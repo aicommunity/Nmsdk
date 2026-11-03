@@ -91,3 +91,25 @@ configuration использует отдельный normalization synapse_coun
 не меняется: его native34 результат и исходный reader verdict будут сохранены.
 Для окончательной приёмки требуется reader rerun из исправленной версии на тех
 же primary после завершения J3; numerical rerun из-за Python inventory не нужен.
+
+## Завершённый адресный native контроль J3/J4
+
+J3 evidence `f8628cffaf5698b5a40d73a54e27662036cb408a` подтверждает
+34/34 реальных native cases, включая все четыре minimal-budget cases.
+Исходный reader verdict сохранён: 19 выполненных checks и одна ошибка
+setUpClass из-за неверного normalization inventory; это не положительная
+приёмка полного J3. Проверены все 549 archive members /11 937 641 bytes,
+314 runner file hashes по Git root1c8206ed98dad49982f1a1e9a1764c118e2cfe34
+и фактический JUnit inventory34 без failures/skips/errors.
+
+J4 evidence `0d4a81b41241ec61ce0c5efe5f386909d33cf127` использует те же
+immutable J3 primary без повторного численного запуска: исправленные22/22
+reader checks прошли, failures/errors/skips отсутствуют. Все10 members /
+24 146 compressed bytes и416 source hashes сверены с Git reader root
+d24bea0f94ef1247512bd4798e713fd7f1e1ad17. Tests/App/CMake и gitlinks
+Pulse/Rdk/Bin этого reader root совпадают с native root1c8206.
+
+Это совместная адресная проверка native34 + readers22. Она не закрывает
+full262, ASan, всю физическую матрицу или scientific classification. Полная
+normal262 J5 запущена отдельно на исходном immutable J3 runtime; завершение
+и приёмка ещё не заявляются. В develop C-search пока не принят.
