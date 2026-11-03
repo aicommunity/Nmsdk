@@ -1,6 +1,8 @@
 """Production declarations and real CLI ModelSpec1/2 transfer evidence."""
 import copy
+import json
 import os
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
@@ -8,7 +10,7 @@ import unittest
 from ..model_spec_transport import prepare, requests, BASELINE
 from ..native_calibration_worker import _signed, audit_run_manifest as audit_calibration
 from ..native_pipeline_worker import audit_run_manifest
-from ..native_evidence import load
+from ..native_evidence import load, EvidenceError
 from ..learned_evidence import audit_learned_state, load_case
 from ..calibrated_evidence import audit_calibrated_state
 from ..recognition_metrics import load_evaluation
@@ -58,6 +60,22 @@ class ModelSpecTransportPreparationTest(unittest.TestCase):
             self.assertGreater(q['duration'], sum(q['pattern_isi']))
             self.assertGreater(q['maximum_samples'], q['duration']*2000+1)
             self.assertEqual(q['reset_policy'], 'reset_per_trial')
+
+    def test_historical_adapter_preserves_original_claims_and_default_stays_strict(self):
+        row = self.plan['conditions'][0]
+        original = self.root/'baseline/corpus'/row['baseline_name']
+        with self.assertRaisesRegex(EvidenceError, 'pipeline_run_analysis_changed'):
+            audit_run_manifest(original/'run-manifest.json')
+        accepted = audit_run_manifest(original/'run-manifest.json', historical_analysis='learned-v2-no-capacitance')
+        self.assertEqual(accepted['historical_analysis_adapter'], 'learned-v2-no-capacitance')
+        destination = Path(self.tmp.name)/'damaged'
+        shutil.copytree(original, destination)
+        path = destination/'run-manifest.json';saved = load(path)
+        for key, value in [('exact', False), ('primary_trials', 0), ('auditor_version', 99)]:
+            changed = copy.deepcopy(saved);changed['analysis']['training_audit'][key] = value
+            changed.pop('sha256');path.write_text(json.dumps(_signed(changed)), encoding='utf-8')
+            with self.subTest(field=key), self.assertRaises(EvidenceError):
+                audit_run_manifest(path, historical_analysis='learned-v2-no-capacitance')
 
 
 class ModelSpecTransportRunTest(unittest.TestCase):
