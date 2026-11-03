@@ -152,6 +152,7 @@ def main(argv: list[str] | None = None) -> int:
     stock = commands.add_parser("stock-phasea-preflight", help="build and inspect the stock four-input NSPNeuronGen without LT membrane; no Train")
     stock.add_argument("source", type=Path)
     stock.add_argument("--runtime-manifest", type=Path, required=True)
+    stock.add_argument("--initial-threshold", type=float, help="explicit native model-spec2 construction value; e.g. 100 for training")
     stock.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
@@ -467,7 +468,8 @@ def main(argv: list[str] | None = None) -> int:
         from .stock_phasea_preflight import run_stock_preflight
         from .native_evidence import EvidenceError
         try:
-            print(json.dumps(run_stock_preflight(args.source, args.runtime_manifest, args.output), allow_nan=False))
+            print(json.dumps(run_stock_preflight(args.source, args.runtime_manifest, args.output,
+                             initial_threshold=args.initial_threshold), allow_nan=False))
             return 0
         except (EvidenceError, OSError, ValueError, KeyError, TypeError, tarfile.TarError) as error:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
