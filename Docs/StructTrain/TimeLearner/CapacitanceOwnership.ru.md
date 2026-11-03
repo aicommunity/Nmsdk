@@ -244,3 +244,9 @@ s07-capacitance-owner-temporal-selected-normal-c2 (PID2494602) ждёт заве
 render, проверяет все cache hashes и выбирает12 PNG: overview и zoom по
 измеренному пику всех сом для regrowth ClassicN0/BranchN1 при2k/20k. Он сохраняет
 visual_review=false до прямого просмотра. ASan owner и transport ещё pending.
+
+Documentation closure: Pulse feature commit
+`1e7ce7a286296b16a265c49ab241c3c3f9a65193` обновляет только описание приёмки.
+Его Core tree `e667aeb7f50774ca2baf16c284e9b3a04a3ad2d2` полностью совпадает
+с tested f899ef024. Gitlink feature-корня обновлён после child push; работающие
+jobs сохраняют свои исходные SHA и не переключаются на documentation commit.
