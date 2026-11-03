@@ -1,5 +1,21 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Обновление43-case gate, 03.11
+
+Связь через VPN Automats2 проверена к обоим workers. Normal G1 выполнил43
+случая,41 PASS; два dormant N0 остановились на повторной регистрации тестовой
+rollback factory, storage живёт между model fixtures. Архив1026 members
+проверен, readers26 не запускались, gate не принят. Изоляция имён fixture
+исправлена в root496a80d7190cafcc1e96329ee3c8e2b17cb40114; повтор Elder G2
+owner330097/324362522, publisher330098/324362522. Исправление не меняет
+производственную модель/алгоритм/допуски и пока не подтверждено повторным runtime.
+
+Bridge H2 прекратился до checkout/build на отказе G1 prerequisite;134 теста
+не запускались. Receipt3 members проверен. M40 owner ASan C3 остаётся отдельным
+активным заданием; его runtime/source не изменены. Зависимый ASan G1 не может
+получить разрешение на запуск от failed normal G1.
+[Подробности и hashes](NativeTrainingCapacitanceBridge.ru.md).
+
 ## Уточнён канонический lifecycle Rdk, 03.11
 
 Rdk docs merge33bdf2d19bb915d3fe4c8a917b84bdfe28bf6580 и дополнение

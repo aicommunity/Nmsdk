@@ -87,3 +87,20 @@ editor выполняется вне этого catch, сохраняя его f
 неизменность source4d501d611 и продолжающий работу normal43 owner297669.
 Численные tests H1 не запускались. Исправленный H2 должен ждать successful
 normal43/readers26 и закрытия их owners; production/runtime ещё не проверены.
+
+
+## H2 остановлен на prerequisite; повтор normal G2
+
+H2 root40a9cb496a7fb92a3618eef3e108ad59074c5316, owner326560/324332166
+не приступил к checkout/сборке: normal G1 дал41/43 вместо полного PASS.
+Receipt e9546bd63846cc8df54b3fa3eb0a0c72c69074e8 проверен:3 members/598bytes.
+Это отказ prerequisites, а не результат выполнения134 bridge tests.
+
+Причина двух G1 failures — повторная регистрация fault-only rollback factory
+из разных fixtures в одном storage. Исправлено только имя тестовой фабрики,
+с учётом rig.name; native import/rollback, Rdk collision checks и допуски прежние.
+Elder G2 root496a80d7190cafcc1e96329ee3c8e2b17cb40114,
+owner330097/324362522, publisher330098/324362522 повторяет43 native +26 readers.
+До изменения source проверены весь архив G1 и закрытие его owners; process guard
+не обнаружил пользователей source/build. Bridge требует нового отдельного
+задания после successful G2; H2 автоматически не возобновляется.
