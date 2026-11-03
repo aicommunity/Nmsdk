@@ -1,3 +1,22 @@
+# Дополнение03.11: проверенный minimal-context fix; серверы доступны
+
+VPN Automats2 восстановлен, SSH через jump host подтверждён к обоим workers.
+K3 old-source regression воспроизвёл ровно2 failures из151; исправленный
+контроллер151/151, Off compatibility137/137 на каждой стороне. Архив71 members,
+87570 bytes и418 Git source records независимо сверены.
+[Детали и границы](CapacitanceContextBudget.ru.md).
+
+J2 evidence904a436a555c4424fdf1f99dfd7089613e648529 независимо сверён:
+449 members /10089911 bytes, native27/27 и readers19/19. Все4 activation controls
+завершились budget_exhausted, без Exact/certificate; у каждого3 witnesses и12
+complete valid observed packets. Это измеренные отрицательные controls.
+
+H17 native213 выполняется; H14 ASan target6/6 прошёл, full213 выполняется.
+Их полные verdict ещё не получены. Текущая объединённая декларация C-search
+kernel151 /native target30 /full258 требует отдельных native/ASan запусков;
+это не результат J2. Только этап0 исходного плана завершён полностью.
+Нижние записи сохраняют хронологию и не заменяют это дополнение.
+
 # Составная normal приёмка и schema4 адресный gate, 03.11
 
 H12 actual native213/213 и target6/6 положительны; первоначальный overall
