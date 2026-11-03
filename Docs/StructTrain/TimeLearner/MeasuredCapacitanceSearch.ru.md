@@ -90,3 +90,8 @@ Archives7904/7224 bytes; active source_closure до/после совпали. A
 init libasan подтверждён. Полный SDK target, native provider comparisonScope,
 контроллер C-trim, model transfer, waveform tests и scientific verdict этим
 unit gate не подтверждаются. В develop модуль пока не принят.
+
+Documentation child closure — `36641d2a309165ed2a28efd3670a3670a1bf1a18`;
+Core tree `c1cd832a243750c421e8c9fb4e12690f3aab140f` совпадает с tested0832d3e.
+После child push feature-root gitlink обновлён. Численные owner/transport jobs
+не переключались на этот kernel; их данные/исходные SHA сохранены отдельно.
