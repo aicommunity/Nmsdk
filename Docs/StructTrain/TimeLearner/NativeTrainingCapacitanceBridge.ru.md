@@ -407,3 +407,12 @@ frames), assertions native encoder и10 independent witness tests с corrupted
 revision/map/number/profile/C и missing required revision/policy controls.
 Проверки требуют реальных server artifacts; локально выполняется только syntax
 inspection. H6 pinned до этих изменений и не подтверждает codec/registry.
+
+H7 queued: sourcefb772a354ff69568f97eada6303395cdb4247acd,
+Pulsee87139062cefb537e1ba73103ca68bcf5c2a00a0. Elder supervisor413740/325039485,
+publisher413741 (start ticks уточнить по receipt), readbacks
+s07-capacitance-witness-codec-normal-h7 и
+s07-capacitance-witness-codec-publication-normal-h7. Gate4 native/28 structured
+readers запускается только после verified H6 PASS4/18 и закрытия его owners;
+H6 в свою очередь ждёт H5 PASS183/52. Уникальные runtime roots, immutable SHA и
+actual process guard сохраняются. Никакого PASS этих очередей пока нет.
