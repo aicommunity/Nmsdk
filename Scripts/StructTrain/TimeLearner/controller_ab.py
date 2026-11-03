@@ -133,11 +133,15 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
         for name in spec['production_paths']+spec['test_paths']:
             production = name in spec['production_paths']
             data = _blob(pulse_repository if production else root_repository, pulse if production else revision, name)
-            destination = directory/name
+            # Preserve the real root/submodule layout: older maintained tests
+            # use relative includes into Libraries/Nmsdk-PulseLib/Core.
+            relative = ('Libraries/Nmsdk-PulseLib/'+name) if production else name
+            destination = directory/relative
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(data)
             sources[name] = {'repository': 'PulseLib' if production else 'root',
-                             'commit': pulse if production else revision, 'sha256': hashlib.sha256(data).hexdigest()}
+                             'commit': pulse if production else revision, 'sha256': hashlib.sha256(data).hexdigest(),
+                             'materialized_path': relative}
         declared = []
         for name in spec['test_paths']:
             declared.extend(a+'/'+b for a, b in re.findall(r'^TEST\(\s*(\w+)\s*,\s*(\w+)\s*\)',
@@ -147,9 +151,9 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
         _write(directory/'sources.json', sources)
         source_maps[label] = sources
         binary = directory/'controller-tests'
-        args = [str(compiler), '-std=c++20', '-O2', '-g0', '-I'+str(directory/'Core'),
+        args = [str(compiler), '-std=c++20', '-O2', '-g0', '-I'+str(directory/'Libraries/Nmsdk-PulseLib/Core'),
                 '-I'+str(gtest_copy/'include'), '-I'+str(gtest_copy),
-                *[str(directory/n) for n in sources if n.endswith('.cpp')],
+                *[str(directory/v['materialized_path']) for n, v in sources.items() if n.endswith('.cpp')],
                 str(gtest_copy/'src/gtest-all.cc'), str(gtest_copy/'src/gtest_main.cc'),
                 '-pthread', '-o', str(binary)]
         compile_result = _run(args, directory, directory/'compile', spec['compile_wall_seconds'], environment)
@@ -172,7 +176,7 @@ def run_controller_ab(specification, root_repository, pulse_repository, compiler
                 record.update(validity='valid', assertion_status=inventory['assertion_status'], inventory=inventory)
             require(record['executable'] == file_record(binary), 'controller_ab_binary_changed')
         for name, source in sources.items():
-            require(hashlib.sha256((directory/name).read_bytes()).hexdigest() == source['sha256'],
+            require(hashlib.sha256((directory/source['materialized_path']).read_bytes()).hexdigest() == source['sha256'],
                     'controller_ab_materialized_source_changed')
         results[label] = record
         _write(directory/'result.json', record)
