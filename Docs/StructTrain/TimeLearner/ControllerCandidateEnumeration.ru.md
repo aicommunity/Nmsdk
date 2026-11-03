@@ -11,7 +11,7 @@
 ```text
 python3 -m Scripts.StructTrain.TimeLearner controller-ab job.json \
   --root-repository ROOT_GIT --pulselib-repository PULSE_GIT \
-  --compiler /usr/bin/g++ --output NEW_OUTPUT_DIRECTORY
+  --compiler /usr/bin/g++ --gtest-source GOOGLETEST_SOURCE --output NEW_OUTPUT_DIRECTORY
 ```
 
 Шаблон: Scripts/StructTrain/TimeLearner/specs/candidate-cursor-ab-v1.json.
@@ -25,7 +25,10 @@ python3 -m Scripts.StructTrain.TimeLearner controller-ab job.json \
 
 Baseline/candidate имеют отдельные каталоги исходников, executable и journals.
 Output запрещён внутри репозиториев. Обе сборки используют одинаковые compiler,
-flags, очищенную environment и явно разрешённые static gtest libraries. Хранятся
+flags, очищенную environment и одну копию оригинального GoogleTest. Его source
+берётся из заданного FetchContent checkout: полные include/src файлы сверяются
+с точным Git commit и копируются в job. Оба executable собирают эти оригинальные
+.cc files; библиотеки активного Nmsdk build не используются. Хранятся
 source hashes, compiler/library/header hashes, точные compile/run arguments,
 owned PID/start_ticks/boot ID, elapsed wall time, JUnit и строгая проверка полного
 уникального test inventory. Timeout завершает только собственную process group.
@@ -39,3 +42,11 @@ resolved libraries не объявляются actual loaded closure.
 доказывает полную operation-trace equivalence, Rdk integration, C-trim, качество
 распознавания или выполнение всей матрицы исходного плана. Перед приёмкой нужны
 также соответствующие native regressions и общая согласованная Git closure.
+
+
+Первый a1 worker не запускал CLI: historical proof checkout оказался sparse без
+PulseLib. A2 использовал private bare object store, но остановился до компиляции
+из-за отсутствия системного libgtest_main.a. Это ошибка предположения runner,
+не отказ алгоритма. Evidence849cb6e8b446982c288ac7f437598a6638949ecf сохраняет
+not_accepted и обе причины; эти попытки не объявляются numerical runs. Кандидат
+runner исправлен на explicit Git-verified GoogleTest source, runtime ещё ожидается.

@@ -135,6 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     controller_ab.add_argument("--root-repository", type=Path, required=True)
     controller_ab.add_argument("--pulselib-repository", type=Path, required=True)
     controller_ab.add_argument("--compiler", type=Path, required=True)
+    controller_ab.add_argument("--gtest-source", type=Path, required=True)
     controller_ab.add_argument("--output", type=Path, required=True)
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
@@ -271,7 +272,7 @@ def main(argv: list[str] | None = None) -> int:
         from .controller_ab import run_controller_ab
         try:
             result = run_controller_ab(args.specification, args.root_repository, args.pulselib_repository,
-                                       args.compiler, args.output)
+                                       args.compiler, args.gtest_source, args.output)
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result['assertion_status'] == 'passed' else 2
         except (EvidenceError, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
