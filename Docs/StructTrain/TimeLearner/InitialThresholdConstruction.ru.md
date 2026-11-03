@@ -512,6 +512,30 @@ Portable evidence содержит реальные логи без alias-дуб
 ещё требуют серверного выполнения; успешный transport/runtime gate пока
 не заявляется.
 
+### Приёмка04.11 после alias fix
+
+Последующая проверка root b3bfe86e913bc1f7aeb5a340a72698eacb060f00
+завершена на обоих workers. На каждом:9 artifact-reader tests;4 preflights;
+4 frozen imports по4 trial с точным совпадением всех наблюдений и моделей;
+3 early refusals; simultaneous duplicate0/2; old/new runtime inventories
+полностью неизменны. Отдельный обычный запуск того же executable подтвердил
+прежний default Rdk без native flags. Дополнительно реально повторены4
+калибровки, вся transaction/model совпадает с исходным A4. ASan maps содержит
+libasan, detect_leaks=0. NativeEventLogNormalVerification.json и
+NativeEventLogAsanVerification.json: по1011 primary members/315 source hashes,
+16 frozen trials и4 calibration transactions независимо сверены с Git.
+
+Evidence normal f6004c6f0d3208005c3a14648929735174526f39 и
+ASan948b7f2da761c87b8cb2b09e6bef1cddc7ff6d07 опубликованы и объединены
+в feature через --no-ff. Исходные failed a1/a2 не переписаны.
+Rdk develop merge10e9d05aa658dd2203c89bc84ba9166595b50014 сохраняет тот же
+tested Core tree c4965d0db1875763ce2226b97fc1db04a771035b; изменена только
+документация приёмки. Приёмка корневого Rdk gitlink выполняется отдельной
+веткой. Это закрывает scoped startup/runtime defect, но не все исходные
+этапы2/4/5/9/10 и не превращает engineering same-matrix модели в stock science.
+Исходный короткий C++ calibration fixture по-прежнему имеет4 неуспеха Train
+на каждой платформе; полный C++ suite новой feature этим не объявляется зелёным.
+
 ## Уточнение04.11: что означает missing в stock Train100
 
 По исходным packets proof e5fa71d745119af0d818059f497dd226f4c7c25d,
