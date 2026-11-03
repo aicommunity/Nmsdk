@@ -80,6 +80,16 @@ class CapacitanceDomainEvidenceTest(unittest.TestCase):
                 with self.assertRaisesRegex(EvidenceError, '^invalid_capacitance_images$'):
                     audit_resistance_domain(record)
 
+    def test_unused_dataset_definition_is_still_bound_to_C0(self):
+        for path, original in self.records:
+            with self.subTest(path=path.name):
+                record = copy.deepcopy(original)
+                images = record['capacitance_storage_images']
+                self.assertIn('NDatasetMatrix', [d['name'] for d in images])
+                record['capacitance_storage_images'] = [d for d in images if d['name'] != 'NDatasetMatrix']
+                with self.assertRaisesRegex(EvidenceError, '^capacitance_storage_profile_mismatch$'):
+                    audit_resistance_domain(record)
+
     def test_resigned_physical_C_corruption_is_rejected(self):
         for path, original in self.records:
             with self.subTest(path=path.name):

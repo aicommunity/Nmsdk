@@ -77,6 +77,16 @@ class TrainingCapacitanceBridgeEvidenceTest(unittest.TestCase):
                 with self.assertRaisesRegex(EvidenceError, '^invalid_capacitance_images$'):
                     audit_training_capacitance_bridge(record)
 
+    def test_dataset_image_is_required_without_a_live_neuron_consumer(self):
+        for path, original in self.records:
+            with self.subTest(path=path.name):
+                record = copy.deepcopy(original); frame = record['phases'][3]
+                self.assertIn('NDatasetMatrix', [d['name'] for d in frame['storage_images']])
+                self.assertFalse(any(n['class'] == 'NDatasetMatrix' for n in frame['model']['model']['nodes']))
+                frame['storage_images'] = [d for d in frame['storage_images'] if d['name'] != 'NDatasetMatrix']
+                with self.assertRaisesRegex(EvidenceError, '^capacitance_storage_profile_mismatch$'):
+                    audit_training_capacitance_bridge(record)
+
     def test_consistently_resigned_policy_change_is_detected(self):
         for path, original in self.records:
             with self.subTest(path=path.name):

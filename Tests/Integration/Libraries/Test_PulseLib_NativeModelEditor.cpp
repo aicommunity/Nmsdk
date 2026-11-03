@@ -593,8 +593,8 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
         const auto value=rig.learner->ReadNativeTrainingCapacitance();QJsonValue typed(QJsonValue::Null);
         const auto native=rig.learner->OwnedNativeCapacitanceState();
         std::vector<std::string> imageRoots;
-        const auto classes=native["baseline"].toObject()["channel_classes"].toObject();
-        for(auto it=classes.begin();it!=classes.end();++it)imageRoots.push_back(it.value().toString().toStdString());
+        for(const auto& definition:native["baseline"].toObject()["storage_images"].toArray())
+            imageRoots.push_back(definition.toObject()["name"].toString().toStdString());
         if(value)
         {
             QJsonObject scales;for(const auto& [path,scale]:value->membraneScales)scales[QString::fromStdString(path)]=scale;
@@ -723,8 +723,9 @@ template<class Learner> void NativeTrainingCapacitanceBinding(int normalization)
     const auto record=[&](const char* phase) {
         const auto state=rig.learner->OwnedNativeCapacitanceState();
         const auto typed=rig.learner->ReadNativeTrainingCapacitance();QJsonValue controller(QJsonValue::Null);
-        std::vector<std::string> roots;const auto classes=state["baseline"].toObject()["channel_classes"].toObject();
-        for(auto it=classes.begin();it!=classes.end();++it)roots.push_back(it.value().toString().toStdString());
+        std::vector<std::string> roots;
+        for(const auto& definition:state["baseline"].toObject()["storage_images"].toArray())
+            roots.push_back(definition.toObject()["name"].toString().toStdString());
         if(typed)
         {
             QJsonObject scales;for(const auto& [path,value]:typed->membraneScales)scales[QString::fromStdString(path)]=value;
