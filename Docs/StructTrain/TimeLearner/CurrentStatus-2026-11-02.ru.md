@@ -40,8 +40,13 @@ Diagnostic E1 локализовал две отсутствующие связ�
 UNet owning-tree Load с UnInit/Build/Init/Reset и проверяет все прежние связи
 до первой физической правки. E3 собран, но4 tests остановились до Train:
 канал сохранил прежний storage-класс. Все47 members proof5d0438d1 проверены.
-E4 явно согласует membrane property и Class дочернего узла в native XML;
-назначен на Elder, root7a4417b5a, Pulse30495d1. Результат пока pending.
+E4 XML согласован (property и дочерний Class), но4 tests остановились до Train:
+legacy BuildStructure заново создал Neuron до явного native adoption. Proof
+6cc7274d проверен:51 members/103 675 bytes. E5 готовит Dataset/Neuron через
+их штатные Build/Init, выполняет AdoptNativeModel до lifecycle owner, затем
+использует внешний scheduler. Назначен на Elder: root35b0ba72d, Pulse30495d1,
+worker272413/publisher272414; результат pending. Это setup-конфликт владельца
+графа, dormant export этими предыдущими отказами не проверен.
 Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
 fixtures отменён до изменения source/build/runtime: проверены точные
 PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
@@ -58,6 +63,24 @@ hashes проверены. Raw terminal png_count=0 исправлен отде�
 Полной visual acceptance2697 PNG и scientific verdict нет.
 [Полные SHA, handles, ограничения и следующий шаг](CapacitanceOwnership.ru.md).
 Статусы исходных этапов0–12 не сокращаются; полностью завершён только0.
+
+## Отдельная ветка bounded C search: unit-приёмка не равна native-приёмке
+
+Feature root `484cf3d6797bcfffdcca5ded2c52bdfa21f0120c`, Pulse
+`9d95f05790b04a4505541d398fd039fa56e6a65f` содержит production kernel предложений
+C-кандидатов и полный pure controller state активных/dormant C-scales.
+Normal и ASan130/130 подтверждены отдельными proof commits
+`8214f20625b5287d72f388f7f7005e86eabfd59f` /
+`88e96182c184b242e2185eeca76a095c8666e294`: по13 members, hashes24 production/
+test файлов совпадают с Git, source closure leased SDK до/после неизменен.
+Полный SDK target и native C-On controller этой проверкой не подтверждаются.
+[Scope, отрицательные build attempts и следующий native шаг](https://github.com/aicommunity/Nmsdk/blob/484cf3d6797bcfffdcca5ded2c52bdfa21f0120c/Docs/StructTrain/TimeLearner/MeasuredCapacitanceSearch.ru.md).
+
+Остаются NativeTrainingService/Bindings, чтение полного C-owner state,
+joint C/Rs preview/domain и readback, versioned codec/readers, C policy,
+comparisonScope от фактического native графа и обязательная native матрица.
+SyncCapacitanceTrim On V2 остаётся неподдержанным; ветка не принята в develop.
+Она зависит от ещё открытой приёмки automatic C₀ owner выше.
 
 ## Принятый файловый вход, 03.11
 
