@@ -1,7 +1,9 @@
 # Ограниченный поиск C: измеряемые предложения и оставшаяся интеграция
 
 Новая ветка от develop, отдельная от ещё принимаемого automatic C₀ owner.
-Реализован только production kernel предложений C-кандидатов и его тесты.
+Реализованы production kernel предложений C и полный pure candidate C-state.
+Подготовлен [native bridge чтения/совместного применения](NativeTrainingCapacitanceBridge.ru.md);
+его runtime-приёмка ещё не выполнена.
 NativeTrainingService пока его не вызывает; SyncCapacitanceTrim On для V2
 остаётся явно неподдержанным. Этот документ не объявляет этап7 завершённым.
 
@@ -157,9 +159,11 @@ B1–B4 build failures сохранены отдельно с0 выполнен�
 все8 members каждого отрицательного архива проверены. B4 исправляет copy
 range element в прежнем observation test, не меняя численных условий.
 
-Следующая native работа должна сначала разобрать открытый prerequisite:
-normal owner transport39/43 прошёл, четыре dormant fixtures не восстановили
-граф после смены channel class/Build (model.bindings.size). До dormant export
-они не дошли. После диагностики остаются NativeTrainingService/Bindings,
-versioned codecs/readers и собственно bounded C search. В develop эта feature
-не принята; общий план0–12 не завершён.
+Prerequisite уточнён после native diagnostics E1–E8: исходные четыре dormant
+fixtures нарушали owning-tree load lifecycle и затем initial search-domain.
+Исправленный explicit-graph setup прошёл4/4 normal same/fresh-process transports;
+independent readers3/3 проверили actual packages и semantic negative controls.
+[Текущая приёмка owner](CapacitanceOwnership.ru.md) всё ещё требует normal43 и
+ASan owner8/transport43. Следующий механический bridge описан отдельно; service,
+versioned codecs/readers и bounded C search ещё не подключены. В develop эта
+feature не принята; общий план0–12 не завершён.

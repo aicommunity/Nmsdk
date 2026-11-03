@@ -103,6 +103,21 @@ hashes проверены. Raw terminal png_count=0 исправлен отде�
 [Полные SHA, handles, ограничения и следующий шаг](CapacitanceOwnership.ru.md).
 Статусы исходных этапов0–12 не сокращаются; полностью завершён только0.
 
+## Подготовлен механический native bridge C-map, runtime pending
+
+Pulse candidate2e7d3dd7904ef2fcf30efa4ad38e97a96db29e36 добавляет общий
+NativeTrainingCapacitance и два метода обоих learners: validated read полного
+map/origin и применение L/Ns/Rs/C через прежний joint editor. Отсутствующий
+baseline остаётся nullopt; immutable capture/profile origin сохраняется при
+расширении C₀ witnesses. Потеря history, смена policy/origin и nonfinite values
+отклоняются. [Контракт и следующий scope](NativeTrainingCapacitanceBridge.ru.md).
+
+NativeTrainingService/Bindings пока не используют этот API; C-trim On V2 не
+включён. Подготовлены реальные4 native tests и первый полный SDK regression134
+с ранее unit-проверенными130 cases. Новая сборка/численная приёмка ещё не
+выполнена; результаты kernel unit130 не распространяются на bridge. Текущие
+normal43 и ASan8/43 сохраняют свои прежние immutable sources/runtimes.
+
 ## Отдельная ветка bounded C search: unit-приёмка не равна native-приёмке
 
 Feature root `484cf3d6797bcfffdcca5ded2c52bdfa21f0120c`, Pulse
