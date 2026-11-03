@@ -3329,7 +3329,11 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         // one-shot hook fails only after the new dataset has been attached;
         // adding the old objects back must remain possible during rollback.
         using FaultOwner=ImportRollbackLearner<Learner>;
-        const auto className=std::string(rig.branch?"LearnedImportRollbackBranch":"LearnedImportRollbackClassic");
+        // Storage outlives individual models in the integration process. Each
+        // boundary fixture registers its own fault-only factory; reusing the
+        // topology-only name makes a later dormant case fail at registration
+        // before exercising rollback. Keep duplicate-name rejection in Rdk.
+        const auto className=std::string("LearnedImportRollback_")+rig.name;
         core.storage->AddClass(new UComponentFactoryMethod(core.storage,
             +[]() -> UComponent* {return new FaultOwner;},className),className);
         auto rollback=dynamic_pointer_cast<FaultOwner>(core.storage->TakeObject(className));ASSERT_TRUE(rollback);

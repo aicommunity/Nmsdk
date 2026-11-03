@@ -434,3 +434,21 @@ job использовал shallow glob */*.png для более глубоко
 Raw receipt не переписан; cache-count-correction.json отдельно связывает
 рекурсивно подтверждённые2697 PNG с исходным cache SHA256SUMS hash. Временной
 отчёт не требуется пересчитывать ради исправления этого счётчика.
+
+
+## Повторный полный gate G1: изоляция тестовых storage factories
+
+Normal G1 (root4d501d611b56945c9f1914e9e4c44dee5485c949) выполнил все43
+случая:41 PASS, ClassicN0/BranchN0 dormant transport — exception
+`name already exists: LearnedImportRollbackClassic/Branch`. Полный архив
+2f8099cff769be6b5c7511d5a57cc08153065959 проверен:1026 members,7537157bytes.
+Readers26 не запускались; gate не принят. Отдельный E8 с4 PASS не заменяет
+полный процесс: storage сохраняется между model fixtures, и предыдущие
+transport N0 уже зарегистрировали тот же fault-only factory.
+
+Исправление ограничено именем factory в интеграционной fixture: добавлено
+полное rig.name (топология/частота/N/сценарий). Проверка коллизий Rdk,
+производственный import/rollback и допуски не меняются. Новый полный gate
+обязателен; source review не считается runtime-подтверждением.
+Bridge H2 (326560/324332166) корректно прекратился на prerequisite G1 до
+source/build mutation. ASan C3 на M40 продолжает работу независимо.
