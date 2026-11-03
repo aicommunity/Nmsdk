@@ -1,3 +1,14 @@
+## Дополнение04.11: принята семантика рабочего каталога Rdk
+
+Rdk develop10e9d05a и root develop7c8d6e2f принимают сохранение явно заданного
+до Init рабочего каталога. Пустое значение сохраняет прежний default. На обоих
+workers проверены native/frozen/calibration, early refusals, duplicate launch,
+неизменность runtime и обычный startup; все первичные артефакты доступны в Git.
+[Точные SHA, проверки и ограничения](RdkStartupWorkDirectoryAcceptance-2026-11-04.ru.md).
+Это адресное продвижение2/4/9/10. Полные исходные этапы1–12 остаются частичными;
+полностью завершён только0. Console/ModelSpec2 transport feature проходит
+отдельную приёмку; этот merge не принимает её полный C++ suite или science.
+
 ## Дополнение03.11: два исторических Branch retry launchers удалены
 
 Убраны Phase9/Phase10 br480 Python entrypoints без wrappers; manifest107 и

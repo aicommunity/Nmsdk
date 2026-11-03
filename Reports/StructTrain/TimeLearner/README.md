@@ -3,6 +3,20 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Accepted explicit Rdk working-directory startup (04.11):
+[native normal](s02-native-event-log-normal-a3/README.ru.md),
+[native ASan](s02-native-event-log-asan-a3/README.ru.md),
+[ordinary default normal](s02-rdk-default-startup-normal-a1/README.ru.md),
+[ordinary default ASan](s02-rdk-default-startup-asan-a1/README.ru.md),
+[calibration normal](s02-native-event-calibration-normal-a1/README.ru.md),
+[calibration ASan](s02-native-event-calibration-asan-a1/README.ru.md).
+Each worker: four preflights, four frozen imports (16 trials), four actual
+calibrations, nine artifact-reader tests, three early refusals and one
+concurrent duplicate0/2. Old/new runtime inventories unchanged; same ordinary
+startup default. All1011 archived members and315 source hashes verified.
+[Scope, exact code and accepted merges](../../../Docs/StructTrain/TimeLearner/RdkStartupWorkDirectoryAcceptance-2026-11-04.ru.md).
+Engineering same-matrix LT profiles; no stock classification or full-plan verdict.
+
 Accepted scoped native timing property correction:
 [baseline4 failures /84 accepted nonfinite values](s01-timing-finite-baseline-normal-a1/README.md),
 [normal4+21](s01-timing-finite-current-normal-a1/README.md),
