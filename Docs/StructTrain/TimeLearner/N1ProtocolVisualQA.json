@@ -1,0 +1,184 @@
+{
+  "kind": "timelearner_selected_temporal_visual_review",
+  "schema_version": 1,
+  "review_date": "2026-11-03",
+  "publication_commit": "f47fa0e0aabd24327a76011ada7b2edcf59f0d24",
+  "metadata_commit": "27ec82d40ae32a3238d2dfaee696cfabbaa65697",
+  "numerical_commit": "642f08ddca735d0a66755b20ce84decbfccf18f7",
+  "profile": "modified-N1-two-input-LT-membrane-integration-profile",
+  "selected_manual_review_completed": true,
+  "full_792_manual_review_completed": false,
+  "selected_png_count": 28,
+  "sample_ids": [
+    "foil-0",
+    "foil-1",
+    "foil-2",
+    "foil-3",
+    "foil-4",
+    "foil-5",
+    "foil-6",
+    "target"
+  ],
+  "conditions": [
+    "Branch-study-preserve_neuron_dynamics-1600ms",
+    "Branch-study-preserve_neuron_dynamics-400ms",
+    "Branch-study-reset_per_trial-1600ms",
+    "Branch-study-reset_per_trial-400ms",
+    "Classic-study-preserve_neuron_dynamics-1600ms",
+    "Classic-study-preserve_neuron_dynamics-400ms",
+    "Classic-study-reset_per_trial-1600ms",
+    "Classic-study-reset_per_trial-400ms"
+  ],
+  "checks": [
+    "All28 original PNGs directly inspected at native1920x960 resolution",
+    "Actual input pulses and soma potential readable in overview plus100-native-tick zoom",
+    "All8 sample IDs and all8 main conditions represented",
+    "All somas of each selected trial represented",
+    "Model units explicitly labelled; no unsupported SI conversion",
+    "LTZone spike markers distinguished from soma waveform; no soma threshold line inferred",
+    "No scientific conclusion about isolated LT or ITI causality",
+    "Original selection.json manual_review_complete=false describes publication-time state and is superseded only for selected28 by this review"
+  ],
+  "images": [
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/00-Branch-study-preserve_neuron_dynamics-1600ms-trial0-soma1-overview.png",
+      "sha256": "422897d1cfa40fbc827e91ca8bc5d81af7459a1e641c5500f58a61039daf29ec",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/01-Branch-study-preserve_neuron_dynamics-1600ms-trial0-soma1-peak-zoom.png",
+      "sha256": "e76bfa58851233b855bf3bcf382da4df40a14d4b960fbbeaca7d4c0910c797ca",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/02-Branch-study-preserve_neuron_dynamics-400ms-trial1-soma1-overview.png",
+      "sha256": "86a5079f0aea9d0661095ccb0e12f5de2700a7e35529cac30631fc796f94b9f2",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/03-Branch-study-preserve_neuron_dynamics-400ms-trial1-soma1-peak-zoom.png",
+      "sha256": "08286b6e96a45884e2afbbb06de2eeb0a33f9bf8ed8c37bc59e610ff17dd6458",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/04-Branch-study-reset_per_trial-1600ms-trial2-soma1-overview.png",
+      "sha256": "78ccfa2daac1a2079ffbfba43e9fb6b423198604d20dd7c33a68925181d1a629",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/05-Branch-study-reset_per_trial-1600ms-trial2-soma1-peak-zoom.png",
+      "sha256": "55604f954c8715332597a149814c4bb6544a6c4425952a5a94cb748e6a49cd48",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/06-Branch-study-reset_per_trial-400ms-trial3-soma1-overview.png",
+      "sha256": "040d2c01ba9b21539c1dae56d3f172ee27e0c309d420c5e8add2583d36cc70fe",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/07-Branch-study-reset_per_trial-400ms-trial3-soma1-peak-zoom.png",
+      "sha256": "cc0c023b2c11691a9b2a2bf52a4df4e0d17a328c44b62ff01850154bc7421f74",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/08-Classic-study-preserve_neuron_dynamics-1600ms-trial4-soma1-overview.png",
+      "sha256": "4cb93574b05a164cf09fbef9e01753315ce889bb068bce8224aaf94d6bcefe3c",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/09-Classic-study-preserve_neuron_dynamics-1600ms-trial4-soma1-peak-zoom.png",
+      "sha256": "17f76dd5d585623d8864b3e08562be88f49a785a5af14209dc2100755a8abad0",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/10-Classic-study-preserve_neuron_dynamics-1600ms-trial4-soma2-overview.png",
+      "sha256": "d2d73a2f106a200c02b35f00c825a5da9f3c108750493ead0c176426cda725e8",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/11-Classic-study-preserve_neuron_dynamics-1600ms-trial4-soma2-peak-zoom.png",
+      "sha256": "5a0e0e6c8f796c2c45d3ead5bd1155ba9941047ea2a69347f3f31ee7d7793cc1",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/12-Classic-study-preserve_neuron_dynamics-400ms-trial5-soma1-overview.png",
+      "sha256": "cea8d214f631283ea5aefb31a0dce2c157181da0d94b4b67a6568bca5c7d3a79",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/13-Classic-study-preserve_neuron_dynamics-400ms-trial5-soma1-peak-zoom.png",
+      "sha256": "1f1bd6e8d4c66ecd4d26968de7f9553fe26ead52879dea6d0c327fafdacd6c39",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/14-Classic-study-preserve_neuron_dynamics-400ms-trial5-soma2-overview.png",
+      "sha256": "615cb68507a2280406018cb65ab5e2ddb1139dd99aba234c5f00ab61ff81a93b",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/15-Classic-study-preserve_neuron_dynamics-400ms-trial5-soma2-peak-zoom.png",
+      "sha256": "201a1e677e230af92ab53bba6d8d24455bfb167c287b9b2f2a20411ac22fb3fb",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/16-Classic-study-reset_per_trial-1600ms-trial6-soma1-overview.png",
+      "sha256": "f19a5e9a30cd8fb4f534c14741d4bc8c7b63ca3d863937112db22f5599677790",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/17-Classic-study-reset_per_trial-1600ms-trial6-soma1-peak-zoom.png",
+      "sha256": "564a9931c565d96c4313760a9981b3c95e39f93d7a3a2ff2df51696486c4d255",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/18-Classic-study-reset_per_trial-1600ms-trial6-soma2-overview.png",
+      "sha256": "f1419fde42c55aa59edd6c51eb7312c529015a00886b72d736643dbd019a3d6b",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/19-Classic-study-reset_per_trial-1600ms-trial6-soma2-peak-zoom.png",
+      "sha256": "83023125be4e73acb8b9a0bd92fa3a63046334792e9816ef64ec26d06081a5e0",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/20-Classic-study-reset_per_trial-400ms-trial7-soma1-overview.png",
+      "sha256": "778d8457eb7bd065fbe8482f810e06c78fbda046b33dba268281361c75e5c1ed",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/21-Classic-study-reset_per_trial-400ms-trial7-soma1-peak-zoom.png",
+      "sha256": "fbe6b5df484d538c7c256556911828f834178acb2fbe0cc0b8007f2574ccb639",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/22-Classic-study-reset_per_trial-400ms-trial7-soma2-overview.png",
+      "sha256": "a515eebcae9ed93a2ce4a56bc4c82b7e9d8bb4368df0b8ce6d5567f3bbb9158d",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/23-Classic-study-reset_per_trial-400ms-trial7-soma2-peak-zoom.png",
+      "sha256": "2c76b903e837a0f9007896f2562e8e09da51da5653c41a8b4bb5c516f503ddd9",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/24-Classic-study-reset_per_trial-400ms-trial0-soma1-overview.png",
+      "sha256": "b88721cf77d443836aad2f46f482b51db66576b3a4bc658d3da1e9d5734a0fda",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/25-Classic-study-reset_per_trial-400ms-trial0-soma1-peak-zoom.png",
+      "sha256": "7e4e8af075aa065747d3ea8a393e992dfaa7adcffc217ab42c49e3289b6274d4",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/26-Classic-study-reset_per_trial-400ms-trial0-soma2-overview.png",
+      "sha256": "a0af46bc31a173877bd4115b631931614d38e666eca9ac300a4a3e45cafe2418",
+      "review": "readable"
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s11-n1-fixed-protocol-selected-v2/selected/27-Classic-study-reset_per_trial-400ms-trial0-soma2-peak-zoom.png",
+      "sha256": "d1e6791daf40bef63508cce6ee6344434e3fba499869b92a61ec753ec84a959a",
+      "review": "readable"
+    }
+  ]
+}
