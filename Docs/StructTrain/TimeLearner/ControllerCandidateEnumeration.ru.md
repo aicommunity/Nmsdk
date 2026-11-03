@@ -37,7 +37,8 @@ owned PID/start_ticks/boot ID, elapsed wall time, JUnit и строгая про
 resolved libraries не объявляются actual loaded closure.
 
 Сборки/запуски разрешены только на указанных Elder/M40 через jump host.
-Локально выполнены AST/declaration/diff проверки; серверный A/B ещё ожидается.
+Локально выполнены AST/declaration/diff проверки. Серверный A4 A/B прошёл:
+130/130 tests на каждой стороне; строгие результаты и hashes проверены независимо.
 Результат130/130 с обеих сторон подтвердит этот корпус pure decisions. Он не
 доказывает полную operation-trace equivalence, Rdk integration, C-trim, качество
 распознавания или выполнение всей матрицы исходного плана. Перед приёмкой нужны
@@ -58,3 +59,27 @@ layout. Evidence da3612b95ec70d34f638b626fa41d9102bce74de сохраняет о�
 диагностики. Исправление runner размещает целые исходные файлы в реальной структуре
 корень/сабмодуль, не меняя include directives или test bodies. Успех130/130 пока
 не заявляется; повторный A/B должен проверить исправленную production CLI.
+
+
+## Подтверждённый A4 срез и следующая native проверка
+
+Root c04850a81bb7f1918519d72bc4c18214438d9ed0, baseline root2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747.
+PulseLib baseline21435c8d5a11d2670cdc1609757d3a9973877314 → candidate03b004aa36121766b8eac3040a282e272b392eb5.
+Evidence bcdae6c4985310850f89356a072ca80b3cbe7ca3:36 members,45377 compressed bytes.
+Независимо сверены346 Git source hashes, оба JUnit inventories130/130 без failures,
+errors/skips и одинаковые семь test files. Обратная подстановка cursor.field в
+production .cpp точно воспроизводит baseline после CRLF/LF normalization.
+Принят только этот pure-decision corpus. Native/Rdk integration и полная
+operation-trace equivalence пока не подтверждены; C-search не включён.
+
+Для native H10 зафиксирован root f5845fb78d906f9e7d95a55a8b0c217a73fa281c.
+Elder supervisor546230/start_ticks326149080 и publisher546231/326149080 проверены
+живыми; readbacks s07-candidate-cursor-native-normal-h10 и
+s07-candidate-cursor-native-publication-normal-h10. Очередь ждёт успешный baseline
+H9b209/87 и освобождение его source/build, затем выполняет209 native tests и104
+reader checks. Включены ранее исправленные17 диагностических/certificate controls.
+Отдельно требуется точное совпадение наборов и SHA256 детерминированных primary CSV
+Classic/Branch N0/N1 automatic service и capacitance bridge с H9b baseline.
+Receipt сохраняет все имена/hashes и любое различие запрещает приёмку. Текущий
+H10 ещё не запускал сборку; дополнительные неучтённые сбои baseline останавливают
+переход. До native/ASan приёмки изменения не объединяются в develop.
