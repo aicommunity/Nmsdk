@@ -58,7 +58,7 @@ confirmation сохраняется и учитывается отдельно �
 ## Выполнение и приёмка
 
 CLI: `python3 -m Scripts.StructTrain.TimeLearner n1-protocol-study` с действиями
-`prepare`, `run`, `analyze`. Runtime manifest и source evidence обязательны для
+`prepare`, `run`, `analyze`, `report`. Runtime manifest и source evidence обязательны для
 prepare/run. Output должен быть новым каталогом. После недостоверного smoke
 следующие операции не запускаются; исходная неудача сохраняется.
 
@@ -77,3 +77,13 @@ AST/diff/source checks. На момент постановки новый scient
 графики всех паттернов с фактическими входами. Полный отчёт — воспроизводимый
 кэш на M40; в Git — сжатые primary, модели, метрики, provenance и выбранные
 проверенные изображения. Исходные этапы 8/11 остаются открытыми.
+
+`n1-protocol-study report STUDY --output NEW_CACHE` сначала проверяет всю
+матрицу, затем использует общий `render_calibration_run` для всех десяти
+операций, всех завершённых проб, сом и свежих confirmations, если они были.
+Оглавление содержит метрики и фактический диапазон quiet intervals каждого
+условия. Отчёт сохраняет нативные samples, actual input pulses, overview и
+zoom PNG/SVG/PDF без downsampling. Три отдельных server reader checks
+проверяют привязку исходных samples, размерность, completeness и читаемость
+по существующему production report contract. Это не заменяет прямой просмотр
+выбранных изображений; ручная приёмка в manifest остаётся false.
