@@ -311,3 +311,14 @@ sweep launchers удалены, восемь отчётов помечены и�
 records (79 retired +2 moved), server metadata приёмка пройдена на обоих workers;
 все archive members проверены, restored-Bin negative fixture отклонён.
 [Исходники, review и ограничения](AsymRmLauncherRetirement.ru.md).
+
+
+Следующий адресный подэтап:13 исторических Reports job.py/runner.sh удаляются
+без wrappers. Manifest94 records (92 retired +2 moved); all primary payloads
+сохранены. [Исходники, current directory checksums и требуемая приёмка](ReportLauncherRetirement.ru.md).
+На момент подготовки серверная проверка этого94-record snapshot ещё не выполнена.
+
+Приёмка94-record snapshot завершена на обоих workers: production CLI и
+restored-Reports-launcher negative fixture; оба10-member архива и380 exact Git
+source hashes независимо сверены. Подробные SHA — в ReportLauncherRetirement.
+Это не завершение полного этапа9.

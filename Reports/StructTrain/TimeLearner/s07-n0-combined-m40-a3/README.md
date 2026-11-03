@@ -5,3 +5,15 @@ Root 2b7267526c834484be12549f3614d3d967b4bc9b: 53/53 production Python tests on 
 Attempts a1/a2 are retained failures of job preparation: a1 omitted native subdirectories and mistakenly substituted a Python environment-variable name; a2 selected obsolete domain-preview kind. Neither is an algorithm failure or passing run. Corrected a3 uses explicit native paths and verifies input kind before testing. Positive figures under test_actual_cli_all_recorded_somas_common_axes_and_primary_hashes use actual Classic/Branch data; other test_* figures contain declared corrupted metadata controls.
 
 Scientific verdict and full-matrix visual acceptance remain unclaimed. Module list, exact counts and input hashes are in a3/validation.json and a3/input-provenance.json.
+
+
+## Launcher retirement, 2026-11-03
+
+The historical job.py/runner.sh launcher is available in root commit
+`3bfb72a1fbe7712796e65bea59db343d507d48f4`. See
+[retrieval manifest](../../../../Docs/StructTrain/TimeLearner/script_migration.json) and
+[scope](../../../../Docs/StructTrain/TimeLearner/ReportLauncherRetirement.ru.md).
+Current-tree directory checksums omit retired launchers and include this note;
+the original checksums remain in that same archival commit. Primary results,
+models, metrics and original test verdicts are preserved. This directory is
+historical evidence, not an active experiment launcher.
