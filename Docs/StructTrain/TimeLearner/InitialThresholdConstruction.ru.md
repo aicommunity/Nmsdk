@@ -440,3 +440,13 @@ continuation, а не checkpoint физической динамики.
 и calibrated graphs и проверяют reuse/отказ для другого job либо runtime.
 Весь новый набор итоговых проверок теперь5 cases; старые3 A2 не объявляются
 проверкой этих двух дополнений. До серверной проверки новый gate открыт.
+
+A3 обоих workers успешно проверил/copy завершённые Train и export, но
+остановился на повторной записи cumulative reuse JSON: общий _write намеренно
+создаёт только новые immutable files. Дополнительный просмотр всех output
+writes обнаружил ту же потенциальную ошибку для progress второго condition.
+Исправлено сразу оба места: отдельный reused-operation-NAME.json для каждой
+операции и progress-CONDITION.json для каждого завершённого condition.
+Native запусков A3 не было; старые completed sources сохраняются. A4 должен
+продолжить именно canonical completed prefix A2, сохранив исходные A3 failure
+packets отдельно. Физика, критерии, бюджеты и source certificates не меняются.

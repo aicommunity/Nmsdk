@@ -174,7 +174,7 @@ def run(prepared, runtime, output, *, completed_prefix=None):
             audit = auditor(folder/'run-manifest.json')
             reused.append({'name': name, 'mode': mode, 'source': str(previous),
                            'run_manifest_sha256': original['sha256'], 'native_rerun': False})
-            _write(output/'reused-completed-operations.json', reused)
+            _write(output/('reused-operation-'+name+'.json'), reused[-1])
             print('REUSE COMPLETED', name, flush=True)
             return folder, audit
         args = (['calibrate', 'run'] if mode == 'calibrate' else [mode])+[str(path)]
@@ -259,7 +259,7 @@ def run(prepared, runtime, output, *, completed_prefix=None):
                     'transport_calibrated_frozen_package_changed')
             row['fresh_frozen_evaluation'] = {'audit': frozen_audit, 'model_sha256': final['sha256'],
                                              'threshold': final['threshold']}
-        rows.append(row);_write(output/'progress.json', rows)
+        rows.append(row);_write(output/('progress-'+name+'.json'), rows)
     require(before == inventory(prepared), 'transport_prepared_sources_changed')
     require(completed_prefix is None or prefix_before == inventory(completed_prefix), 'transport_prefix_source_changed')
     result = {'kind': 'native_model_spec_transport_result', 'schema_version': 1,
