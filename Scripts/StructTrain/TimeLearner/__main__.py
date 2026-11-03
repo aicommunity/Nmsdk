@@ -144,7 +144,7 @@ def main(argv: list[str] | None = None) -> int:
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
     study = commands.add_parser("n1-protocol-study", help="probe preregistered N1 thresholds across order/reset/quiet-tail conditions")
-    study.add_argument("action", choices=("prepare", "run", "analyze"))
+    study.add_argument("action", choices=("prepare", "run", "analyze", "report"))
     study.add_argument("source", type=Path)
     study.add_argument("--runtime-manifest", type=Path)
     study.add_argument("--source-evidence")
@@ -463,12 +463,16 @@ def main(argv: list[str] | None = None) -> int:
         from .n1_protocol_robustness import prepare_study, run_study, audit_study
         from .native_evidence import EvidenceError, require
         try:
-            if args.action == "analyze":
+            if args.action in {"analyze", "report"}:
                 require(args.runtime_manifest is None and args.source_evidence is None, "n1_study_analyze_has_no_runtime")
-                result = audit_study(args.source)
-                with args.output.open("x", encoding="utf-8") as stream:
-                    json.dump(result, stream, indent=2, allow_nan=False)
-                    stream.write("\n")
+                if args.action == "report":
+                    from .n1_protocol_reports import render_study
+                    result = render_study(args.source, args.output)
+                else:
+                    result = audit_study(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False)
+                        stream.write("\n")
             else:
                 require(args.runtime_manifest is not None and args.source_evidence is not None, "n1_study_requires_runtime_and_source")
                 result = (prepare_study if args.action == "prepare" else run_study)(
