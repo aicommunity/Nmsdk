@@ -113,3 +113,19 @@ Pulse/Rdk/Bin этого reader root совпадают с native root1c8206.
 full262, ASan, всю физическую матрицу или scientific classification. Полная
 normal262 J5 запущена отдельно на исходном immutable J3 runtime; завершение
 и приёмка ещё не заявляются. В develop C-search пока не принят.
+
+## Полная normal-регрессия J5 завершена
+
+Proof `cfde22838e9c6eef7edd5dfbd20936b3bda97899` подтверждает262/262 native
+cases из37 suites и119/119 production readers, без failures/errors/skips.
+Native root1c8206ed98dad49982f1a1e9a1764c118e2cfe34 / Pulse84e456d6fb551021e0222ebaf51fa313df2623b4;
+reader root446fff4dea2185181ac40660807611b0539046bb. Runtime не пересобирался
+и не обновлялся во время серии. Native gtest wall5177.071 s — не model time.
+
+Независимо проверены все2732 archive members /1 064 858 258 raw bytes →
+46 011 088 gzip bytes, outer checksums,416 source hashes по точному reader Git
+root и фактический JUnit inventory262 без незавершённых или skipped cases.
+Сохранены все schema3/schema4 данные и исходные отрицательные verdicts.
+Это полный заявленный normal gate данного снимка, не ASan gate, не вся
+матрица исходного плана и не научная классификация. C-search ещё не принят
+в develop; отдельные ASan/model/physics/visual требования остаются открытыми.
