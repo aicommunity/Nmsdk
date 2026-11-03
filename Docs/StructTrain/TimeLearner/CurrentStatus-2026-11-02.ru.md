@@ -2,8 +2,10 @@
 
 ## Текущий незавершённый C₀ owner, 03.11
 
-Принятый root develop — c2e77869d0d109f3da1370aefb561de1cfc10ff4:
-после parser acceptance c594eacef принят отдельный metadata-подэтап удаления
+Принятый root develop — 3a6b83de203f2fc7bd18754a20203e87a010aaa5:
+после c2e77869d принят docs-only Rdk lifecycle merge33bdf2d1 с прежними
+Core/Deploy trees a62393f7. [Scope](https://github.com/aicommunity/Nmsdk/blob/3a6b83de203f2fc7bd18754a20203e87a010aaa5/Docs/StructTrain/TimeLearner/NativeLifecycleDocumentation-2026-11-03.ru.md).
+После parser acceptance c594eacef принят отдельный metadata-подэтап удаления
 17 historical AsymRm launchers; Bin develop39d811e5, Pulse develop5a52565.
 [Scope и проверенные81 migration records](AsymRmLauncherRetirement.ru.md).
 Новый C₀ owner не включён в develop. Corrected baseline8
@@ -45,8 +47,14 @@ legacy BuildStructure заново создал Neuron до явного native 
 6cc7274d проверен:51 members/103 675 bytes. E5 готовит Dataset/Neuron через
 их штатные Build/Init, выполняет AdoptNativeModel до lifecycle owner, затем
 использует внешний scheduler. Назначен на Elder: root35b0ba72d, Pulse30495d1,
-worker272413/publisher272414; результат pending. Это setup-конфликт владельца
-графа, dormant export этими предыдущими отказами не проверен.
+worker272413/publisher272414;4 FAIL до Train, все51 members proofca83319e
+проверены. Перестановка adoption сама по себе не сохранила класс; точная первая
+стадия замены пока не установлена. E6 добавляет read-only class/C/Ready/Init
+snapshots после каждого шага, без смены физики/алгоритма/identity. Запущен на
+Elder: root5f6add3064890a7647d43a2ec8ebc34fbe252695, Pulse30495d1, worker278449,
+publisher278450. До локализации по snapshots дальнейшее изменение порядка
+на основании только последнего assertion не является исправлением.
+Dormant export этими предыдущими отказами не проверен.
 Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
 fixtures отменён до изменения source/build/runtime: проверены точные
 PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
