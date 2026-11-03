@@ -6,14 +6,33 @@
 создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
 входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).
 
+`phasea-matrix --bin-repository BIN --output NEW.json` извлекает все четыре ISI
+и метки восьми паттернов из точного исторического Bin Git commit. Исторические
+response metrics не импортируются, scheduler/ITI этим не воспроизводятся.
+
+`stock-threshold-study prepare/run/analyze` проверяет четыре холодных stock
+условия на одном immutable runtime: Classic/Branch ×0.0117/100. Для100 нужен
+явно поддерживающий ModelSpec2 SDK; это отдельный construction parameter,
+не скрытый legacy knob. [Протокол](../../../Docs/StructTrain/TimeLearner/InitialThresholdConstruction.ru.md).
+
+`stock-stopped-evaluation prepare/run/analyze/report` использует полные фактические
+остановленные модели и восемь исторических паттернов с новым reset-per-trial
+протоколом. Опубликованы32 пробы без нового Train/калибровки,5+6 readers;
+TP/FP здесь означают любой спайк за полное окно2s. Незавершённый Train не становится
+успешным обучением. `report` строит80 trial-soma pairs; render и3 report readers
+пока ожидают серверного выполнения. [Данные, CLI и ограничения](../../../Docs/StructTrain/TimeLearner/StockStoppedEvaluation.ru.md).
+
 `n1-protocol-study prepare/run/analyze/report` — заранее объявленная проверка двух
 сохранённых N1-кандидатов при фиксированных порогах, разных порядке, Reset и
 полных окнах. Это same-matrix candidate probe без повторного обучения или
 подбора порога; не independent Test. [Протокол и ограничения](../../../Docs/StructTrain/TimeLearner/N1ProtocolRobustness.ru.md).
 Для `run SOURCE_BUNDLE --runtime-manifest ORIGINAL_RUNTIME.json --source-evidence FULL_SHA --output NEW_DIRECTORY`
 обязательны исходный runtime и полный Git SHA доказательства. `analyze STUDY --output NEW.json`
-повторно проверяет полные данные и пересчитывает метрики. Серверная приёмка этой
-новой серии пока не завершена; запуск не означает успешный scientific verdict.
+повторно проверяет полные данные и пересчитывает метрики. Серия завершена:
+528 полных проб и5/5 readers; временные отчёты для792 пар и3/3 report readers.
+Выбранные28 PNG непосредственно просмотрены; полный ручной просмотр кэша не заявлен.
+Это изменённый двухвходовый профиль с LT-мембраной, не stock-модель августа.
+Нулевого FP при target hit не получено; научные ограничения приведены в протоколе.
 `report STUDY --output NEW_CACHE` строит все временные графики сом и фактических
 входных импульсов, overview/zoom и общее оглавление условий; полный cache хранится на M40.
 
