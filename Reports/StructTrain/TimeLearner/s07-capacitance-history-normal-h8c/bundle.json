@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "c553897361e03c2658ef60e36f21efaa5419fc84",
+  "pulselib": "6c75a6061c51c5fb174cdf1e2d9348fe3ba85a25",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 75,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "eae88dbecfd74a1893a9fda09696da3bbe118e7621e4d279fe0715b30824a957",
+  "archive_bytes": 12513,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/CMakeCache.before.txt": "6a6f9ecfe0aebff5d82596aadc4594ebe85597b8a0e83e52271483741ed7372f",
+    "gate/build-request.json": "62a8f891db629d4cfffdbc321395e6d19550ab659c0ab25fa668d9f8b8c607ee",
+    "gate/build.log": "b52c09377e8bdb36ce8aa6f13a3c4cb133200c861e3e6057ed996e3c8e4ec964",
+    "gate/checkout-Nmsdk-PulseLib.log": "dfb19e4f298b904fc36edac7a96c580f849595af9298875201dc5016b6751385",
+    "gate/checkout.log": "dbda0a3dfb2c1c59c8b12987d5878095cb21c2a6328682313537eaeaaaa56485",
+    "gate/compile-failure-prerequisite.json": "8dacee0d17f225ddc36fa79fa5f6595b6ec76f37aeced08e3caf527a6d7f7556",
+    "gate/configure.log": "ef0007dd0d1fd2c5ec8963a7a2b8192f7e9325a3dbb8210837bc4d9221f2cd99",
+    "gate/exception.json": "6e68267caa28070a2ee168aa1f0b50c4201a977bb5e246376e9817dce9e7afd3",
+    "gate/fetch-Nmsdk-PulseLib.log": "70d524e73b1c1027e20dafc990813297229ad12349d803d4c35bc79dba7b7cb1",
+    "gate/fetch.log": "f0c9f6eca20d488140f15febe93f0d72409efbd44324e9bb1ab6bfb64cf43a92",
+    "gate/owned-supervisor.json": "60cde19f5052988476d7dc35af01755b9575e629b4f6018b734013b33212a73e",
+    "gate/prerequisite-verification.json": "4619b6ce16f2feb55ab619bafe138816c11195bbc7b48c96fbb61f30335c33c1",
+    "gate/process-guard.json": "35e8f9dff9fb27cfeb62b78bac1df866d18bdbed5d13b28878ead87246010dd4"
+  },
+  "scope": "Integrated SDK197 after verified native183/readers52 H5b (binding-reference test now uses actual primary traces): previous183,10 tracked capacitance history controls and4 legacy service regressions; independent structured readers75. Summary3 preserves actual C0/full map, per-trial witness IDs, native domain/edit readbacks and reset history, including two dormant-only observation-sink faults. recordCapacitanceHistory is an explicit C++ evidence capability. Configured flag, learned-state package/import3 and C-search policy remain pending. No scientific classification verdict.",
+  "scientific_verdict": null
+}
