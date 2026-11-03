@@ -364,3 +364,18 @@ Full root SHA и новый output receipt обязательны; для sparse
 архивные программы не исполняются. Это проверка retrieval/absence/replacement,
 не полнота migration и не numerical/runtime parity. Контракт:
 [ScriptMigration](../../../Docs/StructTrain/TimeLearner/ScriptMigration.ru.md).
+
+
+Отчёт изменения выбранного C-интервала создаётся штатной командой:
+`report CASE_capacitance_region_region.json --format capacitance-region --output NEW_M40_CACHE`.
+Сначала проверяются effective C0/child physics и полный набор before/after проб
+каждого входа. Отчёт сохраняет проверенный portable snapshot, метки phase/input,
+все записанные soma и реальные input pulses с исходным шагом, общие Y limits
+внутри сравнения и дополнительные detail views. Это characterization штатной
+пачкой, не классификация полной матрицы и не сертификат сходимости.
+Полный кэш хранится на M40 Data; визуальная приёмка и выбранные рисунки отдельно.
+Серверный render gate использует `tests.test_capacitance_region_reports` с
+`TIMELEARNER_CAPACITANCE_REGION_DIR` и новым
+`TIMELEARNER_CAPACITANCE_REGION_REPORT_CACHE`; декларация3 tests/32 trials/48
+trial-soma pairs требует actual восьми native fixtures, а не синтетических копий.
+Пока gate не выполнен, наличие команды не означает проверенный отчёт.
