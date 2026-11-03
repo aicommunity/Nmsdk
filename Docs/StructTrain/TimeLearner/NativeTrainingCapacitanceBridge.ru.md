@@ -314,3 +314,24 @@ PNG1920×960 открыты и просмотрены напрямую. Заго
 для сопоставления амплитуд. Sidecar review сохраняет точные SHA каждого PNG; raw
 pre-review selection metadata не переписана. Global visual acceptance всех2697
 PNG и scientific verdict не заявляются.
+
+
+## H4: first full SDK run, owning JSON value correction
+
+H4 evidenceea4ae160c957846e3dcf6e6ff5ffa8c78b3beba9 проверен:219 members,
+3902211bytes. SDK/Console собраны, все134 cases выполнены:130 PASS,4 bridge
+failures на одной EXPECT_DOUBLE_EQ. Actual created C=9.5e-10, сохранённый
+baseline.channels.Dendrite1_4.ExcChannel=1e-9. Тестовый `const auto c0 =
+baseline["channels"].toObject()[...]` сохранял borrowed QJsonValueRef от
+временного QJsonObject; после дальнейших allocations чтение ожидания давало0.
+Исправлен только тип c0 на owning QJsonValue. Численное ожидание C₀×.95 и
+допуски не изменены; native algorithm не менялся ради прохождения assertion.
+Bounded search по relevant Core/TimeLearner и root integration tests не нашёл
+других таких сохранённых refs без завершающего owning преобразования; conditional
+ModelArchive expectedIdentity имеет common owning QJsonValue type от const identity.
+
+Reader7 H4 не запускался после native failure. Отдельно подтверждён и исправлен
+registry closure gap по actual H4 snapshot; это независимый от Qt-ref дефект
+witness producer. Ни H4, ни новый140/26 integrated gate не считаются принятыми
+до полного runtime/independent анализа. ASan43 G3 проверяет прежний automatic
+owner, а не эти новые API/test changes.

@@ -695,7 +695,9 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
     EXPECT_EQ(final->origin,origin);EXPECT_EQ(final->membraneScales.at("Dendrite1_4"),.95);
     EXPECT_EQ(final->membraneScales.at("Dendrite1_2"),1.1);
     const auto state=rig.learner->OwnedNativeCapacitanceState(),baseline=state["baseline"].toObject();
-    const auto c0=baseline["channels"].toObject()["Dendrite1_4.ExcChannel"];ASSERT_TRUE(c0.isDouble());ASSERT_GT(c0.toDouble(),0.);
+    // Indexing this temporary QJsonObject yields a borrowed QJsonValueRef.
+    // Keep an owning value before later allocations/storage reads occur.
+    const QJsonValue c0=baseline["channels"].toObject()["Dendrite1_4.ExcChannel"];ASSERT_TRUE(c0.isDouble());ASSERT_GT(c0.toDouble(),0.);
     EXPECT_EQ(baseline["channel_origins"].toObject()["Dendrite1_4.ExcChannel"],QJsonValue("storage_image"));
     const auto created=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_4.ExcChannel",true);ASSERT_TRUE(created);
     EXPECT_DOUBLE_EQ(created->Capacity.GetData(),c0.toDouble()*.95);record("joint_growth");
