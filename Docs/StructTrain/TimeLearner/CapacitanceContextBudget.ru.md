@@ -37,3 +37,13 @@ scheduler/lifecycle или формат policy4. Default Off не затраги
 Приёмка: old-source regression reproduction, corrected kernel151, Off A/B137
 на каждой стороне, затем реальные native/ASan/matrix проверки. Ни число tests,
 ни успешный pure kernel не являются научной классификацией или полной приёмкой.
+
+
+Baseline regression root e927b4a59537a3c32233a96603644bf68e6c9bac сохраняет
+Pulse198 и те же151 tests. Исправление Pulse84e456d6fb551021e0222ebaf51fa313df2623b4
+добавляет только private predicate/отбор seeds в BoundedTraining.cpp. Predicate
+проверяет known path indices и implicit unit future paths, не создаёт union map.
+Для Branch учитывает текущую downstream length и upstream upper bounds;
+консервативно не удаляет context, если no-op не доказан. Штатные native preview,
+C0/profile и fresh all-input gates остаются авторитетными.
+Серверные reproduction/corrected/off-compatibility проверки ещё требуются.
