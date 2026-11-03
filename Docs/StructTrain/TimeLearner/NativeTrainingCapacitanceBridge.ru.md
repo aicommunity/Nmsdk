@@ -529,3 +529,35 @@ completed packages со всеми первичными CSV, проверенн�
 Это сохраняет проверку пересчёта certificate, вместо выдуманного сертификата у
 BudgetExhausted. Проверки обоих классов peak assignment сохранены. Серверная
 проверка этой отдельной ветки ещё ожидается; H9 использует прежний immutable root.
+
+
+### Проверка reader contracts и исправление queued guard, 03.11
+
+AssignedNativeEvidenceTest4/4 PASS на Elder, source47e09bec527973500fb24cad0f0ca17c69095242.
+Evidence1c63ec13a9cad3775d6899ecc16663a15ca79209: независимо проверены10 members,
+296 hashes исходников и8 original primary файлов (stored/raw hashes/size).
+Восстановлены четыре JSON/CSV пары из accepted full-clock Elder snapshot,
+native rootaeff4a9d73c02b7672352ecb1b7a4b1cd8de9224. Нет numerical rerun или
+приёмки нового C++ кода. В Git добавлено16700 compressed bytes; primary дубли
+не добавлялись, их точные Git paths/hashes находятся в evidence inventory.
+
+Отдельные17 NativeEvidenceTest checks ожидают завершения и публикации H8d:
+reader worker520243/start_ticks325950968 подтверждён живым. Источник immutable47e09bec5,
+результат s03-native-evidence-contract-readers-h8d. Он проверяет реально completed
+certificate packages и диагностические summaries независимо от полного verdict
+численного H8d. Новые21 checks не объявляются общим PASS до завершения всех17.
+
+Queue H9 отменена до сборки из-за ошибочного ожидания execution=completed у
+native assertions failure. Штатный native-gate возвращает process_error/valid/failed
+при полном JUnit inventory; это не timeout и не пропущенные cases. Источник и
+runtime H8d не менялись. Полный cancellation receipt
+91d331a85d6dcc8b0c203d3162f324732204c0cb проверен:5 members,729 compressed bytes,
+никаких build-request/native-cli. Его not_accepted сохранён.
+
+Исправленная H9b очередь использует тот же source2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747,
+native209/readers87, waits H8d и H9 owners. Supervisor520145/325950666 и publisher
+520146/325950667 проверены живыми. Readbacks s07-capacitance-history-boundary-normal-h9b
+и s07-capacitance-history-boundary-publication-normal-h9b. Предшествующий H8d должен
+иметь полный197 inventory, ровно четыре разобранных exception-type failures и
+проверенный полный Git archive; дополнительные failures останавливают переход.
+Никакой незавершённый процесс не объявляется остановленным по timeout наблюдения.
