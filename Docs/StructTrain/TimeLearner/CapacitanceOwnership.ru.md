@@ -61,6 +61,24 @@ publisher278450; результат pending. Ранее отдельным docs-
 точный канонический lifecycle Rdk (root develop3a6b83de2, Rdk33bdf2d1): Core
 и Deploy совпадают с a62393f7; работающие jobs сохраняют собственные gitlinks.
 
+## E6: первая потеря физики находится внутри LoadComponent
+
+Evidence `38cf86675497e9d7ca441467b51393fc03f1baff` проверен:99 members,
+106 654 bytes. Во всех4 случаях первое after_load уже содержит прежний channel
+class и1nF вместо retained1.41nF; последующие frequency/Build/Init/adoption шаги
+не являются первой причиной. Это уточняет предыдущую гипотезу о позднем Build.
+
+Подтверждённая исходниками цепочка: UNet.LoadComponent(links=true) →
+SetComponentInternalLinks → BreakLinks → DisconnectAll → Build. Поэтому
+полный Load может войти в структурную сборку владельца до возврата управления.
+E7 загружает готовый граф в штатном learner StructureBuildMode=0. После
+проверки/AdoptNativeModel восстанавливается исходный mode1 до первого Train.
+Это реальная смена режима явного графа на исходное управление, не самоприсваивание
+для пробуждения. Режим вложенного нейрона2 не меняется; все class/C/bindings
+assertions остаются. Нового результата пока нет. Независимые риски удаления
+канала при повторной сборке самого NPulseNeuron требуют отдельной проверки,
+а не предполагаются исправленными этим setup-переходом.
+
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
 Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.

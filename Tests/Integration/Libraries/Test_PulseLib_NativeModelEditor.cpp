@@ -2868,6 +2868,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         // an already-ready neuron does not rebuild the cable's channel links.
         // No self-assignment, arbitrary Default or learner-specific wake-up.
         const auto declaration=Configuration(rig).model;
+        const auto originalLearnerBuildMode=rig.learner->StructureBuildMode.GetData();
         USerStorageXML configuration;ASSERT_TRUE(configuration.Create("DormantChannelConfiguration"));
         const auto configurationOwner=dynamic_pointer_cast<UNet>(rig.model);ASSERT_TRUE(configurationOwner);
         ASSERT_TRUE(configurationOwner->SaveComponent(&configuration,true,ptPubParameter|pgSystem));
@@ -2883,6 +2884,13 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         ASSERT_TRUE(configuration.SelectNode("Components"));ASSERT_TRUE(configuration.SelectNode("ExcChannel"));
         ASSERT_TRUE(configuration.SetNodeAttribute("Class",dormantImage));
         for(int level=0;level<8;++level)configuration.SelectUp();
+        // Link restoration calls DisconnectAll/Connect, which can Build the
+        // owner inside Load itself. A serialized complete graph uses the
+        // documented no-reconstruction mode until explicit native adoption.
+        for(const auto& node:std::vector<std::string>{"Components","Learner","Parameters","StructureBuildMode"})
+            ASSERT_TRUE(configuration.SelectNode(node))<<node;
+        ASSERT_TRUE(configuration.SetNodeText("0"));
+        for(int level=0;level<4;++level)configuration.SelectUp();
         std::string configuredXml;ASSERT_TRUE(configuration.Save(configuredXml));
         Artifact(rig.name+"_dormant_configuration.xml",QByteArray::fromStdString(configuredXml));
         const auto captureSetupStage=[&](const std::string& stage) {
@@ -2893,6 +2901,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             if(owner)
             {
                 observed["owner_ready"]=owner->IsReady();observed["owner_initialized"]=owner->IsInit();
+                observed["owner_structure_mode"]=owner->StructureBuildMode.GetData();
                 const auto tree=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
                 if(tree)
                 {
@@ -2915,6 +2924,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         captureSetupStage("after_load");
         rig.model->SetGlobalTimeStep(frequency);captureSetupStage("after_frequency");
         rig.learner=rig.model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(rig.learner);
+        ASSERT_EQ(rig.learner->StructureBuildMode.GetData(),0);
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
         auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
         // Like native construction, prepare the physical children before
@@ -2930,6 +2940,9 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         const auto adopted=rig.learner->AdoptNativeModel(declaration);
         ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
         captureSetupStage("after_adopt");
+        rig.learner->StructureBuildMode=originalLearnerBuildMode;
+        ASSERT_EQ(rig.learner->StructureBuildMode.GetData(),originalLearnerBuildMode);
+        captureSetupStage("after_restore_owner_mode");
         rig.model->Init();captureSetupStage("after_model_init");
         rig.model->Reset();captureSetupStage("after_model_reset");
         // The external native scheduler completes the newly adopted owner's
