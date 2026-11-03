@@ -233,3 +233,14 @@ production scripts из Git в отдельный source и строит отч�
 native-capacitance-ownership-report-v1.json, с реальными stimulus overlays.
 Полный cache не публикуется в Git; selected figures и direct visual QA ещё
 не выполнены. Renderer не использует leased ASan source/build/runtime.
+
+Впоследствии normal C2 завершён:8/8 native и19/19 readers PASS. Evidence
+`a928fb92edd0880728a697da0fed6d7ede3e7d4a`: outer SHA256 и все259 members
+проверены локально, compressed archive10 491 579 bytes. Результат добавлен
+merge commit в feature-ветку; это ещё не merge owner в develop. Transport normal
+проверил prerequisite bundle и начал собственную сборку в новом runtime.
+На M40 renderer проверил тот же bundle и строит отчёт. Отдельный publisher
+s07-capacitance-owner-temporal-selected-normal-c2 (PID2494602) ждёт завершения
+render, проверяет все cache hashes и выбирает12 PNG: overview и zoom по
+измеренному пику всех сом для regrowth ClassicN0/BranchN1 при2k/20k. Он сохраняет
+visual_review=false до прямого просмотра. ASan owner и transport ещё pending.

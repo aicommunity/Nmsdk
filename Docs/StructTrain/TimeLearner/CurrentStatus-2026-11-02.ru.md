@@ -25,8 +25,9 @@ PID/start_ticks/executable hashes; primary/receipts опубликованы и 
 
 Pulse обоих jobs f899ef0: новый owner плюс принятый parser. Source/build/runtime
 leased; вручную не обновлять. Ожидаются8 native и19 independent readers;
-результат пока pending. На03.11 00:15 UTC normal8 завершены, readers/publication
-ещё проверяются; ASan прошёл4/8 и продолжает20k cases. Conditional transport43
+полная приёмка пока pending. Normal8 и19 readers завершены и опубликованы:
+evidence a928fb92edd0880728a697da0fed6d7ede3e7d4a, все259 members проверены.
+ASan прошёл4/8 и продолжает20k cases. Conditional transport43
 (включая4 dormant-image cases) с26 readers ждёт successful predecessor; вместе
 с owner8 это51 уникальная проверка. Отдельный readonly renderer normal C2
 ждёт опубликованный passed bundle и строит48 проб/72 trial-soma pairs в Data
