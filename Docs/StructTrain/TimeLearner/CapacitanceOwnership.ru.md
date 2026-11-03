@@ -15,13 +15,29 @@ hashes278 source files совпали с Git reader rootf1d500245. Отрица�
 при потере unused image и invalid_dormant_capacitance_scale при scale1.3.
 Зелёный результат не может обеспечиваться случайным повреждением outer digest.
 
-Полная приёмка automatic owner остаётся открытой. Normal regression43/readers26
-G1 выполняется на Elder: root4d501d611b56945c9f1914e9e4c44dee5485c949,
-worker297669/324112486, publisher297670. Build завершён, native43 начат.
-M40 ASan owner C3 прошёл6/8, работает Branch20k. Corrected ASan43/readers26 G1
-поставлен после успешных ASan owner8 и normal43: worker2578910/274660894,
-publisher2578911. До их завершения source/build/runtime не меняются.
-Отменённый старый ASan D1 не возобновляется.
+Полная приёмка automatic owner остаётся открытой. Normal G1 завершился41/43:
+два dormant N0 отказа вызваны повторной регистрацией fault-only factory между
+fixtures одного storage. Test-only fix root496a80d7190cafcc1e96329ee3c8e2b17cb40114
+проверяется в G2, worker330097/324362522. Build успешен, native43 выполняется.
+
+M40 ASan C3 завершён8/8 +19 independent readers; evidence
+ d7cace1f5f9f62385b97281d0d1f48770e7153fd: все261 members/10508679bytes проверены,
+сохранены реальные libasan mappings. Журнал содержит Ran19/OK, terminal returncodes0.
+Это source eab5e61c2/Pulsef899, не весь transport43 и не scientific evaluation.
+
+ASan transport G1 отказал до checkout/build на failed normal G1 prerequisite:
+44a2f30e98f501a64bcfbe61f4627aa5a7d98866,5 members/720bytes проверены. Оба owners
+закрыты. Его и старый D1 не возобновлять; нужен новый ASan gate на G2 fix после
+successful normal G2. Production sources/runtime C3 не менялись во время работы.
+
+Обнаружен также дефект временного publisher: `skipped` искалось во всём unittest
+log, включая имя проходящего test_skipped_or_unfinished_case_is_rejected.
+Для G2 заменён только принадлежащий заданию publisher330098/324362522 после
+проверки PID/start_ticks/cmd и отсутствия children; native330097 не затронут.
+Replacement publisher проверяет точный финальный unittest OK, exit code и26 tests,
+а не отсутствие слова в именах. Receipt сохранён отдельно. Для новых gates
+следует использовать production validation.run_suite с JSON skipped/failures/errors,
+полным inventory и fixture/package fingerprints, а не разбор произвольного текста.
 
 Все результаты здесь — engineering transport controls при явно заданной .2,
 не научная классификация, не convergence при default .02 и не завершение
