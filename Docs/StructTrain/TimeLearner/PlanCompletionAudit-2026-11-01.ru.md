@@ -1,3 +1,13 @@
+## Дополнение03.11: два исторических Branch retry launchers удалены
+
+Убраны Phase9/Phase10 br480 Python entrypoints без wrappers; manifest107 и
+restored-Python negative fixture проверены production CLI на обоих workers.
+Сверены20 members и380 exact Git source hashes каждого пакета. Два исторических
+документа помечены без изменения исходных наблюдений. [SHA, source findings и
+исправление текстового scope evidence](BranchRetryRetirement.ru.md).
+Phase8 сохранён из-за действующих legacy consumers. Полная миграция и исходные
+этапы1–12 остаются частичными; только исходный этап0 закрыт полностью.
+
 ## Дополнение03.11: ещё11 исторических Bin launchers удалены
 
 SoftCold/OpenGaps/T2/T4 launcher retirement прошёл production migration105 и
