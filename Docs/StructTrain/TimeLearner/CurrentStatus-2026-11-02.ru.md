@@ -1,3 +1,26 @@
+# Актуализация 03.11: portable C-history кандидат, серверные проверки продолжаются
+
+Связь Automats2 восстановлена. H5 native183 и исправленные independent readers52
+подтверждены; combined evidence9cf5aaa6c67678f0bab5d3ce35800e17f064c55d.
+H6/H7/H8 не прошли prerequisites, H8b/H8c дали сохранённые compile failures.
+H8d успешно собран и выполняется на Elder; замечено несовпадение ожидаемого
+исключения в bridge fixture, исправление требует точной фактической диагностики.
+M40 ASanG3 выполняется:15 завершённых successes при последнем poll, итог ещё неизвестен.
+Не считать эти промежуточные числа полным197/75 либо43/26 PASS.
+
+Rootfe8674cb9 /Pulse21435c8d5a11d2670cdc1609757d3a9973877314:
+реализован кандидат configuration/model schema3 с C₀/current/trial witnesses,
+physical C/C₀ проверкой, same/fresh-process transfer controls и12 новыми readers.
+Declared native gate209. Новая часть ещё не собрана/проверена сервером и не merged
+в develop. Старый запрет export tracked run в этом кандидате заменён полноценным
+boundary package3; schemas1/2 сохраняются. Checkpoint посреди пробы не заявляется.
+Native measurement auditor6, learned/stopped readers4 фиксируют новую семантику.
+C-search On и остальные открытые требования полного плана остаются обязательными.
+
+Подробные SHA, ограничения и chronology:
+[NativeTrainingCapacitanceBridge](NativeTrainingCapacitanceBridge.ru.md).
+Ниже сохранены предыдущие срезы; формулировки queued/pending относятся к их датам.
+
 # Подтверждённый срез 02.11: полнота временных данных
 
 ## Tracked service/summary3 подготовлен, runtime pending03.11

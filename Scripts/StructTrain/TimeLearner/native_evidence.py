@@ -16,7 +16,7 @@ import zlib
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 5
+AUDITOR_VERSION = 6
 
 
 class EvidenceError(ValueError):
