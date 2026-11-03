@@ -161,7 +161,7 @@ def main(argv: list[str] | None = None) -> int:
     stock.add_argument("--initial-threshold", type=float, help="explicit native model-spec2 construction value; e.g. 100 for training")
     stock.add_argument("--output", type=Path, required=True)
     pair = commands.add_parser("stock-threshold-study", help="paired cold stock Train at explicit thresholds 0.0117 and 100 on one runtime")
-    pair.add_argument("action", choices=("prepare", "run", "analyze"))
+    pair.add_argument("action", choices=("prepare", "run", "analyze", "failure-report"))
     pair.add_argument("source", type=Path)
     pair.add_argument("--runtime-manifest", type=Path)
     pair.add_argument("--code-identity", type=Path)
@@ -539,11 +539,15 @@ def main(argv: list[str] | None = None) -> int:
         from .stock_threshold_study import prepare, run, audit
         from .native_evidence import EvidenceError, require, load
         try:
-            if args.action == "analyze":
+            if args.action in ("analyze", "failure-report"):
                 require(args.runtime_manifest is None and args.code_identity is None, "stock_pair_analysis_has_no_runtime")
-                result = audit(args.source)
-                with args.output.open("x", encoding="utf-8") as stream:
-                    json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+                if args.action == "failure-report":
+                    from .stock_failure_reports import render_failure_report
+                    result = render_failure_report(args.source, args.output)
+                else:
+                    result = audit(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
             else:
                 require(args.runtime_manifest is not None and args.code_identity is not None, "stock_pair_runtime_and_code_required")
                 result = (prepare if args.action == "prepare" else run)(args.source, args.runtime_manifest,

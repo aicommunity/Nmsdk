@@ -50,6 +50,19 @@ def equal(a: Any, b: Any) -> bool:
     return not after(a, b) and not after(b, a)
 
 
+def measured_wave_plateaus(signal, minimum):
+    """Interior positive plateaus in actual sample order; no inferred peaks."""
+    measured, index = [], 1
+    while index + 1 < len(signal):
+        last = index
+        while last + 1 < len(signal) and signal[last + 1] == signal[index]:
+            last += 1
+        if last + 1 < len(signal) and signal[index] >= minimum and signal[index] > signal[index - 1] and signal[last] > signal[last + 1]:
+            measured.append((index, last))
+        index = last + 1
+    return measured
+
+
 def parse_json_bytes(raw: bytes) -> Any:
     """The same strict decoder for files and already snapshotted archive bytes."""
     def pairs(items: list[tuple[str, Any]]) -> dict[str, Any]:
@@ -237,15 +250,7 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
         minimum = number(spec["minimum_amplitude"])
         require(not (signal[0] >= minimum and signal[0] >= signal[1]) and
                 not (signal[-1] >= minimum and signal[-1] >= signal[-2]), "clipped_trace_wave")
-        measured_waves: list[tuple[int, int]] = []
-        index = 1
-        while index + 1 < len(signal):
-            last = index
-            while last + 1 < len(signal) and signal[last + 1] == signal[index]:
-                last += 1
-            if last + 1 < len(signal) and signal[index] >= minimum and signal[index] > signal[index - 1] and signal[last] > signal[last + 1]:
-                measured_waves.append((index, last))
-            index = last + 1
+        measured_waves = measured_wave_plateaus(signal, minimum)
         require(len(measured_waves) == len(assignment["waves"]), "trace_wave_count_mismatch")
         for wave, (first, last) in zip(assignment["waves"], measured_waves):
             require(equal(wave["time"], times[first]) and equal(wave["plateau_end"], times[last]),
