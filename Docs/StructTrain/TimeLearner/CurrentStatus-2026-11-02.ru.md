@@ -1,3 +1,22 @@
+# Дополнение03.11: backward readers88 завершены; новые gates выполняются
+
+H18: production schema4 reader rootab95 проверен на исходных H12 schema3
+primaries,88/88 без errors/failures/skips. Независимо сверены10 archive members,
+25536 bytes и416 Git source hashes. Новые C++ models этим не подтверждаются.
+[Привязка native/reader roots](BoundaryReaderInventoryControls.ru.md).
+
+J3 из root1c8206ed98dad49982f1a1e9a1764c118e2cfe34/Pulse84 строится в новом
+source/build/runtime:34 target cases, включая4 minimal-context physical cases,
+затем22 readers. Full262 остаётся декларацией. Найденный package-normalization
+inventory дефект новых readers исправлен в root47e5ca437ab9f0c1ddf66468332d3b52f718e951;
+immutable J3 не меняется, reader rerun потребуется на его исходных данных.
+
+C-search visual-v3 из root47e5 выполняет14 checks и построение всех48 actual
+J2 probes /72 trial-soma pairs. Предыдущие preparation/inventory failures
+9641e3955ace78c97667d7b0461ba4ab4d16f454 иf1c08142fd1f3bf8188d03a43795222c3d6c5457
+сохранены и независимо сверены. До результата и прямого просмотра рисунков
+visual acceptance не заявляется. Только исходный этап0 закрыт полностью.
+
 # Дополнение03.11: проверенный minimal-context fix; серверы доступны
 
 VPN Automats2 восстановлен, SSH через jump host подтверждён к обоим workers.
