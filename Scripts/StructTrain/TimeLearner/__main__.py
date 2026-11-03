@@ -143,6 +143,11 @@ def main(argv: list[str] | None = None) -> int:
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
+    transfer = commands.add_parser("model-spec-transport", help="replay pinned positive engineering N1 jobs, then measure calibration and fresh import")
+    transfer.add_argument("action", choices=("prepare", "run"))
+    transfer.add_argument("source", type=Path, help="Git repository for prepare; prepared declarations for run")
+    transfer.add_argument("--runtime-manifest", type=Path)
+    transfer.add_argument("--output", type=Path, required=True)
     study = commands.add_parser("n1-protocol-study", help="probe preregistered N1 thresholds across order/reset/quiet-tail conditions")
     study.add_argument("action", choices=("prepare", "run", "analyze", "report"))
     study.add_argument("source", type=Path)
@@ -477,6 +482,21 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, ImportError) as error:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "model-spec-transport":
+        from .model_spec_transport import prepare, run
+        from .native_evidence import EvidenceError, require
+        try:
+            if args.action == "prepare":
+                require(args.runtime_manifest is None, "transport_prepare_does_not_execute_runtime")
+                result = prepare(args.source.resolve(strict=True), args.output.resolve())
+            else:
+                require(args.runtime_manifest is not None, "transport_runtime_required")
+                result = run(args.source.resolve(strict=True), args.runtime_manifest.resolve(strict=True), args.output.resolve())
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "stock-stopped-evaluation":
         from .stock_stopped_evaluation import prepare, run, audit, report

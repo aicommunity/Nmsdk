@@ -362,3 +362,35 @@ LearnedBoundary. Полная CLI-цепочка train→export→measured calib
 evaluation должна оставлять действительный source-case и полный calibration
 proof. Исходные допуски и CapturedPerInput сохраняются; новая постановка
 декларируется отдельно и не заменяет нынешние отрицательные результаты.
+
+## Production replay вместо короткого calibration fixture
+
+Команда model-spec-transport prepare восстанавливает точные206 primary members
+из baseline proofbcbd30f1d87e352825e6c8400c5b929eff184ae5. Проверяются SHA256
+архива/manifest и каждого member, исходные native manifests и действительные
+Exact source certificates. Schema1 job полностью совпадает с опубликованным;
+в schema2 меняются только вложенные model.schema_version/initial_threshold1
+и производный digest. Physics/storage archives, ISI.01/.03, CapturedPerInput,
+допуски, bounds, бюджеты и режимы остаются прежними. Четыре jobs записываются
+до первого Train; оба варианта должны восстановить тот же effective cold graph.
+
+Команда model-spec-transport run использует production CLI train/export/
+evaluate/calibrate. После настоящего Exact выполняется identity export,
+полные nonspiking proposal probes для заранее объявленных target[.01,.03]
+и dispersed foil[.01,.24] (2kHz,reset-per-trial,0.4s). Пики лишь предлагают
+конечную сетку порогов. Каждый кандидат и свежий confirmation измеряются
+штатным native calibration transaction; NonSeparable сохраняется как
+отрицательный исход и не создаёт calibrated package.
+
+При calibrated результате новый процесс Console импортирует полный пакет
+и выполняет четыре frozen probes с target на обеих позициях. До/после
+сверяется весь пакет и выбранный threshold, отличный от construction1.
+Нельзя подменить отсутствие source certificate шаблонной моделью. Все
+подготовленные данные должны остаться побайтно неизменными.
+
+Область — сохранённый двухвходовый инженерный LT профиль и primary-pair
+historical_same_matrix calibration, не stock science и не independent Test.
+Три подготовительных теста проверяют реальные pinned primaries, неизменность
+job и геометрию trial design; три итоговых — genuine Train, calibration
+provenance и complete frozen import. Пока серверное выполнение не завершено,
+полный transport gate остаётся открытым.
