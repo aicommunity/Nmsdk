@@ -117,7 +117,10 @@ TEST(NativeInitialThreshold,StrictCodecAndExplicitSignedValues) {
 }
 TEST(NativeInitialThreshold,UnsupportedZoneIsRejectedBeforeAttachment) {
     Scope scope(2000);auto owner=scope.OwnerNode<NNeuronTimeLearner>(2000);
-    StorageProfileSpec p;p.name="InitialThresholdUnsupported";p.neuronBaseClass="NSPNeuronGen";p.ltZoneBaseClass="NPulseSimpleLTZone";
+    // Storage image names differ from C++ implementation names; exercise the
+    // real registered simple-zone image, not a missing-template exception.
+    ASSERT_TRUE(scope.storage->CheckClass("NPSimpleLTZone"));
+    StorageProfileSpec p;p.name="InitialThresholdUnsupported";p.neuronBaseClass="NSPNeuronGen";p.ltZoneBaseClass="NPSimpleLTZone";
     const auto profile=RegisterStorageProfile(scope.storage,scope.environment,p);
     auto spec=Spec(false,2000,100.);spec.neuronClass=profile.neuronClass;
     const auto result=owner->ConstructNativeModel(spec);
