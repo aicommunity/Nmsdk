@@ -1,5 +1,28 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## ASan owner8 принят адресно; typed N1 domain подготовлен, 03.11
+
+M40 C3 завершён8/8 native +19/19 readers. Evidence
+d7cace1f5f9f62385b97281d0d1f48770e7153fd: проверены261 members/10508679bytes,
+terminal returncodes0, реальный libasan mapping и завершающий unittest OK.
+ASan transport G1 не запускался из-за failed normal G1; receipt5 members проверен.
+
+Normal G2 выполняется на Elder. Его временный publisher заменён по exact owned
+PID/start_ticks (native не затронут): поиск skipped во всём log ошибочно считал
+имя проходящего negative test пропуском. Новый publisher340619/324442705 читает
+финальный unittest OK, exit code и26 tests. Для новых reader gates использовать
+production validation.run_suite и structured skipped/failures/errors.
+M40 ASan G2 owner2621211/274992757, publisher2621212/274992757 ожидают successful
+normal G2, прежде чем менять source/build. Исходный ASan C3 runtime закрыт.
+
+Подготовлена explicit typed N1 domain capability: requested/effective C maps,
+signed actual-preview C₀/state, storage readback и codec schema3. Старые calls
+остаются schema2. Independent reader проверяет C и заново рассчитывает Rs bounds
+по тем же каналам; native tests сравнивают preview с фактическим joint commit
+и с прежним domain API. Новые8 domain-reader tests и SDK ещё не выполнялись.
+Это подготовленный код в feature, не PASS, не service dispatch и не C-trim On.
+[Scope](NativeTrainingCapacitanceBridge.ru.md). Полный план остаётся незавершённым.
+
 ## Независимая проверка native C₀ bridge, 03.11
 
 Подготовлены production reader и CLI `analyze --format training-capacitance-bridge`.

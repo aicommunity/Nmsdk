@@ -173,3 +173,11 @@ N1 части четырёх bridge tests расширены: domain preview с�
 реальных Classic/Branch N1 records, включая resigned physical C corruption и
 проверку связи с исходным/конечным графом. Эти изменения ещё не собраны и не
 исполнялись; для них нужен отдельный SDK gate после H3/I1 и ASan.
+
+
+Добавлена восьмая domain-reader проверка: настоящий прежний native API вызывается
+для того же L/Ns/Rs/C; schema2, status, полный preview и Rs endpoints должны
+совпасть с новым typed API. Это проверка существующего production path, а не
+перекрашивание schema3 JSON под старую схему. SDK/reader16 gate (bridge8+domain8)
+должен использовать production validation.run_suite с полным объявленным
+inventory, package/fixture fingerprints и structured skipped/failures/errors.
