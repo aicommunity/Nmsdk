@@ -126,7 +126,7 @@ template<class Owner> void PostConstructionArchive(unsigned frequency) {
     ASSERT_DOUBLE_EQ(zone->Threshold.GetData(),laterThreshold);
     dataset->Delay=0.;dataset->LoopSamples=false;dataset->AdvanceSampleAfterBurst=false;
     auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(generator);
-    const NmsdkTools::ModelBoundarySources sourcePorts{{&generator->Output,"burst"}};
+    NmsdkTools::ModelBoundarySources sourcePorts{{&generator->Output,"burst"}};
     const auto datasetArchive=NmsdkTools::ExportDatasetSnapshot(dataset);
     std::vector<std::string> imageRoots;
     for(const auto& value:datasetArchive["required_class_names"].toArray())imageRoots.push_back(value.toString().toStdString());
@@ -151,7 +151,7 @@ template<class Owner> void PostConstructionArchive(unsigned frequency) {
         datasetArchive,scope.storage,scope.environment));ASSERT_TRUE(importedDataset);
     auto importedGenerator=importedDataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
     ASSERT_TRUE(importedGenerator);
-    const NmsdkTools::ModelBoundarySources targetPorts{{&importedGenerator->Output,"burst"}};
+    NmsdkTools::ModelBoundarySources targetPorts{{&importedGenerator->Output,"burst"}};
     auto importedNeuron=dynamic_pointer_cast<NPulseNeuron>(NmsdkTools::ImportModelArchive(
         archive,scope.storage,scope.environment,QString::fromStdString(implementation),targetPorts));
     ASSERT_TRUE(importedNeuron);
@@ -163,11 +163,30 @@ template<class Owner> void PostConstructionArchive(unsigned frequency) {
     ASSERT_EQ(current.status,NativeModelBuildStatus::Adopted)<<current.reason;
     ASSERT_EQ(current.modelRevision,adopted.modelRevision);
     target->Build();target->Init();target->Reset();
+    importedNeuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
+    importedDataset=target->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    ASSERT_TRUE(importedNeuron);ASSERT_TRUE(importedDataset);
+    importedGenerator=importedDataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);ASSERT_TRUE(importedGenerator);
+    targetPorts={{&importedGenerator->Output,"burst"}};
     auto importedZone=importedNeuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(importedZone);
     ASSERT_DOUBLE_EQ(importedZone->Threshold.GetData(),laterThreshold);
     ASSERT_EQ(NmsdkTools::IdentifyModel(importedNeuron,targetPorts),NmsdkTools::IdentifyModel(neuron,sourcePorts));
     EXPECT_DOUBLE_EQ(scope.environment->GetTime().GetDoubleTime(),clock);
     scope.model->Init();scope.model->Reset();
+    // Lifecycle operations may legitimately rebuild children. Resolve actual
+    // named objects and boundary ports; pointer identity is not the contract.
+    neuron=source->template GetComponentL<NPulseNeuron>("Neuron",true);
+    dataset=source->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    importedNeuron=target->template GetComponentL<NPulseNeuron>("Neuron",true);
+    importedDataset=target->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    ASSERT_TRUE(neuron);ASSERT_TRUE(dataset);ASSERT_TRUE(importedNeuron);ASSERT_TRUE(importedDataset);
+    generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+    importedGenerator=importedDataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+    ASSERT_TRUE(generator);ASSERT_TRUE(importedGenerator);
+    zone=neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);
+    importedZone=importedNeuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);
+    ASSERT_TRUE(zone);ASSERT_TRUE(importedZone);
+    sourcePorts={{&generator->Output,"burst"}};targetPorts={{&importedGenerator->Output,"burst"}};
     ASSERT_DOUBLE_EQ(zone->Threshold.GetData(),laterThreshold);
     ASSERT_DOUBLE_EQ(importedZone->Threshold.GetData(),laterThreshold);
     dataset->StateGeneration=1;importedDataset->StateGeneration=1;
