@@ -44,6 +44,19 @@ owner уже учитывает native-владение. Learner-specific Ready 
 bindings, класс канала и1.41nF сохранённой мембраны остаются assertions.
 Результат E5 ещё не получен; dormant export по E4 не проверен.
 
+## E5 не подтвердил достаточность перестановки adoption
+
+E5 (`ca83319e75f4cf39f0ff6eec994ea84aa4845065`),51 members/103 681 bytes,
+проверен полностью: успешная сборка,4 FAIL до Train с прежним классом канала.
+Значит объяснение только последующим legacy Build owner недостаточно;
+сохранённый XML по E4/E5 корректен, но точная стадия замены ещё не установлена.
+E6 добавляет read-only snapshots после UnInit, Load, frequency assignment,
+Dataset Build/Init, Neuron Build/Init, adoption и native model Init/Reset/Calculate.
+Снимки включают реальные class names, Ready/Init и обе контрольные C. Они не
+меняют структуру, физику, допуски или strict import identity. Следующая правка
+должна опираться на первую фактически изменившую класс операцию, а не на
+предположение о финальном месте отказа. E6 пока не выполнен.
+
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
 Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.

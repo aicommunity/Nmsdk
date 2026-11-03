@@ -2885,28 +2885,56 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         for(int level=0;level<8;++level)configuration.SelectUp();
         std::string configuredXml;ASSERT_TRUE(configuration.Save(configuredXml));
         Artifact(rig.name+"_dormant_configuration.xml",QByteArray::fromStdString(configuredXml));
+        const auto captureSetupStage=[&](const std::string& stage) {
+            QJsonObject observed{{"stage",QString::fromStdString(stage)},
+                {"requested_channel_class",QString::fromStdString(dormantImage)},
+                {"model_ready",rig.model->IsReady()},{"model_initialized",rig.model->IsInit()}};
+            const auto owner=rig.model->template GetComponentL<Learner>("Learner",true);
+            if(owner)
+            {
+                observed["owner_ready"]=owner->IsReady();observed["owner_initialized"]=owner->IsInit();
+                const auto tree=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+                if(tree)
+                {
+                    observed["neuron_ready"]=tree->IsReady();observed["neuron_initialized"]=tree->IsInit();
+                    const auto membrane=tree->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);
+                    if(membrane)observed["membrane_channel_class"]=QString::fromStdString(membrane->ExcChannelClassName.GetData());
+                    const auto channel=tree->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+                    if(channel){observed["actual_channel_class"]=QString::fromStdString(channel->GetCompClassName());observed["capacity"]=channel->Capacity.GetData();}
+                    const auto retained=tree->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
+                    if(retained)observed["retained_capacity"]=retained->Capacity.GetData();
+                }
+            }
+            Artifact(rig.name+"_setup_"+stage+".json",QJsonDocument(observed).toJson());
+        };
         const auto marker=rig.model->OperationFailureSequence();
-        rig.model->UnInit();
+        captureSetupStage("before_uninit");rig.model->UnInit();captureSetupStage("after_uninit");
         TProjectLoadDiagnostics diagnostics;
         ASSERT_TRUE(configurationOwner->LoadComponent(&configuration,true,&diagnostics));
         ASSERT_TRUE(diagnostics.errors.empty());ASSERT_TRUE(diagnostics.warnings.empty());
-        rig.model->SetGlobalTimeStep(frequency);
+        captureSetupStage("after_load");
+        rig.model->SetGlobalTimeStep(frequency);captureSetupStage("after_frequency");
         rig.learner=rig.model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(rig.learner);
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
         auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
         // Like native construction, prepare the physical children before
         // adopting their graph. Building a still-legacy learner here would
         // legitimately replace the loaded neuron from its common profile.
-        dataset->Build();dataset->Init();rig.neuron->Build();rig.neuron->Init();
+        dataset->Build();captureSetupStage("after_dataset_build");
+        dataset->Init();captureSetupStage("after_dataset_init");
+        rig.neuron->Build();captureSetupStage("after_neuron_build");
+        rig.neuron->Init();captureSetupStage("after_neuron_init");
         ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
         rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(rig.source);
         rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
         const auto adopted=rig.learner->AdoptNativeModel(declaration);
         ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
-        rig.model->Init();rig.model->Reset();
+        captureSetupStage("after_adopt");
+        rig.model->Init();captureSetupStage("after_model_init");
+        rig.model->Reset();captureSetupStage("after_model_reset");
         // The external native scheduler completes the newly adopted owner's
         // ordinary lifecycle. No nested Calculate or forced Ready toggles.
-        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();captureSetupStage("after_model_calculate");
         ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
         ASSERT_EQ(rig.neuron,rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true));
         ASSERT_TRUE(rig.neuron->IsReady() && rig.neuron->IsInit());
