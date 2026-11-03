@@ -22,6 +22,7 @@ from .model_identity import canonical_model_sha256 as sha
 
 BASELINE = 'bcbd30f1d87e352825e6c8400c5b929eff184ae5'
 BASELINE_PATH = 'Reports/StructTrain/TimeLearner/s07-native-n1-refined-normal-a1/'
+BASELINE_MANIFEST_SHA256 = '770e07c522f02425b606f7715a62674a78ac099e51d72292b6a45c0b44b88392'
 CRITERION = {'id': 'post_anchor_target_whole_window_foil_v1', 'anchor': 'onset',
              'begin_offset': 0., 'end_offset': None, 'reject_target_outside_window': True}
 
@@ -38,7 +39,8 @@ def prepare(repository, output):
     sums = json.loads(blob('SHA256SUMS.json'))
     raw, manifest_raw = blob('primary.tar.xz'), blob('manifest.json')
     require(hashlib.sha256(raw).hexdigest() == sums['primary.tar.xz'] and
-            hashlib.sha256(manifest_raw).hexdigest() == sums['manifest.json'], 'transport_baseline_digest_mismatch')
+            hashlib.sha256(manifest_raw).hexdigest() == sums['manifest.json'] == BASELINE_MANIFEST_SHA256,
+            'transport_baseline_digest_mismatch')
     manifest = json.loads(manifest_raw)
     archive = tarfile.open(fileobj=io.BytesIO(raw), mode='r:xz')
     expected = {r['path']: r for r in manifest['records']}
@@ -57,6 +59,7 @@ def prepare(repository, output):
         payload[member.name] = data
     require(shutil.disk_usage(output.parent).free >= 2*1024**3, 'transport_primary_storage_capacity')
     output.mkdir(parents=True, exist_ok=False)
+    (output/'baseline-manifest.json').write_bytes(manifest_raw)
     for name, data in payload.items():
         p = output/'baseline'/name;p.parent.mkdir(parents=True, exist_ok=True);p.write_bytes(data)
     baseline = output/'baseline/corpus'
@@ -66,7 +69,7 @@ def prepare(repository, output):
     (output/'jobs').mkdir();rows = []
     for record in index['records']:
         folder = baseline/record['name']
-        audit_run_manifest(folder/'run-manifest.json')
+        baseline_audit = audit_run_manifest(folder/'run-manifest.json', historical_analysis='learned-v2-no-capacitance')
         case = load_case(folder/'native/train_learned_state.json')
         require(audit_learned_state(*case)['exact'], 'transport_baseline_not_exact')
         original = load(folder/'input/job.json')
@@ -86,6 +89,7 @@ def prepare(repository, output):
             _write(output/'jobs'/(name+'-train.json'), job)
             rows.append({'name': name, 'topology': top, 'model_spec_version': version,
                          'original_job_sha256': original['sha256'], 'job_sha256': job['sha256'],
+                         'baseline_audit': baseline_audit,
                          'baseline_name': record['name'], 'baseline_solo_sha256': case[0]['sha256']})
     require(len({r['name'] for r in rows}) == 4, 'transport_duplicate_condition')
     plan = {'kind': 'native_model_spec_transport_plan', 'schema_version': 1,
@@ -116,6 +120,15 @@ def run(prepared, runtime, output):
     plan = load(prepared/'plan.json')
     require(plan['kind'] == 'native_model_spec_transport_plan' and plan['baseline_commit'] == BASELINE
             and len(plan['conditions']) == 4, 'transport_unknown_plan')
+    require(plan['patterns'] == [[.01, .03], [.01, .24]] and plan['criterion'] == CRITERION and
+            plan['duration'] == .4 and plan['maximum_samples'] == 805 and
+            {r['name'] for r in plan['conditions']} == {'Classic-v1', 'Classic-v2', 'Branch-v1', 'Branch-v2'},
+            'transport_declared_matrix_changed')
+    baseline_manifest = prepared/'baseline-manifest.json'
+    require(hashlib.sha256(baseline_manifest.read_bytes()).hexdigest() == BASELINE_MANIFEST_SHA256,
+            'transport_prepared_baseline_manifest_changed')
+    require(inventory(prepared/'baseline') == {r['path']: r['sha256'] for r in load(baseline_manifest)['records']},
+            'transport_prepared_baseline_changed')
     before = inventory(prepared)
     output.mkdir(parents=True);(output/'jobs').mkdir();(output/'runs').mkdir()
     _write(output/'plan.json', plan)
@@ -140,6 +153,15 @@ def run(prepared, runtime, output):
     for condition in plan['conditions']:
         name = condition['name'];job = load(prepared/'jobs'/(name+'-train.json'))
         require(job['sha256'] == condition['job_sha256'], 'transport_declared_job_changed')
+        original = load(prepared/'baseline/corpus'/condition['baseline_name']/'input/job.json')
+        expected = deepcopy(original)
+        version = condition['model_spec_version']
+        require(type(version) is int and version in (1, 2) and
+                original['sha256'] == condition['original_job_sha256'], 'transport_original_job_identity_changed')
+        if version == 2:
+            expected['configuration']['model'].update(schema_version=2, initial_threshold=1.)
+            expected.pop('sha256');expected = _signed(expected)
+        require(job == expected, 'transport_nonfactor_job_change')
         train, train_audit = invoke('train', name+'-train', job)
         source = train/'native/train_learned_state.json';case = load_case(source)
         require(audit_learned_state(*case)['exact'], 'transport_replay_not_exact:'+name)

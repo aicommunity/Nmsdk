@@ -355,8 +355,9 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
 
 
 @_evidence_boundary
-def audit_run_manifest(path):
+def audit_run_manifest(path, *, historical_analysis=None):
     """Recompute portable source, native result and process/runtime bindings."""
+    require(historical_analysis in (None, 'learned-v2-no-capacitance'), 'unknown_pipeline_historical_adapter')
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
     require(set(manifest) == {"kind", "schema_version", "operation", "execution", "validity", "job_sha256",
@@ -450,7 +451,25 @@ def audit_run_manifest(path):
                     "cooperative_capture_argument_missing")
     if auditable and process["execution"] != "completed":
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
-    require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+    comparison = audit
+    adapter_used = False
+    if historical_analysis is not None and manifest['analysis'] != audit:
+        # Explicit adapter for archived training evidence. The only supported
+        # drift is auditor2 -> auditor3 adding capacitance_state=None. Keep
+        # every result, certificate, primary count and runtime check strict.
+        require(manifest['schema_version'] == 1 and mode == 'train' and type(audit) is dict and
+                type(manifest['analysis']) is dict and type(audit.get('training_audit')) is dict and
+                type(manifest['analysis'].get('training_audit')) is dict,
+                'unsupported_pipeline_historical_analysis')
+        old, current = manifest['analysis']['training_audit'], audit['training_audit']
+        require(old.get('auditor_version') == 2 and 'capacitance_state' not in old and
+                current.get('auditor_version') == 3 and 'capacitance_state' in current and
+                current['capacitance_state'] is None, 'unsupported_pipeline_historical_analysis')
+        projected = {**current, 'auditor_version': 2};projected.pop('capacitance_state')
+        comparison = {**audit, 'training_audit': projected};adapter_used = True
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")
-    return {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
+    result = {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
             "independent_partition_verified": False, "evaluation_verdict": None}
+    if adapter_used:result['historical_analysis_adapter'] = historical_analysis
+    return result

@@ -390,7 +390,31 @@ evaluate/calibrate. После настоящего Exact выполняется
 
 Область — сохранённый двухвходовый инженерный LT профиль и primary-pair
 historical_same_matrix calibration, не stock science и не independent Test.
-Три подготовительных теста проверяют реальные pinned primaries, неизменность
+Четыре подготовительных теста проверяют реальные pinned primaries, неизменность
 job и геометрию trial design; три итоговых — genuine Train, calibration
 provenance и complete frozen import. Пока серверное выполнение не завершено,
 полный transport gate остаётся открытым.
+
+### A1 production preflight: явный исторический adapter
+
+Orchestration rootb3029668f89914af356c6f74ece47635ed98487b, runtimef32/Pulse541:
+оба workers остановились до любого нового Train в setUpClass подготовки.
+Причина pipeline_run_analysis_changed: исходный manifest schema1 хранит
+training auditor2, нынешний auditor3 добавляет capacitance_state=null.
+Остальные ключи, Exact, model revision,58 primary trials Classic, protocol и
+certificates совпали. Старый отчёт не исправляется и не перезаписывается.
+
+Добавлен явный historical_analysis=learned-v2-no-capacitance для
+audit_run_manifest. Он разрешён только для schema1 Train и точной пары
+auditor2→3 без capacitance state. Все проверки artifact closure/digests,
+job/preflight, owned process/runtime и primary execution выполняются как
+обычно; сравнение всех остальных полей остаётся точным. Без аргумента
+функция сохраняет строгий отказ. Добавлены реальные исторические проверки
+строгого отказа/adapter acceptance и отказа для rehashed подмены Exact,
+primary count либо версии аудитора. Это независимое исправление анализа,
+не изменение численных условий и не положительный результат нового Train.
+
+Prepared baseline дополнительно привязан к точному manifest SHA256 и всем206
+member hashes перед запуском. Каждый run ещё раз выводит допустимый job из
+неизменного исходного job; скрытые изменения параметров не допускаются.
+Native runtime обеих A1 не менялся; новый запуск получает отдельные каталоги.
