@@ -49,3 +49,15 @@ kernel builder, но не был добавлен в CMake target Test_PulseLib_
 инвентаря не ослабляется; текущий J1 не может получить положительную приёмку
 27-case gate даже при успехе всех16 actual native cases. Его результат и причина
 будут сохранены; повторная проверка требует завершения owners и нового runtime.
+
+
+J1 завершён: фактически16 native cases,12 passed/4 failed. Все codec и
+completed/stopped transfer прошли. Четыре activation controls отвергнуты до
+создания search: observation_not_valid_complete. Первичные packets показывают
+complete=true, peak_ambiguous:input0, candidate_count=2 и два valid assigned
+burst waves: при расширении окна на всю пачку fixture оставил isolated_window.
+Исправление явно выбирает AssignedBurstWave одновременно в protocol и probe;
+исходный sync0, физика, пачка, пределы и требования реального C-edit неизменны.
+Strict invalid-observation gate не ослабляется. Failure evidence08864d3261e8fe7c2d962f347a5bf3cc299c49f8
+сохраняет исходную ошибку постановки. Повтор должен включать CMake inventory fix,
+все27 случаев и independent readers; успех повторного запуска ещё не заявлен.

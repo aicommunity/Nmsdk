@@ -6264,6 +6264,7 @@ template<class Learner> void CapacitanceSearchActivation(int normalization)
 {
     EditingRig<Learner> rig(2000,normalization,"csearch_activation",false,2,true,2,1,false,{},1,1.,"NSPNeuronGen",.8e-9);
     rig.learner->BindNativeTrainingCapacitance(.2);auto plan=TrainingPlan(rig,0.);
+    plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     const auto original=rig.learner->ReadNativeParameters();
     for(std::size_t i=0;i<original.size();++i)
     {
