@@ -1,5 +1,30 @@
 # Автоматическое владение исходной C₀
 
+## Текущая приёмка, 03.11: открытый native roundtrip дефект
+
+Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.
+Normal transport43 завершён:39 PASS и4 FAIL в NativeDormantCapacitanceTransport.
+Evidence `e324c1603aa388c92a46c3be07d8927d1f69920c`: outer hashes и все846
+members проверены; compressed primary6 535 342 bytes. Readers26 после failed
+native gate не запускались. Полная приёмка owner остаётся открытой.
+
+Все четыре topology/normalization случая остановились ещё в setup:
+PrepareCapacitanceTransfer → native physical edit preview/import сообщает
+archive_model_mismatch: model_mismatch: model.bindings.size. Перед этим fixture
+получает новый channel image через RegisterClassImage, меняет ExcChannelClassName
+одной мембраны и вызывает neuron Build/Init/Reset. До удаления последнего
+потребителя образа, dormant export и fresh-process import тест не дошёл.
+Нельзя приписывать этот отказ потере unused image или ослаблять graph identity.
+Следующий шаг — адресно сравнить связи после смены класса/повторного Build и
+native snapshot load, проверить создание через штатную storage image chain.
+Исправлять подтверждённого владельца дефекта; дополнительные «будящие» Build
+и подмена графа более простым профилем не являются решением.
+
+ASan owner C3 прошёл5/8: первый20k ClassicN0 завершился за2798.618s, выполняется
+ClassicN1At20000 (native handle2473290/start_ticks273872272 подтверждён).
+ASan transport D1 ещё ожидает owner predecessor; его старые четыре dormant
+fixtures требуют пересмотра после диагностики, автоматического PASS им нет.
+
 Следующий пункт этапа7 после explicit C₀ API. Он не включает bounded C-trim
 search: V2 SyncCapacitanceTrimOn остаётся запрещённым до его отдельной проверки.
 Capturing per-input amplitudes, anchor и исходные допуски не меняются.
