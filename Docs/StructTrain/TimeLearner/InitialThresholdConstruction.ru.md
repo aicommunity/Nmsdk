@@ -319,3 +319,27 @@ readbacks сохраняются; схема1 проходит прежний н
 same-matrix calibration, N1,2000Hz. Это проверка API переноса, не stock science,
 не независимая оценка и не полная матрица всех вариантов. Новые cases пока
 не собраны/не выполнены; gate остаётся открытым до серверной проверки.
+
+### Первый запуск полного calibration gate: отказ до калибровки
+
+Rootf32de33257dd67e84962926f1225b1a6f6b29fcd/Pulse541, Elder Normal A1:
+4 tests,4 failures,0 errors,46.412s. Все четыре (оба прежних schema1 и оба
+новых schema2) завершают Train причиной maximum_sweeps_exhausted и не имеют
+training certificate. Калибровка и distinct-owner transfer не выполнялись.
+Reader-worker корректно отказался от анализа как успешного calibration.
+Это не доказательство дефекта schema2, import или калибровки.
+
+Выявлена ошибочная предпосылка выбора контрольного fixture: старый
+LearnedBoundary использует ISI[.01,.08],L0=2,Rs0=86MΩ и область первого
+L=2..3/Rs=86..172MΩ, depth0,4 candidates,1 sweep. Подтверждённый положительный
+production N1-контроль MeasuredResistanceRefinement имеет другие условия:
+ISI[.01,.03],L0=1,Rs0=86MΩ,L=1..3/Rs=43..86MΩ,depth4,80 candidates.
+Успех последнего нельзя переносить на первый. Изменение tolerances либо
+автоматическое увеличение бюджета старого fixture не выполняется.
+
+Следующий шаг — выбрать согласованный реально достижимый source для проверки
+полного переноса и объявить его условия до Train; исходный отрицательный
+контроль сохранить. В fixture добавлен terminal training summary перед
+фатальной проверкой certificate, чтобы такой отказ сохранял состояние поиска.
+Это только observability change, пока не собранный на сервере; активные SDK
+не меняются. ASan A1 на момент первого normal readback ещё выполнялся.

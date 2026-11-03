@@ -3069,6 +3069,14 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     {ASSERT_LT(ticks,unsigned(plan.maximumModelSeconds*frequency)+100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
     const auto& service=rig.learner->NativeTrainingController();
     const bool diagnostic=expectation==BoundaryExpectation::DiagnosticSweepBudget;
+    // Preserve the real failure boundary before a downstream transport
+    // precondition assertion. Missing convergence must never erase the search
+    // summary or be mistaken for an import/calibration failure.
+    Artifact(rig.name+"_transport_training_precondition.json",QJsonDocument(QJsonObject{
+        {"kind","native_transport_training_precondition"},{"schema_version",1},
+        {"summary",EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())},
+        {"configured",configured},{"model_spec2",modelSpec2},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     if(diagnostic)
     {
         ASSERT_FALSE(service.Certificate());ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
