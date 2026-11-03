@@ -80,7 +80,8 @@ PhysicalInfeasible и не доказательство несостоятель
 Classification/Test после незавершённого Train не запускались.
 
 Опубликован proof322409d685f20ab6b0be03f7d69e69399f127239,77 members /
-298368 compressed bytes. Его независимая локальная проверка ещё требуется;
+298368 compressed bytes. Независимо проверены все77 members /7 466 773 raw bytes,
+outer checksums и384 source hashes по Git producer15bae9cbe; подтверждены4/4 readers.
 `execution_valid` относится к выполнению и доказательствам, а не к сходимости.
 Worker953150 завершён; каталог `s07-stock-phasea-cold-normal-a1` сохраняется.
 
