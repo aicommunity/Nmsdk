@@ -46,3 +46,23 @@ producer `visual_acceptance_complete=false` остаётся неизменны�
 visual-v3 построил48/72, но test ошибочно требовал отсутствующую fallback роль.
 Исправления не ослабляют production-аудиторы. Полные SHA и свежий результат
 следует читать в текущем статусе и соответствующих Git evidence bundles.
+
+
+## Проверенный visual-v4, 03.11
+
+Evidence `735104796440a5a59cb0eda51ca029e0a3d2fed7`:14/14 controls, все48
+проб/72 пары trial–soma. Независимо сверены126 archive members /248528 compressed
+bytes и416 Git source hashes. Renderer root
+`b93ff75f0f17486457f7606fbee06599d8e44080`.
+
+Selected evidence `4369897a9a54bdd0cdd90df4c4efe3d294a0ac13` содержит16 PNG
+общим объёмом2575986 bytes. Все16 исходных1920×960 изображений непосредственно
+просмотрены: входные импульсы видны на overview и peak-containing zoom, оси и
+легенды читаемы, clipping/наложения текста не обнаружены. Смена C наблюдаема
+в амплитуде/форме кривой. [Точные хеши и scope](CapacitanceSearchVisualQA-2026-11-03.json).
+Это приёмка читаемости выбранного набора; остальные рисунки не объявляются
+непосредственно просмотренными.
+
+Полный кэш: `/media/user/Data/TimeLearnerRefactor/readbacks/s07-capacitance-search-visual-v4/full-report-cache`.
+Git сохраняет сжатые primary в J2 и компактный visual receipt, выбранные PNG,
+модели/метрики. Ни whole-plan completion, ни classification PASS не заявляются.
