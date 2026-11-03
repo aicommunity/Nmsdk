@@ -135,9 +135,9 @@ void CheckFiniteCandidateRanking(ProbeRouting routing,Normalization normalizatio
         {
             measured.insert(evidence.parameters.length);
             const int length=evidence.parameters.length;
-            if(axes&1)EXPECT_NEAR(std::max(std::fabs(evidence.timingResidualLow),std::fabs(evidence.timingResidualHigh)),
-                length==2?.06:(length==3?.02:.01),1e-12);
-            if(axes&2)EXPECT_NEAR(evidence.amplitudeResidual,length==2?.006:(length==3?.002:.001),1e-12);
+            if(axes&1){EXPECT_NEAR(std::max(std::fabs(evidence.timingResidualLow),std::fabs(evidence.timingResidualHigh)),
+                length==2?.06:(length==3?.02:.01),1e-12);}
+            if(axes&2){EXPECT_NEAR(evidence.amplitudeResidual,length==2?.006:(length==3?.002:.001),1e-12);}
         }
         EXPECT_EQ(measured,(std::set<int>{2,3,4}));
     }
@@ -312,7 +312,7 @@ TEST(BoundedTraining, Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesEx
         });
         EXPECT_EQ(session.Status(),exactAtCap?TrainingStatus::Exact:TrainingStatus::BudgetExhausted);
         ASSERT_TRUE(session.Certificate());EXPECT_EQ(session.Certificate()->Exact(),exactAtCap);
-        if(exactAtCap)EXPECT_EQ(session.Parameters()[0].synapses,128);
+        if(exactAtCap){EXPECT_EQ(session.Parameters()[0].synapses,128);}
     }
 }
 
@@ -506,7 +506,7 @@ TEST(BoundedTraining, ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments)
         {
             EXPECT_EQ(action.parameters[i].synapses,1);EXPECT_EQ(action.parameters[i].resistance,10.);
             delay[i]=.03+.1*(action.parameters[i].length-1);
-            if(i)EXPECT_GE(action.parameters[i-1].length,action.parameters[i].length);
+            if(i){EXPECT_GE(action.parameters[i-1].length,action.parameters[i].length);}
         }
         EXPECT_EQ(action.parameters.back().length,1);
     });
