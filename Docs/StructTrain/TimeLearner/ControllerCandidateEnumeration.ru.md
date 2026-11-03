@@ -119,3 +119,22 @@ s07-candidate-cursor-native-publication-normal-h15-v2. Ожидающий пер
 SDK213; строгие counters уже требовали213. Worker и численные процессы не
 перезапускались; исходная superseded.json квитанция сохранена. Для приёмки
 используется только v2 publisher с актуальным scope и обязательным byte compare.
+
+
+## H15 отказ и следующий исправленный gate
+
+H12 native213/213 и адресные6/6 завершены; readers86/87 обнаружили только
+несоответствие exact diagnostic в отрицательном test. H15 корректно отказался
+до сборки, исходная квитанция86914b5cdc115858dc5e8aded1502281bd47a319 сохранена.
+[Два раздельных контроля](BoundaryReaderInventoryControls.ru.md) проверены
+из новым reader source90c4074a6d2049b298fd923052112e738db9ae3b на тех же данных:
+88/88, evidenceaeb9664b092332555d41eefd0ac8de5fd63cc9b4. Алгоритмы и production
+auditor не менялись, C++ заново не запускался. Обе исходные версии source
+записаны отдельно; первоначальный overall H12 not_accepted не переписывается.
+
+Следующий H17 явно требует эту составную baseline native213/6 + readers88,
+полные original archives и неизменность C++/child sources у reader repair.
+Кандидат включает исправленный test; native213, reader105 (88 +17) и точные
+baseline/candidate CSV sets/SHA256 обязательны. C-search/schema4 сюда не входят;
+Kernel A4 остаётся отдельным уже проверенным доказательством130/130 с каждой
+стороны. Положительная native A/B приёмка пока отсутствует.
