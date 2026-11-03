@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "2700af9e46479de96270efafdbe303560b430026",
+  "pulselib": "5fed73a0379d5599656e40f58e0600469d43f28c",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 104,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "afebd7468490a835ac6bbc8c6ef9e3458c09f202d988a9df4ffcfa41b84cb527",
+  "archive_bytes": 1068,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/compile-failure-prerequisite.json": "8dacee0d17f225ddc36fa79fa5f6595b6ec76f37aeced08e3caf527a6d7f7556",
+    "gate/exception.json": "788ecbf5677e93ad810304c7e911806a350e5729c767edf4e534eb0d2dc4aaeb",
+    "gate/owned-supervisor.json": "08d73b0e4d2351c56e4b9e1d4bf8a504da6357ec207fd3db03e09d8b02681ba6",
+    "gate/pointer-failure-prerequisite.json": "08f8032eb587377c7ece10ec27f0ff2417606fd39019bb2dd757a4e45c015117",
+    "gate/witness-exception-prerequisite.json": "f32505a1fd022127bfcd555c0fc8ea921b36a609bf52ba9887f1f4f8db8d12f2"
+  },
+  "scope": "Native SDK213/readers104 after validated schema3 SDK213/readers87 baseline and pure-kernel A/B130 per side. CandidateCursor extraction only, no C-search activation. Original deterministic Classic/Branch N0/N1 service and capacitance bridge primary CSV sets must be byte-identical to the baseline; comparison receipt retained. NativeEvidenceTest17 adds strict diagnostic-vs-certificate controls; AssignedNativeEvidenceTest4 has separate published evidence. No full-matrix, scientific recognition or complete-plan claim.",
+  "scientific_verdict": null
+}
