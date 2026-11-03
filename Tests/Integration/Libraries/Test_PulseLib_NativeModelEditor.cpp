@@ -2876,7 +2876,15 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
                 "Components","Dendrite1_2","Parameters","ExcChannelClassName"})
             ASSERT_TRUE(configuration.SelectNode(node))<<node;
         ASSERT_TRUE(configuration.SetNodeText(dormantImage));
+        // A loaded graph declares both the membrane's future channel class
+        // and the class of its already serialized channel instance. Keep
+        // them consistent instead of relying on a later structural repair.
+        configuration.SelectUp();configuration.SelectUp();
+        ASSERT_TRUE(configuration.SelectNode("Components"));ASSERT_TRUE(configuration.SelectNode("ExcChannel"));
+        ASSERT_TRUE(configuration.SetNodeAttribute("Class",dormantImage));
         for(int level=0;level<8;++level)configuration.SelectUp();
+        std::string configuredXml;ASSERT_TRUE(configuration.Save(configuredXml));
+        Artifact(rig.name+"_dormant_configuration.xml",QByteArray::fromStdString(configuredXml));
         const auto marker=rig.model->OperationFailureSequence();
         rig.model->UnInit();
         TProjectLoadDiagnostics diagnostics;
@@ -2892,6 +2900,8 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         const auto adopted=rig.learner->AdoptNativeModel(declaration);
         ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
         ASSERT_TRUE(rig.neuron->IsReady() && rig.neuron->IsInit());
+        const auto configuredMembrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(configuredMembrane);
+        EXPECT_EQ(configuredMembrane->ExcChannelClassName.GetData(),dormantImage);
         const auto actual=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(actual);
         ASSERT_EQ(actual->GetCompClassName(),dormantImage);
         const auto configuredGraph=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
