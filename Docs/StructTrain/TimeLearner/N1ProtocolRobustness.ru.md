@@ -87,3 +87,28 @@ zoom PNG/SVG/PDF без downsampling. Три отдельных server reader ch
 проверяют привязку исходных samples, размерность, completeness и читаемость
 по существующему production report contract. Это не заменяет прямой просмотр
 выбранных изображений; ручная приёмка в manifest остаётся false.
+
+## Выполняющиеся задания, 03.11
+
+Elder normal a1 использует producer root
+`29397614b81941910a94571b0147b7da66cf2f26`. Supervisor PID855824,
+start_ticks328418258; каталог
+`/home/user/timelearner-refactor/readbacks/s11-n1-fixed-protocol-normal-a1`.
+Все десять designs сохранены до первого Console. Первичные source checks и
+оба continuous smoke завершились; выполняются основные условия. Полный
+научный итог и приёмка пяти readers пока не заявлены. Для следующего шага
+проверять live owned handles и receipts, не перезапускать по таймауту наблюдения.
+
+M40 visual a1: renderer root
+`6df4e10a999eb65dabaa157a4812a9eeaf8f184d`, supervisor PID3159399;
+`/media/user/Data/TimeLearnerRefactor/readbacks/s11-n1-fixed-protocol-visual-a1`.
+Он ждёт публикации `codex/evidence-s11-n1-fixed-protocol-normal-a1`, затем
+фиксирует полный SHA, проверяет каждый primary member, строит все графики и
+запускает три report readers. Собственных численных операций у него нет.
+Заимствование Git objects из immutable native source — read-only; источник,
+build и runtime ASan H14 не изменяются. Все новые файлы создаются в отдельном
+каталоге Data. Перед будущим удалением donor Git store необходимо проверить
+borrowed-object зависимость; source и полный кэш до приёмки сохраняются.
+
+Фоновая задача не является доказательством завершения. При ошибке сохраняются
+исходные receipts и terminal verdict; автоматический повтор не предусмотрен.
