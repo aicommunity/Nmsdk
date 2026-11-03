@@ -160,6 +160,10 @@ def main(argv: list[str] | None = None) -> int:
     pair.add_argument("--runtime-manifest", type=Path)
     pair.add_argument("--code-identity", type=Path)
     pair.add_argument("--output", type=Path, required=True)
+    phasea = commands.add_parser("phasea-matrix", help="recover all four ISIs and labels from exact historical Bin Git data; no model execution")
+    phasea.add_argument("--bin-repository", type=Path, required=True)
+    phasea.add_argument("--revision", default="1c1464e248f8744e858bd66df0be99e39969fd65")
+    phasea.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -468,6 +472,21 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, ImportError) as error:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "phasea-matrix":
+        from .phasea_matrix import from_git
+        from .native_evidence import EvidenceError
+        try:
+            result = from_git(args.bin_repository, args.revision)
+            raw = (json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False)+"\n").encode("utf-8")
+            with args.output.open("xb") as stream:
+                stream.write(raw)
+            print(json.dumps({"pattern_matrix_sha256": result["pattern_matrix_sha256"], "patterns": len(result["patterns"]),
+                              "historical_presentation_reproduced": False, "scientific_verdict": None}))
+            return 0
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "stock-threshold-study":
         from .stock_threshold_study import prepare, run, audit
