@@ -62,8 +62,19 @@ Export отклонён: старый fixture-domain [1,1] не включает
 E8 сохраняет ограниченный domain [1,2] и требует после Train отсутствия
 Dendrite1_2, чтобы не потерять dormant проверку. Назначен на Elder:
 root0481331ade277933b4e47cc4e4d2f3ccebc38fdd, Pulse30495d1,
-worker289099/publisher289100. Export/fresh-process import пока не приняты.
-Это transport control, не научная классификация или convergence при default .02.
+worker289099/publisher289100; E8 завершён4/4, same/fresh-process import,
+unused image closure и dormant scale сохранены. Evidence315d6520:
+269 members/1 373 512 bytes проверены. Independent readers F1 завершены3/3,
+включая точные причины отказа missing image и dormant scale1.3: proof37bf2f78,
+6 members/14 592 bytes, hashes278 source files совпали с reader Git root.
+
+Полная normal43/readers26 G1 выполняется на Elder (root4d501d611,
+worker297669/start_ticks324112486, publisher297670); build успешен. Corrected
+ASan43/readers26 G1 на M40 (worker2578910/start_ticks274660894,
+publisher2578911) ждёт успешных owner8 ASan C3 и опубликованного normal G1.
+До этого рабочие source/build/runtime ASan owner не меняются. Полная приёмка
+owner pending; это transport control, не научная классификация и не convergence
+при default .02. [Текущий scope и исторический журнал](CapacitanceOwnership.ru.md).
 Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
 fixtures отменён до изменения source/build/runtime: проверены точные
 PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
