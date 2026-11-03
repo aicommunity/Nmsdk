@@ -6135,3 +6135,49 @@ TEST(NativeCapacitanceHistoryBoundary,ClassicN0StoppedEarly){StoppedBoundary<NNe
 TEST(NativeCapacitanceHistoryBoundary,BranchN1StoppedBudgetEarly){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::BudgetEarly,"tracked_budget_early",1,false,1,true,true);}
 TEST(NativeCapacitanceHistoryBoundary,ClassicN1StoppedBeforeFirstTick){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::BeforeFirstTick,"tracked_before_first_tick",1,false,1,true,true);}
 TEST(NativeCapacitanceHistoryBoundary,BranchN0StoppedBeforeFirstTick){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::BeforeFirstTick,"tracked_before_first_tick",0,false,1,true,true);}
+
+namespace {
+template<class Learner> void ConfiguredProbeOwnership(int normalization)
+{
+    EditingRig<Learner> rig(2000,normalization,"configured_probe_ownership");
+    auto configuration=Configuration(rig);configuration.recordCapacitanceHistory=true;
+    configuration.capacitanceMaximumRelativeChange=.2;
+    rig.learner->ControllerVersion=2;
+    rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact).toStdString();
+    rig.learner->Build();rig.learner->Init();
+    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    ASSERT_TRUE(rig.neuron && rig.source);rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+    ASSERT_TRUE(rig.learner->IsNeedToTrain.GetData());
+    ASSERT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    const auto characterization=rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const NativeProbeSample&) {
+            EXPECT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::Idle);
+            EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
+        });
+    ASSERT_EQ(characterization.status,NativeProbeStatus::Completed);ASSERT_TRUE(characterization.observation);
+    EXPECT_TRUE(characterization.observation->valid && characterization.observation->complete);
+    EXPECT_EQ(rig.learner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    EXPECT_TRUE(rig.learner->OwnedNativeCapacitanceState().isEmpty());
+    EXPECT_TRUE(rig.learner->IsNeedToTrain.GetData());
+    rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    const auto& training=rig.learner->NativeTrainingController();
+    const bool started=training.State()==NativeTrainingState::CapturingReferences || training.State()==NativeTrainingState::Searching;
+    ASSERT_TRUE(started)<<training.Reason();ASSERT_TRUE(training.CapacitanceHistory());
+    EXPECT_GT(training.SessionAttempt(),0u);EXPECT_TRUE(rig.learner->NativeModelEditFailure().empty());
+    const auto state=rig.learner->OwnedNativeCapacitanceState();ASSERT_FALSE(state.isEmpty());
+    const auto startedSummary=EncodeNativeTrainingState(training,rig.Revision(),rig.learner->ReadNativeParameters());
+    rig.learner->IsNeedToTrain=false;
+    EXPECT_EQ(training.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(training.Certificate());
+    Artifact(rig.name+"_handoff.json",QJsonDocument(QJsonObject{{"kind","native_configured_probe_handoff"},
+        {"schema_version",1},{"branch",rig.branch},{"normalization",normalization},
+        {"characterization",EncodeNativeProbeEvidence(characterization)},{"characterization_stem",QString::fromStdString(rig.name+"_probe_"+std::to_string(rig.serial))},
+        {"training_started_after_result",started},{"owned_capacitance_state",state},{"started_summary",startedSummary},
+        {"stopped_outcome",TrainingStatusName(training.Outcome())},{"certificate",QJsonValue(QJsonValue::Null)},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+}
+TEST(NativeConfiguredProbeOwnership,ClassicN0){ConfiguredProbeOwnership<NNeuronTimeLearner>(0);}
+TEST(NativeConfiguredProbeOwnership,ClassicN1){ConfiguredProbeOwnership<NNeuronTimeLearner>(1);}
+TEST(NativeConfiguredProbeOwnership,BranchN0){ConfiguredProbeOwnership<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeConfiguredProbeOwnership,BranchN1){ConfiguredProbeOwnership<NNeuronTimeLearnerBranch>(1);}
