@@ -1,5 +1,22 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Tracked service/summary3 подготовлен, runtime pending03.11
+
+Rootac1244e4ce2065a6266fffe3a17dd428923800ae /Pulse
+2cd80bb573f0e1407aba75d53706cac198043c39 добавляют explicit C++ evidence flag,
+передачу полного C map через service/controller/native edits/N1 domains, exact
+trial→witness links и summary3. Registry key теперь hash полного witness:
+dormant-only histories могут различаться при одном физическом model revision.
+Добавлены10 native и12 independent history controls, в том числе observation
+sink fault после закрытия окна при неизменном graph hash. Default certificate
+gate строгий; diagnostic analysis явно возвращает отсутствие certificate/Exact.
+
+Изменения ещё не приняты: H8 queued197/75 ждёт H7, а тот H6/H5. Сборки/численные
+тесты выполняются только workers, локально проверены syntax и declared inventory.
+Configured codec, learned-state export/import3 и C-search policy ещё не готовы;
+tracked export прежним пакетом временно явно запрещён вместо потери provenance.
+Весь исходный план остаётся активным. [SHA/handles/scope](NativeTrainingCapacitanceBridge.ru.md).
+
 ## Revision-bound C witnesses: реализация подготовлена, проверки в очереди03.11
 
 Rootfb772a354ff69568f97eada6303395cdb4247acd /Pulse
