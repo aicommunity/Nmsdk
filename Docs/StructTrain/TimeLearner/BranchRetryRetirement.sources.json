@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "bin_snapshot": "4af17aa240a7da0e30655a62c07cc4832e7253b9",
+  "records": [
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase9_br480_mid_retry.py",
+      "action": "retired_historical",
+      "archive_commit": "4af17aa240a7da0e30655a62c07cc4832e7253b9",
+      "last_change_commit": "a65a48f57d4819e4985613e6487be6e8c537ddef",
+      "blob_sha1": "2344567d288e85eeee4116b38fb4a11cdbbcdaba",
+      "content_sha256": "9defa399df19cf7794c556d9e9e27cebe397cae9e4880a90ebfdc81ee99a1111",
+      "bytes": 2402,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/4af17aa240a7da0e30655a62c07cc4832e7253b9/Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase9_br480_mid_retry.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "4af17aa240a7da0e30655a62c07cc4832e7253b9:Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase9_br480_mid_retry.py"
+      ],
+      "replacement": null,
+      "reason": "Historical br480 P4 retry with hardcoded shared executable, first-row target and unchecked process exit; retained results require their original criteria.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not a claim about experiment execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase10_br480_tipr_retry.py",
+      "action": "retired_historical",
+      "archive_commit": "4af17aa240a7da0e30655a62c07cc4832e7253b9",
+      "last_change_commit": "e453aae46e0b5555c4536d2b9fab297229c077cd",
+      "blob_sha1": "fa28b8b9c4178cf446b50424cac4be0893fd842b",
+      "content_sha256": "70b3ea7b0b05c9666b1bdd0e747f9c59c91f1e8e60c42d0738b3d4d85cff029f",
+      "bytes": 5835,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/4af17aa240a7da0e30655a62c07cc4832e7253b9/Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase10_br480_tipr_retry.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "4af17aa240a7da0e30655a62c07cc4832e7253b9:Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase10_br480_tipr_retry.py"
+      ],
+      "replacement": null,
+      "reason": "Historical br480 Phase10 tip-R retry with manual XML overlays and fixed four-input tips; malformed amplitudes become zero and foil values above target are omitted from midpoint selection.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not a claim about experiment execution source"
+    }
+  ],
+  "active_caller_matches": 0,
+  "historical_document_paths": [
+    "Configs/SpikeSamples/StructTrain/SelectivityBranch/PHASE7_BRANCH_QUALITY.md",
+    "Configs/SpikeSamples/StructTrain/SelectivityBranch/EXP_br480_preinh250_tiprmin_phase10_tipr/README.md"
+  ],
+  "numeric_results_modified": false
+}
