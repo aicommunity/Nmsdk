@@ -104,3 +104,18 @@ independent readers104 (87 +17 existing diagnostic/certificate controls) и
 точное совпадение имён/SHA256 объявленных детерминированных primary CSV с H12.
 Любой failure baseline или waveform mismatch запрещает приёмку. ASan и fresh
 closure остаются самостоятельными условиями; весь исходный этап6 не закрыт.
+
+
+Native H15 поставлен в очередь на Elder: source root2700af9e46479de96270efafdbe303560b430026,
+Pulse5fed73a0379d5599656e40f58e0600469d43f28c. Supervisor738540/start_ticks327554764
+подтверждён живым; он ждёт закрытия всех H12 owners и положительного полного
+H12 evidence перед любым checkout/build в повторно используемом b1 каталоге.
+J2 имеет отдельные source/build/runtime и не затрагивается. H15 декларация —
+213 native /104 readers; waveform receipt обязателен, успех пока не заявляется.
+
+Каталоги readbacks: s07-candidate-cursor-native-normal-h15 и
+s07-candidate-cursor-native-publication-normal-h15-v2. Ожидающий первый publisher
+заменён до публикации, чтобы исправить устаревшую текстовую метку SDK209 на
+SDK213; строгие counters уже требовали213. Worker и численные процессы не
+перезапускались; исходная superseded.json квитанция сохранена. Для приёмки
+используется только v2 publisher с актуальным scope и обязательным byte compare.
