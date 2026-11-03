@@ -661,8 +661,27 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
     auto future=*afterShrink;future.membraneScales["Dendrite1_4"]=.95;
     geometry=rig.learner->ReadNativeParameters();geometry[0].length=4;
     ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    std::string domainRevision;
+    if(normalization==1)
+    {
+        const auto live=NmsdkTools::IdentifyModel(rig.neuron,rig.ports),owned=rig.learner->OwnedNativeCapacitanceState();
+        const auto domain=rig.learner->AssessNativeTrainingResistanceDomain(geometry,0,future);
+        ASSERT_TRUE(domain.status==ResistanceDomainStatus::Available || domain.status==ResistanceDomainStatus::Unavailable)<<domain.reason;
+        EXPECT_FALSE(domain.modelMayHaveChanged);EXPECT_EQ(domain.capacitance,std::optional<TrainingCapacitance>(future));
+        ASSERT_TRUE(domain.effectiveCapacitance);EXPECT_TRUE(TrainingCapacitanceReadbackMatches(future,domain.effectiveCapacitance));
+        EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),live);EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),owned);
+        const auto encoded=EncodeResistanceDomainAssessment(domain);EXPECT_EQ(encoded["schema_version"],QJsonValue(3));
+        Artifact(rig.name+"_domain.json",QJsonDocument(encoded).toJson());domainRevision=domain.previewModelRevision;
+        auto invalidDomain=future;invalidDomain.maximumRelativeChange=.3;
+        const auto rejected=rig.learner->AssessNativeTrainingResistanceDomain(geometry,0,invalidDomain);
+        EXPECT_EQ(rejected.status,ResistanceDomainStatus::Unsupported);EXPECT_EQ(rejected.reason,"training_capacitance_origin_or_policy_changed");
+        EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_FALSE(rejected.effectiveCapacitance);
+        EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),live);EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),owned);
+        Artifact(rig.name+"_domain_rejected.json",QJsonDocument(EncodeResistanceDomainAssessment(rejected)).toJson());
+    }
     const auto joint=rig.learner->ApplyNativeTrainingParameters(geometry,future);
     ASSERT_EQ(joint.status,NativeEditStatus::Applied)<<joint.reason;
+    if(normalization==1)EXPECT_EQ(rig.Revision(),domainRevision);
     const auto final=rig.learner->ReadNativeTrainingCapacitance();ASSERT_TRUE(final);
     EXPECT_EQ(final->origin,origin);EXPECT_EQ(final->membraneScales.at("Dendrite1_4"),.95);
     EXPECT_EQ(final->membraneScales.at("Dendrite1_2"),1.1);

@@ -148,3 +148,28 @@ owner335141/324394463; ожидает опубликованный successful H3
 H3 records, SDK source/build/runtime не затрагиваются. Опубликованный результат
 должен включать source-file hashes и ссылку на исходный native evidence commit.
 На момент постановки I1 находится в ожидании, PASS отсутствует.
+
+
+## Подготовлен typed N1 domain/schema3, runtime pending
+
+Оба learner получили AssessNativeTrainingResistanceDomain. Requested complete map
+строго разрешается через текущий owner. Native совместный preview L/Ns/Rs/C
+формирует effective map (допустимы только новые доказанные unit paths), signed
+C₀/state с preview revision и отдельный storage-image readback. Requested map
+сохраняется отдельно как контекст действия контроллера; effective map описывает
+сам preview. Live model/owner не изменяются.
+
+Старые domain calls остаются schema2. Explicit typed call выбирает schema3:
+requested_capacitance, effective_capacitance, capacitance_state,
+capacitance_storage_images. Available без полного witness запрещён. Unsupported
+может иметь null effective proof; он не подтверждает физику. Python reader
+проверяет все новые поля, native C₀/registry/C, requested/effective соответствие
+и пересчитывает Rs bounds по тем же реальным каналам. Скрытие C-полей под schema2
+запрещено. Native summary/service/adapters пока не используют эту capability.
+
+N1 части четырёх bridge tests расширены: domain preview сверяется с последующим
+фактическим joint commit по полному hash/state/map; изменение policy отвергается
+без изменения live model. Добавлены7 independent domain-reader tests на двух
+реальных Classic/Branch N1 records, включая resigned physical C corruption и
+проверку связи с исходным/конечным графом. Эти изменения ещё не собраны и не
+исполнялись; для них нужен отдельный SDK gate после H3/I1 и ASan.
