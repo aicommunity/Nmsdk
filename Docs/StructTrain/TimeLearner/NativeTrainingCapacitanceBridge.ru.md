@@ -458,3 +458,16 @@ reference/current witnesses. Чтобы не терять их молча, пр�
 test_native_evidence по source всё ещё ожидает service negative certificates там,
 где текущий RunNativeTraining сохраняет diagnostic summary без certificate; его
 полная актуализация/повторный runtime остаётся отдельной открытой задачей.
+
+H8 queued после H7: rootac1244e4ce2065a6266fffe3a17dd428923800ae /
+Pulse2cd80bb573f0e1407aba75d53706cac198043c39, Rdkacc3de8d/Bin39d811e5.
+Elder supervisor427223/325160769 и publisher427225/325160769 проверены живыми;
+readbacks s07-capacitance-history-normal-h8 и
+s07-capacitance-history-publication-normal-h8. До verified H7 PASS4/28 и закрытия
+его owners worker не меняет source/build; затем actual process guard и immutable
+checkout/build отдельного runtime. Native197/structured readers75 ещё не запускались.
+H7 проверяет прежнюю revision-keyed registry утилиту; её результат не подтверждает
+новые evidence IDs, service tracking или summary3. Для этого нужен именно H8.
+
+При последнем poll H5 live155 завершённых successes/0 failure lines, M40 ASanG3
+live7/0. Это промежуточный stdout, не финальный expected inventory/verdict.
