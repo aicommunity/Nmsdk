@@ -16,7 +16,7 @@ import zlib
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 5
+AUDITOR_VERSION = 6
 
 
 class EvidenceError(ValueError):
@@ -301,7 +301,7 @@ def validate_search_history_availability(summary: dict[str, Any]) -> bool | None
     retained = summary.get("search_history_retained")
     if "search_history_retained" in summary:
         require(type(retained) is bool, "invalid_search_history_marker")
-    if summary.get("schema_version") == 2:
+    if summary.get("schema_version") in (2, 3):
         require(type(summary.get("candidate_repeat_groups")) is list, "invalid_candidate_repeat_groups")
     if retained is False:
         require(all(summary[name] == [] for name in ("candidates", "rejections", "resistance_domains")) and
@@ -315,7 +315,7 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     """Bind the declared repeat factor to evidence, without replacing the native codec."""
     schema = configuration.get("schema_version")
     require(configuration.get("kind") == "timelearner_native_cold_configuration" and
-            type(schema) is int and schema in (1, 2), "unknown_repeat_configuration_schema")
+            type(schema) is int and schema in (1, 2, 3), "unknown_repeat_configuration_schema")
     require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
             "configuration_summary_repeat_schema_mismatch")
     search, measured = configuration["search"], summary["configuration"]
@@ -328,6 +328,16 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
                 "legacy_configuration_contains_repeat_factor")
         return 1
     repeats = count(search["n0_candidate_repeats"])
+    if schema == 3:
+        history = configuration['capacitance_history']; source = summary['capacitance_history']
+        require(type(history) is dict and set(history) == {'record', 'maximum_relative_change'}
+                and history['record'] is True and number(history['maximum_relative_change']) >= 0,
+                'invalid_configured_capacitance_history')
+        capture = source['witnesses'][source['capture_witness_id']]
+        require(history['maximum_relative_change'] == capture['controller_parameters']['maximum_relative_change']
+                and 1 <= repeats <= 128 and (normalization == 'N0' or repeats == 1)
+                and count(measured['n0_candidate_repeats']) == repeats, 'configuration_summary_capacitance_policy_mismatch')
+        return repeats
     require(normalization == "N0" and 2 <= repeats <= 128 and
             count(measured["n0_candidate_repeats"]) == repeats, "configuration_summary_repeat_policy_mismatch")
     return repeats
@@ -352,8 +362,8 @@ def measured_training_probe(packets, trial, input_id, origin_stimulus_id, select
     return packet, number(peak["raw_potential"]), number(peak["time"]) - origin, number(peak["plateau_end"]) - origin
 
 
-def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
-                           origin_stimulus_id: str) -> dict[str, Any]:
+def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
+                           origin_stimulus_id: str, *, require_certificate: bool = True) -> dict[str, Any]:
     """Compare exported certificate/candidates with independently audited probes.
 
     The caller supplies the declared protocol origin; row position is not a
@@ -366,7 +376,8 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
     if schema == 1:
         require("candidate_repeat_groups" not in summary and "n0_candidate_repeats" not in summary["configuration"],
                 "repeat_policy_requires_summary_schema_2")
-    require(summary["contains_evaluation_verdict"] is False and summary["model_state_kind"] == "learned_solo",
+    require(summary["contains_evaluation_verdict"] is False and (summary["model_state_kind"] == "learned_solo" or
+            (not require_certificate and summary["model_state_kind"] == "diagnostic")),
             "unsupported_summary_state_kind")
     history_retained = validate_search_history_availability(summary)
     refs = summary["references"]
@@ -413,29 +424,34 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
         return within_amp and within_time
 
     certificate = summary["certificate"]
-    require(certificate is not None and certificate["schema_version"] == 1, "missing_or_unknown_certificate")
-    require(certificate.get("peak_selection", "isolated_window") in selections, "certificate_peak_selection_mismatch")
-    require(certificate["model_revision"] == summary["actual_model_revision"] and
-            certificate["model_epoch"] == summary["model_epoch"] and
-            certificate["reference_model_revision"] == summary["reference_model_revision"] and
-            certificate["reference_model_epoch"] == summary["reference_model_epoch"], "certificate_model_binding_mismatch")
-    require(summary["certificate_matches_actual_model"] is True, "certificate_failed_native_binding_check")
-    residuals = {r["input_id"]: r for r in certificate["residuals"]}
-    require(len(residuals) == len(certificate["residuals"]) and set(residuals) == set(targets), "incomplete_certificate_residuals")
-    exact = True
-    for input_id, residual in residuals.items():
-        packet, raw, _, _ = measured(residual["trial_id"], input_id)
-        prepared = packet["prepared"]
-        require(prepared["base_model_revision"] == certificate["model_revision"] and
-                prepared["model_epoch"] == certificate["model_epoch"] and
-                prepared["effective_model_revision"] == residual["effective_model_revision"] and
-                prepared["protocol_revision"] == certificate["protocol_revision"], "final_probe_context_mismatch")
-        require(equal(residual["measured_raw_potential"], raw) and
-                equal(residual["target_raw_potential"], targets[input_id]) and
-                equal(residual["amplitude_tolerance"], absolute + relative * abs(targets[input_id])), "certificate_amplitude_mismatch")
-        exact = check_residual(residual, input_id, residual["trial_id"], residuals[anchor_id]["trial_id"]) and exact
-    require(certificate["exact"] is exact, "certificate_exact_mismatch")
-    require((summary["outcome"] == "exact") == exact, "outcome_certificate_mismatch")
+    if certificate is None:
+        require(not require_certificate and summary["certificate_matches_actual_model"] is False
+                and summary["outcome"] != "exact", "missing_or_unknown_certificate")
+        exact = None
+    else:
+        require(certificate is not None and certificate["schema_version"] == 1, "missing_or_unknown_certificate")
+        require(certificate.get("peak_selection", "isolated_window") in selections, "certificate_peak_selection_mismatch")
+        require(certificate["model_revision"] == summary["actual_model_revision"] and
+                certificate["model_epoch"] == summary["model_epoch"] and
+                certificate["reference_model_revision"] == summary["reference_model_revision"] and
+                certificate["reference_model_epoch"] == summary["reference_model_epoch"], "certificate_model_binding_mismatch")
+        require(summary["certificate_matches_actual_model"] is True, "certificate_failed_native_binding_check")
+        residuals = {r["input_id"]: r for r in certificate["residuals"]}
+        require(len(residuals) == len(certificate["residuals"]) and set(residuals) == set(targets), "incomplete_certificate_residuals")
+        exact = True
+        for input_id, residual in residuals.items():
+            packet, raw, _, _ = measured(residual["trial_id"], input_id)
+            prepared = packet["prepared"]
+            require(prepared["base_model_revision"] == certificate["model_revision"] and
+                    prepared["model_epoch"] == certificate["model_epoch"] and
+                    prepared["effective_model_revision"] == residual["effective_model_revision"] and
+                    prepared["protocol_revision"] == certificate["protocol_revision"], "final_probe_context_mismatch")
+            require(equal(residual["measured_raw_potential"], raw) and
+                    equal(residual["target_raw_potential"], targets[input_id]) and
+                    equal(residual["amplitude_tolerance"], absolute + relative * abs(targets[input_id])), "certificate_amplitude_mismatch")
+            exact = check_residual(residual, input_id, residual["trial_id"], residuals[anchor_id]["trial_id"]) and exact
+        require(certificate["exact"] is exact, "certificate_exact_mismatch")
+        require((summary["outcome"] == "exact") == exact, "outcome_certificate_mismatch")
     # Restored model boundaries carry reference/final proof and actual graph
     # parameters, not an accepted search snapshot. All proof, bounds and primary
     # measurement checks still apply; missing history is never called measured.
@@ -518,10 +534,49 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
         require(covered == set(candidates), "candidate_repeat_coverage_incomplete")
     repeat_validation = ({"training_summary_schema": 2, "candidate_repeat_groups_checked": len(summary["candidate_repeat_groups"])}
                          if schema == 2 else {})
-    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True, "exact": exact, **repeat_validation,
+    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": certificate is not None, "exact": exact, **repeat_validation,
             "search_history_retained": history_retained,
-            "model_revision": certificate["model_revision"], "reference_count": len(refs),
+            "model_revision": certificate["model_revision"] if certificate is not None else summary["actual_model_revision"], "reference_count": len(refs),
             "candidate_count": len(summary["candidates"]), "evaluation_verdict": None}
+
+
+def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
+                           origin_stimulus_id: str, *, require_certificate: bool = True) -> dict[str, Any]:
+    """Audit physical C contexts before reusing the measured residual validator."""
+    version = summary.get('schema_version')
+    require(type(version) is int and version in (1, 2, 3), 'unknown_training_summary_schema')
+    c_fields = {'capacitance_history', 'actual_capacitance_witness_id', 'accepted_capacitance'}
+    if version != 3:
+        require(not c_fields.intersection(summary) and
+                all('capacitance_witness_id' not in r for r in summary.get('references', [])) and
+                all(not {'capacitance', 'capacitance_witness_id'}.intersection(c)
+                    for c in summary.get('candidates', [])) and
+                all(not {'capacitance', 'capacitance_witness_ids', 'anchor_capacitance_witness_ids'}.intersection(g)
+                    for g in summary.get('candidate_repeat_groups', [])) and
+                all(d.get('schema_version') != 3 for d in summary.get('resistance_domains', [])),
+                'unversioned_training_summary_capacitance')
+        return _audit_training_summary(summary, packets, origin_stimulus_id, require_certificate=require_certificate)
+    from .training_capacitance_history import audit_training_capacitance_history
+    import copy
+    physical = audit_training_capacitance_history(summary, packets)
+    require(physical['actual_state_verified'], 'unverified_training_summary_actual_capacitance')
+    projected = copy.deepcopy(summary)
+    for field in c_fields:
+        projected.pop(field, None)
+    for r in projected['references']:
+        r.pop('capacitance_witness_id')
+    for candidate in projected['candidates']:
+        candidate.pop('capacitance');candidate.pop('capacitance_witness_id')
+    for group in projected['candidate_repeat_groups']:
+        for field in ('capacitance', 'capacitance_witness_ids', 'anchor_capacitance_witness_ids'):
+            group.pop(field)
+    repeats = count(projected['configuration']['n0_candidate_repeats'])
+    projected['schema_version'] = 2 if repeats > 1 else 1
+    if repeats == 1:
+        require(projected['candidate_repeat_groups'] == [], 'unexpected_single_repeat_groups')
+        projected.pop('candidate_repeat_groups');projected['configuration'].pop('n0_candidate_repeats')
+    measured = _audit_training_summary(projected, packets, origin_stimulus_id, require_certificate=require_certificate)
+    return {**measured, 'training_summary_schema': 3, 'capacitance_history': physical}
 
 
 def main() -> int:

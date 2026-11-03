@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_full_capacitance_unit_build_failure",
+  "schema_version": 1,
+  "root": "179d1bf4d2de8ea3e13c09fe0a8c8d07db15e816",
+  "pulselib": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+  "worker": "asan",
+  "execution": "process_error",
+  "assertion_status": "not_assessed",
+  "expected_tests": 130,
+  "observed_tests": 0,
+  "reason": "isolated unit harness did not preserve the SDK layout required by old repo-relative test includes; no numerical tests executed",
+  "records": [
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "compile-request.json",
+      "bytes": 22478,
+      "sha256": "e79c03fa41e5b8e5874b26862203d726284eaaf7ef5a3d70fe3be1e323dac5a6"
+    },
+    {
+      "path": "compile-terminal.json",
+      "bytes": 22,
+      "sha256": "b9f87d4ceb14f54a8787da14c5985aa499e13197fe39c8f0f4ecf87e7a01957e"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 952,
+      "sha256": "f9e6b136dbf08882d461ba81157c2b8b778dc01dd29f7009af447e324b3f5060"
+    },
+    {
+      "path": "exception.json",
+      "bytes": 347,
+      "sha256": "5e3cc282b34ee6ab0ed1d42789dbee7d85b957e6f141a0c63abccbecc6ebeec2"
+    },
+    {
+      "path": "job.py",
+      "bytes": 8867,
+      "sha256": "35513034a96fb5d4792e295e9b00ab2bf4145767676ff5838bbfdf310a35ced0"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 51,
+      "sha256": "69f0df705ccca405517ad332d2cb2a23878ca4818a6645447d76c9dcda676dcd"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 424,
+      "sha256": "013a6ee47f02874a928f6b96fa802fa076776b2ede0971b0f9cd15276cebffb6"
+    }
+  ],
+  "archive_sha256": "40f2aa53660cc848059ff2c1e2d0b3c8f6628c58cbcc7bfa4406825414126d43",
+  "scientific_verdict": null
+}

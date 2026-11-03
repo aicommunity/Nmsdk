@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -45,6 +46,18 @@ def analyze(args: argparse.Namespace) -> dict:
         spec, observations = load_evaluation(args.evaluation.resolve(strict=True))
         result = audit_native_calibration_assessment(load(source), spec, observations,
             load(args.model.resolve(strict=True)), load_case(args.source_solo.resolve(strict=True)))
+    elif args.format == "capacitance-history":
+        from .training_capacitance_history import audit_training_capacitance_case
+        result = audit_training_capacitance_case(source)
+    elif args.format == "capacitance-witness":
+        from .training_capacitance_witness import audit_training_capacitance_witness
+        result = audit_training_capacitance_witness(load(source))
+    elif args.format == "capacitance-binding":
+        from .capacitance_binding_evidence import audit_capacitance_binding
+        result = audit_capacitance_binding(load(source))
+    elif args.format == "training-capacitance-bridge":
+        from .training_capacitance_bridge_evidence import audit_training_capacitance_bridge
+        result = audit_training_capacitance_bridge(load(source))
     elif args.format == "domain":
         from .domain_evidence import audit_resistance_domain
         result = audit_resistance_domain(load(source), allow_legacy=args.allow_legacy)
@@ -117,6 +130,13 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    controller_ab = commands.add_parser("controller-ab", help="compare pinned pure controller kernels on a Linux worker")
+    controller_ab.add_argument("specification", type=Path)
+    controller_ab.add_argument("--root-repository", type=Path, required=True)
+    controller_ab.add_argument("--pulselib-repository", type=Path, required=True)
+    controller_ab.add_argument("--compiler", type=Path, required=True)
+    controller_ab.add_argument("--gtest-source", type=Path, required=True)
+    controller_ab.add_argument("--output", type=Path, required=True)
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
@@ -148,7 +168,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
+    analysis.add_argument("--format", choices=("capacitance-history", "capacitance-witness", "capacitance-binding", "training-capacitance-bridge", "domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
@@ -246,6 +266,18 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"kind": "timelearner_legacy_completed_replay_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command == "controller-ab":
+        from .native_evidence import EvidenceError
+        from .controller_ab import run_controller_ab
+        try:
+            result = run_controller_ab(args.specification, args.root_repository, args.pulselib_repository,
+                                       args.compiler, args.gtest_source, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result['assertion_status'] == 'passed' else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
+            print(json.dumps({'kind': 'timelearner_controller_ab_error', 'reason': str(error),
+                              'scientific_verdict': None}), file=sys.stderr)
             return 2
     if args.command == "native-gate":
         from .native_evidence import EvidenceError
