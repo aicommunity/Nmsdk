@@ -1,0 +1,50 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "5c9b92350ee48d130d954bf10bf9521251f99e4e",
+  "pulselib": "54516bcc0aa7b0437c68f818598a19788e20eb55",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 87,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "actual_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "2ecd25fc50e9770a9c6cafb5d20a86884efd2a0f1bed86184bed7cb261497e86",
+  "archive_bytes": 2864,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/checkout-Bin.log": "c16e0fb9b4f65eff280f351429115b2664e4626c6909b88ba9b97ad50f7620f4",
+    "gate/checkout-Libraries_Nmsdk-MotionControlLib.log": "a1e5fdb9b98b0b03aa10257e5b26ce4466dc4e3bac9ba23ad4b91e6ba9074a22",
+    "gate/checkout-Libraries_Nmsdk-PulseLib.log": "d2cf69fd7f204c45baba9e45e6b8d0731724cbdd061fbfd18569b0769880c641",
+    "gate/checkout-Libraries_Rdk-BasicLib.log": "b2cc10f5619568ae02d233671a2fbd07381a5cce35cc1fb913abc71afb1a9dc6",
+    "gate/checkout-Libraries_Rdk-CvBasicLib.log": "ea78837b7090d8293951d429e1a1719a0dd2abdf8088d85b604bfc97a3c7bf0a",
+    "gate/checkout-Libraries_Rdk-HardwareLib.log": "3b2af0c785b95e927e88805c46982e02ad1ca51b740e5bb06a194d064e1597d8",
+    "gate/checkout-Rdk.log": "c8fa9d9754551fcff32f4d2022eebcdec8e560dbe470f11882db8289a5c97f50",
+    "gate/checkout-root.log": "7ea5af3cc7d0c59809a44605ff6bb4192c69f0a86c75b96cd062fc3a8a2a077f",
+    "gate/clone-Bin.log": "49c8f2b3025fee2f930c2c01fa4347dd9c69b1d31a45367c2db5d5916297c049",
+    "gate/clone-Libraries_Nmsdk-MotionControlLib.log": "34b897aad57a8af744602f1072b66bd74f1e1060683abeeb38d0234c4179df9f",
+    "gate/clone-Libraries_Nmsdk-PulseLib.log": "9cd104a429826d401ae293d75e3a9bb978ecd634aa3ef20a2d0523cca039cc0d",
+    "gate/clone-Libraries_Rdk-BasicLib.log": "241c86fb15380db1ced58034073b1a86e4d2b984b0692934238ba36c35c0efd1",
+    "gate/clone-Libraries_Rdk-CvBasicLib.log": "8045c1db919b273e929fcf658f815b2ba4533478fa1496d81f6ea7293fc4662c",
+    "gate/clone-Libraries_Rdk-HardwareLib.log": "8aef765e5eac2a5fffb16efb92bbd33ee2a781006727e045f7f33bb5e9b08e83",
+    "gate/clone-Rdk.log": "9b7533c35eb1d8f5adf9598894b28f0aca048768dddeb8b91829170f81f3f367",
+    "gate/clone-root.log": "ec8968cbf661508171809c493ec97068c21b3b9abf14c4f92916ad5db73b09ef",
+    "gate/exception.json": "e9203edee618d8e3b855a98a8196fa6089bbfff67d6371c9af9554349a64870c",
+    "gate/fetch-Libraries_Nmsdk-PulseLib.log": "020da3f6a8d2de09b9a8090bae1bec6a1143be04b53a474a454720ca21e04a61",
+    "gate/fetch-root.log": "b96ee00eadcafaedb1e8c4e757bc3cda2d7c2d0dfba46255f7560834713dff94",
+    "gate/init-submodules.log": "c222c719196e352b8a705baab0ebd43c396be9e2141e3ce02b26bb58349e0ea9",
+    "gate/owned-supervisor.json": "15e56982505feaa879f2e9ad35073691fb08c895fc06d4e2937de6e5c1cd790e",
+    "gate/previous-asan-closed.json": "69f6d3b6c14ac0bc0830b1329a755c101a067509b1c317e8df9dea9920688d23",
+    "gate/resource-preflight.json": "34fb42665d740394cd6d03ede176a1c1a799de32f8790056b388e70d957227f4",
+    "gate/source-closure.json": "d1d7e92dab3103804c7f84bff49b8b4ea5af4bc917f6894553f2244f8c0409d4",
+    "gate/sparse-init.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "gate/sparse-set.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "Targeted6 (four configured explicit-probe ownership cases and both original H11 failures), then full native213/readers87. Before source reuse verify complete H11 archive2018 and exact queued-probe illegal-C0-read diagnostics; wait all prior owners closed. Only Classic/Branch automatic Start ownership guard and dedicated tests, no Cursor, active C-search, physical model, tolerance or scientific classification change. ASan actual mappings required for both target and full native processes; detect_leaks=0, no leak-check claim.",
+  "scientific_verdict": null
+}
