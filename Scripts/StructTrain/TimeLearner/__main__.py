@@ -147,6 +147,7 @@ def main(argv: list[str] | None = None) -> int:
     transfer.add_argument("action", choices=("prepare", "run"))
     transfer.add_argument("source", type=Path, help="Git repository for prepare; prepared declarations for run")
     transfer.add_argument("--runtime-manifest", type=Path)
+    transfer.add_argument("--completed-prefix", type=Path, help="verified closed operation prefix; never a mid-probe checkpoint")
     transfer.add_argument("--output", type=Path, required=True)
     study = commands.add_parser("n1-protocol-study", help="probe preregistered N1 thresholds across order/reset/quiet-tail conditions")
     study.add_argument("action", choices=("prepare", "run", "analyze", "report"))
@@ -488,11 +489,12 @@ def main(argv: list[str] | None = None) -> int:
         from .native_evidence import EvidenceError, require
         try:
             if args.action == "prepare":
-                require(args.runtime_manifest is None, "transport_prepare_does_not_execute_runtime")
+                require(args.runtime_manifest is None and args.completed_prefix is None, "transport_prepare_does_not_execute_runtime")
                 result = prepare(args.source.resolve(strict=True), args.output.resolve())
             else:
                 require(args.runtime_manifest is not None, "transport_runtime_required")
-                result = run(args.source.resolve(strict=True), args.runtime_manifest.resolve(strict=True), args.output.resolve())
+                result = run(args.source.resolve(strict=True), args.runtime_manifest.resolve(strict=True), args.output.resolve(),
+                             completed_prefix=args.completed_prefix.resolve(strict=True) if args.completed_prefix is not None else None)
             print(json.dumps(result, allow_nan=False));return 0
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),

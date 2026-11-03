@@ -414,3 +414,8 @@ calibration с fresh confirmation и импорт полного пакета в
 с frozen target/foil probes. Пара[.01,.03]/[.01,.24] объявлена до Train;
 калибровка same-matrix и не доказывает независимый научный Test.
 Незавершённое обучение и NonSeparable не создают успешный transport verdict.
+
+`--completed-prefix PREVIOUS_RUN` разрешает продолжить только с закрытых
+операций того же job/runtime. Manifest, primary closure и фактический runtime
+проверяются повторно, на Linux проверяется PID/start_ticks. Reuse явно
+фиксируется отдельно от новых native процессов; середина пробы не поддержана.
