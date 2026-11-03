@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_full_capacitance_unit_build_failure",
+  "schema_version": 1,
+  "root": "4f4d5f5ade4ff069553ed12564b2799d9eb1b43f",
+  "pulselib": "31f27afd43e6ef3669dec662e5bec43fb67bb318",
+  "worker": "normal",
+  "execution": "process_error",
+  "assertion_status": "not_assessed",
+  "expected_tests": 84,
+  "observed_tests": 0,
+  "reason": "strict compiler caught existing implicit empty optional initializers and misleading stop/reset indentation; no numerical tests executed",
+  "records": [
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "6898024c349c11f3b814acd84b42051482a5a6e1b9bd9a0a1ab6f942888d3918"
+    },
+    {
+      "path": "compile-request.json",
+      "bytes": 22839,
+      "sha256": "9cd7b93f6eca6f88ae0893c0ea39f649e002ee0f05219e6f818b7e18f665836f"
+    },
+    {
+      "path": "compile-terminal.json",
+      "bytes": 22,
+      "sha256": "b9f87d4ceb14f54a8787da14c5985aa499e13197fe39c8f0f4ecf87e7a01957e"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 8259,
+      "sha256": "0aea59a533013bdbfa4ba947a4a8633289fde30856a8f86242aee29a9f5832d2"
+    },
+    {
+      "path": "exception.json",
+      "bytes": 277,
+      "sha256": "08f133bfee37d3c61a0d381cf470f27129c95f3f8a1008e1b6bb8f9a60ed2c4d"
+    },
+    {
+      "path": "job.py",
+      "bytes": 8809,
+      "sha256": "f83365d8ef62b1daae71922efc43df549d63c28d816d8f41f47f24db143f261f"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 50,
+      "sha256": "bb98996e387fe2a8cdbaa4a4881b39391570ae7beb065421b6ae468f4c1f841c"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 355,
+      "sha256": "8cbce28acf0463602555e5fa8b4b9cec66d7f52c1fbd1646b8e773f27bbb8898"
+    }
+  ],
+  "archive_sha256": "1a5971632f859a159dc91d7b5a75a027b49a6539880b7f5ca79bc75616bd5fed",
+  "scientific_verdict": null
+}
