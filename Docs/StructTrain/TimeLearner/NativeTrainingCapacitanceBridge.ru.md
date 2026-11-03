@@ -72,3 +72,18 @@ witnesses, добавить versioned summary/domain codecs и independent reade
 CapturedPerInput, anchor, defaults амплитуды/sync и legacy absolute-F
 DendriteCapacitance не меняются. ControllerVersion2 с C-trim On продолжает
 отклоняться; bridge и весь исходный план не объявляются завершёнными.
+
+## Уточнение до первой SDK-сборки
+
+При source review сужена область catch в фасаде: Rejected с гарантией отсутствия
+live mutation относится только к подготовке correction. Делегирование native
+editor выполняется вне этого catch, сохраняя его failure/rollback контракт.
+Иначе исключение после физического commit могло бы ошибочно выглядеть как
+безопасный отказ подготовки. Исправление Pulse a58489d8a2d3311719e5f70b8c7781de439ea8cc
+не меняет математические кандидаты или допуски.
+
+Первая очередь H1 с rootabf65a9cc отменена до source/build/runtime mutation:
+проверены PID/start_ticks314367/324253090 и314368/324253090, отсутствие детей,
+неизменность source4d501d611 и продолжающий работу normal43 owner297669.
+Численные tests H1 не запускались. Исправленный H2 должен ждать successful
+normal43/readers26 и закрытия их owners; production/runtime ещё не проверены.
