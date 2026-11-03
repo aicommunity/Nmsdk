@@ -1,0 +1,55 @@
+{
+  "kind": "timelearner_asymrm_launcher_retirement_gate",
+  "schema_version": 1,
+  "source": "e9f39959f56be1139d41165edbce1b787e45ff9a",
+  "worker": "asan",
+  "source_records_verified": 81,
+  "new_retired_files": 17,
+  "negative_fixture_commit": "5a6e91174fb8c2ffbcbf1e48c41888d27733edbf",
+  "active_source_context_unchanged": true,
+  "records": [
+    {
+      "path": "active-context-after.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "job.py",
+      "bytes": 7759,
+      "sha256": "bcd5b46e6c9c0808b43134324492ec62286ececa32338b44620bfa9f7e5d36bf"
+    },
+    {
+      "path": "negative.json",
+      "bytes": 249,
+      "sha256": "52ec363597635192eae3675d49b08684864d6817f36f544667d63bc4117ae731"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 51,
+      "sha256": "f68cf4f508efa0a827d54d4dec9746969dcb2ada87f100738d3902464ab5c9fd"
+    },
+    {
+      "path": "positive.json",
+      "bytes": 46289,
+      "sha256": "4412b347e172c979a59e53a49fc68d862d107e39350708a25ad40736153c84c4"
+    },
+    {
+      "path": "revision-map.json",
+      "bytes": 314418,
+      "sha256": "21cc55726787e628404031d866b8ba93d61cb2efd3522cf066a8ba19c732e01a"
+    },
+    {
+      "path": "scope.json",
+      "bytes": 2719,
+      "sha256": "3a7a67baaba6288ac269be5f78f02afb72ee9c50e6330fa7373fb5648fc86be6"
+    }
+  ],
+  "archive_sha256": "3899caef2e496670ff2c472eaed8ec8e5e47b3b5a6979a56aa1ea9dadf05c2bc",
+  "runtime_equivalence_attested": false,
+  "scientific_verdict": null
+}
