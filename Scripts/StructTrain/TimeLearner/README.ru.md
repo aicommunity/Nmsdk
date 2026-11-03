@@ -399,3 +399,18 @@ Full root SHA и новый output receipt обязательны; для sparse
 архивные программы не исполняются. Это проверка retrieval/absence/replacement,
 не полнота migration и не numerical/runtime parity. Контракт:
 [ScriptMigration](../../../Docs/StructTrain/TimeLearner/ScriptMigration.ru.md).
+# Контроль полного переноса ModelSpec1/2
+
+`python -m Scripts.StructTrain.TimeLearner model-spec-transport prepare REPO --output PREPARED`
+восстанавливает из закреплённого Git-коммита положительное production N1
+задание и его первичные данные, сверяет все hashes и реальные Exact certificates.
+До Train объявляются четыре jobs Classic/Branch × ModelSpec1/2; схема2
+добавляет только construction threshold1. Физика, протокол, bounds и допуски
+сохраняются. Это двухвходовый инженерный LT-профиль, не stock физика августа.
+
+`python -m Scripts.StructTrain.TimeLearner model-spec-transport run PREPARED --runtime-manifest RUNTIME --output RUN`
+выполняет штатные Train/export, измеренное предложение сетки порогов, native
+calibration с fresh confirmation и импорт полного пакета в новый Console
+с frozen target/foil probes. Пара[.01,.03]/[.01,.24] объявлена до Train;
+калибровка same-matrix и не доказывает независимый научный Test.
+Незавершённое обучение и NonSeparable не создают успешный transport verdict.
