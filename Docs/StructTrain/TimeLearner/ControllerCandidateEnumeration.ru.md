@@ -190,3 +190,24 @@ child commit по parent Git metadata даже при отказе до checkout
 На момент записи H20 worker3299200 подтверждён живым в состоянии ожидания;
 publisher3299201 запущен отдельно. Это очередь, а не ASan pass. Fresh recursive
 closure и исходные полные этапы6/7 остаются открытыми.
+
+## Уточнение publisher H20: отдельная замена, численный worker не изменён
+
+Первоначальный publisher3299201 ошибочно разбирал .gitmodules через Python
+ConfigParser: неодинаковый отступ branch мог стать продолжением URL.
+До остановки подтверждены PID/start_ticks и отсутствие публикации; остановлен
+только этот ожидающий publisher. H20 worker3299200 и H14 native не прерывались.
+Receipt superseded.json сохранён в исходном publication каталоге.
+
+Новый publisher-v2 PID3362315 использует штатный git config --blob для точного
+parent commit. Публикация ожидается в отдельной evidence ветке
+codex/evidence-s07-candidate-cursor-native-asan-h20-v2. Исходный отказ не
+переписывается и включается в архив. Это исправление одноразовой обвязки:
+production publisher.py уже использовал native Git parser. Новый regression
+этой особенности .gitmodules прошёл в составе17/17 production publisher tests
+на Elder и M40 (proof8a435e495eb6a1e548141bc64fad484f59a01897 и
+8f53372908ab94515ad2527ca73a8b389b0da355); он не подменяет ASan проверку.
+
+При последней проверке03.11 H14 native3052995 и owner3024065 живы,
+H20 worker3299200 и новый publisher3362315 живы. Прежний текст о3299201 выше
+описывает исторический запуск. Ни ASan pass, ни завершение этапа6 не заявлены.
