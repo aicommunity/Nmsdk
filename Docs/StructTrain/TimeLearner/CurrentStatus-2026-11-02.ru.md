@@ -17,7 +17,9 @@ candidate прошли по130/130 pure tests. Evidencebcdae6c4985310850f89356a0
 346 hashes/36 members сверены; ошибки подготовки прежних попыток сохранены.
 [Scope/команда/SHA](ControllerCandidateEnumeration.ru.md).
 
-H9b сейчас собирает portable model/configuration schema3 на Elder, native209/readers87.
+H9b собрал portable model/configuration schema3 на Elder и выполняет native209.
+Выявлено несовпадение runtime_error/invalid_argument в archive encoder corruption
+control; исправление сохранено отдельно, полный failure inventory ещё ожидается.
 H10 queued209/104 добавляет native проверку cursor refactor и сравнение primary CSV;
 никакие working sources/runtime не переключаются до закрытия владельцев baseline.
 M40 ASanG3 остаётся жив; при последнем poll39 завершённых successes, финал ещё неизвестен.
@@ -1059,3 +1061,16 @@ production scheduler/leases/crash recovery и fault matrix публикации;
 Нового научного результата разделимой классификации этим срезом не получено.
 Августовские визуально подтверждённые4/8–6/8 сохраняют доказательность своего
 исходного протокола; перестановки и увеличенный ITI тогда не проверялись.
+
+
+## Кандидат codec boundary fix после начала H9b
+
+Pulse253fe87020ae189a47c6940fa68c386ebf10c293 нормализует runtime_error от pure
+archive validation в invalid_argument внутри JSON encoder, сохраняя точную
+archived_capacitance_channel_mismatch диагностику. Live witness read и физические
+Build/Reset/Calculate не менялись. Изменение объединено --no-ff с cursor candidate.
+Root corruption control теперь проверяет одновременно тип и точный текст ошибки;
+повреждённая Capacity по-прежнему переподписана, так что digest-only отказ не
+подменяет physical C/C₀ проверку. Runtime fix ещё не принят. Текущие H9b/H10
+не переключаются на новый код: H9b заканчивается, H10 обязан отказаться от
+неуспешного baseline. После полного разбора понадобится новый immutable gate.

@@ -660,7 +660,13 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
             const auto correction=ParseNativeCapacitanceState(invalid.nativeStateJson,previousRevision);
             invalid.nativeStateJson=QJsonDocument(EncodeNativeCapacitanceState(correction,invalid.modelRevision))
                 .toJson(QJsonDocument::Compact).toStdString();
-            EXPECT_THROW(EncodeNativeTrainingCapacitanceWitness(invalid),std::invalid_argument);
+            try
+            {
+                EncodeNativeTrainingCapacitanceWitness(invalid);
+                FAIL()<<"re-signed graph data must still satisfy the physical C/C0 equation";
+            }
+            catch(const std::invalid_argument& error)
+            {EXPECT_STREQ(error.what(),"archived_capacitance_channel_mismatch");}
         }
         EXPECT_TRUE(life.IsCurrent());EXPECT_EQ(epoch,rig.learner->NativeTrainingController().ModelEpoch());
         EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),snapshot["model"].toObject());
