@@ -1,5 +1,9 @@
 # Перенос положительных N1-моделей в frozen recognition
 
+Уточнение03.11: сохранённые модели имеют изменённый integration-профиль с
+отдельной LT-мембраной. Это не stock `NSPNeuronGen` и не августовская физика.
+[Источник LT и исправление научной постановки](ScientificProfileDrift.ru.md).
+
 ## Цель и исходное доказательство
 
 Подэтап следует принятому [measured refinement](MeasuredResistanceRefinement.ru.md),
