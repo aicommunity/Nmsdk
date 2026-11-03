@@ -34,9 +34,18 @@ ASan прошёл5/8 и продолжает20k cases. Normal transport43 зав
 четыре dormant fixtures остановились в setup при native snapshot roundtrip
 с model.bindings.size, ещё до удаления последнего image consumer. Evidence
 e324c160 проверен (846 members); readers26 не запускались после failed native.
-Требуется диагностика смены child class/Build/import, strict identity сохраняется.
-Conditional ASan transport43 (включая те же4 dormant fixtures) ещё ждёт
-successful predecessor. Вместе с owner8 это51 уникальная проверка.
+Diagnostic E1 локализовал две отсутствующие связи после прямой смены класса
+дочернего канала при ready parent. Артефакты E1 (67 members) и build-failed E2
+(11 members, 0 native tests) проверены и объединены в feature. E3 использует
+UNet owning-tree Load с UnInit/Build/Init/Reset и проверяет все прежние связи
+до первой физической правки; запущен на Elder, root3d144493a, Pulse30495d1.
+Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
+fixtures отменён до изменения source/build/runtime: проверены точные
+PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
+процессов и прежний source HEAD. Cancellation evidence d6135806b068100640afc6e16d278d693fa18324:
+все4 file hashes проверены. Работающий ASan owner8 не затронут. Корректный
+transport gate будет назначен после результата адресного normal4.
+Вместе с owner8 это51 уникальная проверка, полная приёмка остаётся открытой.
 Отдельный readonly renderer normal C2 использовал published passed bundle
 и завершил48 complete trials/72 soma pairs,2697 PNG
 (и столько же SVG/PDF) только в M40 cache. Compact proof b4617156 содержит12
