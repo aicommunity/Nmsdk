@@ -402,3 +402,5 @@ failed: test ошибочно требовал присутствия fallback p
 candidate anchor либо final verification. Исправлен exact expected phase set
 этого corpus; renderer и аудитор не ослаблены. Результат и рисунки v3 сохраняются,
 новая проверка/прямой просмотр требуются до visual acceptance.
+
+Подробный контракт и границы: [C-search temporal reports](../../../Docs/StructTrain/TimeLearner/CapacitanceSearchVisuals.ru.md).
