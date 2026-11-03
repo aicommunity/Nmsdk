@@ -68,11 +68,25 @@ class CapacitanceBoundaryEvidenceTest(unittest.TestCase):
             self.assertFalse(audit_package_capacitance_history(package)['search_checkpoint'])
 
     def test_missing_capture_witness_is_rejected(self):
-        for _, original in self.cases:
+        for path, original in self.cases:
             package = copy.deepcopy(original);h = package['capacitance_history']
-            del h['witnesses'][h['capture_witness_id']];self.resign(package)
-            with self.assertRaisesRegex(EvidenceError, '^missing_capacitance_boundary_witness$'):
-                audit_package_capacitance_history(package)
+            # A missing reference in a populated registry is distinct from an
+            # empty inventory, which is rejected before reference resolution.
+            self.assertTrue(h['witnesses'])
+            h['capture_witness_id'] = 'a'*64
+            self.assertNotIn(h['capture_witness_id'], h['witnesses'])
+            self.resign(package)
+            with self.subTest(path=path.name):
+                with self.assertRaisesRegex(EvidenceError, '^missing_capacitance_boundary_witness$'):
+                    audit_package_capacitance_history(package)
+
+    def test_empty_boundary_inventory_is_rejected(self):
+        for path, original in self.cases:
+            with self.subTest(path=path.name):
+                package = copy.deepcopy(original)
+                package['capacitance_history']['witnesses'].clear();self.resign(package)
+                with self.assertRaisesRegex(EvidenceError, '^invalid_capacitance_boundary_inventory$'):
+                    audit_package_capacitance_history(package)
 
     def test_wrong_trial_binding_is_rejected(self):
         for _, original in self.cases:
