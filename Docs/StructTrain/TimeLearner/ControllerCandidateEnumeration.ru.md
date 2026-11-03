@@ -138,3 +138,22 @@ auditor не менялись, C++ заново не запускался. Об�
 baseline/candidate CSV sets/SHA256 обязательны. C-search/schema4 сюда не входят;
 Kernel A4 остаётся отдельным уже проверенным доказательством130/130 с каждой
 стороны. Положительная native A/B приёмка пока отсутствует.
+
+
+## Независимо проверенный H17 normal результат
+
+Root `a97a4448e90f77cb87fa66204bb83295383382e3`, Pulse
+`5fed73a0379d5599656e40f58e0600469d43f28c`. Evidence
+`44c793e6d868527120a8d92153ece3aaf3e3c8aa` содержит native213/213 и readers105/105,
+без failures/errors/skips. Все2132 archive members /30060996 compressed bytes
+независимо сверены. Runtime manifest подтверждает7 clean exact child commits.
+
+Все104 CSV двух объявленных deterministic families automatic service и
+capacitance bridge побайтно совпадают с Git-bound H12 baseline; каждый набор
+содержит Classic/Branch N0/N1. Сверены имена, actual candidate bytes и SHA256
+неизменяемого baseline bundle. App/Tests/CMake источники baseline/candidate
+идентичны; child Core diff только BoundedTraining.cpp/.h. Ни global operation
+trace equivalence, ни scientific recognition этим не подтверждаются.
+
+Normal native A/B принят в этом scope. ASan и fresh closure остаются отдельными
+условиями перед develop merge; исходный этап6 полностью не закрывается.
