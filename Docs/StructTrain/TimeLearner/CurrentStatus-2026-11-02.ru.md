@@ -16,8 +16,11 @@ Elder H4 на mechanical snapshot1c992e4ab впервые собрал SDK134;13
 связаны с borrowed QJsonValueRef в новом тесте (ожидание C₀ стало0), fixed owning
 value pending повторной проверки. Actual frame выявил missing dataset/generator
 в отдельно снятой registry closure; producer исправлен, reader не ослаблен.
-Следующий integrated gate должен выполнить140 SDK cases и26 structured readers
-(bridge9+domain9+binding8). C-trim/service dispatch/summary schema3 ещё не готовы.
+Integrated H5 на source627b601547bf80fae08e1ebad26cdecaabc9c85e выполняет183
+SDK cases и52 structured readers (прежние26 +bridge9+domain9+binding8).
+После восстановления Automats2 подтверждены завершённые сборки и живые native
+процессы H5 на Elder и ASan43 G3 на M40; финального verdict пока нет.
+C-trim/service dispatch/summary schema3 ещё не готовы.
 
 ASan C3 temporal report завершён48/72,8895 checksums.26 shared-Y и6 local-Y PNG
 проверены и напрямую просмотрены;32 выбранных views читаемы. Полные2697 PNG/SVG/PDF

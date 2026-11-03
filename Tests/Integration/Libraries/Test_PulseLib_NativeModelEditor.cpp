@@ -605,6 +605,21 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
             {"native_state",native},{"controller_parameters",typed},
             {"storage_images",NmsdkTools::CaptureModelImageDefinitions(rig.neuron,rig.ports,imageRoots)},
             {"model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)}};
+        const auto life=rig.neuron->ObserveLifecycle();
+        const auto epoch=rig.learner->NativeTrainingController().ModelEpoch();
+        const auto witness=rig.learner->ReadNativeTrainingCapacitanceWitness();
+        ASSERT_EQ(bool(witness),bool(value));
+        if(witness)
+        {
+            EXPECT_EQ(witness->parameters,*value);
+            EXPECT_EQ(witness->modelRevision,rig.Revision());
+            EXPECT_EQ(QJsonDocument::fromJson(QByteArray::fromStdString(witness->modelIdentityJson)).object(),snapshot["model"].toObject());
+            EXPECT_EQ(QJsonDocument::fromJson(QByteArray::fromStdString(witness->nativeStateJson)).object(),native);
+            EXPECT_EQ(QJsonDocument::fromJson(QByteArray::fromStdString(witness->storageImagesJson)).array(),snapshot["storage_images"].toArray());
+        }
+        EXPECT_TRUE(life.IsCurrent());EXPECT_EQ(epoch,rig.learner->NativeTrainingController().ModelEpoch());
+        EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),snapshot["model"].toObject());
+        EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),native);
         phases.append(snapshot);Artifact(rig.name+"_bridge_"+phase+".json",QJsonDocument(snapshot).toJson());
     };
     const auto initial=rig.Revision();const auto initialLife=rig.neuron->ObserveLifecycle();
@@ -623,7 +638,21 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
     const auto boundRevision=rig.Revision();const auto boundLife=rig.neuron->ObserveLifecycle();
     EXPECT_EQ(rig.learner->ReadNativeTrainingCapacitance(),captured);EXPECT_TRUE(boundLife.IsCurrent());
     EXPECT_EQ(boundRevision,rig.Revision());record("captured");
-    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    // A witness must not launder changed live C through an unchanged owner.
+    const auto retainedCapacity=retained->Capacity.GetData();retained->Capacity=retainedCapacity*1.01;
+    const auto foreignRevision=rig.Revision();const auto foreignLife=rig.neuron->ObserveLifecycle();
+    EXPECT_THROW(rig.learner->ReadNativeTrainingCapacitanceWitness(),std::invalid_argument);
+    EXPECT_EQ(rig.Revision(),foreignRevision);EXPECT_TRUE(foreignLife.IsCurrent());
+    retained->Capacity=retainedCapacity;EXPECT_EQ(rig.Revision(),boundRevision);
+    bool refusedRunning=false;
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true,false,
+        [&](const NativeProbeSample&) {
+            if(refusedRunning)return;
+            try{rig.learner->ReadNativeTrainingCapacitanceWitness();ADD_FAILURE()<<"witness accepted during native probe";}
+            catch(const std::invalid_argument& error)
+            {EXPECT_EQ(std::string(error.what()),"training_capacitance_read_during_probe");refusedRunning=true;}
+        }).status,NativeProbeStatus::Completed);
+    EXPECT_TRUE(refusedRunning);
     auto geometry=rig.learner->ReadNativeParameters();geometry[0].length=3;
     const auto grown=rig.learner->ApplyNativeParameters(geometry);ASSERT_EQ(grown.status,NativeEditStatus::Applied)<<grown.reason;
     const auto afterGrowth=rig.learner->ReadNativeTrainingCapacitance();ASSERT_TRUE(afterGrowth);
