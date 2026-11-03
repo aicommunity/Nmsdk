@@ -37,3 +37,21 @@ reference capture и export. Поэтому первый неподтвержд�
 контроль теперь меняет ID на отсутствующий, не удаляя единственную запись.
 Нельзя считать этот corpus доказательством multi-revision boundary transport;
 для этого остаётся отдельный реальный C-edit/growth native контроль.
+
+
+## Повтор H16 подтверждён на первичных данных H12
+
+Reader source90c4074a6d2049b298fd923052112e738db9ae3b:88/88 без failures/errors/skips.
+Evidenceaeb9664b092332555d41eefd0ac8de5fd63cc9b4:10 members/24678 compressed
+bytes и400 точных Git source hashes независимо сверены. Исходный H12 пакет
+eb0441f31b9ba51155a14e4705e27d75786dbe3b:2259 members/32323202 bytes сверены;
+C++ target6/full213 положительны, первоначальный reader failure остаётся
+not_accepted в своей неизменённой квитанции. Новый анализ не пересчитывал модели.
+C++ sources/tests, child gitlinks и production Python auditors совпадают;
+из Scripts изменён только указанный test module с двумя отдельными controls.
+
+H15 native Cursor worker отказался до сборки, поскольку первоначальный H12
+общий gate не был принят. Evidence86914b5cdc115858dc5e8aded1502281bd47a319:
+6 members/1068 bytes независимо сверены. Это корректный fail-closed переход,
+а не неуспех Cursor runtime; следующий A/B должен явно требовать составное
+доказательство native H12 + corrected readers H16, сохраняя обе версии source.
