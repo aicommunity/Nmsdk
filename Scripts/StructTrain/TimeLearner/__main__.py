@@ -165,7 +165,7 @@ def main(argv: list[str] | None = None) -> int:
     phasea.add_argument("--revision", default="1c1464e248f8744e858bd66df0be99e39969fd65")
     phasea.add_argument("--output", type=Path, required=True)
     stopped_stock = commands.add_parser("stock-stopped-evaluation", help="diagnostic eight-pattern frozen probes of actual unfinished stock models; preserves inherited thresholds")
-    stopped_stock.add_argument("action", choices=("prepare", "run", "analyze"))
+    stopped_stock.add_argument("action", choices=("prepare", "run", "analyze", "report"))
     stopped_stock.add_argument("source", type=Path)
     stopped_stock.add_argument("--bin-repository", type=Path)
     stopped_stock.add_argument("--output", type=Path, required=True)
@@ -479,14 +479,17 @@ def main(argv: list[str] | None = None) -> int:
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "stock-stopped-evaluation":
-        from .stock_stopped_evaluation import prepare, run, audit
+        from .stock_stopped_evaluation import prepare, run, audit, report
         from .native_evidence import EvidenceError, require
         try:
-            if args.action == "analyze":
+            if args.action in ("analyze", "report"):
                 require(args.bin_repository is None, "stock_diagnostic_analysis_uses_bound_matrix")
-                result = audit(args.source)
-                with args.output.open("x", encoding="utf-8") as stream:
-                    json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+                if args.action == "report":
+                    result = report(args.source, args.output)
+                else:
+                    result = audit(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
             else:
                 require(args.bin_repository is not None, "stock_diagnostic_bin_repository_required")
                 result = (prepare if args.action == "prepare" else run)(args.source, args.bin_repository, args.output)
