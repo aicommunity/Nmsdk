@@ -53,7 +53,17 @@ reset policy. Период2s и reset-per-trial объявляются новы�
 Пять reader tests используют настоящие Git XML/CSV: blobs/onset/labels,
 перестановка CSV, повреждённые/дублирующиеся входы,64 trial IDs/target positions/
 защита от alias mutation и production CLI с отказом overwrite/symbolic revision.
-На момент подготовки серверная проверка ещё не выполнена. Получение матрицы
-не подтверждает успешного cold Train; до валидного завершённого package новый
+Серверная проверка завершена:5/5 без errors/failures/skips на каждом worker.
+Elder proof `fe97c6016b7180a7b4525f63d1322e983cbb446f`, M40 proof
+`bbe37a22629f829f1a376f6775bb07dc2931cca6`, source root
+`d3ef795caaea9877ef3e1d8fdbfe0595b5bd751a`. Независимо проверены все10 members
+каждого архива, outer/member hashes и291 точных Git source hashes на worker.
+Оба исходных XML/CSV совпадают байт-в-байт со старым Bin Git commit; старый
+commit — предок текущего Bin99f58da9. Полученные matrix.json побайтно одинаковы
+на двух workers. Scope — extraction и native trial declarations; моделей
+не рассчитывали, old response metrics не импортировали. Это не приёмка всего
+Train→Test, scientific physics matrix или полного исходного этапа11.
+
+Получение матрицы не подтверждает успешного cold Train; до валидного завершённого package новый
 Test не запускается. Временные отчёты будущих проб должны содержать все паттерны,
 реальные входные импульсы и читаемые Soma traces согласно исходному плану.
