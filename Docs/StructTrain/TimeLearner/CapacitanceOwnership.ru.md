@@ -204,3 +204,32 @@ reader требует4 реально dormant packages и проверяет о�
 живых nodes при наличии определения в archive. Без флага старый inventory
 остаётся строгим; пропущенные новые cases не превращаются в PASS.
 Это пока постановка адресной проверки, не полученный runtime-результат.
+
+
+## Продолжение после восстановления Automats2, 03.11 00:15 UTC
+
+Связь с обоими workers проверена. Elder C2 завершил все8 native cases успешно
+(1409.723s); independent readers и публикация ещё проверяются. M40 C3 прошёл
+четыре2k cases и выполняет ClassicN0At20000; процесс и start_ticks совпадают
+с исходным owned handle. Повторные numerical jobs не запускались.
+
+Conditional transport43 на root `3b55ff17ae1c28332882d2755a3b0bb9681bd860`
+запущен заранее в ожидании успешной публикации своего owner8 и закрытия lease:
+
+- Elder normal D1: owner203893/start_ticks323443588;
+- M40 ASan D1: owner2488268/start_ticks273986367.
+
+Readback names: s07-capacitance-owner-transport-normal-d1 и
+s07-capacitance-owner-transport-asan-d1. После43 native обязательны26 readers:
+native_gate8, capacitance_evidence15, dormant_evidence3. До проверки prerequisite
+и process guard очереди не меняют source/build/runtime. Это pending, не PASS.
+
+На M40 отдельно поставлен readonly renderer normal C2:
+s07-capacitance-owner-temporal-normal-c2, supervisor2492051. Он ждёт evidence
+branch codex/evidence-s07-capacitance-owner-current-normal-c2, требует passed
+bundle с точным root3a1b7fe1f, проверяет outer SHA256 и каждый member, извлекает
+production scripts из Git в отдельный source и строит отчёт в Data cache.
+Обязательное покрытие:48 complete trials/72 rendered trial-soma pairs по
+native-capacitance-ownership-report-v1.json, с реальными stimulus overlays.
+Полный cache не публикуется в Git; selected figures и direct visual QA ещё
+не выполнены. Renderer не использует leased ASan source/build/runtime.
