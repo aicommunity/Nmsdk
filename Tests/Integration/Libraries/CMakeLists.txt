@@ -32,6 +32,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_MeasuredLengthSearch.cpp
     Test_PulseLib_MeasuredCapacitanceSearch.cpp
     Test_PulseLib_TrainingCapacitance.cpp
+    Test_PulseLib_CapacitanceContexts.cpp
     Test_PulseLib_NativeModelEditor.cpp
     Test_PulseLib_CalibrationOwnership.cpp
     Test_PulseLib_PostTuneConfiguration.cpp
