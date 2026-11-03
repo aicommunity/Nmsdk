@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_native_training_capacitance_bridge_evidence",
+  "schema_version": 1,
+  "root": "92787e4962a5674f3f622ae06a60e71b09a901c6",
+  "pulselib": "8b5d8f8262c097928daf0789ace14189fad85e3c",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 16,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "a5b15d741bc9d1ee0833b25ac66a017efe362fe68fe452466510190d79ab6653",
+  "archive_bytes": 647,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/exception.json": "67cde94e76ba716cd161d67f24e26f695b842210c6fd7a1083e597c29379adfb",
+    "gate/owned-supervisor.json": "90897b45e8ab61c31725d7fac4fc85dc2f87a00774461760b7c1b37fc4161c2a"
+  },
+  "scope": "Full SDK gate134: four native full-capacitance bridge cases plus130 actual production controller/proposal/state/observation/final tests previously run in isolated units. New bridge not dispatched by NativeTrainingService; C-trim On remains unsupported. No scientific classification verdict.",
+  "scientific_verdict": null
+}
