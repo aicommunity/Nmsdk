@@ -2,8 +2,11 @@
 
 ## Текущий незавершённый C₀ owner, 03.11
 
-Принятый root develop — c594eacef (документирует parser merge f153d5c45),
-Pulse develop5a52565. Новый C₀ owner не включён в develop. Corrected baseline8
+Принятый root develop — c2e77869d0d109f3da1370aefb561de1cfc10ff4:
+после parser acceptance c594eacef принят отдельный metadata-подэтап удаления
+17 historical AsymRm launchers; Bin develop39d811e5, Pulse develop5a52565.
+[Scope и проверенные81 migration records](AsymRmLauncherRetirement.ru.md).
+Новый C₀ owner не включён в develop. Corrected baseline8
 на прежнем Core8b41 завершён с8 failures отсутствия owned metadata; все191
 members evidence a054904f проверены. Подготовлен owner-кандидат: prospective
 parameter state проверяется до live commit; C₀/scales автоматически переходят
