@@ -2854,21 +2854,49 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(withDormantCapacitance)
     {
         ASSERT_TRUE(withCapacitance);
-        Artifact(rig.name+"_before_channel_class_change.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+        const auto beforeClassChange=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
+        Artifact(rig.name+"_before_channel_class_change.json",QJsonDocument(beforeClassChange).toJson());
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         auto membrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(membrane);
         auto image=dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(membrane->ExcChannelClassName.GetData()));
         ASSERT_TRUE(image);image->SetEnvironment(rig.environment);image->SetGlobalTimeStep(frequency);image->Capacity=.9e-9;
         dormantImage=rig.name+"_DormantExcImage";
         RegisterClassImage(core.storage,dormantImage,image);core.storage->ReturnObject(image);
-        membrane->ExcChannelClassName=dormantImage;
-        const auto marker=rig.neuron->OperationFailureSequence();
-        rig.neuron->Build();rig.neuron->Init();rig.neuron->Reset();
+        // Apply the initial heterogeneous configuration through native Load of
+        // its owning tree. A leaf setter only invalidates that leaf; Build of
+        // an already-ready neuron does not rebuild the cable's channel links.
+        // No self-assignment, arbitrary Default or learner-specific wake-up.
+        const auto declaration=Configuration(rig).model;
+        USerStorageXML configuration;ASSERT_TRUE(configuration.Create("DormantChannelConfiguration"));
+        ASSERT_TRUE(rig.model->SaveComponent(&configuration,true,ptPubParameter|pgSystem));
+        ASSERT_TRUE(configuration.SelectNode(rig.model->GetName()));
+        for(const auto& node:std::vector<std::string>{"Components","Learner","Components","Neuron",
+                "Components","Dendrite1_2","Parameters","ExcChannelClassName"})
+            ASSERT_TRUE(configuration.SelectNode(node))<<node;
+        ASSERT_TRUE(configuration.SetNodeText(dormantImage));
+        for(int level=0;level<8;++level)configuration.SelectUp();
+        TProjectLoadDiagnostics diagnostics;
+        ASSERT_TRUE(rig.model->LoadComponent(&configuration,true,&diagnostics));
+        ASSERT_TRUE(diagnostics.errors.empty());
+        rig.model->SetGlobalTimeStep(frequency);
+        const auto marker=rig.model->OperationFailureSequence();
+        rig.model->Init();rig.model->Reset();
+        ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
+        rig.learner=rig.model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(rig.learner);
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(rig.source);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+        const auto adopted=rig.learner->AdoptNativeModel(declaration);
+        ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
         ASSERT_TRUE(rig.neuron->IsReady() && rig.neuron->IsInit());
-        ASSERT_FALSE(rig.neuron->HasOperationFailureSince(marker));
         const auto actual=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(actual);
         ASSERT_EQ(actual->GetCompClassName(),dormantImage);
-        Artifact(rig.name+"_after_channel_class_build.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
+        const auto configuredGraph=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
+        Artifact(rig.name+"_after_channel_class_build.json",QJsonDocument(configuredGraph).toJson());
+        ASSERT_TRUE(configuredGraph["valid"].toBool());
+        ASSERT_EQ(configuredGraph["model"].toObject()["bindings"],beforeClassChange["model"].toObject()["bindings"]);
+        const auto retained=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(retained);
+        ASSERT_DOUBLE_EQ(retained->Capacity.GetData(),1.41e-9);
     }
     NativeCapacitanceCorrection capacitance;
     if(withCapacitance)ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,capacitance));
