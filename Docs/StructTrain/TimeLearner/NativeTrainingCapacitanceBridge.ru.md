@@ -335,3 +335,16 @@ registry closure gap по actual H4 snapshot; это независимый от
 witness producer. Ни H4, ни новый140/26 integrated gate не считаются принятыми
 до полного runtime/independent анализа. ASan43 G3 проверяет прежний automatic
 owner, а не эти новые API/test changes.
+
+
+## Следующая приёмка объединяет old owner и новые metadata API
+
+Для corrected snapshot выбран integrated SDK183: binding6 +bridge/domain4 +
+130 pure production cases +прежние43 native ownership/transport/regression cases.
+Это проверяет взаимодействие новых Core changes с уже адресно проверенным
+automatic owner в одном SDK/runtime и одном storage process. Focused140 spec
+сохранён для адресной диагностики. Independent validation —52 declared tests:
+прежние26 native/transfer/dormant controls +новые26 bridge/domain/binding controls.
+Все inventory/fixture/package fingerprints должны пройти production validation.
+Допуски, модели, научная цель и алгоритм поиска ради gate не менялись.
+Это будущая проверка, не текущий PASS и не научная classification.
