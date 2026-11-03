@@ -143,6 +143,12 @@ def main(argv: list[str] | None = None) -> int:
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
+    study = commands.add_parser("n1-protocol-study", help="probe preregistered N1 thresholds across order/reset/quiet-tail conditions")
+    study.add_argument("action", choices=("prepare", "run", "analyze"))
+    study.add_argument("source", type=Path)
+    study.add_argument("--runtime-manifest", type=Path)
+    study.add_argument("--source-evidence")
+    study.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -451,6 +457,26 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, ImportError) as error:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "n1-protocol-study":
+        import tarfile
+        from .n1_protocol_robustness import prepare_study, run_study, audit_study
+        from .native_evidence import EvidenceError, require
+        try:
+            if args.action == "analyze":
+                require(args.runtime_manifest is None and args.source_evidence is None, "n1_study_analyze_has_no_runtime")
+                result = audit_study(args.source)
+                with args.output.open("x", encoding="utf-8") as stream:
+                    json.dump(result, stream, indent=2, allow_nan=False)
+                    stream.write("\n")
+            else:
+                require(args.runtime_manifest is not None and args.source_evidence is not None, "n1_study_requires_runtime_and_source")
+                result = (prepare_study if args.action == "prepare" else run_study)(
+                    args.source, args.runtime_manifest, args.output, args.source_evidence)
+            print(json.dumps(result, allow_nan=False)); return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError, tarfile.TarError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "analyze":
         from .native_evidence import EvidenceError
