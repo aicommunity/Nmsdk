@@ -1,5 +1,22 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Revision-bound C witnesses: реализация подготовлена, проверки в очереди03.11
+
+Rootfb772a354ff69568f97eada6303395cdb4247acd /Pulse
+e87139062cefb537e1ba73103ca68bcf5c2a00a0 содержит read-only physical witness API,
+version1 encoder, independent physical/registry auditor и CLI capacitance-witness.
+Таблица требует actual graph/C₀/storage каждого используемого revision, единые
+origin/policy и неизменные общие channel baselines. Добавлены native assertions
+и10 negative/positive reader controls; локально подтверждён только syntax.
+
+Elder H5 остаётся живым: в stdout145 завершённых successes, failure lines0,
+полный183/52 verdict ещё отсутствует. H6 queued4/18 проверяет provider snapshot,
+H7 queued4/28 проверяет encoder/registry. Каждый ждёт verified predecessor
+evidence и закрытия owners перед checkout/build. ASan43 G3 на M40 выполняется
+на прежнем owner snapshot, а не на новых API. Service dispatch/history summary3,
+C-search integration и полные исходные этапы остаются открытыми.
+[Immutable SHA, handles и scope](NativeTrainingCapacitanceBridge.ru.md).
+
 ## Normal owner43/readers26 принят адресно; новые API pending, 03.11
 
 Native43 root496a80d719 прошёл полностью. Исправленный reader-only gate26

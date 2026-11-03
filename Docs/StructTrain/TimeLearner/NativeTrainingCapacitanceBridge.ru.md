@@ -410,7 +410,7 @@ inspection. H6 pinned до этих изменений и не подтверж�
 
 H7 queued: sourcefb772a354ff69568f97eada6303395cdb4247acd,
 Pulsee87139062cefb537e1ba73103ca68bcf5c2a00a0. Elder supervisor413740/325039485,
-publisher413741 (start ticks уточнить по receipt), readbacks
+publisher413741/325039485 (проверены receipt и живой PID), readbacks
 s07-capacitance-witness-codec-normal-h7 и
 s07-capacitance-witness-codec-publication-normal-h7. Gate4 native/28 structured
 readers запускается только после verified H6 PASS4/18 и закрытия его owners;
