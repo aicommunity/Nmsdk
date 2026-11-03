@@ -144,3 +144,22 @@ B3 сохранил старую разметку изолированной uni
 и Tests/Integration/Libraries; source/test файлы целиком берутся из Git.
 Ещё один conditional GTest assertion observation fixture получает явные
 braces без изменения смысла. Native sources/runtimes текущих jobs не меняются.
+
+Unit B5 завершён на root `0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d`,
+Pulse `9d95f05790b04a4505541d398fd039fa56e6a65f`:130/130 normal и130/130 ASan.
+Proofs `8214f20625b5287d72f388f7f7005e86eabfd59f` и
+`88e96182c184b242e2185eeca76a095c8666e294`; каждый архив13 members,
+13 692/13 136 compressed bytes. Проверены outer/member hashes и соответствие
+всех24 production/test files Git sources. Actual loader init libasan и
+неизменность active source_closure подтверждены. Это pure controller/state/
+observation/final-gate unit scope, не native adapter или рабочий C-trim On.
+B1–B4 build failures сохранены отдельно с0 выполненных численных tests;
+все8 members каждого отрицательного архива проверены. B4 исправляет copy
+range element в прежнем observation test, не меняя численных условий.
+
+Следующая native работа должна сначала разобрать открытый prerequisite:
+normal owner transport39/43 прошёл, четыре dormant fixtures не восстановили
+граф после смены channel class/Build (model.bindings.size). До dormant export
+они не дошли. После диагностики остаются NativeTrainingService/Bindings,
+versioned codecs/readers и собственно bounded C search. В develop эта feature
+не принята; общий план0–12 не завершён.
