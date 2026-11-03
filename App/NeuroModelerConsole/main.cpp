@@ -240,8 +240,40 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
      name = qgetenv("USERNAME");
  default_user_name = name.toLocal8Bit().constData();
 
+ QString eventLogDirectory=QCoreApplication::applicationDirPath()+"/EventsLog/";
+ if(nativeJob)
+ {
+  const auto logConfigurationError=[](const char* reason) {
+   std::cerr<<QJsonDocument(QJsonObject{{"kind","timelearner_native_configuration_error"},{"schema_version",1},
+       {"execution","not_started"},{"validity","invalid_config"},{"reason",reason},
+       {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson(QJsonDocument::Compact).constData()<<std::endl;
+   return 2;
+  };
+  const QFileInfo outputInfo(QDir::cleanPath(QFileInfo(parser.value(timeLearnerOutputOption).trimmed()).absoluteFilePath()));
+  const QString parent=outputInfo.absoluteDir().canonicalPath();
+  const QString runtime=QFileInfo(QCoreApplication::applicationDirPath()).canonicalFilePath();
+  const QString relative=QDir(runtime).relativeFilePath(parent);
+  const bool insideRuntime=relative=="." || (!QDir::isAbsolutePath(relative) && relative!=".." && !relative.startsWith("../"));
+  eventLogDirectory=outputInfo.absoluteFilePath()+".events-log";
+  const QFileInfo logInfo(eventLogDirectory);
+  // Native output is new and immutable. Keep startup logs alongside that
+  // operation, without pre-creating its native result directory or touching
+  // the executable/resources. Refuse reuse before logger initialization.
+  if(parent.isEmpty() || runtime.isEmpty() || insideRuntime || outputInfo.fileName().isEmpty() ||
+     outputInfo.exists() || outputInfo.isSymLink() || logInfo.exists() || logInfo.isSymLink())
+  {
+   return logConfigurationError("invalid_native_output_or_event_log_path");
+  }
+  UIniFile<char> settings;
+  if(!settings.LoadFromFile(applicationIni.toLocal8Bit().constData()) ||
+     !settings("Log","Dir","").empty() || !settings("Log","FixedLogPath","").empty())
+  {
+   return logConfigurationError("native_event_log_ini_override_not_allowed");
+  }
+ }
+
  int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), applicationIni.toLocal8Bit().constData(),
-               (QCoreApplication::applicationDirPath()+"/EventsLog/").toLocal8Bit().constData(), default_user_name,
+               eventLogDirectory.toLocal8Bit().constData(), default_user_name,
                forwardedArgc, forwardedArgv);
 
  if(init_res != 0)

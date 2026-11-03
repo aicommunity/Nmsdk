@@ -168,3 +168,23 @@ reader без adapter должен отказать; explicit adapter долже
 подмены Exact, числа primary trials и версии аудитора должны отказать.
 Подготовительный ModelSpec transport suite проверяет это до нового Train.
 См. InitialThresholdConstruction.ru.md: область пока feature, не весь stage3.
+
+## Изоляция служебных логов native Console
+
+Проверка полного production переноса выявила запись bootstrap INFO logs в
+runtime/EventsLog. Хотя четыре цепочки и reader checks проходят, полная
+побайтная неизменность runtime при этом не подтверждается. Исходный guard
+не переобъявляется успешным. Надо отдельно классифицировать все отличия и
+проверить неизменность executable/libraries/resources, сохранив исходный пакет.
+
+Подготовлено исправление Console: для native операций event log destination
+равен OUTPUT.events-log, рядом с новым native output и вне executable runtime.
+Сам native output до job runner не создаётся. Повторное использование output
+или event-log sibling отвергается до AppCore.Init и не дописывает старый лог.
+Runtime-parent output запрещён. Application ini должен оставлять Log/Dir и
+Log/FixedLogPath пустыми, иначе штатный Rdk приоритет INI перекроет per-job
+destination; такой native config получает явную invalid_config диагностику.
+Обычные project/inspection Console modes сохраняют прежний logging default.
+Rdk lifecycle и алгоритмы обучения не меняются. Это изменение пока требует
+серверной сборки и проверки реального immutable runtime, новых event logs и
+отрицательных запусков; до этого общий runtime gate остаётся открытым.
