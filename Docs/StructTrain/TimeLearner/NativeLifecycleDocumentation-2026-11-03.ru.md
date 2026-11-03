@@ -24,3 +24,27 @@ Root closure сохраняет Pulse develop5a525657 и Bin develop39d811e5, м
 Rdk на указанный docs merge. Automatic C₀ owner и bounded C search остаются
 отдельными ещё не принятыми feature-ветками. Полностью завершён только этап0;
 полная lifecycle/storage/physics матрица и общая реализация плана остаются открыты.
+
+## Дополнение: связи и присваивания также входят в lifecycle
+
+Rdk merge `acc3de8d1af2480d61ddb723c3288f7e81003049` дополняет тот же канонический
+документ. Источниками проверены UItem.Connect/DisconnectAll и
+UConnector.ConnectToItem: операции связей вызывают Build. В частности,
+LoadComponent(links=true) → SetComponentInternalLinks → BreakLinks →
+DisconnectAll может запустить структурный owner до возврата из Load.
+
+Diagnostic proof `38cf86675497e9d7ca441467b51393fc03f1baff` (99 members,
+106 654 bytes, все hashes проверены) фиксирует первую потерю custom channel
+class и retained C уже в after_load, до явных frequency/Build/Init/adoption.
+Его четыре FAIL являются диагностикой setup, а не итогом проверки dormant
+export или научного обучения. Исправленный setup ещё принимается в отдельной
+ветке; документация не выдаёт ему PASS.
+
+Уточнена также семантика UProperty.h: равное локальное SetData при включённом
+CheckEqualsFlag не вызывает setter; connected input не принимает такое
+присваивание, ExternalDataSource перенаправляет его источнику. Это объясняет,
+почему self-assignment не является штатной командой rebuild. Для факторов
+эксперимента и структурной настройки требуется effective readback.
+
+Этот дополнительный diff Rdk затрагивает только NativeLifecycle.md. Core/Deploy
+SHA выше неизменны, новые численные/ASan результаты ему не приписываются.
