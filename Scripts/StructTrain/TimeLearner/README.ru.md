@@ -12,8 +12,11 @@
 подбора порога; не independent Test. [Протокол и ограничения](../../../Docs/StructTrain/TimeLearner/N1ProtocolRobustness.ru.md).
 Для `run SOURCE_BUNDLE --runtime-manifest ORIGINAL_RUNTIME.json --source-evidence FULL_SHA --output NEW_DIRECTORY`
 обязательны исходный runtime и полный Git SHA доказательства. `analyze STUDY --output NEW.json`
-повторно проверяет полные данные и пересчитывает метрики. Серверная приёмка этой
-новой серии пока не завершена; запуск не означает успешный scientific verdict.
+повторно проверяет полные данные и пересчитывает метрики. Серия завершена:
+528 полных проб и5/5 readers; временные отчёты для792 пар и3/3 report readers.
+Выбранные28 PNG непосредственно просмотрены; полный ручной просмотр кэша не заявлен.
+Это изменённый двухвходовый профиль с LT-мембраной, не stock-модель августа.
+Нулевого FP при target hit не получено; научные ограничения приведены в протоколе.
 `report STUDY --output NEW_CACHE` строит все временные графики сом и фактических
 входных импульсов, overview/zoom и общее оглавление условий; полный cache хранится на M40.
 
