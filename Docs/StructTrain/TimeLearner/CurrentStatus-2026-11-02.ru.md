@@ -1,3 +1,23 @@
+# Визуальный подэтап03.11: coverage32/48 и direct review16
+
+R1 native15/15 ASan и readers16/16; Visual-v3 render/readers11/11, полные
+32 probes/48 trial-soma pairs. Все107 members visual evidence независимо
+сверены; source hashes привязаны к точному renderer Gitroot. В Git сохранены
+16 selected original PNG (2.48MB) с packet/CSV/PDF hashes; все16 просмотрены
+непосредственно. Полный PNG/SVG/PDF cache остаётся на M40 Data.
+[QA и границы](CapacitanceRegionVisualQA-2026-11-03.json), [контракт](CapacitanceRegions.ru.md).
+Это контрольный C-region corpus; новая полная classification series ещё нужна.
+
+H12 normal full213/readers87 выполняется. Для ASan того же ownership исправления
+подготовлен root5c9b92350ee48d130d954bf10bf9521251f99e4e/Pulse54516bcc.
+H13 остановился до configure/build: на M40 system GTest, поэтому отсутствует
+предполагавшийся _deps Git checkout. Failure receipt4dd0db8869fd061f291f3b5b2d9bd79c2cf6c517
+сохранён. H14 использует новый private Git GTest точной project-declared
+release-1.12.1 (58d77fa8070e8cec2dc1ed015d66b454c8d78850), system find отключён;
+configure прошёл, ASan build выполняется. Declaration target6/full213/readers87,
+не результат. J2 schema4 normal также строится в своём отдельном source/runtime.
+Ни эти задания, ни визуальная приёмка не закрывают полный план0–12.
+
 # Срез03.11: принята миграция Reports, новые runtime evidence
 
 В develop49946c54da6f0573afca139e3b6de4c2cf50e650 принят адресный retirement
