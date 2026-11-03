@@ -79,6 +79,24 @@ assertions остаются. Нового результата пока нет. 
 канала при повторной сборке самого NPulseNeuron требуют отдельной проверки,
 а не предполагаются исправленными этим setup-переходом.
 
+## E7: явный граф сохранён, остановка находится при экспорте configuration
+
+Proof `28a02ecc3a81dca17b14065c278ac6cc512bd7c8` проверен полностью:
+171 members/243 551 bytes. Во всех4 случаях mode0 → native adoption → mode1
+сохраняет требуемые class/C и весь список bindings. Native shrink и dormant
+scale1.1 также прошли. Сохранены learned summaries: actual/accepted L=(1,1),
+Rs=86MΩ, Ns=(1,1), applied_edits=0 и fresh certificate при явно заданной .2.
+Это транспортный контроль, а не сходимость при default .02 или классификация.
+
+Ошибка invalid_configured_native_bounds возникает при export: immutable
+ModelSpec описывает исходную длину2, а fixture зафиксировал search-domain в1
+после ручного shrink. Export validator обоснованно отклоняет такой config.
+E8 сохраняет штатный ограниченный length-domain [1,2], включающий исходную
+декларацию и фактический warm state; Ns/Rs остаются фиксированы. После Train
+явно требуется отсутствие Dendrite1_2, поэтому рост не может незаметно убрать
+проверку dormant image. Не меняются references, исходная C₀, tolerances,
+критерий сертификата или serializer validator. Export/import ещё не принят.
+
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
 Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.

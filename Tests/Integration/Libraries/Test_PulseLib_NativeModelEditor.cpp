@@ -2982,9 +2982,13 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(withDormantCapacitance)
         for(auto& bound:plan.search.bounds)
         {
-            // Transport control on declared fixed geometry at explicit .2
-            // tolerance; not a new convergence claim at the default .02.
-            bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;
+            // The immutable model declaration starts at L=2, while this
+            // transport begins after an explicit shrink to L=1. Preserve
+            // TrainingPlan's bounded [1,2] length domain so both the original
+            // declaration and the actual warm state remain representable.
+            // Ns/Rs stay fixed; the final missing-node assertion below proves
+            // this transfer still exercises a genuinely dormant image.
+            bound.maximumSynapses=bound.minimumSynapses;
             bound.maximumResistance=bound.minimumResistance;
         }
     if(inputs>2)
@@ -3027,6 +3031,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     }
     else ASSERT_TRUE(service.Certificate())<<service.Reason();
     if(sync==.2 && inputs==2 && n0Repeats==1)EXPECT_TRUE(service.Certificate()->Exact());
+    if(withDormantCapacitance)ASSERT_FALSE(rig.neuron->GetComponentL("Dendrite1_2",true));
     ASSERT_EQ(service.ReferencePackets().size(),inputs);ASSERT_EQ(service.FinalPackets().size(),inputs);
     for(const auto& packet:service.ReferencePackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
     for(const auto& packet:service.FinalPackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
