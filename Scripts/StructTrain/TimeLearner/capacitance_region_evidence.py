@@ -88,11 +88,15 @@ def _audit(record, root):
             'scientific_verdict': None, 'training_certificate_verified': False}
 
 
-def audit_capacitance_region(path):
-    path = Path(path).resolve(strict=True)
+def audit_capacitance_region_record(record, root):
     try:
-        return _audit(load(path), path.parent)
+        return _audit(record, Path(root))
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, OverflowError) as error:
         raise EvidenceError('malformed_capacitance_region:'+str(error)) from error
+
+
+def audit_capacitance_region(path):
+    path = Path(path).resolve(strict=True)
+    return audit_capacitance_region_record(load(path), path.parent)
