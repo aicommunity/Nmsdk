@@ -1262,6 +1262,38 @@ template<class Learner> NativeTrainingPlan TrainingPlan(EditingRig<Learner>& rig
     return plan;
 }
 
+template<class Learner> void NativeCapacitanceBindingReferenceGuard()
+{
+    EditingRig<Learner> rig(2000,1,"binding_reference_guard",false,2,true);
+    auto plan=TrainingPlan(rig);RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned ticks=0;!rig.learner->NativeTrainingController().References();++ticks)
+    {
+        ASSERT_LT(ticks,10000u)<<rig.learner->NativeTrainingController().Reason();
+        ASSERT_NE(rig.learner->NativeTrainingController().State(),NativeTrainingState::Finished);
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+    }
+    rig.learner->IsNeedToTrain=false;
+    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+    rig.learner->Reset();const auto& service=rig.learner->NativeTrainingController();
+    EXPECT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_TRUE(service.References());
+    ASSERT_TRUE(rig.learner->OwnedNativeCapacitanceState().isEmpty());
+    const auto before=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);const auto life=rig.neuron->ObserveLifecycle();
+    std::string reason;
+    try{rig.learner->BindNativeTrainingCapacitance(.2);ADD_FAILURE()<<"references must not be rebased by metadata binding";}
+    catch(const std::exception& error){reason=error.what();}
+    EXPECT_EQ(reason,"training_capacitance_binding_requires_initial_model_boundary");
+    EXPECT_TRUE(rig.learner->OwnedNativeCapacitanceState().isEmpty());EXPECT_FALSE(rig.learner->ReadNativeTrainingCapacitance());
+    const auto after=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);EXPECT_EQ(before,after);EXPECT_TRUE(life.IsCurrent());
+    QJsonArray packets;for(const auto& p:service.ReferencePackets())packets.append(EncodeNativeProbeEvidence(p));
+    Artifact(rig.name+"_reference_guard.json",QJsonDocument(QJsonObject{{"kind","native_capacitance_binding_reference_guard"},
+        {"schema_version",1},{"branch",rig.branch},{"reason",QString::fromStdString(reason)},
+        {"before_model",before},{"after_model",after},{"reference_packets",packets},
+        {"owner_state",rig.learner->OwnedNativeCapacitanceState()},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativeTrainingCapacitanceBinding,ClassicRetainedReferencesCannotBeRebased){NativeCapacitanceBindingReferenceGuard<NNeuronTimeLearner>();}
+TEST(NativeTrainingCapacitanceBinding,BranchRetainedReferencesCannotBeRebased){NativeCapacitanceBindingReferenceGuard<NNeuronTimeLearnerBranch>();}
+
 template<class Learner> void NativeJointCapacitanceCandidate(int normalization,bool fault=false)
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();

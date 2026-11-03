@@ -8,7 +8,8 @@ import sys
 import unittest
 
 from ..capacitance_binding_evidence import audit_capacitance_binding
-from ..native_evidence import EvidenceError, load
+from ..model_identity import canonical_model_sha256
+from ..native_evidence import EvidenceError, audit_probe, load
 
 
 class CapacitanceBindingEvidenceTest(unittest.TestCase):
@@ -77,6 +78,26 @@ class CapacitanceBindingEvidenceTest(unittest.TestCase):
                 record['phases'][0]['native_state'] = copy.deepcopy(record['phases'][1]['native_state'])
                 with self.assertRaisesRegex(EvidenceError, '^fabricated_unbound_capacitance_binding$'):
                     audit_capacitance_binding(record)
+
+    def test_actual_retained_references_block_first_binding(self):
+        root = Path(os.environ['TIMELEARNER_TRAINING_CAPACITANCE_BRIDGE_DIR'])
+        guards = [load(p) for p in sorted(root.glob('*_binding_reference_guard_reference_guard.json'))]
+        self.assertEqual(len(guards), 2)
+        self.assertEqual({g['branch'] for g in guards}, {False, True})
+        for guard in guards:
+            with self.subTest(branch=guard['branch']):
+                self.assertEqual(guard['kind'], 'native_capacitance_binding_reference_guard')
+                self.assertEqual(guard['reason'], 'training_capacitance_binding_requires_initial_model_boundary')
+                self.assertEqual(guard['owner_state'], {})
+                self.assertEqual(guard['before_model'], guard['after_model'])
+                identity = guard['before_model']
+                self.assertEqual(identity['sha256'], canonical_model_sha256(identity['model']))
+                packets = guard['reference_packets']; self.assertEqual(len(packets), 2)
+                audits = [audit_probe(packet) for packet in packets]
+                self.assertTrue(all(a['valid_observation'] for a in audits))
+                self.assertEqual(len({a['trial_id'] for a in audits}), 2)
+                self.assertTrue(all(p['current_base_revision'] == identity['sha256'] for p in packets))
+                self.assertIsNone(guard['scientific_verdict'])
 
 
 if __name__ == '__main__': unittest.main()

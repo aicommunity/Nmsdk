@@ -260,3 +260,17 @@ SDK gate binding-regression содержит138 случаев (предыдущ
 затем ASan. Эти изменения ещё не собирались/исполнялись, PASS отсутствует.
 После этого всё ещё нужны service/adapters, полные физические witnesses истории,
 summary schema3/readers, C-search policy и измеряемые действия поиска.
+
+
+## Дополнительная граница references → Reset → first bind
+
+Добавлены2 native случая Classic/Branch N1: штатный scheduler собирает реальные
+reference packets; external stop не объявляется сходимостью, затем Reset learner
+сохраняет references. First C₀ bind после этого обязан отказать с конкретной
+причиной initial_model_boundary и не менять graph/owner/lifecycle. Independent
+reader проверяет оба actual reference packets, их уникальные IDs, revision и
+неизменность graph. Это дополняет4 initial unit-bind/trim fixtures.
+
+Текущий binding SDK inventory —140 (134+6), structured readers23
+(bridge8+domain8+binding7); предыдущие138/22 в журнале относятся к подготовке
+до добавления retained-reference guards. Все новые случаи ещё pending runtime.
