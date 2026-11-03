@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -129,6 +130,12 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    controller_ab = commands.add_parser("controller-ab", help="compare pinned pure controller kernels on a Linux worker")
+    controller_ab.add_argument("specification", type=Path)
+    controller_ab.add_argument("--root-repository", type=Path, required=True)
+    controller_ab.add_argument("--pulselib-repository", type=Path, required=True)
+    controller_ab.add_argument("--compiler", type=Path, required=True)
+    controller_ab.add_argument("--output", type=Path, required=True)
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
@@ -258,6 +265,18 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"kind": "timelearner_legacy_completed_replay_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command == "controller-ab":
+        from .native_evidence import EvidenceError
+        from .controller_ab import run_controller_ab
+        try:
+            result = run_controller_ab(args.specification, args.root_repository, args.pulselib_repository,
+                                       args.compiler, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result['assertion_status'] == 'passed' else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
+            print(json.dumps({'kind': 'timelearner_controller_ab_error', 'reason': str(error),
+                              'scientific_verdict': None}), file=sys.stderr)
             return 2
     if args.command == "native-gate":
         from .native_evidence import EvidenceError
