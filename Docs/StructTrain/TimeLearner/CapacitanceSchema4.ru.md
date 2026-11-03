@@ -36,3 +36,16 @@ configured Start. Он исправляется и принимается изо
 Остаются normal/ASan, полнота визуальных отчётов, fresh Git closure, measured C
 comparison scope/refinement, все production modes/physics и исходные эксперименты.
 Schema4 не обещает mid-probe динамический или точный search-cursor checkpoint.
+
+
+## Первый native запуск J1: обнаружен дефект test-target inventory
+
+На root90798f2c4e648483eaa7718189956d211bde7ff2 обе сборки завершились;
+четыре actual codec tests прошли, boundary/activation ещё выполняются.
+GTest сообщает16 native tests вместо заявленных27: файл
+Test_PulseLib_CapacitanceContexts.cpp ранее проверялся отдельным production
+kernel builder, но не был добавлен в CMake target Test_PulseLib_StorageComponents.
+Исправление включает этот original test source в штатный target. Проверка
+инвентаря не ослабляется; текущий J1 не может получить положительную приёмку
+27-case gate даже при успехе всех16 actual native cases. Его результат и причина
+будут сохранены; повторная проверка требует завершения owners и нового runtime.
