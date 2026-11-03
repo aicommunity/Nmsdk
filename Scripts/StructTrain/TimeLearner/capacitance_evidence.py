@@ -188,7 +188,7 @@ def audit_package_capacitance(package):
     """Schema 1 carries no C0 provenance; do not invent an untrimmed baseline."""
     try:
         version = package['schema_version']
-        require(type(version) is int and version in (1, 2), 'unknown_capacitance_package_schema')
+        require(type(version) is int and version in (1, 2, 3), 'unknown_capacitance_package_schema')
         if version == 1:
             require('capacitance_state' not in package, 'unversioned_capacitance_state')
             return None

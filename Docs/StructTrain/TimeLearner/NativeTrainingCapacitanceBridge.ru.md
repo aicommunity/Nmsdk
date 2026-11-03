@@ -471,3 +471,35 @@ H7 проверяет прежнюю revision-keyed registry утилиту; е�
 
 При последнем poll H5 live155 завершённых successes/0 failure lines, M40 ASanG3
 live7/0. Это промежуточный stdout, не финальный expected inventory/verdict.
+
+
+### Уточнение после восстановления VPN, 2026-11-03
+
+H5: native183/183 PASS сохранён в60bc2936916ef00059278bd196a553a4c3b6b8f7.
+Два reader errors происходили из отсутствия переданного CSV при наличии primary
+файлов. Исправленный reader source c364899db6c553c247399c06df3130a9d6baf370
+проверен отдельно:52/52 PASS, combined evidence
+9cf5aaa6c67678f0bab5d3ce35800e17f064c55d. Исходный failed verdict не переписан.
+H6/H7/H8 остановились на prerequisite; numerical checks не запускались.
+H8b/H8c завершились compile failures, сохранёнными в3731817db28d5cd7fef608896fbe8e6d87173f7f
+и78eb539b9284ef5e5bcdd9b492ad625b63591c7c; исправлены include и native pointer view.
+
+Актуальный H8d: root ff2451a9936afaf712386edcd5013ad91784dd10,
+Pulse1e62f4d3aedba4ff8a456af0c592aaa7b53fd776. Обе цели успешно собраны.
+Supervisor506379/start_ticks325840639, native CLI510768/325871989 живы при poll.
+В промежуточном stdout130 successes и один завершённый failure: test ожидал
+invalid_argument от изменённой live C, фактически владелец сообщил runtime_error
+capacitance_state_does_not_match_model. Следующий case сообщает то же несовпадение.
+Кандидат test теперь требует runtime_error с точным диагностическим текстом и
+по-прежнему проверяет неизменность графа/lifecycle. Текущий run не перезапущен.
+M40 ASanG3 также жив:15 завершённых successes, длительные20kHz cases ещё идут.
+Это промежуточные наблюдения, не финальная приёмка197/75 либо43/26.
+
+Подготовлен следующий кандидат portable boundary/configuration schema3.
+Он сохраняет C₀/current witnesses и trial bindings через model import/export,
+не обещает checkpoint посреди пробы/поиска, проверяет реальную C/C₀-физику, а не
+только digest. Добавлены12 native controls и12 readers; новый declared gate209.
+Python readers version4 отличает эту семантику от прежних отчётов.
+Проверены только AST Python, уникальность inventory и whitespace diff локально;
+серверная сборка/проверка кандидата ещё не выполнена. C-search On, полная матрица
+режимов и остальные открытые пункты исходного плана остаются обязательными.
