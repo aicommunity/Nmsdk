@@ -27,7 +27,20 @@ class CapacitanceEvidenceTest(unittest.TestCase):
         cls.cases = [(p, v) for p, v in cls.completed+cls.stopped if v['schema_version'] == 2]
         cls.recognition = [p for p in sorted(root.glob('*_owner_recognition_state.json'))
                            if load(p)['source_solo']['schema_version'] == 2]
-        extra = 4 if os.environ.get('TIMELEARNER_CAPACITANCE_DORMANT_CONTROLS') == '1' else 0
+        declaration = load(root.parent/'specification.json')
+        expected = declaration.get('expected_test_ids')
+        if (declaration.get('kind') != 'timelearner_native_test_gate'
+                or type(declaration.get('schema_version')) is not int or declaration['schema_version'] not in (1, 2)
+                or type(expected) is not list or not all(type(n) is str for n in expected)
+                or len(set(expected)) != len(expected)):
+            raise RuntimeError('requires the explicit native test declaration for this immutable artifact set')
+        dormant = {'NativeDormantCapacitanceTransport/'+name for name in ('ClassicN0', 'ClassicN1', 'BranchN0', 'BranchN1')}
+        declared_dormant = set(expected) & dormant
+        if declared_dormant and declared_dormant != dormant:
+            raise RuntimeError('requires all four declared dormant transport controls')
+        # Bind the expected package set to the job declaration, not an ambient
+        # environment switch or whichever files happen to be present.
+        extra = 4 if declared_dormant else 0
         if len(cls.cases) != 8+extra or sum(v['kind'] == 'timelearner_completed_state' for _, v in cls.cases) != 6+extra:
             raise RuntimeError('requires the declared completed/stopped native C0 inventory, including optional dormant4 controls')
         if len(cls.recognition) != 2: raise RuntimeError('requires identity and scaled C0 recognition controls')
@@ -65,8 +78,27 @@ class CapacitanceEvidenceTest(unittest.TestCase):
     def test_rebased_C0_rejected_despite_new_envelope_digests(self):
         self.reject(lambda p, s, b: b['channels'].__setitem__('Dendrite1_2.ExcChannel', .9e-9*1.1))
 
-    def test_missing_effective_scale(self):
-        self.reject(lambda p, s, b: s.__setitem__('membrane_scales', {'Dendrite1_1': 1.}))
+    def test_missing_nonunit_scale(self):
+        for path, original in self.cases:
+            with self.subTest(path=path.name):
+                package = copy.deepcopy(original); state = package['capacitance_state']
+                # Unit entries may be implicit in the native parameter codec.
+                # Removing them does not lose a correction. In the dormant
+                # fixtures the learned1.1 is absent from the active map entirely.
+                active = [p for p, value in state['membrane_scales'].items() if value != 1.]
+                if active:
+                    del state['membrane_scales'][active[0]]
+                    reason = 'incomplete_or_changed_capacitance_scales'
+                else:
+                    dormant = state.get('dormant_membrane_scales', {})
+                    nonunit = [p for p, value in dormant.items() if value != 1.]
+                    self.assertEqual(len(dormant), 1, 'this control requires the declared single dormant correction')
+                    self.assertEqual(len(nonunit), 1)
+                    del dormant[nonunit[0]]
+                    reason = 'invalid_dormant_capacitance_scales'
+                resign(state); resign(package)
+                with self.assertRaisesRegex(EvidenceError, '^'+reason+'$'):
+                    audit_package_capacitance(package)
 
     def test_changed_effective_scale(self):
         self.reject(lambda p, s, b: s['membrane_scales'].__setitem__('Dendrite1_2', 1.2))
