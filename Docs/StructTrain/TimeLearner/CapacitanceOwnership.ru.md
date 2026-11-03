@@ -168,10 +168,39 @@ native success. Результат пока pending, publisher ждёт закр
 M40 queued C2 (2467199/2467200, start_ticks273833678) отменён до fetch/checkout/
 runtime changes ради измеренного ASan budget; cancellation receipts копируются
 в C3 primary. Работающие source/build/runtime нельзя переключать вручную.
-После успеха ещё нужны regression47, transport/legacy readers и временные
+После успеха ещё нужны transport/legacy regressions и временные
 отчёты с прямой visual QA. Общая цель и этапы4/5/6/7/11 не завершены.
 
 Изменения выполняются в codex/timelearner-capacitance-owner от принятого develop;
 server jobs не должны вытеснять текущую invalid-reload проверку. После адресной
 приёмки — --no-ff merge Pulse develop, затем root с точным gitlink. Полные
 этапы4/5/6/7 и исходная цель остаются частичными.
+
+## Уточнённая проверка автоматического export и dormant import
+
+Существующие completed/stopped fixtures теперь передают в same/fresh-process
+import результат ExportNativeLearnedState без correction аргумента. Явный
+export сохраняется как compatibility control: C₀ state, configuration, trained
+inputs, полный semantic graph identity и image fingerprints должны совпасть.
+Incidental XML State bytes не используются как подмена физического равенства.
+
+Четыре NativeDormantCapacitanceTransport cases (Classic/Branch × N0/N1 при2k)
+создают приватный проверенный образ канала через RegisterClassImage и native
+структурную настройку мембраны. После удаления его последнего живого сегмента
+имя образа сохраняется только в исходной C₀. Training при явно фиксированной
+геометрии и sync=.2 нужен как completed transport boundary, а не новый научный
+результат. Автоматический export обязан сохранить dormant scale и неиспользуемое
+определение образа; same/fresh-process import обязан сохранить фактический граф,
+состояние и полный stimulus/soma response. Parent overrides и post-Take Default
+не добавлены.
+
+Общий контракт51 объединяет ownership8 и43 сопряжённых проверок. После уже
+пройденного ownership8 используется отдельный transport-regression43: не надо
+повторять дорогие неизменённые8 owner cases лишь из-за правки transport fixture.
+43 включают прежние39 уникальных explicit/joint/boundary cases и4 dormant cases.
+Capacitance readers получают явный TIMELEARNER_CAPACITANCE_DORMANT_CONTROLS=1:
+тогда обязательны10 completed+2 stopped C₀ packages, а не прежние6+2. Отдельный
+reader требует4 реально dormant packages и проверяет отсутствие их образа в
+живых nodes при наличии определения в archive. Без флага старый inventory
+остаётся строгим; пропущенные новые cases не превращаются в PASS.
+Это пока постановка адресной проверки, не полученный runtime-результат.
