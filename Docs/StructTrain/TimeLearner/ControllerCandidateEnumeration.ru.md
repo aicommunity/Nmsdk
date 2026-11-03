@@ -83,3 +83,24 @@ Classic/Branch N0/N1 automatic service и capacitance bridge с H9b baseline.
 Receipt сохраняет все имена/hashes и любое различие запрещает приёмку. Текущий
 H10 ещё не запускал сборку; дополнительные неучтённые сбои baseline останавливают
 переход. До native/ASan приёмки изменения не объединяются в develop.
+
+
+## Независимый native A/B после исправления владения explicit probe
+
+Прежний H10 отказался от сборки из-за неуспешного baseline H9b; поздний H11
+сохранил два explicit-probe ownership failures. Теперь baseline — точный H12
+rootfd8a10b02797ceace0eb87e0d9de4e36bd1e9e62/Pulse54516bcc0aa7b0437c68f818598a19788e20eb55.
+Кандидат Pulse5fed73a0379d5599656e40f58e0600469d43f28c включает тот же guard
+через --no-ff merge. Все Core files кроме BoundedTraining.cpp/.h побайтно
+совпадают. Два оставшихся файла содержат только grouping enumeration state
+в CandidateCursor; новые C-context algorithms/schema4/region helper отсутствуют.
+
+Корневой кандидат включает те же четыре ownership tests и остальные native
+fixtures; declaration213 сохраняет parity с H12. Pure A/B specification тоже
+привязана к точному H12 root; прежний130/130 A4 corpus не переименовывается
+в проверку нового native runtime. Следующий worker должен дождаться успешных
+H12 full213/readers87 и закрытия owners, затем проверить candidate native213,
+independent readers104 (87 +17 existing diagnostic/certificate controls) и
+точное совпадение имён/SHA256 объявленных детерминированных primary CSV с H12.
+Любой failure baseline или waveform mismatch запрещает приёмку. ASan и fresh
+closure остаются самостоятельными условиями; весь исходный этап6 не закрыт.
