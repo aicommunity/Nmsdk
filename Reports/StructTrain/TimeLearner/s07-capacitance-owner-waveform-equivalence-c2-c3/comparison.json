@@ -1,0 +1,893 @@
+{
+  "kind": "timelearner_native_capacitance_trace_comparison",
+  "schema_version": 1,
+  "sources": [
+    {
+      "commit": "a928fb92edd0880728a697da0fed6d7ede3e7d4a",
+      "root": "3a1b7fe1f0a2a958d034736613f2793abe16c5ec",
+      "report_path": "Reports/StructTrain/TimeLearner/s07-capacitance-owner-current-normal-c2/",
+      "archive_sha256": "b849830828db032eaf55332b9122ed5f07886cfd2a32a86b3825e39d23866293",
+      "members_verified": 259,
+      "trace_count": 48
+    },
+    {
+      "commit": "d7cace1f5f9f62385b97281d0d1f48770e7153fd",
+      "root": "eab5e61c2c246d15dcf28ba03454b8ae44b1f6c2",
+      "report_path": "Reports/StructTrain/TimeLearner/s07-capacitance-owner-current-asan-c3/",
+      "archive_sha256": "fd6a9588d5ff89bed6fd518226f4af908dce5740589ed0f587441f78b472ea73",
+      "members_verified": 261,
+      "trace_count": 48
+    }
+  ],
+  "trace_count": 48,
+  "all_csv_byte_identical": true,
+  "rows": 95088,
+  "traces": [
+    {
+      "path": "gate/native-result/native/Branch_20000_N0_capacitance_owner_probe_10.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "a81b8aecf3a3b4cff231d870011c1befd5ff5074031988f55525921dfebaa2fb",
+      "asan_sha256": "a81b8aecf3a3b4cff231d870011c1befd5ff5074031988f55525921dfebaa2fb",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N0_capacitance_owner_probe_12.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "5366a174e3d7531d4eca0e58933bcc657f802be2214e948e960a6fda014557e9",
+      "asan_sha256": "5366a174e3d7531d4eca0e58933bcc657f802be2214e948e960a6fda014557e9",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N0_capacitance_owner_probe_2.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "18ed655c5e132e871806cee5188b7c01d6d146dec2658e5da2f59a152b017e0f",
+      "asan_sha256": "18ed655c5e132e871806cee5188b7c01d6d146dec2658e5da2f59a152b017e0f",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N0_capacitance_owner_probe_4.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "2ebee89f9eb0cc29deeb3553eb31e56dac5748f9750405dde3faac6cd0bf2db6",
+      "asan_sha256": "2ebee89f9eb0cc29deeb3553eb31e56dac5748f9750405dde3faac6cd0bf2db6",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N0_capacitance_owner_probe_6.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "fa1b7bb30f92aa9207efd194b111ebb7171f8eca1bb3ea52154037a96df0cdd0",
+      "asan_sha256": "fa1b7bb30f92aa9207efd194b111ebb7171f8eca1bb3ea52154037a96df0cdd0",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N0_capacitance_owner_probe_8.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "2add1ce793679d6d51151b24c21a51ada5327992949be64a1127250a74695903",
+      "asan_sha256": "2add1ce793679d6d51151b24c21a51ada5327992949be64a1127250a74695903",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N1_capacitance_owner_probe_10.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "12f95b98858efa0495edb4dfee7a11f9418b5fb44c8d5dfd303985f5c31cbef1",
+      "asan_sha256": "12f95b98858efa0495edb4dfee7a11f9418b5fb44c8d5dfd303985f5c31cbef1",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N1_capacitance_owner_probe_12.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "88afdb80640a389ab14976b4e9436c7b3d1a6f78a0ae6a3fed60550eb0fc0f83",
+      "asan_sha256": "88afdb80640a389ab14976b4e9436c7b3d1a6f78a0ae6a3fed60550eb0fc0f83",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N1_capacitance_owner_probe_2.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "44c0457cf7cf2705a8158da27ec8392ca9d27aa4011e47982da9139ffccf3bc9",
+      "asan_sha256": "44c0457cf7cf2705a8158da27ec8392ca9d27aa4011e47982da9139ffccf3bc9",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N1_capacitance_owner_probe_4.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "b9b71c1a291e5176711c555fc031c62f7360bce3beda8f0dc8481982485a3511",
+      "asan_sha256": "b9b71c1a291e5176711c555fc031c62f7360bce3beda8f0dc8481982485a3511",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N1_capacitance_owner_probe_6.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "6713cc8e43df8f5485ea74256335b7a16137e7ab61856d9b5d55c4b1b100044e",
+      "asan_sha256": "6713cc8e43df8f5485ea74256335b7a16137e7ab61856d9b5d55c4b1b100044e",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_20000_N1_capacitance_owner_probe_8.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "9da983a2f8f41b36710f7b3586eaaa7c089a4e65125255039f46b51b959e27b9",
+      "asan_sha256": "9da983a2f8f41b36710f7b3586eaaa7c089a4e65125255039f46b51b959e27b9",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N0_capacitance_owner_probe_10.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "b8faa8ca8a48b86c64947c80dae218489b329a20f72a51e58cf35a417b7c6870",
+      "asan_sha256": "b8faa8ca8a48b86c64947c80dae218489b329a20f72a51e58cf35a417b7c6870",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N0_capacitance_owner_probe_12.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "6b4c6cf842045f37bf54a139a591179642f6526a427d17fc138aef880db07e89",
+      "asan_sha256": "6b4c6cf842045f37bf54a139a591179642f6526a427d17fc138aef880db07e89",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N0_capacitance_owner_probe_2.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "4e81e8f8446c73d2d4ee0ed72a43579658c0987464ae23445a17b2a9f4db4f18",
+      "asan_sha256": "4e81e8f8446c73d2d4ee0ed72a43579658c0987464ae23445a17b2a9f4db4f18",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N0_capacitance_owner_probe_4.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "6666ead47d1f81d478a8ee3f5677c2ead270ba5494e656c6c169d156e14514dc",
+      "asan_sha256": "6666ead47d1f81d478a8ee3f5677c2ead270ba5494e656c6c169d156e14514dc",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N0_capacitance_owner_probe_6.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "8fdbb067d169793003b73a9ee2f713c64d876c4de6862e07fa7f0f8022848ab4",
+      "asan_sha256": "8fdbb067d169793003b73a9ee2f713c64d876c4de6862e07fa7f0f8022848ab4",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N0_capacitance_owner_probe_8.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "a591af7fbffdc44d516c1b77562f7ea52cdfa246098f3ed10acf9525fb13afc9",
+      "asan_sha256": "a591af7fbffdc44d516c1b77562f7ea52cdfa246098f3ed10acf9525fb13afc9",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N1_capacitance_owner_probe_10.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "43735370f4f26f2288647650cc326c47ac3f294ea3f9d67ba0c38fe72ee10d97",
+      "asan_sha256": "43735370f4f26f2288647650cc326c47ac3f294ea3f9d67ba0c38fe72ee10d97",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N1_capacitance_owner_probe_12.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "257b77390e3c661fba7de410bd023db98567ad90ed2ee05563ebe7306ffce8ad",
+      "asan_sha256": "257b77390e3c661fba7de410bd023db98567ad90ed2ee05563ebe7306ffce8ad",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N1_capacitance_owner_probe_2.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "a432a4ff0e167320deb8a6a7c18be30aaaa2fef9b644d349de82e5bcc97d0064",
+      "asan_sha256": "a432a4ff0e167320deb8a6a7c18be30aaaa2fef9b644d349de82e5bcc97d0064",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N1_capacitance_owner_probe_4.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "c6d0d716d6c4016b78b8af4ff7cc9e4d55df4740eda39e14befe5b2f9f274ab9",
+      "asan_sha256": "c6d0d716d6c4016b78b8af4ff7cc9e4d55df4740eda39e14befe5b2f9f274ab9",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N1_capacitance_owner_probe_6.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "a171c5c5425fa5eb9c2b0f63b463119188bfcb0872fc4c0dc7c13c17eaa4e64f",
+      "asan_sha256": "a171c5c5425fa5eb9c2b0f63b463119188bfcb0872fc4c0dc7c13c17eaa4e64f",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Branch_2000_N1_capacitance_owner_probe_8.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0"
+      ],
+      "normal_sha256": "a3fa18cc8f535faee82e5611e97c752e1d4cd431fae4701e6e2471603a7824c1",
+      "asan_sha256": "a3fa18cc8f535faee82e5611e97c752e1d4cd431fae4701e6e2471603a7824c1",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N0_capacitance_owner_probe_10.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "8cf9ff4f57f03ec02da97e4a6336fe892b2d3511f7e6d4d60fc329700d8f53db",
+      "asan_sha256": "8cf9ff4f57f03ec02da97e4a6336fe892b2d3511f7e6d4d60fc329700d8f53db",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N0_capacitance_owner_probe_12.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "9c6c40b3eba5508cce968910433f19a72888014521a8bc03a6651b5da13ecef6",
+      "asan_sha256": "9c6c40b3eba5508cce968910433f19a72888014521a8bc03a6651b5da13ecef6",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N0_capacitance_owner_probe_2.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "e737f7e00591639552f61caac5fa73836d735bab05814df18ec87f1917ec444a",
+      "asan_sha256": "e737f7e00591639552f61caac5fa73836d735bab05814df18ec87f1917ec444a",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N0_capacitance_owner_probe_4.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "25afa73bc5295e147475420fe4d5d3b52ffcf2d37fc5c83ebfc3733dd6cb9c0b",
+      "asan_sha256": "25afa73bc5295e147475420fe4d5d3b52ffcf2d37fc5c83ebfc3733dd6cb9c0b",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N0_capacitance_owner_probe_6.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "34e6f79b3bb9c5140eb5533fe86c5006b10e623e1cdb849ef6c523cc6206fa98",
+      "asan_sha256": "34e6f79b3bb9c5140eb5533fe86c5006b10e623e1cdb849ef6c523cc6206fa98",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N0_capacitance_owner_probe_8.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "a1d8d74e2a5c23ddaac387f2aa4a1d9deb9c703a1e8797295feb6df02684c310",
+      "asan_sha256": "a1d8d74e2a5c23ddaac387f2aa4a1d9deb9c703a1e8797295feb6df02684c310",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N1_capacitance_owner_probe_10.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "abfd8225a1ca1bf5a7a28f0b1d6285e6e61711113ac962013ac8c8bb24035c6d",
+      "asan_sha256": "abfd8225a1ca1bf5a7a28f0b1d6285e6e61711113ac962013ac8c8bb24035c6d",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N1_capacitance_owner_probe_12.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "57f79111e7555b7423b7edc931ae7de88ea7613ca4200fdf93d4b0fe26fcfb6f",
+      "asan_sha256": "57f79111e7555b7423b7edc931ae7de88ea7613ca4200fdf93d4b0fe26fcfb6f",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N1_capacitance_owner_probe_2.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "b1c69643c4795acc884ae6273a3232e42f9fd4f3aeea13e7548f43756b2ec0e6",
+      "asan_sha256": "b1c69643c4795acc884ae6273a3232e42f9fd4f3aeea13e7548f43756b2ec0e6",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N1_capacitance_owner_probe_4.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "ab4be1690656ba1906f28b6a475007f7b86dc37b06c13bf479b03d399749e23c",
+      "asan_sha256": "ab4be1690656ba1906f28b6a475007f7b86dc37b06c13bf479b03d399749e23c",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N1_capacitance_owner_probe_6.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "c21105cd75e1671c5767a71d100f906fe361f73384f030203d582e6aa83e31f2",
+      "asan_sha256": "c21105cd75e1671c5767a71d100f906fe361f73384f030203d582e6aa83e31f2",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_20000_N1_capacitance_owner_probe_8.csv",
+      "rows": 3601,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "a0aae1c776c732938ee2697acbfc923f777ae2b1c196c71c4a1c5c5a49d6cad8",
+      "asan_sha256": "a0aae1c776c732938ee2697acbfc923f777ae2b1c196c71c4a1c5c5a49d6cad8",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N0_capacitance_owner_probe_10.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "9afa7f4f226e9220f6f30693488e55fb7347b1e94cda43218123b7c5be33a3a5",
+      "asan_sha256": "9afa7f4f226e9220f6f30693488e55fb7347b1e94cda43218123b7c5be33a3a5",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N0_capacitance_owner_probe_12.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "e1046df8ed4309fc28bdb00df66460d04bf4c8abf039745548c8df658c72895e",
+      "asan_sha256": "e1046df8ed4309fc28bdb00df66460d04bf4c8abf039745548c8df658c72895e",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N0_capacitance_owner_probe_2.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "044e651432814665e54fcecb1c808f8a9b4db4e9e7de33c26137c9cec8171cd7",
+      "asan_sha256": "044e651432814665e54fcecb1c808f8a9b4db4e9e7de33c26137c9cec8171cd7",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N0_capacitance_owner_probe_4.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "93b582421c88c146bac619d4ff95807dd7eb9f4557e3888d5f48d1afef71be09",
+      "asan_sha256": "93b582421c88c146bac619d4ff95807dd7eb9f4557e3888d5f48d1afef71be09",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N0_capacitance_owner_probe_6.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "a8fe84a8174f820d873fc713cabd34cf348a604613fc89d58fbf7b807b53a90c",
+      "asan_sha256": "a8fe84a8174f820d873fc713cabd34cf348a604613fc89d58fbf7b807b53a90c",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N0_capacitance_owner_probe_8.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "de2c569792d2ae64a7430ebe19f65b9df295a2ea22ffb7ce7946f0696025fc17",
+      "asan_sha256": "de2c569792d2ae64a7430ebe19f65b9df295a2ea22ffb7ce7946f0696025fc17",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N1_capacitance_owner_probe_10.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "7e5e033cf1b38b5a66c8a1b6f3934277007af30a288f94c6354160b93e9a47a3",
+      "asan_sha256": "7e5e033cf1b38b5a66c8a1b6f3934277007af30a288f94c6354160b93e9a47a3",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N1_capacitance_owner_probe_12.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "10d2b16dea9c4dc26df4d434da4f6b2e3b8533f12246e408fa7f5b346965aeb0",
+      "asan_sha256": "10d2b16dea9c4dc26df4d434da4f6b2e3b8533f12246e408fa7f5b346965aeb0",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N1_capacitance_owner_probe_2.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "a9e7e4eea2471576e870d8d72c8c58a5acae89bdcac4471de350c3c707b26693",
+      "asan_sha256": "a9e7e4eea2471576e870d8d72c8c58a5acae89bdcac4471de350c3c707b26693",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N1_capacitance_owner_probe_4.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "6ff926649849ce47c900f6ea3e51e50f7024b91a53dd719666505f5720580260",
+      "asan_sha256": "6ff926649849ce47c900f6ea3e51e50f7024b91a53dd719666505f5720580260",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N1_capacitance_owner_probe_6.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "4665423f45c079b475337ec1f436e61da0f1f8408242659af21fde15a86f8ee7",
+      "asan_sha256": "4665423f45c079b475337ec1f436e61da0f1f8408242659af21fde15a86f8ee7",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    },
+    {
+      "path": "gate/native-result/native/Classic_2000_N1_capacitance_owner_probe_8.csv",
+      "rows": 361,
+      "columns": [
+        "time",
+        "stimulus",
+        "soma0",
+        "soma1"
+      ],
+      "normal_sha256": "55292b2cfb8b64f263a1fb05a8a746b869bfcd1e41aced6eb9dcc7cebff9366a",
+      "asan_sha256": "55292b2cfb8b64f263a1fb05a8a746b869bfcd1e41aced6eb9dcc7cebff9366a",
+      "byte_identical": true,
+      "maximum_absolute_differences": {
+        "time": 0.0,
+        "stimulus": 0.0,
+        "soma0": 0.0,
+        "soma1": 0.0
+      }
+    }
+  ],
+  "scope": "Exact recorded time, input and every soma column of all48 engineering probes in owner8 normal/ASan. No interpolated data, tolerance or scientific classification verdict; no inference about unobserved state.",
+  "scientific_verdict": null
+}
