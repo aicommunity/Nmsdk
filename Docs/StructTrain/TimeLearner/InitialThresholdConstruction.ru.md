@@ -57,6 +57,28 @@ mismatch. AST/source checks локальны; численные/integration che
 
 ## Парный production workflow
 
+### Серверная проверка реализации: промежуточное состояние
+
+Попытка A1 на Elder не дошла до native tests: GCC обнаружил отсутствие
+`template` у зависимого вызова `GetComponentL` в новом тестовом fixture.
+Исправление — root `7ffec7acbf7f1f9884c713aaf22e6d852f6d4ce5`.
+Production Pulse Core при этой ошибке уже компилировался; это не подтверждает
+корректность нового construction path. Ни один из14 тестов не считать пройденным.
+
+Артефакты отказа сохранены в commits
+`268fe310c43385599d124e6823fbdc28fc19b961` (A1,60 members) и
+`394d90462c928d9a7acd7feac7e59a4129f6a154` (A2,5 members).
+Локально независимо проверены outer/member SHA256, размеры и явное
+`acceptance_status=not_accepted`. A2 правильно отказался запускать readback
+после незавершённой сборки. В его подготовленном обходном пути также выявлено
+неверное имя импорта native gate; A3 использует реальный `run_native_gate`.
+
+A3 запущен на Elder в отдельных source/build/runtime/framework каталогах
+`initial-threshold-normal-a3` с исходниками root7ffec7acb / Pulse541bf89b.
+Исходные каталоги A1 не изменяются. До фактического результата A3 отсутствует
+приёмка14 native tests, двух preflight100 и трёх reader tests; cold pair ещё
+не выполнялся. Эти состояния не означают завершения этапов4/7/11.
+
 `stock-threshold-study prepare/run/analyze` использует прошедший native
 preflight100 как источник stock-конфигурации. `run` требует тот же runtime
 manifest и code identity (Pulse Core/Rdk Core trees и hash Console driver).
