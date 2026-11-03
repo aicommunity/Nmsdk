@@ -1,3 +1,34 @@
+# Уточнение 03.11: полный результат H9b, отказ H10, следующий baseline
+
+Связь через Automats2 восстановлена и проверена SSH к Elder. H9b завершён:
+209/209 тестов наблюдались, 197 прошли, 12 упали; execution=process_error,
+validity=valid, assertion_status=failed. Evidence d7b653bdacf21c4a897cecaa575329f87f292a76:
+1991 member / 25348335 compressed bytes, все checksums независимо сверены.
+Четыре bridge failures — несогласованный тип исключения archive encoder
+(archived_capacitance_channel_mismatch); исправление Pulse253fe870 сохранено,
+но его серверная проверка ещё не завершена. Две configured completed проверки
+упёрлись в editor_fixture_probe_budget; шесть stopped fresh-process — в попытку
+экспорта terminal boundary после штатного общего Reset управления.
+
+В fixtures явно снимается configured request перед frozen evaluation;
+история экспортируется на импортированной завершённой границе до Reset, после
+Reset и пробы сравниваются сохранённые witness registry/ID, trial bindings и C0.
+Reset не изменён и не обязан сохранять terminal статус остановленного управления.
+При превышении бюджета добавлена структурированная диагностика состояния,
+без увеличения бюджета, изменения физики или ослабления допусков.
+Это исправления по разбору причин, пока не runtime-verified PASS.
+
+H10 отказал до checkout/build/native: prerequisite H9b не принят. Evidence
+55b103ba08b74edd80c978c0f167f97e348dffaf, все 6 members/1067 bytes сверены.
+Отказ не считается тестированием CandidateCursor. Следующий H11 восстанавливает
+baseline без Cursor (Pulse253fe87020ae189a47c6940fa68c386ebf10c293),
+native209/readers87; только после его PASS возможен новый native A/B.
+
+Отдельный принятый auto-owner/transport контур остаётся ограниченным 43 native /
+26 readers normal и ASan, Pulse develop027070e8 и root develop3bfb72a1.
+Полные этапы4/5/7 и цель0–12 не закрыты. Новые C-region helper/fixtures остаются
+в отдельной рабочей ветке и в H11 не включены.
+
 # Подтверждённое продвижение 03.11: reader21 и controller A/B130
 
 Independent NativeEvidenceTest17/17 PASS:6287b547af9164ccdb4fd1257d9fbcbbbfd43424,
