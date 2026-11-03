@@ -54,3 +54,35 @@ mismatch. AST/source checks локальны; численные/integration che
 После валидного cold Train — полный export/import и реальные calibration/Test
 с temporal reports. Отрицательный результат не превращается в неразделимость
 всех моделей, а invalid candidate не становится доказательством infeasibility.
+
+## Парный production workflow
+
+`stock-threshold-study prepare/run/analyze` использует прошедший native
+preflight100 как источник stock-конфигурации. `run` требует тот же runtime
+manifest и code identity (Pulse Core/Rdk Core trees и hash Console driver).
+Алгоритмическая идентичность дополнительно привязана к фактическому executable
+SHA; путь binary и attempt ID в ConditionSpec не включаются.
+
+Все четыре job specs, ожидаемые полные initial identities и ConditionSpec
+создаются до первого нового native вызова. Два значения порога для одной
+топологии имеют полностью одинаковые прочие факторы. Все четыре preflight
+должны совпасть с ожидаемыми графами прежде, чем начинается хотя бы один Train.
+Ожидаемая модель получена из actual stock witness заменой только declared
+LTZone.Threshold; это проверяемая гипотеза конструкции, а не подмена actual
+readback. Каждый Train создаёт fresh native model и сравнивается со своим
+preflight. Никакого warm import или шаблонного Test нет.
+
+Четыре cold runs — по одному на условие. Генератор и остальные декларации не
+получают случайности от нового attempt ID. CapturedPerInput, bounds, Ns1,
+амплитудные/временные допуски, full-window assignment и budgets остаются ровно
+из source preflight. Данные передаются production native_pipeline_worker.
+Валидные invalid_observation/search_unresolved/budget_exhausted сохраняются
+отдельно от ошибок выполнения; положительная сходимость не требуется для
+приёмки достоверности эксперимента.
+
+`analyze` повторно проверяет каждый portable manifest, actual graph/runtime,
+параметры источника, все условия и producer outcomes. Три server reader checks
+требуют реальные четыре runs и проверяют missing condition и независимость
+fingerprint от attempt/path. Classification/calibration этим workflow не
+оцениваются. Они следуют отдельным этапом только для фактически полученных
+состояний, с честной маркировкой stopped diagnostic при отсутствии certificate.
