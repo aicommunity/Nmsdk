@@ -181,3 +181,23 @@ N1 части четырёх bridge tests расширены: domain preview с�
 перекрашивание schema3 JSON под старую схему. SDK/reader16 gate (bridge8+domain8)
 должен использовать production validation.run_suite с полным объявленным
 inventory, package/fixture fingerprints и structured skipped/failures/errors.
+
+
+## Очередь J1: SDK134 + structured readers16
+
+Source92787e4962a5674f3f622ae06a60e71b09a901c6, Pulse
+8b5d8f8262c097928daf0789ace14189fad85e3c. Elder owner342716/324461355,
+publisher342717/324461356. Ожидает published successful H3 (134+7) и I1 (8),
+проверяет primary closure и закрытие predecessor owners до изменения source/build.
+Затем запускает134 SDK tests (N1 bridge cases теперь включают domain), после
+них production validation.run_suite: bridge8+domain8, полный фиксированный
+список16 IDs, package fingerprint, fingerprints фактических JSON fixtures,
+структурированные failures/errors/skipped. Publisher требует executed16, exact
+inventory, нулевые failures/errors/skipped и завершённый valid native134.
+Синтаксис трёх новых/изменённых Python модулей проверен на Elder из Git92787e496,
+это не замена runtime tests. На момент постановки J1 ожидает prerequisites.
+
+M40 ASan transport G2 source496a80d7190cafcc1e96329ee3c8e2b17cb40114:
+owner2621211/274992757, publisher2621212/274992757. Ожидает successful normal G2;
+это gate automatic owner/transport43, а не новой typed domain реализации.
+Для schema3 domain по-прежнему нужен отдельный ASan gate после normal J1.
