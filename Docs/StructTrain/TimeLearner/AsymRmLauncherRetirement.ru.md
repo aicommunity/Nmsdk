@@ -53,5 +53,17 @@ Manifest содержит81 запись:79 retired и2 moved. До принят
 5. Работающие numerical sources/builds/runtimes не меняются. Для metadata
    проверки используются отдельные Git repositories и источник корневых scripts.
 
-Серверная приёмка пока pending. После проверки — --no-ff merge Bin feature
-в develop, затем root с точным gitlink; история не переписывается.
+Серверная metadata-приёмка завершена на обоих workers. Elder proof
+`aadbe4e4b50716f880daf3a4a2250bc87e3ae62c`, M40 proof
+`9e190d18b370476b221e40f5e310573d69cbc3ac`; проверены outer hashes и все8 members
+каждого архива (86 760/86 776 compressed bytes). Оба подтвердили81 records,
+negative fixture `5a6e91174fb8c2ffbcbf1e48c41888d27733edbf` отклонён на первом
+возвращённом AsymRm пути. Positive receipt для него не создавался. Полные
+source_closure до/после совпали. Это не numerical/ASan-приёмка алгоритмов:
+названия normal/asan обозначают workers, а проверялся Git metadata workflow.
+
+Bin feature `07fbeb4357a7337a2fb924330846f8d4ec05ac4b` объединён --no-ff в
+develop `39d811e5e0798eecf124f32356c9fc6edbe4538a` и опубликован до root.
+Tree merge commit совпадает с проверенным feature tree
+`5857a08c2ea1be67c5ade0504bb213e177466bb9`. Root gitlink обновлён на этот merge.
+Численные источники текущих owner/transport jobs остаются на своих прежних SHA.
