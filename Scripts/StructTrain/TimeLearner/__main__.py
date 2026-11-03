@@ -154,6 +154,12 @@ def main(argv: list[str] | None = None) -> int:
     stock.add_argument("--runtime-manifest", type=Path, required=True)
     stock.add_argument("--initial-threshold", type=float, help="explicit native model-spec2 construction value; e.g. 100 for training")
     stock.add_argument("--output", type=Path, required=True)
+    pair = commands.add_parser("stock-threshold-study", help="paired cold stock Train at explicit thresholds 0.0117 and 100 on one runtime")
+    pair.add_argument("action", choices=("prepare", "run", "analyze"))
+    pair.add_argument("source", type=Path)
+    pair.add_argument("--runtime-manifest", type=Path)
+    pair.add_argument("--code-identity", type=Path)
+    pair.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -462,6 +468,24 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, ImportError) as error:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "stock-threshold-study":
+        from .stock_threshold_study import prepare, run, audit
+        from .native_evidence import EvidenceError, require, load
+        try:
+            if args.action == "analyze":
+                require(args.runtime_manifest is None and args.code_identity is None, "stock_pair_analysis_has_no_runtime")
+                result = audit(args.source)
+                with args.output.open("x", encoding="utf-8") as stream:
+                    json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+            else:
+                require(args.runtime_manifest is not None and args.code_identity is not None, "stock_pair_runtime_and_code_required")
+                result = (prepare if args.action == "prepare" else run)(args.source, args.runtime_manifest,
+                          load(args.code_identity), args.output)
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "stock-phasea-preflight":
         import tarfile
