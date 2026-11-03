@@ -192,7 +192,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -469,6 +469,11 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.trace is None and args.model is None, "calibration_transaction_declares_its_models_and_observations")
                 renderer = render_calibration_run if args.format == "calibration-run" else render_calibration_transaction
                 result = renderer(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "capacitance-search":
+                from .capacitance_search_reports import render_capacitance_search
+                require(args.trace is None and args.model is None and args.artifacts is None,
+                        "capacitance_search_report_declares_its_own_primary_files")
+                result = render_capacitance_search(args.source.resolve(strict=True), args.output.resolve())
             elif args.format == "capacitance-region":
                 from .capacitance_region_reports import render_capacitance_region
                 require(args.trace is None and args.model is None and args.artifacts is None,

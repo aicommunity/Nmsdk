@@ -379,3 +379,18 @@ Full root SHA и новый output receipt обязательны; для sparse
 `TIMELEARNER_CAPACITANCE_REGION_REPORT_CACHE`; декларация3 tests/32 trials/48
 trial-soma pairs требует actual восьми native fixtures, а не синтетических копий.
 Пока gate не выполнен, наличие команды не означает проверенный отчёт.
+
+
+Полная история C-search визуализируется командой
+`report CASE_stopped_state.json --format capacitance-search --output NEW_M40_CACHE`
+(также поддерживается completed learned state). Перед построением проверяются
+package, summary, C-state/history и все первичные JSON/CSV; отчёт работает по
+portable проверенному snapshot. Каждая проба связана с phase/input, точным
+model revision и C witness, включая transient кандидатов после последующего
+восстановления лучшего состояния. Общие Y scales и detail views формируются
+production probe-set renderer. Это все записанные training probes; отдельные
+полные реакции на каждый classification pattern по-прежнему обязательны для
+научного Test. Полный figure cache остаётся на M40 Data.
+`tests.test_capacitance_search_reports` требует четыре actual activation cases
+и persistent `TIMELEARNER_CAPACITANCE_SEARCH_REPORT_CACHE`; ожидаемая матрица
+48 trials /72 trial-soma pairs ещё требует серверной render/visual проверки.
