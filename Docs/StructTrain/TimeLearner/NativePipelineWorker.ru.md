@@ -195,3 +195,13 @@ exists недостаточно для двух одновременных за�
 получает invalid_config/native_event_log_path_reservation_failed. Сам native
 output по-прежнему создаёт штатный job runner. Это проверяется отдельно от
 обычного повторного запуска с уже завершённым output.
+
+Первая проверка Console-only исправления показала: FixedLogPath не меняет
+место glog. Четыре preflight/frozen controls и три early refusals прошли,
+duplicate дал0/2, однако logs остались в runtime и directory guard не прошёл.
+Исправление требует штатного WorkDirectory до Init. Общая Rdk feature0e70cf0
+сохраняет это явно заданное значение (default при пустом — по-прежнему
+executable directory). Console выбирает owned OUTPUT.events-log как рабочий
+контейнер; стандартный файловый путь Rdk — OUTPUT.events-log/EventsLog.
+Core system directory и абсолютные resource paths не подменяются. Первые
+NOT_ACCEPTED packets сохраняются; joint normal/ASan проверка ещё требуется.

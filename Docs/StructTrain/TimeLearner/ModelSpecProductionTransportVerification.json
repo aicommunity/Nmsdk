@@ -1,0 +1,97 @@
+{
+  "kind": "independent_static_native_model_spec_transport_verification",
+  "schema_version": 1,
+  "workers": {
+    "normal": {
+      "evidence_commit": "a4344242c4cbbc8df7d3795ab5176c7dd694c6d6",
+      "members_verified": 2301,
+      "orchestration_source_hashes_verified": 299,
+      "preparation_readers": 4,
+      "final_readers": 5,
+      "cases": [
+        {
+          "name": "Classic-v1",
+          "threshold": 0.004780132099175549,
+          "complete_frozen_trials": 4,
+          "solo_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+          "recognition_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a"
+        },
+        {
+          "name": "Classic-v2",
+          "threshold": 0.004780132099175549,
+          "complete_frozen_trials": 4,
+          "solo_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+          "recognition_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a"
+        },
+        {
+          "name": "Branch-v1",
+          "threshold": 0.009589717471100379,
+          "complete_frozen_trials": 4,
+          "solo_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+          "recognition_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38"
+        },
+        {
+          "name": "Branch-v2",
+          "threshold": 0.009589717471100379,
+          "complete_frozen_trials": 4,
+          "solo_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+          "recognition_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38"
+        }
+      ],
+      "owned_native_processes": 20,
+      "new_processes_in_a4": 17,
+      "reused_completed_operations": 3,
+      "runtime_directory_immutable": false,
+      "only_owned_event_logs_changed": true,
+      "bundle_accepted": false,
+      "scientific_verdict": null
+    },
+    "asan": {
+      "evidence_commit": "f1bdaeff07315235346fbf829e04161a9b51376a",
+      "members_verified": 2302,
+      "orchestration_source_hashes_verified": 299,
+      "preparation_readers": 4,
+      "final_readers": 5,
+      "cases": [
+        {
+          "name": "Classic-v1",
+          "threshold": 0.004780132099175549,
+          "complete_frozen_trials": 4,
+          "solo_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+          "recognition_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a"
+        },
+        {
+          "name": "Classic-v2",
+          "threshold": 0.004780132099175549,
+          "complete_frozen_trials": 4,
+          "solo_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+          "recognition_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a"
+        },
+        {
+          "name": "Branch-v1",
+          "threshold": 0.009589717471100379,
+          "complete_frozen_trials": 4,
+          "solo_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+          "recognition_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38"
+        },
+        {
+          "name": "Branch-v2",
+          "threshold": 0.009589717471100379,
+          "complete_frozen_trials": 4,
+          "solo_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+          "recognition_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38"
+        }
+      ],
+      "owned_native_processes": 20,
+      "new_processes_in_a4": 17,
+      "reused_completed_operations": 3,
+      "runtime_directory_immutable": false,
+      "only_owned_event_logs_changed": true,
+      "bundle_accepted": false,
+      "scientific_verdict": null
+    }
+  },
+  "same_semantic_physics_across_workers": true,
+  "runtime_log_fix_verified": false,
+  "stage_complete": false
+}
