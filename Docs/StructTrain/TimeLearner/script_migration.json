@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -1508,6 +1508,253 @@
       "replacement": null,
       "reason": "Historical pilot sweep patches shared XML/physics in place and continues after failed legacy jobs; requires new declarative specification before reuse.",
       "original_results": "preserved; retrieval commit does not attest the execution source of historical experiments"
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s03-inherited-review-selection-asan-a1/job.py",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "0b949bc81e34365935d20d45d5237e88a8bc44a7",
+      "blob_sha1": "453419181f2311f37bf5c9f0fcf98677e7a967ea",
+      "content_sha256": "fb87dc4a3c029c3078f935d721e646ee9e82ae07ede9d9c99cf86497c24f07bd",
+      "bytes": 7135,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s03-inherited-review-selection-asan-a1/job.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s03-inherited-review-selection-asan-a1/job.py"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s03-inherited-review-selection-asan-a2/job.py",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "1edb1f403786c8266baf401cd64e239bfc000095",
+      "blob_sha1": "b784b49ec9982b39f331e36ddbb327ce57d0f4d8",
+      "content_sha256": "6a79f00a93ef639d201b99d5d6c963794be7408d9b8b5753124141f999eedbf3",
+      "bytes": 7212,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s03-inherited-review-selection-asan-a2/job.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s03-inherited-review-selection-asan-a2/job.py"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s03-inherited-review-selection-normal-a1/job.py",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "16d7a17f569c48f1840534b0caab4a2def1f19cb",
+      "blob_sha1": "2bf28029b241bb531335e6e37cb5063166ee8beb",
+      "content_sha256": "bbf6e28e39c0beb4621650f81698b42b8b3223753c65e465a7fa8b14937e882a",
+      "bytes": 7142,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s03-inherited-review-selection-normal-a1/job.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s03-inherited-review-selection-normal-a1/job.py"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s03-inherited-review-selection-normal-a2/job.py",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "41a5cf04ff4394e3016c682df1d01d0d36ed3930",
+      "blob_sha1": "5aa298830f7d653f3561b5dc0889061a7a2c60c5",
+      "content_sha256": "4425b7bbb4c776dc7624b21193668632bdc162a9ae360c1334b4bd8bf5c47e91",
+      "bytes": 7219,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s03-inherited-review-selection-normal-a2/job.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s03-inherited-review-selection-normal-a2/job.py"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-elder1-a1/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "414d1c8810af5f6126f8b4fde130cd94b2a65942",
+      "blob_sha1": "2bfef1a4bbf64a32de45c0a9e23569a1d6586e33",
+      "content_sha256": "b64a1e2048f5a6f3bf3a36e4fe5bc5da8fde4917030ac59a2259fd127007fd1b",
+      "bytes": 2074,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-elder1-a1/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-elder1-a1/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-m40-a1/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "8aeae5558595e360d3dc5a2cb7b091680e61e929",
+      "blob_sha1": "297fc359c263fcb56c129b0d1cadb19e827ee1ba",
+      "content_sha256": "4bbedd3365268488d85a8362faf4708526d85edd6275b2647bad45d423fb0937",
+      "bytes": 2082,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-m40-a1/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s05-repeat-boundary-baseline-m40-a1/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-closure-m40-a1/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "3f3cdd56b90990f29bc43f337c49cd5e735bda52",
+      "blob_sha1": "d7b4474b4334bca7878013d91330206b75383873",
+      "content_sha256": "edddaca7490c1c660ab38554ea7f59afab29790033d5bd0c305d4ec99cb33cea",
+      "bytes": 2344,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-closure-m40-a1/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-closure-m40-a1/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a1/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "8363f7a498d686612fa231abb37677c458057ad8",
+      "blob_sha1": "edb8082e33a18be3f4d4fadda51f6f35ef7bc1e4",
+      "content_sha256": "37fd3f7a7b4f3cb4fc24f6e8bc7c21a2db5cf9c278d334b170d0457facb776f2",
+      "bytes": 2413,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a1/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a1/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a2/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "8363f7a498d686612fa231abb37677c458057ad8",
+      "blob_sha1": "5b540b56fc539aba2ae53ee9ad60708882de8327",
+      "content_sha256": "e2efb56b9be8f512b5fa7cdf3ee5699ff815dfe38642cb0b1e1f9da6a671f574",
+      "bytes": 2426,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a2/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a2/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a3/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "8363f7a498d686612fa231abb37677c458057ad8",
+      "blob_sha1": "51e4ddf20d22f146ac8509fd2abbb001b37cef75",
+      "content_sha256": "bc47a89b1ad25473edfa674974864164cbd3c90206d2bcd84a8ea905e4c55145",
+      "bytes": 3174,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a3/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-combined-elder1-a3/a3/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a1/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "1ed43743038646670c0db61354af14272316aff1",
+      "blob_sha1": "d2c1d1bbbe060e7c1e10bcb58df0d3a05e9d3be3",
+      "content_sha256": "825fb5f924c686abeb757aba9d6268d343dde4fba27fd52815b6902a821abb88",
+      "bytes": 2555,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a1/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a1/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a2/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "1ed43743038646670c0db61354af14272316aff1",
+      "blob_sha1": "e9f9c63dd63cf0e673610a54ecc5ef35bb45ae34",
+      "content_sha256": "2f165979fd06f8986b89016d51f5e41b417ea821cb552599d968ec61b33aa6f1",
+      "bytes": 2515,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a2/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a2/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "root",
+      "old_path": "Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a3/runner.sh",
+      "action": "retired_historical",
+      "archive_commit": "3bfb72a1fbe7712796e65bea59db343d507d48f4",
+      "last_change_commit": "1ed43743038646670c0db61354af14272316aff1",
+      "blob_sha1": "e403870d572b17b256b63834127e728636a18445",
+      "content_sha256": "3f244bd426604ced5c46acdca00ff247b4b221822794d77113d7d5d575be38c2",
+      "bytes": 3261,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3bfb72a1fbe7712796e65bea59db343d507d48f4/Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a3/runner.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3bfb72a1fbe7712796e65bea59db343d507d48f4:Reports/StructTrain/TimeLearner/s07-n0-combined-m40-a3/a3/runner.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
+      "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
     }
   ],
   "reference_review": {
