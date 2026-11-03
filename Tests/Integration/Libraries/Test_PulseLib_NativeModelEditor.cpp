@@ -86,6 +86,17 @@ protected:
         {failNeuronAttach=false;throw std::runtime_error("injected_posttune_neuron_attach_failure");}
     }
 };
+template<class Learner> class CapacitanceHistoryFaultLearner : public Learner {
+public:
+    CapacitanceHistoryFaultLearner* New(void) override {return new CapacitanceHistoryFaultLearner;}
+    void InjectDormantHistoryChange() {
+        std::string revision;
+        auto state=ParseNativeCapacitanceState(QJsonDocument(this->NativeLearnedCapacitanceState)
+            .toJson(QJsonDocument::Compact).toStdString(),revision);
+        state.dormantMembraneScales.at("Dendrite1_2")=1.15;
+        this->NativeLearnedCapacitanceState=EncodeNativeCapacitanceState(state,revision);
+    }
+};
 class CapacitanceResetFaultNeuron : public NPulseNeuron {
 public:
     int resetsUntilFailure=0;
@@ -1750,6 +1761,116 @@ TEST(NativeTrainingService,ClassicN0SearchAndFreshNegativeFinalGate){RunNativeTr
 TEST(NativeTrainingService,BranchN0SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeTrainingService,ClassicN1SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearner>(1);}
 TEST(NativeTrainingService,BranchN1SearchAndFreshNegativeFinalGate){RunNativeTraining<NNeuronTimeLearnerBranch>(1);}
+
+template<class Learner> void TrackedNativeTraining(int normalization,std::size_t repeats=1)
+{
+    EditingRig<Learner> rig(2000,normalization,"tracked_capacitance_service_repeat"+std::to_string(repeats),false,2,true);
+    NativeCapacitanceCorrection correction;ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,correction));
+    const auto original=rig.learner->ReadNativeTrainingCapacitance();ASSERT_TRUE(original);
+    auto plan=TrainingPlan(rig,repeats>1?.2:.02);plan.recordCapacitanceHistory=true;
+    // Same numerical/model-time budget on both workers; allow the measured
+    // ASan boundary/archive overhead without changing a residual tolerance.
+    plan.maximumWallSeconds=3600.;
+    plan.search.n0CandidateRepeats=repeats;
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);
+    rig.learner->BeginNativeTraining(plan);
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
+    {ASSERT_LT(tick,50000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();
+    ASSERT_TRUE(service.References())<<service.Reason();ASSERT_TRUE(service.Search())<<service.Reason();
+    EXPECT_NE(service.Outcome(),TrainingStatus::InvalidModel)<<service.Reason();
+    EXPECT_NE(service.Outcome(),TrainingStatus::InvalidObservation)<<service.Reason();
+    const auto& history=service.CapacitanceHistory();ASSERT_TRUE(history);EXPECT_TRUE(history->currentVerified);
+    EXPECT_FALSE(history->witnesses.empty());EXPECT_FALSE(history->trialWitnessIds.empty());
+    EXPECT_EQ(history->domainBaseWitnessIds.size(),service.Search()->Domains().size());
+    EXPECT_EQ(service.Search()->Capacitance(),rig.learner->ReadNativeTrainingCapacitance());
+    for(const auto& [id,witness]:history->witnesses)
+    {
+        EXPECT_EQ(id,NativeTrainingCapacitanceWitnessId(witness));
+        EXPECT_EQ(witness.parameters.origin,original->origin);
+        EXPECT_EQ(witness.parameters.membraneScales.at("Dendrite1_2"),1.1);
+    }
+    for(const auto& packet:service.ObservedPackets())
+    {
+        ASSERT_TRUE(packet.requestedSpecification);
+        const auto found=history->trialWitnessIds.find(packet.requestedSpecification->trialId);
+        ASSERT_NE(found,history->trialWitnessIds.end());
+        EXPECT_EQ(history->witnesses.at(found->second).modelRevision,packet.currentBaseRevision);
+    }
+    const auto summary=EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters());
+    EXPECT_EQ(summary["schema_version"],QJsonValue(3));EXPECT_TRUE(summary["actual_capacitance_witness_id"].isString());
+    if(service.Certificate())EXPECT_TRUE(service.Certificate()->Matches(rig.Revision(),*service.References(),
+        plan.search.tolerances,ModelStateKind::LearnedSolo,service.ModelEpoch()));
+    if(repeats>1)EXPECT_FALSE(service.Search()->CandidateRepeats().empty());
+    Artifact(rig.name+"_tracked_summary.json",QJsonDocument(summary).toJson());
+    const auto before=rig.Revision();const auto savedTrialIds=history->trialWitnessIds;
+    rig.learner->Reset();EXPECT_EQ(rig.Revision(),before);
+    ASSERT_TRUE(service.CapacitanceHistory());EXPECT_EQ(service.CapacitanceHistory()->trialWitnessIds,savedTrialIds);
+    EXPECT_TRUE(service.CapacitanceHistory()->domainBaseWitnessIds.empty());
+    const auto reset=EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters());
+    EXPECT_EQ(reset["schema_version"],QJsonValue(3));EXPECT_EQ(reset["search_history_retained"],QJsonValue(false));
+    Artifact(rig.name+"_tracked_reset_summary.json",QJsonDocument(reset).toJson());
+}
+TEST(NativeTrainingCapacitanceHistory,ClassicN0){TrackedNativeTraining<NNeuronTimeLearner>(0);}
+TEST(NativeTrainingCapacitanceHistory,BranchN0){TrackedNativeTraining<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeTrainingCapacitanceHistory,ClassicN1){TrackedNativeTraining<NNeuronTimeLearner>(1);}
+TEST(NativeTrainingCapacitanceHistory,BranchN1){TrackedNativeTraining<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeTrainingCapacitanceHistory,ClassicN0RepeatedPointTwo){TrackedNativeTraining<NNeuronTimeLearner>(0,2);}
+TEST(NativeTrainingCapacitanceHistory,BranchN0RepeatedPointTwo){TrackedNativeTraining<NNeuronTimeLearnerBranch>(0,2);}
+
+template<class Learner> void UnboundNativeTrainingHistory()
+{
+    EditingRig<Learner> rig(2000,0,"unbound_capacitance_service",false,2,true);
+    const auto before=rig.Revision();const auto life=rig.neuron->ObserveLifecycle();
+    auto plan=TrainingPlan(rig);plan.recordCapacitanceHistory=true;rig.learner->BeginNativeTraining(plan);
+    const auto& service=rig.learner->NativeTrainingController();
+    EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
+    EXPECT_EQ(service.Reason(),"native_training_capacitance_history_requires_bound_C0");
+    EXPECT_TRUE(rig.learner->OwnedNativeCapacitanceState().isEmpty());EXPECT_FALSE(service.CapacitanceHistory());
+    EXPECT_EQ(rig.Revision(),before);EXPECT_TRUE(life.IsCurrent());
+    Artifact(rig.name+"_unbound_history.json",QJsonDocument(QJsonObject{{"reason",QString::fromStdString(service.Reason())},
+        {"before",QString::fromStdString(before)},{"after",QString::fromStdString(rig.Revision())},
+        {"owner",rig.learner->OwnedNativeCapacitanceState()},{"history_present",bool(service.CapacitanceHistory())}}).toJson());
+}
+TEST(NativeTrainingCapacitanceHistory,ClassicUnboundIsNotInvented){UnboundNativeTrainingHistory<NNeuronTimeLearner>();}
+TEST(NativeTrainingCapacitanceHistory,BranchUnboundIsNotInvented){UnboundNativeTrainingHistory<NNeuronTimeLearnerBranch>();}
+
+template<class Learner> void NativeHistorySinkFault()
+{
+    using FaultOwner=CapacitanceHistoryFaultLearner<Learner>;
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    const auto className=std::string("CapacitanceHistoryFault_")+
+        (std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value?"Branch":"Classic");
+    core.storage->AddClass(new UComponentFactoryMethod(core.storage,
+        +[]()->UComponent* {return new FaultOwner;},className),className);
+    EditingRig<FaultOwner> rig(2000,1,"capacitance_history_sink_fault",false,2,true,2,1,false,className);
+    NativeCapacitanceCorrection correction;ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,correction));
+    auto parameters=rig.learner->ReadNativeParameters();parameters[0].length=1;
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    const auto shrunk=rig.learner->ApplyNativeParameters(parameters);ASSERT_EQ(shrunk.status,NativeEditStatus::Applied)<<shrunk.reason;
+    ASSERT_FALSE(rig.neuron->GetComponentL("Dendrite1_2",true));
+    const auto before=rig.Revision();const auto previousOwner=rig.learner->OwnedNativeCapacitanceState();
+    auto plan=TrainingPlan(rig);plan.recordCapacitanceHistory=true;bool injected=false;
+    plan.observationSink=[&](const NativeProbeResult&) {
+        if(injected)return;rig.learner->InjectDormantHistoryChange();injected=true;
+    };
+    RecordNativeTrainingProof(plan,rig.name,rig.branch?1u:rig.inputCount);rig.learner->BeginNativeTraining(plan);
+    for(unsigned tick=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick)
+    {ASSERT_LT(tick,5000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}
+    const auto& service=rig.learner->NativeTrainingController();EXPECT_TRUE(injected);
+    EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
+    EXPECT_EQ(service.Reason(),"native_training_capacitance_readback_mismatch");
+    EXPECT_EQ(rig.Revision(),before);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    ASSERT_TRUE(service.CapacitanceHistory());EXPECT_FALSE(service.CapacitanceHistory()->currentVerified);
+    const auto summary=EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters());
+    EXPECT_TRUE(summary["actual_capacitance_witness_id"].isNull());
+    Artifact(rig.name+"_history_sink_fault.json",QJsonDocument(QJsonObject{{"kind","native_capacitance_history_sink_fault"},
+        {"schema_version",1},{"before_revision",QString::fromStdString(before)},
+        {"after_revision",QString::fromStdString(rig.Revision())},{"previous_owner",previousOwner},
+        {"actual_owner",rig.learner->OwnedNativeCapacitanceState()},{"summary",summary}}).toJson());
+}
+TEST(NativeTrainingCapacitanceHistory,ClassicDormantChangeAfterWindowIsRejected){NativeHistorySinkFault<NNeuronTimeLearner>();}
+TEST(NativeTrainingCapacitanceHistory,BranchDormantChangeAfterWindowIsRejected){NativeHistorySinkFault<NNeuronTimeLearnerBranch>();}
 TEST(NativeColdTrainingService,ClassicN0){RunNativeTraining<NNeuronTimeLearner>(0,true);}
 TEST(NativeColdTrainingService,BranchN0){RunNativeTraining<NNeuronTimeLearnerBranch>(0,true);}
 TEST(NativeColdTrainingService,ClassicN1){RunNativeTraining<NNeuronTimeLearner>(1,true);}
