@@ -212,3 +212,27 @@ trial99 не является последней при наличии trial108 
 маркировкой незавершённого Train, исходным порогом и frozen model hash.
 Эти контроли без LT не изолируют причинный эффект LT относительно прежнего
 двухвходового профиля: различаются и другие параметры/размерность.
+
+## Qt6/ASan SDK: независимая проверка в процессе
+
+На M40 запущен отдельный SDK с root
+`ddfe1f39d40373daab1d4e2894a9c822c90a288f`, Pulse541bf89b,
+папками source/build/runtime/framework-initial-threshold-asan-a2.
+Owner3428746 подтверждён живым; CMake build выполняется с одним потоком.
+Конфигурация RelWithDebInfo: -O1 -g1 -fsanitize=address,
+-fno-omit-frame-pointer; private GTest58d77fa8070e8cec2dc1ed015d66b454c8d78850,
+системный GTest отключён. Исходники и runtime работающего H21 не изменяются.
+Git object donors зафиксированы и сохраняются до dissociation.
+
+Декларация приёмки:14 native tests, фактический libasan mapping,
+два zero-tick stock preflight100 и3 readers. Начальные модели должны целиком
+совпасть с опубликованными normal A5 readbacks. Не запускается новый cold Train.
+Эти проверки не доказывают все режимы ModelSpec2: калиброванный roundtrip с
+конечным порогом, отличающимся от construction value, остаётся отдельным gate.
+До terminal/primary проверки ASan pass и develop merge не заявляются.
+
+Первоначальный a1 был только ожидающим процессом3426523: ни исходники, ни
+build/runtime не создавались, расчётов не было. После измерения свободных RAM
+и12 CPU этот owned waiter остановлен с сохранением superseded.json, чтобы
+не откладывать независимую однопоточную сборку до конца многочасового H21.
+A2 использует новые каталоги; прежние сведения не удаляются.
