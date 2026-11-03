@@ -1,3 +1,33 @@
+# Подтверждённое продвижение 03.11: reader21 и controller A/B130
+
+Independent NativeEvidenceTest17/17 PASS:6287b547af9164ccdb4fd1257d9fbcbbbfd43424,
+reader root47e09bec527973500fb24cad0f0ca17c69095242;296 исходных hashes сверены.
+С AssignedNativeEvidenceTest4/4 (1c63ec13a9cad3775d6899ecc16663a15ca79209) получены
+21/21 для полного модуля, двумя явно разделёнными наборами реальных primary данных.
+Диагностика BudgetExhausted не получает придуманный certificate или Exact.
+H8d завершён:197/197 observed,193 successes и ровно четыре известные exception-type
+fixture failures. Evidence40bd553d86e02a682886ee69c30a854f73e5d9b9:1682 members,
+20373764 compressed bytes проверены. Его общий verdict остаётся not_accepted;
+75 independent readers этого run не запускались, он не объявляется193/193 PASS.
+
+CandidateCursor механически выделяет enumeration state; C-search On пока отсутствует.
+Новый root CLI controller-ab использует целые original production/test sources,
+штатный root/Pulse layout и private Git-verified GoogleTest source. Baseline и
+candidate прошли по130/130 pure tests. Evidencebcdae6c4985310850f89356a072ca80b3cbe7ca3,
+346 hashes/36 members сверены; ошибки подготовки прежних попыток сохранены.
+[Scope/команда/SHA](ControllerCandidateEnumeration.ru.md).
+
+H9b сейчас собирает portable model/configuration schema3 на Elder, native209/readers87.
+H10 queued209/104 добавляет native проверку cursor refactor и сравнение primary CSV;
+никакие working sources/runtime не переключаются до закрытия владельцев baseline.
+M40 ASanG3 остаётся жив; при последнем poll39 завершённых successes, финал ещё неизвестен.
+Полный план остаётся активным; только этап0 полностью принят. Нужны native/ASan
+приёмка новых частей, C-search, полная mode/physics matrix, дальнейший pipeline,
+исторические/контрольные эксперименты и остальные пункты исходного аудита.
+Ни одно из приведённых чисел не является качеством научной классификации.
+
+Ниже сохранены предыдущие хронологические срезы.
+
 # Актуализация 03.11: portable C-history кандидат, серверные проверки продолжаются
 
 Связь Automats2 восстановлена. H5 native183 и исправленные independent readers52
