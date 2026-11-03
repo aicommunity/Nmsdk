@@ -51,6 +51,20 @@ class PublisherTest(unittest.TestCase):
             self.assertIsNone(result["scientific_verdict"])
         self.assertEqual(git(self.remote,"rev-parse","refs/heads/develop"),git(self.root,"rev-parse","HEAD"))
 
+    def test_gitmodules_uneven_indentation_uses_native_committed_git_parser(self):
+        # Git accepts this indentation. An ordinary INI parser treats the
+        # four-space branch field as a continuation of the one-tab URL field.
+        content = ''.join('[submodule "'+name+'"]\n\tpath = '+name+'\n\turl = '+
+                          str(self.base/(name+'.git'))+'\n    branch = develop\n'
+                          for name in ('A', 'B'))
+        (self.root/'.gitmodules').write_text(content)
+        git(self.root, 'add', '.gitmodules');git(self.root, 'commit', '-m', 'valid mixed-indentation Git configuration')
+        self.spec['repositories'][-1]['commit'] = git(self.root, 'rev-parse', 'HEAD')
+        result = publish_closure(self.root, self.spec)
+        self.assertEqual(result['publication'], 'published', result)
+        self.assertEqual([r['path'] for r in result['repositories']], ['A', 'B', '.'])
+        self.assertEqual(git(self.remote, 'show', 'refs/heads/develop:.gitmodules'), content.strip())
+
     def _artifact_set(self, *, stage=True, sparse=False):
         (self.root/".gitignore").write_text("*.png\n")
         git(self.root,"add",".gitignore");git(self.root,"commit","-m","ignore derived images")
