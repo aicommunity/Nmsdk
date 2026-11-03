@@ -6,6 +6,7 @@
 #include "NConstGenerator.h"
 #include "NNeuronPostTrainTune.h"
 #include "TimeLearner/StorageProfiles.h"
+#include "TimeLearner/CapacitanceRegion.h"
 #include "TimeLearner/ModelIdentity.h"
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/ModelInspection.h"
@@ -228,7 +229,7 @@ template<class Learner> struct EditingRig {
     EditingRig(unsigned f,int mode,const std::string& suffix,bool tight=false,std::size_t inputs=2,
                bool cold=false,int neuronMode=2,int learnerMode=1,bool domainInhibitionProfile=false,
                const std::string& learnerClass={},int initialFirstSynapses=1,double initialThreshold=1.,
-               const std::string& neuronBaseClass="NSPNeuronGen")
+               const std::string& neuronBaseClass="NSPNeuronGen",std::optional<double> initialInhibitionCapacity={})
         :frequency(f),normalization(mode),inputCount(inputs),tightBurst(tight)
     {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();environment=core.environment;
@@ -237,6 +238,7 @@ template<class Learner> struct EditingRig {
         name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(f)+"_N"+std::to_string(mode)+"_"+suffix;
         StorageProfileSpec profile;profile.name=name;profile.frequencyHz=f;profile.neuronBaseClass=neuronBaseClass;
         if(domainInhibitionProfile)profile.body.inhChannel.capacity=.15e-9;
+        if(initialInhibitionCapacity)profile.body.inhChannel.capacity=*initialInhibitionCapacity;
         profile.initialThreshold=initialThreshold;profile.ltMembrane=profile.body;profile.ltMembrane->excChannel.capacity=.3e-9;
         const auto registered=RegisterStorageProfile(core.storage,environment,profile);
         learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(learnerClass.empty()?
@@ -6108,3 +6110,79 @@ TEST(NativeCapacitanceHistoryBoundary,ClassicN0StoppedEarly){StoppedBoundary<NNe
 TEST(NativeCapacitanceHistoryBoundary,BranchN1StoppedBudgetEarly){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::BudgetEarly,"tracked_budget_early",1,false,1,true,true);}
 TEST(NativeCapacitanceHistoryBoundary,ClassicN1StoppedBeforeFirstTick){StoppedBoundary<NNeuronTimeLearner>(StoppedCase::BeforeFirstTick,"tracked_before_first_tick",1,false,1,true,true);}
 TEST(NativeCapacitanceHistoryBoundary,BranchN0StoppedBeforeFirstTick){StoppedBoundary<NNeuronTimeLearnerBranch>(StoppedCase::BeforeFirstTick,"tracked_before_first_tick",0,false,1,true,true);}
+
+namespace {
+template<class Learner> void NativeCapacitanceRegion(unsigned frequency,int normalization)
+{
+    // The standard storage recipe creates distinct Exc/Inh C0 before any
+    // instance is constructed. No prototype or live-child physics repair.
+    EditingRig<Learner> rig(frequency,normalization,"capacitance_region",false,2,true,
+        2,1,false,{},1,1.,"NSPNeuronGen",.8e-9);
+    rig.learner->BindNativeTrainingCapacitance(.2);
+    const auto initial=rig.learner->ReadNativeTrainingCapacitance();ASSERT_TRUE(initial);
+    const auto beforeWitness=rig.learner->ReadNativeTrainingCapacitanceWitness();ASSERT_TRUE(beforeWitness);
+    const auto parameters=rig.learner->ReadNativeParameters();
+    const auto routing=rig.branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
+    const auto region=SelectCapacitanceRegion(routing,parameters,0);
+    EXPECT_EQ(region,(rig.branch?CapacitanceRegion{1,2,2}:CapacitanceRegion{1,1,2}));
+    const auto baseline=rig.learner->OwnedNativeCapacitanceState()["baseline"].toObject();
+    const auto channels=baseline["channels"].toObject();
+    EXPECT_NE(channels["Dendrite1_2.ExcChannel"],channels["Dendrite1_2.InhChannel"]);
+    QJsonArray probes,inputParameters;
+    for(const auto& value:parameters)inputParameters.append(QJsonObject{{"length",value.length},
+        {"synapses",value.synapses},{"resistance",value.resistance}});
+    const auto measure=[&](const char* phase) {
+        for(std::size_t input=0;input<parameters.size();++input)
+        {
+            const auto observation=rig.Probe(input,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true);
+            ASSERT_EQ(observation.status,NativeProbeStatus::Completed);
+            ASSERT_TRUE(observation.observation);EXPECT_TRUE(observation.observation->complete);
+            EXPECT_TRUE(observation.observation->valid);
+            const auto stem=rig.name+"_probe_"+std::to_string(rig.serial);
+            probes.append(QJsonObject{{"phase",phase},{"input_index",double(input)},
+                {"packet",EncodeNativeProbeEvidence(observation)},
+                {"record_file",QString::fromStdString(stem+"_evidence.json")},
+                {"trace_file",QString::fromStdString(stem+".csv")}});
+        }
+    };
+    ASSERT_NO_FATAL_FAILURE(measure("before"));
+    const auto initialRevision=rig.Revision();
+    const auto request=MakeCapacitanceRegionRequest(*initial,region,1.05,2);
+    const auto changed=rig.learner->ApplyNativeTrainingParameters(parameters,request);
+    ASSERT_EQ(changed.status,NativeEditStatus::Applied)<<changed.reason;
+    EXPECT_NE(rig.Revision(),initialRevision);EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);
+    EXPECT_TRUE(TrainingCapacitanceReadbackMatches(request,rig.learner->ReadNativeTrainingCapacitance()));
+    for(auto it=channels.begin();it!=channels.end();++it)
+    {
+        auto channel=rig.neuron->template GetComponentL<NPulseChannel>(it.key().toStdString(),true);ASSERT_TRUE(channel);
+        const auto membrane=it.key().section('.',0,0).toStdString();
+        const auto selected=request.membraneScales.find(membrane);
+        const double scale=selected==request.membraneScales.end()?1.:selected->second;
+        EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),it.value().toDouble()*scale)<<it.key().toStdString();
+    }
+    const auto afterWitness=rig.learner->ReadNativeTrainingCapacitanceWitness();ASSERT_TRUE(afterWitness);
+    const auto frozen=rig.learner->OwnedNativeCapacitanceState();
+    ASSERT_NO_FATAL_FAILURE(measure("after"));
+    EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),frozen);
+    EXPECT_EQ(rig.Revision(),afterWitness->modelRevision);
+    Artifact(rig.name+"_region.json",QJsonDocument(QJsonObject{
+        {"kind","native_capacitance_region"},{"schema_version",1},{"frequency_hz",int(frequency)},
+        {"normalization",normalization},{"branch",rig.branch},{"input_index",0},{"scale",1.05},
+        {"input_parameters",inputParameters},
+        {"region",QJsonObject{{"dendrite",double(region.dendrite)},{"first",double(region.first)},{"last",double(region.last)}}},
+        {"before",EncodeNativeTrainingCapacitanceWitness(*beforeWitness)},
+        {"after",EncodeNativeTrainingCapacitanceWitness(*afterWitness)},
+        {"probes",probes},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+}
+#define CAPACITANCE_REGION_TEST(Topology,Type,N,F) \
+TEST(NativeCapacitanceRegion,Topology##N##At##F){NativeCapacitanceRegion<Type>(F,N);}
+CAPACITANCE_REGION_TEST(Classic,NNeuronTimeLearner,0,2000)
+CAPACITANCE_REGION_TEST(Classic,NNeuronTimeLearner,1,2000)
+CAPACITANCE_REGION_TEST(Branch,NNeuronTimeLearnerBranch,0,2000)
+CAPACITANCE_REGION_TEST(Branch,NNeuronTimeLearnerBranch,1,2000)
+CAPACITANCE_REGION_TEST(Classic,NNeuronTimeLearner,0,20000)
+CAPACITANCE_REGION_TEST(Classic,NNeuronTimeLearner,1,20000)
+CAPACITANCE_REGION_TEST(Branch,NNeuronTimeLearnerBranch,0,20000)
+CAPACITANCE_REGION_TEST(Branch,NNeuronTimeLearnerBranch,1,20000)
+#undef CAPACITANCE_REGION_TEST
