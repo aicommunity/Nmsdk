@@ -1,5 +1,30 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Normal owner43/readers26 принят адресно; новые API pending, 03.11
+
+Native43 root496a80d719 прошёл полностью. Исправленный reader-only gate26
+sourcec63d1b7b9c08c7542398ca944bcc7cf22e5ea2b4 прошёл без errors/failures/skips
+на тех же1062 members numerical primary; новый numerical run не выполнялся.
+Combined proof7ec395554f0f8d506c08b587ba130025d0af1719 проверен:11 members/
+16660bytes,278 source hashes и actual Git diff/gitlinks подтверждают неизменность
+C++/CMake относительно numeric root. Ошибочный control удалял implicit units,
+сохраняя dormant1.1; исправлен выбор реального non-unit path и строгая причина
+отказа. Expected matrix теперь читается из native declaration, не ambient flag.
+
+M40 ASan43 G3 на sourcec63d1b7b9 начал сборку после проверки всех prerequisites.
+Elder H4 на mechanical snapshot1c992e4ab впервые собрал SDK134;130 PASS/4 failures
+связаны с borrowed QJsonValueRef в новом тесте (ожидание C₀ стало0), fixed owning
+value pending повторной проверки. Actual frame выявил missing dataset/generator
+в отдельно снятой registry closure; producer исправлен, reader не ослаблен.
+Следующий integrated gate должен выполнить140 SDK cases и26 structured readers
+(bridge9+domain9+binding8). C-trim/service dispatch/summary schema3 ещё не готовы.
+
+ASan C3 temporal report завершён48/72,8895 checksums.26 shared-Y и6 local-Y PNG
+проверены и напрямую просмотрены;32 выбранных views читаемы. Полные2697 PNG/SVG/PDF
+остаются на M40 Data, global visual acceptance и scientific verdict отсутствуют.
+[Подробности, commits и scope](NativeTrainingCapacitanceBridge.ru.md).
+Полностью закрыт по-прежнему только исходный этап0.
+
 ## Совпадение всех normal/ASan primary waveform, 03.11
 
 Опубликован5c7838123aafa54597b4f66e0a1a2a08f462a1f9: все48 owner8 CSV
