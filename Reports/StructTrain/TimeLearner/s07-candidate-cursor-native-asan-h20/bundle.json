@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "9c39adbbbd7afd6af4a64393e719fd48efce4dd5",
+  "pulselib": "5fed73a0379d5599656e40f58e0600469d43f28c",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 105,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "actual_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "b9d5b1e2b35b46c6cf5de5f4feef0dfaa0da356950659d1ecced4597159e2e6c",
+  "archive_bytes": 1775,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "superseded-publisher.json": "28061806ed428cccc161e17a19931ded767f62f2cc046513970d7b9cf340ae48",
+    "gate/exception.json": "41a14a56556c91f81bc236d9c4fd16e362c7bc3bf96ad31c3171f6d61a75fcec",
+    "gate/h19-preparation-failure.json": "be7eeac853713e4e03caebb0e38a7bdaa7c6ef22b34ed52643faaff83eaf7151",
+    "gate/owned-supervisor.json": "79ff27dbef06a84ed11831bb43daabf972ba1c5e40c095f672e710716c39040d",
+    "gate/resource-preflight.json": "9a7dc48f6c3e33f0cdcb6b1f77b128105ed12909b1eaafac7710ceffe1fcdd03",
+    "gate/waiting-baseline.json": "f7cc0d818a9a0122f8e5efaa3af74d20c2436037629557d420b0312753cceba7"
+  },
+  "scope": "Mechanical CandidateCursor extraction ASan; exact baseline213 primary CSV A/B and corrected105 readers required. Targeted6 (four configured explicit-probe ownership cases and both original H11 failures), then full native213/readers87. Before source reuse verify complete H11 archive2018 and exact queued-probe illegal-C0-read diagnostics; wait all prior owners closed. Only Classic/Branch automatic Start ownership guard and dedicated tests, no Cursor, active C-search, physical model, tolerance or scientific classification change. ASan actual mappings required for both target and full native processes; detect_leaks=0, no leak-check claim.",
+  "scientific_verdict": null
+}
