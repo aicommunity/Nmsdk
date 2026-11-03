@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_native_capacitance_transport_evidence",
+  "schema_version": 1,
+  "root": "496a80d7190cafcc1e96329ee3c8e2b17cb40114",
+  "pulselib": "30495d143795022ad444bf290d2ac30b7e140199",
+  "rdk": "a62393f7791cc4ad10d1c2c11f255b3db3334f89",
+  "statuses": {
+    "readers": {
+      "expected": 26,
+      "observed": null,
+      "assertion_status": "not_passed"
+    }
+  },
+  "actual_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "e327fccd70344f6623648b9f65c7682b06ed1234df02a962e4c33a2063b0df8f",
+  "archive_bytes": 710,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/exception.json": "c2900e6bbb23c182a00afedc5c5157fd9378371bcd8b63377f0d393043935455",
+    "gate/fetch-normal-proof.log": "aa0abfeb5366be83ffeef6139ffa3a69ecddff3e7f1bb6cca82739fc857eee6e",
+    "gate/owned-supervisor.json": "66be01f6f2c1e5e6b6ea01e27cc7029cea049ab27d6a4107fe5cf5c4afc298bd",
+    "gate/prerequisite-verification.json": "a79d996503b2e46451fdec8c6b40f7dc120b8acb5d543d5dfe3e0b0edfe18729"
+  },
+  "scope": "Native transport43 plus independent readers26, including four corrected explicit-graph dormant transfers. Full inventories and primary preserved on failure. Actual ASan mapping required for acceptance. No scientific classification verdict.",
+  "scientific_verdict": null
+}
