@@ -10,7 +10,7 @@ interval также не должен создавать отдельные од
 Новые три regression tests охватывают Classic/Branch N0/N1 при двух context
 slots, warm1.1 correction и пустой coincident Branch interval. Ожидаемая
 воспроизводимость на старом коде — failure minimal-budget и empty-interval,
-успех warm-reset; это ещё требует серверной проверки. Declared kernel151
+успех warm-reset; это подтверждено серверной проверкой K3 ниже. Declared kernel151
 (14 On controls), native target30, future full regression258. Исторические
 J2 27/19 и K2 148 остаются результатами своих immutable source snapshots.
 
@@ -46,4 +46,24 @@ Pulse198 и те же151 tests. Исправление Pulse84e456d6fb551021e022
 Для Branch учитывает текущую downstream length и upstream upper bounds;
 консервативно не удаляет context, если no-op не доказан. Штатные native preview,
 C0/profile и fresh all-input gates остаются авторитетными.
-Серверные reproduction/corrected/off-compatibility проверки ещё требуются.
+Серверные reproduction/corrected/off-compatibility проверки завершены; native/ASan/matrix проверки исправления ещё требуются.
+
+
+## Серверная проверка K3, 03.11.2026
+
+Evidence commit `06408c3487f5c6f62e2090e3ea27515f16a56470`,
+[пакет](../../../Reports/StructTrain/TimeLearner/s07-capacitance-contexts-kernel-normal-k3/bundle.json).
+На Elder собраны целые production decision sources с оригинальным GTest:
+
+- Off compatibility: 137/137 baseline и 137/137 candidate, одинаковые test sources.
+- Старый Pulse198 / root e927b4a59537a3c32233a96603644bf68e6c9bac:
+  149/151, ровно два ожидаемых failures minimal-budget и empty-interval.
+- Исправленный Pulse84 / root d23a4164669bf3dcee8918f6322085e558a99e49:
+  151/151, включая сохранение настоящего warm reset к C0.
+
+Старый failed verdict сохранён как воспроизведение дефекта. Для сравнения старого
+и исправленного кода использованы одинаковые test sources. Независимо сверены
+outer checksums, все71 archive members /87570 compressed bytes, 106 production
+source records и312 runner source records по точным Git commits. Это проверка
+контроллера; native Rdk integration, ASan, физическая матрица и classification
+не подтверждаются. Полные этапы плана этим не закрываются.
