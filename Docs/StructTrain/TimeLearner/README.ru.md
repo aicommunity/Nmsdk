@@ -4,7 +4,7 @@
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
 [Научная сводка 03.11: реальные 5/8, ложные ответы и ссылки на графики](ScientificResults-2026-11-03.ru.md).
-[Следующая серия: фиксированные N1-пороги, порядок, Reset и пауза](N1ProtocolRobustness.ru.md).
+[Завершённая серия: фиксированные N1-пороги, порядок, Reset и пауза](N1ProtocolRobustness.ru.md).
 
 Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
 
