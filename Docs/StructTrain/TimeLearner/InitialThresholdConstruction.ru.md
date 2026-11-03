@@ -101,7 +101,21 @@ LTMembrane отсутствует, число сом и LTZone/feedback connecti
 дендритов разрешены; это не сравнение конечной модели с неизменённым шаблоном.
 Четыре адресных reader tests используют реальные cold пакеты двух топологий
 и отклоняют rehashed добавление LT, изменение C и перенаправление feedback.
-Эти новые проверки до серверного результата остаются непроверенными.
+Серверная проверка A2 завершена:4/4 без errors/failures/skips, evidence commit
+`613bb241d06cce32f4881b351365f6c59090be2d`. Использованы actual initial/final
+graphs из исходного cold proof `322409d685f20ab6b0be03f7d69e69399f127239`;
+численные прогоны не повторялись. Независимо проверены7 archive members,
+outer/member hashes,289 точных Git source hashes и фактический reader result.
+Это подтверждает scoped reader, а не сходимость cold Train. A1 остановился
+до reader из-за отсутствующего Git object исходного proof; в A2 добавлен его
+явный fetch. Отказ A1 сохранён в `0f3df5456328ca7fbb37a1d89117acc8d524f93b`.
+
+Серия `s07-stock-threshold-pair-normal-a1` поставлена на Elder в ожидание
+конкретного owner A3. При его отказе серия завершится без Train. При принятом
+A3 она использует неизменённый native runtime root7ffec7acb и отдельный
+Python code snapshot74369ef34; SDK не обновляется. Декларации четырёх условий
+формируются production workflow до первого native вызова. Это ещё не результат
+четырёх обучений и не проверка классификации.
 
 Четыре cold runs — по одному на условие. Генератор и остальные декларации не
 получают случайности от нового attempt ID. CapturedPerInput, bounds, Ns1,
