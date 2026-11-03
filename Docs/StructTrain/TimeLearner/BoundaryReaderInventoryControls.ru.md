@@ -12,9 +12,10 @@ registry и корректно даёт invalid_capacitance_boundary_inventory. 
 
 Исправление только в тестах, без изменения auditor/численных данных/допусков:
 
-- Missing-capture control работает на фактических multi-witness boundaries,
-  сохраняет непустой registry и требует точную missing-reference диагностику.
-  Отсутствие подходящего actual fixture — failure, не skip.
+- Missing-capture control заменяет capture_witness_id на заведомо отсутствующий
+  корректно сформированный ID, сохраняет весь непустой actual registry и требует
+  точную missing-reference диагностику для каждого package. Ни один fake witness
+  не создаётся. Это работает и при общем единственном capture/current witness.
 - Отдельный empty-inventory control очищает registry каждого из12 actual
   completed/stopped packages, пересчитывает envelope digest и требует точную
   invalid-inventory диагностику. Корректный общий capture/current witness
@@ -28,3 +29,11 @@ native Cursor A/B общий reader gate станет105 (88 +17), с отдел
 остальная матрица сохраняются; native success не заменяет reader acceptance.
 
 На момент фиксации кода повторная серверная проверка ещё не выполнена.
+
+Прямая проверка всех12 H12 packages показала по одному общему capture/current
+witness: этот transport corpus не включает изменение effective model между
+reference capture и export. Поэтому первый неподтверждённый draftdafecee16,
+требовавший multi-witness fixture, исправлен до запуска проверки: missing-link
+контроль теперь меняет ID на отсутствующий, не удаляя единственную запись.
+Нельзя считать этот corpus доказательством multi-revision boundary transport;
+для этого остаётся отдельный реальный C-edit/growth native контроль.
