@@ -126,6 +126,19 @@ class ModelSpecTransportRunTest(unittest.TestCase):
             manifest = load(folder/'run-manifest.json')
             self.assertEqual(manifest['execution'], 'completed')
 
+    def test_schema1_and_schema2_have_the_same_measured_solo_and_calibrated_physics(self):
+        for top in ('Classic', 'Branch'):
+            solos = [load(self.root/'runs'/(top+'-v'+str(v)+'-train')/'native/train_learned_state.json')
+                     for v in (1, 2)]
+            self.assertEqual(solos[0]['model_revision'], solos[1]['model_revision'])
+            self.assertEqual(solos[0]['trained_inputs'], solos[1]['trained_inputs'])
+            self.assertEqual(solos[0]['neuron']['graph'], solos[1]['neuron']['graph'])
+            calibrated = [load(self.root/'runs'/(top+'-v'+str(v)+'-calibrate')/'native/model.json')
+                          for v in (1, 2)]
+            self.assertEqual(calibrated[0]['threshold'], calibrated[1]['threshold'])
+            self.assertEqual(calibrated[0]['model_revision'], calibrated[1]['model_revision'])
+            self.assertEqual(calibrated[0]['neuron']['graph'], calibrated[1]['neuron']['graph'])
+
 
 if __name__ == '__main__':
     unittest.main()
