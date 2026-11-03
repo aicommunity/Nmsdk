@@ -54,6 +54,17 @@ class CapacitanceDomainEvidenceTest(unittest.TestCase):
                 with self.assertRaisesRegex(EvidenceError, '^unversioned_domain_capacitance$'):
                     audit_resistance_domain(record)
 
+    def test_actual_legacy_domain_keeps_its_physics_and_schema(self):
+        for path, typed in self.records:
+            with self.subTest(path=path.name):
+                legacy = load(path.with_name(path.name.removesuffix('.json')+'_legacy.json'))
+                self.assertEqual(legacy['schema_version'], 2)
+                result = audit_resistance_domain(legacy)
+                self.assertEqual(result['physics_verified'], legacy['status'] == 'available')
+                self.assertNotIn('capacitance_verified', result)
+                for key in ('status', 'preview_model_revision', 'preview_model', 'minimum_resistance', 'maximum_resistance'):
+                    self.assertEqual(legacy[key], typed[key])
+
     def test_requested_and_effective_scales_cannot_disagree(self):
         for path, original in self.records:
             with self.subTest(path=path.name):

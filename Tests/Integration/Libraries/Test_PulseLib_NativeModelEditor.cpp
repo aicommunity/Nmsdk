@@ -672,6 +672,15 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
         EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),live);EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),owned);
         const auto encoded=EncodeResistanceDomainAssessment(domain);EXPECT_EQ(encoded["schema_version"],QJsonValue(3));
         Artifact(rig.name+"_domain.json",QJsonDocument(encoded).toJson());domainRevision=domain.previewModelRevision;
+        std::string ownedRevision;
+        auto legacyCorrection=ParseNativeCapacitanceState(QJsonDocument(owned).toJson(QJsonDocument::Compact).toStdString(),ownedRevision);
+        legacyCorrection.membraneScales=future.membraneScales;legacyCorrection.dormantMembraneScales.clear();
+        const auto legacyDomain=rig.learner->AssessNativeResistanceDomain(geometry,0,legacyCorrection);
+        EXPECT_EQ(legacyDomain.status,domain.status);EXPECT_EQ(legacyDomain.previewModelRevision,domainRevision);
+        EXPECT_EQ(legacyDomain.minimumResistance,domain.minimumResistance);EXPECT_EQ(legacyDomain.maximumResistance,domain.maximumResistance);
+        EXPECT_FALSE(legacyDomain.capacitance);EXPECT_FALSE(legacyDomain.effectiveCapacitance);
+        const auto legacyEncoded=EncodeResistanceDomainAssessment(legacyDomain);EXPECT_EQ(legacyEncoded["schema_version"],QJsonValue(2));
+        Artifact(rig.name+"_domain_legacy.json",QJsonDocument(legacyEncoded).toJson());
         auto invalidDomain=future;invalidDomain.maximumRelativeChange=.3;
         const auto rejected=rig.learner->AssessNativeTrainingResistanceDomain(geometry,0,invalidDomain);
         EXPECT_EQ(rejected.status,ResistanceDomainStatus::Unsupported);EXPECT_EQ(rejected.reason,"training_capacitance_origin_or_policy_changed");
