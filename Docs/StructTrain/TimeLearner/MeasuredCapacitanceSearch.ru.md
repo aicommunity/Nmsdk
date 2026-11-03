@@ -119,3 +119,20 @@ configured C policy и сам поиск C пока не подключены. �
 срез working C-trim On. Добавлены6 state-level и5 production-session unit
 controls; проверки на серверах подготавливаются. Старые callers без C-карты
 сохраняют None/unknown provenance, а не получают вымышленный C₀.
+
+Первая strict unit сборка B1 на root629876c13/Pulse31f27af остановилась до
+исполнения84 tests: четыре прежних conditional GTest assertions требовали
+явных braces. Normal failure proof16eb145511bda89e6503a20962cc15f0227a2679,
+ASan d33f8027425004bbf7f993e21615af8d9c18777d; все8 members каждого архива
+проверены, observed_tests=0. Test-only исправление4f4d5f5ad не меняет assertions.
+
+B2 затем выявил прежние implicit empty optionals PeakObservation и misleading
+indentation в independent Stop/reset statements. Failure proofs:
+normal4d267c9134189828b3baae732709eb176a5235e6,
+ASan8c6bec8af49ebfc73dd53531eb3d510d66320b5d. Численные tests не выполнялись.
+Это compile diagnostics, не научные FAIL и не подтверждение C-state behavior.
+Отдельные Pulse refactor commits3ee9975 и9d95f05 явно задают прежние nullopt
+defaults и границы независимых statements, не заменяя unknown measurements
+нулевыми числами. Следующий strict gate включает27 observation и19 final
+verification regressions дополнительно к84 controller/proposal/state cases:
+итого130 tests. Полный native C-trim pipeline по-прежнему не включён.
