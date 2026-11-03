@@ -443,3 +443,32 @@ construction threshold и последующие stock controls пока в feat
 остальная миграция скриптов, fault/lease/publication matrix, научные контроли
 на stock моделях и сквозная актуализация документов. Fresh recursive checkout
 последнего develop после этого merge также ещё требует отдельной проверки.
+
+## Дополнение04.11: проверка физического model archive после construction
+
+В feature codex/timelearner-initial-threshold проверены18 native cases на
+Elder normal и M40 ASan. Доказательства60f5905c7b04ac41f16d405d2fe715f1e3eed174
+иcd3a477ee03f5f75b2d71af83772ec6dce5dda1e опубликованы и объединены через
+--no-ff. Подробности и независимые проверки: InitialThresholdConstruction.ru.md,
+InitialThresholdArchiveNormalVerification.json и
+InitialThresholdArchiveASanVerification.json. Каждый пакет содержит97
+проверенных members;430 source hashes совпали с точными Git blobs.
+
+Четыре новых Classic/Branch ×2000/20000Hz cases проверяют полный физический
+граф и реальный scheduler response после export/import/Build/Init/Reset.
+Construction threshold100 не стирает последующий instance threshold0.005.
+Stock модель без LTMembrane. Training metadata явно not_trained; полного
+calibrated recognition-state roundtrip ModelSpec2 эти cases не доказывают.
+Ни этап4, ни5 не закрывается по этому узкому контракту. Pulse541 и root
+feature пока не приняты в develop: требуются оставшиеся профильные gates.
+
+H21 full213 на M40 подтверждён живым по PID3416749/start_ticks281000389;
+его ожидание не является повторным запуском. Полный80-pair temporal report
+stock stopped diagnostic ожидает завершения этого owned процесса. Численные
+32 пробы опубликованы отдельно (c8381cfc3ecbf446ae1f59175c794ef547dcc93d),
+обученные классификаторы и научная сходимость ими не заявляются.
+
+На момент проверки Elder имел31GiB свободно, M40 root84GiB и Data423GiB;
+два текущих native задания работали. Причина нехватки места не подменяется
+диагнозом SSH. Новые тяжёлые отчёты размещаются на Data; primary/model/history
+не удалены. Исходная классификация этапов остаётся:0 завершён,1–12 частичны.
