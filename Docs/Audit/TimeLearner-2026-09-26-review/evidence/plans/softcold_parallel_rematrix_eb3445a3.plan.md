@@ -28,6 +28,9 @@ todos:
     status: completed
 isProject: false
 ---
+> Дополнение03.11.2026: это исторический документ кампании. SoftCold/OpenGaps/T2/T4 shell launchers удалены из текущего дерева; их исходники доступны в Bin commit `39d811e5e0798eecf124f32356c9fc6edbe4538a` по прежнему пути. Полный retrieval manifest: `Docs/StructTrain/TimeLearner/script_migration.json`. Измерения и прежние выводы ниже сохранены; старые команды не являются инструкцией нового запуска.
+
+
 
 # План: стоп W4 → фиксы §1–3,§5 → parallel SoftCold 49×6
 

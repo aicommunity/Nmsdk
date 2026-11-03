@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -1755,6 +1755,215 @@
       "replacement": null,
       "reason": "Historical fixed-workspace validation/build/report/publication receipt for a completed implementation campaign; no active package references. Not an experiment algorithm or reusable production launcher.",
       "original_results": "Preserved. Retrieval snapshot is not an attestation of the runtime source used by the historical job."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/open_gaps_remain6_waiter.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "a58191a482ed418a00fc4fcfbf3ddec886167412",
+      "blob_sha1": "f65648d339ac231546c5d2aca8d0728bc8c3a83c",
+      "content_sha256": "3e39f6f0c07337eef697c2f2d66ba30fe115aac5e132fedb08ca6ecdbf5ad4b5",
+      "bytes": 2896,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/open_gaps_remain6_waiter.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/open_gaps_remain6_waiter.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical OpenGaps six-case waiter; pattern-based process intervention and fixed old RCS/queue paths.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/open_gaps_w0_diag.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "a58191a482ed418a00fc4fcfbf3ddec886167412",
+      "blob_sha1": "2e535c5d5f546a430ac9fd06c3194d7595701599",
+      "content_sha256": "1a3e6fceba7106c489a1646dd85b173734b9e2b40baea0d12bac4ad135a4b858",
+      "bytes": 1760,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/open_gaps_w0_diag.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/open_gaps_w0_diag.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical OpenGaps W0 subset; old posttune_verify, shared logs, RCS and case manifest.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/run_canon_soft.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "9fc706572e8794e07c9de5bde4c9f46fb361e44e",
+      "blob_sha1": "b6633584df49eccf33e0b0e0e10d053c5cbe8163",
+      "content_sha256": "b47bf3c960783dc1280dacfd696b0617a297a933ca585d6b52c571b251d1901d",
+      "bytes": 1403,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/run_canon_soft.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/run_canon_soft.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Branch/FastSpan two-repeat cold harness and implicit old registry commits.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/run_invest_ab.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "281a2d01b006c6eb0a36e23e25cb4562735416ed",
+      "blob_sha1": "2bc3afbfce1a23b7d1779c61c305a4c53ecd0288",
+      "content_sha256": "b2114e105aa18ce24a62d489a39475de62870a3555164892c9a143cbf70c0bc8",
+      "bytes": 1807,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/run_invest_ab.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/run_invest_ab.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed A1/A2/B1/B2 investigation harness and shared status files/commits.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_c_batch.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "fbfdcf7d8b14f9f8d5eae93db16874f369023ee8",
+      "blob_sha1": "54b912c67e55b30ece97d49f2e6bacb7745292a1",
+      "content_sha256": "2281bfdc7b165c1d17cf53d6de5a6b09e5203efe85c2a585eb75fa91e377aee9",
+      "bytes": 1589,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_c_batch.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/softcold_c_batch.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical C1/C2 fixed case list using old posttune_verify and shared runtime.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_full49_status_snapshot.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "047f640176ef8db8a2205a1958cde30c96cb4600",
+      "blob_sha1": "c856ed0907589716fa277344f6257e8266a65f1f",
+      "content_sha256": "224243ccb07e04cadbf299174fd621c431040f05a5572df1ab7154bba6dc29da",
+      "bytes": 1753,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_full49_status_snapshot.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/softcold_full49_status_snapshot.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical full49 status from old RCS/log/process names; rc0 is not modern scientific PASS.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "60ab6eb6d6a704a780cd1ca19a39e479071d5bd3",
+      "blob_sha1": "7dd1b564bdc61939efd009b72293b22e11a9740b",
+      "content_sha256": "a1e2de2f7a600a914e9ec49193b0d39a4e00bddf562c3e689478d4ce8c5388bf",
+      "bytes": 2000,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical serial full49 queue and legacy registry updates; shared workspace/runtime.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix_parallel.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "217c0656a344f40351e5a5ebaee11dc5652799a4",
+      "blob_sha1": "accf571a179fbddc26ecc5999d835bddf8526cc9",
+      "content_sha256": "72fa102693ff4fb72f4aa5689271b8f3d177e897f96c9c8246c1a225e47d076a",
+      "bytes": 3806,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix_parallel.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix_parallel.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical full49 xargs queue/shared RCS; labels rc0 as PASS, not a training certificate.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_w4_status_snapshot.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "9acff00938ab247a00cc5e7db4bf4816c5d48e3c",
+      "blob_sha1": "6b12e0d372ca4d850174a7472ac2b910eda1efa4",
+      "content_sha256": "92a3ecee77c31c93c86bb44112a61a23427f272e40dd2ccb1c9afa37ed3d4f99",
+      "bytes": 1355,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_w4_status_snapshot.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/scripts/softcold_w4_status_snapshot.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical W4 full49 status tied to old logs/RCS and process names.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/runs/T2_control_batch.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "d9a61e11b3a3ec9cba5862a4bcce48832c979207",
+      "blob_sha1": "1f655989343ff2ba33a4a5a6d9c09311f454b8f1",
+      "content_sha256": "5b07c073ac593ae583a115d49b9b8da34ffa406eb56865e8853e8e8b8beed0c4",
+      "bytes": 1210,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/_repro/runs/T2_control_batch.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/_repro/runs/T2_control_batch.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical T2 three-case Branch/Asym control batch; old shared Console and posttune harness.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/runs/T4_cold_matrix.sh",
+      "action": "retired_historical",
+      "archive_commit": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "last_change_commit": "0600e38a118f4b5b578187d0c4b1e0339537474f",
+      "blob_sha1": "da98908f3da50788144b4c91330126bac145374b",
+      "content_sha256": "4509e260f1b964e158d3ced4e28dd9bb144d2b97edff5d838025b54a413570a8",
+      "bytes": 2868,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/_repro/runs/T4_cold_matrix.sh",
+      "retrieval_command": [
+        "git",
+        "show",
+        "39d811e5e0798eecf124f32356c9fc6edbe4538a:Configs/SpikeSamples/StructTrain/_repro/runs/T4_cold_matrix.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical September D4/T4 fixed six-case matrix; old shared runtime and historical audit outputs.",
+      "original_results": "preserved; retrieval snapshot does not assert historical execution source"
     }
   ],
   "reference_review": {
