@@ -79,6 +79,39 @@ A3 запущен на Elder в отдельных source/build/runtime/framewor
 приёмка14 native tests, двух preflight100 и трёх reader tests; cold pair ещё
 не выполнялся. Эти состояния не означают завершения этапов4/7/11.
 
+### A3:13 реальных pass, один неверно заданный negative fixture
+
+A3 завершил полную сборку и все14 cases;13 прошли. Единственный failure —
+`NativeInitialThreshold/UnsupportedZoneIsRejectedBeforeAttachment`: fixture
+передал C++ имя `NPulseSimpleLTZone` в поле имени storage-образа. В реальном
+CreateClassSamples этот образ зарегистрирован как `NPSimpleLTZone`.
+RegisterStorageProfile корректно выдал `missing_profile_template` до вызова
+проверяемого construction API. Поэтому отказ не проверял требуемую диагностику
+неподдерживаемой scalar threshold semantics.
+
+Исходный A3 proof `0edde4558c2ad8035688afb2133752aa8f31c481` остаётся
+`not_accepted`; независимо сверены132 members,424 exact root/child Git source
+hashes и фактический XML14/13/1. Supported stock100, legacy image,2000/20000Hz,
+repeated Build/Init/Reset, codec и pool controls прошли в этом scoped запуске.
+Это не общий14-case pass. Source hashes дочерних файлов проверены по точному
+gitlink Pulse541bf89b, а не попыткой читать submodule contents из root tree.
+
+Первая cold pair закономерно отказалась до Train: proof
+`e8d882f7740aa36cf7215de6999c3ed533038ef1`,5 members/289 source hashes сверены.
+Исправление fixture в root `ed12d19c7a43d7e35fa15e209159aa219b0fd61d`
+использует `NPSimpleLTZone` и сначала требует реальный `CheckClass`. Ожидаемые14
+test names и production Pulse Core не изменены. Stock scientific model по-прежнему
+имеет NPulseLTZoneThreshold и не содержит отдельной LTMembrane.
+
+Новая A4 выполняется в отдельных source/build/runtime/framework каталогах на
+Elder. Pair A2 ждёт конкретного A4 owner; при отказе не начнёт обучение.
+Исходные A3 source/runtime не изменяются. До фактических A4 и pair результатов
+приёмка14/2/3 и четыре cold обучения остаются pending.
+
+`model.schema_version=2` — версия вложенного NativeModelSpec с initial threshold;
+она отлична от версии внешней cold configuration (cooperative policy и C-search
+имеют собственные внешние версии). Их нельзя объединять по одному числу2.
+
 `stock-threshold-study prepare/run/analyze` использует прошедший native
 preflight100 как источник stock-конфигурации. `run` требует тот же runtime
 manifest и code identity (Pulse Core/Rdk Core trees и hash Console driver).
