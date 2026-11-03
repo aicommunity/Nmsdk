@@ -1,5 +1,12 @@
 # Миграция скриптов TimeLearner
 
+Актуально03.11:105 records (103 retired/2 moved), complete=false. Проверены оба
+workers и restored-launcher negative control для11 SoftCold/OpenGaps/T2/T4 tools;
+[точные SHA и границы](SoftColdLauncherRetirement.ru.md). Все старые пути удалены
+без wrappers. Ни первичные данные, ни история научных выводов не удалены.
+Ниже — хронология ранее принятых пакетов, а не competing current launch guide.
+
+
 Исторические shell-файлы из Docs уже удалены; следующий пакет удаляет четыре
 разовых Python-инструмента SoftCold/W1/W2: [обоснование и источники](DocsPythonRetirement.ru.md).
 Это частичная миграция этапа 9; production runner/queue, активные анализаторы,
