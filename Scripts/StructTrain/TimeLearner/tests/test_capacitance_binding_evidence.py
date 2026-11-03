@@ -90,10 +90,10 @@ class CapacitanceBindingEvidenceTest(unittest.TestCase):
 
     def test_actual_retained_references_block_first_binding(self):
         root = Path(os.environ['TIMELEARNER_TRAINING_CAPACITANCE_BRIDGE_DIR'])
-        guards = [load(p) for p in sorted(root.glob('*_binding_reference_guard_reference_guard.json'))]
+        guards = [(p, load(p)) for p in sorted(root.glob('*_binding_reference_guard_reference_guard.json'))]
         self.assertEqual(len(guards), 2)
-        self.assertEqual({g['branch'] for g in guards}, {False, True})
-        for guard in guards:
+        self.assertEqual({g['branch'] for _, g in guards}, {False, True})
+        for path, guard in guards:
             with self.subTest(branch=guard['branch']):
                 self.assertEqual(guard['kind'], 'native_capacitance_binding_reference_guard')
                 self.assertEqual(guard['reason'], 'training_capacitance_binding_requires_initial_model_boundary')
@@ -102,8 +102,22 @@ class CapacitanceBindingEvidenceTest(unittest.TestCase):
                 identity = guard['before_model']
                 self.assertEqual(identity['sha256'], canonical_model_sha256(identity['model']))
                 packets = guard['reference_packets']; self.assertEqual(len(packets), 2)
-                audits = [audit_probe(packet) for packet in packets]
+                # The embedded packets carry observations, not their waveform
+                # samples. Resolve the actual recorder outputs by trial ID.
+                primary = {}
+                stem = path.name.removesuffix('_reference_guard.json')
+                for trial_path in sorted(path.parent.glob(stem+'_training_proof_*.json')):
+                    packet = load(trial_path); trial = packet['requested_specification']['trial_id']
+                    self.assertNotIn(trial, primary)
+                    primary[trial] = (packet, trial_path.with_suffix('.csv'))
+                self.assertEqual(set(primary), {p['requested_specification']['trial_id'] for p in packets})
+                audits = []
+                for packet in packets:
+                    trial = packet['requested_specification']['trial_id']; recorded, trace = primary[trial]
+                    self.assertEqual(packet, recorded)
+                    audits.append(audit_probe(recorded, trace))
                 self.assertTrue(all(a['valid_observation'] for a in audits))
+                self.assertTrue(all(a['trace_checked'] for a in audits))
                 self.assertEqual(len({a['trial_id'] for a in audits}), 2)
                 self.assertTrue(all(p['current_base_revision'] == identity['sha256'] for p in packets))
                 self.assertIsNone(guard['scientific_verdict'])
