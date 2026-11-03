@@ -1,3 +1,22 @@
+# Составная normal приёмка и schema4 адресный gate, 03.11
+
+H12 actual native213/213 и target6/6 положительны; первоначальный overall
+not_accepted сохранён из-за одного exact-diagnostic test failure. H16 проверил
+исправленные88 readers на тех же данных без нового обучения;10 members/24678
+bytes и400 Git source hashes независимо сверены. [Контракт](BoundaryReaderInventoryControls.ru.md).
+
+J2 schema4 завершён native27/27 и readers19/19; evidence904a436a555c4424fdf1f99dfd7089613e648529
+пока ожидает независимой локальной сверки. Все4 actual activation controls
+содержат3 physical witnesses/12 trial bindings после реальных C edits; это
+валидные отрицательные результаты, не scientific classification PASS.
+
+При интеграции ownership ветки сохранены все4 NativeConfiguredProbeOwnership
+cases и весь region/schema4 corpus. Полная будущая regression specification
+расширена с251 до255; новая объединённая C++ сборка ещё не проверена.
+Pulse198dd5b является потомком исправления54516bcc; gitlink сохранён на198.
+H17 Cursor A/B выполняет отдельный исходник без C-search с native213/readers105,
+ASanH14 продолжает schema3 baseline. Полные этапы0–12 этим не закрываются.
+
 # Визуальный подэтап03.11: coverage32/48 и direct review16
 
 R1 native15/15 ASan и readers16/16; Visual-v3 render/readers11/11, полные
@@ -112,6 +131,27 @@ regression и native Cursor A/B в данном адресном запуске 
 Обе ветки с кодом и точными gitlinks опубликованы, рабочие деревья чисты.
 Новые изменения не включены в develop до прохождения собственной приёмки.
 C-search On не активирован; цель всего плана0–12 остаётся действующей.
+
+### Историческое уточнение H11 из ownership ветки
+
+# Уточнение configured probe ownership после H11
+
+H11 полностью выполнил209 cases:207 passed, два configured C-history cases
+остались неуспешными. Сохранённая диагностика установила pre-Train конфликт:
+queued external probe пересекается с automatic BindNativeTrainingCapacitance;
+training получает invalid_model/training_capacitance_read_during_probe ещё
+до начала сессии. Это уточняет прежнюю гипотезу о frozen evaluation.
+
+В обоих learner подготовлено условие законной передачи управления: automatic
+Train ожидает завершения пробы и чтения её результата (AtEditBoundary).
+Исправление требует адресных и полных normal/ASan проверок; пока не принято.
+Бюджеты/допуски/физика не увеличены и не ослаблены.
+
+Принятый develop3bfb72a1 /Pulse027070e8 остаётся scoped auto-owner/transport
+43 native /26 readers normal и ASan; recursive closure17a4f61d сверяет7 children.
+[Приёмка C0](C0Acceptance-2026-11-03.ru.md). Полные этапы4/5/7 не закрыты,
+полностью принят только исходный этап0. Schema3 API и этот fix не принимаются
+одним принятым transport corpus. Ниже сохранена хронология прежних выводов.
 
 # Уточнение 03.11: полный результат H9b, отказ H10, следующий baseline
 
