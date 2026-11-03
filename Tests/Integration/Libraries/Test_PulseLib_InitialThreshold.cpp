@@ -75,7 +75,7 @@ template<class Owner> void Construct(unsigned frequency,bool explicitThreshold) 
     ASSERT_EQ(result.status,NativeModelBuildStatus::Constructed)<<result.reason;
     scope.model->Init();scope.model->Reset();
     auto neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(neuron);
-    auto zone=neuron->GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
+    auto zone=neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
     EXPECT_FALSE(neuron->GetComponent("LTMembrane",true));
     EXPECT_DOUBLE_EQ(zone->Threshold.GetData(),explicitThreshold?100.:stock);
     const auto identity=InspectNativeLearnerModel(*owner,s,{1,1,1,1});
