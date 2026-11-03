@@ -1,0 +1,74 @@
+# Механический мост полного C-состояния в native API
+
+Подэтап7, ещё не принятый runtime. Общий модуль Pulse Core/TimeLearner/
+NativeTrainingCapacitance связывает typed TrainingCapacitance с существующим
+native C₀ owner. Оба learner сохраняют классы/режимы/config loading и получают
+два C++ метода: ReadNativeTrainingCapacitance и ApplyNativeTrainingParameters.
+Новых XML properties или действующего фактора C-trim этот API не создаёт.
+
+## Контракт
+
+```text
+read at an idle/completed physical boundary:
+    absent owned C0 -> nullopt (unknown, never fabricated unit baseline)
+    validate signed native state against actual graph/physics/model revision
+    merge active + dormant map and witnessed unit paths
+    bind origin to original capture/model spec/immutable profile fingerprint
+
+apply full L/Ns/Rs + absolute per-membrane scale map:
+    validate actual owned state and requested positive finite bounded values
+    reject missing baseline, changed origin/policy or lost known path
+    retain the native owner's original C0 witnesses
+    translate the complete map to the existing joint native edit
+    let the prospective native graph determine active/dormant paths
+    extend new C0 only from verified storage images, then apply atomically
+```
+
+Origin — canonical SHA256 объекта kind=timelearner_training_capacitance_origin,
+schema_version=1, capture_model_revision=baseline.model_revision,
+model_spec=baseline.model_spec, storage_images_sha256=baseline.storage_images_sha256.
+Он намеренно не равен baseline.sha256: последний меняется при расширении
+проверенного channel inventory после роста. Исторические unit paths сохраняются
+в полной карте вместе с ненулевыми поправками временно отсутствующих мембран.
+Новые неизвестные paths не признаются по имени: joint preview обязан доказать
+их существование и происхождение C₀. Сам bridge не меняет C₀/образ/структуру.
+
+Read при queued/running probe запрещён: временная Branch isolation не является
+solo model boundary. Apply использует обычные native ownership/probe/integrator
+ограничения; отказы подготовки возвращают Rejected без live mutation.
+Не вызываются Calculate/Default и не меняются prototypes, Ready или частоты.
+Владельцем параметров остаётся модель; pure controller хранит полный map/origin,
+а не собственную копию baseline или подставленное parent/default C.
+
+## Подготовленные проверки
+
+NativeTrainingCapacitanceBridge: Classic/Branch × N0/N1 при2000Hz, реальные
+storage/Environment и production API. Fresh unbound read не создаёт provenance;
+первый bound edit сохраняет heterogeneous C₀. Проверяются stable origin при
+расширении baseline после роста, unit scales новых paths, общий shrink/C edit,
+dormant scales, joint growth с поправкой ещё не существовавшего канала и C₀
+из storage_image. Новые значения сравниваются с эффективными дочерними каналами.
+Смена origin/policy, потеря известного path, nullopt при bound owner, NaN и
+фиктивный path должны отклоняться с конкретной причиной, без изменения всего
+semantic model и native state. Read не должен входить в lifecycle живого нейрона.
+
+Каждый probe сохраняет реальные input/soma CSV и полный evidence packet;
+каждая фаза — semantic graph, native signed state и typed map. Эти engineering
+пробы не являются научной классификацией или доказательством convergence.
+Спецификация native-training-capacitance-bridge-v1.json содержит4 случая.
+Первый полный SDK gate bridge-regression добавляет130 ранее unit-проверенных
+controller/observation/final/proposal cases: всего134. До этого SDK с новым
+модулем ещё не собирался; ранее130 normal/ASan были isolated production units.
+Новые сборки/тесты выполняются только на разрешённых workers после закрытия
+текущих leases. Визуальные отчёты и independent bridge evidence reader ещё нужны.
+
+## Что остаётся до C-trim On
+
+NativeTrainingService/Bindings ещё не передают map в actions/domain/readback.
+Нужно связать всю историю кандидатов/повторов с фактическими физическими
+witnesses, добавить versioned summary/domain codecs и independent readers,
+совместный N1 domain на том же C, native comparisonScope, начальное владение C₀
+до первого C-search edit, конфигурацию bounded policy и сам измеряемый поиск.
+CapturedPerInput, anchor, defaults амплитуды/sync и legacy absolute-F
+DendriteCapacitance не меняются. ControllerVersion2 с C-trim On продолжает
+отклоняться; bridge и весь исходный план не объявляются завершёнными.
