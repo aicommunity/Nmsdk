@@ -301,7 +301,7 @@ def validate_search_history_availability(summary: dict[str, Any]) -> bool | None
     retained = summary.get("search_history_retained")
     if "search_history_retained" in summary:
         require(type(retained) is bool, "invalid_search_history_marker")
-    if summary.get("schema_version") == 2:
+    if summary.get("schema_version") in (2, 3):
         require(type(summary.get("candidate_repeat_groups")) is list, "invalid_candidate_repeat_groups")
     if retained is False:
         require(all(summary[name] == [] for name in ("candidates", "rejections", "resistance_domains")) and
@@ -315,7 +315,7 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     """Bind the declared repeat factor to evidence, without replacing the native codec."""
     schema = configuration.get("schema_version")
     require(configuration.get("kind") == "timelearner_native_cold_configuration" and
-            type(schema) is int and schema in (1, 2), "unknown_repeat_configuration_schema")
+            type(schema) is int and schema in (1, 2, 3), "unknown_repeat_configuration_schema")
     require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
             "configuration_summary_repeat_schema_mismatch")
     search, measured = configuration["search"], summary["configuration"]
@@ -328,6 +328,16 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
                 "legacy_configuration_contains_repeat_factor")
         return 1
     repeats = count(search["n0_candidate_repeats"])
+    if schema == 3:
+        history = configuration['capacitance_history']; source = summary['capacitance_history']
+        require(type(history) is dict and set(history) == {'record', 'maximum_relative_change'}
+                and history['record'] is True and number(history['maximum_relative_change']) >= 0,
+                'invalid_configured_capacitance_history')
+        capture = source['witnesses'][source['capture_witness_id']]
+        require(history['maximum_relative_change'] == capture['controller_parameters']['maximum_relative_change']
+                and 1 <= repeats <= 128 and (normalization == 'N0' or repeats == 1)
+                and count(measured['n0_candidate_repeats']) == repeats, 'configuration_summary_capacitance_policy_mismatch')
+        return repeats
     require(normalization == "N0" and 2 <= repeats <= 128 and
             count(measured["n0_candidate_repeats"]) == repeats, "configuration_summary_repeat_policy_mismatch")
     return repeats

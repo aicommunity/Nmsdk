@@ -13,15 +13,16 @@ from typing import Any
 from .native_evidence import audit_probe, audit_training_summary, load, require, validate_configured_repeat_policy
 from .model_identity import canonical_model_sha256
 from .capacitance_evidence import audit_package_capacitance
+from .capacitance_boundary_evidence import audit_package_capacitance_history
 
-AUDITOR_VERSION = 3
+AUDITOR_VERSION = 4
 
 
 def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
                         packets: dict[str, dict[str, Any]],
                         traces: dict[str, Path]) -> dict[str, Any]:
     require(package.get("kind") == "timelearner_completed_state" and
-            type(package.get("schema_version")) is int and package["schema_version"] in (1, 2), "unknown_learned_state_schema")
+            type(package.get("schema_version")) is int and package["schema_version"] in (1, 2, 3), "unknown_learned_state_schema")
     require(package["state_kind"] == "learned_solo" and package["dynamic_checkpoint"] is False,
             "unsupported_learned_state_kind")
     require(package["sha256"] == canonical_model_sha256({k: v for k, v in package.items() if k != "sha256"}),
@@ -74,12 +75,14 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
             metadata["training"]["status"] == package["training_outcome"], "archive_state_mismatch")
     native = audit_training_summary(summary, packets, protocol["origin_stimulus_id"])
     capacitance = audit_package_capacitance(package)
+    capacitance_history = audit_package_capacitance_history(package, summary)
     return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True,
             "primary_trials": len(packets), "embedded_trials": sum(map(len, embedded.values())),
             "exact": native["exact"], "model_revision": package["model_revision"],
             "n0_candidate_repeats": repeats, "search_history_retained": native["search_history_retained"],
             "native_import_verified": False, "package_digest_verified": True,
-            "capacitance_state": capacitance, "evaluation_verdict": None}
+            "capacitance_state": capacitance, **({"capacitance_history": capacitance_history} if capacitance_history is not None else {}),
+            "evaluation_verdict": None}
 
 
 def load_case(package_path: Path) -> tuple[dict, dict, dict, dict]:
