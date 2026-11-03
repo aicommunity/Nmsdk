@@ -53,3 +53,12 @@ readers, затем public CLI отказался до native probes: prepare н
 Добавлено штатное создание каталога и новый actual-filesystem prepare reader.
 Первоначальные exception/CLI receipts сохраняются; исправление ещё требует
 нового серверного запуска. Численные результаты32 проб пока отсутствуют.
+
+A3 с root6342a56d68718d3231b11dc0f6af7c3bc045cd8d запущен в отдельном
+каталоге Elder после Git connectivity verification. Все5 preflight readers
+прошли без failures/errors/skips, включая actual-filesystem prepare.
+Owner1111148 подтверждён живым по PID/start_ticks. Public CLI запущен из
+чужого cwd; завершённых run manifests на момент проверки ещё нет. Source/runtime
+A5 не обновлялись. Точная квитанция и следующие gates —
+[StockStoppedEvaluation.progress.json](StockStoppedEvaluation.progress.json).
+Это запись очереди/процесса, а не положительный численный результат.

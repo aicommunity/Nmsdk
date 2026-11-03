@@ -1,0 +1,45 @@
+{
+  "kind": "stock_stopped_evaluation_progress",
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "status": "native_diagnostic_in_progress",
+  "source_root": "6342a56d68718d3231b11dc0f6af7c3bc045cd8d",
+  "worker": "user@10.245.1.11",
+  "directory": "/home/user/timelearner-refactor/readbacks/s11-stock-stopped-phasea-normal-a3",
+  "owner_pid": 1111148,
+  "owner_identity_receipt": "owned-supervisor.json",
+  "same_pid_start_ticks_confirmed_live": true,
+  "preflight_readers": {
+    "executed": 5,
+    "passed": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "completed_run_manifests_at_poll": 0,
+  "native_trials_declared": 32,
+  "native_runtime_root": "5c4adf7ed3b2dcd977c763846d7f4010b67869d3",
+  "native_runtime_mutated": false,
+  "prior_attempts": [
+    {
+      "attempt": "a1",
+      "failure": "GitHub DNS before source checkout",
+      "native_started": false
+    },
+    {
+      "attempt": "a2",
+      "failure": "missing jobs directory after4 source readers; public CLI refused before native probes",
+      "native_started": false
+    }
+  ],
+  "source_transport": "native Git pack over existing authenticated SSH; commit and Git connectivity verified",
+  "publication": null,
+  "training_completed": false,
+  "scientific_verdict": null,
+  "next": [
+    "Wait for exact owner identity to close; never restart a live attempt",
+    "Inspect original CLI and native records and six final readers",
+    "Publish original failures and primary evidence through Git, verify archive members and source hashes",
+    "Render all observed soma/input temporal plots and directly inspect selected readable figures"
+  ]
+}
