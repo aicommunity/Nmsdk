@@ -250,3 +250,29 @@ Documentation closure: Pulse feature commit
 Его Core tree `e667aeb7f50774ca2baf16c284e9b3a04a3ad2d2` полностью совпадает
 с tested f899ef024. Gitlink feature-корня обновлён после child push; работающие
 jobs сохраняют свои исходные SHA и не переключаются на documentation commit.
+
+## Временной отчёт normal C2
+
+Production native-test renderer завершил48 complete native trials/72 actual
+trial-soma pairs. Полный cache на M40 Data занимает761 345 710 bytes:2697 PNG,
+2697 SVG и2697 PDF. Все8895 files в checksum inventory проверены publisher.
+Compact proof `b4617156d8578d5dbe22ab9a5fa21b5bbcc9fb09` содержит12 selected PNG,
+сжатые manifest/checksums и renderer receipts (2 280 244 bytes вместе).
+Все17 опубликованных file hashes проверены локально; все12 original PNG
+непосредственно просмотрены. Visual-review sidecar фиксирует фактическое
+покрытие, hashes и ограничения; полной visual acceptance всех2697 PNG нет.
+
+На overview видны оба реальных входных импульса и полная реакция сомы;
+zoom windows сохраняют native samples при1920×960, без downsampling.
+Для Classic общий выбранный arrival-window может показывать рост другой сомы,
+а не её собственный максимум; отдельные пики близки к границе grid zoom.
+Полный cache содержит соседние окна и обзор для восстановления контекста.
+Единицы остаются явно model_units_SI_unverified. Это engineering two-pulse
+probes, не новая eight-pattern classification или сходимость при default tolerances.
+
+Служебный renderer-terminal.json ошибочно содержит png_count=0: одноразовый
+job использовал shallow glob */*.png для более глубоко вложенного native-test
+отчёта. Production inventory72, primary и полная hash-проверка были корректны.
+Raw receipt не переписан; cache-count-correction.json отдельно связывает
+рекурсивно подтверждённые2697 PNG с исходным cache SHA256SUMS hash. Временной
+отчёт не требуется пересчитывать ради исправления этого счётчика.

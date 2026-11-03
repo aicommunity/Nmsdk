@@ -19,22 +19,27 @@ PID/start_ticks/executable hashes; primary/receipts опубликованы и 
 Их execution=interrupted, observation=incomplete, acceptance=not_accepted.
 
 Исправленный контракт проверяет точные C₀, scales, L/Ns/Rs и реальные identities
-каждого графа; full graph export/import identity не ослаблена. Выполняются:
+каждого графа; full graph export/import identity не ослаблена. Исходные handles:
 
 - Elder normal C2: root3a1b7fe1f, owner185679/323290894,
-  publisher185680/323290894, native outer7200s.
+  publisher185680/323290894, native outer7200s; оба завершены.
 - M40 ASan C3: rooteab5e61c2, owner2470460/273856765,
   publisher2470461/273856765, native outer18000s по измеренным ASan затратам.
 
-Pulse обоих jobs f899ef0: новый owner плюс принятый parser. Source/build/runtime
-leased; вручную не обновлять. Ожидаются8 native и19 independent readers;
-полная приёмка пока pending. Normal8 и19 readers завершены и опубликованы:
+Pulse обоих jobs f899ef0: новый owner плюс принятый parser. Численные sources,
+builds и runtimes остаются leased текущими jobs; вручную не обновлять.
+Полная приёмка пока pending. Normal8 и19 readers завершены и опубликованы:
 evidence a928fb92edd0880728a697da0fed6d7ede3e7d4a, все259 members проверены.
 ASan прошёл4/8 и продолжает20k cases. Conditional transport43
-(включая4 dormant-image cases) с26 readers ждёт successful predecessor; вместе
-с owner8 это51 уникальная проверка. Отдельный readonly renderer normal C2
-ждёт опубликованный passed bundle и строит48 проб/72 trial-soma pairs в Data
-cache; direct visual QA и selected figures ещё не выполнены.
+(включая4 dormant-image cases) с26 readers: normal уже выполняется, ASan ждёт
+successful predecessor. Вместе с owner8 это51 уникальная проверка.
+Отдельный readonly renderer normal C2 использовал published passed bundle
+и завершил48 complete trials/72 soma pairs,2697 PNG
+(и столько же SVG/PDF) только в M40 cache. Compact proof b4617156 содержит12
+selected PNG; все12 непосредственно просмотрены, все17 исходных published file
+hashes проверены. Raw terminal png_count=0 исправлен отдельным sidecar:
+причина — shallow glob одноразового job, production inventory был корректен.
+Полной visual acceptance2697 PNG и scientific verdict нет.
 [Полные SHA, handles, ограничения и следующий шаг](CapacitanceOwnership.ru.md).
 Статусы исходных этапов0–12 не сокращаются; полностью завершён только0.
 
