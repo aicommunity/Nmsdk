@@ -495,3 +495,19 @@ Init сохраняет явно установленный рабочий ка�
 owned output.events-log через штатный SetWorkDirectory до AppCore.Init,
 сохраняя Rdk/EventsLog дочерний путь. Новый joint root5949d850c ещё требует
 серверной проверки; Rdk/develop и root/develop пока не объединяются.
+
+Joint a2 на обоих workers завершил первый preflight с exit0 и записал
+initial-state/execution. Строгие old/new runtime guards сохранились. Упаковка
+остановилась на штатной glog-ссылке NeuroModeler.INFO внутри частного
+native.events-log/EventsLog; это ошибка сборщика артефактов, не SSH и не
+подтверждённая нехватка диска. Оба исходных a2 остаются NOT_ACCEPTED.
+
+Production pipeline и calibration теперь собирают только реальные файлы.
+Допускается только severity alias штатного glog в точном частном каталоге:
+basename target, без цепочек/выхода из каталога, существующий regular log,
+совпадение severity и PID из owned-process.json. Иные ссылки запрещены.
+Portable evidence содержит реальные логи без alias-дублей; архиватор должен
+исключать эти ссылки, а не материализовывать их как копии. Те же проверки
+выполняются при последующем audit. Исправление и отрицательные проверки
+ещё требуют серверного выполнения; успешный transport/runtime gate пока
+не заявляется.
