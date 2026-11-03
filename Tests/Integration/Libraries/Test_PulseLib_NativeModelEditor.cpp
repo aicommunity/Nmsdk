@@ -2823,7 +2823,8 @@ void RepeatedBoundarySummary(const NativeTrainingService& service,const std::str
 enum class BoundaryExpectation { Completed, DiagnosticSweepBudget };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
-    double fixtureWallSeconds=600.,BoundaryExpectation expectation=BoundaryExpectation::Completed,bool withCapacitance=false)
+    double fixtureWallSeconds=600.,BoundaryExpectation expectation=BoundaryExpectation::Completed,bool withCapacitance=false,
+    bool withDormantCapacitance=false)
 {
     ASSERT_TRUE(std::isfinite(fixtureWallSeconds) && fixtureWallSeconds>0.);
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
@@ -2832,6 +2833,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(initialThreshold!=1.)suffix+="_spiking";
     if(n0Repeats>1)suffix+="_repeat"+std::to_string(n0Repeats);
     if(withCapacitance)suffix+="_capacitance_state";
+    if(withDormantCapacitance)suffix+="_dormant";
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold);
     if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
@@ -2848,12 +2850,49 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     auto initialZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(initialZone);
     ASSERT_DOUBLE_EQ(initialZone->Threshold.GetData(),initialThreshold);
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);channel->Capacity=1.41e-9;
+    std::string dormantImage;
+    if(withDormantCapacitance)
+    {
+        ASSERT_TRUE(withCapacitance);
+        const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+        auto membrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(membrane);
+        auto image=dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(membrane->ExcChannelClassName.GetData()));
+        ASSERT_TRUE(image);image->SetEnvironment(rig.environment);image->SetGlobalTimeStep(frequency);image->Capacity=.9e-9;
+        dormantImage=rig.name+"_DormantExcImage";
+        RegisterClassImage(core.storage,dormantImage,image);core.storage->ReturnObject(image);
+        membrane->ExcChannelClassName=dormantImage;
+        const auto marker=rig.neuron->OperationFailureSequence();
+        rig.neuron->Build();rig.neuron->Init();rig.neuron->Reset();
+        ASSERT_TRUE(rig.neuron->IsReady() && rig.neuron->IsInit());
+        ASSERT_FALSE(rig.neuron->HasOperationFailureSince(marker));
+        const auto actual=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(actual);
+        ASSERT_EQ(actual->GetCompClassName(),dormantImage);
+    }
     NativeCapacitanceCorrection capacitance;
     if(withCapacitance)ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,capacitance));
+    if(withDormantCapacitance)
+    {
+        auto requested=rig.learner->ReadNativeParameters();requested[0].length=1;
+        const auto edit=rig.learner->ApplyNativeParameters(requested);
+        ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+        ASSERT_FALSE(rig.neuron->GetComponentL("Dendrite1_2",true));
+        const auto state=rig.learner->OwnedNativeCapacitanceState();ASSERT_EQ(state["schema_version"],QJsonValue(2));
+        ASSERT_EQ(state["dormant_membrane_scales"].toObject()["Dendrite1_2"],QJsonValue(1.1));
+        std::string revision;
+        capacitance=ParseNativeCapacitanceState(QJsonDocument(state).toJson().toStdString(),revision);
+    }
     auto plan=TrainingPlan(rig,sync);plan.protocol.peakSelection=plan.probe.specification.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
     plan.maximumWallSeconds=fixtureWallSeconds;
     plan.search.n0CandidateRepeats=n0Repeats;
     for(auto& window:plan.inputWindows){window.begin=0.;window.end=rig.duration;}
+    if(withDormantCapacitance)
+        for(auto& bound:plan.search.bounds)
+        {
+            // Transport control on declared fixed geometry at explicit .2
+            // tolerance; not a new convergence claim at the default .02.
+            bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;
+            bound.maximumResistance=bound.minimumResistance;
+        }
     if(inputs>2)
     {
         // A dimensional transport control, with declared fixed geometry and
@@ -2904,11 +2943,34 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     const auto certificate=certificateValue(service);
     Artifact(rig.name+"_learned_summary.json",QJsonDocument(EncodeNativeTrainingState(service,original,parameters)).toJson());
     const std::string implementation=diagnostic?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1";
-    const auto package=withCapacitance?rig.learner->ExportNativeLearnedState(implementation,capacitance):rig.learner->ExportNativeLearnedState(implementation);
+    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    if(withCapacitance)
+    {
+        const auto explicitPackage=rig.learner->ExportNativeLearnedState(implementation,capacitance);
+        EXPECT_EQ(package["capacitance_state"],explicitPackage["capacitance_state"]);
+        EXPECT_EQ(package["capacitance_state"],QJsonValue(rig.learner->OwnedNativeCapacitanceState()));
+        EXPECT_EQ(package["configuration"],explicitPackage["configuration"]);
+        EXPECT_EQ(package["trained_inputs"],explicitPackage["trained_inputs"]);
+        const auto implicitArchive=package["neuron"].toObject(),explicitArchive=explicitPackage["neuron"].toObject();
+        EXPECT_EQ(implicitArchive["graph"].toObject()["identity"],explicitArchive["graph"].toObject()["identity"]);
+        EXPECT_EQ(NmsdkTools::ModelImageDefinitionsFingerprint(implicitArchive["class_definitions"].toArray()),
+                  NmsdkTools::ModelImageDefinitionsFingerprint(explicitArchive["class_definitions"].toArray()));
+        // Native same/fresh-process import and exact response comparisons below
+        // consume the implicit export. Incidental XML State bytes need not be
+        // identical between two independent exports of the same physics.
+    }
     if(withCapacitance)
     {
         EXPECT_EQ(package["schema_version"],QJsonValue(2));
         EXPECT_EQ(package["capacitance_state"].toObject()["baseline"],QJsonValue(capacitance.baseline));
+    }
+    if(withDormantCapacitance)
+    {
+        EXPECT_EQ(package["capacitance_state"].toObject()["schema_version"],QJsonValue(2));
+        bool retainedImage=false;
+        for(const auto& definition:package["neuron"].toObject()["class_definitions"].toArray())
+            retainedImage|=definition.toObject()["name"]==QJsonValue(QString::fromStdString(dormantImage));
+        EXPECT_TRUE(retainedImage)<<"export must include the image whose last live channel was removed";
     }
     EXPECT_EQ(package["kind"],QJsonValue(diagnostic?"timelearner_stopped_state":"timelearner_completed_state"));
     if(diagnostic)
@@ -3178,6 +3240,14 @@ TEST(NativeCapacitanceStateTransport,BranchN0){CapacitanceCompletedTransport<NNe
 TEST(NativeCapacitanceStateTransport,BranchN1){CapacitanceCompletedTransport<NNeuronTimeLearnerBranch>(1);}
 TEST(NativeCapacitanceStateTransport,ClassicFrozenIdentity){CapacitanceCompletedTransport<NNeuronTimeLearner>(0,RecognitionCase::OwnedFreshIdentity);}
 TEST(NativeCapacitanceStateTransport,BranchFrozenScaled){CapacitanceCompletedTransport<NNeuronTimeLearnerBranch>(1,RecognitionCase::OwnedFreshScaled);}
+template<class Learner> void DormantCapacitanceTransport(int normalization)
+{
+    LearnedBoundary<Learner>(normalization,.2,2000,2,false,{},false,1.,1,600.,BoundaryExpectation::Completed,true,true);
+}
+TEST(NativeDormantCapacitanceTransport,ClassicN0){DormantCapacitanceTransport<NNeuronTimeLearner>(0);}
+TEST(NativeDormantCapacitanceTransport,ClassicN1){DormantCapacitanceTransport<NNeuronTimeLearner>(1);}
+TEST(NativeDormantCapacitanceTransport,BranchN0){DormantCapacitanceTransport<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeDormantCapacitanceTransport,BranchN1){DormantCapacitanceTransport<NNeuronTimeLearnerBranch>(1);}
 
 template<class Learner> void DiagnosticSweepBudgetBoundary(int normalization)
 {
@@ -3633,7 +3703,22 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     if(scenario==StoppedCase::Final)EXPECT_EQ(service.FinalPackets().size(),1u);
     ASSERT_FALSE(service.ObservedPackets().empty());
     const std::string implementation="native-stopped-boundary-fixture-v1";
-    const auto package=withCapacitance?rig.learner->ExportNativeLearnedState(implementation,capacitance):rig.learner->ExportNativeLearnedState(implementation);
+    const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    if(withCapacitance)
+    {
+        const auto explicitPackage=rig.learner->ExportNativeLearnedState(implementation,capacitance);
+        EXPECT_EQ(package["capacitance_state"],explicitPackage["capacitance_state"]);
+        EXPECT_EQ(package["capacitance_state"],QJsonValue(rig.learner->OwnedNativeCapacitanceState()));
+        EXPECT_EQ(package["configuration"],explicitPackage["configuration"]);
+        EXPECT_EQ(package["trained_inputs"],explicitPackage["trained_inputs"]);
+        const auto implicitArchive=package["neuron"].toObject(),explicitArchive=explicitPackage["neuron"].toObject();
+        EXPECT_EQ(implicitArchive["graph"].toObject()["identity"],explicitArchive["graph"].toObject()["identity"]);
+        EXPECT_EQ(NmsdkTools::ModelImageDefinitionsFingerprint(implicitArchive["class_definitions"].toArray()),
+                  NmsdkTools::ModelImageDefinitionsFingerprint(explicitArchive["class_definitions"].toArray()));
+        // Native same/fresh-process import and exact response comparisons below
+        // consume the implicit export. Incidental XML State bytes need not be
+        // identical between two independent exports of the same physics.
+    }
     if(withCapacitance)EXPECT_EQ(package["schema_version"],QJsonValue(2));
     EXPECT_EQ(package["kind"],QJsonValue("timelearner_stopped_state"));EXPECT_TRUE(package["certificate"].isNull());
     EXPECT_EQ(package["reason"].toString().toStdString(),service.Reason());
