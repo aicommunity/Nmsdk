@@ -1,3 +1,16 @@
+# Срез приёмки automatic C₀ ownership/transport, 03.11
+
+Проверены normal43/readers26 и ASan43/readers26. Tested Pulse30495d1 принят
+child develop merge027070e8e1181380427edc9384641d08ed9943be без изменения Core.
+Корневая ветка фиксирует этот gitlink и сохраняет актуальный docs-only Rdkacc3de8d.
+[Точные sources, evidence, ограничения и closure](C0Acceptance-2026-11-03.ru.md).
+Остальные ветки с public witnesses, tracked service/schema3, CandidateCursor и
+archive codec fix имеют отдельную незавершённую приёмку. Это не их выпуск и не
+включение C-search. Полностью завершённым исходным этапом остаётся только0.
+
+Ниже сохранена хронология до этой приёмки; прежние pending/running относятся
+к соответствующим записям, не являются текущими статусами G3.
+
 # Подтверждённый срез 02.11: полнота временных данных
 
 ## Уточнён канонический lifecycle Rdk, 03.11
@@ -10,6 +23,116 @@ Ready/InitFlag и штатный обход детей; прямые ACalculate/
 Это документальный подэтап4/12, не приёмка новой реализации и не закрытие
 матрицы lifecycle/storage. Дополнение описывает Build внутри native операций
 связей/Load и CheckEqualsFlag/connected assignment. Полностью завершён только исходный этап0.
+
+## Хронология C₀ owner до завершения G3, 03.11
+
+Принятый root develop — 9de7aa0d591ab1a111976e2616e5bc58c4d81eac:
+после c2e77869d приняты docs-only Rdk lifecycle merge33bdf2d1 и дополнение
+acc3de8d с прежними Core/Deploy trees a62393f7. [Scope](https://github.com/aicommunity/Nmsdk/blob/3a6b83de203f2fc7bd18754a20203e87a010aaa5/Docs/StructTrain/TimeLearner/NativeLifecycleDocumentation-2026-11-03.ru.md).
+После parser acceptance c594eacef принят отдельный metadata-подэтап удаления
+17 historical AsymRm launchers; Bin develop39d811e5, Pulse develop5a52565.
+[Scope и проверенные81 migration records](AsymRmLauncherRetirement.ru.md).
+Новый C₀ owner не включён в develop. Corrected baseline8
+на прежнем Core8b41 завершён с8 failures отсутствия owned metadata; все191
+members evidence a054904f проверены. Подготовлен owner-кандидат: prospective
+parameter state проверяется до live commit; C₀/scales автоматически переходят
+через обычные edits, Reset, growth и shrink/regrowth с dormant maps.
+
+Первые B1 builds успешны, но выявили избыточный whole-graph roundtrip assertion:
+native editor законно освобождает бывшие owned banks при сохранении остальных
+банков. Одни L/Ns/Rs не задают весь граф. B1 намеренно остановлены по проверенным
+PID/start_ticks/executable hashes; primary/receipts опубликованы и проверены.
+Их execution=interrupted, observation=incomplete, acceptance=not_accepted.
+
+Исправленный контракт проверяет точные C₀, scales, L/Ns/Rs и реальные identities
+каждого графа; full graph export/import identity не ослаблена. Исходные handles:
+
+- Elder normal C2: root3a1b7fe1f, owner185679/323290894,
+  publisher185680/323290894, native outer7200s; оба завершены.
+- M40 ASan C3: rooteab5e61c2, owner2470460/273856765,
+  publisher2470461/273856765, native outer18000s по измеренным ASan затратам.
+
+Pulse обоих jobs f899ef0: новый owner плюс принятый parser. Численные sources,
+builds и runtimes остаются leased текущими jobs; вручную не обновлять.
+Полная приёмка пока pending. Normal8 и19 readers завершены и опубликованы:
+evidence a928fb92edd0880728a697da0fed6d7ede3e7d4a, все259 members проверены.
+ASan прошёл6/8 (ClassicN1At20000=2778.136s) и продолжает Branch20k cases. Normal transport43 завершился39 PASS/4 FAIL:
+четыре dormant fixtures остановились в setup при native snapshot roundtrip
+с model.bindings.size, ещё до удаления последнего image consumer. Evidence
+e324c160 проверен (846 members); readers26 не запускались после failed native.
+Diagnostic E1 локализовал две отсутствующие связи после прямой смены класса
+дочернего канала при ready parent. Артефакты E1 (67 members) и build-failed E2
+(11 members, 0 native tests) проверены и объединены в feature. E3 использует
+UNet owning-tree Load с UnInit/Build/Init/Reset и проверяет все прежние связи
+до первой физической правки. E3 собран, но4 tests остановились до Train:
+канал сохранил прежний storage-класс. Все47 members proof5d0438d1 проверены.
+E4 XML согласован (property и дочерний Class), но4 tests остановились до Train:
+legacy BuildStructure заново создал Neuron до явного native adoption. Proof
+6cc7274d проверен:51 members/103 675 bytes. E5 готовит Dataset/Neuron через
+их штатные Build/Init, выполняет AdoptNativeModel до lifecycle owner, затем
+использует внешний scheduler. Назначен на Elder: root35b0ba72d, Pulse30495d1,
+worker272413/publisher272414;4 FAIL до Train, все51 members proofca83319e
+проверены. Перестановка adoption сама по себе не сохранила класс; точная первая
+стадия замены пока не установлена. E6 добавляет read-only class/C/Ready/Init
+snapshots после каждого шага, без смены физики/алгоритма/identity. Запущен на
+Elder: root5f6add3064890a7647d43a2ec8ebc34fbe252695, Pulse30495d1, worker278449,
+publisher278450. E6 завершён: все99 members proof38cf8667 проверены,
+первая потеря custom class/C во всех4 случаях находится уже внутри Load.
+Нативные операции связей вызывают Build. E7 загружает готовый граф в learner
+mode0, затем adoption и возврат исходного mode1; neuron mode2 неизменен.
+Proof28a02ecc (171 members) подтверждает сохранность классов/C/bindings, shrink,
+dormant scale1.1 и completed Train при явно заданной .2, applied_edits=0.
+Export отклонён: старый fixture-domain [1,1] не включает исходную декларацию L2.
+E8 сохраняет ограниченный domain [1,2] и требует после Train отсутствия
+Dendrite1_2, чтобы не потерять dormant проверку. Назначен на Elder:
+root0481331ade277933b4e47cc4e4d2f3ccebc38fdd, Pulse30495d1,
+worker289099/publisher289100; E8 завершён4/4, same/fresh-process import,
+unused image closure и dormant scale сохранены. Evidence315d6520:
+269 members/1 373 512 bytes проверены. Independent readers F1 завершены3/3,
+включая точные причины отказа missing image и dormant scale1.3: proof37bf2f78,
+6 members/14 592 bytes, hashes278 source files совпали с reader Git root.
+
+Полная normal43/readers26 G1 выполняется на Elder (root4d501d611,
+worker297669/start_ticks324112486, publisher297670); build успешен. Corrected
+ASan43/readers26 G1 на M40 (worker2578910/start_ticks274660894,
+publisher2578911) ждёт успешных owner8 ASan C3 и опубликованного normal G1.
+До этого рабочие source/build/runtime ASan owner не меняются. Полная приёмка
+owner pending; это transport control, не научная классификация и не convergence
+при default .02. [Текущий scope и исторический журнал](CapacitanceOwnership.ru.md).
+Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
+fixtures отменён до изменения source/build/runtime: проверены точные
+PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
+процессов и прежний source HEAD. Cancellation evidence d6135806b068100640afc6e16d278d693fa18324:
+все4 file hashes проверены. Работающий ASan owner8 не затронут. Корректный
+transport gate будет назначен после результата адресного normal4.
+Вместе с owner8 это51 уникальная проверка, полная приёмка остаётся открытой.
+Отдельный readonly renderer normal C2 использовал published passed bundle
+и завершил48 complete trials/72 soma pairs,2697 PNG
+(и столько же SVG/PDF) только в M40 cache. Compact proof b4617156 содержит12
+selected PNG; все12 непосредственно просмотрены, все17 исходных published file
+hashes проверены. Raw terminal png_count=0 исправлен отдельным sidecar:
+причина — shallow glob одноразового job, production inventory был корректен.
+Полной visual acceptance2697 PNG и scientific verdict нет.
+[Полные SHA, handles, ограничения и следующий шаг](CapacitanceOwnership.ru.md).
+Статусы исходных этапов0–12 не сокращаются; полностью завершён только0.
+
+## Отдельная ветка bounded C search: unit-приёмка не равна native-приёмке
+
+Feature root `484cf3d6797bcfffdcca5ded2c52bdfa21f0120c`, Pulse
+`9d95f05790b04a4505541d398fd039fa56e6a65f` содержит production kernel предложений
+C-кандидатов и полный pure controller state активных/dormant C-scales.
+Normal и ASan130/130 подтверждены отдельными proof commits
+`8214f20625b5287d72f388f7f7005e86eabfd59f` /
+`88e96182c184b242e2185eeca76a095c8666e294`: по13 members, hashes24 production/
+test файлов совпадают с Git, source closure leased SDK до/после неизменен.
+Полный SDK target и native C-On controller этой проверкой не подтверждаются.
+[Scope, отрицательные build attempts и следующий native шаг](https://github.com/aicommunity/Nmsdk/blob/484cf3d6797bcfffdcca5ded2c52bdfa21f0120c/Docs/StructTrain/TimeLearner/MeasuredCapacitanceSearch.ru.md).
+
+Остаются NativeTrainingService/Bindings, чтение полного C-owner state,
+joint C/Rs preview/domain и readback, versioned codec/readers, C policy,
+comparisonScope от фактического native графа и обязательная native матрица.
+SyncCapacitanceTrim On V2 остаётся неподдержанным; ветка не принята в develop.
+Она зависит от ещё открытой приёмки automatic C₀ owner выше.
 
 ## Принятый файловый вход, 03.11
 

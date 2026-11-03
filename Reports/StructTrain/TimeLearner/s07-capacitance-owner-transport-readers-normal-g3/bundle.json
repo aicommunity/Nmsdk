@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_native_capacitance_transport_reader_evidence",
+  "schema_version": 1,
+  "root": "c63d1b7b9c08c7542398ca944bcc7cf22e5ea2b4",
+  "native_root": "496a80d7190cafcc1e96329ee3c8e2b17cb40114",
+  "native_evidence_commit": "ccfa43c1fea90567574aa3061eaa2a902c37710d",
+  "acceptance_status": "passed",
+  "statuses": {
+    "native": {
+      "inventory": {
+        "expected": 43,
+        "observed": 43,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "67dc2dc2b5e8d5ddc131d74e0b7f57c8a76334c46d462a59fa8789b8bac19a5e"
+      },
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory"
+    },
+    "readers": {
+      "kind": "timelearner_python_validation_result",
+      "schema_version": 1,
+      "suite_id": "native-capacitance-transport-g3-readers26",
+      "package_fingerprint": "df5cc6bc6ccad58b10f9e76d76488581f0341b66b3be51653ef56df415cb4b6a",
+      "execution": "completed",
+      "assertion_status": "passed",
+      "expected_test_ids": [
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_actual_inventory_and_reversed_declaration_have_identical_results",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_actual_contract_and_explicit_capture_versions",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_missing_or_duplicate_identity_is_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_skipped_or_unfinished_case_is_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_corrupt_totals_are_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_complete_assertion_failure_is_observed_as_failed",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_truncated_xml_is_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateEnvironmentTest.test_present_and_absent_environment_are_restored_after_exception",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_actual_primary_readers_and_bound_C0",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_actual_legacy_packages_do_not_invent_C0",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_actual_recognition_preserves_source_C0",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_rebased_C0_rejected_despite_new_envelope_digests",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_missing_nonunit_scale",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_changed_effective_scale",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_scale_beyond_declared_bound",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_wrong_applied_revision",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_changed_storage_profile",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_missing_image_dependency",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_missing_growth_selector_dependency",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_invented_new_channel_origin",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_changed_static_channel_physics",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_boolean_schema_is_not_version_one",
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_evidence.CapacitanceEvidenceTest.test_unversioned_state_rejected",
+        "Scripts.StructTrain.TimeLearner.tests.test_dormant_capacitance_evidence.DormantCapacitanceEvidenceTest.test_actual_native_packages_and_fresh_import",
+        "Scripts.StructTrain.TimeLearner.tests.test_dormant_capacitance_evidence.DormantCapacitanceEvidenceTest.test_unused_image_cannot_be_omitted_from_actual_archive",
+        "Scripts.StructTrain.TimeLearner.tests.test_dormant_capacitance_evidence.DormantCapacitanceEvidenceTest.test_dormant_scale_still_obeys_its_declared_bound"
+      ],
+      "executed_tests": 26,
+      "failures": [],
+      "errors": [],
+      "skipped": [],
+      "fixtures": {
+        "TIMELEARNER_NATIVE_GATE_DIR": {
+          "path": "/home/user/timelearner-refactor/readbacks/s07-capacitance-owner-transport-readers-normal-g3/primary/gate/native-result",
+          "files": 3,
+          "fingerprint": "1eb914b67dd4e06645ec81fff91f4269af7dd26b70d3ca3dadffe80ea445834f"
+        },
+        "TIMELEARNER_CAPACITANCE_STATE_EVIDENCE_DIR": {
+          "path": "/home/user/timelearner-refactor/readbacks/s07-capacitance-owner-transport-readers-normal-g3/primary/gate/native-result/native",
+          "files": 754,
+          "fingerprint": "2b1ce5465d6728469ccadf655eb460dbacf27cfb2df3847ba82c6d35aea89e12"
+        }
+      },
+      "scientific_verdict": null
+    }
+  },
+  "archive_sha256": "c6b8d17fe8c7222800ecf954b409ea623442fce6c45b9aa3810ae7261bcb6b9f",
+  "archive_bytes": 16660,
+  "members": {
+    "prerequisite-verification.json": "c00827336ae2c44ed0d94c013fd4819b40198111decbdca7fff0b82b54ca2668",
+    "code-equivalence.json": "038e844d52670162a428416c12f314cfe915402439255752514158921a3cc842",
+    "owned-supervisor.json": "761426cc54c64ac44f5bfdea0f43906ecb09360404eea7fa024111dfa127924a",
+    "owned-readers.json": "21c5b2d8395c58f32154cdd1eb5da8305567ef3a1e8db994658bc23cf26a7812",
+    "source-hashes.json": "c418674dbc46c7578b1114c7ca5626dde47b0fea0ac78fcd4fc83283f9565d41",
+    "terminal.json": "f8d86cdbcf156e69c9bc0727012505a1b5e32512994bc37d4b20d2156fa0e418",
+    "readers-cli.log": "88a240d408e8c224aeccc32a8320d253d40c49b9375201db35c920c41fda882c",
+    "reader-suite.json": "43090197f8715e032f4b41aad87613c4a4cdd7ba5480dec6677accb293ab0d79",
+    "structured-readers/unittest.log": "6a7bae36a5847879da9b7576c5592bf79298dcb8056baab542048ff9d22fa74e",
+    "structured-readers/suite.json": "43090197f8715e032f4b41aad87613c4a4cdd7ba5480dec6677accb293ab0d79",
+    "structured-readers/result.json": "da511c4400145aeceb914f147d4be461a1210309a83524a77f54b5d48c18acd0"
+  },
+  "scope": "Existing native43 PASS plus structured readers26 on all actual same primary. C++/CMake/gitlinks unchanged; corrected nonunit negative control and declaration-based inventory only. No new numerical run or scientific verdict.",
+  "scientific_verdict": null
+}

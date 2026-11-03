@@ -1,0 +1,115 @@
+{
+  "kind": "timelearner_native_capacitance_selected_visual_review",
+  "schema_version": 1,
+  "source_selection_commit": "b4617156d8578d5dbe22ab9a5fa21b5bbcc9fb09",
+  "review_date": "2026-11-03",
+  "review_method": "Direct native image inspection of all12 original1920x960 PNG, each overview and selected measured-arrival temporal zoom; no contact-sheet replacement.",
+  "selected_images_reviewed": [
+    {
+      "path": "group-005/probe-0000/soma-001/overview.png",
+      "sha256": "bc6889d53a37f5f5eeca4408dd67b0a10d67203ff1a2f243f04d2d7f4a328563",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-005/probe-0000/soma-001/zoom-003.png",
+      "sha256": "14f4f30fa0ccbaa62bfc9a279c74c434656d3833d4c2851e4263a3ba18bfc180",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-005/probe-0000/soma-002/overview.png",
+      "sha256": "f02198d933f4fa7bb5560584a1cc99502f78752a7590df3b01782dc926c3edf4",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-005/probe-0000/soma-002/zoom-003.png",
+      "sha256": "838dbeaea2fded612e328d629ec7907549db3c8cc912c91b91946c8b1ebd313d",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-017/probe-0000/soma-001/overview.png",
+      "sha256": "7d5dae7d17bf2ee38c996ed26ddc717aacd3c2a377d5928b6fd8b68430909544",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-017/probe-0000/soma-001/zoom-021.png",
+      "sha256": "e7e65d634541555e3f18850b146de29a5c3f1dd0796b4076f74275381da2c78d",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-017/probe-0000/soma-002/overview.png",
+      "sha256": "187ddef76461246b56d85de36b6da31de316c4e58c8815229d1b1ec324f71190",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-017/probe-0000/soma-002/zoom-021.png",
+      "sha256": "93042af886a08afa417a7236262a5828ae41bf108a23fb4e4912700360339f0b",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-035/probe-0000/soma-001/overview.png",
+      "sha256": "356d01f225fc81fdd2bdcf82c70fdd6e637b5783c77b09f456526f13bc5d9cad",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-035/probe-0000/soma-001/zoom-002.png",
+      "sha256": "65ded9a09d1a9c3dfd5f73e31eed741adafb5a5646e6d81fc7b071c278513db4",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-047/probe-0000/soma-001/overview.png",
+      "sha256": "d5a74d5e19fbb0018d221e17aa51826c27a1dc936c57a5fc3cd24a2adbe3869d",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    },
+    {
+      "path": "group-047/probe-0000/soma-001/zoom-021.png",
+      "sha256": "ddcda1eb1c3d691fcfa99a57a0802a4d978085d3e014ef7e80435526bce87c36",
+      "direct_visual_review": true,
+      "readable_axes_and_legend": true,
+      "input_overlay_visible_in_overview": true,
+      "trace_visible_at_declared_scale": true
+    }
+  ],
+  "global_visual_acceptance": false,
+  "full_report_complete_trials": 48,
+  "full_report_rendered_trial_soma_pairs": 72,
+  "limitations": [
+    "Selected common measured-arrival zoom can show a rise rather than the peak of a different Classic soma; all channels have complete overviews and all native-sample zoom windows in full cache.",
+    "Some grid-aligned peaks approach a zoom boundary; adjacent full-cache windows preserve context.",
+    "Amplitude units remain explicitly model_units_SI_unverified.",
+    "Engineering native two-pulse probes; eight-pattern classification and scientific convergence not attested."
+  ],
+  "scientific_verdict": null
+}
