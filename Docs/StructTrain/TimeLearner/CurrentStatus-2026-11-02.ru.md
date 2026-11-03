@@ -30,8 +30,12 @@ Pulse обоих jobs f899ef0: новый owner плюс принятый parser
 builds и runtimes остаются leased текущими jobs; вручную не обновлять.
 Полная приёмка пока pending. Normal8 и19 readers завершены и опубликованы:
 evidence a928fb92edd0880728a697da0fed6d7ede3e7d4a, все259 members проверены.
-ASan прошёл4/8 и продолжает20k cases. Conditional transport43
-(включая4 dormant-image cases) с26 readers: normal уже выполняется, ASan ждёт
+ASan прошёл5/8 и продолжает20k cases. Normal transport43 завершился39 PASS/4 FAIL:
+четыре dormant fixtures остановились в setup при native snapshot roundtrip
+с model.bindings.size, ещё до удаления последнего image consumer. Evidence
+e324c160 проверен (846 members); readers26 не запускались после failed native.
+Требуется диагностика смены child class/Build/import, strict identity сохраняется.
+Conditional ASan transport43 (включая те же4 dormant fixtures) ещё ждёт
 successful predecessor. Вместе с owner8 это51 уникальная проверка.
 Отдельный readonly renderer normal C2 использовал published passed bundle
 и завершил48 complete trials/72 soma pairs,2697 PNG
