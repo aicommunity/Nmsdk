@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_dormant_binding_diagnostic_evidence",
+  "schema_version": 1,
+  "root": "a97027870afc1776620e3862180c86b5be9270e2",
+  "pulselib": "30495d143795022ad444bf290d2ac30b7e140199",
+  "rdk": "a62393f7791cc4ad10d1c2c11f255b3db3334f89",
+  "statuses": {},
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "diagnostic_only",
+  "archive_sha256": "bb16321ead18e84748156dcedbc627b40645b8bd229caf7b7b472498f801359d",
+  "archive_bytes": 12441,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/CMakeCache.before.txt": "2dc89aefcc89a69229d0b81a0293fdb6da4327f0a7fabf3669654896aab6b25a",
+    "gate/build-request.json": "62a8f891db629d4cfffdbc321395e6d19550ab659c0ab25fa668d9f8b8c607ee",
+    "gate/build.log": "dd13e1c4adb6628a849a92386197ab5ab3392029fa0512a1a1bb72c75bf15ada",
+    "gate/checkout.log": "4109ddcd148e8008addf08436f1882ab203dcd18929fceb15e210d1b39540c98",
+    "gate/configure.log": "a0ac321493519f8d33aa3e710527f3a9c9c9e3d2663bf1e2fccd8fb414554c19",
+    "gate/exception.json": "fc60efcb976b03f19c2e1f08c7939684a729c2878e5c427dd4a6b7d4bbe300e9",
+    "gate/fetch.log": "f5c8873d52368bebe7c2fcebbc5a6a91658c53173aa9f57f02b9dfed3a317bae",
+    "gate/owned-supervisor.json": "5570871f658493561dd2a9780b71ca456f7fb9bd8c2b95231ef42dfabc1bd558",
+    "gate/prerequisite-verification.json": "b6aaa3373582c0ab48295331de0ded81fc366b925b959d0c74a81949ee16bd8f",
+    "gate/process-guard.json": "425c27262ec99d34cc6cf79c0956d4d08bba65eff1921cdc6ce8abc70cd7a07f"
+  },
+  "scope": "Diagnostic native dormant4 only: full graph before/after child class replacement and bounded binding delta on native snapshot import failure. No identity relaxation, no acceptance or scientific verdict.",
+  "scientific_verdict": null
+}

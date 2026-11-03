@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_dormant_capacitance_reader_evidence",
+  "schema_version": 1,
+  "root": "f1d500245a7e448df121d4a758b96d27fe8ad242",
+  "native_evidence_commit": "315d6520f1b235a77798389ecd0c56c32f03b5a9",
+  "acceptance_status": "passed",
+  "statuses": {
+    "readers": {
+      "execution": "completed",
+      "reader_exit_code": 0,
+      "expected": 3,
+      "observed": 3,
+      "acceptance_status": "passed",
+      "native_packages": 4,
+      "scientific_verdict": null
+    }
+  },
+  "archive_sha256": "c75a7c71fe3e2cae125fcb5e8fa599a10bfce0a005ce30687a053e56770b7738",
+  "archive_bytes": 14592,
+  "members": {
+    "prerequisite-verification.json": "2459158819472d58607d3d3e6cd45274517bbc7c967072a8c1b0096a0b8c5f57",
+    "readers.log": "56ad6faa76c02c77189a773728b51162cc2bf0e7952278a5e8b343ac2ae645d3",
+    "owned-supervisor.json": "1fddb3fd44f8f157a84ec3320726d567a7a29959c28fef6cb850c7652e7fd10e",
+    "owned-readers.json": "15cbfe9fadd76be1e3e44742862618704e8081057cdc9aa65c94fd20d7044790",
+    "source-hashes.json": "633f9813500473d4e6c50f871b7671b7d84e1be37940521c9863ccf10a3eb045",
+    "terminal.json": "16bad9939928a290395c6dc5486c61a6ad991fa58f9abf8e6367b955c8908607"
+  },
+  "scope": "Production Python dormant C0 package audit on four actual native same/fresh-process transports; exact negative reasons for omitted unused image and out-of-bound dormant scale. No numerical rerun or scientific verdict."
+}

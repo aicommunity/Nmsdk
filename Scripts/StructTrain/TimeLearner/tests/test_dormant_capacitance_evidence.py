@@ -33,18 +33,24 @@ class DormantCapacitanceEvidenceTest(unittest.TestCase):
                 self.assertIn(image, [d['name'] for d in package['neuron']['class_definitions']])
 
     def test_unused_image_cannot_be_omitted_from_actual_archive(self):
-        for _, original in self.cases:
-            package = copy.deepcopy(original)
-            name = package['capacitance_state']['baseline']['channel_classes']['Dendrite1_2.ExcChannel']
-            package['neuron']['class_definitions'] = [d for d in package['neuron']['class_definitions'] if d['name'] != name]
-            with self.assertRaises(EvidenceError): audit_package_capacitance(package)
+        for path, original in self.cases:
+            with self.subTest(path=path.name):
+                package = copy.deepcopy(original)
+                name = package['capacitance_state']['baseline']['channel_classes']['Dendrite1_2.ExcChannel']
+                package['neuron']['class_definitions'] = [d for d in package['neuron']['class_definitions'] if d['name'] != name]
+                # This auditor checks C0/profile consistency directly; a stale
+                # unrelated outer-package digest must not satisfy the control.
+                with self.assertRaisesRegex(EvidenceError, '^capacitance_storage_profile_mismatch$'):
+                    audit_package_capacitance(package)
 
     def test_dormant_scale_still_obeys_its_declared_bound(self):
-        for _, original in self.cases:
-            package = copy.deepcopy(original); state = package['capacitance_state']
-            state['dormant_membrane_scales']['Dendrite1_2'] = 1.3
-            state['sha256'] = canonical_model_sha256({k: v for k, v in state.items() if k != 'sha256'})
-            with self.assertRaises(EvidenceError): audit_package_capacitance(package)
+        for path, original in self.cases:
+            with self.subTest(path=path.name):
+                package = copy.deepcopy(original); state = package['capacitance_state']
+                state['dormant_membrane_scales']['Dendrite1_2'] = 1.3
+                state['sha256'] = canonical_model_sha256({k: v for k, v in state.items() if k != 'sha256'})
+                with self.assertRaisesRegex(EvidenceError, '^invalid_dormant_capacitance_scale$'):
+                    audit_package_capacitance(package)
 
 
 if __name__ == '__main__': unittest.main()

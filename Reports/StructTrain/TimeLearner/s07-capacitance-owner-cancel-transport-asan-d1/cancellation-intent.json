@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_queued_job_cancellation",
+  "schema_version": 1,
+  "reason": "superseded_failing_dormant_class_setup_fixture_before_build",
+  "execution": "cancelled_before_source_mutation",
+  "source_head_before": "eab5e61c2c246d15dcf28ba03454b8ae44b1f6c2",
+  "protected_owner": {
+    "pid": 2470460,
+    "start_ticks": "273856765",
+    "root": "eab5e61c2c246d15dcf28ba03454b8ae44b1f6c2",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-finite-ranking-asan-a1",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-finite-ranking-asan-a1"
+  },
+  "processes": [
+    {
+      "pid": 2488268,
+      "start_ticks": "273986367",
+      "root": "3b55ff17ae1c28332882d2755a3b0bb9681bd860",
+      "source": "/media/user/Data/TimeLearnerRefactor/source-finite-ranking-asan-a1",
+      "build": "/media/user/Data/TimeLearnerRefactor/build-finite-ranking-asan-a1",
+      "command": "python3\u0000-u\u0000/media/user/Data/TimeLearnerRefactor/readbacks/s07-capacitance-owner-transport-asan-d1.py\u0000",
+      "command_sha256": "481d0d70f100f8ba4cebf3221657cb8210f433e622d8d28385e0aa03394672aa"
+    },
+    {
+      "pid": 2488269,
+      "start_ticks": "273986367",
+      "command": "python3\u0000-u\u0000/media/user/Data/TimeLearnerRefactor/readbacks/s07-capacitance-owner-publication-transport-asan-d1.py\u0000",
+      "command_sha256": "e93465996189fce3d5fb205801acc1771a5d352921fdf19751e0f7d5615a22c5"
+    }
+  ],
+  "scientific_verdict": null
+}
