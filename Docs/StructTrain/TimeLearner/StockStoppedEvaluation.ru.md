@@ -36,10 +36,20 @@ scheduler/ITI. На этом шаге порядок единственный; r
 scientific_verdict=null сохраняются. Это не подтверждение сходимости,
 независимая Test выборка или причинное сравнение наличия LT.
 
-Пять адресных server readers в tests/test_stock_stopped_evaluation.py:
-четыре работают с actual source study и historical Git data; пятый требует
+Шесть адресных server readers в tests/test_stock_stopped_evaluation.py:
+пять работают с actual source study и historical Git data; шестой требует
 фактического32-trial результата. Skip не засчитывается как успешная проверка.
 После выполнения следует сформировать production temporal reports: все
 паттерны/сомы, реальные входные импульсы, полный обзор и читаемый zoom.
 Компактный Git хранит primary/models/metrics и выбранные изображения;
 полный воспроизводимый кэш — M40 Data. Этот документ не закрывает весь этап11.
+
+## Первые попытки и обязательная повторная проверка
+
+A1 отказался до чтения нового кода из-за DNS GitHub на Elder. Коммит передан
+нативным Git pack через существующий SSH; проверены exact commit и connectivity.
+SDK/source/build/runtime при передаче не изменялись. A2 выполнил4/4 source
+readers, затем public CLI отказался до native probes: prepare не создавал jobs.
+Добавлено штатное создание каталога и новый actual-filesystem prepare reader.
+Первоначальные exception/CLI receipts сохраняются; исправление ещё требует
+нового серверного запуска. Численные результаты32 проб пока отсутствуют.

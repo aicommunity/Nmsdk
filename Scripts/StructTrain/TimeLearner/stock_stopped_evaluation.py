@@ -48,6 +48,7 @@ def prepare(source, bin_repository, output):
     require(len(analyzed['rows']) == 4 and all(not r['completed_boundary'] for r in analyzed['rows']),
             'stock_diagnostic_requires_four_unfinished_sources')
     output.mkdir(parents=True)
+    (output/'jobs').mkdir()
     shutil.copytree(source, output/'source')
     require(_inventory(source) == _inventory(output/'source'), 'stock_diagnostic_copy_changed')
     matrix = from_git(bin_repository)

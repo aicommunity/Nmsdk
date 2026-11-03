@@ -1,13 +1,14 @@
 """Actual four stopped stock models; no successful-training surrogate fixture."""
 from copy import deepcopy
 import os
+import tempfile
 from pathlib import Path
 import unittest
 
 from ..native_evidence import EvidenceError, load
 from ..native_pipeline_worker import validate_job
 from ..phasea_matrix import from_git
-from ..stock_stopped_evaluation import audit, job_for
+from ..stock_stopped_evaluation import audit, job_for, prepare
 from ..stock_threshold_study import audit as audit_source
 from ..stopped_evidence import load_case
 
@@ -20,6 +21,7 @@ class StockStoppedJobTest(unittest.TestCase):
         if not source or not repository:
             raise unittest.SkipTest('requires published four stopped stock models and historical Bin Git objects')
         cls.source = Path(source)
+        cls.repository = Path(repository)
         cls.matrix = from_git(repository)
         cls.rows = audit_source(cls.source)['rows']
 
@@ -66,6 +68,18 @@ class StockStoppedJobTest(unittest.TestCase):
             changed = deepcopy(case[0]);changed['configuration']['model']['initial_isi'][-1] += .01
             with self.assertRaisesRegex(EvidenceError, 'phasea_matrix_learned_target_mismatch'):
                 job_for(row, changed, self.matrix)
+
+    def test_prepare_creates_all_jobs_and_bound_sources_before_native_execution(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)/'new-diagnostic'
+            design = prepare(self.source, self.repository, output)
+            self.assertEqual(len(design['rows']), 4)
+            for row in design['rows']:
+                job = load(output/'jobs'/(row['name']+'.json'))
+                self.assertEqual(job['sha256'], row['job_sha256'])
+                source = output/'source/runs'/row['name']/'native'/row['source_package']
+                validate_job('diagnostic-evaluate', job, load_case(source))
+            self.assertFalse((output/'runs').exists())
 
 
 class StockStoppedExecutionTest(unittest.TestCase):
