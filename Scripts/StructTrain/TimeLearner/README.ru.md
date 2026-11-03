@@ -2,6 +2,10 @@
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 
+`stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
+создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
+входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).
+
 `n1-protocol-study prepare/run/analyze/report` — заранее объявленная проверка двух
 сохранённых N1-кандидатов при фиксированных порогах, разных порядке, Reset и
 полных окнах. Это same-matrix candidate probe без повторного обучения или

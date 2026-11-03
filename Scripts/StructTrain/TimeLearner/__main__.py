@@ -149,6 +149,10 @@ def main(argv: list[str] | None = None) -> int:
     study.add_argument("--runtime-manifest", type=Path)
     study.add_argument("--source-evidence")
     study.add_argument("--output", type=Path, required=True)
+    stock = commands.add_parser("stock-phasea-preflight", help="build and inspect the stock four-input NSPNeuronGen without LT membrane; no Train")
+    stock.add_argument("source", type=Path)
+    stock.add_argument("--runtime-manifest", type=Path, required=True)
+    stock.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -457,6 +461,17 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, ImportError) as error:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "stock-phasea-preflight":
+        import tarfile
+        from .stock_phasea_preflight import run_stock_preflight
+        from .native_evidence import EvidenceError
+        try:
+            print(json.dumps(run_stock_preflight(args.source, args.runtime_manifest, args.output), allow_nan=False))
+            return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError, tarfile.TarError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "training_started": False, "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "n1-protocol-study":
         import tarfile
