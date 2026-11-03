@@ -1,3 +1,22 @@
+# Выполняемые проверки после восстановления Automats2, 03.11
+
+Elder: H11 запущен на root14e95660ff0f1a12d6e67a0cf9a425fe7955d1ce,
+Pulse253fe87020ae189a47c6940fa68c386ebf10c293. Baseline без Cursor;
+декларация native209/readers87. Проверены завершение старых owners и
+полный неуспешный H9b. Сборка выполняется, окончательного verdict нет.
+
+M40: адресный ASan r1 запущен на root1a4fd929296f05322d469270039e195698b5f620,
+Pulse194643e261fae59dbb3bfdd7b83ea54663ae04d7. Декларация region15/readers16:
+7 kernel +8 native Classic/Branch N0/N1 2000/20000Гц и16 independent reader
+checks. Проверены закрытые прежние owners и принятые primary prerequisites.
+Новый runtime изолирован, ASan detect_leaks=0; leak check не заявлен.
+Это подготовленная проверка, а не runtime-verified результат. Полная224
+regression и native Cursor A/B в данном адресном запуске не выполняются.
+
+Обе ветки с кодом и точными gitlinks опубликованы, рабочие деревья чисты.
+Новые изменения не включены в develop до прохождения собственной приёмки.
+C-search On не активирован; цель всего плана0–12 остаётся действующей.
+
 # Уточнение 03.11: полный результат H9b, отказ H10, следующий baseline
 
 Связь через Automats2 восстановлена и проверена SSH к Elder. H9b завершён:
