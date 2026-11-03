@@ -1,3 +1,16 @@
+# Срез приёмки automatic C₀ ownership/transport, 03.11
+
+Проверены normal43/readers26 и ASan43/readers26. Tested Pulse30495d1 принят
+child develop merge027070e8e1181380427edc9384641d08ed9943be без изменения Core.
+Корневая ветка фиксирует этот gitlink и сохраняет актуальный docs-only Rdkacc3de8d.
+[Точные sources, evidence, ограничения и closure](C0Acceptance-2026-11-03.ru.md).
+Остальные ветки с public witnesses, tracked service/schema3, CandidateCursor и
+archive codec fix имеют отдельную незавершённую приёмку. Это не их выпуск и не
+включение C-search. Полностью завершённым исходным этапом остаётся только0.
+
+Ниже сохранена хронология до этой приёмки; прежние pending/running относятся
+к соответствующим записям, не являются текущими статусами G3.
+
 # Подтверждённый срез 02.11: полнота временных данных
 
 ## Уточнён канонический lifecycle Rdk, 03.11
