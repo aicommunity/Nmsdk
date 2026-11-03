@@ -104,3 +104,25 @@ owner330097/324362522, publisher330098/324362522 повторяет43 native +26
 До изменения source проверены весь архив G1 и закрытие его owners; process guard
 не обнаружил пользователей source/build. Bridge требует нового отдельного
 задания после successful G2; H2 автоматически не возобновляется.
+
+
+## Подготовлен independent reader: приёмка pending
+
+Новые frame snapshots содержат фактическую storage dependency closure, повторно
+прочитанную через CaptureModelImageDefinitions с дополнительными image roots
+всех baseline channels, включая dormant. Это отдельный readback registry, а
+не копирование baseline.storage_images в поле доказательства.
+
+`analyze FILE --format training-capacitance-bridge` проверяет все6 фаз в порядке,
+semantic model hash, signed baseline/state, эффективные C=C₀×scale, физику каналов,
+registry profiles, полную typed map active/dormant/unit paths и вычисляемый origin.
+Между фазами запрещены recapture исходных полей baseline, потеря прежних channel
+witnesses и history paths. Фаза отказов обязана сохранить весь model/state/map.
+Reader не выдаёт training certificate и явно не подтверждает native import,
+probe observations или классификацию.
+
+Подготовлены7 production-reader tests на4 реальных bridge records: позитивный
+полный разбор, CLI, неизвестная схема/неполный inventory, forged origin, потеря
+dormant map, отсутствие registry snapshot и изменение физической C с пересчётом
+всех затронутых digest/revision (проверяется численная физика, а не stale hash).
+До server gate эти tests не исполнялись; никакого PASS пока нет.

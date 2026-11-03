@@ -591,6 +591,10 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
     QJsonArray phases;
     const auto record=[&](const std::string& phase) {
         const auto value=rig.learner->ReadNativeTrainingCapacitance();QJsonValue typed(QJsonValue::Null);
+        const auto native=rig.learner->OwnedNativeCapacitanceState();
+        std::vector<std::string> imageRoots;
+        const auto classes=native["baseline"].toObject()["channel_classes"].toObject();
+        for(auto it=classes.begin();it!=classes.end();++it)imageRoots.push_back(it.value().toString().toStdString());
         if(value)
         {
             QJsonObject scales;for(const auto& [path,scale]:value->membraneScales)scales[QString::fromStdString(path)]=scale;
@@ -598,7 +602,8 @@ template<class Learner> void NativeTrainingCapacitanceBridge(int normalization)
                 {"maximum_relative_change",value->maximumRelativeChange},{"membrane_scales",scales}};
         }
         const QJsonObject snapshot{{"phase",QString::fromStdString(phase)},
-            {"native_state",rig.learner->OwnedNativeCapacitanceState()},{"controller_parameters",typed},
+            {"native_state",native},{"controller_parameters",typed},
+            {"storage_images",NmsdkTools::CaptureModelImageDefinitions(rig.neuron,rig.ports,imageRoots)},
             {"model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)}};
         phases.append(snapshot);Artifact(rig.name+"_bridge_"+phase+".json",QJsonDocument(snapshot).toJson());
     };
