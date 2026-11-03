@@ -1,3 +1,16 @@
+# Дополнение03.11: C-search temporal reports проверены
+
+Visual-v4:14/14, полные48 actual probes/72 trial-soma pairs. Независимо сверены
+126 members /248528 bytes и416 source hashes.16 выбранных исходных1920×960 PNG
+непосредственно просмотрены, оси/импульсы/кривые читаемы. Общий PNG объём2.58MB;
+полный figure cache остаётся на M40 Data. [Контракт и SHA](CapacitanceSearchVisuals.ru.md),
+[QA](CapacitanceSearchVisualQA-2026-11-03.json).
+
+Это отрицательные controls C-search с budget_exhausted, без Exact/certificate.
+Отчёт по всем classification patterns, latest native34/full262 и C-search ASan
+остаются отдельными незакрытыми проверками. Исходные этапы1–12 частичны.
+Нижние pending/failed записи сохраняют хронологию.
+
 # Дополнение03.11: backward readers88 завершены; новые gates выполняются
 
 H18: production schema4 reader rootab95 проверен на исходных H12 schema3
