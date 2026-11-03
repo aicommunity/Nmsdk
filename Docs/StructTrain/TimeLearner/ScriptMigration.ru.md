@@ -322,3 +322,9 @@ records (79 retired +2 moved), server metadata приёмка пройдена �
 restored-Reports-launcher negative fixture; оба10-member архива и380 exact Git
 source hashes независимо сверены. Подробные SHA — в ReportLauncherRetirement.
 Это не завершение полного этапа9.
+
+
+Следующий пакет удаляет11 исторических SoftCold/OpenGaps/T2/T4 shell entrypoints
+без wrappers; [источники, consumers и приёмка](SoftColdLauncherRetirement.ru.md).
+Manifest105:103 retired/2 moved; complete=false. Текущие skill/reference копии
+переходят на root CLI. Это не удаление первичных данных и не запуск старых волн.

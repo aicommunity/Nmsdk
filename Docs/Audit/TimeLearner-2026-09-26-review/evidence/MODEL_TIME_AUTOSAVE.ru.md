@@ -1,5 +1,8 @@
 # Model-time autosave (Console) — порт из spike_classifier_preset
 
+> Дополнение03.11.2026: это исторический документ кампании. SoftCold/OpenGaps/T2/T4 shell launchers удалены из текущего дерева; их исходники доступны в Bin commit `39d811e5e0798eecf124f32356c9fc6edbe4538a` по прежнему пути. Полный retrieval manifest: `Docs/StructTrain/TimeLearner/script_migration.json`. Измерения и прежние выводы ниже сохранены; старые команды не являются инструкцией нового запуска.
+
+
 Дата: 2026-10-01.
 
 ## Источник
