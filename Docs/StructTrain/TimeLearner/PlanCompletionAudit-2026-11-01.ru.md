@@ -380,3 +380,41 @@ inherited16 baseline. Частичные данные и -15 exit сохране
 acceptance нового163 и широкая матрица планов всё ещё открыты. Stage0 остаётся
 единственным полностью завершённым этапом0–12; версии2 в целом не присваивается
 статус рекомендуемой по этим узким gates.
+
+## Дополнение03.11: принятый scoped scientific checkpoint
+
+Root develop merge `f879b3ded60c2ddca0be2fef15f794b04d9d87ad` принял
+фиксированную N1 protocol series и temporal reports. Child closure остаётся
+Pulse027070e8e1181380427edc9384641d08ed9943be,
+Bin99f58da9296a794374cef679bbb878cb62af979a,
+Rdkacc3de8d1af2480d61ddb723c3288f7e81003049. Новые feature изменения
+initial-threshold, CandidateCursor и C-search этим merge не принимались.
+
+Численные primary: `642f08ddca735d0a66755b20ce84decbfccf18f7`,528 complete
+trials,5/5 readers. Полный renderer proof27ec82d40ae32a3238d2dfaee696cfabbaa65697:
+792 trial-soma pairs,3/3 readers. Выбранные28 PNG из proof
+f47fa0e0aabd24327a76011ada7b2edcf59f0d24 непосредственно просмотрены; hashes
+и точная область ручной приёмки — N1ProtocolVisualQA.json. Полный image cache
+на M40 Data, компактные первичные данные и выбранные изображения в Git.
+Production workflow/report и соответствующие test source blobs после merge
+побайтно равны проверенным снимкам29397614 и1a0b666eea211ef0a127f981564b9549bcce8579.
+
+**Исправление научной постановки:** эта серия использует изменённый двухвходовый
+integration profile с LTMembrane0.3nF, DissociationTC1ms и InhRm100MΩ.
+Она не является stock четырёхвходовой моделью августа. Причинный эффект LT
+по этим данным не выделен. Источник и разница topology/feedback —
+ScientificProfileDrift.ru.md. Августовские рабочие4/8–6/8 не отменяются.
+
+TP8/FN0 во всех основных условиях. FP24 при reset и continuous1.6s;
+continuous0.4s FP10 Classic/15 Branch. Эти same-matrix данные не доказывают
+независимую generalization, нулевой FP или успешность всех режимов обучения.
+Stock preflight и первый отрицательный stock cold сохранены; новая версия
+construction threshold и последующие stock controls пока в feature branch.
+
+Это продвижение этапов3/9/11/12, а не их полное завершение. Полностью закрыт
+только исходный этап0. Все исходные этапы1–12 сохраняют открытые требования:
+полный property/evidence review, lifecycle/storage/physics и legacy/V2 A/B,
+полные export/import/Train→Test и алгоритмические modes, PostTune/calibration,
+остальная миграция скриптов, fault/lease/publication matrix, научные контроли
+на stock моделях и сквозная актуализация документов. Fresh recursive checkout
+последнего develop после этого merge также ещё требует отдельной проверки.
