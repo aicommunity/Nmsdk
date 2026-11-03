@@ -18,7 +18,7 @@ from .process_runner import verify_runtime
 TARGET = [.01, .08, .16, .24]
 
 
-def make_stock_job(solo, name):
+def make_stock_job(solo, name, *, initial_threshold=None):
     c = deepcopy(solo['configuration'])
     c.update(run_id=name, protocol_revision='stock-nspneurongen-phasea-target-v1', duration=1.8,
              maximum_samples=3605, maximum_model_seconds=3600, maximum_wall_seconds=7200,
@@ -28,6 +28,8 @@ def make_stock_job(solo, name):
     m.update(neuron_class='NSPNeuronGen', initial_isi=TARGET[:], maximum_cable_length=100,
              inputs=[{'attachment': 1, 'synapses': 1, 'resistance': 86e6} for _ in TARGET],
              allocated_cable_lengths=[1] if m['branch'] else [1]*4)
+    if initial_threshold is not None:
+        m.update(schema_version=2, initial_threshold=initial_threshold)
     require(m['frequency_hz'] == 2000 and m['normalization'] == 'N1' and m['inhibition'] == [],
             'stock_preflight_template_scope')
     c['search'].update(bounds=[{'minimum_length': 1, 'maximum_length': 100 if i < 3 else 1,
@@ -100,7 +102,7 @@ def audit_stock_profile(identity, *, branch):
             'historical_dynamics_equivalence_proven': False, 'scientific_verdict': None}
 
 
-def run_stock_preflight(bundle, runtime_path, output):
+def run_stock_preflight(bundle, runtime_path, output, *, initial_threshold=None):
     output = Path(output)
     require(not output.exists(), 'stock_preflight_output_exists')
     runtime = load(Path(runtime_path));verify_runtime(runtime)
@@ -112,14 +114,14 @@ def run_stock_preflight(bundle, runtime_path, output):
     for top in ('Classic', 'Branch'):
         source = load(output/'source/corpus/runs'/f'{top}-grid/native/transaction.json')['source_recognition']['source_solo']
         name = top+'-stock-nspneurongen-inputs4'
-        job = make_stock_job(source, name)
+        job = make_stock_job(source, name, initial_threshold=initial_threshold)
         _write(output/'jobs'/f'{name}.json', job)
         jobs.append((name, job))
     # Both complete declarations precede the first native creation.
     _write(output/'design.json', {'kind': 'stock_phasea_native_preflight_design', 'schema_version': 1,
            'source_archive_sha256': load(output/'source/source-bundle.json')['archive_sha256'],
            'jobs': {name: job['sha256'] for name, job in jobs}, 'uses_fixture_physics': False,
-           'training_run': False, 'scientific_verdict': None})
+           'initial_threshold': initial_threshold, 'training_run': False, 'scientific_verdict': None})
     rows = []
     for name, job in jobs:
         print('PREFLIGHT', name, flush=True)

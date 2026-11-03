@@ -81,6 +81,8 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
+        from .native_model_spec import validate_model_spec
+        validate_model_spec(config['model'])
         require(type(config) is dict and type(config["model"]) is dict and
                 type(config["model"]["branch"]) is bool and type(config["run_id"]) is str and config["run_id"],
                 "invalid_training_declaration")
@@ -178,6 +180,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 identity["schema_version"] == 2 and identity["valid"] is True and identity["diagnostics"] == [] and
                 identity["sha256"] == sha(identity["model"]) == execution["model_revision"],
                 "preflight_model_binding_changed")
+        from .native_model_spec import audit_initial_threshold
+        audit_initial_threshold(job['configuration']['model'], identity)
         parameters, inputs = initial["parameters"], job["configuration"]["model"]["inputs"]
         require(type(parameters) is list and len(parameters) == len(inputs) and all(
                 type(p) is dict and set(p) == {"length", "synapses", "resistance"} and
@@ -198,6 +202,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 "native_execution_verified": False, "evaluation_verdict": None}
     if live:
         from .live_training_worker import audit_live_training
+        from .native_model_spec import audit_initial_threshold
+        audit_initial_threshold(job['configuration']['model'], load(directory/'initial-state.json')['identity'])
         return audit_live_training(directory, job, execution, names)
     if mode == "train":
         completed = execution["completed_boundary"]
@@ -222,6 +228,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 initial["configuration_sha256"] == sha(job["configuration"]) and
                 initial["identity"]["valid"] is True and
                 initial["identity"]["sha256"] == sha(initial["identity"]["model"]), "pipeline_cold_initial_state_invalid")
+        from .native_model_spec import audit_initial_threshold
+        audit_initial_threshold(job['configuration']['model'], initial['identity'])
         inputs = job["configuration"]["model"]["inputs"]
         require(len(initial["parameters"]) == len(inputs) and all(
             p["length"] == declared["attachment"] and p["synapses"] == declared["synapses"] and
