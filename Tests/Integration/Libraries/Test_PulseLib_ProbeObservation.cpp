@@ -119,7 +119,7 @@ TEST(TimeLearnerBurstAssignment, AssignedPolicySelectsTheActualLaterWaveInAWideW
 TEST(TimeLearnerBurstAssignment, AssignedPolicyRequiresSamplesAroundTheSelectedPlateau)
 {
     auto s=BurstSpecification();s.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
-    for(const auto bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
+    for(const auto& bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
     {
         s.windows[0].begin=bounds.first;s.windows[0].end=bounds.second;
         const auto o=BurstObservation(s);EXPECT_FALSE(o.valid);
