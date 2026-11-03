@@ -126,3 +126,16 @@ probe observations или классификацию.
 dormant map, отсутствие registry snapshot и изменение физической C с пересчётом
 всех затронутых digest/revision (проверяется численная физика, а не stale hash).
 До server gate эти tests не исполнялись; никакого PASS пока нет.
+
+
+H3 поставлен в очередь после успешного normal G2: source
+1c992e4ab95d6c467f9b006808c8b8046d180781, owner333776/324382901,
+publisher333777/324382902. Он выполняет134 SDK/native cases и7 independent
+reader tests на своём immutable snapshot. Работающий G2 source не изменён.
+
+При дополнительном review reader усилен восьмым negative control: изменение
+maximum_relative_change одновременно в native/typed state с корректным новым
+digest не должно пройти проверку неизменной policy между фазами. H3 сохраняет
+свой ранее объявленный snapshot; отдельный reader-only gate должен проверить
+новую версию на тех же фактических H3 артефактах через Git archive, без изменения
+leased SDK source/runtime и без повторного численного расчёта.
