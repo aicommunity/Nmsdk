@@ -1,3 +1,12 @@
+## Дополнение03.11: исторические запускатели Reports
+
+Удалены13 Reports job.py/runner.sh без wrappers;94 migration records прошли
+production history CLI на обоих workers, восстановленный launcher отклонён.
+Оба evidence архива и380 Git source hashes независимо сверены; остальные
+primary payloads не изменены. [Контракт, SHA и ограничения](ReportLauncherRetirement.ru.md).
+Это продвижение9/12; полная миграция, production orchestration и весь план
+не закрываются. Полностью завершённым исходным этапом остаётся0.
+
 ## Дополнение03.11: scoped C₀ owner принят, полные этапы остаются частичными
 
 Root develop0a495cefe /Pulse develop027070e8 принимают automatic ownership и
