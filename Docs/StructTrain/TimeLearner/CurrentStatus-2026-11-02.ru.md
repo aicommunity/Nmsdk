@@ -2,9 +2,9 @@
 
 ## Текущий незавершённый C₀ owner, 03.11
 
-Принятый root develop — 3a6b83de203f2fc7bd18754a20203e87a010aaa5:
-после c2e77869d принят docs-only Rdk lifecycle merge33bdf2d1 с прежними
-Core/Deploy trees a62393f7. [Scope](https://github.com/aicommunity/Nmsdk/blob/3a6b83de203f2fc7bd18754a20203e87a010aaa5/Docs/StructTrain/TimeLearner/NativeLifecycleDocumentation-2026-11-03.ru.md).
+Принятый root develop — 9de7aa0d591ab1a111976e2616e5bc58c4d81eac:
+после c2e77869d приняты docs-only Rdk lifecycle merge33bdf2d1 и дополнение
+acc3de8d с прежними Core/Deploy trees a62393f7. [Scope](https://github.com/aicommunity/Nmsdk/blob/3a6b83de203f2fc7bd18754a20203e87a010aaa5/Docs/StructTrain/TimeLearner/NativeLifecycleDocumentation-2026-11-03.ru.md).
 После parser acceptance c594eacef принят отдельный metadata-подэтап удаления
 17 historical AsymRm launchers; Bin develop39d811e5, Pulse develop5a52565.
 [Scope и проверенные81 migration records](AsymRmLauncherRetirement.ru.md).
@@ -32,7 +32,7 @@ Pulse обоих jobs f899ef0: новый owner плюс принятый parser
 builds и runtimes остаются leased текущими jobs; вручную не обновлять.
 Полная приёмка пока pending. Normal8 и19 readers завершены и опубликованы:
 evidence a928fb92edd0880728a697da0fed6d7ede3e7d4a, все259 members проверены.
-ASan прошёл5/8 и продолжает20k cases. Normal transport43 завершился39 PASS/4 FAIL:
+ASan прошёл6/8 (ClassicN1At20000=2778.136s) и продолжает Branch20k cases. Normal transport43 завершился39 PASS/4 FAIL:
 четыре dormant fixtures остановились в setup при native snapshot roundtrip
 с model.bindings.size, ещё до удаления последнего image consumer. Evidence
 e324c160 проверен (846 members); readers26 не запускались после failed native.
@@ -52,9 +52,18 @@ worker272413/publisher272414;4 FAIL до Train, все51 members proofca83319e
 стадия замены пока не установлена. E6 добавляет read-only class/C/Ready/Init
 snapshots после каждого шага, без смены физики/алгоритма/identity. Запущен на
 Elder: root5f6add3064890a7647d43a2ec8ebc34fbe252695, Pulse30495d1, worker278449,
-publisher278450. До локализации по snapshots дальнейшее изменение порядка
-на основании только последнего assertion не является исправлением.
-Dormant export этими предыдущими отказами не проверен.
+publisher278450. E6 завершён: все99 members proof38cf8667 проверены,
+первая потеря custom class/C во всех4 случаях находится уже внутри Load.
+Нативные операции связей вызывают Build. E7 загружает готовый граф в learner
+mode0, затем adoption и возврат исходного mode1; neuron mode2 неизменен.
+Proof28a02ecc (171 members) подтверждает сохранность классов/C/bindings, shrink,
+dormant scale1.1 и completed Train при явно заданной .2, applied_edits=0.
+Export отклонён: старый fixture-domain [1,1] не включает исходную декларацию L2.
+E8 сохраняет ограниченный domain [1,2] и требует после Train отсутствия
+Dendrite1_2, чтобы не потерять dormant проверку. Назначен на Elder:
+root0481331ade277933b4e47cc4e4d2f3ccebc38fdd, Pulse30495d1,
+worker289099/publisher289100. Export/fresh-process import пока не приняты.
+Это transport control, не научная классификация или convergence при default .02.
 Strict identity сохраняется. Conditional ASan transport43 со старыми четырьмя
 fixtures отменён до изменения source/build/runtime: проверены точные
 PID/start_ticks2488268/273986367 и2488269/273986367, отсутствие дочерних
