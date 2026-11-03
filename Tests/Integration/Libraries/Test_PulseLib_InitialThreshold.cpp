@@ -4,7 +4,7 @@
 #include "NPulseNeuron.h"
 #include "NPulseLTZoneCommon.h"
 #include "NPulseMembrane.h"
-#include "NPulseGeneratorTransit.h"
+#include "NPulseGenerator.h"
 #include "NDatasetMatrix.h"
 #include "TimeLearner/ConfiguredNativeTraining.h"
 #include "TimeLearner/StorageProfiles.h"
