@@ -1,5 +1,34 @@
 # Автоматическое владение исходной C₀
 
+## Актуальная адресная приёмка после E8/F1
+
+Normal dormant4 завершён4/4: Classic/Branch × N0/N1, same/fresh-process import,
+сохранение неиспользуемого image и dormant scale1.1. Evidence
+`315d6520f1b235a77798389ecd0c56c32f03b5a9`: outer hashes и269 members проверены,
+primary1 373 512 bytes. Native source root0481331ad, Pulse30495d1, Rdk a62393f7.
+Сериализатор/identity не ослаблены: исправлены load mode/order и domain fixture.
+
+Independent readers3/3 на этих четырёх actual packages: evidence
+`37bf2f787e93542a7972e560418a31aee2559684`, все6 members/14 592 bytes проверены;
+hashes278 source files совпали с Git reader rootf1d500245. Отрицательные случаи
+требуют конкретных semantic reasons: capacitance_storage_profile_mismatch
+при потере unused image и invalid_dormant_capacitance_scale при scale1.3.
+Зелёный результат не может обеспечиваться случайным повреждением outer digest.
+
+Полная приёмка automatic owner остаётся открытой. Normal regression43/readers26
+G1 выполняется на Elder: root4d501d611b56945c9f1914e9e4c44dee5485c949,
+worker297669/324112486, publisher297670. Build завершён, native43 начат.
+M40 ASan owner C3 прошёл6/8, работает Branch20k. Corrected ASan43/readers26 G1
+поставлен после успешных ASan owner8 и normal43: worker2578910/274660894,
+publisher2578911. До их завершения source/build/runtime не меняются.
+Отменённый старый ASan D1 не возобновляется.
+
+Все результаты здесь — engineering transport controls при явно заданной .2,
+не научная классификация, не convergence при default .02 и не завершение
+исходных этапов4/5/7/12. Новая C-search policy ещё не подключена к native service.
+Полностью завершён только исходный этап0. Далее сохранён журнал диагностики;
+промежуточные гипотезы и отказы не являются текущим статусом E8/F1.
+
 ## Диагностика конфигурации dormant4, 03.11
 
 E1 (`93e623903e4edf3bebb698ae26553772d910ee43`) локализует два отсутствующих
@@ -99,7 +128,7 @@ E8 сохраняет штатный ограниченный length-domain [1,2
 0481331ade277933b4e47cc4e4d2f3ccebc38fdd, Pulse30495d1, worker289099,
 publisher289100. Export/import ещё не принят.
 
-## Текущая приёмка, 03.11: открытый native roundtrip дефект
+## Исторический срез до E8: normal43 D1 и первоначальный roundtrip отказ
 
 Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.
 Normal transport43 завершён:39 PASS и4 FAIL в NativeDormantCapacitanceTransport.
