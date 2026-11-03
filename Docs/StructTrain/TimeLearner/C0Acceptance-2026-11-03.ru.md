@@ -95,7 +95,7 @@ CapturedPerInput; общая амплитуда A* не вводилась, tole
 Root acceptance сохраняет Rdkacc3de8d, актуальный к началу объединения. Отличие от
 tested a62393f7 ограничено пятью Docs paths; Core/Deploy/прочие compiled sources
 совпадают. Bin39d811e5 и остальные children не меняются. После child-first push
-корень фиксирует точные gitlinks; отдельный fresh recursive checkout ещё требуется.
+корень фиксирует точные gitlinks; fresh recursive checkout подтверждён отдельно ниже.
 
 Это подэтапы4/5/7, не закрытие полных этапов. Profile/mode/dimension matrix,
 multirate, новая public binding/witness API, tracked service/model schema3,
@@ -103,3 +103,16 @@ C-search On, весь PostTune/calibration pipeline и научные экспе
 этим corpus. Визуальные материалы ownership имеют отдельные source scopes и полный
 cache на M40; selected figures не означают visual acceptance всех будущих моделей.
 Version2 не объявляется рекомендуемой по всей матрице, научного verdict здесь нет.
+
+
+### Опубликованная closure automatic owner
+
+Root develop merge0a495cefe72778d9ffb74d1cc51990d0dda611e6 опубликован после
+Pulse develop027070e8e1181380427edc9384641d08ed9943be. Fresh shallow recursive
+checkout на M40 завершён из origin, все7 children совпадают с gitlinks и чистые.
+Evidence17a4f61dee84743ede1e9d42ab4157336f4754c1:9 checksummed payload files,
+включая closure, recursive status и Core trees. Pulse Core76eca8256da2588f7d5327e33ea0a5ee3259c8f2
+совпадает с tested30495; Rdk Coreb204ef8da698476898394aa1d5b6a2679e5a91ed — с tested
+а62393f7. Это подтверждение source closure; новая numerical сборка не заявляется.
+Последующий merge этих receipts/docs не меняет принятых child pins или источников
+App/Scripts/Tests. Полный план и ранее перечисленные ограничения остаются открытыми.
