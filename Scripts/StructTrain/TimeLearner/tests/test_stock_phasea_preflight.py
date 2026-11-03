@@ -59,3 +59,13 @@ class StockPhaseAPreflightTest(unittest.TestCase):
                 changed['sha256'] = sha(changed['model'])
                 with self.assertRaisesRegex(EvidenceError, reason):
                     audit_stock_profile(changed, branch=branch)
+
+    def test_rehashed_changed_spike_feedback_path_is_rejected(self):
+        for row in self.rows:
+            folder = self.root/'runs'/row['name']
+            changed = deepcopy(load(folder/'native/initial-state.json')['identity'])
+            edge = next(b for b in changed['model']['bindings'] if b['source'] == '$.LTZone:Output')
+            edge['target'] = '$.Soma1.ExcChannel:ChannelInputs'
+            changed['sha256'] = sha(changed['model'])
+            with self.assertRaisesRegex(EvidenceError, 'stock_profile_ltzone_connections_mismatch'):
+                audit_stock_profile(changed, branch=row['name'].startswith('Branch'))
