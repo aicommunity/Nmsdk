@@ -38,8 +38,12 @@ native snapshot load, проверить создание через штатн�
 
 ASan owner C3 прошёл5/8: первый20k ClassicN0 завершился за2798.618s, выполняется
 ClassicN1At20000 (native handle2473290/start_ticks273872272 подтверждён).
-ASan transport D1 ещё ожидает owner predecessor; его старые четыре dormant
-fixtures требуют пересмотра после диагностики, автоматического PASS им нет.
+ASan transport D1 со старыми четырьмя dormant fixtures отменён до source/build/
+runtime mutation. Cancellation evidence d6135806b068100640afc6e16d278d693fa18324:
+все4 file hashes проверены, точные PID/start_ticks закрыты, прежний HEAD
+неизменен, активный ASan owner8 подтверждён живым. E3 normal4 на Elder использует
+root3d144493aa073663d309946a961bf055bee617f4, Pulse30495d1; новая ASan transport
+серия требует исправленного fixture и положительного адресного normal результата.
 
 Следующий пункт этапа7 после explicit C₀ API. Он не включает bounded C-trim
 search: V2 SyncCapacitanceTrimOn остаётся запрещённым до его отдельной проверки.
