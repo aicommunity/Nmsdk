@@ -87,7 +87,7 @@ Normal compiled C++/CMake/gitlinks между496a80 иc63d1 не менялис�
 libasan.so.8 (SHA2568d5845bdf056b5db4cfb9fff40ad5eeea8f6da05a8ca6f5935a7d1c138ed2558).
 detect_leaks=0, отсутствие утечек не заявляется. Все archive members сверены локально.
 
-Scope включает Classсic/Branch N0/N1,2k/20k native edits, automatic ownership,
+Scope включает Classic/Branch N0/N1,2k/20k native edits, automatic ownership,
 R bounds, joint C, rollback, active/dormant history, same/fresh-process completed
 и stopped transfer и frozen responses в этих43 tests. Каждый вход остаётся целью
 CapturedPerInput; общая амплитуда A* не вводилась, tolerances не изменялись.
