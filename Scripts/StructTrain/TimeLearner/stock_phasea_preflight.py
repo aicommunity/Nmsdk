@@ -83,6 +83,15 @@ def audit_stock_profile(identity, *, branch):
             synapses += 1
     require('$.LTZone' in paths and paths['$.LTZone']['class'] == 'NPulseLTZoneThreshold',
             'stock_profile_ltzone_mismatch')
+    somas = sorted(p for p in membrane_paths if p.startswith('$.Soma'))
+    expected_lt = {(p+'.'+role+'Channel:Output', '$.LTZone:Inputs') for p in somas for role in ('Exc', 'Inh')}
+    expected_lt.update(('$.LTZone:Output', p+':InputFeedbackSignal') for p in somas)
+    bindings = [b for b in identity['model']['bindings']
+                if b['target'] == '$.LTZone:Inputs' or b['source'] == '$.LTZone:Output']
+    require(len(bindings) == len(expected_lt) and
+            all(b['kind'] == 'property_pointer' for b in bindings) and
+            {(b['source'], b['target']) for b in bindings} == expected_lt,
+            'stock_profile_ltzone_connections_mismatch')
     return {'profile': 'NSPNeuronGen', 'lt_membrane': False, 'input_count': 4,
             'body_membranes': len(membrane_paths), 'channels_checked': channels,
             'synapses_checked': synapses, 'frequency_hz': 2000,

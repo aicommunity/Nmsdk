@@ -116,3 +116,40 @@ borrowed-object зависимость; source и полный кэш до пр�
 
 Фоновая задача не является доказательством завершения. При ошибке сохраняются
 исходные receipts и terminal verdict; автоматический повтор не предусмотрен.
+
+## Завершённые первичные измерения
+
+Normal proof `642f08ddca735d0a66755b20ce84decbfccf18f7`: все10 операций,
+528 complete search trials,0 confirmations,5/5 production readers без ошибок,
+failures или skips. Независимо проверены все1239 members /1 098 702 945 raw bytes
+→22 277 328 xz bytes, outer checksums и380 точных source hashes по Git root29397614.
+Измерения относятся **только к изменённому профилю с LTMembrane** выше.
+
+В каждом основном условии64 пробы:8 target и56 foils. TP8/FN0 во всех условиях.
+
+| Топология | Reset policy | Окно, s | FP | TN | Accuracy |
+|---|---|---:|---:|---:|---:|
+| Classic | reset-per-trial |0.4|24|32|62.5%|
+| Classic | reset-per-trial |1.6|24|32|62.5%|
+| Classic | continuous |0.4|10|46|84.375%|
+| Classic | continuous |1.6|24|32|62.5%|
+| Branch | reset-per-trial |0.4|24|32|62.5%|
+| Branch | reset-per-trial |1.6|24|32|62.5%|
+| Branch | continuous |0.4|15|41|76.5625%|
+| Branch | continuous |1.6|24|32|62.5%|
+
+Все FP в длинных окнах произошли в первых400 ms; поздних foil spikes после
+этого времени не найдено. Значит, разница этих measured counts не объясняется
+простым включением поздних FP в более длинное окно. Она совместима с влиянием
+предыстории continuous-модели, но конкретный механизм и роль LT не выделены.
+Нулевого FP при target hit не получено. Детерминированные порядки не являются
+независимыми cold trainings или независимой pattern выборкой.
+
+Первый visual a1 остановился до построения графиков: системный Python не имел
+matplotlib. Failure proof `57afc8eb47c48adb215fe768cc8997952708d214` сохранён;
+все5 members /19 976 compressed bytes и382 source hashes проверены. Новый
+visual a2 использует существующее plot-venv-a1 (matplotlib3.9.4/Pillow13.0.0),
+renderer root `1a0b666eea211ef0a127f981564b9549bcce8579`, PID3241790,
+каталог Data `s11-n1-fixed-protocol-visual-a2`. Он повторно проверяет и читает
+те же Git-bound primary; численные пробы не повторяются. Полная visual приёмка
+и завершение a2 пока не заявлены.
