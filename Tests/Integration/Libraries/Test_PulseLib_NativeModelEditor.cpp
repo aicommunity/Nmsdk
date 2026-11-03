@@ -2432,6 +2432,51 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
             rig.name=baseName+"_calibrated";
             FrozenTrialChecks(rig,calibrated,true);
             EXPECT_EQ(rig.learner->ExportNativeRecognitionState(implementation),calibrated);
+            if(solo["configuration"].toObject()["model"].toObject()["schema_version"]==QJsonValue(2))
+            {
+                const auto originalOwner=rig.learner;const auto originalNeuron=rig.neuron;
+                const auto originalGenerator=rig.source;const auto originalPorts=rig.ports;
+                const auto originalName=rig.name;
+                const auto before=originalOwner->ExportNativeRecognitionState(implementation);
+                // A distinct native owner imports the complete calibrated
+                // package; it must not reconstruct with construction threshold1.
+                const auto checkFresh=[&]() {
+                    auto fresh=dynamic_pointer_cast<Learner>(core.storage->TakeObject(
+                        rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
+                    ASSERT_TRUE(fresh);ASSERT_NE(fresh.Get(),originalOwner.Get());
+                    fresh->Name="CalibratedDestination";fresh->SetGlobalTimeStep(rig.frequency);
+                    UEPtr<UContainer> node=fresh;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);
+                    const auto installed=fresh->ImportNativeRecognitionState(calibrated,implementation);
+                    ASSERT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;
+                    fresh->Build();fresh->Init();fresh->Reset();
+                    rig.model->Init();rig.model->Reset();
+                    ASSERT_EQ(fresh->ExportNativeRecognitionState(implementation),calibrated);
+                    ASSERT_FALSE(fresh->NativeTrainingController().Certificate());
+                    ASSERT_FALSE(fresh->NativeTrainingController().References());
+                    rig.learner=fresh;
+                    rig.neuron=fresh->template GetComponentL<NPulseNeuron>("Neuron",true);
+                    rig.source=fresh->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+                    ASSERT_TRUE(rig.neuron);ASSERT_TRUE(rig.source);
+                    rig.ports={{&rig.source->Output,"burst"}};rig.name=originalName+"_fresh_owner";
+                    auto effectiveZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);
+                    ASSERT_TRUE(effectiveZone);ASSERT_DOUBLE_EQ(effectiveZone->Threshold.GetData(),*pendingProposal->threshold);
+                    ASSERT_NE(*pendingProposal->threshold,solo["configuration"].toObject()["model"].toObject()["initial_threshold"].toDouble());
+                    FrozenTrialChecks(rig,calibrated,true);
+                    EXPECT_EQ(fresh->ExportNativeRecognitionState(implementation),calibrated);
+                    EXPECT_EQ(originalOwner->ExportNativeRecognitionState(implementation),before);
+                    effectiveZone=fresh->template GetComponentL<NPulseLTZoneCommon>("Neuron.LTZone",true);
+                    ASSERT_TRUE(effectiveZone);
+                    Artifact(rig.name+"_calibrated_transfer.json",QJsonDocument(QJsonObject{
+                        {"kind","native_calibrated_model_spec2_distinct_owner_transfer"},{"schema_version",1},
+                        {"source_solo",solo},{"calibrated_state",calibrated},{"destination_state",fresh->ExportNativeRecognitionState(implementation)},
+                        {"source_state_after",originalOwner->ExportNativeRecognitionState(implementation)},
+                        {"distinct_owners",true},{"construction_threshold",solo["configuration"].toObject()["model"].toObject()["initial_threshold"]},{"effective_threshold",effectiveZone->Threshold.GetData()},
+                        {"engineering_lt_profile",true},{"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+                };
+                checkFresh();
+                rig.learner=originalOwner;rig.neuron=originalNeuron;rig.source=originalGenerator;
+                rig.ports=originalPorts;rig.name=originalName;
+            }
             if(runGrid)ThresholdGridChecks(rig,source,*pendingProposal->threshold,search.requests);
             if(runPostTune)PostTuneTransactionChecks(rig,source,*pendingProposal->threshold,search.requests);
         }
@@ -2825,7 +2870,7 @@ enum class BoundaryExpectation { Completed, DiagnosticSweepBudget };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
     double fixtureWallSeconds=600.,BoundaryExpectation expectation=BoundaryExpectation::Completed,bool withCapacitance=false,
-    bool withDormantCapacitance=false)
+    bool withDormantCapacitance=false,bool modelSpec2=false)
 {
     ASSERT_TRUE(std::isfinite(fixtureWallSeconds) && fixtureWallSeconds>0.);
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
@@ -2835,12 +2880,14 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(n0Repeats>1)suffix+="_repeat"+std::to_string(n0Repeats);
     if(withCapacitance)suffix+="_capacitance_state";
     if(withDormantCapacitance)suffix+="_dormant";
+    if(modelSpec2)suffix+="_model_spec2";
     EditingRig<Learner> rig(frequency,normalization,suffix,false,inputs,!configured,2,1,false,{},1,initialThreshold);
     if(automatic)rig.learner->CalculateMode=0;
     std::optional<ConfiguredNativeTraining> configuredPlan;
     if(configured)
     {
         configuredPlan=Configuration(rig);configuredPlan->search.tolerances.sync=sync;
+        if(modelSpec2){configuredPlan->model.schemaVersion=2;configuredPlan->model.initialThreshold=initialThreshold;}
         configuredPlan->maximumWallSeconds=fixtureWallSeconds;
         configuredPlan->search.n0CandidateRepeats=n0Repeats;
         rig.learner->ControllerVersion=2;rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(*configuredPlan)).toJson(QJsonDocument::Compact).toStdString();
@@ -3043,6 +3090,13 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     Artifact(rig.name+"_learned_summary.json",QJsonDocument(EncodeNativeTrainingState(service,original,parameters)).toJson());
     const std::string implementation=diagnostic?"native-stopped-boundary-fixture-v1":"native-learned-boundary-fixture-v1";
     const auto package=rig.learner->ExportNativeLearnedState(implementation);
+    if(modelSpec2)
+    {
+        ASSERT_TRUE(configured);
+        const auto declaration=package["configuration"].toObject()["model"].toObject();
+        ASSERT_EQ(declaration["schema_version"],QJsonValue(2));
+        ASSERT_DOUBLE_EQ(declaration["initial_threshold"].toDouble(),initialThreshold);
+    }
     if(withCapacitance)
     {
         const auto explicitPackage=rig.learner->ExportNativeLearnedState(implementation,capacitance);
@@ -3432,6 +3486,10 @@ TEST(NativePostTuneTransaction,ClassicN0_2000){LearnedBoundary<NNeuronTimeLearne
 TEST(NativePostTuneTransaction,BranchN0_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,true,RecognitionCase::PostTuneTransaction,false,1.,1,1800.);}
 TEST(NativeCalibratedState,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.);}
 TEST(NativeCalibratedState,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.);}
+// Engineering LT profile and primary-pair calibration. These are native
+// transport contracts, not stock four-input selectivity experiments.
+TEST(NativeCalibratedModelSpec2,ClassicN1_2000){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,true);}
+TEST(NativeCalibratedModelSpec2,BranchN1_2000){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::CalibratedThreshold,false,1.,1,1800.,BoundaryExpectation::Completed,false,false,true);}
 TEST(NativeThresholdCandidate,ClassicN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearner>(1,2000);}
 TEST(NativeThresholdCandidate,BranchN0_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(0,2000);}
 TEST(NativeThresholdCandidate,BranchN1_2000){CalibrationBoundaryFixture<NNeuronTimeLearnerBranch>(1,2000);}

@@ -1,0 +1,15 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "cooperative_runtime_capture": true,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "NativeCalibratedModelSpec2/ClassicN1_2000",
+    "NativeCalibratedModelSpec2/BranchN1_2000",
+    "NativeCalibratedState/ClassicN1_2000",
+    "NativeCalibratedState/BranchN1_2000"
+  ],
+  "maximum_wall_seconds": 14400,
+  "asan_options": "detect_leaks=0"
+}

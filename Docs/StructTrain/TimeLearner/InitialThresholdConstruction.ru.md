@@ -296,3 +296,26 @@ runtime. Первоначальная compile failure Normal A1 остаётся
 roundtrip ModelSpec2 не завершены. Научного результата обучения эти fixtures
 не создают. Проверка H21 и полный80-pair визуальный отчёт остаются отдельными
 заданиями.
+
+## Следующая проверка: ModelSpec2 и полный калиброванный recognition package
+
+Добавлены NativeCalibratedModelSpec2.ClassicN1_2000/BranchN1_2000 и gate
+native-calibrated-model-spec2-v1.json (два новых и два исходных schema1 cases).
+Вариант использует существующий реальный LearnedBoundary и production
+configured controller; математическая цель, допуски и физика не меняются.
+ModelSpec2.initial_threshold1 передаётся до холодного configured Build.
+После реального обучения выполняются измеренные search и отдельное fresh
+confirmation, формируется полный NativeCalibratedState и проверяются
+строгий импорт, сохранение после Build/Init/Reset и frozen responses.
+
+Новая schema2 ветка дополнительно импортирует пакет в отдельный свежий
+learner, сохраняет весь пакет и исходный recognition graph, проверяет
+фактический выбранный порог (отличающийся от construction1), отсутствие
+training certificate/references у распознающего owner и выполняет реальные
+frozen probes через корневой scheduler. Первичные transfer и response
+readbacks сохраняются; схема1 проходит прежний неизменённый сценарий.
+
+Область: двухвходовый инженерный профиль с LTMembrane, существующая primary-pair
+same-matrix calibration, N1,2000Hz. Это проверка API переноса, не stock science,
+не независимая оценка и не полная матрица всех вариантов. Новые cases пока
+не собраны/не выполнены; gate остаётся открытым до серверной проверки.
