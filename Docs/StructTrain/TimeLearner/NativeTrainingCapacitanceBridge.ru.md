@@ -503,3 +503,16 @@ Python readers version4 отличает эту семантику от преж
 Проверены только AST Python, уникальность inventory и whitespace diff локально;
 серверная сборка/проверка кандидата ещё не выполнена. C-search On, полная матрица
 режимов и остальные открытые пункты исходного плана остаются обязательными.
+
+
+H9 поставлен в очередь на Elder: root2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747,
+Pulse21435c8d5a11d2670cdc1609757d3a9973877314; native209/readers87.
+Supervisor515626/start_ticks325911553, publisher515627/325911554 проверены живыми.
+Readbacks: s07-capacitance-history-boundary-normal-h9 и
+s07-capacitance-history-boundary-publication-normal-h9. Сборка пока не началась.
+Перед reuse source/build обязательны закрытие PID/start_ticks всех H8d owners,
+его полная публикация и проверка всех compressed primary members. H8d должен
+иметь ровно четыре failures NativeTrainingCapacitanceBridge Classic/Branch N0/N1
+с точным описанным runtime_error; любое иное расхождение запрещает автоматический
+переход. Его not_accepted остаётся неизменным. Новая ветка исправляет ожидание
+fixture и добавляет portable schema3; новый PASS нельзя подменять прежним183/52.
