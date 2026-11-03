@@ -136,3 +136,11 @@ defaults и границы независимых statements, не заменя�
 нулевыми числами. Следующий strict gate включает27 observation и19 final
 verification regressions дополнительно к84 controller/proposal/state cases:
 итого130 tests. Полный native C-trim pipeline по-прежнему не включён.
+
+B3 сохранил старую разметку изолированной unit сборки production/Core; два
+добавленных прежних теста используют repo-relative includes SDK, поэтому до
+исполнения tests получен header-not-found. Это ошибка harness layout, не
+ошибка алгоритма. Повтор сохраняет реальные пути Libraries/Nmsdk-PulseLib/Core
+и Tests/Integration/Libraries; source/test файлы целиком берутся из Git.
+Ещё один conditional GTest assertion observation fixture получает явные
+braces без изменения смысла. Native sources/runtimes текущих jobs не меняются.
