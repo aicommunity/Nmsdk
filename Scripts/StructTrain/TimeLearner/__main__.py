@@ -45,6 +45,9 @@ def analyze(args: argparse.Namespace) -> dict:
         spec, observations = load_evaluation(args.evaluation.resolve(strict=True))
         result = audit_native_calibration_assessment(load(source), spec, observations,
             load(args.model.resolve(strict=True)), load_case(args.source_solo.resolve(strict=True)))
+    elif args.format == "capacitance-binding":
+        from .capacitance_binding_evidence import audit_capacitance_binding
+        result = audit_capacitance_binding(load(source))
     elif args.format == "training-capacitance-bridge":
         from .training_capacitance_bridge_evidence import audit_training_capacitance_bridge
         result = audit_training_capacitance_bridge(load(source))
@@ -151,7 +154,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("training-capacitance-bridge", "domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
+    analysis.add_argument("--format", choices=("capacitance-binding", "training-capacitance-bridge", "domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")

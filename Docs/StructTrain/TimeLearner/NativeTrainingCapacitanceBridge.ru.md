@@ -232,3 +232,31 @@ d7cace1f5f9f62385b97281d0d1f48770e7153fd. Все48 CSV побайтно иден
 Это равенство записанных откликов конкретных engineering probes; из него нельзя
 вывести классификацию8 паттернов, сходимость, эквивалентность всей динамики либо
 завершение C-search/service integration.
+
+
+## Подготовлен explicit initial C₀ bind, runtime pending
+
+BindNativeTrainingCapacitance(limit) в обоих learner закрывает metadata-only setup
+до первого search action. First bind требует Idle native controller без references
+или search, незамороженную модель, ModelSpec и legal probe boundary. Из реальных
+C/physics/graph/storage создаётся полный unit owner; подписанный state и actual
+readback валидируются до присваивания. Модель/параметры/scheduler/lifecycle/dynamics
+и epoch не меняются; Build/Reset/Calculate/Default не вызываются. Повторный bind
+возвращает проверенный существующий owner, не recapture trimmed C и не меняет
+policy. Это явная декларация текущего исходного состояния, а не восстановление
+утраченной истории/cold-start proof. Native service пока не вызывает bind.
+
+Подготовлены4 real native fixtures Classic/Branch ×N0/N1 при2k, heterogeneous C,
+отказы NaN/смены policy, повторный bind после реального trim, сохранение graph,
+C₀, Idle/no fake tick и epoch. Публикуются3 полных frame snapshots и actual probes.
+Independent binding reader/CLI проверяют реальные C₀/registry/C и full typed map,
+неизменность физической модели при unit bind и исходной baseline после trim.
+6 reader tests на4 actual records включают подмену первого graph другим валидным
+actual snapshot (не stale hash), потерю registry, fabricated owner и schema/phase
+ошибки. Native lifecycle и cold history reader явно не считает доказанными по JSON.
+
+SDK gate binding-regression содержит138 случаев (предыдущие134 +binding4);
+после успешного J1 нужен отдельный gate138 и structured readers22 (8+8+6),
+затем ASan. Эти изменения ещё не собирались/исполнялись, PASS отсутствует.
+После этого всё ещё нужны service/adapters, полные физические witnesses истории,
+summary schema3/readers, C-search policy и измеряемые действия поиска.

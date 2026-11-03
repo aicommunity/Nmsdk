@@ -713,6 +713,75 @@ TEST(NativeTrainingCapacitanceBridge,ClassicN1){NativeTrainingCapacitanceBridge<
 TEST(NativeTrainingCapacitanceBridge,BranchN0){NativeTrainingCapacitanceBridge<NNeuronTimeLearnerBranch>(0);}
 TEST(NativeTrainingCapacitanceBridge,BranchN1){NativeTrainingCapacitanceBridge<NNeuronTimeLearnerBranch>(1);}
 
+template<class Learner> void NativeTrainingCapacitanceBinding(int normalization)
+{
+    EditingRig<Learner> rig(2000,normalization,"training_capacitance_binding",false,2,true);
+    auto retained=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
+    auto distinct=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+    ASSERT_TRUE(retained);ASSERT_TRUE(distinct);retained->Capacity=1.41e-9;distinct->Capacity=.9e-9;
+    QJsonArray phases;
+    const auto record=[&](const char* phase) {
+        const auto state=rig.learner->OwnedNativeCapacitanceState();
+        const auto typed=rig.learner->ReadNativeTrainingCapacitance();QJsonValue controller(QJsonValue::Null);
+        std::vector<std::string> roots;const auto classes=state["baseline"].toObject()["channel_classes"].toObject();
+        for(auto it=classes.begin();it!=classes.end();++it)roots.push_back(it.value().toString().toStdString());
+        if(typed)
+        {
+            QJsonObject scales;for(const auto& [path,value]:typed->membraneScales)scales[QString::fromStdString(path)]=value;
+            controller=QJsonObject{{"origin",QString::fromStdString(typed->origin)},
+                {"maximum_relative_change",typed->maximumRelativeChange},{"membrane_scales",scales}};
+        }
+        phases.append(QJsonObject{{"phase",phase},{"native_state",state},{"controller_parameters",controller},
+            {"model",NmsdkTools::IdentifyModel(rig.neuron,rig.ports)},
+            {"storage_images",NmsdkTools::CaptureModelImageDefinitions(rig.neuron,rig.ports,roots)}});
+    };
+    const auto reject=[&](double limit,const std::string& reason) {
+        const auto before=NmsdkTools::IdentifyModel(rig.neuron,rig.ports),state=rig.learner->OwnedNativeCapacitanceState();
+        const auto life=rig.neuron->ObserveLifecycle();
+        try{rig.learner->BindNativeTrainingCapacitance(limit);ADD_FAILURE()<<"expected binding refusal";}
+        catch(const std::exception& error){EXPECT_EQ(std::string(error.what()),reason);}
+        EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),before);EXPECT_TRUE(life.IsCurrent());
+        EXPECT_EQ(rig.learner->OwnedNativeCapacitanceState(),state);
+    };
+    EXPECT_FALSE(rig.learner->ReadNativeTrainingCapacitance());record("unbound");
+    ASSERT_NO_FATAL_FAILURE(reject(std::numeric_limits<double>::quiet_NaN(),"invalid_training_capacitance_binding_policy"));
+    const auto initial=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
+    const auto parameters=rig.learner->ReadNativeParameters();
+    const auto life=rig.neuron->ObserveLifecycle();const auto epoch=rig.learner->NativeTrainingController().ModelEpoch();
+    ASSERT_EQ(rig.learner->NativeProbeState(),NativeProbeStatus::Idle);
+    const auto bound=rig.learner->BindNativeTrainingCapacitance(.2);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(rig.neuron,rig.ports),initial);EXPECT_TRUE(life.IsCurrent());
+    EXPECT_EQ(rig.learner->ReadNativeParameters(),parameters);EXPECT_EQ(rig.learner->NativeProbeState(),NativeProbeStatus::Idle);
+    EXPECT_EQ(rig.learner->NativeTrainingController().ModelEpoch(),epoch);
+    const auto baseline=bound["baseline"].toObject();
+    EXPECT_EQ(baseline["model_revision"],initial["sha256"]);
+    EXPECT_EQ(baseline["channels"].toObject()["Dendrite1_1.ExcChannel"],QJsonValue(1.41e-9));
+    EXPECT_EQ(baseline["channels"].toObject()["Dendrite1_2.ExcChannel"],QJsonValue(.9e-9));
+    const auto typed=rig.learner->ReadNativeTrainingCapacitance();ASSERT_TRUE(typed);
+    for(const auto& [path,value]:typed->membraneScales)EXPECT_DOUBLE_EQ(value,1.);
+    EXPECT_EQ(rig.learner->BindNativeTrainingCapacitance(.2),bound);EXPECT_TRUE(life.IsCurrent());record("bound");
+    ASSERT_NO_FATAL_FAILURE(reject(.3,"training_capacitance_origin_or_policy_changed"));
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    auto requested=*typed;requested.membraneScales["Dendrite1_1"]=1.05;
+    const auto edited=rig.learner->ApplyNativeTrainingParameters(parameters,requested);
+    ASSERT_EQ(edited.status,NativeEditStatus::Applied)<<edited.reason;
+    const auto trimmed=rig.learner->OwnedNativeCapacitanceState();const auto revision=rig.Revision();
+    const auto trimmedLife=rig.neuron->ObserveLifecycle();
+    EXPECT_EQ(rig.learner->BindNativeTrainingCapacitance(.2),trimmed);EXPECT_TRUE(trimmedLife.IsCurrent());
+    EXPECT_EQ(rig.Revision(),revision);EXPECT_EQ(trimmed["baseline"],bound["baseline"]);
+    EXPECT_EQ(rig.learner->ReadNativeTrainingCapacitance()->origin,typed->origin);
+    retained=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(retained);
+    EXPECT_DOUBLE_EQ(retained->Capacity.GetData(),1.41e-9*1.05);record("trimmed");
+    ASSERT_EQ(rig.Probe(0,nullptr,nullptr,PeakSelectionPolicy::AssignedBurstWave,true).status,NativeProbeStatus::Completed);
+    Artifact(rig.name+"_binding.json",QJsonDocument(QJsonObject{{"kind","native_training_capacitance_binding"},
+        {"schema_version",1},{"branch",rig.branch},{"normalization",normalization},{"phases",phases},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
+}
+TEST(NativeTrainingCapacitanceBinding,ClassicN0){NativeTrainingCapacitanceBinding<NNeuronTimeLearner>(0);}
+TEST(NativeTrainingCapacitanceBinding,ClassicN1){NativeTrainingCapacitanceBinding<NNeuronTimeLearner>(1);}
+TEST(NativeTrainingCapacitanceBinding,BranchN0){NativeTrainingCapacitanceBinding<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeTrainingCapacitanceBinding,BranchN1){NativeTrainingCapacitanceBinding<NNeuronTimeLearnerBranch>(1);}
+
 template<class Learner> void BoundCapacitanceGrowth(unsigned frequency,int normalization)
 {
     EditingRig<Learner> rig(frequency,normalization,"bound_capacitance",false,2,true);
