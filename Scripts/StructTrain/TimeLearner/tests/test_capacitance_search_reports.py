@@ -16,10 +16,10 @@ class CapacitanceSearchReportsTest(unittest.TestCase):
         if not directory:
             raise unittest.SkipTest('requires the four actual C-search activation histories')
         cls.sources = sorted(Path(directory).glob('*_csearch_activation_stopped_state.json'))
-        profiles = {(load(p)['configuration']['model']['branch'], load(p)['configuration']['normalization'])
+        profiles = {(load(p)['configuration']['model']['branch'], load(p)['configuration']['model']['normalization'])
                     for p in cls.sources}
         if len(cls.sources) != 4 or profiles != {(b, n) for b in (False, True)
-                                              for n in ('synapse_count', 'tip_resistance')}:
+                                              for n in ('N0', 'N1')}:
             raise RuntimeError('requires all four topology/normalization cases')
 
     def test_all_actual_trials_render_with_shared_scales_and_witness_context(self):

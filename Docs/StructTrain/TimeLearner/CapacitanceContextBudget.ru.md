@@ -81,3 +81,13 @@ Classic/Branch × N0/N1, maximumContexts2 и maximumCandidatesPerInput2,
 первичные данные и согласованный owned C-state. Это negative control обучения,
 не доказательство классификации. Новые декларации: target34/full262; отдельный
 minimal gate4. До серверного результата это только подготовленные проверки.
+
+
+03.11: render-v2 обнаружил ошибку нового fixture inventory: full configured
+package хранит normalization в configuration.model как N0/N1; summary search
+configuration использует отдельный normalization synapse_count/tip_resistance.
+Исправлены два новых reader inventory без изменения production схем/аудиторов.
+Уже выполняющийся immutable J3 build/root1c8206ed98dad49982f1a1e9a1764c118e2cfe34
+не меняется: его native34 результат и исходный reader verdict будут сохранены.
+Для окончательной приёмки требуется reader rerun из исправленной версии на тех
+же primary после завершения J3; numerical rerun из-за Python inventory не нужен.
