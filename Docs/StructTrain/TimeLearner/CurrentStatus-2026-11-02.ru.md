@@ -1,3 +1,25 @@
+# Срез03.11: принята миграция Reports, новые runtime evidence
+
+В develop49946c54da6f0573afca139e3b6de4c2cf50e650 принят адресный retirement
+13 Reports launchers. На обоих workers94 migration records и restored-path
+negative fixture;20 archive members/380 Git source hashes независимо сверены.
+Core/gitlinks неизменны; полный этап9 открыт.
+
+R1 ASan15/15/readers16/16 положителен;172 members verified. Visual-v2 получил
+честный отказ из-за отсутствия matplotlib; visual-v3 выполняется с existing
+plot-venv и mandatory preflight. [SHA и границы](CapacitanceRegions.ru.md).
+
+J1 schema4 завершён:12/16 actual native прошли,4 activation controls отклонены
+из-за isolated_window поверх всей пачки. Native gate требует27 cases и не
+принят: CMake не включал11 pure C-context tests. Все346 members/6209951 bytes
+failure evidence08864d3261e8fe7c2d962f347a5bf3cc299c49f8 проверены.
+Оба дефекта постановки исправлены без ослабления tolerances/validity.
+J2 запущен с новой изолированной source/build/runtime на root83779d6e2de01b8097b2672722a3625187b9a410,
+Pulse198dd5b77223938c53bf5e1e52880f402f5cf865, declaration27/readers19.
+Перед подготовкой проверяет полный J1 archive и причины всех4 activation failures.
+[Контракт](CapacitanceSchema4.ru.md). H12 full213/readers87 ещё не принят.
+Полные этапы1–12 остаются частичными, цель0–12 не сужена.
+
 # Следующий обязательный deliverable: графики C-region, 03.11.2026
 
 Добавлен штатный report --format capacitance-region: portable snapshot,
