@@ -1,5 +1,20 @@
 # Подтверждённый срез 02.11: полнота временных данных
 
+## Независимая проверка native C₀ bridge, 03.11
+
+Подготовлены production reader и CLI `analyze --format training-capacitance-bridge`.
+Фактические registry snapshots записываются отдельно от baseline; сверяются
+исходный C₀, эффективные C, typed map и dormant history, origin и неизменность policy.
+Изменение физической C с корректно пересчитанными digest проверяется отдельно.
+
+Elder G2 собран, выполняет43 native cases; зависимый H3 ожидает successful G2,
+затем выполняет134 SDK cases и7 reader tests immutable snapshot1c992e4ab.
+Отдельный I1 проверит усиленный reader8 snapshot9e1d1a739 на тех же actual H3
+артефактах через Git archive. Это очереди/подготовленный код, не runtime PASS.
+[Handles, scope и оставшаяся интеграция](NativeTrainingCapacitanceBridge.ru.md).
+NativeTrainingService ещё не использует полный C map; C-trim On V2 остаётся
+неподдерживаемым до codecs/domain/native policy/search и их проверки.
+
 ## Обновление43-case gate, 03.11
 
 Связь через VPN Automats2 проверена к обоим workers. Normal G1 выполнил43

@@ -139,3 +139,12 @@ digest не должно пройти проверку неизменной poli
 свой ранее объявленный snapshot; отдельный reader-only gate должен проверить
 новую версию на тех же фактических H3 артефактах через Git archive, без изменения
 leased SDK source/runtime и без повторного численного расчёта.
+
+
+Reader-only I1 поставлен в очередь: source9e1d1a73987f90f3be9e725f37fc5acc80d2d2c2,
+owner335141/324394463; ожидает опубликованный successful H3 (native134 +reader7).
+Перед анализом проверяет SHA256SUMS, bundle, каждый tar member и полный inventory.
+Пакет Python извлекается из Git archive в отдельный каталог;8 tests читают четыре
+H3 records, SDK source/build/runtime не затрагиваются. Опубликованный результат
+должен включать source-file hashes и ссылку на исходный native evidence commit.
+На момент постановки I1 находится в ожидании, PASS отсутствует.
