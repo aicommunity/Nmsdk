@@ -68,7 +68,13 @@ def _audit(record, root):
         witness = before if phase == 'before' else after
         require(packet['current_base_revision'] == witness['model_revision'] and
                 packet['prepared']['input_id'] == 'input'+str(input_index), 'capacitance_region_probe_context_mismatch')
-        trial = packet['requested_specification']['trial_id']
+        requested = packet['requested_specification']
+        require(packet['prepared']['routing'] == ('branch_solo_burst' if record['branch'] else 'classic_burst') and
+                requested['pattern_hash'] == canonical_model_sha256(declaration['initial_isi']) and
+                requested['maximum_sample_gap'] == 1./record['frequency_hz'] and
+                requested['peak_selection'] == 'assigned_burst_wave' and
+                requested['wave_assignment'] == 'ordered_whole_burst', 'capacitance_region_stimulus_protocol_mismatch')
+        trial = requested['trial_id']
         require(trial not in trials, 'capacitance_region_reused_trial')
         trials.add(trial)
         protocol = {k: v for k, v in packet['requested_specification'].items() if k != 'trial_id'}
