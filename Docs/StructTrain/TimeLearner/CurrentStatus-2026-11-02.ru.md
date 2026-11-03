@@ -105,7 +105,8 @@ hashes проверены. Raw terminal png_count=0 исправлен отде�
 
 ## Подготовлен механический native bridge C-map, runtime pending
 
-Pulse candidate2e7d3dd7904ef2fcf30efa4ad38e97a96db29e36 добавляет общий
+Pulse candidate2e7d3dd7904ef2fcf30efa4ad38e97a96db29e36 и уточнение
+a58489d8a2d3311719e5f70b8c7781de439ea8cc добавляют общий
 NativeTrainingCapacitance и два метода обоих learners: validated read полного
 map/origin и применение L/Ns/Rs/C через прежний joint editor. Отсутствующий
 baseline остаётся nullopt; immutable capture/profile origin сохраняется при
@@ -115,7 +116,10 @@ baseline остаётся nullopt; immutable capture/profile origin сохран
 NativeTrainingService/Bindings пока не используют этот API; C-trim On V2 не
 включён. Подготовлены реальные4 native tests и первый полный SDK regression134
 с ранее unit-проверенными130 cases. Новая сборка/численная приёмка ещё не
-выполнена; результаты kernel unit130 не распространяются на bridge. Текущие
+выполнена; результаты kernel unit130 не распространяются на bridge. H1 отменён
+до сборки после уточнения catch только для preparation; H2 назначается на
+исправленный source после successful normal43. ASan owner C3 прошёл7/8,
+BranchN0At20000=2080.978s, выполняется последний BranchN1At20000. Текущие
 normal43 и ASan8/43 сохраняют свои прежние immutable sources/runtimes.
 
 ## Отдельная ветка bounded C search: unit-приёмка не равна native-приёмке
