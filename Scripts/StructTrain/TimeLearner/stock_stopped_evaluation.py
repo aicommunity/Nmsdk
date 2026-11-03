@@ -4,6 +4,8 @@ No training, threshold selection, template replacement or convergence claim.
 The original source study and native diagnostic reader remain authoritative.
 """
 from copy import deepcopy
+import hashlib
+import html
 from pathlib import Path
 import shutil
 
@@ -143,3 +145,50 @@ def audit(directory):
     return {'kind': 'stock_stopped_phasea_diagnostic_analysis', 'schema_version': 1,
             'execution': 'completed', 'validity': 'valid', 'models': results, 'trials': 32,
             'diagnostic_only': True, 'training_completed': False, 'scientific_verdict': None}
+
+
+def report(directory, output):
+    """Complete temporal cache; primary data and physics are never reconstructed."""
+    from .live_pipeline_reports import render_pipeline_run
+    from .model_identity import canonical_model_sha256
+    directory, output = Path(directory).resolve(strict=True), Path(output).resolve()
+    require(not output.exists() and not output.is_relative_to(directory) and
+            not directory.is_relative_to(output), 'stock_diagnostic_report_requires_separate_new_cache')
+    analysis = audit(directory)
+    output.mkdir(parents=True)
+    _write(output/'analysis.json', analysis)
+    rows, pairs, links = [], 0, []
+    for row in analysis['models']:
+        name = row['name']
+        source = directory/'runs'/name/'run-manifest.json'
+        rendered = render_pipeline_run(source, output/name)
+        require(rendered['diagnostic_only'] is True and rendered['training_completed'] is False and
+                rendered['evaluation_report']['diagnostic_only'] is True and
+                rendered['scientific_verdict'] is None, 'stock_diagnostic_report_false_training_role')
+        count = rendered['recognition_trial_soma_pairs'];pairs += count
+        rows.append({'name': name, 'path': name+'/index.html',
+                     'source_model_revision': row['source_model_revision'],
+                     'source_manifest_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+                     'trial_soma_pairs': count, 'effective_threshold': row['metrics']['effective_threshold']})
+        links.append('<li><a href="'+html.escape(name, quote=True)+'/index.html">'+html.escape(name)+'</a></li>')
+    require(pairs == 80, 'stock_diagnostic_report_missing_soma_or_trial')
+    manifest = {'kind': 'stock_stopped_phasea_temporal_report', 'schema_version': 1,
+        'source_analysis_sha256': canonical_model_sha256(analysis), 'models': rows,
+        'physics_profile': 'stock-four-input-NSPNeuronGen-without-LTMembrane',
+        'trials': 32, 'trial_soma_pairs': pairs, 'diagnostic_only': True,
+        'training_completed': False, 'calibration_performed': False,
+        'historical_presentation_reproduced': False, 'visual_acceptance_complete': False,
+        'scientific_verdict': None}
+    _write(output/'manifest.json', manifest)
+    (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Stock stopped-model responses</title>'
+        '<style>body{font:18px sans-serif;margin:2em}</style><h1>Stock four-input models without LT membrane</h1>'
+        '<p>Actual unfinished training states. Original thresholds0.0117 or100 are preserved; no recognition '
+        'calibration or successful-training certificate. Eight historical pattern vectors, new reset-per-trial '
+        'protocol with complete2s windows; historical scheduler/ITI are not reproduced.</p>'
+        '<p>Every soma and pattern: original native samples, actual input pulse overlays, complete overview and '
+        '100-native-tick zooms. SI units remain unverified. This is diagnostic evaluation, not independent Test '
+        'or an isolated comparison of LT physics. Silent targets are false negatives.</p><ul>'+
+        ''.join(links)+'</ul>', encoding='utf-8')
+    _write(output/'SHA256SUMS.json', {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+                                    for p in sorted(output.rglob('*')) if p.is_file()})
+    return manifest
