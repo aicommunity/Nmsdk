@@ -3,6 +3,12 @@
 Принят explicit API исходных ёмкостей и completed/stopped transfer. Это
 подэтапы4/5/7, не выполнение полных этапов и не включение bounded C-trim V2.
 
+Это запись приёмки именно explicit API. Последующие source/archive и parser
+исправления приняты отдельно: [текущий статус](CurrentStatus-2026-11-02.ru.md).
+Автоматическое владение C₀ проверяется в отдельной ветке:
+[контракт и текущая приёмка](CapacitanceOwnership.ru.md). Его normal8/readers19
+не заменяют ещё выполняющиеся ASan, transport и визуальную проверку.
+
 ## Проверенная реализация
 
 - PulseLib tested commit `69d463aa50144a1c8ddb4a674bb900c2a07e769f`,

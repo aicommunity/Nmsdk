@@ -27,8 +27,9 @@ class CapacitanceEvidenceTest(unittest.TestCase):
         cls.cases = [(p, v) for p, v in cls.completed+cls.stopped if v['schema_version'] == 2]
         cls.recognition = [p for p in sorted(root.glob('*_owner_recognition_state.json'))
                            if load(p)['source_solo']['schema_version'] == 2]
-        if len(cls.cases) != 8 or sum(v['kind'] == 'timelearner_completed_state' for _, v in cls.cases) != 6:
-            raise RuntimeError('requires six completed and two stopped native C0 controls')
+        extra = 4 if os.environ.get('TIMELEARNER_CAPACITANCE_DORMANT_CONTROLS') == '1' else 0
+        if len(cls.cases) != 8+extra or sum(v['kind'] == 'timelearner_completed_state' for _, v in cls.cases) != 6+extra:
+            raise RuntimeError('requires the declared completed/stopped native C0 inventory, including optional dormant4 controls')
         if len(cls.recognition) != 2: raise RuntimeError('requires identity and scaled C0 recognition controls')
 
     def test_actual_primary_readers_and_bound_C0(self):
