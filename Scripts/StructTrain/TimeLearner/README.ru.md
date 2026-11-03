@@ -1,6 +1,16 @@
 # Поддерживаемый пакет TimeLearner
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
+
+`n1-protocol-study prepare/run/analyze` — заранее объявленная проверка двух
+сохранённых N1-кандидатов при фиксированных порогах, разных порядке, Reset и
+полных окнах. Это same-matrix candidate probe без повторного обучения или
+подбора порога; не independent Test. [Протокол и ограничения](../../../Docs/StructTrain/TimeLearner/N1ProtocolRobustness.ru.md).
+Для `run SOURCE_BUNDLE --runtime-manifest ORIGINAL_RUNTIME.json --source-evidence FULL_SHA --output NEW_DIRECTORY`
+обязательны исходный runtime и полный Git SHA доказательства. `analyze STUDY --output NEW.json`
+повторно проверяет полные данные и пересчитывает метрики. Серверная приёмка этой
+новой серии пока не завершена; запуск не означает успешный scientific verdict.
+
 Import не запускает эксперименты. Реализованы `inventory`, native-подмножество
 `analyze`, `report`, `bundle`, `publish`, `history resolve` и анализ измерений
 `calibrate run/select/confirm`, owned `train/export/evaluate` и portable
