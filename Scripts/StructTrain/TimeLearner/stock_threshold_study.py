@@ -18,10 +18,48 @@ from .native_evidence import load, require
 from .native_model_spec import audit_initial_threshold
 from .native_pipeline_worker import audit_run_manifest, run_job, validate_job
 from .process_runner import verify_runtime
-from .stock_phasea_preflight import TARGET, audit_stock_profile
+from .stock_phasea_preflight import TARGET, audit_stock_profile, _property
 
 
 THRESHOLDS = (.0117, 100.)
+
+
+def audit_final_stock(initial, final):
+    """Growth may change morphology and individual Rs, never the declared physics."""
+    require(final['valid'] is True and final['diagnostics'] == [] and
+            final['sha256'] == sha(final['model']), 'stock_pair_final_identity_invalid')
+    before = {n['path']: n for n in initial['model']['nodes']}
+    nodes = {n['path']: n for n in final['model']['nodes']}
+    require(len(nodes) == len(final['model']['nodes']) and nodes['$']['class'] == 'NSPNeuronGen' and
+            not any(p == '$.LTMembrane' or p.startswith('$.LTMembrane.') for p in nodes),
+            'stock_pair_final_profile_changed')
+    require(all(n['frequency_hz'] == '2000' for n in nodes.values()), 'stock_pair_final_frequency_changed')
+    membranes = {p for p in nodes if re.fullmatch(r'\$\.(?:Soma\d+|Dendrite\d+_\d+)', p)}
+    require(bool(membranes) and {p for p in membranes if p.startswith('$.Soma')} ==
+            {p for p in before if re.fullmatch(r'\$\.Soma\d+', p)}, 'stock_pair_final_somas_changed')
+    channels = 0
+    for path in membranes:
+        require(nodes[path]['class'] == 'NPMembraneBio', 'stock_pair_final_membrane_class_changed')
+        for role in ('Exc', 'Inh'):
+            channel = nodes[path+'.'+role+'Channel'];baseline = before['$.Soma1.'+role+'Channel']
+            require(channel['class'] == baseline['class'], 'stock_pair_final_channel_class_changed')
+            for field in ('Capacity', 'Resistance', 'RestingResistance', 'FBResistance', 'Type'):
+                require(_property(channel, field) == _property(baseline, field),
+                        'stock_pair_final_channel_physics_changed:'+field)
+            channels += 1
+    for node in nodes.values():
+        if node['class'] == 'NPSynapseBio':
+            for field, value in {'SecretionTC': .001, 'DissociationTC': .005, 'TypicalPulseDuration': .001,
+                                 'UsePresynapticInhibition': False, 'InhibitionCoeff': 0.}.items():
+                require(_property(node, field) == value, 'stock_pair_final_synapse_physics_changed:'+field)
+    require(nodes['$.LTZone'] == before['$.LTZone'], 'stock_pair_final_ltzone_changed')
+    def zone_bindings(model):
+        return sorted((b['source'], b['target'], b['kind']) for b in model['bindings']
+                      if b['target'] == '$.LTZone:Inputs' or b['source'] == '$.LTZone:Output')
+    require(zone_bindings(final['model']) == zone_bindings(initial['model']),
+            'stock_pair_final_ltzone_connections_changed')
+    return {'lt_membrane': False, 'membranes_checked': len(membranes), 'channels_checked': channels,
+            'threshold_unchanged': True, 'feedback_connections_unchanged': True}
 
 
 def _expected(initial, threshold):
@@ -202,10 +240,12 @@ def audit(directory):
             require(actual == expected and load(folder/'process/runtime.json') == runtime, 'stock_pair_initial_or_runtime_changed')
             audit_stock_profile(actual, branch=row['topology'] == 'Branch')
         execution = load(directory/'runs'/name/'native/execution.json')
+        package = load(directory/'runs'/name/'native'/execution['package_path'])
+        final_physics = audit_final_stock(expected, package['neuron']['graph']['identity'])
         measured = {'name': name, 'training_outcome': execution['training_outcome'],
                     'completed_boundary': execution['completed_boundary'], 'model_revision': execution['model_revision']}
         require(measured == claimed[name], 'stock_pair_producer_result_changed')
-        rows.append({**row, **measured})
+        rows.append({**row, **measured, 'final_stock_physics': final_physics})
     return {'kind': 'stock_phasea_threshold_pair_analysis', 'schema_version': 1,
             'execution': 'completed', 'validity': 'valid', 'rows': rows,
             'training_runs': 4, 'preflight_runs': 4, 'classification_assessed': False, 'scientific_verdict': None}
