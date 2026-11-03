@@ -1,12 +1,30 @@
 # C-trim: физический baseline и правка ёмкостей
 
+## Актуальный статус, 03.11
+
+Explicit baseline/edit/joint API и completed/stopped transfer приняты в develop;
+проверенные commits, normal/ASan evidence и точные ограничения приведены в
+[адресной приёмке](C0Acceptance-2026-11-03.ru.md). Ниже сохранена хронология
+построения этих проверок. Формулировки о pending относятся к своему снимку,
+а не отменяют состоявшуюся приёмку.
+
+Автоматический owner последующих edits — отдельный кандидат. Normal C2 прошёл
+8 native и19 independent readers; evidence
+`a928fb92edd0880728a697da0fed6d7ede3e7d4a`,259 members проверены.
+ASan, transport43/dormant-image import и visual QA ещё выполняются;
+[текущий контракт и handles](CapacitanceOwnership.ru.md).
+Bounded C-trim search по-прежнему отсутствует: V2 с SyncCapacitanceTrim On
+выдаёт явную диагностику. Принятие physical API не включает этот режим.
+
+## Исторический normal checkpoint baseline/growth
+
 Последующий normal gate baseline/growth завершён21/21 +9/9 unit на rootc6345fa6,
 все349 members и61 probe packet проверены. Полный временной отчёт:
 93 trial-soma pairs,1680PNG в M40 cache,20 выбранных оригиналов непосредственно
 просмотрены. Новая [schema2 переноса C₀](CapacitanceStateTransfer.ru.md) —
 следующий срез кода с отдельной ещё не завершённой приёмкой.
 
-## Новый срез: привязанный baseline (серверная проверка впереди)
+## Историческая постановка: привязанный baseline
 
 В PulseLib `cc1eb71c8a4be8b2241c2b9a870ac4b533e01a51` реализованы отдельный
 baseline schema 2, привязка к ModelSpec/исходному графу/storage-образам,
@@ -30,7 +48,7 @@ Spec: `Scripts/StructTrain/TimeLearner/specs/native-bound-capacitance-v1.json`.
 Автоматическое включение этого состояния в NativeLearnedState и bounded
 C-trim search контроллера V2 остаются открытыми. V2 с C-trim On ещё запрещён.
 
-## Актуальный checkpoint после восстановления VPN
+## Исторический checkpoint standalone API после восстановления VPN
 
 Elder standalone gate завершён: 8/8, 32 raw probes проверены, 8 сравнений
 ответа при одинаковых входах подтверждают ненулевое изменение сомы. Evidence
@@ -150,7 +168,7 @@ native physical roundtrip, реальные waveform probes, negative candidates
 рост до нового сегмента без baseline. Такой сегмент пока отклоняется.
 Численные и интеграционные проверки выполняются только на Elder/M40.
 
-## Оставшаяся интеграция C-trim
+## Историческая постановка joint API и оставшийся поиск C-trim
 
 Рабочее дополнение joint API: общий preview теперь может включать
 L/Ns/Rs/C перед assessment. Отдельный C-plan helper выделен механическим
@@ -173,10 +191,12 @@ Reset, после изменения C; preview faults не вооружены. 
 запрет внешнего edit при активном Train. Это пока declared checks, не PASS.
 Поддержка поиска C в контроллере и её persistent state всё ещё отсутствует.
 
-1. Связать baseline с immutable ModelSpec/storage profile и сохранить явные
-   baseline/correction records в trained state, plan и boundary continuation.
-2. Добавить baseline extension после native growth из подтверждённого нового
-   storage channel; не переснимать уже trimmed C как новый C0.
+1. Привязка baseline к ModelSpec/storage и explicit trained-state transfer
+   уже приняты адресно. Автоматическое владение после последующих edits
+   проходит отдельную матрицу; включение C в controller candidate/plan остаётся.
+2. Extension C₀ при росте из verified storage принят для explicit API.
+   Автоматическое сохранение active/dormant maps при обычных edits ещё
+   проверяется. Не переснимать уже trimmed C как новый C₀.
 3. В общем контроллере реализовать bounded C candidates по свежим timing/amp
    measurements, с исходными targets/tolerances и ограничением поправки.
 4. Classic: корректировать выбранный путь. Branch: явный интервал общего кабеля;
