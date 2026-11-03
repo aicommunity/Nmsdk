@@ -2,7 +2,10 @@
 
 Проверены normal43/readers26 и ASan43/readers26. Tested Pulse30495d1 принят
 child develop merge027070e8e1181380427edc9384641d08ed9943be без изменения Core.
-Корневая ветка фиксирует этот gitlink и сохраняет актуальный docs-only Rdkacc3de8d.
+Root develop0a495cefe72778d9ffb74d1cc51990d0dda611e6 фиксирует этот gitlink
+и сохраняет актуальный docs-only Rdkacc3de8d. Fresh recursive M40 checkout
+17a4f61dee84743ede1e9d42ab4157336f4754c1 подтвердил7 точных чистых children;
+все9 published payload hashes и оба tested Core trees сверены независимо.
 [Точные sources, evidence, ограничения и closure](C0Acceptance-2026-11-03.ru.md).
 Остальные ветки с public witnesses, tracked service/schema3, CandidateCursor и
 archive codec fix имеют отдельную незавершённую приёмку. Это не их выпуск и не
