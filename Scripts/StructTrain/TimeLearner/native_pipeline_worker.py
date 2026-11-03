@@ -10,7 +10,7 @@ import hashlib
 
 from .native_evidence import count, equal, load, number, require
 from .model_identity import canonical_model_sha256 as sha
-from .native_calibration_worker import _digest, _evidence_boundary, _record, _signed, _write
+from .native_calibration_worker import _artifact_files, _digest, _evidence_boundary, _record, _signed, _write
 from .process_runner import execute, verify_runtime
 from .learned_evidence import load_case, audit_learned_state
 from .recognition_evidence import audit_recognition_source
@@ -348,7 +348,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         "preflight": preflight, "analysis": audit,
         "analysis_code": [{"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                           for p in sorted(Path(__file__).parent.glob("*.py"))],
-        "artifacts": [_record(p, output) for p in sorted(output.rglob("*")) if p.is_file()],
+        "artifacts": [_record(p, output) for p in _artifact_files(output)],
         "independent_partition_verified": False, "evaluation_verdict": None}
     _write(output/"run-manifest.json", _signed(result))
     return result
@@ -372,8 +372,8 @@ def audit_run_manifest(path, *, historical_analysis=None):
     require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
             type(r["path"]) is str for r in records), "pipeline_run_artifact_schema")
     names = {r["path"] for r in records}
-    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in root.rglob("*")
-            if p.is_file() and p != path}, "pipeline_run_artifact_closure_changed")
+    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in _artifact_files(root)
+            if p != path}, "pipeline_run_artifact_closure_changed")
     for r in records:
         relative = PurePosixPath(r["path"])
         require(not relative.is_absolute() and ".." not in relative.parts and "\\" not in r["path"], "pipeline_artifact_escape")
