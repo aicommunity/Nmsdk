@@ -2891,14 +2891,24 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         ASSERT_TRUE(configurationOwner->LoadComponent(&configuration,true,&diagnostics));
         ASSERT_TRUE(diagnostics.errors.empty());ASSERT_TRUE(diagnostics.warnings.empty());
         rig.model->SetGlobalTimeStep(frequency);
-        rig.model->Build();rig.model->Init();rig.model->Reset();
-        ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
         rig.learner=rig.model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(rig.learner);
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
+        auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+        // Like native construction, prepare the physical children before
+        // adopting their graph. Building a still-legacy learner here would
+        // legitimately replace the loaded neuron from its common profile.
+        dataset->Build();dataset->Init();rig.neuron->Build();rig.neuron->Init();
+        ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
         rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(rig.source);
         rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
         const auto adopted=rig.learner->AdoptNativeModel(declaration);
         ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
+        rig.model->Init();rig.model->Reset();
+        // The external native scheduler completes the newly adopted owner's
+        // ordinary lifecycle. No nested Calculate or forced Ready toggles.
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
+        ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
+        ASSERT_EQ(rig.neuron,rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true));
         ASSERT_TRUE(rig.neuron->IsReady() && rig.neuron->IsInit());
         const auto configuredMembrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(configuredMembrane);
         EXPECT_EQ(configuredMembrane->ExcChannelClassName.GetData(),dormantImage);
