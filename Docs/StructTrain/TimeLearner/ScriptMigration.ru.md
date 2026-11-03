@@ -335,3 +335,9 @@ source hashes независимо сверены. Подробные SHA — в
 без wrappers; [источники, consumers и приёмка](SoftColdLauncherRetirement.ru.md).
 Manifest105:103 retired/2 moved; complete=false. Текущие skill/reference копии
 переходят на root CLI. Это не удаление первичных данных и не запуск старых волн.
+
+Следующий пакет удаляет два исторических Branch br480 Phase9/Phase10 Python
+retry entrypoints, без wrappers; source/caller review и точные retrieval records
+описаны в [BranchRetryRetirement](BranchRetryRetirement.ru.md). Manifest107:
+105 retired/2 moved; complete=false. Phase8 сохраняется из-за действующих
+legacy consumers. Серверная приёмка нового107-record snapshot пока pending.

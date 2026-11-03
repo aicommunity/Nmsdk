@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -1964,6 +1964,44 @@
       "replacement": null,
       "reason": "Historical September D4/T4 fixed six-case matrix; old shared runtime and historical audit outputs.",
       "original_results": "preserved; retrieval snapshot does not assert historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase9_br480_mid_retry.py",
+      "action": "retired_historical",
+      "archive_commit": "4af17aa240a7da0e30655a62c07cc4832e7253b9",
+      "last_change_commit": "a65a48f57d4819e4985613e6487be6e8c537ddef",
+      "blob_sha1": "2344567d288e85eeee4116b38fb4a11cdbbcdaba",
+      "content_sha256": "9defa399df19cf7794c556d9e9e27cebe397cae9e4880a90ebfdc81ee99a1111",
+      "bytes": 2402,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/4af17aa240a7da0e30655a62c07cc4832e7253b9/Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase9_br480_mid_retry.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "4af17aa240a7da0e30655a62c07cc4832e7253b9:Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase9_br480_mid_retry.py"
+      ],
+      "replacement": null,
+      "reason": "Historical br480 P4 retry with hardcoded shared executable, first-row target and unchecked process exit; retained results require their original criteria.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not a claim about experiment execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase10_br480_tipr_retry.py",
+      "action": "retired_historical",
+      "archive_commit": "4af17aa240a7da0e30655a62c07cc4832e7253b9",
+      "last_change_commit": "e453aae46e0b5555c4536d2b9fab297229c077cd",
+      "blob_sha1": "fa28b8b9c4178cf446b50424cac4be0893fd842b",
+      "content_sha256": "70b3ea7b0b05c9666b1bdd0e747f9c59c91f1e8e60c42d0738b3d4d85cff029f",
+      "bytes": 5835,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/4af17aa240a7da0e30655a62c07cc4832e7253b9/Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase10_br480_tipr_retry.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "4af17aa240a7da0e30655a62c07cc4832e7253b9:Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase10_br480_tipr_retry.py"
+      ],
+      "replacement": null,
+      "reason": "Historical br480 Phase10 tip-R retry with manual XML overlays and fixed four-input tips; malformed amplitudes become zero and foil values above target are omitted from midpoint selection.",
+      "original_results": "preserved; archive_commit is a retrieval snapshot, not a claim about experiment execution source"
     }
   ],
   "reference_review": {
