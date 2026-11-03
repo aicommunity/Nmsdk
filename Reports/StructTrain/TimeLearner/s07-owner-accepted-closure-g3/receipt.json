@@ -1,0 +1,57 @@
+{
+  "kind": "timelearner_accepted_owner_git_closure",
+  "schema_version": 1,
+  "root": "0a495cefe72778d9ffb74d1cc51990d0dda611e6",
+  "closure": {
+    "root": {
+      "head": "0a495cefe72778d9ffb74d1cc51990d0dda611e6",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "head": "39d811e5e0798eecf124f32356c9fc6edbe4538a",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "027070e8e1181380427edc9384641d08ed9943be",
+      "head": "027070e8e1181380427edc9384641d08ed9943be",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+      "head": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+      "status": ""
+    }
+  },
+  "recursive_children": 7,
+  "core_trees": {
+    "Libraries/Nmsdk-PulseLib": "76eca8256da2588f7d5327e33ea0a5ee3259c8f2",
+    "Rdk": "b204ef8da698476898394aa1d5b6a2679e5a91ed"
+  },
+  "acceptance_status": "passed",
+  "numerical_tests_rerun": false,
+  "native_evidence": "82f205d733dc64513ff3dd22ede7df3f9ab7a445",
+  "normal_evidence": "7ec395554f0f8d506c08b587ba130025d0af1719",
+  "scope": "Fresh shallow recursive checkout of the accepted owner/transport root develop and exact child gitlinks. No source/build/runtime from an experiment is changed. This verifies Git closure, not a new numerical run, schema3/C-search or full-plan completion.",
+  "scientific_verdict": null
+}
