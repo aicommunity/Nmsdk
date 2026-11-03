@@ -274,6 +274,10 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   // a logger before the native job itself claims its result directory.
   if(!QDir(parent).mkdir(outputInfo.fileName()+".events-log"))
    return logConfigurationError("native_event_log_path_reservation_failed");
+  // Rdk's file logger follows WorkDirectory/EventsLog, not FixedLogPath.
+  // Select its standard working directory before AppCore initializes it.
+  AppCore.application.SetWorkDirectory(eventLogDirectory.toLocal8Bit().constData());
+  eventLogDirectory=QDir(eventLogDirectory).filePath("EventsLog/");
  }
 
  int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), applicationIni.toLocal8Bit().constData(),
