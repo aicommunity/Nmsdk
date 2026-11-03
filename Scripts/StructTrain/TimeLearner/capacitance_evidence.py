@@ -94,10 +94,13 @@ def _images(definitions):
 
 
 def _audit(state, declaration, identity, archive_images):
-    require(type(state) is dict and set(state) == {'kind', 'schema_version', 'baseline', 'membrane_scales',
-            'maximum_relative_change', 'applied_model_revision', 'sha256'}
-            and state['kind'] == 'timelearner_capacitance_parameter_state' and type(state['schema_version']) is int
-            and state['schema_version'] == 1, 'unknown_capacitance_parameter_state')
+    require(type(state) is dict and type(state.get('schema_version')) is int
+            and state['schema_version'] in (1, 2), 'unknown_capacitance_parameter_state')
+    fields = {'kind', 'schema_version', 'baseline', 'membrane_scales',
+              'maximum_relative_change', 'applied_model_revision', 'sha256'}
+    if state['schema_version'] == 2: fields.add('dormant_membrane_scales')
+    require(set(state) == fields and state['kind'] == 'timelearner_capacitance_parameter_state',
+            'unknown_capacitance_parameter_state')
     _signed(state); b = state['baseline']; _signed(b)
     require(set(b) == {'kind', 'schema_version', 'model_revision', 'frequency_hz', 'channels', 'sha256', 'model_spec',
             'capture_model', 'storage_images', 'storage_images_sha256', 'channel_classes', 'channel_physics', 'channel_origins'}
@@ -107,7 +110,8 @@ def _audit(state, declaration, identity, archive_images):
     require(frequency > 0 and frequency == int(frequency) and b['model_spec'] == declaration and frequency == number(declaration['frequency_hz'])
             and b['model_revision'] == canonical_model_sha256(b['capture_model']), 'capacitance_capture_binding_mismatch')
     captured, current = _nodes(b['capture_model']), _nodes(identity['model'])
-    require(captured['$']['class'] == declaration['neuron_class']
+    require(identity['valid'] is True and not identity['diagnostics']
+            and captured['$']['class'] == declaration['neuron_class']
             and identity['sha256'] == canonical_model_sha256(identity['model']) == state['applied_model_revision'],
             'capacitance_applied_revision_mismatch')
     images = _images(b['storage_images']); actual_images = _images(archive_images)
@@ -131,6 +135,13 @@ def _audit(state, declaration, identity, archive_images):
         require(type(path) is str and re.fullmatch(r'Dendrite[1-9][0-9]*_[1-9][0-9]*', path)
                 and '$.'+path in current and number(scale) > 0 and 1-limit <= scale <= 1+limit,
                 'invalid_capacitance_scale')
+    dormant = state.get('dormant_membrane_scales', {})
+    require(type(dormant) is dict and (state['schema_version'] == 1 or dormant)
+            and not set(dormant).intersection(scales), 'invalid_dormant_capacitance_scales')
+    for path, scale in dormant.items():
+        require(type(path) is str and re.fullmatch(r'Dendrite[1-9][0-9]*_[1-9][0-9]*', path)
+                and '$.'+path not in current and any(c.startswith(path+'.') for c in channels)
+                and number(scale) > 0 and 1-limit <= scale <= 1+limit, 'invalid_dormant_capacitance_scale')
     seen = set()
     for path, node in current.items():
         if 'Capacity' not in node.get('parameters', {}): continue
@@ -140,8 +151,21 @@ def _audit(state, declaration, identity, archive_images):
         membrane = key.split('.', 1)[0]
         require(_physical(node, 'Capacity') == channels[key]*scales.get(membrane, 1.), 'incomplete_or_changed_capacitance_scales')
     require(seen, 'missing_capacitance_effective_channels')
-    return {'schema_version': 1, 'consistent': True, 'effective_channels': len(seen),
+    result = {'schema_version': 1, 'consistent': True, 'effective_channels': len(seen),
             'baseline_channels': len(channels), 'storage_images': len(images), 'native_import_verified': False}
+    if state['schema_version'] == 2:
+        result.update(schema_version=2, dormant_membranes=len(dormant))
+    return result
+
+
+def audit_capacitance_state(state, declaration, identity, class_definitions):
+    """Check a real owner-state snapshot without inventing a Train certificate."""
+    try:
+        return _audit(state, declaration, identity, class_definitions)
+    except EvidenceError:
+        raise
+    except (KeyError, TypeError, ValueError, OverflowError) as error:
+        raise EvidenceError('malformed_capacitance_evidence:'+str(error)) from error
 
 
 def audit_package_capacitance(package):
