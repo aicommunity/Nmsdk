@@ -1,3 +1,14 @@
+## Дополнение03.11: scoped C₀ owner принят, полные этапы остаются частичными
+
+Root develop0a495cefe /Pulse develop027070e8 принимают automatic ownership и
+completed/stopped transport по normal43/26 и ASan43/26. Fresh recursive closure
+17a4f61d подтверждает7 clean exact children и прежние tested Core trees.
+[Полные SHA, артефакты и границы](C0Acceptance-2026-11-03.ru.md).
+Это подтверждённый подэтап4/5/7. Public facade/witness/service/schema3/C-search,
+полная physics/mode/dimension matrix, исторические/научные эксперименты и остальные
+пункты исходного плана не принимаются этим corpus. Только исходный этап0 закрыт
+полностью. Нижние pending/running записи сохраняют свою хронологию.
+
 # Состояние полного плана TimeLearner — 01.11.2026
 
 Дополнение03.11: удалены17 исторических Bin AsymRm pilot/finish/scale/sweep
