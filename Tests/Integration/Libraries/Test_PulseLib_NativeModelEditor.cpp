@@ -26,6 +26,7 @@
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
+#include "../../../Rdk/Core/Engine/UNet.h"
 #include <QFile>
 #include <QDir>
 #include <QJsonArray>
@@ -2854,19 +2855,112 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(withDormantCapacitance)
     {
         ASSERT_TRUE(withCapacitance);
+        const auto beforeClassChange=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
+        Artifact(rig.name+"_before_channel_class_change.json",QJsonDocument(beforeClassChange).toJson());
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         auto membrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(membrane);
         auto image=dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(membrane->ExcChannelClassName.GetData()));
         ASSERT_TRUE(image);image->SetEnvironment(rig.environment);image->SetGlobalTimeStep(frequency);image->Capacity=.9e-9;
         dormantImage=rig.name+"_DormantExcImage";
         RegisterClassImage(core.storage,dormantImage,image);core.storage->ReturnObject(image);
-        membrane->ExcChannelClassName=dormantImage;
-        const auto marker=rig.neuron->OperationFailureSequence();
-        rig.neuron->Build();rig.neuron->Init();rig.neuron->Reset();
+        // Apply the initial heterogeneous configuration through native Load of
+        // its owning tree. A leaf setter only invalidates that leaf; Build of
+        // an already-ready neuron does not rebuild the cable's channel links.
+        // No self-assignment, arbitrary Default or learner-specific wake-up.
+        const auto declaration=Configuration(rig).model;
+        const auto originalLearnerBuildMode=rig.learner->StructureBuildMode.GetData();
+        USerStorageXML configuration;ASSERT_TRUE(configuration.Create("DormantChannelConfiguration"));
+        const auto configurationOwner=dynamic_pointer_cast<UNet>(rig.model);ASSERT_TRUE(configurationOwner);
+        ASSERT_TRUE(configurationOwner->SaveComponent(&configuration,true,ptPubParameter|pgSystem));
+        ASSERT_TRUE(configuration.SelectNode(rig.model->GetName()));
+        for(const auto& node:std::vector<std::string>{"Components","Learner","Components","Neuron",
+                "Components","Dendrite1_2","Parameters","ExcChannelClassName"})
+            ASSERT_TRUE(configuration.SelectNode(node))<<node;
+        ASSERT_TRUE(configuration.SetNodeText(dormantImage));
+        // A loaded graph declares both the membrane's future channel class
+        // and the class of its already serialized channel instance. Keep
+        // them consistent instead of relying on a later structural repair.
+        configuration.SelectUp();configuration.SelectUp();
+        ASSERT_TRUE(configuration.SelectNode("Components"));ASSERT_TRUE(configuration.SelectNode("ExcChannel"));
+        ASSERT_TRUE(configuration.SetNodeAttribute("Class",dormantImage));
+        for(int level=0;level<8;++level)configuration.SelectUp();
+        // Link restoration calls DisconnectAll/Connect, which can Build the
+        // owner inside Load itself. A serialized complete graph uses the
+        // documented no-reconstruction mode until explicit native adoption.
+        for(const auto& node:std::vector<std::string>{"Components","Learner","Parameters","StructureBuildMode"})
+            ASSERT_TRUE(configuration.SelectNode(node))<<node;
+        ASSERT_TRUE(configuration.SetNodeText("0"));
+        for(int level=0;level<4;++level)configuration.SelectUp();
+        std::string configuredXml;ASSERT_TRUE(configuration.Save(configuredXml));
+        Artifact(rig.name+"_dormant_configuration.xml",QByteArray::fromStdString(configuredXml));
+        const auto captureSetupStage=[&](const std::string& stage) {
+            QJsonObject observed{{"stage",QString::fromStdString(stage)},
+                {"requested_channel_class",QString::fromStdString(dormantImage)},
+                {"model_ready",rig.model->IsReady()},{"model_initialized",rig.model->IsInit()}};
+            const auto owner=rig.model->template GetComponentL<Learner>("Learner",true);
+            if(owner)
+            {
+                observed["owner_ready"]=owner->IsReady();observed["owner_initialized"]=owner->IsInit();
+                observed["owner_structure_mode"]=owner->StructureBuildMode.GetData();
+                const auto tree=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+                if(tree)
+                {
+                    observed["neuron_ready"]=tree->IsReady();observed["neuron_initialized"]=tree->IsInit();
+                    const auto membrane=tree->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);
+                    if(membrane)observed["membrane_channel_class"]=QString::fromStdString(membrane->ExcChannelClassName.GetData());
+                    const auto channel=tree->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);
+                    if(channel){observed["actual_channel_class"]=QString::fromStdString(channel->GetCompClassName());observed["capacity"]=channel->Capacity.GetData();}
+                    const auto retained=tree->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);
+                    if(retained)observed["retained_capacity"]=retained->Capacity.GetData();
+                }
+            }
+            Artifact(rig.name+"_setup_"+stage+".json",QJsonDocument(observed).toJson());
+        };
+        const auto marker=rig.model->OperationFailureSequence();
+        captureSetupStage("before_uninit");rig.model->UnInit();captureSetupStage("after_uninit");
+        TProjectLoadDiagnostics diagnostics;
+        ASSERT_TRUE(configurationOwner->LoadComponent(&configuration,true,&diagnostics));
+        ASSERT_TRUE(diagnostics.errors.empty());ASSERT_TRUE(diagnostics.warnings.empty());
+        captureSetupStage("after_load");
+        rig.model->SetGlobalTimeStep(frequency);captureSetupStage("after_frequency");
+        rig.learner=rig.model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(rig.learner);
+        ASSERT_EQ(rig.learner->StructureBuildMode.GetData(),0);
+        rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
+        auto dataset=rig.learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+        // Like native construction, prepare the physical children before
+        // adopting their graph. Building a still-legacy learner here would
+        // legitimately replace the loaded neuron from its common profile.
+        dataset->Build();captureSetupStage("after_dataset_build");
+        dataset->Init();captureSetupStage("after_dataset_init");
+        rig.neuron->Build();captureSetupStage("after_neuron_build");
+        rig.neuron->Init();captureSetupStage("after_neuron_init");
+        ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
+        rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(rig.source);
+        rig.ports.clear();rig.ports.emplace(&rig.source->Output,"burst");
+        const auto adopted=rig.learner->AdoptNativeModel(declaration);
+        ASSERT_EQ(adopted.status,NativeModelBuildStatus::Adopted)<<adopted.reason;
+        captureSetupStage("after_adopt");
+        rig.learner->StructureBuildMode=originalLearnerBuildMode;
+        ASSERT_EQ(rig.learner->StructureBuildMode.GetData(),originalLearnerBuildMode);
+        captureSetupStage("after_restore_owner_mode");
+        rig.model->Init();captureSetupStage("after_model_init");
+        rig.model->Reset();captureSetupStage("after_model_reset");
+        // The external native scheduler completes the newly adopted owner's
+        // ordinary lifecycle. No nested Calculate or forced Ready toggles.
+        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();captureSetupStage("after_model_calculate");
+        ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
+        ASSERT_EQ(rig.neuron,rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true));
         ASSERT_TRUE(rig.neuron->IsReady() && rig.neuron->IsInit());
-        ASSERT_FALSE(rig.neuron->HasOperationFailureSince(marker));
+        const auto configuredMembrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(configuredMembrane);
+        EXPECT_EQ(configuredMembrane->ExcChannelClassName.GetData(),dormantImage);
         const auto actual=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(actual);
         ASSERT_EQ(actual->GetCompClassName(),dormantImage);
+        const auto configuredGraph=NmsdkTools::IdentifyModel(rig.neuron,rig.ports);
+        Artifact(rig.name+"_after_channel_class_build.json",QJsonDocument(configuredGraph).toJson());
+        ASSERT_TRUE(configuredGraph["valid"].toBool());
+        ASSERT_EQ(configuredGraph["model"].toObject()["bindings"],beforeClassChange["model"].toObject()["bindings"]);
+        const auto retained=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(retained);
+        ASSERT_DOUBLE_EQ(retained->Capacity.GetData(),1.41e-9);
     }
     NativeCapacitanceCorrection capacitance;
     if(withCapacitance)ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,capacitance));
@@ -2888,9 +2982,13 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(withDormantCapacitance)
         for(auto& bound:plan.search.bounds)
         {
-            // Transport control on declared fixed geometry at explicit .2
-            // tolerance; not a new convergence claim at the default .02.
-            bound.maximumLength=bound.minimumLength;bound.maximumSynapses=bound.minimumSynapses;
+            // The immutable model declaration starts at L=2, while this
+            // transport begins after an explicit shrink to L=1. Preserve
+            // TrainingPlan's bounded [1,2] length domain so both the original
+            // declaration and the actual warm state remain representable.
+            // Ns/Rs stay fixed; the final missing-node assertion below proves
+            // this transfer still exercises a genuinely dormant image.
+            bound.maximumSynapses=bound.minimumSynapses;
             bound.maximumResistance=bound.minimumResistance;
         }
     if(inputs>2)
@@ -2933,6 +3031,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     }
     else ASSERT_TRUE(service.Certificate())<<service.Reason();
     if(sync==.2 && inputs==2 && n0Repeats==1)EXPECT_TRUE(service.Certificate()->Exact());
+    if(withDormantCapacitance)ASSERT_FALSE(rig.neuron->GetComponentL("Dendrite1_2",true));
     ASSERT_EQ(service.ReferencePackets().size(),inputs);ASSERT_EQ(service.FinalPackets().size(),inputs);
     for(const auto& packet:service.ReferencePackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));
     for(const auto& packet:service.FinalPackets())EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(EncodeNativeProbeEvidence(packet))),EncodeNativeProbeEvidence(packet));

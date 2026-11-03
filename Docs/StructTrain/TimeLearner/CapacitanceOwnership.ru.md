@@ -1,6 +1,134 @@
 # Автоматическое владение исходной C₀
 
-## Текущая приёмка, 03.11: открытый native roundtrip дефект
+## Актуальная адресная приёмка после E8/F1
+
+Normal dormant4 завершён4/4: Classic/Branch × N0/N1, same/fresh-process import,
+сохранение неиспользуемого image и dormant scale1.1. Evidence
+`315d6520f1b235a77798389ecd0c56c32f03b5a9`: outer hashes и269 members проверены,
+primary1 373 512 bytes. Native source root0481331ad, Pulse30495d1, Rdk a62393f7.
+Сериализатор/identity не ослаблены: исправлены load mode/order и domain fixture.
+
+Independent readers3/3 на этих четырёх actual packages: evidence
+`37bf2f787e93542a7972e560418a31aee2559684`, все6 members/14 592 bytes проверены;
+hashes278 source files совпали с Git reader rootf1d500245. Отрицательные случаи
+требуют конкретных semantic reasons: capacitance_storage_profile_mismatch
+при потере unused image и invalid_dormant_capacitance_scale при scale1.3.
+Зелёный результат не может обеспечиваться случайным повреждением outer digest.
+
+Полная приёмка automatic owner остаётся открытой. Normal regression43/readers26
+G1 выполняется на Elder: root4d501d611b56945c9f1914e9e4c44dee5485c949,
+worker297669/324112486, publisher297670. Build завершён, native43 начат.
+M40 ASan owner C3 прошёл6/8, работает Branch20k. Corrected ASan43/readers26 G1
+поставлен после успешных ASan owner8 и normal43: worker2578910/274660894,
+publisher2578911. До их завершения source/build/runtime не меняются.
+Отменённый старый ASan D1 не возобновляется.
+
+Все результаты здесь — engineering transport controls при явно заданной .2,
+не научная классификация, не convergence при default .02 и не завершение
+исходных этапов4/5/7/12. Новая C-search policy ещё не подключена к native service.
+Полностью завершён только исходный этап0. Далее сохранён журнал диагностики;
+промежуточные гипотезы и отказы не являются текущим статусом E8/F1.
+
+## Диагностика конфигурации dormant4, 03.11
+
+E1 (`93e623903e4edf3bebb698ae26553772d910ee43`) локализует два отсутствующих
+в live-графе соединения после смены класса канала напрямую. Повторный Build
+готового родителя не перестраивает связи: setter инвалидирует только мембрану.
+Строгий snapshot import обоснованно отвергает такой граф. Это ещё не дефект
+сохранения dormant C₀. Проверка переходит на штатный Load всего owning tree.
+
+E2 (`f6db81b9f4331fb221172271593c0626ba421b4f`) завершился ошибкой компиляции:
+SaveComponent/LoadComponent принадлежат UNet, а rig.model объявлен UContainer.
+Численные тесты не запускались. E3 использует проверенное приведение к UNet и
+явный lifecycle UnInit → Load → SetGlobalTimeStep → Build → Init → Reset.
+Дочерние handles обновляются после загрузки; все связи и исходная неоднородная
+ёмкость проверяются до первого edit. Это исправление fixture, без ослабления
+identity или изменения алгоритма.
+
+E3 (`5d0438d14f5650917f541c99729dafe62f3c4d55`) успешно собран, но все4 tests
+остановились до Train: после Load фактический ExcChannel сохранил прежний
+storage-класс. Все47 members и outer hashes проверены, primary86 641 bytes.
+E4 согласует ExcChannelClassName с Class дочернего ExcChannel в полном native
+XML, сохраняет XML как артефакт и проверяет effective property/class, связи и
+исходную heterogeneous C до edit. Root7a4417b5a4eaed6f42d1435e193d8072855e431f,
+Pulse30495d143795022ad444bf290d2ac30b7e140199. Native normal4 назначен на Elder,
+результат ещё не получен. E1/E3 не доказывают дефект dormant export: до него
+эти попытки не дошли.
+
+## Owning controller после Load: E4 и следующий адресный E5
+
+E4 (`6cc7274d5a228954f6dbe7ad50c239381ba1b429`): сборка успешна,4 FAIL до Train;
+все51 members/103 675 compressed bytes проверены. Сохранённый native XML
+содержит новый storage-класс и в ExcChannelClassName, и в Class дочернего узла.
+При полном model Build ещё не adopted learner выполняет legacy BuildStructure,
+который штатно удаляет загруженный Neuron и создаёт новый из общего образа.
+В таком порядке тест сам теряет неоднородную конфигурацию.
+
+E5 готовит загруженные Dataset/Neuron через их native Build/Init, затем явно
+AdoptNativeModel закрепляет готовый граф; обычный внешний scheduler завершает
+lifecycle owner. Порядок соответствует construction/adoption API: Inspect
+проверяет ready/initialized физических детей до принятия декларации, а Build
+owner уже учитывает native-владение. Learner-specific Ready toggles, Default,
+самоприсваивания параметров и вложенный Calculate не добавляются. Полные
+bindings, класс канала и1.41nF сохранённой мембраны остаются assertions.
+Результат E5 ещё не получен; dormant export по E4 не проверен.
+
+## E5 не подтвердил достаточность перестановки adoption
+
+E5 (`ca83319e75f4cf39f0ff6eec994ea84aa4845065`),51 members/103 681 bytes,
+проверен полностью: успешная сборка,4 FAIL до Train с прежним классом канала.
+Значит объяснение только последующим legacy Build owner недостаточно;
+сохранённый XML по E4/E5 корректен, но точная стадия замены ещё не установлена.
+E6 добавляет read-only snapshots после UnInit, Load, frequency assignment,
+Dataset Build/Init, Neuron Build/Init, adoption и native model Init/Reset/Calculate.
+Снимки включают реальные class names, Ready/Init и обе контрольные C. Они не
+меняют структуру, физику, допуски или strict import identity. Следующая правка
+должна опираться на первую фактически изменившую класс операцию, а не на
+предположение о финальном месте отказа. E6 назначен на Elder с root
+5f6add3064890a7647d43a2ec8ebc34fbe252695, Pulse30495d1, worker278449 и
+publisher278450; результат pending. Ранее отдельным docs-only merge принят
+точный канонический lifecycle Rdk (root develop3a6b83de2, Rdk33bdf2d1): Core
+и Deploy совпадают с a62393f7; работающие jobs сохраняют собственные gitlinks.
+
+## E6: первая потеря физики находится внутри LoadComponent
+
+Evidence `38cf86675497e9d7ca441467b51393fc03f1baff` проверен:99 members,
+106 654 bytes. Во всех4 случаях первое after_load уже содержит прежний channel
+class и1nF вместо retained1.41nF; последующие frequency/Build/Init/adoption шаги
+не являются первой причиной. Это уточняет предыдущую гипотезу о позднем Build.
+
+Подтверждённая исходниками цепочка: UNet.LoadComponent(links=true) →
+SetComponentInternalLinks → BreakLinks → DisconnectAll → Build. Поэтому
+полный Load может войти в структурную сборку владельца до возврата управления.
+E7 загружает готовый граф в штатном learner StructureBuildMode=0. После
+проверки/AdoptNativeModel восстанавливается исходный mode1 до первого Train.
+Это реальная смена режима явного графа на исходное управление, не самоприсваивание
+для пробуждения. Режим вложенного нейрона2 не меняется; все class/C/bindings
+assertions остаются. Нового результата пока нет. Независимые риски удаления
+канала при повторной сборке самого NPulseNeuron требуют отдельной проверки,
+а не предполагаются исправленными этим setup-переходом.
+
+## E7: явный граф сохранён, остановка находится при экспорте configuration
+
+Proof `28a02ecc3a81dca17b14065c278ac6cc512bd7c8` проверен полностью:
+171 members/243 551 bytes. Во всех4 случаях mode0 → native adoption → mode1
+сохраняет требуемые class/C и весь список bindings. Native shrink и dormant
+scale1.1 также прошли. Сохранены learned summaries: actual/accepted L=(1,1),
+Rs=86MΩ, Ns=(1,1), applied_edits=0 и fresh certificate при явно заданной .2.
+Это транспортный контроль, а не сходимость при default .02 или классификация.
+
+Ошибка invalid_configured_native_bounds возникает при export: immutable
+ModelSpec описывает исходную длину2, а fixture зафиксировал search-domain в1
+после ручного shrink. Export validator обоснованно отклоняет такой config.
+E8 сохраняет штатный ограниченный length-domain [1,2], включающий исходную
+декларацию и фактический warm state; Ns/Rs остаются фиксированы. После Train
+явно требуется отсутствие Dendrite1_2, поэтому рост не может незаметно убрать
+проверку dormant image. Не меняются references, исходная C₀, tolerances,
+критерий сертификата или serializer validator. E8 назначен на Elder, root
+0481331ade277933b4e47cc4e4d2f3ccebc38fdd, Pulse30495d1, worker289099,
+publisher289100. Export/import ещё не принят.
+
+## Исторический срез до E8: normal43 D1 и первоначальный roundtrip отказ
 
 Normal owner8/readers19 пройдены, temporal48/72 построен, selected12 просмотрены.
 Normal transport43 завершён:39 PASS и4 FAIL в NativeDormantCapacitanceTransport.
@@ -20,10 +148,15 @@ native snapshot load, проверить создание через штатн�
 Исправлять подтверждённого владельца дефекта; дополнительные «будящие» Build
 и подмена графа более простым профилем не являются решением.
 
-ASan owner C3 прошёл5/8: первый20k ClassicN0 завершился за2798.618s, выполняется
-ClassicN1At20000 (native handle2473290/start_ticks273872272 подтверждён).
-ASan transport D1 ещё ожидает owner predecessor; его старые четыре dormant
-fixtures требуют пересмотра после диагностики, автоматического PASS им нет.
+ASan owner C3 прошёл6/8: ClassicN0At20000=2798.618s,
+ClassicN1At20000=2778.136s; выполняется BranchN0At20000
+(native handle2473290/start_ticks273872272 подтверждён).
+ASan transport D1 со старыми четырьмя dormant fixtures отменён до source/build/
+runtime mutation. Cancellation evidence d6135806b068100640afc6e16d278d693fa18324:
+все4 file hashes проверены, точные PID/start_ticks закрыты, прежний HEAD
+неизменен, активный ASan owner8 подтверждён живым. E3 normal4 на Elder использует
+root3d144493aa073663d309946a961bf055bee617f4, Pulse30495d1; новая ASan transport
+серия требует исправленного fixture и положительного адресного normal результата.
 
 Следующий пункт этапа7 после explicit C₀ API. Он не включает bounded C-trim
 search: V2 SyncCapacitanceTrimOn остаётся запрещённым до его отдельной проверки.
