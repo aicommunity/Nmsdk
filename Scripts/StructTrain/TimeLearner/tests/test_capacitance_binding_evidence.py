@@ -71,6 +71,15 @@ class CapacitanceBindingEvidenceTest(unittest.TestCase):
                 with self.assertRaisesRegex(EvidenceError, '^invalid_capacitance_images$'):
                     audit_capacitance_binding(record)
 
+    def test_unused_dataset_image_is_required_for_initial_binding(self):
+        for path, original in self.records:
+            with self.subTest(path=path.name):
+                record = copy.deepcopy(original); frame = record['phases'][1]
+                self.assertIn('NDatasetMatrix', [d['name'] for d in frame['storage_images']])
+                frame['storage_images'] = [d for d in frame['storage_images'] if d['name'] != 'NDatasetMatrix']
+                with self.assertRaisesRegex(EvidenceError, '^capacitance_storage_profile_mismatch$'):
+                    audit_capacitance_binding(record)
+
     def test_fabricated_unbound_owner(self):
         for path, original in self.records:
             with self.subTest(path=path.name):

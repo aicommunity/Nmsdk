@@ -274,3 +274,43 @@ reader проверяет оба actual reference packets, их уникальн
 Текущий binding SDK inventory —140 (134+6), structured readers23
 (bridge8+domain8+binding7); предыдущие138/22 в журнале относятся к подготовке
 до добавления retained-reference guards. Все новые случаи ещё pending runtime.
+
+
+## Закрыт normal43/readers26; full closure и визуальная проверка
+
+Combined evidence7ec395554f0f8d506c08b587ba130025d0af1719: прежний native43
+ccfa43c1 +исправленный reader snapshotc63d1b7b9c08c7542398ca944bcc7cf22e5ea2b4
+дали26/26 production validation checks без failures/errors/skips. Проверены11
+archive members/16660bytes, все278 source-file hashes и actual Git diff/gitlinks:
+C++/CMake относительно496a80d719 неизменны. Численные пробы не пересчитывались;
+исходный G2 verdict not_accepted не переписан. H3/J1/K1 остановились на своих
+failed prerequisites и не считаются SDK/runtime проверками новых API.
+
+Elder H4 заново проверил1062 numerical primary members и11 reader members,
+закрытие старых owners и начал SDK134+reader7 на неизменном mechanical snapshot
+1c992e4ab95d6c467f9b006808c8b8046d180781 (owner371101/324683009).
+На actual H4 captured frame уже найден witness gap: baseline содержит dataset
+и generator, а отдельно снятая registry closure только channel roots их теряет.
+В root snapshots и typed domain это исправлено перечислением ВСЕХ имён из
+baseline.storage_images при новом чтении storage. Аудитор не ослаблен; добавлены
+три controls потери unused NDatasetMatrix image с конкретным profile-mismatch
+reason. Новый integrated SDK140 теперь требует26 readers (bridge9+domain9+binding8).
+H4 источники не меняются во время его работы; исправление ждёт нового gate.
+
+M40 ASan G3 sourcec63d1b7b9c08c7542398ca944bcc7cf22e5ea2b4, owner2662153/275233732
+начал новую сборку43-case transport и structured readers26 после проверки combined
+G3 и всех original primary. На основании измеренных ASan затрат native outer
+budget установлен43200s; это execution budget, не допуск сходимости. C3/старые
+G1/G2 не возобновляются.
+
+Temporal cache C3c завершён:48 complete probes/72 soma pairs,2697 PNG+SVG+PDF,
+8895 file hashes проверены; размер760289883bytes остаётся на M40 Data. Compact
+098e81688f2be8eded64e528b619c9f522d559bf содержит26 PNG;
+6da96040f04a9fa57f343bc7f6afe4b649a6a76e добавляет6 local-Y peak views.
+Проверены34+7 file hashes и согласованность с cache checksum manifest; все32
+PNG1920×960 открыты и просмотрены напрямую. Заголовки/оси/легенды и input overlays
+читаемы; в20k narrow shared-Y peak views вертикальная форма почти плоская, поэтому
+обязательна парная local-Y детализация. Она явно подписана; общий масштаб остаётся
+для сопоставления амплитуд. Sidecar review сохраняет точные SHA каждого PNG; raw
+pre-review selection metadata не переписана. Global visual acceptance всех2697
+PNG и scientific verdict не заявляются.
