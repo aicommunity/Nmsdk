@@ -1,3 +1,22 @@
+# Продвижение03.11: совместный decision search L/Ns/Rs/C
+
+В отдельной ветке реализованы независимые C-контексты и чередование кандидатов
+с общим бюджетом, preserved full C0 map, N0 repeats и per-C N1 domains.
+K1 Off A/B137 на каждой стороне и kernel147 прошли на Elder;
+все52 members/357 Git source hashes evidence9ab8a63a892e4ad780ebd19bf2dfeaef648a04f3
+проверены независимо. [Алгоритм, SHA и ограничения](CapacitanceContexts.ru.md).
+
+После K1 добавлен явный общий seed inventory budget, готовится kernel148.
+Это не приёмка всего C-trim: конфигурация/model transport schema4 и readers,
+native/ASan/physical matrix, measured C comparison scope/refinement остаются.
+В старые schemas новая policy не записывается молча; применяется явный отказ.
+Default Off и legacy сохранены. Ничего нового в develop пока не принимается.
+
+H11 продолжает native209/readers87 на Elder; R1 — region15/readers16 ASan
+на M40. Оба supervisor PID/start_ticks подтверждены живыми после K1; итоговые
+verdict ещё отсутствуют. Эти запускаемые бинарники/source/runtime не изменены.
+Полностью закрытым исходным этапом по-прежнему остаётся только этап0.
+
 # Выполняемые проверки после восстановления Automats2, 03.11
 
 Elder: H11 запущен на root14e95660ff0f1a12d6e67a0cf9a425fe7955d1ce,
