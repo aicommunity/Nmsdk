@@ -270,6 +270,10 @@ const QStringList cliClassFilters = parser.values(clDescClassOption);
   {
    return logConfigurationError("native_event_log_ini_override_not_allowed");
   }
+  // mkdir is the per-output reservation: concurrent launches may not share
+  // a logger before the native job itself claims its result directory.
+  if(!QDir(parent).mkdir(outputInfo.fileName()+".events-log"))
+   return logConfigurationError("native_event_log_path_reservation_failed");
  }
 
  int init_res=AppCore.Init(QCoreApplication::applicationFilePath().toLocal8Bit().constData(), applicationIni.toLocal8Bit().constData(),

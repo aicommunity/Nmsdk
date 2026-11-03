@@ -188,3 +188,10 @@ destination; такой native config получает явную invalid_config
 Rdk lifecycle и алгоритмы обучения не меняются. Это изменение пока требует
 серверной сборки и проверки реального immutable runtime, новых event logs и
 отрицательных запусков; до этого общий runtime gate остаётся открытым.
+
+Event-log sibling резервируется атомарным mkdir до AppCore.Init. Проверки
+exists недостаточно для двух одновременных запусков с одинаковым output:
+только владелец новой директории может инициализировать logger, проигравший
+получает invalid_config/native_event_log_path_reservation_failed. Сам native
+output по-прежнему создаёт штатный job runner. Это проверяется отдельно от
+обычного повторного запуска с уже завершённым output.
