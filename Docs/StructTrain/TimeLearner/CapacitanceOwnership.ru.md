@@ -14,7 +14,17 @@ SaveComponent/LoadComponent принадлежат UNet, а rig.model объяв
 явный lifecycle UnInit → Load → SetGlobalTimeStep → Build → Init → Reset.
 Дочерние handles обновляются после загрузки; все связи и исходная неоднородная
 ёмкость проверяются до первого edit. Это исправление fixture, без ослабления
-identity или изменения алгоритма. Результат E3 пока не получен.
+identity или изменения алгоритма.
+
+E3 (`5d0438d14f5650917f541c99729dafe62f3c4d55`) успешно собран, но все4 tests
+остановились до Train: после Load фактический ExcChannel сохранил прежний
+storage-класс. Все47 members и outer hashes проверены, primary86 641 bytes.
+E4 согласует ExcChannelClassName с Class дочернего ExcChannel в полном native
+XML, сохраняет XML как артефакт и проверяет effective property/class, связи и
+исходную heterogeneous C до edit. Root7a4417b5a4eaed6f42d1435e193d8072855e431f,
+Pulse30495d143795022ad444bf290d2ac30b7e140199. Native normal4 назначен на Elder,
+результат ещё не получен. E1/E3 не доказывают дефект dormant export: до него
+эти попытки не дошли.
 
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
