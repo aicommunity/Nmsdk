@@ -73,6 +73,20 @@ PhysicalInfeasible/Exact. Refinement tolerance не заменяет исход�
 budget/invalid declarations, both timing directions, mixed full-physics scope,
 inconsistent repeats, nonmonotonicity/flat response, plateau intervals, damped
 extrapolation/clipping, changed domain, nonfinite values и extreme finite ranges.
-Они входят в штатный Test_PulseLib_StorageComponents target. Серверная проверка
-самого kernel готовится отдельно от длительных native owner/transport jobs;
-её нельзя выдавать за выполненную интеграцию C-trim в controller.
+Они включены в штатный Test_PulseLib_StorageComponents target; его полная
+сборка/прогон с новым модулем ещё не выполнены. Отдельная серверная unit-проверка
+состоялась:23/23 на Elder normal и23/23 на M40 ASan — новые12 плюс6 length
+и5 resistance regressions. Компилировались полные production .cpp и полные
+штатные test files из Git, а не извлечённые тела функций. Изолированная сборка
+не касается leased native source/build/runtime. GTest dependency paths/hashes,
+compiler flags/version, binary SHA, loader diagnostics и stdout/JUnit сохранены.
+
+Root test snapshot `b951fb3d44eb713a21d5aefd69b13f0e9440ac77`, Pulse
+`0832d3ea17fa0a224a332d802f0cee00514c7cec`. Normal proof
+`e311c97eeb0eb44270a027b9e2aec68ca16fdeb6`, ASan proof
+`6da55382f2600db42ed69073da281cb67e5626a5`: проверены13 members каждого архива,
+outer hashes и совпадение всех9 production/test file hashes с Git sources.
+Archives7904/7224 bytes; active source_closure до/после совпали. ASan loader
+init libasan подтверждён. Полный SDK target, native provider comparisonScope,
+контроллер C-trim, model transfer, waveform tests и scientific verdict этим
+unit gate не подтверждаются. В develop модуль пока не принят.
