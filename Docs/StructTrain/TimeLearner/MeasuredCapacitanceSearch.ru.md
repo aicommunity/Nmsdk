@@ -95,3 +95,27 @@ Documentation child closure — `36641d2a309165ed2a28efd3670a3670a1bf1a18`;
 Core tree `c1cd832a243750c421e8c9fb4e12690f3aab140f` совпадает с tested0832d3e.
 После child push feature-root gitlink обновлён. Численные owner/transport jobs
 не переключались на этот kernel; их данные/исходные SHA сохранены отдельно.
+
+## Рабочая интеграция полной карты в decision controller
+
+В эту feature через merge commits включена зависимость automatic C₀ owner;
+её native/ASan/transport приёмка остаётся отдельной pending работой. Это не
+объединение owner в develop и не переключение работающих jobs.
+
+Новый pure TrainingCapacitance хранит origin hash, bound policy и полную карту
+абсолютных per-membrane scales, включая dormant paths. BoundedTrainingSession
+принимает её явно: actions, candidate evidence и repeat groups удерживают карту;
+Applied сверяет C readback наряду с L/Ns/Rs; derived Rs assessment не может
+опустить или заменить C context. Growth допускает только новые unit entries;
+известные entries не исчезают. Restore historical best сохраняет полный
+накопленный C₀ path inventory, но возвращает отсутствующие в old best новые
+поправки к1, не заимствуя более поздний trim. Origin/policy не переопределяются.
+Сравнение timing proposals допускает разницу только в дополнительных unit
+entries; равенство C-карты не означает равенства полного физического графа.
+
+Это подготовленное изменение pure decision path. NativeTrainingService и
+BindNativeTraining ещё не передают новую карту; versioned summary codec/readers,
+configured C policy и сам поиск C пока не подключены. Нельзя объявлять этот
+срез working C-trim On. Добавлены6 state-level и5 production-session unit
+controls; проверки на серверах подготавливаются. Старые callers без C-карты
+сохраняют None/unknown provenance, а не получают вымышленный C₀.
