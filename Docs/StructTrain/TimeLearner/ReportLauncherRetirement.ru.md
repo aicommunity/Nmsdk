@@ -51,3 +51,17 @@ Manifest теперь содержит94 records:92 retired и2 moved, complete=
 
 Локальная статическая сверка и подготовка manifest не заменяют эту серверную
 приёмку. Runtime/scientific equivalence исторических launchers не заявляется.
+
+
+## Проверка на двух workers
+
+Проверенный source root9b07a7714b00e93e7dc37894ba41a329de353d49.
+Elder evidence27f98de68f4a1ffb179ac270be372e70de95db0d (10 members/37771 bytes),
+M40 evidence10a48a8c0313bc16d62a010757f11d5042819c77 (10 members/37751 bytes).
+Оба прошли production CLI94 records и negative restored-job fixture (exit2,
+migration_old_path_still_present, положительный receipt отсутствует).
+Их архивы, outer/member checksums и380 точных Git source hashes независимо
+проверены локально. Source inventories обоих workers совпали. Проверка diff
+ограничила изменения указанными13 launchers, manifest, оговорками и checksum
+индексами; остальные payload blobs и checksum values сохранены.
+Это адресная приёмка данного удаления; whole_migration_attested=false.

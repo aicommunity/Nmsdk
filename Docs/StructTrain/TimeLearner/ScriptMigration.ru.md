@@ -317,3 +317,8 @@ records (79 retired +2 moved), server metadata приёмка пройдена �
 без wrappers. Manifest94 records (92 retired +2 moved); all primary payloads
 сохранены. [Исходники, current directory checksums и требуемая приёмка](ReportLauncherRetirement.ru.md).
 На момент подготовки серверная проверка этого94-record snapshot ещё не выполнена.
+
+Приёмка94-record snapshot завершена на обоих workers: production CLI и
+restored-Reports-launcher negative fixture; оба10-member архива и380 exact Git
+source hashes независимо сверены. Подробные SHA — в ReportLauncherRetirement.
+Это не завершение полного этапа9.
