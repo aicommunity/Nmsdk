@@ -1,3 +1,14 @@
+## Дополнение04.11: принята семантика рабочего каталога Rdk
+
+Rdk develop10e9d05a и root develop7c8d6e2f принимают сохранение явно заданного
+до Init рабочего каталога. Пустое значение сохраняет прежний default. На обоих
+workers проверены native/frozen/calibration, early refusals, duplicate launch,
+неизменность runtime и обычный startup; все первичные артефакты доступны в Git.
+[Точные SHA, проверки и ограничения](RdkStartupWorkDirectoryAcceptance-2026-11-04.ru.md).
+Это адресное продвижение2/4/9/10. Полные исходные этапы1–12 остаются частичными;
+полностью завершён только0. Console/ModelSpec2 transport feature проходит
+отдельную приёмку; этот merge не принимает её полный C++ suite или science.
+
 ## Уточнение03.11: научная физика и границы результатов
 
 Результаты новой N1 calibration5/8 и protocol study528 предъявлений относятся
