@@ -1,5 +1,11 @@
 # Состояние полного плана TimeLearner — 01.11.2026
 
+Дополнение03.11: удалены17 исторических Bin AsymRm pilot/finish/scale/sweep
+launchers без wrappers;81 migration records и restored-Bin negative fixture
+проверены production verifier на обоих workers. Восемь отчётов помечены
+историческими, их исходное содержимое сохранено. [Приёмка и SHA](AsymRmLauncherRetirement.ru.md).
+Это адресное продвижение этапов9/12, а не завершение всей миграции.
+
 Дополнение03.11: [explicit C₀ native edits и transfer](C0Acceptance-2026-11-03.ru.md)
 приняты адресно: normal9/14, independent reader24, ASan9/35/readers24, verified
 actual mappings и766 members. Это не automatic C-trim ownership/search и не
