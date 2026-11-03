@@ -7,7 +7,7 @@ from .training_capacitance_witness import audit_training_capacitance_registry, v
 
 def _audit(summary, packets):
     require(type(summary) is dict and summary.get('kind') == 'native_training_state_summary' and
-            type(summary.get('schema_version')) is int and summary['schema_version'] == 3,
+            type(summary.get('schema_version')) is int and summary['schema_version'] in (3, 4),
             'unknown_training_capacitance_history_schema')
     history = summary['capacitance_history']
     require(type(history) is dict and set(history) == {'capture_witness_id', 'current_witness_id',

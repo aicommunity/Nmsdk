@@ -16,8 +16,8 @@ OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_obser
 
 def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dict) -> dict:
     require(package.get("kind") == "timelearner_stopped_state" and type(package.get("schema_version")) is int
-            and package["schema_version"] in (1, 2, 3)
-            and len(package) == {1: 26, 2: 27, 3: 28}[package['schema_version']], "unknown_stopped_state_schema")
+            and package["schema_version"] in (1, 2, 3, 4)
+            and len(package) == {1: 26, 2: 27, 3: 28, 4: 28}[package['schema_version']], "unknown_stopped_state_schema")
     require(package["state_kind"] == "diagnostic" and package["dynamic_checkpoint"] is False,
             "unsupported_stopped_state_kind")
     require(package["certificate"] is None and package["training_outcome"] in OUTCOMES,

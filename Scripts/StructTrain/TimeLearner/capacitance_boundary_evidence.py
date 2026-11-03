@@ -6,14 +6,26 @@ from .training_capacitance_witness import audit_training_capacitance_registry
 
 def _audit(package, summary):
     version = package['schema_version']
-    require(type(version) is int and version in (1, 2, 3), 'unknown_capacitance_boundary_package_schema')
-    if version != 3:
+    require(type(version) is int and version in (1, 2, 3, 4), 'unknown_capacitance_boundary_package_schema')
+    if version not in (3, 4):
         require('capacitance_history' not in package and package['configuration']['schema_version'] in (1, 2),
                 'unversioned_learned_capacitance_history')
         return None
     audit_package_capacitance(package)
     configuration = package['configuration'];policy = configuration['capacitance_history']
-    require(type(configuration['schema_version']) is int and configuration['schema_version'] == 3 and
+    archived = package['neuron']['metadata']['training']
+    if version == 4:
+        from .capacitance_policy import audit_capacitance_search_policy
+        search = configuration['capacitance_search']
+        audit_capacitance_search_policy(search, maximum_relative_change=policy['maximum_relative_change'],
+                                        configuration=configuration['search'])
+        require(archived['capacitance_search'] == search, 'capacitance_boundary_archive_search_mismatch')
+        if summary is not None:
+            require(summary['configuration']['capacitance_search'] == search, 'capacitance_boundary_summary_search_mismatch')
+    else:
+        require('capacitance_search' not in configuration and 'capacitance_search' not in archived,
+                'unversioned_learned_capacitance_search')
+    require(type(configuration['schema_version']) is int and configuration['schema_version'] == version and
             type(policy) is dict and set(policy) == {'record', 'maximum_relative_change'} and
             policy['record'] is True and number(policy['maximum_relative_change']) >= 0 and
             policy['maximum_relative_change'] == package['capacitance_state']['maximum_relative_change'],
@@ -70,7 +82,7 @@ def _audit(package, summary):
             require(all(baseline[field].get(k) == v for k, v in value['native_state']['baseline'][field].items()),
                     'capacitance_boundary_current_baseline_history_lost')
     if summary is not None:
-        require(type(summary['schema_version']) is int and summary['schema_version'] == 3, 'capacitance_boundary_summary_schema_mismatch')
+        require(type(summary['schema_version']) is int and summary['schema_version'] == version, 'capacitance_boundary_summary_schema_mismatch')
         source = summary['capacitance_history']
         require(source['capture_witness_id'] == history['capture_witness_id'] and
                 source['current_witness_id'] == history['current_witness_id'] and source['current_verified'] is True and

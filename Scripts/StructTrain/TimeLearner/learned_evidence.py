@@ -15,14 +15,14 @@ from .model_identity import canonical_model_sha256
 from .capacitance_evidence import audit_package_capacitance
 from .capacitance_boundary_evidence import audit_package_capacitance_history
 
-AUDITOR_VERSION = 4
+AUDITOR_VERSION = 5
 
 
 def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
                         packets: dict[str, dict[str, Any]],
                         traces: dict[str, Path]) -> dict[str, Any]:
     require(package.get("kind") == "timelearner_completed_state" and
-            type(package.get("schema_version")) is int and package["schema_version"] in (1, 2, 3), "unknown_learned_state_schema")
+            type(package.get("schema_version")) is int and package["schema_version"] in (1, 2, 3, 4), "unknown_learned_state_schema")
     require(package["state_kind"] == "learned_solo" and package["dynamic_checkpoint"] is False,
             "unsupported_learned_state_kind")
     require(package["sha256"] == canonical_model_sha256({k: v for k, v in package.items() if k != "sha256"}),
