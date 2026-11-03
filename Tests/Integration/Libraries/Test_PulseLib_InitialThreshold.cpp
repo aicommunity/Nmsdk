@@ -117,6 +117,21 @@ TEST(NativeInitialThreshold,StrictCodecAndExplicitSignedValues) {
 }
 TEST(NativeInitialThreshold,UnsupportedZoneIsRejectedBeforeAttachment) {
     Scope scope(2000);auto owner=scope.OwnerNode<NNeuronTimeLearner>(2000);
+    // TakeObject may return a fully built learner image. Rejection must retain
+    // its live graph, rather than manufacture empty slots by deleting children.
+    const auto baseline=Spec(false,2000,std::nullopt);
+    const auto constructed=owner->ConstructNativeModel(baseline);
+    ASSERT_EQ(constructed.status,NativeModelBuildStatus::Constructed)<<constructed.reason;
+    scope.model->Init();scope.model->Reset();
+    const auto before=InspectNativeLearnerModel(*owner,baseline,{1,1,1,1});
+    ASSERT_EQ(before.status,NativeModelBuildStatus::Adopted)<<before.reason;
+    const auto oldNeuron=owner->GetComponent("Neuron",true),oldDataset=owner->GetComponent("DatasetMatrix",true);
+    ASSERT_TRUE(oldNeuron);ASSERT_TRUE(oldDataset);
+    const auto datasetBefore=NmsdkTools::IdentifyModel(oldDataset);
+    ASSERT_TRUE(datasetBefore["valid"].toBool())<<QJsonDocument(datasetBefore).toJson().toStdString();
+    std::vector<NameT> orderBefore;owner->GetComponentsList(orderBefore);
+    scope.environment->GetTime().SetTime(1000000);
+    const double clock=scope.environment->GetTime().GetDoubleTime();
     // Storage image names differ from C++ implementation names; exercise the
     // real registered simple-zone image, not a missing-template exception.
     ASSERT_TRUE(scope.storage->CheckClass("NPSimpleLTZone"));
@@ -126,7 +141,22 @@ TEST(NativeInitialThreshold,UnsupportedZoneIsRejectedBeforeAttachment) {
     const auto result=owner->ConstructNativeModel(spec);
     EXPECT_EQ(result.status,NativeModelBuildStatus::Rejected);
     EXPECT_EQ(result.reason,"native_scalar_spike_threshold_not_supported_by_ltzone");
-    EXPECT_FALSE(owner->GetComponent("Neuron",true));EXPECT_FALSE(owner->GetComponent("DatasetMatrix",true));
+    EXPECT_FALSE(result.modelMayHaveChanged);
+    EXPECT_EQ(owner->GetComponent("Neuron",true).Get(),oldNeuron.Get());
+    EXPECT_EQ(owner->GetComponent("DatasetMatrix",true).Get(),oldDataset.Get());
+    std::vector<NameT> orderAfter;owner->GetComponentsList(orderAfter);EXPECT_EQ(orderBefore,orderAfter);
+    const auto after=InspectNativeLearnerModel(*owner,baseline,{1,1,1,1});
+    ASSERT_EQ(after.status,NativeModelBuildStatus::Adopted)<<after.reason;
+    EXPECT_EQ(after.modelRevision,before.modelRevision);EXPECT_EQ(after.effective,before.effective);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(oldDataset),datasetBefore);
+    EXPECT_DOUBLE_EQ(scope.environment->GetTime().GetDoubleTime(),clock);
+    Write("initial_threshold_rejection_unchanged.json",{{"reason",QString::fromStdString(result.reason)},
+        {"before",QString::fromStdString(before.modelRevision)},{"after",QString::fromStdString(after.modelRevision)},
+        {"dataset_before",datasetBefore},{"dataset_after",NmsdkTools::IdentifyModel(oldDataset)},
+        {"clock_before",clock},{"clock_after",scope.environment->GetTime().GetDoubleTime()},
+        {"children_retained",owner->GetComponent("Neuron",true).Get()==oldNeuron.Get() &&
+                             owner->GetComponent("DatasetMatrix",true).Get()==oldDataset.Get()},
+        {"order_retained",orderBefore==orderAfter}});
 }
 TEST(NativeInitialThreshold,InspectionDoesNotReapplyConstructionValue) {
     Scope scope(2000);auto owner=scope.OwnerNode<NNeuronTimeLearner>(2000);auto spec=Spec(false,2000,100.);
