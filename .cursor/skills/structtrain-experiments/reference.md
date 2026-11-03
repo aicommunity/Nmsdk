@@ -1,4 +1,4 @@
-# StructTrain experiments — reference
+# StructTrain experiments — исторический справочник
 
 ## posttune_verify cases → канон
 
@@ -34,21 +34,15 @@ Skip-train gold control: тот же канон Branch25, протокол `Skip
 - Цель = срабатывание на target. При Acc 8/8 → `да`. При Acc&lt;8/8 колонка обязательна (`да`/`нет`/`—`).
 - Нет CSV gate → Acc/Цель/Режим = `—`.
 
-## CLI
+## Исторические запускатели
 
-```bash
-python3 Bin/Configs/SpikeSamples/StructTrain/scripts/posttune_verify.py --case br25_on
-python3 Bin/Configs/SpikeSamples/StructTrain/scripts/posttune_verify.py --case all
-# GoldTest NOT_RETESTED (no Train):
-python3 Bin/Configs/SpikeSamples/StructTrain/scripts/gold_retest_batch.py \
-  --manifest Bin/Configs/SpikeSamples/StructTrain/_repro/NOT_RETESTED_manifest_20260925.txt
-# SoftCold wave C1/C2:
-WAVE=C1 bash Bin/Configs/SpikeSamples/StructTrain/scripts/softcold_c_batch.sh
-# debug only:
-python3 …/posttune_verify.py --case br25_on --allow-salvage
-python3 …/posttune_verify.py --case br25_on --use-archive-inplace
-```
+Таблицы выше сохраняют прежнюю семантику case/registry. Они не доказывают
+современную приёмку алгоритма и не заменяют пять осей статуса текущего контура.
+SoftCold/OpenGaps/T2/T4 shell entrypoints удалены из текущего Bin без wrappers.
+Исходники доступны в Bin commit `39d811e5e0798eecf124f32356c9fc6edbe4538a`; точные пути и хеши:
+[реестр миграции](../../../Docs/StructTrain/TimeLearner/SoftColdLauncherRetirement.ru.md).
 
-Console path (Linux): `Bin/Platform/Linux/NeuroModelerConsole`.
-
-Extra SoftCold `--case` ids (wave C): `br50_gen`, `br*_preinh`, `br*_nextseg`, `br480_*`, `asym*_preinh`, `asym100_*`, `phase6_thr_only` / `preinh250` / `ltzcal_twin`, `fs*`, `ltz*`, `pa*`, `tn_classic`, `psi*` — see `CASES` in `posttune_verify.py`.
+Для нового задания использовать [корневой CLI](../../../Scripts/StructTrain/TimeLearner/README.ru.md)
+с явными job/runtime manifests и только проверенными capabilities. Старый shared
+`Bin/Platform` и команды posttune_verify/--case относятся к историческому протоколу.
+Не возобновлять прежние очереди ради повторной генерации документации.

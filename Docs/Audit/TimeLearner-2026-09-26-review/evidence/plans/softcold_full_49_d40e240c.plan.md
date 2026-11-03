@@ -25,6 +25,9 @@ todos:
     status: completed
 isProject: false
 ---
+> Дополнение03.11.2026: это исторический документ кампании. SoftCold/OpenGaps/T2/T4 shell launchers удалены из текущего дерева; их исходники доступны в Bin commit `39d811e5e0798eecf124f32356c9fc6edbe4538a` по прежнему пути. Полный retrieval manifest: `Docs/StructTrain/TimeLearner/script_migration.json`. Измерения и прежние выводы ниже сохранены; старые команды не являются инструкцией нового запуска.
+
+
 
 # SoftCold Full 49 + explanation pass (детальный инвентарь)
 
@@ -100,10 +103,10 @@ sha256sum Bin/Platform/Linux/NeuroModelerConsole | cut -c1-16
 
 | Скрипт | Роль |
 |--------|------|
-| [`softcold_full_matrix_parallel.sh`](Bin/Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix_parallel.sh) | оркестратор PARALLEL → RCS shards → merge → apply |
+| [`softcold_full_matrix_parallel.sh`](https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_full_matrix_parallel.sh) | оркестратор PARALLEL → RCS shards → merge → apply |
 | [`posttune_verify.py`](Bin/Configs/SpikeSamples/StructTrain/scripts/posttune_verify.py) | worker: SoftCold+PostTune, SNAP, provenance, stall |
 | [`apply_softcold_rcs_to_registry.py`](Bin/Configs/SpikeSamples/StructTrain/scripts/apply_softcold_rcs_to_registry.py) | RCS → EXPERIMENTS + SUCCESSFUL (PASS only) |
-| [`softcold_w4_status_snapshot.sh`](Bin/Configs/SpikeSamples/StructTrain/scripts/softcold_w4_status_snapshot.sh) | база для статуса; для full49 — каждые **15 мин**, считать `rcs.d` (см. §2.2a) |
+| [`softcold_w4_status_snapshot.sh`](https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_w4_status_snapshot.sh) | база для статуса; для full49 — каждые **15 мин**, считать `rcs.d` (см. §2.2a) |
 
 **Не использовать** для этой волны: `softcold_full_matrix.sh` (serial W4), `open_gaps_w0_diag.sh` (subset + keep-slog), `apply_softcold_rcs.py` (legacy append block), `diag_psi01_sync_as_keep.py` (не матрица).
 
