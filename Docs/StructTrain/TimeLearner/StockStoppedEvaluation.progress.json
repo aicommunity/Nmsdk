@@ -158,8 +158,21 @@
     }
   },
   "temporal_reports": {
-    "status": "production report action and three real-cache readers added; execution pending",
+    "status": "queued_after_exact_H21_native_owner",
     "trial_soma_pairs_required": 80,
-    "manual_review_completed": false
+    "manual_review_completed": false,
+    "source_root": "ddfe1f39d40373daab1d4e2894a9c822c90a288f",
+    "owner_pid": 3424054,
+    "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-stopped-phasea-visual-a1",
+    "waits_for": {
+      "pid": 3416749,
+      "start_ticks": "281000389"
+    },
+    "expected_readers": 3
+  },
+  "criterion": {
+    "anchor": "onset",
+    "window": "whole2s for target and foils",
+    "correct_post_pattern_spike_timing_established": false
   }
 }

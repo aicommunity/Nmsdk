@@ -74,6 +74,10 @@ failures и skips. Evidence `c8381cfc3ecbf446ae1f59175c794ef547dcc93d` опуб�
 нативным Git pack через SSH; из-за DNS на Elder push сделан из локального Git
 после проверки данных. Ни SDK, ни модели при синхронизации не обновлялись.
 
+Здесь TP/FP означают наличие любого спайка за полное окно от onset до2 s.
+Это диагностический критерий активности; корректное время ответа после
+последнего импульса этими counts не устанавливается.
+
 | Порог | Classic TP/FP/FN/TN | Branch TP/FP/FN/TN |
 |---|---|---|
 |0.0117|1/7/0/0|1/7/0/0|
@@ -100,3 +104,12 @@ trial-soma pairs; полный обзор и100-tick zoom с реальными 
 ещё не выполнены. До просмотра изображений visual_acceptance_complete=false.
 Полные PNG/SVG/PDF остаются кэшем Data; compact Git получает метаданные и
 выбранные непосредственно просмотренные рисунки.
+
+M40 visual-a1 owner3424054 с исходниками renderer rootddfe1f39d поставлен
+в ожидание точного H21 owner3416749/start_ticks281000389. После его закрытия
+отчёт читает published proofc8381cfc и строит полный кэш без повторных моделей.
+Декларация:80 пар и3 report readers. Отдельный publisher использует native
+Git parser и remote fetch каждого child commit; в Git передаются только
+metadata.tar.xz, manifest и checksums. Полные PNG/SVG/PDF не публикуются.
+Численная диагностика завершена; queue и ожидаемые проверки графиков ещё
+не являются visual acceptance или новым научным результатом.
