@@ -211,3 +211,33 @@ production publisher.py уже использовал native Git parser. Нов�
 При последней проверке03.11 H14 native3052995 и owner3024065 живы,
 H20 worker3299200 и новый publisher3362315 живы. Прежний текст о3299201 выше
 описывает исторический запуск. Ни ASan pass, ни завершение этапа6 не заявлены.
+
+## Завершение H14/H20 и адресный повтор H21
+
+Оригинальный H14 опубликован в `cd39ea2a903236357a1b5965ce859d6fca5f30c9`:
+2264 members проверены по outer/member hashes и фактическому JUnit.
+Targeted6/6, full212/213; единственный отказ
+NativeCapacitanceHistoryBoundary.ClassicN1StoppedBeforeFirstTick —
+child.waitForFinished(120000). Actual libasan mapping присутствует.
+Reader87 после этого отказа не запускался; overall остаётся not_accepted.
+
+H20 корректно прекратился до нового SDK после отрицательного baseline gate.
+Его original receipt и заменённый publisher сохранены в
+`81ca263780419ad2bdbda322365923474a193db6`; все7 members независимо проверены.
+Этот пакет не содержит нового ASan candidate runtime или A/B результата.
+Ни baseline pass, ни CandidateCursor ASan pass не присваиваются.
+
+H21 повторяет исходный failing case на том же неизменённом H14 executable,
+не увеличивая внутренние120000ms. После освобождения памяти на M40 доступно
+около43GiB. Standalone case прошёл1/1 (126805ms всего теста); это совместимо
+с влиянием ресурсов, но не доказывает причину исходного таймаута и не заменяет
+полный ordered gate. Затем начат прежний213-case набор в том же порядке,
+с бюджетом43200s. Owner3416749 и native runtime подтверждены живыми.
+Файл memory-samples.jsonl фиксирует MemAvailable, SwapFree и RSS процессов
+именно этого executable с PID/start_ticks. Чужие процессы не останавливались.
+
+H21 out: /media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-probe-ownership-asan-h21.
+После полного native213 всё ещё нужны original/corrected reader проверки,
+публикация и независимая проверка primary. Новый CandidateCursor ASan A/B
+после H20 пока не запущен. Fresh closure, develop merge и исходные полные
+этапы6/7 остаются открытыми.
