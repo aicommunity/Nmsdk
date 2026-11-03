@@ -348,3 +348,22 @@ automatic owner в одном SDK/runtime и одном storage process. Focused
 Все inventory/fixture/package fingerprints должны пройти production validation.
 Допуски, модели, научная цель и алгоритм поиска ради gate не менялись.
 Это будущая проверка, не текущий PASS и не научная classification.
+
+
+## H5 запущен на отдельном runtime после закрытия H4
+
+Source627b601547bf80fae08e1ebad26cdecaabc9c85e, Pulse
+7707be2d19aeaf653d3430277426637a88ab967d, Rdk acc3de8d, Bin39d811e5.
+Elder owner400316/324934774, publisher400317/324934775; отдельный
+runtime-s07-capacitance-owner-integration-normal-h5. Перед checkout проверены
+combinedG3, исходные1062 numerical members,11 reader members и219 H4 members,
+закрытие старых owners и отсутствие пользователей source/build. Это новый
+SDK183/structured readers52, не автоматическое возобновление H3/J1/K1.
+Новые producer closure и owning QJsonValue проверяются теми же физическими
+ожиданиями; positive runtime результат пока отсутствует.
+
+Одноразовая отправка orchestration code превысила Windows command-line length
+и была отвергнута до создания процесса. Повторная передача использует временный
+локальный файл только с кодом, credentials по stdin и прежний проверяющий known
+hosts SSH helper. Project sources/config/results по-прежнему только через Git;
+пароли не записывались в файлы. После успешного запуска handles проверены живыми.
