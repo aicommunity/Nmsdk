@@ -67,3 +67,17 @@ outer checksums, все71 archive members /87570 compressed bytes, 106 productio
 source records и312 runner source records по точным Git commits. Это проверка
 контроллера; native Rdk integration, ASan, физическая матрица и classification
 не подтверждаются. Полные этапы плана этим не закрываются.
+
+
+## Следующий native контроль: два слота
+
+Добавлены четыре отдельных NativeCapacitanceSearchMinimalBudget случая:
+Classic/Branch × N0/N1, maximumContexts2 и maximumCandidatesPerInput2,
+фиксированные исходные L/Ns/Rs. Используется настоящий EditingRig, storage,
+штатный scheduler и AssignedBurstWave; исходные четыре activation cases
+не заменяются. Артефакты имеют отдельный csearch_minimal prefix. Проверяются
+реальный measured non-unit C, отдельный N1 domain и отсутствие Exact при
+нулевом sync tolerance. Python reader требует все четыре случая, полные
+первичные данные и согласованный owned C-state. Это negative control обучения,
+не доказательство классификации. Новые декларации: target34/full262; отдельный
+minimal gate4. До серверного результата это только подготовленные проверки.
