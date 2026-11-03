@@ -95,7 +95,9 @@ E8 сохраняет штатный ограниченный length-domain [1,2
 декларацию и фактический warm state; Ns/Rs остаются фиксированы. После Train
 явно требуется отсутствие Dendrite1_2, поэтому рост не может незаметно убрать
 проверку dormant image. Не меняются references, исходная C₀, tolerances,
-критерий сертификата или serializer validator. Export/import ещё не принят.
+критерий сертификата или serializer validator. E8 назначен на Elder, root
+0481331ade277933b4e47cc4e4d2f3ccebc38fdd, Pulse30495d1, worker289099,
+publisher289100. Export/import ещё не принят.
 
 ## Текущая приёмка, 03.11: открытый native roundtrip дефект
 
@@ -117,8 +119,9 @@ native snapshot load, проверить создание через штатн�
 Исправлять подтверждённого владельца дефекта; дополнительные «будящие» Build
 и подмена графа более простым профилем не являются решением.
 
-ASan owner C3 прошёл5/8: первый20k ClassicN0 завершился за2798.618s, выполняется
-ClassicN1At20000 (native handle2473290/start_ticks273872272 подтверждён).
+ASan owner C3 прошёл6/8: ClassicN0At20000=2798.618s,
+ClassicN1At20000=2778.136s; выполняется BranchN0At20000
+(native handle2473290/start_ticks273872272 подтверждён).
 ASan transport D1 со старыми четырьмя dormant fixtures отменён до source/build/
 runtime mutation. Cancellation evidence d6135806b068100640afc6e16d278d693fa18324:
 все4 file hashes проверены, точные PID/start_ticks закрыты, прежний HEAD
