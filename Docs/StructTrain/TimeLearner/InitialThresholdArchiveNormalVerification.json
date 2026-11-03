@@ -1,0 +1,42 @@
+{
+  "kind": "independent_git_primary_verification",
+  "evidence_commit": "60f5905c7b04ac41f16d405d2fe715f1e3eed174",
+  "members_verified": 97,
+  "source_hashes_verified": 430,
+  "native_tests": 18,
+  "errors": 0,
+  "failures": 0,
+  "original_runtime_unchanged": true,
+  "physical_roundtrip_cases": [
+    {
+      "path": "native-result/native/initial_threshold_archive_Classic_20000.json",
+      "samples": 1201,
+      "columns": 13,
+      "frequency_hz": 20000,
+      "paired_traces_equal": true
+    },
+    {
+      "path": "native-result/native/initial_threshold_archive_Branch_2000.json",
+      "samples": 121,
+      "columns": 7,
+      "frequency_hz": 2000,
+      "paired_traces_equal": true
+    },
+    {
+      "path": "native-result/native/initial_threshold_archive_Branch_20000.json",
+      "samples": 1201,
+      "columns": 7,
+      "frequency_hz": 20000,
+      "paired_traces_equal": true
+    },
+    {
+      "path": "native-result/native/initial_threshold_archive_Classic_2000.json",
+      "samples": 121,
+      "columns": 13,
+      "frequency_hz": 2000,
+      "paired_traces_equal": true
+    }
+  ],
+  "scientific_verdict": null,
+  "calibrated_recognition_state_verified": false
+}

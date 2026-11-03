@@ -261,6 +261,38 @@ input/response и finite samples обязательны; это проверка
 не обучение на одиночном импульсе и не модель динамического checkpoint.
 Исходный archive записывается до paired run, чтобы сохранить контекст отказа.
 
-Новые4 ещё не собраны/не выполнены. Их необходимо проверить на серверах;
-продукционный код Pulse541 пока не изменён. Даже успешный физический roundtrip
-не заменяет отдельный calibrated-recognition-state roundtrip ModelSpec2.
+Все18 cases выполнены на Elder (Qt5/GCC11 Release) и M40
+(Qt6/GCC13 AddressSanitizer, detect_leaks=0). Продукционный код Pulse541
+не изменён. Физический roundtrip не заменяет отдельный
+calibrated-recognition-state roundtrip ModelSpec2.
+
+## Подтверждённый физический roundtrip18, 2026-11-04
+
+Normal A2: root63d861e823aea132625b22f3702ac11c3d1e7320,
+evidence60f5905c7b04ac41f16d405d2fe715f1e3eed174. Фактический GTest XML:
+18 tests, 0 failures/errors/disabled, 43.570s.
+ASan A1: тот же root и Pulse541bf89b9966f63ca5131fa57a31a9ae3f5820ea,
+evidencecd3a477ee03f5f75b2d71af83772ec6dce5dda1e. Фактический XML:
+18 tests, 0 failures/errors/disabled, 300.608s. Реальный libasan mapping
+проверен по loaded-files; отсутствие утечек не заявляется.
+
+В каждом пакете независимо проверены все97 members и430 hashes исходников.
+Исходники обоих запусков совпали с точными Git blobs. В четырёх новых
+readbacks подтверждены полная semantic identity графа, untrained metadata,
+ModelSpec2.initial_threshold100, effective threshold0.005 и отсутствие
+LTMembrane. Все paired input/soma/spike samples конечны и попарно равны:
+121 samples при2000Hz,1201 при20000Hz. Есть ненулевой стимул и изменение
+потенциала сомы; проверка не сводится к сравнению двух молчащих нулевых трасс.
+
+Использованы закрытые SDK/build с заменой только тестового CPP и новым
+runtime каждого запуска. До/после сохранены и сверены байты/realpaths прежних
+runtime. Первоначальная compile failure Normal A1 остаётся в readbacks;
+она не подменена успешным A2. Полные97-member primary archives занимают
+295424 и370876 bytes в Git; изображения не добавлялись. Доступность всех7
+точных child commits проверена по удалённым refs и записана в ASan-пакете.
+
+Оба отчёта опубликованы и объединены в рабочую feature-ветку через --no-ff.
+Эти адресные gates закрыты; полный этап4/5 и calibrated-recognition-state
+roundtrip ModelSpec2 не завершены. Научного результата обучения эти fixtures
+не создают. Проверка H21 и полный80-pair визуальный отчёт остаются отдельными
+заданиями.
