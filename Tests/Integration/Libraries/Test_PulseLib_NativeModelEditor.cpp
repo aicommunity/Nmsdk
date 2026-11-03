@@ -26,6 +26,7 @@
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
+#include "../../../Rdk/Core/Engine/UNet.h"
 #include <QFile>
 #include <QDir>
 #include <QJsonArray>
@@ -2868,19 +2869,21 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         // No self-assignment, arbitrary Default or learner-specific wake-up.
         const auto declaration=Configuration(rig).model;
         USerStorageXML configuration;ASSERT_TRUE(configuration.Create("DormantChannelConfiguration"));
-        ASSERT_TRUE(rig.model->SaveComponent(&configuration,true,ptPubParameter|pgSystem));
+        const auto configurationOwner=dynamic_pointer_cast<UNet>(rig.model);ASSERT_TRUE(configurationOwner);
+        ASSERT_TRUE(configurationOwner->SaveComponent(&configuration,true,ptPubParameter|pgSystem));
         ASSERT_TRUE(configuration.SelectNode(rig.model->GetName()));
         for(const auto& node:std::vector<std::string>{"Components","Learner","Components","Neuron",
                 "Components","Dendrite1_2","Parameters","ExcChannelClassName"})
             ASSERT_TRUE(configuration.SelectNode(node))<<node;
         ASSERT_TRUE(configuration.SetNodeText(dormantImage));
         for(int level=0;level<8;++level)configuration.SelectUp();
-        TProjectLoadDiagnostics diagnostics;
-        ASSERT_TRUE(rig.model->LoadComponent(&configuration,true,&diagnostics));
-        ASSERT_TRUE(diagnostics.errors.empty());
-        rig.model->SetGlobalTimeStep(frequency);
         const auto marker=rig.model->OperationFailureSequence();
-        rig.model->Init();rig.model->Reset();
+        rig.model->UnInit();
+        TProjectLoadDiagnostics diagnostics;
+        ASSERT_TRUE(configurationOwner->LoadComponent(&configuration,true,&diagnostics));
+        ASSERT_TRUE(diagnostics.errors.empty());ASSERT_TRUE(diagnostics.warnings.empty());
+        rig.model->SetGlobalTimeStep(frequency);
+        rig.model->Build();rig.model->Init();rig.model->Reset();
         ASSERT_FALSE(rig.model->HasOperationFailureSince(marker));
         rig.learner=rig.model->template GetComponentL<Learner>("Learner",true);ASSERT_TRUE(rig.learner);
         rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>("Neuron",true);ASSERT_TRUE(rig.neuron);
