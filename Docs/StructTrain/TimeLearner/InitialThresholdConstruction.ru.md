@@ -418,3 +418,25 @@ Prepared baseline дополнительно привязан к точному 
 member hashes перед запуском. Каждый run ещё раз выводит допустимый job из
 неизменного исходного job; скрытые изменения параметров не допускаются.
 Native runtime обеих A1 не менялся; новый запуск получает отдельные каталоги.
+
+A2 normal прошёл4/4 preparatory checks; Classic schema1 cold Train вновь
+получил Exact с прежним Rs64369082.70599112, model revisionc7cb9097… и теми
+же финальными остатками. Export и обе proposal probes завершены/valid.
+Дальнейшая запись proposal metadata отказала FileExistsError: путь
+Classic-v1-proposal.json уже занимал неизменяемый native job. Исправление
+разносит job и threshold-proposal.json; исходные файлы не перезаписываются.
+
+Добавлен --completed-prefix: только finalized completed/valid operations
+с точным прежним job и runtime fingerprint могут копироваться в новый run.
+Полные manifest/primary audits выполняются до и после копирования; на Linux
+проверяется отсутствие исходного owned PID/start_ticks. Current runtime
+проверяется по фактическим файлам, весь prefix — на побайтную неизменность.
+Повторный native запуск для перенесённых операций явно помечается false;
+их исходные process records и manifest SHA сохраняются. Незавершённая проба
+либо неполный operation directory не возобновляются. Это completed-boundary
+continuation, а не checkpoint физической динамики.
+
+Новые итоговые reader checks дополнительно сравнивают schema1/schema2 solo
+и calibrated graphs и проверяют reuse/отказ для другого job либо runtime.
+Весь новый набор итоговых проверок теперь5 cases; старые3 A2 не объявляются
+проверкой этих двух дополнений. До серверной проверки новый gate открыт.

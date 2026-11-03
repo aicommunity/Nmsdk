@@ -112,10 +112,36 @@ def requests(name, *, frozen=False):
              'record_threshold_potential': True} for i, (pattern, label) in enumerate(order)]
 
 
-def run(prepared, runtime, output):
+def validate_completed_operation(folder, mode, job, runtime):
+    """Audit a closed immutable operation, without starting a new process."""
+    from .runtime import digest_json, runtime_content_identity
+    from .process_runner import _start_identity
+    require((folder/'run-manifest.json').is_file(), 'transport_prefix_operation_not_finalized')
+    original = load(folder/'run-manifest.json')
+    require(mode in ('train', 'export', 'evaluate', 'calibrate') and
+            (original.get('kind') == 'timelearner_calibration_run_manifest' if mode == 'calibrate'
+             else original.get('operation') == mode), 'transport_prefix_operation_mode_changed')
+    require(original['execution'] == 'completed' and original['validity'] == 'valid' and
+            original['runtime_fingerprint'] == runtime['runtime_fingerprint'] ==
+            digest_json(runtime_content_identity(runtime)) and load(folder/'input/job.json') == job,
+            'transport_prefix_operation_changed')
+    auditor = audit_calibration if mode == 'calibrate' else audit_run_manifest
+    audit = auditor(folder/'run-manifest.json')
+    if Path('/proc').is_dir():
+        owned = load(folder/'process/owned-process.json')
+        try:
+            require(_start_identity(owned['pid']) != owned['start_ticks'], 'transport_prefix_process_still_live')
+        except FileNotFoundError:
+            pass
+    return original, audit
+
+
+def run(prepared, runtime, output, *, completed_prefix=None):
     from .__main__ import main as cli
     from .recognition_metrics import load_evaluation
     from .calibrated_evidence import audit_calibrated_state
+    from .process_runner import verify_runtime
+    verify_runtime(load(runtime))
     require(output != prepared and not output.exists(), 'transport_output_must_be_new')
     plan = load(prepared/'plan.json')
     require(plan['kind'] == 'native_model_spec_transport_plan' and plan['baseline_commit'] == BASELINE
@@ -130,13 +156,27 @@ def run(prepared, runtime, output):
     require(inventory(prepared/'baseline') == {r['path']: r['sha256'] for r in load(baseline_manifest)['records']},
             'transport_prepared_baseline_changed')
     before = inventory(prepared)
+    prefix_before = inventory(completed_prefix) if completed_prefix is not None else None
+    if completed_prefix is not None:
+        require(load(completed_prefix/'plan.json') == plan, 'transport_prefix_plan_changed')
     output.mkdir(parents=True);(output/'jobs').mkdir();(output/'runs').mkdir()
     _write(output/'plan.json', plan)
-    rows = []
+    rows = [];reused = []
 
     def invoke(mode, name, job, source=None):
         path = output/'jobs'/(name+'.json');_write(path, job)
         folder = output/'runs'/name
+        previous = completed_prefix/'runs'/name if completed_prefix is not None else None
+        if previous is not None and previous.exists():
+            original, _ = validate_completed_operation(previous, mode, job, load(runtime))
+            auditor = audit_calibration if mode == 'calibrate' else audit_run_manifest
+            shutil.copytree(previous, folder)
+            audit = auditor(folder/'run-manifest.json')
+            reused.append({'name': name, 'mode': mode, 'source': str(previous),
+                           'run_manifest_sha256': original['sha256'], 'native_rerun': False})
+            _write(output/'reused-completed-operations.json', reused)
+            print('REUSE COMPLETED', name, flush=True)
+            return folder, audit
         args = (['calibrate', 'run'] if mode == 'calibrate' else [mode])+[str(path)]
         if source is not None:args += ['--source-solo', str(source)]
         args += ['--runtime-manifest', str(runtime), '--wall-seconds', '1800', '--output', str(folder)]
@@ -194,7 +234,7 @@ def run(prepared, runtime, output):
         unique = sorted(set(peaks));inherited = model['neuron']['metadata']['calibration']['threshold']
         thresholds = sorted(set([.9*unique[0], 1.1*unique[-1], inherited]+
                                 [a+.5*(b-a) for a, b in zip(unique, unique[1:])]))
-        _write(output/'jobs'/(name+'-proposal.json'), {'peaks': peaks, 'thresholds': thresholds,
+        _write(output/'jobs'/(name+'-threshold-proposal.json'), {'peaks': peaks, 'thresholds': thresholds,
                 'source_run_manifest_sha256': load(measured/'run-manifest.json')['sha256'],
                 'rule': plan['threshold_grid_rule'], 'selection_verdict': None})
         grid, grid_audit = invoke('calibrate', name+'-calibrate', _signed({
@@ -221,8 +261,10 @@ def run(prepared, runtime, output):
                                              'threshold': final['threshold']}
         rows.append(row);_write(output/'progress.json', rows)
     require(before == inventory(prepared), 'transport_prepared_sources_changed')
+    require(completed_prefix is None or prefix_before == inventory(completed_prefix), 'transport_prefix_source_changed')
     result = {'kind': 'native_model_spec_transport_result', 'schema_version': 1,
               'conditions': rows, 'prepared_primary_unchanged': True,
+              'reused_completed_operations': reused,
               'all_calibrated_transfers_completed': all(r['fresh_frozen_evaluation'] is not None for r in rows),
               'engineering_lt_profile': True, 'statistical_independence_verified': False, 'scientific_verdict': None}
     _write(output/'index.json', result)

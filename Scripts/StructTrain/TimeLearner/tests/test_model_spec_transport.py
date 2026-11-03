@@ -7,7 +7,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from ..model_spec_transport import prepare, requests, BASELINE
+from ..model_spec_transport import prepare, requests, validate_completed_operation, BASELINE
 from ..native_calibration_worker import _signed, audit_run_manifest as audit_calibration
 from ..native_pipeline_worker import audit_run_manifest
 from ..native_evidence import load, EvidenceError
@@ -138,6 +138,23 @@ class ModelSpecTransportRunTest(unittest.TestCase):
             self.assertEqual(calibrated[0]['threshold'], calibrated[1]['threshold'])
             self.assertEqual(calibrated[0]['model_revision'], calibrated[1]['model_revision'])
             self.assertEqual(calibrated[0]['neuron']['graph'], calibrated[1]['neuron']['graph'])
+
+    def test_completed_prefix_reuse_is_explicit_and_rejects_other_jobs_or_runtimes(self):
+        reused = self.index['reused_completed_operations']
+        self.assertEqual({r['name'] for r in reused},
+                         {'Classic-v1-train', 'Classic-v1-export', 'Classic-v1-proposal'})
+        for record in reused:
+            folder = self.root/'runs'/record['name']
+            job, runtime = load(folder/'input/job.json'), load(folder/'process/runtime.json')
+            manifest, _ = validate_completed_operation(folder, record['mode'], job, runtime)
+            self.assertEqual(manifest['sha256'], record['run_manifest_sha256'])
+            self.assertFalse(record['native_rerun'])
+            changed = copy.deepcopy(job);changed['implementation_id'] = 'wrong-implementation'
+            with self.assertRaises(EvidenceError):
+                validate_completed_operation(folder, record['mode'], changed, runtime)
+            changed_runtime = copy.deepcopy(runtime);changed_runtime['runtime_fingerprint'] = '0'*64
+            with self.assertRaises(EvidenceError):
+                validate_completed_operation(folder, record['mode'], job, changed_runtime)
 
 
 if __name__ == '__main__':
