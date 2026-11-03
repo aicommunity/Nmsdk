@@ -450,3 +450,48 @@ writes обнаружил ту же потенциальную ошибку дл
 Native запусков A3 не было; старые completed sources сохраняются. A4 должен
 продолжить именно canonical completed prefix A2, сохранив исходные A3 failure
 packets отдельно. Физика, критерии, бюджеты и source certificates не меняются.
+
+## Production A4: полный модельный контракт подтверждён, runtime gate открыт
+
+На Elder normal и M40 ASan завершены четыре условия Classic/Branch × ModelSpec1/2.
+Все genuine cold Train дали Exact с исходными tolerances; все четыре
+калибровки получили measured calibrated с fresh confirmation. Новый Console
+импортировал полный пакет и сохранил выбранный threshold и graph при четырёх
+полных frozen probes каждого условия. Подготовительные проверки4/4, итоговые5/5
+на обоих workers, без failures/errors/skips. Первые три Classic-v1 операции
+использованы из закрытого A2 без повторного расчёта; представлены20 native
+process records,17 новых в A4. Это не сравнение legacy/V2 контроллеров:
+меняется только вложенная схема ModelSpec в одном native V2 алгоритме.
+
+Подтверждены одинаковые semantic solo/recognition physics и параметры между
+ModelSpec1/2 и между workers. Classic threshold0.004780132099175549,
+Branch0.009589717471100379. Scope остаётся инженерным двухвходовым LT-профилем
+и заранее объявленной same-matrix парой, не всей матрицей8 паттернов.
+Научной independent Test/8-class selectivity эти данные не доказывают.
+
+Proofs a4344242c4cbbc8df7d3795ab5176c7dd694c6d6 и
+f1bdaeff07315235346fbf829e04161a9b51376a опубликованы и объединены в feature
+через --no-ff. Независимо проверены2301/2302 members,299 source hashes и
+текущая remote reachability всех7 исходных children. Объём primary archives
+15215180/13680940 bytes; PNG/SVG/PDF не добавлены.
+
+Исходные bundle NOT_ACCEPTED сохранены: runtime directory guard обнаружил
+18 изменённых EventsLog paths. Отдельный readback и независимая проверка
+подтвердили только17 новых owned PID logs и alias, неизменность executable,
+libraries/resources и отсутствие других directory changes. Это не позволяет
+назвать полный runtime immutable и не закрывает целиком этапы4/5.
+
+Первый Console logging fix d6f46afe9 собран и реально выполнен на обоих workers:
+4 preflight и4 calibrated frozen replays дали те же модели/каждый sample,
+три early refusal cases прошли, simultaneous duplicate дал один0 и один2.
+Но glog всё ещё писал в runtime, reserved destination оставался пуст:
+штатный Rdk пишет в GetWorkLogDir, а UApplication::Init безусловно стирал
+ранее заданный WorkDirectory. Этот попытка остаётся NOT_ACCEPTED.
+
+Подготовлена общая Rdk feature0e70cf07ddc52f6af81ac0b291e299434925319c:
+Init сохраняет явно установленный рабочий каталог, при пустом значении
+сохраняет обычный default executable directory. SystemDir остаётся фактическим
+путём executable; ABI/поля/virtual interface не менялись. Console выбирает
+owned output.events-log через штатный SetWorkDirectory до AppCore.Init,
+сохраняя Rdk/EventsLog дочерний путь. Новый joint root5949d850c ещё требует
+серверной проверки; Rdk/develop и root/develop пока не объединяются.
