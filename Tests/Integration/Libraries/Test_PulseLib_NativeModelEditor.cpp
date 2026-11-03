@@ -2854,6 +2854,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     if(withDormantCapacitance)
     {
         ASSERT_TRUE(withCapacitance);
+        Artifact(rig.name+"_before_channel_class_change.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         auto membrane=rig.neuron->template GetComponentL<NPulseMembrane>("Dendrite1_2",true);ASSERT_TRUE(membrane);
         auto image=dynamic_pointer_cast<NPulseChannel>(core.storage->TakeObject(membrane->ExcChannelClassName.GetData()));
@@ -2867,6 +2868,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
         ASSERT_FALSE(rig.neuron->HasOperationFailureSince(marker));
         const auto actual=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_2.ExcChannel",true);ASSERT_TRUE(actual);
         ASSERT_EQ(actual->GetCompClassName(),dormantImage);
+        Artifact(rig.name+"_after_channel_class_build.json",QJsonDocument(NmsdkTools::IdentifyModel(rig.neuron,rig.ports)).toJson());
     }
     NativeCapacitanceCorrection capacitance;
     if(withCapacitance)ASSERT_NO_FATAL_FAILURE(PrepareCapacitanceTransfer(rig,capacitance));
