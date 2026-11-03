@@ -25,6 +25,9 @@ todos:
     status: pending
 isProject: false
 ---
+> Дополнение03.11.2026: это исторический документ кампании. SoftCold/OpenGaps/T2/T4 shell launchers удалены из текущего дерева; их исходники доступны в Bin commit `39d811e5e0798eecf124f32356c9fc6edbe4538a` по прежнему пути. Полный retrieval manifest: `Docs/StructTrain/TimeLearner/script_migration.json`. Измерения и прежние выводы ниже сохранены; старые команды не являются инструкцией нового запуска.
+
+
 
 # План проверок и исправлений (детализация код / конфиги / доки)
 
@@ -409,7 +412,7 @@ Gate: `phase8_tiprmin_gate.py` — `prepare_test` L263+, `main` prepare L439–4
 
 Повтор C1 «exited» / classic eps-затронутых из § SoftCold wave C auto — если inventory P0 показал неполный bundle.
 
-Запуск: `posttune_verify.py --case <id>`; batch-обёртка [`softcold_c_batch.sh`](Bin/Configs/SpikeSamples/StructTrain/scripts/softcold_c_batch.sh) — только если не тащит salvage; иначе последовательный цикл.
+Запуск: `posttune_verify.py --case <id>`; batch-обёртка [`softcold_c_batch.sh`](https://github.com/aicommunity/Nmsdk-Bin/blob/39d811e5e0798eecf124f32356c9fc6edbe4538a/Configs/SpikeSamples/StructTrain/scripts/softcold_c_batch.sh) — только если не тащит salvage; иначе последовательный цикл.
 
 ### 5.2 Обновление реестров
 

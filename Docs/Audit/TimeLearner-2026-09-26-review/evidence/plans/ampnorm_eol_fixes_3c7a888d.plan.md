@@ -1,5 +1,8 @@
 # План: AmpNorm / EOL — исправление сходимости Train
 
+> Дополнение03.11.2026: это исторический документ кампании. SoftCold/OpenGaps/T2/T4 shell launchers удалены из текущего дерева; их исходники доступны в Bin commit `39d811e5e0798eecf124f32356c9fc6edbe4538a` по прежнему пути. Полный retrieval manifest: `Docs/StructTrain/TimeLearner/script_migration.json`. Измерения и прежние выводы ниже сохранены; старые команды не являются инструкцией нового запуска.
+
+
 Статус: **pending** (исполнение не начато; пересмотрен по ре-аудиту `db7c9133`, сверка агентом 2026-10-03).  
 База: [SOFTCOLD_CONVERGENCE_AUDIT.ru.md](SOFTCOLD_CONVERGENCE_AUDIT.ru.md) (49/49 = **8 PASS / 41 FAIL**; D=22, E=6, B=7, A=3, C=1, G=2; N пересекает E).  
 Код: `Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.cpp` (+ Branch twin).  
