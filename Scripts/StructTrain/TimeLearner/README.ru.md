@@ -1,6 +1,22 @@
 # Поддерживаемый пакет TimeLearner
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
+
+`stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
+создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
+входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).
+
+`n1-protocol-study prepare/run/analyze/report` — заранее объявленная проверка двух
+сохранённых N1-кандидатов при фиксированных порогах, разных порядке, Reset и
+полных окнах. Это same-matrix candidate probe без повторного обучения или
+подбора порога; не independent Test. [Протокол и ограничения](../../../Docs/StructTrain/TimeLearner/N1ProtocolRobustness.ru.md).
+Для `run SOURCE_BUNDLE --runtime-manifest ORIGINAL_RUNTIME.json --source-evidence FULL_SHA --output NEW_DIRECTORY`
+обязательны исходный runtime и полный Git SHA доказательства. `analyze STUDY --output NEW.json`
+повторно проверяет полные данные и пересчитывает метрики. Серверная приёмка этой
+новой серии пока не завершена; запуск не означает успешный scientific verdict.
+`report STUDY --output NEW_CACHE` строит все временные графики сом и фактических
+входных импульсов, overview/zoom и общее оглавление условий; полный cache хранится на M40.
+
 Import не запускает эксперименты. Реализованы `inventory`, native-подмножество
 `analyze`, `report`, `bundle`, `publish`, `history resolve` и анализ измерений
 `calibrate run/select/confirm`, owned `train/export/evaluate` и portable
