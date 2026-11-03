@@ -343,3 +343,22 @@ ISI[.01,.03],L0=1,Rs0=86MΩ,L=1..3/Rs=43..86MΩ,depth4,80 candidates.
 фатальной проверкой certificate, чтобы такой отказ сохранял состояние поиска.
 Это только observability change, пока не собранный на сервере; активные SDK
 не меняются. ASan A1 на момент первого normal readback ещё выполнялся.
+
+ASan A1 затем завершился:4/4 failures по той же precondition,324.753s,
+без ошибок интеграции/сообщений о memory error в проверенных test failures.
+Это не общий ASan pass: тесты остаются failed. Normal proof
+470a9251af14e50f47e89815edafe5b6d7471513 и ASan proof
+29da1f5bc1dfdd401d8bceb97cc7650f537dd5b5 опубликованы. Независимо сверены
+154/153 members,431 точных hashes исходников, реальные XML failure messages,
+libasan mapping ASan и прежние runtime до/после. Калиброванных пакетов и
+transfer readbacks в архивах нет. Оба reader-worker закрылись prerequisite
+refusal; четыре reader-теста не запускались и успешными не считаются.
+
+Следующая проверка должна использовать повторение точного опубликованного
+положительного N1 production job с изменением только model.schema_version2 /
+initial_threshold1 и соответствующий schema1 контроль. Реальные source
+declarations и storage definitions берутся из Git primary, не из короткого
+LearnedBoundary. Полная CLI-цепочка train→export→measured calibration→fresh
+evaluation должна оставлять действительный source-case и полный calibration
+proof. Исходные допуски и CapturedPerInput сохраняются; новая постановка
+декларируется отдельно и не заменяет нынешние отрицательные результаты.

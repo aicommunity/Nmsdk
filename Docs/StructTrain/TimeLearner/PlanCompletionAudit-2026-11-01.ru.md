@@ -472,3 +472,16 @@ stock stopped diagnostic ожидает завершения этого owned п
 два текущих native задания работали. Причина нехватки места не подменяется
 диагнозом SSH. Новые тяжёлые отчёты размещаются на Data; primary/model/history
 не удалены. Исходная классификация этапов остаётся:0 завершён,1–12 частичны.
+
+Дальнейший full-calibrated-package gate04.11 выявил отказ ещё до калибровки:
+на обоих workers4/4 cases завершили Train maximum_sweeps_exhausted, включая
+оба исходных schema1 контроля. Доказательства470a9251af14e50f47e89815edafe5b6d7471513
+и29da1f5bc1dfdd401d8bceb97cc7650f537dd5b5 опубликованы; все154/153 members и
+431 hashes исходников проверены, фактический ASan mapping сохранён.
+Подтверждённый физический archive18 gate этим не отменяется, но calibrated
+transport не выполнен. Причина неверного выбора контроля: короткий endpoint
+LearnedBoundary с ISI.08 не является ранее Exact production N1 job с ISI.03
+и другой областью поиска. Нужен точный schema1/schema2 production replay;
+увеличение tolerances или подмена отсутствующего source certificate исключены.
+CalibratedModelSpec2.progress.json фиксирует закрытые workers, prerequisite
+reader refusals и оставшуюся задачу. Изменения остаются feature/WIP.
