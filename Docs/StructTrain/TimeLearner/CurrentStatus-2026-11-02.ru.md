@@ -1,3 +1,22 @@
+# Уточнение configured probe ownership после H11
+
+H11 полностью выполнил209 cases:207 passed, два configured C-history cases
+остались неуспешными. Сохранённая диагностика установила pre-Train конфликт:
+queued external probe пересекается с automatic BindNativeTrainingCapacitance;
+training получает invalid_model/training_capacitance_read_during_probe ещё
+до начала сессии. Это уточняет прежнюю гипотезу о frozen evaluation.
+
+В обоих learner подготовлено условие законной передачи управления: automatic
+Train ожидает завершения пробы и чтения её результата (AtEditBoundary).
+Исправление требует адресных и полных normal/ASan проверок; пока не принято.
+Бюджеты/допуски/физика не увеличены и не ослаблены.
+
+Принятый develop3bfb72a1 /Pulse027070e8 остаётся scoped auto-owner/transport
+43 native /26 readers normal и ASan; recursive closure17a4f61d сверяет7 children.
+[Приёмка C0](C0Acceptance-2026-11-03.ru.md). Полные этапы4/5/7 не закрыты,
+полностью принят только исходный этап0. Schema3 API и этот fix не принимаются
+одним принятым transport corpus. Ниже сохранена хронология прежних выводов.
+
 # Уточнение 03.11: полный результат H9b, отказ H10, следующий baseline
 
 Связь через Automats2 восстановлена и проверена SSH к Elder. H9b завершён:
