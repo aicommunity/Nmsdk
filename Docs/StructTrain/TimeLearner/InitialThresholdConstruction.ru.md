@@ -236,3 +236,31 @@ build/runtime не создавались, расчётов не было. По�
 и12 CPU этот owned waiter остановлен с сохранением superseded.json, чтобы
 не откладывать независимую однопоточную сборку до конца многочасового H21.
 A2 использует новые каталоги; прежние сведения не удаляются.
+
+## Дополнительный native contract: сохранение последующего значения порога
+
+Добавлены четыре адресных теста Classic/Branch ×2000/20000Hz в существующий
+Test_PulseLib_InitialThreshold.cpp. Декларация native-initial-threshold-v2.json
+содержит18 cases; прежняя v1 с14 cases сохранена. Текущий ASan a2 с rootddfe
+выполняет прежние14 и не считается проверкой новых четырёх.
+
+Fixture строит реальный stock NSPNeuronGen без LT с ModelSpec2.initial_threshold100,
+затем между измерениями явно меняет единственный LTZone threshold на0.005.
+Это idle instance edit; state_kind=model_spec, training.status=not_trained,
+calibration.status=fixed. Сертификат или результат подбора порога не создаются.
+Полный ModelArchive с image closure и DatasetSnapshot импортируется в новый
+owner, который до замены действительно имел construction threshold100.
+Применяются common CommitNativeLearnerChildren и public AdoptNativeModel:
+обновляются штатные child aliases, а не сохраняются старые указатели.
+
+Проверяются весь semantic graph, фактический0.005 после Build/Init/Reset,
+неизменность clock при переносе и prototype0.0117. Реальный root scheduler
+рассчитывает оба дерева; первые60ms штатной пачки (до второго импульса) должны
+дать одинаковые фактические input, soma и LTZone output traces. Ненулевой
+input/response и finite samples обязательны; это проверка физического переноса,
+не обучение на одиночном импульсе и не модель динамического checkpoint.
+Исходный archive записывается до paired run, чтобы сохранить контекст отказа.
+
+Новые4 ещё не собраны/не выполнены. Их необходимо проверить на серверах;
+продукционный код Pulse541 пока не изменён. Даже успешный физический roundtrip
+не заменяет отдельный calibrated-recognition-state roundtrip ModelSpec2.
