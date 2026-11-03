@@ -228,4 +228,64 @@ TEST(CapacitanceContexts, CursorInventoryIsBoundedBeforeContextCopiesAndDomainEx
     EXPECT_EQ(session.Reason(),"capacitance_cursor_inventory_budget_exhausted");EXPECT_FALSE(session.Certificate());
 }
 
+TEST(CapacitanceContexts, MinimalContextBudgetMeasuresANonUnitScale)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        const auto protocol=Protocol(2,routing);auto cfg=ContextConfig(normalization);
+        cfg.maximumCandidatesPerInput=2;cfg.capacitanceSearch->maximumContexts=2;
+        BoundedTrainingSession session(References(protocol),cfg,{{2,1,10.},{1,1,10.}},
+            normalization==Normalization::TipResistance,ContextC0());
+        DriveTraining(session,protocol,{},[&](const auto& action) {
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+            d.baseModelRevision=action.baseModelRevision;d.previewModelRevision="scope/"+std::to_string(SelectedScale(action.capacitance));
+            d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=d.maximumResistance=10.;
+            d.sourceAmplitude=1.;d.capacitance=action.capacitance;return d;
+        });
+        EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+            return e.capacitance && SelectedScale(e.capacitance)!=1.;
+        }));
+        EXPECT_NE(session.Status(),TrainingStatus::Exact);
+    }
+}
+
+TEST(CapacitanceContexts, MinimalContextBudgetKeepsARealC0ResetForWarmCorrections)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        const auto protocol=Protocol(2,routing);auto cfg=ContextConfig(normalization);
+        cfg.maximumCandidatesPerInput=2;cfg.capacitanceSearch->maximumContexts=2;
+        auto initial=ContextC0();initial.membraneScales["Dendrite1_2"]=1.1;
+        BoundedTrainingSession session(References(protocol),cfg,{{2,1,10.},{1,1,10.}},
+            normalization==Normalization::TipResistance,initial);
+        DriveTraining(session,protocol,{},[&](const auto& action) {
+            ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+            d.baseModelRevision=action.baseModelRevision;d.previewModelRevision="scope/"+std::to_string(SelectedScale(action.capacitance));
+            d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=d.maximumResistance=10.;
+            d.sourceAmplitude=1.;d.capacitance=action.capacitance;return d;
+        });
+        EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),[](const auto& e) {
+            return e.capacitance && SelectedScale(e.capacitance)==1.;
+        }));
+        EXPECT_EQ(session.Capacitance()->membraneScales.at("Dendrite1_99"),.8);
+    }
+}
+
+TEST(CapacitanceContexts, EmptyBranchIntervalsDoNotCreateRedundantDomainContexts)
+{
+    const auto protocol=Protocol(2,ProbeRouting::BranchSoloBurst);auto cfg=ContextConfig(Normalization::TipResistance);
+    cfg.bounds[0].minimumLength=cfg.bounds[0].maximumLength=1;
+    BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},true,ContextC0());
+    std::size_t domains=0;
+    DriveTraining(session,protocol,{},[&](const auto& action) {
+        ++domains;ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+        d.baseModelRevision=action.baseModelRevision;d.previewModelRevision="empty-interval";
+        d.geometry=action.parameters;d.inputIndex=action.inputIndex;d.minimumResistance=d.maximumResistance=10.;
+        d.sourceAmplitude=1.;d.capacitance=action.capacitance;return d;
+    });
+    EXPECT_EQ(domains,1u);EXPECT_NE(session.Status(),TrainingStatus::Exact);
+}
+
 }
