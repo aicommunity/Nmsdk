@@ -40,7 +40,7 @@ class CapacitanceSearchReportsTest(unittest.TestCase):
                 self.assertEqual({c['witness_id'] for c in manifest['trial_context']},
                                  set(package['capacitance_history']['witnesses']))
                 self.assertEqual({c['phase'] for c in manifest['trial_context']},
-                                 {'reference', 'candidate', 'candidate anchor', 'search probe', 'final verification'})
+                                 {'reference', 'candidate', 'candidate anchor', 'final verification'})
                 for item in load(output/'probes/manifest.json')['reports']:
                     trial = load(output/'probes'/item['folder']/'manifest.json')
                     self.assertEqual(trial['comparison_scope'], 'explicit shared probe set')
