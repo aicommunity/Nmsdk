@@ -385,3 +385,11 @@ H5 использует прежний immutable snapshot и не подтвер
 N0/N1 плюс18 independent bridge/domain readers; после полного закрытия owners H5
 и проверки его evidence. Не включать C-trim/service до versioned history schema3
 с физическими witnesses каждого candidate/repeat/final и независимым reader.
+
+H6 queued на Elder: source36af2933e738b83fce25070c083f41cc810a8b11,
+Pulse9490b7a73ad3b1bbb05c4c025af866fce667a0ea, supervisor410902/325014434,
+publisher410903/325014434. Readbacks s07-capacitance-witness-normal-h6 и
+s07-capacitance-witness-publication-normal-h6; runtime отдельный. До verified
+H5 PASS183/52 и закрытия обоих его owners H6 не выполняет checkout/build.
+Далее дополнительно проверяет actual source/build users. При провале prerequisite
+новый native run не запускается. Текущий H5 и ASan G3 не перезапущены.
