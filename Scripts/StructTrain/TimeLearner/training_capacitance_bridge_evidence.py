@@ -24,7 +24,7 @@ def _audit(record):
             and all(type(f) is dict for f in frames)
             and [f.get('phase') for f in frames] == list(PHASES),
             'incomplete_training_capacitance_bridge_phases')
-    audits, prior_baseline, previous_scales = [], None, None
+    audits, prior_baseline, previous_scales, previous_limit = [], None, None, None
     inventory_fields = ('channels', 'channel_classes', 'channel_physics', 'channel_origins')
     for frame in frames:
         require(set(frame) == {'phase', 'native_state', 'controller_parameters', 'model', 'storage_images'},
@@ -63,6 +63,7 @@ def _audit(record):
             require(number(value) > 0 and 1-limit <= value <= 1+limit,
                     'invalid_training_capacitance_bridge_scale')
         if prior_baseline is not None:
+            require(limit == previous_limit, 'training_capacitance_bridge_policy_changed')
             require({k: v for k, v in baseline.items() if k not in (*inventory_fields, 'sha256')}
                     == {k: v for k, v in prior_baseline.items() if k not in (*inventory_fields, 'sha256')},
                     'training_capacitance_bridge_baseline_recaptured')
@@ -70,7 +71,7 @@ def _audit(record):
                 require(all(baseline[field].get(p) == v for p, v in prior_baseline[field].items()),
                         'training_capacitance_bridge_witness_lost')
             require(set(previous_scales) <= set(scales), 'training_capacitance_bridge_history_lost')
-        prior_baseline, previous_scales = baseline, scales
+        prior_baseline, previous_scales, previous_limit = baseline, scales, limit
     before, after = frames[3], frames[4]
     require(before['model'] == after['model'] and before['native_state'] == after['native_state']
             and before['controller_parameters'] == after['controller_parameters'],

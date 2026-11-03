@@ -77,6 +77,17 @@ class TrainingCapacitanceBridgeEvidenceTest(unittest.TestCase):
                 with self.assertRaisesRegex(EvidenceError, '^invalid_capacitance_images$'):
                     audit_training_capacitance_bridge(record)
 
+    def test_consistently_resigned_policy_change_is_detected(self):
+        for path, original in self.records:
+            with self.subTest(path=path.name):
+                record = copy.deepcopy(original); frame = record['phases'][3]
+                state = frame['native_state']
+                state['maximum_relative_change'] = .3
+                frame['controller_parameters']['maximum_relative_change'] = .3
+                state['sha256'] = canonical_model_sha256({k: v for k, v in state.items() if k != 'sha256'})
+                with self.assertRaisesRegex(EvidenceError, '^training_capacitance_bridge_policy_changed$'):
+                    audit_training_capacitance_bridge(record)
+
     def test_resigned_physical_capacity_change_is_detected(self):
         for path, original in self.records:
             with self.subTest(path=path.name):
