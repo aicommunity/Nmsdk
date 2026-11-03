@@ -305,3 +305,8 @@ negative fixture. [Источники, ограничения и proofs](DocsPyt
 
 Плановые инструменты20 октября: ещё16 historical files удалены;64 records,
 production Git-приёмка всех64 записей и restored-path negative fixture пройдена на обоих workers. [Причины и точные источники](PlanToolRetirement.ru.md).
+
+Следующий независимый кандидат:17 исторических Bin AsymRm pilot/finish/scale/
+sweep launchers удалены, восемь отчётов помечены историческими. Manifest81
+records (79 retired +2 moved), server metadata приёмка пока pending.
+[Исходники, review и ограничения](AsymRmLauncherRetirement.ru.md).
