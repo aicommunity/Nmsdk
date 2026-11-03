@@ -16,7 +16,7 @@ import zlib
 from pathlib import Path
 from typing import Any
 
-AUDITOR_VERSION = 6
+AUDITOR_VERSION = 7
 
 
 class EvidenceError(ValueError):
@@ -301,7 +301,7 @@ def validate_search_history_availability(summary: dict[str, Any]) -> bool | None
     retained = summary.get("search_history_retained")
     if "search_history_retained" in summary:
         require(type(retained) is bool, "invalid_search_history_marker")
-    if summary.get("schema_version") in (2, 3):
+    if summary.get("schema_version") in (2, 3, 4):
         require(type(summary.get("candidate_repeat_groups")) is list, "invalid_candidate_repeat_groups")
     if retained is False:
         require(all(summary[name] == [] for name in ("candidates", "rejections", "resistance_domains")) and
@@ -315,10 +315,18 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
     """Bind the declared repeat factor to evidence, without replacing the native codec."""
     schema = configuration.get("schema_version")
     require(configuration.get("kind") == "timelearner_native_cold_configuration" and
-            type(schema) is int and schema in (1, 2, 3), "unknown_repeat_configuration_schema")
+            type(schema) is int and schema in (1, 2, 3, 4), "unknown_repeat_configuration_schema")
     require(type(summary.get("schema_version")) is int and summary["schema_version"] == schema,
             "configuration_summary_repeat_schema_mismatch")
     search, measured = configuration["search"], summary["configuration"]
+    if schema == 4:
+        from .capacitance_policy import audit_capacitance_search_policy
+        policy = configuration.get('capacitance_search')
+        require(policy == measured.get('capacitance_search'), 'configuration_summary_capacitance_search_mismatch')
+        audit_capacitance_search_policy(policy, configuration=search)
+    else:
+        require('capacitance_search' not in configuration and 'capacitance_search' not in measured,
+                'unversioned_configured_capacitance_search')
     normalization = configuration["model"]["normalization"]
     require(normalization in ("N0", "N1") and
             measured["normalization"] == {"N0": "synapse_count", "N1": "tip_resistance"}[normalization],
@@ -328,12 +336,17 @@ def validate_configured_repeat_policy(configuration: dict[str, Any], summary: di
                 "legacy_configuration_contains_repeat_factor")
         return 1
     repeats = count(search["n0_candidate_repeats"])
-    if schema == 3:
-        history = configuration['capacitance_history']; source = summary['capacitance_history']
+    if schema in (3, 4):
+        history = configuration.get('capacitance_history'); source = summary.get('capacitance_history')
         require(type(history) is dict and set(history) == {'record', 'maximum_relative_change'}
                 and history['record'] is True and number(history['maximum_relative_change']) >= 0,
                 'invalid_configured_capacitance_history')
+        require(type(source) is dict and type(source.get('witnesses')) is dict and
+                type(source.get('capture_witness_id')) is str and source['capture_witness_id'] in source['witnesses'],
+                'missing_configured_capacitance_capture')
         capture = source['witnesses'][source['capture_witness_id']]
+        if schema == 4:
+            audit_capacitance_search_policy(policy, maximum_relative_change=history['maximum_relative_change'])
         require(history['maximum_relative_change'] == capture['controller_parameters']['maximum_relative_change']
                 and 1 <= repeats <= 128 and (normalization == 'N0' or repeats == 1)
                 and count(measured['n0_candidate_repeats']) == repeats, 'configuration_summary_capacitance_policy_mismatch')
@@ -544,9 +557,12 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
                            origin_stimulus_id: str, *, require_certificate: bool = True) -> dict[str, Any]:
     """Audit physical C contexts before reusing the measured residual validator."""
     version = summary.get('schema_version')
-    require(type(version) is int and version in (1, 2, 3), 'unknown_training_summary_schema')
+    require(type(version) is int and version in (1, 2, 3, 4), 'unknown_training_summary_schema')
     c_fields = {'capacitance_history', 'actual_capacitance_witness_id', 'accepted_capacitance'}
-    if version != 3:
+    require(type(summary.get('configuration')) is dict, 'missing_training_summary_configuration')
+    if version != 4:
+        require('capacitance_search' not in summary['configuration'], 'unversioned_training_capacitance_search')
+    if version not in (3, 4):
         require(not c_fields.intersection(summary) and
                 all('capacitance_witness_id' not in r for r in summary.get('references', [])) and
                 all(not {'capacitance', 'capacitance_witness_id'}.intersection(c)
@@ -559,8 +575,15 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
     from .training_capacitance_history import audit_training_capacitance_history
     import copy
     physical = audit_training_capacitance_history(summary, packets)
+    if version == 4:
+        from .capacitance_policy import audit_capacitance_search_policy
+        source = summary['capacitance_history'];capture = source['witnesses'][source['capture_witness_id']]
+        audit_capacitance_search_policy(summary['configuration'].get('capacitance_search'),
+            maximum_relative_change=capture['controller_parameters']['maximum_relative_change'],
+            configuration=summary['configuration'])
     require(physical['actual_state_verified'], 'unverified_training_summary_actual_capacitance')
     projected = copy.deepcopy(summary)
+    if version == 4:projected['configuration'].pop('capacitance_search')
     for field in c_fields:
         projected.pop(field, None)
     for r in projected['references']:
@@ -576,7 +599,7 @@ def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str,
         require(projected['candidate_repeat_groups'] == [], 'unexpected_single_repeat_groups')
         projected.pop('candidate_repeat_groups');projected['configuration'].pop('n0_candidate_repeats')
     measured = _audit_training_summary(projected, packets, origin_stimulus_id, require_certificate=require_certificate)
-    return {**measured, 'training_summary_schema': 3, 'capacitance_history': physical}
+    return {**measured, 'training_summary_schema': version, 'capacitance_history': physical}
 
 
 def main() -> int:
