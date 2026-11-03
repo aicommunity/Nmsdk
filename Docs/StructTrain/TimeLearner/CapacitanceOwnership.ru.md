@@ -468,3 +468,27 @@ transport N0 уже зарегистрировали тот же fault-only fact
 обязателен; source review не считается runtime-подтверждением.
 Bridge H2 (326560/324332166) корректно прекратился на prerequisite G1 до
 source/build mutation. ASan C3 на M40 продолжает работу независимо.
+
+
+## G2 native43 PASS; reader negative control исправляется отдельно
+
+Root496a80d7190cafcc1e96329ee3c8e2b17cb40114 выполнил43/43 native cases.
+Evidence ccfa43c1fea90567574aa3061eaa2a902c37710d проверен:1062 members,
+7796699bytes. Readers26 выполнились с4 failures только в missing_effective_scale.
+В dormant4 этот контроль заменял active map на unit1, оставляя learned dormant1.1
+нетронутой. Удаление implicit unit entries не меняет физику и разрешено codec;
+это не доказательство пропущенной проверки C₀. Combined gate не принят.
+
+Контроль теперь удаляет фактический non-unit path: active — ожидается точная
+причина incomplete_or_changed_capacitance_scales; declared single dormant —
+invalid_dormant_capacitance_scales. State/package digest пересчитываются,
+случайный stale hash не может дать успех. Native algorithm, serializer и
+численные допуски не меняются. Expected dormant inventory читается из actual
+native specification, вместо скрытого TIMELEARNER_CAPACITANCE_DORMANT_CONTROLS.
+Частичное объявление dormant4 отвергается; count primary packages остаётся строгим.
+
+Нужен reader-only gate26 на фактических G2 artifacts с новым Python snapshot и
+проверкой неизменности C++/CMake/gitlinks относительно496a80d719. Новый numerical
+run ради исправления Python negative control не требуется. Прежний G2 verdict
+остаётся not_accepted; новая проверка должна иметь свой scorer root и provenance.
+H3 и зависящие от него jobs не считать выполненными из-за успешного native43.
