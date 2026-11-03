@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_full_capacitance_unit_build_failure",
+  "schema_version": 1,
+  "root": "629876c139e4069a74af9edfc6ce5fd903f6d1e5",
+  "pulselib": "31f27afd43e6ef3669dec662e5bec43fb67bb318",
+  "worker": "asan",
+  "execution": "process_error",
+  "assertion_status": "not_assessed",
+  "expected_tests": 84,
+  "observed_tests": 0,
+  "reason": "strict compiler caught four existing unbraced conditional GTest assertions; no numerical tests executed",
+  "records": [
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "compile-request.json",
+      "bytes": 17663,
+      "sha256": "85059faeb3dbc870b6a3bdc51f1ca419ea6cd36cdf24f89c9c0c5152975f9f62"
+    },
+    {
+      "path": "compile-terminal.json",
+      "bytes": 22,
+      "sha256": "b9f87d4ceb14f54a8787da14c5985aa499e13197fe39c8f0f4ecf87e7a01957e"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 10675,
+      "sha256": "62446f08ee3833ed50653ed40e5f9b2c8347dcc4d3664f1a3512d3ae09470761"
+    },
+    {
+      "path": "exception.json",
+      "bytes": 347,
+      "sha256": "9caec02f194b09fc0cefb7cc75a54529fc5175dcd2e96882e728d1043a72d52d"
+    },
+    {
+      "path": "job.py",
+      "bytes": 8809,
+      "sha256": "dbfaa902c2ee6a2e9d06dc29e2ca1edfd15d60855bfcac0ccf588fef804cb089"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 51,
+      "sha256": "05165ee1debf6a0c794c05b7e146f4069bc1d99f912953304a899efa90c4c4b8"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 424,
+      "sha256": "cf2cc2217244f64c570b50d155965a5c64cb7e56f1b9f9828ddca4195e323d66"
+    }
+  ],
+  "archive_sha256": "7b63ddead4e9ef2d5e5843c02082fd9cc5539b914946c512765f0b007b9216f0",
+  "scientific_verdict": null
+}
