@@ -10,7 +10,8 @@ import unittest
 from ..condition import ConditionSpec
 from ..native_evidence import EvidenceError, load
 from ..n1_protocol_robustness import _signed, _write
-from ..stock_threshold_study import _condition, audit
+from ..stock_threshold_study import _condition, audit, audit_final_stock
+from ..model_identity import canonical_model_sha256
 
 
 class StockThresholdStudyTest(unittest.TestCase):
@@ -54,3 +55,50 @@ class StockThresholdStudyTest(unittest.TestCase):
             shutil.copyfile(self.root/'index.json', root/'index.json')
             with self.assertRaisesRegex(EvidenceError, 'stock_pair_incomplete_matrix'):
                 audit(root)
+
+
+class StockFinalPhysicsTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        value = os.environ.get('TIMELEARNER_STOCK_COLD_PHYSICS')
+        if not value:
+            raise unittest.SkipTest('requires real cold stock packages and initial graph readbacks')
+        cls.cases = []
+        for folder in sorted((Path(value)/'runs').iterdir()):
+            native = folder/'native'
+            execution = load(native/'execution.json')
+            package = load(native/execution['package_path'])
+            cls.cases.append((load(native/'initial-state.json')['identity'], package['neuron']['graph']['identity']))
+        if len(cls.cases) != 2:
+            raise AssertionError('requires both actual stock topologies')
+
+    def changed(self, mutation, reason):
+        for initial, final in self.cases:
+            changed = deepcopy(final);mutation(changed['model'])
+            changed['sha256'] = canonical_model_sha256(changed['model'])
+            with self.assertRaisesRegex(EvidenceError, reason):
+                audit_final_stock(initial, changed)
+
+    def test_actual_growth_and_individual_resistance_edits_preserve_stock_physics(self):
+        for initial, final in self.cases:
+            result = audit_final_stock(initial, final)
+            self.assertFalse(result['lt_membrane'])
+            self.assertTrue(result['feedback_connections_unchanged'])
+
+    def test_rehashed_added_lt_membrane_is_rejected(self):
+        def add(model):
+            node = deepcopy(next(n for n in model['nodes'] if n['path'] == '$.Soma1'))
+            node['path'] = '$.LTMembrane';model['nodes'].append(node)
+        self.changed(add, 'stock_pair_final_profile_changed')
+
+    def test_rehashed_growth_channel_capacity_drift_is_rejected(self):
+        def edit(model):
+            node = next(n for n in model['nodes'] if n['path'] == '$.Dendrite1_1.ExcChannel')
+            node['parameters']['Capacity']['data']['value'] = '3df49da7e361ce4c'
+        self.changed(edit, 'stock_pair_final_channel_physics_changed:Capacity')
+
+    def test_rehashed_feedback_destination_change_is_rejected(self):
+        def edit(model):
+            edge = next(b for b in model['bindings'] if b['source'] == '$.LTZone:Output')
+            edge['target'] = '$.Dendrite1_1:InputFeedbackSignal'
+        self.changed(edit, 'stock_pair_final_ltzone_connections_changed')
