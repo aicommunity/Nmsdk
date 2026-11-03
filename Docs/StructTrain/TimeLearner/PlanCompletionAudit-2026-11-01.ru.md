@@ -1,3 +1,12 @@
+## Дополнение03.11: ещё11 исторических Bin launchers удалены
+
+SoftCold/OpenGaps/T2/T4 launcher retirement прошёл production migration105 и
+restored-launcher negative gate на обоих workers. Все20 архивных members и380
+source hashes каждого пакета независимо сверены. Обе skill/reference копии
+согласованы с root CLI, status axes и текущим протоколом; исторические registry
+таблицы сохранены. [Источники и SHA](SoftColdLauncherRetirement.ru.md).
+Это продвижение9/12. Полная migration и исходные этапы1–12 остаются частичными.
+
 ## Дополнение03.11: исторические запускатели Reports
 
 Удалены13 Reports job.py/runner.sh без wrappers;94 migration records прошли
