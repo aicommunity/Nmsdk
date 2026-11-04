@@ -1,0 +1,160 @@
+{
+  "kind": "timelearner_prerequisite_failure",
+  "label": "s06-shared-recognition-normal-a1",
+  "reason": "disk/memory preflight before reserve refused declared6GiB free-disk threshold; source4f3/Pulsef6 not compiled",
+  "members": {
+    "worker/queue.json": {
+      "bytes": 2219,
+      "sha256": "015cd69875e71cdb92ae9ef009c93ed71eb6d1f8ee4dc442be663aac5798da4b"
+    },
+    "worker/baseline-prerequisite.json": {
+      "bytes": 2730,
+      "sha256": "a8ee9b4ebe7199451dcefaa7b9ad00d11e8e6fe860983c9f7f7a3ad1f21086d9"
+    },
+    "worker/owned-supervisor.json": {
+      "bytes": 283,
+      "sha256": "878a51834b274af07a106784536a76476e20ea850656d8a4eccb78029300e5df"
+    },
+    "worker/previous-lifecycle-prerequisite.json": {
+      "bytes": 2703,
+      "sha256": "63ca7f6070c2b86a541f2b3adf19ca1c5e83e08e7c9aac0649a8fd1ced2d621d"
+    },
+    "worker/producer.py": {
+      "bytes": 16377,
+      "sha256": "6130c0f2a75cf54c35a2241481beb411bc21d4fe6582670c76c7f3dcec74e1f7"
+    },
+    "worker/source-hashes.json": {
+      "bytes": 41355,
+      "sha256": "0526f96aebbb50ef38e43adc31ae362e169e4b0f037306e6edf8fcde272422a4"
+    },
+    "worker/exception.json": {
+      "bytes": 380,
+      "sha256": "55b09bbc3569d23fa5f28c8f1b55725f80b752202b594391c5b90e42de2e9d2f"
+    },
+    "worker/queue-prerequisite.json": {
+      "bytes": 1938,
+      "sha256": "f5c57eb56351f8d045fccbdd65ccc98944cd433af534abdeaa54008eb1af084d"
+    },
+    "worker/dependency-history.jsonl": {
+      "bytes": 1712,
+      "sha256": "9416fece88150adc0da108eb6bcd465b2af3bb3c350ab7dcbc8c9222120c1166"
+    },
+    "worker/terminal.json": {
+      "bytes": 184,
+      "sha256": "091a9d6c7be9873dc8d444a8a4e83f8c52bda067e9d2170e307f30dfe6ef12c4"
+    },
+    "controller/worker-final-state.json": {
+      "bytes": 1299,
+      "sha256": "00cfaa770e0a27f7bc79f82c4e406b5891dc964cdb38d2afb60863e3e2d40760"
+    },
+    "controller/request.json": {
+      "bytes": 764,
+      "sha256": "ae19e46be4cde524f9ece219f6c3c1dbf0597f43fbbb84ad1622f3c69943ba8a"
+    },
+    "controller/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "controller/lease-not-created.json": {
+      "bytes": 58,
+      "sha256": "b4fa2ab65856a11ea2f00869909e8c4c82a4d765b2b5d3b597f3f67a9d93f4ec"
+    },
+    "controller/owned-supervisor.json": {
+      "bytes": 80,
+      "sha256": "f39a20b1e36e9eef4acb6542c7177709b2623b0fa289d27ab3748d4b171c79b7"
+    },
+    "controller/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "controller/limits-readback.json": {
+      "bytes": 1070,
+      "sha256": "d5216da34c94852e67a1d48b4221fa4ed9c24cd3faa393b840565893232e92b8"
+    },
+    "controller/stdout.log": {
+      "bytes": 13,
+      "sha256": "73012d43c9cbbf74a20aadc60352126d73f4bb3e81214bb66aef781e3b3ae8da"
+    },
+    "controller/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "controller/ready.json": {
+      "bytes": 44,
+      "sha256": "08d8588be0d340600d26510a6a9f1c65c035b589d6ce67ac77d88eee7abb7c2d"
+    },
+    "controller/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "88802324a7e431299fe56ff306c58e56554ad8cae629d89226468cebc3db9f7c"
+    },
+    "controller/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "controller/closure.json": {
+      "bytes": 1212,
+      "sha256": "7abbe8e88c6a085f959258be73bb9ab420406ddb845e620bc41e33df91393a3d"
+    },
+    "controller/runtime.json": {
+      "bytes": 2816,
+      "sha256": "30f01c56b3d6c5900755b90b9649bdc97c80f64da6e33c6db83b706b3ce3415e"
+    },
+    "fresh-resource-state.json": {
+      "bytes": 1853,
+      "sha256": "166a1f2d6b2dd2b419f33f3f68837fe011e2203b24e01fc8e16f6b3b56a1c72a"
+    }
+  },
+  "archive_bytes": 25596,
+  "archive_sha256": "7a59a3effbb9dd2d6c9c98182104a970fe91d6e988a08c8085be2a8a1157373a",
+  "failed_before_reservation_or_models": true,
+  "resource_state": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s06-shared-recognition-normal-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-normal-a1-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "a31d171d0c074c4d52c36f09219cef2de50b68093d790f028c39c24cd5cc73aa",
+        "unit": "timelearner-d78b7b75-1a2a-43f3-9e90-62a3dd03c3d4.service",
+        "invocation_id": "9cbe129cb506465e833f755a856d78e1",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d78b7b75-1a2a-43f3-9e90-62a3dd03c3d4.service",
+        "initial_main_pid": 2298408,
+        "initial_start_ticks": "338792163",
+        "sha256": "2bb81f6dac9bb5d0ccccaaca9954dc9d008f4e0fcbde21c706ea3d333f4ff99d"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-d78b7b75-1a2a-43f3-9e90-62a3dd03c3d4.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": true,
+    "reservation_state": "not_created",
+    "reservation_token": null,
+    "state": "ready",
+    "reason": "dependency_closed_without_reservation",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}
