@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "state": "queued_not_accepted",
+  "host": "10.245.1.11",
+  "source_root": "71b56cd5b1a0ce877054f9e45bc59f30fc2523c8",
+  "source_directory": "/home/user/timelearner-refactor/source-managed-reconciliation-a1",
+  "outer_pid": 2106288,
+  "worker_pid": 2106304,
+  "worker_start_ticks": "337404060",
+  "readback": "/home/user/timelearner-refactor/readbacks/s10-managed-reconciliation-normal-a1",
+  "predecessor_readback": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a1",
+  "prerequisites": [
+    "actual coordinator8 passed without skips",
+    "whole controller and native units closed",
+    "global predecessor lease released"
+  ],
+  "tests_expected": 7,
+  "new_native_units": 0,
+  "memory_cap_bytes": 536870912,
+  "whole_budget_seconds": 86400,
+  "queue_wait_budget_seconds": 64800,
+  "symlink_severity_aliases_preserved": true,
+  "native_runtime_rebuilt": false,
+  "worker_source_sha256": "8ce0a9abc71d014351b50d1cea95c5044c62324e3789078f5860efa71690f76b",
+  "orchestration_sha256": "12dc9875189df312308ec72ef22f0d34aa690726156e5b9baf67aad259d9bf41",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "pending": [
+    "actual seven-check server execution",
+    "active-controller duplicate adoption control",
+    "worker reboot",
+    "active cancellation",
+    "full fault matrix",
+    "ConditionSpec and queue/publish integration"
+  ]
+}
