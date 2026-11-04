@@ -538,3 +538,11 @@ Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights h
 - 04.11: s03-stopped-resistance-elder-a1 и s03-stopped-resistance-m40-a1 — полный native stopped import, matched Rs controls, compact primary reuse; s03-stopped-resistance-visual-m40-a1 — девять выбранных waveform PNG. Проверка: Docs/StructTrain/TimeLearner/StoppedStateResistanceVerification.json. Один исходный паттерн, без научного verdict.
 
 - 04.11: s03-native-probe-phases-elder-a1 и s03-native-probe-phases-m40-a1 — imported baseline/main interruption,12 jobs и7 readers на worker,2 cold regressions, compact reuse7362 primary files. См. Docs/StructTrain/TimeLearner/NativeProbePhases.ru.md.
+
+
+04.11: [исправленный временной preview stock stopped Train](s11-stock-stopped-title-preview-a4/preview.png)
+и [его provenance](s11-stock-stopped-title-preview-a4/preview.json). Полный trial ID
+больше не обрезан;1920×960, фактический soma potential и входные импульсы.
+Визуально проверено только это изображение. Полный новый80-pair кэш A4 ещё
+формируется на M40; прежний A3 прошёл3 readers, но не принят визуально из-за
+обрезанных заголовков. Это незавершённый Train, не классификационный PASS.
