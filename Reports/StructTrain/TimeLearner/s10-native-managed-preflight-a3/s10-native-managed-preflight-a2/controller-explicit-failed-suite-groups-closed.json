@@ -1,0 +1,82 @@
+[
+  {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-managed-preflight-a2/native-controls/Classic-N0/run/process/contained",
+    "observation": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "c47f0a752cef0e495d244a959f747b273864aeef3ff60d96462161623482fdde",
+        "unit": "timelearner-96276f98-bb01-4e75-b131-e1eb670bfa9b.service",
+        "invocation_id": "6fb0feadbd6744b5a32f7cc3d0de8e21",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-96276f98-bb01-4e75-b131-e1eb670bfa9b.service",
+        "initial_main_pid": 3790852,
+        "initial_start_ticks": "286007079",
+        "sha256": "1ffeee5e7b5d7c1cc97079dfe0ea418c767b564d1264bd58ab085cfc320bebbf"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "oom-kill",
+        "ExecMainCode": "2",
+        "ExecMainStatus": "9",
+        "ControlGroup": "",
+        "MemoryMax": "536870912",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 96276f98-bb01-4e75-b131-e1eb670bfa9b",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "6fb0feadbd6744b5a32f7cc3d0de8e21"
+      },
+      "memory_max": 536870912,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    }
+  },
+  {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-managed-preflight-a2/native-controls/Branch-N1/run/process/contained",
+    "observation": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "03ebd5521879496144354900980b4c4b0b0fd2042286be48ace509abe42928e4",
+        "unit": "timelearner-c7e9d391-68bb-41d8-aed1-845df0bab8c7.service",
+        "invocation_id": "518da389d53d4aa5a54457a59f9b73f4",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c7e9d391-68bb-41d8-aed1-845df0bab8c7.service",
+        "initial_main_pid": 3790665,
+        "initial_start_ticks": "286006399",
+        "sha256": "e43b9796c6d58e91d786c66aef0bc088a7a7d9f2f04ccef5802eb7d2a232e135"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "oom-kill",
+        "ExecMainCode": "2",
+        "ExecMainStatus": "9",
+        "ControlGroup": "",
+        "MemoryMax": "536870912",
+        "TasksMax": "64",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt c7e9d391-68bb-41d8-aed1-845df0bab8c7",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "518da389d53d4aa5a54457a59f9b73f4"
+      },
+      "memory_max": 536870912,
+      "tasks_max": 64,
+      "scientific_verdict": null
+    }
+  }
+]
