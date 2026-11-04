@@ -6,6 +6,22 @@
 создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
 входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).
 
+`phasea-matrix --bin-repository BIN --output NEW.json` извлекает все четыре ISI
+и метки восьми паттернов из точного исторического Bin Git commit. Исторические
+response metrics не импортируются, scheduler/ITI этим не воспроизводятся.
+
+`stock-threshold-study prepare/run/analyze/failure-report` проверяет четыре холодных stock
+условия на одном immutable runtime: Classic/Branch ×0.0117/100. Для100 нужен
+явно поддерживающий ModelSpec2 SDK; это отдельный construction parameter,
+не скрытый legacy knob. [Протокол](../../../Docs/StructTrain/TimeLearner/InitialThresholdConstruction.ru.md).
+
+`stock-stopped-evaluation prepare/run/analyze/report` использует полные фактические
+остановленные модели и восемь исторических паттернов с новым reset-per-trial
+протоколом. Опубликованы32 пробы без нового Train/калибровки,5+6 readers;
+TP/FP здесь означают любой спайк за полное окно2s. Незавершённый Train не становится
+успешным обучением. `report` строит80 trial-soma pairs; render и3 report readers
+пока ожидают серверного выполнения. [Данные, CLI и ограничения](../../../Docs/StructTrain/TimeLearner/StockStoppedEvaluation.ru.md).
+
 `n1-protocol-study prepare/run/analyze/report` — заранее объявленная проверка двух
 сохранённых N1-кандидатов при фиксированных порогах, разных порядке, Reset и
 полных окнах. Это same-matrix candidate probe без повторного обучения или
@@ -383,3 +399,30 @@ Full root SHA и новый output receipt обязательны; для sparse
 архивные программы не исполняются. Это проверка retrieval/absence/replacement,
 не полнота migration и не numerical/runtime parity. Контракт:
 [ScriptMigration](../../../Docs/StructTrain/TimeLearner/ScriptMigration.ru.md).
+# Контроль полного переноса ModelSpec1/2
+
+`python -m Scripts.StructTrain.TimeLearner model-spec-transport prepare REPO --output PREPARED`
+восстанавливает из закреплённого Git-коммита положительное production N1
+задание и его первичные данные, сверяет все hashes и реальные Exact certificates.
+До Train объявляются четыре jobs Classic/Branch × ModelSpec1/2; схема2
+добавляет только construction threshold1. Физика, протокол, bounds и допуски
+сохраняются. Это двухвходовый инженерный LT-профиль, не stock физика августа.
+
+`python -m Scripts.StructTrain.TimeLearner model-spec-transport run PREPARED --runtime-manifest RUNTIME --output RUN`
+выполняет штатные Train/export, измеренное предложение сетки порогов, native
+calibration с fresh confirmation и импорт полного пакета в новый Console
+с frozen target/foil probes. Пара[.01,.03]/[.01,.24] объявлена до Train;
+калибровка same-matrix и не доказывает независимый научный Test.
+Незавершённое обучение и NonSeparable не создают успешный transport verdict.
+
+`--completed-prefix PREVIOUS_RUN` разрешает продолжить только с закрытых
+операций того же job/runtime. Manifest, primary closure и фактический runtime
+проверяются повторно, на Linux проверяется PID/start_ticks. Reuse явно
+фиксируется отдельно от новых native процессов; середина пробы не поддержана.
+# Диагностика границы stock-обучения
+
+`stock-threshold-study failure-report STUDY --output NEW_CACHE` строит графики
+терминальной невалидной пробы и предшествующей валидной пробы того же входа
+для всех четырёх stock-условий. Используются сохранённые JSON/CSV, без запуска
+моделей; все сомы и фактические входные импульсы, общие оси и native zoom.
+[Контракт, проверка волн и ограничения](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md).

@@ -143,6 +143,12 @@ def main(argv: list[str] | None = None) -> int:
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
+    transfer = commands.add_parser("model-spec-transport", help="replay pinned positive engineering N1 jobs, then measure calibration and fresh import")
+    transfer.add_argument("action", choices=("prepare", "run"))
+    transfer.add_argument("source", type=Path, help="Git repository for prepare; prepared declarations for run")
+    transfer.add_argument("--runtime-manifest", type=Path)
+    transfer.add_argument("--completed-prefix", type=Path, help="verified closed operation prefix; never a mid-probe checkpoint")
+    transfer.add_argument("--output", type=Path, required=True)
     study = commands.add_parser("n1-protocol-study", help="probe preregistered N1 thresholds across order/reset/quiet-tail conditions")
     study.add_argument("action", choices=("prepare", "run", "analyze", "report"))
     study.add_argument("source", type=Path)
@@ -152,7 +158,23 @@ def main(argv: list[str] | None = None) -> int:
     stock = commands.add_parser("stock-phasea-preflight", help="build and inspect the stock four-input NSPNeuronGen without LT membrane; no Train")
     stock.add_argument("source", type=Path)
     stock.add_argument("--runtime-manifest", type=Path, required=True)
+    stock.add_argument("--initial-threshold", type=float, help="explicit native model-spec2 construction value; e.g. 100 for training")
     stock.add_argument("--output", type=Path, required=True)
+    pair = commands.add_parser("stock-threshold-study", help="paired cold stock Train at explicit thresholds 0.0117 and 100 on one runtime")
+    pair.add_argument("action", choices=("prepare", "run", "analyze", "failure-report"))
+    pair.add_argument("source", type=Path)
+    pair.add_argument("--runtime-manifest", type=Path)
+    pair.add_argument("--code-identity", type=Path)
+    pair.add_argument("--output", type=Path, required=True)
+    phasea = commands.add_parser("phasea-matrix", help="recover all four ISIs and labels from exact historical Bin Git data; no model execution")
+    phasea.add_argument("--bin-repository", type=Path, required=True)
+    phasea.add_argument("--revision", default="1c1464e248f8744e858bd66df0be99e39969fd65")
+    phasea.add_argument("--output", type=Path, required=True)
+    stopped_stock = commands.add_parser("stock-stopped-evaluation", help="diagnostic eight-pattern frozen probes of actual unfinished stock models; preserves inherited thresholds")
+    stopped_stock.add_argument("action", choices=("prepare", "run", "analyze", "report"))
+    stopped_stock.add_argument("source", type=Path)
+    stopped_stock.add_argument("--bin-repository", type=Path)
+    stopped_stock.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -462,12 +484,86 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"kind": "timelearner_visual_report", "status": "incomplete",
                               "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
             return 2
+    elif args.command == "model-spec-transport":
+        from .model_spec_transport import prepare, run
+        from .native_evidence import EvidenceError, require
+        try:
+            if args.action == "prepare":
+                require(args.runtime_manifest is None and args.completed_prefix is None, "transport_prepare_does_not_execute_runtime")
+                result = prepare(args.source.resolve(strict=True), args.output.resolve())
+            else:
+                require(args.runtime_manifest is not None, "transport_runtime_required")
+                result = run(args.source.resolve(strict=True), args.runtime_manifest.resolve(strict=True), args.output.resolve(),
+                             completed_prefix=args.completed_prefix.resolve(strict=True) if args.completed_prefix is not None else None)
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "stock-stopped-evaluation":
+        from .stock_stopped_evaluation import prepare, run, audit, report
+        from .native_evidence import EvidenceError, require
+        try:
+            if args.action in ("analyze", "report"):
+                require(args.bin_repository is None, "stock_diagnostic_analysis_uses_bound_matrix")
+                if args.action == "report":
+                    result = report(args.source, args.output)
+                else:
+                    result = audit(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+            else:
+                require(args.bin_repository is not None, "stock_diagnostic_bin_repository_required")
+                result = (prepare if args.action == "prepare" else run)(args.source, args.bin_repository, args.output)
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "phasea-matrix":
+        from .phasea_matrix import from_git
+        from .native_evidence import EvidenceError
+        try:
+            result = from_git(args.bin_repository, args.revision)
+            raw = (json.dumps(result, indent=2, ensure_ascii=False, allow_nan=False)+"\n").encode("utf-8")
+            with args.output.open("xb") as stream:
+                stream.write(raw)
+            print(json.dumps({"pattern_matrix_sha256": result["pattern_matrix_sha256"], "patterns": len(result["patterns"]),
+                              "historical_presentation_reproduced": False, "scientific_verdict": None}))
+            return 0
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "stock-threshold-study":
+        from .stock_threshold_study import prepare, run, audit
+        from .native_evidence import EvidenceError, require, load
+        try:
+            if args.action in ("analyze", "failure-report"):
+                require(args.runtime_manifest is None and args.code_identity is None, "stock_pair_analysis_has_no_runtime")
+                if args.action == "failure-report":
+                    from .stock_failure_reports import render_failure_report
+                    result = render_failure_report(args.source, args.output)
+                else:
+                    result = audit(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+            else:
+                require(args.runtime_manifest is not None and args.code_identity is not None, "stock_pair_runtime_and_code_required")
+                result = (prepare if args.action == "prepare" else run)(args.source, args.runtime_manifest,
+                          load(args.code_identity), args.output)
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
     elif args.command == "stock-phasea-preflight":
         import tarfile
         from .stock_phasea_preflight import run_stock_preflight
         from .native_evidence import EvidenceError
         try:
-            print(json.dumps(run_stock_preflight(args.source, args.runtime_manifest, args.output), allow_nan=False))
+            print(json.dumps(run_stock_preflight(args.source, args.runtime_manifest, args.output,
+                             initial_threshold=args.initial_threshold), allow_nan=False))
             return 0
         except (EvidenceError, OSError, ValueError, KeyError, TypeError, tarfile.TarError) as error:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
