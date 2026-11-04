@@ -132,7 +132,9 @@ class ManagedNativeCalibrationTest(unittest.TestCase):
             self.assertTrue(transaction["source_restored"])
             self.assertEqual(final, model)
         silent = deepcopy(job)
-        silent["thresholds"] = [inherited]
+        silent_threshold = 1.1*unique[-1]
+        self.assertNotEqual(silent_threshold, inherited)
+        silent["thresholds"] = [silent_threshold]
         silent["maximum_candidates"] = 1
         silent["specification"]["attempt_id"] += "/silent-control"
         rejected = invoke("calibrate", "silent-nonseparable", silent)
@@ -141,14 +143,51 @@ class ManagedNativeCalibrationTest(unittest.TestCase):
         self.assertTrue(rollback["source_restored"])
         self.assertEqual(load(rejected/"native/model.json"), model)
         self.assertIsNone(rollback["calibrated_package"])
+        self.assertEqual(len(rollback["candidates"]), 1)
+        rejected_candidate = rollback["candidates"][0]
+        changed = rejected_candidate["candidate"]
+        self.assertEqual(changed["threshold"], silent_threshold)
+        self.assertNotEqual(changed["model_revision"], model["model_revision"])
+        self.assertEqual(changed["candidate_record"]["source_model_revision"], model["model_revision"])
+        rejected_observations = rejected_candidate["matrix"]["observations"]
+        self.assertEqual(len(rejected_observations), len(original["trials"]))
+        self.assertEqual({o["trial_id"] for o in rejected_observations},
+                         {t["trial_id"] for t in original["trials"]})
+        for observation in rejected_observations:
+            self.assertTrue(observation["valid"] and observation["complete"])
+            self.assertEqual(observation["model_before"], changed["model_revision"])
+            self.assertEqual(observation["model_after"], changed["model_revision"])
+            self.assertEqual(observation["spike_count"], 0)
+        # Import the actual returned package in another native process. JSON
+        # restoration alone cannot establish the response of the restored graph.
+        restored_evaluation = deepcopy(original)
+        restored_evaluation["source_recognition"] = load(rejected/"native/model.json")
+        restored_evaluation["run_id"] += "/after-changed-threshold-rollback"
+        for i, trial in enumerate(restored_evaluation["trials"]):
+            trial["run_id"] = restored_evaluation["run_id"]
+            trial["trial_id"] = restored_evaluation["run_id"]+"/"+str(i)
+        restored_run = invoke("evaluate", "rollback-frozen", restored_evaluation)
+        self.assertEqual(load(restored_run/"native/model.json"), model)
+        self.assertEqual(load(restored_run/"native/model-after.json"), model)
+        _, restored_observations = load_evaluation(restored_run/"native/evaluation.json")
+        self.assertEqual(len(restored_observations), len(observations))
+        for baseline, restored in zip(observations, restored_observations):
+            self.assertTrue(restored["valid"] and restored["complete"])
+            self.assertEqual(restored["sample_id"], baseline["sample_id"])
+            self.assertEqual(restored["samples"], baseline["samples"])
+            self.assertEqual(restored["spike_count"], baseline["spike_count"])
         for path, digest in before.items():
             self.assertEqual(hashlib.sha256(Path(path).read_bytes()).hexdigest(), digest)
-        registry.release(lease["token"], note="Actual full-grid, fresh frozen and silent rollback units closed; source model unchanged.")
+        registry.release(lease["token"], note="Actual grid, fresh frozen, changed-threshold rejection and restored-model frozen units closed; source model unchanged.")
         self.assertEqual(registry.inspect()["leases"][0]["state"], "released")
         (root/"result.json").write_text(json.dumps({"phases": phases,
             "calibration_status": transaction["status"], "thresholds": thresholds,
             "frozen_counts": score["pooled_counts"], "silent_control_status": rollback["status"],
-            "source_unchanged": True, "scientific_verdict": None,
+            "source_unchanged": True, "changed_threshold_rollback": {
+                "source_threshold": inherited, "candidate_threshold": silent_threshold,
+                "source_model_revision": model["model_revision"],
+                "candidate_model_revision": changed["model_revision"],
+                "fresh_restored_response_matches_source": True}, "scientific_verdict": None,
             "independent_partition_verified": False}, indent=2))
 
     def test_classic_modelspec1_measured_grid_and_silent_rollback(self):
