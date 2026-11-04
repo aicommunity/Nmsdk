@@ -513,3 +513,10 @@ Scoped metadata acceptance 2026-11-01: [Elder property/migration](s09-resumed-st
 Measured length scoped acceptance2026-11-02: [normal67 after source repair](s07-measured-length-gate-normal-a2/README.md), [ASan remaining24 plus original39+4](s07-measured-length-gate-asan-a2/README.md), [selected ASan rerender16/16](s07-measured-length-selected-asan-a1/README.md), [scope and source limitations](../../../Docs/StructTrain/TimeLearner/MeasuredLengthProposal.ru.md). Full stages6/7/11 remain open.
 
 - 04.11: s10-resource-reservations-elder-a2 и s10-resource-reservations-m40-a2 — по15 реальных SQLite/process/path controls. Принят только reservation API; полная очередь/worker integration остаются открытыми. См. Docs/StructTrain/TimeLearner/ResourceReservations.ru.md.
+
+
+04.11: worker resource budget controls,30/30 на каждом сервере:
+[Elder](s10-resource-budgets-elder-a2/README.ru.md),
+[M40](s10-resource-budgets-m40-a2/README.ru.md). Atomic path+slot+RAM+disk
+accounting с привязкой к filesystem; исходные schema1 controls сохранены.
+Это адресная проверка API, не полный scheduler или численный результат.

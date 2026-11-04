@@ -248,3 +248,11 @@ ControllerVersion=2, новые builders, длинные окна/assigned-wave 
 динамические Rs domains и полный Train→Test остаются открытыми. Поэтому прежняя
 строка «полный native structural Train не реализован» не означает отсутствие
 этого ограниченного рабочего API; весь этап и production-ready V2 ещё не приняты.
+
+
+Уточнение04.11: quantitative reservation schema2 прошёл30/30 controls на
+каждом сервере. Слоты/RAM/disk demands проверяются атомарно с каталогами;
+disk budget привязан к actual filesystem, а crash/expiry не освобождают
+capacity. [Контракт, доказательства и ограничения](ResourceReservations.ru.md).
+Это следующий слой очереди; production dispatcher/ConditionSpec wiring,
+весь граф процессов, cancel/recovery, worker policies и весь этап10 не завершены.
