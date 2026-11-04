@@ -1,0 +1,126 @@
+{
+  "kind": "joint_native_threshold_expectation_failure",
+  "job_root": "9f92a40b97b5868b84b156e38b91903e6b0d8176",
+  "pulselib": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+  "native_tests": 42,
+  "passed": 34,
+  "failed": 8,
+  "failed_ids": [
+    "NativeCapacitanceModelSpec2Boundary/ClassicN0COff",
+    "NativeCapacitanceModelSpec2Boundary/ClassicN1COff",
+    "NativeCapacitanceModelSpec2Boundary/BranchN0COff",
+    "NativeCapacitanceModelSpec2Boundary/BranchN1COff",
+    "NativeCapacitanceModelSpec2Boundary/ClassicN0COn",
+    "NativeCapacitanceModelSpec2Boundary/ClassicN1COn",
+    "NativeCapacitanceModelSpec2Boundary/BranchN0COn",
+    "NativeCapacitanceModelSpec2Boundary/BranchN1COn"
+  ],
+  "actual_cases": [
+    {
+      "file": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": true,
+      "normalization": "N0",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": true,
+      "normalization": "N0",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": true,
+      "normalization": "N1",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": true,
+      "normalization": "N1",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": false,
+      "normalization": "N0",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": false,
+      "normalization": "N0",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": false,
+      "normalization": "N1",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    },
+    {
+      "file": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_learned_state.json",
+      "initial_threshold": 100,
+      "effective_threshold": 100.0,
+      "branch": false,
+      "normalization": "N1",
+      "input_count": 2,
+      "has_lt_membrane": true,
+      "frozen_trial_count": 4,
+      "observed_spikes": 0,
+      "all_valid_complete_frozen": true
+    }
+  ],
+  "native_frozen_trials": 32,
+  "scientific_verdict": null,
+  "model_spiking_or_separability_not_established": true,
+  "diagnosis": "FrozenTrialChecks used the legacy spiking filename suffix for threshold!=1, including100; future correction must explicitly declare response expectations and preserve low-threshold positive controls.",
+  "whole_worker_closed": true,
+  "reserved_resources_after": {
+    "slots": 0,
+    "memory_bytes": 0,
+    "disk_bytes": 0
+  }
+}
