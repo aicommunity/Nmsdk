@@ -1,0 +1,124 @@
+{
+  "kind": "timelearner_in_progress_readback",
+  "schema_version": 1,
+  "recorded_utc": "2026-11-04T17:26:59.513748+00:00",
+  "build_terminal": {
+    "execution": "completed",
+    "root": "1eab24decb6432947afc928e7f049f3a07de2709"
+  },
+  "source_closure": {
+    "root": "1eab24decb6432947afc928e7f049f3a07de2709",
+    "children": {
+      "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+      "Bin": "99f58da9296a794374cef679bbb878cb62af979a",
+      "Libraries/Nmsdk-MotionControlLib": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "Libraries/Nmsdk-PulseLib": "8644c50984c45a2211de13a75fe05cffc5bb3154",
+      "Libraries/Rdk-BasicLib": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "Libraries/Rdk-CvBasicLib": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "Libraries/Rdk-HardwareLib": "de40b008e990105856726e01230dde19f42a90a9"
+    },
+    "clean": true,
+    "alternates": false,
+    "baseline_sdk_unchanged": true
+  },
+  "scope": {
+    "baseline_root": "33fc48278cff860d20c570cb703198847f028065",
+    "candidate_root": "1eab24decb6432947afc928e7f049f3a07de2709",
+    "Tests_App_CMake_identical": true,
+    "pulse_core_changed_paths": [
+      "Core/NNeuronTimeLearner.cpp",
+      "Core/NNeuronTimeLearner.h",
+      "Core/NNeuronTimeLearnerBranch.cpp",
+      "Core/NNeuronTimeLearnerBranch.h",
+      "Core/TimeLearner/NativeLearnerLifecycle.h"
+    ],
+    "mathematical_goals_and_tolerances_unchanged": true,
+    "baseline_sdk_unchanged": true
+  },
+  "focused_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 18,
+      "observed": 18,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "12d3ecf9814158f5db09951a6bdc2535dd3555af13057c7bdc026cc6fb305e6e"
+    },
+    "scientific_verdict": null
+  },
+  "focused_xml_sha256": "12d3ecf9814158f5db09951a6bdc2535dd3555af13057c7bdc026cc6fb305e6e",
+  "focused_xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<testsuites tests=\"18\" failures=\"0\" disabled=\"0\" errors=\"0\" time=\"73.952\" timestamp=\"2026-11-04T20:15:21.312\" name=\"AllTests\">\n  <testsuite name=\"TimeLearnerResistanceTest\" tests=\"2\" failures=\"0\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"0.929\" timestamp=\"2026-11-04T20:15:21.312\">\n    <testcase name=\"ClassicChecksAllMembranesAndSkipsCalculationAfterPreflightFailure\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_TimeLearnerResistance.cpp\" line=\"1546\" status=\"run\" result=\"completed\" time=\"0.893\" timestamp=\"2026-11-04T20:15:21.312\" classname=\"TimeLearnerResistanceTest\" />\n    <testcase name=\"BranchChecksAllMembranesAndSkipsCalculationAfterPreflightFailure\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_TimeLearnerResistance.cpp\" line=\"1576\" status=\"run\" result=\"completed\" time=\"0.035\" timestamp=\"2026-11-04T20:15:22.206\" classname=\"TimeLearnerResistanceTest\" />\n  </testsuite>\n  <testsuite name=\"NativePhaseLifecycle\" tests=\"16\" failures=\"0\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"73.022\" timestamp=\"2026-11-04T20:15:22.242\">\n    <testcase name=\"ClassicWeightReset\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"100\" status=\"run\" result=\"completed\" time=\"1.791\" timestamp=\"2026-11-04T20:15:22.242\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicWeightDefault\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"101\" status=\"run\" result=\"completed\" time=\"1.867\" timestamp=\"2026-11-04T20:15:24.033\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicWeightDestroy\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"102\" status=\"run\" result=\"completed\" time=\"1.885\" timestamp=\"2026-11-04T20:15:25.901\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicThresholdReset\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"103\" status=\"run\" result=\"completed\" time=\"2.223\" timestamp=\"2026-11-04T20:15:27.786\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicThresholdDefault\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"104\" status=\"run\" result=\"completed\" time=\"2.23\" timestamp=\"2026-11-04T20:15:30.010\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicThresholdDestroy\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"105\" status=\"run\" result=\"completed\" time=\"2.178\" timestamp=\"2026-11-04T20:15:32.241\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchWeightReset\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"106\" status=\"run\" result=\"completed\" time=\"1.638\" timestamp=\"2026-11-04T20:15:34.419\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchWeightDefault\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"107\" status=\"run\" result=\"completed\" time=\"1.694\" timestamp=\"2026-11-04T20:15:36.058\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchWeightDestroy\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"108\" status=\"run\" result=\"completed\" time=\"1.665\" timestamp=\"2026-11-04T20:15:37.752\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchThresholdReset\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"109\" status=\"run\" result=\"completed\" time=\"2.068\" timestamp=\"2026-11-04T20:15:39.418\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchThresholdDefault\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"110\" status=\"run\" result=\"completed\" time=\"2.164\" timestamp=\"2026-11-04T20:15:41.487\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchThresholdDestroy\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"111\" status=\"run\" result=\"completed\" time=\"1.965\" timestamp=\"2026-11-04T20:15:43.651\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicNestedDefault\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"112\" status=\"run\" result=\"completed\" time=\"8.81\" timestamp=\"2026-11-04T20:15:45.617\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"ClassicNestedDestroy\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"113\" status=\"run\" result=\"completed\" time=\"8.528\" timestamp=\"2026-11-04T20:15:54.427\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchNestedDefault\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"114\" status=\"run\" result=\"completed\" time=\"16.111\" timestamp=\"2026-11-04T20:16:02.956\" classname=\"NativePhaseLifecycle\" />\n    <testcase name=\"BranchNestedDestroy\" file=\"/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2/Tests/Integration/Libraries/Test_PulseLib_PhaseLifecycle.cpp\" line=\"115\" status=\"run\" result=\"completed\" time=\"16.196\" timestamp=\"2026-11-04T20:16:19.068\" classname=\"NativePhaseLifecycle\" />\n  </testsuite>\n</testsuites>\n",
+  "focused_process_result": {
+    "kind": "timelearner_process_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "reason": "exit_zero",
+    "returncode": 0,
+    "wall_seconds": 74.95883199898526,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "9f222421699702c3f6b02dd97a7719cbc7c4cbfcdfbdd4f998f9506c50869da1",
+    "ownership_scope": "launched_executable_only",
+    "scientific_verdict": null
+  },
+  "full133_process": {
+    "record": {
+      "pid": 2228382,
+      "start_ticks": "338236752",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "executable": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2/Test_PulseLib_StorageComponents",
+      "executable_sha256": "d5614d44f7f3d4ef3764597d5b17306b66e0e1a7f2432a41b9c271e262072f77",
+      "runtime_fingerprint": "9f222421699702c3f6b02dd97a7719cbc7c4cbfcdfbdd4f998f9506c50869da1"
+    },
+    "kernel_identity_live": true,
+    "current_start_ticks": "338236752",
+    "kernel_state": "R"
+  },
+  "parent_process": {
+    "record": {
+      "pid": 2199400,
+      "start_ticks": "338039366",
+      "root": "1eab24decb6432947afc928e7f049f3a07de2709",
+      "candidate_root": "1eab24decb6432947afc928e7f049f3a07de2709",
+      "contained_supervisor": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2-container"
+    },
+    "kernel_identity_live": true,
+    "current_start_ticks": "338039366",
+    "kernel_state": "S"
+  },
+  "audit_retirement_queue": {
+    "record": {
+      "pid": 2231936,
+      "start_ticks": "338260912",
+      "root": "a93097a10902d7c46ea2ce36064b5ec470a17546",
+      "source": "/home/user/timelearner-refactor/source-audit-probe-retirement-a1",
+      "metadata_only": true
+    },
+    "kernel_identity_live": true,
+    "current_start_ticks": "338260912",
+    "kernel_state": "S"
+  },
+  "audit_queue_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "7ecbdb0fea9c649e90c67874e4ea15381a2143e5ccd89b9643376d5f5b2747dd",
+    "unit": "timelearner-76899aa3-fd38-4164-ba94-98525c152504.service",
+    "invocation_id": "4fd7054409f04596b4dded47baa985de",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-76899aa3-fd38-4164-ba94-98525c152504.service",
+    "initial_main_pid": 2231936,
+    "initial_start_ticks": "338260912",
+    "sha256": "d49b54437ec816913bd7b3ac3f09dce9a585a1d2ec0e4c1e6adf006c1d521216"
+  },
+  "full133_verdict_observed": false,
+  "full133_acceptance": null,
+  "final_model_export_bundle_pending": true,
+  "progress_snapshot_not_final_acceptance": true,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}
