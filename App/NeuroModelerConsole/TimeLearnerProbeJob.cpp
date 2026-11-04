@@ -136,6 +136,7 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             Require(ticks<j.maximumTicks,"probe_tick_budget_without_terminal_packet");
             ++ticks;model->Calculate();environment->IncreaseModelTimeByStep();
         }
+        const double probeWallSeconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count();
         evidence.Observation(*result);
         for(const auto& record:evidence.FinalizeWithPrefix("probe_trial_"))artifacts.append(record);
         const auto final=NmsdkTools::IdentifyModel(neuron,ports);
@@ -156,10 +157,11 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        Write(output,"execution.json",Signed({{"kind","timelearner_native_probe_execution"},{"schema_version",1},
+        Write(output,"execution.json",Signed({{"kind","timelearner_native_probe_execution"},{"schema_version",2},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},
+            {"probe_wall_seconds",probeWallSeconds},
             {"model_unchanged",unchanged},{"controller_idle",controllerIdle},{"probe_status",NativeProbeStatusName(result->status)},
             {"observation_valid",bool(result->observation && result->observation->valid)},
             {"observation_complete",bool(result->observation && result->observation->complete)},

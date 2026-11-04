@@ -82,11 +82,12 @@ def audit_execution(directory):
     directory = Path(directory)
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
     validate_job(job);_digest(execution)
+    schema = execution['schema_version']
+    require(type(schema) is int and schema in (1, 2), 'characterization_execution_schema')
     require(set(execution) == {'kind', 'schema_version', 'execution', 'job_sha256', 'model_revision', 'frequency_hz',
             'model_ticks', 'model_time_begin', 'model_time_end', 'training_started', 'search_executed', 'certificate_available',
             'model_unchanged', 'controller_idle', 'probe_status', 'observation_valid', 'observation_complete', 'artifacts',
-            'evaluation_verdict', 'sha256'} and execution['kind'] == 'timelearner_native_probe_execution' and
-            type(execution['schema_version']) is int and execution['schema_version'] == 1 and
+            'evaluation_verdict', 'sha256'} | ({'probe_wall_seconds'} if schema == 2 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
     expected_files = {'job.json', 'owner-configuration.json', 'initial-state.json',
                       'final-state.json', 'probe_trial_1.json', 'probe_trial_1.csv'}
@@ -98,6 +99,10 @@ def audit_execution(directory):
             execution['evaluation_verdict'] is None, 'characterization_claims_training')
     require(execution['execution'] in ('completed', 'cancelled', 'timeout', 'model_tick_budget_exhausted', 'probe_rejected',
             'model_changed', 'unexpected_training_activity'), 'characterization_execution_unknown')
+    if schema == 2:
+        require(number(execution['probe_wall_seconds']) > 0 and
+                (execution['execution'] != 'timeout' or execution['probe_wall_seconds'] >= job['maximum_wall_seconds']),
+                'characterization_wall_budget_not_reached')
     initial, final = load(directory/'initial-state.json'), load(directory/'final-state.json')
     _digest(initial);_digest(final)
     for state, kind in ((initial, 'native_probe_initial_state'), (final, 'native_probe_final_state')):
