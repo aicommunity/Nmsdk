@@ -47,14 +47,16 @@ def _validate(spec, *, preflight=False):
     require(type(phases) is list and all(type(p) is dict and set(p) == {"operation", "job", "wall_seconds"}
             for p in phases), "invalid_managed_pipeline_phases")
     order = [p["operation"] for p in phases]
-    require(order in (["train", "export", "evaluate"], ["train", "export", "calibrate", "evaluate"],
+    live = bool(phases) and phases[0]['operation'] == 'train' and \
+        type(phases[0]['job']) is dict and phases[0]['job'].get('schema_version') == 2
+    require(order == ['train', 'evaluate'] if live else order in (
+                      ["train", "export", "evaluate"], ["train", "export", "calibrate", "evaluate"],
                       ["train", "export", "posttune", "evaluate"],
                       ["train", "export", "posttune", "calibrate", "evaluate"]),
             "managed_pipeline_phase_order")
     from .native_pipeline_worker import validate_job, FIELDS, KINDS
     from .native_calibration_worker import JOB_FIELDS
     validate_job("train", phases[0]["job"])
-    require(phases[0]["job"]["schema_version"] == 1, "pipeline_live_finalization_requires_distinct_state_routing")
     implementation = phases[0]["job"]["implementation_id"]
     for phase in phases:
         wall = phase["wall_seconds"]
@@ -122,12 +124,16 @@ def _append(root, events, event, phase, payload):
     events.append(record)
 
 
-def _resolved_job(phase, root, completed):
+def _resolved_job(phase, root, completed, *, live_finalization=False):
     job = deepcopy(phase["job"])
     operation = phase["operation"]
     if operation != "train":
         predecessor = completed[-1]
         name = "train_learned_state.json" if operation == "export" else "model.json"
+        if predecessor == 'train' and operation == 'evaluate' and live_finalization:
+            # Native live finalization has already converted/tuned/calibrated
+            # recognition state. Exporting solo again would discard its work.
+            name = 'recognition-model.json'
         source_key = "source_solo" if operation == "export" else "source_recognition"
         job[source_key] = load(root/"phases"/predecessor/"native"/name)
     return signed(job)
@@ -150,7 +156,10 @@ def _audit_phase(root, operation, expected_job, runtime_fingerprint):
 
 def _phase_ready(operation, manifest):
     ready = manifest["execution"] == "completed" and manifest["validity"] == "valid"
-    return ready and (operation != "train" or manifest["analysis"]["completed_boundary"])
+    if operation != 'train':
+        return ready
+    analysis = manifest['analysis']
+    return ready and analysis['completed_boundary'] and analysis.get('recognition_available', True)
 
 
 def _scan(root, spec, events, runtime_fingerprint):
@@ -166,14 +175,16 @@ def _scan(root, spec, events, runtime_fingerprint):
         require(event["phase"] == operation, "pipeline_journal_phase_order")
         if event["event"] == "started":
             require(pending is None and event["payload"] == {
-                "job_sha256": _resolved_job(spec["phases"][index], root, completed)["sha256"]},
+                "job_sha256": _resolved_job(spec["phases"][index], root, completed,
+                    live_finalization=spec["phases"][0]["job"]["schema_version"] == 2)["sha256"]},
                 "pipeline_journal_started_binding")
             pending = operation
         else:
             require(pending == operation and event["event"] in
                     ("finished", "halted", "reconciled_finished", "reconciled_halted"),
                     "pipeline_journal_transition")
-            job = _resolved_job(spec["phases"][index], root, completed)
+            job = _resolved_job(spec["phases"][index], root, completed,
+                    live_finalization=spec["phases"][0]["job"]["schema_version"] == 2)
             manifest = _audit_phase(root, operation, job, runtime_fingerprint)
             reconciled = event["event"].startswith("reconciled_")
             payload = event["payload"]
@@ -228,7 +239,8 @@ def reconcile_pipeline(root):
         completed, pending, halted = _scan(root, spec, events, runtime["runtime_fingerprint"])
         require(pending is not None and halted is None, "pipeline_no_phase_to_reconcile")
         phase = spec["phases"][len(completed)]
-        job = _resolved_job(phase, root, completed)
+        job = _resolved_job(phase, root, completed,
+                live_finalization=spec["phases"][0]["job"]["schema_version"] == 2)
         require(load(root/(pending+"-resolved-job.json")) == job,
                 "pipeline_prepared_job_changed")
         manifest = _audit_phase(root, pending, job, runtime["runtime_fingerprint"])
@@ -296,7 +308,8 @@ def run_pipeline(specification, runtime_path, policy, output, *, resume=False, s
             require(checked == completed and pending is None and halted is None,
                     "pipeline_boundary_changed_before_next_phase")
             operation = phase["operation"]
-            job = _resolved_job(phase, root, completed)
+            job = _resolved_job(phase, root, completed,
+                live_finalization=spec["phases"][0]["job"]["schema_version"] == 2)
             path = root/(operation+"-resolved-job.json")
             if path.exists():
                 require(load(path) == job, "pipeline_prepared_job_changed")
