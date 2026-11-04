@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.1g — Console Branch soma IR (остров nextseg vs gen)
 
 Постановка: офлайн цепочка E1.1d/e/f **не** заменила E1.4 `ideal_inh_proxy` (τ = 0.5 мс, FWHM≈2.1 мс, sep≈+0.074). Этот scoped-проход снимает **Test-only** Console TRACE на Branch×N1 Pack-A при состоянии острова `br25_nextseg` (L = `7 6 4 1`, TipR = `20M×3+86M`) для mods **nextseg** и **gen** (тот же L), с коротким `-t 40` и wall-kill ≤3 мин, чтобы не зависнуть на `posttune_mid_dbg` / TRACE hang (E1.1d / DEBT-A3). G1 RERUN / F1b / KeepDone / PASS×3 **не** запускались.

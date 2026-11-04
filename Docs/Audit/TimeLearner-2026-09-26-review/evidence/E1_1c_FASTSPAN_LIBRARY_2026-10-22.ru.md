@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.1c — scoped библиотека FastSpan (timing ± amp Rs/N)
 
 Постановка: закрыть **PENDING FastSpan** из E1.1 / E1.1b для Stage1-физики контроллера: собрать **офлайн** библиотеку **t_peak / FWHM / peak** для нейрон-модели матричных волн W10 / W12 / W48 / FastSpanLtzCal — **`NSPNeuronGenD002C25e11`** — по тому же каркасу, что E1.1 timing и E1.1b amp, без полного §E1.1-sweep (PSI / NextSegInh / AsymRm A–C вне scope). Trainer×Mode для probe-физики **N/A**; конфиги Train/Test — **N/A** (offline `cable_model`, Console-якоря в этом turn **не** снимались). G1 RERUN / F1b cold / KeepDone W33 **не** трогались; S0 sep_margin уже DONE.

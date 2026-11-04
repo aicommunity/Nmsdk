@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.1e — multi-pulse tip IR NextSegInh / PSI vs passive (scoped)
 
 Постановка: **E1.1d** показал, что одиночный импульс NextSegInh на tip PASS-острова `br25_nextseg` (L = 7) почти совпадает с passive по FWHM (~62 мс) и **не** воспроизводит полосу E1.4 `ideal_inh_proxy` (τ = 0.5 мс / FWHM/span ≲ 0.13 ⇒ FWHM ≲ 3.25 мс при span 25). Гипотеза аудита: сужение проявляется на **паттерн-уровне** при пачке. Этот scoped-проход проверяет **офлайн** tip-drive 2–4 импульсов с Pack-A ISI (и абсолютные времена target Pack-A) для **AsymRm**, mods **passive / nextseg / psi_k2_5**, L ∈ {1, 7, 10, 25}, TipR = 8.6×10⁷. Полный Rs-grid, Console Branch IR и полная 4-дендритная суперпозиция Pack-A **не** входили в scope.
