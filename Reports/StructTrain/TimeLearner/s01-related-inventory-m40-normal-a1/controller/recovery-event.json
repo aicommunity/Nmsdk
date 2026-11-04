@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "dd768959-7463-4001-ba55-cdea7eb87353",
+  "job_id": "s01-related-inventory-normal-a1",
+  "recorded_unix": 1793811810.4422667,
+  "administrator": {
+    "pid": 3971944,
+    "start_ticks": "288699786",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 3971954,
+    "start_ticks": "288699798",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-related-inventory-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "ee8840a5c9a91d343ccc8c43defc422dc5943057098d1346cfff75bb3ef61827",
+      "unit": "timelearner-0be53509-c49d-44b7-b269-c8ba3dc908b9.service",
+      "invocation_id": "06035907eed14cbf9b7745cc8855fc90",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0be53509-c49d-44b7-b269-c8ba3dc908b9.service",
+      "initial_main_pid": 3971954,
+      "initial_start_ticks": "288699798",
+      "sha256": "b448e3c51c5629c4e36397c6405b64416bfc7890ae60169c12dff35ff9b2e1f5"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-0be53509-c49d-44b7-b269-c8ba3dc908b9.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Read-only related inventory Git/CLI gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-related-inventory-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-related-inventory-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Libraries/Nmsdk-PulseLib",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Libraries/Nmsdk-PulseLib"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-related-inventory-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-related-inventory-normal-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
