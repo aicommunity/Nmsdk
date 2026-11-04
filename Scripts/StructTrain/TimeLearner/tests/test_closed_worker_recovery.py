@@ -60,6 +60,8 @@ class ClosedWorkerRecoveryTest(unittest.TestCase):
         self.assertEqual(reopened.recovery_history(), [event])
         self.assertEqual(reopened.inspect()['reserved'], dict.fromkeys(registry.capacity, 0))
         self.assertEqual(reopened.inspect()['leases'][0]['state'], 'released')
+        (self.root/'recovery-event.json').write_text(json.dumps(event, indent=2))
+        (self.root/'recovery-ledger.json').write_text(json.dumps(reopened.inspect(), indent=2))
         with self.assertRaisesRegex(ReservationError, 'reservation_not_held'):
             reopened.recover_closed_worker(lease['token'], output, note='duplicate recovery')
 
@@ -68,6 +70,8 @@ class ClosedWorkerRecoveryTest(unittest.TestCase):
         event = registry.recover_closed_worker(lease['token'], output, note='explicit schema one recovery')
         self.assertEqual(registry.inspect()['schema_version'], 1)
         self.assertEqual(Reservations(registry.path).recovery_history(), [event])
+        (self.root/'recovery-event.json').write_text(json.dumps(event, indent=2))
+        (self.root/'recovery-ledger.json').write_text(json.dumps(registry.inspect(), indent=2))
 
     def test_a_different_closed_unit_cannot_release_the_dead_owner(self):
         registry, lease, actual = self.dead_worker()
@@ -76,7 +80,9 @@ class ClosedWorkerRecoveryTest(unittest.TestCase):
         with self.assertRaisesRegex(ReservationError, 'unit_does_not_own_worker'):
             registry.recover_closed_worker(lease['token'], other, note='wrong unit')
         self.assertEqual(registry.inspect()['leases'][0]['state'], 'held')
-        registry.recover_closed_worker(lease['token'], actual, note='correct unit')
+        event = registry.recover_closed_worker(lease['token'], actual, note='correct unit')
+        (self.root/'recovery-event.json').write_text(json.dumps(event, indent=2))
+        (self.root/'recovery-ledger.json').write_text(json.dumps(registry.inspect(), indent=2))
 
     def test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit(self):
         registry, lease, _ = self.dead_worker(contained=False)
