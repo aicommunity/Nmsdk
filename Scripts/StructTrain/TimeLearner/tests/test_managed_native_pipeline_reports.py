@@ -32,6 +32,9 @@ class ManagedNativePipelineReportsTest(unittest.TestCase):
             evaluation = report/"evaluation"
             plotted = load(evaluation/"manifest.json")
             _, observations = load_evaluation(run/"native/evaluation.json")
+            declared = load(run/"input/job.json")["trials"]
+            self.assertEqual(len(declared), 4)
+            self.assertEqual({o["trial_id"] for o in observations}, {t["trial_id"] for t in declared})
             expected = {(o["trial_id"], i) for o in observations
                         for i in range(len(o["samples"][0]["soma"]))}
             self.assertEqual({(f["trial_id"], f["descriptor"]["index"])
@@ -52,4 +55,4 @@ class ManagedNativePipelineReportsTest(unittest.TestCase):
             for root in (report, evaluation):
                 for name, digest in load(root/"SHA256SUMS.json").items():
                     self.assertEqual(hashlib.sha256((root/name).read_bytes()).hexdigest(), digest)
-        self.assertEqual(pairs, 12)
+        self.assertEqual(pairs, 24)
