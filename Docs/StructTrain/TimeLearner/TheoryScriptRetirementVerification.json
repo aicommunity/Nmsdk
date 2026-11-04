@@ -1,0 +1,49 @@
+{
+  "kind": "theory_script_retirement_independent_verification",
+  "candidate_root": "8154242fe2ee282f7659d29fe7609e7b0f22e1fc",
+  "workers": {
+    "elder": {
+      "evidence_commit": "eb78ed1a3f95641b94f562439439dabb9d042a76",
+      "attempts": {
+        "s09-theory-retirement-a1": {
+          "members": 10,
+          "bytes": 112600,
+          "sha256": "9962603bae86878ee02473497538b831a308105abd1f760155ac717511c5749f",
+          "attempt_passed": false,
+          "positive_records_verified_before_scope_failure": 121
+        },
+        "s09-theory-retirement-a2": {
+          "members": 14,
+          "bytes": 125820,
+          "sha256": "662d05d64402bfaa89b7d76092bad296ffbae25f2af91df000cd1be85f1a5b26",
+          "source_blobs_verified": 277,
+          "source_records_verified": 121,
+          "negative_restored_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/evalset.py"
+        }
+      }
+    },
+    "m40": {
+      "evidence_commit": "18a75a073ebcac5fec64d2512521e8633a8839a6",
+      "attempts": {
+        "s09-theory-retirement-a1": {
+          "members": 10,
+          "bytes": 112552,
+          "sha256": "20b7142f274bf6a97dfa414cc103c0285cda28dc2c559cfb21b295cb32fe882f",
+          "attempt_passed": false,
+          "positive_records_verified_before_scope_failure": 121
+        },
+        "s09-theory-retirement-a2": {
+          "members": 14,
+          "bytes": 125768,
+          "sha256": "345e3ab2b881fd78226775769484b66a794468a5d4744b63f4c2344bcdf7d4fd",
+          "source_blobs_verified": 277,
+          "source_records_verified": 121,
+          "negative_restored_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/evalset.py"
+        }
+      }
+    }
+  },
+  "whole_migration_complete": false,
+  "native_runtime_unchanged": true,
+  "scientific_verdict": null
+}
