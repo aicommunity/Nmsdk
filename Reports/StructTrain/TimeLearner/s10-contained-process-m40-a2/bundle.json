@@ -1,0 +1,550 @@
+{
+  "kind": "worker_contained_process_controls",
+  "root": "ecc384214bd3a9be4bbbfc6aba102f98d1069c89",
+  "acceptance_status": "passed",
+  "members": {
+    "source-hashes.json": {
+      "bytes": 56020,
+      "sha256": "99eaf18ac659c8b912e5b5e2a1fe5ea9948483528c8c6176e7eba7e0e3eda370"
+    },
+    "runner.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner.py": {
+      "bytes": 816,
+      "sha256": "59674d8a92a3516a706aae0973d76fdff07593d9b33009c60ed8e4245a6e9c8e"
+    },
+    "producer.py": {
+      "bytes": 3917,
+      "sha256": "8c2ec509b3035c88665eb163230866e0bc767d775b2470cc60b82cc04dbaa85d"
+    },
+    "terminal.json": {
+      "bytes": 145,
+      "sha256": "218abdba5a1da4ba419a7f254f6cd0b420405145ec54cb1e1d53aa523aa13395"
+    },
+    "tests.log": {
+      "bytes": 2814,
+      "sha256": "bbd1c658ca51cf8cd55d31c43a4f0b1fb35e4be9a3e0152084026a2fd365163d"
+    },
+    "runtime.json": {
+      "bytes": 293,
+      "sha256": "2eb87398f5a2b0d249c3ad547401f0263d94d882bbec2d941db7839e4fae9728"
+    },
+    "owned-supervisor.json": {
+      "bytes": 51,
+      "sha256": "498c6cb6ba0f005f786dc5416f52d3c3af71f0470985e0c0fd6f98b76eb4d016"
+    },
+    "tests.json": {
+      "bytes": 66,
+      "sha256": "ec3c967fcee8b5d68e3e7468f3d577ed57121b5ae24a823e42ddcdec8e3d1da6"
+    },
+    "owned-tests.json": {
+      "bytes": 51,
+      "sha256": "53de37484d69614b0c2804fff18b476a1e0b17d0615ec7381c62229c2198995e"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/runtime.json": {
+      "bytes": 1569,
+      "sha256": "7f5a87e4970a2d883d6ada811d6228812fbd27d8c704b32a3eebbf471acd5ed5"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/runtime.json": {
+      "bytes": 1569,
+      "sha256": "399ff6563d7c30d6e7858bc3f5bdce8ce98928b356fb31c2ad2215b7511a79d4"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/orphan.py": {
+      "bytes": 179,
+      "sha256": "4c62143844903913b5e2d7937b66b7f07205ae9199fcaf7687d561019c44536e"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/child": {
+      "bytes": 7,
+      "sha256": "e333f89bde051e95cdeb657a593644ef63072c4116126a39af4eba4f058b3106"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/child.json": {
+      "bytes": 16,
+      "sha256": "f9a04b493b0a638d1c359e3aaf10951639c646076fb20f9254d5182db63e2c3e"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/fork.py": {
+      "bytes": 224,
+      "sha256": "cca498b303aaf9fc40c276e713d5150e1967c0f1a0646b3f44d5828c04ee2897"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "f174871677780a4cfb8eceba319d84312498fbdf29b02b6e0316c25fc8e00f4f"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "a800a3591259c2a3197e88bc6803ce4b2dca24c7250f62f633215831766ed1df"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "23a1d54d70abc6320e8c33fbb8c3e5e23d0bdbc423c55a5918b455d3a8cac443"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "0dfcdd489058ff3aa3e607e6e6f78354db8abc2c7d6556a9b4c4203b12bb2d53"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "a8d7a352b9a23e0070f115bf3bfcdeeee5141c25a11136979f570f1c34a14612"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "a3dc5f8d4bbbb4f8d5a9a999d1712ecd49ab4f7c3669d95b7b4feff02d8014b4"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "f5e3b8ab6dcbdf0b750b1ad7e59e2626b6392fbf7808f232ae482174685e92a6"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "d562afb4d23a005a7b715b701364c994c61211e78530dc817a81e6d06ae29615"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "1026c9832b4ee15097a3323490a71fe89a62b453e318784f3c6e1c5ae68408d2"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "97bbc588f56fd86b9285324e33627af56f6f03f67ff92ce6344511af30956ff8"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "eb5fc5f661d5b5d1135f510725c2a7c81f19b79552447309098e526c11914758"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_request_corruption_and_reused_output_fail_closed/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "ffbe480c126bb61fa26caae55c3d1b3cc57ace345714294ab9b3585a13797a95"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "aa469d3154147713004f6935ff9ecc1721b7f856c57b5e86766dd1fd811161e6"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "02574340a886ffe2137e82a5e459144f2d5c31e39ebfd6a8707dea465534cee0"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/stdout.log": {
+      "bytes": 16,
+      "sha256": "eaa2cdd481a9e332dbd4932c2148ef5ea30458620eabece2c9716b939a236dd4"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "2fd7da90f0e5a1549fee49b867d258e710d892e777e9f3f75f5400243d9af596"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/runtime.json": {
+      "bytes": 1795,
+      "sha256": "0e9dd4abf778fd0ec9d71766c681ceefe75259f32468ad30a5eb3a87cd4805ea"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/request.json": {
+      "bytes": 846,
+      "sha256": "8a6a3641642b3c1989d1cc927956da6523f5a9c0c434fd00271ba584a107486f"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "49a9dd4bc0b36c05c759ff368c5906023a6a62671eb095ce5fc231b8b3cc296d"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/test-final-membership.json": {
+      "bytes": 1297,
+      "sha256": "219a4d95f23d1a831044a0f18af8f805c327347cf5ee3a178076983932c63105"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "fa66ea46472fbbc4772fd3d7344e32be9fa9ca53a41be6f0b89256bc70c06105"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/stdout.log": {
+      "bytes": 13,
+      "sha256": "2adfc351dfa316e5bb459f0bde7ab327654b33267c2e2d12432b07c9bf927cac"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "e4dfc5d06d644616d16173407ff937607f0e01be69f1caf997c1a063e6cc0248"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/runtime.json": {
+      "bytes": 1768,
+      "sha256": "faffdf3559836b9baf543b7eea86bf753ab3fe57e7ecaff167c44805c0756f76"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/request.json": {
+      "bytes": 828,
+      "sha256": "0f6ab745ae27f0c655892d6cc9ea80993f729252a37be3e84475aab3ada8f10d"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/stderr.log": {
+      "bytes": 13,
+      "sha256": "655ebb9f4f76f4a77876c73b8a64e3cb2891e5f23a781f6913c9122c71b4b5c7"
+    },
+    "native/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "a5ad52b6270338d7a39d962516ce85e6cffc1b5cb1ca6e9fe513afd79ab22894"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "06a69223b20296fcaf304d2b2b2e7938b569be4fc902a5cb18b005c7dab66355"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "43cc5bfb1027224b35c7f41b2591d8643e050d514956a065f69d0e915c1162c7"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "72079a76e24fa2e07b169ebf0dcb3937ba52365c0849e57d822a854aea150e1e"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "2011dcddeaeeb6f5e5ba43b3f2b03a57f939b67608fc93b6a38a05e848a04d21"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "d8e0948b3f20986c5660198698cf5f4351fb3aff95ca8bed1bf0db3a98b8bc02"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_changed_invocation_is_refused_before_signalling/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "994eefd69679237d845fafad91ddee3b48eaa967d04ad06605c01c48aee87c6d"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "7cc080114b80ba6ea8fcd7a0db4c09c3d42fd39e87c76feec731bbbe163ac42f"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "ca128c253a19978c8a89efa2e0f115acabc2c9d87ff8900b6588d5e8e46fa898"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "3cabe0e330b7b8638e5eaad511bceaa65e34fba00394cfdccaada1d97e89480e"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/runtime.json": {
+      "bytes": 1764,
+      "sha256": "342f13b542dd8c67cd213949dcaf9b0cff1bafe80b198d6ee44c898c19ee7580"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/request.json": {
+      "bytes": 763,
+      "sha256": "9b6967c08276c3b2d85cd92642c0b7126ceac5494fed189dd1498de64035ecb6"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/ready.json": {
+      "bytes": 44,
+      "sha256": "9aaf00e9590995d15f7317e0706e5a1815b85aa06db4f3f843f8da5f957fcb87"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "e27e07c12d31a44e882ec6ede06a663d82f71176a1f1196d59afa06fc95e581b"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "8fb34e60ee064fcfe10e46914ffea1c5a8e1b1f8cb9e5cb0379033757c36d3b0"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/runtime.json": {
+      "bytes": 1764,
+      "sha256": "391356afe7c5654fd9ca6f1dea9a0c10c12c56ad84d198fce4b1d97b5751a25a"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/request.json": {
+      "bytes": 763,
+      "sha256": "178caadbe2bc7b7d1a34e1641329497fcf535f87c0f0a574d8b1c2577975574f"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/ready.json": {
+      "bytes": 44,
+      "sha256": "2c1c86977535b994d2c799d946146f24fa6dd4e1354db6bcf01e870e38a485d5"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "49ece5913bf772aef8a622db68f99e668c6cdf1da06c178a316b89b684bcb02b"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "a0f661fe513f981a69ce693e393668d5f7138b686c9f5b4c05b12692317a8b73"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "e92f25d71141f4c6285677b15b4f1f56b273836afb572b2d9a897d8e22941f4a"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/runtime.json": {
+      "bytes": 2512,
+      "sha256": "fc94eb35b1bd7cfbe113486607b0a7f43072bfc56b5006764a2528b5a029b1ab"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/request.json": {
+      "bytes": 807,
+      "sha256": "614ed2cf2f2e2b760fe4f1af807e1050270cb669ad48f5146006f3ee0f78dabb"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_main_exit_does_not_release_a_live_descendant/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "3effce1255a23449bdee3f3ef579adaad7db505225651a2e771b3f9ce36245b4"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "f6fea8dcc0f405a8812f424998011380a5310036c21ca17ca57ac0a2719a0b31"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "644209e01c7356366705c6e5502dac2af037957610614ae6d7759ec7b0fe8979"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "48bea2f4fb48d896bc8e22cb5b941bea9d10a9c75f02feb12ad22ccf26340ef2"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/runtime.json": {
+      "bytes": 2512,
+      "sha256": "61ce43d56cc73e28e64cf39f2c5a69fbf5750a050f89c74c3d6a4d19c1352717"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/request.json": {
+      "bytes": 805,
+      "sha256": "56324b67b5f8735806fdbe973465a973f971de06a7d8d07b43333549051fd8ec"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "6412cc6c3c4910be5c46a01fdb2ed3e30d3e1879b2b23bee9049ea1adab52188"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/test-final-membership.json": {
+      "bytes": 1296,
+      "sha256": "0d4364f78695f91d9e3686f970bcf7440378595cd4e403923661ae4797230220"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "14728b06c6f5da27b2724e59249fcdd10dc7305b9e91955ad4af5f8461b6eb9d"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "90479c95a516a8393c1d95e146e13ed6e552745829b562c04e45729eb8ceeb50"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "26e5ce49e81dac1c5ee42fb641d43b515e415ae5063f27ab7b655498a1cf2da0"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/request.json": {
+      "bytes": 762,
+      "sha256": "099c84c926c2b997d6f82c5e4dcdaaaa06053610da0be346c2c5119e1f7cfb38"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "1018eec7983cd32cfe656b2afd8c0a540d03f30b3f021e53088d19ee1a23ab68"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "1fb7a009bd50084b97523b452b93b643ac63ac81378c631315e32facf16a30cb"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "070d6b2c0662f7f8c2ca452485cab990c7fba33052e1365ef135fcef3ae9ec08"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "8d8176948530662c2c8eb47fe11041bce626c09d4692c89280b7e537bf1f905d"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "d47a30f5e636db193a69bf35110111b95bffec59af8af84d5b82c681bef7d2c8"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "3d02bb32e808a03b62b2b62a9cf193e50d580934ef52215861ad3b4cc2c12d1d"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "32c522d6f4b561f7356d87a5c7e63b4f526a7c0e02d648e3349247b692f0f885"
+    }
+  },
+  "archive_bytes": 32768,
+  "archive_sha256": "e1b4e8584ae01bb58a790887c675107cff47ea8479d1514133a3911a2307395c",
+  "scientific_verdict": null
+}
