@@ -23,6 +23,7 @@
 | Временные графики переноса | Реальный plotting test1/1 на M40:60 видов/12 сом/8 моделей. В Git24 PNG; full cache на Data. [Читаемый отчёт и ограничения](JointOwnerReplayVisuals.ru.md). |
 | Managed normal full path | 8/8:четыре Exact N1 Train/export/frozen пути и четыре stopped/export-refusal controls;16 actual managed native units закрыты. [Scope и открытые пункты](ManagedNativePipelineAcceptance.ru.md). |
 | Managed frozen temporal reports | 1/1 на M40:24 trial–soma pairs,360 views;30 selected PNG в Git. При фиксированном threshold1.0 все4 случая TP0/FP0/FN2/TN2, успех классификации отсутствует. [Графики и ограничения](ManagedNativePipelineVisuals.ru.md). |
+| Managed measured calibration normal | 4/4 на Elder:реальные grids,confirmation,отдельный frozen Test и NonSeparable rollback при1.0;12 native groups закрыты. Все4 инженерных N1 случая TP2/FP0/FN0/TN2 после same-matrix calibration; stock scientific PASS не заявляется. [Приёмка/ограничения](ManagedNativeCalibrationAcceptance.ru.md). |
 | Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
 | Прежний C-search ASan K1 | Тот же supervisor3649813/start284056538 подтверждён живым; full262 ещё работает. Это иной code snapshot. |
 | Следующий joint ASan44 | Поставлен в ожидание K1; новый worker3836828/start286684788, фактические модели ещё не запускались. [Условия и budgets](../../../Reports/StructTrain/TimeLearner/s07-joint-asan44-queued-a2/job.json). |
