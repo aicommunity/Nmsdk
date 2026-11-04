@@ -1,0 +1,161 @@
+{
+  "kind": "worker_unit_graph_recovery_fault_baseline",
+  "source_commit": "adc1f6227144360097b378a33e1db564794e0442",
+  "gap_reproduced": true,
+  "members": {
+    "isolated-reservations.sqlite3": {
+      "bytes": 32768,
+      "sha256": "1a5a3871e4751538983ee1d1b65f13c5689c18ca50d6e7e17933a81dace165e5"
+    },
+    "lease.json": {
+      "bytes": 648,
+      "sha256": "fb6e7b5d3e67cdfb2ac1b47ae5a8f9dc960654759ef5b16e64ebc10c2390745c"
+    },
+    "source-hashes.json": {
+      "bytes": 621,
+      "sha256": "af6ebc0557ddc8c221ee2b480f86aa5f29a416c435ce93e4114b6e859eca55a5"
+    },
+    "parent-source.py": {
+      "bytes": 2049,
+      "sha256": "1751ede365575fdb34021480e8f2b64b73dbb3dc60fbcc2628c21b6ef10c4382"
+    },
+    "case-result.json": {
+      "bytes": 428,
+      "sha256": "e9a499754b7daea8162a6840434ed61293993f56ebddb9ea1e57502f2e7de21e"
+    },
+    "parent-returned-with-live-child.json": {
+      "bytes": 150,
+      "sha256": "775a94338f1c3e484f61849c842367d8e01ad8a30c97aa1d7c046572b2e4cf26"
+    },
+    "ledger-after-recovery.json": {
+      "bytes": 1407,
+      "sha256": "51c4cb5ed41d7626c1dceec5e591cbcc7628aa5712f63b580768ea9d42cdd1bf"
+    },
+    "producer.py": {
+      "bytes": 6348,
+      "sha256": "dc0ed3b05d1d4907fbae5be02f475912d5cd6797771b7da555783ccd7fadf6fa"
+    },
+    "recovery-event.json": {
+      "bytes": 2739,
+      "sha256": "215186eea83ac43817b0149b6c2e00452006334a1f15fa196a37a1639c59ad4c"
+    },
+    "parent-before-recovery.json": {
+      "bytes": 1295,
+      "sha256": "8f09f0f475fe948793445eeed28405cb618b4ed0891501bfe3a9f8a97ede7a4d"
+    },
+    "child-binding.json": {
+      "bytes": 565,
+      "sha256": "5338533496492e78d7d843839bbb5d9fda2f9d6e13086273287987b34018f746"
+    },
+    "parent-final-closure.json": {
+      "bytes": 1212,
+      "sha256": "96816ff76c99224a6620c685d70f3d3ad78bc94aa14c4eb813b486116739e9bd"
+    },
+    "child-final-closure.json": {
+      "bytes": 1212,
+      "sha256": "c7ab3279ae491c707e900e27c937d6fa3e0f1e0aa973e0c31ae318c3f3168b69"
+    },
+    "child-before-recovery.json": {
+      "bytes": 1415,
+      "sha256": "19f972c62dbc97e4474a43f5b5c40fffcf8879a26700b2586f446b4ef1b566b2"
+    },
+    "child-after-recovery.json": {
+      "bytes": 1415,
+      "sha256": "19f972c62dbc97e4474a43f5b5c40fffcf8879a26700b2586f446b4ef1b566b2"
+    },
+    "parent-worker/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "0e5bcb5fc2a12b22070851195b208bd2360b6b87c4bb380fcccc98643f493dcd"
+    },
+    "parent-worker/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "parent-worker/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "parent-worker/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "parent-worker/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "parent-worker/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "210174e6794c78a11ae30b42419a73fb381c39baac5836867278ceceb857fcbc"
+    },
+    "parent-worker/runtime.json": {
+      "bytes": 2808,
+      "sha256": "af5c9282e26a08f027445c5c2a673b75479f573c693354988f824f37ea55a2fc"
+    },
+    "parent-worker/request.json": {
+      "bytes": 770,
+      "sha256": "dd3838a39d76abba9f990f4fe80556f928d16d0f57fe23b5f974bee0740890d3"
+    },
+    "parent-worker/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "parent-worker/ready.json": {
+      "bytes": 44,
+      "sha256": "7abd9d33334e29ff62af0c522b11057303ce3d5b42318e5c97b31f594c1449ed"
+    },
+    "runtime-tree/child-entered.json": {
+      "bytes": 16,
+      "sha256": "cfad8215ff1c7bbed8826e0eb0164266183b54f541430b9d8d2c2d2a4baa5cdb"
+    },
+    "runtime-tree/child.py": {
+      "bytes": 132,
+      "sha256": "cf961ba25451a32d1a8497f04eb85a68e048878e0367f5f9960702a1bf3808d9"
+    },
+    "native-child/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "95705a797eb2ff2ed6f1509777a3f0f5d909a0210948182c47d57631f225cc26"
+    },
+    "native-child/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native-child/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native-child/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-child/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native-child/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "33bae480ed39de24dd60d35fad1144f51f55d719bfa5bbc1119835812543f9ea"
+    },
+    "native-child/runtime.json": {
+      "bytes": 2726,
+      "sha256": "ce2b5f0ff72c5a8339849857cce33e6fe7d68640d4bb6265c4a39dc29cac3d1a"
+    },
+    "native-child/request.json": {
+      "bytes": 916,
+      "sha256": "79c3d68ce44eb721286b741c452634a5bbf6ce417b486b7c4061739e78b44ac0"
+    },
+    "native-child/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-child/ready.json": {
+      "bytes": 44,
+      "sha256": "2abcad62527f81337486597b0e95ab7e44f518f7218760719f17637e1c102f77"
+    }
+  },
+  "archive_bytes": 7636,
+  "archive_sha256": "737228dbe5df8d08dfeb61cf565eb35ff31adffb4f4443eb5ac467a18b94f267",
+  "native_models_executed": 0,
+  "global_ledger_untouched": true,
+  "all_owned_groups_finally_closed": true,
+  "scientific_verdict": null
+}
