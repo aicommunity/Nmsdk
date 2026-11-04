@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "scope": "Read-only catalog membership and document integrity; not a runtime test",
-  "pulselib_source": "456a5abdb0ff36a218b25943f7f2c6f9c2175190",
+  "pulselib_source": "9ec4566d71bf56d4eeb5c8a920bbc683fcd85299",
   "original_inventory_records": 211,
   "reviewed_original_records": 211,
   "new_configured_records": 6,
@@ -14,5 +14,7 @@
   "correction_evidence": "AuditFlagDefault.ru.md; declarations unchanged, two ADefault values corrected",
   "source_drift_evidence": "PropertySourceDrift.json",
   "source_drift_validation": "PropertySourceDrift.validation.json",
-  "inherited_rdk_properties_included": false
+  "inherited_rdk_properties_included": false,
+  "accepted_source_refresh_evidence": "PropertyAcceptedSourceDrift-20261104.json",
+  "accepted_source_refresh_scope": "Local immutable Git metadata only;217 unchanged declared-property slices; helpers/consumers and runtime matrix not attested"
 }
