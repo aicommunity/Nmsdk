@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "criterion": {
+    "anchor": "onset",
+    "begin_offset": 0,
+    "end_offset": null,
+    "id": "post_anchor_target_whole_window_foil_v1",
+    "reject_target_outside_window": true
+  },
+  "evaluation_spec_digest": "771dd13d9db365f18154d46b0f4af263c597de0b1651893a3e0d82eb111015d2",
+  "coverage_policy": "per_trial_windows",
+  "run_id": "Branch-v1/frozen/managed-frozen",
+  "model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+  "declared_training_outcome": "exact",
+  "source_training_evidence_checked": false,
+  "calibration": {
+    "ltzone_path": "$.LTZone",
+    "protocol": "fixed-inherited-from-solo",
+    "source_solo_sha256": "3667bf17de6d636fc63b7dcbee8b16da5dc6d411c97616cca27c6a7dc430a4f7",
+    "status": "fixed",
+    "threshold": 1
+  },
+  "effective_threshold": 1.0,
+  "native_execution_verified": false,
+  "evaluation_verdict": null,
+  "invalid_trial_ids": [],
+  "validity": "valid",
+  "reason": "complete_declared_evaluation",
+  "pooled_counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 2,
+    "TN": 2,
+    "targets": 2,
+    "foils": 2,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.5,
+    "target_hit_rate": 0.0,
+    "foil_response_rate": 0.0
+  },
+  "by_reset_policy": {
+    "reset_per_trial": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "targets": 2,
+      "foils": 2,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.5,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0,
+      "criterion_satisfied": false,
+      "criterion_assessed": true
+    }
+  },
+  "trials": [
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/0",
+      "sample_id": "target",
+      "label": "target",
+      "presentation_index": 0,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.01,
+      "response_end": 0.4,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FN"
+    },
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/1",
+      "sample_id": "foil",
+      "label": "foil",
+      "presentation_index": 1,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.4105,
+      "response_end": 0.8005,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/2",
+      "sample_id": "foil",
+      "label": "foil",
+      "presentation_index": 2,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.811,
+      "response_end": 1.201,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/3",
+      "sample_id": "target",
+      "label": "target",
+      "presentation_index": 3,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 1.2115,
+      "response_end": 1.6015000000000001,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FN"
+    }
+  ]
+}

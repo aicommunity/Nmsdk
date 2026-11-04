@@ -1,0 +1,1657 @@
+{
+  "kind": "timelearner_visual_report",
+  "schema_version": 1,
+  "purpose": "recognition_evaluation_diagnostic",
+  "calibration_claim": false,
+  "source_calibration_evidence_checked": false,
+  "run_id": "Branch-v1/frozen/managed-frozen",
+  "model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+  "status": "diagnostic",
+  "observation_validity": "valid",
+  "expected_trial_soma_pairs": 4,
+  "figures": [
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/0",
+      "sample_id": "target",
+      "label": "target",
+      "presentation_index": 0,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_14_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "views": [
+        {
+          "view": "overview",
+          "begin": 0,
+          "end": 0.4,
+          "files": [
+            "trial-0000-soma-001/overview.png",
+            "trial-0000-soma-001/overview.svg",
+            "trial-0000-soma-001/overview.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": null,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "overview",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-001",
+          "begin": 0.0,
+          "end": 0.05,
+          "files": [
+            "trial-0000-soma-001/zoom-001.png",
+            "trial-0000-soma-001/zoom-001.svg",
+            "trial-0000-soma-001/zoom-001.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-001",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-002",
+          "begin": 0.05,
+          "end": 0.1,
+          "files": [
+            "trial-0000-soma-001/zoom-002.png",
+            "trial-0000-soma-001/zoom-002.svg",
+            "trial-0000-soma-001/zoom-002.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-002",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003",
+          "begin": 0.1,
+          "end": 0.15000000000000002,
+          "files": [
+            "trial-0000-soma-001/zoom-003.png",
+            "trial-0000-soma-001/zoom-003.svg",
+            "trial-0000-soma-001/zoom-003.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003-detail",
+          "begin": 0.1,
+          "end": 0.15000000000000002,
+          "files": [
+            "trial-0000-soma-001/zoom-003-detail.png",
+            "trial-0000-soma-001/zoom-003-detail.svg",
+            "trial-0000-soma-001/zoom-003-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -6.021873805082567e-05,
+            0.0010423200675850719
+          ]
+        },
+        {
+          "view": "zoom-004",
+          "begin": 0.15000000000000002,
+          "end": 0.2,
+          "files": [
+            "trial-0000-soma-001/zoom-004.png",
+            "trial-0000-soma-001/zoom-004.svg",
+            "trial-0000-soma-001/zoom-004.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-004-detail",
+          "begin": 0.15000000000000002,
+          "end": 0.2,
+          "files": [
+            "trial-0000-soma-001/zoom-004-detail.png",
+            "trial-0000-soma-001/zoom-004-detail.svg",
+            "trial-0000-soma-001/zoom-004-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.116968833638765e-06,
+            1.781717895409596e-05
+          ]
+        },
+        {
+          "view": "zoom-005",
+          "begin": 0.2,
+          "end": 0.25,
+          "files": [
+            "trial-0000-soma-001/zoom-005.png",
+            "trial-0000-soma-001/zoom-005.svg",
+            "trial-0000-soma-001/zoom-005.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-005-detail",
+          "begin": 0.2,
+          "end": 0.25,
+          "files": [
+            "trial-0000-soma-001/zoom-005-detail.png",
+            "trial-0000-soma-001/zoom-005-detail.svg",
+            "trial-0000-soma-001/zoom-005-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.4514306858615102e-08,
+            2.231584400513853e-07
+          ]
+        },
+        {
+          "view": "zoom-006",
+          "begin": 0.25,
+          "end": 0.30000000000000004,
+          "files": [
+            "trial-0000-soma-001/zoom-006.png",
+            "trial-0000-soma-001/zoom-006.svg",
+            "trial-0000-soma-001/zoom-006.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-006",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-006-detail",
+          "begin": 0.25,
+          "end": 0.30000000000000004,
+          "files": [
+            "trial-0000-soma-001/zoom-006-detail.png",
+            "trial-0000-soma-001/zoom-006-detail.svg",
+            "trial-0000-soma-001/zoom-006-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-006",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.4675613613235328e-10,
+            2.224265411854276e-09
+          ]
+        },
+        {
+          "view": "zoom-007",
+          "begin": 0.30000000000000004,
+          "end": 0.35000000000000003,
+          "files": [
+            "trial-0000-soma-001/zoom-007.png",
+            "trial-0000-soma-001/zoom-007.svg",
+            "trial-0000-soma-001/zoom-007.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-007-detail",
+          "begin": 0.30000000000000004,
+          "end": 0.35000000000000003,
+          "files": [
+            "trial-0000-soma-001/zoom-007-detail.png",
+            "trial-0000-soma-001/zoom-007-detail.svg",
+            "trial-0000-soma-001/zoom-007-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.2553824646488465e-12,
+            1.8974430915363884e-11
+          ]
+        },
+        {
+          "view": "zoom-008",
+          "begin": 0.35000000000000003,
+          "end": 0.4,
+          "files": [
+            "trial-0000-soma-001/zoom-008.png",
+            "trial-0000-soma-001/zoom-008.svg",
+            "trial-0000-soma-001/zoom-008.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-008-detail",
+          "begin": 0.35000000000000003,
+          "end": 0.4,
+          "files": [
+            "trial-0000-soma-001/zoom-008-detail.png",
+            "trial-0000-soma-001/zoom-008-detail.svg",
+            "trial-0000-soma-001/zoom-008-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -8.135714324453147e-15,
+            1.581268449513118e-13
+          ]
+        }
+      ]
+    },
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/1",
+      "sample_id": "foil",
+      "label": "foil",
+      "presentation_index": 1,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_14_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "views": [
+        {
+          "view": "overview",
+          "begin": 0.4005,
+          "end": 0.8005,
+          "files": [
+            "trial-0001-soma-001/overview.png",
+            "trial-0001-soma-001/overview.svg",
+            "trial-0001-soma-001/overview.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": null,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "overview",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-001",
+          "begin": 0.4005,
+          "end": 0.4505,
+          "files": [
+            "trial-0001-soma-001/zoom-001.png",
+            "trial-0001-soma-001/zoom-001.svg",
+            "trial-0001-soma-001/zoom-001.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-001",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-002",
+          "begin": 0.4505,
+          "end": 0.5005000000000001,
+          "files": [
+            "trial-0001-soma-001/zoom-002.png",
+            "trial-0001-soma-001/zoom-002.svg",
+            "trial-0001-soma-001/zoom-002.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-002",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003",
+          "begin": 0.5005000000000001,
+          "end": 0.5505,
+          "files": [
+            "trial-0001-soma-001/zoom-003.png",
+            "trial-0001-soma-001/zoom-003.svg",
+            "trial-0001-soma-001/zoom-003.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003-detail",
+          "begin": 0.5005000000000001,
+          "end": 0.5505,
+          "files": [
+            "trial-0001-soma-001/zoom-003-detail.png",
+            "trial-0001-soma-001/zoom-003-detail.svg",
+            "trial-0001-soma-001/zoom-003-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -5.435864176024375e-06,
+            8.893940265044087e-05
+          ]
+        },
+        {
+          "view": "zoom-004",
+          "begin": 0.5505,
+          "end": 0.6005,
+          "files": [
+            "trial-0001-soma-001/zoom-004.png",
+            "trial-0001-soma-001/zoom-004.svg",
+            "trial-0001-soma-001/zoom-004.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-004-detail",
+          "begin": 0.5505,
+          "end": 0.6005,
+          "files": [
+            "trial-0001-soma-001/zoom-004-detail.png",
+            "trial-0001-soma-001/zoom-004-detail.svg",
+            "trial-0001-soma-001/zoom-004-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -8.151278914070304e-08,
+            1.2655057594734842e-06
+          ]
+        },
+        {
+          "view": "zoom-005",
+          "begin": 0.6005,
+          "end": 0.6505000000000001,
+          "files": [
+            "trial-0001-soma-001/zoom-005.png",
+            "trial-0001-soma-001/zoom-005.svg",
+            "trial-0001-soma-001/zoom-005.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-005-detail",
+          "begin": 0.6005,
+          "end": 0.6505000000000001,
+          "files": [
+            "trial-0001-soma-001/zoom-005-detail.png",
+            "trial-0001-soma-001/zoom-005-detail.svg",
+            "trial-0001-soma-001/zoom-005-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -4.617102045797239e-05,
+            0.0006233104627237562
+          ]
+        },
+        {
+          "view": "zoom-006",
+          "begin": 0.6505000000000001,
+          "end": 0.7005000000000001,
+          "files": [
+            "trial-0001-soma-001/zoom-006.png",
+            "trial-0001-soma-001/zoom-006.svg",
+            "trial-0001-soma-001/zoom-006.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-006",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-007",
+          "begin": 0.7005000000000001,
+          "end": 0.7505000000000001,
+          "files": [
+            "trial-0001-soma-001/zoom-007.png",
+            "trial-0001-soma-001/zoom-007.svg",
+            "trial-0001-soma-001/zoom-007.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-007-detail",
+          "begin": 0.7005000000000001,
+          "end": 0.7505000000000001,
+          "files": [
+            "trial-0001-soma-001/zoom-007-detail.png",
+            "trial-0001-soma-001/zoom-007-detail.svg",
+            "trial-0001-soma-001/zoom-007-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -9.981049704477218e-05,
+            0.0018475624483608177
+          ]
+        },
+        {
+          "view": "zoom-008",
+          "begin": 0.7505000000000001,
+          "end": 0.8005,
+          "files": [
+            "trial-0001-soma-001/zoom-008.png",
+            "trial-0001-soma-001/zoom-008.svg",
+            "trial-0001-soma-001/zoom-008.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-008-detail",
+          "begin": 0.7505000000000001,
+          "end": 0.8005,
+          "files": [
+            "trial-0001-soma-001/zoom-008-detail.png",
+            "trial-0001-soma-001/zoom-008-detail.svg",
+            "trial-0001-soma-001/zoom-008-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -2.38219706571563e-06,
+            3.880984502413032e-05
+          ]
+        }
+      ]
+    },
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/2",
+      "sample_id": "foil",
+      "label": "foil",
+      "presentation_index": 2,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_14_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "views": [
+        {
+          "view": "overview",
+          "begin": 0.801,
+          "end": 1.201,
+          "files": [
+            "trial-0002-soma-001/overview.png",
+            "trial-0002-soma-001/overview.svg",
+            "trial-0002-soma-001/overview.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": null,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "overview",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-001",
+          "begin": 0.801,
+          "end": 0.8510000000000001,
+          "files": [
+            "trial-0002-soma-001/zoom-001.png",
+            "trial-0002-soma-001/zoom-001.svg",
+            "trial-0002-soma-001/zoom-001.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-001",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-002",
+          "begin": 0.8510000000000001,
+          "end": 0.901,
+          "files": [
+            "trial-0002-soma-001/zoom-002.png",
+            "trial-0002-soma-001/zoom-002.svg",
+            "trial-0002-soma-001/zoom-002.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-002",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-002-detail",
+          "begin": 0.8510000000000001,
+          "end": 0.901,
+          "files": [
+            "trial-0002-soma-001/zoom-002-detail.png",
+            "trial-0002-soma-001/zoom-002-detail.svg",
+            "trial-0002-soma-001/zoom-002-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-002",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.00017307416972740076,
+            0.0034837452024436065
+          ]
+        },
+        {
+          "view": "zoom-003",
+          "begin": 0.901,
+          "end": 0.9510000000000001,
+          "files": [
+            "trial-0002-soma-001/zoom-003.png",
+            "trial-0002-soma-001/zoom-003.svg",
+            "trial-0002-soma-001/zoom-003.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003-detail",
+          "begin": 0.901,
+          "end": 0.9510000000000001,
+          "files": [
+            "trial-0002-soma-001/zoom-003-detail.png",
+            "trial-0002-soma-001/zoom-003-detail.svg",
+            "trial-0002-soma-001/zoom-003-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -5.7114160524252e-06,
+            9.265935298185202e-05
+          ]
+        },
+        {
+          "view": "zoom-004",
+          "begin": 0.9510000000000001,
+          "end": 1.0010000000000001,
+          "files": [
+            "trial-0002-soma-001/zoom-004.png",
+            "trial-0002-soma-001/zoom-004.svg",
+            "trial-0002-soma-001/zoom-004.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-004-detail",
+          "begin": 0.9510000000000001,
+          "end": 1.0010000000000001,
+          "files": [
+            "trial-0002-soma-001/zoom-004-detail.png",
+            "trial-0002-soma-001/zoom-004-detail.svg",
+            "trial-0002-soma-001/zoom-004-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -7.743169105900449e-08,
+            1.2104109353705539e-06
+          ]
+        },
+        {
+          "view": "zoom-005",
+          "begin": 1.0010000000000001,
+          "end": 1.0510000000000002,
+          "files": [
+            "trial-0002-soma-001/zoom-005.png",
+            "trial-0002-soma-001/zoom-005.svg",
+            "trial-0002-soma-001/zoom-005.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-005-detail",
+          "begin": 1.0010000000000001,
+          "end": 1.0510000000000002,
+          "files": [
+            "trial-0002-soma-001/zoom-005-detail.png",
+            "trial-0002-soma-001/zoom-005-detail.svg",
+            "trial-0002-soma-001/zoom-005-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -4.617102045797239e-05,
+            0.0006233104627237562
+          ]
+        },
+        {
+          "view": "zoom-006",
+          "begin": 1.0510000000000002,
+          "end": 1.101,
+          "files": [
+            "trial-0002-soma-001/zoom-006.png",
+            "trial-0002-soma-001/zoom-006.svg",
+            "trial-0002-soma-001/zoom-006.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-006",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-007",
+          "begin": 1.101,
+          "end": 1.151,
+          "files": [
+            "trial-0002-soma-001/zoom-007.png",
+            "trial-0002-soma-001/zoom-007.svg",
+            "trial-0002-soma-001/zoom-007.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-007-detail",
+          "begin": 1.101,
+          "end": 1.151,
+          "files": [
+            "trial-0002-soma-001/zoom-007-detail.png",
+            "trial-0002-soma-001/zoom-007-detail.svg",
+            "trial-0002-soma-001/zoom-007-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.00010447650419917576,
+            0.001910553544945266
+          ]
+        },
+        {
+          "view": "zoom-008",
+          "begin": 1.151,
+          "end": 1.201,
+          "files": [
+            "trial-0002-soma-001/zoom-008.png",
+            "trial-0002-soma-001/zoom-008.svg",
+            "trial-0002-soma-001/zoom-008.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-008-detail",
+          "begin": 1.151,
+          "end": 1.201,
+          "files": [
+            "trial-0002-soma-001/zoom-008-detail.png",
+            "trial-0002-soma-001/zoom-008-detail.svg",
+            "trial-0002-soma-001/zoom-008-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -2.505365622589295e-06,
+            4.04726205419248e-05
+          ]
+        }
+      ]
+    },
+    {
+      "trial_id": "Branch-v1/frozen/managed-frozen/3",
+      "sample_id": "target",
+      "label": "target",
+      "presentation_index": 3,
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_14_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "views": [
+        {
+          "view": "overview",
+          "begin": 1.2015,
+          "end": 1.6015000000000001,
+          "files": [
+            "trial-0003-soma-001/overview.png",
+            "trial-0003-soma-001/overview.svg",
+            "trial-0003-soma-001/overview.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": null,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "overview",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-001",
+          "begin": 1.2015,
+          "end": 1.2515,
+          "files": [
+            "trial-0003-soma-001/zoom-001.png",
+            "trial-0003-soma-001/zoom-001.svg",
+            "trial-0003-soma-001/zoom-001.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-001",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-002",
+          "begin": 1.2515,
+          "end": 1.3015,
+          "files": [
+            "trial-0003-soma-001/zoom-002.png",
+            "trial-0003-soma-001/zoom-002.svg",
+            "trial-0003-soma-001/zoom-002.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-002",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003",
+          "begin": 1.3015,
+          "end": 1.3515000000000001,
+          "files": [
+            "trial-0003-soma-001/zoom-003.png",
+            "trial-0003-soma-001/zoom-003.svg",
+            "trial-0003-soma-001/zoom-003.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-003-detail",
+          "begin": 1.3015,
+          "end": 1.3515000000000001,
+          "files": [
+            "trial-0003-soma-001/zoom-003-detail.png",
+            "trial-0003-soma-001/zoom-003-detail.svg",
+            "trial-0003-soma-001/zoom-003-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-003",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -6.021873805082567e-05,
+            0.0010423200675850719
+          ]
+        },
+        {
+          "view": "zoom-004",
+          "begin": 1.3515000000000001,
+          "end": 1.4015,
+          "files": [
+            "trial-0003-soma-001/zoom-004.png",
+            "trial-0003-soma-001/zoom-004.svg",
+            "trial-0003-soma-001/zoom-004.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-004-detail",
+          "begin": 1.3515000000000001,
+          "end": 1.4015,
+          "files": [
+            "trial-0003-soma-001/zoom-004-detail.png",
+            "trial-0003-soma-001/zoom-004-detail.svg",
+            "trial-0003-soma-001/zoom-004-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-004",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.116968833638765e-06,
+            1.781717895409596e-05
+          ]
+        },
+        {
+          "view": "zoom-005",
+          "begin": 1.4015,
+          "end": 1.4515,
+          "files": [
+            "trial-0003-soma-001/zoom-005.png",
+            "trial-0003-soma-001/zoom-005.svg",
+            "trial-0003-soma-001/zoom-005.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-005-detail",
+          "begin": 1.4015,
+          "end": 1.4515,
+          "files": [
+            "trial-0003-soma-001/zoom-005-detail.png",
+            "trial-0003-soma-001/zoom-005-detail.svg",
+            "trial-0003-soma-001/zoom-005-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-005",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.4514306858615102e-08,
+            2.231584400513853e-07
+          ]
+        },
+        {
+          "view": "zoom-006",
+          "begin": 1.4515,
+          "end": 1.5015,
+          "files": [
+            "trial-0003-soma-001/zoom-006.png",
+            "trial-0003-soma-001/zoom-006.svg",
+            "trial-0003-soma-001/zoom-006.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-006",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-006-detail",
+          "begin": 1.4515,
+          "end": 1.5015,
+          "files": [
+            "trial-0003-soma-001/zoom-006-detail.png",
+            "trial-0003-soma-001/zoom-006-detail.svg",
+            "trial-0003-soma-001/zoom-006-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-006",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.4675613613235328e-10,
+            2.224265411854276e-09
+          ]
+        },
+        {
+          "view": "zoom-007",
+          "begin": 1.5015,
+          "end": 1.5515,
+          "files": [
+            "trial-0003-soma-001/zoom-007.png",
+            "trial-0003-soma-001/zoom-007.svg",
+            "trial-0003-soma-001/zoom-007.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-007-detail",
+          "begin": 1.5015,
+          "end": 1.5515,
+          "files": [
+            "trial-0003-soma-001/zoom-007-detail.png",
+            "trial-0003-soma-001/zoom-007-detail.svg",
+            "trial-0003-soma-001/zoom-007-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-007",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -1.3238965479445142e-12,
+            1.9899371039855396e-11
+          ]
+        },
+        {
+          "view": "zoom-008",
+          "begin": 1.5515,
+          "end": 1.6015000000000001,
+          "files": [
+            "trial-0003-soma-001/zoom-008.png",
+            "trial-0003-soma-001/zoom-008.svg",
+            "trial-0003-soma-001/zoom-008.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "shared",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ]
+        },
+        {
+          "view": "zoom-008-detail",
+          "begin": 1.5515,
+          "end": 1.6015000000000001,
+          "files": [
+            "trial-0003-soma-001/zoom-008-detail.png",
+            "trial-0003-soma-001/zoom-008-detail.svg",
+            "trial-0003-soma-001/zoom-008-detail.pdf"
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "minimum_native_tick_pixels_on_zoom": 14.208,
+          "downsampling": false,
+          "y_scale": "local_detail",
+          "time_view": "zoom-008",
+          "sample_markers": false,
+          "shared_y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "y_limits": [
+            -8.713030297258229e-15,
+            1.659206105841804e-13
+          ]
+        }
+      ]
+    }
+  ],
+  "series": [
+    {
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "Branch_2000_N1_learned_boundary_configured_recognition_14_Body_Membrane",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      },
+      "timeline": [
+        {
+          "presentation_index": 0,
+          "trial_id": "Branch-v1/frozen/managed-frozen/0",
+          "sample_id": "target",
+          "label": "target",
+          "begin": 0,
+          "planned_end": 0.4,
+          "last_observed": 0.4,
+          "reset_policy": "reset_per_trial",
+          "reset_boundary": 0,
+          "exact_reset_timestamp": null,
+          "onset_to_onset_seconds": null,
+          "last_to_first_stimulus_seconds": null,
+          "unobserved_gap": null
+        },
+        {
+          "presentation_index": 1,
+          "trial_id": "Branch-v1/frozen/managed-frozen/1",
+          "sample_id": "foil",
+          "label": "foil",
+          "begin": 0.4005,
+          "planned_end": 0.8005,
+          "last_observed": 0.8005,
+          "reset_policy": "reset_per_trial",
+          "reset_boundary": 0.4005,
+          "exact_reset_timestamp": null,
+          "onset_to_onset_seconds": 0.40049999999999997,
+          "last_to_first_stimulus_seconds": 0.3705,
+          "unobserved_gap": null
+        },
+        {
+          "presentation_index": 2,
+          "trial_id": "Branch-v1/frozen/managed-frozen/2",
+          "sample_id": "foil",
+          "label": "foil",
+          "begin": 0.801,
+          "planned_end": 1.201,
+          "last_observed": 1.201,
+          "reset_policy": "reset_per_trial",
+          "reset_boundary": 0.801,
+          "exact_reset_timestamp": null,
+          "onset_to_onset_seconds": 0.4005000000000001,
+          "last_to_first_stimulus_seconds": 0.1605000000000001,
+          "unobserved_gap": null
+        },
+        {
+          "presentation_index": 3,
+          "trial_id": "Branch-v1/frozen/managed-frozen/3",
+          "sample_id": "target",
+          "label": "target",
+          "begin": 1.2015,
+          "planned_end": 1.6015000000000001,
+          "last_observed": 1.6015,
+          "reset_policy": "reset_per_trial",
+          "reset_boundary": 1.2015,
+          "exact_reset_timestamp": null,
+          "onset_to_onset_seconds": 0.40049999999999997,
+          "last_to_first_stimulus_seconds": 0.1605000000000001,
+          "unobserved_gap": null
+        }
+      ],
+      "views": [
+        {
+          "view": "series-overview",
+          "begin": 0,
+          "end": 1.6015000000000001,
+          "first_presentation": 0,
+          "last_presentation": 3,
+          "files": [
+            "series-soma-001/series-overview.png",
+            "series-soma-001/series-overview.svg",
+            "series-soma-001/series-overview.pdf"
+          ],
+          "y_scale": "shared",
+          "y_limits": [
+            -0.0008907861984514121,
+            0.012025613679094063
+          ],
+          "png_width": 1920,
+          "png_height": 960,
+          "downsampling": false,
+          "clock_compression": false
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "limitations": [
+    "Soma SI units not recorded in native observations",
+    "visual acceptance pending"
+  ],
+  "visual_acceptance_complete": false,
+  "evaluation_verdict": null
+}
