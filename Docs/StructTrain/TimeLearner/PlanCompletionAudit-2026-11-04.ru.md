@@ -197,3 +197,12 @@ build-only подготовка corrected8021301e в новом runtime; K1 пр
 Corrected ASan build-only root8021301e также [завершён и проверен](JointASanBuild.ru.md):
 два приложения, четыре instrumented target flags,510 source blobs совпадают
 с normal44; native models0. Готовность сборки не закрывает pending ASan gates.
+
+Для joint normal44 построены [временные отчёты всех40 frozen trials](Joint44FrozenReports.ru.md):
+60 trial/soma pairs,5 production-reader checks без skips,80 выбранных PNG
+(10.4MiB) и full275-view cache на Data M40. Визуально просмотрены17 рисунков,
+представляющих все10 моделей; полный manual review всех views не заявлен.
+High100 controls: каждый TP0/FP0/FN2/TN2. Low0.0001 controls: каждый
+TP0/FP1/FN2/TN1 плюс ранний target response. Это отрицательные LT engineering
+контроли, не августовский stock replay и не science PASS. Молчание означает
+отсутствие LT spikes при ненулевой soma response. Этап11 по-прежнему частичный.

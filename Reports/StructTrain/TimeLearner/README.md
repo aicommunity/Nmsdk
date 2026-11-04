@@ -585,3 +585,8 @@ lease recovery и production pipeline integration остаются открыт�
   [сжатые первичные данные](s07-csearch-threshold-joint-normal-a4/README.ru.md).
   Это инженерная приёмка исправления test expectations; full304/readers/ASan
   совместного среза ещё не приняты, научная классификация не заявлена.
+
+- [Joint44 frozen soma/input reports](../../../Docs/StructTrain/TimeLearner/Joint44FrozenReports.ru.md):
+ 40 trials/60 soma pairs,5 report checks, полный кэш на M40 и выбранные PNG
+ в [HTML](s11-joint44-frozen-visual-a3/index.html). Отрицательные инженерные
+ LT controls; успешная классификация не заявлена.
