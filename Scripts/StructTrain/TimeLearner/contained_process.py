@@ -161,6 +161,11 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
     require((group/'memory.max').read_text().strip() == str(memory_bytes) and
             (group/'pids.max').read_text().strip() == str(tasks) and
             (group/'memory.swap.max').read_text().strip() == '0', 'contained_kernel_limits_not_applied')
+    _write(output/'limits-readback.json', {'unit': unit, 'invocation_id': binding['invocation_id'],
+        'control_group': binding['control_group'], 'memory.max': (group/'memory.max').read_text().strip(),
+        'memory.swap.max': (group/'memory.swap.max').read_text().strip(),
+        'pids.max': (group/'pids.max').read_text().strip(), 'cgroup.events': (group/'cgroup.events').read_text(),
+        'initial_members': [int(p) for p in (group/'cgroup.procs').read_text().split()], 'systemd': state['state']})
     verify_runtime(manifest)
     (output/'start.ack').write_text('binding committed\n')
     return binding
