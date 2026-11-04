@@ -594,3 +594,5 @@ lease recovery и production pipeline integration остаются открыт�
 - [Runtime interface7 and disk maintenance](s02-runtime-role-and-disk-maintenance-a1/README.ru.md): invalid live A3 retained; no Train/Test or scientific pass claimed.
 
 - [Joint ASan resource-stop/retry evidence](s07-joint-asan-resource-retry-a1/README.ru.md): complete negative partial data retained;44/304 acceptance pending.
+
+- PhaseA historical tool retirement: [Elder](s09-phasea-tools-elder-a3/README.ru.md), [M40](s09-phasea-tools-m40-a3/README.ru.md),166 retrieval records and restored-path refusal on each worker; August results preserved, complete migration pending.

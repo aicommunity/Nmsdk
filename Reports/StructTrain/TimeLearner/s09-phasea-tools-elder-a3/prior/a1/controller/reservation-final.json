@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "Elder-1",
+  "leases": [
+    {
+      "token": "3bb5c33c-2598-47e7-9e66-590325bb00fe",
+      "job_id": "s09-phasea-tool-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2375735,
+        "start_ticks": "339175204",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-phasea-tool-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-phasea-tool-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-phasea-tool-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-phasea-tool-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793821982.3600047,
+      "deadline": 1793822102.3600047,
+      "updated": 1793821984.3272007,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
