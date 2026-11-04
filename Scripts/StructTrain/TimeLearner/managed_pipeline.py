@@ -277,6 +277,8 @@ def run_pipeline(specification, runtime_path, policy, output, *, resume=False, s
     verify_runtime(runtime)
     policy = validate_policy(policy)
     require(policy is not None and policy["schema_version"] == 2, "pipeline_requires_managed_reservation")
+    from .native_cli import inspect_native_cli
+    inspect_native_cli(runtime, [phase['operation'] for phase in spec['phases']])
     root = Path(output).resolve()
     if not resume:
         root.mkdir(parents=True, exist_ok=False)
