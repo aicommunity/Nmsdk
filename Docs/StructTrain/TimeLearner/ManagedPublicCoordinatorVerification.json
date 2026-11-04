@@ -1,0 +1,649 @@
+{
+  "evidence_commit": "c40e992d9729b0f1b2c881668e00042b066c14ef",
+  "source_commit": "2cc27b9f3192ccd5a11d5dcc8189f68205205b15",
+  "published_files_verified": 20,
+  "checksummed_files_verified": 19,
+  "archive_members_verified": 2215,
+  "archive_bytes": 10175056,
+  "archive_sha256": "a7c0d181d73cb5263657fb4f4275e1850aaf9e20d72ab462a0544c964fe7c9e1",
+  "production_source_blobs_verified": 288,
+  "primary_sqlite_integrity_verified": 8,
+  "native_units_freshly_closed": 20,
+  "tests": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected": 8
+  },
+  "cases": {
+    "Classic-v1": {
+      "native_phases": 4,
+      "pipeline_complete": true,
+      "halted_phase": null,
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": {
+        "schema_version": 1,
+        "criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "evaluation_spec_digest": "92bf4f0a709766d9f911cb915e3a837103c027c32eaba07356399a2eaf445f79",
+        "coverage_policy": "per_trial_windows",
+        "run_id": "Classic-v1/frozen/managed-coordinator-frozen",
+        "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+        "declared_training_outcome": "exact",
+        "source_training_evidence_checked": false,
+        "calibration": {
+          "candidate_record": {
+            "algorithm": "explicit-native-threshold-v2",
+            "calibrated": false,
+            "ltzone_path": "$.LTZone",
+            "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+            "original_threshold": 1,
+            "schema_version": 1,
+            "source_model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+            "source_recognition_sha256": "bf9f635d32f8cc2a89b063eeda8affdb92ebbde2200917ac708473ffe56f7dd4",
+            "threshold": 0.004780132099175549
+          },
+          "confirmation_sha256": "21d402fafaa1285a63971737a0c519dceeabe09b64a8492ba36d3752212f2d7e",
+          "ltzone_path": "$.LTZone",
+          "protocol": "historical_same_matrix",
+          "source_solo_sha256": "13ba4cbbf41bb2be742f74e67975328b1de6e16e415677bf691bd33630e0b4a8",
+          "status": "calibrated",
+          "threshold": 0.004780132099175549
+        },
+        "effective_threshold": 0.004780132099175549,
+        "native_execution_verified": false,
+        "evaluation_verdict": null,
+        "invalid_trial_ids": [],
+        "calibration_evidence_checked": true,
+        "calibration_proof_sha256": "21d402fafaa1285a63971737a0c519dceeabe09b64a8492ba36d3752212f2d7e",
+        "statistical_independence_verified": false,
+        "evaluation_partition_verified": false,
+        "validity": "valid",
+        "reason": "complete_declared_evaluation",
+        "pooled_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "by_reset_policy": {
+          "reset_per_trial": {
+            "TP": 2,
+            "FP": 0,
+            "FN": 0,
+            "TN": 2,
+            "targets": 2,
+            "foils": 2,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0,
+            "criterion_satisfied": true,
+            "criterion_assessed": true
+          }
+        },
+        "trials": [
+          {
+            "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.01,
+            "response_end": 0.4,
+            "spike_count": 1,
+            "window_spikes": [
+              0.0485
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          },
+          {
+            "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.4105,
+            "response_end": 0.8005,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/2",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.811,
+            "response_end": 1.201,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/3",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 1.2115,
+            "response_end": 1.6015000000000001,
+            "spike_count": 1,
+            "window_spikes": [
+              1.25
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          }
+        ]
+      }
+    },
+    "Classic-v2": {
+      "native_phases": 4,
+      "pipeline_complete": true,
+      "halted_phase": null,
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": {
+        "schema_version": 1,
+        "criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "evaluation_spec_digest": "f314ff70a7816731f24c468d918926369506c7e6c0285f853bdba7aff73385c8",
+        "coverage_policy": "per_trial_windows",
+        "run_id": "Classic-v2/frozen/managed-coordinator-frozen",
+        "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+        "declared_training_outcome": "exact",
+        "source_training_evidence_checked": false,
+        "calibration": {
+          "candidate_record": {
+            "algorithm": "explicit-native-threshold-v2",
+            "calibrated": false,
+            "ltzone_path": "$.LTZone",
+            "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+            "original_threshold": 1,
+            "schema_version": 1,
+            "source_model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+            "source_recognition_sha256": "becbb68a0362b8c0c4044fe1bd55c83194e35b092417e366e6e40bec1fda0f1c",
+            "threshold": 0.004780132099175549
+          },
+          "confirmation_sha256": "30299e31516a36a0fedf210d116a8d23bcdb72cb8e54e2bb0abb20380ecc7d68",
+          "ltzone_path": "$.LTZone",
+          "protocol": "historical_same_matrix",
+          "source_solo_sha256": "bcd992d5725dc7d01c73fdacc065d4eb107b08cfc50dc95227ed3a427a6ecc0a",
+          "status": "calibrated",
+          "threshold": 0.004780132099175549
+        },
+        "effective_threshold": 0.004780132099175549,
+        "native_execution_verified": false,
+        "evaluation_verdict": null,
+        "invalid_trial_ids": [],
+        "calibration_evidence_checked": true,
+        "calibration_proof_sha256": "30299e31516a36a0fedf210d116a8d23bcdb72cb8e54e2bb0abb20380ecc7d68",
+        "statistical_independence_verified": false,
+        "evaluation_partition_verified": false,
+        "validity": "valid",
+        "reason": "complete_declared_evaluation",
+        "pooled_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "by_reset_policy": {
+          "reset_per_trial": {
+            "TP": 2,
+            "FP": 0,
+            "FN": 0,
+            "TN": 2,
+            "targets": 2,
+            "foils": 2,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0,
+            "criterion_satisfied": true,
+            "criterion_assessed": true
+          }
+        },
+        "trials": [
+          {
+            "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/0",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.01,
+            "response_end": 0.4,
+            "spike_count": 1,
+            "window_spikes": [
+              0.0485
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          },
+          {
+            "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/1",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.4105,
+            "response_end": 0.8005,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/2",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.811,
+            "response_end": 1.201,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/3",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 1.2115,
+            "response_end": 1.6015000000000001,
+            "spike_count": 1,
+            "window_spikes": [
+              1.25
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          }
+        ]
+      }
+    },
+    "Branch-v1": {
+      "native_phases": 4,
+      "pipeline_complete": true,
+      "halted_phase": null,
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": {
+        "schema_version": 1,
+        "criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "evaluation_spec_digest": "8633caf0bc8d5db63113a753caa4e388f884938d9bc4dc08356043af9b24a94f",
+        "coverage_policy": "per_trial_windows",
+        "run_id": "Branch-v1/frozen/managed-coordinator-frozen",
+        "model_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38",
+        "declared_training_outcome": "exact",
+        "source_training_evidence_checked": false,
+        "calibration": {
+          "candidate_record": {
+            "algorithm": "explicit-native-threshold-v2",
+            "calibrated": false,
+            "ltzone_path": "$.LTZone",
+            "model_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38",
+            "original_threshold": 1,
+            "schema_version": 1,
+            "source_model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+            "source_recognition_sha256": "0a74cf70e7dcfd3df7b755461bae34456e705366087ce9c100e497f0d3cfaa64",
+            "threshold": 0.009589717471100379
+          },
+          "confirmation_sha256": "f05c55ff9ccf01ad5ef1336b4266dcfc50cabaa56e7c9513bcae80d47d5bf6ad",
+          "ltzone_path": "$.LTZone",
+          "protocol": "historical_same_matrix",
+          "source_solo_sha256": "643704e9ce20e673f8748369e0c574e8aad61ce8843220546550cc38cca89e70",
+          "status": "calibrated",
+          "threshold": 0.009589717471100379
+        },
+        "effective_threshold": 0.009589717471100379,
+        "native_execution_verified": false,
+        "evaluation_verdict": null,
+        "invalid_trial_ids": [],
+        "calibration_evidence_checked": true,
+        "calibration_proof_sha256": "f05c55ff9ccf01ad5ef1336b4266dcfc50cabaa56e7c9513bcae80d47d5bf6ad",
+        "statistical_independence_verified": false,
+        "evaluation_partition_verified": false,
+        "validity": "valid",
+        "reason": "complete_declared_evaluation",
+        "pooled_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "by_reset_policy": {
+          "reset_per_trial": {
+            "TP": 2,
+            "FP": 0,
+            "FN": 0,
+            "TN": 2,
+            "targets": 2,
+            "foils": 2,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0,
+            "criterion_satisfied": true,
+            "criterion_assessed": true
+          }
+        },
+        "trials": [
+          {
+            "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/0",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.01,
+            "response_end": 0.4,
+            "spike_count": 1,
+            "window_spikes": [
+              0.0485
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          },
+          {
+            "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/1",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.4105,
+            "response_end": 0.8005,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/2",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.811,
+            "response_end": 1.201,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/3",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 1.2115,
+            "response_end": 1.6015000000000001,
+            "spike_count": 1,
+            "window_spikes": [
+              1.25
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          }
+        ]
+      }
+    },
+    "Branch-v2": {
+      "native_phases": 4,
+      "pipeline_complete": true,
+      "halted_phase": null,
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": {
+        "schema_version": 1,
+        "criterion": {
+          "anchor": "onset",
+          "begin_offset": 0,
+          "end_offset": null,
+          "id": "post_anchor_target_whole_window_foil_v1",
+          "reject_target_outside_window": true
+        },
+        "evaluation_spec_digest": "3c7189e0bfafd5cb4570090aaa0fe6aaa6cd984c1fe78a8b1861e206a0b2c66f",
+        "coverage_policy": "per_trial_windows",
+        "run_id": "Branch-v2/frozen/managed-coordinator-frozen",
+        "model_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38",
+        "declared_training_outcome": "exact",
+        "source_training_evidence_checked": false,
+        "calibration": {
+          "candidate_record": {
+            "algorithm": "explicit-native-threshold-v2",
+            "calibrated": false,
+            "ltzone_path": "$.LTZone",
+            "model_revision": "a11b01ce324d332b8ecfb52e8f14e8c23b01ac16becef5a69a82662653ceab38",
+            "original_threshold": 1,
+            "schema_version": 1,
+            "source_model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+            "source_recognition_sha256": "12c93f934c2937e04fe6a16142eef22e8f9d65ffb9df527ba8fb615e2107711d",
+            "threshold": 0.009589717471100379
+          },
+          "confirmation_sha256": "63a92aa6b5e38af258881e4b69b7ad30828d29dc3d6f3f28724ff7520f474072",
+          "ltzone_path": "$.LTZone",
+          "protocol": "historical_same_matrix",
+          "source_solo_sha256": "ac107d4ea69889091fc27e301d1a4cdc7ce08a054c6b3a29bedd52c0a8100496",
+          "status": "calibrated",
+          "threshold": 0.009589717471100379
+        },
+        "effective_threshold": 0.009589717471100379,
+        "native_execution_verified": false,
+        "evaluation_verdict": null,
+        "invalid_trial_ids": [],
+        "calibration_evidence_checked": true,
+        "calibration_proof_sha256": "63a92aa6b5e38af258881e4b69b7ad30828d29dc3d6f3f28724ff7520f474072",
+        "statistical_independence_verified": false,
+        "evaluation_partition_verified": false,
+        "validity": "valid",
+        "reason": "complete_declared_evaluation",
+        "pooled_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "by_reset_policy": {
+          "reset_per_trial": {
+            "TP": 2,
+            "FP": 0,
+            "FN": 0,
+            "TN": 2,
+            "targets": 2,
+            "foils": 2,
+            "target_trials_with_outside_spikes": 0,
+            "accuracy": 1.0,
+            "target_hit_rate": 1.0,
+            "foil_response_rate": 0.0,
+            "criterion_satisfied": true,
+            "criterion_assessed": true
+          }
+        },
+        "trials": [
+          {
+            "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/0",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.01,
+            "response_end": 0.4,
+            "spike_count": 1,
+            "window_spikes": [
+              0.0485
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          },
+          {
+            "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/1",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.4105,
+            "response_end": 0.8005,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/2",
+            "sample_id": "foil",
+            "label": "foil",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 0.811,
+            "response_end": 1.201,
+            "spike_count": 0,
+            "window_spikes": [],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TN"
+          },
+          {
+            "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/3",
+            "sample_id": "target",
+            "label": "target",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "response_begin": 1.2115,
+            "response_end": 1.6015000000000001,
+            "spike_count": 1,
+            "window_spikes": [
+              1.25
+            ],
+            "early_spikes": [],
+            "late_spikes": [],
+            "classification": "TP"
+          }
+        ]
+      }
+    },
+    "Classic-N0": {
+      "native_phases": 1,
+      "pipeline_complete": false,
+      "halted_phase": "train",
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": null
+    },
+    "Classic-N1": {
+      "native_phases": 1,
+      "pipeline_complete": false,
+      "halted_phase": "train",
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": null
+    },
+    "Branch-N0": {
+      "native_phases": 1,
+      "pipeline_complete": false,
+      "halted_phase": "train",
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": null
+    },
+    "Branch-N1": {
+      "native_phases": 1,
+      "pipeline_complete": false,
+      "halted_phase": "train",
+      "primary_sqlite_tables": [
+        "metadata",
+        "leases",
+        "managed_unit_intents"
+      ],
+      "evaluation": null
+    }
+  },
+  "resource_ready": true,
+  "scientific_verdict": null,
+  "source_promoted_to_develop": false,
+  "whole_plan_complete": false
+}
