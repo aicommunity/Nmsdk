@@ -122,6 +122,13 @@ def _process_policy(args):
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    pipeline = commands.add_parser("pipeline", help="managed Train/export/optional tuning/frozen Test with a durable boundary journal")
+    pipeline.add_argument("action", choices=("run", "continue", "audit"))
+    pipeline.add_argument("directory", type=Path)
+    pipeline.add_argument("--specification", type=Path)
+    pipeline.add_argument("--runtime-manifest", type=Path)
+    pipeline.add_argument("--process-policy", type=Path)
+    pipeline.add_argument("--stop-after", choices=("train", "export", "posttune", "calibrate", "evaluate"))
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
@@ -268,6 +275,25 @@ def main(argv: list[str] | None = None) -> int:
     reuse.add_argument("--reference-archive")
     reuse.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
+    if args.command == "pipeline":
+        from .managed_pipeline import run_pipeline, audit_pipeline
+        from .native_evidence import load, require, EvidenceError
+        try:
+            if args.action == "audit":
+                require(all(v is None for v in (args.specification, args.runtime_manifest,
+                                               args.process_policy, args.stop_after)), "pipeline_audit_execution_options")
+                result = audit_pipeline(args.directory)
+            else:
+                require(all(v is not None for v in (args.specification, args.runtime_manifest,
+                                                   args.process_policy)), "pipeline_execution_inputs_required")
+                result = run_pipeline(args.specification, args.runtime_manifest, load(args.process_policy),
+                                      args.directory, resume=args.action == "continue", stop_after=args.stop_after)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result["pending_phase"] is None and result["halted_phase"] is None else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_managed_pipeline_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
     if args.command == "primary-reuse":
         from .primary_reuse import pack, restore
         from .native_evidence import EvidenceError, require
