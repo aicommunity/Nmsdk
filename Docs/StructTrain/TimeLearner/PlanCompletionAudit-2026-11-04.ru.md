@@ -312,3 +312,8 @@ original dataset304 не менялся. Failed attempts сохранены. Э�
 ### Читаемые графики fresh-process переноса
 
 [Отчёт и ограничения](JointOwnerReplayVisuals.ru.md): на M40 прошёл реальный plotting gate 1/1 для 8 моделей, 12 сом и 60 видов. В Git сохранены 24 выбранных PNG и данные проверки; полные отчёты — воспроизводимый кэш на отдельном диске M40. Проверка не заменяет научную матрицу всех паттернов. Joint ASan и остальные пункты плана остаются открытыми; стадии целиком не закрываются.
+
+
+## Pending cable/E1 migration04.11
+
+Feature `1d5c8276cc9344362ebffccf43a0970d55cc2084` подготовил удаление20 связанных исторических cable/E1 tools. Числа и первичные данные сохранены; source retrieval внесён в candidate manifest141 records. В текущем develop остаётся принятый manifest121 records; общий остаток217 не уменьшается до завершения gate. [Два bounded metadata workers и exact handles](../../../Reports/StructTrain/TimeLearner/s09-cable-retirement-queued-a1/jobs.json) ожидают закрытия предшествующих native jobs. Исторический код не исполняется; общая native equivalence не заявляется.
