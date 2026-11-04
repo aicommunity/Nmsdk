@@ -1,3 +1,5 @@
+Принята группа cable/E1:manifest141 records,139 retired/2 moved; оба workers/negative/scope gates пройдены. [Приёмка](CableFamilyRetirement.ru.md). Следующие9 root tools подготовлены отдельно, candidate150 ещё не принят: [scope](RemainingRootToolsRetirement.ru.md).
+
 Принят04.11 пакет theory/sim:14 исторических исходников удалены без wrappers; manifest121 records (119 retired,2 moved), complete=false. Production history CLI и restored-path negative control проверены на обоих workers. [Источники и приёмка](TheoryScriptRetirement.ru.md). Общая migration ещё не завершена.
 
 # Миграция скриптов TimeLearner
