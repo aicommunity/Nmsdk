@@ -277,3 +277,12 @@ reader119 и source4c reader124 не прошли. CLI shadowing исправл�
 fresh-process replay, затем полный reader gate. Недостающий domain fixture
 получен в отдельном native2, не добавлен задним числом в старый native304.
 Все failed attempts сохранены в Git; algorithm feature/joint ASan не приняты.
+
+
+## Normal joint owner8/readers128
+
+[Восемь настоящих отдельных импортов](JointOwnerReplayNormal.ru.md) и полный
+reader128 source982 прошли. Новые ответы byte-exact с original paired waveform,
+original dataset304 не менялся. Failed attempts сохранены. Это закрывает
+конкретные normal reader/replay blockers; joint ASan и общий режимный/scientific
+охват остаются pending. Код алгоритмов/Pulsecc этим evidence merge не promoted.
