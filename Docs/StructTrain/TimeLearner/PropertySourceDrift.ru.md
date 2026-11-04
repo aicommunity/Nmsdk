@@ -111,3 +111,10 @@ helper evidence для каждой группы и реальные прове�
 catalog не заменяет требуемую inherited runtime/connected/profile матрицу.
 Сверка источников не доказывает полноту истории экспериментов, migration,
 самостоятельный frozen Test или поддержку C-trim/target-reference calibration.
+
+
+## Принятый PulseLib9ec: повторная сверка04.11
+
+[Новый read-only catalog drift](PropertyAcceptedSourceDrift-20261104.json) сравнивает прежний принятый `456a5abdb0ff36a218b25943f7f2c6f9c2175190` с текущим `9ec4566d71bf56d4eeb5c8a920bbc683fcd85299`. По неизменяемым Git blobs найдено217→217 записей, без добавлений/удалений и без изменений исследованных declaration type/flags, registration name, setter/body и source default mentions. Source anchors, blob IDs и SHA256 для обоих снимков сохранены в JSON.
+
+Это локальная статическая сверка production utility, не новый runtime gate и не server-reproduced receipt. Она не распространяет прежнюю runtime-приёмку на изменённые helpers/consumers и не подтверждает новую алгоритмическую семантику. Предыдущие217-record серверные receipts относятся к прежнему снимку456a5ab и остаются историческими. Pending Pulse cc971/8644 не становится принятым от этой проверки. Полная property/mode/physics matrix открыта.
