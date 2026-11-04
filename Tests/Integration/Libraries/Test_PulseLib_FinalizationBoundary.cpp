@@ -6,6 +6,7 @@
 #include "TimeLearner/NativeFinalizationControlPolicy.h"
 #include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativeLiveFinalization.h"
+#include "TimeLearner/ModelArchive.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerJobSupport.h"
 #include <cstdlib>
@@ -413,27 +414,41 @@ enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, 
 template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario scenario)
 {
     const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
-    if(!directory)GTEST_SKIP()<<"Requires profile/design source; training itself is cold";
+    const auto coldDirectory=std::getenv("TIMELEARNER_LIVE_COLD_SOURCE");
+    const auto calibrationDirectory=std::getenv("TIMELEARNER_LIVE_CALIBRATION_SOURCE");
+    if(!directory || !coldDirectory || !calibrationDirectory)
+        GTEST_SKIP()<<"Requires separate saved-state, cold-training and calibration declarations";
     constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
     const std::string name=std::string(branch?"Branch":"Classic")+"_live_finalization_"+
         std::to_string(mode)+(connected?"_connected":"_local")+"_"+std::to_string(int(scenario));
     const QDir root(QString::fromLocal8Bit(directory));
     const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
-    const auto oldSolo=job["source_recognition"].toObject()["source_solo"].toObject();
     const auto implementation=job["implementation_id"].toString().toStdString();
-    auto configuration=DecodeConfiguredNativeTraining(oldSolo["configuration"].toObject());
+    const QString coldName=branch?"Branch-v1":"Classic-v1";
+    const QDir coldRoot(QString::fromLocal8Bit(coldDirectory));
+    const auto coldJob=NmsdkWorker::ReadDocument(coldRoot.filePath(coldName+"-train/input/job.json"));
+    const auto evaluationJob=NmsdkWorker::ReadDocument(coldRoot.filePath(coldName+"-frozen/input/job.json"));
+    const auto calibrationJob=NmsdkWorker::ReadDocument(QDir(QString::fromLocal8Bit(calibrationDirectory)).filePath(
+        coldName+"/measured-grid-job.json"));
+    for(const auto& declaration:{coldJob,evaluationJob,calibrationJob}) {
+        NmsdkWorker::Require(NmsdkWorker::Signed(declaration)==declaration,"live_fixture_job_digest_mismatch");
+        NmsdkWorker::Require(declaration["implementation_id"]==job["implementation_id"],"live_fixture_implementation_mismatch");
+    }
+    NmsdkWorker::Require(coldJob["kind"]==QJsonValue("timelearner_native_training_job") &&
+        coldJob["schema_version"]==QJsonValue(1),"live_fixture_requires_cold_training_declaration");
+    auto configuration=DecodeConfiguredNativeTraining(coldJob["configuration"].toObject());
     configuration.runId=name;
     if(scenario==LiveScenario::Stopped)configuration.maximumModelSeconds=1./2000.;
     NativeThresholdGridSpec grid;grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
     grid.confirmation.attemptId=name+"/post_tune";
-    for(const auto& value:job["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(value.toObject()));
+    for(const auto& value:evaluationJob["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(value.toObject()));
     if(scenario==LiveScenario::InvalidDesign) {
         EXPECT_GE(grid.trials.size(),2u);
         grid.trials[1]=grid.trials.front();grid.trials[1].trialId+="/second-target";
     }
     if(scenario==LiveScenario::Calibrate) {
-        for(const auto& value:job["thresholds"].toArray())grid.thresholds.push_back(value.toDouble());
-        grid.maximumCandidates=std::size_t(job["maximum_candidates"].toDouble());
+        for(const auto& value:calibrationJob["thresholds"].toArray())grid.thresholds.push_back(value.toDouble());
+        grid.maximumCandidates=std::size_t(calibrationJob["maximum_candidates"].toDouble());
     }
     auto spec=DecodeNativePostTuneControls(job["post_tune"].toObject(),grid);
     spec.mode=NativePostTuneControllerMode::KeepDone;spec.canonicalFloor=spec.canonicalLast=0.;spec.resistanceBounds.clear();
@@ -467,7 +482,14 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
             EXPECT_TRUE(owner->IsNeedToTrain.SetPointer(0,&flag->Value));
         }
         const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");
-        if(output)EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+        if(output) {
+            EXPECT_TRUE(QDir().mkpath(QString::fromLocal8Bit(output)));
+            NmsdkWorker::Write(QString::fromLocal8Bit(output),QString::fromStdString(name)+"_source_declarations.json",
+                {{"kind","native_live_fixture_declarations"},{"schema_version",1},
+                 {"training_job_sha256",coldJob["sha256"]},{"evaluation_job_sha256",evaluationJob["sha256"]},
+                 {"calibration_job_sha256",calibrationJob["sha256"]},{"post_tune_controls_job_sha256",job["sha256"]},
+                 {"cold_training",true},{"saved_model_installed",false}});
+        }
         std::vector<NativeProbeSample> samples;std::size_t trial=0;
         owner->SetConfiguredNativeEvidenceSinks({[&](const auto&,const auto&){samples.clear();},
             [&](const auto& sample){samples.push_back(sample);},[&](const auto& result) {
@@ -605,9 +627,13 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
              {"scientific_verdict",QJsonValue(QJsonValue::Null)}});
         return ::testing::Test::HasFailure()?2:0;
     },[&](auto storage,auto environment) {
-        // Only registers the original physical images. Neither learned graph,
-        // learned parameters nor the saved training controller is installed.
-        auto source=PrepareNativeLearnedState(oldSolo,storage,environment,implementation);
+        // The same cold-job storage registration as the production Console.
+        // No saved learned graph, parameters or controller is installed.
+        for(const auto& value:coldJob["profile_archives"].toArray()) {
+            const auto profile=NmsdkWorker::Object(value);
+            const auto imageImplementation=NmsdkWorker::Text(NmsdkWorker::Object(profile["metadata"])["implementation_id"]);
+            NmsdkTools::PrepareModelArchive(profile,storage,environment,QString::fromStdString(imageImplementation));
+        }
     }),0);
 }
 }
