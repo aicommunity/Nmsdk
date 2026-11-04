@@ -343,3 +343,7 @@ Coordinator source2cc остаётся queued на Elder; готовый reconci
 ## Очередь сверки после сбоя coordinator
 
 [Точное bounded задание7 checks](../../../Reports/StructTrain/TimeLearner/s10-managed-reconciliation-queued-normal-a1/job.json), source71b56cd5b1a0ce877054f9e45bc59f30fc2523c8, поставлено на Elder после полного закрытия и освобождения coordinator8. Это новые временные копии настоящего completed corpus с сохранением symlink log aliases, без новых native units. Не принято до фактического gate. Corrected baseline33fc уже прошёл focused25/25; полный133 ещё выполняется. Ни lifecycle candidate8644, ни новый coordinator/reconcile не promoted в develop.
+
+## Pending ранний preflight всех фаз
+
+[Новая постановка и ограничения](ManagedDeclarationPreflight.ru.md), candidate427a5f2ef28b90a76c458951cad8ef70bb118c95: до Train проверяются объявленные downstream probe/grid/conversion factors, criterion проверяется общей функцией scorer. Portable audit прежних schema1 данных сохраняет прежнюю structural validation. [Серверный gate11](../../../Reports/StructTrain/TimeLearner/s10-managed-declaration-queued-normal-a1/job.json) ждёт закрытия metadata reconcile worker и использует настоящий coordinator corpus без новых native units. Код не promoted; обязательны также полный повтор coordinator8 с собственными target negative jobs и scorer regression. Этап10 и весь план остаются частичными.

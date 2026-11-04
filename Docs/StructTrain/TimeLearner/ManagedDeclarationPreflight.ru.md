@@ -1,0 +1,11 @@
+# Pending: проверка downstream declaration до Train
+
+Новый pipeline run/continue до runtime/lease и создания output проверяет объявленные export/evaluate/calibrate/PostTune probe factors. Исторический learned state для такой проверки не создаётся: используются topology/frequency/initial_isi из объявленного cold Train. На границе каждой фазы остаётся полная проверка настоящего predecessor и его первичных данных.
+
+Проверяются поля/режим conversion и индивидуальные bounds, соответствие branch/N1 историческому преобразованию; criterion, уникальность trial ID, sample/label/pattern consistency, размерность и target hash, конечные duration/grid values, sample budget и частота калибровки. Общие target/foil правила использует существующий validate_trial_design. Проверка criterion механически выделена из production scorer в validate_response_criterion и вызывается обоими путями; определения verdict не дублируются.
+
+Это ранняя проверка известных declaration factors. Она не доказывает effective storage graph, native integration stability, фактические stimulus timestamps или длительность окна относительно измеренного onset. Полная семантика PostTune и embedded conversion PostTune остаётся у native worker; отсутствие ошибки preflight не означает runtime capability для всей матрицы.
+
+Portable audit прежних schema1 документов сохраняет прежнюю structural validation: новые требования не добавляются задним числом к неисполненным фазам исторического stopped Train. Новые исполнения и continuation требуют раннюю проверку всех объявленных фаз. В будущих negative coordinator fixtures target evaluation теперь соответствует их собственному Train initial_isi, хотя Train должен остановиться раньше export. Старые первичные данные и текущий source2cc job не меняются.
+
+Подготовлены11 metadata/CLI checks на реальном completed coordinator corpus: четыре положительные декларации, duplicate trial, неверная target label, sample collision, clipped samples, nonfinite duration, criterion, calibration frequency/grid, несовместимый historical conversion и public CLI rejection до output. CLI control имеет policy null и не может запустить модель при регрессии preflight. Runtime gate не выполнен; локально проверен только AST. Общий повтор native coordinator8 с исправленными negative declarations и reader/scorer regression ещё обязателен до продвижения кода в develop.
