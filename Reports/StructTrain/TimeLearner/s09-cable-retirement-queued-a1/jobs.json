@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "queued_not_accepted",
+  "candidate_root": "1d5c8276cc9344362ebffccf43a0970d55cc2084",
+  "base_root": "3c5e777393776d5340131b03a31b34f4cb668b27",
+  "candidate_retired_files": 20,
+  "candidate_manifest_records": 141,
+  "currently_accepted_manifest_records": 121,
+  "expected_changed_paths": 36,
+  "tests": [
+    "production history verify-migration141 records",
+    "restored historical script negative tree rejected",
+    "exact scope and unchanged Scripts/Tests/App/CMake and child gitlinks"
+  ],
+  "workers": [
+    {
+      "host": "10.245.1.11",
+      "label": "elder",
+      "outer_pid": 2026030,
+      "worker_pid": 2026046,
+      "worker_start_ticks": "336855777",
+      "readback": "/home/user/timelearner-refactor/readbacks/s09-cable-retirement-a1",
+      "predecessor": "s10-managed-native-calibration-changed-rollback-normal-a1-container",
+      "orchestration_uncompressed_sha256": "ae8369a48edb61ba8acca689619f793bb11682b869a6c3562a92336c11e42ce6"
+    },
+    {
+      "host": "10.245.1.17",
+      "label": "m40",
+      "outer_pid": 3885756,
+      "worker_pid": 3885765,
+      "worker_start_ticks": "287398613",
+      "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-cable-retirement-a1",
+      "predecessor": "s07-csearch-threshold-joint-asan-gate-a2-container and legacy K1 exact PID/start absent or terminal",
+      "orchestration_uncompressed_sha256": "1491743aa691b2758885d879f3e37ef3e7609fd38478fe215390d39b8d1d3e7c"
+    }
+  ],
+  "worker_memory_cap_bytes": 536870912,
+  "worker_tasks_max": 128,
+  "whole_worker_budget_seconds": 86400,
+  "queue_wait_budget_seconds": 64800,
+  "historical_scripts_executed": false,
+  "native_models_executed": 0,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}
