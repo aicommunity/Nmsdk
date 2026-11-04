@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 8,
+    "observed": 8,
+    "failed_test_ids": [
+      "NativeRecognitionOwner/ClassicFreshDestination",
+      "NativeRecognitionOwner/BranchFreshDestination",
+      "NativeRecognitionOwner/ClassicSpikingFreshDestination",
+      "NativeRecognitionOwner/BranchSpikingFreshDestination",
+      "NativeRecognitionOwner/ClassicN0",
+      "NativeRecognitionOwner/BranchN0",
+      "NativeRecognitionOwner/ClassicN1",
+      "NativeRecognitionOwner/BranchN1"
+    ],
+    "assertion_status": "failed",
+    "sha256": "6d75f808dfb5b0d92bcda8440a48a3540fd0a1aa33a50942fe26860485eead7c"
+  },
+  "scientific_verdict": null
+}
