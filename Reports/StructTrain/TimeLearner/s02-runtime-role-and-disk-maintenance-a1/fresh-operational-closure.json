@@ -1,0 +1,100 @@
+{
+  "interface": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s10-native-runtime-interface-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2540f779b4276931bf13ab617edfb36e40919922e45c1bb075ff0190235ec061",
+        "unit": "timelearner-ee2cbcee-92a6-4e7b-a049-aff0090184a9.service",
+        "invocation_id": "217f5571bc6e4efe946b70ceb475a0c6",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ee2cbcee-92a6-4e7b-a049-aff0090184a9.service",
+        "initial_main_pid": 2347566,
+        "initial_start_ticks": "338969433",
+        "sha256": "22c8f6b1ffff02d78f78ab5e9b67a20d6c0ec854a8caf760bb7647920d75f58d"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-ee2cbcee-92a6-4e7b-a049-aff0090184a9.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "17860f0a-e4bd-4c48-bf45-2e3278ec5e69",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "invalid_live": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s10-managed-live-routing-normal-a3",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a3-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "0d870c48332febfa09c15e6359292b0c83503df6e874ffebd7f351934912fdad",
+        "unit": "timelearner-8aa13f2b-e170-4be0-bd20-d578a239bac6.service",
+        "invocation_id": "821d815591c746148ffd13cfc553b7fd",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8aa13f2b-e170-4be0-bd20-d578a239bac6.service",
+        "initial_main_pid": 2311267,
+        "initial_start_ticks": "338873654",
+        "sha256": "7ff1578b174366e4e547a67421c499fc9bb2dd989e4a314e05a43be7ca824c21"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-8aa13f2b-e170-4be0-bd20-d578a239bac6.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "8febf56f-a81d-49f9-a239-032f5e87fd93",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  }
+}
