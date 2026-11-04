@@ -13,7 +13,7 @@ import math
 import platform
 from pathlib import Path
 
-from .native_evidence import audit_probe, load, number, require
+from .native_evidence import audit_probe, load, measured_wave_plateaus, number, require
 from .plotting import padded_limits, render_soma, plotting_runtime
 
 
@@ -72,6 +72,11 @@ def render_probe(packet_path: Path, trace_path: Path, output: Path, comparison_l
         if quality is not None:
             chart["unobserved_intervals"]=quality["unobserved_intervals"]
             chart["sample_markers"]=not quality["recorded_window_complete"]
+            if quality["recorded_window_complete"] and not audit["valid_observation"]:
+                baseline=number(spec["baseline"][channel])
+                signal=[number(number(sample["soma"][channel])-baseline) for sample in samples]
+                chart["diagnostic_peak_indices"]=[first for first,_ in
+                    measured_wave_plateaus(signal,number(spec["minimum_amplitude"]))]
         label=f"Soma{channel+1}.SumPotential (CSV soma{channel})"
         limits=padded_limits(values) if comparison_limits is None else comparison_limits[channel]
         require(limits[0] < min(values) <= max(values) < limits[1], "probe_comparison_limits_clip_primary_data")

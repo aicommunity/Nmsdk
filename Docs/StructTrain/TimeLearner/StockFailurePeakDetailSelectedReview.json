@@ -1,0 +1,26 @@
+{
+  "kind": "stock_failure_selected_peak_detail_review",
+  "source_proof": "bb0a5080aa5334647580264e4d78ca3726db14ea",
+  "source_root": "988d4bfb706f9a3e3520bb012a6fe93304baf4ef",
+  "selected_peak_details_directly_reviewed": 4,
+  "prior_overviews_directly_reviewed": 8,
+  "prior_overview_png_bytes_unchanged": true,
+  "scope": "twelve selected original PNG views only",
+  "selected_view_acceptance": "passed",
+  "full_cache_manual_review_complete": false,
+  "files": {
+    "Branch-threshold-low-terminal-invalid-peak-detail.png": "65c20a8d8d889bb224f75e6460baa33e98212e768cdd3be7b9c31e3fc79c62d4",
+    "Branch-threshold-training100-terminal-invalid-peak-detail.png": "57bf53be06f17f5ff30472893aa13b3cc3ef40a5ab0b45fe9d597adb7868a2b0",
+    "Classic-threshold-low-terminal-invalid-peak-detail.png": "b1b330f181612a66deeacdab8a40e747eb08d11e2bc968794f535e945d3e4f67",
+    "Classic-threshold-training100-terminal-invalid-peak-detail.png": "591ba85e5fbb1b99cfa7cf3880cb39e9e8a8acc5a6208461ab6f342696014f15"
+  },
+  "findings": [
+    "The small Branch maximum around1.8689e-5 is clearly resolved on an explicit local Y scale, with21 actual sample markers and zero actual input in this narrow neighbourhood.",
+    "The Classic low-threshold secondary maximum around0.03053 is resolved without suppressing the global negative excursion in the overview.",
+    "Both high-threshold broad maxima retain actual native sample positions and visible curvature in the local view.",
+    "All four additional views explicitly label local_detail Y and retain absolute model time, including the displayed axis offset.",
+    "No observation, threshold, physical parameter, wave criterion or scientific verdict was changed."
+  ],
+  "native_rerun": false,
+  "scientific_verdict": null
+}

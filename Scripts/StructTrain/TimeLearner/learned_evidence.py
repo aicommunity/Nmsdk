@@ -39,6 +39,8 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
     require(protocol["schema_version"] == 3 and protocol["revision"] == certificate["protocol_revision"],
             "package_protocol_mismatch")
     config = package["configuration"]
+    from .native_model_spec import validate_model_spec
+    validate_model_spec(config['model'])
     repeats = validate_configured_repeat_policy(config, summary)
     require(config["search"]["tolerances"] == summary["tolerances"] and
             config["search"]["bounds"] == summary["configuration"]["bounds"], "package_configuration_mismatch")

@@ -10,7 +10,7 @@ import hashlib
 
 from .native_evidence import count, equal, load, number, require
 from .model_identity import canonical_model_sha256 as sha
-from .native_calibration_worker import _digest, _evidence_boundary, _record, _signed, _write
+from .native_calibration_worker import _artifact_files, _digest, _evidence_boundary, _record, _signed, _write
 from .process_runner import execute, verify_runtime
 from .learned_evidence import load_case, audit_learned_state
 from .recognition_evidence import audit_recognition_source
@@ -81,6 +81,8 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
+        from .native_model_spec import validate_model_spec
+        validate_model_spec(config['model'])
         require(type(config) is dict and type(config["model"]) is dict and
                 type(config["model"]["branch"]) is bool and type(config["run_id"]) is str and config["run_id"],
                 "invalid_training_declaration")
@@ -178,6 +180,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 identity["schema_version"] == 2 and identity["valid"] is True and identity["diagnostics"] == [] and
                 identity["sha256"] == sha(identity["model"]) == execution["model_revision"],
                 "preflight_model_binding_changed")
+        from .native_model_spec import audit_initial_threshold
+        audit_initial_threshold(job['configuration']['model'], identity)
         parameters, inputs = initial["parameters"], job["configuration"]["model"]["inputs"]
         require(type(parameters) is list and len(parameters) == len(inputs) and all(
                 type(p) is dict and set(p) == {"length", "synapses", "resistance"} and
@@ -198,6 +202,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 "native_execution_verified": False, "evaluation_verdict": None}
     if live:
         from .live_training_worker import audit_live_training
+        from .native_model_spec import audit_initial_threshold
+        audit_initial_threshold(job['configuration']['model'], load(directory/'initial-state.json')['identity'])
         return audit_live_training(directory, job, execution, names)
     if mode == "train":
         completed = execution["completed_boundary"]
@@ -222,6 +228,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 initial["configuration_sha256"] == sha(job["configuration"]) and
                 initial["identity"]["valid"] is True and
                 initial["identity"]["sha256"] == sha(initial["identity"]["model"]), "pipeline_cold_initial_state_invalid")
+        from .native_model_spec import audit_initial_threshold
+        audit_initial_threshold(job['configuration']['model'], initial['identity'])
         inputs = job["configuration"]["model"]["inputs"]
         require(len(initial["parameters"]) == len(inputs) and all(
             p["length"] == declared["attachment"] and p["synapses"] == declared["synapses"] and
@@ -340,15 +348,16 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         "preflight": preflight, "analysis": audit,
         "analysis_code": [{"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                           for p in sorted(Path(__file__).parent.glob("*.py"))],
-        "artifacts": [_record(p, output) for p in sorted(output.rglob("*")) if p.is_file()],
+        "artifacts": [_record(p, output) for p in _artifact_files(output)],
         "independent_partition_verified": False, "evaluation_verdict": None}
     _write(output/"run-manifest.json", _signed(result))
     return result
 
 
 @_evidence_boundary
-def audit_run_manifest(path):
+def audit_run_manifest(path, *, historical_analysis=None):
     """Recompute portable source, native result and process/runtime bindings."""
+    require(historical_analysis in (None, 'learned-v2-no-capacitance'), 'unknown_pipeline_historical_adapter')
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
     require(set(manifest) == {"kind", "schema_version", "operation", "execution", "validity", "job_sha256",
@@ -363,8 +372,8 @@ def audit_run_manifest(path):
     require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
             type(r["path"]) is str for r in records), "pipeline_run_artifact_schema")
     names = {r["path"] for r in records}
-    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in root.rglob("*")
-            if p.is_file() and p != path}, "pipeline_run_artifact_closure_changed")
+    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in _artifact_files(root)
+            if p != path}, "pipeline_run_artifact_closure_changed")
     for r in records:
         relative = PurePosixPath(r["path"])
         require(not relative.is_absolute() and ".." not in relative.parts and "\\" not in r["path"], "pipeline_artifact_escape")
@@ -442,7 +451,25 @@ def audit_run_manifest(path):
                     "cooperative_capture_argument_missing")
     if auditable and process["execution"] != "completed":
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
-    require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+    comparison = audit
+    adapter_used = False
+    if historical_analysis is not None and manifest['analysis'] != audit:
+        # Explicit adapter for archived training evidence. The only supported
+        # drift is auditor2 -> auditor3 adding capacitance_state=None. Keep
+        # every result, certificate, primary count and runtime check strict.
+        require(manifest['schema_version'] == 1 and mode == 'train' and type(audit) is dict and
+                type(manifest['analysis']) is dict and type(audit.get('training_audit')) is dict and
+                type(manifest['analysis'].get('training_audit')) is dict,
+                'unsupported_pipeline_historical_analysis')
+        old, current = manifest['analysis']['training_audit'], audit['training_audit']
+        require(old.get('auditor_version') == 2 and 'capacitance_state' not in old and
+                current.get('auditor_version') == 3 and 'capacitance_state' in current and
+                current['capacitance_state'] is None, 'unsupported_pipeline_historical_analysis')
+        projected = {**current, 'auditor_version': 2};projected.pop('capacitance_state')
+        comparison = {**audit, 'training_audit': projected};adapter_used = True
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")
-    return {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
+    result = {"run_evidence_consistent": True, "operation": mode, "native_execution_verified": False,
             "independent_partition_verified": False, "evaluation_verdict": None}
+    if adapter_used:result['historical_analysis_adapter'] = historical_analysis
+    return result
