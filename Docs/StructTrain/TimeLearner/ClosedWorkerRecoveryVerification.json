@@ -1,0 +1,74 @@
+{
+  "kind": "closed_worker_recovery_verification",
+  "scientific_verdict": null,
+  "complete_queue_attested": false,
+  "workers": {
+    "elder": {
+      "bytes": 29256,
+      "sha256": "aafa21888c7edf48d21cb0208f38546fa999e1be3e936794897f3155ef6eba9e",
+      "members_verified": 223,
+      "source_blobs_verified": 273,
+      "proof_commit": "989d03fab5133d2b37d7a90b4f904082e574cee0",
+      "source_commit": "adc1f6227144360097b378a33e1db564794e0442",
+      "tests_passed": 49,
+      "persisted_recoveries_verified": 3,
+      "closed_cgroups": 18,
+      "kernel_limit_readbacks": 17,
+      "previous_attempts": {
+        "a1": {
+          "bytes": 28188,
+          "sha256": "b4de615d25d59a922df83c951d5bf42c5da4be7082d4c4f174c7ed2981d04fea",
+          "members_verified": 217,
+          "source_blobs_verified": 273,
+          "accepted_current": false,
+          "returncode": 1
+        },
+        "a2": {
+          "bytes": 28088,
+          "sha256": "549871945e5f103387b8abfe49d8f7836e2a446bffe703ffeb49330fe4355361",
+          "members_verified": 217,
+          "source_blobs_verified": 273,
+          "accepted_current": false,
+          "returncode": 0
+        }
+      },
+      "neural_runs": 0,
+      "cleanup": {
+        "files_deleted": 1832,
+        "generated_object_bytes_deleted": 815872568,
+        "receipt_sha256": "a0c379873ce5bcb636e10fb2404485411278db4433a8f86578619db762584748"
+      }
+    },
+    "m40": {
+      "bytes": 30268,
+      "sha256": "f94aebcea153a4448f5e3e0e53813df1513feab1913a348f0a23ebbc85d5ff54",
+      "members_verified": 223,
+      "source_blobs_verified": 273,
+      "proof_commit": "035832fca10aa1747f9e3bf78dcd560fdcd6ea0f",
+      "source_commit": "adc1f6227144360097b378a33e1db564794e0442",
+      "tests_passed": 49,
+      "persisted_recoveries_verified": 3,
+      "closed_cgroups": 18,
+      "kernel_limit_readbacks": 17,
+      "previous_attempts": {
+        "a1": {
+          "bytes": 29220,
+          "sha256": "e0db912f2de8ca1b5e286cc1c74acafbcc1a422569d6aff17068e53ac5934fcf",
+          "members_verified": 217,
+          "source_blobs_verified": 273,
+          "accepted_current": false,
+          "returncode": 1
+        },
+        "a2": {
+          "bytes": 29168,
+          "sha256": "11d767858765922f16d73b0a5f1e1e999b2312f206e4f9dd9682ed65b4001e06",
+          "members_verified": 217,
+          "source_blobs_verified": 273,
+          "accepted_current": false,
+          "returncode": 0
+        }
+      },
+      "neural_runs": 0
+    }
+  }
+}

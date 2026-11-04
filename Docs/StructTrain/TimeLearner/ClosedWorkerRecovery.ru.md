@@ -1,6 +1,6 @@
 # Явное восстановление резерва завершённого worker
 
-Статус: реализация в отдельной ветке; серверная приёмка ещё не выполнена.
+Статус: адресная серверная приёмка выполнена на Elder и M40.
 Это часть этапа10, а не приёмка всего scheduler.
 
 `Reservations.recover_closed_worker(token, contained_directory, note=...)`
@@ -27,4 +27,25 @@ lease в released; `recovery_history()` читает события. Исход�
 SQLite API: живой осиротевший child; остановка всей группы; восстановление и
 перечитывание capacity; schema1; неверный закрытый unit; внешний controller;
 живой владелец; пустая причина; другой boot; повторный recovery. Полные наборы
-существующих reservation/contained tests также подлежат повторному выполнению.
+существующих reservation/contained tests также повторно выполнены.
+
+## Проверенный срез
+
+Source `adc1f6227144360097b378a33e1db564794e0442`: по49/49 на каждом
+сервере, без failures/errors/skips:15 reservations,15 budgets,13 contained
+processes,6 recovery. В каждом архиве223 файла,273 исходных Python blobs
+сверены с Git,18 закрытых cgroups,17 kernel limit readbacks и3 сохранённых
+recovery events с повторно прочитанными released ledgers. Нейронных прогонов0.
+
+Proofs `989d03fab5133d2b37d7a90b4f904082e574cee0` и
+`035832fca10aa1747f9e3bf78dcd560fdcd6ea0f`; подробная независимая сверка
+в [ClosedWorkerRecoveryVerification.json](ClosedWorkerRecoveryVerification.json).
+Первый запуск a1 имел13 ошибок сохранения доказательств из-за повторного
+обнаружения импортированного класса тестов; не принят. a2 прошёл49/49;
+в a3 дополнительно сохраняются реальные recovery events и ledger readbacks.
+Исходные архивы a1/a2 включены в новые proofs, без изменения результатов.
+
+В Elder proof также сохранён сжатый журнал удаления1832 старых CMake `.o`
+в четырёх закрытых сборках:815872568 bytes. Зависимости `_deps`, готовые
+библиотеки, исходники, модели и результаты не удалялись. Перед удалением
+проверены реальные пути, CMakeCache, открытые handles и mappings процессов.
