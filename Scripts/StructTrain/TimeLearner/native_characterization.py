@@ -121,7 +121,7 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
         'implementation_id': package['implementation_id'], 'model': deepcopy(c['model']), 'profile_archives': [],
         'stimulus_profile': deepcopy(c['stimulus_profile']), 'probe': probe, 'source_stopped': deepcopy(package),
         'resistance_intervention': deepcopy(resistance_intervention or []),
-        'maximum_model_ticks': int(c['duration']*c['model']['frequency_hz'])+4, 'maximum_wall_seconds': maximum_wall_seconds})
+        'maximum_model_ticks': (int(c['duration']*c['model']['frequency_hz'])+4)*(2 if resistance_intervention else 1), 'maximum_wall_seconds': maximum_wall_seconds})
     validate_job(job);return job
 
 
@@ -159,6 +159,8 @@ def audit_execution(directory):
     imported = job['schema_version'] == 2
     if imported:
         expected_files.update({'source-import.json', 'probe-configuration.json', 'controller-before.json', 'controller-after.json'})
+        if job['resistance_intervention']:
+            expected_files.update({'baseline_trial_1.json', 'baseline_trial_1.csv'})
     if (directory/'cancel.request').exists():
         require((directory/'cancel.request').stat().st_size <= 65536, 'characterization_cancel_request_too_large')
         expected_files.add('cancel.request')
@@ -192,11 +194,25 @@ def audit_execution(directory):
                 source_import['physical_dynamics_reset'] is True and source_import['controller_dynamics_reset'] is True and
                 source_import['controller_history_preserved'] is True and
                 source_import['training_started'] is False, 'characterization_source_import_changed')
-        control = load(directory/'controller-before.json')
-        require(control == load(directory/'controller-after.json') and control['state'] == 'idle' and control['certificate'] is None and
-                control['reference_probes'] == 0, 'characterization_imported_controller_changed')
+        control = load(directory/'controller-before.json');_digest(control)
+        summary = control['summary']
+        require(control == load(directory/'controller-after.json') and control['kind'] == 'native_probe_controller_snapshot' and
+                control['schema_version'] == 1 and summary['state'] == 'idle' and summary['certificate'] is None and
+                summary['reference_probes'] == 0 and control['observed_packet_count'] == len(source['observed_packets']) and
+                control['observed_packets_sha256'] == sha(source['observed_packets']), 'characterization_imported_controller_changed')
         require(initial['parameters'] == expected_import_parameters(job) and
                 initial['identity']['model'] == expected_import_model(job), 'characterization_import_or_intervention_graph_changed')
+        if job['resistance_intervention']:
+            baseline = load(directory/'baseline_trial_1.json')
+            require(baseline['native_status'] == 'completed' and baseline['observation'] is not None and
+                    baseline['observation']['complete'] is True and
+                    baseline['requested_specification']['trial_id'] == job['probe']['trial_id']+'/source-baseline' and
+                    baseline['prepared']['base_model_revision'] == source['model_revision'], 'characterization_edit_boundary_not_measured')
+            baseline_trace = directory/'baseline_trial_1.csv'
+            base_audit = audit_probe(baseline, baseline_trace)
+            if not base_audit['valid_observation']:
+                observation, spec, _, samples, _, quality = read_partial_probe(baseline, baseline_trace)
+                audit_recorded_wave_diagnostics(observation, spec, samples, quality)
     require(initial['training_started'] is False and initial['search_executed'] is False and initial['dynamics_checkpoint'] is False,
             'characterization_initial_training_claim')
     require(initial['identity'] == final['identity'] and initial['parameters'] == final['parameters'] and
