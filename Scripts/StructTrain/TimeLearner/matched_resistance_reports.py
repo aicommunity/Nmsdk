@@ -19,7 +19,7 @@ def render(directory, output):
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    rows = load(directory/'index.json')['rows'];output.mkdir(parents=True);views = [];links = []
+    rows = load(directory/'index.json')['rows'];output.mkdir(parents=True);views = [];links = [];soma_channels = 0
     _write(output/'analysis.json', analysis)
     for branch in (False, True):
         topology = 'Branch' if branch else 'Classic'
@@ -29,6 +29,7 @@ def render(directory, output):
         changed_parameter = load(sources['resistance']/'initial-state.json')['parameters'][selected_input]
         data = {k: _trace(v) for k, v in sources.items()}
         control, spec, samples = data['matched-control'];changed = data['resistance'][2]
+        soma_channels += len(spec['baseline'])
         relative = [s['time']-spec['begin'] for s in samples];n = len(samples)
         intervals = [('full', 0, n)]+[('samples-'+str(first)+'-'+str(min(first+900, n-1)), first, min(first+901, n))
                                       for first in range(0, n-1, 800)]
@@ -86,4 +87,4 @@ def render(directory, output):
         'This is not completed training or classification.</p><ul>'+''.join(links)+'</ul>', encoding='utf-8')
     sums = {p.relative_to(output).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*') if p.is_file()}
     _write(output/'SHA256SUMS.json', sums)
-    return {'views': len(views), 'soma_channels': 5, 'full_pattern_matrix_test': False, 'scientific_classification_verdict': None}
+    return {'views': len(views), 'soma_channels': soma_channels, 'full_pattern_matrix_test': False, 'scientific_classification_verdict': None}
