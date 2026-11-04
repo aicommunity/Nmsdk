@@ -1,3 +1,5 @@
+Последующий corrected declaration gate:13/13 наb7,полный primary опубликован; prior12/13 сохранён. Live6 выполняется отдельно, source pipeline pending. [Приёмка и план безопасного освобождения compiled objects](CorrectedDeclarationPreflightAcceptance.ru.md).
+
 Последняя приёмка04.11: inventory0497 и audit retirementa930 объединены; exact production blobs/manifest/CMake/native trees проверены. Manifest158,complete=false. [Доказательства и ограничения](InventoryAndAuditRetirementAcceptance.ru.md). Предыдущие pending формулировки ниже относятся к своим timestamps.
 
 # Текущая карта выполнения исходного плана,04.11.2026
