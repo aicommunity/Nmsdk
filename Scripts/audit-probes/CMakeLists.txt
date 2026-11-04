@@ -29,4 +29,3 @@ add_executable(audit_counterexamples counterexamples.cpp "${CMAKE_BINARY_DIR}/ex
 target_include_directories(audit_counterexamples PRIVATE "${REPO}/Libraries/Nmsdk-PulseLib/Core" "${REPO}/Rdk/GUI/Qt")
 target_link_libraries(audit_counterexamples PRIVATE gtest_main Qt5::Core Qt5::Gui)
 add_test(NAME counterexamples COMMAND audit_counterexamples)
-
