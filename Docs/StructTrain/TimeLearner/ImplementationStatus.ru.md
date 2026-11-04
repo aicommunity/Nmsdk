@@ -291,3 +291,11 @@ A4 заново формирует все80 trial-soma pairs из byte-equal2684
 +119 readers; сейчас идёт сборка. Он не подменяет normal/ASan приёмку
 объединённой модели с initial-threshold и актуальным Rdk. Полные этапы1–12
 остаются частичными; завершённые адресные gates не означают завершения плана.
+
+
+Последующее завершение04.11: stock stopped A4 render6+3 checks принят,
+20 selected PNG просмотрены и опубликованы с точными hashes.
+[Читаемый отчёт](../../../Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-visual-a4/REPORT.ru.md)
+включает восемь паттернов и TP/FP/FN/TN. Полный80-pair кэш остаётся на M40;
+no-LTMembrane, incomplete Train, fixed threshold и отсутствие scientific
+verdict сохранены. Вся матрица этапа11 и общий план остаются открытыми.
