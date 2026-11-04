@@ -1,0 +1,25 @@
+{
+  "targeted_tests": 34,
+  "full_tests": 262,
+  "readers": 119,
+  "source_closure": {
+    "root": "69789b8cb93dbc2ce44fe7a8d90aed758cf93f76",
+    "children": {
+      "Rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+      "Bin": "4af17aa240a7da0e30655a62c07cc4832e7253b9",
+      "Libraries/Nmsdk-MotionControlLib": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "Libraries/Nmsdk-PulseLib": "84e456d6fb551021e0222ebaf51fa313df2623b4",
+      "Libraries/Rdk-BasicLib": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "Libraries/Rdk-CvBasicLib": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "Libraries/Rdk-HardwareLib": "de40b008e990105856726e01230dde19f42a90a9"
+    },
+    "clean": true
+  },
+  "asan_options": "detect_leaks=0",
+  "leak_absence_attested": false,
+  "legacy_source_uses_shared_object_handles": true,
+  "final_native_peak_memory_bytes": null,
+  "memory_measurement_limit": "legacy launcher did not retain native rusage or final cgroup peak; historical RSS observations are only lower bounds",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

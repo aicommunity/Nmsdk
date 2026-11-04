@@ -1,0 +1,924 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "4ccf906f-589f-4b23-9ae2-8d487e5fff77",
+      "job_id": "s07-capacitance-full-asan-k1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3649813,
+        "start_ticks": "284056538",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-capacitance-full-asan-k1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-capacitance-full-asan-k1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-capacitance-full-asan-k1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-capacitance-full-asan-k1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-capacitance-full-asan-k1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-capacitance-full-asan-k1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-capacitance-full-asan-k1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-capacitance-full-asan-k1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finite-ranking-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finite-ranking-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-legacy-completed-replay-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-legacy-completed-replay-asan-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793765375.833552,
+      "deadline": 1793812873.2234857,
+      "updated": 1793812767.8847103,
+      "release_note": "Supervisor work ended and all direct children are closed; result separately recorded.",
+      "heartbeat_expired": false,
+      "owner_status": "identity_live",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "456fe6c0-a202-4ff8-a1d5-f716b1232dd0",
+      "job_id": "s00-current-develop-checkout-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3667868,
+        "start_ticks": "284260931",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/fresh-current-develop-checkout-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/fresh-current-develop-checkout-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s00-current-develop-checkout-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s00-current-develop-checkout-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793767411.6877918,
+      "deadline": 1793767751.9226027,
+      "updated": 1793767649.7472324,
+      "release_note": "All synchronous Git and integrity operations closed; no numerical process launched.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "9a848a70-a609-452a-95e2-a0482a05e4c6",
+      "job_id": "s07-csearch-threshold-joint-asan-build-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3717866,
+        "start_ticks": "284925354",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/fresh-current-develop-checkout-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/fresh-current-develop-checkout-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793774055.996309,
+      "deadline": 1793775900.2769384,
+      "updated": 1793775797.034466,
+      "release_note": "Build-only worker completed synchronous work; fresh cgroup membership contains only this finalizing owner. No native model gates launched.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "69cbacb4-9327-4082-b9d9-a7fe811193a7",
+      "job_id": "s07-csearch-threshold-joint-asan-build-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3736071,
+        "start_ticks": "285138753",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/fresh-current-develop-checkout-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/fresh-current-develop-checkout-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-build-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-build-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793776189.9951975,
+      "deadline": 1793776450.1067884,
+      "updated": 1793776341.2644093,
+      "release_note": "Build-only worker completed synchronous work; fresh cgroup membership contains only this finalizing owner. No native model gates launched.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "c1167544-8f63-4f0f-9058-763f5c83f78c",
+      "job_id": "s11-joint44-frozen-visual-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3750840,
+        "start_ticks": "285377954",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-joint44-frozen-visual-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-joint44-frozen-visual-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793778582.012941,
+      "deadline": 1793778702.012941,
+      "updated": 1793778586.9979532,
+      "release_note": "Rendering/packing worker closed; exact main owner and fresh kernel whole-group closure verified. This recovery does not attest rendering success or scientific results.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "8797fde5-8245-4057-bb0d-32b7dfe1c478",
+      "job_id": "s11-joint44-frozen-visual-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3751592,
+        "start_ticks": "285386364",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-joint44-frozen-visual-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-joint44-frozen-visual-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793778666.1115134,
+      "deadline": 1793778786.1115134,
+      "updated": 1793778676.1108642,
+      "release_note": "Rendering/packing worker closed; exact main owner and fresh kernel whole-group closure verified. This recovery does not attest rendering success or scientific results.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "0f54a0fc-0190-41b4-a209-6a1bbc6fe516",
+      "job_id": "s11-joint44-frozen-visual-a3",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3752485,
+        "start_ticks": "285395384",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-joint44-frozen-visual-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-joint44-frozen-visual-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793778756.3716667,
+      "deadline": 1793778956.5250602,
+      "updated": 1793778856.428985,
+      "release_note": "Rendering/packing worker closed; exact main owner and fresh kernel whole-group closure verified. This recovery does not attest rendering success or scientific results.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "ad85abf2-f56c-4084-87de-65dcc3cca07b",
+      "job_id": "s10-pipeline-containment-policy-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3759916,
+        "start_ticks": "285508436",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-containment-policy-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-containment-policy-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-pipeline-containment-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-pipeline-containment-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793779886.8296127,
+      "deadline": 1793780006.8296127,
+      "updated": 1793779891.8119805,
+      "release_note": "Portable policy/archived-native audit worker closed including archive creation; exact owner and fresh kernel whole-group closure verified. No native models ran.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "4f1810d6-6201-4789-8888-bb1b2c3b9210",
+      "job_id": "s10-managed-unit-reservations-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3771888,
+        "start_ticks": "285708439",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-managed-unit-reservations-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-managed-unit-reservations-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-managed-unit-reservations-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-managed-unit-reservations-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793781886.853187,
+      "deadline": 1793782046.8759322,
+      "updated": 1793782033.1748188,
+      "release_note": "Failed suite diagnosed as missing multiprocessing import guard. Controller and every persisted actual unit binding freshly checked closed; no neural model ran. Explicit recovery does not relabel failed tests as passed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "78f26838-a406-4a7f-9a17-3b72c5caf846",
+      "job_id": "s10-managed-unit-reservations-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3773531,
+        "start_ticks": "285723884",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-managed-unit-reservations-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-managed-unit-reservations-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-managed-unit-reservations-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-managed-unit-reservations-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793782041.3067334,
+      "deadline": 1793782161.3067334,
+      "updated": 1793782051.4138098,
+      "release_note": "Metadata suite passed61 tests, controller and all persisted test unit bindings freshly closed. Isolated schema3 ledgers only; no neural model ran.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "295a268d-9fb1-4fd8-8441-58efeeb9bb82",
+      "job_id": "s10-native-managed-preflight-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3790623,
+        "start_ticks": "286006175",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-native-pipeline-cli-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-native-pipeline-cli-asan-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-managed-preflight-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-managed-preflight-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-containment-policy-a1/fixtures",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-containment-policy-a1/fixtures"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-probe-phases-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-probe-phases-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-initial-threshold-asan-a2/Bin",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-initial-threshold-asan-a2/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-managed-integration-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-managed-integration-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793784864.2155385,
+      "deadline": 1793784984.2155385,
+      "updated": 1793785033.7538834,
+      "release_note": "Failed preflight19 retained: two actual ASan Console units oom-killed at512MiB, not PASS. Fresh parent and both signed/owned native child groups closed. Release operational global lease only; isolated evidence ledgers retained.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "ccb9d3f1-5045-4fb8-a1b0-cd55d07a928f",
+      "job_id": "s10-native-managed-preflight-a3",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3792910,
+        "start_ticks": "286031459",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-native-pipeline-cli-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-native-pipeline-cli-asan-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-managed-preflight-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-managed-preflight-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-containment-policy-a1/fixtures",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-pipeline-containment-policy-a1/fixtures"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-probe-phases-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-probe-phases-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-initial-threshold-asan-a2/Bin",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-initial-threshold-asan-a2/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-managed-integration-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-managed-integration-a3"
+        }
+      ],
+      "state": "released",
+      "created": 1793785117.060814,
+      "deadline": 1793785237.060814,
+      "updated": 1793785137.0872226,
+      "release_note": "Metadata suite passed19 checks including two actual native preflights, controller and all persisted test unit bindings freshly closed. Isolated schema3 ledgers only; no neural model ran.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "423a7ec3-1adb-4703-beb8-24cb8dae1f1c",
+      "job_id": "s09-theory-retirement-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3805193,
+        "start_ticks": "286221290",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-theory-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-theory-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793787015.3572037,
+      "deadline": 1793787135.3572037,
+      "updated": 1793787020.3490624,
+      "release_note": "Read-only historical121 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "2fd2d131-52f5-4280-9058-3ff4b4629362",
+      "job_id": "s09-theory-retirement-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3806338,
+        "start_ticks": "286232203",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-theory-retirement-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-theory-retirement-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793787124.4993973,
+      "deadline": 1793787244.4993973,
+      "updated": 1793787129.4899561,
+      "release_note": "Read-only historical121 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "8cf908c5-6a93-4817-8c6f-b73576450404",
+      "job_id": "s03-analysis-dispatch-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3812412,
+        "start_ticks": "286316101",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-analysis-dispatch-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-analysis-dispatch-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-cli-analysis-dispatch-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-cli-analysis-dispatch-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793787963.4698515,
+      "deadline": 1793788083.4698515,
+      "updated": 1793787968.4629858,
+      "release_note": "Actual production analysis CLI5 on Git-transferred native normal primaries. No new native model executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "4c396bc3-09c1-414d-b35e-81c6f7ab92e7",
+      "job_id": "s09-cable-retirement-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3930888,
+        "start_ticks": "288102009",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-cable-retirement-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-cable-retirement-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-cable-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-cable-retirement-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+        }
+      ],
+      "state": "released",
+      "created": 1793805822.6086102,
+      "deadline": 1793805942.6086102,
+      "updated": 1793805827.5536315,
+      "release_note": "Read-only historical141 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "8f2d845d-c6d9-4a13-919c-d3fc0e961a5e",
+      "job_id": "s09-remaining-root-retirement-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3937585,
+        "start_ticks": "288181211",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-remaining-root-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-remaining-root-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-remaining-root-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-remaining-root-retirement-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+        }
+      ],
+      "state": "released",
+      "created": 1793806614.6191316,
+      "deadline": 1793806734.6191316,
+      "updated": 1793806619.56295,
+      "release_note": "Read-only historical150 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "206472d4-f056-4473-9381-d85aed393af7",
+      "job_id": "s09-remaining-root-retirement-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3938141,
+        "start_ticks": "288187765",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-remaining-root-retirement-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-remaining-root-retirement-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-remaining-root-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-remaining-root-retirement-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+        }
+      ],
+      "state": "released",
+      "created": 1793806680.137994,
+      "deadline": 1793806800.137994,
+      "updated": 1793806685.0996976,
+      "release_note": "Read-only historical150 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "614ededf-09a3-483f-8753-9d76a57f5f1a",
+      "job_id": "s10-worker-dependency-normal-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3945849,
+        "start_ticks": "288275033",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793807552.8134193,
+      "deadline": 1793807672.8134193,
+      "updated": 1793807715.0779943,
+      "release_note": "Explicit release after failed8/9 dependency fixture gate: all ten actual external unit groups and controller freshly closed. Test failure retained; no neural model executed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "433c4154-3a8d-4ba7-8456-6794b9c275ef",
+      "job_id": "s10-worker-dependency-normal-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3947783,
+        "start_ticks": "288298989",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793807792.3739917,
+      "deadline": 1793807912.3739917,
+      "updated": 1793807797.4016502,
+      "release_note": "All nine actual dependency controls passed; ten exact external kernel units and the bounded controller freshly closed. No neural models executed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "dd768959-7463-4001-ba55-cdea7eb87353",
+      "job_id": "s01-related-inventory-normal-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3971954,
+        "start_ticks": "288699798",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-related-inventory-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s01-related-inventory-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Libraries/Nmsdk-PulseLib"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-related-inventory-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-related-inventory-normal-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793811800.4855418,
+      "deadline": 1793811920.4855418,
+      "updated": 1793811810.4422667,
+      "release_note": "Read-only related inventory Git/CLI gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null,
+  "remaining_direct_children": [],
+  "heartbeat_errors": []
+}
