@@ -34,8 +34,33 @@ phase/applied/boundary/request/budget/completion. Для completed отдель�
 сравниваются девять исходных физических primary файлов; для старых запусков
 повторно читаются оригинальные manifests без изменений.
 
-Проверка начата на Elder и M40 ASan в
-`readbacks/s03-native-probe-phases-{normal,asan}-a1`. До terminal receipts и
-независимой проверки артефактов это исправление считается реализованным,
-но не принятым по runtime. Исходные математика обучения, физические профили,
-CapturedPerInput и допуски не менялись. Научный verdict отсутствует.
+## Runtime-приёмка 04.11.2026
+
+Набор `readbacks/s03-native-probe-phases-{normal,asan}-a1` прошёл на обоих
+worker: по12 реальных jobs и7 readers, без errors/failures/skip. Каждый
+worker выполнил18 native-проб: завершённые baseline/main и частичные
+baseline/main при явно указанной причине прерывания. Прерванные baseline
+сохраняют исходный граф, history и реальные отсчёты; основная проба и
+изменение Rs отсутствуют. В completed cases девять физических primary
+файлов на топологию побайтно совпали с предыдущими uninterrupted Rs controls.
+Записанные конечные окна stock-моделей по-прежнему имеют три идентифицируемых
+максимума; PASS этого контракта не подтверждает обучение или классификацию.
+
+Ещё по два cold jobs выполнены тем же новым executable. Восемь CSV/JSON/
+initial/final files на каждом worker побайтно равны ранним cold controls;
+сравнение повторено непосредственно с их Git-артефактами. Четыре прежних
+production manifest прочитаны на каждом worker без переподписывания.
+
+Proof commits: `a069c078b184c714e46c381e028565000e0e6774` (Elder) и
+`a294f0a2b2a67c8f9676c09537c45d6d5cf6a35b` (M40 ASan). Для каждого
+проверены все14 outer members, отдельный cold archive, source blobs и все
+7362 исходных файла:330 retained и7032 reused из неизменяемого Git reference.
+Compact native часть занимает697396B на Elder и627288B на M40; точные
+контрольные суммы и состав записаны в
+[NativeProbePhasesVerification.json](NativeProbePhasesVerification.json).
+Для всех12 imported runs M40 подтверждён фактически загруженный libasan;
+detect_leaks=0. Ни отсутствие утечек, ни полный план этим не принимаются.
+
+Исходные математика обучения, физические профили, CapturedPerInput и допуски
+не менялись. Общие import failure/rollback, остальные модели/размерности и
+научная матрица остаются отдельными обязательствами плана.

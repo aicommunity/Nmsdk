@@ -272,4 +272,8 @@ preflight с совпадающими L/Ns/Rs не воспроизвёл вес
 все3671 файла побайтно из новых файлов и указанного Git archive. Девять
 выбранных рисунков приняты визуально. Это диагностический отрицательный
 результат для одного паттерна, без Train/certificate/classification verdict.
-Warm-phase interruption, научная матрица и полная приёмка этапов остаются открытыми.
+[Warm-phase interruption](NativeProbePhases.ru.md) принят отдельным последующим
+набором: по12 real imported jobs,7 readers и2 cold regressions на каждом worker.
+Побайтное восстановление всех7362 primary files, неизменные cold traces и
+фактические libasan maps M40 проверены. Научная матрица и полная приёмка этапов
+остаются открытыми.
