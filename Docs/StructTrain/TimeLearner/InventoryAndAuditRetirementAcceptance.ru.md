@@ -1,0 +1,11 @@
+# Приёмка inventory и retirement8,04.11.2026
+
+Выполнены два отдельных --no-ff merge: source0497 расширенного inventory и sourcea930 удаления восьми исторических audit tools. Both workers:15/15 actual Git/CLI checks inventory;158 historical records,restored-path negative,exact16 scope и retained CMake prefix для retirement. Первичные данные и неудачные predecessors сохранены: [Elder](CompletedDependentGatesElder.ru.md), [M40 inventory](RelatedScriptInventoryM40Verification.json), [M40 retirement](AuditProbeRetirementM40Verification.json).
+
+[Integration receipt](InventoryAndAuditRetirementIntegrationVerification.json) проверяет реальные Git trees merge: три production Python blobs точно равны source0497; manifest и surviving CMake равны sourcea930;8 old paths отсутствуют. Tests/App/Root CMake и Bin/Pulse/Rdk gitlinks точно совпадают с исходным принятым develop. Новый numerical runtime PASS на merge commit не присваивается. Конфликт разрешён только в хронологии ScriptMigration.ru.md, прежние records сохранены.
+
+Теперь inventory --include-related доступен в принятом корневом пакете: schema3 читает committed script bytes/path tokens без import/исполнения; default schema2 сохранён, добавлены.mjs/.cjs/.js/.psm1/.pl/.rb. [Контракт и ограничения](RelatedScriptInventory.ru.md). Исторический snapshot197 candidates содержит уже удалённые8 root tools; это source snapshot0497, а не актуальный остаток после merge.189 Bin candidates и непрямые/general root probes всё ещё требуют review. Новый полный catalog следует строить на новом exact root commit с recorded child gitlinks.
+
+Migration manifest158 (156 retired/2 moved),complete=false. Исторические executables не оставлены на старых местах; exact archive commit/path/blob/SHA256/bytes/retrieval записаны в manifest. Старые методы body extraction и mock verifiers не считаются актуальным native integration proof; общие GUI/component probes остаются для отдельного review. Ни первичные научные данные, ни августовские4/8–6/8 не удалены и не переоценены.
+
+Это приёмка конкретных подэтапов1/9/12. Остальные active Bin scripts, common controller/full physics matrix, ConditionSpec/queue/publisher, полный Train→Test и научные протоколы остаются открытыми. Общий план не завершён.
