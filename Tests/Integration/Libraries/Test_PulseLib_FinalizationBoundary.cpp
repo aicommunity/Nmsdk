@@ -444,7 +444,10 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
     for(const auto& value:evaluationJob["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(value.toObject()));
     if(scenario==LiveScenario::InvalidDesign) {
         EXPECT_GE(grid.trials.size(),2u);
-        grid.trials[1]=grid.trials.front();grid.trials[1].trialId+="/second-target";
+        for(std::size_t i=1;i<grid.trials.size();++i) {
+            grid.trials[i]=grid.trials.front();
+            grid.trials[i].trialId+="/additional-target/"+std::to_string(i);
+        }
     }
     if(scenario==LiveScenario::Calibrate) {
         for(const auto& value:calibrationJob["thresholds"].toArray())grid.thresholds.push_back(value.toDouble());
