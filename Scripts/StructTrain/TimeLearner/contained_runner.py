@@ -86,6 +86,8 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
                 else:
                     outcome, reason = 'process_error', 'nonzero_exit_or_missing_terminal_status'
                 break
+            if last['state'].get('MainPID') == '0' and not (output/'main-exited-with-live-descendants.json').exists():
+                _write(output/'main-exited-with-live-descendants.json', last)
             if cancel.exists():
                 outcome, reason = 'interrupted', 'cancellation_request'
                 break
