@@ -144,3 +144,10 @@ M40 имел84GiB свободно на system и393GiB на Data. Повтор�
 не завершён. M40 K1 targeted34 прошёл по runner verdict,262 regression
 работает; полная primary/reader приёмка остаётся открытой. Ни один из этапов
 1–12 этими инфраструктурными подэтапами целиком не закрывается.
+
+Следующий принятый подэтап10 — [contained runner/native-gate schema3](ContainedRunner.ru.md):
+77/77 Python checks и2 реальных native C++ codec/storage cases на worker,
+normal/ASan, без skips. Новый gate сочетает actual loaded files, cooperative
+capture и закрытие всей cgroup; MainPID0 с живыми потомками наблюдается явно.
+Прежние gates schema1/2 и текущие long-running jobs не меняются. Это не перевод
+всех production Train/Test workers, полный scheduler или приёмка joint algorithms.
