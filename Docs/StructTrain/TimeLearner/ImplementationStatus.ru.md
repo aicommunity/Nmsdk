@@ -277,3 +277,17 @@ preflight с совпадающими L/Ns/Rs не воспроизвёл вес
 Побайтное восстановление всех7362 primary files, неизменные cold traces и
 фактические libasan maps M40 проверены. Научная матрица и полная приёмка этапов
 остаются открытыми.
+
+
+Дополнение04.11 по визуальной приёмке: полный stock stopped report A3
+прошёл3/3 readers, но просмотр выявил обрезанный trial ID. Исправление
+43b2fbf7b прошло6/6 plotting controls на M40. Один исправленный1920×960
+preview принят визуально; [статус и ограничения](StockStoppedEvaluation.ru.md).
+A4 заново формирует все80 trial-soma pairs из byte-equal2684 primary files.
+Генерация ещё идёт; весь отчёт и научная классификация не приняты.
+
+Отдельный downstream C-search ASan K1 (root69789b8cb / Pulse84e456d)
+создаёт новый SDK runtime на M40 Data. Декларация34 targeted +262 full native
++119 readers; сейчас идёт сборка. Он не подменяет normal/ASan приёмку
+объединённой модели с initial-threshold и актуальным Rdk. Полные этапы1–12
+остаются частичными; завершённые адресные gates не означают завершения плана.
