@@ -79,7 +79,9 @@ class WorkerDependencyTest(unittest.TestCase):
 
     def test_held_expired_lease_requires_explicit_recovery(self):
         output, registry, leases = self.reserving_worker()
+        self.wait(lambda:registry.inspect()['leases'][0]['heartbeat_expired'])
         before = registry.inspect()
+        self.assertTrue(before['leases'][0]['heartbeat_expired'])
         result = self.observe(output, registry, 'actual-dependency')
         self.assertEqual((result['state'], result['reservation_state']), ('pending', 'held'))
         self.assertEqual(registry.recovery_history(), [])
