@@ -1,0 +1,290 @@
+{
+  "a1": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "c6525c4817b368c1ba15b33ac7c5fef52615d9352edaec73bbe6cd3fafc85cd8",
+      "unit": "timelearner-19bd2fc2-541b-4585-a736-1527c57c3372.service",
+      "invocation_id": "7b6365d1878c47bb89a06b06549fd3e9",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-19bd2fc2-541b-4585-a736-1527c57c3372.service",
+      "initial_main_pid": 2401262,
+      "initial_start_ticks": "339298871",
+      "sha256": "8fd6ff3b9d4340f1b51cc969a3f07e29f1859e3fe8166517c7f461a29b62569d"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-19bd2fc2-541b-4585-a736-1527c57c3372.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    },
+    "maintenance_lease": {
+      "token": "471d169b-a89c-43b2-b805-c311f37a0ef2",
+      "job_id": "obsolete-schema4-build-cache-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2401262,
+        "start_ticks": "339298871",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793823219.0216928,
+      "deadline": 1793826819.0216928,
+      "updated": 1793823219.1120658,
+      "release_note": "Synchronous obsolete build-cache cleanup ended; no model, compiler or child process remains. Source SDK/runtime/results retained.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "a2": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "f8531a42f7b606967c060a55ce504690464a50ec3c5310857e9c10248bd4ef1a",
+      "unit": "timelearner-3994f127-a248-4685-a511-ab8d1438c2c8.service",
+      "invocation_id": "bf226ce4c0b846c18b800531a1d05cbf",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3994f127-a248-4685-a511-ab8d1438c2c8.service",
+      "initial_main_pid": 2402024,
+      "initial_start_ticks": "339304332",
+      "sha256": "f446f701c9e9cb061f100e257dcc6fbee0bcd79cb352e48a5fcbe0a390aa80d6"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-3994f127-a248-4685-a511-ab8d1438c2c8.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    },
+    "maintenance_lease": {
+      "token": "da356eac-426f-4555-b5c4-da1b9ec5ee7f",
+      "job_id": "s02-obsolete-schema4-build-cache-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2402024,
+        "start_ticks": "339304332",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793823273.6164122,
+      "deadline": 1793826873.6164122,
+      "updated": 1793823280.535616,
+      "release_note": "Synchronous obsolete build-cache cleanup ended; no model, compiler or child process remains. Source SDK/runtime/results retained.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "a3": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "82afeb5ead3b161edf29ed953a67f7a890546ba94896400ec1cd05ed063483d4",
+      "unit": "timelearner-415481e7-b6e1-4f90-8fe7-0516d14f9105.service",
+      "invocation_id": "9045037a0cdc4f6f9d72d4906cd59d70",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-415481e7-b6e1-4f90-8fe7-0516d14f9105.service",
+      "initial_main_pid": 2403487,
+      "initial_start_ticks": "339314698",
+      "sha256": "718264f3c4a7a9ee4c7158b9b12d3aca0ee0c314389466990dbd54a420293f92"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-415481e7-b6e1-4f90-8fe7-0516d14f9105.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    },
+    "maintenance_lease": {
+      "token": "0d8bbf7b-17d0-4581-aace-a127453298aa",
+      "job_id": "s02-obsolete-schema4-build-cache-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2403487,
+        "start_ticks": "339314698",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a3"
+        }
+      ],
+      "state": "released",
+      "created": 1793823377.2989643,
+      "deadline": 1793826977.2989643,
+      "updated": 1793823382.785178,
+      "release_note": "Synchronous obsolete build-cache cleanup ended; no model, compiler or child process remains. Source SDK/runtime/results retained.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "a4": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "c5fff6e0fc60faea3bbd0bcd6985afd19b636d222ca91c8af56735911adf7b39",
+      "unit": "timelearner-25156fc7-632c-4bf3-a6ec-80ad91571933.service",
+      "invocation_id": "4326c95dd3f4498baaa214d58869dc3f",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-25156fc7-632c-4bf3-a6ec-80ad91571933.service",
+      "initial_main_pid": 2409647,
+      "initial_start_ticks": "339341519",
+      "sha256": "6cab82fb7227478b445ce86a14355c9a2cff2b469e5906532b78d5fb99956183"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-25156fc7-632c-4bf3-a6ec-80ad91571933.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    },
+    "maintenance_lease": {
+      "token": "6fc24953-7a45-4bf4-9700-dca52394b91a",
+      "job_id": "s02-obsolete-schema4-build-cache-a4",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2409647,
+        "start_ticks": "339341519",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2",
+          "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-build-cache-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793823645.4995565,
+      "deadline": 1793827245.4995565,
+      "updated": 1793823651.9290133,
+      "release_note": "Synchronous obsolete build-cache cleanup ended; no model, compiler or child process remains. Source SDK/runtime/results retained.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  }
+}
