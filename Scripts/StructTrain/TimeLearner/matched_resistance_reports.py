@@ -24,6 +24,9 @@ def render(directory, output):
     for branch in (False, True):
         topology = 'Branch' if branch else 'Classic'
         sources = {r['variant']: directory/'runs'/r['name']/'native' for r in rows if r['branch'] is branch}
+        selected_input = load(sources['resistance']/'job.json')['probe']['input_index']
+        control_parameter = load(sources['matched-control']/'initial-state.json')['parameters'][selected_input]
+        changed_parameter = load(sources['resistance']/'initial-state.json')['parameters'][selected_input]
         data = {k: _trace(v) for k, v in sources.items()}
         control, spec, samples = data['matched-control'];changed = data['resistance'][2]
         relative = [s['time']-spec['begin'] for s in samples];n = len(samples)
@@ -38,8 +41,8 @@ def render(directory, output):
                     fig, axes = plt.subplots(3, 1, figsize=(14, 8), dpi=160, sharex=True,
                                              gridspec_kw={'height_ratios': [4, 2, 1]})
                     for variant, color, style, legend in [('baseline', '#777777', '--', 'Source replay (absolute begin 0 s)'),
-                            ('matched-control', '#0063a6', '-', 'Matched control, Rs unchanged'),
-                            ('resistance', '#c44b00', '-', 'Changed bank Rs')]:
+                            ('matched-control', '#0063a6', '-', 'Matched control, Rs='+format(control_parameter['resistance'], '.9g')),
+                            ('resistance', '#c44b00', '-', 'Changed bank, Rs='+format(changed_parameter['resistance'], '.9g'))]:
                         _, series_spec, trace = data[variant]
                         times = [s['time']-series_spec['begin'] for s in trace[first:last]]
                         axes[0].plot(times, [s['soma'][channel] for s in trace[first:last]], color=color,
@@ -57,13 +60,14 @@ def render(directory, output):
                     axes[2].set_ylabel('Input\n[native units]')
                     axes[2].set_xlabel('Time relative to recorded trial begin [s]; matched absolute begin '+str(spec['begin'])+' s')
                     for axis in axes:axis.grid(alpha=.25);axis.set_xlim(x[0], x[-1])
-                    fig.suptitle(topology+' soma '+str(channel+1)+' | diagnostic stopped model, target pattern only | '+label+
+                    fig.suptitle(topology+' soma '+str(channel+1)+' | stock NSPNeuronGen, selected attachment '+str(control_parameter['length'])+' | '+label+
                                  '\nNo training certificate or classification verdict; actual samples, no resampling')
                     fig.tight_layout(rect=(0, 0, 1, .94))
                     for extension in ('png', 'svg'):fig.savefig(folder/(label+'.'+extension))
                     record = {'topology': topology, 'channel': channel, 'view': label, 'first_frame': first,
                         'last_frame_inclusive': last-1, 'sample_count': last-first, 'time_begin_relative': x[0], 'time_end_relative': x[-1],
                         'matched_absolute_begin': spec['begin'], 'soma_y_limits': list(axes[0].get_ylim()),
+                        'selected_input': selected_input, 'control_parameters': control_parameter, 'changed_parameters': changed_parameter,
                         'difference_y_limits': list(axes[1].get_ylim()), 'png': (folder/(label+'.png')).relative_to(output).as_posix(),
                         'raw_samples_not_resampled': True, 'local_view_has_sample_markers': label != 'full'}
                     views.append(record);plt.close(fig)
