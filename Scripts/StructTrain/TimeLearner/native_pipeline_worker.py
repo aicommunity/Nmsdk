@@ -343,7 +343,10 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     policy = validate_policy(process_policy, maximum_wall_seconds)
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_pipeline_wall_budget")
+    from .native_cli import inspect_native_cli
+    cli = inspect_native_cli(runtime, [mode])
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
+    _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();source_relative = None
     if source_path is not None:
         snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe")

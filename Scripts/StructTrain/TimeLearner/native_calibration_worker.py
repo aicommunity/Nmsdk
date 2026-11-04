@@ -284,8 +284,11 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *
     preflight = validate_job(job, load_case(source_path), post_tune=post_tune)
     policy = validate_policy(process_policy, maximum_wall_seconds)
     runtime = load(Path(runtime_path).resolve(strict=True)); executable = verify_runtime(runtime)
+    from .native_cli import inspect_native_cli
+    cli = inspect_native_cli(runtime, ['posttune' if post_tune else 'calibrate'])
     require(number(maximum_wall_seconds) > 0, "invalid_worker_wall_budget")
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
+    _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();primaries = inputs/"source";primaries.mkdir()
     stem = source_path.name.removesuffix("_learned_state.json")
     paths = [source_path, source_path.with_name(stem+"_learned_summary.json")]
