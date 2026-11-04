@@ -1,3 +1,5 @@
+Текущий migration manifest:166 records,complete=false; PhaseA8 принят обоими workers, все научные/config/native blobs сохранены. [Доказательства](PhaseAToolRetirement.ru.md). Прежние158/189 ниже относятся к своим snapshots; из того lower-bound Bin каталога осталось181 после8 удалений. Stage9 и все этапы1–12 частичны.
+
 Актуализация04.11: прежний joint ASan44 A2 остановлен по8GiB resource cap, полного результата нет. Same-SDK44 A3 работает с42GiB; full304 A2 ждёт его PASS/closure/release. [Полные первичные данные и ограничения](JointAsanResourceRetry.ru.md). Нижние записи о работающем A2 относятся к предыдущему снимку.
 
 Актуализация04.11: live-routing A3 признан invalid_runtime и остановлен; Train/Test результата нет. Capability7/7 passed; coordinator A4/live A5 ждут текущие workers. Object cleanup отказал до удаления; Git-pack dedup освободил408945883 bytes с сохранением содержимого. [Факты и ограничения](NativeRuntimeInterfaceAcceptance.ru.md). Слова ниже о живом A3 и планируемом удалении относятся к прежнему снимку.
