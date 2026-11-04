@@ -565,3 +565,11 @@ Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights h
 32 полных пробы,80 trial-soma pairs, реальные входы,6+3 checks;20 выбранных
 PNG просмотрены. Низкий порог:TP1/FP7; порог100:FN1/TN7. Train остановлен;
 это diagnostic evidence без сертификата или научного PASS. Полный кэш на M40.
+
+
+04.11: [origin-only recursive checkout](s00-current-develop-checkout-m40-a1/README.ru.md),
+100534 tracked files; без build/numerical claim.
+User-systemd/cgroup controls12/12 на worker:
+[Elder](s10-contained-process-elder-a1/README.ru.md),
+[M40](s10-contained-process-m40-a1/README.ru.md). Это lifecycle primitive,
+без automatic lease recovery или complete scheduler claim.

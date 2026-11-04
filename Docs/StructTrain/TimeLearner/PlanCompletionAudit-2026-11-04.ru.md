@@ -88,3 +88,17 @@ algorithm slice и его regression/probe checks; затем расширять
 матрицу по уровням этапа11. Series D автоматически не возобновлять. Параллельно
 продолжать незакрытые property/migration/scheduler требования; ожидание ASan
 не является причиной объявлять план завершённым или останавливать всю работу.
+
+
+## Последующее уточнение04.11
+
+Fresh checkout owner3667868 закрыт успешно: origin-only roote218753e4 и все
+семь gitlinks чисты,100534 tracked files сверены на worker и независимо с
+локальными Git objects. [Доказательства и границы](FreshDevelopCheckout.ru.md).
+Это не новый SDK build и не приёмка будущего C-search/containment code.
+
+[Contained process primitive](ContainedProcess.ru.md) прошёл12/12 controls
+на каждом worker;11 групп на сервер закрыты с kernel membership receipts.
+OS limits и учёт потомков после потери frontend работают в этом API. Однако
+lease recovery/journal/ConditionSpec/Train→Test wiring ещё не подключены;
+старый runner и работающий K1 не переведены. Этап10 остаётся частичным.
