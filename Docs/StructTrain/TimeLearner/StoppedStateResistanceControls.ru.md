@@ -115,8 +115,33 @@ proof `e5fa71d745119af0d818059f497dd226f4c7c25d`, путь
 `Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz`.
 Команды `primary-reuse pack/restore` проверяют полный commit, archive SHA256,
 каждый member и замкнутый набор файлов. Недоступный reference не заменяется
-серверным кэшем. Новые compact bundles, их roundtrip и рисунки ещё проходят
-приёмку; окончательные proof commits будут добавлены после проверки.
+серверным кэшем.
+
+## Принятые артефакты 04.11.2026
+
+Proof commits: `a566b02aa8ae530717740e9e2afb4776dc53741e` (Elder) и
+`090004bffda8573b5e77d7ddbaa05fa7ca818345` (M40 ASan). В каждом внешнем
+архиве проверены все 22 member, исходники orchestration и native build, а
+также отдельный архив шести source readers. Для каждой платформы побайтно
+проверены все 3671 исходных файла: 155 новых сохранённых файлов и 3516 ссылок
+на неизменяемый Git archive. Compact native часть занимает соответственно
+599532 и 613352 байта. Положительные результаты четырёх matched readers и
+четырёх reuse readers дополняют шесть source readers; это проверки разных
+контрактов, а не дополнительные обучения.
+
+Рисунки: `2a2e0faf1c7ad9028cc99fcc541c7bee08fe9bb8`, раздел
+`Reports/StructTrain/TimeLearner/s03-stopped-resistance-visual-m40-a1`.
+Все 18 членов архива и source hashes проверены. Девять выбранных PNG
+просмотрены непосредственно: общий вид всех пяти соматических каналов и
+четыре увеличенных участка. Видны фактические входные импульсы, потенциалы
+и разность matched откликов; подписи читаемы. Полный кэш содержит 30 видов
+PNG/SVG на M40, но не объявляется целиком просмотренным вручную. Это реакция
+на один исходный паттерн; требование отчёта по всем паттернам этим не закрыто.
+Исходное `manual_review_complete=false` в producer metadata сохранено;
+приёмка выбранных файлов записана отдельно в
+[StoppedStateResistanceVerification.json](StoppedStateResistanceVerification.json).
+Название visual proof commit ошибочно упоминает cancel/wall-budget; состав
+дерева и проверенный manifest относятся к matched resistance waveform report.
 
 Полные этапы5–12 остаются открытыми. Следующий алгоритмический вопрос —
 конечный поиск при неидентифицируемой волне и бюджет допустимых отклонённых
