@@ -1,0 +1,78 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "b043e74c-525d-4f0f-a45a-9aef3265953f",
+  "job_id": "s07-csearch-threshold-joint-readers-a4",
+  "recorded_unix": 1793786697.1883037,
+  "administrator": {
+    "pid": 1853273,
+    "start_ticks": "335615617",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 1853285,
+    "start_ticks": "335615627",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a4-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "83f9c3d2af166a2e538049dda21237425315b1c1296b8dad44ec953b87d91278",
+      "unit": "timelearner-cdc3d5a5-2a77-4cf7-844d-d65e781f5da9.service",
+      "invocation_id": "a3095c4e169447e782abb645538a60db",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-cdc3d5a5-2a77-4cf7-844d-d65e781f5da9.service",
+      "initial_main_pid": 1853285,
+      "initial_start_ticks": "335615627",
+      "sha256": "96c1843bb2e3c6a9cdcf9f032317e041f6e89742a7f58103c0ff4ea7514d3d53"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-cdc3d5a5-2a77-4cf7-844d-d65e781f5da9.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Read-only primary124 suite; no separately managed native units launched. Fresh whole parent kernel group closed, source and native304 corpus unchanged; pass/fail retained.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a4",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a4"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-joint-primary-readers-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-joint-primary-readers-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
