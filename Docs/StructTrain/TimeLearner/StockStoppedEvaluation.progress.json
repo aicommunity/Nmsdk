@@ -1,0 +1,178 @@
+{
+  "kind": "stock_stopped_evaluation_progress",
+  "schema_version": 1,
+  "date": "2026-11-03",
+  "status": "native_diagnostic_verified_and_published",
+  "source_root": "6342a56d68718d3231b11dc0f6af7c3bc045cd8d",
+  "worker": "user@10.245.1.11",
+  "directory": "/home/user/timelearner-refactor/readbacks/s11-stock-stopped-phasea-normal-a3",
+  "owner_pid": 1111148,
+  "owner_identity_receipt": "owned-supervisor.json",
+  "same_pid_start_ticks_confirmed_live": false,
+  "preflight_readers": {
+    "executed": 5,
+    "passed": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "completed_run_manifests_at_poll": 4,
+  "native_trials_declared": 32,
+  "native_runtime_root": "5c4adf7ed3b2dcd977c763846d7f4010b67869d3",
+  "native_runtime_mutated": false,
+  "prior_attempts": [
+    {
+      "attempt": "a1",
+      "failure": "GitHub DNS before source checkout",
+      "native_started": false
+    },
+    {
+      "attempt": "a2",
+      "failure": "missing jobs directory after4 source readers; public CLI refused before native probes",
+      "native_started": false
+    }
+  ],
+  "source_transport": "native Git pack over existing authenticated SSH; commit and Git connectivity verified",
+  "publication": {
+    "commit": "c8381cfc3ecbf446ae1f59175c794ef547dcc93d",
+    "members_verified": 2684,
+    "exact_python_source_hashes_verified": 247,
+    "archive_bytes": 28236672,
+    "remote_ref_verified": true
+  },
+  "training_completed": false,
+  "scientific_verdict": null,
+  "next": [
+    "Render80 trial-soma pairs through production report CLI on M40 Data",
+    "Run three full-cache readers; retain full windows and actual input overlays",
+    "Publish compact report metadata and directly inspect selected readable PNGs",
+    "Keep stopped diagnostic counts separate from convergence and calibrated recognition"
+  ],
+  "final_readers": {
+    "executed": 6,
+    "passed": 6,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "remote_child_reachability": [
+    {
+      "path": "Rdk",
+      "declared_url": "git@github.com:aicommunity/Rdk.git",
+      "transport_url": "https://github.com/aicommunity/Rdk.git",
+      "commit": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+      "remote_advertised_refs": [
+        "refs/heads/develop"
+      ],
+      "remote_reachable": true
+    },
+    {
+      "path": "Bin",
+      "declared_url": "git@github.com:aicommunity/Nmsdk-Bin.git",
+      "transport_url": "https://github.com/aicommunity/Nmsdk-Bin.git",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "remote_advertised_refs": [
+        "refs/heads/develop"
+      ],
+      "remote_reachable": true
+    },
+    {
+      "path": "Libraries/Nmsdk-MotionControlLib",
+      "declared_url": "git@github.com:aicommunity/Nmsdk-MotionControlLib.git",
+      "transport_url": "https://github.com/aicommunity/Nmsdk-MotionControlLib.git",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "remote_advertised_refs": [
+        "refs/heads/develop"
+      ],
+      "remote_reachable": true
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib",
+      "declared_url": "git@github.com:aicommunity/Nmsdk-PulseLib.git",
+      "transport_url": "https://github.com/aicommunity/Nmsdk-PulseLib.git",
+      "commit": "541bf89b9966f63ca5131fa57a31a9ae3f5820ea",
+      "remote_advertised_refs": [
+        "refs/heads/codex/timelearner-initial-threshold"
+      ],
+      "remote_reachable": true
+    },
+    {
+      "path": "Libraries/Rdk-BasicLib",
+      "declared_url": "git@github.com:aicommunity/Rdk-BasicLib.git",
+      "transport_url": "https://github.com/aicommunity/Rdk-BasicLib.git",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "remote_advertised_refs": [
+        "refs/heads/develop"
+      ],
+      "remote_reachable": true
+    },
+    {
+      "path": "Libraries/Rdk-CvBasicLib",
+      "declared_url": "git@github.com:aicommunity/Rdk-CvBasicLib.git",
+      "transport_url": "https://github.com/aicommunity/Rdk-CvBasicLib.git",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "remote_advertised_refs": [
+        "refs/heads/develop"
+      ],
+      "remote_reachable": true
+    },
+    {
+      "path": "Libraries/Rdk-HardwareLib",
+      "declared_url": "git@github.com:aicommunity/Rdk-HardwareLib.git",
+      "transport_url": "https://github.com/aicommunity/Rdk-HardwareLib.git",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "remote_advertised_refs": [
+        "refs/heads/codex/hardwarelib-audit-fixes-20261008"
+      ],
+      "remote_reachable": true
+    }
+  ],
+  "counts_by_threshold": {
+    "0.0117": {
+      "Classic": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      },
+      "Branch": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      }
+    },
+    "100": {
+      "Classic": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      },
+      "Branch": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      }
+    }
+  },
+  "temporal_reports": {
+    "status": "queued_after_exact_H21_native_owner",
+    "trial_soma_pairs_required": 80,
+    "manual_review_completed": false,
+    "source_root": "ddfe1f39d40373daab1d4e2894a9c822c90a288f",
+    "owner_pid": 3424054,
+    "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-stopped-phasea-visual-a1",
+    "waits_for": {
+      "pid": 3416749,
+      "start_ticks": "281000389"
+    },
+    "expected_readers": 3
+  },
+  "criterion": {
+    "anchor": "onset",
+    "window": "whole2s for target and foils",
+    "correct_post_pattern_spike_timing_established": false
+  }
+}

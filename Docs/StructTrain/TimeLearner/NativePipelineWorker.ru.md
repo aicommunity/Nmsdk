@@ -151,3 +151,57 @@ SearchUnresolved. Это отрицательный результат конк�
 калибровочных проб остаются открытыми; fixed-evaluation графики не подменяют их.
 
 Это не replay августа, не полные 8 паттернов и не приёмка всех этапов.
+## Явное чтение исторического training audit, 04.11
+
+По умолчанию audit_run_manifest требует точного совпадения сохранённого
+analysis с пересчётом. Для закреплённых schema1 Train manifests доступен
+явный historical_analysis="learned-v2-no-capacitance". Он поддерживает только
+auditor2→3, где единственное новое поле — capacitance_state=null. Все
+остальные analysis fields, включая Exact/primary count/model revision,
+сравниваются без ослабления; остальные старые/неизвестные версии отвергаются.
+Artifact closure, digests, native job/preflight, owned process и runtime
+проверяются обычным путём до адаптации analysis. Сам исходный manifest
+не изменяется. Успешный результат явно содержит historical_analysis_adapter.
+
+Реальные negative controls берутся из pinned positive N1 primary: строгий
+reader без adapter должен отказать; explicit adapter должен принять; rehashed
+подмены Exact, числа primary trials и версии аудитора должны отказать.
+Подготовительный ModelSpec transport suite проверяет это до нового Train.
+См. InitialThresholdConstruction.ru.md: область пока feature, не весь stage3.
+
+## Изоляция служебных логов native Console
+
+Проверка полного production переноса выявила запись bootstrap INFO logs в
+runtime/EventsLog. Хотя четыре цепочки и reader checks проходят, полная
+побайтная неизменность runtime при этом не подтверждается. Исходный guard
+не переобъявляется успешным. Надо отдельно классифицировать все отличия и
+проверить неизменность executable/libraries/resources, сохранив исходный пакет.
+
+Подготовлено исправление Console: для native операций event log destination
+равен OUTPUT.events-log, рядом с новым native output и вне executable runtime.
+Сам native output до job runner не создаётся. Повторное использование output
+или event-log sibling отвергается до AppCore.Init и не дописывает старый лог.
+Runtime-parent output запрещён. Application ini должен оставлять Log/Dir и
+Log/FixedLogPath пустыми, иначе штатный Rdk приоритет INI перекроет per-job
+destination; такой native config получает явную invalid_config диагностику.
+Обычные project/inspection Console modes сохраняют прежний logging default.
+Rdk lifecycle и алгоритмы обучения не меняются. Это изменение пока требует
+серверной сборки и проверки реального immutable runtime, новых event logs и
+отрицательных запусков; до этого общий runtime gate остаётся открытым.
+
+Event-log sibling резервируется атомарным mkdir до AppCore.Init. Проверки
+exists недостаточно для двух одновременных запусков с одинаковым output:
+только владелец новой директории может инициализировать logger, проигравший
+получает invalid_config/native_event_log_path_reservation_failed. Сам native
+output по-прежнему создаёт штатный job runner. Это проверяется отдельно от
+обычного повторного запуска с уже завершённым output.
+
+Первая проверка Console-only исправления показала: FixedLogPath не меняет
+место glog. Четыре preflight/frozen controls и три early refusals прошли,
+duplicate дал0/2, однако logs остались в runtime и directory guard не прошёл.
+Исправление требует штатного WorkDirectory до Init. Общая Rdk feature0e70cf0
+сохраняет это явно заданное значение (default при пустом — по-прежнему
+executable directory). Console выбирает owned OUTPUT.events-log как рабочий
+контейнер; стандартный файловый путь Rdk — OUTPUT.events-log/EventsLog.
+Core system directory и абсолютные resource paths не подменяются. Первые
+NOT_ACCEPTED packets сохраняются; joint normal/ASan проверка ещё требуется.

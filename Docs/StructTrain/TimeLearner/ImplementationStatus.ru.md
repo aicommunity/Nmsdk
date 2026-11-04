@@ -256,3 +256,22 @@ disk budget привязан к actual filesystem, а crash/expiry не осво
 capacity. [Контракт, доказательства и ограничения](ResourceReservations.ru.md).
 Это следующий слой очереди; production dispatcher/ConditionSpec wiring,
 весь граф процессов, cancel/recovery, worker policies и весь этап10 не завершены.
+
+Уточнение04.11: [предусловия калибровочных tests](CalibrationFixturePreconditions.ru.md)
+исправлены в отдельной ветке. На Elder все8 native cases и7 readers прошли:
+четыре production-derived source models получили настоящий Exact и калибровку,
+четыре прежних narrow-search cases сохранены как budget-exhausted controls.
+Два ModelSpec2 случая подтвердили distinct-owner calibrated import. Допуски
+не ослаблены. ASan также прошёл8/8 native и7/7 readers; оба набора артефактов
+проверены и опубликованы. Merge в общую develop closure и проверка сочетания
+с остальными ожидающими feature branches пока открыты.
+
+
+Приёмка объединения04.11: optional initial threshold и исправленные
+calibration fixtures включены в согласованный threshold acceptance срез.
+Pulse develop9ec4566 сохраняет tested Core541bf89; root App/Tests/CMake/Rdk/Bin
+совпадают с normal/ASan nativeb82.
+[InitialThresholdIntegrationVerification.json](InitialThresholdIntegrationVerification.json)
+фиксирует сравнение с обоими tested roots и область18 threshold +8 calibration
++7 readers на worker. Нового численного запуска не заявляется. Остальные
+feature branches, полная physics/mode матрица и общий план остаются открытыми.
