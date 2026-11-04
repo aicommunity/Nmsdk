@@ -2899,7 +2899,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
             // loosening physical tolerances or injecting a certificate.
             rig.isi={.01,.03};rig.duration=.26;
             auto& c=*configuredPlan;c.model.initialIsi=rig.isi;
-            c.model.allocatedCableLengths.assign(inputs,1);
+            c.model.allocatedCableLengths.assign(rig.branch?1u:inputs,1);
             for(auto& input:c.model.inputs){input.attachment=1;input.synapses=1;input.resistance=86.e6;}
             c.duration=rig.duration;c.windows.assign(inputs,{0.,rig.duration});c.maximumSamples=540;
             c.maximumReferenceProbes=2;c.maximumModelSeconds=180.;
