@@ -1,4 +1,8 @@
-# Открытая приёмка совместного C-search/ModelSpec2 среза
+# Приёмка совместного C-search/ModelSpec2 среза
+
+Актуализация: [normal owner8/readers128 принят](JointOwnerReplayNormal.ru.md).
+Ниже сохранены причины failed attempts и исходный перечень: пункты1–5 выполнены
+для normal SDK802, пункт6 и прочая исходная матрица остаются открытыми.
 
 Native normal304 source8021301e894368aefd045f9d77274fcce9f60245 прошёл.
 Это не приёмка всех readers, отдельного процесса импорта, ASan или научной
