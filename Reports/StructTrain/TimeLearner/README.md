@@ -523,3 +523,5 @@ Scoped metadata acceptance 2026-11-01: [Elder property/migration](s09-resumed-st
 Measured length scoped acceptance2026-11-02: [normal67 after source repair](s07-measured-length-gate-normal-a2/README.md), [ASan remaining24 plus original39+4](s07-measured-length-gate-asan-a2/README.md), [selected ASan rerender16/16](s07-measured-length-selected-asan-a1/README.md), [scope and source limitations](../../../Docs/StructTrain/TimeLearner/MeasuredLengthProposal.ru.md). Full stages6/7/11 remain open.
 
 - 04.11: s05-calibration-preconditions-elder-a1 —8 native и7 primary readers;4 настоящих Exact→calibration,4 сохранённых legacy stopped controls. ASan counterpart pending. См. Docs/StructTrain/TimeLearner/CalibrationFixturePreconditions.ru.md.
+
+- 04.11: s05-calibration-preconditions-m40-a2 — ASan8/8 и readers7/7; первые отказы guard/prerequisite сохранены отдельно. См. CalibrationFixturePreconditions и ASanVerification в Docs/StructTrain/TimeLearner.

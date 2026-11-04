@@ -56,10 +56,25 @@ reader primary56,408B. Проверка восьми source packages нашла 
 и4 stopped,4 calibrated packages и2 distinct-owner transfer records:
 [CalibrationFixtureNormalVerification.json](CalibrationFixtureNormalVerification.json).
 
+## Проверка на M40 ASan
+
+Тот же native root прошёл8/8 cases за2950.468s;7/7 readers из того же
+reader root прошли без failures/errors/skips. Получены4 настоящих completed
+Exact sources,4 stopped sources,4 calibrated packages и2 schema2 transfers.
+Фактически загруженный libasan подтверждён, detect_leaks=0.
+
+Proof `ec7934bfd4a838b397298f9cf8ad18774b28e0f9`, раздел
+`Reports/StructTrain/TimeLearner/s05-calibration-preconditions-m40-a2`.
+Все812 native archive members,438 native source hashes и reader archive
+проверены независимо: [CalibrationFixtureASanVerification.json](CalibrationFixtureASanVerification.json).
+Native primary3,890,968B, reader primary56,452B.
+
 Код подготовлен в отдельной ветке от develop с merge prerequisites через
-`--no-ff`. ASan-приёмка ещё открыта. Первая подготовка M40 остановлена до
+`--no-ff`. Адресная приёмка восьми cases завершена на обоих workers; общая
+closure с другими ожидающими feature branches ещё не принята. Первая подготовка M40 остановлена до
 checkout/build, потому что old runtime ещё использовался отдельной cold
 regression. После закрытия её owner запущен новый readback
 `s05-calibration-preconditions-asan-a2`; исходный отказ a1 сохранён, не считается
-ошибкой алгоритма и не заменён результатом a2. Научная классификация stock
+ошибкой алгоритма и не заменён результатом a2. Оба исходных отказа входят
+отдельными проверенными архивами в новый proof. Научная классификация stock
 четырёхвходовой модели этим набором не проверяется.
