@@ -172,3 +172,9 @@ native приёмка ещё требуются; алгоритмический 
 На M40 отдельно работает **build-only** ASan joint SDK с одним compiler,
 memory cap4GiB и preflight MemAvailable>=36GiB. Он не запускает native gates;
 первоначальный K1 regression продолжает работу независимо.
+
+[Первичный failed42 gate](Joint42Failure.ru.md) независимо проверен и сохранён
+в Git:1205 members/510 source blobs,8 high100 graphs и32 полных frozen trials.
+Работает отдельный повтор normal44 root8021301e после явного исправления
+fixture expectations; old runtime/primary сохранены. Это pending native
+приёмка, не completed joint algorithms. Temporal report этих probes пока pending.
