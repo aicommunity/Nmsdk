@@ -114,7 +114,9 @@ class ManagedDeclarationTest(unittest.TestCase):
         job = self.job();self.phase(job, 'evaluate')['criterion']['anchor'] = 'unknown'
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary);declaration = root/'job.json';policy = root/'policy.json'
-            declaration.write_text(json.dumps(job));policy.write_text('null')
+            declaration.write_text(json.dumps(job));policy.write_text('{}')
+            # An object-shaped, unauthorized policy reaches semantic job validation;
+            # null is rejected by the generic JSON-object loader before run_pipeline.
             # No execution authority is supplied. A regression must not launch
             # a native process merely to prove that early validation is absent.
             output = root/'runs';text = io.StringIO()
