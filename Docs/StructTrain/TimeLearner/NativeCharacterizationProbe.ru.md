@@ -1,7 +1,7 @@
 # Штатная проба без обучения
 
 Ветка `codex/timelearner-native-probe`; реализация ещё проходит серверную
-приёмку. Обычный серверный контур проверен; ASan-приёмка пока не завершена.
+приёмку. Обычный серверный контур и тот же набор под ASan проверены.
 Команда Console `--timelearner-probe job.json --timelearner-output NEW`
 строит явно заданную холодную модель через `ConstructNativeModel`, затем
 использует обычные Build/Init/Reset и `QueueNativeProbe`. Дочерние компоненты
@@ -70,7 +70,15 @@ Proof commit `76d62276a33e271b0320f13d899a4be4c806f96d`, компактный а
 точным checkout принятого commit; Rdk Core tree не менялся. Отказы не были
 сбоями научного эксперимента или доказательством проблемы SSH/диска.
 
-Открыто: ASan-приёмка, отдельные cancel/wall-budget controls, сравнение
+M40 ASan A3 повторил все восемь проб, пять ранних отказов и пять primary
+readers; 121 файл холодного Train также побайтно совпал с исходным ASan
+контролем. Proof `692961f9ae587242e39a44b23827c2133a122725`, архив
+`Reports/StructTrain/TimeLearner/s03-native-characterization-m40-a3/primary.tar.xz`:
+357 членов, 548656 байт. Все члены и 322 source blobs проверены независимо;
+в фактически загруженных файлах каждой пробы присутствует libasan. Leak
+detection выключен. [Receipt](NativeCharacterizationASanVerification.json).
+
+Открыто: отдельные cancel/wall-budget controls, сравнение
 stock-графа с сохранённым остановленным состоянием и fixed-geometry Rs
 interventions. Новая команда пока не объединена в develop и не закрывает
 этапы 6–8 или научную матрицу.
