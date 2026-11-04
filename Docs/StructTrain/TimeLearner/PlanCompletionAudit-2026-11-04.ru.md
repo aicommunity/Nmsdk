@@ -184,3 +184,12 @@ fixture expectations; old runtime/primary сохранены. Это pending nat
 target flags и закрытая4GiB cgroup. Native gates0. Идёт отдельная инкрементальная
 build-only подготовка corrected8021301e в новом runtime; K1 продолжает работать.
 Компиляция и последующая численная/native приёмка учитываются раздельно.
+
+Актуализация после завершения normal44: [44/44 cases подтверждены](Joint44Acceptance.ru.md),
+включая восемь high100 negative и два low-threshold positive controls.
+Независимо проверены1275 archive members/510 source blobs; восемь графов
+и32 frozen observations совпадают с failed42 с учётом только абсолютного
+сдвига времени (остаток<=1.43e-14s). Прежние pending normal44 записи выше
+описывают предыдущий момент. Normal304 теперь запущен отдельно на том же
+неизменённом runtime; full304/readers/ASan joint native ещё не приняты.
+Компактный Git хранит primary5.87MB, без полного производного render cache.
