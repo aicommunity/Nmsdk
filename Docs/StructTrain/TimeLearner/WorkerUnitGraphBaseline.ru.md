@@ -62,3 +62,10 @@ child и успешный release только после closure всего г�
 доказательствами своего охвата. Они не проверяли этот lease-owner/managed-unit
 разрыв и не являются его исправлением. Build/Calculate/Reset bool-контракт Rdk,
 CapturedPerInput, физические параметры и научные критерии не затронуты.
+
+Последующая проверка: schema3 implementation source34394c301 прошла
+[M4061/61 tests](ManagedUnitsM40Acceptance.ru.md), включая отказ recovery
+при живой отдельной child и успешное освобождение после closure всего графа.
+Это исправление в отдельной ветке с M40 evidence; Elder и production integration
+ещё pending. Первоначальный baseline/API sourceADC не менялся и не считается
+исправленным задним числом.
