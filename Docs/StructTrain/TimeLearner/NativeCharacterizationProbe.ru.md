@@ -100,7 +100,12 @@ Proof commits `7d5604cdd60fbb5b024f86326843bbb74a76e6f6` (Elder, 122256 B)
 На каждом независимо проверены 145 primary members и 323 source blobs:
 [receipt](NativeProbeInterruptionsVerification.json). ASan detect_leaks=0.
 
-Открыто: полное восстановление
-stock-графа с сохранённым остановленным состоянием и fixed-geometry Rs
-interventions. Новая команда пока не объединена в develop и не закрывает
-этапы 6–8 или научную матрицу.
+Уточнение 04.11.2026: полное восстановление двух stock-графов из остановленного
+состояния и fixed-geometry Rs interventions проверены на обоих worker:
+[протокол и артефакты](StoppedStateResistanceControls.ru.md). Приняты непрерванные
+запуски с полным import, сохранённой controller history и реальной вспомогательной
+пробой перед разрешённым изменением Rs. Прерывание этой вспомогательной фазы
+пока не имеет полного phase-aware execution envelope и остаётся открытым;
+проверенные выше cold cancel/timeout controls не доказывают этот случай.
+Новая команда пока не объединена в develop и не закрывает этапы 6–8 или
+научную матрицу.

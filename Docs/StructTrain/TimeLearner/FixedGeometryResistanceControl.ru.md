@@ -81,3 +81,7 @@ Proof `2d49e6aba30c271c59309f733777b2d7b9f96436` содержит обе исх�
 [артефакты](../../../Reports/StructTrain/TimeLearner/s07-stock-fixed-geometry-elder-a2/README.ru.md),
 [независимая проверка](FixedGeometryResistanceVerification.json).
 Научный verdict отсутствует; этапы5–8 и11 этим контролем не завершены.
+
+Уточнение04.11: последующий полный native import и matched Rs controls приняты;
+[отчёт и ограничения](StoppedStateResistanceControls.ru.md). Исторический отказ
+cold preflight выше сохранён: равенство L/Ns/Rs не заменяет равенство всего графа.
