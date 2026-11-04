@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "cb1905f4-0bcc-4fe6-b53b-2b7b847fc7a5",
+  "job_id": "s10-managed-native-calibration-normal-a1",
+  "recorded_unix": 1793794258.5266826,
+  "administrator": {
+    "pid": 1959467,
+    "start_ticks": "336347692",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 1959484,
+    "start_ticks": "336347702",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "65a9f6924e73e20964773cb59c346847a0414fca0d08d0b04b359b806643a271",
+      "unit": "timelearner-8cf08ca9-7a03-495a-86e5-43ee72303d66.service",
+      "invocation_id": "29b8be0e4b4045bebb8d3256556154ee",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8cf08ca9-7a03-495a-86e5-43ee72303d66.service",
+      "initial_main_pid": 1959484,
+      "initial_start_ticks": "336347702",
+      "sha256": "359f48d79ea9dd6cf44a7924983efcdd027da9f84410f93f9cd356b55433a222"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-8cf08ca9-7a03-495a-86e5-43ee72303d66.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Actual four measured calibration controls passed: full real grids, subsequent frozen evaluation and nonseparable silent rollback; all twelve separately managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3/actual-controls",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3/actual-controls"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+      "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-managed-calibration-acceptance-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-managed-calibration-acceptance-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
