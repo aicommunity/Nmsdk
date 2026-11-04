@@ -573,3 +573,10 @@ User-systemd/cgroup controls12/12 на worker:
 [Elder](s10-contained-process-elder-a1/README.ru.md),
 [M40](s10-contained-process-m40-a1/README.ru.md). Это lifecycle primitive,
 без automatic lease recovery или complete scheduler claim.
+
+
+Contained-process итоговый gate13/13:
+[Elder A2](s10-contained-process-elder-a2/README.ru.md),
+[M40 A2](s10-contained-process-m40-a2/README.ru.md). Добавлен ранний отказ
+подстановки bootstrap paths; первые12-case primary сохранены. Автоматический
+lease recovery и production pipeline integration остаются открытыми.

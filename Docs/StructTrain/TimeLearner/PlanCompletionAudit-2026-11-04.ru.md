@@ -102,3 +102,12 @@ Fresh checkout owner3667868 закрыт успешно: origin-only roote218753
 OS limits и учёт потомков после потери frontend работают в этом API. Однако
 lease recovery/journal/ConditionSpec/Train→Test wiring ещё не подключены;
 старый runner и работающий K1 не переведены. Этап10 остаётся частичным.
+
+
+Текущий contained-process sourceecc384214 прошёл расширенный13-case gate
+на обоих workers; в develop принимается только этот явно ограниченный API.
+Подготовлен также **непринятый** Pulse кандидат совместного C-search и
+construction threshold `cc97149c90ce98ff24ca688452f4a40d54e0e63d`: merge
+от9ec4566 с84e456d, без текстовых конфликтов. Его runtime/gates с ModelSpec2,
+config schema4, новым Rdk/root и optional C On ещё не выполнялись; исходный
+K1 не заменяет эти совместные проверки.
