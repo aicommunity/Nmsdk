@@ -212,3 +212,24 @@ class ManagedUnitReservationsTest(unittest.TestCase):
         self.assertTrue(event["managed_unit_graph"]["all_registered_units_closed"])
         self.assertEqual(len(event["managed_unit_graph"]["units"]), 1)
         self.assertEqual(registry.inspect()["leases"][0]["state"], "released")
+
+    def test_changed_reservation_alias_is_rejected_before_direct_unit_launch(self):
+        alias = self.root/"owned-link"
+        alias.symlink_to(self.owned, target_is_directory=True)
+        registry = Reservations(self.root/"alias.sqlite3", capacity=CAPACITY, managed_units=True)
+        lease = registry.reserve("aliased-output", [{"path": str(alias), "access": "write"}],
+            demands=DEMANDS, controller_directory=self.controller)
+        other = self.root/"other"
+        other.mkdir()
+        alias.unlink()
+        alias.symlink_to(other, target_is_directory=True)
+        try:
+            with self.assertRaisesRegex(ReservationError, "reservation_path_alias_changed"):
+                start(self.manifest(), ["20"], self.root, self.owned/"native", memory_bytes=64*MIB,
+                    tasks=16, maximum_wall_seconds=30, managed_reservation=(registry, lease["token"]))
+            self.assertFalse((self.owned/"native").exists())
+            self.assertEqual(registry.inspect()["managed_unit_intents"], [])
+        finally:
+            alias.unlink()
+            alias.symlink_to(self.owned, target_is_directory=True)
+        registry.release(lease["token"], note="Actual symlink change rejected before manager submission; alias restored.")
