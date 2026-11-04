@@ -6,18 +6,18 @@ import sys
 import unittest
 import uuid
 
-from .test_contained_process import ContainedProcessTest
+from . import test_contained_process as contained_fixture
 from ..contained_process import inspect as inspect_contained, stop
 from ..resource_reservations import Reservations, ReservationError
 
 
 @unittest.skipUnless(sys.platform == 'linux', 'actual Linux cgroup worker required')
 class ClosedWorkerRecoveryTest(unittest.TestCase):
-    setUp = ContainedProcessTest.setUp
-    close_units = ContainedProcessTest.close_units
-    manifest = ContainedProcessTest.manifest
-    launch = ContainedProcessTest.launch
-    wait = ContainedProcessTest.wait
+    setUp = contained_fixture.ContainedProcessTest.setUp
+    close_units = contained_fixture.ContainedProcessTest.close_units
+    manifest = contained_fixture.ContainedProcessTest.manifest
+    launch = contained_fixture.ContainedProcessTest.launch
+    wait = contained_fixture.ContainedProcessTest.wait
 
     def dead_worker(self, *, child=False, budget=False, contained=True):
         database = self.root/'leases.sqlite3'; receipt = self.root/'lease.json'
