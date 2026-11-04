@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending; twenty historical cable_model and E1 tools retired together; standalone Euler/proxy/XML-overlay assumptions remain historical, all primary outputs retained; E05 and other remaining tools pending",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -2268,6 +2268,386 @@
       "replacement": null,
       "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
       "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable.c",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "5e8279e5eeb919e5d69a3705fa5e471cf15ef6cf",
+      "content_sha256": "1fd641922fea125ab62116a0c35df1172ce4da802ad52cfd62f1df722b585324",
+      "bytes": 1987,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable.c",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable.c"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable2.c",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "984868db8cc4bb8de3c66c08b706edee9c6f1bf3",
+      "content_sha256": "02028197cde2328f7aecc5568fccb2469bf36e13c0d4035fa5c805f6087f5c27",
+      "bytes": 2055,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable2.c",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/cable2.c"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/classic_full.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "6ff1dc1a3f9be1849ce06f321d69a4268c27a298",
+      "content_sha256": "676c5da15f85112633c03050405e078296b169c57a61797384cb8883d7e137ad",
+      "bytes": 840,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/classic_full.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/classic_full.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/ideal_delay.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "d053f8dd1502b4b1899a6ecd6a4e5b651f1296c4",
+      "content_sha256": "af8a8d26c1eb550810e7fe590f61a6f3f2380f49297dadb849ad605cd730ec68",
+      "bytes": 934,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/ideal_delay.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/ideal_delay.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/library.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "a8fc68b398de3afb546c7f5689561ded9769f992",
+      "content_sha256": "b97979b937faae4647af98ee32197d1e7ed0570554ee309c104285fe8e9c5a21",
+      "bytes": 3373,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/library.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/library.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/margin_vs_shift.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "2189e8eafdd917abd867e367d131ca4f45fbc72e",
+      "blob_sha1": "2f13c7bae14a2e73de64f7bb12ca9b8c3c9f0ebb",
+      "content_sha256": "22f101bfd42cbba7406dd7a020ee63ad9fec146846a6490a4fd0941a2594c370",
+      "bytes": 5854,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/margin_vs_shift.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/margin_vs_shift.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/oracle.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "6cca612746f2190f14b474fbd3c6bcf2ccc02178",
+      "content_sha256": "2b75f4fe1fd8ddb84f752fbd557bbab7791c7a7b4390c1c84291206b261d672d",
+      "bytes": 1646,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/oracle.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/oracle.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/sweep.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "c0d19a90abfd4309df12bdaeece82cbb520e115a",
+      "blob_sha1": "32206659825f47e93fd25cd8a9ecf8e03e7bc17f",
+      "content_sha256": "536d3a7479947e319561fdfd87fdcff061ce8ac387960d4c86005110846a3fa6",
+      "bytes": 1666,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/sweep.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/cable_model/sweep.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_0_summarize.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "642cabb5b0868f3af82b23220651e07515ffcc68",
+      "blob_sha1": "cc31ab2ffab1a73613d5bed70c2eef6837849762",
+      "content_sha256": "8da321d9575a5e50230e0b3718076ed8bb19980a44fb1f2f9691b79be3a291f2",
+      "bytes": 2522,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_0_summarize.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_0_summarize.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1_timing_library.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "190543c4adc73fa4fc59147185380b45c2b2e6d9",
+      "blob_sha1": "50fde4f55fc52f2be858f132f57374f0735dc636",
+      "content_sha256": "5eb916774ea5576a7d78b729a3cdec4e4c131bdfce709cc38432da32a09276c9",
+      "bytes": 6228,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1_timing_library.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1_timing_library.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1b_rs_n_amp_library.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "2604dc08c405512e3ba739206654fea1c23156df",
+      "blob_sha1": "d7979609d0915badd0ecb272d304edb623e54fd4",
+      "content_sha256": "82eee970995a635e1695465d949e92ddbca1ce9cf7828f0210ce46347566330a",
+      "bytes": 5946,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1b_rs_n_amp_library.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1b_rs_n_amp_library.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1c_fastspan_library.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "9c6cc318334fccf0040120d75c53e3ae2f5ae47c",
+      "blob_sha1": "44d09082b781cac0c7effbd82e29406506b19335",
+      "content_sha256": "c09ab401b8284a9c7a2a892aff925c70bdb0bd4b395f065f89e8a8ad11b2c958",
+      "bytes": 7157,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1c_fastspan_library.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1c_fastspan_library.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1d_nextseg_psi_library.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "da88a998c38e3e5be56a9d36165aefde3e153605",
+      "blob_sha1": "d6749e6edad430acc9b8e59c085780ad1e011a36",
+      "content_sha256": "21c50d19b0be19f9844d0132d85d8b35c58dae8cebf3981357ded32fc5669a1a",
+      "bytes": 9444,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1d_nextseg_psi_library.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1d_nextseg_psi_library.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1e_multipulse_ir.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "2adf0cd353a1249abe2a51e0a8565311332066e5",
+      "blob_sha1": "ad18b201d9cead090e333ad090bf087f48c2eebd",
+      "content_sha256": "ffa20bdc7f1249c1a820b83b7f57d8a6c1d4b8129c52c71dbd6e35003839b2ea",
+      "bytes": 12733,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1e_multipulse_ir.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1e_multipulse_ir.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1f_four_dendrite_packa.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "18ddd803a8daef2e1c381cf1b8e2d3bf7d692f7f",
+      "blob_sha1": "b4e6bc03cefd612f133607e202db60b83ac4faf9",
+      "content_sha256": "f10a2c32fc81924138293fd1159b72e0e4859e4dba4722a9a72f729bda830da5",
+      "bytes": 16651,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1f_four_dendrite_packa.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1f_four_dendrite_packa.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1g_console_branch_ir.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "ab3abc32994328c714b517c06bb6f30e6c3a58e1",
+      "blob_sha1": "832822a7da2898a04cea9174e687790790fe03e5",
+      "content_sha256": "3d1123912d1fa1a2a35c7926b1b927a9b034e40526d66b1256ff2d2f991f2a54",
+      "bytes": 16404,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1g_console_branch_ir.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_1g_console_branch_ir.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_2_repeatability.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "2e1ce380a33f12e855982b4f3738c6b131b38b24",
+      "blob_sha1": "10612d0196ef06d553a6594911b56d511c4bff52",
+      "content_sha256": "e899391f41470d8945bf33c74fd8a1ccd930d5210eb5cf69332dba79a8c420ef",
+      "bytes": 19413,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_2_repeatability.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_2_repeatability.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_3_relaxation.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "fbd9b0490d143d16f7cda2c6ca34de10ee3041e5",
+      "blob_sha1": "139f9f66d7a452115be3a0b6cefb452b9fb587ea",
+      "content_sha256": "4daa9f78fc128f9f6f79d15a45da765b02e5661b089e59feaeed2439a9feca03",
+      "bytes": 18555,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_3_relaxation.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_3_relaxation.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_4_separability_predictor.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "e9a0808c8cbee4b5e9cfcdab39dc157f9b46f41d",
+      "blob_sha1": "1f361eeacc0d5301e50b03ca3d0163c76dacf9a3",
+      "content_sha256": "1d649bb5c5e676bd3da0bd2d686ed816501d67149a68861e143a4248cd3f5759",
+      "bytes": 13081,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_4_separability_predictor.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_4_separability_predictor.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_5_fragility.py",
+      "action": "retired_historical",
+      "archive_commit": "3c5e777393776d5340131b03a31b34f4cb668b27",
+      "last_change_commit": "f9e83bf8cd3f8af275845e5022ad00aac7f02a49",
+      "blob_sha1": "d4e8bac40bb3cb8751a790e4406f488eb990511b",
+      "content_sha256": "ba760f62a18452abed552f8702b4bd0a273587ca3d73b951ad16daeaaf16a1bb",
+      "bytes": 15868,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/3c5e777393776d5340131b03a31b34f4cb668b27/Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_5_fragility.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "3c5e777393776d5340131b03a31b34f4cb668b27:Docs/Audit/TimeLearner-2026-09-26-review/evidence/tools/e1_5_fragility.py"
+      ],
+      "replacement": null,
+      "reason": "Historical cable simulator/E1 analysis family retired coherently after dependency/caller review. Current native package does not execute these paths; no general analytical/native equivalence claimed.",
+      "original_results": "preserved; retrieval snapshot is not an attestation of experiment execution source"
     }
   ],
   "reference_review": {

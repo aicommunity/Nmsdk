@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.1 — библиотека задержки и FWHM (scoped follow-up после E1.0 PARTIAL)
 
 Постановка: после этапа **E1.0** ([`E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md`](E1_0_CABLE_VS_CONSOLE_2026-10-22.ru.md), commit **`642cabb5b`**, вердикт **PARTIAL**) собрать **первичную timing-библиотеку** для контроллера и F1 (поиск L\* по задержке): для **NSPNeuronGen** и **NSPNeuronGenAsymRmD001C1e9** на **TipR = 8.6e7**, одиночный EPSP, **L = 1…100**. Колонки: **t_peak**, **FWHM**, **peak** (Console где есть, иначе модель), provenance **RUN/json**. Полная сетка E1.1 по плану ([`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §E1.1: Rs×8, N∈{1,2,4…128}, NextSegInh, PSI, FastSpan, AsymRm A/B/C) **не** запускалась в этом проходе.

@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.1f — 4-дендритная Pack-A суперпозиция IR (offline)
 
 Постановка: **E1.1e** закрыл tip multi-pulse **отрицательно** (nextseg@L=7 ≈passive, last_fwhm~62–66 мс, gate 0/132) и оставил gap «pattern-level / 4-dendrite Pack-A». Этот scoped-проход проверяет, даёт ли **полная 4-входная** суперпозиция при состоянии острова `br25_nextseg` (L = `7 6 4 1`, TipR = `20M×3+86M`) с mods **passive / nextseg / psi_k2_5** узкое эффективное ядро и **положительный** `sep_margin`, сопоставимый с E1.4 `ideal_inh_proxy` (τ = 0.5 мс, margin ≈ +0.074, FWHM/span ≲ 0.13). Console Branch soma IR, G1 RERUN / F1b / KeepDone **не** запускались.

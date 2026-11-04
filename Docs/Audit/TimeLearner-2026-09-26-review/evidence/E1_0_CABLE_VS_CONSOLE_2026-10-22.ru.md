@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.0 — модель кабеля vs Console (одиночный EPSP)
 
 Постановка: сверить офлайн-модель `plans/AGENT_PLAN_2026-10-20/tools/cable_model` с NeuroModelerConsole по одиночному импульсу на соме для длин дендрита **L ∈ {1, 4, 10, 25, 50}** и моделей **NSPNeuronGen** (τ = 10 мс, D = 5 мс, f = 2000 Гц) и **NSPNeuronGenAsymRmD001C1e9** (τ = 10 мс, D = 1 мс, f = 20000 Гц). Критерий этапа 1 плана: относительная ошибка **амplitude, t_peak и FWHM ≤ 5%** — тогда модель может заменить большую часть сетки E1.1. Trainer×Mode для этой проверки не применим (чистая физика кабеля); конфиги Train/Test — probe-only (`IsNeedToTrain=0`), TipR = 8.6e7, ISI = 2 с.
