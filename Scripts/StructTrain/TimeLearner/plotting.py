@@ -110,6 +110,18 @@ def render_soma(observation, channel, label, limits, output: Path, *,
             detail = detail_limits(samples, channel, left, right, limits)
             if detail is not None:
                 views.append((name+"-detail", left, right, detail, "local_detail", name))
+        peak_details = {}
+        for index in observation.get("diagnostic_peak_indices", []):
+            require(type(index) is int and 0 < index < len(samples)-1, "invalid_plot_peak_sample_index")
+            first, last = max(0,index-10), min(len(samples)-1,index+10)
+            left, right = samples[first]["time"], samples[last]["time"]
+            detail = detail_limits(samples, channel, left, right, limits)
+            if detail is None:
+                continue
+            name = f"measured-peak-{index:05d}-detail"
+            views.append((name,left,right,detail,"local_detail","measured_peak_detail"))
+            peak_details[name] = {"peak_sample_index":index,"peak_sample_time":samples[index]["time"],
+                                  "first_sample_index":first,"last_sample_index":last}
         for name, left, right, y_limits, scale, time_view in views:
             fig, ax = plt.subplots(figsize=(12, 6), dpi=160)
             # A threshold adds a fourth legend row. Reserve its own band above
@@ -124,7 +136,8 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                            label="Actual scalar spike threshold")
             overlay.step(times, stimulus, where="post", color="#d46200", alpha=.65,
                          linewidth=1.2, label="Actual shared input (native samples)")
-            if sample_markers:
+            visible_sample_markers = sample_markers or name in peak_details
+            if visible_sample_markers:
                 # Only visible samples get unclipped glyphs. The waveform itself
                 # stays clipped: disabling clipping for its full line would draw
                 # other time windows across labels and neighbouring panels.
@@ -175,8 +188,11 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                          "png_width": 1920, "png_height": 960,
                          "minimum_native_tick_pixels_on_zoom": 14.208 if time_view != "overview" else None,
                          "downsampling": False, "y_scale": scale, "time_view": time_view,
-                         "sample_markers":bool(sample_markers),
+                         "sample_markers":bool(visible_sample_markers),
                          "shared_y_limits": list(limits), "y_limits": list(y_limits)})
+            if name in peak_details:
+                rows[-1]["peak_detail"] = peak_details[name]
+                rows[-1]["minimum_native_tick_pixels_on_zoom"] = 1420.8/(frequency*(right-left))
             if reference_level is not None:
                 rows[-1]["reference_level"] = reference_level
     return rows

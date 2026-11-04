@@ -1,0 +1,59 @@
+{
+  "kind": "native_initial_threshold_integration_tree_verification",
+  "schema_version": 1,
+  "tested_native_root": "b82f76e2fe543acf25d6c3076abbd864f965b3a8",
+  "tested_reader_root": "59f28159bf5518d01871062fb90813ebd3d55cab",
+  "root_merge_parents": [
+    "70151ff0494d3528591e13eb4ef2af8bf24518c9",
+    "bd8e9b65b3e643072ed9d20fab05f237bbe61099"
+  ],
+  "prepared_index_tree": "8d63a9ebed4533b8f1bcad61655be9f220e90eb1",
+  "native_trees": {
+    "App": {
+      "tested": "88fa3bc766440ca6589739c9c74c4cbaf4252fba",
+      "integrated": "88fa3bc766440ca6589739c9c74c4cbaf4252fba",
+      "identical": true
+    },
+    "Tests": {
+      "tested": "cf51e3cf12b4529b123bc1210db220e4736b58ef",
+      "integrated": "cf51e3cf12b4529b123bc1210db220e4736b58ef",
+      "identical": true
+    },
+    "CMakeLists.txt": {
+      "tested": "2a54513b75286c025142c1972f26a74b3ee2e176",
+      "integrated": "2a54513b75286c025142c1972f26a74b3ee2e176",
+      "identical": true
+    },
+    "Rdk": {
+      "tested": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+      "integrated": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+      "identical": true
+    },
+    "Bin": {
+      "tested": "99f58da9296a794374cef679bbb878cb62af979a",
+      "integrated": "99f58da9296a794374cef679bbb878cb62af979a",
+      "identical": true
+    }
+  },
+  "tested_pulselib": "541bf89b9966f63ca5131fa57a31a9ae3f5820ea",
+  "integrated_pulselib": "9ec4566d71bf56d4eeb5c8a920bbc683fcd85299",
+  "pulselib_core": "a4768548668becf13b1af26ad242acff87e61183",
+  "pulselib_changes_after_test": "documentation and merge metadata only",
+  "pulse_remote_develop_verified": true,
+  "scripts_changed_vs_tested_readers": [
+    "Scripts/StructTrain/TimeLearner/resource_reservations.py",
+    "Scripts/StructTrain/TimeLearner/tests/test_resource_budgets.py",
+    "Scripts/StructTrain/TimeLearner/tests/test_resource_reservations.py"
+  ],
+  "script_changes_scope": "verified reservation API and its own process tests; native pipeline/scorer/readers unchanged",
+  "threshold_normal_proof": "60f5905c7b04ac41f16d405d2fe715f1e3eed174",
+  "threshold_asan_proof": "cd3a477ee03f5f75b2d71af83772ec6dce5dda1e",
+  "calibration_normal_proof": "3824e7eb2068812c94af33ef2775a7c25f8556f9",
+  "calibration_asan_proof": "ec7934bfd4a838b397298f9cf8ad18774b28e0f9",
+  "threshold_controls_per_worker": 18,
+  "calibration_native_controls_per_worker": 8,
+  "calibration_readers_per_worker": 7,
+  "new_numerical_run": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

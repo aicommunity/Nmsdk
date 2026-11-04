@@ -6,6 +6,8 @@ data partitioning or replace the full experiment scheduler/ConditionSpec pipelin
 from pathlib import Path, PurePosixPath
 import hashlib
 import json
+import os
+import re
 from functools import wraps
 
 from .calibrated_evidence import REQUEST_FIELDS
@@ -58,6 +60,46 @@ def _record(path, root):
     require(not path.is_symlink() and path.is_file(), "worker_artifact_missing_or_symlink")
     raw = path.read_bytes()
     return {"path": path.relative_to(root).as_posix(), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+def _artifact_files(root):
+    """Keep real primary files; validate, but do not duplicate glog aliases.
+
+    Rdk creates severity aliases in the private native event-log directory.
+    Only a basename alias to a regular log owned by this recorded process is
+    permitted. All other symlinks, including directory links, remain invalid.
+    The same inventory is used when publishing and when auditing a run.
+    """
+    root = Path(root)
+    log_directory = root/"native.events-log/EventsLog"
+    files = []
+
+    def owned_log(path):
+        pid = load(root/"process/owned-process.json")["pid"]
+        require(type(pid) is int and pid > 0 and
+                re.fullmatch(r"NeuroModeler\.[^/]+\.log\.(INFO|WARNING|ERROR|FATAL)\.\d{8}-\d{6}\."+str(pid), path.name)
+                is not None, "worker_event_log_owner_mismatch")
+
+    for path in sorted(root.rglob("*")):
+        if path.is_symlink():
+            require(path.parent == log_directory and path.name in
+                    {"NeuroModeler."+s for s in ("INFO", "WARNING", "ERROR", "FATAL")},
+                    "worker_artifact_missing_or_symlink")
+            target_name = os.readlink(path)
+            require(target_name not in ("", ".", "..") and
+                    "/" not in target_name and "\\" not in target_name,
+                    "worker_event_log_alias_escape")
+            target = path.parent/target_name
+            require(not target.is_symlink() and target.is_file(), "worker_event_log_alias_target_invalid")
+            owned_log(target)
+            require(".log."+path.name.split(".")[-1]+"." in target.name,
+                    "worker_event_log_alias_severity_mismatch")
+            continue
+        if path.is_file():
+            if path.parent == log_directory:
+                owned_log(path)
+            files.append(path)
+    return files
 
 
 @_evidence_boundary
@@ -268,7 +310,7 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *
               "source_package_path": (primaries/source_path.name).relative_to(output).as_posix(),
               "runtime_fingerprint": runtime["runtime_fingerprint"], "source_closure": runtime["source_closure"],
               "preflight": preflight, "analysis": audit, "analysis_code": analysis_code,
-              "artifacts": [_record(p, output) for p in sorted(output.rglob("*")) if p.is_file()],
+              "artifacts": [_record(p, output) for p in _artifact_files(output)],
               "independent_partition_verified": False, "evaluation_verdict": None}
     _write(output/"run-manifest.json", _signed(result))
     return result
@@ -290,8 +332,8 @@ def audit_run_manifest(path, *, post_tune=False):
             type(r["path"]) is str and type(r["bytes"]) is int and r["bytes"] >= 0 and
             type(r["sha256"]) is str and len(r["sha256"]) == 64 for r in records), "unknown_worker_artifact_record")
     names = {r["path"] for r in records}
-    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in root.rglob("*")
-            if p.is_file() and p != path}, "worker_run_artifact_closure_changed")
+    require(len(names) == len(records) and names == {p.relative_to(root).as_posix() for p in _artifact_files(root)
+            if p != path}, "worker_run_artifact_closure_changed")
     for record in records:
         relative = PurePosixPath(record["path"])
         require(not relative.is_absolute() and ".." not in relative.parts and "\\" not in record["path"],
