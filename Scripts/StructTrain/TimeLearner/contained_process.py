@@ -126,7 +126,12 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
             'contained_environment_invalid')
     executable = verify_runtime(manifest)
     cwd = Path(working_directory).resolve(strict=True);require(cwd.is_dir(), 'contained_cwd_invalid')
-    output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
+    output = Path(output).resolve()
+    # systemd interprets percent specifiers and expands variables in its own
+    # bootstrap arguments. Native arguments stay literal in request JSON.
+    require(not any(c in str(path) for path in (cwd, output, sys.executable) for c in ('%', '$')),
+            'contained_bootstrap_path_requires_literal_location')
+    output.mkdir(parents=True, exist_ok=False)
     attempt = str(uuid.uuid4());unit = 'timelearner-'+attempt+'.service'
     loader = manifest['loader_environment']
     require(type(loader) is dict and set(loader) <= {'LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM'} and

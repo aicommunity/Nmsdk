@@ -176,3 +176,11 @@ class ContainedProcessTest(unittest.TestCase):
         output = self.launch(['-c', 'printf preserved_spaces'], manifest=self.manifest('console space.rs1', '/bin/sh'))
         self.wait(lambda:inspect(output)['all_processes_closed'])
         self.assertEqual((output/'stdout.log').read_text(), 'preserved_spaces')
+
+    def test_service_path_expansion_is_refused_before_creating_outputs(self):
+        manifest = self.manifest()
+        for name in ('percent%H', 'variable${HOME}'):
+            output = self.root/name
+            with self.assertRaisesRegex(EvidenceError, 'requires_literal_location'):
+                start(manifest, ['20'], self.root, output, memory_bytes=134217728, tasks=32, maximum_wall_seconds=30)
+            self.assertFalse(output.exists())
