@@ -230,3 +230,13 @@ members/279 source blobs/21 fresh unit closures, implementation34394c301
 ещё feature, не develop. Elder61 поставлен в ожидание normal304 slot; global
 M40 schema1 и действующие SDK неизменны. Production integration/остальные
 fault cases и весь этап10 остаются частичными.
+
+
+## Дополнение после восстановления связи и проверки дисков
+
+[Завершённые Elder gates](ElderCompletedGates-2026-11-04.ru.md): joint normal304/304
+и schema3 kernel61/61 завершились; первичные архивы и closures проверены на
+worker и локально и сохранены в Git. Дополнительные joint readers/ASan и
+production worker acceptance остаются открытыми. На Elder18GiB free/97% used,
+поэтому новые большие model jobs там не запускались. M40 Data387GiB free.
+Повторный запуск уже работающего K1 не выполнялся.
