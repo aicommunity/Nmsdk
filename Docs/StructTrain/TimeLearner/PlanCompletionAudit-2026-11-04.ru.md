@@ -111,3 +111,28 @@ construction threshold `cc97149c90ce98ff24ca688452f4a40d54e0e63d`: merge
 от9ec4566 с84e456d, без текстовых конфликтов. Его runtime/gates с ModelSpec2,
 config schema4, новым Rdk/root и optional C On ещё не выполнялись; исходный
 K1 не заменяет эти совместные проверки.
+
+## Ресурсы и явный recovery04.11
+
+Проверен узкий [closed-worker recovery](ClosedWorkerRecovery.ru.md):49/49
+реальных infrastructure controls на каждом сервере, с сохранёнными events,
+ledger readbacks и kernel closures. Он освобождает только lease первоначального
+main процесса той же закрытой cgroup. Старые outside-controller leases,
+автоматический dispatcher, полный journal и production wiring остаются открыты.
+Этап10 по-прежнему частичный.
+
+Подготовка joint normal a1 root9f92a40b/Pulsecc97149c на Elder была остановлена
+до configure/build/native probes: слишком глубокая цепочка Git alternates
+вызвала рекурсивные lazy fetch и достижение TasksMax128. Это ошибка доставки,
+а не отрицательный научный результат. Whole-worker unit явно остановлен;
+резерв оставлен held до отдельной проверяемой recovery, без ручного SQL.
+Новая исходная копия normal a2 доставлена самостоятельными shallow Git packs:
+rootcode и Pulsecode не имеют alternates; Docs/Reports явно не материализованы,
+остальные gitlinks пока не установлены. Это ещё не SDK/runtime и не gate PASS.
+
+На момент адресной проверки Elder имел23GiB свободно при95% заполнении.
+Удалены только1832 промежуточных `.o` четырёх закрытых старых CMake builds,
+815872568 bytes; подробный сжатый журнал включён в Elder recovery proof.
+Исходные данные, библиотеки, `_deps` и Git object donors сохранены.
+M40 имел84GiB свободно на system и393GiB на Data. Повторное утверждение,
+что последняя ошибка подготовки вызвана SSH, не подтверждено: SSH работает.
