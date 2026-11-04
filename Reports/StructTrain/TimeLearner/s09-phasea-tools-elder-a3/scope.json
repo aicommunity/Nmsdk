@@ -1,0 +1,35 @@
+{
+  "root_base": "bc0c98590c2979f73e4f4c8166fdd4423265784e",
+  "root_candidate": "5e84b51b73688a6cb3181746c45645006a624bb5",
+  "bin_base": "99f58da9296a794374cef679bbb878cb62af979a",
+  "bin_candidate": "d7feac786e9c68437cba2c23dfa4a008faf8e36c",
+  "bin_exact_changes": {
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/EXP01_ltz_threshold_sweep/README.md": "M",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/README.md": "M",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/REPORT.md": "M",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/copy_config.sh": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/inject_analyzer.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/ltz_sweep_offline.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/merge_train_weights.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/patch_ltzone_integration.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/patch_test_model.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/run_all_experiments.sh": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/setup_all_experiments.sh": "D"
+  },
+  "root_exact_changes": [
+    "Bin",
+    "Docs/StructTrain/TimeLearner/PhaseAToolRetirement.ru.md",
+    "Docs/StructTrain/TimeLearner/script_migration.json"
+  ],
+  "all_other_bin_blobs_unchanged": true,
+  "original_phasea_report_body_identical": true,
+  "unchanged_root_native_and_code_trees": {
+    "Scripts": "9b73fcfc31e7e72e4a8c0895b9de3ae372812b74",
+    "Tests": "cf51e3cf12b4529b123bc1210db220e4736b58ef",
+    "App": "1637df3021509a59074a8ee9e747e5b4d290ba25",
+    "CMakeLists.txt": "2a54513b75286c025142c1972f26a74b3ee2e176",
+    "Libraries": "3d2368ce70f303005e481c8988bf5bfa3d2f3bf5",
+    "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014"
+  },
+  "scientific_verdict": null
+}
