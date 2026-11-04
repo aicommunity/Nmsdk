@@ -240,3 +240,10 @@ worker и локально и сохранены в Git. Дополнитель�
 production worker acceptance остаются открытыми. На Elder18GiB free/97% used,
 поэтому новые большие model jobs там не запускались. M40 Data387GiB free.
 Повторный запуск уже работающего K1 не выполнялся.
+
+
+[Managed native preflight acceptance](ManagedNativePreflightAcceptance.ru.md):
+Elder62/62 новых alias/resource controls, M4019/19 actual public preflight/
+portable checks. Предшествующая M4017/19 попытка сохранена с доказанными
+512MiB OOM. Это адресная приёмка evidence; code backend не promoted,
+Train→Test/production matrix и M40 повтор suite62 остаются pending.
