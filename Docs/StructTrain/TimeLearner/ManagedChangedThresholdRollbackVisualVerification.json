@@ -1,0 +1,62 @@
+{
+  "proof_commit": "f18056284cfd78193e07197feb7cb1a66128dd9c",
+  "files_verified": 191,
+  "verification_log_members": [
+    "terminal.json",
+    "test-result.json",
+    "render-tests.log",
+    "restoration.json",
+    "controller/closure.json",
+    "controller/runtime.json",
+    "controller/request.json",
+    "controller/worker-final-state.json"
+  ],
+  "selected_png": 84,
+  "trial_soma_pairs": 192,
+  "matrices": 32,
+  "full_png": 2872,
+  "full_cache_files": 9184,
+  "full_cache_bytes": 654729236,
+  "full_visual_acceptance_complete": false,
+  "extracted_for_review": [
+    "Classic-v1/fresh-frozen/evaluation/trial-0000-soma-001/zoom-001.png",
+    "Classic-v1/fresh-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Classic-v1/rollback-frozen/evaluation/trial-0000-soma-001/overview.png",
+    "Classic-v1/rollback-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Classic-v2/fresh-frozen/evaluation/trial-0000-soma-001/zoom-001.png",
+    "Classic-v2/fresh-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Classic-v2/rollback-frozen/evaluation/trial-0000-soma-001/overview.png",
+    "Classic-v2/rollback-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Branch-v1/fresh-frozen/evaluation/trial-0000-soma-001/zoom-001.png",
+    "Branch-v1/fresh-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Branch-v1/rollback-frozen/evaluation/trial-0000-soma-001/overview.png",
+    "Branch-v1/rollback-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Branch-v2/fresh-frozen/evaluation/trial-0000-soma-001/zoom-001.png",
+    "Branch-v2/fresh-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Branch-v2/rollback-frozen/evaluation/trial-0000-soma-001/overview.png",
+    "Branch-v2/rollback-frozen/evaluation/trial-0001-soma-001/overview.png",
+    "Classic-v1/silent-nonseparable/candidate-0000/trial-0000-soma-001/overview.png",
+    "Branch-v1/silent-nonseparable/candidate-0000/trial-0000-soma-001/overview.png"
+  ],
+  "manual_visual_review": {
+    "images_seen": 14,
+    "complete": false,
+    "scope": [
+      "rollback-frozen target/foil Soma1 overviews for Classic/Branch ModelSpec1/2",
+      "fresh-frozen target Soma1 zoom for Classic-v1/Branch-v1",
+      "changed silent-control target Soma1 overview for Classic-v1/Branch-v1",
+      "Classic-v1 rollback-frozen target/foil Soma2 overviews"
+    ],
+    "checks": [
+      "readable labels and axes",
+      "actual native input overlays visible",
+      "complete-window response tails visible",
+      "spike markers visibly distinct from soma waveform"
+    ],
+    "limitations": [
+      "Remaining selected70 and full-cache views not individually reviewed",
+      "SI units unverified",
+      "No independent or LT/no-LT causal comparison"
+    ]
+  }
+}
