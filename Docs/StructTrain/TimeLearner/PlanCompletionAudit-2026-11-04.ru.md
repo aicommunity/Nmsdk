@@ -317,3 +317,8 @@ original dataset304 не менялся. Failed attempts сохранены. Э�
 ## Pending cable/E1 migration04.11
 
 Feature `1d5c8276cc9344362ebffccf43a0970d55cc2084` подготовил удаление20 связанных исторических cable/E1 tools. Числа и первичные данные сохранены; source retrieval внесён в candidate manifest141 records. В текущем develop остаётся принятый manifest121 records; общий остаток217 не уменьшается до завершения gate. [Два bounded metadata workers и exact handles](../../../Reports/StructTrain/TimeLearner/s09-cable-retirement-queued-a1/jobs.json) ожидают закрытия предшествующих native jobs. Исторический код не исполняется; общая native equivalence не заявляется.
+
+
+## Ресурсы полного ASan: фактическое наблюдение04.11
+
+[Kernel readback K1](../../../Reports/StructTrain/TimeLearner/s07-full-asan-resource-observation-20261104-a1/observation.json) подтверждает native PID3690746/start284598691, RSS23.30GiB/HWM23.32GiB, текущее выполнение Classic0At20000. Full262 ещё не terminal. Для будущего full304 необходим отдельный бюджет по реальным peak/free RAM; лимит8GiB focused gate не распространяется автоматически на полный набор. Это иной snapshot, причина памяти/утечка не установлена; число tests и критерии не меняются.
