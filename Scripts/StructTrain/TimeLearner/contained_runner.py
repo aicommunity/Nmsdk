@@ -117,6 +117,15 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
                                    'schema_version': 1, 'pid': pid, 'start_ticks': binding['initial_start_ticks']})
                     except (FileNotFoundError, ProcessLookupError) as error:
                         mapping_error = str(error)
+                    except RuntimeError as error:
+                        # The main process can exit between reading /proc/exe
+                        # and /proc/maps while a descendant remains alive.
+                        # Missing capture is not permission to finish or to
+                        # stop observing that descendant. Other mapping errors
+                        # retain the strict invalid-runtime path.
+                        if str(error) != 'no executable mappings found':
+                            raise
+                        mapping_error = str(error)
             time.sleep(.02)
         _write(output/'terminal-unit-state.json', last)
         verify_runtime(manifest)
