@@ -1,3 +1,5 @@
+Принято после15/15 на каждом worker; exact merge blobs проверены: [приёмка](InventoryAndAuditRetirementAcceptance.ru.md). Ниже исходная постановка candidate и его ограничения.
+
 # Дополнение к инвентаризации скриптов
 
 Обнаружен пробел прежнего path-based inventory: расширение.mjs не входило в SCRIPT_SUFFIXES, хотя в Bin есть generate_timelearner_chart_workbook.mjs. Скрипты с нейтральными именами, включая Scripts/audit-probes/generate_probes.py, могут содержать прямые ссылки на TimeLearner и не попадать в поиск по пути. Снимок188 Bin/0 выбранных root остаётся историческим результатом прежнего селектора, не доказательством отсутствия остальных инструментов.
