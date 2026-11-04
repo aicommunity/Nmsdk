@@ -85,6 +85,9 @@ class ContainedRunnerTest(unittest.TestCase):
         self.assertTrue(result['all_processes_closed'])
         self.assertLess(result['wall_seconds'], 5)
         self.assertNotEqual(result['execution'], 'completed')
+        observed = json.loads((self.root/'attempt/main-exited-with-live-descendants.json').read_text())
+        self.assertEqual(observed['state']['MainPID'], '0')
+        self.assertFalse(observed['all_processes_closed'])
 
     def test_cancel_closes_all_descendants_and_preserves_unrelated_process(self):
         output = self.root/'attempt';unrelated = subprocess.Popen(['/bin/sleep', '20'])
