@@ -328,3 +328,8 @@ Feature `1d5c8276cc9344362ebffccf43a0970d55cc2084` подготовил удал
 ## Текущие implementation candidates после baseline133
 
 Root33fc48278cff860d20c570cb703198847f028065/Pulsecc — только исправленная cold test-постановка, separate build/focused25/133; stage6 candidate8644 пока не испытывался. Новый Python coordinatorabf22df34c6a409f34ecdd2243dfadf547efca1c с pipeline run/continue/audit и8 actual integration checks сохранён в отдельной ветке; в develop этот CLI не включён и runtime ещё не проверен. Открыты ConditionSpec binding, fault/cancel/reconciliation, queue/publish/report wiring. Полный план0–12 не сужается; только0 полностью принят.
+
+
+## Pending coordinator/render и единая A/B test-постановка
+
+[Точные два jobs/handles](../../../Reports/StructTrain/TimeLearner/s10-coordinator-and-rollback-render-pending-a1/jobs.json):M40 строит все4 phase reports changed-threshold corpus, включая rollback-frozen; Elder ожидает свободного ресурса для8 actual production coordinator checks/20 units. Root1eab24de/Pulse8644 подготовлен с теми же Tests/App/CMake, что corrected baseline33fc. Ни candidate dispatcher, ни coordinator, ни новый render по этой записи ещё не приняты. Полный исходный план и scopes независимой оценки сохраняются.
