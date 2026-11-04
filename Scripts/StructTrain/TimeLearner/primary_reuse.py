@@ -97,15 +97,18 @@ def pack(directory, repository, commit, archive_path, output):
     # envelopes. It changes compression only, not a single primary byte.
     destination = output/'primary.tar.xz'
     filters = [{'id': lzma.FILTER_LZMA2, 'preset': 3, 'dict_size': 64*1024**2}]
-    with tarfile.open(destination, 'w:xz', filters=filters) as archive:
-        for name, row in records.items():
-            path = directory/name
-            require(path.resolve(strict=True).is_relative_to(directory) and not path.is_symlink(), 'reuse_source_file_escape')
-            raw = path.read_bytes();require(_record(raw) == row, 'reuse_original_file_changed:'+name)
-            if name in reused:
-                continue
-            info = tarfile.TarInfo(name);info.size = len(raw);info.mode = 0o644
-            archive.addfile(info, io.BytesIO(raw))
+    # tarfile.xzopen does not forward arbitrary LZMA filters on the supported
+    # Python versions. Own the compression stream and pass a plain tar stream.
+    with lzma.open(destination, 'wb', filters=filters) as compressed_stream:
+        with tarfile.open(fileobj=compressed_stream, mode='w') as archive:
+            for name, row in records.items():
+                path = directory/name
+                require(path.resolve(strict=True).is_relative_to(directory) and not path.is_symlink(), 'reuse_source_file_escape')
+                raw = path.read_bytes();require(_record(raw) == row, 'reuse_original_file_changed:'+name)
+                if name in reused:
+                    continue
+                info = tarfile.TarInfo(name);info.size = len(raw);info.mode = 0o644
+                archive.addfile(info, io.BytesIO(raw))
     compressed = destination.read_bytes()
     metadata = _signed({'kind': 'timelearner_reused_primary_bundle', 'schema_version': 1,
         'original_bundle': original, 'reference': reference, 'reused_members': reused,
