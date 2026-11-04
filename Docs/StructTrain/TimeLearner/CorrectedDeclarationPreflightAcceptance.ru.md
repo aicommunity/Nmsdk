@@ -1,3 +1,5 @@
+Актуализация04.11: live-routing A3 признан invalid_runtime и остановлен; Train/Test результата нет. Capability7/7 passed; coordinator A4/live A5 ждут текущие workers. Object cleanup отказал до удаления; Git-pack dedup освободил408945883 bytes с сохранением содержимого. [Факты и ограничения](NativeRuntimeInterfaceAcceptance.ru.md). Слова ниже о живом A3 и планируемом удалении относятся к прежнему снимку.
+
 # Corrected declaration preflight13,04.11.2026
 
 На Elder source `b7bb1dba24107cb310519e76da4933d67344fc46` прошёл13/13 actual metadata/CLI tests на полном реальном public coordinator corpus. Нет failures/errors/skips. Проверки используют реальные declarations из четырёх завершённых cold Train pipelines, не создают поддельные learned models и не запускают компоненты. Прежний df5/A3 результат12/13 сохранён в [предыдущем evidence](../../../Reports/StructTrain/TimeLearner/s10-completed-dependent-gates-elder-a2/outcomes.json).
