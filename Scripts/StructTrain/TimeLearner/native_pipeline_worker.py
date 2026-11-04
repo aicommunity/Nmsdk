@@ -48,7 +48,7 @@ EXECUTION_FIELDS["diagnostic-evaluate"] = EXECUTION_FIELDS["evaluate"] | {
 
 
 def _load_source_case(mode, path):
-    if mode == "diagnostic-evaluate":
+    if mode in ("diagnostic-evaluate", "probe"):
         from .stopped_evidence import load_case as load_stopped
         return load_stopped(path)
     return load_case(path)
@@ -75,9 +75,16 @@ def _audit_source(job, source_case, mode):
 def validate_job(mode, job, source_case=None):
     require(mode in FIELDS and type(job) is dict, "unknown_native_pipeline_job")
     if mode == "probe":
-        require(source_case is None, "cold_probe_does_not_import_learned_state")
         from .native_characterization import validate_job as validate_probe_job
-        return validate_probe_job(job)
+        result = validate_probe_job(job)
+        if job['schema_version'] == 2:
+            from .stopped_evidence import audit_stopped_state
+            require(source_case is not None and source_case[0] == job['source_stopped'], 'probe_original_stopped_primary_required')
+            audit_stopped_state(*source_case)
+            result['source_primary_checked'] = True
+        else:
+            require(source_case is None, "cold_probe_does_not_import_learned_state")
+        return result
     live = mode in ("train", "preflight") and type(job.get("schema_version")) is int and job["schema_version"] == 2
     require(set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"} | ({"finalization_plan"} if live else set())
             and job["kind"] == "timelearner_native_"+KINDS[mode]+"_job" and
@@ -337,7 +344,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
     inputs = output/"input";inputs.mkdir();source_relative = None
     if source_path is not None:
-        snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate")
+        snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe")
         source_case = _load_source_case(mode, snapshot);source_relative = snapshot.relative_to(output).as_posix()
         require(validate_job(mode, job, source_case) == preflight, "pipeline_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
@@ -390,7 +397,8 @@ def audit_run_manifest(path, *, historical_analysis=None):
         actual = root/r["path"]
         require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
     mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
-    if mode in ("train", "preflight", "probe"):
+    job = load(root/"input/job.json")
+    if mode in ("train", "preflight") or (mode == "probe" and job['schema_version'] == 1):
         require(source is None, "pipeline_cold_training_has_source")
     else:
         require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),

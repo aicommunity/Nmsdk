@@ -5,6 +5,7 @@ artifacts. Process ownership/runtime evidence remain the supervisor's task.
 """
 from copy import deepcopy
 from pathlib import Path
+import struct
 
 from .native_calibration_worker import _digest, _evidence_boundary, _signed
 from .native_evidence import audit_probe, count, equal, load, number, require
@@ -21,8 +22,10 @@ PROBE_FIELDS = {'run_id', 'trial_id', 'sample_id', 'protocol_revision', 'input_i
 
 @_evidence_boundary
 def validate_job(job):
-    require(type(job) is dict and set(job) == JOB_FIELDS and job['kind'] == 'timelearner_native_probe_job'
-            and type(job['schema_version']) is int and job['schema_version'] == 1, 'unknown_characterization_job')
+    version = job.get('schema_version') if type(job) is dict else None
+    require(type(version) is int and version in (1, 2), 'unknown_characterization_job')
+    require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version == 2 else set()) and
+            job['kind'] == 'timelearner_native_probe_job', 'unknown_characterization_job')
     _digest(job)
     validate_model_spec(job['model'])
     model, probe = job['model'], job['probe']
@@ -54,6 +57,14 @@ def validate_job(job):
             type(profile['use_transit_signal']) is bool and type(profile['use_pattern_output']) is bool,
             'characterization_stimulus_invalid')
     number(profile['amplitude'])
+    if version == 2:
+        source = job['source_stopped'];_digest(source)
+        require(source['kind'] == 'timelearner_stopped_state' and source['state_kind'] == 'diagnostic' and
+                source['certificate'] is None and source['controller_version'] == 2 and
+                source['implementation_id'] == job['implementation_id'] and
+                source['configuration']['model'] == model and job['profile_archives'] == [],
+                'characterization_stopped_source_mismatch')
+        expected_import_parameters(job)
     return {'job_sha256': job['sha256'], 'native_configuration_validation_required': True, 'training_started': False}
 
 
@@ -77,6 +88,60 @@ def prepare_job(training_job, input_index, trial_id, *, maximum_wall_seconds=Non
     return job
 
 
+def expected_import_parameters(job):
+    parameters = deepcopy(job['source_stopped']['trained_inputs'])
+    require(len(parameters) == len(job['model']['inputs']), 'characterization_import_dimension_changed')
+    changes = job['resistance_intervention']
+    require(type(changes) is list and len(changes) <= len(parameters), 'characterization_intervention_invalid')
+    seen = set()
+    for change in changes:
+        require(type(change) is dict and set(change) == {'input_index', 'resistance'}, 'characterization_intervention_fields')
+        i, r = count(change['input_index']), number(change['resistance'])
+        require(i < len(parameters) and i not in seen and r > 0, 'characterization_intervention_invalid')
+        seen.add(i);parameters[i]['resistance'] = r
+    if job['model']['branch']:
+        banks = {}
+        for p in parameters:
+            require(p['length'] not in banks or banks[p['length']] == (p['synapses'], p['resistance']),
+                    'characterization_shared_bank_intervention_inconsistent')
+            banks[p['length']] = (p['synapses'], p['resistance'])
+    return parameters
+
+
+def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=None, maximum_wall_seconds=900):
+    from .stopped_evidence import audit_stopped_state
+    audit_stopped_state(*case)
+    package = case[0];c = package['configuration']
+    probe = {k: deepcopy(c[k]) for k in ('run_id', 'sample_id', 'protocol_revision', 'duration',
+             'maximum_sample_gap', 'minimum_amplitude', 'maximum_samples', 'record_spikes', 'peak_selection')}
+    require(count(input_index) < len(c['windows']), 'characterization_input_out_of_range')
+    probe.update(input_index=input_index, trial_id=trial_id, window=deepcopy(c['windows'][input_index]))
+    job = _signed({'kind': 'timelearner_native_probe_job', 'schema_version': 2,
+        'owner_class': 'NNeuronTimeLearner'+('Branch' if c['model']['branch'] else ''),
+        'implementation_id': package['implementation_id'], 'model': deepcopy(c['model']), 'profile_archives': [],
+        'stimulus_profile': deepcopy(c['stimulus_profile']), 'probe': probe, 'source_stopped': deepcopy(package),
+        'resistance_intervention': deepcopy(resistance_intervention or []),
+        'maximum_model_ticks': int(c['duration']*c['model']['frequency_hz'])+4, 'maximum_wall_seconds': maximum_wall_seconds})
+    validate_job(job);return job
+
+
+def expected_import_model(job):
+    """Exact physical graph projection for an Rs-only intervention, including aliases."""
+    parameters = expected_import_parameters(job)
+    model = deepcopy(job['source_stopped']['neuron']['graph']['identity']['model'])
+    nodes = {n['path']: n for n in model['nodes']}
+    for i, (before, after) in enumerate(zip(job['source_stopped']['trained_inputs'], parameters)):
+        if before['resistance'] == after['resistance']:
+            continue
+        cable = 1 if job['model']['branch'] else i+1
+        for k in range(1, count(after['synapses'])+1):
+            path = '$.Dendrite'+str(cable)+'_'+str(after['length'])+'.ExcSynapse'+str(k)
+            data = nodes[path]['parameters']['Resistance']['data']
+            require(data['type'] == 'binary64', 'characterization_resistance_type_unsupported')
+            data['value'] = struct.pack('>d', number(after['resistance'])).hex()
+    return model
+
+
 @_evidence_boundary
 def audit_execution(directory):
     directory = Path(directory)
@@ -91,6 +156,9 @@ def audit_execution(directory):
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
     expected_files = {'job.json', 'owner-configuration.json', 'initial-state.json',
                       'final-state.json', 'probe_trial_1.json', 'probe_trial_1.csv'}
+    imported = job['schema_version'] == 2
+    if imported:
+        expected_files.update({'source-import.json', 'probe-configuration.json'})
     if (directory/'cancel.request').exists():
         require((directory/'cancel.request').stat().st_size <= 65536, 'characterization_cancel_request_too_large')
         expected_files.add('cancel.request')
@@ -112,7 +180,19 @@ def audit_execution(directory):
         require(identity['kind'] == 'semantic_model_identity' and identity['schema_version'] == 2 and
                 identity['valid'] is True and identity['diagnostics'] == [] and identity['sha256'] == sha(identity['model']),
                 'characterization_invalid_model')
-    audit_initial_threshold(job['model'], initial['identity'])
+    if not imported:
+        audit_initial_threshold(job['model'], initial['identity'])
+    if imported:
+        source_import = load(directory/'source-import.json');_digest(source_import)
+        source = job['source_stopped']
+        require(source_import['kind'] == 'native_probe_source_import' and source_import['schema_version'] == 1 and
+                source_import['source_stopped_sha256'] == source['sha256'] and
+                source_import['identity'] == source['neuron']['graph']['identity'] and
+                source_import['parameters'] == source['trained_inputs'] and
+                source_import['physical_dynamics_reset'] is True and source_import['controller_history_reset'] is True and
+                source_import['training_started'] is False, 'characterization_source_import_changed')
+        require(initial['parameters'] == expected_import_parameters(job) and
+                initial['identity']['model'] == expected_import_model(job), 'characterization_import_or_intervention_graph_changed')
     require(initial['training_started'] is False and initial['search_executed'] is False and initial['dynamics_checkpoint'] is False,
             'characterization_initial_training_claim')
     require(initial['identity'] == final['identity'] and initial['parameters'] == final['parameters'] and
@@ -120,9 +200,10 @@ def audit_execution(directory):
             all(value is True for value in (final['model_unchanged'], final['controller_idle'], execution['model_unchanged'], execution['controller_idle'])),
             'characterization_model_or_controller_changed')
     parameters = initial['parameters']
-    require(len(parameters) == len(job['model']['inputs']) and all(set(p) == {'length', 'synapses', 'resistance'} and
+    inputs = [{'attachment': p['length'], **p} for p in expected_import_parameters(job)] if imported else job['model']['inputs']
+    require(len(parameters) == len(inputs) and all(set(p) == {'length', 'synapses', 'resistance'} and
             count(p['length']) == q['attachment'] and count(p['synapses']) == q['synapses'] and number(p['resistance']) > 0 and
-            (q['resistance'] is None or p['resistance'] == q['resistance']) for p, q in zip(parameters, job['model']['inputs'])),
+            (q['resistance'] is None or p['resistance'] == q['resistance']) for p, q in zip(parameters, inputs)),
             'characterization_effective_parameters_changed')
     ticks, frequency = count(execution['model_ticks']), count(execution['frequency_hz'])
     require(0 < ticks <= job['maximum_model_ticks'] and frequency == job['model']['frequency_hz'] and
