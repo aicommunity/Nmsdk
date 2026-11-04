@@ -1,0 +1,338 @@
+{
+  "cases": {
+    "Classic-v1": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-9ab72750-54c4-40fa-bba3-b907bd3c8c46.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-19f05864-3eb7-41fa-8506-c519995ec5c7.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-f4119c07-051b-41cc-b52a-9058521fe60d.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "rollback-frozen",
+          "unit": "timelearner-ca9de47a-42fe-4aa7-8ef3-3a80dc8f5be2.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.0037147266773602363,
+        0.004780132099175549,
+        0.005976069123634809,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "changed_threshold_rollback": {
+        "source_threshold": 1,
+        "candidate_threshold": 0.005976069123634809,
+        "source_model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+        "candidate_model_revision": "bea4a1b525f7648b77e0a67755d40b289d54791166d6788554d398ae8fb83eb9",
+        "fresh_restored_response_matches_source": true
+      },
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Classic-v2": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-45555c97-7847-4020-bd3a-49381cc3e3ee.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-e9ab9efa-273b-4fa3-9e39-1994c6cdb0de.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-a66eda0e-8f64-4016-aa30-bae3454b8592.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "rollback-frozen",
+          "unit": "timelearner-d26794de-51db-4a44-b204-9cf484cdd749.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.0037147266773602363,
+        0.004780132099175549,
+        0.005976069123634809,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "changed_threshold_rollback": {
+        "source_threshold": 1,
+        "candidate_threshold": 0.005976069123634809,
+        "source_model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+        "candidate_model_revision": "bea4a1b525f7648b77e0a67755d40b289d54791166d6788554d398ae8fb83eb9",
+        "fresh_restored_response_matches_source": true
+      },
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Branch-v1": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-d9bca6f8-1391-43fb-b6c2-022e19b8c139.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-8a798ee1-93aa-45a8-bb2f-bbb1572221a3.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-4a87ddbd-4eaa-4302-bfc2-423df7db5bcb.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "rollback-frozen",
+          "unit": "timelearner-4538127c-9823-4514-8881-58d427a9ce3f.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.007459905324788041,
+        0.009589717471100379,
+        0.011979716372791006,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "changed_threshold_rollback": {
+        "source_threshold": 1,
+        "candidate_threshold": 0.011979716372791006,
+        "source_model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+        "candidate_model_revision": "12dd8f216964db9e9da9bd16ebf90e2ca9d7b94952a5dc52204b20ef1bda69cb",
+        "fresh_restored_response_matches_source": true
+      },
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Branch-v2": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-d55b76ef-0ac6-4704-83dd-e8de535dbe1c.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-ed109767-49d8-41af-a663-cbbad28897a4.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-2571cbe0-d234-4fb2-95e6-a997e46084d2.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "rollback-frozen",
+          "unit": "timelearner-f9bc013e-0691-4661-bdb5-c5eacdac5572.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.007459905324788041,
+        0.009589717471100379,
+        0.011979716372791006,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "changed_threshold_rollback": {
+        "source_threshold": 1,
+        "candidate_threshold": 0.011979716372791006,
+        "source_model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+        "candidate_model_revision": "12dd8f216964db9e9da9bd16ebf90e2ca9d7b94952a5dc52204b20ef1bda69cb",
+        "fresh_restored_response_matches_source": true
+      },
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    }
+  },
+  "selected_thresholds": {
+    "Classic-v1": 0.004780132099175549,
+    "Classic-v2": 0.004780132099175549,
+    "Branch-v1": 0.009589717471100379,
+    "Branch-v2": 0.009589717471100379
+  },
+  "original_primary_commit": "28f7d2fe6f59232f19b33e5b24f4d4011eddfffb",
+  "models_trained_in_this_operation": false,
+  "historical_same_matrix": true,
+  "independent_partition_verified": false,
+  "unique_patterns": [
+    [
+      0.01,
+      0.03
+    ],
+    [
+      0.01,
+      0.24
+    ]
+  ],
+  "scientific_verdict": null,
+  "temporal_reports_pending": true
+}
