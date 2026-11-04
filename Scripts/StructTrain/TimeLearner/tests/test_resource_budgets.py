@@ -118,6 +118,26 @@ class ResourceBudgetsTest(unittest.TestCase):
             legacy.reserve('one', [{'path': str(self.root/'one'), 'access': 'write'}], demands=self.capacity)
         self.assertEqual(legacy.inspect()['leases'], [])
 
+    def test_write_on_a_different_actual_filesystem_cannot_borrow_this_disk_budget(self):
+        other = Path('/dev/shm')
+        self.assertTrue(other.is_dir())
+        self.assertNotEqual(other.stat().st_dev, self.root.stat().st_dev)
+        with self.assertRaisesRegex(ReservationError, 'disk_filesystem_mismatch'):
+            self.registry.reserve('foreign-write', [{'path': str(other/'timelearner-no-write'), 'access': 'write'}],
+                                  demands={'slots': 1, 'memory_bytes': 0, 'disk_bytes': 1})
+        self.assertEqual(self.registry.inspect()['leases'], [])
+        # Reading an immutable source on another volume does not consume its space.
+        self.registry.reserve('foreign-read', [{'path': str(other), 'access': 'read'}],
+                              demands={'slots': 1, 'memory_bytes': 0, 'disk_bytes': 0})
+
+    def test_copying_a_ledger_to_another_actual_filesystem_does_not_rebind_its_policy(self):
+        with tempfile.TemporaryDirectory(prefix='timelearner-ledger-', dir='/dev/shm') as directory:
+            target = Path(directory)/'copied.sqlite'
+            self.assertNotEqual(target.parent.stat().st_dev, self.root.stat().st_dev)
+            target.write_bytes(self.database.read_bytes())
+            with self.assertRaisesRegex(ReservationError, 'schema_or_worker_changed'):
+                Reservations(target, capacity=self.capacity)
+
     def test_expiry_preserves_all_demands_until_owner_releases(self):
         lease = self.registry.reserve('slow', [{'path': str(self.root/'slow'), 'access': 'read'}],
                                       demands=self.capacity, ttl_seconds=.001)
