@@ -170,31 +170,43 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             if(imported)actual=DescribeNativeLearnerModel(*owner,j.model.branch,j.model.normalization,attachments,j.model.editPolicy);
             return IdleConfiguration(j,parameters,actual?&*actual:nullptr);
         };
+        std::optional<NativeProbeResult> terminalResult;
+        std::string terminalPhase="main_probe";bool interventionApplied=false;
         if(!j.resistanceIntervention.empty()) {
             // Native edits require ownership at a consumed probe boundary. Use
             // a real source-state probe, even if its measured peak is invalid.
             // Do not invent a completed observation or modify executor state.
             EvidenceWriter baseline(output,j.model.branch?1:built.effective.size());
-            const auto measured=runProbe(configurationFor(built.effective),j.trialId+"/source-baseline",restoredIdentity,baseline);
+            auto measured=runProbe(configurationFor(built.effective),j.trialId+"/source-baseline",restoredIdentity,baseline);
             for(const auto& record:baseline.FinalizeWithPrefix("baseline_trial_"))artifacts.append(record);
-            Require(measured.status==NativeProbeStatus::Completed && measured.observation && measured.observation->complete && idle(),"probe_intervention_baseline_not_completed");
-            auto requested=built.effective;for(const auto& change:j.resistanceIntervention)requested.at(change.first).resistance=change.second;
-            const auto edited=owner->ApplyNativeParameters(requested);Require(edited.status==NativeEditStatus::Applied,edited.reason.c_str());
-            neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);Require(bool(neuron),"probe_edited_graph_missing");observer.Clear();
+            Require(idle(),"probe_intervention_baseline_started_training");
+            if(measured.status!=NativeProbeStatus::Completed || !measured.observation || !measured.observation->complete) {
+                // A partial baseline is evidence in its own right. Keep the
+                // imported model, do not apply an edit or invent a main probe.
+                terminalPhase="source_baseline";terminalResult=std::move(measured);
+            } else {
+                auto requested=built.effective;for(const auto& change:j.resistanceIntervention)requested.at(change.first).resistance=change.second;
+                const auto edited=owner->ApplyNativeParameters(requested);Require(edited.status==NativeEditStatus::Applied,edited.reason.c_str());
+                interventionApplied=true;
+                neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);Require(bool(neuron),"probe_edited_graph_missing");observer.Clear();
+            }
         }
         const auto initial=NmsdkTools::IdentifyModel(neuron,ports);Require(initial["valid"]==QJsonValue(true),"probe_invalid_initial_graph");
         const auto parameters=owner->ReadNativeParameters();auto expected=built.effective;
-        for(const auto& change:j.resistanceIntervention)expected.at(change.first).resistance=change.second;
+        if(interventionApplied)for(const auto& change:j.resistanceIntervention)expected.at(change.first).resistance=change.second;
         Require(Parameters(parameters)==Parameters(expected) && idle(),"probe_intervention_parameter_or_controller_mismatch");
         const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());Require(integration.valid,integration.reason.c_str());
         const auto configuration=configurationFor(parameters);
         if(imported)artifacts.append(Write(output,"probe-configuration.json",EncodeConfiguredNativeTraining(configuration)));
         artifacts.append(Write(output,"initial-state.json",Signed({{"kind","native_probe_initial_state"},{"schema_version",1},
             {"identity",initial},{"parameters",Parameters(parameters)},{"training_started",false},{"search_executed",false},{"dynamics_checkpoint",false}})));
-        EvidenceWriter evidence(output,j.model.branch?1:parameters.size());
-        const auto result=runProbe(configuration,j.trialId,initial,evidence);
+        if(!terminalResult) {
+            EvidenceWriter evidence(output,j.model.branch?1:parameters.size());
+            terminalResult=runProbe(configuration,j.trialId,initial,evidence);
+            for(const auto& record:evidence.FinalizeWithPrefix("probe_trial_"))artifacts.append(record);
+        }
+        const auto& result=*terminalResult;
         const double probeWallSeconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count();
-        for(const auto& record:evidence.FinalizeWithPrefix("probe_trial_"))artifacts.append(record);
         const auto final=NmsdkTools::IdentifyModel(neuron,ports);
         const bool unchanged=final==initial && Parameters(owner->ReadNativeParameters())==Parameters(parameters),controllerIdle=idle();
         if(imported)artifacts.append(Write(output,"controller-after.json",controlSnapshot()));
@@ -209,13 +221,18 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        Write(output,"execution.json",Signed({{"kind","timelearner_native_probe_execution"},{"schema_version",2},
+        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",imported?3:2},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},
             {"probe_wall_seconds",probeWallSeconds},{"model_unchanged",unchanged},{"controller_idle",controllerIdle},{"probe_status",NativeProbeStatusName(result.status)},
             {"observation_valid",bool(result.observation && result.observation->valid)},{"observation_complete",bool(result.observation && result.observation->complete)},
-            {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
+            {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}};
+        if(imported) {
+            executionRecord["terminal_phase"]=QString::fromStdString(terminalPhase);
+            executionRecord["resistance_intervention_applied"]=interventionApplied;
+        }
+        Write(output,"execution.json",Signed(executionRecord));
         return execution=="completed"?0:2;
     },[&](auto storage,auto environment) {
         for(const auto& p:j.profiles) {const auto profile=Object(p);
