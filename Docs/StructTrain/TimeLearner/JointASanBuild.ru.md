@@ -29,3 +29,11 @@ instrumented target flags, завершение и освобождение ре
 отдельно по завершению текущего K1 и фактическим ресурсам. Успешная компиляция
 не является runtime-приёмкой joint algorithms, проверкой новой физики либо
 научным результатом. Все исходные этапы1–12 остаются частичными.
+
+Актуализация: corrected build-only a2 root8021301e завершён. Proof
+`e2e8deeb6c242a48848fbdf6ee8c40abf0685d9e`,
+[независимая сверка](JointASanCorrectedBuildVerification.json):510 source hashes
+равны independently verified normal44, четыре instrumented targets,
+закрытая worker cgroup и released lease. Native gates0; старые pending записи
+выше описывают предыдущий момент. Исправленный ASan runtime готов, но joint
+native44/full304/readers ещё не приняты и ожидают отдельного запуска после K1.
