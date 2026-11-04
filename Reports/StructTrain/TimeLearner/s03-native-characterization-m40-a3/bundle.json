@@ -1,0 +1,1438 @@
+{
+  "kind": "native_characterization_validation",
+  "root": "111d0b578566342a6159a50977c6bcdab9f9c647",
+  "members": {
+    "readers.json": {
+      "sha256": "120d34ff11ca2d60db4e77200fc3dd787c93b8e41687cbb9229f19e17e865e4f",
+      "bytes": 65
+    },
+    "index.json": {
+      "sha256": "9a3e887ca0354c7d4a7d489de1f6cfbddf17abe999fb898121b8f40f4e8afd6f",
+      "bytes": 1833
+    },
+    "source-hashes.json": {
+      "sha256": "586d0dd62777c311bdbbbaa2c365a2b033edae787b681388a871a26dd60866ea",
+      "bytes": 44453
+    },
+    "readers.log": {
+      "sha256": "673869683c8fd410712197b7b25c84309a4cb3fcbc91f18b390a7be2f25668a1",
+      "bytes": 1253
+    },
+    "runtime-unchanged.json": {
+      "sha256": "42b052c9444dacd03eb479129d64b2fa82dfb3628534544acf638606b1ba1674",
+      "bytes": 33
+    },
+    "producer.py": {
+      "sha256": "08d65f519ed879c7165cb47a8116f79ebb2315d8b913bc6bdfedcddd5d0fcf23",
+      "bytes": 7202
+    },
+    "terminal.json": {
+      "sha256": "03b7d2ac9dbc4dfb00f6125b31f4613ef3b7b1d5de36732d52147dac1ac742bd",
+      "bytes": 109
+    },
+    "negative-cases.json": {
+      "sha256": "31a2377edca415442f7bb281e6c538cb2a57efc140112949343c1133ad103d86",
+      "bytes": 847
+    },
+    "train-writer-equality.json": {
+      "sha256": "961b99561e8028224e15c84faac66c1302b541f0fdb87a806c92dcec9d4590a9",
+      "bytes": 4762
+    },
+    "runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "owned-supervisor.json": {
+      "sha256": "1c9fac1c32afb663b2042d3a39a807ad9db82bea16c5821159079e24c757dcb1",
+      "bytes": 51
+    },
+    "regression/run-manifest.json": {
+      "sha256": "4f21b518956a4c87a96835c70d9568dbbeff3aedac28f4de13b91907147545bc",
+      "bytes": 37757
+    },
+    "jobs/Classic-v2-missing.json": {
+      "sha256": "604b222b5b949bf4073287838873212d11ac97852178314f22ea541b4c234750",
+      "bytes": 911887
+    },
+    "jobs/Branch-v2-partial.json": {
+      "sha256": "b3c690d2208ed3aadab02e4ca9744373f1b22cc18af1c807a839884d23809b2d",
+      "bytes": 840326
+    },
+    "jobs/Branch-v1-full.json": {
+      "sha256": "3676c082fe03517da462650079438b90bc04943a1088d62d1062c0cc2c2a16f1",
+      "bytes": 840294
+    },
+    "jobs/Branch-v2-full.json": {
+      "sha256": "410a575ed6e7193799e2a329e42992b5352b2982f99a70180ba0cc9c8e4edda0",
+      "bytes": 840324
+    },
+    "jobs/Classic-v2-full.json": {
+      "sha256": "95d77f30e3ee80e0f2e21a8f494db2ff6481d999701bde9533c0184505f356d7",
+      "bytes": 911884
+    },
+    "jobs/Classic-v2-partial.json": {
+      "sha256": "61dcc736a0dbee296151dc6fa27fd14d70bd117ca00a111d7fd86f139db3e2d8",
+      "bytes": 911886
+    },
+    "jobs/Classic-v1-full.json": {
+      "sha256": "7d6944ea49aecc35942cda30e121e55ff2fbf01ce8dd7dfe07e279562410965f",
+      "bytes": 911854
+    },
+    "jobs/Branch-v2-missing.json": {
+      "sha256": "c8a5784cf6c4dd9c12c0c9671a544f1f8c763931cdff914171e3c603dfb35830",
+      "bytes": 840327
+    },
+    "negative/spikes/job.json": {
+      "sha256": "2f0ef27500109c71e617687e4ec2d8568531ae4ce1b84e070ed2473f4c15f119",
+      "bytes": 570718
+    },
+    "negative/index/job.json": {
+      "sha256": "49d089594d930d33e2812026478800d20e52edc0c9cbd899625b5dcfca30957c",
+      "bytes": 570721
+    },
+    "negative/schema/job.json": {
+      "sha256": "72ca001d1ac8febd312ddccc530e82dac9e6bd7d57bcca898075e815332b97d6",
+      "bytes": 570719
+    },
+    "negative/digest/job.json": {
+      "sha256": "808fc7daffa715f261baec5956bf4926790200548639d22798f616eaea6e8a00",
+      "bytes": 570727
+    },
+    "negative/profile/job.json": {
+      "sha256": "249b9d8e1b8c34507557fdefb6ea5043f48278e1bc5b894078424b161b7d761e",
+      "bytes": 570719
+    },
+    "negative/spikes/process/capture-ready.json": {
+      "sha256": "b062e025584630605759528f11b4bf4bbc8dc3eb9574bc56aa791bf1bfe1fe31",
+      "bytes": 98
+    },
+    "negative/spikes/process/capture-ack.json": {
+      "sha256": "af87387b9ce6c6d7b4388c913feb16a9f049cbd77cbffab24606625e394f9a8e",
+      "bytes": 114
+    },
+    "negative/spikes/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "negative/spikes/process/owned-process.json": {
+      "sha256": "2e6bb443c3329589c6f53a232bcc0b79bc881fa0f7d8a8a8b37af613e4ebf6e2",
+      "bytes": 404
+    },
+    "negative/spikes/process/result.json": {
+      "sha256": "85b19d3cc7987ba3c76fab4fe2d7f869b470888c4554cef3d66b10f5f506fea9",
+      "bytes": 450
+    },
+    "negative/spikes/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "negative/spikes/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "negative/spikes/process/request.json": {
+      "sha256": "bcaa2562077632a863c63fef255b469cb69e8059e89f2bc59720b1953072236a",
+      "bytes": 917
+    },
+    "negative/spikes/process/stderr.log": {
+      "sha256": "378349ce17b4782a96bc4661b642601445a70d5398ae7ca799d730ff5b3475ec",
+      "bytes": 64
+    },
+    "negative/spikes/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035919.3559108": {
+      "sha256": "8c73f583e5684c15da96d47b1606b7b8e9bcce19ddcaae875e16e65f59377ae6",
+      "bytes": 291
+    },
+    "negative/index/process/capture-ready.json": {
+      "sha256": "f1019551e4b25ce245120c6493e583c2b5339f53d5f0f39649029612756a5600",
+      "bytes": 98
+    },
+    "negative/index/process/capture-ack.json": {
+      "sha256": "261ca0d2e01b7077670ec7fe96c728f3f6411489c025af3374f932ceeb211055",
+      "bytes": 114
+    },
+    "negative/index/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "negative/index/process/owned-process.json": {
+      "sha256": "d4c50ce97c1b591f62f09d1493829864cf1999f86e62e9a000156f8ca455e33f",
+      "bytes": 404
+    },
+    "negative/index/process/result.json": {
+      "sha256": "d24a02b390b5ec171d880d37469c9625f12c2d7168623332609e94f5cfe9d4c2",
+      "bytes": 450
+    },
+    "negative/index/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "negative/index/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "negative/index/process/request.json": {
+      "sha256": "540c67e52d7818e2652d402600785bc06fe43a6389fc5e2ff4ab9e3979ffe117",
+      "bytes": 913
+    },
+    "negative/index/process/stderr.log": {
+      "sha256": "7f86f33d9fabdef7d916baf180e03fe337b10a9750cdf504139dc0c2a65a7cc1",
+      "bytes": 46
+    },
+    "negative/index/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035906.3558371": {
+      "sha256": "3791c9a855e2d86a1513083d8b814954d6891d0b74170304f44e30b421a4de4c",
+      "bytes": 291
+    },
+    "negative/schema/process/capture-ready.json": {
+      "sha256": "1b717156a91b9341ea44bc2de8fb3bf9fff5d059f77c0686a93aa1d5b979becf",
+      "bytes": 98
+    },
+    "negative/schema/process/capture-ack.json": {
+      "sha256": "1b1cebbf3ca70ee3ac7f6ee2b0d79aa010e7ad51427c9a948628cb1e6174dd5c",
+      "bytes": 114
+    },
+    "negative/schema/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "negative/schema/process/owned-process.json": {
+      "sha256": "d012e4bb1d5425eb005a4ef1c78ef188475b2608d89df4148639eaac46f50225",
+      "bytes": 404
+    },
+    "negative/schema/process/result.json": {
+      "sha256": "50b8949fbe92f56a15a9dab9c7239ece799717dcd6e808327df4ce31c1788d81",
+      "bytes": 450
+    },
+    "negative/schema/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "negative/schema/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "negative/schema/process/request.json": {
+      "sha256": "a2716e342377bb5dc3b4409a0f9ccaec32725615471c231573b44f8e6fced20f",
+      "bytes": 917
+    },
+    "negative/schema/process/stderr.log": {
+      "sha256": "7f86f33d9fabdef7d916baf180e03fe337b10a9750cdf504139dc0c2a65a7cc1",
+      "bytes": 46
+    },
+    "negative/schema/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035913.3558659": {
+      "sha256": "bf8c53c69ccb528f7939784760f8603d4c746ff2850e8194479c78b7901faddf",
+      "bytes": 291
+    },
+    "negative/digest/process/capture-ready.json": {
+      "sha256": "dd80c593b3487a26f516e732511cf29a05022e60328d1852f37f8b9e2e4a140e",
+      "bytes": 98
+    },
+    "negative/digest/process/capture-ack.json": {
+      "sha256": "0cafb595a277ef01a730c9d152ae667765dee215e6f3b4b5a106df5838049945",
+      "bytes": 114
+    },
+    "negative/digest/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "negative/digest/process/owned-process.json": {
+      "sha256": "ac651f636b598662ed1244791ad15a0bddb8650c0a5215543786832096b96f36",
+      "bytes": 404
+    },
+    "negative/digest/process/result.json": {
+      "sha256": "6374d634c10987a2f1f469937cbbe7909c2ff898d022df03bfde4f55e4c3148c",
+      "bytes": 450
+    },
+    "negative/digest/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "negative/digest/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "negative/digest/process/request.json": {
+      "sha256": "576ae82aaecfe6d799b01c374b5ccf7306e49e9dcf3f5e93148d008b56f09403",
+      "bytes": 917
+    },
+    "negative/digest/process/stderr.log": {
+      "sha256": "55d6db76156178798bec9b514ce52ffe4626a5327b81debe38010b2daaa60268",
+      "bytes": 43
+    },
+    "negative/digest/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035925.3559396": {
+      "sha256": "7afde9389a4c15fd25abced1c3a5e634b39281289532e43446a4c3f7d7b570c3",
+      "bytes": 291
+    },
+    "negative/profile/process/capture-ready.json": {
+      "sha256": "463c34bccf57e4213566feb0126be7b0bc29a50358febe53cfe823afa4fd37a2",
+      "bytes": 98
+    },
+    "negative/profile/process/capture-ack.json": {
+      "sha256": "2f150a7330266dc21bf7269806596b00d1f2d485a0c8ab0ebb79b7c0161579a9",
+      "bytes": 114
+    },
+    "negative/profile/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "negative/profile/process/owned-process.json": {
+      "sha256": "5beea0516b05ab4b24537d463f7c563d0c860a3736cf7d862b0d26745723ffc0",
+      "bytes": 404
+    },
+    "negative/profile/process/result.json": {
+      "sha256": "5a59db8c0288fe67bfd2bc881e2e22622b095125dd953cc2e39e14a4997ed42f",
+      "bytes": 450
+    },
+    "negative/profile/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "negative/profile/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "negative/profile/process/request.json": {
+      "sha256": "02e45b6fc594a70900341c201991d99994028f8cf905a87f85f5ee40584f8a18",
+      "bytes": 921
+    },
+    "negative/profile/process/stderr.log": {
+      "sha256": "15c9f4367d2d140edc0aa8235640cf0841c1d7204de8f195259f2e7dcf3eb4f3",
+      "bytes": 69
+    },
+    "negative/profile/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035932.3559687": {
+      "sha256": "aa006bf606b9ae2b1d5d97ee09312947755d3b4e7119f85aea7355bf380bc047",
+      "bytes": 291
+    },
+    "regression/input/job.json": {
+      "sha256": "fc98b3897b4a43017641ef7af4bbf268bf2529d83c19bc48176f5987a9b18762",
+      "bytes": 913202
+    },
+    "regression/native/train_state_trial_18.csv": {
+      "sha256": "fc9f78c207e42663d6f05f7435b7aee417a8ea4e09f951ad8afe2305a2fa5bc0",
+      "bytes": 32920
+    },
+    "regression/native/train_state_trial_16.csv": {
+      "sha256": "9a9c62df339d7ef7bc4635ec5a6b2a0926b6be09b18e789e5fe972d3da602df5",
+      "bytes": 32662
+    },
+    "regression/native/train_state_trial_30.json": {
+      "sha256": "71ad544ae6a3986307442e340348d152f0a23968fc368551ffe2ed67eea37f8b",
+      "bytes": 5774
+    },
+    "regression/native/train_state_trial_3.json": {
+      "sha256": "bc7521192df50d47e3abd9a850398015c226f0a84c42e3f249c578a9f1705829",
+      "bytes": 5760
+    },
+    "regression/native/train_state_trial_58.csv": {
+      "sha256": "eb553597d503caf1bee3ccd141eef87d2c90e165b1963bef93127be94d4bc7ac",
+      "bytes": 30262
+    },
+    "regression/native/train_state_trial_31.json": {
+      "sha256": "022ed125058de77b6712ba91f4bd8dafb12ac7256f5db096d69dece82c4fc77f",
+      "bytes": 5765
+    },
+    "regression/native/train_state_trial_33.json": {
+      "sha256": "2943f910327482c68ee7d04ec564524f7a8be7984e2bb1571a36e76775cf55be",
+      "bytes": 5761
+    },
+    "regression/native/train_state_trial_49.json": {
+      "sha256": "27cdfdc81fb44ee10aa0e3afa74ce98c85247abc4317d18e86b0757660b1abfe",
+      "bytes": 5782
+    },
+    "regression/native/train_state_trial_6.csv": {
+      "sha256": "6ac25296695d834a9d4fea406bc3c1f7d3e5c8a77abe95a458f2bd4a1e0dd7f9",
+      "bytes": 30719
+    },
+    "regression/native/train_state_trial_24.csv": {
+      "sha256": "43b841a7c756b2daff13a4b676fcdea4d38363bc75edd24daae1d2ff56af2761",
+      "bytes": 32923
+    },
+    "regression/native/train_state_trial_50.csv": {
+      "sha256": "a99b9954c6693dc53a30edfa816564240f4e88ebaf880cdf5d7f51326e20aacb",
+      "bytes": 30264
+    },
+    "regression/native/train_state_trial_10.csv": {
+      "sha256": "489743781cfb2b4beb34b5321bf2e3dc72c47c1588d953919f34c55b5fd005ee",
+      "bytes": 32164
+    },
+    "regression/native/train_state_trial_44.json": {
+      "sha256": "c59d4f641dd0065f94b6f9b42efaeb7a753e88718ef952109b75ee653f75ec8c",
+      "bytes": 5776
+    },
+    "regression/native/train_state_trial_8.csv": {
+      "sha256": "7ddb1e211fd5c7acd0b0e464a2fd83763a1ce8ef6738756bb53c4abf448da2a4",
+      "bytes": 31191
+    },
+    "regression/native/train_state_trial_26.csv": {
+      "sha256": "59d27bb2a1bb027dd98d211c67240c2b917cc4d18f7e50ce6837faba47dbc92d",
+      "bytes": 32920
+    },
+    "regression/native/train_state_trial_28.csv": {
+      "sha256": "ba3a31c41f6f1aee96d8ef78e40642e3c3e14cfd5187bd5aab7ede46ea397989",
+      "bytes": 32906
+    },
+    "regression/native/train_state_trial_13.csv": {
+      "sha256": "b065778f8d08298bb0922dacd9d489b0bd914e8febb7d68b21d6e48eea1bf9e0",
+      "bytes": 32147
+    },
+    "regression/native/execution.json": {
+      "sha256": "6c1395395dc44c28f98a7e55eaea18f5e48eaaca305c3c26895b4c729817c141",
+      "bytes": 23079
+    },
+    "regression/native/train_state_trial_36.json": {
+      "sha256": "0b27c5338d0f926cc36c6a574076d12a572774a30b609914d24f743db6171417",
+      "bytes": 5770
+    },
+    "regression/native/train_state_trial_39.csv": {
+      "sha256": "36b162a08455e51606398a99a89f8e25ef2b9b09181c4ee787beac6d5ac72ce3",
+      "bytes": 31230
+    },
+    "regression/native/train_state_trial_38.csv": {
+      "sha256": "6698c6b7261dd802b673aed265ed448b28e298174cf0c405f9a7a27720dc9512",
+      "bytes": 33344
+    },
+    "regression/native/train_state_trial_34.csv": {
+      "sha256": "7c839461a173677a39db6a0dd1f1fd8b73337dfaedc2d5c5ec1c4c5fc82db956",
+      "bytes": 33366
+    },
+    "regression/native/train_state_trial_15.csv": {
+      "sha256": "6d236f56221977f52abbb6b04be5d9bd37a103b1ac4ad191e99d6a023bc63636",
+      "bytes": 32188
+    },
+    "regression/native/train_state_trial_19.csv": {
+      "sha256": "15dd992371a1e199569dddf8983af16d7f4f0b67d7eebc89a755088f7772c2f1",
+      "bytes": 32938
+    },
+    "regression/native/train_state_trial_12.json": {
+      "sha256": "2547f5d8f98bde1f9cc8f5e7cd835de94e8a9fd2b5ccb6d2266ca5132a076d8f",
+      "bytes": 5766
+    },
+    "regression/native/train_state_trial_42.csv": {
+      "sha256": "b99b8fb1f2bc494dc0d567fd11d3907a4ba81301d6fd398b7bc33732399f7d28",
+      "bytes": 30296
+    },
+    "regression/native/train_state_trial_14.csv": {
+      "sha256": "7c92cac1d6ae096e9d79be834fdf585a2fedb89eaf97575221af5f63c6aa17aa",
+      "bytes": 32159
+    },
+    "regression/native/train_state_trial_33.csv": {
+      "sha256": "7d61b58c075feaec27af1a3cd1a1e9fd179c73b1375bc9cde3ed4799876132e6",
+      "bytes": 33340
+    },
+    "regression/native/train_state_trial_10.json": {
+      "sha256": "2f9bcfc0a1e24f445927133a5d630c6d2860a87ecf6b5441b80d393d8884f1d2",
+      "bytes": 5771
+    },
+    "regression/native/train_state_trial_22.json": {
+      "sha256": "a9de4fd6ef689e51daa31f1150f699e1bfc1c855b96452b436acede2155557ba",
+      "bytes": 5771
+    },
+    "regression/native/train_state_trial_53.json": {
+      "sha256": "a763d5cbbf2f1261e2f8612a8fdcc18f99a0d585a4cc64878b178ff97f1602c7",
+      "bytes": 5777
+    },
+    "regression/native/train_state_trial_49.csv": {
+      "sha256": "082eeef77a919dabba243ad14fafda9d4b921326646938b5c136db234ce0e6df",
+      "bytes": 30280
+    },
+    "regression/native/train_state_trial_15.json": {
+      "sha256": "1584ab656ba7a3c240d173190392f9714953fff019219feec3b8341ad13aa3a4",
+      "bytes": 5789
+    },
+    "regression/native/train_state_trial_23.json": {
+      "sha256": "59f770f8982d13ade99fb19da1412d36c1a43680ead695dc9c8067f7aa090b58",
+      "bytes": 5791
+    },
+    "regression/native/train_state_trial_34.json": {
+      "sha256": "9bc6a014d83f76c8aee6cb71651e7610c025eec277ca2d925448db99dece156e",
+      "bytes": 5768
+    },
+    "regression/native/train_state_trial_54.csv": {
+      "sha256": "545c20dcac441edbdbd13963a0e99ff76228fcc294189dbe5c57425665486b63",
+      "bytes": 30260
+    },
+    "regression/native/train_state_trial_51.csv": {
+      "sha256": "a35c1770ba038dc4a5971bb51240c92f2f9573b58217fbea7e684295fdb155d1",
+      "bytes": 30254
+    },
+    "regression/native/train_state_trial_54.json": {
+      "sha256": "cc729fc1e34720f87121486ba07dd982e8e8b835acad1d08ba37c74a1d6a4dd2",
+      "bytes": 5776
+    },
+    "regression/native/train_state_trial_46.csv": {
+      "sha256": "dc6b9aef2d83b40d39b3cb83914f3e4fd96b36dc204f2ba1e78f01892250852a",
+      "bytes": 30251
+    },
+    "regression/native/train_state_trial_56.json": {
+      "sha256": "559f4088d574e8d67db170da7905fdd476785a26b265e945a6cd6df966d2f157",
+      "bytes": 5801
+    },
+    "regression/native/train_state_trial_26.json": {
+      "sha256": "cd93d8e8fc53f6627262d5edf92ae748a7e5567a148c2aac8f3fb05606c775ac",
+      "bytes": 5772
+    },
+    "regression/native/train_state_trial_9.csv": {
+      "sha256": "b1e6e675e44605e1da4b4e193bf8c1e6abdc60917c20bc050cfdae9fbef56a19",
+      "bytes": 32164
+    },
+    "regression/native/train_state_trial_53.csv": {
+      "sha256": "ecd235c09ad5abb64e051b2074cfe5c4e3072d0f19dba688fc0cba0f156e02f1",
+      "bytes": 30286
+    },
+    "regression/native/train_state_trial_57.json": {
+      "sha256": "c8826b6c381e1cb528c6288ed9526b5ec70f792430e461b6ea9467fa83dffbbb",
+      "bytes": 5817
+    },
+    "regression/native/train_state_trial_58.json": {
+      "sha256": "cf852a4de41dcff6dbea5eeb130b4a0f454bd53c6cc74bc113a7a1c037122a8b",
+      "bytes": 5813
+    },
+    "regression/native/train_state_trial_39.json": {
+      "sha256": "cc7192a99f89ed64671ca6c537f709e35be213dca9830c4180c6a2d68f97b5ef",
+      "bytes": 5768
+    },
+    "regression/native/train_state_trial_20.json": {
+      "sha256": "244b7dbc9bfe2a643ff87113119b2a34626b4cf21a5f28483b15ae606f920b88",
+      "bytes": 5793
+    },
+    "regression/native/train_state_trial_50.json": {
+      "sha256": "56f702a269175f057716abfff3de69c753839c3a40f39bd8d991c04b132ffb7e",
+      "bytes": 5775
+    },
+    "regression/native/train_state_trial_36.csv": {
+      "sha256": "8837dc2166e8a50f9626b7f434743049873d3f57bcdad15506b7ac0cef1c2b9a",
+      "bytes": 33357
+    },
+    "regression/native/train_state_trial_17.json": {
+      "sha256": "3cd08a79c285a7aa4861caa7289760aee364cb07feac8bcca0c8ee6cfcd9cc07",
+      "bytes": 5763
+    },
+    "regression/native/train_state_trial_28.json": {
+      "sha256": "4607510c80f548613f3f91ad15e2abbf5e93429ef1de212de055966862df98ba",
+      "bytes": 5792
+    },
+    "regression/native/train_state_trial_25.json": {
+      "sha256": "667af9ed3dc24e9c85f33a48911f259d9cc4139d9af725f6c2399c6bac48fa12",
+      "bytes": 5764
+    },
+    "regression/native/train_state_trial_27.json": {
+      "sha256": "10fe31dee77568897febf29ac2769fc7bafbec4547ec0aefa09f0bcb45bea47e",
+      "bytes": 5764
+    },
+    "regression/native/train_state_trial_13.json": {
+      "sha256": "e1ac929960830185735afef8c6fafbee84232935156eef1fe33c8de97f9fb130",
+      "bytes": 5762
+    },
+    "regression/native/train_state_trial_29.csv": {
+      "sha256": "eaa3f32829e8e06d204166d85c58375d454935c210f9e59c6d1efb75dfb5c340",
+      "bytes": 32955
+    },
+    "regression/native/train_state_trial_5.csv": {
+      "sha256": "4e0e4973c4238412f8e3f22208d08d0fc0c65348cb655a7df1abb54873cef8d9",
+      "bytes": 30678
+    },
+    "regression/native/train_state_trial_31.csv": {
+      "sha256": "95a76220d9aaa7a8fdbd6dc2edfab8828a5555daf958063a4f9f83c72158ffa6",
+      "bytes": 33089
+    },
+    "regression/native/job.json": {
+      "sha256": "e55af53c6703ac0b5dc62e1dcf51ba9214d839c6e95c2a517ecf15401efb3331",
+      "bytes": 1267806
+    },
+    "regression/native/train_state_trial_21.json": {
+      "sha256": "27f1d4e89a0544cdc179513812a9533ce39be8ae8d4620718b50029c337deb93",
+      "bytes": 5763
+    },
+    "regression/native/train_state_trial_3.csv": {
+      "sha256": "73a03f07bb7eeeb35386862eee91c2b3dd3e5fb33c6949d26bd99a0f020f2e89",
+      "bytes": 33649
+    },
+    "regression/native/train_state_trial_48.json": {
+      "sha256": "6abb67882ef1f80bc0544fbf664e1c9f71c793153cea98c17c835a56e9456769",
+      "bytes": 5775
+    },
+    "regression/native/train_state_trial_2.csv": {
+      "sha256": "2f75b618059e48282056a0cc74b5ace9182fc2556805e30df8f75622eb7c53cc",
+      "bytes": 33076
+    },
+    "regression/native/train_state_trial_29.json": {
+      "sha256": "4e30384908d6bfc86e7b892f658308b4cf1035395a61fce2fe8b0c392d3cc86f",
+      "bytes": 5764
+    },
+    "regression/native/train_state_trial_41.csv": {
+      "sha256": "d7ef4084229c436ca5035fc032408f74516e66d793158c12d51d4bb7bc79b333",
+      "bytes": 30248
+    },
+    "regression/native/train_state_trial_9.json": {
+      "sha256": "0a2acefbb13850497203a5b725d4a5be3242f83cf695c2c5989928d9a161dc16",
+      "bytes": 5789
+    },
+    "regression/native/train_state_trial_5.json": {
+      "sha256": "8e87693486c56852b297a3a061479d4b135696d0d5c8bb87f3185901e83c18a5",
+      "bytes": 5760
+    },
+    "regression/native/train_state_trial_45.json": {
+      "sha256": "c047c8ebc68e455b3518a2c121970e5506426efcd5d66987a14c8943f8bd6606",
+      "bytes": 5781
+    },
+    "regression/native/train_state_trial_4.csv": {
+      "sha256": "1f1b41e6369f593de67543f3e1102893cbf368bea25d3f84f11e9097a2ff8808",
+      "bytes": 33153
+    },
+    "regression/native/train_state_trial_19.json": {
+      "sha256": "77d5b0db93c0d10c277c636d9f8f6af7cbd52e75028661d8b61561810e854933",
+      "bytes": 5763
+    },
+    "regression/native/train_state_trial_30.csv": {
+      "sha256": "9d9aa8a62fa24a8202d189c90eed2154240f443867f1b5d988a3c4970e5fe42d",
+      "bytes": 32930
+    },
+    "regression/native/train_state_trial_55.json": {
+      "sha256": "36657c7c98ac411cd5aeda82767a5dada0655c321c1589c9fe33acba98468d96",
+      "bytes": 5781
+    },
+    "regression/native/train_state_trial_45.csv": {
+      "sha256": "45aad6655f303aa5e32735084b3c495646c2654186ccc2df59d3fef9ab17427e",
+      "bytes": 30264
+    },
+    "regression/native/train_state_trial_11.json": {
+      "sha256": "30a75b88964d93f1469dc50b63e40bf7bf4f6a0e443557c1f9394e74215bedca",
+      "bytes": 5788
+    },
+    "regression/native/train_state_trial_20.csv": {
+      "sha256": "8c43eea19063093737df09fcb6c3aca7cb5323c22ccbf9332ba95205038fef56",
+      "bytes": 32934
+    },
+    "regression/native/train_state_trial_52.json": {
+      "sha256": "9a4af222914789d710248b813f87bc0d43c3a4b136a0e2f68aabe44de984ba5a",
+      "bytes": 5771
+    },
+    "regression/native/train_state_trial_40.csv": {
+      "sha256": "d36c551d2bee43c45167bad7f7d3280aa4ee8762f406ddd1cf402fdd2da228b6",
+      "bytes": 30259
+    },
+    "regression/native/train_state_trial_1.json": {
+      "sha256": "bfcfc4b7cc3565ed4f6128b67688310e5ae2d40be55ea376b2d9b5be3a7e1244",
+      "bytes": 5675
+    },
+    "regression/native/train_state_trial_57.csv": {
+      "sha256": "e610f8347b8d85366b6c552bb24ff6c41ed39cfcbfd78dee2b6a80d996e95516",
+      "bytes": 30268
+    },
+    "regression/native/train_state_trial_25.csv": {
+      "sha256": "baad1f143c3415ec88488bba71ec36d0a077c88c53e519c60e007ee856e436bc",
+      "bytes": 32920
+    },
+    "regression/native/train_state_trial_37.json": {
+      "sha256": "c9f91912a8bb1516cfe4436ce023dbe125880c202f752ca7da9714f590caa3d1",
+      "bytes": 5769
+    },
+    "regression/native/train_state_trial_2.json": {
+      "sha256": "169ed742335c205a3e04e5a6f5e7b4f38a2e34369ce0f468020e949eb77b04aa",
+      "bytes": 5790
+    },
+    "regression/native/train_state_trial_55.csv": {
+      "sha256": "856210f005198f6bee87e39d64fc395a5d532ee85b7906ba5ed63893033e08fa",
+      "bytes": 30277
+    },
+    "regression/native/train_state_trial_17.csv": {
+      "sha256": "887b59d659837fc32f4f7f43025b802f6dfb15d277d33a1e547988d1fb0e5c02",
+      "bytes": 32933
+    },
+    "regression/native/train_learned_state.json": {
+      "sha256": "f3a7bc46ab23e6b8477fe9595d3adba8e1e1dea5a1fe7b93d37bc6ac7e7ebe87",
+      "bytes": 1243586
+    },
+    "regression/native/train_state_trial_16.json": {
+      "sha256": "8dc1c4ded9b39b062a3aacf9358032f4d60c84ecdf10052f971196fa8cf6756c",
+      "bytes": 5770
+    },
+    "regression/native/train_state_trial_43.json": {
+      "sha256": "a473e7ed960bdd3261a6fd4726e3c22a57d8bad50af94813cbcfac9f9c71e20a",
+      "bytes": 5799
+    },
+    "regression/native/train_state_trial_35.json": {
+      "sha256": "4bbd0e653f7852c29f3b167b60abccf7f51060620e133cd6f160bfc53be8e5f5",
+      "bytes": 5763
+    },
+    "regression/native/train_state_trial_27.csv": {
+      "sha256": "b4b1894c1f7efecda1824e46eeec479108dc3215bac1621f7e2d9b212bac9f7c",
+      "bytes": 32914
+    },
+    "regression/native/train_state_trial_32.csv": {
+      "sha256": "6a5813aee0d86e6e955d5113a9ed46ad73a3ae0ad8b1e7c860c8fdb5268e3e6e",
+      "bytes": 33343
+    },
+    "regression/native/train_state_trial_8.json": {
+      "sha256": "d8f0359d655a44885edae00c83f91b015419c9e320d1c90c4ed9a68b40a05966",
+      "bytes": 5794
+    },
+    "regression/native/train_state_trial_14.json": {
+      "sha256": "b2f66f99087e020d702d6f5b7c34afc820ecc90f0191cc6f60146597734d6cfe",
+      "bytes": 5793
+    },
+    "regression/native/train_state_trial_37.csv": {
+      "sha256": "2cb0ac6b01a3f9a159af4fe12db01f44840ee252987be1e7157c94e27fdcfe70",
+      "bytes": 33344
+    },
+    "regression/native/train_state_trial_4.json": {
+      "sha256": "0ae2e1af2a2b1f56402b206d35df3d8306adef81072dbd1099eec516b670a7f5",
+      "bytes": 5766
+    },
+    "regression/native/initial-state.json": {
+      "sha256": "4020952d262ed69653f031fd280f98c2dc1f4ed82cb17c726516f895842442e7",
+      "bytes": 149732
+    },
+    "regression/native/train_state_trial_1.csv": {
+      "sha256": "52bc17750efb5d3ce147c94b33fae316fbc1b8e4b5e45eabf7c8944d66a3a7a3",
+      "bytes": 32104
+    },
+    "regression/native/train_state_trial_48.csv": {
+      "sha256": "8cc89cfcde3130e753b7219eba64dbe80d6d56e79b1c1ba2d716e54453a8c817",
+      "bytes": 30241
+    },
+    "regression/native/train_state_trial_24.json": {
+      "sha256": "45b2d2a14c4a5ac7dee758968d8fa284e2e7a1466367699c8323a1c399d40f7b",
+      "bytes": 5766
+    },
+    "regression/native/train_state_trial_22.csv": {
+      "sha256": "1996934af2b41a6adb4f765238394290db90edcb0869e32ca0d1d4d4cde67848",
+      "bytes": 32899
+    },
+    "regression/native/train_state_trial_12.csv": {
+      "sha256": "f36925fc39e77be1fdfec510848cb2f8ad9db29db847c1594d3b5a6554a75306",
+      "bytes": 32218
+    },
+    "regression/native/train_state_trial_42.json": {
+      "sha256": "2f2eb894b71709dec6f65d0d50c152540351b470f2744fc7428f01465eca2d5b",
+      "bytes": 5790
+    },
+    "regression/native/train_state_trial_40.json": {
+      "sha256": "64b82f0b0ebdb762fac0fc5db370d0827300924c1fc6e3d19b02799943d497c6",
+      "bytes": 5774
+    },
+    "regression/native/train_state_trial_23.csv": {
+      "sha256": "c125cdd0b80ea83fc3c77299e12377c7b5b830e274d89f2bac86036009f804ec",
+      "bytes": 32906
+    },
+    "regression/native/train_state_trial_35.csv": {
+      "sha256": "c45159656dc83aa3a5ce1a008b1f6b18b3664af3d142cafe80ec4e2e4f3c65f1",
+      "bytes": 33366
+    },
+    "regression/native/train_state_trial_46.json": {
+      "sha256": "c2cc35e20f1ed1cfb5ae0ea51980e0c77753503c70f614cb32122955238448fa",
+      "bytes": 5768
+    },
+    "regression/native/train_state_trial_32.json": {
+      "sha256": "2361e9f10b0bea76c8274ca378c5abc94f172248bdb63889469d90af15668acd",
+      "bytes": 5794
+    },
+    "regression/native/train_state_trial_41.json": {
+      "sha256": "171097f4d18f131410562d2bf61dd59a01903c70190210370e27ed9701bd6fc8",
+      "bytes": 5779
+    },
+    "regression/native/train_state_trial_21.csv": {
+      "sha256": "a044b5171031f81d7124b06faf7d87f6fdc9110c49e05a96c6c00160e8383c63",
+      "bytes": 32888
+    },
+    "regression/native/train_state_trial_47.json": {
+      "sha256": "a1c76105b8cf672b6248151da225cac4235255dfa328e84101ba4ef7fdf9685a",
+      "bytes": 5782
+    },
+    "regression/native/train_state_trial_51.json": {
+      "sha256": "789494a751515b6fd4d9695b84d04e1e9e2fd5fdbddaf88134c6aaf9d0a03984",
+      "bytes": 5782
+    },
+    "regression/native/train_state_trial_6.json": {
+      "sha256": "216d0ae6bd710096f82c3211e992fbc078fcee74babe2ed88e7e81670f42a6c0",
+      "bytes": 5792
+    },
+    "regression/native/train_state_trial_56.csv": {
+      "sha256": "6a10b0b11d4ce7e856438622f9f3193f2a3bede1cf2bdebd049e52b093e1aba7",
+      "bytes": 30299
+    },
+    "regression/native/train_state_trial_47.csv": {
+      "sha256": "e3610dd7907e51748a9c7f0b927eb8d3c24c0b032309bf33d227ed744b8d45a2",
+      "bytes": 30254
+    },
+    "regression/native/train_state_trial_7.csv": {
+      "sha256": "a7080c4055c71dfcffa46c1af19958c9566abaffd8ac9d4ce256d8a95b8d0563",
+      "bytes": 30728
+    },
+    "regression/native/train_state_trial_38.json": {
+      "sha256": "627661b75bd284ee1c939f39126853238c9f91fd95c7dcc56f154802394f03de",
+      "bytes": 5765
+    },
+    "regression/native/train_state_trial_18.json": {
+      "sha256": "ff93315139b0a6b2c56dbe2a8814a011c5bd39b941233409e0642cec09576a1c",
+      "bytes": 5771
+    },
+    "regression/native/train_state_trial_52.csv": {
+      "sha256": "d31fa0ec0406bbfccc080fb496dfd994e43ad6d0865d7925516461a46b565dc2",
+      "bytes": 30272
+    },
+    "regression/native/train_learned_summary.json": {
+      "sha256": "72493e413fb1f037458f309e3a5f16b6440bb1616f309518045ee53df08c5891",
+      "bytes": 4713203
+    },
+    "regression/native/train_state_trial_44.csv": {
+      "sha256": "300ba1d2d47720858ded4d792f54f15c851e0e8f4983f4caf1a15fc88684a46e",
+      "bytes": 30242
+    },
+    "regression/native/train_state_trial_11.csv": {
+      "sha256": "8dd041642416185db8bd7db7854c5a930a0b9ee8b0284e35f11bc87e9109e7b9",
+      "bytes": 32185
+    },
+    "regression/native/train_state_trial_43.csv": {
+      "sha256": "bb1605f1c139e0dcc08a6c55f0f9de53806c78675302a42225d2a316ea648a86",
+      "bytes": 30286
+    },
+    "regression/native/train_state_trial_7.json": {
+      "sha256": "b684ff5f0bfb299fa2e58d293cd1ee2e24a1833459873727187a75d1a0eccfd9",
+      "bytes": 5760
+    },
+    "regression/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "regression/process/owned-process.json": {
+      "sha256": "cbfb1faa4dfcbcf1882dc311d765f16fb5bb97399d4e913f48d485dc500b967f",
+      "bytes": 404
+    },
+    "regression/process/result.json": {
+      "sha256": "fca244c6efdba3f9b4898db1d360f5f138cc8460407410667dcd83717f458d93",
+      "bytes": 444
+    },
+    "regression/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "regression/process/loaded-files.json": {
+      "sha256": "71bdb895bcfefbfbca86ea4794792f0d9198b7066521418af406a5e035b42a8e",
+      "bytes": 5382
+    },
+    "regression/process/request.json": {
+      "sha256": "886aa3689a1e8ccc957d02907207a69b6ed610915e0b7597c65eb5e8a04a36ad",
+      "bytes": 755
+    },
+    "regression/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "regression/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035939.3559978": {
+      "sha256": "80dcd23d270387fb1aff58c8f5e680cbf6da41d1404f54630dad8dde79606056",
+      "bytes": 291
+    },
+    "runs/Classic-v2-partial/run-manifest.json": {
+      "sha256": "4ab9f974a4241259e584be296ef9120558cb1884c0ac1fe121ff46c1ee2a5131",
+      "bytes": 18651
+    },
+    "runs/Branch-v1-full/run-manifest.json": {
+      "sha256": "d83e3cf51291aca8d35e618eebf9ce06f8ce1035c60db8af890887f5f1f4f0da",
+      "bytes": 18627
+    },
+    "runs/Branch-v2-full/run-manifest.json": {
+      "sha256": "7bf4b4a29e90933c11577003c7195140988ca5eca897bb957d2e5b92cbedad6e",
+      "bytes": 18627
+    },
+    "runs/Branch-v2-partial/run-manifest.json": {
+      "sha256": "1f54839cde988d62f5eae79c0742c987e1d248e4331b6aea8fe9b114b1701293",
+      "bytes": 18649
+    },
+    "runs/Classic-v2-missing/run-manifest.json": {
+      "sha256": "3ac69832a4bfb32ed5b2bbf8fcf1a82617a7b0543e05ed69b309c5d1fbce8e80",
+      "bytes": 18630
+    },
+    "runs/Classic-v2-full/run-manifest.json": {
+      "sha256": "bc6751dd3d4074a6edeba2e21f39606fc051349d57b61af7b79b8ecceb28a8fb",
+      "bytes": 18629
+    },
+    "runs/Classic-v1-full/run-manifest.json": {
+      "sha256": "02bacd303fc5a3f1e6390f4d714cc088613d2e6d90640f73c232943d537a36b3",
+      "bytes": 18629
+    },
+    "runs/Branch-v2-missing/run-manifest.json": {
+      "sha256": "a2f14545d0e0daf864f2851c02dd65ccde93e71b9720d7c9aa31958d135c9ed9",
+      "bytes": 18628
+    },
+    "runs/Classic-v2-partial/input/job.json": {
+      "sha256": "61dcc736a0dbee296151dc6fa27fd14d70bd117ca00a111d7fd86f139db3e2d8",
+      "bytes": 911886
+    },
+    "runs/Classic-v2-partial/native/execution.json": {
+      "sha256": "089675036752a67dcf1e19dc24b3a96d3ec5f234ad99def2d1e216339cc6d996",
+      "bytes": 1873
+    },
+    "runs/Classic-v2-partial/native/probe_trial_1.json": {
+      "sha256": "55aa357f1425e92e9dd170020fb9a97d95ba875184b3db1fd955c34d790f1ed8",
+      "bytes": 4790
+    },
+    "runs/Classic-v2-partial/native/final-state.json": {
+      "sha256": "1c749a359d219cfa6f9ae7fac35893ebce6e60af673d04ca367b134757c2f367",
+      "bytes": 149624
+    },
+    "runs/Classic-v2-partial/native/job.json": {
+      "sha256": "c51a52fb29f4269faf07a88274e6fbca57725470df1ec778012a6e1760580e94",
+      "bytes": 1266080
+    },
+    "runs/Classic-v2-partial/native/probe_trial_1.csv": {
+      "sha256": "0763c240e86c45478a0621e22004d8acd6f9ea3beae0bcb2df60c3da8e5fe8d3",
+      "bytes": 240
+    },
+    "runs/Classic-v2-partial/native/owner-configuration.json": {
+      "sha256": "21fe892decd460997a26b97655c75d096c9e73a81cabb1ee996ecf942fe4b7ea",
+      "bytes": 3076
+    },
+    "runs/Classic-v2-partial/native/initial-state.json": {
+      "sha256": "3cd67add76ba3b69cd38f5b102bd4d07435c81d13a5e877109f6a8266b4da1d7",
+      "bytes": 149663
+    },
+    "runs/Classic-v2-partial/process/capture-ready.json": {
+      "sha256": "33b78651e4e46486ca16aa126436ab0ca1348f6125907bf18f23799ad4fb3392",
+      "bytes": 98
+    },
+    "runs/Classic-v2-partial/process/capture-ack.json": {
+      "sha256": "2eddc571bbcb43c319c0139d0a0eb8f5cd3837949979763ddac67ce65667fd7c",
+      "bytes": 114
+    },
+    "runs/Classic-v2-partial/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v2-partial/process/owned-process.json": {
+      "sha256": "89732369c33ef0b4b9c5647c9413bfdd852dcb2ad07f3580b3e11d380a7e20f6",
+      "bytes": 404
+    },
+    "runs/Classic-v2-partial/process/result.json": {
+      "sha256": "e15df301de228560544cb22a6e669158c373e9e2b290e39375ff8147541df0ac",
+      "bytes": 451
+    },
+    "runs/Classic-v2-partial/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Classic-v2-partial/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Classic-v2-partial/process/request.json": {
+      "sha256": "8abac60f3ccc32c2cbc86f11b3349bf87a7c4024efbe68d0d0928046fe5fb413",
+      "bytes": 955
+    },
+    "runs/Classic-v2-partial/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v2-partial/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035832.3557091": {
+      "sha256": "75e7876bf7efb421dd360ac50ee994577d63338f5f0f9d9bdbf225d5eea09704",
+      "bytes": 291
+    },
+    "runs/Branch-v1-full/input/job.json": {
+      "sha256": "3676c082fe03517da462650079438b90bc04943a1088d62d1062c0cc2c2a16f1",
+      "bytes": 840294
+    },
+    "runs/Branch-v1-full/native/execution.json": {
+      "sha256": "cc7893c1493e643c28c0fabcd9327e3e154d1fce0e6baa74f7dd26188605ffb0",
+      "bytes": 1856
+    },
+    "runs/Branch-v1-full/native/probe_trial_1.json": {
+      "sha256": "4a1805297c49d1c246eea0f607827e370c5da6737c5134b4383c98938b5e6c55",
+      "bytes": 5541
+    },
+    "runs/Branch-v1-full/native/final-state.json": {
+      "sha256": "676a53f8f0badcb0364e9a532dd939d56261c666374f76dfdf4ce137cd5b0ff1",
+      "bytes": 98731
+    },
+    "runs/Branch-v1-full/native/job.json": {
+      "sha256": "1fe18f071f527a1d60e9c8eb9fbc8a831f26a2d3829d86e70648cbc7bb864534",
+      "bytes": 1170316
+    },
+    "runs/Branch-v1-full/native/probe_trial_1.csv": {
+      "sha256": "f1988adbf39f4afd07a525dca1452931a0bee4f4c439776f300532d490315fd4",
+      "bytes": 20719
+    },
+    "runs/Branch-v1-full/native/owner-configuration.json": {
+      "sha256": "0fb6565b8b276e77908ac5a7c65e507c88d0a26226d2ab3bd0d4c36d33bed02b",
+      "bytes": 3026
+    },
+    "runs/Branch-v1-full/native/initial-state.json": {
+      "sha256": "34807e526eb78c356a0e06f10092c369956dcf636a27e05aa03f14ed46cce17c",
+      "bytes": 98770
+    },
+    "runs/Branch-v1-full/process/capture-ready.json": {
+      "sha256": "396f0f36715ec24cbaf3d7bab52bf0b5fbf27bdd919097067115477e21ef7bc2",
+      "bytes": 98
+    },
+    "runs/Branch-v1-full/process/capture-ack.json": {
+      "sha256": "d31c06d5d1f0e93c3342ab8a0470d24597b6c8b73f1bd5f39be96d996aa8ebf5",
+      "bytes": 114
+    },
+    "runs/Branch-v1-full/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v1-full/process/owned-process.json": {
+      "sha256": "0d03b5f3f82ad7bce0f9dd97c7d1710c05b25e1e5df1493b2e2ecc4c5edb43dd",
+      "bytes": 404
+    },
+    "runs/Branch-v1-full/process/result.json": {
+      "sha256": "e2e43728c2d6bed242f41853e3afd0a3286c4e53db6488b1a6e6a582d70dff89",
+      "bytes": 443
+    },
+    "runs/Branch-v1-full/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Branch-v1-full/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Branch-v1-full/process/request.json": {
+      "sha256": "04205894a73b487899e03ed75f522c10c5da5b460d3cbe5803d28ef973c063f8",
+      "bytes": 939
+    },
+    "runs/Branch-v1-full/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v1-full/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035814.3556392": {
+      "sha256": "53d281c9b9b1dfa319ffd800d9f5f5fa049604eaac6e7e1bd0ead72519e377c0",
+      "bytes": 291
+    },
+    "runs/Branch-v2-full/input/job.json": {
+      "sha256": "410a575ed6e7193799e2a329e42992b5352b2982f99a70180ba0cc9c8e4edda0",
+      "bytes": 840324
+    },
+    "runs/Branch-v2-full/native/execution.json": {
+      "sha256": "f2dccc469421abc94e1756ba1ab9218bf99d652d0e648836ff0d42662203751a",
+      "bytes": 1856
+    },
+    "runs/Branch-v2-full/native/probe_trial_1.json": {
+      "sha256": "bc914e3747fd42577d4ab1daa78967069c3af3bd7410abe36940f131a4c319e8",
+      "bytes": 5549
+    },
+    "runs/Branch-v2-full/native/final-state.json": {
+      "sha256": "676a53f8f0badcb0364e9a532dd939d56261c666374f76dfdf4ce137cd5b0ff1",
+      "bytes": 98731
+    },
+    "runs/Branch-v2-full/native/job.json": {
+      "sha256": "1b18d94db152c53bb4cddf75a8396a6fa2a6957d88668f70379cf88e35333b46",
+      "bytes": 1170348
+    },
+    "runs/Branch-v2-full/native/probe_trial_1.csv": {
+      "sha256": "f1988adbf39f4afd07a525dca1452931a0bee4f4c439776f300532d490315fd4",
+      "bytes": 20719
+    },
+    "runs/Branch-v2-full/native/owner-configuration.json": {
+      "sha256": "f4f345705b8e61d86688ccd8ce46ea5c66bbfd55230d6ca8bae43da6350b6e41",
+      "bytes": 3058
+    },
+    "runs/Branch-v2-full/native/initial-state.json": {
+      "sha256": "34807e526eb78c356a0e06f10092c369956dcf636a27e05aa03f14ed46cce17c",
+      "bytes": 98770
+    },
+    "runs/Branch-v2-full/process/capture-ready.json": {
+      "sha256": "1195b95f7be6abf872e76a85062fc5e0e95140f5e27faa0c0a25a5651093fcfd",
+      "bytes": 98
+    },
+    "runs/Branch-v2-full/process/capture-ack.json": {
+      "sha256": "b883819244d7ba1fbc2099f96286c11bd0f4c0b52b028544157d039e7f8a9a84",
+      "bytes": 114
+    },
+    "runs/Branch-v2-full/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v2-full/process/owned-process.json": {
+      "sha256": "56595ec6ea05cdb33ff988e79aa866d54eacbd6eea72c4608068b8f3b7329a97",
+      "bytes": 404
+    },
+    "runs/Branch-v2-full/process/result.json": {
+      "sha256": "ef44797bb22013525470a15caa20e0a25db9869a53b5e5bfe789d2262f265185",
+      "bytes": 442
+    },
+    "runs/Branch-v2-full/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Branch-v2-full/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Branch-v2-full/process/request.json": {
+      "sha256": "9ec888024c33bf9ff4c2bef572922af91539419ae3a00125227f5752715c859a",
+      "bytes": 939
+    },
+    "runs/Branch-v2-full/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v2-full/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035823.3556791": {
+      "sha256": "0cf1691c810de5d137cc43b496bb1cb09b588fa1d1a7c47aa379cb611b618251",
+      "bytes": 291
+    },
+    "runs/Branch-v2-partial/input/job.json": {
+      "sha256": "b3c690d2208ed3aadab02e4ca9744373f1b22cc18af1c807a839884d23809b2d",
+      "bytes": 840326
+    },
+    "runs/Branch-v2-partial/native/execution.json": {
+      "sha256": "93250cf4c4cf2035b7e43fed8ef69d537c9bc0e029916194a8f75e2e99509ee9",
+      "bytes": 1871
+    },
+    "runs/Branch-v2-partial/native/probe_trial_1.json": {
+      "sha256": "31509617dfed9fc157e6b9f756392041885eb398075db9d3fe5c747a55e57f2e",
+      "bytes": 4768
+    },
+    "runs/Branch-v2-partial/native/final-state.json": {
+      "sha256": "676a53f8f0badcb0364e9a532dd939d56261c666374f76dfdf4ce137cd5b0ff1",
+      "bytes": 98731
+    },
+    "runs/Branch-v2-partial/native/job.json": {
+      "sha256": "16d60ac186dc5576cc8af511ff940e641c20fc4c078e343afde44bb9ce930ec7",
+      "bytes": 1170350
+    },
+    "runs/Branch-v2-partial/native/probe_trial_1.csv": {
+      "sha256": "1793fc8ec42a77bbc1cda6ff28e9488384bbe91a821629c3ccd566b0ea29b28f",
+      "bytes": 214
+    },
+    "runs/Branch-v2-partial/native/owner-configuration.json": {
+      "sha256": "f4f345705b8e61d86688ccd8ce46ea5c66bbfd55230d6ca8bae43da6350b6e41",
+      "bytes": 3058
+    },
+    "runs/Branch-v2-partial/native/initial-state.json": {
+      "sha256": "34807e526eb78c356a0e06f10092c369956dcf636a27e05aa03f14ed46cce17c",
+      "bytes": 98770
+    },
+    "runs/Branch-v2-partial/process/capture-ready.json": {
+      "sha256": "11603f77909637b01d8157cae9e2329312662f1511e6b026092c0a481b8261bf",
+      "bytes": 98
+    },
+    "runs/Branch-v2-partial/process/capture-ack.json": {
+      "sha256": "0b73556b4c6de96c1b09bf685624359dec7af113a972b20e056348dd85627c70",
+      "bytes": 114
+    },
+    "runs/Branch-v2-partial/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v2-partial/process/owned-process.json": {
+      "sha256": "590e1691e416329381e6314665d8253747150c5980c5ac560db89b4455fed6e4",
+      "bytes": 404
+    },
+    "runs/Branch-v2-partial/process/result.json": {
+      "sha256": "6948472b4feebf5b80a0a50f17c642dba00f80eb61871fa5406c74d399c35ad4",
+      "bytes": 450
+    },
+    "runs/Branch-v2-partial/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Branch-v2-partial/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Branch-v2-partial/process/request.json": {
+      "sha256": "422c36600a5cc7d794aec118e2f2e7e6c3b120400a9b725d4fb0d5ca87ddcb6f",
+      "bytes": 951
+    },
+    "runs/Branch-v2-partial/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v2-partial/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035840.3557386": {
+      "sha256": "7a63d039e56d86ee0d74b8faf9b77a0569cb23be360bc8be5f81a76c7c338cf6",
+      "bytes": 291
+    },
+    "runs/Classic-v2-missing/input/job.json": {
+      "sha256": "604b222b5b949bf4073287838873212d11ac97852178314f22ea541b4c234750",
+      "bytes": 911887
+    },
+    "runs/Classic-v2-missing/native/execution.json": {
+      "sha256": "d52cb423d07d25bf381eb320ec34e1d1393fa3c05632c2bcc73a3ae8726e2858",
+      "bytes": 1859
+    },
+    "runs/Classic-v2-missing/native/probe_trial_1.json": {
+      "sha256": "d5db74279ac04d90e8fbd4bdd792084f7db4422924bd59917a8ab9aec6070bb5",
+      "bytes": 4888
+    },
+    "runs/Classic-v2-missing/native/final-state.json": {
+      "sha256": "1c749a359d219cfa6f9ae7fac35893ebce6e60af673d04ca367b134757c2f367",
+      "bytes": 149624
+    },
+    "runs/Classic-v2-missing/native/job.json": {
+      "sha256": "c6e1601f26f0d2f0e49b0cb916c0c69a5e3e20bf3bb9a2bee6f172375a4424dc",
+      "bytes": 1266079
+    },
+    "runs/Classic-v2-missing/native/probe_trial_1.csv": {
+      "sha256": "52bc17750efb5d3ce147c94b33fae316fbc1b8e4b5e45eabf7c8944d66a3a7a3",
+      "bytes": 32104
+    },
+    "runs/Classic-v2-missing/native/owner-configuration.json": {
+      "sha256": "fa8593ad7802a42b0269ac2de4591fba09b9b8ff69976b68c381536b875e1f68",
+      "bytes": 3074
+    },
+    "runs/Classic-v2-missing/native/initial-state.json": {
+      "sha256": "3cd67add76ba3b69cd38f5b102bd4d07435c81d13a5e877109f6a8266b4da1d7",
+      "bytes": 149663
+    },
+    "runs/Classic-v2-missing/process/capture-ready.json": {
+      "sha256": "aaf5bdaa0724a9b5c7d0d6f15fd34b34edbf895e8e83ecf563dfb845bbc87230",
+      "bytes": 98
+    },
+    "runs/Classic-v2-missing/process/capture-ack.json": {
+      "sha256": "27ce9a6fcdfa562be777dc92f59f6db4456afdea7f11287cdf516e5ca7989eee",
+      "bytes": 114
+    },
+    "runs/Classic-v2-missing/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v2-missing/process/owned-process.json": {
+      "sha256": "52c9d977089f47748d08e7b57cc930ef808037a7c72fc6e8142a7528b4c0696d",
+      "bytes": 404
+    },
+    "runs/Classic-v2-missing/process/result.json": {
+      "sha256": "ffc495ac80920f595c24053cc3f0589353519a477bb380f56fcd7c74a37ecd79",
+      "bytes": 443
+    },
+    "runs/Classic-v2-missing/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Classic-v2-missing/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Classic-v2-missing/process/request.json": {
+      "sha256": "8b0eaf261de10a8f6685f17bf3555436a43a11975f0cad97d68bcdbf857ab554",
+      "bytes": 955
+    },
+    "runs/Classic-v2-missing/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v2-missing/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035849.3557781": {
+      "sha256": "e5be08350cc5cf7da0c75e8738c1f48436031af97124a59959bd9b31dcece477",
+      "bytes": 291
+    },
+    "runs/Classic-v2-full/input/job.json": {
+      "sha256": "95d77f30e3ee80e0f2e21a8f494db2ff6481d999701bde9533c0184505f356d7",
+      "bytes": 911884
+    },
+    "runs/Classic-v2-full/native/execution.json": {
+      "sha256": "da11231d435ab64888e59e54c2fc77fd0abee29903a290ca7fe25108e1f6a2a7",
+      "bytes": 1858
+    },
+    "runs/Classic-v2-full/native/probe_trial_1.json": {
+      "sha256": "0983ffc31c57dfbd74ddd002d727b4c83e8b3dad10a8c3ea33fde17441f09973",
+      "bytes": 5571
+    },
+    "runs/Classic-v2-full/native/final-state.json": {
+      "sha256": "1c749a359d219cfa6f9ae7fac35893ebce6e60af673d04ca367b134757c2f367",
+      "bytes": 149624
+    },
+    "runs/Classic-v2-full/native/job.json": {
+      "sha256": "2f7da075e18fb658a6cdb2fedc063b9e0055ab2faa83b32cd3a73e180d87eff2",
+      "bytes": 1266078
+    },
+    "runs/Classic-v2-full/native/probe_trial_1.csv": {
+      "sha256": "52bc17750efb5d3ce147c94b33fae316fbc1b8e4b5e45eabf7c8944d66a3a7a3",
+      "bytes": 32104
+    },
+    "runs/Classic-v2-full/native/owner-configuration.json": {
+      "sha256": "21fe892decd460997a26b97655c75d096c9e73a81cabb1ee996ecf942fe4b7ea",
+      "bytes": 3076
+    },
+    "runs/Classic-v2-full/native/initial-state.json": {
+      "sha256": "3cd67add76ba3b69cd38f5b102bd4d07435c81d13a5e877109f6a8266b4da1d7",
+      "bytes": 149663
+    },
+    "runs/Classic-v2-full/process/capture-ready.json": {
+      "sha256": "c6a87cd2afb24ad0412b51ef9d8a722361c26b4e1a5c039bada6d6f973620fbc",
+      "bytes": 98
+    },
+    "runs/Classic-v2-full/process/capture-ack.json": {
+      "sha256": "45d6528f7cc4cdaea914f4420b8f49509af1d38da9980fa2050f221283c48780",
+      "bytes": 114
+    },
+    "runs/Classic-v2-full/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v2-full/process/owned-process.json": {
+      "sha256": "632e819e1b38a608e6a09ff1a6aacb5b93058d767a56a5928e28f2b2a1774a6a",
+      "bytes": 404
+    },
+    "runs/Classic-v2-full/process/result.json": {
+      "sha256": "893c0a68fd350d9cddb17f9a71ae0d84ec7637c704831727448375c703633933",
+      "bytes": 443
+    },
+    "runs/Classic-v2-full/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Classic-v2-full/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Classic-v2-full/process/request.json": {
+      "sha256": "a4dd36757f272dc54ced943db78432be420bbbdefc7d42340a8ef3152a08978e",
+      "bytes": 943
+    },
+    "runs/Classic-v2-full/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v2-full/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035804.3556095": {
+      "sha256": "9f4103cfd3923227ec4b217786a485994abbf120e27ac65a950179474c5a533d",
+      "bytes": 291
+    },
+    "runs/Classic-v1-full/input/job.json": {
+      "sha256": "7d6944ea49aecc35942cda30e121e55ff2fbf01ce8dd7dfe07e279562410965f",
+      "bytes": 911854
+    },
+    "runs/Classic-v1-full/native/execution.json": {
+      "sha256": "c522063c937720e44d7739c9b2db52f8a96c60636eb3c8c9c57b4763ff3bb20b",
+      "bytes": 1858
+    },
+    "runs/Classic-v1-full/native/probe_trial_1.json": {
+      "sha256": "fac25ecef28572410ba591e8687944e7e574adb85a76b45320990c0af818f6cb",
+      "bytes": 5563
+    },
+    "runs/Classic-v1-full/native/final-state.json": {
+      "sha256": "1c749a359d219cfa6f9ae7fac35893ebce6e60af673d04ca367b134757c2f367",
+      "bytes": 149624
+    },
+    "runs/Classic-v1-full/native/job.json": {
+      "sha256": "fea3c16b4d78edd6e5ab48070cfca481c05f0184d50216fb4c2237da4138d925",
+      "bytes": 1266046
+    },
+    "runs/Classic-v1-full/native/probe_trial_1.csv": {
+      "sha256": "52bc17750efb5d3ce147c94b33fae316fbc1b8e4b5e45eabf7c8944d66a3a7a3",
+      "bytes": 32104
+    },
+    "runs/Classic-v1-full/native/owner-configuration.json": {
+      "sha256": "6813d58716f05f5880e1b23fe855c85a574c580a84bfbac3e73193fb5e09cc2e",
+      "bytes": 3044
+    },
+    "runs/Classic-v1-full/native/initial-state.json": {
+      "sha256": "3cd67add76ba3b69cd38f5b102bd4d07435c81d13a5e877109f6a8266b4da1d7",
+      "bytes": 149663
+    },
+    "runs/Classic-v1-full/process/capture-ready.json": {
+      "sha256": "1a1ae40a9863bfb38067ba63edfe5ef25051dc49be529e5b6e1b69cd0d55662f",
+      "bytes": 98
+    },
+    "runs/Classic-v1-full/process/capture-ack.json": {
+      "sha256": "f9bb0ebd80e36c4a9f2291b2d2ea6c048c7d7603a280435b5b303f7a24d4ca1c",
+      "bytes": 114
+    },
+    "runs/Classic-v1-full/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v1-full/process/owned-process.json": {
+      "sha256": "c58ecc2ba08ebaee1f13d52ccf365dcdd58359e459751f63e8512a2552116d6f",
+      "bytes": 404
+    },
+    "runs/Classic-v1-full/process/result.json": {
+      "sha256": "f4f705bdaa17d85ce1f66f0f51e433ee9e8079f5583c9e9bb2ae1a0839ee119a",
+      "bytes": 443
+    },
+    "runs/Classic-v1-full/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Classic-v1-full/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Classic-v1-full/process/request.json": {
+      "sha256": "1cf7e9059de111e173fdebd2930cacd7afa7afd2f5a30ce209dab65ccb81b677",
+      "bytes": 943
+    },
+    "runs/Classic-v1-full/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Classic-v1-full/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035755.3555799": {
+      "sha256": "c7e23786e99ff13b8d5edff931da1a92ff71331719e539047631b1dd258f8c98",
+      "bytes": 291
+    },
+    "runs/Branch-v2-missing/input/job.json": {
+      "sha256": "c8a5784cf6c4dd9c12c0c9671a544f1f8c763931cdff914171e3c603dfb35830",
+      "bytes": 840327
+    },
+    "runs/Branch-v2-missing/native/execution.json": {
+      "sha256": "ac47bd8aff1c64eeb3589737ef50370d66a9797e559ae84bd5928e7dbfa73395",
+      "bytes": 1857
+    },
+    "runs/Branch-v2-missing/native/probe_trial_1.json": {
+      "sha256": "3af8834a4117efd0dd80a591cf9d48eaaf4493dffe2157e6ba8d0a3b1e65dc15",
+      "bytes": 4866
+    },
+    "runs/Branch-v2-missing/native/final-state.json": {
+      "sha256": "676a53f8f0badcb0364e9a532dd939d56261c666374f76dfdf4ce137cd5b0ff1",
+      "bytes": 98731
+    },
+    "runs/Branch-v2-missing/native/job.json": {
+      "sha256": "a3e34e63595b53f4324396c90cbac51d01a8a4576416050134ce48dfd562c215",
+      "bytes": 1170349
+    },
+    "runs/Branch-v2-missing/native/probe_trial_1.csv": {
+      "sha256": "f1988adbf39f4afd07a525dca1452931a0bee4f4c439776f300532d490315fd4",
+      "bytes": 20719
+    },
+    "runs/Branch-v2-missing/native/owner-configuration.json": {
+      "sha256": "c445dc5e0410d9c0425452c55d0a77ba2c8aef672bc9e24d2893161b45e84491",
+      "bytes": 3056
+    },
+    "runs/Branch-v2-missing/native/initial-state.json": {
+      "sha256": "34807e526eb78c356a0e06f10092c369956dcf636a27e05aa03f14ed46cce17c",
+      "bytes": 98770
+    },
+    "runs/Branch-v2-missing/process/capture-ready.json": {
+      "sha256": "c3bd9a70f6c6519ed85141cfdf601d4dd93dd56b683e621b836830639dfcbf74",
+      "bytes": 98
+    },
+    "runs/Branch-v2-missing/process/capture-ack.json": {
+      "sha256": "96225a95ecb0c76daeba82b618e69484ae61b5cbb4714280e5f4075c01c406dc",
+      "bytes": 114
+    },
+    "runs/Branch-v2-missing/process/stdout.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v2-missing/process/owned-process.json": {
+      "sha256": "5df5de43e2abf04c24f1ef320a77f2c38afe6e66510e82b7544e1fc5d1d95922",
+      "bytes": 404
+    },
+    "runs/Branch-v2-missing/process/result.json": {
+      "sha256": "413719bb501202e50ab2a72594133c4005a09d8e1d70b41d2a55adeaa421218e",
+      "bytes": 443
+    },
+    "runs/Branch-v2-missing/process/runtime.json": {
+      "sha256": "e3868d56467edad05384f8c52aa9ef3bf5985973f69777a9760abfe2b2d091bd",
+      "bytes": 31935
+    },
+    "runs/Branch-v2-missing/process/loaded-files.json": {
+      "sha256": "3af5d25a799e493e10a6de699915c234f89908bd5bb0cbd921d5295391d614c5",
+      "bytes": 17628
+    },
+    "runs/Branch-v2-missing/process/request.json": {
+      "sha256": "e43cf74457cb95108decb38dcac98ab8e14fdee63e454b46ed5bc8a4fd998929",
+      "bytes": 951
+    },
+    "runs/Branch-v2-missing/process/stderr.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runs/Branch-v2-missing/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-035858.3558078": {
+      "sha256": "3ee960d08a93c614853b776cf3cc39e0a77ef522bad6234e39b3837729e3d9c9",
+      "bytes": 291
+    }
+  },
+  "archive_sha256": "69054ef3568b1e432909212c89d07d406567078317ac3d2bb2e6bc593be2dea3",
+  "archive_bytes": 548656,
+  "acceptance_status": "passed",
+  "scientific_verdict": null
+}
