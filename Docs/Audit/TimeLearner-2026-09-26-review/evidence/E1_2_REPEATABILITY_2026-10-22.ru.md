@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.2 — повторяемость измерения (Reset vs без Reset)
 
 Постановка: для одной фиксированной структуры измерить разброс **амплитуды пика** и **латентности t_peak** по **20 пачкам с Reset** и **20 без**, и предложить допуски F4 не уже **3σ** (план [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §E1.2 / F4). Trainer×Mode для probe-физики **N/A**; конфиги Train/Test — probe-only (`IsNeedToTrain=0`), шаблон Test [`TimeLearnerMatrix/W01/inputs/W01_CL50_N0_PSIoff/Test`](../../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/W01/inputs/W01_CL50_N0_PSIoff/Test). G1 RERUN / F1b cold / KeepDone W33 **не** запускались.
