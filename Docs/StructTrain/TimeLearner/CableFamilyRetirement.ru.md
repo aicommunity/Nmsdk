@@ -1,6 +1,6 @@
 # Историческая группа cable_model и E1
 
-Из текущего дерева удалены20 связанных исходников из текущего дерева:8 standalone Python/C cable tools и12 E1 utilities. Это часть миграции, не научная runtime-приёмка. Source snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`. Точные20 путей, full commit, blob SHA1, SHA256 и размеры внесены в script_migration.json; wrappers и копии не остаются.
+Из текущего дерева удалены20 связанных исходников:8 standalone Python/C cable tools и12 E1 utilities. Это часть миграции, не научная runtime-приёмка. Source snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`. Точные20 путей, full commit, blob SHA1, SHA256 и размеры внесены в script_migration.json; wrappers и копии не остаются.
 
 ## Зависимости и границы
 
