@@ -1,0 +1,149 @@
+{
+  "kind": "timelearner_joint44_frozen_report_recipe",
+  "schema_version": 1,
+  "source_root": "8021301e894368aefd045f9d77274fcce9f60245",
+  "primary_proof": "82910cad87425fcad0ef67480d612bb917c6d933",
+  "primary_prefix": "Reports/StructTrain/TimeLearner/s07-csearch-threshold-joint-normal-a4/",
+  "primary_archive_sha256": "6eafb6f96e76af5ea5a622efb9bb8c0f94982ebac616bc6559e49903172232e2",
+  "fixture_source": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+  "fixture_functions": [
+    "FrozenTrialChecks",
+    "LearnedBoundary"
+  ],
+  "models": [
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN0COff",
+      "stem": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 2
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN0COn",
+      "stem": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 2
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN1COff",
+      "stem": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 2
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN1COn",
+      "stem": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 2
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN0COff",
+      "stem": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 1
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN0COn",
+      "stem": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 1
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN1COff",
+      "stem": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 1
+    },
+    {
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN1COn",
+      "stem": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch",
+      "expected_spikes": false,
+      "effective_threshold": 100.0,
+      "soma_channels": 1
+    },
+    {
+      "test_id": "NativeCompletedTransportExplicitPointTwo/ClassicSpikingFreshN0",
+      "stem": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking",
+      "expected_spikes": true,
+      "effective_threshold": 0.0001,
+      "soma_channels": 2
+    },
+    {
+      "test_id": "NativeCompletedTransportExplicitPointTwo/BranchSpikingFreshN1",
+      "stem": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_8_spiking",
+      "expected_spikes": true,
+      "effective_threshold": 0.0001,
+      "soma_channels": 1
+    }
+  ],
+  "trials": [
+    {
+      "trial_id": "trial_0",
+      "sample_id": "training_target",
+      "label": "target",
+      "pattern_isi": [
+        0.01,
+        0.08
+      ],
+      "reset_policy": "reset_per_trial",
+      "presentation_index": 0,
+      "duration": 0.12
+    },
+    {
+      "trial_id": "trial_1",
+      "sample_id": "foil_reverse",
+      "label": "foil",
+      "pattern_isi": [
+        0.08,
+        0.01
+      ],
+      "reset_policy": "reset_per_trial",
+      "presentation_index": 1,
+      "duration": 0.12
+    },
+    {
+      "trial_id": "trial_2",
+      "sample_id": "training_target",
+      "label": "target",
+      "pattern_isi": [
+        0.01,
+        0.08
+      ],
+      "reset_policy": "preserve_neuron_dynamics",
+      "presentation_index": 2,
+      "duration": 0.12
+    },
+    {
+      "trial_id": "trial_3",
+      "sample_id": "foil_reverse",
+      "label": "foil",
+      "pattern_isi": [
+        0.08,
+        0.01
+      ],
+      "reset_policy": "preserve_neuron_dynamics",
+      "presentation_index": 3,
+      "duration": 0.12
+    }
+  ],
+  "criterion": {
+    "id": "post_anchor_target_whole_window_foil_v1",
+    "anchor": "last_stimulus",
+    "begin_offset": 0.0,
+    "end_offset": null,
+    "reject_target_outside_window": true
+  },
+  "coverage_policy": "per_trial_windows",
+  "expected_models": 10,
+  "expected_trials": 40,
+  "expected_trial_soma_pairs": 60,
+  "renderer": "Scripts.StructTrain.TimeLearner.reports.render_evaluation",
+  "cache_policy": "M40 Data only; compact Git primary/models/metrics and selected images",
+  "scientific_verdict": null
+}
