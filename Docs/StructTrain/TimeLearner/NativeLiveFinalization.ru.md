@@ -1,5 +1,7 @@
 # Живой переход Train → финализация
 
+Уточнение04.11: [расширенный SDK802 baseline133](Baseline133PrerequisiteReadback.ru.md) на отдельном архивном S08 fixture дал119 passed/14 failed: cold Train не получил certificate и не дошёл до queued boundary. Прежние receipts ниже сохраняются для своих исходников/входов; они не подтверждают произвольную другую cold декларацию. Подготовлен отдельный corrected cold fixture, runtime-приёмка ещё не завершена.
+
 ## Текущее состояние на 01.11.2026
 
 Ветка `codex/timelearner-live-finalization`. Native dispatcher, явная отмена и

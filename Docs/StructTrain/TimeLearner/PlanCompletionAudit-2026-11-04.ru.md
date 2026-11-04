@@ -24,8 +24,9 @@
 | Managed normal full path | 8/8:четыре Exact N1 Train/export/frozen пути и четыре stopped/export-refusal controls;16 actual managed native units закрыты. [Scope и открытые пункты](ManagedNativePipelineAcceptance.ru.md). |
 | Managed frozen temporal reports | 1/1 на M40:24 trial–soma pairs,360 views;30 selected PNG в Git. При фиксированном threshold1.0 все4 случая TP0/FP0/FN2/TN2, успех классификации отсутствует. [Графики и ограничения](ManagedNativePipelineVisuals.ru.md). |
 | Managed measured calibration normal | 4/4 на Elder:реальные grids,confirmation,отдельный frozen Test и NonSeparable/source preservation при исходном1.0 (changed-threshold rollback здесь не проверен);12 native groups закрыты. Все4 инженерных N1 случая TP2/FP0/FN0/TN2 после same-matrix calibration; stock scientific PASS не заявляется. [Приёмка/ограничения](ManagedNativeCalibrationAcceptance.ru.md). |
+| Managed changed-threshold rollback normal | 4/4,16 actual native units, fresh restored model reproduces every sample/spike count; новый temporal report pending. [Scope и первичные данные](ManagedChangedThresholdRollbackAcceptance.ru.md). |
 | Managed calibration temporal reports | 1/1 на M40:168 trial–soma pairs,2512 PNG;54 selected PNG в Git. [Галерея и ограничения](ManagedNativeCalibrationVisuals.ru.md). |
-| Общий lifecycle dispatcher | Три идентичных hook body выделены в pending Pulse8644; baseline133 на SDK802 выполняется. Separate candidate build+133 ожидает его успеха/closure; компиляция кандидата ещё не подтверждена. [Постановка](../../../Reports/StructTrain/TimeLearner/s06-shared-lifecycle-queued-normal-a1/job.json). |
+| Общий lifecycle dispatcher | Baseline133 SDK802:119 passed/14 failed/0 skips, core18 passed. Cold fixture не получил certificate; candidate8644 не компилировался. Corrected baseline33fc собирается отдельно. [Полный отрицательный readback](Baseline133PrerequisiteReadback.ru.md). |
 | Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
 | Прежний C-search ASan K1 | Тот же supervisor3649813/start284056538 подтверждён живым; full262 ещё работает. Это иной code snapshot. |
 | Следующий joint ASan44 | Поставлен в ожидание K1; новый worker3836828/start286684788, фактические модели ещё не запускались. [Условия и budgets](../../../Reports/StructTrain/TimeLearner/s07-joint-asan44-queued-a2/job.json). |
@@ -322,3 +323,8 @@ Feature `1d5c8276cc9344362ebffccf43a0970d55cc2084` подготовил удал
 ## Ресурсы полного ASan: фактическое наблюдение04.11
 
 [Kernel readback K1](../../../Reports/StructTrain/TimeLearner/s07-full-asan-resource-observation-20261104-a1/observation.json) подтверждает native PID3690746/start284598691, RSS23.30GiB/HWM23.32GiB, текущее выполнение Classic0At20000. Full262 ещё не terminal. Для будущего full304 необходим отдельный бюджет по реальным peak/free RAM; лимит8GiB focused gate не распространяется автоматически на полный набор. Это иной snapshot, причина памяти/утечка не установлена; число tests и критерии не меняются.
+
+
+## Текущие implementation candidates после baseline133
+
+Root33fc48278cff860d20c570cb703198847f028065/Pulsecc — только исправленная cold test-постановка, separate build/focused25/133; stage6 candidate8644 пока не испытывался. Новый Python coordinatorabf22df34c6a409f34ecdd2243dfadf547efca1c с pipeline run/continue/audit и8 actual integration checks сохранён в отдельной ветке; в develop этот CLI не включён и runtime ещё не проверен. Открыты ConditionSpec binding, fault/cancel/reconciliation, queue/publish/report wiring. Полный план0–12 не сужается; только0 полностью принят.
