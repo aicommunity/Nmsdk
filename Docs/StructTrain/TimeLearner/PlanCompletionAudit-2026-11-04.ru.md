@@ -257,3 +257,13 @@ Manifest121 records (119 retired,2 moved), complete=false, проверен на
 workers с restored-path Git-tree negative control. После этого адресного
 удаления прежний path-based остаток231 уменьшается до217 (29 root,188 Bin).
 Это поправка к историческому inventory, не новая общая semantic/runtime приёмка.
+
+
+## Исправленная регрессия analysis CLI
+
+[Коллизия имени analyze](AnalysisDispatchRegression.ru.md) исправлена отдельным
+alias import; production5 checks прошли на каждом worker по настоящим native
+данным. На Elder дополнительно исполнены два readonly native controls; на M40
+выполнен повторный анализ тех же Git primaries, без нового native запуска.
+Совместные readers124/ModelSpec2 fresh-process coverage и joint ASan остаются
+открытыми; этот hotfix не является их приёмкой.
