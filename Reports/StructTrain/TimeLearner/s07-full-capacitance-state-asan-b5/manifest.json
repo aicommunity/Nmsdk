@@ -1,0 +1,226 @@
+{
+  "kind": "timelearner_full_capacitance_state_unit_gate",
+  "schema_version": 1,
+  "root": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+  "pulselib": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+  "worker": "asan",
+  "tests": 130,
+  "new_capacitance_state_tests": 11,
+  "previous_measured_capacitance_tests": 12,
+  "production_sources_verified": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredCapacitanceSearch.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/MeasuredCapacitanceSearch.h",
+      "sha256": "339bd887c4b3ad5f89f9aace161e81178530214691879fa44f407554fd05de0a"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredCapacitanceSearch.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/MeasuredCapacitanceSearch.cpp",
+      "sha256": "c727528c8d20d8e7fc94119435317f95d3b01a722a07b3bf0469a02626729d0b"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredLengthSearch.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/MeasuredLengthSearch.h",
+      "sha256": "8c3147e449cc6fb22ccf26deb9d0832b8fcf4cba8d400847ddab5eece9fa9aeb"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredLengthSearch.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/MeasuredLengthSearch.cpp",
+      "sha256": "6afb63cc6a2cca687eb8abbc398bd51516ff9409f00d58c35f1de246b66c6dc4"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResistanceSearch.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/MeasuredResistanceSearch.h",
+      "sha256": "a3683465371237832520c9f9ace99e046eb733448a53ff81cdda3386c118168e"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResistanceSearch.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/MeasuredResistanceSearch.cpp",
+      "sha256": "6053283e3bc2da53a6d88c11962a6b66d3b3c6b8d8fa19b49bc1acd988374b72"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/BoundedTraining.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/BoundedTraining.h",
+      "sha256": "d4bd9025210c92bbe4b0481c1e2b23bff3699a4f62b8e99fb96fa5ef338bb251"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/BoundedTraining.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/BoundedTraining.cpp",
+      "sha256": "aff573f068cc906ff12abad4dbcdf29993aa36d09ccd141bd071990073c3ff30"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/TrainingCapacitance.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/TrainingCapacitance.h",
+      "sha256": "64039e4c9398364b4939815a5b6dec3d2de7a78a648ecd9295b1603715cd6ba1"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/TrainingCapacitance.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/TrainingCapacitance.cpp",
+      "sha256": "a099995336f5dac451aa5fce1286cd18b92faedcd3e66740d20e63c96223d810"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/ProbeObservation.h",
+      "sha256": "402a76de7f8fa3c501e384337d9ec970de9f741408fbd230f4e5d919d2d0f3fa"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/ProbeObservation.cpp",
+      "sha256": "e6450a094be237e7e945858a44728e43b99507fd53d19151f460df6148c819d8"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/FinalVerification.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/FinalVerification.h",
+      "sha256": "f3269ee99fd98bfc37af7413cb98ec4d8a510bbb4c5f37e8b865bd35fdc6da2e"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/FinalVerification.cpp",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/FinalVerification.cpp",
+      "sha256": "8550e3b786289c952144307619d7dae7c7f8acfe65cef571dfd9776a4e8f37ff"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ResistanceDomain.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/ResistanceDomain.h",
+      "sha256": "604919b451d72f0b71051c41d72e2f44bc618ca3d3b4abe02e229b084deb29ec"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/TrainingParameters.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/TrainingParameters.h",
+      "sha256": "08e5e4c5b904b223ef97e76a23405f4e7832ee87f5e5f921f1a2d5c1b78737fe"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Libraries/Nmsdk-PulseLib/Core/TimeLearner/NumericChecks.h",
+      "git_commit": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+      "git_path": "Core/TimeLearner/NumericChecks.h",
+      "sha256": "feb1368c19a1588319a448a508fc6fd10b9313549a5d31a24d7aba987650c018"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp",
+      "sha256": "ee8a014f77a132c3934bfe087a5c937ddd56ca551bea566de5248bd2ad161b95"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp",
+      "sha256": "bff8e89b41c193ca4e7c0810165ac82cc08aa87572aad59adfad3f85fe743e8d"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp",
+      "sha256": "abc0ab50d61db2db0b3f9998b168fc237b6239a0c038c51835ac9958d7b58a81"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_TrainingCapacitance.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_TrainingCapacitance.cpp",
+      "sha256": "eb5b55cd57132e80f6c9d18aff82fe3d4cee2fddf24169cf7e200674ecc1dea4"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp",
+      "sha256": "8436e62d6e257b914b5cf0a298a5abdaf8f9fdb35101664240ed076586152218"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp",
+      "sha256": "13ac0233fffa928af24936bef89e9798d888c468f22c9f384582c7eef1713377"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-full-capacitance-state-asan-b5/production/Tests/Integration/Libraries/Test_PulseLib_FinalVerification.cpp",
+      "git_commit": "0a3c5b0f10b0b0448b21dddb9d3ee6bb483d876d",
+      "git_path": "Tests/Integration/Libraries/Test_PulseLib_FinalVerification.cpp",
+      "sha256": "ebeb891d365831e0de74fb384aa39a2e5116a24b2f9c345d5106e9fa7c85c047"
+    }
+  ],
+  "records": [
+    {
+      "path": "active-context-after.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "f09eea5cecb8cef41bdaef1a0c6febf0a23a36562c72517b97a166f123a68c3f"
+    },
+    {
+      "path": "binary-ldd.txt",
+      "bytes": 447,
+      "sha256": "4c6cb6cc8947de9605a6647bc81f11d5fc9f9c0ee5d53ec8a9083eb4cd895215"
+    },
+    {
+      "path": "compile-request.json",
+      "bytes": 23103,
+      "sha256": "2bc680e39fe7465d99691b57c68fc0f67791601ddd7aa2f7a993cf623d9f4f7f"
+    },
+    {
+      "path": "compile-terminal.json",
+      "bytes": 22,
+      "sha256": "1e3f6691f455051e8adb15d961e4bf3c7a17e83dd88b2afdd13315cc288250bb"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compiler-version.txt",
+      "bytes": 246,
+      "sha256": "88b7c4b67564a146863224148116065fee418539f0a408f3636a68f3bde51805"
+    },
+    {
+      "path": "job.py",
+      "bytes": 8967,
+      "sha256": "a174e5724d1bee9e8dc988f7e7452c514ef4c406dc6f78074bdf56960dc5d1e8"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 51,
+      "sha256": "576ad7035223abfd0852a37036c8232f9d78459bbfc57b88e3b1b80c4ae7a050"
+    },
+    {
+      "path": "stderr.log",
+      "bytes": 7517,
+      "sha256": "3c1b9281c74814a562ebcc1f35e0f0db78e1f601de5167286038304eb703e3a3"
+    },
+    {
+      "path": "stdout.log",
+      "bytes": 24818,
+      "sha256": "53893dc607dcabc743c964340dac721c486fe1a8b18356c1c5be8610aefe94ba"
+    },
+    {
+      "path": "tests.xml",
+      "bytes": 49767,
+      "sha256": "c066b52894e8d7858c634f8daed62b8997abf5a3115a3c13c92c7ab4c918633f"
+    },
+    {
+      "path": "unit-result.json",
+      "bytes": 306,
+      "sha256": "bb797472888f0196232f7c2cb81d102e129b194271bb4c122bed0b458778ff84"
+    }
+  ],
+  "archive_sha256": "0ce183f8f706f6644f1d9582b8f8b423fb1a760b9b7b76940adec01067228e8e",
+  "native_integration_attested": false,
+  "scientific_verdict": null
+}

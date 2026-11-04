@@ -426,3 +426,44 @@ calibration с fresh confirmation и импорт полного пакета в
 для всех четырёх stock-условий. Используются сохранённые JSON/CSV, без запуска
 моделей; все сомы и фактические входные импульсы, общие оси и native zoom.
 [Контракт, проверка волн и ограничения](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md).
+
+
+
+Отчёт изменения выбранного C-интервала создаётся штатной командой:
+`report CASE_capacitance_region_region.json --format capacitance-region --output NEW_M40_CACHE`.
+Сначала проверяются effective C0/child physics и полный набор before/after проб
+каждого входа. Отчёт сохраняет проверенный portable snapshot, метки phase/input,
+все записанные soma и реальные input pulses с исходным шагом, общие Y limits
+внутри сравнения и дополнительные detail views. Это characterization штатной
+пачкой, не классификация полной матрицы и не сертификат сходимости.
+Полный кэш хранится на M40 Data; визуальная приёмка и выбранные рисунки отдельно.
+Серверный render gate использует `tests.test_capacitance_region_reports` с
+`TIMELEARNER_CAPACITANCE_REGION_DIR` и новым
+`TIMELEARNER_CAPACITANCE_REGION_REPORT_CACHE`; декларация3 tests/32 trials/48
+trial-soma pairs требует actual восьми native fixtures, а не синтетических копий.
+Пока gate не выполнен, наличие команды не означает проверенный отчёт.
+
+
+Полная история C-search визуализируется командой
+`report CASE_stopped_state.json --format capacitance-search --output NEW_M40_CACHE`
+(также поддерживается completed learned state). Перед построением проверяются
+package, summary, C-state/history и все первичные JSON/CSV; отчёт работает по
+portable проверенному snapshot. Каждая проба связана с phase/input, точным
+model revision и C witness, включая transient кандидатов после последующего
+восстановления лучшего состояния. Общие Y scales и detail views формируются
+production probe-set renderer. Это все записанные training probes; отдельные
+полные реакции на каждый classification pattern по-прежнему обязательны для
+научного Test. Полный figure cache остаётся на M40 Data.
+`tests.test_capacitance_search_reports` требует четыре actual activation cases
+и persistent `TIMELEARNER_CAPACITANCE_SEARCH_REPORT_CACHE`; ожидаемая матрица
+48 trials /72 trial-soma pairs ещё требует серверной render/visual проверки.
+
+
+C-search render-v3 построил все48 actual probes/72 soma пары, но gate остался
+failed: test ошибочно требовал присутствия fallback phase search probe, хотя
+все12 trial каждого реального case уже относятся к reference, candidate,
+candidate anchor либо final verification. Исправлен exact expected phase set
+этого corpus; renderer и аудитор не ослаблены. Результат и рисунки v3 сохраняются,
+новая проверка/прямой просмотр требуются до visual acceptance.
+
+Подробный контракт и границы: [C-search temporal reports](../../../Docs/StructTrain/TimeLearner/CapacitanceSearchVisuals.ru.md).

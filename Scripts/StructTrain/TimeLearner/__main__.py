@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -45,6 +46,21 @@ def analyze(args: argparse.Namespace) -> dict:
         spec, observations = load_evaluation(args.evaluation.resolve(strict=True))
         result = audit_native_calibration_assessment(load(source), spec, observations,
             load(args.model.resolve(strict=True)), load_case(args.source_solo.resolve(strict=True)))
+    elif args.format == "capacitance-history":
+        from .training_capacitance_history import audit_training_capacitance_case
+        result = audit_training_capacitance_case(source)
+    elif args.format == "capacitance-witness":
+        from .training_capacitance_witness import audit_training_capacitance_witness
+        result = audit_training_capacitance_witness(load(source))
+    elif args.format == "capacitance-region":
+        from .capacitance_region_evidence import audit_capacitance_region
+        result = audit_capacitance_region(source)
+    elif args.format == "capacitance-binding":
+        from .capacitance_binding_evidence import audit_capacitance_binding
+        result = audit_capacitance_binding(load(source))
+    elif args.format == "training-capacitance-bridge":
+        from .training_capacitance_bridge_evidence import audit_training_capacitance_bridge
+        result = audit_training_capacitance_bridge(load(source))
     elif args.format == "domain":
         from .domain_evidence import audit_resistance_domain
         result = audit_resistance_domain(load(source), allow_legacy=args.allow_legacy)
@@ -117,6 +133,20 @@ def analyze(args: argparse.Namespace) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    controller_ab = commands.add_parser("controller-ab", help="compare pinned pure controller kernels on a Linux worker")
+    controller_ab.add_argument("specification", type=Path)
+    controller_ab.add_argument("--root-repository", type=Path, required=True)
+    controller_ab.add_argument("--pulselib-repository", type=Path, required=True)
+    controller_ab.add_argument("--compiler", type=Path, required=True)
+    controller_ab.add_argument("--gtest-source", type=Path, required=True)
+    controller_ab.add_argument("--output", type=Path, required=True)
+    controller_kernel = commands.add_parser("controller-kernel", help="run pinned pure decision kernel tests on a Linux worker")
+    controller_kernel.add_argument("specification", type=Path)
+    controller_kernel.add_argument("--root-repository", type=Path, required=True)
+    controller_kernel.add_argument("--pulselib-repository", type=Path, required=True)
+    controller_kernel.add_argument("--compiler", type=Path, required=True)
+    controller_kernel.add_argument("--gtest-source", type=Path, required=True)
+    controller_kernel.add_argument("--output", type=Path, required=True)
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
@@ -183,7 +213,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--output", type=Path, required=True)
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
+    analysis.add_argument("--format", choices=("capacitance-region", "capacitance-history", "capacitance-witness", "capacitance-binding", "training-capacitance-bridge", "domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
@@ -197,7 +227,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -364,6 +394,19 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"kind": "timelearner_legacy_completed_replay_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command in ("controller-ab", "controller-kernel"):
+        from .native_evidence import EvidenceError
+        from .controller_ab import run_controller_ab, run_controller_kernel
+        try:
+            runner = run_controller_kernel if args.command == "controller-kernel" else run_controller_ab
+            result = runner(args.specification, args.root_repository, args.pulselib_repository,
+                                       args.compiler, args.gtest_source, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result['assertion_status'] == 'passed' else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
+            print(json.dumps({'kind': 'timelearner_controller_kernel_error' if args.command == 'controller-kernel' else 'timelearner_controller_ab_error', 'reason': str(error),
+                              'scientific_verdict': None}), file=sys.stderr)
             return 2
     if args.command == "native-gate":
         from .native_evidence import EvidenceError
@@ -548,6 +591,16 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.trace is None and args.model is None, "calibration_transaction_declares_its_models_and_observations")
                 renderer = render_calibration_run if args.format == "calibration-run" else render_calibration_transaction
                 result = renderer(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "capacitance-search":
+                from .capacitance_search_reports import render_capacitance_search
+                require(args.trace is None and args.model is None and args.artifacts is None,
+                        "capacitance_search_report_declares_its_own_primary_files")
+                result = render_capacitance_search(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "capacitance-region":
+                from .capacitance_region_reports import render_capacitance_region
+                require(args.trace is None and args.model is None and args.artifacts is None,
+                        "capacitance_region_report_declares_its_own_primary_files")
+                result = render_capacitance_region(args.source.resolve(strict=True), args.output.resolve())
             elif args.format == "probe-set":
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
