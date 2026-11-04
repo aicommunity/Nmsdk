@@ -1,3 +1,5 @@
+Последняя приёмка04.11: inventory0497 и audit retirementa930 объединены; exact production blobs/manifest/CMake/native trees проверены. Manifest158,complete=false. [Доказательства и ограничения](InventoryAndAuditRetirementAcceptance.ru.md). Предыдущие pending формулировки ниже относятся к своим timestamps.
+
 # Текущая карта выполнения исходного плана,04.11.2026
 
 Основание — [утверждённый план0–12](RefactoringPlan.ru.md). Нумерация и критерии
@@ -24,8 +26,8 @@
 | Временные графики переноса | Реальный plotting test1/1 на M40:60 видов/12 сом/8 моделей. В Git24 PNG; full cache на Data. [Читаемый отчёт и ограничения](JointOwnerReplayVisuals.ru.md). |
 | Managed normal full path | 8/8:четыре Exact N1 Train/export/frozen пути и четыре stopped/export-refusal controls;16 actual managed native units закрыты. [Scope и открытые пункты](ManagedNativePipelineAcceptance.ru.md). |
 | Зависимые Elder gates | Reconciliation7,inventory15,retirement158 passed; declaration12/13 (fixture corrected separately), live did not run. Source branches пока feature. [Readback](CompletedDependentGatesElder.ru.md). |
-| Retirement восьми untagged audit tools | Оба workers:158 records/negative refusal/exact16 scope/retained CMake prefix; source pending merge, sourcea930 не объединён. Accepted manifest150. [Readback](AuditProbeRetirementM40Readback.ru.md). |
-| Расширение script inventory | Оба workers 15/15; чтение committed snapshot обнаружило197 candidates (189 Bin/8 root) вместо прежнего path-only188. Source pending merge, source selector не объединён; ни один новый candidate не удалён. [Readback](RelatedScriptInventoryReadback.ru.md). |
+| Retirement восьми untagged audit tools | Оба workers:158 records/negative refusal/exact16 scope/retained CMake prefix; sourcea930 принят, manifest158 complete=false. [Readback](AuditProbeRetirementM40Readback.ru.md). |
+| Расширение script inventory | Оба workers 15/15; чтение committed snapshot обнаружило197 candidates (189 Bin/8 root) вместо прежнего path-only188. Source pending merge, selector0497 принят;8 root candidates удалены sourcea930, Bin остаётся на review. [Readback](RelatedScriptInventoryReadback.ru.md). |
 | Public managed coordinator | 8/8 actual CLI tests,20 native units closed,8 SQLite primary registries verified; исходный candidate package2cc ещё не объединён. [Приёмка и ограничения](ManagedPublicCoordinatorAcceptance.ru.md). |
 | Managed frozen temporal reports | 1/1 на M40:24 trial–soma pairs,360 views;30 selected PNG в Git. При фиксированном threshold1.0 все4 случая TP0/FP0/FN2/TN2, успех классификации отсутствует. [Графики и ограничения](ManagedNativePipelineVisuals.ru.md). |
 | Managed measured calibration normal | 4/4 на Elder:реальные grids,confirmation,отдельный frozen Test и NonSeparable/source preservation при исходном1.0 (changed-threshold rollback здесь не проверен);12 native groups закрыты. Все4 инженерных N1 случая TP2/FP0/FN0/TN2 после same-matrix calibration; stock scientific PASS не заявляется. [Приёмка/ограничения](ManagedNativeCalibrationAcceptance.ru.md). |

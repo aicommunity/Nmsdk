@@ -1,3 +1,5 @@
+Принято после158 records/negative/exact16/CMake prefix на обоих workers: [приёмка](InventoryAndAuditRetirementAcceptance.ru.md). Manifest158 complete=false; ниже сохранена исходная постановка candidate.
+
 # Candidate: исторические audit/probe entrypoints
 
 Восемь Python tools из Scripts/audit-probes удалены из текущего feature tree без wrappers. Archive snapshot `147f6dbcdbc0c0c183ef1068152e4bbee9848dd9` содержит каждый исходник; полный commit/path/blob/SHA256/bytes и read-only retrieval command записаны в [manifest](script_migration.json). Получается158 records (156 retired/2 moved), complete=false. До серверных gate это candidate, не принятая миграция.
