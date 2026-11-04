@@ -247,3 +247,13 @@ Elder62/62 новых alias/resource controls, M4019/19 actual public preflight/
 portable checks. Предшествующая M4017/19 попытка сохранена с доказанными
 512MiB OOM. Это адресная приёмка evidence; code backend не promoted,
 Train→Test/production matrix и M40 повтор suite62 остаются pending.
+
+
+## Принятый пакет theory/sim
+
+[14 исторических исходников](TheoryScriptRetirement.ru.md) удалены из Docs
+без wrappers; модели данных, отчёты и прежние научные критерии сохранены.
+Manifest121 records (119 retired,2 moved), complete=false, проверен на обоих
+workers с restored-path Git-tree negative control. После этого адресного
+удаления прежний path-based остаток231 уменьшается до217 (29 root,188 Bin).
+Это поправка к историческому inventory, не новая общая semantic/runtime приёмка.
