@@ -1,0 +1,90 @@
+{
+  "kind": "timelearner_full304_asan_queue_readback",
+  "schema_version": 1,
+  "recorded_utc": "2026-11-04T17:57:18.986543+00:00",
+  "owner": {
+    "pid": 3991393,
+    "start_ticks": "288960902",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "role": "queue-only; native unit is not launched yet"
+  },
+  "current_kernel_state": "S",
+  "declaration": {
+    "root": "8021301e894368aefd045f9d77274fcce9f60245",
+    "pulse": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+    "tests": 304,
+    "memory_cap_bytes": 45097156608,
+    "minimum_available_memory_bytes": 45097156608,
+    "physical_memory_minimum_bytes": 49392123904,
+    "minimum_disk_free_bytes": 15032385536,
+    "outer_system_headroom_basis": "M40 total about47GiB, at most42GiB in this whole native unit; no overlapping model gate",
+    "budget_basis": "legacy final peak was not stored; last observed native RSS32363392KiB is only a lower bound, not a final peak. Cap chosen from physical host headroom; memory.peak/events and reaped-child usage will be retained. OOM cannot be accepted as PASS.",
+    "asan_options": "detect_leaks=0",
+    "native_wall_seconds": 86400,
+    "native_unit_wall_seconds": 86400,
+    "queue_wait_is_before_unit_start": true,
+    "readonly_sdk_reuse": true,
+    "source_or_runtime_update": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "state": {
+    "state": "waiting_for_asan44_closure_and_release",
+    "dependency": {
+      "kind": "timelearner_worker_dependency_state",
+      "schema_version": 1,
+      "job_id": "s07-csearch-threshold-joint-asan-gate-a2",
+      "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a2-container",
+      "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+      "closure": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "ff007c2b32096b790bb28908e50237ccc9f39ec6a9379d09c2c905978ec8a0f0",
+          "unit": "timelearner-daef7ebe-4dfc-45fd-9950-60f6322f8dea.service",
+          "invocation_id": "ac01199a8f1240c0a6aaea3e13594d70",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daef7ebe-4dfc-45fd-9950-60f6322f8dea.service",
+          "initial_main_pid": 3836828,
+          "initial_start_ticks": "286684788",
+          "sha256": "eb4835dbeedefc495acf82ef8b37a96b2cb1d255b63cda2ef639e32d094f740e"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "3836828",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-daef7ebe-4dfc-45fd-9950-60f6322f8dea.service",
+          "MemoryMax": "8589934592",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt daef7ebe-4dfc-45fd-9950-60f6322f8dea",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "ac01199a8f1240c0a6aaea3e13594d70"
+        },
+        "memory_max": 8589934592,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "reservation_optional": true,
+      "reservation_state": null,
+      "reservation_token": null,
+      "state": "pending",
+      "reason": "dependency_worker_group_still_live",
+      "successful_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "elapsed": 615.3983944617212,
+    "native_models_started": false
+  },
+  "worker_source_sha256": "7fe321e06814d37a84185adf07b7499c17ebf8c132e638ff2e023f4ab7fc08f7",
+  "whole_plan_complete": false,
+  "queued_is_not_passed": true
+}

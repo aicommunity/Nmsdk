@@ -32,8 +32,8 @@
 | Managed calibration temporal reports | 1/1 на M40:168 trial–soma pairs,2512 PNG;54 selected PNG в Git. [Галерея и ограничения](ManagedNativeCalibrationVisuals.ru.md). |
 | Общий lifecycle dispatcher | Baseline133 SDK802:119 passed/14 failed/0 skips, core18 passed. Cold fixture не получил certificate. Corrected baseline33fc прошёл focused25/full133; candidate8644 собран в отдельном SDK, focused18/18 прошёл; full133 работает, окончательная приёмка pending. [Progress](AuditProbeRetirementM40Readback.ru.md). [Полный отрицательный readback](Baseline133PrerequisiteReadback.ru.md). |
 | Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
-| Прежний C-search ASan K1 | Тот же supervisor3649813/start284056538 подтверждён живым; full262 ещё работает. Это иной code snapshot. |
-| Следующий joint ASan44 | Поставлен в ожидание K1; новый worker3836828/start286684788, фактические модели ещё не запускались. [Условия и budgets](../../../Reports/StructTrain/TimeLearner/s07-joint-asan44-queued-a2/job.json). |
+| Прежний C-search ASan K1 | Завершён:34/262 C++ tests и119 readers passed. Все3293 primary files опубликованы,8.9MB compressed. Это иной snapshot, leak check выключен и final peak неизвестен. [Приёмка](CapacitanceFullAsanK1Acceptance.ru.md). |
+| Следующий joint ASan44/304 | Реальный44 работает на802/Pulsecc, native3979458. Full304 поставлен после44 PASS/closure/release;42GiB cap и сбор cgroup peak, tests/budgets не сокращены. [Постановка и ограничения](CapacitanceFullAsanK1Acceptance.ru.md). |
 
 Pending algorithm/Pulse branch не объединена в develop. Опубликованы данные и адресные исправления инфраструктуры, а не общий алгоритмический срез. Остаются joint ASan44/304/replay/readers, остальные режимы/профили, общий контроллер, production pipeline и научная матрица. Только этап0 полностью принят;1–12 частичны. Восемь replay моделей — инженерный transport-контроль с одним паттерном, не научная классификация всей матрицы и не доказательство влияния LT-мембраны.
 
@@ -72,7 +72,7 @@ merge commit вымышленного нового runtime pass. Нового ч
 |4 — lifecycle/storage|Нативные fixtures и explicit model boundaries проверены;18 threshold/archive cases на каждом worker, включая реальные ответы2000/20000Hz.|Полная fresh/reuse/Copy/Load/growth/heterogeneous physics матрица и все legacy/V2 paths, единая семантика Default/Build/Init/Reset/Calculate без learner-specific обходов.|
 |5 — model export/Train→Test|Исправленные8 calibration cases и7 readers на каждом worker:4 реальные Exact sources,4 исходных stopped controls,2 ModelSpec2 distinct-owner transfers.|Распространить полную semantic/response identity на остальные modes/topologies/dimensions/profiles. Не подменять полный export overlays и не обещать mid-probe checkpoint.|
 |6 — общий контроллер|Native V2 service, adapters и scoped controllers реализованы; native probe теперь объединён. Граф, history и source references сохраняются в адресных import/probe случаях.|Полное legacy/V2 A/B и рефакторинг remaining duplicated controls; вся configured/multirate/compatibility матрица.|
-|7 — алгоритмы|Честные bounded search/measurement/final certificate пути реализованы и адресно проверялись. C-search normal262/119 принят своей веткой; ASan K1 ещё работает.|Принять pending algorithm branches и их общий срез, завершить N0/N1/C-trim/quantization/bounds/nonmonotonicity/reset/physics matrix. Отрицательный stock Train не доказывает PhysicalInfeasible.|
+|7 — алгоритмы|Честные bounded search/measurement/final certificate пути реализованы и адресно проверялись. C-search normal262/119 и старый ASan34/262/119 подтверждены; новый joint ASan ещё не завершён.|Принять pending algorithm branches и их общий срез, завершить N0/N1/C-trim/quantization/bounds/nonmonotonicity/reset/physics matrix. Отрицательный stock Train не доказывает PhysicalInfeasible.|
 |8 — conversion/PostTune/calibration|Есть versioned final states, transactional candidates и реальные calibration/frozen controls. Проверены новые threshold construction/transfer semantics.|Все реализованные PostTune/mute/inhibition/calibration/reset modes, commit/rollback/interruption, idempotent conversion и frozen independent evaluation для всей матрицы.|
 |9 — единый пакет и миграция|Активные root CLI/анализ/отчёты реализованы; migration manifest и часть retirements приняты.|Удалить оставшиеся исторические executables из Bin/PulseLib/Docs после переноса нужного функционала, без wrappers; указать repository/full commit/path/blob. Завершить prepare/preflight всех supported factors.|
 |10 — очередь/provenance/publish|Приняты path reservations15/15 и path+slot+RAM+disk budgets30/30 на обоих workers; диск привязан к реальному filesystem.|Связать public JobSpec/ConditionSpec с production Train→Test, весь owned process graph, cancel/recovery, actual resource policies и все publication/fault cases. Учёт заявленных ресурсов не является OS quota или полным scheduler.|
@@ -94,7 +94,7 @@ merge commit вымышленного нового runtime pass. Нового ч
 - [Reservations](ResourceReservations.ru.md): schema2 атомарно учитывает
   каталоги/slots/RAM/disk;30 tests на каждом worker, включая настоящие два
   конкурирующих процесса и два filesystem. Recovery и production wiring
-  остаются открытыми; живой K1 ledger не мигрировал.
+  остаются открытыми; M40 legacy ledger не мигрировал, lease завершённого K1 released.
 - [Читаемый stock temporal report](../../../Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-visual-a4/REPORT.ru.md):
   полный кэш14728 файлов на M40,4450 trial-soma views,20 выбранных PNG в Git.
   Проверены40 metadata members и414 source hashes. Визуальная приёмка
@@ -102,25 +102,13 @@ merge commit вымышленного нового runtime pass. Нового ч
 
 ## Работающие проверки и следующие действия
 
-C-search K1 root69789b8cb/Pulse84e456d на M40 имеет собственный неизменяемый
-SDK/runtime. Supervisor3649813/start_ticks284056538, targeted native3660392
-подтверждены живыми04.11. Предусмотрены34 адресных native cases, затем262
-полных и119 readers. Успех не присваивается до фактического завершения и
-независимой проверки. Этот снимок не включает новые initial-threshold/Rdk
-и не является проверкой их будущего общего среза.
+K1 завершён и его полный34/262/119 primary принят как отдельный snapshot: [доказательства](CapacitanceFullAsanK1Acceptance.ru.md). Новый joint44 реально работает; full304 поставлен после его PASS/closure/release с42GiB cap и точным сбором memory peak. Старые RSS/HWM наблюдения ниже относятся к прежним моментам и не являются final peak.
 
-Отдельно запущен настоящий fresh recursive checkout root develope218753e4
-только из origin, без object donors/alternates: M40 owner3667868,
-`readbacks/s00-current-develop-checkout-m40-a1`. Он не собирает SDK и не
-запускает модель. Проверяются exact gitlinks, чистота, tracked blobs и Git
-connectivity. На момент записи checkout ещё работает; результата PASS нет.
+Elder corrected shared-lifecycle SDK собран, focused18 passed, full133 продолжает работу; после него последовательно ждут reconciliation7, declaration13, live6, inventory15 и retirement158. Source branches не объединяются по факту одного progress receipt. Результаты каждого задания проверяются отдельно.
 
-Дальнейший порядок: принять эти результаты по факту; завершить общий
-algorithm slice и его regression/probe checks; затем расширять контрольную
-матрицу по уровням этапа11. Series D автоматически не возобновлять. Параллельно
-продолжать незакрытые property/migration/scheduler требования; ожидание ASan
-не является причиной объявлять план завершённым или останавливать всю работу.
+Origin-only fresh checkout e218753e4 уже принят:100534 tracked files, семь exact gitlinks, чистота и connectivity подтверждены. [Границы](FreshDevelopCheckout.ru.md): это прежний source snapshot, не новый SDK build.
 
+Далее нужны завершение joint304/replay/readers, общий algorithm slice, остальные режимы/профили и научная матрица этапа11. Series D автоматически не возобновлять. Ожидание отдельных gates не заменяет остальные property/migration/scheduler требования и не означает завершение плана.
 
 ## Последующее уточнение04.11
 
