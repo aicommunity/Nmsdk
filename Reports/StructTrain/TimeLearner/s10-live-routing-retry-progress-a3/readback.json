@@ -1,0 +1,44 @@
+{
+  "kind": "timelearner_live_routing_retry_readback",
+  "schema_version": 1,
+  "recorded_utc": "2026-11-04T19:03:08.662499+00:00",
+  "source_commit": "b7bb1dba24107cb310519e76da4933d67344fc46",
+  "declaration_A4_tests": {
+    "tests": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected": 13
+  },
+  "declaration_A4_terminal": {
+    "tests_passed": true,
+    "new_native_units": 0,
+    "source_commit": "b7bb1dba24107cb310519e76da4933d67344fc46",
+    "actual_primary": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+    "effective_native_validation_and_full_coordinator_rerun_pending": true,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "declaration_A4_bundle": {
+    "kind": "managed_actual_downstream_declaration_checks",
+    "source_commit": "b7bb1dba24107cb310519e76da4933d67344fc46",
+    "passed": true,
+    "archive_bytes": 18448,
+    "archive_sha256": "d8d8b6e5870ef57808e9a5b43b86aa199b712b51a8bf1d7932f99ab92a02007c",
+    "new_native_units": 0
+  },
+  "owner": {
+    "pid": 2311267,
+    "start_ticks": "338873654",
+    "source": "/home/user/timelearner-refactor/source-declaration-cli-fixture-a1",
+    "root": "b7bb1dba24107cb310519e76da4933d67344fc46",
+    "contained_supervisor": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a3-container"
+  },
+  "same_worker_identity_live": true,
+  "declared_tests": 6,
+  "expected_native_phases": 10,
+  "terminal": null,
+  "test_log_tail": "test_branch_fixed_live_state_to_frozen_test (Scripts.StructTrain.TimeLearner.tests.test_managed_live_pipeline.ManagedLivePipelineTest) ... ",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
