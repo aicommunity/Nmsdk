@@ -256,4 +256,7 @@ Train→export→calibration→fresh frozen import уже реализованы
 возможность — [штатная проба без Train](NativeCharacterizationProbe.ru.md):
 восемь real native cases и пять primary readers на Elder, 121 исходный файл
 контрольного холодного Train не изменился после выделения общего writer.
-ASan-приёмка этой команды и причинное исследование stock-границ ещё открыты.
+Те же восемь проб и пять проверок данных прошли на M40 под ASan,
+detect_leaks=0; 121 файл холодного Train также совпал с исходным ASan контролем.
+Отдельные cancel/wall-budget controls и причинное исследование stock-границ
+ещё открыты.

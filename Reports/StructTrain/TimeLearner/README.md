@@ -521,3 +521,12 @@ still open. Contract and precise limits: Docs/StructTrain/TimeLearner/NativePref
 Scoped metadata acceptance 2026-11-01: [Elder property/migration](s09-resumed-static-elder-a1/validation.json), [M40 property/migration](s09-resumed-static-m40-a1/validation.json), [Elder worktree guard](s02-source-worktree-identity-normal-a1/validation.json), [M40 worktree guard](s02-source-worktree-identity-asan-a1/validation.json). Actual Git fixtures; no numerical or full-stage claim. Elder Bin alias diagnosis is preserved in its report.
 
 Measured length scoped acceptance2026-11-02: [normal67 after source repair](s07-measured-length-gate-normal-a2/README.md), [ASan remaining24 plus original39+4](s07-measured-length-gate-asan-a2/README.md), [selected ASan rerender16/16](s07-measured-length-selected-asan-a1/README.md), [scope and source limitations](../../../Docs/StructTrain/TimeLearner/MeasuredLengthProposal.ru.md). Full stages6/7/11 remain open.
+
+## Native characterization без Train, 04.11.2026
+
+Source111d0b578566342a6159a50977c6bcdab9f9c647. Восемь проб Classic/Branch ModelSpec1/2 на каждом worker; пять ранних отказов и пять primary readers на каждом. Обе холодные Train-регрессии дали по121 побайтно совпадающему первичному файлу. Это инженерные controls с LT-мембраной; нет научного verdict классификации.
+
+- [Elder normal](s03-native-characterization-elder-a6/README.ru.md), proof76d62276a33e271b0320f13d899a4be4c806f96d, primary634052B.
+- [M40 ASan](s03-native-characterization-m40-a3/README.ru.md), proof692961f9ae587242e39a44b23827c2133a122725, primary548656B, detect_leaks=0.
+
+[Назначение, команды и ограничения](../../../Docs/StructTrain/TimeLearner/NativeCharacterizationProbe.ru.md). Cancel/wall controls и stock Rs interventions ещё открыты.
