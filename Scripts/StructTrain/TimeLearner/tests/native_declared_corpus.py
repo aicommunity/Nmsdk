@@ -1,4 +1,7 @@
 """Bind optional native ModelSpec2 cohorts to the actual completed gate declaration."""
+import os
+from pathlib import Path
+
 from ..native_evidence import load
 from ..native_gate import supported_specification
 
@@ -36,3 +39,31 @@ def require_model_spec2_records(records, expected):
         keys.append((model["branch"], model["normalization"], model["frequency_hz"]))
     if len(keys) != len(set(keys)) or set(keys) != expected:
         raise RuntimeError("missing, duplicate or undeclared native ModelSpec2 record")
+
+
+def audit_model_spec2_recognition_replay(path, solo):
+    """New recognition cases require their actual eight-process replay corpus."""
+    from ..recognition_owner_replay import audit_case_replay
+    value = os.environ.get("TIMELEARNER_MODELSPEC2_FRESH_OWNER_REPLAY")
+    if not value:
+        raise RuntimeError("requires actual ModelSpec2 fresh-process owner replay")
+    replay, root = Path(value), path.parent
+    index = load(replay/"index.json")
+    expected = {(branch, norm, hz, mode) for mode in ("Off", "On")
+                for branch, norm, hz in model_spec2_cohort(root, mode)}
+    observed = []
+    for row in index["cases"]:
+        name = row["source_filename"]
+        if Path(name).name != name or not name.endswith("_owner_recognition_state.json"):
+            raise RuntimeError("invalid ModelSpec2 replay source filename")
+        source = load(root/name)["source_solo"]
+        c, m = source["configuration"], source["configuration"]["model"]
+        if c["schema_version"] not in (3, 4) or m["schema_version"] != 2 or m["initial_threshold"] != 100.:
+            raise RuntimeError("unexpected ModelSpec2 recognition replay cohort")
+        observed.append((m["branch"], m["normalization"], m["frequency_hz"], "On" if c["schema_version"] == 4 else "Off"))
+    if len(observed) != len(set(observed)) or set(observed) != expected:
+        raise RuntimeError("requires exactly the complete declared ModelSpec2 replay matrix")
+    package_path = path.with_name(path.name.removesuffix("_learned_state.json")+"_owner_recognition_state.json")
+    if load(package_path)["source_solo"] != solo:
+        raise RuntimeError("ModelSpec2 owner replay substituted another solo source")
+    return audit_case_replay(package_path, replay)
