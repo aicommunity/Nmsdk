@@ -1,3 +1,5 @@
+Текущий shared recognition candidate4f/Pulsef6 собран,но8/8 Owner tests failed; full133 не запускался. Предыдущий133 не включает эти8,поэтому регрессия ещё не установлена. [Полный отрицательный primary и A/B queue](SharedRecognitionNegative.ru.md). Candidate_cpp_executed=false исходного producer ошибочен и исправлен отдельным derived receipt; core не принят.
+
 Текущий migration manifest:166 records,complete=false; PhaseA8 принят обоими workers, все научные/config/native blobs сохранены. [Доказательства](PhaseAToolRetirement.ru.md). Прежние158/189 ниже относятся к своим snapshots; из того lower-bound Bin каталога осталось181 после8 удалений. Stage9 и все этапы1–12 частичны.
 
 Актуализация04.11: прежний joint ASan44 A2 остановлен по8GiB resource cap, полного результата нет. Same-SDK44 A3 работает с42GiB; full304 A2 ждёт его PASS/closure/release. [Полные первичные данные и ограничения](JointAsanResourceRetry.ru.md). Нижние записи о работающем A2 относятся к предыдущему снимку.
