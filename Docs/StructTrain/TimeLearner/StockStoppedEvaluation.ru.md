@@ -173,3 +173,29 @@ Preview proof `7f6a37c0259125015cba9caf5386b23e08f19bc5` содержит тол
 Полный кэш: `/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-stopped-phasea-visual-a4/full-report-cache`.
 Остальные selected figures, полные cache hashes и публикация metadata остаются
 открытыми до завершения A4. Августовские результаты не пересматриваются.
+
+
+## Завершённый A4: полный render и selected20 visual QA
+
+A4 owner3648538 и selector3652241 закрыты успешно. Source43b2fbf7b прошёл
+6 plotting controls и3 production report readers. Все2684 primary files
+сравнены с Git до render; моделей повторно не рассчитывали. Полный кэш
+содержит14728 файлов:4450 trial-soma views и30 series PNG, соответствующие
+SVG/PDF, manifests и portable primary copies. В Git размещены metadata archive
+1,023,884B и20 выбранных PNG, без копии всего кэша.
+
+Proof `d262170b3c5665ecce3fd55c9e9277fcf204b7f3` независимо проверен:
+40 metadata members,414 exact source hashes, все20 PNG, cache inventories,
+вложенные manifests и source archiveSHA. Producer manual flags оставлены
+false; отдельно [зафиксирован реальный просмотр20](StockStoppedTemporalSelectedVisualQA.json).
+Просмотрен весь selected набор, включая все8 Classic-low soma1 overviews,
+target/foil остальных трёх состояний, четыре peak zoom и две local-Y детали.
+Ни manual QA всех остальных изображений, ни завершение Train не заявляются.
+
+[Читаемый отчёт с рисунками](../../../Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-visual-a4/REPORT.ru.md)
+содержит TP/FP/FN/TN, условия, шкалы, доказательства и команду воспроизведения.
+У LT spike event речь о штатном LTZone; **LTMembrane в этих моделях нет**.
+Малый local-Y хвост порядка1e-11 и отсутствие импульса внутри отдельного zoom
+не интерпретируются как большой ответ или потеря исходных входных данных.
+Это завершённая визуальная доставка диагностического наблюдения, не научный
+PASS классификации, не полный контроль порядка/ITI и не завершение этапа11.

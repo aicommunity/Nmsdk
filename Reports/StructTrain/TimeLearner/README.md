@@ -546,3 +546,9 @@ Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights h
 Визуально проверено только это изображение. Полный новый80-pair кэш A4 ещё
 формируется на M40; прежний A3 прошёл3 readers, но не принят визуально из-за
 обрезанных заголовков. Это незавершённый Train, не классификационный PASS.
+
+
+04.11 завершён [временной отчёт stock stopped A4](s11-stock-stopped-phasea-visual-a4/REPORT.ru.md):
+32 полных пробы,80 trial-soma pairs, реальные входы,6+3 checks;20 выбранных
+PNG просмотрены. Низкий порог:TP1/FP7; порог100:FN1/TN7. Train остановлен;
+это diagnostic evidence без сертификата или научного PASS. Полный кэш на M40.

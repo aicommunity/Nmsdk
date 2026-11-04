@@ -1,0 +1,346 @@
+{
+  "kind": "stock_stopped_selected_temporal_visual_review",
+  "schema_version": 1,
+  "date": "2026-11-04",
+  "evidence_commit": "d262170b3c5665ecce3fd55c9e9277fcf204b7f3",
+  "reviewed_images": 20,
+  "selected_visual_acceptance_complete": true,
+  "full_cache_manually_reviewed": false,
+  "scientific_verdict": null,
+  "checks": [
+    "complete identifiers and axes fit fixed1920x960 page",
+    "legends separated from waveforms",
+    "actual native input overlay and spike events remain visible",
+    "all8 Classic-low soma1 pattern overviews inspected",
+    "target and foil overview for each other model inspected",
+    "four measured-peak zooms and two explicitly local-Y details inspected"
+  ],
+  "notes": [
+    "Classic-low target overview was viewed as the earlier preview; identical PNG SHA256 was verified.",
+    "LT spike event refers to the actual LTZone threshold component, not an added LTMembrane.",
+    "Local amplitude detail near1e-11 in Classic-training100 is a tiny pre-response tail; read the displayed exponent and shared-Y overview.",
+    "A zoom without an input pulse inside its actual time window correctly shows zero input; use the overview for stimulus context."
+  ],
+  "images": [
+    {
+      "path": "selected/Classic-threshold-low-row0-soma1-overview.png",
+      "sha256": "4d18cb81beba99aa4a566d2d367d411d22214b6cb3d4821b24efdbcee8c882c8",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0000-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row1-soma1-overview.png",
+      "sha256": "5e6cbc4c2963bf6d547c2b7c719ca39fdc0fc59b21a0bfdf81627099ed86aeed",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0001-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/1",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row2-soma1-overview.png",
+      "sha256": "2a37e5ae088f876019fba1be3ac4d7c3dd3cffd0dc3fbd194d2861c6f8149a63",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0002-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-2",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/2",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row3-soma1-overview.png",
+      "sha256": "1110498f4338685dd664331a2c00ed2fba5aed4c7a4e3cfd077cabfd68d9c3ce",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0003-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-3",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/3",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row4-soma1-overview.png",
+      "sha256": "0616b1183408f9b00211e7977694fd747e89a1e0a94e99c5f50069b3d18624c2",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0004-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-4",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/4",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row5-soma1-overview.png",
+      "sha256": "2fc94b22cb30cad03b9c9d106be62700e8885eb10cb9453f68fa7fc5150c19a7",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0005-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-5",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/5",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row6-soma1-overview.png",
+      "sha256": "d73d1a54790a95e578a2544848ae1fd12331c59cb985e641b0c0282d10536b3a",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0006-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-6",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/6",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-row7-soma1-overview.png",
+      "sha256": "614ba141ec48bfdae35d5991c7baf51e2943f7391914a58fc186feed134bc59e",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0007-soma-001/overview.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-7",
+      "label": "foil",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/7",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-low-target-peak-zoom.png",
+      "sha256": "5d11548827d7b32150cbe9795a8b5dada48f6e73a98a67e1cb60eaa675d9b962",
+      "source_cache_path": "Classic-threshold-low/evaluation/trial-0000-soma-001/zoom-003.png",
+      "model": "Classic-threshold-low",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-training100-row0-soma1-overview.png",
+      "sha256": "caf39236a86ae162436a3fc90aad8c1eee4479263d265eaf60472253fbf2da76",
+      "source_cache_path": "Classic-threshold-training100/evaluation/trial-0000-soma-001/overview.png",
+      "model": "Classic-threshold-training100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Classic-threshold-training100/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-training100-row1-soma1-overview.png",
+      "sha256": "9224f7e349a49e1ed3716f5933b6defb4b4790c5ce56e44fb4286fd7ba7e1975",
+      "source_cache_path": "Classic-threshold-training100/evaluation/trial-0001-soma-001/overview.png",
+      "model": "Classic-threshold-training100",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "trial_id": "Classic-threshold-training100/stopped-phasea-diagnostic/rotation-0/1",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-training100-target-peak-zoom.png",
+      "sha256": "93a743f4aca57068b734538a69d307acdfcfaeb293b9456725120e3e44640434",
+      "source_cache_path": "Classic-threshold-training100/evaluation/trial-0000-soma-001/zoom-012.png",
+      "model": "Classic-threshold-training100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Classic-threshold-training100/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Classic-threshold-training100-target-local-detail.png",
+      "sha256": "a939454b2872d93860000639aa50c7fc5ae4b0215c5b805b5be5a45261a8f80e",
+      "source_cache_path": "Classic-threshold-training100/evaluation/trial-0000-soma-001/zoom-004-detail.png",
+      "model": "Classic-threshold-training100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Classic-threshold-training100/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-low-row0-soma1-overview.png",
+      "sha256": "46c078ce3d1edba8a49d911edb3b9f05cd8d74b8dd14a0c9ac104900708a8406",
+      "source_cache_path": "Branch-threshold-low/evaluation/trial-0000-soma-001/overview.png",
+      "model": "Branch-threshold-low",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Branch-threshold-low/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-low-row1-soma1-overview.png",
+      "sha256": "1c53a4c83f767a087f89d933dbd40789364a6b686baab4de1a6fd6ab04d8a662",
+      "source_cache_path": "Branch-threshold-low/evaluation/trial-0001-soma-001/overview.png",
+      "model": "Branch-threshold-low",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "trial_id": "Branch-threshold-low/stopped-phasea-diagnostic/rotation-0/1",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-low-target-peak-zoom.png",
+      "sha256": "387e42a6b138ae6243ec211b094c9fda741aa2b0ef7e818defc7d76c4b2275a8",
+      "source_cache_path": "Branch-threshold-low/evaluation/trial-0000-soma-001/zoom-002.png",
+      "model": "Branch-threshold-low",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Branch-threshold-low/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-low-target-local-detail.png",
+      "sha256": "38baf278df4f7ab3b5ae4eab5d4befb4fff78fb9bfd230e12062f4dd83c9676f",
+      "source_cache_path": "Branch-threshold-low/evaluation/trial-0000-soma-001/zoom-004-detail.png",
+      "model": "Branch-threshold-low",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Branch-threshold-low/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-training100-row0-soma1-overview.png",
+      "sha256": "2b93a504169f8fe60c792d8b1988f11f74dc73f4fa15be6699381dbd7dd9effb",
+      "source_cache_path": "Branch-threshold-training100/evaluation/trial-0000-soma-001/overview.png",
+      "model": "Branch-threshold-training100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Branch-threshold-training100/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-training100-row1-soma1-overview.png",
+      "sha256": "6a3e2e8453551f83e674b95e59edf580f489927dea1adfc9b9db99076293b633",
+      "source_cache_path": "Branch-threshold-training100/evaluation/trial-0001-soma-001/overview.png",
+      "model": "Branch-threshold-training100",
+      "sample_id": "phasea-row-1",
+      "label": "foil",
+      "trial_id": "Branch-threshold-training100/stopped-phasea-diagnostic/rotation-0/1",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    },
+    {
+      "path": "selected/Branch-threshold-training100-target-peak-zoom.png",
+      "sha256": "a41a29e50cc440fd5ffa0cc8ac95e2e62a27ccd7b896e9abd94c58b0607b3538",
+      "source_cache_path": "Branch-threshold-training100/evaluation/trial-0000-soma-001/zoom-006.png",
+      "model": "Branch-threshold-training100",
+      "sample_id": "phasea-row-0",
+      "label": "target",
+      "trial_id": "Branch-threshold-training100/stopped-phasea-diagnostic/rotation-0/0",
+      "descriptor": {
+        "index": 0,
+        "path": "$.Soma1.SumPotential",
+        "class": "NPMembraneBio",
+        "units": "model_units_SI_unverified",
+        "adapter": "native_recognition_soma"
+      }
+    }
+  ]
+}
