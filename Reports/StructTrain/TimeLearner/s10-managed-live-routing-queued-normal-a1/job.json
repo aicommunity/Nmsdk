@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "state": "queued_not_accepted",
+  "host": "10.245.1.11",
+  "source_root": "289a28ee73f4812fc860de88883ac469cf3e5516",
+  "source_pack_bytes": 3551784,
+  "source_pack_sha256": "47885768c0996d716995b6b4fd84b293311939702f66ac8c0b0241fb7231a6dd",
+  "native_sdk_root": "33fc48278cff860d20c570cb703198847f028065",
+  "native_sdk_pulse": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+  "outer_pid": 2117907,
+  "worker_pid": 2117919,
+  "worker_start_ticks": "337495579",
+  "readback": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a1",
+  "predecessor": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a1-container",
+  "prerequisites": [
+    "corrected native baseline133 passed",
+    "declaration11 passed and whole controller closed",
+    "operational predecessor lease released"
+  ],
+  "tests_expected": 6,
+  "expected_native_units": 10,
+  "cold_learning_required": true,
+  "ready_learned_graphs_installed": false,
+  "fixed_threshold_detector_success_required": false,
+  "calibration_protocol": "historical_same_matrix",
+  "memory_controller_bytes": 536870912,
+  "memory_native_unit_bytes": 4294967296,
+  "whole_worker_budget_seconds": 86400,
+  "queue_wait_budget_seconds": 64800,
+  "orchestration_sha256": "02f4d80b54af3281dd611fcc104fe56253c6ae956a469abe9be4e3fe5c090464",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
