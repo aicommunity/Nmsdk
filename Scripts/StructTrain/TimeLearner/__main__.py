@@ -240,7 +240,7 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--pulselib-repository", type=Path)
     history.add_argument("--output", type=Path)
     probe = commands.add_parser("probe-job", help="prepare or audit a native whole-burst characterization without training")
-    probe.add_argument("action", choices=["prepare", "prepare-stopped", "analyze", "analyze-matched"])
+    probe.add_argument("action", choices=["prepare", "prepare-stopped", "analyze", "analyze-matched", "report-matched"])
     probe.add_argument("source", type=Path)
     probe.add_argument("--input-index", type=int)
     probe.add_argument("--trial-id")
@@ -293,6 +293,11 @@ def main(argv: list[str] | None = None) -> int:
         from .native_evidence import EvidenceError, load, require
         from .native_calibration_worker import _write
         try:
+            if args.action == "report-matched":
+                require(args.input_index is None and args.trial_id is None and args.resistance_intervention is None, "probe_report_has_no_configuration_overrides")
+                from .matched_resistance_reports import render
+                result = render(args.source, args.output)
+                print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
             if args.action == "prepare":
                 require(args.input_index is not None and args.trial_id is not None, "probe_identity_required")
                 require(args.resistance_intervention is None, "cold_probe_prepare_has_no_import_intervention")
