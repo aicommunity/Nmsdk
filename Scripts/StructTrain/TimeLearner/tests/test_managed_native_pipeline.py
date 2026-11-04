@@ -122,7 +122,7 @@ class ManagedNativePipelineTest(unittest.TestCase):
         self.assertEqual(execution["training_outcome"], "exact")
         solo_path = trained/"native/train_learned_state.json"
         solo = load(solo_path)
-        self.assertEqual(solo["configuration"]["run_id"], job["configuration"]["run_id"])
+        self.assertEqual(solo["configuration"]["run_id"], job["configuration"]["run_id"]+"/session/1")
         export = load(templates/(name+"-export/input/job.json"))
         export["source_solo"] = solo
         exported = invoke("export", export, solo_path)
