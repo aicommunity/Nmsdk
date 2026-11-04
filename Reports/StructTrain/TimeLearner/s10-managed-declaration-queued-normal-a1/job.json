@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "state": "queued_not_accepted",
+  "host": "10.245.1.11",
+  "source_root": "427a5f2ef28b90a76c458951cad8ef70bb118c95",
+  "source_pack_bytes": 3548846,
+  "source_pack_sha256": "31b63e0ee56a7d314c2904189e61e2701d2052680810d07d556becec34ae50c5",
+  "outer_pid": 2112675,
+  "worker_pid": 2112687,
+  "worker_start_ticks": "337454450",
+  "readback": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a1",
+  "predecessor": "/home/user/timelearner-refactor/readbacks/s10-managed-reconciliation-normal-a1-container",
+  "corpus_source": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a1/actual-controls",
+  "tests_expected": 11,
+  "new_native_units": 0,
+  "memory_cap_bytes": 536870912,
+  "whole_budget_seconds": 86400,
+  "queue_wait_budget_seconds": 64800,
+  "orchestration_sha256": "e4ccf7740933cf04a3dc71dce89f0d8c1485b1bbd8b742073e4246cb0d0ffad6",
+  "prerequisites": [
+    "reconciliation metadata group closed and operational lease settled",
+    "actual coordinator8 passed and all original native units closed"
+  ],
+  "pending": [
+    "actual declaration11 gate",
+    "full native coordinator8 rerun with corrected negative job declarations",
+    "scorer reader regression",
+    "full downstream effective model capability validation"
+  ],
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
