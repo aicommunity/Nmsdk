@@ -22,8 +22,14 @@ class CalibratedModelSpec2EvidenceTest(unittest.TestCase):
             raise unittest.SkipTest('requires actual native calibration/transport outputs')
         cls.root = Path(value)
         cls.sources = {}
+        from ..stopped_evidence import audit_stopped_state
         for path in cls.root.glob('*_learned_state.json'):
             case = load_case(path)
+            if case[0]['kind'] == 'timelearner_stopped_state':
+                # Legacy precondition controls coexist with the positive
+                # matrix. Validate them as diagnostic, never as calibrated.
+                audit_stopped_state(*case)
+                continue
             cls.sources[case[0]['sha256']] = case
         if len(cls.sources) != 4:
             raise RuntimeError('requires two schema1 and two schema2 genuine learned cases')
