@@ -2194,7 +2194,7 @@ enum class RecognitionCase { Identity,Scaled,Clipped,SharedConflict,OwnedIdentit
 
 template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJsonObject& package,
     bool recordThresholdPotential=false,std::vector<NativeRecognitionTrialRequest>* declaredRequests=nullptr,
-    std::vector<NativeRecognitionTrialObservation>* recorded=nullptr)
+    std::vector<NativeRecognitionTrialObservation>* recorded=nullptr,std::optional<bool> expectedSpikes={})
 {
     const auto target=rig.learner->InputPattern.GetData();const auto frozen=rig.Revision();
     const std::string implementation="native-learned-boundary-fixture-v1";
@@ -2285,7 +2285,19 @@ template<class Learner> void FrozenTrialChecks(EditingRig<Learner>& rig,const QJ
         EXPECT_THROW(rig.learner->QueueNativeRecognitionTrial(request),std::runtime_error);
         if(recorded)recorded->push_back(*result);
     }
-    if(rig.name.find("spiking")!=std::string::npos)EXPECT_GT(observedSpikes,0u);
+    // Artifact names are legacy identifiers, never physical response criteria.
+    if(expectedSpikes)
+    {
+        if(*expectedSpikes)EXPECT_GT(observedSpikes,0u);
+        else EXPECT_EQ(observedSpikes,0u);
+    }
+    auto finalZone=rig.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(finalZone);
+    Artifact(rig.name+"_frozen_expectation.json",QJsonDocument(QJsonObject{
+        {"kind","native_frozen_response_fixture_expectation"},{"schema_version",1},
+        {"expected_spikes",expectedSpikes?QJsonValue(*expectedSpikes):QJsonValue(QJsonValue::Null)},
+        {"observed_spikes",double(observedSpikes)},{"effective_threshold",finalZone->Threshold.GetData()},
+        {"model_revision",QString::fromStdString(frozen)},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     auto cancelled=make(4,false,RecognitionResetPolicy::PerTrial);
     rig.learner->QueueNativeRecognitionTrial(cancelled);tick();
     rig.learner->CancelNativeRecognitionTrial("explicit_cancel");
@@ -2376,7 +2388,8 @@ void CalibrationAssessmentChecks(const std::string& name,
     EXPECT_THROW(AssessNativeThresholdResponses(wrong,observations,targetHash,CalibrationResponseWindow{}),std::invalid_argument);
 }
 
-template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
+template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario,
+    std::optional<bool> expectedSpikes={})
 {
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
     const auto sourceCopy=source;NativeRecognitionSpec spec;
@@ -2512,7 +2525,7 @@ template<class Learner> void RecognitionOwnerChecks(EditingRig<Learner>& rig,con
             {"source_model_before",QString::fromStdString(trainingBefore)},{"source_model_after",QString::fromStdString(trainingAfter)},
             {"target_model",QString::fromStdString(frozenAfter)},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}).toJson());
     }
-    if(fresh)FrozenTrialChecks(rig,package);
+    if(fresh)FrozenTrialChecks(rig,package,false,nullptr,nullptr,expectedSpikes);
     // A direct physical edit is discovered before the next child calculation.
     auto channel=rig.neuron->template GetComponentL<NPulseChannel>("Dendrite1_1.ExcChannel",true);ASSERT_TRUE(channel);
     channel->Capacity=channel->Capacity.GetData()*1.01;rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();
@@ -2785,7 +2798,9 @@ template<class Learner> void ThresholdCandidateChecks(EditingRig<Learner>& rig,c
         Artifact(rig.name+"_recognition_candidate.json",QJsonDocument(candidate).toJson());
         std::vector<NativeRecognitionTrialRequest> declared;
         std::vector<NativeRecognitionTrialObservation> observations;
-        FrozenTrialChecks(rig,candidate,recordThresholdPotential,&declared,&observations);
+        const auto expectedSpikes=threshold<.001 && !recordThresholdPotential && rig.frequency==2000?
+            std::optional<bool>(true):std::nullopt;
+        FrozenTrialChecks(rig,candidate,recordThresholdPotential,&declared,&observations,expectedSpikes);
         const auto trainingHash=solo["protocol"].toObject()["pattern_hash"].toString().toStdString();
         CalibrationAssessmentChecks(rig.name,declared,observations,trainingHash);
         if(recordThresholdPotential && threshold==1.)
@@ -3023,7 +3038,8 @@ template<class Learner> void PostTuneCandidateChecks(EditingRig<Learner>& rig,co
     EXPECT_EQ(rig.Revision(),original);EXPECT_EQ(rig.environment->GetTime().GetTime(),clock);
 }
 
-template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario)
+template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJsonObject& source,RecognitionCase scenario,
+    std::optional<bool> expectedSpikes={})
 {
     if(scenario==RecognitionCase::ThresholdCandidates){ThresholdCandidateChecks(rig,source);return;}
     if(scenario==RecognitionCase::ThresholdPotential){ThresholdCandidateChecks(rig,source,true);return;}
@@ -3032,7 +3048,7 @@ template<class Learner> void RecognitionChecks(EditingRig<Learner>& rig,const QJ
     if(scenario==RecognitionCase::PostTuneTransaction){ThresholdCandidateChecks(rig,source,true,true,false,true);return;}
     if(scenario==RecognitionCase::OwnedIdentity || scenario==RecognitionCase::OwnedScaled || scenario==RecognitionCase::OwnedClipped ||
        scenario==RecognitionCase::OwnedFreshIdentity || scenario==RecognitionCase::OwnedFreshScaled)
-    {RecognitionOwnerChecks(rig,source,scenario);return;}
+    {RecognitionOwnerChecks(rig,source,scenario,expectedSpikes);return;}
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();const std::string implementation="native-learned-boundary-fixture-v1";
     const auto original=rig.Revision();const auto parameters=rig.learner->ReadNativeParameters();
     const auto sourceCopy=source;const auto clock=rig.environment->GetTime().GetTime();NativeRecognitionSpec spec;
@@ -3336,6 +3352,7 @@ struct BoundaryExtras {
     bool productionCalibrationSeed=false;
     bool trackedCapacitance=false;
     std::optional<CapacitanceSearchPolicy> capacitanceSearch;
+    std::optional<bool> expectedFrozenSpikes;
 };
 template<class Learner> void LearnedBoundary(int normalization,double sync=.02,unsigned frequency=2000,std::size_t inputs=2,bool configured=false,
     std::optional<RecognitionCase> recognition={},bool automatic=false,double initialThreshold=1.,unsigned n0Repeats=1,
@@ -3345,6 +3362,11 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     const bool modelSpec2=extras.modelSpec2,productionCalibrationSeed=extras.productionCalibrationSeed;
     const bool trackedCapacitance=extras.trackedCapacitance;
     const auto& capacitanceSearch=extras.capacitanceSearch;
+    if(extras.expectedFrozenSpikes)
+    {
+        ASSERT_TRUE(recognition && (*recognition==RecognitionCase::OwnedFreshIdentity ||
+                                    *recognition==RecognitionCase::OwnedFreshScaled));
+    }
     ASSERT_TRUE(std::isfinite(fixtureWallSeconds) && fixtureWallSeconds>0.);
     auto suffix=std::string(sync==.02?"learned_boundary":"learned_boundary_explicit_tolerance");
     if(inputs!=2)suffix+="_inputs"+std::to_string(inputs);if(configured)suffix+="_configured";if(automatic)suffix+="_automatic";
@@ -3661,7 +3683,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     // a native Reset must not be allowed to start a new configured training.
     if(configured)rig.learner->IsNeedToTrain=false;
     EXPECT_EQ(ParseNativeLearnedState(QJsonDocument(package).toJson(QJsonDocument::Compact).toStdString()),package);
-    if(recognition){RecognitionChecks(rig,package,*recognition);return;}
+    if(recognition){RecognitionChecks(rig,package,*recognition,extras.expectedFrozenSpikes);return;}
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
     auto test=dynamic_pointer_cast<Learner>(core.storage->TakeObject(rig.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(test);
     test->Name="TestLearner";UEPtr<UContainer> node=test;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);test->SetGlobalTimeStep(frequency);
@@ -4052,9 +4074,9 @@ TEST(NativeCompletedTransportExplicitPointTwo,ClassicIdentityN0)
 TEST(NativeCompletedTransportExplicitPointTwo,BranchHistoricalScaleN1)
 {LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,false,RecognitionCase::Scaled);}
 TEST(NativeCompletedTransportExplicitPointTwo,ClassicSpikingFreshN0)
-{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,true,RecognitionCase::OwnedFreshIdentity,false,.0001);}
+{LearnedBoundary<NNeuronTimeLearner>(0,.2,2000,2,true,RecognitionCase::OwnedFreshIdentity,false,.0001,1,600.,BoundaryExpectation::Completed,false,false,{.expectedFrozenSpikes=true});}
 TEST(NativeCompletedTransportExplicitPointTwo,BranchSpikingFreshN1)
-{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,true,RecognitionCase::OwnedFreshScaled,false,.0001);}
+{LearnedBoundary<NNeuronTimeLearnerBranch>(1,.2,2000,2,true,RecognitionCase::OwnedFreshScaled,false,.0001,1,600.,BoundaryExpectation::Completed,false,false,{.expectedFrozenSpikes=true});}
 TEST(NativeCompletedTransportExplicitPointTwo,ClassicCalibrationGridN1)
 {LearnedBoundary<NNeuronTimeLearner>(1,.2,2000,2,true,RecognitionCase::ThresholdGrid,false,1.,1,1800.);}
 TEST(NativeCompletedTransportExplicitPointTwo,BranchCalibrationGridN1)
@@ -4081,8 +4103,8 @@ TEST(NativeLearnedState,BranchSixSharedInputsExplicitOneTolerance){LearnedBounda
 
 TEST(NativeRecognitionOwner,ClassicFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity);}
 TEST(NativeRecognitionOwner,BranchFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled);}
-TEST(NativeRecognitionOwner,ClassicSpikingFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity,false,.0001);}
-TEST(NativeRecognitionOwner,BranchSpikingFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled,false,.0001);}
+TEST(NativeRecognitionOwner,ClassicSpikingFreshDestination){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,true,RecognitionCase::OwnedFreshIdentity,false,.0001,1,600.,BoundaryExpectation::Completed,false,false,{.expectedFrozenSpikes=true});}
+TEST(NativeRecognitionOwner,BranchSpikingFreshDestination){LearnedBoundary<NNeuronTimeLearnerBranch>(1,.02,2000,2,true,RecognitionCase::OwnedFreshScaled,false,.0001,1,600.,BoundaryExpectation::Completed,false,false,{.expectedFrozenSpikes=true});}
 TEST(NativeRecognitionOwner,ClassicN0){LearnedBoundary<NNeuronTimeLearner>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeRecognitionOwner,BranchN0){LearnedBoundary<NNeuronTimeLearnerBranch>(0,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
 TEST(NativeRecognitionOwner,ClassicN1){LearnedBoundary<NNeuronTimeLearner>(1,.02,2000,2,false,RecognitionCase::OwnedIdentity);}
@@ -6514,7 +6536,7 @@ CSEARCH_MODELSPEC2_CODEC(Branch,NNeuronTimeLearnerBranch,1,20000)
 namespace {
 template<class Learner> void ModelSpec2CapacitanceBoundary(int normalization,bool csearch)
 {
-    BoundaryExtras extras{.modelSpec2=true,.trackedCapacitance=true};
+    BoundaryExtras extras{.modelSpec2=true,.trackedCapacitance=true,.expectedFrozenSpikes=false};
     if(csearch)extras.capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,4,8,131072};
     // Match the original engineering C-history/C-search boundary protocol.
     // Explicit sync0.2 is a transport control, not default-tolerance science.
