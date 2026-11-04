@@ -193,3 +193,7 @@ build-only подготовка corrected8021301e в новом runtime; K1 пр
 описывают предыдущий момент. Normal304 теперь запущен отдельно на том же
 неизменённом runtime; full304/readers/ASan joint native ещё не приняты.
 Компактный Git хранит primary5.87MB, без полного производного render cache.
+
+Corrected ASan build-only root8021301e также [завершён и проверен](JointASanBuild.ru.md):
+два приложения, четыре instrumented target flags,510 source blobs совпадают
+с normal44; native models0. Готовность сборки не закрывает pending ASan gates.
