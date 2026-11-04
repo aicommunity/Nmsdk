@@ -339,3 +339,7 @@ Root33fc48278cff860d20c570cb703198847f028065/Pulsecc — только испра
 [Новый report gate1/1 и выборочная визуальная проверка14 видов](ManagedChangedThresholdRollbackVisuals.ru.md):32 матрицы,192 trial–soma pairs,2872 PNG в воспроизводимом M40 cache;84 PNG и manifests опубликованы компактно. Для всех четырёх случаев calibrated frozen TP2/FP0/FN0/TN2, rollback-frozen TP0/FP0/FN2/TN2. Возвращённое молчание — проверка восстановления, не classifier PASS. Ранее queued render теперь завершён; исходные queued записи сохраняют историю. Только этап0 полностью принят.
 
 Coordinator source2cc остаётся queued на Elder; готовый reconciliation candidate970dd48a716a065583b1de197e49df4ac6f0895d с7 actual-corpus проверками пока не развёрнут и не исполнен. Он не изменяет immutable запущенное задание. Полная fault/cancel/reboot матрица, ConditionSpec и публикация остаются открытыми.
+
+## Очередь сверки после сбоя coordinator
+
+[Точное bounded задание7 checks](../../../Reports/StructTrain/TimeLearner/s10-managed-reconciliation-queued-normal-a1/job.json), source71b56cd5b1a0ce877054f9e45bc59f30fc2523c8, поставлено на Elder после полного закрытия и освобождения coordinator8. Это новые временные копии настоящего completed corpus с сохранением symlink log aliases, без новых native units. Не принято до фактического gate. Corrected baseline33fc уже прошёл focused25/25; полный133 ещё выполняется. Ни lifecycle candidate8644, ни новый coordinator/reconcile не promoted в develop.
