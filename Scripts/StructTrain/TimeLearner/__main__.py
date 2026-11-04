@@ -240,7 +240,7 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--pulselib-repository", type=Path)
     history.add_argument("--output", type=Path)
     probe = commands.add_parser("probe-job", help="prepare or audit a native whole-burst characterization without training")
-    probe.add_argument("action", choices=["prepare", "prepare-stopped", "analyze"])
+    probe.add_argument("action", choices=["prepare", "prepare-stopped", "analyze", "analyze-matched"])
     probe.add_argument("source", type=Path)
     probe.add_argument("--input-index", type=int)
     probe.add_argument("--trial-id")
@@ -307,7 +307,11 @@ def main(argv: list[str] | None = None) -> int:
                 result = prepare_stopped_job(load_stopped_case(args.source), args.input_index, args.trial_id, resistance_intervention=changes)
             else:
                 require(args.input_index is None and args.trial_id is None and args.resistance_intervention is None, "probe_analysis_has_no_configuration_overrides")
-                result = audit_execution(args.source)
+                if args.action == "analyze-matched":
+                    from .matched_resistance_analysis import analyze
+                    result = analyze(args.source)
+                else:
+                    result = audit_execution(args.source)
             _write(args.output, result)
             print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
