@@ -1,3 +1,5 @@
+Исторический audit snapshot. Пять исполняемых probes удалены; ниже команды заменены на read-only просмотр точных Git sources. Результаты/контрпримеры сохранены и не считаются текущей native integration приёмкой. [Причины и архивные SHA](../../../Docs/StructTrain/TimeLearner/AuditProbeRetirement.ru.md).
+
 # Дополнительные воспроизведения аудита 2026-09-24
 
 [Отчёт](../../../Docs/Audit/TimeLearner-2026-09-24-review/README.md) и [сохранённые результаты](../../../Docs/Audit/TimeLearner-2026-09-24-review/evidence/probes-summary.json).
@@ -9,8 +11,8 @@
 Из корня репозитория, Python 3.10+:
 
 ```text
-python -B Scripts/audit-probes/review-20260924/verifier_probes.py
-python -B Scripts/audit-probes/review-20260924/metrics_probes.py
+git show 147f6dbcdbc0c0c183ef1068152e4bbee9848dd9:Scripts/audit-probes/review-20260924/verifier_probes.py
+git show 147f6dbcdbc0c0c183ef1068152e4bbee9848dd9:Scripts/audit-probes/review-20260924/metrics_probes.py
 python -B -m unittest discover -s Bin/Configs/SpikeSamples/StructTrain/scripts/tests -v
 ```
 
@@ -19,7 +21,7 @@ verifier_probes вызывает реальные run_case/validator/overlay/sal
 ## C++ PostTune
 
 ```text
-python -B Scripts/audit-probes/review-20260924/posttune_probes.py
+git show 147f6dbcdbc0c0c183ef1068152e4bbee9848dd9:Scripts/audit-probes/review-20260924/posttune_probes.py
 ```
 
 Скрипт извлекает текущие FinalizePostTuneMid/UpdatePostTuneFreeRunPeak TL и Branch, а также soma accumulator из Branch ACalculate. Подменены framework, время и входной scalar signal. Для исторического среза 17854a4 извлекаются Finalize/Handle и соответствующие helper cpp/header. Тела production-методов не редактируются.
@@ -50,9 +52,9 @@ cl /nologo /EHsc /std:c++17 build/audit-review-20260924/analyzer/analyzer-bounda
 ## D1–D5 debt probes (2026-09-24)
 
 ```text
-python -B Scripts/audit-probes/review-20260924/n_stim_csv_probe.py
-python -B Scripts/audit-probes/review-20260924/posttune_probes.py   # includes R04 double_train_result_reset
-python -B Scripts/audit-probes/review-20260924/pulse_delay_probes.py
+git show 147f6dbcdbc0c0c183ef1068152e4bbee9848dd9:Scripts/audit-probes/review-20260924/n_stim_csv_probe.py
+git show 147f6dbcdbc0c0c183ef1068152e4bbee9848dd9:Scripts/audit-probes/review-20260924/posttune_probes.py   # includes R04 double_train_result_reset
+git show 147f6dbcdbc0c0c183ef1068152e4bbee9848dd9:Scripts/audit-probes/review-20260924/pulse_delay_probes.py
 python -B Scripts/audit-probes/generate_probes.py /tmp/ce.cpp        # + NPulseDelay CE
 python -B -m unittest discover -s Bin/Configs/SpikeSamples/StructTrain/scripts/tests -v
 ```

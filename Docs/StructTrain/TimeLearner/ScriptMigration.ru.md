@@ -1,3 +1,5 @@
+Принято04.11:158 records (156 retired/2 moved), complete=false. Оба workers проверили retirement8/negative/exact16/CMake prefix и расширенный inventory15. [Согласованная приёмка](InventoryAndAuditRetirementAcceptance.ru.md). Ниже — хронология прежних pending состояний; актуальные команды поиска находятся в корневом пакете.
+
 Candidate158: M40 подтвердил158 retrieval records, negative refusal/exact16 scope/CMake prefix. Elder gate ждёт inventory A2; source удаления8 audit tools не объединён. Accepted manifest пока150. [Readback](AuditProbeRetirementM40Readback.ru.md).
 
 Дополнение04.11: расширенный candidate inventory обнаружил197 review candidates (189 Bin/8 root), включая пропущенный.mjs. M40 15/15, Elder pending; селектор не объединён. Manifest150 остаётся неизменным. [Readback и точные ограничения](RelatedScriptInventoryReadback.ru.md).
