@@ -1,0 +1,162 @@
+{
+  "Classic-v2": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-7ac43edf-c347-45c5-9464-dba6963af5df.service",
+        "job_sha256": "0a54e4aa9fe0f15a520eea223133dc2c3b869ad1964c5b49eaf4fca338b3b648",
+        "manifest_sha256": "e55901c472abaacb088c007d62a4e1b68af18c391cf3393fbaede735381983b7"
+      },
+      {
+        "operation": "export",
+        "unit": "timelearner-493ebab8-5807-4eb3-9314-ef8d0850d25f.service",
+        "job_sha256": "3a36feca6a83fc0078d2800c9687062a3c09bc091d4eda8bb8c135aca729aaaa",
+        "manifest_sha256": "f6d3e35f988d63b5c2dc6fe8caf3f58a12712948b5b681236609684c58c7b4dc"
+      },
+      {
+        "operation": "evaluate",
+        "unit": "timelearner-8fbf2dcd-72e3-4dbe-af82-a07d268459cf.service",
+        "job_sha256": "9e35939d01b0665c849994e57f781479484615b471db15a9934c8d6df901d052",
+        "manifest_sha256": "ef0ff9e9f04f0931d87659e5ccd3d5394e79c45b60867b5bc73ca7e2ae03e124"
+      }
+    ],
+    "training_outcome": "exact",
+    "solo_sha256": "46e368118a32c4ab90b614b77469b12b7aa39fd8eaf019f58a83c379dd95748f",
+    "recognition_sha256": "d430ed7afd1304ed8f46ff55a684f4c0fd54c73b5efc89545d4a1f5c10b14226",
+    "scientific_verdict": null,
+    "independent_partition_verified": false
+  },
+  "Branch-N1": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-7b9d9f4b-ad5d-4e3c-8414-d0f9b2bee415.service",
+        "job_sha256": "19cf595070d6acd5a6cae9732c68e5695174dd7e505eec99901c29e720f8f3db",
+        "manifest_sha256": "b42892b7cc3e6a0411a0239a19fc2879d9b40d8a35ed0373d30d0522a492b50c"
+      }
+    ],
+    "training_outcome": "budget_exhausted",
+    "completed_export_refused": true,
+    "scientific_verdict": null
+  },
+  "Branch-v2": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-8c48e2d0-8422-4eab-a8b8-5a5764493cd3.service",
+        "job_sha256": "8bb75740e9d0eff98731c23ec4a2d890883e750ba1bec36ab70398410f3d0bb4",
+        "manifest_sha256": "d40f5147a9b3e9005e2fc7d158f885cefc1ba186bb5b6d8120bd749cfb89c1e3"
+      },
+      {
+        "operation": "export",
+        "unit": "timelearner-885ef2e3-dba4-45ee-8e61-8a83285af15f.service",
+        "job_sha256": "f9ef8c556a18134683b304a7aefbb6968b9489f9d8d85ebb9c04e011003377c2",
+        "manifest_sha256": "b29d493c4f3d41875b067aaf0205f2ddeeed62ae12949976db52ff8a6a50c7d1"
+      },
+      {
+        "operation": "evaluate",
+        "unit": "timelearner-08c99c7c-054d-401a-8cd6-6bfcd48118b1.service",
+        "job_sha256": "9f2f6a1d6fd2c956314de303a4182f02e0f4c4cc202c413beac018b9e63f7b4f",
+        "manifest_sha256": "4a97976f775e7670478a033ee215483afefdf3d7dd5913ba405f456bd51114a9"
+      }
+    ],
+    "training_outcome": "exact",
+    "solo_sha256": "8e13c9a18613b7bdb4669a1f29d86cf4f48e8123679699a33e32ddea6f8475b7",
+    "recognition_sha256": "bfe572d576c59678ce2e66f65c6bb5bd421226cd7fae605817b5920d032849f9",
+    "scientific_verdict": null,
+    "independent_partition_verified": false
+  },
+  "Branch-N0": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-55edbee6-bdc8-4cdd-9d63-13acd4f190a6.service",
+        "job_sha256": "5bc9769f26fff200092d55d1a2e695d4acc25d7e5b33c7140746b2f8ff64a896",
+        "manifest_sha256": "2b5bb67081e2807e8db9af4d2ac85b64c14fe49c0eb8e763fa400931878cadec"
+      }
+    ],
+    "training_outcome": "budget_exhausted",
+    "completed_export_refused": true,
+    "scientific_verdict": null
+  },
+  "Classic-N1": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-c23c74f6-9b68-4ae1-8010-7f776c11fda6.service",
+        "job_sha256": "5f887540f7529390cf6b5c1cb427438049caa498b7605b7679397bdb88ed68bf",
+        "manifest_sha256": "ba82c70703e90c13c4502b74e912b4779ec66707e15ed34d2dfc450cde891cfa"
+      }
+    ],
+    "training_outcome": "budget_exhausted",
+    "completed_export_refused": true,
+    "scientific_verdict": null
+  },
+  "Classic-N0": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-b7e3cddb-fb5d-4606-b8df-caf73af736b8.service",
+        "job_sha256": "87d28dee9d1b9490bb090f31814b3823105ce38322a362c7f0bb24633d1f641f",
+        "manifest_sha256": "fe482f48f8d755445fa0a99235ed0dc4a9ed30c4c4b5acf7d31c276d1c5673b8"
+      }
+    ],
+    "training_outcome": "budget_exhausted",
+    "completed_export_refused": true,
+    "scientific_verdict": null
+  },
+  "Classic-v1": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-5c58c4b9-ea83-4286-8d78-01cf81222956.service",
+        "job_sha256": "dd5f6091c18766456b941806d8ae1a26e992b4ca21b816824e67704620345177",
+        "manifest_sha256": "be815cd00579175d2e331f5428edd863cbdcb9f08d7ddd2461b5dadc284533d0"
+      },
+      {
+        "operation": "export",
+        "unit": "timelearner-ca394bd5-28df-481b-a618-7d5c49817dc5.service",
+        "job_sha256": "f95ba5b1c94f1cf17b47735b50510882c3e06b34cff2081494d19e9d3bbe3379",
+        "manifest_sha256": "3a1e2eac316b5982dd629d8ddaf0524a5ce880a1f6eb10b4188f55cb1cfbb7e1"
+      },
+      {
+        "operation": "evaluate",
+        "unit": "timelearner-aceeff56-b04b-4995-be3e-3f41c7b1971c.service",
+        "job_sha256": "6e2e7664377c8a17acc8849b9255b8000716ff24bb084e1883638a3daec1cca6",
+        "manifest_sha256": "6ee63ea44a58a1a28a9a52e2fbafc063a20ce6e6ace19a4fe6345f769d063fa9"
+      }
+    ],
+    "training_outcome": "exact",
+    "solo_sha256": "8ad31c5f337e51345335413d395288629a4895746204b2c6f0025130bf89b77e",
+    "recognition_sha256": "5e29cbbcb935cc39c312e4dc81383f0d7fa17512f72c66c252874adf6222d844",
+    "scientific_verdict": null,
+    "independent_partition_verified": false
+  },
+  "Branch-v1": {
+    "phases": [
+      {
+        "operation": "train",
+        "unit": "timelearner-94876d86-ea87-4aba-b375-e11d1a4333fe.service",
+        "job_sha256": "320785dc377f54226b39511f206f4ff4286514d021fc15afc6ce9f228f3f4aaa",
+        "manifest_sha256": "195b83342a31a119851f1ce48b09f0b97671de963a4d6fa289eec709e074e187"
+      },
+      {
+        "operation": "export",
+        "unit": "timelearner-de3dd6d3-ad69-43e5-b71e-8fe64a74f78a.service",
+        "job_sha256": "92a7a63d1df0d348fdbf40a78a07d96ad32e9bfdc92fb326a409163d3ecf55ba",
+        "manifest_sha256": "2a6d0bc696f0ae8842243b71015220045e6d52467d40c7d310e196bc2fe5fe36"
+      },
+      {
+        "operation": "evaluate",
+        "unit": "timelearner-4c3e2d12-86cf-4ecc-bd7b-ed36d1e7ef5d.service",
+        "job_sha256": "52a1fdd35163df4287f2a0984ab35d2489212f120097ab0f2e75ea8124a05cbf",
+        "manifest_sha256": "66b0880cc2df7421dde76156e11008e82e1b7687ca16267d00ed6722c09b438e"
+      }
+    ],
+    "training_outcome": "exact",
+    "solo_sha256": "3667bf17de6d636fc63b7dcbee8b16da5dc6d411c97616cca27c6a7dc430a4f7",
+    "recognition_sha256": "7e74f12987bad53bc83353bc9ef2748929501ea45a686089bd33ea252cd60eb5",
+    "scientific_verdict": null,
+    "independent_partition_verified": false
+  }
+}
