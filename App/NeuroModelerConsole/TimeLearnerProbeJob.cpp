@@ -120,7 +120,7 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             Require(identity==expected && Parameters(owner->ReadNativeParameters())==Array(j.stopped["trained_inputs"]),"probe_import_graph_or_parameters_changed");
             sourceImport=Signed({{"kind","native_probe_source_import"},{"schema_version",1},
                 {"source_stopped_sha256",j.stopped["sha256"]},{"identity",identity},{"parameters",Parameters(owner->ReadNativeParameters())},
-                {"physical_dynamics_reset",true},{"controller_history_reset",true},{"training_started",false}});
+                {"physical_dynamics_reset",true},{"controller_dynamics_reset",true},{"controller_history_preserved",true},{"training_started",false}});
             for(const auto& change:j.resistanceIntervention)expectedParameters.at(change.first).resistance=change.second;
             if(!j.resistanceIntervention.empty()) {
                 const auto edited=owner->ApplyNativeParameters(expectedParameters);
@@ -140,10 +140,13 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         if(imported)actual=DescribeNativeLearnerModel(*owner,j.model.branch,j.model.normalization,attachments,j.model.editPolicy);
         const auto configuration=IdleConfiguration(j,parameters,actual?&*actual:nullptr);
         const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());Require(integration.valid,integration.reason.c_str());
+        const auto controlBaseline=EncodeNativeTrainingState(owner->NativeTrainingController(),initial["sha256"].toString().toStdString(),parameters);
         const auto idle=[&]() {
             const auto& control=owner->NativeTrainingController();
-            return control.State()==NativeTrainingState::Idle && control.IssuedReferenceProbes()==0 && control.ObservedPackets().empty() &&
-                !control.Certificate() && !control.References() && !owner->IsNeedToTrain.GetData();
+            return control.State()==NativeTrainingState::Idle && control.IssuedReferenceProbes()==0 &&
+                !control.Certificate() && !owner->IsNeedToTrain.GetData() &&
+                (imported || (control.ObservedPackets().empty() && !control.References())) &&
+                EncodeNativeTrainingState(control,initial["sha256"].toString().toStdString(),parameters)==controlBaseline;
         };
         Require(idle() && environment->GetTime().GetDoubleTime()==0. && owner->NativeProbeState()==NativeProbeStatus::Idle,"probe_preparation_started_training");
         Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");
@@ -151,6 +154,7 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         if(imported) {
             artifacts.append(Write(output,"source-import.json",sourceImport));
             artifacts.append(Write(output,"probe-configuration.json",EncodeConfiguredNativeTraining(configuration)));
+            artifacts.append(Write(output,"controller-before.json",controlBaseline));
         }
         artifacts.append(Write(output,"initial-state.json",Signed({{"kind","native_probe_initial_state"},{"schema_version",1},
             {"identity",initial},{"parameters",Parameters(parameters)},{"training_started",false},{"search_executed",false},{"dynamics_checkpoint",false}})));
@@ -187,6 +191,7 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         const auto final=NmsdkTools::IdentifyModel(neuron,ports);
         const bool unchanged=final==initial && Parameters(owner->ReadNativeParameters())==Parameters(parameters);
         const bool controllerIdle=idle();
+        if(imported)artifacts.append(Write(output,"controller-after.json",EncodeNativeTrainingState(owner->NativeTrainingController(),initial["sha256"].toString().toStdString(),parameters)));
         if(execution=="completed" && result->status!=NativeProbeStatus::Completed)execution="probe_rejected";
         if(!unchanged)execution="model_changed";
         if(!controllerIdle)execution="unexpected_training_activity";

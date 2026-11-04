@@ -158,7 +158,7 @@ def audit_execution(directory):
                       'final-state.json', 'probe_trial_1.json', 'probe_trial_1.csv'}
     imported = job['schema_version'] == 2
     if imported:
-        expected_files.update({'source-import.json', 'probe-configuration.json'})
+        expected_files.update({'source-import.json', 'probe-configuration.json', 'controller-before.json', 'controller-after.json'})
     if (directory/'cancel.request').exists():
         require((directory/'cancel.request').stat().st_size <= 65536, 'characterization_cancel_request_too_large')
         expected_files.add('cancel.request')
@@ -189,8 +189,12 @@ def audit_execution(directory):
                 source_import['source_stopped_sha256'] == source['sha256'] and
                 source_import['identity'] == source['neuron']['graph']['identity'] and
                 source_import['parameters'] == source['trained_inputs'] and
-                source_import['physical_dynamics_reset'] is True and source_import['controller_history_reset'] is True and
+                source_import['physical_dynamics_reset'] is True and source_import['controller_dynamics_reset'] is True and
+                source_import['controller_history_preserved'] is True and
                 source_import['training_started'] is False, 'characterization_source_import_changed')
+        control = load(directory/'controller-before.json')
+        require(control == load(directory/'controller-after.json') and control['state'] == 'idle' and control['certificate'] is None and
+                control['reference_probes'] == 0, 'characterization_imported_controller_changed')
         require(initial['parameters'] == expected_import_parameters(job) and
                 initial['identity']['model'] == expected_import_model(job), 'characterization_import_or_intervention_graph_changed')
     require(initial['training_started'] is False and initial['search_executed'] is False and initial['dynamics_checkpoint'] is False,
