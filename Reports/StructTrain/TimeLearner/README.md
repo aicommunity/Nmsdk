@@ -534,3 +534,34 @@ accounting с привязкой к filesystem; исходные schema1 control
 - 04.11: s05-calibration-preconditions-elder-a1 —8 native и7 primary readers;4 настоящих Exact→calibration,4 сохранённых legacy stopped controls. ASan counterpart pending. См. Docs/StructTrain/TimeLearner/CalibrationFixturePreconditions.ru.md.
 
 - 04.11: s05-calibration-preconditions-m40-a2 — ASan8/8 и readers7/7; первые отказы guard/prerequisite сохранены отдельно. См. CalibrationFixturePreconditions и ASanVerification в Docs/StructTrain/TimeLearner.
+
+## Native characterization без Train, 04.11.2026
+
+Source111d0b578566342a6159a50977c6bcdab9f9c647. Восемь проб Classic/Branch ModelSpec1/2 на каждом worker; пять ранних отказов и пять primary readers на каждом. Обе холодные Train-регрессии дали по121 побайтно совпадающему первичному файлу. Это инженерные controls с LT-мембраной; нет научного verdict классификации.
+
+- [Elder normal](s03-native-characterization-elder-a6/README.ru.md), proof76d62276a33e271b0320f13d899a4be4c806f96d, primary634052B.
+- [M40 ASan](s03-native-characterization-m40-a3/README.ru.md), proof692961f9ae587242e39a44b23827c2133a122725, primary548656B, detect_leaks=0.
+
+[Назначение, команды и ограничения](../../../Docs/StructTrain/TimeLearner/NativeCharacterizationProbe.ru.md). Cancel/wall controls и stock Rs interventions ещё открыты.
+
+Native probe interruption controls (source07ff1081f88dd020eafa345c3dc0cf4594a0941c): six real executions and nine primary readers on each worker. Exact external cancel requests and actual partial traces retained; ordinary complete observations unchanged. [Elder](s03-native-probe-interruptions-elder-a1/README.ru.md), [M40 ASan](s03-native-probe-interruptions-m40-a1/README.ru.md), [verification](../../../Docs/StructTrain/TimeLearner/NativeProbeInterruptionsVerification.json).
+
+Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights had equal L/Ns/Rs but different full graphs (three extra excitation synapses Classic, thirteen Branch). No resistance probes were run. Four readers passed; full stopped-state import is required before causal controls. [Primary evidence](s07-stock-fixed-geometry-elder-a2/README.ru.md), [scope and next step](../../../Docs/StructTrain/TimeLearner/FixedGeometryResistanceControl.ru.md). No scientific classification verdict.
+
+- 04.11: s03-stopped-resistance-elder-a1 и s03-stopped-resistance-m40-a1 — полный native stopped import, matched Rs controls, compact primary reuse; s03-stopped-resistance-visual-m40-a1 — девять выбранных waveform PNG. Проверка: Docs/StructTrain/TimeLearner/StoppedStateResistanceVerification.json. Один исходный паттерн, без научного verdict.
+
+- 04.11: s03-native-probe-phases-elder-a1 и s03-native-probe-phases-m40-a1 — imported baseline/main interruption,12 jobs и7 readers на worker,2 cold regressions, compact reuse7362 primary files. См. Docs/StructTrain/TimeLearner/NativeProbePhases.ru.md.
+
+
+04.11: [исправленный временной preview stock stopped Train](s11-stock-stopped-title-preview-a4/preview.png)
+и [его provenance](s11-stock-stopped-title-preview-a4/preview.json). Полный trial ID
+больше не обрезан;1920×960, фактический soma potential и входные импульсы.
+Визуально проверено только это изображение. Полный новый80-pair кэш A4 ещё
+формируется на M40; прежний A3 прошёл3 readers, но не принят визуально из-за
+обрезанных заголовков. Это незавершённый Train, не классификационный PASS.
+
+
+04.11 завершён [временной отчёт stock stopped A4](s11-stock-stopped-phasea-visual-a4/REPORT.ru.md):
+32 полных пробы,80 trial-soma pairs, реальные входы,6+3 checks;20 выбранных
+PNG просмотрены. Низкий порог:TP1/FP7; порог100:FN1/TN7. Train остановлен;
+это diagnostic evidence без сертификата или научного PASS. Полный кэш на M40.
