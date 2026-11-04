@@ -1,0 +1,190 @@
+{
+  "archive": "Reports/StructTrain/TimeLearner/s05-calibration-preconditions-elder-a1/primary.tar.xz",
+  "bytes": 3862024,
+  "sha256": "aad9bcc2a5562d05c66ddb06dd02ce0740114763b336476bb84625dba6d42139",
+  "members_verified": 812,
+  "proof_commit": "3824e7eb2068812c94af33ef2775a7c25f8556f9",
+  "native_source_blobs_verified": 438,
+  "reader_archive": {
+    "archive": "Reports/StructTrain/TimeLearner/s05-calibration-preconditions-elder-a1/readers-primary.tar.xz",
+    "bytes": 56408,
+    "sha256": "d8a17497f55efdbddd694b25179052b021b2f284743077a35683a6848cfd64d4",
+    "members_verified": 8,
+    "source_blobs_verified": 255
+  },
+  "readers": {
+    "native_source_root": "b82f76e2fe543acf25d6c3076abbd864f965b3a8",
+    "reader_source_root": "59f28159bf5518d01871062fb90813ebd3d55cab",
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "scientific_verdict": null
+  },
+  "training_cases": [
+    {
+      "artifact": "native-result/native/Classic_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_learned_state.json",
+      "kind": "timelearner_completed_state",
+      "model_spec_schema": 1,
+      "branch": false,
+      "outcome": "exact",
+      "certificate_present": true,
+      "initial_isi": [
+        0.01,
+        0.03
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Classic_2000_N1_learned_boundary_configured_learned_state.json",
+      "kind": "timelearner_stopped_state",
+      "model_spec_schema": 1,
+      "branch": false,
+      "outcome": "budget_exhausted",
+      "certificate_present": false,
+      "initial_isi": [
+        0.01,
+        0.08
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Branch_2000_N1_learned_boundary_configured_learned_state.json",
+      "kind": "timelearner_stopped_state",
+      "model_spec_schema": 1,
+      "branch": true,
+      "outcome": "budget_exhausted",
+      "certificate_present": false,
+      "initial_isi": [
+        0.01,
+        0.08
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Classic_2000_N1_learned_boundary_configured_model_spec2_learned_state.json",
+      "kind": "timelearner_stopped_state",
+      "model_spec_schema": 2,
+      "branch": false,
+      "outcome": "budget_exhausted",
+      "certificate_present": false,
+      "initial_isi": [
+        0.01,
+        0.08
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_state.json",
+      "kind": "timelearner_completed_state",
+      "model_spec_schema": 2,
+      "branch": true,
+      "outcome": "exact",
+      "certificate_present": true,
+      "initial_isi": [
+        0.01,
+        0.03
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Branch_2000_N1_learned_boundary_configured_model_spec2_learned_state.json",
+      "kind": "timelearner_stopped_state",
+      "model_spec_schema": 2,
+      "branch": true,
+      "outcome": "budget_exhausted",
+      "certificate_present": false,
+      "initial_isi": [
+        0.01,
+        0.08
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_learned_state.json",
+      "kind": "timelearner_completed_state",
+      "model_spec_schema": 1,
+      "branch": true,
+      "outcome": "exact",
+      "certificate_present": true,
+      "initial_isi": [
+        0.01,
+        0.03
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    },
+    {
+      "artifact": "native-result/native/Classic_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_learned_state.json",
+      "kind": "timelearner_completed_state",
+      "model_spec_schema": 2,
+      "branch": false,
+      "outcome": "exact",
+      "certificate_present": true,
+      "initial_isi": [
+        0.01,
+        0.03
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0,
+        "sync": 0.02
+      }
+    }
+  ],
+  "calibrated_packages": [
+    "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_calibrated_state.json",
+    "native-result/native/Classic_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_state.json",
+    "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_production_calibration_seed_calibrated_state.json",
+    "native-result/native/Classic_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_calibrated_state.json"
+  ],
+  "distinct_owner_transfers": [
+    "native-result/native/Classic_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_calibrated_fresh_owner_calibrated_transfer.json",
+    "native-result/native/Branch_2000_N1_learned_boundary_configured_recognition_11_model_spec2_production_calibration_seed_calibrated_fresh_owner_calibrated_transfer.json"
+  ],
+  "runtime_result": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 8,
+      "observed": 8,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "4cb277a812eed794fea68804b1cd2b9e5ad25f23acd845cb3b1bba3b58311577"
+    },
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null,
+  "asan_counterpart_pending": true
+}
