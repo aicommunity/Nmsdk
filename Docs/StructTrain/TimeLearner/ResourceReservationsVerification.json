@@ -1,0 +1,51 @@
+{
+  "kind": "worker_resource_reservation_verification",
+  "complete_queue_attested": false,
+  "scientific_verdict": null,
+  "workers": {
+    "elder": {
+      "archive": "Reports/StructTrain/TimeLearner/s10-resource-reservations-elder-a2/primary.tar.xz",
+      "bytes": 22300,
+      "sha256": "b33e80fe28e2d0335da4782dfdbbd2d526dac7d1dd06a9c438359f78b350bc75",
+      "members_verified": 10,
+      "proof_commit": "3685d33dc945eb39e87df8787cb534f3ad43a23d",
+      "source_blobs_verified": 386,
+      "tests": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "runtime": {
+        "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+        "executable": "/usr/bin/python3.10",
+        "executable_sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+        "sqlite": "3.37.2",
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "neural_runs": 0
+      }
+    },
+    "m40": {
+      "archive": "Reports/StructTrain/TimeLearner/s10-resource-reservations-m40-a2/primary.tar.xz",
+      "bytes": 22424,
+      "sha256": "537aa4dcbde7db46408b0b18798980a4a777ed1d95ab7e82d6a8a23631bef574",
+      "members_verified": 10,
+      "proof_commit": "25c391992a8e3d8bd97956f40661c4fafb0db4e1",
+      "source_blobs_verified": 386,
+      "tests": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "runtime": {
+        "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+        "executable": "/usr/bin/python3.12",
+        "executable_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+        "sqlite": "3.45.1",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "neural_runs": 0
+      }
+    }
+  }
+}
