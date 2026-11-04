@@ -1,0 +1,416 @@
+{
+  "kind": "stopped_state_resistance_proof_verification",
+  "scientific_verdict": null,
+  "workers": [
+    {
+      "archive": "Reports/StructTrain/TimeLearner/s03-stopped-resistance-elder-a1/primary.tar.xz",
+      "bytes": 717776,
+      "sha256": "e931a9cd19745ddfe143f8754b342ef888aabb6927a136b2250dd7f686cc5e42",
+      "members_verified": 22,
+      "proof_commit": "a566b02aa8ae530717740e9e2afb4776dc53741e",
+      "worker": "elder",
+      "analysis_source_blobs_verified": 313,
+      "native_source_blobs_verified": 325,
+      "source_readers_archive": {
+        "archive": "Reports/StructTrain/TimeLearner/s03-stopped-resistance-elder-a1/source-readers-primary.tar.xz",
+        "bytes": 72424,
+        "sha256": "3b880b951cf31046849b42874d9010bafdf9738d86906044dd8fc3e04b841895",
+        "members_verified": 48,
+        "source_blobs_verified": 308
+      },
+      "matched_source_blobs_verified": 308,
+      "compact_primary": {
+        "bytes": 599532,
+        "retained_files": 155,
+        "reused_files": 3516,
+        "restored_files": 3671,
+        "all_primary_bytes_verified": true,
+        "reference": {
+          "commit": "e5fa71d745119af0d818059f497dd226f4c7c25d",
+          "archive_path": "Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz",
+          "archive_sha256": "6d0820f92c13bf4e91f5b86b7e26da5957dfba991730fca3c64a31858bc71c1c"
+        }
+      },
+      "matched_readers": {
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "reuse_readers": {
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "restored_production_readback": {
+        "passed": [
+          "Classic-threshold-training100-resistance",
+          "Branch-threshold-training100-resistance"
+        ],
+        "all_primary_files_verified_by_restore": true,
+        "native_rerun": false
+      },
+      "analysis": {
+        "kind": "matched_resistance_characterization",
+        "schema_version": 1,
+        "rows": [
+          {
+            "branch": false,
+            "source_stopped_sha256": "107f7d2aa639ce21169e9f54f226fa54ae014621cc1b7e98e3bac2cf6c06cad6",
+            "conditions_matched": true,
+            "absolute_sample_times_equal": true,
+            "windows_equal": true,
+            "actual_stimulus_rows_and_events_equal": true,
+            "runtime_equal": true,
+            "warm_source_traces_byte_equal": true,
+            "replay_and_warm_source_traces_byte_equal": true,
+            "model_time_begin": 1.8005,
+            "model_time_end": 3.6005000000000003,
+            "replay_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "control_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "changed_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "potential_differences": [
+              {
+                "channel": 0,
+                "maximum_absolute_potential_difference": 0.0010815627894296131,
+                "rms_potential_difference": 0.0004195939707516063,
+                "control_maximum_potential": 0.004504819155902173,
+                "changed_maximum_potential": 0.0055863819453317864
+              },
+              {
+                "channel": 1,
+                "maximum_absolute_potential_difference": 0.0,
+                "rms_potential_difference": 0.0,
+                "control_maximum_potential": 0.015828572406203167,
+                "changed_maximum_potential": 0.015828572406203167
+              },
+              {
+                "channel": 2,
+                "maximum_absolute_potential_difference": 0.0,
+                "rms_potential_difference": 0.0,
+                "control_maximum_potential": 0.015828572406203167,
+                "changed_maximum_potential": 0.015828572406203167
+              },
+              {
+                "channel": 3,
+                "maximum_absolute_potential_difference": 0.0,
+                "rms_potential_difference": 0.0,
+                "control_maximum_potential": 0.015828572406203167,
+                "changed_maximum_potential": 0.015828572406203167
+              }
+            ],
+            "source_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "control_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "changed_model_revision": "07b97966374d0ac91a853b331aabcb3fbb53f800617dee12a1dcb064b605fceb"
+          },
+          {
+            "branch": true,
+            "source_stopped_sha256": "2663fd52d65f4ba3c4aeba2b4aa5e6808b8d22bd2f80019d881118bc8661d6ae",
+            "conditions_matched": true,
+            "absolute_sample_times_equal": true,
+            "windows_equal": true,
+            "actual_stimulus_rows_and_events_equal": true,
+            "runtime_equal": true,
+            "warm_source_traces_byte_equal": true,
+            "replay_and_warm_source_traces_byte_equal": true,
+            "model_time_begin": 1.8005,
+            "model_time_end": 3.6005000000000003,
+            "replay_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "control_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "changed_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "potential_differences": [
+              {
+                "channel": 0,
+                "maximum_absolute_potential_difference": 0.001465504082932112,
+                "rms_potential_difference": 0.0004964690882025046,
+                "control_maximum_potential": 0.006103650024966156,
+                "changed_maximum_potential": 0.007569154107898268
+              }
+            ],
+            "source_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+            "control_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+            "changed_model_revision": "bd0dcb3936a6728e1df36b9b3d50819ba1979658865d74b6e1fd7178ddde366c"
+          }
+        ],
+        "all_conditions_matched": true,
+        "training_executed": false,
+        "spiking_response_measured": false,
+        "scientific_classification_verdict": null,
+        "analysis_version": 1,
+        "input_matrix_sha256": "e0a1b7b2d50e0ef1929b32cb8a61c82af01b95a4265e1088124be441795cc66f"
+      }
+    },
+    {
+      "archive": "Reports/StructTrain/TimeLearner/s03-stopped-resistance-m40-a1/primary.tar.xz",
+      "bytes": 736280,
+      "sha256": "b7e53a0c3502baa5a3ae2688ca6079068c7677af4db58c2c8e2f2e300a319374",
+      "members_verified": 22,
+      "proof_commit": "090004bffda8573b5e77d7ddbaa05fa7ca818345",
+      "worker": "m40",
+      "analysis_source_blobs_verified": 313,
+      "native_source_blobs_verified": 325,
+      "source_readers_archive": {
+        "archive": "Reports/StructTrain/TimeLearner/s03-stopped-resistance-m40-a1/source-readers-primary.tar.xz",
+        "bytes": 76800,
+        "sha256": "75f5133de4693e3d8ff90f74a51ad2e2d56ed222cad5e253f911332d39076512",
+        "members_verified": 48,
+        "source_blobs_verified": 308
+      },
+      "matched_source_blobs_verified": 308,
+      "compact_primary": {
+        "bytes": 613352,
+        "retained_files": 155,
+        "reused_files": 3516,
+        "restored_files": 3671,
+        "all_primary_bytes_verified": true,
+        "reference": {
+          "commit": "e5fa71d745119af0d818059f497dd226f4c7c25d",
+          "archive_path": "Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz",
+          "archive_sha256": "6d0820f92c13bf4e91f5b86b7e26da5957dfba991730fca3c64a31858bc71c1c"
+        }
+      },
+      "matched_readers": {
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "reuse_readers": {
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "restored_production_readback": {
+        "passed": [
+          "Classic-threshold-training100-resistance",
+          "Branch-threshold-training100-resistance"
+        ],
+        "all_primary_files_verified_by_restore": true,
+        "native_rerun": false
+      },
+      "analysis": {
+        "kind": "matched_resistance_characterization",
+        "schema_version": 1,
+        "rows": [
+          {
+            "branch": false,
+            "source_stopped_sha256": "107f7d2aa639ce21169e9f54f226fa54ae014621cc1b7e98e3bac2cf6c06cad6",
+            "conditions_matched": true,
+            "absolute_sample_times_equal": true,
+            "windows_equal": true,
+            "actual_stimulus_rows_and_events_equal": true,
+            "runtime_equal": true,
+            "warm_source_traces_byte_equal": true,
+            "replay_and_warm_source_traces_byte_equal": true,
+            "model_time_begin": 1.8005,
+            "model_time_end": 3.6005000000000003,
+            "replay_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "control_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "changed_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "potential_differences": [
+              {
+                "channel": 0,
+                "maximum_absolute_potential_difference": 0.0010815627894296131,
+                "rms_potential_difference": 0.0004195939707516063,
+                "control_maximum_potential": 0.004504819155902173,
+                "changed_maximum_potential": 0.0055863819453317864
+              },
+              {
+                "channel": 1,
+                "maximum_absolute_potential_difference": 0.0,
+                "rms_potential_difference": 0.0,
+                "control_maximum_potential": 0.015828572406203167,
+                "changed_maximum_potential": 0.015828572406203167
+              },
+              {
+                "channel": 2,
+                "maximum_absolute_potential_difference": 0.0,
+                "rms_potential_difference": 0.0,
+                "control_maximum_potential": 0.015828572406203167,
+                "changed_maximum_potential": 0.015828572406203167
+              },
+              {
+                "channel": 3,
+                "maximum_absolute_potential_difference": 0.0,
+                "rms_potential_difference": 0.0,
+                "control_maximum_potential": 0.015828572406203167,
+                "changed_maximum_potential": 0.015828572406203167
+              }
+            ],
+            "source_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "control_model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+            "changed_model_revision": "07b97966374d0ac91a853b331aabcb3fbb53f800617dee12a1dcb064b605fceb"
+          },
+          {
+            "branch": true,
+            "source_stopped_sha256": "2663fd52d65f4ba3c4aeba2b4aa5e6808b8d22bd2f80019d881118bc8661d6ae",
+            "conditions_matched": true,
+            "absolute_sample_times_equal": true,
+            "windows_equal": true,
+            "actual_stimulus_rows_and_events_equal": true,
+            "runtime_equal": true,
+            "warm_source_traces_byte_equal": true,
+            "replay_and_warm_source_traces_byte_equal": true,
+            "model_time_begin": 1.8005,
+            "model_time_end": 3.6005000000000003,
+            "replay_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "control_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "changed_waves": [
+              {
+                "channel": 0,
+                "count": 3,
+                "assignment_validity": "missing"
+              }
+            ],
+            "potential_differences": [
+              {
+                "channel": 0,
+                "maximum_absolute_potential_difference": 0.001465504082932112,
+                "rms_potential_difference": 0.0004964690882025046,
+                "control_maximum_potential": 0.006103650024966156,
+                "changed_maximum_potential": 0.007569154107898268
+              }
+            ],
+            "source_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+            "control_model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67",
+            "changed_model_revision": "bd0dcb3936a6728e1df36b9b3d50819ba1979658865d74b6e1fd7178ddde366c"
+          }
+        ],
+        "all_conditions_matched": true,
+        "training_executed": false,
+        "spiking_response_measured": false,
+        "scientific_classification_verdict": null,
+        "analysis_version": 1,
+        "input_matrix_sha256": "1e98f078d00eb21566e53b293125e003540991c3771889c613ebbdae53dee8ba"
+      }
+    }
+  ],
+  "visual": {
+    "archive": "Reports/StructTrain/TimeLearner/s03-stopped-resistance-visual-m40-a1/primary.tar.xz",
+    "bytes": 1427160,
+    "sha256": "daa7c57ba9e96d7d207253165cb1a24862513bb9d33f60b8d412e86d02e1c376",
+    "members_verified": 18,
+    "proof_commit": "2a2e0faf1c7ad9028cc99fcc541c7bee08fe9bb8",
+    "source_blobs_verified": 313,
+    "selected_visual_review": {
+      "status": "accepted",
+      "scope": "nine selected PNG files only",
+      "reviewed_files": {
+        "selected/Classic-soma3-full.png": {
+          "sha256": "aafab349d4649ee0d1fac990cea8f9cd31651a6157a13099a130438215e4a6cf",
+          "bytes": 193046
+        },
+        "selected/Branch-soma1-samples-800-1700.png": {
+          "sha256": "db74b6c1876d8ea5dd865c7cb904242a29138b766da6c9ff1dbb76116203cadd",
+          "bytes": 209484
+        },
+        "selected/Branch-soma1-samples-1600-2500.png": {
+          "sha256": "c2fd8becd03ac7d7d9def3be5d9f986fc6856d9082577eee6270df18e8de7a23",
+          "bytes": 153966
+        },
+        "selected/Classic-soma2-full.png": {
+          "sha256": "ff0330f4c7b1570dbf5d4f93faa74ba13582632b40a05837cd54afb39815b0af",
+          "bytes": 193198
+        },
+        "selected/Classic-soma4-full.png": {
+          "sha256": "a24bc9fa7e358735664dab9a1eac5cc0684d6c9302c5697666aa04e3471fa719",
+          "bytes": 192752
+        },
+        "selected/Classic-soma1-full.png": {
+          "sha256": "889d710ef8f1d4636129ce649f748bbdb0d868fdb4f5090fe905cbae049a2508",
+          "bytes": 212989
+        },
+        "selected/Classic-soma1-samples-1600-2500.png": {
+          "sha256": "c97f75320fa2f359c5a57446b73fa9bb64aff7c295570d1ff192be2918e7a983",
+          "bytes": 195245
+        },
+        "selected/Classic-soma1-samples-800-1700.png": {
+          "sha256": "df61c0f7395c05a390d7ca951be3a886020047ca4d1390936a39e1118682d94a",
+          "bytes": 200669
+        },
+        "selected/Branch-soma1-full.png": {
+          "sha256": "70a45e719bb94b61e5360d18a26e4925cf6804f64df0134a8df4a529459b3fec",
+          "bytes": 231293
+        }
+      },
+      "checks": [
+        "Readable labels and legends, no clipped content",
+        "Actual input pulses shown with soma potential and difference panels",
+        "Matched control and changed-Rs traces share absolute model clock",
+        "Detailed windows expose actual sample markers",
+        "Other Classic soma channels visibly unchanged with explicit zero-difference label"
+      ],
+      "full_cache_manual_review_complete": false,
+      "all_pattern_matrix": false,
+      "si_units_verified": false
+    }
+  }
+}

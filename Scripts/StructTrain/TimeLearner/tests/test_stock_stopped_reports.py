@@ -36,6 +36,12 @@ class StockStoppedReportsTest(unittest.TestCase):
                         for i in range(len(o['samples'][0]['soma']))}
             rendered = load(folder/'manifest.json')
             self.assertEqual({(f['trial_id'], f['descriptor']['index']) for f in rendered['figures']}, expected)
+            # The pipeline embeds the actual return value of render_diagnostic_evaluation.
+            # A correct nested manifest alone cannot prove the batch interface works.
+            pipeline = load(self.report/name/'manifest.json')
+            self.assertTrue(pipeline['evaluation_report']['diagnostic_only'])
+            self.assertFalse(pipeline['evaluation_report']['training_completed'])
+            self.assertEqual(pipeline['evaluation_report']['source_training_outcome'], 'invalid_observation')
             observed_pairs.update((name, *pair) for pair in expected)
         self.assertEqual(len(observed_pairs), 80)
 

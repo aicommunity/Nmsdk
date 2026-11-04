@@ -113,3 +113,89 @@ Git parser и remote fetch каждого child commit; в Git передают�
 metadata.tar.xz, manifest и checksums. Полные PNG/SVG/PDF не публикуются.
 Численная диагностика завершена; queue и ожидаемые проверки графиков ещё
 не являются visual acceptance или новым научным результатом.
+
+Уточнение04.11 после завершения очереди: visual-a1 закрыт с ошибкой
+`KeyError: diagnostic_only`, Git proof `7e02f1126f23f1ed326b8bd16d1474d5c6284839`
+явно имеет `acceptance_status=not_accepted`. Первичный manifest дочернего
+diagnostic renderer правильно отмечал остановленный Train, но возвращаемый
+словарь не передавал эту роль в `live_pipeline_reports` / общий stock report.
+Поэтому завершённый частичный кэш первой модели не является отчётом по80 парам.
+
+Исправление `b8b366dd8b4f1987e3a60c9183633b5129be8b00` возвращает diagnostic
+role, training_completed и source_training_outcome из того же manifest.
+Читатель дополнительно проверяет реальный вложенный summary в pipeline
+manifest, а не только корректность отдельного файла. Модели, исходные пробы,
+метрики и собственно рисование не менялись.
+
+Запущен отдельный `s11-stock-stopped-phasea-visual-a2`, owner3633270, исходники
+получены через Git. Перед повторным render все2684 исходных файла сравниваются
+побайтно с proofc8381cfc; данные a1 переиспользуются только после этой проверки.
+Повторного Train/Test нет. Полная генерация,3 report readers и визуальная
+приёмка выбранных изображений остаются открытыми до фактического завершения.
+
+Служебная проверка a2 остановлена адресно по подтверждённому owner до render:
+обход XZ members через неупорядоченный set вызывал повторную распаковку при
+обратных seek. Первичные файлы не менялись; ASan jobs не останавливались.
+`interruption.json` a2 фиксирует эту причину. Новый a3 owner3634999 читает TAR
+последовательно (`r|xz`); все2684 файла уже сравнены с Git побайтно, receipt
+`source-primary-reverified.json` сохранён. Генерация полного кэша продолжается
+в `readbacks/s11-stock-stopped-phasea-visual-a3/full-report-cache`; никаких
+утверждений о её завершении или визуальной приёмке до итоговых проверок нет.
+
+
+## Приёмка временного отчёта04.11: обнаруженное обрезание заголовка
+
+A3 завершил полный render32 trials /80 trial-soma pairs и3/3 production
+report readers без failures/errors/skips. Однако непосредственный просмотр
+выбранных PNG обнаружил обрезание длинного trial_id на первой строке
+заголовка. Поэтому численная/структурная проверка A3 не является визуальной
+приёмкой. Неопубликованный candidate8751cb12 с20 рисунками не принят;
+его `manual_review_complete=false` не заменяется задним числом.
+
+Исправление `43b2fbf7bae735d028f73690eeb5f2c245fbe4ef` переносит полный
+заголовок и проверяет его реальные границы через rendering backend в полосе
+страницы. Размер1920×960, область кривой, временные окна, amplitudes, реальные
+входы и маркировка LT spike events не меняются. Шрифт остаётся9–11 pt;
+если полный заголовок не помещается читаемо, renderer выдаёт ошибку вместо
+обрезанного рисунка. Контроль использует реальный длинный trial_id.
+
+A4 supervisor3648538/start_ticks284037842 на M40 заново сверил2684 primary
+files с Git proofc8381cfc побайтно, затем прошёл6/6 plotting checks. Полная
+генерация нового кэша ещё идёт;3 report readers запускаются после её окончания.
+Повторных вычислений моделей нет. Первое фактически полученное изображение
+передано через native Git и просмотрено целиком: title/axes/legend читаемы,
+входные импульсы наложены на soma potential, waveform не закрыт легендой.
+
+Preview proof `7f6a37c0259125015cba9caf5386b23e08f19bc5` содержит только
+этот рисунок и его привязку к source/data/cache. Это приёмка оформления одного
+изображения, не всех80 пар, не всех паттернов и не завершения обучения.
+[Просмотренный preview](../../../Reports/StructTrain/TimeLearner/s11-stock-stopped-title-preview-a4/preview.png).
+Полный кэш: `/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-stopped-phasea-visual-a4/full-report-cache`.
+Остальные selected figures, полные cache hashes и публикация metadata остаются
+открытыми до завершения A4. Августовские результаты не пересматриваются.
+
+
+## Завершённый A4: полный render и selected20 visual QA
+
+A4 owner3648538 и selector3652241 закрыты успешно. Source43b2fbf7b прошёл
+6 plotting controls и3 production report readers. Все2684 primary files
+сравнены с Git до render; моделей повторно не рассчитывали. Полный кэш
+содержит14728 файлов:4450 trial-soma views и30 series PNG, соответствующие
+SVG/PDF, manifests и portable primary copies. В Git размещены metadata archive
+1,023,884B и20 выбранных PNG, без копии всего кэша.
+
+Proof `d262170b3c5665ecce3fd55c9e9277fcf204b7f3` независимо проверен:
+40 metadata members,414 exact source hashes, все20 PNG, cache inventories,
+вложенные manifests и source archiveSHA. Producer manual flags оставлены
+false; отдельно [зафиксирован реальный просмотр20](StockStoppedTemporalSelectedVisualQA.json).
+Просмотрен весь selected набор, включая все8 Classic-low soma1 overviews,
+target/foil остальных трёх состояний, четыре peak zoom и две local-Y детали.
+Ни manual QA всех остальных изображений, ни завершение Train не заявляются.
+
+[Читаемый отчёт с рисунками](../../../Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-visual-a4/REPORT.ru.md)
+содержит TP/FP/FN/TN, условия, шкалы, доказательства и команду воспроизведения.
+У LT spike event речь о штатном LTZone; **LTMembrane в этих моделях нет**.
+Малый local-Y хвост порядка1e-11 и отсутствие импульса внутри отдельного zoom
+не интерпретируются как большой ответ или потеря исходных входных данных.
+Это завершённая визуальная доставка диагностического наблюдения, не научный
+PASS классификации, не полный контроль порядка/ITI и не завершение этапа11.

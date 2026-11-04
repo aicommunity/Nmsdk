@@ -8,6 +8,28 @@ from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
 
 
 class PlotScaleTest(unittest.TestCase):
+    def test_actual_long_trial_title_fits_fixed_page_and_preserves_identifiers(self):
+        import matplotlib
+        matplotlib.use('Agg')
+        import matplotlib.pyplot as plt
+        from Scripts.StructTrain.TimeLearner.plotting import figure_title
+        text = ('Stopped Train: invalid_observation | phasea-row-0 | target | '
+                'Classic-threshold-low/stopped-phasea-diagnostic/rotation-0/0\n'
+                '$.Soma1.SumPotential | reset_per_trial\n'
+                'overview (shared Y) | valid=True, complete=True | model aeeb20de9f62')
+        fig = plt.figure(figsize=(12, 6), dpi=160)
+        try:
+            title = figure_title(fig, text)
+            self.assertEqual(''.join(title.get_text().split()), ''.join(text.split()))
+            bounds = title.get_window_extent(fig.canvas.get_renderer())
+            self.assertGreaterEqual(bounds.x0, .03*1920)
+            self.assertLessEqual(bounds.x1, .97*1920)
+            self.assertGreaterEqual(bounds.y0, .85*960)
+            self.assertGreaterEqual(title.get_fontsize(), 9)
+            self.assertEqual(fig.canvas.get_width_height(), (1920, 960))
+        finally:
+            plt.close(fig)
+
     def test_missing_backend_does_not_leave_partial_report(self):
         from Scripts.StructTrain.TimeLearner.reports import render_evaluation
         from Scripts.StructTrain.TimeLearner.probe_reports import render_probe, render_probe_set
