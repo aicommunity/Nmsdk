@@ -47,6 +47,7 @@ Job Read(const QString& path)
     j.input=Count(p["input_index"],0,j.model.inputs.size()-1);j.duration=Number(p["duration"]);j.gap=Number(p["maximum_sample_gap"]);
     j.minimumAmplitude=Number(p["minimum_amplitude"]);j.maximumSamples=Count(p["maximum_samples"],1,100000000);
     j.recordSpikes=Boolean(p["record_spikes"]);
+    Require(!j.recordSpikes,"native_probe_spike_capture_not_supported");
     const auto selection=Text(p["peak_selection"]);
     Require(selection=="isolated_window" || selection=="assigned_burst_wave","invalid_probe_selection");
     j.selection=selection=="isolated_window"?PeakSelectionPolicy::IsolatedWindow:PeakSelectionPolicy::AssignedBurstWave;
