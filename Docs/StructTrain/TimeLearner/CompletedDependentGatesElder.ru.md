@@ -19,3 +19,8 @@ RecognitionA3 очередь подтверждена живой; она ждё�
 Declaration fixture исправлен отдельным test-only commit `b7bb1dba24107cb310519e76da4933d67344fc46`: unauthorized{} вместо null допускает раннюю semantic validation, но не даёт authority для native process. Expected unknown_response_criterion и отсутствие output unchanged. A4 запущен на том же actual coordinator corpus; его итог проверяется отдельно и не исправляет A3 задним числом. После него требуется actual live6 и full coordinator/scorer regression.
 
 Эти инженерные gates не доказывают stock4/8 классификацию, independent frozen evaluation, LT/no-LT causal effect или завершение общего плана. Только этап0 полностью принят,1–12 частичны.
+
+
+Последующий fresh readback: corrected declaration A4 действительно завершён13/13 без ошибок/пропусков на sourceb7. Его полный primary bundle пока на worker; archive SHA/size и terminal сохранены в [progress metadata](../../../Reports/StructTrain/TimeLearner/s10-live-routing-retry-progress-a3/readback.json), отдельная полная публикация/проверка предстоит. Это не новый полный coordinator regression.
+
+Live routing A3 на том же packageb7 реально запущен: owner2311267/start338873654 свежо подтверждён живым, terminal отсутствовал. Сохраняются6 tests/10 ожидаемых managed native units и неизменяемый runtime baseline33fc. Модели не заменяются старым готовым графом; фактический результат не присвоен до завершения. Прежний liveA2 отказал из-за failed prerequisite и остаётся отдельной попыткой.
