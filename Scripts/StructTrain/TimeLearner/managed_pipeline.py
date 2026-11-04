@@ -229,8 +229,24 @@ def reconcile_pipeline(root):
         require(load(root/(pending+"-resolved-job.json")) == job,
                 "pipeline_prepared_job_changed")
         manifest = _audit_phase(root, pending, job, runtime["runtime_fingerprint"])
+        directory = root/"phases"/pending/"process"
+        context = load(directory/"reservation-context.json")
+        origin = Path(context["intent"]["intent"]["directory"])
+        require(tuple(origin.parts[-4:]) == ("phases", pending, "process", "contained"),
+                "pipeline_reconciliation_origin_changed")
+        owner = load(directory/"contained/request.json")["controller"]
+        if origin.parents[3].resolve() != root and owner["pid"] != os.getpid():
+            # A restored directory must not fork an attempt whose original
+            # coordinator is still running elsewhere. At the original root,
+            # the exclusive workflow lock already serializes its writers.
+            try:
+                fields = (Path("/proc")/str(owner["pid"])/"stat").read_text().rsplit(") ", 1)[1].split()
+            except (FileNotFoundError, ProcessLookupError):
+                fields = None
+            require(fields is None or fields[19] != owner["start_ticks"] or fields[0] in ("Z", "X"),
+                    "pipeline_reconciliation_original_controller_still_live")
         from .contained_process import inspect as inspect_contained
-        closure = inspect_contained(root/"phases"/pending/"process/contained")
+        closure = inspect_contained(directory/"contained")
         require(closure["all_processes_closed"], "pipeline_reconciliation_phase_still_live")
         _append(root, events, "reconciled_finished" if _phase_ready(pending, manifest)
                 else "reconciled_halted", pending,
