@@ -26,6 +26,13 @@ def supported_specification(spec):
         return False
     if spec["schema_version"] == 1:
         return set(spec) == FIELDS
+    if spec['schema_version'] == 3:
+        limits = spec.get('process_limits')
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits'} and
+                type(spec['cooperative_runtime_capture']) is bool and type(limits) is dict and
+                set(limits) == {'memory_bytes', 'tasks'} and
+                type(limits['memory_bytes']) is int and 0 < limits['memory_bytes'] <= 2**63-1 and
+                type(limits['tasks']) is int and 0 < limits['tasks'] <= 2**31-1)
     return (spec["schema_version"] == 2 and set(spec) == FIELDS | {"cooperative_runtime_capture"}
             and spec["cooperative_runtime_capture"] is True)
 
@@ -79,6 +86,8 @@ def run_native_gate(specification, output):
     require(type(spec["asan_options"]) is str and "\x00" not in spec["asan_options"], "invalid_native_gate_asan_options")
     wall = number(spec["maximum_wall_seconds"])
     require(wall > 0, "invalid_native_gate_wall_budget")
+    if spec['schema_version'] == 3:
+        require(1 <= wall <= 86400, 'invalid_contained_wall_budget')
 
     def resolve(key):
         value = spec[key]
@@ -101,16 +110,23 @@ def run_native_gate(specification, output):
                    for key in ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM")}
     environment.update(ASAN_OPTIONS=spec["asan_options"], TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"))
     with _environment(environment):
-        result = execute(runtime, ["--gtest_filter="+":".join(x.replace("/", ".") for x in expected),
+        runner, limits = execute, {}
+        if spec['schema_version'] == 3:
+            from .contained_runner import execute as contained_execute
+            runner, limits = contained_execute, spec['process_limits']
+        result = runner(runtime, ["--gtest_filter="+":".join(x.replace("/", ".") for x in expected),
                                   "--gtest_output=xml:"+str(output/"native.xml")],
                          executable.parent, output/"process", wall,
-                         cooperative_capture=spec.get("cooperative_runtime_capture", False))
+                         cooperative_capture=spec.get("cooperative_runtime_capture", False), **limits)
         verify_runtime(runtime)
     record = {"kind": "timelearner_native_test_gate_result", "schema_version": 1,
               "execution": result["execution"], "validity": "incomplete_test_observation",
               "assertion_status": "not_assessed", "reason": "native_result_not_available",
               "inventory": None, "scientific_verdict": None}
     try:
+        if spec['schema_version'] == 3:
+            require(result.get('schema_version') == 2 and result.get('ownership_scope') == 'bound_cgroup' and
+                    result.get('all_processes_closed') is True, 'native_gate_whole_group_closure_missing')
         require(result["runtime_provenance"] == "loaded_files_captured", "native_gate_loaded_runtime_missing")
         inventory = audit_junit(output/"native.xml", expected)
         require((inventory["assertion_status"] == "passed" and result["execution"] == "completed"

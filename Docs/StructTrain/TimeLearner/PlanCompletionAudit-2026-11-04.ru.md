@@ -10,7 +10,7 @@
 для нескольких fixtures, завершённый процесс и научный PASS различаются.
 Ни итоговая карта всех моделей, ни весь рефакторинг пока не завершены.
 
-## Согласованный develop
+## Принятая C++ основа до последующих Python merges
 
 | Репозиторий | Принятая исходная точка |
 |---|---|
@@ -18,6 +18,11 @@
 | PulseLib | `9ec4566d71bf56d4eeb5c8a920bbc683fcd85299` |
 | Rdk | `10e9d05aa658dd2203c89bc84ba9166595b50014` |
 | Bin | `99f58da9296a794374cef679bbb878cb62af979a` |
+
+Таблица фиксирует согласованный C++/native-probe snapshot, не текущий root HEAD.
+Последующие infrastructure Python merges до `1c51d0c23f1cee8fe0c59eceba872fcf30145235`
+не меняют эти child gitlinks. Источник конкретного runtime берётся из manifest
+его задания, а актуальный root HEAD — из Git, не из исторической таблицы.
 
 Root develop последовательно принял resource budgets, construction threshold/
 calibration и native probe/report acceptance. Merge commits сохранены; rebase,
@@ -111,3 +116,134 @@ construction threshold `cc97149c90ce98ff24ca688452f4a40d54e0e63d`: merge
 от9ec4566 с84e456d, без текстовых конфликтов. Его runtime/gates с ModelSpec2,
 config schema4, новым Rdk/root и optional C On ещё не выполнялись; исходный
 K1 не заменяет эти совместные проверки.
+
+## Ресурсы и явный recovery04.11
+
+Проверен узкий [closed-worker recovery](ClosedWorkerRecovery.ru.md):49/49
+реальных infrastructure controls на каждом сервере, с сохранёнными events,
+ledger readbacks и kernel closures. Он освобождает только lease первоначального
+main процесса той же закрытой cgroup. Старые outside-controller leases,
+автоматический dispatcher, полный journal и production wiring остаются открыты.
+Этап10 по-прежнему частичный.
+
+Подготовка joint normal a1 root9f92a40b/Pulsecc97149c на Elder была остановлена
+до configure/build/native probes: слишком глубокая цепочка Git alternates
+вызвала рекурсивные lazy fetch и достижение TasksMax128. Это ошибка доставки,
+а не отрицательный научный результат. Whole-worker unit явно остановлен;
+резерв оставлен held до отдельной проверяемой recovery, без ручного SQL.
+Новая исходная копия normal a2 доставлена самостоятельными shallow Git packs:
+rootcode и Pulsecode не имеют alternates; Docs/Reports явно не материализованы,
+остальные gitlinks пока не установлены. Это ещё не SDK/runtime и не gate PASS.
+
+На момент адресной проверки Elder имел23GiB свободно при95% заполнении.
+Удалены только1832 промежуточных `.o` четырёх закрытых старых CMake builds,
+815872568 bytes; подробный сжатый журнал включён в Elder recovery proof.
+Исходные данные, библиотеки, `_deps` и Git object donors сохранены.
+M40 имел84GiB свободно на system и393GiB на Data. Повторное утверждение,
+что последняя ошибка подготовки вызвана SSH, не подтверждено: SSH работает.
+
+Позднее04.11 резерв a1 действительно освобождён через проверенный API;
+точный владелец и released ledger сохранены в Git. [Подробный статус](JointPreparationRecovery.ru.md)
+фиксирует работающую normal a3 SDK compilation с тем же joint root9f92a40b,
+семью чистыми gitlinks и без alternates в новой копии. Native42 gate ещё
+не завершён. M40 K1 targeted34 прошёл по runner verdict,262 regression
+работает; полная primary/reader приёмка остаётся открытой. Ни один из этапов
+1–12 этими инфраструктурными подэтапами целиком не закрывается.
+
+Следующий принятый подэтап10 — [contained runner/native-gate schema3](ContainedRunner.ru.md):
+77/77 Python checks и2 реальных native C++ codec/storage cases на worker,
+normal/ASan, без skips. Новый gate сочетает actual loaded files, cooperative
+capture и закрытие всей cgroup; MainPID0 с живыми потомками наблюдается явно.
+Прежние gates schema1/2 и текущие long-running jobs не меняются. Это не перевод
+всех production Train/Test workers, полный scheduler или приёмка joint algorithms.
+
+Следующий source-аудит исправил смешение commit/index/working headers в
+[inventory schema2](InventorySnapshots.ru.md):10/10 tests на worker,
+byte-identical current catalog,217 declarations и231 path-selected оставшийся
+tool (root43/Bin188/Pulse0). Это нижняя граница для review, не разрешение
+удалить каждый файл без разбора и не завершение semantic/runtime matrix.
+
+Совместный normal42 gate root9f92a40b завершился с34 passed/8 failed:
+восемь новых ModelSpec2/C-history cases с construction/effective threshold100
+дошли до полных frozen observations без spikes, но общий fixture по суффиксу
+`_spiking` ошибочно ожидал положительный spike count для любого threshold!=1.
+Исходный failed результат сохраняется. Исправление expectations и повторная
+native приёмка ещё требуются; алгоритмический или scientific PASS не присвоен.
+На M40 отдельно работает **build-only** ASan joint SDK с одним compiler,
+memory cap4GiB и preflight MemAvailable>=36GiB. Он не запускает native gates;
+первоначальный K1 regression продолжает работу независимо.
+
+[Первичный failed42 gate](Joint42Failure.ru.md) независимо проверен и сохранён
+в Git:1205 members/510 source blobs,8 high100 graphs и32 полных frozen trials.
+Работает отдельный повтор normal44 root8021301e после явного исправления
+fixture expectations; old runtime/primary сохранены. Это pending native
+приёмка, не completed joint algorithms. Temporal report этих probes пока pending.
+
+Совместный [ASan build-only9f](JointASanBuild.ru.md) завершён и независимо
+проверен:65 members,510 source blobs совпадают с normal9f, четыре instrumented
+target flags и закрытая4GiB cgroup. Native gates0. Идёт отдельная инкрементальная
+build-only подготовка corrected8021301e в новом runtime; K1 продолжает работать.
+Компиляция и последующая численная/native приёмка учитываются раздельно.
+
+Актуализация после завершения normal44: [44/44 cases подтверждены](Joint44Acceptance.ru.md),
+включая восемь high100 negative и два low-threshold positive controls.
+Независимо проверены1275 archive members/510 source blobs; восемь графов
+и32 frozen observations совпадают с failed42 с учётом только абсолютного
+сдвига времени (остаток<=1.43e-14s). Прежние pending normal44 записи выше
+описывают предыдущий момент. Normal304 теперь запущен отдельно на том же
+неизменённом runtime; full304/readers/ASan joint native ещё не приняты.
+Компактный Git хранит primary5.87MB, без полного производного render cache.
+
+Corrected ASan build-only root8021301e также [завершён и проверен](JointASanBuild.ru.md):
+два приложения, четыре instrumented target flags,510 source blobs совпадают
+с normal44; native models0. Готовность сборки не закрывает pending ASan gates.
+
+Для joint normal44 построены [временные отчёты всех40 frozen trials](Joint44FrozenReports.ru.md):
+60 trial/soma pairs,5 production-reader checks без skips,80 выбранных PNG
+(10.4MiB) и full275-view cache на Data M40. Визуально просмотрены17 рисунков,
+представляющих все10 моделей; полный manual review всех views не заявлен.
+High100 controls: каждый TP0/FP0/FN2/TN2. Low0.0001 controls: каждый
+TP0/FP1/FN2/TN1 плюс ранний target response. Это отрицательные LT engineering
+контроли, не августовский stock replay и не science PASS. Молчание означает
+отсутствие LT spikes при ненулевой soma response. Этап11 по-прежнему частичный.
+
+[Native process policy portable checks](PipelinePolicyPortableAcceptance.ru.md):
+15/15 на M40,54 archive members/279 source blobs, повторное чтение двух
+реальных C++ process archives normal/ASan без нового расчёта. Pending worker
+integration source1fd77d34f не включён в develop. Перед production promotion
+нужны actual native job tests и учёт отдельных systemd units в lease release/
+recovery, с registration-before-launch и fault-проверкой. Whole cgroup
+управляющего worker сама по себе не доказывает завершение созданных им units.
+
+Требование учёта managed-unit graph теперь подтверждено [реальным fault baseline](WorkerUnitGraphBaseline.ru.md):
+isolated M40 recovery освобождает simulated runtime lease после parent closure,
+когда отдельно созданная child unit ещё жива. SQLite и свежие kernel records
+проверены; обе unit затем закрыты. Main registry/нейронные jobs не менялись.
+Исправление, registration-before-launch, aggregate caps и повтор этого fault
+case остаются обязательными до promotion source1fd77d34f. Этап10 не завершён.
+
+[Schema3 managed-unit reservations](ManagedUnitsM40Acceptance.ru.md): M40
+61/61, включая12 новых graph/cap/recovery cases и49 legacy controls. Fault
+parent-closed/managed-child-live теперь удерживает isolated schema3 runtime;
+после full graph closure освобождение подтверждено в SQLite. Приняты290
+members/279 source blobs/21 fresh unit closures, implementation34394c301
+ещё feature, не develop. Elder61 поставлен в ожидание normal304 slot; global
+M40 schema1 и действующие SDK неизменны. Production integration/остальные
+fault cases и весь этап10 остаются частичными.
+
+
+## Дополнение после восстановления связи и проверки дисков
+
+[Завершённые Elder gates](ElderCompletedGates-2026-11-04.ru.md): joint normal304/304
+и schema3 kernel61/61 завершились; первичные архивы и closures проверены на
+worker и локально и сохранены в Git. Дополнительные joint readers/ASan и
+production worker acceptance остаются открытыми. На Elder18GiB free/97% used,
+поэтому новые большие model jobs там не запускались. M40 Data387GiB free.
+Повторный запуск уже работающего K1 не выполнялся.
+
+
+[Managed native preflight acceptance](ManagedNativePreflightAcceptance.ru.md):
+Elder62/62 новых alias/resource controls, M4019/19 actual public preflight/
+portable checks. Предшествующая M4017/19 попытка сохранена с доказанными
+512MiB OOM. Это адресная приёмка evidence; code backend не promoted,
+Train→Test/production matrix и M40 повтор suite62 остаются pending.
