@@ -20,7 +20,7 @@ class ManagedNativeCalibrationReportsTest(unittest.TestCase):
         from PIL import Image
         source, output = Path(source), Path(output)
         output.mkdir(parents=True, exist_ok=False)
-        matrix_pairs = frozen_pairs = declared_matrix_pairs = 0
+        matrix_pairs = frozen_pairs = declared_matrix_pairs = declared_frozen_pairs = 0
 
         def check_matrix(folder, expected):
             manifest = load(folder/"manifest.json")
@@ -46,29 +46,38 @@ class ManagedNativeCalibrationReportsTest(unittest.TestCase):
             return len(pairs)
 
         for name in ("Classic-v1", "Classic-v2", "Branch-v1", "Branch-v2"):
-            for phase in ("measured-grid", "silent-nonseparable", "fresh-frozen"):
+            result = load(source/name/"result.json")
+            phases = ("measured-grid", "silent-nonseparable", "fresh-frozen")
+            if "changed_threshold_rollback" in result:
+                phases += ("rollback-frozen",)
+            self.assertEqual({p["operation"] for p in result["phases"]}, set(phases))
+            self.assertEqual({p.name for p in (source/name/"runs").iterdir() if p.is_dir()}, set(phases))
+            for phase in phases:
                 run = source/name/"runs"/phase
                 report = output/name/phase
-                fmt = "pipeline-run" if phase == "fresh-frozen" else "calibration-run"
+                run_manifest = load(run/"run-manifest.json")
+                source_model = load(run/run_manifest["source_package_path"])["configuration"]["model"]
+                channels = 1 if source_model["branch"] else len(source_model["inputs"])
+                job = load(run/"input/job.json")
+                frozen = phase in ("fresh-frozen", "rollback-frozen")
+                fmt = "pipeline-run" if frozen else "calibration-run"
                 stdout = io.StringIO()
                 with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stdout):
                     code = main(["report", str(run/"run-manifest.json"), "--format", fmt,
                                  "--output", str(report)])
                 self.assertEqual(code, 0, stdout.getvalue())
-                if phase == "fresh-frozen":
+                if frozen:
                     _, actual = load_evaluation(run/"native/evaluation.json")
                     frozen_pairs += check_matrix(report/"evaluation", actual)
+                    declared_frozen_pairs += len(job["trials"])*channels
                 else:
                     transaction = load(run/"native/transaction.json")
-                    job = load(run/"input/job.json")
                     self.assertEqual(len(transaction["candidates"]), len(job["thresholds"]))
                     manifest = load(report/"manifest.json")
                     expected = {f"candidate-{i:04d}": r["matrix"]["observations"]
                                 for i, r in enumerate(transaction["candidates"])}
                     if transaction["status"] in ("calibrated", "confirmation_failed"):
                         expected["fresh-confirmation"] = transaction["confirmation"]["observations"]
-                    model = job["source_recognition"]["source_solo"]["configuration"]["model"]
-                    channels = 1 if model["branch"] else len(model["inputs"])
                     declared_matrix_pairs += len(expected)*len(job["trials"])*channels
                     self.assertEqual({r["name"] for r in manifest["matrices"]}, set(expected))
                     for item in manifest["matrices"]:
@@ -78,5 +87,6 @@ class ManagedNativeCalibrationReportsTest(unittest.TestCase):
                     self.assertTrue(binding["run_audit"]["run_evidence_consistent"])
                 for path, digest in load(report/"SHA256SUMS.json").items():
                     self.assertEqual(hashlib.sha256((report/path).read_bytes()).hexdigest(), digest)
-        self.assertEqual(frozen_pairs, 24)
+        self.assertEqual(frozen_pairs, declared_frozen_pairs)
+        self.assertGreater(declared_frozen_pairs, 0)
         self.assertEqual(matrix_pairs, declared_matrix_pairs)
