@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "criterion": {
+    "id": "post_anchor_target_whole_window_foil_v1",
+    "anchor": "onset",
+    "begin_offset": 0,
+    "end_offset": null,
+    "reject_target_outside_window": true
+  },
+  "evaluation_spec_digest": "79f424fa15c9d5543530710eec142ef236ae343e58ba0f9360d31e18244390ad",
+  "coverage_policy": "per_trial_windows",
+  "run_id": "Classic-v2/managed-grid/silent-control/search/0",
+  "model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+  "declared_training_outcome": "exact",
+  "source_training_evidence_checked": false,
+  "calibration": {
+    "candidate_record": {
+      "algorithm": "explicit-native-threshold-v2",
+      "calibrated": false,
+      "ltzone_path": "$.LTZone",
+      "model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+      "original_threshold": 1,
+      "schema_version": 1,
+      "source_model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+      "source_recognition_sha256": "d430ed7afd1304ed8f46ff55a684f4c0fd54c73b5efc89545d4a1f5c10b14226",
+      "threshold": 1
+    },
+    "ltzone_path": "$.LTZone",
+    "protocol": "threshold-candidate-not-calibrated",
+    "source_solo_sha256": "46e368118a32c4ab90b614b77469b12b7aa39fd8eaf019f58a83c379dd95748f",
+    "status": "fixed",
+    "threshold": 1
+  },
+  "effective_threshold": 1.0,
+  "native_execution_verified": false,
+  "evaluation_verdict": null,
+  "invalid_trial_ids": [],
+  "calibration_probe": true,
+  "validity": "valid",
+  "reason": "complete_declared_evaluation",
+  "pooled_counts": {
+    "TP": 0,
+    "FP": 0,
+    "FN": 2,
+    "TN": 2,
+    "targets": 2,
+    "foils": 2,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 0.5,
+    "target_hit_rate": 0.0,
+    "foil_response_rate": 0.0
+  },
+  "by_reset_policy": {
+    "reset_per_trial": {
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "targets": 2,
+      "foils": 2,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 0.5,
+      "target_hit_rate": 0.0,
+      "foil_response_rate": 0.0,
+      "criterion_satisfied": false,
+      "criterion_assessed": true
+    }
+  },
+  "trials": [
+    {
+      "trial_id": "Classic-v2/frozen/managed-frozen/0",
+      "sample_id": "target",
+      "label": "target",
+      "presentation_index": 0,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.01,
+      "response_end": 0.4,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FN"
+    },
+    {
+      "trial_id": "Classic-v2/frozen/managed-frozen/1",
+      "sample_id": "foil",
+      "label": "foil",
+      "presentation_index": 1,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.4105,
+      "response_end": 0.8005,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "Classic-v2/frozen/managed-frozen/2",
+      "sample_id": "foil",
+      "label": "foil",
+      "presentation_index": 2,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 0.811,
+      "response_end": 1.201,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "TN"
+    },
+    {
+      "trial_id": "Classic-v2/frozen/managed-frozen/3",
+      "sample_id": "target",
+      "label": "target",
+      "presentation_index": 3,
+      "reset_policy": "reset_per_trial",
+      "response_begin": 1.2115,
+      "response_end": 1.6015000000000001,
+      "spike_count": 0,
+      "window_spikes": [],
+      "early_spikes": [],
+      "late_spikes": [],
+      "classification": "FN"
+    }
+  ]
+}
