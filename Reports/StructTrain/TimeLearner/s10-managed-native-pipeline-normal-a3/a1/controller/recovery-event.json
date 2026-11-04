@@ -1,0 +1,98 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "69b4b39a-60c2-44d5-bb51-2e7f8c91907c",
+  "job_id": "s10-managed-native-pipeline-normal-a1",
+  "recorded_unix": 1793792115.08235,
+  "administrator": {
+    "pid": 1926689,
+    "start_ticks": "336188483",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 1923446,
+    "start_ticks": "336178387",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "96386c87afc204c6b8781ee15d99a018424ac41baa71461601b136941ea2901e",
+      "unit": "timelearner-9933e37c-c03e-4897-8b84-97328f159a59.service",
+      "invocation_id": "0c73a5ddc95f4aa5ac3c3d4196dc0790",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9933e37c-c03e-4897-8b84-97328f159a59.service",
+      "initial_main_pid": 1923446,
+      "initial_start_ticks": "336178387",
+      "sha256": "3433a598d9b763b52c1ef0a1b09cd2e4c901a966c7b4f1301f060d28e9820326"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-9933e37c-c03e-4897-8b84-97328f159a59.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Failed pipeline expectations preserved: four actual cold Trains stopped without completed model. All four independently managed native units and exact controller freshly verified closed. Only global operational lease recovered; no success inferred.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+      "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
