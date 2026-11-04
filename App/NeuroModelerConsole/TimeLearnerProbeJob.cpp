@@ -146,6 +146,16 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         if(!controllerIdle)execution="unexpected_training_activity";
         artifacts.append(Write(output,"final-state.json",Signed({{"kind","native_probe_final_state"},{"schema_version",1},
             {"identity",final},{"parameters",Parameters(owner->ReadNativeParameters())},{"model_unchanged",unchanged},{"controller_idle",controllerIdle}})));
+        // Preserve the exact external request, just as the Train driver does.
+        // Its mere presence is not proof that it arrived before window closure.
+        const QString cancelPath=QDir(output).filePath("cancel.request");
+        if(QFileInfo::exists(cancelPath)) {
+            Require(!QFileInfo(cancelPath).isSymLink(),"probe_cancel_request_symlink");
+            QFile file(cancelPath);Require(file.open(QIODevice::ReadOnly) && file.size()<=65536,"probe_cancel_request_unreadable");
+            const auto bytes=file.readAll();
+            artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
+                {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
+        }
         Write(output,"execution.json",Signed({{"kind","timelearner_native_probe_execution"},{"schema_version",1},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},

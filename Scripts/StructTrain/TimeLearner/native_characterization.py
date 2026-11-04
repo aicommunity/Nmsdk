@@ -88,8 +88,12 @@ def audit_execution(directory):
             'evaluation_verdict', 'sha256'} and execution['kind'] == 'timelearner_native_probe_execution' and
             type(execution['schema_version']) is int and execution['schema_version'] == 1 and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
-    require(_artifact_records(directory, execution) == {'job.json', 'owner-configuration.json', 'initial-state.json',
-            'final-state.json', 'probe_trial_1.json', 'probe_trial_1.csv'}, 'characterization_artifact_closure_changed')
+    expected_files = {'job.json', 'owner-configuration.json', 'initial-state.json',
+                      'final-state.json', 'probe_trial_1.json', 'probe_trial_1.csv'}
+    if (directory/'cancel.request').exists():
+        require((directory/'cancel.request').stat().st_size <= 65536, 'characterization_cancel_request_too_large')
+        expected_files.add('cancel.request')
+    require(_artifact_records(directory, execution) == expected_files, 'characterization_artifact_closure_changed')
     require(all(execution[k] is False for k in ('training_started', 'search_executed', 'certificate_available')) and
             execution['evaluation_verdict'] is None, 'characterization_claims_training')
     require(execution['execution'] in ('completed', 'cancelled', 'timeout', 'model_tick_budget_exhausted', 'probe_rejected',
@@ -134,6 +138,16 @@ def audit_execution(directory):
             type(execution['observation_valid']) is type(execution['observation_complete']) is bool and
             execution['observation_valid'] == bool(observation and observation['valid']) and
             execution['observation_complete'] == bool(observation and observation['complete']), 'characterization_observation_flags_changed')
+    if execution['execution'] in ('cancelled', 'timeout', 'model_tick_budget_exhausted'):
+        # End-to-end binding to the native recorder's actual termination reason.
+        # A cancelled process or a file alone cannot manufacture a closed trial.
+        require(observation is not None and packet['native_status'] == 'rejected' and
+                execution['execution'] in packet['reasons'] and observation['end_reason'] == execution['execution'] and
+                observation['valid'] is False, 'characterization_interruption_not_observed')
+        if execution['execution'] == 'cancelled':
+            require('cancel.request' in expected_files, 'characterization_cancellation_request_missing')
+        if execution['execution'] == 'model_tick_budget_exhausted':
+            require(ticks == job['maximum_model_ticks'], 'characterization_tick_budget_not_reached')
     audit = audit_probe(packet, trace)
     if not audit['valid_observation']:
         observation, spec, _, samples, _, quality = read_partial_probe(packet, trace)
