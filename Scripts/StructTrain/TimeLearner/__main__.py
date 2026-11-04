@@ -123,7 +123,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
     pipeline = commands.add_parser("pipeline", help="managed Train/export/optional tuning/frozen Test with a durable boundary journal")
-    pipeline.add_argument("action", choices=("run", "continue", "audit"))
+    pipeline.add_argument("action", choices=("run", "continue", "audit", "reconcile"))
     pipeline.add_argument("directory", type=Path)
     pipeline.add_argument("--specification", type=Path)
     pipeline.add_argument("--runtime-manifest", type=Path)
@@ -276,13 +276,13 @@ def main(argv: list[str] | None = None) -> int:
     reuse.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
     if args.command == "pipeline":
-        from .managed_pipeline import run_pipeline, audit_pipeline
+        from .managed_pipeline import run_pipeline, audit_pipeline, reconcile_pipeline
         from .native_evidence import load, require, EvidenceError
         try:
-            if args.action == "audit":
+            if args.action in ("audit", "reconcile"):
                 require(all(v is None for v in (args.specification, args.runtime_manifest,
                                                args.process_policy, args.stop_after)), "pipeline_audit_execution_options")
-                result = audit_pipeline(args.directory)
+                result = (reconcile_pipeline if args.action == "reconcile" else audit_pipeline)(args.directory)
             else:
                 require(all(v is not None for v in (args.specification, args.runtime_manifest,
                                                    args.process_policy)), "pipeline_execution_inputs_required")

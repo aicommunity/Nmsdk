@@ -145,6 +145,11 @@ def _audit_phase(root, operation, expected_job, runtime_fingerprint):
     return manifest
 
 
+def _phase_ready(operation, manifest):
+    ready = manifest["execution"] == "completed" and manifest["validity"] == "valid"
+    return ready and (operation != "train" or manifest["analysis"]["completed_boundary"])
+
+
 def _scan(root, spec, events, runtime_fingerprint):
     require(bool(events) and events[0]["event"] == "created" and events[0]["phase"] is None
             and events[0]["payload"] == {"specification_sha256": digest(spec),
@@ -162,16 +167,25 @@ def _scan(root, spec, events, runtime_fingerprint):
                 "pipeline_journal_started_binding")
             pending = operation
         else:
-            require(pending == operation and event["event"] in ("finished", "halted"),
+            require(pending == operation and event["event"] in
+                    ("finished", "halted", "reconciled_finished", "reconciled_halted"),
                     "pipeline_journal_transition")
             job = _resolved_job(spec["phases"][index], root, completed)
             manifest = _audit_phase(root, operation, job, runtime_fingerprint)
-            require(event["payload"] == {"manifest_sha256": manifest["sha256"]},
+            reconciled = event["event"].startswith("reconciled_")
+            payload = event["payload"]
+            require(type(payload) is dict and set(payload) ==
+                    ({"manifest_sha256", "closure"} if reconciled else {"manifest_sha256"}) and
+                    payload["manifest_sha256"] == manifest["sha256"],
                     "pipeline_journal_manifest_changed")
-            ready = manifest["execution"] == "completed" and manifest["validity"] == "valid"
-            if operation == "train":
-                ready = ready and manifest["analysis"]["completed_boundary"]
-            require(ready == (event["event"] == "finished"), "pipeline_journal_outcome_changed")
+            if reconciled:
+                closure = payload["closure"]
+                binding = load(root/"phases"/operation/"process/contained/owned-unit.json")
+                require(type(closure) is dict and closure.get("all_processes_closed") is True and
+                        closure.get("binding") == binding, "pipeline_reconciled_closure_changed")
+            ready = _phase_ready(operation, manifest)
+            require(ready == (event["event"] in ("finished", "reconciled_finished")),
+                    "pipeline_journal_outcome_changed")
             pending = None
             if ready:
                 completed.append(operation)
@@ -195,6 +209,33 @@ def audit_pipeline(root):
             "completed_phases": completed, "pending_phase": pending, "halted_phase": halted,
             "pipeline_complete": len(completed) == len(spec["phases"]), "evaluation": evaluation,
             "scientific_verdict": None, "condition_identity_attested": False}
+
+
+def reconcile_pipeline(root):
+    """Acknowledge one closed, fully audited native phase; never execute it.
+
+    This does not release leases, repair torn journal records, or recover an
+    unfinished physical probe. A stopped Train remains a halted pipeline.
+    """
+    root = Path(root).resolve(strict=True)
+    with _lock(root):
+        spec = _validate(load(root/"specification.json"))
+        runtime = load(root/"runtime.json")
+        events = _events(root)
+        completed, pending, halted = _scan(root, spec, events, runtime["runtime_fingerprint"])
+        require(pending is not None and halted is None, "pipeline_no_phase_to_reconcile")
+        phase = spec["phases"][len(completed)]
+        job = _resolved_job(phase, root, completed)
+        require(load(root/(pending+"-resolved-job.json")) == job,
+                "pipeline_prepared_job_changed")
+        manifest = _audit_phase(root, pending, job, runtime["runtime_fingerprint"])
+        from .contained_process import inspect as inspect_contained
+        closure = inspect_contained(root/"phases"/pending/"process/contained")
+        require(closure["all_processes_closed"], "pipeline_reconciliation_phase_still_live")
+        _append(root, events, "reconciled_finished" if _phase_ready(pending, manifest)
+                else "reconciled_halted", pending,
+                {"manifest_sha256": manifest["sha256"], "closure": closure})
+        return audit_pipeline(root)
 
 
 def run_pipeline(specification, runtime_path, policy, output, *, resume=False, stop_after=None):
@@ -255,9 +296,7 @@ def run_pipeline(specification, runtime_path, policy, output, *, resume=False, s
             require(inspect_contained(root/"phases"/operation/"process/contained")["all_processes_closed"],
                     "pipeline_finished_phase_still_live")
             manifest = _audit_phase(root, operation, job, runtime["runtime_fingerprint"])
-            ready = manifest["execution"] == "completed" and manifest["validity"] == "valid"
-            if operation == "train":
-                ready = ready and manifest["analysis"]["completed_boundary"]
+            ready = _phase_ready(operation, manifest)
             _append(root, events, "finished" if ready else "halted", operation,
                     {"manifest_sha256": manifest["sha256"]})
             if not ready:
