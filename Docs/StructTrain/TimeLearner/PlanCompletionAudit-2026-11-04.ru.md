@@ -24,7 +24,7 @@
 | Managed normal full path | 8/8:четыре Exact N1 Train/export/frozen пути и четыре stopped/export-refusal controls;16 actual managed native units закрыты. [Scope и открытые пункты](ManagedNativePipelineAcceptance.ru.md). |
 | Managed frozen temporal reports | 1/1 на M40:24 trial–soma pairs,360 views;30 selected PNG в Git. При фиксированном threshold1.0 все4 случая TP0/FP0/FN2/TN2, успех классификации отсутствует. [Графики и ограничения](ManagedNativePipelineVisuals.ru.md). |
 | Managed measured calibration normal | 4/4 на Elder:реальные grids,confirmation,отдельный frozen Test и NonSeparable/source preservation при исходном1.0 (changed-threshold rollback здесь не проверен);12 native groups закрыты. Все4 инженерных N1 случая TP2/FP0/FN0/TN2 после same-matrix calibration; stock scientific PASS не заявляется. [Приёмка/ограничения](ManagedNativeCalibrationAcceptance.ru.md). |
-| Managed changed-threshold rollback normal | 4/4,16 actual native units, fresh restored model reproduces every sample/spike count; новый temporal report pending. [Scope и первичные данные](ManagedChangedThresholdRollbackAcceptance.ru.md). |
+| Managed changed-threshold rollback normal | 4/4,16 actual native units, fresh restored model reproduces every sample/spike count; temporal report1/1 принят,32 матрицы/192 trial–soma pairs/84 selected PNG. [Scope и первичные данные](ManagedChangedThresholdRollbackAcceptance.ru.md). |
 | Managed calibration temporal reports | 1/1 на M40:168 trial–soma pairs,2512 PNG;54 selected PNG в Git. [Галерея и ограничения](ManagedNativeCalibrationVisuals.ru.md). |
 | Общий lifecycle dispatcher | Baseline133 SDK802:119 passed/14 failed/0 skips, core18 passed. Cold fixture не получил certificate; candidate8644 не компилировался. Corrected baseline33fc собирается отдельно. [Полный отрицательный readback](Baseline133PrerequisiteReadback.ru.md). |
 | Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
@@ -333,3 +333,9 @@ Root33fc48278cff860d20c570cb703198847f028065/Pulsecc — только испра
 ## Pending coordinator/render и единая A/B test-постановка
 
 [Точные два jobs/handles](../../../Reports/StructTrain/TimeLearner/s10-coordinator-and-rollback-render-pending-a1/jobs.json):M40 строит все4 phase reports changed-threshold corpus, включая rollback-frozen; Elder ожидает свободного ресурса для8 actual production coordinator checks/20 units. Root1eab24de/Pulse8644 подготовлен с теми же Tests/App/CMake, что corrected baseline33fc. Ни candidate dispatcher, ни coordinator, ни новый render по этой записи ещё не приняты. Полный исходный план и scopes независимой оценки сохраняются.
+
+## Принята галерея changed-threshold rollback
+
+[Новый report gate1/1 и выборочная визуальная проверка14 видов](ManagedChangedThresholdRollbackVisuals.ru.md):32 матрицы,192 trial–soma pairs,2872 PNG в воспроизводимом M40 cache;84 PNG и manifests опубликованы компактно. Для всех четырёх случаев calibrated frozen TP2/FP0/FN0/TN2, rollback-frozen TP0/FP0/FN2/TN2. Возвращённое молчание — проверка восстановления, не classifier PASS. Ранее queued render теперь завершён; исходные queued записи сохраняют историю. Только этап0 полностью принят.
+
+Coordinator source2cc остаётся queued на Elder; готовый reconciliation candidate970dd48a716a065583b1de197e49df4ac6f0895d с7 actual-corpus проверками пока не развёрнут и не исполнен. Он не изменяет immutable запущенное задание. Полная fault/cancel/reboot матрица, ConditionSpec и публикация остаются открытыми.
