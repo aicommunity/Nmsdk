@@ -6,7 +6,7 @@
 
 Зависимый candidate build A1 корректно отказался до создания SDK/lease; Pulse8644 не компилировался и не исполнялся. Independent rollback A1 тоже не запускал модели/не создавал lease: его условие ошибочно требовало recovery-event у candidate, который вообще не резервировал ресурсы. Ошибка dependency handling сохранена, общее различение lease_not_created/released остаётся задачей scheduler. Для независимого rollback A2 выбран уже закрытый metadata predecessor с фактическим release; сама проверка и runtime не изменены.
 
-Elder metadata gate затем подтвердил все141 candidate migration records, отказал negative tree с возвращённым старым файлом и проверил exact36 changed paths/unchanged runtime code и child gitlinks. M40 ещё ожидается; в develop сохраняется принятый manifest121 records, удаление20 cable/E1 scripts не объединено.
+Elder metadata gate затем подтвердил все141 candidate migration records, отказал negative tree с возвращённым старым файлом и проверил exact36 changed paths/unchanged runtime code и child gitlinks. На момент этого readback M40 ещё ожидался. Затем [M40 gate и merge группы](CableFamilyRetirement.ru.md) завершены: текущий manifest141 records,20 cable/E1 scripts удалены без копий/wrappers.
 
 Независимо проверены24 опубликованных файла,814 archive members и1202 source Git blobs:319 baseline,320 uncompiled candidate,286 rollback A1,277 history utility. [Receipt](Baseline133PrerequisiteVerification.json). Все созданные operational leases released после kernel closure; у двух failed prerequisites lease не создавался.
 

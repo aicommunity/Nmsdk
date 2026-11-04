@@ -16,6 +16,7 @@
 
 | Проверка | Фактический итог и границы |
 |---|---|
+| Миграция cable/E1 | Принята группа20 scripts:141 records на обоих workers, negative restored-path controls, exact36-file scope. Текущий остаток197 (9 root/188 Bin), нижняя граница; общий этап9 не закрыт. [Приёмка](CableFamilyRetirement.ru.md). |
 | Joint normal focused | 44/44; ошибочный исходный42 сохранён отдельно. |
 | Joint normal full | 304/304 на Elder; полные первичные данные опубликованы. |
 | ModelSpec2 fresh-process replay | 8/8 Classic/Branch×N0/N1×C-Off/On; actual soma/input CSV побайтно совпадают с исходными paired observations. |
@@ -355,3 +356,7 @@ Candidate289a28ee73f4812fc860de88883ac469cf3e5516 добавляет отдел�
 ## Pending minimum native sample window
 
 Сверка preflight с NativeRecognitionObservationValidation.cpp выявила missing ticks>=1: slack округления сам по себе допускал окно около нуля шагов. Candidate df5e06800ca57a65a66e8f401c23e192d39d8778 добавляет явный минимум и проверки subtick/fractional/overflow без изменения physical tolerances. [Gate13](../../../Reports/StructTrain/TimeLearner/s10-managed-declaration-queued-normal-a2/job.json) поставлен после полного закрытия live-routing worker; native моделей в нём нет. Прежние pinned gate11/source427 и live6/source289 не менялись. Новое исправление пока AST-only и не принято в develop.
+
+## Cable/E1 migration принята после M40 A2
+
+M40 gate141 и negative restored-path control прошли на том же source1d5; полный scope36 и production trees проверены. Вместе с прежним Elder141 это разрешило merge20 исторических script removals: [приёмка и retrieval](CableFamilyRetirement.ru.md). Текущий manifest141 records (139 retired/2 moved), complete=false; нижняя граница оставшихся scripts197 (9 root/188 Bin). Прежняя queued A1 запись историческая: M40 A1 отменён до reserve/checks, A2 ограничен512MiB и использовал непересекающиеся с ASan пути. K1 не прерывался. Эта приёмка не подтверждает runtime equivalence исторических моделей и не закрывает весь план.
