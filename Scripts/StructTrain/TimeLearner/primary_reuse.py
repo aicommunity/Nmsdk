@@ -14,7 +14,7 @@ import subprocess
 import tarfile
 
 from .native_calibration_worker import _digest, _signed, _write
-from .native_evidence import count, load, require
+from .native_evidence import EvidenceError, count, load, require
 
 LIMIT = 2*1024**3
 
@@ -42,7 +42,14 @@ def _records(records):
 def _git_archive(repository, reference):
     require(type(reference['commit']) is str and re.fullmatch('[0-9a-f]{40}', reference['commit']), 'reuse_requires_full_git_commit')
     path = _name(reference['archive_path'])
-    raw = subprocess.check_output(['git', '-C', str(Path(repository).resolve(strict=True)), 'show', reference['commit']+':'+path])
+    prefix = ['git', '-C', str(Path(repository).resolve(strict=True))]
+    obj = reference['commit']+':'+path
+    try:
+        size = int(subprocess.check_output(prefix+['cat-file', '-s', obj], stderr=subprocess.PIPE))
+        require(0 < size <= 512*1024**2, 'reuse_reference_compressed_budget_exceeded')
+        raw = subprocess.check_output(prefix+['show', obj], stderr=subprocess.PIPE)
+    except subprocess.CalledProcessError as error:
+        raise EvidenceError('reuse_git_archive_unavailable') from error
     require(0 < len(raw) <= 512*1024**2, 'reuse_reference_compressed_budget_exceeded')
     if 'archive_sha256' in reference:
         require(hashlib.sha256(raw).hexdigest() == reference['archive_sha256'], 'reuse_git_archive_changed')
