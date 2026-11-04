@@ -1,0 +1,111 @@
+{
+  "workers": [
+    {
+      "host": "elder",
+      "proof_commit": "7d5604cdd60fbb5b024f86326843bbb74a76e6f6",
+      "source_root": "07ff1081f88dd020eafa345c3dc0cf4594a0941c",
+      "members_verified": 145,
+      "source_blobs_verified": 323,
+      "archive_bytes": 122256,
+      "archive_sha256": "a17f0fc2c4dffcbda8b705490867fafd1e76e469191d44ed2bcbd73c8da1af82",
+      "readers": {
+        "tests": 9,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "observations": [
+        {
+          "name": "Classic-completed",
+          "samples": 521,
+          "execution": "completed",
+          "probe_wall_seconds": 0.196339198
+        },
+        {
+          "name": "Classic-timeout",
+          "samples": 1,
+          "execution": "timeout",
+          "probe_wall_seconds": 0.0406111
+        },
+        {
+          "name": "Classic-cancelled",
+          "samples": 274,
+          "execution": "cancelled",
+          "probe_wall_seconds": 0.125162078
+        },
+        {
+          "name": "Branch-completed",
+          "samples": 521,
+          "execution": "completed",
+          "probe_wall_seconds": 0.146878705
+        },
+        {
+          "name": "Branch-timeout",
+          "samples": 1,
+          "execution": "timeout",
+          "probe_wall_seconds": 0.028265167
+        },
+        {
+          "name": "Branch-cancelled",
+          "samples": 419,
+          "execution": "cancelled",
+          "probe_wall_seconds": 0.12862821
+        }
+      ]
+    },
+    {
+      "host": "m40",
+      "proof_commit": "a7a1407f138adc5b652f23bd7a5501d2202eacdc",
+      "source_root": "07ff1081f88dd020eafa345c3dc0cf4594a0941c",
+      "members_verified": 145,
+      "source_blobs_verified": 323,
+      "archive_bytes": 131872,
+      "archive_sha256": "70d684669472d99cdbb497abd854b1db0f2f1116f4d27589b99c9c4c38798d7e",
+      "readers": {
+        "tests": 9,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "observations": [
+        {
+          "name": "Classic-completed",
+          "samples": 521,
+          "execution": "completed",
+          "probe_wall_seconds": 1.028493651
+        },
+        {
+          "name": "Classic-timeout",
+          "samples": 1,
+          "execution": "timeout",
+          "probe_wall_seconds": 0.234915147
+        },
+        {
+          "name": "Classic-cancelled",
+          "samples": 273,
+          "execution": "cancelled",
+          "probe_wall_seconds": 0.634953285
+        },
+        {
+          "name": "Branch-completed",
+          "samples": 521,
+          "execution": "completed",
+          "probe_wall_seconds": 0.690812806
+        },
+        {
+          "name": "Branch-timeout",
+          "samples": 1,
+          "execution": "timeout",
+          "probe_wall_seconds": 0.161599217
+        },
+        {
+          "name": "Branch-cancelled",
+          "samples": 413,
+          "execution": "cancelled",
+          "probe_wall_seconds": 0.611193816
+        }
+      ]
+    }
+  ],
+  "scientific_verdict": null
+}

@@ -275,3 +275,54 @@ Pulse develop9ec4566 сохраняет tested Core541bf89; root App/Tests/CMake
 фиксирует сравнение с обоими tested roots и область18 threshold +8 calibration
 +7 readers на worker. Нового численного запуска не заявляется. Остальные
 feature branches, полная physics/mode матрица и общий план остаются открытыми.
+
+Уточнение 04.11.2026: новые configured V2 и полный инженерный путь
+Train→export→calibration→fresh frozen import уже реализованы и проверялись
+в отдельных ветках; прежние утверждения выше фиксируют состояние своих
+подэтапов. Это не завершение всех режимов исходного плана. Текущая добавленная
+возможность — [штатная проба без Train](NativeCharacterizationProbe.ru.md):
+восемь real native cases и пять primary readers на Elder, 121 исходный файл
+контрольного холодного Train не изменился после выделения общего writer.
+Те же восемь проб и пять проверок данных прошли на M40 под ASan,
+detect_leaks=0; 121 файл холодного Train также совпал с исходным ASan контролем.
+Отдельные cancel/wall-budget controls тоже пройдены на обоих worker:
+по шесть реальных запусков и девять проверок данных; подробности и ограничения
+в том же документе. Причинное исследование stock-границ ещё открыто: cold
+preflight с совпадающими L/Ns/Rs не воспроизвёл весь архивный граф, поэтому
+контроль Rs остановлен до полного native import сохранённой модели.
+
+Последующая проверка04.11: [полный stopped import и Rs controls](StoppedStateResistanceControls.ru.md)
+уже выполнены на Elder и M40 ASan. При одинаковых абсолютных часах модели
+изменение Rs повышает амплитуду, но оставляет три максимума вместо четырёх.
+Архивный граф и controller history сохранены; шесть source, четыре matched и
+четыре reuse readers на каждом worker прошли. Compact primary восстанавливает
+все3671 файла побайтно из новых файлов и указанного Git archive. Девять
+выбранных рисунков приняты визуально. Это диагностический отрицательный
+результат для одного паттерна, без Train/certificate/classification verdict.
+[Warm-phase interruption](NativeProbePhases.ru.md) принят отдельным последующим
+набором: по12 real imported jobs,7 readers и2 cold regressions на каждом worker.
+Побайтное восстановление всех7362 primary files, неизменные cold traces и
+фактические libasan maps M40 проверены. Научная матрица и полная приёмка этапов
+остаются открытыми.
+
+
+Дополнение04.11 по визуальной приёмке: полный stock stopped report A3
+прошёл3/3 readers, но просмотр выявил обрезанный trial ID. Исправление
+43b2fbf7b прошло6/6 plotting controls на M40. Один исправленный1920×960
+preview принят визуально; [статус и ограничения](StockStoppedEvaluation.ru.md).
+A4 заново формирует все80 trial-soma pairs из byte-equal2684 primary files.
+Генерация ещё идёт; весь отчёт и научная классификация не приняты.
+
+Отдельный downstream C-search ASan K1 (root69789b8cb / Pulse84e456d)
+создаёт новый SDK runtime на M40 Data. Декларация34 targeted +262 full native
++119 readers; сейчас идёт сборка. Он не подменяет normal/ASan приёмку
+объединённой модели с initial-threshold и актуальным Rdk. Полные этапы1–12
+остаются частичными; завершённые адресные gates не означают завершения плана.
+
+
+Последующее завершение04.11: stock stopped A4 render6+3 checks принят,
+20 selected PNG просмотрены и опубликованы с точными hashes.
+[Читаемый отчёт](../../../Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-visual-a4/REPORT.ru.md)
+включает восемь паттернов и TP/FP/FN/TN. Полный80-pair кэш остаётся на M40;
+no-LTMembrane, incomplete Train, fixed threshold и отсутствие scientific
+verdict сохранены. Вся матрица этапа11 и общий план остаются открытыми.
