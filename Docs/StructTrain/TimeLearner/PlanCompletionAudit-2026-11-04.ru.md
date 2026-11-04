@@ -214,3 +214,10 @@ integration source1fd77d34f не включён в develop. Перед productio
 нужны actual native job tests и учёт отдельных systemd units в lease release/
 recovery, с registration-before-launch и fault-проверкой. Whole cgroup
 управляющего worker сама по себе не доказывает завершение созданных им units.
+
+Требование учёта managed-unit graph теперь подтверждено [реальным fault baseline](WorkerUnitGraphBaseline.ru.md):
+isolated M40 recovery освобождает simulated runtime lease после parent closure,
+когда отдельно созданная child unit ещё жива. SQLite и свежие kernel records
+проверены; обе unit затем закрыты. Main registry/нейронные jobs не менялись.
+Исправление, registration-before-launch, aggregate caps и повтор этого fault
+case остаются обязательными до promotion source1fd77d34f. Этап10 не завершён.
