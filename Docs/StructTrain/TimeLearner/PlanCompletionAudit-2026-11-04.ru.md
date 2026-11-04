@@ -247,3 +247,33 @@ Elder62/62 новых alias/resource controls, M4019/19 actual public preflight/
 portable checks. Предшествующая M4017/19 попытка сохранена с доказанными
 512MiB OOM. Это адресная приёмка evidence; code backend не promoted,
 Train→Test/production matrix и M40 повтор suite62 остаются pending.
+
+
+## Принятый пакет theory/sim
+
+[14 исторических исходников](TheoryScriptRetirement.ru.md) удалены из Docs
+без wrappers; модели данных, отчёты и прежние научные критерии сохранены.
+Manifest121 records (119 retired,2 moved), complete=false, проверен на обоих
+workers с restored-path Git-tree negative control. После этого адресного
+удаления прежний path-based остаток231 уменьшается до217 (29 root,188 Bin).
+Это поправка к историческому inventory, не новая общая semantic/runtime приёмка.
+
+
+## Исправленная регрессия analysis CLI
+
+[Коллизия имени analyze](AnalysisDispatchRegression.ru.md) исправлена отдельным
+alias import; production5 checks прошли на каждом worker по настоящим native
+данным. На Elder дополнительно исполнены два readonly native controls; на M40
+выполнен повторный анализ тех же Git primaries, без нового native запуска.
+Совместные readers124/ModelSpec2 fresh-process coverage и joint ASan остаются
+открытыми; этот hotfix не является их приёмкой.
+
+
+## Joint readers: приёмка остаётся открытой
+
+[Точные результаты и следующий gate](JointReaderOpenGates.ru.md): source802
+reader119 и source4c reader124 не прошли. CLI shadowing исправлен отдельно,
+но для новых восьми ModelSpec2 recognition cases ещё нужен настоящий
+fresh-process replay, затем полный reader gate. Недостающий domain fixture
+получен в отдельном native2, не добавлен задним числом в старый native304.
+Все failed attempts сохранены в Git; algorithm feature/joint ASan не приняты.

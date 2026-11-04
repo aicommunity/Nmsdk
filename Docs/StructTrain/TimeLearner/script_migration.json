@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -2002,6 +2002,272 @@
       "replacement": null,
       "reason": "Historical br480 Phase10 tip-R retry with manual XML overlays and fixed four-input tips; malformed amplitudes become zero and foil values above target are omitted from midpoint selection.",
       "original_results": "preserved; archive_commit is a retrieval snapshot, not a claim about experiment execution source"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/evalset.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "fa4fa5344ebb5876acc2c81bdb84dcb7edcf78b4",
+      "content_sha256": "2dcd8cab5329f9285c25a2f2799c191f68e4480ed0ec1b6b39a972a742b3d265",
+      "bytes": 1417,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/evalset.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/evalset.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/figs.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "3fa9cdf87a8062b758eab6419f593fe0d5ca4130",
+      "content_sha256": "9f4e4ccd135b9ef3613f01e91a5ca7fbdfa5c92a96047bea8dedf4be3f65126b",
+      "bytes": 3797,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/figs.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/figs.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/klib.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "534663bfa8a756078f88cdae6f8cdc57767668d0",
+      "content_sha256": "db0834ffc5bb099a8d25361020b6488f8e67dc5afa28b087d845363a043e92d5",
+      "bytes": 846,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/klib.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/klib.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/model.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "10c12a918e1f17a1ae025e7ccfbbad5a52aac6a5",
+      "content_sha256": "7d462a75f6653bee76b5e14824e656e424794accbb331aa61d087d2f4617a74e",
+      "bytes": 2442,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/model.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/model.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_base.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "f3bfb517b7c10b108bff6f1962c26d986e4c662a",
+      "content_sha256": "0ec44d0488a48d5133a4a124615d5541e8698c95bd1581a17d3c43caf25d5151",
+      "bytes": 2093,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_base.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_base.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_collapse.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "fb8678f462c7b96462eb6c48478445862431114d",
+      "content_sha256": "7cc9ecffb1967cb7765f7d61f99381c3a5b01675edd73b12b0600c2fdefd42f6",
+      "bytes": 868,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_collapse.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_collapse.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_ei.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "956d0e611b9b58f0db3d2f0c9a6cbeb61c860640",
+      "content_sha256": "434fdcc829049b5f0c17c76c1f3971153f72f4269370acacdbf2c5766729d83a",
+      "bytes": 1236,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_ei.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_ei.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_fast.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "edc611d36a098c3f7cbce8d867829458fa2b64a4",
+      "content_sha256": "85020ac0ba71e2cbd4926e2be952a40d6a31794037a72d4b5a01b0b0d6588379",
+      "bytes": 987,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_fast.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_fast.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_hp.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "ecbb6e6d636890f10dd6c7ff1b9bd8e5de01f10b",
+      "content_sha256": "b1bfa352c34567d6af74f7d9ac9cdf08bfd2f07e073cd1913cbd5cf436b33c6e",
+      "bytes": 958,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_hp.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_hp.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_iti.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "148a27fa9686305fb374cee6f58235389f082853",
+      "content_sha256": "8154aa6479a93c105fa444a3b4fa54c1d2a50fa8b8a25d3540ef3cd9ad3c3449",
+      "bytes": 1187,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_iti.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_iti.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_tau.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "976900a3eb65a80c491261dbd9b2208dadc22c82",
+      "content_sha256": "16b30ccb92fb9fbb264dc5347b7c491277a1ccd015172fecef168378283817cb",
+      "bytes": 1023,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_tau.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/run_tau.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/segsim.c",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "c056db75d73eb03a63c2d2e76810b5735838b47e",
+      "content_sha256": "678bdad3fd95eecf3de66f4601df65621c95cb2dce0fe933d7d10e53dfec77fc",
+      "bytes": 2949,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/segsim.c",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/segsim.c"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/theory1.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "dd855786715b9af6692556a7a4a94e9968a10865",
+      "content_sha256": "b66f9ea6283e1d2d31715044f919bab69e438ecf120925ec600f4548e2bd810f",
+      "bytes": 2308,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/theory1.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/theory1.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
+    },
+    {
+      "repository": "root",
+      "old_path": "Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/theory2.py",
+      "action": "retired_historical",
+      "archive_commit": "8b231dae9c9be8405c561ace76a0d2730c49c076",
+      "last_change_commit": "34fa0aba45297968a5386df9ef0e6cfdb9b3bf0d",
+      "blob_sha1": "50a2e357933d784d53db04a5346236ad2f43579b",
+      "content_sha256": "c68104e9b7d78adcd69a250053b7a8343880f89e50a73c1507670ca889c37550",
+      "bytes": 3761,
+      "archive_url": "https://github.com/aicommunity/Nmsdk/blob/8b231dae9c9be8405c561ace76a0d2730c49c076/Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/theory2.py",
+      "retrieval_command": [
+        "git",
+        "show",
+        "8b231dae9c9be8405c561ace76a0d2730c49c076:Docs/Audit/TimeLearner-2026-09-26-review/theory/sim/theory2.py"
+      ],
+      "replacement": null,
+      "reason": "Historical standalone signal-shape theory/sweep family with fixed outputs and import-time execution; no native Rdk lifecycle/storage or production CLI integration. Retrieve complete family from pinned snapshot.",
+      "original_results": "preserved; retrieval snapshot is not a claim of native runtime equivalence"
     }
   ],
   "reference_review": {
