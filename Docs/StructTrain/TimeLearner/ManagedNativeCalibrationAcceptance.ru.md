@@ -34,3 +34,8 @@ Proof `6d1e36ff2c990eace565745db52703fbea231ed9`, parent accepted8b231dae9. [Pri
 Silent-only control использовал исходный порог1.0. Это проверка NonSeparable и сохранности исходного состояния; она не доказывает откат после фактического изменения порога. Соответствующая managed-проверка остаётся открытой.
 
 Implementation branch пока не merged в develop. Эти данные закрывают normal-подэтап managed calibration, не весь этап8/10. Открыты M40 ASan/kernel62 и actual pipeline/calibration, актуальный joint SDK, положительные N0 и остальные profiles/modes, owned PostTune/live finalization, cancellation/recovery и общий production dispatcher. Все этапы1–12 остаются частичными.
+
+
+## Следующая проверка фактического отката
+
+Усиленный source `c411920ed7cce979a1d90be3f4e9e5cdd3c9145a` требует отличающегося порога/revision кандидата и fresh native frozen replay возвращённой модели с совпадением полных samples. [Постановка16 units](../../../Reports/StructTrain/TimeLearner/s10-managed-changed-rollback-queued-normal-a1/job.json). Worker2018363/start336793428 ожидает закрытия предыдущего задания; фактического результата ещё нет. Этот открытый пункт не считается закрытым очередью или AST-проверкой.
