@@ -39,3 +39,8 @@ Implementation branch пока не merged в develop. Эти данные за�
 ## Следующая проверка фактического отката
 
 Усиленный source `c411920ed7cce979a1d90be3f4e9e5cdd3c9145a` требует отличающегося порога/revision кандидата и fresh native frozen replay возвращённой модели с совпадением полных samples. [Постановка16 units](../../../Reports/StructTrain/TimeLearner/s10-managed-changed-rollback-queued-normal-a1/job.json). Worker2018363/start336793428 ожидает закрытия предыдущего задания; фактического результата ещё нет. Этот открытый пункт не считается закрытым очередью или AST-проверкой.
+
+
+## Уточнение после actual A2
+
+[Реальный changed-threshold rollback и fresh restored response](ManagedChangedThresholdRollbackAcceptance.ru.md) прошли4/4 normal на Elder:16 native units, исходный пакет и все записанные waveform samples восстановлены. Это закрывает конкретное ограничение прежнего inherited-threshold control. A1 с ошибкой prerequisite/no-lease сохранена в [readback](Baseline133PrerequisiteReadback.ru.md); она не запускала модели. Новые temporal reports и полная mode/ASan/recovery matrix пока открыты.
