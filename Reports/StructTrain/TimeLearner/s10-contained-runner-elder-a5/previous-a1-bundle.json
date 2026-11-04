@@ -1,0 +1,1563 @@
+{
+  "members": {
+    "owned-tests.json": {
+      "bytes": 44,
+      "sha256": "bc9de6ba53a1daab8fe11c7ea3a0c881f5659ab06fa030122a9cd4aef8c6cabe"
+    },
+    "source-hashes.json": {
+      "bytes": 37685,
+      "sha256": "2e4c6081d8a5f29fdf79348fad7b9b8114a180fc9cf06bb0c93653afef6c7f58"
+    },
+    "tests.log": {
+      "bytes": 10804,
+      "sha256": "c1ca058338e3638d1f260e867ed9669c0528c184691d0952342b62872b04888e"
+    },
+    "terminal.json": {
+      "bytes": 106,
+      "sha256": "95e0c7e306049c6c660e7e9948bbfa311db008b2e89575bb1e496f77c67d60eb"
+    },
+    "owner.json": {
+      "bytes": 44,
+      "sha256": "6f72607c425c5ee3d861f035cd299d1bec11e59ff4caf24675a0c70b67909635"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/reserve.py": {
+      "bytes": 676,
+      "sha256": "5832a023c1195d02a1cd1ae6bfe72e52cc9a876588be2259c2695f675ba34f95"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/lease.json": {
+      "bytes": 536,
+      "sha256": "e12b02d3a8a4a8e59f69aaf7298bc3bf02d49a6706695dde480d204fc8dc7410"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/recovery-event.json": {
+      "bytes": 2304,
+      "sha256": "5b58616fbbda9d9faecd878cb134b990960097e97c33942e3c164259c30f4bca"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/recovery-ledger.json": {
+      "bytes": 1540,
+      "sha256": "668d9d30a3d0dee26fee48065a633dad451fd861cfcaebf2fb2a7bf0a26b26dd"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "58e5e6812888589438b4a3c24e67961fd9b4137b081a310e49201b71aa629cbd"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "7afbc55f1417357cbac095fcad4e4e1a2a66d88d1858710ca41ae9c60a1570f9"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "74167a50475b56b5e3064ab27f2500bc5d414730f7360b0a5b88bc7e57d1dc0f"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "7bd8c95ae3bae7c540ec368bfebfbd5efca7a06f5d99fe91fbf2ce70ca397a4d"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "75479f5fd4d874afa980626b70278dd9d6aee47d4e089aa4171a6af98c294865"
+    },
+    "cgroups/test_live_descendant_refuses_then_closed_group_recovers_and_persists_budget/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "b36931021ccab384055f27dfc63d65b3ebe94bf30583c2b1fe4a3efec878058e"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/request.json": {
+      "bytes": 828,
+      "sha256": "ea6166db5b464bc961efd444fc0cfa100e3346f649bcfc0b5ce25359b447683c"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/stderr.log": {
+      "bytes": 13,
+      "sha256": "655ebb9f4f76f4a77876c73b8a64e3cb2891e5f23a781f6913c9122c71b4b5c7"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "9838115318c7cea4bb919df0e82ba01d6e5adeabcf70ad2ed3c5f0976cb2186d"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/stdout.log": {
+      "bytes": 13,
+      "sha256": "2adfc351dfa316e5bb459f0bde7ab327654b33267c2e2d12432b07c9bf927cac"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "15bedba66f1bc4ea1b11e4c5ea800ab3cd5843cb78df8cde5ecd452d74e154b7"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "d1cef32c677e15a22ea9234dae3b3db074c03f50ccd25b9d36c50c7628f56420"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/test-final-membership.json": {
+      "bytes": 1297,
+      "sha256": "822cead61fb8fc493bbc7a4fa02152c95bceae34a0328289bc851229fa88a9b2"
+    },
+    "cgroups/test_nonzero_exit_and_actual_stdout_stderr_are_preserved/attempt-0/runtime.json": {
+      "bytes": 1768,
+      "sha256": "4de93a98fc56ef0ab46e6352cee6809ab4e76f1e5f860797ac70cb089fd8b7ff"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/child.json": {
+      "bytes": 16,
+      "sha256": "918ca9f5011abdc899f39b39fc7059ba4d8c73e2f9449a2e08b11994d3b4844c"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/fork.py": {
+      "bytes": 224,
+      "sha256": "b31fceec383df0d84a7628e75f35c553f83f65da38b9dfe3cfe2822ae8d69aed"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/request.json": {
+      "bytes": 805,
+      "sha256": "79253e6eba57390036e8cafdf6e2a6deae4346ae5261cb84147b90871331b430"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "34d289af7b3f0b402e38e7af3b4e78bc773f261bbe5a3ebef477d9cab2d08d48"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "9595974126ad9a74777307468836bfa40d8f0e5b9c057a9fb14c5ab2a7f46ae9"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "c14674963303ce34977d3c7964c3102c38e5b58c832663976fc65bf5c3240fa4"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "8179347191d3cf3069e50a394378be63b94edca516208526c51cd587669dc3ab"
+    },
+    "cgroups/test_a_child_in_a_new_session_cannot_outlive_explicit_group_stop/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "ee0d700d72058d9e3be7c16e09d6bd4df69fdedf90262214b87e8c7b7add3ec3"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/request.json": {
+      "bytes": 762,
+      "sha256": "eb8875948a7e8a83e08099a9d0c2a95b6c0b8ac68646b38fd2e795851c8cbbe8"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "db75d74378b880e3bc00035e3aef4c167ca21f8e39d2977502622767e6e74ef9"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "39cb3a69a5463d1c21d2b1145eaf52471298ff4b6f4aebe0eebac04eedc88876"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "631607f87f1a6a5c84e7ce5e7ec9e62f8e766afb7f2ffaa515115986533eeac0"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/test-final-membership.json": {
+      "bytes": 1296,
+      "sha256": "1a826c7bbb2a58e0d4e089469bee3d54d0ae2dc5c30f087428b23b3c346971e7"
+    },
+    "cgroups/test_runtime_deadline_ends_all_members_without_controller_polling/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "522c1c7eddca9b23aaea510beea0985bfa3392884f707e526f7428ee9b3ef391"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/request.json": {
+      "bytes": 764,
+      "sha256": "2dba54136aadfc9b393c5d5384d9f937fc06f7da8aba56c3cdf1e60f342cf8f8"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "b24cc2476f38ab366551b5550b2cad5aa7d206076eeaaa538984404018f8aa8a"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "9b1422f6eca893276edaca8db2fc858b41c468cce484a82345e7ea13ff6db8e1"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "cd0779ecf53cfb7e7cc54bb69dda99b3a9ab3a607f0a77067c1c5011c02f86ae"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "718a93ed8c20027db7bdd9b64e4824b0b021299e9bd3776b4186e159dc38b562"
+    },
+    "cgroups/test_live_owner_and_missing_reason_cannot_be_recovered/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "55602e0a96b9fcf0c161c7521bfad5452fa4c64c46178d8b30829a7e922af05c"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/reserve.py": {
+      "bytes": 517,
+      "sha256": "f21e2e14bf9f646aadc40dcadc26230f1e04f4500d68bd4ff6bd316bd6590514"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/lease.json": {
+      "bytes": 471,
+      "sha256": "55193c743e89a6fa666305fd4576c48fc1c4192f3899336e57a4c8f417913371"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "fc26fd6f2d15eea1738c52a0db23abffb2cf0ef9633601af84a5810f9223dbda"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "3b8ecb8dd90f5850228e6fb06b54c14bb4a14233dbd55a17faa51e37eba3c636"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "6db997e2d3eaa4ea03bf2329113b61ace16e15fc815f9f0bcdc9cbd8514aa9d5"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "f32a43eb552a1106424b3c8c6b3e3a6dd6917f5d3498dffd5cad77abe767d92a"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "4630be1ed89de672cd83d39de6a5d2685c900cfc5ecb8d43a2719eba58362efd"
+    },
+    "cgroups/test_changed_boot_is_not_accepted_as_a_closed_worker/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "ba249c26c860a51dcfb844ef35c259edd6c0c25742c2839cbc1c796753127bd3"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/orphan.py": {
+      "bytes": 179,
+      "sha256": "546062f3746fa5a0034456aa480e9f01fcc83e9340e2f7a8fbc08c8dfbabdfcb"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/child": {
+      "bytes": 7,
+      "sha256": "2614d48eb41e36531cf7191c29edfb8cb27867ddff8f9c7cd2fb778c5cd1f0cc"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/request.json": {
+      "bytes": 807,
+      "sha256": "f9bb55ae4a7866dfc1576bbae91e6ad4deb8a14ce84d5dcf17b6d62531eb7c21"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "5a0f59fb557602f01dfbef3b11fa435b5d3dd632ec592bd27406fe22f3e94333"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "3509a75c6131630c73294782224212ed8b4514e9a75190a3c5d2c7898744967c"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "dc839656fe3ec5acf936a554ea2df7bb1261818c2ca3f2a4c4a26f81038692af"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "39546ddee1b2d504434d50ffdffaf9b48d500aa74029cf1a9d67ef5c70e56259"
+    },
+    "cgroups/test_main_exit_does_not_release_a_live_descendant/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "0009b5cf6627bae4c74181a5de2654cc7068b8d0eb0ffe153e8ecdf26df2065e"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/reserve.py": {
+      "bytes": 517,
+      "sha256": "482dd2c265dff7b546003270e11d76aac24d8acbd3f7a3c32675e691273f4017"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/lease.json": {
+      "bytes": 471,
+      "sha256": "90c830a8169be7750052ac99241cd73ec9fe0fb22480757e2904a123bc6c9f90"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/recovery-event.json": {
+      "bytes": 2374,
+      "sha256": "22553dbc3d4946c68c2abe0c7aa7cfbb2be1d831f82b21a325e1b9b375cbf674"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/recovery-ledger.json": {
+      "bytes": 1104,
+      "sha256": "2eb9acc94fc791623a9a2e9ebf8aae18ed33c9b9cca990b8b87f910ef3a1b7a8"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/request.json": {
+      "bytes": 764,
+      "sha256": "456d0e629ba2c74c5975d516568028d4a2b17a8904a7fc8b3a734979d0d8a301"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "76dab5d0213fcad951d11017eadd8c7899b8d4c12114074984ba6d8330c4490b"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/ready.json": {
+      "bytes": 44,
+      "sha256": "6635072b88a51ddc5b537251958f67490e70ce5e6f4bda668b48d39523864ef0"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "ff2a43e65e6d392bb08567560e22af0f64618e72822d169fcd2829b81a987aea"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "8fac30d2412a7a613d7f4af7d09d80f407ed60934e7e1a7eac7513b67faefc41"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-1/runtime.json": {
+      "bytes": 1764,
+      "sha256": "80e9034b8e5932889c27302561afabe41bf05e5893102e58d806cc2acb6e9cdd"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "1a6e6768218cda017ca88169567f40d85a9db794a6e1d73f831b59090fd5ac4c"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "a91c58da1df6a1050402c06f4abc0a038f2b053c7d011a207cd5f49776d40178"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "62b03bdf1e13b9b54e906aece0a1341e4707518a90f9b66de274f0ae59518edf"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "ead73bcd4f8b7039c61adf44eced2c6aac5b19afcc34f1b83d01cea731f033ef"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "0645bcf1969a046b58d93a85c8f62b2673ca10684a58067c4b2547a7c6592803"
+    },
+    "cgroups/test_a_different_closed_unit_cannot_release_the_dead_owner/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "9ad5cf2366d0e077b5398f743081fae10db64ec2fa465b8cb38efb421c5a848c"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/runtime.json": {
+      "bytes": 1569,
+      "sha256": "9eaef93e4230ed308ad541d3766b8fd2becc3addcbf094def74de88a83059ad0"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/request.json": {
+      "bytes": 763,
+      "sha256": "cd0cbacde9f2b2d88c60a9bc841dd703be7b1a8d3891229bff1b4c97c24e2245"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "360901a073332e583db29e1e69740574c6da626cd94d8c1d4bc59d26a9b434a5"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/ready.json": {
+      "bytes": 44,
+      "sha256": "3887e49e40b6ea6779731ef16384738d72f69eee99c781b54443d9d485bd860a"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "29020a54538657fee18f39931246e7df5798a2ef4b4c682b04002661b3b134c9"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "44cbf24478b75a343d6ed0469243ad0f11f617a6788938aa8778b26c977b1b87"
+    },
+    "cgroups/test_controller_exit_does_not_make_the_contained_attempt_complete/lost-controller/runtime.json": {
+      "bytes": 1764,
+      "sha256": "6958aaee0df5bd1f4022c0d1573cd34b1d09db853b995e8c38c698a34d58da21"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/runtime.json": {
+      "bytes": 1569,
+      "sha256": "d4fbbf07aee2fcc3cca7d8668dcb30b1d72bae3eee5e44afb923fa0ee9f2f8f8"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/request.json": {
+      "bytes": 763,
+      "sha256": "bfd4dda367341c7d8d723eb377ddb1c4f40d29937c0f3ab12144a4f6d8eabe06"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/ready.json": {
+      "bytes": 44,
+      "sha256": "c4a5d6f272cf367eb55802dae9d39382fe246bd4ab93796a0986004cfc692540"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "34140a67d5238021b39baaff8176ad6f8639ea4a5f0e73a0ec18c889cdf30a54"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "33ca76a4d968fc13f163488501ef77939552e1df156e1beb099403f19c092fe1"
+    },
+    "cgroups/test_recovery_of_crash_before_binding_never_starts_the_native_program/unbound-controller/runtime.json": {
+      "bytes": 1764,
+      "sha256": "4dff0803cf3b9d6fff25c918686d7e0636474fe3690641e4811913853e9d386a"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/reserve.py": {
+      "bytes": 517,
+      "sha256": "755ab10e4a6119ba206b330790752ac351d8c5dd5f2d7047fb3940fc0b3aeff3"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/lease.json": {
+      "bytes": 471,
+      "sha256": "6870190cbda4c27a32b4a49b67bb45790f607ac84ccbf3cb524b81ed169acffc"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/recovery-event.json": {
+      "bytes": 2391,
+      "sha256": "72eb6201b46f8e5df21f51644f6281493384fa44d365669c41e00300f7d348f0"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/recovery-ledger.json": {
+      "bytes": 1121,
+      "sha256": "79b88d2b9a3ef39d73d33eb27952ba0ec195760ee3e6e5e9d383975da0207515"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "e6835adc328e52dedcb007ac6e78c22318f536618808d96f616c3e2d723042e6"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "2bb76985d335f18ce9cdac2816dbc39b0cd4414aff12ed2a80e4cccce61dcc0b"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "fe21245964846664b4ca615c07a48e6c826706e18c954c83e39dece5cf1e6f68"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "f0bb35ac6e203d7d220ebac1eeb5b57414fa05288045b9a5f938ca8cd9b5e628"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "d017878c03021c4f926754b9f44c519b89de647a99ee5b566d498f673717a5fb"
+    },
+    "cgroups/test_schema_one_closed_worker_recovers_without_capacity_migration/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "2f636899220158d02378ef4260293aa33f7653d4b2577e8a2896557ca376b3a5"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/request.json": {
+      "bytes": 846,
+      "sha256": "f4765d3bcbc4d9f0ace27689bde6c913144fb7d123cc115493a4fba5aedba4d2"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "3e1d42bfc9553c83f1e58b95f3bccf2653454212f69e08bf421a1ef767a92e99"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/stdout.log": {
+      "bytes": 16,
+      "sha256": "eaa2cdd481a9e332dbd4932c2148ef5ea30458620eabece2c9716b939a236dd4"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "98910123bb47feb2b29db791c3ce17ee5ee8525392e41a4cde7ea42ee20acf4c"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "d59742dce482b49f6d39035f1d6712ba5e34406e427bf8d20efb586db78fc6ad"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "486f949940eda00b08d248dd6fc289872e414fffb723301e387a44cc4380d5fa"
+    },
+    "cgroups/test_actual_paths_with_spaces_preserve_runtime_and_logs/attempt-0/runtime.json": {
+      "bytes": 1795,
+      "sha256": "d35000ab33099a2ba01b5d03770077724b5e865d8cd0563666c87ee1ddb95235"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/reserve.py": {
+      "bytes": 517,
+      "sha256": "9a9057cfb50c6d6b17a72dbd7ab6124f2aeb9313e83c8d87d6a897e403f8c7ac"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/lease.json": {
+      "bytes": 444,
+      "sha256": "b526bfe22226e9097c38f08a6f2f4af467f047c7fb27d8549afda414cb14a6a4"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/request.json": {
+      "bytes": 764,
+      "sha256": "9ed2d2e03c548973dce58936dc1dfe0d05da48ec2a0997cd39b0e86b3ab78a48"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "096710e9b61d70b3d86b87ad57dfc38741c53fb6c08fef21dc9050a7d660f9eb"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "6822854c7224b438b1cc44d413f71718c79608231172c47652ab1d9974de9a5c"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "c9b18fe99370a931cb77615cee133f33aa8c64bd788c419c599fa5870999518a"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "7a733a5cbe5dfa30962a2bce092e729c3e81deb1b5df572375f960e4794a2df6"
+    },
+    "cgroups/test_uncontained_dead_controller_stays_held_despite_a_closed_child_unit/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "a65985f4cf17c4f7f6642aea99a1488944882e122bfeb68c02a53a2d23b821f5"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "79c13ccbd591bfdd94196eed9bc8ee8609fe0aad65288e32e31a8c4213b19f85"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "5a37edd9bd1a7762cf48c13a1b92a82b7f636b7a954cd0ce508045cfad281baf"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "c396b7430592c645d16d7e35eca849b0fc414291d40f649c2a3e6dd53aa6bd60"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "7c14bb3fcd851644863ad58f9403bcbc6b6257a7e119dc7e3739e15bc471ad4b"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "8f8e97a5b0feb28aa00bde0b336b2073252ae5cd645da60fbe6b1e092188ed0b"
+    },
+    "cgroups/test_stop_does_not_touch_an_unrelated_actual_process/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "0d2dfcc462ffea4ef9551efde394a3a395f6a3a411296af9f454369522a52216"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "7fa0697c38b1ad21480b8e81499dd2965eb5da3cc967bc9a9abb5d9bff1dc8ea"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c8459d400d69a38dc23b5481ce92ddb21d0511a1a14e9150562b068dcdb2a7f9"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "80a29996b572e6e1010ea96bdddfbf6902eae86ece3ce047fdcdf21a2ef54a0f"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "2b182b3c58b50862b36d9a15451cc1eeabdadbd1828a8aa8d2f453db99219bc2"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "347460258533db9ae9482f832d0808620ac19d5330549588b9ed3c80845d92cf"
+    },
+    "cgroups/test_changed_invocation_is_refused_before_signalling/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "e46a6c93920dbed142eaba95492d612b117c0d40098f734bb29321c1c0367f9f"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "be969bcd92f61716499598bec5b7a3ccf5050540274b1c274993abac4df3b4af"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "9cf04e96b070419677322a7438ba063431a99d1deb65a9445612709097dd99f1"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "29095231a3ce2d34c20dfca1cf84aa96489cc0fba30d3afaec184c3a466330bd"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "4652b2436d57d9c2e2552f7746c90ec9d2b5206b302777d2ecd2cbd43d781c04"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "bcc63bacf28b0a3754c5aaa22930ef9dc241582f1d73976250bb675c7608c0f4"
+    },
+    "cgroups/test_request_corruption_and_reused_output_fail_closed/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "cdc806a8d89fa7e619f22ab1d35270b001f30291390886cdb4eccd791e1a48b2"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "03346e0dd816a23c49bf8bb09e6cc08d35344cf72532842065886f321f09f3a1"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "9b0ab84a271aec4124f16895fe62cca65b07c8ca0b12895cdc18acf2ee1c67d0"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "23360ded386ce5de8513312a0ba0ad55a7765412edaa176dac9663f7127b5f3a"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "87c3adf8877563db01c053622accd0056085682c0296d123a085df41d9974946"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "1f3d195dbd5243bc1a3a5bc0c41ab7d43cb283c6b32cffe11ee5275e004135e7"
+    },
+    "cgroups/test_actual_kernel_limits_suffix_binary_and_complete_group_closure/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "7b0c9f50ddbab744957bbc9201c56febf452f0bce412cacf0a9646e6677540e9"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/owned-process.json": {
+      "bytes": 620,
+      "sha256": "0d5535f700a7c8c0e52a2b3cd9b3694558a634433d421f8726a28f27482aa439"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/request.json": {
+      "bytes": 294,
+      "sha256": "8bccf7f36a0d89f6fec4b9d3ea0def2d64c8f7eb836a3f586815f375492c143a"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/loaded-files.json": {
+      "bytes": 352,
+      "sha256": "4022e9b5a61445f3a0640327af25565e98bf32215d8ca082f2adebf10786f55d"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/result.json": {
+      "bytes": 488,
+      "sha256": "31387c66e32877fbebc51e1d0054c15ff80d6b3cd1da0fc97bf4983342832a0a"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "7202f5e20eb65b110a3af369e21d341b6054acd2c852ef206de4e86e66c78685"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/terminal-unit-state.json": {
+      "bytes": 1296,
+      "sha256": "a76d393948cbe628b6f9f82e15e351a038a066ec1c8bcc334fab4bd9e3ae9a9d"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "97dcf1b0faea5465a65299bbc7e4ab48446e51bed6afbac194ea5adbf250bf7e"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/runtime.json": {
+      "bytes": 1778,
+      "sha256": "8e5b6fe6f34e14303ad5af9945903919422656e8592aee7ffb43ca7a8ea2678a"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/request.json": {
+      "bytes": 776,
+      "sha256": "0e7169d0201b2251fbef22aafd3d74bba6888ffbb87dabe9a73e1887a82c2dc1"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "e682d3016ce1e8a4b6b5977be7872b90936ed148cc69daf81c0e75a907417868"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "95d6e473b23372153e64e92112066d99341ec47cc27a86ec8b4886b2783892a7"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "bc47b09b0bb55bdba20e16a4507457dfcbf63d5ad81484e165ac1f332cf997f6"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_reused_output_changed_runtime_and_preset_cancellation_are_refused/attempt/contained/runtime.json": {
+      "bytes": 1778,
+      "sha256": "8e5b6fe6f34e14303ad5af9945903919422656e8592aee7ffb43ca7a8ea2678a"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/owned-process.json": {
+      "bytes": 620,
+      "sha256": "d79ca75dd5b101987b65a56ab2d985e97a13b118af357a1e6390e71454907e7b"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/request.json": {
+      "bytes": 294,
+      "sha256": "d5a69cc08f05d2a2fbe7f02427000035ef2094d3d4f6ab1a3ca8296baefe5891"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/loaded-files.json": {
+      "bytes": 514,
+      "sha256": "baaa96c0866374d5eb0c65d036183101e3f3704cc09a6e8f622bf4786b7d2854"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/result.json": {
+      "bytes": 541,
+      "sha256": "499b1548e58f55cb402aeca099d2e999d176e3a3d740634c252bc26f685b1601"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "84732a302a9d8c021614f22259ea654b7c490c8a34c32baf233616afe47b48b5"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/terminal-unit-state.json": {
+      "bytes": 1296,
+      "sha256": "6e78caab00c5bd3b9aa29b73985be574fc9d247f296520611e94251ff323feff"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "17c185651febe59ba9bd72376f8dd127ac961bee3d82fed199a5d4a5dae99916"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/runtime.json": {
+      "bytes": 1778,
+      "sha256": "694866ab987040faf162efd897eb22690c320783bd922d329d94e6a007053fa3"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/request.json": {
+      "bytes": 776,
+      "sha256": "e43c2ef916176d7c5e7290241625452853fd99e5df36c0c6bb26a1020f73999d"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "02529a68e15ac6e720b68f1cdcb91e07207180aef71017036130382734ac8b6b"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "d1dba8705accd2ba30573a99a675f1c50e569e70dd7d4cc81d0d7eddfe086a4a"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "32b6ab1d7398560f8f7bd5e90de0e907791ca6a24ff7a5518f4ea779f9dc7acf"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_runtime_mutation_after_launch_invalidates_provenance/attempt/contained/runtime.json": {
+      "bytes": 1778,
+      "sha256": "694866ab987040faf162efd897eb22690c320783bd922d329d94e6a007053fa3"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/capture.py": {
+      "bytes": 541,
+      "sha256": "0a3a7fe7509509461af9ac7a4f91371d0be5fc6963956bca402836fba518aff7"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/capture-ack.json": {
+      "bytes": 114,
+      "sha256": "e61ac08f57c51f5be50589f52aa63ebb8ce81f81de4b02360072f745621ac4dc"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/owned-process.json": {
+      "bytes": 622,
+      "sha256": "8e3c84bd79bb5abf55a63773155bd89ee25eab5bf87e6d78ca213832fc834785"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/request.json": {
+      "bytes": 344,
+      "sha256": "bd4ef487e065e82c5696f8292bd6954e521de46c13b150e5138d7e08c441d0b5"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/loaded-files.json": {
+      "bytes": 1208,
+      "sha256": "6c851f890efa2c9bac164bbeaf2097d788453a56445ef3ba955d949e6b8c6547"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/stdout.log": {
+      "bytes": 27,
+      "sha256": "97ca0ed9899c8f9049ede977091d351c5af85fed17d2e0ba6f2aa6fefaa9c54d"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/result.json": {
+      "bytes": 488,
+      "sha256": "721ce0d54ace70dea6eb96dd90ebd29c777d4baf71b0eedf06680c9a4ddecb18"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/capture-ready.json": {
+      "bytes": 105,
+      "sha256": "552f3b396e62350939341e479ac08fb14e09d757db8a88a5a38a56d028fe4596"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "e49ec54b7fc83da8dca1bf39e3ba2d80aa3af27f2decc971ebe9aaae31d025fa"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/terminal-unit-state.json": {
+      "bytes": 1296,
+      "sha256": "2f2ed5f325adaeb9322600ae67ab9ecb9696dd9e9bcd43cd0cca1a6df1e51037"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "b2c4c6db1114c4cfef3a097d1597321891a00142af754531e001cca697cba970"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/runtime.json": {
+      "bytes": 2530,
+      "sha256": "e1f6b9363beb1dc618e642edc5999e0a6d0b5197c0eb167b5093771d7209906f"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/request.json": {
+      "bytes": 926,
+      "sha256": "dc6359ea5bf5ab22338e9d374e52aeed2af401b6210294fa1829ed8c63d6877e"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "818d980b53e65f3b9f47dc29dbcb6cc8ab286ea98885a606cc6e88cc80f3d134"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/stdout.log": {
+      "bytes": 27,
+      "sha256": "97ca0ed9899c8f9049ede977091d351c5af85fed17d2e0ba6f2aa6fefaa9c54d"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "b953e603aa33fa4acd825a1d0a49521d2910a4528cd457717a5576aac2b25102"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "dc18da582a76b5d993f4c7f4aeb7e6f03b3a4c920dcaa05c4d0c4d3f0b74b80a"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_cooperative_capture_reads_actual_python_process_maps_before_ack/attempt/contained/runtime.json": {
+      "bytes": 2530,
+      "sha256": "e1f6b9363beb1dc618e642edc5999e0a6d0b5197c0eb167b5093771d7209906f"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/owned-process.json": {
+      "bytes": 620,
+      "sha256": "2c075a771ff538c8efb9f40009dfb8b9939ca8806daa713f5db32dab8353f937"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/request.json": {
+      "bytes": 294,
+      "sha256": "b54b4917dbadc507936b3e3f564edbe04db8dfdbca22c38a8c6f33cfae747d64"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/loaded-files.json": {
+      "bytes": 514,
+      "sha256": "7d4fa0f846003391ed5404b4fa945d62c2b6073a16e54ff06e4f53b14f899d58"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/result.json": {
+      "bytes": 487,
+      "sha256": "278a5cd0645bb0f21f896865ed4a62f18b9266968f96f572c3a69bf6269f0ef9"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "e28805da5e8bc8035d839fee8d3430774f994debbc1c5ac78c6285269cef1467"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/terminal-unit-state.json": {
+      "bytes": 1296,
+      "sha256": "25d8b7e659a46c54f3b8e01b2e6d68de7e39d4b06f2406ec470eeb271756c84f"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "5c552a2867832dabc3bb69854e105cbb5f29d8f83336f5a6240af3b51c820e42"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/runtime.json": {
+      "bytes": 1778,
+      "sha256": "4e42d211d295a8d72121782b97ffafa2d98ca1ea54cac0e3686502a233ecd149"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/request.json": {
+      "bytes": 776,
+      "sha256": "8e1d84a8250deed7adc532dee9ac578947b352044a7d4f01058b5da86b9fff69"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "ab0f9cfecd6409b321b496bbcd8e2a17079ef6caf614b3f94c245bdd05338aa3"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "9784aef01044c793e155ff1bb167c71545e145287a798e72f9d34bacd64dca6d"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "55acc3c5f54a5bff04f6d106556f631f86fcc2de0ffd6288616cade55ba2ad23"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_complete_suffix_process_has_real_maps_limits_and_closed_whole_group/attempt/contained/runtime.json": {
+      "bytes": 1778,
+      "sha256": "4e42d211d295a8d72121782b97ffafa2d98ca1ea54cac0e3686502a233ecd149"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/owned-process.json": {
+      "bytes": 621,
+      "sha256": "e05cf72bba7c1ecfe0e33c04acf0ef49ce0b55b9085d9de107af2d0a2e577618"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/request.json": {
+      "bytes": 324,
+      "sha256": "1721c3c6f9fb8ddba37ab4d8e621c6e1378a1a25cfa7df7a2c3b6d735fdf8893"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/result.json": {
+      "bytes": 476,
+      "sha256": "c2c0ede0e9e2a49a0f65b43711d7dec42ee5dad0647c4d8a3ab2376a0c346dde"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "c99f419617507b4d2756b5262369bd88e9ebc662300563b40a9227ff97f04919"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/terminal-unit-state.json": {
+      "bytes": 1409,
+      "sha256": "70fdca628b1f7a2dac20a662b9778eccf448f9708533d15a564136cced3392c9"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "4405985386de858a1429432155c0ce90415143516688a6690c5405cc76d2355c"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/runtime.json": {
+      "bytes": 1780,
+      "sha256": "d6ac5b6a0aadc5dddc9984c23fc196df15854b39ff58bcd6c696917eda0c72a9"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/request.json": {
+      "bytes": 807,
+      "sha256": "305bdf72eb0116d46608b2041691561da07ebc1b47bf43341d3fc7976f0b3c44"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "dc0e91349f0979334b1a6ecd5134b8ff13a38ee73b5dcb4d6571324b357ae944"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "e57d61791afac0df4f44d240e6c914937805289689820cd4405697b8dbe44c8a"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "00641c37f51a0c754f8c09b19336cf01a724acec3dcdee26364157e8abeb97d9"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_zero_main_exit_with_live_child_never_completes_and_hits_wall_budget/attempt/contained/runtime.json": {
+      "bytes": 1780,
+      "sha256": "d6ac5b6a0aadc5dddc9984c23fc196df15854b39ff58bcd6c696917eda0c72a9"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/runtime.json": {
+      "bytes": 1583,
+      "sha256": "e67ff05f1d3190ed6d05c81b776aa71a13c37f1898968b82848135fd7072812d"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/owned-process.json": {
+      "bytes": 620,
+      "sha256": "981ea5ba298a4b6d743c19cefe7272369add1d450da0ac641f4d99dd0a5505b9"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/request.json": {
+      "bytes": 302,
+      "sha256": "c716fbd90babd0e6ab33898cf4f080b1aee8254f329426ebeec38fb4c4d22dda"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "7e140af2d6d7ce6503bd3f7ba956f5c3489d346cea0578f17d4df12c66ddad49"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/runtime.json": {
+      "bytes": 1778,
+      "sha256": "7257fb3b67e89bfab502e16d25ecef68fd7590d68abb4f505fecd64439060818"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/request.json": {
+      "bytes": 776,
+      "sha256": "b64b2db98b8bf5cc6bb4ccbf644f677cb69e9d96ce354a6d8cdd0241ba2cf77e"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "d78310a8adc0e7b0012301e3759c2facaca399d309deeccac98692d7d6e3815d"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "9ed59969b0cb30a9c24168310c7326beca236d48dd5860f8d5979c1ce51e8b3a"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "ba09bd45829699ff23619192cba3bc84dc3a4795964271b3c5e3789accd521e0"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_crashed_frontend_leaves_observable_owned_group_until_explicit_stop/lost-controller/contained/runtime.json": {
+      "bytes": 1778,
+      "sha256": "7257fb3b67e89bfab502e16d25ecef68fd7590d68abb4f505fecd64439060818"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/owned-process.json": {
+      "bytes": 623,
+      "sha256": "8629288186091524829f855f13b638ce2ae605205617d47654a726c7749c2dff"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/request.json": {
+      "bytes": 356,
+      "sha256": "548ba2c2414abe3c2cc4e9717d4af4de31ab635439a63e971a31a6cb9d4cb8f2"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/stderr.log": {
+      "bytes": 13,
+      "sha256": "5e23729b57b640f93fb71036abc7e39cbacf80466fecf3999a285d9d88abe27f"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/stdout.log": {
+      "bytes": 13,
+      "sha256": "66ca4c4b4bc5e399b7d0fb52ef05d23758140fa95f9a07b56388570c2c02ea75"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/result.json": {
+      "bytes": 501,
+      "sha256": "9a884d64a6942937e6da8104c551659b1e13086649390b17472b234ec9b9e9ed"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/whole-group-closure.json": {
+      "bytes": 1298,
+      "sha256": "9e6821a0f9a1c48cf2f59111bf3b7e817d17d2867401dbcbd3070f5254cbec69"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/terminal-unit-state.json": {
+      "bytes": 1298,
+      "sha256": "9e6821a0f9a1c48cf2f59111bf3b7e817d17d2867401dbcbd3070f5254cbec69"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/test-final-membership.json": {
+      "bytes": 1297,
+      "sha256": "a363d0f2165785616b8dda56590a67887a7d97cb55b000c9ba5f6cf0f0e78347"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/runtime.json": {
+      "bytes": 1782,
+      "sha256": "84a84dc628d5ac8e269c373c16ac9d47a71569147cb4a3a26a166680ee17bf58"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/request.json": {
+      "bytes": 841,
+      "sha256": "bb36a7a391d3dc69d33e130815da3bb2bdb46803c6d77e9373c82a48f356b627"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/stderr.log": {
+      "bytes": 13,
+      "sha256": "5e23729b57b640f93fb71036abc7e39cbacf80466fecf3999a285d9d88abe27f"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "11a2b51837e191142650632148a6fc81b361ba9bd01697643f4139a46da9b64a"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/stdout.log": {
+      "bytes": 13,
+      "sha256": "66ca4c4b4bc5e399b7d0fb52ef05d23758140fa95f9a07b56388570c2c02ea75"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "43ce507d634b776e5002df5804d2010c7d5a173a2d6cb8c26a41fa5684083938"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "7597d53c6a8da5ebdd2364991db2667fda415a048d4b5ff986daabf3973daaf3"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_nonzero_exit_preserves_actual_output_and_status/attempt/contained/runtime.json": {
+      "bytes": 1782,
+      "sha256": "84a84dc628d5ac8e269c373c16ac9d47a71569147cb4a3a26a166680ee17bf58"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/owned-process.json": {
+      "bytes": 621,
+      "sha256": "8f38b3ebde9346a8617d131512f23231748c1289bdf86657f637c8ee54027637"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/request.json": {
+      "bytes": 322,
+      "sha256": "62c9ef4cf5bb6204772507a01ac8e62acc404f1bc4eded05478d61df585ce3f1"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/result.json": {
+      "bytes": 483,
+      "sha256": "2430fe01ed7119ac496e5bde20008cd3e1b960de8191263029d171ba0b20d9e5"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "9eff9d80600c2e17ffc5b600fa2b9b1ba0a0945c7cee0d08bf643cfa8f7344d1"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/terminal-unit-state.json": {
+      "bytes": 1416,
+      "sha256": "bff8bbceb5f6f19ca5e51ee4ff9915fac2bfd3f37cc53083958db52291575b18"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "4a82937ac6cbdd50bd17c21769d01b80253aae16ddf18ccb7fa9f98f33b18b65"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/runtime.json": {
+      "bytes": 1780,
+      "sha256": "9a679460879909d920662793cea91b138843f5603354e78b4adbdbfb75cc988d"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/request.json": {
+      "bytes": 805,
+      "sha256": "40e7d8356f30432db52b174ce9013491e0d9f865dd3a0041e9da981d20e8cb0c"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "afb3a73144b059b0feb7e6467becc7febd7188fb6fabada0dccbd978bfa82d32"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "642e0f6f25424022d79bf697ecfafdea69b3e0601b41675951642cbafca83834"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "b825709a65e95725a983f6f413bf055323bcdcfdc513eaedafd400483490e7f5"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_cancel_closes_all_descendants_and_preserves_unrelated_process/attempt/contained/runtime.json": {
+      "bytes": 1780,
+      "sha256": "9a679460879909d920662793cea91b138843f5603354e78b4adbdbfb75cc988d"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/capture.py": {
+      "bytes": 539,
+      "sha256": "57e7c23505fe385f2914b986641f4e88f7c5b7fd20483affd2b1bafeffd8365d"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/owned-process.json": {
+      "bytes": 622,
+      "sha256": "3b9a484e6e0c7a1a3149b84a7c94b85d8643f3ef6f0d0996649bbb474b38c138"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/request.json": {
+      "bytes": 344,
+      "sha256": "acd9c533e775e3bcd475ca7de53aac2478f64983da34b277bc419655b016249a"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/result.json": {
+      "bytes": 507,
+      "sha256": "b2ac3b9bb56ac877dbc700d58ea7b92a795c03d7bce1e6b9eaea0a1a74a323ca"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "433043f2af5eef87a02528229ab3f96ab7440532e7196ab7ac0d46a01bcd1687"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "12c72b44419dca504d6bc2195eab008263281b693728ad17b0e6224888198dd0"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "18fd7f657a949850059d1d3ec77ff6f5424a60e78c93e7f979810078c59c9f25"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/runtime.json": {
+      "bytes": 2530,
+      "sha256": "9a02a2e478451433728a6ab2a5d30bf10e805d6e7b2ee22b158957131302c283"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/request.json": {
+      "bytes": 926,
+      "sha256": "31badafc8f7c2a2e5ad24898a21b249a30b8148afed63bfa7f3d0e4450d97e28"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "95ce362bdc3bd2d6688cd336d861171b686691894501c3f85d652d2036b82371"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "323f058d98761f15de4cbeb1cd0bfd148d6f9f9801ffef94e0dd2760139e1b75"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "2f2e6dc903c97dd5a60f1f46b8ca7181035f3bdd18ba7f0343426fe4909f6c6e"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "runner/test_wrong_capture_identity_stops_the_owned_group_without_ack/attempt/contained/runtime.json": {
+      "bytes": 2530,
+      "sha256": "9a02a2e478451433728a6ab2a5d30bf10e805d6e7b2ee22b158957131302c283"
+    }
+  },
+  "archive_sha256": "f9fee8b101231d5d0185c2bc8e3d4a4cc6c74ddd9652f847525541e8798c33b0",
+  "source_commit": "0b4af58f0f627869c32bd5f5fb56076235bd4190",
+  "returncode": 0
+}
