@@ -247,11 +247,14 @@ class Reservations:
     def validate_paths(self, token):
         with self._transaction() as connection:
             value = self._owned(connection, token)
-            _require(all(str(Path(r['requested_path']).resolve(strict=False)) == r['canonical_path']
-                         for r in value['resources']), 'reservation_path_alias_changed')
-            if self.capacity is not None:
-                self._validate_disk_resources(value['resources'])
+            self._validate_lease_paths(value)
         return True
+
+    def _validate_lease_paths(self, lease):
+        _require(all(str(Path(r['requested_path']).resolve(strict=False)) == r['canonical_path']
+                     for r in lease['resources']), 'reservation_path_alias_changed')
+        if self.capacity is not None:
+            self._validate_disk_resources(lease['resources'])
 
     def _validate_disk_resources(self, resources):
         # One disk budget covers one actual filesystem, not the sum of free
@@ -332,6 +335,7 @@ class Reservations:
         from .managed_reservation_graph import register_intent
         with self._transaction() as connection:
             lease = self._owned(connection, token)
+            self._validate_lease_paths(lease)
             return register_intent(connection, lease, directory, attempt_id,
                                    memory_bytes=memory_bytes, tasks=tasks, maximum_wall_seconds=maximum_wall_seconds)
 
@@ -349,6 +353,7 @@ class Reservations:
         from .managed_reservation_graph import transition
         with self._transaction() as connection:
             lease = self._owned(connection, token)
+            self._validate_lease_paths(lease)
             return transition(connection, lease, attempt_id, state)
 
     def recovery_history(self):
