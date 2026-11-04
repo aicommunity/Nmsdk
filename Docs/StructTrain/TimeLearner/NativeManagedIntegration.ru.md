@@ -43,3 +43,15 @@ Linux symlink test: native unit и intent не создаются, исходн�
 61/61 её не проверяли. Требуется повторная suite62 (13 новых +49 прежних) и
 отдельные19 policy/preflight checks. Локально выполнен только разбор AST,
 серверная runtime-приёмка этой правки пока отсутствует.
+
+
+Первая actual M40 preflight attempt source43d32cf211:17/19 portable checks
+прошли, оба actual Console preflight завершились process_error/-9;
+terminal unit state сообщает Result=oom-kill при MemoryMax=536870912.
+Это подтверждённая недостаточность тестового ASan resource profile, не
+нехватка диска или научный результат. Попытка и held leases сохраняются
+до явной проверки kernel closure. Следующая попытка использует native4GiB,
+controller256MiB и aggregate reservation4.25GiB при capacity6GiB; scientific
+JobSpec, runtime и19 assertions остаются прежними. Runtime pass не присвоен.
+Elder suite62/62 для source43d32cf211 прошла без skips; новый memory profile
+отдельной native fixture ещё требует реального запуска.

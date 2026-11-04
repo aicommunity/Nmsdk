@@ -31,12 +31,12 @@ class ManagedNativePreflightTest(unittest.TestCase):
         root = self.root/name
         root.mkdir()
         output = root/"run"
-        capacity = {"slots": 1, "memory_bytes": 2*1024**3, "disk_bytes": 512*1024**2, "tasks": 512}
-        demands = {"slots": 1, "memory_bytes": 1024**3, "disk_bytes": 256*1024**2, "tasks": 256}
+        capacity = {"slots": 1, "memory_bytes": 6*1024**3, "disk_bytes": 512*1024**2, "tasks": 512}
+        demands = {"slots": 1, "memory_bytes": 4*1024**3+256*1024**2, "disk_bytes": 256*1024**2, "tasks": 256}
         registry = Reservations(root/"leases.sqlite3", capacity=capacity, managed_units=True)
         lease = registry.reserve("native-preflight-"+name, [{"path": str(output), "access": "write"}],
             demands=demands, controller_directory=self.spec["controller"], ttl_seconds=300)
-        policy = policy_for_reservation(registry, lease["token"], memory_bytes=512*1024**2, tasks=64)
+        policy = policy_for_reservation(registry, lease["token"], memory_bytes=4*1024**3, tasks=64)
         policy_path = root/"policy.json"
         policy_path.write_text(json.dumps(policy))
         stdout = io.StringIO()
