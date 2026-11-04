@@ -1,0 +1,91 @@
+{
+  "kind": "contained_runner_and_native_gate_v3_verification",
+  "scientific_verdict": null,
+  "whole_pipeline_attested": false,
+  "workers": {
+    "elder": {
+      "bytes": 45508,
+      "sha256": "ea7b31064c23943228769ba3ec32bc2b1683186ae70b86239bd454257b9bc926",
+      "members_verified": 422,
+      "source_blobs_verified": 275,
+      "proof_commit": "df72d059f9540c6237f5cf680d2748bba228eb42",
+      "source_commit": "5c72b70b54f6ff9ae911f2ba7089eb7a8ffc3f3c",
+      "python_tests": {
+        "tests": 77,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected": 77
+      },
+      "native_tests_passed": 2,
+      "native_sdk_root": "b82f76e2fe543acf25d6c3076abbd864f965b3a8",
+      "native_gate_schema": 3,
+      "unique_units": 28,
+      "final_test_closures": 27,
+      "kernel_readbacks": 27,
+      "native_group_closed": true,
+      "main_exit_descendant_alive_readback_verified": true,
+      "previous_attempts": {
+        "a1": {
+          "bytes": 38268,
+          "sha256": "f9fee8b101231d5d0185c2bc8e3d4a4cc6c74ddd9652f847525541e8798c33b0",
+          "members_verified": 389,
+          "source_blobs_verified": 275,
+          "current_acceptance": false,
+          "returncode": 0
+        },
+        "a3": {
+          "bytes": 45416,
+          "sha256": "2bc05dc0ff1900fbd310e2b801b19ea326308bff66a86a00eb07db7f783479d0",
+          "members_verified": 418,
+          "source_blobs_verified": 275,
+          "current_acceptance": false,
+          "returncode": 2
+        }
+      },
+      "scientific_training_or_pattern_evaluation_runs": 0
+    },
+    "m40": {
+      "bytes": 50660,
+      "sha256": "1342ed807c2b2e407becbd193c5130f27161219933f68955e130c9a3287030fc",
+      "members_verified": 420,
+      "source_blobs_verified": 275,
+      "proof_commit": "dbbacf0c1be37c67479d9da5288c111e9209c870",
+      "source_commit": "5c72b70b54f6ff9ae911f2ba7089eb7a8ffc3f3c",
+      "python_tests": {
+        "tests": 77,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected": 77
+      },
+      "native_tests_passed": 2,
+      "native_sdk_root": "b82f76e2fe543acf25d6c3076abbd864f965b3a8",
+      "native_gate_schema": 3,
+      "unique_units": 28,
+      "final_test_closures": 27,
+      "kernel_readbacks": 27,
+      "native_group_closed": true,
+      "main_exit_descendant_alive_readback_verified": true,
+      "previous_attempts": {
+        "a1": {
+          "bytes": 40136,
+          "sha256": "e96d6b3f83a59c2feb85037f4e4c2805b9a40cccc1e3a32b37fac102c78c14ed",
+          "members_verified": 389,
+          "source_blobs_verified": 275,
+          "current_acceptance": false,
+          "returncode": 0
+        },
+        "a3": {
+          "bytes": 50484,
+          "sha256": "e549b804b4324ec6a76d272fe60c5c245d92b0ee793e563c4fb89fd00f2286df",
+          "members_verified": 419,
+          "source_blobs_verified": 275,
+          "current_acceptance": false,
+          "returncode": 0
+        }
+      },
+      "scientific_training_or_pattern_evaluation_runs": 0
+    }
+  }
+}
