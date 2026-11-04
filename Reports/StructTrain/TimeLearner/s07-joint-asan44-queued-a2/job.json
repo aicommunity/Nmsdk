@@ -1,0 +1,46 @@
+{
+  "kind": "pending_joint_asan44_queue",
+  "schema_version": 1,
+  "status": "waiting_for_exact_live_predecessor",
+  "native_models_started": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "host": "10.245.1.17",
+  "code_root": "8021301e894368aefd045f9d77274fcce9f60245",
+  "pulselib": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+  "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+  "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a2",
+  "queue_worker": {
+    "pid": 3836828,
+    "start_ticks": "286684788"
+  },
+  "predecessor": {
+    "pid": 3649813,
+    "start_ticks": "284056538"
+  },
+  "expected_native_tests": 44,
+  "native_budget_seconds": 21600,
+  "wait_budget_seconds": 50400,
+  "outer_budget_seconds": 86400,
+  "memory_max_bytes": 8589934592,
+  "tasks_max": 128,
+  "worker_source_sha256": "c152e9454b0cc02896369ad779f4f720d8ce251301c272917fbb1676167ec1dd",
+  "orchestration_archive_sha256": "2c440cf192a43396becbf61e2c7b651bf0e0130db86692438324cd75c5ee0c6f",
+  "previous_launch": "a1 rejected before group creation: maximum_wall_seconds exceeded API maximum86400; no native process started",
+  "start_conditions": [
+    "exact predecessor terminal passed",
+    "all recorded owned PID/start handles closed",
+    "predecessor global lease released",
+    "prebuilt group closed",
+    "source/runtime snapshot unchanged",
+    "memory/disk preflight",
+    "new path reservation acquired"
+  ],
+  "future_gates": [
+    "independent primary audit",
+    "joint full304",
+    "actual owner8 replay",
+    "readers128",
+    "remaining original mode and scientific matrix"
+  ]
+}

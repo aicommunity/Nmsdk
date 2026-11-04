@@ -10,6 +10,23 @@
 для нескольких fixtures, завершённый процесс и научный PASS различаются.
 Ни итоговая карта всех моделей, ни весь рефакторинг пока не завершены.
 
+## Актуальный краткий срез после последних приёмок04.11
+
+Ниже расположена хронология дня: старые слова «работает», «не запускался» и «pending» относятся к моменту записи соответствующего дополнения. Текущие подтверждённые результаты:
+
+| Проверка | Фактический итог и границы |
+|---|---|
+| Joint normal focused | 44/44; ошибочный исходный42 сохранён отдельно. |
+| Joint normal full | 304/304 на Elder; полные первичные данные опубликованы. |
+| ModelSpec2 fresh-process replay | 8/8 Classic/Branch×N0/N1×C-Off/On; actual soma/input CSV побайтно совпадают с исходными paired observations. |
+| Python readers этого корпуса | 128/128, без failures/errors/skips. [Приёмка](JointOwnerReplayNormal.ru.md). |
+| Временные графики переноса | Реальный plotting test1/1 на M40:60 видов/12 сом/8 моделей. В Git24 PNG; full cache на Data. [Читаемый отчёт и ограничения](JointOwnerReplayVisuals.ru.md). |
+| Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
+| Прежний C-search ASan K1 | Тот же supervisor3649813/start284056538 подтверждён живым; full262 ещё работает. Это иной code snapshot. |
+| Следующий joint ASan44 | Поставлен в ожидание K1; новый worker3836828/start286684788, фактические модели ещё не запускались. [Условия и budgets](../../../Reports/StructTrain/TimeLearner/s07-joint-asan44-queued-a2/job.json). |
+
+Pending algorithm/Pulse branch не объединена в develop. Опубликованы данные и адресные исправления инфраструктуры, а не общий алгоритмический срез. Остаются joint ASan44/304/replay/readers, остальные режимы/профили, общий контроллер, production pipeline и научная матрица. Только этап0 полностью принят;1–12 частичны. Восемь replay моделей — инженерный transport-контроль с одним паттерном, не научная классификация всей матрицы и не доказательство влияния LT-мембраны.
+
 ## Принятая C++ основа до последующих Python merges
 
 | Репозиторий | Принятая исходная точка |
@@ -230,3 +247,63 @@ members/279 source blobs/21 fresh unit closures, implementation34394c301
 ещё feature, не develop. Elder61 поставлен в ожидание normal304 slot; global
 M40 schema1 и действующие SDK неизменны. Production integration/остальные
 fault cases и весь этап10 остаются частичными.
+
+
+## Дополнение после восстановления связи и проверки дисков
+
+[Завершённые Elder gates](ElderCompletedGates-2026-11-04.ru.md): joint normal304/304
+и schema3 kernel61/61 завершились; первичные архивы и closures проверены на
+worker и локально и сохранены в Git. Дополнительные joint readers/ASan и
+production worker acceptance остаются открытыми. На Elder18GiB free/97% used,
+поэтому новые большие model jobs там не запускались. M40 Data387GiB free.
+Повторный запуск уже работающего K1 не выполнялся.
+
+
+[Managed native preflight acceptance](ManagedNativePreflightAcceptance.ru.md):
+Elder62/62 новых alias/resource controls, M4019/19 actual public preflight/
+portable checks. Предшествующая M4017/19 попытка сохранена с доказанными
+512MiB OOM. Это адресная приёмка evidence; code backend не promoted,
+Train→Test/production matrix и M40 повтор suite62 остаются pending.
+
+
+## Принятый пакет theory/sim
+
+[14 исторических исходников](TheoryScriptRetirement.ru.md) удалены из Docs
+без wrappers; модели данных, отчёты и прежние научные критерии сохранены.
+Manifest121 records (119 retired,2 moved), complete=false, проверен на обоих
+workers с restored-path Git-tree negative control. После этого адресного
+удаления прежний path-based остаток231 уменьшается до217 (29 root,188 Bin).
+Это поправка к историческому inventory, не новая общая semantic/runtime приёмка.
+
+
+## Исправленная регрессия analysis CLI
+
+[Коллизия имени analyze](AnalysisDispatchRegression.ru.md) исправлена отдельным
+alias import; production5 checks прошли на каждом worker по настоящим native
+данным. На Elder дополнительно исполнены два readonly native controls; на M40
+выполнен повторный анализ тех же Git primaries, без нового native запуска.
+Совместные readers124/ModelSpec2 fresh-process coverage и joint ASan остаются
+открытыми; этот hotfix не является их приёмкой.
+
+
+## Joint readers: приёмка остаётся открытой
+
+[Точные результаты и следующий gate](JointReaderOpenGates.ru.md): source802
+reader119 и source4c reader124 не прошли. CLI shadowing исправлен отдельно,
+но для новых восьми ModelSpec2 recognition cases ещё нужен настоящий
+fresh-process replay, затем полный reader gate. Недостающий domain fixture
+получен в отдельном native2, не добавлен задним числом в старый native304.
+Все failed attempts сохранены в Git; algorithm feature/joint ASan не приняты.
+
+
+## Normal joint owner8/readers128
+
+[Восемь настоящих отдельных импортов](JointOwnerReplayNormal.ru.md) и полный
+reader128 source982 прошли. Новые ответы byte-exact с original paired waveform,
+original dataset304 не менялся. Failed attempts сохранены. Это закрывает
+конкретные normal reader/replay blockers; joint ASan и общий режимный/scientific
+охват остаются pending. Код алгоритмов/Pulsecc этим evidence merge не promoted.
+
+### Читаемые графики fresh-process переноса
+
+[Отчёт и ограничения](JointOwnerReplayVisuals.ru.md): на M40 прошёл реальный plotting gate 1/1 для 8 моделей, 12 сом и 60 видов. В Git сохранены 24 выбранных PNG и данные проверки; полные отчёты — воспроизводимый кэш на отдельном диске M40. Проверка не заменяет научную матрицу всех паттернов. Joint ASan и остальные пункты плана остаются открытыми; стадии целиком не закрываются.
