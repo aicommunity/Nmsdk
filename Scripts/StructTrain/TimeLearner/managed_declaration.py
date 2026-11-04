@@ -84,7 +84,7 @@ def validate_downstream_declaration(operation, job, model):
                 2 <= count(trial['maximum_samples']) <= 10000000,
                 'invalid_calibration_proof_request_budget')
         ticks = number(number(trial['duration'])*number(model['frequency_hz']))
-        require(equal(ticks, round(ticks)) and ticks+1 <= trial['maximum_samples'],
+        require(ticks >= 1 and equal(ticks, round(ticks)) and ticks+1 <= trial['maximum_samples'],
                 'worker_trial_window_or_sample_budget')
         signature = trial['label'], trial['pattern_hash']
         require(samples.setdefault(trial['sample_id'], signature) == signature, 'worker_sample_collision')

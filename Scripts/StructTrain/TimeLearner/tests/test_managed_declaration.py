@@ -9,6 +9,8 @@ import unittest
 
 from ..__main__ import main
 from ..managed_pipeline import _validate
+from ..managed_pipeline import signed
+from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import EvidenceError, load
 
 
@@ -60,9 +62,30 @@ class ManagedDeclarationTest(unittest.TestCase):
         self.reject(job, 'worker_trial_window_or_sample_budget')
 
     def test_nonfinite_duration_cannot_reach_a_native_process(self):
-        for duration in (float('nan'), float('inf'), True):
+        for duration in (float('nan'), float('inf'), True, 1e308):
             job = self.job();self.phase(job, 'evaluate')['trials'][0]['duration'] = duration
             self.reject(job, 'nonfinite|number|numeric')
+
+    def test_subtick_window_cannot_round_to_an_empty_observation(self):
+        job = self.job()
+        job['phases'] = [p for p in job['phases'] if p['operation'] != 'calibrate']
+        train = job['phases'][0]['job']
+        dimension = len(train['configuration']['model']['inputs'])
+        train['configuration']['model']['initial_isi'] = [0.] * dimension
+        job['phases'][0]['job'] = signed(train)
+        for trial in self.phase(job, 'evaluate')['trials']:
+            trial['pattern_isi'] = [0.] * dimension
+            if trial['label'] == 'foil':
+                trial['pattern_isi'][-1] = 1e-20
+            trial['pattern_hash'] = digest(trial['pattern_isi'])
+            trial['duration'] = 1e-18
+        self.reject(job, 'worker_trial_window_or_sample_budget')
+
+    def test_fractional_sample_interval_is_rejected(self):
+        job = self.job()
+        frequency = job['phases'][0]['job']['configuration']['model']['frequency_hz']
+        self.phase(job, 'evaluate')['trials'][0]['duration'] += 0.5/frequency
+        self.reject(job, 'worker_trial_window_or_sample_budget')
 
     def test_response_criterion_uses_the_scorer_contract(self):
         for anchor in ('unknown', None):
