@@ -242,8 +242,28 @@ def main(argv: list[str] | None = None) -> int:
     probe.add_argument("--input-index", type=int)
     probe.add_argument("--trial-id")
     probe.add_argument("--output", type=Path, required=True)
+    fixed = commands.add_parser("fixed-geometry-resistance", help="gate stock Rs controls on the complete stopped model graph")
+    fixed.add_argument("action", choices=["prepare", "run"])
+    fixed.add_argument("source", type=Path)
+    fixed.add_argument("--runtime-manifest", type=Path)
+    fixed.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
-    if args.command == "probe-job":
+    if args.command == "fixed-geometry-resistance":
+        from .fixed_geometry_resistance import prepare, run
+        from .native_evidence import EvidenceError, require
+        try:
+            if args.action == "prepare":
+                require(args.runtime_manifest is None, "fixed_geometry_prepare_has_no_runtime")
+                result = prepare(args.source, args.output)
+            else:
+                require(args.runtime_manifest is not None, "fixed_geometry_runtime_required")
+                result = run(args.source, args.runtime_manifest, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "probe-job":
         from .native_characterization import prepare_job, audit_execution
         from .native_evidence import EvidenceError, load, require
         from .native_calibration_worker import _write
