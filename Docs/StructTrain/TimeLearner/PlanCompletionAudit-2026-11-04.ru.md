@@ -221,3 +221,12 @@ isolated M40 recovery освобождает simulated runtime lease после 
 проверены; обе unit затем закрыты. Main registry/нейронные jobs не менялись.
 Исправление, registration-before-launch, aggregate caps и повтор этого fault
 case остаются обязательными до promotion source1fd77d34f. Этап10 не завершён.
+
+[Schema3 managed-unit reservations](ManagedUnitsM40Acceptance.ru.md): M40
+61/61, включая12 новых graph/cap/recovery cases и49 legacy controls. Fault
+parent-closed/managed-child-live теперь удерживает isolated schema3 runtime;
+после full graph closure освобождение подтверждено в SQLite. Приняты290
+members/279 source blobs/21 fresh unit closures, implementation34394c301
+ещё feature, не develop. Elder61 поставлен в ожидание normal304 slot; global
+M40 schema1 и действующие SDK неизменны. Production integration/остальные
+fault cases и весь этап10 остаются частичными.
