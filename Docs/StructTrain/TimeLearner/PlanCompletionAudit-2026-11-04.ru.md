@@ -351,3 +351,7 @@ Coordinator source2cc остаётся queued на Elder; готовый reconci
 ## Pending managed live recognition route
 
 Candidate289a28ee73f4812fc860de88883ac469cf3e5516 добавляет отдельный schema2 Train→frozen Test без повторного export из solo: [контракт и открытые проверки](ManagedLiveRecognitionRouting.ru.md). [Gate6/10 actual native units](../../../Reports/StructTrain/TimeLearner/s10-managed-live-routing-queued-normal-a1/job.json) поставлен на Elder после corrected baseline133 и declaration11, SDK33fc/Pulsecc неизменяемый. До фактического результата не принят; остальные scientific/mode/fault требования исходного плана сохраняются.
+
+## Pending minimum native sample window
+
+Сверка preflight с NativeRecognitionObservationValidation.cpp выявила missing ticks>=1: slack округления сам по себе допускал окно около нуля шагов. Candidate df5e06800ca57a65a66e8f401c23e192d39d8778 добавляет явный минимум и проверки subtick/fractional/overflow без изменения physical tolerances. [Gate13](../../../Reports/StructTrain/TimeLearner/s10-managed-declaration-queued-normal-a2/job.json) поставлен после полного закрытия live-routing worker; native моделей в нём нет. Прежние pinned gate11/source427 и live6/source289 не менялись. Новое исправление пока AST-only и не принято в develop.
