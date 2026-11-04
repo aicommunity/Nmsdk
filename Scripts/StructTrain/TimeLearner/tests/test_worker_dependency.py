@@ -43,12 +43,16 @@ class WorkerDependencyTest(unittest.TestCase):
         script = self.root/'reserve.py'
         script.write_text('import json,sys,subprocess\nfrom pathlib import Path\n'
             'sys.path.insert(0,'+repr(str(Path(__file__).resolve().parents[4]))+')\n'
-            'from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations\n'
+            'from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations,ReservationError\n'
             'r=Reservations('+repr(str(self.root/'leases.sqlite3'))+')\n'
             'values=[]\n'
             'for i in range('+str(2 if twice else 1)+'):\n'
-            ' values.append(r.reserve("actual-dependency",[{"path":'+repr(str(self.root))+
+            ' try:\n'
+            '  values.append(r.reserve("actual-dependency",[{"path":'+repr(str(self.root))+
             '+"/scratch-"+str(i),"access":"write"}],ttl_seconds=.001))\n'
+            ' except ReservationError as error:\n'
+            '  Path('+repr(str(self.root/'duplicate-rejection.json'))+').write_text(json.dumps({"reason":str(error)}))\n'
+            '  break\n'
             'Path('+repr(str(self.root/'leases.json'))+').write_text(json.dumps(values))\n'+
             ('subprocess.Popen(["/bin/sleep","20"],start_new_session=True)\n' if child else ''))
         output = self.launch([str(script)], manifest=self.manifest('worker.rs2', sys.executable))
@@ -105,13 +109,16 @@ class WorkerDependencyTest(unittest.TestCase):
         self.assertEqual((result['state'], result['reason']), ('refused', 'dependency_job_id_mismatch'))
         registry.recover_closed_worker(leases[0]['token'], output, note='original reservation retained')
 
-    def test_two_reservations_with_one_attempt_identifier_are_ambiguous(self):
+    def test_registry_rejects_duplicate_job_without_losing_original_reservation(self):
         output, registry, leases = self.reserving_worker(twice=True)
+        self.assertEqual(json.loads((self.root/'duplicate-rejection.json').read_text())['reason'],
+                         'reservation_job_already_recorded')
+        self.assertEqual(len(leases), 1)
+        self.assertEqual(len(registry.inspect()['leases']), 1)
         result = self.observe(output, registry, 'actual-dependency')
-        self.assertEqual(result['reason'], 'dependency_reservation_ambiguous')
-        self.assertEqual(result['state'], 'refused')
-        for lease in leases:
-            registry.recover_closed_worker(lease['token'], output, note='explicit duplicate lease cleanup')
+        self.assertEqual((result['state'], result['reservation_state']), ('pending', 'held'))
+        self.assertEqual(result['reservation_token'], leases[0]['token'])
+        registry.recover_closed_worker(leases[0]['token'], output, note='original lease retained after duplicate refusal')
 
     def test_live_descendant_prevents_dependency_readiness(self):
         output, registry, leases = self.reserving_worker(child=True)
