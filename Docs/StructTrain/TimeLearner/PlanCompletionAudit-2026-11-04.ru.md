@@ -21,6 +21,7 @@
 | ModelSpec2 fresh-process replay | 8/8 Classic/Branch×N0/N1×C-Off/On; actual soma/input CSV побайтно совпадают с исходными paired observations. |
 | Python readers этого корпуса | 128/128, без failures/errors/skips. [Приёмка](JointOwnerReplayNormal.ru.md). |
 | Временные графики переноса | Реальный plotting test1/1 на M40:60 видов/12 сом/8 моделей. В Git24 PNG; full cache на Data. [Читаемый отчёт и ограничения](JointOwnerReplayVisuals.ru.md). |
+| Managed normal full path | 8/8:четыре Exact N1 Train/export/frozen пути и четыре stopped/export-refusal controls;16 actual managed native units закрыты. [Scope и открытые пункты](ManagedNativePipelineAcceptance.ru.md). |
 | Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
 | Прежний C-search ASan K1 | Тот же supervisor3649813/start284056538 подтверждён живым; full262 ещё работает. Это иной code snapshot. |
 | Следующий joint ASan44 | Поставлен в ожидание K1; новый worker3836828/start286684788, фактические модели ещё не запускались. [Условия и budgets](../../../Reports/StructTrain/TimeLearner/s07-joint-asan44-queued-a2/job.json). |
