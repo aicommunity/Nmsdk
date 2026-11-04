@@ -1,0 +1,266 @@
+{
+  "cases": {
+    "Classic-v1": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-787be3b2-c07b-47fb-8e1a-619850ad1891.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-7f0d0550-cdff-42f4-a128-f1e82638600b.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-977c6002-5809-4be3-9352-e88df378f2d0.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.0037147266773602363,
+        0.004780132099175549,
+        0.005976069123634809,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Classic-v2": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-e8bf76a5-4949-4468-b613-b81e76dfab5d.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-932d806d-8919-4c18-a1ff-37eb81ed2d51.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-c36489e6-9e61-4945-8aa9-80dcdb8333dd.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.0037147266773602363,
+        0.004780132099175549,
+        0.005976069123634809,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Branch-v1": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-87c1f2b7-1b12-408e-ab9f-8b33127e8bf6.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-b88ed369-3df0-4f1a-9a04-4ef260a64b05.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-04a2b7d9-ade3-401c-ad34-24e79523b6bf.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.007459905324788041,
+        0.009589717471100379,
+        0.011979716372791006,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Branch-v2": {
+      "phases": [
+        {
+          "operation": "measured-grid",
+          "unit": "timelearner-72ad237a-1db7-44a8-9d82-cc1c9a9969e6.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": true,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "fresh-frozen",
+          "unit": "timelearner-73182884-0cc2-48fa-956a-4bd5a1cb6150.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "operation": "evaluate",
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        },
+        {
+          "operation": "silent-nonseparable",
+          "unit": "timelearner-bb772924-fdb4-406c-b5cf-9dcb93c79b11.service",
+          "audit": {
+            "run_evidence_consistent": true,
+            "full_grid_model_binding_verified": false,
+            "native_execution_verified": false,
+            "independent_partition_verified": false,
+            "evaluation_verdict": null
+          }
+        }
+      ],
+      "calibration_status": "calibrated",
+      "thresholds": [
+        0.007459905324788041,
+        0.009589717471100379,
+        0.011979716372791006,
+        1
+      ],
+      "frozen_counts": {
+        "TP": 2,
+        "FP": 0,
+        "FN": 0,
+        "TN": 2,
+        "targets": 2,
+        "foils": 2,
+        "target_trials_with_outside_spikes": 0,
+        "accuracy": 1.0,
+        "target_hit_rate": 1.0,
+        "foil_response_rate": 0.0
+      },
+      "silent_control_status": "nonseparable",
+      "source_unchanged": true,
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    }
+  },
+  "selected_thresholds": {
+    "Classic-v1": 0.004780132099175549,
+    "Classic-v2": 0.004780132099175549,
+    "Branch-v1": 0.009589717471100379,
+    "Branch-v2": 0.009589717471100379
+  },
+  "original_primary_commit": "28f7d2fe6f59232f19b33e5b24f4d4011eddfffb",
+  "models_trained_in_this_operation": false,
+  "historical_same_matrix": true,
+  "independent_partition_verified": false,
+  "unique_patterns": [
+    [
+      0.01,
+      0.03
+    ],
+    [
+      0.01,
+      0.24
+    ]
+  ],
+  "scientific_verdict": null,
+  "temporal_reports_pending": true
+}
