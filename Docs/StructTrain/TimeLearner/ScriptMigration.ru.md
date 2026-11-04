@@ -1,3 +1,5 @@
+Текущее принятое состояние:141 records (139 retired/2 moved), complete=false. [Cable/E1 two-worker приёмка](CableFamilyRetirement.ru.md). Следующие9 root tools — candidate150, пока только M40 gate: [scope и ожидание Elder](RemainingRootToolsRetirement.ru.md). Ниже сохранена хронология прежних приёмок.
+
 Принят04.11 пакет theory/sim:14 исторических исходников удалены без wrappers; manifest121 records (119 retired,2 moved), complete=false. Production history CLI и restored-path negative control проверены на обоих workers. [Источники и приёмка](TheoryScriptRetirement.ru.md). Общая migration ещё не завершена.
 
 # Миграция скриптов TimeLearner
