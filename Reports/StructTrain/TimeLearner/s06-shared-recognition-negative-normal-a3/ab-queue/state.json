@@ -1,0 +1,64 @@
+{
+  "dependencies": {
+    "managed-pipeline-coordinator-normal-a4": {
+      "kind": "timelearner_worker_dependency_state",
+      "schema_version": 1,
+      "job_id": "s10-managed-pipeline-coordinator-normal-a4",
+      "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a4-container",
+      "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+      "closure": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "a2d87c1c9dd4b216469c9275a36041fa62ea04453d0df842ca8ceb7b5e268e21",
+          "unit": "timelearner-dfe008ed-5c4b-4676-b4f8-e767e5668af2.service",
+          "invocation_id": "f8927621403d4e30a8a6adebf9e32ed2",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dfe008ed-5c4b-4676-b4f8-e767e5668af2.service",
+          "initial_main_pid": 2379749,
+          "initial_start_ticks": "339186045",
+          "sha256": "478f84385d4c56c4166e305b95053d9903e7be74df93be5b13471838607dd464"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "2379749",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dfe008ed-5c4b-4676-b4f8-e767e5668af2.service",
+          "MemoryMax": "536870912",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt dfe008ed-5c4b-4676-b4f8-e767e5668af2",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "f8927621403d4e30a8a6adebf9e32ed2"
+        },
+        "memory_max": 536870912,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "reservation_optional": true,
+      "reservation_state": null,
+      "reservation_token": null,
+      "state": "pending",
+      "reason": "dependency_worker_group_still_live",
+      "successful_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "managed-live-routing-normal-a5": {
+      "preunit_owner_live": true,
+      "native_unit_created": false,
+      "held_lease": false
+    }
+  },
+  "disk_free_bytes": 2525241344,
+  "minimum_disk_free_bytes": 3221225472,
+  "native_started": false,
+  "requires_preceding_business_success": false
+}
