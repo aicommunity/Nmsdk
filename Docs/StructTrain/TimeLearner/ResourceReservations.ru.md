@@ -42,5 +42,16 @@ abandoned lease остаётся held. Таймаут SSH не даёт прав
 parent/child overlap и независимый sibling; heartbeat/expiry; crash владельца;
 чужой token; два реальных конкурентных writers; symlink alias/его смена;
 создание нового runtime; transaction rollback; неизвестные schema/worker;
-недопустимые запросы и повреждённые held records. Численных моделей эти tests не запускают. До проверок
-на обоих серверах реализация не имеет runtime acceptance.
+недопустимые запросы и повреждённые held records. Численных моделей эти tests не запускают.
+
+Приёмка source `637e2638805b240b8cc9a11a519569a781e93e6b`: все15 tests прошли
+на Elder и M40, без failures/errors/skips. Это обычные Python/SQLite/process
+controls, не ASan или numerical tests. Source blobs и все10 членов каждого
+архива проверены независимо. Proofs:
+`3685d33dc945eb39e87df8787cb534f3ad43a23d` (Elder) и
+`25c391992a8e3d8bd97956f40661c4fafb0db4e1` (M40), разделы
+`Reports/StructTrain/TimeLearner/s10-resource-reservations-{elder,m40}-a2`.
+[ResourceReservationsVerification.json](ResourceReservationsVerification.json)
+фиксирует386 Git source hashes на worker и фактические версии Python/SQLite.
+Это приёмка reservation API; подключение его к production worker и вся
+остальная очередь по-прежнему обязательны и не заявляются завершёнными.
