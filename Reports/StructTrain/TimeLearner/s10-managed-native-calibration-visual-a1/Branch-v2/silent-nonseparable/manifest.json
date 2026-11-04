@@ -1,0 +1,57 @@
+{
+  "kind": "timelearner_calibration_transaction_visual_report",
+  "schema_version": 1,
+  "status": "diagnostic",
+  "transaction_status": "nonseparable",
+  "source_transaction_sha256": "5822fc0575eb07040663e371b58808acf27b23d5e2219eef2901c0f7c8e7513b",
+  "matrices": [
+    {
+      "name": "candidate-0000",
+      "model_revision": "2367278fac6b152c1bf34f7301c8ed9185a0bff9e17856ea03cd0dd75f2b482f",
+      "threshold": 1,
+      "trials": 4,
+      "report": "candidate-0000/index.html",
+      "result": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 4,
+        "files": 190,
+        "evaluation_verdict": null
+      }
+    }
+  ],
+  "completed_matrices": 1,
+  "trial_soma_pairs": 4,
+  "runtime": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "evidence_audit": {
+    "schema_version": 1,
+    "transaction_evidence_consistent": true,
+    "status": "nonseparable",
+    "diagnostic_only": false,
+    "negative_status_verified": true,
+    "calibrated": false,
+    "measured_candidates": 1,
+    "selected_index": null,
+    "package_audit": null,
+    "native_execution_verified": false,
+    "owner_restoration_verified": false,
+    "partial_observations_validated": false,
+    "statistical_independence_verified": false,
+    "evaluation_verdict": null
+  },
+  "source_primary_checked": false,
+  "calibration_claim": false,
+  "incomplete_matrix_plotted_as_complete": false,
+  "visual_acceptance_complete": false,
+  "limitations": [
+    "SI soma units unverified",
+    "visual acceptance pending",
+    "incomplete active probes retained in primary transaction; no complete-response plot inferred"
+  ],
+  "evaluation_verdict": null
+}
