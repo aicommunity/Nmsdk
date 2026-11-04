@@ -1,0 +1,78 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "614ededf-09a3-483f-8753-9d76a57f5f1a",
+  "job_id": "s10-worker-dependency-normal-a1",
+  "recorded_unix": 1793807715.0779943,
+  "administrator": {
+    "pid": 3947125,
+    "start_ticks": "288291263",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 3945849,
+    "start_ticks": "288275033",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "45a4c22721d09e38e37972757d51a9ab21db711887c34d75f6ae2cdcc67ee3b2",
+      "unit": "timelearner-a2ec3d81-b0b6-4e7e-ae80-02c91c6df9a6.service",
+      "invocation_id": "5f3787739be64fc49b35e0dd60c7034d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a2ec3d81-b0b6-4e7e-ae80-02c91c6df9a6.service",
+      "initial_main_pid": 3945849,
+      "initial_start_ticks": "288275033",
+      "sha256": "730202d9d22f6193db4798c37a8afc3f4754a263b026ca92d9ae74bd92c543d6"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-a2ec3d81-b0b6-4e7e-ae80-02c91c6df9a6.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Explicit release after failed8/9 dependency fixture gate: all ten actual external unit groups and controller freshly closed. Test failure retained; no neural model executed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-worker-dependency-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

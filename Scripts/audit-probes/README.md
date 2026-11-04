@@ -80,3 +80,5 @@ python3 Scripts/audit-probes/run_fixed_threshold_grid.py \
 Цель `audit_branch_update`: FinalizePostTuneMid / HandlePostTuneFinishIteration. После remediation — 8/8 PASS (включая NaN, setup failure, fallback metrics).
 
 A07 = calibration-quality контракт. A12 отложен (малый шаг Euler). Они не входят в обязательный план исправлений.
+
+Историческая команда `Scripts/audit_timelearner.py` выше относится к snapshot `cb0bb0c322736406d9e73a0b5542b3b3a5ba33ec`; файл извлекается через migration manifest. Она не является текущей командой аудита. Для нового source inventory используйте `python3 -m Scripts.StructTrain.TimeLearner inventory --root REPOSITORY --output INVENTORY.json`; evidence/scoring имеют отдельные production команды и критерии. См. [область миграции](../../Docs/StructTrain/TimeLearner/RemainingRootToolsRetirement.ru.md).
