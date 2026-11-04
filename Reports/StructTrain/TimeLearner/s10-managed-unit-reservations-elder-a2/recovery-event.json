@@ -1,0 +1,78 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "42dc5c15-3de7-4339-88d1-1baf4a337545",
+  "job_id": "s10-managed-unit-reservations-elder-a2",
+  "recorded_unix": 1793784874.6693842,
+  "administrator": {
+    "pid": 1834770,
+    "start_ticks": "335463411",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 1834782,
+    "start_ticks": "335463422",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "014346a9844e66b2670d6ebd08570864cd20e2a6826e656f777bdca3c6f51b7d",
+      "unit": "timelearner-522aaa63-8e9f-4ab5-94f4-d1dab95df787.service",
+      "invocation_id": "21fc5a91e04a45a689bbb5bef12442fa",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-522aaa63-8e9f-4ab5-94f4-d1dab95df787.service",
+      "initial_main_pid": 1834782,
+      "initial_start_ticks": "335463422",
+      "sha256": "075242732fa7f39213cd86d4b505d2d212ed3d80c9f44863222f1b68d6249fca"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-522aaa63-8e9f-4ab5-94f4-d1dab95df787.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Metadata suite passed62 tests, controller and all persisted test unit bindings freshly closed. Isolated schema3 ledgers only; no neural model ran.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-native-managed-integration-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-native-managed-integration-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
