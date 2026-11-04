@@ -598,3 +598,5 @@ lease recovery и production pipeline integration остаются открыт�
 - PhaseA historical tool retirement: [Elder](s09-phasea-tools-elder-a3/README.ru.md), [M40](s09-phasea-tools-m40-a3/README.ru.md),166 retrieval records and restored-path refusal on each worker; August results preserved, complete migration pending.
 
 - [Shared recognition negative8](s06-shared-recognition-negative-normal-a3/README.ru.md): all8 ran and failed, no133 or owner API pass; baseline comparison queued.
+
+- [Obsolete build-cache cleanup](s02-obsolete-schema4-build-cache-a4/README.ru.md): exact j1/j2 only, runtime/source/results retained, full process-use audit and metadata preserved.
