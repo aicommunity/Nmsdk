@@ -96,10 +96,10 @@ QJsonArray Parameters(const std::vector<InputParameters>& values)
 template<class Owner> int Execute(const Job& j,const QString& output)
 {
     return WithFreshOwner<Owner>(j.ownerClass,j.model.frequencyHz,"ProbeOwner",[&](auto,auto environment,auto model,auto owner) {
+        const bool imported=!j.stopped.isEmpty();
         owner->ControllerVersion=2;owner->CalculateMode=1;
         owner->StructureBuildMode=j.model.editPolicy.preserveAllocatedCable?0:1;
         owner->SyncCapacitanceTrim=0;owner->EnablePostTrainTuning=false;owner->AutoCalibrateFixedLTZThreshold=false;owner->IsNeedToTrain=false;
-        const bool imported=!j.stopped.isEmpty();
         const auto built=imported?owner->ImportNativeLearnedState(j.stopped,Text(j.document["implementation_id"])):owner->ConstructNativeModel(j.model);
         Require(built.status==(imported?NativeModelBuildStatus::Adopted:NativeModelBuildStatus::Constructed),built.reason.c_str());
         Require(built.effective.size()==j.model.inputs.size(),"probe_initial_dimension_changed");
@@ -109,101 +109,103 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         Require(owner->NativeModelEditFailure().empty(),owner->NativeModelEditFailure().c_str());
         Require(owner->ControllerVersion.GetData()==2 && owner->CalculateMode.GetData()==1 && owner->ConfiguredModelInitialized.GetData(),"probe_native_owner_not_initialized");
         RequireNativeCalculationSchedule(*owner);
-        QJsonObject sourceImport;
-        auto expectedParameters=built.effective;
-        if(imported) {
-            auto restored=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
-            auto generator=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
-            Require(restored && generator,"probe_import_graph_missing");
-            const auto identity=NmsdkTools::IdentifyModel(restored,{{&generator->Output,"burst"}});
-            const auto expected=Object(Object(Object(j.stopped["neuron"])["graph"])["identity"]);
-            Require(identity==expected && Parameters(owner->ReadNativeParameters())==Array(j.stopped["trained_inputs"]),"probe_import_graph_or_parameters_changed");
-            sourceImport=Signed({{"kind","native_probe_source_import"},{"schema_version",1},
-                {"source_stopped_sha256",j.stopped["sha256"]},{"identity",identity},{"parameters",Parameters(owner->ReadNativeParameters())},
-                {"physical_dynamics_reset",true},{"controller_dynamics_reset",true},{"controller_history_preserved",true},{"training_started",false}});
-            for(const auto& change:j.resistanceIntervention)expectedParameters.at(change.first).resistance=change.second;
-            if(!j.resistanceIntervention.empty()) {
-                const auto edited=owner->ApplyNativeParameters(expectedParameters);
-                Require(edited.status==NativeEditStatus::Applied,edited.reason.c_str());
-            }
-        }
         auto neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
         auto source=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
         Require(bool(neuron) && bool(source),"probe_graph_missing");
         const NmsdkTools::ModelBoundarySources ports{{&source->Output,"burst"}};
-        const auto initial=NmsdkTools::IdentifyModel(neuron,ports);
-        Require(initial["valid"]==QJsonValue(true),"probe_invalid_initial_graph");
-        const auto parameters=owner->ReadNativeParameters();
-        Require(Parameters(parameters)==Parameters(expectedParameters),"probe_lifecycle_changed_parameters");
-        std::vector<int> attachments;for(const auto& p:parameters)attachments.push_back(p.length);
-        std::optional<NativeModelSpec> actual;
-        if(imported)actual=DescribeNativeLearnerModel(*owner,j.model.branch,j.model.normalization,attachments,j.model.editPolicy);
-        const auto configuration=IdleConfiguration(j,parameters,actual?&*actual:nullptr);
-        const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());Require(integration.valid,integration.reason.c_str());
-        const auto controlBaseline=EncodeNativeTrainingState(owner->NativeTrainingController(),initial["sha256"].toString().toStdString(),parameters);
+        const auto restoredIdentity=NmsdkTools::IdentifyModel(neuron,ports);
+        Require(restoredIdentity["valid"]==QJsonValue(true) && Parameters(owner->ReadNativeParameters())==Parameters(built.effective),"probe_lifecycle_changed_model");
+        if(imported)Require(restoredIdentity==Object(Object(Object(j.stopped["neuron"])["graph"])["identity"]),"probe_import_graph_changed");
+        const auto controlSnapshot=[&]() {
+            QJsonArray packets;for(const auto& p:owner->NativeTrainingController().ObservedPackets())packets.append(EncodeNativeProbeEvidence(p));
+            return Signed({{"kind","native_probe_controller_snapshot"},{"schema_version",1},
+                {"summary",EncodeNativeTrainingState(owner->NativeTrainingController(),restoredIdentity["sha256"].toString().toStdString(),built.effective)},
+                {"observed_packet_count",double(packets.size())},{"observed_packets_sha256",NmsdkTools::CanonicalModelDataSha256(packets)}});
+        };
+        const auto controlBaseline=controlSnapshot();
         const auto idle=[&]() {
             const auto& control=owner->NativeTrainingController();
-            return control.State()==NativeTrainingState::Idle && control.IssuedReferenceProbes()==0 &&
-                !control.Certificate() && !owner->IsNeedToTrain.GetData() &&
-                (imported || (control.ObservedPackets().empty() && !control.References())) &&
-                EncodeNativeTrainingState(control,initial["sha256"].toString().toStdString(),parameters)==controlBaseline;
+            return control.State()==NativeTrainingState::Idle && control.IssuedReferenceProbes()==0 && !control.Certificate() &&
+                !owner->IsNeedToTrain.GetData() && (imported || (control.ObservedPackets().empty() && !control.References())) && controlSnapshot()==controlBaseline;
         };
         Require(idle() && environment->GetTime().GetDoubleTime()==0. && owner->NativeProbeState()==NativeProbeStatus::Idle,"probe_preparation_started_training");
-        Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");
-        QJsonArray artifacts{Write(output,"job.json",j.document),Write(output,"owner-configuration.json",EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(owner->ControllerConfiguration.GetData())))};
+        Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");QJsonArray artifacts;
+        artifacts.append(Write(output,"job.json",j.document));
+        artifacts.append(Write(output,"owner-configuration.json",EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(owner->ControllerConfiguration.GetData()))));
         if(imported) {
-            artifacts.append(Write(output,"source-import.json",sourceImport));
-            artifacts.append(Write(output,"probe-configuration.json",EncodeConfiguredNativeTraining(configuration)));
+            Require(controlBaseline["observed_packets_sha256"]==QJsonValue(NmsdkTools::CanonicalModelDataSha256(j.stopped["observed_packets"])),"probe_import_history_changed");
+            artifacts.append(Write(output,"source-import.json",Signed({{"kind","native_probe_source_import"},{"schema_version",1},
+                {"source_stopped_sha256",j.stopped["sha256"]},{"identity",restoredIdentity},{"parameters",Parameters(built.effective)},
+                {"physical_dynamics_reset",true},{"controller_dynamics_reset",true},{"controller_history_preserved",true},{"training_started",false}})));
             artifacts.append(Write(output,"controller-before.json",controlBaseline));
         }
+        NmsdkTools::ModelRevisionObserver observer;
+        std::size_t ticks=0;std::string execution="completed";
+        const auto start=std::chrono::steady_clock::now();
+        const auto runProbe=[&](const ConfiguredNativeTraining& configuration,const std::string& trial,const QJsonObject& identity,EvidenceWriter& evidence) {
+            auto plan=MakeConfiguredNativeTrainingPlan(configuration);auto request=plan.probe;
+            request.activeInput=int(j.input);request.inputId="input"+std::to_string(j.input);request.baseModelRevision=identity["sha256"].toString().toStdString();
+            request.specification.runId=j.runId;request.specification.trialId=trial;request.specification.windows={plan.inputWindows[j.input]};
+            request.readModelRevision=[&](){return observer.Read(neuron,ports).toStdString();};
+            request.readFullModelRevision=[&](){const auto actual=NmsdkTools::IdentifyModel(neuron,ports);
+                Require(actual["valid"]==QJsonValue(true),"probe_invalid_live_graph");return actual["sha256"].toString().toStdString();};
+            double end=0.;
+            request.onPrepared=[&](const auto& p,const auto& spec){end=spec.end;evidence.Prepared(p,spec);};
+            request.onSample=[&](const auto& sample){
+                evidence.Sample(sample);
+                if(QFileInfo::exists(QDir(output).filePath("cancel.request")))execution="cancelled";
+                else if(std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count()>=j.wallSeconds)execution="timeout";
+                else if(ticks>=j.maximumTicks && Detail::After(end,sample.time))execution="model_tick_budget_exhausted";
+                if(execution!="completed")throw std::runtime_error(execution);
+            };
+            owner->QueueNativeProbe(std::move(request));std::optional<NativeProbeResult> result;
+            while(!(result=owner->TakeNativeProbeResult())) {
+                Require(ticks<j.maximumTicks,"probe_tick_budget_without_terminal_packet");
+                ++ticks;model->Calculate();environment->IncreaseModelTimeByStep();
+            }
+            evidence.Observation(*result);return std::move(*result);
+        };
+        const auto configurationFor=[&](const std::vector<InputParameters>& parameters) {
+            std::optional<NativeModelSpec> actual;std::vector<int> attachments;for(const auto& p:parameters)attachments.push_back(p.length);
+            if(imported)actual=DescribeNativeLearnerModel(*owner,j.model.branch,j.model.normalization,attachments,j.model.editPolicy);
+            return IdleConfiguration(j,parameters,actual?&*actual:nullptr);
+        };
+        if(!j.resistanceIntervention.empty()) {
+            // Native edits require ownership at a consumed probe boundary. Use
+            // a real source-state probe, even if its measured peak is invalid.
+            // Do not invent a completed observation or modify executor state.
+            EvidenceWriter baseline(output,j.model.branch?1:built.effective.size());
+            const auto measured=runProbe(configurationFor(built.effective),j.trialId+"/source-baseline",restoredIdentity,baseline);
+            for(const auto& record:baseline.FinalizeWithPrefix("baseline_trial_"))artifacts.append(record);
+            Require(measured.status==NativeProbeStatus::Completed && measured.observation && measured.observation->complete && idle(),"probe_intervention_baseline_not_completed");
+            auto requested=built.effective;for(const auto& change:j.resistanceIntervention)requested.at(change.first).resistance=change.second;
+            const auto edited=owner->ApplyNativeParameters(requested);Require(edited.status==NativeEditStatus::Applied,edited.reason.c_str());
+            neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);Require(bool(neuron),"probe_edited_graph_missing");observer.Clear();
+        }
+        const auto initial=NmsdkTools::IdentifyModel(neuron,ports);Require(initial["valid"]==QJsonValue(true),"probe_invalid_initial_graph");
+        const auto parameters=owner->ReadNativeParameters();auto expected=built.effective;
+        for(const auto& change:j.resistanceIntervention)expected.at(change.first).resistance=change.second;
+        Require(Parameters(parameters)==Parameters(expected) && idle(),"probe_intervention_parameter_or_controller_mismatch");
+        const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());Require(integration.valid,integration.reason.c_str());
+        const auto configuration=configurationFor(parameters);
+        if(imported)artifacts.append(Write(output,"probe-configuration.json",EncodeConfiguredNativeTraining(configuration)));
         artifacts.append(Write(output,"initial-state.json",Signed({{"kind","native_probe_initial_state"},{"schema_version",1},
             {"identity",initial},{"parameters",Parameters(parameters)},{"training_started",false},{"search_executed",false},{"dynamics_checkpoint",false}})));
         EvidenceWriter evidence(output,j.model.branch?1:parameters.size());
-        auto request=MakeConfiguredNativeTrainingPlan(configuration).probe;
-        request.activeInput=int(j.input);request.inputId="input"+std::to_string(j.input);request.baseModelRevision=initial["sha256"].toString().toStdString();
-        request.specification.runId=j.runId;request.specification.trialId=j.trialId;
-        request.specification.windows={MakeConfiguredNativeTrainingPlan(configuration).inputWindows[j.input]};
-        NmsdkTools::ModelRevisionObserver observer;
-        request.readModelRevision=[&](){return observer.Read(neuron,ports).toStdString();};
-        request.readFullModelRevision=[&](){const auto identity=NmsdkTools::IdentifyModel(neuron,ports);
-            Require(identity["valid"]==QJsonValue(true),"probe_invalid_live_graph");return identity["sha256"].toString().toStdString();};
-        std::size_t ticks=0;double windowEnd=0.;std::string execution="completed";
-        const auto start=std::chrono::steady_clock::now();
-        request.onPrepared=[&](const auto& p,const auto& s){windowEnd=s.end;evidence.Prepared(p,s);};
-        request.onSample=[&](const auto& s){
-            evidence.Sample(s);
-            if(QFileInfo::exists(QDir(output).filePath("cancel.request")))execution="cancelled";
-            else if(std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count()>=j.wallSeconds)execution="timeout";
-            else if(ticks>=j.maximumTicks && Detail::After(windowEnd,s.time))execution="model_tick_budget_exhausted";
-            // The native executor catches a sink failure, retains the actual
-            // partial recorder and restores routing. Never reset the learner
-            // here or fabricate a complete observation at a budget boundary.
-            if(execution!="completed")throw std::runtime_error(execution);
-        };
-        owner->QueueNativeProbe(std::move(request));std::optional<NativeProbeResult> result;
-        while(!(result=owner->TakeNativeProbeResult())) {
-            Require(ticks<j.maximumTicks,"probe_tick_budget_without_terminal_packet");
-            ++ticks;model->Calculate();environment->IncreaseModelTimeByStep();
-        }
+        const auto result=runProbe(configuration,j.trialId,initial,evidence);
         const double probeWallSeconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count();
-        evidence.Observation(*result);
         for(const auto& record:evidence.FinalizeWithPrefix("probe_trial_"))artifacts.append(record);
         const auto final=NmsdkTools::IdentifyModel(neuron,ports);
-        const bool unchanged=final==initial && Parameters(owner->ReadNativeParameters())==Parameters(parameters);
-        const bool controllerIdle=idle();
-        if(imported)artifacts.append(Write(output,"controller-after.json",EncodeNativeTrainingState(owner->NativeTrainingController(),initial["sha256"].toString().toStdString(),parameters)));
-        if(execution=="completed" && result->status!=NativeProbeStatus::Completed)execution="probe_rejected";
-        if(!unchanged)execution="model_changed";
-        if(!controllerIdle)execution="unexpected_training_activity";
+        const bool unchanged=final==initial && Parameters(owner->ReadNativeParameters())==Parameters(parameters),controllerIdle=idle();
+        if(imported)artifacts.append(Write(output,"controller-after.json",controlSnapshot()));
+        if(execution=="completed" && result.status!=NativeProbeStatus::Completed)execution="probe_rejected";
+        if(!unchanged)execution="model_changed";if(!controllerIdle)execution="unexpected_training_activity";
         artifacts.append(Write(output,"final-state.json",Signed({{"kind","native_probe_final_state"},{"schema_version",1},
             {"identity",final},{"parameters",Parameters(owner->ReadNativeParameters())},{"model_unchanged",unchanged},{"controller_idle",controllerIdle}})));
-        // Preserve the exact external request, just as the Train driver does.
-        // Its mere presence is not proof that it arrived before window closure.
         const QString cancelPath=QDir(output).filePath("cancel.request");
         if(QFileInfo::exists(cancelPath)) {
-            Require(!QFileInfo(cancelPath).isSymLink(),"probe_cancel_request_symlink");
-            QFile file(cancelPath);Require(file.open(QIODevice::ReadOnly) && file.size()<=65536,"probe_cancel_request_unreadable");
-            const auto bytes=file.readAll();
+            Require(!QFileInfo(cancelPath).isSymLink(),"probe_cancel_request_symlink");QFile file(cancelPath);
+            Require(file.open(QIODevice::ReadOnly) && file.size()<=65536,"probe_cancel_request_unreadable");const auto bytes=file.readAll();
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
@@ -211,10 +213,8 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},
-            {"probe_wall_seconds",probeWallSeconds},
-            {"model_unchanged",unchanged},{"controller_idle",controllerIdle},{"probe_status",NativeProbeStatusName(result->status)},
-            {"observation_valid",bool(result->observation && result->observation->valid)},
-            {"observation_complete",bool(result->observation && result->observation->complete)},
+            {"probe_wall_seconds",probeWallSeconds},{"model_unchanged",unchanged},{"controller_idle",controllerIdle},{"probe_status",NativeProbeStatusName(result.status)},
+            {"observation_valid",bool(result.observation && result.observation->valid)},{"observation_complete",bool(result.observation && result.observation->complete)},
             {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
         return execution=="completed"?0:2;
     },[&](auto storage,auto environment) {
