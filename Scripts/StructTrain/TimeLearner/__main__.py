@@ -236,8 +236,31 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--bin-repository", type=Path)
     history.add_argument("--pulselib-repository", type=Path)
     history.add_argument("--output", type=Path)
+    probe = commands.add_parser("probe", help="prepare or audit a native whole-burst characterization without training")
+    probe.add_argument("action", choices=["prepare", "analyze"])
+    probe.add_argument("source", type=Path)
+    probe.add_argument("--input-index", type=int)
+    probe.add_argument("--trial-id")
+    probe.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
-    if args.command == "diagnostic-regression":
+    if args.command == "probe":
+        from .native_characterization import prepare_job, audit_execution
+        from .native_evidence import EvidenceError, load, require
+        from .native_calibration_worker import _write
+        try:
+            if args.action == "prepare":
+                require(args.input_index is not None and args.trial_id is not None, "probe_identity_required")
+                result = prepare_job(load(args.source), args.input_index, args.trial_id)
+            else:
+                require(args.input_index is None and args.trial_id is None, "probe_analysis_has_no_configuration_overrides")
+                result = audit_execution(args.source)
+            _write(args.output, result)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "diagnostic-regression":
         from .diagnostic_regression import run_diagnostic_regression
         from .native_evidence import EvidenceError
         try:
