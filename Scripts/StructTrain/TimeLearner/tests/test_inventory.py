@@ -145,3 +145,18 @@ class InventorySnapshotTest(unittest.TestCase):
         self.assertEqual(completed.returncode, 2, completed.stderr)
         self.assertEqual(json.loads(completed.stderr)['reason'], 'inventory_full_root_commit_required')
         self.assertFalse(output.exists())
+
+    def test_child_copy_of_root_package_and_script_symlink_remain_migration_candidates(self):
+        copied = self.bin/'Scripts/StructTrain/TimeLearner/duplicate.py';copied.parent.mkdir(parents=True)
+        copied.write_text('historical duplicate; never execute')
+        self.commit(self.bin)
+        link = self.root/'Docs/StructTrain/TimeLearner/alias.py'
+        os.symlink('tool.py', link)
+        self.commit(self.root)
+        value = build_inventory(self.root)
+        self.assertTrue(any(r['repository']=='Bin' and r['old_path']==copied.relative_to(self.bin).as_posix()
+                            for r in value['scripts']))
+        row = next(r for r in value['scripts'] if r['old_path']==link.relative_to(self.root).as_posix())
+        self.assertTrue(row['symlink'])
+        self.assertEqual(row['mode'], '120000')
+        self.assertEqual(row['content_sha256'], hashlib.sha256(b'tool.py').hexdigest())

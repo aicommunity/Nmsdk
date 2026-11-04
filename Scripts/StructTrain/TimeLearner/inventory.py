@@ -62,7 +62,7 @@ def build_inventory(root: Path, revision: str | None = None) -> dict:
             if not any(word in name.lower() for word in ("timelearner", "structtrain", "normsync")):
                 continue
             # New production tools are not historical migration candidates.
-            if name.startswith("Scripts/StructTrain/TimeLearner/"):
+            if repository == 'root' and name.startswith("Scripts/StructTrain/TimeLearner/"):
                 continue
             raw = None
             if Path(name).suffix.lower() not in SCRIPT_SUFFIXES:
