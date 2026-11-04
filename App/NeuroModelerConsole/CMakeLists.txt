@@ -21,6 +21,7 @@ target_sources(NeuroModelerConsole PRIVATE
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/main.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/TimeLearnerCalibrationJob.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/TimeLearnerTrainingJob.cpp
+  ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/TimeLearnerProbeJob.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/TimeLearnerTransportJob.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/ClDescGenerator.cpp
   ${CMAKE_SOURCE_DIR}/App/NeuroModelerConsole/PropertyAliasAnalyzer.cpp
