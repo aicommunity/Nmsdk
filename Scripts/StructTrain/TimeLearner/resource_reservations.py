@@ -247,6 +247,63 @@ class Reservations:
             connection.execute('UPDATE leases SET state=\'released\',updated=?,release_note=? WHERE token=?',
                                (time.time(), note, token))
 
+    def recover_closed_worker(self, token, contained_directory, *, note):
+        """Explicitly release a dead whole-worker owner after kernel closure.
+
+        A closed child unit does not prove closure of an outside controller.
+        Therefore only a lease whose original owner was this unit's bound main
+        process is eligible. Legacy outside-controller leases stay held.
+        This records resource recovery, never successful execution or science.
+        """
+        from .contained_process import inspect as inspect_contained
+        _require(type(token) is str, 'invalid_reservation_token')
+        _require(type(note) is str and bool(note.strip()) and len(note) <= 1024,
+                 'reservation_release_reason_required')
+        directory = Path(contained_directory).resolve(strict=True)
+        with self._transaction() as connection:
+            row = connection.execute('SELECT * FROM leases WHERE token=?', (token,)).fetchone()
+            _require(row is not None, 'reservation_token_unknown')
+            lease = self._decode(row)
+            _require(lease['state'] == 'held', 'reservation_not_held')
+            caller, owner = _identity(), lease['owner']
+            _require(caller['uid'] == owner['uid'] and caller['boot_id'] == owner['boot_id'],
+                     'reservation_recovery_worker_epoch_changed')
+            owner_status = _owner_status(owner)
+            _require(owner_status in ('missing', 'exited', 'pid_reused'), 'reservation_recovery_owner_not_closed')
+            closure = inspect_contained(directory)  # Fresh manager AND kernel readback, not a cached receipt.
+            request = json.loads((directory/'request.json').read_text(encoding='utf-8'))
+            binding = closure['binding']
+            _require(request['uid'] == owner['uid'] and request['boot_id'] == owner['boot_id'] and
+                     binding['request_sha256'] == request['sha256'] and
+                     binding['initial_main_pid'] == owner['pid'] and
+                     binding['initial_start_ticks'] == owner['start_ticks'],
+                     'reservation_recovery_unit_does_not_own_worker')
+            _require(closure['all_processes_closed'] is True, 'reservation_recovery_descendants_not_closed')
+            # Recheck after the external readback, retaining the SQLite write lock.
+            _require(_owner_status(owner) in ('missing', 'exited', 'pid_reused'),
+                     'reservation_recovery_owner_not_closed')
+            now = time.time()
+            event = {'kind': 'timelearner_closed_worker_recovery', 'schema_version': 1,
+                     'token': token, 'job_id': lease['job_id'], 'recorded_unix': now,
+                     'administrator': caller, 'owner': owner, 'owner_status': owner_status,
+                     'contained_directory': str(directory), 'closure': closure, 'note': note,
+                     'resources': lease['resources'], 'scientific_verdict': None,
+                     'successful_execution_attested': False}
+            connection.execute('CREATE TABLE IF NOT EXISTS closed_worker_recoveries ('
+                               'token TEXT PRIMARY KEY, recorded REAL NOT NULL, event TEXT NOT NULL)')
+            connection.execute('INSERT INTO closed_worker_recoveries VALUES (?,?,?)', (token, now, _json(event)))
+            connection.execute('UPDATE leases SET state=\'released\',updated=?,release_note=? WHERE token=?',
+                               (now, note, token))
+        return event
+
+    def recovery_history(self):
+        """Read the immutable recovery events; old ledger schemas remain usable."""
+        with self._transaction() as connection:
+            present = connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?",
+                                         ('closed_worker_recoveries',)).fetchone()
+            return ([json.loads(row['event']) for row in connection.execute(
+                'SELECT event FROM closed_worker_recoveries ORDER BY recorded,token')] if present else [])
+
     def inspect(self):
         with self._transaction() as connection:
             values = [self._decode(row) for row in connection.execute('SELECT * FROM leases ORDER BY created,token')]
