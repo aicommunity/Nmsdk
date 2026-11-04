@@ -1,3 +1,5 @@
+Место Elder: удалены толькоobsolete build caches j1/j2,освобождено1168801792 bytes,source SDK/runtime/results сохранены. [Полный аудит операции](ObsoleteBuildCacheCleanup.ru.md). Последний замер послеоперации3378659328 bytes; A/B всё ещё ждёт predecessor closure.
+
 Текущий shared recognition candidate4f/Pulsef6 собран,но8/8 Owner tests failed; full133 не запускался. Предыдущий133 не включает эти8,поэтому регрессия ещё не установлена. [Полный отрицательный primary и A/B queue](SharedRecognitionNegative.ru.md). Candidate_cpp_executed=false исходного producer ошибочен и исправлен отдельным derived receipt; core не принят.
 
 Текущий migration manifest:166 records,complete=false; PhaseA8 принят обоими workers, все научные/config/native blobs сохранены. [Доказательства](PhaseAToolRetirement.ru.md). Прежние158/189 ниже относятся к своим snapshots; из того lower-bound Bin каталога осталось181 после8 удалений. Stage9 и все этапы1–12 частичны.

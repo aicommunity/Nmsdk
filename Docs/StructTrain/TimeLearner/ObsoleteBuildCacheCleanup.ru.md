@@ -1,0 +1,15 @@
+# Очистка устаревших build caches на Elder,04.11.2026
+
+В пределах разрешения пользователя на удаление ненужных сборок удалены ровно build-capacitance-schema4-normal-j1 и build-capacitance-schema4-normal-j2 под /home/user/timelearner-refactor. Это старые generated build trees и чистые third-party fetch caches; исходные SDK, runtime, ресурсы и экспериментальные результаты сохранены. Current baseline/candidate SDK для A/B и работающего coordinator не затронуты.
+
+До удаления записаны SHA256/размеры всех файлов, CMakeCache/compile_commands, vendor HEAD/refs и отсутствие stash, включая nested Git directories. Vendor tracked tree совпадает с сохранённым build-initial-threshold-normal-a4 на1971adf55e3ebbfab83771d6174d37b77c352c71. CMake source/deploy/resource roots находятся за пределами удаляемых каталогов. Вне vendor/CMake-generated metadata не обнаружены CSV/XML/INI/архивы экспериментальных данных.
+
+Оба target path проверены как точные resolved descendants рабочего каталога; пересечений с held production resources нет. Отдельная проверка только на чтение с правами администратора прочитала kernel file/process сведения100 процессов пользователя: references/read errors=0. Она не удаляла файлы; удаление выполнял bounded worker обычного пользователя по связанным nonce/PID/start ticks и свежести отчёта. Пароль передан по stdin, в коде/артефактах не сохранялся. Во время операции runtime regular-file hashes сравнивались до/после; после неё broken runtime symlinks отсутствуют.
+
+Свободное место2 209 857 536→3 378 659 328 bytes: освобождено1 168 801 792 bytes, около1.09GiB. Это фактическое измерение операции; последующие задания могут снова расходовать место. Global resource capacity/model slots не менялись, использовалась отдельная path-only maintenance lease. Ни модель, ни компилятор не запускались.
+
+[Полный metadata primary](../../../Reports/StructTrain/TimeLearner/s02-obsolete-schema4-build-cache-a4/bundle.json), evidence `28a9ca48e13814d97ee8d5dcb7fc6dafc5103eba`:96 members,619 104 compressed bytes,SHA256 `0183e979d9bdb84288a8fc7fdde82841f8234e944049398f3af47077f4499705`. [Независимая проверка](ObsoleteBuildCacheCleanupVerification.json) подтверждает все members/checksums, target paths, vendor/caches inventory, nonce/kernel audit и closure/released lease четырёх попыток. Локально выполнены только Git/hash/archive проверки.
+
+A1 отказал из-за неверной классификации symbolic refs/remotes/origin/HEAD как Git directory. A2/A3 обычному пользователю не хватило видимости kernel сведений системных session helpers; попытка узкого распознавания sd-pam не решила общий случай. Все три остановились до удаления и сохранены полностью. A4 использовал отдельный read-only privileged audit без исключения неизвестных процессов и успешно завершился. Это разовая maintenance процедура, а не утверждение о готовности всего production scheduler.
+
+Освобождение места снимает текущий3GiB disk prerequisite для очереди shared-recognition A/B, но та также ждёт coordinator/live whole-group closure/release. Сам A/B и133 ещё не завершены; восемь failed Owner prerequisites не переоцениваются в PASS. Полный исходный план остаётся активным и частичным.
