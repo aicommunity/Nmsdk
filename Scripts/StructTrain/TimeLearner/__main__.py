@@ -181,6 +181,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
+    inventory.add_argument('--revision', help='full root commit SHA; defaults to current root HEAD and its recorded gitlinks')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
     analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
@@ -403,8 +404,15 @@ def main(argv: list[str] | None = None) -> int:
                               "validity": "invalid", "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "inventory":
+        import subprocess
+        from .native_evidence import EvidenceError
         from .inventory import write_inventory
-        write_inventory(args.root.resolve(), args.output.resolve())
+        try:
+            write_inventory(args.root.resolve(), args.output.resolve(), args.revision)
+        except (EvidenceError, OSError, ValueError, subprocess.SubprocessError) as error:
+            print(json.dumps({'kind': 'timelearner_inventory_error', 'reason': str(error),
+                              'scientific_verdict': None}), file=sys.stderr)
+            return 2
     elif args.command == "history":
         from .history import resolve_revision
         from .native_evidence import EvidenceError, require
