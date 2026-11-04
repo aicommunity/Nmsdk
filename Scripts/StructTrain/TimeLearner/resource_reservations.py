@@ -89,6 +89,13 @@ def _overlap(left, right):
     return a == b or a.is_relative_to(b) or b.is_relative_to(a)
 
 
+def _disk_device(path):
+    path = Path(path)
+    while not path.exists():
+        path = path.parent
+    return path.stat().st_dev
+
+
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
     @property
@@ -103,10 +110,12 @@ class Reservations:
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.host = socket.gethostname()
         self._capacity = _quantities(capacity, capacity=True) if capacity is not None else None
+        self.disk_device = self.path.parent.stat().st_dev if capacity is not None else None
         self.schema = '2' if self.capacity is not None else '1'
         self.metadata = {'schema_version': self.schema, 'worker_host': self.host}
         if self.capacity is not None:
             self.metadata['capacity'] = _json(self.capacity)
+            self.metadata['disk_device'] = str(self.disk_device)
         self._initialized = False
         with self._transaction() as connection:
             connection.execute('CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)')
@@ -125,6 +134,8 @@ class Reservations:
     def _transaction(self):
         _require(not self.requested_path.is_symlink(), 'reservation_database_symlink')
         _require(self.requested_path.resolve(strict=False) == self.path, 'reservation_database_alias_changed')
+        if self.capacity is not None:
+            _require(self.path.parent.stat().st_dev == self.disk_device, 'reservation_database_filesystem_changed')
         connection = sqlite3.connect(self.path, timeout=10, isolation_level=None)
         connection.row_factory = sqlite3.Row
         try:
@@ -174,6 +185,7 @@ class Reservations:
             _require(demands is None, 'reservation_budget_policy_required')
         else:
             demands = _quantities(demands)
+            self._validate_disk_resources(resources)
         owner, now, token = _identity(), time.time(), str(uuid.uuid4())
         with self._transaction() as connection:
             _require(connection.execute('SELECT 1 FROM leases WHERE job_id=?', (job_id,)).fetchone() is None,
@@ -217,7 +229,16 @@ class Reservations:
             value = self._owned(connection, token)
             _require(all(str(Path(r['requested_path']).resolve(strict=False)) == r['canonical_path']
                          for r in value['resources']), 'reservation_path_alias_changed')
+            if self.capacity is not None:
+                self._validate_disk_resources(value['resources'])
         return True
+
+    def _validate_disk_resources(self, resources):
+        # One disk budget covers one actual filesystem, not the sum of free
+        # space on unrelated system and archive disks. Multi-volume jobs need
+        # an explicit future policy; they must not silently borrow this budget.
+        _require(all(r['access'] == 'read' or _disk_device(r['canonical_path']) == self.disk_device
+                     for r in resources), 'reservation_disk_filesystem_mismatch')
 
     def release(self, token, *, note):
         _require(type(note) is str and bool(note.strip()) and len(note) <= 1024, 'reservation_release_reason_required')
@@ -242,5 +263,6 @@ class Reservations:
             _require(all(used[key] <= self.capacity[key] for key in used), 'reservation_capacity_exhausted')
             result.update(capacity=dict(self.capacity), reserved=used,
                           available={key: self.capacity[key]-used[key] for key in used},
+                          disk_device=self.disk_device,
                           os_resource_limits_enforced=False)
         return result
