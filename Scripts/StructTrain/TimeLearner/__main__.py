@@ -251,8 +251,29 @@ def main(argv: list[str] | None = None) -> int:
     fixed.add_argument("source", type=Path)
     fixed.add_argument("--runtime-manifest", type=Path)
     fixed.add_argument("--output", type=Path, required=True)
+    reuse = commands.add_parser("primary-reuse", help="losslessly reuse primary source files already published in Git")
+    reuse.add_argument("action", choices=["pack", "restore"])
+    reuse.add_argument("source", type=Path)
+    reuse.add_argument("--repository", type=Path, required=True)
+    reuse.add_argument("--reference-commit")
+    reuse.add_argument("--reference-archive")
+    reuse.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
-    if args.command == "fixed-geometry-resistance":
+    if args.command == "primary-reuse":
+        from .primary_reuse import pack, restore
+        from .native_evidence import EvidenceError, require
+        try:
+            if args.action == "pack":
+                require(args.reference_commit is not None and args.reference_archive is not None, "primary_reuse_reference_required")
+                result = pack(args.source, args.repository, args.reference_commit, args.reference_archive, args.output)
+            else:
+                require(args.reference_commit is None and args.reference_archive is None, "primary_reuse_restore_cannot_override_reference")
+                result = restore(args.source, args.repository, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error), "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "fixed-geometry-resistance":
         from .fixed_geometry_resistance import prepare, run
         from .native_evidence import EvidenceError, require
         try:
