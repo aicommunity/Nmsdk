@@ -241,3 +241,32 @@ H21 out: /media/user/Data/TimeLearnerRefactor/readbacks/s07-configured-probe-own
 публикация и независимая проверка primary. Новый CandidateCursor ASan A/B
 после H20 пока не запущен. Fresh closure, develop merge и исходные полные
 этапы6/7 остаются открытыми.
+
+
+## Уточнение04.11: baseline H21 принят, candidate ASan не подменяется им
+
+H21 owner3416749 закрыт. Git proof
+`37cc03f72cdd461f0bde508fbc466ac976081f9c` подтверждает standalone1/1 и
+полный213/213 native gate в исходном runtime H14. Это root
+`5c9b92350ee48d130d954bf10bf9521251f99e4e`, Pulse
+`54516bcc0aa7b0437c68f818598a19788e20eb55`, Rdk
+`acc3de8d1af2480d61ddb723c3288f7e81003049`, Bin
+`39d811e5e0798eecf124f32356c9fc6edbe4538a`. Длительность native26818.657s.
+Исправленные88/88 readers rootab95ba64323114f9b8a3fb05cdb46527c20d452a
+прошли; исходные87 сохранены с одним отказом, а не объявлены прошедшими.
+Actual libasan mapping,2155 archive members и899 source hashes проверены.
+Этот успешный повтор при неизменных120000ms не устанавливает причину H14 timeout.
+
+Новый downstream ASan gate C-search K1 запущен отдельно на root
+`69789b8cb93dbc2ce44fe7a8d90aed758cf93f76` / Pulse
+`84e456d6fb551021e0222ebaf51fa313df2623b4`, owner3649813/start_ticks284056538.
+Git ancestry подтверждает включение mechanical cursor commit
+`03b004aa36121766b8eac3040a282e272b392eb5` и codec fix253fe87; declared262
+содержит все213 IDs исходной регрессии. Но это другой snapshot с C-search,
+а не отдельный candidate5fed73 без него. K1 сейчас строится; он пока не
+подтверждает ни ASan pass, ни waveform/operation-trace equivalence.
+
+Таким образом normal A/B и normal213/105 с104 byte-equal CSV остаются
+принятыми своими доказательствами; ASan baseline теперь завершён. Проверка
+candidate/downstream, точное сравнение соответствующих primary и объединение
+с актуальными initial-threshold/Rdk/Bin ещё открыты. Полные этапы6/7 не закрыты.
