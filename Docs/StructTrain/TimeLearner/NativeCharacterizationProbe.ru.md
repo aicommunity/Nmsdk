@@ -104,8 +104,9 @@ Proof commits `7d5604cdd60fbb5b024f86326843bbb74a76e6f6` (Elder, 122256 B)
 состояния и fixed-geometry Rs interventions проверены на обоих worker:
 [протокол и артефакты](StoppedStateResistanceControls.ru.md). Приняты непрерванные
 запуски с полным import, сохранённой controller history и реальной вспомогательной
-пробой перед разрешённым изменением Rs. Прерывание этой вспомогательной фазы
-пока не имеет полного phase-aware execution envelope и остаётся открытым;
-проверенные выше cold cancel/timeout controls не доказывают этот случай.
+пробой перед разрешённым изменением Rs. Последующий
+[phase-aware execution envelope](NativeProbePhases.ru.md) также прошёл
+адресную проверку на обоих worker:12 imported jobs,7 readers и2 дополнительных
+cold regressions на каждом, с явным отсутствием Rs edits при частичной baseline.
 Новая команда пока не объединена в develop и не закрывает этапы 6–8 или
 научную матрицу.
