@@ -4,6 +4,7 @@
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeCalculationPolicy.h"
 #include "TimeLearner/NumericChecks.h"
+#include "TimeLearner/ModelArchive.h"
 #include <chrono>
 #include <iostream>
 
