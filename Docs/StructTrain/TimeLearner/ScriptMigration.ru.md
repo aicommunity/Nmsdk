@@ -1,3 +1,5 @@
+Принято04.11:166 records (164 retired/2 moved),complete=false. Удалены8 исторических PhaseA tools после двух actual CLI/negative/scope gates; августовские модели/конфиги/CSV/тело REPORT сохранены. [Приёмка](PhaseAToolRetirement.ru.md). Ниже — хронология прежних снимков.
+
 Принято04.11:158 records (156 retired/2 moved), complete=false. Оба workers проверили retirement8/negative/exact16/CMake prefix и расширенный inventory15. [Согласованная приёмка](InventoryAndAuditRetirementAcceptance.ru.md). Ниже — хронология прежних pending состояний; актуальные команды поиска находятся в корневом пакете.
 
 Candidate158: M40 подтвердил158 retrieval records, negative refusal/exact16 scope/CMake prefix. Elder gate ждёт inventory A2; source удаления8 audit tools не объединён. Accepted manifest пока150. [Readback](AuditProbeRetirementM40Readback.ru.md).
