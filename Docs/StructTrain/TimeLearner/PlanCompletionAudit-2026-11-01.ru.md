@@ -1,3 +1,6 @@
+Текущее состояние после последующих merge — [аудит04.11](PlanCompletionAudit-2026-11-04.ru.md).
+Ниже сохранены исторические этапы и дополнения01–04.11 своих снимков.
+
 ## Дополнение04.11: проверен разбор границ stock-обучения
 
 Feature [StockFailureBoundaryReports](StockFailureBoundaryReports.ru.md) исправляет
