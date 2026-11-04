@@ -148,15 +148,25 @@ def audit_execution(directory):
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
     validate_job(job);_digest(execution)
     schema = execution['schema_version']
-    require(type(schema) is int and schema in (1, 2), 'characterization_execution_schema')
+    require(type(schema) is int and schema in (1, 2, 3), 'characterization_execution_schema')
     require(set(execution) == {'kind', 'schema_version', 'execution', 'job_sha256', 'model_revision', 'frequency_hz',
             'model_ticks', 'model_time_begin', 'model_time_end', 'training_started', 'search_executed', 'certificate_available',
             'model_unchanged', 'controller_idle', 'probe_status', 'observation_valid', 'observation_complete', 'artifacts',
-            'evaluation_verdict', 'sha256'} | ({'probe_wall_seconds'} if schema == 2 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
+            'evaluation_verdict', 'sha256'} | ({'probe_wall_seconds'} if schema >= 2 else set()) |
+            ({'terminal_phase', 'resistance_intervention_applied'} if schema == 3 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
-    expected_files = {'job.json', 'owner-configuration.json', 'initial-state.json',
-                      'final-state.json', 'probe_trial_1.json', 'probe_trial_1.csv'}
     imported = job['schema_version'] == 2
+    baseline_terminal = schema == 3 and execution['terminal_phase'] == 'source_baseline'
+    if schema == 3:
+        require(imported and execution['terminal_phase'] in ('source_baseline', 'main_probe') and
+                type(execution['resistance_intervention_applied']) is bool and
+                execution['resistance_intervention_applied'] == (bool(job['resistance_intervention']) and not baseline_terminal) and
+                (not baseline_terminal or (job['resistance_intervention'] and execution['execution'] != 'completed')),
+                'characterization_phase_or_intervention_changed')
+    applied = imported and bool(job['resistance_intervention']) and not baseline_terminal
+    terminal_prefix = 'baseline_trial_' if baseline_terminal else 'probe_trial_'
+    expected_files = {'job.json', 'owner-configuration.json', 'initial-state.json',
+                      'final-state.json', terminal_prefix+'1.json', terminal_prefix+'1.csv'}
     if imported:
         expected_files.update({'source-import.json', 'probe-configuration.json', 'controller-before.json', 'controller-after.json'})
         if job['resistance_intervention']:
@@ -169,7 +179,7 @@ def audit_execution(directory):
             execution['evaluation_verdict'] is None, 'characterization_claims_training')
     require(execution['execution'] in ('completed', 'cancelled', 'timeout', 'model_tick_budget_exhausted', 'probe_rejected',
             'model_changed', 'unexpected_training_activity'), 'characterization_execution_unknown')
-    if schema == 2:
+    if schema >= 2:
         require(number(execution['probe_wall_seconds']) > 0 and
                 (execution['execution'] != 'timeout' or execution['probe_wall_seconds'] >= job['maximum_wall_seconds']),
                 'characterization_wall_budget_not_reached')
@@ -200,9 +210,10 @@ def audit_execution(directory):
                 control['schema_version'] == 1 and summary['state'] == 'idle' and summary['certificate'] is None and
                 summary['reference_probes'] == 0 and control['observed_packet_count'] == len(source['observed_packets']) and
                 control['observed_packets_sha256'] == sha(source['observed_packets']), 'characterization_imported_controller_changed')
-        require(initial['parameters'] == expected_import_parameters(job) and
-                initial['identity']['model'] == expected_import_model(job), 'characterization_import_or_intervention_graph_changed')
-        if job['resistance_intervention']:
+        require(initial['parameters'] == (expected_import_parameters(job) if applied else source['trained_inputs']) and
+                initial['identity']['model'] == (expected_import_model(job) if applied else source['neuron']['graph']['identity']['model']),
+                'characterization_import_or_intervention_graph_changed')
+        if applied:
             baseline = load(directory/'baseline_trial_1.json')
             require(baseline['native_status'] == 'completed' and baseline['observation'] is not None and
                     baseline['observation']['complete'] is True and
@@ -220,7 +231,8 @@ def audit_execution(directory):
             all(value is True for value in (final['model_unchanged'], final['controller_idle'], execution['model_unchanged'], execution['controller_idle'])),
             'characterization_model_or_controller_changed')
     parameters = initial['parameters']
-    inputs = [{'attachment': p['length'], **p} for p in expected_import_parameters(job)] if imported else job['model']['inputs']
+    source_parameters = (expected_import_parameters(job) if applied else job['source_stopped']['trained_inputs']) if imported else None
+    inputs = [{'attachment': p['length'], **p} for p in source_parameters] if imported else job['model']['inputs']
     require(len(parameters) == len(inputs) and all(set(p) == {'length', 'synapses', 'resistance'} and
             count(p['length']) == q['attachment'] and count(p['synapses']) == q['synapses'] and number(p['resistance']) > 0 and
             (q['resistance'] is None or p['resistance'] == q['resistance']) for p, q in zip(parameters, inputs)),
@@ -229,9 +241,10 @@ def audit_execution(directory):
     require(0 < ticks <= job['maximum_model_ticks'] and frequency == job['model']['frequency_hz'] and
             equal(execution['model_time_begin'], 0) and equal(execution['model_time_end'], ticks/frequency),
             'characterization_clock_changed')
-    packet, trace = load(directory/'probe_trial_1.json'), directory/'probe_trial_1.csv'
+    packet, trace = load(directory/(terminal_prefix+'1.json')), directory/(terminal_prefix+'1.csv')
     requested, p = packet['requested_specification'], job['probe']
-    require(all(requested[k] == p[k] for k in ('run_id', 'trial_id', 'sample_id', 'maximum_sample_gap', 'minimum_amplitude',
+    require(requested['trial_id'] == p['trial_id']+('/source-baseline' if baseline_terminal else '') and
+            all(requested[k] == p[k] for k in ('run_id', 'sample_id', 'maximum_sample_gap', 'minimum_amplitude',
             'maximum_samples', 'record_spikes', 'peak_selection')) and equal(requested['begin'], 0) and
             equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(job['model']['initial_isi']) and
             requested['stimulus_profile'] == job['stimulus_profile'], 'characterization_request_changed')
@@ -265,5 +278,6 @@ def audit_execution(directory):
                 'characterization_prepared_context_changed')
     require((execution['execution'] == 'completed') == (packet['native_status'] == 'completed'), 'characterization_completion_changed')
     return {'primary_evidence_checked': True, 'runtime_provenance_checked': False, 'model_unchanged': True,
+            **({'terminal_phase': execution['terminal_phase']} if schema == 3 else {}),
             'execution': execution['execution'], 'observation_valid': execution['observation_valid'],
             'observation_complete': execution['observation_complete'], 'training_started': False, 'evaluation_verdict': None}
