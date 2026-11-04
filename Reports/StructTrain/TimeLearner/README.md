@@ -530,3 +530,7 @@ Source111d0b578566342a6159a50977c6bcdab9f9c647. Восемь проб Classic/Br
 - [M40 ASan](s03-native-characterization-m40-a3/README.ru.md), proof692961f9ae587242e39a44b23827c2133a122725, primary548656B, detect_leaks=0.
 
 [Назначение, команды и ограничения](../../../Docs/StructTrain/TimeLearner/NativeCharacterizationProbe.ru.md). Cancel/wall controls и stock Rs interventions ещё открыты.
+
+Native probe interruption controls (source07ff1081f88dd020eafa345c3dc0cf4594a0941c): six real executions and nine primary readers on each worker. Exact external cancel requests and actual partial traces retained; ordinary complete observations unchanged. [Elder](s03-native-probe-interruptions-elder-a1/README.ru.md), [M40 ASan](s03-native-probe-interruptions-m40-a1/README.ru.md), [verification](../../../Docs/StructTrain/TimeLearner/NativeProbeInterruptionsVerification.json).
+
+Stock fixed-geometry resistance gate: two real Elder zero-tick cold preflights had equal L/Ns/Rs but different full graphs (three extra excitation synapses Classic, thirteen Branch). No resistance probes were run. Four readers passed; full stopped-state import is required before causal controls. [Primary evidence](s07-stock-fixed-geometry-elder-a2/README.ru.md), [scope and next step](../../../Docs/StructTrain/TimeLearner/FixedGeometryResistanceControl.ru.md). No scientific classification verdict.
