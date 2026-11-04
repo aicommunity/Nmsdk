@@ -1,0 +1,80 @@
+{
+  "s06-shared-lifecycle-baseline-normal-a1": {
+    "archive_bytes": 6674476,
+    "archive_sha256": "9deccb1014534f127ccfe83d1fb4f2c8e4098924caa852c8ab65bd803687639a",
+    "members": 786,
+    "terminal": {
+      "baseline133_passed": false,
+      "candidate_cpp_executed": false,
+      "candidate_build_pending": true,
+      "whole_plan_complete": false,
+      "scientific_verdict": null
+    },
+    "lease_created": true
+  },
+  "s06-shared-lifecycle-candidate-normal-a1": {
+    "archive_bytes": 20808,
+    "archive_sha256": "8ea01661a36d71fe26dd1774c774e6f766956ca6329072c3d8cf18fa87cb0b56",
+    "members": 6,
+    "terminal": {
+      "candidate133_passed": false,
+      "candidate_cpp_executed": false,
+      "candidate_build_pending": true,
+      "whole_plan_complete": false,
+      "scientific_verdict": null
+    },
+    "lease_created": false
+  },
+  "s10-managed-native-calibration-changed-rollback-normal-a1": {
+    "archive_bytes": 17324,
+    "archive_sha256": "0df6570ffcd324d35efd62137ad0325faa64b0f07ce612975baf31250c30f665",
+    "members": 6,
+    "terminal": {
+      "tests_passed": false,
+      "actual_managed_native_phases": null,
+      "owned_posttune_and_m40_pending": true,
+      "independent_partition_verified": false,
+      "scientific_verdict": null,
+      "whole_plan_complete": false
+    },
+    "lease_created": false
+  },
+  "s09-cable-retirement-a1": {
+    "archive_bytes": 128728,
+    "archive_sha256": "094223b463dc1426856f24866a56d4afe42bcb748443a1b3d8cf4fe6544ed853",
+    "members": 16,
+    "terminal": {
+      "checks_passed": true,
+      "source_records_verified": 141,
+      "historical_scripts_executed": false,
+      "native_models_executed": 0,
+      "whole_migration_complete": false,
+      "scientific_verdict": null
+    },
+    "lease_created": true
+  },
+  "baseline133": {
+    "observed": 133,
+    "passed": 119,
+    "failed": [
+      "NativeLiveFinalization/ClassicAutomaticFixed",
+      "NativeLiveFinalization/BranchAutomaticFixed",
+      "NativeLiveFinalization/ClassicConnectedCalibrate",
+      "NativeLiveFinalization/BranchConnectedCalibrate",
+      "NativeLiveFinalization/ClassicQueuedControlDrift",
+      "NativeLiveFinalization/BranchQueuedControlDrift",
+      "NativeLiveFinalization/ClassicQueuedReset",
+      "NativeLiveFinalization/BranchQueuedReset",
+      "NativeLiveFinalization/ClassicQueuedStop",
+      "NativeLiveFinalization/BranchQueuedStop",
+      "NativeLiveFinalization/ClassicCancelQueued",
+      "NativeLiveFinalization/BranchCancelQueued",
+      "NativeLiveFinalization/ClassicCancelPostTune",
+      "NativeLiveFinalization/BranchCancelPostTune"
+    ],
+    "skipped": 0,
+    "core18_passed": true,
+    "candidate_cpp_compiled_or_executed": false,
+    "cold_positive_fixture_not_established": true
+  }
+}
