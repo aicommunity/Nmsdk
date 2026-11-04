@@ -9,7 +9,7 @@ from ..learned_evidence import audit_learned_state, load_case as learned_case
 from ..model_identity import canonical_model_sha256
 from ..native_evidence import EvidenceError, audit_probe, load
 from ..stopped_evidence import audit_stopped_state, load_case as stopped_case
-from .native_declared_corpus import model_spec2_cohort, require_model_spec2_records
+from .native_declared_corpus import model_spec2_cohort, require_model_spec2_records, audit_model_spec2_recognition_replay
 
 
 class CapacitanceBoundaryEvidenceTest(unittest.TestCase):
@@ -52,6 +52,9 @@ class CapacitanceBoundaryEvidenceTest(unittest.TestCase):
     def test_fresh_process_preserves_history_and_actual_response(self):
         for path, package in self.cases:
             with self.subTest(path=path.name):
+                if package['configuration']['model']['schema_version'] == 2:
+                    self.assertTrue(audit_model_spec2_recognition_replay(path, package)['waveform_bytes_exact'])
+                    continue
                 suffix = '_learned_state.json' if package['kind'] == 'timelearner_completed_state' else '_stopped_state.json'
                 stem = path.name.removesuffix(suffix)
                 fresh_path = path.with_name(stem+'_fresh_process.json'); fresh = load(fresh_path)

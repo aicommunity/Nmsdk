@@ -9,7 +9,7 @@ from ..learned_evidence import audit_learned_state, load_case as learned_case
 from ..stopped_evidence import audit_stopped_state, load_case as stopped_case
 from ..native_evidence import EvidenceError, audit_probe, audit_training_summary, load
 from ..model_identity import canonical_model_sha256
-from .native_declared_corpus import model_spec2_cohort, require_model_spec2_records
+from .native_declared_corpus import model_spec2_cohort, require_model_spec2_records, audit_model_spec2_recognition_replay
 
 
 class CapacitanceSearchEvidenceTest(unittest.TestCase):
@@ -56,6 +56,9 @@ class CapacitanceSearchEvidenceTest(unittest.TestCase):
         for path in self.completed+self.stopped:
             with self.subTest(path=path.name):
                 package = load(path)
+                if package['configuration']['model']['schema_version'] == 2:
+                    self.assertTrue(audit_model_spec2_recognition_replay(path, package)['waveform_bytes_exact'])
+                    continue
                 suffix = '_learned_state.json' if path in self.completed else '_stopped_state.json'
                 stem = path.name.removesuffix(suffix);fresh = load(path.with_name(stem+'_fresh_process.json'))
                 self.assertEqual(fresh['capacitance_history'], package['capacitance_history'])
