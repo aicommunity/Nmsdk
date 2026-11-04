@@ -1,3 +1,5 @@
+Текущее принятое состояние:150 records (148 retired/2 moved), complete=false. Последние9 path-selected root tools удалены после двух workers/negative/exact13 checks: [приёмка](RemainingRootToolsRetirement.ru.md). Production inventory snapshot287b75d0f2a2f5465295de5da4c82dd98892fa4c подтверждает188 Bin candidates/0 выбранных root/0 Pulse и217 property declarations. Это нижняя граница; неименованные scripts и активная Bin миграция ещё требуют review. Ниже сохранена хронология.
+
 Текущее принятое состояние:141 records (139 retired/2 moved), complete=false. [Cable/E1 two-worker приёмка](CableFamilyRetirement.ru.md). Следующие9 root tools — candidate150, пока только M40 gate: [scope и ожидание Elder](RemainingRootToolsRetirement.ru.md). Ниже сохранена хронология прежних приёмок.
 
 Принят04.11 пакет theory/sim:14 исторических исходников удалены без wrappers; manifest121 records (119 retired,2 moved), complete=false. Production history CLI и restored-path negative control проверены на обоих workers. [Источники и приёмка](TheoryScriptRetirement.ru.md). Общая migration ещё не завершена.

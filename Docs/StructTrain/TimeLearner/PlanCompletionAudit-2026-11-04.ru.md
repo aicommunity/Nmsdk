@@ -16,7 +16,7 @@
 
 | Проверка | Фактический итог и границы |
 |---|---|
-| Миграция cable/E1 | Принята группа20 scripts:141 records на обоих workers, negative restored-path controls, exact36-file scope. Текущий остаток197 (9 root/188 Bin), нижняя граница; общий этап9 не закрыт. [Приёмка](CableFamilyRetirement.ru.md). |
+| Миграция cable/E1 | Приняты группы20+9 scripts:текущий manifest150 на обоих workers, negative restored-path controls/exact scopes. Production inventory подтверждает188 Bin candidates/0 выбранных root; общий этап9 не закрыт. [Приёмка](CableFamilyRetirement.ru.md). |
 | Joint normal focused | 44/44; ошибочный исходный42 сохранён отдельно. |
 | Joint normal full | 304/304 на Elder; полные первичные данные опубликованы. |
 | ModelSpec2 fresh-process replay | 8/8 Classic/Branch×N0/N1×C-Off/On; actual soma/input CSV побайтно совпадают с исходными paired observations. |
@@ -27,7 +27,7 @@
 | Managed measured calibration normal | 4/4 на Elder:реальные grids,confirmation,отдельный frozen Test и NonSeparable/source preservation при исходном1.0 (changed-threshold rollback здесь не проверен);12 native groups закрыты. Все4 инженерных N1 случая TP2/FP0/FN0/TN2 после same-matrix calibration; stock scientific PASS не заявляется. [Приёмка/ограничения](ManagedNativeCalibrationAcceptance.ru.md). |
 | Managed changed-threshold rollback normal | 4/4,16 actual native units, fresh restored model reproduces every sample/spike count; temporal report1/1 принят,32 матрицы/192 trial–soma pairs/84 selected PNG. [Scope и первичные данные](ManagedChangedThresholdRollbackAcceptance.ru.md). |
 | Managed calibration temporal reports | 1/1 на M40:168 trial–soma pairs,2512 PNG;54 selected PNG в Git. [Галерея и ограничения](ManagedNativeCalibrationVisuals.ru.md). |
-| Общий lifecycle dispatcher | Baseline133 SDK802:119 passed/14 failed/0 skips, core18 passed. Cold fixture не получил certificate; candidate8644 не компилировался. Corrected baseline33fc собирается отдельно. [Полный отрицательный readback](Baseline133PrerequisiteReadback.ru.md). |
+| Общий lifecycle dispatcher | Baseline133 SDK802:119 passed/14 failed/0 skips, core18 passed. Cold fixture не получил certificate; candidate8644 не компилировался. Corrected baseline33fc прошёл focused25/full133; candidate8644 ещё не собирался. [Полный отрицательный readback](Baseline133PrerequisiteReadback.ru.md). |
 | Совместный ASan runtime | Build-only принят; сам по себе не подтверждает native44/304. |
 | Прежний C-search ASan K1 | Тот же supervisor3649813/start284056538 подтверждён живым; full262 ещё работает. Это иной code snapshot. |
 | Следующий joint ASan44 | Поставлен в ожидание K1; новый worker3836828/start286684788, фактические модели ещё не запускались. [Условия и budgets](../../../Reports/StructTrain/TimeLearner/s07-joint-asan44-queued-a2/job.json). |
@@ -364,3 +364,9 @@ M40 gate141 и negative restored-path control прошли на том же sour
 ## Pending последние9 path-selected root tools
 
 Candidate0cd87e45ecf350301483ff4371994ced688931ef удаляет9 historical E05/ITI/surrogate/snapshot tools без wrappers и сохраняет точный Git retrieval; production package/Tests/App/CMake/child gitlinks не меняются. [M40150 passed и source review](RemainingRootToolsRetirement.ru.md), failed first delivery retained. [Elder bounded metadata job](../../../Reports/StructTrain/TimeLearner/s09-remaining-root-retirement-pending-a1/jobs.json) ожидает declaration13. В develop остаётся manifest141/нижняя граница197 scripts; candidate150/188 не принят до второго gate. Более широкий review scripts без path tags остаётся обязательным.
+
+## Приняты corrected baseline и операционные gates
+
+[Baseline33fc25/133](CorrectedColdBaselineAcceptance.ru.md) полностью прошёл на тех же algorithms/Pulsecc с исправленной положительной cold постановкой; он не продвигает общий dispatcher или pending C-search в develop. [Resource dependency9/9 на обоих workers](WorkerDependencyState.ru.md) сохраняет сырые SQLite/kernel данные, отделяет ready от business/scientific success и устраняет зависимость от момента записи release-file. Пять failed prerequisites до reserve/model сохранены. [Последние9 path-selected root tools](RemainingRootToolsRetirement.ru.md) приняты после двух150-record gates; текущий manifest150, complete=false. Новый production inventory source287b75d0 подтверждает217 declarations и188 Bin candidates; это metadata-only sparse clones, не SDK/пользовательские working-tree readbacks. Более широкий source/property/mode/runtime/science аудит остаётся открытым.
+
+Coordinator retryA2 source2cc/runtimef679 фактически выполняется после resource readiness; первый Branch case прошёл. Live/reconcile/declaration candidate gates из прежней failed chain ещё не испытывались. Следующий C++ шаг — build/A-B общего lifecycle8644 с теми же corrected Tests и source declarations, после освобождения текущего ресурса. Только этап0 полностью принят;1–12 частичны.

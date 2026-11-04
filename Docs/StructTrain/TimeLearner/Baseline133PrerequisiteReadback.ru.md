@@ -11,3 +11,5 @@ Elder metadata gate затем подтвердил все141 candidate migratio
 Независимо проверены24 опубликованных файла,814 archive members и1202 source Git blobs:319 baseline,320 uncompiled candidate,286 rollback A1,277 history utility. [Receipt](Baseline133PrerequisiteVerification.json). Все созданные operational leases released после kernel closure; у двух failed prerequisites lease не создавался.
 
 Corrected baseline source33fc48278cff860d20c570cb703198847f028065 отделяет cold declarations и cold profile registration от saved-state replay. Он собирается в отдельном SDK; старый802 сохраняется. Планируются focused25, затем те же133, без skips. Никаких гарантий PASS до фактического результата. Исходные допуски и алгоритмы обучения не меняются; другие входы означают отдельный контроль.
+
+Corrected baseline33fc затем прошёл25/25 и133/133: [новая приёмка и точная граница](CorrectedColdBaselineAcceptance.ru.md). Это отдельная cold-постановка; прежние отрицательные результаты и исторические saved-state controls сохраняют свои источники. Общий dispatcher8644 остаётся непротестированным.
