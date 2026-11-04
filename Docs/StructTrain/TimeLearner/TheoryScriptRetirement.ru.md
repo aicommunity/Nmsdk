@@ -35,3 +35,26 @@ Manifest121 records (119 retired,2 moved), complete=false. Предыдущий 
 До merge требуются production history verify-migration на двух workers:
 все121 records, exact changed-tree scope и restored-path negative Git fixture.
 Исторический код не исполняется/не материализуется; numerical runtime не меняется.
+
+
+## Проверено на двух workers
+
+Source8154242fe2ee282f7659d29fe7609e7b0f22e1fc: обе production CLI проверки
+подтвердили121 record и отклонили negative Git tree с восстановленным evalset.py
+(exit2/migration_old_path_still_present, положительный receipt не создан).
+На каждом worker сверены20 изменённых путей; Scripts/Tests/App/CMake и все
+child gitlinks остались равны принятому root8b231dae9. Отдельные metadata-only
+child object handles не являются SDK. Ни исторический script, ни C-модель не
+исполнялись; active runtime не менялись.
+
+Elder proof eb78ed1a3f95641b94f562439439dabb9d042a76,
+M40 proof18a75a073ebcac5fec64d2512521e8633a8839a6. Все14 members каждого
+passing archive и277 Python source blobs независимо проверены локально.
+Сохранены также failed A1 archives: production positive121 там уже прошёл,
+но scope check пытался делать rename detection и читать непереданные report
+blobs. A2 явно использует --no-renames для проверки набора путей. Исходники,
+manifest и assertions absence/hash/native-source preservation не менялись.
+Worker cgroups закрыты; оперативные leases освобождены после kernel readback.
+
+[Точные контрольные суммы](TheoryScriptRetirementVerification.json).
+Это принятый пакет удаления14 исторических источников; общий этап9/12 открыт.

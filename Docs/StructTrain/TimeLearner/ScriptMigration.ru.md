@@ -1,4 +1,4 @@
-Feature-пакет theory/sim:14 исторических исходников удалены, manifest121 records; server gates pending. [Обоснование](TheoryScriptRetirement.ru.md). Общая migration ещё не принята.
+Принят04.11 пакет theory/sim:14 исторических исходников удалены без wrappers; manifest121 records (119 retired,2 moved), complete=false. Production history CLI и restored-path negative control проверены на обоих workers. [Источники и приёмка](TheoryScriptRetirement.ru.md). Общая migration ещё не завершена.
 
 # Миграция скриптов TimeLearner
 
