@@ -326,3 +326,12 @@ A4 заново формирует все80 trial-soma pairs из byte-equal2684
 включает восемь паттернов и TP/FP/FN/TN. Полный80-pair кэш остаётся на M40;
 no-LTMembrane, incomplete Train, fixed threshold и отсутствие scientific
 verdict сохранены. Вся матрица этапа11 и общий план остаются открытыми.
+
+
+Дополнение04.11: [fresh recursive checkout](FreshDevelopCheckout.ru.md)
+подтвердил origin-only доступность согласованного source/artifact дерева
+e218753e4, без object donors:100534 tracked files. Отдельный
+[contained process API](ContainedProcess.ru.md) прошёл12/12 controls на каждом
+worker и проверяет закрытие потомков через kernel cgroup. Это следующий слой
+очереди, не автоматическое lease recovery и не полный production dispatcher.
+Старый process runner и текущий ASan K1 неизменны; полный план открыт.
