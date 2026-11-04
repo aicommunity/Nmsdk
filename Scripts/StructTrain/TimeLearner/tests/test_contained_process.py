@@ -146,7 +146,8 @@ class ContainedProcessTest(unittest.TestCase):
             with self.assertRaisesRegex(EvidenceError, 'record_changed'):inspect(output)
         finally:path.write_bytes(original)
         with self.assertRaises(FileExistsError):
-            start(self.manifest(), ['20'], self.root, output, memory_bytes=134217728, tasks=32, maximum_wall_seconds=30)
+            start(json.loads((output/'runtime.json').read_text()), ['20'], self.root, output,
+                  memory_bytes=134217728, tasks=32, maximum_wall_seconds=30)
         self.assertFalse(inspect(output)['all_processes_closed'])
 
     def test_invalid_requests_do_not_launch_a_service(self):
@@ -154,3 +155,9 @@ class ContainedProcessTest(unittest.TestCase):
             values={'memory_bytes':134217728,'tasks':32,'maximum_wall_seconds':30,**limits}
             with self.assertRaises(EvidenceError):start(self.manifest(), ['20'], self.root, self.root/'invalid', **values)
         self.assertFalse((self.root/'invalid').exists())
+
+    def test_actual_paths_with_spaces_preserve_runtime_and_logs(self):
+        self.root = self.root/'directory with spaces';self.root.mkdir()
+        output = self.launch(['-c', 'printf preserved_spaces'], manifest=self.manifest('console space.rs1', '/bin/sh'))
+        self.wait(lambda:inspect(output)['all_processes_closed'])
+        self.assertEqual((output/'stdout.log').read_text(), 'preserved_spaces')
