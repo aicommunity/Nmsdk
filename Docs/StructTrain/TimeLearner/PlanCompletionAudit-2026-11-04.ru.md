@@ -360,3 +360,7 @@ Candidate289a28ee73f4812fc860de88883ac469cf3e5516 добавляет отдел�
 ## Cable/E1 migration принята после M40 A2
 
 M40 gate141 и negative restored-path control прошли на том же source1d5; полный scope36 и production trees проверены. Вместе с прежним Elder141 это разрешило merge20 исторических script removals: [приёмка и retrieval](CableFamilyRetirement.ru.md). Текущий manifest141 records (139 retired/2 moved), complete=false; нижняя граница оставшихся scripts197 (9 root/188 Bin). Прежняя queued A1 запись историческая: M40 A1 отменён до reserve/checks, A2 ограничен512MiB и использовал непересекающиеся с ASan пути. K1 не прерывался. Эта приёмка не подтверждает runtime equivalence исторических моделей и не закрывает весь план.
+
+## Pending последние9 path-selected root tools
+
+Candidate0cd87e45ecf350301483ff4371994ced688931ef удаляет9 historical E05/ITI/surrogate/snapshot tools без wrappers и сохраняет точный Git retrieval; production package/Tests/App/CMake/child gitlinks не меняются. [M40150 passed и source review](RemainingRootToolsRetirement.ru.md), failed first delivery retained. [Elder bounded metadata job](../../../Reports/StructTrain/TimeLearner/s09-remaining-root-retirement-pending-a1/jobs.json) ожидает declaration13. В develop остаётся manifest141/нижняя граница197 scripts; candidate150/188 не принят до второго gate. Более широкий review scripts без path tags остаётся обязательным.
