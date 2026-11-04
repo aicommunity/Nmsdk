@@ -182,6 +182,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
     inventory.add_argument('--revision', help='full root commit SHA; defaults to current root HEAD and its recorded gitlinks')
+    inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
     analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
@@ -408,7 +409,7 @@ def main(argv: list[str] | None = None) -> int:
         from .native_evidence import EvidenceError
         from .inventory import write_inventory
         try:
-            write_inventory(args.root.resolve(), args.output.resolve(), args.revision)
+            write_inventory(args.root.resolve(), args.output.resolve(), args.revision, include_related=args.include_related)
         except (EvidenceError, OSError, ValueError, subprocess.SubprocessError) as error:
             print(json.dumps({'kind': 'timelearner_inventory_error', 'reason': str(error),
                               'scientific_verdict': None}), file=sys.stderr)
