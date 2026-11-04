@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "state": "not_accepted",
+  "source_root": "2cc27b9f3192ccd5a11d5dcc8189f68205205b15",
+  "coordinator": {
+    "host": "10.245.1.11",
+    "outer_pid": 2076965,
+    "worker_pid": 2076977,
+    "worker_start_ticks": "337169840",
+    "readback": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a1",
+    "state": "waiting_for_corrected_baseline_kernel_closure_and_release",
+    "native_models_started": false,
+    "test_count": 8,
+    "expected_native_units": 20,
+    "native_sdk_root": "f679d0410dd00a36995f9d32cc03812438819bb7",
+    "controller_memory_cap_bytes": 536870912,
+    "native_unit_memory_cap_bytes": 4294967296,
+    "whole_worker_budget_seconds": 86400,
+    "queue_wait_budget_seconds": 64800
+  },
+  "render": {
+    "host": "10.245.1.17",
+    "outer_pid": 3904524,
+    "outer_start_ticks": "287701173",
+    "worker_pid": 3904533,
+    "worker_start_ticks": "287701184",
+    "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-managed-native-changed-rollback-visual-a1",
+    "state": "rendering_not_accepted",
+    "primary_commit": "bfa6be48a8732892fa75c3207eb8c45b3bd8c6b3",
+    "archive_members_verified": 1955,
+    "members_restored": 1900,
+    "memory_cap_bytes": 4294967296,
+    "wall_budget_seconds": 3600,
+    "native_models_executed": 0,
+    "expected_matrices_not_yet_attested": 32,
+    "expected_trial_soma_pairs_not_yet_attested": 192
+  },
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
