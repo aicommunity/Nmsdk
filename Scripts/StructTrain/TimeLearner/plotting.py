@@ -1,8 +1,30 @@
 """Full-sample diagnostic plots. Scientific metrics never use rendered pixels."""
 from pathlib import Path
 import math
+import textwrap
 
 from .native_evidence import EvidenceError, require
+
+
+def figure_title(fig, text):
+    """Keep complete identifiers inside the title band of the fixed-size page.
+
+    Measuring the actual backend avoids clipping long trial paths while keeping
+    the waveform axes and native-tick resolution unchanged.
+    """
+    wrapped = '\n'.join(textwrap.fill(line, width=110, break_long_words=True,
+                                      break_on_hyphens=False)
+                        for line in text.splitlines())
+    title = fig.suptitle(wrapped, y=.98, fontsize=11)
+    for size in (11, 10, 9):
+        title.set_fontsize(size)
+        fig.canvas.draw()
+        bounds = title.get_window_extent(fig.canvas.get_renderer())
+        width, height = fig.canvas.get_width_height()
+        if (bounds.x0 >= .03*width and bounds.x1 <= .97*width
+                and bounds.y0 >= .85*height and bounds.y1 <= .99*height):
+            return title
+    require(False, 'plot_title_does_not_fit_readable_band')
 
 
 def plotting_runtime():
@@ -169,11 +191,11 @@ def render_soma(observation, channel, label, limits, output: Path, *,
                     ax.axvline(event, color="#8c2c91", alpha=.5, linestyle=":",
                                label=None if labelled_spike else "Actual LT spike event")
                     labelled_spike = True
-            fig.suptitle((context_label+' | ' if context_label else '')+
+            figure_title(fig, (context_label+' | ' if context_label else '')+
                          f'{observation["sample_id"]} | {observation["label"]} | {observation["trial_id"]}\n'
                          f'{label} | {observation["reset_policy"]}\n'
                          f'{name} ({scale} Y) | valid={observation["valid"]}, complete={observation["complete"]} | '
-                         f'model {observation["model_before"][:12]}', y=.98)
+                         f'model {observation["model_before"][:12]}')
             handles, labels = ax.get_legend_handles_labels()
             more_handles, more_labels = overlay.get_legend_handles_labels()
             fig.legend(handles+more_handles, labels+more_labels, loc="upper center",
@@ -252,10 +274,10 @@ def render_series(observations, channel, label, limits, output: Path, *, context
             overlay.set_ylabel("Input [native generator units]", color="#a34d00")
             overlay.tick_params(axis="y", colors="#a34d00")
             ax.grid(True, alpha=.25)
-            fig.suptitle((context_label+' | ' if context_label else '')+
+            figure_title(fig, (context_label+' | ' if context_label else '')+
                          f'{name} | {label} | trials {first}..{last-1}\n'
                          'Green boundary: reset policy; grey area: unobserved\n'
-                         'Actual order and stimulus intervals: timing table in index/manifest', y=.98)
+                         'Actual order and stimulus intervals: timing table in index/manifest')
             handles, labels = ax.get_legend_handles_labels()
             more_handles, more_labels = overlay.get_legend_handles_labels()
             fig.legend(handles+more_handles, labels+more_labels, loc="upper center",
