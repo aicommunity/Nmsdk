@@ -1,3 +1,5 @@
+Последующее уточнение: normal N1 Train/export/frozen Test и stopped controls теперь прошли реальные проверки на Elder; [приёмка и оставшиеся ограничения](ManagedNativePipelineAcceptance.ru.md). Ниже сохранён scope прежнего preflight, не текущий полный статус.
+
 # Managed native preflight: адресная приёмка04.11
 
 Это приёмка данных отдельных checks, не promotion implementation branch
