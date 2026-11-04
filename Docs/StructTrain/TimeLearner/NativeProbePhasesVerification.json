@@ -1,0 +1,316 @@
+{
+  "kind": "native_probe_phase_proof_verification",
+  "scientific_verdict": null,
+  "workers": {
+    "elder": {
+      "archive": "Reports/StructTrain/TimeLearner/s03-native-probe-phases-elder-a1/primary.tar.xz",
+      "bytes": 828340,
+      "sha256": "0824828730de305c837313f482a58af013896800758fd7eec97199f7dfc22515",
+      "members_verified": 14,
+      "proof_commit": "a069c078b184c714e46c381e028565000e0e6774",
+      "worker": "elder",
+      "packaging_source_blobs_verified": 314,
+      "native_source_blobs_verified": 332,
+      "primary": {
+        "restored_files": 7362,
+        "retained_files": 330,
+        "reused_files": 7032,
+        "compact_bytes": 697396,
+        "all_primary_bytes_verified": true,
+        "reference": {
+          "commit": "e5fa71d745119af0d818059f497dd226f4c7c25d",
+          "archive_path": "Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz",
+          "archive_sha256": "6d0820f92c13bf4e91f5b86b7e26da5957dfba991730fca3c64a31858bc71c1c"
+        }
+      },
+      "phase_readers": {
+        "tests": 7,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "native_rows": [
+        {
+          "name": "Classic-completed",
+          "execution": "completed",
+          "terminal_phase": "main_probe",
+          "observation_complete": true
+        },
+        {
+          "name": "Classic-baseline-timeout",
+          "execution": "timeout",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-baseline-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-baseline-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-main-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-main-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-completed",
+          "execution": "completed",
+          "terminal_phase": "main_probe",
+          "observation_complete": true
+        },
+        {
+          "name": "Branch-baseline-timeout",
+          "execution": "timeout",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-baseline-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-baseline-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-main-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-main-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        }
+      ],
+      "historical_readback": {
+        "old_stopped_manifests": 4,
+        "rewritten": false
+      },
+      "completed_primary_equal": {
+        "Branch-completed-unchanged-primary.json": {
+          "byte_equal_files": [
+            "initial-state.json",
+            "final-state.json",
+            "controller-before.json",
+            "controller-after.json",
+            "source-import.json",
+            "probe-configuration.json",
+            "owner-configuration.json",
+            "baseline_trial_1.csv",
+            "probe_trial_1.csv"
+          ],
+          "old_native": "/home/user/timelearner-refactor/readbacks/s03-native-probe-stopped-normal-a3/runs/Branch-threshold-training100-resistance/native"
+        },
+        "Classic-completed-unchanged-primary.json": {
+          "byte_equal_files": [
+            "initial-state.json",
+            "final-state.json",
+            "controller-before.json",
+            "controller-after.json",
+            "source-import.json",
+            "probe-configuration.json",
+            "owner-configuration.json",
+            "baseline_trial_1.csv",
+            "probe_trial_1.csv"
+          ],
+          "old_native": "/home/user/timelearner-refactor/readbacks/s03-native-probe-stopped-normal-a3/runs/Classic-threshold-training100-resistance/native"
+        }
+      },
+      "cold_archive": {
+        "archive": "Reports/StructTrain/TimeLearner/s03-native-probe-phases-elder-a1/cold-primary.tar.xz",
+        "bytes": 71988,
+        "sha256": "6d176d3c2960edfc01336abd98240b71481a17d8b1a2ae40cac4d29f997e6c5c",
+        "members_verified": 45,
+        "source_blobs_verified": 314,
+        "old_primary_evidence_commit": "76d62276a33e271b0320f13d899a4be4c806f96d",
+        "byte_equal_primary_files": [
+          "runs/Classic-v2-full/native/probe_trial_1.csv",
+          "runs/Classic-v2-full/native/probe_trial_1.json",
+          "runs/Classic-v2-full/native/initial-state.json",
+          "runs/Classic-v2-full/native/final-state.json",
+          "runs/Branch-v2-full/native/probe_trial_1.csv",
+          "runs/Branch-v2-full/native/probe_trial_1.json",
+          "runs/Branch-v2-full/native/initial-state.json",
+          "runs/Branch-v2-full/native/final-state.json"
+        ]
+      }
+    },
+    "m40": {
+      "archive": "Reports/StructTrain/TimeLearner/s03-native-probe-phases-m40-a1/primary.tar.xz",
+      "bytes": 756108,
+      "sha256": "77e4b58b6b0eaa287ac15f0985f177ac9c557b41e8ff5f24dca0fcfd954b99ad",
+      "members_verified": 14,
+      "proof_commit": "a294f0a2b2a67c8f9676c09537c45d6d5cf6a35b",
+      "worker": "m40",
+      "packaging_source_blobs_verified": 314,
+      "native_source_blobs_verified": 332,
+      "primary": {
+        "restored_files": 7362,
+        "retained_files": 330,
+        "reused_files": 7032,
+        "compact_bytes": 627288,
+        "all_primary_bytes_verified": true,
+        "reference": {
+          "commit": "e5fa71d745119af0d818059f497dd226f4c7c25d",
+          "archive_path": "Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz",
+          "archive_sha256": "6d0820f92c13bf4e91f5b86b7e26da5957dfba991730fca3c64a31858bc71c1c"
+        }
+      },
+      "phase_readers": {
+        "tests": 7,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0
+      },
+      "native_rows": [
+        {
+          "name": "Classic-completed",
+          "execution": "completed",
+          "terminal_phase": "main_probe",
+          "observation_complete": true
+        },
+        {
+          "name": "Classic-baseline-timeout",
+          "execution": "timeout",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-baseline-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-baseline-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-main-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        },
+        {
+          "name": "Classic-main-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-completed",
+          "execution": "completed",
+          "terminal_phase": "main_probe",
+          "observation_complete": true
+        },
+        {
+          "name": "Branch-baseline-timeout",
+          "execution": "timeout",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-baseline-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-baseline-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "source_baseline",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-main-ticks",
+          "execution": "model_tick_budget_exhausted",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        },
+        {
+          "name": "Branch-main-cancel",
+          "execution": "cancelled",
+          "terminal_phase": "main_probe",
+          "observation_complete": false
+        }
+      ],
+      "historical_readback": {
+        "old_stopped_manifests": 4,
+        "rewritten": false
+      },
+      "completed_primary_equal": {
+        "Branch-completed-unchanged-primary.json": {
+          "byte_equal_files": [
+            "initial-state.json",
+            "final-state.json",
+            "controller-before.json",
+            "controller-after.json",
+            "source-import.json",
+            "probe-configuration.json",
+            "owner-configuration.json",
+            "baseline_trial_1.csv",
+            "probe_trial_1.csv"
+          ],
+          "old_native": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-probe-stopped-asan-a3/runs/Branch-threshold-training100-resistance/native"
+        },
+        "Classic-completed-unchanged-primary.json": {
+          "byte_equal_files": [
+            "initial-state.json",
+            "final-state.json",
+            "controller-before.json",
+            "controller-after.json",
+            "source-import.json",
+            "probe-configuration.json",
+            "owner-configuration.json",
+            "baseline_trial_1.csv",
+            "probe_trial_1.csv"
+          ],
+          "old_native": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-probe-stopped-asan-a3/runs/Classic-threshold-training100-resistance/native"
+        }
+      },
+      "cold_archive": {
+        "archive": "Reports/StructTrain/TimeLearner/s03-native-probe-phases-m40-a1/cold-primary.tar.xz",
+        "bytes": 76316,
+        "sha256": "09d0f57d5b8165620844854f1513b286bbdbfa47a1f892c9f58b6c2bd5f4d3d4",
+        "members_verified": 45,
+        "source_blobs_verified": 314,
+        "old_primary_evidence_commit": "692961f9ae587242e39a44b23827c2133a122725",
+        "byte_equal_primary_files": [
+          "runs/Classic-v2-full/native/probe_trial_1.csv",
+          "runs/Classic-v2-full/native/probe_trial_1.json",
+          "runs/Classic-v2-full/native/initial-state.json",
+          "runs/Classic-v2-full/native/final-state.json",
+          "runs/Branch-v2-full/native/probe_trial_1.csv",
+          "runs/Branch-v2-full/native/probe_trial_1.json",
+          "runs/Branch-v2-full/native/initial-state.json",
+          "runs/Branch-v2-full/native/final-state.json"
+        ]
+      },
+      "actual_libasan_maps_verified": 12,
+      "leak_detection": false
+    }
+  }
+}

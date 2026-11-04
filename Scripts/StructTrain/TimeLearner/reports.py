@@ -166,4 +166,7 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
             for p in sorted(output.rglob("*")) if p.is_file()}
     _write(output/"SHA256SUMS.json", sums)
     return {"kind": manifest["kind"], "status": manifest["status"],
-            "trial_soma_pairs": len(figures), "files": len(sums), "evaluation_verdict": None}
+            "trial_soma_pairs": len(figures), "files": len(sums), "evaluation_verdict": None,
+            **({"diagnostic_only": manifest["diagnostic_only"],
+                "training_completed": manifest["training_completed"],
+                "source_training_outcome": manifest["source_training_outcome"]} if diagnostic else {})}

@@ -1,0 +1,1 @@
+Thirty readable soma/input/difference views for all five soma channels of stopped stock models. Target pattern only, not eight-pattern classification. All local views contain at most901 raw samples and explicit markers. Full cache stays on M40; nine selected PNG originals and primary metadata in Git. Manual review pending.
