@@ -347,3 +347,7 @@ Coordinator source2cc остаётся queued на Elder; готовый reconci
 ## Pending ранний preflight всех фаз
 
 [Новая постановка и ограничения](ManagedDeclarationPreflight.ru.md), candidate427a5f2ef28b90a76c458951cad8ef70bb118c95: до Train проверяются объявленные downstream probe/grid/conversion factors, criterion проверяется общей функцией scorer. Portable audit прежних schema1 данных сохраняет прежнюю structural validation. [Серверный gate11](../../../Reports/StructTrain/TimeLearner/s10-managed-declaration-queued-normal-a1/job.json) ждёт закрытия metadata reconcile worker и использует настоящий coordinator corpus без новых native units. Код не promoted; обязательны также полный повтор coordinator8 с собственными target negative jobs и scorer regression. Этап10 и весь план остаются частичными.
+
+## Pending managed live recognition route
+
+Candidate289a28ee73f4812fc860de88883ac469cf3e5516 добавляет отдельный schema2 Train→frozen Test без повторного export из solo: [контракт и открытые проверки](ManagedLiveRecognitionRouting.ru.md). [Gate6/10 actual native units](../../../Reports/StructTrain/TimeLearner/s10-managed-live-routing-queued-normal-a1/job.json) поставлен на Elder после corrected baseline133 и declaration11, SDK33fc/Pulsecc неизменяемый. До фактического результата не принят; остальные scientific/mode/fault требования исходного плана сохраняются.
