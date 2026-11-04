@@ -1,3 +1,5 @@
+> Историческое описание standalone-модели. Исходники cable/E1 удалены из текущего дерева; полный retrieval snapshot: `3c5e777393776d5340131b03a31b34f4cb668b27`. Реестр: `Docs/StructTrain/TimeLearner/script_migration.json`; ограничения: `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md`. Совпадение частного пика/длин не доказывает общую native equivalence; команды ниже относятся к историческому снимку.
+
 > Исторический снимок плана и команд от20.10.2026. Инструменты удалены из текущего дерева; их точные исходники: [Git snapshot](https://github.com/aicommunity/Nmsdk/tree/0c12a71757d4eb34412f043028f56edfa38ba974/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools). Действующий план и причины миграции: [реестр](../../../../../../StructTrain/TimeLearner/PlanToolRetirement.ru.md). Старые команды не являются текущей инструкцией запуска.
 
 # Модель кабеля TimeLearner (вне Console)
