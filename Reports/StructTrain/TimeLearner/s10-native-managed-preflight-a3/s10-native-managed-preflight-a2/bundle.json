@@ -1,0 +1,272 @@
+{
+  "kind": "managed_native_production_preflight_checks",
+  "source_commit": "43d32cf211f0366d1237726c5be423db72565d41",
+  "returncode": 1,
+  "members": {
+    "test-inventory.json": {
+      "bytes": 2841,
+      "sha256": "87f248c32f0beb4e3462df499163e3a8736c3acde04721bc01f5d76cd419b879"
+    },
+    "native-preflight-declaration.json": {
+      "bytes": 614,
+      "sha256": "8d47c3fd8e3017808e1c915d832be3fb2e787c795d18923f8522519b74c7735d"
+    },
+    "native-runtime.json": {
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964"
+    },
+    "source-hashes.json": {
+      "bytes": 38657,
+      "sha256": "b66b224cf51f768fb481e63451fa6e0bff743c12273ee1821a036efab0e6c294"
+    },
+    "reservation.json": {
+      "bytes": 2064,
+      "sha256": "7259d57fed9912fdfee367a9ef86147bef12f6023f62f7f5b26b3467c8a486c9"
+    },
+    "producer.py": {
+      "bytes": 6576,
+      "sha256": "ea75a0b371e5926c40a364478ff57b4a7b501680562b6f79b8f789291f2462e8"
+    },
+    "resource-preflight.json": {
+      "bytes": 311,
+      "sha256": "fd878793d31ebd3d1ee13b49623d49a0c0977c36f5e34217f4512b5bb898d465"
+    },
+    "terminal.json": {
+      "bytes": 221,
+      "sha256": "fd2698bce0f1c5af115e72f9b28b039f2306468e278a52b76e01de1c7eb7004b"
+    },
+    "exception.json": {
+      "bytes": 685,
+      "sha256": "710bf2273a58d57c6c385e9567f1461768d65936271b82f8cee7b5d72bc9b8d3"
+    },
+    "tests.log": {
+      "bytes": 40832,
+      "sha256": "144f46717e5709a2e3931ab292a24ae7acefcb2a7f415516bb5251fc319feba8"
+    },
+    "portable-fixtures.json": {
+      "bytes": 221,
+      "sha256": "fb5422f1f58f235b2c79125c657ac10643ba46f54af7841702232cb9ba9a0dfa"
+    },
+    "owned-supervisor.json": {
+      "bytes": 312,
+      "sha256": "ba9f74bd20a7b2edf635462728d9ff2adcc7b3dd98ca69ec803e117007817889"
+    },
+    "tests.json": {
+      "bytes": 84,
+      "sha256": "5cec9ef55d1a7c324812f18c97dc9bf3d1e497ebaa7ac83928d0d9dcf21a56b1"
+    },
+    "native-controls/Classic-N0/leases.sqlite3": {
+      "bytes": 36864,
+      "sha256": "f4c634b8c2a77ed5fdddf7e2e575e3b37f8906f072e759390c6f16a2fd5a3094"
+    },
+    "native-controls/Classic-N0/policy.json": {
+      "bytes": 457,
+      "sha256": "0402484793a0791fe4ba03be2cddee487de74c0d44d100170bd29aed1050735d"
+    },
+    "native-controls/Classic-N0/cli-stdout.log": {
+      "bytes": 17550,
+      "sha256": "0cf8750bc497ab9e0d24a9da6b099a170c6d868eb058fb65fdd6000f455d9872"
+    },
+    "native-controls/Branch-N1/leases.sqlite3": {
+      "bytes": 36864,
+      "sha256": "fc3423fa71719ce2086b7d0d1a0273fae6a37df314b0573654e2503787201d6a"
+    },
+    "native-controls/Branch-N1/policy.json": {
+      "bytes": 456,
+      "sha256": "19eed11300e226c30d6630f84963a62be8b6180b68774572b5ec7c8c837b6645"
+    },
+    "native-controls/Branch-N1/cli-stdout.log": {
+      "bytes": 17549,
+      "sha256": "feca21d84568d904b036e3ef091a1883d0f21790b54cf7934ee04c5b12d199cf"
+    },
+    "native-controls/Classic-N0/run/run-manifest.json": {
+      "bytes": 20958,
+      "sha256": "57756bbaaae6b7b0308425df5497a5e334664457edeb93e38a2c22a0ccd797f2"
+    },
+    "native-controls/Classic-N0/run/input/process-policy.json": {
+      "bytes": 520,
+      "sha256": "96d3a698c4fa0d266c7275479ab3f0b2b7e76c4ccf9f92afc75fdfd501ff41c2"
+    },
+    "native-controls/Classic-N0/run/input/job.json": {
+      "bytes": 913158,
+      "sha256": "3d5938beed5eabf5ff70588f23d770db1d5374fdfe0c939ed8607191f752a485"
+    },
+    "native-controls/Classic-N0/run/process/reservation-context.json": {
+      "bytes": 2996,
+      "sha256": "aa6a900413cb2569bcf058297dda8f8f8e94eaae6d2bf7a651bc025b475f9bd5"
+    },
+    "native-controls/Classic-N0/run/process/whole-group-closure.json": {
+      "bytes": 1297,
+      "sha256": "9e296d34fc4227809f9ed9bd25273c12c41402aeff294a5edfe3bc2f71db88e3"
+    },
+    "native-controls/Classic-N0/run/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Classic-N0/run/process/owned-process.json": {
+      "bytes": 660,
+      "sha256": "a5a81b1f550964cb0d28ba0aa3a1bc22db4d72ab742c1c43649b429345b86658"
+    },
+    "native-controls/Classic-N0/run/process/result.json": {
+      "bytes": 526,
+      "sha256": "48b12458124f2f5a636cd4be52bb6f69d9c74e0ea7cba9cd6c83478187f24970"
+    },
+    "native-controls/Classic-N0/run/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "9e296d34fc4227809f9ed9bd25273c12c41402aeff294a5edfe3bc2f71db88e3"
+    },
+    "native-controls/Classic-N0/run/process/runtime.json": {
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964"
+    },
+    "native-controls/Classic-N0/run/process/request.json": {
+      "bytes": 820,
+      "sha256": "c39ca8d5a9646894211a8da63f1ee065c8edd93c0b8d65524707e40c6594a830"
+    },
+    "native-controls/Classic-N0/run/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Classic-N0/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-123433.3790852": {
+      "bytes": 291,
+      "sha256": "5d5b2c93ca6081d5bce732affcb3ea5c003c461f5976b5d0b3ce04ce843447a7"
+    },
+    "native-controls/Classic-N0/run/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "a7fe39accf7c0d33f88667d93c94013b26a6b2a77c11835d981e3cf92053b0d8"
+    },
+    "native-controls/Classic-N0/run/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native-controls/Classic-N0/run/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native-controls/Classic-N0/run/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Classic-N0/run/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native-controls/Classic-N0/run/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "2f7c28ee9dd5dde376a6b74d61aaa4e1df2b6aab5140fe721ac158212acc72ae"
+    },
+    "native-controls/Classic-N0/run/process/contained/runtime.json": {
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964"
+    },
+    "native-controls/Classic-N0/run/process/contained/request.json": {
+      "bytes": 1516,
+      "sha256": "565e40f1b8cfadde910ed43e5355ec5170114f3bd5bf643cff6c3796d96bffd9"
+    },
+    "native-controls/Classic-N0/run/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Classic-N0/run/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "7b3c5227664aecf7cd9134f40aee070e417c47c2211b4cb6a7284013067573c3"
+    },
+    "native-controls/Branch-N1/run/run-manifest.json": {
+      "bytes": 20957,
+      "sha256": "a45805302f3c7fb7582a2689c27e267e95420208b171e004b0414c09aff9e467"
+    },
+    "native-controls/Branch-N1/run/input/process-policy.json": {
+      "bytes": 519,
+      "sha256": "52aac33c0d3a9a46b7c9be5e8bd70dfc8723395b047101cd17dd0080872d6190"
+    },
+    "native-controls/Branch-N1/run/input/job.json": {
+      "bytes": 841598,
+      "sha256": "10875b2526daf83901092f14d03ed9890ae04b34e542c624efeb116513f256c4"
+    },
+    "native-controls/Branch-N1/run/process/reservation-context.json": {
+      "bytes": 2991,
+      "sha256": "99203dcfc90b492d0d8ba0ecdfe133e705daa19ea42471ca3c2015af0246f8a5"
+    },
+    "native-controls/Branch-N1/run/process/whole-group-closure.json": {
+      "bytes": 1297,
+      "sha256": "b7093fcc53b7d8a282f20d85b1967bdc73167cde867ac719198eb46fd9dda913"
+    },
+    "native-controls/Branch-N1/run/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Branch-N1/run/process/owned-process.json": {
+      "bytes": 660,
+      "sha256": "59cf6e60a19926049489de7cdc22864bf1f39736333f186829fe1e00acc5f1d2"
+    },
+    "native-controls/Branch-N1/run/process/result.json": {
+      "bytes": 527,
+      "sha256": "d22718aad6a3aca20a2ba2d89fc2a2396ab2765464afaf900da704566109bedb"
+    },
+    "native-controls/Branch-N1/run/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "b7093fcc53b7d8a282f20d85b1967bdc73167cde867ac719198eb46fd9dda913"
+    },
+    "native-controls/Branch-N1/run/process/runtime.json": {
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964"
+    },
+    "native-controls/Branch-N1/run/process/request.json": {
+      "bytes": 817,
+      "sha256": "e8e67adfe794867842f702b23980e01687737a1a5bd534553b908a6fdba859d0"
+    },
+    "native-controls/Branch-N1/run/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Branch-N1/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-123426.3790665": {
+      "bytes": 291,
+      "sha256": "bb5db8bd1c0ac8b1d7e10955fa7186a723ef721295b494e91a205d4b58ec5185"
+    },
+    "native-controls/Branch-N1/run/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "6b48580fcc622cc6ca62bde8b04bafe11268f11613aa753edfcb165f0f79253a"
+    },
+    "native-controls/Branch-N1/run/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "native-controls/Branch-N1/run/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "native-controls/Branch-N1/run/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Branch-N1/run/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "native-controls/Branch-N1/run/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "28adecdebced8faf0776d39a538606645a1a4311c37bfb31aa2f9640ecc0f89c"
+    },
+    "native-controls/Branch-N1/run/process/contained/runtime.json": {
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964"
+    },
+    "native-controls/Branch-N1/run/process/contained/request.json": {
+      "bytes": 1513,
+      "sha256": "f0fab1ce7b75af8961d86f221ad77f03bf293fd0ceab4c912690a7c22777de7d"
+    },
+    "native-controls/Branch-N1/run/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-controls/Branch-N1/run/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "47847bbec247e9cd9fa318c6aa1a644e4c80a59904b97ddcbc310b7cc3b7a968"
+    }
+  },
+  "archive_bytes": 55916,
+  "archive_sha256": "b5ebac26ffd5a3a54c1dff8fe799668353bbb984498a4fdb01b1ff5f74b4b20d",
+  "native_sdk_source": "f679d0410dd00a36995f9d32cc03812438819bb7",
+  "train_export_evaluate_calibration_posttune_pending": true,
+  "scientific_verdict": null
+}

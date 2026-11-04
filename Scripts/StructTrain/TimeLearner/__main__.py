@@ -322,8 +322,8 @@ def main(argv: list[str] | None = None) -> int:
             else:
                 require(args.input_index is None and args.trial_id is None and args.resistance_intervention is None, "probe_analysis_has_no_configuration_overrides")
                 if args.action == "analyze-matched":
-                    from .matched_resistance_analysis import analyze
-                    result = analyze(args.source)
+                    from .matched_resistance_analysis import analyze as analyze_matched_resistance
+                    result = analyze_matched_resistance(args.source)
                 else:
                     result = audit_execution(args.source)
             _write(args.output, result)
