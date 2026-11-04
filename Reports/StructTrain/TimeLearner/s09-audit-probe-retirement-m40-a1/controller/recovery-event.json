@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1d2f8021-20d0-4e7c-b330-64476e0dda06",
+  "job_id": "s09-audit-probe-retirement-a1",
+  "recorded_unix": 1793812844.4326863,
+  "administrator": {
+    "pid": 3980212,
+    "start_ticks": "288803686",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 3980221,
+    "start_ticks": "288803698",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-audit-probe-retirement-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a556f65a477449792f4639df188eabfa78c8c651824d9c65a2d890a8e6c05f12",
+      "unit": "timelearner-4014b7d8-b9ec-48c0-8230-c99ca981eb61.service",
+      "invocation_id": "e76d98f7c4184ec990b1daeee9d10ad2",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4014b7d8-b9ec-48c0-8230-c99ca981eb61.service",
+      "initial_main_pid": 3980221,
+      "initial_start_ticks": "288803698",
+      "sha256": "206269031b6dfe4943d93fb18a894e4164c9760f375067da5f4a5a58e299534a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-4014b7d8-b9ec-48c0-8230-c99ca981eb61.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Read-only historical150 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-audit-probe-retirement-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-audit-probe-retirement-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-audit-probe-retirement-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-audit-probe-retirement-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

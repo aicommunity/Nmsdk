@@ -1,3 +1,5 @@
+Candidate158: M40 подтвердил158 retrieval records, negative refusal/exact16 scope/CMake prefix. Elder gate ждёт inventory A2; source удаления8 audit tools не объединён. Accepted manifest пока150. [Readback](AuditProbeRetirementM40Readback.ru.md).
+
 Дополнение04.11: расширенный candidate inventory обнаружил197 review candidates (189 Bin/8 root), включая пропущенный.mjs. M40 15/15, Elder pending; селектор не объединён. Manifest150 остаётся неизменным. [Readback и точные ограничения](RelatedScriptInventoryReadback.ru.md).
 
 Текущее принятое состояние:150 records (148 retired/2 moved), complete=false. Последние9 path-selected root tools удалены после двух workers/negative/exact13 checks: [приёмка](RemainingRootToolsRetirement.ru.md). Production inventory snapshot287b75d0f2a2f5465295de5da4c82dd98892fa4c подтверждает188 Bin candidates/0 выбранных root/0 Pulse и217 property declarations. Это нижняя граница; неименованные scripts и активная Bin миграция ещё требуют review. Ниже сохранена хронология.
