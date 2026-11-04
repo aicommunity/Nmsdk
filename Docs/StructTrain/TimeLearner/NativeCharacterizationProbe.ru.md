@@ -1,7 +1,8 @@
 # Штатная проба без обучения
 
 Ветка `codex/timelearner-native-probe`; реализация ещё проходит серверную
-приёмку. Команда Console `--timelearner-probe job.json --timelearner-output NEW`
+приёмку. Обычный серверный контур проверен; ASan-приёмка пока не завершена.
+Команда Console `--timelearner-probe job.json --timelearner-output NEW`
 строит явно заданную холодную модель через `ConstructNativeModel`, затем
 использует обычные Build/Init/Reset и `QueueNativeProbe`. Дочерние компоненты
 вычисляет только штатный scheduler корневой модели. ControllerVersion=2,
@@ -37,3 +38,39 @@ learner в середине пробы не вызывается. Внешнее
 нормальная и ASan сборки; полное валидное и полное невалидное наблюдения;
 частичный tick budget; неверный index/schema/digest/profile; неизменность
 модели и idle-контроллера; regression существующих Train/preflight writer.
+
+## Пакет и проверенные первичные данные
+
+`python -m Scripts.StructTrain.TimeLearner probe-job prepare TRAIN_JOB
+--input-index N --trial-id ID --output PROBE_JOB` переносит физику и протокол,
+удаляя все факторы поиска и финализации. `probe PROBE_JOB --runtime-manifest R
+--wall-seconds S --output NEW` использует общий production supervisor,
+кооперативный захват фактически загруженных библиотек и обычный run-manifest.
+`probe-job analyze NEW/native --output AUDIT` независимо проверяет первичные
+данные; общий `audit_run_manifest` дополнительно проверяет привязку процесса,
+runtime и полного состава файлов. Сам анализ первичных данных не доказывает
+происхождение произвольно подложенного отчёта процесса.
+
+Source root `111d0b578566342a6159a50977c6bcdab9f9c647`, PulseLib
+`541bf89b9966f63ca5131fa57a31a9ae3f5820ea`, Rdk
+`10e9d05aa658dd2203c89bc84ba9166595b50014`. Elder A6: восемь реальных
+проб (четыре полные валидные, две частичные по tick budget, две полные
+с отсутствующими волнами при явно заданном diagnostic min amplitude=100),
+пять отказов до наблюдения (index/schema/spikes/digest/stimulus mismatch),
+пять проверок данных без skip. Дополнительный холодный Train дал 121 первичный
+файл, побайтно равный прежнему positive-control Train. Это инженерный профиль
+с LT-мембраной, а не stock NSPNeuronGen и не научный результат классификации.
+
+Proof commit `76d62276a33e271b0320f13d899a4be4c806f96d`, компактный архив
+`Reports/StructTrain/TimeLearner/s03-native-characterization-elder-a6/primary.tar.xz`:
+357 членов, 634052 байта. Независимо проверены все члены и 322 source blobs:
+[receipt](NativeCharacterizationNormalVerification.json). Ранние неуспешные
+сборки/подготовки оставлены на сервере: недостающий include, неверный путь
+к локальному Git cache и несовпадающий gitlink Rdk. Последний отказ устранили
+точным checkout принятого commit; Rdk Core tree не менялся. Отказы не были
+сбоями научного эксперимента или доказательством проблемы SSH/диска.
+
+Открыто: ASan-приёмка, отдельные cancel/wall-budget controls, сравнение
+stock-графа с сохранённым остановленным состоянием и fixed-geometry Rs
+interventions. Новая команда пока не объединена в develop и не закрывает
+этапы 6–8 или научную матрицу.
