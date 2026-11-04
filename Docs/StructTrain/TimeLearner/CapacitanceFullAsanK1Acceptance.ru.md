@@ -1,3 +1,5 @@
+Актуализация04.11: прежний joint ASan44 A2 остановлен по8GiB resource cap, полного результата нет. Same-SDK44 A3 работает с42GiB; full304 A2 ждёт его PASS/closure/release. [Полные первичные данные и ограничения](JointAsanResourceRetry.ru.md). Нижние записи о работающем A2 относятся к предыдущему снимку.
+
 # C-search ASan K1:34/262/119,04.11.2026
 
 Завершён старый неизменяемый SDK root `69789b8cb93dbc2ce44fe7a8d90aed758cf93f76` / Pulse `84e456d6fb551021e0222ebaf51fa313df2623b4` / Rdk `acc3de8d1af2480d61ddb723c3288f7e81003049` / Bin `4af17aa240a7da0e30655a62c07cc4832e7253b9`.34 адресных C++ tests и262 полного набора прошли без failures/errors/skips;119 production Python readers прошли на фактических outputs. Набор включает чистые controller/math cases и реальные Rdk/Pulse fixtures; это не262 независимых физических эксперимента. Targeted cases повторяются внутри full inventory, не считаются независимыми seeds.
