@@ -37,7 +37,7 @@ def _write(path, value):
     _sync_directory(path.parent)
 
 
-def _validate(spec):
+def _validate(spec, *, preflight=False):
     require(type(spec) is dict and set(spec) == {"kind", "schema_version", "attempt_id", "phases"}
             and spec["kind"] == "timelearner_managed_pipeline_job"
             and type(spec["schema_version"]) is int and spec["schema_version"] == 1
@@ -78,8 +78,11 @@ def _validate(spec):
         if operation != "export":
             require(job["owner_class"] == phases[0]["job"]["owner_class"],
                     "managed_pipeline_owner_changed")
-        # Full native semantic validation happens with the actual predecessor
-        # model; no historical template can stand in for that model.
+        # Reject malformed downstream factors before expensive cold Train.
+        # Source-dependent validation still uses only the actual predecessor.
+        if preflight:
+            from .managed_declaration import validate_downstream_declaration
+            validate_downstream_declaration(operation, job, phases[0]['job']['configuration']['model'])
     return deepcopy(spec)
 
 
@@ -255,7 +258,7 @@ def reconcile_pipeline(root):
 
 
 def run_pipeline(specification, runtime_path, policy, output, *, resume=False, stop_after=None):
-    spec = _validate(load(Path(specification)))
+    spec = _validate(load(Path(specification)), preflight=True)
     require(stop_after is None or stop_after in [p["operation"] for p in spec["phases"]],
             "pipeline_unknown_stop_boundary")
     runtime = load(Path(runtime_path))

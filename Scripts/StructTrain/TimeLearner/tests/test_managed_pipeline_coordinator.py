@@ -44,6 +44,11 @@ class ManagedPipelineCoordinatorTest(unittest.TestCase):
         for i, trial in enumerate(evaluation["trials"]):
             trial["run_id"] = evaluation["run_id"]
             trial["trial_id"] = evaluation["run_id"]+"/"+str(i)
+            if not positive and trial['label'] == 'target':
+                # Even an intentionally stopped Train must have a meaningful
+                # downstream declaration; never label another job's target.
+                trial['pattern_isi'] = list(train['configuration']['model']['initial_isi'])
+                trial['pattern_hash'] = fixtures.sha(trial['pattern_isi'])
         phases = [{"operation": "train", "job": train, "wall_seconds": 600},
                   {"operation": "export", "job": export, "wall_seconds": 600}]
         if positive:
