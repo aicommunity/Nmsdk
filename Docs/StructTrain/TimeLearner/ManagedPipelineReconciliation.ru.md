@@ -11,3 +11,5 @@
 AST проверен локально; server runtime gate ещё не выполнен. Текущие coordinator8 и M40 rendering jobs закреплены на прежнем source2cc и этот новый commit не подхватывают. Это расширение pending coordinator, не принятие этапа10 и не scientific PASS.
 
 При работе с восстановленной копией проверяется исходный coordinator PID/start_ticks: чужой ещё живой controller не допускает adoption той же попытки в другом каталоге. В исходном каталоге writers сериализует общий file lock. Проверка active-controller/duplicate-run сценария на реальных управляемых процессах остаётся отдельной обязательной частью fault matrix.
+
+При копировании actual corpus сохраняются symlink severity aliases Rdk event logs. Превращение их в обычные файлы меняло бы проверяемый artifact inventory до проверки reconcile; такой тестовый перенос не используется.

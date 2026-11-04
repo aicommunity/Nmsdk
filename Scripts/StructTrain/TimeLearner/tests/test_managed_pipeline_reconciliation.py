@@ -29,7 +29,10 @@ class ManagedPipelineReconciliationTest(unittest.TestCase):
     def copy(self, name="Classic-v1"):
         original = self.source/name/"runs/pipeline"
         self.assertIsNone(audit_pipeline(original)["pending_phase"])
-        shutil.copytree(original, self.root)
+        # Native Rdk event logs contain severity aliases. Preserve their real
+        # filesystem type: materializing aliases as regular files would change
+        # the audited artifact inventory before testing recovery itself.
+        shutil.copytree(original, self.root, symlinks=True)
         self.assertEqual(audit_pipeline(self.root), audit_pipeline(original))
         return self.root
 
