@@ -78,7 +78,29 @@ readers; 121 файл холодного Train также побайтно со�
 в фактически загруженных файлах каждой пробы присутствует libasan. Leak
 detection выключен. [Receipt](NativeCharacterizationASanVerification.json).
 
-Открыто: отдельные cancel/wall-budget controls, сравнение
+Отдельные cancel/wall-budget controls также пройдены: source root
+`07ff1081f88dd020eafa345c3dc0cf4594a0941c`, шесть запусков на каждом worker
+(Classic/Branch × completed/timeout/cancelled), по девять data readers без skip.
+Непрерванные CSV/JSON и initial/final state побайтно равны предыдущим пробам.
+Timeout с явно заданным бюджетом 1 ns проверяет контракт прерывания и не
+является benchmark: в каждом случае сохранён один реальный sample. Отмены
+поступили после появления записанной трассы, сохраняют фактические samples,
+точный cancel.request и восстановленный граф. Контроллер остался idle.
+
+Execution schema 2 добавляет `probe_wall_seconds` (steady clock). Schema 1
+сохраняется для чтения прежних результатов. Auditor связывает причину
+прерывания с native packet/end_reason; для отмены требует сохранённый request,
+для tick budget — достигнутый лимит, для schema2 timeout — измеренное время
+не меньше заданного. Внешний timeout supervisor, который принудительно
+завершает процесс, остаётся отдельным исходом и не доказывает наличие
+завершённого native packet.
+
+Proof commits `7d5604cdd60fbb5b024f86326843bbb74a76e6f6` (Elder, 122256 B)
+и `a7a1407f138adc5b652f23bd7a5501d2202eacdc` (M40 ASan, 131872 B).
+На каждом независимо проверены 145 primary members и 323 source blobs:
+[receipt](NativeProbeInterruptionsVerification.json). ASan detect_leaks=0.
+
+Открыто: полное восстановление
 stock-графа с сохранённым остановленным состоянием и fixed-geometry Rs
 interventions. Новая команда пока не объединена в develop и не закрывает
 этапы 6–8 или научную матрицу.
