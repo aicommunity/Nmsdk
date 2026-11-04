@@ -34,6 +34,14 @@ def _ttl(value):
     return value
 
 
+def _quantities(value, *, capacity=False):
+    _require(type(value) is dict and set(value) == {'slots', 'memory_bytes', 'disk_bytes'} and
+             all(type(v) is int and 0 <= v <= 2**63-1 for v in value.values()) and
+             value['slots'] > 0 and (not capacity or all(v > 0 for v in value.values())),
+             'invalid_reservation_capacity' if capacity else 'invalid_reservation_demands')
+    return dict(value)
+
+
 def _identity():
     _require(os.name == 'posix' and Path('/proc/self/stat').exists(), 'linux_worker_required')
     pid = os.getpid()
@@ -83,21 +91,31 @@ def _overlap(left, right):
 
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
-    def __init__(self, database):
+    @property
+    def capacity(self):
+        return dict(self._capacity) if self._capacity is not None else None
+
+    def __init__(self, database, *, capacity=None):
         _identity()  # Reject unsupported workers before creating any ledger files.
         self.requested_path = Path(database).absolute()
         _require(not self.requested_path.is_symlink(), 'reservation_database_symlink')
         self.path = self.requested_path.resolve(strict=False)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.host = socket.gethostname()
+        self._capacity = _quantities(capacity, capacity=True) if capacity is not None else None
+        self.schema = '2' if self.capacity is not None else '1'
+        self.metadata = {'schema_version': self.schema, 'worker_host': self.host}
+        if self.capacity is not None:
+            self.metadata['capacity'] = _json(self.capacity)
         self._initialized = False
         with self._transaction() as connection:
             connection.execute('CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)')
             connection.execute('CREATE TABLE IF NOT EXISTS leases ('
                                'token TEXT PRIMARY KEY, job_id TEXT UNIQUE NOT NULL, owner TEXT NOT NULL, '
                                'resources TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN (\'held\',\'released\')), '
-                               'created REAL NOT NULL, deadline REAL NOT NULL, updated REAL NOT NULL, release_note TEXT)')
-            for key, value in (('schema_version', '1'), ('worker_host', self.host)):
+                               'created REAL NOT NULL, deadline REAL NOT NULL, updated REAL NOT NULL, release_note TEXT'+
+                               (', demands TEXT NOT NULL' if self.capacity is not None else '')+')')
+            for key, value in self.metadata.items():
                 connection.execute('INSERT OR IGNORE INTO metadata VALUES (?,?)', (key, value))
                 _require(connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()[0] == value,
                          'reservation_ledger_schema_or_worker_changed')
@@ -114,7 +132,7 @@ class Reservations:
             connection.execute('PRAGMA synchronous=FULL')
             connection.execute('BEGIN IMMEDIATE')
             if self._initialized:
-                for key, expected in (('schema_version', '1'), ('worker_host', self.host)):
+                for key, expected in self.metadata.items():
                     row = connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()
                     _require(row is not None and row[0] == expected, 'reservation_ledger_schema_or_worker_changed')
             yield connection
@@ -142,27 +160,41 @@ class Reservations:
                          all(type(r[k]) is str and Path(r[k]).is_absolute() for k in ('requested_path', 'canonical_path')) and
                          '..' not in Path(r['canonical_path']).parts and r['access'] in ('read', 'write') for r in value['resources']),
                      'corrupt_reservation_resources')
+            if 'demands' in value:
+                value['demands'] = _quantities(json.loads(value['demands']))
         except (ValueError, TypeError, KeyError) as error:
             raise ReservationError('corrupt_reservation_record') from error
         return value
 
-    def reserve(self, job_id, resources, *, ttl_seconds=30):
+    def reserve(self, job_id, resources, *, ttl_seconds=30, demands=None):
         _require(type(job_id) is str and 1 <= len(job_id) <= 128 and
                  not any(ord(c) < 32 for c in job_id), 'invalid_reservation_job_id')
         resources = _resources(resources);ttl_seconds = _ttl(ttl_seconds)
+        if self.capacity is None:
+            _require(demands is None, 'reservation_budget_policy_required')
+        else:
+            demands = _quantities(demands)
         owner, now, token = _identity(), time.time(), str(uuid.uuid4())
         with self._transaction() as connection:
             _require(connection.execute('SELECT 1 FROM leases WHERE job_id=?', (job_id,)).fetchone() is None,
                      'reservation_job_already_recorded')
+            used = {key: 0 for key in self.capacity or {}}
             for row in connection.execute('SELECT * FROM leases WHERE state=\'held\''):
                 held = self._decode(row)
                 _require(not any(_overlap(a['canonical_path'], b['canonical_path']) and
                                  'write' in (a['access'], b['access']) for a in resources for b in held['resources']),
                          'reservation_resource_conflict')
-            connection.execute('INSERT INTO leases VALUES (?,?,?,?,?,?,?,?,NULL)',
-                               (token, job_id, _json(owner), _json(resources), 'held', now, now+ttl_seconds, now))
+                for key in used:
+                    used[key] += held['demands'][key]
+            if self.capacity is not None:
+                _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),
+                         'reservation_capacity_exhausted')
+            values = (token, job_id, _json(owner), _json(resources), 'held', now, now+ttl_seconds, now)
+            connection.execute('INSERT INTO leases VALUES (?,?,?,?,?,?,?,?,NULL'+
+                               (',?' if self.capacity is not None else '')+')',
+                               values+((_json(demands),) if self.capacity is not None else ()))
         return {'token': token, 'job_id': job_id, 'owner': owner, 'resources': resources, 'state': 'held',
-                'scientific_verdict': None}
+                **({'demands': demands} if self.capacity is not None else {}), 'scientific_verdict': None}
 
     def _owned(self, connection, token):
         _require(type(token) is str, 'invalid_reservation_token')
@@ -203,5 +235,12 @@ class Reservations:
             value['owner_status'] = _owner_status(value['owner'])
             value['inspection_required'] = value['state'] == 'held' and (value['heartbeat_expired'] or value['owner_status'] != 'identity_live')
             value['scientific_verdict'] = None
-        return {'kind': 'timelearner_worker_resource_reservations', 'schema_version': 1, 'worker_host': self.host,
+        result = {'kind': 'timelearner_worker_resource_reservations', 'schema_version': int(self.schema), 'worker_host': self.host,
                 'leases': values, 'automatic_release_on_expiry': False, 'execution_attested': False, 'scientific_verdict': None}
+        if self.capacity is not None:
+            used = {key: sum(v['demands'][key] for v in values if v['state'] == 'held') for key in self.capacity}
+            _require(all(used[key] <= self.capacity[key] for key in used), 'reservation_capacity_exhausted')
+            result.update(capacity=dict(self.capacity), reserved=used,
+                          available={key: self.capacity[key]-used[key] for key in used},
+                          os_resource_limits_enforced=False)
+        return result
