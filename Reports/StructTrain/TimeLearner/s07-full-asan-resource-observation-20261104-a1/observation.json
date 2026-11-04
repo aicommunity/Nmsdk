@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "kind": "live_asan_resource_observation",
+  "host": "10.245.1.17",
+  "observed_utc": "2026-11-04T13:32:12.436146+00:00",
+  "pid": 3690746,
+  "start_ticks": "284598691",
+  "state": "R",
+  "parent_pid": 3649813,
+  "executable_realpath": "/media/user/Data/TimeLearnerRefactor/runtime-capacitance-full-asan-k1/Test_PulseLib_StorageComponents",
+  "vm_rss_bytes": 25021366272,
+  "vm_hwm_bytes": 25044742144,
+  "threads": 7,
+  "memory": {
+    "MemTotal": 50436325376,
+    "MemAvailable": 21335318528,
+    "SwapFree": 6021545984
+  },
+  "last_test_line": "[ RUN      ] NativeCapacitanceRegion.Classic0At20000",
+  "gate_terminal_observed": false,
+  "full_gate_pass_attested": false,
+  "scientific_verdict": null
+}
