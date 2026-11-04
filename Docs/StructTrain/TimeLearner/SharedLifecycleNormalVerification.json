@@ -1,0 +1,57 @@
+{
+  "evidence_commit": "7921bf4a33f04e586d689d363daa61bb452d74f6",
+  "source_closure": {
+    "root": "1eab24decb6432947afc928e7f049f3a07de2709",
+    "children": {
+      "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+      "Bin": "99f58da9296a794374cef679bbb878cb62af979a",
+      "Libraries/Nmsdk-MotionControlLib": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "Libraries/Nmsdk-PulseLib": "8644c50984c45a2211de13a75fe05cffc5bb3154",
+      "Libraries/Rdk-BasicLib": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "Libraries/Rdk-CvBasicLib": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "Libraries/Rdk-HardwareLib": "de40b008e990105856726e01230dde19f42a90a9"
+    },
+    "clean": true,
+    "alternates": false,
+    "baseline_sdk_unchanged": true
+  },
+  "checksummed_published_files": 24,
+  "archive_members_verified": 1673,
+  "archive_bytes": 13305664,
+  "archive_sha256": "54e2bba7cfcfaa02a5d478ea37f166565dbdec967d88b839d44dd99f792b8d31",
+  "native_inventories": {
+    "focused": {
+      "tests": 18,
+      "wall_seconds": 74.95883199898526
+    },
+    "native": {
+      "tests": 133,
+      "wall_seconds": 4035.2873436589725
+    }
+  },
+  "source_blobs_verified": {
+    "root": 56,
+    "pulse": 264
+  },
+  "scope": {
+    "baseline_root": "33fc48278cff860d20c570cb703198847f028065",
+    "candidate_root": "1eab24decb6432947afc928e7f049f3a07de2709",
+    "Tests_App_CMake_identical": true,
+    "pulse_core_changed_paths": [
+      "Core/NNeuronTimeLearner.cpp",
+      "Core/NNeuronTimeLearner.h",
+      "Core/NNeuronTimeLearnerBranch.cpp",
+      "Core/NNeuronTimeLearnerBranch.h",
+      "Core/TimeLearner/NativeLearnerLifecycle.h"
+    ],
+    "mathematical_goals_and_tolerances_unchanged": true,
+    "baseline_sdk_unchanged": true
+  },
+  "whole_group_closed_and_lease_released": true,
+  "source_or_Pulse_promoted_to_develop": false,
+  "next_recognition_helper_runtime_acceptance": false,
+  "ASan_acceptance": false,
+  "legacy_whole_matrix_AB_attested": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

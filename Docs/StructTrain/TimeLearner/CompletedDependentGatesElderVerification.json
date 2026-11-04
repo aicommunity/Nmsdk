@@ -1,0 +1,101 @@
+{
+  "evidence_commit": "0da29c40ae4763808ba75df384e660244885207b",
+  "attempts": {
+    "s10-managed-reconciliation-normal-a2": {
+      "terminal": {
+        "tests_passed": true,
+        "new_native_units": 0,
+        "source_commit": "71b56cd5b1a0ce877054f9e45bc59f30fc2523c8",
+        "actual_primary": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+        "reboot_active_cancel_and_live_controller_matrix_pending": true,
+        "scientific_verdict": null,
+        "whole_plan_complete": false
+      },
+      "members": 10,
+      "archive_bytes": 18532,
+      "archive_sha256": "5eca0e2edc8436313b6d8759cc911e3433642d9ee085e69b89ed4952ba5c11bf",
+      "source_commit": "71b56cd5b1a0ce877054f9e45bc59f30fc2523c8",
+      "resource_state": "released",
+      "archive_members_verified": 10,
+      "source_blobs_verified": 289,
+      "fresh_resource_state_verified": true
+    },
+    "s10-managed-declaration-normal-a3": {
+      "terminal": {
+        "tests_passed": false,
+        "new_native_units": 0,
+        "source_commit": "df5e06800ca57a65a66e8f401c23e192d39d8778",
+        "actual_primary": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+        "effective_native_validation_and_full_coordinator_rerun_pending": true,
+        "scientific_verdict": null,
+        "whole_plan_complete": false
+      },
+      "members": 11,
+      "archive_bytes": 19016,
+      "archive_sha256": "5ec3633b26b9fe02278c274765d62488d9f5ca89f5412e3158cd312014108f0a",
+      "source_commit": "df5e06800ca57a65a66e8f401c23e192d39d8778",
+      "resource_state": "released",
+      "archive_members_verified": 11,
+      "source_blobs_verified": 292,
+      "fresh_resource_state_verified": true
+    },
+    "s10-managed-live-routing-normal-a2": {
+      "terminal": {
+        "tests_passed": false,
+        "actual_managed_native_phases": null,
+        "other_modes_and_fault_matrix_pending": true,
+        "independent_partition_verified": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false
+      },
+      "members": 8,
+      "archive_bytes": 18832,
+      "archive_sha256": "35b0535346d967c2edbd07d4eeb0146caf655fec982234a64de6405a3533b34f",
+      "source_commit": "289a28ee73f4812fc860de88883ac469cf3e5516",
+      "resource_state": "not_created",
+      "archive_members_verified": 8,
+      "source_blobs_verified": 292,
+      "fresh_resource_state_verified": true
+    },
+    "s01-related-inventory-normal-a2": {
+      "terminal": {
+        "tests_passed": true,
+        "new_native_units": 0,
+        "source_commit": "0497d934d666d883903f3a8ff504169009982dbe",
+        "actual_primary": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Libraries/Nmsdk-PulseLib",
+        "whole_migration_attested": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false
+      },
+      "members": 11,
+      "archive_bytes": 18840,
+      "archive_sha256": "94a69ad3d97c05c2129e327ce990f8847c82afade099caf4d4c5ee22ba1c0f82",
+      "source_commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "resource_state": "released",
+      "archive_members_verified": 11,
+      "source_blobs_verified": 279,
+      "fresh_resource_state_verified": true
+    },
+    "s09-audit-probe-retirement-a3": {
+      "terminal": {
+        "checks_passed": true,
+        "source_records_verified": 158,
+        "historical_scripts_executed": false,
+        "native_models_executed": 0,
+        "whole_migration_complete": false,
+        "scientific_verdict": null
+      },
+      "members": 18,
+      "archive_bytes": 136272,
+      "archive_sha256": "fc8e4f3bfe0cd91f01d542503186198582296ecfa5dbfd8df41835400fb2d95d",
+      "source_commit": "a93097a10902d7c46ea2ce36064b5ec470a17546",
+      "resource_state": "released",
+      "archive_members_verified": 18,
+      "source_blobs_verified": 279,
+      "fresh_resource_state_verified": true
+    }
+  },
+  "source_branches_promoted": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}
