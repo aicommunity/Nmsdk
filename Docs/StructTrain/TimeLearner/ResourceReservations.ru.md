@@ -38,9 +38,9 @@ cancel, передача/инспекция после сбоя и доказу�
 обе worker policies и Git publisher gates. Пока такой recovery не реализован,
 abandoned lease остаётся held. Таймаут SSH не даёт права повторить задачу.
 
-Подготовлены14 адресных проверок: совместные readers и запрет redeploy;
+Подготовлены15 адресных проверок: совместные readers и запрет redeploy;
 parent/child overlap и независимый sibling; heartbeat/expiry; crash владельца;
 чужой token; два реальных конкурентных writers; symlink alias/его смена;
 создание нового runtime; transaction rollback; неизвестные schema/worker;
-недопустимые запросы. Численных моделей эти tests не запускают. До проверок
+недопустимые запросы и повреждённые held records. Численных моделей эти tests не запускают. До проверок
 на обоих серверах реализация не имеет runtime acceptance.
