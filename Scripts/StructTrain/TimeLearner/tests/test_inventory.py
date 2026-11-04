@@ -160,3 +160,75 @@ class InventorySnapshotTest(unittest.TestCase):
         self.assertTrue(row['symlink'])
         self.assertEqual(row['mode'], '120000')
         self.assertEqual(row['content_sha256'], hashlib.sha256(b'tool.py').hexdigest())
+
+    def test_script_formats_include_module_javascript_and_powershell_without_running_them(self):
+        for extension in ('.mjs', '.cjs', '.js', '.psm1', '.pl', '.rb'):
+            path = self.bin/('Configs/StructTrain/report'+extension)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text('throw new Error("inventory must not execute this file");\n')
+        self.commit(self.bin);self.commit(self.root)
+        value = build_inventory(self.root)
+        paths = {r['old_path'] for r in value['scripts'] if r['repository']=='Bin'}
+        for extension in ('.mjs', '.cjs', '.js', '.psm1', '.pl', '.rb'):
+            self.assertIn('Configs/StructTrain/report'+extension, paths)
+        self.assertEqual(value['schema_version'], 2)
+
+    def test_related_scope_reads_committed_content_not_dirty_working_files(self):
+        path = self.root/'Scripts/audit-probes/generate.py';path.parent.mkdir(parents=True)
+        path.write_text('# references NNeuronTimeLearner; not an execution instruction\nraise RuntimeError("read only")\n')
+        self.commit(self.root)
+        baseline = build_inventory(self.root)
+        self.assertNotIn(path.relative_to(self.root).as_posix(), {r['old_path'] for r in baseline['scripts']})
+        related = build_inventory(self.root, include_related=True)
+        row = next(r for r in related['scripts'] if r['old_path']==path.relative_to(self.root).as_posix())
+        self.assertEqual(related['schema_version'], 3)
+        self.assertEqual(row['selection_reasons'], {'path_tokens': [], 'content_tokens': ['timelearner']})
+        path.write_text('changed uncommitted file with no matching tokens')
+        self.assertEqual(build_inventory(self.root, include_related=True)['scripts'], related['scripts'])
+        production = self.root/'Scripts/StructTrain/TimeLearner/internal.py';production.parent.mkdir(parents=True)
+        production.write_text('TimeLearner production module is excluded from historical candidates')
+        self.commit(self.root)
+        self.assertNotIn(production.relative_to(self.root).as_posix(),
+                         {r['old_path'] for r in build_inventory(self.root, include_related=True)['scripts']})
+
+    def test_related_shebangs_and_symlinks_are_read_as_git_objects_without_following_targets(self):
+        folder = self.root/'Scripts/tools';folder.mkdir(parents=True)
+        executable = folder/'probe'
+        executable.write_text('#!/usr/bin/env python3\n# STRUCTTRAIN\nraise RuntimeError("must not run")\n')
+        binary = folder/'binary';binary.write_bytes(b'\x00TimeLearner\x00')
+        link = folder/'outside.py';os.symlink('../../missing-TimeLearner.py', link)
+        javascript = folder/'neutral.mjs';javascript.write_text('/* NORMSYNC historical analysis */ throw new Error("read only");')
+        self.git(self.root, 'add', '.')
+        for path in (executable, binary):self.git(self.root, 'update-index', '--chmod=+x', path.relative_to(self.root).as_posix())
+        self.git(self.root, '-c', 'user.name=Inventory Fixture', '-c', 'user.email=inventory@localhost',
+                 'commit', '-qm', 'Read-only related tool formats')
+        rows = {r['old_path']:r for r in build_inventory(self.root, include_related=True)['scripts']}
+        self.assertIn(executable.relative_to(self.root).as_posix(), rows)
+        self.assertNotIn(binary.relative_to(self.root).as_posix(), rows)
+        self.assertEqual(rows[link.relative_to(self.root).as_posix()]['content_sha256'],
+                         hashlib.sha256(b'../../missing-TimeLearner.py').hexdigest())
+        self.assertTrue(rows[link.relative_to(self.root).as_posix()]['symlink'])
+        self.assertEqual(rows[javascript.relative_to(self.root).as_posix()]['selection_reasons']['content_tokens'], ['normsync'])
+
+    def test_public_cli_related_scope_and_default_scope_are_explicit(self):
+        path = self.root/'Scripts/neutral.py';path.parent.mkdir(parents=True)
+        path.write_text('# TimeLearner audit; this is not an active-launch attestation\n')
+        commit = self.commit(self.root)
+        output = self.temporary/'related.json'
+        args = [sys.executable, '-m', 'Scripts.StructTrain.TimeLearner', 'inventory', '--root', str(self.root),
+                '--revision', commit, '--include-related', '--output', str(output)]
+        completed = subprocess.run(args, capture_output=True, text=True)
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        value = json.loads(output.read_text());self.assertEqual(value['schema_version'], 3)
+        self.assertEqual(value['script_discovery_scope'], 'path_and_content_tokens')
+        self.assertTrue(any(r['old_path']=='Scripts/neutral.py' for r in value['scripts']))
+        output.unlink();args.remove('--include-related')
+        completed = subprocess.run(args, capture_output=True, text=True)
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        value = json.loads(output.read_text());self.assertEqual(value['schema_version'], 2)
+        self.assertFalse(any(r['old_path']=='Scripts/neutral.py' for r in value['scripts']))
+
+    def test_scope_api_rejects_non_boolean_flags(self):
+        for value in (1, 'yes', None):
+            with self.subTest(value=value), self.assertRaisesRegex(EvidenceError, 'inventory_related_scope_must_be_boolean'):
+                build_inventory(self.root, include_related=value)
