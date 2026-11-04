@@ -24,3 +24,6 @@ Declaration fixture исправлен отдельным test-only commit `b7bb
 Последующий fresh readback: corrected declaration A4 действительно завершён13/13 без ошибок/пропусков на sourceb7. Его полный primary bundle пока на worker; archive SHA/size и terminal сохранены в [progress metadata](../../../Reports/StructTrain/TimeLearner/s10-live-routing-retry-progress-a3/readback.json), отдельная полная публикация/проверка предстоит. Это не новый полный coordinator regression.
 
 Live routing A3 на том же packageb7 реально запущен: owner2311267/start338873654 свежо подтверждён живым, terminal отсутствовал. Сохраняются6 tests/10 ожидаемых managed native units и неизменяемый runtime baseline33fc. Модели не заменяются старым готовым графом; фактический результат не присвоен до завершения. Прежний liveA2 отказал из-за failed prerequisite и остаётся отдельной попыткой.
+
+
+Corrected A4 полный primary теперь опубликован и независимо проверен: [13/13 и границы](CorrectedDeclarationPreflightAcceptance.ru.md). Предыдущая фраза «bundle пока на worker» описывает более ранний snapshot.
