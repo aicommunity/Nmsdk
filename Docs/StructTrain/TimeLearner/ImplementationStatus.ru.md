@@ -254,4 +254,6 @@ ControllerVersion=2, новые builders, длинные окна/assigned-wave 
 четыре production-derived source models получили настоящий Exact и калибровку,
 четыре прежних narrow-search cases сохранены как budget-exhausted controls.
 Два ModelSpec2 случая подтвердили distinct-owner calibrated import. Допуски
-не ослаблены; ASan-приёмка и merge в develop пока открыты.
+не ослаблены. ASan также прошёл8/8 native и7/7 readers; оба набора артефактов
+проверены и опубликованы. Merge в общую develop closure и проверка сочетания
+с остальными ожидающими feature branches пока открыты.
