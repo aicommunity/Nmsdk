@@ -286,3 +286,7 @@ reader128 source982 прошли. Новые ответы byte-exact с original
 original dataset304 не менялся. Failed attempts сохранены. Это закрывает
 конкретные normal reader/replay blockers; joint ASan и общий режимный/scientific
 охват остаются pending. Код алгоритмов/Pulsecc этим evidence merge не promoted.
+
+### Читаемые графики fresh-process переноса
+
+[Отчёт и ограничения](JointOwnerReplayVisuals.ru.md): на M40 прошёл реальный plotting gate 1/1 для 8 моделей, 12 сом и 60 видов. В Git сохранены 24 выбранных PNG и данные проверки; полные отчёты — воспроизводимый кэш на отдельном диске M40. Проверка не заменяет научную матрицу всех паттернов. Joint ASan и остальные пункты плана остаются открытыми; стадии целиком не закрываются.
