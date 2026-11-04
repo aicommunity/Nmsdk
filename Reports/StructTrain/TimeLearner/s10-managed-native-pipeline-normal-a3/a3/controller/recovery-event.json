@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "c4e9f033-2fa6-4b1c-b1df-bf4985d51f3c",
+  "job_id": "s10-managed-native-pipeline-normal-a3",
+  "recorded_unix": 1793792531.1463783,
+  "administrator": {
+    "pid": 1934943,
+    "start_ticks": "336210440",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 1934959,
+    "start_ticks": "336210480",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "40e2ca525759ce53425a60e66fef4b80702c6c10668cdd8ebdc0ca1b6f580066",
+      "unit": "timelearner-7df52878-7607-4a1c-b995-1aad3159dc46.service",
+      "invocation_id": "a901a657e619443e8e2bdb5a0997cab5",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7df52878-7607-4a1c-b995-1aad3159dc46.service",
+      "initial_main_pid": 1934959,
+      "initial_start_ticks": "336210480",
+      "sha256": "285445c5449fbaf444c923f3f258850ab426325feaa4563e312629e899222040"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-7df52878-7607-4a1c-b995-1aad3159dc46.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Actual eight controls passed: four Exact N1 cold Train/export/frozen paths and four stopped Train/export-refusal controls; all sixteen independently managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+      "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a3"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

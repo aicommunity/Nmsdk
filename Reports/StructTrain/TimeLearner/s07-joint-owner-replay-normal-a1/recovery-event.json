@@ -1,0 +1,108 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "3d999c76-1303-48de-84f5-4a8c32144e9d",
+  "job_id": "s07-csearch-threshold-joint-owner-replay-a1",
+  "recorded_unix": 1793789958.7467976,
+  "administrator": {
+    "pid": 1891564,
+    "start_ticks": "335932252",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 1891576,
+    "start_ticks": "335932263",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-owner-replay-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "8a10f7f1c57d41d7d7a92bd4ad2996c88c22ef99eb2bc81c5f03c11e8eab194c",
+      "unit": "timelearner-9d15bd3a-9eee-4e36-be4b-c28943301d78.service",
+      "invocation_id": "a4fe41fc8c90491aa67c32a042b8b15e",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9d15bd3a-9eee-4e36-be4b-c28943301d78.service",
+      "initial_main_pid": 1891576,
+      "initial_start_ticks": "335932263",
+      "sha256": "47ab2a3c57faf15e1eefe41de546c089d69ac090ea39116d923fd98a2724a556"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-9d15bd3a-9eee-4e36-be4b-c28943301d78.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Native owner8 and reader128 worker closed including archive creation; fresh kernel closure and exact worker main PID/start ticks verified before releasing read-only SDK and runtime/resource lease. Recovery does not attest test success.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+      "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-analysis-dispatch-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-analysis-dispatch-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-owner-replay-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-owner-replay-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+      "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-joint-owner-replay-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-joint-owner-replay-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

@@ -1,0 +1,285 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 2,
+  "worker_host": "Elder-1",
+  "leases": [
+    {
+      "token": "e212e5de-1a92-4402-b903-fb43103cb4a8",
+      "job_id": "s07-csearch-threshold-joint-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1561839,
+        "start_ticks": "334038317",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/git-relay-csearch-threshold-source-a1.git",
+          "requested_path": "/home/user/timelearner-refactor/git-relay-csearch-threshold-source-a1.git"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/git-relay-pulse-csearch-threshold-a1.git",
+          "requested_path": "/home/user/timelearner-refactor/git-relay-pulse-csearch-threshold-a1.git"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793770613.47449,
+      "deadline": 1793770893.5252287,
+      "updated": 1793772248.597491,
+      "release_note": "Explicit recovery after verified whole-unit stop: source preparation failed before configure/build/native model execution; not a successful run.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "4d6cf2bf-69a4-4bbf-891e-5f7004ffca92",
+      "job_id": "s07-csearch-threshold-joint-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1667159,
+        "start_ticks": "334215550",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793772385.7963486,
+      "deadline": 1793774993.7199051,
+      "updated": 1793774874.3582244,
+      "release_note": "All synchronous operations returned and fresh whole-worker cgroup membership contains only this finalizing owner; subsequent group closure recorded separately.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "777429f1-edf6-48c7-a81f-a5d654efa2d0",
+      "job_id": "s07-csearch-threshold-joint-normal-a4",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1716073,
+        "start_ticks": "334541124",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793775641.5455935,
+      "deadline": 1793776681.850611,
+      "updated": 1793776570.9009209,
+      "release_note": "All synchronous operations returned and fresh whole-worker cgroup membership contains only this finalizing owner; subsequent group closure recorded separately.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "1f652be3-1914-4f1e-943e-409a50c19bfd",
+      "job_id": "s07-csearch-threshold-joint-full-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1744928,
+        "start_ticks": "334772989",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793777960.200894,
+      "deadline": 1793783929.3488584,
+      "updated": 1793783827.1390588,
+      "release_note": "Full normal304 worker closed including archive creation; fresh kernel closure and exact worker main PID/start ticks verified before releasing read-only SDK and runtime/resource lease. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null,
+  "capacity": {
+    "slots": 1,
+    "memory_bytes": 25769803776,
+    "disk_bytes": 15032385536
+  },
+  "reserved": {
+    "slots": 0,
+    "memory_bytes": 0,
+    "disk_bytes": 0
+  },
+  "available": {
+    "slots": 1,
+    "memory_bytes": 25769803776,
+    "disk_bytes": 15032385536
+  },
+  "disk_device": 2051,
+  "os_resource_limits_enforced": false
+}

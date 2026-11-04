@@ -1,0 +1,91 @@
+{
+  "commit": "28f7d2fe6f59232f19b33e5b24f4d4011eddfffb",
+  "attempts": [
+    {
+      "attempt": "a1",
+      "source_commit": "2fd2f990258a0ce3eacf396771cc81333f4dfecc",
+      "members_verified": 263,
+      "source_blobs_verified": 283,
+      "archive_sha256": "fe63ce307726921552df4113c9fc813303f1b2fdfad5524a362f5ca4e829294c",
+      "archive_bytes": 399648
+    },
+    {
+      "attempt": "a2",
+      "source_commit": "bbb15540562abb19ae3b929a9f8525dd9094339f",
+      "members_verified": 751,
+      "source_blobs_verified": 283,
+      "archive_sha256": "96d48f09d4bbb99f2a2517ffbd4d6e2af5880a04c28f6d73d49c0041f405e753",
+      "archive_bytes": 1752260
+    },
+    {
+      "attempt": "a3",
+      "source_commit": "c3445128cd6b62aa9ae0ce1b9e448186a1b4c62c",
+      "members_verified": 1714,
+      "source_blobs_verified": 283,
+      "archive_sha256": "190c22f03a712e040122af8d73e466068ec0f1df41cec3428a99f722d5d025ff",
+      "archive_bytes": 4541640
+    }
+  ],
+  "outcomes": {
+    "kind": "managed_actual_pipeline_evidence",
+    "attempts": [
+      {
+        "attempt": "a1",
+        "source_commit": "2fd2f990258a0ce3eacf396771cc81333f4dfecc",
+        "passed": false,
+        "tests": {
+          "tests": 4,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0,
+          "expected": 4
+        },
+        "archive_bytes": 399648,
+        "archive_sha256": "fe63ce307726921552df4113c9fc813303f1b2fdfad5524a362f5ca4e829294c",
+        "members": 263
+      },
+      {
+        "attempt": "a2",
+        "source_commit": "bbb15540562abb19ae3b929a9f8525dd9094339f",
+        "passed": false,
+        "tests": {
+          "tests": 8,
+          "failures": 4,
+          "errors": 0,
+          "skipped": 0,
+          "expected": 8
+        },
+        "archive_bytes": 1752260,
+        "archive_sha256": "96d48f09d4bbb99f2a2517ffbd4d6e2af5880a04c28f6d73d49c0041f405e753",
+        "members": 751
+      },
+      {
+        "attempt": "a3",
+        "source_commit": "c3445128cd6b62aa9ae0ce1b9e448186a1b4c62c",
+        "passed": true,
+        "tests": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "expected": 8
+        },
+        "archive_bytes": 4541640,
+        "archive_sha256": "190c22f03a712e040122af8d73e466068ec0f1df41cec3428a99f722d5d025ff",
+        "members": 1714
+      }
+    ],
+    "current_tests_passed": 8,
+    "actual_managed_native_phases": 16,
+    "exact_n1_models": 4,
+    "stopped_controls": 4,
+    "model_spec_versions": [
+      1,
+      2
+    ],
+    "positive_n0_pending": true,
+    "m40_asan_pending": true,
+    "posttune_and_calibration_pending": true,
+    "scientific_verdict": null
+  }
+}

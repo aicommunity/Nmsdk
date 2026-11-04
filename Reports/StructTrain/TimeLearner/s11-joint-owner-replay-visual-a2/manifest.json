@@ -1,0 +1,2161 @@
+{
+  "kind": "native_recognition_owner_replay_visual_report",
+  "schema_version": 1,
+  "status": "diagnostic",
+  "runtime": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "cases": [
+    {
+      "id": "Branch_N0_COn",
+      "source_filename": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_owner_recognition_state.json",
+      "source_file_sha256": "1c7f0b1edb9557bef5724cc727b04ad636924ae6a9eef0e67467a167c8c495df",
+      "actual_trace_sha256": "6f0ab618bec913835622ca534af7e14b95bf132f267e595d5bfa5b9842b1888c",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch/owned-recognition",
+      "model_revision": "cfcd276c75065c8bdceed0223d2bae18b6869e55f3fa34e41eba15e60e06243f",
+      "native_ticks": 381,
+      "soma_channels": 1,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "cfcd276c75065c8bdceed0223d2bae18b6869e55f3fa34e41eba15e60e06243f",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "cfcd276c75065c8bdceed0223d2bae18b6869e55f3fa34e41eba15e60e06243f",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 215.8859,
+              "end": 216.0759,
+              "files": [
+                "Branch_N0_COn/soma-001/overview.png",
+                "Branch_N0_COn/soma-001/overview.svg",
+                "Branch_N0_COn/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 215.8859,
+              "end": 215.9359,
+              "files": [
+                "Branch_N0_COn/soma-001/zoom-001.png",
+                "Branch_N0_COn/soma-001/zoom-001.svg",
+                "Branch_N0_COn/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 215.9359,
+              "end": 215.9859,
+              "files": [
+                "Branch_N0_COn/soma-001/zoom-002.png",
+                "Branch_N0_COn/soma-001/zoom-002.svg",
+                "Branch_N0_COn/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 215.9859,
+              "end": 216.0359,
+              "files": [
+                "Branch_N0_COn/soma-001/zoom-003.png",
+                "Branch_N0_COn/soma-001/zoom-003.svg",
+                "Branch_N0_COn/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 216.0359,
+              "end": 216.0759,
+              "files": [
+                "Branch_N0_COn/soma-001/zoom-004.png",
+                "Branch_N0_COn/soma-001/zoom-004.svg",
+                "Branch_N0_COn/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Branch_N0_COff",
+      "source_filename": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_owner_recognition_state.json",
+      "source_file_sha256": "dd0d45e298b00b3184b386b3be2a70a177cac4ecf1a907a812ed9ecbe5950e8b",
+      "actual_trace_sha256": "790dd41b6a8e2a8936d9cadef6a579f55ac0ac35ccc30ec497225db483cc9014",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Branch_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history/owned-recognition",
+      "model_revision": "cee1b0b5f6406c543988ce504cf5fe5332457840b028b0736b86149dfae5bd59",
+      "native_ticks": 381,
+      "soma_channels": 1,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "cee1b0b5f6406c543988ce504cf5fe5332457840b028b0736b86149dfae5bd59",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "cee1b0b5f6406c543988ce504cf5fe5332457840b028b0736b86149dfae5bd59",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 208.1299,
+              "end": 208.3199,
+              "files": [
+                "Branch_N0_COff/soma-001/overview.png",
+                "Branch_N0_COff/soma-001/overview.svg",
+                "Branch_N0_COff/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 208.1299,
+              "end": 208.1799,
+              "files": [
+                "Branch_N0_COff/soma-001/zoom-001.png",
+                "Branch_N0_COff/soma-001/zoom-001.svg",
+                "Branch_N0_COff/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 208.1799,
+              "end": 208.2299,
+              "files": [
+                "Branch_N0_COff/soma-001/zoom-002.png",
+                "Branch_N0_COff/soma-001/zoom-002.svg",
+                "Branch_N0_COff/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 208.2299,
+              "end": 208.2799,
+              "files": [
+                "Branch_N0_COff/soma-001/zoom-003.png",
+                "Branch_N0_COff/soma-001/zoom-003.svg",
+                "Branch_N0_COff/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 208.2799,
+              "end": 208.3199,
+              "files": [
+                "Branch_N0_COff/soma-001/zoom-004.png",
+                "Branch_N0_COff/soma-001/zoom-004.svg",
+                "Branch_N0_COff/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Branch_N1_COn",
+      "source_filename": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_owner_recognition_state.json",
+      "source_file_sha256": "60cfcb60c75d25f02979a020efeb3f90e02ea213817d06272f3d375c11fe9dcd",
+      "actual_trace_sha256": "0130e06efd02a1aaa5cae591370447cd44458a86f864248fdf264c5bf07a8d1b",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch/owned-recognition",
+      "model_revision": "0c9033052aad9b53cb34182db3286631e1b09d880e7bef1ae6cbe9047904e1ad",
+      "native_ticks": 381,
+      "soma_channels": 1,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "0c9033052aad9b53cb34182db3286631e1b09d880e7bef1ae6cbe9047904e1ad",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "0c9033052aad9b53cb34182db3286631e1b09d880e7bef1ae6cbe9047904e1ad",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 217.8249,
+              "end": 218.0149,
+              "files": [
+                "Branch_N1_COn/soma-001/overview.png",
+                "Branch_N1_COn/soma-001/overview.svg",
+                "Branch_N1_COn/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 217.8249,
+              "end": 217.87490000000003,
+              "files": [
+                "Branch_N1_COn/soma-001/zoom-001.png",
+                "Branch_N1_COn/soma-001/zoom-001.svg",
+                "Branch_N1_COn/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 217.87490000000003,
+              "end": 217.9249,
+              "files": [
+                "Branch_N1_COn/soma-001/zoom-002.png",
+                "Branch_N1_COn/soma-001/zoom-002.svg",
+                "Branch_N1_COn/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 217.9249,
+              "end": 217.97490000000002,
+              "files": [
+                "Branch_N1_COn/soma-001/zoom-003.png",
+                "Branch_N1_COn/soma-001/zoom-003.svg",
+                "Branch_N1_COn/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 217.97490000000002,
+              "end": 218.0149,
+              "files": [
+                "Branch_N1_COn/soma-001/zoom-004.png",
+                "Branch_N1_COn/soma-001/zoom-004.svg",
+                "Branch_N1_COn/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Branch_N1_COff",
+      "source_filename": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_owner_recognition_state.json",
+      "source_file_sha256": "85ca1ef1590ae0297f679310d1b92231558a01a3171cb19e8a10b6d55fe04bad",
+      "actual_trace_sha256": "f2f62f58515bc0f413fb7a7aa9ca18c6549973ca9708b98403d4fa6cc2e07982",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Branch_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history/owned-recognition",
+      "model_revision": "a97f7f6f6f4b53c88104fbb5e320ac7edfa1a0ff4226d6661e40dc870b9ab61c",
+      "native_ticks": 381,
+      "soma_channels": 1,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "a97f7f6f6f4b53c88104fbb5e320ac7edfa1a0ff4226d6661e40dc870b9ab61c",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "a97f7f6f6f4b53c88104fbb5e320ac7edfa1a0ff4226d6661e40dc870b9ab61c",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 210.0689,
+              "end": 210.2589,
+              "files": [
+                "Branch_N1_COff/soma-001/overview.png",
+                "Branch_N1_COff/soma-001/overview.svg",
+                "Branch_N1_COff/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 210.0689,
+              "end": 210.11890000000002,
+              "files": [
+                "Branch_N1_COff/soma-001/zoom-001.png",
+                "Branch_N1_COff/soma-001/zoom-001.svg",
+                "Branch_N1_COff/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 210.11890000000002,
+              "end": 210.1689,
+              "files": [
+                "Branch_N1_COff/soma-001/zoom-002.png",
+                "Branch_N1_COff/soma-001/zoom-002.svg",
+                "Branch_N1_COff/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 210.1689,
+              "end": 210.21890000000002,
+              "files": [
+                "Branch_N1_COff/soma-001/zoom-003.png",
+                "Branch_N1_COff/soma-001/zoom-003.svg",
+                "Branch_N1_COff/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 210.21890000000002,
+              "end": 210.2589,
+              "files": [
+                "Branch_N1_COff/soma-001/zoom-004.png",
+                "Branch_N1_COff/soma-001/zoom-004.svg",
+                "Branch_N1_COff/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ],
+              "y_limits": [
+                -0.0009550690566745157,
+                0.012893432265105961
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Classic_N0_COn",
+      "source_filename": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_owner_recognition_state.json",
+      "source_file_sha256": "ddfc6b326063b951ccd273d89d62248d042d5caf50151aa9ee15a1197a8d41fe",
+      "actual_trace_sha256": "fd1e3e696359c92cb63681b5bd8593296d9a3ad6f2b7ec7e614d9790877b4216",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch/owned-recognition",
+      "model_revision": "22ac18f1acf450e4f99728df54dc1cd83bb1b5512f9f507d52fe8d0249550e33",
+      "native_ticks": 381,
+      "soma_channels": 2,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "22ac18f1acf450e4f99728df54dc1cd83bb1b5512f9f507d52fe8d0249550e33",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "22ac18f1acf450e4f99728df54dc1cd83bb1b5512f9f507d52fe8d0249550e33",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 212.0079,
+              "end": 212.1979,
+              "files": [
+                "Classic_N0_COn/soma-001/overview.png",
+                "Classic_N0_COn/soma-001/overview.svg",
+                "Classic_N0_COn/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 212.0079,
+              "end": 212.05790000000002,
+              "files": [
+                "Classic_N0_COn/soma-001/zoom-001.png",
+                "Classic_N0_COn/soma-001/zoom-001.svg",
+                "Classic_N0_COn/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 212.05790000000002,
+              "end": 212.1079,
+              "files": [
+                "Classic_N0_COn/soma-001/zoom-002.png",
+                "Classic_N0_COn/soma-001/zoom-002.svg",
+                "Classic_N0_COn/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 212.1079,
+              "end": 212.1579,
+              "files": [
+                "Classic_N0_COn/soma-001/zoom-003.png",
+                "Classic_N0_COn/soma-001/zoom-003.svg",
+                "Classic_N0_COn/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 212.1579,
+              "end": 212.1979,
+              "files": [
+                "Classic_N0_COn/soma-001/zoom-004.png",
+                "Classic_N0_COn/soma-001/zoom-004.svg",
+                "Classic_N0_COn/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "descriptor": "$.Soma2.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 212.0079,
+              "end": 212.1979,
+              "files": [
+                "Classic_N0_COn/soma-002/overview.png",
+                "Classic_N0_COn/soma-002/overview.svg",
+                "Classic_N0_COn/soma-002/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 212.0079,
+              "end": 212.05790000000002,
+              "files": [
+                "Classic_N0_COn/soma-002/zoom-001.png",
+                "Classic_N0_COn/soma-002/zoom-001.svg",
+                "Classic_N0_COn/soma-002/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 212.05790000000002,
+              "end": 212.1079,
+              "files": [
+                "Classic_N0_COn/soma-002/zoom-002.png",
+                "Classic_N0_COn/soma-002/zoom-002.svg",
+                "Classic_N0_COn/soma-002/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 212.1079,
+              "end": 212.1579,
+              "files": [
+                "Classic_N0_COn/soma-002/zoom-003.png",
+                "Classic_N0_COn/soma-002/zoom-003.svg",
+                "Classic_N0_COn/soma-002/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 212.1579,
+              "end": 212.1979,
+              "files": [
+                "Classic_N0_COn/soma-002/zoom-004.png",
+                "Classic_N0_COn/soma-002/zoom-004.svg",
+                "Classic_N0_COn/soma-002/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Classic_N0_COff",
+      "source_filename": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_owner_recognition_state.json",
+      "source_file_sha256": "b259913f8d85127af5a03ad3e9bf53961fb07238f9563f8c5b808feac76eedec",
+      "actual_trace_sha256": "013eca9580c21f9427e4fa08a526c1f8ce841cc654a9779926e47dc389df195d",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Classic_2000_N0_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history/owned-recognition",
+      "model_revision": "0d088be389d2135caa0877cf4379d3f2b484305b0f12605e11fcf3f4defa76fb",
+      "native_ticks": 381,
+      "soma_channels": 2,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "0d088be389d2135caa0877cf4379d3f2b484305b0f12605e11fcf3f4defa76fb",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "0d088be389d2135caa0877cf4379d3f2b484305b0f12605e11fcf3f4defa76fb",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 204.2519,
+              "end": 204.4419,
+              "files": [
+                "Classic_N0_COff/soma-001/overview.png",
+                "Classic_N0_COff/soma-001/overview.svg",
+                "Classic_N0_COff/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 204.2519,
+              "end": 204.30190000000002,
+              "files": [
+                "Classic_N0_COff/soma-001/zoom-001.png",
+                "Classic_N0_COff/soma-001/zoom-001.svg",
+                "Classic_N0_COff/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 204.30190000000002,
+              "end": 204.3519,
+              "files": [
+                "Classic_N0_COff/soma-001/zoom-002.png",
+                "Classic_N0_COff/soma-001/zoom-002.svg",
+                "Classic_N0_COff/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 204.3519,
+              "end": 204.4019,
+              "files": [
+                "Classic_N0_COff/soma-001/zoom-003.png",
+                "Classic_N0_COff/soma-001/zoom-003.svg",
+                "Classic_N0_COff/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 204.4019,
+              "end": 204.4419,
+              "files": [
+                "Classic_N0_COff/soma-001/zoom-004.png",
+                "Classic_N0_COff/soma-001/zoom-004.svg",
+                "Classic_N0_COff/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "descriptor": "$.Soma2.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 204.2519,
+              "end": 204.4419,
+              "files": [
+                "Classic_N0_COff/soma-002/overview.png",
+                "Classic_N0_COff/soma-002/overview.svg",
+                "Classic_N0_COff/soma-002/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 204.2519,
+              "end": 204.30190000000002,
+              "files": [
+                "Classic_N0_COff/soma-002/zoom-001.png",
+                "Classic_N0_COff/soma-002/zoom-001.svg",
+                "Classic_N0_COff/soma-002/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 204.30190000000002,
+              "end": 204.3519,
+              "files": [
+                "Classic_N0_COff/soma-002/zoom-002.png",
+                "Classic_N0_COff/soma-002/zoom-002.svg",
+                "Classic_N0_COff/soma-002/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 204.3519,
+              "end": 204.4019,
+              "files": [
+                "Classic_N0_COff/soma-002/zoom-003.png",
+                "Classic_N0_COff/soma-002/zoom-003.svg",
+                "Classic_N0_COff/soma-002/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 204.4019,
+              "end": 204.4419,
+              "files": [
+                "Classic_N0_COff/soma-002/zoom-004.png",
+                "Classic_N0_COff/soma-002/zoom-004.svg",
+                "Classic_N0_COff/soma-002/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Classic_N1_COn",
+      "source_filename": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch_owner_recognition_state.json",
+      "source_file_sha256": "35ff47f2abb686da00e0423582751c029b5de7442736f8b798197c27100e6d11",
+      "actual_trace_sha256": "3ec36c8ab4f526c7798994353cb58688e8b05f20ca62215eca7b289f8e2b224e",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_csearch/owned-recognition",
+      "model_revision": "5f0b52849d6f56b527c6465eb8efff0b019fccd1dda6cedeccc1626211f7e9bd",
+      "native_ticks": 381,
+      "soma_channels": 2,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "5f0b52849d6f56b527c6465eb8efff0b019fccd1dda6cedeccc1626211f7e9bd",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "5f0b52849d6f56b527c6465eb8efff0b019fccd1dda6cedeccc1626211f7e9bd",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 213.9469,
+              "end": 214.1369,
+              "files": [
+                "Classic_N1_COn/soma-001/overview.png",
+                "Classic_N1_COn/soma-001/overview.svg",
+                "Classic_N1_COn/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 213.9469,
+              "end": 213.9969,
+              "files": [
+                "Classic_N1_COn/soma-001/zoom-001.png",
+                "Classic_N1_COn/soma-001/zoom-001.svg",
+                "Classic_N1_COn/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 213.9969,
+              "end": 214.0469,
+              "files": [
+                "Classic_N1_COn/soma-001/zoom-002.png",
+                "Classic_N1_COn/soma-001/zoom-002.svg",
+                "Classic_N1_COn/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 214.0469,
+              "end": 214.0969,
+              "files": [
+                "Classic_N1_COn/soma-001/zoom-003.png",
+                "Classic_N1_COn/soma-001/zoom-003.svg",
+                "Classic_N1_COn/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 214.0969,
+              "end": 214.1369,
+              "files": [
+                "Classic_N1_COn/soma-001/zoom-004.png",
+                "Classic_N1_COn/soma-001/zoom-004.svg",
+                "Classic_N1_COn/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "descriptor": "$.Soma2.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 213.9469,
+              "end": 214.1369,
+              "files": [
+                "Classic_N1_COn/soma-002/overview.png",
+                "Classic_N1_COn/soma-002/overview.svg",
+                "Classic_N1_COn/soma-002/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 213.9469,
+              "end": 213.9969,
+              "files": [
+                "Classic_N1_COn/soma-002/zoom-001.png",
+                "Classic_N1_COn/soma-002/zoom-001.svg",
+                "Classic_N1_COn/soma-002/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 213.9969,
+              "end": 214.0469,
+              "files": [
+                "Classic_N1_COn/soma-002/zoom-002.png",
+                "Classic_N1_COn/soma-002/zoom-002.svg",
+                "Classic_N1_COn/soma-002/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 214.0469,
+              "end": 214.0969,
+              "files": [
+                "Classic_N1_COn/soma-002/zoom-003.png",
+                "Classic_N1_COn/soma-002/zoom-003.svg",
+                "Classic_N1_COn/soma-002/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 214.0969,
+              "end": 214.1369,
+              "files": [
+                "Classic_N1_COn/soma-002/zoom-004.png",
+                "Classic_N1_COn/soma-002/zoom-004.svg",
+                "Classic_N1_COn/soma-002/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Classic_N1_COff",
+      "source_filename": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history_owner_recognition_state.json",
+      "source_file_sha256": "d25388fdb7823d560eb911341cbf7476491e322a596543b7aef8a44fe117b1eb",
+      "actual_trace_sha256": "fd7d94c48cffeefdf378292fec7e34122926200449d8e15c097f7f3e2d698af6",
+      "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+      "trial_id": "Classic_2000_N1_learned_boundary_explicit_tolerance_configured_recognition_7_spiking_capacitance_state_model_spec2_history/owned-recognition",
+      "model_revision": "199e69288abd0322bcb8718ddf63b7be1f015b34ec4a13e0b182886c221b9a3a",
+      "native_ticks": 381,
+      "soma_channels": 2,
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "199e69288abd0322bcb8718ddf63b7be1f015b34ec4a13e0b182886c221b9a3a",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "199e69288abd0322bcb8718ddf63b7be1f015b34ec4a13e0b182886c221b9a3a",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      },
+      "figures": [
+        {
+          "channel": 0,
+          "descriptor": "$.Soma1.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 206.1909,
+              "end": 206.3809,
+              "files": [
+                "Classic_N1_COff/soma-001/overview.png",
+                "Classic_N1_COff/soma-001/overview.svg",
+                "Classic_N1_COff/soma-001/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 206.1909,
+              "end": 206.2409,
+              "files": [
+                "Classic_N1_COff/soma-001/zoom-001.png",
+                "Classic_N1_COff/soma-001/zoom-001.svg",
+                "Classic_N1_COff/soma-001/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 206.2409,
+              "end": 206.2909,
+              "files": [
+                "Classic_N1_COff/soma-001/zoom-002.png",
+                "Classic_N1_COff/soma-001/zoom-002.svg",
+                "Classic_N1_COff/soma-001/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 206.2909,
+              "end": 206.3409,
+              "files": [
+                "Classic_N1_COff/soma-001/zoom-003.png",
+                "Classic_N1_COff/soma-001/zoom-003.svg",
+                "Classic_N1_COff/soma-001/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 206.3409,
+              "end": 206.3809,
+              "files": [
+                "Classic_N1_COff/soma-001/zoom-004.png",
+                "Classic_N1_COff/soma-001/zoom-004.svg",
+                "Classic_N1_COff/soma-001/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ],
+              "y_limits": [
+                -0.00044922098945558985,
+                0.006064483357650463
+              ]
+            }
+          ]
+        },
+        {
+          "channel": 1,
+          "descriptor": "$.Soma2.SumPotential",
+          "views": [
+            {
+              "view": "overview",
+              "begin": 206.1909,
+              "end": 206.3809,
+              "files": [
+                "Classic_N1_COff/soma-002/overview.png",
+                "Classic_N1_COff/soma-002/overview.svg",
+                "Classic_N1_COff/soma-002/overview.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": null,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "overview",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-001",
+              "begin": 206.1909,
+              "end": 206.2409,
+              "files": [
+                "Classic_N1_COff/soma-002/zoom-001.png",
+                "Classic_N1_COff/soma-002/zoom-001.svg",
+                "Classic_N1_COff/soma-002/zoom-001.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-001",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-002",
+              "begin": 206.2409,
+              "end": 206.2909,
+              "files": [
+                "Classic_N1_COff/soma-002/zoom-002.png",
+                "Classic_N1_COff/soma-002/zoom-002.svg",
+                "Classic_N1_COff/soma-002/zoom-002.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-002",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-003",
+              "begin": 206.2909,
+              "end": 206.3409,
+              "files": [
+                "Classic_N1_COff/soma-002/zoom-003.png",
+                "Classic_N1_COff/soma-002/zoom-003.svg",
+                "Classic_N1_COff/soma-002/zoom-003.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-003",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            },
+            {
+              "view": "zoom-004",
+              "begin": 206.3409,
+              "end": 206.3809,
+              "files": [
+                "Classic_N1_COff/soma-002/zoom-004.png",
+                "Classic_N1_COff/soma-002/zoom-004.svg",
+                "Classic_N1_COff/soma-002/zoom-004.pdf"
+              ],
+              "png_width": 1920,
+              "png_height": 960,
+              "minimum_native_tick_pixels_on_zoom": 14.208,
+              "downsampling": false,
+              "y_scale": "shared",
+              "time_view": "zoom-004",
+              "sample_markers": false,
+              "shared_y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ],
+              "y_limits": [
+                -0.0006379310262029314,
+                0.008612068853739574
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_archive_sha256": "e0b4dbc2ba7f34f1f0579b19309240842c7d31c0a1624656f61010d1fae2f94c",
+  "origin_evidence_commit": "25bbda5529caea24e8847973cd603d50b1b45826",
+  "patterns_per_case": 1,
+  "spikes": "not_recorded_by_paired_transport",
+  "units": "model_units_SI_unverified",
+  "primary_data_copied_into_report": false,
+  "visual_acceptance_complete": false,
+  "scientific_verdict": null
+}
