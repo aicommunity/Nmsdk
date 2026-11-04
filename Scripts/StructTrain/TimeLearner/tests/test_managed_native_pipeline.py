@@ -34,13 +34,14 @@ class ManagedNativePipelineTest(unittest.TestCase):
         if not declaration:
             raise unittest.SkipTest("requires real Console runtime, controller and cold job declarations")
         cls.spec = load(Path(declaration))
-        if set(cls.spec) != {"runtime", "templates", "controller", "output"}:
+        if set(cls.spec) != {"runtime", "templates", "positive_templates", "controller", "output"}:
             raise RuntimeError("incomplete managed pipeline declaration")
         cls.output = Path(cls.spec["output"])
         cls.output.mkdir(parents=True, exist_ok=False)
         cls.templates = Path(cls.spec["templates"])
+        cls.positive_templates = Path(cls.spec["positive_templates"])
 
-    def case(self, name):
+    def case(self, name, *, positive=False):
         root = self.output/name
         root.mkdir()
         capacity = {"slots": 1, "memory_bytes": 6*1024**3, "disk_bytes": 1024**3, "tasks": 512}
@@ -84,21 +85,50 @@ class ManagedNativePipelineTest(unittest.TestCase):
                             "job_sha256": job["sha256"], "manifest_sha256": manifest["sha256"]})
             return output
 
-        job = load(self.templates/(name+"-train/input/job.json"))
+        templates = self.positive_templates if positive else self.templates
+        job = load(templates/(name+"-train/input/job.json"))
         self.assertEqual(job["schema_version"], 1)
         job["configuration"]["run_id"] += "/managed-cold-pipeline"
         trained = invoke("train", job)
         execution = load(trained/"native/execution.json")
+        if not positive:
+            # These older declarations have a real, retained negative outcome
+            # under this runtime. They are never reused as positive seeds.
+            self.assertFalse(execution["completed_boundary"])
+            self.assertEqual(execution["training_outcome"], "budget_exhausted")
+            self.assertFalse((trained/"native/train_learned_state.json").exists())
+            stopped = trained/"native/train_stopped_state.json"
+            self.assertTrue(stopped.is_file())
+            forbidden = root/"runs/forbidden-export"
+            export = load(templates/(name+"-export/input/job.json"))
+            export["source_solo"] = load(stopped)
+            path = root/"forbidden-export.json"
+            path.write_text(json.dumps(signed(export)), encoding="utf-8")
+            stdout = io.StringIO()
+            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stdout):
+                code = main(["export", str(path), "--source-solo", str(stopped),
+                    "--runtime-manifest", self.spec["runtime"], "--wall-seconds", "600",
+                    "--process-policy", str(policy_path), "--output", str(forbidden)])
+            (root/"forbidden-export-cli.log").write_text(stdout.getvalue(), encoding="utf-8")
+            self.assertEqual(code, 2)
+            self.assertFalse(forbidden.exists())
+            registry.release(lease["token"], note="Actual stopped Train closed; completed export refused before output or model process.")
+            self.assertEqual(registry.inspect()["leases"][0]["state"], "released")
+            (root/"result.json").write_text(json.dumps({"phases": records,
+                "training_outcome": execution["training_outcome"], "completed_export_refused": True,
+                "scientific_verdict": None}), encoding="utf-8")
+            return
         self.assertTrue(execution["completed_boundary"])
+        self.assertEqual(execution["training_outcome"], "exact")
         solo_path = trained/"native/train_learned_state.json"
         solo = load(solo_path)
         self.assertEqual(solo["configuration"]["run_id"], job["configuration"]["run_id"])
-        export = load(self.templates/(name+"-export/input/job.json"))
+        export = load(templates/(name+"-export/input/job.json"))
         export["source_solo"] = solo
         exported = invoke("export", export, solo_path)
         recognition = load(exported/"native/model.json")
         self.assertEqual(recognition["source_solo"], solo)
-        evaluation = load(self.templates/(name+"-evaluate/input/job.json"))
+        evaluation = load(templates/(name+"-frozen/input/job.json"))
         evaluation["source_recognition"] = recognition
         evaluation["run_id"] += "/managed-frozen"
         for i, trial in enumerate(evaluation["trials"]):
@@ -118,14 +148,26 @@ class ManagedNativePipelineTest(unittest.TestCase):
             "recognition_sha256": recognition["sha256"], "scientific_verdict": None,
             "independent_partition_verified": False}, indent=2), encoding="utf-8")
 
-    def test_classic_n0_managed_train_export_frozen_evaluation(self):
+    def test_previous_classic_n0_stopped_train_cannot_export(self):
         self.case("Classic-N0")
 
-    def test_classic_n1_managed_train_export_frozen_evaluation(self):
+    def test_previous_classic_n1_stopped_train_cannot_export(self):
         self.case("Classic-N1")
 
-    def test_branch_n0_managed_train_export_frozen_evaluation(self):
+    def test_previous_branch_n0_stopped_train_cannot_export(self):
         self.case("Branch-N0")
 
-    def test_branch_n1_managed_train_export_frozen_evaluation(self):
+    def test_previous_branch_n1_stopped_train_cannot_export(self):
         self.case("Branch-N1")
+
+    def test_classic_n1_modelspec1_exact_train_export_frozen_evaluation(self):
+        self.case("Classic-v1", positive=True)
+
+    def test_classic_n1_modelspec2_exact_train_export_frozen_evaluation(self):
+        self.case("Classic-v2", positive=True)
+
+    def test_branch_n1_modelspec1_exact_train_export_frozen_evaluation(self):
+        self.case("Branch-v1", positive=True)
+
+    def test_branch_n1_modelspec2_exact_train_export_frozen_evaluation(self):
+        self.case("Branch-v2", positive=True)
