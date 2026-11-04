@@ -3,7 +3,7 @@ import csv
 import math
 from pathlib import Path
 
-from .native_evidence import EvidenceError, after, count, equal, number, require
+from .native_evidence import EvidenceError, after, count, equal, measured_wave_plateaus, number, require
 
 
 def read_partial_probe(packet: dict, trace: Path):
@@ -63,7 +63,10 @@ def _read_partial_probe(packet, trace):
         require(requested[key] == spec[key], "partial_request_identity_mismatch:"+key)
     require(spec["record_spikes"] is False, "native_training_probe_spike_capture_not_supported")
     begin, end = number(spec["begin"]), number(spec["end"])
-    require(end > begin and equal(requested["begin"], 0) and equal(end-begin, requested["end"]),
+    # Compare in the absolute frame, like the strict native auditor. Subtracting
+    # two large timestamps first loses precision relative to a short duration.
+    # This is the existing roundoff allowance, not a new physical tolerance.
+    require(end > begin and equal(requested["begin"], 0) and equal(end, begin+number(requested["end"])),
             "partial_requested_window_mismatch")
     prepared = packet["prepared"]
     require(type(prepared) is dict and prepared["effective_model_revision"] == spec["effective_model_revision"] and
@@ -108,3 +111,35 @@ def _read_partial_probe(packet, trace):
                "recorded_window_complete": bool(observation["complete"] and covered and not nonfinite),
                "reason": observation.get("end_reason", "invalid_or_incomplete_observation")}
     return observation, spec, frequency, samples, channels, quality
+
+
+def audit_recorded_wave_diagnostics(observation, spec, samples, quality):
+    """Cross-check recorded wave arrays without accepting an invalid probe.
+
+    Partial/nonfinite traces stay unavailable for whole-window wave counting.
+    A matched wave count is separate from stimulus assignment or convergence.
+    """
+    if not quality['recorded_window_complete']:
+        return {'recorded_waves_checked': False, 'reason': 'window_incomplete_or_nonfinite',
+                'valid_observation': False}
+    rows = [];seen = set();minimum = number(spec['minimum_amplitude'])
+    require(minimum > 0, 'diagnostic_wave_minimum_amplitude_invalid')
+    for assignment in observation['burst_assignments']:
+        channel = count(assignment['channel'])
+        require(channel < len(spec['baseline']) and channel not in seen, 'diagnostic_wave_channel_invalid')
+        seen.add(channel);baseline = number(spec['baseline'][channel])
+        signal = [number(number(s['soma'][channel])-baseline) for s in samples]
+        plateaus = measured_wave_plateaus(signal, minimum)
+        waves = assignment['waves']
+        require(len(waves) == len(plateaus), 'diagnostic_trace_wave_count_mismatch')
+        for wave, (first, last) in zip(waves, plateaus):
+            require(equal(wave['time'], samples[first]['time']) and
+                    equal(wave['plateau_end'], samples[last]['time']) and
+                    equal(wave['raw_potential'], samples[first]['soma'][channel]) and
+                    equal(wave['amplitude'], signal[first]), 'diagnostic_trace_wave_value_mismatch')
+        rows.append({'channel': channel, 'measured_wave_count': len(plateaus),
+                     'expected_stimulus_count': len(observation['stimuli']),
+                     'recorded_assignment_validity': assignment['validity']})
+    require(bool(rows), 'diagnostic_wave_assignments_missing')
+    return {'recorded_waves_checked': True, 'channels': rows,
+            'valid_observation': False, 'reason': 'wave_arrays_checked_only_assignment_not_certified'}

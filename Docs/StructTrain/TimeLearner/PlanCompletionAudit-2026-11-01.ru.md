@@ -1,3 +1,17 @@
+## Дополнение04.11: проверен разбор границ stock-обучения
+
+Feature [StockFailureBoundaryReports](StockFailureBoundaryReports.ru.md) исправляет
+floating subtraction в diagnostic reader поздних окон и добавляет воспроизводимую
+команду failure-report. На обоих workers прошли 12 data/regression checks;
+на M40 — 4 текущие report checks. Проверены 20 probe/soma pairs, 1021 views,
+25 дополнительных локальных видов; непосредственно просмотрены 12 выбранных
+оригиналов. Дополнительные пики около 1.86e-5 стали читаемы без изменения
+минимума 1e-6, исходных данных или training validity. Оба старых отказа сохранены.
+Исследованы те же четыре cold conditions, без повторного запуска моделей;
+это не классификация и не два независимых обучения. Изменения находятся в
+feature с зависимостью от ещё не принятого в develop ModelSpec2 контура.
+Полные этапы 1–12 остаются частичными; полностью завершён только этап 0.
+
 ## Дополнение04.11: принята семантика рабочего каталога Rdk
 
 Rdk develop10e9d05a и root develop7c8d6e2f принимают сохранение явно заданного
@@ -8,6 +22,31 @@ workers проверены native/frozen/calibration, early refusals, duplicate 
 Это адресное продвижение2/4/9/10. Полные исходные этапы1–12 остаются частичными;
 полностью завершён только0. Console/ModelSpec2 transport feature проходит
 отдельную приёмку; этот merge не принимает её полный C++ suite или science.
+
+## Уточнение03.11: научная физика и границы результатов
+
+Результаты новой N1 calibration5/8 и protocol study528 предъявлений относятся
+к изменённому **двухвходовому integration-профилю**, а не к исходному stock
+`NSPNeuronGen`: добавлена LTMembrane0.3nF, изменены DissociationTC и InhChannel
+RestingResistance. Одновременно меняется место обратного действия спайка.
+Использовать эти результаты как научное продолжение августовского четырёхвходового
+графа было ошибкой постановки. Они сохраняются с фактическим scope;
+инженерные storage/transfer проверки этого профиля также не отменяются.
+[Происхождение, параметры и исправление постановки](ScientificProfileDrift.ru.md).
+
+На основном stock-графе без LTMembrane проверены реальные initial/final child
+physics и связи, в том числе после роста Branch. Первое cold обучение обеих
+топологий завершилось `invalid_observation` из-за неоднозначного пика и не дало
+обученной модели для классификации. Это не доказательство физической
+невозможности обучения. Обнаружено ещё одно различие протокола: V2 использовал
+порог образа0.0117, историческое обучение —100. Явная настройка construction
+threshold и парное сравнение на одном runtime проверяются отдельно;
+причинное объяснение неоднозначности порогом пока не подтверждено.
+[Контракт, реальные scoped проверки и pending gates](InitialThresholdConstruction.ru.md).
+
+Августовские визуально подтверждённые4/8–6/8 и их исторические replay остаются
+результатами своих исходных условий. Новые profile/protocol ошибки не отменяют
+те наблюдения. Полностью завершённым исходным этапом остаётся0.
 
 ## Дополнение03.11: два исторических Branch retry launchers удалены
 
@@ -429,3 +468,45 @@ construction threshold и последующие stock controls пока в feat
 остальная миграция скриптов, fault/lease/publication matrix, научные контроли
 на stock моделях и сквозная актуализация документов. Fresh recursive checkout
 последнего develop после этого merge также ещё требует отдельной проверки.
+
+## Дополнение04.11: проверка физического model archive после construction
+
+В feature codex/timelearner-initial-threshold проверены18 native cases на
+Elder normal и M40 ASan. Доказательства60f5905c7b04ac41f16d405d2fe715f1e3eed174
+иcd3a477ee03f5f75b2d71af83772ec6dce5dda1e опубликованы и объединены через
+--no-ff. Подробности и независимые проверки: InitialThresholdConstruction.ru.md,
+InitialThresholdArchiveNormalVerification.json и
+InitialThresholdArchiveASanVerification.json. Каждый пакет содержит97
+проверенных members;430 source hashes совпали с точными Git blobs.
+
+Четыре новых Classic/Branch ×2000/20000Hz cases проверяют полный физический
+граф и реальный scheduler response после export/import/Build/Init/Reset.
+Construction threshold100 не стирает последующий instance threshold0.005.
+Stock модель без LTMembrane. Training metadata явно not_trained; полного
+calibrated recognition-state roundtrip ModelSpec2 эти cases не доказывают.
+Ни этап4, ни5 не закрывается по этому узкому контракту. Pulse541 и root
+feature пока не приняты в develop: требуются оставшиеся профильные gates.
+
+H21 full213 на M40 подтверждён живым по PID3416749/start_ticks281000389;
+его ожидание не является повторным запуском. Полный80-pair temporal report
+stock stopped diagnostic ожидает завершения этого owned процесса. Численные
+32 пробы опубликованы отдельно (c8381cfc3ecbf446ae1f59175c794ef547dcc93d),
+обученные классификаторы и научная сходимость ими не заявляются.
+
+На момент проверки Elder имел31GiB свободно, M40 root84GiB и Data423GiB;
+два текущих native задания работали. Причина нехватки места не подменяется
+диагнозом SSH. Новые тяжёлые отчёты размещаются на Data; primary/model/history
+не удалены. Исходная классификация этапов остаётся:0 завершён,1–12 частичны.
+
+Дальнейший full-calibrated-package gate04.11 выявил отказ ещё до калибровки:
+на обоих workers4/4 cases завершили Train maximum_sweeps_exhausted, включая
+оба исходных schema1 контроля. Доказательства470a9251af14e50f47e89815edafe5b6d7471513
+и29da1f5bc1dfdd401d8bceb97cc7650f537dd5b5 опубликованы; все154/153 members и
+431 hashes исходников проверены, фактический ASan mapping сохранён.
+Подтверждённый физический archive18 gate этим не отменяется, но calibrated
+transport не выполнен. Причина неверного выбора контроля: короткий endpoint
+LearnedBoundary с ISI.08 не является ранее Exact production N1 job с ISI.03
+и другой областью поиска. Нужен точный schema1/schema2 production replay;
+увеличение tolerances или подмена отсутствующего source certificate исключены.
+CalibratedModelSpec2.progress.json фиксирует закрытые workers, prerequisite
+reader refusals и оставшуюся задачу. Изменения остаются feature/WIP.

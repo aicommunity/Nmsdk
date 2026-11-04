@@ -1,0 +1,228 @@
+{
+  "kind": "stock_threshold_stopped_primary_readback",
+  "schema_version": 1,
+  "source_commit": "e5fa71d745119af0d818059f497dd226f4c7c25d",
+  "source_archive": "Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz",
+  "archive_sha256": "6d0820f92c13bf4e91f5b86b7e26da5957dfba991730fca3c64a31858bc71c1c",
+  "latest_probe_order": "numeric trial suffix; lexical filename order is not chronological",
+  "rows": [
+    {
+      "case": "Classic-threshold-low",
+      "summary_member": "study/runs/Classic-threshold-low/native/train_stopped_summary.json",
+      "summary_sha256": "9bd3e42b5cf57da95154b9926b66fcc722a5e51359278565b6be4e5dd962abcc",
+      "last_probe_member": "study/runs/Classic-threshold-low/native/train_stopped_trial_8.json",
+      "last_probe_sha256": "e268394a58b00e1c1ab000ef97cefacd02b0db6306200ea2f363e61ae6225b88",
+      "last_numeric_trial": 8,
+      "last_trial_id": "Classic-threshold-low/session/1/search/6",
+      "training_outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "applied_edits": 1,
+      "search_probes": 4,
+      "measured_candidate_records": 1,
+      "actual_parameters": [
+        {
+          "length": 1,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete": true,
+      "end_reason": "window_closed",
+      "sample_count": 3601,
+      "reasons": [
+        "burst_ambiguous:0",
+        "peak_ambiguous:input0"
+      ],
+      "burst_waves": [
+        {
+          "channel": 0,
+          "validity": "ambiguous",
+          "count": 12
+        }
+      ],
+      "certificate": null,
+      "certificate_matches_actual_model": false
+    },
+    {
+      "case": "Classic-threshold-training100",
+      "summary_member": "study/runs/Classic-threshold-training100/native/train_stopped_summary.json",
+      "summary_sha256": "d34efb2b05c40cbcb958f26adaf08cc4ab6b109a0aab0da859e087c4d968d83e",
+      "last_probe_member": "study/runs/Classic-threshold-training100/native/train_stopped_trial_108.json",
+      "last_probe_sha256": "c06c3953146a60f21bca6289a92083f7366d9e649a3ecd352a09d0ccc9a2bd1c",
+      "last_numeric_trial": 108,
+      "last_trial_id": "Classic-threshold-training100/session/1/search/209",
+      "training_outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "applied_edits": 51,
+      "search_probes": 104,
+      "measured_candidate_records": 51,
+      "actual_parameters": [
+        {
+          "length": 54,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete": true,
+      "end_reason": "window_closed",
+      "sample_count": 3601,
+      "reasons": [
+        "burst_missing:0",
+        "peak_missing:input0"
+      ],
+      "burst_waves": [
+        {
+          "channel": 0,
+          "validity": "missing",
+          "count": 3
+        }
+      ],
+      "certificate": null,
+      "certificate_matches_actual_model": false
+    },
+    {
+      "case": "Branch-threshold-low",
+      "summary_member": "study/runs/Branch-threshold-low/native/train_stopped_summary.json",
+      "summary_sha256": "39366c05d1d4d6bafc454e11a9c888ebf13b81e5be0940e50a09f32e7f8e73ae",
+      "last_probe_member": "study/runs/Branch-threshold-low/native/train_stopped_trial_8.json",
+      "last_probe_sha256": "cd6afa7d118d34beb917e09d10b9bcc05d7a0968656a06fad4c5762adc295ecf",
+      "last_numeric_trial": 8,
+      "last_trial_id": "Branch-threshold-low/session/1/search/7",
+      "training_outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "applied_edits": 1,
+      "search_probes": 4,
+      "measured_candidate_records": 1,
+      "actual_parameters": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete": true,
+      "end_reason": "window_closed",
+      "sample_count": 3601,
+      "reasons": [
+        "burst_ambiguous:0",
+        "peak_ambiguous:input2"
+      ],
+      "burst_waves": [
+        {
+          "channel": 0,
+          "validity": "ambiguous",
+          "count": 7
+        }
+      ],
+      "certificate": null,
+      "certificate_matches_actual_model": false
+    },
+    {
+      "case": "Branch-threshold-training100",
+      "summary_member": "study/runs/Branch-threshold-training100/native/train_stopped_summary.json",
+      "summary_sha256": "8984f33b6f6b6a280c68358dbd4695b4694025b32f621457b5cfd82ee2ef6ccf",
+      "last_probe_member": "study/runs/Branch-threshold-training100/native/train_stopped_trial_476.json",
+      "last_probe_sha256": "745e2fc3075f53f28810fa06fdf70fbc4c7e1e02943ddc2bfc805674f109765c",
+      "last_numeric_trial": 476,
+      "last_trial_id": "Branch-threshold-training100/session/1/search/969",
+      "training_outcome": "invalid_observation",
+      "reason": "observation_not_valid_complete",
+      "applied_edits": 235,
+      "search_probes": 472,
+      "measured_candidate_records": 235,
+      "actual_parameters": [
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 15,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "complete": true,
+      "end_reason": "window_closed",
+      "sample_count": 3601,
+      "reasons": [
+        "burst_missing:0",
+        "peak_missing:input2"
+      ],
+      "burst_waves": [
+        {
+          "channel": 0,
+          "validity": "missing",
+          "count": 3
+        }
+      ],
+      "certificate": null,
+      "certificate_matches_actual_model": false
+    }
+  ],
+  "classification_assessed": false,
+  "physical_infeasibility_established": false,
+  "isolated_lt_effect_established": false,
+  "notes": [
+    "This is a readback of actual published stopped states, not new measurements",
+    "All four candidates retained native full-window AssignedBurstWave criteria",
+    "Search configured maximum_invalid_observations=0; first invalid observation terminates",
+    "No missing or ambiguous peak is replaced by predicted timing",
+    "Actual stopped parameters do not constitute a training certificate"
+  ]
+}

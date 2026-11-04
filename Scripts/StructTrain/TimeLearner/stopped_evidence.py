@@ -35,6 +35,8 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
             and package["trained_inputs"] == summary["actual_parameters"]
             and package["training_outcome"] == summary["outcome"]
             and package["reason"] == summary["reason"], "package_summary_mismatch")
+    from .native_model_spec import validate_model_spec
+    validate_model_spec(package['configuration']['model'])
     repeats = validate_configured_repeat_policy(package["configuration"], summary)
     retained = validate_search_history_availability(summary)
     require(bool(packets) and set(packets) == set(traces), "missing_primary_trace")
