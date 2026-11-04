@@ -29,6 +29,8 @@ Runtime — неизменяемый root `f679d0410dd00a36995f9d32cc03812438819
 
 Proof `6d1e36ff2c990eace565745db52703fbea231ed9`, parent accepted8b231dae9. [Primary/outcomes/closures](../../../Reports/StructTrain/TimeLearner/s10-managed-native-calibration-normal-a1/README.ru.md). Сжатый первичный архив8 922 700B,SHA256 `db5b95d9b993572260492a813e9260a69b2b34036cd69706fbf303c23aee7a7b`. Локально независимо проверены все1462 member hashes и285 source Git blobs; [receipt](ManagedNativeCalibrationVerification.json). Первоначальный silent frozen результат при1.0 сохраняется в отдельном [отчёте](ManagedNativePipelineVisuals.ru.md), не заменяется новой оценкой.
 
-Полные temporal reports всех кандидатов, confirmation, silent controls и frozen Test запущены на M40, source `b014bb245420e4bc812a923873344bfab17e3773`, readback `s10-managed-native-calibration-visual-a1`; пока результат plotting gate не принят. Полный кэш остаётся на Data, в Git должны попасть только выбранные рисунки и контрольные суммы.
+Полные temporal reports всех кандидатов, confirmation, silent controls и frozen Test прошли plotting gate1/1 на M40. [Галерея, масштаб и границы визуальной проверки](ManagedNativeCalibrationVisuals.ru.md):168 trial–soma pairs,2512 PNG в кэше,54 выбранных PNG в Git.
+
+Silent-only control использовал исходный порог1.0. Это проверка NonSeparable и сохранности исходного состояния; она не доказывает откат после фактического изменения порога. Соответствующая managed-проверка остаётся открытой.
 
 Implementation branch пока не merged в develop. Эти данные закрывают normal-подэтап managed calibration, не весь этап8/10. Открыты M40 ASan/kernel62 и actual pipeline/calibration, актуальный joint SDK, положительные N0 и остальные profiles/modes, owned PostTune/live finalization, cancellation/recovery и общий production dispatcher. Все этапы1–12 остаются частичными.
