@@ -135,10 +135,25 @@ class ResourceReservationsTest(unittest.TestCase):
         self.assertEqual([r['job_id'] for r in self.registry.inspect()['leases']], ['one'])
 
     def test_unknown_schema_or_worker_is_refused_by_existing_and_new_connections(self):
-        with sqlite3.connect(self.database) as connection:
-            connection.execute('UPDATE metadata SET value=\'unknown\' WHERE key=\'schema_version\'')
-        for call in (lambda:Reservations(self.database), self.registry.inspect):
-            with self.assertRaisesRegex(ReservationError, 'schema_or_worker_changed'):call()
+        for key in ('schema_version', 'worker_host'):
+            with sqlite3.connect(self.database) as connection:
+                original = connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()[0]
+                connection.execute('UPDATE metadata SET value=\'unknown\' WHERE key=?', (key,))
+            for call in (lambda:Reservations(self.database), self.registry.inspect):
+                with self.assertRaisesRegex(ReservationError, 'schema_or_worker_changed'):call()
+            with sqlite3.connect(self.database) as connection:
+                connection.execute('UPDATE metadata SET value=? WHERE key=?', (original, key))
+
+    def test_corrupt_held_records_cannot_be_ignored_to_grant_a_writer(self):
+        self.reserve('reader', 'read')
+        for column in ('owner', 'resources'):
+            with sqlite3.connect(self.database) as connection:
+                original = connection.execute('SELECT '+column+' FROM leases').fetchone()[0]
+                connection.execute('UPDATE leases SET '+column+'=\'[]\'')
+            with self.assertRaises(ReservationError):self.reserve('replacement')
+            with self.assertRaises(ReservationError):self.registry.inspect()
+            with sqlite3.connect(self.database) as connection:
+                connection.execute('UPDATE leases SET '+column+'=?', (original,))
 
     def test_database_symlink_is_not_an_independent_ledger(self):
         alias = self.root/'other.sqlite';alias.symlink_to(self.database)

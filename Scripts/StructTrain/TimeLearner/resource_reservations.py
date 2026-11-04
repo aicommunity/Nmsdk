@@ -84,6 +84,7 @@ def _overlap(left, right):
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
     def __init__(self, database):
+        _identity()  # Reject unsupported workers before creating any ledger files.
         self.requested_path = Path(database).absolute()
         _require(not self.requested_path.is_symlink(), 'reservation_database_symlink')
         self.path = self.requested_path.resolve(strict=False)
