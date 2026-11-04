@@ -267,3 +267,13 @@ alias import; production5 checks прошли на каждом worker по на
 выполнен повторный анализ тех же Git primaries, без нового native запуска.
 Совместные readers124/ModelSpec2 fresh-process coverage и joint ASan остаются
 открытыми; этот hotfix не является их приёмкой.
+
+
+## Joint readers: приёмка остаётся открытой
+
+[Точные результаты и следующий gate](JointReaderOpenGates.ru.md): source802
+reader119 и source4c reader124 не прошли. CLI shadowing исправлен отдельно,
+но для новых восьми ModelSpec2 recognition cases ещё нужен настоящий
+fresh-process replay, затем полный reader gate. Недостающий domain fixture
+получен в отдельном native2, не добавлен задним числом в старый native304.
+Все failed attempts сохранены в Git; algorithm feature/joint ASan не приняты.
