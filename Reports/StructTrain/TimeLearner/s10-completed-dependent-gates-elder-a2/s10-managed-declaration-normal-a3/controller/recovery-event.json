@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "98bab895-d519-4945-b3e3-778ae52cbf56",
+  "job_id": "s10-managed-declaration-normal-a3",
+  "recorded_unix": 1793818355.2189846,
+  "administrator": {
+    "pid": 2205734,
+    "start_ticks": "338081481",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 2205773,
+    "start_ticks": "338081495",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a3-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "615e7db7da263f6a70b44e762015346db8af735be4954d8e69274bdd1067a189",
+      "unit": "timelearner-f3f61bac-94b2-4cc7-b5b6-91fac593abe7.service",
+      "invocation_id": "651427227664474db65944a307afbf84",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f3f61bac-94b2-4cc7-b5b6-91fac593abe7.service",
+      "initial_main_pid": 2205773,
+      "initial_start_ticks": "338081495",
+      "sha256": "33dd32efdad87a5bc8670b65fd327e441c7fb8842dae08b942e5867e435c681a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-f3f61bac-94b2-4cc7-b5b6-91fac593abe7.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Metadata-only actual downstream declaration gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a3",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-managed-declaration-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-managed-declaration-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
