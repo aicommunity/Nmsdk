@@ -21,3 +21,5 @@ LiveFinalization теперь требует отдельно:
 Собрать отдельный baseline с Pulsecc971 и исправленной test-постановкой, сохранив старый SDK802/runtime и отрицательные primary. Сначала все24 NativeLiveFinalization controls и plan codec; затем те же133 real tests. Никаких skips вместо PASS. Если новое cold Train также не Exact, сохранять его реальные причины и проверять обучение, не подставлять готовую модель.
 
 Для A/B общего dispatcher baseline и candidate8644 должны иметь строго одинаковые исправленные Tests/App/CMake и одинаковые input declaration hashes. После normal baseline провести candidate133/full304 и сравнение реальных CSV/состояний. ASan и другие обязательные матрицы остаются отдельными gates. До runtime-проверки это pending test correction, не принятое исправление алгоритма, не scientific8/8 и не завершение этапа6.
+
+InvalidDesign строится из любого числа trials: все метки/patterns превращаются в target с различными trial_id. Замена только второй пробы была отрицательным контролем лишь для двухпробного дизайна; при четырёх пробах она оставляла foil и уже не гарантировала unbalanced design.
