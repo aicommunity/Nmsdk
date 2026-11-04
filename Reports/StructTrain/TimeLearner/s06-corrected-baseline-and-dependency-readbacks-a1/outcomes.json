@@ -1,0 +1,71 @@
+{
+  "attempts": {
+    "s06-live-cold-fixture-baseline-normal-a1": {
+      "members": 2922,
+      "archive_bytes": 18611368,
+      "archive_sha256": "9a035f1486f8f4a843a69b5ef408041226d07b316e817b07c5e61eacd761527e",
+      "passed": true,
+      "root": "33fc48278cff860d20c570cb703198847f028065"
+    },
+    "s09-remaining-root-retirement-a1": {
+      "members": 18,
+      "archive_bytes": 133992,
+      "archive_sha256": "7e37f5adca3a28f9ca7f6bd551234bd04577704ac70f0593f067453cba192607",
+      "passed": true,
+      "root": "0cd87e45ecf350301483ff4371994ced688931ef"
+    },
+    "s10-worker-dependency-normal-a1": {
+      "members": 170,
+      "archive_bytes": 29988,
+      "archive_sha256": "c78721956072261fc4e7f1fcb6909b664a148f6840e1f51878cb0f6ab0c11656",
+      "passed": true,
+      "root": "1e714a38401c3aa77dce42873188d96a6867c643"
+    },
+    "s10-managed-pipeline-coordinator-normal-a1": {
+      "members": 6,
+      "archive_bytes": 17468,
+      "archive_sha256": "6b6b29fa430b8b723af26a928b1b8ae5deaabafd8c9ec5ecdcb7494dd9299016",
+      "passed": false,
+      "root": "2cc27b9f3192ccd5a11d5dcc8189f68205205b15"
+    },
+    "s10-managed-reconciliation-normal-a1": {
+      "members": 6,
+      "archive_bytes": 16976,
+      "archive_sha256": "6615816f2a112a980d3249e319b548283053f82a0c0ce785dc9cab0d0e591519",
+      "passed": false,
+      "root": "71b56cd5b1a0ce877054f9e45bc59f30fc2523c8"
+    },
+    "s10-managed-declaration-normal-a1": {
+      "members": 6,
+      "archive_bytes": 17148,
+      "archive_sha256": "a9027cf2b6c99b5c352c9621865471764186f92f5011baeadc30cc7f46081cba",
+      "passed": false,
+      "root": "427a5f2ef28b90a76c458951cad8ef70bb118c95"
+    },
+    "s10-managed-live-routing-normal-a1": {
+      "members": 6,
+      "archive_bytes": 17780,
+      "archive_sha256": "c1f410b428d7ebb6c655a7dda0ee51173c0b4d9acd3ed57786d3225759297461",
+      "passed": false,
+      "root": "289a28ee73f4812fc860de88883ac469cf3e5516"
+    },
+    "s10-managed-declaration-normal-a2": {
+      "members": 6,
+      "archive_bytes": 17184,
+      "archive_sha256": "791f229be92f96866f8585f07a865dbf353548fc1ad7afc964c8ef3009ec789e",
+      "passed": false,
+      "root": "df5e06800ca57a65a66e8f401c23e192d39d8778"
+    }
+  },
+  "corrected_baseline_root": "33fc48278cff860d20c570cb703198847f028065",
+  "pulse": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+  "focused_passed": 25,
+  "full_passed": 133,
+  "retirement_records": 150,
+  "dependency_checks": 9,
+  "dependency_kernel_units": 10,
+  "failed_before_reservation_or_model": 5,
+  "algorithm_candidate_8644_compiled": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

@@ -1,6 +1,6 @@
-# Pending: последние девять path-selected исторических root tools
+# Последние девять path-selected исторических root tools
 
-Snapshot cb0bb0c322736406d9e73a0b5542b3b3a5ba33ec. Девять файлов удалены в candidate без wrappers/copies; каждый full commit/path/blob/SHA256/size/retrieval_command внесён в manifest. Candidate150 records:148 retired/2 moved, complete=false. До двух серверных gates это не приёмка.
+Snapshot cb0bb0c322736406d9e73a0b5542b3b3a5ba33ec. Девять файлов удалены в candidate без wrappers/copies; каждый full commit/path/blob/SHA256/size/retrieval_command внесён в manifest. Candidate150 records:148 retired/2 moved, complete=false. Production gates150/negative/exact13 прошли на обоих workers; группа принята.
 
 ## Зависимости и применение
 
@@ -21,6 +21,6 @@ Snapshot cb0bb0c322736406d9e73a0b5542b3b3a5ba33ec. Девять файлов у�
 
 Все данные, модели, JSON/TSV/CSV, графики и численные тексты отчётов сохраняются. Исторические команды требуют source snapshot, не повторный запуск текущей очереди. SeriesD не возобновляется. Никакая новая научная оценка не выводится из удаления scripts.
 
-Нужны verify-migration150 на обоих workers, restored-path negative control и точная проверка scope/неизменности production code, configs, data и child gitlinks. Исторические программы не исполнять. Нижняя граница после candidate188 Bin/0 выбранных root/0 Pulse не означает, что проверены все неименованные scripts: Scripts/audit-probes и другие callers вне path filter остаются для отдельного review. Весь этап9 и исходный план остаются частичными.
+verify-migration150, restored-path negative control и exact13 scope прошли на обоих workers. Native production package/Tests/App/CMake/child gitlinks не менялись в retirement candidate; отдельное принятое добавление worker_dependency имеет собственную двухсерверную приёмку. Исторические программы не исполнять. Нижняя граница после candidate188 Bin/0 выбранных root/0 Pulse не означает, что проверены все неименованные scripts: Scripts/audit-probes и другие callers вне path filter остаются для отдельного review. Весь этап9 и исходный план остаются частичными.
 
-M40 A2 прошёл150/negative/exact13 controls; A1 не прочитал manifest из-за неполной доставки blob и сохранён отдельно. Проверены13 опубликованных файлов,24 archive members,277 source blobs: [receipt](RemainingRootToolsM40Verification.json). Matching Elder ожидает закрытия declaration13. До двух workers candidate9 removals не принят; действующий manifest develop141.
+M40 A2 прошёл150/negative/exact13 controls; A1 не прочитал manifest из-за неполной доставки blob и сохранён отдельно. Проверены13 опубликованных файлов,24 archive members,277 source blobs: [receipt](RemainingRootToolsM40Verification.json). Elder также прошёл150 и negative control: [primary](../../../Reports/StructTrain/TimeLearner/s06-corrected-baseline-and-dependency-readbacks-a1/README.ru.md), proof871280a11a36016476723b00d121cff53979c7ea. Текущий принятый manifest150 records; все9 старых путей отсутствуют. Более широкий review неименованных scripts остаётся обязательным.

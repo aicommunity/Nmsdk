@@ -1,0 +1,11 @@
+# Corrected cold baseline:25/25 и133/133
+
+Elder SDK root33fc48278cff860d20c570cb703198847f028065/Pulsecc97149c90ce98ff24ca688452f4a40d54e0e63d прошёл focused25 и полный133 без failures/errors/skips. Фактические gtest XML перепроверены по первичным данным. Полный gate занял4109.092s wall time. Все owned процессы закрыты, operational lease released.
+
+[Полные первичные данные и сопутствующие readbacks](../../../Reports/StructTrain/TimeLearner/s06-corrected-baseline-and-dependency-readbacks-a1/README.ru.md), proof871280a11a36016476723b00d121cff53979c7ea. Baseline archive18611368B, SHA2569a035f1486f8f4a843a69b5ef408041226d07b316e817b07c5e61eacd761527e,2922 members. [Независимая проверка всего комплекта](CorrectedBaselineOperationalVerification.json):45 опубликованных файлов,3140 members,2327 root/Pulse source blobs и9 SQLite primary/readback pairs.
+
+Runtime source diff относительно SDK802 содержит только Tests/Integration/Libraries/Test_PulseLib_FinalizationBoundary.cpp. Использованы отдельные проверенные cold declarations/storage-profile registration вместо saved-state/interruption источника для положительных cold controls. Исходные algorithms и tolerances не менялись. Прежний вход[.01,.08] с малым бюджетом остаётся своим budget_exhausted наблюдением; новые положительные controls[.01,.03] не доказывают улучшения на прежнем входе. [История исходного133:119/14](Baseline133PrerequisiteReadback.ru.md) сохранена.
+
+Принят baseline для последующего A/B. Pulse8644c50984c45a2211de13a75fe05cffc5bb3154 с общим lifecycle ещё не компилировался/не испытывался. Подготовленный root1eab24decb6432947afc928e7f049f3a07de2709 имеет те же Tests/App/CMake, что baseline33fc. Pending алгоритмический/Pulsecc срез этим evidence merge не продвигается в develop; данный SDK остаётся отдельным runtime.
+
+Проверки покрывают свои15 suites, включая native burst/clock/probe invalidation/dimensions/PostTune/live-finalization controls при заявленных частотах. Полная mode/physics/scientific матрица, joint ASan и независимое распознавание4-input/8-pattern не подтверждаются числом133. Отдельная визуальная приёмка всех model-case проб этого SDK ещё не выполнена; первичные trace/observation данные сохранены. Только этап0 полностью принят.

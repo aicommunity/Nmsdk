@@ -1,0 +1,689 @@
+{
+  "kind": "worker_dependency_actual_kernel_gate",
+  "root": "1e714a38401c3aa77dce42873188d96a6867c643",
+  "passed": true,
+  "members": {
+    "dependency-prerequisite.json": {
+      "bytes": 1880,
+      "sha256": "58bea229f15bf318a7ddf7e5800ca7352b31c349488f38a1cf92b13342dffa6e"
+    },
+    "queue.json": {
+      "bytes": 2114,
+      "sha256": "abbbd1edd472a51cae16ed39fc79a67ff56746cd524e53404b59dbea249c8ea6"
+    },
+    "reservation.json": {
+      "bytes": 1132,
+      "sha256": "4e58165bd8258873808c58c34dc9e5e55a2225d5e7765e5c4a4560a488ae61ad"
+    },
+    "owned-supervisor.json": {
+      "bytes": 218,
+      "sha256": "df6960a34ce14927579008be5a47f872191ba124886d57c6298838a2a1114feb"
+    },
+    "resource-preflight.json": {
+      "bytes": 234,
+      "sha256": "f4c232a42661e7e7cdc97ecc98bef99fe1c122fdd6fbc4c86258c7bf3ca71781"
+    },
+    "producer.py": {
+      "bytes": 5607,
+      "sha256": "994f4854c526d358ecdde9edb0ba8f69453db91af4c1d1e051d829137b0886e8"
+    },
+    "source-hashes.json": {
+      "bytes": 38226,
+      "sha256": "b688fa69699fbf9f005c86cc71e7d9cb90d64f0dff566dc35533dbd83ac8564f"
+    },
+    "tests.log": {
+      "bytes": 1424,
+      "sha256": "f0061a568c51631911a1edfff5bdd2f0733ddde56478bdffe285f694c2f1cc01"
+    },
+    "tests.json": {
+      "bytes": 82,
+      "sha256": "cf196a4f72626758ee9dbbe404d4975a0383520652f801e4b8f5a1f821b68d7b"
+    },
+    "dependency-history.jsonl": {
+      "bytes": 3489,
+      "sha256": "b7edd220532df181eef15034476912968dbc05db5a6a91d77823181a165ce4e2"
+    },
+    "terminal.json": {
+      "bytes": 217,
+      "sha256": "0b7aefcbfe9e0f9f655a3970d55dd9b6c036dfd88a332de992a3346180e8cc9c"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/lease-readback.json": {
+      "bytes": 224,
+      "sha256": "3fb26354d9c09a6b141ca2d4a52869f20ff86b5d6333520ae634d03ac2739ab5"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/leases.sqlite3": {
+      "bytes": 24576,
+      "sha256": "ca9eeb58d3c7a0a4809010c2abb4d341eb527919f69c2ac8d848029fcfec6868"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/recovery-history.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/dependency-0.json": {
+      "bytes": 1873,
+      "sha256": "8b933e8630ffcab432b87f320cecbc74fbd5b8d80a8ad46d8786a5b4cc0bc715"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/request.json": {
+      "bytes": 764,
+      "sha256": "3686f0ead04e24db5ba66a76cc125da14373a2df178136df9ad14d767df39fd5"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "fb017578ec842b1a25e6092fd6615d4b1b848cc8377f14b6dbbaab91d2e143ed"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "f9bc268cfd6b5f3bd7d5a8c69de06f43341f4cfaec38da666520d76247cb9a62"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "582db073b4651748acddfca7ab875886886a4ff5127b83f00bef61f2a17a83db"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "f44e1fac622426797fbeb45a245be3c5bb95f1c4589b9da6db78a1cd371beb73"
+    },
+    "actual-controls/test_required_missing_reservation_refuses_closed_worker/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "cf0a7a9c8175fb8fe39c2ecb914bf3f207ac5411d047d0f75522ffc8af680b8b"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/lease-readback.json": {
+      "bytes": 224,
+      "sha256": "3fb26354d9c09a6b141ca2d4a52869f20ff86b5d6333520ae634d03ac2739ab5"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/leases.sqlite3": {
+      "bytes": 24576,
+      "sha256": "ca9eeb58d3c7a0a4809010c2abb4d341eb527919f69c2ac8d848029fcfec6868"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/recovery-history.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/dependency-0.json": {
+      "bytes": 1868,
+      "sha256": "a48375404f882454ce43b884b6248f35e51fc672ceedaec82cd0b6e6ce5b01d2"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/request.json": {
+      "bytes": 764,
+      "sha256": "12f2a315071516f958ecfee0119d6a58e428026b744d81002ef8845526593d41"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "e8bf328c220cb06579708bd4e9c43377d14fcfb7ca2933b5fa1885a461baa211"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "53460017cbe295245e34c753766229e6a438f62c6a41510c06ee94ee4e103234"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "a6444863c6f6605c6a4945e4436ced5a2fb2cba44a1d84c3250a4f97203ac9ba"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "2d9cda473eb87a450657dea30acaaa693fbe31abe694acd1574c88ade7354047"
+    },
+    "actual-controls/test_closed_worker_without_optional_reservation_is_explicit/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "c02cf94a881de19dbc1fe369b2e08ee9389c1053daac8cf8ffffa0afc131fb61"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/dependency-1.json": {
+      "bytes": 1815,
+      "sha256": "17a3654a5a6bce363619b23c8743f356de57cc19e2a602a5064a9db9f857a05d"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/lease-readback.json": {
+      "bytes": 1125,
+      "sha256": "fb176709da70fe98f4c249d600228a4c68639971eafa654ba2ece0bf3b45c830"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/leases.sqlite3": {
+      "bytes": 32768,
+      "sha256": "426a2ab850a5e201aeaf36576958348022caea4c6941213729130851fd647dc9"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/recovery-history.json": {
+      "bytes": 2450,
+      "sha256": "c7ea586c67d26685fe1699fee7aed507d319f31481754735e0af5d38070e5a33"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/reserve.py": {
+      "bytes": 798,
+      "sha256": "e018a44cead5ba03a7de1192cba221d61bf7ae864c1757240410d65664d6b970"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/leases.json": {
+      "bytes": 480,
+      "sha256": "1b9c21dc8fd7e849a80a78043efdcacf18d222ef4c9629896ad86a955159bc5a"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/dependency-0.json": {
+      "bytes": 1979,
+      "sha256": "3a98c91800c5b26df6790bc31c8a4788bb10322514a7ba7e34a19aa607c97515"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "cc6a635fe00426db9f067176c215a9556d177c845f61a15a99265d085c02a24d"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "9628a04ff5ed0499bba356735b9e89d639bf12c3fbd06278ebec36a286e8d3dc"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "79865c2da97fabdeb8065b3a13e7b84040d6a4ee9d71c54c05765c74ea3531eb"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "53b57859ddeead24e3b60d633d1a4f1e79f7c44b7613f11df1df7ac73f9909bd"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "5f6542a085a927172d63eb433ce1a3607cc6691951730f0c95bffab48fe5e995"
+    },
+    "actual-controls/test_live_descendant_prevents_dependency_readiness/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "04b172df92d6103c0475bdb695622c47305106a095d792db8dee413b516e155c"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/lease-readback.json": {
+      "bytes": 1118,
+      "sha256": "51a239a764cf3412dc745d9910e9c0676d75b1185d53ba333d97b0a9c2c0beb3"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/leases.sqlite3": {
+      "bytes": 32768,
+      "sha256": "1be8f4003bc3be4f201fbd0e3bc8b6cccc084a0e30024b0a58348aaa78611890"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/recovery-history.json": {
+      "bytes": 2533,
+      "sha256": "dcdd69755a4bb7a34b9e9ae7a52a4d3090fdd8118b53e207a1e353b1f2ba9e78"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/reserve.py": {
+      "bytes": 737,
+      "sha256": "50f1be44416f6f1027f5f8cda6d3968b4d5efef4ad45d2929e413eff5e6a8ab4"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/leases.json": {
+      "bytes": 480,
+      "sha256": "a905064c737939e55de2db9aada75fb0ddb8b2bd451587e07cf51ace17d21af7"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/dependency-0.json": {
+      "bytes": 1868,
+      "sha256": "47fcad9f28fbccb2a7d4d4770f9cf14a673a1d028c5375257c3e7feb5cc6ed01"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/request.json": {
+      "bytes": 764,
+      "sha256": "4eb2315a35a3d9879089c826725cc42553e5978fab3287b1b2224f89089d56d9"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "d5a8c967d518cf805ef582928cf2639531a21e577fe6d900bdff3e714581f057"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/ready.json": {
+      "bytes": 44,
+      "sha256": "8ad4134d7de007df1d2de8f6d4cdabcbfe558fffa5c3fd0686de886f7cd79512"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "82b669e4944c1225929582b2d238b5714193d689ac20c7b4281ed11d624a02cf"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "3f2babce676afdfb4f53cb0bc1a0bc564673e7e710d1033b27164a9be33284e0"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-1/runtime.json": {
+      "bytes": 1764,
+      "sha256": "499dd26558f410b791353a6f41d48fe842c024d62dbb88180f9b32e4c85a3513"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "23895e55c93ad5e649bae85125378cd7025e503ad50d209983a23de934a85d94"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "aa6d9308a8150e8157b011dea6ed369489bd010bf299aba0168fe76e21ddc1ee"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "152077cd5579574f48a90060d73bb0f5655484329d6139a2d38d330d68cd70e3"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "7eccb0a1f4d013492920c85e6eddb327e9d68aed590f754e370480bf3633503d"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "89b98d0be7e1412a5930585ed8133c1d94ac379743190e45317746425e46f2b3"
+    },
+    "actual-controls/test_matching_job_id_cannot_select_a_different_owner/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "bdf042493200df5549d0b0aa741159d7dfbaa004e1e0c50d8c40ce751796b506"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/dependency-1.json": {
+      "bytes": 1902,
+      "sha256": "bc2266fbba1a977f917379cb14919eaec2129d3f325834a23e43c1408d15801b"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/lease-readback.json": {
+      "bytes": 1140,
+      "sha256": "95eeaa3a49a617d3905f1d43be3e13406ded68f1b1a13c1a2e71dacb59d842ee"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/leases.sqlite3": {
+      "bytes": 32768,
+      "sha256": "04893fd1379c36bfdc3e02696642a34506c64b55d38f3a9254710e679a0d2196"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/recovery-history.json": {
+      "bytes": 2556,
+      "sha256": "b3c5f68a5ae34c4afbc3fbf1cff5d73bd3741a201dec5e2e46104cce51561039"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/reserve.py": {
+      "bytes": 737,
+      "sha256": "718f68be95277e75c465f258984ed4f95e9b343762451597613b9f646b7d4b2d"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/leases.json": {
+      "bytes": 480,
+      "sha256": "ae4599075ac6e48fb7a7d2e6a259a7379107c8dd8a6ef1d7e17f2b6e39ee74d0"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/dependency-0.json": {
+      "bytes": 1902,
+      "sha256": "d0a75615b9b8e03eeec871f41bb661b4028c7bdfb18ad70e886da58fbb3a044f"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "2ea5659504fa1526b64fa547ba1f9a140a080133d0d3e19437965b0e5afebf3f"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "0bb809e4687f2ab364acc1cb10e105b00b3337961fff18e5e57cf67ed4f93809"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "80e062e3667f3e475d9006e717148216b1b7aab90545aea2e417c0b3f3c92edf"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "719192b0657804a1139d64223b0b6994bb7cc237a50c48ca6eac2edf3aedd665"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "f22712a30031772bebd81c1cb66e3df4987421c41c626d5c0cfe70381a10ccfc"
+    },
+    "actual-controls/test_held_expired_lease_requires_explicit_recovery/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "80a7edf57d60c24586af6054513628368e4a7db937ed264297ab38a955da6fab"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/lease-readback.json": {
+      "bytes": 1147,
+      "sha256": "c98d596da72a7b4bcfb33337b7f0fd39a8611eea2b849e17376cf1e09c6101e6"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/leases.sqlite3": {
+      "bytes": 32768,
+      "sha256": "7e427be139ec48672b882cd8e0b9c953748bb51aa0e062b45168aa4b6eca676a"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/recovery-history.json": {
+      "bytes": 2561,
+      "sha256": "89851d0132bc3754e3276eb06954f731bc0493258f0229183dd58c11f1c9fe4b"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/reserve.py": {
+      "bytes": 737,
+      "sha256": "c633486536729842901de2483a7c732235f94e6e963a0ba6210188d118fdcf07"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/leases.json": {
+      "bytes": 480,
+      "sha256": "675227f514a97d5843b81a0c3e70b7ea5151a63900e2e338bcf7511d8a1e16cb"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/duplicate-rejection.json": {
+      "bytes": 46,
+      "sha256": "219e7b644afef9401f81d852763d385ea21e00796a214d803e8c41bb87157412"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/dependency-0.json": {
+      "bytes": 1902,
+      "sha256": "81c9698d4c7c94a7defad74921fb1cd3ab37b4a8a1b0ee2f823efcea55ea17ec"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "5f229c72222f3bb6f1520ca11da2d849ab8622329a1bd2b35ab7a09010520ddb"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "e95d88283d0d98103ef4a275f4e7304e304564bb3f86ab8c361231d38a74d9ae"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "5c5495ddfdd555f7d80484cdac082d1b8543f951e5a21efb69eaba4ec2ad3599"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "ac572d815bb7ea9ef1f00f724965bd4f7aaf52f4c7b107f06996c3f7f0d9718b"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "a8c455cc7149eca8e7b95548d41b3e6306890ec9b34b988ab29e4decf3f10f32"
+    },
+    "actual-controls/test_registry_rejects_duplicate_job_without_losing_original_reservation/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "388dd36b644719b995d1559c8dce2ccacfcda6a5ebaef0504d54fe421607b750"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/lease-readback.json": {
+      "bytes": 224,
+      "sha256": "3fb26354d9c09a6b141ca2d4a52869f20ff86b5d6333520ae634d03ac2739ab5"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/leases.sqlite3": {
+      "bytes": 24576,
+      "sha256": "ca9eeb58d3c7a0a4809010c2abb4d341eb527919f69c2ac8d848029fcfec6868"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/recovery-history.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/dependency-0.json": {
+      "bytes": 1978,
+      "sha256": "e743bc79191daa2e8addecc024b4d9c27634f8005a098f44c45659bdbe13266e"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/request.json": {
+      "bytes": 763,
+      "sha256": "cff0d2515a6c873b10f26e48a6698e0c6030660bd8c4237045532e4e4c15e296"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c99853f5eee616c65e409b1d129b98480ba9f2ce795641cd8368ce25910dd106"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "4e4503c5420ba62706fe5cbe7381a1d776e9594848df77b4343a1fe2f9a308ca"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "6960e593ea9848ce1ea627772781e2f370d4f4340b90cf7fe585e929d902479a"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "b0bba7ba665ca02b611b3d2bf591c934eb47ad4c14c1f72ed489b519f9fba687"
+    },
+    "actual-controls/test_live_unreserved_worker_is_never_ready/attempt-0/runtime.json": {
+      "bytes": 1764,
+      "sha256": "c067239ab249f05ee2f38e9bb801a408397e67ac80d80e335e45194b6343be65"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/lease-readback.json": {
+      "bytes": 224,
+      "sha256": "3fb26354d9c09a6b141ca2d4a52869f20ff86b5d6333520ae634d03ac2739ab5"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/leases.sqlite3": {
+      "bytes": 24576,
+      "sha256": "ca9eeb58d3c7a0a4809010c2abb4d341eb527919f69c2ac8d848029fcfec6868"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/recovery-history.json": {
+      "bytes": 2,
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/dependency-0.json": {
+      "bytes": 1870,
+      "sha256": "5fe9911d44678c5fa724d4708724417fb0f049d7579655d426e0994359b4e040"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/request.json": {
+      "bytes": 792,
+      "sha256": "e467b304fcbd8b5f4cee7b228ee072c64c2015de4e341823f469c6efab8def54"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "1d6823af78b2935c2e5928cd8363eec0bc89474cedd6dfd073e6cabb4f4beb36"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "701d5fbe3e988a8236f597621d57c9cdbf1bafb16b54ad9267026e0d2e0c91e6"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "997360d17a6ae8bee748f20e7ecc8d05a09f0b97efeffa0d0fac6d56952d0e96"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/test-final-membership.json": {
+      "bytes": 1297,
+      "sha256": "6906aed290c3da2e3a990045de4f6428989f2db7fe74a4330d9f8f85fa612dd6"
+    },
+    "actual-controls/test_nonzero_exit_is_not_manufactured_into_business_success/attempt-0/runtime.json": {
+      "bytes": 2516,
+      "sha256": "96b13e2bed0aaa4ad979d29763dbb1c7eaa9199d05203add3d283bd3cdd2805c"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/lease-readback.json": {
+      "bytes": 1128,
+      "sha256": "79de4ccfe26f6392607504325ea09c883bb3b7faa8cf7f9316d4a3f79273a4db"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/leases.sqlite3": {
+      "bytes": 32768,
+      "sha256": "c7eb640cc1d8bc62701b8572af99c524526a28839a00c2a42b59af0dfffa8fab"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/recovery-history.json": {
+      "bytes": 2542,
+      "sha256": "93081a35997a06bf25c630da520896318437c307ab7c844abc16d53743104f9b"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/reserve.py": {
+      "bytes": 737,
+      "sha256": "b6179042b0f2496a0b66ac48205b4e549e9e3230133f8c28903ab3d93012411e"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/leases.json": {
+      "bytes": 480,
+      "sha256": "362eda1d4a239f46924f74d62ad796bf061d28eef4d9cf7584df870814b6df2d"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/dependency-0.json": {
+      "bytes": 1853,
+      "sha256": "1dce120930d0ec9d26dd31b0c16f29ddb4211c3b1a8bbe9c68c1a8cbc949831d"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/request.json": {
+      "bytes": 808,
+      "sha256": "ea13330837050a39e93b17b84e72abdc37dab5fe05d46b7820f4a9d07a3fc6e4"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "3923c768043dc029a9c779cc8abd009e28f170814398e58839de5ef8900ec18f"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/ready.json": {
+      "bytes": 44,
+      "sha256": "f08e5e4c1735176a170d47a844376d2f1665f8e203aac411667fddd6540a3401"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "0a1185a18111a6ca051068ac56896ecbfc45d6aaf831eee5f0e0f9541def5734"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/test-final-membership.json": {
+      "bytes": 1212,
+      "sha256": "7f82df302f8ff1ffb24084dc90f664c8fde8d777399b1b9162085d4b1cf42c4b"
+    },
+    "actual-controls/test_wrong_job_id_cannot_hide_an_existing_worker_reservation/attempt-0/runtime.json": {
+      "bytes": 2515,
+      "sha256": "340109ce66055a3a3c95dfee578703fe6893073d53c5d19ea06a5180827e149e"
+    }
+  },
+  "archive_bytes": 29988,
+  "archive_sha256": "c78721956072261fc4e7f1fcb6909b664a148f6840e1f51878cb0f6ab0c11656"
+}
