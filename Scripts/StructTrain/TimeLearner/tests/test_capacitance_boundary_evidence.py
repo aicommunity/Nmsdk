@@ -9,6 +9,7 @@ from ..learned_evidence import audit_learned_state, load_case as learned_case
 from ..model_identity import canonical_model_sha256
 from ..native_evidence import EvidenceError, audit_probe, load
 from ..stopped_evidence import audit_stopped_state, load_case as stopped_case
+from .native_declared_corpus import model_spec2_cohort, require_model_spec2_records
 
 
 class CapacitanceBoundaryEvidenceTest(unittest.TestCase):
@@ -22,8 +23,11 @@ class CapacitanceBoundaryEvidenceTest(unittest.TestCase):
                          if load(p)['schema_version'] == 3]
         cls.stopped = [(p, load(p)) for p in sorted(cls.root.glob('*_stopped_state.json'))
                        if load(p)['schema_version'] == 3]
-        if len(cls.completed) != 6 or len(cls.stopped) != 6:
-            raise RuntimeError('requires six completed and six stopped actual C-history boundaries')
+        cls.model_spec2 = [(p, v) for p, v in cls.completed if v['configuration']['model']['schema_version'] == 2]
+        baseline = [(p, v) for p, v in cls.completed if v['configuration']['model']['schema_version'] == 1]
+        require_model_spec2_records([v for _, v in cls.model_spec2], model_spec2_cohort(cls.root, 'Off'))
+        if len(baseline) != 6 or len(cls.stopped) != 6 or len(cls.completed) != len(baseline)+len(cls.model_spec2):
+            raise RuntimeError('requires six baseline completed/six stopped and the complete declared ModelSpec2 C-Off cohort')
         cls.cases = cls.completed+cls.stopped
 
     @staticmethod
@@ -146,7 +150,7 @@ class CapacitanceBoundaryEvidenceTest(unittest.TestCase):
 
     def test_configured_record_flag_is_explicit(self):
         configured = [v for p, v in self.completed if '_configured' in p.name]
-        self.assertEqual(len(configured), 2)
+        self.assertEqual(len(configured), 2+len(self.model_spec2))
         for package in configured:
             c = package['configuration'];self.assertEqual(c['schema_version'], 3)
             self.assertEqual(c['capacitance_history'], {'record': True, 'maximum_relative_change': .2})
