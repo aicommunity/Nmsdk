@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "state": "one_worker_passed_not_accepted",
+  "candidate_root": "0cd87e45ecf350301483ff4371994ced688931ef",
+  "candidate_manifest_records": 150,
+  "accepted_manifest_records": 141,
+  "root_removals_candidate": 9,
+  "exact_changed_paths": 13,
+  "native_models_executed": 0,
+  "historical_scripts_executed": false,
+  "m40": {
+    "proof_commit": "156e5c3852264e1cc4024df20843a2d1a444c5bf",
+    "passed": true,
+    "first_attempt_missing_manifest_blob_preserved": true
+  },
+  "elder": {
+    "outer_pid": 2138083,
+    "worker_pid": 2138099,
+    "worker_start_ticks": "337651668",
+    "readback": "/home/user/timelearner-refactor/readbacks/s09-remaining-root-retirement-a1",
+    "state": "wait_for_decl13_whole_group_closure_and_lease_settlement",
+    "memory_cap_bytes": 536870912,
+    "whole_worker_budget_seconds": 86400,
+    "queue_wait_budget_seconds": 64800
+  },
+  "whole_migration_complete": false,
+  "scientific_verdict": null
+}
