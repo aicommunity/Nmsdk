@@ -8,6 +8,7 @@ import copy
 import math
 from pathlib import Path, PurePosixPath
 import re
+import uuid
 
 from .native_evidence import load, load_json, require
 from .runtime import digest_json, runtime_content_identity
@@ -19,14 +20,29 @@ POLICY_FIELDS = {"kind", "schema_version", "backend", "memory_bytes", "tasks", "
 def validate_policy(value, maximum_wall_seconds=None):
     if value is None:
         return None
-    require(type(value) is dict and set(value) == POLICY_FIELDS and
+    require(type(value) is dict and set(value) == POLICY_FIELDS | ({"reservation"} if value.get("schema_version") == 2 else set()) and
             value["kind"] == "timelearner_native_process_policy" and
-            type(value["schema_version"]) is int and value["schema_version"] == 1 and
+            type(value["schema_version"]) is int and value["schema_version"] in (1, 2) and
             value["backend"] == "bound_cgroup", "unknown_native_process_policy")
     require(type(value["memory_bytes"]) is int and 0 < value["memory_bytes"] <= 2**63-1 and
             type(value["tasks"]) is int and 0 < value["tasks"] <= 2**31-1,
             "native_process_policy_limits_invalid")
     require(value["cooperative_capture"] is True, "native_containment_requires_cooperative_capture")
+    if value["schema_version"] == 2:
+        context = value["reservation"]
+        require(type(context) is dict and set(context) == {"database", "capacity", "token"} and
+                type(context["database"]) is str and PurePosixPath(context["database"]).is_absolute() and
+                ".." not in PurePosixPath(context["database"]).parts and
+                type(context["token"]) is str, "native_resource_context_schema")
+        try:
+            require(str(uuid.UUID(context["token"])) == context["token"], "native_resource_token_invalid")
+        except ValueError as error:
+            from .native_evidence import EvidenceError
+            raise EvidenceError("native_resource_token_invalid") from error
+        capacity = context["capacity"]
+        require(type(capacity) is dict and set(capacity) == {"slots", "memory_bytes", "disk_bytes", "tasks"} and
+                all(type(v) is int and 0 < v <= 2**63-1 for v in capacity.values()),
+                "native_resource_context_capacity_invalid")
     if maximum_wall_seconds is not None:
         require(type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds) and
                 1 <= maximum_wall_seconds <= 86400, "invalid_contained_wall_budget")
@@ -38,8 +54,104 @@ def execute_native(manifest, arguments, cwd, output, maximum_wall_seconds, polic
     policy = validate_policy(policy, maximum_wall_seconds)
     require(policy is not None, "native_process_policy_required")
     from .contained_runner import execute
-    return execute(manifest, arguments, cwd, output, maximum_wall_seconds,
-                   memory_bytes=policy["memory_bytes"], tasks=policy["tasks"], cooperative_capture=True)
+    managed, lease = None, None
+    if policy["schema_version"] == 2:
+        managed, lease = _open_reservation(policy)
+    result = execute(manifest, arguments, cwd, output, maximum_wall_seconds,
+                     memory_bytes=policy["memory_bytes"], tasks=policy["tasks"], cooperative_capture=True,
+                     managed_reservation=managed)
+    if managed is not None:
+        registry, token = managed
+        target = str((Path(output).resolve()/"contained").resolve())
+        rows = [v for v in registry.inspect()["managed_unit_intents"]
+                if v["token"] == token and v["intent"]["directory"] == target]
+        require(len(rows) <= 1, "native_managed_intent_duplicate")
+        require(bool(rows) or not (Path(output)/"contained/request.json").exists(), "native_managed_intent_missing")
+        from .process_runner import _write
+        _write(Path(output)/"reservation-context.json", {
+            "kind": "timelearner_native_resource_context", "schema_version": 1,
+            "registry": policy["reservation"], "lease": lease, "intent": rows[0] if rows else None,
+            "scientific_verdict": None})
+    return result
+
+
+def _open_reservation(policy):
+    from .resource_reservations import Reservations, ReservationError
+    from .native_evidence import EvidenceError
+    context = policy["reservation"]
+    database = Path(context["database"])
+    require(database.is_file() and not database.is_symlink(), "native_resource_registry_missing_or_alias")
+    try:
+        registry = Reservations(database, capacity=context["capacity"], managed_units=True)
+        registry.validate_paths(context["token"])
+        rows = [v for v in registry.inspect()["leases"] if v["token"] == context["token"]]
+        require(len(rows) == 1 and rows[0]["state"] == "held", "native_resource_lease_not_held")
+        lease = {k: rows[0][k] for k in ("token", "job_id", "owner", "resources", "state", "demands", "controller")}
+        require(lease["controller"]["memory_bytes"]+policy["memory_bytes"] <= lease["demands"]["memory_bytes"] and
+                lease["controller"]["tasks"]+policy["tasks"] <= lease["demands"]["tasks"],
+                "native_resource_context_budget_exhausted")
+    except ReservationError as error:
+        raise EvidenceError("native_resource_context:"+str(error)) from error
+    return (registry, context["token"]), lease
+
+
+def policy_for_reservation(registry, token, *, memory_bytes, tasks):
+    """Create a per-attempt operational policy for this exact owning process."""
+    require(registry.managed_units is True, "managed_unit_ledger_v3_required")
+    value = {"kind": "timelearner_native_process_policy", "schema_version": 2, "backend": "bound_cgroup",
+             "memory_bytes": memory_bytes, "tasks": tasks, "cooperative_capture": True,
+             "reservation": {"database": str(registry.path), "capacity": registry.capacity, "token": token}}
+    value = validate_policy(value)
+    _open_reservation(value)
+    return value
+
+
+def _audit_resource_context(directory, runtime, policy, *, auditable):
+    context = load(directory/"reservation-context.json")
+    require(set(context) == {"kind", "schema_version", "registry", "lease", "intent", "scientific_verdict"} and
+            context["kind"] == "timelearner_native_resource_context" and type(context["schema_version"]) is int and
+            context["schema_version"] == 1 and context["registry"] == policy["reservation"] and
+            context["scientific_verdict"] is None, "native_resource_context_changed")
+    lease = context["lease"]
+    require(lease["token"] == policy["reservation"]["token"] and lease["state"] == "held" and
+            set(lease["demands"]) == {"slots", "memory_bytes", "disk_bytes", "tasks"} and
+            all(type(v) is int and v >= 0 for v in lease["demands"].values()), "native_resource_lease_changed")
+    require(lease["demands"]["slots"] > 0 and
+            all(lease["demands"][k] <= policy["reservation"]["capacity"][k] for k in lease["demands"]),
+            "native_resource_capacity_changed")
+    controller, owner = lease["controller"], lease["owner"]
+    require(controller["binding"]["sha256"] == digest_json({k: v for k, v in controller["binding"].items() if k != "sha256"}) and
+            type(owner["pid"]) is int and owner["pid"] > 0 and type(owner["uid"]) is int and owner["uid"] >= 0,
+            "native_resource_controller_binding_changed")
+    require(controller["binding"]["initial_main_pid"] == owner["pid"] and
+            controller["binding"]["initial_start_ticks"] == owner["start_ticks"] and
+            type(controller["memory_bytes"]) is int and controller["memory_bytes"] > 0 and
+            type(controller["tasks"]) is int and controller["tasks"] > 0 and
+            controller["memory_bytes"]+policy["memory_bytes"] <= lease["demands"]["memory_bytes"] and
+            controller["tasks"]+policy["tasks"] <= lease["demands"]["tasks"], "native_resource_controller_or_budget_changed")
+    row = context["intent"]
+    if row is None:
+        require(not auditable and not (directory/"contained/request.json").exists(), "native_managed_intent_missing")
+        return
+    require(set(row) == {"token", "state", "intent"} and row["token"] == lease["token"] and
+            row["state"] in ("registered", "submitted", "bound", "aborted"), "native_managed_intent_state_changed")
+    intent = row["intent"]
+    require(intent["sha256"] == digest_json({k: v for k, v in intent.items() if k != "sha256"}) and
+            intent["token"] == lease["token"] and intent["owner"] == owner and
+            intent["memory_bytes"] == policy["memory_bytes"] and intent["tasks"] == policy["tasks"],
+            "native_managed_intent_changed")
+    if auditable:
+        request = _signed(directory/"contained/request.json")
+        binding = _signed(directory/"contained/owned-unit.json")
+        require(row["state"] == "bound" and intent["attempt_id"] == request["attempt_id"] and
+                intent["unit"] == binding["unit"] == request["unit"] and
+                request["controller"] == {"pid": owner["pid"], "start_ticks": owner["start_ticks"]} and
+                request["uid"] == owner["uid"] and request["boot_id"] == owner["boot_id"] and
+                intent["directory"] == str(PurePosixPath(load(directory/"request.json")["cancel_file"]).parent/"contained") and
+                any(v["access"] == "write" and
+                    (PurePosixPath(intent["directory"]) == PurePosixPath(v["canonical_path"]) or
+                     PurePosixPath(intent["directory"]).is_relative_to(PurePosixPath(v["canonical_path"])))
+                    for v in lease["resources"]), "native_managed_unit_lease_binding_changed")
 
 
 def _signed(path):
@@ -61,6 +173,8 @@ def audit_contained_attempt(directory, runtime, policy, *, auditable):
     policy = validate_policy(policy)
     require(policy is not None and type(auditable) is bool, "native_process_policy_required")
     process, request = load(directory/"result.json"), load(directory/"request.json")
+    if policy["schema_version"] == 2:
+        _audit_resource_context(directory, runtime, policy, auditable=auditable)
     require(set(request) == {"arguments", "working_directory", "maximum_wall_seconds", "cancel_file",
                             "memory_bytes", "tasks", "cooperative_capture"}, "native_contained_request_schema_changed")
     validate_policy(policy, request["maximum_wall_seconds"])

@@ -53,6 +53,22 @@ class NativeProcessPolicyTest(unittest.TestCase):
                 validate_policy(POLICY, value)
 
 
+    def test_managed_policy_has_separate_typed_operational_context(self):
+        policy = POLICY | {"schema_version": 2, "reservation": {
+            "database": "/worker/leases-v3.sqlite3", "token": "00000000-0000-4000-8000-000000000001",
+            "capacity": {"slots": 1, "memory_bytes": 2**30, "disk_bytes": 2**20, "tasks": 256}}}
+        self.assertEqual(validate_policy(policy), policy)
+        changed = copy.deepcopy(policy)
+        changed["reservation"]["capacity"]["tasks"] = True
+        with self.assertRaises(EvidenceError):
+            validate_policy(changed)
+
+    def test_managed_policy_rejects_missing_or_relative_registry(self):
+        for reservation in ({}, {"database": "relative.sqlite3", "token": "bad", "capacity": {}}):
+            with self.subTest(reservation=reservation), self.assertRaises(EvidenceError):
+                validate_policy(POLICY | {"schema_version": 2, "reservation": reservation})
+
+
 class NativeContainedPortableEvidenceTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
