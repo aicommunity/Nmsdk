@@ -1,0 +1,74 @@
+{
+  "archive": "Reports/StructTrain/TimeLearner/s07-configured-ownership-asan-h21/primary.tar.xz",
+  "bytes": 4781460,
+  "sha256": "bf50eb8460d4d4592d08fd54e8fc4c481770d49d013dcefd3a054cad64c239b2",
+  "members_verified": 2155,
+  "proof_commit": "37cc03f72cdd461f0bde508fbc466ac976081f9c",
+  "source_closure": {
+    "root": "5c9b92350ee48d130d954bf10bf9521251f99e4e",
+    "Libraries/Nmsdk-PulseLib/": "54516bcc0aa7b0437c68f818598a19788e20eb55",
+    "Rdk/": "acc3de8d1af2480d61ddb723c3288f7e81003049"
+  },
+  "native_source_blobs_verified": 899,
+  "readers": {
+    "original87": {
+      "root": "5c9b92350ee48d130d954bf10bf9521251f99e4e",
+      "members_verified": 13,
+      "source_blobs_verified": 400,
+      "execution": "completed",
+      "assertion_status": "failed",
+      "executed_tests": 87,
+      "failures": [
+        "Scripts.StructTrain.TimeLearner.tests.test_capacitance_boundary_evidence.CapacitanceBoundaryEvidenceTest.test_missing_capture_witness_is_rejected"
+      ],
+      "errors": [],
+      "skipped": []
+    },
+    "corrected88": {
+      "root": "ab95ba64323114f9b8a3fb05cdb46527c20d452a",
+      "members_verified": 13,
+      "source_blobs_verified": 416,
+      "execution": "completed",
+      "assertion_status": "passed",
+      "executed_tests": 88,
+      "failures": [],
+      "errors": [],
+      "skipped": []
+    }
+  },
+  "native_result": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 213,
+      "observed": 213,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "28fc372f3238a057f94b3ee1af65934d3b3ec4c3bc29c1cfac61eafd9b51177b"
+    },
+    "scientific_verdict": null
+  },
+  "targeted_result": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 1,
+      "observed": 1,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "15ace1334ba297d64a8c0c9e1697ee3f604c004c9f391232265f4ff507a29d7e"
+    },
+    "scientific_verdict": null
+  },
+  "actual_libasan_mapping_verified": true,
+  "detect_leaks": false,
+  "scientific_verdict": null
+}
