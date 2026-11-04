@@ -1,0 +1,25 @@
+{
+  "attempts": {
+    "s09-audit-probe-retirement-a1": {
+      "reason": "bounded metadata unit spent its3600s limit waiting for dependency; no migration tests executed",
+      "archive_bytes": 7476,
+      "archive_sha256": "a7283bd143149259e919e76e44f262019b48859d06e002bb47fb03b462ed253f",
+      "members": 16,
+      "state": "closed_not_created"
+    },
+    "s06-shared-recognition-normal-a1": {
+      "reason": "disk/memory preflight before reserve refused declared6GiB free-disk threshold; source4f3/Pulsef6 not compiled",
+      "archive_bytes": 25596,
+      "archive_sha256": "7a59a3effbb9dd2d6c9c98182104a970fe91d6e988a08c8085be2a8a1157373a",
+      "members": 25,
+      "state": "closed_not_created"
+    }
+  },
+  "successful_lifecycle18_133_evidence": "7921bf4a33f04e586d689d363daa61bb452d74f6",
+  "recognition_helper_source": "4f3db1160cda9bad59974af2bff01c023832248d",
+  "recognition_helper_pulse": "f6a917d395b21610f6bf6cbb0ed945e6cdee31dd",
+  "recognition_helper_runtime_pass": false,
+  "retirement158_Elder_pass": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

@@ -1,0 +1,126 @@
+{
+  "kind": "timelearner_prerequisite_failure",
+  "label": "s09-audit-probe-retirement-a1",
+  "reason": "bounded metadata unit spent its3600s limit waiting for dependency; no migration tests executed",
+  "members": {
+    "worker/queue.json": {
+      "bytes": 2231,
+      "sha256": "0f1a3b97f42b01a733fe22217fcb30bf7aea4b69e41ff3d3e8a4b4315f1a23f1"
+    },
+    "worker/owned-supervisor.json": {
+      "bytes": 210,
+      "sha256": "6d8ce22dc00e266b68e3b8dd967bd200706b0a5c2d410f92e49fcd3ba5e362fa"
+    },
+    "worker/producer.py": {
+      "bytes": 10532,
+      "sha256": "91c91fbcb4121749359e57829cf21f0fbafb30d2c87ef8f76b72cca092f1226c"
+    },
+    "controller/request.json": {
+      "bytes": 759,
+      "sha256": "d877f3f2c8632202d1f8b09ccdb3d82a27edd23eb42193bc2aa1b678986799bc"
+    },
+    "controller/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "controller/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "controller/limits-readback.json": {
+      "bytes": 1068,
+      "sha256": "f9e4a9e7741f47a884d07e6fb62da35a5e56c14ca7df746a9fca1d888a8b7b91"
+    },
+    "controller/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "controller/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "controller/recovery-refused.json": {
+      "bytes": 942,
+      "sha256": "73d5d1620f456b373e199f741a9e5fc7926ce302730b39cbab7293dff816457d"
+    },
+    "controller/ready.json": {
+      "bytes": 44,
+      "sha256": "bc1e1f5ba0a832284ff586c1bf1d9569ed2866b1712ee5e7b377edbad2a54899"
+    },
+    "controller/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "458031220bf2811550240e8c35aa503b27732c6a51ad62f5deb2388a468dd565"
+    },
+    "controller/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "controller/closure.json": {
+      "bytes": 1298,
+      "sha256": "dd4df7a6e32c436b2df986a3881b79616faa0163b5d873baa36e9411a28168b0"
+    },
+    "controller/runtime.json": {
+      "bytes": 2776,
+      "sha256": "c4f643ac617c22696bbd1998fa5ccd7771d62e6c1c3d153769d5a086d422319f"
+    },
+    "fresh-resource-state.json": {
+      "bytes": 1937,
+      "sha256": "f7e6e3cec6c1f3171c20f20ca3dc07ec8e315ca29374455f09db7d1fb0990c85"
+    }
+  },
+  "archive_bytes": 7476,
+  "archive_sha256": "a7283bd143149259e919e76e44f262019b48859d06e002bb47fb03b462ed253f",
+  "failed_before_reservation_or_models": true,
+  "resource_state": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s09-audit-probe-retirement-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-audit-probe-retirement-a1-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "7ecbdb0fea9c649e90c67874e4ea15381a2143e5ccd89b9643376d5f5b2747dd",
+        "unit": "timelearner-76899aa3-fd38-4164-ba94-98525c152504.service",
+        "invocation_id": "4fd7054409f04596b4dded47baa985de",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-76899aa3-fd38-4164-ba94-98525c152504.service",
+        "initial_main_pid": 2231936,
+        "initial_start_ticks": "338260912",
+        "sha256": "d49b54437ec816913bd7b3ac3f09dce9a585a1d2ec0e4c1e6adf006c1d521216"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "timeout",
+        "ExecMainCode": "2",
+        "ExecMainStatus": "15",
+        "ControlGroup": "",
+        "MemoryMax": "536870912",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 76899aa3-fd38-4164-ba94-98525c152504",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "4fd7054409f04596b4dded47baa985de"
+      },
+      "memory_max": 536870912,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "reservation_optional": true,
+    "reservation_state": "not_created",
+    "reservation_token": null,
+    "state": "ready",
+    "reason": "dependency_closed_without_reservation",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}
