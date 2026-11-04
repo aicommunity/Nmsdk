@@ -1,3 +1,5 @@
+Последующее уточнение: [managed measured calibration/fresh confirmation/frozen Test и silent rollback](ManagedNativeCalibrationAcceptance.ru.md) прошли4/4 на Elder на этих новых источниках. Это same-matrix engineering проверка, не scientific stock PASS.
+
 # Managed Train → export → frozen Test: normal приёмка
 
 На Elder source `c3445128cd6b62aa9ae0ce1b9e448186a1b4c62c` прошёл **8/8** реальных checks без failures/errors/skips:
