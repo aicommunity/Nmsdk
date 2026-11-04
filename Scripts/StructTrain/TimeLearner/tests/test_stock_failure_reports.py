@@ -187,3 +187,26 @@ class StockFailureReportTest(unittest.TestCase):
         self.assertEqual(pairs, self.manifest['trial_soma_pairs'])
         for name, digest in load(self.root/'SHA256SUMS.json').items():
             self.assertEqual(hashlib.sha256((self.root/name).read_bytes()).hexdigest(), digest)
+
+    def test_small_real_branch_rebound_has_a_sample_marked_readable_local_view(self):
+        row = next(r for r in self.manifest['reports'] if r['name'] == 'Branch-threshold-low')
+        selected = row['selection']['probes'][-1]
+        wave = selected['burst_assignments'][0]['waves'][2]
+        self.assertLess(wave['amplitude'], 2e-5)
+        self.assertGreater(wave['amplitude'], 1e-6)
+        folder = self.root/row['name']
+        entry = load(folder/'manifest.json')['reports'][-1]
+        figure = load(folder/entry['folder']/'manifest.json')['figures'][0]
+        from ..native_evidence import equal
+        view = next(v for v in figure['views'] if 'peak_detail' in v and
+                    equal(v['peak_detail']['peak_sample_time'], wave['time']))
+        self.assertEqual(view['time_view'], 'measured_peak_detail')
+        self.assertEqual(view['y_scale'], 'local_detail')
+        self.assertTrue(view['sample_markers'])
+        indices = view['peak_detail']
+        self.assertLessEqual(indices['last_sample_index']-indices['first_sample_index'], 20)
+        trace = self.root/'primary'/row['name']/selected['trace']
+        with trace.open(newline='') as stream:
+            samples = list(csv.reader(stream))[1:]
+        values = [float(s[2]) for s in samples[indices['first_sample_index']:indices['last_sample_index']+1]]
+        self.assertGreater((max(values)-min(values))/(view['y_limits'][1]-view['y_limits'][0]), .5)
