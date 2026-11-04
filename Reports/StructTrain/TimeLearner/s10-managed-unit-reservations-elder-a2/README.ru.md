@@ -1,0 +1,1 @@
+Elder source43d32cf211:62/62 actual kernel controls, no skips/failures/errors. Includes new direct-launch symlink-alias replacement refusal. No neural model ran. Native production preflight acceptance is separate and remains pending.
