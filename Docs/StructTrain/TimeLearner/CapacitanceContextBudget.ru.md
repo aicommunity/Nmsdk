@@ -129,3 +129,38 @@ root и фактический JUnit inventory262 без незавершённ�
 Это полный заявленный normal gate данного снимка, не ASan gate, не вся
 матрица исходного плана и не научная классификация. C-search ещё не принят
 в develop; отдельные ASan/model/physics/visual требования остаются открытыми.
+
+
+## ASan K1: отдельная проверка полного поиска
+
+04.11 запущен `s07-capacitance-full-asan-k1` на M40, supervisor PID3649813,
+start_ticks284056538. Исходный root
+`69789b8cb93dbc2ce44fe7a8d90aed758cf93f76`, Pulse
+`84e456d6fb551021e0222ebaf51fa313df2623b4`, Rdk
+`acc3de8d1af2480d61ddb723c3288f7e81003049`, Bin
+`4af17aa240a7da0e30655a62c07cc4832e7253b9`. Это собственный старый срез
+C-search; успешный результат не подтвердит комбинацию с ещё не объединёнными
+initial-threshold, новым Rdk или другими feature branches.
+
+Создаются новые source/build/runtime под `/media/user/Data/TimeLearnerRefactor`
+с суффиксом `capacitance-full-asan-k1`; прежние сборки не обновляются.
+Предпроверка:405 GiB свободно и43 GiB доступной RAM, минимум60/32 GiB;
+компиляция двумя процессами. Declared gates:34 targeted native cases,
+затем262 full native cases и тот же список119 production readers из
+normal J5. Используется штатный SDK target и `native-gate`, ASan
+`detect_leaks=0`, исходные внутренние child timeouts. Полный внешний budget
+86400 s учитывает длительность213-case H21; изменение budget не заменяет
+прохождение всех262 случаев.
+
+Каталоги защищены worker-local SQLite reservation из develop
+`ea8345c334738cc9aea34c2010dd0d380cf474dd`; supervisor поддерживает heartbeat
+и проверяет aliases до/после операций. Это адресное использование примитива
+резервирования, не принятие полного scheduler: ручные нерегистрируемые writers,
+восстановление orphan descendants и количественное распределение ресурсов
+остаются отдельными требованиями. При аварии held reservation не снимается
+автоматически. Producer и reservation receipts сохраняются в readback.
+
+На момент записи supervisor жив, подготовка нового checkout продолжается.
+Сборка, численные результаты,119 readers, упаковка/публикация и независимая
+проверка ещё не завершены. Не запускать повторный K1 из-за timeout наблюдения:
+сначала проверить этот PID вместе со start_ticks и дочерними handles.
