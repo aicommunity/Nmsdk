@@ -102,8 +102,9 @@ def prepare(directory, output):
                      'source_model_revision': identity['sha256'], 'intervention_resistance': resistance})
     require({r['branch'] for r in rows} == {False, True} and len(rows) == 2, 'fixed_geometry_source_coverage_missing')
     require(before == _inventory(directory), 'fixed_geometry_source_changed')
-    plan = _signed({'kind': 'stock_fixed_geometry_resistance_plan', 'schema_version': 1, 'rows': rows,
+    plan = _signed({'kind': 'stock_fixed_geometry_resistance_plan', 'schema_version': 2, 'rows': rows,
                     'source_inventory_sha256': sha(before), 'source_study_sha256': sha(study),
+                    'files': _inventory(output),
                     'training_executed': False, 'scientific_verdict': None})
     _write(output/'plan.json', plan)
     return plan
@@ -120,6 +121,14 @@ def graph_difference(a, b):
                     yield {'path': path+[key], 'before': x.get(key), 'after': y.get(key), 'missing_key': True}
                 else:
                     yield from differences(x[key], y[key], path+[key])
+        elif type(x) is list and type(y) is list and all(type(v) is dict and type(v.get('path')) is str for v in x+y):
+            # Node membership changes must not duplicate entire graph arrays in
+            # every diagnostic row. Preserve order separately; never sort it away.
+            left, right = {v['path']: v for v in x}, {v['path']: v for v in y}
+            require(len(left) == len(x) and len(right) == len(y), 'fixed_geometry_duplicate_node_path')
+            if list(left) != list(right):
+                yield {'path': path+['node_order'], 'before': list(left), 'after': list(right), 'missing_key': False}
+            yield from differences(left, right, path+['by_path'])
         elif type(x) is list and type(y) is list and len(x) == len(y):
             for i, (left, right) in enumerate(zip(x, y)):
                 yield from differences(left, right, path+[i])
@@ -128,11 +137,32 @@ def graph_difference(a, b):
     return list(differences(a, b, []))
 
 
+def validate_prepared(prepared):
+    prepared = Path(prepared)
+    plan = load(prepared/'plan.json');_digest(plan)
+    require(set(plan) == {'kind', 'schema_version', 'rows', 'source_inventory_sha256', 'source_study_sha256',
+                         'files', 'training_executed', 'scientific_verdict', 'sha256'} and
+            plan['kind'] == 'stock_fixed_geometry_resistance_plan' and type(plan['schema_version']) is int and
+            plan['schema_version'] == 2 and plan['training_executed'] is False and plan['scientific_verdict'] is None,
+            'unknown_fixed_geometry_plan')
+    require(not any(p.is_symlink() for p in prepared.rglob('*')), 'fixed_geometry_prepared_symlink')
+    require(plan['files'] == {k: v for k, v in _inventory(prepared).items() if k != 'plan.json'},
+            'fixed_geometry_prepared_file_changed')
+    require(type(plan['rows']) is list and len(plan['rows']) == 2 and
+            {r['name'] for r in plan['rows']} == {'Classic-threshold-training100', 'Branch-threshold-training100'},
+            'fixed_geometry_plan_coverage_changed')
+    for row in plan['rows']:
+        expected = load(prepared/'expected'/(row['name']+'.json'))
+        require(expected['identity']['sha256'] == sha(expected['identity']['model']) == row['source_model_revision'] and
+                expected['source_package_sha256'] == row['source_package_sha256'] and
+                expected['physical_bank_owners'] == row['physical_bank_owners'] and
+                expected['intervention_resistance'] == row['intervention_resistance'], 'fixed_geometry_expected_context_changed')
+    return plan
+
+
 def run(prepared, runtime_manifest, output):
     prepared, output = Path(prepared).resolve(strict=True), Path(output).resolve()
-    plan = load(prepared/'plan.json');_digest(plan)
-    require(plan['kind'] == 'stock_fixed_geometry_resistance_plan' and plan['schema_version'] == 1 and
-            plan['training_executed'] is False and plan['scientific_verdict'] is None, 'unknown_fixed_geometry_plan')
+    plan = validate_prepared(prepared)
     require(not output.exists() and not output.is_relative_to(prepared) and not prepared.is_relative_to(output),
             'fixed_geometry_requires_separate_new_run')
     before = _inventory(prepared);output.mkdir(parents=True);rows = []
