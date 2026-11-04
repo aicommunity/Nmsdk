@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.1d — библиотека импульсных откликов NextSegInh / PSI vs passive (scoped)
 
 Постановка: этап **E1.4** явно оставил **PARTIAL**, потому что предсказатель разделимости для `nextseg`/`preinh` опирается на **ideal_inh_proxy** с τ = 0.5 мс при `length_sync_cv≤0.25`, а не на измеренные ядра ([`E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md`](E1_4_SEPARABILITY_PREDICTOR_2026-10-22.ru.md)). Параллельно **E1.5 FRAGILE** показал, что PASS-остров `br25_nextseg` держится на NextSeg. Этот scoped-проход закрывает чекбокс E1.1 «отдельно с NextSegInh и PSI» для **AsymRm** на короткой сетке **L ∈ {1, 4, 7, 10, 25}**, **N = 1**, несколько TipR, с записью **peak / t_peak / FWHM** и относительных δ относительно **passive** baseline. Полный L = 1…100 × Rs × N и NeuronModel A/B/C **не** запускались.
