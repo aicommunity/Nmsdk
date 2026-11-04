@@ -1,0 +1,3647 @@
+{
+  "kind": "timelearner_related_script_review",
+  "schema_version": 1,
+  "source_catalog_schema_version": 3,
+  "root_revision": "0497d934d666d883903f3a8ff504169009982dbe",
+  "repositories": {
+    "root": {
+      "path": ".",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "checkout_head": "0497d934d666d883903f3a8ff504169009982dbe",
+      "checkout_matches_snapshot": true,
+      "tracked_working_tree_status": ""
+    },
+    "PulseLib": {
+      "path": "Libraries/Nmsdk-PulseLib",
+      "commit": "9ec4566d71bf56d4eeb5c8a920bbc683fcd85299",
+      "checkout_head": "9ec4566d71bf56d4eeb5c8a920bbc683fcd85299",
+      "checkout_matches_snapshot": true,
+      "tracked_working_tree_status": ""
+    },
+    "Bin": {
+      "path": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "checkout_head": "99f58da9296a794374cef679bbb878cb62af979a",
+      "checkout_matches_snapshot": true,
+      "tracked_working_tree_status": ""
+    }
+  },
+  "script_discovery_scope": "path_and_content_tokens",
+  "selection_tokens": [
+    "timelearner",
+    "structtrain",
+    "normsync"
+  ],
+  "script_suffixes": [
+    ".bash",
+    ".bat",
+    ".c",
+    ".cjs",
+    ".cmd",
+    ".js",
+    ".mjs",
+    ".pl",
+    ".ps1",
+    ".psm1",
+    ".py",
+    ".rb",
+    ".sh"
+  ],
+  "scripts": [
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/generate_branch_update_probes.py",
+      "blob": "1075fe6dfde34b7669db517d5d20d14b4f3aa24a",
+      "mode": "100644",
+      "bytes": 7590,
+      "content_sha256": "16dc1307718f3800c61b0bc1174cb56f8ebd5fadb6a1385eb3af106b3f4ba683",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/generate_training_core_probes.py",
+      "blob": "732b3c4b0fc15416040030a2e7b80ba8e037c421",
+      "mode": "100644",
+      "bytes": 14354,
+      "content_sha256": "92ba6bd500e19d0b5f9142e9bb4e8ad7e152f24809293b4e6eb05a13443eb325",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/review-20260924/metrics_probes.py",
+      "blob": "23c4edf6369d50363151e5e4074033b70cca49f4",
+      "mode": "100644",
+      "bytes": 3407,
+      "content_sha256": "60023299495cb3938dfd86a853c22ef95d1d0a3b5e18123f5a98a1587460aa58",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/review-20260924/n_stim_csv_probe.py",
+      "blob": "13758d5114fa1e83be0f28c979ee540532ea16f5",
+      "mode": "100644",
+      "bytes": 8243,
+      "content_sha256": "09257f35069c769b53f18d148cba91873078a930fb16a554d339bed16e94d433",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/review-20260924/posttune_probes.py",
+      "blob": "bef406b3f3687929667d0307ba21a04897f40677",
+      "mode": "100644",
+      "bytes": 11784,
+      "content_sha256": "5d0700e6ac9d51460d2753e1e5a2565bc1d3cddd2e0ab62e0ee0395e64a3c445",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/review-20260924/pulse_delay_probes.py",
+      "blob": "b4a575bdfbc7608b85b242ac846dee56f2911433",
+      "mode": "100644",
+      "bytes": 3633,
+      "content_sha256": "0c3e598cee34c1c3e545a812a48a5be81861218d85ccce13f09b19fcdb282a89",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/review-20260924/verifier_probes.py",
+      "blob": "c2083939f1fb332ef4f8f0ac245ada0d68c105da",
+      "mode": "100644",
+      "bytes": 6308,
+      "content_sha256": "45185cc170c07326b042277614fd622676eee710793a757019b6b6082dd37ba5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "root",
+      "commit": "0497d934d666d883903f3a8ff504169009982dbe",
+      "old_path": "Scripts/audit-probes/run_fixed_threshold_grid.py",
+      "blob": "309d823009da29da11d9ac12a500a47999102fac",
+      "mode": "100644",
+      "bytes": 10279,
+      "content_sha256": "2fb7d33cbffebb1610b2b075676157c20a783b53cba77688443e25a037fbf576",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/analyze_peak_sync.py",
+      "blob": "60d52ae427c7d5ee13c694d13a1a89273a3f8734",
+      "mode": "100644",
+      "bytes": 9425,
+      "content_sha256": "5b8d68b8d30b3dc0ac6f91c3149392b50270e2c524d2ae635ddb847fb5b9386b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/analyze_signal_fidelity.py",
+      "blob": "16c4f5fc05d68da13dadb84349aa28c76084f3e5",
+      "mode": "100644",
+      "bytes": 10773,
+      "content_sha256": "83895bb6e66fd6851de02fadf5ac96681707e8ff7a43337844e0470ac86a0929",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/analyze_sync_tolerance.py",
+      "blob": "9b4fc897452ac503fc6aafa83035fcbaf7e8415a",
+      "mode": "100644",
+      "bytes": 10524,
+      "content_sha256": "a5c559d375fc120636a2b2a53740624f29c5e478817a6dac2426b1a711d7d49d",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/analyze_train_stall.py",
+      "blob": "699fcf71a1dc38c59a3992db03bf2a50f7db66d9",
+      "mode": "100755",
+      "bytes": 12100,
+      "content_sha256": "075796f45fce7805293ae2ce33c8173fbcd8892c31dd21ca8b1dbfa2de146556",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/asymrm_train_common.py",
+      "blob": "89858c2724ae2c1dd7a8b84ceebcbce008c5e31e",
+      "mode": "100755",
+      "bytes": 14610,
+      "content_sha256": "edfd271e749047f852558a94a0a347197908624f91cef6bbce5d9ead34c98aff",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/audit_l_oscillation.py",
+      "blob": "c63ece41e42a063b87c92e3c1a9bbf91e1213889",
+      "mode": "100644",
+      "bytes": 9062,
+      "content_sha256": "cf8e3dd1f5a7516634d61b59db23fc98a87624f6b661ba0d31835d8b63711c26",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/check_timing_feasibility.py",
+      "blob": "467ec57124adae7101f933d1d65e2be364b3a64b",
+      "mode": "100755",
+      "bytes": 7715,
+      "content_sha256": "f28013f7abb4000d68069a5275d7446213651c0d3c28d9ed41e1d925e064aa28",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh",
+      "blob": "986c917cd0295d7f0b8b8d3855b4b3bd693adc4b",
+      "mode": "100755",
+      "bytes": 2275,
+      "content_sha256": "e315feb17a62d3094d551b102de34b82b3d43b10f42383acf70430dbfb8c4ddb",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+      "blob": "f92497632d5a6781ac0d156d9bfa67c8d6b2e30e",
+      "mode": "100755",
+      "bytes": 3436,
+      "content_sha256": "d570f35962e2880c4e9ef82a1b0837b5db8cead21faae5741c31afcbf66957f2",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/compare_l_target.py",
+      "blob": "41834b17ce239f1a66d929206e02d0272df6b3b7",
+      "mode": "100644",
+      "bytes": 2481,
+      "content_sha256": "4f849c7e4b2c6a59b4c0a1fea4b188149298c63a846650463fcafd1fb253f5dd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/copy_config.sh",
+      "blob": "b74914c99cb2b178f79fee3917dd737023d336ba",
+      "mode": "100755",
+      "bytes": 1932,
+      "content_sha256": "0ddf0465b3fd408fa7963224ae45e446533407504c1dbf0c7af83f7f9bfcc80c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/done_fingerprint.py",
+      "blob": "ec62434e2b147b87d9e615620c5921375fdd140e",
+      "mode": "100755",
+      "bytes": 4305,
+      "content_sha256": "625a492ab012afbfa0c378e347c4330534f4beaa275e799e53515719633054d6",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/evaluate_selectivity_csv.py",
+      "blob": "c16682b8ac655f7b728add83ba01ea64c1c29a9d",
+      "mode": "100755",
+      "bytes": 397,
+      "content_sha256": "46ff1bb020bc7123e60366efbcd03f78cdb1564828dec9ddb87f1934d20f66fd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/export_preinh_audit.sh",
+      "blob": "e6bc8ac004fe76cb793a9be861571f1f2cd47b13",
+      "mode": "100755",
+      "bytes": 1825,
+      "content_sha256": "32ef3481c4aeaf64c9fa71a0d228cae9b9f79160a0d91f4f6dd7668e19b568a6",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py",
+      "blob": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "mode": "100755",
+      "bytes": 3576,
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inventory_statisticlog.sh",
+      "blob": "78b9297230fb33c553a64c2182d287a866ade634",
+      "mode": "100755",
+      "bytes": 4612,
+      "content_sha256": "58c694e68313cea0a8af2a3e5354ca3f9d349a5ae00e89320a593d283449ef3a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/l_train_guard.py",
+      "blob": "0551b9e13d5053acc2d7f56b79da48155399d46b",
+      "mode": "100644",
+      "bytes": 6147,
+      "content_sha256": "9763fbbd3d6125d4948405e765e1aa5790b6ce4d9b3dd9356a6c15a59aee0aa4",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/length_step_guard.py",
+      "blob": "dca5e2ffedc53bb7d10943b119c512837f8baccd",
+      "mode": "100644",
+      "bytes": 5686,
+      "content_sha256": "d95c87b2c41e0497a6ea6e0b4d3da7c77b3631d6ceef711d35fbe491f57b8bfd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py",
+      "blob": "f8d64f994100722038aeba6cfd1500be42d4429f",
+      "mode": "100755",
+      "bytes": 2240,
+      "content_sha256": "9ed392118fb463f39c0b1bbceb846654530bc348f15808f7aeda00f1ef6e647a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_l_reference.py",
+      "blob": "940fdd660c6a3488c48f5b1e386e98fdc6029128",
+      "mode": "100644",
+      "bytes": 7025,
+      "content_sha256": "2e087ccbeb469047523425668236624b465fb48bacb0c5e9ac82fe7a75c6a34a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+      "blob": "929b0e4210ea5f823a4b83fe08e3e42a1d704bdc",
+      "mode": "100755",
+      "bytes": 8442,
+      "content_sha256": "c5e652a2b03e3bb45bb87ad9ec8b60fd32f7e5c7607ad1f5b4f56c38115051be",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py",
+      "blob": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "mode": "100755",
+      "bytes": 2027,
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_watch_pattern_legend.py",
+      "blob": "16f40a3e957c7b94cf2d93ec3b4010b400b83277",
+      "mode": "100755",
+      "bytes": 8217,
+      "content_sha256": "f81c55f0eaa14b6aae5829a2685eb99f953581808d495f228f21d67af53bd667",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/phase9_preinh_bc_gate.py",
+      "blob": "6728a64d8eea542b12ea1785c33be758c8294228",
+      "mode": "100755",
+      "bytes": 17967,
+      "content_sha256": "edcbf2e69a37d15eed0f20eb5c875a7370a6a1ee7413f7ff76ffe8295bae29f2",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/pilot_status.sh",
+      "blob": "9d229f5b19a40f07979ee7ef09f098608a0874fe",
+      "mode": "100755",
+      "bytes": 1348,
+      "content_sha256": "79ec9263651a3ff609fc18e9f7c2c73a24b6ff45d9070a27e51dd9a130958aa8",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/prune_statisticlog.sh",
+      "blob": "90f8f4eef8c4fced86489e1aef862556cd250406",
+      "mode": "100755",
+      "bytes": 1627,
+      "content_sha256": "514fc0e1f96c85f23b0d88aeedc6782be197457af125a4743a6b6cbda8c96689",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/reset_asymrm_cold.sh",
+      "blob": "db152c55e6653cd8a9805e42aa91d46336ff7755",
+      "mode": "100755",
+      "bytes": 5409,
+      "content_sha256": "a7a7fec146d7855b369ab5a2adfad2a2342779909c7ec4876985124a8eefa680",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/reset_pathological_tip.py",
+      "blob": "e92afec01773f943a6b9fc0879c22c2544444144",
+      "mode": "100755",
+      "bytes": 5427,
+      "content_sha256": "a5fe393947ef8427c58592aa0584ab6bb40db26f1f2d393cd8aa425189d755f6",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_asymrm.sh",
+      "blob": "82d9cf6811e7e457ae1f6bce5cc6cffefa0356d7",
+      "mode": "100755",
+      "bytes": 29407,
+      "content_sha256": "21e1974d973a37058e5bc69906bf1a08a00bd0bbdc648e1ea172c61912d9d122",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_parallel.sh",
+      "blob": "8c457140a6da52f7f4b85f794f4ac450abbe5d53",
+      "mode": "100755",
+      "bytes": 1473,
+      "content_sha256": "41924651df39e26e420d87fc37521d74fc8c8d3fa5c28fc638cb0527b1fd6790",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/seed_from_done_preinh.py",
+      "blob": "c267faeae9e1f87a1cecb96529ff69e8d41e6c6c",
+      "mode": "100755",
+      "bytes": 7275,
+      "content_sha256": "edf5a5bb94bca96ff102a53bab8990e6af31a57d31d1b5e827da5524d21b4deb",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/seed_initial_from_ltzcal.py",
+      "blob": "60598b590d2ad63217d6a8dd5a096f08c1280b2e",
+      "mode": "100755",
+      "bytes": 9933,
+      "content_sha256": "0b101c7f0536088495f09bee27ebe833660777c9d9ce46ac6d8666316d15aba5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/seed_tipr_from_done_sibling.py",
+      "blob": "36a46a5a17a451f041707d5d48b77213e487ecb7",
+      "mode": "100755",
+      "bytes": 4848,
+      "content_sha256": "dc9e0f479e77dd99b923fa34a2063338a60d9533c8e1ec024f7662f997785109",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/setup_asymrm.sh",
+      "blob": "a49eeaf1ad13a250d552cf9e287671819cba50a8",
+      "mode": "100755",
+      "bytes": 7621,
+      "content_sha256": "4a59664bc823a4aff15741c8e7f31c2e1c49cdd17d11dde5bc67512e09d1c6a4",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/sweep_sync_tolerance_offline.py",
+      "blob": "9dc1931ca26a70d85b379a3efdc19eef0fd3fe43",
+      "mode": "100644",
+      "bytes": 6622,
+      "content_sha256": "67f72545ef843f8536e4c71f0d68bf29035484e301475d45d2247da600966805",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/train_time_budget.py",
+      "blob": "4842fd0c7b9c0e24d9f573cdc780bf54e300fc42",
+      "mode": "100644",
+      "bytes": 6808,
+      "content_sha256": "569a0d143f4a46db6703454fc2b9b45c6fdd7425774e89f300587956185a2a3e",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/verify_element_params.py",
+      "blob": "779a517c12bc8e72fd4060daa68bcd2500b2f248",
+      "mode": "100755",
+      "bytes": 7667,
+      "content_sha256": "a83efb8f74962107a91ffe92207e9408b41f01b5325f6345ed8c60b34dedbca0",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/verify_pattern_span.py",
+      "blob": "be634953c9c194aa8ff013b6c23b0780a60d068c",
+      "mode": "100755",
+      "bytes": 3890,
+      "content_sha256": "e93f0019e3ae4daca8b155281c09a8cd6b0aafecbe756968fbf0e7fe6968814a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py",
+      "blob": "e1e39b75aa4c69192a548494920834757812e908",
+      "mode": "100755",
+      "bytes": 1994,
+      "content_sha256": "e21db4fa7b3beeb76d86e511c64cfee0e3cb7354ab397a74694049a5719f352d",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranch/scripts/phase8_tiprmin_gate.py",
+      "blob": "02e8a6f3825a082e7f1b74c085301fb57dcb2684",
+      "mode": "100755",
+      "bytes": 28494,
+      "content_sha256": "0200c4125429ec2907ba411afc20aed1a830a7520c37de8dcddcb2a0377a3a52",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/scripts/create_br_fs_exps.py",
+      "blob": "e736d64a488d0ac0eb94e6cb90233eec7bb6abc6",
+      "mode": "100644",
+      "bytes": 5268,
+      "content_sha256": "a424c725e6027dcf2df6fd28d904f5ba2694a1afae16e34d473d1dd95116b47c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/copy_config.sh",
+      "blob": "b74914c99cb2b178f79fee3917dd737023d336ba",
+      "mode": "100755",
+      "bytes": 1932,
+      "content_sha256": "0ddf0465b3fd408fa7963224ae45e446533407504c1dbf0c7af83f7f9bfcc80c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/inject_analyzer.py",
+      "blob": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "mode": "100755",
+      "bytes": 3576,
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/merge_train_weights.py",
+      "blob": "06562e5ae2137ce28349df2ae07badd260a141a4",
+      "mode": "100755",
+      "bytes": 1834,
+      "content_sha256": "c155d12b087626d75cf17790ca5021b1157714d109ad5e4dcc57cda7c1cd70b6",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/patch_test_model.py",
+      "blob": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "mode": "100755",
+      "bytes": 2027,
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/run_grid.sh",
+      "blob": "b050d451138fa32b72e06155bbd88cdfbd2c8180",
+      "mode": "100755",
+      "bytes": 4403,
+      "content_sha256": "e23edee7b6899c0b63470dd3e6c78db373cc3a33d2748bca87e13983fa17b3cb",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/setup_grid.sh",
+      "blob": "bf4965134c17f8949ebdf9d785edb3413fe73d68",
+      "mode": "100755",
+      "bytes": 4774,
+      "content_sha256": "ef5cbde6e5e9cd50769d80b2eafec517e9665c7e53e782d6bc8529fc529ab6a3",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/copy_config.sh",
+      "blob": "b74914c99cb2b178f79fee3917dd737023d336ba",
+      "mode": "100755",
+      "bytes": 1932,
+      "content_sha256": "0ddf0465b3fd408fa7963224ae45e446533407504c1dbf0c7af83f7f9bfcc80c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/evaluate_selectivity_csv.py",
+      "blob": "c16682b8ac655f7b728add83ba01ea64c1c29a9d",
+      "mode": "100755",
+      "bytes": 397,
+      "content_sha256": "46ff1bb020bc7123e60366efbcd03f78cdb1564828dec9ddb87f1934d20f66fd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/inject_analyzer.py",
+      "blob": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "mode": "100755",
+      "bytes": 3576,
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/merge_train_weights.py",
+      "blob": "f8d64f994100722038aeba6cfd1500be42d4429f",
+      "mode": "100755",
+      "bytes": 2240,
+      "content_sha256": "9ed392118fb463f39c0b1bbceb846654530bc348f15808f7aeda00f1ef6e647a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_pattern_scale.py",
+      "blob": "929b0e4210ea5f823a4b83fe08e3e42a1d704bdc",
+      "mode": "100755",
+      "bytes": 8442,
+      "content_sha256": "c5e652a2b03e3bb45bb87ad9ec8b60fd32f7e5c7607ad1f5b4f56c38115051be",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_test_model.py",
+      "blob": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "mode": "100755",
+      "bytes": 2027,
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_watch_pattern_legend.py",
+      "blob": "16f40a3e957c7b94cf2d93ec3b4010b400b83277",
+      "mode": "100755",
+      "bytes": 8217,
+      "content_sha256": "f81c55f0eaa14b6aae5829a2685eb99f953581808d495f228f21d67af53bd667",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/run_fastspan.sh",
+      "blob": "13da870ebbc80e2f5189e8f5025cb5f1418ae773",
+      "mode": "100755",
+      "bytes": 7057,
+      "content_sha256": "ca527f4e80caf6054b0f6ce6f7d606eec4e4fa1092b355a6d0611aec139c021f",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/run_parallel.sh",
+      "blob": "8c457140a6da52f7f4b85f794f4ac450abbe5d53",
+      "mode": "100755",
+      "bytes": 1473,
+      "content_sha256": "41924651df39e26e420d87fc37521d74fc8c8d3fa5c28fc638cb0527b1fd6790",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/setup_fastspan.sh",
+      "blob": "ce298a83b3a00b277affb3023cf0faa54bd4f45a",
+      "mode": "100755",
+      "bytes": 7838,
+      "content_sha256": "026f95526d9cb7c66f66164c5323564a3f7c4f8105f4d3b0de4b8fa66d470571",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/verify_element_params.py",
+      "blob": "779a517c12bc8e72fd4060daa68bcd2500b2f248",
+      "mode": "100755",
+      "bytes": 7667,
+      "content_sha256": "a83efb8f74962107a91ffe92207e9408b41f01b5325f6345ed8c60b34dedbca0",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/verify_pattern_span.py",
+      "blob": "be634953c9c194aa8ff013b6c23b0780a60d068c",
+      "mode": "100755",
+      "bytes": 3890,
+      "content_sha256": "e93f0019e3ae4daca8b155281c09a8cd6b0aafecbe756968fbf0e7fe6968814a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityInhGrid/clone_inh_grid.py",
+      "blob": "25c875f6fb550f575c801a9702616476e45a19c0",
+      "mode": "100644",
+      "bytes": 6461,
+      "content_sha256": "4fe605ed365b31ec1d60c8fcf4ab2fc08458097268cac1888dfd17c3c539880d",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/analyze_separability.py",
+      "blob": "effc523822a2788d8ff86eb4a08fcc04c48ebc04",
+      "mode": "100755",
+      "bytes": 4014,
+      "content_sha256": "c50a2b0a7d58c16d510d3e41469df82efbfd5a7db13ec6952e559e2736fecd0f",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+      "blob": "8661256826f4b4c363262b602ab7dc430a35d906",
+      "mode": "100755",
+      "bytes": 4593,
+      "content_sha256": "4a994459762409dedcfafb46482c10aeae476e8a9dfd38af24d01fa2c8616195",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/copy_config.sh",
+      "blob": "ccd452c55fa047cc86573d8bbc85255c9942c665",
+      "mode": "100755",
+      "bytes": 1983,
+      "content_sha256": "2b9c2ffa108b632d931cd2bc75504d45a760780857efd5f2aab3bd8d6550ca8d",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/copy_config_branch.sh",
+      "blob": "8901a23d1de84e0620d4e42d4bf70c77f68d127a",
+      "mode": "100755",
+      "bytes": 1927,
+      "content_sha256": "5bcaf6c826c4b41fe5e8404a7248d525a57bd9f89e7156c3a739e211deb93fc9",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/evaluate_selectivity_csv.py",
+      "blob": "c16682b8ac655f7b728add83ba01ea64c1c29a9d",
+      "mode": "100755",
+      "bytes": 397,
+      "content_sha256": "46ff1bb020bc7123e60366efbcd03f78cdb1564828dec9ddb87f1934d20f66fd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/inject_analyzer.py",
+      "blob": "9e944f653224d14f1d39bdaa99b22ec68f69223d",
+      "mode": "100755",
+      "bytes": 3533,
+      "content_sha256": "e944cca59249e74d2c30a6ce18ed1b68aa41c85ab6b17d3a2ffc716c0138167b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/inject_analyzer_branch.py",
+      "blob": "9d59b5c76ab40f1bedd72bcabce179d4638def3d",
+      "mode": "100755",
+      "bytes": 3405,
+      "content_sha256": "f6f144dacde13b8a5d7ba1de388ebbd64cf4fab3787dece63e1002410abefcff",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/merge_train_model.py",
+      "blob": "0b7e73c96bc9eb32ca7f1edc61c9e9098586c75e",
+      "mode": "100755",
+      "bytes": 2307,
+      "content_sha256": "c9f38372f597631c1b02de2bad0748ccc50b121e5a9306ed731433e8cd07d678",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/merge_train_weights.py",
+      "blob": "513e4f44360bc913d7278c68e758f62e4f2db3b2",
+      "mode": "100755",
+      "bytes": 2575,
+      "content_sha256": "89a859425eee6a7e91657a0db84820b0960d3e774dacc142bc240fab4042e69a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_ltz_calibrate.py",
+      "blob": "71e540a8bf6aa97b3e42f40cc64590f300b0299b",
+      "mode": "100755",
+      "bytes": 1188,
+      "content_sha256": "50e38d6c983dfb82ca7ee60cad8bc5ced8eba55f13af21eaba4868de07769901",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_ltz_calibrate_test.py",
+      "blob": "da4ab229d1e087c8487e7ddc4bbc8bc66710eb0c",
+      "mode": "100755",
+      "bytes": 1609,
+      "content_sha256": "e999fcd66ece81763f1a82157f32d5dbd4b88882516330ede08d28c4246b0212",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_ltz_calibrate_train.py",
+      "blob": "42c3f4c5cf6ce3eec154e424646a223c17d1d426",
+      "mode": "100755",
+      "bytes": 2791,
+      "content_sha256": "be3750ba0762dc2ebbe94a85040350ee65b22de444a960b9b85cc2e525d67c07",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_pattern_scale.py",
+      "blob": "929b0e4210ea5f823a4b83fe08e3e42a1d704bdc",
+      "mode": "100755",
+      "bytes": 8442,
+      "content_sha256": "c5e652a2b03e3bb45bb87ad9ec8b60fd32f7e5c7607ad1f5b4f56c38115051be",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_test_model.py",
+      "blob": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "mode": "100755",
+      "bytes": 2027,
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_test_model_branch.py",
+      "blob": "ac41e9549fc49f7bcc74f8c1032b5a2aaad851e7",
+      "mode": "100755",
+      "bytes": 2219,
+      "content_sha256": "781e67b7ae1f8c090ec401ccd8ff0485c305f6ebff5036b4e8bfd32bbcf1a359",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/patch_watch_pattern_legend.py",
+      "blob": "16f40a3e957c7b94cf2d93ec3b4010b400b83277",
+      "mode": "100755",
+      "bytes": 8217,
+      "content_sha256": "f81c55f0eaa14b6aae5829a2685eb99f953581808d495f228f21d67af53bd667",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/reset_asymrm_ltzcal_cold.sh",
+      "blob": "c1c80892af5f4479865d8199d4d4f3233d6db69b",
+      "mode": "100755",
+      "bytes": 3130,
+      "content_sha256": "7ee3aa27be41b7ad97c61b7c0d1ca8c18972b5af9e866a7063e2ae0b3331f3c5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal.sh",
+      "blob": "bacbf59093f7633b82a93a20b12898060f0b9bbc",
+      "mode": "100755",
+      "bytes": 11139,
+      "content_sha256": "c4e6efc08fbbf4150a7d54463c7ae9aff0f64532e2fa18dff459c2ad87eef4eb",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal_branch.sh",
+      "blob": "dd4a3f01ba5aa50a45070adb3f53879f8e12ff61",
+      "mode": "100755",
+      "bytes": 7563,
+      "content_sha256": "c05b56ef98792493fe52f2337f94a66f4b618b9f7802abf0590ff896c8b8b375",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_branch_grid.sh",
+      "blob": "4e64a8a657f34eaff835a12e30366678ffc8f1e6",
+      "mode": "100755",
+      "bytes": 4034,
+      "content_sha256": "4222cccc675758e3c3d428c0ff53b80fc62f5aaa257115e9dcb46402bcc82ca1",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_ltz_grid.sh",
+      "blob": "53b8b29f33bc6a80a5389e26564de22c74146429",
+      "mode": "100755",
+      "bytes": 7628,
+      "content_sha256": "d87253ea6356d597e8e267332947c752b940039605c479b3a8b1a22d174f906b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression.sh",
+      "blob": "6ac90b9f708b9929fc282cc9dd586ead787fbd05",
+      "mode": "100755",
+      "bytes": 1974,
+      "content_sha256": "16c099b1f0a4908b727eb29c58b27aaf6ece00a9d4f9ec2aa0bdce0f831fba66",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression_warm.sh",
+      "blob": "c66392253a67bb0df2062c36b051cac23003c8cd",
+      "mode": "100755",
+      "bytes": 2965,
+      "content_sha256": "cf28421ecaf2f71942b2c0477b23ad4d9a8fe8ae025fd32f6cadc72523890e6a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_separability.sh",
+      "blob": "723407f618df9e2ff4e64b8d5ba1f2c50381901a",
+      "mode": "100755",
+      "bytes": 591,
+      "content_sha256": "3c90619d7fff61686ac9fda46e0a250f2fee13b9947d498644154a91448f6c5a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal.sh",
+      "blob": "8d69ce484580431f793b8e3a66028b70a355c544",
+      "mode": "100755",
+      "bytes": 3561,
+      "content_sha256": "73b138cef1623a2cce26b93be2558f6c583f539b45a5d5a439240093fa22ea21",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal_branch.sh",
+      "blob": "51e0c0437b86cc86fa2a80793f77276f2a915f43",
+      "mode": "100755",
+      "bytes": 6629,
+      "content_sha256": "e25b048c26fbe65466198d24c1bafa362d5b5a89eb78991dba8338de531d7537",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_branch_grid.sh",
+      "blob": "acd94d40dbb4b448dba48f1db4c45c5ae1397481",
+      "mode": "100755",
+      "bytes": 4352,
+      "content_sha256": "372da3f54b060caf621a6ce650650e186a0ca004ed64874dc60265843aca81fd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_ltz_grid.sh",
+      "blob": "eb18ab097f0d701f302a1f60d1a66fac99895ca8",
+      "mode": "100755",
+      "bytes": 5652,
+      "content_sha256": "7df1d6f18ab0e9f805d6bf7db7837332b6aeb6b70d23b6ee2066d0473ac61286",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_regression.sh",
+      "blob": "709181a1a5bbaaa682955af2a2d66140e561029e",
+      "mode": "100755",
+      "bytes": 5033,
+      "content_sha256": "09a8468dbcb1218c39da8ab224d14c08275055e0099ac0b45fdfb03e14a062c4",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/smoke_sync_regression.sh",
+      "blob": "233c863dfa2faf27af972bb5e80478b9bffb2786",
+      "mode": "100755",
+      "bytes": 2598,
+      "content_sha256": "0c9e6745d3fe77c17dd241091a908db530fb8a1975bea4999404882ae3140acd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/sweep_ltz_threshold.py",
+      "blob": "4cd1d651a67de8c4b85ed94025086dec585e884a",
+      "mode": "100755",
+      "bytes": 1767,
+      "content_sha256": "ace280153948bda6c1b91c0ac964610451491f2caee136b7075042c915d129f3",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_element_params.py",
+      "blob": "d7766e42740f4a8594b1cf5e56ab41545c9b68ae",
+      "mode": "100755",
+      "bytes": 3483,
+      "content_sha256": "9fae1c04de922b695ae0ad07338d82624c8edd82b3e9446af0f18e7c645c6788",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_pattern_span.py",
+      "blob": "be634953c9c194aa8ff013b6c23b0780a60d068c",
+      "mode": "100755",
+      "bytes": 3890,
+      "content_sha256": "e93f0019e3ae4daca8b155281c09a8cd6b0aafecbe756968fbf0e7fe6968814a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_regression.py",
+      "blob": "f098f9796b6a1debab0cb79dd22ee9b9b3131997",
+      "mode": "100755",
+      "bytes": 6835,
+      "content_sha256": "dbe3a74882b223d8952ea3a29e2fe9b68b30007d4045d379edbacdf9ef628a49",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_train_done.py",
+      "blob": "b66a9168044b621e170ef7ab63e62e05d5a9f1aa",
+      "mode": "100755",
+      "bytes": 9095,
+      "content_sha256": "454861b3a26f692f308c66453aa6ef32f6b1b8dfa8972cfea9bb4cf45c5466ee",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/copy_config.sh",
+      "blob": "b74914c99cb2b178f79fee3917dd737023d336ba",
+      "mode": "100755",
+      "bytes": 1932,
+      "content_sha256": "0ddf0465b3fd408fa7963224ae45e446533407504c1dbf0c7af83f7f9bfcc80c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/inject_analyzer.py",
+      "blob": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "mode": "100644",
+      "bytes": 3576,
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/ltz_sweep_offline.py",
+      "blob": "5fa01da38ca1c2c495ef4625928b7693493cf170",
+      "mode": "100644",
+      "bytes": 1465,
+      "content_sha256": "7a969e04cf0a4059312ada076732a6d5f1e0f0617f0a65967d4eb373cdae4353",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/merge_train_weights.py",
+      "blob": "06562e5ae2137ce28349df2ae07badd260a141a4",
+      "mode": "100644",
+      "bytes": 1834,
+      "content_sha256": "c155d12b087626d75cf17790ca5021b1157714d109ad5e4dcc57cda7c1cd70b6",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/patch_ltzone_integration.py",
+      "blob": "8c2d97eb2db496ed49d8e5ae780317cec1f1bbdb",
+      "mode": "100644",
+      "bytes": 2477,
+      "content_sha256": "e7176a5aa458c44a4c8a2d027475be70c2be40beb3957fa77194a2bb7ac85221",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/patch_test_model.py",
+      "blob": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "mode": "100644",
+      "bytes": 2027,
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/run_all_experiments.sh",
+      "blob": "bb50253a5748537a111bfe16311361c10f028b6f",
+      "mode": "100644",
+      "bytes": 1478,
+      "content_sha256": "0db3fb9ebe23c613c072865802e00a71e4129209c7e8949a8b1752a8dc0a58a7",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/scripts/setup_all_experiments.sh",
+      "blob": "d63ec558549804d8c6e262d33b72a0665a62dda9",
+      "mode": "100755",
+      "bytes": 3628,
+      "content_sha256": "1588fbb942db61f07e62b333b1d34fd6936a2177f65b2d1cb27bc9c43967a5e1",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+      "blob": "560f1ee49721b2b3df5bb1d42627e5ea89f3300f",
+      "mode": "100755",
+      "bytes": 3086,
+      "content_sha256": "0dd00eedaa88f650328d43da274bb56e9117efeb546a515c1e7cc75361f28f7c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/evaluate_selectivity_csv.py",
+      "blob": "c16682b8ac655f7b728add83ba01ea64c1c29a9d",
+      "mode": "100755",
+      "bytes": 397,
+      "content_sha256": "46ff1bb020bc7123e60366efbcd03f78cdb1564828dec9ddb87f1934d20f66fd",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/inject_analyzer.py",
+      "blob": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "mode": "100644",
+      "bytes": 3576,
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/merge_train_weights.py",
+      "blob": "093acd24971586304b4de03246f96a5d0524a3cf",
+      "mode": "100644",
+      "bytes": 2138,
+      "content_sha256": "4ad40154bb02d7690315704205f1c3745105054b152ddc27773019853205dce3",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_autothr.py",
+      "blob": "9e4f6830a350b9aef5ab0e0bed807c12abbe1222",
+      "mode": "100755",
+      "bytes": 1697,
+      "content_sha256": "379e64ec01712edb1319824007c56bcb364e9946b9ce232242b969e4a4a6bc07",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_neuron_class.py",
+      "blob": "43068111906232c6749fc735ec8f58b0be599e6a",
+      "mode": "100755",
+      "bytes": 718,
+      "content_sha256": "dc0744a6907280dfcca06f8441b4f284f25ba247775acf6ef797181da87a5365",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_pattern_scale.py",
+      "blob": "8c4344fc24030d314c5d666b37e60fb22a0ac6e5",
+      "mode": "100755",
+      "bytes": 6311,
+      "content_sha256": "0897836457ba94c96ebc91e0c03436930ba77386eab23731dae173c99c1a56eb",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_test_model.py",
+      "blob": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "mode": "100644",
+      "bytes": 2027,
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/prepare_gui_psi_train.py",
+      "blob": "3ef0b5137d0fb3d1442113df08d930699e08d8d4",
+      "mode": "100755",
+      "bytes": 3987,
+      "content_sha256": "0a22bdac4d47a41e9267f096b8e4925a7531c798740edc5f23876bbfbac5960b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_autothr_experiments.sh",
+      "blob": "2fa720c6e5b483bc4e93bfa1e1be89863db73e53",
+      "mode": "100755",
+      "bytes": 2064,
+      "content_sha256": "4dfde470e432a787f5b39e4f5b224abbf0546691c37e7d152837f8baa03d9143",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_experiments.sh",
+      "blob": "b5c92f5326910862ebc50f4ebe947ba9c0ec3cd9",
+      "mode": "100755",
+      "bytes": 1404,
+      "content_sha256": "ac73ab3503d70d504bda9515c5a548dbd8e6f53737aec20adc64f4f6aff13f7f",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_time_compress.sh",
+      "blob": "6af6bc55de7a539f942c012c460dff0ec9cd26e0",
+      "mode": "100755",
+      "bytes": 12409,
+      "content_sha256": "780c86b07b9f4fb56a336eb868c57706da1d94545b601f287e8a2d593887274b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_autothr_experiments.sh",
+      "blob": "e3a97fcdd7889595fd678ee23bbe654b75202e60",
+      "mode": "100755",
+      "bytes": 3438,
+      "content_sha256": "3dd0946b8ed93b4cfab736febe02bed43ecc69b958fdeee6160d638b8ea83c48",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_experiments.sh",
+      "blob": "41fd06dcb068f6bfadf686832256afbd10c60ddd",
+      "mode": "100755",
+      "bytes": 4868,
+      "content_sha256": "dceeb55418793cd6e899f86790bcf468a9ba4d4c541188b6d361f7ccb60cbd87",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_gui_autothr_exp02.sh",
+      "blob": "3dfc344538f939b264f933bca186308ad7a0378d",
+      "mode": "100755",
+      "bytes": 2543,
+      "content_sha256": "83b6afd5b257837e87566510a2f0d8b768dbe88d159f3eb7d4dc27ab4242f3d8",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_k_sweep.sh",
+      "blob": "95ece684d18d6ab3496d545473303d88071f70ae",
+      "mode": "100755",
+      "bytes": 4219,
+      "content_sha256": "6dbeddd18c91a413db5707a02b9357b5d1532c21782a3e52718c66027aa8f1f0",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_compress.sh",
+      "blob": "cb771f9cab2c63898310f3c16c298ada1ce95a86",
+      "mode": "100755",
+      "bytes": 5018,
+      "content_sha256": "aaaf8555bf7f49b03f3dee4727fb87968273e87e2dcbdf26cec395511e5de3b3",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_expand.sh",
+      "blob": "4acf96dcc912f894994628ec052ed578649524fd",
+      "mode": "100755",
+      "bytes": 4627,
+      "content_sha256": "22f253cdfc8f72420e8f762ab4df32dc5bcad27ec22d9e40f400b9c9870dc68b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/tune_timing_params.py",
+      "blob": "0ced6ffe6edbdd4faa5b5d4e78aadd32c2eea742",
+      "mode": "100755",
+      "bytes": 5383,
+      "content_sha256": "4a38a49b2c356d060fd7f8e2f7d5381eb780623f48e8c3e0058edeba1008c4ac",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/replay_w_case.py",
+      "blob": "3cfe3293a3723027d90f99db01945e6abed75630",
+      "mode": "100644",
+      "bytes": 8021,
+      "content_sha256": "16a33293eedec895d3e077120531013c5a2341428c0815678d417c1fc10510ef",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+      "blob": "689d78e13ece1fdb8cf7df157e73822f23b16701",
+      "mode": "100644",
+      "bytes": 6462,
+      "content_sha256": "d6fc4ff1b8ef51a72e37266fdd6e1f87a20a6539a0bde9821b05470ec0ecd02f",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py",
+      "blob": "2c865b33ab4bbd3c9c72c8f636aef18dca977160",
+      "mode": "100644",
+      "bytes": 12763,
+      "content_sha256": "5ef2a7a21163e8cdacdab27da7fbff7130be979673002a6ab2c200e5b065aa7b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260927/analyze_classifier_dynamics.py",
+      "blob": "373af7907e23e76eebb6f103fad851f57ee23549",
+      "mode": "100644",
+      "bytes": 6580,
+      "content_sha256": "5a51258c71df6824c4f82a612a5bc08c3cada2c6ee551db675b801dc6929fc3e",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260927/analyze_detailed_dynamics.py",
+      "blob": "91af4cb820b96f056c83fc2babb7ed314cfd18f6",
+      "mode": "100644",
+      "bytes": 7059,
+      "content_sha256": "a17724a58a4b8a0e3a59901853390722e1388c7b85918d7a6514ec4d01d3ce84",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260927/prepare_clones.py",
+      "blob": "9746b4ab1255a3ac56c54a753ff7184ae7feaf48",
+      "mode": "100644",
+      "bytes": 13662,
+      "content_sha256": "76694c2440a1c7519eb4dd958463fb761d1400b8613d717f1e0e36ac7df34ce8",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260927/prepare_detailed_signal_clones.py",
+      "blob": "c72ccd4d69c2a2f4eb6948b4dad1344de940ca5d",
+      "mode": "100644",
+      "bytes": 14496,
+      "content_sha256": "773f4e936bf4b2f888fcee5151f7108814997733588a6441f84e00262d246a86",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/analyze_burst_replays.py",
+      "blob": "29d64c79331dbd40776735a491149d0cc3ba702b",
+      "mode": "100644",
+      "bytes": 7375,
+      "content_sha256": "92a216ec399532952e3fe40359bf10c64b2f1a47fdf909e8d802d7c7133bc673",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/analyze_classifier_replays.py",
+      "blob": "66892c95072d99462fada9594fb93833963834e8",
+      "mode": "100644",
+      "bytes": 7233,
+      "content_sha256": "2fc065521a2d7780abe9e3d60c5a5dcb230a06af6ca4a688da2f3d96dce3739d",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/analyze_classifier_threshold_pools.py",
+      "blob": "40122a8a19fe2c02c85a12e11f0bb123ae38d994",
+      "mode": "100644",
+      "bytes": 9508,
+      "content_sha256": "5e0add2f2e1bb1ea36629c125cc98ab6d1628806257842f89270a30957c6ace5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_burst_exclusion_replays.py",
+      "blob": "458ee07125c4167e32c5140971ac03664dbd99a3",
+      "mode": "100644",
+      "bytes": 20883,
+      "content_sha256": "78b17572d4655e2bcc2094498ba03c36bbd8f9875b1ac544e8dc52dce0f92c15",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_classifier_threshold_probes.py",
+      "blob": "34d03dcf4b52967f1d31cc16252bd49cb5bc544a",
+      "mode": "100644",
+      "bytes": 5730,
+      "content_sha256": "f26f556b9efcc934a111d84ab32444cbb3714c036aa9c88ceed741d8f5fb2593",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_competitor_inhibition_dynamics.py",
+      "blob": "58ab8cc9a18bb6441c6f91523fc9fb17a338443e",
+      "mode": "100644",
+      "bytes": 6950,
+      "content_sha256": "a44e05bf5558f7ad9c0a6c55cb04dc6c399853973e66c7579ae666d3f18c4a95",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_dendrite_length_threshold_variants.py",
+      "blob": "e5f286711b8c39cb08f02a3f3ae5ef0845e74275",
+      "mode": "100644",
+      "bytes": 2150,
+      "content_sha256": "93a42901c51565745bae76ba56f2aba3c959c9ff486026be7d065617b50778cc",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_learner_incremental_type_matched.py",
+      "blob": "77fdd3e00bb9e8031e010b76bff9a133a0c8770c",
+      "mode": "100644",
+      "bytes": 9481,
+      "content_sha256": "71e89b6f7288f01165cf7af6b14afa426ca10f5d627c265d3c4b9e59b5772d1c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_learner_threshold_sweep.py",
+      "blob": "12a2065b124f330087bb13bbeb1d1db53ce64c5c",
+      "mode": "100644",
+      "bytes": 3737,
+      "content_sha256": "0ad21b14f7c4c15fe4199c2e2155da9338b7eb89c32a69187d5d517e053a87a3",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_trainer_threshold_sweep.py",
+      "blob": "ef51fa7123b8b1277f41fbe5e12a1701623ecdd9",
+      "mode": "100644",
+      "bytes": 4977,
+      "content_sha256": "f847e3715b4f0fc5b57cd05378051be2e138781c4712a116082093d173444862",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/prepare_type_matched_sweep.py",
+      "blob": "f56ceb2a8d666b45edfb09bb4e126b50dcfb7ab3",
+      "mode": "100644",
+      "bytes": 4856,
+      "content_sha256": "fe4bc1fd813ff030c5ac570513128b6dca32a96d1f4950491ed54e64a8092f53",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/ClassifierDynamicsAudit_20260928/run_burst_excluded_batch.py",
+      "blob": "04656e30b05cae2fff02b55724e89649af0f92a0",
+      "mode": "100644",
+      "bytes": 10238,
+      "content_sha256": "c68093a0f2d9357f86258e9d493c6025b8d5febe1393760ad1549daa7c946592",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/NNeuronTrainingReplay/evaluate_iris_classifier_output.py",
+      "blob": "e695fcc778e7d3438ef1e2bd511e620f7dce0ac5",
+      "mode": "100644",
+      "bytes": 5897,
+      "content_sha256": "cec63f3af825215903a58c4c05a41a650b7fa57738be977b228257f3d34845e1",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/runs/T3_H3_soft_vs_strip.py",
+      "blob": "b172ed6ed6acae507fdadd15c652e3200cb1c49b",
+      "mode": "100755",
+      "bytes": 4681,
+      "content_sha256": "de68c27eb443d95afc145d4494764363d6d863f0ee775d9dfbf1200876a81c31",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/_repro/runs/T3_H4_autoscale.py",
+      "blob": "74c9a4b76e47e0721d7c80dd5deb844f2fd07c9a",
+      "mode": "100755",
+      "bytes": 5482,
+      "content_sha256": "4d4ea5055117ab331b5390c356e5551430ad9ccb63739d113d5194c24093af72",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/apply_gold_retest.py",
+      "blob": "15a3eb8e450f124679e803f09b2b98a9a4305b97",
+      "mode": "100755",
+      "bytes": 5220,
+      "content_sha256": "86f6dbadd167646b88001f4175aa2f21f09364c1c44c1ea0fd695f806c7bb675",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/apply_softcold_rcs.py",
+      "blob": "68add866566680860a21346d7fbbb3e0d714648d",
+      "mode": "100644",
+      "bytes": 6034,
+      "content_sha256": "4c5fb3d781ac3861ce3b9dfbdca0d13553403f3826a37f7b8d8dee668567191d",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/apply_softcold_rcs_to_registry.py",
+      "blob": "240661c24cdcfcc099a509e6cb99118ec5ce6393",
+      "mode": "100644",
+      "bytes": 11570,
+      "content_sha256": "4f9cf12558509cbf789864da43b699c16e678decb343a6eb6eb40ae73fb3d0cc",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/audit_structtrain.py",
+      "blob": "bce729b35a858589728b376440c670b850a389a1",
+      "mode": "100755",
+      "bytes": 14897,
+      "content_sha256": "fd1e34392e184fa15067c970e7f7d58b94f7f8ba7b3005da9579efca56a53771",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/audit_timelearner_history.py",
+      "blob": "3e24b8c093fcf58cc5a8d14d49a1d2463a0cb95f",
+      "mode": "100644",
+      "bytes": 24685,
+      "content_sha256": "82904e93af748b6c5a6222ea136ee4232e7d815bbcece617e9f0426773e4c318",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/build_timelearner_matrix.py",
+      "blob": "230e0455a1d3fe75768926d8283d965cff6e2e6b",
+      "mode": "100644",
+      "bytes": 58086,
+      "content_sha256": "039900a57b0b91e5e1bbdcc83717a3d9915c45c137daa26333882a3e867992c8",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/commit_timelearner_matrix_wave.py",
+      "blob": "660eab777a3ae4d798ebac908c06afd9e145edfb",
+      "mode": "100755",
+      "bytes": 7222,
+      "content_sha256": "5187948626df465224c5771957e24c0d97757c4ce495ecc98cd95b88d44531d5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/diag_psi01_sync_as_keep.py",
+      "blob": "8ed79057f0e4fc69137e8a441d315a125c04a0f2",
+      "mode": "100644",
+      "bytes": 4681,
+      "content_sha256": "609568d09e16a3379068d227ab625679deae054f94a854a1e51ada30a60750bc",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/evaluate_selectivity_csv.py",
+      "blob": "629151d526dee94e7c8a2d5f54f133cb9245bd99",
+      "mode": "100755",
+      "bytes": 385,
+      "content_sha256": "a2f4ecdc660c6059ff157ddecf82ef5d100c550405fd227afeed5e07ccbf327c",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/generate_timelearner_chart_workbook.mjs",
+      "blob": "e2a03efd7df09861870b7f17ad9d6f0fc8e79a9a",
+      "mode": "100644",
+      "bytes": 7084,
+      "content_sha256": "bc43844487ff0db7329b182e37b0ebe04f2af04b2f63132a5fe06bf00d8e3d24",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/generate_timelearner_visual_report.py",
+      "blob": "c865717e256c999e0a633e008a1f710db0b6c12e",
+      "mode": "100644",
+      "bytes": 34156,
+      "content_sha256": "842ce12bd8cb6f7db406cf4c3ddc35dee9b8d7effa770718a35c90fa47e10c78",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/gold_retest_batch.py",
+      "blob": "69a3306481266a4365ded04b92483537ec0a4e95",
+      "mode": "100755",
+      "bytes": 10691,
+      "content_sha256": "89fc3d53acd55261c0ae678a2b6e9620a70827c8ee8f3fb829614e646ed468d5",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/matrix_run_safety.py",
+      "blob": "8b6d010bfb4158819eb84b6611772d859200bb14",
+      "mode": "100644",
+      "bytes": 9980,
+      "content_sha256": "d6c30d0723940a7293506d182310d286f1ecdcf60a494157b954f221cc2dec50",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/merge_gold_retest.py",
+      "blob": "893a0a5347a8a6fa5e5c5523177514d9c06456a3",
+      "mode": "100644",
+      "bytes": 5725,
+      "content_sha256": "b2ef2d5ff945e522eea9e4cbf8ab9849a15fee151228f8c76428230420c08f64",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/migrate_experiments_softcold_columns.py",
+      "blob": "852b65ac0e25ffc8ebe0f042d337c9c260a44bd3",
+      "mode": "100644",
+      "bytes": 12562,
+      "content_sha256": "151a149538009c06edba91de9c816e35da1ee82780f899a88b522d432742bd6a",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/migrate_registry_working_lastcheck.py",
+      "blob": "37350a13e7fb790388bd938bd5fe0296acc38a5c",
+      "mode": "100644",
+      "bytes": 6046,
+      "content_sha256": "ecb990a3daeafe207220638253d661b0a390dcae07b23802cc812b9da7b881ae",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/pack_statistic_logs.py",
+      "blob": "ddeb2bf9df5a6fa46a55519a82fbcb9d12c6d923",
+      "mode": "100644",
+      "bytes": 6539,
+      "content_sha256": "beca22c2ec04f21815fc03801ee251f8d4d4419d490330d61a07c2b620941a61",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/patch_phase6_tn_estdelay.py",
+      "blob": "9af4d4b24548158b93604aa484c8d6a6e62de952",
+      "mode": "100755",
+      "bytes": 1937,
+      "content_sha256": "5507866bae130cbc6b1aa8caab0e4526b8ccfba7802a6882211ba54791af05c4",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/patch_phasea_psi_estdelay.py",
+      "blob": "5bca88f7625344653bc2df47958996811c48f863",
+      "mode": "100755",
+      "bytes": 4043,
+      "content_sha256": "22159cf971c617e037f0c38406bc6fc8b7646788579de3a99d00377e41fb6664",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_validate.py",
+      "blob": "354ffc6d0b1a0e96dbca34ffaee12399a9667b04",
+      "mode": "100644",
+      "bytes": 43971,
+      "content_sha256": "40c8f6256c7a7ab5b4eff1296e7d11a5f7b19dcb02f1e8c1b8e5d3a1abdf8393",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/phase12_wave3.py",
+      "blob": "da737e5749ef7302523581e7ef26d4292290b441",
+      "mode": "100644",
+      "bytes": 39787,
+      "content_sha256": "61e836b5c8484d29dbe56ba63e1d47cce8fb78f07c36a71349ddb16dadea1d93",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/posttune_verify.py",
+      "blob": "7d689679222976b9859d5f3b03eded5568ee61fa",
+      "mode": "100644",
+      "bytes": 143052,
+      "content_sha256": "42f5788bca468a4ee311eae282e7a5f0b7e522c2269df3401996bd496cf136d1",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/prepare_initial_rs_w49.py",
+      "blob": "918e111bfc8e7b2115ab27b8193609a8836d36a0",
+      "mode": "100644",
+      "bytes": 5947,
+      "content_sha256": "a9921d878d97fdcc1498deac468226f01f891fa26d56393fb17275b5dd65350b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/r0_train_test_ltz_replay.py",
+      "blob": "457d99b6ca749801f7a87b41c64a5d8613bc96a4",
+      "mode": "100644",
+      "bytes": 3353,
+      "content_sha256": "90a8345724dcec95fc87e7c9c56ed0c9801fdcf1aad97a44c5d68377d8964d1e",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/repro_cold_harness.py",
+      "blob": "3f8361bb8d2be23ae2ca795ce5997a4aeb2e6e0e",
+      "mode": "100644",
+      "bytes": 16105,
+      "content_sha256": "95b5888e06ea02ea3d5892c1aeedd6b1a2ecfc5690144414db43f09e60b12102",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/repro_cold_lib.py",
+      "blob": "159958573d91072e29d182714d7bc9eebd04ef56",
+      "mode": "100644",
+      "bytes": 45668,
+      "content_sha256": "53c2d599a723dcb8ca3edcf0d130aa58f7062e4c07c88d4999b0a9ca00d41cc4",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/rerun_all_tests.sh",
+      "blob": "4093800def2fbdee70ffe39738608ef9e14a7dfa",
+      "mode": "100755",
+      "bytes": 4096,
+      "content_sha256": "6264aba65e7555db3ea2abd46d6686316a28cde05a54b90f44498aa58580e7a6",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/run_host_wave_loop.sh",
+      "blob": "49a64580345c19ed0e20171595f8c2b65ae98a3a",
+      "mode": "100755",
+      "bytes": 3283,
+      "content_sha256": "d5aa4be6aa81bc36988361c880689c23509bf4335b7d5fd6b689a14237a86770",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_campaign.py",
+      "blob": "2a93f6fdec041bf2e893ce3088cf105b0b394648",
+      "mode": "100644",
+      "bytes": 16705,
+      "content_sha256": "c1fe399d471d69eb5d25c12989e8d6cbba5ed84a9e3906dcf6b6091b4da44707",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_campaign.sh",
+      "blob": "9103245155322488a0a84df6b7912b4b30e7c8bf",
+      "mode": "100755",
+      "bytes": 10526,
+      "content_sha256": "2164f00179ff95a41266c6c774c5db3ab93c22556e696016e6f02a87d9f597de",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/run_timelearner_matrix_queue.py",
+      "blob": "9b238a6b864c67fd0e47deea52d93bc91561e0f9",
+      "mode": "100755",
+      "bytes": 48623,
+      "content_sha256": "fcb1df8e4ed063a2af8418010c2abcfd1269f44a1488eeef875219804ffb7e89",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/selectivity_metrics.py",
+      "blob": "423b96dbeadb440e442679696be243bf6b9b11e8",
+      "mode": "100755",
+      "bytes": 24180,
+      "content_sha256": "e902be964c9fde2627ca3742ad5320ee0f2489b0f95296b8ff02f0610206f266",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_full49_snap_table.py",
+      "blob": "e40403b6f506e9e44af9988866243d24d555fc94",
+      "mode": "100755",
+      "bytes": 9298,
+      "content_sha256": "030cb6b77ebe7929d7b029dff1e132d3d06bef84f16386eddf32f80e11bc5247",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/softcold_smoke_growth.py",
+      "blob": "f0a4f8138e402e1ee3da800a953f6b3c0ce84145",
+      "mode": "100644",
+      "bytes": 7649,
+      "content_sha256": "d4abfd26bd167f1c9767b5510b33ec2be75257e0bd53f04f6fd005e1ae664043",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/test_matrix_run_safety.py",
+      "blob": "fa22cd3d10dc37265727ff6c9e2113116e8ad172",
+      "mode": "100644",
+      "bytes": 33782,
+      "content_sha256": "d190190ea14dec9194e184a94a0d354e1fc30bbcbfe830d7c5a4c697223f26d1",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/test_timelearner_matrix.py",
+      "blob": "0e4b0011af3861c2b1436689839e3db581296a29",
+      "mode": "100644",
+      "bytes": 47809,
+      "content_sha256": "b7d7bc66b0bfdbf74fa5c81682a116d80f20fa9452c1882b837587c5f5c51246",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/test_timelearner_matrix_report.py",
+      "blob": "a2985bf3964904abbdfee06a3dc674ed0fb465ef",
+      "mode": "100644",
+      "bytes": 3534,
+      "content_sha256": "d28719368e7684d87b72d36053c99f9ceefaefac48395aa07986c5626f108eec",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/tests/__init__.py",
+      "blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644",
+      "bytes": 0,
+      "content_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/tests/test_link_hygiene_unit.py",
+      "blob": "c67b59a125920f617d0e975f96f5bd7898221a78",
+      "mode": "100644",
+      "bytes": 4487,
+      "content_sha256": "595548cc94905659636c196e43c4048f358e48f1ed3944119b1ff05abfb208b2",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/tests/test_observation_contract.py",
+      "blob": "73a805f5a3a5aed54c2db2f5465f44feb4aeb60a",
+      "mode": "100644",
+      "bytes": 4745,
+      "content_sha256": "f617f9f5933601b5e61a4de621e909c30c290d253190f1c8836526d26271c80b",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/tests/test_posttune_verify_unit.py",
+      "blob": "10721da3fe3d2fcf4764452ade6ee036658e40ac",
+      "mode": "100644",
+      "bytes": 50190,
+      "content_sha256": "131b7e350c922b479f204a7e2c2b85590ca86c7a8aea385d85d7fb8eabe99065",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "structtrain"
+        ],
+        "content_tokens": []
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/tests/test_softcold_fix_unit.py",
+      "blob": "8bb4083f282ae4d6164e5552bade0a1cc5f87664",
+      "mode": "100644",
+      "bytes": 3724,
+      "content_sha256": "181cf37150cce507286e378f87d04a963c131fe2cbe6261862ff9f4107217ea2",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/timelearner_matrix.py",
+      "blob": "46efb6444f7a09c545ca65afd8104b03acb83d46",
+      "mode": "100755",
+      "bytes": 92962,
+      "content_sha256": "e79f3e009b8e18045f6447b98aab20f5bade0af6afd0d4d280aefcd067b74daa",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/update_timelearner_matrix_report.py",
+      "blob": "7b8d06010331629c7ca7513ffc80496f3f944d93",
+      "mode": "100755",
+      "bytes": 56924,
+      "content_sha256": "aeb02b599f60e40a6396bb62d1d105c54f95f7ec9ca73ac83356784646eb7ff7",
+      "symlink": false,
+      "disposition": "review_required"
+    },
+    {
+      "selection_reasons": {
+        "path_tokens": [
+          "timelearner",
+          "structtrain"
+        ],
+        "content_tokens": [
+          "timelearner",
+          "structtrain"
+        ]
+      },
+      "repository": "Bin",
+      "commit": "99f58da9296a794374cef679bbb878cb62af979a",
+      "old_path": "Configs/SpikeSamples/StructTrain/scripts/watch_timelearner_matrix_commits.sh",
+      "blob": "181a18f551fc0e72577582bc6663d9f54d45be31",
+      "mode": "100755",
+      "bytes": 4573,
+      "content_sha256": "6196ccaf32f2fffdd4cbee2a2e6a4405d8d55bb222bd0004037c3e567808c5da",
+      "symlink": false,
+      "disposition": "review_required"
+    }
+  ],
+  "limitations": [
+    "Path/content token selection is a lower bound; imports, computed names, nonexecutable unknown suffixes and external callers require separate review.",
+    "Content matches include comments and string literals; selection never proves active use or authorizes deletion.",
+    "Untracked/ignored files and inherited Rdk properties are outside this committed catalog.",
+    "Default expressions are source evidence, not effective runtime values.",
+    "Semantic property review remains explicit; no inferred lifecycle guarantees."
+  ],
+  "unchanged_property_catalog": {
+    "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+    "file_sha256": "0b76d94233696dff368bb8bed721b6dd50b72a654f959f24a86e3665c42b6467",
+    "properties": 217,
+    "exact_property_and_source_arrays_equal": true
+  },
+  "checkout_status_context": "Temporary metadata-only sparse Git clones using local object handles; no user working file or SDK status attestation. No models or numerical tests executed locally.",
+  "source_code_acceptance": "M40 fifteen tests passed; Elder gate queued; selector code is not merged into develop",
+  "whole_migration_attested": false,
+  "scientific_verdict": null
+}
