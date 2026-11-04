@@ -38,7 +38,28 @@ L `[2,3]`, Rs `[86,172]` МОм, четыре кандидата, нулевая
 Остальные heterogeneous, capacitance, default-tolerance и transport fixtures
 не меняют свою постановку. Legacy отрицательные cases остаются отдельными.
 
+## Проверка на Elder
+
+Native root `b82f76e2fe543acf25d6c3076abbd864f965b3a8`, readers
+`59f28159bf5518d01871062fb90813ebd3d55cab`. Все8 native cases прошли за403.122s:
+четыре реальные Exact source models дошли до калибровки; два schema2 случая
+также до переноса в другого владельца; четыре legacy случая сохранили
+budget_exhausted без certificate. Семь independent readers прошли без
+failures/errors/skips и проверили весь набор, фактические target/foil окна,
+сохранённые параметры поиска и отсутствие подмены stopped→completed.
+
+Proof `3824e7eb2068812c94af33ef2775a7c25f8556f9`:
+`Reports/StructTrain/TimeLearner/s05-calibration-preconditions-elder-a1`.
+Независимо проверены все812 native и8 reader archive members,438 native
+source hashes и reader source hashes. Native primary3,862,024B;
+reader primary56,408B. Проверка восьми source packages нашла ровно4 completed
+и4 stopped,4 calibrated packages и2 distinct-owner transfer records:
+[CalibrationFixtureNormalVerification.json](CalibrationFixtureNormalVerification.json).
+
 Код подготовлен в отдельной ветке от develop с merge prerequisites через
-`--no-ff`. Приёмка ещё открыта: нужны восемь адресных native cases на Elder и
-M40 ASan, фактические traces/сертификаты/калибровка/import и независимые readers.
-Научная классификация stock четырёхвходовой модели этим не проверяется.
+`--no-ff`. ASan-приёмка ещё открыта. Первая подготовка M40 остановлена до
+checkout/build, потому что old runtime ещё использовался отдельной cold
+regression. После закрытия её owner запущен новый readback
+`s05-calibration-preconditions-asan-a2`; исходный отказ a1 сохранён, не считается
+ошибкой алгоритма и не заменён результатом a2. Научная классификация stock
+четырёхвходовой модели этим набором не проверяется.
