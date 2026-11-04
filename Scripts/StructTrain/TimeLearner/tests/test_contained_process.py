@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import shutil
 import time
 import unittest
 
@@ -23,8 +24,22 @@ class ContainedProcessTest(unittest.TestCase):
         self.addCleanup(self.close_units)
 
     def close_units(self):
+        evidence = os.environ.get('TIMELEARNER_CONTAINED_EVIDENCE_DIR')
+        errors = []
         for output in reversed(self.outputs):
-            stop(output)
+            try:
+                final = stop(output)
+                (output/'test-final-membership.json').write_text(json.dumps(final, indent=2))
+            except Exception as error:
+                errors.append(str(error))
+        if evidence:
+            destination = Path(evidence)/self._testMethodName
+            destination.mkdir(parents=True, exist_ok=False)
+            for path in self.root.rglob('*'):
+                if path.is_file() and (path.suffix in ('.json', '.log', '.py') or path.name in ('child', 'start.ack')):
+                    target = destination/path.relative_to(self.root);target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(path, target)
+        if errors:raise RuntimeError('; '.join(errors))
 
     def manifest(self, name='sleep.rs2', binary='/bin/sleep'):
         from .test_process_runner import OwnedProcessTest
