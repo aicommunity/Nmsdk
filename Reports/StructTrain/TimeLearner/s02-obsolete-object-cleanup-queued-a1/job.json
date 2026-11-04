@@ -1,0 +1,86 @@
+{
+  "kind": "timelearner_obsolete_compiled_cleanup_queue",
+  "schema_version": 1,
+  "recorded_utc": "2026-11-04T19:10:06.895366+00:00",
+  "owner": {
+    "pid": 2327500,
+    "start_ticks": "338905221"
+  },
+  "kernel_identity_live": true,
+  "state": {
+    "state": "waiting_for_live_whole_group_closure_and_release",
+    "resource": {
+      "kind": "timelearner_worker_dependency_state",
+      "schema_version": 1,
+      "job_id": "s10-managed-live-routing-normal-a3",
+      "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a3-container",
+      "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+      "closure": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "0d870c48332febfa09c15e6359292b0c83503df6e874ffebd7f351934912fdad",
+          "unit": "timelearner-8aa13f2b-e170-4be0-bd20-d578a239bac6.service",
+          "invocation_id": "821d815591c746148ffd13cfc553b7fd",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8aa13f2b-e170-4be0-bd20-d578a239bac6.service",
+          "initial_main_pid": 2311267,
+          "initial_start_ticks": "338873654",
+          "sha256": "7ff1578b174366e4e547a67421c499fc9bb2dd989e4a314e05a43be7ca824c21"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "2311267",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8aa13f2b-e170-4be0-bd20-d578a239bac6.service",
+          "MemoryMax": "536870912",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 8aa13f2b-e170-4be0-bd20-d578a239bac6",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "821d815591c746148ffd13cfc553b7fd"
+        },
+        "memory_max": 536870912,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "reservation_optional": true,
+      "reservation_state": null,
+      "reservation_token": null,
+      "state": "pending",
+      "reason": "dependency_worker_group_still_live",
+      "successful_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "deletion_started": false
+  },
+  "targets": [
+    "/home/user/timelearner-refactor/build-test-switch-off-b3",
+    "/home/user/timelearner-refactor/build-test-switch-on-b3"
+  ],
+  "allowed_suffixes": [
+    ".o",
+    ".a",
+    ".obj",
+    ".pch"
+  ],
+  "preserve": [
+    "all other build files",
+    "CMakeCache",
+    "runtime files",
+    "source",
+    "experiment models and observations"
+  ],
+  "native_models_executed": false,
+  "cleanup_not_yet_attested": true,
+  "worker_source_sha256": "383c2e5bf874b7fd9ae34f4772d463d04a7db4ea44d52d094671a00697436a51",
+  "whole_plan_complete": false
+}
