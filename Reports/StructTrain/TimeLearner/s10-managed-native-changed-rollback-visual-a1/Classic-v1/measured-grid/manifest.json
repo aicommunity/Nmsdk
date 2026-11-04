@@ -1,0 +1,136 @@
+{
+  "kind": "timelearner_calibration_transaction_visual_report",
+  "schema_version": 1,
+  "status": "diagnostic",
+  "transaction_status": "calibrated",
+  "source_transaction_sha256": "7314b21c4513e2bacd9c4f6418f462b6dc9e897880ca3d93feff52f32a49677d",
+  "matrices": [
+    {
+      "name": "candidate-0000",
+      "model_revision": "28911b1d1f8f86b3f1d21f59ff92aa16f51967ad1f53d77541766635003b380f",
+      "threshold": 0.0037147266773602363,
+      "trials": 4,
+      "report": "candidate-0000/index.html",
+      "result": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 8,
+        "files": 370,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "name": "candidate-0001",
+      "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+      "threshold": 0.004780132099175549,
+      "trials": 4,
+      "report": "candidate-0001/index.html",
+      "result": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 8,
+        "files": 370,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "name": "candidate-0002",
+      "model_revision": "bea4a1b525f7648b77e0a67755d40b289d54791166d6788554d398ae8fb83eb9",
+      "threshold": 0.005976069123634809,
+      "trials": 4,
+      "report": "candidate-0002/index.html",
+      "result": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 8,
+        "files": 370,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "name": "candidate-0003",
+      "model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+      "threshold": 1,
+      "trials": 4,
+      "report": "candidate-0003/index.html",
+      "result": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 8,
+        "files": 370,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "name": "fresh-confirmation",
+      "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+      "threshold": 0.004780132099175549,
+      "trials": 4,
+      "report": "fresh-confirmation/index.html",
+      "result": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 8,
+        "files": 370,
+        "evaluation_verdict": null
+      }
+    }
+  ],
+  "completed_matrices": 5,
+  "trial_soma_pairs": 40,
+  "runtime": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "evidence_audit": {
+    "schema_version": 1,
+    "transaction_evidence_consistent": true,
+    "status": "calibrated",
+    "diagnostic_only": false,
+    "negative_status_verified": false,
+    "calibrated": true,
+    "measured_candidates": 4,
+    "selected_index": 1,
+    "package_audit": {
+      "schema_version": 1,
+      "calibration_evidence_consistent": true,
+      "calibrated": true,
+      "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+      "threshold": 0.004780132099175549,
+      "source_audit": {
+        "schema_version": 1,
+        "source_recognition_sha256": "5e29cbbcb935cc39c312e4dc81383f0d7fa17512f72c66c252874adf6222d844",
+        "model_revision": "195fdda1b55c0c03485fbd0d28ff3e90f52da4298de759d397a46c566b30af2a",
+        "threshold": 0.004780132099175549,
+        "threshold_derivation_verified": true,
+        "source_training_and_conversion_checked": false,
+        "source_audit": null,
+        "native_import_verified": false,
+        "calibrated": false,
+        "evaluation_verdict": null
+      },
+      "native_execution_verified": false,
+      "native_import_verified": false,
+      "grid_selection_verified": false,
+      "statistical_independence_verified": false,
+      "evaluation_verdict": null
+    },
+    "native_execution_verified": false,
+    "owner_restoration_verified": false,
+    "partial_observations_validated": false,
+    "statistical_independence_verified": false,
+    "evaluation_verdict": null
+  },
+  "source_primary_checked": false,
+  "calibration_claim": false,
+  "incomplete_matrix_plotted_as_complete": false,
+  "visual_acceptance_complete": false,
+  "limitations": [
+    "SI soma units unverified",
+    "visual acceptance pending",
+    "incomplete active probes retained in primary transaction; no complete-response plot inferred"
+  ],
+  "evaluation_verdict": null
+}
