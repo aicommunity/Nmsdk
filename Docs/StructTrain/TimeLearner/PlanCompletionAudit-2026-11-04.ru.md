@@ -206,3 +206,11 @@ High100 controls: каждый TP0/FP0/FN2/TN2. Low0.0001 controls: каждый
 TP0/FP1/FN2/TN1 плюс ранний target response. Это отрицательные LT engineering
 контроли, не августовский stock replay и не science PASS. Молчание означает
 отсутствие LT spikes при ненулевой soma response. Этап11 по-прежнему частичный.
+
+[Native process policy portable checks](PipelinePolicyPortableAcceptance.ru.md):
+15/15 на M40,54 archive members/279 source blobs, повторное чтение двух
+реальных C++ process archives normal/ASan без нового расчёта. Pending worker
+integration source1fd77d34f не включён в develop. Перед production promotion
+нужны actual native job tests и учёт отдельных systemd units в lease release/
+recovery, с registration-before-launch и fault-проверкой. Whole cgroup
+управляющего worker сама по себе не доказывает завершение созданных им units.
