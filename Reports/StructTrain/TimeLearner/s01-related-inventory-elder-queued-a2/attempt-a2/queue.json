@@ -1,0 +1,55 @@
+{
+  "dependency": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s10-managed-live-routing-normal-a2",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a2-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "1c8aaeffb42cf033c1cc7c59d0ce68ffbfb1c52102eb3672f4e98242893bd4ac",
+        "unit": "timelearner-5bc725d6-6c72-4278-928c-5004a42457a0.service",
+        "invocation_id": "06721fcd0d09427ba3749de919cafe4d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5bc725d6-6c72-4278-928c-5004a42457a0.service",
+        "initial_main_pid": 2205774,
+        "initial_start_ticks": "338081496",
+        "sha256": "e7bf4e02cd0e84a7f404b37ff210838c1a65f51d1a1c394f439e4d636c291cf9"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "2205774",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5bc725d6-6c72-4278-928c-5004a42457a0.service",
+        "MemoryMax": "536870912",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 5bc725d6-6c72-4278-928c-5004a42457a0",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "06721fcd0d09427ba3749de919cafe4d"
+      },
+      "memory_max": 536870912,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "reservation_optional": true,
+    "reservation_state": null,
+    "reservation_token": null,
+    "state": "pending",
+    "reason": "dependency_worker_group_still_live",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "elapsed": 45.10251828143373,
+  "tests_started": false
+}
