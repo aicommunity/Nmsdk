@@ -178,3 +178,9 @@ memory cap4GiB и preflight MemAvailable>=36GiB. Он не запускает na
 Работает отдельный повтор normal44 root8021301e после явного исправления
 fixture expectations; old runtime/primary сохранены. Это pending native
 приёмка, не completed joint algorithms. Temporal report этих probes пока pending.
+
+Совместный [ASan build-only9f](JointASanBuild.ru.md) завершён и независимо
+проверен:65 members,510 source blobs совпадают с normal9f, четыре instrumented
+target flags и закрытая4GiB cgroup. Native gates0. Идёт отдельная инкрементальная
+build-only подготовка corrected8021301e в новом runtime; K1 продолжает работать.
+Компиляция и последующая численная/native приёмка учитываются раздельно.
