@@ -136,3 +136,11 @@ rootcode и Pulsecode не имеют alternates; Docs/Reports явно не м�
 Исходные данные, библиотеки, `_deps` и Git object donors сохранены.
 M40 имел84GiB свободно на system и393GiB на Data. Повторное утверждение,
 что последняя ошибка подготовки вызвана SSH, не подтверждено: SSH работает.
+
+Позднее04.11 резерв a1 действительно освобождён через проверенный API;
+точный владелец и released ledger сохранены в Git. [Подробный статус](JointPreparationRecovery.ru.md)
+фиксирует работающую normal a3 SDK compilation с тем же joint root9f92a40b,
+семью чистыми gitlinks и без alternates в новой копии. Native42 gate ещё
+не завершён. M40 K1 targeted34 прошёл по runner verdict,262 regression
+работает; полная primary/reader приёмка остаётся открытой. Ни один из этапов
+1–12 этими инфраструктурными подэтапами целиком не закрывается.
