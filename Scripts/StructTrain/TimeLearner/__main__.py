@@ -138,6 +138,9 @@ def main(argv: list[str] | None = None) -> int:
         if operation == "diagnostic-evaluate":
             native.add_argument("--source-stopped", dest="source_solo", type=Path, required=True,
                                 help="stopped package with its original primary trial siblings; never completed Train")
+        elif operation == "probe":
+            native.add_argument("--source-stopped", dest="source_solo", type=Path,
+                                help="schema2 probe: original stopped package and primary trial siblings")
         else:
             native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
         native.add_argument("--runtime-manifest", type=Path, required=True)
@@ -237,10 +240,11 @@ def main(argv: list[str] | None = None) -> int:
     history.add_argument("--pulselib-repository", type=Path)
     history.add_argument("--output", type=Path)
     probe = commands.add_parser("probe-job", help="prepare or audit a native whole-burst characterization without training")
-    probe.add_argument("action", choices=["prepare", "analyze"])
+    probe.add_argument("action", choices=["prepare", "prepare-stopped", "analyze"])
     probe.add_argument("source", type=Path)
     probe.add_argument("--input-index", type=int)
     probe.add_argument("--trial-id")
+    probe.add_argument("--resistance-intervention", type=Path)
     probe.add_argument("--output", type=Path, required=True)
     fixed = commands.add_parser("fixed-geometry-resistance", help="gate stock Rs controls on the complete stopped model graph")
     fixed.add_argument("action", choices=["prepare", "run"])
@@ -264,15 +268,24 @@ def main(argv: list[str] | None = None) -> int:
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "probe-job":
-        from .native_characterization import prepare_job, audit_execution
+        from .native_characterization import prepare_job, prepare_stopped_job, audit_execution
         from .native_evidence import EvidenceError, load, require
         from .native_calibration_worker import _write
         try:
             if args.action == "prepare":
                 require(args.input_index is not None and args.trial_id is not None, "probe_identity_required")
+                require(args.resistance_intervention is None, "cold_probe_prepare_has_no_import_intervention")
                 result = prepare_job(load(args.source), args.input_index, args.trial_id)
+            elif args.action == "prepare-stopped":
+                from .stopped_evidence import load_case as load_stopped_case
+                require(args.input_index is not None and args.trial_id is not None, "probe_identity_required")
+                changes = None
+                if args.resistance_intervention is not None:
+                    from .native_evidence import load_json
+                    changes = load_json(args.resistance_intervention)
+                result = prepare_stopped_job(load_stopped_case(args.source), args.input_index, args.trial_id, resistance_intervention=changes)
             else:
-                require(args.input_index is None and args.trial_id is None, "probe_analysis_has_no_configuration_overrides")
+                require(args.input_index is None and args.trial_id is None and args.resistance_intervention is None, "probe_analysis_has_no_configuration_overrides")
                 result = audit_execution(args.source)
             _write(args.output, result)
             print(json.dumps(result, ensure_ascii=False, allow_nan=False));return 0
@@ -347,7 +360,11 @@ def main(argv: list[str] | None = None) -> int:
         from .native_evidence import EvidenceError, require
         from .native_pipeline_worker import run_job
         try:
-            require((args.source_solo is None) == (args.command in ("train", "preflight", "probe")), "pipeline_source_required_only_for_export_evaluate")
+            if args.command == "probe":
+                from .native_evidence import load
+                require((args.source_solo is None) == (load(args.specification)['schema_version'] == 1), 'probe_source_required_only_for_import')
+            else:
+                require((args.source_solo is None) == (args.command in ("train", "preflight")), "pipeline_source_required_only_for_export_evaluate")
             result = run_job(args.command, args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
