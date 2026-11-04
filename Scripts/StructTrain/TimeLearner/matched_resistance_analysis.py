@@ -29,6 +29,14 @@ def _trace(folder, stem='probe_trial_1'):
     return packet, spec, samples
 
 
+def compare_probe_inputs(control, control_spec, a, changed, changed_spec, b):
+    times_match = len(a) == len(b) and [v['time'] for v in a] == [v['time'] for v in b]
+    windows_match = control_spec['begin'] == changed_spec['begin'] and control_spec['end'] == changed_spec['end']
+    stimulus_match = times_match and [v['stimulus'] for v in a] == [v['stimulus'] for v in b] and control['observation']['stimuli'] == changed['observation']['stimuli']
+    return {'absolute_sample_times_equal': times_match, 'windows_equal': windows_match,
+            'actual_stimulus_rows_and_events_equal': stimulus_match}
+
+
 def analyze(directory):
     directory = Path(directory).resolve(strict=True)
     rows = load(directory/'index.json')['rows']
@@ -46,9 +54,8 @@ def analyze(directory):
         changed, changed_spec, b = _trace(selected['resistance'])
         # Equal absolute times also control generator sampling/rounding at the
         # scheduler boundary. Merely shifting a picture to onset is insufficient.
-        times_match = len(a) == len(b) and [v['time'] for v in a] == [v['time'] for v in b]
-        windows_match = control_spec['begin'] == changed_spec['begin'] and control_spec['end'] == changed_spec['end']
-        stimulus_match = times_match and [v['stimulus'] for v in a] == [v['stimulus'] for v in b] and control['observation']['stimuli'] == changed['observation']['stimuli']
+        inputs = compare_probe_inputs(control, control_spec, a, changed, changed_spec, b)
+        times_match, windows_match, stimulus_match = (inputs[k] for k in ('absolute_sample_times_equal', 'windows_equal', 'actual_stimulus_rows_and_events_equal'))
         source_warm_equal = (selected['matched-control']/'baseline_trial_1.csv').read_bytes() == (selected['resistance']/'baseline_trial_1.csv').read_bytes()
         replay_warm_equal = (selected['baseline']/'probe_trial_1.csv').read_bytes() == (selected['matched-control']/'baseline_trial_1.csv').read_bytes()
         runtime_match = load(selected['matched-control'].parent/'process/runtime.json')['runtime_fingerprint'] == load(selected['resistance'].parent/'process/runtime.json')['runtime_fingerprint']
