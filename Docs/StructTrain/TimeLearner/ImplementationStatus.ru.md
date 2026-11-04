@@ -248,3 +248,10 @@ ControllerVersion=2, новые builders, длинные окна/assigned-wave 
 динамические Rs domains и полный Train→Test остаются открытыми. Поэтому прежняя
 строка «полный native structural Train не реализован» не означает отсутствие
 этого ограниченного рабочего API; весь этап и production-ready V2 ещё не приняты.
+
+Уточнение04.11: [предусловия калибровочных tests](CalibrationFixturePreconditions.ru.md)
+исправлены в отдельной ветке. На Elder все8 native cases и7 readers прошли:
+четыре production-derived source models получили настоящий Exact и калибровку,
+четыре прежних narrow-search cases сохранены как budget-exhausted controls.
+Два ModelSpec2 случая подтвердили distinct-owner calibrated import. Допуски
+не ослаблены; ASan-приёмка и merge в develop пока открыты.
