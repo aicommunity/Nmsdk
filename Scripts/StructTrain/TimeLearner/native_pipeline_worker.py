@@ -26,6 +26,8 @@ FIELDS = {
     "evaluate": {"owner_class", "implementation_id", "source_recognition", "maximum_model_ticks", "run_id",
                  "coverage_policy", "criterion", "trials"},
 }
+FIELDS["probe"] = {"owner_class", "implementation_id", "model", "profile_archives", "stimulus_profile", "probe",
+                   "maximum_model_ticks", "maximum_wall_seconds"}
 FIELDS["diagnostic-evaluate"] = (FIELDS["evaluate"] - {"source_recognition"}) | {"source_stopped", "conversion_spec"}
 KINDS = {"preflight": "training", "train": "training", "export": "recognition_export", "evaluate": "evaluation", "diagnostic-evaluate": "diagnostic_evaluation"}
 EXECUTION_KINDS = {"preflight": "preflight", "train": "training", "export": "conversion", "evaluate": "evaluation", "diagnostic-evaluate": "diagnostic_evaluation"}
@@ -72,6 +74,10 @@ def _audit_source(job, source_case, mode):
 @_evidence_boundary
 def validate_job(mode, job, source_case=None):
     require(mode in FIELDS and type(job) is dict, "unknown_native_pipeline_job")
+    if mode == "probe":
+        require(source_case is None, "cold_probe_does_not_import_learned_state")
+        from .native_characterization import validate_job as validate_probe_job
+        return validate_probe_job(job)
     live = mode in ("train", "preflight") and type(job.get("schema_version")) is int and job["schema_version"] == 2
     require(set(job) == FIELDS[mode] | {"kind", "schema_version", "sha256"} | ({"finalization_plan"} if live else set())
             and job["kind"] == "timelearner_native_"+KINDS[mode]+"_job" and
@@ -144,6 +150,10 @@ def _artifact_records(directory, execution):
 @_evidence_boundary
 def audit_execution(mode, directory, job, source_case=None):
     validate_job(mode, job, source_case)
+    if mode == "probe":
+        from .native_characterization import audit_execution as audit_probe_execution
+        require(load(Path(directory)/"job.json") == job, "pipeline_probe_job_changed")
+        return audit_probe_execution(directory)
     directory = Path(directory)
     execution = load(directory/"execution.json");_digest(execution)
     live = mode == "train" and job["schema_version"] == 2
@@ -299,7 +309,7 @@ def _structured_training_exit(mode, job, process, directory):
     The caller must still audit signed native data, owned runtime and the stopped
     boundary, and reject a completed-execution claim paired with exit code 2.
     """
-    return (mode in ("train", "diagnostic-evaluate") and type(job.get("schema_version")) is int and job["schema_version"] in (1, 2)
+    return (mode in ("train", "diagnostic-evaluate", "probe") and type(job.get("schema_version")) is int and job["schema_version"] in (1, 2)
             and process["execution"] == "process_error" and type(process["returncode"]) is int
             and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 
@@ -333,7 +343,7 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
     _write(inputs/"job.json", job)
     process = execute(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
         "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
-        executable.parent, output/"process", maximum_wall_seconds, cooperative_capture=mode == "preflight")
+        executable.parent, output/"process", maximum_wall_seconds, cooperative_capture=mode in ("preflight", "probe"))
     verify_runtime(runtime)
     audit = None
     if process["execution"] == "completed" or _structured_training_exit(mode, job, process, output/"native"):
@@ -380,7 +390,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
         actual = root/r["path"]
         require(actual.resolve(strict=True).is_relative_to(root) and _record(actual, root) == r, "pipeline_run_artifact_changed")
     mode = manifest["operation"];source = manifest["source_package_path"];source_case = None
-    if mode in ("train", "preflight"):
+    if mode in ("train", "preflight", "probe"):
         require(source is None, "pipeline_cold_training_has_source")
     else:
         require(type(source) is str and source in names and PurePosixPath(source).parent == PurePosixPath("input/source"),
@@ -395,7 +405,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
             process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime)) and
             manifest["source_closure"] == runtime["source_closure"], "pipeline_run_runtime_changed")
     request = load(root/"process/request.json");arguments = request["arguments"]
-    capture_arguments = (type(arguments) is list and len(arguments) == 8 and mode == "preflight" and
+    capture_arguments = (type(arguments) is list and len(arguments) == 8 and mode in ("preflight", "probe") and
                          arguments[6] == "--timelearner-capture-directory")
     require(type(arguments) is list and len(arguments) == (8 if capture_arguments else 6) and all(type(a) is str for a in arguments) and
             arguments[:6:2] == ["--app-ini", "--timelearner-"+mode, "--timelearner-output"] and
@@ -423,7 +433,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
                 process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == "launched_executable_only" and
                 process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
     audit = audit_execution(mode, root/"native", job, source_case) if auditable else None
-    if mode == "preflight" and auditable:
+    if mode in ("preflight", "probe") and auditable:
         request = load(root/"process/request.json");arguments = request["arguments"]
         if "--timelearner-capture-directory" in arguments:
             require(arguments.count("--timelearner-capture-directory") == 1,
@@ -432,7 +442,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
             require(index+1 < len(arguments) and PurePosixPath(arguments[index+1]).name == "process",
                     "cooperative_capture_argument_changed")
             require(type(arguments) is list and len(arguments) == 8 and
-                    arguments[::2] == ["--app-ini", "--timelearner-preflight", "--timelearner-output",
+                    arguments[::2] == ["--app-ini", "--timelearner-"+mode, "--timelearner-output",
                                       "--timelearner-capture-directory"] and
                     arguments[1] == runtime["app_ini"]["path"] and
                     PurePosixPath(arguments[3]).name == "job.json" and
