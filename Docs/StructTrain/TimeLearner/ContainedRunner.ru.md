@@ -64,3 +64,9 @@ program: manifest старого runtime ссылался на прежний ro
 incomplete capture, и наблюдение cgroup продолжается. Другие integrity errors
 сохраняют отказ. a5 повторно прошёл всю матрицу с реальным descendant readback.
 Ни старые результаты, ни исходные критерии не переписаны.
+
+Уточнение границы приёмки: воспроизведён [разрыв lease owner и managed unit](WorkerUnitGraphBaseline.ru.md).
+Закрытие одной worker cgroup не доказывает завершение отдельно запущенных
+user-systemd units. До учёта всего зарегистрированного графа такой recovery
+нельзя считать разрешением освобождать общий SDK/runtime нового pipeline.
+Прежние tests сохраняют силу для своего конкретного охвата.
