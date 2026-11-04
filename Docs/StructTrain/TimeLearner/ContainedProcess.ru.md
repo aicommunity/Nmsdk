@@ -15,7 +15,7 @@ tasks=..., maximum_wall_seconds=...)` принимает прежний runtime 
 Это **не** новое подтверждение фактически загруженных библиотек: runtime maps/
 cooperative capture ещё нужно соединить со штатным native pipeline.
 
-Сначала записывается signed launch intent. В службе стартует маленький launcher,
+Сначала записывается launch intent с контрольной суммой. В службе стартует маленький launcher,
 который сообщает свой PID/start_ticks и ждёт ACK. Контроллер проверяет MainPID,
 фактическую принадлежность к cgroup, InvocationID и реальные `memory.max`,
 `memory.swap.max`, `pids.max`. Binding и kernel readback записываются до ACK;
@@ -74,7 +74,27 @@ invocation/request/output и сохранность постороннего п�
 staged-crash case остановлен до нормального readback/ACK; invalid requests
 не создали службы. Все11 групп закрыты; ни одному не присвоен научный PASS.
 [Независимая проверка](ContainedProcessVerification.json) сверяет primary
-hashes, Git sources, подписи request/binding, actual limits и final membership.
+hashes, Git sources, контрольные суммы request/binding, actual limits и final membership.
 Proofs: `596301043967d832a00b23052e1d7679a8dec101` и
 `ec9315c60d99f11485be6af41a7d680847e78837`. Отсутствие утечек и весь этап10
 этими проверками не принимаются.
+
+
+## Текущая приёмка расширенного API13
+
+После первого12-case среза добавлен ранний отказ для bootstrap locations
+с `%`/`$`: systemd мог бы интерпретировать их как specifier/variable, а native
+working directory обязан оставаться буквальным. Проверка действует до создания
+output и службы. Пути с пробелами поддерживаются и проверены. Native arguments
+остаются буквальными в request JSON; ограничение относится к путям bootstrap,
+не к строкам свойств вроде `$.Soma1` в модельных аргументах.
+
+Source `ecc384214bd3a9be4bbbfc6aba102f98d1069c89` прошёл13/13 на Elder и
+M40, failures/errors/skips0. Новый negative case не создаёт службы; остальные
+11 unit attempts,10 kernel readbacks и11 final group receipts сохранены.
+Текущие proofs `d3b599128c5d17c1995ffd9c557b179166fcfde7` и
+`fc92dfd5b992b820653e7edd78c5c426ec2c18d1`, по135 members и421 source hashes
+проверены независимо. Актуальный [receipt](ContainedProcessVerification.json)
+ссылается на13-case источники; прежние12-case proofs остаются историческими.
+Ни общий dispatcher, ни автоматическое освобождение старых leases этим не
+принимаются. Работающий K1 продолжает использовать первоначальный runner.

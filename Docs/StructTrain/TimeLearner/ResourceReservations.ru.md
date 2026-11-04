@@ -116,3 +116,10 @@ Elder и M40:15 прежних плюс15 budget/schema/filesystem tests, вкл
 всех потомков после потери frontend; это ещё не автоматическое освобождение
 reservation другим владельцем. Journal binding, все crash windows и полная
 production интеграция остаются обязательными требованиями этапа10.
+
+
+Текущая приёмка contained API расширена до13/13 на каждом worker: ранний
+отказ bootstrap path expansion добавлен до любого запуска. Все12 прежних
+controls также прошли. Точные source/proof SHA и ограничения — в
+[ContainedProcess](ContainedProcess.ru.md). Recovery reservation/journal
+по-прежнему не считается подключённым.
