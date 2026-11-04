@@ -1,0 +1,30 @@
+{
+  "kind": "stock_failure_selected_overview_review",
+  "source_proof": "490998982c59367f39e7f3daa65a8028ee6069ea",
+  "scope": "eight original overview PNG files; full image cache not manually reviewed",
+  "selected_overviews_reviewed": 8,
+  "full_cache_manual_review_complete": false,
+  "acceptance": "additional_rebound_peak_detail_required",
+  "files": {
+    "Branch-threshold-low-last-valid-same-input.png": "691a6f13424a42bdf2aa4f6a0072fdc43bc210d33265681cdfdcab72fc5fdf39",
+    "Branch-threshold-low-terminal-invalid.png": "838bd5c03fb6fdfa58c4a3a24d08b3edecc6c221da111d1e931e60b13701442e",
+    "Branch-threshold-training100-last-valid-same-input.png": "6a804a6267593d661b593a157d8aa2adfae7fae109fe8ce49fa0a9577c641548",
+    "Branch-threshold-training100-terminal-invalid.png": "acc5d3e95c1aa27141b6672a9d7945d838c7b7bfa0f5694d05fc88c88b9d5d7d",
+    "Classic-threshold-low-last-valid-same-input.png": "2718ee595463ad6ec8e35221421a1c4e03a321308e8c13616aa3dc76862cffe5",
+    "Classic-threshold-low-terminal-invalid.png": "030aa75f01d694529f3a406e13609763405a8cc76934c2e99a94161df6eb02a0",
+    "Classic-threshold-training100-last-valid-same-input.png": "2a762bbc35c13440d7756884491b41409178f5ccf9fd4ede20d3df661068c9b1",
+    "Classic-threshold-training100-terminal-invalid.png": "13eaafe8c955c8cd27378619d8010b7da6b427a4f6e1a8f5d933c0774283bd3f"
+  },
+  "findings": [
+    "All eight overviews preserve visible actual input pulses and per-comparison common Y scales.",
+    "Train100: four separated previous waves versus three broad terminal waves; membrane activity is clearly nonzero.",
+    "Classic compared states change L3/Rs69551260.1240013 to L54/Rs86000000; they do not isolate length as the sole cause.",
+    "Branch compared states change active attachment14/Rs69551260.1240013 to15/Rs86000000; early overlap increases.",
+    "Low threshold Classic has large biphasic excursions and12 measured positive maxima.",
+    "Low threshold Branch secondary maxima near1.86e-5 are above the original1e-6 minimum, but hidden by common scale including negative excursion about-0.38.",
+    "Existing100-tick local view covering relative0.1945s spans approximately-0.00517..0.000403 and allocates less than2 pixels of ordinate to the small rebound.",
+    "Add explicit sample-marked peak-centred local views; do not change peak criteria or infer silence."
+  ],
+  "native_rerun": false,
+  "scientific_verdict": null
+}

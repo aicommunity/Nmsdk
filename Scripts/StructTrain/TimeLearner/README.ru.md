@@ -10,7 +10,7 @@
 и метки восьми паттернов из точного исторического Bin Git commit. Исторические
 response metrics не импортируются, scheduler/ITI этим не воспроизводятся.
 
-`stock-threshold-study prepare/run/analyze` проверяет четыре холодных stock
+`stock-threshold-study prepare/run/analyze/failure-report` проверяет четыре холодных stock
 условия на одном immutable runtime: Classic/Branch ×0.0117/100. Для100 нужен
 явно поддерживающий ModelSpec2 SDK; это отдельный construction parameter,
 не скрытый legacy knob. [Протокол](../../../Docs/StructTrain/TimeLearner/InitialThresholdConstruction.ru.md).
@@ -419,3 +419,10 @@ calibration с fresh confirmation и импорт полного пакета в
 операций того же job/runtime. Manifest, primary closure и фактический runtime
 проверяются повторно, на Linux проверяется PID/start_ticks. Reuse явно
 фиксируется отдельно от новых native процессов; середина пробы не поддержана.
+# Диагностика границы stock-обучения
+
+`stock-threshold-study failure-report STUDY --output NEW_CACHE` строит графики
+терминальной невалидной пробы и предшествующей валидной пробы того же входа
+для всех четырёх stock-условий. Используются сохранённые JSON/CSV, без запуска
+моделей; все сомы и фактические входные импульсы, общие оси и native zoom.
+[Контракт, проверка волн и ограничения](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md).

@@ -3,6 +3,16 @@
 Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
+Feature stock training failure diagnostics (04.11; full native feature acceptance pending):
+[contracts, observed boundaries and limits](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md),
+[Elder twelve data checks](s07-stock-failure-boundary-elder-a1/README.ru.md),
+[M40 initial twenty probe/soma pairs](s07-stock-failure-boundary-m40-a1/README.ru.md),
+[readable local peaks, four report checks and twelve selected originals](s07-stock-failure-boundary-m40-a2/README.ru.md).
+Same original four cold conditions; no models rerun or classification claimed.
+1021 cached views, including25 local peak views, stay on M40. Compressed primary
+metadata and selected PNG originals are retained in Git. All twelve selected
+originals reviewed; the whole image cache has not been manually reviewed.
+
 Accepted explicit Rdk working-directory startup (04.11):
 [native normal](s02-native-event-log-normal-a3/README.ru.md),
 [native ASan](s02-native-event-log-asan-a3/README.ru.md),
