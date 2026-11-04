@@ -1,3 +1,5 @@
+> Исторический отчёт: числа и критерии сохранены. E1/cable executable tools удалены из текущего дерева; извлечение исходников и ограничения описаны в `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md` и script_migration.json (snapshot `3c5e777393776d5340131b03a31b34f4cb668b27`). Старые команды не являются текущей инструкцией запуска.
+
 # E1.4 — предсказатель разделимости (офлайн суперпозиция ядер)
 
 Постановка: по плану [`TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md`](../TIMELEARNER_AUDIT_AND_PLAN_2026-10-20.ru.md) §E1.4 построить офлайн-предсказатель запаса разделимости `(tgt − max_foil)/tgt` для известных обученных состояний (L, TipR) и тестового Pack A, затем сравнить направление Acc/Цель с Console на **3 PASS** острова Branch и **3 FAIL** (`br25_gen`, `br25_preinh`, `W01_CL50_N0`). Ворота: совпадение с Console ≥ **5/6**. G1 RERUN / F1b cold / KeepDone **не** запускались; код-агент F3 не блокировал этот turn.

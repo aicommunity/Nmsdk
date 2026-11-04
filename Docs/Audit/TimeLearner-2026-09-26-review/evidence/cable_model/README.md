@@ -1,3 +1,5 @@
+> Историческое описание standalone-модели. Исходники cable/E1 удалены из текущего дерева; полный retrieval snapshot: `3c5e777393776d5340131b03a31b34f4cb668b27`. Реестр: `Docs/StructTrain/TimeLearner/script_migration.json`; ограничения: `Docs/StructTrain/TimeLearner/CableFamilyRetirement.ru.md`. Совпадение частного пика/длин не доказывает общую native equivalence; команды ниже относятся к историческому снимку.
+
 # Модель кабеля TimeLearner (вне Console)
 
 Повторяет явные шаги Эйлера `NPulseChannel::ACalculate2` и `NPulseSynapse::ACalculate2`
