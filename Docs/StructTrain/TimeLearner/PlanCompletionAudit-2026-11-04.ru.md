@@ -10,7 +10,7 @@
 для нескольких fixtures, завершённый процесс и научный PASS различаются.
 Ни итоговая карта всех моделей, ни весь рефакторинг пока не завершены.
 
-## Согласованный develop
+## Принятая C++ основа до последующих Python merges
 
 | Репозиторий | Принятая исходная точка |
 |---|---|
@@ -18,6 +18,11 @@
 | PulseLib | `9ec4566d71bf56d4eeb5c8a920bbc683fcd85299` |
 | Rdk | `10e9d05aa658dd2203c89bc84ba9166595b50014` |
 | Bin | `99f58da9296a794374cef679bbb878cb62af979a` |
+
+Таблица фиксирует согласованный C++/native-probe snapshot, не текущий root HEAD.
+Последующие infrastructure Python merges до `1c51d0c23f1cee8fe0c59eceba872fcf30145235`
+не меняют эти child gitlinks. Источник конкретного runtime берётся из manifest
+его задания, а актуальный root HEAD — из Git, не из исторической таблицы.
 
 Root develop последовательно принял resource budgets, construction threshold/
 calibration и native probe/report acceptance. Merge commits сохранены; rebase,
@@ -151,3 +156,19 @@ normal/ASan, без skips. Новый gate сочетает actual loaded files,
 capture и закрытие всей cgroup; MainPID0 с живыми потомками наблюдается явно.
 Прежние gates schema1/2 и текущие long-running jobs не меняются. Это не перевод
 всех production Train/Test workers, полный scheduler или приёмка joint algorithms.
+
+Следующий source-аудит исправил смешение commit/index/working headers в
+[inventory schema2](InventorySnapshots.ru.md):10/10 tests на worker,
+byte-identical current catalog,217 declarations и231 path-selected оставшийся
+tool (root43/Bin188/Pulse0). Это нижняя граница для review, не разрешение
+удалить каждый файл без разбора и не завершение semantic/runtime matrix.
+
+Совместный normal42 gate root9f92a40b завершился с34 passed/8 failed:
+восемь новых ModelSpec2/C-history cases с construction/effective threshold100
+дошли до полных frozen observations без spikes, но общий fixture по суффиксу
+`_spiking` ошибочно ожидал положительный spike count для любого threshold!=1.
+Исходный failed результат сохраняется. Исправление expectations и повторная
+native приёмка ещё требуются; алгоритмический или scientific PASS не присвоен.
+На M40 отдельно работает **build-only** ASan joint SDK с одним compiler,
+memory cap4GiB и preflight MemAvailable>=36GiB. Он не запускает native gates;
+первоначальный K1 regression продолжает работу независимо.
