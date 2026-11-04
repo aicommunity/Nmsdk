@@ -596,3 +596,5 @@ lease recovery и production pipeline integration остаются открыт�
 - [Joint ASan resource-stop/retry evidence](s07-joint-asan-resource-retry-a1/README.ru.md): complete negative partial data retained;44/304 acceptance pending.
 
 - PhaseA historical tool retirement: [Elder](s09-phasea-tools-elder-a3/README.ru.md), [M40](s09-phasea-tools-m40-a3/README.ru.md),166 retrieval records and restored-path refusal on each worker; August results preserved, complete migration pending.
+
+- [Shared recognition negative8](s06-shared-recognition-negative-normal-a3/README.ru.md): all8 ran and failed, no133 or owner API pass; baseline comparison queued.
