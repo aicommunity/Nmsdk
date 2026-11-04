@@ -1,0 +1,200 @@
+{
+  "kind": "joint44_visual_report_independent_verification",
+  "proof_commit": "df29f5d469baec8d987a40e643f2a188158618b2",
+  "job_source": "94c3fa262b6691faa0bef7ed1479d7b7882a6ab8",
+  "renderer_source": "8021301e894368aefd045f9d77274fcce9f60245",
+  "archive_members_verified": 53,
+  "archive_sha256": "3ae2952ab5aac95bd9af4e5ac2bcc03281fcf95ef427372240ed1e897b59ab3d",
+  "job_source_blobs_verified": 2,
+  "reader_tests_passed": 5,
+  "declared_models": 10,
+  "complete_trials": 40,
+  "trial_soma_pairs": 60,
+  "figure_views": 275,
+  "selected_pngs_verified": 80,
+  "selected_png_bytes": 10887157,
+  "cache_excluded_from_git": true,
+  "previous_preparation_attempts": {
+    "a1": {
+      "archive_sha256": "27b654b8c26d6bd3dd0192dec1518617c41faad95aec6c9b497eb6d7a5b5be6b",
+      "members_verified": 7,
+      "reason": "Command '['git', '-C', '/media/user/Data/TimeLearnerRefactor/source-inventory-snapshots-a1', 'fetch', '--no-recurse-submodules', '--depth', '1', '--filter=blob:none', 'origin', '94"
+    },
+    "a2": {
+      "archive_sha256": "637ad54317c84e22bf3e216d695f82de7740dda972119f8f37c6973445c24b1d",
+      "members_verified": 12,
+      "reason": "[{'test_id': 'NativeCapacitanceModelSpec2Boundary/ClassicN0COff', 'reason': \"plotting_runtime_unavailable:No module named 'matplotlib'\", 'traceback': 'Traceback (most recent call l"
+    }
+  },
+  "worker_closed": true,
+  "lease_recovered_after_closure": true,
+  "counts": [
+    {
+      "case": "Classic-case-00",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN0COff",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Classic-case-01",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN0COn",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Classic-case-02",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN1COff",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Classic-case-03",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/ClassicN1COn",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Branch-case-04",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN0COff",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Branch-case-05",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN0COn",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Branch-case-06",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN1COff",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Branch-case-07",
+      "test_id": "NativeCapacitanceModelSpec2Boundary/BranchN1COn",
+      "TP": 0,
+      "FP": 0,
+      "FN": 2,
+      "TN": 2,
+      "target_outside": 0
+    },
+    {
+      "case": "Classic-case-08",
+      "test_id": "NativeCompletedTransportExplicitPointTwo/ClassicSpikingFreshN0",
+      "TP": 0,
+      "FP": 1,
+      "FN": 2,
+      "TN": 1,
+      "target_outside": 1
+    },
+    {
+      "case": "Branch-case-09",
+      "test_id": "NativeCompletedTransportExplicitPointTwo/BranchSpikingFreshN1",
+      "TP": 0,
+      "FP": 1,
+      "FN": 2,
+      "TN": 1,
+      "target_outside": 1
+    }
+  ],
+  "visual_acceptance_pending": true,
+  "scientific_verdict": null,
+  "selected_manual_review": {
+    "status": "passed_for_named_figures",
+    "files": [
+      {
+        "name": "Classic-case-00-00.png",
+        "sha256": "4bef949aa99ceddd5eb24efccc422b16b9ba7cf751777fd40a9a8397238fb399"
+      },
+      {
+        "name": "Classic-case-03-08.png",
+        "sha256": "71a654982d2a22307f943de32b44d2e8dd244b7d7eb5a2a3409a5607e88cd891"
+      },
+      {
+        "name": "Branch-case-04-00.png",
+        "sha256": "50ed7a039341e72d0f7e62b87adcacd1bd126926a890e0a2b0d92c882d63d6e0"
+      },
+      {
+        "name": "Branch-case-07-04.png",
+        "sha256": "d67ecdaf7d21e98e7ada7746fb737c675c7f666303fdbc9bd391d1134f71ff82"
+      },
+      {
+        "name": "Classic-case-08-00.png",
+        "sha256": "f0d080f8270ec9945a8710559fde1f9447d3bdbeead1487fa3ad52379cbd72f7"
+      },
+      {
+        "name": "Branch-case-09-00.png",
+        "sha256": "0361b5937620968c062427902a4dffeb08d71a98fa98bfe56aa9527df46057c9"
+      },
+      {
+        "name": "Classic-case-01-00.png",
+        "sha256": "37f53f2d6eedf6b9c2b03b050b05feb7550a1a1b95a611c07f62338e7285f99d"
+      },
+      {
+        "name": "Classic-case-02-00.png",
+        "sha256": "c1a9cbb85b35bfe38ffccd9b9e6f13c261cda9b8581186eab3f694428d830014"
+      },
+      {
+        "name": "Branch-case-05-00.png",
+        "sha256": "dd56cc6bff366299bf108d886ace86e850a93be574c8fce7dde14b6a8324cc9c"
+      },
+      {
+        "name": "Branch-case-06-00.png",
+        "sha256": "c2c7f97f0c38acb6e0c1fd0d8b76688085ae405f13e17185e5788769c570bb83"
+      },
+      {
+        "name": "Classic-case-08-02.png",
+        "sha256": "3ab8d5a9fe3ccc4fd7e5fdf4fbf26abf714290c6dd2b753ec7f2a471aba1132e"
+      },
+      {
+        "name": "Branch-case-09-01.png",
+        "sha256": "4539b764bddbdb6dbf3b5cf21557a6cab2a72aa5487f7b294899542eec19f99d"
+      },
+      {
+        "name": "Classic-case-08-01.png",
+        "sha256": "db0ff85023377250bfb8e5f49b856bf41ec9d12fa1ec835c3e711a53a88951eb"
+      },
+      {
+        "name": "Classic-case-08-06.png",
+        "sha256": "6ff847779214d65d27327e754fe68006c0063017a5ece045e08e89bb2e80eca3"
+      },
+      {
+        "name": "Branch-case-09-03.png",
+        "sha256": "02d29cc81db9abbfd221eb22258ddd7c9a7fd06ec56df770ada74930fdf72b88"
+      },
+      {
+        "name": "Classic-case-08-09.png",
+        "sha256": "9c20c3a2068e805cc3c38a1407ac1f1c2d945824274bdc267d965dc52874b9e2"
+      },
+      {
+        "name": "Branch-case-09-05.png",
+        "sha256": "f420effa95f6b5df127b27e29b277493d6552fba876391cacebeedcd634cf919"
+      }
+    ],
+    "unique_figures": 17,
+    "scope": "Ten models represented; native overview and zoom, target/foil, Classic second soma, preserved dynamics, positive spike markers and both presentation series. Titles/axes/legends readable; pulse overlay and waveforms visible. Not an exhaustive manual review of every cached view."
+  }
+}

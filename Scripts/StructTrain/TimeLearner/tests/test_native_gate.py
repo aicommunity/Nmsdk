@@ -7,7 +7,7 @@ import unittest
 from xml.etree import ElementTree as ET
 
 from ..native_evidence import EvidenceError
-from ..native_gate import _environment, audit_junit, supported_specification
+from ..native_gate import FIELDS, _environment, audit_junit, supported_specification
 
 
 class NativeGateJUnitTest(unittest.TestCase):
@@ -39,8 +39,8 @@ class NativeGateJUnitTest(unittest.TestCase):
     def test_actual_contract_and_explicit_capture_versions(self):
         original = json.loads((self.root/"specification.json").read_text())
         self.assertTrue(supported_specification(original))
-        legacy = dict(original, schema_version=1)
-        legacy.pop("cooperative_runtime_capture", None)
+        legacy = {key: original[key] for key in FIELDS}
+        legacy['schema_version'] = 1
         self.assertTrue(supported_specification(legacy))
         cooperative = dict(legacy, schema_version=2, cooperative_runtime_capture=True)
         self.assertTrue(supported_specification(cooperative))
