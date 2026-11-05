@@ -6,16 +6,17 @@ and completeness of the declared inventory remain separate upstream gates.
 from pathlib import Path, PurePosixPath
 import json
 import hashlib
-import os
 import re
 import subprocess
 from urllib.parse import urlsplit
 
 from .native_evidence import EvidenceError, require
+from .publication_lock import hold as hold_publication_lock, recover as recover_lock, git_lock_arguments
 
 
 def _git(directory, *args):
-    result = subprocess.run(["git", "--no-replace-objects", "-C", str(directory), *args], capture_output=True, timeout=120)
+    result = subprocess.run(["git", "--no-replace-objects", "-C", str(directory), *args], capture_output=True, timeout=120,
+                            **git_lock_arguments())
     require(result.returncode == 0, "git_operation_failed:"+args[0]+":"+
             result.stderr.decode("utf-8", errors="replace")[-3000:])
     return result.stdout.decode("utf-8", errors="strict").strip()
@@ -261,44 +262,45 @@ def publication_plan(root: Path, specification):
     return ordered
 
 
+def _common_directory(root):
+    common = Path(_git(root, "rev-parse", "--git-common-dir"))
+    return (common if common.is_absolute() else root/common).resolve(strict=True)
+
+
+def recover_publication_lock(root):
+    root = Path(root).resolve(strict=True)
+    require(Path(_git(root, "rev-parse", "--show-toplevel")).resolve() == root,
+            "publication_repository_root_required")
+    return recover_lock(_common_directory(root))
+
+
 def publish_closure(root: Path, specification):
     root = root.resolve(strict=True)
-    # A common-git-dir lock serializes publishers across linked worktrees.
-    common = Path(_git(root, "rev-parse", "--git-common-dir"))
-    common = common if common.is_absolute() else root/common
-    lock = common.resolve()/"timelearner-publication.lock"
-    try:
-        lock.mkdir()
-    except FileExistsError as error:
-        raise EvidenceError("publication_lock_exists_inspect_owner_before_recovery") from error
-    published = []
-    version = 2 if type(specification) is dict and specification.get("schema_version") == 2 else 1
-    try:
-        (lock/"owner.json").write_text(json.dumps({"pid": os.getpid()}), encoding="utf-8")
-        plan = publication_plan(root, specification)
-        for directory, record in plan:
-            # Revalidate the complete local closure before each remote mutation.
-            publication_plan(root, specification)
-            target = record["push_url"] if version == 2 else record["remote"]
-            _git(directory, "-c", "push.recurseSubmodules=no", "push", target,
-                 record["commit"]+":"+record["branch"])
-            actual = _git(directory, "ls-remote", "--exit-code", target, record["branch"])
-            require(actual.split() == [record["commit"], record["branch"]], "remote_publication_verification_failed:"+record["path"])
-            published.append(dict(record))
-        # A child ref may have moved while root was being pushed: fail closed.
-        for directory, record in plan:
-            target = record["push_url"] if version == 2 else record["remote"]
-            actual = _git(directory, "ls-remote", "--exit-code", target, record["branch"])
-            require(actual.split() == [record["commit"], record["branch"]], "published_closure_changed:"+record["path"])
-        return {"kind": "timelearner_git_publication_result", "schema_version": version,
-                "publication": "published", "repositories": published, "scientific_verdict": None,
-                **({"artifact_sets_verified": specification["artifacts"]} if version == 2 else {})}
-    except (EvidenceError, OSError, subprocess.SubprocessError, UnicodeError, ValueError) as error:
-        return {"kind": "timelearner_git_publication_result", "schema_version": version,
-                "publication": "failed", "repositories_published_before_failure": published,
-                "reason": str(error), "scientific_verdict": None}
-    finally:
-        owner = lock/"owner.json"
-        if owner.exists():
-            owner.unlink()
-        lock.rmdir()
+    # The kernel guard also fences inherited Git children after frontend death.
+    with hold_publication_lock(_common_directory(root)):
+        published = []
+        version = 2 if type(specification) is dict and specification.get("schema_version") == 2 else 1
+        try:
+            (lock/"owner.json").write_text(json.dumps({"pid": os.getpid()}), encoding="utf-8")
+            plan = publication_plan(root, specification)
+            for directory, record in plan:
+                # Revalidate the complete local closure before each remote mutation.
+                publication_plan(root, specification)
+                target = record["push_url"] if version == 2 else record["remote"]
+                _git(directory, "-c", "push.recurseSubmodules=no", "push", target,
+                     record["commit"]+":"+record["branch"])
+                actual = _git(directory, "ls-remote", "--exit-code", target, record["branch"])
+                require(actual.split() == [record["commit"], record["branch"]], "remote_publication_verification_failed:"+record["path"])
+                published.append(dict(record))
+            # A child ref may have moved while root was being pushed: fail closed.
+            for directory, record in plan:
+                target = record["push_url"] if version == 2 else record["remote"]
+                actual = _git(directory, "ls-remote", "--exit-code", target, record["branch"])
+                require(actual.split() == [record["commit"], record["branch"]], "published_closure_changed:"+record["path"])
+            return {"kind": "timelearner_git_publication_result", "schema_version": version,
+                    "publication": "published", "repositories": published, "scientific_verdict": None,
+                    **({"artifact_sets_verified": specification["artifacts"]} if version == 2 else {})}
+        except (EvidenceError, OSError, subprocess.SubprocessError, UnicodeError, ValueError) as error:
+            return {"kind": "timelearner_git_publication_result", "schema_version": version,
+                    "publication": "failed", "repositories_published_before_failure": published,
+                    "reason": str(error), "scientific_verdict": None}
