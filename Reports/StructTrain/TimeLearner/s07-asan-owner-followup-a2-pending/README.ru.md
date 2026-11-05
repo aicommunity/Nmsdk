@@ -1,0 +1,1 @@
+Pending queue on M40, not a positive verdict. First publish completed native304 evidence through Git and verify remote closure, then write the exact origin JSON described by job.json. Queue A2 refuses native replay until this file exists. Source/runtime of running ASan is never changed.

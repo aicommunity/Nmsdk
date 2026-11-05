@@ -1,0 +1,49 @@
+{
+  "queue_owner": {
+    "pid": 118589,
+    "start_ticks": "294021884",
+    "native_predecessor": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-full-asan-a2",
+    "owner8_readers128_pending": true
+  },
+  "queue_kernel_state": "S",
+  "native_owner": {
+    "pid": 4070117,
+    "start_ticks": "290187349",
+    "root": "8021301e894368aefd045f9d77274fcce9f60245",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+    "contained_supervisor": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-full-asan-a2-container"
+  },
+  "native_kernel_state": "S",
+  "completed_native_log_records": 256,
+  "native_log_tail": "odec (2981 ms)\n[----------] 4 tests from NativeCapacitanceSearchConfiguration (12548 ms total)\n\n[----------] 8 tests from NativeCapacitanceSearchBoundary\n[ RUN      ] NativeCapacitanceSearchBoundary.ClassicN0Manual\n[       OK ] NativeCapacitanceSearchBoundary.ClassicN0Manual (741013 ms)\n[ RUN      ] NativeCapacitanceSearchBoundary.ClassicN1Configured\n[       OK ] NativeCapacitanceSearchBoundary.ClassicN1Configured (602361 ms)\n[ RUN      ] NativeCapacitanceSearchBoundary.BranchN0ConfiguredRepeat\n",
+  "observed_utc_ns": 1793865600427175686,
+  "queue_terminal": null,
+  "origin_publication_file": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-joint-asan-owner-readers-a2-queue/native304-published-origin.json",
+  "requirements": {
+    "native304_valid_completed_passed": true,
+    "fresh_kernel_group_closed_and_exact_lease_released": true,
+    "exact_native_archive_published_before_replay": true,
+    "new_native_owner_tests": 8,
+    "Python_readers": 128,
+    "memory_limit_bytes": 8589934592,
+    "maximum_worker_wall_seconds": 7200,
+    "leak_detection": false,
+    "no_SDK_build": true
+  },
+  "publication_gate": {
+    "write_only_after_verified_Git_publication": true,
+    "file": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-joint-asan-owner-readers-a2-queue/native304-published-origin.json",
+    "required_fields": [
+      "origin_published",
+      "native_source_commit",
+      "native_archive_sha256",
+      "evidence_commit",
+      "report_prefix"
+    ],
+    "also_record": "published_root_commit",
+    "native_source_commit": "8021301e894368aefd045f9d77274fcce9f60245",
+    "semantics": "evidence_commit identifies the original304 data archive, never its source code SHA; private evidence repository must contain this bundle; worker verifies exact published bundle bytes against native origin"
+  }
+}
