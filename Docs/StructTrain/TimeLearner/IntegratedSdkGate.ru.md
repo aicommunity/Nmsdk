@@ -1,3 +1,5 @@
+Актуализация05.11: integrated normal coordinator A3 прошёл8/8 и20 actual native phases; все2233 primary файла/8 SQLite проверены. Исправлена ASan dependency chain: новые owner8/readers128, build, отдельные focused8/lifecycle133 очереди; старые waiting queues отменены до units. [Приёмка, scope и pending temporal reports](IntegratedCoordinatorAcceptance.ru.md). Ниже исторические снимки.
+
 ASan уточнение05.11: explicit partition mechanism прошёл5/5 с двумя actual native processes; full304 A2 запущен с kernel binding и отдельным82800s native budget. Старый монолитный304 остаётся invalid; новые owner/readers и shared ASan gates ещё открыты. [Подробная приёмка и ограничения очередей](NativePartitionAcceptance.ru.md).
 
 Актуализация05.11: normal integrated SDK завершил8/8+133/133, полные первичные данные проверены. Coordinator A2 отказал до моделей из-за duplicate reservation; исправленный A3 работает. Старый ASan304 завершился internal StackStore CHECK и invalid runtime, не PASS; зависимые ASan проверки остаются открытыми. [Текущие результаты, scope и следующая работа](IntegratedSdkResults-2026-11-05.ru.md). Ниже историческая постановка до завершения заданий.
