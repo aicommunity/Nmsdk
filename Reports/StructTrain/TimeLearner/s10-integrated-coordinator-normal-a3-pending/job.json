@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "managed_native_coordinator_acceptance_pending",
+  "source_root_commit": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "pulselib_commit": "12d8c8a41c998ae1516496f716a0ae0f3d312b3e",
+  "host": "10.245.1.11",
+  "user": "user",
+  "tests_expected": 8,
+  "predecessor": "s06-integrated-acceptance-normal-a1",
+  "predecessor_inventory": [
+    8,
+    133
+  ],
+  "change": "Remove duplicate read(out) when out is already reserved for write; require unique canonical resource list before reservation.",
+  "worker_sha256": "3c886d4b5fb6acbb272c73410301563e71d5519ce4bbeea6800b1032e66e0355",
+  "historical_trained_model_import": false,
+  "calibration_protocol": "historical_same_matrix_engineering",
+  "independent_scientific_evaluation": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
