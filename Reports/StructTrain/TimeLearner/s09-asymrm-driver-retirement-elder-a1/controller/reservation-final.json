@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "Elder-1",
+  "leases": [
+    {
+      "token": "3a9e3860-c66a-408d-918a-de07a55d091d",
+      "job_id": "s09-asymrm-driver-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 3484161,
+        "start_ticks": "348373369",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-asymrm-driver-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-asymrm-driver-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-asymrm-driver-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-asymrm-driver-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793913964.0055714,
+      "deadline": 1793914084.0055714,
+      "updated": 1793913967.9921987,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
