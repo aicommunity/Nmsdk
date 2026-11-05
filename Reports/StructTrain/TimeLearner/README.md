@@ -604,3 +604,5 @@ lease recovery и production pipeline integration остаются открыт�
 - [Obsolete build-cache cleanup](s02-obsolete-schema4-build-cache-a4/README.ru.md): exact j1/j2 only, runtime/source/results retained, full process-use audit and metadata preserved.
 
 - [Current-package public coordinator regression8](s10-managed-public-coordinator-normal-a4/README.ru.md):20 actual Console phases, complete data; live6, new temporal report and scientific matrix pending.
+
+- FastResponse/FastSpan historical tool retirement: [Elder](s09-fast-tools-elder-a1/README.ru.md), [M40](s09-fast-tools-m40-a1/README.ru.md),184 retrieval records and restored-path refusal on each worker; original configurations/models/data/report bodies retained, complete migration pending.
