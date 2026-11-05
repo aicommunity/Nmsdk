@@ -1,0 +1,1 @@
+Actual managed live routing regression on package8c9ee9f6b319a06224d6ebdcdd537b88e993fc4a and Console33fc:6 tests passed,10 actual native phases. Four live fixed/grid Classic/Branch paths and two incomplete-Train controls without Test. Source and complete primary retained. Other modes, fault matrix, independent scientific evaluation and whole plan remain pending.
