@@ -281,7 +281,6 @@ def publish_closure(root: Path, specification):
         published = []
         version = 2 if type(specification) is dict and specification.get("schema_version") == 2 else 1
         try:
-            (lock/"owner.json").write_text(json.dumps({"pid": os.getpid()}), encoding="utf-8")
             plan = publication_plan(root, specification)
             for directory, record in plan:
                 # Revalidate the complete local closure before each remote mutation.
