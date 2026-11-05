@@ -1,0 +1,51 @@
+{
+  "a1": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s09-fast-tool-retirement-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-fast-tool-retirement-a1-container",
+    "registry": "/home/user/timelearner-refactor/fast-tool-metadata-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2d328bed35fe8a24d684d241399efbfb1a58a5d16ae80ad250760143d31b2e5b",
+        "unit": "timelearner-1b917b2a-9cf2-41ea-a4a2-68e10b0a7a06.service",
+        "invocation_id": "ae83e7e07ffb499994b52bb98340a843",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1b917b2a-9cf2-41ea-a4a2-68e10b0a7a06.service",
+        "initial_main_pid": 2652636,
+        "initial_start_ticks": "341257305",
+        "sha256": "a82ea7706840eca6e7b6771778f593d82711348929e34aeae51d9c48272f1e08"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-1b917b2a-9cf2-41ea-a4a2-68e10b0a7a06.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "9f8042ef-44b2-43a7-bcb4-b31769994788",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  }
+}
