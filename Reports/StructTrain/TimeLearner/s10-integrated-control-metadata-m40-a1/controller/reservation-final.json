@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "dfd585f3-343b-45fe-b903-1d67dd66b928",
+      "job_id": "s10-integrated-control-metadata-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 4179214,
+        "start_ticks": "291997951",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-integrated-control-metadata-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-integrated-control-metadata-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-controller-python-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-controller-python-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793844782.0264018,
+      "deadline": 1793844902.0264018,
+      "updated": 1793844789.9788487,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
