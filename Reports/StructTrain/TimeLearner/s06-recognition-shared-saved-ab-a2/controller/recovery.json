@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "2f2e6332-e875-4f32-a6eb-d7bcebb2b839",
+  "job_id": "s06-recognition-shared-saved-ab-a2",
+  "recorded_unix": 1793863759.5188231,
+  "administrator": {
+    "pid": 2898825,
+    "start_ticks": "343345884",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 2898841,
+    "start_ticks": "343345895",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s06-recognition-shared-saved-ab-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "8e47ae1fa82e6b709bfb863b86fae1403d5c3aac83d684678bce4b04299d83b3",
+      "unit": "timelearner-4b7d6281-1343-413a-8e23-dd711802d6ae.service",
+      "invocation_id": "45f40de01cc8420ba9d43ae307ead304",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4b7d6281-1343-413a-8e23-dd711802d6ae.service",
+      "initial_main_pid": 2898841,
+      "initial_start_ticks": "343345895",
+      "sha256": "c546359abaac1b910d7d5d93bda3d4d8c8538f5a7261a262e2700af86beffd2f"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-4b7d6281-1343-413a-8e23-dd711802d6ae.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "All replay subprocesses freshly closed; actual current job reservation released.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-shared-saved-ab-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-shared-saved-ab-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-integrated-historical-replay-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-integrated-historical-replay-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
