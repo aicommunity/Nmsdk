@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1157d005-fea3-4e96-88c1-892a22c16931",
+  "job_id": "s09-grid-generator-retirement-a1",
+  "recorded_unix": 1793869024.124547,
+  "administrator": {
+    "pid": 2969553,
+    "start_ticks": "343878968",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 2969567,
+    "start_ticks": "343878981",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-grid-generator-retirement-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0a21440b6fa91e8889c571e9c27d26ba8d52cad614e3af19b7febb0dfaaa02ef",
+      "unit": "timelearner-1d015266-d0ec-41db-adc7-20f59c47d39f.service",
+      "invocation_id": "e38b606af9564661bab2333c1dceaba2",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1d015266-d0ec-41db-adc7-20f59c47d39f.service",
+      "initial_main_pid": 2969567,
+      "initial_start_ticks": "343878981",
+      "sha256": "e0b505442076368bf7bd40580d1f6e49d106a47854ffb0b7f954d0fea95a22bd"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-1d015266-d0ec-41db-adc7-20f59c47d39f.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-grid-generator-retirement-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-grid-generator-retirement-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/source-grid-generator-retirement-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-grid-generator-retirement-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
