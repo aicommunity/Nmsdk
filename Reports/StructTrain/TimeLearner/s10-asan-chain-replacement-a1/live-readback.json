@@ -1,0 +1,125 @@
+{
+  "kind": "timelearner_replacement_ASan_queues_live_readback",
+  "schema_version": 1,
+  "queues": [
+    {
+      "queue": "s07-joint-asan-owner-readers-a3-queue",
+      "owner": {
+        "pid": 220319,
+        "start_ticks": "295376899",
+        "native_predecessor": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-full-asan-a2",
+        "owner8_readers128_pending": true
+      },
+      "kernel_live": true,
+      "state": {
+        "kind": "timelearner_worker_dependency_state",
+        "schema_version": 1,
+        "job_id": "s07-native-partition-full-asan-a2",
+        "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-full-asan-a2-container",
+        "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+        "closure": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "c9881d8ce11ff0728784744d7bb0bcf18f55fa537d7bee9cfdc341720ca72fba",
+            "unit": "timelearner-bd8a9468-1f2a-4975-8c11-4038b5b3238f.service",
+            "invocation_id": "ed56d571901a4f3dac636592de44306e",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd8a9468-1f2a-4975-8c11-4038b5b3238f.service",
+            "initial_main_pid": 202412,
+            "initial_start_ticks": "295322316",
+            "sha256": "5be024c0b242c76a2c60febb041306ca4b00156877dec004d6d641282eb4070a"
+          },
+          "state": {
+            "Type": "exec",
+            "Restart": "no",
+            "RemainAfterExit": "yes",
+            "MainPID": "202412",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd8a9468-1f2a-4975-8c11-4038b5b3238f.service",
+            "MemoryMax": "45097156608",
+            "TasksMax": "128",
+            "KillMode": "control-group",
+            "Description": "TimeLearner contained attempt bd8a9468-1f2a-4975-8c11-4038b5b3238f",
+            "LoadState": "loaded",
+            "ActiveState": "active",
+            "SubState": "running",
+            "InvocationID": "ed56d571901a4f3dac636592de44306e"
+          },
+          "memory_max": 45097156608,
+          "tasks_max": 128,
+          "scientific_verdict": null
+        },
+        "reservation_optional": false,
+        "reservation_state": null,
+        "reservation_token": null,
+        "state": "pending",
+        "reason": "dependency_worker_group_still_live",
+        "successful_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "queue": "s07-integrated-acceptance-asan-build-a2-queue",
+      "owner": {
+        "pid": 220320,
+        "start_ticks": "295376899",
+        "native_models_started": false,
+        "role": "wait for current SDK802 ASan304 then published-origin owner8/readers128; build separate shared-controller SDK only"
+      },
+      "kernel_live": true,
+      "state": {
+        "state": "waiting_for_sdk802_ASan_owner8_reader128_closure_and_resources",
+        "dependency": null,
+        "memory_available_bytes": 46098923520,
+        "disk_free_bytes": 403342118912,
+        "new_build_started": false,
+        "new_native_models_started": false,
+        "elapsed_seconds": 30.000871509779245
+      }
+    },
+    {
+      "queue": "s06-integrated-acceptance-asan-focused-a3-queue",
+      "owner": {
+        "pid": 220321,
+        "start_ticks": "295376899",
+        "native_models_started": false,
+        "role": "wait for separate shared-controller ASan build; execute focused8 only"
+      },
+      "kernel_live": true,
+      "state": {
+        "state": "waiting_for_new_shared_controller_ASan_build_closure_and_resources",
+        "dependency": null,
+        "memory_available_bytes": 46098923520,
+        "disk_free_bytes": 403342118912,
+        "new_build_started": false,
+        "new_native_models_started": false,
+        "elapsed_seconds": 30.00331373885274
+      }
+    },
+    {
+      "queue": "s06-integrated-acceptance-asan-lifecycle-a3-queue",
+      "owner": {
+        "pid": 220322,
+        "start_ticks": "295376899",
+        "native_models_started": false,
+        "role": "wait for separate shared-controller ASan build; then execute lifecycle133 only"
+      },
+      "kernel_live": true,
+      "state": {
+        "state": "waiting_for_new_shared_controller_ASan_build_closure_and_resources",
+        "dependency": null,
+        "memory_available_bytes": 46098923520,
+        "disk_free_bytes": 403342118912,
+        "new_build_started": false,
+        "new_native_models_started": false,
+        "elapsed_seconds": 30.012132782954723
+      }
+    }
+  ],
+  "active304_not_restarted": true
+}
