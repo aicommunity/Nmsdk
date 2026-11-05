@@ -93,6 +93,27 @@ class StoppedFinalPass(unittest.TestCase):
         with self.assertRaises(EvidenceError):
             audit_negative_final_pass(package, summary, packets, traces)
 
+    def test_unknown_summary_schema_is_rejected(self):
+        for version in (99, 1.0, True):
+            with self.subTest(version=version):
+                package, summary, packets, traces = self.case()
+                summary["schema_version"] = version
+                with self.assertRaisesRegex(EvidenceError, "unknown_negative_final_summary_schema"):
+                    audit_negative_final_pass(package, summary, packets, traces)
+
+    def test_noninteger_protocol_schema_is_rejected(self):
+        package, summary, packets, traces = self.case()
+        package["protocol"]["schema_version"] = 3.0
+        self.resign(package)
+        with self.assertRaisesRegex(EvidenceError, "unknown_negative_final_protocol_schema"):
+            audit_negative_final_pass(package, summary, packets, traces)
+
+    def test_sweep_budget_cannot_be_changed_in_the_summary(self):
+        package, summary, packets, traces = self.case()
+        summary["configuration"]["maximum_sweeps"] += 1
+        with self.assertRaisesRegex(EvidenceError, "negative_final_pass_attempt_mismatch"):
+            audit_negative_final_pass(package, summary, packets, traces)
+
     def test_production_cli_checks_the_actual_source(self):
         with tempfile.TemporaryDirectory() as temporary:
             output = Path(temporary) / "result.json"
