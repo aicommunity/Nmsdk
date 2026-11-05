@@ -1,5 +1,6 @@
 # Структурное обучение TimeLearner
 
+[Отдельный процесс: old/new A/B16 и читаемые графики](SharedRecognitionSavedAB.ru.md).
 [Положительные Owner8/133 и16/16 historical checks на обоих workers](Owner141AndHistoricalAdapters.ru.md).
 [Native133 и границы совместимости сохранённого анализа05.11](RecognitionAndRecovery-2026-11-05.ru.md).
 [Новые проверки74×2 и читаемая галерея временных откликов](IntegratedMetadataAndTemporalReports.ru.md).

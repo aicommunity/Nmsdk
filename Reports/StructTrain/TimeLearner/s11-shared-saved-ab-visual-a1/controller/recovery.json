@@ -1,0 +1,78 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1f13067d-7c21-4524-a8b4-b3f0723ce071",
+  "job_id": "s11-shared-saved-ab-visual-a1",
+  "recorded_unix": 1793864575.2944608,
+  "administrator": {
+    "pid": 115320,
+    "start_ticks": "293972857",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 115329,
+    "start_ticks": "293972870",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-shared-saved-ab-visual-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "e12c4c95d5a0aa6941193d2bffb9a888f1e65eebe2bfd55a409e39bfc4acae3c",
+      "unit": "timelearner-6ce5c42e-6a70-4c89-9803-c69ff168cbe9.service",
+      "invocation_id": "1c145451f16c4e9797f211d396cfd983",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6ce5c42e-6a70-4c89-9803-c69ff168cbe9.service",
+      "initial_main_pid": 115329,
+      "initial_start_ticks": "293972870",
+      "sha256": "827b8462b91fcc8c57322eabd3d5a3785a9ebeb802266c960e72554ca0a382bb"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-6ce5c42e-6a70-4c89-9803-c69ff168cbe9.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Renderer and metadata group freshly closed; actual output reservation released.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/shared-saved-ab16-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/shared-saved-ab16-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-shared-saved-ab-visual-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-shared-saved-ab-visual-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-owner-plots-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-owner-plots-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
