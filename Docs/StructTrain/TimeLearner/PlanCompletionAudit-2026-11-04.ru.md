@@ -1,3 +1,5 @@
+Прогон05.11: public coordinator package8c прошёл8/8 и20 native phases на Console33fc; полный2238-member primary проверен. [Scope и ограничения](ManagedCoordinatorRegression.ru.md). Live6/temporal report/production integration ещё ожидаются; это не stock scientific PASS.
+
 Место Elder: удалены толькоobsolete build caches j1/j2,освобождено1168801792 bytes,source SDK/runtime/results сохранены. [Полный аудит операции](ObsoleteBuildCacheCleanup.ru.md). Последний замер послеоперации3378659328 bytes; A/B всё ещё ждёт predecessor closure.
 
 Текущий shared recognition candidate4f/Pulsef6 собран,но8/8 Owner tests failed; full133 не запускался. Предыдущий133 не включает эти8,поэтому регрессия ещё не установлена. [Полный отрицательный primary и A/B queue](SharedRecognitionNegative.ru.md). Candidate_cpp_executed=false исходного producer ошибочен и исправлен отдельным derived receipt; core не принят.
