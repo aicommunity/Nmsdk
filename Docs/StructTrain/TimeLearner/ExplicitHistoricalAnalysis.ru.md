@@ -20,3 +20,5 @@ python3 -m Scripts.StructTrain.TimeLearner analyze /absolute/path/to/train/run-m
 Без флага сохраняется строгий отказ. Флаг применим только к analyze --format pipeline-run; managed pipeline continue/reconcile не получает автоматического historical adapter. Для приёмки актуального managed pipeline необходима свежая corpus на этой версии SDK, а не изменение старых analysis records.
 
 Проверки:12 новых real-primary tests на прежних completed/stopped Classic/Branch Train receipts, включая оба ModelSpec wire versions, CLI, неправильный adapter/version, ложную сходимость, отсутствие/подмену capacitance, повреждение primary model и runtime. Дополнительно4 existing ModelSpecTransportPreparationTest используют исходные pinned Git primaries с auditor2. Тесты требуют реальных данных; skips не считаются приёмкой. Сборка/нейронные модели этим Python-набором не запускаются. Execution receipts должны быть сохранены до заявления исправления проверенным.
+
+При явном выборе adapter проверяется именно заявленная исходная версия даже при совпавших остальных полях. Неверный adapter не игнорируется молча; текущий manifest можно проверить без historical флага.
