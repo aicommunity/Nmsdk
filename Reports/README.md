@@ -17,3 +17,6 @@ tracked explicitly; the historical notes below describe the older archive.
 ## EN
 
 This directory holds historical development reports. Use [Docs/README.md](../Docs/README.md) for maintained documentation.
+
+
+[TimeLearner05.11: совместные metadata checks и42 читаемых temporal originals](../Docs/StructTrain/TimeLearner/IntegratedMetadataAndTemporalReports.ru.md). Полный report cache остаётся на M40; Git хранит компактные primaries и выбранные рисунки.

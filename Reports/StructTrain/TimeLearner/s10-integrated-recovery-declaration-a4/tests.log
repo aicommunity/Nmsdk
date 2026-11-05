@@ -1,0 +1,200 @@
+test_changed_native_model_is_not_adopted (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... ERROR
+test_closed_complete_phase_is_reconciled_without_new_native_work (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... test_missing_manifest_never_creates_a_completion_record (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... ERROR
+test_public_cli_audits_reconciled_actual_phase (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... ERROR
+test_repeat_reconciliation_is_rejected_without_extra_events (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... ERROR
+test_stopped_training_stays_halted_without_export_or_test (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... ERROR
+test_torn_journal_is_preserved_and_not_silently_repaired (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) ... ERROR
+test_actual_positive_declarations_remain_valid_without_fake_models (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_calibration_frequency_must_match_declared_model (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_clipped_sample_budget_is_rejected_before_training (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_duplicate_trial_id_is_rejected_before_training (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_fractional_sample_interval_is_rejected (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_historical_conversion_cannot_be_applied_to_classic (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_invalid_grid_is_rejected_before_training (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_nonfinite_duration_cannot_reach_a_native_process (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_public_cli_rejects_later_phase_before_output_is_created (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_response_criterion_uses_the_scorer_contract (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_sample_identity_cannot_alias_target_and_foil (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_subtick_window_cannot_round_to_an_empty_observation (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+test_target_label_cannot_identify_another_pattern (Scripts.StructTrain.TimeLearner.tests.test_managed_declaration.ManagedDeclarationTest) ... ok
+
+======================================================================
+ERROR: test_changed_native_model_is_not_adopted (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 85, in test_changed_native_model_is_not_adopted
+    self.copy()
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_closed_complete_phase_is_reconciled_without_new_native_work (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) (name='Classic-v1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 54, in test_closed_complete_phase_is_reconciled_without_new_native_work
+    self.copy(name)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_closed_complete_phase_is_reconciled_without_new_native_work (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest) (name='Branch-v1')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 54, in test_closed_complete_phase_is_reconciled_without_new_native_work
+    self.copy(name)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_missing_manifest_never_creates_a_completion_record (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 76, in test_missing_manifest_never_creates_a_completion_record
+    self.copy()
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_public_cli_audits_reconciled_actual_phase (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 113, in test_public_cli_audits_reconciled_actual_phase
+    self.copy()
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_repeat_reconciliation_is_rejected_without_extra_events (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 104, in test_repeat_reconciliation_is_rejected_without_extra_events
+    self.copy()
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_stopped_training_stays_halted_without_export_or_test (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 65, in test_stopped_training_stays_halted_without_export_or_test
+    self.copy("Classic-N0")
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+======================================================================
+ERROR: test_torn_journal_is_preserved_and_not_silently_repaired (Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_reconciliation.ManagedPipelineReconciliationTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 95, in test_torn_journal_is_preserved_and_not_silently_repaired
+    self.copy()
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_pipeline_reconciliation.py", line 31, in copy
+    self.assertIsNone(audit_pipeline(original)["pending_phase"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 215, in audit_pipeline
+    completed, pending, halted = _scan(root, spec, _events(root), runtime["runtime_fingerprint"])
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 188, in _scan
+    manifest = _audit_phase(root, operation, job, runtime_fingerprint)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/managed_pipeline.py", line 148, in _audit_phase
+    if operation in ("calibrate", "posttune") else pipeline_audit(directory/"run-manifest.json"))
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 506, in audit_run_manifest
+    require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
+  File "/home/user/timelearner-refactor/source-integrated-controller-python-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: pipeline_run_analysis_changed
+
+----------------------------------------------------------------------
+Ran 20 tests in 5.238s
+
+FAILED (errors=8)

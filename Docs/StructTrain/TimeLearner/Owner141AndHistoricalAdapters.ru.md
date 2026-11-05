@@ -1,0 +1,29 @@
+# Положительные Owner8/native133 и historical adapters,05.11.2026
+
+На Elder source `2cb855677f3e7160cd01837f62c649b18803ebf0` / Pulse `f6a917d395b21610f6bf6cbb0ed945e6cdee31dd` успешно завершил8 NativeRecognitionOwner и независимый полный133: failures/errors/skips отсутствуют. Фактический JUnit сопоставлен с обоими predeclared inventories; independently проверены56 Root и265 Pulse C++ blobs. [Первичные данные1878 members](../../../Reports/StructTrain/TimeLearner/s06-positive-recognition-owner141-a1/bundle.json):13182444 bytes, SHA256 `db96d80302c6291d710e7c9206ecff0420e90ea59268f1e0bde5e4c0c3836b17`. Evidence `b411dbf1eb469f83442dc816f77563f82bdfb5ea`.
+
+Восемь случаев проверяют Classic/Branch, N0/N1, импорт recognition package в learner, создание отдельного destination через storage, lifecycle Build/Init/Reset, замороженную модель, повторный import без повторного масштабирования, отказ от переноса solo-certificate на recognition и измеренное совпадение отклика с эталонной реконструкцией. FreshDestination означает другой компонент в том же процессе; отдельный процесс этим именем не доказывается. Source initial ISI[.01,.03] задан явно; физика, C, допуски и алгоритм не смягчены. Старые восемь failures при другом initial burst остаются отрицательным результатом своей постановки. Это не stock8-pattern классификация или проверка LT-inertia.
+
+Целевая восьмёрка прошла за79379ms, full133 за4092219ms. Разделение execution/validity/training/science сохраняется. Неинформативный bundle.candidate_cpp_executed=null не используется как authority: реальные JUnit, process/runtime records и terminal.candidate_cpp_executed=true подтверждают исполнение.
+
+## Explicit historical analysis
+
+Feature source `d2d68a83bfb5d30e2a380b4eedf6f1cc162154d5` прошёл16/16 actual-primary Python checks на каждом сервере:12 новых и4 существующих ModelSpecTransportPreparationTest; failures/errors/skips0. В каждом случае сверены318 Python Git blobs. Проверены исходные Git primaries auditor2 и8 Train receipts auditor3: completed/stopped Classic/Branch, ModelSpec1/2. Все716 Elder и706 M40 inventory entries до/после неизменны; отличие числа entries связано с наличием alias symlinks, проверка артефактов их не материализует. Новый Train/Test в этих Python-наборах не запускался.
+
+Исправлен ранее неподдержанный переход learned auditor2→5 без C; добавлен явно выбираемый training auditor3→learned5/stopped4 без capacitance_history. Проецируется только известное изменение схемы, остальные поля точно сравниваются. По умолчанию старые manifests не принимаются как новый analysis. Неправильный явно выбранный adapter отвергается даже при совпавших остальных полях. Проверены CLI и отказы при изменённых Exact/outcome, числах trials, model revision, C fields, runtime, primary model и неизвестных версиях/полях.
+
+Публичный candidate CLI: `analyze ... --format pipeline-run --historical-analysis training-v3-no-capacitance-history`. Managed continue/reconcile не адаптируется автоматически; положительный current coordinator gate всё ещё требует свежей corpus. Подробный контракт находится в feature Docs/StructTrain/TimeLearner/ExplicitHistoricalAnalysis.ru.md. Исправление и integrated parent ещё не продвинуты в develop; этот документ принимает receipts, не весь candidate code.
+
+[Elder421176 bytes/17 members](../../../Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-elder-a4/bundle.json), [M4043152 bytes/15 members](../../../Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-m40-a2/bundle.json). M40 evidence `aa80142b415bef73d2effdf71e68bbd589a2d4e1`; Elder включён в b411. После свежего kernel closure фактические leases released. Publication preflight обнаружил, что outer wrapper смотрел reservation path старой попытки; корректное освобождение выполнено через production recover_closed_worker для реального owner/group, без повторного запуска тестов. Причина сохранена в controller/corrected-reservation-recovery.json.
+
+Все ранние preflight отказы сохранены: A1 wrapper precreated output до start API; Elder A2 disk floor; Elder A3 попытка открыть capacity ledger как schema1. До самих tests/reservation эти попытки не дошли. A4 учитывает фактическую schema2/capacity Elder; M40 использует свою schema1. Assertions и16-test inventory не уменьшались.
+
+## Место и сохранность данных
+
+[Очистка закрытых кэшей](../../../Reports/StructTrain/TimeLearner/s02-closed-owner-baselines-cache-a1/bundle.json) освобождает1222201344 bytes на Elder. До удаления292 процесса проверены read-only: ссылок на пять целевых путей нет, ошибок чтения нет; guards проверили закрытие jobs/leases. Удалены две устаревшие build directories и expanded AB dataset. Все2056 исходных файлов AB corpus были переданы через Git, восстановлены и заново хешированы в `/media/user/Data/TimeLearnerRefactor/ReportsCache/shared-recognition-ab-a1/source` (809241644 bytes). Исходный9.7MB compressed primary уже находится в origin; уникальные primaries не утрачены. Source/runtime/resources сохранены, CMake caches и удалённый file inventory включены в receipt. После очистки свободно2509385728 bytes.
+
+[Независимая сверка всех четырёх архивов](Owner141AndHistoricalAdaptersVerification.json) проверяет каждый member/checksum и конкретные source blobs. Численные и интеграционные тесты локально не выполнялись.
+
+## Оставшиеся gates
+
+Joint ASan304802/Pulsecc ещё работает; затем нужны его отдельные fresh-process Owner8/readers128. Общий candidate должен получить собственную согласованную SDK/runtime сборку, fresh coordinator8/live6/recovery20, C++ regression и дальнейшую полную mode/storage/physics/scientific matrix. M40 имеет около47GiB RAM: текущий ASan ограничен42GiB, поэтому тяжёлая новая сборка параллельно не запущена. Все этапы1–12 остаются частичными; полностью принят только этап0. Получение8/8 не подменяет условия завершения плана.

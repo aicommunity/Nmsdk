@@ -1,0 +1,1 @@
+Explicit historical training adapters on sourced2d68:16 real-primary checks passed without skips. Original auditor2 Git primaries and8 auditor3 Train receipts unchanged; all positive/negative CLI/native provenance checks passed. No native model executed. First wrapper failure preserved.

@@ -382,3 +382,18 @@ Candidate0cd87e45ecf350301483ff4371994ced688931ef удаляет9 historical E05
 [Baseline33fc25/133](CorrectedColdBaselineAcceptance.ru.md) полностью прошёл на тех же algorithms/Pulsecc с исправленной положительной cold постановкой; он не продвигает общий dispatcher или pending C-search в develop. [Resource dependency9/9 на обоих workers](WorkerDependencyState.ru.md) сохраняет сырые SQLite/kernel данные, отделяет ready от business/scientific success и устраняет зависимость от момента записи release-file. Пять failed prerequisites до reserve/model сохранены. [Последние9 path-selected root tools](RemainingRootToolsRetirement.ru.md) приняты после двух150-record gates; текущий manifest150, complete=false. Новый production inventory source287b75d0 подтверждает217 declarations и188 Bin candidates; это metadata-only sparse clones, не SDK/пользовательские working-tree readbacks. Более широкий source/property/mode/runtime/science аудит остаётся открытым.
 
 Coordinator retryA2 source2cc/runtimef679 фактически выполняется после resource readiness; первый Branch case прошёл. Live/reconcile/declaration candidate gates из прежней failed chain ещё не испытывались. Следующий C++ шаг — build/A-B общего lifecycle8644 с теми же corrected Tests и source declarations, после освобождения текущего ресурса. Только этап0 полностью принят;1–12 частичны.
+
+
+## Совместные metadata gates и читаемые графики05.11
+
+[По74 проверки на обоих серверах и галерея42 оригинальных графиков](IntegratedMetadataAndTemporalReports.ru.md) приняты как данные: resource/publisher/identity/history controls и полные temporal reports существующего coordinator corpus. Все42 изображения просмотрены в исходном размере. Объединённый candidate d936 не принят как production code; runtime/Owner/full ASan и научная матрица ещё открыты. Только этап0 полностью завершён.
+
+
+## Native133 и совместимость сохранённого analysis05.11
+
+[Native133 прошёл; Owner8 ещё не положительный; recovery20 на старом corpus fail-closed по версиям аудитора](RecognitionAndRecovery-2026-11-05.ru.md). Отрицательные результаты и ошибки harness сохранены. Открыты свежая integrated SDK/coordinator corpus и explicit historical adapters; старые manifests не переписываются. Данные не являются merge алгоритмов или завершением этапов1–12.
+
+
+## Положительные Owner8/133 и explicit historical readers05.11
+
+[Новый источник2cb прошёл Owner8 и full133; feature d2d68 прошёл16/16 на обоих workers](Owner141AndHistoricalAdapters.ru.md). Исправлены явные переходы auditor2/3 к current learned5/stopped4 без переписывания primaries. Принимаются receipts, а не интегрированный code merge. ASan304 и fresh SDK/coordinator/scientific matrix остаются открыты. Сохранён verified lossless M40 cache; удалены только устаревшие builds и подтверждённые expanded дубли.

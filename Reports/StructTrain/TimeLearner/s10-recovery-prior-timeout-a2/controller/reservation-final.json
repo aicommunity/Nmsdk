@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "Elder-1",
+  "leases": [
+    {
+      "token": "2c494e3a-ef65-42ba-b53b-b8766774452c",
+      "job_id": "s10-current-package-recovery-declaration-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2663994,
+        "start_ticks": "341339903",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-current-package-recovery-declaration-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-current-package-recovery-declaration-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793843630.8758402,
+      "deadline": 1793845536.5159965,
+      "updated": 1793845430.4833355,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
