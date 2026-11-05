@@ -1,0 +1,43 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a50bdae691ee9802aeded765fd9cee4db13898e9bf4e30d10a3d71aac9630a7d",
+      "unit": "timelearner-89512ffc-9515-4aa6-8b19-11e70fe52598.service",
+      "invocation_id": "fcb395f304ce49fbb31eccf94108625d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-89512ffc-9515-4aa6-8b19-11e70fe52598.service",
+      "initial_main_pid": 2662129,
+      "initial_start_ticks": "341325307",
+      "sha256": "29672ec1aaee7cc8b7a4c23d1ffbe168cbc3e5b611530b614549fa4fc1fa44dc"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "536870912",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 89512ffc-9515-4aa6-8b19-11e70fe52598",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "fcb395f304ce49fbb31eccf94108625d"
+    },
+    "memory_max": 536870912,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "stderr": "Traceback (most recent call last):\n  File \"/tmp/timelearner-current-package-recovery-declaration-a1-worker.py\", line 5, in <module>\n    from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency\nModuleNotFoundError: No module named 'Scripts.StructTrain.TimeLearner.worker_dependency'\n",
+  "test_execution": false,
+  "reservation_created": false,
+  "reason": "harness attempted operational helper import from older immutable product snapshot"
+}
