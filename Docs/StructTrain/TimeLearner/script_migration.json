@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending; twenty historical cable_model and E1 tools retired together; standalone Euler/proxy/XML-overlay assumptions remain historical, all primary outputs retained; E05 and other remaining tools pending; nine remaining path-selected historical root tools retired with Git retrieval; no active production callers found, historical measurements retained, broader untagged scripts and Bin remain pending; eight historical untagged audit/probe Python tools retired after source and literal-caller review; two dependent extraction CMake targets removed; general GUI/component probes retained for separate review, no native equivalence or complete migration claim; eight historical PhaseA shell/Python tools retired after full source and literal caller review; all August configurations and observations preserved; active scientific replay/remaining Bin migration incomplete; eighteen historical FastResponse/FastSpan tools retired after full source/helper-diff/caller review; raw configuration/model/CSV and report bodies retained, exact two-worker metadata gates pending; two historical BranchFastSpan/InhGrid generators retired without wrappers; storage-aware production preparation is separate, existing generated experiment data unchanged",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending; twenty historical cable_model and E1 tools retired together; standalone Euler/proxy/XML-overlay assumptions remain historical, all primary outputs retained; E05 and other remaining tools pending; nine remaining path-selected historical root tools retired with Git retrieval; no active production callers found, historical measurements retained, broader untagged scripts and Bin remain pending; eight historical untagged audit/probe Python tools retired after source and literal-caller review; two dependent extraction CMake targets removed; general GUI/component probes retained for separate review, no native equivalence or complete migration claim; eight historical PhaseA shell/Python tools retired after full source and literal caller review; all August configurations and observations preserved; active scientific replay/remaining Bin migration incomplete; eighteen historical FastResponse/FastSpan tools retired after full source/helper-diff/caller review; raw configuration/model/CSV and report bodies retained, exact two-worker metadata gates pending; two historical BranchFastSpan/InhGrid generators retired without wrappers; storage-aware production preparation is separate, existing generated experiment data unchanged; nineteen historical PSI campaign tools retired as one dependency group; adaptive tolerance/Test selection remains explicitly historical, no model/data/report body changed",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -3559,6 +3559,405 @@
       "replacement": null,
       "reason": "Historical72-grid directory-replacing generator and README disagree on base neuron class. Its partial text overlays are not effective model export/import or factor validity; existing manifest/configurations/results preserved.",
       "original_results": "All generated configs, models, manifests, observations and historical report bodies preserved; retrieval proves source bytes, not historical execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "7ca8c6695b049e0134fae7ebec93260a1d952f03",
+      "blob_sha1": "560f1ee49721b2b3df5bb1d42627e5ea89f3300f",
+      "content_sha256": "0dd00eedaa88f650328d43da274bb56e9117efeb546a515c1e7cc75361f28f7c",
+      "bytes": 3086,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/evaluate_selectivity_csv.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "7ca8c6695b049e0134fae7ebec93260a1d952f03",
+      "blob_sha1": "c16682b8ac655f7b728add83ba01ea64c1c29a9d",
+      "content_sha256": "46ff1bb020bc7123e60366efbcd03f78cdb1564828dec9ddb87f1934d20f66fd",
+      "bytes": 397,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/evaluate_selectivity_csv.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/evaluate_selectivity_csv.py"
+      ],
+      "replacement": null,
+      "reason": "Historical forwarding wrapper into legacy Bin scorer; current production metrics and explicit historical adapters belong to the root package.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/inject_analyzer.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "b6cb3b0f189f23c0164e2bab861f529b6474e1d8",
+      "blob_sha1": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "bytes": 3576,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/inject_analyzer.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/inject_analyzer.py"
+      ],
+      "replacement": null,
+      "reason": "Historical partial regex/XML overlay is not a complete semantic model export/import, storage profile or connectivity validation.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/merge_train_weights.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "f298642182d0ef88c1314bf6a5ccd7f221b8de1e",
+      "blob_sha1": "093acd24971586304b4de03246f96a5d0524a3cf",
+      "content_sha256": "4ad40154bb02d7690315704205f1c3745105054b152ddc27773019853205dce3",
+      "bytes": 2138,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/merge_train_weights.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/merge_train_weights.py"
+      ],
+      "replacement": null,
+      "reason": "Historical partial regex/XML overlay is not a complete semantic model export/import, storage profile or connectivity validation.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_autothr.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "b6cb3b0f189f23c0164e2bab861f529b6474e1d8",
+      "blob_sha1": "9e4f6830a350b9aef5ab0e0bed807c12abbe1222",
+      "content_sha256": "379e64ec01712edb1319824007c56bcb364e9946b9ce232242b969e4a4a6bc07",
+      "bytes": 1697,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_autothr.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_autothr.py"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_neuron_class.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "b6cb3b0f189f23c0164e2bab861f529b6474e1d8",
+      "blob_sha1": "43068111906232c6749fc735ec8f58b0be599e6a",
+      "content_sha256": "dc0744a6907280dfcca06f8441b4f284f25ba247775acf6ef797181da87a5365",
+      "bytes": 718,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_neuron_class.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_neuron_class.py"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_pattern_scale.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "5715c51cfc785a8ac102ad470794317508045552",
+      "blob_sha1": "8c4344fc24030d314c5d666b37e60fb22a0ac6e5",
+      "content_sha256": "0897836457ba94c96ebc91e0c03436930ba77386eab23731dae173c99c1a56eb",
+      "bytes": 6311,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_pattern_scale.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_pattern_scale.py"
+      ],
+      "replacement": null,
+      "reason": "Historical text matrix scaling also changes tolerances and floors ISIs; malformed tokens can survive. Factor identity and validation belong to declared production jobs, not this patch.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_test_model.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "b6cb3b0f189f23c0164e2bab861f529b6474e1d8",
+      "blob_sha1": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "bytes": 2027,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_test_model.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_test_model.py"
+      ],
+      "replacement": null,
+      "reason": "Historical partial regex/XML overlay is not a complete semantic model export/import, storage profile or connectivity validation.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/prepare_gui_psi_train.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "f298642182d0ef88c1314bf6a5ccd7f221b8de1e",
+      "blob_sha1": "3ef0b5137d0fb3d1442113df08d930699e08d8d4",
+      "content_sha256": "0a22bdac4d47a41e9267f096b8e4925a7531c798740edc5f23876bbfbac5960b",
+      "bytes": 3987,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/prepare_gui_psi_train.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/prepare_gui_psi_train.py"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_autothr_experiments.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "b6cb3b0f189f23c0164e2bab861f529b6474e1d8",
+      "blob_sha1": "2fa720c6e5b483bc4e93bfa1e1be89863db73e53",
+      "content_sha256": "4dfde470e432a787f5b39e4f5b224abbf0546691c37e7d152837f8baa03d9143",
+      "bytes": 2064,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_autothr_experiments.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_autothr_experiments.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_experiments.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "b6cb3b0f189f23c0164e2bab861f529b6474e1d8",
+      "blob_sha1": "b5c92f5326910862ebc50f4ebe947ba9c0ec3cd9",
+      "content_sha256": "ac73ab3503d70d504bda9515c5a548dbd8e6f53737aec20adc64f4f6aff13f7f",
+      "bytes": 1404,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_experiments.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_experiments.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_time_compress.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "ac2e79dac2c902c7ef343be43c7b0fcd28ca9169",
+      "blob_sha1": "6af6bc55de7a539f942c012c460dff0ec9cd26e0",
+      "content_sha256": "780c86b07b9f4fb56a336eb868c57706da1d94545b601f287e8a2d593887274b",
+      "bytes": 12409,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_time_compress.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_time_compress.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical Done-seeking timing grid widens SyncTolerance and ranks Test outcomes on the same matrix; retain history, do not import tolerance relaxation into the new fixed-goal controller.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_autothr_experiments.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "f298642182d0ef88c1314bf6a5ccd7f221b8de1e",
+      "blob_sha1": "e3a97fcdd7889595fd678ee23bbe654b75202e60",
+      "content_sha256": "3dd0946b8ed93b4cfab736febe02bed43ecc69b958fdeee6160d638b8ea83c48",
+      "bytes": 3438,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_autothr_experiments.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_autothr_experiments.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_experiments.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "f298642182d0ef88c1314bf6a5ccd7f221b8de1e",
+      "blob_sha1": "41fd06dcb068f6bfadf686832256afbd10c60ddd",
+      "content_sha256": "dceeb55418793cd6e899f86790bcf468a9ba4d4c541188b6d361f7ccb60cbd87",
+      "bytes": 4868,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_experiments.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_experiments.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_gui_autothr_exp02.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "e6a41407d416929a98d1328015a3fd104dcff74a",
+      "blob_sha1": "3dfc344538f939b264f933bca186308ad7a0378d",
+      "content_sha256": "83b6afd5b257837e87566510a2f0d8b768dbe88d159f3eb7d4dc27ab4242f3d8",
+      "bytes": 2543,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_gui_autothr_exp02.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_gui_autothr_exp02.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_k_sweep.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "29c9bfd67f48e5164e3ffd62f0d3435378b3ec24",
+      "blob_sha1": "95ece684d18d6ab3496d545473303d88071f70ae",
+      "content_sha256": "6dbeddd18c91a413db5707a02b9357b5d1532c21782a3e52718c66027aa8f1f0",
+      "bytes": 4219,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_k_sweep.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_k_sweep.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_compress.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "5acf53c98f8be17840a3102f5d62774e1ed3df3c",
+      "blob_sha1": "cb771f9cab2c63898310f3c16c298ada1ce95a86",
+      "content_sha256": "aaaf8555bf7f49b03f3dee4727fb87968273e87e2dcbdf26cec395511e5de3b3",
+      "bytes": 5018,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_compress.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_compress.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_expand.sh",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "f3c1966979226f8474675cffa01f3f2a1b450f79",
+      "blob_sha1": "4acf96dcc912f894994628ec052ed578649524fd",
+      "content_sha256": "22f253cdfc8f72420e8f762ab4df32dc5bcad27ec22d9e40f400b9c9870dc68b",
+      "bytes": 4627,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_expand.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_expand.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical PSI campaign-local configuration patch/launcher; production storage profiles, full model import/export and declared calibration/evaluation replace this procedural workflow. No runtime equivalence claimed.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/tune_timing_params.py",
+      "action": "retired_historical",
+      "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+      "last_change_commit": "6ac7a5516abb3595170d0eee5ee9c2fc89f6c555",
+      "blob_sha1": "0ced6ffe6edbdd4faa5b5d4e78aadd32c2eea742",
+      "content_sha256": "4a38a49b2c356d060fd7f8e2f7d5381eb780623f48e8c3e0058edeba1008c4ac",
+      "bytes": 5383,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/525aafbafe72679b40332eeb7704a922c3c72eee/Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/tune_timing_params.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "525aafbafe72679b40332eeb7704a922c3c72eee:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/tune_timing_params.py"
+      ],
+      "replacement": null,
+      "reason": "Historical Done-seeking timing grid widens SyncTolerance and ranks Test outcomes on the same matrix; retain history, do not import tolerance relaxation into the new fixed-goal controller.",
+      "original_results": "Original XML/configs, matrices, models, CSV, interface templates and historical report bodies retained unchanged. Retrieval proves script source bytes, not successful execution or current scientific validity."
     }
   ],
   "reference_review": {
@@ -3588,11 +3987,11 @@
     "full migration dependency review"
   ],
   "last_batch": {
-    "name": "historical BranchFastSpan/InhGrid generators",
-    "files": 2,
+    "name": "historical PSI campaign tools",
+    "files": 19,
     "archive_repository": "Bin",
-    "archive_commit": "11ad066eac74d26c3e71e471c8a5998323e79176",
-    "acceptance": "both workers passed186 production history records/exact scope/restored-path negative; evidence2be0a887de961162be596880cdee7a721f93d9ca andfff1f61f5564b02b8e51862d80a1823f9c209ed0; Bin develop merge525aafbafe72679b40332eeb7704a922c3c72eee tree equals tested featurea781"
+    "archive_commit": "525aafbafe72679b40332eeb7704a922c3c72eee",
+    "acceptance": "pending both-worker production verify-migration, restored-path negative, exact scope and preserved report bodies; no old script/model execution"
   },
   "moved_files": [
     {
