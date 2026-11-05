@@ -1,0 +1,141 @@
+{
+  "source_records_independently_hashed": 184,
+  "complete": false,
+  "workers": {
+    "elder": {
+      "evidence_commit": "b9a02fdd4e0586f515d4aa24fe33e7830773cc0c",
+      "prefix": "Reports/StructTrain/TimeLearner/s09-fast-tools-elder-a1/",
+      "archive_bytes": 138220,
+      "archive_sha256": "75f7b8a3ce600cf9e03f98462de6b1220c2ba65237c993c0eaa05dbdfed81e94",
+      "members_verified": 16,
+      "published_checksums": 18,
+      "production_Python_blobs_verified": 279,
+      "records_verified": 184,
+      "negative_rejected": true,
+      "negative_git_scope_verified": true,
+      "exact_scope": {
+        "root_base": "32cb84567009d1c8df9cf499697eb53fef4eeea8",
+        "root_candidate": "6975400d120d8909665f2f5bbed1004559bcc85d",
+        "bin_base": "500764df8ae41604e03bdecdfd5531c7bc16f49b",
+        "bin_candidate": "897f0214e9397e0559032d2d13c3c35d7171c5ae",
+        "bin_exact_changes": {
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/README.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/REPORT.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/copy_config.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/inject_analyzer.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/merge_train_weights.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/patch_test_model.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/run_grid.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/setup_grid.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/JOURNAL.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/REPORT.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/copy_config.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/evaluate_selectivity_csv.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/inject_analyzer.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/merge_train_weights.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_pattern_scale.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_test_model.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_watch_pattern_legend.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/run_fastspan.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/run_parallel.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/setup_fastspan.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/verify_element_params.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/verify_pattern_span.py": "D"
+        },
+        "root_exact_changes": [
+          "Bin",
+          "Docs/StructTrain/TimeLearner/FastProtocolToolRetirement.ru.md",
+          "Docs/StructTrain/TimeLearner/script_migration.json"
+        ],
+        "all_other_bin_blobs_unchanged": true,
+        "preserved_original_report_bodies": [
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/REPORT.md",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/JOURNAL.md",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/REPORT.md"
+        ],
+        "unchanged_root_native_and_code_trees": {
+          "Scripts": "9b73fcfc31e7e72e4a8c0895b9de3ae372812b74",
+          "Tests": "cf51e3cf12b4529b123bc1210db220e4736b58ef",
+          "App": "1637df3021509a59074a8ee9e747e5b4d290ba25",
+          "CMakeLists.txt": "2a54513b75286c025142c1972f26a74b3ee2e176",
+          "Libraries": "3d2368ce70f303005e481c8988bf5bfa3d2f3bf5",
+          "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014"
+        },
+        "scientific_verdict": null
+      },
+      "closed_lease_released": true,
+      "native_models_executed": 0
+    },
+    "m40": {
+      "evidence_commit": "711e2e531b9248c364d0ed6ca9de9adf20d6c8bc",
+      "prefix": "Reports/StructTrain/TimeLearner/s09-fast-tools-m40-a1/",
+      "archive_bytes": 138200,
+      "archive_sha256": "c8ec0524cf68b5a5ac440a1dd60c63783f2ea0429d38ca009d5810fff6713812",
+      "members_verified": 16,
+      "published_checksums": 18,
+      "production_Python_blobs_verified": 279,
+      "records_verified": 184,
+      "negative_rejected": true,
+      "negative_git_scope_verified": true,
+      "exact_scope": {
+        "root_base": "32cb84567009d1c8df9cf499697eb53fef4eeea8",
+        "root_candidate": "6975400d120d8909665f2f5bbed1004559bcc85d",
+        "bin_base": "500764df8ae41604e03bdecdfd5531c7bc16f49b",
+        "bin_candidate": "897f0214e9397e0559032d2d13c3c35d7171c5ae",
+        "bin_exact_changes": {
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/README.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/REPORT.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/copy_config.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/inject_analyzer.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/merge_train_weights.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/patch_test_model.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/run_grid.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/scripts/setup_grid.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/JOURNAL.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/REPORT.md": "M",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/copy_config.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/evaluate_selectivity_csv.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/inject_analyzer.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/merge_train_weights.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_pattern_scale.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_test_model.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/patch_watch_pattern_legend.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/run_fastspan.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/run_parallel.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/setup_fastspan.sh": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/verify_element_params.py": "D",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/scripts/verify_pattern_span.py": "D"
+        },
+        "root_exact_changes": [
+          "Bin",
+          "Docs/StructTrain/TimeLearner/FastProtocolToolRetirement.ru.md",
+          "Docs/StructTrain/TimeLearner/script_migration.json"
+        ],
+        "all_other_bin_blobs_unchanged": true,
+        "preserved_original_report_bodies": [
+          "Configs/SpikeSamples/StructTrain/SelectivityFastResponse/REPORT.md",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/JOURNAL.md",
+          "Configs/SpikeSamples/StructTrain/SelectivityFastSpan/REPORT.md"
+        ],
+        "unchanged_root_native_and_code_trees": {
+          "Scripts": "9b73fcfc31e7e72e4a8c0895b9de3ae372812b74",
+          "Tests": "cf51e3cf12b4529b123bc1210db220e4736b58ef",
+          "App": "1637df3021509a59074a8ee9e747e5b4d290ba25",
+          "CMakeLists.txt": "2a54513b75286c025142c1972f26a74b3ee2e176",
+          "Libraries": "3d2368ce70f303005e481c8988bf5bfa3d2f3bf5",
+          "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014"
+        },
+        "scientific_verdict": null
+      },
+      "closed_lease_released": true,
+      "native_models_executed": 0
+    }
+  },
+  "integration": {
+    "bin_feature": "897f0214e9397e0559032d2d13c3c35d7171c5ae",
+    "bin_develop_merge": "11ad066eac74d26c3e71e471c8a5998323e79176",
+    "bin_tree": "016fc567836853115c5ea0dfc28b160eacbb5c80",
+    "tree_equal": true,
+    "remote_develop_reachability_verified": true
+  }
+}
