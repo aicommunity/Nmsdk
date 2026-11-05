@@ -1,3 +1,5 @@
+Актуализация05.11: normal integrated SDK завершил8/8+133/133, полные первичные данные проверены. Coordinator A2 отказал до моделей из-за duplicate reservation; исправленный A3 работает. Старый ASan304 завершился internal StackStore CHECK и invalid runtime, не PASS; зависимые ASan проверки остаются открытыми. [Текущие результаты, scope и следующая работа](IntegratedSdkResults-2026-11-05.ru.md). Ниже историческая постановка до завершения заданий.
+
 # Свежая integrated SDK: отдельный незавершённый gate
 
 На Elder подготовлено чистое дерево root `2e0618110a9abb48b94f6edc6b63c51f829ec810`, семь точных gitlinks, собственные Git stores без alternates. Pulse12d совмещает implementation f6 и принятые документы0ec. C++ App/Tests/CMake побайтно совпадают с ранее проверенным2cb, Pulse/Core — с f6; Python-пакет содержит323 файла. Это новая сборка, а не переименование старого runtime.
