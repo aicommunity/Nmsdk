@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "48586bfc-f797-49f5-9412-947df026c15a",
+      "job_id": "s10-publication-lock-recovery-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 535316,
+        "start_ticks": "298994842",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-publication-lock-recovery-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-publication-lock-recovery-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-publication-lock-recovery-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-publication-lock-recovery-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793914750.8990617,
+      "deadline": 1793914870.8990617,
+      "updated": 1793914754.875616,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
