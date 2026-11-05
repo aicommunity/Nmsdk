@@ -1,3 +1,5 @@
+Актуализация06.11: оставшиеся10 shell-драйверов также удалены отдельным принятым пакетом [AsymRmDriverRetirement](AsymRmDriverRetirement.ru.md). Упоминание ниже generic run_asymrm как остающегося на review относится к прежнему snapshot. Python-анализаторы и весь этап9 ещё открыты.
+
 # Удаление исторических запускателей AsymRm
 
 Отдельный подэтап9:17 shell entrypoints прежних pilot/finish/scale/sweep волн
