@@ -1,0 +1,7 @@
+# Совместный candidate historical/replay
+
+Через отдельные --no-ff merges включены d2d68 (explicit historical adapters),982e23 (native cohort readers/fresh-process owner replay) и accepted develop9f7ba1c6 (данные/документы). Конфликтов нет. App/Tests/CMake побайтно равны2cb; Pulsef6/Bin11ad/Rdk10e сохранены. Reader merge меняет только5 Python files и2 документа. [Git/AST-сверка](IntegratedHistoricalReplayMergeReview.json):321 Python files. Это не runtime gate новой комбинации.
+
+D2 feature прошёл16/16 на обоих workers, native2cb8/133 прошёл, reader982 на SDK802 прошёл128. Эти receipts не объявляются общей SDK приёмкой. Следующий контроль — saved-state transport A/B: те же8 actual owner packages2cb воспроизвести в16 новых процессах на old runtime1eab и новом2cb через production recognition_owner_replay. Проверять фактические input/soma samples, полные окна, frozen hash и побайтную проекцию paired waveform. Это не old-version cold retrain и не классификация.
+
+Затем необходимы свежая integrated SDK/coordinator corpus, совместная ASan проверка и остальная исходная матрица. Тяжёлая сборка не запускается рядом с42GiB ASan на47GiB M40 RAM. Accepted develop пока сохраняет Pulse9ec. Только этап0 полностью принят;1–12 частичны. Raw logs/CMake caches из принятых evidence сохраняют исходные пробелы; whitespace check применяется к source/docs, а Reports проверяются по SHA без редактирования primaries.

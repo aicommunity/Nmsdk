@@ -1,6 +1,6 @@
 # Явное чтение исторического Train analysis
 
-Изменение подготовлено в отдельной ветке на integrated d936. Серверная приёмка ожидается; это не merge всей интеграции в develop.
+Изменение подготовлено в отдельной ветке на integrated d936. На feature source d2d68a83bfb5d30e2a380b4eedf6f1cc162154d5 прошли16/16 real-primary checks на обоих workers; [receipts и границы](Owner141AndHistoricalAdapters.ru.md). Это не merge всей интеграции в develop.
 
 По умолчанию audit_run_manifest требует точного равенства сохранённого анализа и результата текущего аудитора. Прежняя версия отчёта не считается результатом новой версии автоматически. Все model/runtime/process/artifact проверки выполняются до адаптации.
 
