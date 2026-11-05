@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/tmp/timelearner-native-partition-full-asan-a1.py", line 30, in <module>
+    binding=start(m,[str(worker)],'/tmp',out,memory_bytes=42*1024**3,tasks=128,maximum_wall_seconds=90000)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3/Scripts/StructTrain/TimeLearner/contained_process.py", line 118, in start
+    require(type(memory_bytes) is int and 0 < memory_bytes <= 2**63-1 and
+  File "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: contained_limits_invalid
