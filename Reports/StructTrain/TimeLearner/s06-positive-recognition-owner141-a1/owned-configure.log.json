@@ -1,0 +1,20 @@
+{
+  "pid": 2695949,
+  "start_ticks": "341571959",
+  "arguments": [
+    "cmake",
+    "-S",
+    "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+    "-B",
+    "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1",
+    "-DCMAKE_BUILD_TYPE=Release",
+    "-DBUILD_TESTING=ON",
+    "-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON",
+    "-DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=OFF",
+    "-DFETCHCONTENT_SOURCE_DIR_GOOGLETEST=/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+    "-DFETCHCONTENT_UPDATES_DISCONNECTED=ON",
+    "-DRDK_LLM_LLAMA_CPP_DIR=/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+    "-DNMSDK_DEPLOY_ROOT=/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+    "-DNMSDK_RESOURCE_ROOT=/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin"
+  ]
+}

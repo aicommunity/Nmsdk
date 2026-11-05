@@ -1,0 +1,85 @@
+{
+  "token": "9e042025-1785-4f54-b260-a858a0c7a462",
+  "job_id": "s06-recognition-owner-burst-normal-a1",
+  "owner": {
+    "pid": 2695593,
+    "start_ticks": "341571795",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "resources": [
+    {
+      "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+      "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+      "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "demands": {
+    "slots": 1,
+    "memory_bytes": 8589934592,
+    "disk_bytes": 2147483648
+  },
+  "scientific_verdict": null
+}
