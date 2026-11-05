@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "945a54b6-ae22-433c-8a3a-dd0cb3b62152",
+  "job_id": "s07-csearch-threshold-joint-asan-gate-a3",
+  "recorded_unix": 1793826665.1690583,
+  "administrator": {
+    "pid": 4032337,
+    "start_ticks": "289628594",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 4032348,
+    "start_ticks": "289628607",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a3-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "7134e12099b713d0b8ea8ad9404eda38a0dde53942e948ada4fd94093f219163",
+      "unit": "timelearner-46dc7c61-181d-4fe4-a827-cd2fd6136e87.service",
+      "invocation_id": "d715574d19a547b18d41871e0d5f95a3",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-46dc7c61-181d-4fe4-a827-cd2fd6136e87.service",
+      "initial_main_pid": 4032348,
+      "initial_start_ticks": "289628607",
+      "sha256": "69cafa81b3ffc465e8ad383784cd55443442ff9786d68db08c5c444e73390e1e"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-46dc7c61-181d-4fe4-a827-cd2fd6136e87.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "ASan44 retry worker closed including archive creation; fresh kernel closure and exact worker main PID/start ticks verified before releasing read-only SDK and runtime/resource lease. Recovery does not attest test success.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-csearch-threshold-joint-asan-gate-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
