@@ -1,3 +1,5 @@
+Принято06.11: оба workers прошли production migration215 и restored-path negative без receipt; exact Bin10 deletions+7 prefix-only docs, все прочие blobs неизменны. Проверены все17 primary members и281 source hashes каждого worker. M40 data `d8d9178e33d471ce8888e5cf2e1ac9995a94b978`, Elder data `b85b102140d8217c7926ebe9d15449cc9227f6a9`. Bin merge `f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa` опубликован; его tree равен проверенному639bc3ef. [Независимая сверка](AsymRmDriverRetirementVerification.json). Постановка ниже сохранена как история; слова «пока не выполнена» относятся к состоянию до приёмки. Общий этап9 остаётся частичным.
+
 # Миграция оставшихся shell-драйверов AsymRm
 
 Подготовлен отдельный подэтап9: удаление десяти исторических shell-файлов
