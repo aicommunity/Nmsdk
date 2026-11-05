@@ -397,3 +397,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Положительные Owner8/133 и explicit historical readers05.11
 
 [Новый источник2cb прошёл Owner8 и full133; feature d2d68 прошёл16/16 на обоих workers](Owner141AndHistoricalAdapters.ru.md). Исправлены явные переходы auditor2/3 к current learned5/stopped4 без переписывания primaries. Принимаются receipts, а не интегрированный code merge. ASan304 и fresh SDK/coordinator/scientific matrix остаются открыты. Сохранён verified lossless M40 cache; удалены только устаревшие builds и подтверждённые expanded дубли.
+
+
+## Shared recognition A/B16 и readable temporal reports05.11
+
+[Восемь сохранённых моделей,16 отдельных процессов и8 побайтно равных soma/input waveforms](SharedRecognitionSavedAB.ru.md) приняты как transport evidence. Два renderer checks прошли; все16 выбранных оригиналов просмотрены.120 full views остаются кэшем M40. Этот continuous transport не заменяет cold retrain, reset-per-pattern/stock evaluation или проверку LT. Новая integrated SDK и ASan304→Owner8/readers128 остаются открыты.
