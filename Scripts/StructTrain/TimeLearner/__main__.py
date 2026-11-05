@@ -213,6 +213,9 @@ def main(argv: list[str] | None = None) -> int:
     publication.add_argument("specification", type=Path)
     publication.add_argument("--root", type=Path, required=True)
     publication.add_argument("--output", type=Path, required=True, help="new receipt outside source tree")
+    recovery = commands.add_parser("publish-recover", help="explicit Linux recovery of a closed publication lock; no push")
+    recovery.add_argument("--root", type=Path, required=True)
+    recovery.add_argument("--output", type=Path, required=True, help="new recovery receipt outside source tree")
     calibration = commands.add_parser("calibrate", help="run a native Console calibration job or select/confirm from saved primary measurements")
     calibration.add_argument("action", choices=("run", "select", "confirm"))
     calibration.add_argument("specification", type=Path)
@@ -500,6 +503,21 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError) as error:
             print(json.dumps({"kind": "timelearner_calibration_analysis_error", "validity": "invalid",
                               "reason": str(error), "calibrated": False, "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "publish-recover":
+        from .native_evidence import EvidenceError
+        from .publisher import recover_publication_lock
+        try:
+            with args.output.open("x", encoding="utf-8") as receipt:
+                result = recover_publication_lock(args.root)
+                json.dump(result, receipt, ensure_ascii=False, indent=2, allow_nan=False)
+                receipt.write("\n")
+            print(json.dumps(result, ensure_ascii=False))
+            return 0
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"kind": "timelearner_publication_lock_recovery", "recovery": "refused",
+                              "reason": str(error), "publication": "not_attempted",
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "publish":
         from .native_evidence import EvidenceError, load
