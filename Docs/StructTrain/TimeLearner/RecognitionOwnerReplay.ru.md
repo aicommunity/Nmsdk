@@ -51,3 +51,21 @@ solo-process roundtrip этим не объявляется выполненны
 Полная proposed suite — прежние119+5 domain CLI+4 replay checks=128.
 До серверной приёмки runtime pass не присвоен. C++/physical profiles, tolerances,
 CapturedPerInput и threshold100 transport controls не меняются.
+
+
+## Визуальный отчёт replay
+
+Модуль recognition_owner_replay_reports строит actual fresh soma SumPotential
+с наложением фактических input samples, без decimation: обзор,100-tick tiles
+и локальные amplitude details общим plotting renderer. Для каждой из8 моделей
+сохраняются все сомы (12 суммарно) и все записанные ticks. Протокол подаёт один
+объявленный transport pattern на модель; это не8-pattern scientific evaluation.
+LT spike timestamps этим paired-протоколом не записывались и не домысливаются.
+
+`python3 -m Scripts.StructTrain.TimeLearner.recognition_owner_replay_reports SOURCE REPLAY --output NEW_CACHE`
+проверяет replay/source до создания отчёта. Полные PNG/SVG/PDF/HTML хранятся
+кэшем на Data M40; в Git идут primary replay, ссылка на исходный corpus, metrics
+и выбранные читаемые рисунки. Старые primary в render directory не дублируются.
+Один отдельный actual rendering test проверяет8 моделей/12 сом, всеsamples,
+покрытие views, tick spacing>=8px и file hashes. В suite128 этот plotting test
+не включён: у него отдельные зависимости Matplotlib и отдельная серверная приёмка.
