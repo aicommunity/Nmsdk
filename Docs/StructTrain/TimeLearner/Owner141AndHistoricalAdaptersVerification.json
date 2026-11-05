@@ -1,0 +1,71 @@
+{
+  "local_operations": "Git,hash,tar,XML/JSON metadata only; all tests ran on workers",
+  "reports": [
+    {
+      "worker": "elder",
+      "evidence_commit": "b411dbf1eb469f83442dc816f77563f82bdfb5ea",
+      "prefix": "Reports/StructTrain/TimeLearner/s06-positive-recognition-owner141-a1/",
+      "archive_members_verified": 1878,
+      "published_checksums_verified": 48,
+      "archive_bytes": 13182444,
+      "archive_sha256": "db96d80302c6291d710e7c9206ecff0420e90ea59268f1e0bde5e4c0c3836b17",
+      "scientific_verdict": null,
+      "root_CPP_blobs": 56,
+      "Pulse_CPP_blobs": 265,
+      "focused-result_tests": 8,
+      "native-result_tests": 133,
+      "bundle_candidate_cpp_executed_null_is_not_authority": true,
+      "group_closed_and_lease_released": true
+    },
+    {
+      "worker": "elder",
+      "evidence_commit": "b411dbf1eb469f83442dc816f77563f82bdfb5ea",
+      "prefix": "Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-elder-a4/",
+      "archive_members_verified": 17,
+      "published_checksums_verified": 32,
+      "archive_bytes": 421176,
+      "archive_sha256": "8776ac558be39d485a0e64b843fb13e069f1ee28af03715c3675b5f4c5a06015",
+      "scientific_verdict": null,
+      "Python_source_blobs": 318,
+      "tests": 16,
+      "original_train_files": 716,
+      "originals_unchanged": true,
+      "group_closed_and_lease_released": true
+    },
+    {
+      "worker": "elder",
+      "evidence_commit": "b411dbf1eb469f83442dc816f77563f82bdfb5ea",
+      "prefix": "Reports/StructTrain/TimeLearner/s02-closed-owner-baselines-cache-a1/",
+      "archive_members_verified": 6,
+      "published_checksums_verified": 9,
+      "archive_bytes": 392084,
+      "archive_sha256": "d92d95a4410b3c21103c1b276d80bc894432a28cd5946f102cd49b140296a5a0",
+      "scientific_verdict": null,
+      "bytes_freed": 1222201344,
+      "processes_audited": 292,
+      "full_M40_cache_files": 2056,
+      "unique_primaries_lost": false
+    },
+    {
+      "worker": "m40",
+      "evidence_commit": "aa80142b415bef73d2effdf71e68bbd589a2d4e1",
+      "prefix": "Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-m40-a2/",
+      "archive_members_verified": 15,
+      "published_checksums_verified": 30,
+      "archive_bytes": 43152,
+      "archive_sha256": "e9d53765ca8df43a87e2e8ac780085a7e12690fe407138815f2f3a7a84d1b7b7",
+      "scientific_verdict": null,
+      "Python_source_blobs": 318,
+      "tests": 16,
+      "original_train_files": 706,
+      "originals_unchanged": true,
+      "group_closed_and_lease_released": true
+    }
+  ],
+  "historical_worker_primary_comparison": {
+    "common_entries_identical": 706,
+    "Elder_only_entries": 10,
+    "Elder_only_all_alias_symlinks": true,
+    "M40_only_entries": 0
+  }
+}
