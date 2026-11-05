@@ -1,5 +1,7 @@
 # Структурное обучение TimeLearner
 
+[Новые проверки74×2 и читаемая галерея временных откликов](IntegratedMetadataAndTemporalReports.ru.md).
+
 Этот раздел содержит поддерживаемую спецификацию рефакторинга двух компонентов:
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
