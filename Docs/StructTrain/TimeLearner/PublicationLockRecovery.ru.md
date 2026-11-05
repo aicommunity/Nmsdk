@@ -1,3 +1,5 @@
+Принято06.11: source `10d45ed93f08928a9992a3cf569c6a4938cdcd64` прошёл20/20 real Git publisher tests на каждом worker без failures/errors/skips. Проверены frontend SIGKILL при живом receive hook, kernel guard refusal, explicit public CLI recovery с сохранением owner и успешная children-first повторная публикация. Сверены282 source hashes каждого worker и все archive members. [Независимая проверка и полные Git-источники](PublicationLockRecoveryVerification.json). Первые A1 результаты с3 failures/13 errors сохранены: obsolete owner-write NameError исправлен в коде, CWD CLI исправлен в launcher; PASS задним числом не присваивается. Постановка ниже сохранена как история; этап10 остаётся частичным.
+
 # Блокировка publisher и явное восстановление после сбоя frontend
 
 Candidate устраняет PID-only ownership у блокировки публикации на Linux.
