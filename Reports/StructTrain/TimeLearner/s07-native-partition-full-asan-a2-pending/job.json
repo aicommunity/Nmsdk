@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "native_partition_full_ASan_acceptance_pending",
+  "native_source_root": "8021301e894368aefd045f9d77274fcce9f60245",
+  "native_pulselib": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+  "tool_root": "86118630da6fed4763715209e4405980cad59f0d",
+  "expected_cases": 304,
+  "process_policy": "one_independent_process_per_test_no_retries",
+  "maximum_case_wall_seconds": 7200,
+  "maximum_native_total_wall_seconds": 82800,
+  "maximum_whole_worker_wall_seconds": 86400,
+  "archive_budget_basis": "Reserve3600s within existing86400s contained backend maximum; original child gate maximum86400 retained, actual aggregate budget82800 declared explicitly. A1 requested90000 and was rejected before unit creation.",
+  "memory_bytes": 45097156608,
+  "tasks": 128,
+  "asan_options": "detect_leaks=0",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "kernel_live_snapshot": {
+    "pid": 202412,
+    "start_ticks": "295322316",
+    "root": "8021301e894368aefd045f9d77274fcce9f60245",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+    "contained_supervisor": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-full-asan-a2-container"
+  },
+  "worker_sha256": "b69dbc42b93c78798f41a699679066c4ebcd92ebad24f2fa9c104fa9d703e8c6"
+}
