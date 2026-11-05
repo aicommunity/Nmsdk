@@ -1,0 +1,9 @@
+# Явный источник для проверок RecognitionOwner
+
+Candidate корректирует только тестовую постановку восьми NativeRecognitionOwner cases. Старые случаи root4f/Pulsef6 (.01/.08,длины2–3,один sweep) фактически закончились budget_exhausted: лучший измеренный временной остаток58.5ms Classic/60.5ms Branch при sync20ms,ни один кандидат не within_timing. Исходные395 primary files сохранены в evidence d2a5de9e; baseline1eab↔candidate4f A/B выполняется отдельно по старым условиям. Измеренный набор не доказывает PhysicalInfeasible и пока не устанавливает регрессию.
+
+Новые Owner cases явно задают initial ISI [.01,.03] в EditingRig до InputPattern, построения/Init модели и конфигурации controller. Профиль помечен suffix owner_burst_003. Это отдельное условие для downstream owner/recognition contract: successful Train по-прежнему обязателен, certificate не подставляется. Если native Train не завершится, тест обязан упасть.
+
+Остальные условия сохранены:CapturedPerInput,anchor N−1,sync0.02,amp abs1e-5/relative0,frequency2000,штатная пачка/длительность окна,исходные bounds/бюджеты,N0/N1,configured/manual,fresh/spiking flags,неоднородная Capacity1.41nF и исходный LTMembrane profile. Алгоритмы PulseLib/Rdk/Console не изменяются. Предсказание о пригодности короткого паттерна — гипотеза до реального gate8 иfull133; старые отрицательные наблюдения не переоцениваются.
+
+Constructor проверяет размер/положительность/конечность интервалов и закрытие окна. Default для всех остальных fixture остаётся прежним. Восемь изменений вызовов и общий optional test-fixture аргумент находятся только в Test_PulseLib_NativeModelEditor.cpp. Следующий SDK должен быть отдельным и неизменяемым; существующие baseline/candidate runtime не обновляются. Numerical/integration проверки выполняются только на серверах. Новое научное качество классификации этой правкой не заявляется.
