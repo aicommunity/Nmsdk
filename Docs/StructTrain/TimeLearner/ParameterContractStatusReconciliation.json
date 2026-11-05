@@ -1,0 +1,178 @@
+{
+  "kind": "timelearner_parameter_contract_status_reconciliation",
+  "schema_version": 1,
+  "date_moscow": "2026-11-06",
+  "root_snapshot": "a4633b54028a5fc5d5a9a75f9bafbd0e86a5d377",
+  "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+  "evidence_kind": "immutable_git_source_comparison_and_previously_published_runtime_receipts",
+  "new_numerical_execution": false,
+  "setters": [
+    {
+      "component": "NNeuronTimeLearner",
+      "setter": "SetIterationGap",
+      "line": 3270,
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "65a197e3d82202564b8cbc146c8148b15beb5953222e7c9f650d9bc9105377e5",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "setter": "SetSyncTolerance",
+      "line": 3278,
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "9cdf8a0b3d4c1e648fd4cb87d2dbcba3d3f333bb2c4aab999ec7a190d96f70b9",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "setter": "SetPeakMeasureMargin",
+      "line": 3286,
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "c7b29873bb9f4d8f7a352927f93e68a05f005930b739d8c60261fcc941e5ba8a",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "setter": "SetDelayAgreeMarginMin",
+      "line": 3294,
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "9eed6364266eb93b8b49e082ae2376014cf85db2cc18f6c2e306b5d65ae9f962",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearner",
+      "setter": "SetEstDelayPerSeg",
+      "line": 3302,
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "bcc61d1915a5d24abe33d502c068f4d5d8c2d13a8698d5872d609731e60af6f2",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "setter": "SetIterationGap",
+      "line": 4020,
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "4040da4c64f29e581c553121bcaf9d6a3219c305e7f343f359ef4913edbb86ee",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "setter": "SetSyncTolerance",
+      "line": 4028,
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "d070ac352c91a1514ea65ca2f18979fa72bd69170536d564206a6f4002766844",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "setter": "SetPeakMeasureMargin",
+      "line": 4036,
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "4e233e3dd09b35a04340f0563f69584ac5ac19e29ddbe71876ff8ae8088b88e4",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "setter": "SetDelayAgreeMarginMin",
+      "line": 4044,
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "5c5cc855b0ad9d05f5cc3683f2f7123c75724ce0c69ba8dff189d5935fc01e27",
+      "identical_to_tested_method": true
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "setter": "SetInitEstDelayPerSeg",
+      "line": 4052,
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "accepted_pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "tested_pulse_commit": "ecf35a6c322f58fc9c4ffdfb998bf882f990252a",
+      "method_sha256": "5e2bd67772a6d3680eb2f0f51ed6ca3b851b7cb19113c692f21b85d5cc239fc3",
+      "identical_to_tested_method": true
+    }
+  ],
+  "measured_length_helpers": [
+    {
+      "path": "Core/TimeLearner/MeasuredLengthSearch.h",
+      "sha256": "8c3147e449cc6fb22ccf26deb9d0832b8fcf4cba8d400847ddab5eece9fa9aeb",
+      "identical_to_tested_blob": true
+    },
+    {
+      "path": "Core/TimeLearner/MeasuredLengthSearch.cpp",
+      "sha256": "6afb63cc6a2cca687eb8abbc398bd51516ff9409f00d58c35f1de246b66c6dc4",
+      "identical_to_tested_blob": true
+    }
+  ],
+  "timing_runtime_evidence": {
+    "normal_commit": "fff3d9ddf116c39abaf22ab5fa8b13025efd350b",
+    "asan_commit": "afe5bdf4b56deddf4a6021853b1ad76d145a494e",
+    "acceptance_document": "TimingFiniteValidation.ru.md",
+    "scope": "ordinary local UProperty::SetData on actual storage objects at2000/20000Hz; connected and SetDataDirect paths not attested"
+  },
+  "measured_length_runtime_evidence": {
+    "normal_gate_commit": "1701991807a10db5609a3656c468bb18bb1f30c3",
+    "asan_gate_commit": "d6110479ffc5deb5f496eb6e36ae10e6ce4e857a",
+    "acceptance_document": "MeasuredLengthProposal.ru.md",
+    "scope": "bounded measured-candidate proposal; legacy EstDelayPerSeg does not own this policy; no scientific classification claim"
+  },
+  "whole_parameter_matrix_complete": false,
+  "scientific_verdict": null,
+  "timing_primary_rechecked": [
+    {
+      "case": "normal",
+      "commit": "fff3d9ddf116c39abaf22ab5fa8b13025efd350b",
+      "archive_sha256": "b789cfbd1605e4fa80e22d49396edae02e4ab15760b20f2d26f49c9f4bb3ac4c",
+      "archive_members_verified": 71,
+      "property_records": 4,
+      "nonfinite_assignments_rejected_and_preserved": 120,
+      "completed_native_cases": [
+        4,
+        21
+      ],
+      "initial_timeout_preserved": false
+    },
+    {
+      "case": "asan",
+      "commit": "afe5bdf4b56deddf4a6021853b1ad76d145a494e",
+      "archive_sha256": "7e4aaab97d631714eccd2b0cb92fffb5f8b11ad9b88802226a5fc5f8afb0912a",
+      "archive_members_verified": 112,
+      "property_records": 4,
+      "nonfinite_assignments_rejected_and_preserved": 120,
+      "completed_native_cases": [
+        4,
+        21
+      ],
+      "initial_timeout_preserved": {
+        "kind": "timelearner_process_result",
+        "schema_version": 1,
+        "execution": "timeout",
+        "reason": "wall_budget_exhausted",
+        "returncode": -15,
+        "wall_seconds": 1800.6028125640005,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "7a2e034a805e022d0cd55ee19469772def5676755dbb59ace912d59a0c8978a0",
+        "ownership_scope": "launched_executable_only",
+        "scientific_verdict": null
+      }
+    }
+  ]
+}

@@ -8,6 +8,11 @@
 commit, blob, строка декларации/регистрации и реализации. Это source review;
 новых численных прогонов и полной runtime-приёмки18 свойств здесь нет.
 
+Актуализация06.11: исходный JSON-реестр остаётся историческим source snapshot.
+Текущие исправления и границы runtime-приёмки приведены ниже; их
+[сверка с принятым PulseLib и первичными данными](ParameterContractStatusReconciliation.json)
+не является новым численным прогоном.
+
 ## Действующие владельцы
 
 | Свойство | Legacy: default и смысл | Configured V2 |
@@ -20,7 +25,7 @@ commit, blob, строка декларации/регистрации и реа
 | DelayAgreeMarginMin |0.03 с, legacy agreement floor вместе с SyncTolerance. | Не является входом MakeConfiguredNativeTrainingPlan. |
 | IterationGap |0.5 с, условный нижний предел. При AutoScaleIterationGap=true этот предел игнорируется. | Полный протокол определяется длительностью пробы, окнами, reset policy и фактическими timestamps, а не этим legacy-полем. |
 | AutoScaleIterationGap |true: span+settle+slack. При false учитываются пользовательские floors. Dataset delay дополнительно ограничен снизу1.55 с для late-response окна. | Не объявляет V2 ITI. |
-| Classic EstDelayPerSeg / Branch InitEstDelayPerSeg | Classic: публичная адаптивная оценка0.005 с/сегмент. Branch: seed0, означающий fallback0.005, и отдельная приватная адаптивная оценка. | Эти поля не реализуют V2 informed proposal policy; этот пункт этапа7 остаётся открытым. |
+| Classic EstDelayPerSeg / Branch InitEstDelayPerSeg | Classic: публичная адаптивная оценка0.005 с/сегмент. Branch: seed0, означающий fallback0.005, и отдельная приватная адаптивная оценка. | Эти legacy-поля не управляют V2 proposal policy. В V2 уже принят отдельный measured-length proposer: минимум три согласованные измеренные длины, bounded bracket/secant candidate и обычный перебор при немонотонности. См. [область приёмки](MeasuredLengthProposal.ru.md); прогноз не подтверждает пик или Exact. |
 
 Обычный Reset не означает Default и не возвращает эти параметры к defaults.
 В частности, Classic сохраняет EstDelayPerSeg при ResizeSyncVectors. Branch
@@ -42,15 +47,24 @@ seed и текущая история оценки — разные сущнос
 его интеграция и положительные контроли применения факторов остаются в этапе9.
 Равенство результата N0/N1 само по себе не является ошибкой применения фактора.
 
-## Подтверждённые по исходникам незакрытые места
+## Статусы выявленных дефектов
 
-`PARAM-FINITE-001`: legacy setters SyncTolerance, PeakMeasureMargin,
-DelayAgreeMarginMin, IterationGap проверяют знак без явного isfinite; Classic
-EstDelayPerSeg проверяет только <=0. Branch InitEstDelayPerSeg вообще не имеет
-компонентного setter. Это пробелы проверки входа по исходникам. Достижимость
-через конкретный XML/parser и численный эффект ещё не воспроизведены. Строгий
-JSON parser V2 отдельно проверяет конечность значений; переносить на него
-утверждение об отсутствии этой проверки неверно.
+`PARAM-FINITE-001` — **исправлен и адресно runtime-проверен**. Исходный
+Pulse70f467d действительно принимал неконечные назначения. Исправление
+`ecf35a6c322f58fc9c4ffdfb998bf882f990252a` добавило isfinite в четыре общих
+setters, Classic EstDelayPerSeg и новый setter Branch InitEstDelayPerSeg.
+Все десять тел методов в принятом PulseLib0ec9193 побайтно совпадают с tested
+версиями. [TimingFiniteValidation](TimingFiniteValidation.ru.md) сохраняет
+baseline failure и normal/ASan acceptance: на каждом worker4 property cases
+и21 regression,120 NaN/±Inf назначений отклонены с сохранением предыдущего
+значения. При сверке06.11 повторно проверены все71/112 archive members,
+четыре actual property records и завершённые gtest receipts каждого корпуса.
+
+Это обычный локальный UProperty::SetData на настоящих storage-объектах,
+включая Return→Take, при2000/20000Hz. XML parser, SetDataDirect и connected
+supplier не покрыты этим утверждением; не считать их автоматически проверенными.
+Finite domains сохранены: общие margins/gap>=0, Classic estimate>0,
+Branch finite seed<=0 остаётся штатным fallback. JSON V2 имеет своего validator.
 
 `LIFECYCLE-BOOL-001`: legacy ABuild/AReset обоих learner всё ещё имеют ветви
 return false при внутренних отказах. Уточнение после проверки Rdk0a1c1d05:
