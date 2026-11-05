@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "8f5ec521-aab3-4194-9323-b096d9adfb80",
+  "job_id": "s09-fast-tool-retirement-a1",
+  "recorded_unix": 1793842797.9832416,
+  "administrator": {
+    "pid": 4165511,
+    "start_ticks": "291799141",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 4165520,
+    "start_ticks": "291799153",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-fast-tool-retirement-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a937ecdc147fea823cf3b93a42e2511ce640d88f714148b329c2a67b70ca558d",
+      "unit": "timelearner-3a3e547a-d806-4340-9dc4-b2508b122039.service",
+      "invocation_id": "5a44258b2ced42d8bda0614a5b075135",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3a3e547a-d806-4340-9dc4-b2508b122039.service",
+      "initial_main_pid": 4165520,
+      "initial_start_ticks": "291799153",
+      "sha256": "fc4db8319c0b52fb263844eae6b207bc7618adf605147b682e53b07c3a93418c"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-3a3e547a-d806-4340-9dc4-b2508b122039.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-fast-tool-retirement-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-fast-tool-retirement-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fast-tool-retirement-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fast-tool-retirement-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
