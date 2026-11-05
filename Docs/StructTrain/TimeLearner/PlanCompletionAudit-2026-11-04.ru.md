@@ -402,3 +402,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Shared recognition A/B16 и readable temporal reports05.11
 
 [Восемь сохранённых моделей,16 отдельных процессов и8 побайтно равных soma/input waveforms](SharedRecognitionSavedAB.ru.md) приняты как transport evidence. Два renderer checks прошли; все16 выбранных оригиналов просмотрены.120 full views остаются кэшем M40. Этот continuous transport не заменяет cold retrain, reset-per-pattern/stock evaluation или проверку LT. Новая integrated SDK и ASan304→Owner8/readers128 остаются открыты.
+
+
+## Устранён отставший статус NDataset/clock документации
+
+[Documentation-only Pulse merge](DatasetDocumentationCurrent.ru.md) помечает старый atoi/atof baseline историческим и связывает текущий reader/reload с уже принятой server evidence. Core tree не изменён, новых численных запусков нет; whole-plan completion этим не заявляется.
