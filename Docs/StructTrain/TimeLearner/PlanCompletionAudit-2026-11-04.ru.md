@@ -1,3 +1,5 @@
+Принято06.11: удалены10 оставшихся исторических shell-драйверов AsymRm; manifest215 проверен обоими workers через production CLI, restored-path negative и exact scope. Данные/модели/конфиги не удалялись, старые скрипты не запускались. [Приёмка](AsymRmDriverRetirement.ru.md). Bin path/suffix inventory131 — ограниченный срез; этап9 и все этапы1–12 частичны.
+
 Сверка06.11: устранены устаревшие открытые статусы PARAM-FINITE-001 и V2 measured-length proposal в обзоре параметров. Заново проверены10 accepted setters,2 helper blobs и normal71/ASan112 primary members; новых численных прогонов нет. [Точные области и оставшиеся пробелы](ParameterContractStatusReconciliation.ru.md). Все этапы1–12 частичны.
 
 Принято06.11: temporal отчёт отрицательного final-pass —32 реальные пробы,48 trial–soma pairs,288 автоматически проверенных видов;24 оригинала просмотрены. Все116 primary неизменны, новые модели не запускались. [Галерея, воспроизведение и границы](StoppedFinalPassTemporalVisuals.ru.md). N2/LT/sync0 — инженерная диагностика, не научный Test. Все этапы1–12 частичны.
