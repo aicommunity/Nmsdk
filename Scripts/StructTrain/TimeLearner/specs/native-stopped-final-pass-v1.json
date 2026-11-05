@@ -1,0 +1,15 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "runtime_manifest": "runtime.json",
+  "source_root": ".",
+  "expected_test_ids": [
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary"
+  ],
+  "maximum_wall_seconds": 1200,
+  "asan_options": "",
+  "cooperative_runtime_capture": true
+}
