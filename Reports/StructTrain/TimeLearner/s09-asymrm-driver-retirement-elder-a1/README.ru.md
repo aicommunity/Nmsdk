@@ -1,0 +1,1 @@
+Historical10 remaining AsymRm shell drivers retired: production history215 and restored-path negative passed; exact Bin10 deletions+7 historical documentation prefixes, Root3 paths. All other config/data/native/code objects and original report bodies unchanged. No model or old script executed; full migration and science completion not claimed.
