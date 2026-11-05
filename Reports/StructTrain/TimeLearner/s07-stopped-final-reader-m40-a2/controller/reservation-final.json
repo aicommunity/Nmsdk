@@ -1,0 +1,52 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "75715388-f387-4fda-adfc-7315683fd1ef",
+      "job_id": "s07-stopped-final-reader-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 505622,
+        "start_ticks": "298703203",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/stopped-final-native-elder-a1-reader-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/stopped-final-native-elder-a1-reader-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stopped-final-reader-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stopped-final-reader-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-stopped-final-diagnostics-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-stopped-final-diagnostics-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-stopped-final-diagnostics-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-stopped-final-diagnostics-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793911834.5101376,
+      "deadline": 1793911954.5101376,
+      "updated": 1793911838.4964213,
+      "release_note": "Whole metadata-only reader group freshly closed; no native model rerun.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}

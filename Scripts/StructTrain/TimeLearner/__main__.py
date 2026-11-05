@@ -54,6 +54,9 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "stopped-solo":
         from .stopped_evidence import audit_stopped_state, load_case
         result = audit_stopped_state(*load_case(source))
+    elif args.format == "stopped-final-pass":
+        from .stopped_final_pass import audit_negative_final_pass, load_inputs
+        result = audit_negative_final_pass(*load_inputs(source))
     elif args.format == "recognition-evaluation":
         from .recognition_metrics import load_evaluation, score_recognition_evaluation
         require(args.model is not None, "recognition_model_package_required")
@@ -185,7 +188,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
+    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "stopped-final-pass", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
