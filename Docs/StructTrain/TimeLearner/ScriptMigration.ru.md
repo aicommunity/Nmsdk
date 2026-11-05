@@ -1,3 +1,5 @@
+Принято06.11:215 records (213 retired/2 moved),complete=false. Десять оставшихся AsymRm shell-драйверов удалены после проверок обоих workers; конфиги, модели, измерения и исходные report bodies сохранены. [Область и Git-источники](AsymRmDriverRetirement.ru.md). Ограниченный path/suffix inventory Bin теперь131; полнота всей миграции не заявляется. Ниже — хронология прежних снимков.
+
 Принято04.11:166 records (164 retired/2 moved),complete=false. Удалены8 исторических PhaseA tools после двух actual CLI/negative/scope gates; августовские модели/конфиги/CSV/тело REPORT сохранены. [Приёмка](PhaseAToolRetirement.ru.md). Ниже — хронология прежних снимков.
 
 Принято04.11:158 records (156 retired/2 moved), complete=false. Оба workers проверили retirement8/negative/exact16/CMake prefix и расширенный inventory15. [Согласованная приёмка](InventoryAndAuditRetirementAcceptance.ru.md). Ниже — хронология прежних pending состояний; актуальные команды поиска находятся в корневом пакете.

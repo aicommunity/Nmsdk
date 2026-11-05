@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "3a9e3860-c66a-408d-918a-de07a55d091d",
+  "job_id": "s09-asymrm-driver-retirement-a1",
+  "recorded_unix": 1793913967.9921987,
+  "administrator": {
+    "pid": 3484149,
+    "start_ticks": "348373359",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 3484161,
+    "start_ticks": "348373369",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-asymrm-driver-retirement-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "465c92accb0ccefb7763e5bc4d53dfe006b9a0d13d17f99c97a122111ac8e875",
+      "unit": "timelearner-dcdd7e58-1b64-4988-859a-3e2f569927d9.service",
+      "invocation_id": "286e8ab7fc5b4051bbfa7efad5a690a7",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dcdd7e58-1b64-4988-859a-3e2f569927d9.service",
+      "initial_main_pid": 3484161,
+      "initial_start_ticks": "348373369",
+      "sha256": "948c0b5088380cdd780b2ef46bc50c91cf1c6606b7916c414a9977b92fa6a4dd"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-dcdd7e58-1b64-4988-859a-3e2f569927d9.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-asymrm-driver-retirement-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-asymrm-driver-retirement-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/source-asymrm-driver-retirement-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-asymrm-driver-retirement-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
