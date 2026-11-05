@@ -1,0 +1,1 @@
+Complete original compressed primary and fresh whole-group closure. Normal141 has focused8/full133 evidence. Failed304 has ASan StackStore internal failure and changed system library, not PASS. Coordinator A2 failed before native models due duplicate resource reservation. Scientific classification and complete refactoring are not attested.
