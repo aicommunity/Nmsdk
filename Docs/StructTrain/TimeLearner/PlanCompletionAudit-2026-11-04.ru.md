@@ -427,3 +427,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## ASan fixtures доступны в Git; numerical gate ещё pending
 
 [Шесть точных условий и103 saved-state fixtures сверены; post-build ASan8+133 поставлен в очередь](IntegratedSdkGate.ru.md). Cold/live и saved-state boundary categories разграничены по actual C++ source, исторические packages не приписываются новому Train. New heavy build/native jobs пока не запускались; текущие задания не изменены. Только этап0 полностью принят.
+
+
+## Подготовлен запас диска Elder
+
+[Адресно удалены1392 generated compiler outputs трёх закрытых builds](IntegratedSdkGate.ru.md), runtime/source/data/CMakeCache сохранены, все6 archive members и fresh closed/released состояние сверены. Это подтверждённая очистка воспроизводимого кэша, не scientific result и не завершение этапа2.
