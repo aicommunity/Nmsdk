@@ -1,4 +1,4 @@
-Temporal update: visual A1 rejected old-reader analysis mismatch; exact producer reader2e прошёл strict16-phase preflight, A2 rendering kernel-live. [Подробности, исходники и ограничения](IntegratedCoordinatorReportReader.ru.md). Старый pending A1 ниже — историческая постановка.
+Temporal update05.11: matching-reader A2 завершил16 reports/4 checks,42 выбранных оригинала визуально проверены и опубликованы. [Галерея и физические ограничения](IntegratedCoordinatorTemporalVisuals.ru.md). Старые pending A1/A2 формулировки ниже относятся к прежней постановке.
 
 # Integrated coordinator: normal8 принят, ASan цепочка исправлена
 
@@ -10,7 +10,7 @@ Native SDK root `2e0618110a9abb48b94f6edc6b63c51f829ec810`, Pulse12d:8/8 actual 
 
 Все четыре positive frozen controls:TP2/FP0/FN0/TN2. Это инженерные двухвходовые same-matrix проверки переноса/калибровки на конкретных условиях; не stock4-input/8-pattern scientific PASS и не независимое обобщение. ModelSpec1/2 — варианты сериализации, не независимые повторения. В derived scorer остаются source_training_evidence_checked=false, native_execution_verified=false, condition_identity_attested=false: сам scorer не является свидетельством этих проверок. Адресная проверка actual native units/loaded-runtime делается по отдельным process artifacts; общий production condition/provenance контур по всему исходному плану не принят.
 
-[Запланирован полный temporal report](../../../Reports/StructTrain/TimeLearner/s11-integrated-coordinator-visual-a1-pending/job.json):16 Train/calibration/frozen/negative-Train reports. Primary восстановлен на Data M40 через Git, все2233 файла повторно rehashed. Renderer source8c9ee9f6, без нового обучения; все зарегистрированные паттерны и сомы, реальные shared-input импульсы, native samples без downsampling, PNG1920×960 и zoom≥8px/tick. Полный HTML/PNG/SVG/PDF — cache на M40; в Git остаются compressed primary и выбранные рисунки после visual QA. Пока генерация/QA не завершены, графики не считаются принятыми.
+[Принятый temporal report](IntegratedCoordinatorTemporalVisuals.ru.md):16 Train/calibration/frozen/negative-Train reports, exact reader2e,5752 автоматических views,42 визуально проверенных оригинала. Полные отчёты/изображения — M40 Data cache; в Git primary/metadata/selected PNG. Фактический engineering-профиль содержит LTMembrane и отличается от stock-физики; scientific stock/independent PASS не заявляется. Историческая неудача reader8c сохранена отдельно.
 
 ## Исправленные зависимости ASan
 
