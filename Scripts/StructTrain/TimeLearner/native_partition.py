@@ -111,7 +111,7 @@ def run(specification, output):
         require(type(gate[key]) is str and bool(gate[key]), 'invalid_partition_path:'+key)
         path = Path(gate[key])
         gate[key] = str((path if path.is_absolute() else specification.parent/path).resolve(strict=True))
-    runtime = load(gate['runtime_manifest'])
+    runtime = load(Path(gate['runtime_manifest']))
     executable = verify_runtime(runtime)
     output = Path(output).resolve()
     for protected in (Path(gate['source_root']), executable.parent):
