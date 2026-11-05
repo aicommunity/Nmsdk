@@ -3,6 +3,8 @@
 Этот раздел содержит поддерживаемую спецификацию рефакторинга двух компонентов:
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
+**Текущий статус полного плана:** [аудит04.11 с дополнениями05.11](PlanCompletionAudit-2026-11-04.ru.md). Полностью принят только этап0; этапы1–12 частичны. [Последние завершённые ASan44/live6 проверки и их ограничения](CompletedGates-2026-11-05.ru.md); [принятая миграция18 FastResponse/FastSpan tools, manifest184](FastProtocolToolRetirement.ru.md). Pending source branches и работающие задания не считаются принятыми.
+
 [Научная сводка 03.11: реальные 5/8, ложные ответы и ссылки на графики](ScientificResults-2026-11-03.ru.md).
 [Завершённая серия: фиксированные N1-пороги, порядок, Reset и пауза](N1ProtocolRobustness.ru.md).
 
@@ -26,7 +28,7 @@ Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 - [Состояние 30.10: принятые подэтапы, доказательства и полный остаток плана](CurrentStatus-2026-10-30.ru.md).
 - [Приёмка 28.10: full post-fix gate, native completed state и child merges](PooledFullAcceptance.ru.md).
 - [Исходная точка и ход реализации](ImplementationStatus.ru.md).
-- [Актуальный статус всех этапов на 29.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-29.ru.md).
+- [Исторический срез всех этапов на 29.10: принятый develop, scoped проверки и оставшаяся работа](CurrentStatus-2026-10-29.ru.md).
 - [Историческая сводка 27.10 и последующие дополнения](CurrentStatus-2026-10-27.ru.md).
 - [Предшествующий аудит 27.10 и история дополнений](PlanCompletionAudit-2026-10-27.ru.md).
 - [Исходная сверка 25.10 и журнал последующих дополнений](PlanCompletionAudit-2026-10-25.ru.md).
