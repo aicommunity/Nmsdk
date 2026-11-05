@@ -9,6 +9,7 @@ from ..learned_evidence import audit_learned_state, load_case as learned_case
 from ..stopped_evidence import audit_stopped_state, load_case as stopped_case
 from ..native_evidence import EvidenceError, audit_probe, audit_training_summary, load
 from ..model_identity import canonical_model_sha256
+from .native_declared_corpus import model_spec2_cohort, require_model_spec2_records, audit_model_spec2_recognition_replay
 
 
 class CapacitanceSearchEvidenceTest(unittest.TestCase):
@@ -21,9 +22,13 @@ class CapacitanceSearchEvidenceTest(unittest.TestCase):
         cls.completed = sorted(cls.root.glob('*_csearch_learned_state.json'))
         cls.stopped = sorted(cls.root.glob('*_csearch_stopped_state.json'))
         cls.activation = sorted(cls.root.glob('*_csearch_activation_stopped_state.json'))
-        cls.codecs = sorted(cls.root.glob('*_csearch_codec_schema4_configuration.json'))
-        if [len(v) for v in [cls.completed, cls.stopped, cls.activation, cls.codecs]] != [4, 4, 4, 4]:
-            raise RuntimeError('requires all four actual topology/normalization cases in every schema4 group')
+        cls.codecs = sorted(cls.root.glob('*_csearch_codec*_schema4_configuration.json'))
+        completed2 = [load(p) for p in cls.completed if load(p)['configuration']['model']['schema_version'] == 2]
+        codecs2 = [load(p) for p in cls.codecs if load(p)['model']['schema_version'] == 2]
+        require_model_spec2_records(completed2, model_spec2_cohort(cls.root, 'On'))
+        require_model_spec2_records(codecs2, model_spec2_cohort(cls.root, 'codec'))
+        if [len(cls.completed)-len(completed2), len(cls.stopped), len(cls.activation), len(cls.codecs)-len(codecs2)] != [4, 4, 4, 4]:
+            raise RuntimeError('requires four baseline cases per schema4 group and the complete declared ModelSpec2 cohorts')
 
     @staticmethod
     def case(path):
@@ -51,6 +56,9 @@ class CapacitanceSearchEvidenceTest(unittest.TestCase):
         for path in self.completed+self.stopped:
             with self.subTest(path=path.name):
                 package = load(path)
+                if package['configuration']['model']['schema_version'] == 2:
+                    self.assertTrue(audit_model_spec2_recognition_replay(path, package)['waveform_bytes_exact'])
+                    continue
                 suffix = '_learned_state.json' if path in self.completed else '_stopped_state.json'
                 stem = path.name.removesuffix(suffix);fresh = load(path.with_name(stem+'_fresh_process.json'))
                 self.assertEqual(fresh['capacitance_history'], package['capacitance_history'])
