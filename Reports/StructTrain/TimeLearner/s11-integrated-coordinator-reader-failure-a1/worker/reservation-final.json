@@ -1,0 +1,173 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "3b92ba5a-5131-4fd3-9912-849cc5b938ef",
+      "job_id": "s11-managed-coordinator-visual-a4",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 4154458,
+        "start_ticks": "291630655",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-managed-coordinator-visual-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-managed-coordinator-visual-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793841109.1062438,
+      "deadline": 1793859109.1062438,
+      "updated": 1793841113.772863,
+      "release_note": "Read-only source render/check procedure ended; no model/experiment process launched. Cache result status recorded separately.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "bd6f19e2-275c-4669-90e2-299875d0e807",
+      "job_id": "s11-managed-coordinator-visual-a5",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 4157437,
+        "start_ticks": "291676733",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4/source",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4/source"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a5",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a5"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-managed-coordinator-visual-a5",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-managed-coordinator-visual-a5"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793841569.8795767,
+      "deadline": 1793859569.8795767,
+      "updated": 1793841571.730505,
+      "release_note": "Read-only source render/check procedure ended; no model/experiment process launched. Cache result status recorded separately.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "bc5d1753-87f6-4bba-95ba-8d8b04a18f27",
+      "job_id": "s11-managed-coordinator-visual-a6",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 4157922,
+        "start_ticks": "291682736",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4/source",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4/source"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a6",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a6"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-managed-coordinator-visual-a6",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-managed-coordinator-visual-a6"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793841630.001442,
+      "deadline": 1793861441.4015884,
+      "updated": 1793843515.0910423,
+      "release_note": "Read-only source render/check procedure ended; no model/experiment process launched. Cache result status recorded separately.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "cd2512ff-2223-456f-bad3-ddb5e8d7603d",
+      "job_id": "s11-integrated-coordinator-visual-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 330448,
+        "start_ticks": "296798280",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/integrated-coordinator-normal-a3/source",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/integrated-coordinator-normal-a3/source"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/integrated-coordinator-visual-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/integrated-coordinator-visual-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-integrated-coordinator-visual-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-integrated-coordinator-visual-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-runtime-interface-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793892785.561173,
+      "deadline": 1793910785.561173,
+      "updated": 1793892787.263589,
+      "release_note": "Read-only source render/check procedure ended; no model/experiment process launched. Cache result status recorded separately.",
+      "heartbeat_expired": false,
+      "owner_status": "identity_live",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
