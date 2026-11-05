@@ -1,0 +1,15 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "runtime_manifest": "/home/user/timelearner-refactor/readbacks/s07-stopped-final-native-elder-a1/runtime.json",
+  "source_root": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+  "expected_test_ids": [
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary"
+  ],
+  "maximum_wall_seconds": 1200,
+  "asan_options": "",
+  "cooperative_runtime_capture": true
+}
