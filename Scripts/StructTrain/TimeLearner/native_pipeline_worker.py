@@ -490,7 +490,7 @@ def audit_run_manifest(path, *, historical_analysis=None):
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     comparison = audit
     adapter_used = False
-    if historical_analysis is not None and manifest['analysis'] != audit:
+    if historical_analysis is not None:
         # Recompute with the current auditor first. Only an explicitly selected,
         # known schema transition may project its result into the archived shape.
         # The final equality still checks every other field and all native/runtime
