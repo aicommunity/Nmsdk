@@ -1,5 +1,7 @@
 # Joint304: актуализация первичных readers
 
+Историческая спецификация feature982; её normal SDK802 gate принят в [JointOwnerReplayNormal](JointOwnerReplayNormal.ru.md). Включение в integrated candidate не заменяет проверку новой комбинации. ASan counterpart остаётся открытым.
+
 Исходный source802 native304/304 не означает успешного анализа. Reader attempt
 A3 выполнил95/119:18 CLI subtest failures из-за UnboundLocalError analyze,
 два setUpClass errors из-за прибавления объявленных ModelSpec2 cohorts.

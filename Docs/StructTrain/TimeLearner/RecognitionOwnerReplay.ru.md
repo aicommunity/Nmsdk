@@ -1,5 +1,7 @@
 # Отдельный процесс импорта recognition state
 
+Историческая спецификация feature982; её normal SDK802 gate принят в [JointOwnerReplayNormal](JointOwnerReplayNormal.ru.md). Включение в integrated candidate не заменяет проверку новой комбинации. ASan counterpart остаётся открытым.
+
 Production module `Scripts.StructTrain.TimeLearner.recognition_owner_replay`
 запускает существующий NativeRecognitionOwner.FreshProcessImport в неизменённом
 SDK. Это replay, без Train, подбора порога, retarget и scientific verdict.
