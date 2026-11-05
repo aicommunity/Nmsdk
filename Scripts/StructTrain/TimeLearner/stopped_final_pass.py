@@ -12,12 +12,18 @@ from .stopped_evidence import audit_stopped_state
 
 
 def audit_negative_final_pass(package, summary, packets, traces):
+    require(type(summary) is dict and summary.get("kind") == "native_training_state_summary"
+            and type(summary.get("schema_version")) is int and summary["schema_version"] in (1, 2),
+            "unknown_negative_final_summary_schema")
     source_audit = audit_stopped_state(package, summary, packets, traces)
     require(package["training_outcome"] == "budget_exhausted"
             and package["reason"] == "maximum_sweeps_exhausted"
             and package["reference_complete"] is True,
             "unsupported_negative_final_pass_source")
     protocol = package["protocol"]
+    require(type(protocol.get("schema_version")) is int and protocol["schema_version"] == 3
+            and protocol.get("routing") in ("classic_burst", "branch_solo_burst"),
+            "unknown_negative_final_protocol_schema")
     inputs = protocol["inputs"]
     ids = [item["id"] for item in inputs]
     require(bool(ids) and len(set(ids)) == len(ids), "invalid_final_pass_inputs")
@@ -36,13 +42,13 @@ def audit_negative_final_pass(package, summary, packets, traces):
         prepared = packet["prepared"]
         spec = packet["observation"]["specification"]
         require(packet["current_base_revision"] == prepared["base_model_revision"] == revision
-                and prepared["model_epoch"] == epoch
+                and count(prepared["model_epoch"]) == epoch
                 and prepared["protocol_revision"] == protocol["revision"]
                 and prepared["routing"] == protocol["routing"], "final_pass_context_mismatch")
         selected = index if protocol["routing"] == "branch_solo_burst" else None
         require(prepared.get("selected_input_index") == selected,
                 "final_pass_selected_input_mismatch")
-        require(spec["schema_version"] == protocol["schema_version"]
+        require(type(spec["schema_version"]) is int and spec["schema_version"] == protocol["schema_version"]
                 and spec["sample_id"] == protocol["sample_id"]
                 and spec["pattern_hash"] == protocol["pattern_hash"]
                 and spec["expected_stimulus_ids"] == protocol["stimulus_ids"]
@@ -73,7 +79,8 @@ def audit_negative_final_pass(package, summary, packets, traces):
         runs.add(packet["observation"]["specification"]["run_id"])
     require(set(measured) == set(ids) and len(runs) == 1, "mixed_or_incomplete_negative_final_pass")
     sweeps = count(summary["configuration"]["maximum_sweeps"])
-    require(sweeps > 0 and next(iter(runs)) ==
+    require(sweeps == count(package["configuration"]["search"]["maximum_sweeps"])
+            and sweeps > 0 and next(iter(runs)) ==
             summary["configuration"]["run_id"] + "/final/" + str(sweeps - 1),
             "negative_final_pass_attempt_mismatch")
     anchor = measured[ids[-1]]
