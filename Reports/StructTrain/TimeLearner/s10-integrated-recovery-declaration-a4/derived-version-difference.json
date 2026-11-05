@@ -1,0 +1,105 @@
+{
+  "source_package": "d9363446203bdc41c762c81d47deffc835057148",
+  "examples": {
+    "Classic-v1": {
+      "original_analysis": {
+        "training_audit": {
+          "auditor_version": 3,
+          "certificate_consistent": true,
+          "primary_trials": 58,
+          "embedded_trials": 4,
+          "exact": true,
+          "model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+          "n0_candidate_repeats": 1,
+          "search_history_retained": true,
+          "native_import_verified": false,
+          "package_digest_verified": true,
+          "capacitance_state": null,
+          "evaluation_verdict": null
+        },
+        "completed_boundary": true,
+        "training_outcome": "exact",
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      "current_analysis": {
+        "training_audit": {
+          "auditor_version": 5,
+          "certificate_consistent": true,
+          "primary_trials": 58,
+          "embedded_trials": 4,
+          "exact": true,
+          "model_revision": "c7cb9097c528735451089778b9b0884d8a424188770a8369eb0949ffca79909c",
+          "n0_candidate_repeats": 1,
+          "search_history_retained": true,
+          "native_import_verified": false,
+          "package_digest_verified": true,
+          "capacitance_state": null,
+          "evaluation_verdict": null
+        },
+        "completed_boundary": true,
+        "training_outcome": "exact",
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      "only_changed_field": "training_audit.auditor_version",
+      "old": 3,
+      "current": 5,
+      "original_manifest_sha256": "d175ae1a49453ab067427fa063287a285976756e573e53a99dcf409a58738752",
+      "old_manifest_not_edited": true
+    },
+    "Classic-N0": {
+      "original_analysis": {
+        "training_audit": {
+          "auditor_version": 3,
+          "state_kind": "diagnostic",
+          "training_outcome": "budget_exhausted",
+          "n0_candidate_repeats": 1,
+          "search_history_retained": true,
+          "primary_trials": 14,
+          "reference_trials": 2,
+          "final_trials": 2,
+          "invalid_or_censored_trials": 0,
+          "certificate_present": false,
+          "native_import_verified": false,
+          "capacitance_state": null,
+          "evaluation_verdict": null
+        },
+        "completed_boundary": false,
+        "training_outcome": "budget_exhausted",
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      "current_analysis": {
+        "training_audit": {
+          "auditor_version": 4,
+          "state_kind": "diagnostic",
+          "training_outcome": "budget_exhausted",
+          "n0_candidate_repeats": 1,
+          "search_history_retained": true,
+          "primary_trials": 14,
+          "reference_trials": 2,
+          "final_trials": 2,
+          "invalid_or_censored_trials": 0,
+          "certificate_present": false,
+          "native_import_verified": false,
+          "capacitance_state": null,
+          "evaluation_verdict": null
+        },
+        "completed_boundary": false,
+        "training_outcome": "budget_exhausted",
+        "native_execution_verified": false,
+        "evaluation_verdict": null
+      },
+      "only_changed_field": "training_audit.auditor_version",
+      "old": 3,
+      "current": 4,
+      "original_manifest_sha256": "d0191f3443a3d6dac21d00c7d478a51e95bcbfda668dbf035be5b0cb70703402",
+      "old_manifest_not_edited": true
+    }
+  },
+  "all_cases_proven_equal": false,
+  "new_model_runs": 0,
+  "acceptance": false,
+  "scientific_verdict": null
+}
