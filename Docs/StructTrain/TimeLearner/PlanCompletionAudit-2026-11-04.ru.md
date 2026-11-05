@@ -407,3 +407,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Устранён отставший статус NDataset/clock документации
 
 [Documentation-only Pulse merge](DatasetDocumentationCurrent.ru.md) помечает старый atoi/atof baseline историческим и связывает текущий reader/reload с уже принятой server evidence. Core tree не изменён, новых численных запусков нет; whole-plan completion этим не заявляется.
+
+
+## Свежая integrated SDK поставлена на приёмку
+
+[Новая isolated сборка Elder и проверенное удаление только expanded native133 дубля](IntegratedSdkGate.ru.md). Root2e061/Pulse12d/Bin11ad, Owner8+133 pending; приёмка алгоритмов этим ещё не заявлена. Фактический read-only resource Bin99f указан отдельно, конфиги/физика совпадают по Git tree. На M40 прежняя ASan304 продолжается. Только этап0 принят полностью.
