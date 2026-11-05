@@ -1,0 +1,72 @@
+{
+  "kind": "timelearner_actual_git_push_frontend_crash",
+  "schema_version": 1,
+  "receive_hook_stat_when_ready": "3500381 (python3.10) S 3500372 3499007 3499007 0 -1 4194304 1226 0 0 0 1 0 0 0 30 10 1 0 348466880 20549632 2528 18446744073709551615 98146424573952 98146427414029 140721031049440 0 0 0 0 16781312 2 1 0 0 17 3 0 0 0 0 0 98146429786160 98146430070232 98147109740544 140721031051355 140721031051408 140721031051408 140721031053284 0\n",
+  "frontend_pid": 3500308,
+  "frontend_returncode": -9,
+  "original_owner": {
+    "kind": "timelearner_kernel_publication_lock",
+    "schema_version": 1,
+    "pid": 3500308,
+    "start_ticks": "348466864",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "host": "Elder-1",
+    "token": "d4af8dba25a04f7594656bb1f0025b2a",
+    "guard_device": 2051,
+    "guard_inode": 24774875
+  },
+  "live_git_recovery_refusal": "publication_guard_busy_owner_or_git_child_live",
+  "live_git_publish_refusal": "publication_guard_busy_owner_or_git_child_live",
+  "public_cli_recovery": {
+    "kind": "timelearner_publication_lock_recovery",
+    "schema_version": 1,
+    "recovery": "recovered",
+    "previous_owner": {
+      "kind": "timelearner_kernel_publication_lock",
+      "schema_version": 1,
+      "pid": 3500308,
+      "start_ticks": "348466864",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "host": "Elder-1",
+      "token": "d4af8dba25a04f7594656bb1f0025b2a",
+      "guard_device": 2051,
+      "guard_inode": 24774875
+    },
+    "preserved_owner_directory": "/tmp/tmpi2oaa9yo/root/.git/timelearner-publication-recovered-c9f478446f604471a2b3a8fa6b5ea8bd",
+    "kernel_guard_acquired": true,
+    "previous_owner_identity_live": false,
+    "git_push_executed": false,
+    "publication": "not_attempted",
+    "scientific_verdict": null
+  },
+  "resumed_publication": {
+    "kind": "timelearner_git_publication_result",
+    "schema_version": 1,
+    "publication": "published",
+    "repositories": [
+      {
+        "path": "A",
+        "commit": "990b60d3d6d80939461f2b846cff80eac53b28ba",
+        "remote": "origin",
+        "branch": "refs/heads/develop"
+      },
+      {
+        "path": "B",
+        "commit": "cbda8f00d674266b6928ba49780748dd31eccccd",
+        "remote": "origin",
+        "branch": "refs/heads/develop"
+      },
+      {
+        "path": ".",
+        "commit": "5a8710e42cf35228af693ee934e740efebf6bcfa",
+        "remote": "origin",
+        "branch": "refs/heads/develop"
+      }
+    ],
+    "scientific_verdict": null
+  },
+  "root_remote_commit": "5a8710e42cf35228af693ee934e740efebf6bcfa",
+  "expected_root_commit": "5a8710e42cf35228af693ee934e740efebf6bcfa",
+  "receive_hook_helper": "from pathlib import Path\nimport time,os\nPath('/tmp/tmpi2oaa9yo/receive-ready').write_text(str(os.getpid()))\ndeadline=time.monotonic()+25\nwhile not Path('/tmp/tmpi2oaa9yo/receive-release').exists():\n if time.monotonic()>deadline:raise SystemExit(2)\n time.sleep(.02)\n",
+  "scientific_verdict": null
+}
