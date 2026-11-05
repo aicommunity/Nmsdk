@@ -1,0 +1,1 @@
+Exact immutable reader2e passed strict read-only preflight of all16 Train/calibration/evaluate phase artifacts without historical adapters. Actual rendering A2 is a separate still-pending gate. New private code store includes root attributes required by sparse checkout. Original data and analysis fields unchanged.
