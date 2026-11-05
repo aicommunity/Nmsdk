@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "675804dd-4bd2-4b0c-8db6-9a3c00a371eb",
+  "job_id": "s10-managed-live-routing-normal-a5",
+  "recorded_unix": 1793825689.4426014,
+  "administrator": {
+    "pid": 2357638,
+    "start_ticks": "339039063",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 2413847,
+    "start_ticks": "339368034",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a5-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "bb548d0ce7b7cf86b694123629d99f0d6af9ac49bea4e19763b37ba83d9a263b",
+      "unit": "timelearner-33cafc34-d8d5-4423-8237-670009d33633.service",
+      "invocation_id": "7bb729293ab0456d9e45be73b6811473",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-33cafc34-d8d5-4423-8237-670009d33633.service",
+      "initial_main_pid": 2413847,
+      "initial_start_ticks": "339368034",
+      "sha256": "d356e8b5f293108f68975cd78796b63d398fbfd0acd8fd777ce509991f9238d7"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-33cafc34-d8d5-4423-8237-670009d33633.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Actual six live-routing controls passed: four native live Train/frozen paths and two unfinished Train/no-Test controls; all ten independently managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a5",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a5"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin",
+      "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
