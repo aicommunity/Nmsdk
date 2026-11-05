@@ -122,8 +122,11 @@ class StoppedFinalPass(unittest.TestCase):
                                     capture_output=True)
             self.assertEqual(result.returncode, 0, result.stderr.decode(errors="replace"))
             parsed = json.loads(output.read_text(encoding="utf-8"))
-            self.assertTrue(parsed["complete_measured_final_pass"])
-            self.assertFalse(parsed["certificate_present"])
+            self.assertEqual(parsed["kind"], "timelearner_analysis")
+            self.assertEqual(parsed["format"], "stopped-final-pass")
+            self.assertIsNone(parsed["evaluation_verdict"])
+            self.assertTrue(parsed["analysis"]["complete_measured_final_pass"])
+            self.assertFalse(parsed["analysis"]["certificate_present"])
 
     def test_unknown_descriptor_schema_fails_without_a_receipt(self):
         with tempfile.TemporaryDirectory() as temporary:
