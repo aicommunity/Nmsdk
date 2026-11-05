@@ -239,6 +239,14 @@ Spec/receipt хранить вне публикуемого checkout. Полны
 Docs/StructTrain/TimeLearner/GitClosurePublisher.ru.md. Это ещё не сквозной
 experiment runner, очереди или доказательство полноты артефактов эксперимента.
 
+После сбоя Linux publisher используйте отдельную команду
+`python3 -m Scripts.StructTrain.TimeLearner publish-recover --root CHECKOUT --output NEW_RECOVERY_RECEIPT.json`.
+Она не выполняет push: проверяет kernel guard, host/boot/PID/start и inode,
+сохраняет прежнего владельца и отказывает при живом Git-процессе. Старый
+PID-only lock или неизвестный формат требуют отдельной проверки.
+Контракт и серверные fault tests:
+Docs/StructTrain/TimeLearner/PublicationLockRecovery.ru.md.
+
 ### Процесс задания
 
 `python3 -m Scripts.StructTrain.TimeLearner.process_runner --runtime-manifest runtime.json --working-directory RUNTIME --output NEW_ATTEMPT --wall-seconds 60 -- ARGUMENTS`

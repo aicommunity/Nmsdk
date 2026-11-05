@@ -63,8 +63,13 @@ only then return publication=published
 неизменённого spec допустима. Если remote branch ушла вперёд, инструмент не
 переписывает её историю ради старого tip.
 
-Lock общий для worktrees. Оставшийся после crash lock не удаляется автоматически:
-нужно проверить живой процесс и явно восстановить управление. Полный stale-lease
+Lock общий для worktrees. На Linux kernel guard наследуется Git subprocess:
+смерть одного Python frontend не разрешает снять блокировку живого Git push.
+Оставшийся после crash lock не удаляется автоматически. Явная команда
+`publish-recover` проверяет host/boot/PID/start и тот же guard inode, сохраняет
+прежнего owner и не делает push. Старые PID-only/неизвестные locks и другой boot
+этим API не восстанавливаются. [Контракт и приёмка20×2](PublicationLockRecovery.ru.md).
+Полный stale-lease
 recovery scheduler остаётся отдельной задачей. Межрепозиторной Git-транзакции
 нет: последующая внешняя смена remote ref возможна. Финальная сверка фиксирует
 проверенное состояние, но не обещает вечную неизменность remote веток.

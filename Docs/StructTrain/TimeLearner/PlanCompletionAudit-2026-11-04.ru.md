@@ -1,3 +1,5 @@
+Принято06.11: Linux publication kernel guard и explicit recovery —20 actual Git tests на каждом worker, включая frontend crash во время живого push и повторную публикацию после закрытия. Полные оба attempts сохранены. [Контракт, доказательства и границы](PublicationLockRecovery.ru.md). Это не весь scheduler/reboot/ConditionSpec контур; этапы1–12 частичны.
+
 Принято06.11: удалены10 оставшихся исторических shell-драйверов AsymRm; manifest215 проверен обоими workers через production CLI, restored-path negative и exact scope. Данные/модели/конфиги не удалялись, старые скрипты не запускались. [Приёмка](AsymRmDriverRetirement.ru.md). Bin path/suffix inventory131 — ограниченный срез; этап9 и все этапы1–12 частичны.
 
 Сверка06.11: устранены устаревшие открытые статусы PARAM-FINITE-001 и V2 measured-length proposal в обзоре параметров. Заново проверены10 accepted setters,2 helper blobs и normal71/ASan112 primary members; новых численных прогонов нет. [Точные области и оставшиеся пробелы](ParameterContractStatusReconciliation.ru.md). Все этапы1–12 частичны.
