@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_analysis",
+  "schema_version": 1,
+  "execution": "completed",
+  "validity": "valid",
+  "format": "stopped-final-pass",
+  "analysis": {
+    "kind": "timelearner_negative_final_pass_diagnostics",
+    "schema_version": 1,
+    "source_stopped_sha256": "cc7e06c4332b5f221122e8243c881d4c8f1bd0037385763fb881debd6519211a",
+    "source_audit": {
+      "auditor_version": 3,
+      "state_kind": "diagnostic",
+      "training_outcome": "budget_exhausted",
+      "n0_candidate_repeats": 1,
+      "search_history_retained": true,
+      "primary_trials": 8,
+      "reference_trials": 2,
+      "final_trials": 2,
+      "invalid_or_censored_trials": 0,
+      "certificate_present": false,
+      "native_import_verified": false,
+      "capacitance_state": null,
+      "evaluation_verdict": null
+    },
+    "training_outcome": "budget_exhausted",
+    "training_reason": "maximum_sweeps_exhausted",
+    "model_revision": "ea8fc7b1729c4cbfdfe641261e0f6226b3b580286a3c07daf2207b71adf49fb3",
+    "model_epoch": 0,
+    "tolerances": {
+      "amplitude_absolute": 1e-05,
+      "amplitude_relative": 0,
+      "sync": 0
+    },
+    "residuals": [
+      {
+        "input_id": "input0",
+        "trial_id": "Branch_2000_N0_sweep_budget_boundary/automatic/session/1/final/0/verify/0/2",
+        "anchor_trial_id": "Branch_2000_N0_sweep_budget_boundary/automatic/session/1/final/0/verify/0/1",
+        "effective_model_revision": "945398b57d7f26a3b8c9983a1c1a7036caaf5750c2e60bb1d048684441b5b172",
+        "target_raw_potential": 0.0033828893825672557,
+        "measured_raw_potential": 0.0033828893825672557,
+        "amplitude_residual": 0.0,
+        "amplitude_tolerance": 1e-05,
+        "timing_low": -0.07050000000000001,
+        "timing_high": -0.07050000000000001,
+        "within_amplitude": true,
+        "within_timing": false
+      },
+      {
+        "input_id": "input1",
+        "trial_id": "Branch_2000_N0_sweep_budget_boundary/automatic/session/1/final/0/verify/0/1",
+        "anchor_trial_id": "Branch_2000_N0_sweep_budget_boundary/automatic/session/1/final/0/verify/0/1",
+        "effective_model_revision": "695b1d8dab446e43f43cca932e67ad000eafa49979350cd819716c1ec783b6b5",
+        "target_raw_potential": 0.004602018844406253,
+        "measured_raw_potential": 0.004602018844406253,
+        "amplitude_residual": 0.0,
+        "amplitude_tolerance": 1e-05,
+        "timing_low": 0.0,
+        "timing_high": 0.0,
+        "within_amplitude": true,
+        "within_timing": true
+      }
+    ],
+    "complete_measured_final_pass": true,
+    "certificate_present": false,
+    "training_completed": false,
+    "diagnostic_only": true,
+    "native_execution_verified": false,
+    "evaluation_verdict": null
+  },
+  "evaluation_verdict": null
+}
