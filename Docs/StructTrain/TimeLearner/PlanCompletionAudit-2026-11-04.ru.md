@@ -417,3 +417,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Принята миграция двух исторических grid generators
 
 [BranchFastSpan/InhGrid: оба worker186 и отрицательная проверка](GridGeneratorRetirement.ru.md), configs/physics/manifests/observations сохранены. Bin develop525aafba, manifest186 complete=false; lower-bound оставшихся Bin scripts161. Исторический README SymInh/AsymRm конфликт отмечен без переписывания результатов. Integrated SDK/ASan продолжают свои immutable задания; общий этап9 и этапы1–12 не завершены.
+
+
+## Следующая ASan SDK — только очередь, не приёмка
+
+[Отдельная build-only постановка root2e061/Pulse12d на M40](IntegratedSdkGate.ru.md) ждёт SDK802 ASan304→published owner8/readers128 и освобождения RAM. Исходники доставлены через Git; новая сборка и её native8+133 ещё не выполнены. На Elder normal SDK уже компилирована и фактический native процесс запущен; полный итог нужно читать из последующих verdict/terminal/XML, а не из этого live наблюдения. Все этапы1–12 остаются частичными.
