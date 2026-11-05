@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "1f13067d-7c21-4524-a8b4-b3f0723ce071",
+      "job_id": "s11-shared-saved-ab-visual-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 115329,
+        "start_ticks": "293972870",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/shared-saved-ab16-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/shared-saved-ab16-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-shared-saved-ab-visual-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-shared-saved-ab-visual-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-owner-plots-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-owner-plots-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793864531.2258291,
+      "deadline": 1793864691.2599301,
+      "updated": 1793864575.2944608,
+      "release_note": "Renderer and metadata group freshly closed; actual output reservation released.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
