@@ -600,3 +600,5 @@ lease recovery и production pipeline integration остаются открыт�
 - [Shared recognition negative8](s06-shared-recognition-negative-normal-a3/README.ru.md): all8 ran and failed, no133 or owner API pass; baseline comparison queued.
 
 - [Obsolete build-cache cleanup](s02-obsolete-schema4-build-cache-a4/README.ru.md): exact j1/j2 only, runtime/source/results retained, full process-use audit and metadata preserved.
+
+- [Current-package public coordinator regression8](s10-managed-public-coordinator-normal-a4/README.ru.md):20 actual Console phases, complete data; live6, new temporal report and scientific matrix pending.
