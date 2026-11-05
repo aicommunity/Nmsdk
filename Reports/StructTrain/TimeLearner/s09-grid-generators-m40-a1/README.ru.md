@@ -1,0 +1,1 @@
+Historical2 BranchFastSpan/InhGrid generator retirement: production history186 and restored-path negative passed; exact Bin2 deletions+README prefix, Root3 paths; all other config/data/native/code objects unchanged. No model or old generator executed. Metadata whole group freshly closed and lease released; no full migration or scientific completion claim.
