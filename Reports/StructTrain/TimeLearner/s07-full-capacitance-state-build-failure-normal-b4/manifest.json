@@ -1,0 +1,56 @@
+{
+  "kind": "timelearner_full_capacitance_unit_build_failure",
+  "schema_version": 1,
+  "root": "e561f2843f911ae4f31e8190854f22b8750c3991",
+  "pulselib": "9d95f05790b04a4505541d398fd039fa56e6a65f",
+  "worker": "normal",
+  "execution": "process_error",
+  "assertion_status": "not_assessed",
+  "expected_tests": 130,
+  "observed_tests": 0,
+  "reason": "strict compiler found one existing peak-window test copying a range element; no numerical tests executed",
+  "records": [
+    {
+      "path": "active-context-before.json",
+      "bytes": 1304,
+      "sha256": "6898024c349c11f3b814acd84b42051482a5a6e1b9bd9a0a1ab6f942888d3918"
+    },
+    {
+      "path": "compile-request.json",
+      "bytes": 28267,
+      "sha256": "3d0dfa766d8bf33c52a1151cc36988e0cf43469fa11c1c2b1eef52440f37ec5b"
+    },
+    {
+      "path": "compile-terminal.json",
+      "bytes": 22,
+      "sha256": "b9f87d4ceb14f54a8787da14c5985aa499e13197fe39c8f0f4ecf87e7a01957e"
+    },
+    {
+      "path": "compile.log",
+      "bytes": 1145,
+      "sha256": "c6339ed5883a13f0281cb9852baf499480c91d8a030e71e12cc26e920d1358d3"
+    },
+    {
+      "path": "exception.json",
+      "bytes": 277,
+      "sha256": "1a5be5362325fbcd99433a0d5da331249a57650a8be761b17abc4ffcd86be1d8"
+    },
+    {
+      "path": "job.py",
+      "bytes": 8967,
+      "sha256": "8e348720fb27f8fd12227f894cbde4d648e21422ca048ef896577d690e91f802"
+    },
+    {
+      "path": "pid.json",
+      "bytes": 50,
+      "sha256": "c655a5f40dc7dd794c9881f121ae586bc2d13797ac1eb38973ce506d77371095"
+    },
+    {
+      "path": "supervisor.log",
+      "bytes": 355,
+      "sha256": "0cb88f6e963d0e06f733829e72862d434ea669892ec16d216a0ea889a2cec5bf"
+    }
+  ],
+  "archive_sha256": "2259ed818d586ca02f9ff5b61f8b89f11542003f0c8a7dded7604e1d49b170fa",
+  "scientific_verdict": null
+}

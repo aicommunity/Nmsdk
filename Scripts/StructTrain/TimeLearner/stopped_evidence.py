@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .model_identity import canonical_model_sha256
 from .capacitance_evidence import audit_package_capacitance
+from .capacitance_boundary_evidence import audit_package_capacitance_history
 from .native_evidence import (audit_probe, count, load, number, require,
                               validate_configured_repeat_policy, validate_search_history_availability)
 
@@ -15,8 +16,8 @@ OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_obser
 
 def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dict) -> dict:
     require(package.get("kind") == "timelearner_stopped_state" and type(package.get("schema_version")) is int
-            and package["schema_version"] in (1, 2)
-            and len(package) == (27 if package["schema_version"] == 2 else 26), "unknown_stopped_state_schema")
+            and package["schema_version"] in (1, 2, 3, 4)
+            and len(package) == {1: 26, 2: 27, 3: 28, 4: 28}[package['schema_version']], "unknown_stopped_state_schema")
     require(package["state_kind"] == "diagnostic" and package["dynamic_checkpoint"] is False,
             "unsupported_stopped_state_kind")
     require(package["certificate"] is None and package["training_outcome"] in OUTCOMES,
@@ -39,7 +40,10 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     validate_model_spec(package['configuration']['model'])
     repeats = validate_configured_repeat_policy(package["configuration"], summary)
     retained = validate_search_history_availability(summary)
-    require(bool(packets) and set(packets) == set(traces), "missing_primary_trace")
+    require(set(packets) == set(traces), "missing_primary_trace")
+    if not packets:
+        require(package['reference_packets'] == [] and package['final_packets'] == [] and
+                package['reference_complete'] is False, 'empty_stopped_attempt_contains_measurements')
     observed = package["observed_packets"]
     require(isinstance(observed, list) and len(observed) == len(packets), "missing_observed_attempt")
     seen = set()
@@ -96,12 +100,14 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
             and training["target_pattern"] == package["configuration"]["model"]["initial_isi"],
             "archive_target_or_reference_mismatch")
     capacitance = audit_package_capacitance(package)
-    return {"auditor_version": 3, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
+    capacitance_history = audit_package_capacitance_history(package, summary)
+    return {"auditor_version": 4, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
             "n0_candidate_repeats": repeats, "search_history_retained": retained,
             "primary_trials": len(packets), "reference_trials": len(references), "final_trials": len(final_ids),
             "invalid_or_censored_trials": sum(not a["valid_observation"] for a in audits.values()),
             "certificate_present": False, "native_import_verified": False,
-            "capacitance_state": capacitance, "evaluation_verdict": None}
+            "capacitance_state": capacitance, **({"capacitance_history": capacitance_history} if capacitance_history is not None else {}),
+            "evaluation_verdict": None}
 
 
 def load_case(path: Path) -> tuple[dict, dict, dict, dict]:
