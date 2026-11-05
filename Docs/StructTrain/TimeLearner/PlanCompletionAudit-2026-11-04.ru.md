@@ -1,3 +1,5 @@
+Актуализация05.11: joint ASan44 A3 прошёл44/44 с измеренным пиком9.30GB без cap/OOM events; full304 выполняется. Live-routing package8c прошёл6/6 и10 native units, включая два ожидаемых process_error/exit2 stopped-Train controls. Fixed threshold1.0 остаётся полным молчанием; grid даёт инженерные TP2/FP0/FN0/TN2 на same-matrix. Проверенный obsolete build j3 удалён с сохранением SDK/runtime/results, освобождено703688704 bytes. [Первичные данные, независимая проверка и ограничения](CompletedGates-2026-11-05.ru.md). Все этапы1–12 частичны; pending source branches не приняты. Старые оперативные статусы ниже относятся ко времени их записи.
+
 Прогон05.11: public coordinator package8c прошёл8/8 и20 native phases на Console33fc; полный2238-member primary проверен. [Scope и ограничения](ManagedCoordinatorRegression.ru.md). Live6/temporal report/production integration ещё ожидаются; это не stock scientific PASS.
 
 Место Elder: удалены толькоobsolete build caches j1/j2,освобождено1168801792 bytes,source SDK/runtime/results сохранены. [Полный аудит операции](ObsoleteBuildCacheCleanup.ru.md). Последний замер послеоперации3378659328 bytes; A/B всё ещё ждёт predecessor closure.
