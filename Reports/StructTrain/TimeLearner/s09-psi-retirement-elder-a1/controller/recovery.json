@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "e9b843d9-b505-4d1f-a2f2-3dd6f0f918c9",
+  "job_id": "s09-psi-retirement-a2",
+  "recorded_unix": 1793900093.755552,
+  "administrator": {
+    "pid": 3329404,
+    "start_ticks": "346985934",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 3329420,
+    "start_ticks": "346985945",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "abf5ebf9890717cd1a6910309e16d622df51af39f5c7302934cd45ba23a191ef",
+      "unit": "timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+      "invocation_id": "72277660e7fb41d6b0cf4cbcdf539e2a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+      "initial_main_pid": 3329420,
+      "initial_start_ticks": "346985945",
+      "sha256": "4f8a8a458b338c5b1d2ffed9d4764ecc0226f508c299f9b923384fa01a85a54a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/source-psi-retirement-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-psi-retirement-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
