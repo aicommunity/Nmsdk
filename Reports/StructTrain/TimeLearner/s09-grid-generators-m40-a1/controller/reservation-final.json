@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "a991ea5a-990c-4e7c-a461-ef7f07deb352",
+      "job_id": "s09-grid-generator-retirement-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 145054,
+        "start_ticks": "294421758",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-grid-generator-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-grid-generator-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-grid-generator-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-grid-generator-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793869020.0690546,
+      "deadline": 1793869140.0690546,
+      "updated": 1793869024.0350852,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
