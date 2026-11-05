@@ -1,0 +1,296 @@
+[
+  {
+    "commit": "bc64516a2501be36e42049a6d7cb570108abd9eb",
+    "prefix": "Reports/StructTrain/TimeLearner/s07-joint-asan44-a3/",
+    "archive_bytes": 4329632,
+    "archive_sha256": "af260d751cb8bc2e16388bd36bc6d6c3b7f98d7ce837efe7ec677b9b4e6bd8d1",
+    "members_verified": 1266,
+    "raw_bytes": 408324825,
+    "published_checksums_verified": 22,
+    "sqlite_integrity_checks": 0,
+    "local_operations": "Git/hash/archive/SQLite metadata only; no model execution",
+    "source_blobs_verified": {
+      "root": 420,
+      "Libraries/Nmsdk-PulseLib": 263
+    },
+    "parent_closed_lease_released": true,
+    "terminal": {
+      "execution": "completed",
+      "native44_asan_passed": true,
+      "additional_readers_pending": true,
+      "owner_replay_pending": true,
+      "leak_absence_attested": false,
+      "whole_plan_complete": false,
+      "scientific_verdict": null
+    },
+    "native_verdict": {
+      "kind": "timelearner_native_test_gate_result",
+      "schema_version": 1,
+      "execution": "completed",
+      "validity": "valid",
+      "assertion_status": "passed",
+      "reason": "complete_declared_test_inventory",
+      "inventory": {
+        "expected": 44,
+        "observed": 44,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "9aed4db522fb3ad4b1e98ab56b4843725b50d6ec50d2cc771b513916171f4c16"
+      },
+      "scientific_verdict": null
+    },
+    "memory": {
+      "cgroup_after_native": {
+        "monotonic_seconds": 2901855.704279682,
+        "cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-46dc7c61-181d-4fe4-a827-cd2fd6136e87.service",
+        "memory.current": 622768128,
+        "memory.peak": 9299521536,
+        "memory.max": 45097156608,
+        "memory.swap.current": 0,
+        "events": {
+          "low": 0,
+          "high": 0,
+          "max": 0,
+          "oom": 0,
+          "oom_kill": 0,
+          "oom_group_kill": 0,
+          "sock_throttled": 0
+        }
+      },
+      "largest_reaped_child_maxrss_kib": 8526948,
+      "rusage_scope": "largest individual reaped child in this worker; cgroup peak is whole job through native completion",
+      "legacy_K1_final_peak_known": false
+    }
+  },
+  {
+    "commit": "4610cd382cad493ba7904018197cc4a2eec9aa40",
+    "prefix": "Reports/StructTrain/TimeLearner/s10-managed-live-routing-normal-a5/",
+    "archive_bytes": 6099312,
+    "archive_sha256": "46a83e2430327a1cfb7ae280dd29ff1b163b3335272384a2cee1ed8bd15c246c",
+    "members_verified": 1109,
+    "raw_bytes": 373442479,
+    "published_checksums_verified": 20,
+    "sqlite_integrity_checks": 6,
+    "local_operations": "Git/hash/archive/SQLite metadata only; no model execution",
+    "source_blobs_verified": {
+      "root": 294
+    },
+    "parent_closed_lease_released": true,
+    "terminal": {
+      "tests_passed": true,
+      "actual_managed_native_phases": 10,
+      "other_modes_and_fault_matrix_pending": true,
+      "independent_partition_verified": false,
+      "scientific_verdict": null,
+      "whole_plan_complete": false
+    },
+    "unit_request_count": 10,
+    "native_groups_verified_closed": 10,
+    "distinct_units": [
+      "timelearner-07493d72-f834-4daf-9de5-e07012b6c432.service",
+      "timelearner-13885f41-6f5b-4582-aa1e-f02aea1ac9ce.service",
+      "timelearner-6786f58c-02ec-426e-ade6-b07e8ccc0acb.service",
+      "timelearner-411cd581-493f-4c51-8ba6-faee6e4ea8fb.service",
+      "timelearner-59ab3789-9a49-4b39-95bf-42c639efc912.service",
+      "timelearner-fe471a0d-f9ea-4469-83f5-b8e3b95ced13.service",
+      "timelearner-74547cdd-1b50-4227-af39-48d867f51b66.service",
+      "timelearner-b4ce5018-deab-4571-90c4-5d5f466aa1fa.service",
+      "timelearner-c7a5c374-7343-438c-9de6-68c17cdf65dc.service",
+      "timelearner-9d6a34c6-f09e-4384-85ad-24243156bc8f.service"
+    ],
+    "case_summary": {
+      "actual-controls/Branch-grid/result.json": {
+        "completed_phases": [
+          "train",
+          "evaluate"
+        ],
+        "halted_phase": null,
+        "native_units": 2,
+        "pooled_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "independence_verified": false
+      },
+      "actual-controls/Classic-fixed/result.json": {
+        "completed_phases": [
+          "train",
+          "evaluate"
+        ],
+        "halted_phase": null,
+        "native_units": 2,
+        "pooled_counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 2,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.5,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        },
+        "independence_verified": false
+      },
+      "actual-controls/Branch-stopped/result.json": {
+        "completed_phases": [],
+        "halted_phase": "train",
+        "native_units": 1,
+        "pooled_counts": null,
+        "independence_verified": false
+      },
+      "actual-controls/Classic-stopped/result.json": {
+        "completed_phases": [],
+        "halted_phase": "train",
+        "native_units": 1,
+        "pooled_counts": null,
+        "independence_verified": false
+      },
+      "actual-controls/Classic-grid/result.json": {
+        "completed_phases": [
+          "train",
+          "evaluate"
+        ],
+        "halted_phase": null,
+        "native_units": 2,
+        "pooled_counts": {
+          "TP": 2,
+          "FP": 0,
+          "FN": 0,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 1.0,
+          "target_hit_rate": 1.0,
+          "foil_response_rate": 0.0
+        },
+        "independence_verified": false
+      },
+      "actual-controls/Branch-fixed/result.json": {
+        "completed_phases": [
+          "train",
+          "evaluate"
+        ],
+        "halted_phase": null,
+        "native_units": 2,
+        "pooled_counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 2,
+          "TN": 2,
+          "targets": 2,
+          "foils": 2,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.5,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        },
+        "independence_verified": false
+      }
+    },
+    "expected_negative_process_errors": 2
+  },
+  {
+    "commit": "08269811c5eab9e6954e8f37eaec60afa4995575",
+    "prefix": "Reports/StructTrain/TimeLearner/s02-obsolete-schema4-j3-build-cache-a1/",
+    "archive_bytes": 535664,
+    "archive_sha256": "b33c994f8dde68594e3e3badf74b0438de7de0f3824de4e2c35e292ea6a8ac41",
+    "members_verified": 26,
+    "raw_bytes": 2050821,
+    "published_checksums_verified": 6,
+    "sqlite_integrity_checks": 0,
+    "local_operations": "Git/hash/archive/SQLite metadata only; no model execution",
+    "result": {
+      "free_before": 2965897216,
+      "free_after": 3669585920,
+      "deleted_builds": [
+        "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j3"
+      ],
+      "runtime_content_unchanged": true,
+      "source_sdk_or_resources_deleted": false,
+      "primary_models_logs_results_deleted": false,
+      "new_native_models_executed": 0
+    },
+    "closures": {
+      "a1": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "8ef0cac1df5c698f07eb3d9c8364985d1ffdf80ac753529369a5905de90fb559",
+          "unit": "timelearner-c3a36484-4b97-4d5b-9734-a1feaa753512.service",
+          "invocation_id": "79ecaae8e12a4e0a80c0f082d6fadd3d",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c3a36484-4b97-4d5b-9734-a1feaa753512.service",
+          "initial_main_pid": 2636492,
+          "initial_start_ticks": "341134545",
+          "sha256": "73eae61cc90d090cc3ca9320f1683cb3b3e0ffd5aac65f6ca46a1123a8acae5d"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "38260",
+          "KillMode": "control-group",
+          "Description": "timelearner-c3a36484-4b97-4d5b-9734-a1feaa753512.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        },
+        "maintenance_lease": {
+          "token": "c3623450-480a-49ee-9fa3-1c5a8aa707d5",
+          "job_id": "s02-obsolete-schema4-j3-build-cache-a1",
+          "owner": {
+            "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+            "executable": "/usr/bin/python3.10",
+            "pid": 2636492,
+            "start_ticks": "341134545",
+            "uid": 1000
+          },
+          "resources": [
+            {
+              "access": "write",
+              "canonical_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j3",
+              "requested_path": "/home/user/timelearner-refactor/build-capacitance-schema4-normal-j3"
+            },
+            {
+              "access": "write",
+              "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-j3-build-cache-a1",
+              "requested_path": "/home/user/timelearner-refactor/readbacks/s02-obsolete-schema4-j3-build-cache-a1"
+            }
+          ],
+          "state": "released",
+          "created": 1793841575.7576022,
+          "deadline": 1793845175.7576022,
+          "updated": 1793841584.2877822,
+          "release_note": "Synchronous obsolete build-cache cleanup ended; no model, compiler or child process remains. Source SDK/runtime/results retained.",
+          "heartbeat_expired": false,
+          "owner_status": "missing",
+          "inspection_required": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    "read_only_process_audit_count": 97,
+    "runtime_files_verified_unchanged": 59
+  }
+]

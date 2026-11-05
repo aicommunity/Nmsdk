@@ -1,6 +1,8 @@
 # TimeLearner reproducibility artifacts
 
-Current whole-plan status: [01.11.2026 audit](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-01.ru.md).
+Completed scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Full304 and visual acceptance remain pending; fixed-threshold silent models are not successful detections.
+
+Current whole-plan status: [04.11.2026 audit with05.11 updates](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-04.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
 
 Feature stock training failure diagnostics (04.11; full native feature acceptance pending):
