@@ -11,3 +11,7 @@ clone_inh_grid.py пересоздаёт72 каталога (Classic48, Branch24
 Exact candidate scope: Bin два удаления и один README prefix; root Bin gitlink, migration manifest и этот документ. Scripts/Tests/App/CMake/Libraries/Rdk без изменений. До принятия нужны production history verify-migration186 на каждом сервере и отдельный negative tree, возвращающий удалённый script: expected migration_old_path_still_present без положительного receipt. Проверки metadata-only в512MiB, без запуска generators/моделей, без изменения активных SDK/runtime/global capacity. Bin→develop и root→develop только после полной сверки receipts.
 
 Августовские визуальные4/8–6/8 сохраняют исходную доказательность. Прежние измерения, конфиги, пороги, manifests и report bodies не пересчитываются и не удаляются. План/этап9 остаются частичными; scientific и inhibition matrix не закрываются удалением исторических entrypoints.
+
+## Приёмка
+
+[Полная независимая сверка архивов/источников](GridGeneratorRetirementVerification.json): Elder и M40 по186 records, negative exit2 без receipt, по16 архивных members и279 production Python hashes сверены с Git5621. Whole groups freshly closed, dedicated leases released. Bin merge525aafbafe72679b40332eeb7704a922c3c72eee опубликован; его tree побайтно равен проверенному a781. Исходные exact scope receipts относятся к candidate5621, последующая приёмка добавляет только Git-артефакты, статус документации и final gitlink — не новые algorithms/configs.
