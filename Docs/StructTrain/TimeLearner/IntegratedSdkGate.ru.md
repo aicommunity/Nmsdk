@@ -1,0 +1,11 @@
+# Свежая integrated SDK: отдельный незавершённый gate
+
+На Elder подготовлено чистое дерево root `2e0618110a9abb48b94f6edc6b63c51f829ec810`, семь точных gitlinks, собственные Git stores без alternates. Pulse12d совмещает implementation f6 и принятые документы0ec. C++ App/Tests/CMake побайтно совпадают с ранее проверенным2cb, Pulse/Core — с f6; Python-пакет содержит323 файла. Это новая сборка, а не переименование старого runtime.
+
+[Задание и исходники worker](../../../Reports/StructTrain/TimeLearner/s06-integrated-acceptance-normal-a1-pending/job.json) запускают отдельные source/build/runtime, затем Owner8 и native133. CMake configure прошёл; сборка началась. Pending снимок не доказывает завершения: нужны фактические XML, полный inventory, runtime/source hashes и свежая kernel closure с released lease. ASan304 на M40 не перезапускается и не совмещается с новой тяжёлой сборкой.
+
+Ресурсы — read-only Bin99f, тогда как gitlink нового SDK — Bin11ad. Реальная server tree-сверка обнаружила только26 исторических scripts и7 markdown изменений; конфиги, физические profiles и данные не изменились. Оба SHA и33 пути записаны worker в shared-resource-binding.json. Это явная привязка ресурсов, а не утверждение, что материализован Bin11ad целиком.
+
+[Проверка удаления expanded дубля](IntegratedSdkGateVerification.json) подтверждает1513 native-result файлов/790664613 логических байт по исходному published b411 manifest; [полный receipt](../../../Reports/StructTrain/TimeLearner/s02-owner141-expanded-cache-retirement-a1/result.json) сохраняет каждую пару SHA/size. Полный cache1878 файлов/944621766B перепроверен на M40; compressed primary остаётся в Git, focused8/source/runtime/build сохранены. Измеренный прирост свободного места Elder794345472B отличается от логического размера файлов из-за учёта файловой системой. Уникальные данные не удалены. Это обслуживание диска, не новый эксперимент.
+
+После gate необходимы fresh managed coordinator/corpus, recovery/declaration/live routing, последующие ASan owner/readers и остальная исходная научная/режимная матрица. Старые manifest/version failures не скрываются. Только этап0 полностью принят; этапы1–12 и общая цель остаются открытыми.
