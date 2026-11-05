@@ -1,3 +1,5 @@
+Принято05.11: оба workers проверили184 retrieval records через production CLI; restored-path negative отвергнут без receipt. Полные primary и [независимая проверка](FastProtocolToolRetirementVerification.json) сохранены. Bin develop merge `11ad066eac74d26c3e71e471c8a5998323e79176` имеет дерево, побайтно совпадающее с проверенным feature897f0214. Исходная постановка ниже сохранена; все слова candidate/pending в ней относятся к моменту до этой приёмки. Общий этап9 остаётся частичным.
+
 # Исторические инструменты FastResponse/FastSpan
 
 Candidate удаляет 18 campaign-local tools: 6 из SelectivityFastResponse/scripts и 12 из SelectivityFastSpan/scripts. Bin исходная точка — `500764df8ae41604e03bdecdfd5531c7bc16f49b`; все commit/path/blob/SHA256/size/last-change/retrieval записаны в script_migration.json. Общий manifest содержит 184 records, complete=false. Wrappers и копии на прежних местах не сохраняются. Приёмка обоими workers ещё ожидается; этот документ не объявляет этап 9 завершённым.
