@@ -1,0 +1,17 @@
+{
+  "terminal": {
+    "tests_passed": false,
+    "expected_tests": 16,
+    "new_native_models_executed": 0,
+    "cpp_runtime_executed": false,
+    "source_package": "d2d68a83bfb5d30e2a380b4eedf6f1cc162154d5",
+    "full_pipeline_runtime_acceptance_complete": false,
+    "scientific_verdict": null
+  },
+  "exception": {
+    "reason": "reservation_ledger_schema_or_worker_changed",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-explicit-historical-analysis-a3-worker.py\", line 35, in <module>\n    held=Reservations(base/'resource-reservations.sqlite3').inspect()['leases']\n  File \"/home/user/timelearner-refactor/source-historical-analysis-python-a2/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 134, in __init__\n    _require(connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()[0] == value,\n  File \"/home/user/timelearner-refactor/source-historical-analysis-python-a2/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_ledger_schema_or_worker_changed\n"
+  },
+  "tests_executed": 0,
+  "reason": "outer preflight must open existing Elder global ledger with its declared capacity; separate analysis ledger is unchanged"
+}
