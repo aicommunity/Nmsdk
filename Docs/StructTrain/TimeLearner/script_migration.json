@@ -2,7 +2,7 @@
   "kind": "timelearner_script_migration",
   "schema_version": 1,
   "complete": false,
-  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending; twenty historical cable_model and E1 tools retired together; standalone Euler/proxy/XML-overlay assumptions remain historical, all primary outputs retained; E05 and other remaining tools pending; nine remaining path-selected historical root tools retired with Git retrieval; no active production callers found, historical measurements retained, broader untagged scripts and Bin remain pending; eight historical untagged audit/probe Python tools retired after source and literal-caller review; two dependent extraction CMake targets removed; general GUI/component probes retained for separate review, no native equivalence or complete migration claim; eight historical PhaseA shell/Python tools retired after full source and literal caller review; all August configurations and observations preserved; active scientific replay/remaining Bin migration incomplete; eighteen historical FastResponse/FastSpan tools retired after full source/helper-diff/caller review; raw configuration/model/CSV and report bodies retained, exact two-worker metadata gates pending",
+  "scope": "27 historical root Docs shell tools,9 normsync Python/C tools,4 historical Docs SoftCold/W1/W2 Python tools and6 historical Bin Phase12 shell launchers retired; active Bin Branch analyzer and six tests migrated. Full active analysis/CLI migration remains incomplete.; sixteen historical 20 October plan tools retired (seven exact evidence copies and nine campaign-specific utilities); no analytical/runtime equivalence inferred; seventeen historical AsymRm pilot/finish/scale/sweep shell launchers retired with full Git retrieval; active analyzers and generic legacy runner remain pending; thirteen historical Reports job.py/runner.sh launch receipts retired with exact Git retrieval; no primary data, models or metrics removed; eleven historical SoftCold/OpenGaps/T2/T4 shell launchers/monitors retired, current skills point to root production CLI; no experiment resumed; two historical Branch br480 Phase9/Phase10 retry entrypoints retired after source and caller review; Phase8 remains pending with real consumers; fourteen historical theory/sim Python and standalone C sources retired after full source/import/caller review; all theory outputs retained; cable/E05 tools remain pending; twenty historical cable_model and E1 tools retired together; standalone Euler/proxy/XML-overlay assumptions remain historical, all primary outputs retained; E05 and other remaining tools pending; nine remaining path-selected historical root tools retired with Git retrieval; no active production callers found, historical measurements retained, broader untagged scripts and Bin remain pending; eight historical untagged audit/probe Python tools retired after source and literal-caller review; two dependent extraction CMake targets removed; general GUI/component probes retained for separate review, no native equivalence or complete migration claim; eight historical PhaseA shell/Python tools retired after full source and literal caller review; all August configurations and observations preserved; active scientific replay/remaining Bin migration incomplete; eighteen historical FastResponse/FastSpan tools retired after full source/helper-diff/caller review; raw configuration/model/CSV and report bodies retained, exact two-worker metadata gates pending; two historical BranchFastSpan/InhGrid generators retired without wrappers; storage-aware production preparation is separate, existing generated experiment data unchanged",
   "source_snapshot": "b62127538694a3442771598420fd78fa7e405c8b",
   "retired_files": [
     {
@@ -3517,6 +3517,48 @@
       "replacement": null,
       "reason": "Historical fixed4-spike span checks may skip missing metadata and do not establish8 trials, complete observations or finite data.",
       "original_results": "All saved configurations, models, CSV, tables and historical report bodies retained. Retrieval identifies source bytes, not proof of historical execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/scripts/create_br_fs_exps.py",
+      "action": "retired_historical",
+      "archive_commit": "11ad066eac74d26c3e71e471c8a5998323e79176",
+      "last_change_commit": "f8f8d49f8a1df3500e0a0ba3cab57c33caa0ef6e",
+      "blob_sha1": "e736d64a488d0ac0eb94e6cb90233eec7bb6abc6",
+      "content_sha256": "a424c725e6027dcf2df6fd28d904f5ba2694a1afae16e34d473d1dd95116b47c",
+      "bytes": 5268,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/11ad066eac74d26c3e71e471c8a5998323e79176/Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/scripts/create_br_fs_exps.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "11ad066eac74d26c3e71e471c8a5998323e79176:Configs/SpikeSamples/StructTrain/SelectivityBranchFastSpan/scripts/create_br_fs_exps.py"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed18-grid directory-replacing generator applies global regex C/kinetics edits without effective heterogeneous child/storage readback. Existing generated configurations preserved; future experiments use root ModelSpec/storage profiles.",
+      "original_results": "All generated configs, models, manifests, observations and historical report bodies preserved; retrieval proves source bytes, not historical execution or current scientific validity."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityInhGrid/clone_inh_grid.py",
+      "action": "retired_historical",
+      "archive_commit": "11ad066eac74d26c3e71e471c8a5998323e79176",
+      "last_change_commit": "b7706a076892a96502b30c8cc02e957b80767159",
+      "blob_sha1": "25c875f6fb550f575c801a9702616476e45a19c0",
+      "content_sha256": "4fe605ed365b31ec1d60c8fcf4ab2fc08458097268cac1888dfd17c3c539880d",
+      "bytes": 6461,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/11ad066eac74d26c3e71e471c8a5998323e79176/Configs/SpikeSamples/StructTrain/SelectivityInhGrid/clone_inh_grid.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "11ad066eac74d26c3e71e471c8a5998323e79176:Configs/SpikeSamples/StructTrain/SelectivityInhGrid/clone_inh_grid.py"
+      ],
+      "replacement": null,
+      "reason": "Historical72-grid directory-replacing generator and README disagree on base neuron class. Its partial text overlays are not effective model export/import or factor validity; existing manifest/configurations/results preserved.",
+      "original_results": "All generated configs, models, manifests, observations and historical report bodies preserved; retrieval proves source bytes, not historical execution or current scientific validity."
     }
   ],
   "reference_review": {
@@ -3546,11 +3588,11 @@
     "full migration dependency review"
   ],
   "last_batch": {
-    "name": "FastResponse/FastSpan campaign-local historical tools",
-    "files": 18,
+    "name": "historical BranchFastSpan/InhGrid generators",
+    "files": 2,
     "archive_repository": "Bin",
-    "archive_commit": "500764df8ae41604e03bdecdfd5531c7bc16f49b",
-    "acceptance": "both workers passed184 production history records/exact scope/restored-path negative; primary evidence b9a02fdd4e0586f515d4aa24fe33e7830773cc0c and711e2e531b9248c364d0ed6ca9de9adf20d6c8bc; Bin merge tree equal verified feature"
+    "archive_commit": "11ad066eac74d26c3e71e471c8a5998323e79176",
+    "acceptance": "pending production history186 checks and restored-path negative on both workers"
   },
   "moved_files": [
     {
