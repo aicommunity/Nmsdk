@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "b2531857-a6db-4a29-a539-511104ac9085",
+  "job_id": "s07-native-partition-addressed-asan-a1",
+  "recorded_unix": 1793877646.9025872,
+  "administrator": {
+    "pid": 198292,
+    "start_ticks": "295283923",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 198309,
+    "start_ticks": "295283942",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-addressed-asan-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "3c46fd56604dbf1cfdd616bbdf5f63792e1898a55364600cb5ba968c71bd40f2",
+      "unit": "timelearner-5a873903-e59b-4745-a91e-6952c241f53e.service",
+      "invocation_id": "9aa6437f58f14e0ca3e7fef434638f70",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5a873903-e59b-4745-a91e-6952c241f53e.service",
+      "initial_main_pid": 198309,
+      "initial_start_ticks": "295283942",
+      "sha256": "7ce429913e61acbfea4fefdd67f674e0062445cd922b71df3d4bdd846e5e5fca"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-5a873903-e59b-4745-a91e-6952c241f53e.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Addressed partition worker and native descendants closed; operational recovery does not attest test success.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-addressed-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-addressed-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-partition-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-partition-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
