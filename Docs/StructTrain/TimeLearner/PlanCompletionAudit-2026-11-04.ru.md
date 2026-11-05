@@ -1,3 +1,5 @@
+Принято06.11: isolated ASan304 на SDK802/Pulsecc завершён304/304; проверены12095 archive members,304 исходных JUnit/process identities,683 compiled и325 tool source hashes. Данные опубликованы, agent-owned origin receipt разблокирует owner8/readers128; их PASS не заявляется. [Точный scope](Native304PartitionASanAcceptance.ru.md). SDK2e/Pulse12d ASan и все этапы1–12 ещё открыты.
+
 Принято06.11: Linux publication kernel guard и explicit recovery —20 actual Git tests на каждом worker, включая frontend crash во время живого push и повторную публикацию после закрытия. Полные оба attempts сохранены. [Контракт, доказательства и границы](PublicationLockRecovery.ru.md). Это не весь scheduler/reboot/ConditionSpec контур; этапы1–12 частичны.
 
 Принято06.11: удалены10 оставшихся исторических shell-драйверов AsymRm; manifest215 проверен обоими workers через production CLI, restored-path negative и exact scope. Данные/модели/конфиги не удалялись, старые скрипты не запускались. [Приёмка](AsymRmDriverRetirement.ru.md). Bin path/suffix inventory131 — ограниченный срез; этап9 и все этапы1–12 частичны.
