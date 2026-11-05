@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "Elder-1",
+  "leases": [
+    {
+      "token": "9f8042ef-44b2-43a7-bcb4-b31769994788",
+      "job_id": "s09-fast-tool-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2652636,
+        "start_ticks": "341257305",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-fast-tool-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-fast-tool-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-fast-tool-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-fast-tool-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793842803.394637,
+      "deadline": 1793842923.394637,
+      "updated": 1793842807.3650212,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}
