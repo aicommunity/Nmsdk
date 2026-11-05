@@ -1,3 +1,5 @@
+Temporal update: visual A1 rejected old-reader analysis mismatch; exact producer reader2e прошёл strict16-phase preflight, A2 rendering kernel-live. [Подробности, исходники и ограничения](IntegratedCoordinatorReportReader.ru.md). Старый pending A1 ниже — историческая постановка.
+
 # Integrated coordinator: normal8 принят, ASan цепочка исправлена
 
 ## Coordinator8 на новой SDK

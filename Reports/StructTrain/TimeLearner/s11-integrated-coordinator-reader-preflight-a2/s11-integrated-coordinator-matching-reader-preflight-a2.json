@@ -1,0 +1,74 @@
+{
+  "reader_commit": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "strict_preflight_passed": 16,
+  "historical_adapter": null,
+  "git_checkout_clean": true,
+  "required_root_gitattributes_blob_restored": true,
+  "no_native_models_executed": true,
+  "phases": [
+    {
+      "case": "Branch-N0",
+      "phase": "train"
+    },
+    {
+      "case": "Branch-N1",
+      "phase": "train"
+    },
+    {
+      "case": "Branch-v1",
+      "phase": "train"
+    },
+    {
+      "case": "Branch-v1",
+      "phase": "calibrate"
+    },
+    {
+      "case": "Branch-v1",
+      "phase": "evaluate"
+    },
+    {
+      "case": "Branch-v2",
+      "phase": "train"
+    },
+    {
+      "case": "Branch-v2",
+      "phase": "calibrate"
+    },
+    {
+      "case": "Branch-v2",
+      "phase": "evaluate"
+    },
+    {
+      "case": "Classic-N0",
+      "phase": "train"
+    },
+    {
+      "case": "Classic-N1",
+      "phase": "train"
+    },
+    {
+      "case": "Classic-v1",
+      "phase": "train"
+    },
+    {
+      "case": "Classic-v1",
+      "phase": "calibrate"
+    },
+    {
+      "case": "Classic-v1",
+      "phase": "evaluate"
+    },
+    {
+      "case": "Classic-v2",
+      "phase": "train"
+    },
+    {
+      "case": "Classic-v2",
+      "phase": "calibrate"
+    },
+    {
+      "case": "Classic-v2",
+      "phase": "evaluate"
+    }
+  ]
+}
