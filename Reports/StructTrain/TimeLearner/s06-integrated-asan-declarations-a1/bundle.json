@@ -1,0 +1,71 @@
+{
+  "kind": "timelearner_integrated_native_declared_fixture_subset",
+  "schema_version": 1,
+  "source_evidence_commit": "b411dbf1eb469f83442dc816f77563f82bdfb5ea",
+  "source_declaration_inventory_path": "live-declaration-sources.json",
+  "source_inventory_sha256": "16e826e9bf83d941241b5a1a60ef5766b71dd0fe0bbffaba065d4869ee5f47cb",
+  "members": {
+    "cold/Classic-v1-train/input/job.json": {
+      "bytes": 913202,
+      "sha256": "fc98b3897b4a43017641ef7af4bbf268bf2529d83c19bc48176f5987a9b18762"
+    },
+    "cold/Classic-v1-frozen/input/job.json": {
+      "bytes": 5204584,
+      "sha256": "b05a8c8b845f85745797f603ccd2091d083793a95e34043ee89d43c6d1c8e3b9"
+    },
+    "calibration/Classic-v1/measured-grid-job.json": {
+      "bytes": 1171760,
+      "sha256": "a8147b766f94a0b56c8ede0f790537edcd70743ff66e42722a98910555f144aa"
+    },
+    "cold/Branch-v1-train/input/job.json": {
+      "bytes": 841641,
+      "sha256": "961a81639a3aaf6f82f18cffc51fa521700294a996396b832df983b4cbb12e91"
+    },
+    "cold/Branch-v1-frozen/input/job.json": {
+      "bytes": 4805424,
+      "sha256": "83fe4e848a1ca37f3a9debedf3e47de43ea2d4732c3a29923dde4d54e58ea15f"
+    },
+    "calibration/Branch-v1/measured-grid-job.json": {
+      "bytes": 1085732,
+      "sha256": "c0f6cd2bf3639ad3382a42850a852443a0814ee10ea3552f6938a311f7fa7184"
+    }
+  },
+  "bindings": {
+    "cold/Classic-v1-train/input/job.json": {
+      "original_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs/Classic-v1-train/input/job.json",
+      "original_kind": "timelearner_native_training_job",
+      "matches_published_b411_declaration_inventory": true
+    },
+    "cold/Classic-v1-frozen/input/job.json": {
+      "original_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs/Classic-v1-frozen/input/job.json",
+      "original_kind": "timelearner_native_evaluation_job",
+      "matches_published_b411_declaration_inventory": true
+    },
+    "calibration/Classic-v1/measured-grid-job.json": {
+      "original_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls/Classic-v1/measured-grid-job.json",
+      "original_kind": "timelearner_native_calibration_job",
+      "matches_published_b411_declaration_inventory": true
+    },
+    "cold/Branch-v1-train/input/job.json": {
+      "original_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs/Branch-v1-train/input/job.json",
+      "original_kind": "timelearner_native_training_job",
+      "matches_published_b411_declaration_inventory": true
+    },
+    "cold/Branch-v1-frozen/input/job.json": {
+      "original_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs/Branch-v1-frozen/input/job.json",
+      "original_kind": "timelearner_native_evaluation_job",
+      "matches_published_b411_declaration_inventory": true
+    },
+    "calibration/Branch-v1/measured-grid-job.json": {
+      "original_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls/Branch-v1/measured-grid-job.json",
+      "original_kind": "timelearner_native_calibration_job",
+      "matches_published_b411_declaration_inventory": true
+    }
+  },
+  "archive_bytes": 197272,
+  "archive_sha256": "7b6e795b98d1caab98645f8af683d903b7cb394cfbb64d7d7875c155ac22bcdf",
+  "purpose": "Exact declarations only for shared-control native8/133 tests; tests must construct cold/current models and replace or clear historical source packages. Not a fresh Train result.",
+  "native_models_executed": 0,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
