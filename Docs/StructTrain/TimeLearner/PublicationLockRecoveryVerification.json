@@ -1,0 +1,398 @@
+{
+  "kind": "timelearner_publication_kernel_lock_recovery_acceptance",
+  "schema_version": 1,
+  "source_root": "10d45ed93f08928a9992a3cf569c6a4938cdcd64",
+  "both_workers": [
+    {
+      "host": "elder",
+      "data_commit": "17780f4c9f8d21a7033f424d95b6de8bbf138693",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s10-publication-lock-recovery-elder-a2/",
+      "archives": {
+        "accepted": {
+          "members": 12,
+          "bytes": 18924,
+          "sha256": "b177b0dec08fd8b385289fd0f8544f47e1f25a0c5fd947639cbfb4e8bb5dadee",
+          "checks_passed": true
+        },
+        "prior/a1/": {
+          "members": 10,
+          "bytes": 18092,
+          "sha256": "05ac799e228fca2ad4301fc48705aed24f03b878f61763635c99a4cc9bb7101b",
+          "checks_passed": false
+        }
+      },
+      "source_hashes_verified": 282,
+      "publisher_cases_passed": 20,
+      "original_attempt_preserved": true,
+      "actual_receive_hook_and_frontend_fault": {
+        "kind": "timelearner_actual_git_push_frontend_crash",
+        "schema_version": 1,
+        "receive_hook_stat_when_ready": "3500381 (python3.10) S 3500372 3499007 3499007 0 -1 4194304 1226 0 0 0 1 0 0 0 30 10 1 0 348466880 20549632 2528 18446744073709551615 98146424573952 98146427414029 140721031049440 0 0 0 0 16781312 2 1 0 0 17 3 0 0 0 0 0 98146429786160 98146430070232 98147109740544 140721031051355 140721031051408 140721031051408 140721031053284 0\n",
+        "frontend_pid": 3500308,
+        "frontend_returncode": -9,
+        "original_owner": {
+          "kind": "timelearner_kernel_publication_lock",
+          "schema_version": 1,
+          "pid": 3500308,
+          "start_ticks": "348466864",
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "host": "Elder-1",
+          "token": "d4af8dba25a04f7594656bb1f0025b2a",
+          "guard_device": 2051,
+          "guard_inode": 24774875
+        },
+        "live_git_recovery_refusal": "publication_guard_busy_owner_or_git_child_live",
+        "live_git_publish_refusal": "publication_guard_busy_owner_or_git_child_live",
+        "public_cli_recovery": {
+          "kind": "timelearner_publication_lock_recovery",
+          "schema_version": 1,
+          "recovery": "recovered",
+          "previous_owner": {
+            "kind": "timelearner_kernel_publication_lock",
+            "schema_version": 1,
+            "pid": 3500308,
+            "start_ticks": "348466864",
+            "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+            "host": "Elder-1",
+            "token": "d4af8dba25a04f7594656bb1f0025b2a",
+            "guard_device": 2051,
+            "guard_inode": 24774875
+          },
+          "preserved_owner_directory": "/tmp/tmpi2oaa9yo/root/.git/timelearner-publication-recovered-c9f478446f604471a2b3a8fa6b5ea8bd",
+          "kernel_guard_acquired": true,
+          "previous_owner_identity_live": false,
+          "git_push_executed": false,
+          "publication": "not_attempted",
+          "scientific_verdict": null
+        },
+        "resumed_publication": {
+          "kind": "timelearner_git_publication_result",
+          "schema_version": 1,
+          "publication": "published",
+          "repositories": [
+            {
+              "path": "A",
+              "commit": "990b60d3d6d80939461f2b846cff80eac53b28ba",
+              "remote": "origin",
+              "branch": "refs/heads/develop"
+            },
+            {
+              "path": "B",
+              "commit": "cbda8f00d674266b6928ba49780748dd31eccccd",
+              "remote": "origin",
+              "branch": "refs/heads/develop"
+            },
+            {
+              "path": ".",
+              "commit": "5a8710e42cf35228af693ee934e740efebf6bcfa",
+              "remote": "origin",
+              "branch": "refs/heads/develop"
+            }
+          ],
+          "scientific_verdict": null
+        },
+        "root_remote_commit": "5a8710e42cf35228af693ee934e740efebf6bcfa",
+        "expected_root_commit": "5a8710e42cf35228af693ee934e740efebf6bcfa",
+        "receive_hook_helper": "from pathlib import Path\nimport time,os\nPath('/tmp/tmpi2oaa9yo/receive-ready').write_text(str(os.getpid()))\ndeadline=time.monotonic()+25\nwhile not Path('/tmp/tmpi2oaa9yo/receive-release').exists():\n if time.monotonic()>deadline:raise SystemExit(2)\n time.sleep(.02)\n",
+        "scientific_verdict": null
+      },
+      "fresh_operational_closures": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s10-publication-lock-recovery-a1",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-publication-lock-recovery-a1-container",
+          "registry": "/home/user/timelearner-refactor/publication-lock-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "58750ef33436c16fc0ceec5eec077f81d487aabf430bba3af8d558d8c8faea38",
+              "unit": "timelearner-cf99967a-3390-4ddf-8323-54d06cddd879.service",
+              "invocation_id": "4982079924b84f20a960a6703ad18ffc",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-cf99967a-3390-4ddf-8323-54d06cddd879.service",
+              "initial_main_pid": 3494637,
+              "initial_start_ticks": "348451973",
+              "sha256": "7fdd4269bef26a414ca957010ed0771c69a0a92b58a932bf29eb83e3e9e1dbb3"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-cf99967a-3390-4ddf-8323-54d06cddd879.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "1fb6258c-676f-4106-b787-86c581a1d991",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        },
+        "a2": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s10-publication-lock-recovery-a2",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-publication-lock-recovery-a2-container",
+          "registry": "/home/user/timelearner-refactor/publication-lock-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "36305af7064b711b41698c371d5c68e5947ab38bb9889e1b8b6876cbbe9de452",
+              "unit": "timelearner-807d2087-6441-4d47-8617-b4fc21f29d9e.service",
+              "invocation_id": "812e8fe3bb784facaf4eff4bc0a71a56",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-807d2087-6441-4d47-8617-b4fc21f29d9e.service",
+              "initial_main_pid": 3499007,
+              "initial_start_ticks": "348466675",
+              "sha256": "a68e85a45d23abcb88cb73248b3c8ef3200cd6afd75d11f8b98ad499090f3338"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-807d2087-6441-4d47-8617-b4fc21f29d9e.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "c465ea18-bc92-465b-8080-7fa6c4566ecf",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    {
+      "host": "m40",
+      "data_commit": "0990742cfa379de9e6a66865b9e1c2ae0c6b5bad",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s10-publication-lock-recovery-m40-a2/",
+      "archives": {
+        "accepted": {
+          "members": 12,
+          "bytes": 19020,
+          "sha256": "db021ed31da9f660d56d9dca67d8a10c7f067afd7334a45e006bbe76fb9a071c",
+          "checks_passed": true
+        },
+        "prior/a1/": {
+          "members": 10,
+          "bytes": 18216,
+          "sha256": "81b5c47e03d76f5b671e2d6786c83221c85d0a8d9eb83b5dfb8d496018dcc2a1",
+          "checks_passed": false
+        }
+      },
+      "source_hashes_verified": 282,
+      "publisher_cases_passed": 20,
+      "original_attempt_preserved": true,
+      "actual_receive_hook_and_frontend_fault": {
+        "kind": "timelearner_actual_git_push_frontend_crash",
+        "schema_version": 1,
+        "receive_hook_stat_when_ready": "540912 (python3.12) S 540903 539543 539543 0 -1 4194304 1417 0 0 0 1 0 0 0 30 10 1 0 299010750 22470656 2891 18446744073709551615 4325376 7352253 140728324530800 0 0 0 0 16781312 2 1 0 0 17 3 0 0 0 0 0 10653128 12216448 769720320 140728324532295 140728324532348 140728324532348 140728324534244 0\n",
+        "frontend_pid": 540838,
+        "frontend_returncode": -9,
+        "original_owner": {
+          "kind": "timelearner_kernel_publication_lock",
+          "schema_version": 1,
+          "pid": 540838,
+          "start_ticks": "299010736",
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "host": "M40",
+          "token": "e234b69985dc4685b064e5571b74c7c6",
+          "guard_device": 2066,
+          "guard_inode": 1980895
+        },
+        "live_git_recovery_refusal": "publication_guard_busy_owner_or_git_child_live",
+        "live_git_publish_refusal": "publication_guard_busy_owner_or_git_child_live",
+        "public_cli_recovery": {
+          "kind": "timelearner_publication_lock_recovery",
+          "schema_version": 1,
+          "recovery": "recovered",
+          "previous_owner": {
+            "kind": "timelearner_kernel_publication_lock",
+            "schema_version": 1,
+            "pid": 540838,
+            "start_ticks": "299010736",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "host": "M40",
+            "token": "e234b69985dc4685b064e5571b74c7c6",
+            "guard_device": 2066,
+            "guard_inode": 1980895
+          },
+          "preserved_owner_directory": "/tmp/tmp96k0h4pn/root/.git/timelearner-publication-recovered-367041de03624fe6aa770099f51c5fed",
+          "kernel_guard_acquired": true,
+          "previous_owner_identity_live": false,
+          "git_push_executed": false,
+          "publication": "not_attempted",
+          "scientific_verdict": null
+        },
+        "resumed_publication": {
+          "kind": "timelearner_git_publication_result",
+          "schema_version": 1,
+          "publication": "published",
+          "repositories": [
+            {
+              "path": "A",
+              "commit": "de66ce4f02af659cafec47da2935bed4ba561dc1",
+              "remote": "origin",
+              "branch": "refs/heads/develop"
+            },
+            {
+              "path": "B",
+              "commit": "9d45264fadcec7cc26458be17bc4a9d53416c0cf",
+              "remote": "origin",
+              "branch": "refs/heads/develop"
+            },
+            {
+              "path": ".",
+              "commit": "1eccd559203a798dcd57f4ae71a3c8b469d95a65",
+              "remote": "origin",
+              "branch": "refs/heads/develop"
+            }
+          ],
+          "scientific_verdict": null
+        },
+        "root_remote_commit": "1eccd559203a798dcd57f4ae71a3c8b469d95a65",
+        "expected_root_commit": "1eccd559203a798dcd57f4ae71a3c8b469d95a65",
+        "receive_hook_helper": "from pathlib import Path\nimport time,os\nPath('/tmp/tmp96k0h4pn/receive-ready').write_text(str(os.getpid()))\ndeadline=time.monotonic()+25\nwhile not Path('/tmp/tmp96k0h4pn/receive-release').exists():\n if time.monotonic()>deadline:raise SystemExit(2)\n time.sleep(.02)\n",
+        "scientific_verdict": null
+      },
+      "fresh_operational_closures": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s10-publication-lock-recovery-a1",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-publication-lock-recovery-a1-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/publication-lock-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "eadb5bf909e160bc41e5a3a258e2602981b05e365c548f2a491521f5903e805f",
+              "unit": "timelearner-572e24ad-7bb8-4a46-b9a8-9bee0e25a738.service",
+              "invocation_id": "88aa4ea55c0542809b25c6978e466a24",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-572e24ad-7bb8-4a46-b9a8-9bee0e25a738.service",
+              "initial_main_pid": 535316,
+              "initial_start_ticks": "298994842",
+              "sha256": "fb889520eb8b79448162e77ff51c1212e163435b1c89007610ceb56180d30fad"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-572e24ad-7bb8-4a46-b9a8-9bee0e25a738.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "48586bfc-f797-49f5-9412-947df026c15a",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        },
+        "a2": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s10-publication-lock-recovery-a2",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-publication-lock-recovery-a2-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/publication-lock-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "21a048259d8a1544a85f139252e6acfc266a559be4720b612132c902bd88c160",
+              "unit": "timelearner-79136155-4257-4e2a-85ad-3d76484addc1.service",
+              "invocation_id": "44a303ccc2f64228afef562014c140c5",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-79136155-4257-4e2a-85ad-3d76484addc1.service",
+              "initial_main_pid": 539543,
+              "initial_start_ticks": "299010569",
+              "sha256": "ab2a2e78444fea3903af6e817815501e65fe95539f248d5d3b9508628e876d49"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-79136155-4257-4e2a-85ad-3d76484addc1.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "799469fb-ba08-4497-80e4-cbc32d977eac",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    }
+  ],
+  "neural_models_executed": 0,
+  "whole_stage10_complete": false,
+  "scientific_verdict": null
+}
