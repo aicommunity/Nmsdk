@@ -1,0 +1,51 @@
+{
+  "kind": "timelearner_worker_dependency_state",
+  "schema_version": 1,
+  "job_id": "s10-current-package-recovery-declaration-a2",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s10-current-package-recovery-declaration-a2-container",
+  "registry": "/home/user/timelearner-refactor/metadata-regression-reservations.sqlite3",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "ff3238f4811016f247f6210f3b12318090a40c4ecdd253fda47b7b8c81c7fb29",
+      "unit": "timelearner-c6261568-60cd-4a9f-9992-fb2d9729ecde.service",
+      "invocation_id": "3527dd1a80e242248febafeabc50a5dd",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c6261568-60cd-4a9f-9992-fb2d9729ecde.service",
+      "initial_main_pid": 2663994,
+      "initial_start_ticks": "341339903",
+      "sha256": "9811e1873a699300a785641cea44ec0d610262cbfd365cf367cdb74b5654dfcf"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "timeout",
+      "ExecMainCode": "2",
+      "ExecMainStatus": "15",
+      "ControlGroup": "",
+      "MemoryMax": "536870912",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt c6261568-60cd-4a9f-9992-fb2d9729ecde",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "3527dd1a80e242248febafeabc50a5dd"
+    },
+    "memory_max": 536870912,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "reservation_optional": false,
+  "reservation_state": "released",
+  "reservation_token": "2c494e3a-ef65-42ba-b53b-b8766774452c",
+  "state": "ready",
+  "reason": "dependency_closed_lease_released",
+  "successful_execution_attested": false,
+  "scientific_verdict": null
+}
