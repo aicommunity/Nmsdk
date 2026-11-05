@@ -1,0 +1,267 @@
+{
+  "script_root": "8c9ee9f6b319a06224d6ebdcdd537b88e993fc4a",
+  "primary_evidence_commit": "2776bd89fb53a4c32324a445d771e75d010a30d0",
+  "archive_path": "Reports/StructTrain/TimeLearner/s10-managed-public-coordinator-normal-a4/primary.tar.xz",
+  "bundle_path": "Reports/StructTrain/TimeLearner/s10-managed-public-coordinator-normal-a4/bundle.json",
+  "commands": [
+    {
+      "source_manifest_relative": "actual-controls/Branch-N0/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Branch-N0--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-N0/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Branch-N0--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-N1/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Branch-N1--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-N1/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Branch-N1--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-v1/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Branch-v1--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-v1/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Branch-v1--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-v1/runs/pipeline/phases/calibrate/run-manifest.json",
+      "format": "calibration-run",
+      "output_folder": "Branch-v1--calibrate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-v1/runs/pipeline/phases/calibrate/run-manifest.json",
+        "--format",
+        "calibration-run",
+        "--output",
+        "{CACHE}/Branch-v1--calibrate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-v1/runs/pipeline/phases/evaluate/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Branch-v1--evaluate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-v1/runs/pipeline/phases/evaluate/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Branch-v1--evaluate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-v2/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Branch-v2--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-v2/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Branch-v2--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-v2/runs/pipeline/phases/calibrate/run-manifest.json",
+      "format": "calibration-run",
+      "output_folder": "Branch-v2--calibrate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-v2/runs/pipeline/phases/calibrate/run-manifest.json",
+        "--format",
+        "calibration-run",
+        "--output",
+        "{CACHE}/Branch-v2--calibrate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Branch-v2/runs/pipeline/phases/evaluate/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Branch-v2--evaluate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Branch-v2/runs/pipeline/phases/evaluate/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Branch-v2--evaluate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-N0/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Classic-N0--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-N0/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Classic-N0--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-N1/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Classic-N1--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-N1/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Classic-N1--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-v1/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Classic-v1--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-v1/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Classic-v1--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-v1/runs/pipeline/phases/calibrate/run-manifest.json",
+      "format": "calibration-run",
+      "output_folder": "Classic-v1--calibrate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-v1/runs/pipeline/phases/calibrate/run-manifest.json",
+        "--format",
+        "calibration-run",
+        "--output",
+        "{CACHE}/Classic-v1--calibrate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-v1/runs/pipeline/phases/evaluate/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Classic-v1--evaluate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-v1/runs/pipeline/phases/evaluate/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Classic-v1--evaluate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-v2/runs/pipeline/phases/train/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Classic-v2--train",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-v2/runs/pipeline/phases/train/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Classic-v2--train"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-v2/runs/pipeline/phases/calibrate/run-manifest.json",
+      "format": "calibration-run",
+      "output_folder": "Classic-v2--calibrate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-v2/runs/pipeline/phases/calibrate/run-manifest.json",
+        "--format",
+        "calibration-run",
+        "--output",
+        "{CACHE}/Classic-v2--calibrate"
+      ]
+    },
+    {
+      "source_manifest_relative": "actual-controls/Classic-v2/runs/pipeline/phases/evaluate/run-manifest.json",
+      "format": "pipeline-run",
+      "output_folder": "Classic-v2--evaluate",
+      "command": [
+        "python3",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "report",
+        "{EXTRACTED}/actual-controls/Classic-v2/runs/pipeline/phases/evaluate/run-manifest.json",
+        "--format",
+        "pipeline-run",
+        "--output",
+        "{CACHE}/Classic-v2--evaluate"
+      ]
+    }
+  ],
+  "cache_origin": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a6",
+  "rendering_does_not_execute_models": true,
+  "full_bitwise_PDF_SVG_metadata_reproduction_attested": false
+}
