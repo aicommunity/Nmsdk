@@ -1,0 +1,128 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "9e042025-1785-4f54-b260-a858a0c7a462",
+  "job_id": "s06-recognition-owner-burst-normal-a1",
+  "recorded_unix": 1793851905.4086027,
+  "administrator": {
+    "pid": 2646564,
+    "start_ticks": "341206599",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 2695593,
+    "start_ticks": "341571795",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "add2553868399db87c012d8e107f11fc1cdf112546287dd4fda359aa7e9aa4df",
+      "unit": "timelearner-14b56564-5059-4a9e-91c6-c2c4f9c92c2c.service",
+      "invocation_id": "6f44117dc44e47b89597311b5bccc0c7",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-14b56564-5059-4a9e-91c6-c2c4f9c92c2c.service",
+      "initial_main_pid": 2695593,
+      "initial_start_ticks": "341571795",
+      "sha256": "e54ad66a9713feb3fd09ad78a5dbdadbe812497980fc37e22dada5c08a18399d"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-14b56564-5059-4a9e-91c6-c2c4f9c92c2c.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Separate corrected lifecycle recognition candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+      "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
