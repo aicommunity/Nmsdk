@@ -1,0 +1,52 @@
+{
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "826ee392817113e036b65f734e7f603c5097513f419e4b1b4a5502068b16ff99",
+      "unit": "timelearner-3ec5682e-26bc-4373-add6-3321153f1556.service",
+      "invocation_id": "337debee35d74da59118179fd8124d78",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ec5682e-26bc-4373-add6-3321153f1556.service",
+      "initial_main_pid": 2709358,
+      "initial_start_ticks": "341665605",
+      "sha256": "d245fb2c2b1af1ac02c5cad82861fb56b5a425244bb66fac5db22512bca3981b"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-3ec5682e-26bc-4373-add6-3321153f1556.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "terminal": {
+    "tests_passed": false,
+    "native_models_executed": 0,
+    "source_package": "d9363446203bdc41c762c81d47deffc835057148",
+    "corpus_origin_evidence": "2776bd89fb53a4c32324a445d771e75d010a30d0",
+    "whole_fault_matrix_complete": false,
+    "scientific_verdict": null
+  },
+  "exception": {
+    "reason": "",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-integrated-recovery-declaration-a3-worker.py\", line 31, in <module>\n    previous_launch=inspect(prior);assert previous_launch['all_processes_closed'];cleanup=json.loads((base/'readbacks/s10-integrated-recovery-declaration-a3/failed-attempt-cleanup.json').read_text());assert cleanup['execution']=='timeout';write('previous-failed-launch.json',{'closure':previous_launch,'tests_completed':6,'whole20_passed':False,'reason':'previous immutable8c metadata/control suite exhausted1800s outer wall budget; no assertion failure or memory OOM established','temporary_cleanup':cleanup})\nAssertionError\n"
+  },
+  "test_execution": false,
+  "reservation_created": false,
+  "reason": "outer launcher rewrote previous-attempt path inside embedded worker; fixed by separating outer and worker literals"
+}
