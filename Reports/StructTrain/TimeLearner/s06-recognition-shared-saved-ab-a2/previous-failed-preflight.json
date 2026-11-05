@@ -1,0 +1,16 @@
+{
+  "terminal": {
+    "saved_state_AB16_passed": false,
+    "new_training_executed": false,
+    "integrated_CPP_runtime_built": false,
+    "source_package": "f3af229da421c27f0c8e2756dc858d6af90c6092",
+    "whole_plan_complete": false,
+    "scientific_verdict": null
+  },
+  "exception": {
+    "reason": "'path'",
+    "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-recognition-shared-saved-ab-a1-worker.py\", line 21, in <module>\n    verify_runtime(runtime);write(name+'-runtime.json',runtime);paths.extend([Path(runtime['source_closure']['root']['path']),Path(runtime['executable']['path']).parent])\nKeyError: 'path'\n"
+  },
+  "native_processes_launched": 0,
+  "reason": "source_closure intentionally stores content identity without absolute root path; use explicit verified native source binding"
+}
