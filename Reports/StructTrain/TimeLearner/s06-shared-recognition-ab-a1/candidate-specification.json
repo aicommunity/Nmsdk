@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "cooperative_runtime_capture": true,
+  "runtime_manifest": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/candidate-runtime.json",
+  "source_root": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+  "expected_test_ids": [
+    "NativeRecognitionOwner/ClassicFreshDestination",
+    "NativeRecognitionOwner/BranchFreshDestination",
+    "NativeRecognitionOwner/ClassicSpikingFreshDestination",
+    "NativeRecognitionOwner/BranchSpikingFreshDestination",
+    "NativeRecognitionOwner/ClassicN0",
+    "NativeRecognitionOwner/BranchN0",
+    "NativeRecognitionOwner/ClassicN1",
+    "NativeRecognitionOwner/BranchN1"
+  ],
+  "maximum_wall_seconds": 21600,
+  "asan_options": ""
+}
