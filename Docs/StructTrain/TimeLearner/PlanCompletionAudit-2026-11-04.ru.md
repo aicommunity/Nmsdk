@@ -392,3 +392,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Native133 и совместимость сохранённого analysis05.11
 
 [Native133 прошёл; Owner8 ещё не положительный; recovery20 на старом corpus fail-closed по версиям аудитора](RecognitionAndRecovery-2026-11-05.ru.md). Отрицательные результаты и ошибки harness сохранены. Открыты свежая integrated SDK/coordinator corpus и explicit historical adapters; старые manifests не переписываются. Данные не являются merge алгоритмов или завершением этапов1–12.
+
+
+## Положительные Owner8/133 и explicit historical readers05.11
+
+[Новый источник2cb прошёл Owner8 и full133; feature d2d68 прошёл16/16 на обоих workers](Owner141AndHistoricalAdapters.ru.md). Исправлены явные переходы auditor2/3 к current learned5/stopped4 без переписывания primaries. Принимаются receipts, а не интегрированный code merge. ASan304 и fresh SDK/coordinator/scientific matrix остаются открыты. Сохранён verified lossless M40 cache; удалены только устаревшие builds и подтверждённые expanded дубли.
