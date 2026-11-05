@@ -1,3 +1,5 @@
+Принято05.11:19 исторических PSI scripts удалены после двух205-record production CLI gates и restored-path negative. Bin merge34387285; все конфиги/модели/измерения/golden XML и семь исходных report bodies сохранены. Manifest205=203 retired+2 moved,complete=false. [Приёмка и границы](PsiToolRetirement.ru.md). По ограниченному path/suffix inventory осталось141 Bin paths; это не полнота всей миграции. Все этапы1–12 частичны.
+
 Актуализация05.11: integrated coordinator temporal A2 принят:16 phase reports/4 checks,5752 автоматически проверенных views,42 оригинала после visual QA; metadata644 и reader323 hashes сверены. [Галерея и ограничения](IntegratedCoordinatorTemporalVisuals.ru.md). Это двухвходовый профиль с LTMembrane, не stock scientific matrix. Все исходные этапы1–12 остаются частичными.
 
 Актуализация05.11: новая integrated coordinator SDK2e завершила8/8 и20 actual native phases; полные данные/SQLite/closure опубликованы. ASan304 выполняется по отдельным processes; corrected downstream queues ждут его PASS и origin publication. [Точные результаты и границы](IntegratedCoordinatorAcceptance.ru.md). Все исходные этапы1–12 частичны.

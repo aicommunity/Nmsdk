@@ -1,0 +1,273 @@
+{
+  "kind": "timelearner_PSI_retirement_acceptance",
+  "source_root": "554c45786cc2d0203ac5199cc7df568828f66e58",
+  "source_bin": "f03e31ebc0c393e5f9c25dc4c58a0daef9c1a1bc",
+  "both_workers": [
+    {
+      "host": "m40",
+      "data_commit": "95b31194164bc280a162dc6c723a771a5f7ce8d7",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-psi-retirement-m40-a1/",
+      "archives": {
+        "accepted": {
+          "members": 16,
+          "bytes": 141948,
+          "sha256": "760fa200995e469a417b5af505826f5ea63a2db361818af606cad176caa9c9dc",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 205,
+      "source_hashes_verified": 279,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/README.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_autothr.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_gui_autothr.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_k_sweep.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_time_compress.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_time_expand.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/evaluate_selectivity_csv.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/inject_analyzer.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/merge_train_weights.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_autothr.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_neuron_class.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_pattern_scale.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_test_model.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/prepare_gui_psi_train.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_autothr_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_time_compress.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_autothr_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_gui_autothr_exp02.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_k_sweep.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_compress.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_expand.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/tune_timing_params.py": "D"
+      },
+      "seven_report_bodies_preserved": true,
+      "restored_path_negative": {
+        "root_commit": "3ab00cb0a018bd67b54b48cb7adf83b32fba3787",
+        "bin_commit": "f1ee4456cb0e5e1bc0f6c63455bcf055fb240f7c",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-psi-retirement-a1",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-psi-retirement-a1-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/psi-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "635ee7dbf957eedfc19eb93bd27f46436039a1d328ca508ae7e4fa3484da4fc1",
+              "unit": "timelearner-44d31234-bb42-47fb-a0ac-d26ffa9bdaca.service",
+              "invocation_id": "854ecf1c3673457d9dbfccd6f72c606f",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-44d31234-bb42-47fb-a0ac-d26ffa9bdaca.service",
+              "initial_main_pid": 399725,
+              "initial_start_ticks": "297521441",
+              "sha256": "ed9504e0b8f20d5d9baeb67a7c506d284f637278eb6f4385670bfd308388b421"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-44d31234-bb42-47fb-a0ac-d26ffa9bdaca.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "2a02c01a-b79c-4753-822c-cfa090011042",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    {
+      "host": "elder",
+      "data_commit": "067101b825b0f4ae59b3d05b7c07bbfa21c32efe",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-psi-retirement-elder-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 142320,
+          "sha256": "45e84ba8f12284002e899f2f0f06c03dc9de424a8463943ac7b6d115acea53d6",
+          "checks_passed": true
+        },
+        "prior/a1/": {
+          "members": 4,
+          "bytes": 4220,
+          "sha256": "9e8e540b6f130279564986923d93d6415080a62e638e6a929f9c3078e97e9a08",
+          "checks_passed": false
+        }
+      },
+      "records_verified": 205,
+      "source_hashes_verified": 279,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/README.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_autothr.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_gui_autothr.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_k_sweep.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_time_compress.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/REPORT_time_expand.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/evaluate_selectivity_csv.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/inject_analyzer.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/merge_train_weights.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_autothr.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_neuron_class.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_pattern_scale.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/patch_test_model.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/prepare_gui_psi_train.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_autothr_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/run_time_compress.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_autothr_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_experiments.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_gui_autothr_exp02.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_k_sweep.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_compress.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/setup_time_expand.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/tune_timing_params.py": "D"
+      },
+      "seven_report_bodies_preserved": true,
+      "restored_path_negative": {
+        "root_commit": "fd88ba8cad3570c2d0d54163976b72812c1eca81",
+        "bin_commit": "f1661460b958ce8aa00ac51fd96e2ceca1ce54e2",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityPresynapticInhib/scripts/copy_config.sh",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-psi-retirement-a1",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a1-container",
+          "registry": "/home/user/timelearner-refactor/psi-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "2ee45a5b442e733e782cd9f0a495b3e30bfce4badf7ad68014a8fef0196b01cd",
+              "unit": "timelearner-8c612c1d-69f6-4b45-a92a-d4b2c135c0ea.service",
+              "invocation_id": "542fba173f7046eca43f4acac7564b5a",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8c612c1d-69f6-4b45-a92a-d4b2c135c0ea.service",
+              "initial_main_pid": 3328397,
+              "initial_start_ticks": "346977767",
+              "sha256": "ffe54414f5a3f3007e9a3c5651c15173005bf362f6ba1125f3103e0f28afd906"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-8c612c1d-69f6-4b45-a92a-d4b2c135c0ea.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": true,
+          "reservation_state": "not_created",
+          "reservation_token": null,
+          "state": "ready",
+          "reason": "dependency_closed_without_reservation",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        },
+        "a2": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-psi-retirement-a2",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a2-container",
+          "registry": "/home/user/timelearner-refactor/psi-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "abf5ebf9890717cd1a6910309e16d622df51af39f5c7302934cd45ba23a191ef",
+              "unit": "timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+              "invocation_id": "72277660e7fb41d6b0cf4cbcdf539e2a",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+              "initial_main_pid": 3329420,
+              "initial_start_ticks": "346985945",
+              "sha256": "4f8a8a458b338c5b1d2ffed9d4764ecc0226f508c299f9b923384fa01a85a54a"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "e9b843d9-b505-4d1f-a2f2-3dd6f0f918c9",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    }
+  ],
+  "old_scripts_or_native_models_executed": false,
+  "whole_migration_complete": false,
+  "scientific_verdict": null
+}
