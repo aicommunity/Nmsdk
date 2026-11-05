@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 1,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "ad929e20-06ae-4880-9067-52b402526e44",
+      "job_id": "s03-explicit-historical-analysis-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 99681,
+        "start_ticks": "293725183",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4/source/actual-controls",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/managed-coordinator-normal-a4/source/actual-controls"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-explicit-historical-analysis-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-explicit-historical-analysis-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-historical-analysis-python-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-historical-analysis-python-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793862054.3272126,
+      "deadline": 1793862174.3272126,
+      "updated": 1793862640.1061327,
+      "release_note": "Publication preflight caught unreleased metadata lease: outer wrapper looked at prior attempt reservation path. Exact current worker/group freshly closed; no tests restarted.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null
+}

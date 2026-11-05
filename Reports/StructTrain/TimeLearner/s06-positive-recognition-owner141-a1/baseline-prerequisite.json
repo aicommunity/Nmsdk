@@ -1,0 +1,74 @@
+{
+  "resource_state": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s06-live-cold-fixture-baseline-normal-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1-container",
+    "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "f64fda01dbe6ab13c28cd99094814d3b8121cc9d0b8f0494b0fc2b8329d9d9e6",
+        "unit": "timelearner-48358fa7-dbbc-4d13-bda6-f305eabbde17.service",
+        "invocation_id": "014c1920e1fa4ce9b81d94b2f1a0208e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-48358fa7-dbbc-4d13-bda6-f305eabbde17.service",
+        "initial_main_pid": 2063636,
+        "initial_start_ticks": "337077176",
+        "sha256": "3a917a112676d0339045faa89b89ce1f50150b206e93723eab0ef9d1cae678e5"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-48358fa7-dbbc-4d13-bda6-f305eabbde17.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "285d44a8-d4ae-4a91-904e-06d21a720c27",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "terminal": {
+    "corrected_baseline133_passed": true,
+    "corrected_baseline_cpp_executed": true,
+    "corrected_baseline_build_pending": false,
+    "whole_plan_complete": false,
+    "scientific_verdict": null
+  },
+  "native_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 133,
+      "observed": 133,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "bc4358fc0322b77f625086baa4c21bb200a320122f983a083954e64de70c5f5a"
+    },
+    "scientific_verdict": null
+  }
+}
