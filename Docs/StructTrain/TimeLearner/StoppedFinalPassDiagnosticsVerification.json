@@ -1,0 +1,170 @@
+{
+  "kind": "timelearner_stopped_final_pass_acceptance",
+  "native_root": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "native_pulselib": "12d8c8a41c998ae1516496f716a0ae0f3d312b3e",
+  "reader_root": "297bcbb42105396d83c3eecf52ad98613afaef0f",
+  "native4_data_commit": "d080310f241c994bca1231cbb38a3cb290ca2f36",
+  "native_execution_host": "Elder only",
+  "native_test_ids": [
+    "NativeTrainingTermination/ClassicN0SweepBudgetBoundary",
+    "NativeTrainingTermination/ClassicN1SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN0SweepBudgetBoundary",
+    "NativeTrainingTermination/BranchN1SweepBudgetBoundary"
+  ],
+  "native_csv_count": 32,
+  "initial_reader_A1": {
+    "tests": 10,
+    "errors": 1,
+    "expected_error": "KeyError complete_measured_final_pass in CLI test: standard analysis envelope was read incorrectly; original proof retained"
+  },
+  "compiler_record_matches_original_sdk_build_manifest": true,
+  "readers": [
+    {
+      "host": "elder",
+      "data_commit": "5a1f158ca3628835fb444f10d02dc58ae8e1624d",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-stopped-final-reader-elder-a2/",
+      "members": 15,
+      "archive_bytes": 19504,
+      "archive_sha256": "ccd34954d02c59b44aa922d65c23ef9197570b806808bf50e1ea46ca287dbae9",
+      "reader_git_hashes_verified": 281,
+      "checks": {
+        "returncode": 0,
+        "tests": 13,
+        "expected": 13,
+        "skips_allowed": false
+      },
+      "cli_cases": 4,
+      "native_models_executed": 0,
+      "source_files_unchanged": {
+        "all_116_primary_files_rehashed": true,
+        "data_commit": "d080310f241c994bca1231cbb38a3cb290ca2f36",
+        "cpp_rerun": false
+      },
+      "fresh_closed_released": {
+        "kind": "timelearner_worker_dependency_state",
+        "schema_version": 1,
+        "job_id": "s07-stopped-final-reader-elder-a2",
+        "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-stopped-final-reader-elder-a2-container",
+        "registry": "/home/user/timelearner-refactor/stopped-final-metadata-reservations.sqlite3",
+        "closure": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "2940392ea2993220e967b89395320824f7870fb56b71487976cf40fd99b024fd",
+            "unit": "timelearner-6d573b80-5d4b-4beb-a1fc-f26e74747866.service",
+            "invocation_id": "fec6ec0f4cbf42388ac00bebf881488c",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6d573b80-5d4b-4beb-a1fc-f26e74747866.service",
+            "initial_main_pid": 3460457,
+            "initial_start_ticks": "348160464",
+            "sha256": "edc38c01c9adfc82a4ec43fccd3e73751e2bb0c0d93aec8bcf0ae61a635fd24c"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "38260",
+            "KillMode": "control-group",
+            "Description": "timelearner-6d573b80-5d4b-4beb-a1fc-f26e74747866.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        },
+        "reservation_optional": false,
+        "reservation_state": "released",
+        "reservation_token": "c8834392-e785-40bc-8211-7323e9aad0ff",
+        "state": "ready",
+        "reason": "dependency_closed_lease_released",
+        "successful_execution_attested": false,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "host": "m40",
+      "data_commit": "3b157a6e67ef7f8a83fef06d0f9b22c7c06b1d2c",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-stopped-final-reader-m40-a2/",
+      "members": 15,
+      "archive_bytes": 19516,
+      "archive_sha256": "ff63dc50c9125dc7fa59f9261e19b0d1dfa880e6d36b4659699c7636868e984c",
+      "reader_git_hashes_verified": 281,
+      "checks": {
+        "returncode": 0,
+        "tests": 13,
+        "expected": 13,
+        "skips_allowed": false
+      },
+      "cli_cases": 4,
+      "native_models_executed": 0,
+      "source_files_unchanged": {
+        "all_116_primary_files_rehashed": true,
+        "data_commit": "d080310f241c994bca1231cbb38a3cb290ca2f36",
+        "cpp_rerun": false
+      },
+      "fresh_closed_released": {
+        "kind": "timelearner_worker_dependency_state",
+        "schema_version": 1,
+        "job_id": "s07-stopped-final-reader-m40-a2",
+        "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stopped-final-reader-m40-a2-container",
+        "registry": "/media/user/Data/TimeLearnerRefactor/stopped-final-metadata-reservations.sqlite3",
+        "closure": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "1215aaf682a69d84e6c387b3ea52434d80ab4b9949eb5e2ff850e439da7fd525",
+            "unit": "timelearner-0240cc7c-efe9-41e4-9aa5-ed7c0c6a592f.service",
+            "invocation_id": "73ea13711a35468882c0a562afac7aca",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-0240cc7c-efe9-41e4-9aa5-ed7c0c6a592f.service",
+            "initial_main_pid": 505622,
+            "initial_start_ticks": "298703203",
+            "sha256": "1de414f3c5de8d14ab2a1396610972747e9751f4fef6febc84564724a04b9b9c"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "52862",
+            "KillMode": "control-group",
+            "Description": "timelearner-0240cc7c-efe9-41e4-9aa5-ed7c0c6a592f.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        },
+        "reservation_optional": false,
+        "reservation_state": "released",
+        "reservation_token": "75715388-f387-4fda-adfc-7315683fd1ef",
+        "state": "ready",
+        "reason": "dependency_closed_lease_released",
+        "successful_execution_attested": false,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "four_cli_outputs_byte_identical_between_servers": true,
+  "cpp_rerun_for_reader_correction": false,
+  "temporal_figures_for_this_new_corpus_accepted": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}
