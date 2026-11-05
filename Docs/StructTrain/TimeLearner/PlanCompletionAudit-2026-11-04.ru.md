@@ -422,3 +422,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Следующая ASan SDK — только очередь, не приёмка
 
 [Отдельная build-only постановка root2e061/Pulse12d на M40](IntegratedSdkGate.ru.md) ждёт SDK802 ASan304→published owner8/readers128 и освобождения RAM. Исходники доставлены через Git; новая сборка и её native8+133 ещё не выполнены. На Elder normal SDK уже компилирована и фактический native процесс запущен; полный итог нужно читать из последующих verdict/terminal/XML, а не из этого live наблюдения. Все этапы1–12 остаются частичными.
+
+
+## ASan fixtures доступны в Git; numerical gate ещё pending
+
+[Шесть точных условий и103 saved-state fixtures сверены; post-build ASan8+133 поставлен в очередь](IntegratedSdkGate.ru.md). Cold/live и saved-state boundary categories разграничены по actual C++ source, исторические packages не приписываются новому Train. New heavy build/native jobs пока не запускались; текущие задания не изменены. Только этап0 полностью принят.
