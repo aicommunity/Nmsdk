@@ -1,3 +1,5 @@
+Принято06.11: temporal отчёт отрицательного final-pass —32 реальные пробы,48 trial–soma pairs,288 автоматически проверенных видов;24 оригинала просмотрены. Все116 primary неизменны, новые модели не запускались. [Галерея, воспроизведение и границы](StoppedFinalPassTemporalVisuals.ru.md). N2/LT/sync0 — инженерная диагностика, не научный Test. Все этапы1–12 частичны.
+
 Принято06.11: negative final-pass diagnostics — actual native4 на Elder,13 reader checks и CLI4 на обоих workers; исходные32 пробы и116 members сохранены, outputs byte-equal. Сертификат у BudgetExhausted не появляется. [Область и данные](StoppedFinalPassDiagnostics.ru.md). Графики нового корпуса/retries/прочие размеры ещё открыты; все исходные этапы1–12 частичны.
 
 Принято05.11:19 исторических PSI scripts удалены после двух205-record production CLI gates и restored-path negative. Bin merge34387285; все конфиги/модели/измерения/golden XML и семь исходных report bodies сохранены. Manifest205=203 retired+2 moved,complete=false. [Приёмка и границы](PsiToolRetirement.ru.md). По ограниченному path/suffix inventory осталось141 Bin paths; это не полнота всей миграции. Все этапы1–12 частичны.
