@@ -1,0 +1,79 @@
+from pathlib import Path
+import os,sys,json,subprocess,hashlib,threading,traceback,tarfile,shutil
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-integrated-acceptance-asan-a1';root='2e0618110a9abb48b94f6edc6b63c51f829ec810';out=base/'readbacks/s06-integrated-acceptance-asan-native-a2';out.mkdir(exist_ok=False);prior=base/'readbacks/s07-integrated-acceptance-asan-build-a1';fixtures=base/'readbacks/s06-integrated-asan-declarations-a1';bootstrap=base/'source-closed-worker-recovery-a3';stop=threading.Event();thread=None;r=None;token=None;errors=[];passed=False
+sys.dont_write_bytecode=True
+
+def write(n,v):(out/n).write_bytes((json.dumps(v,indent=2,allow_nan=False)+chr(10)).encode())
+def sha(p):
+ h=hashlib.sha256()
+ with p.open('rb') as f:
+  for b in iter(lambda:f.read(1024**2),b''):h.update(b)
+ return h.hexdigest()
+def git(repo,*a):return subprocess.check_output(['git','-C',str(repo),*a],text=True).strip()
+(out/'producer.py').write_bytes(Path(__file__).read_bytes());write('owner.json',{'pid':os.getpid(),'start_ticks':Path('/proc/self/stat').read_text().rsplit(') ',1)[1].split()[19],'root':root,'native_tests_declared':[8,133],'leak_check_enabled':False})
+try:
+ sys.path.insert(0,str(base/'source-worker-dependency-normal-a2'))
+ from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+ from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+ r=Reservations(base/'resource-reservations.sqlite3');dependency=inspect_worker_dependency(Path(str(prior)+'-container'),r,prior.name)
+ assert dependency['state']=='ready' and dependency['reservation_state']=='released',dependency
+ assert json.loads((prior/'terminal.json').read_text())['build_passed'];write('build-prerequisite.json',dependency)
+ memory=int(next(l.split()[1] for l in Path('/proc/meminfo').read_text().splitlines() if l.startswith('MemAvailable:')))*1024;free=shutil.disk_usage(base).free
+ assert memory>=36*1024**3 and free>=4*1024**3
+ write('resource-preflight.json',{'memory_available_bytes':memory,'free_disk_bytes':free,'worker_memory_max_bytes':42*1024**3,'worker_tasks_max':128,'whole_worker_maximum_wall_seconds':129600,'focused_maximum_wall_seconds':21600,'full_maximum_wall_seconds':86400,'minimum_available_memory_bytes':36*1024**3,'minimum_disk_bytes':4*1024**3,'compilation_disabled':True})
+ assert git(source,'rev-parse','HEAD')==root and not git(source,'status','--porcelain','--untracked-files=no')
+ runtime=json.loads((prior/'native-runtime.json').read_text());assert runtime['source_closure']['root']['head']==root
+ executable=base/'runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents';assert Path(runtime['executable']['path']).resolve()==executable.resolve()
+ assert runtime['build_flags']['CMAKE_BUILD_TYPE']=='RelWithDebInfo' and '-fsanitize=address' in runtime['build_flags']['CMAKE_CXX_FLAGS_RELWITHDEBINFO'] and '-fsanitize=address' in runtime['build_flags']['CMAKE_EXE_LINKER_FLAGS']
+ post=json.loads((fixtures/'posttune-binding.json').read_text());post_root=Path(post['directory']);assert post['source_evidence_commit']=='b411dbf1eb469f83442dc816f77563f82bdfb5ea' and post['all_files_match_published_Git_manifest']
+ lease=r.reserve(out.name,[{'path':str(out),'access':'write'}]+[{'path':str(p),'access':'read'} for p in [source,prior,fixtures,post_root,base/'source-integrated-owner-plots-a1',executable.parent,base/'source-csearch-threshold-joint-asan-build-a1/Bin']],ttl_seconds=120);token=lease['token'];write('reservation.json',lease)
+ def heartbeat():
+  while not stop.wait(20):
+   try:r.heartbeat(token,ttl_seconds=120);r.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=heartbeat,daemon=True);thread.start()
+ fixture_repo=base/'source-theory-retirement-a1';fixture_commit='bb0e0506a72ac6415c67ee593f576f02223b4d51';prefix='Reports/StructTrain/TimeLearner/s06-integrated-asan-declarations-a1/'
+ bundle=json.loads(subprocess.check_output(['git','-C',str(fixture_repo),'show',fixture_commit+':'+prefix+'bundle.json']));restoration=json.loads((fixtures/'restoration.json').read_text());assert restoration['source_commit']==fixture_commit and restoration['all_written_files_rehashed'] and restoration['restored']==bundle['members']
+ for name,rec in restoration['restored'].items():
+  f=fixtures/name;assert not f.is_symlink() and f.stat().st_size==rec['bytes'] and sha(f)==rec['sha256']
+ assert len(restoration['restored'])==6
+ published_post_bundle=subprocess.check_output(['git','-C',str(base/'source-integrated-owner-plots-a1'),'show','b411dbf1eb469f83442dc816f77563f82bdfb5ea:Reports/StructTrain/TimeLearner/s06-positive-recognition-owner141-a1/bundle.json'])
+ assert hashlib.sha256(published_post_bundle).hexdigest()==post['source_bundle_sha256']
+ published_post_members={name:rec for name,rec in json.loads(published_post_bundle)['members'].items() if name.startswith('fixtures/')}
+ assert post['members']==published_post_members,'posttune_binding_does_not_match_published_source'
+ for name,rec in post['members'].items():
+  assert name.startswith('fixtures/') and '..' not in Path(name).parts
+  f=post_root.parent/name;assert not f.is_symlink() and f.stat().st_size==rec['bytes'] and sha(f)==rec['sha256']
+ assert len(post['members'])==103;write('fixture-provenance.json',{'cold_live_declaration_restoration':restoration,'posttune_saved_state_binding':post,'all_109_fixture_files_rehashed':True,'historical_results_not_inferred_as_new_cold_training':True})
+ for name in list(sys.modules):
+  if name=='Scripts' or name.startswith('Scripts.'):del sys.modules[name]
+ sys.path.insert(0,str(source));os.chdir(source)
+ from Scripts.StructTrain.TimeLearner.process_runner import verify_runtime
+ from Scripts.StructTrain.TimeLearner.native_gate import run_native_gate
+ verify_runtime(runtime);write('native-runtime.json',runtime)
+ for key in ['LD_LIBRARY_PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM']:
+  if key in runtime['loader_environment']:os.environ[key]=runtime['loader_environment'][key]
+  else:os.environ.pop(key,None)
+ os.environ['ASAN_OPTIONS']='detect_leaks=0';os.environ['TIMELEARNER_LIVE_COLD_SOURCE']=str(fixtures/'cold');os.environ['TIMELEARNER_LIVE_CALIBRATION_SOURCE']=str(fixtures/'calibration');os.environ['TIMELEARNER_POSTTUNE_FIXED_SOURCE']=str(post_root)
+ for filename,count,label,budget in [('native-shared-recognition-v1.json',8,'focused',21600),('native-shared-lifecycle-regression-v1.json',133,'native',86400)]:
+  spec=json.loads((source/'Scripts/StructTrain/TimeLearner/specs'/filename).read_text());assert len(spec['expected_test_ids'])==count
+  original_budget=spec['maximum_wall_seconds'];spec.update(source_root=str(source),runtime_manifest=str(out/'native-runtime.json'),asan_options='detect_leaks=0',maximum_wall_seconds=budget)
+  write(label+'-specification.json',spec);write(label+'-budget.json',{'source_budget_seconds':original_budget,'ASan_budget_seconds':budget,'expected_inventory':count,'model_times_and_tolerances_changed':False})
+  result=run_native_gate(out/(label+'-specification.json'),out/(label+'-result'));write(label+'-verdict.json',result)
+  assert result['execution']=='completed' and result['validity']=='valid' and result['assertion_status']=='passed' and result['inventory']['observed']==result['inventory']['expected']==count
+ assert not errors;passed=True
+except BaseException as e:write('exception.json',{'reason':str(e),'traceback':traceback.format_exc()})
+finally:
+ stop.set()
+ if thread:thread.join(timeout=30)
+ executed=any((out/(label+'-result/process/owned-process.json')).is_file() for label in ['focused','native'])
+ write('terminal.json',{'shared_integrated_ASan_owner8_lifecycle133_passed':passed,'native_cpp_executed':executed,'root':root,'leak_absence_attested':False,'scientific_verdict':None,'whole_plan_complete':False})
+ if source.is_dir():
+  for label,prefixes,suffixes in [('native',['App/NeuroModelerConsole','Tests/Integration/Libraries','Libraries/Nmsdk-PulseLib/Core'],['.cpp','.h','.c']),('python',['Scripts/StructTrain/TimeLearner'],['.py'])]:
+   write(label+'-source-hashes.json',{str(f.relative_to(source)):sha(f) for prefix in prefixes for f in (source/prefix).rglob('*') if f.is_file() and f.suffix in suffixes})
+ files={str(p.relative_to(out)):{'bytes':p.stat().st_size,'sha256':sha(p)} for p in out.rglob('*') if p.is_file() and not p.is_symlink()}
+ with tarfile.open(out/'primary.tar.xz','w:xz',preset=3) as a:
+  for name,rec in files.items():
+   info=tarfile.TarInfo(name);info.size=rec['bytes']
+   with (out/name).open('rb') as f:a.addfile(info,f)
+ write('bundle.json',{'kind':'integrated_shared_controller_ASan_native_gate','root':root,'shared_integrated_ASan_owner8_lifecycle133_passed':passed,'members':files,'archive_bytes':(out/'primary.tar.xz').stat().st_size,'archive_sha256':sha(out/'primary.tar.xz'),'scientific_verdict':None,'whole_plan_complete':False});print('CLOSED',passed,flush=True)
