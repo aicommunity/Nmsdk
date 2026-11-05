@@ -1,0 +1,1 @@
+Explicit historical training adapters on sourced2d68:16 real-primary checks passed with no skips, including old auditor2 Git originals and completed/stopped Classic/Branch auditor3 receipts. Current audit validates every other field; no model or original manifest rewritten. Prior harness, disk and capacity preflights preserved.

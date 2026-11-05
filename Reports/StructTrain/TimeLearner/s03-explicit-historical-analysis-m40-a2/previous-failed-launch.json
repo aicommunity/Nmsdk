@@ -1,0 +1,7 @@
+{
+  "reason": "outer wrapper precreated contained output directory, but production start owns creation",
+  "launch_log": "Traceback (most recent call last):\n  File \"/tmp/timelearner-explicit-historical-analysis-a1-container.py\", line 14, in <module>\n    start(m,[str(worker)],'/tmp',out,memory_bytes=1024**3,tasks=128,maximum_wall_seconds=7200)\n  File \"/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3/Scripts/StructTrain/TimeLearner/contained_process.py\", line 134, in start\n    output.mkdir(parents=True, exist_ok=False)\n  File \"/usr/lib/python3.12/pathlib.py\", line 1313, in mkdir\n    os.mkdir(self, mode)\nFileExistsError: [Errno 17] File exists: '/media/user/Data/TimeLearnerRefactor/readbacks/s03-explicit-historical-analysis-a1-container'\n",
+  "worker_started": false,
+  "tests_executed": 0,
+  "reservation_created": false
+}
