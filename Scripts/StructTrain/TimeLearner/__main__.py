@@ -130,6 +130,11 @@ def analyze(args: argparse.Namespace) -> dict:
             "analysis": result, "evaluation_verdict": None}
 
 
+def _process_policy(args):
+    from .native_evidence import load
+    return None if args.process_policy is None else load(args.process_policy.resolve(strict=True))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
@@ -147,6 +152,13 @@ def main(argv: list[str] | None = None) -> int:
     controller_kernel.add_argument("--compiler", type=Path, required=True)
     controller_kernel.add_argument("--gtest-source", type=Path, required=True)
     controller_kernel.add_argument("--output", type=Path, required=True)
+    pipeline = commands.add_parser("pipeline", help="managed Train/export/optional tuning/frozen Test with a durable boundary journal")
+    pipeline.add_argument("action", choices=("run", "continue", "audit", "reconcile"))
+    pipeline.add_argument("directory", type=Path)
+    pipeline.add_argument("--specification", type=Path)
+    pipeline.add_argument("--runtime-manifest", type=Path)
+    pipeline.add_argument("--process-policy", type=Path)
+    pipeline.add_argument("--stop-after", choices=("train", "export", "posttune", "calibrate", "evaluate"))
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
@@ -175,6 +187,7 @@ def main(argv: list[str] | None = None) -> int:
             native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
+        native.add_argument("--process-policy", type=Path, help="explicit whole-cgroup limits; omitted retains legacy process scope")
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
     transfer = commands.add_parser("model-spec-transport", help="replay pinned positive engineering N1 jobs, then measure calibration and fresh import")
     transfer.add_argument("action", choices=("prepare", "run"))
@@ -246,6 +259,7 @@ def main(argv: list[str] | None = None) -> int:
     calibration.add_argument("--measurements", type=Path, help="portable search measurement-set descriptor for select/confirm")
     calibration.add_argument("--runtime-manifest", type=Path, help="verified Console runtime required for run")
     calibration.add_argument("--wall-seconds", type=float, help="owned process wall budget required for run")
+    calibration.add_argument("--process-policy", type=Path, help="whole-cgroup execution policy; run only")
     calibration.add_argument("--source-solo", type=Path, required=True, help="original learned-state package with primary trial siblings")
     calibration.add_argument("--selection", type=Path, help="required for confirmation; recomputed against primary search evidence")
     calibration.add_argument("--confirmation", type=Path, help="one fresh measurement-set descriptor required for confirmation")
@@ -255,6 +269,7 @@ def main(argv: list[str] | None = None) -> int:
     posttune.add_argument("--source-solo", type=Path, required=True)
     posttune.add_argument("--runtime-manifest", type=Path, required=True)
     posttune.add_argument("--wall-seconds", type=float, required=True)
+    posttune.add_argument("--process-policy", type=Path, help="explicit whole-cgroup execution policy")
     posttune.add_argument("--output", type=Path, required=True, help="new run directory; never overwritten")
     bundle = commands.add_parser("bundle", help="lossless primary archives; full plots remain in worker cache")
     bundle.add_argument("action", choices=("pack-native-tests", "verify", "extract"))
@@ -291,6 +306,25 @@ def main(argv: list[str] | None = None) -> int:
     reuse.add_argument("--reference-archive")
     reuse.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
+    if args.command == "pipeline":
+        from .managed_pipeline import run_pipeline, audit_pipeline, reconcile_pipeline
+        from .native_evidence import load, require, EvidenceError
+        try:
+            if args.action in ("audit", "reconcile"):
+                require(all(v is None for v in (args.specification, args.runtime_manifest,
+                                               args.process_policy, args.stop_after)), "pipeline_audit_execution_options")
+                result = (reconcile_pipeline if args.action == "reconcile" else audit_pipeline)(args.directory)
+            else:
+                require(all(v is not None for v in (args.specification, args.runtime_manifest,
+                                                   args.process_policy)), "pipeline_execution_inputs_required")
+                result = run_pipeline(args.specification, args.runtime_manifest, load(args.process_policy),
+                                      args.directory, resume=args.action == "continue", stop_after=args.stop_after)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result["pending_phase"] is None and result["halted_phase"] is None else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_managed_pipeline_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
     if args.command == "primary-reuse":
         from .primary_reuse import pack, restore
         from .native_evidence import EvidenceError, require
@@ -380,7 +414,7 @@ def main(argv: list[str] | None = None) -> int:
         from .native_calibration_worker import run_job
         try:
             result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output,
-                             args.wall_seconds, post_tune=True)
+                             args.wall_seconds, post_tune=True, process_policy=_process_policy(args))
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
@@ -440,7 +474,8 @@ def main(argv: list[str] | None = None) -> int:
                 require((args.source_solo is None) == (load(args.specification)['schema_version'] == 1), 'probe_source_required_only_for_import')
             else:
                 require((args.source_solo is None) == (args.command in ("train", "preflight")), "pipeline_source_required_only_for_export_evaluate")
-            result = run_job(args.command, args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
+            result = run_job(args.command, args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds,
+                             process_policy=_process_policy(args))
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
@@ -514,10 +549,11 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.runtime_manifest is not None and args.wall_seconds is not None and
                         args.measurements is None and args.selection is None and args.confirmation is None,
                         "native_calibration_requires_runtime_wall_budget_and_no_saved_measurements")
-                result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
+                result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds,
+                                 process_policy=_process_policy(args))
                 print(json.dumps(result, ensure_ascii=False, allow_nan=False))
                 return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
-            require(args.runtime_manifest is None and args.wall_seconds is None and args.measurements is not None,
+            require(args.runtime_manifest is None and args.wall_seconds is None and args.process_policy is None and args.measurements is not None,
                     "saved_calibration_requires_measurements_and_no_runtime")
             require(args.action == "confirm" or (args.selection is None and args.confirmation is None),
                     "selection_does_not_accept_confirmation_options")
