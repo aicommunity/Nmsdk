@@ -1,0 +1,98 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "1b7d62b9-06d7-4027-a215-879eba0c2810",
+  "job_id": "s02-elder-verified-cache-release-a2",
+  "recorded_unix": 1793915872.7633836,
+  "administrator": {
+    "pid": 3514732,
+    "start_ticks": "348563029",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 3514744,
+    "start_ticks": "348563040",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "124d4bdb3ef3c54cf2306b5d81e43f13076d4e00ea36f993588b7c3809c41fe5",
+      "unit": "timelearner-20ddd47d-65c3-4462-ae64-7d8c3bd137e0.service",
+      "invocation_id": "25784a8f0ee54e1cb1cc6b5254b76bb1",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-20ddd47d-65c3-4462-ae64-7d8c3bd137e0.service",
+      "initial_main_pid": 3514744,
+      "initial_start_ticks": "348563040",
+      "sha256": "f9a1e5591adfa1cd7e4349f58cc7932e4830d1d690787aa152887669d64bb7b6"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-20ddd47d-65c3-4462-ae64-7d8c3bd137e0.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4",
+      "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
