@@ -1,0 +1,40 @@
+{
+  "kind": "timelearner_queue_replacement_cancellation",
+  "schema_version": 1,
+  "only_exact_owned_waiting_python_queues_stopped": true,
+  "active304_untouched": true,
+  "records": [
+    {
+      "pid": 151566,
+      "start_ticks": "294496748",
+      "previous_state": {
+        "state": "waiting_for_sdk802_ASan_owner8_reader128_closure_and_resources",
+        "dependency": null,
+        "memory_available_bytes": 46135910400,
+        "disk_free_bytes": 403346624512,
+        "new_build_started": false,
+        "new_native_models_started": false,
+        "elapsed_seconds": 8715.43595048599
+      },
+      "native_or_build_unit_created": false,
+      "reason": "Replace permanently stale failed-predecessor chain and unsupported129600s parent by separately bounded stages; active304 not touched.",
+      "owned_queue_exited": true
+    },
+    {
+      "pid": 168864,
+      "start_ticks": "294783992",
+      "previous_state": {
+        "state": "waiting_for_new_shared_controller_ASan_build_closure_and_resources",
+        "dependency": null,
+        "memory_available_bytes": 46130561024,
+        "disk_free_bytes": 403346956288,
+        "new_build_started": false,
+        "new_native_models_started": false,
+        "elapsed_seconds": 5835.468139275443
+      },
+      "native_or_build_unit_created": false,
+      "reason": "Replace permanently stale failed-predecessor chain and unsupported129600s parent by separately bounded stages; active304 not touched.",
+      "owned_queue_exited": true
+    }
+  ]
+}
