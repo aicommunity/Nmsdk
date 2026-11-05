@@ -1,0 +1,22 @@
+{
+  "cgroup_after_native": {
+    "monotonic_seconds": 2901855.704279682,
+    "cgroup": "/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-46dc7c61-181d-4fe4-a827-cd2fd6136e87.service",
+    "memory.current": 622768128,
+    "memory.peak": 9299521536,
+    "memory.max": 45097156608,
+    "memory.swap.current": 0,
+    "events": {
+      "low": 0,
+      "high": 0,
+      "max": 0,
+      "oom": 0,
+      "oom_kill": 0,
+      "oom_group_kill": 0,
+      "sock_throttled": 0
+    }
+  },
+  "largest_reaped_child_maxrss_kib": 8526948,
+  "rusage_scope": "largest individual reaped child in this worker; cgroup peak is whole job through native completion",
+  "legacy_K1_final_peak_known": false
+}
