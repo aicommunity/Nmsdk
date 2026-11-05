@@ -387,3 +387,8 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Совместные metadata gates и читаемые графики05.11
 
 [По74 проверки на обоих серверах и галерея42 оригинальных графиков](IntegratedMetadataAndTemporalReports.ru.md) приняты как данные: resource/publisher/identity/history controls и полные temporal reports существующего coordinator corpus. Все42 изображения просмотрены в исходном размере. Объединённый candidate d936 не принят как production code; runtime/Owner/full ASan и научная матрица ещё открыты. Только этап0 полностью завершён.
+
+
+## Native133 и совместимость сохранённого analysis05.11
+
+[Native133 прошёл; Owner8 ещё не положительный; recovery20 на старом corpus fail-closed по версиям аудитора](RecognitionAndRecovery-2026-11-05.ru.md). Отрицательные результаты и ошибки harness сохранены. Открыты свежая integrated SDK/coordinator corpus и explicit historical adapters; старые manifests не переписываются. Данные не являются merge алгоритмов или завершением этапов1–12.
