@@ -2,6 +2,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPatternResponseAnalyzer.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearner.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NNeuronTimeLearnerBranch.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseLTZone.h"
 #include "../Support/ConsoleLikeInit.h"
 
 #include <limits>
@@ -16,6 +17,7 @@ public:
     using NPatternResponseAnalyzer::AppendStim;
     using NPatternResponseAnalyzer::CloseTrial;
     using NPatternResponseAnalyzer::IsIsiTemplateMatch;
+    using NPatternResponseAnalyzer::ReadLtzPotential;
     void Label(int label) { trial_target_class_ = label; }
 };
 
@@ -163,6 +165,74 @@ TEST_F(IsiTemplateValidation, MissingTemplateCannotBecomeSuccessfulFoil)
             Present(label);
             ExpectInvalid();
         }
+    }
+}
+
+TEST_F(IsiTemplateValidation, LazyLtzLookupUsesActualNeuronForBothTopologies)
+{
+    for(const std::string learnerClass : {"NNeuronTimeLearner", "NNeuronTimeLearnerBranch"})
+    {
+        SCOPED_TRACE(learnerClass);
+        ASSERT_NO_FATAL_FAILURE(MakeFixture(learnerClass));
+        auto ltz = neuron->GetComponentL<NMSDK::NPulseLTZoneCommon>("LTZone", true);
+        if(!ltz)
+        {
+            RDK::UEPtr<NMSDK::NPulseLTZoneThreshold> source(new NMSDK::NPulseLTZoneThreshold);
+            const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+            source->SetStorage(core.storage);
+            source->SetEnvironment(core.environment);
+            source->Default();
+            source->Name = "LTZone";
+            ASSERT_NE(neuron->AddComponent(source), RDK::ForbiddenId);
+            ltz = source;
+        }
+        ltz->Potential.SetDataDirect(.123);
+        // No analyzer Build or test-only BindLtz: exercise production lazy lookup.
+        EXPECT_DOUBLE_EQ(analyzer->ReadLtzPotential(), .123);
+    }
+}
+
+TEST_F(IsiTemplateValidation, EmptyShapeAndNonfiniteUnusedColumnInvalidateBothLabels)
+{
+    for(const std::string learnerClass : {"NNeuronTimeLearner", "NNeuronTimeLearnerBranch"})
+    {
+        SCOPED_TRACE(learnerClass);
+        ASSERT_NO_FATAL_FAILURE(MakeFixture(learnerClass));
+        for(int label : {0, 1})
+        {
+            Reference({});
+            Present(label);
+            ExpectInvalid();
+            RDK::MDMatrix<double> emptyColumns;
+            emptyColumns.Resize(4, 0);
+            neuron->TrainingPattern.SetDataDirect(emptyColumns);
+            Present(label);
+            ExpectInvalid();
+            RDK::MDMatrix<double> extraColumn;
+            extraColumn.Resize(4, 2, .1);
+            const double reference[] = {.01, .08, .16, .24};
+            for(int i = 0; i < 4; ++i) extraColumn(i, 0) = reference[i];
+            extraColumn(0, 1) = std::numeric_limits<double>::quiet_NaN();
+            neuron->TrainingPattern.SetDataDirect(extraColumn);
+            Present(label);
+            ExpectInvalid();
+        }
+    }
+}
+
+TEST_F(IsiTemplateValidation, NonIncreasingStimulusInvalidatesBothLabels)
+{
+    for(const std::string learnerClass : {"NNeuronTimeLearner", "NNeuronTimeLearnerBranch"})
+    {
+        SCOPED_TRACE(learnerClass);
+        ASSERT_NO_FATAL_FAILURE(MakeFixture(learnerClass));
+        Reference({.01, .08, .16, .24});
+        for(double second : {10.0, 9.99})
+            for(int label : {0, 1})
+            {
+                Present(label, second);
+                ExpectInvalid();
+            }
     }
 }
 

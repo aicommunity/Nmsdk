@@ -58,3 +58,34 @@ Root920d42a7 доставлен отдельным Git snapshot; child Pulse2f/C
 архив a1, его JUnit и ограничение ошибочной fixture сохраняются. До результата
 исправленного a2 дефект не объявляется runtime-принятым. Эта политика повторно
 использует только освобождённый кэш; активные source/runtime не обновляются.
+
+
+## Воспроизведение и candidate-исправление
+
+Исправленная fixture a3 на root920d42a7/Pulse2f завершилась:9/9 объявленных
+functions наблюдены,5 observation controls passed,4 ISI regressions failed,
+valid JUnit/process agreement. NaN reference/stimulus, отсутствующий источник
+и Branch lookup воспроизведены на реальных объектах. Это отрицательный baseline,
+не PASS исправления. A2 до него остановился при обычном fetch частичного
+снимка без Reports blobs; checkout остался56ac, расчётов не было. A3 импортировал
+точный Git code packet и сохранил прежний runtime без изменений.
+
+Candidate Pulsefe382a0 разделяет Invalid/Mismatch/Match. Неизвестный/пустой
+источник, неприменимый ISI-размер, nonfinite reference/stimulus/residual и
+нестрого возрастающий clock дают invalid_measurement и Match0 для target/foil.
+Конечный mismatch остаётся обычным mismatch, допуск1e-5 сохранён. Источник
+Neuron и lazy LTZone разрешаются через общий UContainer, как при ABuild.
+Публичные properties, CSV schema, физика и lifecycle bool не меняются.
+
+В fixed gate добавлены три controls: реальный lazy LTZone lookup обоих
+learner, empty shape/NaN в дополнительном столбце и неверный порядок stimulus.
+Итого7 новых test functions (каждая Classic+Branch) плюс5 прежних observation
+controls. Дополнительные три controls пока не runtime-проверены; положительная
+приёмка candidate12 ещё ожидается. Проверка на втором сервере и ASan также
+не объявляются выполненными.
+
+MatchMode1 сравнивает входные ISI с сохранённым TrainingPattern. Его Match сам
+по себе не доказывает ответ нейрона. Научные метрики обязаны использовать
+фактические выходные спайки; исторические отчёты с таким режимом требуют
+отдельной проверки критерия. Августовские4/8–6/8 подтверждены настоящими LT
+responses и не отменяются этим замечанием.
