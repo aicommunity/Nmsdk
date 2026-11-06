@@ -232,7 +232,24 @@ void RecoveryCase(ProbeRouting routing,Normalization normalization,bool failAnch
         if(reject){++rejections;if(!extra)raw[action->inputIndex]=-.065;}
         session.Consume(Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},raw,
                                reject && extra),action->baseModelRevision);
+        if(reject && policy==InvalidMeasurementRecovery::AdvanceUnassignedBurst)
+        {
+            ASSERT_EQ(session.Recoveries().size(),rejections);const auto& event=session.Recoveries().back();
+            EXPECT_EQ(event.actionSerial,action->serial);EXPECT_EQ(event.inputIndex,action->inputIndex);
+            EXPECT_EQ(event.candidateInputIndex,0u);EXPECT_EQ(event.sweep,0u);
+            EXPECT_EQ(event.runId,action->runId);EXPECT_EQ(event.trialId,action->trialId);
+            EXPECT_EQ(event.modelEpoch,action->modelEpoch);EXPECT_EQ(event.baseModelRevision,action->baseModelRevision);
+            EXPECT_EQ(event.effectiveModelRevision,prepared.effectiveModelRevision);EXPECT_EQ(event.anchor,failAnchor);
+            EXPECT_EQ(event.fullParameters,action->parameters);EXPECT_FALSE(event.capacitance);
+            EXPECT_EQ(event.validity,extra?PeakValidity::Ambiguous:PeakValidity::Missing);
+            EXPECT_EQ(event.invalidBefore,rejections-1);EXPECT_EQ(event.invalidAfter,rejections);
+            EXPECT_EQ(event.statusAfter,session.Status());EXPECT_EQ(event.reasonAfter,session.Reason());
+            EXPECT_EQ(event.disposition,rejections>allowance?CandidateRecoveryDisposition::InvalidBudgetStop:
+                CandidateRecoveryDisposition::CursorAdvanced);
+        }
+        if(policy==InvalidMeasurementRecovery::RetrySameCandidate)EXPECT_TRUE(session.Recoveries().empty());
     }
+    EXPECT_EQ(session.InvalidObservations(),rejections);
     if(alwaysInvalid)
     {
         EXPECT_FALSE(session.Certificate());EXPECT_TRUE(session.Evidence().empty());
@@ -295,6 +312,7 @@ TEST(BoundedCandidateRecovery,FinalVerificationNeverSkipsAnUnassignedInput)
         }
         EXPECT_EQ(badFinals,2u);EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
         EXPECT_FALSE(session.Certificate());EXPECT_EQ(session.AppliedEdits(),0u);
+        EXPECT_TRUE(session.Recoveries().empty());EXPECT_EQ(session.InvalidObservations(),badFinals);
     }
 }
 
@@ -384,6 +402,11 @@ TEST(BoundedCandidateRecovery,UnassignedRestoredBestCannotReuseItsOldMeasuredCer
     EXPECT_EQ(firstPoint,2u);EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
     EXPECT_EQ(session.Reason(),"restored_best_candidate_has_unassigned_burst");EXPECT_FALSE(session.Certificate());
     EXPECT_EQ(session.Evidence().size(),2u);EXPECT_EQ(session.Parameters()[0].length,1);
+    ASSERT_EQ(session.Recoveries().size(),1u);const auto& event=session.Recoveries().front();
+    EXPECT_EQ(event.disposition,CandidateRecoveryDisposition::RestoredBestStop);
+    EXPECT_EQ(event.statusAfter,TrainingStatus::SearchUnresolved);
+    EXPECT_EQ(event.reasonAfter,"restored_best_candidate_has_unassigned_burst");
+    EXPECT_EQ(event.invalidBefore,0u);EXPECT_EQ(event.invalidAfter,1u);
 }
 
 TEST(BoundedTrainingN0Repeats, SecondObservationCanRejectAnApparentlyExactCandidate)

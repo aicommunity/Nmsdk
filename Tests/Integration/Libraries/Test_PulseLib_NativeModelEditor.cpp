@@ -6645,6 +6645,7 @@ template<class Learner> void CandidateRecoveryCodec(int normalization)
     EXPECT_EQ(summary["invalid_measurement_recovery"],QJsonValue("advance_unassigned_burst"));
     EXPECT_EQ(summary["search_history_retained"],QJsonValue(false));
     EXPECT_TRUE(summary.contains("invalid_observations"));EXPECT_TRUE(summary["invalid_observations"].isNull());
+    ASSERT_TRUE(summary["candidate_recovery_events"].isArray());EXPECT_TRUE(summary["candidate_recovery_events"].toArray().isEmpty());
     Artifact(rig.name+"_schema5_summary.json",QJsonDocument(summary).toJson());
     rig.learner->IsNeedToTrain=false;
 }
