@@ -32,5 +32,7 @@
   "native_test_result_available": false,
   "algorithm_fix_verified": false,
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "baseline_fixture_correction_pending": true,
+  "fixture_correction": "Initial a1 test inspects trial_measurement_valid_ after CloseTrial reset; corrected test uses retained LastMatch/LastErrorClass. Do not accept a1 gate as final baseline solely by expected four failing IDs."
 }
