@@ -1,3 +1,5 @@
+Принято06.11: **новая shared SDK2e/Pulse12d ASan build + focused8 —8/8**. Проверены19+575 archive members,720 build и321/323/325 native/Python/tool hashes,8 actual native identities/JUnit/libasan mappings. [Область, данные и аудит восстановления collector lease](SharedSdkASanFocusedAcceptance.ru.md). ASan lifecycle133 и научная матрица открыты; этапы1–12 частичны.
+
 Принято06.11: **новый shared SDK2e/Pulse12d normal304 —304/304** в одном настоящем C++ процессе. Все3936 members,304 исходных ID/статуса,720 compiled и282 tool source hashes проверены; closure/released подтверждены. [Доказательства и ограничения](SharedSdkNormal304Acceptance.ru.md). ASan этой SDK и научная матрица остаются отдельными; этапы1–12 частичны.
 
 Принято06.11: fresh ASan owner8/readers128 завершены; проверены195 archive members,8 actual native identities/исходных JUnit,original model bindings и323 reader source hashes. [Доказательства и границы](JointOwnerReplayASanAcceptance.ru.md). Новый SDK2e normal304/focused ASan8 завершены по серверным records, но ещё не прошли отдельную приёмку; ASan lifecycle133 kernel-live. Все этапы1–12 частичны.

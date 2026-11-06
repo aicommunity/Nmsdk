@@ -1,3 +1,5 @@
+Дополнение06.11: [новая shared ASan build/focused8 принята](SharedSdkASanFocusedAcceptance.ru.md). Lifecycle133 остаётся отдельным незавершённым gate; прежние слова «требует приёмки» ниже относятся к более раннему снимку.
+
 Дополнение06.11: [новый SDK2e/Pulse12d full normal304 принят](SharedSdkNormal304Acceptance.ru.md). Прежнее ожидание normal304 ниже относится к предыдущему снимку; ASan и научные проверки отдельные.
 
 Дополнение06.11: [ASan fresh owner8/readers128 приняты](JointOwnerReplayASanAcceptance.ru.md); старые формулировки ожидания ниже относятся к предыдущему снимку. Новая shared SDK проверяется отдельно.

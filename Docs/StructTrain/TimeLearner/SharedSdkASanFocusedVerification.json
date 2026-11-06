@@ -1,0 +1,322 @@
+{
+  "kind": "timelearner_shared_asan_build_focused_independent_verification",
+  "date": "2026-11-06",
+  "evidence_commit": "86c761c90a1d52fb49dca5c0aab4bd9334a5d02e",
+  "compiled_root": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "compiled_pulse": "12d8c8a41c998ae1516496f716a0ae0f3d312b3e",
+  "tool_root": "86118630da6fed4763715209e4405980cad59f0d",
+  "proofs": {
+    "s07-integrated-acceptance-asan-build-a2": {
+      "archive_members_checked": 19,
+      "archive_bytes": 64880,
+      "archive_sha256": "7dec8d89f23db8a4ea23c9966a7c937ed3f0b808117695b368c740c8d00418d8",
+      "source_files_checked": {
+        "source-hashes.json": 720
+      },
+      "cases": [],
+      "fresh_closed_released": {
+        "kind": "timelearner_worker_dependency_state",
+        "schema_version": 1,
+        "job_id": "s07-integrated-acceptance-asan-build-a2",
+        "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2-container",
+        "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+        "closure": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "dd012b2d60d8f565b3c19124bba922ea2e04c3a8a0bb9406d0f2e4a83ec13222",
+            "unit": "timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+            "invocation_id": "90c5dc8c87a0470aa88d21c57a20a601",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+            "initial_main_pid": 565550,
+            "initial_start_ticks": "299254564",
+            "sha256": "636d968de561e7ea053bd632bc9abae9bcd17131a4271c193afcf3294cb01270"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "52862",
+            "KillMode": "control-group",
+            "Description": "timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        },
+        "reservation_optional": false,
+        "reservation_state": "released",
+        "reservation_token": "9bc3febd-1356-4e72-8595-e766446a5b62",
+        "state": "ready",
+        "reason": "dependency_closed_lease_released",
+        "successful_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "publisher_recovery": {
+        "kind": "explicit_dead_synchronous_publisher_lease_recovery",
+        "date_unix": 1793937486.8334208,
+        "token": "82f25bfe-e222-44ac-bdc8-59bb0bf07bf3",
+        "original_row": {
+          "token": "82f25bfe-e222-44ac-bdc8-59bb0bf07bf3",
+          "job_id": "publish-shared-asan-build-focused-a1",
+          "owner": "{\"boot_id\":\"0340843f-8a05-4b7e-bd66-afeefecdbe55\",\"executable\":\"/usr/bin/python3.12\",\"pid\":731873,\"start_ticks\":\"301254719\",\"uid\":1000}",
+          "resources": "[{\"access\":\"write\",\"canonical_path\":\"/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1\",\"requested_path\":\"/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1\"}]",
+          "state": "held",
+          "created": 1793937349.913154,
+          "deadline": 1793937469.913154,
+          "updated": 1793937349.913154,
+          "release_note": null
+        },
+        "owner_kernel_state": "missing",
+        "relevant_live_git": [],
+        "excluded_nondumpable_helpers": [
+          {
+            "pid": "3395",
+            "comm": "(sd-pam)",
+            "parent": "3389",
+            "parent_comm": "systemd",
+            "reason": "nondumpable login/session helper; executable/cwd not inspected"
+          },
+          {
+            "pid": "121820",
+            "comm": "ssh-agent",
+            "parent": "3389",
+            "parent_comm": "systemd",
+            "reason": "nondumpable login/session helper; executable/cwd not inspected"
+          },
+          {
+            "pid": "733007",
+            "comm": "sshd",
+            "parent": "732956",
+            "parent_comm": "sshd",
+            "reason": "nondumpable login/session helper; executable/cwd not inspected"
+          }
+        ],
+        "completed_data_commit": "4bd624d69d61f8f687c145325b50fbd2543234cb",
+        "reason": "Manual closure of synchronous evidence collector after completed data commit; release call omitted required note. Original owner missing, no live Git in target repo; no native job modified.",
+        "native_jobs_modified": false,
+        "first_recovery_attempt": "PermissionError before transaction commit; no changes",
+        "scientific_verdict": null
+      }
+    },
+    "s06-integrated-acceptance-asan-focused-a3": {
+      "archive_members_checked": 575,
+      "archive_bytes": 776104,
+      "archive_sha256": "9861d53b10626378be2b444714026a8df7fa8b45ee27fa070dffcbc417693c51",
+      "source_files_checked": {
+        "native-source-hashes.json": 321,
+        "python-source-hashes.json": 323,
+        "tool-source-hashes.json": 325
+      },
+      "cases": [
+        {
+          "test_id": "NativeRecognitionOwner/ClassicFreshDestination",
+          "native_process": {
+            "pid": 579417,
+            "start_ticks": "299417076",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/BranchFreshDestination",
+          "native_process": {
+            "pid": 580476,
+            "start_ticks": "299425923",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/ClassicSpikingFreshDestination",
+          "native_process": {
+            "pid": 581317,
+            "start_ticks": "299432846",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/BranchSpikingFreshDestination",
+          "native_process": {
+            "pid": 582315,
+            "start_ticks": "299441810",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/ClassicN0",
+          "native_process": {
+            "pid": 583161,
+            "start_ticks": "299448691",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/BranchN0",
+          "native_process": {
+            "pid": 583987,
+            "start_ticks": "299454540",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/ClassicN1",
+          "native_process": {
+            "pid": 584778,
+            "start_ticks": "299459257",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        },
+        {
+          "test_id": "NativeRecognitionOwner/BranchN1",
+          "native_process": {
+            "pid": 585596,
+            "start_ticks": "299465156",
+            "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+            "executable": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1/Test_PulseLib_StorageComponents",
+            "executable_sha256": "051c7cdc4fff8c59efee6a5b7f59c50fabb73492f6881b57755f67271236fae3",
+            "runtime_fingerprint": "93b11ba8e6294327ec8f53688f4b133d7559835ec96f1a3f6cd1566d30fc82b5"
+          },
+          "loaded_files": 73
+        }
+      ],
+      "fresh_closed_released": {
+        "kind": "timelearner_worker_dependency_state",
+        "schema_version": 1,
+        "job_id": "s06-integrated-acceptance-asan-focused-a3",
+        "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-integrated-acceptance-asan-focused-a3-container",
+        "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+        "closure": {
+          "execution": "unknown",
+          "all_processes_closed": true,
+          "reason": "bound_unit_and_group_absent",
+          "scientific_verdict": null,
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "006efc6376c4fe70d8cde76398aa1225e5a4f34c2173845f249fc7bd52a94d9c",
+            "unit": "timelearner-fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac.service",
+            "invocation_id": "5f27a9e9261b44a5883aced1f45ca960",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac.service",
+            "initial_main_pid": 579229,
+            "initial_start_ticks": "299416651",
+            "sha256": "659b2172658b570388be492b2fc2aec93add8f4985ae30d8b9a961a42f39310e"
+          },
+          "state": {
+            "Type": "",
+            "Restart": "no",
+            "RemainAfterExit": "no",
+            "MainPID": "0",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "",
+            "MemoryMax": "infinity",
+            "TasksMax": "52862",
+            "KillMode": "control-group",
+            "Description": "timelearner-fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac.service",
+            "LoadState": "not-found",
+            "ActiveState": "inactive",
+            "SubState": "dead",
+            "InvocationID": ""
+          }
+        },
+        "reservation_optional": false,
+        "reservation_state": "released",
+        "reservation_token": "e18577de-27dc-4cf2-8192-d0a8df51978a",
+        "state": "ready",
+        "reason": "dependency_closed_lease_released",
+        "successful_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "publisher_recovery": {
+        "kind": "explicit_dead_synchronous_publisher_lease_recovery",
+        "date_unix": 1793937486.8334208,
+        "token": "82f25bfe-e222-44ac-bdc8-59bb0bf07bf3",
+        "original_row": {
+          "token": "82f25bfe-e222-44ac-bdc8-59bb0bf07bf3",
+          "job_id": "publish-shared-asan-build-focused-a1",
+          "owner": "{\"boot_id\":\"0340843f-8a05-4b7e-bd66-afeefecdbe55\",\"executable\":\"/usr/bin/python3.12\",\"pid\":731873,\"start_ticks\":\"301254719\",\"uid\":1000}",
+          "resources": "[{\"access\":\"write\",\"canonical_path\":\"/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1\",\"requested_path\":\"/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1\"}]",
+          "state": "held",
+          "created": 1793937349.913154,
+          "deadline": 1793937469.913154,
+          "updated": 1793937349.913154,
+          "release_note": null
+        },
+        "owner_kernel_state": "missing",
+        "relevant_live_git": [],
+        "excluded_nondumpable_helpers": [
+          {
+            "pid": "3395",
+            "comm": "(sd-pam)",
+            "parent": "3389",
+            "parent_comm": "systemd",
+            "reason": "nondumpable login/session helper; executable/cwd not inspected"
+          },
+          {
+            "pid": "121820",
+            "comm": "ssh-agent",
+            "parent": "3389",
+            "parent_comm": "systemd",
+            "reason": "nondumpable login/session helper; executable/cwd not inspected"
+          },
+          {
+            "pid": "733007",
+            "comm": "sshd",
+            "parent": "732956",
+            "parent_comm": "sshd",
+            "reason": "nondumpable login/session helper; executable/cwd not inspected"
+          }
+        ],
+        "completed_data_commit": "4bd624d69d61f8f687c145325b50fbd2543234cb",
+        "reason": "Manual closure of synchronous evidence collector after completed data commit; release call omitted required note. Original owner missing, no live Git in target repo; no native job modified.",
+        "native_jobs_modified": false,
+        "first_recovery_attempt": "PermissionError before transaction commit; no changes",
+        "scientific_verdict": null
+      }
+    }
+  },
+  "local_numerical_tests_executed": false,
+  "lifecycle133_accepted": false,
+  "leak_absence_attested": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
