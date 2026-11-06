@@ -38,8 +38,10 @@ baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют иде
 полный34-member primary опубликован и746 source files сверены с Git.
 Fixed SDK прошёл4/4 новых и74/74 смежных tests. Native physical/transport gate
 дал21/23: два configured Train исчерпали sweeps до ожидаемого сертификата.
-Тот же набор23 выполняется на прежнем SDK для A/B; оба первичных отрицательных
-результата сохранены. Это pending общая приёмка, не merge в develop.
+Тот же набор23 на прежнем SDK дал те же21/23; все252 CSV и7 precondition
+summaries побайтно совпали. Оба первичных отрицательных результата сохранены;
+отказы этих fixtures не объясняются budget fix в данном A/B. Это pending общая
+приёмка, не merge в develop.
 ASan A5 относится к Pulse12d и не
 подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
 не устраняет stock burst ambiguity.
