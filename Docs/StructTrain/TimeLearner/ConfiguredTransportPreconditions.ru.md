@@ -1,6 +1,7 @@
 # Предусловия configured model transport — кандидат06.11.2026
 
-Статус: изменения тестов подготовлены; новый25-case gate ещё не выполнен.
+Статус: новый normal25-case gate прошёл на M40; четыре изолированных matched
+cold controls также прошли. Общая приёмка pending C++ SDK ещё не завершена.
 Это не исправление физики, не новая процедура обучения и не научный PASS.
 PulseLib остаётся `2c7e0144a902795cb6287ee677cff5aa08998847`.
 
@@ -39,12 +40,37 @@ profiles; новые положительные случаи не должны �
 
 ## Приёмка
 
-Новый изолированный normal SDK должен выполнить прежние23 IDs с двумя
+Новый изолированный normal SDK выполнил прежние23 IDs с двумя
 исправленными диагностическими expectations плюс два новых positive controls.
 Нельзя объявлять этот новый25-case verdict прохождением прежнего неизменённого
 23-case gate: его два assertion failures остаются историческими фактами.
 
-Обязательны original JUnit, фактические runtime/process captures, source hashes,
+На root `d41fdb6efbef2c672229df55266be8acabc57ac7`, PulseLib2c7, получено25/25
+без skips/errors/failures. Proof `f45818ef3670da162c65a355c21080fd36b9ab75`:
+804 members,1135504 bytes xz; все members и746 source files сверены с Git.
+[Primary receipt](ConfiguredTransportPreconditionVerification.json).
+
+Сравнение общих23 и25-case процессов не объявляется полностью идентичным:
+из252 прежних CSV совпали170,82 отличаются, потерянных нет. В просмотренных
+примерах различается абсолютное время после дополнительных lifecycle фаз.
+Полный список различий сохранён в cold-evidence-comparison.json; одного
+переноса кривых к onset недостаточно для matched control.
+
+Поэтому выполнен отдельный контроль: ClassicConfiguredN1 и BranchConfiguredN0
+по одному в свежем процессе на старом и новом test SDK, всего четыре native PID.
+Старые случаи сохранили исходные assertions/exit1, исправленные прошли полный
+diagnostic stopped-state transport. До downstream assertion все28 cold CSV и
+две precondition summaries побайтно совпали, включая абсолютные timestamps.
+У каждого нового случая появились по три дополнительных CSV downstream фаз.
+Никакое численное или временное выравнивание при сравнении не применялось.
+
+Proof `c69274b623f16433b3f8468753857fdbc97dc0f5`:220 members,
+166808 bytes xz; все members и335 tool source files сверены.
+[Matched receipt](ConfiguredTransportColdMatchedVerification.json).
+Свежие closure/released leases и фактические loaded-runtime identities
+проверены для обоих заданий. Это normal controls; ASan не засчитывается.
+
+Сохранены original JUnit, фактические runtime/process captures, source hashes,
 complete/stopped packages и исходные пробы. Проверить сохранение исходных cold
 условий и отсутствие изменений обучающей физики/алгоритма. Изменение числа
 downstream replay/probe artifacts ожидаемо: прежде два теста прерывались до
