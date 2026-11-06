@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_queued_job_cancellation",
+  "schema_version": 1,
+  "reason": "superseded_preflight_exception_scope_before_first_sdk_build",
+  "execution": "cancelled_before_source_mutation",
+  "source_head_before": "4d501d611b56945c9f1914e9e4c44dee5485c949",
+  "protected_owner": {
+    "pid": 297669,
+    "start_ticks": "324112486",
+    "root": "4d501d611b56945c9f1914e9e4c44dee5485c949",
+    "source": "/home/user/timelearner-refactor/source-capacitance-state-normal-b1",
+    "build": "/home/user/timelearner-refactor/build-capacitance-state-normal-b1"
+  },
+  "processes": [
+    {
+      "pid": 314367,
+      "start_ticks": "324253090",
+      "root": "abf65a9cc2f18d82eb0d1182ae48a29563e6c5fd",
+      "source": "/home/user/timelearner-refactor/source-capacitance-state-normal-b1",
+      "build": "/home/user/timelearner-refactor/build-capacitance-state-normal-b1",
+      "command": "python3\u0000-u\u0000/tmp/timelearner-native-capacitance-bridge-normal-h1-worker.py\u0000",
+      "command_sha256": "9601181614730561bfdad40d4f54859f44229445c68e6ece627f5a4dde90cb9d"
+    },
+    {
+      "pid": 314368,
+      "start_ticks": "324253090",
+      "command": "python3\u0000-u\u0000/tmp/timelearner-native-capacitance-bridge-normal-h1-publisher.py\u0000",
+      "command_sha256": "e4417ab2117f485473b3ad0f7936e9751d4e3c6836f51fdc1156c5321303f68b"
+    }
+  ],
+  "scientific_verdict": null,
+  "source_head_after": "4d501d611b56945c9f1914e9e4c44dee5485c949",
+  "queue_closed": true,
+  "protected_owner_still_live": true
+}

@@ -168,11 +168,27 @@ def audit_capacitance_state(state, declaration, identity, class_definitions):
         raise EvidenceError('malformed_capacitance_evidence:'+str(error)) from error
 
 
+def controller_capacitance_parameters(state):
+    """Derive a full typed map after audit_capacitance_state has validated it."""
+    baseline = state['baseline']
+    scales = dict(state['membrane_scales'])
+    scales.update(state.get('dormant_membrane_scales', {}))
+    for path in baseline['channels']:
+        membrane = path.split('.', 1)[0]
+        if re.fullmatch(r'Dendrite[1-9][0-9]*_[1-9][0-9]*', membrane):
+            scales.setdefault(membrane, 1.)
+    origin = canonical_model_sha256({
+        'kind': 'timelearner_training_capacitance_origin', 'schema_version': 1,
+        'capture_model_revision': baseline['model_revision'], 'model_spec': baseline['model_spec'],
+        'storage_images_sha256': baseline['storage_images_sha256']})
+    return {'origin': origin, 'maximum_relative_change': state['maximum_relative_change'], 'membrane_scales': scales}
+
+
 def audit_package_capacitance(package):
     """Schema 1 carries no C0 provenance; do not invent an untrimmed baseline."""
     try:
         version = package['schema_version']
-        require(type(version) is int and version in (1, 2), 'unknown_capacitance_package_schema')
+        require(type(version) is int and version in (1, 2, 3, 4), 'unknown_capacitance_package_schema')
         if version == 1:
             require('capacitance_state' not in package, 'unversioned_capacitance_state')
             return None
