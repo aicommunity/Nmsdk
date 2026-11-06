@@ -53,4 +53,3 @@ not increased. Elder acceptance remains pending. Full actual990-member pilot
 restoration on M40 now passed:8 redundant aliases omitted with explicit receipt,
 982 original regular members retained; original signed manifests unchanged.
 Report generation has started, but its full result/visual QA is not yet accepted.
-
