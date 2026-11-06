@@ -12,8 +12,8 @@
 
 Последующий feature Pulse70f / rootef215 прошёл116 C++ controls на M40,
 включая opt-in recovery и общий invalid budget; это отдельный срез, не
-ASan-приёмка SDK12d и не merge в develop. Новый typed recovery journal
-Pulsea34 ещё не проверен; его Python history-validator прошёл54/54 на каждом
+ASan-приёмка SDK12d и не merge в develop. Typed recovery journal/serializer
+Pulse416 прошёл отдельный gate118; Python history-validator прошёл54/54 на каждом
 сервере на hypothetical metadata, без native execution proof.
 [Exact source, primary и пределы](UnassignedBurstCandidateRecovery.ru.md).
 
@@ -29,7 +29,7 @@ Pulsea34 ещё не проверен; его Python history-validator прош�
 | Legacy SyncCapacitanceTrim>0 в native Train | Отклоняется | Отклоняется и в кандидате. Новый C-search включается декларацией, а не этим legacy-полем |
 | PostTune/calibration | Есть typed фазовые планы, native import/transactions и адресные runtime controls | Public legacy flags не заменяют план; все режимы/прерывания/независимая оценка остаются открытыми |
 | Общее управление lifecycle | Общий native service уже есть; часть hooks ещё дублируется | NativeLearnerLifecycle и NativeRecognitionControl выделены в кандидате; полная совместимость не следует из механического выделения |
-| Общий invalid budget попытки | Полная приёмка всей области остаётся открытой | Fix Pulse2c7 и последующий70f проверяют общий бюджет search/final sweeps; подготовленный journala34 не входит в PASS116 |
+| Общий invalid budget попытки | Полная приёмка всей области остаётся открытой | Fix Pulse2c7/70f проверяет общий бюджет search/final sweeps; journal/serializer416 прошёл отдельный118, без stock cold opt-in proof |
 | Неидентифицируемая пачка | Старые конфигурации сохраняют retry/явную остановку | Opt-in AdvanceUnassignedBurst в feature70f прошёл controller/classifier/codec controls; stock cold Train и сквозной audit ещё не приняты |
 
 ## Версии схем — разные оси
@@ -41,7 +41,7 @@ Pulsea34 ещё не проверен; его Python history-validator прош�
   capacitance_search. Эти поля не являются legacy SyncCapTrim* properties.
 - Feature cold/summary schema5 объявляет recovery поверх base1..4. Это
   незавершённый формат кандидата; не ControllerVersion5. Full Python audit5
-  пока явно отклоняется, а старые1..4 означают прежний retry.
+  подготовлен, его18-cell API приёмка ещё не выполнена; старые1..4 означают прежний retry.
 - ModelSpec1/2 — версии физической декларации; одинаковая модель в двух
   сериализациях не является двумя независимыми экспериментами.
 - Completed/stopped package schema2 с capacitance_state — перенос C₀;
