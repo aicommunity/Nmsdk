@@ -21,7 +21,7 @@ def records(base=1):
     configuration = {"kind": "timelearner_native_cold_configuration", "schema_version": base,
                      "search": search, "model": {"normalization": "N0"}}
     summary = {"kind": "native_training_state_summary", "schema_version": base,
-               "configuration": measured}
+               "configuration": measured, "search_history_retained": True}
     return configuration, summary
 
 
@@ -29,6 +29,7 @@ def envelope(value):
     result = deepcopy(value)
     result.update(schema_version=5, base_schema_version=value["schema_version"],
                   invalid_measurement_recovery=RECOVERY_MODE)
+    if value["kind"] == "native_training_state_summary":result["invalid_observations"] = 0
     return result
 
 
@@ -120,6 +121,26 @@ class CandidateRecoveryDeclarationTest(unittest.TestCase):
             summary = envelope(records(base)[1])
             with self.assertRaisesRegex(EvidenceError, "candidate_recovery_primary_audit_not_implemented"):
                 audit_training_summary(summary, {}, "pulse0")
+
+    def test_invalid_charge_is_available_only_with_retained_search(self):
+        for charge in (None, True, -1, 1.5, float("nan"), float("inf"), "1"):
+            summary = envelope(records()[1]);summary["invalid_observations"] = charge
+            with self.subTest(charge=charge), self.assertRaises(EvidenceError):
+                project_recovery_summary(summary)
+        summary = envelope(records()[1]);summary["search_history_retained"] = False
+        with self.assertRaisesRegex(EvidenceError, "unretained_recovery_invalid_charge_not_unknown"):
+            project_recovery_summary(summary)
+        summary["invalid_observations"] = None
+        projected, mode = project_recovery_summary(summary)
+        self.assertEqual(mode, RECOVERY_MODE)
+        self.assertNotIn("invalid_observations", projected)
+        for field in ("invalid_observations", "search_history_retained"):
+            bad = deepcopy(summary);bad.pop(field)
+            with self.assertRaisesRegex(EvidenceError, "missing_recovery_invalid_charge_availability"):
+                project_recovery_summary(bad)
+        legacy = records()[1];legacy["invalid_observations"] = 0
+        with self.assertRaisesRegex(EvidenceError, "unversioned_recovery_invalid_charge"):
+            project_recovery_summary(legacy)
 
 
 if __name__ == "__main__":
