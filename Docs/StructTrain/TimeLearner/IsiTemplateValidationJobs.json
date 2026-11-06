@@ -34,5 +34,90 @@
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "baseline_fixture_correction_pending": true,
-  "fixture_correction": "Initial a1 test inspects trial_measurement_valid_ after CloseTrial reset; corrected test uses retained LastMatch/LastErrorClass. Do not accept a1 gate as final baseline solely by expected four failing IDs."
+  "fixture_correction": "Initial a1 test inspects trial_measurement_valid_ after CloseTrial reset; corrected test uses retained LastMatch/LastErrorClass. Do not accept a1 gate as final baseline solely by expected four failing IDs.",
+  "following_corrected_fixture_attempt_a2": {
+    "observed_utc": "2026-11-06T23:01:18.165158+00:00",
+    "queue_owner": {
+      "pid": 1338022,
+      "start_ticks": "308125353"
+    },
+    "queue_owner_live": true,
+    "state": {
+      "state": "waiting_for_matched_baseline_native_closure_and_resources",
+      "dependency": {
+        "kind": "timelearner_worker_dependency_state",
+        "schema_version": 1,
+        "job_id": "s07-isi-template-baseline-normal-a1",
+        "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a1-container",
+        "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+        "closure": {
+          "execution": "running",
+          "all_processes_closed": false,
+          "reason": "kernel_cgroup_observed",
+          "binding": {
+            "kind": "timelearner_contained_binding",
+            "schema_version": 1,
+            "request_sha256": "3419bc435c496df5b7e2ec482a76758d3f72c697f5bfd579ab608737ce85c64e",
+            "unit": "timelearner-98e95e9b-83f5-4058-b20e-56691f21b289.service",
+            "invocation_id": "92032a7c7e3f48be8b6ad75b266962c2",
+            "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-98e95e9b-83f5-4058-b20e-56691f21b289.service",
+            "initial_main_pid": 1327660,
+            "initial_start_ticks": "308016706",
+            "sha256": "87788770308e5b4ebc6a80ad49cd8e966db38907735fb191f730f0d4fc6fa1d1"
+          },
+          "state": {
+            "Type": "exec",
+            "Restart": "no",
+            "RemainAfterExit": "yes",
+            "MainPID": "1327660",
+            "Result": "success",
+            "ExecMainCode": "0",
+            "ExecMainStatus": "0",
+            "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-98e95e9b-83f5-4058-b20e-56691f21b289.service",
+            "MemoryMax": "4294967296",
+            "TasksMax": "128",
+            "KillMode": "control-group",
+            "Description": "TimeLearner contained attempt 98e95e9b-83f5-4058-b20e-56691f21b289",
+            "LoadState": "loaded",
+            "ActiveState": "active",
+            "SubState": "running",
+            "InvocationID": "92032a7c7e3f48be8b6ad75b266962c2"
+          },
+          "memory_max": 4294967296,
+          "tasks_max": 128,
+          "scientific_verdict": null
+        },
+        "reservation_optional": false,
+        "reservation_state": null,
+        "reservation_token": null,
+        "state": "pending",
+        "reason": "dependency_worker_group_still_live",
+        "successful_execution_attested": false,
+        "scientific_verdict": null
+      },
+      "memory_available_bytes": 43596779520,
+      "disk_free_bytes": 376898768896,
+      "new_build_started": false,
+      "new_native_models_started": false,
+      "elapsed_seconds": 15.040929613169283
+    },
+    "worker_source_sha256": "c7ebbcd9631067b2f947e7e7f1a6257bbbe16bc87ed72117077c7417535691ac",
+    "output_created": false,
+    "launcher_tail": [],
+    "job_id": "s07-isi-template-baseline-normal-a2",
+    "root": "920d42a700d9d3f3477bd94c4aac9d145ea73cac",
+    "state_description": "Waiting for a1 whole-group closure and released lease; corrected retained-result fixture, algorithm C++ unchanged.",
+    "incoming_git_source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-a2-delivery",
+    "reused_inactive_source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+    "reused_inactive_build_cache": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+    "new_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-baseline-normal-a2",
+    "source_change_before_closure_forbidden": true,
+    "exclusive_source_and_build_lease_required": true,
+    "source_change_only_test_cpp": true,
+    "old_runtime_file_hashes_checked_before_and_after": true,
+    "old_runtime_shared_mutable_symlinks_or_inodes_forbidden": true,
+    "native_test_result_available": false,
+    "baseline_defect_reproduced_accepted": false,
+    "algorithm_fix_verified": false
+  }
 }
