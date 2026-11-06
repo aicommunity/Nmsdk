@@ -129,3 +129,10 @@ Compiled receipts сохраняют прежний Bin37ff: действующ�
 Предыдущая накопительная сводка сохранена в
 [Git](https://github.com/aicommunity/Nmsdk/blob/b2517a3576f949c12acb402ce83ab595ebcbf0b1/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
 Неудачные проверки остаются evidence своего среза, не переписываются под PASS.
+
+
+Отдельная [проверка legacy ISI-template analyzer](IsiTemplateValidation.ru.md)
+готовит runtime-воспроизведение source-review рисков NaN, поиска источника
+Branch и превращения отсутствующего template в успешный foil. Baseline SDK
+собирается; исправление ещё не заявляется. MatchMode1 не является объяснением
+InvalidObservation native V2 stock Train.

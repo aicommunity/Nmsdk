@@ -23,5 +23,10 @@ stimulus; отсутствующий источник. Тела production фу�
 
 Эти случаи относятся к MatchMode=1 legacy analyzer. Они не объясняют
 InvalidObservation текущего native V2 stock Train и не меняют его критерий.
-Активные runtime/source эксперимента не обновляются. Тесты пока не выполнялись;
-ни baseline failure, ни исправление, ни научный результат не заявляются.
+Активные runtime/source эксперимента не обновляются.
+[Baseline SDK собирается на M40](IsiTemplateValidationJobs.json): root56ac50c9,
+Pulse2f6b5725 с неизменённым Core46615e8, отдельные source/build/runtime.
+Gate содержит4 новых функции (каждая Classic+Branch) и5 существующих controls.
+Ожидаемые assertion failures сохраняются как baseline, не положительный PASS.
+Процесс сборки подтверждён по PID/start ticks; native tests ещё не завершены.
+Ни baseline failure, ни исправление, ни научный результат пока не заявляются.
