@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_component_documentation_reconciliation",
+  "schema_version": 1,
+  "PulseLib_before": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+  "PulseLib_after": "edb1e4e39f581b3249b84f578e77f9f79597e690",
+  "unchanged_Core_tree": "46615e802cd05878b4f2a3b7c76055f8bb184a49",
+  "changed_paths": [
+    "Docs/Components/NNeuronTimeLearner.md",
+    "Docs/Components/NNeuronTimeLearnerBranch.md",
+    "Docs/Components/TimeLearnerControllerModes.ru.md"
+  ],
+  "corrected_claims": [
+    "Native configured V2 service is connected; legacy remains the default for old configurations",
+    "Legacy phases, helper formulas and XML overlay instructions do not specify native V2",
+    "Fresh all-input verification belongs to the native service rather than legacy Done",
+    "Complete versioned model import replaces partial Parameters overlays for V2 Train-to-Test",
+    "Controller number is distinct from configuration/package schema numbers",
+    "Inherited no-op methods and reserved properties are not functional experimental factors"
+  ],
+  "canonical_recursive_checkout_links_verified": 29,
+  "new_numerical_tests_required_for_documentation_only_change": false,
+  "active_server_source_or_runtime_modified": false,
+  "compiled_server_PulseLib_still": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+  "Bin_ClDesc_full_reconciliation_complete": false,
+  "all_repository_documentation_complete": false,
+  "whole_plan_complete": false
+}
