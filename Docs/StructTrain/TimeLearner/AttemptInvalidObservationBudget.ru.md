@@ -1,6 +1,7 @@
 # Общий бюджет невалидных проб — кандидат, 06.11.2026
 
-Статус: исходный дефект **воспроизведён на M40**, fixed-приёмка ещё не завершена.
+Статус: исходный дефект **воспроизведён на M40**, fixed4/74 прошли;
+native-приёмка дала21/23 и требует A/B разбора двух отказов.
 Документ не является свидетельством runtime-исправления или закрытия этапа 7.
 В develop этот C++ кандидат не объединён.
 
@@ -66,6 +67,39 @@ runtime/maps/process owner, compiler logs и архив34 members (66436 bytes).
 созданием evidence commit в отдельном Git store. Источники и runtime сборки
 не изменены. [Receipt](AttemptInvalidObservationBudgetBaselineVerification.json),
 [primary bundle](../../../Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-baseline-m40-a1/bundle.json).
+
+## Серверная проверка исправленного SDK
+
+На root `a2df1eac50bfb53e5ce6c9220eed8b7da7b5ba0b` / PulseLib
+`2c7e0144a902795cb6287ee677cff5aa08998847` прошли4/4 новых regression functions
+и74/74 смежных исходных tests, без skips/errors/failures. Использованы те же
+новые регрессии, что в baseline:32 сочетания Classic/Branch, N0/N1,
+observation/preparation failure и границ attempt budget. Это normal, не ASan.
+Два оригинальных JUnit/process captures принадлежат разным actual native PID.
+
+Proof `98e6fbc979ec3cd8ab75f0bff28b0cbbcde34fcc`:49 archive members,
+70356 bytes xz, все746 root/Pulse source files сверены с точными Git blobs.
+[Независимая сверка](AttemptInvalidObservationBudgetFixedVerification.json).
+
+Дополнительный исходный native23 gate завершился21 passed /2 failed.
+`NativeLearnedState/ClassicConfiguredN1` и `NativeLearnedState/BranchConfiguredN0`
+остановились на `ASSERT_TRUE(service.Certificate())` после фактического
+maximum_sweeps_exhausted. Их cold Train с SyncTolerance=0.02 не выполнил
+предусловие completed-model transport. Это не сбой чтения JUnit или timeout;
+полный исходный exit1 сохраняется. Эти два результата не превращаются в PASS
+потому, что узкие budget regressions прошли.
+
+Proof `8447d4f937623c56ed7292fd4c6c18aeb9fbbadb` сохраняет696 archive members,
+788880 bytes xz, первичные пробы, summary до assertion и runtime captures.
+Все members,335 tool source files и306 native source files повторно сверены.
+На прежнем root7cc/Pulse12d запущен **тот же неизменённый набор23 tests**,
+с тем же normal build profile и отдельным runtime. До его результата нельзя
+приписывать два отказа новому budget-коду либо исправлять ожидания тестов.
+Список304 прежнего gate сам по себе не подтверждает любой иной набор случаев.
+
+Приёмка конкретного budget fix, исправление неверных fixture assumptions и
+полная приёмка исходного этапа7 — отдельные утверждения. Общий C++ кандидат
+пока не объединяется в develop. Исторические и отрицательные измерения сохранены.
 
 ## Контракт и изменение
 
