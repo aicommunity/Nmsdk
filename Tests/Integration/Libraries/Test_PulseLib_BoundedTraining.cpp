@@ -811,6 +811,73 @@ TEST(TrainingTermination,FinalRejectionDoesNotBorrowEarlierSearchDiagnostic)
     EXPECT_EQ(session.Reason().find("final_verification:"),0u);EXPECT_FALSE(session.Certificate());
 }
 
+// Exercise the production controller and recorder across search/final/sweep
+// boundaries. A configured retry budget belongs to the entire attempt.
+enum class InvalidBudgetScenario { SearchThenFinal, FinalThenNextSweep, FinalOnly, Zero };
+void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,InvalidBudgetScenario scenario)
+{
+    const auto protocol=Protocol(2,routing);auto config=Configuration(2,normalization);
+    config.maximumInvalidObservations=scenario==InvalidBudgetScenario::Zero?0:1;
+    config.maximumSweeps=2;config.maximumCandidatesPerInput=2;
+    config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    unsigned calls=0,invalidInjected=0;bool searchRejected=false,finalRejected=false;
+    bool outsideFirstFinal=false,secondSweep=false;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++calls,40u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        if(!action->finalVerification && outsideFirstFinal)secondSweep=true;
+        const bool rejectSearch=!action->finalVerification && action->inputIndex==0 && !searchRejected &&
+            (scenario==InvalidBudgetScenario::SearchThenFinal ||
+             (scenario==InvalidBudgetScenario::FinalThenNextSweep && secondSweep));
+        if(rejectSearch){raw[0]=-.065;searchRejected=true;++invalidInjected;}
+        const bool rejectFinal=action->finalVerification && !finalRejected;
+        // Final observations stay valid until their pattern identity is
+        // deliberately corrupted below; the search failure is a missing peak.
+        const bool failFirstFinal=scenario==InvalidBudgetScenario::FinalThenNextSweep &&
+            action->finalVerification && action->inputIndex==0 && finalRejected && !secondSweep;
+        if(failFirstFinal){raw[0]+=.001;outsideFirstFinal=true;}
+        auto observation=Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},raw);
+        if(rejectFinal)
+        {
+            ASSERT_TRUE(observation.valid);
+            observation.specification.patternHash="corrupted_budget_probe";
+            finalRejected=true;++invalidInjected;
+        }
+        session.Consume(observation,action->baseModelRevision);
+    }
+    ASSERT_TRUE(finalRejected);
+    if(scenario==InvalidBudgetScenario::FinalOnly)
+    {
+        EXPECT_EQ(invalidInjected,1u);EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+        ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    }
+    else
+    {
+        EXPECT_EQ(invalidInjected,scenario==InvalidBudgetScenario::Zero?1u:2u);
+        EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
+        EXPECT_FALSE(session.Certificate());
+        if(scenario!=InvalidBudgetScenario::Zero)EXPECT_TRUE(searchRejected);
+        if(scenario==InvalidBudgetScenario::FinalThenNextSweep)EXPECT_TRUE(secondSweep);
+    }
+}
+
+#define ATTEMPT_INVALID_BUDGET_TEST(name,routing,normalization) \
+TEST(TrainingInvalidBudget,name) { \
+    for(const auto scenario:{InvalidBudgetScenario::SearchThenFinal,InvalidBudgetScenario::FinalThenNextSweep, \
+                            InvalidBudgetScenario::FinalOnly,InvalidBudgetScenario::Zero}) { \
+        SCOPED_TRACE(static_cast<int>(scenario)); \
+        CheckAttemptInvalidBudget(routing,normalization,scenario); \
+    } \
+}
+ATTEMPT_INVALID_BUDGET_TEST(ClassicN0,ProbeRouting::ClassicBurst,Normalization::SynapseCount)
+ATTEMPT_INVALID_BUDGET_TEST(ClassicN1,ProbeRouting::ClassicBurst,Normalization::TipResistance)
+ATTEMPT_INVALID_BUDGET_TEST(BranchN0,ProbeRouting::BranchSoloBurst,Normalization::SynapseCount)
+ATTEMPT_INVALID_BUDGET_TEST(BranchN1,ProbeRouting::BranchSoloBurst,Normalization::TipResistance)
+#undef ATTEMPT_INVALID_BUDGET_TEST
+
 namespace {
 TrainingCapacitance OwnedCapacitance()
 {return {std::string(64,'a'),.3,{{"Dendrite1_1",.9},{"Dendrite1_2",1.1},{"Dendrite1_5",.8},{"Dendrite2_1",1.}}};}
