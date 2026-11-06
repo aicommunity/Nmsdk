@@ -12,7 +12,7 @@ merge и научная разделимость — разные утвержд
 |---|---|
 |Root develop, проверенная отправная точка этой сводки|837b0c7aad7c6d1973325319a750ce8da8f0f070|
 |PulseLib в develop|0ec9193e6620ae2439329eece5ecd6d6f167c70a|
-|Bin в develop|3d5fc67c33f7be9ad3806db0b00b9d92588049bb|
+|Bin в develop|37ff211fa6ba4999fc51802182915022b239a1eb|
 |Rdk в develop|10e9d05aa658dd2203c89bc84ba9166595b50014|
 |Проверяемый compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
 
@@ -44,7 +44,7 @@ A4 остановилась до C++ из-за неполного tool snapshot;
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration220:218 retired+2 moved; пять XML patchers приняты без wrappers|Остаются24 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
+|9. Скрипты|Корневой пакет и CLI работают; migration222:220 retired+2 moved; семь исторических XML patchers приняты без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Сохранены августовские4/8–6/8; есть N2 engineering controls и читаемые временные отчёты|Stock cold retrain и legacy/V2, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
@@ -53,7 +53,8 @@ A4 остановилась до C++ из-за неполного tool snapshot;
 [learned-state API](NativeLearnedState.ru.md),
 [семантика параметров](ParameterControlContracts.ru.md),
 [поиск](ParameterSearchContracts.ru.md),
-[пять retired overlay tools и220 records](AsymRmOverlayRetirement.ru.md),
+[пять retired overlay tools](AsymRmOverlayRetirement.ru.md),
+[два scale/UWatch patchers и222 records](AsymRmDisplayScaleRetirement.ru.md),
 [двухсерверное восстановление primary](PortablePrimaryRestoration.ru.md).
 
 ## Последние результаты и их пределы
