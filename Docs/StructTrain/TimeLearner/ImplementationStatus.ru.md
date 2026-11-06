@@ -1,102 +1,69 @@
-# Состояние реализации TimeLearner — 06.11.2026
+# Состояние реализации TimeLearner — 07.11.2026
 
-**Полностью принят только исходный этап0. Этапы1–12 выполнены частично.**
-Эта сводка описывает текущее состояние; исторические подэтапы и их численные
-итоги следует читать по неизменяемым receipts. Наличие кода, отдельный PASS,
-merge и научная разделимость — разные утверждения. Требования целиком сохранены
-в [плане](RefactoringPlan.ru.md); результат8/8 не является условием его завершения.
+**Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
+Полный объём сохраняется в [плане](RefactoringPlan.ru.md). Технический PASS,
+merge и научная разделимость — разные утверждения; 8/8 не является условием
+завершения. Эта страница заменяет накопительную сводку. Исторические попытки
+и отрицательные результаты сохранены в Git и отдельных receipts.
 
-## Принятый код и проверяемый срез
+## Проверенные срезы
 
-| Источник | Состояние |
+| Срез | Подтверждено и ограничения |
 |---|---|
-|Root develop, проверенная отправная точка этой сводки|9b380a3eba4f67c31b2fde80a0a0f5b9677c3110|
-|PulseLib в develop|0ec9193e6620ae2439329eece5ecd6d6f167c70a|
-|Bin в develop|37ff211fa6ba4999fc51802182915022b239a1eb|
-|Rdk в develop|10e9d05aa658dd2203c89bc84ba9166595b50014|
-|Базовый общий compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
-|Recovery compiled SDK|Root84d6d97501a62b0a689b1170ec4f0fb53e558a48 / Pulse416e07c71b80e7e7a37cd213f8d0b6f7efb768fb; normal118 и адресный ASan19 проверены; stock серия завершена, её публикация ещё ожидается|
+| Принятый root develop | `9b380a3eba4f67c31b2fde80a0a0f5b9677c3110` |
+| Принятые PulseLib / Bin / Rdk | `0ec9193e6620ae2439329eece5ecd6d6f167c70a` / `37ff211fa6ba4999fc51802182915022b239a1eb` / `10e9d05aa658dd2203c89bc84ba9166595b50014` |
+| Общий ASan SDK | root2e061/Pulse12d: 133/133; не подтверждает последующие изменения |
+| Baseline recovery SDK | root84d6/Pulse416: normal118 и адресный ASan19 приняты; stock Train/evaluation завершены |
+| Fair-domain compiled SDK | root36f598/Pulse8f057: normal137/137 и адресный ASan38/38 на M40; общая приёмка в develop ещё открыта |
+| PulseLib documentation HEAD | `2f6b57253bd7ae380a19320ef3835a2701cb4d30`; Core совпадает с tested8f, но receipts сохраняют фактический SHA сборки |
+| Worker-limit Python SDK | rooteae3: 26/26 на каждом сервере; не проверка нейронного обучения |
 
-[Матрица возможностей](ControllerCapabilities.ru.md) отделяет принятые API от
-кандидата: N0 repeats и native learned-state import уже реализованы и адресно
-приняты; автоматический bounded C-search и часть общих lifecycle hooks находятся
-в кандидате. Legacy SyncCapacitanceTrim>0 отклоняется обоими native путями;
-новый C-search задаётся отдельной декларацией. Версии Controller, ModelSpec,
-cold configuration, learned package, observation и scorer не взаимозаменяемы.
+Полные SHA, source hashes, первичные архивы и process closure:
+[ASan133](IntegratedSharedAsan133Verification.json),
+[normal137](FairDomainTraversalNormal137Verification.json),
+[ASan38](FairDomainTraversalAsan38Verification.json),
+[worker limits](WorkerLimitPreflightVerification.json).
+ASan не является leak check. Эти результаты имеют область соответствующего
+receipt, не всей матрицы. Default native comparison нового fair варианта:
+284 CSV и 480 JSON идентичны baseline, ещё 19 startup JSON отличаются лишь
+StepDuration. [Изменение алгоритма](FairDomainTraversal.ru.md) касается только
+opt-in N1 AdvanceUnassignedBurst; CapturedPerInput, reference и допуски сохранены.
 
-На кандидате normal304 и адресные ASan8 прошли. Полный ASan lifecycle A3
-выполнил133 cases:132 passed,1 assertion failure при записи файла в отсутствующий
-output/native. [Исправленный production gate](NativeGateOutputDirectory.ru.md)
-проверен тем же оригинальным тестом на прежних normal/ASan binaries и принят.
-A4 остановилась до C++ из-за неполного tool snapshot. A5 завершилась: серверный
-verdict сообщает133/133 passed за28553.79 с; свежая проверка подтвердила отсутствие
-процесса/группы и released lease. Полный primary архив проверен:4888 members/23120604 bytes;321 native,323 Python
-и335 tool source hashes совпали с Git. Результат и fresh closure/released lease
-сохранены в [проверке](IntegratedSharedAsan133Verification.json). A5 относится
-только к root2e061/Pulse12d, не к последующим
-изменениям invalid budget и candidate recovery; отсутствие утечек не проверялось.
+## Научные результаты
 
-Отдельно подготовлен [общий бюджет невалидных проб](AttemptInvalidObservationBudget.ru.md):
-baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют идентичные новые
-регрессии. На M40 baseline воспроизвёл превышение бюджета:4 test functions
-завершились32 ожидаемыми assertions, Exact и присутствующим сертификатом;
-полный34-member primary опубликован и746 source files сверены с Git.
-Fixed SDK прошёл4/4 новых и74/74 смежных tests. Native physical/transport gate
-дал21/23: два configured Train исчерпали sweeps до ожидаемого сертификата.
-Тот же набор23 на прежнем SDK дал те же21/23; все252 CSV и7 precondition
-summaries побайтно совпали. Оба первичных отрицательных результата сохранены;
-отказы этих fixtures не объясняются budget fix в данном A/B. Это pending общая
-приёмка, не merge в develop.
-ASan A5 относится к Pulse12d и не
-подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
-не устраняет stock burst ambiguity.
+Baseline stock серия: все восемь Train остановились InvalidObservation без
+сертификата. Последующие 64 диагностические пробы полны и валидны; переданы
+фактические stopped модели. При inherited0.0117 каждый случай TP1/FP7/FN0/TN0,
+при100 — TP0/FP0/FN1/TN7. Молчание7/8 не является успешной детекцией. Два
+порога не доказывают NonSeparable на всей сетке.
+[Научный отчёт](StockRecoveryScientificReport-2026-11-06.ru.md),
+[Train primary](StockRecoveryNativeVerification.json),
+[evaluation primary](StockRecoveryEvaluationVerification.json).
 
-Следующий [configured transport25](ConfiguredTransportPreconditions.ru.md)
-прошёл25/25 на той же Pulse2c7: исходные0.02 Train сохранены как diagnostic
-stopped-state controls, добавлены отдельные completed controls с явным0.2.
-Четыре изолированных old/new процесса подтвердили совпадение28 cold CSV и
-двух precondition summaries с абсолютным временем. Старый21/23 verdict не
-переписан. Общие23/25 процессы имеют82 отличающихся CSV, поэтому их полная
-временная эквивалентность не заявляется. Pending C++ SDK ещё не принят целиком.
+Полный render этой baseline серии завершён: 160 trial/soma pairs, 8931 views,
+30287 файлов, все checksums проверены. Каждая пара имеет полный2с обзор и
+40 непрерывных50мс увеличений с потенциалом сомы и входными импульсами, без
+прореживания. Полный2.1GB cache хранится на M40; Git содержит компактные
+primary, metadata и выбранные PNG. Вручную просмотрены четыре PNG, не весь cache.
+[Проверка графиков](StockRecoveryFullVisualVerification.json),
+[visual QA](StockRecoverySelectedVisualQA.json).
 
-Отдельный [WIP candidate recovery](UnassignedBurstCandidateRecovery.ru.md)
-добавляет opt-in продвижение bounded search после строго классифицированного
-unassigned burst и C++ cold/summary envelope5. Default retry и final all-input
-gate сохраняются. C++ проверки выполнены в отдельных срезах, указанных ниже. Python declaration,
-preflight и ConditionSpec binding сначала проверены33/33 tests на каждом сервере.
-Следующий primary-classifier срез прошёл48/48 на обоих серверах, включая
-исходные stock invalid JSON/CSV и их повреждения; он не подтверждает переходы
-поиска. Полный primary audit5 добавлен последующим срезом rootf516. M40 SDK Pulse70f прошёл116/116
-C++ controls; проверены834 primary members,748 source hashes и process/lease
-closure. Все284 CSV прежнего default25 subset побайтно совпали;18 startup JSON
-отличаются только StepDuration telemetry. Последующий C++ typed journal Pulsea34
-проверен отдельно последующим Pulse416 gate118/118 (root84d6), включая общий
-serializer;834 members и752 source hashes сверены. Это не stock cold recovery.
-Standalone history auditor прошёл54/54
-Python mutation checks на каждом сервере с гипотетическими decision metadata
-поверх реальных старых проб; это не native execution proof.
-Новый full schema5 reader rootf516 проверен на18-cell корпусе base1..4:
-60/60 Python tests без пропусков на обоих серверах (source5a6). Сверены20
-source files каждого запуска, идентичные manifests и312 файлов корпуса
-(77806588 bytes) с исходными Git-архивами2100 members. Это hypothetical
-schema5 envelopes поверх старых реальных данных, не новый native Train.
-Первый Elder запуск исчерпал120с; количество выполненных тестов неизвестно,
-частичный stdout утрачен. Отдельный запуск с бюджетом900с завершился за142.07с.
-Подробности: [API verification](CandidateRecoveryApiVerification.json). Срез не принят в develop;
-научного результата он не добавляет.
+Новая matched серия s07-stock-fair-domains-normal-a2 выполняется после шести
+design checks, preregistration и восьми cold preflight. На момент
+[timestamped наблюдения](FairDomainStockProgressObservation.json) завершены6/8
+Train, все InvalidObservation; тот же worker жив по PID/start ticks.
+Полный verdict и последующая оценка новых моделей ещё отсутствуют.
+[Условия и история](FairDomainStockComparisonJobs.json): исходный NSPNeuronGen
+без дополнительной LTMembrane, C-trim/PostTune/калибровка выключены. Старые
+baseline ответы не подставляются вместо результатов новой серии.
 
-Следующий [stock recovery study](StockRecoveryStudy.ru.md) уже выполняется на
-M40: восемь matched условий Classic/Branch×два порога×retry/advance с общим
-invalid allowance32 и прежними физикой/допусками. Шесть design tests и все восемь
-preflight прошли. Первые два Classic-low Train остановились InvalidObservation;
-полная серия и публикация её primary ещё не завершены. Сквозной CLI отдельно
-проверен: prepare8 и отказ анализа неполной матрицы. Эти предварительные
-наблюдения не закрывают stock cold convergence, Train→Test или научную оценку.
-[Зависимая frozen/diagnostic оценка](StockRecoveryEvaluation.ru.md) подготовлена
-для всех восьми моделей:64 предъявления,160 trial/soma views с исходными
-импульсами; ждёт полного closure Train серии. Пять role/job guards и два CLI
-сценария уже прошли на реальных старых stock пакетах; новый native export/
-evaluate/report и визуальная приёмка ещё ожидаются.
+Августовские визуально подтверждённые4/8–6/8 сохраняются для своего протокола;
+порядок и увеличенный ITI тогда не проверялись. Ранее N2 LT проверка дала5/8
+(TP1/FP3/FN0/TN4), NonSeparable на проверенной сетке. Узкие engineering случаи
+TP2/FP0 повторяли один target/foil после same-matrix калибровки и не являются
+независимой восьмипаттерновой оценкой.
+[Исходные результаты](ScientificResults-2026-11-03.ru.md).
+Серия D не возобновлялась.
 
 ## Приёмка по исходным этапам
 
@@ -116,126 +83,30 @@ evaluate/report и визуальная приёмка ещё ожидаются
 |11. Научные проверки|Сохранены августовские4/8–6/8; есть N2 engineering controls и читаемые временные отчёты|Stock cold retrain и legacy/V2, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
 
-Подробности принятых изменений: [native model](NativeModelBuilder.ru.md),
-[learned-state API](NativeLearnedState.ru.md),
-[семантика параметров](ParameterControlContracts.ru.md),
-[поиск](ParameterSearchContracts.ru.md),
-[пять retired overlay tools](AsymRmOverlayRetirement.ru.md),
-[два scale/UWatch patchers и222 records](AsymRmDisplayScaleRetirement.ru.md),
-[двухсерверное восстановление primary](PortablePrimaryRestoration.ru.md).
+## Путь к итоговым выводам
 
-## Последние результаты и их пределы
+1. Завершить полную новую Train серию, аудит и matched code comparison;
+   оценить фактические модели и построить все trial/soma графики.
+2. Разобрать invalid peak/burst assignment и проверить исправление реальными
+   штатными пробами. Budget exhaustion не доказывает PhysicalInfeasible.
+3. Выполнить saved-state replay августа и cold retrain исходного протокола;
+   отдельно проверить перестановки, ITI, continuous/reset-per-trial.
+4. Проверить frozen модели и пороги, target во всех позициях, полные окна;
+   независимость данных заявлять только при реально независимой оценке.
+5. Завершить исходную матрицу режимов/физики, миграцию, документацию и общую
+   приёмку children-first в develop через merge commits.
 
-В проверяемой ветке завершён coordinator schema1/schema2:16/16 production cases,
-40 различных actual native phases;1456 CSV сверены попарно. Это эквивалентность
-orchestration на объявленных случаях, не независимые научные повторы и не вся
-матрица learner. [Исходная приёмка и scope](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/PipelineConditionFullMatrixAcceptance.ru.md).
+Общий native service, measured bounded поиск, N0 repeats, native export/import
+и recognition transactions уже существуют. Их ограничения описаны в
+[capabilities](ControllerCapabilities.ru.md),
+[parameter contracts](ParameterControlContracts.ru.md),
+[readiness](ExperimentReadiness.ru.md). Полная lifecycle/storage/growth и
+legacy/V2 матрица остаётся открытой. Migration222 (220 retired+2 moved) не равна
+всему inventory; остаются22 AsymRm Python и другие инструменты. Полная scheduler,
+recovery, publication fault matrix и effective-factor attestation не закрыты.
+Компонентные страницы PulseLib актуализированы, но все ClDesc/config/defaults
+ещё не сверены. Исторические primary не удаляются ради компактного Git.
 
-Ранее более широкая восьмипаттерновая N2 LT проверка дала target-detecting5/8:
-TP1/FP3/FN0/TN4, со статусом NonSeparable на проверенной сетке порогов.
-[Этот результат и его первичные данные сохраняются](ScientificResults-2026-11-03.ru.md).
-
-Два последних N2 LT engineering случая дали каждый TP2/FP0/FN0/TN2 после same-matrix
-калибровки на более узком наборе: повторяются один target и один foil.
-Этим не устранены прежние FP на близких отвлекающих паттернах. Их четыре предъявления содержат повторные target/foil; они не
-являются stock4-input/8-pattern или independent evaluation. Сохранены primary,
-модели,46 выбранных PNG и полный воспроизводимый cache214 trial/soma /2620 views.
-[Отчёт и пределы visual QA](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/PipelineConditionPilotVisualReport.ru.md).
-
-Штатный stock Train пока останавливался на невалидных измерениях: закрытое окно
-не гарантирует однозначного burst/peak assignment. Повтор того же кандидата
-при большем invalid budget не устраняет детерминированное слияние волн.
-Такой результат не доказывает PhysicalInfeasible или общую невозможность
-классификации. Следующий научный приоритет — корректное измерение/ограниченное
-восстановление поиска в исходной физике, затем cold/frozen сравнение протоколов.
-
-[Готовность экспериментов](ExperimentReadiness.ru.md) задаёт порядок допуска.
-Предыдущая накопительная версия этой сводки сохранена в
-[Git snapshot](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
-Её старые слова «ещё не реализовано» относятся к состоянию своего подэтапа.
-Исторические измерения и критерии не переписываются под новые результаты.
-
-
-Дополнительный [адресный ASan19](CandidateRecoveryAsan19.ru.md) нового Pulse416
-запущен в независимом runtime/source/build. Пройдены19/19,64 primary members и757 source hashes проверены; fresh closure
-и released lease подтверждены. [Точная сверка](CandidateRecoveryAsan19Verification.json).
-Это не вся ASan matrix нового SDK и не leak check.
-
-
-Stock matched Train завершён8/8 с валидными первичными данными; все восемь
-моделей stopped/InvalidObservation без certificate. Все64 diagnostic probes
-также завершены. При inherited0.0117 каждый случай TP1/FP7/FN0/TN0; при100 —
-TP0/FP0/FN1/TN7. Это не классификация обученной модели. Render первого worker
-остановился из-за отсутствующего matplotlib; отдельный render-only job использует
-существующий plot-venv, без нового native Train/evaluate. Первичные Train/
-evaluation archives ещё проходят публикацию; предварительные числа не закрывают
-этап11 и не отменяют августовские наблюдения.
-
-
-[Численный stock recovery отчёт06.11](StockRecoveryScientificReport-2026-11-06.ru.md)
-теперь связан с проверенными Train/evaluation Git primary. Все восемь попыток
-остановлены без certificate;64 diagnostic responses не показали классификации.
-Render-only retry и визуальная приёмка остаются отдельными незавершёнными работами.
-
-
-Адресный archive API schemas1..4 проверен9/9 на каждом сервере с идентичными
-6 producer snapshots/577 файлами. [Сверка](PackagedPipelineArchiveTwoHostVerification.json).
-Это inclusion/integrity gate, не model convergence и не вся fault matrix.
-В stock report добавлены4 вручную просмотренных Soma1 PNG первого Classic-low
-случая; первый model cache завершён, полный eight-model render ещё работает.
-[Visual scope](StockRecoverySelectedVisualQA.json).
-
-
-Следующий [coverage аудит](SearchCoverageReview.ru.md) связывает фактическое
-покрытие L/Ns/Rs с полными parameter witnesses. Для native N1 dynamic domains
-code review выявляет Rs-first порядок внутри одной geometry; малый invalid
-budget может остановить попытку до обзора других длин. Это ограничение
-покрытия, не доказательство PhysicalInfeasible или ошибки численного расчёта.
-Новый reader/CLI и4 checks запущены на M40, verdict ещё pending.
-
-
-Coverage reader/CLI принят адресно на M40:4/4 tests,11 primary members/349
-source hashes,8 source summary/package hashes сверены.
-[Результаты и следующий алгоритмический вопрос](SearchCoverageReview.ru.md).
-Подтверждено ограниченное покрытие первого обучаемого входа; full search box
-и PhysicalInfeasible не заявляются. C++ порядок пока прежний.
-
-Последующее изменение C++ подготовлено отдельной веткой:
-[fair domain traversal](FairDomainTraversal.ru.md). Оно interleave-ит geometry
-только для opt-in N1 AdvanceUnassignedBurst; default RetrySameCandidate
-остаётся прежним. Normal122 завершён121/122: единственная failed проверка
-ошибочно ожидала input1 у всех Branch evidence, включая штатное продолжение
-с input0. Все4 новых теста исполнились; три прошли. Исходные834 primary members,
-JUnit и761 source hashes сверены и сохранены, весь gate не объявлен PASS.
-Исправленный normal137 добавляет15 C-context controls, включая новый
-контроль полного3L×3Rs mesh в трёх suspended contexts для Classic и Branch.
-После остановленного очередью A1 и prebuild launcher failure A2 отдельный A3
-успешно сконфигурирован и собирается. Pulse-алгоритм между этими попытками
-не менялся. [Job history](FairDomainTraversalJobs.json). Новый stock Train
-не запускался; улучшение классификации пока не заявляется.
-
-Полный stock recovery render теперь завершён:
-[проверка](StockRecoveryFullVisualVerification.json),160 trial/soma pairs,
-8931 views,30287 файлов/2.1GB на M40. Проверены все cache checksums и source
-bindings; worker group closed, lease released. Каждая пара содержит full2s
-overview и40 непрерывных50ms zooms, без downsampling. Компактные metadata
-сохранены в Git, тяжёлый derived cache — только M40. Ручная visual QA остаётся
-ограниченной четырьмя ранее выбранными PNG; научный результат не изменился.
-
-Последующий normal137 нового fair-domain варианта успешно завершён и принят
-в указанном scope: [точная сверка](FairDomainTraversalNormal137Verification.json).
-Подтверждены137/137,834 primary members/761 source hashes, неизменность284 CSV
-и480 JSON прежних native controls;19 startup JSON меняют лишь StepDuration.
-Это не scientific PASS. [ASan38 принят](FairDomainTraversalAsan38Verification.json)
-в отдельном runtime; следующая восьмиусловная stock-серияA2 уже проходит Train
-после8 successful cold preflight. Её первый launcherA1 был отклонён до worker
-из-за36h outer cap; у A2 cap24h при неизменных per-Train budgets. Парный анализатор
-принят на M40 [6/6 плюс actual-primary CLI](StockRecoveryCodeComparisonVerification.json);
-реальное сравнение разных code versions и приёмка на Elder ещё не выполнены.
-
-[Ранний preflight worker limits](WorkerLimitPreflightVerification.json) принят
-отдельно:26/26 actual-process/CLI checks на каждом сервере, одинаковые353 source
-hashes и26 IDs; старые import/capacity setup failures сохранены. Это не новая
-проверка классификации и не вся scheduler matrix. Компонентные страницы PulseLib
-теперь различают legacy1 и подключённый native V2; полный documentation/ClDesc
-audit по-прежнему открыт. Все исходные этапы1–12 остаются частичными.
+Предыдущая накопительная сводка сохранена в
+[Git](https://github.com/aicommunity/Nmsdk/blob/b2517a3576f949c12acb402ce83ab595ebcbf0b1/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
+Неудачные проверки остаются evidence своего среза, не переписываются под PASS.
