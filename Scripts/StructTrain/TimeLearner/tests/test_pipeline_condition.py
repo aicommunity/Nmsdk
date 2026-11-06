@@ -107,9 +107,15 @@ class PipelineConditionTest(unittest.TestCase):
             if mode == "grid":
                 phase = next(p for p in spec["phases"] if p["operation"] == "calibrate")
                 phase["job"]["thresholds"] = [t*1.01 for t in phase["job"]["thresholds"]]
-            elif mode == "order": spec["phases"][-1]["job"]["trials"].reverse()
+            elif mode == "order":
+                trials = spec["phases"][-1]["job"]["trials"]
+                # This real corpus is target/foil/foil/target. Reversal only
+                # renames trial IDs; require an actual stimulus-order change.
+                trials.reverse()
+                self.assertEqual(baseline, self.binding(spec)["condition_fingerprint"])
+                trials.append(trials.pop(0))
             else: spec["phases"][0]["wall_seconds"] -= 1
-            self.assertNotEqual(baseline, self.binding(spec)["condition_fingerprint"])
+            self.assertNotEqual(baseline, self.binding(spec)["condition_fingerprint"], mode)
 
     def test_rehashed_arbitrary_condition_artifact_cannot_replace_declaration(self):
         spec = self.spec();runtime = self.runtime();binding = self.binding(spec, runtime)
