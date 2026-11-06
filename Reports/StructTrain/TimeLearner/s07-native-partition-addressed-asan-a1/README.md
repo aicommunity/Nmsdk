@@ -1,0 +1,1 @@
+Native partition regression: A1 failed before native launch; A2 passed five addressed checks with two actual ASan processes. Full304 and complete refactoring remain open.

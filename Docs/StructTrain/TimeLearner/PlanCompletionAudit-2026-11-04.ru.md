@@ -1,3 +1,35 @@
+Сверка06.11: исправлены устаревшие текущие статусы N0 repeats и learner import в поддерживаемых описаниях; accepted Pulse0ec отделён от candidate12d. Проверены20 immutable source blobs,2 accepted merge ancestors и отдельные schema/legacy-C guards. [Матрица возможностей](ControllerCapabilities.ru.md), [source receipt](ControllerCapabilityReconciliation.json). Новых численных прогонов нет; все этапы1–12 частичны.
+
+Принято06.11: production `analyze --format legacy-statistic-traces` — оба явных dialects, произвольная размерность, строгие numeric/hash/clock/path checks, без достраивания trial validity. Elder12/12 и M40 12/12, все11+11 members и286 source/fixture hashes каждого worker проверены. [Приёмка и найденные риски старого AsymRm анализа](LegacyStatisticTraceReader.ru.md). Остальные специализированные анализаторы/старые29 Python paths не перенесены; этапы1–12 частичны.
+
+Принято06.11: **новая shared SDK2e/Pulse12d ASan build + focused8 —8/8**. Проверены19+575 archive members,720 build и321/323/325 native/Python/tool hashes,8 actual native identities/JUnit/libasan mappings. [Область, данные и аудит восстановления collector lease](SharedSdkASanFocusedAcceptance.ru.md). ASan lifecycle133 и научная матрица открыты; этапы1–12 частичны.
+
+Принято06.11: **новый shared SDK2e/Pulse12d normal304 —304/304** в одном настоящем C++ процессе. Все3936 members,304 исходных ID/статуса,720 compiled и282 tool source hashes проверены; closure/released подтверждены. [Доказательства и ограничения](SharedSdkNormal304Acceptance.ru.md). ASan этой SDK и научная матрица остаются отдельными; этапы1–12 частичны.
+
+Принято06.11: fresh ASan owner8/readers128 завершены; проверены195 archive members,8 actual native identities/исходных JUnit,original model bindings и323 reader source hashes. [Доказательства и границы](JointOwnerReplayASanAcceptance.ru.md). Новый SDK2e normal304/focused ASan8 завершены по серверным records, но ещё не прошли отдельную приёмку; ASan lifecycle133 kernel-live. Все этапы1–12 частичны.
+
+06.11: на Elder освобождены1788657942 logical bytes подтверждённых expanded duplicates/compile objects; оригинальный опубликованный архив сохранён, текущий runtime неизменён. [Exact file audit и восстановление](ElderVerifiedCacheRelease.ru.md). На SDK2e/Pulse12d запущен полный normal304, без нового build и без изменения математических допусков; PASS пока неизвестен. Все этапы1–12 частичны.
+
+Принято06.11: isolated ASan304 на SDK802/Pulsecc завершён304/304; проверены12095 archive members,304 исходных JUnit/process identities,683 compiled и325 tool source hashes. Данные опубликованы, agent-owned origin receipt разблокирует owner8/readers128; их PASS не заявляется. [Точный scope](Native304PartitionASanAcceptance.ru.md). SDK2e/Pulse12d ASan и все этапы1–12 ещё открыты.
+
+Принято06.11: Linux publication kernel guard и explicit recovery —20 actual Git tests на каждом worker, включая frontend crash во время живого push и повторную публикацию после закрытия. Полные оба attempts сохранены. [Контракт, доказательства и границы](PublicationLockRecovery.ru.md). Это не весь scheduler/reboot/ConditionSpec контур; этапы1–12 частичны.
+
+Принято06.11: удалены10 оставшихся исторических shell-драйверов AsymRm; manifest215 проверен обоими workers через production CLI, restored-path negative и exact scope. Данные/модели/конфиги не удалялись, старые скрипты не запускались. [Приёмка](AsymRmDriverRetirement.ru.md). Bin path/suffix inventory131 — ограниченный срез; этап9 и все этапы1–12 частичны.
+
+Сверка06.11: устранены устаревшие открытые статусы PARAM-FINITE-001 и V2 measured-length proposal в обзоре параметров. Заново проверены10 accepted setters,2 helper blobs и normal71/ASan112 primary members; новых численных прогонов нет. [Точные области и оставшиеся пробелы](ParameterContractStatusReconciliation.ru.md). Все этапы1–12 частичны.
+
+Принято06.11: temporal отчёт отрицательного final-pass —32 реальные пробы,48 trial–soma pairs,288 автоматически проверенных видов;24 оригинала просмотрены. Все116 primary неизменны, новые модели не запускались. [Галерея, воспроизведение и границы](StoppedFinalPassTemporalVisuals.ru.md). N2/LT/sync0 — инженерная диагностика, не научный Test. Все этапы1–12 частичны.
+
+Принято06.11: negative final-pass diagnostics — actual native4 на Elder,13 reader checks и CLI4 на обоих workers; исходные32 пробы и116 members сохранены, outputs byte-equal. Сертификат у BudgetExhausted не появляется. [Область и данные](StoppedFinalPassDiagnostics.ru.md). Графики нового корпуса/retries/прочие размеры ещё открыты; все исходные этапы1–12 частичны.
+
+Принято05.11:19 исторических PSI scripts удалены после двух205-record production CLI gates и restored-path negative. Bin merge34387285; все конфиги/модели/измерения/golden XML и семь исходных report bodies сохранены. Manifest205=203 retired+2 moved,complete=false. [Приёмка и границы](PsiToolRetirement.ru.md). По ограниченному path/suffix inventory осталось141 Bin paths; это не полнота всей миграции. Все этапы1–12 частичны.
+
+Актуализация05.11: integrated coordinator temporal A2 принят:16 phase reports/4 checks,5752 автоматически проверенных views,42 оригинала после visual QA; metadata644 и reader323 hashes сверены. [Галерея и ограничения](IntegratedCoordinatorTemporalVisuals.ru.md). Это двухвходовый профиль с LTMembrane, не stock scientific matrix. Все исходные этапы1–12 остаются частичными.
+
+Актуализация05.11: новая integrated coordinator SDK2e завершила8/8 и20 actual native phases; полные данные/SQLite/closure опубликованы. ASan304 выполняется по отдельным processes; corrected downstream queues ждут его PASS и origin publication. [Точные результаты и границы](IntegratedCoordinatorAcceptance.ru.md). Все исходные этапы1–12 частичны.
+
+Актуализация05.11 после завершения workers: новая integrated normal SDK2e/Pulse12d прошла8/8+133/133; полный primary опубликован и повторно сверены XML, runtime capture и1876 файлов. Coordinator A2 отказал до моделей, исправленный A3 kernel-live. Старый ASan304 остановился после284 OK lines: internal StackStore CHECK и изменившаяся системная библиотека, итоговый JUnit отсутствует, PASS не засчитан. Owner/readers не запущены; следующие ASan gates открыты. [Точные данные и границы](IntegratedSdkResults-2026-11-05.ru.md). Все этапы1–12 остаются частичными.
+
 Принято05.11:18 FastResponse/FastSpan historical tools удалены после двух184-record production CLI gates и restored-path negative. Bin develop merge11ad066e; все данные/config/native blobs и три исходных REPORT/JOURNAL тела сохранены. Manifest184=182 retired+2 moved,complete=false; из прежней нижней границы181 Bin tools осталось163, полнота inventory не заявляется. [Приёмка и исходники](FastProtocolToolRetirement.ru.md). Старые числа ниже относятся к своим snapshots. Все исходные этапы1–12 остаются частичными.
 
 Актуализация05.11: joint ASan44 A3 прошёл44/44 с измеренным пиком9.30GB без cap/OOM events; full304 выполняется. Live-routing package8c прошёл6/6 и10 native units, включая два ожидаемых process_error/exit2 stopped-Train controls. Fixed threshold1.0 остаётся полным молчанием; grid даёт инженерные TP2/FP0/FN0/TN2 на same-matrix. Проверенный obsolete build j3 удалён с сохранением SDK/runtime/results, освобождено703688704 bytes. [Первичные данные, независимая проверка и ограничения](CompletedGates-2026-11-05.ru.md). Все этапы1–12 частичны; pending source branches не приняты. Старые оперативные статусы ниже относятся ко времени их записи.
@@ -407,3 +439,28 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Устранён отставший статус NDataset/clock документации
 
 [Documentation-only Pulse merge](DatasetDocumentationCurrent.ru.md) помечает старый atoi/atof baseline историческим и связывает текущий reader/reload с уже принятой server evidence. Core tree не изменён, новых численных запусков нет; whole-plan completion этим не заявляется.
+
+
+## Свежая integrated SDK поставлена на приёмку
+
+[Новая isolated сборка Elder и проверенное удаление только expanded native133 дубля](IntegratedSdkGate.ru.md). Root2e061/Pulse12d/Bin11ad, Owner8+133 pending; приёмка алгоритмов этим ещё не заявлена. Фактический read-only resource Bin99f указан отдельно, конфиги/физика совпадают по Git tree. На M40 прежняя ASan304 продолжается. Только этап0 принят полностью.
+
+
+## Принята миграция двух исторических grid generators
+
+[BranchFastSpan/InhGrid: оба worker186 и отрицательная проверка](GridGeneratorRetirement.ru.md), configs/physics/manifests/observations сохранены. Bin develop525aafba, manifest186 complete=false; lower-bound оставшихся Bin scripts161. Исторический README SymInh/AsymRm конфликт отмечен без переписывания результатов. Integrated SDK/ASan продолжают свои immutable задания; общий этап9 и этапы1–12 не завершены.
+
+
+## Следующая ASan SDK — только очередь, не приёмка
+
+[Отдельная build-only постановка root2e061/Pulse12d на M40](IntegratedSdkGate.ru.md) ждёт SDK802 ASan304→published owner8/readers128 и освобождения RAM. Исходники доставлены через Git; новая сборка и её native8+133 ещё не выполнены. На Elder normal SDK уже компилирована и фактический native процесс запущен; полный итог нужно читать из последующих verdict/terminal/XML, а не из этого live наблюдения. Все этапы1–12 остаются частичными.
+
+
+## ASan fixtures доступны в Git; numerical gate ещё pending
+
+[Шесть точных условий и103 saved-state fixtures сверены; post-build ASan8+133 поставлен в очередь](IntegratedSdkGate.ru.md). Cold/live и saved-state boundary categories разграничены по actual C++ source, исторические packages не приписываются новому Train. New heavy build/native jobs пока не запускались; текущие задания не изменены. Только этап0 полностью принят.
+
+
+## Подготовлен запас диска Elder
+
+[Адресно удалены1392 generated compiler outputs трёх закрытых builds](IntegratedSdkGate.ru.md), runtime/source/data/CMakeCache сохранены, все6 archive members и fresh closed/released состояние сверены. Это подтверждённая очистка воспроизводимого кэша, не scientific result и не завершение этапа2.

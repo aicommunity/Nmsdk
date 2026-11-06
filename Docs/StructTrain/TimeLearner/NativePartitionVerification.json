@@ -1,0 +1,46 @@
+{
+  "a1": {
+    "commit": "a5c18c55172440e29fac86c864a4bd99b061380b",
+    "archive_members": 12,
+    "archive_bytes": 26212,
+    "archive_sha256": "2aaf724ce337f43fd77531137ca878f67ecb575b704177c7128fbbcc09257f95",
+    "terminal": {
+      "addressed_real_ASan_partitions_passed": false,
+      "full304_passed": false,
+      "whole_plan_complete": false,
+      "scientific_verdict": null
+    }
+  },
+  "a2": {
+    "commit": "900ed669960ac66ce5e0172468b8673b4abec099",
+    "archive_members": 67,
+    "archive_bytes": 36808,
+    "archive_sha256": "1d22e88be20b72f1c08b2c46ba860b33ecc52bab61bf379f92e34e9800b499e2",
+    "terminal": {
+      "addressed_real_ASan_partitions_passed": true,
+      "full304_passed": false,
+      "whole_plan_complete": false,
+      "scientific_verdict": null
+    },
+    "actual_native_processes": [
+      [
+        199505,
+        "295295193",
+        "0340843f-8a05-4b7e-bd66-afeefecdbe55"
+      ],
+      [
+        199995,
+        "295296017",
+        "0340843f-8a05-4b7e-bd66-afeefecdbe55"
+      ]
+    ],
+    "tests": {
+      "expected": 5,
+      "executed": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "tool_code_matches_exact_git_blobs": true
+  }
+}

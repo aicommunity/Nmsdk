@@ -1,0 +1,206 @@
+{
+  "kind": "timelearner_asymrm_driver_retirement_acceptance",
+  "source_root": "617d80919a5cbb6c38ac0d56188243d8bf66a801",
+  "source_bin": "639bc3ef19c9c36ea76168defee30c851b2a8ac6",
+  "both_workers": [
+    {
+      "host": "m40",
+      "data_commit": "d8d9178e33d471ce8888e5cf2e1ac9995a94b978",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-asymrm-driver-retirement-m40-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 146256,
+          "sha256": "786334dc67e5b3ac027ee5a5a329d8b0e64ec59f2341ce77f3e3b1a2956a6af9",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 215,
+      "source_hashes_verified": 281,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/AMP_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PARAM_SPAN_COMPARE.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PILOT_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SELECTIVITY_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SIGNAL_FIDELITY_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SPAN100_PROTOCOL.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/copy_config.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/export_preinh_audit.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inventory_statisticlog.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/pilot_status.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/prune_statisticlog.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/reset_asymrm_cold.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_asymrm.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_parallel.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/setup_asymrm.sh": "D"
+      },
+      "seven_report_bodies_preserved": true,
+      "restored_path_negative": {
+        "root_commit": "49fbac551015218f583485d77208e9da69108b46",
+        "bin_commit": "c29804d01b4189f74d3d46b94536859fe1cc5b89",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-asymrm-driver-retirement-a1",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-asymrm-driver-retirement-a1-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/asymrm-driver-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "732eac224f88fc4509ccd14fa8fdebe1ae92bce68f49e06e7610260210e581f2",
+              "unit": "timelearner-1bc0607e-83c9-4d5c-a789-fb5693ce7859.service",
+              "invocation_id": "a2d977bcfc9446119eec1b5ebf25415d",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1bc0607e-83c9-4d5c-a789-fb5693ce7859.service",
+              "initial_main_pid": 521539,
+              "initial_start_ticks": "298918289",
+              "sha256": "fd67de7fe541f0d363a5a4b96b128ddf80f69615348fad935ed6a123029c7144"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-1bc0607e-83c9-4d5c-a789-fb5693ce7859.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "342e282c-80bd-4be8-b062-7622398f333a",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    {
+      "host": "elder",
+      "data_commit": "b85b102140d8217c7926ebe9d15449cc9227f6a9",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-asymrm-driver-retirement-elder-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 146160,
+          "sha256": "082eedfde04c16da1a917bfcb6412ec5bcd2805a4b2b3cc798e32a44dac5431c",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 215,
+      "source_hashes_verified": 281,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/AMP_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PARAM_SPAN_COMPARE.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PILOT_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SELECTIVITY_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SIGNAL_FIDELITY_REPORT.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SPAN100_PROTOCOL.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/copy_config.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/export_preinh_audit.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inventory_statisticlog.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/pilot_status.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/prune_statisticlog.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/reset_asymrm_cold.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_asymrm.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/run_parallel.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/setup_asymrm.sh": "D"
+      },
+      "seven_report_bodies_preserved": true,
+      "restored_path_negative": {
+        "root_commit": "878c09ea715f898c6af06796f1106df84c82077a",
+        "bin_commit": "880d54a425782c428cd218dd9731685262afd2b3",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/clone_asymrm_exp.sh",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-asymrm-driver-retirement-a1",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-asymrm-driver-retirement-a1-container",
+          "registry": "/home/user/timelearner-refactor/asymrm-driver-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "465c92accb0ccefb7763e5bc4d53dfe006b9a0d13d17f99c97a122111ac8e875",
+              "unit": "timelearner-dcdd7e58-1b64-4988-859a-3e2f569927d9.service",
+              "invocation_id": "286e8ab7fc5b4051bbfa7efad5a690a7",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-dcdd7e58-1b64-4988-859a-3e2f569927d9.service",
+              "initial_main_pid": 3484161,
+              "initial_start_ticks": "348373369",
+              "sha256": "948c0b5088380cdd780b2ef46bc50c91cf1c6606b7916c414a9977b92fa6a4dd"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-dcdd7e58-1b64-4988-859a-3e2f569927d9.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "3a9e3860-c66a-408d-918a-de07a55d091d",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    }
+  ],
+  "old_scripts_or_native_models_executed": false,
+  "whole_migration_complete": false,
+  "scientific_verdict": null,
+  "accepted_bin_merge": {
+    "commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+    "tree": "8388fe15772c3f6d956f80e81b6a204990239b7b",
+    "identical_to_tested_candidate_tree": true,
+    "origin_develop_verified": true
+  }
+}

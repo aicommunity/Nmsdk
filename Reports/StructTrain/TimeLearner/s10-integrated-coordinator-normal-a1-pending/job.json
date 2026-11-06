@@ -1,0 +1,38 @@
+{
+  "kind": "queued_fresh_integrated_cold_coordinator",
+  "root_commit": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "worker": "10.245.1.11",
+  "queue_pid": 2958263,
+  "queue_start_ticks": "343798773",
+  "directory": "/home/user/timelearner-refactor/readbacks/s10-integrated-coordinator-normal-a1",
+  "prerequisite": "s06-integrated-acceptance-normal-a1",
+  "prerequisite_expected_native_cases": [
+    8,
+    133
+  ],
+  "requires_successful_terminal_and_fresh_closed_released_dependency": true,
+  "minimum_free_disk_bytes": 2147483648,
+  "minimum_free_memory_bytes": 10737418240,
+  "outer_controller_memory_max_bytes": 536870912,
+  "native_process_memory_max_bytes": 4294967296,
+  "suite": "Scripts.StructTrain.TimeLearner.tests.test_managed_pipeline_coordinator",
+  "expected_checks": 8,
+  "expected_topologies": [
+    "Classic",
+    "Branch"
+  ],
+  "expected_ModelSpec_versions": [
+    1,
+    2
+  ],
+  "positive_cold_cases": 4,
+  "stopped_no_export_cases": 4,
+  "old_saved_model_imported": false,
+  "old_verdict_imported": false,
+  "new_native_results_available": false,
+  "calibration_protocol": "historical same-matrix; not independent classification",
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "worker-source_sha256": "a1daf9f5f8a287283b977963748b01f1d29361875bbfee5449f10d4acafda833",
+  "queue-source_sha256": "b962cabc1c05e8b03e35fe6cb03db580006795525893ed3bc69e7ed6ddac0acf"
+}

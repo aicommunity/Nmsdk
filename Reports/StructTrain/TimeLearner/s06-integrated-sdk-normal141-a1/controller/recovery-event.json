@@ -1,0 +1,133 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "5f731e11-41d2-4bd3-bf92-1128aa7255fc",
+  "job_id": "s06-integrated-acceptance-normal-a1",
+  "recorded_unix": 1793873760.4543538,
+  "administrator": {
+    "pid": 2953337,
+    "start_ticks": "343769323",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 2953350,
+    "start_ticks": "343769336",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s06-integrated-acceptance-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "767a6ecfca6f91644510d0e0c3575979cd33ffa0c115b034b811a28205e74ded",
+      "unit": "timelearner-e6ad39ae-d4aa-440f-af02-e126eb9fef2a.service",
+      "invocation_id": "08493aff3b7549658631038a5bddc720",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e6ad39ae-d4aa-440f-af02-e126eb9fef2a.service",
+      "initial_main_pid": 2953350,
+      "initial_start_ticks": "343769336",
+      "sha256": "1b1f080882c453f0c59d700c8c77eb2edd6a135a177c9996e8d353848f7f2d7b"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-e6ad39ae-d4aa-440f-af02-e126eb9fef2a.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Separate corrected lifecycle recognition candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+      "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

@@ -1,0 +1,1 @@
+Historical19 PSI campaign tools retired: production history205 and restored-path negative passed; exact Bin19 deletions+7 historical documentation prefixes, Root3 paths. All other config/data/native/code objects and original report bodies unchanged. No model or old script executed; full migration and science completion not claimed.

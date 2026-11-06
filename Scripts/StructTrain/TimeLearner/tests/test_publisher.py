@@ -3,13 +3,17 @@ from pathlib import Path
 import copy
 import hashlib
 import json
+import os
+import shlex
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 
 from ..native_evidence import EvidenceError
-from ..publisher import publication_plan, publish_closure, stage_artifact_set
+from ..publisher import publication_plan, publish_closure, stage_artifact_set, recover_publication_lock
+from ..publication_lock import hold
 
 
 def git(path, *args):
@@ -220,3 +224,99 @@ class PublisherTest(unittest.TestCase):
         lock=self.root/".git/timelearner-publication.lock";lock.mkdir()
         with self.assertRaises(EvidenceError):publish_closure(self.root,self.spec)
         self.assertTrue(lock.exists())
+
+    def test_legacy_lock_is_not_automatically_recovered(self):
+        lock=self.root/".git/timelearner-publication.lock";lock.mkdir()
+        (lock/'owner.json').write_text(json.dumps({'pid':99999999}))
+        with self.assertRaises(EvidenceError):recover_publication_lock(self.root)
+        self.assertEqual(json.loads((lock/'owner.json').read_text()),{'pid':99999999})
+
+    @unittest.skipUnless(sys.platform == 'linux', 'Linux kernel publication guard')
+    def test_linked_worktree_uses_same_live_kernel_guard(self):
+        linked=self.base/'linked'
+        git(self.root,'worktree','add','--detach',str(linked))
+        spec=self.base/'linked-spec.json';spec.write_text(json.dumps(self.spec))
+        with hold(self.root/'.git'):
+            result=subprocess.run([sys.executable,'-m','Scripts.StructTrain.TimeLearner','publish',str(spec),
+                '--root',str(linked),'--output',str(self.base/'blocked-receipt.json')],capture_output=True,text=True,timeout=15)
+            self.assertEqual(result.returncode,2,result.stdout+result.stderr)
+            self.assertIn('publication_guard_busy_owner_or_git_child_live',result.stderr)
+            with self.assertRaisesRegex(EvidenceError,'publication_guard_busy'):
+                recover_publication_lock(self.root)
+        self.assertFalse((self.root/'.git/timelearner-publication.lock').exists())
+
+    @unittest.skipUnless(sys.platform == 'linux', 'Linux kernel publication guard')
+    def test_crashed_frontend_cannot_release_live_git_push_and_explicit_recovery_resumes(self):
+        # Actual receive hook and Git descendants, not mocked PID or lock state.
+        child=self.root/'A';git(child,'config','user.name','Publication test')
+        git(child,'config','user.email','test@localhost')
+        (child/'model.txt').write_text('changed model')
+        git(child,'add','model.txt');git(child,'commit','-m','new model')
+        git(self.root,'add','A');git(self.root,'commit','-m','new child link')
+        for record in self.spec['repositories']:record['commit']=git(self.root/record['path'],'rev-parse','HEAD')
+        ready=self.base/'receive-ready';release=self.base/'receive-release'
+        helper=self.base/'hold-receive.py'
+        helper.write_text('from pathlib import Path\nimport time,os\n'
+            +'Path('+repr(str(ready))+').write_text(str(os.getpid()))\n'
+            +'deadline=time.monotonic()+25\n'
+            +'while not Path('+repr(str(release))+').exists():\n'
+            +' if time.monotonic()>deadline:raise SystemExit(2)\n'
+            +' time.sleep(.02)\n')
+        hook=self.base/'A.git/hooks/pre-receive'
+        hook.write_text('#!/bin/sh\nexec '+shlex.quote(sys.executable)+' '+shlex.quote(str(helper))+'\n')
+        hook.chmod(0o755)
+        spec=self.base/'crash-spec.json';spec.write_text(json.dumps(self.spec))
+        process=subprocess.Popen([sys.executable,'-m','Scripts.StructTrain.TimeLearner','publish',str(spec),
+            '--root',str(self.root),'--output',str(self.base/'interrupted-receipt.json')],
+            stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        try:
+            deadline=time.monotonic()+15
+            while not ready.exists() and process.poll() is None and time.monotonic()<deadline:time.sleep(.02)
+            self.assertTrue(ready.exists(),'actual Git receive hook never started')
+            hook_stat=Path('/proc',ready.read_text(),'stat').read_text()
+            owner=json.loads((self.root/'.git/timelearner-publication.lock/owner.json').read_text())
+            self.assertEqual(owner['pid'],process.pid)
+            process.kill();process.wait(timeout=5)
+            self.assertFalse(Path('/proc',str(process.pid)).exists())
+            with self.assertRaisesRegex(EvidenceError,'publication_guard_busy') as blocked_recovery:
+                recover_publication_lock(self.root)
+            with self.assertRaisesRegex(EvidenceError,'publication_guard_busy') as blocked_publish:
+                publish_closure(self.root,self.spec)
+            release.write_text('release only the owned receive hook\n')
+            deadline=time.monotonic()+10;recovery=None;attempt=0
+            while time.monotonic()<deadline:
+                attempt+=1;receipt=self.base/('recovery-'+str(attempt)+'.json')
+                result=subprocess.run([sys.executable,'-m','Scripts.StructTrain.TimeLearner','publish-recover',
+                    '--root',str(self.root),'--output',str(receipt)],capture_output=True,text=True,timeout=10)
+                if result.returncode==0:
+                    recovery=json.loads(receipt.read_text());break
+                self.assertEqual(result.returncode,2,result.stdout+result.stderr)
+                self.assertIn('publication_guard_busy',result.stderr)
+                time.sleep(.02)
+            self.assertIsNotNone(recovery,'Git chain did not close')
+            self.assertEqual(recovery['previous_owner'],owner)
+            self.assertEqual(recovery['publication'],'not_attempted')
+            self.assertFalse(recovery['git_push_executed'])
+            preserved=Path(recovery['preserved_owner_directory'])
+            self.assertEqual(json.loads((preserved/'owner.json').read_text()),owner)
+            with self.assertRaisesRegex(EvidenceError,'publication_lock_missing'):
+                recover_publication_lock(self.root)
+            self.assertEqual(git(self.remote,'for-each-ref','--format=%(refname)'), '')
+            result=publish_closure(self.root,self.spec)
+            self.assertEqual(result['publication'],'published',result)
+            self.assertEqual(git(self.remote,'rev-parse','refs/heads/develop'),git(self.root,'rev-parse','HEAD'))
+            if evidence := os.environ.get('TIMELEARNER_PUBLISHER_EVIDENCE'):
+                Path(evidence,'frontend-crash-recovery.json').write_text(json.dumps({
+                    'kind':'timelearner_actual_git_push_frontend_crash', 'schema_version':1,
+                    'receive_hook_stat_when_ready':hook_stat,'frontend_pid':process.pid,
+                    'frontend_returncode':process.returncode,'original_owner':owner,
+                    'live_git_recovery_refusal':str(blocked_recovery.exception),
+                    'live_git_publish_refusal':str(blocked_publish.exception),
+                    'public_cli_recovery':recovery,'resumed_publication':result,
+                    'root_remote_commit':git(self.remote,'rev-parse','refs/heads/develop'),
+                    'expected_root_commit':git(self.root,'rev-parse','HEAD'),
+                    'receive_hook_helper':helper.read_text(),'scientific_verdict':None},indent=2)+'\n')
+        finally:
+            release.write_text('cleanup owned hook\n')
+            if process.poll() is None:process.kill()
+            process.communicate(timeout=15)

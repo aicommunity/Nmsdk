@@ -1,0 +1,4 @@
+{
+  "reason": "",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-publication-lock-recovery-a1-worker.py\", line 35, in <module>\n    write('checks.json',{'tests':result.testsRun,'expected':20,'failures':[t.id() for t,_ in result.failures],'errors':[t.id() for t,_ in result.errors],'skipped':result.skipped});assert result.testsRun==20 and result.wasSuccessful() and not result.skipped\nAssertionError\n"
+}

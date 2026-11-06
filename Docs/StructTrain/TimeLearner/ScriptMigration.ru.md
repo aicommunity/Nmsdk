@@ -1,3 +1,5 @@
+Принято06.11:215 records (213 retired/2 moved),complete=false. Десять оставшихся AsymRm shell-драйверов удалены после проверок обоих workers; конфиги, модели, измерения и исходные report bodies сохранены. [Область и Git-источники](AsymRmDriverRetirement.ru.md). Ограниченный path/suffix inventory Bin теперь131; полнота всей миграции не заявляется. Ниже — хронология прежних снимков.
+
 Принято04.11:166 records (164 retired/2 moved),complete=false. Удалены8 исторических PhaseA tools после двух actual CLI/negative/scope gates; августовские модели/конфиги/CSV/тело REPORT сохранены. [Приёмка](PhaseAToolRetirement.ru.md). Ниже — хронология прежних снимков.
 
 Принято04.11:158 records (156 retired/2 moved), complete=false. Оба workers проверили retirement8/negative/exact16/CMake prefix и расширенный inventory15. [Согласованная приёмка](InventoryAndAuditRetirementAcceptance.ru.md). Ниже — хронология прежних pending состояний; актуальные команды поиска находятся в корневом пакете.
@@ -360,3 +362,6 @@ legacy consumers. Серверная приёмка нового107-record snaps
 negative fixture. Все20 members и380 Git source hashes на worker независимо
 проверены. [SHA и исправление ошибочного текстового scope17/14 на фактический5/4](BranchRetryRetirement.ru.md).
 Полный этап9 остаётся частичным.
+
+
+Текущий принятый manifest после [удаления двух исторических генераторов сеток](GridGeneratorRetirement.ru.md):186 records (184 retired/2 moved), complete=false. На обоих серверах production retrieval186, exact scope и restored-path negative прошли; generated configs/manifest/results не изменены. Прежние числа выше относятся к своим историческим снимкам. Нижняя граница remaining Bin candidates161; активные analyzers/runner и вся широкая миграция остаются открытыми.

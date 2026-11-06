@@ -1,0 +1,100 @@
+{
+  "a1": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s09-psi-retirement-a1",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a1-container",
+    "registry": "/home/user/timelearner-refactor/psi-metadata-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "2ee45a5b442e733e782cd9f0a495b3e30bfce4badf7ad68014a8fef0196b01cd",
+        "unit": "timelearner-8c612c1d-69f6-4b45-a92a-d4b2c135c0ea.service",
+        "invocation_id": "542fba173f7046eca43f4acac7564b5a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8c612c1d-69f6-4b45-a92a-d4b2c135c0ea.service",
+        "initial_main_pid": 3328397,
+        "initial_start_ticks": "346977767",
+        "sha256": "ffe54414f5a3f3007e9a3c5651c15173005bf362f6ba1125f3103e0f28afd906"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-8c612c1d-69f6-4b45-a92a-d4b2c135c0ea.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": true,
+    "reservation_state": "not_created",
+    "reservation_token": null,
+    "state": "ready",
+    "reason": "dependency_closed_without_reservation",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "a2": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s09-psi-retirement-a2",
+    "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-psi-retirement-a2-container",
+    "registry": "/home/user/timelearner-refactor/psi-metadata-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "abf5ebf9890717cd1a6910309e16d622df51af39f5c7302934cd45ba23a191ef",
+        "unit": "timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+        "invocation_id": "72277660e7fb41d6b0cf4cbcdf539e2a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+        "initial_main_pid": 3329420,
+        "initial_start_ticks": "346985945",
+        "sha256": "4f8a8a458b338c5b1d2ffed9d4764ecc0226f508c299f9b923384fa01a85a54a"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "38260",
+        "KillMode": "control-group",
+        "Description": "timelearner-ff3f427c-89c0-4330-908e-7edfec7b2696.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "e9b843d9-b505-4d1f-a2f2-3dd6f0f918c9",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  }
+}

@@ -1,0 +1,1 @@
+SDK2e/Pulse12d full monolithic normal304 completed. All declared original JUnit IDs, native process/runtime and full primary checked. Not scientific classification or whole-plan completion. ASan is separate.
