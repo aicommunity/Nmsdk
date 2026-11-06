@@ -1,3 +1,5 @@
+Принято адресно:19/19 прошли,64 primary members и757 source hashes сверены; loaded libasan и fresh closed/released подтверждены. [Сверка](CandidateRecoveryAsan19Verification.json). Это не full SDK ASan и не leak check. Ниже сохранена постановка запуска.
+
 # Recovery: адресный ASan19 gate
 
 Запущена отдельная изолированная сборка M40 s07-candidate-recovery-asan19-a1.

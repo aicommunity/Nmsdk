@@ -4,7 +4,7 @@
   "observed_utc": "2026-11-06T18:34:35.395628+00:00",
   "host": "10.245.1.17",
   "job_id": "s07-candidate-recovery-asan19-a1",
-  "state": "building_observed",
+  "state": "completed_verified",
   "owner": {
     "pid": 1191297,
     "start_ticks": "306511984"
@@ -47,9 +47,10 @@
   "cxx_flags": "-O1 -g1 -fsanitize=address -fno-omit-frame-pointer",
   "linker_flags": "-fsanitize=address",
   "asan_options": "detect_leaks=0",
-  "native_tests_executed_yet": false,
+  "native_tests_executed_yet": true,
   "whole_sdk_asan_coverage": false,
   "leak_absence_attested": false,
   "scientific_verdict": null,
-  "primary_git_publication_pending": true
+  "primary_git_publication_pending": false,
+  "evidence_commit": "d6bd183cfabc8b940461e9aa9d855052bc9c50a0"
 }
