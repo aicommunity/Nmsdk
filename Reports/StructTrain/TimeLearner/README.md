@@ -1,9 +1,14 @@
 # TimeLearner reproducibility artifacts
 
-Completed scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Full304 and visual acceptance remain pending; fixed-threshold silent models are not successful detections.
+Historical scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Their acceptance applies to the documented source snapshots; fixed-threshold silent models are not successful detections.
 
-Current whole-plan status: [04.11.2026 audit with05.11 updates](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-04.ru.md).
+Current whole-plan status: [maintained implementation status](../../../Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md) and [scientific readiness](../../../Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
+
+Candidate recovery declaration (06.11):33/33 Python checks on each server,
+covering envelope/repeat binding, preflight and scientific condition identity.
+[Scope, primary evidence and remaining native/CSV audit work](../../../Docs/StructTrain/TimeLearner/UnassignedBurstCandidateRecovery.ru.md).
+This is not acceptance of physical recovery or a scientific classification result.
 
 Feature stock training failure diagnostics (04.11; full native feature acceptance pending):
 [contracts, observed boundaries and limits](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md),

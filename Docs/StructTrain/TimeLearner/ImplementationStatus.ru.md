@@ -57,8 +57,10 @@ stopped-state controls, добавлены отдельные completed controls
 Отдельный [WIP candidate recovery](UnassignedBurstCandidateRecovery.ru.md)
 добавляет opt-in продвижение bounded search после строго классифицированного
 unassigned burst и C++ cold/summary envelope5. Default retry и final all-input
-gate сохраняются. Новые tests ещё не выполнялись, Python/CLI support5 не
-завершён; этот срез не включён в текущие SDK-проверки и не принят в develop.
+gate сохраняются. Новые C++ tests ещё не выполнялись. Python declaration,
+preflight и ConditionSpec binding проверены33/33 tests на каждом сервере;
+полный primary audit5 ещё явно отклоняется. Этот срез не включён в текущие
+SDK-проверки и не принят в develop; научного результата он не добавляет.
 
 ## Приёмка по исходным этапам
 

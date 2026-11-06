@@ -1,0 +1,101 @@
+{
+  "kind": "candidate_recovery_declaration_local_verification",
+  "schema_version": 1,
+  "source_commit": "7e06a570236563a332722ff0357017dfcfd90401",
+  "servers": [
+    {
+      "host": "10.245.1.11",
+      "evidence_commit": "0128f0ee58615c3f7645473d4bb97c6e0b5a4dc8",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-11",
+      "tests_run": 33,
+      "skipped": 0,
+      "source_files_verified": 9,
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "artifacts": [
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-11/receipt.json",
+          "original_server_name": "receipt.json",
+          "bytes": 7652,
+          "sha256": "8284519a119154610afeec9a76f901b7b5644ed265b27e84495b66ab3276fedd"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-11/tests.json",
+          "original_server_name": "tests.json",
+          "bytes": 5056,
+          "sha256": "c515f4cfde140a038a6d771bf964520fbeb3209a82f6d6f2edb547836ea71bc7"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-11/unittest.log",
+          "original_server_name": "unittest.log",
+          "bytes": 5045,
+          "sha256": "3453df9ea725768230421076ac43d0531cfb32ad0e26802769a06490bc465823"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-11/runner.txt",
+          "original_server_name": "runner.py",
+          "bytes": 994,
+          "sha256": "704dc981642f15cb45ad2ac1e9f7edff8a241624bc8e57602b3e598c983b5acc"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-11/previous-runner-syntax-error.log",
+          "original_server_name": "previous-runner-syntax-error.log",
+          "bytes": 224,
+          "sha256": "3d819b21d664be8367c53ce8e944e3ff30c830aed599ac3d31836c31486ca6e5"
+        }
+      ]
+    },
+    {
+      "host": "10.245.1.17",
+      "evidence_commit": "7eefe1a8ad55c3a50dfd201a921cd864d1f44e52",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-17",
+      "tests_run": 33,
+      "skipped": 0,
+      "source_files_verified": 9,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "artifacts": [
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-17/receipt.json",
+          "original_server_name": "receipt.json",
+          "bytes": 7658,
+          "sha256": "4e40a9f1b66fdf9881aea31d03a298e9d7d0aa786cdfe8cfdff80a4454bda0e5"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-17/tests.json",
+          "original_server_name": "tests.json",
+          "bytes": 5056,
+          "sha256": "c515f4cfde140a038a6d771bf964520fbeb3209a82f6d6f2edb547836ea71bc7"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-17/unittest.log",
+          "original_server_name": "unittest.log",
+          "bytes": 6942,
+          "sha256": "afa95a06c1af96f07abb3bd616c804097fddf6aa58c955b5ebe423b10f1fdf95"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-17/runner.txt",
+          "original_server_name": "runner.py",
+          "bytes": 994,
+          "sha256": "704dc981642f15cb45ad2ac1e9f7edff8a241624bc8e57602b3e598c983b5acc"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-declaration-a2-17/previous-runner-syntax-error.log",
+          "original_server_name": "previous-runner-syntax-error.log",
+          "bytes": 224,
+          "sha256": "3d819b21d664be8367c53ce8e944e3ff30c830aed599ac3d31836c31486ca6e5"
+        }
+      ]
+    }
+  ],
+  "verified_via_git_objects": true,
+  "local_numerical_tests_run": false,
+  "scope": "declaration/preflight/condition identity only",
+  "native_execution_verified": false,
+  "primary_audit_schema5_supported": false,
+  "scientific_verdict": null,
+  "limitations": [
+    "C++ recovery has not been executed",
+    "Full schema5 primary auditing is not implemented",
+    "Original A1 runner syntax failure is retained; A2 publication required write-tree --missing-ok for omitted historical blobs",
+    "Server runner.py retained as runner.txt in current report tree; it is not an active launcher"
+  ]
+}
