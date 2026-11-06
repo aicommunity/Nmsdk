@@ -221,6 +221,12 @@ def main(argv: list[str] | None = None) -> int:
     pair.add_argument("--runtime-manifest", type=Path)
     pair.add_argument("--code-identity", type=Path)
     pair.add_argument("--output", type=Path, required=True)
+    recovery = commands.add_parser("stock-recovery-study", help="matched retry/advance stock cold Train at two fixed thresholds; no classification claim")
+    recovery.add_argument("action", choices=("prepare", "run", "analyze"))
+    recovery.add_argument("source", type=Path)
+    recovery.add_argument("--runtime-manifest", type=Path)
+    recovery.add_argument("--code-identity", type=Path)
+    recovery.add_argument("--output", type=Path, required=True)
     phasea = commands.add_parser("phasea-matrix", help="recover all four ISIs and labels from exact historical Bin Git data; no model execution")
     phasea.add_argument("--bin-repository", type=Path, required=True)
     phasea.add_argument("--revision", default="1c1464e248f8744e858bd66df0be99e39969fd65")
@@ -753,8 +759,11 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
-    elif args.command == "stock-threshold-study":
-        from .stock_threshold_study import prepare, run, audit
+    elif args.command in ("stock-threshold-study", "stock-recovery-study"):
+        if args.command == "stock-recovery-study":
+            from .stock_recovery_study import prepare, run, audit
+        else:
+            from .stock_threshold_study import prepare, run, audit
         from .native_evidence import EvidenceError, require, load
         try:
             if args.action in ("analyze", "failure-report"):
