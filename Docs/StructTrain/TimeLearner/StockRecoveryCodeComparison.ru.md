@@ -43,3 +43,17 @@ native package/CSV/context/physics, затем существующий coverage
 sweep budget/length bounds; наличие только design без native results;
 CLI отказ при существующем output и отсутствующих primary. Это проверки
 анализатора, не новая Train серия. До server receipt они остаются pending.
+
+Адресная [серверная приёмка M40](StockRecoveryCodeComparisonVerification.json)
+завершена:6/6, без errors/skips, плюс отдельный production CLI над полным
+реальным корпусом. Проверены11 archive members и351 tool source hash,
+fresh whole-group closure/released lease. Все восемь пар — тот же исходный
+attempt; новых повторов не создано. Для этого fixture отдельно выведены
+из точных Git objects обе Core tree identity и Console driver digest по семи
+CPP blobs, совпавшие с декларацией SDK84/Pulse416/Rdk10e.
+
+Эта дополнительная Git-сверка относится к fixture. Сам CLI сохраняет
+объявленные code identity и runtime fingerprints, но не реконструирует
+build provenance произвольного binary из этих трёх hash. Для реального fair
+A/B нужны соответствующие source/build/loaded-runtime receipts обеих версий.
+Двухсерверная приёмка и реальное сравнение разных обученных моделей ещё открыты.

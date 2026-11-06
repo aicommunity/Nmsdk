@@ -4,8 +4,11 @@
   "observed_utc": "2026-11-06T20:41:30Z",
   "host": "10.245.1.17",
   "job_id": "s07-stock-code-compare-a1",
-  "state": "running_verified_live",
-  "owner": {"pid": 1261639, "start_ticks": "307285397"},
+  "state": "completed_verified",
+  "owner": {
+    "pid": 1261639,
+    "start_ticks": "307285397"
+  },
   "owner_kernel_identity_checked": true,
   "source_root": "00ebc7286726c7d26c9fca2fff1baab0089123c1",
   "source": "/media/user/Data/TimeLearnerRefactor/source-stock-code-compare-a1",
@@ -16,7 +19,11 @@
   "additional_cli_check": "complete production self-comparison over the actual eight-case primary",
   "new_native_calculations": false,
   "fixture_modified": false,
-  "tests_passed_attested": false,
+  "tests_passed_attested": true,
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "primary_git_evidence": "901386133a9c953522ca56e14aa0e54d7639c173",
+  "verification": "StockRecoveryCodeComparisonVerification.json",
+  "fresh_process_group_closed": true,
+  "lease_released": true
 }
