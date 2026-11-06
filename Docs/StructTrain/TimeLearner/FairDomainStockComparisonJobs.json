@@ -84,7 +84,7 @@
   },
   "following_attempt_a2": {
     "job_id": "s07-stock-fair-domains-normal-a2",
-    "state": "native_training_in_progress",
+    "state": "native_train_completed_audited_and_published",
     "owner": {
       "pid": 1292040,
       "start_ticks": "307579961"
@@ -102,12 +102,17 @@
       "outcome": "invalid_observation",
       "preliminary_until_full_study_verified": true
     },
-    "observed_active_case": "Branch-threshold-training100-retry32",
-    "observed_utc": "2026-11-06T22:11:33.594857+00:00",
+    "observed_utc": "2026-11-06T22:30:09.435777+00:00",
     "readbacks": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
     "scientific_verdict": null,
-    "completed_train_cases": 6,
+    "completed_train_cases": 8,
     "progress_observation": "FairDomainStockProgressObservation.json",
-    "owner_identity_matches": true
+    "owner_identity_matches": true,
+    "completed_training_models": 0,
+    "evidence_commit": "a1ea63709dbd9a40a54a0e0a0b38fee2b02f9af8",
+    "verification": "FairDomainStockTrainVerification.json",
+    "all_worker_processes_closed": true,
+    "reservation_released": true,
+    "progress_observation_scope": "Earlier six-case observation only; final full study acceptance is FairDomainStockTrainVerification.json"
   }
 }
