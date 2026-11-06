@@ -2,7 +2,10 @@
 
 Подэтап `stage06/configured-native-controller` прошёл адресную серверную проверку.
 Он подключает V2 cold configuration через штатные параметры и XML Load, но не
-меняет классификацию целых этапов плана и не объявляет готовым trained-state import.
+меняет классификацию целых этапов плана. Полный trained-state import реализован
+и адресно принят позднее: [NativeLearnedState](NativeLearnedState.ru.md),
+[повторы и boundary restore](RepeatBoundaryState.ru.md). Текущая граница
+версий — [матрица возможностей](ControllerCapabilities.ru.md).
 
 `ControllerVersion` по умолчанию 1: существующие конфигурации сохраняют legacy
 dispatch. Значение 2 включает explicit native cold configuration из строкового
@@ -10,8 +13,9 @@ dispatch. Значение 2 включает explicit native cold configuration
 `timelearner_native_cold_configuration`, с ModelSpec, фактическим профилем
 генератора, начальными ISI, окнами, допусками и конечными бюджетами поиска.
 Schema2 явно задаёт N0 candidate repeats; она не меняет ControllerVersion и не
-совпадает по смыслу с production job schema2 live finalization. N1 использует
-schema1; новая N1 proposal policy не меняет mathematical goal и tolerances,
+совпадает по смыслу с production job schema2 live finalization. В принятом коде
+N1 использует schema1; schema3/4 отдельного C-history/search кандидата не следует
+приписывать этому develop. Новая N1 proposal policy не меняет mathematical goal и tolerances,
 см. [MeasuredResistanceRefinement](MeasuredResistanceRefinement.ru.md).
 
 Build разбирает декларацию и выполняет storage-owned cold builder только один
@@ -41,9 +45,8 @@ legacy flags не заменяют такой план. Optional C-trim в nativ
 `ConfiguredModelInitialized` — сохраняемый guard холодного построения. Если после
 Load/Copy имеется этот marker, но отсутствует process-local native declaration,
 Build отклоняет состояние с `configured_trained_model_requires_explicit_state_import`.
-Это предотвращает молчаливую замену обученного графа исходным. Поддержка полного
-versioned trained-state import/export остаётся следующим обязательным шагом;
-marker не является checkpoint и не доказывает обученность.
+Это предотвращает молчаливую замену обученного графа исходным. Полный versioned trained-state import/export выполняется отдельным native API;
+marker не является checkpoint, не заменяет этот API и не доказывает обученность.
 
 Guard помечен и Parameter, и State: Rdk Copy(false) вызывает Build после
 копирования параметров, до копирования состояния. State-only marker оказался бы
@@ -100,10 +103,11 @@ gitlinks и чистыми деревьями корня/сабмодулей. �
 
 ## Открытые требования
 
-Полный trained-state export/import и Train→Test, reconfiguration/retarget с новым
-протоколом, geometry-dependent Rs domains, production длительности окон/recovery,
-C-trim, conversion/PostTune/calibration, вся physics/mode matrix и scientific
-controls остаются обязательными. Зарегистрированные storage recipes должны быть
+Полная matrix trained-state export/import и Train→Test, reconfiguration/retarget
+с новым протоколом, все geometry-dependent Rs domains, production окна/recovery,
+bounded C-search и весь conversion/PostTune/calibration/physics/mode scope
+и scientific controls остаются обязательными. Наличие адресно проверенных
+API не означает полного отсутствия этих функций либо закрытия всех режимов. Зарегистрированные storage recipes должны быть
 доступны принимающему runtime; один JSON с именами образов не переносит их
 определения. Новый controller пока не рекомендуется как завершённая замена всех
 существующих научных конфигураций. Ошибки конфигурации удерживаются typed
