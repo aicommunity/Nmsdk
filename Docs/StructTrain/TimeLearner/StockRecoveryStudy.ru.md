@@ -3,6 +3,12 @@
 Проверка этапа7, ещё не научная оценка классификации. Production-модуль:
 `Scripts/StructTrain/TimeLearner/stock_recovery_study.py`.
 
+CLI: `python -m Scripts.StructTrain.TimeLearner stock-recovery-study prepare|run SOURCE
+--runtime-manifest RUNTIME.json --code-identity CODE.json --output NEW_DIRECTORY`.
+Для анализа: `stock-recovery-study analyze STUDY --output ANALYSIS.json`;
+runtime и code identity повторно не задаются. Обёртка worker добавляет lease,
+ограничение cgroup и сохраняет исходный код запуска как текстовый артефакт.
+
 До первого native вызова сохраняются восемь условий: Classic/Branch × исходный
 порог0.0117/обучающий100 × RetrySameCandidate/AdvanceUnassignedBurst. Один
 неизменяемый SDK Pulse416 используется для обеих политик. От исходных четырёх
