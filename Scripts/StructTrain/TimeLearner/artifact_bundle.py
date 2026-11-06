@@ -154,6 +154,79 @@ def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
             "archive_sha256": bundle["archive_sha256"], "scientific_verdict": None}
 
 
+def canonicalize_pipeline_archive(source, archive, bundle, output, maximum_bytes=8*1024**3):
+    """Create a separate regular-file archive from an audited, frozen worker.
+
+    Old producers used tar.add on glog severity symlinks even though native run
+    inventories intentionally exclude them. Only the existing owner/hash-bound
+    glog adapter may omit such duplicates. Original bytes and archive stay in
+    place; every other member must survive with its original content hash.
+    Fresh worker closure and model audits are the caller's responsibility.
+    """
+    from .portable_primary import _alias_plan, _record as validate_record
+    source, archive, output = Path(source).resolve(strict=True), Path(archive).resolve(strict=True), Path(output).resolve()
+    require(not output.exists() and not output.is_relative_to(source) and not source.is_relative_to(output),
+            "canonical_pipeline_output_overlap")
+    require(type(bundle) is dict and type(bundle.get("members")) is dict and bundle["members"] and
+            type(maximum_bytes) is int and maximum_bytes > 0, "invalid_pipeline_archive_inventory")
+    declared = bundle["members"]
+    for name, record in declared.items():
+        _name(name);validate_record(record)
+        path = source/name
+        require(path.is_file() and path.resolve(strict=True).is_relative_to(source) and
+                all(not parent.is_symlink() for parent in path.parents if parent != source and parent.is_relative_to(source)),
+                "canonical_pipeline_source_missing_or_outside_root:"+name)
+    require(sum(r["bytes"] for r in declared.values()) <= maximum_bytes, "pipeline_archive_exceeds_budget")
+    require(type(bundle.get("archive_bytes")) is int and archive.stat().st_size == bundle["archive_bytes"] and
+            _sha(archive) == bundle.get("archive_sha256"), "pipeline_archive_checksum_mismatch")
+    aliases = _alias_plan(source, declared);omitted = {row["omitted_alias"]: row for row in aliases}
+    for name in declared:
+        require(not (source/name).is_symlink() or name in omitted, "canonical_pipeline_unknown_source_symlink")
+    seen = set();links = 0
+    # Verify original regular bytes as well as link headers. A new archive may
+    # never conceal a damaged original payload behind unchanged directory data.
+    with tarfile.open(archive, "r:*") as tar:
+        for member in tar:
+            name = _name(member.name)
+            require(name in declared and name not in seen, "unexpected_pipeline_source_archive_member")
+            seen.add(name)
+            if member.issym():
+                require(name in omitted and member.size == 0 and member.linkname == Path(member.linkname).name and
+                        (Path(name).parent/member.linkname).as_posix() == omitted[name]["retained_target"],
+                        "unverified_pipeline_source_archive_link")
+                links += 1
+                continue
+            require(member.isfile() and member.size == declared[name]["bytes"],
+                    "unexpected_pipeline_source_archive_member")
+            digest = hashlib.sha256();size = 0
+            with tar.extractfile(member) as stream:
+                for chunk in iter(lambda: stream.read(1024**2), b""):
+                    digest.update(chunk);size += len(chunk)
+            require({"bytes": size, "sha256": digest.hexdigest()} == declared[name],
+                    "pipeline_source_archive_member_bytes_changed:"+name)
+    require(seen == set(declared), "pipeline_source_archive_member_set_changed")
+    retained = {name: record for name, record in declared.items() if name not in omitted}
+    output.mkdir(parents=True)
+    target = output/"primary.tar.xz"
+    with tarfile.open(target, "w:xz", preset=3, format=tarfile.PAX_FORMAT) as tar:
+        for name, record in sorted(retained.items()):
+            path = source/name
+            require(not path.is_symlink() and path.stat().st_size == record["bytes"],
+                    "canonical_pipeline_source_changed:"+name)
+            info = tarfile.TarInfo(name);info.size = record["bytes"];info.mode = 0o644
+            with path.open("rb") as stream:tar.addfile(info, stream)
+    result = {"kind": "timelearner_canonical_pipeline_archive", "schema_version": 1,
+              "members": retained, "archive_bytes": target.stat().st_size, "archive_sha256": _sha(target),
+              "source_archive_sha256": bundle["archive_sha256"], "source_archive_bytes": bundle["archive_bytes"],
+              "source_archive_members_verified": len(seen), "source_archive_links_verified": links,
+              "omitted_duplicate_glog_aliases": aliases, "original_archive_unchanged": True,
+              "scientific_verdict": None}
+    result["pipeline_closure"] = verify_pipeline_archive(target, result, maximum_bytes)
+    require(_sha(archive) == bundle["archive_sha256"], "pipeline_source_archive_changed")
+    _write(output/"bundle.json", result)
+    return result
+
+
 def pack_native_tests(contract, artifacts, output, selected_report, maximum_bytes=8*1024**3):
     root = artifacts.resolve(strict=True); report = selected_report.resolve(strict=True)
     require(not output.resolve().is_relative_to(root) and not output.resolve().is_relative_to(report),
