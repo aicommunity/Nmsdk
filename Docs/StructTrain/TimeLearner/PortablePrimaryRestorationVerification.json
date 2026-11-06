@@ -1,0 +1,45 @@
+{
+  "source_commit": "f1af8480406b3d1c1cfdb4b62f2b501e1117c5b6",
+  "workers": [
+    {
+      "host": "m40",
+      "data_commit": "c0a8b68b69efd0e8fc81785a78bb2468f65bfb31",
+      "source_fixture_hashes_checked": 293,
+      "archives": [
+        {
+          "attempt": "accepted",
+          "archive_members_checked": 8,
+          "archive_bytes": 17180,
+          "archive_sha256": "7ab989ec295f7dff46eb1d45f6feddc7da3a669c3338c9c4faa7d6ea07d9939b",
+          "tests_run": 14
+        }
+      ]
+    },
+    {
+      "host": "elder",
+      "data_commit": "1ed645f1c7e229e68392a42a8dc3b24ebce12dfa",
+      "source_fixture_hashes_checked": 293,
+      "archives": [
+        {
+          "attempt": "accepted",
+          "archive_members_checked": 8,
+          "archive_bytes": 17152,
+          "archive_sha256": "e91d9c4da9a26e8cf0e37fe2625d024c3c2cd04c47f0f26d8ebe6bf3d9ef572c",
+          "tests_run": 14
+        },
+        {
+          "attempt": "previous-a1/",
+          "archive_members_checked": 5,
+          "archive_bytes": 16420,
+          "archive_sha256": "7089e6784a7612915170e42a950c50f1de23541b5aa850fa6d08ebf725becd5e",
+          "tests_run": 0
+        }
+      ]
+    }
+  ],
+  "native_models_executed": 0,
+  "local_numerical_tests_executed": 0,
+  "format_restoration_only": true,
+  "full_scientific_pipeline_attested": false,
+  "whole_plan_complete": false
+}
