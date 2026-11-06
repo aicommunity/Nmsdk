@@ -50,3 +50,36 @@ M40 job s07-search-coverage-a1 запущен с source9cb944fd58ad90a286900d2c9
 Owner1228078/start306980048 подтверждён живым; tests/CLI verdict ещё ожидается.
 [Снимок задания](SearchCoverageJobs.json) не доказывает его состояние после
 времени наблюдения. C++ порядок поиска этим подэтапом не изменён.
+
+
+## Адресная проверка завершена
+
+M404/4 checks и фактический CLI прошли;11 primary members и349 source hashes
+сверены. Hash каждой из8 summaries/packages совпадает с опубликованным native
+archive. Свежий worker closure и released lease подтверждены.
+[Verification](SearchCoverageVerification.json). Полный coverage JSON хранится
+один раз в Reports/StructTrain/TimeLearner/s07-search-coverage-m40-a1/coverage.json.
+
+| Условие | Geometry groups | Measured candidates | Typed invalid events | Обучаемые входы в свидетельствах |
+|---|---:|---:|---:|---|
+|Classic-threshold-low-retry32|1|1|0|[0]|
+|Classic-threshold-low-advance32|2|1|33|[0]|
+|Classic-threshold-training100-retry32|3|51|0|[0]|
+|Classic-threshold-training100-advance32|5|51|33|[0]|
+|Branch-threshold-low-retry32|1|1|0|[2]|
+|Branch-threshold-low-advance32|5|3|33|[2]|
+|Branch-threshold-training100-retry32|27|235|0|[2]|
+|Branch-threshold-training100-advance32|31|235|33|[2]|
+
+Во всех случаях зафиксирован только первый обучаемый input:0 Classic и2 Branch
+в штатном reverse order с fixed reference3. Изменение общей геометрии Branch
+не означает, что каждый изменённый input прошёл собственную локальную приёмку.
+Повторные невалидные legacy probes без parameter witness в geometry histogram
+не добавлены; это ограничение сведений, не утверждение об отсутствии отказов.
+
+Следующее алгоритмическое сравнение должно отдельно проверить fair traversal
+динамических Rs domains, сохранив полный конечный набор кандидатов, fresh bounds
+при каждом возврате, source/hash/C context deduplication и общий budget.
+Не следует просто пропускать все остальные Rs после первой missing wave.
+Окончательный выбор порядка требует адресных production-controller checks и
+повторного stock A/B на одном immutable runtime; потенциальный успех не обещан.

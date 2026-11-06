@@ -192,3 +192,10 @@ code review выявляет Rs-first порядок внутри одной geo
 budget может остановить попытку до обзора других длин. Это ограничение
 покрытия, не доказательство PhysicalInfeasible или ошибки численного расчёта.
 Новый reader/CLI и4 checks запущены на M40, verdict ещё pending.
+
+
+Coverage reader/CLI принят адресно на M40:4/4 tests,11 primary members/349
+source hashes,8 source summary/package hashes сверены.
+[Результаты и следующий алгоритмический вопрос](SearchCoverageReview.ru.md).
+Подтверждено ограниченное покрытие первого обучаемого входа; full search box
+и PhysicalInfeasible не заявляются. C++ порядок пока прежний.
