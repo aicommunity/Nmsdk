@@ -236,6 +236,11 @@ def main(argv: list[str] | None = None) -> int:
     stopped_stock.add_argument("source", type=Path)
     stopped_stock.add_argument("--bin-repository", type=Path)
     stopped_stock.add_argument("--output", type=Path, required=True)
+    recovery_eval = commands.add_parser("stock-recovery-evaluation", help="frozen eight-pattern responses; unfinished recovery models remain diagnostic")
+    recovery_eval.add_argument("action", choices=("prepare", "run", "analyze", "report"))
+    recovery_eval.add_argument("source", type=Path)
+    recovery_eval.add_argument("--bin-repository", type=Path)
+    recovery_eval.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -724,8 +729,11 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
-    elif args.command == "stock-stopped-evaluation":
-        from .stock_stopped_evaluation import prepare, run, audit, report
+    elif args.command in ("stock-stopped-evaluation", "stock-recovery-evaluation"):
+        if args.command == "stock-recovery-evaluation":
+            from .stock_recovery_evaluation import prepare, run, audit, report
+        else:
+            from .stock_stopped_evaluation import prepare, run, audit, report
         from .native_evidence import EvidenceError, require
         try:
             if args.action in ("analyze", "report"):
