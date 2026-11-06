@@ -1,0 +1,57 @@
+from pathlib import Path
+import sys,os,subprocess,json,hashlib,tarfile,time
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-stock-recovery-cli-a1'
+root='6226ca3d3631187eab7e02693515ae1f0ee2679f';out=base/'readbacks/s07-stock-recovery-cli-a1';out.mkdir(exist_ok=False)
+sdk=base/'source-candidate-recovery-journal-normal-a1';runtime=base/'runtime-candidate-recovery-journal-normal-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+def git(repo,*a):return subprocess.check_output(['git','-C',str(repo),*a],text=True).strip()
+def write(n,v):(out/n).write_text(json.dumps(v,indent=2,allow_nan=False)+'\n')
+def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+assert git(source,'rev-parse','HEAD')==root and not git(source,'status','--porcelain','--untracked-files=no')
+os.environ['PYTHONDONTWRITEBYTECODE']='1';os.environ['QT_QPA_PLATFORM']='offscreen'
+for k in ('LD_LIBRARY_PATH','QT_PLUGIN_PATH','ASAN_OPTIONS'):os.environ.pop(k,None)
+from Scripts.StructTrain.TimeLearner.runtime import snapshot
+from Scripts.StructTrain.TimeLearner.stock_recovery_study import audit_design
+manifest=snapshot(sdk,runtime/'NeuroModelerConsole',runtime/'NeuroModelerConsole.ini',base/'build-candidate-recovery-journal-normal-a1/CMakeCache.txt')
+write('runtime.json',manifest)
+code={'pulse_core':git(sdk/'Libraries/Nmsdk-PulseLib','rev-parse','HEAD:Core'),'rdk_core':git(sdk/'Rdk','rev-parse','HEAD:Core'),'console_driver':hashlib.sha256(json.dumps({p.relative_to(sdk).as_posix():digest(p) for p in sorted((sdk/'App/NeuroModelerConsole').rglob('*.cpp'))},sort_keys=True).encode()).hexdigest()}
+write('code-identity.json',code)
+records=[]
+def cli(label,args,expected):
+ start=time.time()
+ p=subprocess.Popen([sys.executable,'-m','Scripts.StructTrain.TimeLearner',*args],cwd=source,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+ owner={'pid':p.pid,'start_ticks':Path('/proc',str(p.pid),'stat').read_text().rsplit(') ',1)[1].split()[19]}
+ try:stdout,_=p.communicate(timeout=600)
+ except subprocess.TimeoutExpired:
+  p.kill();stdout,_=p.communicate();(out/(label+'.log')).write_bytes(stdout);raise
+ (out/(label+'.log')).write_bytes(stdout)
+ records.append({'label':label,'returncode':p.returncode,'owner':owner,'closed':True,'wall_seconds':time.time()-start,'arguments':args})
+ assert p.returncode==expected,(label,p.returncode,stdout[-2000:])
+ return stdout
+assert b'stock-recovery-study' in cli('help',['--help'],0)
+assert b'failure-report' in cli('old-help',['stock-threshold-study','--help'],0)
+cli('prepare',['stock-recovery-study','prepare',str(base/'readbacks/s07-stock-failure-production-visual-a1/restored/study'),'--runtime-manifest',str(out/'runtime.json'),'--code-identity',str(out/'code-identity.json'),'--output',str(out/'prepared')],0)
+d=audit_design(out/'prepared');assert len(d['rows'])==8 and not (out/'prepared/runs').exists()
+cli('incomplete-analyze',['stock-recovery-study','analyze',str(out/'prepared'),'--output',str(out/'must-not-exist.json')],2)
+assert not (out/'must-not-exist.json').exists()
+write('receipt.json',{'kind':'stock_recovery_cli_gate','schema_version':1,'source_root':root,'operations':records,'prepared_conditions':8,'new_native_training':False,'scientific_verdict':None})
+write('source-hashes.json',{p.relative_to(source).as_posix():digest(p) for p in (source/'Scripts/StructTrain/TimeLearner').rglob('*.py')})
+(out/'driver.txt').write_text(PUBLISHER_SOURCE)
+members={p.relative_to(out).as_posix():{'bytes':p.stat().st_size,'sha256':digest(p)} for p in out.rglob('*') if p.is_file()}
+with tarfile.open(out/'primary.tar.xz','w:xz',preset=3) as tar:
+ for name in members:tar.add(out/name,arcname=name,recursive=False)
+write('bundle.json',{'members':members,'archive_bytes':(out/'primary.tar.xz').stat().st_size,'archive_sha256':digest(out/'primary.tar.xz')})
+collector=base/'evidence-stock-recovery-cli-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as stream:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=stream,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(root+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(out/'publication-index'))
+def pg(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+pg('read-tree',root);prefix='Reports/StructTrain/TimeLearner/s07-stock-recovery-cli-a1'
+for name in ('primary.tar.xz','bundle.json','receipt.json','source-hashes.json','driver.txt'):
+ oid=pg('hash-object','-w','--stdin',data=(out/name).read_bytes());pg('update-index','--add','--cacheinfo','100644',oid,prefix+'/'+name)
+tree=pg('write-tree','--missing-ok')
+c=pg('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',tree,'-p',root,data=b'Preserve real stock recovery CLI preparation and incomplete-analysis rejection\n')
+pg('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':root,'repository':str(collector),'prefix':prefix,'operations':len(records),'prepared_conditions':8}))
