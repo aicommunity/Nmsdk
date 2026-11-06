@@ -1,11 +1,16 @@
 # ISI-template анализатор: проверка нечисловых данных и источника
 
+**Текущее состояние07.11:** исправленный baseline a3 воспроизвёл дефекты,
+fixed12/12 прошёл на M40. [Проверенные primary и source bindings](IsiTemplateValidationNormalVerification.json).
+ASan, второй сервер и вся матрица analyzer остаются открытыми. Ниже сохранена
+история постановки, неверной первой fixture и ошибки доставки.
+
 Source review Pulse2f6b5725 выявил два риска в NPatternResponseAnalyzer:
 IsIsiTemplateMatch использует fabs(observed-reference)>1e-5 без проверки finite;
 NaN делает это сравнение ложным. Источник Neuron ищется через конкретный
 NNeuronTimeLearner, хотя Branch является отдельным UNet. Отсутствующий источник
 возвращает тот же false, что и обычное несовпадение; для foil это может стать
-положительным match. Это гипотезы по коду, пока не native runtime-подтверждение.
+положительным match. Это исходные гипотезы по коду; последующее native подтверждение a3 приведено ниже.
 
 Добавлены четыре production C++ regression cases, каждый с Classic и Branch:
 реальные storage/Environment/owner lookup; finite match/mismatch и обе
@@ -89,3 +94,19 @@ MatchMode1 сравнивает входные ISI с сохранённым Tra
 фактические выходные спайки; исторические отчёты с таким режимом требуют
 отдельной проверки критерия. Августовские4/8–6/8 подтверждены настоящими LT
 responses и не отменяются этим замечанием.
+
+
+## Адресная normal приёмка на M40
+
+[Точная сверка](IsiTemplateValidationNormalVerification.json): baseline a3
+наблюдал9 функций (4 новых failed,5 controls passed), fixed root87e406bd /
+Pulsefe382a0 прошёл12/12 без skips. Первые четыре regression bodies совпадают;
+три дополнительных fixed-only controls не выдаются за baseline A/B.
+
+В Git опубликованы все три исходные попытки и fixed primary. Проверены
+35+9+40 baseline members и41 fixed member;766 source hashes каждой попытки
+сверены с её фактическими root/Pulse commits. A2 declared root920, но не дошёл
+до checkout: его source hashes относятся к56ac, что указано явно. Старые
+13 runtime files сохранились;28 actual loaded files привязаны к процессу.
+Все группы закрыты и leases released. ASan, второй сервер, полный analyzer
+scope и этап3 остаются открытыми; положительный научный результат не добавлен.

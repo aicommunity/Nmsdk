@@ -119,5 +119,24 @@
     "native_test_result_available": false,
     "baseline_defect_reproduced_accepted": false,
     "algorithm_fix_verified": false
+  },
+  "completed_baseline_acceptance": {
+    "attempt": "a3",
+    "evidence": "1ae54182d85e399bf49e9d2440c477ddfd14408f",
+    "observed": 9,
+    "failed_regressions": 4,
+    "old_controls_passed": 5,
+    "full_group_closed": true,
+    "reservation_released": true
+  },
+  "fixed_normal_acceptance": {
+    "job": "s03-isi-template-fixed-normal-a1",
+    "root": "87e406bd0829af2f8db3482d1fd8b157501f9f51",
+    "PulseLib": "fe382a0aa729a0692ec3790b0226649b4348410a",
+    "evidence": "8631f99ac1366cf84a347976b0f72633adb2b4da",
+    "tests_passed": 12,
+    "verification": "IsiTemplateValidationNormalVerification.json",
+    "ASan_verified": false,
+    "second_host_verified": false
   }
 }
