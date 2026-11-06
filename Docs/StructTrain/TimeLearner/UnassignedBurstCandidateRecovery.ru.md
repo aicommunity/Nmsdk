@@ -116,10 +116,56 @@ Root `7e06a570236563a332722ff0357017dfcfd90401` добавляет
 и `audit_stopped_state` явно завершаются причиной
 `candidate_recovery_primary_audit_not_implemented`. Успешная проверка envelope
 не разрешает принять missing/ambiguous observation или выдать сертификат.
-Следующий шаг — проверка каждого recovery rejection по actual JSON/CSV,
-protocol/context, закрытому окну и общему бюджету, затем полная интеграция
+Проверка отдельной пробы описана ниже. Её ещё нужно связать с каждым recovery
+rejection, фазой поиска и общим бюджетом, затем интегрировать
 completed/stopped/C-history readers. C++ tests и native recovery пока не
 проверены; этот срез остаётся feature-кандидатом.
+
+### Проверка первичной невалидной пробы: два сервера
+
+Root `8815dea36` отдельно выделяет прежнюю строгую проверку часов CSV;
+`0cf65d58f4880c283431c7652e8d63b08107bf55` добавляет
+`candidate_recovery_evidence.audit_unassigned_burst`. Используются существующие
+read_partial_probe и measured_wave_plateaus через wave diagnostics; второй
+детектор волн не создаётся. Проверяются protocol/prepared/requested/spec,
+размерность и выбранный канал, полное окно и максимальный шаг, конечные числа,
+реальные фронты входа, точные причины отказа, отсутствие численных peak claims,
+волны и соответствие их фактическим отсчётам CSV. Первичная проба остаётся
+valid=false; результат явно содержит training_transition_verified=false.
+
+На M40 и Elder прошли по48/48 tests без skips:9 declaration/budget availability,
+12 общих ConditionSpec,13 pipeline-condition,5 новых primary mutation и9 прежних
+stock boundary tests. Использованы те же четыре штатных исторических cold runs:
+Classic/Branch при двух порогах; высокопороговые terminal probes имеют три волны
+вместо четырёх, низкопороговые — дополнительные максимумы. Эти модели заново
+не рассчитывались. Изменённые копии проверяют неполноту, nonfinite, часы,
+входные импульсы, соматические отсчёты, clipping, identity/dimensions,
+лишние причины и выдуманные peak fields.
+
+Evidence commits: M40 `af10708979f48cd2bc7e95654bc94e73fbba72a9`,
+Elder `3d5a5ef8b6f29c2e13edd2e8f514bafe9a3d79ab`.
+[Проверка primary](CandidateRecoveryPrimaryVerification.json) сверяет14 source
+files каждого сервера с exact Git source. Заново проверены все1370 members
+исходного сжатого Git primary `e5fa71d745119af0d818059f497dd226f4c7c25d`;
+все1212 M40 inputs и620 Elder inputs сверены с самим архивом, а не только
+с серверным manifest. Elder восстановлен из Git выборочно: вся JSON chronology
+и восемь выбранных CSV,102118568 bytes. Это повтор анализа исходных данных,
+не независимое обучение и не результат применения новой политики.
+
+PulseLib `70f4f27daa390bdd0f405d1ed9e3f01d47cd2394` добавляет getter общего
+InvalidObservations и поле invalid_observations в summary5. При retained search
+это фактический счётчик attempt, включая final sweeps; при отсутствии search
+значение null. Нельзя выводить его из размера Rejected или подставлять ноль
+после импорта без истории. Python проверяет availability и тип поля;
+согласованность списания с переходами поиска ещё не принята.
+
+На M40 запущена отдельная сборка root
+`ef21547432ac60f49ba4af3038735ed96a9a6c8e` / Pulse70f с объявленными116 C++ cases:
+13 новых classifier/controller/codec,4 invalid-budget,74 смежных и25 transport.
+[Задание и наблюдаемый статус](CandidateRecoveryNativeJobs.json).
+Сборка не содержит последующий Python primary classifier и не подменяет
+проверку его сквозной интеграции. До terminal/JUnit/closure и публикации primary
+результат116 PASS не заявляется. ASan A5 проверяет более ранний Pulse12d.
 
 Добавлены controller regressions default-versus-opt-in, anchor/input failures,
 missing/extra waves, общий budget, конечное исчерпание поиска, запрет final skip,

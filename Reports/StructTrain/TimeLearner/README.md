@@ -10,6 +10,12 @@ covering envelope/repeat binding, preflight and scientific condition identity.
 [Scope, primary evidence and remaining native/CSV audit work](../../../Docs/StructTrain/TimeLearner/UnassignedBurstCandidateRecovery.ru.md).
 This is not acceptance of physical recovery or a scientific classification result.
 
+The next primary-classifier gate passed48/48 Python checks on each server,
+including the four original stock failure conditions and damaged JSON/CSV.
+[Source/archive verification](../../../Docs/StructTrain/TimeLearner/CandidateRecoveryPrimaryVerification.json).
+This classifies invalid observations; controller transitions and full schema5
+training audit remain unaccepted. No models were recalculated by these gates.
+
 Feature stock training failure diagnostics (04.11; full native feature acceptance pending):
 [contracts, observed boundaries and limits](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md),
 [Elder twelve data checks](s07-stock-failure-boundary-elder-a1/README.ru.md),
