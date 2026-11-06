@@ -7,7 +7,8 @@
 ## Исходный риск и сохранённый baseline
 
 Baseline с новыми регрессиями и прежним PulseLib:
-root `02e4d46fa79c138fa6a09568d1c10ee1bf677efb`,
+root `7cc21bdd9e0904f8f5052466651e0682f2f1f1a3`
+(ветка `codex/timelearner-invalid-budget-baseline`),
 PulseLib `12d8c8a41c998ae1516496f716a0ae0f3d312b3e`.
 Исправление PulseLib: `2c7e0144a902795cb6287ee677cff5aa08998847`.
 
