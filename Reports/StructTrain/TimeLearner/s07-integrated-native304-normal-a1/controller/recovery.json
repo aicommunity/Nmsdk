@@ -1,0 +1,88 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "3a8465aa-7d06-4168-b979-35540fc7c826",
+  "job_id": "s07-integrated-native304-normal-a1",
+  "recorded_unix": 1793922131.995993,
+  "administrator": {
+    "pid": 3518924,
+    "start_ticks": "348598645",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 3518936,
+    "start_ticks": "348598656",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-integrated-native304-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2c0c2bc2a8b34390fcb88f5e452ff7cb431e9faa9c68fa072ee7cb92dcd31fc6",
+      "unit": "timelearner-013d8b2d-cf11-4eea-b048-d8d54067f986.service",
+      "invocation_id": "9a6385685ec94b61beb954dba2e5fdab",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-013d8b2d-cf11-4eea-b048-d8d54067f986.service",
+      "initial_main_pid": 3518936,
+      "initial_start_ticks": "348598656",
+      "sha256": "f3d1edf260475dcabc7548a5218f2245c5820bf0c8620b7c33b5107bbed5fb5b"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-013d8b2d-cf11-4eea-b048-d8d54067f986.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Whole native/reader group freshly closed; retain all positive and negative primary results.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-integrated-native304-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-integrated-native304-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2",
+      "requested_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
