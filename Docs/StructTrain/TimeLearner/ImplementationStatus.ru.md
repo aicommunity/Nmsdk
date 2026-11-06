@@ -170,3 +170,9 @@ TP0/FP0/FN1/TN7. Это не классификация обученной мо�
 существующий plot-venv, без нового native Train/evaluate. Первичные Train/
 evaluation archives ещё проходят публикацию; предварительные числа не закрывают
 этап11 и не отменяют августовские наблюдения.
+
+
+[Численный stock recovery отчёт06.11](StockRecoveryScientificReport-2026-11-06.ru.md)
+теперь связан с проверенными Train/evaluation Git primary. Все восемь попыток
+остановлены без certificate;64 diagnostic responses не показали классификации.
+Render-only retry и визуальная приёмка остаются отдельными незавершёнными работами.
