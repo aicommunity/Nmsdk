@@ -26,7 +26,7 @@
       "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-normal-a1",
       "wrapper_pid": 923491,
       "wrapper_start_ticks": "303693092",
-      "observed_state": "build_live",
+      "observed_state": "completed_expected_assertion_failures",
       "worker_source_sha256": "bfe5b65c89e82e84d815a7059f947decc91f0cdd0b55b3e7c770aaa54582bfd1",
       "wrapper_source_sha256": "ac97db4f22c18285addd6e86b2d9475de11383503c095e0baeb19aff796fb053",
       "expected_assertion_status": "failed",
@@ -36,7 +36,10 @@
       "build_pid": 924029,
       "build_start_ticks": "303693510",
       "worker_and_wrapper_sha256_verified_on_server": true,
-      "worker_memory_max_bytes": 4294967296
+      "worker_memory_max_bytes": 4294967296,
+      "previous_observed_state": "build_live",
+      "evidence_commit": "9c79384fcdec4eee1da2c00e5746fa33b2ae24fe",
+      "fresh_closure_and_release_checked": true
     },
     {
       "label": "attempt-invalid-budget-fixed-normal-a1",
@@ -49,14 +52,19 @@
       "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-normal-a1",
       "wrapper_pid": 925483,
       "wrapper_start_ticks": "303706437",
-      "observed_state": "waiting_for_live_baseline_cgroup",
+      "observed_state": "build_live",
       "worker_source_sha256": "8181909a6bdd0b57c29db6aaa7ef84395a7a6e2b34357ebeefe6bc477fb08fb0",
       "wrapper_source_sha256": "414b09a47c1723158bfe8e6931f33acffd6956bef8200d0570fab1f61031f5b6",
       "expected_assertion_status": "passed",
       "additional_adjacent_functions": 74,
       "dependency": "s07-attempt-invalid-budget-baseline-normal-a1: fresh closed cgroup + released lease + expected_baseline_failures_observed=true",
       "worker_and_wrapper_sha256_verified_on_server": true,
-      "worker_memory_max_bytes": 4294967296
+      "worker_memory_max_bytes": 4294967296,
+      "previous_observed_state": "waiting_for_live_baseline_cgroup",
+      "worker_pid": 936125,
+      "worker_start_ticks": "303819046",
+      "build_pid": 936718,
+      "build_start_ticks": "303819449"
     },
     {
       "label": "attempt-invalid-budget-fixed-native-a1",
