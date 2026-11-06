@@ -1,5 +1,7 @@
 # Структурное обучение TimeLearner
 
+**Текущий статус06.11:** [единая сводка реализации](ImplementationStatus.ru.md) и [условия допуска научных экспериментов](ExperimentReadiness.ru.md). Полностью принят только исходный этап0; этапы1–12 частичны. Датированные отчёты ниже сохраняют результаты и формулировки своего снимка, а не заменяют текущую сводку.
+
 [Полный isolated ASan304 и границы SDK802/shared SDK2e](Native304PartitionASanAcceptance.ru.md).
 
 [Linux publisher: actual Git frontend-crash recovery20×2](PublicationLockRecovery.ru.md).
@@ -12,9 +14,9 @@
 Этот раздел содержит поддерживаемую спецификацию рефакторинга двух компонентов:
 Classic (`NNeuronTimeLearner`) и Branch (`NNeuronTimeLearnerBranch`).
 
-**Текущий статус полного плана:** [аудит04.11 с дополнениями05.11](PlanCompletionAudit-2026-11-04.ru.md). Полностью принят только этап0; этапы1–12 частичны. [Последние завершённые ASan44/live6 проверки и их ограничения](CompletedGates-2026-11-05.ru.md); [принятая миграция18 FastResponse/FastSpan tools, manifest184](FastProtocolToolRetirement.ru.md). Pending source branches и работающие задания не считаются принятыми.
+**Исторический аудит04.11 с дополнениями05.11:** [датированный аудит](PlanCompletionAudit-2026-11-04.ru.md). Полностью принят только этап0; этапы1–12 частичны. [Последние завершённые ASan44/live6 проверки и их ограничения](CompletedGates-2026-11-05.ru.md); [принятая миграция18 FastResponse/FastSpan tools, manifest184](FastProtocolToolRetirement.ru.md). Pending source branches и работающие задания не считаются принятыми.
 
-[Научная сводка 03.11: реальные 5/8, ложные ответы и ссылки на графики](ScientificResults-2026-11-03.ru.md).
+[Научный N2 LT срез03.11: target-detecting5/8 с FP3 и ссылки на графики](ScientificResults-2026-11-03.ru.md).
 [Завершённая серия: фиксированные N1-пороги, порядок, Reset и пауза](N1ProtocolRobustness.ru.md).
 
 Работа возобновлена пользователем 28.10.2026. [Историческая точка остановки и сохранённые проверки](ResumeAfterPause-2026-10-27.ru.md).
