@@ -48,17 +48,21 @@ primary, metadata и выбранные PNG. Вручную просмотрен
 [Проверка графиков](StockRecoveryFullVisualVerification.json),
 [visual QA](StockRecoverySelectedVisualQA.json).
 
-Новая matched серия s07-stock-fair-domains-normal-a2 выполняется после шести
-design checks, preregistration и восьми cold preflight. На момент
-[timestamped наблюдения](FairDomainStockProgressObservation.json) завершены6/8
-Train, все InvalidObservation; тот же worker жив по PID/start ticks.
-Полный verdict и последующая оценка новых моделей ещё отсутствуют.
-[Оценка и полный render](FairDomainStockEvaluationJobs.json) поставлены в очередь;
-ожидающий процесс подтверждён живым, native evaluation ещё не началась.
-Допуск требует полного closure Train, released lease и успешного аудита серии.
-[Условия и история](FairDomainStockComparisonJobs.json): исходный NSPNeuronGen
-без дополнительной LTMembrane, C-trim/PostTune/калибровка выключены. Старые
-baseline ответы не подставляются вместо результатов новой серии.
+Новая matched серия s07-stock-fair-domains-normal-a2 завершена и опубликована:
+8 cold preflight и8 Train, все InvalidObservation без certificate. Полные
+аудиты обеих серий и сравнение восьми пар условий прошли; группа процессов
+закрыта, lease released. [Приёмка primary](FairDomainStockTrainVerification.json).
+Advance расширил записанные geometry groups: Classic2→59 и5→47,
+Branch5→58 и31→60. Это не полный search box и не улучшение классификации.
+В четырёх default Retry случаях совпали модели, summaries и728 native CSV.
+[Сравнительный отчёт](FairDomainStockScientificReport-2026-11-07.ru.md).
+
+[Оценка восьми новых моделей](FairDomainStockEvaluationJobs.json) уже выполняется:
+пять role/job checks прошли, native diagnostic evaluation началась после
+проверенного closure Train. На момент наблюдения полного64-trial результата
+ещё нет; render всех160 trial/soma pairs следует за оценкой. Условия — исходный
+NSPNeuronGen без дополнительной LTMembrane, без C-trim/PostTune/калибровки.
+Baseline ответы не подставляются вместо результатов новой серии.
 
 Августовские4/8,5/8,6/8 подтверждены не только исходным визуальным наблюдением:
 выполнены [saved-state replay](HistoricalAugustReplay.ru.md) и
@@ -94,8 +98,9 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
 
 ## Путь к итоговым выводам
 
-1. Завершить полную новую Train серию, аудит и matched code comparison;
-   оценить фактические модели и построить все trial/soma графики.
+1. Завершить оценку восьми новых фактических моделей и все trial/soma
+   графики. Полный Train, primary audit и matched code comparison этой серии
+   уже приняты; не повторять их ради одного обновления отчёта.
 2. Разобрать invalid peak/burst assignment и проверить исправление реальными
    штатными пробами. Budget exhaustion не доказывает PhysicalInfeasible.
 3. Использовать уже принятые августовские replay и cold Train→Test как

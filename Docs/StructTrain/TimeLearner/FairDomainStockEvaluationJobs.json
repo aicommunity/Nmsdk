@@ -103,5 +103,28 @@
   "large_derived_reports_in_git": false,
   "archive_policy": "Only owner/hash-bound duplicate glog aliases may be omitted; primary source files retained.",
   "classification_assessed": false,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "following_native_evaluation": {
+    "observed_utc": "2026-11-06T22:30:09.435777+00:00",
+    "worker": {
+      "pid": 1318579,
+      "start_ticks": "307911504",
+      "identity_matches": true
+    },
+    "tests": {
+      "tests_run": 5,
+      "successful": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "terminal": null,
+    "exception": null,
+    "analysis": null,
+    "stdout_tail": [
+      "DIAGNOSTIC-EVALUATE Classic-threshold-low-retry32",
+      "DIAGNOSTIC-EVALUATE Classic-threshold-low-advance32"
+    ],
+    "state": "native_diagnostic_evaluation_running"
+  }
 }
