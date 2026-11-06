@@ -15,7 +15,7 @@ merge и научная разделимость — разные утвержд
 |Bin в develop|37ff211fa6ba4999fc51802182915022b239a1eb|
 |Rdk в develop|10e9d05aa658dd2203c89bc84ba9166595b50014|
 |Базовый общий compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
-|Recovery compiled SDK|Root84d6d97501a62b0a689b1170ec4f0fb53e558a48 / Pulse416e07c71b80e7e7a37cd213f8d0b6f7efb768fb; normal118 принят адресно, stock серия и ASan19 ещё выполняются|
+|Recovery compiled SDK|Root84d6d97501a62b0a689b1170ec4f0fb53e558a48 / Pulse416e07c71b80e7e7a37cd213f8d0b6f7efb768fb; normal118 и адресный ASan19 проверены; stock серия завершена, её публикация ещё ожидается|
 
 [Матрица возможностей](ControllerCapabilities.ru.md) отделяет принятые API от
 кандидата: N0 repeats и native learned-state import уже реализованы и адресно
@@ -157,5 +157,16 @@ TP1/FP3/FN0/TN4, со статусом NonSeparable на проверенной 
 
 
 Дополнительный [адресный ASan19](CandidateRecoveryAsan19.ru.md) нового Pulse416
-запущен в независимом runtime/source/build. На момент записи — compile, без
-C++ verdict. Прежний ASan133 не переносится на этот более поздний код.
+запущен в независимом runtime/source/build. Пройдены19/19,64 primary members и757 source hashes проверены; fresh closure
+и released lease подтверждены. [Точная сверка](CandidateRecoveryAsan19Verification.json).
+Это не вся ASan matrix нового SDK и не leak check.
+
+
+Stock matched Train завершён8/8 с валидными первичными данными; все восемь
+моделей stopped/InvalidObservation без certificate. Все64 diagnostic probes
+также завершены. При inherited0.0117 каждый случай TP1/FP7/FN0/TN0; при100 —
+TP0/FP0/FN1/TN7. Это не классификация обученной модели. Render первого worker
+остановился из-за отсутствующего matplotlib; отдельный render-only job использует
+существующий plot-venv, без нового native Train/evaluate. Первичные Train/
+evaluation archives ещё проходят публикацию; предварительные числа не закрывают
+этап11 и не отменяют августовские наблюдения.
