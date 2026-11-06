@@ -31,6 +31,21 @@ A4 остановилась до C++ из-за неполного tool snapshot;
 согласованный tool bb288399bdb66aaadb3db7ec5f01c76cd9bd57ae и выполняется отдельно.
 До полного verdict, первичных данных и closure это не ASan133 PASS кандидата.
 
+Отдельно подготовлен [общий бюджет невалидных проб](AttemptInvalidObservationBudget.ru.md):
+baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют идентичные новые
+регрессии. На M40 baseline воспроизвёл превышение бюджета:4 test functions
+завершились32 ожидаемыми assertions, Exact и присутствующим сертификатом;
+полный34-member primary опубликован и746 source files сверены с Git.
+Fixed SDK прошёл4/4 новых и74/74 смежных tests. Native physical/transport gate
+дал21/23: два configured Train исчерпали sweeps до ожидаемого сертификата.
+Тот же набор23 на прежнем SDK дал те же21/23; все252 CSV и7 precondition
+summaries побайтно совпали. Оба первичных отрицательных результата сохранены;
+отказы этих fixtures не объясняются budget fix в данном A/B. Это pending общая
+приёмка, не merge в develop.
+ASan A5 относится к Pulse12d и не
+подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
+не устраняет stock burst ambiguity.
+
 ## Приёмка по исходным этапам
 
 | Этап | Подтверждено в ограниченной области | Что мешает закрыть этап целиком |
