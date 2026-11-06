@@ -1,3 +1,11 @@
+Принято06.11:14/14 на каждом worker, без failures/errors/skips. M40 data
+`c0a8b68b69efd0e8fc81785a78bb2468f65bfb31`, Elder data
+`1ed645f1c7e229e68392a42a8dc3b24ebce12dfa`; все8 members каждого архива,
+293 source/fixture hashes на worker и сохранённый resource-refused ElderA1
+проверены. [Двухсерверная сверка](PortablePrimaryRestorationVerification.json).
+Принята только форматная функция восстановления; весь pipeline/план этим
+не закрывается. Ниже сохранена первоначальная постановка и промежуточная
+M40-only приёмка; их ожидания Elder относятся к прежнему состоянию.
 # Восстановление primary: dereferenced glog aliases
 
 Постановка06.11.2026, ещё не принята. Реальный архив пилота `bd10072c73d7c8296f1a4d02c051459f29f8c039`
@@ -45,3 +53,4 @@ not increased. Elder acceptance remains pending. Full actual990-member pilot
 restoration on M40 now passed:8 redundant aliases omitted with explicit receipt,
 982 original regular members retained; original signed manifests unchanged.
 Report generation has started, but its full result/visual QA is not yet accepted.
+
