@@ -97,6 +97,18 @@ def load(path: Path) -> dict[str, Any]:
     return result
 
 
+def require_primary_trace_clock(spec: dict[str, Any], sample_count: Any, times: list[float]) -> None:
+    """Shared strict whole-window clock check for valid and diagnostic probes."""
+    require(len(times) == count(sample_count) >= 3, "sample_count_mismatch")
+    begin, end = number(spec["begin"]), number(spec["end"])
+    gap = number(spec["maximum_sample_gap"])
+    require(gap > 0 and count(spec["maximum_samples"]) >= len(times), "invalid_sample_budget")
+    require(equal(times[0], begin) and equal(times[-1], end), "incomplete_trace_coverage")
+    roundoff = 32 * sys.float_info.epsilon * max(1., abs(begin), abs(end))
+    require(gap > 2 * roundoff, "insufficient_probe_timestamp_resolution")
+    require(all(b > a and not after(b, a + gap) for a, b in zip(times, times[1:])), "sample_gap_or_duplicate")
+
+
 def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str, Any]:
     require(packet.get("kind") == "timelearner_native_probe_evidence" and
             packet.get("evidence_schema_version") in (1, 2), "unknown_native_evidence_schema")
@@ -228,14 +240,8 @@ def _audit_probe(packet: dict[str, Any], trace: Path | None = None) -> dict[str,
     except ValueError as error:
         raise EvidenceError("damaged_numeric_token") from error
     require(all(math.isfinite(value) for row in values for value in row), "nonfinite_trace")
-    require(len(values) == count(observation["sample_count"]) >= 3, "sample_count_mismatch")
     times = [row[0] for row in values]
-    gap = number(spec["maximum_sample_gap"])
-    require(gap > 0 and count(spec["maximum_samples"]) >= len(values), "invalid_sample_budget")
-    require(equal(times[0], begin) and equal(times[-1], end), "incomplete_trace_coverage")
-    roundoff = 32 * sys.float_info.epsilon * max(1., abs(begin), abs(end))
-    require(gap > 2 * roundoff, "insufficient_probe_timestamp_resolution")
-    require(all(b > a and not after(b, a + gap) for a, b in zip(times, times[1:])), "sample_gap_or_duplicate")
+    require_primary_trace_clock(spec, observation["sample_count"], times)
 
     def at(time: float) -> list[float]:
         index = bisect.bisect_left(times, time)
