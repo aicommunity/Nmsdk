@@ -95,6 +95,10 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
+        from .candidate_recovery import project_recovery_configuration
+        # Validate the policy envelope, but execute/hash the original record.
+        # Effective support still requires the native strict codec/readback.
+        project_recovery_configuration(config)
         from .native_model_spec import validate_model_spec
         validate_model_spec(config['model'])
         require(type(config) is dict and type(config["model"]) is dict and
