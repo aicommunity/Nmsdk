@@ -37,6 +37,12 @@ C-trim: V2 SyncCapacitanceTrim>0 по-прежнему не поддержива
 режимы и границы — [сверка каталога](PropertySourceDrift.ru.md) и
 [NativePostTuneController](NativePostTuneController.ru.md).
 
+Сверка06.11: запрет legacy `SyncCapacitanceTrim>0` сохраняется также в
+проверяемом кандидате12d. Он не означает отсутствия отдельного explicit
+C-search schema4 в этой ветке; этот поиск ещё не включён в принятый develop.
+Не переносить значения SyncCapTrimGain/MinTau в новую декларацию без явного
+отображения: [точные версии и владельцы](ControllerCapabilities.ru.md).
+
 ## Пять parent overrides обоих классов
 
 | Свойство | Default/единицы | Фактическая область применения |
