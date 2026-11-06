@@ -126,5 +126,111 @@
       "DIAGNOSTIC-EVALUATE Classic-threshold-low-advance32"
     ],
     "state": "native_diagnostic_evaluation_running"
+  },
+  "following_native64_and_render_observation": {
+    "observed_utc": "2026-11-06T22:51:14.496691+00:00",
+    "analysis_sha256": "426986a7ab732b7405d8f68452fd9724867734a135f9f10dbc37cbb86557449a",
+    "validity": "valid",
+    "trials": 64,
+    "completed_training_models": 0,
+    "render_owner": {
+      "pid": 1327104,
+      "start_ticks": "308008963",
+      "arguments": [
+        "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+        "-m",
+        "Scripts.StructTrain.TimeLearner",
+        "stock-recovery-evaluation",
+        "report",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-frozen-normal-a1/study",
+        "--output",
+        "/media/user/Data/TimeLearnerRefactor/ReportsCache/stock-fair-frozen-normal-a1"
+      ]
+    },
+    "render_identity_matches": true,
+    "whole_worker_closed": false,
+    "primary_publication_complete": false,
+    "rows": [
+      {
+        "name": "Classic-threshold-low-retry32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0
+        }
+      },
+      {
+        "name": "Classic-threshold-low-advance32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0
+        }
+      },
+      {
+        "name": "Classic-threshold-training100-retry32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7
+        }
+      },
+      {
+        "name": "Classic-threshold-training100-advance32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7
+        }
+      },
+      {
+        "name": "Branch-threshold-low-retry32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0
+        }
+      },
+      {
+        "name": "Branch-threshold-low-advance32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 1,
+          "FP": 7,
+          "FN": 0,
+          "TN": 0
+        }
+      },
+      {
+        "name": "Branch-threshold-training100-retry32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7
+        }
+      },
+      {
+        "name": "Branch-threshold-training100-advance32",
+        "diagnostic_only": true,
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7
+        }
+      }
+    ]
   }
 }

@@ -58,9 +58,11 @@ Branch5→58 и31→60. Это не полный search box и не улучше
 [Сравнительный отчёт](FairDomainStockScientificReport-2026-11-07.ru.md).
 
 [Оценка восьми новых моделей](FairDomainStockEvaluationJobs.json) уже выполняется:
-пять role/job checks прошли, native diagnostic evaluation началась после
-проверенного closure Train. На момент наблюдения полного64-trial результата
-ещё нет; render всех160 trial/soma pairs следует за оценкой. Условия — исходный
+пять role/job checks прошли, все64 native diagnostic пробы завершены с valid
+наблюдениями. При inherited0.0117 вновь TP1/FP7/FN0/TN0, при100 —
+TP0/FP0/FN1/TN7. Эти серверные числа предварительны до закрытой публикации
+primary; render всех160 trial/soma pairs ещё выполняется, его PID/start ticks
+подтверждены. Обученных моделей с сертификатом по-прежнему0. Условия — исходный
 NSPNeuronGen без дополнительной LTMembrane, без C-trim/PostTune/калибровки.
 Baseline ответы не подставляются вместо результатов новой серии.
 
