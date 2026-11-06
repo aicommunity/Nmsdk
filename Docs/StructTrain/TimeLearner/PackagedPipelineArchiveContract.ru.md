@@ -45,3 +45,10 @@ canonicalize_pipeline_archive создаёт отдельный архив, не
 проверяются потоковым verifier. TarInfo для retained файлов всегда regular,
 с фиксированными mode/mtime; повторная упаковка детерминирована. Новые два
 теста и нормализация фактического stock archive ещё ожидают серверной проверки.
+
+
+M40 A2 прошёл9/9 без skips и потоковую проверку реального stock archive:
+3455 regular members,16 run closures/3394 artifact entries,630119342 bytes.
+Сверены347 tool source hashes и сохранены baseline/A1/launch-collision failures.
+[Приёмка](StockRecoveryNativeVerification.json). Другой worker для нового
+packing API ещё не проверен; полная scheduler/publisher fault matrix открыта.

@@ -60,3 +60,21 @@ prepare восьми условий, отказ analyze для ещё не вы�
 и без файла положительного результата. Сверены41 archive members и344 source
 files; нового Train в этой проверке не было.
 [Git evidence и сверка](StockRecoveryCliVerification.json).
+
+
+## Завершённая приёмка native Train
+
+Все8 Train завершены и проверены: InvalidObservation без certificate во всех
+условиях. Обе политики реально исполнены на одном SDK; advance не превратил
+невалидные волны в допустимые измерения. Проверены16 preflight/Train manifests,
+3455 primary files/630119342 uncompressed bytes,344 tool source hashes.
+[Сверка](StockRecoveryNativeVerification.json), evidence da57d3cb10826843790b193e93cdcb380fa7f0fc.
+
+Первый archive producer включил16 glog INFO symlinks, хотя native inventories
+их исключают. Inclusion gateA1 честно отклонил архив. Отдельная каноническая
+копия содержит все retained primary bytes и только regular files; удалены
+лишь owner/hash-bound duplicate aliases. Исходник неизменён. Новый gate9/9
+и baseline reproduction старого schema2 отказа сохранены вместе с failedA1.
+Archive27953456 bytes, SHA256 acda6d294d09ecad24c30f38d38fd5deb478fcd078ffe4a67f3989749f736218.
+Это завершённая инженерная/отрицательная Train серия, не физическая
+невозможность задачи, не успешная классификация и не опровержение августа.
