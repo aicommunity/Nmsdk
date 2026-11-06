@@ -3,7 +3,6 @@
 This explicit backend leaves legacy pidfd attempts unchanged. A successful main
 exit cannot complete an attempt while any descendant remains in its cgroup.
 """
-import math
 import os
 from pathlib import Path
 import shutil
@@ -12,6 +11,7 @@ import time
 from . import contained_process
 from .native_evidence import load, require
 from .process_runner import verify_runtime, _start_identity, _write
+from .process_limits import validate_limits
 from .runtime import loaded_process_files
 
 
@@ -40,10 +40,7 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
             'invalid_process_arguments')
     require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
             for a in arguments), 'capture_directory_is_supervisor_owned')
-    require(type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds) and
-            1 <= maximum_wall_seconds <= 86400, 'invalid_contained_wall_budget')
-    require(type(memory_bytes) is int and 0 < memory_bytes <= 2**63-1 and
-            type(tasks) is int and 0 < tasks <= 2**31-1, 'contained_limits_invalid')
+    validate_limits(memory_bytes, tasks, maximum_wall_seconds, wall_reason='invalid_contained_wall_budget')
     executable = verify_runtime(manifest)
     cwd = Path(working_directory).resolve(strict=True)
     require(cwd.is_dir(), 'invalid_process_working_directory')
