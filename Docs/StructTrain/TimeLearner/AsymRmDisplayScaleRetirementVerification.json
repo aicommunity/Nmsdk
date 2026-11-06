@@ -1,0 +1,175 @@
+{
+  "kind": "timelearner_asymrm_display_scale_retirement_acceptance",
+  "source_root": "76d0c649ea64de181413c18662898de55b3a37d7",
+  "source_bin": "1a8e1d6ba1c5e1018ac22140cbeb4328d1e87f2d",
+  "both_workers": [
+    {
+      "host": "m40",
+      "data_commit": "f38be7dd1cbd9128559d0c0ffaad17ccf8f0e78a",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-asymrm-display-scale-retirement-m40-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 148508,
+          "sha256": "d4f8506f078ba8af9b507d22ddb9b6d34e0b0eef89c8f06202c5f6290f7bbbbc",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 222,
+      "source_hashes_verified": 286,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PARAM_SPAN_COMPARE.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_watch_pattern_legend.py": "D"
+      },
+      "scientific_report_body_preserved_except_two_git_links": true,
+      "restored_path_negative": {
+        "root_commit": "ef8e369859ac5944cb984802ce47f3fc2cd74c80",
+        "bin_commit": "f494ce03134d3c5fabbbfcb6ea659d818c6cb572",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-asymrm-display-scale-retirement-a1",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-asymrm-display-scale-retirement-a1-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "04f8f70ded208e089007108db711c2b401e48d139093076f69afeb07fd2f9f4d",
+              "unit": "timelearner-d4b73d1f-606b-47ef-9cdf-a9a7a254132b.service",
+              "invocation_id": "79ec78b254b74fa9b5dae1b040f73272",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d4b73d1f-606b-47ef-9cdf-a9a7a254132b.service",
+              "initial_main_pid": 1184694,
+              "initial_start_ticks": "306444263",
+              "sha256": "bf243efab4d9e7624fb600ae95cb352a53bb6a8b79e3142961f72e1046e644da"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-d4b73d1f-606b-47ef-9cdf-a9a7a254132b.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "6ab9b9ad-d198-4972-80c8-333ef808dfe3",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    {
+      "host": "elder",
+      "data_commit": "6d54f6fb61326870aec8a9291eb2b939d089cbda",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-asymrm-display-scale-retirement-elder-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 148420,
+          "sha256": "b51fcb32d31cb67b2daaa68428b3119ceae8f5e540e69c183b1759bfab5a52f2",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 222,
+      "source_hashes_verified": 286,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PARAM_SPAN_COMPARE.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_watch_pattern_legend.py": "D"
+      },
+      "scientific_report_body_preserved_except_two_git_links": true,
+      "restored_path_negative": {
+        "root_commit": "8e8969e8e5e7d5e36f6adc2b0a4b6d9beefb88c3",
+        "bin_commit": "d3e1227395d3f4b411a46d4823fd0bc6160c4bd1",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-asymrm-display-scale-retirement-a1",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-asymrm-display-scale-retirement-a1-container",
+          "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "4bbc3085d49a777fc2406090051643b93efacd0b82dfa9455b384cbdae6d210c",
+              "unit": "timelearner-697eb615-c111-4ada-ba3a-cfaa3480c496.service",
+              "invocation_id": "38bc308e49034fbfa045fda6fcf49a77",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-697eb615-c111-4ada-ba3a-cfaa3480c496.service",
+              "initial_main_pid": 177575,
+              "initial_start_ticks": "355902870",
+              "sha256": "28db316bfdc473932dd615e4606eb595f86dfbd51c67a7975abdf40ef5933706"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-697eb615-c111-4ada-ba3a-cfaa3480c496.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "a1494b8f-c0a8-4912-8cef-952bac04bc65",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    }
+  ],
+  "old_scripts_or_native_models_executed": false,
+  "whole_migration_complete": false,
+  "scientific_verdict": null,
+  "accepted_bin_merge_commit": "37ff211fa6ba4999fc51802182915022b239a1eb",
+  "accepted_bin_tree_matches_tested": true,
+  "bin_develop_remote_verified": true
+}
