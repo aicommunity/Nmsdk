@@ -226,7 +226,16 @@ overview и40 непрерывных50ms zooms, без downsampling. Компа�
 в указанном scope: [точная сверка](FairDomainTraversalNormal137Verification.json).
 Подтверждены137/137,834 primary members/761 source hashes, неизменность284 CSV
 и480 JSON прежних native controls;19 startup JSON меняют лишь StepDuration.
-Это не scientific PASS. ASan38 уже собирается в отдельном runtime, следующая
-восьмиусловная stock-серия поставлена после его успеха. Парный анализатор
+Это не scientific PASS. [ASan38 принят](FairDomainTraversalAsan38Verification.json)
+в отдельном runtime; следующая восьмиусловная stock-серияA2 уже проходит Train
+после8 successful cold preflight. Её первый launcherA1 был отклонён до worker
+из-за36h outer cap; у A2 cap24h при неизменных per-Train budgets. Парный анализатор
 принят на M40 [6/6 плюс actual-primary CLI](StockRecoveryCodeComparisonVerification.json);
 реальное сравнение разных code versions и приёмка на Elder ещё не выполнены.
+
+[Ранний preflight worker limits](WorkerLimitPreflightVerification.json) принят
+отдельно:26/26 actual-process/CLI checks на каждом сервере, одинаковые353 source
+hashes и26 IDs; старые import/capacity setup failures сохранены. Это не новая
+проверка классификации и не вся scheduler matrix. Компонентные страницы PulseLib
+теперь различают legacy1 и подключённый native V2; полный documentation/ClDesc
+audit по-прежнему открыт. Все исходные этапы1–12 остаются частичными.
