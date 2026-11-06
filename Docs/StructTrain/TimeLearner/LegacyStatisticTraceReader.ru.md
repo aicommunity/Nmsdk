@@ -1,3 +1,5 @@
+Принято06.11: Elder12/12 и M40 12/12, без failures/errors/skips. Все11 archive members каждого worker и286 source/fixture hashes сверены с исходным root `f096b7a854b95b04c08720dcc8c9610de85f1bf2`. Реальный scalar fixture побайтно совпадает с Bin archive commit; fresh worker closure/released подтверждены. [Независимая сверка](LegacyStatisticTraceReaderVerification.json). [Elder primary](../../../Reports/StructTrain/TimeLearner/s09-statistic-traces-elder-a1/bundle.json), data `cd45e327f20724df8762763b2a4f4ca1f6c6222b`,11 members/17208 xz bytes; [M40 primary](../../../Reports/StructTrain/TimeLearner/s09-statistic-traces-m40-a1/bundle.json), data `f13d638b6b5d3220d43d88d5f95fa0bb981aed61`,11 members/17508 xz bytes. Исторические скрипты и модели не запускались; native_models_executed=0. Старые формулировки ожидания ниже относятся к постановке до приёмки. Этапы3/9 и остальные этапы1–12 ещё частичны.
+
 # Строгий адаптер числовых StatisticLog: постановка проверки
 
 Новый production путь: `python -m Scripts.StructTrain.TimeLearner analyze INPUTS.json --format legacy-statistic-traces --output NEW.json`.
