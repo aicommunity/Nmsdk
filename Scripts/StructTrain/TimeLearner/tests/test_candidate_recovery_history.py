@@ -9,12 +9,12 @@ import unittest
 from ..candidate_recovery import RECOVERY_MODE
 from ..candidate_recovery_history import audit_recovery_history
 from ..native_evidence import EvidenceError, load
-from .test_candidate_recovery_evidence import CandidateRecoveryPrimaryTest
 
 
 class CandidateRecoveryHistoryTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
+        from .test_candidate_recovery_evidence import CandidateRecoveryPrimaryTest
         CandidateRecoveryPrimaryTest.setUpClass()
         cls.cases = CandidateRecoveryPrimaryTest.cases
 
