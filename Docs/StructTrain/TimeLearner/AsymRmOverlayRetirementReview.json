@@ -1,0 +1,125 @@
+{
+  "kind": "timelearner_historical_script_retirement_review",
+  "archive_repository": "Bin",
+  "archive_commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+  "records": [
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+      "action": "retired_historical",
+      "archive_commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+      "last_change_commit": "fb4f97ea978718391d9dd0e0a7c6888b183c7385",
+      "blob_sha1": "f92497632d5a6781ac0d156d9bfa67c8d6b2e30e",
+      "content_sha256": "d570f35962e2880c4e9ef82a1b0837b5db8cead21faae5741c31afcbf66957f2",
+      "bytes": 3436,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py"
+      ],
+      "replacement": null,
+      "reason": "One-off Dspan cold-reset plus repeated scalar DissociationTC/default overrides. New runs declare initial state and native storage profile; equivalent parent defaults do not prove effective child physics.",
+      "original_results": "preserved; retrieval commit is not an attestation of historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py",
+      "action": "retired_historical",
+      "archive_commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+      "last_change_commit": "68fb5e3be4da0585fdb6a16b7798a2cd49bfd3ed",
+      "blob_sha1": "e1e39b75aa4c69192a548494920834757812e908",
+      "content_sha256": "e21db4fa7b3beeb76d86e511c64cfee0e3cb7354ab397a74694049a5719f352d",
+      "bytes": 1994,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py"
+      ],
+      "replacement": null,
+      "reason": "One-off non-reference length raising through Parameters XML. Warm continuation now requires a declared boundary state, full native model import and invalidation; no claim that all valid models need L>1.",
+      "original_results": "preserved; retrieval commit is not an attestation of historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py",
+      "action": "retired_historical",
+      "archive_commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "480c7883aef5e0cc39f60241a063c78810b68dd7",
+      "content_sha256": "4e6015da5e82062117e9fb4564f0600931c39d3e89f3aec7a87d1f90719cf0a5",
+      "bytes": 2027,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py"
+      ],
+      "replacement": null,
+      "reason": "Historical analyzer-link regex patch; imported only by retired inject_analyzer within this batch. Native observations/frozen executor do not require mutating Test XML with this script.",
+      "original_results": "preserved; retrieval commit is not an attestation of historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py",
+      "action": "retired_historical",
+      "archive_commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "9e5842bfa39eef6c9c41a7d90ad6cc11acb12b0b",
+      "content_sha256": "cdc5c95ce854dae0ea574781333e550cb45439e970a8de15a8a7fbe231efd353",
+      "bytes": 3576,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py"
+      ],
+      "replacement": null,
+      "reason": "Historical whole Train Model copy into Test plus fixed analyzer links. Existing historical reports warn this can preserve transient Dataset connectors/fire_all; new Train-Test requires complete exported native graph.",
+      "original_results": "preserved; retrieval commit is not an attestation of historical execution source"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py",
+      "action": "retired_historical",
+      "archive_commit": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "f8d64f994100722038aeba6cfd1500be42d4429f",
+      "content_sha256": "9ed392118fb463f39c0b1bbceb846654530bc348f15808f7aeda00f1ef6e647a",
+      "bytes": 2240,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py"
+      ],
+      "replacement": null,
+      "reason": "Historical fixed list XML parameter overlay omits general graph/storage/links and edits training controls. Full native export/import replaces the intended transport; no equivalence with this partial overlay is asserted.",
+      "original_results": "preserved; retrieval commit is not an attestation of historical execution source"
+    }
+  ],
+  "full_source_review": true,
+  "only_remaining_code_dependency": "inject_analyzer imports patch_test_model; both removed in this batch",
+  "tracked_code_consumers_outside_batch_found": false,
+  "consumer_search_scope": [
+    "root Scripts/Apps/Tests",
+    "Bin tracked Python/shell/CMake",
+    "PulseLib tracked Python/shell/CMake"
+  ],
+  "remaining_asymrm_python_files": 24,
+  "runtime_equivalence_attested": false,
+  "models_configs_primary_changed": false,
+  "server_acceptance_pending": true,
+  "whole_migration_complete": false
+}
