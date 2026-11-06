@@ -1,3 +1,5 @@
+Принято06.11: **новый shared SDK2e/Pulse12d normal304 —304/304** в одном настоящем C++ процессе. Все3936 members,304 исходных ID/статуса,720 compiled и282 tool source hashes проверены; closure/released подтверждены. [Доказательства и ограничения](SharedSdkNormal304Acceptance.ru.md). ASan этой SDK и научная матрица остаются отдельными; этапы1–12 частичны.
+
 Принято06.11: fresh ASan owner8/readers128 завершены; проверены195 archive members,8 actual native identities/исходных JUnit,original model bindings и323 reader source hashes. [Доказательства и границы](JointOwnerReplayASanAcceptance.ru.md). Новый SDK2e normal304/focused ASan8 завершены по серверным records, но ещё не прошли отдельную приёмку; ASan lifecycle133 kernel-live. Все этапы1–12 частичны.
 
 06.11: на Elder освобождены1788657942 logical bytes подтверждённых expanded duplicates/compile objects; оригинальный опубликованный архив сохранён, текущий runtime неизменён. [Exact file audit и восстановление](ElderVerifiedCacheRelease.ru.md). На SDK2e/Pulse12d запущен полный normal304, без нового build и без изменения математических допусков; PASS пока неизвестен. Все этапы1–12 частичны.
