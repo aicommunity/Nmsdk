@@ -13,9 +13,11 @@ from .stopped_evidence import audit_stopped_state
 
 def audit_negative_final_pass(package, summary, packets, traces):
     require(type(summary) is dict and summary.get("kind") == "native_training_state_summary"
-            and type(summary.get("schema_version")) is int and summary["schema_version"] in (1, 2),
+            and type(summary.get("schema_version")) is int and summary["schema_version"] in (1, 2, 3, 4, 5),
             "unknown_negative_final_summary_schema")
     source_audit = audit_stopped_state(package, summary, packets, traces)
+    from .candidate_recovery import project_recovery_summary
+    summary, _ = project_recovery_summary(summary)
     require(package["training_outcome"] == "budget_exhausted"
             and package["reason"] == "maximum_sweeps_exhausted"
             and package["reference_complete"] is True,

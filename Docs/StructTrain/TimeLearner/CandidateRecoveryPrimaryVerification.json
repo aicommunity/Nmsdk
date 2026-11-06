@@ -1,0 +1,105 @@
+{
+  "kind": "candidate_recovery_primary_verification",
+  "schema_version": 1,
+  "source_commit": "0cf65d58f4880c283431c7652e8d63b08107bf55",
+  "servers": [
+    {
+      "host": "10.245.1.17",
+      "evidence_commit": "af10708979f48cd2bc7e95654bc94e73fbba72a9",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-17",
+      "tests_run": 48,
+      "source_files_verified": 14,
+      "input_files_verified_against_original_archive": 1212,
+      "input_bytes": 217652118,
+      "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+      "evidence_changes_only_own_five_report_paths": true,
+      "artifacts": [
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-17/receipt.json",
+          "original_server_name": "receipt.json",
+          "bytes": 11202,
+          "sha256": "8f03d4a9915896fbbca24243edbcd9cf53fd676fb2f831625fd5478142d7c6c6"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-17/tests.json",
+          "original_server_name": "tests.json",
+          "bytes": 7507,
+          "sha256": "3edf320f90710161077b25f80b1d489826faad32975e8385f60778d28a48865c"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-17/input-manifest.json",
+          "original_server_name": "input-manifest.json",
+          "bytes": 247447,
+          "sha256": "147cc11503e937c4c5c7f14e0d25c6d3bfb744c78ce1c36c8b164807010230e4"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-17/unittest.log",
+          "original_server_name": "unittest.log",
+          "bytes": 10365,
+          "sha256": "79232766f389d2d2e8c37aab824c7a693989ad173e9693241cb90e4ed38d6c2d"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-17/runner.txt",
+          "original_server_name": "runner.py",
+          "bytes": 994,
+          "sha256": "1d8644f3246d7122cd311bf071fa2cbb6165c187bbb47e76b0194bf947f8ec35"
+        }
+      ]
+    },
+    {
+      "host": "10.245.1.11",
+      "evidence_commit": "3d5a5ef8b6f29c2e13edd2e8f514bafe9a3d79ab",
+      "prefix": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-11",
+      "tests_run": 48,
+      "source_files_verified": 14,
+      "input_files_verified_against_original_archive": 620,
+      "input_bytes": 102118568,
+      "python": "3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0]",
+      "evidence_changes_only_own_five_report_paths": true,
+      "artifacts": [
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-11/receipt.json",
+          "original_server_name": "receipt.json",
+          "bytes": 11199,
+          "sha256": "d2a3ba4c9f072b33c2e550180002f5c44663ad3ac02c1d517784e6afb1954984"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-11/tests.json",
+          "original_server_name": "tests.json",
+          "bytes": 7507,
+          "sha256": "3edf320f90710161077b25f80b1d489826faad32975e8385f60778d28a48865c"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-11/input-manifest.json",
+          "original_server_name": "input-manifest.json",
+          "bytes": 126298,
+          "sha256": "4050415bd5f0763da89fd57265afa6e4252ffb3a2cc9ce23ac2bda89d30629e8"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-11/unittest.log",
+          "original_server_name": "unittest.log",
+          "bytes": 7527,
+          "sha256": "e8fb1f20c4634e78e71018a3a598d060c6586f98148d316486f01daec2a32e51"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-candidate-recovery-primary-a1-11/runner.txt",
+          "original_server_name": "runner.py",
+          "bytes": 994,
+          "sha256": "1d8644f3246d7122cd311bf071fa2cbb6165c187bbb47e76b0194bf947f8ec35"
+        }
+      ]
+    }
+  ],
+  "original_primary": {
+    "evidence_commit": "e5fa71d745119af0d818059f497dd226f4c7c25d",
+    "path": "Reports/StructTrain/TimeLearner/s07-stock-threshold-pair-normal-a3/primary.tar.xz",
+    "bytes": 12829920,
+    "sha256": "6d0820f92c13bf4e91f5b86b7e26da5957dfba991730fca3c64a31858bc71c1c",
+    "members_verified": 1370
+  },
+  "local_numerical_tests_run": false,
+  "scope": "observation classification of original four stock failures; not controller transition/budget/certificate proof",
+  "new_model_runs": false,
+  "full_schema5_primary_audit_supported": false,
+  "scientific_verdict": null
+}
