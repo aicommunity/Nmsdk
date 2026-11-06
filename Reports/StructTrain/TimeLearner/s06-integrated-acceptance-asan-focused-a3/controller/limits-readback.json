@@ -1,0 +1,30 @@
+{
+  "unit": "timelearner-fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac.service",
+  "invocation_id": "5f27a9e9261b44a5883aced1f45ca960",
+  "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac.service",
+  "memory.max": "45097156608",
+  "memory.swap.max": "0",
+  "pids.max": "128",
+  "cgroup.events": "populated 1\nfrozen 0\n",
+  "initial_members": [
+    579229
+  ],
+  "systemd": {
+    "Type": "exec",
+    "Restart": "no",
+    "RemainAfterExit": "yes",
+    "MainPID": "579229",
+    "Result": "success",
+    "ExecMainCode": "0",
+    "ExecMainStatus": "0",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac.service",
+    "MemoryMax": "45097156608",
+    "TasksMax": "128",
+    "KillMode": "control-group",
+    "Description": "TimeLearner contained attempt fc0cf40f-b4dd-4c8a-8e46-2b19fb89aaac",
+    "LoadState": "loaded",
+    "ActiveState": "active",
+    "SubState": "running",
+    "InvocationID": "5f27a9e9261b44a5883aced1f45ca960"
+  }
+}

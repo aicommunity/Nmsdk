@@ -1,0 +1,57 @@
+{
+  "archive_members_checked": 19,
+  "archive_bytes": 64880,
+  "archive_sha256": "7dec8d89f23db8a4ea23c9966a7c937ed3f0b808117695b368c740c8d00418d8",
+  "fresh_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-integrated-acceptance-asan-build-a2",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "dd012b2d60d8f565b3c19124bba922ea2e04c3a8a0bb9406d0f2e4a83ec13222",
+        "unit": "timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+        "invocation_id": "90c5dc8c87a0470aa88d21c57a20a601",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+        "initial_main_pid": 565550,
+        "initial_start_ticks": "299254564",
+        "sha256": "636d968de561e7ea053bd632bc9abae9bcd17131a4271c193afcf3294cb01270"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "9bc3febd-1356-4e72-8595-e766446a5b62",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "cases": [],
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
