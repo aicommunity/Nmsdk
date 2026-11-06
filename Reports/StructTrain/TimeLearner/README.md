@@ -16,6 +16,12 @@ including the four original stock failure conditions and damaged JSON/CSV.
 This classifies invalid observations; controller transitions and full schema5
 training audit remain unaccepted. No models were recalculated by these gates.
 
+The separate M40 Pulse70f SDK passed116/116 C++ controls. All284 default physical
+CSV match the earlier25-case gate byte for byte;18 startup JSON differ only in
+StepDuration telemetry. [Verified primary and exact source](../../../Docs/StructTrain/TimeLearner/CandidateRecoveryNativeVerification.json).
+The later typed decision journal Pulsea34 is outside this PASS; no stock opt-in
+cold training or independent classification is established here.
+
 Feature stock training failure diagnostics (04.11; full native feature acceptance pending):
 [contracts, observed boundaries and limits](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md),
 [Elder twelve data checks](s07-stock-failure-boundary-elder-a1/README.ru.md),

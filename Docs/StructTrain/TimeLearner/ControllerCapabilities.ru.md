@@ -10,6 +10,11 @@
 [Сверка20 исходных blobs и ancestry](ControllerCapabilityReconciliation.json)
 выполнена по неизменяемым Git commits, без новых численных запусков.
 
+Последующий feature Pulse70f / rootef215 прошёл116 C++ controls на M40,
+включая opt-in recovery и общий invalid budget; это отдельный срез, не
+ASan-приёмка SDK12d и не merge в develop. Новый typed recovery journal
+Pulsea34 ещё не проверен. [Exact source, primary и пределы](UnassignedBurstCandidateRecovery.ru.md).
+
 | Возможность | Принятый develop | Проверяемый кандидат / остающиеся ограничения |
 |---|---|---|
 | Совместимость старых конфигов | ControllerVersion по умолчанию1; V2 включается явно | Полная legacy/V2 A/B и multirate матрица открыты |
@@ -22,6 +27,8 @@
 | Legacy SyncCapacitanceTrim>0 в native Train | Отклоняется | Отклоняется и в кандидате. Новый C-search включается декларацией, а не этим legacy-полем |
 | PostTune/calibration | Есть typed фазовые планы, native import/transactions и адресные runtime controls | Public legacy flags не заменяют план; все режимы/прерывания/независимая оценка остаются открытыми |
 | Общее управление lifecycle | Общий native service уже есть; часть hooks ещё дублируется | NativeLearnerLifecycle и NativeRecognitionControl выделены в кандидате; полная совместимость не следует из механического выделения |
+| Общий invalid budget попытки | Полная приёмка всей области остаётся открытой | Fix Pulse2c7 и последующий70f проверяют общий бюджет search/final sweeps; подготовленный journala34 не входит в PASS116 |
+| Неидентифицируемая пачка | Старые конфигурации сохраняют retry/явную остановку | Opt-in AdvanceUnassignedBurst в feature70f прошёл controller/classifier/codec controls; stock cold Train и сквозной audit ещё не приняты |
 
 ## Версии схем — разные оси
 
@@ -30,6 +37,9 @@
   schema2 задаёт повторные измерения N0.
 - В кандидате cold schema3 добавляет capacitance_history, schema4 —
   capacitance_search. Эти поля не являются legacy SyncCapTrim* properties.
+- Feature cold/summary schema5 объявляет recovery поверх base1..4. Это
+  незавершённый формат кандидата; не ControllerVersion5. Full Python audit5
+  пока явно отклоняется, а старые1..4 означают прежний retry.
 - ModelSpec1/2 — версии физической декларации; одинаковая модель в двух
   сериализациях не является двумя независимыми экспериментами.
 - Completed/stopped package schema2 с capacitance_state — перенос C₀;
