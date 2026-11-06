@@ -85,3 +85,17 @@ input1 штатно включает следующий input0. Проверка
 jobs/cold graphs, полные primary audits обеих серий, разные code/runtime
 identities. Новый analyzer отдельно проверяется на старой native серии;
 такая self-comparison не считается повтором обучения или проверкой fair stock.
+
+[Следующая stock-серия](FairDomainStockComparisonJobs.json) поставлена в очередь
+после normal137 и ASan38. Она повторяет восемь условий предыдущего SDK84/Pulse416
+на SDK36/Pulse8f. До первого native вызова сохраняются все declarations и
+проверяется их совпадение с baseline, затем восемь cold preflight подтверждают
+effective model. Новый Train ещё не начат. C-trim/PostTune/calibration выключены,
+дополнительная LTMembrane отсутствует; цель и исходные допуски сохранены.
+
+Git-сверка показала: между Pulse416 и Pulse8f в Core изменены только два
+BoundedTraining файла; Console sources и корневой CMake между SDK84 и SDK36
+совпадают. Runtime/source receipts и итоговая проверка физики всё равно
+обязательны. Архивирование новой серии использует только regular payloads;
+owner/hash-bound duplicate glog aliases перечисляются отдельно и не удаляются
+из исходного server tree. Неизвестные ссылки не отбрасываются молча.
