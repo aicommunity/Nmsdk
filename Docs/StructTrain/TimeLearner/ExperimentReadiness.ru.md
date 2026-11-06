@@ -66,12 +66,14 @@ stall доказательством физической невозможнос
 
 ## Последовательность научных проверок
 
-1. Воспроизведение сохранённого августовского состояния в исходных порядке,
-   ITI, пороге, reset policy, timestep и физике. Неизвестную provenance помечать
-   явно; не достраивать certificate задним числом.
-2. Cold retrain в тех же условиях и legacy/V2 сравнение с исходной математической
-   целью. До интерпретации различий проверить effective graph/params и реальные
-   волны; совпадение L само по себе не доказывает эквивалентность алгоритмов.
+1. [Saved-state replay августа](HistoricalAugustReplay.ru.md) уже воспроизвёл
+   три исходных результата4/8,5/8,6/8 с первоначальным протоколом. Его receipt
+   не является V2 certificate или независимой оценкой.
+2. [Настоящий historical cold Train→Test](HistoricalAugustColdStart.ru.md)
+   также уже воспроизвёл эти результаты с полным переносом нейрона. Осталось
+   legacy/V2 A/B при согласованных исходных условиях. До интерпретации различий
+   проверить effective graph/params и реальные волны; совпадение L само по себе
+   не доказывает эквивалентность алгоритмов.
 3. Frozen evaluation с target в каждой позиции, изменениями порядка и ITI.
    Reset-per-trial и continuous stream проверять отдельно, с полными окнами,
    неизменным learned-state hash и фиксированным порогом.
@@ -98,3 +100,19 @@ Silent threshold не делает молчаливые target успешной 
 [исходного плана](RefactoringPlan.ru.md) требуют всей обязательной матрицы.
 Предыдущая накопительная постановка29.10 с поздними дополнениями сохранена в
 [Git](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).
+
+
+## Текущее применение допуска — 07.11.2026
+
+[Fair-domain stock Train](FairDomainStockTrainVerification.json) допущен и
+полностью исполнен:8 preflight/8 Train,16 run manifests; все Train остановлены
+InvalidObservation. Его полная диагностическая оценка64 проб уже получена на
+сервере, но весь worker с render ещё работает; закрытая первичная публикация
+оценки и visual QA ожидаются. Это не повод повторять Train или менять текущий
+runtime. [Статус задания](FairDomainStockEvaluationJobs.json).
+
+Обе серии используют исходную физику без дополнительной LTMembrane.
+[Сравнение](FairDomainStockScientificReport-2026-11-07.ru.md) подтверждает расширение
+покрытия Advance и неизменность728 Retry CSV, но не улучшение классификации.
+Готовность конкретного отрицательного результата и общая рекомендация V2
+остаются разными решениями.

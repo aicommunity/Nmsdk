@@ -1,21 +1,22 @@
 # Возможности TimeLearner: принятый код и проверяемый кандидат
 
-Сверка06.11.2026. Этот документ отделяет реализованный и объединённый код от
+Сверка07.11.2026. Этот документ отделяет реализованный и объединённый код от
 последующего кандидата; он не является полной приёмкой режимов или научным отчётом.
 
 Принятый PulseLib develop: `0ec9193e6620ae2439329eece5ecd6d6f167c70a`.
-Проверяемый PulseLib: `12d8c8a41c998ae1516496f716a0ae0f3d312b3e`, compiled root
-`2e0618110a9abb48b94f6edc6b63c51f829ec810`. Последний не становится исходником
-принятого develop лишь потому, что его результаты опубликованы в корневом Git.
-[Сверка20 исходных blobs и ancestry](ControllerCapabilityReconciliation.json)
-выполнена по неизменяемым Git commits, без новых численных запусков.
+Проверяемый compiled SDK: Pulse `8f057e69f489ab3eddd5e7f889404b779a85e93e`,
+root `36f598524b08ef9a5b72e26e50ef1f34501331e2`; normal137/137 и адресный
+ASan38/38 приняты на M40. Docs-only Pulse `2f6b57253bd7ae380a19320ef3835a2701cb4d30`
+имеет тот же Core. Это ещё не общий merge C++ в develop.
+[Normal137](FairDomainTraversalNormal137Verification.json),
+[ASan38](FairDomainTraversalAsan38Verification.json).
 
-Последующий feature Pulse70f / rootef215 прошёл116 C++ controls на M40,
-включая opt-in recovery и общий invalid budget; это отдельный срез, не
-ASan-приёмка SDK12d и не merge в develop. Typed recovery journal/serializer
-Pulse416 прошёл отдельный gate118; Python history-validator прошёл54/54 на каждом
-сервере на hypothetical metadata, без native execution proof.
-[Exact source, primary и пределы](UnassignedBurstCandidateRecovery.ru.md).
+SDK2e061/Pulse12d и [сверка20 blobs](ControllerCapabilityReconciliation.json)
+относятся к предыдущему срезу; их source hashes не подставляются новому SDK.
+Native recovery уже исполнен в двух полных восьмиусловных stock Train сериях,
+с production primary/CSV audits и публикацией данных. Все попытки остановлены
+InvalidObservation, без certificate; native execution proof не означает
+доказанной сходимости. [Последнее парное сравнение](FairDomainStockTrainVerification.json).
 
 | Возможность | Принятый develop | Проверяемый кандидат / остающиеся ограничения |
 |---|---|---|
@@ -29,8 +30,8 @@ Pulse416 прошёл отдельный gate118; Python history-validator пр�
 | Legacy SyncCapacitanceTrim>0 в native Train | Отклоняется | Отклоняется и в кандидате. Новый C-search включается декларацией, а не этим legacy-полем |
 | PostTune/calibration | Есть typed фазовые планы, native import/transactions и адресные runtime controls | Public legacy flags не заменяют план; все режимы/прерывания/независимая оценка остаются открытыми |
 | Общее управление lifecycle | Общий native service уже есть; часть hooks ещё дублируется | NativeLearnerLifecycle и NativeRecognitionControl выделены в кандидате; полная совместимость не следует из механического выделения |
-| Общий invalid budget попытки | Полная приёмка всей области остаётся открытой | Fix Pulse2c7/70f проверяет общий бюджет search/final sweeps; journal/serializer416 прошёл отдельный118, без stock cold opt-in proof |
-| Неидентифицируемая пачка | Старые конфигурации сохраняют retry/явную остановку | Opt-in AdvanceUnassignedBurst в feature70f прошёл controller/classifier/codec controls; stock cold Train и сквозной audit ещё не приняты |
+| Общий invalid budget попытки | Полная приёмка всей области остаётся открытой | Адресные проверки общего бюджета, journal/serializer и actual stock invalid-budget stops опубликованы; весь scope и все final/reset сочетания ещё не закрыты |
+| Неидентифицируемая пачка | Старые конфигурации сохраняют retry/явную остановку | Opt-in AdvanceUnassignedBurst и fair traversal прошли адресные controls и actual stock Train/audit; все8 новых Train invalid, без сертификата, вся физическая матрица открыта |
 
 ## Версии схем — разные оси
 
@@ -39,10 +40,12 @@ Pulse416 прошёл отдельный gate118; Python history-validator пр�
   schema2 задаёт повторные измерения N0.
 - В кандидате cold schema3 добавляет capacitance_history, schema4 —
   capacitance_search. Эти поля не являются legacy SyncCapTrim* properties.
-- Feature cold/summary schema5 объявляет recovery поверх base1..4. Это
-  незавершённый формат кандидата; не ControllerVersion5. Full Python audit5
-  прошёл60/60 Python checks на обоих серверах на18-cell корпусе; native cold
-  schema5 Train/pipeline ещё не принят. Старые1..4 означают прежний retry.
+- Feature cold/summary schema5 объявляет recovery поверх base1..4; это не
+  ControllerVersion5. Reader mutation checks60/60 на обоих серверах используют
+ 18-cell historical корпус; отдельно исполнены реальные schema5 native Train
+  и их полные audits в stock сериях. Ни то, ни другое не доказывает все
+  сочетания C-search/PostTune/reset или завершение обучения. Старые1..4
+  сохраняют прежний retry.
 - ModelSpec1/2 — версии физической декларации; одинаковая модель в двух
   сериализациях не является двумя независимыми экспериментами.
 - Completed/stopped package schema2 с capacitance_state — перенос C₀;
@@ -66,9 +69,11 @@ boundary summaries являются ancestors принятого PulseLib; пе�
 [normal8+133](IntegratedSdkResults-2026-11-05.ru.md),
 [ASan build/focused8](SharedSdkASanFocusedAcceptance.ru.md) и
 [сквозной инженерный coordinator](IntegratedCoordinatorAcceptance.ru.md).
-ASan lifecycle133 ещё не принят. Старый isolated ASan304 относится к SDK802,
-поэтому не объявляется ASan PASS нового SDK2e. Последующие merge сохраняют
-реальные исходные manifests; merge SHA не подставляется задним числом.
+[ASan lifecycle133 принят](IntegratedSharedAsan133Verification.json) для
+SDK2e/Pulse12d. Он не подтверждает последующие изменения recovery/fair traversal;
+для нового SDK отдельно принят ASan38 в указанной области, без leak check.
+Старый isolated ASan304 относится к SDK802. Реальные исходные manifests
+сохраняются; merge SHA не подставляется задним числом.
 
 Новые эксперименты должны сохранять точный root/child/runtime и действующего
 владельца каждого параметра. Успех загрузки UProperty не доказывает влияние
