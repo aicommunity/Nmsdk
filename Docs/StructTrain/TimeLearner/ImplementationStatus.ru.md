@@ -27,9 +27,11 @@ cold configuration, learned package, observation и scorer не взаимоза
 выполнил133 cases:132 passed,1 assertion failure при записи файла в отсутствующий
 output/native. [Исправленный production gate](NativeGateOutputDirectory.ru.md)
 проверен тем же оригинальным тестом на прежних normal/ASan binaries и принят.
-A4 остановилась до C++ из-за неполного tool snapshot; свежая A5 использует
-согласованный tool bb288399bdb66aaadb3db7ec5f01c76cd9bd57ae и выполняется отдельно.
-До полного verdict, первичных данных и closure это не ASan133 PASS кандидата.
+A4 остановилась до C++ из-за неполного tool snapshot. A5 завершилась: серверный
+verdict сообщает133/133 passed за28553.79 с; свежая проверка подтвердила отсутствие
+процесса/группы и released lease. Проверка и Git-публикация её полного primary
+архива ещё ожидаются. A5 относится только к root2e061/Pulse12d, не к последующим
+изменениям invalid budget и candidate recovery; отсутствие утечек не проверялось.
 
 Отдельно подготовлен [общий бюджет невалидных проб](AttemptInvalidObservationBudget.ru.md):
 baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют идентичные новые
@@ -57,11 +59,11 @@ stopped-state controls, добавлены отдельные completed controls
 Отдельный [WIP candidate recovery](UnassignedBurstCandidateRecovery.ru.md)
 добавляет opt-in продвижение bounded search после строго классифицированного
 unassigned burst и C++ cold/summary envelope5. Default retry и final all-input
-gate сохраняются. Новые C++ tests ещё не выполнялись. Python declaration,
+gate сохраняются. C++ проверки выполнены в отдельных срезах, указанных ниже. Python declaration,
 preflight и ConditionSpec binding сначала проверены33/33 tests на каждом сервере.
 Следующий primary-classifier срез прошёл48/48 на обоих серверах, включая
 исходные stock invalid JSON/CSV и их повреждения; он не подтверждает переходы
-поиска. Полный primary audit5 ещё явно отклоняется. M40 SDK Pulse70f прошёл116/116
+поиска. Полный primary audit5 добавлен последующим срезом rootf516. M40 SDK Pulse70f прошёл116/116
 C++ controls; проверены834 primary members,748 source hashes и process/lease
 closure. Все284 CSV прежнего default25 subset побайтно совпали;18 startup JSON
 отличаются только StepDuration telemetry. Последующий C++ typed journal Pulsea34
@@ -70,8 +72,14 @@ serializer;834 members и752 source hashes сверены. Это не stock col
 Standalone history auditor прошёл54/54
 Python mutation checks на каждом сервере с гипотетическими decision metadata
 поверх реальных старых проб; это не native execution proof.
-Новый full schema5 reader rootf516 подготовлен для18-cell API проверки
-base1..4; эта проверка ещё не запускалась. Срез не принят в develop;
+Новый full schema5 reader rootf516 проверен на18-cell корпусе base1..4:
+60/60 Python tests без пропусков на обоих серверах (source5a6). Сверены20
+source files каждого запуска, идентичные manifests и312 файлов корпуса
+(77806588 bytes) с исходными Git-архивами2100 members. Это hypothetical
+schema5 envelopes поверх старых реальных данных, не новый native Train.
+Первый Elder запуск исчерпал120с; количество выполненных тестов неизвестно,
+частичный stdout утрачен. Отдельный запуск с бюджетом900с завершился за142.07с.
+Подробности: [API verification](CandidateRecoveryApiVerification.json). Срез не принят в develop;
 научного результата он не добавляет.
 
 ## Приёмка по исходным этапам

@@ -2,9 +2,9 @@
 
 06.11.2026. Это незавершённый кандидат этапа7. Он не принят в develop и не
 включён в эксперименты. Срез Pulse70f прошёл116 C++ controls на M40;
-typed recovery journal/serializer Pulse416 прошёл118. Python/CLI audit и допуск schema5 ещё
-не завершены: новый режим нельзя выдавать за поддержанный сквозной pipeline.
-Текущие задания используют неизменяемые более ранние SDK и не подтверждают код.
+typed recovery journal/serializer Pulse416 прошёл118. Python public readers
+прошли60/60 checks на обоих серверах. Native cold schema5 Train и сквозной
+production pipeline ещё не проверены: новый режим не является принятым.
 
 ## Основание
 
@@ -30,7 +30,8 @@ whole burst или автоматически повышать minimum amplitude
 В PulseLib `4689a3c8652cfdd411a5734d86c1914b9b949f69` отдельно выделяет
 CheckedProbeContext из CheckedMeasurement. Старый измеритель вызывает его
 с прежним требованием valid/complete; порядок оставшихся проверок сохранён.
-Это механическое выделение, runtime-эквивалентность ещё требует проверки.
+Это механическое выделение проверено последующими gate116/118 и default25
+сравнением в их ограниченной области; полная legacy/V2 эквивалентность открыта.
 
 Следующий commit `1edf9ac90d299594bcdc7552b8743aa50e560105` добавляет
 CanAdvanceUnassignedBurstCandidate. Он только классифицирует отказ и не
@@ -112,7 +113,8 @@ Root `7e06a570236563a332722ff0357017dfcfd90401` добавляет
 Повторного запуска tests для публикации не было. Текст runner хранится как
 `runner.txt`, без действующего launcher в Reports.
 
-**Полный Python audit schema5 подготовлен, но ещё не принят.** Root
+**Python public readers schema5 проверены на адресном корпусе; сквозной
+native pipeline ещё не принят.** Root
 `f51603eb6221ee7d4b519acfbab8dc91c9c500a6` подключает history validator к
 `audit_training_summary` и `audit_stopped_state`, сохраняет исходный JSON/hash
 и использует прежнюю base1..4 проверку измеренных остатков. Для summary5
@@ -127,8 +129,9 @@ Root `7e06a570236563a332722ff0357017dfcfd90401` добавляет
 stopped base2. Это проверки формата на исходных данных и hypothetical schema5
 metadata, без новой Train. Corpus312 files/77806588 bytes восстановлен на обоих
 серверах с проверкой всех834 и1266 исходных archive members. Его данные не
-дублируются новым primary archive в Git. Проверки API ещё не выполнены;
-stock cold opt-in и полный production pipeline остаются непроверенными.
+дублируются новым primary archive в Git. Проверки API прошли60/60 без пропусков
+на обоих серверах (source5a6); stock cold opt-in и полный production pipeline
+остаются непроверенными. Детали и Elder timeout: CandidateRecoveryApiVerification.json.
 
 ### Проверка первичной невалидной пробы: два сервера
 
@@ -280,3 +283,15 @@ Classic/Branch, N=1/2/4/6, valid/missing/extra-wave и повреждения к
 входов конкретной модели. Исчерпание конечного поиска или бюджета не означает
 PhysicalInfeasible. Августовские4/8–6/8 и прежние отрицательные измерения
 сохраняются; этот подэтап не является новой научной серией.
+
+
+### Проверка public readers — 06.11.2026
+
+Source5a6dd77dedca3595087570fa4153cff3c78309fe прошёл60/60 Python checks
+без пропусков на M40 и Elder. Корпус:18 случаев base1..4,312 файлов;
+хеши сверены с исходными архивами в Git. Schema5 envelopes в этой проверке
+добавлены к копиям исторических данных: native выполнение нового recovery
+и полный pipeline этим не подтверждаются. Elder A1 завершился по120с timeout
+с неизвестным числом выполненных тестов и потерянным stdout; A2 с неизменными
+тестами и бюджетом900с прошёл за142.07с.
+[Подтверждение и точные commits](CandidateRecoveryApiVerification.json).

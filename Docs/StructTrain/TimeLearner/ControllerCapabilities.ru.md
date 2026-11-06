@@ -41,7 +41,8 @@ Pulse416 прошёл отдельный gate118; Python history-validator пр�
   capacitance_search. Эти поля не являются legacy SyncCapTrim* properties.
 - Feature cold/summary schema5 объявляет recovery поверх base1..4. Это
   незавершённый формат кандидата; не ControllerVersion5. Full Python audit5
-  подготовлен, его18-cell API приёмка ещё не выполнена; старые1..4 означают прежний retry.
+  прошёл60/60 Python checks на обоих серверах на18-cell корпусе; native cold
+  schema5 Train/pipeline ещё не принят. Старые1..4 означают прежний retry.
 - ModelSpec1/2 — версии физической декларации; одинаковая модель в двух
   сериализациях не является двумя независимыми экспериментами.
 - Completed/stopped package schema2 с capacitance_state — перенос C₀;
@@ -74,3 +75,15 @@ ASan lifecycle133 ещё не принят. Старый isolated ASan304 отн
 фактора: например, legacy IterationGap не задаёт V2 протокол, а SynapseClassName
 не заменяет выбор реальных storage-образов. Полный production factor preflight
 остаётся открытым. Все исходные этапы1–12 частичны;8/8 не условие рефакторинга.
+
+
+### Проверка public readers — 06.11.2026
+
+Source5a6dd77dedca3595087570fa4153cff3c78309fe прошёл60/60 Python checks
+без пропусков на M40 и Elder. Корпус:18 случаев base1..4,312 файлов;
+хеши сверены с исходными архивами в Git. Schema5 envelopes в этой проверке
+добавлены к копиям исторических данных: native выполнение нового recovery
+и полный pipeline этим не подтверждаются. Elder A1 завершился по120с timeout
+с неизвестным числом выполненных тестов и потерянным stdout; A2 с неизменными
+тестами и бюджетом900с прошёл за142.07с.
+[Подтверждение и точные commits](CandidateRecoveryApiVerification.json).
