@@ -52,7 +52,7 @@
       "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-normal-a1",
       "wrapper_pid": 925483,
       "wrapper_start_ticks": "303706437",
-      "observed_state": "build_live",
+      "observed_state": "completed_4_and_74_passed",
       "worker_source_sha256": "8181909a6bdd0b57c29db6aaa7ef84395a7a6e2b34357ebeefe6bc477fb08fb0",
       "wrapper_source_sha256": "414b09a47c1723158bfe8e6931f33acffd6956bef8200d0570fab1f61031f5b6",
       "expected_assertion_status": "passed",
@@ -60,11 +60,13 @@
       "dependency": "s07-attempt-invalid-budget-baseline-normal-a1: fresh closed cgroup + released lease + expected_baseline_failures_observed=true",
       "worker_and_wrapper_sha256_verified_on_server": true,
       "worker_memory_max_bytes": 4294967296,
-      "previous_observed_state": "waiting_for_live_baseline_cgroup",
+      "previous_observed_state": "build_live",
       "worker_pid": 936125,
       "worker_start_ticks": "303819046",
       "build_pid": 936718,
-      "build_start_ticks": "303819449"
+      "build_start_ticks": "303819449",
+      "evidence_commit": "98e6fbc979ec3cd8ab75f0bff28b0cbbcde34fcc",
+      "fresh_closure_and_release_checked": true
     },
     {
       "label": "attempt-invalid-budget-fixed-native-a1",
@@ -75,7 +77,7 @@
       "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-native-a1",
       "wrapper_pid": 930960,
       "wrapper_start_ticks": "303761703",
-      "observed_state": "waiting_for_live_fixed_normal_queue",
+      "observed_state": "completed_21_passed_2_failed",
       "worker_source_sha256": "e7fb3fb5545d887bb245c71c1893134ed0ceba10bfeefff066c42d6ab9b17e1e",
       "wrapper_source_sha256": "2cf3863e92f010f82d8fa146123d2b2115505679471dfb2804b350274ff71e33",
       "worker_and_wrapper_sha256_verified_on_server": true,
@@ -108,7 +110,57 @@
       ],
       "expected_assertion_status": "passed",
       "compilation_disabled": true,
-      "ASan_executed": false
+      "ASan_executed": false,
+      "previous_observed_state": "waiting_for_live_fixed_normal_queue",
+      "evidence_commit": "8447d4f937623c56ed7292fd4c6c18aeb9fbbadb",
+      "fresh_closure_and_release_checked": true
+    },
+    {
+      "label": "attempt-invalid-budget-baseline-native-a1",
+      "source_root_commit": "7cc21bdd9e0904f8f5052466651e0682f2f1f1a3",
+      "PulseLib_commit": "12d8c8a41c998ae1516496f716a0ae0f3d312b3e",
+      "wrapper_pid": 959182,
+      "wrapper_start_ticks": "303996063",
+      "worker_pid": 959202,
+      "worker_start_ticks": "303996078",
+      "native_pid": 959308,
+      "native_start_ticks": "303996187",
+      "observed_state": "completed_21_passed_same_2_failed",
+      "worker_source_sha256": "944391dac04d3ff5cef903848e79a3283967f39b69d785aec70a81f4bf4b0da7",
+      "wrapper_source_sha256": "b18d6b7dd629a4d70a2e33e24b34b9611a46ee4d31256cb3ca8b38c369f00b48",
+      "worker_and_wrapper_sha256_verified_on_server": true,
+      "worker_memory_max_bytes": 8589934592,
+      "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-baseline-native-a1",
+      "expected_test_ids": [
+        "NativeTrainingService/ClassicN0SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/BranchN0SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/ClassicN1SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/BranchN1SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/ExactAutoCompletionResetWarmRestartAndRetarget",
+        "NativeTrainingService/ClassicExternalStopPreservesCensoredEvidence",
+        "NativeTrainingService/BranchExternalStopPreservesCensoredEvidence",
+        "NativeTrainingService/ModelTimeBudgetCannotManufactureConvergence",
+        "NativeLearnedState/ClassicN0",
+        "NativeLearnedState/BranchN0",
+        "NativeLearnedState/ClassicN1",
+        "NativeLearnedState/BranchN1",
+        "NativeLearnedState/ExactCertificateWithExplicitPointTwoTolerance",
+        "NativeLearnedState/ClassicConfiguredN1",
+        "NativeLearnedState/BranchConfiguredN0",
+        "NativeStoppedState/ClassicFinal",
+        "NativeStoppedState/BranchFinal",
+        "NativeStoppedState/ClassicInvalidProbe",
+        "NativeStoppedState/BranchInvalidProbe",
+        "NativeStoppedState/ClassicN0BudgetSearch",
+        "NativeStoppedState/BranchN0BudgetSearch",
+        "NativeStoppedState/ClassicN0RepeatedHalfCandidate",
+        "NativeStoppedState/BranchN0RepeatedHalfCandidate"
+      ],
+      "compilation_disabled": true,
+      "scientific_verdict": null,
+      "previous_observed_state": "original_controller_23_case_AB_kernel_live",
+      "evidence_commit": "a3710b95842d57813032b9bcd8ab3cc80075f92a",
+      "fresh_closure_and_release_checked": true
     }
   ],
   "build_worker_memory_max_bytes": 4294967296,
@@ -134,5 +186,9 @@
       ],
       "issue": "Inherited waiting-state wording mentions earlier SDK802 prerequisite; actual dependency.job_id and kernel cgroup binding identify the current predecessor. Do not use display wording as dependency identity."
     }
-  ]
+  ],
+  "scoped_controller_regressions_passed": true,
+  "full_native23_passed": false,
+  "original_fixed_native_AB_complete": true,
+  "AB_receipt": "AttemptInvalidObservationBudgetNativeABVerification.json"
 }
