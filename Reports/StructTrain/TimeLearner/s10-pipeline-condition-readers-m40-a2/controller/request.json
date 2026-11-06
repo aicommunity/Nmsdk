@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_contained_request",
+  "schema_version": 1,
+  "attempt_id": "07205ca7-5cd4-4718-90ae-a758b40e7b28",
+  "unit": "timelearner-07205ca7-5cd4-4718-90ae-a758b40e7b28.service",
+  "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+  "uid": 1000,
+  "controller": {
+    "pid": 749601,
+    "start_ticks": "301526243"
+  },
+  "executable": "/usr/bin/python3.12",
+  "arguments": [
+    "/tmp/timelearner-pipeline-condition-readers-a2-worker.py"
+  ],
+  "working_directory": "/tmp",
+  "runtime_fingerprint": "81d89a59ba7dce14fe4d5d0323a122c4ce8f0e3b5c392053be4af64233b425c8",
+  "memory_bytes": 536870912,
+  "tasks": 64,
+  "maximum_wall_seconds": 600,
+  "environment": {},
+  "sha256": "2c5c5fb9155b4093e5ec55f1e954d69acd9a693cceb0358721dabff7e2936e01"
+}
