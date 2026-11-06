@@ -1,0 +1,73 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "6ab9b9ad-d198-4972-80c8-333ef808dfe3",
+  "job_id": "s09-asymrm-display-scale-retirement-a1",
+  "recorded_unix": 1793989249.0943441,
+  "administrator": {
+    "pid": 1184684,
+    "start_ticks": "306444251",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1184694,
+    "start_ticks": "306444263",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-asymrm-display-scale-retirement-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "04f8f70ded208e089007108db711c2b401e48d139093076f69afeb07fd2f9f4d",
+      "unit": "timelearner-d4b73d1f-606b-47ef-9cdf-a9a7a254132b.service",
+      "invocation_id": "79ec78b254b74fa9b5dae1b040f73272",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d4b73d1f-606b-47ef-9cdf-a9a7a254132b.service",
+      "initial_main_pid": 1184694,
+      "initial_start_ticks": "306444263",
+      "sha256": "bf243efab4d9e7624fb600ae95cb352a53bb6a8b79e3142961f72e1046e644da"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-d4b73d1f-606b-47ef-9cdf-a9a7a254132b.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Metadata migration worker and archive descendants freshly closed; old tools and native models not executed",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-asymrm-display-scale-retirement-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-asymrm-display-scale-retirement-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-asymrm-display-scale-retirement-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-asymrm-display-scale-retirement-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
