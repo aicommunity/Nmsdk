@@ -1,0 +1,157 @@
+{
+  "kind": "controller_capability_source_reconciliation",
+  "schema_version": 1,
+  "date": "2026-11-06",
+  "accepted_root_before_document_change": "fe12540083d62d2e2b1deb015f9bbaa90e2dec89",
+  "accepted_child_gitlink": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+  "snapshots": {
+    "accepted": {
+      "pulse_commit": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+      "files": [
+        {
+          "path": "Core/TimeLearner/BoundedTraining.h",
+          "git_blob": "174ce706497f23de22daaddc59b8a2a51a59f3fb",
+          "sha256": "81e92bb28a6dd818410af81bfc2b4a6a3f84bd1de3def11e2b9ec9b805c45016",
+          "bytes": 7785
+        },
+        {
+          "path": "Core/TimeLearner/BoundedTraining.cpp",
+          "git_blob": "297355235e589cae37e668269ff360e4782c7c8f",
+          "sha256": "aef436fff4aba6be667a49fe40130f1e828931ead1d1365caf11a1f9f1baefcf",
+          "bytes": 38737
+        },
+        {
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "git_blob": "f55c54010b9bca51009da8acea2102f589c80792",
+          "sha256": "02f7ca22ba8022e6df2187e2cd6d5b3a39230300d9f53fb5c82e2b7077d5cfa8",
+          "bytes": 20506
+        },
+        {
+          "path": "Core/TimeLearner/ConfiguredNativeOwner.h",
+          "git_blob": "30cc3c53b0a9e5b3eac33f19a7e8408b96f2608e",
+          "sha256": "25c57045c60e72fb07e2f726af4fd64fb4b3f5b035f9dc3366e039c8972f5924",
+          "bytes": 1871
+        },
+        {
+          "path": "Core/TimeLearner/NativeTrainingService.h",
+          "git_blob": "6a8327c6ac793272303c04235f72510373d6b69b",
+          "sha256": "6782e62b409f54d5391e6eda50881575dc15a4b7c4eeea6c9d2f775cdaf120bf",
+          "bytes": 6571
+        },
+        {
+          "path": "Core/TimeLearner/NativeLearnedState.cpp",
+          "git_blob": "310255db7937b6a5aae31edf7ab0e3b485344e46",
+          "sha256": "0532b8917c347685610f8daabc61274739cd70e3019b94359f970123fb082d17",
+          "bytes": 23013
+        },
+        {
+          "path": "Core/TimeLearner/ModelArchive.cpp",
+          "git_blob": "f52c4085e14dd0e4c1f0af8a87826a32af1519bb",
+          "sha256": "25df82987c9520d2512a9b545e6a004979f517bbb7cbca5f9c4c408f7f86be6f",
+          "bytes": 40513
+        },
+        {
+          "path": "Core/TimeLearner/NativeCapacitanceOwner.h",
+          "git_blob": "cfbd3f632a04627aedd4d19f1a96e614c4a504a6",
+          "sha256": "ccf87e3ebb7e39520973faa1553b7fb5ac1f94eed31c6866c28bae5e316c33d9",
+          "bytes": 1756
+        },
+        {
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "git_blob": "7fccf1264b833b3df5a45a7c8670192c22c0fe62",
+          "sha256": "15153fe57fe2ff1559ad9c520f11c6b287c07c099d5e9dc0d27f3da1dbbf4797",
+          "bytes": 287467
+        },
+        {
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "git_blob": "098fbbca24f6d44e500362d375832e4899152aa7",
+          "sha256": "e6d176739376115111bbe5e969f193f2cf0cab4b1c34b07326e6b32473ba6ef0",
+          "bytes": 332620
+        }
+      ],
+      "legacy_sync_capacitance_trim_rejected": true,
+      "cold_configuration_schema4": false,
+      "n0_repeat_default": 1,
+      "loaded_marker_requires_explicit_import": true
+    },
+    "candidate": {
+      "pulse_commit": "12d8c8a41c998ae1516496f716a0ae0f3d312b3e",
+      "files": [
+        {
+          "path": "Core/TimeLearner/BoundedTraining.h",
+          "git_blob": "ab08c68ebbc2e44ff2da2ac3d4f75586fb902dcc",
+          "sha256": "be698ca8c96acbde7a5f08704070e148bf435fbd551ddf16cfbcdc768c83b921",
+          "bytes": 10364
+        },
+        {
+          "path": "Core/TimeLearner/BoundedTraining.cpp",
+          "git_blob": "511fc9173d23d9c00a6b794e31b1c008641865eb",
+          "sha256": "2b90a0b4551dce46d19caeed0f8406e5f0adbc03ec33976b1fd3d9d33f361028",
+          "bytes": 51938
+        },
+        {
+          "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+          "git_blob": "d7b8acb013d2c9448a3bde8804c34a792455ca36",
+          "sha256": "5fb9cf07e2eefb78202d073ccb406938b0caaf36ae4c214d945e4782ab0c56c8",
+          "bytes": 23678
+        },
+        {
+          "path": "Core/TimeLearner/ConfiguredNativeOwner.h",
+          "git_blob": "30cc3c53b0a9e5b3eac33f19a7e8408b96f2608e",
+          "sha256": "25c57045c60e72fb07e2f726af4fd64fb4b3f5b035f9dc3366e039c8972f5924",
+          "bytes": 1871
+        },
+        {
+          "path": "Core/TimeLearner/NativeTrainingService.h",
+          "git_blob": "15185b2d5ef4544728afb7f98ed1a47bc413d512",
+          "sha256": "e7985696f8b00619313be2c16c361368662a7955d249f4c5986ba60e359917b2",
+          "bytes": 8876
+        },
+        {
+          "path": "Core/TimeLearner/NativeLearnedState.cpp",
+          "git_blob": "17d660cb69a36688f95a83e8188153dafb8504e3",
+          "sha256": "30f4218f37958173f9f58f9c95d69a945f0be0549668c85b0ef4a46d635a6023",
+          "bytes": 29515
+        },
+        {
+          "path": "Core/TimeLearner/ModelArchive.cpp",
+          "git_blob": "f52c4085e14dd0e4c1f0af8a87826a32af1519bb",
+          "sha256": "25df82987c9520d2512a9b545e6a004979f517bbb7cbca5f9c4c408f7f86be6f",
+          "bytes": 40513
+        },
+        {
+          "path": "Core/TimeLearner/NativeCapacitanceOwner.h",
+          "git_blob": "cfbd3f632a04627aedd4d19f1a96e614c4a504a6",
+          "sha256": "ccf87e3ebb7e39520973faa1553b7fb5ac1f94eed31c6866c28bae5e316c33d9",
+          "bytes": 1756
+        },
+        {
+          "path": "Core/NNeuronTimeLearner.cpp",
+          "git_blob": "f9bc7208d44f35f0e10bfc72fc6ad4bed2343912",
+          "sha256": "b46642391bcbac063c1f53bc144f93520b86a00af3793470f56f85cb9f88365d",
+          "bytes": 285836
+        },
+        {
+          "path": "Core/NNeuronTimeLearnerBranch.cpp",
+          "git_blob": "64d2f7f28c3301f317a7684a82972a07a717f18a",
+          "sha256": "7f2fc0d41ace2ba8e2d7462f2e265de1e8fdbc9815d30c4b29232407302ad4d1",
+          "bytes": 331019
+        }
+      ],
+      "legacy_sync_capacitance_trim_rejected": true,
+      "cold_configuration_schema4": true,
+      "n0_repeat_default": 1,
+      "loaded_marker_requires_explicit_import": true
+    }
+  },
+  "accepted_ancestors_checked": [
+    "b2b670a22f849e0d0d2b6789b8242308521b1c37",
+    "086b04fb43bb57506558bfb6beba6250f61a6ce2"
+  ],
+  "training_capacitance_header_only_in_candidate": true,
+  "new_runtime_execution": false,
+  "new_runtime_equivalence_attested": false,
+  "all_property_modes_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

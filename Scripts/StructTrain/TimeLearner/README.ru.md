@@ -1,5 +1,7 @@
 # Поддерживаемый пакет TimeLearner
 
+Перед выбором протокола: [принятые возможности и отдельно проверяемый кандидат](../../../Docs/StructTrain/TimeLearner/ControllerCapabilities.ru.md).
+
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 
 `stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
