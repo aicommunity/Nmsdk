@@ -133,8 +133,9 @@ Compiled receipts сохраняют прежний Bin37ff: действующ�
 Неудачные проверки остаются evidence своего среза, не переписываются под PASS.
 
 
-Отдельная [проверка legacy ISI-template analyzer](IsiTemplateValidation.ru.md)
-готовит runtime-воспроизведение source-review рисков NaN, поиска источника
-Branch и превращения отсутствующего template в успешный foil. Baseline SDK
-собирается; исправление ещё не заявляется. MatchMode1 не является объяснением
+[Legacy ISI-template analyzer](IsiTemplateValidationNormalVerification.json):
+корректный baseline воспроизвёл4 regression failures при5 passing controls;
+исправленный Pulsefe382a0 прошёл12/12 на M40. Baseline/fixed primary и source
+hashes опубликованы. ASan, второй сервер и весь analyzer scope ещё открыты.
+MatchMode1 сравнивает вход с шаблоном, не доказывает ответ нейрона и не объясняет
 InvalidObservation native V2 stock Train.
