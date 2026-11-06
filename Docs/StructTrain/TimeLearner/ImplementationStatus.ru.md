@@ -60,8 +60,14 @@ Train, все InvalidObservation; тот же worker жив по PID/start ticks
 без дополнительной LTMembrane, C-trim/PostTune/калибровка выключены. Старые
 baseline ответы не подставляются вместо результатов новой серии.
 
-Августовские визуально подтверждённые4/8–6/8 сохраняются для своего протокола;
-порядок и увеличенный ITI тогда не проверялись. Ранее N2 LT проверка дала5/8
+Августовские4/8,5/8,6/8 подтверждены не только исходным визуальным наблюдением:
+выполнены [saved-state replay](HistoricalAugustReplay.ru.md) и
+[настоящее cold Train → frozen Test](HistoricalAugustColdStart.ru.md)
+на историческом SDK и в исходном протоколе. TP1, FP4/3/2, FN0, TN3/4/5;
+это legacy_done_uncertified, не V2 Exact. Временные данные cold Test совпали
+с replay, граф передан полностью. [Повторная проверка трёх primary архивов](HistoricalCompletedEvidenceRevalidation-20261107.json)
+подтвердила все104+83+236 members и неизменность относительно опубликованных
+commits. Порядок, увеличенный ITI и legacy/V2 A/B этим не проверены. Ранее N2 LT проверка дала5/8
 (TP1/FP3/FN0/TN4), NonSeparable на проверенной сетке. Узкие engineering случаи
 TP2/FP0 повторяли один target/foil после same-matrix калибровки и не являются
 независимой восьмипаттерновой оценкой.
@@ -83,7 +89,7 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
 |9. Скрипты|Корневой пакет и CLI работают; migration222:220 retired+2 moved; семь исторических XML patchers приняты без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
-|11. Научные проверки|Сохранены августовские4/8–6/8; есть N2 engineering controls и читаемые временные отчёты|Stock cold retrain и legacy/V2, target в каждой позиции, order/ITI/reset и independent frozen matrix|
+|11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Завершение оценки нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
 
 ## Путь к итоговым выводам
@@ -92,8 +98,10 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
    оценить фактические модели и построить все trial/soma графики.
 2. Разобрать invalid peak/burst assignment и проверить исправление реальными
    штатными пробами. Budget exhaustion не доказывает PhysicalInfeasible.
-3. Выполнить saved-state replay августа и cold retrain исходного протокола;
-   отдельно проверить перестановки, ITI, continuous/reset-per-trial.
+3. Использовать уже принятые августовские replay и cold Train→Test как
+   историческую опору; выполнить legacy/V2 A/B и отдельные проверки
+   перестановок, ITI, continuous/reset-per-trial. Повторять исходные запуски
+   только при новой проверяемой причине, не из-за неточной сводки.
 4. Проверить frozen модели и пороги, target во всех позициях, полные окна;
    независимость данных заявлять только при реально независимой оценке.
 5. Завершить исходную матрицу режимов/физики, миграцию, документацию и общую
