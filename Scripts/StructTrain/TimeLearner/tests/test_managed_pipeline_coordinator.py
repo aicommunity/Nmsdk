@@ -17,6 +17,7 @@ from ..resource_reservations import Reservations
 
 
 class ManagedPipelineCoordinatorTest(unittest.TestCase):
+    pipeline_schema_version = 1
     @classmethod
     def setUpClass(cls):
         fixtures.ManagedNativePipelineTest.setUpClass.__func__(cls)
@@ -61,7 +62,7 @@ class ManagedPipelineCoordinatorTest(unittest.TestCase):
             phases.append({"operation": "calibrate", "job": calibration, "wall_seconds": 600})
         phases.append({"operation": "evaluate", "job": evaluation, "wall_seconds": 600})
         declaration = root/"pipeline-job.json"
-        declaration.write_text(json.dumps({"kind": "timelearner_managed_pipeline_job", "schema_version": 1,
+        declaration.write_text(json.dumps({"kind": "timelearner_managed_pipeline_job", "schema_version": self.pipeline_schema_version,
             "attempt_id": name+"/managed-coordinator", "phases": phases}, allow_nan=False))
         registry = Reservations(root/"leases.sqlite3", managed_units=True,
             capacity={"slots": 1, "memory_bytes": 6*1024**3, "disk_bytes": 1024**3, "tasks": 512})
@@ -90,6 +91,14 @@ class ManagedPipelineCoordinatorTest(unittest.TestCase):
         paused = invoke("run", stop_after="train", expected=0 if positive else 2)
         self.assertFalse(paused["pipeline_complete"])
         self.assertIsNone(paused["pending_phase"])
+        if self.pipeline_schema_version == 2:
+            from ..pipeline_condition import audit_binding
+            binding = load(output/"condition-binding.json")
+            fingerprint = audit_binding(binding, load(declaration), load(output/"runtime.json"))
+            self.assertEqual(paused["condition_fingerprint"], fingerprint)
+            self.assertTrue(paused["condition_declaration_bound"])
+            self.assertFalse(paused["condition_identity_attested"])
+            binding_hash = hashlib.sha256((output/"condition-binding.json").read_bytes()).hexdigest()
         if not positive:
             self.assertEqual(paused["halted_phase"], "train")
             self.assertFalse((output/"phases/export").exists())
@@ -103,6 +112,9 @@ class ManagedPipelineCoordinatorTest(unittest.TestCase):
             self.assertTrue(complete["pipeline_complete"])
             self.assertEqual(complete["completed_phases"], [p["operation"] for p in phases])
             self.assertEqual(hashlib.sha256(package.read_bytes()).hexdigest(), before)
+            if self.pipeline_schema_version == 2:
+                self.assertEqual(complete["condition_fingerprint"], fingerprint)
+                self.assertEqual(hashlib.sha256((output/"condition-binding.json").read_bytes()).hexdigest(), binding_hash)
             self.assertEqual({k: complete["evaluation"]["pooled_counts"][k] for k in ("TP", "FP", "FN", "TN")},
                              {"TP": 2, "FP": 0, "FN": 0, "TN": 2})
         units = {}
