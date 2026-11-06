@@ -10,6 +10,13 @@
 [Сверка20 исходных blobs и ancestry](ControllerCapabilityReconciliation.json)
 выполнена по неизменяемым Git commits, без новых численных запусков.
 
+Последующий feature Pulse70f / rootef215 прошёл116 C++ controls на M40,
+включая opt-in recovery и общий invalid budget; это отдельный срез, не
+ASan-приёмка SDK12d и не merge в develop. Typed recovery journal/serializer
+Pulse416 прошёл отдельный gate118; Python history-validator прошёл54/54 на каждом
+сервере на hypothetical metadata, без native execution proof.
+[Exact source, primary и пределы](UnassignedBurstCandidateRecovery.ru.md).
+
 | Возможность | Принятый develop | Проверяемый кандидат / остающиеся ограничения |
 |---|---|---|
 | Совместимость старых конфигов | ControllerVersion по умолчанию1; V2 включается явно | Полная legacy/V2 A/B и multirate матрица открыты |
@@ -22,6 +29,8 @@
 | Legacy SyncCapacitanceTrim>0 в native Train | Отклоняется | Отклоняется и в кандидате. Новый C-search включается декларацией, а не этим legacy-полем |
 | PostTune/calibration | Есть typed фазовые планы, native import/transactions и адресные runtime controls | Public legacy flags не заменяют план; все режимы/прерывания/независимая оценка остаются открытыми |
 | Общее управление lifecycle | Общий native service уже есть; часть hooks ещё дублируется | NativeLearnerLifecycle и NativeRecognitionControl выделены в кандидате; полная совместимость не следует из механического выделения |
+| Общий invalid budget попытки | Полная приёмка всей области остаётся открытой | Fix Pulse2c7/70f проверяет общий бюджет search/final sweeps; journal/serializer416 прошёл отдельный118, без stock cold opt-in proof |
+| Неидентифицируемая пачка | Старые конфигурации сохраняют retry/явную остановку | Opt-in AdvanceUnassignedBurst в feature70f прошёл controller/classifier/codec controls; stock cold Train и сквозной audit ещё не приняты |
 
 ## Версии схем — разные оси
 
@@ -30,6 +39,10 @@
   schema2 задаёт повторные измерения N0.
 - В кандидате cold schema3 добавляет capacitance_history, schema4 —
   capacitance_search. Эти поля не являются legacy SyncCapTrim* properties.
+- Feature cold/summary schema5 объявляет recovery поверх base1..4. Это
+  незавершённый формат кандидата; не ControllerVersion5. Full Python audit5
+  прошёл60/60 Python checks на обоих серверах на18-cell корпусе; native cold
+  schema5 Train/pipeline ещё не принят. Старые1..4 означают прежний retry.
 - ModelSpec1/2 — версии физической декларации; одинаковая модель в двух
   сериализациях не является двумя независимыми экспериментами.
 - Completed/stopped package schema2 с capacitance_state — перенос C₀;
@@ -62,3 +75,15 @@ ASan lifecycle133 ещё не принят. Старый isolated ASan304 отн
 фактора: например, legacy IterationGap не задаёт V2 протокол, а SynapseClassName
 не заменяет выбор реальных storage-образов. Полный production factor preflight
 остаётся открытым. Все исходные этапы1–12 частичны;8/8 не условие рефакторинга.
+
+
+### Проверка public readers — 06.11.2026
+
+Source5a6dd77dedca3595087570fa4153cff3c78309fe прошёл60/60 Python checks
+без пропусков на M40 и Elder. Корпус:18 случаев base1..4,312 файлов;
+хеши сверены с исходными архивами в Git. Schema5 envelopes в этой проверке
+добавлены к копиям исторических данных: native выполнение нового recovery
+и полный pipeline этим не подтверждаются. Elder A1 завершился по120с timeout
+с неизвестным числом выполненных тестов и потерянным stdout; A2 с неизменными
+тестами и бюджетом900с прошёл за142.07с.
+[Подтверждение и точные commits](CandidateRecoveryApiVerification.json).
