@@ -70,3 +70,5 @@ Fingerprint правильно остался прежним. Контроль �
 не ослаблен. Временный worker дополнительно отказал при JSON сериализации
 объекта failed TestCase; следующий использует production validation.run_suite.
 Оба A1 outputs сохраняются целиком; моделей эти проверки не запускали.
+
+Поддерживаемый полный native gate: `tests.test_managed_pipeline_condition_coordinator.ManagedPipelineConditionCoordinatorTest` наследует восемь реальных coordinator controls с schema2: Classic/Branch × ModelSpec1/2 positive cold/boundary/calibration/frozen и четыре N0/N1 stopped controls. Базовый schema1 suite сохраняет прежнее поведение. Для schema2 отдельно проверяются сохранённый binding, fingerprint при paused Train и его неизменность после continuation; stopped Train по-прежнему не экспортируется и не запускает Test. Runtime/шаблоны/owner reservations задаются теми же обязательными fixture bindings. Этот новый полный8 gate пока не выполнен; текущий адресный pilot выполняет только Classic-v1 и Branch-v2 на прежнем SDK2e.
