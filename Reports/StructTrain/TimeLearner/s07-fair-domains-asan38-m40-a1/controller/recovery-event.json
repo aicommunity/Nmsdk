@@ -1,0 +1,113 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "03bbe0d5-1ab5-4468-a420-31d3b4091f05",
+  "job_id": "s07-fair-domains-asan38-a1",
+  "recorded_unix": 1794000197.4969056,
+  "administrator": {
+    "pid": 1258939,
+    "start_ticks": "307258672",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1274374,
+    "start_ticks": "307377300",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fair-domains-asan38-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a3c1516efe33f32a3d8da43d6a4d54aa6a4e43106692ee269003b91ea28b17f2",
+      "unit": "timelearner-8d863ec5-2775-400e-963a-c98d3c25a145.service",
+      "invocation_id": "695a713697c14dd3b4607d96aeca3355",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d863ec5-2775-400e-963a-c98d3c25a145.service",
+      "initial_main_pid": 1274374,
+      "initial_start_ticks": "307377300",
+      "sha256": "34510388fae7ddda5111fd2addd21782adb0df21e17054a2782b4d2d3c5fd918"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-8d863ec5-2775-400e-963a-c98d3c25a145.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Fair-domain worker and all compiler/test/archive descendants closed; original38-case JUnit defines the result, no scientific verdict inferred.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fair-domains-asan38-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-domains-asan38-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
