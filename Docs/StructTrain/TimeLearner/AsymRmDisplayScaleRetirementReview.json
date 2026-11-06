@@ -1,0 +1,53 @@
+{
+  "kind": "timelearner_historical_script_retirement_review",
+  "archive_repository": "Bin",
+  "archive_commit": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+  "records": [
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+      "action": "retired_historical",
+      "archive_commit": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "929b0e4210ea5f823a4b83fe08e3e42a1d704bdc",
+      "content_sha256": "c5e652a2b03e3bb45bb87ad9ec8b60fd32f7e5c7607ad1f5b4f56c38115051be",
+      "bytes": 8442,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/3d5fc67c33f7be9ad3806db0b00b9d92588049bb/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "3d5fc67c33f7be9ad3806db0b00b9d92588049bb:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_pattern_scale.py"
+      ],
+      "replacement": null,
+      "reason": "Historical canonical4/32-entry ISI regex rewrite also scales SyncTolerance and peak/agreement margins with floor0.0005. New jobs declare actual input vectors and explicit unchanged tolerances; no automatic tolerance scaling is retained or claimed equivalent.",
+      "original_results": "Configurations, XML interfaces, measurements, models and historical observations retained. Retrieval is not proof of original execution source."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_watch_pattern_legend.py",
+      "action": "retired_historical",
+      "archive_commit": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "16f40a3e957c7b94cf2d93ec3b4010b400b83277",
+      "content_sha256": "f81c55f0eaa14b6aae5829a2685eb99f953581808d495f228f21d67af53bd667",
+      "bytes": 8217,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/3d5fc67c33f7be9ad3806db0b00b9d92588049bb/Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_watch_pattern_legend.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "3d5fc67c33f7be9ad3806db0b00b9d92588049bb:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_watch_pattern_legend.py"
+      ],
+      "replacement": null,
+      "reason": "Historical UWatch Interface.xml regex patcher hardcodes four ISI series and clips0/1 stimulus/spike overlays on a dendrite axis. Current reports use actual native soma traces/input timestamps with separate overview/zoom views; old visual layout is not a runtime feature.",
+      "original_results": "Configurations, XML interfaces, measurements, models and historical observations retained. Retrieval is not proof of original execution source."
+    }
+  ],
+  "source_review_scope": "Both complete source files inspected; historical responsibilities and public CLI side effects reviewed; no code executed.",
+  "active_call_review": "Current root production package has no callers; committed Bin source/config search has no incoming literal calls/imports. Other AsymRm helpers remain pending as a dependency cohort.",
+  "runtime_equivalence_attested": false,
+  "whole_migration_complete": false
+}
