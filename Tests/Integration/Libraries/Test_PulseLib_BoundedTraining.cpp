@@ -1,5 +1,8 @@
 #include <gtest/gtest.h>
 #include "TimeLearner/BoundedTraining.h"
+#include "TimeLearner/ProbeEvidenceJson.h"
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -246,6 +249,11 @@ void RecoveryCase(ProbeRouting routing,Normalization normalization,bool failAnch
             EXPECT_EQ(event.statusAfter,session.Status());EXPECT_EQ(event.reasonAfter,session.Reason());
             EXPECT_EQ(event.disposition,rejections>allowance?CandidateRecoveryDisposition::InvalidBudgetStop:
                 CandidateRecoveryDisposition::CursorAdvanced);
+            const auto encoded=EncodeCandidateRecoveryEvidence(event);
+            EXPECT_EQ(encoded["invalid_after"],QJsonValue(double(rejections)));
+            EXPECT_EQ(encoded["trial_id"],QJsonValue(QString::fromStdString(action->trialId)));
+            EXPECT_EQ(encoded["phase"],QJsonValue(failAnchor?"anchor":"input"));
+            EXPECT_EQ(QJsonDocument::fromJson(QJsonDocument(encoded).toJson()).object(),encoded);
         }
         if(policy==InvalidMeasurementRecovery::RetrySameCandidate)EXPECT_TRUE(session.Recoveries().empty());
     }
@@ -1225,5 +1233,36 @@ TEST(BoundedTrainingCapacitance, DomainCannotDiscardFullCapacitanceContext)
     });
     EXPECT_TRUE(domainRequested);EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_FALSE(session.Certificate());
     EXPECT_NE(session.Reason().find("resistance_domain_context_mismatch"),std::string::npos);
+}
+
+TEST(CandidateRecoveryEvidenceCodec,FullOwnedCapacitanceSurvivesJson)
+{
+    CandidateRecoveryEvidence e;e.actionSerial=7;e.inputIndex=e.candidateInputIndex=0;e.sweep=1;e.modelEpoch=3;
+    e.runId="run/session/1";e.trialId=e.runId+"/search/7";e.baseModelRevision=std::string(64,'a');
+    e.effectiveModelRevision=std::string(64,'b');e.invalidBefore=1;e.invalidAfter=2;
+    e.fullParameters={{2,3,10.},{1,1,20.}};e.capacitance=OwnedCapacitance();
+    e.disposition=CandidateRecoveryDisposition::CursorAdvanced;e.statusAfter=TrainingStatus::Searching;
+    const auto encoded=EncodeCandidateRecoveryEvidence(e);
+    EXPECT_EQ(encoded.size(),18);EXPECT_EQ(encoded["disposition"],QJsonValue("cursor_advanced"));
+    EXPECT_EQ(encoded["full_parameters"].toArray().size(),2);
+    EXPECT_EQ(encoded["full_parameters"].toArray()[0].toObject()["synapses"],QJsonValue(3));
+    const auto capacitance=encoded["capacitance"].toObject();EXPECT_EQ(capacitance["membrane_scales"].toObject().size(),4);
+    EXPECT_EQ(capacitance["membrane_scales"].toObject()["Dendrite1_2"],QJsonValue(1.1));
+    EXPECT_EQ(QJsonDocument::fromJson(QJsonDocument(encoded).toJson()).object(),encoded);
+    EXPECT_FALSE(encoded.contains("certificate"));EXPECT_FALSE(encoded.contains("evaluation_verdict"));
+}
+TEST(CandidateRecoveryEvidenceCodec,RejectsUnknownEnumsAndNonfiniteOrInexactNumbers)
+{
+    CandidateRecoveryEvidence e;e.fullParameters={{1,1,10.}};
+    auto bad=e;bad.disposition=static_cast<CandidateRecoveryDisposition>(999);
+    EXPECT_THROW(EncodeCandidateRecoveryEvidence(bad),std::invalid_argument);
+    bad=e;bad.validity=PeakValidity::Valid;EXPECT_THROW(EncodeCandidateRecoveryEvidence(bad),std::invalid_argument);
+    bad=e;bad.statusAfter=static_cast<TrainingStatus>(999);EXPECT_THROW(EncodeCandidateRecoveryEvidence(bad),std::invalid_argument);
+    bad=e;bad.fullParameters[0].resistance=std::numeric_limits<double>::quiet_NaN();
+    EXPECT_THROW(EncodeCandidateRecoveryEvidence(bad),std::invalid_argument);
+    bad=e;bad.capacitance=OwnedCapacitance();bad.capacitance->membraneScales.begin()->second=std::numeric_limits<double>::infinity();
+    EXPECT_THROW(EncodeCandidateRecoveryEvidence(bad),std::invalid_argument);
+    if(sizeof(std::size_t)>=8)
+    {bad=e;bad.invalidAfter=static_cast<std::size_t>(9007199254740992ULL);EXPECT_THROW(EncodeCandidateRecoveryEvidence(bad),std::invalid_argument);}
 }
 }
