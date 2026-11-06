@@ -39,6 +39,9 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     from .native_model_spec import validate_model_spec
     validate_model_spec(package['configuration']['model'])
     repeats = validate_configured_repeat_policy(package["configuration"], summary)
+    from .candidate_recovery import RETRY_MODE, project_recovery_summary
+    _, recovery_mode = project_recovery_summary(summary)
+    require(recovery_mode == RETRY_MODE, "candidate_recovery_primary_audit_not_implemented")
     retained = validate_search_history_availability(summary)
     require(set(packets) == set(traces), "missing_primary_trace")
     if not packets:

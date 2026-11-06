@@ -318,6 +318,8 @@ def validate_search_history_availability(summary: dict[str, Any]) -> bool | None
 
 def validate_configured_repeat_policy(configuration: dict[str, Any], summary: dict[str, Any]) -> int:
     """Bind the declared repeat factor to evidence, without replacing the native codec."""
+    from .candidate_recovery import bind_recovery_policy
+    configuration, summary = bind_recovery_policy(configuration, summary)
     schema = configuration.get("schema_version")
     require(configuration.get("kind") == "timelearner_native_cold_configuration" and
             type(schema) is int and schema in (1, 2, 3, 4), "unknown_repeat_configuration_schema")
@@ -561,6 +563,9 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
 def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
                            origin_stimulus_id: str, *, require_certificate: bool = True) -> dict[str, Any]:
     """Audit physical C contexts before reusing the measured residual validator."""
+    from .candidate_recovery import RETRY_MODE, project_recovery_summary
+    _, recovery_mode = project_recovery_summary(summary)
+    require(recovery_mode == RETRY_MODE, "candidate_recovery_primary_audit_not_implemented")
     version = summary.get('schema_version')
     require(type(version) is int and version in (1, 2, 3, 4), 'unknown_training_summary_schema')
     c_fields = {'capacitance_history', 'actual_capacitance_witness_id', 'accepted_capacitance'}
