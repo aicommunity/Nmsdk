@@ -434,3 +434,5 @@ calibration с fresh confirmation и импорт полного пакета в
 для всех четырёх stock-условий. Используются сохранённые JSON/CSV, без запуска
 моделей; все сомы и фактические входные импульсы, общие оси и native zoom.
 [Контракт, проверка волн и ограничения](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md).
+
+`analyze INPUTS.json --format legacy-statistic-traces --output NEW.json` — строгий описательный адаптер числовых StatisticLog; явные layout/width/hash, без trial или training PASS. [Схема и область](../../../Docs/StructTrain/TimeLearner/LegacyStatisticTraceReader.ru.md). Elder12/12 и M40 12/12 приняты; это не сертификат обучения.
