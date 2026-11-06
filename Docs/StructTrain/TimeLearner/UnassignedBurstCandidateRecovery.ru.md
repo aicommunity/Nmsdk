@@ -2,7 +2,7 @@
 
 06.11.2026. Это незавершённый кандидат этапа7. Он не принят в develop и не
 включён в эксперименты. Срез Pulse70f прошёл116 C++ controls на M40;
-последующий typed recovery journal Pulsea34 ещё не проверен. Python/CLI audit и допуск schema5 ещё
+typed recovery journal/serializer Pulse416 прошёл118. Python/CLI audit и допуск schema5 ещё
 не завершены: новый режим нельзя выдавать за поддержанный сквозной pipeline.
 Текущие задания используют неизменяемые более ранние SDK и не подтверждают код.
 
@@ -112,14 +112,23 @@ Root `7e06a570236563a332722ff0357017dfcfd90401` добавляет
 Повторного запуска tests для публикации не было. Текст runner хранится как
 `runner.txt`, без действующего launcher в Reports.
 
-**Полный Python audit schema5 ещё не реализован.** `audit_training_summary`
-и `audit_stopped_state` явно завершаются причиной
-`candidate_recovery_primary_audit_not_implemented`. Успешная проверка envelope
-не разрешает принять missing/ambiguous observation или выдать сертификат.
-Проверка отдельной пробы описана ниже. Её ещё нужно связать с каждым recovery
-rejection, фазой поиска и общим бюджетом, затем интегрировать
-completed/stopped/C-history readers. Typed journal C++ и stock cold recovery
-пока не проверены; этот срез остаётся feature-кандидатом.
+**Полный Python audit schema5 подготовлен, но ещё не принят.** Root
+`f51603eb6221ee7d4b519acfbab8dc91c9c500a6` подключает history validator к
+`audit_training_summary` и `audit_stopped_state`, сохраняет исходный JSON/hash
+и использует прежнюю base1..4 проверку измеренных остатков. Для summary5
+обязательны actual protocol и CSV; завершённая попытка с retained search
+проверяется также по полному числу current capture/search/final packets,
+с отдельным учётом старых references при warm continuation. C-boundary reader
+проверяет проекцию формата; отрицательный final pass сохраняет diagnostic-only
+статус. Успешная проверка envelope не делает missing/ambiguous peak валидным.
+
+Подготовлены6 API/mutation tests и18-cell корпус из двух опубликованных
+архивов: Classic/Branch×N0/N1 completed base1/3/4, stopped base1 и N0-repeat
+stopped base2. Это проверки формата на исходных данных и hypothetical schema5
+metadata, без новой Train. Corpus312 files/77806588 bytes восстановлен на обоих
+серверах с проверкой всех834 и1266 исходных archive members. Его данные не
+дублируются новым primary archive в Git. Проверки API ещё не выполнены;
+stock cold opt-in и полный production pipeline остаются непроверенными.
 
 ### Проверка первичной невалидной пробы: два сервера
 
@@ -210,7 +219,19 @@ unknown после потери истории. Это не доказывает
 Elder `25c7c5b2110d4c9a23f3676ee207fdec45e04e8b`.
 [Проверка](CandidateRecoveryHistoryVerification.json) связывает16 source files
 на каждом сервере и подтверждает побайтно прежние проверенные input manifests.
-Сам C++ journala34 ещё не запускался. Schema5 остаётся незавершённым feature-форматом; ранние codec
+Последующий serializer commit Pulse416 и root84d6 проверены отдельным M40
+gate118: все118 прошли, включая2 новых serializer functions и новые assertions
+в прежних controller cases. События формируются реальным BoundedTrainingSession
+по контролируемым ProbeRecorder waveforms и сериализуются той же функцией,
+которую вызывает штатный summary. Проверены nonempty decisions, enum errors,
+NaN/Inf, inexact counts и сохранение полного C map. Это не физический stock
+recovery Train. [Exact source и проверка primary](CandidateRecoveryJournalVerification.json)
+подтверждают834 members,752 source hashes, actual runtime, kernel limits и
+closed/released. Evidence `e4bfac737b35d884bc0aed7c5e66f48f35abbd2b` и
+`21ac2020ff9e64269d25c94881273244bdef63b7`: все284 прежних default CSV совпали;
+449 JSON совпали,20 startup JSON отличаются только84 StepDuration values.
+
+Schema5 остаётся незавершённым feature-форматом; ранние codec
 артефакты Pulse70f читаются в контексте своего exact source snapshot, без
 достраивания отсутствующего журнала. Cold configuration5 при этом не меняется.
 
