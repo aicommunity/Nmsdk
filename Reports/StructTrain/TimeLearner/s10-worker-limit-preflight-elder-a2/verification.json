@@ -1,0 +1,32 @@
+{
+  "kind": "worker_limit_preflight_actual_process_verification",
+  "source_root": "eae3a302185406b841284abdaf407c56b77891b9",
+  "attempts": [
+    {
+      "attempt": "a1",
+      "archive_members": 5,
+      "archive_bytes": 19616,
+      "archive_sha256": "29ba5e329fac55d0e8efc13cdabf01bbfe2fcee1c3336b41d88f71b27e247234",
+      "tests": null,
+      "reservation_state": "not_created",
+      "fresh_whole_group_closed": true
+    },
+    {
+      "attempt": "a2",
+      "archive_members": 302,
+      "archive_bytes": 37616,
+      "archive_sha256": "4263bebe9d0fc9b59ed3cac7da6ff3afab968a18a70061c85417b2daea6ed66f",
+      "tests": {
+        "tests_run": 26,
+        "successful": true,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "reservation_state": "released",
+      "fresh_whole_group_closed": true
+    }
+  ],
+  "neural_models_started": false,
+  "scientific_verdict": null
+}
