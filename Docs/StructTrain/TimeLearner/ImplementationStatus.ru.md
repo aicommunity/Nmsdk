@@ -53,6 +53,9 @@ design checks, preregistration и восьми cold preflight. На момент
 [timestamped наблюдения](FairDomainStockProgressObservation.json) завершены6/8
 Train, все InvalidObservation; тот же worker жив по PID/start ticks.
 Полный verdict и последующая оценка новых моделей ещё отсутствуют.
+[Оценка и полный render](FairDomainStockEvaluationJobs.json) поставлены в очередь;
+ожидающий процесс подтверждён живым, native evaluation ещё не началась.
+Допуск требует полного closure Train, released lease и успешного аудита серии.
 [Условия и история](FairDomainStockComparisonJobs.json): исходный NSPNeuronGen
 без дополнительной LTMembrane, C-trim/PostTune/калибровка выключены. Старые
 baseline ответы не подставляются вместо результатов новой серии.
