@@ -6643,6 +6643,8 @@ template<class Learner> void CandidateRecoveryCodec(int normalization)
     const auto summary=EncodeNativeTrainingState(rig.learner->NativeTrainingController(),rig.Revision(),rig.learner->ReadNativeParameters());
     EXPECT_EQ(summary["schema_version"],QJsonValue(5));EXPECT_EQ(summary["base_schema_version"],QJsonValue(1));
     EXPECT_EQ(summary["invalid_measurement_recovery"],QJsonValue("advance_unassigned_burst"));
+    EXPECT_EQ(summary["search_history_retained"],QJsonValue(false));
+    EXPECT_TRUE(summary.contains("invalid_observations"));EXPECT_TRUE(summary["invalid_observations"].isNull());
     Artifact(rig.name+"_schema5_summary.json",QJsonDocument(summary).toJson());
     rig.learner->IsNeedToTrain=false;
 }

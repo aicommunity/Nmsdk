@@ -47,8 +47,21 @@ def project_recovery_configuration(configuration):
 
 
 def project_recovery_summary(summary):
-    return _project(summary, kind="native_training_state_summary",
-                    configuration_field="configuration")
+    projected, mode = _project(summary, kind="native_training_state_summary",
+                               configuration_field="configuration")
+    if mode == RETRY_MODE:
+        require("invalid_observations" not in summary, "unversioned_recovery_invalid_charge")
+    else:
+        retained = summary.get("search_history_retained")
+        require(type(retained) is bool and "invalid_observations" in summary,
+                "missing_recovery_invalid_charge_availability")
+        charge = summary["invalid_observations"]
+        if retained:
+            count(charge)
+        else:
+            require(charge is None, "unretained_recovery_invalid_charge_not_unknown")
+        projected.pop("invalid_observations")
+    return projected, mode
 
 
 def bind_recovery_policy(configuration, summary):

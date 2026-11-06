@@ -1090,6 +1090,7 @@ void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,
         session.Consume(observation,action->baseModelRevision);
     }
     ASSERT_TRUE(finalRejected);
+    EXPECT_EQ(session.InvalidObservations(),invalidInjected);
     if(scenario==InvalidBudgetScenario::FinalOnly)
     {
         EXPECT_EQ(invalidInjected,1u);EXPECT_EQ(session.Status(),TrainingStatus::Exact);
