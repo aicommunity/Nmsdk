@@ -91,6 +91,11 @@ preflight прошли. Первые два Classic-low Train остановил
 полная серия и публикация её primary ещё не завершены. Сквозной CLI отдельно
 проверен: prepare8 и отказ анализа неполной матрицы. Эти предварительные
 наблюдения не закрывают stock cold convergence, Train→Test или научную оценку.
+[Зависимая frozen/diagnostic оценка](StockRecoveryEvaluation.ru.md) подготовлена
+для всех восьми моделей:64 предъявления,160 trial/soma views с исходными
+импульсами; ждёт полного closure Train серии. Пять role/job guards и два CLI
+сценария уже прошли на реальных старых stock пакетах; новый native export/
+evaluate/report и визуальная приёмка ещё ожидаются.
 
 ## Приёмка по исходным этапам
 

@@ -1,0 +1,28 @@
+{
+  "kind": "stock_recovery_frozen_job_observation",
+  "schema_version": 1,
+  "observed_utc": "2026-11-06T18:10:25.738798+00:00",
+  "host": "10.245.1.17",
+  "job_id": "s07-stock-recovery-frozen-normal-a1",
+  "state": "queued_observed",
+  "queue_owner": {
+    "pid": 1178598,
+    "start_ticks": "306363827"
+  },
+  "dependency": {
+    "job_id": "s07-stock-recovery-normal-a1",
+    "kernel_main_pid": 1168109,
+    "kernel_start_ticks": "306264528",
+    "all_processes_closed": false,
+    "required_state": "closed_and_released_with_valid_complete_matrix"
+  },
+  "tool_root": "5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1",
+  "planned_trials": 64,
+  "planned_trial_soma_pairs": 160,
+  "models_to_evaluate": 8,
+  "runtime_mutated": false,
+  "classification_result_available": false,
+  "scientific_verdict": null,
+  "launcher_label_limitation": "queue owner role string inherited transport25 build wording; actual worker has no build and executes stock_recovery_evaluation.run/report only",
+  "primary_git_publication_pending": true
+}
