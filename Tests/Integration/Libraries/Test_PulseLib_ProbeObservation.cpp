@@ -119,7 +119,7 @@ TEST(TimeLearnerBurstAssignment, AssignedPolicySelectsTheActualLaterWaveInAWideW
 TEST(TimeLearnerBurstAssignment, AssignedPolicyRequiresSamplesAroundTheSelectedPlateau)
 {
     auto s=BurstSpecification();s.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
-    for(const auto bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
+    for(const auto& bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
     {
         s.windows[0].begin=bounds.first;s.windows[0].end=bounds.second;
         const auto o=BurstObservation(s);EXPECT_FALSE(o.valid);
@@ -278,7 +278,7 @@ TEST(TimeLearnerProbe, StimulusCompletenessAndUniqueIdsAreRequired)
         if(mode==2)recorder.RecordStimulus("unknown",.1);
         auto result=recorder.Close(1.,"model_1","closed");EXPECT_FALSE(result.valid);
         EXPECT_TRUE(Has(result,mode==1?"duplicate_stimulus_id":"missing_stimulus"));
-        if(mode!=1)EXPECT_FALSE(result.peaks[0].delayFromStimulus);
+        if(mode!=1){EXPECT_FALSE(result.peaks[0].delayFromStimulus);}
     }
 }
 

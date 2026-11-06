@@ -1,3 +1,249 @@
+# Дополнение03.11: C-search temporal reports проверены
+
+Visual-v4:14/14, полные48 actual probes/72 trial-soma pairs. Независимо сверены
+126 members /248528 bytes и416 source hashes.16 выбранных исходных1920×960 PNG
+непосредственно просмотрены, оси/импульсы/кривые читаемы. Общий PNG объём2.58MB;
+полный figure cache остаётся на M40 Data. [Контракт и SHA](CapacitanceSearchVisuals.ru.md),
+[QA](CapacitanceSearchVisualQA-2026-11-03.json).
+
+Это отрицательные controls C-search с budget_exhausted, без Exact/certificate.
+Отчёт по всем classification patterns, latest native34/full262 и C-search ASan
+остаются отдельными незакрытыми проверками. Исходные этапы1–12 частичны.
+Нижние pending/failed записи сохраняют хронологию.
+
+# Дополнение03.11: backward readers88 завершены; новые gates выполняются
+
+H18: production schema4 reader rootab95 проверен на исходных H12 schema3
+primaries,88/88 без errors/failures/skips. Независимо сверены10 archive members,
+25536 bytes и416 Git source hashes. Новые C++ models этим не подтверждаются.
+[Привязка native/reader roots](BoundaryReaderInventoryControls.ru.md).
+
+J3 из root1c8206ed98dad49982f1a1e9a1764c118e2cfe34/Pulse84 строится в новом
+source/build/runtime:34 target cases, включая4 minimal-context physical cases,
+затем22 readers. Full262 остаётся декларацией. Найденный package-normalization
+inventory дефект новых readers исправлен в root47e5ca437ab9f0c1ddf66468332d3b52f718e951;
+immutable J3 не меняется, reader rerun потребуется на его исходных данных.
+
+C-search visual-v3 из root47e5 выполняет14 checks и построение всех48 actual
+J2 probes /72 trial-soma pairs. Предыдущие preparation/inventory failures
+9641e3955ace78c97667d7b0461ba4ab4d16f454 иf1c08142fd1f3bf8188d03a43795222c3d6c5457
+сохранены и независимо сверены. До результата и прямого просмотра рисунков
+visual acceptance не заявляется. Только исходный этап0 закрыт полностью.
+
+# Дополнение03.11: проверенный minimal-context fix; серверы доступны
+
+VPN Automats2 восстановлен, SSH через jump host подтверждён к обоим workers.
+K3 old-source regression воспроизвёл ровно2 failures из151; исправленный
+контроллер151/151, Off compatibility137/137 на каждой стороне. Архив71 members,
+87570 bytes и418 Git source records независимо сверены.
+[Детали и границы](CapacitanceContextBudget.ru.md).
+
+J2 evidence904a436a555c4424fdf1f99dfd7089613e648529 независимо сверён:
+449 members /10089911 bytes, native27/27 и readers19/19. Все4 activation controls
+завершились budget_exhausted, без Exact/certificate; у каждого3 witnesses и12
+complete valid observed packets. Это измеренные отрицательные controls.
+
+H17 native213 выполняется; H14 ASan target6/6 прошёл, full213 выполняется.
+Их полные verdict ещё не получены. Текущая объединённая декларация C-search
+kernel151 /native target30 /full258 требует отдельных native/ASan запусков;
+это не результат J2. Только этап0 исходного плана завершён полностью.
+Нижние записи сохраняют хронологию и не заменяют это дополнение.
+
+# Составная normal приёмка и schema4 адресный gate, 03.11
+
+H12 actual native213/213 и target6/6 положительны; первоначальный overall
+not_accepted сохранён из-за одного exact-diagnostic test failure. H16 проверил
+исправленные88 readers на тех же данных без нового обучения;10 members/24678
+bytes и400 Git source hashes независимо сверены. [Контракт](BoundaryReaderInventoryControls.ru.md).
+
+J2 schema4 завершён native27/27 и readers19/19; evidence904a436a555c4424fdf1f99dfd7089613e648529
+пока ожидает независимой локальной сверки. Все4 actual activation controls
+содержат3 physical witnesses/12 trial bindings после реальных C edits; это
+валидные отрицательные результаты, не scientific classification PASS.
+
+При интеграции ownership ветки сохранены все4 NativeConfiguredProbeOwnership
+cases и весь region/schema4 corpus. Полная будущая regression specification
+расширена с251 до255; новая объединённая C++ сборка ещё не проверена.
+Pulse198dd5b является потомком исправления54516bcc; gitlink сохранён на198.
+H17 Cursor A/B выполняет отдельный исходник без C-search с native213/readers105,
+ASanH14 продолжает schema3 baseline. Полные этапы0–12 этим не закрываются.
+
+# Визуальный подэтап03.11: coverage32/48 и direct review16
+
+R1 native15/15 ASan и readers16/16; Visual-v3 render/readers11/11, полные
+32 probes/48 trial-soma pairs. Все107 members visual evidence независимо
+сверены; source hashes привязаны к точному renderer Gitroot. В Git сохранены
+16 selected original PNG (2.48MB) с packet/CSV/PDF hashes; все16 просмотрены
+непосредственно. Полный PNG/SVG/PDF cache остаётся на M40 Data.
+[QA и границы](CapacitanceRegionVisualQA-2026-11-03.json), [контракт](CapacitanceRegions.ru.md).
+Это контрольный C-region corpus; новая полная classification series ещё нужна.
+
+H12 normal full213/readers87 выполняется. Для ASan того же ownership исправления
+подготовлен root5c9b92350ee48d130d954bf10bf9521251f99e4e/Pulse54516bcc.
+H13 остановился до configure/build: на M40 system GTest, поэтому отсутствует
+предполагавшийся _deps Git checkout. Failure receipt4dd0db8869fd061f291f3b5b2d9bd79c2cf6c517
+сохранён. H14 использует новый private Git GTest точной project-declared
+release-1.12.1 (58d77fa8070e8cec2dc1ed015d66b454c8d78850), system find отключён;
+configure прошёл, ASan build выполняется. Declaration target6/full213/readers87,
+не результат. J2 schema4 normal также строится в своём отдельном source/runtime.
+Ни эти задания, ни визуальная приёмка не закрывают полный план0–12.
+
+# Срез03.11: принята миграция Reports, новые runtime evidence
+
+В develop49946c54da6f0573afca139e3b6de4c2cf50e650 принят адресный retirement
+13 Reports launchers. На обоих workers94 migration records и restored-path
+negative fixture;20 archive members/380 Git source hashes независимо сверены.
+Core/gitlinks неизменны; полный этап9 открыт.
+
+R1 ASan15/15/readers16/16 положителен;172 members verified. Visual-v2 получил
+честный отказ из-за отсутствия matplotlib; visual-v3 выполняется с existing
+plot-venv и mandatory preflight. [SHA и границы](CapacitanceRegions.ru.md).
+
+J1 schema4 завершён:12/16 actual native прошли,4 activation controls отклонены
+из-за isolated_window поверх всей пачки. Native gate требует27 cases и не
+принят: CMake не включал11 pure C-context tests. Все346 members/6209951 bytes
+failure evidence08864d3261e8fe7c2d962f347a5bf3cc299c49f8 проверены.
+Оба дефекта постановки исправлены без ослабления tolerances/validity.
+J2 запущен с новой изолированной source/build/runtime на root83779d6e2de01b8097b2672722a3625187b9a410,
+Pulse198dd5b77223938c53bf5e1e52880f402f5cf865, declaration27/readers19.
+Перед подготовкой проверяет полный J1 archive и причины всех4 activation failures.
+[Контракт](CapacitanceSchema4.ru.md). H12 full213/readers87 ещё не принят.
+Полные этапы1–12 остаются частичными, цель0–12 не сужена.
+
+# Следующий обязательный deliverable: графики C-region, 03.11.2026
+
+Добавлен штатный report --format capacitance-region: portable snapshot,
+проверка полного before/after набора входов, общие soma scales, input overlays,
+исходный timestep и явная диагностическая маркировка. Root9a916d8b858efa0384226b285a8997f030e11547.
+Новые3 server checks вместе с прежними8 readers требуют actual восьми R1
+fixtures; ожидается32 probes/48 trial-soma pairs. Worker visual-v2 на M40
+пока ждёт положительный R1 Git evidence. Полные картинки в M40 cache;
+manual selected-figure review ещё не выполнен. Локально только AST/diff.
+[Контракт, причины замены ожидающего v1 и приёмка](CapacitanceRegions.ru.md).
+
+# Проверка текущих заданий и evidence, 03.11.2026
+
+Automats2 восстановлен; SSH через jump host проверен на обоих workers.
+H11 завершился207/209, оба оставшихся отказа воспроизводят конфликт explicit
+probe с automatic configured Start до Train. Причина и исправление изолированы
+в schema3 H12 (rootfd8a10b02797ceace0eb87e0d9de4e36bd1e9e62,
+Pulse54516bcc0aa7b0437c68f818598a19788e20eb55). Target6/6 прошёл; native213
+ещё выполняется, readers87 ждут его. Полная приёмка не заявляется.
+
+J1 выполняет отдельную чистую сборку schema4 на root90798f2c4e648483eaa7718189956d211bde7ff2,
+Pulse198dd5b77223938c53bf5e1e52880f402f5cf865; заявлены target27/readers19.
+Runtime и исходники изолированы от работающего H12. Это ещё не результат.
+M40 R1 ASan:14/15 прошли, последний Branch N1 20000Гц выполняется; readers16
+ожидают полного gate. Число промежуточное; никаких PASS всей серии пока нет.
+
+K2 независимо проверен:53 members/66027 bytes/357 точных Git source hashes;
+Off A/B137 с каждой стороны и отдельный decision kernel148 прошли.
+[Проверенные SHA, состав и ограничения](CapacitanceContexts.ru.md).
+Только этап0 исходного плана полностью закрыт; исходная цель0–12 действует.
+Ни schema4, ни C-search не приняты в develop по этим промежуточным данным.
+
+Далее сохранены предыдущие срезы хронологически: их записи о выполнявшихся
+заданиях описывают прежний момент и не заменяют этот текущий срез.
+
+# Продвижение03.11: совместный decision search L/Ns/Rs/C
+
+В отдельной ветке реализованы независимые C-контексты и чередование кандидатов
+с общим бюджетом, preserved full C0 map, N0 repeats и per-C N1 domains.
+K1 Off A/B137 на каждой стороне и kernel147 прошли на Elder;
+все52 members/357 Git source hashes evidence9ab8a63a892e4ad780ebd19bf2dfeaef648a04f3
+проверены независимо. [Алгоритм, SHA и ограничения](CapacitanceContexts.ru.md).
+
+После K1 добавлен явный общий seed inventory budget, готовится kernel148.
+Это не приёмка всего C-trim: конфигурация/model transport schema4 и readers,
+native/ASan/physical matrix, measured C comparison scope/refinement остаются.
+В старые schemas новая policy не записывается молча; применяется явный отказ.
+Default Off и legacy сохранены. Ничего нового в develop пока не принимается.
+
+H11 продолжает native209/readers87 на Elder; R1 — region15/readers16 ASan
+на M40. Оба supervisor PID/start_ticks подтверждены живыми после K1; итоговые
+verdict ещё отсутствуют. Эти запускаемые бинарники/source/runtime не изменены.
+Полностью закрытым исходным этапом по-прежнему остаётся только этап0.
+
+# Выполняемые проверки после восстановления Automats2, 03.11
+
+Elder: H11 запущен на root14e95660ff0f1a12d6e67a0cf9a425fe7955d1ce,
+Pulse253fe87020ae189a47c6940fa68c386ebf10c293. Baseline без Cursor;
+декларация native209/readers87. Проверены завершение старых owners и
+полный неуспешный H9b. Сборка выполняется, окончательного verdict нет.
+
+M40: адресный ASan r1 запущен на root1a4fd929296f05322d469270039e195698b5f620,
+Pulse194643e261fae59dbb3bfdd7b83ea54663ae04d7. Декларация region15/readers16:
+7 kernel +8 native Classic/Branch N0/N1 2000/20000Гц и16 independent reader
+checks. Проверены закрытые прежние owners и принятые primary prerequisites.
+Новый runtime изолирован, ASan detect_leaks=0; leak check не заявлен.
+Это подготовленная проверка, а не runtime-verified результат. Полная224
+regression и native Cursor A/B в данном адресном запуске не выполняются.
+
+Обе ветки с кодом и точными gitlinks опубликованы, рабочие деревья чисты.
+Новые изменения не включены в develop до прохождения собственной приёмки.
+C-search On не активирован; цель всего плана0–12 остаётся действующей.
+
+### Историческое уточнение H11 из ownership ветки
+
+# Уточнение configured probe ownership после H11
+
+H11 полностью выполнил209 cases:207 passed, два configured C-history cases
+остались неуспешными. Сохранённая диагностика установила pre-Train конфликт:
+queued external probe пересекается с automatic BindNativeTrainingCapacitance;
+training получает invalid_model/training_capacitance_read_during_probe ещё
+до начала сессии. Это уточняет прежнюю гипотезу о frozen evaluation.
+
+В обоих learner подготовлено условие законной передачи управления: automatic
+Train ожидает завершения пробы и чтения её результата (AtEditBoundary).
+Исправление требует адресных и полных normal/ASan проверок; пока не принято.
+Бюджеты/допуски/физика не увеличены и не ослаблены.
+
+Принятый develop3bfb72a1 /Pulse027070e8 остаётся scoped auto-owner/transport
+43 native /26 readers normal и ASan; recursive closure17a4f61d сверяет7 children.
+[Приёмка C0](C0Acceptance-2026-11-03.ru.md). Полные этапы4/5/7 не закрыты,
+полностью принят только исходный этап0. Schema3 API и этот fix не принимаются
+одним принятым transport corpus. Ниже сохранена хронология прежних выводов.
+
+# Уточнение 03.11: полный результат H9b, отказ H10, следующий baseline
+
+Связь через Automats2 восстановлена и проверена SSH к Elder. H9b завершён:
+209/209 тестов наблюдались, 197 прошли, 12 упали; execution=process_error,
+validity=valid, assertion_status=failed. Evidence d7b653bdacf21c4a897cecaa575329f87f292a76:
+1991 member / 25348335 compressed bytes, все checksums независимо сверены.
+Четыре bridge failures — несогласованный тип исключения archive encoder
+(archived_capacitance_channel_mismatch); исправление Pulse253fe870 сохранено,
+но его серверная проверка ещё не завершена. Две configured completed проверки
+упёрлись в editor_fixture_probe_budget; шесть stopped fresh-process — в попытку
+экспорта terminal boundary после штатного общего Reset управления.
+
+В fixtures явно снимается configured request перед frozen evaluation;
+история экспортируется на импортированной завершённой границе до Reset, после
+Reset и пробы сравниваются сохранённые witness registry/ID, trial bindings и C0.
+Reset не изменён и не обязан сохранять terminal статус остановленного управления.
+При превышении бюджета добавлена структурированная диагностика состояния,
+без увеличения бюджета, изменения физики или ослабления допусков.
+Это исправления по разбору причин, пока не runtime-verified PASS.
+
+H10 отказал до checkout/build/native: prerequisite H9b не принят. Evidence
+55b103ba08b74edd80c978c0f167f97e348dffaf, все 6 members/1067 bytes сверены.
+Отказ не считается тестированием CandidateCursor. Следующий H11 восстанавливает
+baseline без Cursor (Pulse253fe87020ae189a47c6940fa68c386ebf10c293),
+native209/readers87; только после его PASS возможен новый native A/B.
+
+Отдельный принятый auto-owner/transport контур остаётся ограниченным 43 native /
+26 readers normal и ASan, Pulse develop027070e8 и root develop3bfb72a1.
+Полные этапы4/5/7 и цель0–12 не закрыты. Новые C-region helper/fixtures остаются
+в отдельной рабочей ветке и в H11 не включены.
+
+# Рабочая ветка C-регионов: принятое основание и pending APIs
+
+Эта ветка объединяет develop3bfb72a1 с кандидатами public facade/witness/service,
+portable schema3, CandidateCursor и archive codec fix. Опубликованная приёмка
+C₀ owner/transport и её fresh closure сохраняются. Новые кандидаты не считаются
+принятыми; ниже сведены хронологические срезы, включая прежние pending статусы.
+Цель нового участка — топологически корректная область C-поправки без изменения
+исходной математической цели или штатного lifecycle. C-search On ещё не включён.
+
 # Срез приёмки automatic C₀ ownership/transport, 03.11
 
 Проверены normal43/readers26 и ASan43/readers26. Tested Pulse30495d1 принят
@@ -16,6 +262,195 @@ archive codec fix имеют отдельную незавершённую пр�
 
 # Подтверждённый срез 02.11: полнота временных данных
 
+
+### Дополнительный feature-срез до приёмки C₀ owner
+
+# Подтверждённое продвижение 03.11: reader21 и controller A/B130
+
+Independent NativeEvidenceTest17/17 PASS:6287b547af9164ccdb4fd1257d9fbcbbbfd43424,
+reader root47e09bec527973500fb24cad0f0ca17c69095242;296 исходных hashes сверены.
+С AssignedNativeEvidenceTest4/4 (1c63ec13a9cad3775d6899ecc16663a15ca79209) получены
+21/21 для полного модуля, двумя явно разделёнными наборами реальных primary данных.
+Диагностика BudgetExhausted не получает придуманный certificate или Exact.
+H8d завершён:197/197 observed,193 successes и ровно четыре известные exception-type
+fixture failures. Evidence40bd553d86e02a682886ee69c30a854f73e5d9b9:1682 members,
+20373764 compressed bytes проверены. Его общий verdict остаётся not_accepted;
+75 independent readers этого run не запускались, он не объявляется193/193 PASS.
+
+CandidateCursor механически выделяет enumeration state; C-search On пока отсутствует.
+Новый root CLI controller-ab использует целые original production/test sources,
+штатный root/Pulse layout и private Git-verified GoogleTest source. Baseline и
+candidate прошли по130/130 pure tests. Evidencebcdae6c4985310850f89356a072ca80b3cbe7ca3,
+346 hashes/36 members сверены; ошибки подготовки прежних попыток сохранены.
+[Scope/команда/SHA](ControllerCandidateEnumeration.ru.md).
+
+H9b собрал portable model/configuration schema3 на Elder и выполняет native209.
+Выявлено несовпадение runtime_error/invalid_argument в archive encoder corruption
+control; исправление сохранено отдельно, полный failure inventory ещё ожидается.
+H10 queued209/104 добавляет native проверку cursor refactor и сравнение primary CSV;
+никакие working sources/runtime не переключаются до закрытия владельцев baseline.
+M40 ASanG3 остаётся жив; при последнем poll39 завершённых successes, финал ещё неизвестен.
+Полный план остаётся активным; только этап0 полностью принят. Нужны native/ASan
+приёмка новых частей, C-search, полная mode/physics matrix, дальнейший pipeline,
+исторические/контрольные эксперименты и остальные пункты исходного аудита.
+Ни одно из приведённых чисел не является качеством научной классификации.
+
+Ниже сохранены предыдущие хронологические срезы.
+
+# Актуализация 03.11: portable C-history кандидат, серверные проверки продолжаются
+
+Связь Automats2 восстановлена. H5 native183 и исправленные independent readers52
+подтверждены; combined evidence9cf5aaa6c67678f0bab5d3ce35800e17f064c55d.
+H6/H7/H8 не прошли prerequisites, H8b/H8c дали сохранённые compile failures.
+H8d успешно собран и выполняется на Elder; замечено несовпадение ожидаемого
+исключения в bridge fixture, исправление требует точной фактической диагностики.
+M40 ASanG3 выполняется:15 завершённых successes при последнем poll, итог ещё неизвестен.
+Не считать эти промежуточные числа полным197/75 либо43/26 PASS.
+
+Rootfe8674cb9 /Pulse21435c8d5a11d2670cdc1609757d3a9973877314:
+реализован кандидат configuration/model schema3 с C₀/current/trial witnesses,
+physical C/C₀ проверкой, same/fresh-process transfer controls и12 новыми readers.
+Declared native gate209. Новая часть ещё не собрана/проверена сервером и не merged
+в develop. Старый запрет export tracked run в этом кандидате заменён полноценным
+boundary package3; schemas1/2 сохраняются. Checkpoint посреди пробы не заявляется.
+Native measurement auditor6, learned/stopped readers4 фиксируют новую семантику.
+C-search On и остальные открытые требования полного плана остаются обязательными.
+
+Подробные SHA, ограничения и chronology:
+[NativeTrainingCapacitanceBridge](NativeTrainingCapacitanceBridge.ru.md).
+Ниже сохранены предыдущие срезы; формулировки queued/pending относятся к их датам.
+
+# Подтверждённый срез 02.11: полнота временных данных
+
+## Tracked service/summary3 подготовлен, runtime pending03.11
+
+Rootac1244e4ce2065a6266fffe3a17dd428923800ae /Pulse
+2cd80bb573f0e1407aba75d53706cac198043c39 добавляют explicit C++ evidence flag,
+передачу полного C map через service/controller/native edits/N1 domains, exact
+trial→witness links и summary3. Registry key теперь hash полного witness:
+dormant-only histories могут различаться при одном физическом model revision.
+Добавлены10 native и12 independent history controls, в том числе observation
+sink fault после закрытия окна при неизменном graph hash. Default certificate
+gate строгий; diagnostic analysis явно возвращает отсутствие certificate/Exact.
+
+Изменения ещё не приняты: H8 queued197/75 ждёт H7, а тот H6/H5. Сборки/численные
+тесты выполняются только workers, локально проверены syntax и declared inventory.
+Configured codec, learned-state export/import3 и C-search policy ещё не готовы;
+tracked export прежним пакетом временно явно запрещён вместо потери provenance.
+Весь исходный план остаётся активным. [SHA/handles/scope](NativeTrainingCapacitanceBridge.ru.md).
+
+## Revision-bound C witnesses: реализация подготовлена, проверки в очереди03.11
+
+Rootfb772a354ff69568f97eada6303395cdb4247acd /Pulse
+e87139062cefb537e1ba73103ca68bcf5c2a00a0 содержит read-only physical witness API,
+version1 encoder, independent physical/registry auditor и CLI capacitance-witness.
+Таблица требует actual graph/C₀/storage каждого используемого revision, единые
+origin/policy и неизменные общие channel baselines. Добавлены native assertions
+и10 negative/positive reader controls; локально подтверждён только syntax.
+
+Elder H5 остаётся живым: в stdout145 завершённых successes, failure lines0,
+полный183/52 verdict ещё отсутствует. H6 queued4/18 проверяет provider snapshot,
+H7 queued4/28 проверяет encoder/registry. Каждый ждёт verified predecessor
+evidence и закрытия owners перед checkout/build. ASan43 G3 на M40 выполняется
+на прежнем owner snapshot, а не на новых API. Service dispatch/history summary3,
+C-search integration и полные исходные этапы остаются открытыми.
+[Immutable SHA, handles и scope](NativeTrainingCapacitanceBridge.ru.md).
+
+## Normal owner43/readers26 принят адресно; новые API pending, 03.11
+
+Native43 root496a80d719 прошёл полностью. Исправленный reader-only gate26
+sourcec63d1b7b9c08c7542398ca944bcc7cf22e5ea2b4 прошёл без errors/failures/skips
+на тех же1062 members numerical primary; новый numerical run не выполнялся.
+Combined proof7ec395554f0f8d506c08b587ba130025d0af1719 проверен:11 members/
+16660bytes,278 source hashes и actual Git diff/gitlinks подтверждают неизменность
+C++/CMake относительно numeric root. Ошибочный control удалял implicit units,
+сохраняя dormant1.1; исправлен выбор реального non-unit path и строгая причина
+отказа. Expected matrix теперь читается из native declaration, не ambient flag.
+
+M40 ASan43 G3 на sourcec63d1b7b9 начал сборку после проверки всех prerequisites.
+Elder H4 на mechanical snapshot1c992e4ab впервые собрал SDK134;130 PASS/4 failures
+связаны с borrowed QJsonValueRef в новом тесте (ожидание C₀ стало0), fixed owning
+value pending повторной проверки. Actual frame выявил missing dataset/generator
+в отдельно снятой registry closure; producer исправлен, reader не ослаблен.
+Integrated H5 на source627b601547bf80fae08e1ebad26cdecaabc9c85e выполняет183
+SDK cases и52 structured readers (прежние26 +bridge9+domain9+binding8).
+После восстановления Automats2 подтверждены завершённые сборки и живые native
+процессы H5 на Elder и ASan43 G3 на M40; финального verdict пока нет.
+C-trim/service dispatch/summary schema3 ещё не готовы.
+
+ASan C3 temporal report завершён48/72,8895 checksums.26 shared-Y и6 local-Y PNG
+проверены и напрямую просмотрены;32 выбранных views читаемы. Полные2697 PNG/SVG/PDF
+остаются на M40 Data, global visual acceptance и scientific verdict отсутствуют.
+[Подробности, commits и scope](NativeTrainingCapacitanceBridge.ru.md).
+Полностью закрыт по-прежнему только исходный этап0.
+
+## Совпадение всех normal/ASan primary waveform, 03.11
+
+Опубликован5c7838123aafa54597b4f66e0a1a2a08f462a1f9: все48 owner8 CSV
+Normal C2/ASan C3 побайтно идентичны (95088 строк времени/input/всех soma).
+Проверены полный inventory, archive hashes и каждый primary member обоих прогонов;
+результат и пары hashes доступны в Git. Это engineering two-pulse probes,
+не scientific8-pattern classification и не подтверждение всего плана.
+
+M40 production renderer готовит полный temporal cache48/72 с native-tick zoom
+и input overlays. В Git пойдут только выбранные графики и gzip manifest/checksums;
+полный cache остаётся на Data. Визуальная приёмка пока pending.
+[Источники, handles, масштаб и ограничения](NativeTrainingCapacitanceBridge.ru.md).
+
+## ASan owner8 принят адресно; typed N1 domain подготовлен, 03.11
+
+M40 C3 завершён8/8 native +19/19 readers. Evidence
+d7cace1f5f9f62385b97281d0d1f48770e7153fd: проверены261 members/10508679bytes,
+terminal returncodes0, реальный libasan mapping и завершающий unittest OK.
+ASan transport G1 не запускался из-за failed normal G1; receipt5 members проверен.
+
+Normal G2 выполняется на Elder. Его временный publisher заменён по exact owned
+PID/start_ticks (native не затронут): поиск skipped во всём log ошибочно считал
+имя проходящего negative test пропуском. Новый publisher340619/324442705 читает
+финальный unittest OK, exit code и26 tests. Для новых reader gates использовать
+production validation.run_suite и structured skipped/failures/errors.
+M40 ASan G2 owner2621211/274992757, publisher2621212/274992757 ожидают successful
+normal G2, прежде чем менять source/build. Исходный ASan C3 runtime закрыт.
+
+Подготовлена explicit typed N1 domain capability: requested/effective C maps,
+signed actual-preview C₀/state, storage readback и codec schema3. Старые calls
+остаются schema2. Independent reader проверяет C и заново рассчитывает Rs bounds
+по тем же каналам; native tests сравнивают preview с фактическим joint commit
+и с прежним domain API. Новые8 domain-reader tests и SDK ещё не выполнялись.
+Это подготовленный код в feature, не PASS, не service dispatch и не C-trim On.
+[Scope](NativeTrainingCapacitanceBridge.ru.md). Полный план остаётся незавершённым.
+
+## Независимая проверка native C₀ bridge, 03.11
+
+Подготовлены production reader и CLI `analyze --format training-capacitance-bridge`.
+Фактические registry snapshots записываются отдельно от baseline; сверяются
+исходный C₀, эффективные C, typed map и dormant history, origin и неизменность policy.
+Изменение физической C с корректно пересчитанными digest проверяется отдельно.
+
+Elder G2 собран, выполняет43 native cases; зависимый H3 ожидает successful G2,
+затем выполняет134 SDK cases и7 reader tests immutable snapshot1c992e4ab.
+Отдельный I1 проверит усиленный reader8 snapshot9e1d1a739 на тех же actual H3
+артефактах через Git archive. Это очереди/подготовленный код, не runtime PASS.
+[Handles, scope и оставшаяся интеграция](NativeTrainingCapacitanceBridge.ru.md).
+NativeTrainingService ещё не использует полный C map; C-trim On V2 остаётся
+неподдерживаемым до codecs/domain/native policy/search и их проверки.
+
+## Обновление43-case gate, 03.11
+
+Связь через VPN Automats2 проверена к обоим workers. Normal G1 выполнил43
+случая,41 PASS; два dormant N0 остановились на повторной регистрации тестовой
+rollback factory, storage живёт между model fixtures. Архив1026 members
+проверен, readers26 не запускались, gate не принят. Изоляция имён fixture
+исправлена в root496a80d7190cafcc1e96329ee3c8e2b17cb40114; повтор Elder G2
+owner330097/324362522, publisher330098/324362522. Исправление не меняет
+производственную модель/алгоритм/допуски и пока не подтверждено повторным runtime.
+
+Bridge H2 прекратился до checkout/build на отказе G1 prerequisite;134 теста
+не запускались. Receipt3 members проверен. M40 owner ASan C3 остаётся отдельным
+активным заданием; его runtime/source не изменены. Зависимый ASan G1 не может
+получить разрешение на запуск от failed normal G1.
+[Подробности и hashes](NativeTrainingCapacitanceBridge.ru.md).
+
 ## Уточнён канонический lifecycle Rdk, 03.11
 
 Rdk docs merge33bdf2d19bb915d3fe4c8a917b84bdfe28bf6580 и дополнение
@@ -28,6 +463,10 @@ Ready/InitFlag и штатный обход детей; прямые ACalculate/
 связей/Load и CheckEqualsFlag/connected assignment. Полностью завершён только исходный этап0.
 
 ## Хронология C₀ owner до завершения G3, 03.11
+
+### Дополнительный feature-срез до приёмки C₀ owner
+
+## Текущий незавершённый C₀ owner, 03.11
 
 Принятый root develop — 9de7aa0d591ab1a111976e2616e5bc58c4d81eac:
 после c2e77869d приняты docs-only Rdk lifecycle merge33bdf2d1 и дополнение
@@ -118,6 +557,25 @@ hashes проверены. Raw terminal png_count=0 исправлен отде�
 Полной visual acceptance2697 PNG и scientific verdict нет.
 [Полные SHA, handles, ограничения и следующий шаг](CapacitanceOwnership.ru.md).
 Статусы исходных этапов0–12 не сокращаются; полностью завершён только0.
+
+## Подготовлен механический native bridge C-map, runtime pending
+
+Pulse candidate2e7d3dd7904ef2fcf30efa4ad38e97a96db29e36 и уточнение
+a58489d8a2d3311719e5f70b8c7781de439ea8cc добавляют общий
+NativeTrainingCapacitance и два метода обоих learners: validated read полного
+map/origin и применение L/Ns/Rs/C через прежний joint editor. Отсутствующий
+baseline остаётся nullopt; immutable capture/profile origin сохраняется при
+расширении C₀ witnesses. Потеря history, смена policy/origin и nonfinite values
+отклоняются. [Контракт и следующий scope](NativeTrainingCapacitanceBridge.ru.md).
+
+NativeTrainingService/Bindings пока не используют этот API; C-trim On V2 не
+включён. Подготовлены реальные4 native tests и первый полный SDK regression134
+с ранее unit-проверенными130 cases. Новая сборка/численная приёмка ещё не
+выполнена; результаты kernel unit130 не распространяются на bridge. H1 отменён
+до сборки после уточнения catch только для preparation; H2 назначается на
+исправленный source после successful normal43. ASan owner C3 прошёл7/8,
+BranchN0At20000=2080.978s, выполняется последний BranchN1At20000. Текущие
+normal43 и ASan8/43 сохраняют свои прежние immutable sources/runtimes.
 
 ## Отдельная ветка bounded C search: unit-приёмка не равна native-приёмке
 
@@ -874,3 +1332,16 @@ production scheduler/leases/crash recovery и fault matrix публикации;
 Нового научного результата разделимой классификации этим срезом не получено.
 Августовские визуально подтверждённые4/8–6/8 сохраняют доказательность своего
 исходного протокола; перестановки и увеличенный ITI тогда не проверялись.
+
+
+## Кандидат codec boundary fix после начала H9b
+
+Pulse253fe87020ae189a47c6940fa68c386ebf10c293 нормализует runtime_error от pure
+archive validation в invalid_argument внутри JSON encoder, сохраняя точную
+archived_capacitance_channel_mismatch диагностику. Live witness read и физические
+Build/Reset/Calculate не менялись. Изменение объединено --no-ff с cursor candidate.
+Root corruption control теперь проверяет одновременно тип и точный текст ошибки;
+повреждённая Capacity по-прежнему переподписана, так что digest-only отказ не
+подменяет physical C/C₀ проверку. Runtime fix ещё не принят. Текущие H9b/H10
+не переключаются на новый код: H9b заканчивается, H10 обязан отказаться от
+неуспешного baseline. После полного разбора понадобится новый immutable gate.
