@@ -1,14 +1,14 @@
 # Общий бюджет невалидных проб — кандидат, 06.11.2026
 
-Статус: исправление подготовлено; серверные baseline/fixed проверки **ещё не
-выполнены**. Документ не является свидетельством runtime-исправления или закрытия
-этапа 7. В develop этот кандидат не объединён.
+Статус: исходный дефект **воспроизведён на M40**, fixed-приёмка ещё не завершена.
+Документ не является свидетельством runtime-исправления или закрытия этапа 7.
+В develop этот C++ кандидат не объединён.
 
-Baseline-сборка запущена на M40 в отдельном runtime; fixed-сборка поставлена
-после её closure, освобождения lease и подтверждения ожидаемых baseline
-assertion failures. Фактические PID/start_ticks проверены по /proc. Это
-свидетельство запуска и ожидания, а не прохождения тестов. Условия и идентичности
-запуска сохранены в [job record](AttemptInvalidObservationBudgetJobs.json).
+Baseline завершён на M40 в отдельном runtime; fixed-сборка поставлена после
+его closure, освобождения lease и подтверждения ожидаемых baseline assertion
+failures. Фактические PID/start_ticks проверены по /proc. Исходные launch/wait
+наблюдения сохранены в [job record](AttemptInvalidObservationBudgetJobs.json);
+они не являются постоянно обновляемым монитором и не доказывают fixed PASS.
 
 После fixed normal gate дополнительно поставлены 23 оригинальные native
 проверки реальных Classic/Branch: поиск N0/N1, отрицательный final pass,
@@ -39,8 +39,33 @@ BeginVerification передаёт полное `maximumInvalidObservations` н�
 FinalVerificationSession, имеющему собственный `invalidCount`. При следующем
 проходе создаётся ещё одна final session с полным бюджетом. Отклонения final не
 списываются со счётчика поиска. Это подтверждено чтением production-кода;
-возможность получить Exact после превышения общего бюджета должна быть отдельно
-воспроизведена тестами baseline, а не объявлена измеренным фактом.
+возможность получить Exact после превышения общего бюджета теперь отдельно
+воспроизведена тестами baseline, как описано ниже.
+
+## Подтверждённый исходный результат
+
+M40 выполнил четыре исходные production test functions: Classic/Branch × N0/N1.
+Все четыре завершились assertion failure, исходный exit1 сохранён. В каждой
+функции ровно восемь ожидаемых assertion failures: два превышающих бюджет
+сценария × observation/preparation corruption × статус и наличие сертификата.
+Итого32 assertions относятся исключительно к этим16 сочетаниям. Остальные16
+сочетаний, проверяющие допустимый одиночный повтор и нулевой бюджет, не дали
+assertion failures; отдельными зелёными JUnit cases они не объявляются.
+
+В превышающих бюджет случаях фактический TrainingStatus=Exact (enum2), а не
+InvalidObservation (enum6), и Certificate присутствует. Сверены исходные строки
+двух assertions и каждый scenario/preparation trace. Это нарушение заявленного
+бюджета выполнения, а не доказательство неверных физических residuals или
+успешной научной классификации. Наблюдения производились production recorder
+на управляемых численных waveforms; реальный нейрон этим baseline не проверен.
+
+Proof `9c79384fcdec4eee1da2c00e5746fa33b2ae24fe` сохраняет исходные JUnit,
+runtime/maps/process owner, compiler logs и архив34 members (66436 bytes).
+Повторно сверены все members,481 root source files и265 PulseLib Core files
+с точными Git blobs. Fresh kernel closure и released lease проверены перед
+созданием evidence commit в отдельном Git store. Источники и runtime сборки
+не изменены. [Receipt](AttemptInvalidObservationBudgetBaselineVerification.json),
+[primary bundle](../../../Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-baseline-m40-a1/bundle.json).
 
 ## Контракт и изменение
 
@@ -95,8 +120,8 @@ waveforms; физический Rdk-нейрон этим тестом не мо
 
 Перед приёмкой необходимо:
 
-- собрать baseline на сервере и сохранить исходные ожидаемые падения вместе с
-  положительными контролями; отдельно проверить валидность fixture и причины;
+- baseline собран и исходные ожидаемые падения сохранены; положительные
+  контрольные сценарии и конкретные причины проверены по исходному JUnit;
 - собрать fixed SDK в другом неизменяемом runtime и выполнить ту же матрицу;
 - выполнить затронутые search/final/termination/N0-repeat регрессии и native
   stopped/completed transport, подтвердив корректные причины и сертификаты;
