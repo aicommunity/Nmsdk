@@ -17,7 +17,7 @@
   "worker_start_ticks": "304089059",
   "compiler_driver_pid": 974967,
   "compiler_driver_start_ticks": "304089528",
-  "observed_state": "kernel_confirmed_build_live",
+  "observed_state": "completed_25_passed",
   "worker_source_sha256": "0224f343b9bb21963fb8fa66c62b1d148698f65ff5d519d705fc93e393150011",
   "wrapper_source_sha256": "a64f81508fe9c29f71c4454da70723c6e41562bf3aafafc55456bfabe0910b4e",
   "worker_and_wrapper_hashes_matched_actual_server_bytes": true,
@@ -54,8 +54,12 @@
     "NativeCompletedTransportExplicitPointTwo/BranchConfiguredN0"
   ],
   "new_JUnit_criteria_version": "two original 0.02 diagnostic stopped controls + two separate explicit 0.2 completed controls",
-  "new_test_verdict": null,
+  "new_test_verdict": "valid / passed / exit0",
   "ASan_executed": false,
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "previous_observed_state": "kernel_confirmed_build_live",
+  "evidence_commit": "f45818ef3670da162c65a355c21080fd36b9ab75",
+  "fresh_closure_and_release_verified": true,
+  "matched_cold_evidence": "c69274b623f16433b3f8468753857fdbc97dc0f5"
 }
