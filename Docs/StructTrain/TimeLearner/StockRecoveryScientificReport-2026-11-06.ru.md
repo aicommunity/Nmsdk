@@ -79,11 +79,21 @@ CSV/наблюдения, stimulus timestamps, конфигурации, мет�
 records. Каждый архив и source hash сверены. Только доказанные duplicate glog
 aliases исключены из отдельных canonical copies; original archives не изменены.
 
-Первый render остановился на отсутствующем matplotlib. Render-only retry идёт
-в существующем plot-venv, отдельный cache M40 Data, без новых расчётов модели.
-Планируются все160 trial/soma pairs с наложенными импульсами и100-tick zooms.
-Пока не закончены render и visual QA, этот документ является читаемым численным
-отчётом с доступными primary, но **не окончательным визуальным отчётом**.
+Первый render остановился на отсутствующем matplotlib. Render-only retry
+завершён в существующем plot-venv без новых расчётов модели.
+[Проверка полного кэша](StockRecoveryFullVisualVerification.json): все160
+trial/soma pairs,8931 views; контрольные суммы30287 файлов сверены на M40.
+Для каждой пары есть полное2с окно и40 последовательных50мс zooms с общей
+вертикальной шкалой,1920×960, без downsampling; минимум14.208 pixels/native tick.
+Все восемь паттернов присутствуют для каждой сомы. Ось времени сохраняет
+абсолютное model time: последующие пробы не начинаются с нуля.
+
+Полный HTML/PDF/SVG/PNG cache находится на M40:
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/stock-recovery-render-normal-a2/index.html`.
+В Git сохранены компактные bindings/checksums и ранее выбранные PNG;
+2.1GB производных отчётов туда не добавлены. Завершение render и проверка
+целостности **не заменяют ручную визуальную приёмку всех160 пар**:
+пока просмотрены четыре выбранных графика первого Classic-low случая.
 
 Ни эти восемь остановок, ни диагностические responses не отменяют визуально
 подтверждённые августовские4/8–6/8 при их исходном протоколе. Перестановки,
@@ -111,8 +121,9 @@ model units/SI unverified. На просмотренных target/foil видн�
 ![Target: окно450–500мс](../../../Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-zoom-010.png)
 
 Последнее zoom-окно заканчивается во время ответа: продолжение находится
-в соседних окнах и overview. Эти четыре PNG не заменяют160 trial/soma pairs,
-весь eight-model render или полную визуальную приёмку.
+в соседних окнах и overview. Эти четыре PNG не заменяют полную визуальную
+приёмку160 trial/soma pairs; весь eight-model render завершён и проверен
+по manifests/checksums.
 
 
 [Проверенный аудит покрытия поиска](SearchCoverageReview.ru.md) уточняет предел

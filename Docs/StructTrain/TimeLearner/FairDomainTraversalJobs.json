@@ -5,7 +5,10 @@
   "host": "10.245.1.17",
   "job_id": "s07-fair-domains-normal-a1",
   "state": "building_verified_live",
-  "owner": {"pid": 1234210, "start_ticks": "307068474"},
+  "owner": {
+    "pid": 1234210,
+    "start_ticks": "307068474"
+  },
   "owner_kernel_identity_checked": true,
   "source_root": "567d6842dcae5f9f3d83e13546d8d93aa913d2dc",
   "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
@@ -29,5 +32,26 @@
     "adjacent/default output comparison and scoped ASan",
     "matched stock training and frozen/diagnostic evaluation"
   ],
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "following_context_gate": {
+    "job_id": "s07-fair-contexts-normal-a1",
+    "state": "queued_after_normal122",
+    "queue_owner": {
+      "pid": 1243222,
+      "start_ticks": "307154370"
+    },
+    "queue_kernel_identity_checked": true,
+    "source_root": "50ffa3ff0dac58eeb39e4baee9281eb73e9869fe",
+    "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+    "expected_tests": 137,
+    "previous_tests": 122,
+    "capacitance_context_tests": 15,
+    "source_delivery": "separate immutable Git source; Pulse standalone; Bin sparse /.gitignore; remaining children from closed predecessor",
+    "delivery_attempts": [
+      "initial Pulse filename typo: empty Git metadata retained in readbacks/s07-fair-contexts-source-delivery-empty-git-a1; no build started",
+      "initial Bin full sparse checkout could not load omitted blobs; corrected to the packet-declared /.gitignore sparse payload; clean exact HEAD verified"
+    ],
+    "native_tests_executed_yet": false,
+    "scientific_verdict": null
+  }
 }

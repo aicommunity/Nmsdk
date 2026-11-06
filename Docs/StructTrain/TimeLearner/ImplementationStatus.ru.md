@@ -199,3 +199,20 @@ source hashes,8 source summary/package hashes сверены.
 [Результаты и следующий алгоритмический вопрос](SearchCoverageReview.ru.md).
 Подтверждено ограниченное покрытие первого обучаемого входа; full search box
 и PhysicalInfeasible не заявляются. C++ порядок пока прежний.
+
+Последующее изменение C++ подготовлено отдельной веткой:
+[fair domain traversal](FairDomainTraversal.ru.md). Оно interleave-ит geometry
+только для opt-in N1 AdvanceUnassignedBurst; default RetrySameCandidate
+остаётся прежним. Normal122 ещё проходит серверную сборку/приёмку.
+Следующий отдельный normal137 добавляет15 C-context controls, включая новый
+контроль полного3L×3Rs mesh в трёх suspended contexts для Classic и Branch.
+Он поставлен в очередь после normal122 и не запускает stock Train.
+PASS или улучшение классификации пока не заявляются.
+
+Полный stock recovery render теперь завершён:
+[проверка](StockRecoveryFullVisualVerification.json),160 trial/soma pairs,
+8931 views,30287 файлов/2.1GB на M40. Проверены все cache checksums и source
+bindings; worker group closed, lease released. Каждая пара содержит full2s
+overview и40 непрерывных50ms zooms, без downsampling. Компактные metadata
+сохранены в Git, тяжёлый derived cache — только M40. Ручная visual QA остаётся
+ограниченной четырьмя ранее выбранными PNG; научный результат не изменился.
