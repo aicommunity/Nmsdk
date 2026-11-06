@@ -6,7 +6,6 @@ process-runner schema or live experiment is changed by importing this module.
 """
 from pathlib import Path, PurePosixPath
 import json
-import math
 import os
 import re
 import subprocess
@@ -16,6 +15,7 @@ import uuid
 
 from .native_evidence import load, require
 from .process_runner import verify_runtime, _start_identity, _write
+from .process_limits import validate_limits
 from .runtime import digest_json
 
 
@@ -146,6 +146,8 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
     An ambiguous submitted launch stays reserved for explicit recovery. Existing
     callers and their ledgers keep the original interface and evidence schema.
     """
+    require(sys.platform == 'linux', 'contained_linux_required')
+    validate_limits(memory_bytes, tasks, maximum_wall_seconds)
     launch = _ManagedLaunch(managed_reservation) if managed_reservation is not None else None
     try:
         return _start(manifest, arguments, working_directory, output, memory_bytes=memory_bytes,
@@ -159,10 +161,7 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
 def _start(manifest, arguments, working_directory, output, *, memory_bytes, tasks, maximum_wall_seconds,
            environment=None, managed_launch=None):
     require(sys.platform == 'linux', 'contained_linux_required')
-    require(type(memory_bytes) is int and 0 < memory_bytes <= 2**63-1 and
-            type(tasks) is int and 0 < tasks <= 2**31-1 and
-            type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds) and
-            1 <= maximum_wall_seconds <= 86400, 'contained_limits_invalid')
+    validate_limits(memory_bytes, tasks, maximum_wall_seconds)
     require(type(arguments) is list and all(type(a) is str and '\0' not in a for a in arguments), 'contained_arguments_invalid')
     environment = {} if environment is None else environment
     require(type(environment) is dict and all(type(k) is str and type(v) is str and '\0' not in v and
