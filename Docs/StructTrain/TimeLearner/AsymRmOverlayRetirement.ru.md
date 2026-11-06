@@ -1,3 +1,5 @@
+Принято06.11: оба workers прошли production migration220 и restored-path negative без receipt. Все17 primary members и284 source hashes каждого worker сверены. Bin merge `3d5fc67c33f7be9ad3806db0b00b9d92588049bb` опубликован и имеет ровно проверенное tree4123c177. Data Elder `bcb532b4c044827646670766874ff800c568ff36`, M40 `45723a5242810d8da50c41eae6453239802e8e70`. [Сверка](AsymRmOverlayRetirementVerification.json). Ниже сохранена постановка до приёмки; весь этап9 остаётся частичным.
+
 # Исторические AsymRm XML overlay/cold/warm инструменты
 
 Подготовлено06.11.2026, серверная metadata-приёмка ожидается. Это отдельный
