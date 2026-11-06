@@ -100,6 +100,34 @@ class PipelineConditionTest(unittest.TestCase):
                 spec = self.spec();change(spec["phases"][0]["job"])
                 self.assertNotEqual(baseline, self.binding(self.sign_train(spec))["condition_fingerprint"])
 
+    def test_candidate_recovery_policy_is_bound_without_projection_of_the_job(self):
+        from ..candidate_recovery import RECOVERY_MODE
+        from ..native_pipeline_worker import validate_job
+        for name in ("Classic-v1", "Classic-v2", "Branch-v1", "Branch-v2"):
+            spec = self.spec(name)
+            config = spec["phases"][0]["job"]["configuration"]
+            config["search"]["maximum_invalid_observations"] = 3
+            baseline = self.binding(self.sign_train(spec))["condition_fingerprint"]
+            config.update(base_schema_version=config["schema_version"], schema_version=5,
+                          invalid_measurement_recovery=RECOVERY_MODE)
+            self.sign_train(spec)
+            before = deepcopy(spec)
+            checked = validate_job("train", spec["phases"][0]["job"])
+            binding = self.binding(spec)
+            self.assertEqual(spec, before)
+            self.assertNotEqual(binding["condition_fingerprint"], baseline)
+            self.assertTrue(checked["native_configuration_validation_required"])
+            self.assertFalse(checked["effective_model_checked"])
+            self.assertTrue(binding["declaration_only"])
+            self.assertFalse(binding["native_execution_verified"])
+            for mutation in ("mode", "base", "allowance"):
+                bad = deepcopy(spec)
+                declared = bad["phases"][0]["job"]["configuration"]
+                if mutation == "mode":declared["invalid_measurement_recovery"] = "unknown"
+                elif mutation == "base":declared["base_schema_version"] = 5
+                else:declared["search"]["maximum_invalid_observations"] = 0
+                with self.assertRaises(EvidenceError):self.binding(self.sign_train(bad))
+
     def test_calibration_evaluation_order_and_phase_budget_change_identity(self):
         baseline = self.binding()["condition_fingerprint"]
         for mode in ("grid", "order", "budget"):
