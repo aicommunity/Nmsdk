@@ -1,0 +1,4 @@
+{
+  "reason": "'str' object has no attribute 'read_bytes'",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-pipeline-condition-native-matrix-a1-worker.py\", line 23, in <module>\n    old_declaration=load(base/'readbacks/s10-integrated-coordinator-normal-a3/declaration.json');runtime=load(old_declaration['runtime']);verify_runtime(runtime);assert runtime['executable']['sha256']=='b2d98c8f85be0ff5d87769ddd4285bbc2ee2fc8b39609d2bd4833149865c5153';write('runtime.json',runtime)\n  File \"/home/user/timelearner-refactor/source-pipeline-condition-matrix-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 95, in load\n    result = load_json(path)\n  File \"/home/user/timelearner-refactor/source-pipeline-condition-matrix-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 85, in load_json\n    raw = path.read_bytes()\nAttributeError: 'str' object has no attribute 'read_bytes'\n"
+}
