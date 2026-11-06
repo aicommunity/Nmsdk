@@ -43,3 +43,11 @@ fixtures от cwd: дочерний `python -c` не находил Scripts пр
 обязательных declared demands в существующем capacity-schema2 ledger;
 новый worker объявляет slot1/memory2GiB/disk128MiB, сохраняя прежнюю capacity.
 Эти отказы не являются приёмкой26 cases и сохраняются отдельно от исправления.
+
+Исправленный [gateA2 принят на обоих серверах](WorkerLimitPreflightVerification.json):
+26/26 без failures/errors/skips на каждом, одинаковые26 IDs и353 source hashes.
+Сверены301/302 archive members и по20 actual final-membership records;
+обе worker groups закрыты, leases released. Сохранены исходные failedA1
+archives281/5 members и их353 source hashes. Source correction не затрагивает
+идущую нейронную серию. Общая scheduler/fault matrix и миграция всех временных
+launchers этим отдельным substage не завершены; develop ещё не обновлён.
