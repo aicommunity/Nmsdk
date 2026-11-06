@@ -82,6 +82,45 @@ allowance запрещены. Старые схемы1..4 по-прежнему 
 Это сохраняет CPP export/import declaration через существующий configuration
 codec, но complete/stopped roundtrip нового режима ещё требует runtime-проверки.
 
+### Python declaration/preflight: адресная проверка на двух серверах
+
+Root `7e06a570236563a332722ff0357017dfcfd90401` добавляет
+`candidate_recovery.py`: строгую проверку плоского envelope5, выбор прежней
+базовой схемы только для проверки, связывание declared/measured режима и
+ненулевого invalid allowance. Схемы1..4 с новыми полями отклоняются, отсутствие
+этих полей означает прежний RetrySameCandidate. Неизвестные поля базовой схемы
+сохраняются для последующей проверки штатным C++ codec; Python projection не
+выдаётся за полный native preflight. Исходный JSON не изменяется и остаётся
+источником job hash, native execution и ConditionSpec.
+
+На Elder и M40 прошли по33/33 Python tests без skips:8 envelope/binding,
+12 общих ConditionSpec и13 pipeline-condition tests. Новый pipeline test
+использует четыре сохранённые реальные Classic/Branch declarations, проверяет
+изменение научной идентичности при выборе режима и отказ неизвестного режима,
+вложенной base5 и нулевого allowance. Это проверка декларации, без нового
+физического Train. Девять файлов source каждого сервера сверены с Git.
+Первичные logs/receipts сохранены отдельными Git evidence commits:
+
+- Elder: `0128f0ee58615c3f7645473d4bb97c6e0b5a4dc8`;
+- M40: `7eefe1a8ad55c3a50dfd201a921cd864d1f44e52`.
+
+[Проверка артефактов](CandidateRecoveryDeclarationVerification.json) содержит
+пути, размеры, hashes и точные versions. Первая A1 попытка остановилась на
+ошибке экранирования строки в проверочном runner до запуска tests; её log
+сохранён. A2 tests прошли, затем публикация из частичного Git snapshot
+потребовала `write-tree --missing-ok` для неизменённых исторических blobs.
+Повторного запуска tests для публикации не было. Текст runner хранится как
+`runner.txt`, без действующего launcher в Reports.
+
+**Полный Python audit schema5 ещё не реализован.** `audit_training_summary`
+и `audit_stopped_state` явно завершаются причиной
+`candidate_recovery_primary_audit_not_implemented`. Успешная проверка envelope
+не разрешает принять missing/ambiguous observation или выдать сертификат.
+Следующий шаг — проверка каждого recovery rejection по actual JSON/CSV,
+protocol/context, закрытому окну и общему бюджету, затем полная интеграция
+completed/stopped/C-history readers. C++ tests и native recovery пока не
+проверены; этот срез остаётся feature-кандидатом.
+
 Добавлены controller regressions default-versus-opt-in, anchor/input failures,
 missing/extra waves, общий budget, конечное исчерпание поиска, запрет final skip,
 повреждённый контекст, незавершённые N0 repeats и отказ свежего restoringBest.
