@@ -23,6 +23,10 @@ script_migration.json содержат исходный Bin commit3d5fc67c33f7be
 Всего manifest теперь222 records:220 retired и2 moved; complete=false.
 В SelectivityAsymRm/scripts остаются22 Python, весь этап9 не закрыт.
 
-Серверная metadata приёмка и children-first no-ff merges ещё ожидаются.
+Оба сервера прошли production verify-migration222 и restored-path negative:
+17 primary members и286 source hashes каждого запуска сверены.
+[Проверка](AsymRmDisplayScaleRetirementVerification.json).
+Bin no-ff merge37ff211fa6ba4999fc51802182915022b239a1eb опубликован; его tree
+равен проверенному1a8e1d6b. Корневой children-first merge выполняется отдельно.
 Исторические скрипты не запускались, Build/Calculate и физика не изменены.
 Работающие server source/runtime не обновляются.
