@@ -54,3 +54,14 @@ cursor, а не физическую недостижимость. Общие б
 классификации или сходимости не обещается. Новые ветки созданы от develop с
 явными no-ff merges pending recovery prerequisites; это не promotion этих
 prerequisites в develop. Активный renderer/старые runtimes не изменены.
+
+Следующая отдельная проверка `CapacitanceContexts/
+FairN1TraversalResumesEveryGeometryAndResistanceInEachSuspendedContext`
+подготовлена для Classic и Branch. Она использует production session и
+ProbeRecorder с контролируемым откликом, три C-контекста и полный mesh
+3L×3Rs в каждом контексте. Проверяются сохранность dormant/anchor physics,
+покрытие каждого mesh и продвижение до дальней длины перед оставшимися Rs
+первой длины. Это проверка suspended cursor, не физический эксперимент.
+Она добавлена после замораживания normal122 и в эту сборку не входит;
+серверная проверка ожидается отдельно. Состояние normal122 записывается в
+[job observation](FairDomainTraversalJobs.json), без предварительного PASS.
