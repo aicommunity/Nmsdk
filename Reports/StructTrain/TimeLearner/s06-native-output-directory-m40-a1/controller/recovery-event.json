@@ -1,0 +1,93 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "bf983429-1d5c-4170-877f-012f84fc0266",
+  "job_id": "s06-native-output-directory-a1",
+  "recorded_unix": 1793955713.737806,
+  "administrator": {
+    "pid": 861459,
+    "start_ticks": "303090108",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 861477,
+    "start_ticks": "303090120",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-native-output-directory-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "9365ef74878a64074fd2ea7c18f7bc233827e36f1fe770a3cbdb5ef2474ddd47",
+      "unit": "timelearner-2df48350-6e39-4bfb-9052-e94ea81bf251.service",
+      "invocation_id": "b8b1217bc94e46f1b7ae0c96ede45192",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2df48350-6e39-4bfb-9052-e94ea81bf251.service",
+      "initial_main_pid": 861477,
+      "initial_start_ticks": "303090120",
+      "sha256": "ef1332fe3e3df1d5caea1f12e52a2c8172278d4a341d3e8686b38b2a47e9d67c"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-2df48350-6e39-4bfb-9052-e94ea81bf251.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Original native fixture group and archive descendants freshly closed; release is not a scientific verdict",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-native-output-directory-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-native-output-directory-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-gate-output-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-gate-output-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
