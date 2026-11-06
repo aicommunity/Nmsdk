@@ -73,3 +73,15 @@ input1 штатно включает следующий input0. Проверка
 для всех записей, geometry coverage — отдельно для input1. Алгоритм этим
 исправлением не меняется. Исходный failed run сохраняется; полная приёмка
 требует нового immutable source/runtime с исправленным тестом.
+
+Для того же corrected C++ source36f5985 подготовлен отдельный
+[ASan38 gate](FairDomainTraversalAsan38Jobs.json):19 recovery controls,
+4 fair-domain checks и15 C-context checks. Он запускается только после
+успеха normal137 и подтверждённых closure/released lease. `detect_leaks=0`;
+отсутствие утечек и вся физическая ASan matrix этим не проверяются.
+
+Парное научное сравнение должно использовать
+[строгий matched-study analyzer](StockRecoveryCodeComparison.ru.md): одинаковые
+jobs/cold graphs, полные primary audits обеих серий, разные code/runtime
+identities. Новый analyzer отдельно проверяется на старой native серии;
+такая self-comparison не считается повтором обучения или проверкой fair stock.
