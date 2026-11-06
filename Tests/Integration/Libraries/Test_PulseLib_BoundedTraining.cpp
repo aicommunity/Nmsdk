@@ -876,8 +876,7 @@ TEST(TrainingInvalidBudget,name) { \
     for(const bool invalidPreparation:{false,true}) \
     for(const auto scenario:{InvalidBudgetScenario::SearchThenFinal,InvalidBudgetScenario::FinalThenNextSweep, \
                             InvalidBudgetScenario::FinalOnly,InvalidBudgetScenario::Zero}) { \
-        SCOPED_TRACE(static_cast<int>(scenario)); \
-        SCOPED_TRACE(invalidPreparation); \
+        SCOPED_TRACE(::testing::Message()<<"scenario="<<static_cast<int>(scenario)<<" invalidPreparation="<<invalidPreparation); \
         CheckAttemptInvalidBudget(routing,normalization,scenario,invalidPreparation); \
     } \
 }
