@@ -36,9 +36,11 @@ baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют иде
 регрессии. На M40 baseline воспроизвёл превышение бюджета:4 test functions
 завершились32 ожидаемыми assertions, Exact и присутствующим сертификатом;
 полный34-member primary опубликован и746 source files сверены с Git.
-Fixed-сборка работает; после неё заявлены4/74 tests и отдельные23 native
-physical/transport controls. Это pending приёмка исправления, не PASS и не
-merge в develop. ASan A5 относится к Pulse12d и не
+Fixed SDK прошёл4/4 новых и74/74 смежных tests. Native physical/transport gate
+дал21/23: два configured Train исчерпали sweeps до ожидаемого сертификата.
+Тот же набор23 выполняется на прежнем SDK для A/B; оба первичных отрицательных
+результата сохранены. Это pending общая приёмка, не merge в develop.
+ASan A5 относится к Pulse12d и не
 подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
 не устраняет stock burst ambiguity.
 
