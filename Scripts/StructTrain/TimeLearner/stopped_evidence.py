@@ -40,9 +40,8 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     validate_model_spec(package['configuration']['model'])
     repeats = validate_configured_repeat_policy(package["configuration"], summary)
     from .candidate_recovery import RETRY_MODE, project_recovery_summary
-    _, recovery_mode = project_recovery_summary(summary)
-    require(recovery_mode == RETRY_MODE, "candidate_recovery_primary_audit_not_implemented")
-    retained = validate_search_history_availability(summary)
+    projected, recovery_mode = project_recovery_summary(summary)
+    retained = validate_search_history_availability(projected)
     require(set(packets) == set(traces), "missing_primary_trace")
     if not packets:
         require(package['reference_packets'] == [] and package['final_packets'] == [] and
@@ -62,6 +61,14 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
     require(seen == set(packets), "primary_packet_set_mismatch")
     protocol = package["protocol"]
     require(protocol["schema_version"] == 3, "unknown_protocol_schema")
+    recovery = None
+    if recovery_mode != RETRY_MODE:
+        from .candidate_recovery_history import audit_recovery_history
+        from .probe_diagnostics import read_partial_probe
+        for trial, packet in packets.items():
+            if not audits[trial]["valid_observation"]:
+                read_partial_probe(packet, traces[trial])
+        recovery = audit_recovery_history(summary, packets, traces, protocol)
     references = package["reference_packets"]
     require(isinstance(references, list) and type(package["reference_complete"]) is bool
             and len(references) <= len(protocol["inputs"])
@@ -104,12 +111,13 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
             "archive_target_or_reference_mismatch")
     capacitance = audit_package_capacitance(package)
     capacitance_history = audit_package_capacitance_history(package, summary)
-    return {"auditor_version": 4, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
+    return {"auditor_version": 5 if recovery is not None else 4, "state_kind": "diagnostic", "training_outcome": package["training_outcome"],
             "n0_candidate_repeats": repeats, "search_history_retained": retained,
             "primary_trials": len(packets), "reference_trials": len(references), "final_trials": len(final_ids),
             "invalid_or_censored_trials": sum(not a["valid_observation"] for a in audits.values()),
             "certificate_present": False, "native_import_verified": False,
             "capacitance_state": capacitance, **({"capacitance_history": capacitance_history} if capacitance_history is not None else {}),
+            **({"candidate_recovery": recovery} if recovery is not None else {}),
             "evaluation_verdict": None}
 
 

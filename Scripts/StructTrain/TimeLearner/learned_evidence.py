@@ -75,15 +75,17 @@ def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
     require(metadata["state_kind"] == "learned_solo" and metadata["conversion"]["mode"] == "none" and
             metadata["calibration"]["status"] == "fixed" and
             metadata["training"]["status"] == package["training_outcome"], "archive_state_mismatch")
-    native = audit_training_summary(summary, packets, protocol["origin_stimulus_id"])
+    native = audit_training_summary(summary, packets, protocol["origin_stimulus_id"], traces=traces, protocol=protocol)
     capacitance = audit_package_capacitance(package)
     capacitance_history = audit_package_capacitance_history(package, summary)
-    return {"auditor_version": AUDITOR_VERSION, "certificate_consistent": True,
+    recovery = native.get("candidate_recovery")
+    return {"auditor_version": 6 if recovery is not None else AUDITOR_VERSION, "certificate_consistent": True,
             "primary_trials": len(packets), "embedded_trials": sum(map(len, embedded.values())),
             "exact": native["exact"], "model_revision": package["model_revision"],
             "n0_candidate_repeats": repeats, "search_history_retained": native["search_history_retained"],
             "native_import_verified": False, "package_digest_verified": True,
             "capacitance_state": capacitance, **({"capacitance_history": capacitance_history} if capacitance_history is not None else {}),
+            **({"candidate_recovery": recovery} if recovery is not None else {}),
             "evaluation_verdict": None}
 
 

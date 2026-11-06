@@ -7,12 +7,16 @@ from .training_capacitance_witness import audit_training_capacitance_registry
 def _audit(package, summary):
     version = package['schema_version']
     require(type(version) is int and version in (1, 2, 3, 4), 'unknown_capacitance_boundary_package_schema')
+    from .candidate_recovery import project_recovery_configuration, project_recovery_summary
+    configuration, _ = project_recovery_configuration(package['configuration'])
+    if summary is not None:
+        summary, _ = project_recovery_summary(summary)
     if version not in (3, 4):
-        require('capacitance_history' not in package and package['configuration']['schema_version'] in (1, 2),
+        require('capacitance_history' not in package and configuration['schema_version'] in (1, 2),
                 'unversioned_learned_capacitance_history')
         return None
     audit_package_capacitance(package)
-    configuration = package['configuration'];policy = configuration['capacitance_history']
+    policy = configuration['capacitance_history']
     archived = package['neuron']['metadata']['training']
     if version == 4:
         from .capacitance_policy import audit_capacitance_search_policy
