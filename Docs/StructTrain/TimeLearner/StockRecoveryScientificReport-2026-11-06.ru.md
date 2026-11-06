@@ -90,3 +90,26 @@ aliases исключены из отдельных canonical copies; original ar
 увеличенный ITI, независимая оценка, legacy/V2 сравнение и вся физическая/режимная
 матрица остаются открытыми. СерияD не возобновлялась. Цель полного рефакторинга
 не завершена;8/8 не является условием его успеха.
+
+
+## Первые проверенные временные графики
+
+[Реестр visual QA](StockRecoverySelectedVisualQA.json): просмотрены4 исходных PNG
+первой Classic-low-retry модели, Soma1. Все подписи читаемы, реальный вход
+наложен на график, overview содержит полное2с окно. Zoom50мс даёт минимум
+14.208 pixels на native tick, без downsampling. Единицы сомы помечены как
+model units/SI unverified. На просмотренных target/foil видно повторение ответа
+вслед за отдельными импульсами; это наблюдение согласуется с диагностическим FP7,
+но не устанавливает причину и не распространяется автоматически на другие сомы.
+
+![Target: Soma1, полное окно](../../../Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-overview.png)
+
+![Foil: Soma1, полное окно](../../../Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/foil-overview.png)
+
+![Target: первые50мс с входным импульсом](../../../Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-zoom-001.png)
+
+![Target: окно450–500мс](../../../Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-zoom-010.png)
+
+Последнее zoom-окно заканчивается во время ответа: продолжение находится
+в соседних окнах и overview. Эти четыре PNG не заменяют160 trial/soma pairs,
+весь eight-model render или полную визуальную приёмку.
