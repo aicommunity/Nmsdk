@@ -65,3 +65,16 @@ transport fixtures остаются открытым результатом ал
 `TIMELEARNER_NATIVE_GATE_DIR=/path/to/actual/result python3 -m unittest Scripts.StructTrain.TimeLearner.tests.test_native_gate`.
 Произвольные XML dialects, parameterized IDs, scheduler/leases и полная
 матрица алгоритмов этим подэтапом не принимаются.
+
+
+## Явная изоляция тестов по процессам (кандидат)
+
+`python -m Scripts.StructTrain.TimeLearner.native_partition declaration.json --output /absolute/fresh-output` принимает отдельную схему `timelearner_partitioned_native_gate`, schema_version=1. Поля: native_gate (полная исходная schema2 cooperative gate declaration), maximum_total_wall_seconds и maximum_case_wall_seconds. Все ожидаемые test IDs задаются явно; автоматических повторов, пропусков и переноса PASS из другой попытки нет. На этом этапе принимается только child schema2 с cooperative_runtime_capture=true; schema1/3 для нового режима не заявлены.
+
+Каждый ID выполняется существующим production run_native_gate в отдельном процессе. Сохраняются cases/NNNN/native.xml, native traces, process identity, loaded files и process result, точная declaration и progress. Исходная монолитная схема и исходные тесты не меняются. Общий и индивидуальный wall budget записаны явно, численные tolerances не меняются. Runtime проверяется каждым child gate и после всех partitions.
+
+Производный native.xml объединяет только полные индивидуальные XML, с точным множеством IDs и без повторного использования process identity. junit-sources.json связывает каждый test ID с исходным XML/hash/PID/start/boot. Итог имеет отдельный kind timelearner_partitioned_native_gate_result; общего process/result.json не создаётся. Пропуски, повреждённые XML и invalid runtime запрещают PASS.
+
+native/ — lossless hardlink-представление для существующих readers, native-projection.json хранит происхождение каждого файла. Одинаковые имена с различающимся содержимым вызывают явный отказ; перезаписи и выбора «последнего» нет. Первичными остаются отдельные cases/NNNN. Даже при отказе формирования reader view индивидуальные наблюдения сохраняются.
+
+Режим предназначен для повторной полной ASan304 проверки после internal StackStore CHECK длинного процесса; это изменение протокола запуска, не доказательство исправления алгоритма или отсутствия утечек. Требуются реальные двухпроцессные адресные проверки и полная304 матрица на M40. До них модуль — непроверенный кандидат.

@@ -20,7 +20,7 @@ VerificationProtocol Protocol(std::size_t n=2,ProbeRouting routing=ProbeRouting:
 PreparedVerificationProbe Prepare(const VerificationProtocol& p,std::size_t index,const std::string& revision,std::size_t epoch)
 {
     PreparedVerificationProbe result{p.routing,p.inputs.at(index).id,p.revision,revision,
-        revision+"/route/"+std::to_string(index),epoch};
+        revision+"/route/"+std::to_string(index),epoch,{}};
     if(p.routing==ProbeRouting::BranchSoloBurst)result.selectedInputIndex=index;
     return result;
 }
@@ -84,7 +84,7 @@ void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& p
         const auto stable=session.NextAction();ASSERT_TRUE(stable);EXPECT_EQ(stable->serial,action->serial);
         if(action->kind==TrainingActionKind::Edit)
         {
-            session.Applied(action->serial,action->parameters,"model"+std::to_string(action->serial));continue;
+            session.Applied(action->serial,action->parameters,"model"+std::to_string(action->serial),action->capacitance);continue;
         }
         if(action->kind==TrainingActionKind::ResistanceDomain)
         {
@@ -135,9 +135,9 @@ void CheckFiniteCandidateRanking(ProbeRouting routing,Normalization normalizatio
         {
             measured.insert(evidence.parameters.length);
             const int length=evidence.parameters.length;
-            if(axes&1)EXPECT_NEAR(std::max(std::fabs(evidence.timingResidualLow),std::fabs(evidence.timingResidualHigh)),
-                length==2?.06:(length==3?.02:.01),1e-12);
-            if(axes&2)EXPECT_NEAR(evidence.amplitudeResidual,length==2?.006:(length==3?.002:.001),1e-12);
+            if(axes&1){EXPECT_NEAR(std::max(std::fabs(evidence.timingResidualLow),std::fabs(evidence.timingResidualHigh)),
+                length==2?.06:(length==3?.02:.01),1e-12);}
+            if(axes&2){EXPECT_NEAR(evidence.amplitudeResidual,length==2?.006:(length==3?.002:.001),1e-12);}
         }
         EXPECT_EQ(measured,(std::set<int>{2,3,4}));
     }
@@ -312,7 +312,7 @@ TEST(BoundedTraining, Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesEx
         });
         EXPECT_EQ(session.Status(),exactAtCap?TrainingStatus::Exact:TrainingStatus::BudgetExhausted);
         ASSERT_TRUE(session.Certificate());EXPECT_EQ(session.Certificate()->Exact(),exactAtCap);
-        if(exactAtCap)EXPECT_EQ(session.Parameters()[0].synapses,128);
+        if(exactAtCap){EXPECT_EQ(session.Parameters()[0].synapses,128);}
     }
 }
 
@@ -506,7 +506,7 @@ TEST(BoundedTraining, ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments)
         {
             EXPECT_EQ(action.parameters[i].synapses,1);EXPECT_EQ(action.parameters[i].resistance,10.);
             delay[i]=.03+.1*(action.parameters[i].length-1);
-            if(i)EXPECT_GE(action.parameters[i-1].length,action.parameters[i].length);
+            if(i){EXPECT_GE(action.parameters[i-1].length,action.parameters[i].length);}
         }
         EXPECT_EQ(action.parameters.back().length,1);
     });
@@ -809,4 +809,163 @@ TEST(TrainingTermination,FinalRejectionDoesNotBorrowEarlierSearchDiagnostic)
     }
     ASSERT_TRUE(rejectedSearch);EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
     EXPECT_EQ(session.Reason().find("final_verification:"),0u);EXPECT_FALSE(session.Certificate());
+}
+
+// Exercise the production controller and recorder across search/final/sweep
+// boundaries. A configured retry budget belongs to the entire attempt.
+enum class InvalidBudgetScenario { SearchThenFinal, FinalThenNextSweep, FinalOnly, Zero };
+void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,InvalidBudgetScenario scenario,
+                              bool invalidPreparation)
+{
+    const auto protocol=Protocol(2,routing);auto config=Configuration(2,normalization);
+    config.maximumInvalidObservations=scenario==InvalidBudgetScenario::Zero?0:1;
+    config.maximumSweeps=2;config.maximumCandidatesPerInput=2;
+    config.bounds.assign(2,{1,1,1,1,10.,10.});
+    BoundedTrainingSession session(References(protocol),config,{{1,1,10.},{1,1,10.}});
+    unsigned calls=0,invalidInjected=0;bool searchRejected=false,finalRejected=false;
+    bool outsideFirstFinal=false,secondSweep=false;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++calls,40u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        const bool rejectFinal=action->finalVerification && !finalRejected;
+        if(rejectFinal && invalidPreparation)
+        {
+            prepared.protocolRevision="corrupted_budget_preparation";
+            session.Arm(action->serial,prepared);finalRejected=true;++invalidInjected;
+            continue;
+        }
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        if(!action->finalVerification && outsideFirstFinal)secondSweep=true;
+        const bool rejectSearch=!action->finalVerification && action->inputIndex==0 && !searchRejected &&
+            (scenario==InvalidBudgetScenario::SearchThenFinal ||
+             (scenario==InvalidBudgetScenario::FinalThenNextSweep && secondSweep));
+        if(rejectSearch){raw[0]=-.065;searchRejected=true;++invalidInjected;}
+        // Final observations stay valid until their pattern identity is
+        // deliberately corrupted below; the search failure is a missing peak.
+        const bool failFirstFinal=scenario==InvalidBudgetScenario::FinalThenNextSweep &&
+            action->finalVerification && action->inputIndex==0 && finalRejected && !secondSweep;
+        if(failFirstFinal){raw[0]+=.001;outsideFirstFinal=true;}
+        auto observation=Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},raw);
+        if(rejectFinal)
+        {
+            ASSERT_TRUE(observation.valid);
+            observation.specification.patternHash="corrupted_budget_probe";
+            finalRejected=true;++invalidInjected;
+        }
+        session.Consume(observation,action->baseModelRevision);
+    }
+    ASSERT_TRUE(finalRejected);
+    if(scenario==InvalidBudgetScenario::FinalOnly)
+    {
+        EXPECT_EQ(invalidInjected,1u);EXPECT_EQ(session.Status(),TrainingStatus::Exact);
+        ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    }
+    else
+    {
+        EXPECT_EQ(invalidInjected,scenario==InvalidBudgetScenario::Zero?1u:2u);
+        EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
+        EXPECT_FALSE(session.Certificate());
+        if(scenario!=InvalidBudgetScenario::Zero)EXPECT_TRUE(searchRejected);
+        if(scenario==InvalidBudgetScenario::FinalThenNextSweep)EXPECT_TRUE(secondSweep);
+    }
+}
+
+#define ATTEMPT_INVALID_BUDGET_TEST(name,routing,normalization) \
+TEST(TrainingInvalidBudget,name) { \
+    for(const bool invalidPreparation:{false,true}) \
+    for(const auto scenario:{InvalidBudgetScenario::SearchThenFinal,InvalidBudgetScenario::FinalThenNextSweep, \
+                            InvalidBudgetScenario::FinalOnly,InvalidBudgetScenario::Zero}) { \
+        SCOPED_TRACE(::testing::Message()<<"scenario="<<static_cast<int>(scenario)<<" invalidPreparation="<<invalidPreparation); \
+        CheckAttemptInvalidBudget(routing,normalization,scenario,invalidPreparation); \
+    } \
+}
+ATTEMPT_INVALID_BUDGET_TEST(ClassicN0,ProbeRouting::ClassicBurst,Normalization::SynapseCount)
+ATTEMPT_INVALID_BUDGET_TEST(ClassicN1,ProbeRouting::ClassicBurst,Normalization::TipResistance)
+ATTEMPT_INVALID_BUDGET_TEST(BranchN0,ProbeRouting::BranchSoloBurst,Normalization::SynapseCount)
+ATTEMPT_INVALID_BUDGET_TEST(BranchN1,ProbeRouting::BranchSoloBurst,Normalization::TipResistance)
+#undef ATTEMPT_INVALID_BUDGET_TEST
+
+namespace {
+TrainingCapacitance OwnedCapacitance()
+{return {std::string(64,'a'),.3,{{"Dendrite1_1",.9},{"Dendrite1_2",1.1},{"Dendrite1_5",.8},{"Dendrite2_1",1.}}};}
+void UntilCapacitanceEdit(BoundedTrainingSession& session,const VerificationProtocol& protocol,TrainingAction& edit)
+{
+    for(unsigned step=0;step<32;++step)
+    {
+        const auto action=session.NextAction();ASSERT_TRUE(action);
+        if(action->kind==TrainingActionKind::Edit){edit=*action;return;}
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);raw[0]+=.001;
+        session.Consume(Observe(protocol,prepared,action->inputIndex,action->runId,action->trialId,{.03,.03},raw),action->baseModelRevision);
+    }
+    FAIL()<<"missing expected structural edit";
+}
+TEST(BoundedTrainingCapacitance, CompleteMapFollowsProbesCandidatesAndRepeats)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.n0CandidateRepeats=2;cfg.tolerances.sync=1.;
+    cfg.bounds={{2,2,1,2,10.,10.},{1,1,1,1,10.,10.}};
+    const auto state=OwnedCapacitance();
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},false,state);
+    DriveTraining(session,p,[&](const auto& action,auto&,auto& raw) {
+        EXPECT_EQ(action.capacitance,std::optional<TrainingCapacitance>(state));
+        if(action.inputIndex==0 && action.parameters[0].synapses==1)raw[0]+=.001;
+    });
+    ASSERT_EQ(session.Status(),TrainingStatus::Exact);ASSERT_FALSE(session.Evidence().empty());
+    for(const auto& e:session.Evidence())EXPECT_EQ(e.capacitance,std::optional<TrainingCapacitance>(state));
+    for(const auto& group:session.CandidateRepeats())EXPECT_EQ(group.capacitance,std::optional<TrainingCapacitance>(state));
+    EXPECT_EQ(session.Capacitance(),std::optional<TrainingCapacitance>(state));
+}
+TEST(BoundedTrainingCapacitance, UnitScaleExtensionIsRetainedAfterEdit)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.tolerances.sync=1.;
+    cfg.bounds={{2,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    const auto initial=OwnedCapacitance();
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},false,initial);
+    TrainingAction action;ASSERT_NO_FATAL_FAILURE(UntilCapacitanceEdit(session,p,action));
+    auto effective=initial;effective.membraneScales["Dendrite1_3"]=1.;
+    session.Applied(action.serial,action.parameters,"native-grown-model",effective);
+    ASSERT_EQ(session.Capacitance(),std::optional<TrainingCapacitance>(effective));
+    const auto next=session.NextAction();ASSERT_TRUE(next);EXPECT_EQ(next->capacitance,session.Capacitance());
+    EXPECT_EQ(session.Status(),TrainingStatus::Searching);
+}
+TEST(BoundedTrainingCapacitance, LostDormantScaleRejectsOtherwiseMatchingInputReadback)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.bounds={{2,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    const auto initial=OwnedCapacitance();
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},false,initial);
+    TrainingAction action;ASSERT_NO_FATAL_FAILURE(UntilCapacitanceEdit(session,p,action));
+    auto wrong=initial;wrong.membraneScales.erase("Dendrite1_5");
+    session.Applied(action.serial,action.parameters,"different-model",wrong);
+    EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_FALSE(session.Certificate());
+    EXPECT_EQ(session.Capacitance(),std::optional<TrainingCapacitance>(initial));
+}
+TEST(BoundedTrainingCapacitance, UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.bounds={{2,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    const auto initial=OwnedCapacitance();
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},false,initial);
+    TrainingAction action;ASSERT_NO_FATAL_FAILURE(UntilCapacitanceEdit(session,p,action));
+    auto wrong=initial;wrong.membraneScales["Dendrite1_3"]=.95;
+    session.Applied(action.serial,action.parameters,"different-model",wrong);
+    EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_FALSE(session.Certificate());
+}
+TEST(BoundedTrainingCapacitance, DomainCannotDiscardFullCapacitanceContext)
+{
+    const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
+    cfg.bounds={{2,3,1,1,1.,100.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true,OwnedCapacitance());
+    bool domainRequested=false;
+    DriveTraining(session,p,[](const auto&,auto&,auto& raw){raw[0]+=.001;},[&](const auto& action) {
+        domainRequested=true;EXPECT_TRUE(action.capacitance);
+        ResistanceDomainAssessment result;result.status=ResistanceDomainStatus::Available;
+        result.baseModelRevision=action.baseModelRevision;result.previewModelRevision="preview";
+        result.geometry=action.parameters;result.inputIndex=action.inputIndex;
+        result.minimumResistance=1.;result.maximumResistance=100.;
+        return result; // Deliberately omits the requested C context.
+    });
+    EXPECT_TRUE(domainRequested);EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_FALSE(session.Certificate());
+    EXPECT_NE(session.Reason().find("resistance_domain_context_mismatch"),std::string::npos);
+}
 }
