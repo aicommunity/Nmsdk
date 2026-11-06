@@ -33,9 +33,12 @@ A4 остановилась до C++ из-за неполного tool snapshot;
 
 Отдельно подготовлен [общий бюджет невалидных проб](AttemptInvalidObservationBudget.ru.md):
 baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют идентичные новые
-регрессии. На M40 начата изолированная baseline-сборка; после неё заявлены
-fixed 4/74 tests и отдельные23 native physical/transport controls. Это pending
-приёмка, не PASS и не merge в develop. ASan A5 относится к Pulse12d и не
+регрессии. На M40 baseline воспроизвёл превышение бюджета:4 test functions
+завершились32 ожидаемыми assertions, Exact и присутствующим сертификатом;
+полный34-member primary опубликован и746 source files сверены с Git.
+Fixed-сборка работает; после неё заявлены4/74 tests и отдельные23 native
+physical/transport controls. Это pending приёмка исправления, не PASS и не
+merge в develop. ASan A5 относится к Pulse12d и не
 подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
 не устраняет stock burst ambiguity.
 
