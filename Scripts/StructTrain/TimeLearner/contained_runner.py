@@ -35,7 +35,7 @@ def inspect_attempt(output):
 
 
 def execute(manifest, arguments, working_directory, output, maximum_wall_seconds,
-            cancel_file=None, *, memory_bytes, tasks, cooperative_capture=False):
+            cancel_file=None, *, memory_bytes, tasks, cooperative_capture=False, managed_reservation=None):
     require(type(arguments) is list and all(type(a) is str and '\0' not in a for a in arguments),
             'invalid_process_arguments')
     require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
@@ -67,7 +67,8 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
     provenance, closure, last, binding = 'invalid_or_incomplete_runtime', None, None, None
     try:
         binding = contained_process.start(manifest, args, cwd, output/'contained', memory_bytes=memory_bytes,
-                  tasks=tasks, maximum_wall_seconds=maximum_wall_seconds, environment=environment)
+                  tasks=tasks, maximum_wall_seconds=maximum_wall_seconds, environment=environment,
+                  managed_reservation=managed_reservation)
         _write(output/'owned-process.json', {'pid': binding['initial_main_pid'],
                'start_ticks': binding['initial_start_ticks'],
                'boot_id': Path('/proc/sys/kernel/random/boot_id').read_text().strip(),

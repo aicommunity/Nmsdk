@@ -1,0 +1,9 @@
+# Candidate: общий контроль проб распознавания
+
+Pulse candidate `f6a917d395b21610f6bf6cbb0ed945e6cdee31dd` на основе lifecycle8644 объединяет7 дублированных методов Classic/Branch в Core/TimeLearner/NativeRecognitionControl.h. Public component classes/signatures/layout сохраняются; helper не создаёт состояние, не вызывает nested Calculate/Reset/Build и не меняет storage physics. Topology-specific construction и bindings остаются у существующих adapters.
+
+Методы: ObserveNativeRecognitionContext, HasNativeRecognitionTrialIdentity, IsNativeRecognitionTrialIdle, QueueNativeRecognitionTrial, TakeNativeRecognitionTrialResult, CancelNativeRecognitionTrial, ExportNativeRecognitionState. Порядок owned-PostTune/available/failure/hold/implementation проверок и diagnostic strings сохранён. Общие38 строк исходных тел побайтно совпали в двух топологиях, обратная owner qualification восстановила их точно. [Mechanical receipt](SharedRecognitionMechanicalVerification.json) не является runtime PASS.
+
+Следующий server gate — отдельная сборка после завершения текущей очереди Elder, затем8 существующих NativeRecognitionOwner controls (Classic/Branch×N0/N1 и fresh destination silent/spiking) и полный133 lifecycle/finalization regression. Native recognition controls проверяют реальный import, paired response, freeze/revision, cancel/sample gap и ownership, а не извлечённую копию тела helper. Нынешние Tests/App/CMake не меняются; отдельный spec только объявляет существующие test IDs.
+
+Ни focused18/full133 предыдущего lifecycle8644, ни normal304/ASan262 другого code snapshot не приписываются новому helper. Нужны actual native gate и оставшаяся общая matrix. Build/runtime обновлять только в новом изолированном SDK; работающие jobs и исходники их runtime не менять. До приёмки не объединять candidate в develop. CapturedPerInput/N−1 и tolerances неизменны; научный результат не заявляется.

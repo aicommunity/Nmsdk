@@ -40,9 +40,12 @@ PostTune можно оставить выключенными; базовый к
 
 Normal304 и адресные ASan8 SDK2e прошли. ASan133 A3 дал132 passed/1 output-directory
 assertion failure; runner исправлен и адресно проверен на прежних бинарниках.
-Полный свежий A5 выполняется отдельно: до его terminal/JUnit/closure нельзя
-объявлять общий SDK принятым. Старые положительные ASan304 относятся к другому
-SDK и не заменяют этот результат. Detect_leaks=0 не доказывает отсутствие утечек.
+Полный свежий A5 прошёл133/133. Сверены4888 primary members,321 native,
+323 Python и335 tool source hashes; fresh closure/released lease подтверждены.
+[Точные версии и scope](IntegratedSharedAsan133Verification.json): root2e061/
+Pulse12d, без последующих invalid-budget/recovery изменений. Это закрывает
+заявленный ASan133 gate, не всю обязательную матрицу SDK. Старые ASan304 относятся
+к другому SDK. Detect_leaks=0 не доказывает отсутствие утечек.
 
 Coordinator schema1/schema2 прошёл16/16 cases /40 native phases, попарные CSV
 совпали. ConditionSpec binding при этом декларативен; он не доказывает полную
