@@ -8,7 +8,6 @@
   "runtime_tests_passed": false,
   "whole_plan_complete": false,
   "compiler_parallelism": 1,
-  "worker_memory_max_bytes": 4294967296,
   "worker_tasks_max": 128,
   "maximum_worker_wall_seconds": 21600,
   "build_type": "RelWithDebInfo",
@@ -36,7 +35,8 @@
       "worker_start_ticks": "303693105",
       "build_pid": 924029,
       "build_start_ticks": "303693510",
-      "worker_and_wrapper_sha256_verified_on_server": true
+      "worker_and_wrapper_sha256_verified_on_server": true,
+      "worker_memory_max_bytes": 4294967296
     },
     {
       "label": "attempt-invalid-budget-fixed-normal-a1",
@@ -55,7 +55,76 @@
       "expected_assertion_status": "passed",
       "additional_adjacent_functions": 74,
       "dependency": "s07-attempt-invalid-budget-baseline-normal-a1: fresh closed cgroup + released lease + expected_baseline_failures_observed=true",
-      "worker_and_wrapper_sha256_verified_on_server": true
+      "worker_and_wrapper_sha256_verified_on_server": true,
+      "worker_memory_max_bytes": 4294967296
+    },
+    {
+      "label": "attempt-invalid-budget-fixed-native-a1",
+      "source_root_commit": "a2df1eac50bfb53e5ce6c9220eed8b7da7b5ba0b",
+      "PulseLib_commit": "2c7e0144a902795cb6287ee677cff5aa08998847",
+      "source": "/media/user/Data/TimeLearnerRefactor/source-attempt-invalid-budget-fixed-normal-a1",
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-attempt-invalid-budget-fixed-normal-a1",
+      "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-attempt-invalid-budget-fixed-native-a1",
+      "wrapper_pid": 930960,
+      "wrapper_start_ticks": "303761703",
+      "observed_state": "waiting_for_live_fixed_normal_queue",
+      "worker_source_sha256": "e7fb3fb5545d887bb245c71c1893134ed0ceba10bfeefff066c42d6ab9b17e1e",
+      "wrapper_source_sha256": "2cf3863e92f010f82d8fa146123d2b2115505679471dfb2804b350274ff71e33",
+      "worker_and_wrapper_sha256_verified_on_server": true,
+      "dependency": "s07-attempt-invalid-budget-fixed-normal-a1: fresh closed cgroup + released lease + fixed_controller_regressions_passed=true; inspect original 4/74 JUnits",
+      "worker_memory_max_bytes": 8589934592,
+      "expected_test_ids": [
+        "NativeTrainingService/ClassicN0SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/BranchN0SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/ClassicN1SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/BranchN1SearchAndFreshNegativeFinalGate",
+        "NativeTrainingService/ExactAutoCompletionResetWarmRestartAndRetarget",
+        "NativeTrainingService/ClassicExternalStopPreservesCensoredEvidence",
+        "NativeTrainingService/BranchExternalStopPreservesCensoredEvidence",
+        "NativeTrainingService/ModelTimeBudgetCannotManufactureConvergence",
+        "NativeLearnedState/ClassicN0",
+        "NativeLearnedState/BranchN0",
+        "NativeLearnedState/ClassicN1",
+        "NativeLearnedState/BranchN1",
+        "NativeLearnedState/ExactCertificateWithExplicitPointTwoTolerance",
+        "NativeLearnedState/ClassicConfiguredN1",
+        "NativeLearnedState/BranchConfiguredN0",
+        "NativeStoppedState/ClassicFinal",
+        "NativeStoppedState/BranchFinal",
+        "NativeStoppedState/ClassicInvalidProbe",
+        "NativeStoppedState/BranchInvalidProbe",
+        "NativeStoppedState/ClassicN0BudgetSearch",
+        "NativeStoppedState/BranchN0BudgetSearch",
+        "NativeStoppedState/ClassicN0RepeatedHalfCandidate",
+        "NativeStoppedState/BranchN0RepeatedHalfCandidate"
+      ],
+      "expected_assertion_status": "passed",
+      "compilation_disabled": true,
+      "ASan_executed": false
+    }
+  ],
+  "build_worker_memory_max_bytes": 4294967296,
+  "producer_metadata_errata": [
+    {
+      "applies_to": [
+        "attempt-invalid-budget-baseline-normal-a1",
+        "attempt-invalid-budget-fixed-normal-a1"
+      ],
+      "fields": [
+        "resource-preflight.json/native_gates_disabled",
+        "reservation.json/scope"
+      ],
+      "issue": "Inherited build-only descriptions are stale: native gates are explicitly declared and run after build. Use original gate specs, JUnit, process records and terminal records for execution evidence; do not infer execution from those descriptions. Active workers were not edited."
+    },
+    {
+      "applies_to": [
+        "attempt-invalid-budget-fixed-normal-a1",
+        "attempt-invalid-budget-fixed-native-a1"
+      ],
+      "fields": [
+        "queue/state.json/state"
+      ],
+      "issue": "Inherited waiting-state wording mentions earlier SDK802 prerequisite; actual dependency.job_id and kernel cgroup binding identify the current predecessor. Do not use display wording as dependency identity."
     }
   ]
 }

@@ -10,6 +10,22 @@ assertion failures. Фактические PID/start_ticks проверены п
 свидетельство запуска и ожидания, а не прохождения тестов. Условия и идентичности
 запуска сохранены в [job record](AttemptInvalidObservationBudgetJobs.json).
 
+После fixed normal gate дополнительно поставлены 23 оригинальные native
+проверки реальных Classic/Branch: поиск N0/N1, отрицательный final pass,
+остановка/timeout, сохранение censored evidence, completed/stopped model
+transport, configured paths и N0 repeated partial state. Они используют новый
+compiled SDK, без дополнительной сборки, и ждут closure fixed worker с
+положительными исходными 4/74 JUnit. Это отдельная интеграционная приёмка,
+не повтор 32 управляемых сценариев и не научная классификация.
+
+В неизменяемых временных producers обнаружены унаследованные описательные
+поля «build only/native gates disabled» и старое название waiting state.
+Ошибки этих подписей перечислены в job record. Реальное выполнение определяется
+gate specification, JUnit, process identity и kernel cgroup, а зависимость —
+точным dependency.job_id. Работающие producers не редактировались; при
+последующем разборе нельзя использовать эти подписи как доказательство
+отсутствия тестов либо идентичности предшественника.
+
 ## Исходный риск и сохранённый baseline
 
 Baseline с новыми регрессиями и прежним PulseLib:
