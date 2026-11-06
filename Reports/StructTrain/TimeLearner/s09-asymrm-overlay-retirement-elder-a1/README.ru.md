@@ -1,0 +1,1 @@
+Historical5 AsymRm XML cold warm transport patchers retired: production history220 and restored-path negative passed; exact Bin5 deletions+3 historical documentation prefixes, Root4 paths. All other config/data/native/code objects and original report bodies unchanged. No model or old script executed; full migration and science completion not claimed.
