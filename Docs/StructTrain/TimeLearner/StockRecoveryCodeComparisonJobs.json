@@ -1,0 +1,22 @@
+{
+  "kind": "stock_recovery_code_comparison_gate_observation",
+  "schema_version": 1,
+  "observed_utc": "2026-11-06T20:41:30Z",
+  "host": "10.245.1.17",
+  "job_id": "s07-stock-code-compare-a1",
+  "state": "running_verified_live",
+  "owner": {"pid": 1261639, "start_ticks": "307285397"},
+  "owner_kernel_identity_checked": true,
+  "source_root": "00ebc7286726c7d26c9fca2fff1baab0089123c1",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-stock-code-compare-a1",
+  "readbacks": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-code-compare-a1",
+  "fixture": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-normal-a1/study",
+  "fixture_native_evidence": "da57d3cb10826843790b193e93cdcb380fa7f0fc",
+  "expected_tests": 6,
+  "additional_cli_check": "complete production self-comparison over the actual eight-case primary",
+  "new_native_calculations": false,
+  "fixture_modified": false,
+  "tests_passed_attested": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
