@@ -21,3 +21,14 @@ file.open(QIODevice::WriteOnly|QIODevice::NewOnly)==false. На сервере �
 Проверка нужна на прежних normal/ASan binaries с этим точным isolated test,
 затем свежий полный ASan133. До этого общий SDK gate остаётся непринятым.
 Проверки с извлечённой копией тела функции или mock моделью не предусматриваются.
+
+Адресная приёмка06.11: прежние SDK2e normal и ASan binaries прошли тот же
+изолированный оригинальный C++ test, оба записали по2 штатных BranchAlias JSON.
+Elder data `f52d481fd095987186ec2018855883cb872d4197`, M40 data
+`58334ecb5454c0694ac90c230cb9e534680b22e3`; проверены все25 members каждого
+архива,284 tool source hashes, реальные loaded binary/libasan и fresh closure/
+released lease. [Receipt](NativeGateOutputDirectoryVerification.json).
+Новый полный ASan133 A4 запущен отдельно на тех же бинарниках с исправленным
+runner642a9c875; исходный A3 остаётся132 passed/1 failed. Ни адресный PASS,
+ни запуск A4 не подменяют полный свежий итог. Область приёмки этого исправления —
+подготовка output в Python gate, не весь SDK и не алгоритм Branch.
