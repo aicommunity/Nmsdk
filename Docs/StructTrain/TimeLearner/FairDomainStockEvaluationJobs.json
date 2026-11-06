@@ -1,0 +1,130 @@
+{
+  "observed_utc": "2026-11-06T22:15:59.581268+00:00",
+  "pid": 1314548,
+  "start_ticks": "307854426",
+  "process_state": "S",
+  "queue": {
+    "state": "waiting_for_matched_baseline_native_closure_and_resources",
+    "dependency": {
+      "kind": "timelearner_worker_dependency_state",
+      "schema_version": 1,
+      "job_id": "s07-stock-fair-domains-normal-a2",
+      "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2-container",
+      "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+      "closure": {
+        "execution": "running",
+        "all_processes_closed": false,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "1f76bb84e1fc425ee8429723a3ab89e34164982707c63d38a9d6f20767785f75",
+          "unit": "timelearner-1e9f4994-99d1-4b8b-b23d-90f5e372fbf4.service",
+          "invocation_id": "ea57a477a56e4ce38d61cf2e0f223f3b",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1e9f4994-99d1-4b8b-b23d-90f5e372fbf4.service",
+          "initial_main_pid": 1292040,
+          "initial_start_ticks": "307579961",
+          "sha256": "41311b21465142fc28ee2d73d7a615eaa60c4ed094d97fe6b7dbd327d7db5156"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "1292040",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1e9f4994-99d1-4b8b-b23d-90f5e372fbf4.service",
+          "MemoryMax": "4294967296",
+          "TasksMax": "128",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 1e9f4994-99d1-4b8b-b23d-90f5e372fbf4",
+          "LoadState": "loaded",
+          "ActiveState": "active",
+          "SubState": "running",
+          "InvocationID": "ea57a477a56e4ce38d61cf2e0f223f3b"
+        },
+        "memory_max": 4294967296,
+        "tasks_max": 128,
+        "scientific_verdict": null
+      },
+      "reservation_optional": false,
+      "reservation_state": null,
+      "reservation_token": null,
+      "state": "pending",
+      "reason": "dependency_worker_group_still_live",
+      "successful_execution_attested": false,
+      "scientific_verdict": null
+    },
+    "memory_available_bytes": 46085591040,
+    "disk_free_bytes": 379890429952,
+    "new_build_started": false,
+    "new_native_models_started": false,
+    "elapsed_seconds": 0.01414532819762826
+  },
+  "worker_source_sha256": "fe8c69323c7351a9cffa40100e6171173826b559b261c174d2762b1b2b2a1fa0",
+  "output_created": false,
+  "container_created": false,
+  "launcher_log": "",
+  "kind": "stock_fair_domain_frozen_queue_observation",
+  "schema_version": 1,
+  "host": "10.245.1.17",
+  "job_id": "s07-stock-fair-frozen-normal-a1",
+  "tool_root": "eae3a302185406b841284abdaf407c56b77891b9",
+  "compiled_root": "36f598524b08ef9a5b72e26e50ef1f34501331e2",
+  "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+  "models": 8,
+  "planned_trials": 64,
+  "planned_trial_soma_pairs": 160,
+  "run_conditions": {
+    "reset_policy": "reset_per_trial",
+    "window_seconds": 2,
+    "rotations": 1,
+    "threshold": "inherited_fixed",
+    "calibration": false,
+    "independent_patterns": false,
+    "stopped_models": "diagnostic_only_native_import"
+  },
+  "worker_limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 128,
+    "maximum_wall_seconds": 86400,
+    "preflight_before_queue": true
+  },
+  "requirements_before_worker": [
+    "whole predecessor process group closed",
+    "predecessor reservation released",
+    "stock_recovery_matrix_executed_and_audited=true",
+    "available memory at least 8GiB",
+    "available Data disk at least 12GiB"
+  ],
+  "render_python": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+  "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/stock-fair-frozen-normal-a1",
+  "large_derived_reports_in_git": false,
+  "archive_policy": "Only owner/hash-bound duplicate glog aliases may be omitted; primary source files retained.",
+  "classification_assessed": false,
+  "whole_plan_complete": false,
+  "following_native_evaluation": {
+    "observed_utc": "2026-11-06T22:30:09.435777+00:00",
+    "worker": {
+      "pid": 1318579,
+      "start_ticks": "307911504",
+      "identity_matches": true
+    },
+    "tests": {
+      "tests_run": 5,
+      "successful": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "terminal": null,
+    "exception": null,
+    "analysis": null,
+    "stdout_tail": [
+      "DIAGNOSTIC-EVALUATE Classic-threshold-low-retry32",
+      "DIAGNOSTIC-EVALUATE Classic-threshold-low-advance32"
+    ],
+    "state": "native_diagnostic_evaluation_running"
+  }
+}
