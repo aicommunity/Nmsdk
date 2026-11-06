@@ -118,8 +118,8 @@ Root `7e06a570236563a332722ff0357017dfcfd90401` добавляет
 не разрешает принять missing/ambiguous observation или выдать сертификат.
 Проверка отдельной пробы описана ниже. Её ещё нужно связать с каждым recovery
 rejection, фазой поиска и общим бюджетом, затем интегрировать
-completed/stopped/C-history readers. C++ tests и native recovery пока не
-проверены; этот срез остаётся feature-кандидатом.
+completed/stopped/C-history readers. Typed journal C++ и stock cold recovery
+пока не проверены; этот срез остаётся feature-кандидатом.
 
 ### Проверка первичной невалидной пробы: два сервера
 
@@ -199,10 +199,18 @@ search trial IDs, точными rejections, фазой и bounds, провер�
 Standalone validator не включён в full completed/stopped audit: публичные
 читатели пока явно отклоняют schema5.
 
-Подготовлены дополнительные C++ проверки журнала и Python mutation tests на
-реальных старых пробах с гипотетическими decision metadata. Они не доказывают,
-что исторический controller исполнял новую политику. Новый срез ещё не
-выполнялся. Schema5 остаётся незавершённым feature-форматом; ранние codec
+Подготовлены дополнительные C++ проверки журнала. Python mutation tests на
+реальных старых пробах с гипотетическими decision metadata прошли54/54 на
+каждом сервере (source `cabe942c3e3f9611ac1cc2f189daf69847cf07c7`):10 envelope,
+12 ConditionSpec,13 pipeline-condition,5 primary,9 stock boundary и5 history.
+Проверяются phase/context, serial/run/trial, bounds, budget increments,
+терминальные причины, rejection coverage, запрет final/capture recovery и
+unknown после потери истории. Это не доказывает, что исторический controller
+исполнял новую политику. Evidence: M40 `35ba64dbc9d84d0d1087ebd46985435bc8d2017d`,
+Elder `25c7c5b2110d4c9a23f3676ee207fdec45e04e8b`.
+[Проверка](CandidateRecoveryHistoryVerification.json) связывает16 source files
+на каждом сервере и подтверждает побайтно прежние проверенные input manifests.
+Сам C++ journala34 ещё не запускался. Schema5 остаётся незавершённым feature-форматом; ранние codec
 артефакты Pulse70f читаются в контексте своего exact source snapshot, без
 достраивания отсутствующего журнала. Cold configuration5 при этом не меняется.
 

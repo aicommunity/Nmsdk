@@ -13,7 +13,9 @@
 Последующий feature Pulse70f / rootef215 прошёл116 C++ controls на M40,
 включая opt-in recovery и общий invalid budget; это отдельный срез, не
 ASan-приёмка SDK12d и не merge в develop. Новый typed recovery journal
-Pulsea34 ещё не проверен. [Exact source, primary и пределы](UnassignedBurstCandidateRecovery.ru.md).
+Pulsea34 ещё не проверен; его Python history-validator прошёл54/54 на каждом
+сервере на hypothetical metadata, без native execution proof.
+[Exact source, primary и пределы](UnassignedBurstCandidateRecovery.ru.md).
 
 | Возможность | Принятый develop | Проверяемый кандидат / остающиеся ограничения |
 |---|---|---|
