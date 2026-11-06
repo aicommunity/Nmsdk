@@ -176,3 +176,11 @@ evaluation archives ещё проходят публикацию; предвар
 теперь связан с проверенными Train/evaluation Git primary. Все восемь попыток
 остановлены без certificate;64 diagnostic responses не показали классификации.
 Render-only retry и визуальная приёмка остаются отдельными незавершёнными работами.
+
+
+Адресный archive API schemas1..4 проверен9/9 на каждом сервере с идентичными
+6 producer snapshots/577 файлами. [Сверка](PackagedPipelineArchiveTwoHostVerification.json).
+Это inclusion/integrity gate, не model convergence и не вся fault matrix.
+В stock report добавлены4 вручную просмотренных Soma1 PNG первого Classic-low
+случая; первый model cache завершён, полный eight-model render ещё работает.
+[Visual scope](StockRecoverySelectedVisualQA.json).

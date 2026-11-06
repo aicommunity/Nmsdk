@@ -50,5 +50,15 @@ canonicalize_pipeline_archive создаёт отдельный архив, не
 M40 A2 прошёл9/9 без skips и потоковую проверку реального stock archive:
 3455 regular members,16 run closures/3394 artifact entries,630119342 bytes.
 Сверены347 tool source hashes и сохранены baseline/A1/launch-collision failures.
-[Приёмка](StockRecoveryNativeVerification.json). Другой worker для нового
-packing API ещё не проверен; полная scheduler/publisher fault matrix открыта.
+[Приёмка](StockRecoveryNativeVerification.json). Elder также прошёл9/9, девять primary members и347 source hashes сверены;
+шесть исходных snapshots/577 файлов побайтно соответствуют корпусу M40.
+[Двухсерверная сверка](PackagedPipelineArchiveTwoHostVerification.json).
+M40 дополнительно проверил реальный stock archive16 runs; это действие на Elder
+не повторялось. Полная scheduler/publisher fault matrix остаётся открытой.
+
+
+Elder первый launcher остановился до worker из-за унаследованного имени
+временного файла. Использовано отдельное новое имя; original launch log сохранён
+в evidence781b42f955b63cd57e5e519cef611d856e8562dc. Вторая попытка прошла,
+kernel closure/released lease подтверждены. Ни один исторический скрипт
+из fixture archives не исполнялся.
