@@ -1,0 +1,18 @@
+[
+  {
+    "pid": 2727457,
+    "comm": "(sd-pam)",
+    "parent_pid": 2727455,
+    "argv0": "(sd-pam)",
+    "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/init.scope",
+    "scope": "identified PAM/SSH transport helper; protected proc cwd/fd not inspected; child processes scanned individually"
+  },
+  {
+    "pid": 2728914,
+    "comm": "ssh-agent",
+    "parent_pid": 2727481,
+    "argv0": "/usr/bin/ssh-agent",
+    "cgroup": "0::/user.slice/user-1000.slice/session-772.scope",
+    "scope": "identified PAM/SSH transport helper; protected proc cwd/fd not inspected; child processes scanned individually"
+  }
+]
