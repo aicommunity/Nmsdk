@@ -1,0 +1,37 @@
+{
+  "root_base": "990361d44a24ea6a2a541ccf0fc7d15a98504abf",
+  "root_candidate": "e38260b47f718cb6dc5695ca2e36e0ab9dc12b1f",
+  "bin_base": "f12f09ae1f7fc0a9af1d99be86d3a4002a3cf4aa",
+  "bin_candidate": "4123c177848f159dd52de41dffe923085d14d633",
+  "bin_exact_changes": {
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/DIAG_LAST_PULSE_span25_packA.md": "M",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PHASE5_SPAN50_100.md": "M",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SPAN100_PROTOCOL.md": "M",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py": "D",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py": "D"
+  },
+  "root_exact_changes": [
+    "Bin",
+    "Docs/StructTrain/TimeLearner/AsymRmOverlayRetirement.ru.md",
+    "Docs/StructTrain/TimeLearner/AsymRmOverlayRetirementReview.json",
+    "Docs/StructTrain/TimeLearner/script_migration.json"
+  ],
+  "all_other_bin_blobs_unchanged": true,
+  "preserved_original_report_bodies": [
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/DIAG_LAST_PULSE_span25_packA.md",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PHASE5_SPAN50_100.md",
+    "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SPAN100_PROTOCOL.md"
+  ],
+  "unchanged_root_native_and_code_trees": {
+    "Scripts": "6db355ef3d6847dc354f278f1a37428cc9b91a9a",
+    "Tests": "cf51e3cf12b4529b123bc1210db220e4736b58ef",
+    "App": "1637df3021509a59074a8ee9e747e5b4d290ba25",
+    "CMakeLists.txt": "2a54513b75286c025142c1972f26a74b3ee2e176",
+    "Libraries": "78a148282ce14dc32001f1715bacdd451b824551",
+    "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014"
+  },
+  "scientific_verdict": null
+}

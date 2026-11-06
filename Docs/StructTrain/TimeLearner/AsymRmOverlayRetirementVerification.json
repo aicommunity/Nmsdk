@@ -1,0 +1,188 @@
+{
+  "kind": "timelearner_asymrm_overlay_retirement_acceptance",
+  "source_root": "e38260b47f718cb6dc5695ca2e36e0ab9dc12b1f",
+  "source_bin": "4123c177848f159dd52de41dffe923085d14d633",
+  "both_workers": [
+    {
+      "host": "m40",
+      "data_commit": "45723a5242810d8da50c41eae6453239802e8e70",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-asymrm-overlay-retirement-m40-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 147028,
+          "sha256": "5c459c9df15feb81908aab84045f7272d1d3acbc9a340c7577673a6aaf2b053a",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 220,
+      "source_hashes_verified": 284,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/DIAG_LAST_PULSE_span25_packA.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PHASE5_SPAN50_100.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SPAN100_PROTOCOL.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py": "D"
+      },
+      "three_report_bodies_preserved": true,
+      "restored_path_negative": {
+        "root_commit": "cb77ab754fb76c45128bc993126dd9ed44997fc7",
+        "bin_commit": "03a3967982eee7697a649949820dd301ad20d432",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-asymrm-overlay-retirement-a1",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-asymrm-overlay-retirement-a1-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "03af5d3b201e0bde4c75a38393e7d7261284e1bd8ed7cc5f29991dc7721b5467",
+              "unit": "timelearner-fd3604d8-6738-415c-9ec0-1b6c3b8b8703.service",
+              "invocation_id": "77f1ae87bf744c5d89dfde0e6472f585",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fd3604d8-6738-415c-9ec0-1b6c3b8b8703.service",
+              "initial_main_pid": 893245,
+              "initial_start_ticks": "303299090",
+              "sha256": "635acfb3f3cb6c3e20e70d0dcdba13bc2dcfe63bffa6e36e0e2f440dbc30a75d"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-fd3604d8-6738-415c-9ec0-1b6c3b8b8703.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "7035bd71-1c34-4444-a24a-73df649dff53",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    {
+      "host": "elder",
+      "data_commit": "bcb532b4c044827646670766874ff800c568ff36",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-asymrm-overlay-retirement-elder-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 146888,
+          "sha256": "f6806e7d9208b4a71205d7ff82512f0e83a4a57bc48e5f66309f70a5f8b5c848",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 220,
+      "source_hashes_verified": 284,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/DIAG_LAST_PULSE_span25_packA.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/PHASE5_SPAN50_100.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/SPAN100_PROTOCOL.md": "M",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/inject_analyzer.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/merge_train_weights.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/patch_test_model.py": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/warm_start_l.py": "D"
+      },
+      "three_report_bodies_preserved": true,
+      "restored_path_negative": {
+        "root_commit": "cf193f2fa7ad1ec0e11a2e36673fb9042288f1aa",
+        "bin_commit": "e0bfce114b8c7a39371689568d418fda45d18bc5",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/cold_patch_dspan.py",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-asymrm-overlay-retirement-a1",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-asymrm-overlay-retirement-a1-container",
+          "registry": "/home/user/timelearner-refactor/resource-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "a9609d560ac85edf2aed55e91ebbc3dcfe9ec0c5a4f2f59ec798d40b905a9365",
+              "unit": "timelearner-c851c8cb-e4b3-4a2c-966e-7b54c3dac885.service",
+              "invocation_id": "b6f041ca65d645ab8022c98668c51647",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c851c8cb-e4b3-4a2c-966e-7b54c3dac885.service",
+              "initial_main_pid": 4024379,
+              "initial_start_ticks": "352755966",
+              "sha256": "b38b60991a22e14f66f27e7a23cd21f2759a414f745cc7e06ff1672025cb66ef"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-c851c8cb-e4b3-4a2c-966e-7b54c3dac885.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "77418f88-9ed2-4380-8272-2d21030b2e29",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    }
+  ],
+  "old_scripts_or_native_models_executed": false,
+  "whole_migration_complete": false,
+  "scientific_verdict": null,
+  "accepted_bin_merge": {
+    "commit": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+    "tree": "12e65aad43428b6f17ea581ec8072f0f9034f23c",
+    "tree_equals_checked_candidate": true,
+    "origin_develop_reachability_checked": true
+  }
+}
