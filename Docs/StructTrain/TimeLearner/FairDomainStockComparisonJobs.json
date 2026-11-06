@@ -4,8 +4,11 @@
   "observed_utc": "2026-11-06T20:52:11Z",
   "host": "10.245.1.17",
   "job_id": "s07-stock-fair-domains-normal-a1",
-  "state": "queued_after_normal137_and_asan38",
-  "queue_owner": {"pid": 1267249, "start_ticks": "307347915"},
+  "state": "prelaunch_rejected",
+  "queue_owner": {
+    "pid": 1267249,
+    "start_ticks": "307347915"
+  },
   "queue_owner_kernel_identity_checked": true,
   "worker_source_sha256": "d088c8ab851453b9503b21b8781c1f9a1d5e6756163ccda62897752d16508e8a",
   "tool_root": "00ebc7286726c7d26c9fca2fff1baab0089123c1",
@@ -30,9 +33,18 @@
   ],
   "console_and_root_cmake_unchanged_from_baseline": true,
   "conditions": 8,
-  "topologies": ["Classic", "Branch"],
-  "thresholds": [0.0117, 100],
-  "policies": ["retry_same_candidate", "advance_unassigned_burst"],
+  "topologies": [
+    "Classic",
+    "Branch"
+  ],
+  "thresholds": [
+    0.0117,
+    100
+  ],
+  "policies": [
+    "retry_same_candidate",
+    "advance_unassigned_burst"
+  ],
   "invalid_allowance_both_policies": 32,
   "normalization": "N1",
   "neuron_class": "NSPNeuronGen",
@@ -40,11 +52,20 @@
   "C_trim": false,
   "PostTune": false,
   "calibration": false,
-  "initial_isi": [0.01, 0.08, 0.16, 0.24],
+  "initial_isi": [
+    0.01,
+    0.08,
+    0.16,
+    0.24
+  ],
   "frequency_hz": 2000,
   "amplitude_reference": "CapturedPerInput",
   "reference_input_index": 3,
-  "tolerances": {"amplitude_absolute": 0.00001, "amplitude_relative": 0, "sync": 0.02},
+  "tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  },
   "before_train": "freeze all jobs and match every declaration/cold graph to baseline; six design checks; eight actual cold preflights",
   "after_train": "complete production audit, verify declarations stayed frozen, matched-code comparison of both full primary studies",
   "archive_policy": "regular payloads only; omit only owner/hash-bound duplicate glog aliases with explicit omission journal; preserve original files",
@@ -53,5 +74,37 @@
   "independent_random_repeats_attested": false,
   "scientific_verdict": null,
   "series_D_restarted": false,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "queue_owner_confirmed_absent": true,
+  "prelaunch_failure": {
+    "reason": "contained_limits_invalid",
+    "requested_enclosing_wall_seconds": 129600,
+    "supported_maximum_wall_seconds": 86400,
+    "no_worker_created": true
+  },
+  "following_attempt_a2": {
+    "job_id": "s07-stock-fair-domains-normal-a2",
+    "state": "native_training_in_progress",
+    "owner": {
+      "pid": 1292040,
+      "start_ticks": "307579961"
+    },
+    "tool_root": "00ebc7286726c7d26c9fca2fff1baab0089123c1",
+    "compiled_root": "36f598524b08ef9a5b72e26e50ef1f34501331e2",
+    "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+    "enclosing_wall_seconds": 86400,
+    "per_Train_budgets_unchanged": true,
+    "design_checks_passed": 6,
+    "matched_preregistration_before_native_execution": true,
+    "native_cold_preflights_completed": 8,
+    "first_completed_train": {
+      "case": "Classic-threshold-low-retry32",
+      "outcome": "invalid_observation",
+      "preliminary_until_full_study_verified": true
+    },
+    "observed_active_case": "Classic-threshold-low-advance32",
+    "observed_utc": "2026-11-06T21:33:39Z",
+    "readbacks": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+    "scientific_verdict": null
+  }
 }

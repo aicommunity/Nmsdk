@@ -4,7 +4,7 @@
   "observed_utc": "2026-11-06T20:41:30Z",
   "host": "10.245.1.17",
   "job_id": "s07-fair-domains-asan38-a1",
-  "state": "building_observed",
+  "state": "completed_verified",
   "queue_owner": {
     "pid": 1258939,
     "start_ticks": "307258672"
@@ -28,7 +28,7 @@
   "asan_options": "detect_leaks=0",
   "cgroup_memory_bytes": 4294967296,
   "cgroup_tasks": 128,
-  "native_tests_executed_yet": false,
+  "native_tests_executed_yet": true,
   "full_sdk_asan_matrix_attested": false,
   "leak_absence_attested": false,
   "new_stock_experiment_started": false,
@@ -38,5 +38,10 @@
     "pid": 1274374,
     "start_ticks": "307377300"
   },
-  "normal137_accepted": true
+  "normal137_accepted": true,
+  "tests_passed": 38,
+  "verification": "FairDomainTraversalAsan38Verification.json",
+  "primary_git_evidence": "53cd0cd2a02ef5cbf9555c08e1ef0a9b370233d6",
+  "fresh_worker_group_closed": true,
+  "lease_released": true
 }
