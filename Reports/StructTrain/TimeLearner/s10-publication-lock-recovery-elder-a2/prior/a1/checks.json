@@ -1,0 +1,25 @@
+{
+  "tests": 20,
+  "expected": 20,
+  "failures": [
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_crashed_frontend_cannot_release_live_git_push_and_explicit_recovery_resumes",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_linked_worktree_uses_same_live_kernel_guard",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_real_cli_receipt_and_existing_receipt_guard"
+  ],
+  "errors": [
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_artifact_verification_uses_original_objects_not_local_replacements",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_changed_committed_image_cannot_keep_previous_inventory",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_child_push_failure_prevents_root_push",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_children_first_and_idempotent",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_dirty_source_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_explicit_same_repository_push_target_does_not_change_remote_config",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_gitmodules_uneven_indentation_uses_native_committed_git_parser",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_ignored_uncommitted_image_blocks_every_push",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_missing_or_wrong_child_commit_is_preflight_failure",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_root_rejection_is_not_published_success",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_sparse_selected_ignored_artifact_is_staged_and_published",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_wrong_child_remote_does_not_claim_checkout_reproducibility",
+    "Scripts.StructTrain.TimeLearner.tests.test_publisher.PublisherTest.test_wrong_explicit_push_repository_is_rejected_before_push"
+  ],
+  "skipped": []
+}

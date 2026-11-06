@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_partitioned_native_gate",
+  "schema_version": 1,
+  "native_gate": {
+    "kind": "timelearner_native_test_gate",
+    "schema_version": 2,
+    "cooperative_runtime_capture": true,
+    "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-integrated-acceptance-asan-focused-a3/native-runtime.json",
+    "source_root": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1",
+    "expected_test_ids": [
+      "NativeRecognitionOwner/ClassicFreshDestination",
+      "NativeRecognitionOwner/BranchFreshDestination",
+      "NativeRecognitionOwner/ClassicSpikingFreshDestination",
+      "NativeRecognitionOwner/BranchSpikingFreshDestination",
+      "NativeRecognitionOwner/ClassicN0",
+      "NativeRecognitionOwner/BranchN0",
+      "NativeRecognitionOwner/ClassicN1",
+      "NativeRecognitionOwner/BranchN1"
+    ],
+    "maximum_wall_seconds": 21600,
+    "asan_options": "detect_leaks=0"
+  },
+  "maximum_total_wall_seconds": 21600,
+  "maximum_case_wall_seconds": 7200
+}

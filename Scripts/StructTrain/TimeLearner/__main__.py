@@ -30,6 +30,9 @@ def analyze(args: argparse.Namespace) -> dict:
     if args.format == "historical-selectivity":
         from .historical_selectivity import analyze_historical_csv
         result = analyze_historical_csv(source, args.expected_trial_ids)
+    elif args.format == "legacy-statistic-traces":
+        from .statistic_traces import analyze_inputs
+        result = analyze_inputs(source)
     elif args.format == "branch-dynamics":
         from .legacy_dynamics import analyze_telemetry
         result = analyze_telemetry(source, rest_bound=args.rest_bound,
@@ -73,6 +76,9 @@ def analyze(args: argparse.Namespace) -> dict:
     elif args.format == "stopped-solo":
         from .stopped_evidence import audit_stopped_state, load_case
         result = audit_stopped_state(*load_case(source))
+    elif args.format == "stopped-final-pass":
+        from .stopped_final_pass import audit_negative_final_pass, load_inputs
+        result = audit_negative_final_pass(*load_inputs(source))
     elif args.format == "recognition-evaluation":
         from .recognition_metrics import load_evaluation, score_recognition_evaluation
         require(args.model is not None, "recognition_model_package_required")
@@ -231,7 +237,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("capacitance-region", "capacitance-history", "capacitance-witness", "capacitance-binding", "training-capacitance-bridge", "domain", "probe", "learned-solo", "stopped-solo", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity"), required=True)
+    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces'), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
@@ -259,6 +265,9 @@ def main(argv: list[str] | None = None) -> int:
     publication.add_argument("specification", type=Path)
     publication.add_argument("--root", type=Path, required=True)
     publication.add_argument("--output", type=Path, required=True, help="new receipt outside source tree")
+    recovery = commands.add_parser("publish-recover", help="explicit Linux recovery of a closed publication lock; no push")
+    recovery.add_argument("--root", type=Path, required=True)
+    recovery.add_argument("--output", type=Path, required=True, help="new recovery receipt outside source tree")
     calibration = commands.add_parser("calibrate", help="run a native Console calibration job or select/confirm from saved primary measurements")
     calibration.add_argument("action", choices=("run", "select", "confirm"))
     calibration.add_argument("specification", type=Path)
@@ -582,6 +591,21 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError) as error:
             print(json.dumps({"kind": "timelearner_calibration_analysis_error", "validity": "invalid",
                               "reason": str(error), "calibrated": False, "evaluation_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "publish-recover":
+        from .native_evidence import EvidenceError
+        from .publisher import recover_publication_lock
+        try:
+            with args.output.open("x", encoding="utf-8") as receipt:
+                result = recover_publication_lock(args.root)
+                json.dump(result, receipt, ensure_ascii=False, indent=2, allow_nan=False)
+                receipt.write("\n")
+            print(json.dumps(result, ensure_ascii=False))
+            return 0
+        except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"kind": "timelearner_publication_lock_recovery", "recovery": "refused",
+                              "reason": str(error), "publication": "not_attempted",
+                              "scientific_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "publish":
         from .native_evidence import EvidenceError, load

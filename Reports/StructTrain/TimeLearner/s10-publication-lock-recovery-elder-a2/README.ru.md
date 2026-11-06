@@ -1,0 +1,1 @@
+Publisher20 real local Git cases passed, including frontend kill during live receive hook, kernel guard refusal, explicit public CLI recovery preserving old owner, and resumed children-first publication. Prior A1 code NameError and launcher CWD error preserved separately. No neural model executed; whole stage10 and remote distributed transaction not claimed.

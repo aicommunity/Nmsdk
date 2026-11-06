@@ -1,0 +1,72 @@
+{
+  "evidence_commit": "a241fc84b7783ccceba30f4998dcc94631992cfc",
+  "payload_checksums_verified": 13,
+  "exact_deployed_jobs": [
+    {
+      "label": "joint-asan-owner-readers-a3-queue",
+      "queue_sha256": "612bfd80970401d916fa05514c86922e75e968fda7e61278125bb853a0385f1e",
+      "worker_sha256": "2c17614472a0c31d352f490c254196057c3156e6967266202106d6eedea83af6",
+      "actual_worker_matches_AST_literal": true
+    },
+    {
+      "label": "integrated-acceptance-asan-build-a2",
+      "queue_sha256": "0c0acb426ac57aca0ebb01ce76afe94a851a586c6a0eaa00db8af5b57c91eea8",
+      "worker_sha256": "9a20cbbd07535282ca98d8a061d64bfbad6b6c96a6d91b746ed7fb1db91fab82",
+      "actual_worker_matches_AST_literal": true
+    },
+    {
+      "label": "integrated-acceptance-asan-focused-a3",
+      "queue_sha256": "824df28b7ea1ee00ca06f36cea472f9bbff6a67e1d5d458ffa7203fe390d99c4",
+      "worker_sha256": "02721cb8236844a3fc488539f1f4ffe89484ae214d406feaf64786de06936d0e",
+      "actual_worker_matches_AST_literal": true
+    },
+    {
+      "label": "integrated-acceptance-asan-lifecycle-a3",
+      "queue_sha256": "db303d4edd30257fc711b2af1ee3a879d6e584c9acb4328860f19d7ea1ab00f6",
+      "worker_sha256": "9e5a0ba89cab9ed3da9cb2849c62ba3499ed81af49b957b89b7221b20699ff03",
+      "actual_worker_matches_AST_literal": true
+    }
+  ],
+  "cancelled_only_waiting_queues": {
+    "kind": "timelearner_queue_replacement_cancellation",
+    "schema_version": 1,
+    "only_exact_owned_waiting_python_queues_stopped": true,
+    "active304_untouched": true,
+    "records": [
+      {
+        "pid": 151566,
+        "start_ticks": "294496748",
+        "previous_state": {
+          "state": "waiting_for_sdk802_ASan_owner8_reader128_closure_and_resources",
+          "dependency": null,
+          "memory_available_bytes": 46135910400,
+          "disk_free_bytes": 403346624512,
+          "new_build_started": false,
+          "new_native_models_started": false,
+          "elapsed_seconds": 8715.43595048599
+        },
+        "native_or_build_unit_created": false,
+        "reason": "Replace permanently stale failed-predecessor chain and unsupported129600s parent by separately bounded stages; active304 not touched.",
+        "owned_queue_exited": true
+      },
+      {
+        "pid": 168864,
+        "start_ticks": "294783992",
+        "previous_state": {
+          "state": "waiting_for_new_shared_controller_ASan_build_closure_and_resources",
+          "dependency": null,
+          "memory_available_bytes": 46130561024,
+          "disk_free_bytes": 403346956288,
+          "new_build_started": false,
+          "new_native_models_started": false,
+          "elapsed_seconds": 5835.468139275443
+        },
+        "native_or_build_unit_created": false,
+        "reason": "Replace permanently stale failed-predecessor chain and unsupported129600s parent by separately bounded stages; active304 not touched.",
+        "owned_queue_exited": true
+      }
+    ]
+  },
+  "full304_not_restarted": true,
+  "scientific_verdict": null
+}

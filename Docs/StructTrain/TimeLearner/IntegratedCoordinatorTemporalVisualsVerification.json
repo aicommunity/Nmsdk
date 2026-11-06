@@ -1,0 +1,805 @@
+{
+  "kind": "timelearner_integrated_coordinator_selected_visual_qa",
+  "schema_version": 1,
+  "observed_utc": "2026-11-05T17:19:52.087164+00:00",
+  "data_commit": "85e85c90e400b7c165f3011c4a8bae004535f43e",
+  "primary_commit": "26a602e84adef89056021a671055d8272330d810",
+  "exact_reader_root": "2e0618110a9abb48b94f6edc6b63c51f829ec810",
+  "source_hashes_verified_against_git_blobs": 323,
+  "metadata_members_verified": 644,
+  "metadata_sha256": "30c6fbabf1947c266f74c36eb0a91bc56cdc2529930610ffccce20c71f2d3a54",
+  "selected_count": 42,
+  "selected_bytes": 5784905,
+  "selected_manual_review_complete": true,
+  "all_full_cache_views_manually_reviewed": false,
+  "automated_checks": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "expected": 4
+  },
+  "coverage_at_render": {
+    "cases": 8,
+    "phase_reports": 16,
+    "train_trial_soma_pairs": 368,
+    "frozen_trial_soma_pairs": 24,
+    "calibration_trial_soma_pairs": 120,
+    "native_input_overlay_views_checked": 5752,
+    "plot_size_px": [
+      1920,
+      960
+    ],
+    "downsampling": false,
+    "minimum_tick_pixels_on_zoom": 8,
+    "source_files_unchanged": 2233,
+    "selected_images_published": false,
+    "manual_visual_QA": false,
+    "scientific_verdict": null
+  },
+  "original_index_sha256": "282be331417403950076cdf0a575621c190c8265deeb0e43e6356f8a7532a076",
+  "updated_index_sha256": "307d17d2fd211b6fb1fe64bb43e4d27aa61bec37063e4b6827cfb27b93a39bfa",
+  "raw_selection_and_coverage_left_unchanged": true,
+  "raw_manual_review_false_describes_producer_before_this_review": true,
+  "derived_gallery_change": "Added selected-only QA and physical/profile/signal/scale interpretation; PNG bytes unchanged. Original index recoverable from data commit.",
+  "records": [
+    {
+      "file": "selected/001.png",
+      "sha256": "1ae462837832eedeec9de5b6b21964f9789d4351a03fc33832c1eac055be438e",
+      "case": "Branch-v1",
+      "phase": "train",
+      "trial_id": "native-n1-mesh-Branch-isi030/managed-coordinator/session/1/capture/1/1",
+      "source_png": "reports/Branch-v1--train/training/probe-0000/soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. Training spike recording is disabled; absent event markers are not evidence of silence."
+    },
+    {
+      "file": "selected/002.png",
+      "sha256": "089c7d9a98cd7346fa4e44d1cd53cb316ad0be81f37e28a66757b839119a0cb9",
+      "case": "Branch-v1",
+      "phase": "train",
+      "trial_id": "native-n1-mesh-Branch-isi030/managed-coordinator/session/1/final/0/verify/10/2",
+      "source_png": "reports/Branch-v1--train/training/probe-0025/soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. Training spike recording is disabled; absent event markers are not evidence of silence."
+    },
+    {
+      "file": "selected/003.png",
+      "sha256": "b51c696c10f37f1a4de4a98c0a9858204c2baeb800ae1ea37ce62b7f12eaf968",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0000-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/004.png",
+      "sha256": "815eaa5ccc954d8055a38b389488740f515bf25abc1b9058bb832449e5e4eee6",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0000-soma-001/zoom-001.png",
+      "view": "zoom-001",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/005.png",
+      "sha256": "9fadd2784c87562ea083e1da4fe10f9bac414492e7e8cffcc2a1dd88acd776e7",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0000-soma-001/zoom-002.png",
+      "view": "zoom-002",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/006.png",
+      "sha256": "fd8e0931b6bee495675a7cf8ab4ce9d6822efeb48f06b7c39fb5c0a9d1716b53",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0001-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/007.png",
+      "sha256": "13a8cea61b5bf87feda8df75b8c4c670a299d9dfa5971aa4c97efd980afef910",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0001-soma-001/zoom-001.png",
+      "view": "zoom-001",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/008.png",
+      "sha256": "c3d6d10abd71bd22c672759ba6e24b69054f1a2a990830be1cdab8b941d4c491",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0001-soma-001/zoom-002.png",
+      "view": "zoom-002",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/009.png",
+      "sha256": "a607ca2458b7cf07caec1f526959eab2152db57ea45e4ca78aa7cb3087d51e21",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/2",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0002-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/010.png",
+      "sha256": "3d6cc1470e0a793c2c9859cd780a208cf2b250dbd96a3bd030838715373a3121",
+      "case": "Branch-v1",
+      "phase": "evaluate",
+      "trial_id": "Branch-v1/frozen/managed-coordinator-frozen/3",
+      "source_png": "reports/Branch-v1--evaluate/evaluation/trial-0003-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/011.png",
+      "sha256": "ee928939e051be1ea5be00b1b103b093c83785f8993094d936edacce60833150",
+      "case": "Branch-v2",
+      "phase": "evaluate",
+      "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Branch-v2--evaluate/evaluation/trial-0000-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/012.png",
+      "sha256": "d91b683cc014ecc654a0eb02618ac25d7302cc9eea9659bce56726a393fef29e",
+      "case": "Branch-v2",
+      "phase": "evaluate",
+      "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Branch-v2--evaluate/evaluation/trial-0001-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/013.png",
+      "sha256": "a75813fdde3e2cb87cf1ee35dacef52acdd211237b2e6fd044b0c178116cb2fa",
+      "case": "Branch-v2",
+      "phase": "evaluate",
+      "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/2",
+      "source_png": "reports/Branch-v2--evaluate/evaluation/trial-0002-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/014.png",
+      "sha256": "54ee1e0ab51bf5e79993f595ba5d7571f1d2bc6e8c02f125eeaa6c361daf70b1",
+      "case": "Branch-v2",
+      "phase": "evaluate",
+      "trial_id": "Branch-v2/frozen/managed-coordinator-frozen/3",
+      "source_png": "reports/Branch-v2--evaluate/evaluation/trial-0003-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/015.png",
+      "sha256": "cbc42cd74cd7b4f45605d203bb259de27061b91fbc11e9a707ba6ad7f5b2b7a1",
+      "case": "Classic-v1",
+      "phase": "train",
+      "trial_id": "native-n1-mesh-Classic-isi030/managed-coordinator/session/1/capture/1/1",
+      "source_png": "reports/Classic-v1--train/training/probe-0000/soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. Training spike recording is disabled; absent event markers are not evidence of silence."
+    },
+    {
+      "file": "selected/016.png",
+      "sha256": "18de6f87a833eebf6128ee71cf509dc3fb455fd3d7ab798977834e95afe3cdd7",
+      "case": "Classic-v1",
+      "phase": "train",
+      "trial_id": "native-n1-mesh-Classic-isi030/managed-coordinator/session/1/capture/1/1",
+      "source_png": "reports/Classic-v1--train/training/probe-0000/soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. Training spike recording is disabled; absent event markers are not evidence of silence."
+    },
+    {
+      "file": "selected/017.png",
+      "sha256": "c614bb060d00b38aa8cc81fcad01ec4f9f9e51b05cf308a64c622a9437f71402",
+      "case": "Classic-v1",
+      "phase": "train",
+      "trial_id": "native-n1-mesh-Classic-isi030/managed-coordinator/session/1/final/0/verify/26/2",
+      "source_png": "reports/Classic-v1--train/training/probe-0057/soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. Training spike recording is disabled; absent event markers are not evidence of silence."
+    },
+    {
+      "file": "selected/018.png",
+      "sha256": "dc256be45aa67dc675b28907de38d67e7f145f8518dc3a0f021bb994c15e6ba6",
+      "case": "Classic-v1",
+      "phase": "train",
+      "trial_id": "native-n1-mesh-Classic-isi030/managed-coordinator/session/1/final/0/verify/26/2",
+      "source_png": "reports/Classic-v1--train/training/probe-0057/soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. Training spike recording is disabled; absent event markers are not evidence of silence."
+    },
+    {
+      "file": "selected/019.png",
+      "sha256": "fae122ad2b80762fffa1ce60a91b524196275de4c02ba27bbcb0d26c8e2d6c71",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0000-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/020.png",
+      "sha256": "518d44fcac511f0ce1af2bc0b159593ef8851a5030595a530ce03f502282f5b1",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0000-soma-001/zoom-001.png",
+      "view": "zoom-001",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/021.png",
+      "sha256": "beae3f8b9c488d350377e4087ec2d3e9d70be649cea39a03a6f37cd8958c87c2",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0000-soma-001/zoom-002.png",
+      "view": "zoom-002",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/022.png",
+      "sha256": "2866fd1c3d10eb2d20d4e66c9b5a2701781a1636a17d631eefbb4517834fd29f",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0000-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/023.png",
+      "sha256": "578f1c3a2c20d05e4f55af274b4c79246ceb1ba8b29dc5b431dba638ae35317e",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0000-soma-002/zoom-001.png",
+      "view": "zoom-001",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/024.png",
+      "sha256": "685a7d2cd7ff2ea8c582638870ef48ef6922072ff39ccaa81811b6e67e584e7c",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0000-soma-002/zoom-002.png",
+      "view": "zoom-002",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/025.png",
+      "sha256": "4e131d6d14bd9c98df5abe2fbe80a2587cef8e7c5e42a141a0e3a1831c82b89a",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0001-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/026.png",
+      "sha256": "a0e97e03eaecb9fd76f99213953f8066b63bd1c56db00aece6ee26ca4b6b11b3",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0001-soma-001/zoom-001.png",
+      "view": "zoom-001",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/027.png",
+      "sha256": "51e3625a21e27ae0a437e8be52850a6ad79b292baca685be7ee1d4160d14d02c",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0001-soma-001/zoom-002.png",
+      "view": "zoom-002",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/028.png",
+      "sha256": "1c6c960dfc76c3e364f45381d3599d548800d4fca0388651b7d85a15bafb80a1",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0001-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/029.png",
+      "sha256": "3d87f09680c7ecad861fb96845abc9129ff84bfbbbeb7742709c7f2fbbdb3fb5",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0001-soma-002/zoom-001.png",
+      "view": "zoom-001",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/030.png",
+      "sha256": "dc01dbb70d476b02d4fb19133d3cdd6b1459e704bf6ecbc20b16b31598c52a53",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0001-soma-002/zoom-002.png",
+      "view": "zoom-002",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable native-step zoom; waveform/time labels visible. A zoom may show a tail without a stimulus or LT event outside that subwindow. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/031.png",
+      "sha256": "1cbbd0dc05fd40bde09e77ff81831b3fd372c8751decceb0ed74dc8a3c451473",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/2",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0002-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/032.png",
+      "sha256": "371fa82521b20fd490b1e55affc2d3de0e3dbf6f1b316b786c385a19e90ab7df",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/2",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0002-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/033.png",
+      "sha256": "92474cdaebbbb2d0673ea363236a2dc1fb771e06c7380cf5586ab95a8253f15a",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/3",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0003-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/034.png",
+      "sha256": "3210df8544240ea01430077feac1905fbeb1d90c197da8466c651710a89e4ee2",
+      "case": "Classic-v1",
+      "phase": "evaluate",
+      "trial_id": "Classic-v1/frozen/managed-coordinator-frozen/3",
+      "source_png": "reports/Classic-v1--evaluate/evaluation/trial-0003-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/035.png",
+      "sha256": "b649814d2794df4b4f2c05a9813b1b04318fb2cedbbe2042161edae148840308",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0000-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/036.png",
+      "sha256": "4b45525e39e19f9bae84b835f18afe49640e43a8c3db7665fef8d5201066f534",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/0",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0000-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/037.png",
+      "sha256": "93f435b15794316c757cfb7ef4be703ec6a9d260ab6262a3d5f6fa6e9ca9bb26",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0001-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/038.png",
+      "sha256": "f58c83330c2a39bfb01c9b042c8c23b3ec0c2df405133e4aa7ab63abbac1e8aa",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/1",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0001-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/039.png",
+      "sha256": "2704f786d9130d8434ba9d23807471e3c07a433bd8356a8280b77d96d62dd646",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/2",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0002-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/040.png",
+      "sha256": "9ecc459ec657ab4885106a2b3398ed9ada8deb72c43f72ab1d23a7b491a27d61",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/2",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0002-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/041.png",
+      "sha256": "8474d62d63f15aea1df973f958a2efece571e3e81c36ab7bfeb4e8a0ad6267c2",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/3",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0003-soma-001/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    },
+    {
+      "file": "selected/042.png",
+      "sha256": "012d1317e9635a9476fa56ee870512a027cda05db6d352dac96f6414246b7b40",
+      "case": "Classic-v2",
+      "phase": "evaluate",
+      "trial_id": "Classic-v2/frozen/managed-coordinator-frozen/3",
+      "source_png": "reports/Classic-v2--evaluate/evaluation/trial-0003-soma-002/overview.png",
+      "view": "overview",
+      "dimensions": [
+        1920,
+        960
+      ],
+      "opened_as_original": true,
+      "labels_axes_legends_readable": true,
+      "no_clipped_titles_observed": true,
+      "waveform_and_actual_input_visible": true,
+      "accepted_with_scope_notes": "Readable complete overview; actual input pulses and Soma waveform visible. LT events label downstream LTZone output, not a Soma action-potential trace."
+    }
+  ],
+  "scientific_stock8_verdict": null,
+  "initial_plan_stages_1_to_12_complete": false
+}

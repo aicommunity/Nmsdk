@@ -1,5 +1,9 @@
 # Структурное обучение TimeLearner
 
+[Полный isolated ASan304 и границы SDK802/shared SDK2e](Native304PartitionASanAcceptance.ru.md).
+
+[Linux publisher: actual Git frontend-crash recovery20×2](PublicationLockRecovery.ru.md).
+
 [Отдельный процесс: old/new A/B16 и читаемые графики](SharedRecognitionSavedAB.ru.md).
 [Положительные Owner8/133 и16/16 historical checks на обоих workers](Owner141AndHistoricalAdapters.ru.md).
 [Native133 и границы совместимости сохранённого анализа05.11](RecognitionAndRecovery-2026-11-05.ru.md).

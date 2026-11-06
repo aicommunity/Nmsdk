@@ -1,0 +1,52 @@
+{
+  "token": "1a4c2d8f-0cce-4a58-880e-ab0a6a0b6078",
+  "job_id": "s07-native-partition-full-asan-a2",
+  "owner": {
+    "pid": 202412,
+    "start_ticks": "295322316",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "resources": [
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-csearch-threshold-joint-asan-build-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-addressed-asan-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-addressed-asan-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-full-asan-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-partition-full-asan-a2",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-partition-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-partition-a2",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "scientific_verdict": null,
+  "capacity": null,
+  "release_policy": "Hold through archive creation and worker exit; outside controller recovers only after fresh kernel closure and exact owner binding."
+}

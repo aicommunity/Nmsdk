@@ -1,0 +1,1 @@
+Actual isolated ASan304 completed on SDK802/Pulsecc97149c. Every original case JUnit, native process identity, loaded executable/libasan mapping and unchanged projection validated. Full12095-member primary preserved. Owner8/readers128, shared SDK2e ASan gates and full scientific/refactoring acceptance remain separate. Leak detection disabled.

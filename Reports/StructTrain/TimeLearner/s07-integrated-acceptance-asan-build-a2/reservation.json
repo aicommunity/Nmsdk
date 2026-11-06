@@ -1,0 +1,63 @@
+{
+  "token": "9bc3febd-1356-4e72-8595-e766446a5b62",
+  "job_id": "s07-integrated-acceptance-asan-build-a2",
+  "owner": {
+    "pid": 565550,
+    "start_ticks": "299254564",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "resources": [
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-integrated-acceptance-asan-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-integrated-acceptance-asan-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "scientific_verdict": null,
+  "ledger_schema": 1,
+  "live_K1_ledger_not_migrated": true,
+  "scope": "Read/write paths only; actual memory/task cap enforced by the enclosing cgroup. Build only."
+}
