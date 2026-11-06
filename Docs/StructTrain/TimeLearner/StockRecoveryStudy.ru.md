@@ -41,3 +41,22 @@ stock templates/runtime: полнота восьми условий, равен�
 После Train необходимы native export/import и frozen recognition для валидно
 завершённых моделей; эти операции и графики сомы с входными импульсами пока
 не объявляются выполненными. СерияD не возобновляется.
+
+
+## Наблюдаемое состояние запуска
+
+M40 job s07-stock-recovery-normal-a1 запущен с tool roote83dc9c66 и
+compiled root84d6/Pulse416. Шесть design tests прошли без ошибок/пропусков;
+восемь native preflight подтвердили cold graph. Первые два Classic low-threshold
+Train завершились InvalidObservation без сертификата. У advance сохранены33
+реальных recovery events, последний InvalidBudgetStop; production reader5
+проверил полный stopped пакет и первичные пробы. Это предварительное наблюдение
+работающей серии: полный архив и его Git-публикация ещё ожидаются.
+[Job observation](StockRecoveryJobs.json) не является доказательством, что процесс
+остаётся жив позже указанной проверки.
+
+CLI проверен отдельно source6226ca3d3: help нового и прежнего CLI, реальный
+prepare восьми условий, отказ analyze для ещё не выполненной матрицы с exit2
+и без файла положительного результата. Сверены41 archive members и344 source
+files; нового Train в этой проверке не было.
+[Git evidence и сверка](StockRecoveryCliVerification.json).
