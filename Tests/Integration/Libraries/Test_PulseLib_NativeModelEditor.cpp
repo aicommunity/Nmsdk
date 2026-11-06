@@ -6589,3 +6589,53 @@ CSEARCH_MODELSPEC2_BOUNDARY(Classic,NNeuronTimeLearner,1,On,true)
 CSEARCH_MODELSPEC2_BOUNDARY(Branch,NNeuronTimeLearnerBranch,0,On,true)
 CSEARCH_MODELSPEC2_BOUNDARY(Branch,NNeuronTimeLearnerBranch,1,On,true)
 #undef CSEARCH_MODELSPEC2_BOUNDARY
+
+namespace {
+template<class Learner> void CandidateRecoveryCodec(int normalization)
+{
+    EditingRig<Learner> rig(2000,normalization,"candidate_recovery_codec",false,2,true);
+    for(const int base:{1,2,3,4})
+    {
+        if(base==2 && normalization!=0)continue;
+        SCOPED_TRACE(base);auto c=Configuration(rig);c.search.maximumInvalidObservations=1;
+        if(base==2)c.search.n0CandidateRepeats=2;
+        if(base>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(base==4){c.search.maximumCandidatesPerInput=4;c.search.capacitanceSearch=CapacitanceSearchPolicy{.8,1.2,0,4,8,131072};}
+        const auto legacy=EncodeConfiguredNativeTraining(c);ASSERT_EQ(legacy["schema_version"],QJsonValue(base));
+        EXPECT_FALSE(legacy.contains("invalid_measurement_recovery"));
+        c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+        const auto encoded=EncodeConfiguredNativeTraining(c);ASSERT_EQ(encoded["schema_version"],QJsonValue(5));
+        EXPECT_EQ(encoded["base_schema_version"],QJsonValue(base));
+        const auto decoded=ParseConfiguredNativeTraining(QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString());
+        EXPECT_EQ(decoded.search.invalidMeasurementRecovery,InvalidMeasurementRecovery::AdvanceUnassignedBurst);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(decoded),encoded);
+        auto projected=encoded;projected["schema_version"]=base;projected.remove("base_schema_version");projected.remove("invalid_measurement_recovery");
+        EXPECT_EQ(projected,legacy);
+        const auto reject=[&](QJsonObject value){EXPECT_THROW(DecodeConfiguredNativeTraining(value),std::invalid_argument);};
+        auto bad=encoded;bad.remove("base_schema_version");reject(bad);
+        bad=encoded;bad["base_schema_version"]=true;reject(bad);
+        bad=encoded;bad["base_schema_version"]=5;reject(bad);
+        bad=encoded;bad.remove("invalid_measurement_recovery");reject(bad);
+        bad=encoded;bad["invalid_measurement_recovery"]="retry_same_candidate";reject(bad);
+        bad=encoded;bad["unknown_factor"]=1;reject(bad);
+        bad=encoded;auto search=bad["search"].toObject();search["maximum_invalid_observations"]=0;bad["search"]=search;reject(bad);
+        bad=encoded;bad["schema_version"]=base;reject(bad);
+        auto duplicate=QJsonDocument(encoded).toJson(QJsonDocument::Compact).toStdString();duplicate.pop_back();
+        duplicate+=R"(,"\u0069nvalid_measurement_recovery":"advance_unassigned_burst"})";
+        EXPECT_THROW(ParseConfiguredNativeTraining(duplicate),std::invalid_argument);
+        Artifact(rig.name+"_schema5_base"+std::to_string(base)+".json",QJsonDocument(encoded).toJson());
+    }
+    auto plan=TrainingPlan(rig);plan.search.maximumInvalidObservations=1;
+    plan.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    rig.learner->BeginNativeTraining(plan);
+    const auto summary=EncodeNativeTrainingState(rig.learner->NativeTrainingController(),rig.Revision(),rig.learner->ReadNativeParameters());
+    EXPECT_EQ(summary["schema_version"],QJsonValue(5));EXPECT_EQ(summary["base_schema_version"],QJsonValue(1));
+    EXPECT_EQ(summary["invalid_measurement_recovery"],QJsonValue("advance_unassigned_burst"));
+    Artifact(rig.name+"_schema5_summary.json",QJsonDocument(summary).toJson());
+    rig.learner->IsNeedToTrain=false;
+}
+}
+TEST(CandidateRecoveryConfiguration,ClassicN0){CandidateRecoveryCodec<NNeuronTimeLearner>(0);}
+TEST(CandidateRecoveryConfiguration,ClassicN1){CandidateRecoveryCodec<NNeuronTimeLearner>(1);}
+TEST(CandidateRecoveryConfiguration,BranchN0){CandidateRecoveryCodec<NNeuronTimeLearnerBranch>(0);}
+TEST(CandidateRecoveryConfiguration,BranchN1){CandidateRecoveryCodec<NNeuronTimeLearnerBranch>(1);}

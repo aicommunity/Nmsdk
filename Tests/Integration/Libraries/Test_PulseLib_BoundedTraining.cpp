@@ -210,6 +210,182 @@ TEST(UnassignedBurstCandidate,CorruptionAndOtherFailureCausesCannotAuthorizeAdva
     }
 }
 
+void RecoveryCase(ProbeRouting routing,Normalization normalization,bool failAnchor,bool extra,
+                  InvalidMeasurementRecovery policy,bool alwaysInvalid=false,std::size_t allowance=1,
+                  std::size_t candidateLimit=3)
+{
+    const auto p=Protocol(2,routing);auto cfg=Configuration(2,normalization);
+    cfg.invalidMeasurementRecovery=policy;cfg.maximumInvalidObservations=allowance;
+    cfg.maximumCandidatesPerInput=candidateLimit;cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});
+    unsigned steps=0,rejections=0;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++steps,40u);
+        if(action->kind==TrainingActionKind::Edit)
+        {session.Applied(action->serial,action->parameters,"changed"+std::to_string(action->serial));continue;}
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+        const auto prepared=Prepare(p,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        const bool reject=!action->finalVerification && action->inputIndex==(failAnchor?1u:0u) &&
+            (alwaysInvalid || rejections==0);
+        if(reject){++rejections;if(!extra)raw[action->inputIndex]=-.065;}
+        session.Consume(Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},raw,
+                               reject && extra),action->baseModelRevision);
+    }
+    if(alwaysInvalid)
+    {
+        EXPECT_FALSE(session.Certificate());EXPECT_TRUE(session.Evidence().empty());
+        if(allowance<candidateLimit)
+        {EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);EXPECT_EQ(rejections,allowance+1);}
+        else
+        {
+            EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+            EXPECT_EQ(session.Reason(),"no_measured_candidate_in_declared_search");EXPECT_EQ(rejections,candidateLimit);
+        }
+        return;
+    }
+    EXPECT_EQ(rejections,1u);ASSERT_EQ(session.Status(),TrainingStatus::Exact)<<session.Reason();
+    ASSERT_TRUE(session.Certificate());EXPECT_TRUE(session.Certificate()->Exact());
+    const bool advances=policy==InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    EXPECT_EQ(session.Parameters()[0].length,advances?2:1);EXPECT_EQ(session.AppliedEdits(),advances?1u:0u);
+    ASSERT_FALSE(session.Evidence().empty());
+    for(const auto& evidence:session.Evidence())EXPECT_EQ(evidence.parameters.length,advances?2:1);
+    EXPECT_EQ(session.Certificate()->Residuals().size(),2u);
+}
+
+TEST(BoundedCandidateRecovery,OptInAdvancesWhileDefaultRetriesTheSameCandidate)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    for(const bool anchor:{false,true})for(const bool extra:{false,true})
+    for(const auto policy:{InvalidMeasurementRecovery::RetrySameCandidate,InvalidMeasurementRecovery::AdvanceUnassignedBurst})
+    {
+        SCOPED_TRACE(::testing::Message()<<int(routing)<<'/'<<int(normalization)<<'/'<<anchor<<'/'<<extra<<'/'<<int(policy));
+        RecoveryCase(routing,normalization,anchor,extra,policy);
+    }
+}
+
+TEST(BoundedCandidateRecovery,AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        RecoveryCase(routing,normalization,false,false,InvalidMeasurementRecovery::AdvanceUnassignedBurst,true,1,3);
+        RecoveryCase(routing,normalization,true,true,InvalidMeasurementRecovery::AdvanceUnassignedBurst,true,5,2);
+    }
+}
+
+TEST(BoundedCandidateRecovery,FinalVerificationNeverSkipsAnUnassignedInput)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const auto normalization:{Normalization::SynapseCount,Normalization::TipResistance})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration(2,normalization);
+        cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+        cfg.maximumInvalidObservations=1;cfg.bounds.assign(2,{1,1,1,1,10.,10.});
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});unsigned steps=0,badFinals=0;
+        while(const auto action=session.NextAction())
+        {
+            ASSERT_LT(++steps,20u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+            const auto prepared=Prepare(p,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+            session.Arm(action->serial,prepared);auto raw=Raw(2);
+            if(action->finalVerification){raw[action->inputIndex]=-.065;++badFinals;}
+            session.Consume(Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},raw),action->baseModelRevision);
+        }
+        EXPECT_EQ(badFinals,2u);EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
+        EXPECT_FALSE(session.Certificate());EXPECT_EQ(session.AppliedEdits(),0u);
+    }
+}
+
+TEST(BoundedCandidateRecovery,OtherObservationFailuresCannotAdvanceTheCandidateCursor)
+{
+    const std::vector<std::function<void(ProbeObservation&)>> corruptions{
+        [](auto& o){o.specification.patternHash="wrong_pattern";},
+        [](auto& o){o.complete=false;},
+        [](auto& o){o.burstAssignments[0].waves[0].amplitude=std::numeric_limits<double>::quiet_NaN();},
+        [](auto& o){o.valid=false;o.reasons={"sample_gap"};},
+        [](auto& o){o.endReason="model_time_budget_exhausted";o.valid=false;}
+    };
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(std::size_t i=0;i<corruptions.size();++i)
+    {
+        SCOPED_TRACE(i);const auto p=Protocol(2,routing);auto cfg=Configuration();
+        cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;cfg.maximumInvalidObservations=1;
+        cfg.bounds={{1,3,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});unsigned steps=0,bad=0;
+        while(const auto action=session.NextAction())
+        {
+            ASSERT_LT(++steps,10u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
+            const auto prepared=Prepare(p,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+            session.Arm(action->serial,prepared);
+            auto observation=Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},Raw(2));
+            if(action->inputIndex==0){corruptions[i](observation);++bad;}
+            session.Consume(observation,action->baseModelRevision);
+        }
+        EXPECT_EQ(bad,2u);EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);
+        EXPECT_EQ(session.AppliedEdits(),0u);EXPECT_EQ(session.Parameters()[0].length,1);EXPECT_FALSE(session.Certificate());
+    }
+}
+
+TEST(BoundedCandidateRecovery,ZeroAllowanceAndUnknownPoliciesAreRejected)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,1,10.},{1,1,10.}})),std::invalid_argument);
+    cfg.maximumInvalidObservations=1;cfg.invalidMeasurementRecovery=static_cast<InvalidMeasurementRecovery>(99);
+    EXPECT_THROW((BoundedTrainingSession(References(p),cfg,{{1,1,10.},{1,1,10.}})),std::invalid_argument);
+}
+
+TEST(BoundedCandidateRecovery,RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration();cfg.n0CandidateRepeats=2;
+        cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+        cfg.maximumInvalidObservations=1;cfg.bounds={{1,2,1,1,10.,10.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});unsigned steps=0,firstPoint=0;
+        while(const auto action=session.NextAction())
+        {
+            ASSERT_LT(++steps,30u);
+            if(action->kind==TrainingActionKind::Edit)
+            {session.Applied(action->serial,action->parameters,"changed"+std::to_string(action->serial));continue;}
+            const auto prepared=Prepare(p,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+            session.Arm(action->serial,prepared);auto raw=Raw(2);
+            if(!action->finalVerification && action->inputIndex==0 && action->parameters[0].length==1 && ++firstPoint==2)
+                raw[0]=-.065;
+            session.Consume(Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{.13,.03},raw),action->baseModelRevision);
+        }
+        ASSERT_EQ(session.Status(),TrainingStatus::Exact)<<session.Reason();ASSERT_EQ(session.CandidateRepeats().size(),2u);
+        const auto& incomplete=session.CandidateRepeats()[0];const auto& complete=session.CandidateRepeats()[1];
+        EXPECT_FALSE(incomplete.complete);EXPECT_EQ(incomplete.trialIds.size(),1u);
+        EXPECT_TRUE(complete.complete);EXPECT_EQ(complete.trialIds.size(),2u);
+        EXPECT_EQ(incomplete.fullParameters[0].length,1);EXPECT_EQ(complete.fullParameters[0].length,2);
+        EXPECT_NE(complete.trialIds[0],complete.trialIds[1]);EXPECT_NE(complete.anchorTrialIds[0],complete.anchorTrialIds[1]);
+    }
+}
+
+TEST(BoundedCandidateRecovery,UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate)
+{
+    const auto p=Protocol();auto cfg=Configuration();cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    cfg.maximumInvalidObservations=2;cfg.maximumCandidatesPerInput=2;
+    cfg.bounds={{1,2,1,1,10.,10.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}});unsigned steps=0,firstPoint=0;
+    while(const auto action=session.NextAction())
+    {
+        ASSERT_LT(++steps,30u);
+        if(action->kind==TrainingActionKind::Edit)
+        {session.Applied(action->serial,action->parameters,"changed"+std::to_string(action->serial));continue;}
+        const auto prepared=Prepare(p,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        session.Arm(action->serial,prepared);auto raw=Raw(2);
+        if(action->inputIndex==0 && action->parameters[0].length==1 && ++firstPoint==2)raw[0]=-.065;
+        const double delay=action->parameters[0].length==1?.03:.01;
+        session.Consume(Observe(p,prepared,action->inputIndex,action->runId,action->trialId,{delay,.03},raw),action->baseModelRevision);
+    }
+    EXPECT_EQ(firstPoint,2u);EXPECT_EQ(session.Status(),TrainingStatus::SearchUnresolved);
+    EXPECT_EQ(session.Reason(),"restored_best_candidate_has_unassigned_burst");EXPECT_FALSE(session.Certificate());
+    EXPECT_EQ(session.Evidence().size(),2u);EXPECT_EQ(session.Parameters()[0].length,1);
+}
+
 TEST(BoundedTrainingN0Repeats, SecondObservationCanRejectAnApparentlyExactCandidate)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})

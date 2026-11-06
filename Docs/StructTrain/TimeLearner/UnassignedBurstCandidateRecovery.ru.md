@@ -1,9 +1,10 @@
 # Восстановление поиска после неидентифицируемой пачки — WIP
 
 06.11.2026. Это незавершённый кандидат этапа7. Он не принят в develop и не
-включён в эксперименты. Новый классификатор пока **не подключён** к управляющим
-решениям; новые серверные тесты ещё не выполнены. Текущие задания используют
-неизменяемые более ранние SDK и не подтверждают этот код.
+включён в эксперименты. Классификатор подключён к явно выбираемой C++ политике;
+её серверные тесты ещё не выполнены. Python/CLI audit и допуск schema5 ещё
+не завершены: новый режим нельзя выдавать за поддержанный сквозной pipeline.
+Текущие задания используют неизменяемые более ранние SDK и не подтверждают код.
 
 ## Основание
 
@@ -57,6 +58,33 @@ training probe: один выбранный input/window, полная штат�
 
 ## Подготовленные тесты и обязательная дальнейшая работа
 
+### C++ controller/codec: подготовленный следующий срез
+
+PulseLib `e19c2dba39dc3fd51119d1b5d04ee023d1e7cf2d` добавляет
+InvalidMeasurementRecovery: RetrySameCandidate по умолчанию и opt-in
+AdvanceUnassignedBurst. Последний требует ненулевого объявленного invalid
+allowance. Допустимый unassigned burst списывается с общего attempt budget;
+после разрешённого отказа очищаются anchor/partial repeats и используется
+следующий кандидат существующего bounded cursor, включая C-context rotation.
+Неидентифицируемый restoringBest завершает SearchUnresolved, без повторного
+использования старого измерения и без бесконечного возврата. Capture references
+не изменены, final verification остаётся независимой и не пропускает входы.
+
+Cold configuration и training summary имеют opt-in envelope schema5:
+base_schema_version=1..4 и invalid_measurement_recovery=advance_unassigned_burst.
+Все прежние поля остаются полями указанной базовой схемы; её строгий codec
+повторно проверяет исходные ограничения. Base5/неизвестные поля/режимы/нулевой
+allowance запрещены. Старые схемы1..4 по-прежнему означают RetrySameCandidate.
+Это сохраняет CPP export/import declaration через существующий configuration
+codec, но complete/stopped roundtrip нового режима ещё требует runtime-проверки.
+
+Добавлены controller regressions default-versus-opt-in, anchor/input failures,
+missing/extra waves, общий budget, конечное исчерпание поиска, запрет final skip,
+повреждённый контекст, незавершённые N0 repeats и отказ свежего restoringBest.
+Четыре CandidateRecoveryConfiguration tests используют реальные storage rigs
+Classic/Branch×N0/N1 для codec1..4→5, unknown/duplicate-field negatives и summary.
+Наличие этих исходников не означает прохождения тестов.
+
 В production Test_PulseLib_StorageComponents добавлены два теста
 UnassignedBurstCandidate. Настоящий ProbeRecorder получает управляемые
 waveforms, включая реальный дополнительный поздний максимум. Проверяются
@@ -68,7 +96,7 @@ Classic/Branch, N=1/2/4/6, valid/missing/extra-wave и повреждения к
 
 1. Проверить механическое выделение на прежних production measurement tests;
    затем выполнить два новых classifier tests на серверах.
-2. Добавить типизированную opt-in политику в bounded controller. После
+2. Проверить подготовленную типизированную opt-in политику. После
    разрешённого отказа списать общий attempt budget, закрыть незавершённые
    N0 repeats, инвалидировать anchor/input и перейти к следующему легальному
    кандидату штатного cursor. Не создавать CandidateEvidence для отсутствующего
@@ -79,8 +107,8 @@ Classic/Branch, N=1/2/4/6, valid/missing/extra-wave и повреждения к
    бесконечного возврата к той же неидентифицируемой точке.
 4. Не применять skip к capture references или final all-input certificate.
    Недопустимы пропуск входа при final и перенос старого Exact после edit.
-5. Версионировать политику в cold configuration, summary и completed/stopped
-   export/import; добавить strict Python parser/auditor, CLI capability и
+5. Проверить подготовленную C++ версионизацию cold configuration/summary и
+   completed/stopped export/import; добавить strict Python parser/auditor, CLI capability и
    ConditionSpec binding. Отсутствие поля сохраняет прежнюю политику. Пока это
    не сделано, новый режим нельзя объявлять действующим фактором эксперимента.
 6. Проверить default A/B, разрешённый переход, no-candidate/budget outcomes,
