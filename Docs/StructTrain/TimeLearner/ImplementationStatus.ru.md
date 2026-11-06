@@ -84,6 +84,14 @@ schema5 envelopes поверх старых реальных данных, не 
 Подробности: [API verification](CandidateRecoveryApiVerification.json). Срез не принят в develop;
 научного результата он не добавляет.
 
+Следующий [stock recovery study](StockRecoveryStudy.ru.md) уже выполняется на
+M40: восемь matched условий Classic/Branch×два порога×retry/advance с общим
+invalid allowance32 и прежними физикой/допусками. Шесть design tests и все восемь
+preflight прошли. Первые два Classic-low Train остановились InvalidObservation;
+полная серия и публикация её primary ещё не завершены. Сквозной CLI отдельно
+проверен: prepare8 и отказ анализа неполной матрицы. Эти предварительные
+наблюдения не закрывают stock cold convergence, Train→Test или научную оценку.
+
 ## Приёмка по исходным этапам
 
 | Этап | Подтверждено в ограниченной области | Что мешает закрыть этап целиком |
