@@ -1,7 +1,10 @@
 # Frozen оценка моделей recovery study
 
 Подготовлен следующий production-модуль `stock_recovery_evaluation.py`.
-Он пока не прошёл серверную приёмку и не означает выполненную оценку.
+Пять server role/job guards прошли на реальных stock stopped packages;
+CLI help и отказ неполной Train матрицы также проверены. Полный native
+evaluate/export/report этого модуля ещё не выполнен.
+[Git primary и сверка](StockRecoveryEvaluationGateVerification.json).
 
 Исходник — полностью завершённая и проверенная восьмиусловная серия
 StockRecoveryStudy. Неполную матрицу передать нельзя. Все восемь фактических
@@ -31,3 +34,21 @@ prepare|run SOURCE --bin-repository BIN_REPO --output NEW_DIRECTORY`.
 на M40 Data:64 trials и160 trial/soma pairs, все сомы и входные импульсы,
 overview и штатные100-tick zooms. Сам render не считается визуальной приёмкой.
 В Git предполагаются сжатые primary, metrics и выбранные рисунки.
+
+
+## Зависимое задание
+
+M40 s07-stock-recovery-frozen-normal-a1 поставлено в очередь с tool root
+5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1. Оно ждёт свежего kernel closure
+и released lease всей s07-stock-recovery-normal-a1, проверяет её положительный
+execution/audit terminal, затем повторяет5 guards на фактических новых пакетах,
+исполняет64 frozen/diagnostic предъявления и render160 trial/soma pairs.
+Если исходная серия не прошла audit, native оценка не запускается. Успех Train
+не является условием запуска diagnostic пути; его provenance сохраняется.
+
+[Наблюдение очереди](StockRecoveryEvaluationJobs.json) отражает только момент
+проверки PID/start_ticks; последующее состояние нужно читать заново. У legacy
+launcher строка role ещё описывает прежний transport25 build; эта подпись
+не соответствует новому заданию. Фактический worker выполняет только проверки,
+export/evaluate и render по указанному модулю, без сборки. Исходное описание
+не переписано, ограничение учтено в job observation.
