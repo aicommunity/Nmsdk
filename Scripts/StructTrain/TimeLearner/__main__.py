@@ -222,7 +222,7 @@ def main(argv: list[str] | None = None) -> int:
     pair.add_argument("--code-identity", type=Path)
     pair.add_argument("--output", type=Path, required=True)
     recovery = commands.add_parser("stock-recovery-study", help="matched retry/advance stock cold Train at two fixed thresholds; no classification claim")
-    recovery.add_argument("action", choices=("prepare", "run", "analyze"))
+    recovery.add_argument("action", choices=("prepare", "run", "analyze", "coverage"))
     recovery.add_argument("source", type=Path)
     recovery.add_argument("--runtime-manifest", type=Path)
     recovery.add_argument("--code-identity", type=Path)
@@ -774,9 +774,14 @@ def main(argv: list[str] | None = None) -> int:
             from .stock_threshold_study import prepare, run, audit
         from .native_evidence import EvidenceError, require, load
         try:
-            if args.action in ("analyze", "failure-report"):
+            if args.action in ("analyze", "failure-report", "coverage"):
                 require(args.runtime_manifest is None and args.code_identity is None, "stock_pair_analysis_has_no_runtime")
-                if args.action == "failure-report":
+                if args.action == "coverage":
+                    from .search_coverage import analyze_stock_recovery
+                    result = analyze_stock_recovery(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+                elif args.action == "failure-report":
                     from .stock_failure_reports import render_failure_report
                     result = render_failure_report(args.source, args.output)
                 else:
