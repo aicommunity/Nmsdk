@@ -184,3 +184,11 @@ Render-only retry и визуальная приёмка остаются отд
 В stock report добавлены4 вручную просмотренных Soma1 PNG первого Classic-low
 случая; первый model cache завершён, полный eight-model render ещё работает.
 [Visual scope](StockRecoverySelectedVisualQA.json).
+
+
+Следующий [coverage аудит](SearchCoverageReview.ru.md) связывает фактическое
+покрытие L/Ns/Rs с полными parameter witnesses. Для native N1 dynamic domains
+code review выявляет Rs-first порядок внутри одной geometry; малый invalid
+budget может остановить попытку до обзора других длин. Это ограничение
+покрытия, не доказательство PhysicalInfeasible или ошибки численного расчёта.
+Новый reader/CLI и4 checks запущены на M40, verdict ещё pending.
