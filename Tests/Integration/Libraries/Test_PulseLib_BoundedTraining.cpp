@@ -7,6 +7,8 @@
 #include <cmath>
 #include <limits>
 #include <functional>
+#include <map>
+#include <set>
 
 
 namespace {
@@ -1233,6 +1235,130 @@ TEST(BoundedTrainingCapacitance, DomainCannotDiscardFullCapacitanceContext)
     });
     EXPECT_TRUE(domainRequested);EXPECT_EQ(session.Status(),TrainingStatus::InvalidModel);EXPECT_FALSE(session.Certificate());
     EXPECT_NE(session.Reason().find("resistance_domain_context_mismatch"),std::string::npos);
+}
+
+ResistanceDomainAssessment FairDomain(const TrainingAction& action,double low=1.,double high=100.)
+{
+    ResistanceDomainAssessment result;result.status=ResistanceDomainStatus::Available;
+    result.baseModelRevision=action.baseModelRevision;result.geometry=action.parameters;
+    result.inputIndex=action.inputIndex;result.minimumResistance=low;result.maximumResistance=high;
+    result.previewModelRevision="fair_domain";
+    for(const auto& p:action.parameters)result.previewModelRevision+="/"+std::to_string(p.length);
+    return result;
+}
+
+TEST(BoundedTrainingFairDomains,AdvanceVisitsOtherGeometriesBeforeSpendingTheWholeResistanceMesh)
+{
+    for(const auto policy:{InvalidMeasurementRecovery::RetrySameCandidate,InvalidMeasurementRecovery::AdvanceUnassignedBurst})
+    {
+        const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.invalidMeasurementRecovery=policy;cfg.maximumInvalidObservations=32;
+        cfg.resistanceSubdivisionDepth=0;cfg.bounds={{1,3,1,1,1.,100.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}},true);
+        DriveTraining(session,p,[](const auto&,auto&,auto& raw){raw[0]+=.001;},
+            [](const auto& action){return FairDomain(action);});
+        std::set<std::pair<int,double>> covered;
+        std::size_t firstLength3=10000,firstOtherResistance=10000,index=0;
+        for(const auto& e:session.Evidence())
+        {
+            if(e.inputIndex!=0)continue;
+            covered.insert({e.parameters.length,e.parameters.resistance});
+            if(e.parameters.length==3)firstLength3=std::min(firstLength3,index);
+            if(e.parameters.length==1 && e.parameters.resistance!=10.)firstOtherResistance=std::min(firstOtherResistance,index);
+            ++index;
+        }
+        // The same finite mesh survives the order change, including revisits.
+        for(int length=1;length<=3;++length)for(double resistance:{1.,10.,100.})
+            EXPECT_TRUE(covered.contains({length,resistance}));
+        if(policy==InvalidMeasurementRecovery::AdvanceUnassignedBurst)EXPECT_LT(firstLength3,firstOtherResistance);
+        else EXPECT_LT(firstOtherResistance,firstLength3);
+        EXPECT_NE(session.Status(),TrainingStatus::Exact);
+        EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+    }
+}
+
+TEST(BoundedTrainingFairDomains,SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves)
+{
+    const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
+    cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    cfg.maximumInvalidObservations=2;cfg.resistanceSubdivisionDepth=2;
+    cfg.bounds={{1,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}},true);
+    std::size_t iterations=0;
+    while(const auto a=session.NextAction())
+    {
+        ASSERT_LT(++iterations,200u);
+        if(a->kind==TrainingActionKind::Edit)
+        {session.Applied(a->serial,a->parameters,"fair_edit"+std::to_string(a->serial));continue;}
+        if(a->kind==TrainingActionKind::ResistanceDomain)
+        {session.AssessedDomain(a->serial,FairDomain(*a),a->baseModelRevision);continue;}
+        const auto prepared=Prepare(p,a->inputIndex,a->baseModelRevision,a->modelEpoch);
+        session.Arm(a->serial,prepared);
+        const bool extra=a->inputIndex==0 && a->serial>2;
+        auto observation=Observe(p,prepared,a->inputIndex,a->runId,a->trialId,{.03,.03},Raw(2),extra);
+        session.Consume(observation,a->baseModelRevision);
+    }
+    EXPECT_EQ(session.Status(),TrainingStatus::InvalidObservation);EXPECT_FALSE(session.Certificate());
+    EXPECT_EQ(session.InvalidObservations(),3u);
+    ASSERT_EQ(session.Recoveries().size(),3u);
+    std::set<int> lengths;
+    for(const auto& event:session.Recoveries())lengths.insert(event.fullParameters[0].length);
+    EXPECT_EQ(lengths.size(),3u);
+    EXPECT_EQ(session.Recoveries().back().disposition,CandidateRecoveryDisposition::InvalidBudgetStop);
+    EXPECT_EQ(session.Recoveries().back().invalidBefore,2u);
+}
+
+TEST(BoundedTrainingFairDomains,EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit)
+{
+    const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
+    cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    cfg.maximumInvalidObservations=8;cfg.resistanceSubdivisionDepth=0;
+    cfg.bounds={{1,3,1,1,1.,100.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.}},true);
+    std::map<int,int> assessments;std::map<int,std::pair<double,double>> liveBounds;
+    int inputObservations=0;
+    DriveTraining(session,p,[&](const auto& a,auto&,auto& raw) {
+        raw[0]+=.001;
+        if(a.inputIndex==0 && liveBounds.contains(a.parameters[0].length))
+        {
+            const auto [low,high]=liveBounds.at(a.parameters[0].length);
+            EXPECT_GE(a.parameters[0].resistance,low);EXPECT_LE(a.parameters[0].resistance,high);
+        }
+        // Bounds intentionally change between assessed visits in this adapter.
+        // Stop before restore-best/final phases: this case checks live cursor
+        // reassessment, not feasibility of historical best under changed physics.
+        if(a.inputIndex==0 && ++inputObservations==8)session.ExternalStop();
+    },[&](const auto& action) {
+        const int length=action.parameters[0].length;
+        const bool changed=++assessments[length]>1;
+        const auto bounds=changed?std::pair{20.,30.}:std::pair{1.,100.};
+        liveBounds[length]=bounds;
+        return FairDomain(action,bounds.first,bounds.second);
+    });
+    for(int length=1;length<=3;++length)EXPECT_GT(assessments[length],1);
+    EXPECT_EQ(session.Status(),TrainingStatus::ExternalStop);
+}
+
+TEST(BoundedTrainingFairDomains,BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference)
+{
+    const auto p=Protocol(3,ProbeRouting::BranchSoloBurst);auto cfg=Configuration(3,Normalization::TipResistance);
+    cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    cfg.maximumInvalidObservations=8;cfg.resistanceSubdivisionDepth=0;cfg.maximumCandidatesPerInput=24;
+    cfg.bounds={{1,5,1,1,1.,100.},{1,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
+    BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.},{1,1,10.}},true);
+    DriveTraining(session,p,[](const auto&,auto&,auto& raw){raw[0]+=.001;raw[1]+=.001;},
+        [](const auto& action){return FairDomain(action);});
+    std::set<std::vector<int>> geometries;
+    for(const auto& e:session.Evidence())
+    {
+        EXPECT_EQ(e.inputIndex,1u);const auto& ps=e.fullParameters;
+        EXPECT_GE(ps[0].length,ps[1].length);EXPECT_GE(ps[1].length,ps[2].length);
+        EXPECT_EQ(ps[2],(InputParameters{1,1,10.}));
+        for(std::size_t i=0;i+1<ps.size();++i)
+            if(ps[i].length==ps[i+1].length)EXPECT_EQ(ps[i].resistance,ps[i+1].resistance);
+        geometries.insert({ps[0].length,ps[1].length,ps[2].length});
+    }
+    EXPECT_GE(geometries.size(),4u);EXPECT_NE(session.Status(),TrainingStatus::Exact);
 }
 
 TEST(CandidateRecoveryEvidenceCodec,FullOwnedCapacitanceSurvivesJson)
