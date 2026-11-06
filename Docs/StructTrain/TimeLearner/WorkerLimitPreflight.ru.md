@@ -34,3 +34,12 @@ entry points до manifest/context/output side effects. Вместе с ними
 Ветка создана от develop9b380a3 с отдельным no-ff merge pending fair-domain
 prerequisites. Это не их promotion в develop. Идущая stock-серия сохраняет
 свои замороженные source/runtime; этот Python-кандидат её не меняет.
+
+Первый серверный gateA1 выявил зависимость двух прежних crash-controller
+fixtures от cwd: дочерний `python -c` не находил Scripts при запуске тестов
+из `/tmp`. В fixtures явно задан root пакета; источники crash/recovery,
+ассерты17/19 и настоящее cgroup поведение сохранены. На M40 первые26 дали
+24 passed/2 failed именно по этому import. Elder остановился до tests из-за
+обязательных declared demands в существующем capacity-schema2 ledger;
+новый worker объявляет slot1/memory2GiB/disk128MiB, сохраняя прежнюю capacity.
+Эти отказы не являются приёмкой26 cases и сохраняются отдельно от исправления.
