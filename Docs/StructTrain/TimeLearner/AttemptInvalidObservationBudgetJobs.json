@@ -125,7 +125,7 @@
       "worker_start_ticks": "303996078",
       "native_pid": 959308,
       "native_start_ticks": "303996187",
-      "observed_state": "original_controller_23_case_AB_kernel_live",
+      "observed_state": "completed_21_passed_same_2_failed",
       "worker_source_sha256": "944391dac04d3ff5cef903848e79a3283967f39b69d785aec70a81f4bf4b0da7",
       "wrapper_source_sha256": "b18d6b7dd629a4d70a2e33e24b34b9611a46ee4d31256cb3ca8b38c369f00b48",
       "worker_and_wrapper_sha256_verified_on_server": true,
@@ -157,7 +157,10 @@
         "NativeStoppedState/BranchN0RepeatedHalfCandidate"
       ],
       "compilation_disabled": true,
-      "scientific_verdict": null
+      "scientific_verdict": null,
+      "previous_observed_state": "original_controller_23_case_AB_kernel_live",
+      "evidence_commit": "a3710b95842d57813032b9bcd8ab3cc80075f92a",
+      "fresh_closure_and_release_checked": true
     }
   ],
   "build_worker_memory_max_bytes": 4294967296,
@@ -183,5 +186,9 @@
       ],
       "issue": "Inherited waiting-state wording mentions earlier SDK802 prerequisite; actual dependency.job_id and kernel cgroup binding identify the current predecessor. Do not use display wording as dependency identity."
     }
-  ]
+  ],
+  "scoped_controller_regressions_passed": true,
+  "full_native23_passed": false,
+  "original_fixed_native_AB_complete": true,
+  "AB_receipt": "AttemptInvalidObservationBudgetNativeABVerification.json"
 }

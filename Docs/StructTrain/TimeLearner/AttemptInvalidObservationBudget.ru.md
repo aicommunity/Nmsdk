@@ -1,7 +1,7 @@
 # Общий бюджет невалидных проб — кандидат, 06.11.2026
 
 Статус: исходный дефект **воспроизведён на M40**, fixed4/74 прошли;
-native-приёмка дала21/23 и требует A/B разбора двух отказов.
+native-приёмка дала21/23 на обоих SDK, с побайтно одинаковыми откликами.
 Документ не является свидетельством runtime-исправления или закрытия этапа 7.
 В develop этот C++ кандидат не объединён.
 
@@ -92,10 +92,24 @@ maximum_sweeps_exhausted. Их cold Train с SyncTolerance=0.02 не выпол�
 Proof `8447d4f937623c56ed7292fd4c6c18aeb9fbbadb` сохраняет696 archive members,
 788880 bytes xz, первичные пробы, summary до assertion и runtime captures.
 Все members,335 tool source files и306 native source files повторно сверены.
-На прежнем root7cc/Pulse12d запущен **тот же неизменённый набор23 tests**,
-с тем же normal build profile и отдельным runtime. До его результата нельзя
-приписывать два отказа новому budget-коду либо исправлять ожидания тестов.
+На прежнем root7cc/Pulse12d выполнен **тот же неизменённый набор23 tests**,
+с тем же normal build profile и отдельным runtime: также21 passed /2 failed,
+с теми же assertions и maximum_sweeps_exhausted. Все252 CSV и7 training
+precondition summaries побайтно совпали. Сверены compiler, значимые build flags,
+resource root и все фактически загруженные shared files. Эти два отказа
+воспроизводятся без нового budget-кода; в пределах этого контроля изменение
+бюджета их не объясняет. Это не доказательство прохождения всей native матрицы.
+
+Proof `a3710b95842d57813032b9bcd8ab3cc80075f92a`:696 members,
+788492 bytes xz; все335 tool/306 native source hashes и все members проверены.
+Каждый парный CSV/summary hash также совпадает с обоими опубликованными
+primary archives, не только с текущими файлами сервера.
+[A/B receipt](AttemptInvalidObservationBudgetNativeABVerification.json).
 Список304 прежнего gate сам по себе не подтверждает любой иной набор случаев.
+Следующее исправление fixtures должно сохранить исходный cold Train0.02 как
+отрицательный контроль, а completed transport проверять отдельным явно
+объявленным положительным случаем. Нельзя просто ослабить исходные tolerances
+или назвать stopped Train завершённым ради прохождения assertion.
 
 Приёмка конкретного budget fix, исправление неверных fixture assumptions и
 полная приёмка исходного этапа7 — отдельные утверждения. Общий C++ кандидат
