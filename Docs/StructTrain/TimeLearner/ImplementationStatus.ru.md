@@ -58,9 +58,12 @@ stopped-state controls, добавлены отдельные completed controls
 добавляет opt-in продвижение bounded search после строго классифицированного
 unassigned burst и C++ cold/summary envelope5. Default retry и final all-input
 gate сохраняются. Новые C++ tests ещё не выполнялись. Python declaration,
-preflight и ConditionSpec binding проверены33/33 tests на каждом сервере;
-полный primary audit5 ещё явно отклоняется. Этот срез не включён в текущие
-SDK-проверки и не принят в develop; научного результата он не добавляет.
+preflight и ConditionSpec binding сначала проверены33/33 tests на каждом сервере.
+Следующий primary-classifier срез прошёл48/48 на обоих серверах, включая
+исходные stock invalid JSON/CSV и их повреждения; он не подтверждает переходы
+поиска. Полный primary audit5 ещё явно отклоняется. На M40 собирается отдельный
+SDK Pulse70f для116 C++ controls; terminal verdict ещё не получен. Этот срез
+не принят в develop; научного результата он не добавляет.
 
 ## Приёмка по исходным этапам
 
