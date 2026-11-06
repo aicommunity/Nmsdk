@@ -1348,15 +1348,24 @@ TEST(BoundedTrainingFairDomains,BranchVariantsRetainPhysicalBankLegalityAndTheFi
     BoundedTrainingSession session(References(p),cfg,{{1,1,10.},{1,1,10.},{1,1,10.}},true);
     DriveTraining(session,p,[](const auto&,auto&,auto& raw){raw[0]+=.001;raw[1]+=.001;},
         [](const auto& action){return FairDomain(action);});
+    ASSERT_FALSE(session.Evidence().empty());
+    EXPECT_EQ(session.Evidence().front().inputIndex,1u);
     std::set<std::vector<int>> geometries;
+    bool reachedUpstreamInput=false;
     for(const auto& e:session.Evidence())
     {
-        EXPECT_EQ(e.inputIndex,1u);const auto& ps=e.fullParameters;
+        // Reverse order starts at1, then legitimately continues with0 once
+        // that input's bounded search ends. Check bank legality throughout;
+        // geometry coverage below belongs only to the first selected input.
+        EXPECT_LE(e.inputIndex,1u);
+        if(e.inputIndex==0)reachedUpstreamInput=true;
+        else EXPECT_FALSE(reachedUpstreamInput);
+        const auto& ps=e.fullParameters;
         EXPECT_GE(ps[0].length,ps[1].length);EXPECT_GE(ps[1].length,ps[2].length);
         EXPECT_EQ(ps[2],(InputParameters{1,1,10.}));
         for(std::size_t i=0;i+1<ps.size();++i)
             if(ps[i].length==ps[i+1].length)EXPECT_EQ(ps[i].resistance,ps[i+1].resistance);
-        geometries.insert({ps[0].length,ps[1].length,ps[2].length});
+        if(e.inputIndex==1)geometries.insert({ps[0].length,ps[1].length,ps[2].length});
     }
     EXPECT_GE(geometries.size(),4u);EXPECT_NE(session.Status(),TrainingStatus::Exact);
 }
