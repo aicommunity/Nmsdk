@@ -26,7 +26,7 @@ PreparedVerificationProbe Prepare(const VerificationProtocol& p,std::size_t inde
 }
 ProbeObservation Observe(const VerificationProtocol& p,const PreparedVerificationProbe& prepared,
     std::size_t index,const std::string& run,const std::string& trial,
-    const std::vector<double>& delay,const std::vector<double>& raw)
+    const std::vector<double>& delay,const std::vector<double>& raw,bool extraWave=false)
 {
     const bool branch=p.routing==ProbeRouting::BranchSoloBurst;const auto n=p.inputs.size();
     const double onset=.05+.1*index,arrival=onset+delay.at(index);
@@ -48,6 +48,8 @@ ProbeObservation Observe(const VerificationProtocol& p,const PreparedVerificatio
                 const int center=int(std::llround((.05+.1*pulse+delay.at(input))/.005));
                 values[channel]+=(raw.at(input)+.065)*std::max(0.,1.-std::abs(tick-center)/2.);
             }
+            if(extraWave && input==index)
+                values[channel]+=.00002*std::max(0.,1.-std::abs(tick-150)/2.);
         }
         recorder.Observe(time,values,prepared.effectiveModelRevision);
     }
@@ -151,6 +153,62 @@ TEST(BoundedTrainingFiniteRanking,ClassicN0Overflow){CheckFiniteCandidateRanking
 TEST(BoundedTrainingFiniteRanking,ClassicN1Overflow){CheckFiniteCandidateRanking(ProbeRouting::ClassicBurst,Normalization::TipResistance,true);}
 TEST(BoundedTrainingFiniteRanking,BranchN0Overflow){CheckFiniteCandidateRanking(ProbeRouting::BranchSoloBurst,Normalization::SynapseCount,true);}
 TEST(BoundedTrainingFiniteRanking,BranchN1Overflow){CheckFiniteCandidateRanking(ProbeRouting::BranchSoloBurst,Normalization::TipResistance,true);}
+
+TEST(UnassignedBurstCandidate,OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const std::size_t n:{1u,2u,4u,6u})
+    {
+        SCOPED_TRACE(n);const auto p=Protocol(n,routing);const auto prepared=Prepare(p,0,"initial",0);
+        const std::vector<double> delay(n,.03);auto raw=Raw(n);
+        const auto valid=Observe(p,prepared,0,"run","valid",delay,raw);
+        ASSERT_TRUE(valid.valid);EXPECT_FALSE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,valid));
+        raw[0]=-.065;
+        const auto missing=Observe(p,prepared,0,"run","missing",delay,raw);
+        ASSERT_TRUE(missing.complete);ASSERT_FALSE(missing.valid);
+        EXPECT_TRUE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,missing));
+        raw=Raw(n);
+        const auto extra=Observe(p,prepared,0,"run","extra",delay,raw,true);
+        ASSERT_TRUE(extra.complete);ASSERT_FALSE(extra.valid);
+        EXPECT_TRUE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,extra));
+    }
+}
+
+TEST(UnassignedBurstCandidate,CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        const auto p=Protocol(2,routing);const auto prepared=Prepare(p,0,"initial",0);
+        const auto missing=Observe(p,prepared,0,"run","missing",{.03,.03},{-.065,-.054});
+        ASSERT_TRUE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,missing));
+        const std::vector<std::function<void(ProbeObservation&)>> corruptions{
+            [](auto& o){o.complete=false;},
+            [](auto& o){o.specification.patternHash="different_pattern";},
+            [](auto& o){o.specification.modelRevision="different_physics";},
+            [](auto& o){o.specification.stimulusProfile->frequencyHz=20000.;},
+            [](auto& o){o.endReason="external_stop";},
+            [](auto& o){o.sampleCount=2;},
+            [](auto& o){o.reasons.push_back("nonfinite_sample");},
+            [](auto& o){o.reasons.push_back("sample_gap");},
+            [](auto& o){o.stimuli[1].id=o.stimuli[0].id;},
+            [](auto& o){o.stimuli[1].time=o.stimuli[0].time;},
+            [](auto& o){o.peaks[0].amplitude=0.;},
+            [](auto& o){o.peaks[0].validity=PeakValidity::Clipped;},
+            [](auto& o){o.burstAssignments[0].channel=100;},
+            [](auto& o){o.spikes.push_back({0,.5});},
+            [](auto& o){o.reasons.push_back(o.reasons.front());}
+        };
+        for(std::size_t i=0;i<corruptions.size();++i)
+        {
+            SCOPED_TRACE(i);auto altered=missing;corruptions[i](altered);
+            EXPECT_FALSE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,altered));
+        }
+        auto extra=Observe(p,prepared,0,"run","extra",{.03,.03},Raw(2),true);
+        ASSERT_TRUE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,extra));
+        extra.burstAssignments[0].waves[0].amplitude=std::numeric_limits<double>::quiet_NaN();
+        EXPECT_FALSE(CanAdvanceUnassignedBurstCandidate(p,0,prepared,extra));
+    }
+}
 
 TEST(BoundedTrainingN0Repeats, SecondObservationCanRejectAnApparentlyExactCandidate)
 {
