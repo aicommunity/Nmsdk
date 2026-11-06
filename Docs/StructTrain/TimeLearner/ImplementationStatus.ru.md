@@ -10,11 +10,12 @@ merge и научная разделимость — разные утвержд
 
 | Источник | Состояние |
 |---|---|
-|Root develop, проверенная отправная точка этой сводки|837b0c7aad7c6d1973325319a750ce8da8f0f070|
+|Root develop, проверенная отправная точка этой сводки|9b380a3eba4f67c31b2fde80a0a0f5b9677c3110|
 |PulseLib в develop|0ec9193e6620ae2439329eece5ecd6d6f167c70a|
 |Bin в develop|37ff211fa6ba4999fc51802182915022b239a1eb|
 |Rdk в develop|10e9d05aa658dd2203c89bc84ba9166595b50014|
-|Проверяемый compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
+|Базовый общий compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
+|Recovery compiled SDK|Root84d6d97501a62b0a689b1170ec4f0fb53e558a48 / Pulse416e07c71b80e7e7a37cd213f8d0b6f7efb768fb; normal118 принят адресно, stock серия и ASan19 ещё выполняются|
 
 [Матрица возможностей](ControllerCapabilities.ru.md) отделяет принятые API от
 кандидата: N0 repeats и native learned-state import уже реализованы и адресно
@@ -153,3 +154,8 @@ TP1/FP3/FN0/TN4, со статусом NonSeparable на проверенной 
 [Git snapshot](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
 Её старые слова «ещё не реализовано» относятся к состоянию своего подэтапа.
 Исторические измерения и критерии не переписываются под новые результаты.
+
+
+Дополнительный [адресный ASan19](CandidateRecoveryAsan19.ru.md) нового Pulse416
+запущен в независимом runtime/source/build. На момент записи — compile, без
+C++ verdict. Прежний ASan133 не переносится на этот более поздний код.
