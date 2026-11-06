@@ -10,8 +10,8 @@ merge и научная разделимость — разные утвержд
 
 | Срез | Подтверждено и ограничения |
 |---|---|
-| Принятый root develop | `9b380a3eba4f67c31b2fde80a0a0f5b9677c3110` |
-| Принятые PulseLib / Bin / Rdk | `0ec9193e6620ae2439329eece5ecd6d6f167c70a` / `37ff211fa6ba4999fc51802182915022b239a1eb` / `10e9d05aa658dd2203c89bc84ba9166595b50014` |
+| Принятый root develop | `2fbf982ffe6a5882e03dfdf6438eac042161fc12` |
+| Принятые PulseLib / Bin / Rdk | `0ec9193e6620ae2439329eece5ecd6d6f167c70a` / `fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f` / `10e9d05aa658dd2203c89bc84ba9166595b50014` |
 | Общий ASan SDK | root2e061/Pulse12d: 133/133; не подтверждает последующие изменения |
 | Baseline recovery SDK | root84d6/Pulse416: normal118 и адресный ASan19 приняты; stock Train/evaluation завершены |
 | Fair-domain compiled SDK | root36f598/Pulse8f057: normal137/137 и адресный ASan38/38 на M40; общая приёмка в develop ещё открыта |
@@ -107,8 +107,11 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
 legacy/V2 матрица остаётся открытой. Migration222 (220 retired+2 moved) не равна
 всему inventory; остаются22 AsymRm Python и другие инструменты. Полная scheduler,
 recovery, publication fault matrix и effective-factor attestation не закрыты.
-Компонентные страницы PulseLib актуализированы, но все ClDesc/config/defaults
-ещё не сверены. Исторические primary не удаляются ради компактного Git.
+Компонентные страницы PulseLib актуализированы.
+[Пять свойств и общие тексты двух ClDesc](ClDescControllerContractReconciliation-20261107.ru.md)
+сверены с исходниками и приняты в Bin/root develop; изменены только Description.
+Compiled receipts сохраняют прежний Bin37ff: действующие runtime не обновлялись.
+Все остальные ClDesc/config/defaults ещё не сверены. Исторические primary не удаляются ради компактного Git.
 
 Предыдущая накопительная сводка сохранена в
 [Git](https://github.com/aicommunity/Nmsdk/blob/b2517a3576f949c12acb402ce83ab595ebcbf0b1/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
