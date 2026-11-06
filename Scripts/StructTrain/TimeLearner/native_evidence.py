@@ -567,11 +567,50 @@ def _audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str
 
 
 def audit_training_summary(summary: dict[str, Any], packets: dict[str, dict[str, Any]],
-                           origin_stimulus_id: str, *, require_certificate: bool = True) -> dict[str, Any]:
+                           origin_stimulus_id: str, *, require_certificate: bool = True,
+                           traces: dict[str, Path] | None = None, protocol: dict[str, Any] | None = None) -> dict[str, Any]:
     """Audit physical C contexts before reusing the measured residual validator."""
     from .candidate_recovery import RETRY_MODE, project_recovery_summary
-    _, recovery_mode = project_recovery_summary(summary)
-    require(recovery_mode == RETRY_MODE, "candidate_recovery_primary_audit_not_implemented")
+    projected, recovery_mode = project_recovery_summary(summary)
+    if recovery_mode != RETRY_MODE:
+        require(type(traces) is dict and type(protocol) is dict and
+                protocol.get("origin_stimulus_id") == origin_stimulus_id and set(traces) == set(packets),
+                "candidate_recovery_primary_context_required")
+        from .candidate_recovery_history import audit_recovery_history
+        from .probe_diagnostics import read_partial_probe
+        search_trials = reference_trials = 0
+        run_id = summary["configuration"]["run_id"]
+        reference_ids = {r["trial_id"] for r in summary["references"]}
+        for trial, packet in packets.items():
+            require(type(packet) is dict and type(packet.get("requested_specification")) is dict and
+                    type(trial) is str and trial and packet["requested_specification"].get("trial_id") == trial and
+                    isinstance(traces[trial], Path), "recovery_primary_trial_mismatch")
+            requested_run = packet["requested_specification"]["run_id"]
+            require(type(requested_run) is str and requested_run, "recovery_primary_run_missing")
+            if requested_run == run_id or requested_run.startswith(run_id+"/final/"):
+                search_trials += 1
+            elif requested_run.startswith(run_id+"/capture/"):
+                reference_trials += 1
+            elif require_certificate and summary["search_history_retained"]:
+                require(trial in reference_ids, "recovery_contains_unrelated_attempt_primary")
+            primary = audit_probe(packet, traces[trial])
+            if not primary["valid_observation"]:
+                _, _, _, _, _, quality = read_partial_probe(packet, traces[trial])
+                if require_certificate:
+                    require(quality["recorded_window_complete"] and not quality["nonfinite_cells"],
+                            "completed_recovery_contains_incomplete_or_nonfinite_primary")
+        if require_certificate and summary["search_history_retained"]:
+            # Old captured references can be reused by a declared warm attempt.
+            # Count current search/final and current capture separately; never
+            # infer completeness from the subset that produced candidates.
+            require(search_trials == count(summary["search_probes"]) and
+                    reference_trials == count(summary["reference_probes"]),
+                    "recovery_primary_attempt_coverage_mismatch")
+        recovery = audit_recovery_history(summary, packets, traces, protocol)
+        measured = audit_training_summary(projected, packets, origin_stimulus_id,
+                                          require_certificate=require_certificate)
+        return {**measured, "auditor_version": 8, "training_summary_schema": 5,
+                "base_training_summary_schema": projected["schema_version"], "candidate_recovery": recovery}
     version = summary.get('schema_version')
     require(type(version) is int and version in (1, 2, 3, 4), 'unknown_training_summary_schema')
     c_fields = {'capacitance_history', 'actual_capacitance_witness_id', 'accepted_capacitance'}

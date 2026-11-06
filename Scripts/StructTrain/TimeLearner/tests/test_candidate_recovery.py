@@ -120,7 +120,7 @@ class CandidateRecoveryDeclarationTest(unittest.TestCase):
     def test_envelope_acceptance_cannot_certify_training(self):
         for base in range(1, 5):
             summary = envelope(records(base)[1])
-            with self.assertRaisesRegex(EvidenceError, "candidate_recovery_primary_audit_not_implemented"):
+            with self.assertRaisesRegex(EvidenceError, "candidate_recovery_primary_context_required"):
                 audit_training_summary(summary, {}, "pulse0")
 
     def test_invalid_charge_is_available_only_with_retained_search(self):
