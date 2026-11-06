@@ -1,0 +1,49 @@
+from pathlib import Path
+import sys,os,json,subprocess,unittest,hashlib,tarfile,time
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-stock-recovery-evaluation-a1'
+root='5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1'
+out=base/'readbacks/s07-stock-recovery-evaluation-gate-a1';out.mkdir(exist_ok=False)
+os.environ['PYTHONDONTWRITEBYTECODE']='1';sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+templates=base/'readbacks/s07-stock-failure-production-visual-a1/restored/study'
+repository=base/'data-phasea-eight-pattern-matrix-a1'
+os.environ['TIMELEARNER_RECOVERY_EVALUATION_INPUTS']=str(templates)
+os.environ['TIMELEARNER_PHASEA_BIN']=str(repository)
+from Scripts.StructTrain.TimeLearner.phasea_matrix import from_git
+matrix=from_git(repository);(out/'matrix.json').write_text(json.dumps(matrix,indent=2)+'\n')
+module='Scripts.StructTrain.TimeLearner.tests.test_stock_recovery_evaluation.StockRecoveryEvaluationJobTest'
+suite=unittest.defaultTestLoader.loadTestsFromName(module);assert suite.countTestCases()==5
+with (out/'tests.log').open('w') as log:result=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+record={'tests_run':result.testsRun,'successful':result.wasSuccessful(),'failures':len(result.failures),'errors':len(result.errors),'skipped':len(result.skipped)}
+(out/'tests.json').write_text(json.dumps(record,indent=2)+'\n')
+assert result.wasSuccessful() and result.testsRun==5 and not result.skipped
+cli=[]
+for label,args,expected in (
+ ('help',['stock-recovery-evaluation','--help'],0),
+ ('reject-incomplete',['stock-recovery-evaluation','prepare',str(base/'readbacks/s07-stock-recovery-cli-a1/prepared'),'--bin-repository',str(repository),'--output',str(out/'must-not-exist')],2)):
+ p=subprocess.Popen([sys.executable,'-m','Scripts.StructTrain.TimeLearner',*args],cwd=source,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+ owner={'pid':p.pid,'start_ticks':Path('/proc',str(p.pid),'stat').read_text().rsplit(') ',1)[1].split()[19]}
+ try:stdout,_=p.communicate(timeout=600)
+ except subprocess.TimeoutExpired:p.kill();stdout,_=p.communicate();(out/(label+'.log')).write_bytes(stdout);raise
+ (out/(label+'.log')).write_bytes(stdout);assert p.returncode==expected,(label,p.returncode,stdout[-2000:])
+ cli.append({'label':label,'returncode':p.returncode,'owner':owner,'closed':True,'arguments':args})
+assert not (out/'must-not-exist').exists()
+(out/'receipt.json').write_text(json.dumps({'source_commit':root,'tests':record,'cli':cli,'new_native_evaluation':False,'completed_schema5_export_verified':False,'scientific_verdict':None},indent=2)+'\n')
+hashes={p.relative_to(source).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (source/'Scripts/StructTrain/TimeLearner').rglob('*.py')}
+(out/'source-hashes.json').write_text(json.dumps(hashes,indent=2)+'\n');(out/'driver.txt').write_text(PUBLISHER_SOURCE)
+members={p.relative_to(out).as_posix():{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in out.rglob('*') if p.is_file()}
+with tarfile.open(out/'primary.tar.xz','w:xz',preset=3) as tar:
+ for name in members:tar.add(out/name,arcname=name,recursive=False)
+(out/'bundle.json').write_text(json.dumps({'members':members,'archive_bytes':(out/'primary.tar.xz').stat().st_size,'archive_sha256':hashlib.sha256((out/'primary.tar.xz').read_bytes()).hexdigest()},indent=2)+'\n')
+collector=base/'evidence-stock-recovery-evaluation-gate-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(root+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(out/'publication-index'))
+def pg(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+pg('read-tree',root);prefix='Reports/StructTrain/TimeLearner/s07-stock-recovery-evaluation-gate-a1'
+for name in ('primary.tar.xz','bundle.json','receipt.json','source-hashes.json','driver.txt'):
+ oid=pg('hash-object','-w','--stdin',data=(out/name).read_bytes());pg('update-index','--add','--cacheinfo','100644',oid,prefix+'/'+name)
+c=pg('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',pg('write-tree','--missing-ok'),'-p',root,data=b'Preserve recovery frozen-evaluation role guards on actual stock models\n')
+pg('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':root,'repository':str(collector),'prefix':prefix,'tests':5,'cli_operations':2}))

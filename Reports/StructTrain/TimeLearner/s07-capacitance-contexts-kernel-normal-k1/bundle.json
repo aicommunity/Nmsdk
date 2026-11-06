@@ -1,0 +1,273 @@
+{
+  "kind": "timelearner_capacitance_contexts_kernel_evidence",
+  "schema_version": 1,
+  "root": "e4a2db58854c67d08d4dd45067d1724d55947fea",
+  "baseline_root": "1a4fd929296f05322d469270039e195698b5f620",
+  "candidate_pulselib": "9aad0f7f208c61c91f38d54bc92c939c642fab5b",
+  "results": {
+    "off-ab": {
+      "returncode": 0,
+      "expected_cases_per_binary": 137,
+      "accepted": true,
+      "result": {
+        "kind": "timelearner_controller_ab_result",
+        "schema_version": 1,
+        "cases": {
+          "baseline": {
+            "root": "1a4fd929296f05322d469270039e195698b5f620",
+            "pulselib": "194643e261fae59dbb3bfdd7b83ea54663ae04d7",
+            "compile": {
+              "execution": "completed",
+              "returncode": 0,
+              "wall_seconds": 50.26453963899985
+            },
+            "execution": "completed",
+            "validity": "valid",
+            "assertion_status": "passed",
+            "executable": {
+              "path": "/home/user/timelearner-refactor/readbacks/s07-capacitance-contexts-kernel-normal-k1/off-ab/baseline/controller-tests",
+              "sha256": "32432ed84f43b647edb5c1540870dce64b590bafe1b128bbb34e5587cb6fc141",
+              "size": 2031472
+            },
+            "resolved_libraries": [
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+                "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+                "size": 2220400
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+                "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+                "size": 125488
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+                "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+                "size": 940560
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+                "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+                "size": 2260296
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+                "size": 240936
+              }
+            ],
+            "actual_loaded_files_captured": false,
+            "test": {
+              "execution": "completed",
+              "returncode": 0,
+              "wall_seconds": 0.0648701679892838
+            },
+            "inventory": {
+              "expected": 137,
+              "observed": 137,
+              "failed_test_ids": [],
+              "assertion_status": "passed",
+              "sha256": "07ac57907dd340a78d07b0904efe6d2330f09b86b99179fdf46d203503414ca0"
+            }
+          },
+          "candidate": {
+            "root": "e4a2db58854c67d08d4dd45067d1724d55947fea",
+            "pulselib": "9aad0f7f208c61c91f38d54bc92c939c642fab5b",
+            "compile": {
+              "execution": "completed",
+              "returncode": 0,
+              "wall_seconds": 50.51461212383583
+            },
+            "execution": "completed",
+            "validity": "valid",
+            "assertion_status": "passed",
+            "executable": {
+              "path": "/home/user/timelearner-refactor/readbacks/s07-capacitance-contexts-kernel-normal-k1/off-ab/candidate/controller-tests",
+              "sha256": "edc574e6612176a126ffec0d406d116fdb306407154b184e49ec312adab817a4",
+              "size": 2047920
+            },
+            "resolved_libraries": [
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+                "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+                "size": 2220400
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+                "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+                "size": 125488
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+                "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+                "size": 940560
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+                "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+                "size": 2260296
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+                "size": 240936
+              }
+            ],
+            "actual_loaded_files_captured": false,
+            "test": {
+              "execution": "completed",
+              "returncode": 0,
+              "wall_seconds": 0.06436355784535408
+            },
+            "inventory": {
+              "expected": 137,
+              "observed": 137,
+              "failed_test_ids": [],
+              "assertion_status": "passed",
+              "sha256": "28f6f3b91ff8a54c077785940ab64bcdcc403edb59f6916e629f800244404a1c"
+            }
+          }
+        },
+        "assertion_status": "passed",
+        "same_test_sources": true,
+        "native_rdk_integration_verified": false,
+        "operation_trace_equivalence_verified": false,
+        "capacitance_search_enabled": false,
+        "scientific_verdict": null
+      }
+    },
+    "kernel": {
+      "returncode": 0,
+      "expected_cases_per_binary": 147,
+      "accepted": true,
+      "result": {
+        "kind": "timelearner_controller_kernel_result",
+        "schema_version": 1,
+        "cases": {
+          "candidate": {
+            "root": "e4a2db58854c67d08d4dd45067d1724d55947fea",
+            "pulselib": "9aad0f7f208c61c91f38d54bc92c939c642fab5b",
+            "compile": {
+              "execution": "completed",
+              "returncode": 0,
+              "wall_seconds": 54.92482571210712
+            },
+            "execution": "completed",
+            "validity": "valid",
+            "assertion_status": "passed",
+            "executable": {
+              "path": "/home/user/timelearner-refactor/readbacks/s07-capacitance-contexts-kernel-normal-k1/kernel/candidate/controller-tests",
+              "sha256": "e500049d1abc24b2e4128014d6066059278238818729ab898189ed3588e04faf",
+              "size": 2159904
+            },
+            "resolved_libraries": [
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+                "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+                "size": 2220400
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+                "sha256": "fc9d43b2f6c20e53b009238f767c5b949d202389e20de9e202ea684b4ba3729a",
+                "size": 125488
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+                "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+                "size": 940560
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30",
+                "sha256": "ff0825e113603c3866680d5d52216bc6d8eedf3a59f52a0aef67ff01994db128",
+                "size": 2260296
+              },
+              {
+                "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+                "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+                "size": 240936
+              }
+            ],
+            "actual_loaded_files_captured": false,
+            "test": {
+              "execution": "completed",
+              "returncode": 0,
+              "wall_seconds": 0.06430295389145613
+            },
+            "inventory": {
+              "expected": 147,
+              "observed": 147,
+              "failed_test_ids": [],
+              "assertion_status": "passed",
+              "sha256": "e5d467ee2960cf056ba2430c0f8a467a8f178c9f5c3039014d19cf0e54ab3591"
+            }
+          }
+        },
+        "assertion_status": "passed",
+        "same_test_sources": null,
+        "native_rdk_integration_verified": false,
+        "operation_trace_equivalence_verified": false,
+        "scientific_verdict": null,
+        "comparison_performed": false
+      }
+    }
+  },
+  "acceptance_status": "passed",
+  "members": {
+    "kernel/candidate/compile/owned-process.json": "667ab9a702e0a6d3c432d48a35cf35a84744b97ecf0dc42aeb0d610198611e2f",
+    "kernel/candidate/compile/result.json": "f4d06a09f7c9cdb7772b88eab9e976929b9deb53a7949fd7c52a4222352a61fc",
+    "kernel/candidate/compile/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kernel/candidate/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kernel/candidate/junit.xml": "e5d467ee2960cf056ba2430c0f8a467a8f178c9f5c3039014d19cf0e54ab3591",
+    "kernel/candidate/result.json": "256f70078e1d9e6d80ba51333afc0349803a49f1d656c7520bd23bb549e68424",
+    "kernel/candidate/sources.json": "1f0460766beba1175dfebbd0e7c749f43efd275a014c07300135e2cefa1c2fc8",
+    "kernel/candidate/test/owned-process.json": "e6db3979f0a73518f448d447986010e024fa18c806f122338cc3f58f5c1db53c",
+    "kernel/candidate/test/result.json": "4de01af827c4a609285917b60d92fcc6c2f9e7f125c91859e96982c9ef70ca02",
+    "kernel/candidate/test/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kernel/candidate/test/stdout.log": "0c3e6a05eb729ddf303b90f7facb269786b0d032d18ebc56354dec66e6ab5a96",
+    "kernel/result.json": "fcb64bea58b4b88fbbe6552dcf671b792c57d28da89fb49182cfffbe3da77757",
+    "kernel/specification.json": "191cfd1e6746b53696113766bc48ff87cff87dd5cb85621c93cd55eb76b300a4",
+    "kernel/toolchain.json": "418eb33086fea28c7685af20e99c2270769dfdefa015b733e766cbf55441a882",
+    "kernel-job.json": "191cfd1e6746b53696113766bc48ff87cff87dd5cb85621c93cd55eb76b300a4",
+    "kernel-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "kernel-stdout.log": "b11c09e820678378195788594be37b8dd8e8a02e764c9a8648cd9069bd5bc775",
+    "off-ab/baseline/compile/owned-process.json": "bd52bc95198cbdd94dabdb2b29bf38d5dd6955e4e5ad39497c8a82440661d7cd",
+    "off-ab/baseline/compile/result.json": "c39b1e3532465423615a65346f815b3cc34c0a0b7951cbd9de6d62b3e77d66db",
+    "off-ab/baseline/compile/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab/baseline/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab/baseline/junit.xml": "07ac57907dd340a78d07b0904efe6d2330f09b86b99179fdf46d203503414ca0",
+    "off-ab/baseline/result.json": "bf4180a023db4d08dc6a520303a94c192b7255dbb0e405758e13b2075f3bbe9b",
+    "off-ab/baseline/sources.json": "332df3f8e4fe8f18ee0954acaaf0599aaf6eff822c34c8ba1f53e85ab8d5ac48",
+    "off-ab/baseline/test/owned-process.json": "8ed97d546252c8a45e392a58b9933e95d08401628b07d0a5df3366cf4236d45c",
+    "off-ab/baseline/test/result.json": "14f6d1565d23c51c57065b0c2d65fffd5510ccb852b6a97ac09429a9202a3e53",
+    "off-ab/baseline/test/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab/baseline/test/stdout.log": "7de75d99661e3c12f9746a0b486c33ea067b5180455f5318937ac9aa5c32f28b",
+    "off-ab/candidate/compile/owned-process.json": "d6aad36d89f35998bfc6407148f09a13bfbd48356fc92cbdf9a37e3bbc407e69",
+    "off-ab/candidate/compile/result.json": "b77584ddd004bf86a121e87b17c3ac2b51aa7936a8035b8297265b03d4029d93",
+    "off-ab/candidate/compile/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab/candidate/compile/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab/candidate/junit.xml": "28f6f3b91ff8a54c077785940ab64bcdcc403edb59f6916e629f800244404a1c",
+    "off-ab/candidate/result.json": "ab8b4aec134bb9b780c5472a03d9adfcc68a5e05dfeacbb4cc508cbb9b5b39f3",
+    "off-ab/candidate/sources.json": "920f9043c1e7195d9977dfcc828212f3a26288a2276a3521195158f01e424639",
+    "off-ab/candidate/test/owned-process.json": "1f009aaec07d633004c7a58ba6d5d701ff096c7d36afb8d4886e37ed074937c3",
+    "off-ab/candidate/test/result.json": "638f1a4ceb262b426e7853fc71d9ef99617e17edc39194a11f53a241f3c25d64",
+    "off-ab/candidate/test/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab/candidate/test/stdout.log": "cc0b8c185784a3b6286f9246d9d6549dff6e54c41a48efd08310b2c4dc466b56",
+    "off-ab/result.json": "68702f84ef4cd3f72ecfc68afb4b4b8509a41766b1efb7889f2d813d4028df84",
+    "off-ab/specification.json": "48a9b0407b2338ecd69cc3df5b4e4b13d981fb6971def0f554091bdc5b69dee2",
+    "off-ab/toolchain.json": "418eb33086fea28c7685af20e99c2270769dfdefa015b733e766cbf55441a882",
+    "off-ab-job.json": "48a9b0407b2338ecd69cc3df5b4e4b13d981fb6971def0f554091bdc5b69dee2",
+    "off-ab-stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "off-ab-stdout.log": "de9c396cbc9ae6d69de572b9e146bde15ed8ed348c45cbac29ec33f9aa5342f4",
+    "owned-kernel-cli.json": "9ff906f6dad876f4c9b91fa6a243f1556b80d77128e3c3aa8bc06c9fd556cf30",
+    "owned-off-ab-cli.json": "bb2b536cdaa7223d741ec20ac4dcf6b44204f3ec600737686b71fd8758b8d311",
+    "owned-supervisor.json": "7f67184d7209459be1e1417f19909614471bebf050f356672427e94576733240",
+    "preceding-decision-evidence.json": "6e52147ec1f74ba06e855552dbbf1d158e3e8fc5e6f32e86e9d6fbac7cc3969c",
+    "private-object-store.log": "1e308f4e0558173117970214421e3354d750bca2e47071b9bdc3144d18c1badf",
+    "runner-source-hashes.json": "d18c0725a00e521070450724637d36e4e1d87774df4beb701060868f4a145903",
+    "terminal.json": "9f277c3c311185e6f2c5f7448a92a474d808591256009d7d9ab161a24ccc6264"
+  },
+  "archive_sha256": "a972fa0b39f68ed3025e83d3cbe52aa6bea8cd5a2956883f32863a5d025b5658",
+  "archive_bytes": 65793,
+  "scope": "Whole production pure decision sources and original Git-verified GTest. Off compatibility137 per A/B side with identical test files; separate single-candidate147 includes10 new controlled-response On tests. Single kernel is not an A/B comparison. No native Rdk/C0 lifecycle, active configuration/model schema4, measured C refinement, operation-trace equivalence, ASan or scientific recognition claim. All preparation/compile/test failure receipts retained.",
+  "scientific_verdict": null
+}

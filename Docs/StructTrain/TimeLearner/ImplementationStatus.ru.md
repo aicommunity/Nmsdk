@@ -10,11 +10,12 @@ merge и научная разделимость — разные утвержд
 
 | Источник | Состояние |
 |---|---|
-|Root develop, проверенная отправная точка этой сводки|837b0c7aad7c6d1973325319a750ce8da8f0f070|
+|Root develop, проверенная отправная точка этой сводки|9b380a3eba4f67c31b2fde80a0a0f5b9677c3110|
 |PulseLib в develop|0ec9193e6620ae2439329eece5ecd6d6f167c70a|
 |Bin в develop|37ff211fa6ba4999fc51802182915022b239a1eb|
 |Rdk в develop|10e9d05aa658dd2203c89bc84ba9166595b50014|
-|Проверяемый compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
+|Базовый общий compiled SDK|Root2e0618110a9abb48b94f6edc6b63c51f829ec810 / Pulse12d8c8a41c998ae1516496f716a0ae0f3d312b3e; ещё не общий принятый C++ срез|
+|Recovery compiled SDK|Root84d6d97501a62b0a689b1170ec4f0fb53e558a48 / Pulse416e07c71b80e7e7a37cd213f8d0b6f7efb768fb; normal118 и адресный ASan19 проверены; stock серия завершена, её публикация ещё ожидается|
 
 [Матрица возможностей](ControllerCapabilities.ru.md) отделяет принятые API от
 кандидата: N0 repeats и native learned-state import уже реализованы и адресно
@@ -27,9 +28,75 @@ cold configuration, learned package, observation и scorer не взаимоза
 выполнил133 cases:132 passed,1 assertion failure при записи файла в отсутствующий
 output/native. [Исправленный production gate](NativeGateOutputDirectory.ru.md)
 проверен тем же оригинальным тестом на прежних normal/ASan binaries и принят.
-A4 остановилась до C++ из-за неполного tool snapshot; свежая A5 использует
-согласованный tool bb288399bdb66aaadb3db7ec5f01c76cd9bd57ae и выполняется отдельно.
-До полного verdict, первичных данных и closure это не ASan133 PASS кандидата.
+A4 остановилась до C++ из-за неполного tool snapshot. A5 завершилась: серверный
+verdict сообщает133/133 passed за28553.79 с; свежая проверка подтвердила отсутствие
+процесса/группы и released lease. Полный primary архив проверен:4888 members/23120604 bytes;321 native,323 Python
+и335 tool source hashes совпали с Git. Результат и fresh closure/released lease
+сохранены в [проверке](IntegratedSharedAsan133Verification.json). A5 относится
+только к root2e061/Pulse12d, не к последующим
+изменениям invalid budget и candidate recovery; отсутствие утечек не проверялось.
+
+Отдельно подготовлен [общий бюджет невалидных проб](AttemptInvalidObservationBudget.ru.md):
+baseline root7cc/Pulse12d и fixed roota2df/Pulse2c7 используют идентичные новые
+регрессии. На M40 baseline воспроизвёл превышение бюджета:4 test functions
+завершились32 ожидаемыми assertions, Exact и присутствующим сертификатом;
+полный34-member primary опубликован и746 source files сверены с Git.
+Fixed SDK прошёл4/4 новых и74/74 смежных tests. Native physical/transport gate
+дал21/23: два configured Train исчерпали sweeps до ожидаемого сертификата.
+Тот же набор23 на прежнем SDK дал те же21/23; все252 CSV и7 precondition
+summaries побайтно совпали. Оба первичных отрицательных результата сохранены;
+отказы этих fixtures не объясняются budget fix в данном A/B. Это pending общая
+приёмка, не merge в develop.
+ASan A5 относится к Pulse12d и не
+подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
+не устраняет stock burst ambiguity.
+
+Следующий [configured transport25](ConfiguredTransportPreconditions.ru.md)
+прошёл25/25 на той же Pulse2c7: исходные0.02 Train сохранены как diagnostic
+stopped-state controls, добавлены отдельные completed controls с явным0.2.
+Четыре изолированных old/new процесса подтвердили совпадение28 cold CSV и
+двух precondition summaries с абсолютным временем. Старый21/23 verdict не
+переписан. Общие23/25 процессы имеют82 отличающихся CSV, поэтому их полная
+временная эквивалентность не заявляется. Pending C++ SDK ещё не принят целиком.
+
+Отдельный [WIP candidate recovery](UnassignedBurstCandidateRecovery.ru.md)
+добавляет opt-in продвижение bounded search после строго классифицированного
+unassigned burst и C++ cold/summary envelope5. Default retry и final all-input
+gate сохраняются. C++ проверки выполнены в отдельных срезах, указанных ниже. Python declaration,
+preflight и ConditionSpec binding сначала проверены33/33 tests на каждом сервере.
+Следующий primary-classifier срез прошёл48/48 на обоих серверах, включая
+исходные stock invalid JSON/CSV и их повреждения; он не подтверждает переходы
+поиска. Полный primary audit5 добавлен последующим срезом rootf516. M40 SDK Pulse70f прошёл116/116
+C++ controls; проверены834 primary members,748 source hashes и process/lease
+closure. Все284 CSV прежнего default25 subset побайтно совпали;18 startup JSON
+отличаются только StepDuration telemetry. Последующий C++ typed journal Pulsea34
+проверен отдельно последующим Pulse416 gate118/118 (root84d6), включая общий
+serializer;834 members и752 source hashes сверены. Это не stock cold recovery.
+Standalone history auditor прошёл54/54
+Python mutation checks на каждом сервере с гипотетическими decision metadata
+поверх реальных старых проб; это не native execution proof.
+Новый full schema5 reader rootf516 проверен на18-cell корпусе base1..4:
+60/60 Python tests без пропусков на обоих серверах (source5a6). Сверены20
+source files каждого запуска, идентичные manifests и312 файлов корпуса
+(77806588 bytes) с исходными Git-архивами2100 members. Это hypothetical
+schema5 envelopes поверх старых реальных данных, не новый native Train.
+Первый Elder запуск исчерпал120с; количество выполненных тестов неизвестно,
+частичный stdout утрачен. Отдельный запуск с бюджетом900с завершился за142.07с.
+Подробности: [API verification](CandidateRecoveryApiVerification.json). Срез не принят в develop;
+научного результата он не добавляет.
+
+Следующий [stock recovery study](StockRecoveryStudy.ru.md) уже выполняется на
+M40: восемь matched условий Classic/Branch×два порога×retry/advance с общим
+invalid allowance32 и прежними физикой/допусками. Шесть design tests и все восемь
+preflight прошли. Первые два Classic-low Train остановились InvalidObservation;
+полная серия и публикация её primary ещё не завершены. Сквозной CLI отдельно
+проверен: prepare8 и отказ анализа неполной матрицы. Эти предварительные
+наблюдения не закрывают stock cold convergence, Train→Test или научную оценку.
+[Зависимая frozen/diagnostic оценка](StockRecoveryEvaluation.ru.md) подготовлена
+для всех восьми моделей:64 предъявления,160 trial/soma views с исходными
+импульсами; ждёт полного closure Train серии. Пять role/job guards и два CLI
+сценария уже прошли на реальных старых stock пакетах; новый native export/
+evaluate/report и визуальная приёмка ещё ожидаются.
 
 ## Приёмка по исходным этапам
 
@@ -87,3 +154,79 @@ TP1/FP3/FN0/TN4, со статусом NonSeparable на проверенной 
 [Git snapshot](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md).
 Её старые слова «ещё не реализовано» относятся к состоянию своего подэтапа.
 Исторические измерения и критерии не переписываются под новые результаты.
+
+
+Дополнительный [адресный ASan19](CandidateRecoveryAsan19.ru.md) нового Pulse416
+запущен в независимом runtime/source/build. Пройдены19/19,64 primary members и757 source hashes проверены; fresh closure
+и released lease подтверждены. [Точная сверка](CandidateRecoveryAsan19Verification.json).
+Это не вся ASan matrix нового SDK и не leak check.
+
+
+Stock matched Train завершён8/8 с валидными первичными данными; все восемь
+моделей stopped/InvalidObservation без certificate. Все64 diagnostic probes
+также завершены. При inherited0.0117 каждый случай TP1/FP7/FN0/TN0; при100 —
+TP0/FP0/FN1/TN7. Это не классификация обученной модели. Render первого worker
+остановился из-за отсутствующего matplotlib; отдельный render-only job использует
+существующий plot-venv, без нового native Train/evaluate. Первичные Train/
+evaluation archives ещё проходят публикацию; предварительные числа не закрывают
+этап11 и не отменяют августовские наблюдения.
+
+
+[Численный stock recovery отчёт06.11](StockRecoveryScientificReport-2026-11-06.ru.md)
+теперь связан с проверенными Train/evaluation Git primary. Все восемь попыток
+остановлены без certificate;64 diagnostic responses не показали классификации.
+Render-only retry и визуальная приёмка остаются отдельными незавершёнными работами.
+
+
+Адресный archive API schemas1..4 проверен9/9 на каждом сервере с идентичными
+6 producer snapshots/577 файлами. [Сверка](PackagedPipelineArchiveTwoHostVerification.json).
+Это inclusion/integrity gate, не model convergence и не вся fault matrix.
+В stock report добавлены4 вручную просмотренных Soma1 PNG первого Classic-low
+случая; первый model cache завершён, полный eight-model render ещё работает.
+[Visual scope](StockRecoverySelectedVisualQA.json).
+
+
+Следующий [coverage аудит](SearchCoverageReview.ru.md) связывает фактическое
+покрытие L/Ns/Rs с полными parameter witnesses. Для native N1 dynamic domains
+code review выявляет Rs-first порядок внутри одной geometry; малый invalid
+budget может остановить попытку до обзора других длин. Это ограничение
+покрытия, не доказательство PhysicalInfeasible или ошибки численного расчёта.
+Новый reader/CLI и4 checks запущены на M40, verdict ещё pending.
+
+
+Coverage reader/CLI принят адресно на M40:4/4 tests,11 primary members/349
+source hashes,8 source summary/package hashes сверены.
+[Результаты и следующий алгоритмический вопрос](SearchCoverageReview.ru.md).
+Подтверждено ограниченное покрытие первого обучаемого входа; full search box
+и PhysicalInfeasible не заявляются. C++ порядок пока прежний.
+
+Последующее изменение C++ подготовлено отдельной веткой:
+[fair domain traversal](FairDomainTraversal.ru.md). Оно interleave-ит geometry
+только для opt-in N1 AdvanceUnassignedBurst; default RetrySameCandidate
+остаётся прежним. Normal122 завершён121/122: единственная failed проверка
+ошибочно ожидала input1 у всех Branch evidence, включая штатное продолжение
+с input0. Все4 новых теста исполнились; три прошли. Исходные834 primary members,
+JUnit и761 source hashes сверены и сохранены, весь gate не объявлен PASS.
+Исправленный normal137 добавляет15 C-context controls, включая новый
+контроль полного3L×3Rs mesh в трёх suspended contexts для Classic и Branch.
+После остановленного очередью A1 и prebuild launcher failure A2 отдельный A3
+успешно сконфигурирован и собирается. Pulse-алгоритм между этими попытками
+не менялся. [Job history](FairDomainTraversalJobs.json). Новый stock Train
+не запускался; улучшение классификации пока не заявляется.
+
+Полный stock recovery render теперь завершён:
+[проверка](StockRecoveryFullVisualVerification.json),160 trial/soma pairs,
+8931 views,30287 файлов/2.1GB на M40. Проверены все cache checksums и source
+bindings; worker group closed, lease released. Каждая пара содержит full2s
+overview и40 непрерывных50ms zooms, без downsampling. Компактные metadata
+сохранены в Git, тяжёлый derived cache — только M40. Ручная visual QA остаётся
+ограниченной четырьмя ранее выбранными PNG; научный результат не изменился.
+
+Последующий normal137 нового fair-domain варианта успешно завершён и принят
+в указанном scope: [точная сверка](FairDomainTraversalNormal137Verification.json).
+Подтверждены137/137,834 primary members/761 source hashes, неизменность284 CSV
+и480 JSON прежних native controls;19 startup JSON меняют лишь StepDuration.
+Это не scientific PASS. ASan38 уже собирается в отдельном runtime, следующая
+восьмиусловная stock-серия поставлена после его успеха. Парный анализатор
+принят на M40 [6/6 плюс actual-primary CLI](StockRecoveryCodeComparisonVerification.json);
+реальное сравнение разных code versions и приёмка на Elder ещё не выполнены.
