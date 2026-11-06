@@ -64,8 +64,10 @@ preflight и ConditionSpec binding сначала проверены33/33 tests 
 поиска. Полный primary audit5 ещё явно отклоняется. M40 SDK Pulse70f прошёл116/116
 C++ controls; проверены834 primary members,748 source hashes и process/lease
 closure. Все284 CSV прежнего default25 subset побайтно совпали;18 startup JSON
-отличаются только StepDuration telemetry. Последующий typed journal Pulsea34
-и standalone history auditor ещё не проверены и не входят в этот PASS.
+отличаются только StepDuration telemetry. Последующий C++ typed journal Pulsea34
+ещё не проверен и не входит в этот PASS. Standalone history auditor прошёл54/54
+Python mutation checks на каждом сервере с гипотетическими decision metadata
+поверх реальных старых проб; это не native execution proof.
 Этот срез не принят в develop; научного результата он не добавляет.
 
 ## Приёмка по исходным этапам
