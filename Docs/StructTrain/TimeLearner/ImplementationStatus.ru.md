@@ -203,11 +203,16 @@ source hashes,8 source summary/package hashes сверены.
 Последующее изменение C++ подготовлено отдельной веткой:
 [fair domain traversal](FairDomainTraversal.ru.md). Оно interleave-ит geometry
 только для opt-in N1 AdvanceUnassignedBurst; default RetrySameCandidate
-остаётся прежним. Normal122 ещё проходит серверную сборку/приёмку.
-Следующий отдельный normal137 добавляет15 C-context controls, включая новый
+остаётся прежним. Normal122 завершён121/122: единственная failed проверка
+ошибочно ожидала input1 у всех Branch evidence, включая штатное продолжение
+с input0. Все4 новых теста исполнились; три прошли. Исходные834 primary members,
+JUnit и761 source hashes сверены и сохранены, весь gate не объявлен PASS.
+Исправленный normal137 добавляет15 C-context controls, включая новый
 контроль полного3L×3Rs mesh в трёх suspended contexts для Classic и Branch.
-Он поставлен в очередь после normal122 и не запускает stock Train.
-PASS или улучшение классификации пока не заявляются.
+После остановленного очередью A1 и prebuild launcher failure A2 отдельный A3
+успешно сконфигурирован и собирается. Pulse-алгоритм между этими попытками
+не менялся. [Job history](FairDomainTraversalJobs.json). Новый stock Train
+не запускался; улучшение классификации пока не заявляется.
 
 Полный stock recovery render теперь завершён:
 [проверка](StockRecoveryFullVisualVerification.json),160 trial/soma pairs,
