@@ -1,0 +1,581 @@
+{
+  "kind": "independent_archival_identity_verification",
+  "date": "2026-11-06",
+  "evidence_commit": "b15569b6030b82be92e733562aba9b739aa6def8",
+  "archive_members_checked": 195,
+  "archive_bytes": 462240,
+  "archive_sha256": "281396f223a622fdc6095a0b2c87a96c8e1ad6670630e00fbc7de42e9b76b858",
+  "reader_source_commit": "0bebed450eb2f9bfc69e6c428ac2b2331dc6fd7d",
+  "reader_source_files_checked": 323,
+  "actual_native_processes": 8,
+  "readers": 128,
+  "reader_inventory_exact": true,
+  "original_input_hashes_checked": true,
+  "cases": [
+    {
+      "id": "Branch_N0_COn",
+      "process": {
+        "pid": 558986,
+        "start_ticks": "299209961",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "ff548615009d6abb678ccb715d550174bb315579ea71e1c22cde91febeb42da2",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "cfcd276c75065c8bdceed0223d2bae18b6869e55f3fa34e41eba15e60e06243f",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "cfcd276c75065c8bdceed0223d2bae18b6869e55f3fa34e41eba15e60e06243f",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Branch_N0_COff",
+      "process": {
+        "pid": 559612,
+        "start_ticks": "299211858",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "4b4ace7b721ac7039bea640e24a95ffe11251650aa820a3ac2f4e9c4ec3c84aa",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "cee1b0b5f6406c543988ce504cf5fe5332457840b028b0736b86149dfae5bd59",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "cee1b0b5f6406c543988ce504cf5fe5332457840b028b0736b86149dfae5bd59",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Branch_N1_COn",
+      "process": {
+        "pid": 560136,
+        "start_ticks": "299213772",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "cf604b736210f3729feabab8f10a5188f0b2c3fb1df0837eab97bb7c2856a01e",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "0c9033052aad9b53cb34182db3286631e1b09d880e7bef1ae6cbe9047904e1ad",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "0c9033052aad9b53cb34182db3286631e1b09d880e7bef1ae6cbe9047904e1ad",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Branch_N1_COff",
+      "process": {
+        "pid": 560765,
+        "start_ticks": "299215656",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "0afdc8285361a81d54fbc86fafa7b6aa78262744779a24e8a9fa7802d6ba4c0f",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "a97f7f6f6f4b53c88104fbb5e320ac7edfa1a0ff4226d6661e40dc870b9ab61c",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 8,
+              "baseline_channels": 8,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.011938363208431446,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "a97f7f6f6f4b53c88104fbb5e320ac7edfa1a0ff4226d6661e40dc870b9ab61c",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Classic_N0_COn",
+      "process": {
+        "pid": 561284,
+        "start_ticks": "299217531",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "b91b906b7204c6c1e96903356314adce4403c9fdf1bdb54f7696cba1b2192464",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "22ac18f1acf450e4f99728df54dc1cd83bb1b5512f9f507d52fe8d0249550e33",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "22ac18f1acf450e4f99728df54dc1cd83bb1b5512f9f507d52fe8d0249550e33",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Classic_N0_COff",
+      "process": {
+        "pid": 561911,
+        "start_ticks": "299219593",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "1973e683bdc7633ae49be943463029aa5e12017dfbe1d04b561257f2a4e18c48",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "0d088be389d2135caa0877cf4379d3f2b484305b0f12605e11fcf3f4defa76fb",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "0d088be389d2135caa0877cf4379d3f2b484305b0f12605e11fcf3f4defa76fb",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Classic_N1_COn",
+      "process": {
+        "pid": 562544,
+        "start_ticks": "299221647",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "43082cec3912c6351d1b33bf58e07542b7f73146fe27a68b857a558f964f9f3a",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "5f0b52849d6f56b527c6465eb8efff0b019fccd1dda6cedeccc1626211f7e9bd",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "5f0b52849d6f56b527c6465eb8efff0b019fccd1dda6cedeccc1626211f7e9bd",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "id": "Classic_N1_COff",
+      "process": {
+        "pid": 563180,
+        "start_ticks": "299223767",
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/media/user/Data/TimeLearnerRefactor/runtime-csearch-threshold-joint-asan-build-a2/Test_PulseLib_StorageComponents",
+        "executable_sha256": "ec2a840511ef93f5011aa849d47ff035473447043b05a4d19d44647bdcabe6e4",
+        "runtime_fingerprint": "a854d1742c366900065689c57ec1a30fa6c56ee6750dbb071401c68da8b1cfa8"
+      },
+      "source_sha256": "ab8bc5ddde4c8dff049987670e186820a5810f135eaa247cbe2271187ec87456",
+      "transport_audit": {
+        "auditor_version": 2,
+        "source_audit": {
+          "auditor_version": 2,
+          "conversion_math_verified": true,
+          "source_audit": {
+            "auditor_version": 5,
+            "certificate_consistent": true,
+            "primary_trials": 6,
+            "embedded_trials": 4,
+            "exact": true,
+            "model_revision": "199e69288abd0322bcb8718ddf63b7be1f015b34ec4a13e0b182886c221b9a3a",
+            "n0_candidate_repeats": 1,
+            "search_history_retained": true,
+            "native_import_verified": false,
+            "package_digest_verified": true,
+            "capacitance_state": {
+              "schema_version": 1,
+              "consistent": true,
+              "effective_channels": 12,
+              "baseline_channels": 12,
+              "storage_images": 36,
+              "native_import_verified": false
+            },
+            "capacitance_history": {
+              "schema_version": 1,
+              "consistent": true,
+              "physical_witnesses": 1,
+              "bound_trials": 4,
+              "search_checkpoint": false,
+              "dynamic_checkpoint": false,
+              "native_import_verified": false,
+              "scientific_verdict": null
+            },
+            "evaluation_verdict": null
+          },
+          "other_physics_preserved": true,
+          "native_import_verified": false,
+          "evaluation_verdict": null,
+          "frozen_transport": {
+            "complete": true,
+            "sample_count": 381,
+            "paired_values_exact": true,
+            "soma_variation": 0.007974137827536643,
+            "spikes_known": false,
+            "evaluation_verdict": null
+          }
+        },
+        "complete": true,
+        "sample_count": 381,
+        "waveform_values_exact": true,
+        "waveform_bytes_exact": true,
+        "frozen_model_revision": "199e69288abd0322bcb8718ddf63b7be1f015b34ec4a13e0b182886c221b9a3a",
+        "native_import_verified": false,
+        "process_provenance_verified": false,
+        "spikes_known": false,
+        "evaluation_verdict": null
+      }
+    }
+  ],
+  "worker_closed_and_lease_released": true,
+  "local_numerical_tests_executed": false,
+  "server_production_graph_waveform_audit": "audit_case_replay against original packages, recorded in publisher-source.py and owner-originals-verification.json",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

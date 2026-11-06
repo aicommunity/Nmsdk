@@ -1,3 +1,5 @@
+Дополнение06.11: [ASan fresh owner8/readers128 приняты](JointOwnerReplayASanAcceptance.ru.md); старые формулировки ожидания ниже относятся к предыдущему снимку. Новая shared SDK проверяется отдельно.
+
 Дополнение06.11: [SDK802 isolated ASan304 завершён и опубликован](Native304PartitionASanAcceptance.ru.md). Origin receipt для owner8/readers128 записан. Ожидания ниже описывают прежний момент; новая shared SDK2e/Pulse12d ASan ещё не принята.
 
 Temporal update05.11: matching-reader A2 завершил16 reports/4 checks,42 выбранных оригинала визуально проверены и опубликованы. [Галерея и физические ограничения](IntegratedCoordinatorTemporalVisuals.ru.md). Старые pending A1/A2 формулировки ниже относятся к прежней постановке.
