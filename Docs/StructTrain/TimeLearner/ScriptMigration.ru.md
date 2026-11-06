@@ -365,3 +365,9 @@ negative fixture. Все20 members и380 Git source hashes на worker неза�
 
 
 Текущий принятый manifest после [удаления двух исторических генераторов сеток](GridGeneratorRetirement.ru.md):186 records (184 retired/2 moved), complete=false. На обоих серверах production retrieval186, exact scope и restored-path negative прошли; generated configs/manifest/results не изменены. Прежние числа выше относятся к своим историческим снимкам. Нижняя граница remaining Bin candidates161; активные analyzers/runner и вся широкая миграция остаются открытыми.
+
+
+06.11: [AsymRm scale/UWatch retirement](AsymRmDisplayScaleRetirement.ru.md)
+прошёл verify-migration222 и restored-path negative на обоих серверах.
+Текущий manifest:220 retired+2 moved, complete=false. В AsymRm scripts остаются22
+Python; это не приёмка всех оставшихся legacy launchers/analyzers.
