@@ -46,6 +46,12 @@ ASan A5 относится к Pulse12d и не
 подтверждает новое изменение Pulse2c7. Увеличение бюджета повторов само по себе
 не устраняет stock burst ambiguity.
 
+Отдельный [WIP candidate recovery](UnassignedBurstCandidateRecovery.ru.md)
+добавляет opt-in продвижение bounded search после строго классифицированного
+unassigned burst и C++ cold/summary envelope5. Default retry и final all-input
+gate сохраняются. Новые tests ещё не выполнялись, Python/CLI support5 не
+завершён; этот срез не включён в текущие SDK-проверки и не принят в develop.
+
 ## Приёмка по исходным этапам
 
 | Этап | Подтверждено в ограниченной области | Что мешает закрыть этап целиком |
