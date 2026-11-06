@@ -227,6 +227,10 @@ def main(argv: list[str] | None = None) -> int:
     recovery.add_argument("--runtime-manifest", type=Path)
     recovery.add_argument("--code-identity", type=Path)
     recovery.add_argument("--output", type=Path, required=True)
+    recovery_compare = commands.add_parser("stock-recovery-compare", help="compare complete audited stock studies with identical declared training factors and cold graphs")
+    recovery_compare.add_argument("baseline", type=Path)
+    recovery_compare.add_argument("candidate", type=Path)
+    recovery_compare.add_argument("--output", type=Path, required=True)
     phasea = commands.add_parser("phasea-matrix", help="recover all four ISIs and labels from exact historical Bin Git data; no model execution")
     phasea.add_argument("--bin-repository", type=Path, required=True)
     phasea.add_argument("--revision", default="1c1464e248f8744e858bd66df0be99e39969fd65")
@@ -764,6 +768,19 @@ def main(argv: list[str] | None = None) -> int:
                               "historical_presentation_reproduced": False, "scientific_verdict": None}))
             return 0
         except (EvidenceError, OSError, ValueError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "stock-recovery-compare":
+        from .stock_recovery_compare import compare_studies
+        from .native_evidence import EvidenceError, require
+        try:
+            require(not args.output.exists(), "stock_compare_output_exists")
+            result = compare_studies(args.baseline, args.candidate)
+            with args.output.open("x", encoding="utf-8") as stream:
+                json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
