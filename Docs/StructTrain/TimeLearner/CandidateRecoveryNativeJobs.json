@@ -27,11 +27,16 @@
     "start_ticks": "304514545"
   },
   "latest_verified_observation": {
-    "state": "building",
-    "kernel_worker_handle_observed": true,
-    "exception_file_absent": true,
-    "build_log_observation": "91 percent; compiling production integration tests",
-    "terminal_verdict": null
+    "state": "completed",
+    "tests_passed": 116,
+    "failed": 0,
+    "skipped": 0,
+    "closed_released_verified": true,
+    "evidence_commit": "6b843ed8c7884d935e89513d1da894d5a73ff481",
+    "archive_members_verified": 834,
+    "source_files_verified": 748,
+    "typed_recovery_events_not_in_compiled_source": true,
+    "scientific_verdict": null
   },
   "declared_limits": {
     "memory_bytes": 4294967296,
@@ -40,7 +45,7 @@
     "worker_wall_seconds": 21600,
     "native_gate_wall_seconds": 10800
   },
-  "runtime_limit_verification": "pending full captured terminal/closure evidence",
+  "runtime_limit_verification": "captured kernel memory.max=4294967296, memory.swap.max=0, pids.max=128; primary verified",
   "expected_test_ids": [
     "NativeTrainingService/ClassicN0SearchAndFreshNegativeFinalGate",
     "NativeTrainingService/BranchN0SearchAndFreshNegativeFinalGate",

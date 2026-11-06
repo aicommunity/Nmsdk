@@ -1,8 +1,8 @@
 # Восстановление поиска после неидентифицируемой пачки — WIP
 
 06.11.2026. Это незавершённый кандидат этапа7. Он не принят в develop и не
-включён в эксперименты. Классификатор подключён к явно выбираемой C++ политике;
-её серверные тесты ещё не выполнены. Python/CLI audit и допуск schema5 ещё
+включён в эксперименты. Срез Pulse70f прошёл116 C++ controls на M40;
+последующий typed recovery journal Pulsea34 ещё не проверен. Python/CLI audit и допуск schema5 ещё
 не завершены: новый режим нельзя выдавать за поддержанный сквозной pipeline.
 Текущие задания используют неизменяемые более ранние SDK и не подтверждают код.
 
@@ -159,20 +159,60 @@ InvalidObservations и поле invalid_observations в summary5. При retaine
 после импорта без истории. Python проверяет availability и тип поля;
 согласованность списания с переходами поиска ещё не принята.
 
-На M40 запущена отдельная сборка root
+На M40 завершена отдельная сборка root
 `ef21547432ac60f49ba4af3038735ed96a9a6c8e` / Pulse70f с объявленными116 C++ cases:
 13 новых classifier/controller/codec,4 invalid-budget,74 смежных и25 transport.
 [Задание и наблюдаемый статус](CandidateRecoveryNativeJobs.json).
-Сборка не содержит последующий Python primary classifier и не подменяет
-проверку его сквозной интеграции. До terminal/JUnit/closure и публикации primary
-результат116 PASS не заявляется. ASan A5 проверяет более ранний Pulse12d.
+Все116 tests прошли без skips. Первичные данные опубликованы в
+`bfd94563de9db25d9943ab930860113e63ee76cf`, дополнительная проверка различий —
+`6b843ed8c7884d935e89513d1da894d5a73ff481`.
+[Независимая проверка](CandidateRecoveryNativeVerification.json) подтверждает
+все834 archive members,748 source hashes, exact116 JUnit IDs, actual runtime,
+закрытие процессов и release lease. Проверен kernel cap4GiB/tasks128/swap0.
+Общий default25 physical subset сопоставлен с прежним опубликованным архивом:
+все284 CSV и451 JSON побайтно совпали. В18 startup JSON различаются только89
+значений StepDuration/rdk_value — замеры длительности вычисления из
+Rdk UContainer.cpp:2684. Иные поля не различаются; исходники/артефакты не
+переписывались и эти поля не удалялись из первичных данных.
+
+Сборка не содержит последующий Python primary classifier или typed journal
+Pulsea34 и не подменяет их приёмку. Это не stock cold opt-in Train и не
+независимый scientific Test. ASan A5 проверяет более ранний Pulse12d.
+
+### Подготовленный typed journal: ещё не принят
+
+PulseLib `a34be2868449e744e07a11f7687d9033ae0c7cf9` добавляет
+CandidateRecoveryEvidence и summary5 candidate_recovery_events. Каждая запись
+содержит action serial, run/trial, observed/candidate input, sweep, epoch,
+base/effective model revision, phase anchor/input, validity, full L/Ns/Rs и C,
+invalid_before/after, disposition и status/reason после решения. Отдельно
+различаются cursor_advanced, invalid_budget_stop и restored_best_stop.
+Финальные отказы не создают запись пропуска input; default retry не создаёт
+recovery event. Это журнал решения, не новое измерение отсутствующего пика.
+
+Корневой candidate_recovery_history.py связывает записи с actual JSON/CSV,
+search trial IDs, точными rejections, фазой и bounds, проверяет приращения и
+терминальные причины. C-history использует существующий witness registry.
+Общий счётчик остаётся producer-reported: не все preparation/final failures
+имеют отдельный CSV, поэтому all_invalid_observations_independently_recounted
+остаётся false. Нельзя выдавать длину массива событий за полный счётчик.
+Standalone validator не включён в full completed/stopped audit: публичные
+читатели пока явно отклоняют schema5.
+
+Подготовлены дополнительные C++ проверки журнала и Python mutation tests на
+реальных старых пробах с гипотетическими decision metadata. Они не доказывают,
+что исторический controller исполнял новую политику. Новый срез ещё не
+выполнялся. Schema5 остаётся незавершённым feature-форматом; ранние codec
+артефакты Pulse70f читаются в контексте своего exact source snapshot, без
+достраивания отсутствующего журнала. Cold configuration5 при этом не меняется.
 
 Добавлены controller regressions default-versus-opt-in, anchor/input failures,
 missing/extra waves, общий budget, конечное исчерпание поиска, запрет final skip,
 повреждённый контекст, незавершённые N0 repeats и отказ свежего restoringBest.
 Четыре CandidateRecoveryConfiguration tests используют реальные storage rigs
 Classic/Branch×N0/N1 для codec1..4→5, unknown/duplicate-field negatives и summary.
-Наличие этих исходников не означает прохождения тестов.
+Эти13 controller/classifier/codec functions прошли в Pulse70f gate116;
+добавленные позднее assertions typed journal ещё не проверены.
 
 В production Test_PulseLib_StorageComponents добавлены два теста
 UnassignedBurstCandidate. Настоящий ProbeRecorder получает управляемые
