@@ -1,0 +1,108 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "9bc3febd-1356-4e72-8595-e766446a5b62",
+  "job_id": "s07-integrated-acceptance-asan-build-a2",
+  "recorded_unix": 1793918955.0917966,
+  "administrator": {
+    "pid": 220320,
+    "start_ticks": "295376899",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 565550,
+    "start_ticks": "299254564",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "dd012b2d60d8f565b3c19124bba922ea2e04c3a8a0bb9406d0f2e4a83ec13222",
+      "unit": "timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+      "invocation_id": "90c5dc8c87a0470aa88d21c57a20a601",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+      "initial_main_pid": 565550,
+      "initial_start_ticks": "299254564",
+      "sha256": "636d968de561e7ea053bd632bc9abae9bcd17131a4271c193afcf3294cb01270"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-6e531152-0bf1-4f6c-a033-7d40bed4cb63.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Separate ASan shared-controller build worker and all compiler/archive descendants freshly closed; this release does not attest numerical gates.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-integrated-acceptance-asan-build-a2"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-integrated-acceptance-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
