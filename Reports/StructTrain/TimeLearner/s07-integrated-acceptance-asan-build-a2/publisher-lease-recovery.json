@@ -1,0 +1,46 @@
+{
+  "kind": "explicit_dead_synchronous_publisher_lease_recovery",
+  "date_unix": 1793937486.8334208,
+  "token": "82f25bfe-e222-44ac-bdc8-59bb0bf07bf3",
+  "original_row": {
+    "token": "82f25bfe-e222-44ac-bdc8-59bb0bf07bf3",
+    "job_id": "publish-shared-asan-build-focused-a1",
+    "owner": "{\"boot_id\":\"0340843f-8a05-4b7e-bd66-afeefecdbe55\",\"executable\":\"/usr/bin/python3.12\",\"pid\":731873,\"start_ticks\":\"301254719\",\"uid\":1000}",
+    "resources": "[{\"access\":\"write\",\"canonical_path\":\"/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1\",\"requested_path\":\"/media/user/Data/TimeLearnerRefactor/source-theory-retirement-a1\"}]",
+    "state": "held",
+    "created": 1793937349.913154,
+    "deadline": 1793937469.913154,
+    "updated": 1793937349.913154,
+    "release_note": null
+  },
+  "owner_kernel_state": "missing",
+  "relevant_live_git": [],
+  "excluded_nondumpable_helpers": [
+    {
+      "pid": "3395",
+      "comm": "(sd-pam)",
+      "parent": "3389",
+      "parent_comm": "systemd",
+      "reason": "nondumpable login/session helper; executable/cwd not inspected"
+    },
+    {
+      "pid": "121820",
+      "comm": "ssh-agent",
+      "parent": "3389",
+      "parent_comm": "systemd",
+      "reason": "nondumpable login/session helper; executable/cwd not inspected"
+    },
+    {
+      "pid": "733007",
+      "comm": "sshd",
+      "parent": "732956",
+      "parent_comm": "sshd",
+      "reason": "nondumpable login/session helper; executable/cwd not inspected"
+    }
+  ],
+  "completed_data_commit": "4bd624d69d61f8f687c145325b50fbd2543234cb",
+  "reason": "Manual closure of synchronous evidence collector after completed data commit; release call omitted required note. Original owner missing, no live Git in target repo; no native job modified.",
+  "native_jobs_modified": false,
+  "first_recovery_attempt": "PermissionError before transaction commit; no changes",
+  "scientific_verdict": null
+}
