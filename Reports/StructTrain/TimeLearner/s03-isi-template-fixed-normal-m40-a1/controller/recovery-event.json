@@ -1,0 +1,133 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "3df8c633-bfdc-4d75-bd1a-d9ccbc2a2e66",
+  "job_id": "s03-isi-template-fixed-normal-a1",
+  "recorded_unix": 1794008275.7675138,
+  "administrator": {
+    "pid": 1353101,
+    "start_ticks": "308334799",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1353112,
+    "start_ticks": "308334815",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-isi-template-fixed-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "67b48719d455cac7b8daddb9e5ce78d2f1e46da436f8408a2b2249141954d938",
+      "unit": "timelearner-7a9a5972-2bee-4269-86b2-2e4bb21cfbd2.service",
+      "invocation_id": "7f44ce0e1cd8478fb552c529e1356b80",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-7a9a5972-2bee-4269-86b2-2e4bb21cfbd2.service",
+      "initial_main_pid": 1353112,
+      "initial_start_ticks": "308334815",
+      "sha256": "c74b85c92b8e6f69293f28f2c4f5381f74b0a51f3abdf094426beb41ba26987a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-7a9a5972-2bee-4269-86b2-2e4bb21cfbd2.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "ISI baseline worker and all compiler/test/archive descendants closed; original9-case JUnit records expected regression assertions and existing observation controls, no corrected-code PASS inferred.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-isi-template-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-isi-template-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-baseline-normal-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-baseline-normal-a3"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-fixed-normal-a1-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-fixed-normal-a1-delivery"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
