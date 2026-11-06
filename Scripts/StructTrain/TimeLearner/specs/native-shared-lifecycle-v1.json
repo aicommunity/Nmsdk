@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "cooperative_runtime_capture": true,
+  "runtime_manifest": "REPLACE_WITH_ACTUAL_RUNTIME_MANIFEST.json",
+  "source_root": "REPLACE_WITH_ACTUAL_SOURCE_ROOT",
+  "expected_test_ids": [
+    "TimeLearnerResistanceTest/ClassicChecksAllMembranesAndSkipsCalculationAfterPreflightFailure",
+    "TimeLearnerResistanceTest/BranchChecksAllMembranesAndSkipsCalculationAfterPreflightFailure",
+    "NativePhaseLifecycle/ClassicWeightReset",
+    "NativePhaseLifecycle/ClassicWeightDefault",
+    "NativePhaseLifecycle/ClassicWeightDestroy",
+    "NativePhaseLifecycle/ClassicThresholdReset",
+    "NativePhaseLifecycle/ClassicThresholdDefault",
+    "NativePhaseLifecycle/ClassicThresholdDestroy",
+    "NativePhaseLifecycle/ClassicNestedDefault",
+    "NativePhaseLifecycle/ClassicNestedDestroy",
+    "NativePhaseLifecycle/BranchWeightReset",
+    "NativePhaseLifecycle/BranchWeightDefault",
+    "NativePhaseLifecycle/BranchWeightDestroy",
+    "NativePhaseLifecycle/BranchThresholdReset",
+    "NativePhaseLifecycle/BranchThresholdDefault",
+    "NativePhaseLifecycle/BranchThresholdDestroy",
+    "NativePhaseLifecycle/BranchNestedDefault",
+    "NativePhaseLifecycle/BranchNestedDestroy"
+  ],
+  "maximum_wall_seconds": 21600,
+  "asan_options": ""
+}
