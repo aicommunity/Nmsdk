@@ -1,3 +1,5 @@
+Дополнение06.11: [новый SDK2e/Pulse12d full normal304 принят](SharedSdkNormal304Acceptance.ru.md). Прежнее ожидание normal304 ниже относится к предыдущему снимку; ASan и научные проверки отдельные.
+
 Дополнение06.11: [ASan fresh owner8/readers128 приняты](JointOwnerReplayASanAcceptance.ru.md); старые формулировки ожидания ниже относятся к предыдущему снимку. Новая shared SDK проверяется отдельно.
 
 Дополнение06.11: [SDK802 isolated ASan304 завершён и опубликован](Native304PartitionASanAcceptance.ru.md). Origin receipt для owner8/readers128 записан. Ожидания ниже описывают прежний момент; новая shared SDK2e/Pulse12d ASan ещё не принята.
