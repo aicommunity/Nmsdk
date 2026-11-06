@@ -61,9 +61,12 @@ gate сохраняются. Новые C++ tests ещё не выполняли
 preflight и ConditionSpec binding сначала проверены33/33 tests на каждом сервере.
 Следующий primary-classifier срез прошёл48/48 на обоих серверах, включая
 исходные stock invalid JSON/CSV и их повреждения; он не подтверждает переходы
-поиска. Полный primary audit5 ещё явно отклоняется. На M40 собирается отдельный
-SDK Pulse70f для116 C++ controls; terminal verdict ещё не получен. Этот срез
-не принят в develop; научного результата он не добавляет.
+поиска. Полный primary audit5 ещё явно отклоняется. M40 SDK Pulse70f прошёл116/116
+C++ controls; проверены834 primary members,748 source hashes и process/lease
+closure. Все284 CSV прежнего default25 subset побайтно совпали;18 startup JSON
+отличаются только StepDuration telemetry. Последующий typed journal Pulsea34
+и standalone history auditor ещё не проверены и не входят в этот PASS.
+Этот срез не принят в develop; научного результата он не добавляет.
 
 ## Приёмка по исходным этапам
 
