@@ -112,3 +112,11 @@ JSON полного native118 inventory; count correction сохранён в ev
 Это закрывает normal gate данного изменения, включая controlled C-context
 проверку. Вся физическая C-trim matrix, ASan38, реальный stock A/B и полный
 исходный план этим не закрываются. Новая научная серия по-прежнему ждёт ASan38.
+
+Следующее состояние: [ASan38 принят адресно](FairDomainTraversalAsan38Verification.json),
+38/38,64 primary members/761 source hashes, actual libasan mapping и executable
+owner проверены. Whole group closed, lease released. Это не leak check и не
+вся физическая ASan matrix. Первый stock launcherA1 был отклонён до worker:
+129600s превысили штатный лимит86400s. Исправленный launcherA2 использует24h
+внешний cap, сохраняя все бюджеты Train. СерияA2 прошла8 preflight и начала
+Train; результаты пока промежуточные. Исходный отказ сохраняется в её receipt.
