@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "source_closure": {
+    "kind": "metadata_only_worker",
+    "source_sha256": "27dc241b9e56c2238ba8d0da5ad6429886dab238d2dd7682edb8953821826a96"
+  },
+  "executable": {
+    "path": "/usr/bin/python3.10",
+    "sha256": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "size": 5941864
+  },
+  "app_ini": {
+    "path": "/tmp/timelearner-elder-verified-cache-release-a1-worker.py",
+    "sha256": "27dc241b9e56c2238ba8d0da5ad6429886dab238d2dd7682edb8953821826a96",
+    "size": 7923
+  },
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-g++-11",
+    "sha256": "2360901d864cf10bfd6296e261cb2c14053552a80377761ab07146ec9ec9a2c0",
+    "size": 932680
+  },
+  "build_flags": {
+    "role": "Publication kernel lock recovery and actual Git fault tests only"
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793",
+      "size": 2220400
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libexpat.so.1.8.7",
+      "sha256": "683e2e41db14581194bf1f6616e95a8f02cd4ab599f0fba807e46325ec01d21f",
+      "size": 198968
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+      "sha256": "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "size": 940560
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.2.11",
+      "sha256": "64c206f0146cc58bbddc4f22054436f4ff278f5a554aa3ce6921ddf7e9133370",
+      "size": 108936
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "size": 240936
+    }
+  ],
+  "loaded_process_files": null,
+  "loader_environment": {},
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "a2f33a6e006989270f4340528eb61f8f97366e00a5d1b602ac8672ea44fc56ae",
+    "app_ini": "27dc241b9e56c2238ba8d0da5ad6429886dab238d2dd7682edb8953821826a96",
+    "resolved_libraries": [
+      "3dd5511ae94785c9f921429b0f2b2f7aabb461b6f0e6de6dfdbef15f24bdfee6",
+      "41daf7836f7fce21a40ca63a00c5caf21b05a35a76ccc075d86f1716212cdf01",
+      "64c206f0146cc58bbddc4f22054436f4ff278f5a554aa3ce6921ddf7e9133370",
+      "683e2e41db14581194bf1f6616e95a8f02cd4ab599f0fba807e46325ec01d21f",
+      "b2cf6c33b74d2f22543b7a469a75b538911e690f769d0b238843a49465b83793"
+    ],
+    "build_flags": {
+      "role": "Publication kernel lock recovery and actual Git fault tests only"
+    },
+    "compiler": "2360901d864cf10bfd6296e261cb2c14053552a80377761ab07146ec9ec9a2c0",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "aee0fba061669ffcaca9554d4b5912f002fa9fb1f128b5d7abfb319ad1d09c45"
+}

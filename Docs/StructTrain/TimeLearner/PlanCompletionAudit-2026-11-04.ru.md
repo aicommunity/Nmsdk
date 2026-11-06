@@ -1,3 +1,5 @@
+06.11: на Elder освобождены1788657942 logical bytes подтверждённых expanded duplicates/compile objects; оригинальный опубликованный архив сохранён, текущий runtime неизменён. [Exact file audit и восстановление](ElderVerifiedCacheRelease.ru.md). На SDK2e/Pulse12d запущен полный normal304, без нового build и без изменения математических допусков; PASS пока неизвестен. Все этапы1–12 частичны.
+
 Принято06.11: isolated ASan304 на SDK802/Pulsecc завершён304/304; проверены12095 archive members,304 исходных JUnit/process identities,683 compiled и325 tool source hashes. Данные опубликованы, agent-owned origin receipt разблокирует owner8/readers128; их PASS не заявляется. [Точный scope](Native304PartitionASanAcceptance.ru.md). SDK2e/Pulse12d ASan и все этапы1–12 ещё открыты.
 
 Принято06.11: Linux publication kernel guard и explicit recovery —20 actual Git tests на каждом worker, включая frontend crash во время живого push и повторную публикацию после закрытия. Полные оба attempts сохранены. [Контракт, доказательства и границы](PublicationLockRecovery.ru.md). Это не весь scheduler/reboot/ConditionSpec контур; этапы1–12 частичны.

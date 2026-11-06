@@ -1,0 +1,2854 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 2,
+  "worker_host": "Elder-1",
+  "leases": [
+    {
+      "token": "e212e5de-1a92-4402-b903-fb43103cb4a8",
+      "job_id": "s07-csearch-threshold-joint-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1561839,
+        "start_ticks": "334038317",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/git-relay-csearch-threshold-source-a1.git",
+          "requested_path": "/home/user/timelearner-refactor/git-relay-csearch-threshold-source-a1.git"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/git-relay-pulse-csearch-threshold-a1.git",
+          "requested_path": "/home/user/timelearner-refactor/git-relay-pulse-csearch-threshold-a1.git"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793770613.47449,
+      "deadline": 1793770893.5252287,
+      "updated": 1793772248.597491,
+      "release_note": "Explicit recovery after verified whole-unit stop: source preparation failed before configure/build/native model execution; not a successful run.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "4d6cf2bf-69a4-4bbf-891e-5f7004ffca92",
+      "job_id": "s07-csearch-threshold-joint-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1667159,
+        "start_ticks": "334215550",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793772385.7963486,
+      "deadline": 1793774993.7199051,
+      "updated": 1793774874.3582244,
+      "release_note": "All synchronous operations returned and fresh whole-worker cgroup membership contains only this finalizing owner; subsequent group closure recorded separately.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "777429f1-edf6-48c7-a81f-a5d654efa2d0",
+      "job_id": "s07-csearch-threshold-joint-normal-a4",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1716073,
+        "start_ticks": "334541124",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1793775641.5455935,
+      "deadline": 1793776681.850611,
+      "updated": 1793776570.9009209,
+      "release_note": "All synchronous operations returned and fresh whole-worker cgroup membership contains only this finalizing owner; subsequent group closure recorded separately.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "1f652be3-1914-4f1e-943e-409a50c19bfd",
+      "job_id": "s07-csearch-threshold-joint-full-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1744928,
+        "start_ticks": "334772989",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793777960.200894,
+      "deadline": 1793783929.3488584,
+      "updated": 1793783827.1390588,
+      "release_note": "Full normal304 worker closed including archive creation; fresh kernel closure and exact worker main PID/start ticks verified before releasing read-only SDK and runtime/resource lease. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 12884901888,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "759a9f6f-5343-4954-8be1-dee059714185",
+      "job_id": "s10-managed-unit-reservations-elder-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1806042,
+        "start_ticks": "335239503",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-unit-reservations-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-unit-reservations-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793783837.0462573,
+      "deadline": 1793783957.0462573,
+      "updated": 1793783847.9174993,
+      "release_note": "Metadata suite passed61 tests, controller and all persisted test unit bindings freshly closed. Isolated schema3 ledgers only; no neural model ran.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "42dc5c15-3de7-4339-88d1-1baf4a337545",
+      "job_id": "s10-managed-unit-reservations-elder-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1834782,
+        "start_ticks": "335463422",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-unit-reservations-elder-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-native-managed-integration-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-native-managed-integration-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793784864.5568473,
+      "deadline": 1793784984.5568473,
+      "updated": 1793784874.6693842,
+      "release_note": "Metadata suite passed62 tests, controller and all persisted test unit bindings freshly closed. Isolated schema3 ledgers only; no neural model ran.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "58f1cdab-da31-4e3a-8736-c1250431a43f",
+      "job_id": "s07-csearch-threshold-joint-readers-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1843495,
+        "start_ticks": "335532866",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793785558.9564424,
+      "deadline": 1793785678.9564424,
+      "updated": 1793785609.0425916,
+      "release_note": "Read-only primary119 suite; no separately managed native units launched. Fresh whole parent kernel group closed, source and native304 corpus unchanged; pass/fail retained.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "c870315d-36dc-4983-9741-3f87c8967aa9",
+      "job_id": "s07-csearch-threshold-joint-readers-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1845510,
+        "start_ticks": "335548071",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793785711.0316396,
+      "deadline": 1793786011.0769892,
+      "updated": 1793785901.3976066,
+      "release_note": "Read-only primary119 suite; no separately managed native units launched. Fresh whole parent kernel group closed, source and native304 corpus unchanged; pass/fail retained.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "b043e74c-525d-4f0f-a45a-9aef3265953f",
+      "job_id": "s07-csearch-threshold-joint-readers-a4",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1853285,
+        "start_ticks": "335615627",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-readers-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-joint-primary-readers-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-joint-primary-readers-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793786386.585419,
+      "deadline": 1793786806.6502922,
+      "updated": 1793786697.1883037,
+      "release_note": "Read-only primary124 suite; no separately managed native units launched. Fresh whole parent kernel group closed, source and native304 corpus unchanged; pass/fail retained.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "0c84da84-2030-446a-81d7-df2cc528107d",
+      "job_id": "s09-theory-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1860898,
+        "start_ticks": "335678562",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-theory-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-theory-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793787015.9245064,
+      "deadline": 1793787135.9245064,
+      "updated": 1793787020.9170837,
+      "release_note": "Read-only historical121 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "a6eaf76b-8a62-4998-be24-37c0396c223c",
+      "job_id": "s09-theory-retirement-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1862683,
+        "start_ticks": "335689433",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-theory-retirement-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-theory-retirement-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793787124.6414177,
+      "deadline": 1793787244.6414177,
+      "updated": 1793787129.6434622,
+      "release_note": "Read-only historical121 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "f982c360-9e71-45a8-a4eb-348a70dc9883",
+      "job_id": "s07-analysis-dispatch-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1868309,
+        "start_ticks": "335729438",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-analysis-dispatch-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-analysis-dispatch-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-cli-analysis-dispatch-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-cli-analysis-dispatch-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793787524.6907618,
+      "deadline": 1793787644.6907618,
+      "updated": 1793787539.7039654,
+      "release_note": "Native readonly2 and actual CLI5 worker closed including archive creation; fresh kernel closure and exact worker main PID/start ticks verified before releasing read-only SDK and runtime/resource lease. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4294967296,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "3d999c76-1303-48de-84f5-4a8c32144e9d",
+      "job_id": "s07-csearch-threshold-joint-owner-replay-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1891576,
+        "start_ticks": "335932263",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-analysis-dispatch-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-analysis-dispatch-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-owner-replay-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-owner-replay-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-joint-owner-replay-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-joint-owner-replay-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793789552.9439652,
+      "deadline": 1793790073.068991,
+      "updated": 1793789958.7467976,
+      "release_note": "Native owner8 and reader128 worker closed including archive creation; fresh kernel closure and exact worker main PID/start ticks verified before releasing read-only SDK and runtime/resource lease. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "69b4b39a-60c2-44d5-bb51-2e7f8c91907c",
+      "job_id": "s10-managed-native-pipeline-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1923446,
+        "start_ticks": "336178387",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793792014.187332,
+      "deadline": 1793792154.1937797,
+      "updated": 1793792115.08235,
+      "release_note": "Failed pipeline expectations preserved: four actual cold Trains stopped without completed model. All four independently managed native units and exact controller freshly verified closed. Only global operational lease recovered; no success inferred.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4563402752,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "47ab835c-fd81-4701-a5b6-4ad880dc7282",
+      "job_id": "s10-managed-native-pipeline-normal-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1927792,
+        "start_ticks": "336197137",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793792201.6751847,
+      "deadline": 1793792401.702977,
+      "updated": 1793792331.0005724,
+      "release_note": "Four actual Exact Trains failed only the test first-session ID expectation; four stopped/export-refusal controls passed. All eight separate native units and exact parent freshly closed. Failed receipt retained; recover only global operational lease.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4563402752,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "c4e9f033-2fa6-4b1c-b1df-bf4985d51f3c",
+      "job_id": "s10-managed-native-pipeline-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1934959,
+        "start_ticks": "336210480",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-pipeline-acceptance-a3"
+        }
+      ],
+      "state": "released",
+      "created": 1793792335.6325278,
+      "deadline": 1793792640.776696,
+      "updated": 1793792531.1463783,
+      "release_note": "Actual eight controls passed: four Exact N1 cold Train/export/frozen paths and four stopped Train/export-refusal controls; all sixteen independently managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4563402752,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "cb1905f4-0bcc-4fe6-b53b-2b7b847fc7a5",
+      "job_id": "s10-managed-native-calibration-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1959484,
+        "start_ticks": "336347702",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3/actual-controls"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-calibration-acceptance-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-calibration-acceptance-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793793707.3337083,
+      "deadline": 1793794368.6457443,
+      "updated": 1793794258.5266826,
+      "release_note": "Actual four measured calibration controls passed: full real grids, subsequent frozen evaluation and nonseparable silent rollback; all twelve separately managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "664be5db-93da-4bba-83e3-d575aa86e908",
+      "job_id": "s06-shared-lifecycle-baseline-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2006269,
+        "start_ticks": "336694894",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-csearch-threshold-joint-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/runtime-csearch-threshold-joint-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-normal-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793797179.2520225,
+      "deadline": 1793800100.1343548,
+      "updated": 1793799999.8648832,
+      "release_note": "Baseline133 worker and archive closed; fresh kernel closure and exact worker main identity checked before releasing read-only SDK802/runtime and operational lease. Candidate CPP not executed; recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 2147483648,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "ec72e844-9f04-4f30-bf59-2142f7a33770",
+      "job_id": "s09-cable-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2026046,
+        "start_ticks": "336855777",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-cable-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-cable-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-cable-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-cable-retirement-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+        }
+      ],
+      "state": "released",
+      "created": 1793800019.6093132,
+      "deadline": 1793800139.6093132,
+      "updated": 1793800025.4978426,
+      "release_note": "Read-only historical141 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "3733f85f-b7ca-4dfc-8ac5-293ac2d71a34",
+      "job_id": "s10-managed-native-calibration-changed-rollback-normal-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2043800,
+        "start_ticks": "336989799",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-changed-rollback-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-changed-rollback-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3-container"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-pipeline-normal-a3/actual-controls"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-calibration-changed-rollback-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-calibration-changed-rollback-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793800128.340275,
+      "deadline": 1793800842.577642,
+      "updated": 1793800739.6929183,
+      "release_note": "Actual four measured calibration controls passed: full real grids, subsequent frozen evaluation and nonseparable changed-threshold rollback and fresh restored-model response; all sixteen separately managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "285d44a8-d4ae-4a91-904e-06d21a720c27",
+      "job_id": "s06-live-cold-fixture-baseline-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2063636,
+        "start_ticks": "337077176",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-csearch-threshold-joint-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-normal-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793801002.072353,
+      "deadline": 1793808436.8055193,
+      "updated": 1793808326.7227657,
+      "release_note": "Corrected baseline worker, build/native descendants and archive closed; fresh whole-group closure and exact worker identity checked before operational lease recovery. Recovery does not attest compilation or test success.",
+      "demands": {
+        "disk_bytes": 8589934592,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "422ada41-6b47-4401-8618-003fb5241e46",
+      "job_id": "s09-remaining-root-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2138099,
+        "start_ticks": "337651668",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-remaining-root-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-remaining-root-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-remaining-root-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-remaining-root-retirement-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+        }
+      ],
+      "state": "released",
+      "created": 1793808369.0524166,
+      "deadline": 1793808489.0524166,
+      "updated": 1793808375.2692528,
+      "release_note": "Read-only historical150 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "568251ee-483b-4e3c-8e67-9f8a3b8ec640",
+      "job_id": "s10-worker-dependency-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2154695,
+        "start_ticks": "337778929",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-worker-dependency-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-worker-dependency-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793808380.2482479,
+      "deadline": 1793808500.2482479,
+      "updated": 1793808385.395002,
+      "release_note": "All nine actual dependency controls passed; ten exact external kernel units and the bounded controller freshly closed. No neural models executed.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 1073741824,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "a936fddd-a36d-411a-a0a6-d78e40c205d1",
+      "job_id": "s10-managed-pipeline-coordinator-normal-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2163188,
+        "start_ticks": "337833092",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s03-native-probe-phases-cold-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-native-probe-phases-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-initial-threshold-normal-a4/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-pipeline-coordinator-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-pipeline-coordinator-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793808561.3163636,
+      "deadline": 1793810473.6692936,
+      "updated": 1793810370.080903,
+      "release_note": "Actual eight controls passed: four Exact N1 cold Train/export/frozen paths and four stopped Train/export-refusal controls; all twenty independently managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "f5b46859-81ff-4976-b8b8-13f2fc50d207",
+      "job_id": "s06-shared-lifecycle-corrected-normal-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2199400,
+        "start_ticks": "338039366",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/build-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793810624.0077875,
+      "deadline": 1793816766.9882188,
+      "updated": 1793816651.278298,
+      "release_note": "Separate corrected lifecycle candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 8589934592,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "b9376d1f-bd82-47c7-9989-75ee488d1db2",
+      "job_id": "s10-managed-reconciliation-normal-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2205767,
+        "start_ticks": "338081493",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-reconciliation-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-reconciliation-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-reconciliation-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-reconciliation-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793816664.3283691,
+      "deadline": 1793818467.5339677,
+      "updated": 1793818350.1012177,
+      "release_note": "Metadata-only actual coordinator reconciliation gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "98bab895-d519-4945-b3e3-778ae52cbf56",
+      "job_id": "s10-managed-declaration-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2205773,
+        "start_ticks": "338081495",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-managed-declaration-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-managed-declaration-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793818351.552422,
+      "deadline": 1793818471.552422,
+      "updated": 1793818355.2189846,
+      "release_note": "Metadata-only actual downstream declaration gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "b25c1e55-69d8-49c0-83db-7814650ae66d",
+      "job_id": "s01-related-inventory-normal-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2220929,
+        "start_ticks": "338187243",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s01-related-inventory-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s01-related-inventory-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Libraries/Nmsdk-PulseLib"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-related-inventory-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-related-inventory-normal-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793818373.249281,
+      "deadline": 1793818493.249281,
+      "updated": 1793818385.460442,
+      "release_note": "Read-only related inventory Git/CLI gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+      "demands": {
+        "disk_bytes": 134217728,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "54de380a-3759-486c-8357-cff03fd17148",
+      "job_id": "s09-audit-probe-retirement-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2304843,
+        "start_ticks": "338833425",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-audit-probe-retirement-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-audit-probe-retirement-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-audit-probe-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-audit-probe-retirement-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/home/user/timelearner-refactor/source-theory-retirement-a1/Libraries/Nmsdk-PulseLib"
+        }
+      ],
+      "state": "released",
+      "created": 1793818564.6007726,
+      "deadline": 1793818684.6007726,
+      "updated": 1793818569.5519724,
+      "release_note": "Read-only historical158 Git metadata checks. No historical program executed and no separately managed native units launched. Full containing kernel group freshly closed.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "b962b805-0a27-4993-b0cb-2c33bd846852",
+      "job_id": "s10-managed-declaration-normal-a4",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2309398,
+        "start_ticks": "338858207",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-declaration-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-declaration-cli-fixture-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-declaration-cli-fixture-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793818812.3949754,
+      "deadline": 1793818932.3949754,
+      "updated": 1793818817.3642132,
+      "release_note": "Metadata-only actual downstream declaration gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "8febf56f-a81d-49f9-a239-032f5e87fd93",
+      "job_id": "s10-managed-live-routing-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2311267,
+        "start_ticks": "338873654",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-declaration-cli-fixture-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-declaration-cli-fixture-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793818966.9018385,
+      "deadline": 1793819707.1000726,
+      "updated": 1793819690.5963058,
+      "release_note": "Operator stopped invalid live experiment: runtime selected gtest executable instead of Console. Controller and all separately managed registered native groups freshly closed; no scientific success.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "17860f0a-e4bd-4c48-bf45-2e3278ec5e69",
+      "job_id": "s10-native-runtime-interface-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2347566,
+        "start_ticks": "338969433",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793819924.678248,
+      "deadline": 1793820044.678248,
+      "updated": 1793819929.642006,
+      "release_note": "Metadata-only actual downstream declaration gate ended; whole bounded controller kernel group freshly closed, no native models started.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "cab8a239-502a-43fe-9144-04b4a83bc2d8",
+      "job_id": "s06-shared-recognition-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2350101,
+        "start_ticks": "338988682",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-shared-recognition-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-shared-recognition-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-shared-recognition-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/runtime-shared-recognition-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793820117.193047,
+      "deadline": 1793822202.0882611,
+      "updated": 1793822086.3725204,
+      "release_note": "Separate corrected lifecycle recognition candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 6442450944,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "5b8ccddc-7a22-40af-95b3-ec51d1052ed9",
+      "job_id": "s10-managed-pipeline-coordinator-normal-a4",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2379749,
+        "start_ticks": "339186045",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-pipeline-coordinator-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793822090.821301,
+      "deadline": 1793824005.8741462,
+      "updated": 1793823904.6262927,
+      "release_note": "Actual eight controls passed: four Exact N1 cold Train/export/frozen paths and four stopped Train/export-refusal controls; all twenty independently managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "675804dd-4bd2-4b0c-8db6-9a3c00a371eb",
+      "job_id": "s10-managed-live-routing-normal-a5",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2413847,
+        "start_ticks": "339368034",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-native-runtime-interface-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a5",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-live-routing-normal-a5"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-live-cold-fixture-baseline-normal-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-native-runtime-interface-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793823910.6962886,
+      "deadline": 1793825794.1298614,
+      "updated": 1793825689.4426014,
+      "release_note": "Actual six live-routing controls passed: four native live Train/frozen paths and two unfinished Train/no-Test controls; all ten independently managed native units and controller freshly closed. Global operational lease only; isolated schema3 registries retain their full histories.",
+      "demands": {
+        "disk_bytes": 536870912,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "e023a8bb-72d9-4314-af86-1d7ca6a23980",
+      "job_id": "s06-shared-recognition-ab-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2636670,
+        "start_ticks": "341135641",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-shared-recognition-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/runtime-shared-recognition-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793841586.7828224,
+      "deadline": 1793846034.6497698,
+      "updated": 1793845935.6859987,
+      "release_note": "Whole native comparison/regression group closed; release is not numerical acceptance.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "9e042025-1785-4f54-b260-a858a0c7a462",
+      "job_id": "s06-recognition-owner-burst-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2695593,
+        "start_ticks": "341571795",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-live-cold-fixture-baseline-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793845948.339305,
+      "deadline": 1793852017.2557724,
+      "updated": 1793851905.4086027,
+      "release_note": "Separate corrected lifecycle recognition candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 2147483648,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "a6ebf6ea-27b0-4ebb-a917-c9e2d0128bfd",
+      "job_id": "s02-closed-owner-baselines-cache-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2883391,
+        "start_ticks": "343212186",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/build-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-shared-recognition-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/build-shared-recognition-normal-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-closed-owner-baselines-cache-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-closed-owner-baselines-cache-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/baseline-result",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/baseline-result"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/candidate-result",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/candidate-result"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/full-result",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1/full-result"
+        }
+      ],
+      "state": "released",
+      "created": 1793862358.7434115,
+      "deadline": 1793862658.7434115,
+      "updated": 1793862359.254219,
+      "release_note": "Closed obsolete build caches and byte-verified duplicate expanded AB corpus removed; all primary data preserved in Git and M40 full cache.",
+      "demands": {
+        "disk_bytes": 67108864,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "2f2e6332-e875-4f32-a6eb-d7bcebb2b839",
+      "job_id": "s06-recognition-shared-saved-ab-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2898841,
+        "start_ticks": "343345895",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-shared-saved-ab-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-shared-saved-ab-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-recognition-ab-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/runtime-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-integrated-historical-replay-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-integrated-historical-replay-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-lifecycle-corrected-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793863689.7595673,
+      "deadline": 1793863869.7771566,
+      "updated": 1793863759.5188231,
+      "release_note": "All replay subprocesses freshly closed; actual current job reservation released.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "05309971-e5ce-4eaa-9366-78bae66e0812",
+      "job_id": "s02-owner141-expanded-cache-retirement-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2947594,
+        "start_ticks": "343719974",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-owner141-expanded-cache-retirement-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-owner141-expanded-cache-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1/native-result",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1/native-result"
+        }
+      ],
+      "state": "released",
+      "created": 1793867431.8870564,
+      "deadline": 1793867731.8870564,
+      "updated": 1793867432.039576,
+      "release_note": "Expanded native133 primary preserved losslessly in published Git and rehashed full M40 cache; original source archive/focused8/runtime retained.",
+      "demands": {
+        "disk_bytes": 67108864,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "5f731e11-41d2-4bd3-bf92-1128aa7255fc",
+      "job_id": "s06-integrated-acceptance-normal-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2953350,
+        "start_ticks": "343769336",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4/_deps/llama_cpp-src"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s06-shared-lifecycle-corrected-normal-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-recognition-owner-burst-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793867923.6822402,
+      "deadline": 1793873874.2102537,
+      "updated": 1793873760.4543538,
+      "release_note": "Separate corrected lifecycle recognition candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 2147483648,
+        "memory_bytes": 8589934592,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "fcbf0fc5-b491-426c-8dfe-bbc75c7d6ec3",
+      "job_id": "s10-integrated-coordinator-normal-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 3060937,
+        "start_ticks": "344651887",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s05-model-spec-production-normal-a4/corpus/runs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s09-native-pipeline-cli-normal-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-integrated-coordinator-normal-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-integrated-coordinator-normal-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s10-managed-native-calibration-normal-a1/actual-controls"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3",
+          "requested_path": "/home/user/timelearner-refactor/source-closed-worker-recovery-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin",
+          "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-worker-dependency-normal-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793876749.6007402,
+      "deadline": 1793878633.188958,
+      "updated": 1793878522.7926412,
+      "release_note": "Separate corrected lifecycle recognition candidate build/native descendants/archive closed; fresh whole-group closure before operational lease recovery. Recovery does not attest test success.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 4831838208,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "e270b310-19c2-4449-a945-cb6e0a4ba48c",
+      "job_id": "s07-stopped-final-native-elder-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 3450775,
+        "start_ticks": "348082056",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-stopped-final-native-elder-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-stopped-final-native-elder-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-stopped-final-diagnostics-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-stopped-final-diagnostics-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1793911050.873253,
+      "deadline": 1793911190.8796253,
+      "updated": 1793911080.9707518,
+      "release_note": "Whole native/reader group freshly closed; retain all positive and negative primary results.",
+      "demands": {
+        "disk_bytes": 268435456,
+        "memory_bytes": 6442450944,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "4c1075b8-6c04-4b83-8bdf-05a25d132244",
+      "job_id": "s02-elder-verified-cache-release-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 3513238,
+        "start_ticks": "348550754",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793915737.8837934,
+      "deadline": 1793915857.8837934,
+      "updated": 1793915751.9114442,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "demands": {
+        "disk_bytes": 16777216,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "1b7d62b9-06d7-4027-a215-879eba0c2810",
+      "job_id": "s02-elder-verified-cache-release-a2",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 3514744,
+        "start_ticks": "348563040",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a2",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793915860.7685678,
+      "deadline": 1793915980.7685678,
+      "updated": 1793915872.7633836,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "demands": {
+        "disk_bytes": 16777216,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    {
+      "token": "d76d8b0c-4e0c-4c87-91ae-03d4cea75ad1",
+      "job_id": "s02-elder-verified-cache-release-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 3516627,
+        "start_ticks": "348578971",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-august-phasea-de02-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4",
+          "requested_path": "/home/user/timelearner-refactor/build-initial-threshold-normal-a4"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/build-n1-measured-refinement-normal-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a3",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s02-elder-verified-cache-release-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-csearch-threshold-joint-full-normal-a1/native-result/native"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2",
+          "requested_path": "/home/user/timelearner-refactor/source-publication-lock-recovery-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1793916020.0749977,
+      "deadline": 1793916160.0812535,
+      "updated": 1793916044.095986,
+      "release_note": "Whole bounded metadata-only group freshly closed. No native model or historical script executed.",
+      "demands": {
+        "disk_bytes": 16777216,
+        "memory_bytes": 536870912,
+        "slots": 1
+      },
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null,
+  "capacity": {
+    "disk_bytes": 15032385536,
+    "memory_bytes": 25769803776,
+    "slots": 1
+  },
+  "reserved": {
+    "disk_bytes": 0,
+    "memory_bytes": 0,
+    "slots": 0
+  },
+  "available": {
+    "disk_bytes": 15032385536,
+    "memory_bytes": 25769803776,
+    "slots": 1
+  },
+  "disk_device": 2051,
+  "os_resource_limits_enforced": false
+}
