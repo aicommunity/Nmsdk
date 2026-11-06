@@ -104,6 +104,9 @@ def run_native_gate(specification, output):
             "native_gate_output_overlaps_sources_or_runtime")
     require(source_closure(source) == runtime["source_closure"], "native_gate_source_context_changed")
     output.mkdir(parents=True, exist_ok=False)
+    # The runner owns the supplied destination. An isolated fixture must not
+    # depend on an earlier test having created its result directory.
+    (output/"native").mkdir(exist_ok=False)
     _write(output/"specification.json", spec)
     _write(output/"runtime.json", runtime)
     environment = {key: runtime["loader_environment"].get(key)
