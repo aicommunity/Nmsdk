@@ -69,12 +69,16 @@ allowance. Допустимый unassigned burst списывается с об�
 Неидентифицируемый restoringBest завершает SearchUnresolved, без повторного
 использования старого измерения и без бесконечного возврата. Capture references
 не изменены, final verification остаётся независимой и не пропускает входы.
+Текущий последующий срез `a7220af9840c776d675533f170fbce8e4eaa18b9`
+также копирует значение базовой JSON schema перед добавлением новых ключей.
 
 Cold configuration и training summary имеют opt-in envelope schema5:
 base_schema_version=1..4 и invalid_measurement_recovery=advance_unassigned_burst.
 Все прежние поля остаются полями указанной базовой схемы; её строгий codec
 повторно проверяет исходные ограничения. Base5/неизвестные поля/режимы/нулевой
 allowance запрещены. Старые схемы1..4 по-прежнему означают RetrySameCandidate.
+Это версия cold/summary данных, а не ControllerVersion=5: component version
+по-прежнему выбирается существующим ControllerVersion=1/2.
 Это сохраняет CPP export/import declaration через существующий configuration
 codec, но complete/stopped roundtrip нового режима ещё требует runtime-проверки.
 
