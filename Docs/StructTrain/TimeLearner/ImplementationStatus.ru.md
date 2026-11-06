@@ -29,8 +29,10 @@ output/native. [Исправленный production gate](NativeGateOutputDirect
 проверен тем же оригинальным тестом на прежних normal/ASan binaries и принят.
 A4 остановилась до C++ из-за неполного tool snapshot. A5 завершилась: серверный
 verdict сообщает133/133 passed за28553.79 с; свежая проверка подтвердила отсутствие
-процесса/группы и released lease. Проверка и Git-публикация её полного primary
-архива ещё ожидаются. A5 относится только к root2e061/Pulse12d, не к последующим
+процесса/группы и released lease. Полный primary архив проверен:4888 members/23120604 bytes;321 native,323 Python
+и335 tool source hashes совпали с Git. Результат и fresh closure/released lease
+сохранены в [проверке](IntegratedSharedAsan133Verification.json). A5 относится
+только к root2e061/Pulse12d, не к последующим
 изменениям invalid budget и candidate recovery; отсутствие утечек не проверялось.
 
 Отдельно подготовлен [общий бюджет невалидных проб](AttemptInvalidObservationBudget.ru.md):
