@@ -1,0 +1,33 @@
+{
+  "kind": "fair_domain_traversal_job_observation",
+  "schema_version": 1,
+  "observed_utc": "2026-11-06T20:13:55Z",
+  "host": "10.245.1.17",
+  "job_id": "s07-fair-domains-normal-a1",
+  "state": "building_verified_live",
+  "owner": {"pid": 1234210, "start_ticks": "307068474"},
+  "owner_kernel_identity_checked": true,
+  "source_root": "567d6842dcae5f9f3d83e13546d8d93aa913d2dc",
+  "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+  "Bin": "37ff211fa6ba4999fc51802182915022b239a1eb",
+  "Rdk": "10e9d05aa658dd2203c89bc84ba9166595b50014",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-normal-a1",
+  "build": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-normal-a1",
+  "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-fair-domains-normal-a1",
+  "readbacks": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-fair-domains-normal-a1",
+  "expected_native_tests": 122,
+  "new_fair_domain_tests": 4,
+  "previous_controls": 118,
+  "latest_build_progress_percent": 47,
+  "terminal_result_observed": false,
+  "tests_passed_attested": false,
+  "scientific_verdict": null,
+  "following_context_test_in_this_source": false,
+  "remaining_acceptance": [
+    "collect and verify the original normal122 result and process closure",
+    "server-run suspended capacitance context controls in a new immutable source",
+    "adjacent/default output comparison and scoped ASan",
+    "matched stock training and frozen/diagnostic evaluation"
+  ],
+  "whole_plan_complete": false
+}

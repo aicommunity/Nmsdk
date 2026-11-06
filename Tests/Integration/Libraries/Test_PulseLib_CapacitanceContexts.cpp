@@ -4,6 +4,8 @@
 #include <cmath>
 #include <limits>
 #include <functional>
+#include <map>
+#include <set>
 
 
 namespace {
@@ -111,6 +113,56 @@ BoundedTrainingConfig ContextConfig(Normalization normalization=Normalization::S
 }
 double SelectedScale(const std::optional<TrainingCapacitance>& value)
 {return value->membraneScales.at("Dendrite1_2");}
+
+TEST(CapacitanceContexts, FairN1TraversalResumesEveryGeometryAndResistanceInEachSuspendedContext)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        SCOPED_TRACE(static_cast<int>(routing));
+        const auto protocol=Protocol(2,routing);auto cfg=ContextConfig(Normalization::TipResistance);
+        cfg.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+        cfg.maximumInvalidObservations=8;cfg.maximumCandidatesPerInput=128;
+        cfg.resistanceSubdivisionDepth=0;
+        cfg.bounds={{2,4,1,1,5.,20.},{1,1,1,1,10.,10.}};
+        BoundedTrainingSession session(References(protocol),cfg,{{2,1,10.},{1,1,10.}},true,ContextC0());
+        DriveTraining(session,protocol,[](const auto&,auto&,auto& raw){raw[0]+=.001;},
+            [&](const auto& action) {
+                ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+                d.baseModelRevision=action.baseModelRevision;
+                d.previewModelRevision="fair/"+std::to_string(SelectedScale(action.capacitance))+"/"+
+                    std::to_string(action.parameters[0].length);
+                d.geometry=action.parameters;d.inputIndex=action.inputIndex;
+                d.minimumResistance=5.;d.maximumResistance=20.;d.sourceAmplitude=1.;
+                d.capacitance=action.capacitance;return d;
+            });
+        std::map<double,std::vector<std::pair<int,double>>> sequences;
+        for(const auto& e:session.Evidence())
+        {
+            ASSERT_EQ(e.inputIndex,0u);ASSERT_TRUE(e.capacitance);
+            EXPECT_EQ(e.fullParameters[1],(InputParameters{1,1,10.}));
+            EXPECT_EQ(e.capacitance->membraneScales.at("Dendrite1_99"),.8);
+            EXPECT_EQ(e.capacitance->membraneScales.at("Dendrite2_1"),1.);
+            sequences[SelectedScale(e.capacitance)].push_back({e.parameters.length,e.parameters.resistance});
+        }
+        ASSERT_EQ(sequences.size(),3u);
+        for(double scale:{1.,.8,1.2})
+        {
+            SCOPED_TRACE(scale);ASSERT_TRUE(sequences.contains(scale));
+            const auto& sequence=sequences.at(scale);
+            const std::set<std::pair<int,double>> covered(sequence.begin(),sequence.end());
+            for(int length=2;length<=4;++length)for(double resistance:{5.,10.,20.})
+                EXPECT_TRUE(covered.contains({length,resistance}));
+            const auto distant=std::find(sequence.begin(),sequence.end(),std::pair{4,10.});
+            const auto changedRs=std::find_if(sequence.begin(),sequence.end(),[](const auto& p) {
+                return p.first==2 && p.second!=10.;
+            });
+            ASSERT_NE(distant,sequence.end());ASSERT_NE(changedRs,sequence.end());
+            EXPECT_LT(std::distance(sequence.begin(),distant),std::distance(sequence.begin(),changedRs));
+        }
+        EXPECT_NE(session.Status(),TrainingStatus::Exact);
+        EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+    }
+}
 
 TEST(CapacitanceContexts, MissingOrIncompatibleOwnedC0IsRejected)
 {
