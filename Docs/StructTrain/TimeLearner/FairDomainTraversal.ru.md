@@ -99,3 +99,16 @@ BoundedTraining файла; Console sources и корневой CMake между
 обязательны. Архивирование новой серии использует только regular payloads;
 owner/hash-bound duplicate glog aliases перечисляются отдельно и не удаляются
 из исходного server tree. Неизвестные ссылки не отбрасываются молча.
+
+Исправленный [normal137](FairDomainTraversalNormal137Verification.json) принят
+адресно:137/137, точный набор JUnit IDs,834 archive members и761 source hashes.
+Worker group закрыт, lease released. Все783 исходных native CSV/JSON сопоставлены
+с обоими опубликованными primary inventories:284 CSV и480 JSON побайтно равны;
+19 startup JSON отличаются только93 значениями служебного Rdk StepDuration.
+Первый publisher ошибочно ожидал469 JSON старого25-case subset вместо499
+JSON полного native118 inventory; count correction сохранён в evidence.
+Данные и tests не менялись и не перезапускались из-за этой ошибки публикации.
+
+Это закрывает normal gate данного изменения, включая controlled C-context
+проверку. Вся физическая C-trim matrix, ASan38, реальный stock A/B и полный
+исходный план этим не закрываются. Новая научная серия по-прежнему ждёт ASan38.

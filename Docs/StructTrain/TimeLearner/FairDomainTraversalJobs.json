@@ -27,7 +27,7 @@
   "scientific_verdict": null,
   "following_context_test_in_this_source": false,
   "remaining_acceptance": [
-    "accept corrected full normal137 result after collecting original failure and all source hashes",
+    "normal137 and default CSV/JSON comparison accepted; preserve original failed normal122 separately",
     "server-run suspended capacitance context controls in a new immutable source",
     "adjacent/default output comparison and scoped ASan",
     "matched stock training and frozen/diagnostic evaluation"
@@ -88,7 +88,7 @@
   },
   "following_context_gate_a3": {
     "job_id": "s07-fair-contexts-normal-a3",
-    "state": "building_verified_live",
+    "state": "completed_verified",
     "owner": {
       "pid": 1254928,
       "start_ticks": "307229839"
@@ -100,9 +100,14 @@
     "source": "/media/user/Data/TimeLearnerRefactor/source-fair-contexts-normal-a3",
     "build": "/media/user/Data/TimeLearnerRefactor/build-fair-contexts-normal-a3",
     "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-fair-contexts-normal-a3",
-    "latest_build_progress_percent": 8,
+    "latest_build_progress_percent": 100,
     "changes_since_normal122": "corrected test input-progression assertion and added suspended-C-context test; Pulse algorithm unchanged",
     "new_stock_train_started": false,
-    "scientific_verdict": null
+    "scientific_verdict": null,
+    "tests_passed": 137,
+    "evidence_commit": "5a05573d9ba94e56d6021bbe23a5cfc36affeb6c",
+    "verification": "FairDomainTraversalNormal137Verification.json",
+    "fresh_worker_group_closed": true,
+    "lease_released": true
   }
 }

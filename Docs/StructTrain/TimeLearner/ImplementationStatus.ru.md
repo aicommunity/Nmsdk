@@ -221,3 +221,12 @@ bindings; worker group closed, lease released. Каждая пара содер�
 overview и40 непрерывных50ms zooms, без downsampling. Компактные metadata
 сохранены в Git, тяжёлый derived cache — только M40. Ручная visual QA остаётся
 ограниченной четырьмя ранее выбранными PNG; научный результат не изменился.
+
+Последующий normal137 нового fair-domain варианта успешно завершён и принят
+в указанном scope: [точная сверка](FairDomainTraversalNormal137Verification.json).
+Подтверждены137/137,834 primary members/761 source hashes, неизменность284 CSV
+и480 JSON прежних native controls;19 startup JSON меняют лишь StepDuration.
+Это не scientific PASS. ASan38 уже собирается в отдельном runtime, следующая
+восьмиусловная stock-серия поставлена после его успеха. Парный анализатор
+принят на M40 [6/6 плюс actual-primary CLI](StockRecoveryCodeComparisonVerification.json);
+реальное сравнение разных code versions и приёмка на Elder ещё не выполнены.
