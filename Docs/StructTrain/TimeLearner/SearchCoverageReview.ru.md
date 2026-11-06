@@ -44,3 +44,9 @@ referenceN−1, captured targets и fresh final gate остаются прежн
 пакетах: полная сумма свидетельств, invariance гистограммы к порядку строк,
 unknown legacy charge и запрет duplicate/relabelled trial. Исходные модели
 не пересчитываются; серверная проверка нового coverage reader ещё ожидается.
+
+
+M40 job s07-search-coverage-a1 запущен с source9cb944fd58ad90a286900d2c991440065001c1c7.
+Owner1228078/start306980048 подтверждён живым; tests/CLI verdict ещё ожидается.
+[Снимок задания](SearchCoverageJobs.json) не доказывает его состояние после
+времени наблюдения. C++ порядок поиска этим подэтапом не изменён.
