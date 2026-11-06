@@ -1,0 +1,127 @@
+import hashlib,json,os,pathlib,platform,subprocess,sys,time
+
+root=pathlib.Path('/home/user/timelearner-refactor');host='10.245.1.11'
+commit='5a6dd77dedca3595087570fa4153cff3c78309fe'
+source=root/'source-candidate-recovery-api-a1'
+output=root/'readbacks/s07-candidate-recovery-api-a2'
+output.mkdir(parents=True,exist_ok=False)
+def git(*args,cwd=source,input=None):
+    return subprocess.check_output(['git','-C',str(cwd),*args],input=input)
+assert git('rev-parse','HEAD').decode().strip()==commit
+assert not git('status','--porcelain','--untracked-files=no').strip()
+dataset_root=root/'readbacks/s07-candidate-recovery-primary-input-a1/study'
+dataset_files=[]
+for folder in sorted((dataset_root/'runs').iterdir()):
+    native=folder/'native'
+    paths=set(native.glob('train_stopped_trial_*.json'))|set(native.glob('train_stopped_trial_*.csv'))
+    paths|={native/name for name in ('execution.json','train_stopped_state.json','train_stopped_summary.json')}
+    for path in sorted(paths):
+        data=path.read_bytes()
+        dataset_files.append({'path':path.relative_to(dataset_root).as_posix(),'bytes':len(data),
+            'sha256':hashlib.sha256(data).hexdigest()})
+(output/'input-manifest.json').write_text(json.dumps({'source_evidence_commit':
+    'e5fa71d745119af0d818059f497dd226f4c7c25d','restored_root':str(dataset_root),'files':dataset_files},indent=2)+'\n')
+modules=['Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery',
+         'Scripts.StructTrain.TimeLearner.tests.test_condition',
+         'Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition',
+ 'Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_evidence',
+ 'Scripts.StructTrain.TimeLearner.tests.test_stock_failure_reports.StockFailureBoundaryTest',
+ 'Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_history',
+ 'Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_api']
+runner=r'''import json,pathlib,sys,unittest
+modules=json.loads(sys.argv[1]); output=pathlib.Path(sys.argv[2])
+suite=unittest.defaultTestLoader.loadTestsFromNames(modules)
+def flatten(suite):
+    for child in suite:
+        if isinstance(child,unittest.TestSuite):yield from flatten(child)
+        else:yield child.id()
+ids=list(flatten(suite))
+assert len(ids)==len(set(ids))==60,ids
+result=unittest.TextTestRunner(verbosity=2).run(suite)
+record={'expected_test_ids':ids,'tests_run':result.testsRun,'failures':len(result.failures),
+        'errors':len(result.errors),'skipped':len(result.skipped),
+        'unexpected_successes':len(result.unexpectedSuccesses),'expected_failures':len(result.expectedFailures),
+        'successful':result.wasSuccessful()}
+(output/'tests.json').write_text(json.dumps(record,indent=2)+'\n')
+sys.exit(0 if record['successful'] and record['tests_run']==60 and not any(record[k] for k in
+    ('failures','errors','skipped','unexpected_successes','expected_failures')) else 1)
+'''
+environment=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',TIMELEARNER_RECOVERY_API_CORPUS=str(root/'readbacks/s07-candidate-recovery-api-input-a1'),TIMELEARNER_STOCK_THRESHOLD_STUDY=str(root/'readbacks/s07-candidate-recovery-primary-input-a1/study'))
+(output/'runner.py').write_text(runner)
+(output/'corpus-manifest.json').write_bytes((root/'readbacks/s07-candidate-recovery-api-input-a1/corpus.json').read_bytes())
+before=time.time()
+previous=root/'readbacks/s07-candidate-recovery-api-a1'
+# The prior subprocess.run raised TimeoutExpired after killing/waiting its own
+# child. A fresh exact-argument /proc scan found no matching test process.
+previous_record={'execution':'timeout','declared_wall_seconds':120,'tests_json_present':(previous/'tests.json').exists(),
+    'partial_stdout_retained':False,'limitation':'A1 driver lost communicate output when TimeoutExpired escaped before log persistence',
+    'owned_process_scan_before_retry':'no current uid process had the exact A1 output directory argument',
+    'test_source_unchanged':True,'source_commit':commit}
+assert previous_record['tests_json_present'] is False
+(output/'previous-timeout.json').write_text(json.dumps(previous_record,indent=2)+'\n')
+(output/'driver.txt').write_text(PUBLISHER_SOURCE)
+child=subprocess.Popen([sys.executable,'-c',runner,json.dumps(modules),str(output)],cwd=source,
+    env=environment,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
+owner={'pid':child.pid,'start_ticks':pathlib.Path('/proc',str(child.pid),'stat').read_text().split(') ',1)[1].split()[19],
+    'source_commit':commit,'output':str(output),'declared_wall_seconds':900}
+(output/'owned-test.json').write_text(json.dumps(owner,indent=2)+'\n')
+timed_out=False
+try:
+    stdout,_=child.communicate(timeout=900)
+except subprocess.TimeoutExpired:
+    timed_out=True;child.kill();stdout,_=child.communicate()
+process=subprocess.CompletedProcess(child.args,child.returncode,stdout)
+(output/'unittest.log').write_bytes(stdout)
+test_result=json.loads((output/'tests.json').read_text()) if (output/'tests.json').exists() else None
+(output/'test-execution.json').write_text(json.dumps({'execution':'timeout' if timed_out else 'completed' if child.returncode==0 else 'process_error',
+    'returncode':child.returncode,'wall_seconds':time.time()-before,'owned_child_closed':True,
+    'declared_wall_seconds':900,'partial_stdout_retained':True,'tests_completed':test_result is not None},indent=2)+'\n')
+code_files=['Scripts/StructTrain/TimeLearner/'+p for p in (
+    'candidate_recovery.py','native_evidence.py','native_pipeline_worker.py','stopped_evidence.py',
+    'pipeline_condition.py','condition.py','tests/test_candidate_recovery.py',
+    'tests/test_condition.py','tests/test_pipeline_condition.py','candidate_recovery_evidence.py',
+ 'tests/test_candidate_recovery_evidence.py','probe_diagnostics.py','stock_failure_reports.py','tests/test_stock_failure_reports.py','candidate_recovery_history.py','tests/test_candidate_recovery_history.py','learned_evidence.py','capacitance_boundary_evidence.py','stopped_final_pass.py','tests/test_candidate_recovery_api.py')]
+source_files=[]
+for name in code_files:
+    data=(source/name).read_bytes()
+    assert data==git('show',commit+':'+name)
+    source_files.append({'path':name,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
+assert not git('status','--porcelain','--untracked-files=no').strip()
+receipt={'kind':'candidate_recovery_public_reader_gate','schema_version':1,'host':host,
+    'source_commit':commit,'source_repository':str(source),'source_files':source_files,
+    'python':sys.version,'platform':platform.platform(),'parent_pid':os.getpid(),
+    'parent_start_ticks':pathlib.Path('/proc/self/stat').read_text().split(') ',1)[1].split()[19],
+    'started_unix':before,'finished_unix':time.time(),'returncode':process.returncode,'declared_test_wall_seconds':900,
+    'tests':test_result,'scope':'public schema5 readers over18 actual legacy base1..4 cases with hypothetical no-trigger/boundary recovery envelopes; no new native Train',
+    'native_execution_verified':False,'scientific_verdict':None,
+    'full_schema5_pipeline_verified':False,'schema5_public_reader_data_validation_exercised':True,'source_tracked_clean':True}
+(output/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+# The completed test subprocess has exited. Publication uses a different Git
+# object store, with no checkout; the tested source remains immutable.
+collector=root/'evidence-candidate-recovery-api-a2'
+assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+    with pack.open('rb') as stream:
+        subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],
+            stdin=stream,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(commit+'\n')
+index=output/'publication-index'
+publish_env=dict(os.environ,GIT_INDEX_FILE=str(index))
+def plumbing(*args,input=None):
+    return subprocess.check_output(['git','-C',str(collector),*args],input=input,env=publish_env)
+plumbing('read-tree',commit)
+prefix='Reports/StructTrain/TimeLearner/s07-candidate-recovery-api-a2-'+host.rsplit('.',1)[-1]
+for name in ('unittest.log','tests.json','receipt.json','runner.py','input-manifest.json','corpus-manifest.json','owned-test.json','test-execution.json','previous-timeout.json','driver.txt'):
+    if not (output/name).exists():
+        assert name=='tests.json' and timed_out;continue
+    oid=plumbing('hash-object','-w','--stdin',input=(output/name).read_bytes()).decode().strip()
+    plumbing('update-index','--add','--cacheinfo','100644',oid,prefix+'/'+name)
+tree=plumbing('write-tree','--missing-ok').decode().strip()
+publication=subprocess.check_output(['git','-C',str(collector),'-c','user.name=TimeLearner Evidence',
+    '-c','user.email=timelearner-evidence@localhost','commit-tree',tree,'-p',commit],
+    input=('Preserve candidate recovery primary classification gate on '+host+'\n').encode()).decode().strip()
+plumbing('update-ref','refs/heads/evidence',publication)
+print(json.dumps({'host':host,'commit':publication,'parent':commit,'repository':str(collector),
+    'prefix':prefix,'tests':test_result['tests_run'] if test_result else None,'returncode':process.returncode,
+    'successful':test_result['successful'] if test_result else False}))
