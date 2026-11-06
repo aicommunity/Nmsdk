@@ -1,0 +1,45 @@
+{
+  "kind": "timelearner_cldesc_controller_contract_reconciliation",
+  "schema_version": 1,
+  "previous_Bin": "37ff211fa6ba4999fc51802182915022b239a1eb",
+  "feature_Bin": "680564e2dba148ac412e1efdd5c91a5c852999d3",
+  "merged_Bin": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+  "source_review_PulseLib": "2f6b57253bd7ae380a19320ef3835a2701cb4d30",
+  "accepted_PulseLib": "0ec9193e6620ae2439329eece5ecd6d6f167c70a",
+  "changed_properties": [
+    "ControllerVersion",
+    "ControllerConfiguration",
+    "ExperimentMode",
+    "ExperimentNum",
+    "StructureBuildMode"
+  ],
+  "files": [
+    {
+      "path": "ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearner.xml",
+      "before_sha256": "3f151997aa2fb0756e72009c03a4330127530ae115cc58a4edd69ea0be45f87c",
+      "after_sha256": "2f7f184d3a131073dd89332461fb768dce08012a920ba8ef6b4f274e25f91616",
+      "changed_description_nodes": 6,
+      "non_description_tree_unchanged": true
+    },
+    {
+      "path": "ClDesc/PulseLibrary/ru-RU/NNeuronTimeLearnerBranch.xml",
+      "before_sha256": "8562ad88a25a8173f0b2d89bc31c5395fb6d2f50f757e6ecae9d2381e69eb710",
+      "after_sha256": "7b43c357d9006688739c527935e91bc7e7e8ad40dfd06fbfa8668291672e39a2",
+      "changed_description_nodes": 6,
+      "non_description_tree_unchanged": true
+    }
+  ],
+  "reviewed_source_sha256": {
+    "Core/NNeuronTimeLearner.cpp": "b46642391bcbac063c1f53bc144f93520b86a00af3793470f56f85cb9f88365d",
+    "Core/NNeuronTimeLearnerBranch.cpp": "7f2fc0d41ace2ba8e2d7462f2e265de1e8fdbc9815d30c4b29232407302ad4d1",
+    "Core/TimeLearner/ConfiguredNativeTraining.cpp": "6abfc856c4ff39faa8fc9d2242cde4daaaf3251434f7452164c3ccd7a57751bb",
+    "Core/TimeLearner/ConfiguredNativeOwner.h": "25c57045c60e72fb07e2f726af4fd64fb4b3f5b035f9dc3366e039c8972f5924",
+    "Core/TimeLearner/NativeLearnerLifecycle.h": "3d7f390b6d8c4c4202cced9d495fac688e484dc8c07ea6245ddc42ccdaee7d32"
+  },
+  "verification": "XML structure and exact Git blob comparison; no numerical tests needed for description-only change",
+  "runtime_changed": false,
+  "full_public_parameter_audit_complete": false,
+  "whole_stage12_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
