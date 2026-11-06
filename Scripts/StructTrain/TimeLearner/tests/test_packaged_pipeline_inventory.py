@@ -10,7 +10,7 @@ import tempfile
 import unittest
 
 from ..artifact_bundle import (verify_packaged_run_closure, verify_packaged_run_inventory,
-                               verify_pipeline_archive)
+                               verify_pipeline_archive, canonicalize_pipeline_archive)
 from ..model_identity import canonical_model_sha256 as sha
 from ..native_evidence import EvidenceError, load
 
@@ -125,3 +125,41 @@ class PackagedPipelineInventoryTest(unittest.TestCase):
                 path, bundle = self.archive(directory, mutation)
                 with self.assertRaises(EvidenceError):
                     verify_pipeline_archive(path, bundle)
+
+    def test_canonical_repack_preserves_original_and_all_primary_bytes_deterministically(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);source = root/'source';source.mkdir()
+            for name, raw in self.files.items():
+                path = source/name;path.parent.mkdir(parents=True, exist_ok=True);path.write_bytes(raw)
+            archive, bundle = self.archive(root)
+            original = hashlib.sha256(archive.read_bytes()).hexdigest()
+            first = canonicalize_pipeline_archive(source, archive, bundle, root/'one')
+            second = canonicalize_pipeline_archive(source, archive, bundle, root/'two')
+            self.assertEqual(first, second)
+            self.assertEqual(first['members'], self.records)
+            self.assertEqual(first['omitted_duplicate_glog_aliases'], [])
+            self.assertEqual(first['pipeline_closure']['run_snapshots_verified'], 6)
+            self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), original)
+            for name, raw in self.files.items():
+                self.assertEqual((source/name).read_bytes(), raw)
+
+    def test_canonical_repack_does_not_accept_an_unowned_link_as_a_glog_alias(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);source = root/'source';source.mkdir()
+            manifest = next(name for name, raw in self.manifests.items()
+                            if json.loads(raw)['schema_version'] == 2 and json.loads(raw)['operation'] == 'preflight')
+            prefix = manifest.removesuffix('run-manifest.json')
+            files = {name: raw for name, raw in self.files.items() if name.startswith(prefix)}
+            for name, raw in files.items():
+                path = source/name;path.parent.mkdir(parents=True, exist_ok=True);path.write_bytes(raw)
+            target = next(iter(files));(source/'unowned-link.txt').symlink_to(source/target)
+            records = {name: self.records[name] for name in files}
+            records['unowned-link.txt'] = self.records[target]
+            archive = root/'source.tar.xz'
+            with tarfile.open(archive, 'w:xz', preset=1) as tar:
+                for name in records:tar.add(source/name, arcname=name, recursive=False)
+            bundle = {'members': records, 'archive_bytes': archive.stat().st_size,
+                      'archive_sha256': hashlib.sha256(archive.read_bytes()).hexdigest()}
+            with self.assertRaisesRegex(EvidenceError, 'canonical_pipeline_unknown_source_symlink'):
+                canonicalize_pipeline_archive(source, archive, bundle, root/'must-not-exist')
+            self.assertFalse((root/'must-not-exist').exists())
