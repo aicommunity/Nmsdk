@@ -814,7 +814,8 @@ TEST(TrainingTermination,FinalRejectionDoesNotBorrowEarlierSearchDiagnostic)
 // Exercise the production controller and recorder across search/final/sweep
 // boundaries. A configured retry budget belongs to the entire attempt.
 enum class InvalidBudgetScenario { SearchThenFinal, FinalThenNextSweep, FinalOnly, Zero };
-void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,InvalidBudgetScenario scenario)
+void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,InvalidBudgetScenario scenario,
+                              bool invalidPreparation)
 {
     const auto protocol=Protocol(2,routing);auto config=Configuration(2,normalization);
     config.maximumInvalidObservations=scenario==InvalidBudgetScenario::Zero?0:1;
@@ -826,14 +827,20 @@ void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,
     while(const auto action=session.NextAction())
     {
         ASSERT_LT(++calls,40u);ASSERT_EQ(action->kind,TrainingActionKind::Probe);
-        const auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        auto prepared=Prepare(protocol,action->inputIndex,action->baseModelRevision,action->modelEpoch);
+        const bool rejectFinal=action->finalVerification && !finalRejected;
+        if(rejectFinal && invalidPreparation)
+        {
+            prepared.protocolRevision="corrupted_budget_preparation";
+            session.Arm(action->serial,prepared);finalRejected=true;++invalidInjected;
+            continue;
+        }
         session.Arm(action->serial,prepared);auto raw=Raw(2);
         if(!action->finalVerification && outsideFirstFinal)secondSweep=true;
         const bool rejectSearch=!action->finalVerification && action->inputIndex==0 && !searchRejected &&
             (scenario==InvalidBudgetScenario::SearchThenFinal ||
              (scenario==InvalidBudgetScenario::FinalThenNextSweep && secondSweep));
         if(rejectSearch){raw[0]=-.065;searchRejected=true;++invalidInjected;}
-        const bool rejectFinal=action->finalVerification && !finalRejected;
         // Final observations stay valid until their pattern identity is
         // deliberately corrupted below; the search failure is a missing peak.
         const bool failFirstFinal=scenario==InvalidBudgetScenario::FinalThenNextSweep &&
@@ -866,10 +873,12 @@ void CheckAttemptInvalidBudget(ProbeRouting routing,Normalization normalization,
 
 #define ATTEMPT_INVALID_BUDGET_TEST(name,routing,normalization) \
 TEST(TrainingInvalidBudget,name) { \
+    for(const bool invalidPreparation:{false,true}) \
     for(const auto scenario:{InvalidBudgetScenario::SearchThenFinal,InvalidBudgetScenario::FinalThenNextSweep, \
                             InvalidBudgetScenario::FinalOnly,InvalidBudgetScenario::Zero}) { \
         SCOPED_TRACE(static_cast<int>(scenario)); \
-        CheckAttemptInvalidBudget(routing,normalization,scenario); \
+        SCOPED_TRACE(invalidPreparation); \
+        CheckAttemptInvalidBudget(routing,normalization,scenario,invalidPreparation); \
     } \
 }
 ATTEMPT_INVALID_BUDGET_TEST(ClassicN0,ProbeRouting::ClassicBurst,Normalization::SynapseCount)
