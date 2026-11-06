@@ -50,17 +50,22 @@ def project_recovery_summary(summary):
     projected, mode = _project(summary, kind="native_training_state_summary",
                                configuration_field="configuration")
     if mode == RETRY_MODE:
-        require("invalid_observations" not in summary, "unversioned_recovery_invalid_charge")
+        require(not {"invalid_observations", "candidate_recovery_events"}.intersection(summary),
+                "unversioned_recovery_invalid_charge")
     else:
         retained = summary.get("search_history_retained")
         require(type(retained) is bool and "invalid_observations" in summary,
                 "missing_recovery_invalid_charge_availability")
         charge = summary["invalid_observations"]
+        events = summary.get("candidate_recovery_events")
+        require(type(events) is list, "missing_recovery_events")
         if retained:
             count(charge)
         else:
             require(charge is None, "unretained_recovery_invalid_charge_not_unknown")
+            require(events == [], "unretained_recovery_contains_events")
         projected.pop("invalid_observations")
+        projected.pop("candidate_recovery_events")
     return projected, mode
 
 

@@ -29,7 +29,8 @@ def envelope(value):
     result = deepcopy(value)
     result.update(schema_version=5, base_schema_version=value["schema_version"],
                   invalid_measurement_recovery=RECOVERY_MODE)
-    if value["kind"] == "native_training_state_summary":result["invalid_observations"] = 0
+    if value["kind"] == "native_training_state_summary":
+        result["invalid_observations"] = 0;result["candidate_recovery_events"] = []
     return result
 
 
@@ -139,6 +140,22 @@ class CandidateRecoveryDeclarationTest(unittest.TestCase):
             with self.assertRaisesRegex(EvidenceError, "missing_recovery_invalid_charge_availability"):
                 project_recovery_summary(bad)
         legacy = records()[1];legacy["invalid_observations"] = 0
+        with self.assertRaisesRegex(EvidenceError, "unversioned_recovery_invalid_charge"):
+            project_recovery_summary(legacy)
+
+    def test_recovery_event_availability_cannot_be_invented_after_import(self):
+        for value in (None, {}, True, "events"):
+            summary = envelope(records()[1]);summary["candidate_recovery_events"] = value
+            with self.assertRaisesRegex(EvidenceError, "missing_recovery_events"):
+                project_recovery_summary(summary)
+        summary = envelope(records()[1]);summary.pop("candidate_recovery_events")
+        with self.assertRaisesRegex(EvidenceError, "missing_recovery_events"):
+            project_recovery_summary(summary)
+        summary = envelope(records()[1]);summary.update(search_history_retained=False,
+            invalid_observations=None, candidate_recovery_events=[{}])
+        with self.assertRaisesRegex(EvidenceError, "unretained_recovery_contains_events"):
+            project_recovery_summary(summary)
+        legacy = records()[1];legacy["candidate_recovery_events"] = []
         with self.assertRaisesRegex(EvidenceError, "unversioned_recovery_invalid_charge"):
             project_recovery_summary(legacy)
 
