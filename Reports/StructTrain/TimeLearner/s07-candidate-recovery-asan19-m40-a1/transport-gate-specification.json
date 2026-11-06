@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-candidate-recovery-asan19-a1/native-runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+  "expected_test_ids": [
+    "TrainingInvalidBudget/ClassicN0",
+    "TrainingInvalidBudget/ClassicN1",
+    "TrainingInvalidBudget/BranchN0",
+    "TrainingInvalidBudget/BranchN1",
+    "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing",
+    "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+    "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+    "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
+    "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+    "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+    "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+    "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+    "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+    "CandidateRecoveryConfiguration/ClassicN0",
+    "CandidateRecoveryConfiguration/ClassicN1",
+    "CandidateRecoveryConfiguration/BranchN0",
+    "CandidateRecoveryConfiguration/BranchN1",
+    "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+    "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers"
+  ],
+  "maximum_wall_seconds": 10800,
+  "asan_options": "detect_leaks=0",
+  "cooperative_runtime_capture": true
+}

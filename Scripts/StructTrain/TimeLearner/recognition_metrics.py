@@ -17,6 +17,18 @@ TRIAL_FIELDS = {"trial_id", "sample_id", "label", "pattern_hash", "reset_policy"
 CRITERION_FIELDS = {"id", "anchor", "begin_offset", "end_offset", "reject_target_outside_window"}
 
 
+def validate_response_criterion(criterion):
+    """Shared declaration checks; actual window placement needs observations."""
+    require(type(criterion) is dict and set(criterion) == CRITERION_FIELDS and
+            criterion["id"] == "post_anchor_target_whole_window_foil_v1" and
+            criterion["anchor"] in ("onset", "last_stimulus") and
+            type(criterion["reject_target_outside_window"]) is bool, "unknown_response_criterion")
+    start = number(criterion["begin_offset"])
+    stop = None if criterion["end_offset"] is None else number(criterion["end_offset"])
+    require(start >= 0 and (stop is None or stop >= start), "invalid_response_window")
+    return start, stop
+
+
 def _counts(rows):
     counts = {key: sum(row["classification"] == key for row in rows) for key in ("TP", "FP", "FN", "TN")}
     targets, foils = counts["TP"]+counts["FN"], counts["FP"]+counts["TN"]
@@ -61,13 +73,7 @@ def _score_recognition(spec, observations, package, *, calibration_probe, diagno
                 and source["dynamic_checkpoint"] is False and type(source["certificate"]) is dict
                 and source["training_outcome"] in ("exact", "search_unresolved"), "unsupported_evaluation_source_state")
         criterion = spec["criterion"]
-        require(type(criterion) is dict and set(criterion) == CRITERION_FIELDS and
-                criterion["id"] == "post_anchor_target_whole_window_foil_v1" and
-                criterion["anchor"] in ("onset", "last_stimulus") and
-                type(criterion["reject_target_outside_window"]) is bool, "unknown_response_criterion")
-        start = number(criterion["begin_offset"])
-        stop = None if criterion["end_offset"] is None else number(criterion["end_offset"])
-        require(start >= 0 and (stop is None or stop >= start), "invalid_response_window")
+        start, stop = validate_response_criterion(criterion)
         require(type(spec["trials"]) is list and len(spec["trials"]) >= 2, "incomplete_evaluation_design")
         expected, positions, samples = {}, set(), {}
         target_hash = canonical_model_sha256(source["configuration"]["model"]["initial_isi"])

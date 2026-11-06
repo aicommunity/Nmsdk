@@ -1,0 +1,27 @@
+{
+  "kind": "stock_recovery_native_and_archive_verification",
+  "schema_version": 1,
+  "evidence_commit": "da57d3cb10826843790b193e93cdcb380fa7f0fc",
+  "train_source_root": "e83dc9c669d6fdc01b8d89e3a2cc5edd305ced4e",
+  "compiled_root": "84d6d97501a62b0a689b1170ec4f0fb53e558a48",
+  "PulseLib": "416e07c71b80e7e7a37cd213f8d0b6f7efb768fb",
+  "archive_members_verified": 3455,
+  "archive_bytes": 27953456,
+  "archive_sha256": "acda6d294d09ecad24c30f38d38fd5deb478fcd078ffe4a67f3989749f736218",
+  "run_manifests_verified": 16,
+  "omitted_verified_glog_aliases": 16,
+  "original_archive_unchanged": true,
+  "train_runs": 8,
+  "completed_training_models": 0,
+  "training_outcome": "invalid_observation",
+  "design_tests": 6,
+  "archive_gate_tests": 9,
+  "archive_gate_members_verified": 14,
+  "source_hashes_verified": {
+    "Reports/StructTrain/TimeLearner/s07-stock-recovery-native-m40-a1/tool-source-hashes.json": 344,
+    "Reports/StructTrain/TimeLearner/s10-pipeline-archive-inventory-m40-a2/source-hashes.json": 347
+  },
+  "baseline_packaging_defect_reproduced": true,
+  "classification_assessed": false,
+  "scientific_verdict": null
+}

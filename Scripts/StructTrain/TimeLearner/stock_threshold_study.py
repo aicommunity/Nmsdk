@@ -71,10 +71,10 @@ def _expected(initial, threshold):
     return result
 
 
-def _condition(job, expected, code, runtime):
+def _condition(job, expected, code, runtime, *, algorithm_id='stock-phasea-cold-initial-threshold-pair-v1'):
     c = deepcopy(job['configuration']);c.pop('run_id')
     payloads = {
-        'algorithm': {'id': 'stock-phasea-cold-initial-threshold-pair-v1', 'native_code': code,
+        'algorithm': {'id': algorithm_id, 'native_code': code,
                       'executable_sha256': runtime['executable']['sha256']},
         'model_spec': c['model'],
         'storage_profiles': {'class': 'NSPNeuronGen', 'expected_effective_model': expected['model']},
