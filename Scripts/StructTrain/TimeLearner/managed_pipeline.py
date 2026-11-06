@@ -1,6 +1,7 @@
 """Managed phase orchestration with an auditable boundary journal.
 
-A pipeline declaration is an operational identity, not a scientific ConditionSpec.
+Schema1 is an operational identity. Schema2 additionally binds a derived
+ConditionSpec; that binding alone never attests effective physics or execution.
 Only existing native workers execute physical components. An interrupted phase
 requires explicit reconciliation; continuing a finished boundary never reruns it.
 """
@@ -40,7 +41,7 @@ def _write(path, value):
 def _validate(spec, *, preflight=False):
     require(type(spec) is dict and set(spec) == {"kind", "schema_version", "attempt_id", "phases"}
             and spec["kind"] == "timelearner_managed_pipeline_job"
-            and type(spec["schema_version"]) is int and spec["schema_version"] == 1
+            and type(spec["schema_version"]) is int and spec["schema_version"] in (1, 2)
             and type(spec["attempt_id"]) is str and bool(spec["attempt_id"].strip()),
             "unknown_managed_pipeline_job")
     phases = spec["phases"]
@@ -162,10 +163,21 @@ def _phase_ready(operation, manifest):
     return ready and analysis['completed_boundary'] and analysis.get('recognition_available', True)
 
 
+def _created_payload(root, spec, runtime_fingerprint):
+    payload = {"specification_sha256": digest(spec), "runtime_fingerprint": runtime_fingerprint}
+    if spec["schema_version"] == 2:
+        from .pipeline_condition import audit_binding
+        runtime, binding = load(root/"runtime.json"), load(root/"condition-binding.json")
+        require(runtime["runtime_fingerprint"] == runtime_fingerprint,
+                "pipeline_condition_runtime_changed")
+        payload["condition_fingerprint"] = audit_binding(binding, spec, runtime)
+        payload["condition_binding_sha256"] = digest(binding)
+    return payload
+
+
 def _scan(root, spec, events, runtime_fingerprint):
     require(bool(events) and events[0]["event"] == "created" and events[0]["phase"] is None
-            and events[0]["payload"] == {"specification_sha256": digest(spec),
-                                       "runtime_fingerprint": runtime_fingerprint},
+            and events[0]["payload"] == _created_payload(root, spec, runtime_fingerprint),
             "pipeline_journal_declaration_changed")
     completed, pending, halted = [], None, None
     for event in events[1:]:
@@ -219,10 +231,14 @@ def audit_pipeline(root):
         directory = root/"phases/evaluate/native"
         design, observations = load_evaluation(directory/"evaluation.json")
         evaluation = score_recognition_evaluation(design, observations, load(directory/"model.json"))
-    return {"kind": "timelearner_managed_pipeline_audit", "schema_version": 1,
+    result = {"kind": "timelearner_managed_pipeline_audit", "schema_version": spec["schema_version"],
             "completed_phases": completed, "pending_phase": pending, "halted_phase": halted,
             "pipeline_complete": len(completed) == len(spec["phases"]), "evaluation": evaluation,
             "scientific_verdict": None, "condition_identity_attested": False}
+    if spec["schema_version"] == 2:
+        result["condition_fingerprint"] = load(root/"condition-binding.json")["condition_fingerprint"]
+        result["condition_declaration_bound"] = True
+    return result
 
 
 def reconcile_pipeline(root):
@@ -288,10 +304,12 @@ def run_pipeline(specification, runtime_path, policy, output, *, resume=False, s
         if not resume:
             _write(root/"specification.json", spec)
             _write(root/"runtime.json", runtime)
+            if spec["schema_version"] == 2:
+                from .pipeline_condition import build_binding
+                _write(root/"condition-binding.json", build_binding(spec, runtime))
             (root/"phases").mkdir()
             events = []
-            _append(root, events, "created", None, {"specification_sha256": digest(spec),
-                                                  "runtime_fingerprint": runtime["runtime_fingerprint"]})
+            _append(root, events, "created", None, _created_payload(root, spec, runtime["runtime_fingerprint"]))
         else:
             require(load(root/"specification.json") == spec and load(root/"runtime.json") == runtime,
                     "pipeline_resume_inputs_changed")

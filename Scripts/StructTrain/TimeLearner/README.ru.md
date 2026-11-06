@@ -479,3 +479,5 @@ candidate anchor либо final verification. Исправлен exact expected 
 Подробный контракт и границы: [C-search temporal reports](../../../Docs/StructTrain/TimeLearner/CapacitanceSearchVisuals.ru.md).
 
 `analyze INPUTS.json --format legacy-statistic-traces --output NEW.json` — строгий описательный адаптер числовых StatisticLog; явные layout/width/hash, без trial или training PASS. [Схема и область](../../../Docs/StructTrain/TimeLearner/LegacyStatisticTraceReader.ru.md). Elder12/12 и M40 12/12 приняты; это не сертификат обучения.
+
+Managed pipeline schema2 добавляет вычисляемый ConditionSpec и journal binding; schema1 сохраняет historical operational semantics. [Схема, границы и pending приёмка](../../../Docs/StructTrain/TimeLearner/PipelineConditionBinding.ru.md).
