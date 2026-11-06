@@ -4,8 +4,11 @@
   "observed_utc": "2026-11-06T20:41:30Z",
   "host": "10.245.1.17",
   "job_id": "s07-fair-domains-asan38-a1",
-  "state": "queued_after_normal137",
-  "queue_owner": {"pid": 1258939, "start_ticks": "307258672"},
+  "state": "building_observed",
+  "queue_owner": {
+    "pid": 1258939,
+    "start_ticks": "307258672"
+  },
   "queue_owner_kernel_identity_checked": true,
   "required_predecessor": "s07-fair-contexts-normal-a3",
   "required_predecessor_result": "fair_domains137_passed=true; fresh whole-group closure and released lease",
@@ -30,5 +33,10 @@
   "leak_absence_attested": false,
   "new_stock_experiment_started": false,
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "owner": {
+    "pid": 1274374,
+    "start_ticks": "307377300"
+  },
+  "normal137_accepted": true
 }
