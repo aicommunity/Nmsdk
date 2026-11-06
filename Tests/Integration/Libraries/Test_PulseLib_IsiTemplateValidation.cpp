@@ -17,7 +17,6 @@ public:
     using NPatternResponseAnalyzer::CloseTrial;
     using NPatternResponseAnalyzer::IsIsiTemplateMatch;
     void Label(int label) { trial_target_class_ = label; }
-    bool MeasurementValid() const { return trial_measurement_valid_; }
 };
 
 class IsiTemplateValidation : public ::testing::Test
@@ -93,7 +92,8 @@ protected:
     {
         EXPECT_FALSE(analyzer->IsIsiTemplateMatch());
         analyzer->CloseTrial(20.0);
-        EXPECT_FALSE(analyzer->MeasurementValid());
+        // CloseTrial resets temporary probe state. Inspect the retained result,
+        // rather than a flag that now belongs to the next, empty observation.
         EXPECT_EQ(analyzer->LastMatch.GetData(), 0);
         EXPECT_EQ(analyzer->LastErrorClass.GetData(), "invalid_measurement");
     }
@@ -113,7 +113,7 @@ TEST_F(IsiTemplateValidation, ResolvesActualLearnerAndKeepsFiniteTolerance)
         Reference({.01, .081, .16, .24});
         EXPECT_FALSE(analyzer->IsIsiTemplateMatch());
         analyzer->CloseTrial(20.0);
-        EXPECT_TRUE(analyzer->MeasurementValid()); // Finite mismatch is not corrupt evidence.
+        EXPECT_NE(analyzer->LastErrorClass.GetData(), "invalid_measurement");
     }
 }
 
