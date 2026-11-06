@@ -1,0 +1,64 @@
+from pathlib import Path
+import sys,json,subprocess,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-worker-limit-preflight-a2';objects=base/'source-isi-template-baseline-normal-a1';parent='87e406bd0829af2f8db3482d1fd8b157501f9f51'
+folder=base/'readbacks/s03-isi-template-fixed-normal-a1';repo=base/'evidence-isi-template-fixed-normal-m40-a1';prefix='Reports/StructTrain/TimeLearner/s03-isi-template-fixed-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3');closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+with tarfile.open(archive,'r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in seen and m.name in bundle['members'];seen.add(m.name);c=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(c),'sha256':hashlib.sha256(c).hexdigest()}
+assert seen==set(bundle['members'])
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['build_passed'] and terminal['native_gates_executed'] and terminal['isi_template_fixed12_passed']
+spec=json.loads((folder/'transport-gate-specification.json').read_text());v=json.loads((folder/'transport-verdict.json').read_text());assert len(spec['expected_test_ids'])==12
+assert v['execution']=='completed' and v['validity']=='valid' and v['assertion_status']=='passed' and v['inventory']==audit_junit(folder/'native12/native.xml',spec['expected_test_ids'])
+runtime=json.loads((folder/'native-runtime.json').read_text());assert runtime['source_closure']['root']['head']==parent and runtime['source_closure']['Libraries/Nmsdk-PulseLib']['head']=='fe382a0aa729a0692ec3790b0226649b4348410a'
+owner=json.loads((folder/'native12/process/owned-process.json').read_text());process=json.loads((folder/'native12/process/result.json').read_text());loaded=json.loads((folder/'native12/process/loaded-files.json').read_text());assert owner['executable_sha256']==runtime['executable']['sha256'] and process['returncode']==0 and process['runtime_provenance']=='loaded_files_captured' and any(r['sha256']==owner['executable_sha256'] for r in loaded)
+old_runtime=base/'runtime-isi-template-baseline-normal-a3';before=json.loads((folder/'previous-runtime-frozen-files.json').read_text())
+for n,row in before.items():
+ p=old_runtime/n;assert p.stat().st_size==row['bytes'] and hashlib.sha256(p.read_bytes()).hexdigest()==row['sha256']
+payloads={};updates={}
+for p in folder.iterdir():
+ if p.is_file() and (p.suffix=='.json' or p.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+('producer.txt' if p.name=='producer.py' else p.name)]=p.read_bytes()
+for p in Path(str(folder)+'-container').iterdir():
+ if p.is_file() and p.suffix=='.json':payloads[prefix+'/controller/'+p.name]=p.read_bytes()
+payloads[prefix+'/fixed-verification.json']=(json.dumps({'closed_released':closed,'archive_members':len(seen),'tests':12,'passed':12,'failed':0,'baseline_evidence':'1ae54182d85e399bf49e9d2440c477ddfd14408f','loaded_files':len(loaded),'old_runtime_files_unchanged':len(before),'ASan_verified':False,'second_host_verified':False,'whole_plan_complete':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for p in (objects/'.git/objects/pack').glob('*.pack'):
+ with p.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve twelve passing ISI and observation controls with actual ownership, complete source binding and unchanged prior runtime\n');git('update-ref','refs/heads/codex/isi-template-fixed-normal-m40-a1-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'tests_passed':12}))
