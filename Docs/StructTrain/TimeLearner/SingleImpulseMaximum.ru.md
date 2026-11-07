@@ -1,8 +1,10 @@
 # Выбор наибольшего пика одиночной пробы: кандидат этапа7
 
 Реализация находится в отдельной ветке `codex/timelearner-impulse-maximum`,
-созданной от develop с merge предшествующей SDK feature. Серверная приёмка
-нового кода ещё не выполнена. ASan storage SDK8702 относится к прежнему коду.
+созданной от develop с merge предшествующей SDK feature. Полная native/Console
+приёмка нового кода ещё не завершена. [Native38/readers25 на Elder](SingleImpulseMaximumElderAcceptance.ru.md)
+и [unit ASan34 на M40](ProbeAlgorithmsASan.ru.md) приняты в своих областях;
+ASan storage SDK8702 относится к прежнему коду. Console/whole-burst ещё открыты.
 
 Добавлена явная native ProbeSpec schema5, `single_impulse_maximum`. Она
 разрешена только в диагностическом предъявлении ровно одного импульса.
