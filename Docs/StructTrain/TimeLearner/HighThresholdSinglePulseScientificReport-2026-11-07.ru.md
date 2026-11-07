@@ -64,7 +64,37 @@ PhysicalInfeasible по этой локальной остановке.
 
 ## Графики
 
-Полные temporal reports по4 пробам/10 trial-soma pairs строятся на M40 из двух
-опубликованных primary archives. Нужны overview и50мс/local-Y детали с actual
-input overlays. Selected visual QA пока не завершена; scientific report не
-выдаётся за финальный отчёт об успешном обучении. Full cache не помещается в Git.
+[Полный temporal report](HighThresholdTemporalVerification.json) завершён:
+4 пробы/10 trial-soma pairs,393 views,1187 проверенных cache files/131740593B.
+Все29 archive members и375 tool hashes сверены с Git; group closed/lease released.
+Полный cache на M40: /media/user/Data/TimeLearnerRefactor/ReportsCache/high-threshold-joint-normal-a1.
+В Git только metadata/primary и6 выбранных PNG общим объёмом1381204B.
+[Все шесть PNG просмотрены индивидуально](HighThresholdSelectedVisualQA.json);
+полный cache вручную не просматривался. Новых native расчётов для render не было.
+
+Overview показывает всю реакцию и actual input pulses. Детали10мс дают более71
+pixels/native tick и показывают каждый отсчёт. Порог100 сильно растягивает Y
+панели LT decision potential в overview; local-Y детали явно отмечают порог
+за пределами видимого диапазона. Верхняя панель сомы остаётся читаемой.
+
+### Classic: штатная пачка и одиночный импульс
+
+![Classic, burst: четыре реальных импульса](../../../Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-burst-soma1-overview.png)
+
+![Classic, single: один реальный импульс](../../../Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-single-soma1-overview.png)
+
+![Classic, максимум одиночного отклика, native samples](../../../Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-single-soma1-measured-peak-01055-detail.png)
+
+### Branch: штатная пачка и одиночный импульс
+
+![Branch, burst: четыре реальных импульса](../../../Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Branch-threshold-training100-retry32-burst-soma1-overview.png)
+
+![Branch, single: один реальный импульс](../../../Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Branch-threshold-training100-retry32-single-soma1-overview.png)
+
+![Branch, максимум одиночного отклика, native samples](../../../Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Branch-threshold-training100-retry32-single-soma1-measured-peak-00314-detail.png)
+
+Форма burst с широким первым участком согласуется с гипотезой наложения;
+это интерпретация рисунков, не доказанная линейная модель. На выбранных графиках
+Feedback/LT Output нулевые. Следующий причинный тест должен сохранять исходную
+физику и отличать наложение от состояния синапсов; результат нынешнего native
+критерия остаётся missing, без подстановки четвёртого peak.
