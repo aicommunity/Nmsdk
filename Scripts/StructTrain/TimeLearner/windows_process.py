@@ -18,6 +18,20 @@ from .process_runner import verify_runtime
 from .runtime import file_record, source_closure
 
 
+class ModuleInventoryError(OSError):
+    """A failed actual PSAPI snapshot, including its partial paths for diagnosis."""
+    def __init__(self, operation, winerror, *, module=None, paths=(), returned=None):
+        self.record = {'operation': operation, 'winerror': winerror,
+                       'module_base': hex(module) if module is not None else None,
+                       'partial_paths': [str(p) for p in paths], 'returned_characters': returned}
+        super().__init__(winerror, 'windows_module_inventory_failed:'+operation)
+
+
+def _module_error(error, phase):
+    return {'phase': phase, 'detail': getattr(error, 'record', None),
+            'reason': str(error), 'exception': type(error).__name__}
+
+
 class _Windows:
     def __init__(self):
         require(os.name == 'nt', 'windows_worker_required')
@@ -116,12 +130,20 @@ class _Windows:
 
     def modules(self, process):
         modules = (self.W.HMODULE*2048)();needed = self.W.DWORD()
-        self.check(self.enum_modules(process, modules, C.sizeof(modules), C.byref(needed), 3))
-        require(needed.value <= C.sizeof(modules), 'windows_module_inventory_truncated')
+        C.set_last_error(0)
+        if not self.enum_modules(process, modules, C.sizeof(modules), C.byref(needed), 3):
+            raise ModuleInventoryError('EnumProcessModulesEx', C.get_last_error())
+        require(needed.value <= C.sizeof(modules) and needed.value % C.sizeof(self.W.HMODULE) == 0,
+                'windows_module_inventory_truncated')
         result = []
         for module in modules[:needed.value//C.sizeof(self.W.HMODULE)]:
             path = C.create_unicode_buffer(32768)
-            require(0 < self.module_name(process, module, path, len(path)) < len(path), 'windows_module_path_unavailable')
+            C.set_last_error(0)
+            returned = self.module_name(process, module, path, len(path))
+            error = C.get_last_error()
+            if not 0 < returned < len(path):
+                raise ModuleInventoryError('GetModuleFileNameExW', error,
+                                           module=module, paths=result, returned=int(returned))
             result.append(Path(path.value).resolve(strict=True))
         return result
 
@@ -223,7 +245,7 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
                         key = os.path.normcase(str(path))
                         if key not in observed:observed[key] = file_record(path)
                 except (OSError, RuntimeError) as error:
-                    if len(module_errors) < 8:module_errors.append(str(error))
+                    if len(module_errors) < 8:module_errors.append(_module_error(error, 'poll'))
                 if cooperative_capture and not captured and (output/'capture-ready.json').exists():
                     expected = {'kind': 'native_runtime_capture_ready', 'schema_version': 2,
                                 'pid': int(process.pid), 'creation_filetime': identity['creation_filetime']}
@@ -231,7 +253,11 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
                     require(type(ready.get('pid')) is int and type(ready.get('schema_version')) is int and
                             ready == expected and api.identity(process.process) == identity,
                             'windows_cooperative_capture_identity_changed')
-                    boundary = [file_record(p) for p in api.modules(process.process)]
+                    try:
+                        boundary = [file_record(p) for p in api.modules(process.process)]
+                    except (OSError, RuntimeError) as error:
+                        module_errors.append(_module_error(error, 'cooperative_boundary'))
+                        raise
                     require(any(os.path.samefile(p['path'], exe) for p in boundary),
                             'windows_capture_boundary_executable_missing')
                     require(api.running(process.process) and api.identity(process.process) == identity,
@@ -277,6 +303,10 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     except BaseException as error:
         result.update(reason=str(error), validity='invalid_or_incomplete')
     finally:
+        # These are diagnostic partial observations, not a successful boundary
+        # capture. Preserve them even when capture fails before normal exit.
+        _write(output/'partial-loaded-files.json', list(observed.values()))
+        _write(output/'module-observation-errors.json', module_errors)
         if process.process:
             if api.running(process.process):
                 if assigned:api.terminate_job(job, 1460)
