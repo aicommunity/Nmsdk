@@ -52,3 +52,35 @@ actual impulses, labels/ISI, clock80000 samples/12 streams и все LT edges.
 общих helper, actual original-protocol pilot, corruption controls, расширение
 до16 условий, temporal reports и scientific interpretation ещё не выполнены.
 Этап11 остаётся частичным. Августовские исходные наблюдения не пересматриваются.
+
+
+## Пилот и сохранённые отказы подготовки
+
+[Зарегистрированный пилот](HistoricalProtocolJobs.json) сначала проверяет2×2:
+исходный/сдвинутый на1 порядок ×ITI1.5/3.0, один frozen threshold0.0135.
+Это4 полных матрицы и4 pre-stimulus checks, не вся16-условная серия. Все11
+подготовительных tests на реальных архивных конфигах прошли; результат A3
+на этом снимке ещё выполняется и не принят.
+
+A1 остановился до native execution: при механическом переносе write был
+пропущен модульный import json. AST восьми тел сохранился, но это не проверяло
+их namespace dependencies. Импорт исправлен; существующая positive preparation
+проверка теперь также выполняет production запись protocol.json. [ReceiptA1](HistoricalProtocolPilotA1Verification.json)
+сверяет27 primary members/41052 compressed bytes,387 tool hashes и11 tests;
+научного результата нет.
+
+A2 выполнил один pre-stimulus native процесс и остановился перед40s Test:
+новый full parameter export терял исходный Parameters threshold overlay0.0135
+и восстанавливал parent Model default0.0115. Строгий graph guard это отказал.
+Все604 узла/496 связей и все их параметры совпали с исходным neuron, поэтому
+это не повреждение структуры: не было применено заявленное старое наложение
+порога. Подготовка теперь берёт controls из исходного Parameters и переносит
+их в обе новые декларации перед full export; не подбирает новый порог и не
+ослабляет identity guard. [ReceiptA2](HistoricalProtocolPilotA2Verification.json)
+сверяет69 primary members/56652 compressed bytes,387 tool hashes,26 actual
+loaded-file records; полных Test0. Обе failed группы закрыты/leases released.
+
+A3 использует новый immutable tool snapshot19f24aa и прежний runtime16428572,
+прошёл11 preparation controls, подтверждён живым kernel cgroup. Старые попытки
+и их terminal не переписываются. После pilot acceptance нужны расширение до
+всех target positions, temporal reports/visual QA и интерпретация результатов.
