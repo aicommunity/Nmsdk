@@ -9,8 +9,8 @@
   "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-prepared-model-normal-a1",
   "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-prepared-model-normal-a1-container",
   "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-prepared-model-normal-a1",
-  "status_at_last_kernel_observation": "running",
-  "phase_at_last_observation": "building",
+  "status_at_last_kernel_observation": "closed",
+  "phase_at_last_observation": "compile_failed",
   "unit": "timelearner-7e127fae-cd8d-4e0c-b093-41116d176dc0.service",
   "invocation_id": "7c49bccd4e0841eda3f8c9906892a131",
   "initial_main_pid": 1483958,
@@ -38,5 +38,10 @@
   "second_host_verified": false,
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "restart_policy": "Inspect exact contained handle and full closure/released lease before source/cache/runtime reuse. Observation timeout is not terminal. Existing ASan uses another immutable SDK."
+  "restart_policy": "Inspect exact contained handle and full closure/released lease before source/cache/runtime reuse. Observation timeout is not terminal. Existing ASan uses another immutable SDK.",
+  "build_passed": false,
+  "native_tests_executed": false,
+  "whole_group_closed": true,
+  "lease_released": true,
+  "primary_commit": "a49ed0ed03286b1e7eb261e763a7915d43cedcbb"
 }
