@@ -15,8 +15,11 @@ merge и научная разделимость — разные утвержд
 Исправлен отдельный [дефект повторного учёта общей вершины в сертификате](AssignedVertexCertificateGuard-2026-11-07.ru.md):
 контролируемый counterexample воспроизведён до изменения; после него23/23
 production C++ unit checks прошли на Elder/normal и M40/ASan. Диагностическое
-чтение schema1/2 сохранено. Полная native интеграция данного среза и
-сопоставление волн штатной пачки остаются открытыми; это feature branch.
+чтение schema1/2 сохранено. Полный SDK Elder теперь собран:23/23 нового
+CMake target,21/21 native storage/training и7/7 reader checks прошли.
+[Новый native-контроль с графиками обеих сом](AssignedVertexNativeControlReport-2026-11-07.ru.md)
+подтверждает отказ общей вершины. ASan SDK gate M40 ещё выполняется.
+Сопоставление волн штатной пачки остаётся открытым; это feature branch.
 
 На M40 выполнена [проверка гипотезы наложения](SuperpositionDiagnostic-2026-11-07.ru.md)
 для двух архивных high-threshold burst/single пар. Сумма сдвинутых single
