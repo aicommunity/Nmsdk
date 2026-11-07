@@ -166,3 +166,14 @@ controls,4 пробы и18 readers; libasan подтверждён в5 проц�
 5 сом,216 views; четыре выбранных PNG просмотрены по отдельности и сверены с Git.
 Второй сервер и вся interruption/intervention/profile матрица нового режима
 остаются открытыми. Первая compile failure сохранена в evidence.
+
+
+[Одноимпульсная диагностика](SinglePulseCharacterizationContract.ru.md):
+native-кандидат Pulse302124b/root288b643 реализован в отдельной feature-ветке.
+Добавлены schema4 diagnostic purpose, временный dataset overlay/restore и
+production запрет использования этих наблюдений для training certificate.
+На M40 запущена [адресная приёмка](SinglePulseCharacterizationJobs.json):
+9 новых native функций и12 существующих контролей. Последняя проверка ядра
+подтвердила живую группу сборки; результатов tests ещё нет. Console job/reader
+для нового режима и оставшаяся fault matrix ещё не реализованы/не приняты.
+Это не изменение assignment и не новое успешное обучение.
