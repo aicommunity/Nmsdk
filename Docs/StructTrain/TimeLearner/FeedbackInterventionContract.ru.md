@@ -69,7 +69,7 @@ native fixtures, а не прежние JSON mutations аудиторных unit
 дополнительных пиках опубликованных stock-моделей этим не получен.
 
 
-## Полный physical-state import через профиль — кандидат
+## Полный physical-state import через профиль — scoped normal проверка
 
 PulseLib ImportFeedbackProfileGraphForEdit строит новый, не подключённый к
 owner граф из полного native snapshot. До преобразования source XML проходит
@@ -85,8 +85,8 @@ overlays FeedbackGain удаляются штатным USerStorageXML. Ника
 отказ без derived membrane class, при неверном image gain и при повреждённом
 source XML даже с пересчитанной XML checksum. Два независимых Python readers
 сравнивают actual identities production-аудитором, включая individual C/Rs.
-Новые функции ещё не проверены сервером; отклик полученного candidate в этой
-проверке не рассчитывается и не объявляется научным результатом. Применение
+Новые функции прошли адресную проверку ниже; отклик полученного candidate в этой
+проверке не рассчитывался и не объявляется научным результатом. Применение
 к полному archived stopped state и paired waveforms остаются следующим gate.
 
 
@@ -103,13 +103,25 @@ FeedbackGain только на проверенных paths с проверен�
 source/rehearsal/archive загрузки остаются strict. Дополнительные fixtures
 проверяют отказ неполному source XML с корректной checksum. Эта правка найдена
 статически, она не является причиной трёх фактических compile errors.
-Исправленный SDK пока не прошёл native gate; ни full-state intervention,
-ни waveform equivalence новым импортом ещё не подтверждены.
+Исправленный SDK проверен отдельно, как указано ниже. Full-state intervention
+и waveform equivalence новым импортом ещё не подтверждены.
 
 
-Исправленная проверка [a2 запущена на M40](ProfiledGraphImportJobs-a2.json).
-На последней kernel-проверке worker1464862 жив и выполняет сборку;
-ModelArchive.cpp уже скомпилирован, SDK ещё не принят. Точная постановка
-остаётся24 native/27 readers. Перед повторным использованием cache проверены
-closed/released и точный failed terminal a1; её архив не изменяется. Создан
-новый runtime-a2, пять прежних runtime, включая failed-a1, защищены hashes.
+Исправленная проверка [a2 завершена на M40](ProfiledGraphImportJobs-a2.json).
+[Приёмка](ProfiledGraphImportNormalVerification.json): root8978f104a/Pulse32ea8ae,
+24/24 native за129.462с и27/27 readers без skips. Все225 members primary849936B
+и783 hashes исходников сверены с Git. Восемь actual import records проверены
+production-аудитором: Classic/Branch N4,2000/20000Гц, baseline/zero, индивидуальные
+C/Rs и native roundtrip. Исторические две source identities дополнительных
+аудиторных controls сверены с опубликованными Console primary. Группа процессов
+закрыта, lease released; пять прежних runtime не изменились. Primary commit
+c4e37e764891429e186f84d33e6f60186879338a. Первая failed-a1 остаётся failed.
+
+Проверка не рассчитывала candidate waveform и не переносила controller checkpoint
+или certificate. Следующий протокол должен сначала проверить полное исходное
+stopped состояние, построить candidate через derived images/native import,
+подключить его к свежему диагностическому контроллеру без старых references,
+search history или сертификата и подтвердить baseline paired waveform.
+Только затем интерпретировать объявленное изменение gain. Source threshold,
+target, individual Rs/C, source profile и reset policy сохраняются. ASan
+данного API, второй сервер и полная матрица остаются открытыми.

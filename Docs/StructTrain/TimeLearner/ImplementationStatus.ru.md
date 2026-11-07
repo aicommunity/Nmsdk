@@ -223,3 +223,15 @@ renames. Для explicit0 сохранены все остальные поля 
 200 primary members и783 source hashes сверены, процессы закрыты/lease released.
 Это engineering1e-6 с fixture-морфологией; archived stock0.0117 intervention,
 ASan нового API, второй сервер и XML новых образов остаются открытыми.
+
+
+[Полный physical graph import через feedback images](FeedbackInterventionContract.ru.md):
+root8978f104a/Pulse32ea8ae прошли M40 normal24/24 native и27/27 readers.
+225 primary members и783 source hashes сверены с Git. Подтверждены individual
+C/Rs, native roundtrip, unchanged source, отказ image-gain mismatch и
+противоречивому/неполному source XML. Внутреннее наследование gain не ослабляет
+обычную archive completeness. Процессы закрыты/lease released; пять прежних
+runtime не изменились. Первая compile failure сохранена отдельно. Candidate
+waveform/archived stopped-state intervention не выполнялись; controller
+history/certificate не переносились. ASan этого API, Elder и полная матрица
+остаются открытыми. Это уточняет этапы4/5/7, не закрывает их целиком.
