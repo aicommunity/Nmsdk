@@ -9,6 +9,7 @@ import re
 
 from .native_characterization import audit_execution
 from .native_evidence import load, number, require
+from .recognition_evidence import _physical
 
 
 def render(corpus, output, evidence_commit):
@@ -17,7 +18,7 @@ def render(corpus, output, evidence_commit):
     corpus,output = Path(corpus).resolve(strict=True),Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(corpus) and not corpus.is_relative_to(output),
             'subset_report_output_overlaps_primary')
-    cases=[];limits={};bindings={}
+    cases=[];limits={};bindings={};conditions={}
     for name in load(corpus/'index.json')['native_directories']:
         require(type(name) is str and '\\' not in name and ':' not in name and
                 not PurePosixPath(name).is_absolute() and '..' not in PurePosixPath(name).parts,
@@ -25,6 +26,19 @@ def render(corpus, output, evidence_commit):
         folder=corpus/name;require(folder.resolve(strict=True).is_relative_to(corpus),'subset_report_case_alias')
         audit=audit_execution(folder);require(audit['execution']=='completed','subset_report_requires_closed_diagnostic')
         quality=audit['stimulus_subset_diagnostic'];job=load(folder/'job.json')
+        identity=load(folder/'initial-state.json')['identity']
+        zones=[node for node in identity['model']['nodes'] if node['path']=='$.LTZone']
+        require(len(zones)==1,'subset_report_ltzone_identity_missing')
+        zone=zones[0]
+        condition={'source_run_id':job['source_stopped']['configuration']['run_id'],
+                   'source_stopped_sha256':job['source_stopped']['sha256'],
+                   'declared_initial_threshold':job['model'].get('initial_threshold'),
+                   'effective_lt_class':zone['class'],
+                   'effective_lt_threshold':_physical(zone,'Threshold') if 'Threshold' in zone['parameters'] else None,
+                   'normalization':job['model']['normalization'],'frequency_hz':job['model']['frequency_hz'],
+                   'selected_input_index':job['probe']['input_index'] if job['model']['branch'] else None,
+                   'trained_inputs':job['source_stopped']['trained_inputs'],'model_revision':identity['sha256']}
+        conditions[name]=condition
         packet=load(folder/'probe_trial_1.json');spec=packet['observation']['specification']
         with (folder/'probe_trial_1.csv').open(newline='',encoding='utf-8') as stream:rows=list(csv.reader(stream))
         samples=[[number(float(value)) for value in row] for row in rows[1:]]
@@ -54,8 +68,11 @@ def render(corpus, output, evidence_commit):
                                                                     min(times[-1],last+40*dt))}
         for view,bounds in views.items():
             fig,axes=plt.subplots(channels+1,1,figsize=(16,3.6*(channels+1)),sharex=True,layout='constrained')
+            condition=conditions[name]
             fig.suptitle(key+' | retained source ordinals '+str(quality['source_ordinals'])+' | '+view+'\n'
                          'Frozen diagnostic; no peak assignment or classification verdict\n'
+                         'Source '+condition['source_run_id']+' | LT threshold '+str(condition['effective_lt_threshold'])+
+                         ' | '+condition['normalization']+' | '+str(condition['frequency_hz'])+' Hz\n'
                          'Model '+quality['model_revision'][:16]+' | native potential units; SI unverified',fontsize=13)
             axes[0].step(times,source,where='post',color='#ed8a28',linewidth=1.2,label='Recorded native generator output')
             for event,time in zip(events,event_times):
@@ -79,7 +96,7 @@ def render(corpus, output, evidence_commit):
     records={path.name:{'bytes':path.stat().st_size,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
              for path in output.iterdir() if path.is_file()}
     manifest={'kind':'stimulus_subset_temporal_report','schema_version':1,'declared_source_evidence':evidence_commit,
-              'primary_file_bindings':bindings,'figures':figures,'figure_files':records,'cases':len(cases),
+              'primary_file_bindings':bindings,'source_conditions':conditions,'figures':figures,'figure_files':records,'cases':len(cases),
               'y_scale':'shared across cases for each corresponding soma within a topology','spike_response':'unknown',
               'peak_assignment':'not_performed','scientific_verdict':None}
     (output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
