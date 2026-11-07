@@ -6,7 +6,7 @@ import unittest
 
 from Scripts.StructTrain.TimeLearner.native_characterization import prepare_single_pulse_job, prepare_stopped_job, validate_job
 from Scripts.StructTrain.TimeLearner.native_evidence import EvidenceError
-from Scripts.StructTrain.TimeLearner.native_calibration_worker import _signed
+from Scripts.StructTrain.TimeLearner.n1_protocol_robustness import _signed
 from Scripts.StructTrain.TimeLearner.stock_wave_replay import select_packet
 from Scripts.StructTrain.TimeLearner.stopped_evidence import load_case
 
@@ -61,3 +61,10 @@ class SinglePulseJobTest(unittest.TestCase):
         for _,_,job in self.rows:
             bad = deepcopy(job);bad['channel_diagnostics']=1
             with self.assertRaises(EvidenceError):validate_job(_signed(bad))
+
+    def test_explicit_channel_enable_and_disable_are_canonically_signed(self):
+        for case,index,_ in self.rows:
+            for enabled in (False,True):
+                job = prepare_stopped_job(case,index,'explicit-channel-toggle',channel_diagnostics=enabled)
+                validate_job(job);self.assertEqual(job['schema_version'],3)
+                self.assertIs(job['channel_diagnostics'],enabled)

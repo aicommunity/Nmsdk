@@ -134,6 +134,7 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
     if channel_diagnostics is not None:
         require(type(channel_diagnostics) is bool, 'characterization_diagnostics_boolean_required')
         job.update(schema_version=3, channel_diagnostics=channel_diagnostics)
+        job.pop('sha256')
         job = _signed(job)
     validate_job(job);return job
 
@@ -146,6 +147,7 @@ def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_second
     job['probe']['peak_selection'] = 'isolated_window'
     job['probe']['window'] = {'begin': 0., 'end': job['probe']['duration']}
     job['probe']['protocol_revision'] += '/single-pulse-characterization-v1'
+    job.pop('sha256')
     job = _signed(job);validate_job(job);return job
 
 
