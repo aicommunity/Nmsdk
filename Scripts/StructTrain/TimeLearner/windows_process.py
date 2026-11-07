@@ -162,13 +162,17 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     job = None;process = api.Process();assigned = False;resumed = False;observed = {};module_errors = []
     result = {'kind': 'timelearner_windows_process_result', 'schema_version': 1,
               'execution': 'process_error', 'validity': 'incomplete', 'reason': 'not_started',
-              'returncode': None, 'scientific_verdict': None, 'thread_limit_enforced': False}
+              'returncode': None, 'scientific_verdict': None, 'thread_limit_enforced': False,
+              'memory_limit_semantics': 'job_committed_virtual_memory',
+              'wall_budget_scope': 'whole_attempt_including_preparation'}
     start = time.monotonic();name = 'Local\\TimeLearner-'+str(uuid.uuid4())
     try:
         require(source_closure(source) == manifest['source_closure'], 'windows_source_context_changed')
         status = api.Memory();status.length = C.sizeof(status);api.check(api.memory_status(C.byref(status)))
         require(status.available_physical >= memory_bytes+256*1024**2, 'insufficient_windows_available_memory')
         require(shutil.disk_usage(output).free >= 1024**3, 'insufficient_windows_disk_space')
+        _write(output/'resource-preflight.json', {'available_physical_bytes': int(status.available_physical),
+               'total_physical_bytes': int(status.total_physical), 'memory_budget_bytes': memory_bytes})
         _write(output/'request.json', {'runtime': manifest, 'arguments': arguments, 'working_directory': str(cwd),
                'memory_bytes': memory_bytes, 'maximum_processes': maximum_processes, 'maximum_wall_seconds': maximum_wall_seconds,
                'job_name': name, 'cancel_file': str(cancel_file) if cancel_file else None})
@@ -182,6 +186,10 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
         _write(output/'limits-before-exec.json', actual)
         if cancel_file and Path(cancel_file).exists():
             result.update(execution='cancelled', validity='not_executed', reason='cancelled_before_start',
+                          all_processes_closed=True, runtime_provenance='not_started')
+            return result
+        if time.monotonic()-start >= maximum_wall_seconds:
+            result.update(execution='timeout', validity='not_executed', reason='timeout_before_start',
                           all_processes_closed=True, runtime_provenance='not_started')
             return result
         with open(os.devnull, 'rb') as stdin, (output/'stdout.log').open('xb') as stdout, (output/'stderr.log').open('xb') as stderr:
@@ -227,12 +235,15 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
                           returncode=int(code.value), all_processes_closed=True)
             _write(output/'limits-after.json', api.limits(job));_write(output/'loaded-files.json', list(observed.values()))
             _write(output/'module-observation-errors.json', module_errors)
-            require(os.path.normcase(str(exe)) in observed, 'windows_executable_mapping_not_observed')
             for record in observed.values():
                 require(file_record(Path(record['path'])) == record, 'windows_loaded_file_changed')
             verify_runtime(manifest)
             require(file_record(Path(__file__)) == backend, 'windows_backend_changed')
             require(source_closure(source) == manifest['source_closure'], 'windows_source_context_changed')
+            if os.path.normcase(str(exe)) not in observed:
+                result.update(validity='provenance_missing', reason='windows_executable_mapping_not_observed',
+                              runtime_provenance='not_captured')
+                return result
             result.update(execution=stop_reason or ('completed' if code.value == 0 else 'process_error'),
                           validity='valid', reason=stop_reason or ('exit_zero' if code.value == 0 else 'nonzero_exit'),
                           returncode=int(code.value), runtime_provenance='loaded_files_captured',

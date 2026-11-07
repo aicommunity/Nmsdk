@@ -33,9 +33,9 @@ class WindowsProcessTest(unittest.TestCase):
         cls.manifest['runtime_identity'] = runtime_content_identity(cls.manifest)
         cls.manifest['runtime_fingerprint'] = digest_json(cls.manifest['runtime_identity'])
 
-    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None):
+    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None, memory=128*1024**2):
         result = windows_process.execute(self.manifest, ['-X', 'utf8', '-c', code, *(extra or [])],
-            self.root, self.root/name, memory_bytes=128*1024**2, maximum_processes=processes,
+            self.root, self.root/name, memory_bytes=memory, maximum_processes=processes,
             maximum_wall_seconds=wall, lock_file=self.lock, cancel_file=cancel)
         (self.root/(name+'-observed.json')).write_text(json.dumps(result, indent=2)+'\n')
         return result
@@ -46,6 +46,14 @@ class WindowsProcessTest(unittest.TestCase):
         self.assertTrue(result['all_processes_closed'])
         self.assertEqual(result['runtime_provenance'], 'loaded_files_captured')
         self.assertIsNone(result['scientific_verdict'])
+
+    def stopped(self, result, execution):
+        self.assertEqual(result['execution'], execution, result)
+        self.assertTrue(result['all_processes_closed'])
+        self.assertIsNone(result['scientific_verdict'])
+        self.assertIn(result['validity'], ('valid', 'provenance_missing', 'not_executed'))
+        if result['validity'] != 'valid':
+            self.assertNotEqual(result['runtime_provenance'], 'loaded_files_captured')
 
     def test_completed_argv_and_unicode_are_not_shell_commands(self):
         result = self.run_fixture('quoted', 'import sys,json,time;print(json.dumps(sys.argv[1:],ensure_ascii=False));time.sleep(.3)',
@@ -69,11 +77,25 @@ class WindowsProcessTest(unittest.TestCase):
         self.complete(result)
         self.assertEqual((self.root/'memory/stdout.log').read_text().strip(), 'memory_limit_observed')
         after = json.loads((self.root/'memory/limits-after.json').read_text())
-        self.assertLessEqual(after['peak_job_memory_bytes'], 128*1024**2)
+        self.assertEqual(after['memory_bytes'], 128*1024**2)
+        # Preserve the raw peak counter without inferring an undocumented bound.
+        # Enforcement is tested by actual allocation failure and the paired
+        # successful allocation under a larger limit, not a peak inequality.
+        self.assertGreater(after['peak_job_memory_bytes'], 0)
+
+    def test_same_allocation_succeeds_with_larger_limit(self):
+        result = self.run_fixture('larger-memory',
+            'import time;a=bytearray(512*1024*1024);print(len(a));time.sleep(.3)', memory=768*1024**2)
+        self.complete(result)
+        self.assertEqual((self.root/'larger-memory/stdout.log').read_text().strip(), str(512*1024*1024))
 
     def test_timeout_closes_the_owned_job(self):
         result = self.run_fixture('timeout', 'import time;time.sleep(30)', wall=.3)
-        self.complete(result, 'timeout')
+        self.stopped(result, 'timeout')
+
+    def test_timeout_after_capture_preserves_runtime_evidence(self):
+        result = self.run_fixture('captured-timeout', 'import time;time.sleep(30)', wall=5)
+        self.complete(result, 'timeout');self.assertTrue(result['child_resumed'])
 
     def test_remaining_owned_descendant_is_closed_and_not_success(self):
         code = 'import subprocess,sys,time;subprocess.Popen([sys.executable,"-c","import time;time.sleep(30)"],creationflags=0x08000000);time.sleep(.4)'
@@ -109,7 +131,7 @@ class WindowsProcessTest(unittest.TestCase):
         finally:
             cancel.write_text('cancel');thread.join(timeout=20)
         self.assertFalse(thread.is_alive());self.assertEqual(len(results), 1)
-        self.complete(results[0], 'cancelled')
+        self.stopped(results[0], 'cancelled')
 
     def test_changed_runtime_is_refused_before_execution(self):
         changed = copy.deepcopy(self.manifest);changed['executable']['sha256'] = '0'*64
