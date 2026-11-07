@@ -12,10 +12,36 @@ import unittest
 
 from ..model_identity import canonical_model_sha256 as signed_digest
 from ..native_evidence import EvidenceError
-from ..portable_primary import ALIAS_ADAPTER, main, restore_native_bundle
+from ..portable_primary import ALIAS_ADAPTER, main, restore_native_bundle, create_native_bundle
 
 
 class PortablePrimaryTest(unittest.TestCase):
+    def test_streaming_pack_retains_actual_native_files_and_duplicate_logical_paths(self):
+        sources = {}
+        for i, (name, data) in enumerate(self.files.items()):
+            path = self.root/('input-'+str(i));path.write_bytes(data);sources[name] = path
+        # A repeated source is still two complete logical files after restore.
+        first = next(iter(sources))
+        sources['duplicate/source-record'] = sources[first]
+        bundle = create_native_bundle(sources, self.root/'packed', dictionary_bytes=8*1024**2)
+        self.assertEqual(len(bundle['members']), len(sources))
+        self.assertGreater(bundle['expanded_bytes'], bundle['unique_content_bytes'])
+        result = restore_native_bundle(self.root/'packed/bundle.json', self.root/'restored',
+                                       compatibility=ALIAS_ADAPTER)
+        omitted = {row['omitted_alias'] for row in result['omitted_redundant_aliases']}
+        for name, path in sources.items():
+            if name not in omitted:self.assertEqual((self.root/'restored'/name).read_bytes(), path.read_bytes())
+        self.assertEqual(len(omitted), 1)
+
+    def test_pack_rejects_unsafe_names_collisions_and_existing_output(self):
+        path = self.root/'source';path.write_bytes(next(iter(self.files.values())))
+        for index, sources in enumerate([{'../escape':path}, {'a':path,'a/b':path}]):
+            with self.assertRaises(EvidenceError):
+                create_native_bundle(sources, self.root/('invalid-'+str(index)))
+        occupied = self.root/'occupied';occupied.mkdir();(occupied/'keep').write_text('preserve')
+        with self.assertRaises(EvidenceError):create_native_bundle({'a':path}, occupied)
+        self.assertEqual((occupied/'keep').read_text(), 'preserve')
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
