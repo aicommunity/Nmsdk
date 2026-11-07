@@ -49,3 +49,11 @@ production audit_profile_delta для строгого сравнения все
 Эти новые функции ещё не проверены на сервере. Они не являются переносом
 конкретных опубликованных stopped моделей с порогом0.0117: engineering
 порог1e-6 и отдельная fixture-морфология обозначены явно.
+
+
+Адресная проверка нового inherited-image пути [запущена на M40](InheritedFeedbackProfileJobs.json).
+На последней проверке cgroup worker1453512 жив, идёт сборка. Заявлены22 native
+функции и15 readers. Ранее закрытое normal18 задание освобождено до использования
+его source/build cache; создан новый runtime, прежние три runtime защищены
+byte hashes. ASan продолжает работать с отдельными source/build предыдущего SDK.
+Статус запуска не является PASS и не закрывает scientific intervention.
