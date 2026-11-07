@@ -14,7 +14,12 @@ Use a new source checkout with exact gitlinks, a new build/runtime/output root,
 MSVC x64 from VS2026 and Ninja. Set VCPKG_MANIFEST_DIR to this directory,
 VCPKG_OVERLAY_TRIPLETS to its triplets directory and
 VCPKG_TARGET_TRIPLET=x64-windows-tl. The triplet builds Release dependencies only;
-use CMAKE_BUILD_TYPE=Release. VCPKG_ROOT and the toolchain must identify the same
+use CMAKE_BUILD_TYPE=Release. This restriction applies to the target triplet.
+The first bootstrap leaves VCPKG_HOST_TRIPLET at its native x64-windows default;
+host tools can therefore build Debug and Release dependencies separately. These
+host DLLs are not the declared application runtime. Record both resolved triplets
+and do not describe the first bootstrap as a Release-only host dependency build.
+VCPKG_ROOT and the toolchain must identify the same
 registry. Record its actual commit, compiler version, commands and dependency
 build logs. Begin with VCPKG_MAX_CONCURRENCY=1, CMAKE_BUILD_PARALLEL_LEVEL=1,
 NMSDK_BUILD_PARALLEL_JOBS=1 and cmake --build --parallel 1.
