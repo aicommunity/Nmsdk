@@ -41,7 +41,7 @@ public:
         if(model)dynamic_pointer_cast<UNet>(model)->BreakLinks();
         NmsdkTests::InitEngineForPulseLibTests().environment->DestroyModel();
     }
-    void Make(unsigned f,unsigned n,std::optional<double> feedback={},double threshold=1.) {
+    void Make(unsigned f,unsigned n,std::optional<double> feedback={},double threshold=1.,bool inheritedPhysics=false) {
         frequency=f;count=n;index=n>2?2:n-1;
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
@@ -53,7 +53,16 @@ public:
             artifactFlavor="_feedback_"+(feedback?std::to_string(*feedback):"inherited")+"_threshold_"+std::to_string(threshold);
             p.name+=artifactFlavor;
         }
-        auto profile=RegisterStorageProfile(core.storage,core.environment,p);
+        RegisteredStorageProfile profile;
+        if(inheritedPhysics) {
+            artifactFlavor+="_stock_images";p.name+="_stock_images";
+            if(feedback) {
+                FeedbackStorageProfileSpec inherited;
+                inherited.name=p.name;inherited.frequencyHz=f;inherited.neuronBaseClass=p.neuronBaseClass;
+                inherited.bodyFeedbackGain=feedback;
+                profile=RegisterFeedbackStorageProfile(core.storage,core.environment,inherited);
+            } else profile.neuronClass=p.neuronBaseClass;
+        } else profile=RegisterStorageProfile(core.storage,core.environment,p);
         learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(learner);
         learner->Name="Learner";learner->StructureBuildMode=1;learner->NumInputDendrite=n;
         learner->NeuronClassName=profile.neuronClass;learner->CalculateMode=1;learner->NormalizationMode=1;
@@ -155,6 +164,7 @@ public:
                 for(double v:ltSpikeTimes)spikes.append(v);
                 QFile control(dir+"/feedback-control-"+name+".json");ASSERT_TRUE(control.open(QIODevice::WriteOnly|QIODevice::NewOnly));
                 const auto bytes=QJsonDocument(QJsonObject{{"feedback",feedback},{"actual_lt_spike_times",spikes},
+                    {"actual_model_identity",NmsdkTools::IdentifyModel(neuron,{{&source->Output,"burst"}})},
                     {"engineering_threshold",1e-6},{"native_probe_training_started",false},{"classification_evaluated",false}}).toJson();
                 ASSERT_EQ(control.write(bytes),bytes.size());
             }
@@ -211,12 +221,12 @@ TEST(SinglePulseCharacterization,BranchRestoresBurstResponse){Roundtrip<NNeuronT
 TEST(SinglePulseCharacterization,PreparedFaultRestoresBothTopologies){Roundtrip<NNeuronTimeLearner>(Fault::Prepared);Roundtrip<NNeuronTimeLearnerBranch>(Fault::Prepared);}
 TEST(SinglePulseCharacterization,SampleFaultRestoresBothTopologies){Roundtrip<NNeuronTimeLearner>(Fault::Sample);Roundtrip<NNeuronTimeLearnerBranch>(Fault::Sample);}
 TEST(SinglePulseCharacterization,FinalSampleFaultRestoresBothTopologies){Roundtrip<NNeuronTimeLearner>(Fault::FinalSample);Roundtrip<NNeuronTimeLearnerBranch>(Fault::FinalSample);}
-template<class Learner> void FeedbackDynamics() {
+template<class Learner> void FeedbackDynamics(bool inheritedPhysics=false) {
     for(unsigned frequency:{2000u,20000u}) {
         std::vector<std::vector<double>> inherited,explicitTwo,zero;
         std::vector<double> inheritedSpikes,explicitSpikes;
         for(std::optional<double> gain:{std::optional<double>{},std::optional<double>{2.},std::optional<double>{0.}}) {
-            SinglePulseFixture<Learner> f;f.Make(frequency,2,gain,1e-6);ASSERT_TRUE(f.learner);
+            SinglePulseFixture<Learner> f;f.Make(frequency,2,gain,1e-6,inheritedPhysics);ASSERT_TRUE(f.learner);
             auto zone=f.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
             ASSERT_DOUBLE_EQ(zone->Threshold.GetData(),1e-6);
             std::vector<NameT> names;f.neuron->GetComponentsList(names);
@@ -247,5 +257,7 @@ template<class Learner> void FeedbackDynamics() {
 }
 TEST(StorageFeedbackProfiles,ClassicNativeFeedbackDynamics){FeedbackDynamics<NNeuronTimeLearner>();}
 TEST(StorageFeedbackProfiles,BranchNativeFeedbackDynamics){FeedbackDynamics<NNeuronTimeLearnerBranch>();}
+TEST(FeedbackProfileImages,ClassicNativeInheritedPhysics){FeedbackDynamics<NNeuronTimeLearner>(true);}
+TEST(FeedbackProfileImages,BranchNativeInheritedPhysics){FeedbackDynamics<NNeuronTimeLearnerBranch>(true);}
 
 }

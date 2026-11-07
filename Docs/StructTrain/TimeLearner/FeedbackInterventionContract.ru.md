@@ -31,3 +31,21 @@ construction/import → полный effective graph audit → исходный 
 с точным совпадением soma/stimulus waveform → объявленное изменение gain →
 paired native probes с каналами и временными графиками. CapturedPerInput,
 порог0.0117, индивидуальные параметры, stimulus и reset policy сохраняются.
+
+
+## Кандидат inherited-image profile
+
+В PulseLib добавлен RegisterFeedbackStorageProfile: цепочка существующих
+membrane/neuron образов, с изменением только выбранного gain и class names.
+Полный физический рецепт RegisterStorageProfile не применяется: в stock
+effective graph, например, DissociationTC отличается от default такого рецепта.
+Нельзя приписывать его неявную замену эффекту обратной связи.
+
+Подготовлены четыре native функции: нестандартные C/кинетика, growth и
+коллизии; invalid/no-LT preflight; Classic/Branch stock-image single-pulse
+controls на2000/20000Гц с inherited/explicit2/explicit0. Дополнительно два
+reader tests используют actual_model_identity каждого native control и
+production audit_profile_delta для строгого сравнения всех остальных полей.
+Эти новые функции ещё не проверены на сервере. Они не являются переносом
+конкретных опубликованных stopped моделей с порогом0.0117: engineering
+порог1e-6 и отдельная fixture-морфология обозначены явно.
