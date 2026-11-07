@@ -83,16 +83,48 @@ CapturedPerInput на этом профиле; старые references/certifica
 
 ## Визуальная проверка
 
-[Полные временные отчёты по12 пробам](FeedbackProfileTemporalReportJobs.json)
-находятся в подготовке на M40; пять chart/compatibility controls прошли,
-проверены все30 trial/soma inputs. Выполнены шесть Branch case reports;
-Classic render продолжается. Планируемое содержание:
-потенциал каждой сомы, наложенные actual input pulses, каналы, Feedback и
-фактические LT events. Нужны общий обзор, непрерывные50мс окна и локальный
-Y для слабых пиков. Выбранные рисунки ещё не приняты вручную; до этого
-visual acceptance не заявляется. Полный cache останется на M40, в Git —
-сжатые primary, модели/метрики, metadata и выбранные рисунки.
+[Временные отчёты приняты](FeedbackProfileVisualVerification.json):12 проб,
+30 trial/soma pairs,1213 полных/50мс/detail views и2 дополнительных matched-tail
+увеличения. Проверены3669 cache files/403646846B. Все70+8 archive members и373
+уникальных tool hashes сверены с Git. Обе группы закрыты, leases released.
+Полный cache находится на M40 в
+/media/user/Data/TimeLearnerRefactor/ReportsCache/feedback-profile-joint-normal-a1;
+дополнительные детали — feedback-profile-matched-tail-normal-a1 рядом с ним.
+В Git сохранены metadata/primary и только6 выбранных PNG общим объёмом1468877B.
 
+[Все шесть выбранных рисунков просмотрены индивидуально](FeedbackProfileSelectedVisualQA.json).
+Отсчёты не прореживаются; окно50мс даёт более14 горизонтальных pixels/tick
+при2000Гц, деталь10мс — более71. Общие контекстные шкалы показывают также
+отрицательный rebound; слабые особенности требуют отдельного увеличения.
+У matched-tail рисунков одинаковое время и независимо подписанные local Y:
+по высоте кривых нельзя сравнивать амплитуды без чтения осей. Полный cache
+вручную не просматривался. Надпись training probe в старом burst-render title
+обозначает предъявление training burst; это frozen diagnostics без обучения.
+
+### Classic: исходная физика и FeedbackGain0, первое50мс окно
+
+![Classic, неизменённая реконструкция](../../../Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Classic-threshold-low-retry32-single-baseline-soma1-zoom-001.png)
+
+![Classic, FeedbackGain0](../../../Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Classic-threshold-low-retry32-single-gain0-soma1-zoom-001.png)
+
+### Branch: основной отклик, первое50мс окно
+
+![Branch, неизменённая реконструкция](../../../Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-baseline-soma1-zoom-001.png)
+
+![Branch, FeedbackGain0](../../../Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-gain0-soma1-zoom-001.png)
+
+### Branch: один и тот же поздний участок при local Y
+
+В baseline виден слабый максимум; при gain0 в том же временном окне виден
+монотонный спад. На обоих рисунках вход равен нулю. Feedback/LT Output и
+LT decision potential записаны непосредственно, не восстановлены из soma.
+В частности, gain0 изменяет продолжительность LT Output: это дополнительная
+причина не считать удаление максимумов улучшением spike morphology или
+классификации. Нового Train/evaluation здесь нет.
+
+![Branch, baseline: поздний слабый максимум](../../../Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-baseline-soma1-matched-control-tail-detail.png)
+
+![Branch, gain0: тот же участок, монотонный спад](../../../Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-gain0-soma1-matched-control-tail-detail.png)
 
 Следующая отдельная диагностика — сохранённые training100/Retry состояния,
 в которых burst имел3 maxima/4 actual inputs. Root package теперь может явно
