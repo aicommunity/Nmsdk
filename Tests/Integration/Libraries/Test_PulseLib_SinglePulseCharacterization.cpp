@@ -58,6 +58,11 @@ public:
         learner->Name="Learner";learner->StructureBuildMode=1;learner->NumInputDendrite=n;
         learner->NeuronClassName=profile.neuronClass;learner->CalculateMode=1;learner->NormalizationMode=1;
         learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
+        if(threshold!=1.) {
+            // Legacy Reset legitimately reapplies the learner-owned threshold.
+            // Declare both modes before construction; never repair LT per tick.
+            learner->TrainingLTZThreshold=threshold;learner->FixedLTZThreshold=threshold;learner->LTZThreshold=threshold;
+        }
         std::vector<int> lengths;for(unsigned i=0;i<n;++i)lengths.push_back(n-i);learner->DendriteLength=lengths;
         MDMatrix<double> pattern;pattern.Assign(n,1,0.);double last=0.;
         for(unsigned i=0;i<n;++i){const double v=i?.08:.01;pattern(i,0)=v;isi.push_back(v);original.append(v);last+=v;}
