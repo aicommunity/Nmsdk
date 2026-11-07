@@ -4,7 +4,7 @@
 созданной от develop с merge предшествующей SDK feature. Полная native/Console
 приёмка нового кода ещё не завершена. [Native38/readers25 на Elder](SingleImpulseMaximumElderAcceptance.ru.md)
 и [unit ASan34 на M40](ProbeAlgorithmsASan.ru.md) приняты в своих областях;
-ASan storage SDK8702 относится к прежнему коду. Console/whole-burst ещё открыты.
+ASan storage SDK8702 относится к прежнему коду. [Console replay](SingleMaximumConsoleReplay.ru.md) принят; whole-burst ещё открыт.
 
 Добавлена явная native ProbeSpec schema5, `single_impulse_maximum`. Она
 разрешена только в диагностическом предъявлении ровно одного импульса.
