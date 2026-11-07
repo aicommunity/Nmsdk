@@ -1,9 +1,26 @@
 # TimeLearner reproducibility artifacts
 
-Completed scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Full304 and visual acceptance remain pending; fixed-threshold silent models are not successful detections.
+Historical scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Their acceptance applies to the documented source snapshots; fixed-threshold silent models are not successful detections.
 
-Current whole-plan status: [04.11.2026 audit with05.11 updates](../../../Docs/StructTrain/TimeLearner/PlanCompletionAudit-2026-11-04.ru.md).
+Current whole-plan status: [maintained implementation status](../../../Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md) and [scientific readiness](../../../Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).
 Scoped engineering evidence below does not establish full mode/physics coverage or scientific classification success.
+
+Candidate recovery declaration (06.11):33/33 Python checks on each server,
+covering envelope/repeat binding, preflight and scientific condition identity.
+[Scope, primary evidence and remaining native/CSV audit work](../../../Docs/StructTrain/TimeLearner/UnassignedBurstCandidateRecovery.ru.md).
+This is not acceptance of physical recovery or a scientific classification result.
+
+The next primary-classifier gate passed48/48 Python checks on each server,
+including the four original stock failure conditions and damaged JSON/CSV.
+[Source/archive verification](../../../Docs/StructTrain/TimeLearner/CandidateRecoveryPrimaryVerification.json).
+This classifies invalid observations; controller transitions and full schema5
+training audit remain unaccepted. No models were recalculated by these gates.
+
+The separate M40 Pulse70f SDK passed116/116 C++ controls. All284 default physical
+CSV match the earlier25-case gate byte for byte;18 startup JSON differ only in
+StepDuration telemetry. [Verified primary and exact source](../../../Docs/StructTrain/TimeLearner/CandidateRecoveryNativeVerification.json).
+The later typed decision journal Pulsea34 is outside this PASS; no stock opt-in
+cold training or independent classification is established here.
 
 Feature stock training failure diagnostics (04.11; full native feature acceptance pending):
 [contracts, observed boundaries and limits](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md),

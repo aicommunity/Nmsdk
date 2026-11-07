@@ -4,12 +4,16 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 import sys
 from pathlib import Path
 
 
 def analyze(args: argparse.Namespace) -> dict:
     from .native_evidence import EvidenceError, audit_probe, load, require
+    historical_analysis = getattr(args, 'historical_analysis', None)
+    require(args.format == 'pipeline-run' or historical_analysis is None,
+            'historical_analysis_is_only_for_pipeline_run')
     require(args.format == "historical-selectivity" or getattr(args, "expected_trial_ids", None) is None,
             "expected_trial_ids_is_only_for_historical_selectivity")
     for option in ("rest_bound", "soma_abs_limit", "time_step_hz"):
@@ -48,6 +52,21 @@ def analyze(args: argparse.Namespace) -> dict:
         spec, observations = load_evaluation(args.evaluation.resolve(strict=True))
         result = audit_native_calibration_assessment(load(source), spec, observations,
             load(args.model.resolve(strict=True)), load_case(args.source_solo.resolve(strict=True)))
+    elif args.format == "capacitance-history":
+        from .training_capacitance_history import audit_training_capacitance_case
+        result = audit_training_capacitance_case(source)
+    elif args.format == "capacitance-witness":
+        from .training_capacitance_witness import audit_training_capacitance_witness
+        result = audit_training_capacitance_witness(load(source))
+    elif args.format == "capacitance-region":
+        from .capacitance_region_evidence import audit_capacitance_region
+        result = audit_capacitance_region(source)
+    elif args.format == "capacitance-binding":
+        from .capacitance_binding_evidence import audit_capacitance_binding
+        result = audit_capacitance_binding(load(source))
+    elif args.format == "training-capacitance-bridge":
+        from .training_capacitance_bridge_evidence import audit_training_capacitance_bridge
+        result = audit_training_capacitance_bridge(load(source))
     elif args.format == "domain":
         from .domain_evidence import audit_resistance_domain
         result = audit_resistance_domain(load(source), allow_legacy=args.allow_legacy)
@@ -69,7 +88,7 @@ def analyze(args: argparse.Namespace) -> dict:
         result = audit_run_manifest(source, post_tune=args.format == "posttune-run")
     elif args.format == "pipeline-run":
         from .native_pipeline_worker import audit_run_manifest
-        result = audit_run_manifest(source)
+        result = audit_run_manifest(source, historical_analysis=historical_analysis)
     elif args.format == "posttune-transaction":
         from .posttune_transaction_evidence import audit_posttune_transaction
         from .learned_evidence import load_case
@@ -120,9 +139,35 @@ def analyze(args: argparse.Namespace) -> dict:
             "analysis": result, "evaluation_verdict": None}
 
 
+def _process_policy(args):
+    from .native_evidence import load
+    return None if args.process_policy is None else load(args.process_policy.resolve(strict=True))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="TimeLearner reproducible experiment tools")
     commands = parser.add_subparsers(dest="command", required=True)
+    controller_ab = commands.add_parser("controller-ab", help="compare pinned pure controller kernels on a Linux worker")
+    controller_ab.add_argument("specification", type=Path)
+    controller_ab.add_argument("--root-repository", type=Path, required=True)
+    controller_ab.add_argument("--pulselib-repository", type=Path, required=True)
+    controller_ab.add_argument("--compiler", type=Path, required=True)
+    controller_ab.add_argument("--gtest-source", type=Path, required=True)
+    controller_ab.add_argument("--output", type=Path, required=True)
+    controller_kernel = commands.add_parser("controller-kernel", help="run pinned pure decision kernel tests on a Linux worker")
+    controller_kernel.add_argument("specification", type=Path)
+    controller_kernel.add_argument("--root-repository", type=Path, required=True)
+    controller_kernel.add_argument("--pulselib-repository", type=Path, required=True)
+    controller_kernel.add_argument("--compiler", type=Path, required=True)
+    controller_kernel.add_argument("--gtest-source", type=Path, required=True)
+    controller_kernel.add_argument("--output", type=Path, required=True)
+    pipeline = commands.add_parser("pipeline", help="managed Train/export/optional tuning/frozen Test with a durable boundary journal")
+    pipeline.add_argument("action", choices=("run", "continue", "audit", "reconcile"))
+    pipeline.add_argument("directory", type=Path)
+    pipeline.add_argument("--specification", type=Path)
+    pipeline.add_argument("--runtime-manifest", type=Path)
+    pipeline.add_argument("--process-policy", type=Path)
+    pipeline.add_argument("--stop-after", choices=("train", "export", "posttune", "calibrate", "evaluate"))
     gate = commands.add_parser("native-gate", help="run an explicit native test set in an immutable existing runtime")
     gate.add_argument("specification", type=Path)
     gate.add_argument("--output", type=Path, required=True)
@@ -151,6 +196,7 @@ def main(argv: list[str] | None = None) -> int:
             native.add_argument("--source-solo", type=Path, help="completed source package with primary trial siblings; export/evaluate only")
         native.add_argument("--runtime-manifest", type=Path, required=True)
         native.add_argument("--wall-seconds", type=float, required=True)
+        native.add_argument("--process-policy", type=Path, help="explicit whole-cgroup limits; omitted retains legacy process scope")
         native.add_argument("--output", type=Path, required=True, help="new immutable result directory")
     transfer = commands.add_parser("model-spec-transport", help="replay pinned positive engineering N1 jobs, then measure calibration and fresh import")
     transfer.add_argument("action", choices=("prepare", "run"))
@@ -175,6 +221,16 @@ def main(argv: list[str] | None = None) -> int:
     pair.add_argument("--runtime-manifest", type=Path)
     pair.add_argument("--code-identity", type=Path)
     pair.add_argument("--output", type=Path, required=True)
+    recovery = commands.add_parser("stock-recovery-study", help="matched retry/advance stock cold Train at two fixed thresholds; no classification claim")
+    recovery.add_argument("action", choices=("prepare", "run", "analyze", "coverage"))
+    recovery.add_argument("source", type=Path)
+    recovery.add_argument("--runtime-manifest", type=Path)
+    recovery.add_argument("--code-identity", type=Path)
+    recovery.add_argument("--output", type=Path, required=True)
+    recovery_compare = commands.add_parser("stock-recovery-compare", help="compare complete audited stock studies with identical declared training factors and cold graphs")
+    recovery_compare.add_argument("baseline", type=Path)
+    recovery_compare.add_argument("candidate", type=Path)
+    recovery_compare.add_argument("--output", type=Path, required=True)
     phasea = commands.add_parser("phasea-matrix", help="recover all four ISIs and labels from exact historical Bin Git data; no model execution")
     phasea.add_argument("--bin-repository", type=Path, required=True)
     phasea.add_argument("--revision", default="1c1464e248f8744e858bd66df0be99e39969fd65")
@@ -184,6 +240,11 @@ def main(argv: list[str] | None = None) -> int:
     stopped_stock.add_argument("source", type=Path)
     stopped_stock.add_argument("--bin-repository", type=Path)
     stopped_stock.add_argument("--output", type=Path, required=True)
+    recovery_eval = commands.add_parser("stock-recovery-evaluation", help="frozen eight-pattern responses; unfinished recovery models remain diagnostic")
+    recovery_eval.add_argument("action", choices=("prepare", "run", "analyze", "report"))
+    recovery_eval.add_argument("source", type=Path)
+    recovery_eval.add_argument("--bin-repository", type=Path)
+    recovery_eval.add_argument("--output", type=Path, required=True)
     inventory = commands.add_parser("inventory", help="inventory source properties and tracked historical tools")
     inventory.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3])
     inventory.add_argument("--output", type=Path, required=True)
@@ -191,7 +252,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=("domain", "probe", "learned-solo", "stopped-solo", "stopped-final-pass", "recognition", "recognition-owner", "recognition-trial", "recognition-evaluation", "threshold-candidate", "calibrated-state", "calibration-transaction", "posttune-transaction", "calibration-run", "posttune-run", "pipeline-run", "native-calibration-assessment", "posttune-reconstruction", "posttune-transient", "legacy-posttune-freerun", "native-live-finalization", "branch-dynamics", "historical-selectivity", "legacy-statistic-traces"), required=True)
+    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces'), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
@@ -202,10 +263,13 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--evaluation", type=Path, help="independently declared evaluation spec required for native calibration assessment")
     analysis.add_argument("--trace", type=Path, help="original primary CSV, required for probe")
     analysis.add_argument("--allow-legacy", action="store_true", help="descriptive domain schema-1 adapter only")
+    analysis.add_argument("--historical-analysis", choices=("learned-v2-no-capacitance",
+                         "training-v3-no-capacitance-history"),
+                         help="explicit archived training analysis adapter for pipeline-run only; defaults to strict equality")
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -225,6 +289,7 @@ def main(argv: list[str] | None = None) -> int:
     calibration.add_argument("--measurements", type=Path, help="portable search measurement-set descriptor for select/confirm")
     calibration.add_argument("--runtime-manifest", type=Path, help="verified Console runtime required for run")
     calibration.add_argument("--wall-seconds", type=float, help="owned process wall budget required for run")
+    calibration.add_argument("--process-policy", type=Path, help="whole-cgroup execution policy; run only")
     calibration.add_argument("--source-solo", type=Path, required=True, help="original learned-state package with primary trial siblings")
     calibration.add_argument("--selection", type=Path, help="required for confirmation; recomputed against primary search evidence")
     calibration.add_argument("--confirmation", type=Path, help="one fresh measurement-set descriptor required for confirmation")
@@ -234,6 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     posttune.add_argument("--source-solo", type=Path, required=True)
     posttune.add_argument("--runtime-manifest", type=Path, required=True)
     posttune.add_argument("--wall-seconds", type=float, required=True)
+    posttune.add_argument("--process-policy", type=Path, help="explicit whole-cgroup execution policy")
     posttune.add_argument("--output", type=Path, required=True, help="new run directory; never overwritten")
     bundle = commands.add_parser("bundle", help="lossless primary archives; full plots remain in worker cache")
     bundle.add_argument("action", choices=("pack-native-tests", "verify", "extract"))
@@ -270,6 +336,25 @@ def main(argv: list[str] | None = None) -> int:
     reuse.add_argument("--reference-archive")
     reuse.add_argument("--output", type=Path, required=True)
     args = parser.parse_args(argv)
+    if args.command == "pipeline":
+        from .managed_pipeline import run_pipeline, audit_pipeline, reconcile_pipeline
+        from .native_evidence import load, require, EvidenceError
+        try:
+            if args.action in ("audit", "reconcile"):
+                require(all(v is None for v in (args.specification, args.runtime_manifest,
+                                               args.process_policy, args.stop_after)), "pipeline_audit_execution_options")
+                result = (reconcile_pipeline if args.action == "reconcile" else audit_pipeline)(args.directory)
+            else:
+                require(all(v is not None for v in (args.specification, args.runtime_manifest,
+                                                   args.process_policy)), "pipeline_execution_inputs_required")
+                result = run_pipeline(args.specification, args.runtime_manifest, load(args.process_policy),
+                                      args.directory, resume=args.action == "continue", stop_after=args.stop_after)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result["pending_phase"] is None and result["halted_phase"] is None else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"kind": "timelearner_managed_pipeline_error", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
     if args.command == "primary-reuse":
         from .primary_reuse import pack, restore
         from .native_evidence import EvidenceError, require
@@ -359,7 +444,7 @@ def main(argv: list[str] | None = None) -> int:
         from .native_calibration_worker import run_job
         try:
             result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output,
-                             args.wall_seconds, post_tune=True)
+                             args.wall_seconds, post_tune=True, process_policy=_process_policy(args))
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
@@ -375,6 +460,19 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"kind": "timelearner_legacy_completed_replay_error", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    if args.command in ("controller-ab", "controller-kernel"):
+        from .native_evidence import EvidenceError
+        from .controller_ab import run_controller_ab, run_controller_kernel
+        try:
+            runner = run_controller_kernel if args.command == "controller-kernel" else run_controller_ab
+            result = runner(args.specification, args.root_repository, args.pulselib_repository,
+                                       args.compiler, args.gtest_source, args.output)
+            print(json.dumps(result, ensure_ascii=False, allow_nan=False))
+            return 0 if result['assertion_status'] == 'passed' else 2
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError) as error:
+            print(json.dumps({'kind': 'timelearner_controller_kernel_error' if args.command == 'controller-kernel' else 'timelearner_controller_ab_error', 'reason': str(error),
+                              'scientific_verdict': None}), file=sys.stderr)
             return 2
     if args.command == "native-gate":
         from .native_evidence import EvidenceError
@@ -406,7 +504,8 @@ def main(argv: list[str] | None = None) -> int:
                 require((args.source_solo is None) == (load(args.specification)['schema_version'] == 1), 'probe_source_required_only_for_import')
             else:
                 require((args.source_solo is None) == (args.command in ("train", "preflight")), "pipeline_source_required_only_for_export_evaluate")
-            result = run_job(args.command, args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
+            result = run_job(args.command, args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds,
+                             process_policy=_process_policy(args))
             print(json.dumps(result, ensure_ascii=False, allow_nan=False))
             return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
         except (EvidenceError, OSError, ValueError) as error:
@@ -480,10 +579,11 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.runtime_manifest is not None and args.wall_seconds is not None and
                         args.measurements is None and args.selection is None and args.confirmation is None,
                         "native_calibration_requires_runtime_wall_budget_and_no_saved_measurements")
-                result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds)
+                result = run_job(args.specification, args.source_solo, args.runtime_manifest, args.output, args.wall_seconds,
+                                 process_policy=_process_policy(args))
                 print(json.dumps(result, ensure_ascii=False, allow_nan=False))
                 return 0 if result["execution"] == "completed" and result["validity"] == "valid" else 2
-            require(args.runtime_manifest is None and args.wall_seconds is None and args.measurements is not None,
+            require(args.runtime_manifest is None and args.wall_seconds is None and args.process_policy is None and args.measurements is not None,
                     "saved_calibration_requires_measurements_and_no_runtime")
             require(args.action == "confirm" or (args.selection is None and args.confirmation is None),
                     "selection_does_not_accept_confirmation_options")
@@ -581,6 +681,16 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.trace is None and args.model is None, "calibration_transaction_declares_its_models_and_observations")
                 renderer = render_calibration_run if args.format == "calibration-run" else render_calibration_transaction
                 result = renderer(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "capacitance-search":
+                from .capacitance_search_reports import render_capacitance_search
+                require(args.trace is None and args.model is None and args.artifacts is None,
+                        "capacitance_search_report_declares_its_own_primary_files")
+                result = render_capacitance_search(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "capacitance-region":
+                from .capacitance_region_reports import render_capacitance_region
+                require(args.trace is None and args.model is None and args.artifacts is None,
+                        "capacitance_region_report_declares_its_own_primary_files")
+                result = render_capacitance_region(args.source.resolve(strict=True), args.output.resolve())
             elif args.format == "probe-set":
                 from .probe_reports import render_probe_set
                 require(args.trace is None and args.model is None, "probe_set_declares_its_own_primary_files")
@@ -623,8 +733,11 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
-    elif args.command == "stock-stopped-evaluation":
-        from .stock_stopped_evaluation import prepare, run, audit, report
+    elif args.command in ("stock-stopped-evaluation", "stock-recovery-evaluation"):
+        if args.command == "stock-recovery-evaluation":
+            from .stock_recovery_evaluation import prepare, run, audit, report
+        else:
+            from .stock_stopped_evaluation import prepare, run, audit, report
         from .native_evidence import EvidenceError, require
         try:
             if args.action in ("analyze", "report"):
@@ -658,13 +771,34 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
             return 2
-    elif args.command == "stock-threshold-study":
-        from .stock_threshold_study import prepare, run, audit
+    elif args.command == "stock-recovery-compare":
+        from .stock_recovery_compare import compare_studies
+        from .native_evidence import EvidenceError, require
+        try:
+            require(not args.output.exists(), "stock_compare_output_exists")
+            result = compare_studies(args.baseline, args.candidate)
+            with args.output.open("x", encoding="utf-8") as stream:
+                json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
+                              "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command in ("stock-threshold-study", "stock-recovery-study"):
+        if args.command == "stock-recovery-study":
+            from .stock_recovery_study import prepare, run, audit
+        else:
+            from .stock_threshold_study import prepare, run, audit
         from .native_evidence import EvidenceError, require, load
         try:
-            if args.action in ("analyze", "failure-report"):
+            if args.action in ("analyze", "failure-report", "coverage"):
                 require(args.runtime_manifest is None and args.code_identity is None, "stock_pair_analysis_has_no_runtime")
-                if args.action == "failure-report":
+                if args.action == "coverage":
+                    from .search_coverage import analyze_stock_recovery
+                    result = analyze_stock_recovery(args.source)
+                    with args.output.open("x", encoding="utf-8") as stream:
+                        json.dump(result, stream, indent=2, allow_nan=False);stream.write("\n")
+                elif args.action == "failure-report":
                     from .stock_failure_reports import render_failure_report
                     result = render_failure_report(args.source, args.output)
                 else:

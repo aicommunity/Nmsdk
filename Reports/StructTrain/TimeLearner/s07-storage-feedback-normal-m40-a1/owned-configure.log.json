@@ -1,0 +1,22 @@
+{
+  "pid": 1444720,
+  "start_ticks": "309520055",
+  "arguments": [
+    "cmake",
+    "-S",
+    "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+    "-B",
+    "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+    "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+    "-DNMSDK_BUILD_PARALLEL_JOBS=1",
+    "-DCMAKE_CXX_FLAGS_RELWITHDEBINFO=-O1 -g1",
+    "-DBUILD_TESTING=ON",
+    "-DCMAKE_DISABLE_FIND_PACKAGE_GTest=ON",
+    "-DRDK_BUILD_LEGACY_ENGINE_UNIT_TESTS=OFF",
+    "-DFETCHCONTENT_SOURCE_DIR_GOOGLETEST=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+    "-DFETCHCONTENT_UPDATES_DISCONNECTED=ON",
+    "-DRDK_LLM_LLAMA_CPP_DIR=/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+    "-DNMSDK_DEPLOY_ROOT=/media/user/Data/TimeLearnerRefactor/runtime-storage-feedback-normal-a1",
+    "-DNMSDK_RESOURCE_ROOT=/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+  ]
+}

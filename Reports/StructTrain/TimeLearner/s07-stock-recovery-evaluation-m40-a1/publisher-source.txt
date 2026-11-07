@@ -1,0 +1,48 @@
+from pathlib import Path
+import sys,json,subprocess,hashlib,os
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-pipeline-archive-inventory-a2'
+parent='a5ba5f8d2672de2c76849e0e7db6754b00a6bb5a';sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.artifact_bundle import canonicalize_pipeline_archive
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+registry=Reservations(base/'resource-reservations.sqlite3')
+folder=base/'readbacks/s07-stock-recovery-frozen-normal-a1'
+closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+terminal=json.loads((folder/'terminal.json').read_text())
+assert terminal['frozen_evaluation64_complete'] and not terminal['temporal_report160_complete']
+canonical=base/'readbacks/s07-stock-recovery-evaluation-canonical-primary-a1'
+assert canonical.is_dir()
+# Both inputs are immutable closed-worker primary. The live renderer only reads
+# this directory; no source/output/archive in its lease is modified.
+from Scripts.StructTrain.TimeLearner.artifact_bundle import verify_pipeline_archive
+result=json.loads((canonical/'bundle.json').read_text())
+proof=verify_pipeline_archive(canonical/'primary.tar.xz',result)
+assert proof['run_snapshots_verified']==8
+analysis=json.loads((folder/'analysis.json').read_text())
+assert analysis['trials']==64 and analysis['completed_training_models']==0 and len(analysis['models'])==8
+assert all(m['metrics']['diagnostic_only'] and m['metrics']['evaluation_verdict'] is None for m in analysis['models'])
+
+payload={};prefix='Reports/StructTrain/TimeLearner/s07-stock-recovery-evaluation-m40-a1'
+for name in ('primary.tar.xz','bundle.json'):payload[prefix+'/'+name]=(canonical/name).read_bytes()
+for name in ('analysis.json','tests.json','terminal.json','exception.json','owner.json','tool-source-hashes.json'):
+ payload[prefix+'/'+name]=(folder/name).read_bytes()
+payload[prefix+'/original-archive-bundle.json']=(folder/'bundle.json').read_bytes()
+previous=[r for r in registry.inspect()['leases'] if r['job_id']=='s07-stock-recovery-evaluation-primary-publish-a1']
+assert len(previous)==1 and previous[0]['owner_status']!='identity_live'
+payload[prefix+'/publisher-retry.json']=(json.dumps({'previous_failure':'Reservations.release missing required note; canonical archive fully created before failure','canonical_archive_reused_without_mutation':True,'previous_lease':previous[0],'legacy_orphan_release_pending':True,'runtime_rerun':False},indent=2)+'\n').encode()
+payload[prefix+'/fresh-operational-closure.json']=(json.dumps(closed,indent=2)+'\n').encode()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-stock-recovery-evaluation-primary-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(collector/'publication-index'))
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+git('read-tree',parent)
+for name,raw in payload.items():
+ oid=git('hash-object','-w','--stdin',data=raw);git('update-index','--add','--cacheinfo','100644',oid,name)
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',git('write-tree','--missing-ok'),'-p',parent,data=b'Preserve64 actual diagnostic responses of8 stopped recovery models and original render dependency failure\n')
+git('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'members':result['pipeline_closure']['archive_members_verified'],'archive_bytes':result['archive_bytes'],'alias_duplicates_omitted':len(result['omitted_duplicate_glog_aliases']),'trials':64,'scientific_verdict':None}))

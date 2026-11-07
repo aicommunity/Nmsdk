@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_capacitance_integration_evidence",
+  "schema_version": 1,
+  "root": "2194eeadcb3f29e1b2047ae1bcf3e6e7e48e4747",
+  "pulselib": "21435c8d5a11d2670cdc1609757d3a9973877314",
+  "rdk": "acc3de8d1af2480d61ddb723c3288f7e81003049",
+  "statuses": {
+    "readers": {
+      "expected": 87,
+      "observed": null,
+      "assertion_status": "not_passed",
+      "structured_result": {}
+    }
+  },
+  "unexpected_libasan_mappings": false,
+  "acceptance_status": "not_accepted",
+  "archive_sha256": "5d402bd2861ef0a6c165c5ec2602394db966da6d25057fc28572f5b39a5d5532",
+  "archive_bytes": 729,
+  "members": {
+    "actual-libasan-mappings.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+    "gate/compile-failure-prerequisite.json": "8dacee0d17f225ddc36fa79fa5f6595b6ec76f37aeced08e3caf527a6d7f7556",
+    "gate/owned-supervisor.json": "724e3daaa3307987c40481aaabd561f50ddfce22e4a2d5f1f091c2593e591d5c",
+    "gate/pointer-failure-prerequisite.json": "08f8032eb587377c7ece10ec27f0ff2417606fd39019bb2dd757a4e45c015117",
+    "gate/queue-cancellation.json": "4c621b7d5a32b018dbee21f90b9b61298164a2ca3c807cc466b24f13c0935a8d"
+  },
+  "scope": "SDK209: previous197 regressions plus12 portable configuration/model schema3 boundary controls. Independent readers87 include12 new primary-data and corruption checks. Previous H8d must complete with only the four independently diagnosed exception-type fixture failures, its unchanged failed verdict and complete compressed primary evidence verified before source reuse. No mid-probe/search checkpoint, C-search On activation or scientific classification claim.",
+  "scientific_verdict": null
+}

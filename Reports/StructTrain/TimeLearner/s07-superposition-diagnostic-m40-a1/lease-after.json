@@ -1,0 +1,42 @@
+{
+  "token": "bc369f9b-8bd3-4fb4-af3f-939dae1142eb",
+  "job_id": "s07-superposition-diagnostic-normal-a1",
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1564438,
+    "start_ticks": "311091087",
+    "uid": 1000
+  },
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-superposition-diagnostic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-superposition-diagnostic-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-superposition-diagnostic-a1-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-superposition-diagnostic-a1-delivery"
+    }
+  ],
+  "state": "released",
+  "created": 1794035713.4717185,
+  "deadline": 1794035873.9912086,
+  "updated": 1794035771.4346526,
+  "release_note": "Pure readback waveform hypothesis analysis finished; no native training or certification.",
+  "heartbeat_expired": false,
+  "owner_status": "identity_live",
+  "inspection_required": false,
+  "scientific_verdict": null
+}

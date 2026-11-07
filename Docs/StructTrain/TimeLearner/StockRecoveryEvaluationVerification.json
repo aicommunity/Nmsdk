@@ -1,0 +1,111 @@
+{
+  "kind": "stock_recovery_evaluation_primary_verification",
+  "schema_version": 1,
+  "evidence_commit": "8ca095726d811a6797bbd82671987635f9b7da53",
+  "tool_root": "5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1",
+  "archive_members_verified": 6564,
+  "archive_bytes": 60567368,
+  "archive_sha256": "62135c18bde3930f027c7754feb9fe10902666ae6f813c59d2d77903d4b22b09",
+  "source_files_verified": 346,
+  "trials": 64,
+  "models": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      },
+      "effective_threshold": 0.0117,
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c"
+    },
+    {
+      "name": "Classic-threshold-low-advance32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      },
+      "effective_threshold": 0.0117,
+      "model_revision": "da8ab2daf5adb049c39ac13811b175bc2bddf64d1df20597f7f6196ef253a350"
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      },
+      "effective_threshold": 100.0,
+      "model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04"
+    },
+    {
+      "name": "Classic-threshold-training100-advance32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      },
+      "effective_threshold": 100.0,
+      "model_revision": "3941183928f345e604832cccdc0c8b071e7471cea6d0a5bda97e28193588dcc9"
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      },
+      "effective_threshold": 0.0117,
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4"
+    },
+    {
+      "name": "Branch-threshold-low-advance32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      },
+      "effective_threshold": 0.0117,
+      "model_revision": "751f15fe94b1a79059952e3f3d1261b70220a7d0eedcde00fdf1981ea8a3b2e6"
+    },
+    {
+      "name": "Branch-threshold-training100-retry32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      },
+      "effective_threshold": 100.0,
+      "model_revision": "96ea48df1c10576741142b085955b000399451f9690cc875cdff02447178da67"
+    },
+    {
+      "name": "Branch-threshold-training100-advance32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      },
+      "effective_threshold": 100.0,
+      "model_revision": "0e6c038665ebe4350b18978b37c0b81b0d53de5eccb9648f14d49a4dfe2e5af5"
+    }
+  ],
+  "completed_training_models": 0,
+  "fresh_native_worker_closed_released": true,
+  "omitted_verified_glog_aliases": 8,
+  "all_evaluations_diagnostic": true,
+  "calibration_performed": false,
+  "independent_patterns": false,
+  "render_original_failure": "missing matplotlib in worker interpreter",
+  "render_retry_pending": true,
+  "legacy_publisher_orphan_lease_release_pending": true,
+  "scientific_verdict": null
+}
