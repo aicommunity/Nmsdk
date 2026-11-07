@@ -12,7 +12,7 @@ import subprocess
 import time
 import uuid
 
-from .native_evidence import require
+from .native_evidence import load, require
 from .native_calibration_worker import _write
 from .process_runner import verify_runtime
 from .runtime import file_record, source_closure
@@ -127,7 +127,7 @@ class _Windows:
 
 
 def execute(manifest, arguments, working_directory, output, *, memory_bytes, maximum_processes,
-            maximum_wall_seconds, lock_file, cancel_file=None):
+            maximum_wall_seconds, lock_file, cancel_file=None, cooperative_capture=False):
     """Run one immutable native runtime in an owned, memory-limited Windows job.
 
     A host lock serializes this backend's workers. It does not reserve resources
@@ -138,6 +138,8 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     require(type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds) and
             .1 <= maximum_wall_seconds <= 86400, 'invalid_windows_wall_budget')
     require(type(arguments) is list and all(type(s) is str and '\x00' not in s for s in arguments), 'invalid_windows_arguments')
+    require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
+            for a in arguments), 'capture_directory_is_supervisor_owned')
     api = _Windows();exe = verify_runtime(manifest);cwd = Path(working_directory).resolve(strict=True)
     backend = file_record(Path(__file__))
     require(manifest.get('windows_backend') == backend and
@@ -150,6 +152,8 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     output = Path(output).resolve();require(not output.exists() and not output.is_relative_to(source) and
             not output.is_relative_to(exe.parent), 'windows_output_overlaps_runtime_or_source')
     output.mkdir(parents=True, exist_ok=False)
+    arguments = list(arguments)
+    if cooperative_capture:arguments.extend(['--timelearner-capture-directory', str(output)])
     lock_file = Path(lock_file).resolve();lock_file.parent.mkdir(parents=True, exist_ok=True)
     require(lock_file.suffix == '.lock' and not lock_file.is_relative_to(source) and
             not lock_file.is_relative_to(exe.parent) and not lock_file.is_relative_to(output),
@@ -159,7 +163,7 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     if lock_file.stat().st_size == 0:lock.write(b'0');lock.flush();lock.seek(0)
     try:msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
     except OSError:lock.close();raise RuntimeError('windows_worker_already_reserved')
-    job = None;process = api.Process();assigned = False;resumed = False;observed = {};module_errors = []
+    job = None;process = api.Process();assigned = False;resumed = False;observed = {};module_errors = [];captured = False
     result = {'kind': 'timelearner_windows_process_result', 'schema_version': 1,
               'execution': 'process_error', 'validity': 'incomplete', 'reason': 'not_started',
               'returncode': None, 'scientific_verdict': None, 'thread_limit_enforced': False,
@@ -220,6 +224,23 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
                         if key not in observed:observed[key] = file_record(path)
                 except (OSError, RuntimeError) as error:
                     if len(module_errors) < 8:module_errors.append(str(error))
+                if cooperative_capture and not captured and (output/'capture-ready.json').exists():
+                    expected = {'kind': 'native_runtime_capture_ready', 'schema_version': 2,
+                                'pid': int(process.pid), 'creation_filetime': identity['creation_filetime']}
+                    ready = load(output/'capture-ready.json')
+                    require(type(ready.get('pid')) is int and type(ready.get('schema_version')) is int and
+                            ready == expected and api.identity(process.process) == identity,
+                            'windows_cooperative_capture_identity_changed')
+                    boundary = [file_record(p) for p in api.modules(process.process)]
+                    require(any(os.path.samefile(p['path'], exe) for p in boundary),
+                            'windows_capture_boundary_executable_missing')
+                    require(api.running(process.process) and api.identity(process.process) == identity,
+                            'windows_capture_boundary_process_changed')
+                    _write(output/'boundary-loaded-files.json', boundary)
+                    for record in boundary:observed[os.path.normcase(record['path'])] = record
+                    ack = {**expected, 'kind': 'native_runtime_capture_ack'}
+                    temporary = output/'capture-ack.pending.json';_write(temporary, ack)
+                    temporary.rename(output/'capture-ack.json');captured = True
                 time.sleep(.05)
             if api.wait(process.process, 10000) != 0:raise RuntimeError('windows_owned_process_not_closed')
             api.check(api.exit_code(process.process, C.byref(code)))
@@ -240,6 +261,11 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             verify_runtime(manifest)
             require(file_record(Path(__file__)) == backend, 'windows_backend_changed')
             require(source_closure(source) == manifest['source_closure'], 'windows_source_context_changed')
+            result['cooperative_capture'] = 'completed' if captured else ('not_ready' if cooperative_capture else 'not_requested')
+            if cooperative_capture and not captured:
+                result.update(validity='provenance_missing', reason='windows_cooperative_capture_not_ready',
+                              runtime_provenance='not_captured')
+                return result
             if os.path.normcase(str(exe)) not in observed:
                 result.update(validity='provenance_missing', reason='windows_executable_mapping_not_observed',
                               runtime_provenance='not_captured')
@@ -260,6 +286,9 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             api.close(process.process)
         if job:
             if assigned and api.pids(job):api.terminate_job(job, 1460)
+            deadline = time.monotonic()+10
+            while api.pids(job) and time.monotonic() < deadline:time.sleep(.05)
+            result['all_processes_closed'] = not api.pids(job)
             api.close(job)
         result.update(wall_seconds=time.monotonic()-start, child_resumed=resumed, job_name=name)
         _write(output/'result.json', result)

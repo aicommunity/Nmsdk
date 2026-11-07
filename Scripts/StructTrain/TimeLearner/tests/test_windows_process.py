@@ -33,10 +33,10 @@ class WindowsProcessTest(unittest.TestCase):
         cls.manifest['runtime_identity'] = runtime_content_identity(cls.manifest)
         cls.manifest['runtime_fingerprint'] = digest_json(cls.manifest['runtime_identity'])
 
-    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None, memory=128*1024**2):
+    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None, memory=128*1024**2, cooperative=False):
         result = windows_process.execute(self.manifest, ['-X', 'utf8', '-c', code, *(extra or [])],
             self.root, self.root/name, memory_bytes=memory, maximum_processes=processes,
-            maximum_wall_seconds=wall, lock_file=self.lock, cancel_file=cancel)
+            maximum_wall_seconds=wall, lock_file=self.lock, cancel_file=cancel, cooperative_capture=cooperative)
         (self.root/(name+'-observed.json')).write_text(json.dumps(result, indent=2)+'\n')
         return result
 
@@ -147,3 +147,47 @@ class WindowsProcessTest(unittest.TestCase):
             with self.assertRaises(EvidenceError):
                 windows_process.execute(self.manifest, [], self.root, self.root/name, lock_file=self.lock, **limits)
             self.assertFalse((self.root/name).exists())
+
+    def cooperative_fixture(self, wrong_identity=False):
+        # Protocol fixture only. The C++ implementation is checked by actual SDK gates.
+        return ('import sys,os,json,time,ctypes;from pathlib import Path;sys.path.insert(0,'+
+                repr(str(Path(__file__).resolve().parents[4]))+');'
+                'from Scripts.StructTrain.TimeLearner.windows_process import _Windows;'
+                'a=_Windows();identity=a.identity(ctypes.c_void_p(-1));'
+                'folder=Path(sys.argv[sys.argv.index("--timelearner-capture-directory")+1]);'
+                'ready={"kind":"native_runtime_capture_ready","schema_version":2,"pid":'+
+                ('0' if wrong_identity else 'os.getpid()')+',"creation_filetime":identity["creation_filetime"]};'
+                '(folder/"ready.tmp").write_text(json.dumps(ready));(folder/"ready.tmp").rename(folder/"capture-ready.json");'
+                'deadline=time.monotonic()+4\n'
+                'while not (folder/"capture-ack.json").exists() and time.monotonic()<deadline:time.sleep(.005)\n'
+                'ack=json.loads((folder/"capture-ack.json").read_text());'
+                'assert ack==dict(ready,kind="native_runtime_capture_ack")')
+
+    def test_cooperative_boundary_binds_live_creation_identity(self):
+        result = self.run_fixture('cooperative', self.cooperative_fixture(), wall=10, cooperative=True)
+        self.complete(result);self.assertEqual(result['cooperative_capture'], 'completed')
+        self.assertTrue((self.root/'cooperative/boundary-loaded-files.json').exists())
+
+    def test_wrong_cooperative_identity_closes_the_owned_process(self):
+        result = self.run_fixture('wrong-identity', self.cooperative_fixture(True), wall=10, cooperative=True)
+        self.assertEqual(result['validity'], 'invalid_or_incomplete')
+        self.assertEqual(result['reason'], 'windows_cooperative_capture_identity_changed')
+        self.assertTrue(result['all_processes_closed'])
+        self.assertFalse((self.root/'wrong-identity/capture-ack.json').exists())
+
+    def test_fast_exit_without_requested_boundary_is_not_provenance(self):
+        result = self.run_fixture('missing-boundary', 'print("no capture boundary")', cooperative=True)
+        self.assertEqual(result['validity'], 'provenance_missing')
+        self.assertEqual(result['runtime_provenance'], 'not_captured')
+        self.assertTrue(result['all_processes_closed'])
+
+    def test_windows_gate_specification_declares_process_limits(self):
+        from ..native_gate import supported_specification
+        spec = dict(kind='timelearner_native_test_gate', schema_version=4, runtime_manifest='runtime.json',
+                    source_root='source', expected_test_ids=['Fixture/Case'], maximum_wall_seconds=10,
+                    asan_options='', cooperative_runtime_capture=True,
+                    process_limits={'memory_bytes':128*1024**2,'maximum_processes':1}, worker_lock='worker.lock')
+        self.assertTrue(supported_specification(spec))
+        for change in ({'process_limits':{'memory_bytes':True,'maximum_processes':1}},
+                       {'cooperative_runtime_capture':False}, {'worker_lock':''}):
+            self.assertFalse(supported_specification(dict(spec, **change)))
