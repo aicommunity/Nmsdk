@@ -1,0 +1,67 @@
+{
+  "kind": "historical_preparation_library_extraction",
+  "baseline_root": "ae8cdce48bf9b1ed8bc17cd2930e80d231894376",
+  "functions": [
+    {
+      "function": "write",
+      "old_module": "tests/historical_phasea_replay.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "99e24ff167c314a152171328b9cd08bd3a5e0767fd58dd798e07c59e15e88554",
+      "AST_unchanged": true
+    },
+    {
+      "function": "model_readback",
+      "old_module": "tests/historical_phasea_replay.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "5b546a9cc19605793cc8cc30bc98ba85b19ae73c4c2974e952a4f839355a0ab0",
+      "AST_unchanged": true
+    },
+    {
+      "function": "prepare_case",
+      "old_module": "tests/historical_phasea_replay.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "a4cef92b565c87a23dadc0e19e6134abc31ad72c1d9b729abc11731a046a762b",
+      "AST_unchanged": true
+    },
+    {
+      "function": "add_native_temporal_observer",
+      "old_module": "tests/historical_phasea_replay.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "a6257daddcfd90c1be28cf02783b6f9147da0dbe1024450621d65e17354aaeff",
+      "AST_unchanged": true
+    },
+    {
+      "function": "neuron_destination",
+      "old_module": "tests/historical_phasea_coldtest.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "52a19ff4a426eba2d2c2c7293f64a64262043b8848248375c6c2ec3ce9ca967b",
+      "AST_unchanged": true
+    },
+    {
+      "function": "transfer_model",
+      "old_module": "tests/historical_phasea_coldtest.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "de74f60a63d33a291a9c824260f70ba820bd4677d97a5cff25c363b0bb7f0ea9",
+      "AST_unchanged": true
+    },
+    {
+      "function": "parameter_export",
+      "old_module": "tests/historical_phasea_coldtest.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "d18a43e546356e7630f385513b4de0ab65d5677fb81217f745c482922c51bc8b",
+      "AST_unchanged": true
+    },
+    {
+      "function": "recognition_identity",
+      "old_module": "tests/historical_phasea_coldtest.py",
+      "new_module": "historical_phasea_native.py",
+      "AST_sha256": "d013754046c0ac671e5c75c92ddc712c4d33bf217fb2fc7a1ee35cb98c42b1fe",
+      "AST_unchanged": true
+    }
+  ],
+  "both_CLI_main_AST_unchanged": true,
+  "local_AST_only": true,
+  "server_runtime_validation": null,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
