@@ -78,3 +78,24 @@ capture. Отдельный poll зарегистрировал `EnumProcessModu
 compiled root8314e98 и backend289c3bc, с отдельными первичными данными и
 cooperative capture. Build execution, вынос EventLog и scientific admission
 остаются открытыми.
+
+### A3: полный native capture принят
+
+Задание завершено:23/23 unit и21/21 physical checks прошли; обе группы имеют
+valid execution, actual loaded files, согласованные ready/ack с creation identity
+и закрытые owned Jobs. Evidence `c3295c22748d1a5f02f425d7fd7b3506a11f525f`,
+175 members,763644B compressed, SHA256
+`d722a558ce1c7e0610f2c4385d177f8e1c63223606e92df1644af884c25235d3`.
+[Независимая metadata-сверка](WindowsSDKCaptureVerification.json) проверила
+все members и JUnit inventories;36/47 файлов runtime наблюдались фактически.
+Старые неуспешные build/capture попытки не переоценены. Scientific admission
+и успешная приёмка build execution этим не заявлены.
+
+На Linux отдельно подтверждена та же проблема размещения EventsLog у
+интеграционных тестов: пустой log_dir в Init не отключает fallback Rdk
+WorkDirectory/EventsLog. Обе ASan native группы passed, но общий freeze gate
+обоснованно отклонён из-за новых журналов внутри runtime. Подготовлен fix
+`ConsoleLikeInit.cpp`: штатный SetWorkDirectory до Init и новая принадлежащая
+заданию директория `native.test-events-log`. Для прямого CTest без managed output
+резервируется отдельный временный каталог. Адресный ASan gate ещё выполняется;
+возвраты Build/Calculate/Reset и модельная физика не менялись.
