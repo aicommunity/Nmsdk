@@ -113,7 +113,9 @@ public:
         EXPECT_EQ(EncodeNativeProbeEvidence(DecodeNativeProbeEvidence(encoded)),encoded);
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
             const QString dir=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(dir));
-            const QString name=QString("single-pulse-%1-%2-%3-%4").arg(branch?"Branch":"Classic").arg(frequency).arg(count).arg(serial);
+            const auto test=::testing::UnitTest::GetInstance()->current_test_info();
+            const QString name=QString("single-pulse-%1-%2-%3-%4-%5").arg(QString::fromUtf8(test->name()))
+                .arg(branch?"Branch":"Classic").arg(frequency).arg(count).arg(serial);
             QFile file(dir+"/"+name+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
             const auto bytes=QJsonDocument(encoded).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
             QJsonArray rows;for(const auto& row:samples){QJsonArray values;for(double v:row)values.append(v);rows.append(values);}
