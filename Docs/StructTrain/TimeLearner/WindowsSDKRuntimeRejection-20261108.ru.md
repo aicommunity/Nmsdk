@@ -97,5 +97,8 @@ WorkDirectory/EventsLog. Обе ASan native группы passed, но общий
 обоснованно отклонён из-за новых журналов внутри runtime. Подготовлен fix
 `ConsoleLikeInit.cpp`: штатный SetWorkDirectory до Init и новая принадлежащая
 заданию директория `native.test-events-log`. Для прямого CTest без managed output
-резервируется отдельный временный каталог. Адресный ASan gate ещё выполняется;
-возвраты Build/Calculate/Reset и модельная физика не менялись.
+резервируется отдельный временный каталог. Адресный Linux ASan gate завершён:
+4 проверки passed, текущий и прежний runtime неизменны, контрольная waveform
+побитово совпала с прежней. [Независимая сверка](TestLogOwnershipASanVerification.json).
+Windows-пересборка этого исправления ещё не проверена; возвраты
+Build/Calculate/Reset и модельная физика не менялись.

@@ -139,9 +139,8 @@ full `[0,1,2,3]`, omit `[0,2,3]` и late-single `[3]`; исходные ModelSpe
 профили, trained inputs и controller history сохранены.6 новых reader checks
 и7 прежних reader regressions прошли без skipped. Все процессы закрыты,
 reservation снята. [Bindings и состояние публикации](StimulusSubsetConsoleJobs.json).
-Server evidence f79cdc4 создан; Git-передача на локальную машину, независимая
-metadata-сверка и публикация в origin ещё не завершены. Графики и анализ
-наложения по новым пробам ещё не построены. Это не cold retrain и не Test
+Server evidence f79cdc4 передан через Git, независимо проверен и опубликован
+в origin; [receipt](StimulusSubsetConsoleVerification.json). Это не cold retrain и не Test
 классификации, а расширение адресной приёмки диагностического контура.
 
 Подготовлен `stimulus_subset_temporal`: все реальные soma channels на отдельных
@@ -152,5 +151,8 @@ metadata-сверка и публикация в origin ещё не заверш
 Overview содержит полное окно, response-view только приближает участок
 наблюдаемой активности; оба сохраняются. Plot не назначает пики и не считает
 классификацию. Полный HTML/PNG/SVG отчёт предназначен для кэша M40 Data;
-Git хранит primary, метаданные и выбранные рисунки. Рендер и визуальная QA
-нового модуля ещё требуются, локально выполнен только AST parse.
+Git хранит primary, метаданные и выбранные рисунки. Рендер A3 на M40 завершён:
+12 фигур,24 PNG/SVG; две выбранные overview-фигуры проверены визуально.
+[Отчёт](StimulusSubsetControlReport-2026-11-08.ru.md) явно указывает фактический
+порог0,0117. Он не заменяет отдельное исследование сохранённых состояний
+с порогом100: [постановка](HighThresholdSubsetStudyDesign.json).

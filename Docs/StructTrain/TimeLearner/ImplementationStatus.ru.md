@@ -438,3 +438,14 @@ PhysicalInfeasible или отсутствия вклада импульса. Н
 Runtime неизменен, whole group closed/lease released. Это одиночная диагностика,
 не Train, classification или полная принадлежность пиков пачки. Предыдущие
 указания об открытом адресном ASan Console gate заменены этим receipt.
+
+
+08.11: две раздельные ASan-проверки (shared vertex и Branch20k) прошли,
+но общий freeze gate отклонён: runtime изменился только в трёх EventsLog paths.
+[Receipt](AssignedVertexASanSplitVerification.json). Исправление владельца
+тестового WorkDirectory прошло4 native ASan проверки; обе runtime неизменны,
+контрольная waveform побитово идентична. [Receipt](TestLogOwnershipASanVerification.json).
+Это не приёмка Windows-пересборки или полного этапа2.
+Новая интегрированная ASan-сборка schema6 выполняется на M40; параллельно
+готовятся14 диагностических high-threshold проб по точным состояниям
+[постановки](HighThresholdSubsetStudyDesign.json), без запуска Train.
