@@ -88,8 +88,24 @@ dependency hashes, реальные mappings, stdout/stderr, JUnit, closure и
 
 В корневой CMake добавлен быстрый `Test_PulseLib_VerificationAlgorithms` с
 теми же production-файлами и cases, которые входят в StorageComponents.
-Его полный SDK configure/build и повторная native storage/training проверка
-на этом срезе ещё требуются: выполненные здесь прямые серверные сборки
-translation units не объявляются такой приёмкой. Изменения остаются в
+Полный SDK configure/build на Elder теперь завершён: 23/23 cases нового
+target и 21/21 native storage/training cases (17 NativeBurstAssignment,
+4 NativeBoundedTraining) без skips/errors. Исходники root
+`0f03bdca386a59583a3404b8045ce026a147cf07`, PulseLib
+`9e0640964945ad5903a4fff1c5091ebf71a69810`. Новый реальный merged-burst
+контроль сводит два окна к одной измеренной вершине Soma0 и получает
+`shared_measured_peak_between_stimuli` при попытке capture certificate.
+Это проверка честного отказа, не сходимость или классификация.
+
+Evidence `ab6bd5f109f51ee46e527cefad04358adfa1d8e1`: 193 members,
+814392 bytes compressed primary, включая CSV полной native пробы, JUnit,
+runtime mappings и закрытие всей группы. Дополнительно 7/7 тестов reader
+прошли на настоящих трассах Elder, включая повреждения данных. Независимая
+[metadata-сверка](AssignedVertexSDKVerification.json) подтвердила каждый
+archive member и 782 source hashes против Git. Старые runtime неизменны.
+Численных локальных проверок не выполнялось. ASan SDK gate на M40 ещё
+выполняется; визуальный отчёт этого нового контрольного случая ещё не готов.
+
+Изменения остаются в
 `codex/timelearner-assigned-peak-ownership`; merge в develop не выполнен.
 Этапы 6/7 и полный план остаются незавершёнными.
