@@ -352,10 +352,10 @@ template<class Learner> void FullProfileGraphImport() {
 TEST(FeedbackProfileImport,ClassicFullIndividualStateAndRoundtrip){FullProfileGraphImport<NNeuronTimeLearner>();}
 TEST(FeedbackProfileImport,BranchFullIndividualStateAndRoundtrip){FullProfileGraphImport<NNeuronTimeLearnerBranch>();}
 
-template<class Learner> void MaximumNative(unsigned frequency) {
+template<class Learner> void MaximumNative(unsigned frequency,unsigned count=2) {
     // A declared high-threshold control isolates the measurement policy A/B.
     // Archived stock multi-peak responses require a separate Console replay.
-    SinglePulseFixture<Learner> f;f.Make(frequency,2,{},100.);ASSERT_TRUE(f.learner);
+    SinglePulseFixture<Learner> f;f.Make(frequency,count,{},100.);ASSERT_TRUE(f.learner);
     NativeProbeResult old,current;std::vector<std::vector<double>> before,after;
     f.Run(true,Fault::None,old,before,false,true);
     f.Run(true,Fault::None,current,after,true,true);
@@ -367,6 +367,10 @@ template<class Learner> void MaximumNative(unsigned frequency) {
         for(std::size_t j=1;j<before[i].size();++j)EXPECT_EQ(before[i][j],after[i][j]);
     }
     const auto& o=*current.observation;ASSERT_EQ(o.stimuli.size(),1u);ASSERT_EQ(o.peaks.size(),1u);
+    EXPECT_EQ(o.specification.baseline.size(),f.branch?1u:count);
+    ASSERT_TRUE(o.specification.characterization);
+    EXPECT_EQ(o.specification.characterization->physicalInputCount,count);
+    EXPECT_EQ(o.specification.characterization->selectedInputIndex,f.index);
     const auto& p=o.peaks[0];ASSERT_TRUE(p.rawPotential);ASSERT_TRUE(p.time);
     const auto channel=f.branch?0u:f.index;
     double largest=after.front()[channel+2];std::size_t maximum=0;
@@ -382,6 +386,18 @@ TEST(SingleImpulseMaximumNative,Classic2000){MaximumNative<NNeuronTimeLearner>(2
 TEST(SingleImpulseMaximumNative,Branch2000){MaximumNative<NNeuronTimeLearnerBranch>(2000);}
 TEST(SingleImpulseMaximumNative,Classic20000){MaximumNative<NNeuronTimeLearner>(20000);}
 TEST(SingleImpulseMaximumNative,Branch20000){MaximumNative<NNeuronTimeLearnerBranch>(20000);}
+// N=2 is retained in the four original cases. These independent native cases
+// add the remaining required dimensions without changing their old inventory.
+template<class Learner> void MaximumPhysicalMatrix(unsigned frequency) {
+    for(unsigned count:{1u,4u,6u}) {
+        SCOPED_TRACE(::testing::Message()<<"physical N="<<count);
+        MaximumNative<Learner>(frequency,count);
+    }
+}
+TEST(SingleImpulseMaximumNative,ClassicPhysicalMatrix2000){MaximumPhysicalMatrix<NNeuronTimeLearner>(2000);}
+TEST(SingleImpulseMaximumNative,BranchPhysicalMatrix2000){MaximumPhysicalMatrix<NNeuronTimeLearnerBranch>(2000);}
+TEST(SingleImpulseMaximumNative,ClassicPhysicalMatrix20000){MaximumPhysicalMatrix<NNeuronTimeLearner>(20000);}
+TEST(SingleImpulseMaximumNative,BranchPhysicalMatrix20000){MaximumPhysicalMatrix<NNeuronTimeLearnerBranch>(20000);}
 TEST(SingleImpulseMaximumNative,FaultsRestoreBothTopologies) {
     for(auto fault:{Fault::Prepared,Fault::Sample,Fault::FinalSample}) {
         Roundtrip<NNeuronTimeLearner>(fault,true);Roundtrip<NNeuronTimeLearnerBranch>(fault,true);
