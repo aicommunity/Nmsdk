@@ -1,12 +1,13 @@
 """Protocol mutations of actual archived native configs; execute on workers."""
 import os
+import json
 from pathlib import Path
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
 
 from ..historical_model import serialized_neuron
-from ..historical_phasea_native import prepare_case, parameter_export
+from ..historical_phasea_native import prepare_case, parameter_export, write
 from ..historical_protocol_robustness import (CASE, prepare_protocol, effective_protocol)
 from ..native_evidence import EvidenceError
 
@@ -27,6 +28,8 @@ class HistoricalProtocolPreparation(unittest.TestCase):
                     work = self.fixture(temp);before = serialized_neuron(work/"Model_00.xml")
                     order = [(i+rotation) % 8 for i in range(8)]
                     declared = prepare_protocol(work, order, gap)
+                    write(work.parent/"protocol.json", declared)
+                    self.assertEqual(json.loads((work.parent/"protocol.json").read_text()), declared)
                     self.assertEqual(serialized_neuron(work/"Model_00.xml"), before)
                     for name in ("Model_00.xml", "Parameters_00.xml"):
                         effective_protocol(work/name, declared)
