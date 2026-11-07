@@ -118,7 +118,7 @@ Test тогда отказал reader; последующее read-only испр
 Полный кэш всех128 рисунков расположен на M40:
 `/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-pilot-temporal-a5/figures`.
 По каждому из четырёх case находятся32 PNG и `report.json` с hashes/границами/
-максимумами и полным наблюдением. Git содержит исходные сжатые записи, модели,
+максимумами и полным наблюдением. Для просмотра всех паттернов создано HTML-оглавление `figures/index.html`:32 раскрываемые пробы и ссылки на128 полноразмерных видов. Оно проверяет hashes каждого рисунка перед созданием. Git содержит исходные сжатые записи, модели,
 метрики, код, manifest и шесть выбранных изображений. Кэш не является
 единственным источником: его можно заново построить из Git архивов.
 
@@ -144,3 +144,26 @@ python -m Scripts.StructTrain.TimeLearner.historical_protocol_temporal \
 Здесь нет независимых обучений или доказательства общего отсутствия
 зависимости от порядка. Ложные ответы сохранены и не скрываются точностью6/8.
 Полный план рефакторинга и его этап11 остаются незавершёнными.
+
+
+Оглавление проверено на M40:3 tests,132 hashes прежних PNG/JSON не изменены,
+CLI output совпал с library output. Evidence
+`9ac555a816695e38d604d82bd0ff6b0f6f409d7f`; сжатый комплект25 файлов33668B,
+391 source hashes. [Независимая проверка индекса](HistoricalReportIndexVerification.json)
+не выдаётся за browser QA; шесть выбранных рисунков проверены отдельно.
+После восстановления и построения четырёх папок графиков оглавление можно
+воспроизвести командой:
+
+```text
+python -m Scripts.StructTrain.TimeLearner.historical_report_index \
+  --cache-root REPORTS_DIRECTORY \
+  --case original-order-gap1.5 --case original-order-gap3 \
+  --case rotated-order-gap1.5 --case rotated-order-gap3
+```
+
+Расширение до16 условий зарегистрировано в
+[HistoricalProtocolCompletionJobs.json](HistoricalProtocolCompletionJobs.json).
+На старте проверены завершение пилота и архивные hashes четырёх используемых
+case; новых процессов для них нет. Остальные12 условий выполняются последовательно,
+с резервом системы1.5GiB и проверкой свободного места до каждой матрицы.
+Это регистрация выполнения, не объявление заранее полученных результатов.
