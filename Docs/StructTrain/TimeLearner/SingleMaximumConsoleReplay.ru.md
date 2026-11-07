@@ -68,8 +68,8 @@ metadata/capacity очереди и immutable runtime не изменялись.
 
 ## Что остаётся открытым
 
-- ASan проверка физических компонентов нового пути выполняется отдельно;
-  [зарегистрированное задание](SingleImpulseMaximumPhysicalASanJobs.json).
+- Новая размерная матрица N1/4/6 и ASan Console replay требуют отдельной
+  проверки; [physical ASan38/readers25](SingleImpulseMaximumPhysicalASan.ru.md) уже принят.
 - Максимум закреплённого импульса при наложении волн в штатной пачке Train.
 - Остальная обязательная матрица, итоговые эксперименты классификации и merge
   законченного этапа в develop.

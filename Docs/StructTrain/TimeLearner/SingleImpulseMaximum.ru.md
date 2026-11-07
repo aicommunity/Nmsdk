@@ -4,7 +4,8 @@
 созданной от develop с merge предшествующей SDK feature. Полная native/Console
 приёмка нового кода ещё не завершена. [Native38/readers25 на Elder](SingleImpulseMaximumElderAcceptance.ru.md)
 и [unit ASan34 на M40](ProbeAlgorithmsASan.ru.md) приняты в своих областях;
-ASan storage SDK8702 относится к прежнему коду. [Console replay](SingleMaximumConsoleReplay.ru.md) принят; whole-burst ещё открыт.
+[Физический ASan38/readers25](SingleImpulseMaximumPhysicalASan.ru.md) принят
+на Root038/Pulse217; ASan storage SDK8702 относится к прежнему коду. [Console replay](SingleMaximumConsoleReplay.ru.md) принят; whole-burst ещё открыт.
 
 Добавлена явная native ProbeSpec schema5, `single_impulse_maximum`. Она
 разрешена только в диагностическом предъявлении ровно одного импульса.
@@ -77,3 +78,6 @@ CTest label `unit;timelearner` отличает этот контур от по�
 idle-owner конфигурации. Четыре реальные операции воспроизвели архивные
 Classic/Branch single-pulse трассы без изменения физики. Whole-burst
 assignment, ASan physical integration и классификация остаются открытыми.
+
+Новая размерная матрица N1/4/6 имеет [отдельную постановку](SingleImpulseMaximumDimensionMatrix.ru.md);
+принятые N2 gates не объявляются доказательством всех её условий.
