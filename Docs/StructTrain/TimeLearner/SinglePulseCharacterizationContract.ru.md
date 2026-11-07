@@ -168,3 +168,21 @@ LT/Feedback; они не становятся назначенными response 
 Совместный plotter различает в заголовке burst replay и одноимпульсную
 характеристику. Primary должен быть опубликован в Git до построения такого
 verified report. Результаты запуска этого кандидата пока отсутствуют.
+
+
+## Адресная normal-приёмка native API
+
+[Срез rootb5cfae4/Pulse302124b](SinglePulseCharacterizationNativeVerification.json)
+прошёл37 native функций и13 readers на M40. Это включает четыре функции
+размерностей/частот, два before/after burst controls и три fault функции,
+каждая из которых проверяет обе топологии. В первичном corpus40 записанных
+проб:24 schema4 diagnostic и16 before/after burst, отдельно от старых burst
+controls. Exact относится здесь к совпадению recorded ordinates; training
+certificate не создаётся. Проверки не устанавливают пригодность произвольной
+физики, всей lifecycle/storage матрицы или итоговую разделимость.
+
+Две ошибки стенда сохранены: первая запись файлов под одинаковыми именами
+между тестами; затем неверный каталог reader corpus в оболочке. Все37 native
+tests второй попытки прошли. После исправления пути отдельно выполнены13 readers
+на тех же исходных файлах, без нового расчёта модели. ASan, второй сервер,
+полный fault scope и фактический stopped-model Console job4 остаются открытыми.
