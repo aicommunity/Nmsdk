@@ -1,0 +1,4115 @@
+{
+  "kind": "original_packaged_pipeline_fixtures",
+  "schema_version": 1,
+  "archives": [
+    {
+      "root_commit": "73f2a713e2630dbad67590931073052126db43d8",
+      "path": "Reports/StructTrain/TimeLearner/s09-native-live-training-worker-asan-a1/primary.tar.xz",
+      "git_blob": "fcb0c814348c3599f694710a43f55421f52428b8",
+      "bytes": 1225484,
+      "sha256": "5ac8bc7e633ca8194bca9aa1131c58c621a417068eba51d6e282e31c5afe58de"
+    },
+    {
+      "root_commit": "73f2a713e2630dbad67590931073052126db43d8",
+      "path": "Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-normal-a3/primary.tar.xz",
+      "git_blob": "03814fa76d61957065b460e7e8d5e4dfa9896b8c",
+      "bytes": 28236672,
+      "sha256": "85b35a222affd76f112ed34afe6f58e0d8b195d47b0863793fa907d4e5d7662d"
+    },
+    {
+      "root_commit": "73f2a713e2630dbad67590931073052126db43d8",
+      "path": "Reports/StructTrain/TimeLearner/s10-native-managed-preflight-a3/s10-native-managed-preflight-a3/primary.tar.xz",
+      "git_blob": "cfdc753c570a7d374203d8a0d7122c0a17ddbb75",
+      "bytes": 84992,
+      "sha256": "c1b097983374744fb05a0f57a8ffa51960e22e3170509ce604ad378d6621192a"
+    }
+  ],
+  "cases": [
+    {
+      "label": "legacy-train",
+      "archive": 0,
+      "prefix": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/",
+      "schema_version": 1,
+      "operation": "train"
+    },
+    {
+      "label": "legacy-evaluate",
+      "archive": 0,
+      "prefix": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/",
+      "schema_version": 1,
+      "operation": "evaluate"
+    },
+    {
+      "label": "cold-train",
+      "archive": 1,
+      "prefix": "evaluation/source/runs/Classic-threshold-training100/",
+      "schema_version": 2,
+      "operation": "train"
+    },
+    {
+      "label": "cold-preflight",
+      "archive": 1,
+      "prefix": "evaluation/source/preflights/Classic-threshold-training100/",
+      "schema_version": 2,
+      "operation": "preflight"
+    },
+    {
+      "label": "diagnostic",
+      "archive": 1,
+      "prefix": "evaluation/runs/Classic-threshold-training100/",
+      "schema_version": 3,
+      "operation": "diagnostic-evaluate"
+    },
+    {
+      "label": "contained-preflight",
+      "archive": 2,
+      "prefix": "native-controls/Classic-N0/run/",
+      "schema_version": 4,
+      "operation": "preflight"
+    }
+  ],
+  "files": [
+    {
+      "path": "files/cold-preflight/input/job.json",
+      "bytes": 4133,
+      "sha256": "0478481ea99d9403c01938d1e197acd637478d17e2e877b76a2e9bfbad30eebb",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/input/job.json"
+    },
+    {
+      "path": "files/cold-preflight/native/execution.json",
+      "bytes": 4233,
+      "sha256": "0763d2ef13fd7c78add4ca159b3560148f56950a0a0171c8b42778f5c0625091",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/native/execution.json"
+    },
+    {
+      "path": "files/cold-preflight/native/initial-state.json",
+      "bytes": 222098,
+      "sha256": "67914a5fe43fac6135c52ef190c788f57c6163b0bcbea565c6a529902b0bb01c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/native/initial-state.json"
+    },
+    {
+      "path": "files/cold-preflight/native/job.json",
+      "bytes": 5177,
+      "sha256": "32fb407eb98ddf45f2b4ddabf7b5150aecec2bfe63248d5cd62599eb2c13e418",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/native/job.json"
+    },
+    {
+      "path": "files/cold-preflight/process/capture-ack.json",
+      "bytes": 114,
+      "sha256": "08801aa3e145455ea4d8f5c36b6d12b1a3b7443a11b6ecace8fe63c07f969a0b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/capture-ack.json"
+    },
+    {
+      "path": "files/cold-preflight/process/capture-ready.json",
+      "bytes": 98,
+      "sha256": "1633bf7ef5c88e94ed484a94329c9222e87a8f942a71b970dd3719d078288f16",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/capture-ready.json"
+    },
+    {
+      "path": "files/cold-preflight/process/loaded-files.json",
+      "bytes": 4495,
+      "sha256": "b79d2c7dee45f348cd57ef9d8f79150dd472644904c0bbda8691bc41a5971034",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/loaded-files.json"
+    },
+    {
+      "path": "files/cold-preflight/process/owned-process.json",
+      "bytes": 395,
+      "sha256": "32cb2df251991a4fbdd207fcf28bb5923f8851eacf0c46e0798bdc48d1f4ded8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/owned-process.json"
+    },
+    {
+      "path": "files/cold-preflight/process/request.json",
+      "bytes": 1011,
+      "sha256": "cc12af5e48c4ca12d24c2a2c806ed775553788937246d63b0239305ddd0d90c1",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/request.json"
+    },
+    {
+      "path": "files/cold-preflight/process/result.json",
+      "bytes": 444,
+      "sha256": "152f72dbd501d903a239d89182eeef82c62f3e2fcb39698f6b9ce9e369bec077",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/result.json"
+    },
+    {
+      "path": "files/cold-preflight/process/runtime.json",
+      "bytes": 12192,
+      "sha256": "bc99f10a06fe65cf0b9b181f87992f46b685cc07a60c2f46008fd5493b0c1689",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/runtime.json"
+    },
+    {
+      "path": "files/cold-preflight/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/stderr.log"
+    },
+    {
+      "path": "files/cold-preflight/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/process/stdout.log"
+    },
+    {
+      "path": "files/cold-preflight/run-manifest.json",
+      "bytes": 17150,
+      "sha256": "4d27862bf71e46f0d1f00674ea9d6ebae0deaf7277eb3b3b3cea5f94e98683ff",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/preflights/Classic-threshold-training100/run-manifest.json"
+    },
+    {
+      "path": "files/cold-train/input/job.json",
+      "bytes": 4133,
+      "sha256": "0478481ea99d9403c01938d1e197acd637478d17e2e877b76a2e9bfbad30eebb",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/input/job.json"
+    },
+    {
+      "path": "files/cold-train/native/execution.json",
+      "bytes": 42252,
+      "sha256": "c53c6db0e284d2697b376c35d7d31e64b4c01c762de5769587a15363069e7960",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/execution.json"
+    },
+    {
+      "path": "files/cold-train/native/initial-state.json",
+      "bytes": 222098,
+      "sha256": "67914a5fe43fac6135c52ef190c788f57c6163b0bcbea565c6a529902b0bb01c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/initial-state.json"
+    },
+    {
+      "path": "files/cold-train/native/job.json",
+      "bytes": 5177,
+      "sha256": "32fb407eb98ddf45f2b4ddabf7b5150aecec2bfe63248d5cd62599eb2c13e418",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/job.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_state.json",
+      "bytes": 4212537,
+      "sha256": "41a39c07c5934669796b185d02dd4074e66f933b72d921571932e171e6437fb1",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_state.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_summary.json",
+      "bytes": 15886947,
+      "sha256": "d34efb2b05c40cbcb958f26adaf08cc4ab6b109a0aab0da859e087c4d968d83e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_summary.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_1.csv",
+      "bytes": 390311,
+      "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_1.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_1.json",
+      "bytes": 6820,
+      "sha256": "eaa2fcf4e24e0bfdf7a0e08725b3ee95932218cd0ca8040dd64c5ea918f574ac",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_1.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_10.csv",
+      "bytes": 389873,
+      "sha256": "ae507ad6b8d2692ba70ed2783b5f76c530efa678c39e19a41c1b75e77452f89d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_10.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_10.json",
+      "bytes": 6952,
+      "sha256": "56cbe95e581b0ea9b70876e1aef01af87c99ba5b1e944661a7bc70ce3cbaf600",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_10.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_100.csv",
+      "bytes": 388200,
+      "sha256": "2686e41e63e1fccd3d6b1feaa9540bc2526cca89c2587b1d65aa4feab7ba9bc8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_100.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_100.json",
+      "bytes": 6981,
+      "sha256": "0701042d9ff0420f1a6382c5b3c338102b8a88f928997611bc46a0286aa11a3d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_100.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_101.csv",
+      "bytes": 388307,
+      "sha256": "6dc9463b6305c0df472a40e0b3e377e594137d662c96bbbd8a60405dcc75b665",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_101.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_101.json",
+      "bytes": 6976,
+      "sha256": "f1d24153a7de1bdb26cc58244acc821f8df00d35126ffaa14892f2f083b3c029",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_101.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_102.csv",
+      "bytes": 388307,
+      "sha256": "cea4516046cbac9f263f2b41dc97574299e8d59ba915d3821d11bcf12644614f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_102.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_102.json",
+      "bytes": 6979,
+      "sha256": "10ecdb209526699ace74aeadf15ba404592759c5d405b461d4244b47e25e6297",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_102.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_103.csv",
+      "bytes": 388418,
+      "sha256": "5afe136e37fa6f2e11e950ccd534cf89a48a2f6191497fceba81d11f308ede45",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_103.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_103.json",
+      "bytes": 6976,
+      "sha256": "f0ca8c3b08adaae41c89b40db79ccd74104aa99667311f73fced84d6178aa07c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_103.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_104.csv",
+      "bytes": 388433,
+      "sha256": "f6afeaaa7926721c16a2a312c00bde02f86d722a354814262fbf15f514b2335c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_104.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_104.json",
+      "bytes": 6979,
+      "sha256": "55bd99fd31e9b680d33268d44c45904e5d9879ec69b4067c72d55242550d8a6c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_104.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_105.csv",
+      "bytes": 388620,
+      "sha256": "7f6b93c97f030dfd60e6c80f8ed13a628b99b27a67b165f00535cbaad3f251f4",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_105.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_105.json",
+      "bytes": 6976,
+      "sha256": "03a94051501d47fa744dddd002788acb3257fe642a52cc373ccbbdf82633a80d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_105.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_106.csv",
+      "bytes": 388624,
+      "sha256": "0824942f67f85c396a977c88086b7c9dfeb5416a97e69d71badab16aa12340b4",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_106.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_106.json",
+      "bytes": 6983,
+      "sha256": "e0fad69e8746e3d527138231167a205c3b9da4182c8c84b0e926a8fd016df15a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_106.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_107.csv",
+      "bytes": 382000,
+      "sha256": "8f599898ca3e0bdd22d07b76657dbe721f6fe76b69afbc0db3c9223a449c1dcb",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_107.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_107.json",
+      "bytes": 6965,
+      "sha256": "1bea086940f472b968a578e350a577b96ffb1edca630222a33bff1f449e061bd",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_107.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_108.csv",
+      "bytes": 381997,
+      "sha256": "0ead0fc277fe5e6755ac4500ff2b4067576ede3bb26e0cb5732e7b9cd16b36db",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_108.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_108.json",
+      "bytes": 6576,
+      "sha256": "c06c3953146a60f21bca6289a92083f7366d9e649a3ecd352a09d0ccc9a2bd1c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_108.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_11.csv",
+      "bytes": 389557,
+      "sha256": "00c983de4f5014a8e2caaaae8b71f7e6609c6586af28ae7beafa727dfc03e8ab",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_11.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_11.json",
+      "bytes": 6954,
+      "sha256": "6321cc4fb339cc24eb1a0cb33174b2eee366db4d4727291a80248168529e1df9",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_11.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_12.csv",
+      "bytes": 389531,
+      "sha256": "37745a5acf03ea115bedb1f620bffba786b864ba8c99e889d188a1b833f0b974",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_12.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_12.json",
+      "bytes": 6956,
+      "sha256": "5ef8d75b765a8b69149d263614a55606cc1428ad005f3da1ff9ddcc08cd64c79",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_12.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_13.csv",
+      "bytes": 390044,
+      "sha256": "30275412d19e4e7425d7fcfecbacb97f6fe628da618032582ac1a56ea344758d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_13.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_13.json",
+      "bytes": 6943,
+      "sha256": "18ee8db575068f9c81e88b92b807659563982ffbda03f52ba3babfeed4273591",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_13.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_14.csv",
+      "bytes": 390067,
+      "sha256": "1837e47aa1bf7ccaf51438255d069904325208ec0217085872f5619a8b3343ab",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_14.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_14.json",
+      "bytes": 6949,
+      "sha256": "0a2bd45ae8104af174ca2ffab7ce99b6017357e2477688021370da2b345f5ee7",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_14.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_15.csv",
+      "bytes": 389404,
+      "sha256": "2337f8fdcd701f7396f1c334c5eb546003a33ff1e8498280beb9f02228578161",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_15.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_15.json",
+      "bytes": 6954,
+      "sha256": "fd4e81adb6f0cdfdc2a96d9daf3b41653384bf0c834f60ce11324a7a5e1aa638",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_15.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_16.csv",
+      "bytes": 389455,
+      "sha256": "9d99ed406cd044ededd0967221792f138d4803a37c43ee8525271487a5bcb765",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_16.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_16.json",
+      "bytes": 6941,
+      "sha256": "598a2113576ec47fcb38c42a8c408830e0fdee0d066e6caeb33d7b9cd2d03e26",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_16.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_17.csv",
+      "bytes": 389679,
+      "sha256": "c9c6517e048bfbf90da5dfb685c18c8d67108097b4cf05b3b53f409c9c00ef5c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_17.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_17.json",
+      "bytes": 6955,
+      "sha256": "1a006d0d094666d20d66ae93dcaa155d757689a2888f4d7cee88163d8179ee0a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_17.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_18.csv",
+      "bytes": 391057,
+      "sha256": "8e6ad444a2258113023a48eb67e564fff75d42b5509a05da514963e8d539b3e1",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_18.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_18.json",
+      "bytes": 6943,
+      "sha256": "f76ceb92a0d9833690dd36ba1272019330c567eb66540408fc5960a01097897f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_18.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_19.csv",
+      "bytes": 395925,
+      "sha256": "13ee308ea1f8a10304c9008266b39a6f1c66edf24a007c536c63de91a1966429",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_19.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_19.json",
+      "bytes": 6977,
+      "sha256": "135233cc8e9c4d51c30194163815619eb68e92558c2c3f1b38d57787bc6b5a6d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_19.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_2.csv",
+      "bytes": 390350,
+      "sha256": "8ddfea15819556237a2ddbc779a877d13824150e9f692b8cfd8df99f6dc28063",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_2.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_2.json",
+      "bytes": 6984,
+      "sha256": "675e34e6b16c5f48279cca5b5c279fb2264ba48b3ceb1ea4701c88b685877644",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_2.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_20.csv",
+      "bytes": 395924,
+      "sha256": "5cb803a4cca2fa99908d20491e89fdf5542c38de71b26dee6ec0089bb1246f65",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_20.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_20.json",
+      "bytes": 6944,
+      "sha256": "a44637f57ed7cfc851757cda25048e597a3838be220406d885c3e9630895f2b2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_20.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_21.csv",
+      "bytes": 396190,
+      "sha256": "cc636cdb491bced2476197d68bb3e112623e850e34fcf0cd4f5d3c540c8cf219",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_21.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_21.json",
+      "bytes": 6950,
+      "sha256": "1f471e4485e725f8452358199d1539634f818c7213880f35381ac0871886882e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_21.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_22.csv",
+      "bytes": 396221,
+      "sha256": "e7387415888e9c74509bab505fe3079cf3b400d498b1928fb6225f923b0fdb1d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_22.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_22.json",
+      "bytes": 6954,
+      "sha256": "99a5735ab567a91853a5e754042d4777dfd11af8e3d1383f1a396b7ade65bb92",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_22.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_23.csv",
+      "bytes": 395432,
+      "sha256": "58ebfebaf8984cd4b4db135a2231043175c125b12816353227e5eebf306d8ecf",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_23.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_23.json",
+      "bytes": 6970,
+      "sha256": "1567895fa7e117be9c9bab66b74ccba1a36e166a8289929dd61249a97ae0091f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_23.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_24.csv",
+      "bytes": 395373,
+      "sha256": "806d7d411af2e5f0f7c92282060023a829840fce7371a61c400d368fffd96a43",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_24.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_24.json",
+      "bytes": 6973,
+      "sha256": "324f2d2f4b3f6fd58ab68abdf97820ad6efbb2548687b15658465f1c3c92421e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_24.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_25.csv",
+      "bytes": 395451,
+      "sha256": "7f0224e2af7cdd15c337f3a729cba6d396d9ec16811216b3e36c3cf896574149",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_25.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_25.json",
+      "bytes": 6951,
+      "sha256": "2ed967265ac3198b3a0814a887d6ce31fec684b7ca1a0b9e41c41d7ed71deb9d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_25.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_26.csv",
+      "bytes": 395478,
+      "sha256": "b5a2d33d99fbf97d5bf91c79c2f60edca179ae6a500845b20749227212bc343b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_26.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_26.json",
+      "bytes": 6938,
+      "sha256": "802fdfc4b426d3f27726753ad6e8171819d1e91d37e498a367114c4254700cec",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_26.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_27.csv",
+      "bytes": 395656,
+      "sha256": "d3d5389a44388a4aca9a5e652664646fba506a1e5a5c55f6c57c241d7acc3a22",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_27.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_27.json",
+      "bytes": 6978,
+      "sha256": "26fb670d6893ce508c2a1c1bf66510c1637fc960db99307b90f4d996b4cd3a88",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_27.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_28.csv",
+      "bytes": 395656,
+      "sha256": "0150736310a1ca0a70e9aa163cfdfc40e6d58751856d3645c8d2c21831d9a9e8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_28.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_28.json",
+      "bytes": 6965,
+      "sha256": "78b782c131d0b360e35dd9bed7512035b3d19c414d19811c0bcb8e10f30baad5",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_28.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_29.csv",
+      "bytes": 395705,
+      "sha256": "b05b504cdecef843f10c988a54b583f32f6137eaf9d2f4d83f92eb4698ebca50",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_29.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_29.json",
+      "bytes": 6952,
+      "sha256": "1d0397593e434a5139207764bba20a82879e7dcd177240204bfd4d1ba8a8e02f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_29.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_3.csv",
+      "bytes": 395374,
+      "sha256": "e627199cf2a9277ab6b5544bd590ca2843b4dcdfdbc564fb89602955270e821d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_3.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_3.json",
+      "bytes": 6958,
+      "sha256": "b419d9c045d131dd8a8d72d3c7de65b5e1bf22b2749dc4deb1621f3e1a55b19b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_3.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_30.csv",
+      "bytes": 395693,
+      "sha256": "dc296bfcf1860fa5cde9bd5ebc519f5b70a2508e4b51f6cdbda93cd2f81d08c9",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_30.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_30.json",
+      "bytes": 6952,
+      "sha256": "70ed7732f6e648de0c2bde18c566fb04d071a81fc96f95873db2faffa4d7c52b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_30.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_31.csv",
+      "bytes": 395865,
+      "sha256": "63d77d29df66cf8ca56aec9619d20c9e62c98193b407f82a115f6cbf99987f91",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_31.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_31.json",
+      "bytes": 6977,
+      "sha256": "684c1e97d9bec31bc91f47e41857790767e15660ee56788e31d3265aae99244b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_31.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_32.csv",
+      "bytes": 395931,
+      "sha256": "4e2a9a826d913f4ffe5c3293bec3b0f56555c70bda691481cf04c3a9e9c11044",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_32.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_32.json",
+      "bytes": 6972,
+      "sha256": "f3de48a10064cbf391fe325c7280020990ba8ec77c2b6080bc17f4a4a840123d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_32.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_33.csv",
+      "bytes": 396062,
+      "sha256": "fdfaeceec57fc0e422732ae44db292d258418453522c0be15744ea901f5fcfbd",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_33.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_33.json",
+      "bytes": 6943,
+      "sha256": "f2fd9d9efe903f1f1306877d7a7baca92029e0fbcedf3aa5d5d65d89d27ebd3c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_33.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_34.csv",
+      "bytes": 396017,
+      "sha256": "7a45f0991d6595a7ddf38084fa1ed7c916cde2f5a829deb74b01a71e8cbca8c7",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_34.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_34.json",
+      "bytes": 6950,
+      "sha256": "ca1b3d6fa017e38b813911b5d030815f7f6a98a535dfc1b5a49133e30645f619",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_34.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_35.csv",
+      "bytes": 396053,
+      "sha256": "3ff93172461c03a7007bab36a8665f23182377934005da40a5767dce241ff73a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_35.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_35.json",
+      "bytes": 6953,
+      "sha256": "64f4300f8f8f8a45cd5fba9d5e29fd36539d2b8fa78dcde5e624bbb6cef89af0",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_35.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_36.csv",
+      "bytes": 397308,
+      "sha256": "c26bd64e7018be8fb68bde9154f406e34551387eadd591fb46070aeb271eac11",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_36.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_36.json",
+      "bytes": 6950,
+      "sha256": "8ce9b6e18070f63fafd92eb9c41c8eb471c9fb178a6c212c39dde0e8cf506b02",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_36.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_37.csv",
+      "bytes": 398855,
+      "sha256": "8bc1a77bdcd7c9691829fda90cea9d44b37ed9825dab4698bd2d1d464219ae60",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_37.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_37.json",
+      "bytes": 6955,
+      "sha256": "22cfbb2a9048400ec78d094516aedb2792693199f59e2a64574ef5e5604aef2a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_37.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_38.csv",
+      "bytes": 398896,
+      "sha256": "b42fd6216d17a75dc6df74a8c1adb8ac7029e401c83ae560e000005dd336fb5b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_38.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_38.json",
+      "bytes": 6948,
+      "sha256": "5e3fa3e8033002f3ffa504ebd287214a6b6fde3e5a02f4e3b51d38f9d0941bdf",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_38.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_39.csv",
+      "bytes": 398895,
+      "sha256": "a4c66569791979d4acaca2e74074d56573f7a3bf19dd90e8a184b63a8667c09f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_39.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_39.json",
+      "bytes": 6974,
+      "sha256": "db4b21af6382957ceccb888bf97c3b561a3507e9972b91620252ae8178c037b9",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_39.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_4.csv",
+      "bytes": 396515,
+      "sha256": "79ebf30908e004676acb3dee0de592f19d8ca6b9a06b37be8ec4816656814483",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_4.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_4.json",
+      "bytes": 6959,
+      "sha256": "f7ad63ab20c29eac4295c3e97c7a7250751b04edb33490a6ee55fa7e536fa76a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_4.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_40.csv",
+      "bytes": 398841,
+      "sha256": "3bbbc9040ab2769a8dd20c63851e7c929c61ddf61e1e380b11576f74778a531e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_40.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_40.json",
+      "bytes": 6970,
+      "sha256": "52b201a3a8268b96ff08cddcc438ff17115a05bb0a0dd0a35410fd0ca5aa73a1",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_40.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_41.csv",
+      "bytes": 397765,
+      "sha256": "0b3ead1b5681f0b91c7d055dff13dee6d5d1c00a3bf7fd0a0d79331722cd1e24",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_41.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_41.json",
+      "bytes": 6954,
+      "sha256": "71f22eceeafbe7a05ae2336fd0e98adef92526c006e7d539a9090ef0ff002f33",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_41.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_42.csv",
+      "bytes": 397753,
+      "sha256": "606ab81545f508867d71c6f9c48cb0b90a3a51f7e7fbf82a98977b9e4dca94e0",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_42.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_42.json",
+      "bytes": 6940,
+      "sha256": "b7c9e2e9fed1ce8e551b328c735e86d2a8a79155766dd14695f49b6d765c1c47",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_42.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_43.csv",
+      "bytes": 398409,
+      "sha256": "d42f86c41f238333cf303ef8396ca15108f9d80440c35bbf6c490921f457681b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_43.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_43.json",
+      "bytes": 6954,
+      "sha256": "d9780b91a5107d37c8eb03e7a8fc3fcbb2717363077f74ebf8ca24b56f160115",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_43.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_44.csv",
+      "bytes": 398417,
+      "sha256": "a3056dd9c629fe5b0a2c8c3f094c330b3272ab9f7921be75bd1a9b7289866948",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_44.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_44.json",
+      "bytes": 6937,
+      "sha256": "036ecb197f09cb657fd6382cecc3d4fa938898755030ad5e798eeb0449634006",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_44.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_45.csv",
+      "bytes": 397956,
+      "sha256": "8858d9d90d3e5dc9e168481f436d1f30aa26b42a2d949131fb91a3f7028dbc0b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_45.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_45.json",
+      "bytes": 6953,
+      "sha256": "74acee16e47528843f85124a93223c6ea8d26cb4c824056909491ef457590b53",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_45.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_46.csv",
+      "bytes": 397945,
+      "sha256": "dcf32afe4367556efe532ea0eab8bfe0e2ad9c18c24ef3b20242792dd585c3e7",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_46.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_46.json",
+      "bytes": 6943,
+      "sha256": "f23bc31ecca9d8fceb08ab8443445c6b7cda5146efe9c1a8ed7644ca1303a483",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_46.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_47.csv",
+      "bytes": 398515,
+      "sha256": "d4d0ecc7d4b835c109cac9264ef400925d864a3e8dcb9cae861a913235cdfcc3",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_47.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_47.json",
+      "bytes": 6954,
+      "sha256": "b7548fcb70c86432641bcf804ecfe3bf546597c4f61144dacf21d9f455c9d1b2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_47.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_48.csv",
+      "bytes": 398547,
+      "sha256": "4bb3e0e80bb254af8d46bb15145115b7ad717b9bf18d87b329a926ba463953e8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_48.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_48.json",
+      "bytes": 6957,
+      "sha256": "09ec00e887f16861dce232c0a5d00fc970e959a00107c241614a8b2f04a698f9",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_48.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_49.csv",
+      "bytes": 397873,
+      "sha256": "fd65481c44908715b0b10cb34c9bfa6a2ef801a03e4d4a1cf07b28d7f98ff029",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_49.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_49.json",
+      "bytes": 6954,
+      "sha256": "7a8256f78b0f06a1729e92e63b9dbef4a2c3cd0feb85c44ab82b294d3e1cdf55",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_49.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_5.csv",
+      "bytes": 398095,
+      "sha256": "dcc36516b817831980dd14e9e27866f821fb0b15af5e48afedcebcc467c2a7f9",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_5.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_5.json",
+      "bytes": 6934,
+      "sha256": "09fb7830368228d78e56fd47bac8e13aefcd40ea1857e05c79fd71c40df6fd6c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_5.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_50.csv",
+      "bytes": 397858,
+      "sha256": "a9ccca5288ef30aeab7bc1339ed3d2bf28da18a9b664fde8b75e14c89246a349",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_50.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_50.json",
+      "bytes": 6933,
+      "sha256": "e0e6b388c7b90faa40582dcf0414a7c04f3b7b0e863d5bfbafd0cf7211a86e3a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_50.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_51.csv",
+      "bytes": 398200,
+      "sha256": "298f55e34c756d574bd71a16e8a491bd371b22428e0b299b98332ba213a41848",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_51.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_51.json",
+      "bytes": 6953,
+      "sha256": "dae9f65f84b1e4854d5a85e7318a15b741b4afc3cccc09f88e96c7c465d2abf5",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_51.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_52.csv",
+      "bytes": 398188,
+      "sha256": "1f42ba929125910b68122c52777aee7b7c0f4f665c855fa95a59e9915c9b338e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_52.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_52.json",
+      "bytes": 6938,
+      "sha256": "d80ddc055f42105cb1ea26dfa3736ffe563d65fb6e6bda988f0ac61cd6d70e80",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_52.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_53.csv",
+      "bytes": 398443,
+      "sha256": "c10db0e023c05c4ddb63055d697895907d300cbe13d482c24768e1e398c6299e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_53.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_53.json",
+      "bytes": 6974,
+      "sha256": "c66e90732039a569e4d326d10d6f1630c0f16e594e9a620e07747b187dacf8e4",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_53.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_54.csv",
+      "bytes": 398480,
+      "sha256": "ab22fd64fe32fde14a34f1d9395ce2c75a879ef60704227a7721cbc80fde5fde",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_54.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_54.json",
+      "bytes": 6976,
+      "sha256": "d605ad413e1099a2bfa35d5c0a8618f1c3e5d0a77aa658b6b4981b9a02ba8001",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_54.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_55.csv",
+      "bytes": 398719,
+      "sha256": "d4b8e21e41f6b0290c48297eb85ba089b6173325cb30bde517edfe5382cd08c5",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_55.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_55.json",
+      "bytes": 6956,
+      "sha256": "9383c8cd2f0948b7589331dedb5c21a14e48d86cdc7bcd755b9dde2324635914",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_55.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_56.csv",
+      "bytes": 387573,
+      "sha256": "b0ea2336b3e665c92d74a5df2b6170d8bf9117ba844fd295db6272f921de86ec",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_56.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_56.json",
+      "bytes": 6952,
+      "sha256": "0f208f2b776fe386209513852de5ea969d652db0e884ce1cc07bf8a982aaacf3",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_56.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_57.csv",
+      "bytes": 374327,
+      "sha256": "53c26f1f842f93706db7a315b29b4e8973d3e6cdf92dded628d547fa2716ec18",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_57.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_57.json",
+      "bytes": 6975,
+      "sha256": "f3d5c59601be783b627a62d3c2d9c92b703eedab9e43c9ac42fee1f29498c859",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_57.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_58.csv",
+      "bytes": 374329,
+      "sha256": "c16ca02b1f90c9ded6c9d2f149b85a99884a8c23fe4285f5654f8f72de3453bf",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_58.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_58.json",
+      "bytes": 6960,
+      "sha256": "403688d9f28f85878c955ddd27dd5416aa06a622b5712314102795e6e0ce6875",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_58.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_59.csv",
+      "bytes": 374455,
+      "sha256": "ca79b36f1151cb03c71f4d6ac78edf1fea4a0fcc6aaa29c27664be7809bd240f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_59.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_59.json",
+      "bytes": 6974,
+      "sha256": "0c9047bf269daaabc1748c44a84cf5e088bad9a2c5281555261bbb2d96e32ac7",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_59.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_6.csv",
+      "bytes": 389997,
+      "sha256": "bd547a2f8203f8fd8f807cd7941a98953b040dae96a44be724125a8c78ce09a3",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_6.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_6.json",
+      "bytes": 6937,
+      "sha256": "cecc5fa786972c5ae835eed8bd3bf10cd0d8a3ab51de2a9f0abbdcc2703a2b1d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_6.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_60.csv",
+      "bytes": 374498,
+      "sha256": "d2bb0a5c68aad459ef9621a0a430faedde4faabdf6e0d11b245d505f5490cc1f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_60.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_60.json",
+      "bytes": 6957,
+      "sha256": "d528b415f496707627189948948841f7159779b64ecb67c0a80f501f48e9d906",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_60.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_61.csv",
+      "bytes": 374617,
+      "sha256": "da05d4ed552e34de18cc5fd5b7315902ef4d18e411dea9e06449bfd76dccb7be",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_61.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_61.json",
+      "bytes": 6995,
+      "sha256": "803f0a3b2c124b53ff6397adeb34dfd442a4ce522d2e5ce2c51ee1464047336a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_61.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_62.csv",
+      "bytes": 374612,
+      "sha256": "7707e4196cd55a0b565fa1bd6460267d81dab8f3978d1544336f0782b58e32a6",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_62.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_62.json",
+      "bytes": 6991,
+      "sha256": "194cdc75b6f7dfb9d7539310b8a4189b08d7a1d972da60c5fb9029d167f5069e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_62.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_63.csv",
+      "bytes": 374870,
+      "sha256": "506539fb48163a884fb14b61ccf4745ab61e86232f45fe754038316a3bf3b89b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_63.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_63.json",
+      "bytes": 6975,
+      "sha256": "00c4feef816164625d740aba948d206482b0f9ee997463d40af5c5e46f9ea2af",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_63.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_64.csv",
+      "bytes": 374865,
+      "sha256": "f1e3063d9c1e49d5fa189dc4bc6e8db2eef3a3e62ef04f868273498ca5def169",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_64.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_64.json",
+      "bytes": 6957,
+      "sha256": "2e672772dfac35fc9301a21f723bdeef1243b518d136211e60ef8046a76aae56",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_64.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_65.csv",
+      "bytes": 374950,
+      "sha256": "a74ff3b9a3591e31ccb90d9a74da172649c3e12c6e2faa20b6fbe91da533bdcd",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_65.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_65.json",
+      "bytes": 6975,
+      "sha256": "b92b478557fd456c14fc80d253f8cdf6ad93e29f8fdad4310bed050d32b6f3e2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_65.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_66.csv",
+      "bytes": 374952,
+      "sha256": "fedd2e332347615743de754ec264d582f43fe24438bbec120dee17d3cb1bf1d8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_66.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_66.json",
+      "bytes": 6970,
+      "sha256": "b96fdf8ee694989d0c656c5de315b5d182aaf788122ce190c9cd1056f62f1eae",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_66.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_67.csv",
+      "bytes": 375066,
+      "sha256": "25e5b3b4588cc9606beef06e78bb9ab94eb998d7fb991d7dcac7341855ebaa6a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_67.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_67.json",
+      "bytes": 6974,
+      "sha256": "a9a6ae9832c3efd24c170c343c656554b2a4997204479e59398f2ad04c7c13b9",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_67.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_68.csv",
+      "bytes": 375069,
+      "sha256": "b9b246b389d4d992125f508b9d19499cece6e6068b59553a1eb66c67c0bc966c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_68.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_68.json",
+      "bytes": 6973,
+      "sha256": "25b18ff5dd808b55f5115bb0ab81968f24eb00c9ec1f9e7c49f515f9d57f2c8b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_68.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_69.csv",
+      "bytes": 375189,
+      "sha256": "c484141386575aebfd24ba140120f29fd4c98bd59f1eb441a506e62853baca5d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_69.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_69.json",
+      "bytes": 6975,
+      "sha256": "06ae3277d7cd381fc9836551abf426a05b2eaa3ef41bbcbf02626e2f157bcab6",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_69.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_7.csv",
+      "bytes": 377324,
+      "sha256": "4766cda7cfa12ee15d2b05838160dbd0e10b4d6c697f7bcadf172d9e83814fb7",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_7.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_7.json",
+      "bytes": 6977,
+      "sha256": "136479770f79c2f7eaab71530c3267ef57682e1f606921d66be88de9d05e657f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_7.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_70.csv",
+      "bytes": 375191,
+      "sha256": "b80b5434e378067c53fcf0ffa3f1228c2921b26fe74313f7560826049d7f83a0",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_70.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_70.json",
+      "bytes": 6974,
+      "sha256": "89a0741a6c135b8d881d035fdea00f151c5d44c7c606a3fadedecfddc9c11b7d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_70.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_71.csv",
+      "bytes": 375355,
+      "sha256": "d29ba8fa621eb6e384fb6f7936fa90ea8234a4a0e276254d833eb47bb8b3a46f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_71.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_71.json",
+      "bytes": 6975,
+      "sha256": "e7552ca6b146f324def3487f4fe6d2df4dcaa00a8886939c3473a8edbf378b88",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_71.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_72.csv",
+      "bytes": 387705,
+      "sha256": "0c03da63b79072e30662ac9e292894eea3fc1e5c6119ce616e2d6440d1217845",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_72.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_72.json",
+      "bytes": 6969,
+      "sha256": "0194a15ed376a5bf88b0f271a2758f83c63f0c47a2981d73a4f94860478ba5b8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_72.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_73.csv",
+      "bytes": 388758,
+      "sha256": "20c3ee66f34b8307ecc357ea026d6d78311d67215745b8d66cf24159baf96223",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_73.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_73.json",
+      "bytes": 6976,
+      "sha256": "68284a2de0f9901dee525f97df317da46c7809bcd2ef9181bc36d16bc9fb93e3",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_73.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_74.csv",
+      "bytes": 388759,
+      "sha256": "7cb37b1bdf6ddb6529cbb05052b609b21548c0942b9e9d048ddf6bae0281f733",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_74.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_74.json",
+      "bytes": 6987,
+      "sha256": "4d925d74b5ff894109643be4351d3e5e052ec314e499a4cacbb3c404fca253f5",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_74.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_75.csv",
+      "bytes": 387466,
+      "sha256": "aa43efe96852d1f725071e1f2061db2564fda23e4b0d79b12f29ed3a0283a6c5",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_75.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_75.json",
+      "bytes": 6976,
+      "sha256": "638137ee8c675517b21d27bd1663c7c38a5b4dcfa5723b368a6de804ff0f3b6d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_75.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_76.csv",
+      "bytes": 387481,
+      "sha256": "f8df125402e718c2abeb2c281435e5586b78cdfdaa01baff9a467a397ed7b975",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_76.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_76.json",
+      "bytes": 6969,
+      "sha256": "4f76c75da796f6bdc595841fc12bc7bd997717d8d8e57009b2938f469750d38e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_76.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_77.csv",
+      "bytes": 388124,
+      "sha256": "5c9e28a6ce56f9673f396a34f14e5a13c77e2f7a684864172dae7e0326b23cde",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_77.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_77.json",
+      "bytes": 6976,
+      "sha256": "bdc69078ac3d6d31c06c2cdd707e755d2a20f48fc739b0356a0422650f43a65b",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_77.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_78.csv",
+      "bytes": 388117,
+      "sha256": "79317654d98aa24e53a11b9b142782b34bbc7c2a79a836aa288ca40cb3bef739",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_78.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_78.json",
+      "bytes": 6967,
+      "sha256": "e4c430bcf9f749d501f9ec02d16cb8612a2c2e2e15668fdcfbadff282778fda2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_78.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_79.csv",
+      "bytes": 387721,
+      "sha256": "c3faaffe5ea1c7f0a6e98033fadc1265a3665ac7066fac17cce6f2bac904d6f0",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_79.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_79.json",
+      "bytes": 6998,
+      "sha256": "d25c8b2e651bd38cc3cf9bf24e7efa4d246cbe895e5081511055e08b5ed5e16c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_79.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_8.csv",
+      "bytes": 377331,
+      "sha256": "4cd0eef26ef92d51ffde02a73d54f2ed17d5ec53805ba4f5bcffeec7f7f1b7ee",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_8.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_8.json",
+      "bytes": 6950,
+      "sha256": "c9bcabd9ff8ab5c071e970a1cbc90998c4a3cc11be2765cbe3fc9007079c1195",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_8.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_80.csv",
+      "bytes": 387721,
+      "sha256": "670a2cc25d0d7bf7b4561420b7dfad31893225506bf30be98f49d3ff5d637a7e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_80.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_80.json",
+      "bytes": 6985,
+      "sha256": "5e551157188d2295e1498a025136d25c8029eea19e6cc5c9e6caabbc5b2aeb58",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_80.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_81.csv",
+      "bytes": 388400,
+      "sha256": "9d6352a999e25edad28228e29c319fdbdb85e112fcc956ab65b15b0873af208e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_81.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_81.json",
+      "bytes": 6998,
+      "sha256": "15f513956428ab31b959728895e1b7313f4a6a1936ef69c63444915a430ce827",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_81.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_82.csv",
+      "bytes": 388406,
+      "sha256": "93e1a9c11dd4b9f9db15a1216f09821844d0112632ac3a0de99fd5639618e863",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_82.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_82.json",
+      "bytes": 7007,
+      "sha256": "414c8923381e77436e954707f04974b1681e3b1b74ba714faff18556f50a0d70",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_82.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_83.csv",
+      "bytes": 387590,
+      "sha256": "2abd08c641ed3ecde84307cf03095df08f345649113af197680df45c27114493",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_83.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_83.json",
+      "bytes": 6998,
+      "sha256": "885865ff71c37af72053ac0555127c80a4b87856a8dc854ef8daa7e34cb5652f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_83.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_84.csv",
+      "bytes": 387586,
+      "sha256": "179287f1a83032e88ac176a1ca4cd6777cbf7057cdbdd39801c2dffb6bd41996",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_84.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_84.json",
+      "bytes": 6987,
+      "sha256": "bd19364207a720e766ab7e018f0002bff51471f120d65ae2f15d9f6f3dbf217c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_84.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_85.csv",
+      "bytes": 388030,
+      "sha256": "559b8ea85005cfc1adcc54b77c092e13a861a993669550bab227d342247f175d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_85.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_85.json",
+      "bytes": 6976,
+      "sha256": "75441754fb890b4512f368fd956ce7660456e2998214ae9d35ec38474c656eb2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_85.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_86.csv",
+      "bytes": 388030,
+      "sha256": "464f699546b5d07278ac54e8f674e419aa56c425185bd34f65c143078c0870c7",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_86.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_86.json",
+      "bytes": 6966,
+      "sha256": "72271dfdef813c20a005c4c039fb8c66be1df171c935c558397f04ffe742c127",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_86.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_87.csv",
+      "bytes": 388233,
+      "sha256": "373bed9e023b84cfd3330c6e86253882aabe0fb2d020bc27c724ff75f779e338",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_87.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_87.json",
+      "bytes": 6976,
+      "sha256": "f8e3d0e737529fbe1b64f45a7a6b22dc4086f580cb3c407da307c68da14b19d4",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_87.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_88.csv",
+      "bytes": 388225,
+      "sha256": "f6ff182072c479684fd2cc3d9ec9e0031b765140e8a22e81b27baf8b88fdc5e3",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_88.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_88.json",
+      "bytes": 6977,
+      "sha256": "829c87c10e76197d0d83e1f9b359ed07847ab89a1e2c952c41323985855ec8b5",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_88.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_89.csv",
+      "bytes": 388512,
+      "sha256": "35ae45197c7b249c8ebc8a161e95371b804c7c5546360af615d544ef06337139",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_89.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_89.json",
+      "bytes": 6976,
+      "sha256": "0d736a751ca9b3f3b8bb6a173b7b0b8c640b622886c2b5be8933f047135283f2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_89.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_9.csv",
+      "bytes": 379293,
+      "sha256": "b2bdb609013fadea33ca00929888137337a7c815e149edb2a4f952593cf92c5d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_9.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_9.json",
+      "bytes": 6953,
+      "sha256": "b4871e8eaab363d3ea812d1084c2851c4d7a59dcc438914f7ebf92172f580f7e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_9.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_90.csv",
+      "bytes": 388516,
+      "sha256": "537a0cb378a3438a443a178b3bbe5becd24e413656880624c57cb3334802ff81",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_90.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_90.json",
+      "bytes": 6981,
+      "sha256": "1f05614d62cbe598067a141751d749d9831c02c25be079bb65b816ff8b05d73e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_90.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_91.csv",
+      "bytes": 387495,
+      "sha256": "4ab17e92ba50eb534abd38e1c6a7700cafe1956b39c32b6d87463dd523c5c0c1",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_91.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_91.json",
+      "bytes": 6976,
+      "sha256": "7e55965009902a746979369944da094bc6109b928e6fca18a8e35a54b4f4d314",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_91.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_92.csv",
+      "bytes": 387497,
+      "sha256": "96f18d365de7742b9f23a3654305b570e93cbf4a5b9ab77670f3d99e06d0fdb0",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_92.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_92.json",
+      "bytes": 6969,
+      "sha256": "d40a43f1612809a9494aa11836d3494199ae480197c7382e6c8b7deb4dd2a48c",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_92.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_93.csv",
+      "bytes": 387661,
+      "sha256": "924c387b138a23ed8b8a415cf24a3b58d64f36a505006e48971d0263d626baac",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_93.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_93.json",
+      "bytes": 6976,
+      "sha256": "2166f804420e71253ae7e0e1e8d3be7672a8f169a02d75c580f7f0b5124e6b85",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_93.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_94.csv",
+      "bytes": 387648,
+      "sha256": "1dd72d11624724965c084b8797e8c34dc2c1e8df0fe583349cd54e8d0015245f",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_94.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_94.json",
+      "bytes": 6963,
+      "sha256": "cf0f819ec94ec9e0464571b57f1e814fa1c2f50f8195ca1fcbe6a1b21cb59ba8",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_94.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_95.csv",
+      "bytes": 387886,
+      "sha256": "c2c014e58ff5b46dea06e88001c061e6d3c61eebe2233877f10054418cf1ff3e",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_95.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_95.json",
+      "bytes": 6998,
+      "sha256": "39e81be520e4f07802dd10aefc9578debaea773d2dd1a6a57cb1fac1be2914f2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_95.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_96.csv",
+      "bytes": 387886,
+      "sha256": "3f43b1b5dfb8517b0aee9d2cccfd6ae3d1cc0cac7052d61c28c4640ac5c8dc39",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_96.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_96.json",
+      "bytes": 6994,
+      "sha256": "626c22ad4bd58820d0d053dee07175c0add6066c54ce2349915d17c641c80bbe",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_96.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_97.csv",
+      "bytes": 388077,
+      "sha256": "5948bbbd4458bdf7d4d0d03abcff710eb4bab909214ab61d9ace091d113d400a",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_97.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_97.json",
+      "bytes": 6998,
+      "sha256": "f59e8242b11d20f86eccd7712386e7d47b5878c011ec628acde288276998d856",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_97.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_98.csv",
+      "bytes": 388087,
+      "sha256": "869fbb5f8c051777286ce5f94aad385b24fde7018201e6e9a6339c948153f2f1",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_98.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_98.json",
+      "bytes": 6985,
+      "sha256": "cea8af5b56da8b134acdefa91f67f996673ef636cf6b80b694d401488cb98b87",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_98.json"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_99.csv",
+      "bytes": 388199,
+      "sha256": "51d59c27360f9197e0f937d16228e88ad32be66324a5d7e2be70dda95f31d580",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_99.csv"
+    },
+    {
+      "path": "files/cold-train/native/train_stopped_trial_99.json",
+      "bytes": 6998,
+      "sha256": "cf92a6b367d3fdbd3dc9b55f47d3128452cc305ab680c1b4e45ff1730746e26d",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/native/train_stopped_trial_99.json"
+    },
+    {
+      "path": "files/cold-train/process/loaded-files.json",
+      "bytes": 4495,
+      "sha256": "b79d2c7dee45f348cd57ef9d8f79150dd472644904c0bbda8691bc41a5971034",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/loaded-files.json"
+    },
+    {
+      "path": "files/cold-train/process/owned-process.json",
+      "bytes": 395,
+      "sha256": "ab7843736195dd0313fa30423c425d59194b0dd04de9ca6cdca8826ee8b52cdd",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/owned-process.json"
+    },
+    {
+      "path": "files/cold-train/process/request.json",
+      "bytes": 812,
+      "sha256": "317c101454415a1a6d249b9ffebe0abcb14ad84e59c9b48216b690a83066ddf2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/request.json"
+    },
+    {
+      "path": "files/cold-train/process/result.json",
+      "bytes": 444,
+      "sha256": "d708c1fccefb134f35cedf4f6e07bb738c51e2816f1718c3fd0f3789fa17de24",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/result.json"
+    },
+    {
+      "path": "files/cold-train/process/runtime.json",
+      "bytes": 12192,
+      "sha256": "bc99f10a06fe65cf0b9b181f87992f46b685cc07a60c2f46008fd5493b0c1689",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/runtime.json"
+    },
+    {
+      "path": "files/cold-train/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/stderr.log"
+    },
+    {
+      "path": "files/cold-train/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/process/stdout.log"
+    },
+    {
+      "path": "files/cold-train/run-manifest.json",
+      "bytes": 54119,
+      "sha256": "e2cbace6f4306c0f7a06a34cffd5aa9df09ebc65b7575935e2c68d3db17010c2",
+      "source_archive": 1,
+      "archive_member": "evaluation/source/runs/Classic-threshold-training100/run-manifest.json"
+    },
+    {
+      "path": "files/contained-preflight/input/job.json",
+      "bytes": 913158,
+      "sha256": "3d5938beed5eabf5ff70588f23d770db1d5374fdfe0c939ed8607191f752a485",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/input/job.json"
+    },
+    {
+      "path": "files/contained-preflight/input/process-policy.json",
+      "bytes": 521,
+      "sha256": "3a42630291a322f46c93ef5abd57c9170043d3c890155fa76544e7f8c6167451",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/input/process-policy.json"
+    },
+    {
+      "path": "files/contained-preflight/native.events-log/EventsLog/NeuroModeler.M40.user.log.ERROR.20261104-123853.3793425",
+      "bytes": 280,
+      "sha256": "97f278f4acafb8e6b2e9360bfea0965a1f271e8e5fa638ebb654e7960516b7f9",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.ERROR.20261104-123853.3793425"
+    },
+    {
+      "path": "files/contained-preflight/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-123848.3793425",
+      "bytes": 398,
+      "sha256": "653cc689c4e945253cc9f2c0eba00a50440f96bd3784b312d9ea5485e1837970",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261104-123848.3793425"
+    },
+    {
+      "path": "files/contained-preflight/native.events-log/EventsLog/NeuroModeler.M40.user.log.WARNING.20261104-123853.3793425",
+      "bytes": 280,
+      "sha256": "97f278f4acafb8e6b2e9360bfea0965a1f271e8e5fa638ebb654e7960516b7f9",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/native.events-log/EventsLog/NeuroModeler.M40.user.log.WARNING.20261104-123853.3793425"
+    },
+    {
+      "path": "files/contained-preflight/native/execution.json",
+      "bytes": 3462,
+      "sha256": "c02bb47028999bf585c6a57907ad80e720a38a04b8f0b2bbd51a8d446ce2968a",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/native/execution.json"
+    },
+    {
+      "path": "files/contained-preflight/native/initial-state.json",
+      "bytes": 174854,
+      "sha256": "c2f7ff9a39950320b13f9ee352029172b23ac82299d05484bce8370a27d97667",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/native/initial-state.json"
+    },
+    {
+      "path": "files/contained-preflight/native/job.json",
+      "bytes": 1267770,
+      "sha256": "d97945a378541958c43950502035da378cf8f9f74bfd02fdd0b2360797a2d8ff",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/native/job.json"
+    },
+    {
+      "path": "files/contained-preflight/process/capture-ack.json",
+      "bytes": 114,
+      "sha256": "b21ea645dfd8c7ada91479fefca7f77eaa8e891712777b6673de2cb3fc3da463",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/capture-ack.json"
+    },
+    {
+      "path": "files/contained-preflight/process/capture-ready.json",
+      "bytes": 98,
+      "sha256": "31c23f51cf8975eb7b7584dd5661d823aeaaefde555b684d997e04eda37f2187",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/capture-ready.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/launch-result.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/launcher.py"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "a2c21d37b10469e3ef03c24d7d785a645beaccb71d2f31cad869ef13234f1dd9",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/limits-readback.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/owned-unit.json",
+      "bytes": 566,
+      "sha256": "dc192dcf1708ef3649b029da9eee022509c289615785f2b096b1d6e3af14c6bb",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/owned-unit.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/ready.json",
+      "bytes": 44,
+      "sha256": "495d13db88a8b4651024ffa908e3341187f95cca87899f684c1df317a4a75c38",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/ready.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/request.json",
+      "bytes": 1517,
+      "sha256": "348d5e6f2f84d707f7e9c478f2d26eb21f2daca1a80d8d6f15327c44f04b62fb",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/request.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/runtime.json",
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/runtime.json"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/start.ack"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/stderr.log",
+      "bytes": 107,
+      "sha256": "82d9840b0dc1cee4825e9ec182e9149f067a1d8796a129b6338bd36cb9b2d601",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/stderr.log"
+    },
+    {
+      "path": "files/contained-preflight/process/contained/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/contained/stdout.log"
+    },
+    {
+      "path": "files/contained-preflight/process/loaded-files.json",
+      "bytes": 17624,
+      "sha256": "1f83d68bb40cdcac17558493dd5a4dcd5c3d4a78884da93932c98769d77186f5",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/loaded-files.json"
+    },
+    {
+      "path": "files/contained-preflight/process/owned-process.json",
+      "bytes": 660,
+      "sha256": "a7f2a3243e528012b674517b417afdfb04ebdd543865f3f40f45b52ad267b5ea",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/owned-process.json"
+    },
+    {
+      "path": "files/contained-preflight/process/request.json",
+      "bytes": 821,
+      "sha256": "ab844d051cb43a1b58abb1c4395b96a5e4664eb38e444eb79ad7ead6bcfff9af",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/request.json"
+    },
+    {
+      "path": "files/contained-preflight/process/reservation-context.json",
+      "bytes": 2997,
+      "sha256": "3d5ecb56e9053755dab35af0d85b95a93717d330068944a6a487c7dafbc6bc0e",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/reservation-context.json"
+    },
+    {
+      "path": "files/contained-preflight/process/result.json",
+      "bytes": 486,
+      "sha256": "16a1df193a4efadac6183b047a25225247beb04f73ce32870ac87707c4e817a3",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/result.json"
+    },
+    {
+      "path": "files/contained-preflight/process/runtime.json",
+      "bytes": 31923,
+      "sha256": "7d49ae8056b2320fdf382078eef3bf6c0a9444c77913a84b7041b08b919cf964",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/runtime.json"
+    },
+    {
+      "path": "files/contained-preflight/process/stderr.log",
+      "bytes": 107,
+      "sha256": "82d9840b0dc1cee4825e9ec182e9149f067a1d8796a129b6338bd36cb9b2d601",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/stderr.log"
+    },
+    {
+      "path": "files/contained-preflight/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/stdout.log"
+    },
+    {
+      "path": "files/contained-preflight/process/terminal-unit-state.json",
+      "bytes": 1298,
+      "sha256": "b1fb906320c526fa38221d5610ac598e4d4a90865ac8c0f570980ae0d0c510ad",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/terminal-unit-state.json"
+    },
+    {
+      "path": "files/contained-preflight/process/whole-group-closure.json",
+      "bytes": 1213,
+      "sha256": "30e5d6e03c28d30da85c7497a9cd0f6a44b43c943c98bad52db2f46f772e1404",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/process/whole-group-closure.json"
+    },
+    {
+      "path": "files/contained-preflight/run-manifest.json",
+      "bytes": 22621,
+      "sha256": "c0e683d94319e0fe86e8e091d19e2aa5a90ef8eaaaea8507dba3e30c58bb13a0",
+      "source_archive": 2,
+      "archive_member": "native-controls/Classic-N0/run/run-manifest.json"
+    },
+    {
+      "path": "files/diagnostic/input/job.json",
+      "bytes": 3294397,
+      "sha256": "b5a2ce32321eee1f3491bfd4d8e7d52585fa44dc17c1920d90d7e537790bcad3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/job.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_state.json",
+      "bytes": 4212537,
+      "sha256": "41a39c07c5934669796b185d02dd4074e66f933b72d921571932e171e6437fb1",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_state.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_summary.json",
+      "bytes": 15886947,
+      "sha256": "d34efb2b05c40cbcb958f26adaf08cc4ab6b109a0aab0da859e087c4d968d83e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_summary.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_1.csv",
+      "bytes": 390311,
+      "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_1.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_1.json",
+      "bytes": 6820,
+      "sha256": "eaa2fcf4e24e0bfdf7a0e08725b3ee95932218cd0ca8040dd64c5ea918f574ac",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_1.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_10.csv",
+      "bytes": 389873,
+      "sha256": "ae507ad6b8d2692ba70ed2783b5f76c530efa678c39e19a41c1b75e77452f89d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_10.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_10.json",
+      "bytes": 6952,
+      "sha256": "56cbe95e581b0ea9b70876e1aef01af87c99ba5b1e944661a7bc70ce3cbaf600",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_10.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_100.csv",
+      "bytes": 388200,
+      "sha256": "2686e41e63e1fccd3d6b1feaa9540bc2526cca89c2587b1d65aa4feab7ba9bc8",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_100.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_100.json",
+      "bytes": 6981,
+      "sha256": "0701042d9ff0420f1a6382c5b3c338102b8a88f928997611bc46a0286aa11a3d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_100.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_101.csv",
+      "bytes": 388307,
+      "sha256": "6dc9463b6305c0df472a40e0b3e377e594137d662c96bbbd8a60405dcc75b665",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_101.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_101.json",
+      "bytes": 6976,
+      "sha256": "f1d24153a7de1bdb26cc58244acc821f8df00d35126ffaa14892f2f083b3c029",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_101.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_102.csv",
+      "bytes": 388307,
+      "sha256": "cea4516046cbac9f263f2b41dc97574299e8d59ba915d3821d11bcf12644614f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_102.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_102.json",
+      "bytes": 6979,
+      "sha256": "10ecdb209526699ace74aeadf15ba404592759c5d405b461d4244b47e25e6297",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_102.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_103.csv",
+      "bytes": 388418,
+      "sha256": "5afe136e37fa6f2e11e950ccd534cf89a48a2f6191497fceba81d11f308ede45",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_103.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_103.json",
+      "bytes": 6976,
+      "sha256": "f0ca8c3b08adaae41c89b40db79ccd74104aa99667311f73fced84d6178aa07c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_103.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_104.csv",
+      "bytes": 388433,
+      "sha256": "f6afeaaa7926721c16a2a312c00bde02f86d722a354814262fbf15f514b2335c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_104.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_104.json",
+      "bytes": 6979,
+      "sha256": "55bd99fd31e9b680d33268d44c45904e5d9879ec69b4067c72d55242550d8a6c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_104.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_105.csv",
+      "bytes": 388620,
+      "sha256": "7f6b93c97f030dfd60e6c80f8ed13a628b99b27a67b165f00535cbaad3f251f4",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_105.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_105.json",
+      "bytes": 6976,
+      "sha256": "03a94051501d47fa744dddd002788acb3257fe642a52cc373ccbbdf82633a80d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_105.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_106.csv",
+      "bytes": 388624,
+      "sha256": "0824942f67f85c396a977c88086b7c9dfeb5416a97e69d71badab16aa12340b4",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_106.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_106.json",
+      "bytes": 6983,
+      "sha256": "e0fad69e8746e3d527138231167a205c3b9da4182c8c84b0e926a8fd016df15a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_106.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_107.csv",
+      "bytes": 382000,
+      "sha256": "8f599898ca3e0bdd22d07b76657dbe721f6fe76b69afbc0db3c9223a449c1dcb",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_107.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_107.json",
+      "bytes": 6965,
+      "sha256": "1bea086940f472b968a578e350a577b96ffb1edca630222a33bff1f449e061bd",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_107.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_108.csv",
+      "bytes": 381997,
+      "sha256": "0ead0fc277fe5e6755ac4500ff2b4067576ede3bb26e0cb5732e7b9cd16b36db",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_108.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_108.json",
+      "bytes": 6576,
+      "sha256": "c06c3953146a60f21bca6289a92083f7366d9e649a3ecd352a09d0ccc9a2bd1c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_108.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_11.csv",
+      "bytes": 389557,
+      "sha256": "00c983de4f5014a8e2caaaae8b71f7e6609c6586af28ae7beafa727dfc03e8ab",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_11.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_11.json",
+      "bytes": 6954,
+      "sha256": "6321cc4fb339cc24eb1a0cb33174b2eee366db4d4727291a80248168529e1df9",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_11.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_12.csv",
+      "bytes": 389531,
+      "sha256": "37745a5acf03ea115bedb1f620bffba786b864ba8c99e889d188a1b833f0b974",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_12.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_12.json",
+      "bytes": 6956,
+      "sha256": "5ef8d75b765a8b69149d263614a55606cc1428ad005f3da1ff9ddcc08cd64c79",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_12.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_13.csv",
+      "bytes": 390044,
+      "sha256": "30275412d19e4e7425d7fcfecbacb97f6fe628da618032582ac1a56ea344758d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_13.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_13.json",
+      "bytes": 6943,
+      "sha256": "18ee8db575068f9c81e88b92b807659563982ffbda03f52ba3babfeed4273591",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_13.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_14.csv",
+      "bytes": 390067,
+      "sha256": "1837e47aa1bf7ccaf51438255d069904325208ec0217085872f5619a8b3343ab",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_14.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_14.json",
+      "bytes": 6949,
+      "sha256": "0a2bd45ae8104af174ca2ffab7ce99b6017357e2477688021370da2b345f5ee7",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_14.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_15.csv",
+      "bytes": 389404,
+      "sha256": "2337f8fdcd701f7396f1c334c5eb546003a33ff1e8498280beb9f02228578161",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_15.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_15.json",
+      "bytes": 6954,
+      "sha256": "fd4e81adb6f0cdfdc2a96d9daf3b41653384bf0c834f60ce11324a7a5e1aa638",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_15.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_16.csv",
+      "bytes": 389455,
+      "sha256": "9d99ed406cd044ededd0967221792f138d4803a37c43ee8525271487a5bcb765",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_16.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_16.json",
+      "bytes": 6941,
+      "sha256": "598a2113576ec47fcb38c42a8c408830e0fdee0d066e6caeb33d7b9cd2d03e26",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_16.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_17.csv",
+      "bytes": 389679,
+      "sha256": "c9c6517e048bfbf90da5dfb685c18c8d67108097b4cf05b3b53f409c9c00ef5c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_17.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_17.json",
+      "bytes": 6955,
+      "sha256": "1a006d0d094666d20d66ae93dcaa155d757689a2888f4d7cee88163d8179ee0a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_17.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_18.csv",
+      "bytes": 391057,
+      "sha256": "8e6ad444a2258113023a48eb67e564fff75d42b5509a05da514963e8d539b3e1",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_18.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_18.json",
+      "bytes": 6943,
+      "sha256": "f76ceb92a0d9833690dd36ba1272019330c567eb66540408fc5960a01097897f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_18.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_19.csv",
+      "bytes": 395925,
+      "sha256": "13ee308ea1f8a10304c9008266b39a6f1c66edf24a007c536c63de91a1966429",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_19.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_19.json",
+      "bytes": 6977,
+      "sha256": "135233cc8e9c4d51c30194163815619eb68e92558c2c3f1b38d57787bc6b5a6d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_19.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_2.csv",
+      "bytes": 390350,
+      "sha256": "8ddfea15819556237a2ddbc779a877d13824150e9f692b8cfd8df99f6dc28063",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_2.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_2.json",
+      "bytes": 6984,
+      "sha256": "675e34e6b16c5f48279cca5b5c279fb2264ba48b3ceb1ea4701c88b685877644",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_2.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_20.csv",
+      "bytes": 395924,
+      "sha256": "5cb803a4cca2fa99908d20491e89fdf5542c38de71b26dee6ec0089bb1246f65",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_20.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_20.json",
+      "bytes": 6944,
+      "sha256": "a44637f57ed7cfc851757cda25048e597a3838be220406d885c3e9630895f2b2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_20.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_21.csv",
+      "bytes": 396190,
+      "sha256": "cc636cdb491bced2476197d68bb3e112623e850e34fcf0cd4f5d3c540c8cf219",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_21.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_21.json",
+      "bytes": 6950,
+      "sha256": "1f471e4485e725f8452358199d1539634f818c7213880f35381ac0871886882e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_21.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_22.csv",
+      "bytes": 396221,
+      "sha256": "e7387415888e9c74509bab505fe3079cf3b400d498b1928fb6225f923b0fdb1d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_22.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_22.json",
+      "bytes": 6954,
+      "sha256": "99a5735ab567a91853a5e754042d4777dfd11af8e3d1383f1a396b7ade65bb92",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_22.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_23.csv",
+      "bytes": 395432,
+      "sha256": "58ebfebaf8984cd4b4db135a2231043175c125b12816353227e5eebf306d8ecf",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_23.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_23.json",
+      "bytes": 6970,
+      "sha256": "1567895fa7e117be9c9bab66b74ccba1a36e166a8289929dd61249a97ae0091f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_23.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_24.csv",
+      "bytes": 395373,
+      "sha256": "806d7d411af2e5f0f7c92282060023a829840fce7371a61c400d368fffd96a43",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_24.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_24.json",
+      "bytes": 6973,
+      "sha256": "324f2d2f4b3f6fd58ab68abdf97820ad6efbb2548687b15658465f1c3c92421e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_24.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_25.csv",
+      "bytes": 395451,
+      "sha256": "7f0224e2af7cdd15c337f3a729cba6d396d9ec16811216b3e36c3cf896574149",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_25.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_25.json",
+      "bytes": 6951,
+      "sha256": "2ed967265ac3198b3a0814a887d6ce31fec684b7ca1a0b9e41c41d7ed71deb9d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_25.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_26.csv",
+      "bytes": 395478,
+      "sha256": "b5a2d33d99fbf97d5bf91c79c2f60edca179ae6a500845b20749227212bc343b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_26.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_26.json",
+      "bytes": 6938,
+      "sha256": "802fdfc4b426d3f27726753ad6e8171819d1e91d37e498a367114c4254700cec",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_26.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_27.csv",
+      "bytes": 395656,
+      "sha256": "d3d5389a44388a4aca9a5e652664646fba506a1e5a5c55f6c57c241d7acc3a22",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_27.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_27.json",
+      "bytes": 6978,
+      "sha256": "26fb670d6893ce508c2a1c1bf66510c1637fc960db99307b90f4d996b4cd3a88",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_27.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_28.csv",
+      "bytes": 395656,
+      "sha256": "0150736310a1ca0a70e9aa163cfdfc40e6d58751856d3645c8d2c21831d9a9e8",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_28.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_28.json",
+      "bytes": 6965,
+      "sha256": "78b782c131d0b360e35dd9bed7512035b3d19c414d19811c0bcb8e10f30baad5",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_28.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_29.csv",
+      "bytes": 395705,
+      "sha256": "b05b504cdecef843f10c988a54b583f32f6137eaf9d2f4d83f92eb4698ebca50",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_29.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_29.json",
+      "bytes": 6952,
+      "sha256": "1d0397593e434a5139207764bba20a82879e7dcd177240204bfd4d1ba8a8e02f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_29.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_3.csv",
+      "bytes": 395374,
+      "sha256": "e627199cf2a9277ab6b5544bd590ca2843b4dcdfdbc564fb89602955270e821d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_3.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_3.json",
+      "bytes": 6958,
+      "sha256": "b419d9c045d131dd8a8d72d3c7de65b5e1bf22b2749dc4deb1621f3e1a55b19b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_3.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_30.csv",
+      "bytes": 395693,
+      "sha256": "dc296bfcf1860fa5cde9bd5ebc519f5b70a2508e4b51f6cdbda93cd2f81d08c9",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_30.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_30.json",
+      "bytes": 6952,
+      "sha256": "70ed7732f6e648de0c2bde18c566fb04d071a81fc96f95873db2faffa4d7c52b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_30.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_31.csv",
+      "bytes": 395865,
+      "sha256": "63d77d29df66cf8ca56aec9619d20c9e62c98193b407f82a115f6cbf99987f91",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_31.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_31.json",
+      "bytes": 6977,
+      "sha256": "684c1e97d9bec31bc91f47e41857790767e15660ee56788e31d3265aae99244b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_31.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_32.csv",
+      "bytes": 395931,
+      "sha256": "4e2a9a826d913f4ffe5c3293bec3b0f56555c70bda691481cf04c3a9e9c11044",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_32.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_32.json",
+      "bytes": 6972,
+      "sha256": "f3de48a10064cbf391fe325c7280020990ba8ec77c2b6080bc17f4a4a840123d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_32.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_33.csv",
+      "bytes": 396062,
+      "sha256": "fdfaeceec57fc0e422732ae44db292d258418453522c0be15744ea901f5fcfbd",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_33.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_33.json",
+      "bytes": 6943,
+      "sha256": "f2fd9d9efe903f1f1306877d7a7baca92029e0fbcedf3aa5d5d65d89d27ebd3c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_33.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_34.csv",
+      "bytes": 396017,
+      "sha256": "7a45f0991d6595a7ddf38084fa1ed7c916cde2f5a829deb74b01a71e8cbca8c7",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_34.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_34.json",
+      "bytes": 6950,
+      "sha256": "ca1b3d6fa017e38b813911b5d030815f7f6a98a535dfc1b5a49133e30645f619",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_34.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_35.csv",
+      "bytes": 396053,
+      "sha256": "3ff93172461c03a7007bab36a8665f23182377934005da40a5767dce241ff73a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_35.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_35.json",
+      "bytes": 6953,
+      "sha256": "64f4300f8f8f8a45cd5fba9d5e29fd36539d2b8fa78dcde5e624bbb6cef89af0",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_35.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_36.csv",
+      "bytes": 397308,
+      "sha256": "c26bd64e7018be8fb68bde9154f406e34551387eadd591fb46070aeb271eac11",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_36.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_36.json",
+      "bytes": 6950,
+      "sha256": "8ce9b6e18070f63fafd92eb9c41c8eb471c9fb178a6c212c39dde0e8cf506b02",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_36.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_37.csv",
+      "bytes": 398855,
+      "sha256": "8bc1a77bdcd7c9691829fda90cea9d44b37ed9825dab4698bd2d1d464219ae60",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_37.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_37.json",
+      "bytes": 6955,
+      "sha256": "22cfbb2a9048400ec78d094516aedb2792693199f59e2a64574ef5e5604aef2a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_37.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_38.csv",
+      "bytes": 398896,
+      "sha256": "b42fd6216d17a75dc6df74a8c1adb8ac7029e401c83ae560e000005dd336fb5b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_38.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_38.json",
+      "bytes": 6948,
+      "sha256": "5e3fa3e8033002f3ffa504ebd287214a6b6fde3e5a02f4e3b51d38f9d0941bdf",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_38.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_39.csv",
+      "bytes": 398895,
+      "sha256": "a4c66569791979d4acaca2e74074d56573f7a3bf19dd90e8a184b63a8667c09f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_39.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_39.json",
+      "bytes": 6974,
+      "sha256": "db4b21af6382957ceccb888bf97c3b561a3507e9972b91620252ae8178c037b9",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_39.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_4.csv",
+      "bytes": 396515,
+      "sha256": "79ebf30908e004676acb3dee0de592f19d8ca6b9a06b37be8ec4816656814483",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_4.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_4.json",
+      "bytes": 6959,
+      "sha256": "f7ad63ab20c29eac4295c3e97c7a7250751b04edb33490a6ee55fa7e536fa76a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_4.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_40.csv",
+      "bytes": 398841,
+      "sha256": "3bbbc9040ab2769a8dd20c63851e7c929c61ddf61e1e380b11576f74778a531e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_40.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_40.json",
+      "bytes": 6970,
+      "sha256": "52b201a3a8268b96ff08cddcc438ff17115a05bb0a0dd0a35410fd0ca5aa73a1",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_40.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_41.csv",
+      "bytes": 397765,
+      "sha256": "0b3ead1b5681f0b91c7d055dff13dee6d5d1c00a3bf7fd0a0d79331722cd1e24",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_41.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_41.json",
+      "bytes": 6954,
+      "sha256": "71f22eceeafbe7a05ae2336fd0e98adef92526c006e7d539a9090ef0ff002f33",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_41.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_42.csv",
+      "bytes": 397753,
+      "sha256": "606ab81545f508867d71c6f9c48cb0b90a3a51f7e7fbf82a98977b9e4dca94e0",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_42.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_42.json",
+      "bytes": 6940,
+      "sha256": "b7c9e2e9fed1ce8e551b328c735e86d2a8a79155766dd14695f49b6d765c1c47",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_42.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_43.csv",
+      "bytes": 398409,
+      "sha256": "d42f86c41f238333cf303ef8396ca15108f9d80440c35bbf6c490921f457681b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_43.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_43.json",
+      "bytes": 6954,
+      "sha256": "d9780b91a5107d37c8eb03e7a8fc3fcbb2717363077f74ebf8ca24b56f160115",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_43.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_44.csv",
+      "bytes": 398417,
+      "sha256": "a3056dd9c629fe5b0a2c8c3f094c330b3272ab9f7921be75bd1a9b7289866948",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_44.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_44.json",
+      "bytes": 6937,
+      "sha256": "036ecb197f09cb657fd6382cecc3d4fa938898755030ad5e798eeb0449634006",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_44.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_45.csv",
+      "bytes": 397956,
+      "sha256": "8858d9d90d3e5dc9e168481f436d1f30aa26b42a2d949131fb91a3f7028dbc0b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_45.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_45.json",
+      "bytes": 6953,
+      "sha256": "74acee16e47528843f85124a93223c6ea8d26cb4c824056909491ef457590b53",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_45.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_46.csv",
+      "bytes": 397945,
+      "sha256": "dcf32afe4367556efe532ea0eab8bfe0e2ad9c18c24ef3b20242792dd585c3e7",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_46.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_46.json",
+      "bytes": 6943,
+      "sha256": "f23bc31ecca9d8fceb08ab8443445c6b7cda5146efe9c1a8ed7644ca1303a483",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_46.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_47.csv",
+      "bytes": 398515,
+      "sha256": "d4d0ecc7d4b835c109cac9264ef400925d864a3e8dcb9cae861a913235cdfcc3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_47.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_47.json",
+      "bytes": 6954,
+      "sha256": "b7548fcb70c86432641bcf804ecfe3bf546597c4f61144dacf21d9f455c9d1b2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_47.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_48.csv",
+      "bytes": 398547,
+      "sha256": "4bb3e0e80bb254af8d46bb15145115b7ad717b9bf18d87b329a926ba463953e8",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_48.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_48.json",
+      "bytes": 6957,
+      "sha256": "09ec00e887f16861dce232c0a5d00fc970e959a00107c241614a8b2f04a698f9",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_48.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_49.csv",
+      "bytes": 397873,
+      "sha256": "fd65481c44908715b0b10cb34c9bfa6a2ef801a03e4d4a1cf07b28d7f98ff029",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_49.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_49.json",
+      "bytes": 6954,
+      "sha256": "7a8256f78b0f06a1729e92e63b9dbef4a2c3cd0feb85c44ab82b294d3e1cdf55",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_49.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_5.csv",
+      "bytes": 398095,
+      "sha256": "dcc36516b817831980dd14e9e27866f821fb0b15af5e48afedcebcc467c2a7f9",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_5.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_5.json",
+      "bytes": 6934,
+      "sha256": "09fb7830368228d78e56fd47bac8e13aefcd40ea1857e05c79fd71c40df6fd6c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_5.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_50.csv",
+      "bytes": 397858,
+      "sha256": "a9ccca5288ef30aeab7bc1339ed3d2bf28da18a9b664fde8b75e14c89246a349",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_50.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_50.json",
+      "bytes": 6933,
+      "sha256": "e0e6b388c7b90faa40582dcf0414a7c04f3b7b0e863d5bfbafd0cf7211a86e3a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_50.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_51.csv",
+      "bytes": 398200,
+      "sha256": "298f55e34c756d574bd71a16e8a491bd371b22428e0b299b98332ba213a41848",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_51.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_51.json",
+      "bytes": 6953,
+      "sha256": "dae9f65f84b1e4854d5a85e7318a15b741b4afc3cccc09f88e96c7c465d2abf5",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_51.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_52.csv",
+      "bytes": 398188,
+      "sha256": "1f42ba929125910b68122c52777aee7b7c0f4f665c855fa95a59e9915c9b338e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_52.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_52.json",
+      "bytes": 6938,
+      "sha256": "d80ddc055f42105cb1ea26dfa3736ffe563d65fb6e6bda988f0ac61cd6d70e80",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_52.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_53.csv",
+      "bytes": 398443,
+      "sha256": "c10db0e023c05c4ddb63055d697895907d300cbe13d482c24768e1e398c6299e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_53.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_53.json",
+      "bytes": 6974,
+      "sha256": "c66e90732039a569e4d326d10d6f1630c0f16e594e9a620e07747b187dacf8e4",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_53.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_54.csv",
+      "bytes": 398480,
+      "sha256": "ab22fd64fe32fde14a34f1d9395ce2c75a879ef60704227a7721cbc80fde5fde",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_54.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_54.json",
+      "bytes": 6976,
+      "sha256": "d605ad413e1099a2bfa35d5c0a8618f1c3e5d0a77aa658b6b4981b9a02ba8001",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_54.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_55.csv",
+      "bytes": 398719,
+      "sha256": "d4b8e21e41f6b0290c48297eb85ba089b6173325cb30bde517edfe5382cd08c5",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_55.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_55.json",
+      "bytes": 6956,
+      "sha256": "9383c8cd2f0948b7589331dedb5c21a14e48d86cdc7bcd755b9dde2324635914",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_55.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_56.csv",
+      "bytes": 387573,
+      "sha256": "b0ea2336b3e665c92d74a5df2b6170d8bf9117ba844fd295db6272f921de86ec",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_56.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_56.json",
+      "bytes": 6952,
+      "sha256": "0f208f2b776fe386209513852de5ea969d652db0e884ce1cc07bf8a982aaacf3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_56.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_57.csv",
+      "bytes": 374327,
+      "sha256": "53c26f1f842f93706db7a315b29b4e8973d3e6cdf92dded628d547fa2716ec18",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_57.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_57.json",
+      "bytes": 6975,
+      "sha256": "f3d5c59601be783b627a62d3c2d9c92b703eedab9e43c9ac42fee1f29498c859",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_57.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_58.csv",
+      "bytes": 374329,
+      "sha256": "c16ca02b1f90c9ded6c9d2f149b85a99884a8c23fe4285f5654f8f72de3453bf",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_58.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_58.json",
+      "bytes": 6960,
+      "sha256": "403688d9f28f85878c955ddd27dd5416aa06a622b5712314102795e6e0ce6875",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_58.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_59.csv",
+      "bytes": 374455,
+      "sha256": "ca79b36f1151cb03c71f4d6ac78edf1fea4a0fcc6aaa29c27664be7809bd240f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_59.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_59.json",
+      "bytes": 6974,
+      "sha256": "0c9047bf269daaabc1748c44a84cf5e088bad9a2c5281555261bbb2d96e32ac7",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_59.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_6.csv",
+      "bytes": 389997,
+      "sha256": "bd547a2f8203f8fd8f807cd7941a98953b040dae96a44be724125a8c78ce09a3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_6.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_6.json",
+      "bytes": 6937,
+      "sha256": "cecc5fa786972c5ae835eed8bd3bf10cd0d8a3ab51de2a9f0abbdcc2703a2b1d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_6.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_60.csv",
+      "bytes": 374498,
+      "sha256": "d2bb0a5c68aad459ef9621a0a430faedde4faabdf6e0d11b245d505f5490cc1f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_60.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_60.json",
+      "bytes": 6957,
+      "sha256": "d528b415f496707627189948948841f7159779b64ecb67c0a80f501f48e9d906",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_60.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_61.csv",
+      "bytes": 374617,
+      "sha256": "da05d4ed552e34de18cc5fd5b7315902ef4d18e411dea9e06449bfd76dccb7be",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_61.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_61.json",
+      "bytes": 6995,
+      "sha256": "803f0a3b2c124b53ff6397adeb34dfd442a4ce522d2e5ce2c51ee1464047336a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_61.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_62.csv",
+      "bytes": 374612,
+      "sha256": "7707e4196cd55a0b565fa1bd6460267d81dab8f3978d1544336f0782b58e32a6",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_62.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_62.json",
+      "bytes": 6991,
+      "sha256": "194cdc75b6f7dfb9d7539310b8a4189b08d7a1d972da60c5fb9029d167f5069e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_62.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_63.csv",
+      "bytes": 374870,
+      "sha256": "506539fb48163a884fb14b61ccf4745ab61e86232f45fe754038316a3bf3b89b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_63.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_63.json",
+      "bytes": 6975,
+      "sha256": "00c4feef816164625d740aba948d206482b0f9ee997463d40af5c5e46f9ea2af",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_63.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_64.csv",
+      "bytes": 374865,
+      "sha256": "f1e3063d9c1e49d5fa189dc4bc6e8db2eef3a3e62ef04f868273498ca5def169",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_64.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_64.json",
+      "bytes": 6957,
+      "sha256": "2e672772dfac35fc9301a21f723bdeef1243b518d136211e60ef8046a76aae56",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_64.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_65.csv",
+      "bytes": 374950,
+      "sha256": "a74ff3b9a3591e31ccb90d9a74da172649c3e12c6e2faa20b6fbe91da533bdcd",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_65.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_65.json",
+      "bytes": 6975,
+      "sha256": "b92b478557fd456c14fc80d253f8cdf6ad93e29f8fdad4310bed050d32b6f3e2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_65.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_66.csv",
+      "bytes": 374952,
+      "sha256": "fedd2e332347615743de754ec264d582f43fe24438bbec120dee17d3cb1bf1d8",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_66.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_66.json",
+      "bytes": 6970,
+      "sha256": "b96fdf8ee694989d0c656c5de315b5d182aaf788122ce190c9cd1056f62f1eae",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_66.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_67.csv",
+      "bytes": 375066,
+      "sha256": "25e5b3b4588cc9606beef06e78bb9ab94eb998d7fb991d7dcac7341855ebaa6a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_67.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_67.json",
+      "bytes": 6974,
+      "sha256": "a9a6ae9832c3efd24c170c343c656554b2a4997204479e59398f2ad04c7c13b9",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_67.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_68.csv",
+      "bytes": 375069,
+      "sha256": "b9b246b389d4d992125f508b9d19499cece6e6068b59553a1eb66c67c0bc966c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_68.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_68.json",
+      "bytes": 6973,
+      "sha256": "25b18ff5dd808b55f5115bb0ab81968f24eb00c9ec1f9e7c49f515f9d57f2c8b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_68.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_69.csv",
+      "bytes": 375189,
+      "sha256": "c484141386575aebfd24ba140120f29fd4c98bd59f1eb441a506e62853baca5d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_69.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_69.json",
+      "bytes": 6975,
+      "sha256": "06ae3277d7cd381fc9836551abf426a05b2eaa3ef41bbcbf02626e2f157bcab6",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_69.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_7.csv",
+      "bytes": 377324,
+      "sha256": "4766cda7cfa12ee15d2b05838160dbd0e10b4d6c697f7bcadf172d9e83814fb7",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_7.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_7.json",
+      "bytes": 6977,
+      "sha256": "136479770f79c2f7eaab71530c3267ef57682e1f606921d66be88de9d05e657f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_7.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_70.csv",
+      "bytes": 375191,
+      "sha256": "b80b5434e378067c53fcf0ffa3f1228c2921b26fe74313f7560826049d7f83a0",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_70.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_70.json",
+      "bytes": 6974,
+      "sha256": "89a0741a6c135b8d881d035fdea00f151c5d44c7c606a3fadedecfddc9c11b7d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_70.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_71.csv",
+      "bytes": 375355,
+      "sha256": "d29ba8fa621eb6e384fb6f7936fa90ea8234a4a0e276254d833eb47bb8b3a46f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_71.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_71.json",
+      "bytes": 6975,
+      "sha256": "e7552ca6b146f324def3487f4fe6d2df4dcaa00a8886939c3473a8edbf378b88",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_71.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_72.csv",
+      "bytes": 387705,
+      "sha256": "0c03da63b79072e30662ac9e292894eea3fc1e5c6119ce616e2d6440d1217845",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_72.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_72.json",
+      "bytes": 6969,
+      "sha256": "0194a15ed376a5bf88b0f271a2758f83c63f0c47a2981d73a4f94860478ba5b8",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_72.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_73.csv",
+      "bytes": 388758,
+      "sha256": "20c3ee66f34b8307ecc357ea026d6d78311d67215745b8d66cf24159baf96223",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_73.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_73.json",
+      "bytes": 6976,
+      "sha256": "68284a2de0f9901dee525f97df317da46c7809bcd2ef9181bc36d16bc9fb93e3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_73.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_74.csv",
+      "bytes": 388759,
+      "sha256": "7cb37b1bdf6ddb6529cbb05052b609b21548c0942b9e9d048ddf6bae0281f733",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_74.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_74.json",
+      "bytes": 6987,
+      "sha256": "4d925d74b5ff894109643be4351d3e5e052ec314e499a4cacbb3c404fca253f5",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_74.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_75.csv",
+      "bytes": 387466,
+      "sha256": "aa43efe96852d1f725071e1f2061db2564fda23e4b0d79b12f29ed3a0283a6c5",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_75.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_75.json",
+      "bytes": 6976,
+      "sha256": "638137ee8c675517b21d27bd1663c7c38a5b4dcfa5723b368a6de804ff0f3b6d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_75.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_76.csv",
+      "bytes": 387481,
+      "sha256": "f8df125402e718c2abeb2c281435e5586b78cdfdaa01baff9a467a397ed7b975",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_76.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_76.json",
+      "bytes": 6969,
+      "sha256": "4f76c75da796f6bdc595841fc12bc7bd997717d8d8e57009b2938f469750d38e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_76.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_77.csv",
+      "bytes": 388124,
+      "sha256": "5c9e28a6ce56f9673f396a34f14e5a13c77e2f7a684864172dae7e0326b23cde",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_77.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_77.json",
+      "bytes": 6976,
+      "sha256": "bdc69078ac3d6d31c06c2cdd707e755d2a20f48fc739b0356a0422650f43a65b",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_77.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_78.csv",
+      "bytes": 388117,
+      "sha256": "79317654d98aa24e53a11b9b142782b34bbc7c2a79a836aa288ca40cb3bef739",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_78.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_78.json",
+      "bytes": 6967,
+      "sha256": "e4c430bcf9f749d501f9ec02d16cb8612a2c2e2e15668fdcfbadff282778fda2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_78.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_79.csv",
+      "bytes": 387721,
+      "sha256": "c3faaffe5ea1c7f0a6e98033fadc1265a3665ac7066fac17cce6f2bac904d6f0",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_79.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_79.json",
+      "bytes": 6998,
+      "sha256": "d25c8b2e651bd38cc3cf9bf24e7efa4d246cbe895e5081511055e08b5ed5e16c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_79.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_8.csv",
+      "bytes": 377331,
+      "sha256": "4cd0eef26ef92d51ffde02a73d54f2ed17d5ec53805ba4f5bcffeec7f7f1b7ee",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_8.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_8.json",
+      "bytes": 6950,
+      "sha256": "c9bcabd9ff8ab5c071e970a1cbc90998c4a3cc11be2765cbe3fc9007079c1195",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_8.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_80.csv",
+      "bytes": 387721,
+      "sha256": "670a2cc25d0d7bf7b4561420b7dfad31893225506bf30be98f49d3ff5d637a7e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_80.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_80.json",
+      "bytes": 6985,
+      "sha256": "5e551157188d2295e1498a025136d25c8029eea19e6cc5c9e6caabbc5b2aeb58",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_80.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_81.csv",
+      "bytes": 388400,
+      "sha256": "9d6352a999e25edad28228e29c319fdbdb85e112fcc956ab65b15b0873af208e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_81.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_81.json",
+      "bytes": 6998,
+      "sha256": "15f513956428ab31b959728895e1b7313f4a6a1936ef69c63444915a430ce827",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_81.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_82.csv",
+      "bytes": 388406,
+      "sha256": "93e1a9c11dd4b9f9db15a1216f09821844d0112632ac3a0de99fd5639618e863",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_82.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_82.json",
+      "bytes": 7007,
+      "sha256": "414c8923381e77436e954707f04974b1681e3b1b74ba714faff18556f50a0d70",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_82.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_83.csv",
+      "bytes": 387590,
+      "sha256": "2abd08c641ed3ecde84307cf03095df08f345649113af197680df45c27114493",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_83.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_83.json",
+      "bytes": 6998,
+      "sha256": "885865ff71c37af72053ac0555127c80a4b87856a8dc854ef8daa7e34cb5652f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_83.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_84.csv",
+      "bytes": 387586,
+      "sha256": "179287f1a83032e88ac176a1ca4cd6777cbf7057cdbdd39801c2dffb6bd41996",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_84.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_84.json",
+      "bytes": 6987,
+      "sha256": "bd19364207a720e766ab7e018f0002bff51471f120d65ae2f15d9f6f3dbf217c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_84.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_85.csv",
+      "bytes": 388030,
+      "sha256": "559b8ea85005cfc1adcc54b77c092e13a861a993669550bab227d342247f175d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_85.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_85.json",
+      "bytes": 6976,
+      "sha256": "75441754fb890b4512f368fd956ce7660456e2998214ae9d35ec38474c656eb2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_85.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_86.csv",
+      "bytes": 388030,
+      "sha256": "464f699546b5d07278ac54e8f674e419aa56c425185bd34f65c143078c0870c7",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_86.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_86.json",
+      "bytes": 6966,
+      "sha256": "72271dfdef813c20a005c4c039fb8c66be1df171c935c558397f04ffe742c127",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_86.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_87.csv",
+      "bytes": 388233,
+      "sha256": "373bed9e023b84cfd3330c6e86253882aabe0fb2d020bc27c724ff75f779e338",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_87.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_87.json",
+      "bytes": 6976,
+      "sha256": "f8e3d0e737529fbe1b64f45a7a6b22dc4086f580cb3c407da307c68da14b19d4",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_87.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_88.csv",
+      "bytes": 388225,
+      "sha256": "f6ff182072c479684fd2cc3d9ec9e0031b765140e8a22e81b27baf8b88fdc5e3",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_88.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_88.json",
+      "bytes": 6977,
+      "sha256": "829c87c10e76197d0d83e1f9b359ed07847ab89a1e2c952c41323985855ec8b5",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_88.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_89.csv",
+      "bytes": 388512,
+      "sha256": "35ae45197c7b249c8ebc8a161e95371b804c7c5546360af615d544ef06337139",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_89.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_89.json",
+      "bytes": 6976,
+      "sha256": "0d736a751ca9b3f3b8bb6a173b7b0b8c640b622886c2b5be8933f047135283f2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_89.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_9.csv",
+      "bytes": 379293,
+      "sha256": "b2bdb609013fadea33ca00929888137337a7c815e149edb2a4f952593cf92c5d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_9.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_9.json",
+      "bytes": 6953,
+      "sha256": "b4871e8eaab363d3ea812d1084c2851c4d7a59dcc438914f7ebf92172f580f7e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_9.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_90.csv",
+      "bytes": 388516,
+      "sha256": "537a0cb378a3438a443a178b3bbe5becd24e413656880624c57cb3334802ff81",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_90.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_90.json",
+      "bytes": 6981,
+      "sha256": "1f05614d62cbe598067a141751d749d9831c02c25be079bb65b816ff8b05d73e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_90.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_91.csv",
+      "bytes": 387495,
+      "sha256": "4ab17e92ba50eb534abd38e1c6a7700cafe1956b39c32b6d87463dd523c5c0c1",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_91.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_91.json",
+      "bytes": 6976,
+      "sha256": "7e55965009902a746979369944da094bc6109b928e6fca18a8e35a54b4f4d314",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_91.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_92.csv",
+      "bytes": 387497,
+      "sha256": "96f18d365de7742b9f23a3654305b570e93cbf4a5b9ab77670f3d99e06d0fdb0",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_92.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_92.json",
+      "bytes": 6969,
+      "sha256": "d40a43f1612809a9494aa11836d3494199ae480197c7382e6c8b7deb4dd2a48c",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_92.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_93.csv",
+      "bytes": 387661,
+      "sha256": "924c387b138a23ed8b8a415cf24a3b58d64f36a505006e48971d0263d626baac",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_93.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_93.json",
+      "bytes": 6976,
+      "sha256": "2166f804420e71253ae7e0e1e8d3be7672a8f169a02d75c580f7f0b5124e6b85",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_93.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_94.csv",
+      "bytes": 387648,
+      "sha256": "1dd72d11624724965c084b8797e8c34dc2c1e8df0fe583349cd54e8d0015245f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_94.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_94.json",
+      "bytes": 6963,
+      "sha256": "cf0f819ec94ec9e0464571b57f1e814fa1c2f50f8195ca1fcbe6a1b21cb59ba8",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_94.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_95.csv",
+      "bytes": 387886,
+      "sha256": "c2c014e58ff5b46dea06e88001c061e6d3c61eebe2233877f10054418cf1ff3e",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_95.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_95.json",
+      "bytes": 6998,
+      "sha256": "39e81be520e4f07802dd10aefc9578debaea773d2dd1a6a57cb1fac1be2914f2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_95.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_96.csv",
+      "bytes": 387886,
+      "sha256": "3f43b1b5dfb8517b0aee9d2cccfd6ae3d1cc0cac7052d61c28c4640ac5c8dc39",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_96.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_96.json",
+      "bytes": 6994,
+      "sha256": "626c22ad4bd58820d0d053dee07175c0add6066c54ce2349915d17c641c80bbe",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_96.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_97.csv",
+      "bytes": 388077,
+      "sha256": "5948bbbd4458bdf7d4d0d03abcff710eb4bab909214ab61d9ace091d113d400a",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_97.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_97.json",
+      "bytes": 6998,
+      "sha256": "f59e8242b11d20f86eccd7712386e7d47b5878c011ec628acde288276998d856",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_97.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_98.csv",
+      "bytes": 388087,
+      "sha256": "869fbb5f8c051777286ce5f94aad385b24fde7018201e6e9a6339c948153f2f1",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_98.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_98.json",
+      "bytes": 6985,
+      "sha256": "cea8af5b56da8b134acdefa91f67f996673ef636cf6b80b694d401488cb98b87",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_98.json"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_99.csv",
+      "bytes": 388199,
+      "sha256": "51d59c27360f9197e0f937d16228e88ad32be66324a5d7e2be70dda95f31d580",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_99.csv"
+    },
+    {
+      "path": "files/diagnostic/input/source/train_stopped_trial_99.json",
+      "bytes": 6998,
+      "sha256": "cf92a6b367d3fdbd3dc9b55f47d3128452cc305ab680c1b4e45ff1730746e26d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/input/source/train_stopped_trial_99.json"
+    },
+    {
+      "path": "files/diagnostic/native/evaluation.json",
+      "bytes": 4196,
+      "sha256": "06192c818965f248907aae857cf1694e1dae41dc5575bdaaf859a15568ba7496",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/evaluation.json"
+    },
+    {
+      "path": "files/diagnostic/native/execution.json",
+      "bytes": 3101,
+      "sha256": "2713710a0d682f184324b5754da3fea8bb3b2839f1800f51c2b13555e13a107d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/execution.json"
+    },
+    {
+      "path": "files/diagnostic/native/job.json",
+      "bytes": 4488030,
+      "sha256": "dfdc9b8a3a5a1fb66c28a242576f564ad45f3f176e6e485e8b3c21e7c047c8b2",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/job.json"
+    },
+    {
+      "path": "files/diagnostic/native/model-after.json",
+      "bytes": 7732584,
+      "sha256": "6217993f7f6c447da6d6b6967ef639b15ee2d36312e6fb64a42a9a9b8bc9b546",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/model-after.json"
+    },
+    {
+      "path": "files/diagnostic/native/model.json",
+      "bytes": 7732584,
+      "sha256": "6217993f7f6c447da6d6b6967ef639b15ee2d36312e6fb64a42a9a9b8bc9b546",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/model.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-0.json",
+      "bytes": 1757081,
+      "sha256": "8c5b21613a4ba537782b16856843bfc47d81bc498de9e4084be8606f30911857",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-0.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-1.json",
+      "bytes": 1757013,
+      "sha256": "5786f75b12da9cddcfd427d03eb5d2d1f1ce505a0cf6b1cf3fd02d8e9eabaa7f",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-1.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-2.json",
+      "bytes": 1757137,
+      "sha256": "cf65d962aabac28280867341e508d5bdaeb074a369516a69ba3d815ef986ad98",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-2.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-3.json",
+      "bytes": 1757192,
+      "sha256": "25a265343b93c027fabaf4abc67438a167dc17deec4998a6da0138d3e28a6d89",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-3.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-4.json",
+      "bytes": 1757409,
+      "sha256": "b7f27d1dc631cea766cd7620b0a40f6aeb19a32db2e8116ac79f253643905810",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-4.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-5.json",
+      "bytes": 1761328,
+      "sha256": "72cdda3d5e5119643db19f558fbafba43c9e45e588ccb1abad5ed735ac9f3673",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-5.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-6.json",
+      "bytes": 1761506,
+      "sha256": "66e7098140187aeac832d1abbec6cd75bff6e05d34f170dff679034917088963",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-6.json"
+    },
+    {
+      "path": "files/diagnostic/native/trial-7.json",
+      "bytes": 1761562,
+      "sha256": "2f83a557e34726006c1e3ab2fe2a2f2f2e34cca2d6ea778311740f26dd4bab41",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/native/trial-7.json"
+    },
+    {
+      "path": "files/diagnostic/process/loaded-files.json",
+      "bytes": 4495,
+      "sha256": "b79d2c7dee45f348cd57ef9d8f79150dd472644904c0bbda8691bc41a5971034",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/loaded-files.json"
+    },
+    {
+      "path": "files/diagnostic/process/owned-process.json",
+      "bytes": 395,
+      "sha256": "6f1a946bba3f64376dff0460967197c2c821dd016814b97f5bb84dadbc11172d",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/owned-process.json"
+    },
+    {
+      "path": "files/diagnostic/process/request.json",
+      "bytes": 841,
+      "sha256": "c6b55688925e9def316d3522ccf595d5e084ba5efebae637b96951732c916edb",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/request.json"
+    },
+    {
+      "path": "files/diagnostic/process/result.json",
+      "bytes": 444,
+      "sha256": "3b98c6a16ab8147dddfe523ec7e4b8ff656a00e2b41527f65011b250c59dfeef",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/result.json"
+    },
+    {
+      "path": "files/diagnostic/process/runtime.json",
+      "bytes": 12192,
+      "sha256": "bc99f10a06fe65cf0b9b181f87992f46b685cc07a60c2f46008fd5493b0c1689",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/runtime.json"
+    },
+    {
+      "path": "files/diagnostic/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/stderr.log"
+    },
+    {
+      "path": "files/diagnostic/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/process/stdout.log"
+    },
+    {
+      "path": "files/diagnostic/run-manifest.json",
+      "bytes": 64564,
+      "sha256": "aad6c2c80a8c90dca46d1ea68227690cada05cc232ef6a5e288cfbf75059a3bd",
+      "source_archive": 1,
+      "archive_member": "evaluation/runs/Classic-threshold-training100/run-manifest.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/job.json",
+      "bytes": 1915545,
+      "sha256": "083e02c9ada5e8ce84a6722cef0e87a777c58759ede2707ca47420051ab38905",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/job.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_learned_state.json",
+      "bytes": 1252572,
+      "sha256": "a1812e2bcd8cbb0f135010ac149bef4f3e4ed5b9152c6ea3cca33a49b82462b4",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_learned_state.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_learned_summary.json",
+      "bytes": 824387,
+      "sha256": "0bb4f5c60ec23fbfb2bab9b43d7c0964113259daf7b351e6317566e3336e0481",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_learned_summary.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_1.csv",
+      "bytes": 22082,
+      "sha256": "2cf05522eb1db3c14ca99146f3052101c5e4b01902b78a3a0cf1cc0d3ba6e3ca",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_1.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_1.json",
+      "bytes": 5619,
+      "sha256": "13936ec70abeb193b241c4ef8b0b078799a4500d28303e1554cd44f44a485453",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_1.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_10.csv",
+      "bytes": 20897,
+      "sha256": "438acfd212ce774fcccc1e3a17f5e37e87fa842111afae8db5d20a7cdfd5db34",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_10.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_10.json",
+      "bytes": 5709,
+      "sha256": "c5fbe506f5b9a0905da112ac9f0d2af8322bdb2b676c54421995072904c366ce",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_10.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_11.csv",
+      "bytes": 20890,
+      "sha256": "9e0082c3f35ad928f5461bf8b71be547e5a004c7164f384a2d8c9168d1cd7d98",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_11.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_11.json",
+      "bytes": 5710,
+      "sha256": "5af77949337bba3ca8d8aafe1e0c21f90b57ea1be6909a714bfc69eaa5a1a659",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_11.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_12.csv",
+      "bytes": 21833,
+      "sha256": "9d127a6d5fb48228f3238f9c86b8f0741c569afd157edc2607693ff825089cb9",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_12.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_12.json",
+      "bytes": 5682,
+      "sha256": "856bbdd534008251dba408ad5083cb10949988faf8703b49304434d018542706",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_12.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_13.csv",
+      "bytes": 21901,
+      "sha256": "4c0345cc95f36479e853f2d70fe87189080a18303410f161a1c319b9f027f4fc",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_13.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_13.json",
+      "bytes": 5703,
+      "sha256": "8553a21c87ee577aefd2783c8e0168ab2e1f8763d7ee65db17891a8b6f506838",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_13.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_14.csv",
+      "bytes": 21886,
+      "sha256": "06b5c60868390c7f70147156e8b3ec96deb815cda8b05e19740ba313337f933a",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_14.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_14.json",
+      "bytes": 5713,
+      "sha256": "911776a64237724edb6557e63bbbfdcd4091c6a1020e7e20eec917423059b5e8",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_14.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_2.csv",
+      "bytes": 22070,
+      "sha256": "d5ef565e53d447d5ff0fc814b93af74f6a556bdeaf9e8e73bf6052f6800cdcbc",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_2.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_2.json",
+      "bytes": 5702,
+      "sha256": "f2f4f02902d01a157ee4b9869699f53c8af12d77cb333a2dea075814726a7759",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_2.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_3.csv",
+      "bytes": 22445,
+      "sha256": "631a288d5f0c6987c9e69f3ea386f378e794de214f83558c0fb4bd5c5b6e5c49",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_3.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_3.json",
+      "bytes": 5707,
+      "sha256": "3109509eb8c48441cc57be2e1ea8de8d337625fa14fab2341a9c2b88c95d6141",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_3.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_4.csv",
+      "bytes": 22861,
+      "sha256": "ca9368db79a46bc3b1e53f27d401adfc0d4c3e2fd4504053bea635b1bce33789",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_4.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_4.json",
+      "bytes": 5690,
+      "sha256": "2141ffeeb56526fe9e8fe1cb1c8b74874e99735f101c7438fa95a70baf3d61a5",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_4.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_5.csv",
+      "bytes": 22898,
+      "sha256": "0353b09de806017e071e8cca5bea79281d89e62bbeb99606944e64aa56d2efec",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_5.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_5.json",
+      "bytes": 5682,
+      "sha256": "0738dda7ab20634e8a239f1c6e7dd4cce4292842a1cbec79b4250400db94b2ec",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_5.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_6.csv",
+      "bytes": 22013,
+      "sha256": "ccc67b3e0a89ec9a3a85d774b546f5d19744bba313ad8738c09e943a0f8cacf9",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_6.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_6.json",
+      "bytes": 5689,
+      "sha256": "a0bb3f0cd362067563c3365c3703afd666db6a60fc744708b982f4505de6f1f4",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_6.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_7.csv",
+      "bytes": 20864,
+      "sha256": "daabd69120f5a769ea7bcc3e02ae678955a808dce88c451e9e2cd2a37a9f901f",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_7.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_7.json",
+      "bytes": 5703,
+      "sha256": "1460ea1b07afa6115169f61508d1f172dfd2ce1f53628bd6c4618d8734770911",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_7.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_8.csv",
+      "bytes": 20847,
+      "sha256": "4e6e6a0513e549f87576800775c9ba91e90587631197d08c97aef4d2b4afca99",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_8.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_8.json",
+      "bytes": 5671,
+      "sha256": "3e9b2761cd93a9dedf390713274d2fedf6a35048a1ac553d8c0e209193fa9e69",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_8.json"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_9.csv",
+      "bytes": 20909,
+      "sha256": "f17e97b481c4dc1fb9f6c6f904332e640336afe891eeda075cf05b9e446f34ce",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_9.csv"
+    },
+    {
+      "path": "files/legacy-evaluate/input/source/train_state_trial_9.json",
+      "bytes": 5679,
+      "sha256": "02b2c460fa06a04ff88ab663ce0aa83284872c3027cce7b8b379b230ca638994",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/input/source/train_state_trial_9.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/evaluation.json",
+      "bytes": 1321,
+      "sha256": "7b9ffde9dd14b5062fa391b9ab88d2c10eae55c38aa296b623c1e0060363c2b8",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/evaluation.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/execution.json",
+      "bytes": 1775,
+      "sha256": "22ff7cbcfb01f274859bb68e5470cc88b94916d31f36e6bf04b7b90ad429a5a8",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/execution.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/job.json",
+      "bytes": 2680165,
+      "sha256": "25bbd346bd57740d694a60c92fd36c630a20430cb054471e7abdfd322b065ab5",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/job.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/model-after.json",
+      "bytes": 2543180,
+      "sha256": "2cce52e470a08c49c4bfb4cf9666e4b08ea8934dff09918de4f1252ca83ab39c",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/model-after.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/model.json",
+      "bytes": 2543180,
+      "sha256": "2cce52e470a08c49c4bfb4cf9666e4b08ea8934dff09918de4f1252ca83ab39c",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/model.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/trial-0.json",
+      "bytes": 87446,
+      "sha256": "fddffba55e8d16dc38af76be4ddd47709933c2189a3e3545f8c3798bcb663b49",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/trial-0.json"
+    },
+    {
+      "path": "files/legacy-evaluate/native/trial-1.json",
+      "bytes": 495119,
+      "sha256": "45d28efda695cddc428825d7a5ecb54a9373e97809d2d3130a4b1fdc6785011b",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/native/trial-1.json"
+    },
+    {
+      "path": "files/legacy-evaluate/process/loaded-files.json",
+      "bytes": 15951,
+      "sha256": "1637b52faff56fd710e34c81c0fe283b1e2f52d623db2c6ab4ea4f7cd85989fb",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/loaded-files.json"
+    },
+    {
+      "path": "files/legacy-evaluate/process/owned-process.json",
+      "bytes": 418,
+      "sha256": "7c0106cb49a945c6ae15aad7dc7473e911ac40d37bc2d882b5f15ea2dd2cd466",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/owned-process.json"
+    },
+    {
+      "path": "files/legacy-evaluate/process/request.json",
+      "bytes": 874,
+      "sha256": "b3375b7013b0343cbe04c936c14dd2cf2e7f9c548f384c9f667981c6bb677fa7",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/request.json"
+    },
+    {
+      "path": "files/legacy-evaluate/process/result.json",
+      "bytes": 444,
+      "sha256": "2f2b4b9625487d1db064d39a28865ab7672f2dd1cf5619c23ce5cb874c518acd",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/result.json"
+    },
+    {
+      "path": "files/legacy-evaluate/process/runtime.json",
+      "bytes": 32039,
+      "sha256": "ffd0a4c93e41247ef0e263607ee723e0c96aab685ac8621e8742795ab9fa05ed",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/runtime.json"
+    },
+    {
+      "path": "files/legacy-evaluate/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/stderr.log"
+    },
+    {
+      "path": "files/legacy-evaluate/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/process/stdout.log"
+    },
+    {
+      "path": "files/legacy-evaluate/run-manifest.json",
+      "bytes": 20894,
+      "sha256": "6d52368668ca1e84b95ae062d6f60334045adb2e2c1f61be6c3bdce5600eebe5",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/run-manifest.json"
+    },
+    {
+      "path": "files/legacy-train/input/job.json",
+      "bytes": 841603,
+      "sha256": "4c9dd17a9e67cea1e45d8e29feaff490240dc432687c51c193207c3f2547336a",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/input/job.json"
+    },
+    {
+      "path": "files/legacy-train/native/execution.json",
+      "bytes": 1901,
+      "sha256": "b1b4e9c2b76e8c1ddb9616241d30b35521ce854ef660672167e32260f9a82b70",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/execution.json"
+    },
+    {
+      "path": "files/legacy-train/native/initial-state.json",
+      "bytes": 124170,
+      "sha256": "6b994442c26ef4cb8276e2c02b654b090e04f7bcd888eeefdee4bc13d2e22456",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/initial-state.json"
+    },
+    {
+      "path": "files/legacy-train/native/job.json",
+      "bytes": 1172043,
+      "sha256": "ef117ec90c001502f4e2544b23735cf3e28de2e5cea130d6c9381b5d567dbe70",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/job.json"
+    },
+    {
+      "path": "files/legacy-train/native/train_stopped_state.json",
+      "bytes": 1137921,
+      "sha256": "c175d75e465a2d1cc80a1db433636fa8d6a52ddf96b2ac6f24aa77c59b8df2da",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/train_stopped_state.json"
+    },
+    {
+      "path": "files/legacy-train/native/train_stopped_summary.json",
+      "bytes": 1904,
+      "sha256": "e822f1c1a09bb6fd30ac83c3356f1eed17337281208680089d418194b19210f2",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/train_stopped_summary.json"
+    },
+    {
+      "path": "files/legacy-train/native/train_stopped_trial_1.csv",
+      "bytes": 26,
+      "sha256": "1c7a90858146622ceafdcc8b14695ae939d12f94c1d1e425463cd30cb10c4101",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/train_stopped_trial_1.csv"
+    },
+    {
+      "path": "files/legacy-train/native/train_stopped_trial_1.json",
+      "bytes": 4786,
+      "sha256": "de74b80c1c42a20718591c730a3255a492c010f12268c8d687cdbc2951fb339e",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/native/train_stopped_trial_1.json"
+    },
+    {
+      "path": "files/legacy-train/process/loaded-files.json",
+      "bytes": 6061,
+      "sha256": "643a37199e56e2ba29f72897a8ee10465ade0135b0f97fb0ed8a8872c9c0250a",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/loaded-files.json"
+    },
+    {
+      "path": "files/legacy-train/process/owned-process.json",
+      "bytes": 419,
+      "sha256": "96241d5b1322b04618225a169814de9a9541b6f753c03fc2fbadb75747a24d7a",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/owned-process.json"
+    },
+    {
+      "path": "files/legacy-train/process/request.json",
+      "bytes": 868,
+      "sha256": "7ded30ccd96b3ceec717467ccd44b881bcadcd2adc9eaf54e8d619b20099593e",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/request.json"
+    },
+    {
+      "path": "files/legacy-train/process/result.json",
+      "bytes": 449,
+      "sha256": "74c5c72e7b71c9c5e8d606c30e032cca2998057694615f8edbddbd316d87e1ce",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/result.json"
+    },
+    {
+      "path": "files/legacy-train/process/runtime.json",
+      "bytes": 32039,
+      "sha256": "ffd0a4c93e41247ef0e263607ee723e0c96aab685ac8621e8742795ab9fa05ed",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/runtime.json"
+    },
+    {
+      "path": "files/legacy-train/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/stderr.log"
+    },
+    {
+      "path": "files/legacy-train/process/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/process/stdout.log"
+    },
+    {
+      "path": "files/legacy-train/run-manifest.json",
+      "bytes": 12863,
+      "sha256": "05ea798eb77126d54abcb7a397c62b9d1e7143b6f24d60831fecc3669b0759c5",
+      "source_archive": 0,
+      "archive_member": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/run-manifest.json"
+    }
+  ],
+  "verified_duplicate_glog_aliases_omitted": [],
+  "numerical_rerun": false,
+  "scientific_verdict": null
+}

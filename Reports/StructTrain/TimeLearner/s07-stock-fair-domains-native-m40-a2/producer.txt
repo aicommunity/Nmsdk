@@ -1,0 +1,110 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,time,threading,traceback,tarfile,shutil,unittest
+base=Path('/media/user/Data/TimeLearnerRefactor')
+source=base/'source-stock-code-compare-a1'
+sdk=base/'source-fair-contexts-normal-a3'
+runtime=base/'runtime-fair-contexts-normal-a3'
+build=base/'build-fair-contexts-normal-a3'
+templates=base/'readbacks/s07-stock-failure-production-visual-a1/restored/study'
+out=base/'readbacks/s07-stock-fair-domains-normal-a2'
+out.mkdir(exist_ok=False)
+root='00ebc7286726c7d26c9fca2fff1baab0089123c1'
+sys.dont_write_bytecode=True
+sys.path.insert(0,str(source))
+stop=threading.Event();thread=None;registry=None;token=None;errors=[];passed=False
+def ticks(pid):return Path('/proc',str(pid),'stat').read_text().rsplit(') ',1)[1].split()[19]
+def write(n,v):(out/n).write_text(json.dumps(v,indent=2,allow_nan=False)+'\n')
+def git(repo,*a):return subprocess.check_output(['git','-C',str(repo),*a],text=True).strip()
+def digest(p):
+ h=hashlib.sha256()
+ with p.open('rb') as f:
+  for b in iter(lambda:f.read(1024**2),b''):h.update(b)
+ return h.hexdigest()
+write('owner.json',{'pid':os.getpid(),'start_ticks':ticks(os.getpid()),'tool_root':root,'sdk_root':'36f598524b08ef9a5b72e26e50ef1f34501331e2','PulseLib':'8f057e69f489ab3eddd5e7f889404b779a85e93e'})
+(out/'producer.txt').write_bytes(Path(__file__).read_bytes())
+write('prior-launch-failure.json',{'job':'s07-stock-fair-domains-normal-a1','worker_not_started':True,'reason':'contained controller rejected129600s before worker creation; enclosing limit now86400s, per-Train budgets unchanged','original_launcher_log':(base/'readbacks/launch-stock-fair-domains-normal-a1.log').read_text()})
+try:
+ assert git(source,'rev-parse','HEAD')==root and not git(source,'status','--porcelain','--untracked-files=no')
+ from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+ from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+ registry=Reservations(base/'resource-reservations.sqlite3')
+ prior=base/'readbacks/s07-fair-contexts-normal-a3'
+ dependency=inspect_worker_dependency(Path(str(prior)+'-container'),registry,prior.name)
+ assert dependency['state']=='ready' and dependency['reservation_state']=='released',dependency
+ assert json.loads((prior/'terminal.json').read_text())['fair_domains137_passed']
+ write('native-prerequisite.json',dependency)
+ asan=base/'readbacks/s07-fair-domains-asan38-a1'
+ asan_state=inspect_worker_dependency(Path(str(asan)+'-container'),registry,asan.name)
+ assert asan_state['state']=='ready' and asan_state['reservation_state']=='released',asan_state
+ assert json.loads((asan/'terminal.json').read_text())['fair_domains_asan38_passed']
+ write('asan-prerequisite.json',asan_state)
+ assert shutil.disk_usage(base).free>=24*1024**3
+ reservation=registry.reserve(out.name,[{'path':str(out),'access':'write'}]+[{'path':str(p),'access':'read'} for p in (source,sdk,runtime,build,templates,base/'readbacks/s07-stock-recovery-normal-a1/study',base/'source-csearch-threshold-joint-asan-build-a1/Bin')],ttl_seconds=120)
+ token=reservation['token'];write('reservation.json',reservation)
+ def heartbeat():
+  while not stop.wait(20):
+   try:registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=heartbeat,daemon=True);thread.start()
+ os.environ['QT_QPA_PLATFORM']='offscreen'
+ for k in ('LD_LIBRARY_PATH','QT_PLUGIN_PATH','ASAN_OPTIONS'):os.environ.pop(k,None)
+ from Scripts.StructTrain.TimeLearner.runtime import snapshot
+ manifest=snapshot(sdk,runtime/'NeuroModelerConsole',runtime/'NeuroModelerConsole.ini',build/'CMakeCache.txt')
+ assert manifest['source_closure']['root']['head']=='36f598524b08ef9a5b72e26e50ef1f34501331e2'
+ assert manifest['source_closure']['Libraries/Nmsdk-PulseLib']['head']=='8f057e69f489ab3eddd5e7f889404b779a85e93e'
+ write('runtime.json',manifest)
+ code={'pulse_core':git(sdk/'Libraries/Nmsdk-PulseLib','rev-parse','HEAD:Core'),'rdk_core':git(sdk/'Rdk','rev-parse','HEAD:Core'),'console_driver':hashlib.sha256(json.dumps({p.relative_to(sdk).as_posix():digest(p) for p in sorted((sdk/'App/NeuroModelerConsole').rglob('*.cpp'))},sort_keys=True).encode()).hexdigest()}
+ write('code-identity.json',code)
+ os.environ['TIMELEARNER_STOCK_RECOVERY_TEMPLATES']=str(templates)
+ os.environ['TIMELEARNER_STOCK_RECOVERY_RUNTIME']=str(out/'runtime.json')
+ module='Scripts.StructTrain.TimeLearner.tests.test_stock_recovery_study.StockRecoveryDesignTest'
+ suite=unittest.defaultTestLoader.loadTestsFromName(module)
+ assert suite.countTestCases()==6
+ with (out/'design-tests.log').open('w') as log:
+  tests=unittest.TextTestRunner(stream=log,verbosity=2).run(suite)
+ write('design-tests.json',{'tests_run':tests.testsRun,'failures':len(tests.failures),'errors':len(tests.errors),'skipped':len(tests.skipped),'successful':tests.wasSuccessful()})
+ assert tests.wasSuccessful() and tests.testsRun==6 and not tests.skipped
+ from Scripts.StructTrain.TimeLearner.stock_recovery_study import prepare,run
+ from Scripts.StructTrain.TimeLearner.stock_recovery_compare import match_designs,compare_studies
+ baseline=base/'readbacks/s07-stock-recovery-normal-a1/study'
+ prepare(templates,out/'runtime.json',code,out/'preregistered')
+ write('matched-preregistration.json',{'baseline_native_evidence':'da57d3cb10826843790b193e93cdcb380fa7f0fc','pairs':match_designs(baseline,out/'preregistered'),'before_any_native_operation':True,'scientific_verdict':None})
+ assert not errors,errors
+ result=run(templates,out/'runtime.json',code,out/'study')
+ assert match_designs(baseline,out/'study')==match_designs(baseline,out/'preregistered')
+ write('matched-code-comparison.json',compare_studies(baseline,out/'study'))
+ assert not errors,errors
+ assert result['training_runs']==8 and result['preflight_runs']==8 and result['validity']=='valid'
+ passed=True
+except BaseException as e:
+ write('exception.json',{'reason':str(e),'traceback':traceback.format_exc(),'scientific_verdict':None})
+finally:
+ stop.set()
+ if thread:thread.join(timeout=30)
+ write('terminal.json',{'stock_recovery_matrix_executed_and_audited':passed,'classification_assessed':False,'scientific_verdict':None,'whole_plan_complete':False,'reservation_errors':errors})
+ hashes={p.relative_to(source).as_posix():digest(p) for p in (source/'Scripts/StructTrain/TimeLearner').rglob('*.py') if '__pycache__' not in p.parts}
+ write('tool-source-hashes.json',hashes)
+ try:
+  from Scripts.StructTrain.TimeLearner.portable_primary import _alias_plan
+  files={p.relative_to(out).as_posix():p for p in out.rglob('*') if p.is_file()}
+  members={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in files.items()}
+  omissions=_alias_plan(out,members)
+  omitted={r['omitted_alias'] for r in omissions}
+  for path in out.rglob('*'):
+   if path.is_symlink():
+    name=path.relative_to(out).as_posix();assert name in omitted,('unknown_symlink',name)
+    row=next(r for r in omissions if r['omitted_alias']==name)
+    assert path.resolve()==(out/row['retained_target']).resolve()
+    row['original_symlink_target']=os.readlink(path);row['original_symlink_target_attested']=True
+  write('archive-alias-omissions.json',{'only_verified_duplicate_glog_aliases_omitted':True,'records':omissions,'source_files_deleted':False})
+  files={p.relative_to(out).as_posix():p for p in out.rglob('*') if p.is_file() and p.relative_to(out).as_posix() not in omitted}
+  members={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in files.items()}
+  archive=out/'primary.tar.xz'
+  with tarfile.open(archive,'w:xz',preset=3) as a:
+   for n,path in sorted(files.items()):
+    info=tarfile.TarInfo(n);info.size=path.stat().st_size;info.mode=0o644
+    with path.open('rb') as f:a.addfile(info,f)
+  write('bundle.json',{'kind':'stock_recovery_native_cold_matrix','root':root,'members':members,'archive_bytes':archive.stat().st_size,'archive_sha256':digest(archive),'classification_assessed':False,'scientific_verdict':None,'alias_omissions':len(omissions)})
+ except BaseException as archive_error:
+  write('archive-exception.json',{'reason':str(archive_error),'traceback':traceback.format_exc(),'native_primary_preserved_on_server':True,'portable_archive_attested':False,'scientific_verdict':None})
+ print('CLOSED',passed,flush=True)

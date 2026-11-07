@@ -1,4 +1,4 @@
-# Готовность к научным экспериментам — 06.11.2026
+# Готовность к научным экспериментам — 07.11.2026
 
 Сквозной процесс cold Train → boundary continuation → полный model export →
 измеренная калибровка с confirmation → frozen evaluation уже выполняется на
@@ -40,9 +40,12 @@ PostTune можно оставить выключенными; базовый к
 
 Normal304 и адресные ASan8 SDK2e прошли. ASan133 A3 дал132 passed/1 output-directory
 assertion failure; runner исправлен и адресно проверен на прежних бинарниках.
-Полный свежий A5 выполняется отдельно: до его terminal/JUnit/closure нельзя
-объявлять общий SDK принятым. Старые положительные ASan304 относятся к другому
-SDK и не заменяют этот результат. Detect_leaks=0 не доказывает отсутствие утечек.
+Полный свежий A5 прошёл133/133. Сверены4888 primary members,321 native,
+323 Python и335 tool source hashes; fresh closure/released lease подтверждены.
+[Точные версии и scope](IntegratedSharedAsan133Verification.json): root2e061/
+Pulse12d, без последующих invalid-budget/recovery изменений. Это закрывает
+заявленный ASan133 gate, не всю обязательную матрицу SDK. Старые ASan304 относятся
+к другому SDK. Detect_leaks=0 не доказывает отсутствие утечек.
 
 Coordinator schema1/schema2 прошёл16/16 cases /40 native phases, попарные CSV
 совпали. ConditionSpec binding при этом декларативен; он не доказывает полную
@@ -63,12 +66,14 @@ stall доказательством физической невозможнос
 
 ## Последовательность научных проверок
 
-1. Воспроизведение сохранённого августовского состояния в исходных порядке,
-   ITI, пороге, reset policy, timestep и физике. Неизвестную provenance помечать
-   явно; не достраивать certificate задним числом.
-2. Cold retrain в тех же условиях и legacy/V2 сравнение с исходной математической
-   целью. До интерпретации различий проверить effective graph/params и реальные
-   волны; совпадение L само по себе не доказывает эквивалентность алгоритмов.
+1. [Saved-state replay августа](HistoricalAugustReplay.ru.md) уже воспроизвёл
+   три исходных результата4/8,5/8,6/8 с первоначальным протоколом. Его receipt
+   не является V2 certificate или независимой оценкой.
+2. [Настоящий historical cold Train→Test](HistoricalAugustColdStart.ru.md)
+   также уже воспроизвёл эти результаты с полным переносом нейрона. Осталось
+   legacy/V2 A/B при согласованных исходных условиях. До интерпретации различий
+   проверить effective graph/params и реальные волны; совпадение L само по себе
+   не доказывает эквивалентность алгоритмов.
 3. Frozen evaluation с target в каждой позиции, изменениями порядка и ITI.
    Reset-per-trial и continuous stream проверять отдельно, с полными окнами,
    неизменным learned-state hash и фиксированным порогом.
@@ -95,3 +100,45 @@ Silent threshold не делает молчаливые target успешной 
 [исходного плана](RefactoringPlan.ru.md) требуют всей обязательной матрицы.
 Предыдущая накопительная постановка29.10 с поздними дополнениями сохранена в
 [Git](https://github.com/aicommunity/Nmsdk/blob/ec15c06b1a52917b7a1a49abbddbd095e4b6bb7f/Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).
+
+
+## Текущее применение допуска — 07.11.2026
+
+[Fair-domain stock Train](FairDomainStockTrainVerification.json) допущен и
+полностью исполнен:8 preflight/8 Train,16 run manifests; все Train остановлены
+InvalidObservation. Его диагностическая оценка64 проб и render160 trial/soma
+pairs завершены; primary опубликован и проверен, процессы закрыты и lease
+released. [Приёмка](FairDomainStockEvaluationVerification.json) связывает
+9190 views с фактическими моделями. [Ручная visual QA](FairDomainStockSelectedVisualQA.json)
+охватывает четыре PNG. Полный ручной просмотр cache не заявляется.
+Это не повод повторять Train или менять текущий runtime. Исторические
+наблюдения запуска сохранены в [журнале задания](FairDomainStockEvaluationJobs.json).
+
+Обе серии используют исходную физику без дополнительной LTMembrane.
+[Сравнение](FairDomainStockScientificReport-2026-11-07.ru.md) подтверждает расширение
+покрытия Advance и неизменность728 Retry CSV, но не улучшение классификации.
+Готовность конкретного отрицательного результата и общая рекомендация V2
+остаются разными решениями.
+
+
+[Диагностика каналов](NativeChannelDiagnostics.ru.md) дополнена адресным ASan
+того же SDK на M40 и совместными временными графиками Soma/Exc/Inh/Feedback/LT.
+Невмешательство observer подтверждено равенством Off/On первичных CSV.
+Четыре выбранных рисунка прошли ручную QA; полный кэш не просматривался вручную.
+Это подготовка к исправлению измерений, а не новый успешный Train или Test.
+Следующий контроль — отдельная одноимпульсная характеристика при неизменном
+training target и с явным восстановлением временной конфигурации предъявления.
+
+
+## Обновление07.11: диагностика волн
+
+[Feedback12 и читаемые temporal figures](FeedbackProfileScientificReport-2026-11-07.ru.md)
+завершены в адресной области: baseline reconstruction exact; gain0 устранил
+дополнительные maxima в двух состояниях, изменив также амплитуду/время/LT Output.
+Это не выбор новой default physics или доказательство разделимости.
+[Clock comparator](RelativeClockAlignment.ru.md) исправлен и проверен отдельно;
+подтверждённого дефекта model transfer в high replay не было. Training100 study
+завершена в диагностическом scope: Branch2 reused, Classic2 выполнены;
+[verification](HighThresholdCombinedVerification.json). Механизм missing иvisual
+QA ещё требуют анализа. Остаток полного
+плана и условия приёмки выше сохраняются.

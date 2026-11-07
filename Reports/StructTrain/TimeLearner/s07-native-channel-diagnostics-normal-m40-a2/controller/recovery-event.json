@@ -1,0 +1,138 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "3793eaab-a94d-4e7e-9c42-ef18335e3afa",
+  "job_id": "s07-native-channel-diagnostics-normal-a2",
+  "recorded_unix": 1794012746.8347244,
+  "administrator": {
+    "pid": 1386460,
+    "start_ticks": "308788415",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1386471,
+    "start_ticks": "308788430",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "a8d5a88ac227749f93394b0622d346b537e1922da0c9d5544c2f83e3018eefed",
+      "unit": "timelearner-3972384b-5135-427e-b1b3-25ed20772c2a.service",
+      "invocation_id": "a6f09e1e19b3456894e9924757ce800b",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3972384b-5135-427e-b1b3-25ed20772c2a.service",
+      "initial_main_pid": 1386471,
+      "initial_start_ticks": "308788430",
+      "sha256": "fcbb29247e12b245ac79d97a200d0ded0044e1bd0956ed57be20f2edf66f5962"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-3972384b-5135-427e-b1b3-25ed20772c2a.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Native channel diagnostic worker and all compiler, test, probe and archive descendants freshly closed; record actual results separately.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-channel-diagnostics-normal-a2-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-channel-diagnostics-normal-a2-delivery"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

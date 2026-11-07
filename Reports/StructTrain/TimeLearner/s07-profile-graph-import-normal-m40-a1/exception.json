@@ -1,0 +1,4 @@
+{
+  "reason": "('build.log', 2)",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-profile-graph-import-normal-a1-worker.py\", line 182, in <module>\n    run(['cmake', '--build', build, '--target', 'Test_PulseLib_StorageComponents', 'NeuroModelerConsole', '--parallel', '1'], 'build.log')\n  File \"/tmp/timelearner-profile-graph-import-normal-a1-worker.py\", line 42, in run\n    assert status == 0, (name, status)\n           ^^^^^^^^^^^\nAssertionError: ('build.log', 2)\n"
+}

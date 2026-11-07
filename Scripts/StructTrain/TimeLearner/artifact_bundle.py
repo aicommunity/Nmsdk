@@ -39,15 +39,40 @@ def verify_packaged_run_closure(files):
     """
     require(type(files) is dict and files and all(type(raw) is bytes for raw in files.values()),
             "invalid_packaged_run_snapshot")
-    for name in files:_name(name)
-    manifests = [name for name in files if Path(name).name == "run-manifest.json"]
+    records = {name: {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+               for name, raw in files.items()}
+    manifests = {name: raw for name, raw in files.items() if Path(name).name == "run-manifest.json"}
+    return verify_packaged_run_inventory(records, manifests)
+
+
+def verify_packaged_run_inventory(records, manifests):
+    """Inclusion gate over independently hashed bytes, suitable for streaming.
+
+    This does not replace audit_run_manifest or attest archived process claims.
+    Callers must compute records from the actual archive, never trust a bundle's
+    declared hashes as proof that its members were read.
+    """
+    require(type(records) is dict and records and type(manifests) is dict,
+            "invalid_packaged_run_snapshot")
+    for name, record in records.items():
+        _name(name)
+        require(type(record) is dict and set(record) == {"bytes", "sha256"} and
+                type(record["bytes"]) is int and record["bytes"] >= 0 and
+                type(record["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", record["sha256"]),
+                "invalid_packaged_run_inventory_record")
+    require(set(manifests) == {name for name in records if Path(name).name == "run-manifest.json"},
+            "packaged_run_manifest_set_changed")
     require(bool(manifests), "missing_packaged_run_manifests")
     artifacts = 0
-    for name in manifests:
-        run = parse_json_bytes(files[name])
-        require(type(run) is dict and run.get("kind") in {"timelearner_post_tune_run_manifest", "timelearner_calibration_run_manifest",
+    for name, raw in manifests.items():
+        require(type(raw) is bytes and records[name] ==
+                {"bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()},
+                "packaged_run_manifest_bytes_changed")
+        run = parse_json_bytes(raw)
+        require(type(run) is dict and type(run.get("kind")) is str and run.get("kind") in {"timelearner_post_tune_run_manifest", "timelearner_calibration_run_manifest",
                 "timelearner_native_pipeline_run_manifest"}
-                and type(run.get("schema_version")) is int and run["schema_version"] == 1,
+                and type(run.get("schema_version")) is int and
+                run["schema_version"] in ((1, 2, 3, 4) if run["kind"] == "timelearner_native_pipeline_run_manifest" else (1,)),
                 "unknown_packaged_run_manifest")
         require(run.get("sha256") == canonical_model_sha256({k: v for k, v in run.items() if k != "sha256"}),
                 "packaged_run_manifest_digest_changed")
@@ -62,20 +87,144 @@ def verify_packaged_run_closure(files):
                     type(row["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", row["sha256"]),
                     "invalid_packaged_run_artifact")
             expected.add(path)
-            require(path in files, "packaged_run_missing_artifact:"+path)
-            require(len(files[path]) == row["bytes"] and hashlib.sha256(files[path]).hexdigest() == row["sha256"],
+            require(path in records, "packaged_run_missing_artifact:"+path)
+            require(records[path] == {"bytes": row["bytes"], "sha256": row["sha256"]},
                     "packaged_run_artifact_bytes_changed:"+path)
-        require({path for path in files if path.startswith(prefix) and path != name} == expected,
+        require({path for path in records if path.startswith(prefix) and path != name} == expected,
                 "packaged_run_has_unrecorded_artifacts")
         if run["kind"] == "timelearner_native_pipeline_run_manifest":
-            require(run.get("operation") in {"train", "export", "evaluate"}, "unknown_packaged_pipeline_operation")
-        if run["kind"] == "timelearner_native_pipeline_run_manifest" and run["operation"] == "train":
+            from .native_pipeline_worker import FIELDS
+            require(type(run.get("operation")) is str and run["operation"] in FIELDS,
+                    "unknown_packaged_pipeline_operation")
+            require(run["schema_version"] == 4 or
+                    (run["schema_version"] == 3) == (run["operation"] == "diagnostic-evaluate"),
+                    "packaged_pipeline_schema_operation_mismatch")
+        native_cold = (run["kind"] == "timelearner_native_pipeline_run_manifest" and
+                       (run["operation"] in {"train", "preflight"} or
+                        run["operation"] == "probe" and run.get("source_package_path") is None))
+        if native_cold:
             require(run.get("source_package_path") is None, "packaged_cold_run_has_source_package")
         else:
             require(type(run.get("source_package_path")) is str and prefix+_name(run["source_package_path"]) in expected,
                     "packaged_run_missing_source_package")
         artifacts += len(expected)
     return {"run_snapshots_verified": len(manifests), "artifact_entries_verified": artifacts, "scientific_verdict": None}
+
+
+def verify_pipeline_archive(archive, bundle, maximum_bytes=8*1024**3):
+    """Stream an existing worker archive and bind all actual run inventories.
+
+    No extraction, rewriting, process attestation or scientific verdict occurs.
+    Model/run audits and fresh worker closure remain separate mandatory gates.
+    """
+    archive = Path(archive).resolve(strict=True)
+    require(type(maximum_bytes) is int and maximum_bytes > 0 and type(bundle) is dict and
+            type(bundle.get("members")) is dict and bundle["members"], "invalid_pipeline_archive_inventory")
+    require(type(bundle.get("archive_bytes")) is int and archive.stat().st_size == bundle["archive_bytes"] and
+            type(bundle.get("archive_sha256")) is str and _sha(archive) == bundle["archive_sha256"],
+            "pipeline_archive_checksum_mismatch")
+    declared = bundle["members"];records = {};manifests = {};total = 0
+    for name, record in declared.items():
+        _name(name)
+        require(type(record) is dict and set(record) == {"bytes", "sha256"} and
+                type(record["bytes"]) is int and record["bytes"] >= 0 and
+                type(record["sha256"]) is str and re.fullmatch("[0-9a-f]{64}", record["sha256"]),
+                "invalid_pipeline_archive_record")
+        total += record["bytes"]
+    require(total <= maximum_bytes, "pipeline_archive_exceeds_budget")
+    with tarfile.open(archive, "r:*") as tar:
+        for member in tar:
+            name = _name(member.name)
+            require(member.isfile() and name not in records and name in declared and
+                    member.size == declared[name]["bytes"], "unexpected_pipeline_archive_member")
+            is_manifest = Path(name).name == "run-manifest.json"
+            require(not is_manifest or member.size <= 16*1024**2, "packaged_run_manifest_too_large")
+            digest = hashlib.sha256();size = 0;raw = bytearray()
+            with tar.extractfile(member) as stream:
+                for chunk in iter(lambda: stream.read(1024**2), b""):
+                    digest.update(chunk);size += len(chunk)
+                    if is_manifest:raw.extend(chunk)
+            actual = {"bytes": size, "sha256": digest.hexdigest()}
+            require(actual == declared[name], "pipeline_archive_member_bytes_changed:"+name)
+            records[name] = actual
+            if is_manifest:manifests[name] = bytes(raw)
+    require(set(records) == set(declared), "pipeline_archive_member_set_changed")
+    proof = verify_packaged_run_inventory(records, manifests)
+    return {**proof, "archive_members_verified": len(records), "primary_bytes_verified": total,
+            "archive_sha256": bundle["archive_sha256"], "scientific_verdict": None}
+
+
+def canonicalize_pipeline_archive(source, archive, bundle, output, maximum_bytes=8*1024**3):
+    """Create a separate regular-file archive from an audited, frozen worker.
+
+    Old producers used tar.add on glog severity symlinks even though native run
+    inventories intentionally exclude them. Only the existing owner/hash-bound
+    glog adapter may omit such duplicates. Original bytes and archive stay in
+    place; every other member must survive with its original content hash.
+    Fresh worker closure and model audits are the caller's responsibility.
+    """
+    from .portable_primary import _alias_plan, _record as validate_record
+    source, archive, output = Path(source).resolve(strict=True), Path(archive).resolve(strict=True), Path(output).resolve()
+    require(not output.exists() and not output.is_relative_to(source) and not source.is_relative_to(output),
+            "canonical_pipeline_output_overlap")
+    require(type(bundle) is dict and type(bundle.get("members")) is dict and bundle["members"] and
+            type(maximum_bytes) is int and maximum_bytes > 0, "invalid_pipeline_archive_inventory")
+    declared = bundle["members"]
+    for name, record in declared.items():
+        _name(name);validate_record(record)
+        path = source/name
+        require(path.is_file() and path.resolve(strict=True).is_relative_to(source) and
+                all(not parent.is_symlink() for parent in path.parents if parent != source and parent.is_relative_to(source)),
+                "canonical_pipeline_source_missing_or_outside_root:"+name)
+    require(sum(r["bytes"] for r in declared.values()) <= maximum_bytes, "pipeline_archive_exceeds_budget")
+    require(type(bundle.get("archive_bytes")) is int and archive.stat().st_size == bundle["archive_bytes"] and
+            _sha(archive) == bundle.get("archive_sha256"), "pipeline_archive_checksum_mismatch")
+    aliases = _alias_plan(source, declared);omitted = {row["omitted_alias"]: row for row in aliases}
+    for name in declared:
+        require(not (source/name).is_symlink() or name in omitted, "canonical_pipeline_unknown_source_symlink")
+    seen = set();links = 0
+    # Verify original regular bytes as well as link headers. A new archive may
+    # never conceal a damaged original payload behind unchanged directory data.
+    with tarfile.open(archive, "r:*") as tar:
+        for member in tar:
+            name = _name(member.name)
+            require(name in declared and name not in seen, "unexpected_pipeline_source_archive_member")
+            seen.add(name)
+            if member.issym():
+                require(name in omitted and member.size == 0 and member.linkname == Path(member.linkname).name and
+                        (Path(name).parent/member.linkname).as_posix() == omitted[name]["retained_target"],
+                        "unverified_pipeline_source_archive_link")
+                links += 1
+                continue
+            require(member.isfile() and member.size == declared[name]["bytes"],
+                    "unexpected_pipeline_source_archive_member")
+            digest = hashlib.sha256();size = 0
+            with tar.extractfile(member) as stream:
+                for chunk in iter(lambda: stream.read(1024**2), b""):
+                    digest.update(chunk);size += len(chunk)
+            require({"bytes": size, "sha256": digest.hexdigest()} == declared[name],
+                    "pipeline_source_archive_member_bytes_changed:"+name)
+    require(seen == set(declared), "pipeline_source_archive_member_set_changed")
+    retained = {name: record for name, record in declared.items() if name not in omitted}
+    output.mkdir(parents=True)
+    target = output/"primary.tar.xz"
+    with tarfile.open(target, "w:xz", preset=3, format=tarfile.PAX_FORMAT) as tar:
+        for name, record in sorted(retained.items()):
+            path = source/name
+            require(not path.is_symlink() and path.stat().st_size == record["bytes"],
+                    "canonical_pipeline_source_changed:"+name)
+            info = tarfile.TarInfo(name);info.size = record["bytes"];info.mode = 0o644
+            with path.open("rb") as stream:tar.addfile(info, stream)
+    result = {"kind": "timelearner_canonical_pipeline_archive", "schema_version": 1,
+              "members": retained, "archive_bytes": target.stat().st_size, "archive_sha256": _sha(target),
+              "source_archive_sha256": bundle["archive_sha256"], "source_archive_bytes": bundle["archive_bytes"],
+              "source_archive_members_verified": len(seen), "source_archive_links_verified": links,
+              "omitted_duplicate_glog_aliases": aliases, "original_archive_unchanged": True,
+              "scientific_verdict": None}
+    result["pipeline_closure"] = verify_pipeline_archive(target, result, maximum_bytes)
+    require(_sha(archive) == bundle["archive_sha256"], "pipeline_source_archive_changed")
+    _write(output/"bundle.json", result)
+    return result
 
 
 def pack_native_tests(contract, artifacts, output, selected_report, maximum_bytes=8*1024**3):

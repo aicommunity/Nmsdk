@@ -1,0 +1,41 @@
+from pathlib import Path
+import subprocess,json,hashlib
+base=Path('/media/user/Data/TimeLearnerRefactor');repo=base/'evidence-stock-fair-evaluation-full-visual-m40-a1';parent='77748412dcdfe2a838b10dcfaba69bdac3001abe';cache=base/'ReportsCache/stock-fair-frozen-normal-a1';prefix='Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1'
+payloads={};updates={};rows=[]
+for case,label,view_name in [('Classic-threshold-low-advance32','target','overview'),('Classic-threshold-low-advance32','foil','overview'),('Classic-threshold-low-advance32','target','zoom-010-detail'),('Branch-threshold-training100-advance32','target','zoom-010-detail')]:
+ report=cache/case;meta=json.loads((report/'evaluation/manifest.json').read_text());checksums=json.loads((report/'SHA256SUMS.json').read_text())
+ figure=next(f for f in meta['figures'] if f['label']==label and f['descriptor']['index']==0)
+ choices=[v for v in figure['views'] if v['view']==view_name]
+ view=choices[0] if choices else next(v for v in figure['views'] if v['y_scale']=='local_detail')
+ png=next(p for p in view['files'] if p.endswith('.png'));relative='evaluation/'+png;p=report/relative;raw=p.read_bytes();sha=hashlib.sha256(raw).hexdigest();assert checksums[relative]==sha and raw.startswith(b'\x89PNG\r\n\x1a\n')
+ name=case+'-'+label+'-soma1-'+view['view']+'.png';payloads[prefix+'/'+name]=raw
+ rows.append({'published_file':name,'case':case,'trial_id':figure['trial_id'],'label':label,'descriptor':figure['descriptor'],'view':view,'cache_relative_file':case+'/'+relative,'bytes':len(raw),'sha256':sha,'manual_visual_review_complete':False})
+payloads[prefix+'/selection.json']=(json.dumps({'kind':'stock_fair_domain_selected_visuals','schema_version':1,'source_evidence':parent,'cache':str(cache),'figures':rows,'all160_manually_reviewed':False,'scientific_verdict':None},indent=2)+'\n').encode();payloads[prefix+'/producer.txt']=PUBLISHER_SOURCE.encode()
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve four actual fair-domain stopped-model soma and input overlays for manual visual review\n');git('update-ref','refs/heads/codex/stock-fair-selected-visual-evidence',c,'0'*40);print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'selected_figures':len(rows),'png_bytes':sum(r['bytes'] for r in rows)}))
