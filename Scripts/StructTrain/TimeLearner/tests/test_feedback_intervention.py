@@ -47,6 +47,8 @@ class FeedbackProfileDeltaTest(unittest.TestCase):
             self.assertTrue(result['all_other_effective_graph_fields_equal'])
             self.assertTrue(all(n['candidate_gain'] == 0 for n in result['membranes']))
             self.assertIsNone(result['training_certificate'])
+            self.assertTrue(audit_profile_delta(source,candidate,{},feedback_gain=-0.)[
+                'all_other_effective_graph_fields_equal'])
 
     def test_gain_change_cannot_pass_baseline_reconstruction(self):
         for source in self.sources:
@@ -139,3 +141,33 @@ class InheritedFeedbackNativeTest(unittest.TestCase):
 
     def test_actual_classic_native_profile_graphs(self):self.audit_topology('Classic')
     def test_actual_branch_native_profile_graphs(self):self.audit_topology('Branch')
+
+
+class ProfiledGraphImportNativeTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(os.environ['TIMELEARNER_PROFILED_GRAPH_CORPUS'])
+
+    def audit_topology(self, topology):
+        from ..recognition_evidence import _physical
+        paths = sorted(self.root.glob('profile-import-'+topology+'-*.json'))
+        self.assertEqual(len(paths),4)
+        self.assertEqual({p.name for p in paths},
+                         {f'profile-import-{topology}-{f}-{g}.json' for f in (2000,20000) for g in (0,2)})
+        for path in paths:
+            packet = load(path)
+            self.assertTrue(packet['individual_fixture_state'])
+            self.assertFalse(packet['candidate_waveform_evaluated'])
+            self.assertFalse(packet['training_started'])
+            source,candidate = packet['source_identity'],packet['candidate_identity']
+            audit = audit_profile_delta(source,candidate,packet['class_renames'],
+                                        feedback_gain=packet['feedback_gain'])
+            self.assertTrue(audit['all_other_effective_graph_fields_equal'])
+            self.assertEqual(candidate,packet['roundtrip_identity'])
+            for identity in (source,candidate):
+                nodes = {n['path']:n for n in identity['model']['nodes']}
+                self.assertEqual(_physical(nodes['$.Soma1.ExcChannel'],'Capacity'),1.3e-9)
+                self.assertEqual(_physical(nodes['$.Dendrite1_1.ExcSynapse1'],'Resistance'),93e6)
+
+    def test_classic_individual_state_and_native_roundtrip(self):self.audit_topology('Classic')
+    def test_branch_individual_state_and_native_roundtrip(self):self.audit_topology('Branch')
