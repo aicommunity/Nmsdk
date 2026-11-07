@@ -1,6 +1,7 @@
 #include "TimeLearnerProbeJob.h"
 #include "TimeLearnerProbeEvidenceWriter.h"
 #include "TimeLearnerProbeChannelDiagnostics.h"
+#include "TimeLearnerFeedbackProfileImport.h"
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeCalculationPolicy.h"
@@ -20,6 +21,7 @@ struct Job {
     QJsonObject stopped;
     std::vector<std::pair<std::size_t,double>> resistanceIntervention;
     NativeModelSpec model;
+    std::optional<FeedbackProfileIntervention> profileIntervention;
     StimulusProfile stimulus;
     QJsonArray profiles;
     std::string ownerClass,runId,trialId,sampleId,protocolRevision;
@@ -32,12 +34,13 @@ bool Boolean(const QJsonValue& v){Require(v.isBool(),"probe_boolean_required");r
 Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
-    const auto version=Count(d["schema_version"],1,4);
+    const auto version=Count(d["schema_version"],1,5);
     std::set<QString> fields{"kind","schema_version","owner_class","implementation_id","model","profile_archives",
         "stimulus_profile","probe","maximum_model_ticks","maximum_wall_seconds","sha256"};
     if(version>=2){fields.insert("source_stopped");fields.insert("resistance_intervention");}
     if(version>=3)fields.insert("channel_diagnostics");
-    if(version==4)fields.insert("presentation");
+    if(version>=4)fields.insert("presentation");
+    if(version==5)fields.insert("profile_intervention");
     Keys(d,fields);
     Require(d["kind"]==QJsonValue("timelearner_native_probe_job"),"unsupported_probe_job");
     Require(Signed(d)==d,"job_digest_mismatch");Text(d["implementation_id"]);
@@ -47,9 +50,11 @@ Job Read(const QString& path)
     j.profiles=Array(d["profile_archives"]);Require(j.profiles.size()<=32,"probe_profile_budget_exceeded");
     for(const auto& p:j.profiles)Object(p);
     if(version>=3)j.channelDiagnostics=Boolean(d["channel_diagnostics"]);
-    if(version==4) {
+    if(version>=4) {
         const auto presentation=Object(d["presentation"]);Keys(presentation,{"kind"});
-        Require(presentation["kind"]==QJsonValue("single_pulse_characterization"),"unsupported_probe_presentation");j.singlePulse=true;
+        Require(presentation["kind"]==QJsonValue("single_pulse_characterization") ||
+            (version==5 && presentation["kind"]==QJsonValue("native_burst")),"unsupported_probe_presentation");
+        j.singlePulse=presentation["kind"]==QJsonValue("single_pulse_characterization");
     }
     if(version>=2) {
         j.stopped=Object(d["source_stopped"]);
@@ -62,6 +67,11 @@ Job Read(const QString& path)
             const auto i=Count(change["input_index"],0,j.model.inputs.size()-1);const double r=Number(change["resistance"]);
             Require(seen.insert(i).second && r>0.,"invalid_probe_resistance_intervention");j.resistanceIntervention.emplace_back(i,r);
         }
+    }
+    if(version==5) {
+        j.profileIntervention=ReadFeedbackProfileIntervention(Object(d["profile_intervention"]));
+        Require(j.resistanceIntervention.empty(),"profile_probe_resistance_intervention_forbidden");
+        Require(Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"profile_probe_source_profile_changed");
     }
     Require(!j.singlePulse || j.resistanceIntervention.empty(),"single_pulse_intervention_not_supported");
     Require(!j.singlePulse || Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"single_pulse_source_profile_changed");
@@ -106,16 +116,23 @@ QJsonArray Parameters(const std::vector<InputParameters>& values)
 {QJsonArray a;for(const auto& p:values)a.append(QJsonObject{{"length",p.length},{"synapses",p.synapses},{"resistance",p.resistance}});return a;}
 template<class Owner> int Execute(const Job& j,const QString& output)
 {
-    return WithFreshOwner<Owner>(j.ownerClass,j.model.frequencyHz,"ProbeOwner",[&](auto,auto environment,auto model,auto owner) {
+    const auto work=[&](auto,auto environment,auto model,auto owner) {
         const bool imported=!j.stopped.isEmpty();
         owner->ControllerVersion=2;owner->CalculateMode=1;
         owner->StructureBuildMode=j.model.editPolicy.preserveAllocatedCable?0:1;
         owner->SyncCapacitanceTrim=0;owner->EnablePostTrainTuning=false;owner->AutoCalibrateFixedLTZThreshold=false;owner->IsNeedToTrain=false;
-        const auto built=imported?owner->ImportNativeLearnedState(j.stopped,Text(j.document["implementation_id"])):owner->ConstructNativeModel(j.model);
+        std::optional<PreparedFeedbackProbe> derived;
+        if(j.profileIntervention)derived=InstallFeedbackProfileProbe(*owner,j.stopped,Text(j.document["implementation_id"]),*j.profileIntervention);
+        const auto built=derived?derived->built:(imported?owner->ImportNativeLearnedState(j.stopped,Text(j.document["implementation_id"])):owner->ConstructNativeModel(j.model));
         Require(built.status==(imported?NativeModelBuildStatus::Adopted:NativeModelBuildStatus::Constructed),built.reason.c_str());
         Require(built.effective.size()==j.model.inputs.size(),"probe_initial_dimension_changed");
-        if(!imported)owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(IdleConfiguration(j,built.effective))).toJson(QJsonDocument::Compact).toStdString();
+        if(!imported || derived)owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(IdleConfiguration(j,built.effective,derived?&derived->declaration:nullptr))).toJson(QJsonDocument::Compact).toStdString();
         owner->CalculateMode=1;owner->IsNeedToTrain=false;
+        if(derived) {
+            Require(!owner->GetOwner(),"profile_probe_owner_already_attached");
+            UEPtr<UContainer> component=owner;
+            Require(model->AddComponent(component)!=RDK::ForbiddenId,"job_owner_attachment_failed");
+        }
         owner->Build();owner->Init();model->Init();model->Reset();
         Require(owner->NativeModelEditFailure().empty(),owner->NativeModelEditFailure().c_str());
         Require(owner->ControllerVersion.GetData()==2 && owner->CalculateMode.GetData()==1 && owner->ConfiguredModelInitialized.GetData(),"probe_native_owner_not_initialized");
@@ -126,7 +143,12 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         const NmsdkTools::ModelBoundarySources ports{{&source->Output,"burst"}};
         const auto restoredIdentity=NmsdkTools::IdentifyModel(neuron,ports);
         Require(restoredIdentity["valid"]==QJsonValue(true) && Parameters(owner->ReadNativeParameters())==Parameters(built.effective),"probe_lifecycle_changed_model");
-        if(imported)Require(restoredIdentity==Object(Object(Object(j.stopped["neuron"])["graph"])["identity"]),"probe_import_graph_changed");
+        if(imported)Require(restoredIdentity==(derived?derived->identity:Object(Object(Object(j.stopped["neuron"])["graph"])["identity"])),"probe_import_graph_changed");
+        if(derived) {
+            auto dataset=owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+            Require(bool(dataset) && NmsdkTools::ExportDatasetSnapshot(dataset)["identity"]==derived->record["dataset_identity"],
+                "profile_probe_lifecycle_changed_dataset");
+        }
         const auto controlSnapshot=[&]() {
             QJsonArray packets;for(const auto& p:owner->NativeTrainingController().ObservedPackets())packets.append(EncodeNativeProbeEvidence(p));
             return Signed({{"kind","native_probe_controller_snapshot"},{"schema_version",1},
@@ -137,15 +159,16 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         const auto idle=[&]() {
             const auto& control=owner->NativeTrainingController();
             return control.State()==NativeTrainingState::Idle && control.IssuedReferenceProbes()==0 && !control.Certificate() &&
-                !owner->IsNeedToTrain.GetData() && (imported || (control.ObservedPackets().empty() && !control.References())) && controlSnapshot()==controlBaseline;
+                !owner->IsNeedToTrain.GetData() && ((imported && !derived) || (control.ObservedPackets().empty() && !control.References())) && controlSnapshot()==controlBaseline;
         };
         Require(idle() && environment->GetTime().GetDoubleTime()==0. && owner->NativeProbeState()==NativeProbeStatus::Idle,"probe_preparation_started_training");
         Require(QDir().mkdir(output),"job_output_exists_or_parent_missing");QJsonArray artifacts;
         artifacts.append(Write(output,"job.json",j.document));
         artifacts.append(Write(output,"owner-configuration.json",EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(owner->ControllerConfiguration.GetData()))));
         if(imported) {
-            Require(controlBaseline["observed_packets_sha256"]==QJsonValue(NmsdkTools::CanonicalModelDataSha256(j.stopped["observed_packets"])),"probe_import_history_changed");
-            artifacts.append(Write(output,"source-import.json",Signed({{"kind","native_probe_source_import"},{"schema_version",1},
+            Require(controlBaseline["observed_packets_sha256"]==QJsonValue(NmsdkTools::CanonicalModelDataSha256(derived?QJsonValue(QJsonArray{}):j.stopped["observed_packets"])),"probe_import_history_changed");
+            if(derived)artifacts.append(Write(output,"source-import.json",derived->record));
+            else artifacts.append(Write(output,"source-import.json",Signed({{"kind","native_probe_source_import"},{"schema_version",1},
                 {"source_stopped_sha256",j.stopped["sha256"]},{"identity",restoredIdentity},{"parameters",Parameters(built.effective)},
                 {"physical_dynamics_reset",true},{"controller_dynamics_reset",true},{"controller_history_preserved",true},{"training_started",false}})));
             artifacts.append(Write(output,"controller-before.json",controlBaseline));
@@ -253,8 +276,8 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        const bool diagnosticJob=Count(j.document["schema_version"],1,4)>=3;
-        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",diagnosticJob?4:(imported?3:2)},
+        const bool diagnosticJob=Count(j.document["schema_version"],1,5)>=3;
+        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",derived?5:(diagnosticJob?4:(imported?3:2))},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},
@@ -269,9 +292,18 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             executionRecord["channel_diagnostics_enabled"]=j.channelDiagnostics;
             executionRecord["channel_diagnostic_files"]=diagnosticFiles;
         }
+        if(derived)executionRecord["profile_intervention_applied"]=true;
         Write(output,"execution.json",Signed(executionRecord));
         return execution=="completed"?0:2;
-    },[&](auto storage,auto environment) {
+    };
+    if(j.profileIntervention)return WithFreshModel(j.model.frequencyHz,[&](auto storage,auto environment,auto model) {
+        auto owner=RDK::dynamic_pointer_cast<Owner>(storage->TakeObject(j.ownerClass));
+        Require(bool(owner),"job_owner_creation_failed");owner->Name="ProbeOwner";
+        owner->SetEnvironment(environment);owner->SetGlobalTimeStep(j.model.frequencyHz);
+        UnownedProbeGraph lease{storage,owner};
+        return work(storage,environment,model,owner);
+    });
+    return WithFreshOwner<Owner>(j.ownerClass,j.model.frequencyHz,"ProbeOwner",work,[&](auto storage,auto environment) {
         for(const auto& p:j.profiles) {const auto profile=Object(p);
             NmsdkTools::PrepareModelArchive(profile,storage,environment,QString::fromStdString(Text(Object(profile["metadata"])["implementation_id"])));}
     });
