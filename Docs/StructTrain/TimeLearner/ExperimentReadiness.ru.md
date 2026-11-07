@@ -142,3 +142,15 @@ training target и с явным восстановлением временно
 [verification](HighThresholdCombinedVerification.json). Механизм missing иvisual
 QA ещё требуют анализа. Остаток полного
 плана и условия приёмки выше сохраняются.
+
+
+## Уточнение Console измерителя одиночного отклика
+
+[Console replay Classic/Branch](SingleMaximumConsoleReplay.ru.md) принят на
+Root038/Pulse217: четыре операции, пять design tests, точное воспроизведение
+архивных и A/B waveforms при threshold0.0117. Уникальный наибольший пик
+допускается при нескольких меньших пиках. Это diagnostic single impulse,
+а не замена максимума закреплённого импульса в штатном Train burst. Новых
+результатов классификации этот gate не добавляет. Построены193 temporal views
+на M40; выбранные четыре проверены по оформлению, дополнительное увеличение
+положительных вершин и whole-burst assignment остаются открытыми.
