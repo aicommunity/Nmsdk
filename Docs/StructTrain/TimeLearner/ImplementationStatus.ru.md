@@ -245,3 +245,15 @@ search/history или certificate; full graph и индивидуальные п
 Это не waveform proof и не новое обучение. Console profile protocol пока не
 подключён; ASan этого API, Elder и полная матрица открыты. Этапы4/5/7 целиком
 не закрыты. Failed-a1 сохранён отдельно.
+
+
+[ASan одноимпульсного native/Console контура](SinglePulseCharacterizationAsanVerification.json):
+root5d0b80a/Pulse302124b, M40:37 native,4 реальные Console пробы и42 Python
+проверки без skips. Все618 primary members и781 source hashes сверены с Git;
+libasan загружен в пяти native процессах. Группа закрыта/lease released, два
+предыдущих ASan runtime не изменились. Producer задаёт detect_leaks=0; runtime
+manifest не сохраняет ASAN_OPTIONS, поэтому эта настройка подтверждается
+архивным producer, не process environment readback. Это не leak check,
+не проверка последующих storage/graph/prepared-owner API и не новое обучение.
+Упоминания «ASan открыт» выше для single-pulse среза заменены этой адресной
+проверкой; Elder и остальная матрица остаются открытыми.
