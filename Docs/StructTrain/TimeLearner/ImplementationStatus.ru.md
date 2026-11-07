@@ -12,6 +12,12 @@ merge и научная разделимость — разные утвержд
 сопоставления ещё открыто: [source review, файлы и адресная приёмка](PeakMeasurementContractReview-2026-11-07.ru.md).
 Ранее сохранённые InvalidObservation не переоцениваются автоматически в Exact.
 
+Начат [диагностический API подмножеств пачки](StimulusSubsetDiagnostics.ru.md),
+нужный для проверки наложения на неизменном нейроне. Planner7/7 принят;
+schema6 и native restore ещё проходят отдельную приёмку. Это waveform-only
+режим без назначения пиков/сертификатов, не исправление full-burst assignment.
+[Точное действующее задание](StimulusSubsetNativeJobs.json).
+
 Исправлен отдельный [дефект повторного учёта общей вершины в сертификате](AssignedVertexCertificateGuard-2026-11-07.ru.md):
 контролируемый counterexample воспроизведён до изменения; после него23/23
 production C++ unit checks прошли на Elder/normal и M40/ASan. Диагностическое
