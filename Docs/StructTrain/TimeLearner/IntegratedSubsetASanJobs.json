@@ -10,15 +10,19 @@
   "initial_start_ticks": "316787270",
   "request_sha256": "43746f768145a380dc374aa9508826265e7d04f17138326fe8ac0b56dd0bd11a",
   "worker_sha256": "f60cf391567fb8c626dfa670c74069f2ea6502dbeb1cb0b1a0b577785e2e4e38",
-  "status": "running physical gate; units 14+34+23 passed; no complete acceptance yet",
+  "status": "completed; all scoped checks passed; runtime frozen; closed and released",
   "expected_physical_checks": 10,
   "expected_reader_checks": 7,
   "immutable_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-integrated-subset-log-asan-a1",
   "scientific_verdict": null,
   "whole_plan_complete": false,
   "latest_readback": {
-    "terminal": null,
-    "physical_completed": 9,
-    "last_line": "[ RUN      ] StimulusSubsetNative.BranchOmitInterior20000"
-  }
+    "terminal_passed": true,
+    "physical_completed": 10,
+    "reader_checks_passed": 7
+  },
+  "evidence_commit": "dae5697b579cacf3a6a1bb6c591d8e9cab0cd357",
+  "archive_members": 494,
+  "archive_bytes": 383616,
+  "independent_verification": "IntegratedSubsetASanVerification.json"
 }

@@ -462,3 +462,19 @@ native-пробы подготовки не запускала. Summary Branch67
 55 members,1300 bindings исторических файлов,14 jobs; архив1,11MB без
 повторных source histories. [Receipt](HighThresholdSubsetPreparationVerification.json).
 Фактические high-threshold subset пробы ещё не запускались.
+
+
+Интегрированная ASan-проверка b711/Pulse609 завершена:71 unit,10 physical
+и7 reader checks прошли. Runtime текущей и прежней сборок неизменны,
+все группы закрыты и reservation снята. Evidence dae5697b (494 members,383616B);
+это не Console gate того же задания и не полная приёмка этапа7.
+После этой проверки запущен [high-threshold replay](HighThresholdSubsetStudyJobs.json):
+сначала обе full-пачки сравниваются с опубликованными историческими трассами.
+Без совпадения к остальным условиям перехода нет. Это диагностика stopped
+состояний, без Train, классификации и сертификата закреплённого пика.
+
+ASan evidence dae5697b независимо сверён:494 members,138 source hashes,
+81 JUnit cases и8 restoration packets. [Receipt](IntegratedSubsetASanVerification.json).
+Первая контрольная high-threshold full-проба Classic завершена: recorded input
+и все soma samples точно воспроизвели историческую пачку; относительные clocks
+совпали с ограниченным учётом roundoff. Остальная серия ещё выполняется.
