@@ -289,3 +289,19 @@ ASan нового API, Elder и полный mode/profile scope открыты.
 Запланированы4 actual burst/single probes; результат ещё не принят. Временные
 [отчёты feedback12](FeedbackProfileTemporalReportJobs.json) строятся параллельно;
 5 chart controls прошли, ручная visual QA остаётся открытой.
+
+
+[Feedback temporal report](FeedbackProfileVisualVerification.json) завершён:
+30 trial/soma pairs,1213 views+2 matched-tail details,3669 cache files проверены,
+полный cache403646846B на M40. В Git6 выбранных PNG1468877B; все6 просмотрены
+индивидуально. Сверены70+8 primary members и373 unique tool hashes; оба workers
+closed/leases released. Ручная QA всего cache не заявляется. [Читаемый научный
+отчёт с изображениями](FeedbackProfileScientificReport-2026-11-07.ru.md) отделяет
+causal intervention от обучения/классификации и показывает изменение LT Output.
+
+[Relative clock comparator](RelativeClockAlignment.ru.md): исправлен actual
+replay false failure при source begin855.486с. Signals/model совпали точно;
+ошибка была только в учёте cancellation roundoff. Пять actual-corpus controls
+прошли на M40,9 primary/437 tool hashes/20 input bindings сверены. Допуски
+обучения и физика не менялись. Исходный high attempt сохранён failed; Branch2
+уже выполнены, Classic2 ещё не выполнены. Это не новый успешный Train.

@@ -1,6 +1,6 @@
 # Структурное обучение TimeLearner
 
-**Текущий статус06.11:** [единая сводка реализации](ImplementationStatus.ru.md) и [условия допуска научных экспериментов](ExperimentReadiness.ru.md). Полностью принят только исходный этап0; этапы1–12 частичны. Датированные отчёты ниже сохраняют результаты и формулировки своего снимка, а не заменяют текущую сводку.
+**Текущий статус07.11:** [единая сводка реализации](ImplementationStatus.ru.md) и [условия допуска научных экспериментов](ExperimentReadiness.ru.md). Полностью принят только исходный этап0; этапы1–12 частичны. Датированные отчёты ниже сохраняют результаты и формулировки своего снимка, а не заменяют текущую сводку.
 
 [Полный isolated ASan304 и границы SDK802/shared SDK2e](Native304PartitionASanAcceptance.ru.md).
 
@@ -130,3 +130,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 [Диагностическое storage-вмешательство FeedbackGain](FeedbackProfileScientificReport-2026-11-07.ru.md):
 12 actual probes,4 exact baseline pairs; исходный measurement/physics вопрос сужен,
 новое обучение/классификация и visual QA ещё не завершены.
+
+[Исправление сравнения относительных часов на реальном replay](RelativeClockAlignment.ru.md).

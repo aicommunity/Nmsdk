@@ -1,4 +1,4 @@
-# Готовность к научным экспериментам — 06.11.2026
+# Готовность к научным экспериментам — 07.11.2026
 
 Сквозной процесс cold Train → boundary continuation → полный model export →
 измеренная калибровка с confirmation → frozen evaluation уже выполняется на
@@ -128,3 +128,15 @@ released. [Приёмка](FairDomainStockEvaluationVerification.json) связ�
 Это подготовка к исправлению измерений, а не новый успешный Train или Test.
 Следующий контроль — отдельная одноимпульсная характеристика при неизменном
 training target и с явным восстановлением временной конфигурации предъявления.
+
+
+## Обновление07.11: диагностика волн
+
+[Feedback12 и читаемые temporal figures](FeedbackProfileScientificReport-2026-11-07.ru.md)
+завершены в адресной области: baseline reconstruction exact; gain0 устранил
+дополнительные maxima в двух состояниях, изменив также амплитуду/время/LT Output.
+Это не выбор новой default physics или доказательство разделимости.
+[Clock comparator](RelativeClockAlignment.ru.md) исправлен и проверен отдельно;
+подтверждённого дефекта model transfer в high replay не было. Training100 study
+остаётся неполной: Branch2 сохранены, Classic2 ещё не выполнены. Остаток полного
+плана и условия приёмки выше сохраняются.
