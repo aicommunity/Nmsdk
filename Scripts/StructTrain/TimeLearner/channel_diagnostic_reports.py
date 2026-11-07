@@ -133,13 +133,27 @@ def render_figure(data, name, left, right, output, local=False):
     overlay.yaxis.get_offset_text().set_fontsize(12)
     handles.append(line);labels.append('Actual native input; dotted lines: actual LT events')
     axes[-1].set_xlabel('Native absolute time [s]', fontsize=12)
-    figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native burst characterization')+'\n'+
+    title=figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native burst characterization')+'\n'+
                  observation_caption(data)+'\n'+
                  data['trial_id']+'\n'+data['soma_path']+' | '+name+
                  (' | local Y per panel' if local else ' | shared Y per panel')+
                  ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12], font_sizes=(12,))
-    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(.5,.885), ncol=2, fontsize=12, frameon=False)
-    fig.canvas.draw()
+    legend=fig.legend(handles, labels, loc='center', bbox_to_anchor=(.5,.87), ncol=2, fontsize=12, frameon=False)
+    # Place the legend in the actual free band. Font size alone does not
+    # prevent it from covering the first panel title or a wrapped page title.
+    layout=None
+    for top in (.79,.77,.75,.73):
+        fig.subplots_adjust(top=top);fig.canvas.draw()
+        renderer=fig.canvas.get_renderer();width,height=fig.canvas.get_width_height()
+        heading=title.get_window_extent(renderer);panel=axes[0].get_tightbbox(renderer)
+        legend.set_bbox_to_anchor((.5,(heading.y0+panel.y1)/(2*height)),transform=fig.transFigure)
+        fig.canvas.draw();bounds=legend.get_window_extent(fig.canvas.get_renderer())
+        upper,lower=heading.y0-bounds.y1,bounds.y0-panel.y1
+        if min(upper,lower)>=12 and bounds.x0>=.03*width and bounds.x1<=.97*width:
+            layout={'title_gap_pixels':upper,'first_panel_gap_pixels':lower,
+                    'minimum_required_gap_pixels':12,'axes_top_fraction':top}
+            break
+    require(layout is not None, 'channel_plot_legend_does_not_fit_readable_band')
     from matplotlib.text import Text
     text_sizes=[artist.get_fontsize() for artist in fig.findobj(Text) if artist.get_visible() and artist.get_text()]
     require(text_sizes and min(text_sizes)>=12, 'channel_plot_font_below_readable_minimum')
@@ -150,6 +164,7 @@ def render_figure(data, name, left, right, output, local=False):
     return {'view': name, 'begin': left, 'end': right, 'files': paths,
             'png_width': 1920, 'png_height': 1920, 'downsampling': False,
             'minimum_visible_text_fontsize_pt': min(text_sizes),
+            'legend_layout': layout,
             'minimum_native_tick_pixels': None if name == 'overview' else 1420.8/(data['frequency_hz']*(right-left)),
             'y_scale': 'local_per_panel' if local else 'shared_per_panel', 'panel_y_limits': limits,
             'shared_panel_y_limits': [p['shared_limits'] for p in panels], 'sample_markers':local,
