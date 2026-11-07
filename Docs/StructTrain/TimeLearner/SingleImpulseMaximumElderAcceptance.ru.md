@@ -3,7 +3,8 @@
 Адресная normal-проверка schema5 принята: все38 C++ tests и25 readers прошли
 без failures/errors/skips. Отдельно прошёл unit target34; он использует те же
 observer test bodies и не добавляет34 независимые физические проверки.
-Остальная матрица, Console replay и whole-burst assignment этим не закрываются.
+Остальная матрица и whole-burst assignment этим не закрываются. Последующий
+[Console replay](SingleMaximumConsoleReplay.ru.md) отдельно принят на Root038/Pulse217.
 
 ## Проверенный снимок и поведение
 
