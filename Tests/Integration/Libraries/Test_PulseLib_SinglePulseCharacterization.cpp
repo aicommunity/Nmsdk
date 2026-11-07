@@ -100,12 +100,14 @@ public:
         EXPECT_EQ(dataset->StateGeneration.GetData(),0);EXPECT_EQ(source->Frequency.GetData(),0.);
         EXPECT_EQ(Revision(),base);
     }
-    void Run(bool single,Fault fault,NativeProbeResult& result,std::vector<std::vector<double>>& samples) {
+    void Run(bool single,Fault fault,NativeProbeResult& result,std::vector<std::vector<double>>& samples,
+             bool largest=false,bool wholeWindow=false) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         NativeProbeRequest r;r.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
         r.activeInput=int(index);r.inputId="input"+std::to_string(index);r.protocolRevision="single-pulse-diagnostic-test";
         r.baseModelRevision=base;r.expectedInputIsi=isi;r.readModelRevision=[&](){return Revision();};
-        auto& s=r.specification;s.schemaVersion=single?4:2;
+        auto& s=r.specification;s.schemaVersion=single?(largest?5:4):2;
+        if(largest)s.peakSelection=PeakSelectionPolicy::SingleImpulseMaximum;
         s.runId="single-pulse-native";s.trialId="trial"+std::to_string(++serial);s.sampleId="sample";
         s.patternHash=NmsdkTools::CanonicalModelDataSha256(single?QJsonArray{isi.front()}:original).toStdString();
         s.end=single?.12:duration;s.maximumSampleGap=1./frequency;s.maximumSamples=(duration+.15)*frequency;
@@ -113,6 +115,7 @@ public:
         for(unsigned i=0;i<(single?1u:count);++i)s.expectedStimulusIds.push_back("pulse"+std::to_string(i));
         const double onset=single?.01:.01+.08*index;
         s.windows={{r.inputId,branch?0u:index,onset-.001,onset+.06,single?"pulse0":"pulse"+std::to_string(index)}};
+        if(wholeWindow){s.windows[0].begin=0.;s.windows[0].end=s.end;}
         double begin=0.,end=0.;
         std::vector<UEPtr<NPulseMembrane>> feedbackMembranes;
         if(captureFeedback)for(unsigned i=0;i<(branch?1u:count);++i) {
@@ -203,11 +206,11 @@ template<class Learner> void Matrix(unsigned frequency) {
         }
     }
 }
-template<class Learner> void Roundtrip(Fault fault) {
+template<class Learner> void Roundtrip(Fault fault,bool largest=false) {
     SinglePulseFixture<Learner> f;f.Make(2000,2);ASSERT_TRUE(f.learner);
     NativeProbeResult before,diagnostic,after;std::vector<std::vector<double>> a,d,b;
     f.Run(false,Fault::None,before,a);ASSERT_EQ(before.status,NativeProbeStatus::Completed);
-    f.Run(true,fault,diagnostic,d);
+    f.Run(true,fault,diagnostic,d,largest,largest);
     EXPECT_EQ(diagnostic.status,fault==Fault::None?NativeProbeStatus::Completed:NativeProbeStatus::Rejected);
     f.Run(false,Fault::None,after,b);ASSERT_EQ(after.status,NativeProbeStatus::Completed);
     ASSERT_EQ(a.size(),b.size());ASSERT_FALSE(a.empty());
@@ -347,5 +350,41 @@ template<class Learner> void FullProfileGraphImport() {
 }
 TEST(FeedbackProfileImport,ClassicFullIndividualStateAndRoundtrip){FullProfileGraphImport<NNeuronTimeLearner>();}
 TEST(FeedbackProfileImport,BranchFullIndividualStateAndRoundtrip){FullProfileGraphImport<NNeuronTimeLearnerBranch>();}
+
+template<class Learner> void MaximumNative(unsigned frequency) {
+    // A declared high-threshold control isolates the measurement policy A/B.
+    // Archived stock multi-peak responses require a separate Console replay.
+    SinglePulseFixture<Learner> f;f.Make(frequency,2,{},100.);ASSERT_TRUE(f.learner);
+    NativeProbeResult old,current;std::vector<std::vector<double>> before,after;
+    f.Run(true,Fault::None,old,before,false,true);
+    f.Run(true,Fault::None,current,after,true,true);
+    ASSERT_EQ(old.status,NativeProbeStatus::Completed);ASSERT_EQ(current.status,NativeProbeStatus::Completed);
+    ASSERT_TRUE(current.observation);ASSERT_TRUE(current.observation->valid);ASSERT_TRUE(current.prepared);
+    ASSERT_EQ(before.size(),after.size());ASSERT_FALSE(after.empty());
+    for(std::size_t i=0;i<before.size();++i) {
+        ASSERT_EQ(before[i].size(),after[i].size());EXPECT_NEAR(before[i][0],after[i][0],1e-12);
+        for(std::size_t j=1;j<before[i].size();++j)EXPECT_EQ(before[i][j],after[i][j]);
+    }
+    const auto& o=*current.observation;ASSERT_EQ(o.stimuli.size(),1u);ASSERT_EQ(o.peaks.size(),1u);
+    const auto& p=o.peaks[0];ASSERT_TRUE(p.rawPotential);ASSERT_TRUE(p.time);
+    const auto channel=f.branch?0u:f.index;
+    double largest=after.front()[channel+2];std::size_t maximum=0;
+    for(std::size_t i=1;i<after.size();++i)if(after[i][channel+2]>largest){largest=after[i][channel+2];maximum=i;}
+    EXPECT_EQ(*p.rawPotential,largest);EXPECT_NEAR(*p.time-o.specification.begin,after[maximum][0],1e-12);
+    EXPECT_EQ(old.observation->peaks[0].candidateCount,p.candidateCount);
+    if(p.candidateCount>1)EXPECT_FALSE(old.observation->valid);
+    VerificationProtocol forbidden;forbidden.schemaVersion=5;
+    EXPECT_THROW(ValidateVerificationProtocol(forbidden),std::invalid_argument);
+    EXPECT_THROW(CapturedReferences::Capture(forbidden,{{*current.prepared,o}}),std::invalid_argument);
+}
+TEST(SingleImpulseMaximumNative,Classic2000){MaximumNative<NNeuronTimeLearner>(2000);}
+TEST(SingleImpulseMaximumNative,Branch2000){MaximumNative<NNeuronTimeLearnerBranch>(2000);}
+TEST(SingleImpulseMaximumNative,Classic20000){MaximumNative<NNeuronTimeLearner>(20000);}
+TEST(SingleImpulseMaximumNative,Branch20000){MaximumNative<NNeuronTimeLearnerBranch>(20000);}
+TEST(SingleImpulseMaximumNative,FaultsRestoreBothTopologies) {
+    for(auto fault:{Fault::Prepared,Fault::Sample,Fault::FinalSample}) {
+        Roundtrip<NNeuronTimeLearner>(fault,true);Roundtrip<NNeuronTimeLearnerBranch>(fault,true);
+    }
+}
 
 }

@@ -68,3 +68,19 @@ class SinglePulseJobTest(unittest.TestCase):
                 job = prepare_stopped_job(case,index,'explicit-channel-toggle',channel_diagnostics=enabled)
                 validate_job(job);self.assertEqual(job['schema_version'],3)
                 self.assertIs(job['channel_diagnostics'],enabled)
+
+    def test_largest_peak_requires_explicit_single_pulse_presentation(self):
+        for case,index,_ in self.rows:
+            maximum=prepare_single_pulse_job(case,index,'explicit-maximum',peak_selection='single_impulse_maximum')
+            validate_job(maximum)
+            self.assertEqual(maximum['probe']['peak_selection'],'single_impulse_maximum')
+            self.assertEqual(maximum['source_stopped'],case[0])
+            self.assertTrue(maximum['probe']['protocol_revision'].endswith('/single-impulse-maximum-v1'))
+            bad=prepare_stopped_job(case,index,'maximum-on-burst')
+            bad['probe']['peak_selection']='single_impulse_maximum'
+            with self.assertRaises(EvidenceError):validate_job(_signed(bad))
+
+    def test_unknown_single_pulse_selection_is_rejected(self):
+        for case,index,_ in self.rows:
+            with self.assertRaises(EvidenceError):
+                prepare_single_pulse_job(case,index,'unknown-maximum',peak_selection='largest_anywhere')

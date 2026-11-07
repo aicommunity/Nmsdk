@@ -348,4 +348,70 @@ TEST(TimeLearnerProbe, RejectsWrongSampleDimensionAndWritesAfterClosure)
     EXPECT_THROW(recorder.Observe(2.,{2.},"model_1"),std::logic_error);
     EXPECT_THROW(recorder.Close(2.,"model_1","closed"),std::logic_error);
 }
+
+ProbeSpec MaximumSpecification()
+{
+    auto s=Specification();s.schemaVersion=5;
+    s.stimulusProfile=StimulusProfile{"source",1.,.01,10.,0.,false,false};
+    s.characterization=SinglePulseCharacterization{"full_training_pattern",4,2};
+    s.peakSelection=PeakSelectionPolicy::SingleImpulseMaximum;return s;
+}
+ProbeObservation MaximumObservation(const std::vector<double>& values,bool complete=true,double stimulusTime=.1)
+{
+    ProbeRecorder recorder(MaximumSpecification());Samples(recorder,values);
+    recorder.RecordStimulus("pulse",stimulusTime);return recorder.Close(complete?1.:.9,"model_1","closed");
+}
+TEST(SingleImpulseMaximum, KeepsLargestPeakAfterDeepFallAndSmallerExtrema)
+{
+    // The later maximum follows a fall well below the old 85% early-lock band.
+    const auto o=MaximumObservation({0.,0.,.02,.001,.01,.001,.04,.01,0.,0.,0.});
+    ASSERT_TRUE(o.valid);ASSERT_EQ(o.peaks.size(),1u);const auto& p=o.peaks[0];
+    EXPECT_EQ(p.candidateCount,3u);ASSERT_TRUE(p.amplitude);EXPECT_NEAR(*p.amplitude,.04,1e-15);
+    EXPECT_DOUBLE_EQ(*p.time,.6);EXPECT_DOUBLE_EQ(*p.plateauEnd,.6);
+}
+TEST(SingleImpulseMaximum, SeparatedEqualLargestPeaksAreTimingAmbiguous)
+{
+    const auto o=MaximumObservation({0.,0.,.02,.0,.02,0.,0.,0.,0.,0.,0.});
+    EXPECT_FALSE(o.valid);ASSERT_EQ(o.peaks.size(),1u);
+    EXPECT_EQ(o.peaks[0].validity,PeakValidity::Ambiguous);
+    EXPECT_EQ(o.peaks[0].candidateCount,2u);EXPECT_FALSE(o.peaks[0].time);
+}
+TEST(SingleImpulseMaximum, PlateauRetainsMeasuredEndpointsDespiteSmallerPeak)
+{
+    const auto o=MaximumObservation({0.,0.,.01,0.,.04,.04,.04,.01,0.,0.,0.});
+    ASSERT_TRUE(o.valid);const auto& p=o.peaks[0];EXPECT_EQ(p.candidateCount,2u);
+    EXPECT_DOUBLE_EQ(*p.time,.4);EXPECT_DOUBLE_EQ(*p.plateauEnd,.6);
+}
+TEST(SingleImpulseMaximum, BoundaryAndIncompleteWindowCannotBecomeValidMaximum)
+{
+    const auto clipped=MaximumObservation({0.,0.,.01,0.,0.,0.,0.,0.,0.,0.,.04});
+    EXPECT_FALSE(clipped.valid);EXPECT_EQ(clipped.peaks[0].validity,PeakValidity::Clipped);
+    const auto incomplete=MaximumObservation(onePeak,false);
+    EXPECT_FALSE(incomplete.complete);EXPECT_EQ(incomplete.peaks[0].validity,PeakValidity::Incomplete);
+}
+TEST(SingleImpulseMaximum, NewPolicyCannotRelabelLegacyOrBurstSpecification)
+{
+    auto s=MaximumSpecification();s.schemaVersion=4;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=MaximumSpecification();s.characterization.reset();
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=MaximumSpecification();s.expectedStimulusIds.push_back("other");
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=MaximumSpecification();s.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
+TEST(SingleImpulseMaximum, HistoricalIsolatedPolicyStillRejectsMultiplePeaks)
+{
+    auto s=MaximumSpecification();s.schemaVersion=4;s.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    ProbeRecorder recorder(s);Samples(recorder,{0.,0.,.02,0.,.04,0.,0.,0.,0.,0.,0.});
+    recorder.RecordStimulus("pulse",.1);const auto o=recorder.Close(1.,"model_1","closed");
+    EXPECT_FALSE(o.valid);EXPECT_EQ(o.peaks[0].validity,PeakValidity::Ambiguous);
+}
+TEST(SingleImpulseMaximum, MeasurableMaximumBeforeActualImpulseDoesNotProveAResponse)
+{
+    const auto o=MaximumObservation({0.,0.,.04,0.,.01,0.,0.,0.,0.,0.,0.},true,.5);
+    EXPECT_TRUE(o.complete);EXPECT_FALSE(o.valid);EXPECT_TRUE(Has(o,"peak_precedes_stimulus:input"));
+    ASSERT_EQ(o.peaks.size(),1u);EXPECT_EQ(o.peaks[0].validity,PeakValidity::Valid);
+    EXPECT_DOUBLE_EQ(*o.peaks[0].time,.2);EXPECT_LT(*o.peaks[0].delayFromStimulus,0.);
+}
 }
