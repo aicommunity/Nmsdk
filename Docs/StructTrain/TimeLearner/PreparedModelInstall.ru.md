@@ -29,9 +29,13 @@ references/history/search/certificate/request. Это не waveform proof:
 следующий обязательный gate — реальный Console protocol и paired baseline.
 
 
-[Адресный gate запущен на M40](PreparedModelInstallJobs.json): root122a3aea6 /
-Pulse2726bdf;26 native функций и29 readers. На последней kernel-проверке
-worker1483958 жив и выполняет сборку. Новый runtime отделён от шести прежних;
-source/build cache используется после закрытия и освобождения previous24 job.
-Это статус запуска, не PASS. Ранее принятый physical graph import не проверяет
-новый owner installation API; ASan предыдущего SDK также его не покрывает.
+Первая [проверка на M40](PreparedModelInstallJobs.json) завершилась compile failure.
+[Failed primary](PreparedModelInstallFailureVerification.json):27 members и785
+source hashes сверены с Git; native/reader tests не запускались. Шесть ошибок
+относятся к трём временным UEPtr в двух template instantiations нового fixture;
+ещё две QJsonObject diagnostics являются следствием неверного выражения after.
+Core library собрана, но это не runtime-проверка API. Группа закрыта/lease released.
+
+В fixture использовано GetComponent с правильным общим UEPtr<UContainer>;
+Rdk не изменялся. Failed-a1 остаётся failed. Исправленная постановка сохраняет
+26 native functions/29 readers и ещё должна пройти серверную проверку.

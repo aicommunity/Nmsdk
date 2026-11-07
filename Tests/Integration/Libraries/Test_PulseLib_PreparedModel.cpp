@@ -65,7 +65,7 @@ template<class Owner> void PreparedInstall()
   const auto installed=fresh->InstallNativePreparedModel(actualDeclaration,cloneNeuron,cloneData,built.effective);
   ASSERT_EQ(installed.status,NativeModelBuildStatus::Adopted)<<installed.reason;
   cloneLease.node=0;dataLease.node=0;
-  EXPECT_EQ(NmsdkTools::IdentifyModel(fresh->template GetComponentL<NPulseNeuron>("Neuron",true),{{&cloneGenerator->Output,"burst"}}),expected);
+  EXPECT_EQ(NmsdkTools::IdentifyModel(fresh->GetComponent("Neuron",true),{{&cloneGenerator->Output,"burst"}}),expected);
   EXPECT_EQ(fresh->ReadNativeParameters(),built.effective);
   const auto& control=fresh->NativeTrainingController();EXPECT_EQ(control.State(),NativeTrainingState::Idle);
   EXPECT_TRUE(control.ObservedPackets().empty());EXPECT_FALSE(control.References());EXPECT_FALSE(control.Search());EXPECT_FALSE(control.Certificate());
@@ -73,11 +73,11 @@ template<class Owner> void PreparedInstall()
   const auto again=fresh->InstallNativePreparedModel(actualDeclaration,cloneNeuron,cloneData,built.effective);
   EXPECT_EQ(again.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(again.modelMayHaveChanged);
   EXPECT_EQ(fresh->ReadNativeParameters(),built.effective);
-  EXPECT_EQ(NmsdkTools::IdentifyModel(fresh->template GetComponentL<NPulseNeuron>("Neuron",true),{{&cloneGenerator->Output,"burst"}}),expected);
+  EXPECT_EQ(NmsdkTools::IdentifyModel(fresh->GetComponent("Neuron",true),{{&cloneGenerator->Output,"burst"}}),expected);
   if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
   {
    QJsonObject renames;for(const auto& entry:names)renames[QString::fromStdString(entry.first)]=QString::fromStdString(entry.second);
-   const auto after=NmsdkTools::IdentifyModel(fresh->template GetComponentL<NPulseNeuron>("Neuron",true),{{&cloneGenerator->Output,"burst"}});
+   const auto after=NmsdkTools::IdentifyModel(fresh->GetComponent("Neuron",true),{{&cloneGenerator->Output,"burst"}});
    QJsonArray parameters;for(const auto& p:fresh->ReadNativeParameters())parameters.append(QJsonObject{{"length",p.length},{"synapses",p.synapses},{"resistance",p.resistance}});
    const auto record=QJsonObject{{"kind","native_prepared_model_fixture"},{"schema_version",1},
     {"source_identity",snapshot["identity"]},{"source_after",NmsdkTools::IdentifyModel(neuron,{{&generator->Output,"burst"}})},
