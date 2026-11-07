@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/tmp/timelearner-profile-probe-admission-a1-supervisor.py", line 13, in <module>
+    binding=start(manifest,[str(worker)],'/tmp',out,memory_bytes=2*1024**3,tasks=64,maximum_wall_seconds=600)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2/Scripts/StructTrain/TimeLearner/contained_process.py", line 127, in start
+    executable = verify_runtime(manifest)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2/Scripts/StructTrain/TimeLearner/process_runner.py", line 21, in verify_runtime
+    require(manifest["runtime_identity"] == identity and manifest["runtime_fingerprint"] == digest_json(identity),
+            ~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'runtime_identity'
