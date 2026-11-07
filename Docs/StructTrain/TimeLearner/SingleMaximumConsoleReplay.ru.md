@@ -136,3 +136,16 @@ PNG (596634 bytes). [Независимая сверка384 tool hashes и ар�
 ![Classic: положительная вершина, полный выброс сохранён выше](../../../Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1/selected/Classic-measured-peak-00054-positive-lobe.png)
 
 ![Branch: положительная вершина, полный выброс сохранён выше](../../../Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1/selected/Branch-measured-peak-00060-positive-lobe.png)
+
+
+## Отдельная ASan-проверка Console
+
+Зарегистрирован [M40 job](SingleMaximumConsoleASanJobs.json): тот же production
+replay проверяет4 actual operations и5 design controls на compiled RootE91 /
+Pulse217. Source data commitfea18 сохранён. Runtime от принятой dimension ASan
+группы не пересобирается и не меняется; её whole-group closure/release проверены
+до новых read leases. На данном снимке новый Console job подтверждён живым
+kernel cgroup; ASan/replay verdict ещё не принят. Наличие libasan в ldd и
+compiler flags само по себе не подменяет actual loaded-file proof четырёх
+процессов. Train, classification, whole-burst assignment и leak check не входят
+в эту адресную проверку. Normal A1/A2 receipts не переоцениваются.
