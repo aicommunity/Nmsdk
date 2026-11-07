@@ -9,8 +9,8 @@
   "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-console-normal-a2",
   "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1",
   "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1-container",
-  "status_at_last_kernel_observation": "running",
-  "phase_at_last_observation": "archived_source_preparation",
+  "status_at_last_kernel_observation": "closed",
+  "phase_at_last_observation": "rejected_by_replay_clock_comparison",
   "unit": "timelearner-ae490b93-e27b-4d26-a4c4-a0afbc969a23.service",
   "invocation_id": "8aece074faeb45dba04639a96ac7feb8",
   "initial_main_pid": 1516612,
@@ -24,5 +24,12 @@
   "new_training_started": false,
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "restart_policy": "Poll this exact binding; observation timeout does not permit restart. Source/runtime/primary stay immutable."
+  "restart_policy": "Poll this exact binding; observation timeout does not permit restart. Source/runtime/primary stay immutable.",
+  "whole_group_closed": true,
+  "lease_released": true,
+  "completed_native_probes": 2,
+  "unexecuted_native_probes": 2,
+  "primary_commit": "2ba950373a79e896d3f7817d3cbdbeb1bad192ee",
+  "failure": "relative-clock arithmetic cancellation; soma/input samples exactly equal",
+  "corrected_reader_commit": "a77b46095407832a848e4f1614252a636cfedcec"
 }
