@@ -63,6 +63,7 @@ def chart(directory, soma):
             'begin': spec['begin'], 'end': spec['end'], 'frequency_hz': job['model']['frequency_hz'],
             'times': [number(row['time']) for row in data['samples']],
             'stimulus': [number(float(row['stimulus'])) for row in primary],
+            'soma_baseline': number(spec['baseline'][soma]),
             'panels': panels, 'threshold': threshold,
             'lt_spike_times': [number(t) for row in data['samples'] for t in row['new_lt_spike_times']],
             'raw_initial_channel_values': {'Exc': exc[0], 'Inh': inh[0]},
@@ -95,9 +96,11 @@ def observation_caption(data):
             ' | plotted channel has window='+str(context['plotted_channel_has_window']))
 
 
-def render_figure(data, name, left, right, output, local=False):
+def render_figure(data, name, left, right, output, local=False, positive_lobe=False):
     import matplotlib.pyplot as plt
+    require(not positive_lobe or local, 'positive_lobe_requires_local_view')
     times = data['times'];panels = data['panels']
+    focus=None
     fig, axes = plt.subplots(4, 1, figsize=(12, 12), dpi=160, sharex=True)
     fig.subplots_adjust(left=.12, right=.86, bottom=.06, top=.79, hspace=.43)
     handles=[];labels=[];colors=['#154c9a', '#b45f06', '#228b22', '#7d3c98'];limits=[]
@@ -112,11 +115,23 @@ def render_figure(data, name, left, right, output, local=False):
                         marker='o',markersize=3,markerfacecolor='none',color=line.get_color())
         panel_limits=(padded_limits([values[k] for _,values in panel['series'] for k in bracket])
                       if local else panel['shared_limits'])
+        if positive_lobe and i == 0:
+            baseline=number(data['soma_baseline'])
+            values=panel['series'][0][1]
+            positive=[values[k] for k in bracket if values[k]>baseline]
+            require(bool(positive), 'positive_lobe_has_no_positive_response')
+            panel_limits=padded_limits([baseline]+positive)
+            clipped=[k for k in visible if values[k]<panel_limits[0]]
+            focus={'baseline':baseline,'limits':list(panel_limits),
+                   'clipped_below_times':[times[k] for k in clipped],
+                   'negative_excursion_preserved_in_paired_full_range_view':True}
+            ax.plot([times[k] for k in clipped],[panel_limits[0]]*len(clipped),
+                    linestyle='none',marker='v',markersize=4,color=colors[0],clip_on=False)
         limits.append(panel_limits)
         ax.set_ylim(*panel_limits);ax.set_xlim(left, right)
         ax.set_ylabel('Native units\nSI unverified', fontsize=12)
         extra=('; threshold outside local Y' if i==3 and not panel_limits[0] <= data['threshold'] <= panel_limits[1] else '')
-        ax.set_title(panel['label']+extra, fontsize=12, loc='left');ax.grid(alpha=.25)
+        ax.set_title(panel['label']+extra+('; positive-lobe Y; triangles = below range' if positive_lobe and i==0 else ''), fontsize=12, loc='left');ax.grid(alpha=.25)
         ax.tick_params(axis='both', labelsize=12)
         ax.xaxis.get_offset_text().set_fontsize(12)
         ax.yaxis.get_offset_text().set_fontsize(12)
@@ -136,7 +151,8 @@ def render_figure(data, name, left, right, output, local=False):
     title=figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native burst characterization')+'\n'+
                  observation_caption(data)+'\n'+
                  data['trial_id']+'\n'+data['soma_path']+' | '+name+
-                 (' | local Y per panel' if local else ' | shared Y per panel')+
+                 (' | positive-lobe soma Y; other panels local' if positive_lobe else
+                  ' | local Y per panel' if local else ' | shared Y per panel')+
                  ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12], font_sizes=(12,))
     legend=fig.legend(handles, labels, loc='center', bbox_to_anchor=(.5,.87), ncol=2, fontsize=12, frameon=False)
     # Place the legend in the actual free band. Font size alone does not
@@ -166,9 +182,10 @@ def render_figure(data, name, left, right, output, local=False):
             'minimum_visible_text_fontsize_pt': min(text_sizes),
             'legend_layout': layout,
             'minimum_native_tick_pixels': None if name == 'overview' else 1420.8/(data['frequency_hz']*(right-left)),
-            'y_scale': 'local_per_panel' if local else 'shared_per_panel', 'panel_y_limits': limits,
+            'y_scale': 'positive_lobe_soma_local_other_panels' if positive_lobe else 'local_per_panel' if local else 'shared_per_panel', 'panel_y_limits': limits,
             'shared_panel_y_limits': [p['shared_limits'] for p in panels], 'sample_markers':local,
-            'threshold_outside_local_Y': local and not limits[3][0] <= data['threshold'] <= limits[3][1]}
+            'threshold_outside_local_Y': local and not limits[3][0] <= data['threshold'] <= limits[3][1],
+            **({'positive_lobe_focus':focus} if positive_lobe else {})}
 
 
 def render(directory, output, source_evidence, repository):
@@ -206,6 +223,11 @@ def render(directory, output, source_evidence, repository):
             first,last=max(0,index-10),min(len(data['times'])-1,index+10)
             views.append(render_figure(data,'measured-peak-'+str(index).zfill(5)+'-detail',
                                        data['times'][first],data['times'][last],folder,local=True))
+            baseline=data['soma_baseline'];signal=data['panels'][0]['series'][0][1]
+            if min(signal[first:last+1])<baseline and max(signal[first:last+1])>baseline:
+                views.append(render_figure(data,'measured-peak-'+str(index).zfill(5)+'-positive-lobe',
+                                           data['times'][first],data['times'][last],folder,
+                                           local=True,positive_lobe=True))
         reports.append({'soma_path':data['soma_path'], 'folder':folder.name, 'views':views,
                         'base_model_revision':data['model_revision'],'observed_model_revision':data['observed_model_revision'],
                         'raw_initial_channel_values':data['raw_initial_channel_values'],
@@ -233,6 +255,8 @@ def render(directory, output, source_evidence, repository):
         'measured-peak details have explicitly labelled local Y scales. Packet observation validity applies to '
         'its declared input windows; an additional plotted soma has no separate peak verdict from that flag. '
         'Waveform completeness and plotted-channel window membership are shown separately. '
+        'Positive-lobe views explicitly clip negative soma samples with triangle markers; '
+        'their paired full-range detail retains the complete negative excursion. '
         'No training or causal verdict.</p>'+
         ''.join(sections),encoding='utf-8')
     sums={p.relative_to(output).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
