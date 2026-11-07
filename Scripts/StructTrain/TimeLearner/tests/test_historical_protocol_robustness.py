@@ -88,6 +88,15 @@ class HistoricalProtocolPreparation(unittest.TestCase):
             work = self.fixture(temp);declared = prepare_protocol(work, [3, 4, 5, 6, 7, 0, 1, 2], 3.)
             parameter_export(work);effective_protocol(work/"Parameters_00.xml", declared)
 
+    def test_evaluation_does_not_silently_retarget_the_learner(self):
+        with tempfile.TemporaryDirectory() as temp:
+            work = self.fixture(temp);declared = prepare_protocol(work, list(range(8)), 1.5)
+            path = work/"Model_00.xml";tree = ET.parse(path)
+            target = tree.getroot().find(".//NeuronTimeLearner/Parameters/InputPattern")
+            target.text = ".02 .08 .16 .24";tree.write(path, encoding="utf-8")
+            with self.assertRaisesRegex(EvidenceError, "historical_protocol_training_target_changed"):
+                effective_protocol(path, declared)
+
     def test_invalid_orders_and_intervals_are_not_silently_normalized(self):
         with tempfile.TemporaryDirectory() as temp:
             work = self.fixture(temp)
