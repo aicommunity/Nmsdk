@@ -106,12 +106,15 @@ def render_case(folder, output, case):
                 # Fail on clipped text rather than silently reducing the font.
                 fig.canvas.draw();renderer = fig.canvas.get_renderer()
                 width, height = fig.canvas.get_width_height()
+                hidden_ticks = set()
+                for axis in fig.axes:
+                    for labels_, limits_, coordinate in ((axis.get_xticklabels(), axis.get_xlim(), 0),
+                                                          (axis.get_yticklabels(), axis.get_ylim(), 1)):
+                        hidden_ticks.update(id(label) for label in labels_
+                                            if not limits_[0] <= label.get_position()[coordinate] <= limits_[1])
                 for text in fig.findobj(match=lambda artist: isinstance(artist, plt.Text)):
-                    if not text.get_visible() or not text.get_text():continue
+                    if not text.get_visible() or not text.get_text() or id(text) in hidden_ticks:continue
                     box = text.get_window_extent(renderer)
-                    # Tick text outside the displayed interval is not drawn.
-                    if text.axes is not None and text in text.axes.get_xticklabels():
-                        if not axes[-1].get_xlim()[0] <= text.get_position()[0] <= axes[-1].get_xlim()[1]:continue
                     require(box.x0 >= 0 and box.x1 <= width and box.y0 >= 0 and box.y1 <= height,
                             "protocol_plot_text_clipped:"+text.get_text())
                 path = output/(trial["sample_id"]+"-"+mode+".png")
