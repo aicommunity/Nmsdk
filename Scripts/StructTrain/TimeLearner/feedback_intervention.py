@@ -64,6 +64,7 @@ def audit_profile_delta(source, candidate, class_renames, *, feedback_gain=None)
             not set(class_renames).intersection(class_renames.values()), 'feedback_invalid_class_renames')
     gain = None if feedback_gain is None else number(feedback_gain)
     require(gain is None or gain >= 0, 'feedback_invalid_requested_gain')
+    if gain == 0:gain = 0.  # Same canonical binary64 zero as native ModelIdentity.
     expected = deepcopy(before)
     used = set()
 

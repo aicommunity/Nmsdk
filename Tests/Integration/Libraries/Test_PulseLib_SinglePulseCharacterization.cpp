@@ -5,6 +5,9 @@
 #include <cmath>
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
+#include "TimeLearner/ModelArchive.h"
+#include "NPulseChannel.h"
+#include "NPulseSynapse.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NumericChecks.h"
 #include "../Support/ConsoleLikeInit.h"
@@ -12,6 +15,7 @@
 #include <QJsonDocument>
 #include <QDir>
 #include <QFile>
+#include <QCryptographicHash>
 #include <cstdlib>
 #include <type_traits>
 
@@ -259,5 +263,73 @@ TEST(StorageFeedbackProfiles,ClassicNativeFeedbackDynamics){FeedbackDynamics<NNe
 TEST(StorageFeedbackProfiles,BranchNativeFeedbackDynamics){FeedbackDynamics<NNeuronTimeLearnerBranch>();}
 TEST(FeedbackProfileImages,ClassicNativeInheritedPhysics){FeedbackDynamics<NNeuronTimeLearner>(true);}
 TEST(FeedbackProfileImages,BranchNativeInheritedPhysics){FeedbackDynamics<NNeuronTimeLearnerBranch>(true);}
+
+struct ProfileImportLease {
+    UEPtr<UStorage> storage;UEPtr<UContainer> node;
+    ~ProfileImportLease(){if(node){if(auto net=dynamic_pointer_cast<UNet>(node))net->BreakLinks();storage->ReturnObject(node);}}
+};
+template<class Learner> void FullProfileGraphImport() {
+    const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+    for(unsigned frequency:{2000u,20000u}) {
+        SinglePulseFixture<Learner> f;f.Make(frequency,4,{},.0117,true);ASSERT_TRUE(f.learner);
+        NativeProbeResult result;std::vector<std::vector<double>> samples;
+        f.Run(true,Fault::None,result,samples);ASSERT_EQ(result.status,NativeProbeStatus::Completed);
+        // Explicit private fixture state at a consumed probe boundary. These
+        // heterogeneous individual parameters are not uniform image settings
+        // and are not claimed as the result of a Train.
+        auto channel=f.neuron->template GetComponentL<NPulseChannel>("Soma1.ExcChannel",true);
+        auto tip=f.neuron->template GetComponentL<NPulseSynapse>("Dendrite1_1.ExcSynapse1",true);
+        ASSERT_TRUE(channel);ASSERT_TRUE(tip);channel->Capacity=1.3e-9;tip->Resistance=93e6;
+        f.neuron->Build();f.neuron->Reset();f.base=f.Revision();
+        const NmsdkTools::ModelBoundarySources ports{{&f.source->Output,"burst"}};
+        const auto original=NmsdkTools::ExportPhysicalGraphForEdit(f.neuron,ports);
+        EXPECT_THROW(NmsdkTools::ImportFeedbackProfileGraphForEdit(original,core.storage,core.environment,{},0.,ports),
+                     NmsdkTools::ModelArchiveError);
+        for(double gain:{2.,0.}) {
+            FeedbackStorageProfileSpec spec;spec.frequencyHz=frequency;spec.bodyFeedbackGain=gain;
+            spec.name=std::string("FullProfileImport_")+(f.branch?"Branch":"Classic")+std::to_string(frequency)+"_"+std::to_string(int(gain));
+            const auto profile=RegisterFeedbackStorageProfile(core.storage,core.environment,spec);
+            const std::map<std::string,std::string> names{{"NSPNeuronGen",profile.neuronClass},{"NPMembraneBio",profile.bodyMembraneClass}};
+            const std::optional<double> factor=gain==2.?std::optional<double>{}:std::optional<double>{gain};
+            ProfileImportLease imported{core.storage,NmsdkTools::ImportFeedbackProfileGraphForEdit(original,core.storage,core.environment,names,factor,ports)};
+            ASSERT_TRUE(imported.node);
+            const auto actual=NmsdkTools::IdentifyModel(imported.node,ports);ASSERT_TRUE(actual["valid"].toBool());
+            auto actualChannel=imported.node->template GetComponentL<NPulseChannel>("Soma1.ExcChannel",true);
+            auto actualTip=imported.node->template GetComponentL<NPulseSynapse>("Dendrite1_1.ExcSynapse1",true);
+            ASSERT_TRUE(actualChannel);ASSERT_TRUE(actualTip);
+            EXPECT_EQ(actualChannel->Capacity.GetData(),1.3e-9);EXPECT_EQ(actualTip->Resistance.GetData(),93e6);
+            EXPECT_EQ(NmsdkTools::IdentifyModel(f.neuron,ports),original["identity"].toObject());
+            const auto exported=NmsdkTools::ExportPhysicalGraphForEdit(imported.node,ports);
+            ProfileImportLease roundtrip{core.storage,NmsdkTools::ImportPhysicalGraphForEdit(exported,core.storage,core.environment,ports)};
+            ASSERT_TRUE(roundtrip.node);EXPECT_EQ(NmsdkTools::IdentifyModel(roundtrip.node,ports),actual);
+            EXPECT_THROW(NmsdkTools::ImportFeedbackProfileGraphForEdit(original,core.storage,core.environment,names,.25,ports),
+                         NmsdkTools::ModelArchiveError);
+            auto corrupt=original;USerStorageXML xml;
+            ASSERT_TRUE(xml.Load(original["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph"));
+            ASSERT_TRUE(xml.SelectNode("Neuron"));ASSERT_TRUE(xml.SelectNode("Components"));
+            ASSERT_TRUE(xml.SelectNode("Soma1"));ASSERT_TRUE(xml.SelectNode("Parameters"));
+            ASSERT_TRUE(xml.SelectNode("FeedbackGain"));ASSERT_TRUE(xml.SetNodeText("3"));xml.SelectRoot();
+            std::string broken;ASSERT_TRUE(xml.Save(broken));const auto brokenText=QString::fromStdString(broken);
+            corrupt["native_xml"]=brokenText;
+            corrupt["native_xml_sha256"]=QString::fromLatin1(QCryptographicHash::hash(brokenText.toUtf8(),QCryptographicHash::Sha256).toHex());
+            try {
+                auto invalid=NmsdkTools::ImportFeedbackProfileGraphForEdit(corrupt,core.storage,core.environment,names,factor,ports);
+                ProfileImportLease unexpected{core.storage,invalid};FAIL()<<"contradictory source gain hidden by substitution";
+            } catch(const NmsdkTools::ModelArchiveError& error) {EXPECT_EQ(error.code,"archive_model_mismatch");}
+            if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+                QJsonObject renames;for(const auto& entry:names)renames[QString::fromStdString(entry.first)]=QString::fromStdString(entry.second);
+                const auto record=QJsonObject{{"source_identity",original["identity"]},{"candidate_identity",actual},
+                    {"roundtrip_identity",NmsdkTools::IdentifyModel(roundtrip.node,ports)},{"class_renames",renames},
+                    {"feedback_gain",factor?QJsonValue(*factor):QJsonValue(QJsonValue::Null)},
+                    {"individual_fixture_state",true},{"candidate_waveform_evaluated",false},{"training_started",false}};
+                const QString name=QString("profile-import-%1-%2-%3.json").arg(f.branch?"Branch":"Classic").arg(frequency).arg(int(gain));
+                QFile file(QString::fromLocal8Bit(output)+"/"+name);ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                const auto bytes=QJsonDocument(record).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
+            }
+        }
+    }
+}
+TEST(FeedbackProfileImport,ClassicFullIndividualStateAndRoundtrip){FullProfileGraphImport<NNeuronTimeLearner>();}
+TEST(FeedbackProfileImport,BranchFullIndividualStateAndRoundtrip){FullProfileGraphImport<NNeuronTimeLearnerBranch>();}
 
 }

@@ -67,3 +67,24 @@ native fixtures, а не прежние JSON mutations аудиторных unit
 не добавляется. ASan/второй сервер, XML новых образов и применение к конкретным
 полным archived learned/stopped states ещё не проверены. Научный вывод о
 дополнительных пиках опубликованных stock-моделей этим не получен.
+
+
+## Полный physical-state import через профиль — кандидат
+
+PulseLib ImportFeedbackProfileGraphForEdit строит новый, не подключённый к
+owner граф из полного native snapshot. До преобразования source XML проходит
+native Load/Init и проверку собственной identity. После проверенных class
+substitutions coefficient берётся из derived membrane images; исходные XML
+overlays FeedbackGain удаляются штатным USerStorageXML. Никаких записей во
+все живые мембраны или Calculate не добавляется. Результат снова проходит
+полную native identity-проверку; исходный граф/контроллер не меняется.
+
+Две новые native функции используют Classic/Branch N4,2000/20000Гц, source
+порог0.0117 и явно заданные индивидуальные C1.3e-9/Rs93e6. Проверяются полный
+перенос, обычный native export/import roundtrip, отсутствие изменений source,
+отказ без derived membrane class, при неверном image gain и при повреждённом
+source XML даже с пересчитанной XML checksum. Два независимых Python readers
+сравнивают actual identities production-аудитором, включая individual C/Rs.
+Новые функции ещё не проверены сервером; отклик полученного candidate в этой
+проверке не рассчитывается и не объявляется научным результатом. Применение
+к полному archived stopped state и paired waveforms остаются следующим gate.
