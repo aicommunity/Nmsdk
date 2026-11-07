@@ -379,7 +379,7 @@ members/375 tool hashes; group closed/lease released. [Читаемый отчё
 подтверждена normal иASan: по9 native IDs и10 readers, по16 физических условий
 Classic/Branch ×N1/2/4/6 ×2000/20000 и6 fault captures. Это диагностический
 одиночный импульс, N1 fixture/threshold100. Реальное обучение полной пачкой,
-N0/полная physics matrix иConsole подASan этим не закрыты. Последний ASan
+N0/полная physics matrix этим не закрыты; Console ASan принят отдельно ниже. Последний ASan
 worker завершён, whole group closed/lease released; повтор не запущен.
 
 [Миграция16 LTZ drivers](LtzDriverRetirement.ru.md) вошла в Bin/root develop
@@ -395,3 +395,11 @@ worker завершён, whole group closed/lease released; повтор не з
 PhysicalInfeasible или отсутствия вклада импульса. Научная неопределённость
 сохранена; одиночный отклик с меньшими добавочными максимумами — другой случай.
 Все исходные этапы1–12 по-прежнему частичны, цель полного плана активна.
+
+
+[ASan Console replay4](SingleMaximumConsoleASanVerification.json) принят:
+4 actual processes,5 design tests, exact archive/A-B traces, actual libasan maps,
+459 compact primary members/384 tool hashes/424 manifest artifact bindings.
+Runtime неизменен, whole group closed/lease released. Это одиночная диагностика,
+не Train, classification или полная принадлежность пиков пачки. Предыдущие
+указания об открытом адресном ASan Console gate заменены этим receipt.
