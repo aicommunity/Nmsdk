@@ -18,7 +18,8 @@ def _leaf(value):
 def index_bytes(cache_root, cases):
     """Validate every linked figure; return HTML without changing the cache."""
     root = Path(cache_root).resolve(strict=True)
-    require(type(cases) is list and bool(cases) and len(set(cases)) == len(cases),
+    require(type(cases) is list and bool(cases) and all(type(c) is str for c in cases)
+            and len(set(cases)) == len(cases),
             "report_index_invalid_case_set")
     sections, bindings = [], []
     escape = html.escape
@@ -26,7 +27,9 @@ def index_bytes(cache_root, cases):
     for case in cases:
         folder = (root/_leaf(case)).resolve(strict=True)
         require(folder.is_relative_to(root), "report_index_case_escape")
-        report_path = folder/"report.json";report = load(report_path)
+        report_path = (folder/"report.json").resolve(strict=True)
+        require(report_path.is_relative_to(folder), "report_index_report_escape")
+        report = load(report_path)
         require(report.get("kind") == "historical_protocol_temporal_report" and
                 report.get("schema_version") == 1 and report.get("case") == case and
                 report.get("minimum_font_size", 0) >= 12 and
