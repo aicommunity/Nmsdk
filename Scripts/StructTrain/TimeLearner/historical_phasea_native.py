@@ -6,6 +6,7 @@ threshold, infer trial completeness, or create a training certificate.
 """
 import copy
 import hashlib
+import json
 from pathlib import Path
 import subprocess
 import xml.etree.ElementTree as ET
