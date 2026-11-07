@@ -58,7 +58,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={})
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -71,7 +71,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
         (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"")+
-        (observationSchema==6?"_subset"+subsetSuffix:"");
+        (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"");
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
@@ -190,6 +190,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         trace<<sample.time<<','<<sample.stimulus;
         for(const auto value:sample.potentials)trace<<','<<value;trace<<'\n';
     };
+    if(missingSubsetSink)
+    {ASSERT_EQ(observationSchema,6u);request.onSample={};}
     const auto prototype=request;
     learner->QueueNativeProbe(std::move(request));ASSERT_TRUE(learner->NativeProbeOwnsControl());
     unsigned ticks=0;
@@ -279,6 +281,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             {"revision_reads",int(revisionReads)},{"scientific_training_result",false}}).toJson();
         ASSERT_EQ(file.write(bytes),bytes.size());
     }
+    if(missingSubsetSink)
+    {
+        EXPECT_EQ(result->status,NativeProbeStatus::Rejected);
+        EXPECT_NE(std::find(result->reasons.begin(),result->reasons.end(),"missing_native_stimulus_subset_sample_sink"),result->reasons.end());
+        EXPECT_FALSE(armed);EXPECT_EQ(sampled,0u);EXPECT_EQ(sourceEvents,0u);
+        auto dataset=learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+        ASSERT_EQ(dataset->MatrixData.GetRows(),int(inputCount));
+        for(unsigned i=0;i<inputCount;++i)EXPECT_EQ(dataset->MatrixData(i,0),isi[i]);
+        EXPECT_EQ(readRevision(),base);
+        learner->Reset();dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();return;
+    }
     if(interference!=Interference::None && interference!=Interference::NoopOwnerBuild)
     {
         const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild || interference==Interference::OwnerUnInit
@@ -332,11 +345,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         ASSERT_TRUE(decoded.observation);EXPECT_EQ(decoded.observation->specification.stimulusSubset,observed.specification.stimulusSubset);
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
         {
+            QJsonArray trainingAfter,datasetAfter;
+            for(unsigned i=0;i<inputCount;++i)
+            {trainingAfter.append(learner->InputPattern(i,0));datasetAfter.append(dataset->MatrixData(i,0));}
             QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_subset.json");
             ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-            const auto bytes=QJsonDocument(QJsonObject{{"kind","native_stimulus_subset_diagnostic"},{"schema_version",1},
+            const auto bytes=QJsonDocument(QJsonObject{{"kind","native_stimulus_subset_diagnostic"},{"schema_version",2},
                 {"source_pattern",configuredPattern},{"evidence",encoded},{"model_before",before},
-                {"model_after",NmsdkTools::IdentifyModel(neuron,ports)},{"training_target_restored",true},
+                {"model_after",NmsdkTools::IdentifyModel(neuron,ports)},
+                {"training_pattern_after",trainingAfter},{"dataset_pattern_after",datasetAfter},
+                {"physical_input_count_after",learner->NumInputDendrite.GetData()},
+                {"training_target_restored",trainingAfter==configuredPattern && datasetAfter==configuredPattern},
                 {"scientific_training_result",false}}).toJson();
             ASSERT_EQ(file.write(bytes),bytes.size());
         }
@@ -699,6 +718,8 @@ TEST(NativeBoundedTraining, Classic2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,true);}
 TEST(StimulusSubsetNative, ClassicOmitInterior2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,4,6,false,false,false,{0,2,3});}
+TEST(StimulusSubsetNative, MissingSampleSinkRejectsBeforePresentation)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,4,6,false,false,false,{0,2,3},true);}
 TEST(StimulusSubsetNative, BranchOmitInterior2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,4,6,false,false,false,{0,2,3});}
 TEST(StimulusSubsetNative, ClassicLaterSingle2000)
