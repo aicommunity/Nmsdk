@@ -1,0 +1,52 @@
+from pathlib import Path
+import json,sys,hashlib,tarfile,subprocess,sqlite3,io
+base=Path('/home/user/timelearner-refactor');incoming=base/'source-august-protocol-controls-a4';parent='ea5c884e7a8e544e1fa9b4787886ab1058960625';folder=base/'readbacks/s11-august-protocol-completion-elder-a1';container=Path(str(folder)+'-container');repo=base/'evidence-august-protocol-completion-elder-a1';prefix='Reports/StructTrain/TimeLearner/s11-august-protocol-completion-elder-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);metadata=dict(c.execute('select key,value from metadata'));c.close();r=Reservations(base/'resource-reservations.sqlite3',capacity=json.loads(metadata['capacity']))
+closed=inspect_worker_dependency(container,r,folder.name);assert closed['state']=='ready' and closed['reservation_state']=='released'
+t=json.loads((folder/'terminal.json').read_text());assert t['primary_matrix_complete'] and t['complete_conditions']==16 and t['new_full_tests_completed']==12 and t['new_native_processes_completed']==24 and not t['heartbeat_errors'] and t['ledger_metadata_unchanged']
+assert (folder/'source-before.json').read_bytes()==(folder/'source-after.json').read_bytes()
+processes=list(folder.glob('*/process/result.json'))+list(folder.glob('*/preflight/process/result.json'));assert len(processes)==24;loaded_count=0
+for p in processes:
+ result=json.loads(p.read_text());runtime=json.loads((p.parent/'runtime.json').read_text());loaded=json.loads((p.parent/'loaded-files.json').read_text());owned=json.loads((p.parent/'owned-process.json').read_text())
+ assert result['execution']=='completed' and result['returncode']==0 and result['runtime_provenance']=='loaded_files_captured' and runtime['executable'] in loaded
+ assert runtime['source_closure']['root']['head']=='de02a3809395dd0bbd11e2ba792bfc04a51c89f3' and runtime['executable']['sha256']=='1642857243c8235466a62c64a4a9b5e9a36b75e48e44c66e5326f3e8d6735357'
+ assert result['runtime_fingerprint']==runtime['runtime_fingerprint']==owned['runtime_fingerprint'];loaded_count+=len(loaded)
+b=json.loads((folder/'bundle.json').read_text());raw=(folder/'primary.tar.xz').read_bytes();assert len(raw)==b['archive_bytes'] and hashlib.sha256(raw).hexdigest()==b['archive_sha256'];seen=set()
+with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as tf:
+ for e in tf:
+  assert e.isfile() and e.name not in seen;seen.add(e.name);v=tf.extractfile(e).read();assert b['members'][e.name]=={'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()}
+assert seen==set(b['members']);rows=json.loads((folder/'progress.json').read_text());assert len(rows)==16
+for gap in (1.5,3.):assert {x['target_positions'][0] for x in rows if x['declared_iti']==gap}==set(range(8))
+assert len({x['frozen_neuron_sha256'] for x in rows})==1
+reused=json.loads((folder/'reused-primary-bindings.json').read_text());assert len(reused)==4
+for item in reused:
+ root=Path(item['folder']);actual={p.relative_to(root).as_posix():{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in root.rglob('*') if p.is_file()};assert actual==item['members']
+verification={'kind':'completed_historical_protocol_8x2_primary','conditions':16,'new_native_processes_completed':24,'reused_native_processes':8,'new_loaded_file_bindings':loaded_count,'reused_file_bindings':sum(len(x['members']) for x in reused),'all_target_positions_per_delay_verified':True,'all_frozen_models_equal':True,'rows':rows,'new_training':False,'temporal_report_complete':False,'scientific_verdict':None,'whole_plan_complete':False}
+payloads={prefix+'/'+n:(folder/n).read_bytes() for n in ['primary.tar.xz','bundle.json','terminal.json','tool-source-hashes.json','design.json','reused-primary-bindings.json']}
+for p in container.iterdir():
+ if p.is_file() and p.suffix=='.json':payloads[prefix+'/controller/'+p.name]=p.read_bytes()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode();payloads[prefix+'/publication-verification.json']=(json.dumps(verification,indent=2)+'\n').encode();payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,oid=header.decode().split();entries[name.decode()]=(mode,kind,oid)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ return git('mktree','-z','--missing',data=b''.join((mode+' '+kind+' '+oid+'\t'+name).encode()+b'\0' for name,(mode,kind,oid) in sorted(entries.items())))
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve complete frozen historical target-position and ITI primary matrix\n');git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'archive_members':len(seen),'archive_bytes':len(raw),'archive_sha256':b['archive_sha256'],'new_loaded_file_bindings':loaded_count,'complete_conditions':16,'temporal_report_complete':False}))

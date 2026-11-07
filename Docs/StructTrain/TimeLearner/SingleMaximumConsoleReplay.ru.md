@@ -136,3 +136,39 @@ PNG (596634 bytes). [Независимая сверка384 tool hashes и ар�
 ![Classic: положительная вершина, полный выброс сохранён выше](../../../Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1/selected/Classic-measured-peak-00054-positive-lobe.png)
 
 ![Branch: положительная вершина, полный выброс сохранён выше](../../../Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1/selected/Branch-measured-peak-00060-positive-lobe.png)
+
+
+## Отдельная ASan-проверка Console
+
+Зарегистрирован [M40 job](SingleMaximumConsoleASanJobs.json): тот же production
+replay проверяет4 actual operations и5 design controls на compiled RootE91 /
+Pulse217. Source data commitfea18 сохранён. Runtime от принятой dimension ASan
+группы не пересобирается и не меняется; её whole-group closure/release проверены
+до новых read leases. На данном снимке новый Console job подтверждён живым
+kernel cgroup; ASan/replay verdict ещё не принят. Наличие libasan в ldd и
+compiler flags само по себе не подменяет actual loaded-file proof четырёх
+процессов. Train, classification, whole-burst assignment и leak check не входят
+в эту адресную проверку. Normal A1/A2 receipts не переоцениваются.
+
+
+### ASan Console: принятая проверка
+
+Задание завершено:4 native Console operations и5 design tests, evidence
+`c843acedc2c84804808c054ed6f746815abe64f2`. Все4 production manifests прошли
+аудит. Classic/Branch повторили архивные traces и A/B точно; physics/revisions
+не изменились. Whole group closed, lease released,13 runtime bindings неизменны.
+
+[Независимая сверка](SingleMaximumConsoleASanVerification.json):459 primary
+members,2155572 compressed bytes, SHA256
+`b340af2ff69504d3ffae78cb0ddd65d6137f976cdcf0970b60b7b67fa166a220`,384 tool
+hashes,424 bindings четырёх manifests,216 source-cache duplicates связаны с уже
+опубликованным первичным архивом через commit/member/bytes/hash. Compile flags,
+compiler/source closure и build flags сверены с ASan dimension build receipt.
+В каждом фактическом process map найдена libasan и exact executable record.
+
+Нули ASan_loaded_maps_verified в первоначальном terminal — константа producer,
+который не выполняет эту аттестацию; отдельный collector и независимая сверка
+выполнили её и подтвердили true. Terminal сохранён без исправления задним числом.
+Requested detect_leaks=0, live options readback отсутствует; leak check не заявлен.
+Локально проверялись только metadata/hash/schema. Train, classification,
+full-burst assignment и полная матрица профилей этим не закрываются.

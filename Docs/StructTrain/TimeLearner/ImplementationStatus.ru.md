@@ -12,6 +12,12 @@ merge и научная разделимость — разные утвержд
 сопоставления ещё открыто: [source review, файлы и адресная приёмка](PeakMeasurementContractReview-2026-11-07.ru.md).
 Ранее сохранённые InvalidObservation не переоцениваются автоматически в Exact.
 
+Исправлен отдельный [дефект повторного учёта общей вершины в сертификате](AssignedVertexCertificateGuard-2026-11-07.ru.md):
+контролируемый counterexample воспроизведён до изменения; после него23/23
+production C++ unit checks прошли на Elder/normal и M40/ASan. Диагностическое
+чтение schema1/2 сохранено. Полная native интеграция данного среза и
+сопоставление волн штатной пачки остаются открытыми; это feature branch.
+
 На M40 выполнена [проверка гипотезы наложения](SuperpositionDiagnostic-2026-11-07.ru.md)
 для двух архивных high-threshold burst/single пар. Сумма сдвинутых single
 близко воспроизводит все пять soma channels, включая три максимума Soma1
@@ -19,6 +25,11 @@ merge и научная разделимость — разные утвержд
 pulse3, подтверждая запрет подмены индивидуальной цели Train общей Test
 характеристикой. Четыре tests прошли; новых native calculations/сертификатов
 нет. Это диагностика для исправления measurement, не реализация его замены.
+
+Принят [исторический frozen-пилот порядка/ITI с графиками](HistoricalFrozenProtocolScientificReport-2026-11-07.ru.md):
+четыре условия, во всех6/8, TP1/FP2/FN0/TN5; те же два FP, без late spikes.
+128 temporal views построены на M40 из Git primary, шесть выбранных проверены
+визуально. Это не cold retrain и не независимый Test. Последующая [полная первичная матрица16 условий](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md) принята: target во всех8 позициях на двух Delay, те же6/8 и FP IDs.Полный temporal комплект512 views/128 presentations и оглавление приняты;384 новых,128 использованы по hashes. Это одна frozen историческая модель, не полный этап11.
 
 ## Проверенные срезы
 
@@ -379,7 +390,7 @@ members/375 tool hashes; group closed/lease released. [Читаемый отчё
 подтверждена normal иASan: по9 native IDs и10 readers, по16 физических условий
 Classic/Branch ×N1/2/4/6 ×2000/20000 и6 fault captures. Это диагностический
 одиночный импульс, N1 fixture/threshold100. Реальное обучение полной пачкой,
-N0/полная physics matrix иConsole подASan этим не закрыты. Последний ASan
+N0/полная physics matrix этим не закрыты; Console ASan принят отдельно ниже. Последний ASan
 worker завершён, whole group closed/lease released; повтор не запущен.
 
 [Миграция16 LTZ drivers](LtzDriverRetirement.ru.md) вошла в Bin/root develop
@@ -395,3 +406,11 @@ worker завершён, whole group closed/lease released; повтор не з
 PhysicalInfeasible или отсутствия вклада импульса. Научная неопределённость
 сохранена; одиночный отклик с меньшими добавочными максимумами — другой случай.
 Все исходные этапы1–12 по-прежнему частичны, цель полного плана активна.
+
+
+[ASan Console replay4](SingleMaximumConsoleASanVerification.json) принят:
+4 actual processes,5 design tests, exact archive/A-B traces, actual libasan maps,
+459 compact primary members/384 tool hashes/424 manifest artifact bindings.
+Runtime неизменен, whole group closed/lease released. Это одиночная диагностика,
+не Train, classification или полная принадлежность пиков пачки. Предыдущие
+указания об открытом адресном ASan Console gate заменены этим receipt.

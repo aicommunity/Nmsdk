@@ -1,0 +1,4016 @@
+{
+  "members": {
+    "design.json": {
+      "bytes": 2062,
+      "sha256": "f870c06279edfe0f599a7e5c0f1ff7b95ad1fac7d305fcdeead02842b1bcbc6e"
+    },
+    "disk-before-rotation2-gap1.5.json": {
+      "bytes": 63,
+      "sha256": "ebffc5474c4923599056b825bbc917f69ce81dc05fc69f8b95d4b9526e44b494"
+    },
+    "disk-before-rotation2-gap3.json": {
+      "bytes": 63,
+      "sha256": "8d778875eaa0a31c651d381216cdcc8bcc47d098698c4a66e0b1777495819e53"
+    },
+    "disk-before-rotation3-gap1.5.json": {
+      "bytes": 63,
+      "sha256": "ab48e2bfc9ff46c13bc52c18565dc96835008581884d6a2f0e760a0161cdfbf4"
+    },
+    "disk-before-rotation3-gap3.json": {
+      "bytes": 63,
+      "sha256": "9cf216a7570234ae51ceb16bdbbdf20a30414edf46d7eac2eab1023047b50b8b"
+    },
+    "disk-before-rotation4-gap1.5.json": {
+      "bytes": 63,
+      "sha256": "763f4d14fff5b31271154be0c90fad26cc1b333f1a025245431eb522960315a4"
+    },
+    "disk-before-rotation4-gap3.json": {
+      "bytes": 63,
+      "sha256": "0c99fb2769aa04ddd15c35a323c017b37fbd22c81e0368ff41e6c50736d204ca"
+    },
+    "disk-before-rotation5-gap1.5.json": {
+      "bytes": 63,
+      "sha256": "ca3cdaca73a691a7e2556250cf3b4dd15c580b490a8110babbcdb9cca81ead4a"
+    },
+    "disk-before-rotation5-gap3.json": {
+      "bytes": 63,
+      "sha256": "538b082fe293fa462d1b4cb0e26e56a8051197059db7dbea1720b876df324b77"
+    },
+    "disk-before-rotation6-gap1.5.json": {
+      "bytes": 63,
+      "sha256": "80e1d44665ab421105d26b90facd9473b8985ad35afebcf71e71ce34d8ffaf8b"
+    },
+    "disk-before-rotation6-gap3.json": {
+      "bytes": 63,
+      "sha256": "6d0098b903e941493334b06ce44c2b9c9ad7826aea5645955cd5affb0bb922ed"
+    },
+    "disk-before-rotation7-gap1.5.json": {
+      "bytes": 63,
+      "sha256": "d28aa32e4cdd6e2b90daaec722401bd1579edc95c8f2bd5c550608ff1a13e32b"
+    },
+    "disk-before-rotation7-gap3.json": {
+      "bytes": 63,
+      "sha256": "34fd26eb7b3eac62e1f7478e56361058bae549248fed51241789765ff1bd72d7"
+    },
+    "historical-runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "lease-before-worker-exit.json": {
+      "bytes": 2582,
+      "sha256": "480f2c6d3c5206c2edb56fdb6dfb4d46e6298c64b818dc1e244e705eb058279f"
+    },
+    "ledger-metadata.json": {
+      "bytes": 405,
+      "sha256": "bd1ed0430b2bd907592fc7aba12d143cbf5ad2b9a6b8b1446e3c930f61e244cd"
+    },
+    "pilot-closed.json": {
+      "bytes": 1884,
+      "sha256": "0607ba26f140ad787b4917f89c333cd86decbd4090a7a542bbab70b91f1df2de"
+    },
+    "producer.txt": {
+      "bytes": 8875,
+      "sha256": "514e87aade1c60d4b23cbdcb4eac52c44ed8e5e993105eda59d008eb18b69f5c"
+    },
+    "progress.json": {
+      "bytes": 11159,
+      "sha256": "dccdbef7ecce9c43c2a84a5b50917df522f8545432864d129e0d3d93bd56674d"
+    },
+    "reservation.json": {
+      "bytes": 2362,
+      "sha256": "36e72111f045c92e844b365dfb10fbf0461156433e51aced86d4f66df1692dcc"
+    },
+    "resource-preflight.json": {
+      "bytes": 260,
+      "sha256": "8b9c3d68643eeb0b182f5dc34b5e4a148c0437620fe210928d4dd8c2bb11c55d"
+    },
+    "reused-primary-bindings.json": {
+      "bytes": 56608,
+      "sha256": "df29c86d106cb8e50aae8e2d37b0fa8bfb3f3b45402e27eebf1dd41828276ad2"
+    },
+    "rotation0-gap1.5-reused-observation.json": {
+      "bytes": 5931,
+      "sha256": "dbaec845233b2459c187ff9820c9d0fcda477920fcde3d0a6ca89a4817d307cf"
+    },
+    "rotation0-gap3-reused-observation.json": {
+      "bytes": 5949,
+      "sha256": "7ee8e4444c0445e3540b9fd5f33e4d5743eec2b60106eda402695090de22b125"
+    },
+    "rotation1-gap1.5-reused-observation.json": {
+      "bytes": 5931,
+      "sha256": "61a0aeb61db781262af4339e95dc81374a418edb93637a13161b7a1a2967ea1c"
+    },
+    "rotation1-gap3-reused-observation.json": {
+      "bytes": 5949,
+      "sha256": "75bd1a06aaba1d8a6d2ec6e0a1e8ab4baba2d459c434ffddcd2651dc2f6bf7d1"
+    },
+    "rotation2-gap1.5/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap1.5/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap1.5/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation2-gap1.5/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation2-gap1.5/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap1.5/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap1.5/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation2-gap1.5/observations.json": {
+      "bytes": 5929,
+      "sha256": "a7fbada16caa32dd29b10be51496b898aa8af3447fa689a51ae498fa300cf359"
+    },
+    "rotation2-gap1.5/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation2-gap1.5/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation2-gap1.5/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "d08127a46d033c36a0428d33379c79f1c2e216fd5eeec9f7940ba951cfbe0b2f"
+    },
+    "rotation2-gap1.5/preflight/process/request.json": {
+      "bytes": 599,
+      "sha256": "342b4bc4c7e45c906d781c7b13479d6ea33b74f529d1c900822fd1784da0d600"
+    },
+    "rotation2-gap1.5/preflight/process/result.json": {
+      "bytes": 443,
+      "sha256": "a5d424dae820e1202452edb0230a47ee6ee951a18571d615ec9bfdc921ef68af"
+    },
+    "rotation2-gap1.5/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation2-gap1.5/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "e041d8df48f104ebb7f9f8ab14e2aa3a7634ad821697de917468f615c73ec9fb"
+    },
+    "rotation2-gap1.5/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation2-gap1.5/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation2-gap1.5/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-190548.1077748": {
+      "bytes": 364,
+      "sha256": "43390c3e9f33acedb319cf706782db23cceb622ddfac348885ab65f3721a1c82"
+    },
+    "rotation2-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-190548.1077748": {
+      "bytes": 2602328,
+      "sha256": "1e65c6d0be774ca04aec911dcab19548398b66f58edda8f9437f8befe930d8ba"
+    },
+    "rotation2-gap1.5/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "063c709c6e773f832480ad9b5268afe265f9003e7be834657566582db1c441d4"
+    },
+    "rotation2-gap1.5/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap1.5/preflight/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "3e070a96f74a67b61bcc2e0dfe7e6e10179f8081657af61edec9a58f587941f4"
+    },
+    "rotation2-gap1.5/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation2-gap1.5/preflight/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "cb69d975942fa618fb74634a5a77ade187d10c92ae830e11a63d2bb1945cb029"
+    },
+    "rotation2-gap1.5/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap1.5/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation2-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation2-gap1.5/preflight/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "cb69d975942fa618fb74634a5a77ade187d10c92ae830e11a63d2bb1945cb029"
+    },
+    "rotation2-gap1.5/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap1.5/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap1.5/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "e2f9775fa95b57907b4c80bb5ee43ab536349e3b055eaf28bdfd4ad7fdae796d"
+    },
+    "rotation2-gap1.5/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation2-gap1.5/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "73b8ae9916565371a099d28268f7c1612438fc882339e95455c00e27b7f76837"
+    },
+    "rotation2-gap1.5/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap1.5/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap1.5/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation2-gap1.5/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "9b426641743a7e97d9af43497a42c298ee19957907aeaa6ba3dcf5ed8dc84275"
+    },
+    "rotation2-gap1.5/process/request.json": {
+      "bytes": 566,
+      "sha256": "fe22336608c9c6ce73df7096a0bb9d1c38b0a8e3db6caf48bd8efe22252ad050"
+    },
+    "rotation2-gap1.5/process/result.json": {
+      "bytes": 444,
+      "sha256": "eee41e69cb7486205d4aeca7047ce2794c0337e2c251440ef26097ec7e30f639"
+    },
+    "rotation2-gap1.5/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation2-gap1.5/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "ffcd4de3d7710c85d9061e783f5ba69f49d7565dd8f0b956a7982bac77b4aabd"
+    },
+    "rotation2-gap1.5/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation2-gap1.5/protocol.json": {
+      "bytes": 2624,
+      "sha256": "60f9b9da30e39f714ecf02ae131ea76c2c86c9aa498024d1c395f87628cd68ab"
+    },
+    "rotation2-gap1.5/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation2-gap1.5/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "7a818aeb0057f4ad16a59dd276263a09b5895f6a70313066fb74190d353a46a2"
+    },
+    "rotation2-gap1.5/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-190551.1078046": {
+      "bytes": 365,
+      "sha256": "197ac543de30a5ad355d86699c9ccf0c79be2a9d8651ccf30a9eace00de2080b"
+    },
+    "rotation2-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-190551.1078046": {
+      "bytes": 2602299,
+      "sha256": "dc25ebaa4bd031194cdf89d19a38991e2f7215488588a57026e9f42908bd38d8"
+    },
+    "rotation2-gap1.5/work/History.xml": {
+      "bytes": 102,
+      "sha256": "5b6daa614da6f87c556716f00541c499ecd544e8761d6ba0382548789d37ec03"
+    },
+    "rotation2-gap1.5/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap1.5/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "9f228736685193a786e2bce279433ee1eecb0ba58966b4b6398e67db409ecc04"
+    },
+    "rotation2-gap1.5/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation2-gap1.5/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "5e3f89ada6516dd66d212a05461d6bf03f420e037796e9eab7624456ec181177"
+    },
+    "rotation2-gap1.5/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap1.5/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap1.5/work/SelectivityLog/results.csv": {
+      "bytes": 873,
+      "sha256": "c2e5081e400dcd87c9a20fd0e271fe5c9c0ce8fd1ca0586e8e7bc61a157e4257"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "e3ceafd29a74765b3b470169d3862c98fd303061c7d9fac8f0946f2927667303"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "75ed20ad139b613d72b0785cea2cd70968e3d621cfb9494218d71af7650ddae7"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905106,
+      "sha256": "3488161cd4bfa52343d44fb215cc17e5a269e0ece19d487cc3f1ed486c0ecf8c"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "1c55f88baa79c1ee58d9d648b4c385fd2fd5a3faf31b4121e5dd9ff0ba0f8c33"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906392,
+      "sha256": "d2faf14928399e56237498723fb91a336c254bbaac6ee5a9a2c5fbcfc4f0be29"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "337679ed9f6dc14524bea8c4e7544d3abe5b780f36d118e4b9a0fa3bde5e5f4e"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908643,
+      "sha256": "2702286178fd34e779a5d7899d58063773fb00b714870995cae200b0c097a5b0"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "f422ec66f47adb6c6cb48fa7d3787933fa24b97ce2ed8b435d3db271f2314a40"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910398,
+      "sha256": "5cc33a52034789733045b2a6474ed251326d463e849cc0d5012bc05a5ff25abc"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "7cd81044bfd1919b91f4a5ebd70f66d9bfb4b3f0df154fa81de98c6ab76e080b"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931294,
+      "sha256": "2ca68703eb954cfe41e89e4c448097e849439b1ae4af56c13a8fcf18ebfb4653"
+    },
+    "rotation2-gap1.5/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532112,
+      "sha256": "4fee620d426f4ecf8dfc9c8b1fbbb34afb3cad15ed1ec905f32e1dc2e40793a7"
+    },
+    "rotation2-gap1.5/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "5e3f89ada6516dd66d212a05461d6bf03f420e037796e9eab7624456ec181177"
+    },
+    "rotation2-gap3/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap3/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap3/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation2-gap3/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation2-gap3/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap3/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap3/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation2-gap3/observations.json": {
+      "bytes": 5947,
+      "sha256": "6d2d9e1c95952a50eb4c7ffea18c2d5627854bf2eea142e953031c4507deb216"
+    },
+    "rotation2-gap3/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation2-gap3/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation2-gap3/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "f11008ffce637f9fe0436a20b549de28c41ab75462e0407a6a2260ea09b5e81f"
+    },
+    "rotation2-gap3/preflight/process/request.json": {
+      "bytes": 593,
+      "sha256": "d6c5532452047a90d36a9701c592396c631d7b4ba608dd745bdaa8e99c48093e"
+    },
+    "rotation2-gap3/preflight/process/result.json": {
+      "bytes": 443,
+      "sha256": "52d8d04010ee9b54cd11347d210ceecdd6df7dfd27bfbbd277ecdc1f0e2762f6"
+    },
+    "rotation2-gap3/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation2-gap3/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "6bed8407d37d498031cfd1dd9317880483829287cc9524b5a274a062aedd096f"
+    },
+    "rotation2-gap3/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation2-gap3/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation2-gap3/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-190821.1080142": {
+      "bytes": 363,
+      "sha256": "8a8615bd52f4ecb732cf78bb03a6e624b2ef14a950e32de5561ad09bf1c4801a"
+    },
+    "rotation2-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-190821.1080142": {
+      "bytes": 2602321,
+      "sha256": "6123b68ccbe9e822932b5e66c7193f3e0bd53c48b02bfb2e2047b82ece240c64"
+    },
+    "rotation2-gap3/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "48b28827a3b0e32a15b9fdba7d5c01fb241c6e3db4ebc240b94b061672693b61"
+    },
+    "rotation2-gap3/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap3/preflight/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "cb95dd0cfb631831a8eb522c20547fc6a198a116d6b6f64a3f80e0bf0ca4a7a3"
+    },
+    "rotation2-gap3/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation2-gap3/preflight/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "ced9897ab3466d442e179c18e708d2a2dce524d28def0676af96ada591591463"
+    },
+    "rotation2-gap3/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap3/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation2-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation2-gap3/preflight/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "ced9897ab3466d442e179c18e708d2a2dce524d28def0676af96ada591591463"
+    },
+    "rotation2-gap3/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap3/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap3/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "8caa65d3f5d55df02e9cffea6e906b8eeb0f5b2c4010881fc93c26f78d1dfd47"
+    },
+    "rotation2-gap3/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation2-gap3/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "8de229364c44e16d0151593ea9b8c883dd2043177debb6f4b8f513c6e8c04fee"
+    },
+    "rotation2-gap3/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap3/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap3/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation2-gap3/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "edb4af78b01a621098804ce0886e06304e72cda3c1edc37c8b4330ccf3236cd4"
+    },
+    "rotation2-gap3/process/request.json": {
+      "bytes": 560,
+      "sha256": "1197e707b8a1ec1c17c28c61d0f19363ccfef09eef0821f89e1decbf2a4cdd10"
+    },
+    "rotation2-gap3/process/result.json": {
+      "bytes": 444,
+      "sha256": "81381d0e05cebf484d8fceae51dfa3a87264ae5af2422e54948992fe12619436"
+    },
+    "rotation2-gap3/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation2-gap3/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "8559f501dd2e64b1acec8fdd90be9eb9d7fc644760c05a15ad129ab1859550c1"
+    },
+    "rotation2-gap3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation2-gap3/protocol.json": {
+      "bytes": 2624,
+      "sha256": "a4806e594a6ce53bad88ae7e6fdaab8e206093db401a14400a579ac6f8c3daf7"
+    },
+    "rotation2-gap3/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation2-gap3/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "5865dc8f86548d8a381feb164c409f1aed3e8274881d7ec0b89fbfcb21a8b2c2"
+    },
+    "rotation2-gap3/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation2-gap3/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-190824.1080438": {
+      "bytes": 363,
+      "sha256": "73da15cac16d615fe81836baaf9676c8f004b385d609d4405c436c1f34732d7d"
+    },
+    "rotation2-gap3/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-190824.1080438": {
+      "bytes": 2584002,
+      "sha256": "51131d48cc94277198b696894477ebda1144c3bbe3d6dd5527b7e41538658a55"
+    },
+    "rotation2-gap3/work/History.xml": {
+      "bytes": 102,
+      "sha256": "218c08c40a6bb26b8b724617cba0ea362395e1fbad33e62b073ffb1ef23abd12"
+    },
+    "rotation2-gap3/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation2-gap3/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "7d8275d4c0b2b0629b3fbd68512f317aea1d59d4e1b4e198d22555a85d24b22d"
+    },
+    "rotation2-gap3/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation2-gap3/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "44e170d72a8ae62403c7c3c6b9ff373ec1f2ef2df7e9105df4fe0810fea7ea9c"
+    },
+    "rotation2-gap3/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation2-gap3/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation2-gap3/work/SelectivityLog/results.csv": {
+      "bytes": 873,
+      "sha256": "c2e5081e400dcd87c9a20fd0e271fe5c9c0ce8fd1ca0586e8e7bc61a157e4257"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "2980a5b1231810f9c22331b0b8276d02562e5c4ef0b1a458758726a73aeb6714"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "c4685a57f0f2171e1a82659aa663e79e7866fcd25dae619b8c3bfc5a0d7764e7"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905106,
+      "sha256": "a1f112fdececcbc05f9b8dc086d3ab5846db0753c65f2dbc50c17150ecd61994"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "e60325e616c318e0975164b04e75d2f6dad7e0374d25d923138f7ef4b0c8eea2"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906392,
+      "sha256": "721a669342fd4a219b34c4c779f17c8e8770017037ac5363f884297bf226a81b"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "fe1c60ad0cfe1503478f12ab2d913d1d4b244b568736147a59c076e8d1492744"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908643,
+      "sha256": "367f18b1e06dbc0ee4f0a1e4771a76af1cd3ec402def1091caf9a89e9cfd04e1"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "156086aef5bab74685ac9c6e0b80d7bda98b91602652e3bd074a030e4233959b"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910398,
+      "sha256": "40e26b463755dd5a1c9ff35ebda0331790560c1af70bb041b1a52830ae89075d"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "e2ed8e5d98939320951c4fd020288740ecd752a68d793c0d8b9a57494fe99fc3"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931294,
+      "sha256": "2722663ce63b4e81fad52d72220ce79c488c8d24e66f94a6a6ef13fdae3436fa"
+    },
+    "rotation2-gap3/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532112,
+      "sha256": "65096b32a2e5cb770f2f32f6f3be1a20407d2cd9e7a7185aa63be40d1876c14e"
+    },
+    "rotation2-gap3/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "44e170d72a8ae62403c7c3c6b9ff373ec1f2ef2df7e9105df4fe0810fea7ea9c"
+    },
+    "rotation3-gap1.5/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap1.5/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap1.5/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation3-gap1.5/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation3-gap1.5/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap1.5/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap1.5/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation3-gap1.5/observations.json": {
+      "bytes": 5927,
+      "sha256": "3f6cefa5f05074f5b1e8f4adbc097f081778f906801a577a21be959f08d78c66"
+    },
+    "rotation3-gap1.5/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation3-gap1.5/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation3-gap1.5/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "b0f637c2430cf67efe2965d6a0458b077b5b8daa4d5d474c2924a05f0387674f"
+    },
+    "rotation3-gap1.5/preflight/process/request.json": {
+      "bytes": 599,
+      "sha256": "c65db0768644d0eb3fc303f98a1dc7b08086cf795b3c956ea386b1f033f74818"
+    },
+    "rotation3-gap1.5/preflight/process/result.json": {
+      "bytes": 443,
+      "sha256": "00031df0ec59248f9bfde14fc14653409c6d3cadbb9025e4430eadf9bd1f830e"
+    },
+    "rotation3-gap1.5/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation3-gap1.5/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "2808f1d4a536d311c8c384ba7ed97170d26d7c5277678fcff296278127689234"
+    },
+    "rotation3-gap1.5/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation3-gap1.5/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation3-gap1.5/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191056.1082549": {
+      "bytes": 364,
+      "sha256": "7d05372a4aa2328e1c3fe02b29a9a35cffe8c51d878ddb9c200a7413b43d2a9c"
+    },
+    "rotation3-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191056.1082549": {
+      "bytes": 2602328,
+      "sha256": "3af9c015cc7f7d71d7b8fa144a29cc7d0c573a3bbde8be78c0cf41e0960d96b0"
+    },
+    "rotation3-gap1.5/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "1cd5332e611356c8ac0d553adff62c49bf62ad55114466fa19f54477682b1483"
+    },
+    "rotation3-gap1.5/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap1.5/preflight/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "37fd552ecf001123bf05f3eca175ad26f43fedb25cd225b50a2f98f838195060"
+    },
+    "rotation3-gap1.5/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation3-gap1.5/preflight/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "8d1fa4dc8207b7a356c8990720165aadece5b0a9d3be01339271da82bb5b4ab4"
+    },
+    "rotation3-gap1.5/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap1.5/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation3-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation3-gap1.5/preflight/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "8d1fa4dc8207b7a356c8990720165aadece5b0a9d3be01339271da82bb5b4ab4"
+    },
+    "rotation3-gap1.5/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap1.5/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap1.5/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "011c85b07872b93ec52cdce2cca98d57cce4d394248d1f7667e30ed11db3a96c"
+    },
+    "rotation3-gap1.5/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation3-gap1.5/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "faecc9b2a2cdc40b433a978bed432020ac0ee8c565eba03315bfecde2f73fd12"
+    },
+    "rotation3-gap1.5/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap1.5/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap1.5/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation3-gap1.5/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "7d4af79787cb3e973c1524fad55acd1c4af75d58a0af4a55b0049b9c5c2acb6c"
+    },
+    "rotation3-gap1.5/process/request.json": {
+      "bytes": 566,
+      "sha256": "3b91002ea9a98ed6c1696fe5e74b9d3a3d77f28d0ca29fe6cff898294c25c9c2"
+    },
+    "rotation3-gap1.5/process/result.json": {
+      "bytes": 444,
+      "sha256": "fbce2a7b9f8692b8a6da89f8594f5cd121cf9bd7d15244820ffde9dba7135e13"
+    },
+    "rotation3-gap1.5/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation3-gap1.5/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "0e037812532a77ea05695b146674d6dd0fbc8140b17022b6b450d61ff6730f71"
+    },
+    "rotation3-gap1.5/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation3-gap1.5/protocol.json": {
+      "bytes": 2624,
+      "sha256": "10a0eec16f27ecb4ece09816d5c81a021cd829e81f7d7610ab0041ae56626cd1"
+    },
+    "rotation3-gap1.5/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation3-gap1.5/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "4d2eb40175f2853f61d222998d07827d42bf6f095c391dc33baed62935ab260e"
+    },
+    "rotation3-gap1.5/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191059.1082846": {
+      "bytes": 364,
+      "sha256": "35caf8dbb0bf962e02ea08348a687cfcbf1a94c10e805331ee9d433f301055ca"
+    },
+    "rotation3-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191059.1082846": {
+      "bytes": 2602298,
+      "sha256": "6bd736da1baf6a6683bdbaa944ce7b73de3a895dedf89c86effb9d3ae33ee044"
+    },
+    "rotation3-gap1.5/work/History.xml": {
+      "bytes": 102,
+      "sha256": "1972d2219f3b5dcf2f795a1b9809280c6474bb8fa9c89fd587702660e4340f64"
+    },
+    "rotation3-gap1.5/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap1.5/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "52d92845fb2179c795e2af1e164dc85daa6200ad3629f1aa3dc51a8abf952a32"
+    },
+    "rotation3-gap1.5/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation3-gap1.5/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "14327283a9ed2e372b8ec18a8e6eeacb6beabf93e114b6a1b51e90a1203b30ae"
+    },
+    "rotation3-gap1.5/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap1.5/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap1.5/work/SelectivityLog/results.csv": {
+      "bytes": 875,
+      "sha256": "6acfe8ad30facb0551135d74a8b53ec3634858d2e611e18ff4dcc149f0cb0568"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "5057ca73fc263d4095e7ebf8f03d4388439ecdcd9dc514ab074fd1771515fb26"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "2e2134e9b879ab74ea187b8190e6b8929ddc071292406c469da4619644dc0f34"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905133,
+      "sha256": "5cde56033e645ab94a78933772d6c8ba59f2c8f6996769f318f822224aa8ab2d"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "ae1ad54f54ffa9657e2631b74f0467d9efa6ae603ff021ef419646a57fed5cf4"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906399,
+      "sha256": "edb603e53b15fa574325c1a70ff503b6f26cb24f6e64a88fc66097a626fae9e1"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "6797d373f3478b047ddc7d7a84a920a317d14c4c06af47f2fea7b540c4d2e596"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908673,
+      "sha256": "bbe76195d3201dff302caa74458b95d3489be74204b9bc97bee9f64c51741545"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "629020ccd76cf918ef996516fb214b4a0b284e571f554e709b0b1fe235120f8e"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910383,
+      "sha256": "b44c82741c3093aad1b0d18a5dc3c5d4e0fb788e54db37a3585d105a9556dc5d"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "2909432586493a4a1c0cead6fce519a61a1493bc102622113cd58e3371f12b4f"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931260,
+      "sha256": "d83f9d8b9ee1eeb6e3326abe6b204117b7956cae21ca9a64506b5e508fdf04d5"
+    },
+    "rotation3-gap1.5/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532169,
+      "sha256": "74204861e57511586fae14218f914bd05639fecd686a5e32465360f668377687"
+    },
+    "rotation3-gap1.5/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "14327283a9ed2e372b8ec18a8e6eeacb6beabf93e114b6a1b51e90a1203b30ae"
+    },
+    "rotation3-gap3/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap3/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap3/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation3-gap3/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation3-gap3/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap3/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap3/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation3-gap3/observations.json": {
+      "bytes": 5945,
+      "sha256": "0925f7a5e03f2802a54c9729dfe672558a89e1731d45eda971256db5ece9af67"
+    },
+    "rotation3-gap3/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation3-gap3/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation3-gap3/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "13653b388558f0754a2430349fa2195f394144d42fe26eaff38621b802a81b31"
+    },
+    "rotation3-gap3/preflight/process/request.json": {
+      "bytes": 593,
+      "sha256": "b2fb43d82d45b0810b76a0a9a0549a82912315fa2c8845d05bd0d9e5f6a9cd93"
+    },
+    "rotation3-gap3/preflight/process/result.json": {
+      "bytes": 444,
+      "sha256": "de5361f8ccf20fffed52c716692365604ead82e5e067d82ae5ca8b40aa425b43"
+    },
+    "rotation3-gap3/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation3-gap3/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "485fc905d31be14a28e9756f47fcd86abb9e630d902d4e2f8b2032a31af39b4c"
+    },
+    "rotation3-gap3/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation3-gap3/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation3-gap3/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191331.1084916": {
+      "bytes": 365,
+      "sha256": "e1bfee8b9d4e839f4b8b568e031740fbeb9a9d1f0b371d8a9d20bc58b6aa9e95"
+    },
+    "rotation3-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191331.1084916": {
+      "bytes": 2602323,
+      "sha256": "90430932ff124655f49529c233cca18d563cf13228db93039cf42117b3fc8198"
+    },
+    "rotation3-gap3/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "478fddd4e1758eb3bfda329472883fd155fd3a76144c2b67ceb1f8802cc13bf2"
+    },
+    "rotation3-gap3/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap3/preflight/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "c72e184770ad283a2c810f92fed887323da74f200996d2601bdc28d57ab1fe4c"
+    },
+    "rotation3-gap3/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation3-gap3/preflight/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "4fac475d712f1516db51ef81db96c68fb09a305352361e59934c53c20bd42f62"
+    },
+    "rotation3-gap3/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap3/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation3-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation3-gap3/preflight/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "4fac475d712f1516db51ef81db96c68fb09a305352361e59934c53c20bd42f62"
+    },
+    "rotation3-gap3/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap3/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap3/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "2035e4c1c63519c5939a8a6fa8d525ae8cce691eea3db0dd897c5fdee186f94b"
+    },
+    "rotation3-gap3/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation3-gap3/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "451f8861d48c70650977b35fc8ef4227c5595732e8d44072cf301d4b325df197"
+    },
+    "rotation3-gap3/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap3/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap3/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation3-gap3/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "e99d0d23e22d2c9d8ae15e1e4c0b54745b279ef8ea9a52718788e651a32548f5"
+    },
+    "rotation3-gap3/process/request.json": {
+      "bytes": 560,
+      "sha256": "55197fd0c2bb9ecf450d248a165dbfc3967194c1b7b946ae0bd130b1d4b1c287"
+    },
+    "rotation3-gap3/process/result.json": {
+      "bytes": 444,
+      "sha256": "d32169d1c9586252fb1074c4755a10ef3f93e195e61896ab4973c894a037001f"
+    },
+    "rotation3-gap3/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation3-gap3/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "2267db68db935be318df462d829904f1c58f442f97576e7ee26f1edc25f83333"
+    },
+    "rotation3-gap3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation3-gap3/protocol.json": {
+      "bytes": 2624,
+      "sha256": "dfbde117ced0e5ae199d1adaf63bbadee492c8f1a03a9ca8eb8284fac02baff2"
+    },
+    "rotation3-gap3/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation3-gap3/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "72e64dd6e859e63dfef9834ebca643009bb8ad48a2999ca1e4f76f9dfeb32fae"
+    },
+    "rotation3-gap3/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation3-gap3/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191334.1085212": {
+      "bytes": 364,
+      "sha256": "8e2dda4f297a9a2dfc78972d33644c6d6e12c3356623177cc0652dee927b808c"
+    },
+    "rotation3-gap3/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191334.1085212": {
+      "bytes": 2602292,
+      "sha256": "3d58947dba16c2471648001ce0b3d4e52dd41464510a8c71c6b54fbec9904461"
+    },
+    "rotation3-gap3/work/History.xml": {
+      "bytes": 102,
+      "sha256": "974f8548b32cce193d780db2e0482e3ba6c93441ea03bf61fc3e0270c3d0e263"
+    },
+    "rotation3-gap3/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation3-gap3/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "06bd3b2d7eaef21df868f2ba3c349a0bcd12ecc030b0aa1811849d8af8443c8c"
+    },
+    "rotation3-gap3/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation3-gap3/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "21fc7beaa8cec2349b3513a482144f900addbd958d262a62dfcbb3419c323c2c"
+    },
+    "rotation3-gap3/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation3-gap3/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation3-gap3/work/SelectivityLog/results.csv": {
+      "bytes": 875,
+      "sha256": "6acfe8ad30facb0551135d74a8b53ec3634858d2e611e18ff4dcc149f0cb0568"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "36744507f1f9b8f9bcb22c6b0c7335490c193c4d26ca4aa31d7998df564a9993"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "c5b4ae3fa834ae6d3ccbec4cfb0c84806808d6c8d1a57ad30b17e899cc6af1f6"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905133,
+      "sha256": "649d9c128da4ae89516bbf6e2dab6877d2c2a0052feed02b84284170cb806716"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "084176703eec80fc4610a79a2c8a5a85fb9659593b14a5c50f08e22bf96be915"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906399,
+      "sha256": "868db275247757cc85d9faeab7f28ddf243e6094f812510bb917b992e35a5135"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "1abd621beb7be736a6d7e0eabc6ecbaa265a5bf086203fa50ac66b65ea1b6180"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908673,
+      "sha256": "6863f22ca0222b85099f12b9e87ea761f6e010ea5c758d3a24cd75cf82773d0e"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "9bad624f58f5b64270204ab505c5d29d7d4869ce03d279f3f2e4b06676719b36"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910383,
+      "sha256": "1b5038cde581e33bbaac996c3c7bb814bf4131ec30eaa3b33e1cde850c794c51"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "83ce018febc7c584744cd99358a800b30bbc0db7195690bd9f381be343336792"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931260,
+      "sha256": "d68f7c0ff5bc0a1b4f8a8a3f5f4f2ad114df02e6f806a23dbbffea8414c0cbb9"
+    },
+    "rotation3-gap3/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532169,
+      "sha256": "67b735ff0d6e910c38ce2337b0e72df3153a8043ab43895103a7ca0c502a94fe"
+    },
+    "rotation3-gap3/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "21fc7beaa8cec2349b3513a482144f900addbd958d262a62dfcbb3419c323c2c"
+    },
+    "rotation4-gap1.5/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap1.5/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap1.5/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation4-gap1.5/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation4-gap1.5/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap1.5/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap1.5/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation4-gap1.5/observations.json": {
+      "bytes": 5925,
+      "sha256": "efe08e7c4d4b27c6c00ad9e460177550f6d9941c1fcc12c64d3930643b7e1f12"
+    },
+    "rotation4-gap1.5/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation4-gap1.5/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation4-gap1.5/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "5b3422bc678718836ece0c41d0bb1797d6420a5eb71ec03a5bc031bbb26f907c"
+    },
+    "rotation4-gap1.5/preflight/process/request.json": {
+      "bytes": 599,
+      "sha256": "44b1aa21ce9e10a2dcebcf44b1c7d671adddab6f8d895268d03c94dae4cbd645"
+    },
+    "rotation4-gap1.5/preflight/process/result.json": {
+      "bytes": 443,
+      "sha256": "2e47d9f9e4f17751e0629652832d5a0b0c75326b053464a2b47fc28523c69902"
+    },
+    "rotation4-gap1.5/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation4-gap1.5/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "d21b5f8351a6966c0603b7c7544b7b4136dd5a6304e200ac676341fd18e58f9f"
+    },
+    "rotation4-gap1.5/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation4-gap1.5/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation4-gap1.5/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191606.1087331": {
+      "bytes": 365,
+      "sha256": "36abd798546389ffc9bae3d660f67f894e795b47d12f04005974f02fccfed7b4"
+    },
+    "rotation4-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191606.1087331": {
+      "bytes": 2602329,
+      "sha256": "7615e70e30b2eb5cbd584dd73bd029886b9d25ec814e910c321e1d34ade834e0"
+    },
+    "rotation4-gap1.5/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "157f14314e0e2fb6d79c9e5e3737907780417369fb2ce043e361c9f889ab4ae2"
+    },
+    "rotation4-gap1.5/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap1.5/preflight/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "37d559a0cda01b080ffffdb5ef56cfcf6b34bc33f4669daa8e6982306cdbad11"
+    },
+    "rotation4-gap1.5/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation4-gap1.5/preflight/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "86677ac45b49ea6d0d1a7c4c4365a1c8bd1e1348168a01ff0d5073d2b854ba39"
+    },
+    "rotation4-gap1.5/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap1.5/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation4-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation4-gap1.5/preflight/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "86677ac45b49ea6d0d1a7c4c4365a1c8bd1e1348168a01ff0d5073d2b854ba39"
+    },
+    "rotation4-gap1.5/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap1.5/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap1.5/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "7ca97ae6857b6564f7faeab920522924eefea9e03d4f247aadcf5e5190a0a548"
+    },
+    "rotation4-gap1.5/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation4-gap1.5/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "0951f8eb3bee6a832f5f531ac073e8821eb653042ebcb9201065df99740da6da"
+    },
+    "rotation4-gap1.5/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap1.5/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap1.5/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation4-gap1.5/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "208f47bbd2fad5fd99f17aaeb23a13915c5ebba51adad12d511830a7a3f9c03a"
+    },
+    "rotation4-gap1.5/process/request.json": {
+      "bytes": 566,
+      "sha256": "c20d3de02493d62d6f8a4ba3357845cf07bb5c481d071329075722b98ca8bf59"
+    },
+    "rotation4-gap1.5/process/result.json": {
+      "bytes": 443,
+      "sha256": "84ac1e3fc37db2ba9311fd00f115ad2aea9062e0723a28cba4ce755cb1fff29f"
+    },
+    "rotation4-gap1.5/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation4-gap1.5/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "217e6645ab3833d2cd072d59d141a1446438dc1c22066cf1ebfbd261301a0bbf"
+    },
+    "rotation4-gap1.5/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation4-gap1.5/protocol.json": {
+      "bytes": 2624,
+      "sha256": "2f963a9bd3be76adb3ea99cd213d57f618b358bd417a5c2c8e15ca51f2cb7307"
+    },
+    "rotation4-gap1.5/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation4-gap1.5/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "2593a80b650ff305276f5455d428b5b5332ff93aa19684ecdbfc8dedd9d90a74"
+    },
+    "rotation4-gap1.5/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191609.1087627": {
+      "bytes": 364,
+      "sha256": "11cbb71315f4fc0cfbc4461de6b33ca2e2a02ff6232e9f21150880cd0b93433f"
+    },
+    "rotation4-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191609.1087627": {
+      "bytes": 2584009,
+      "sha256": "a754b0ddbfc6813bb60da9c5bca5c52ed62d81e1a3a2a5180a603abf1a7141e7"
+    },
+    "rotation4-gap1.5/work/History.xml": {
+      "bytes": 102,
+      "sha256": "488e35f508cede8b93f44be2dc3c856b46abb621234c73f2cc7701c756dec2c9"
+    },
+    "rotation4-gap1.5/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap1.5/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "2b173522f5bc3eaf4bcfd50ed03c583656115a3628ad52f9d0c42c4000f8caa5"
+    },
+    "rotation4-gap1.5/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation4-gap1.5/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "1e96bdc0bd01663920194221ab73010506e42e46f93939dd6caa4041121ea845"
+    },
+    "rotation4-gap1.5/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap1.5/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap1.5/work/SelectivityLog/results.csv": {
+      "bytes": 875,
+      "sha256": "bc3bab99c54d6e65505b3521da9db25abdb1a1cd2ea2105a726f23e59133829d"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "0e8cb244c864ac81da8e5563e8e5e8bb3d13f797fa06f5d8ef46893dcd88cc24"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "6c930d01e7be33bd41943b5b62e279e9711c09c48c01d21d7b31698404822545"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905143,
+      "sha256": "d8bafb5398d985ff5a9738d810afa9f36f6e65428031405947d27d81e8888279"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827668,
+      "sha256": "b4e1fcdcaffef96bd2cbe63e71ad014dd421db10cdbfa813caa6ddb1ed700a15"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906420,
+      "sha256": "521345667829bbdc7fb5f140aa9954c1e7a6fbed6c1e4e95cf0306cf6d2adc57"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828918,
+      "sha256": "f7feba52f771ca68812086ee9e21d0b8f0010f93d5dc852546ca99fc52eee98f"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908646,
+      "sha256": "32d435f06cbc4ca3b0ef901e046f8cbfe6f320a20075542472d28b7991e2c32f"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830941,
+      "sha256": "3089d8b73ce36be542d4f2799a76ca624c463ed2b39af824581ed69d61e649b0"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910396,
+      "sha256": "3536b72c04a1b1211157899da51a79ba7b79ae0e456dc83dff56554080493c28"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "f68ce417acbb5297ef24daa6403ec567d1270b8af1c967a121ce98735510a55c"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931199,
+      "sha256": "d90848332b3be26043289e2fd602b8538f6bc4c39a9b87459e55b165207a80c5"
+    },
+    "rotation4-gap1.5/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532161,
+      "sha256": "e9db1fc0843f2df8100ceaedd1383e05295628437f53ba5c4be3e891b93de163"
+    },
+    "rotation4-gap1.5/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "1e96bdc0bd01663920194221ab73010506e42e46f93939dd6caa4041121ea845"
+    },
+    "rotation4-gap3/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap3/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap3/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation4-gap3/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation4-gap3/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap3/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap3/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation4-gap3/observations.json": {
+      "bytes": 5943,
+      "sha256": "fccba5a5bd42ae074127f0a71e7eef3c3e5554a99638d1b0806dad54c59e172c"
+    },
+    "rotation4-gap3/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation4-gap3/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation4-gap3/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "34a2eb563e0919493a40286e3ef133dd5df377fc3cde102cd43c4c4321019b08"
+    },
+    "rotation4-gap3/preflight/process/request.json": {
+      "bytes": 593,
+      "sha256": "9d468f80af412fe490976c1e65be972951a3c0a97f25f70499f496ba5f4866ae"
+    },
+    "rotation4-gap3/preflight/process/result.json": {
+      "bytes": 442,
+      "sha256": "fe640e72d0318ba6bf08c91e37d7546b6575e57ca19dd17807e5204d88926e2a"
+    },
+    "rotation4-gap3/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation4-gap3/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "ffec3e261b4d47bb56436aa6018b4963b9ee4dae166ea1c95043a9cbeb0737cf"
+    },
+    "rotation4-gap3/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation4-gap3/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation4-gap3/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191843.1089705": {
+      "bytes": 363,
+      "sha256": "88b5b5010b37ae30ac5ba07bf75401dbe3312e1a2c32de1ad9c685fcf0a72990"
+    },
+    "rotation4-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191843.1089705": {
+      "bytes": 2584032,
+      "sha256": "3d3a9e3b6f5dfffbe5a6f8343a841502143bc15f6ae83df5f950366dd8a404bc"
+    },
+    "rotation4-gap3/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "acd9b4e59d4600a921be90bd48390e99308ee6b66bd5b178ff001dba9c3e8f0c"
+    },
+    "rotation4-gap3/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap3/preflight/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "996bc84e2c67570338a1093ec597b4934802fc59db6b976aab81bed624263248"
+    },
+    "rotation4-gap3/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation4-gap3/preflight/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "9c0068b86c0985363a2545c771d8d7cd66770936de4ed07d70a037c22931ee4a"
+    },
+    "rotation4-gap3/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap3/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation4-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation4-gap3/preflight/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "9c0068b86c0985363a2545c771d8d7cd66770936de4ed07d70a037c22931ee4a"
+    },
+    "rotation4-gap3/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap3/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap3/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "aeb8d2d218d096a6990c7f3f749d0801e2ace23bd8784717b7ff8eead0bff03d"
+    },
+    "rotation4-gap3/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation4-gap3/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "9933226b10b250e00a154c5d4a9f1590949cf6a24e9eddb5262663d17c33bb8b"
+    },
+    "rotation4-gap3/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap3/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap3/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation4-gap3/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "d9efbf993ad60c271a52e2ab64e66771f7dd8afea997b1bf11c534aacf03d227"
+    },
+    "rotation4-gap3/process/request.json": {
+      "bytes": 560,
+      "sha256": "c5e6a1da133902731221b99b63db6092f80db11696c7f1ea10730e6938908831"
+    },
+    "rotation4-gap3/process/result.json": {
+      "bytes": 444,
+      "sha256": "e94b2739b6f4ac081c89b13990b022e7ec100dd5f4d8c6fb06e0da6b34dfd064"
+    },
+    "rotation4-gap3/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation4-gap3/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "31ccb718af6d373995699aa437a6b674eb7662bb524c2dc62ce40659b03a9fea"
+    },
+    "rotation4-gap3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation4-gap3/protocol.json": {
+      "bytes": 2624,
+      "sha256": "d798f3f965884417c3f370bd074378f467fab7255623735851f0a9d7c0f2e8e6"
+    },
+    "rotation4-gap3/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation4-gap3/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "05a93819dc77366da54d8ca98a6d2bc4f29071b2d12d5a34fbfb24b6af4ce9af"
+    },
+    "rotation4-gap3/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation4-gap3/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-191847.1090057": {
+      "bytes": 365,
+      "sha256": "d84d2849fa681a30f9db34f54a768636d5a03ad705bc6eee12c74e4ff2a4243f"
+    },
+    "rotation4-gap3/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-191847.1090057": {
+      "bytes": 2602293,
+      "sha256": "5e88f12ae723aa19cc2747154e56b5668130314a25b544b20854c6bd03b6ca06"
+    },
+    "rotation4-gap3/work/History.xml": {
+      "bytes": 102,
+      "sha256": "bd1cd1006a809e8d787051ac581fb77ad65e0e4acfbaddbaafde84981323c3ae"
+    },
+    "rotation4-gap3/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation4-gap3/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "1826d70b462cdd315133dd55740ce99c11657bc203cc746b61ac65d040f60659"
+    },
+    "rotation4-gap3/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation4-gap3/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "c3845d97fb791b967f06411a3c42f6d18c48469fc4f1d539e41516d95cd73efd"
+    },
+    "rotation4-gap3/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation4-gap3/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation4-gap3/work/SelectivityLog/results.csv": {
+      "bytes": 875,
+      "sha256": "bc3bab99c54d6e65505b3521da9db25abdb1a1cd2ea2105a726f23e59133829d"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "aa79f1b5be6693d03c697d313ffa2a1f7aeb2c68daff2400ce4f47621c70f4d6"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "3d56d050b32e888d1965e5528491628bd4980559dd8b4efc66271ec79532a598"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905143,
+      "sha256": "17dab103a016950319e11bbe55d39b5355d356230be083810b580c09b7bfc318"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827668,
+      "sha256": "4d90146089117a26bfc7c4712af572ea3cad061c0e8778d2dacba1d36c029b35"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906420,
+      "sha256": "05abe545ff1dfee7c4dab98eea6ae40afec25d245022ffea6edfff62c6fb6b37"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828918,
+      "sha256": "f9a26d2c090283433190f4be72ec13e655a0d4377ae447a5d9904880542583e1"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908646,
+      "sha256": "bb4c7d94556a7c585f82552a42615053935600285a2f31667a0be057d65a5719"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830941,
+      "sha256": "6a4af1d38a271fa43939bb208923907b642c169c38c8c2f7eca7700d4ae88ed4"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910396,
+      "sha256": "5b21c0f25bf41a3c50e0a4c91f8f9bc00985c7ef0484bcb5bb0a4fd910c07998"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "07da65d8f276d99399722c09caa46b611319242fc82a7a9a06ea1dee750fe804"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931199,
+      "sha256": "7787a9e153b8f648c4c91c441bd1b024db5487138540a89241cfe189f7dcbec7"
+    },
+    "rotation4-gap3/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532161,
+      "sha256": "c388a2d0af187e7aec99abe575f98e17386b08b6d48535e271087de04afc041d"
+    },
+    "rotation4-gap3/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "c3845d97fb791b967f06411a3c42f6d18c48469fc4f1d539e41516d95cd73efd"
+    },
+    "rotation5-gap1.5/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap1.5/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap1.5/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation5-gap1.5/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation5-gap1.5/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap1.5/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap1.5/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation5-gap1.5/observations.json": {
+      "bytes": 5927,
+      "sha256": "42e560c456115bdedf001a41b47905ea8c8064bc4d918e85c19a1a0afaf7534f"
+    },
+    "rotation5-gap1.5/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation5-gap1.5/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation5-gap1.5/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "3546c757a00dfbeb94d1510cc4d5f182ff71ebb2c245e04fb6d37c6af1bcf4a9"
+    },
+    "rotation5-gap1.5/preflight/process/request.json": {
+      "bytes": 599,
+      "sha256": "be58d00c8e6bf92094ded2ec8b6ee56ea33b24c1f6a29bfa64d7ee38de5dd52c"
+    },
+    "rotation5-gap1.5/preflight/process/result.json": {
+      "bytes": 443,
+      "sha256": "99ca6e009e63885f454e53cc89346581e20ddb74809e4c1d4f5c7eb96a0ee672"
+    },
+    "rotation5-gap1.5/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation5-gap1.5/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "c558caedca51f1eeeb1cc7351913c719d49c2915436eec4da1dd91f7a855b3f6"
+    },
+    "rotation5-gap1.5/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation5-gap1.5/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation5-gap1.5/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192122.1092227": {
+      "bytes": 364,
+      "sha256": "da43a918a44eecd383497ed411cc00451c484fd68bbba7fba8ef2ef8be5ef020"
+    },
+    "rotation5-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192122.1092227": {
+      "bytes": 2584039,
+      "sha256": "18d2c53e23e3db2784d183d30471fcea526158d8a9909236be5c711755c69118"
+    },
+    "rotation5-gap1.5/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "889b7592875f887dfc89dfc1716c953c454ab392501a733e3e0ec0cf090a4ca0"
+    },
+    "rotation5-gap1.5/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap1.5/preflight/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "3a5e1e36202f479ed678a1d930556a176d81423cfd1cefd6dde1a11e40276792"
+    },
+    "rotation5-gap1.5/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation5-gap1.5/preflight/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "d48851011f38354b667be4d726dc1ec4a1c258aec5218892ccb2c00983c1faf4"
+    },
+    "rotation5-gap1.5/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap1.5/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation5-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation5-gap1.5/preflight/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "d48851011f38354b667be4d726dc1ec4a1c258aec5218892ccb2c00983c1faf4"
+    },
+    "rotation5-gap1.5/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap1.5/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap1.5/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "17cb85cb9a9b3c5ae3bf173114b756093a7308292a0c43865859b44bcd5edc56"
+    },
+    "rotation5-gap1.5/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation5-gap1.5/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "dd4e9f50c6bb5ca7a98b4ec5028dc24b5df88279ed1e86dd5edc7f4a2446138c"
+    },
+    "rotation5-gap1.5/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap1.5/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap1.5/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation5-gap1.5/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "e54e4c504dc33223cfe4f21f33f068dab847e5fc9cb17d62253869dd403e90b0"
+    },
+    "rotation5-gap1.5/process/request.json": {
+      "bytes": 566,
+      "sha256": "c0bd26755820c1a68f2873404cd4924298319574f0fdb337ac0d28fbbec8d8a6"
+    },
+    "rotation5-gap1.5/process/result.json": {
+      "bytes": 443,
+      "sha256": "f9dd83d3be6c5176be63e8d93a8dc73bdd0ea1e974dffc0fcc7172f1cc7151cc"
+    },
+    "rotation5-gap1.5/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation5-gap1.5/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "ded7dd54024a7116268ec3f6e7e7aa15c5d46abbc71bcd0adb15a724dbd3d813"
+    },
+    "rotation5-gap1.5/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation5-gap1.5/protocol.json": {
+      "bytes": 2624,
+      "sha256": "187d4102601bf2c9902cc56b68523c22932721c81a3730313c5d007586ed7109"
+    },
+    "rotation5-gap1.5/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation5-gap1.5/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "faa84080da93437727da29ee719efde2382435eba869551828bbdabd87dd1b1d"
+    },
+    "rotation5-gap1.5/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192126.1092531": {
+      "bytes": 365,
+      "sha256": "a5bf3bd347b1358deafb07843ea2de47230bcd3d0dc957d42cd550e4b5cef1b3"
+    },
+    "rotation5-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192126.1092531": {
+      "bytes": 2602299,
+      "sha256": "6bcab2a769764a0884ddc84606c4fe94129980b5eb2a4c9f847198eb4a403f57"
+    },
+    "rotation5-gap1.5/work/History.xml": {
+      "bytes": 102,
+      "sha256": "31b137cc6a18855ee4ed817f62674e534c3ad991fcba2e91a6162faa46b08044"
+    },
+    "rotation5-gap1.5/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap1.5/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "e8898c3fa7423024a7970b8cfef123f52e61f3c62dc627db71d053efa7c1b6e9"
+    },
+    "rotation5-gap1.5/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation5-gap1.5/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "e0704970ea37b2fdfb2acf9952aa78f985434c369bd951d5dc2bf40dea193429"
+    },
+    "rotation5-gap1.5/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap1.5/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap1.5/work/SelectivityLog/results.csv": {
+      "bytes": 874,
+      "sha256": "7b6827277094d5aef35756c50d2891db6714670aad1295de8e5b5af39e89bd09"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "a546e2735946fb63a737fe261608c41acc125fd37f241cea6c9ca1f2be82ef95"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "555992c2d4d33ca3b71fa332875e63d3533a0939764c3a3ee20cbdad333134a5"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905102,
+      "sha256": "32b405b0d64972cd7485da70ae7c37b92661f18d779a87202f9b89410ee75a71"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "0eda7b4d1b11fc1c713d251a86c45566215d2a25e03615fc2cd3766f22dcce34"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906412,
+      "sha256": "1619cdf2569a2d601bd18310314b78b9f98bd55085b1de1d34733ab97ffdc690"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "ba24d6162337cb5f23276ee2933537c8d6b44ab6e1987299db17444e101488aa"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908674,
+      "sha256": "445f88ea35fcd601aba8ff52a918943eec5f148a0c41833bce3682b15a33e8f9"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "c5e7cce03d38e2bfe1a63a36ec98d0b61b1b4130eef9a61856d26e41b677cf25"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910399,
+      "sha256": "ebf78d7c2ed30673fac8ed427bc91c33df0320d468e23f51a9ef7e4ee9854bd2"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "7bc32f512d94a9fe6f8bdc2dacf4abc894f310fd6d5919d22fc1021a0d668986"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931186,
+      "sha256": "aa58ae3ed3db06f485145acc6d07e42032dd0ae7085a8df115cc25764cf3a3f9"
+    },
+    "rotation5-gap1.5/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532170,
+      "sha256": "6aed338fd2c335e6661650aaa331de465172a29a867c5f97c34e52743842e02b"
+    },
+    "rotation5-gap1.5/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "e0704970ea37b2fdfb2acf9952aa78f985434c369bd951d5dc2bf40dea193429"
+    },
+    "rotation5-gap3/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap3/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap3/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation5-gap3/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation5-gap3/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap3/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap3/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation5-gap3/observations.json": {
+      "bytes": 5945,
+      "sha256": "f4394d75a9f7b8aa80810262b8a0505576a3b2f48a0f7ce42750919845178fcf"
+    },
+    "rotation5-gap3/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation5-gap3/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation5-gap3/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "ebb8cd5e6b54f66a7cdf0624a1480dfe8de89d65ede6fac358af84780f8a7837"
+    },
+    "rotation5-gap3/preflight/process/request.json": {
+      "bytes": 593,
+      "sha256": "945e535efb7a54124f6cb23b7949b3ab2a7365dec750ba47f898eb981078db8d"
+    },
+    "rotation5-gap3/preflight/process/result.json": {
+      "bytes": 444,
+      "sha256": "e3090e0caaeae656941efe69343e4bc6ed95063d5dce5fceacd8691ee64189fb"
+    },
+    "rotation5-gap3/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation5-gap3/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "7e3c22df4671a5dccc30577273ba3216e9dde66a03dfd53937ab9ce28c081998"
+    },
+    "rotation5-gap3/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation5-gap3/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation5-gap3/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192357.1094584": {
+      "bytes": 364,
+      "sha256": "2b9dfff95e0a64a889e23e0b35d475296b03431509c4fc311a4374897ad9ed82"
+    },
+    "rotation5-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192357.1094584": {
+      "bytes": 2602322,
+      "sha256": "25771f3f74f9c051be11fc15d02695b14f6937614c5d974c21a375f6efcf39d0"
+    },
+    "rotation5-gap3/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "f6c756f731a1a67636eeedc39a0d532f6b83b4e3c7d01498956f0959562f7831"
+    },
+    "rotation5-gap3/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap3/preflight/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "38ea837942362a63d03f97b26cd949e9922ab9cbd07bf8933edd2f9b6b1c0fbd"
+    },
+    "rotation5-gap3/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation5-gap3/preflight/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "588f9d2321c7f8e8d8951b618bdeeedadaaeee0585696cf61af25d015ca944dc"
+    },
+    "rotation5-gap3/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap3/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation5-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation5-gap3/preflight/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "588f9d2321c7f8e8d8951b618bdeeedadaaeee0585696cf61af25d015ca944dc"
+    },
+    "rotation5-gap3/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap3/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap3/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "2f9d4a49697f2f1340831df7b55cb9e7020b3ee11183540151377c0ed03faefc"
+    },
+    "rotation5-gap3/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation5-gap3/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "8aad13a25c3210dbf193c9e5898be53885d54260b5b9663db2e0be4c02cb1cc9"
+    },
+    "rotation5-gap3/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap3/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap3/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation5-gap3/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "87d43d05688197f4166bff7a9f6c8246aa4616ed7f700558e39f90f8184617c6"
+    },
+    "rotation5-gap3/process/request.json": {
+      "bytes": 560,
+      "sha256": "a03359bb646aed635024655d4f4a6315ca6a8600a32861202b7310bad8f945e6"
+    },
+    "rotation5-gap3/process/result.json": {
+      "bytes": 444,
+      "sha256": "131ca1024016b7d21d1615eff258f7bebb399092267139e184cf795475ecbfac"
+    },
+    "rotation5-gap3/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation5-gap3/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "859f87dd652e8e30bf8f125e2fac177ef0a925427d07de868ae41b87cd97456e"
+    },
+    "rotation5-gap3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation5-gap3/protocol.json": {
+      "bytes": 2624,
+      "sha256": "c68ebab68a12348bdb3016fa5306916271058aedfe859282a0c751e756f9dabf"
+    },
+    "rotation5-gap3/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation5-gap3/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "f15048d6666f172748900350cb70cfbabd768e382df032c642ec0b81af5f6848"
+    },
+    "rotation5-gap3/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation5-gap3/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192400.1094885": {
+      "bytes": 364,
+      "sha256": "52fd21c8c53ba76369c770c6b484db179fd7f92fdf5d6f112825a94bbcead327"
+    },
+    "rotation5-gap3/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192400.1094885": {
+      "bytes": 2584003,
+      "sha256": "45fb1c0257c978fc20fa8373b93e1d12f8170eeb2cb9f4434f1cef2f7d3a77b2"
+    },
+    "rotation5-gap3/work/History.xml": {
+      "bytes": 102,
+      "sha256": "c8b0d280fc5bf53bc15e1ed66ccaacd4824ebf50813c9304c9123042d8c1238f"
+    },
+    "rotation5-gap3/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation5-gap3/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "98c2056b2805dfcd1fda9e885a96f9323780640826a920396cdf3530e9ee124e"
+    },
+    "rotation5-gap3/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation5-gap3/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "c3725a7f4a35bfd56fda117d9615366b6366b3abd8c6a8fa45d4804a973ca4d6"
+    },
+    "rotation5-gap3/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation5-gap3/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation5-gap3/work/SelectivityLog/results.csv": {
+      "bytes": 874,
+      "sha256": "7b6827277094d5aef35756c50d2891db6714670aad1295de8e5b5af39e89bd09"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "b16a6b975721a92d29c0604ea7547188b155bcf4d5a49caa4739183d37e771f0"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "5d2be0179de440ae9288b69a8ab0550aa965fd5c4ecb454e4b6988fa1c384b2d"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905102,
+      "sha256": "4f410aa59e0e9524699c2d1f531fbcafd7700d5a66a8c68a45b23d5c23e86928"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "637b8edf2d51a7131f195f2e2de32081b113f7046366d57b71afee074e961aad"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906412,
+      "sha256": "1fe8bdcd5156a99159c13aa931fadc9d897400e74150eafee1251db99c8fd4b4"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "c2d7ebe1beae6a2ef1269f59875d608819c20f669ad07e573c6e1af83eaf6bb7"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908674,
+      "sha256": "bd1e201df3376148e05d1b844a5cbe8e768a3cc9a2d1a30846baf6d370d0c0a1"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "2008ce1aff4769c41fbe87fae24f5758967e19f4d2b2b6c1ed642fe62fc254d9"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910399,
+      "sha256": "79ba78d6279743d70b2d21cf28e0abec429fd7d12a1a406d4dd85678d07665c2"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "afb642e8f03bfd4c4e1a52b680e8621ba6c1b4e83aa41befe807857c11d6700e"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931186,
+      "sha256": "f760fe0ce48feea0fad7935fc09a0dbf555b9814ca0f5f879ecd9d895a1e651f"
+    },
+    "rotation5-gap3/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532170,
+      "sha256": "e9d5f8605c1897de6edd78bcf1b52ceb94e33b07b1a0b995d8e07134144252aa"
+    },
+    "rotation5-gap3/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "c3725a7f4a35bfd56fda117d9615366b6366b3abd8c6a8fa45d4804a973ca4d6"
+    },
+    "rotation6-gap1.5/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap1.5/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap1.5/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation6-gap1.5/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation6-gap1.5/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap1.5/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap1.5/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation6-gap1.5/observations.json": {
+      "bytes": 5931,
+      "sha256": "75edda3a4e53660ac0fbc877cae75e2bdb72f08f2d69b2ea0712c52047575733"
+    },
+    "rotation6-gap1.5/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation6-gap1.5/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation6-gap1.5/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "e112d24bd85d2869a6383bc9fe414f7386caad57b884f9bdfd1505cc6831bed8"
+    },
+    "rotation6-gap1.5/preflight/process/request.json": {
+      "bytes": 599,
+      "sha256": "6a5d14a853d79adc4c15fb31add6d55a68b4f9ea250a9c80e9ec60426c5f994b"
+    },
+    "rotation6-gap1.5/preflight/process/result.json": {
+      "bytes": 444,
+      "sha256": "e2711eead92f9ff5e7004b61af30e616a0bd3cf3b1e6824e5a786fcb8e51a743"
+    },
+    "rotation6-gap1.5/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation6-gap1.5/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "6296b92046c4e5621d343222f0d9dfbdd8efc8bc110959e3b3835bac7635df22"
+    },
+    "rotation6-gap1.5/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation6-gap1.5/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation6-gap1.5/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192630.1096998": {
+      "bytes": 364,
+      "sha256": "3db6cd7879b387412f6b3fe279a653c4595014d693791bd35a7b020ef27f94fb"
+    },
+    "rotation6-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192630.1096998": {
+      "bytes": 2602328,
+      "sha256": "8b29081624173a0c6f06b8398dfc968feb7d2860b44bf4ad70cb4491a6d37bfe"
+    },
+    "rotation6-gap1.5/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "eaf75ad87e91b382bfc6040426d13f1cf6621184aac697fd4a8ce04b6a3ac24b"
+    },
+    "rotation6-gap1.5/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap1.5/preflight/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "7df9c9014e0fc089a6c67a2326bf7ea521d229393ef6dc8796a8f3333b2ef47b"
+    },
+    "rotation6-gap1.5/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation6-gap1.5/preflight/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "b79cb8c2ecd38f3eded4caf8549f94e617e08a25219ae918973000a864ac5703"
+    },
+    "rotation6-gap1.5/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap1.5/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation6-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation6-gap1.5/preflight/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "b79cb8c2ecd38f3eded4caf8549f94e617e08a25219ae918973000a864ac5703"
+    },
+    "rotation6-gap1.5/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap1.5/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap1.5/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "04980e65a29ea4216d52677771a73318368fd83139519040290d2cca603d310e"
+    },
+    "rotation6-gap1.5/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation6-gap1.5/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "921279dafdf4462cdc9d6957a899669905ba5aa4f5774efc7544f340db954fa2"
+    },
+    "rotation6-gap1.5/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap1.5/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap1.5/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation6-gap1.5/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "a3e8f89ff9ac0380ba0fed9a1fcc938b89f8fade163fbcae08a1bbee911ac175"
+    },
+    "rotation6-gap1.5/process/request.json": {
+      "bytes": 566,
+      "sha256": "b02358e6ad007902a08705a49e06a08284dee7818f53b0cd22433c4d40417604"
+    },
+    "rotation6-gap1.5/process/result.json": {
+      "bytes": 444,
+      "sha256": "242750b0c39ff6015b46994c4a245e8997be808ca4011e5e905bcb94ef5d4227"
+    },
+    "rotation6-gap1.5/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation6-gap1.5/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "d9c5745666b11bd33497bde5e6cf0683ff2b6001a388ad145c7e08beeb324b74"
+    },
+    "rotation6-gap1.5/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation6-gap1.5/protocol.json": {
+      "bytes": 2624,
+      "sha256": "a078840745a9f0a6ab74f60e9f841bb369776f243f7b78a7ce41b73bdbd708f2"
+    },
+    "rotation6-gap1.5/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation6-gap1.5/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "fd1b410edaea70a74a73cff82ccd20c9b9d925a458a1acdf65936f74aa4d8755"
+    },
+    "rotation6-gap1.5/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192633.1097294": {
+      "bytes": 364,
+      "sha256": "15bb277c9f92086d4ed1b2e9789e6f5592462ca1cd3a48527f580df7e61eaab6"
+    },
+    "rotation6-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192633.1097294": {
+      "bytes": 2584009,
+      "sha256": "2480d51a263bf1fdc3ce5b18be1d83d4aa160b3f8d08da4ad8310bfba0dab631"
+    },
+    "rotation6-gap1.5/work/History.xml": {
+      "bytes": 102,
+      "sha256": "237aab279e83d7757d9b54d5e6aa6ea965399a5220761c62cc578815a135b67b"
+    },
+    "rotation6-gap1.5/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap1.5/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "baafedb48255e5eb1a0dcb9faaabee6d0b4246f34c1673168bf445a2c18c1e45"
+    },
+    "rotation6-gap1.5/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation6-gap1.5/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "14c029fe8d64073cd903cf492cb21222cba27d25291e4d6ff353d36c84702a2f"
+    },
+    "rotation6-gap1.5/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap1.5/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap1.5/work/SelectivityLog/results.csv": {
+      "bytes": 873,
+      "sha256": "fa12a6c19bd5993c6644327fcf40eda3136df63b2c09141f93e20023111a05ba"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "b0c28a431d6355795aae63b558f471b85d76e7834f67f390c2a7aff4a9fcbc6e"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "7917ebdb3e491cebe217192e77c6ea4a77a5e5f711a1aa26a0cfb55410db8927"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905136,
+      "sha256": "9a5b22899d9fa3b02443454cb3aea583ab50f5296e30051a86d98e4e1a5869da"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827662,
+      "sha256": "bf109497bd3dd7329cffc05955498c1b9e68ea938ff45bea352da681aedbe52d"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906366,
+      "sha256": "21d397a4952306ee7586398d34d87af514fc7af02f4720504ac783e979168b58"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828918,
+      "sha256": "cd607254f14d91cf370668f5f09b139df485fe0ffc3804245a5e780d3da298be"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908615,
+      "sha256": "ded5169717a792c43372ae114f46b80552cfe1f4322b3365a0275728e11ab3f7"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830947,
+      "sha256": "adc5bb7264a83aeb1d52c668fbf0c34d8bf7c8711b58fa0491c469c2b7b43613"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910404,
+      "sha256": "baa293a15ab3fe8e8dacd0f145bf9614da563e3501d3a176e0954d70ae02eca7"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "a19f3b2c1b635f1f3756dbb5954dbd6da232371cd605373eebe3bcdf97557aff"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931213,
+      "sha256": "61a7bb5835ffeb6e12851c67aa90885ce47f0894b3bb2e65780c0dac7db103bf"
+    },
+    "rotation6-gap1.5/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532102,
+      "sha256": "50e14adcdd0a0decac45331a76c2c242e3712effc27246b452c6a67ee4d7a08c"
+    },
+    "rotation6-gap1.5/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "14c029fe8d64073cd903cf492cb21222cba27d25291e4d6ff353d36c84702a2f"
+    },
+    "rotation6-gap3/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap3/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap3/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation6-gap3/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation6-gap3/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap3/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap3/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation6-gap3/observations.json": {
+      "bytes": 5947,
+      "sha256": "e835a82c16558ab1181ec3339cd3dc2d9fb7cd5ba14d8af720972e7b1293defe"
+    },
+    "rotation6-gap3/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation6-gap3/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation6-gap3/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "0e8d519edff6b5048e91c915343ddce4cc243334c3d7067c4b01993bb9684fe0"
+    },
+    "rotation6-gap3/preflight/process/request.json": {
+      "bytes": 593,
+      "sha256": "91f890c83834605cac286c069cced8548b6a006cfef0fb1d362daf5db6863298"
+    },
+    "rotation6-gap3/preflight/process/result.json": {
+      "bytes": 444,
+      "sha256": "2a047dd3dc5557f40c3aebfb1817fffd45351808b09f2a08207486e8912f2dd1"
+    },
+    "rotation6-gap3/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation6-gap3/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "02f128a55f73c3e208c628e9bef278e12f2c837dd6abcc816b992b9afd8bd9fb"
+    },
+    "rotation6-gap3/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation6-gap3/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation6-gap3/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192905.1099362": {
+      "bytes": 364,
+      "sha256": "8dc9aa933ae60a95306c2be5ff7b061f23581ef9b5efcaf36c08d6a36f811791"
+    },
+    "rotation6-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192905.1099362": {
+      "bytes": 2584033,
+      "sha256": "2b3bba56972abae73fb9a35bb816b898bd053fd5fd2d94948c6a086477aeecb8"
+    },
+    "rotation6-gap3/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "89c57b2733f24585dc68a78bdce05c890e727febd1006e8c221721b4c651436b"
+    },
+    "rotation6-gap3/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap3/preflight/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "38e57c4c8fc1f37a87939bc35413775eeb6618af20c5e267055b08455105999d"
+    },
+    "rotation6-gap3/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation6-gap3/preflight/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "42a5eec1e51fc759c9f7af371d7ac7c49f7c243bd6e361f6a3a9ee2c5b11ce10"
+    },
+    "rotation6-gap3/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap3/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation6-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation6-gap3/preflight/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "42a5eec1e51fc759c9f7af371d7ac7c49f7c243bd6e361f6a3a9ee2c5b11ce10"
+    },
+    "rotation6-gap3/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap3/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap3/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "cc904a7a4e1e6237018bf31156eae65388baecea3f367d06549003dbcf35ae6a"
+    },
+    "rotation6-gap3/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation6-gap3/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "ace8bc15ef2d63e1c1260ce0c5c0b956f1f2f3709f3e736e9b8bdb96cbc93443"
+    },
+    "rotation6-gap3/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap3/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap3/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation6-gap3/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "106844c3e4dd13186d9acf659b1c77d472d7b4e90abe18cee22775267f693d37"
+    },
+    "rotation6-gap3/process/request.json": {
+      "bytes": 560,
+      "sha256": "260fb149b276378ca174b890a1dd18476499eec43e850030cadcaa329a3a4342"
+    },
+    "rotation6-gap3/process/result.json": {
+      "bytes": 444,
+      "sha256": "75edbb8807a3e5a0342fd86ef93def3daf13924d9bafb613be77c10bc91f9934"
+    },
+    "rotation6-gap3/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation6-gap3/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "fa0c52b2d730b24958a3ae9213030576aa5b92548a9e55bfbc1def3507d35adc"
+    },
+    "rotation6-gap3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation6-gap3/protocol.json": {
+      "bytes": 2624,
+      "sha256": "a8e09ae539be013fcfc932c5215d02332f52b28e26dabf17e3fae905611cb175"
+    },
+    "rotation6-gap3/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation6-gap3/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "01597938086c2c0fcfca17f30a1760947aec06c96bd226924f63920e2708826a"
+    },
+    "rotation6-gap3/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation6-gap3/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-192908.1099655": {
+      "bytes": 364,
+      "sha256": "7f856f839fd96f59c832b749151635d9a58478daf054cec0152fd6ad562d5dee"
+    },
+    "rotation6-gap3/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-192908.1099655": {
+      "bytes": 2584003,
+      "sha256": "b67ec8fbb7743635d96899853bb36fcc74c4a50ace74312268f93668c53e2787"
+    },
+    "rotation6-gap3/work/History.xml": {
+      "bytes": 102,
+      "sha256": "d849a1b605508d865bc52833928a5817a175b0e051b6f1d10521912932304133"
+    },
+    "rotation6-gap3/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation6-gap3/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "733368926713fa5755aa8e0ac84d85b197df829085503b74249e36df73e731a5"
+    },
+    "rotation6-gap3/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation6-gap3/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "c4fde0ab973137db1ef8d9e2a6a94426a4607bfeab8d82e853a00b926728d1c4"
+    },
+    "rotation6-gap3/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation6-gap3/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation6-gap3/work/SelectivityLog/results.csv": {
+      "bytes": 873,
+      "sha256": "fa12a6c19bd5993c6644327fcf40eda3136df63b2c09141f93e20023111a05ba"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "bd4e7616111e33da7d8d135eeea74e78d40c815942840bcf1b3d6bbaecf2c002"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "33921a860617522ece566053cf030f2e4d89af7c3c8cb2bb668535ecc4f61a0c"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905136,
+      "sha256": "63ec2919def283099d9aaed2a270f890284c63067683dfc2b9bb013cb6831944"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827662,
+      "sha256": "d0a3e6553758e3947cd11d7715655130c081f7021b2693502ebd26ea507b3828"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906366,
+      "sha256": "2c9461fb208fd5c2d6377aedb922abfec7ef74ffa4eb1fc5b93c1e014952cc9a"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828918,
+      "sha256": "e082458569c5719edac929b90cc6288ffcc635c42db704fc03c0b823958296d7"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908615,
+      "sha256": "e24801395555d47851b72accfae1f0b43e3db7ab88f42eac37c7036edddc0b3c"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830947,
+      "sha256": "8eee50325f86c1e50672c82e1e0fb0b00850351a7ea12e09adef149b29a2db5c"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910404,
+      "sha256": "7dac013c92a9675ff92c047d972eb8fbe9c084fcb11c9f86c3fa307902748427"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "f912027fa00ef334ed61ab250874d8454a47c395afe7ad0a3270a11c62b9ed97"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931213,
+      "sha256": "62c449ab1ca2bf4147f0ff09370d55ce06fdbcffcbb76e9e6dedc3566583c589"
+    },
+    "rotation6-gap3/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532102,
+      "sha256": "656e7f3b6332041eadd130347559c67e3fa9f044f006c4405ac957e7f3b5f8f7"
+    },
+    "rotation6-gap3/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "c4fde0ab973137db1ef8d9e2a6a94426a4607bfeab8d82e853a00b926728d1c4"
+    },
+    "rotation7-gap1.5/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap1.5/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap1.5/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation7-gap1.5/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation7-gap1.5/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap1.5/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap1.5/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation7-gap1.5/observations.json": {
+      "bytes": 5930,
+      "sha256": "ade3889a45ddd65a9e52ed26731bf0718c3dd43a36cc9a8ea9246fd3d1c2db7f"
+    },
+    "rotation7-gap1.5/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation7-gap1.5/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation7-gap1.5/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "a7f263b6cb2df74e91c3af9c63605b629f9ae53a68d0e53080ba7e0400fd5e9f"
+    },
+    "rotation7-gap1.5/preflight/process/request.json": {
+      "bytes": 599,
+      "sha256": "c21ac429dcc9d646a18e97f535c676d145975a0db1a4aaaffbc960d0473a883c"
+    },
+    "rotation7-gap1.5/preflight/process/result.json": {
+      "bytes": 444,
+      "sha256": "a7fd681d6f112c1c5773a39c5098243d2320ff50dd23bceb5d9843120d5486eb"
+    },
+    "rotation7-gap1.5/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation7-gap1.5/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "f68e05df8b3fd08bbca93dc0409a43bd2f6d0dcc144f965b9f576171dac7aabe"
+    },
+    "rotation7-gap1.5/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation7-gap1.5/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation7-gap1.5/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-193138.1101756": {
+      "bytes": 365,
+      "sha256": "9c992fab5d6ef1194141c23755dfc02174862399d9caf658959bd299db4922c2"
+    },
+    "rotation7-gap1.5/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-193138.1101756": {
+      "bytes": 2602329,
+      "sha256": "7d6e3170eb46dbcb4d58a764e8538d7342d58e935df8a63aa97e54d7c22741d2"
+    },
+    "rotation7-gap1.5/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "bac0aa2af078aeccbadb903cd2a3002481a725a583d2cfe1b719d1b8483bcaa7"
+    },
+    "rotation7-gap1.5/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap1.5/preflight/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "4b6655ee518266cd967468867bc65eff29a3b3b51884ea581acc0bd86803af26"
+    },
+    "rotation7-gap1.5/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation7-gap1.5/preflight/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "2f89a77c2b3d82705dce564b5a3349831cfe439713bc62d4103fa64e2622dd66"
+    },
+    "rotation7-gap1.5/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap1.5/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation7-gap1.5/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation7-gap1.5/preflight/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "2f89a77c2b3d82705dce564b5a3349831cfe439713bc62d4103fa64e2622dd66"
+    },
+    "rotation7-gap1.5/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap1.5/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap1.5/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "6dbde91185aca38692c88ebaf95d5fc204d658cb83379a4898877ab609e651b9"
+    },
+    "rotation7-gap1.5/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation7-gap1.5/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "fe117e1e84c8adfd47a72d4f560f41bf9873cadaa9f11a126c2904444532c88a"
+    },
+    "rotation7-gap1.5/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap1.5/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap1.5/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation7-gap1.5/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "c809a8fc9c3715f8da3011256bb603d0049731b04055f90cd343465ac79fe91e"
+    },
+    "rotation7-gap1.5/process/request.json": {
+      "bytes": 566,
+      "sha256": "332840a5d120dbb8afdf1e9b0fa8be3ca79450773707e30600562814a8eb4863"
+    },
+    "rotation7-gap1.5/process/result.json": {
+      "bytes": 444,
+      "sha256": "6928710f5db892bbcfc96dc86e3a6e6b3251b083c12f2cba2bab64eca182b5bf"
+    },
+    "rotation7-gap1.5/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation7-gap1.5/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "529b87bb4c288b25600c45e201a29d3d4f6900f49cdcdf96437a75738f6dfb87"
+    },
+    "rotation7-gap1.5/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation7-gap1.5/protocol.json": {
+      "bytes": 2624,
+      "sha256": "3fd673a12e5e131dc7d4b8d7d28382459553297b8d4203823bf46839fc7fdee5"
+    },
+    "rotation7-gap1.5/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation7-gap1.5/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "e3b339df8d544e167ffa77d9bb7b82393e6c89eff6d2968cd3bdd125a70f4dac"
+    },
+    "rotation7-gap1.5/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-193141.1102052": {
+      "bytes": 365,
+      "sha256": "bb20827bc0613574968b04871a73369051b9b43b32b6b82432f7a5bab7d394ae"
+    },
+    "rotation7-gap1.5/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-193141.1102052": {
+      "bytes": 2602299,
+      "sha256": "90a2bc1a6c7b36d20006271c983c18cb99cee59a918a6ad9517eed834adde8e2"
+    },
+    "rotation7-gap1.5/work/History.xml": {
+      "bytes": 102,
+      "sha256": "e95d3de2a9327b8c6ad76b063caa388b11e20f103e1e8f51cdc40f649a24d6d0"
+    },
+    "rotation7-gap1.5/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap1.5/work/Model_00.xml": {
+      "bytes": 951026,
+      "sha256": "d18694f5bbf04e4eb1523aed02627327aef8e51344f8d14c0e4b9e635d9daf08"
+    },
+    "rotation7-gap1.5/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation7-gap1.5/work/Parameters_00.xml": {
+      "bytes": 818528,
+      "sha256": "560de364fa49d49b88560279dbfed2120f95b4f71965e22bb90e61e361f94173"
+    },
+    "rotation7-gap1.5/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap1.5/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap1.5/work/SelectivityLog/results.csv": {
+      "bytes": 874,
+      "sha256": "a43f660a6d00b189f516a4bd750b5693b52c131e69720c6e4df9ec92395d8034"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "3740191fd20652c45528d3bec8fba3db63cb18c9e463c096a9ad8ca6f9878618"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "d67b6bac55d61197067ff17860569555bbfceb5ce6473ddcd2184227bc39769b"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905107,
+      "sha256": "4e3a18a62ae89233c7cafa09fa71f5ad936c4ed23c806b9210d08af8aa5040ca"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "93ae8be8847932339ad3946fbe9bf09dda1abaf0d9788d742e030db227237808"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906391,
+      "sha256": "2c2ed193110d9c98377136d3f2a526835f500f1d575a0441bd5e33addff5c1fc"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "2c3a5b066c09a593911fec1c5c2fe65b28173cc7f3377ecffde00ace395b97de"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908668,
+      "sha256": "1ec4f40b270aa38f38644c1feb3c0287ad236a10d2c043505614ab1a2ed62d16"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "22eedc522d66f8140ebe7d66362d65029c1aab399f67d5149f79cc9b08ee10c9"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910399,
+      "sha256": "463710264defcd88ac80bc070c6978dd5a50ce1ff0a906c5a76211a669cbc4ca"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "251511ba55055b732db302dc202030d9abd5e518f26a1c42cd3ac0599cd5034e"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931192,
+      "sha256": "adfd53591e13e030d2099d0dc350304988bdb80aa81c306c3a1d81ff498657ca"
+    },
+    "rotation7-gap1.5/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532258,
+      "sha256": "d88a16eb584fc5a8e9f81a1cbf558c179f451dde7cb66ab5d06791d5de539738"
+    },
+    "rotation7-gap1.5/work/save.tmp": {
+      "bytes": 818528,
+      "sha256": "560de364fa49d49b88560279dbfed2120f95b4f71965e22bb90e61e361f94173"
+    },
+    "rotation7-gap3/inputs/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap3/inputs/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap3/inputs/Model_00.xml": {
+      "bytes": 947735,
+      "sha256": "1884cf16c40133e9b4ea766c297afda76bc0945e3241ccc7a4d08cd8e3bdd6c1"
+    },
+    "rotation7-gap3/inputs/Parameters_00.xml": {
+      "bytes": 816326,
+      "sha256": "db320cdd3d755c646e0230cca34f8507ec90568a57cdd5a916b3cf10c3612b28"
+    },
+    "rotation7-gap3/inputs/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap3/inputs/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap3/inputs.json": {
+      "bytes": 1875,
+      "sha256": "cf7fa64ee4bda011556534be46adad7d9338521d6ff6a1f7afd8f11fbce339e6"
+    },
+    "rotation7-gap3/observations.json": {
+      "bytes": 5947,
+      "sha256": "7a7d2d5e5be7dd1bad8a33b0c02ad8392ecdae2c2468f65d0cf3d95bc2e7d7c6"
+    },
+    "rotation7-gap3/observer.json": {
+      "bytes": 1694,
+      "sha256": "de3ec3e769aff5f368e96cce43b28efe1bea16a6ac2d9e49c83a9951649539bc"
+    },
+    "rotation7-gap3/preflight/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation7-gap3/preflight/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "5bc9ef7ea77315fca6d3779ea265824657986cf521d2545bd5c8f9e6d1cf41d5"
+    },
+    "rotation7-gap3/preflight/process/request.json": {
+      "bytes": 593,
+      "sha256": "1eb7b91248b5d33143d4b1cd2037e3053250293dc8d3bbdc5732f6d7d2e321bf"
+    },
+    "rotation7-gap3/preflight/process/result.json": {
+      "bytes": 443,
+      "sha256": "7a07a68cda1a09d3a1ae0e0079ed6c47b68f5cd55310911ca3919d1bdcc3d4b5"
+    },
+    "rotation7-gap3/preflight/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation7-gap3/preflight/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "997914818d0baccabfef1154ff054b0f98cd08d68e01907fa95fbf56f0c530e6"
+    },
+    "rotation7-gap3/preflight/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation7-gap3/preflight/validation.json": {
+      "bytes": 258,
+      "sha256": "e4f8a78c6adfc369086a6c544019fb3d66f01b83eed8270b03e0127805237ca0"
+    },
+    "rotation7-gap3/preflight/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-193413.1104116": {
+      "bytes": 364,
+      "sha256": "d5fb5c7347bbfd875145a1c61e4e828cf2fe461434a1fee88b7375ef622171cb"
+    },
+    "rotation7-gap3/preflight/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-193413.1104116": {
+      "bytes": 2584033,
+      "sha256": "3ab67493a8ddd771543e6c08a8b09fc80829362450561b4936d6b8db01d9cd0e"
+    },
+    "rotation7-gap3/preflight/work/History.xml": {
+      "bytes": 102,
+      "sha256": "e6bb3ab892fc75c9f9acf194d75512f6fae0913192768f81a29e38080509d196"
+    },
+    "rotation7-gap3/preflight/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap3/preflight/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "8e2fe6649d2a0defe74fb9e5c223efe8415cf0c69d5023b0d8cc7d4c2e84be1b"
+    },
+    "rotation7-gap3/preflight/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation7-gap3/preflight/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "210d756e72b49a0e06d67d20d91e7b5bb12fb1a9f45821a51ef34e96e6906404"
+    },
+    "rotation7-gap3/preflight/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap3/preflight/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 17,
+      "sha256": "05bd23b2c4e3253608605485e439afb3b8d6ea9807dae4c67ff9f9413ea919ba"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 16,
+      "sha256": "02ec11fd467eb9052f3e34ebbd9e941e7a0661c1727bd0861247ae6eaec3c30b"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 35,
+      "sha256": "fe43c60127204e327153c2bd9d310fdbf648e06a86b5ab91f38e34f148e15f5b"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 34,
+      "sha256": "b2f2b2b93c045bb7dbefae446982c480cb9615c68af1142f2468e987575bc7aa"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 16,
+      "sha256": "dde7a824e7f2bb62d60f1502e48ed17f6e51b03bd9fa268d20361a639c75a86e"
+    },
+    "rotation7-gap3/preflight/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 28,
+      "sha256": "76f655261e91ee2a5722ad7d900cfb7cd44383b613625153083f341ca4a734b0"
+    },
+    "rotation7-gap3/preflight/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "210d756e72b49a0e06d67d20d91e7b5bb12fb1a9f45821a51ef34e96e6906404"
+    },
+    "rotation7-gap3/prepared/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap3/prepared/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap3/prepared/Model_00.xml": {
+      "bytes": 948942,
+      "sha256": "9b1bc264192159f9f83f9d87b19b260c62a8c60ff59c37aed887543aa0331de0"
+    },
+    "rotation7-gap3/prepared/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation7-gap3/prepared/Parameters_00.xml": {
+      "bytes": 814932,
+      "sha256": "3ca62593247f669d4b237599c966b47dc128baa91c850dfc795f4ffa2e11d04c"
+    },
+    "rotation7-gap3/prepared/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap3/prepared/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap3/process/loaded-files.json": {
+      "bytes": 4507,
+      "sha256": "38a24de164a9af0f4264dbb018efe268d8cc4983d639e4c67ebb85f8deaf121c"
+    },
+    "rotation7-gap3/process/owned-process.json": {
+      "bytes": 407,
+      "sha256": "b22091333bac4f1269b1512e7ceac2def1d9c2aedff0c341bf06037780f33316"
+    },
+    "rotation7-gap3/process/request.json": {
+      "bytes": 560,
+      "sha256": "ce9e31e00511d6bf4cce4c8b0f832b54006986ee527fea9c66f25cef81b29340"
+    },
+    "rotation7-gap3/process/result.json": {
+      "bytes": 443,
+      "sha256": "d5e6e4be70b6efde266ba7bd3c05c70dab898a174786e8b9d0c58ab6dd3208fc"
+    },
+    "rotation7-gap3/process/runtime.json": {
+      "bytes": 11913,
+      "sha256": "9e4a5176411e58f1f63a55ff73367f0146097670ea9bf3ba994ca6fcbe7b0b10"
+    },
+    "rotation7-gap3/process/stderr.log": {
+      "bytes": 499,
+      "sha256": "5af300c6365d6f4f561169e6132aa78343f84b44582ac9ab5297b508a2b29258"
+    },
+    "rotation7-gap3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rotation7-gap3/protocol.json": {
+      "bytes": 2624,
+      "sha256": "1646188546f352f1439221b76501262acd9b449254ed8e2b2f21c3b10019c25f"
+    },
+    "rotation7-gap3/reference.csv": {
+      "bytes": 872,
+      "sha256": "fe9c8ef63c78a9be8558e49c70aa3e75f94585750d4fc687c5eb4e462108801f"
+    },
+    "rotation7-gap3/trace-files.json": {
+      "bytes": 3445,
+      "sha256": "69361d248a9a400cafa1ea7ef9535f98f2ba8f6d3cf167cf3f5ec2c2d0f83321"
+    },
+    "rotation7-gap3/work/ALGORITHM.md": {
+      "bytes": 8692,
+      "sha256": "97d9dbba9d69773331986d65e2e63c5de744039f69f8cb5f9b6e003deba43351"
+    },
+    "rotation7-gap3/work/EventsLog/NeuroModeler.Elder-1.log.FATAL.20261107-193416.1104412": {
+      "bytes": 363,
+      "sha256": "cdf208526447ed25679d8a5002fc5fe81478344746f0003f2d70691085b0226f"
+    },
+    "rotation7-gap3/work/EventsLog/NeuroModeler.Elder-1.log.INFO.20261107-193416.1104412": {
+      "bytes": 2584002,
+      "sha256": "9f834007728f37c9dc82507fc910a22dee8c0e4797ada03cdf15fb5986709217"
+    },
+    "rotation7-gap3/work/History.xml": {
+      "bytes": 102,
+      "sha256": "ad98fd83e3aa03a8a7870d3ffaa6b197f6d893169764f738f3e8fd02efdc7f2c"
+    },
+    "rotation7-gap3/work/Interface.xml": {
+      "bytes": 28529,
+      "sha256": "15d469b61539cc15905da7acd80ba1a9dc0aa04661e937d076cd63bef8816865"
+    },
+    "rotation7-gap3/work/Model_00.xml": {
+      "bytes": 951022,
+      "sha256": "7860f0353abf2d4db6b784f27a0c4fbf2e2472357eab202baf08f1f5cf629919"
+    },
+    "rotation7-gap3/work/NeuroModelerConsole.ini": {
+      "bytes": 515,
+      "sha256": "358def7c2fa45e589d928ad44ece552a917da5c1a047a4f3ef7032d30c5eb5e5"
+    },
+    "rotation7-gap3/work/Parameters_00.xml": {
+      "bytes": 818524,
+      "sha256": "d2b5d82ce135467f008550e88d625a896e78d8d388236561b4b8c9ce7077facb"
+    },
+    "rotation7-gap3/work/Project.ini": {
+      "bytes": 1772,
+      "sha256": "4fc3fc76652b5acc0cd66af4b3095e9aa5e0f511aede55848327fdf01e4d7c53"
+    },
+    "rotation7-gap3/work/README.md": {
+      "bytes": 174,
+      "sha256": "22595f98647e8b02e3988187107af1e251f01ccadd3870f0a6aa1e4d31216ba8"
+    },
+    "rotation7-gap3/work/SelectivityLog/results.csv": {
+      "bytes": 874,
+      "sha256": "a43f660a6d00b189f516a4bd750b5693b52c131e69720c6e4df9ec92395d8034"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "d295dcf4ac6683ad83243f0a216d13fca23b6c0f58b65314aea1fafe02fb5380"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.LTZone.Output.txt": {
+      "bytes": 2392103,
+      "sha256": "366530efe134f5ce4f9bdb37b8298141e802dc6ad496670078e5b6c8402eff3c"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.ExcChannel.Output.txt": {
+      "bytes": 3905107,
+      "sha256": "6ec5b796448f276d60afd1705f7e13af6fceb9a3a6e484f51616691afd2cd7e8"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma1.InhChannel.Output.txt": {
+      "bytes": 3827617,
+      "sha256": "2abb1b67a2f9ff6a1f60db1b360fef4a90c34a242320ce3b78da00c0fd906c24"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.ExcChannel.Output.txt": {
+      "bytes": 3906391,
+      "sha256": "f0e083c6bd5554079b8894c6d4ff46fd7bc9b9a78ddd6aaab9be3dc1d65f0dc1"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma2.InhChannel.Output.txt": {
+      "bytes": 3828856,
+      "sha256": "7a2e422790bb2d8b4b3b6bc6cbc646581e1f517ea4d88b10323229c577887bb3"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.ExcChannel.Output.txt": {
+      "bytes": 3908668,
+      "sha256": "daf30bf1e6008ba2d7f3e0c19f3d7965062c857c550113a846ab5f370a699f87"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma3.InhChannel.Output.txt": {
+      "bytes": 3830875,
+      "sha256": "5894b85323b476b1d7816ac0a53c1c97881c6de3c4c2139db5f1851708574c00"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.ExcChannel.Output.txt": {
+      "bytes": 3910399,
+      "sha256": "69b2530ca4204284ab0813142341f2767e38657593c790764a6395a9c134394f"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.Soma4.InhChannel.Output.txt": {
+      "bytes": 3831775,
+      "sha256": "03877a8748bb74bae72d2b3f0886467a0c3fcf9d8b88451d4f81acf2bfff4c25"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.Neuron.SomaSumPotential.txt": {
+      "bytes": 2931192,
+      "sha256": "ef1794ebfc384d4ffbde594d6e96c4f5698bb3b486fdfea95e326973df11b7a9"
+    },
+    "rotation7-gap3/work/TemporalTrace/NeuronTimeLearner.SomaNeuronAmplitude.txt": {
+      "bytes": 5532258,
+      "sha256": "476cf8f2c8be10a00872197ed5f6a02c49d1ea58145aad2b8b37d0223170f72e"
+    },
+    "rotation7-gap3/work/save.tmp": {
+      "bytes": 818524,
+      "sha256": "d2b5d82ce135467f008550e88d625a896e78d8d388236561b4b8c9ce7077facb"
+    },
+    "source-after.json": {
+      "bytes": 1304,
+      "sha256": "88c3c257943eb524a39a40584c25cfbd7c3c1790284085f4bc865af9765a378e"
+    },
+    "source-before.json": {
+      "bytes": 1304,
+      "sha256": "88c3c257943eb524a39a40584c25cfbd7c3c1790284085f4bc865af9765a378e"
+    },
+    "terminal.json": {
+      "bytes": 358,
+      "sha256": "efc7adae396490b64928c79b0489e9c6a6c7da8b91bf00f317a7b80088b38bbf"
+    },
+    "tool-source-hashes.json": {
+      "bytes": 53146,
+      "sha256": "d0b8e2007a6264b866ddafe870a73d3ac50f8c9721c4bc4a761b1f9bcbc1f558"
+    }
+  },
+  "archive_bytes": 52316400,
+  "archive_sha256": "22f18e5fbf5315f7ab9ca1a3ec286e3523ece981132ca6fc489420499cce1bff",
+  "tool_root": "ea5c884e7a8e544e1fa9b4787886ab1058960625",
+  "primary_matrix_complete": true
+}

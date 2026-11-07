@@ -1,0 +1,4 @@
+{
+  "reason": "name 'json' is not defined",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-august-protocol-pilot-elder-a1-worker.py\", line 46, in <module>\n    observation=run_case(source,runtime,out/case['id'],order,case['iti'])\n  File \"/home/user/timelearner-refactor/source-august-protocol-controls-a1/Scripts/StructTrain/TimeLearner/historical_protocol_robustness.py\", line 195, in run_case\n    write(output/\"protocol.json\", declared);write(output/\"inputs.json\", records);write(output/\"observer.json\", observer)\n  File \"/home/user/timelearner-refactor/source-august-protocol-controls-a1/Scripts/StructTrain/TimeLearner/historical_phasea_native.py\", line 28, in write\n    path.write_text(json.dumps(record, ensure_ascii=False, indent=2, allow_nan=False)+\"\\n\", encoding=\"utf-8\")\nNameError: name 'json' is not defined\n"
+}
