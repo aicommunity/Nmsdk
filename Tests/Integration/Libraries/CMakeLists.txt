@@ -126,6 +126,12 @@ target_link_libraries(Test_PulseLib_StorageComponents
         GTest::gtest
 )
 
+if(MSVC)
+    # Real model-editor/lifecycle fixtures instantiate enough component and
+    # property templates to exceed the standard COFF section count.
+    target_compile_options(Test_PulseLib_StorageComponents PRIVATE /bigobj)
+endif()
+
 target_include_directories(Test_PulseLib_StorageComponents
     PRIVATE
         ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include

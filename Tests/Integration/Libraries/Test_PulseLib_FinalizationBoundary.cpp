@@ -171,10 +171,11 @@ template<class Owner> void Boundary(Scenario scenario)
         }
         owner->Default();EXPECT_EQ(frozen->Document(),saved);
     };
-    EXPECT_EQ(NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+    const auto ownerResult=NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
         "FinalizationBoundaryOwner",[&](auto storage,auto environment,auto model,auto owner) {
             exercise(storage,environment,model,owner);return ::testing::Test::HasFatalFailure()?2:0;
-        }),0);
+        });
+    EXPECT_EQ(ownerResult,0);
     if(frozen)
     {
         EXPECT_EQ(frozen->Document(),saved); // Survives real model teardown; owns no Rdk pointers.
@@ -227,7 +228,7 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
     specification.calibration.maximumCandidates=0;specification.calibration.thresholds.clear();
     specification.calibration.confirmation.attemptId+="/"+name;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
-    EXPECT_EQ(NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+    const auto ownerResult=NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
         "ManagedFinalizationOwner",[&](auto storage,auto environment,auto model,auto owner) {
         model->Init();model->Reset();
         EXPECT_EQ(owner->ImportNativeLearnedState(original["source_solo"].toObject(),implementation).status,NativeModelBuildStatus::Adopted);
@@ -376,7 +377,8 @@ template<class Owner> void ManagedFinalization(int calculateMode,bool owned=fals
                  {"configured_phase_dispatch_implemented",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
         }
         return ::testing::Test::HasFailure()?2:0;
-    }),0);
+    });
+    EXPECT_EQ(ownerResult,0);
 }
 }
 TEST(NativeFinalizationOwnership,ClassicAutomatic){ManagedFinalization<NNeuronTimeLearner>(0);}
@@ -458,7 +460,7 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
     spec.finalization=scenario==LiveScenario::Calibrate?NativePostTuneFinalization::Calibrate:NativePostTuneFinalization::KeepFixedThreshold;
     spec.weightProbeThreshold=2.;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();core.environment->DestroyModel();
-    EXPECT_EQ(NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
+    const auto ownerResult=NmsdkWorker::WithFreshOwner<Owner>(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner",2000,
         "LiveFinalizationOwner",[&](auto storage,auto environment,auto model,auto owner) {
         owner->ControllerVersion=2;owner->CalculateMode=mode;owner->StructureBuildMode=1;
         owner->EnablePostTrainTuning=true;owner->AutoCalibrateFixedLTZThreshold=false;owner->SyncCapacitanceTrim=0;
@@ -637,7 +639,8 @@ template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario
             const auto imageImplementation=NmsdkWorker::Text(NmsdkWorker::Object(profile["metadata"])["implementation_id"]);
             NmsdkTools::PrepareModelArchive(profile,storage,environment,QString::fromStdString(imageImplementation));
         }
-    }),0);
+    });
+    EXPECT_EQ(ownerResult,0);
 }
 }
 TEST(NativeLiveFinalization,ClassicAutomaticFixed){LiveFinalization<NNeuronTimeLearner>(0,false,LiveScenario::Fixed);}
