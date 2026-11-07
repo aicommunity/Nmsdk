@@ -143,3 +143,47 @@ script, output directory и детей. Наблюдение зафиксиро�
 SHA256. Повторного запуска живой native сборки не было. A5 также записывает
 реальный ERRORLEVEL configure/build прямо в owned cmd: прежний null ExitCode
 PowerShell не превращается в успех.
+
+
+## Сборка и адресные native-проверки приняты
+
+A5 компилировал /bigobj fixture, но встретил MSVC C2362/C2045 в
+FinalizationBoundary: EXPECT_THROW внутри lambda-аргумента внешнего EXPECT_EQ
+получал одинаковые generated labels традиционного препроцессора. В root
+`a1d722259a6fe89a91a289080aa546168be5966a` вызов WithFreshOwner вынесен из
+внешнего assertion, его return code проверяется следующей строкой. Тела
+lambda и все проверки сохранены; аналогичный случай SoloThresholdTrace
+исправлен до следующей сборки. Это изменение тестовой обвязки, не алгоритмов.
+Runtime-проверка самих data-dependent Finalization сценариев на Windows
+здесь не заявляется: их исходные данные ещё не развёрнуты на этом worker.
+
+У A5 дополнительно обнаружена ошибка записи phase exit code: cmd трактовал
+цифру перед `>` как descriptor, записывая пустое значение вместо числа.
+Raw cached-process exit13 и отсутствие build-completed marker сохранили
+terminal failed. Этот артефакт не переоценивался в успех. A6 использует raw
+exit code из cached process handle, отдельно проверяет числовую форму phase
+files и печатает число с корректным разделителем перед redirection.
+
+A6 завершён успешно: configure/build phase codes0, raw process code0;
+Console и оба test executable связаны и размещены в новом runtime-a6.
+Существующий закрытый cache потребовал18 Ninja operations, не повтор495.
+Затем34/34 ProbeAlgorithms и20/20 DatasetClockOrigin/Extended прошли без
+failures/skips. Второй набор выполняет настоящий storage/native Init,
+2000/20000Hz, actual input/synapse readback, finite soma response, разные
+clock origins, near-grid и cutoff;144.35s wall time. Это не обучение
+классификатора и не полная матрица lifecycle/controller/export.
+
+Evidence `6c4b2eb16e999c5f3f1159d3f535f951271f8d88`:257 compressed primary
+members/1170620B. SHA256
+`04107af94866a748d5c0b4073d65252b1ebd8cf13eae0f01c36d3976a79789c2`.
+[Независимая metadata сверка](WindowsNativeBootstrapVerification.json)
+проверила4118 materialized tracked files восьми репозиториев против Git,
+JUnit34+20, неизменность51 runtime exe/DLL/ini record, реальные /bigobj
+commands и сохранность прежних failed attempts. Локальные численные
+проверки не выполнялись. Результаты доставлены native Git pack через .12.
+
+Windows проект теперь собран и проходит указанные native checks. Научным
+worker он пока не принят: actual loaded DLL capture, production ownership/
+containment, quotas, job runner и полноценный Train→Test ещё требуют
+отдельной реализации/приёмки. Этот optional worker не заменяет обязательные
+Linux-проверки плана. Пользовательский C:/Projects/Nmsdk не изменён.
