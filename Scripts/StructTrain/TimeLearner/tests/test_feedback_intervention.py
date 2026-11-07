@@ -108,3 +108,34 @@ class FeedbackProfileDeltaTest(unittest.TestCase):
         node['parameters']['FeedbackGain']['binding'] = True
         with self.assertRaisesRegex(EvidenceError, 'feedback_invalid_gain'):
             audit_profile_delta(source, self.resign(candidate), {}, feedback_gain=0.)
+
+
+class InheritedFeedbackNativeTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.root = Path(os.environ['TIMELEARNER_INHERITED_FEEDBACK_CORPUS'])
+
+    def audit_topology(self, topology):
+        paths = sorted(self.root.glob('feedback-control-single-pulse-'+topology+'NativeInheritedPhysics-*.json'))
+        self.assertEqual(len(paths), 6)
+        for frequency in (2000, 20000):
+            group = {kind: [load(p)['actual_model_identity'] for p in paths
+                           if f'-{frequency}-2-1_feedback_{token}_' in p.name]
+                     for kind, token in [('original','inherited'),('baseline','2.000000'),('zero','0.000000')]}
+            self.assertTrue(all(len(values) == 1 for values in group.values()))
+            source = group['original'][0]
+            before = {n['path']: n for n in source['model']['nodes']}
+            for kind in ('baseline', 'zero'):
+                candidate = group[kind][0];renames = {}
+                for node in candidate['model']['nodes']:
+                    old = before[node['path']]['class'];new = node['class']
+                    if old != new:
+                        self.assertIn(old, {'NSPNeuronGen','NPMembraneBio'})
+                        self.assertTrue(old not in renames or renames[old] == new)
+                        renames[old] = new
+                audit = audit_profile_delta(source,candidate,renames,
+                                           feedback_gain=0. if kind == 'zero' else None)
+                self.assertTrue(audit['all_other_effective_graph_fields_equal'])
+
+    def test_actual_classic_native_profile_graphs(self):self.audit_topology('Classic')
+    def test_actual_branch_native_profile_graphs(self):self.audit_topology('Branch')
