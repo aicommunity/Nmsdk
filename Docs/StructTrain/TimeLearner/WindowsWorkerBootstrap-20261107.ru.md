@@ -84,3 +84,26 @@ publication pipeline ориентированы на Linux. Их нельзя о
 host Debug; available RAM6182412288B, disk free1826246479872B. Конфигурация
 самого Nmsdk ещё не завершена. vcpkg также установил private tool Python3.14.2
 в downloads/tools; это не установка Python пакетов scientific pipeline.
+
+
+## Фактическая компиляция и следующая попытка
+
+Обновление15:37UTC: A3 завершён. Все зависимости установлены, CMake configure
+прошёл. Ninja дошёл до450/495 и остановился в DatasetClock fixture: параметр
+`near` раскрывается Windows macro, приводя к C2059/C2143. Это реальная
+несовместимость исходного теста с MSVC, не численная ошибка модели. Исправление
+`4b4f32262e958bd8c8a0462188fadc0de2aa59b6` переименовывает только параметр
+в `nearGrid`; значения, тестовые случаи и алгоритмы не меняются. A3 журналы
+сохранены. Поле ExitCode его PowerShell producer оказалось null; это не нулевой
+код и не успех. Compiler errors/Ninja stop и terminal false сохранены.
+
+A4 использует новый source `C:/Projects/TimeLearnerWorker/source-4b4f32262-a4`,
+новые build/runtime/bt/pkg-a4, те же точные gitlinks и vcpkg registry. Код и
+дочерние репозитории доставлены Git packs, пользовательская копия не изменена.
+Конфигурация прошла за счёт доступного dependency cache. Свежий CIM подтвердил
+owner8720/cmd11516/CMake/Ninja/MSVC;15:45UTC журнал достиг14/495. Это ещё не
+успех сборки и не JUnit. Прямое подключение .14 дало timeout, но SSH по тому же
+ключу через .12 работает; проблема наблюдения не использовалась для повтора A3.
+
+Сборка и научный допуск остаются разными приёмками. Даже после успешной
+компиляции нужны native tests, Windows runtime/provenance и ownership/cancel.

@@ -28,11 +28,11 @@
   "parallelism": 1,
   "build_directory": "C:/Projects/TimeLearnerWorker/build-a3",
   "runtime_directory": "C:/Projects/TimeLearnerWorker/runtime-a3",
-  "last_verified_execution": "live_process_tree_observed_installing_dependencies",
-  "last_observed_utc": "2026-11-07T12:09:18.521Z",
+  "last_verified_execution": "closed_after_successful_configure_and_cpp_compile_failure",
+  "last_observed_utc": "2026-11-07T15:37:55.3354732Z",
   "last_observed_free_memory_bytes": 5191041024,
   "last_observed_disk_free_bytes": 1829311066112,
-  "build_passed": null,
+  "build_passed": false,
   "os_memory_quota_enforced": false,
   "scientific_worker_admitted": false,
   "scientific_experiments_executed": false,
@@ -130,5 +130,45 @@
       ],
       "code_blobs": 356
     }
-  ]
+  ],
+  "configuration_completed": true,
+  "failure": {
+    "file": "Tests/Integration/Libraries/Test_PulseLib_DatasetClock.cpp",
+    "lines": [
+      197,
+      198
+    ],
+    "compiler": "MSVC 14.51.36231",
+    "reason": "Windows near macro expands fixture parameter named near",
+    "ninja_step": "450/495",
+    "terminal_preserved": true,
+    "exit_code_readback": "PowerShell producer recorded null; compiler errors and Ninja stopped are authoritative failure evidence"
+  },
+  "followup_attempt": {
+    "attempt": "windows-bootstrap-a4",
+    "directory": "C:/Projects/TimeLearnerWorker/jobs/windows-bootstrap-a4",
+    "source_root": "C:/Projects/TimeLearnerWorker/source-4b4f32262-a4",
+    "source_commit": "4b4f32262e958bd8c8a0462188fadc0de2aa59b6",
+    "build_directory": "C:/Projects/TimeLearnerWorker/build-a4",
+    "runtime_directory": "C:/Projects/TimeLearnerWorker/runtime-a4",
+    "owner": {
+      "pid": 8720,
+      "start_utc": "2026-11-07T15:43:29.2054151Z"
+    },
+    "child": {
+      "pid": 11516,
+      "start_utc": "2026-11-07T15:43:32.2724302Z"
+    },
+    "observation_session": 77976,
+    "last_verified_execution": "fresh_CIM_cmd_CMake_Ninja_compiler_live_after_configuration",
+    "last_compiler_observed_utc": "2026-11-07T15:45:42Z",
+    "last_log_step": "14/495",
+    "configured": true,
+    "build_passed": null,
+    "transport": "SSH key through user@10.245.1.12; native Git source packs",
+    "source_and_dependencies_isolated": true,
+    "previous_attempt_restarted": false,
+    "original_user_copy_changed": false,
+    "scientific_worker_admitted": false
+  }
 }
