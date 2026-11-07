@@ -1,0 +1,31 @@
+{
+  "kind": "independent_full_historical_matrix_temporal_metadata_verification",
+  "evidence_commit": "2d7127959c104de8e24a6064ad3da0efeb7b1cab",
+  "tool_root": "7499058cc0bdcfa506bf020e8336e633050738b4",
+  "primary_evidence": "657e48449626ac1caf6362ffe1d53685434f2f83",
+  "archive_members_verified": 65,
+  "archive_bytes": 83084,
+  "archive_sha256": "36e6b09e779b14911171a2a8ea2fc98d0aacb5604286552e8de8469c3a2ff74e",
+  "tool_source_hashes_verified": 391,
+  "conditions": 16,
+  "presentations": 128,
+  "figure_manifest_entries_verified": 512,
+  "new_images": 384,
+  "reused_images": 128,
+  "native_observation_files_byte_reconstructed_against_primary_hashes": 16,
+  "selected_figures_hash_verified": 4,
+  "selected_figure_bytes": 1254266,
+  "all_processes_closed": true,
+  "lease_released": true,
+  "new_native_simulations": false,
+  "local_trace_arithmetic_executed": false,
+  "visual_review_complete": true,
+  "whole_plan_complete": false,
+  "visual_review_scope": "four new selected figures opened individually; earlier six pilot selections separately reviewed; all 512 manifests verified automatically",
+  "visual_review_findings": [
+    "target at positions 5 and 1 remains readable with actual input and LT output overlay",
+    "foil phasea-4 at position zero is explicitly labelled foil, with an actual false-positive spike",
+    "silent foil has a global potential maximum without an LT output spike",
+    "focus diagnostics are outside the waveform panels"
+  ]
+}

@@ -7,10 +7,11 @@
 сохранился. Это подтверждает устойчивость данного сохранённого исторического
 результата к проверенным изменениям протокола, без улучшения разделимости.
 
-Первичные данные всех16 условий приняты. Полные графики пока приняты для
-четырёх условий [пилота](HistoricalFrozenProtocolScientificReport-2026-11-07.ru.md);
-визуальный комплект остальных12 строится отдельно на M40 из новых Git-данных.
-Этот документ не объявляет незавершённый графический комплект готовым.
+Первичные данные и полный графический комплект всех16 условий приняты.
+Построены512 temporal views для128 предъявлений: четыре вида каждого
+паттерна, с фактическим входом, четырьмя сомами и native SomaSumPotential.
+Пилотные128 изображений использованы по проверенным hashes;384 созданы
+дополнительно без новых native расчётов.
 
 ## Модель и протокол
 
@@ -81,10 +82,10 @@ Git/hash/archive/schema metadata, без расчёта реакций или tr
 После завершения на Elder подтверждено около1.77GB доступного места. Удалять
 первичные записи до проверки их Git/M40 копий не требуется для приёмки.
 
-Полный графический отчёт должен покрыть все128 предъявлений, с actual inputs,
+Полный графический отчёт покрывает все128 предъявлений, с actual inputs,
 четырьмя сомами и отдельно native SomaSumPotential, full/response и явно
-отмеченным positive-scale companion. Пилотные128 изображений повторно
-генерировать не нужно; для остальных условий требуются384 новых изображения.
+отмеченным positive-scale companion. Пилотные128 изображений не
+генерировались повторно; для остальных условий построены384 новых изображения.
 Рисунки показывают общий максимум Test и реальные LT spikes раздельно;
 принадлежность пиков импульсам Train ими не сертифицируется.
 
@@ -92,3 +93,59 @@ Git/hash/archive/schema metadata, без расчёта реакций или tr
 reset-per-trial, другие интервалы/порядки/состав distractors, физические
 профили и полноценное сравнение legacy/V2. Полный этап11 и исходный план
 рефакторинга этой матрицей не завершаются.
+
+
+## Временные графики и воспроизведение полного отчёта
+
+Полный кэш M40:
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/historical-protocol-matrix-temporal-a1/figures/index.html`.
+Оглавление содержит128 раскрываемых предъявлений и512 ссылок на исходные
+1920×1680 PNG. Шрифт≥12, прореживания нет. Для каждой пробы доступны full,
+response zoom, positive_full и positive_response. Полные виды сохраняют
+отрицательный feedback, а выход за positive scale явно отмечен.
+Оранжевый — actual input, красный — actual LT output spike, чёрный —
+глобальный максимум соответствующего канала Test, не training assignment.
+
+Target в позиции5 при увеличенном интервале:
+
+![Target в позиции5](../../../Reports/StructTrain/TimeLearner/s11-historical-protocol-matrix-temporal-m40-a1/selected/rotation3-gap3-phasea-0-positive_response.png)
+
+Foil phasea-4 предъявлен первым; реальный выходной spike остаётся ложным
+ответом, несмотря на позицию0:
+
+![Foil в первой позиции](../../../Reports/StructTrain/TimeLearner/s11-historical-protocol-matrix-temporal-m40-a1/selected/rotation4-gap1.5-phasea-4-positive_response.png)
+
+Target в позиции1 после другого паттерна:
+
+![Target в позиции1](../../../Reports/StructTrain/TimeLearner/s11-historical-protocol-matrix-temporal-m40-a1/selected/rotation7-gap3-phasea-0-positive_response.png)
+
+Правильно отвергнутый foil phasea-1 в позиции2:
+
+![Отвергнутый foil в позиции2](../../../Reports/StructTrain/TimeLearner/s11-historical-protocol-matrix-temporal-m40-a1/selected/rotation7-gap3-phasea-1-positive_response.png)
+
+Увеличенные виды не заменяют полных: все512 доступны в оглавлении. Пример
+[полного отрицательного feedback](../../../Reports/StructTrain/TimeLearner/s11-historical-protocol-temporal-m40-a5/selected/original-order-gap1.5-phasea-4-full.png)
+и исходные target/FP controls сохранены в [пилотном отчёте](HistoricalFrozenProtocolScientificReport-2026-11-07.ru.md).
+По сходству выбранных рисунков не устанавливается побитное равенство реакций.
+
+Temporal evidence `2d7127959c104de8e24a6064ad3da0efeb7b1cab`:
+65 compact members83084B, SHA256
+`36e6b09e779b14911171a2a8ea2fc98d0aacb5604286552e8de8469c3a2ff74e`.
+[Независимая сверка](HistoricalProtocolMatrixTemporalVerification.json)
+проверила391 tool hashes,512 manifest entries, bytes всех четырёх выбранных
+PNG и byte reconstruction16 observations против hashes исходного primary
+архива. Четыре новых выбранных рисунка открыты по отдельности; шесть
+пилотных проверены раньше. Ручной просмотр каждого из512 не заявляется.
+Физические observations не изменены, source/cache прежних результатов
+не изменились, worker group закрыта/lease released.
+
+Git содержит сжатые первичные данные, models/configs/metrics, manifests и
+выбранные рисунки. Полные512 PNG остаются воспроизводимым кэшем M40.
+Для воспроизведения на analysis worker восстановить новый1002-member
+bundle штатным portable_primary; четыре прежних набора взять из принятых
+A3/A4 primary или неизменного проверенного пилотного кэша. Новые case IDs
+`rotation2`…`rotation7` ×`gap1.5/gap3` обработать historical_protocol_temporal.
+Затем historical_report_index с явным списком16 папок создаёт оглавление:
+первые четыре папки сохраняют имена original-order/rotated-order из пилота.
+Полное соответствие condition→plot folder находится в `case-map.json`
+temporal evidence. Новых Train/Test для построения отчёта не требуется.
