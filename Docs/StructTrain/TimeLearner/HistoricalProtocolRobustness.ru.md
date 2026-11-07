@@ -48,7 +48,7 @@ actual impulses, labels/ISI, clock80000 samples/12 streams и все LT edges.
 [source reconciliation](HistoricalPreparationExtraction.json). Это отдельный
 механический шаг, не доказательство исполнения новых перестановок.
 
-На данном снимке выполнены только local AST/source review. Серверная проверка
+В первом снимке были выполнены только local AST/source review. Серверная проверка
 общих helper, actual original-protocol pilot, corruption controls, расширение
 до16 условий, temporal reports и scientific interpretation ещё не выполнены.
 Этап11 остаётся частичным. Августовские исходные наблюдения не пересматриваются.
@@ -145,3 +145,31 @@ hashes,156 loaded-file bindings6 новых процессов и80 неизме
 на другие models/modes. Обязательные temporal reports/visual QA пилота ещё не
 построены; итоговый читаемый научный отчёт с графиками и расширение до16 условий
 остаются следующими шагами. Исходные этапы1–12 всё ещё частичны.
+
+
+## Временные отчёты пилота приняты отдельно
+
+На M40 из опубликованных A3/A4 primary bundles восстановлены все четыре
+case без новых native расчётов. ToolRoot `3466d963c7fe0a6800b740b35a02dc3b25ae5f41`;
+evidence `5a8048ad2eb0349c5b09ab21f1267c64d550f90d`. Построены128 PNG:
+8 паттернов ×4 вида ×4 условия,1920×1680, font≥12, без прореживания.
+Реальные input traces наложены на четыре сомы и native SomaSumPotential;
+выходной LT spike отделён от глобального максимума Test. Следующая пачка
+исключена из предыдущего интервала. Full views сохраняют отрицательный
+feedback, positive companions явно отмечают отсечение.
+
+Три адресных tests на настоящих записях прошли; прежние observations не
+изменились.88 compact archive members/46608B и389 tool-source hashes
+сверены независимо; шесть выбранных PNG1744565B открыты по отдельности.
+Это визуальная приёмка выбранных рисунков, не заявление о ручном просмотре
+всех128. A4 layout overlap исправлен размещением подписи вне waveform area;
+его evidence/negative review сохранены. Ошибки подготовки окружения A1–A3
+сохранены отдельно от результатов моделей. M40 schema1 path ledger не
+мигрировался: cgroup limit2GiB/tasks128 проверен отдельно, capacity-based
+admission этого задания не заявлен.
+
+[Читаемый научный отчёт с рисунками](HistoricalFrozenProtocolScientificReport-2026-11-07.ru.md)
+и [независимая сверка](HistoricalProtocolTemporalVerification.json). Полный
+кэш остаётся на M40 Data; primary данные и выбранные figures доступны в Git.
+Пилотный temporal deliverable завершён; оставшиеся12 условий, вся матрица
+режимов и общий этап11 остаются открытыми.
