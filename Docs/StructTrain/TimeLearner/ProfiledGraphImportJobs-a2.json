@@ -9,8 +9,8 @@
   "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-graph-import-normal-a2",
   "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-graph-import-normal-a2-container",
   "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-profile-graph-import-normal-a2",
-  "status_at_last_kernel_observation": "running",
-  "phase_at_last_observation": "building",
+  "status_at_last_kernel_observation": "closed",
+  "phase_at_last_observation": "completed",
   "unit": "timelearner-aa111012-156e-4ddb-8159-d06581aa7fc5.service",
   "invocation_id": "9b22e9d44ad944adacb5429e943bed26",
   "initial_main_pid": 1464862,
@@ -33,7 +33,7 @@
   "source_fixture_threshold": 0.0117,
   "candidate_waveforms_evaluated": false,
   "published_stopped_models_modified": false,
-  "acceptance_complete": false,
+  "acceptance_complete": true,
   "ASan_verified": false,
   "second_host_verified": false,
   "scientific_verdict": null,
@@ -47,5 +47,11 @@
   ],
   "restart_policy": "Inspect exact contained handle and complete closure before cache/source/runtime reuse. Observation timeout is not terminal. Existing ASan runs in a different source/build/runtime.",
   "previous_failed_attempt": "s07-profile-graph-import-normal-a1",
-  "previous_failed_primary_commit": "afb5c7d144ad92c701e294447180e802fe52741a"
+  "previous_failed_primary_commit": "afb5c7d144ad92c701e294447180e802fe52741a",
+  "build_passed": true,
+  "native_tests_passed": 24,
+  "reader_tests_passed": 27,
+  "whole_group_closed": true,
+  "lease_released": true,
+  "primary_commit": "c4e37e764891429e186f84d33e6f60186879338a"
 }
