@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
+#include "NPulseLTZoneCommon.h"
+#include <cmath>
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ModelIdentity.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
@@ -31,19 +33,26 @@ public:
     unsigned frequency=0,count=0,index=0,serial=0;
     bool branch=std::is_same_v<Learner,NNeuronTimeLearnerBranch>;
     double duration=0.;
-    std::string base;
+    std::string base,artifactFlavor;
+    bool captureFeedback=false;
+    std::vector<std::vector<double>> feedbackSamples;
+    std::vector<double> ltSpikeTimes;
     ~SinglePulseFixture() {
         if(model)dynamic_pointer_cast<UNet>(model)->BreakLinks();
         NmsdkTests::InitEngineForPulseLibTests().environment->DestroyModel();
     }
-    void Make(unsigned f,unsigned n) {
+    void Make(unsigned f,unsigned n,std::optional<double> feedback={},double threshold=1.) {
         frequency=f;count=n;index=n>2?2:n-1;
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();
         core.environment->DestroyModel();core.environment->SetUseIndTimeStepFlag(false);
         ASSERT_TRUE(core.environment->CreateModel("NModel"));model=core.environment->GetModel();ASSERT_TRUE(model);
         core.environment->GetTime().SetTime(0);
         StorageProfileSpec p;p.name=std::string("SinglePulse_")+(branch?"Branch":"Classic")+std::to_string(f)+"_"+std::to_string(n);
-        p.neuronBaseClass="NSPNeuronGen";p.frequencyHz=f;p.initialThreshold=1.;
+        p.neuronBaseClass="NSPNeuronGen";p.frequencyHz=f;p.initialThreshold=threshold;p.body.feedbackGain=feedback;
+        if(feedback || threshold!=1.) {
+            artifactFlavor="_feedback_"+(feedback?std::to_string(*feedback):"inherited")+"_threshold_"+std::to_string(threshold);
+            p.name+=artifactFlavor;
+        }
         auto profile=RegisterStorageProfile(core.storage,core.environment,p);
         learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));ASSERT_TRUE(learner);
         learner->Name="Learner";learner->StructureBuildMode=1;learner->NumInputDendrite=n;
@@ -87,6 +96,11 @@ public:
         const double onset=single?.01:.01+.08*index;
         s.windows={{r.inputId,branch?0u:index,onset-.001,onset+.06,single?"pulse0":"pulse"+std::to_string(index)}};
         double begin=0.,end=0.;
+        std::vector<UEPtr<NPulseMembrane>> feedbackMembranes;
+        if(captureFeedback)for(unsigned i=0;i<(branch?1u:count);++i) {
+            auto soma=neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true);
+            ASSERT_TRUE(soma);feedbackMembranes.push_back(soma);
+        }
         r.onPrepared=[&](const auto& prepared,const auto& spec) {
             begin=spec.begin;end=spec.end;
             EXPECT_EQ(spec.baseline.size(),branch?1u:count);
@@ -97,6 +111,11 @@ public:
         r.onSample=[&](const auto& sample) {
             std::vector<double> row{sample.time-begin,sample.stimulus};
             row.insert(row.end(),sample.potentials.begin(),sample.potentials.end());samples.push_back(row);
+            if(captureFeedback) {
+                std::vector<double> feedback;
+                for(const auto& soma:feedbackMembranes)feedback.push_back(soma->Feedback.GetData());
+                feedbackSamples.push_back(std::move(feedback));
+            }
             if((fault==Fault::Sample && samples.size()==4) ||
                 (fault==Fault::FinalSample && !Detail::After(end,sample.time)))throw std::runtime_error("single_pulse_sample_fault");
         };
@@ -106,6 +125,10 @@ public:
             model->Calculate();core.environment->IncreaseModelTimeByStep();
         }
         auto actual=learner->TakeNativeProbeResult();ASSERT_TRUE(actual);result=*actual;
+        if(captureFeedback) {
+            auto zone=neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
+            for(int i=0;i<zone->OutputPulseTimes.GetCols();++i)ltSpikeTimes.push_back(zone->OutputPulseTimes(0,i));
+        }
         for(const auto& reason:result.reasons)std::cout<<"single pulse reason="<<reason<<std::endl;
         CheckRestored();
         EXPECT_TRUE(learner->IsNativeProbeAtEditBoundary());
@@ -115,12 +138,21 @@ public:
             const QString dir=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(dir));
             const auto test=::testing::UnitTest::GetInstance()->current_test_info();
             const QString name=QString("single-pulse-%1-%2-%3-%4-%5").arg(QString::fromUtf8(test->name()))
-                .arg(branch?"Branch":"Classic").arg(frequency).arg(count).arg(serial);
+                .arg(branch?"Branch":"Classic").arg(frequency).arg(count).arg(serial)+QString::fromStdString(artifactFlavor);
             QFile file(dir+"/"+name+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
             const auto bytes=QJsonDocument(encoded).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
             QJsonArray rows;for(const auto& row:samples){QJsonArray values;for(double v:row)values.append(v);rows.append(values);}
             QFile raw(dir+"/"+name+"-samples.json");ASSERT_TRUE(raw.open(QIODevice::WriteOnly|QIODevice::NewOnly));
             const auto data=QJsonDocument(rows).toJson(QJsonDocument::Compact);ASSERT_EQ(raw.write(data),data.size());
+            if(captureFeedback) {
+                QJsonArray feedback,spikes;
+                for(const auto& row:feedbackSamples){QJsonArray values;for(double v:row)values.append(v);feedback.append(values);}
+                for(double v:ltSpikeTimes)spikes.append(v);
+                QFile control(dir+"/"+name+"-feedback.json");ASSERT_TRUE(control.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                const auto bytes=QJsonDocument(QJsonObject{{"feedback",feedback},{"actual_lt_spike_times",spikes},
+                    {"engineering_threshold",1e-6},{"native_probe_training_started",false},{"classification_evaluated",false}}).toJson();
+                ASSERT_EQ(control.write(bytes),bytes.size());
+            }
         }
     }
 };
@@ -174,4 +206,41 @@ TEST(SinglePulseCharacterization,BranchRestoresBurstResponse){Roundtrip<NNeuronT
 TEST(SinglePulseCharacterization,PreparedFaultRestoresBothTopologies){Roundtrip<NNeuronTimeLearner>(Fault::Prepared);Roundtrip<NNeuronTimeLearnerBranch>(Fault::Prepared);}
 TEST(SinglePulseCharacterization,SampleFaultRestoresBothTopologies){Roundtrip<NNeuronTimeLearner>(Fault::Sample);Roundtrip<NNeuronTimeLearnerBranch>(Fault::Sample);}
 TEST(SinglePulseCharacterization,FinalSampleFaultRestoresBothTopologies){Roundtrip<NNeuronTimeLearner>(Fault::FinalSample);Roundtrip<NNeuronTimeLearnerBranch>(Fault::FinalSample);}
+template<class Learner> void FeedbackDynamics() {
+    for(unsigned frequency:{2000u,20000u}) {
+        std::vector<std::vector<double>> inherited,explicitTwo,zero;
+        std::vector<double> inheritedSpikes,explicitSpikes;
+        for(std::optional<double> gain:{std::optional<double>{},std::optional<double>{2.},std::optional<double>{0.}}) {
+            SinglePulseFixture<Learner> f;f.Make(frequency,2,gain,1e-6);ASSERT_TRUE(f.learner);
+            auto zone=f.neuron->template GetComponentL<NPulseLTZoneCommon>("LTZone",true);ASSERT_TRUE(zone);
+            ASSERT_DOUBLE_EQ(zone->Threshold.GetData(),1e-6);
+            std::vector<NameT> names;f.neuron->GetComponentsList(names);
+            for(const auto& name:names)if(auto membrane=f.neuron->template GetComponentL<NPulseMembrane>(name,true))
+                EXPECT_DOUBLE_EQ(membrane->FeedbackGain.GetData(),gain.value_or(2.));
+            f.captureFeedback=true;NativeProbeResult result;std::vector<std::vector<double>> samples;
+            f.Run(true,Fault::None,result,samples);ASSERT_EQ(result.status,NativeProbeStatus::Completed);
+            ASSERT_TRUE(result.observation);ASSERT_TRUE(result.observation->complete);ASSERT_FALSE(f.ltSpikeTimes.empty());
+            ASSERT_EQ(f.feedbackSamples.size(),samples.size());bool nonzero=false;
+            for(const auto& row:f.feedbackSamples)for(double value:row) {
+                ASSERT_TRUE(std::isfinite(value));nonzero=nonzero || value!=0.;
+                if(gain && *gain==0.)EXPECT_EQ(value,0.);
+            }
+            if(!gain || *gain==2.)EXPECT_TRUE(nonzero);
+            if(!gain){inherited=samples;inheritedSpikes=f.ltSpikeTimes;}
+            else if(*gain==2.){explicitTwo=samples;explicitSpikes=f.ltSpikeTimes;}
+            else zero=samples;
+        }
+        EXPECT_EQ(inherited,explicitTwo);EXPECT_EQ(inheritedSpikes,explicitSpikes);
+        ASSERT_EQ(inherited.size(),zero.size());bool changed=false;
+        for(std::size_t i=0;i<inherited.size();++i) {
+            ASSERT_EQ(inherited[i].size(),zero[i].size());
+            EXPECT_EQ(inherited[i][0],zero[i][0]);EXPECT_EQ(inherited[i][1],zero[i][1]);
+            for(std::size_t j=2;j<inherited[i].size();++j)changed=changed || inherited[i][j]!=zero[i][j];
+        }
+        EXPECT_TRUE(changed); // Actual physical response changes, not only the property value.
+    }
+}
+TEST(StorageFeedbackProfiles,ClassicNativeFeedbackDynamics){FeedbackDynamics<NNeuronTimeLearner>();}
+TEST(StorageFeedbackProfiles,BranchNativeFeedbackDynamics){FeedbackDynamics<NNeuronTimeLearnerBranch>();}
+
 }
