@@ -1,0 +1,49 @@
+from pathlib import Path
+import json,hashlib,subprocess,os,sys
+base=Path('/media/user/Data/TimeLearnerRefactor')
+cache=base/'ReportsCache/stock-recovery-render-normal-a2/Classic-threshold-low-retry32'
+native=base/'readbacks/s07-stock-recovery-frozen-normal-a1/study/runs/Classic-threshold-low-retry32'
+source=base/'source-pipeline-archive-inventory-a2';parent='a5ba5f8d2672de2c76849e0e7db6754b00a6bb5a'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.native_evidence import load
+from Scripts.StructTrain.TimeLearner.model_identity import canonical_model_sha256 as sha
+from Scripts.StructTrain.TimeLearner.plotting import plotting_runtime
+report=load(cache/'manifest.json');figures=load(cache/'evaluation/manifest.json')
+assert report['recognition_trial_soma_pairs']==32 and report['diagnostic_only'] and report['visual_acceptance_complete'] is False
+assert figures['expected_trial_soma_pairs']==32 and len(figures['figures'])==32
+manifest=native/'run-manifest.json'
+assert hashlib.sha256(manifest.read_bytes()).hexdigest()==report['source_manifest_sha256']
+run=load(manifest);assert run['sha256']==report['source_run_sha256']==sha({k:v for k,v in run.items() if k!='sha256'})
+assert report['source_artifacts']==run['artifacts']
+for r in run['artifacts']:
+ p=native/r['path']
+ assert p.stat().st_size==r['bytes'] and hashlib.sha256(p.read_bytes()).hexdigest()==r['sha256']
+selection=[]
+for index in (0,1):
+ candidates=[f for f in figures['figures'] if f['presentation_index']==index and f['descriptor']['index']==0]
+ assert len(candidates)==1
+ f=candidates[0];wanted=['overview']+(['zoom-001','zoom-010'] if index==0 else [])
+ for view in wanted:
+  v=next(x for x in f['views'] if x['view']==view)
+  name=next(n for n in v['files'] if n.endswith('.png'));path=cache/'evaluation'/name
+  selection.append({'name':('target-' if index==0 else 'foil-')+view+'.png','source_relative':name,'source_bytes':path.stat().st_size,'source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),'figure':{k:x for k,x in f.items() if k!='views'},'view':v})
+payload={}
+prefix='Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1'
+for r in selection:payload[prefix+'/selected/'+r['name']]=(cache/'evaluation'/r['source_relative']).read_bytes()
+for rel,name in (('manifest.json','pipeline-report-manifest.json'),('evaluation/manifest.json','evaluation-report-manifest.json')):
+ payload[prefix+'/'+name]=(cache/rel).read_bytes()
+payload[prefix+'/selection.json']=(json.dumps({'kind':'stock_recovery_first_model_visual_selection','schema_version':1,'source_native_evidence_commit':'8ca095726d811a6797bbd82671987635f9b7da53','source_report_root':'5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1','source_cache':str(cache),'source_run_manifest_sha256':report['source_manifest_sha256'],'source_report_manifest_sha256':hashlib.sha256((cache/'manifest.json').read_bytes()).hexdigest(),'source_artifact_bytes_verified':len(run['artifacts']),'records':selection,'visual_acceptance_complete':False,'full_eight_model_render_complete':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-stock-recovery-first-visual-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(collector/'publication-index'))
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+git('read-tree',parent)
+for name,raw in payload.items():
+ oid=git('hash-object','-w','--stdin',data=raw);git('update-index','--add','--cacheinfo','100644',oid,name)
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',git('write-tree','--missing-ok'),'-p',parent,data=b'Preserve first completed recovery-model soma plot selection for manual visual QA\n')
+git('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'selected_png':len(selection),'visual_acceptance_complete':False}))

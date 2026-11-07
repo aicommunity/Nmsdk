@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_budget_native_AB_primary_verification",
+  "schema_version": 1,
+  "baseline_evidence_commit": "a3710b95842d57813032b9bcd8ab3cc80075f92a",
+  "fixed_evidence_commit": "8447d4f937623c56ed7292fd4c6c18aeb9fbbadb",
+  "archive_members_checked": 696,
+  "archive_bytes": 788492,
+  "archive_sha256": "6f613277ade2fd26f248888620005c59a4f5584bd7afd4188a47c57606d03f64",
+  "source_hash_records_matched_to_exact_Git_blobs": {
+    "tool-source-hashes.json": 335,
+    "native-source-hashes.json": 306
+  },
+  "same_original_test_functions": 23,
+  "passed_on_both": 21,
+  "failed_on_both": [
+    "NativeLearnedState/ClassicConfiguredN1",
+    "NativeLearnedState/BranchConfiguredN0"
+  ],
+  "byte_identical_CSV_files": 252,
+  "byte_identical_training_precondition_summaries": 7,
+  "new_budget_fix_does_not_explain_these_two_failures_in_this_control": true,
+  "full_native_gate_passed": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null,
+  "local_numerical_tests_executed": false,
+  "AB_file_hashes_also_match_both_published_primary_archives": true
+}

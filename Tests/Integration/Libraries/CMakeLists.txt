@@ -11,6 +11,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_NeuronGrowth.cpp
     Test_PulseLib_TimeLearnerResistance.cpp
     Test_PulseLib_Observations.cpp
+    Test_PulseLib_IsiTemplateValidation.cpp
     Test_PulseLib_LifecycleContracts.cpp
     Test_PulseLib_TimingPropertyContracts.cpp
     Test_PulseLib_HotReadoutReset.cpp
@@ -26,10 +27,15 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_ProbeObservation.cpp
     Test_PulseLib_NativeProbe.cpp
     Test_PulseLib_NativeExecution.cpp
+    Test_PulseLib_SinglePulseCharacterization.cpp
+    Test_PulseLib_PreparedModel.cpp
     Test_PulseLib_FinalVerification.cpp
     Test_PulseLib_BoundedTraining.cpp
     Test_PulseLib_MeasuredResistanceSearch.cpp
     Test_PulseLib_MeasuredLengthSearch.cpp
+    Test_PulseLib_MeasuredCapacitanceSearch.cpp
+    Test_PulseLib_TrainingCapacitance.cpp
+    Test_PulseLib_CapacitanceContexts.cpp
     Test_PulseLib_NativeModelEditor.cpp
     Test_PulseLib_InitialThreshold.cpp
     Test_PulseLib_CalibrationOwnership.cpp

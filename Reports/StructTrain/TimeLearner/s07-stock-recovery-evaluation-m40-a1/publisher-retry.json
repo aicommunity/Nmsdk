@@ -1,0 +1,43 @@
+{
+  "previous_failure": "Reservations.release missing required note; canonical archive fully created before failure",
+  "canonical_archive_reused_without_mutation": true,
+  "previous_lease": {
+    "token": "fa5c100f-a305-4d28-a8ae-4306322bbaa4",
+    "job_id": "s07-stock-recovery-evaluation-primary-publish-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 1219271,
+      "start_ticks": "306846502",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-evaluation-canonical-primary-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-evaluation-canonical-primary-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-frozen-normal-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-frozen-normal-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-pipeline-archive-inventory-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-pipeline-archive-inventory-a2"
+      }
+    ],
+    "state": "held",
+    "created": 1793993267.4578223,
+    "deadline": 1793993867.4578223,
+    "updated": 1793993267.4578223,
+    "release_note": null,
+    "heartbeat_expired": false,
+    "owner_status": "missing",
+    "inspection_required": true,
+    "scientific_verdict": null
+  },
+  "legacy_orphan_release_pending": true,
+  "runtime_rerun": false
+}

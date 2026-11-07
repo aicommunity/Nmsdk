@@ -1,0 +1,106 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,threading,traceback,tarfile,unittest
+base=Path('/media/user/Data/TimeLearnerRefactor')
+source=base/'source-high-threshold-visual-a1-delivery'
+prior=base/'readbacks/s07-high-threshold-classic-normal-a1'
+out=base/'readbacks/s07-high-threshold-joint-visual-normal-a1';out.mkdir(exist_ok=False)
+repository=base/'evidence-high-threshold-classic-normal-a1'
+root='360ed98641d89535363f472a577c6a6f9f7d3157'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+stop=threading.Event();thread=None;registry=None;token=None;errors=[];evaluated=False;rendered=False
+def ticks(pid):return Path('/proc',str(pid),'stat').read_text().rsplit(') ',1)[1].split()[19]
+def write(n,v):(out/n).write_text(json.dumps(v,indent=2,allow_nan=False)+'\n')
+def digest(p):
+ h=hashlib.sha256()
+ with p.open('rb') as f:
+  for b in iter(lambda:f.read(1024**2),b''):h.update(b)
+ return h.hexdigest()
+write('owner.json',{'pid':os.getpid(),'start_ticks':ticks(os.getpid()),'tool_root':root,'training_job':prior.name})
+(out/'producer.txt').write_bytes(Path(__file__).read_bytes())
+try:
+ assert subprocess.check_output(['git','-C',str(source),'rev-parse','HEAD'],text=True).strip()==root
+ from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+ from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+ registry=Reservations(base/'resource-reservations.sqlite3')
+ state=inspect_worker_dependency(Path(str(prior)+'-container'),registry,prior.name)
+ assert state['state']=='ready' and state['reservation_state']=='released',state
+ assert json.loads((prior/'terminal.json').read_text())['high_threshold_combined_diagnostic_complete']
+ branch=base/'readbacks/s07-high-threshold-single-normal-a1'
+ branch_repository=base/'evidence-high-threshold-single-normal-a1'
+ branch_state=inspect_worker_dependency(Path(str(branch)+'-container'),registry,branch.name)
+ assert branch_state['state']=='ready' and branch_state['reservation_state']=='released',branch_state
+ write('training-prerequisite.json',state)
+ sdk=base/'source-isi-template-baseline-normal-a1';runtime=base/'runtime-single-pulse-console-normal-a1'
+ reservation=registry.reserve(out.name,[{'path':str(p),'access':'write'} for p in (out,base/'ReportsCache/high-threshold-joint-normal-a1')]+[{'path':str(p),'access':'read'} for p in (source,prior,branch,branch_repository,sdk,runtime,repository,base/'plot-venv-a1',base/'readbacks/s07-native-channel-diagnostics-normal-a2',base/'evidence-native-channel-diagnostics-normal-a2',base/'source-csearch-threshold-joint-asan-build-a1/Bin')],ttl_seconds=120)
+ token=reservation['token'];write('reservation.json',reservation)
+ def heartbeat():
+  while not stop.wait(20):
+   try:registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=heartbeat,daemon=True);thread.start()
+ os.environ['PYTHONDONTWRITEBYTECODE']='1';os.environ['QT_QPA_PLATFORM']='offscreen'
+ for key in ('LD_LIBRARY_PATH','QT_PLUGIN_PATH','ASAN_OPTIONS'):os.environ.pop(key,None)
+ cache=base/'ReportsCache/high-threshold-joint-normal-a1'
+ from Scripts.StructTrain.TimeLearner.channel_diagnostic_reports import chart
+ plans=[];chart_checks=[]
+ for topology in ['Branch','Classic']:
+  for mode in ['burst','single']:
+   name=topology+'-threshold-training100-retry32-'+mode
+   if topology=='Branch':
+    native=branch/'single-pulse-study/runs'/name/'native';current_repository=branch_repository
+    reference={'commit':'2ba950373a79e896d3f7817d3cbdbeb1bad192ee','archive_path':'Reports/StructTrain/TimeLearner/s07-high-threshold-single-normal-m40-a1/primary.tar.xz','native_member_prefix':'single-pulse-study/runs/'+name+'/native'}
+   else:
+    native=prior/'runs'/name/'native';current_repository=repository
+    reference={'commit':'cd8d32168c3580948d0684f6ccad9f64f8527d94','archive_path':'Reports/StructTrain/TimeLearner/s07-high-threshold-classic-normal-m40-a1/primary.tar.xz','native_member_prefix':'runs/'+name+'/native'}
+   for i in range(1 if topology=='Branch' else 4):
+    data=chart(native,i);assert data['threshold']==100. and len(data['times'])==3601
+    chart_checks.append({'name':name,'soma':i,'threshold':data['threshold'],'samples':len(data['times'])})
+   plans.append((name,native,current_repository,reference))
+ assert len(chart_checks)==10;write('chart-checks.json',chart_checks)
+ cache.mkdir(exist_ok=False);rows=[]
+ for name,native,current_repository,reference in plans:
+  write(name+'-source-reference.json',reference)
+  command=[str(base/'plot-venv-a1/bin/python'),'-m','Scripts.StructTrain.TimeLearner.channel_diagnostic_reports',str(native),'--source-reference',str(out/(name+'-source-reference.json')),'--repository',str(current_repository),'--output',str(cache/name)]
+  with (out/(name+'.log')).open('xb') as log:
+   child=subprocess.Popen(command,cwd=source,stdout=log,stderr=subprocess.STDOUT)
+   write(name+'-owner.json',{'pid':child.pid,'start_ticks':ticks(child.pid),'arguments':command})
+   code=child.wait()
+  assert code==0,(name,code)
+  manifest=json.loads((cache/name/'manifest.json').read_text());checks=json.loads((cache/name/'SHA256SUMS.json').read_text())
+  for relative,sha in checks.items():assert digest(cache/name/relative)==sha,(name,relative)
+  metadata=out/'metadata'/name;metadata.mkdir(parents=True)
+  for filename in ['manifest.json','SHA256SUMS.json']:(metadata/filename).write_bytes((cache/name/filename).read_bytes())
+  rows.append({'name':name,'soma_count':len(manifest['reports']),'views':sum(len(r['views']) for r in manifest['reports']),'files':len(checks),'cache':str(cache/name),'native_files_verified_in_Git':manifest['native_files_verified_in_Git'],'source_archive_sha256':manifest['source_archive_sha256']})
+ evaluated=True;rendered=True
+ write('analysis.json',{'kind':'high_threshold_joint_temporal_cache','rows':rows,'all_cache_file_hashes_verified':True,'manual_visual_review_complete':False,'new_native_models_executed':False,'scientific_verdict':None})
+except BaseException as e:
+ write('exception.json',{'reason':str(e),'traceback':traceback.format_exc(),'scientific_verdict':None})
+finally:
+ stop.set()
+ if thread:thread.join(timeout=30)
+ write('terminal.json',{'temporal_replay_report_complete':rendered,'new_native_models_executed':False,'visual_acceptance_complete':False,'scientific_verdict':None,'whole_plan_complete':False,'reservation_errors':errors})
+ write('tool-source-hashes.json',{p.relative_to(source).as_posix():digest(p) for p in (source/'Scripts/StructTrain/TimeLearner').rglob('*.py')})
+ try:
+  from Scripts.StructTrain.TimeLearner.portable_primary import _alias_plan
+  files={p.relative_to(out).as_posix():p for p in out.rglob('*') if p.is_file()}
+  members={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in files.items()}
+  omissions=_alias_plan(out,members)
+  omitted={r['omitted_alias'] for r in omissions}
+  for path in out.rglob('*'):
+   if path.is_symlink():
+    name=path.relative_to(out).as_posix();assert name in omitted,('unknown_symlink',name)
+    row=next(r for r in omissions if r['omitted_alias']==name)
+    assert path.resolve()==(out/row['retained_target']).resolve()
+    row['original_symlink_target']=os.readlink(path);row['original_symlink_target_attested']=True
+  write('archive-alias-omissions.json',{'only_verified_duplicate_glog_aliases_omitted':True,'records':omissions,'source_files_deleted':False})
+  files={p.relative_to(out).as_posix():p for p in out.rglob('*') if p.is_file() and p.relative_to(out).as_posix() not in omitted}
+  members={n:{'bytes':p.stat().st_size,'sha256':digest(p)} for n,p in files.items()}
+  archive=out/'primary.tar.xz'
+  with tarfile.open(archive,'w:xz',preset=3) as a:
+   for n,path in sorted(files.items()):
+    info=tarfile.TarInfo(n);info.size=path.stat().st_size;info.mode=0o644
+    with path.open('rb') as f:a.addfile(info,f)
+  write('bundle.json',{'kind':'stock_exact_invalid_wave_replay_primary','root':root,'members':members,'archive_bytes':archive.stat().st_size,'archive_sha256':digest(archive),'classification_assessed':False,'scientific_verdict':None,'alias_omissions':len(omissions)})
+ except BaseException as archive_error:
+  write('archive-exception.json',{'reason':str(archive_error),'traceback':traceback.format_exc(),'native_primary_preserved_on_server':True,'portable_archive_attested':False,'scientific_verdict':None})
+ print('CLOSED',evaluated,rendered,flush=True)
