@@ -1,0 +1,83 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "65ebe58e-b956-4713-8e8f-0be5eb6c0309",
+  "job_id": "s11-august-protocol-pilot-elder-a3",
+  "recorded_unix": 1794055321.4245787,
+  "administrator": {
+    "pid": 937798,
+    "start_ticks": "362490431",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 937810,
+    "start_ticks": "362490445",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s11-august-protocol-pilot-elder-a3-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "fb86695cf499b433ef40d97035e51853bcf3c1f8004166be425d247c3c5d62c7",
+      "unit": "timelearner-97fdc2db-97df-4251-9cc9-f3be472bc586.service",
+      "invocation_id": "fcb5f174e0b74f97b52b60d0d067358d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-97fdc2db-97df-4251-9cc9-f3be472bc586.service",
+      "initial_main_pid": 937810,
+      "initial_start_ticks": "362490445",
+      "sha256": "abf7580236d115ff95e716947d9096cbc7facd4812ed3a7a802d994294945f1c"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-97fdc2db-97df-4251-9cc9-f3be472bc586.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Complete SDK worker cgroup closed. Release resources; test/build acceptance is recorded separately.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s11-august-phasea-runtime-elder-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s11-august-phasea-runtime-elder-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s11-august-protocol-pilot-elder-a3",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s11-august-protocol-pilot-elder-a3"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-august-phasea-de02-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-august-phasea-de02-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-august-protocol-controls-a3",
+      "requested_path": "/home/user/timelearner-refactor/source-august-protocol-controls-a3"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
