@@ -82,8 +82,8 @@ def render_case(folder, output, case):
                     name = "Soma "+str(index+1)+" (Exc + Inh)" if index < 4 else "Neuron.SomaSumPotential"
                     ax.set_ylabel(name+"\nnative units; SI unverified")
                     if focus:
-                        ax.text(.99, .93, f"clipped: {len(below)} below, {len(above)} above; see full view",
-                                transform=ax.transAxes, ha="right", va="top", fontsize=12)
+                        ax.set_title(f"Amplitude focus: {len(below)} samples below scale, "
+                                     f"{len(above)} above; see full view", loc="right", fontsize=12)
                     # Actual recorded generator trace, not an inferred pulse train.
                     input_axis = ax.twinx()
                     input_axis.step(x, signals["stimulus"][first:end], where="post",
