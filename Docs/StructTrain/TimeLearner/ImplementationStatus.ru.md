@@ -204,3 +204,12 @@ Classic/Branch2000/20000Гц. Все161 primary members и781 source hashes св
 процессы закрыты, lease released. Engineering threshold1e-6 одинаков в controls;
 это не causal intervention в stock0.0117 и не новое обучение. ASan/второй сервер,
 полная матрица и baseline-equivalent stock reconstruction открыты.
+
+
+[Effective graph delta auditor](FeedbackInterventionContract.ru.md) проверен
+на M40:10/10 reader controls,11 primary members и368 tool source hashes
+сверены с Git. Исходные два actual imported stock graphs привязаны к прежним
+Console primary. Разрешены только объявленные image renames и uniform gain;
+порог, физика каналов, индивидуальные Rs/C, связи, порядок и частота должны
+совпадать полностью. Это data-consistency audit, а не native intervention,
+image closure proof, baseline waveform equivalence или научный verdict.
