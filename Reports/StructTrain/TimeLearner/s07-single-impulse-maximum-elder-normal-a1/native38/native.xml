@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="38" failures="1" disabled="0" errors="0" time="172.75" timestamp="2026-11-07T12:07:51.272" name="AllTests">
+  <testsuite name="TimeLearnerStorageProfiles" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0.857" timestamp="2026-11-07T12:07:51.272">
+    <testcase name="EmptyRoleOverridesPreserveLegacyClassSelection" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="58" status="run" result="completed" time="0.799" timestamp="2026-11-07T12:07:51.272" classname="TimeLearnerStorageProfiles" />
+    <testcase name="RoleReplacementInitializesNewChildrenAndPreservesOtherRole" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="84" status="run" result="completed" time="0.03" timestamp="2026-11-07T12:07:52.071" classname="TimeLearnerStorageProfiles" />
+    <testcase name="InvalidRecipesAndCollisionsDoNotChangeExistingPhysics" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="314" status="run" result="completed" time="0.027" timestamp="2026-11-07T12:07:52.101" classname="TimeLearnerStorageProfiles" />
+  </testsuite>
+  <testsuite name="StorageFeedbackProfiles" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="26.181" timestamp="2026-11-07T12:07:52.129">
+    <testcase name="AbsentGainPreservesCustomBaseAndLiveInstances" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="349" status="run" result="completed" time="0.039" timestamp="2026-11-07T12:07:52.129" classname="StorageFeedbackProfiles" />
+    <testcase name="UniformGainAndSeparateLtSurviveGrowthResetAndXml" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="368" status="run" result="completed" time="0.146" timestamp="2026-11-07T12:07:52.169" classname="StorageFeedbackProfiles" />
+    <testcase name="InvalidGainsFailBeforePublishingAnyDependency" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="403" status="run" result="completed" time="0.001" timestamp="2026-11-07T12:07:52.315" classname="StorageFeedbackProfiles" />
+    <testcase name="GainCollisionPreservesRegisteredAndBasePhysics" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="418" status="run" result="completed" time="0.031" timestamp="2026-11-07T12:07:52.317" classname="StorageFeedbackProfiles" />
+    <testcase name="ClassicNativeFeedbackDynamics" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="265" status="run" result="completed" time="14.94" timestamp="2026-11-07T12:07:52.348" classname="StorageFeedbackProfiles" />
+    <testcase name="BranchNativeFeedbackDynamics" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="266" status="run" result="completed" time="11.021" timestamp="2026-11-07T12:08:07.289" classname="StorageFeedbackProfiles" />
+  </testsuite>
+  <testsuite name="FeedbackProfileImages" tests="4" failures="0" disabled="0" skipped="0" errors="0" time="27.485" timestamp="2026-11-07T12:08:18.311">
+    <testcase name="PreservesCustomChildrenAndRejectsCollisions" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="434" status="run" result="completed" time="0.088" timestamp="2026-11-07T12:08:18.311" classname="FeedbackProfileImages" />
+    <testcase name="InvalidRequestsPublishNoImagesOrExtraLtMembrane" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_StorageProfiles.cpp" line="478" status="run" result="completed" time="0.004" timestamp="2026-11-07T12:08:18.400" classname="FeedbackProfileImages" />
+    <testcase name="ClassicNativeInheritedPhysics" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="267" status="run" result="completed" time="15.826" timestamp="2026-11-07T12:08:18.404" classname="FeedbackProfileImages" />
+    <testcase name="BranchNativeInheritedPhysics" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="268" status="run" result="completed" time="11.565" timestamp="2026-11-07T12:08:34.231" classname="FeedbackProfileImages" />
+  </testsuite>
+  <testsuite name="SingleImpulseMaximum" tests="7" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2026-11-07T12:08:45.796">
+    <testcase name="KeepsLargestPeakAfterDeepFallAndSmallerExtrema" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="364" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.796" classname="SingleImpulseMaximum" />
+    <testcase name="SeparatedEqualLargestPeaksAreTimingAmbiguous" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="372" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.796" classname="SingleImpulseMaximum" />
+    <testcase name="PlateauRetainsMeasuredEndpointsDespiteSmallerPeak" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="379" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.796" classname="SingleImpulseMaximum" />
+    <testcase name="BoundaryAndIncompleteWindowCannotBecomeValidMaximum" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="385" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.797" classname="SingleImpulseMaximum" />
+    <testcase name="NewPolicyCannotRelabelLegacyOrBurstSpecification" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="392" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.797" classname="SingleImpulseMaximum" />
+    <testcase name="HistoricalIsolatedPolicyStillRejectsMultiplePeaks" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="403" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.797" classname="SingleImpulseMaximum" />
+    <testcase name="MeasurableMaximumBeforeActualImpulseDoesNotProveAResponse" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_ProbeObservation.cpp" line="410" status="run" result="completed" time="0" timestamp="2026-11-07T12:08:45.797" classname="SingleImpulseMaximum" />
+  </testsuite>
+  <testsuite name="SinglePulseCharacterization" tests="9" failures="0" disabled="0" skipped="0" errors="0" time="70.159" timestamp="2026-11-07T12:08:45.797">
+    <testcase name="ClassicPhysicalSizesAt2000Hz" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="222" status="run" result="completed" time="3.958" timestamp="2026-11-07T12:08:45.797" classname="SinglePulseCharacterization" />
+    <testcase name="BranchPhysicalSizesAt2000Hz" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="223" status="run" result="completed" time="1.876" timestamp="2026-11-07T12:08:49.756" classname="SinglePulseCharacterization" />
+    <testcase name="ClassicPhysicalSizesAt20000Hz" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="224" status="run" result="completed" time="36.578" timestamp="2026-11-07T12:08:51.632" classname="SinglePulseCharacterization" />
+    <testcase name="BranchPhysicalSizesAt20000Hz" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="225" status="run" result="completed" time="16.276" timestamp="2026-11-07T12:09:28.211" classname="SinglePulseCharacterization" />
+    <testcase name="ClassicRestoresBurstResponse" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="226" status="run" result="completed" time="1.91" timestamp="2026-11-07T12:09:44.488" classname="SinglePulseCharacterization" />
+    <testcase name="BranchRestoresBurstResponse" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="227" status="run" result="completed" time="1.378" timestamp="2026-11-07T12:09:46.399" classname="SinglePulseCharacterization" />
+    <testcase name="PreparedFaultRestoresBothTopologies" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="228" status="run" result="completed" time="2.441" timestamp="2026-11-07T12:09:47.777" classname="SinglePulseCharacterization" />
+    <testcase name="SampleFaultRestoresBothTopologies" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="229" status="run" result="completed" time="2.47" timestamp="2026-11-07T12:09:50.219" classname="SinglePulseCharacterization" />
+    <testcase name="FinalSampleFaultRestoresBothTopologies" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="230" status="run" result="completed" time="3.267" timestamp="2026-11-07T12:09:52.689" classname="SinglePulseCharacterization" />
+  </testsuite>
+  <testsuite name="FeedbackProfileImport" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="20.93" timestamp="2026-11-07T12:09:55.957">
+    <testcase name="ClassicFullIndividualStateAndRoundtrip" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="351" status="run" result="completed" time="14.461" timestamp="2026-11-07T12:09:55.957" classname="FeedbackProfileImport" />
+    <testcase name="BranchFullIndividualStateAndRoundtrip" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="352" status="run" result="completed" time="6.468" timestamp="2026-11-07T12:10:10.419" classname="FeedbackProfileImport" />
+  </testsuite>
+  <testsuite name="SingleImpulseMaximumNative" tests="5" failures="1" disabled="0" skipped="0" errors="0" time="26.275" timestamp="2026-11-07T12:10:16.887">
+    <testcase name="Classic2000" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="380" status="run" result="completed" time="1.028" timestamp="2026-11-07T12:10:16.887" classname="SingleImpulseMaximumNative" />
+    <testcase name="Branch2000" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="381" status="run" result="completed" time="0.736" timestamp="2026-11-07T12:10:17.916" classname="SingleImpulseMaximumNative" />
+    <testcase name="Classic20000" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="382" status="run" result="completed" time="9.394" timestamp="2026-11-07T12:10:18.653" classname="SingleImpulseMaximumNative" />
+    <testcase name="Branch20000" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="383" status="run" result="completed" time="6.781" timestamp="2026-11-07T12:10:28.047" classname="SingleImpulseMaximumNative" />
+    <testcase name="FaultsRestoreBothTopologies" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp" line="384" status="run" result="completed" time="8.333" timestamp="2026-11-07T12:10:34.829" classname="SingleImpulseMaximumNative">
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+      <failure message="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163&#x0A;Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)&#x0A;  Actual: false&#x0A;Expected: true" type=""><![CDATA[/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_SinglePulseCharacterization.cpp:163
+Value of: file.open(QIODevice::WriteOnly|QIODevice::NewOnly)
+  Actual: false
+Expected: true]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="PreparedNativeModel" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0.859" timestamp="2026-11-07T12:10:43.163">
+    <testcase name="ClassicFreshOwnerAndRepeatedRefusal" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp" line="96" status="run" result="completed" time="0.478" timestamp="2026-11-07T12:10:43.163" classname="PreparedNativeModel" />
+    <testcase name="BranchFreshOwnerAndRepeatedRefusal" file="/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_PreparedModel.cpp" line="97" status="run" result="completed" time="0.38" timestamp="2026-11-07T12:10:43.641" classname="PreparedNativeModel" />
+  </testsuite>
+</testsuites>
