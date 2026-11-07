@@ -1,0 +1,54 @@
+from pathlib import Path
+import sys,json,hashlib,tarfile,subprocess,io
+base=Path('/media/user/Data/TimeLearnerRefactor');incoming=base/'source-positive-lobe-report-a1-tool'
+parent='93df0ca389a16c50a7f3106ee1a175e91ed70c7a';folder=base/'readbacks/s07-positive-lobe-report-m40-a1';container=Path(str(folder)+'-container');cache=base/'ReportsCache/positive-lobe-report-m40-a1'
+repo=base/'evidence-positive-lobe-report-m40-a1';prefix='Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(incoming))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+r=Reservations(base/'resource-reservations.sqlite3');closed=inspect_worker_dependency(container,r,folder.name);assert closed['state']=='ready' and closed['reservation_state']=='released'
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['temporal_reports_generated'] and not terminal['heartbeat_errors']
+assert 'Ran 3 tests' in (folder/'tests.log').read_text() and (folder/'tests.log').read_text().rstrip().endswith('OK')
+bundle=json.loads((folder/'bundle.json').read_text());raw=(folder/'primary.tar.xz').read_bytes();assert len(raw)==bundle['archive_bytes'] and hashlib.sha256(raw).hexdigest()==bundle['archive_sha256']
+files={}
+with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in files
+  v=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()};files[m.name]=v
+assert set(files)==set(bundle['members'])
+payloads={prefix+'/primary.tar.xz':raw,prefix+'/bundle.json':(folder/'bundle.json').read_bytes()}
+for f in container.iterdir():
+ if f.is_file() and f.suffix=='.json':payloads[prefix+'/controller/'+f.name]=f.read_bytes()
+for name in ['terminal.json','report-manifest.json','primary-bindings.json','tool-source-hashes.json','tests.log']:
+ payloads[prefix+'/'+name]=files[name]
+selected=[];sums=json.loads(files['cache-file-bindings.json']);reports=json.loads(files['report-manifest.json'])
+for report in reports:
+ case=report['case'];view=report['views'][1];assert 'positive_lobe_focus' in view and view['positive_lobe_focus']['clipped_below_times']
+ relative=case+'/'+view['files'][0];v=(cache/relative).read_bytes();assert hashlib.sha256(v).hexdigest()==sums[relative]
+ dest=prefix+'/selected/'+case+'-'+view['files'][0];payloads[dest]=v;selected.append({'case':case,'path':dest,'sha256':sums[relative],'bytes':len(v),'view':view})
+payloads[prefix+'/selected.json']=(json.dumps({'figures':selected,'visual_acceptance_complete':False,'full_cache_manually_reviewed':False},indent=2)+'\n').encode()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve tested positive-crest views paired with unchanged full-range feedback detail\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'members':len(files),'archive_bytes':len(raw),'archive_sha256':bundle['archive_sha256'],'whole_group_closed':True,'lease_released':True}))

@@ -1,0 +1,79 @@
+{
+  "kind": "single_pulse_native_scoped_verification",
+  "schema_version": 1,
+  "verified_utc": "2026-11-07T02:09:37.736030+00:00",
+  "host": "10.245.1.17",
+  "compiled_root": "b5cfae4b09558aae0a4eac82a3743430c3105539",
+  "compiled_PulseLib": "302124bb3e8aaa412bc7ddacad8560cf427ac94b",
+  "evidence_commit": "d1b4ab27b9533040acb54a7421ab0eed21c496d7",
+  "evidence_path": "Reports/StructTrain/TimeLearner/s07-single-pulse-native-normal-m40-a2",
+  "attempt_archives": [
+    {
+      "subdirectory": "",
+      "root": "b5cfae4b09558aae0a4eac82a3743430c3105539",
+      "members_verified": 176,
+      "source_hashes_verified": 779,
+      "archive_bytes": 722788,
+      "archive_sha256": "f301ebce4757eb62bdf6a575fe2508ae56f39325e8eec90f4b3cbed1e4652814",
+      "whole_group_closed": true,
+      "lease_released": true
+    },
+    {
+      "subdirectory": "prior-fixture-failure-a1/",
+      "root": "288b64386ba6b07028cd84500655dd15adaebb63",
+      "members_verified": 82,
+      "source_hashes_verified": 777,
+      "archive_bytes": 275016,
+      "archive_sha256": "ddf34c89925378d1c53e3412275f9a7071a948156b9d293c7eb99a3f1ca8f8d3",
+      "whole_group_closed": true,
+      "lease_released": true
+    },
+    {
+      "subdirectory": "reader-native37-a1/",
+      "root": "b5cfae4b09558aae0a4eac82a3743430c3105539",
+      "members_verified": 9,
+      "source_hashes_verified": 364,
+      "archive_bytes": 24832,
+      "archive_sha256": "6f3c2767a45ae2cd3359173a481817505a071d8623a2e04e9e8263584f6a16d5",
+      "whole_group_closed": true,
+      "lease_released": true
+    }
+  ],
+  "native_functions_passed": 37,
+  "single_pulse_functions": 9,
+  "existing_ISI_observation_burst_controls": 28,
+  "reader_tests_passed": 13,
+  "reader_tests_skipped": 0,
+  "first_attempt_fixture_failures": {
+    "passed": 16,
+    "total": 21,
+    "failed_cases": 5,
+    "failed_assertions": 20,
+    "all_assertions_are_file_name_collisions": true
+  },
+  "second_attempt_reader_setup_error": {
+    "tests_run": 0,
+    "reason": "wrapper looked in its own single-pulse-fixture instead of native_gate native12/native output",
+    "original_failed_terminal_preserved": true,
+    "native37_repeated": false
+  },
+  "physical_input_counts": [
+    1,
+    2,
+    4,
+    6
+  ],
+  "frequencies_hz": [
+    2000,
+    20000
+  ],
+  "actual_native_fixture_pairs": 40,
+  "single_pulse_packets": 24,
+  "native_fixture_ordinate_comparison": "Exact full-burst stimulus/soma samples before and after characterization; relative clocks checked at 1e-12 roundoff",
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "Console_job4_runtime_verified": false,
+  "full_cancellation_connected_replacement_matrix_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

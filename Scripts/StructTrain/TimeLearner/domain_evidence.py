@@ -19,6 +19,49 @@ from .native_evidence import EvidenceError, count, load, number, require
 
 AUDITOR_VERSION = 1
 
+CAPACITANCE_FIELDS = {'requested_capacitance', 'effective_capacitance',
+                      'capacitance_state', 'capacitance_storage_images'}
+
+
+def _capacitance_context(record):
+    from .capacitance_evidence import audit_capacitance_state, controller_capacitance_parameters
+    require(set(record) == CAPACITANCE_FIELDS | {
+        'kind', 'schema_version', 'status', 'reason', 'input_index', 'base_model_revision',
+        'preview_model_revision', 'geometry', 'locked_by_shared_bank', 'model_may_have_changed',
+        'minimum_resistance', 'maximum_resistance', 'channels', 'preview_model', 'controls',
+        'branch', 'source_amplitude', 'policy'}, 'unknown_capacitance_domain_fields')
+    requested = record['requested_capacitance']
+    require(type(requested) is dict and set(requested) == {'origin', 'maximum_relative_change', 'membrane_scales'}
+            and type(requested['origin']) is str and len(requested['origin']) == 64
+            and all(c in '0123456789abcdef' for c in requested['origin'])
+            and type(requested['membrane_scales']) is dict and requested['membrane_scales'],
+            'invalid_domain_capacitance_request')
+    limit = number(requested['maximum_relative_change'])
+    require(limit >= 0, 'invalid_domain_capacitance_request')
+    import re
+    for path, value in requested['membrane_scales'].items():
+        require(type(path) is str and re.fullmatch(r'Dendrite[1-9][0-9]*_[1-9][0-9]*', path)
+                and number(value) > 0 and 1-limit <= value <= 1+limit, 'invalid_domain_capacitance_request')
+    state, effective, images = (record[k] for k in ('capacitance_state', 'effective_capacitance', 'capacitance_storage_images'))
+    if effective is None:
+        require(record['status'] != 'available' and state is None and images is None,
+                'missing_domain_capacitance_witness')
+        return False
+    require(type(state) is dict and state and type(effective) is dict, 'missing_domain_capacitance_witness')
+    identity = {'valid': True, 'diagnostics': [], 'model': record['preview_model'],
+                'sha256': record['preview_model_revision']}
+    audit_capacitance_state(state, state['baseline']['model_spec'], identity, images)
+    require(effective == controller_capacitance_parameters(state), 'domain_effective_capacitance_mismatch')
+    # Do not permit Python bool == 1 to masquerade as a physical scale.
+    number(effective['maximum_relative_change'])
+    for scale in effective['membrane_scales'].values(): number(scale)
+    require(effective['origin'] == requested['origin']
+            and effective['maximum_relative_change'] == requested['maximum_relative_change']
+            and all(effective['membrane_scales'].get(p) == v for p, v in requested['membrane_scales'].items())
+            and all(v == 1. for p, v in effective['membrane_scales'].items()
+                    if p not in requested['membrane_scales']), 'domain_requested_capacitance_mismatch')
+    return True
+
 
 def _same(actual: Any, expected: float) -> bool:
     # Relative binary64 roundoff only, including quantities much smaller than 1.
@@ -50,7 +93,8 @@ def _property(node: dict, name: str) -> Any:
 def _audit(record: dict, allow_legacy: bool) -> dict:
     require(record.get("kind") == "native_resistance_domain_evidence", "unknown_domain_kind")
     version = record.get("schema_version")
-    require(type(version) is int and version in (1, 2), "unknown_domain_schema")
+    require(type(version) is int and version in (1, 2, 3), "unknown_domain_schema")
+    require(version == 3 or not CAPACITANCE_FIELDS.intersection(record), "unversioned_domain_capacitance")
     status = record["status"]
     require(status in {"available", "unavailable", "unsupported", "failed"}, "unknown_domain_status")
     if version == 1:
@@ -58,10 +102,12 @@ def _audit(record: dict, allow_legacy: bool) -> dict:
         return {"auditor_version": AUDITOR_VERSION, "schema_version": 1,
                 "physics_verified": False, "reason": "legacy_domain_has_no_physical_preview",
                 "evaluation_verdict": None}
+    capacitance_verified = _capacitance_context(record) if version == 3 else None
     require(type(record["model_may_have_changed"]) is bool, "invalid_model_change_flag")
     if status != "available":
-        return {"auditor_version": AUDITOR_VERSION, "schema_version": 2,
+        return {"auditor_version": AUDITOR_VERSION, "schema_version": version,
                 "physics_verified": False, "reason": "domain_not_available:" + status,
+                **({'capacitance_verified': capacitance_verified} if version == 3 else {}),
                 "evaluation_verdict": None}
     require(record["model_may_have_changed"] is False, "domain_changed_live_model")
     model = record["preview_model"]
@@ -198,7 +244,8 @@ def _audit(record: dict, allow_legacy: bool) -> dict:
     require(math.isfinite(lower) and math.isfinite(upper) and 0 < lower <= upper, "empty_available_domain")
     require(_same(record["minimum_resistance"], lower) and _same(record["maximum_resistance"], upper),
             "domain_endpoint_mismatch")
-    return {"auditor_version": AUDITOR_VERSION, "schema_version": 2, "physics_verified": True,
+    return {"auditor_version": AUDITOR_VERSION, "schema_version": version, "physics_verified": True,
+            **({'capacitance_verified': capacitance_verified} if version == 3 else {}),
             "preview_model_revision": record["preview_model_revision"], "controlled_channels": len(expected),
             "minimum_resistance": lower, "maximum_resistance": upper, "evaluation_verdict": None}
 

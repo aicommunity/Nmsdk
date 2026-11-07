@@ -1,0 +1,54 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-inherited-feedback-normal-a1",
+      "members": 200,
+      "archive_bytes": 588892,
+      "archive_sha256": "aef17cbbe9fbf68d336a1ff475ca0a80b130b0070f91651106c3f469346b1087"
+    }
+  ],
+  "terminal": {
+    "build_passed": true,
+    "native_gates_executed": true,
+    "inherited_feedback_scoped_acceptance_passed": true,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "native_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 22,
+      "observed": 22,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "a4cc12bb3cbb7ac5497362c837ddb9e15f105454d4ea5c9c8d68bfb385fbd4ed"
+    },
+    "scientific_verdict": null
+  },
+  "reader_result": {
+    "tests_run": 13,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "three_previous_runtimes_unchanged": true,
+  "actual_inherited_graph_tests": {
+    "tests_run": 2,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "engineering_threshold": 1e-06,
+  "stock_models_modified": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

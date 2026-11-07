@@ -1,0 +1,47 @@
+from pathlib import Path
+import sys,json,hashlib,shutil,sqlite3,subprocess,re
+base=Path('/home/user/timelearner-refactor').resolve();out=(base/'readbacks/s11-august-protocol-completion-elder-a1').resolve();record_dir=base/'readbacks/s11-historical-raw-cache-cleanup-elder-a1';record_dir.mkdir(exist_ok=False)
+sys.dont_write_bytecode=True;sys.path.insert(0,str(base/'source-august-protocol-controls-a4'))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+m40={'primary_commit':'657e48449626ac1caf6362ffe1d53685434f2f83','archive_sha256':'22f18e5fbf5315f7ab9ca1a3ec286e3523ece981132ca6fc489420499cce1bff','archive_members_verified':1002,'conditions':16,'views':512,'matrix_temporal_complete':True,'temporal_evidence':'2d7127959c104de8e24a6064ad3da0efeb7b1cab'}
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);meta=dict(c.execute('select key,value from metadata'));c.close();registry=Reservations(base/'resource-reservations.sqlite3',capacity=json.loads(meta['capacity']))
+closed=inspect_worker_dependency(Path(str(out)+'-container'),registry,out.name);assert closed['state']=='ready' and closed['reservation_state']=='released'
+b=json.loads((out/'bundle.json').read_text());archive=out/'primary.tar.xz';checksum=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();assert b['archive_sha256']==m40['archive_sha256']==checksum(archive)
+assert out.parent==base/'readbacks' and out.is_dir() and not out.is_symlink()
+cases=[x['id'] for x in json.loads((out/'design.json').read_text())['cases'] if not x['native_reused']];assert len(cases)==12 and len(set(cases))==12
+lease=registry.reserve(record_dir.name,[{'path':str(out),'access':'write'},{'path':str(record_dir),'access':'write'}],ttl_seconds=120,demands={'slots':1,'memory_bytes':64*1024**2,'disk_bytes':1024**2});token=lease['token'];plan=[]
+try:
+ for name in cases:
+  assert re.fullmatch(r'rotation[2-7]-gap(?:1\.5|3)',name)
+  folder=out/name;assert folder.is_dir() and not folder.is_symlink() and folder.resolve().parent==out
+  expected={n[len(name)+1:]:v for n,v in b['members'].items() if n.startswith(name+'/')};actual={}
+  for p in folder.rglob('*'):
+   if p.is_symlink():assert p.resolve(strict=True).is_relative_to(folder) and p.is_file()
+   if p.is_file():actual[p.relative_to(folder).as_posix()]={'bytes':p.stat().st_size,'sha256':checksum(p)}
+  assert actual==expected and expected;plan.append({'path':str(folder),'members':len(expected),'logical_bytes':sum(v['bytes'] for v in expected.values())})
+ (record_dir/'plan.json').write_text(json.dumps({'targets':plan,'source_archive':str(archive),'archive_sha256':b['archive_sha256'],'M40_restoration_and_rendering':m40,'user_authorization':'remove confirmed duplicate Nmsdk logs/caches; preserve required primary data and code'},indent=2)+'\n')
+ before=shutil.disk_usage(base).free
+ for item in plan:registry.validate_paths(token);shutil.rmtree(item['path'])
+ after=shutil.disk_usage(base).free;assert checksum(archive)==b['archive_sha256'] and all(not Path(item['path']).exists() for item in plan)
+ receipt={'kind':'verified_duplicate_historical_raw_cache_cleanup','deleted_case_directories':12,'verified_archived_members_deleted':sum(x['members'] for x in plan),'deleted_logical_bytes':sum(x['logical_bytes'] for x in plan),'disk_free_before':before,'disk_free_after':after,'retained_compressed_archive_bytes':archive.stat().st_size,'retained_archive_sha256':checksum(archive),'primary_git_commit':m40['primary_commit'],'M40_temporal_evidence':m40['temporal_evidence'],'old_A3_A4_controls_preserved':True,'source_and_runtime_unchanged':True,'targets':plan,'no_unique_primary_data_deleted':True}
+ (record_dir/'receipt.json').write_text(json.dumps(receipt,indent=2)+'\n')
+finally:registry.release(token,note='Unmanaged metadata cleanup completed; only Git/M40 verified raw-case duplicates removed. Original archive, controls, source and runtime retained.')
+repo=base/'evidence-august-protocol-completion-elder-a1';parent=m40['primary_commit'];prefix='Reports/StructTrain/TimeLearner/s11-historical-raw-cache-cleanup-elder-a1';payloads={prefix+'/plan.json':(record_dir/'plan.json').read_bytes(),prefix+'/receipt.json':(record_dir/'receipt.json').read_bytes(),prefix+'/producer-source.txt':PUBLISHER_SOURCE.encode()}
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for line in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if line:
+    header,name=line.split(b'\t',1);mode,kind,oid=header.decode().split();entries[name.decode()]=(mode,kind,oid)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  old=entries.get(name);entries[name]=('040000','tree',tree(old[2] if old else None,sub))
+ return git('mktree','-z','--missing',data=b''.join((mode+' '+kind+' '+oid+'\t'+name).encode()+b'\0' for name,(mode,kind,oid) in sorted(entries.items())))
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Record deletion of fully archived and M40-verified duplicate historical raw caches\n');git('update-ref','refs/heads/cache-cleanup',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'receipt':receipt}))

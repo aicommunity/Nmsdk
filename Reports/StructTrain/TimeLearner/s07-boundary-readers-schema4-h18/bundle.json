@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_schema4_backward_reader_evidence",
+  "schema_version": 1,
+  "root": "ab95ba64323114f9b8a3fb05cdb46527c20d452a",
+  "native_root": "fd8a10b02797ceace0eb87e0d9de4e36bd1e9e62",
+  "native_evidence": "eb0441f31b9ba51155a14e4705e27d75786dbe3b",
+  "acceptance_status": "passed",
+  "archive_sha256": "38bc5a72869d95e17725dd54864c14d68bd92d97632470662a6bb79d1f75dc2e",
+  "archive_bytes": 25536,
+  "members": {
+    "owned-supervisor.json": "88677ed9ebdc227b3e12e6ebed2f80b7433fbde145e26dc3493572165bb37b05",
+    "native-prerequisite.json": "cbae637664467913d401348b50ab62a6615c575570cb3c5117c4db65ff29d3f5",
+    "source-hashes.json": "14b122b4c568fd5505d0b5af6ed06a05f60c069daa5d6a94a48d871b591a31f8",
+    "owned-readers-cli.json": "8dfca30c1551c1154624b60a346bfd8ec447cee874cbfd3d3da91c13a89868bd",
+    "terminal.json": "dde210a267ea3650d354f86e9f550c15b029f6967de2f4519fa01bded052d574",
+    "readers-cli.log": "9070800ff0eb2039a65f70dd8b8b6c15e2844403b867ade88330f40896c79ae4",
+    "reader-suite.json": "20526da74cea7ab1176895e6868c34a69de25a22120e2960cfb815bd6f6f76d3",
+    "structured-readers/unittest.log": "5ccba7335834d49f3da6bfd14d47ac9511a98afec855e604f0c42758bc5b0a2d",
+    "structured-readers/suite.json": "20526da74cea7ab1176895e6868c34a69de25a22120e2960cfb815bd6f6f76d3",
+    "structured-readers/result.json": "b469f6a59daeba07a3580af8c1b6a120f666bbe092aa3f287c55436fb85f2066"
+  },
+  "scope": "Schema4 production reader backward compatibility: reader root is distinct from native213/targeted6 source. Actual old-schema primary corpus is unchanged and fully audited by88 controls, including negative corruptions. No numerical rerun or validation of new-root C++ models, physical matrix or recognition. Original H12 failed overall verdict is retained.",
+  "scientific_verdict": null
+}

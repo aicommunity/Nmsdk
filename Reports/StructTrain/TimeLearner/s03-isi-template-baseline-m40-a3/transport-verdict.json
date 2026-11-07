@@ -1,0 +1,21 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 9,
+    "observed": 9,
+    "failed_test_ids": [
+      "IsiTemplateValidation/ResolvesActualLearnerAndKeepsFiniteTolerance",
+      "IsiTemplateValidation/NonfiniteReferenceInvalidatesTargetAndFoil",
+      "IsiTemplateValidation/NonfiniteStimulusCannotBecomeTemplateMatch",
+      "IsiTemplateValidation/MissingTemplateCannotBecomeSuccessfulFoil"
+    ],
+    "assertion_status": "failed",
+    "sha256": "6a710c2c7222f3dd40dd0d737606dcd5a42e59d004f5978b17aa86b7994c463a"
+  },
+  "scientific_verdict": null
+}

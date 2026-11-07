@@ -1,0 +1,77 @@
+{
+  "kind": "feedback_profile_selected_visual_QA",
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-07T05:19:35.981560+00:00",
+  "primary_commit": "508e70d63d9f7233f60d5c460b5979ac7d078b96",
+  "selected_pngs_individually_viewed": 6,
+  "PNG_dimensions": [
+    1920,
+    1920
+  ],
+  "hashes_verified_against_Git": true,
+  "input_overlay_visible": true,
+  "legends_axes_titles_readable": true,
+  "no_downsampling": true,
+  "weak_Branch_peak_resolved_with_sample_markers": true,
+  "gain0_same_late_window_monotone_visually_confirmed": true,
+  "local_Y_independent_between_models_explicitly_labelled": true,
+  "full_cache_manually_reviewed": false,
+  "notes": [
+    "First 50ms context keeps full rebound range; weak features require their detail windows.",
+    "Matched late views use the same time interval selected from the baseline peak, with independent local Y.",
+    "Gain0 changes LT Output duration and voltage amplitude; these plots do not demonstrate better classification.",
+    "Burst cache legacy title training probe refers to the training stimulus; these are frozen diagnostic executions, not completed training."
+  ],
+  "figures": [
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-baseline-soma1-zoom-001.png",
+      "sha256": "60238094a2b65e38d14cadc3831d6f3b9b2819e03c351e229a07b614a54c03ca",
+      "view": "zoom-001",
+      "begin": 0.0,
+      "end": 0.05,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-gain0-soma1-zoom-001.png",
+      "sha256": "adab88acc7944290e1ee93b85e4a94f55bc9d16ddad072a50ae39cbf4aaab205",
+      "view": "zoom-001",
+      "begin": 0.0,
+      "end": 0.05,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Classic-threshold-low-retry32-single-baseline-soma1-zoom-001.png",
+      "sha256": "41638499d3792de4a233041fff2436c25b0b90f69982612e19a973c17a89f8dd",
+      "view": "zoom-001",
+      "begin": 0.0,
+      "end": 0.05,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Classic-threshold-low-retry32-single-gain0-soma1-zoom-001.png",
+      "sha256": "832c66a460ca4f13c43e64a0c8fe71e758ddf6c85834800c61cffd93b055b8e0",
+      "view": "zoom-001",
+      "begin": 0.0,
+      "end": 0.05,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-baseline-soma1-matched-control-tail-detail.png",
+      "sha256": "8a639b3e508c725ae5847c78002424f74ee8984d5789b7e510b1098e8dc6d650",
+      "view": "matched-control-tail-detail",
+      "begin": 0.1095,
+      "end": 0.1195,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-feedback-profile-joint-visual-m40-a1/Branch-threshold-low-retry32-single-gain0-soma1-matched-control-tail-detail.png",
+      "sha256": "9d5d79f857b7cf3d74b9e560180993857bb94051dac599616642063c4565d711",
+      "view": "matched-control-tail-detail",
+      "begin": 0.1095,
+      "end": 0.1195,
+      "individually_viewed": true
+    }
+  ],
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

@@ -1,0 +1,77 @@
+from pathlib import Path
+import os,sys,json,subprocess,hashlib,sqlite3,shutil,threading,traceback,tarfile,io
+base=Path('/home/user/timelearner-refactor');tool=base/'source-maximum-dimensions-a1-root-delivery';retained=base/'source-integrated-acceptance-normal-a1'
+out=base/'readbacks/s02-obsolete-source-caches-elder-a1';out.mkdir(exist_ok=False)
+sys.dont_write_bytecode=True;sys.path.insert(0,str(tool))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);metadata=dict(c.execute('select key,value from metadata'));c.close()
+registry=Reservations(base/'resource-reservations.sqlite3',capacity=json.loads(metadata['capacity']))
+token=None;thread=None;stop=threading.Event();errors=[];passed=False;removed=[]
+def write(name,v):(out/name).write_text(json.dumps(v,indent=2)+'\n')
+def git(p,*args):return subprocess.check_output(['git','-C',str(p),*args])
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def available():
+ d=os.statvfs(base);return d.f_bavail*d.f_frsize
+runtime_names=['runtime-single-maximum-console-build-elder-a1','runtime-single-impulse-maximum-elder-normal-a1','runtime-single-impulse-maximum-elder-normal-a2','runtime-feedback-storage-elder-normal-a1','runtime-integrated-acceptance-normal-a1']
+def runtimes():return {str(f.relative_to(base)):{'bytes':f.stat().st_size,'sha256':sha(f)} for n in runtime_names for f in (base/n).rglob('*') if f.is_file()}
+(out/'producer.txt').write_bytes(Path(__file__).read_bytes())
+write('owner.json',{'pid':os.getpid(),'start_ticks':Path('/proc/self/stat').read_text().rsplit(') ',1)[1].split()[19]})
+try:
+ state=inspect_worker_dependency(base/'readbacks/s07-maximum-dimensions-elder-normal-a1-container',registry,'s07-maximum-dimensions-elder-normal-a1');assert state['state']=='ready';write('failed-job-closed.json',state)
+ head=git(retained,'rev-parse','HEAD').decode().strip();assert head=='038a66413b7a41e75bf3826eda365db1c78c364b'
+ candidates=[(base/'source-single-maximum-console-root-a1',head),(base/'source-single-impulse-maximum-a2-root-delivery','62997ad1e7cb7869012d11da82b5a48b529ac1e7')]
+ for path,commit in candidates:
+  assert path.is_dir() and not path.is_symlink() and path.resolve().parent==base.resolve()
+  assert path.resolve()!=retained.resolve() and not retained.resolve().is_relative_to(path.resolve())
+  assert (path/'.git').is_dir() and not (path/'.git/objects/info/alternates').exists()
+ lease=registry.reserve(out.name,[{'path':str(out),'access':'write'}]+[{'path':str(path),'access':'write'} for path,_ in candidates]+[{'path':str(path),'access':'read'} for path in [retained,tool]+[base/n for n in runtime_names]],ttl_seconds=120,demands={'slots':1,'memory_bytes':512*1024**2,'disk_bytes':4*1024**2});token=lease['token'];write('reservation.json',lease)
+ def beat():
+  while not stop.wait(20):
+   try:registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token)
+   except BaseException as e:errors.append(str(e));return
+ thread=threading.Thread(target=beat,daemon=True);thread.start()
+ before=runtimes();write('runtime-before.json',before);write('disk-before.json',{'available_bytes':available()})
+ records=[]
+ for path,commit in candidates:
+  assert git(path,'rev-parse','HEAD').decode().strip()==commit
+  common=git(path,'rev-parse','--git-common-dir').decode().strip();assert (path/common).resolve()==(path/'.git').resolve()
+  assert not git(path,'status','--porcelain','--untracked-files=all').strip()
+  stash=subprocess.run(['git','-C',str(path),'rev-parse','--verify','refs/stash'],stdout=subprocess.PIPE,stderr=subprocess.PIPE);assert stash.returncode!=0
+  git(retained,'cat-file','-e',commit+'^{commit}')
+  entries={}
+  for row in git(path,'ls-tree','-r','-z',commit).split(b'\0'):
+   if row:
+    header,name=row.split(b'\t',1);mode,kind,oid=header.decode().split()
+    if kind=='blob':entries[name.decode()]={'git_blob':oid,'mode':mode}
+  visible={}
+  for f in path.rglob('*'):
+   rel=f.relative_to(path).as_posix()
+   if rel.startswith('.git/'):continue
+   assert not f.is_symlink(),rel
+   if f.is_file():
+    assert rel in entries,rel
+    visible[rel]={**entries[rel],'working_bytes':f.stat().st_size,'working_sha256':sha(f)}
+  names=sorted({r['git_blob'] for r in visible.values()})
+  result=subprocess.check_output(['git','-C',str(retained),'cat-file','--batch-check'],input=('\n'.join(names)+'\n').encode()).decode().splitlines()
+  assert len(result)==len(names)
+  for oid,row in zip(names,result):assert row.split()[0:2]==[oid,'blob'],row
+  size=sum(f.stat().st_size for f in path.rglob('*') if f.is_file())
+  records.append({'path':str(path),'commit':commit,'all_visible_code_blobs_retained_in':str(retained),'visible_files':visible,'all_visible_code_blobs_verified':len(visible),'bytes_including_private_git':size,'stash_present':False,'tracked_and_untracked_status_clean':True,'separate_non_worktree_git_directory':True})
+ write('verified-caches.json',records);assert not errors
+ for record in records:
+  path=Path(record['path']);assert path.resolve().parent==base.resolve() and not path.is_symlink()
+  registry.validate_paths(token);shutil.rmtree(path);assert not path.exists();removed.append(record['path']);write('removed.json',removed)
+ assert git(retained,'rev-parse','HEAD').decode().strip()==head
+ assert runtimes()==before and not errors;write('runtime-after.json',runtimes());write('disk-after.json',{'available_bytes':available()});passed=True
+except BaseException as e:write('exception.json',{'reason':str(e),'traceback':traceback.format_exc()})
+finally:
+ stop.set()
+ if thread:thread.join(timeout=30)
+ if token:write('lease-before-worker-exit.json',next(v for v in registry.inspect()['leases'] if v['token']==token))
+ write('terminal.json',{'cleanup_complete':passed,'removed':removed,'heartbeat_errors':errors,'historical_primary_models_or_logs_deleted':False,'runtime_files_changed':False if passed else None,'scientific_verdict':None})
+ files={f.relative_to(out).as_posix():f.read_bytes() for f in out.rglob('*') if f.is_file()};buffer=io.BytesIO()
+ with tarfile.open(fileobj=buffer,mode='w:xz') as tf:
+  for name,v in sorted(files.items()):
+   m=tarfile.TarInfo(name);m.size=len(v);tf.addfile(m,io.BytesIO(v))
+ raw=buffer.getvalue();(out/'primary.tar.xz').write_bytes(raw);write('bundle.json',{'archive_bytes':len(raw),'archive_sha256':hashlib.sha256(raw).hexdigest(),'members':{n:{'bytes':len(v),'sha256':hashlib.sha256(v).hexdigest()} for n,v in files.items()}})

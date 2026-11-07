@@ -1,0 +1,76 @@
+{
+  "kind": "high_threshold_selected_visual_QA",
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-07T06:44:24.171188+00:00",
+  "primary_commit": "8bc32a401e5b330597ee4f0328b6683f69ad6a7a",
+  "selected_pngs_individually_viewed": 6,
+  "PNG_dimensions": [
+    1920,
+    1920
+  ],
+  "hashes_verified_against_Git": true,
+  "input_overlay_visible": true,
+  "axes_legends_titles_readable": true,
+  "no_downsampling": true,
+  "single_peak_details_resolve_native_samples": true,
+  "threshold_outside_local_Y_explicitly_labelled": true,
+  "full_cache_manually_reviewed": false,
+  "notes": [
+    "Overview establishes full waveform/input context, not individual tick precision.",
+    "Local peak details show native samples without downsampling.",
+    "Threshold100 compresses the decision-potential overview; local-Y details explicitly mark the threshold outside range.",
+    "Burst shapes are compatible with overlapping responses; these plots alone do not prove a causal decomposition or linear superposition."
+  ],
+  "figures": [
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Branch-threshold-training100-retry32-burst-soma1-overview.png",
+      "sha256": "6eb79ba1baffe2f1e55001287d65bd95201a5fbc492e6d5d16109377ab56a4a5",
+      "view": "overview",
+      "begin": 0,
+      "end": 1.8,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Branch-threshold-training100-retry32-single-soma1-overview.png",
+      "sha256": "5795228372d64df3aa84c6a0a1393b07d74d45b92e9ad5b1ab2cadbb487bc54a",
+      "view": "overview",
+      "begin": 0,
+      "end": 1.8,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Branch-threshold-training100-retry32-single-soma1-measured-peak-00314-detail.png",
+      "sha256": "369e70094505c2fd769e3e6cdca7b9314ba7f30d5b655d77bf4e973a2430c1f3",
+      "view": "measured-peak-00314-detail",
+      "begin": 0.152,
+      "end": 0.162,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-burst-soma1-overview.png",
+      "sha256": "4f547c3fedb06cac74aed0d17031492846cbae245d2b5082833ec6a7293f57a3",
+      "view": "overview",
+      "begin": 0,
+      "end": 1.8,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-single-soma1-overview.png",
+      "sha256": "a0824f6970e735053ca135800d71c675541f2b36882040aa2f9575daac221d47",
+      "view": "overview",
+      "begin": 0,
+      "end": 1.8,
+      "individually_viewed": true
+    },
+    {
+      "path": "Reports/StructTrain/TimeLearner/s07-high-threshold-joint-visual-m40-a1/Classic-threshold-training100-retry32-single-soma1-measured-peak-01055-detail.png",
+      "sha256": "dddd6cf29d7db15a2cbbf9b54862ec52f392e69b53f251aa9c81110a3d9d91a3",
+      "view": "measured-peak-01055-detail",
+      "begin": 0.5225,
+      "end": 0.5325,
+      "individually_viewed": true
+    }
+  ],
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
