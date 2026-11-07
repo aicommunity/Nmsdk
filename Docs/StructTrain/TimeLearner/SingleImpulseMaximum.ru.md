@@ -70,3 +70,10 @@ runtime-capture handshake, не создаёт Rdk Environment и не расс�
 CTest label `unit;timelearner` отличает этот контур от полного storage/native.
 Повтор тех же tests в двух executable не считается новой независимой матрицей.
 Требуются реальные серверные build/unit gates, затем native/Console проверки.
+
+## Console replay на stock многопиковых ответах
+
+[Проверка Console](SingleMaximumConsoleReplay.ru.md) принята после исправления
+idle-owner конфигурации. Четыре реальные операции воспроизвели архивные
+Classic/Branch single-pulse трассы без изменения физики. Whole-burst
+assignment, ASan physical integration и классификация остаются открытыми.
