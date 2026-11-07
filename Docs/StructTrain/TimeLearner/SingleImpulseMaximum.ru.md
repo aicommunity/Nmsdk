@@ -56,3 +56,15 @@ sample faults. Положительный native A/B использует явн
 полных schema5 observations от шести fault captures. Первый worker A1 запущен
 до этих исправлений; его неизменяемый снимок не исправляется на ходу и не
 объявляется принятой проверкой исправленного harness.
+
+## Быстрый unit-контур
+
+`Test_PulseLib_ProbeAlgorithms` компилирует производственный
+`Core/TimeLearner/ProbeObservation.cpp` и тот же
+`Test_PulseLib_ProbeObservation.cpp`, который остаётся в полном native target.
+Тела алгоритмов в тестовую копию не извлекаются. Main использует production
+runtime-capture handshake, не создаёт Rdk Environment и не рассчитывает модель.
+Все executable outputs идут в общий настраиваемый deploy root данной сборки.
+CTest label `unit;timelearner` отличает этот контур от полного storage/native.
+Повтор тех же tests в двух executable не считается новой независимой матрицей.
+Требуются реальные серверные build/unit gates, затем native/Console проверки.
