@@ -67,8 +67,8 @@ certificate. LT timestamps записаны непосредственно ко�
 Пока не выполнено контролируемое вмешательство в обратную связь/физику,
 не приписываем все дополнительные максимумы одному конкретному механизму.
 Совпадение с LT/Feedback и wiring в коде — основание гипотезы, не её полная
-причинная проверка. Новые временные графики этого отдельного режима ещё
-требуют render/QA. Исторические августовские4/8–6/8 сохраняют прежнюю силу.
+причинная проверка. Новые временные графики этого отдельного режима построены; избранные
+рисунки проверены вручную, как указано ниже. Исторические августовские4/8–6/8 сохраняют прежнюю силу.
 
 ## Исправление подготовки заданий
 
@@ -82,3 +82,28 @@ single-pulse controls входят в прошедшие42 tests. Negative contr
 
 ASan нового SDK, второй сервер, полный fault/profile scope, исправление
 burst assignment, legacy/V2 A/B и независимая научная матрица остаются открытыми.
+
+
+## Временные графики
+
+[Проверка отчёта](SinglePulseCharacterizationVisualVerification.json): пять сом,
+193 views,583 cache files/63197440B на M40. В Git сохранены19 metadata members,
+сжатый архив metadata и четыре выбранных PNG общим размером925370B.
+Полный cache находится в
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/single-pulse-joint-normal-a1`.
+
+Каждая сома имеет полный обзор, непрерывные50мс окна с общим Y по панели и
+отдельные детали максимумов с локальным Y и всеми native samples.
+На общем Y слабый Branch максимум практически неразличим; для его анализа
+обязательна локальная деталь. Её высоту на странице нельзя сравнивать с
+высотой Classic на другом масштабе. [QA](SinglePulseCharacterizationSelectedVisualQA.json)
+охватывает четыре выбранных рисунка, не весь cache.
+
+Classic: один вход и два LT events в первом50мс окне:
+
+![Classic: потенциал сомы, фактический вход, Exc/Inh, Feedback и LT](../../../Reports/StructTrain/TimeLearner/s03-single-pulse-joint-visual-m40-a1/Classic-threshold-low-retry32-soma1-zoom-001.png)
+
+Branch: разрешённый слабый второй максимум около0.1145с. В этом окне входов
+и новых LT events нет; показаны все отсчёты и локальный масштаб:
+
+![Branch: слабый второй максимум при одиночном предъявлении](../../../Reports/StructTrain/TimeLearner/s03-single-pulse-joint-visual-m40-a1/Branch-threshold-low-retry32-soma1-measured-peak-00229-detail.png)
