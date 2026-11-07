@@ -48,10 +48,21 @@ released; семь прежних runtime не изменились. Это scop
 waveform equivalence, archived stopped-state Console intervention, ASan нового
 API, второй сервер и полная матрица остаются открытыми.
 
-В App добавлен черновой TimeLearnerFeedbackProfileImport.h для следующего
-Console протокола. Он проверяет source package, создаёт derived images,
-переносит физический граф и Dataset и вызывает свежий installation API.
-Helper пока не подключён к CLI и не проверен компилятором; текущий server job
-его не содержит. Новый job schema/reader, парные waveform проверки и научная
-интерпретация остаются не реализованными. Нельзя использовать его как действующий
-параметр эксперимента или считать частью принятого SDK.
+В App подключён кандидат TimeLearnerFeedbackProfileImport.h к Console job schema5.
+Он проверяет source package, создаёт derived images, переносит физический граф
+и Dataset и вызывает свежий installation API до attachment/Init owner.
+Поддерживаются native burst и single-pulse presentation; Rs-intervention и
+изменение stimulus запрещены. Source history/references/certificate не копируются.
+До и после native lifecycle проверяются полный candidate graph и Dataset;
+замороженные пробы сохраняют прежние проверки неизменности.
+
+Production Python builder/admission и execution auditor поддерживают schema5.
+Аудит проверяет source digest, полный graph delta, пустую controller history,
+Dataset identity, image metadata/dependency closure и fingerprint.
+Проверка metadata/XML hashes не заменяет native readback или waveform proof.
+Кандидат ещё не скомпилирован и не принят на сервере; старые job schemas1–4
+сохраняют отдельные контракты. Добавлены адресные admission controls на фактических
+archived source cases. Локально выполнены только AST parsing и diff whitespace
+checks; numerical/reader execution, compiler, paired baseline и actual gain0
+study должны выполняться на серверах. До их приёмки не считать schema5
+проверенным научным инструментом или завершением этапов4/5/7/11.
