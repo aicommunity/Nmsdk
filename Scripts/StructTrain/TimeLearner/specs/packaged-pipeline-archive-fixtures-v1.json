@@ -1,0 +1,72 @@
+{
+  "kind": "packaged_pipeline_archive_fixture_spec",
+  "schema_version": 1,
+  "archives": [
+    {
+      "root_commit": "73f2a713e2630dbad67590931073052126db43d8",
+      "path": "Reports/StructTrain/TimeLearner/s09-native-live-training-worker-asan-a1/primary.tar.xz",
+      "git_blob": "fcb0c814348c3599f694710a43f55421f52428b8",
+      "bytes": 1225484,
+      "sha256": "5ac8bc7e633ca8194bca9aa1131c58c621a417068eba51d6e282e31c5afe58de"
+    },
+    {
+      "root_commit": "73f2a713e2630dbad67590931073052126db43d8",
+      "path": "Reports/StructTrain/TimeLearner/s11-stock-stopped-phasea-normal-a3/primary.tar.xz",
+      "git_blob": "03814fa76d61957065b460e7e8d5e4dfa9896b8c",
+      "bytes": 28236672,
+      "sha256": "85b35a222affd76f112ed34afe6f58e0d8b195d47b0863793fa907d4e5d7662d"
+    },
+    {
+      "root_commit": "73f2a713e2630dbad67590931073052126db43d8",
+      "path": "Reports/StructTrain/TimeLearner/s10-native-managed-preflight-a3/s10-native-managed-preflight-a3/primary.tar.xz",
+      "git_blob": "cfdc753c570a7d374203d8a0d7122c0a17ddbb75",
+      "bytes": 84992,
+      "sha256": "c1b097983374744fb05a0f57a8ffa51960e22e3170509ce604ad378d6621192a"
+    }
+  ],
+  "cases": [
+    {
+      "label": "legacy-train",
+      "archive": 0,
+      "prefix": "s09-native-live-training-worker-asan-a1/corpus/runs/Branch-legacy-budget/",
+      "schema_version": 1,
+      "operation": "train"
+    },
+    {
+      "label": "legacy-evaluate",
+      "archive": 0,
+      "prefix": "s09-native-live-training-worker-asan-a1/corpus/runs/Classic-grid-evaluate/",
+      "schema_version": 1,
+      "operation": "evaluate"
+    },
+    {
+      "label": "cold-train",
+      "archive": 1,
+      "prefix": "evaluation/source/runs/Classic-threshold-training100/",
+      "schema_version": 2,
+      "operation": "train"
+    },
+    {
+      "label": "cold-preflight",
+      "archive": 1,
+      "prefix": "evaluation/source/preflights/Classic-threshold-training100/",
+      "schema_version": 2,
+      "operation": "preflight"
+    },
+    {
+      "label": "diagnostic",
+      "archive": 1,
+      "prefix": "evaluation/runs/Classic-threshold-training100/",
+      "schema_version": 3,
+      "operation": "diagnostic-evaluate"
+    },
+    {
+      "label": "contained-preflight",
+      "archive": 2,
+      "prefix": "native-controls/Classic-N0/run/",
+      "schema_version": 4,
+      "operation": "preflight"
+    }
+  ],
+  "scientific_verdict": null
+}

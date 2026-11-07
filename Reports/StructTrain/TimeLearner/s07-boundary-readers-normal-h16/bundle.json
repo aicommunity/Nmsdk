@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_native_boundary_reader_repair_evidence",
+  "schema_version": 1,
+  "root": "90c4074a6d2049b298fd923052112e738db9ae3b",
+  "native_root": "fd8a10b02797ceace0eb87e0d9de4e36bd1e9e62",
+  "native_evidence": "eb0441f31b9ba51155a14e4705e27d75786dbe3b",
+  "acceptance_status": "passed",
+  "archive_sha256": "d3a70a8547e6990aef38dd70ac64dc253538c9db87873f0c763026ee10d902fe",
+  "archive_bytes": 24678,
+  "members": {
+    "owned-supervisor.json": "f5b7f7497b63fe10d5b116e6cd22e2fed0f83f031d5e0dd92ad04ff250c810b0",
+    "native-prerequisite.json": "313ac3bd7636ae9e4fd0100ed0577fa193bd805de87542fe3ffe08948ccfb2cb",
+    "source-hashes.json": "08e8c161ba76e2a119f5e7bc80d169309bf35422927451a102ae7377e37a6719",
+    "owned-readers-cli.json": "b27a93201eea1137058736664a09c33f985b00d2c6d1ebb11e6375b34fc6838d",
+    "terminal.json": "6b9a4b520914922e8df03d4ccff064f545bbe48f26ea950dc1ec5d172745d4e7",
+    "readers-cli.log": "1847d88fe51f464a8a895d5aa16cc11f1fb28d96f3ccfb6211771fbda4571651",
+    "reader-suite.json": "1d4ffdd5661283df3d1fd0b80e69143915827651155383ef09384450de6702e4",
+    "structured-readers/unittest.log": "c513bd60d8b728ff0040ebce32e0dcf8820c6d8fb829e0899a9917d8a2d962b9",
+    "structured-readers/suite.json": "1d4ffdd5661283df3d1fd0b80e69143915827651155383ef09384450de6702e4",
+    "structured-readers/result.json": "130fe4bb67156f3226af3313f60ecce52de4f2e72fdbe612502679c1d68000a3"
+  },
+  "scope": "Same completed native213 and targeted6 primaries; corrected isolated88-reader suite. No numerical rerun, no production auditor/algorithm/tolerance change; original failure retained. All original native primary blobs remain in exact Git paths.",
+  "scientific_verdict": null
+}
