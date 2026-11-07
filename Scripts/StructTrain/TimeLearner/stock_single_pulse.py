@@ -40,6 +40,37 @@ def compare_first_prefix(burst_packet, burst_trace, single_packet, single_trace)
             'scientific_verdict':None}
 
 
+def analyze_pair(row, burst, single):
+    """Analyze verified closed native pairs without recalculating the neuron."""
+    burst,single=Path(burst),Path(single)
+    for directory in (burst,single):
+        require(audit_run_manifest(directory.parent/'run-manifest.json')['run_evidence_consistent'],
+                'single_pulse_run_manifest_inconsistent')
+    for key in ('source_state','original_packet','original_trace'):
+        require(hashlib.sha256(Path(row[key]).read_bytes()).hexdigest()==row[key+'_sha256'],
+                'single_pulse_original_source_changed')
+    require(load(burst/'initial-state.json')['identity'] == load(single/'initial-state.json')['identity'] and
+            load(single/'initial-state.json')['identity']['sha256'] == row['source_model_revision'],
+            'single_pulse_actual_source_graph_changed')
+    burst_packet = load(burst/'probe_trial_1.json');single_packet = load(single/'probe_trial_1.json')
+    replay = compare_traces(load(Path(row['original_packet'])),row['original_trace'],burst_packet,burst/'probe_trial_1.csv')
+    prefix = compare_first_prefix(burst_packet,burst/'probe_trial_1.csv',single_packet,single/'probe_trial_1.csv')
+    require(replay['exact_waveform_reproduced'] and prefix['exact_first_prefix_reproduced'],
+            'single_pulse_control_waveform_changed')
+    _,spec,_,samples,n,quality = read_single_pulse(single_packet,single/'probe_trial_1.csv')
+    peaks = []
+    for i in range(n):
+        values = [number(s['soma'][i]-spec['baseline'][i]) for s in samples]
+        peaks.append({'soma':i,'positive_local_maxima':[
+            {'relative_time':samples[first]['time']-spec['begin'],'raw_potential':samples[first]['soma'][i],
+             'amplitude':values[first],'plateau_end_relative':samples[last]['time']-spec['begin']}
+            for first,last in measured_wave_plateaus(values,number(spec['minimum_amplitude']))]})
+    return {'name':row['name'],'burst_matches_original_Train':replay,'first_prefix':prefix,
+        'single_pulse_waveform_quality':quality,'single_pulse_peaks':peaks,
+        'single_pulse_channels':load(single.parent/'run-manifest.json')['analysis']['channel_diagnostics'],
+        'classification_evaluated':False,'scientific_verdict':None}
+
+
 def run(study,runtime,output,*,process_policy=None,source_threshold=.0117):
     output = Path(output);sources = prepare(study,output,source_threshold=source_threshold);rows = []
     for row in sources['rows']:
@@ -63,29 +94,8 @@ def run(study,runtime,output,*,process_policy=None,source_threshold=.0117):
             folder = output/'runs'/(row['name']+'-'+mode)
             result = run_job('probe',output/'jobs'/row[mode+'_job'],row['source_state'],runtime,folder,900.,process_policy=process_policy)
             require(result['execution'] == 'completed' and result['validity'] == 'valid','single_pulse_native_execution_incomplete')
-            audit_run_manifest(folder/'run-manifest.json')
-        burst = output/'runs'/(row['name']+'-burst')/'native'
-        single = output/'runs'/(row['name']+'-single')/'native'
-        require(load(burst/'initial-state.json')['identity'] == load(single/'initial-state.json')['identity'] and
-                load(single/'initial-state.json')['identity']['sha256'] == row['source_model_revision'],
-                'single_pulse_actual_source_graph_changed')
-        burst_packet = load(burst/'probe_trial_1.json');single_packet = load(single/'probe_trial_1.json')
-        replay = compare_traces(load(Path(row['original_packet'])),row['original_trace'],burst_packet,burst/'probe_trial_1.csv')
-        prefix = compare_first_prefix(burst_packet,burst/'probe_trial_1.csv',single_packet,single/'probe_trial_1.csv')
-        require(replay['exact_waveform_reproduced'] and prefix['exact_first_prefix_reproduced'],
-                'single_pulse_control_waveform_changed')
-        _,spec,_,samples,n,quality = read_single_pulse(single_packet,single/'probe_trial_1.csv')
-        peaks = []
-        for i in range(n):
-            values = [number(s['soma'][i]-spec['baseline'][i]) for s in samples]
-            peaks.append({'soma':i,'positive_local_maxima':[
-                {'relative_time':samples[first]['time']-spec['begin'],'raw_potential':samples[first]['soma'][i],
-                 'amplitude':values[first],'plateau_end_relative':samples[last]['time']-spec['begin']}
-                for first,last in measured_wave_plateaus(values,number(spec['minimum_amplitude']))]})
-        results.append({'name':row['name'],'burst_matches_original_Train':replay,'first_prefix':prefix,
-            'single_pulse_waveform_quality':quality,'single_pulse_peaks':peaks,
-            'single_pulse_channels':load(single.parent/'run-manifest.json')['analysis']['channel_diagnostics'],
-            'classification_evaluated':False,'scientific_verdict':None})
+        results.append(analyze_pair(row,output/'runs'/(row['name']+'-burst')/'native',
+                                    output/'runs'/(row['name']+'-single')/'native'))
         _write(output/'progress.json',results)
     analysis = {'kind':'stock_single_pulse_characterization','schema_version':1,'rows':results,
                 'training_started':False,'classification_evaluated':False,'scientific_verdict':None}
