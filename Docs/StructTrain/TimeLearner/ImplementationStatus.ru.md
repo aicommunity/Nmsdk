@@ -71,6 +71,9 @@ C-trim/PostTune/калибровки. Baseline ответы не подстав�
 все264 invalid по CSV: дополнительные либо недостающие локальные максимумы
 при четырёх фактических импульсах. Причинная физическая интерпретация и
 исправление assignment ещё открыты.
+[Точный replay двух low/Retry candidate](StockWaveReplay.ru.md) после полного
+import/Reset воспроизвёл все soma/input samples и ambiguous. Шесть серверных
+проверок прошли; causal waveform decomposition и single-pulse controls открыты.
 
 Августовские4/8,5/8,6/8 подтверждены не только исходным визуальным наблюдением:
 выполнены [saved-state replay](HistoricalAugustReplay.ru.md) и
