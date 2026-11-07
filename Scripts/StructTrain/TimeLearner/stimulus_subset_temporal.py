@@ -28,9 +28,11 @@ def render(corpus, output, evidence_commit):
         packet=load(folder/'probe_trial_1.json');spec=packet['observation']['specification']
         with (folder/'probe_trial_1.csv').open(newline='',encoding='utf-8') as stream:rows=list(csv.reader(stream))
         samples=[[number(float(value)) for value in row] for row in rows[1:]]
-        key='Branch' if job['model']['branch'] else 'Classic';potentials=[value for row in samples for value in row[2:]]
-        lo,hi=min(potentials+spec['baseline']),max(potentials+spec['baseline'])
-        old=limits.get(key,(lo,hi));limits[key]=(min(lo,old[0]),max(hi,old[1]))
+        key='Branch' if job['model']['branch'] else 'Classic'
+        for c,baseline in enumerate(spec['baseline']):
+            potentials=[row[c+2] for row in samples]+[baseline]
+            lo,hi=min(potentials),max(potentials)
+            old=limits.get((key,c),(lo,hi));limits[key,c]=(min(lo,old[0]),max(hi,old[1]))
         for filename in ['job.json','execution.json','probe_trial_1.json','probe_trial_1.csv','subset-restoration.json']:
             raw=(folder/filename).read_bytes();bindings[name+'/'+filename]={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
         cases.append((name,key,quality,spec,samples,packet['observation']['stimuli']))
@@ -60,8 +62,8 @@ def render(corpus, output, evidence_commit):
                 axes[0].axvline(time,color='gray',linestyle=':',linewidth=.9)
                 axes[0].annotate(event['id'],(time,spec['stimulus_profile']['amplitude']),xytext=(3,5),textcoords='offset points',fontsize=10)
             axes[0].set_ylabel('Native input units');axes[0].legend(loc='upper right',fontsize=10)
-            lo,hi=limits[key];pad=max((hi-lo)*.08,1e-12)
             for c,axis in enumerate(axes[1:]):
+                lo,hi=limits[key,c];pad=max((hi-lo)*.08,1e-12)
                 axis.plot(times,[row[c+2] for row in samples],color='#205bb1',linewidth=1.4,label='Raw soma potential')
                 axis.axhline(spec['baseline'][c],color='gray',linewidth=.7,linestyle='--',label='Declared rest baseline')
                 overlay=axis.twinx();overlay.step(times,source,where='post',color='#ed8a28',alpha=.35,linewidth=.8)
@@ -78,7 +80,7 @@ def render(corpus, output, evidence_commit):
              for path in output.iterdir() if path.is_file()}
     manifest={'kind':'stimulus_subset_temporal_report','schema_version':1,'declared_source_evidence':evidence_commit,
               'primary_file_bindings':bindings,'figures':figures,'figure_files':records,'cases':len(cases),
-              'y_scale':'shared across cases and soma panels within each topology','spike_response':'unknown',
+              'y_scale':'shared across cases for each corresponding soma within a topology','spike_response':'unknown',
               'peak_assignment':'not_performed','scientific_verdict':None}
     (output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     entries='\n'.join('<h2>'+html.escape(row['case']+' / '+row['view'])+'</h2><a href="'+row['svg']+'">SVG</a><br><img style="width:100%;max-width:2240px" src="'+row['png']+'">' for row in figures)
