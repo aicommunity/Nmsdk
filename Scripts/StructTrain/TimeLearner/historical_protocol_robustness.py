@@ -141,7 +141,7 @@ def effective_protocol(path, declared):
             "historical_protocol_effective_iti_changed")
 
 
-def read_observations(folder, declared):
+def read_observations(folder, declared, *, include_signals=False):
     """Use actual native pulses, labels and all edges, not CSV row position."""
     require(type(declared.get("samples")) is list and len(declared["samples"]) == 8 and
             type(declared.get("order")) is list and len(declared["order"]) == 8 and
@@ -219,16 +219,21 @@ def read_observations(folder, declared):
               for i in range(1, 5)] for n in range(len(times))]
     require(all(s == c[1:] for s, c in zip(somas, streams["learner_cached_somas"])),
             "historical_protocol_native_soma_alignment_changed")
-    return {"kind": "historical_frozen_protocol_observations", "schema_version": 1,
+    observation = {"kind": "historical_frozen_protocol_observations", "schema_version": 1,
             "trials": trials, "native_counts": native["reported_counts"],
             "native_correct": native["native_match_count"], "actual_inter_burst_gaps": gaps,
             "pre_stimulus_spikes": [times[i] for i in spikes if times[i] < trials[0]["onset"]],
             "samples": len(times), "all_recorded_windows_complete": True,
             "training_certificate": None, "independent_evaluation": False,
             "scientific_verdict": None}
+    if include_signals:
+        observation["signals"] = {"times": times, "somas": somas,
+            "neuron_soma_sum": [row[0] for row in streams["neuron_soma_sum"]],
+            "stimulus": [row[0] for row in streams["stimulus"]]}
+    return observation
 
 
-def analyze_case(folder):
+def analyze_case(folder, *, include_signals=False):
     """Read a finished native case without recalculating or editing its model."""
     folder = Path(folder).resolve(strict=True);declared = load(folder/"protocol.json")
     source = serialized_neuron(folder/"inputs/Model_00.xml")
@@ -247,7 +252,7 @@ def analyze_case(folder):
                 "historical_protocol_native_process_evidence_invalid")
     effective_protocol(folder/"preflight/work/Model_00.xml", declared)
     effective_protocol(folder/"work/Model_00.xml", declared)
-    observation = read_observations(folder, declared)
+    observation = read_observations(folder, declared, include_signals=include_signals)
     baseline = declared["order"] == list(range(8)) and declared["iti_declared"] == 1.5
     if baseline:
         require((folder/"work/SelectivityLog/results.csv").read_bytes() == (folder/"reference.csv").read_bytes(),
