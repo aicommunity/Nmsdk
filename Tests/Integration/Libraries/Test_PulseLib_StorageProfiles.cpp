@@ -336,4 +336,161 @@ TEST(TimeLearnerStorageProfiles, InvalidRecipesAndCollisionsDoNotChangeExistingP
  ASSERT_TRUE(legacyChannel); EXPECT_DOUBLE_EQ(legacyChannel->Capacity.GetData(), 1e-9);
  core.storage->ReturnObject(legacy); core.storage->ReturnObject(live);
 }
+void EffectiveFeedback(UEPtr<NPulseNeuron> neuron,double body,std::optional<double> lt={})
+{
+ std::vector<NameT> names;neuron->GetComponentsList(names);unsigned membranes=0;
+ for(const auto& name:names)if(auto m=neuron->GetComponentL<NPulseMembrane>(name,true))
+ {
+  ++membranes;EXPECT_DOUBLE_EQ(m->FeedbackGain.GetData(),name=="LTMembrane"?lt.value_or(body):body)<<name;
+ }
+ EXPECT_GT(membranes,0u);if(lt)EXPECT_TRUE(neuron->GetComponentL<NPulseMembrane>("LTMembrane",true));
+}
+
+TEST(StorageFeedbackProfiles,AbsentGainPreservesCustomBaseAndLiveInstances)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ auto original=Take<NPulseMembrane>("NPMembraneBio");ASSERT_TRUE(original);
+ original->SetGlobalTimeStep(2000);original->FeedbackGain=3.5;original->Build();original->Init();
+ RegisterClassImage(core.storage,"TLFeedbackCustomBase35",original);core.storage->ReturnObject(original);
+ auto live=Take<NPulseMembrane>("TLFeedbackCustomBase35");ASSERT_TRUE(live);live->Init();
+ StorageProfileSpec inherit;inherit.name="TLFeedback_Inherit35";inherit.body.baseClass="TLFeedbackCustomBase35";
+ auto a=RegisterStorageProfile(core.storage,core.environment,inherit);
+ auto neuron=Take<NPulseNeuron>(a.neuronClass);ASSERT_TRUE(neuron);neuron->Init();EffectiveFeedback(neuron,3.5);
+ auto zero=inherit;zero.name="TLFeedback_OverrideZero";zero.body.feedbackGain=0.;
+ auto b=RegisterStorageProfile(core.storage,core.environment,zero);
+ auto modified=Take<NPulseNeuron>(b.neuronClass);ASSERT_TRUE(modified);modified->Init();EffectiveFeedback(modified,0.);
+ EXPECT_DOUBLE_EQ(live->FeedbackGain.GetData(),3.5);
+ auto freshBase=Take<NPulseMembrane>("TLFeedbackCustomBase35");ASSERT_TRUE(freshBase);freshBase->Init();
+ EXPECT_DOUBLE_EQ(freshBase->FeedbackGain.GetData(),3.5);
+ core.storage->ReturnObject(freshBase);core.storage->ReturnObject(modified);core.storage->ReturnObject(neuron);core.storage->ReturnObject(live);
+}
+
+TEST(StorageFeedbackProfiles,UniformGainAndSeparateLtSurviveGrowthResetAndXml)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ for(unsigned frequency:{2000u,20000u})
+ {
+  StorageProfileSpec spec;spec.name="TLFeedback_Growth_"+std::to_string(frequency);spec.frequencyHz=frequency;
+  spec.body.feedbackGain=0.;spec.ltMembrane=spec.body;spec.ltMembrane->feedbackGain=.75;
+  const auto profile=RegisterStorageProfile(core.storage,core.environment,spec);
+  auto neuron=Take<NPulseNeuron>(profile.neuronClass);ASSERT_TRUE(neuron);neuron->SetGlobalTimeStep(frequency);
+  neuron->NumSomaMembraneParts=2;neuron->StructureBuildMode=2;
+  neuron->NumDendriteMembranePartsVec=std::vector<int>{1,2};neuron->Build();neuron->Init();
+  auto tip=neuron->GetComponentL<NPulseMembrane>("Dendrite2_2",true);ASSERT_TRUE(tip);
+  auto synapse=tip->GetComponentL<NPulseSynapse>("ExcSynapse1",true);ASSERT_TRUE(synapse);
+  auto channel=tip->GetComponentL<NPulseChannel>("ExcChannel",true);ASSERT_TRUE(channel);
+  synapse->Resistance=333e6;channel->Capacity=1.43e-9;
+  for(const auto& lengths:{std::vector<int>{2,3},std::vector<int>{2,4}})
+  {
+   neuron->NumDendriteMembranePartsVec=lengths;neuron->Build();neuron->Reset();
+   EffectiveFeedback(neuron,0.,.75);Frequency(neuron,frequency);ValidGraph(neuron);
+   EXPECT_DOUBLE_EQ(synapse->Resistance.GetData(),333e6);EXPECT_DOUBLE_EQ(channel->Capacity.GetData(),1.43e-9);
+   ASSERT_TRUE(neuron->GetComponentL<NPulseMembrane>("Dendrite2_3",true));
+  }
+  USerStorageXML xml;ASSERT_TRUE(xml.Create("FeedbackProfile"));
+  ASSERT_TRUE(neuron->SaveComponent(&xml,true,ptPubParameter|ptPubState|pgSystem));ASSERT_TRUE(xml.SelectNode(neuron->GetName()));
+  auto restored=Take<NPulseNeuron>(profile.neuronClass);ASSERT_TRUE(restored);restored->SetGlobalTimeStep(frequency);
+  ASSERT_TRUE(restored->LoadComponent(&xml,true));restored->Init();restored->Reset();
+  EffectiveFeedback(restored,0.,.75);Frequency(restored,frequency);ValidGraph(restored);
+  auto rSyn=restored->GetComponentL<NPulseSynapse>("Dendrite2_2.ExcSynapse1",true);
+  auto rChannel=restored->GetComponentL<NPulseChannel>("Dendrite2_2.ExcChannel",true);
+  ASSERT_TRUE(rSyn);ASSERT_TRUE(rChannel);EXPECT_DOUBLE_EQ(rSyn->Resistance.GetData(),333e6);EXPECT_DOUBLE_EQ(rChannel->Capacity.GetData(),1.43e-9);
+  std::string serialized;ASSERT_TRUE(xml.Save(serialized));Artifact(spec.name+".xml",serialized);
+  core.storage->ReturnObject(restored);core.storage->ReturnObject(neuron);
+ }
+}
+
+TEST(StorageFeedbackProfiles,InvalidGainsFailBeforePublishingAnyDependency)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();unsigned attempt=0;
+ for(double gain:{-1.,std::numeric_limits<double>::quiet_NaN(),std::numeric_limits<double>::infinity()})
+ {
+  StorageProfileSpec spec;spec.name="TLFeedback_Invalid_"+std::to_string(++attempt);spec.body.feedbackGain=gain;
+  const auto count=core.storage->GetNumClasses();
+  EXPECT_THROW(RegisterStorageProfile(core.storage,core.environment,spec),ClassImageError);
+  EXPECT_EQ(core.storage->GetNumClasses(),count);EXPECT_FALSE(core.storage->CheckClass(spec.name+"_Body_ExcChannel"));
+ }
+ StorageProfileSpec spec;spec.name="TLFeedback_InvalidLt";spec.ltMembrane=spec.body;spec.ltMembrane->feedbackGain=std::numeric_limits<double>::quiet_NaN();
+ const auto count=core.storage->GetNumClasses();EXPECT_THROW(RegisterStorageProfile(core.storage,core.environment,spec),ClassImageError);
+ EXPECT_EQ(core.storage->GetNumClasses(),count);
+}
+
+TEST(StorageFeedbackProfiles,GainCollisionPreservesRegisteredAndBasePhysics)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ auto base=Take<NPulseMembrane>("NPMembraneBio");ASSERT_TRUE(base);const auto initial=base->FeedbackGain.GetData();
+ core.storage->ReturnObject(base);
+ StorageProfileSpec spec;spec.name="TLFeedback_Collision";spec.body.feedbackGain=0.;
+ const auto profile=RegisterStorageProfile(core.storage,core.environment,spec);
+ auto live=Take<NPulseNeuron>(profile.neuronClass);ASSERT_TRUE(live);live->Init();
+ spec.body.feedbackGain=3.;EXPECT_THROW(RegisterStorageProfile(core.storage,core.environment,spec),ClassImageError);
+ EffectiveFeedback(live,0.);
+ auto fresh=Take<NPulseNeuron>(profile.neuronClass);ASSERT_TRUE(fresh);fresh->Init();EffectiveFeedback(fresh,0.);
+ auto untouched=Take<NPulseMembrane>("NPMembraneBio");ASSERT_TRUE(untouched);untouched->Init();
+ EXPECT_DOUBLE_EQ(untouched->FeedbackGain.GetData(),initial);
+ core.storage->ReturnObject(untouched);core.storage->ReturnObject(fresh);core.storage->ReturnObject(live);
+}
+
+TEST(FeedbackProfileImages,PreservesCustomChildrenAndRejectsCollisions)
+{
+ const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+ for(unsigned frequency : {2000u,20000u})
+ {
+  const std::string prefix="FeedbackInherited_"+std::to_string(frequency);
+  auto membrane=Take<NPulseMembrane>("NPMembraneBio");ASSERT_TRUE(membrane);
+  membrane->SetGlobalTimeStep(frequency);membrane->Init();membrane->FeedbackGain=3.5;
+  auto channel=membrane->GetComponentL<NPulseChannel>("ExcChannel",true);
+  auto synapse=membrane->GetComponentL<NPulseSynapse>("ExcSynapse1",true);
+  ASSERT_TRUE(channel);ASSERT_TRUE(synapse);
+  channel->Capacity=1.7e-9;synapse->DissociationTC=.007;
+  RegisterClassImage(core.storage,prefix+"_BaseMembrane",membrane);
+  core.storage->ReturnObject(membrane);
+  auto base=Take<NPulseNeuron>("NSPNeuronGen");ASSERT_TRUE(base);
+  base->MembraneClassName=prefix+"_BaseMembrane";base->SetGlobalTimeStep(frequency);base->Init();
+  RegisterClassImage(core.storage,prefix+"_BaseNeuron",base);core.storage->ReturnObject(base);
+  FeedbackStorageProfileSpec spec;spec.name=prefix;spec.frequencyHz=frequency;
+  spec.neuronBaseClass=prefix+"_BaseNeuron";spec.bodyFeedbackGain=0.;
+  const auto registered=RegisterFeedbackStorageProfile(core.storage,core.environment,spec);
+  auto actual=Take<NPulseNeuron>(registered.neuronClass);ASSERT_TRUE(actual);actual->Init();
+  actual->NumSomaMembraneParts=2;actual->StructureBuildMode=2;
+  actual->NumDendriteMembranePartsVec=std::vector<int>{1,2};actual->Build();
+  for(const auto& name : {"Soma1","Soma2","Dendrite1_1","Dendrite2_2"})
+  {
+   auto part=actual->GetComponentL<NPulseMembrane>(name,true);ASSERT_TRUE(part);
+   EXPECT_EQ(part->FeedbackGain.GetData(),0.);
+   auto ch=part->GetComponentL<NPulseChannel>("ExcChannel",true);
+   auto sy=part->GetComponentL<NPulseSynapse>("ExcSynapse1",true);
+   ASSERT_TRUE(ch);ASSERT_TRUE(sy);
+   EXPECT_EQ(ch->Capacity.GetData(),1.7e-9);EXPECT_EQ(sy->DissociationTC.GetData(),.007);
+   EXPECT_TRUE(part->ExcSynapseClassName->empty());
+  }
+  Frequency(actual,frequency);ValidGraph(actual);
+  spec.bodyFeedbackGain=2.;
+  EXPECT_THROW(RegisterFeedbackStorageProfile(core.storage,core.environment,spec),ClassImageError);
+  auto original=Take<NPulseMembrane>(prefix+"_BaseMembrane");ASSERT_TRUE(original);original->Init();
+  EXPECT_EQ(original->FeedbackGain.GetData(),3.5);
+  auto untouched=original->GetComponentL<NPulseChannel>("ExcChannel",true);ASSERT_TRUE(untouched);
+  EXPECT_EQ(untouched->Capacity.GetData(),1.7e-9);
+  core.storage->ReturnObject(original);core.storage->ReturnObject(actual);
+ }
+}
+
+TEST(FeedbackProfileImages,InvalidRequestsPublishNoImagesOrExtraLtMembrane)
+{
+ const auto& core=NmsdkTests::InitEngineForPulseLibTests();
+ FeedbackStorageProfileSpec spec;spec.name="FeedbackInheritedInvalid";
+ for(double gain : {-1.,std::numeric_limits<double>::quiet_NaN(),std::numeric_limits<double>::infinity()})
+ {
+  spec.bodyFeedbackGain=gain;
+  EXPECT_THROW(RegisterFeedbackStorageProfile(core.storage,core.environment,spec),ClassImageError);
+  EXPECT_FALSE(core.storage->CheckClass(spec.name+"_Body_Membrane"));
+  EXPECT_FALSE(core.storage->CheckClass(spec.name+"_Neuron"));
+ }
+ spec.bodyFeedbackGain=0.;spec.ltFeedbackGain=0.;
+ EXPECT_THROW(RegisterFeedbackStorageProfile(core.storage,core.environment,spec),ClassImageError);
+ EXPECT_FALSE(core.storage->CheckClass(spec.name+"_Body_Membrane"));
+ EXPECT_FALSE(core.storage->CheckClass(spec.name+"_LT_Membrane"));
+ EXPECT_FALSE(core.storage->CheckClass(spec.name+"_Neuron"));
+}
+
 }

@@ -1,0 +1,104 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,tarfile,sqlite3
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-worker-limit-preflight-a2';parent='eae3a302185406b841284abdaf407c56b77891b9'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+registry=Reservations(base/'resource-reservations.sqlite3')
+folder=base/'readbacks/s07-stock-fair-frozen-normal-a1'
+closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+def sha(p):
+ h=hashlib.sha256()
+ with p.open('rb') as f:
+  for chunk in iter(lambda:f.read(1024**2),b''):h.update(chunk)
+ return h.hexdigest()
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and sha(archive)==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tar:
+ for m in tar:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tar.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+from Scripts.StructTrain.TimeLearner.artifact_bundle import verify_pipeline_archive
+archive_proof=verify_pipeline_archive(archive,bundle)
+assert archive_proof['run_snapshots_verified']==8
+analysis=json.loads((folder/'analysis.json').read_text())
+assert analysis['validity']=='valid' and analysis['trials']==64 and analysis['completed_training_models']==0
+assert all(m['metrics']['diagnostic_only'] and m['metrics']['evaluation_verdict'] is None for m in analysis['models'])
+
+terminal=json.loads((folder/'terminal.json').read_text())
+assert terminal['temporal_report160_complete'] and not terminal['visual_acceptance_complete'] and not terminal['reservation_errors']
+cache=base/'ReportsCache/stock-fair-frozen-normal-a1'
+manifest=json.loads((cache/'manifest.json').read_text());binding=json.loads((folder/'visual-cache.json').read_text())
+assert sha(cache/'manifest.json')==binding['manifest_sha256']
+assert manifest['trials']==64 and manifest['trial_soma_pairs']==160 and len(manifest['reports'])==8
+prefix='Reports/StructTrain/TimeLearner/s07-stock-fair-evaluation-full-visual-m40-a1'
+payload={}
+for name in ('primary.tar.xz','bundle.json','terminal.json','visual-cache.json','tool-source-hashes.json','analysis.json','tests.json','owner.json','archive-alias-omissions.json'):
+ payload[prefix+'/'+name]=(folder/name).read_bytes()
+payload[prefix+'/fresh-operational-closure.json']=(json.dumps(closed,indent=2)+'\n').encode()
+payload[prefix+'/cache-manifest.json']=(cache/'manifest.json').read_bytes()
+payload[prefix+'/pipeline-archive-verification.json']=(json.dumps(archive_proof,indent=2)+'\n').encode()
+summary=[]
+for row in manifest['reports']:
+ report=cache/row['name'];sums=json.loads((report/'SHA256SUMS.json').read_text())
+ actual={p.relative_to(report).as_posix() for p in report.rglob('*') if p.is_file() and p!=report/'SHA256SUMS.json'}
+ assert actual==set(sums),(row['name'],'incomplete cache inventory')
+ total=0
+ for name,digest in sums.items():
+  p=report/name
+  assert p.resolve().is_relative_to(report.resolve()) and not p.is_symlink()
+  assert sha(p)==digest,(row['name'],name)
+  total+=p.stat().st_size
+ meta=json.loads((report/'manifest.json').read_text())
+ native=base/'readbacks/s07-stock-fair-frozen-normal-a1/study/runs'/row['name']/'run-manifest.json'
+ assert meta['source_manifest_sha256']==sha(native),(row['name'],'native source mismatch')
+ assert meta['diagnostic_only'] and not meta['training_completed']
+ assert meta['recognition_trial_soma_pairs']==row['trial_soma_pairs']
+ payload[prefix+'/cache-metadata/'+row['name']+'/manifest.json']=(report/'manifest.json').read_bytes()
+ payload[prefix+'/cache-metadata/'+row['name']+'/SHA256SUMS.json']=(report/'SHA256SUMS.json').read_bytes()
+ # The nested report carries the actual temporal windows and renderer settings.
+ payload[prefix+'/cache-metadata/'+row['name']+'/evaluation-manifest.json']=(report/'evaluation/manifest.json').read_bytes()
+ summary.append({'name':row['name'],'files_verified':len(sums),'bytes_verified':total,'trial_soma_pairs':row['trial_soma_pairs'],'native_manifest_sha256':sha(native),'cache_manifest_sha256':sha(report/'manifest.json'),'cache_checksums_sha256':sha(report/'SHA256SUMS.json')})
+payload[prefix+'/verification.json']=(json.dumps({'kind':'stock_recovery_full_temporal_cache_verification','source_root':parent,'models':summary,'trials':64,'trial_soma_pairs':160,'all_declared_cache_file_hashes_verified':True,'full_visual_acceptance_complete':False,'large_derived_reports_in_git':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-stock-fair-evaluation-full-visual-m40-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+
+
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+repo=collector;updates={}
+for name,raw in payload.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve64 actual fair-domain diagnostic responses, complete160-pair temporal cache bindings and source provenance without derived image bulk\n')
+git('update-ref','refs/heads/codex/stock-fair-evaluation-full-visual-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'primary_members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'cache_files_verified':sum(r['files_verified'] for r in summary),'cache_bytes_verified':sum(r['bytes_verified'] for r in summary),'trial_soma_pairs':160,'visual_acceptance_complete':False,'new_native_calculations':False}))

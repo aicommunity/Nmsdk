@@ -1,0 +1,56 @@
+{
+  "kind": "assigned_vertex_full_sdk_native_evidence",
+  "parent": "0f03bdca386a59583a3404b8045ce026a147cf07",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "host_role": "elder",
+  "terminal": {
+    "build_passed": true,
+    "unit23_passed": true,
+    "physical21_passed": true,
+    "passed": true,
+    "ASan_build": false,
+    "ledger_metadata_unchanged": true,
+    "heartbeat_errors": [],
+    "classification_evaluated": false,
+    "whole_plan_complete": false
+  },
+  "gates": [
+    {
+      "name": "unit23",
+      "inventory": {
+        "expected": 23,
+        "observed": 23,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "e25e6f85242e8292a71e605b0825ed25358b80787a34e12f699057e2944636f1"
+      },
+      "runtime_fingerprint": "cd6c9ec5d723c32756ad71002634d13267497f44287af2175a6148ad6cb95321",
+      "loaded_files": 16,
+      "binary_sha256": "796d2dfb2d67ed3a5e9b21f29b81f6f70ba01735672a1293fc8d0c9e0c131b1a"
+    },
+    {
+      "name": "physical21",
+      "inventory": {
+        "expected": 21,
+        "observed": 21,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "e5973f5270336f8132352270f507469c17964007bb3290db1a3841fdde51ccc9"
+      },
+      "runtime_fingerprint": "c230e1fec0e778eca6c63c6b8e7f2191c284eca119d93cbf4ce0def889539d19",
+      "loaded_files": 26,
+      "binary_sha256": "ae0558dd90a7179b96fb6416c95ac0974eb3ed767a8e5372c74ffa32eb480714"
+    }
+  ],
+  "reader_tests": 7,
+  "source_hash_records": 782,
+  "all_processes_closed": true,
+  "reservation_state": "released",
+  "full_sdk_cmake_configured": true,
+  "new_cmake_target_verified": true,
+  "physical_model_and_scheduler_executed": true,
+  "shared_vertex_rejected_by_production_certificate": true,
+  "burst_attribution_resolved": false,
+  "scientific_classification_evaluated": false,
+  "whole_plan_complete": false
+}

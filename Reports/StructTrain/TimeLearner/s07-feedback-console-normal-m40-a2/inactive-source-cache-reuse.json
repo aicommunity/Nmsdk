@@ -1,0 +1,63 @@
+{
+  "previous_root": "c5a32b9a33ce5d5c76d2299ed44ffd4bd3edcba0",
+  "new_root": "844b2789ea0c087c1a0f676d9584ce7b8a7a4d36",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+  "build_cache": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+  "prior_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-prepared-model-normal-a2",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-prepared-model-normal-a2-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "edbdd39e14d214c64188892f0eecc01ca4015bb85e023eb7c670a75e88cfa848",
+        "unit": "timelearner-2dc5f08c-e056-4de8-89ba-2cb08f0cf07d.service",
+        "invocation_id": "a664f805f1a8436e89c6e430554be783",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2dc5f08c-e056-4de8-89ba-2cb08f0cf07d.service",
+        "initial_main_pid": 1489286,
+        "initial_start_ticks": "309994231",
+        "sha256": "ea32bbeee2b16a34c9ff1c8fe8865f1e5e90dbf5f5155bbf4c296e1b4bb600da"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-2dc5f08c-e056-4de8-89ba-2cb08f0cf07d.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "ecf7671a-6271-4d4c-9056-cc089811544b",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "changed_native_CPP_files": [
+    "App/NeuroModelerConsole/TimeLearnerFeedbackProfileImport.h",
+    "App/NeuroModelerConsole/TimeLearnerProbeJob.cpp",
+    "Libraries/Nmsdk-PulseLib"
+  ],
+  "old_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-console-normal-a1",
+  "new_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-console-normal-a2",
+  "old_runtime_bytes_protected": true
+}

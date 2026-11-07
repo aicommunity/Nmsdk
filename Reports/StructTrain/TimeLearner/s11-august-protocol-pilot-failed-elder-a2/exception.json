@@ -1,0 +1,4 @@
+{
+  "reason": "historical_protocol_effective_neuron_changed",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-august-protocol-pilot-elder-a2-worker.py\", line 49, in <module>\n    observation=run_case(source,runtime,out/case['id'],order,case['iti'])\n  File \"/home/user/timelearner-refactor/source-august-protocol-controls-a2/Scripts/StructTrain/TimeLearner/historical_protocol_robustness.py\", line 206, in run_case\n    require(identity[\"sha256\"] == recognition_identity(source_identity, THRESHOLD),\n  File \"/home/user/timelearner-refactor/source-august-protocol-controls-a2/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: historical_protocol_effective_neuron_changed\n"
+}

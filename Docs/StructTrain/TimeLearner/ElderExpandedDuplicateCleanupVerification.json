@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_expanded_duplicate_cleanup_verification",
+  "data_commit": "8d627bed46df93a2e96e49647da7d56c03134f50",
+  "attempts": [
+    {
+      "attempt": 1,
+      "archive_members_checked": 6,
+      "archive_bytes": 4704,
+      "archive_sha256": "e37e22a8112820a414a0e39793fedb1e144a44d200a6968b09a84fed135b3684",
+      "cleanup_passed": false
+    },
+    {
+      "attempt": 2,
+      "archive_members_checked": 9,
+      "archive_bytes": 254688,
+      "archive_sha256": "bfe7d681e2468c5c6b1d5754374e5021f9376c94c38cc5fee0037f5d776a1fab",
+      "cleanup_passed": false
+    },
+    {
+      "attempt": 3,
+      "archive_members_checked": 11,
+      "archive_bytes": 367724,
+      "archive_sha256": "ce29d64f1845debeec47d9dc2bd4569dc50d2fc02bf4ba384c620ff77e8f3f78",
+      "cleanup_passed": true
+    }
+  ],
+  "removed_files_checked_against_original_git_manifest": 3907,
+  "logical_bytes_removed": 1489206262,
+  "native_models_executed": 0,
+  "local_numerical_tests_executed": 0,
+  "whole_plan_complete": false
+}

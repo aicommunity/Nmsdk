@@ -1,0 +1,100 @@
+{
+  "normal": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-single-pulse-console-normal-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "84ecd43002d802ecc7f9d65bcc1db8e909f964a8ead2e36ccf9e421261f73480",
+        "unit": "timelearner-6469768c-8bc8-4fcb-92c9-319c02f054e0.service",
+        "invocation_id": "ee356fe62f764b3e8450d71b4115978a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6469768c-8bc8-4fcb-92c9-319c02f054e0.service",
+        "initial_main_pid": 1426313,
+        "initial_start_ticks": "309285308",
+        "sha256": "77dcc21903e968519164a602faccb0e648e68241bce182b641a484753fec6282"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-6469768c-8bc8-4fcb-92c9-319c02f054e0.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "31203e22-f0a8-47cd-a8f4-42b2adf30a43",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "previous_ASan": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-native-channel-diagnostics-asan-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-asan-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "99b76a7d1cf37ea81f1e9b6626d4ff467fd0411e3effc45eea0910aa537f82b0",
+        "unit": "timelearner-1aa670b4-ca1a-4a2a-aa63-6dd2c3f3c926.service",
+        "invocation_id": "b6ab5b079aa34fc4a3249e18cfa9b184",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1aa670b4-ca1a-4a2a-aa63-6dd2c3f3c926.service",
+        "initial_main_pid": 1397520,
+        "initial_start_ticks": "308924906",
+        "sha256": "5705eb1b49a4af4b921acbcf395798a728a3ec394e203e1383e8db211aa02848"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-1aa670b4-ca1a-4a2a-aa63-6dd2c3f3c926.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "f672e959-fe3a-48a1-a18b-642a572bf545",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  }
+}

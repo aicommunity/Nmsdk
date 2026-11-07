@@ -1,0 +1,94 @@
+{
+  "observed_utc": "2026-11-06T22:11:33.594857+00:00",
+  "pid": 1292040,
+  "start_ticks": "307579961",
+  "process_state": "S",
+  "identity_matches": true,
+  "progress": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 8,
+        "channels_checked": 16,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Classic-threshold-low-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "7551c43adae0f5986f6eff0b5ae302bffbdabdca0f09978ea36abe4cdd33bd12",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 65,
+        "channels_checked": 130,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "913bd90b0a27697f237f08771db1b9431db64a86ac5d43a192f7610a80d71d04",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 61,
+        "channels_checked": 122,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Classic-threshold-training100-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "70a6e591387d442b42458bf9f450eba43635b64b244c7c5c70e77ece37552465",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 49,
+        "channels_checked": 98,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 3,
+        "channels_checked": 6,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    },
+    {
+      "name": "Branch-threshold-low-advance32",
+      "training_outcome": "invalid_observation",
+      "completed_boundary": false,
+      "model_revision": "3cabb091b8661c96703eb6f477570e8f28ea47d57d3c9ec3e342383751dec8cd",
+      "final_stock_physics": {
+        "lt_membrane": false,
+        "membranes_checked": 31,
+        "channels_checked": 62,
+        "threshold_unchanged": true,
+        "feedback_connections_unchanged": true
+      }
+    }
+  ],
+  "kind": "stock_fair_domain_live_progress_observation",
+  "schema_version": 1,
+  "host": "10.245.1.17",
+  "job_id": "s07-stock-fair-domains-normal-a2",
+  "preliminary_until_full_study_verified": true,
+  "classification_assessed": false,
+  "whole_plan_complete": false
+}

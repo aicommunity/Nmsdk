@@ -1,0 +1,75 @@
+{
+  "kind": "stock_recovery_cli_gate",
+  "schema_version": 1,
+  "source_root": "6226ca3d3631187eab7e02693515ae1f0ee2679f",
+  "operations": [
+    {
+      "label": "help",
+      "returncode": 0,
+      "owner": {
+        "pid": 1173497,
+        "start_ticks": "306293107"
+      },
+      "closed": true,
+      "wall_seconds": 0.052292823791503906,
+      "arguments": [
+        "--help"
+      ]
+    },
+    {
+      "label": "old-help",
+      "returncode": 0,
+      "owner": {
+        "pid": 1173498,
+        "start_ticks": "306293112"
+      },
+      "closed": true,
+      "wall_seconds": 0.05114030838012695,
+      "arguments": [
+        "stock-threshold-study",
+        "--help"
+      ]
+    },
+    {
+      "label": "prepare",
+      "returncode": 0,
+      "owner": {
+        "pid": 1173499,
+        "start_ticks": "306293117"
+      },
+      "closed": true,
+      "wall_seconds": 0.7065730094909668,
+      "arguments": [
+        "stock-recovery-study",
+        "prepare",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-failure-production-visual-a1/restored/study",
+        "--runtime-manifest",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-cli-a1/runtime.json",
+        "--code-identity",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-cli-a1/code-identity.json",
+        "--output",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-cli-a1/prepared"
+      ]
+    },
+    {
+      "label": "incomplete-analyze",
+      "returncode": 2,
+      "owner": {
+        "pid": 1173502,
+        "start_ticks": "306293202"
+      },
+      "closed": true,
+      "wall_seconds": 0.2740018367767334,
+      "arguments": [
+        "stock-recovery-study",
+        "analyze",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-cli-a1/prepared",
+        "--output",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-recovery-cli-a1/must-not-exist.json"
+      ]
+    }
+  ],
+  "prepared_conditions": 8,
+  "new_native_training": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,62 @@
+{
+  "previous_root": "56ac50c9f0217f82f284ea9e277bfb4137c7ccc2",
+  "new_root": "920d42a700d9d3f3477bd94c4aac9d145ea73cac",
+  "source": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+  "build_cache": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+  "prior_closed_released": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-isi-template-baseline-normal-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-isi-template-baseline-normal-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "3419bc435c496df5b7e2ec482a76758d3f72c697f5bfd579ab608737ce85c64e",
+        "unit": "timelearner-98e95e9b-83f5-4058-b20e-56691f21b289.service",
+        "invocation_id": "92032a7c7e3f48be8b6ad75b266962c2",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-98e95e9b-83f5-4058-b20e-56691f21b289.service",
+        "initial_main_pid": 1327660,
+        "initial_start_ticks": "308016706",
+        "sha256": "87788770308e5b4ebc6a80ad49cd8e966db38907735fb191f730f0d4fc6fa1d1"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-98e95e9b-83f5-4058-b20e-56691f21b289.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "4912e9d1-a4b1-4e9e-bbee-15f6da470473",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "only_code_change": [
+    "Tests/Integration/Libraries/Test_PulseLib_IsiTemplateValidation.cpp"
+  ],
+  "old_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-baseline-normal-a1",
+  "new_runtime": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-baseline-normal-a3",
+  "prior_fixture_limitation": "a1 checked a cleared trial flag; corrected fixture inspects retained output",
+  "algorithm_cpp_unchanged": true
+}

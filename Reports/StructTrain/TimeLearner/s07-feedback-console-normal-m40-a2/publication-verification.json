@@ -1,0 +1,80 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-feedback-console-normal-a2",
+      "members": 1555,
+      "archive_bytes": 8078168,
+      "archive_sha256": "8f7a7f741763ae1547b7ed8a0817c4a0ea133afc45a7ae81d272de6218fa26b4"
+    }
+  ],
+  "terminal": {
+    "build_passed": true,
+    "native_gates_executed": true,
+    "feedback_profile_scoped_acceptance_passed": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "native_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 26,
+      "observed": 26,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "65dcaa567908e38e86e35284462d4d51045ac0a79d86bcd049ad43887b8b257a"
+    },
+    "scientific_verdict": null
+  },
+  "profile_reader_result": {
+    "tests_run": 11,
+    "successful": false,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "eight_protected_runtimes_unchanged": true,
+  "paired_baseline_checks": [
+    {
+      "name": "Branch-threshold-low-retry32-burst-baseline",
+      "same_sample_count": true,
+      "relative_clock_equal_with_roundoff": true,
+      "stimulus_samples_exactly_equal": true,
+      "soma_samples_exactly_equal": true,
+      "exact_waveform_reproduced": true
+    },
+    {
+      "name": "Branch-threshold-low-retry32-single-baseline",
+      "same_sample_count": true,
+      "relative_clock_equal_with_roundoff": true,
+      "stimulus_samples_exactly_equal": true,
+      "soma_samples_exactly_equal": true,
+      "exact_waveform_reproduced": true
+    },
+    {
+      "name": "Classic-threshold-low-retry32-burst-baseline",
+      "same_sample_count": true,
+      "relative_clock_equal_with_roundoff": true,
+      "stimulus_samples_exactly_equal": true,
+      "soma_samples_exactly_equal": true,
+      "exact_waveform_reproduced": true
+    },
+    {
+      "name": "Classic-threshold-low-retry32-single-baseline",
+      "same_sample_count": true,
+      "relative_clock_equal_with_roundoff": true,
+      "stimulus_samples_exactly_equal": true,
+      "soma_samples_exactly_equal": true,
+      "exact_waveform_reproduced": true
+    }
+  ],
+  "classification_evaluated": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

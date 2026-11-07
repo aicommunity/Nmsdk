@@ -4,6 +4,46 @@ message(STATUS "Libraries integration tests directory created")
 
 set(PULSELIB_TEST_OUTPUT_DIR "${DEPLOY_ROOT}")
 
+# Fast observer/clock checks compile the actual production implementation.
+# Keep the same cases in the full storage target: this unit executable does
+# not replace native lifecycle, storage, routing or physical response gates.
+add_executable(Test_PulseLib_ProbeAlgorithms
+    Test_PulseLib_ProbeObservation.cpp
+    ../Support/ProbeAlgorithmMain.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp
+)
+target_link_libraries(Test_PulseLib_ProbeAlgorithms PRIVATE GTest::gtest Nmsdk::Qt::Core)
+set_target_properties(Test_PulseLib_ProbeAlgorithms PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PULSELIB_TEST_OUTPUT_DIR}"
+)
+add_test(NAME PulseLib_ProbeAlgorithms COMMAND Test_PulseLib_ProbeAlgorithms)
+set_tests_properties(PulseLib_ProbeAlgorithms PROPERTIES
+    WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner")
+
+# Exercise certificate validation against the production implementations.
+# Physical storage/scheduler checks remain in StorageComponents below.
+add_executable(Test_PulseLib_VerificationAlgorithms
+    Test_PulseLib_FinalVerification.cpp
+    ../Support/ProbeAlgorithmMain.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/FinalVerification.cpp
+)
+target_link_libraries(Test_PulseLib_VerificationAlgorithms PRIVATE GTest::gtest Nmsdk::Qt::Core)
+set_target_properties(Test_PulseLib_VerificationAlgorithms PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PULSELIB_TEST_OUTPUT_DIR}"
+)
+add_test(NAME PulseLib_VerificationAlgorithms COMMAND Test_PulseLib_VerificationAlgorithms)
+set_tests_properties(PulseLib_VerificationAlgorithms PROPERTIES
+    WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner")
+
 add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageComponents.cpp
     Test_PulseLib_DatasetFileValidation.cpp
@@ -11,6 +51,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_NeuronGrowth.cpp
     Test_PulseLib_TimeLearnerResistance.cpp
     Test_PulseLib_Observations.cpp
+    Test_PulseLib_IsiTemplateValidation.cpp
     Test_PulseLib_LifecycleContracts.cpp
     Test_PulseLib_TimingPropertyContracts.cpp
     Test_PulseLib_HotReadoutReset.cpp
@@ -26,10 +67,15 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_ProbeObservation.cpp
     Test_PulseLib_NativeProbe.cpp
     Test_PulseLib_NativeExecution.cpp
+    Test_PulseLib_SinglePulseCharacterization.cpp
+    Test_PulseLib_PreparedModel.cpp
     Test_PulseLib_FinalVerification.cpp
     Test_PulseLib_BoundedTraining.cpp
     Test_PulseLib_MeasuredResistanceSearch.cpp
     Test_PulseLib_MeasuredLengthSearch.cpp
+    Test_PulseLib_MeasuredCapacitanceSearch.cpp
+    Test_PulseLib_TrainingCapacitance.cpp
+    Test_PulseLib_CapacitanceContexts.cpp
     Test_PulseLib_NativeModelEditor.cpp
     Test_PulseLib_InitialThreshold.cpp
     Test_PulseLib_CalibrationOwnership.cpp

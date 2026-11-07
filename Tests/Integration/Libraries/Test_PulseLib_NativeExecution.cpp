@@ -57,7 +57,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -67,7 +67,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     ASSERT_GE(inputCount,1u);ASSERT_LE(inputCount,6u);
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
-        (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"");
+        (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"");
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
@@ -128,6 +128,13 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     {
         const auto id="pulse"+std::to_string(i);spec.expectedStimulusIds.push_back(id);
         if(!branch || int(i)==active)spec.windows.push_back({"input"+std::to_string(i),branch?0u:i,onsets[i]-.001,onsets[i]+.06,id});
+    }
+    if(sharedVertex)
+    {
+        ASSERT_FALSE(branch);ASSERT_TRUE(mergedBurst);ASSERT_EQ(observationSchema,2u);ASSERT_EQ(inputCount,2u);
+        // Observe one real soma twice under different pulse labels. The
+        // historical recorder remains diagnostic; certification must refuse.
+        spec.windows[1].channel=0;
     }
     if(interference==Interference::WrongObservationChannel)spec.windows[0].channel=1;
     if(interference==Interference::WrongSoloSelector)request.activeInput=1-active;
@@ -278,6 +285,35 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             // Two real emissions have merged into one physical response wave.
             // WindowOnly labels that same response independently for each input.
             EXPECT_TRUE(observed.valid);EXPECT_TRUE(observed.burstAssignments.empty());
+            if(sharedVertex)
+            {
+                ASSERT_TRUE(observed.valid);ASSERT_TRUE(result->prepared);ASSERT_EQ(observed.peaks.size(),2u);
+                ASSERT_EQ(observed.peaks[0].time,observed.peaks[1].time);
+                ASSERT_EQ(observed.peaks[0].plateauEnd,observed.peaks[1].plateauEnd);
+                VerificationProtocol protocol;protocol.schemaVersion=2;protocol.routing=ProbeRouting::ClassicBurst;
+                protocol.revision=prototype.protocolRevision;protocol.sampleId=observed.specification.sampleId;
+                protocol.patternHash=observed.specification.patternHash;protocol.originStimulusId="pulse0";
+                protocol.maximumSampleGap=1./frequency;protocol.stimulusProfile=observed.specification.stimulusProfile;
+                protocol.stimulusIds={"pulse0","pulse1"};protocol.inputs={{"input0","pulse0"},{"input1","pulse1"}};
+                std::string rejection;
+                try{ValidateProbeMeasurement(protocol,0,*result->prepared,observed);}
+                catch(const std::invalid_argument& error){rejection=error.what();}
+                EXPECT_EQ(rejection,"shared_measured_peak_between_stimuli");
+                std::vector<ReferenceEvidence> evidence;
+                for(const auto& input:protocol.inputs)
+                {auto context=*result->prepared;context.inputId=input.id;evidence.push_back({context,observed});}
+                EXPECT_THROW(CapturedReferences::Capture(protocol,evidence),std::invalid_argument);
+                if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+                {
+                    QFile file(QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"_certificate_guard.json");
+                    ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                    const auto bytes=QJsonDocument(QJsonObject{{"kind","native_shared_vertex_certificate_guard"},
+                        {"schema_version",1},{"observation",BoundedProbeArtifact(*result->prepared,observed)},
+                        {"rejection",QString::fromStdString(rejection)},{"native_pattern",configuredPattern},
+                        {"model_revision",QString::fromStdString(base)},{"scientific_training_result",false}}).toJson();
+                    ASSERT_EQ(file.write(bytes),bytes.size());
+                }
+            }
         }
         else
         {
@@ -568,6 +604,8 @@ TEST(NativeBurstAssignment, Branch20000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3);}
 TEST(NativeBurstAssignment, MergedClassicWindowOnly2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,2,true);}
+TEST(NativeBurstAssignment, SharedClassicVertexCannotCertify2000)
+{ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,2,true,false,true);}
 TEST(NativeBurstAssignment, MergedClassicWholeBurst2000)
 {ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,true);}
 TEST(NativeBurstAssignment, MergedBranchWindowOnly2000)

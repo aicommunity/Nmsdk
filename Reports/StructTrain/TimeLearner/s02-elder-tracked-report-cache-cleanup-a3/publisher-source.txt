@@ -1,0 +1,41 @@
+from pathlib import Path
+import os,json,hashlib,subprocess,tarfile
+base=Path('/home/user/timelearner-refactor');source=base/'source-report-sparse-cleanup-evidence-a1';parent='00ebc7286726c7d26c9fca2fff1baab0089123c1'
+folder=Path('/tmp/timelearner-elder-report-sparse-cleanup-a3')
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tar:
+ for m in tar:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tar.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['primary_git_objects_preserved_and_verified'] and not terminal['unique_experiment_data_deleted']
+fresh=[]
+for row in terminal['repositories']:
+ root=Path(row['root']);assert root.resolve().parent==base.resolve()
+ head=subprocess.check_output(['git','-C',str(root),'rev-parse','HEAD'],text=True).strip();assert head==row['head']
+ status=subprocess.check_output(['git','-C',str(root),'status','--porcelain','--untracked-files=all'],text=True)
+ assert not status
+ assert not (root/'Reports').exists()
+ fresh.append({'root':str(root),'head':head,'status':status,'Reports_materialized':False})
+payload={};prefix='Reports/StructTrain/TimeLearner/s02-elder-tracked-report-cache-cleanup-a3'
+for name in ['primary.tar.xz','bundle.json','terminal.json','local-git-recovery-proof.json','prior-attempt.json']:
+ payload[prefix+'/'+name]=(folder/name).read_bytes()
+payload[prefix+'/fresh-worktree-status.json']=(json.dumps(fresh,indent=2)+'\n').encode()
+for label in ['a1','a2']:
+ payload[prefix+'/prior-setup/'+label+'-producer.txt']=(Path('/tmp')/('timelearner-elder-report-sparse-cleanup-'+label)/'producer.txt').read_bytes()
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-elder-tracked-report-cache-cleanup-a3';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for packet in (source/'.git/objects/pack').glob('*.pack'):
+ with packet.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(collector/'publication-index'))
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+git('read-tree',parent)
+for name,raw in payload.items():
+ oid=git('hash-object','-w','--stdin',data=raw);git('update-index','--add','--cacheinfo','100644',oid,name)
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',git('write-tree','--missing-ok'),'-p',parent,data=b'Preserve full Git-blob proof for retiring two inactive Elder Reports materializations\n')
+git('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'members':len(seen),'removed_worktree_materializations':sum(r['removed_tracked_materializations'] for r in terminal['repositories']),'unique_git_blobs_verified':json.loads((folder/'local-git-recovery-proof.json').read_text())['unique_blob_payloads_read_and_verified'],'free_before':terminal['free_bytes_before'],'free_after':terminal['free_bytes_after']}))
