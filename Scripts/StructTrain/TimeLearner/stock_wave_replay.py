@@ -34,15 +34,16 @@ def select_packet(package):
     return packet
 
 
-def prepare(study, output):
+def prepare(study, output, *, source_threshold=.0117):
     study, output = Path(study).resolve(strict=True), Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(study) and
             not study.is_relative_to(output), 'wave_replay_output_overlap_or_exists')
+    require(number(source_threshold) > 0, 'wave_replay_invalid_source_threshold')
     original = audit_design(study)
-    selected = sorted((r for r in original['rows'] if r['initial_threshold'] == .0117 and
+    selected = sorted((r for r in original['rows'] if r['initial_threshold'] == source_threshold and
                        r['policy'] == 'retry_same_candidate'), key=lambda r: r['name'])
     require(len(selected) == 2 and {r['topology'] for r in selected} == {'Classic', 'Branch'},
-            'wave_replay_requires_both_low_retry_controls')
+            'wave_replay_requires_both_selected_threshold_retry_controls')
     jobs, rows = [], []
     for row in selected:
         source = study/'runs'/row['name']/'native/train_stopped_state.json'
