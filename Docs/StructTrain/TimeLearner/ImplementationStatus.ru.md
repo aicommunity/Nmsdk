@@ -138,6 +138,8 @@ Compiled receipts сохраняют прежний Bin37ff: действующ�
 [Legacy ISI-template analyzer](IsiTemplateValidationNormalVerification.json):
 корректный baseline воспроизвёл4 regression failures при5 passing controls;
 исправленный Pulsefe382a0 прошёл12/12 на M40. Baseline/fixed primary и source
-hashes опубликованы. ASan, второй сервер и весь analyzer scope ещё открыты.
+hashes опубликованы. [Адресный ASan](IsiTemplateValidationAsanVerification.json)
+того же root87/Pulsefe также прошёл12/12 на M40; libasan фактически загружен,
+detect_leaks=0. Второй сервер и весь analyzer scope ещё открыты.
 MatchMode1 сравнивает вход с шаблоном, не доказывает ответ нейрона и не объясняет
 InvalidObservation native V2 stock Train.
