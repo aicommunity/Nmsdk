@@ -24,14 +24,14 @@ pulse3, подтверждая запрет подмены индивидуал�
 
 | Срез | Подтверждено и ограничения |
 |---|---|
-| Принятый root develop | `a0cd8a96540e5e9426a716766d4495829940dfcc`; добавлен принятый maintenance-подэтап Elder, не приёмка всего этапа 2 |
-| Принятые PulseLib / Bin / Rdk | `0ec9193e6620ae2439329eece5ecd6d6f167c70a` / `fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f` / `10e9d05aa658dd2203c89bc84ba9166595b50014` |
+| Принятый root develop | `1d1c8e5dc3e50bca51c174d9552feab4a5ccf5d9`; принята отдельная группа16 LTZ drivers, не весь этап9 |
+| Принятые PulseLib / Bin / Rdk | `0ec9193e6620ae2439329eece5ecd6d6f167c70a` / `b4f66eb137d3e1c19539890dbdee06faa3e1020b` / `10e9d05aa658dd2203c89bc84ba9166595b50014` |
 | Общий ASan SDK | root2e061/Pulse12d: 133/133; не подтверждает последующие изменения |
 | Baseline recovery SDK | root84d6/Pulse416: normal118 и адресный ASan19 приняты; stock Train/evaluation завершены |
 | Fair-domain compiled SDK | root36f598/Pulse8f057: normal137/137 и адресный ASan38/38 на M40; общая приёмка в develop ещё открыта |
 | Исторический documentation snapshot PulseLib | `2f6b57253bd7ae380a19320ef3835a2701cb4d30`; Core совпадает с tested8f; это не текущий HEAD feature |
 | Storage feature документация PulseLib | `3e19cdb97566d6f7e09ff2bc0804115eb59204f9`; Core совпадает с compiled1f97 и Elder8702. Добавлены Train/Test peak contract, диагностика наложения и Elder normal gate; scope runtime не расширен |
-| Новый кандидат измерителя | Core PulseLib6c520fb: explicit schema5 single-impulse maximum; [unit ASan34](ProbeAlgorithmsASan.ru.md) на M40 и [normal38/readers25/unit34](SingleImpulseMaximumElderAcceptance.ru.md) на Elder приняты на root629/Pulse24f. A1 failure сохранён. [Console replay stock multi-peak](SingleMaximumConsoleReplay.ru.md): Root038/Pulse217,4 native operations,5 design tests, exact archived and A/B waveforms; [physical ASan38/readers25](SingleImpulseMaximumPhysicalASan.ru.md) Root038/Pulse217 принят; [normal N1/2/4/6 matrix9/readers10](SingleImpulseMaximumDimensionMatrix.ru.md) RootE91/Pulse217 принята; её ASan выполняется, whole-burst assignment открыт; [контракт](SingleImpulseMaximum.ru.md) |
+| Новый кандидат измерителя | Core PulseLib6c520fb: explicit schema5 single-impulse maximum; [unit ASan34](ProbeAlgorithmsASan.ru.md) на M40 и [normal38/readers25/unit34](SingleImpulseMaximumElderAcceptance.ru.md) на Elder приняты на root629/Pulse24f. A1 failure сохранён. [Console replay stock multi-peak](SingleMaximumConsoleReplay.ru.md): Root038/Pulse217,4 native operations,5 design tests, exact archived and A/B waveforms; [physical ASan38/readers25](SingleImpulseMaximumPhysicalASan.ru.md) Root038/Pulse217 принят; [normal N1/2/4/6 matrix9/readers10](SingleImpulseMaximumDimensionMatrix.ru.md) RootE91/Pulse217 принята; её ASan9/readers10 на M40 также принята, whole-burst assignment открыт; [контракт](SingleImpulseMaximum.ru.md) |
 | Prepared-owner / storage Console SDK | M40 root844b278/Pulse1f97: normal26, readers29+9+2, Console12 и4 exact baseline pairs. Elder rootac9/Pulse8702: normal163/readers19. M40 rootb97/Pulse8702: ASan26/readers19 приняты; Console12 на Elder открыты |
 | Single-pulse ASan SDK | root5d0b80/Pulse302: M40 native37, Console4 иPython42. Это предыдущий SDK, без нового storage API |
 | Worker-limit Python SDK | rooteae3: 26/26 на каждом сервере; не проверка нейронного обучения |
@@ -152,7 +152,7 @@ runtime/effective-factor matrix этим не закрывается.
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration222:220 retired+2 moved; семь исторических XML patchers приняты без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
+|9. Скрипты|Корневой пакет и CLI работают; migration238:236 retired+2 moved; последние16 LTZ drivers приняты обоими серверами без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
@@ -178,7 +178,7 @@ runtime/effective-factor matrix этим не закрывается.
 [capabilities](ControllerCapabilities.ru.md),
 [parameter contracts](ParameterControlContracts.ru.md),
 [readiness](ExperimentReadiness.ru.md). Полная lifecycle/storage/growth и
-legacy/V2 матрица остаётся открытой. Migration222 (220 retired+2 moved) не равна
+legacy/V2 матрица остаётся открытой. Migration238 (236 retired+2 moved) не равна
 всему inventory; остаются22 AsymRm Python и другие инструменты. Полная scheduler,
 recovery, publication fault matrix и effective-factor attestation не закрыты.
 Компонентные страницы PulseLib актуализированы.
@@ -371,3 +371,27 @@ A/B сохранил все поля двух прежних low summaries. Но
 members/375 tool hashes; group closed/lease released. [Читаемый отчёт](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md)
 показывает single peak иburst3/4 иявно отделяет гипотезу наложения от доказанного
 механизма. Визуальная приёмка всего cache и новая классификация не заявляются.
+
+
+## Последние принятые изменения 07.11
+
+[Размерная матрица single maximum](SingleImpulseMaximumDimensionMatrix.ru.md)
+подтверждена normal иASan: по9 native IDs и10 readers, по16 физических условий
+Classic/Branch ×N1/2/4/6 ×2000/20000 и6 fault captures. Это диагностический
+одиночный импульс, N1 fixture/threshold100. Реальное обучение полной пачкой,
+N0/полная physics matrix иConsole подASan этим не закрыты. Последний ASan
+worker завершён, whole group closed/lease released; повтор не запущен.
+
+[Миграция16 LTZ drivers](LtzDriverRetirement.ru.md) вошла в Bin/root develop
+через merge commits. Production history238 и restored-path negative прошли
+на обоих серверах. Все архивные исходники238 записей и288 actual tool hashes
+каждого worker сверены независимо; configs/models/primary не изменены.
+Остаются два LTZ copy helpers с внешними callers и17 Python tools этого
+каталога, другие группы scripts также требуют review. Stage9 partial.
+
+Уточнение пользователя о слившейся общей вершине применяется как консервативная
+рабочая политика: её нельзя выдать за два независимо подтверждённых пика
+закреплённых импульсов. Это unresolved assignment, а не доказательство
+PhysicalInfeasible или отсутствия вклада импульса. Научная неопределённость
+сохранена; одиночный отклик с меньшими добавочными максимумами — другой случай.
+Все исходные этапы1–12 по-прежнему частичны, цель полного плана активна.
