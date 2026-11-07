@@ -37,8 +37,8 @@ def compare_first_prefix(burst_packet, burst_trace, single_packet, single_trace)
             'scientific_verdict':None}
 
 
-def run(study,runtime,output,*,process_policy=None):
-    output = Path(output);sources = prepare(study,output);rows = []
+def run(study,runtime,output,*,process_policy=None,source_threshold=.0117):
+    output = Path(output);sources = prepare(study,output,source_threshold=source_threshold);rows = []
     for row in sources['rows']:
         baseline = load(output/'jobs'/(row['name']+'.json'))
         baseline.update(schema_version=3,channel_diagnostics=True);baseline = _signed(baseline)
@@ -92,7 +92,8 @@ def run(study,runtime,output,*,process_policy=None):
 def main():
     p = argparse.ArgumentParser(description=__doc__);p.add_argument('study',type=Path)
     p.add_argument('--runtime',required=True,type=Path);p.add_argument('--output',required=True,type=Path)
-    a = p.parse_args();print(json.dumps(run(a.study,a.runtime,a.output),indent=2))
+    p.add_argument('--source-threshold',type=float,default=.0117,help='Select archived source conditions; never change the model threshold')
+    a = p.parse_args();print(json.dumps(run(a.study,a.runtime,a.output,source_threshold=a.source_threshold),indent=2))
 
 
 if __name__ == '__main__':main()
