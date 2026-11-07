@@ -6,7 +6,7 @@ import textwrap
 from .native_evidence import EvidenceError, require
 
 
-def figure_title(fig, text):
+def figure_title(fig, text, *, font_sizes=(11, 10, 9)):
     """Keep complete identifiers inside the title band of the fixed-size page.
 
     Measuring the actual backend avoids clipping long trial paths while keeping
@@ -16,7 +16,7 @@ def figure_title(fig, text):
                                       break_on_hyphens=False)
                         for line in text.splitlines())
     title = fig.suptitle(wrapped, y=.98, fontsize=11)
-    for size in (11, 10, 9):
+    for size in font_sizes:
         title.set_fontsize(size)
         fig.canvas.draw()
         bounds = title.get_window_extent(fig.canvas.get_renderer())
