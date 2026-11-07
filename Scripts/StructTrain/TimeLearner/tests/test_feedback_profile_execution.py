@@ -21,7 +21,7 @@ class FeedbackProfileExecutionTest(unittest.TestCase):
             result=audit_execution(self.root/'runs'/row['name']/'native')
             self.assertEqual(result['execution'],'completed');self.assertTrue(result['observation_complete'])
             self.assertFalse(result['training_started']);self.assertIsNone(result['evaluation_verdict'])
-        checks=load(self.root/'baseline-checks.json')
+        checks=load(self.root/'analysis.json')['baseline_checks']
         self.assertEqual(len(checks),4)
         self.assertTrue(all(row['exact_waveform_reproduced'] for row in checks))
 
