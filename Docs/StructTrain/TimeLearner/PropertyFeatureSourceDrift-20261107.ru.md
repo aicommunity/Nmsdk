@@ -18,7 +18,7 @@ Git/source metadata; компоненты локально не создавал
 | Изменение consumer/API | Доказательства и ограничение |
 |---|---|
 | Делегирование BeforeCalculate/BeforeDefault/BeforeReset общему NativeLearnerLifecycle; recognition hooks общему NativeRecognitionControl | Общие SDK gates перечислены в ImplementationStatus. Не менять public lifecycle bool на протокол ошибок; compatibility и multirate матрица остаётся открытой |
-| InstallNativePreparedModel и fresh-owner admission | Normal26/Console12 на M40, normal163/readers19 на Elder; повторная установка отклоняется. Новый API требует собственного ASan, старый single-pulse ASan37 его не покрывает |
+| InstallNativePreparedModel и fresh-owner admission | Normal26/Console12 на M40, normal163/readers19 на Elder; повторная установка отклоняется. Собственный [ASan26/readers19 API8702](FeedbackStorageASan-2026-11-07.ru.md) выполнен отдельно; старый single-pulse ASan37 не используется вместо него |
 | Native training capacitance binding/readback/edit и invalidation | C0 и opt-in bounded C-search имеют отдельные receipts и ограничения; отсутствие новой UProperty не означает отсутствия нового управляющего фактора |
 | Feedback/storage recipes, graph import и single-pulse characterization | Отдельные physical-profile/native controls. Изменение general physics остаётся во storage, характеристика одним импульсом не заменяет штатный burst Train |
 | Analyzer и measurement/verification helpers | Требуют своих schema/finite/assignment проверок. Число пиков всей пачки не является общей целью Train; новый контракт ещё не реализован во всех production путях |

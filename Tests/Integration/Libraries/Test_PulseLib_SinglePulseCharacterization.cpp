@@ -208,6 +208,7 @@ template<class Learner> void Matrix(unsigned frequency) {
 }
 template<class Learner> void Roundtrip(Fault fault,bool largest=false) {
     SinglePulseFixture<Learner> f;f.Make(2000,2);ASSERT_TRUE(f.learner);
+    if(largest)f.artifactFlavor+="_maximum_fault_"+std::to_string(static_cast<int>(fault));
     NativeProbeResult before,diagnostic,after;std::vector<std::vector<double>> a,d,b;
     f.Run(false,Fault::None,before,a);ASSERT_EQ(before.status,NativeProbeStatus::Completed);
     f.Run(true,fault,diagnostic,d,largest,largest);

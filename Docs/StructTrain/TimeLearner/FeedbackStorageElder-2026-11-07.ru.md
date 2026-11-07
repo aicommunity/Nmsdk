@@ -50,8 +50,9 @@ Single-pulse controls не заменяют штатный Train.
 На M40 соответствующий native storage/prepared контур26 уже прошёл отдельно;
 Console12 и четыре exact baseline waveform pairs также проверены на M40.
 На Elder Console только собрана: эти12 физических Console probes здесь не
-повторялись. Новый storage/prepared API ещё требует адресного ASan gate.
-Некорректно переносить на него прежний ASan37 другого SDK.
+повторялись. После normal выполнен отдельный
+[ASan26/readers19 на M40](FeedbackStorageASan-2026-11-07.ru.md) для SDK8702.
+Это собственный адресный gate API, а не перенос прежнего ASan37 другого SDK.
 
 ## Первичные данные и независимая проверка
 
@@ -75,7 +76,7 @@ fingerprint и корректное завершение. Loaded files нахо�
 этого не выполнялась. Whole group closed, lease released после closure.
 Локально выполнены только Git/archive/hash/JUnit metadata проверки.
 
-Отдельно открыты ASan нового API, вся physics/modes matrix, причинное
+Отдельно открыты проверки нового schema5 измерителя, вся physics/modes matrix, причинное
 сопоставление наложившихся откликов и итоговые научные Train→Test эксперименты.
 Графики и результаты отдельной диагностики наложения не переоцениваются этим
 техническим PASS.

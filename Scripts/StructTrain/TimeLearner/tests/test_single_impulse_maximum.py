@@ -14,7 +14,7 @@ from ..single_pulse_evidence import read_single_pulse
 class SingleImpulseMaximumNativeReaderTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.tmp=tempfile.TemporaryDirectory();cls.rows=[]
+        cls.tmp=tempfile.TemporaryDirectory();cls.rows=[];cls.faults=[]
         for path in sorted(Path(os.environ['TIMELEARNER_SINGLE_IMPULSE_MAXIMUM_CORPUS']).glob('single-pulse-*.json')):
             if path.name.endswith('-samples.json'):continue
             packet=load(path)
@@ -23,10 +23,12 @@ class SingleImpulseMaximumNativeReaderTest(unittest.TestCase):
             trace=Path(cls.tmp.name)/(path.stem+'.csv')
             with trace.open('w',newline='',encoding='utf-8') as stream:
                 writer=csv.writer(stream)
-                writer.writerow(['time','stimulus']+[f'soma{i}' for i in range(len(observation['specification']['baseline']))])
+                channels=len(observation['specification']['baseline']) if observation else 1
+                writer.writerow(['time','stimulus']+[f'soma{i}' for i in range(channels)])
                 for row in values:writer.writerow([observation['specification']['begin']+row[0],*row[1:]])
-            cls.rows.append((packet,trace))
+            (cls.rows if packet['native_status']=='completed' else cls.faults).append((packet,trace))
         if len(cls.rows)!=4:raise AssertionError('four topology/frequency schema-5 native fixtures required')
+        if len(cls.faults)!=6:raise AssertionError('six native schema-5 fault captures required')
 
     @classmethod
     def tearDownClass(cls):cls.tmp.cleanup()
@@ -56,6 +58,12 @@ class SingleImpulseMaximumNativeReaderTest(unittest.TestCase):
     def test_native_training_reader_refuses_diagnostic_maximum(self):
         for packet,trace in self.rows:
             with self.assertRaises(EvidenceError):audit_probe(packet,trace)
+
+    def test_fault_captures_remain_partial_diagnostics_without_training_claims(self):
+        for packet,trace in self.faults:
+            _,_,_,_,_,quality=read_single_pulse(packet,trace)
+            self.assertEqual(packet['native_status'],'rejected');self.assertTrue(quality['diagnostic_only'])
+            self.assertFalse(quality['training_eligible']);self.assertIsNone(quality['evaluation_verdict'])
 
     def test_measured_peak_before_actual_input_cannot_be_claimed_valid(self):
         for original,trace in self.rows:

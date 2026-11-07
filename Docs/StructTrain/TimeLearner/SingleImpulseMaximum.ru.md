@@ -47,6 +47,12 @@ sample faults. Положительный native A/B использует явн
 обязаны пройти отдельный Console replay и визуальный анализ.
 
 План адресного normal gate на Elder: прежние26 storage/prepared controls +
-12 новых =38 native;19 прежних readers +5 новых =24 без skips. После него
+12 новых =38 native;19 прежних readers +6 новых =25 без skips. После него
 нужны ASan нового кода, Console replay и общая training assignment приёмка.
 Локально разрешены только Git/AST/schema/hash metadata проверки.
+
+При source review нового тестового harness дополнительно исправлены уникальные
+имена файлов трёх fault subcases внутри одного gtest и разделение четырёх
+полных schema5 observations от шести fault captures. Первый worker A1 запущен
+до этих исправлений; его неизменяемый снимок не исправляется на ходу и не
+объявляется принятой проверкой исправленного harness.
