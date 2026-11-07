@@ -1,0 +1,74 @@
+{
+  "kind": "assigned_vertex_asan_split_native_pass_runtime_log_mutation",
+  "parent": "0f03bdca386a59583a3404b8045ce026a147cf07",
+  "rows": [
+    {
+      "name": "shared-vertex",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "3f8325b24ff4bf8e3eb15b7637a8864f52c51aaf800e4abd29b2a60df0e02899"
+      },
+      "gate": {
+        "kind": "timelearner_native_test_gate_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "assertion_status": "passed",
+        "reason": "complete_declared_test_inventory",
+        "inventory": {
+          "expected": 1,
+          "observed": 1,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "3f8325b24ff4bf8e3eb15b7637a8864f52c51aaf800e4abd29b2a60df0e02899"
+        },
+        "scientific_verdict": null
+      },
+      "runtime_fingerprint": "94a579355510f628422311ce8458c0a0ed860d190e8630e0f592981c59da42d1",
+      "loaded_files": 73
+    },
+    {
+      "name": "branch20k",
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "34042847a1b09ee2b78913b4dbceceffde9de7b206731854ff426b0786a3bb2e"
+      },
+      "gate": {
+        "kind": "timelearner_native_test_gate_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "assertion_status": "passed",
+        "reason": "complete_declared_test_inventory",
+        "inventory": {
+          "expected": 1,
+          "observed": 1,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "34042847a1b09ee2b78913b4dbceceffde9de7b206731854ff426b0786a3bb2e"
+        },
+        "scientific_verdict": null
+      },
+      "runtime_fingerprint": "94a579355510f628422311ce8458c0a0ed860d190e8630e0f592981c59da42d1",
+      "loaded_files": 73
+    }
+  ],
+  "overall_worker_passed": false,
+  "both_native_gates_valid_and_passed": true,
+  "runtime_changed_paths": [
+    "EventsLog/NeuroModeler.INFO",
+    "EventsLog/NeuroModeler.M40.user.log.INFO.20261108-004219.1889889",
+    "EventsLog/NeuroModeler.M40.user.log.INFO.20261108-004242.1890627"
+  ],
+  "source_binaries_and_configuration_unchanged": true,
+  "remaining_defect": "ConsoleLikeInit empty log path does not disable Rdk file logging; select an owned work directory before Init",
+  "prior_timeout_not_reclassified": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
