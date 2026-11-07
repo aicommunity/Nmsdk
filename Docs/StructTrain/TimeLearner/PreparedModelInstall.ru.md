@@ -66,3 +66,13 @@ archived source cases. Локально выполнены только AST pars
 checks; numerical/reader execution, compiler, paired baseline и actual gain0
 study должны выполняться на серверах. До их приёмки не считать schema5
 проверенным научным инструментом или завершением этапов4/5/7/11.
+
+
+Admission candidate root367b811 прошёл9/9 Python controls на M40 (7 прежних
+single-pulse admission и2 profile job controls) на actual archived Classic/Branch
+stopped cases. Проверены обе presentation, baseline/gain0, canonical signing,
+запрет malformed factors/mixed Rs/stimulus edits. Native compilation и candidate
+waveforms этим не проверены. Primary ещё предстоит опубликовать и сверить.
+Первая попытка запускателя завершилась до worker/tests: отсутствовал runtime_identity;
+во второй добавлены штатные runtime_content_identity/digest_json. Это ошибка
+orchestration manifest, не алгоритма модели; попытки не объединяются в один PASS.
