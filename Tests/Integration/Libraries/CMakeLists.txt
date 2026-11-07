@@ -11,6 +11,7 @@ add_executable(Test_PulseLib_ProbeAlgorithms
     Test_PulseLib_ProbeObservation.cpp
     ../Support/ProbeAlgorithmMain.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/StimulusSubset.cpp
 )
 target_link_libraries(Test_PulseLib_ProbeAlgorithms PRIVATE GTest::gtest Nmsdk::Qt::Core)
 set_target_properties(Test_PulseLib_ProbeAlgorithms PROPERTIES
@@ -31,6 +32,7 @@ add_executable(Test_PulseLib_VerificationAlgorithms
     ../Support/ProbeAlgorithmMain.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/FinalVerification.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/StimulusSubset.cpp
 )
 target_link_libraries(Test_PulseLib_VerificationAlgorithms PRIVATE GTest::gtest Nmsdk::Qt::Core)
 set_target_properties(Test_PulseLib_VerificationAlgorithms PROPERTIES
@@ -49,6 +51,8 @@ add_executable(Test_PulseLib_StimulusSubset
     Test_PulseLib_StimulusSubset.cpp
     ../Support/ProbeAlgorithmMain.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/StimulusSubset.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/FinalVerification.cpp
 )
 target_link_libraries(Test_PulseLib_StimulusSubset PRIVATE GTest::gtest Nmsdk::Qt::Core)
 set_target_properties(Test_PulseLib_StimulusSubset PROPERTIES

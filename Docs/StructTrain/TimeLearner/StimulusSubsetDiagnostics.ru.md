@@ -25,13 +25,17 @@ Exact certificate или доказанную декомпозицию нели�
 может быть нелинейным; разность двух soma traces не объявляется универсальным
 «чистым вкладом» импульса.
 
-Предусмотрены семь unit cases production planner, отдельный CMake target
-`Test_PulseLib_StimulusSubset` и те же cases в StorageComponents. Проверки ещё
-предстоит выполнить на сервере; локальная компиляция не применяется.
+Семь unit cases production planner прошли на Elder через полный SDK CMake
+configure и отдельный `Test_PulseLib_StimulusSubset` (rootd684cec2e,
+PulseLibe9da428). Есть те же cases в StorageComponents. Artifact publication
+этого gate ещё предстоит; локальная компиляция не применялась.
 
-Следующий обязательный шаг — отдельная diagnostic-only schema полного
-наблюдения, временная настройка Dataset на легальной границе, snapshot/restore
-полного training pattern, строгая model/source/readback проверка и запрет
-сертификатов для таких наблюдений. Затем нужны native Classic/Branch,
+В feature branch добавлены diagnostic-only schema6 полного наблюдения,
+временная настройка Dataset на легальной границе, snapshot/restore полного
+training pattern, model/source/readback guards и запрет сертификатов.
+Они ещё не скомпилированы/проверены. Добавлены семь observation unit controls
+и девять native Classic/Branch cases: full subset, удаление внутреннего
+импульса, поздний одиночный импульс, отмена с восстановлением,2000/20000Hz.
+После их приёмки нужны
 Console, readers, настоящие ablation-пробы и временные графики. Никакой новый
 assignment или порог сходимости этим документом не вводится.
