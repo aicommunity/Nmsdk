@@ -1,0 +1,200 @@
+{
+  "kind": "timelearner_ltz_driver_retirement_acceptance",
+  "source_root": "66f6504eb44922bcc9fb7361d9c73cce319c201e",
+  "source_bin": "10efba4162729d2fa49fed86747c8fea158cb0aa",
+  "both_workers": [
+    {
+      "host": "m40",
+      "data_commit": "cc26639d41012c4e37b9dc4f0e89274badb644e5",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-ltz-driver-retirement-m40-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 145372,
+          "sha256": "9ff5a79d4fe929eeb9e65e2b1af7a88a0241ad869759b6ea7537f89c9b19645b",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 238,
+      "source_hashes_verified": 288,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/README.md": "A",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/reset_asymrm_ltzcal_cold.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal_branch.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_branch_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_ltz_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression_warm.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_separability.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal_branch.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_branch_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_ltz_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_regression.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/smoke_sync_regression.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_regression.py": "D"
+      },
+      "all_existing_data_config_report_blobs_unchanged": true,
+      "restored_path_negative": {
+        "root_commit": "8bc19a3fc8e3677e8fb0628bf1303fed38dcbb36",
+        "bin_commit": "d2d6a31178cc244e9b66e5c53bd72393047cac57",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-ltz-driver-retirement-a1",
+          "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-ltz-driver-retirement-a1-container",
+          "registry": "/media/user/Data/TimeLearnerRefactor/ltz-driver-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "d393a227c0d3e823c9fbac6b64292aee5dc511904d53ed4dccda383b15e2b284",
+              "unit": "timelearner-9f4707cc-3532-4b40-9c9f-0e9ccf88940e.service",
+              "invocation_id": "75c02a1f735a48f49116cc2da164fe41",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-9f4707cc-3532-4b40-9c9f-0e9ccf88940e.service",
+              "initial_main_pid": 1672416,
+              "initial_start_ticks": "312730149",
+              "sha256": "749d1332395b24e92859e66b15c682361c32683a67d3b2109107024ed2042a64"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "52862",
+              "KillMode": "control-group",
+              "Description": "timelearner-9f4707cc-3532-4b40-9c9f-0e9ccf88940e.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "a1dc4744-7900-4a68-bc60-0ce57b5d70a1",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    },
+    {
+      "host": "elder",
+      "data_commit": "7cad641cd6d99fd849b2478528693e2662bd7b76",
+      "report_prefix": "Reports/StructTrain/TimeLearner/s09-ltz-driver-retirement-elder-a1/",
+      "archives": {
+        "accepted": {
+          "members": 17,
+          "bytes": 145348,
+          "sha256": "8042a7b046d6f1c9a84b193d84b2005a81f98d76376186a682d3445411c179c8",
+          "checks_passed": true
+        }
+      },
+      "records_verified": 238,
+      "source_hashes_verified": 288,
+      "exact_bin_changes": {
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/README.md": "A",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/reset_asymrm_ltzcal_cold.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal_branch.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_branch_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_ltz_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression_warm.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_separability.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal_branch.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_branch_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_ltz_grid.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_regression.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/smoke_sync_regression.sh": "D",
+        "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_regression.py": "D"
+      },
+      "all_existing_data_config_report_blobs_unchanged": true,
+      "restored_path_negative": {
+        "root_commit": "0517a55b83d26a073f26bdf3c675ac4eff8ad19e",
+        "bin_commit": "2935c583487323b7bd4c14b5099352c60807914c",
+        "restored_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+        "returncode": 2,
+        "expected_reason": "migration_old_path_still_present:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+        "output_receipt_absent": true,
+        "old_script_materialized_or_executed": false
+      },
+      "fresh_closed_released": {
+        "a1": {
+          "kind": "timelearner_worker_dependency_state",
+          "schema_version": 1,
+          "job_id": "s09-ltz-driver-retirement-a1",
+          "contained_directory": "/home/user/timelearner-refactor/readbacks/s09-ltz-driver-retirement-a1-container",
+          "registry": "/home/user/timelearner-refactor/ltz-driver-metadata-reservations.sqlite3",
+          "closure": {
+            "execution": "unknown",
+            "all_processes_closed": true,
+            "reason": "bound_unit_and_group_absent",
+            "scientific_verdict": null,
+            "binding": {
+              "kind": "timelearner_contained_binding",
+              "schema_version": 1,
+              "request_sha256": "258ce8b5e49be8f2471a7885bb45c213d3ee51ce26930cd4b6da680297a5239d",
+              "unit": "timelearner-18ad6893-66ee-49c6-bead-07ade938623b.service",
+              "invocation_id": "599aa3f0003142b0b84b568eae27f0b0",
+              "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-18ad6893-66ee-49c6-bead-07ade938623b.service",
+              "initial_main_pid": 900963,
+              "initial_start_ticks": "362187260",
+              "sha256": "212f6801a21e4946daef15e61e92334471c3f32b310e2a7c7ef790071c8bc1b5"
+            },
+            "state": {
+              "Type": "",
+              "Restart": "no",
+              "RemainAfterExit": "no",
+              "MainPID": "0",
+              "Result": "success",
+              "ExecMainCode": "0",
+              "ExecMainStatus": "0",
+              "ControlGroup": "",
+              "MemoryMax": "infinity",
+              "TasksMax": "38260",
+              "KillMode": "control-group",
+              "Description": "timelearner-18ad6893-66ee-49c6-bead-07ade938623b.service",
+              "LoadState": "not-found",
+              "ActiveState": "inactive",
+              "SubState": "dead",
+              "InvocationID": ""
+            }
+          },
+          "reservation_optional": false,
+          "reservation_state": "released",
+          "reservation_token": "6441212b-4221-438a-b17c-50aeca39cbe2",
+          "state": "ready",
+          "reason": "dependency_closed_lease_released",
+          "successful_execution_attested": false,
+          "scientific_verdict": null
+        }
+      }
+    }
+  ],
+  "old_scripts_or_native_models_executed": false,
+  "whole_migration_complete": false,
+  "scientific_verdict": null
+}
