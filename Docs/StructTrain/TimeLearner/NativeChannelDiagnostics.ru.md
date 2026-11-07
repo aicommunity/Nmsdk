@@ -39,7 +39,7 @@ source closure и actual graph. Частичные captures не дают positi
 5. Восемь checks на actual corpus: capture, invariance, повреждённый soma value,
    class, future spike, missing sample, duplicate clock и non-boolean factor.
 6. Действующие scoped ISI/observation12 и waveform/prefix10 controls.
-7. Primary/source/runtime/process closure опубликованы в Git; отдельные графики Exc/Inh/LT ещё требуются.
+7. Primary/source/runtime/process closure опубликованы в Git; приёмка графиков приведена ниже.
 
 CLI нового study:
 `python -m Scripts.StructTrain.TimeLearner.stock_channel_diagnostics STUDY --runtime RUNTIME --output NEW`.
@@ -67,7 +67,41 @@ UProperty; расчётов не было. Исправление использ
 members и source hashes обеих попыток сверены с точными commits; группы
 закрыты и leases released. Два предыдущих runtime проверены на сервере до/после.
 
-Не закрыты ASan, второй сервер, direct schema3 False, весь interruption/
-intervention/profile scope и новые channel graphics. Reader не подтверждает
+Не закрыты второй сервер, direct schema3 False и весь interruption/
+intervention/profile scope. Reader не подтверждает
 Exc/Inh независимо от native producer. До контролируемого вмешательства
 не объявляется установленной общая причинная природа дополнительных максимумов.
+
+
+## Адресный ASan и совместные графики
+
+Тот же compiled root18d4d/Pulsefe382a0 прошёл на M40 адресный ASan:
+12 native controls, четыре реальные Off/On пробы и18 Python readers без skips.
+В пяти процессах подтверждена загрузка libasan; detect_leaks=0, поэтому это
+не доказательство отсутствия утечек. Off/On CSV и исходные Train волны
+сохранены; прежние runtime не изменились. [Приёмка](NativeChannelDiagnosticsAsanVerification.json).
+
+Построен [совместный временной отчёт](NativeChannelJointVisualVerification.json):
+пять сом,216 views,652 файла/73375213B в кэше M40
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/native-channel-joint-normal-a3`.
+Plot source root96431ad; первичные native данные взяты из e98df4e и сверены
+с Git перед построением. Новых расчётов моделей для графиков не выполнялось.
+Каждый рисунок показывает потенциал сомы с фактическим входом, изменения
+Exc/Inh относительно первого отсчёта, Feedback/LT Output и LT Potential
+с фактическим порогом. Начальные Exc=-1 и Inh=+1 не считаются нулём.
+Полные окна имеют общий Y по панели; детали максимумов — явно отмеченный
+локальный Y и все native samples. Это разные масштабы, их нельзя сравнивать
+по высоте кривой на странице. Реальные LT timestamps нанесены пунктиром.
+
+Четыре выбранных PNG (два первых50мс окна и две детали максимумов) сверены
+с Git и просмотрены по отдельности. [Ручная QA](NativeChannelJointSelectedVisualQA.json)
+не распространяется на весь кэш. В детали Classic около0.0485с виден третий
+максимум при нулевых текущих Feedback/LT Output; потенциал LT ещё отрицателен.
+В детали Branch около0.1945с разрешён слабый максимум порядка1.87e-5.
+В обеих деталях новых входных импульсов нет. Эти наблюдения сами по себе
+не доказывают причинную независимость от предшествующей обратной связи:
+она воздействует также на дендриты, а состояние каналов сохраняет историю.
+
+Для причинного разбора требуется отдельный single-pulse characterization
+и контролируемое вмешательство. Он не должен подменять штатную пачку Train,
+менять target или выдавать диагностическое наблюдение за сертификат обучения.
