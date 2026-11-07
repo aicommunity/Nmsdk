@@ -1,0 +1,60 @@
+{
+  "kind": "native_channel_joint_selected_visual_qa",
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-07T01:29:13.733454+00:00",
+  "method": "Direct inspection of each of four server-generated 1920x1920 PNGs, displayed individually; exact Git bytes verified.",
+  "figures": [
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-native-channel-joint-visual-m40-a3/Branch-threshold-low-retry32-soma1-measured-peak-00389-detail.png",
+      "sha256": "3a95c91c310a6ce2700775c31e0441a0f728ead96c23aa7d6169ab5f127dd78f",
+      "manual_review_complete": true,
+      "labels_readable": true,
+      "input_overlay_visible": true,
+      "base_and_observed_model_ids_present": true,
+      "y_scale": "local_per_panel",
+      "native_samples_marked": true
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-native-channel-joint-visual-m40-a3/Branch-threshold-low-retry32-soma1-zoom-001.png",
+      "sha256": "eb93b95a409f3b02b01cfac9d5c412f7d68c177ebde183e562173085299b8ede",
+      "manual_review_complete": true,
+      "labels_readable": true,
+      "input_overlay_visible": true,
+      "base_and_observed_model_ids_present": true,
+      "y_scale": "shared_per_panel",
+      "native_samples_marked": false
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-native-channel-joint-visual-m40-a3/Classic-threshold-low-retry32-soma1-measured-peak-00097-detail.png",
+      "sha256": "421bb01bd06891febd2dafbe2b59dfd225f2b4429438076def1448e308941b5a",
+      "manual_review_complete": true,
+      "labels_readable": true,
+      "input_overlay_visible": true,
+      "base_and_observed_model_ids_present": true,
+      "y_scale": "local_per_panel",
+      "native_samples_marked": true
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-native-channel-joint-visual-m40-a3/Classic-threshold-low-retry32-soma1-zoom-001.png",
+      "sha256": "d89ad129331200577038f6359420f62cba04ecf98c2569150907e02e64083e2b",
+      "manual_review_complete": true,
+      "labels_readable": true,
+      "input_overlay_visible": true,
+      "base_and_observed_model_ids_present": true,
+      "y_scale": "shared_per_panel",
+      "native_samples_marked": false
+    }
+  ],
+  "observations": [
+    "Classic first 50 ms contains two actual LT events and feedback pulses after the first input.",
+    "Branch first 50 ms contains one actual LT event and feedback pulse.",
+    "Classic third maximum is resolved near 0.0485 s with no input or LT event in that detail window.",
+    "Branch weak maximum is resolved near 0.1945 s with no input or LT event in that detail window.",
+    "Channel traces are changes from initial Exc=-1/Inh=+1, not absolute outputs.",
+    "Local detail LT thresholds are explicitly marked outside the displayed range; zero feedback panels retain an automatic tiny Y range."
+  ],
+  "full_cache_manually_reviewed": false,
+  "causal_intervention_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

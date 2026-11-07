@@ -1,0 +1,66 @@
+{
+  "kind": "stock_recovery_selected_visual_qa",
+  "schema_version": 1,
+  "selection_evidence_commit": "764cdbeb0e3cc8253801d2dda49a81404ed7ef4c",
+  "native_primary_evidence_commit": "8ca095726d811a6797bbd82671987635f9b7da53",
+  "source_report_root": "5d0ac867ac9786b5b6b846eec1cd5b2aae8a62c1",
+  "reviewed_at_utc": "2026-11-06T19:42:14.320975+00:00",
+  "selected_png_reviewed": 4,
+  "records": [
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-overview.png",
+      "sha256": "76be3dc82f3e7b895814f539e886940fcd686fe1f1b9e069efa562e4e776531f",
+      "trial_id": "Classic-threshold-low-retry32/stopped-phasea-diagnostic/rotation-0/0",
+      "soma": "$.Soma1.SumPotential",
+      "view": "overview",
+      "title_and_axis_labels_readable": true,
+      "actual_input_overlay_visible": true,
+      "waveform_visible_without_downsampling": true,
+      "full_window": true,
+      "visual_reviewed": true
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-zoom-001.png",
+      "sha256": "ac3625150c26870002c5c6e5ac0e56f91bb096d1e24be4ecaab5678d7d48d40c",
+      "trial_id": "Classic-threshold-low-retry32/stopped-phasea-diagnostic/rotation-0/0",
+      "soma": "$.Soma1.SumPotential",
+      "view": "zoom-001",
+      "title_and_axis_labels_readable": true,
+      "actual_input_overlay_visible": true,
+      "waveform_visible_without_downsampling": true,
+      "full_window": false,
+      "visual_reviewed": true
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/target-zoom-010.png",
+      "sha256": "efd3a1da616c4b67471ee8149427ed82158a0efd60bab677f458167f621cf311",
+      "trial_id": "Classic-threshold-low-retry32/stopped-phasea-diagnostic/rotation-0/0",
+      "soma": "$.Soma1.SumPotential",
+      "view": "zoom-010",
+      "title_and_axis_labels_readable": true,
+      "actual_input_overlay_visible": true,
+      "waveform_visible_without_downsampling": true,
+      "full_window": false,
+      "visual_reviewed": true
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s07-stock-recovery-first-visual-m40-a1/selected/foil-overview.png",
+      "sha256": "62305d3d5889ffa3eef199cc417ba728b7bc0f7b4ae88b68dfa4327da3d510aa",
+      "trial_id": "Classic-threshold-low-retry32/stopped-phasea-diagnostic/rotation-0/1",
+      "soma": "$.Soma1.SumPotential",
+      "view": "overview",
+      "title_and_axis_labels_readable": true,
+      "actual_input_overlay_visible": true,
+      "waveform_visible_without_downsampling": true,
+      "full_window": true,
+      "visual_reviewed": true
+    }
+  ],
+  "scope": "Only first Classic-low-retry stopped model, Soma1, target/foil overviews and two target zooms. Not all160 soma/trial pairs or8 models.",
+  "native_soma_units": "model_units_SI_unverified",
+  "observation": "Viewed Soma1 target and foil show responses after individual input impulses; pooled FP7 remains diagnostic. No causal inference or completed-learning claim.",
+  "zoom_limitation": "zoom010 ends during a response; adjacent windows and overview provide continuation. Fixed-window zoom is not a complete isolated waveform.",
+  "full_render_complete": false,
+  "full_visual_acceptance_complete": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,67 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-stock-wave-replay-normal-a1'
+folder=base/'readbacks/s07-stock-wave-replay-normal-a1';repo=base/'evidence-stock-wave-replay-normal-a1'
+parent='e7379b4beed7be6454cd0cb85356972da85d4423';prefix='Reports/StructTrain/TimeLearner/s07-stock-wave-replay-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.stock_wave_replay import compare_traces
+from Scripts.StructTrain.TimeLearner.native_evidence import load
+registry=Reservations(base/'resource-reservations.sqlite3');closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+bundle=load(folder/'bundle.json');archive=folder/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tf:
+ for m in tf:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+assert load(folder/'tests.json')=={'tests_run':6,'successful':True,'failures':0,'errors':0,'skipped':0}
+assert load(folder/'terminal.json')['exact_source_replay2_complete']
+analysis=load(folder/'analysis.json');design=load(folder/'study/design.json');assert len(analysis['rows'])==len(design['rows'])==2
+for row,declared in zip(analysis['rows'],design['rows']):
+ native=folder/'study/runs'/row['name']/'native';audit_run_manifest(native.parent/'run-manifest.json')
+ actual=compare_traces(load(Path(declared['original_packet'])),declared['original_trace'],load(native/'probe_trial_1.json'),native/'probe_trial_1.csv')
+ assert all(row[k]==v for k,v in actual.items()) and actual['exact_waveform_reproduced']
+ assert load(native/'initial-state.json')['identity']['sha256']==declared['source_model_revision']
+payloads={};updates={}
+for p in folder.iterdir():
+ if p.is_file() and (p.suffix=='.json' or p.name in ('primary.tar.xz','producer.txt')):payloads[prefix+'/'+p.name]=p.read_bytes()
+for p in Path(str(folder)+'-container').iterdir():
+ if p.is_file() and p.suffix=='.json':payloads[prefix+'/controller/'+p.name]=p.read_bytes()
+payloads[prefix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode();payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for p in (source/'.git/objects/pack').glob('*.pack'):
+ with p.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve exact native replay of two first-invalid stock burst models and six refusal controls\n')
+git('update-ref','refs/heads/codex/stock-wave-replay-native-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256'],'tests_passed':6,'exact_native_replays':2}))

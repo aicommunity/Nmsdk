@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_native_test_gate",
+  "schema_version": 2,
+  "runtime_manifest": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-channel-diagnostics-asan-a1/native-runtime.json",
+  "source_root": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+  "expected_test_ids": [
+    "IsiTemplateValidation/ResolvesActualLearnerAndKeepsFiniteTolerance",
+    "IsiTemplateValidation/NonfiniteReferenceInvalidatesTargetAndFoil",
+    "IsiTemplateValidation/NonfiniteStimulusCannotBecomeTemplateMatch",
+    "IsiTemplateValidation/MissingTemplateCannotBecomeSuccessfulFoil",
+    "IsiTemplateValidation/LazyLtzLookupUsesActualNeuronForBothTopologies",
+    "IsiTemplateValidation/EmptyShapeAndNonfiniteUnusedColumnInvalidateBothLabels",
+    "IsiTemplateValidation/NonIncreasingStimulusInvalidatesBothLabels",
+    "TimeLearnerObservations/RetainsEverySomaAndSignedMaxima",
+    "TimeLearnerObservations/NonfiniteCannotBeHiddenByPreviousPeak",
+    "TimeLearnerObservations/OverflowAndDimensionChangeInvalidateEvidence",
+    "TimeLearnerObservations/Schema4IsExplicitAndRequiresActualMeasurementSources",
+    "TimeLearnerObservations/Schema4WriterRoundtripFixture"
+  ],
+  "maximum_wall_seconds": 10800,
+  "asan_options": "detect_leaks=0",
+  "cooperative_runtime_capture": true
+}

@@ -1,0 +1,86 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-fair-domains-asan38-a1'
+folder=base/'readbacks/s07-single-pulse-asan-a1'
+repo=base/'evidence-single-pulse-asan-a1';incoming=base/'source-profile-probe-admission-a1'
+parent='367b811974b325a076e48b7abbd3d39cd90fee6e';prefix='Reports/StructTrain/TimeLearner/s07-single-pulse-asan-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3')
+payloads={};updates={};bundles=[]
+for path,sub in [(folder,'')]:
+ closed=inspect_worker_dependency(Path(str(path)+'-container'),registry,path.name)
+ assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+ bundle=json.loads((path/'bundle.json').read_text());archive=path/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':path.name,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in path.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+sub+('producer.txt' if f.name=='producer.py' else f.name)]=f.read_bytes()
+ for f in Path(str(path)+'-container').iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+sub+'controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+sub+'fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+terminal=json.loads((folder/'terminal.json').read_text())
+assert terminal['single_pulse_ASan_acceptance_passed'] and terminal['build_passed'] and terminal['native_probe_records']==4
+verdict=json.loads((folder/'native12/result.json').read_text())
+assert verdict['execution']=='completed' and verdict['validity']=='valid' and verdict['assertion_status']=='passed' and verdict['inventory']['observed']==37
+readers=json.loads((folder/'single-pulse-tests.json').read_text())
+assert readers=={'tests_run':42,'successful':True,'failures':0,'errors':0,'skipped':0}
+processes=[folder/'native12/process']+sorted((folder/'single-pulse-study/runs').glob('*/process'))
+assert len(processes)==5
+asan_records=[]
+for process in processes:
+ loaded=json.loads((process/'loaded-files.json').read_text())
+ matches=[v for v in loaded if Path(v['path']).name.startswith('libasan.so')]
+ assert len(matches)==1
+ runtime=json.loads((process/'runtime.json').read_text())
+ # Runtime manifest captures loader paths, not ASAN_OPTIONS; declaration is in the exact archived producer.
+ assert "os.environ['ASAN_OPTIONS'] = 'detect_leaks=0'" in (folder/'producer.py').read_text()
+ asan_records.append({'process':str(process.relative_to(folder)),'libasan':matches[0]})
+manifest_audits=[]
+for manifest in sorted((folder/'single-pulse-study/runs').glob('*/run-manifest.json')):
+ audit=audit_run_manifest(manifest);assert audit['run_evidence_consistent'];manifest_audits.append(str(manifest.relative_to(folder)))
+assert len(manifest_audits)==4
+for record_name,runtime in [('previous-runtime-frozen-files.json',base/'runtime-native-channel-diagnostics-asan-a1'),('accepted-runtime-frozen-files.json',base/'runtime-isi-template-fixed-asan12-a1')]:
+ for n,record in json.loads((folder/record_name).read_text()).items():
+  path=runtime/n;assert path.stat().st_size==record['bytes'] and hashlib.sha256(path.read_bytes()).hexdigest()==record['sha256']
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'terminal':terminal,'native_verdict':verdict,'reader_result':readers,'protected_runtimes_unchanged':2,'libasan_loaded_processes':asan_records,'leak_detection_enabled':False,'manifest_audits':manifest_audits,'compiled_root':'5d0b80afeefbc5daa57d3ca5f550a5e654f07969','compiled_PulseLib':'302124bb3e8aaa412bc7ddacad8560cf427ac94b','new_profile_API_verified':False,'second_host_verified':False,'whole_plan_complete':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve verified single-pulse ASan37 Console4 reader42 evidence\n');git('update-ref','refs/heads/codex/single-pulse-asan-a1-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'bundles':bundles,'terminal':terminal,'reader_result':readers}))
