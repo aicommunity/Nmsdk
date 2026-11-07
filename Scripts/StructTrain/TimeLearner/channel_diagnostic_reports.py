@@ -59,6 +59,7 @@ def chart(directory, soma):
     peak_indices=[first for first,_ in measured_wave_plateaus(
         [v-number(spec['baseline'][soma]) for v in signal], number(spec['minimum_amplitude']))]
     return {'soma_path': path, 'trial_id': data['trial_id'], 'model_revision': data['base_model_revision'],
+            'observed_model_revision':spec['effective_model_revision'],
             'begin': spec['begin'], 'end': spec['end'], 'frequency_hz': job['model']['frequency_hz'],
             'times': [number(row['time']) for row in data['samples']],
             'stimulus': [number(float(row['stimulus'])) for row in primary],
@@ -105,7 +106,8 @@ def render_figure(data, name, left, right, output, local=False):
     axes[-1].set_xlabel('Native absolute time [s]')
     figure_title(fig, 'Closed native training probe | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
                  data['trial_id']+'\n'+data['soma_path']+' | '+name+
-                 (' | local Y per panel' if local else ' | shared Y per panel')+' | model '+data['model_revision'][:12])
+                 (' | local Y per panel' if local else ' | shared Y per panel')+
+                 ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12])
     fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(.5,.91), ncol=2, fontsize=9, frameon=False)
     paths=[]
     for extension in ('png', 'svg', 'pdf'):
@@ -155,6 +157,7 @@ def render(directory, output, source_evidence, repository):
             views.append(render_figure(data,'measured-peak-'+str(index).zfill(5)+'-detail',
                                        data['times'][first],data['times'][last],folder,local=True))
         reports.append({'soma_path':data['soma_path'], 'folder':folder.name, 'views':views,
+                        'base_model_revision':data['model_revision'],'observed_model_revision':data['observed_model_revision'],
                         'raw_initial_channel_values':data['raw_initial_channel_values'],
                         'lt_spike_times':data['lt_spike_times'], 'threshold':data['threshold'],
                         'primary_sha256':data['primary']})
