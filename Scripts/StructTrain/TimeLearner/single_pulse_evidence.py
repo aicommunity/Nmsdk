@@ -1,4 +1,4 @@
-"""Strict diagnostic-only native schema 4. Never training/certificate evidence."""
+"""Strict diagnostic-only native schemas 4/5. Never training/certificate evidence."""
 import csv
 import math
 from pathlib import Path
@@ -14,7 +14,7 @@ SPEC_FIELDS = {'time_frame', 'schema_version', 'run_id', 'trial_id', 'sample_id'
 
 def _declaration(spec):
     require(type(spec) is dict and set(spec) == SPEC_FIELDS and type(spec['schema_version']) is int and
-            spec['schema_version'] == 4, 'single_pulse_unknown_specification')
+            spec['schema_version'] in (4, 5), 'single_pulse_unknown_specification')
     c = spec['characterization']
     require(type(c) is dict and set(c) == {'purpose', 'source_training_pattern_hash', 'physical_input_count',
             'selected_input_index'} and c['purpose'] == 'single_pulse_characterization', 'single_pulse_unknown_purpose')
@@ -25,7 +25,8 @@ def _declaration(spec):
                 'single_pulse_invalid_pattern_hash')
     for key in ('run_id', 'trial_id', 'sample_id'):
         require(type(spec[key]) is str and bool(spec[key]), 'single_pulse_identity_missing')
-    require(spec['wave_assignment'] == 'window_only' and spec['peak_selection'] == 'isolated_window' and
+    require(spec['wave_assignment'] == 'window_only' and
+            spec['peak_selection'] == ('isolated_window' if spec['schema_version'] == 4 else 'single_impulse_maximum') and
             spec['record_spikes'] is False and len(spec['expected_stimulus_ids']) == 1 and
             type(spec['expected_stimulus_ids'][0]) is str and bool(spec['expected_stimulus_ids'][0]) and
             number(spec['minimum_amplitude']) > 0 and number(spec['maximum_sample_gap']) > 0 and
@@ -51,7 +52,10 @@ def _peak(observation, spec, samples, begin):
                 while end+1 < len(signal) and signal[end+1] == signal[i]:end += 1
                 if end+1 < len(signal) and signal[i] >= spec['minimum_amplitude'] and signal[i] > signal[i-1] and signal[end] > signal[end+1]:candidates += 1
                 i = end+1
-            validity = 'valid' if candidates == 1 else 'ambiguous'
+            largest_peaks = sum(value == signal[maximum] and (i == 0 or signal[i-1] != value)
+                                for i, value in enumerate(signal))
+            unique = largest_peaks == 1 if spec['peak_selection'] == 'single_impulse_maximum' else candidates == 1
+            validity = 'valid' if unique else 'ambiguous'
     peaks = observation['peaks']
     require(type(peaks) is list and len(peaks) == 1, 'single_pulse_peak_count')
     p = peaks[0]
@@ -69,6 +73,9 @@ def _peak(observation, spec, samples, begin):
         for key, value in expected.items():require(equal(p[key], value), 'single_pulse_peak_trace_mismatch:'+key)
         if observation['stimuli']:
             require(equal(p['delay_from_stimulus'], p['time']-observation['stimuli'][0]['time']), 'single_pulse_peak_delay_mismatch')
+            if after(observation['stimuli'][0]['time'], p['time']):
+                require(not observation['valid'] and 'peak_precedes_stimulus:'+p['input_id'] in observation['reasons'],
+                        'single_pulse_pre_stimulus_peak_claim')
         else:require(p['delay_from_stimulus'] is None, 'single_pulse_missing_stimulus_delay_claim')
     return validity
 
@@ -103,7 +110,7 @@ def read_single_pulse(packet, trace):
                 'diagnostic_only': True, 'training_eligible': False, 'evaluation_verdict': None}
     require(set(observation) == {'schema_version', 'specification', 'complete', 'valid', 'end_reason', 'reasons',
             'sample_count', 'stimuli', 'peaks', 'burst_assignments', 'spikes', 'spike_count', 'first_stimulus_time'} and
-            type(observation['schema_version']) is int and observation['schema_version'] == 4 and
+            type(observation['schema_version']) is int and observation['schema_version'] == requested['schema_version'] and
             type(observation['valid']) is type(observation['complete']) is bool and type(observation['reasons']) is list and
             all(type(r) is str for r in observation['reasons']), 'single_pulse_observation_shape')
     _declaration(spec)

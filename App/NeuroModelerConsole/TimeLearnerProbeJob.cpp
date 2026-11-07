@@ -88,9 +88,11 @@ Job Read(const QString& path)
     j.recordSpikes=Boolean(p["record_spikes"]);
     Require(!j.recordSpikes,"native_probe_spike_capture_not_supported");
     const auto selection=Text(p["peak_selection"]);
-    Require(selection=="isolated_window" || selection=="assigned_burst_wave","invalid_probe_selection");
-    j.selection=selection=="isolated_window"?PeakSelectionPolicy::IsolatedWindow:PeakSelectionPolicy::AssignedBurstWave;
-    Require(!j.singlePulse || j.selection==PeakSelectionPolicy::IsolatedWindow,"single_pulse_requires_explicit_peak_window");
+    Require(selection=="isolated_window" || selection=="assigned_burst_wave" || selection=="single_impulse_maximum","invalid_probe_selection");
+    j.selection=selection=="isolated_window"?PeakSelectionPolicy::IsolatedWindow:
+        selection=="assigned_burst_wave"?PeakSelectionPolicy::AssignedBurstWave:PeakSelectionPolicy::SingleImpulseMaximum;
+    Require(!j.singlePulse || j.selection!=PeakSelectionPolicy::AssignedBurstWave,"single_pulse_requires_explicit_peak_window");
+    Require(j.singlePulse || j.selection!=PeakSelectionPolicy::SingleImpulseMaximum,"maximum_requires_single_impulse_presentation");
     const auto w=Object(p["window"]);Keys(w,{"begin","end"});j.windowBegin=Number(w["begin"]);j.windowEnd=Number(w["end"]);
     j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);j.wallSeconds=Number(d["maximum_wall_seconds"]);
     Require(j.wallSeconds>0.,"invalid_probe_wall_budget");return j;
@@ -187,7 +189,8 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             request.specification.runId=j.runId;request.specification.trialId=trial;request.specification.windows={plan.inputWindows[j.input]};
             if(j.singlePulse) {
                 auto& spec=request.specification;const auto originalHash=spec.patternHash;
-                spec.schemaVersion=4;spec.waveAssignment=WaveAssignmentPolicy::WindowOnly;spec.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+                spec.schemaVersion=j.selection==PeakSelectionPolicy::SingleImpulseMaximum?5:4;
+                spec.waveAssignment=WaveAssignmentPolicy::WindowOnly;spec.peakSelection=j.selection;
                 spec.characterization=SinglePulseCharacterization{originalHash,j.model.inputs.size(),j.input};
                 spec.patternHash=NmsdkTools::CanonicalModelDataSha256(QJsonArray{request.expectedInputIsi.front()}).toStdString();
                 spec.expectedStimulusIds={spec.expectedStimulusIds.front()};

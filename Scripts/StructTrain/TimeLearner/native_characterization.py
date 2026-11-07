@@ -45,7 +45,9 @@ def validate_job(job):
     require(frequency > 0 and number(probe['duration']) > 0 and
             equal(probe['maximum_sample_gap'], 1/frequency) and number(probe['minimum_amplitude']) > 0 and
             1 <= count(probe['maximum_samples']) <= 100000000 and probe['record_spikes'] is False and
-            probe['peak_selection'] in ('isolated_window', 'assigned_burst_wave'), 'characterization_protocol_invalid')
+            probe['peak_selection'] in ('isolated_window', 'assigned_burst_wave', 'single_impulse_maximum'), 'characterization_protocol_invalid')
+    require(is_single_pulse(job) or probe['peak_selection'] != 'single_impulse_maximum',
+            'maximum_requires_single_impulse_presentation')
     window = probe['window']
     require(type(window) is dict and set(window) == {'begin', 'end'} and
             0 <= number(window['begin']) < number(window['end']) <= probe['duration'], 'characterization_window_invalid')
@@ -69,7 +71,7 @@ def validate_job(job):
         require(is_single_pulse(job), 'single_pulse_presentation_invalid')
     if is_single_pulse(job):
         require(job['presentation'] == {'kind': 'single_pulse_characterization'} and
-                job['resistance_intervention'] == [] and probe['peak_selection'] == 'isolated_window' and
+                job['resistance_intervention'] == [] and probe['peak_selection'] in ('isolated_window', 'single_impulse_maximum') and
                 job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
                 'single_pulse_presentation_invalid')
     if version >= 3:
@@ -172,14 +174,18 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
     validate_job(job);return job
 
 
-def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_seconds=900, channel_diagnostics=True):
+def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_seconds=900, channel_diagnostics=True,
+                            peak_selection='isolated_window'):
     """Only transient presentation changes; full source model/target is imported."""
     job = prepare_stopped_job(case, input_index, trial_id, maximum_wall_seconds=maximum_wall_seconds,
                               channel_diagnostics=channel_diagnostics)
     job.update(schema_version=4, presentation={'kind': 'single_pulse_characterization'})
-    job['probe']['peak_selection'] = 'isolated_window'
+    require(peak_selection in ('isolated_window', 'single_impulse_maximum'), 'single_pulse_unknown_peak_selection')
+    job['probe']['peak_selection'] = peak_selection
     job['probe']['window'] = {'begin': 0., 'end': job['probe']['duration']}
     job['probe']['protocol_revision'] += '/single-pulse-characterization-v1'
+    if peak_selection == 'single_impulse_maximum':
+        job['probe']['protocol_revision'] += '/single-impulse-maximum-v1'
     job.pop('sha256')
     job = _signed(job);validate_job(job);return job
 
