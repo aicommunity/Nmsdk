@@ -69,7 +69,7 @@ public:
             }
         }
         QJsonArray spikes;
-        Require(zone->OutputPulseTimes.GetRows()==1 || zone->OutputPulseTimes.GetSize()==0,
+        Require(zone->OutputPulseTimes.GetRows()==1 || zone->OutputPulseTimes.GetData().GetSize()==0,
             "probe_diagnostic_spike_shape_changed");
         double previous=-std::numeric_limits<double>::infinity();
         for(int i=0;i<zone->OutputPulseTimes.GetCols();++i) {
