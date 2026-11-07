@@ -1,0 +1,76 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-prepared-model-normal-a2",
+      "members": 234,
+      "archive_bytes": 859964,
+      "archive_sha256": "e7eec635981ae61c65415f5afad00228ed9c96a52a17c47103f2763b8d83b813"
+    }
+  ],
+  "terminal": {
+    "build_passed": true,
+    "native_gates_executed": true,
+    "prepared_owner_scoped_acceptance_passed": true,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "native_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 26,
+      "observed": 26,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "5ffe3490ebdb36dd965ef2d5ba1a02b44cad0e2ab4e4fcca0404529509540123"
+    },
+    "scientific_verdict": null
+  },
+  "reader_result": {
+    "tests_run": 13,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "seven_previous_runtimes_unchanged": true,
+  "prepared_owner_actual_graph_tests": {
+    "tests_run": 2,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "actual_profile_import_graph_tests": {
+    "tests_run": 2,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "feedback_auditor_regression_tests": {
+    "tests_run": 10,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "candidate_waveforms_evaluated": false,
+  "actual_inherited_graph_tests": {
+    "tests_run": 2,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source_profile_import_fixture_threshold": 0.0117,
+  "stock_models_modified": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}
