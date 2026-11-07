@@ -16,7 +16,7 @@ merge и научная разделимость — разные утвержд
 
 | Срез | Подтверждено и ограничения |
 |---|---|
-| Принятый root develop | `2fbf982ffe6a5882e03dfdf6438eac042161fc12` |
+| Принятый root develop | `a0cd8a96540e5e9426a716766d4495829940dfcc`; добавлен принятый maintenance-подэтап Elder, не приёмка всего этапа 2 |
 | Принятые PulseLib / Bin / Rdk | `0ec9193e6620ae2439329eece5ecd6d6f167c70a` / `fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f` / `10e9d05aa658dd2203c89bc84ba9166595b50014` |
 | Общий ASan SDK | root2e061/Pulse12d: 133/133; не подтверждает последующие изменения |
 | Baseline recovery SDK | root84d6/Pulse416: normal118 и адресный ASan19 приняты; stock Train/evaluation завершены |
@@ -26,6 +26,16 @@ merge и научная разделимость — разные утвержд
 | Prepared-owner / storage Console SDK | root844b278/Pulse1f97: M40 normal26, readers29+9+2, Console12 и4 exact baseline pairs; ASan этого API/Elder открыты |
 | Single-pulse ASan SDK | root5d0b80/Pulse302: M40 native37, Console4 иPython42. Это предыдущий SDK, без нового storage API |
 | Worker-limit Python SDK | rooteae3: 26/26 на каждом сервере; не проверка нейронного обучения |
+
+На Elder закрыта дополнительная подготовка диска: удалены 275 подтверждённых
+дублирующих static `.a`, для каждой оставлена проверенная копия. Остальные
+462 file/symlink bindings выбранных runtime неизменны. Свободное место в ходе
+операции1.52→4.11GiB; исходники, executable, модели и primary не удалялись.
+Шесть filesystem/lease tests прошли; группа закрыта, lease released, схема2/
+capacity/slots не менялись. [Отчёт и ограничения](StaticArchiveCleanup.ru.md),
+[проверка Git primary](StaticArchiveCleanupVerification.json).
+Это освобождение места не заменяет preflight конкретной следующей сборки и не
+означает, что новые storage/Console gates уже выполнены на Elder.
 
 Полные SHA, source hashes, первичные архивы и process closure:
 [ASan133](IntegratedSharedAsan133Verification.json),
