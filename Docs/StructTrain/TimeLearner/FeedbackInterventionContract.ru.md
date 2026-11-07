@@ -88,3 +88,11 @@ source XML даже с пересчитанной XML checksum. Два неза�
 Новые функции ещё не проверены сервером; отклик полученного candidate в этой
 проверке не рассчитывается и не объявляется научным результатом. Применение
 к полному archived stopped state и paired waveforms остаются следующим gate.
+
+
+Адресная normal-проверка physical graph import [запущена на M40](ProfiledGraphImportJobs.json).
+На последней kernel-проверке worker1461419 жив, идёт сборка root8302e8f76 /
+Pulse1d2a703. Заявлены24 native функции и27 readers; PASS не заявляется.
+Cache предыдущей inherited-image проверки используется только после fresh
+closure/released lease и exclusive reservation. Создан новый runtime;
+четыре прежних runtime защищены byte hashes. ASan остаётся на отдельном SDK.
