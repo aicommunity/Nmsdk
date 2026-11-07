@@ -64,7 +64,7 @@ target hit, FP/FN, margin или сертификат Exact.
 сомы шкала Y одинакова между full/omit/single; разные сомы имеют свои шкалы.
 SVG позволяет дополнительное увеличение. Значения потенциала даны в native
 units: единицы SI не аттестованы. Выбранные overview Classic и Branch
-проверяются визуально; полный кэш всех12 рисунков не объявляется просмотренным.
+проверены визуально; полный кэш всех12 рисунков не объявляется просмотренным.
 
 Полный HTML/PNG/SVG cache на M40:
 `/media/user/Data/TimeLearnerRefactor/ReportsCache/subset-console-temporal-a3/figures/index.html`.

@@ -449,3 +449,16 @@ Runtime неизменен, whole group closed/lease released. Это одино
 Новая интегрированная ASan-сборка schema6 выполняется на M40; параллельно
 готовятся14 диагностических high-threshold проб по точным состояниям
 [постановки](HighThresholdSubsetStudyDesign.json), без запуска Train.
+
+Подготовка high-threshold завершена на M40:14 jobs, точные selectors Classic0
+и Branch2, source files сверены с исходными Git manifests. Ни одной новой
+native-пробы подготовки не запускала. Summary Branch67,9MB потребовал явного
+лимита128MiB на member при прежнем общем лимите512MiB; исходный отказ сохранён.
+Повторные истории обучения в новый компактный архив не включены, остаются
+ссылки на исходные Git commits и полные file bindings.
+[Задания подготовки](HighThresholdSubsetPreparationJobs.json).
+
+Компактный пакет подготовки767f579e передан через Git и независимо сверён:
+55 members,1300 bindings исторических файлов,14 jobs; архив1,11MB без
+повторных source histories. [Receipt](HighThresholdSubsetPreparationVerification.json).
+Фактические high-threshold subset пробы ещё не запускались.
