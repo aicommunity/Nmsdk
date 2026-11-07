@@ -106,6 +106,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     }
     const auto phase=learner->TrainingPhase.GetData();const auto need=learner->IsNeedToTrain.GetData();
     const NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
+    NmsdkTools::ModelRevisionObserver subsetRevisionObserver;
     std::size_t revisionReads=0;bool revisionFailure=false;
     const auto readRevision=[&]() {
         ++revisionReads;if(revisionFailure)throw std::runtime_error("injected_revision_failure");
@@ -144,6 +145,13 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         spec.patternHash=NmsdkTools::CanonicalModelDataSha256(presented).toStdString();
         spec.windows.clear();spec.expectedStimulusIds.clear();
         for(auto index:sourceOrdinals)spec.expectedStimulusIds.push_back("pulse"+std::to_string(index));
+        // New waveform-only cases use the already production-validated typed
+        // reader, with independent full captures at both physical boundaries.
+        // Existing regression cases retain their original revision provider.
+        request.readModelRevision=[&]() {
+            ++revisionReads;return subsetRevisionObserver.Read(neuron,ports).toStdString();
+        };
+        request.readFullModelRevision=readRevision;
     }
     if(sharedVertex)
     {
