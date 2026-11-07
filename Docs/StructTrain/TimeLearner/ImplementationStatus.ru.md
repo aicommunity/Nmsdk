@@ -98,7 +98,7 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
 | Этап | Подтверждено в ограниченной области | Что мешает закрыть этап целиком |
 |---|---|---|
 |0. Начальное объединение|Принято; последующие изменения объединяются children-first через merge commits|Новые features проходят свою приёмку отдельно|
-|1. Доказательства и параметры|Есть реестры, исторические anchors и source/property review|Завершить semantic review всех публичных параметров, режимов и прежних аудитов; устранить remaining unknowns|
+|1. Доказательства и параметры|Есть реестры, исторические anchors и catalog coverage всех217 деклараций; это source coverage, не runtime matrix|Обновить semantics изменившихся consumers/helpers, inherited Rdk properties и оставшиеся audit unknowns; завершить runtime/effective-factor проверки|
 |2. Сборки/runtime|Изолированные сборки, manifests, process ownership; приняты scoped gate/output и archive restoration fixes|Полная build/resource/fault matrix, общий срез и воспроизведение closure; не считать учёт ресурсов OS quota|
 |3. Наблюдения/scorer|Строгие native observations, completeness/ID/finite checks и versioned metrics; legacy numeric reader не достраивает доказательства|Все legacy adapters, режимы/физические профили и единый итоговый verdict для всей области|
 |4. Lifecycle/storage|Есть реальные native fixtures, graph/response readback и проверки boundaries|Полная fresh/reuse/Copy/Load/Build/growth/heterogeneous physics матрица и все compatibility paths|
@@ -281,3 +281,11 @@ FeedbackGain0 устранил дополнительные положитель
 вмешательство, не новое обучение или классификация; менять default physics
 либо CapturedPerInput на этом основании нельзя. Отчёт/visual QA продолжаются;
 ASan нового API, Elder и полный mode/profile scope открыты.
+
+
+[Диагностика missing при исходном пороге100](HighThresholdSinglePulseJobs.json)
+запущена на M40 из отдельного tool snapshot с прежним immutable compiled SDK.
+Это selector архивных training100/Retry состояний, не threshold intervention.
+Запланированы4 actual burst/single probes; результат ещё не принят. Временные
+[отчёты feedback12](FeedbackProfileTemporalReportJobs.json) строятся параллельно;
+5 chart controls прошли, ручная visual QA остаётся открытой.
