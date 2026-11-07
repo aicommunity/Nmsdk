@@ -15,7 +15,10 @@ merge и научная разделимость — разные утвержд
 | Общий ASan SDK | root2e061/Pulse12d: 133/133; не подтверждает последующие изменения |
 | Baseline recovery SDK | root84d6/Pulse416: normal118 и адресный ASan19 приняты; stock Train/evaluation завершены |
 | Fair-domain compiled SDK | root36f598/Pulse8f057: normal137/137 и адресный ASan38/38 на M40; общая приёмка в develop ещё открыта |
-| PulseLib documentation HEAD | `2f6b57253bd7ae380a19320ef3835a2701cb4d30`; Core совпадает с tested8f, но receipts сохраняют фактический SHA сборки |
+| Исторический documentation snapshot PulseLib | `2f6b57253bd7ae380a19320ef3835a2701cb4d30`; Core совпадает с tested8f; это не текущий HEAD feature |
+| Текущая feature документация PulseLib | `0475a7ebe21bfd01f843aef36feb77bf629b03d6`; Core совпадает с compiled1f97. Документация согласована с Console gate; scope runtime не расширен |
+| Prepared-owner / storage Console SDK | root844b278/Pulse1f97: M40 normal26, readers29+9+2, Console12 и4 exact baseline pairs; ASan этого API/Elder открыты |
+| Single-pulse ASan SDK | root5d0b80/Pulse302: M40 native37, Console4 иPython42. Это предыдущий SDK, без нового storage API |
 | Worker-limit Python SDK | rooteae3: 26/26 на каждом сервере; не проверка нейронного обучения |
 
 Полные SHA, source hashes, первичные архивы и process closure:
@@ -69,15 +72,20 @@ Primary опубликован:5043 members, каждый повторно пр�
 C-trim/PostTune/калибровки. Baseline ответы не подставлялись вместо новой серии.
 [Адресный wave-аудит](FairDomainStockPeakAudit-2026-11-07.ru.md) подтвердил
 все264 invalid по CSV: дополнительные либо недостающие локальные максимумы
-при четырёх фактических импульсах. Причинная физическая интерпретация и
-исправление assignment ещё открыты.
+при четырёх фактических импульсах. Общая причина всех264 и исправление
+assignment ещё открыты. Для двух low/Retry состояний выполнено отдельное
+[контролируемое feedback-вмешательство](FeedbackProfileScientificReport-2026-11-07.ru.md);
+его выводы нельзя переносить на все случаи missing/ambiguous.
 [Точный replay двух low/Retry candidate](StockWaveReplay.ru.md) после полного
 import/Reset воспроизвёл все soma/input samples и ambiguous. Шесть серверных
 проверок прошли. [Первый импульс](StockFirstPulse.ru.md): до второго onset
 Classic уже имеет3 положительных максимума, Branch —1; четыре адресных tests
 прошли. Это ограничивает предположение «один максимум на импульс», но не
-определяет правило выбора response wave. Replay cache251 view завершён;
-causal waveform decomposition и отдельные single-pulse controls открыты.
+определяет правило выбора response wave. Replay cache251 view завершён.
+Последующие [single-pulse controls](SinglePulseCharacterizationScientificReport-2026-11-07.ru.md)
+проверили полное окно: Branch имеет второй слабый максимум после прежнего
+префикса. [Feedback12](FeedbackProfileScientificReport-2026-11-07.ru.md) сузил
+причину для двух low states; общее правило измерения ещё не принято.
 
 Августовские4/8,5/8,6/8 подтверждены не только исходным визуальным наблюдением:
 выполнены [saved-state replay](HistoricalAugustReplay.ru.md) и
@@ -178,8 +186,10 @@ selector≠0, точное восстановление burst stimulus/soma по
 группы закрыты, leases released. Первая попытка16/21 с20 assertions о коллизиях
 имён сохранена. Вторая дала37/37, но wrapper ошибся каталогом readers:
 исправлен только путь,13 readers выполнены отдельно без повторения native37.
-Оригинальные failed terminals не переписаны под PASS. ASan, Elder и полный
-cancellation/connected/replacement scope открыты. [Console job4 и paired stock study](SinglePulseCharacterizationConsoleVerification.json)
+Оригинальные failed terminals не переписаны под PASS.
+[Адресный ASan](SinglePulseCharacterizationAsanVerification.json) root5d0b80/Pulse302
+прошёл37 native,4 Console и42 Python checks на M40; Elder и полный
+cancellation/connected/replacement scope остаются открытыми. [Console job4 и paired stock study](SinglePulseCharacterizationConsoleVerification.json)
 root5d0b80a прошли четыре реальные пробы и42 Python tests на M40. Один импульс
 дал3 положительных максимума Classic Soma1 и2 Branch Soma1, при2/1 LT events;
 первые180 samples до второго burst onset совпали с исходной пачкой.
