@@ -185,6 +185,7 @@ def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_second
 
 
 def audit_feedback_profile_import(job, record, candidate):
+    _digest(record)
     from .feedback_intervention import audit_profile_delta
     from .archive_transfer_reports import graph
     fields = {'kind', 'schema_version', 'source_stopped_sha256', 'source_identity', 'candidate_identity',
