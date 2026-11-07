@@ -213,3 +213,13 @@ Console primary. Разрешены только объявленные image re
 порог, физика каналов, индивидуальные Rs/C, связи, порядок и частота должны
 совпадать полностью. Это data-consistency audit, а не native intervention,
 image closure proof, baseline waveform equivalence или научный verdict.
+
+
+[Inherited-image feedback profiles](FeedbackInterventionContract.ru.md):
+rootabf13d2b/Pulse73f0365 прошли M40 normal22/22 native и15/15 readers.
+В реальных fixture-моделях original/explicit2 дали одинаковые волны/LT events;
+production auditor подтвердил полный effective graph, кроме объявленных image
+renames. Для explicit0 сохранены все остальные поля и меняется реальный отклик.
+200 primary members и783 source hashes сверены, процессы закрыты/lease released.
+Это engineering1e-6 с fixture-морфологией; archived stock0.0117 intervention,
+ASan нового API, второй сервер и XML новых образов остаются открытыми.

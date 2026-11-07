@@ -9,8 +9,8 @@
   "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-inherited-feedback-normal-a1",
   "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-inherited-feedback-normal-a1-container",
   "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-inherited-feedback-normal-a1",
-  "status_at_last_kernel_observation": "running",
-  "phase_at_last_observation": "building",
+  "status_at_last_kernel_observation": "closed",
+  "phase_at_last_observation": "completed",
   "unit": "timelearner-2fa3761c-55b0-4fa4-8edf-30b173af1bc0.service",
   "invocation_id": "b98c887aa737434eb5991b0de8e71ce4",
   "initial_main_pid": 1453512,
@@ -28,7 +28,7 @@
   "actual_inherited_graph_delta_tests": 2,
   "engineering_threshold": 1e-06,
   "archived_stock_models_modified": false,
-  "acceptance_complete": false,
+  "acceptance_complete": true,
   "ASan_verified": false,
   "second_host_verified": false,
   "scientific_verdict": null,
@@ -38,5 +38,10 @@
     "runtime-single-pulse-native-normal-a2",
     "runtime-single-pulse-console-normal-a1"
   ],
-  "restart_policy": "Inspect this exact contained handle, terminal, full closure and released lease before any reuse. Observation timeout is not terminal; existing ASan uses a different source/build/runtime."
+  "restart_policy": "Inspect this exact contained handle, terminal, full closure and released lease before any reuse. Observation timeout is not terminal; existing ASan uses a different source/build/runtime.",
+  "whole_group_closed": true,
+  "lease_released": true,
+  "native_tests_passed": 22,
+  "reader_tests_passed": 15,
+  "primary_commit": "b157fd3f9b6dd6ec3f82e48f68c5ff0a57e41a4f"
 }
