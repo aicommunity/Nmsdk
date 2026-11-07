@@ -37,16 +37,16 @@ source hashes сверены с Git; native/reader tests не запускали
 Core library собрана, но это не runtime-проверка API. Группа закрыта/lease released.
 
 В fixture использовано GetComponent с правильным общим UEPtr<UContainer>;
-Rdk не изменялся. Failed-a1 остаётся failed. Исправленная постановка сохраняет
-26 native functions/29 readers и ещё должна пройти серверную проверку.
-
-
-Исправленная [a2 проверка запущена на M40](PreparedModelInstallJobs-a2.json).
-На последней kernel-проверке worker1489286 жив, идёт сборка. Ошибочный fixture
-уже скомпилирован, общий SDK ещё не принят. Pulse2726bdf не менялся; изменение
-native root относительно a1 ограничено Test_PulseLib_PreparedModel.cpp. Новый
-runtime отделён от failed-a1; cache используется после fresh closure/released
-lease. Постановка26 native/29 readers сохранена.
+Rdk не изменялся. Failed-a1 остаётся failed. Исправленная
+[a2 проверка на M40](PreparedModelInstallNormalVerification.json) завершена:
+26/26 native функций и29/29 readers без skips. Все234 members и785 source
+hashes сверены с точным compiled rootc5a32/Pulse2726. Четыре actual prepared
+owner records подтверждают candidate graph, индивидуальные параметры,
+неизменность source, пустые references/history/search/certificate/request и
+отказ повторной установки без изменения ownership. Группа закрыта, lease
+released; семь прежних runtime не изменились. Это scoped normal gate:
+waveform equivalence, archived stopped-state Console intervention, ASan нового
+API, второй сервер и полная матрица остаются открытыми.
 
 В App добавлен черновой TimeLearnerFeedbackProfileImport.h для следующего
 Console протокола. Он проверяет source package, создаёт derived images,
