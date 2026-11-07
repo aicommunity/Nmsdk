@@ -137,7 +137,34 @@ DatasetMatrix в подготовке/восстановлении; neuron Reset
 Если восстановление не удалось, executor сохраняет snapshot и не разрешает
 следующий edit/Queue, вместо объявления исходного состояния восстановленным.
 
-Console job/reader/CLI для новой диагностики, полный cancellation/connected/
-replacement fault scope и контроль stopped-model single-pulse ещё не готовы.
-Существующий Console job3 остаётся без изменений. Новую диагностику нельзя
-запустить через общий CLI до появления строгого reader и job admission.
+Native reader и его controls добавлены; адресная серверная проверка выполняется
+отдельно от первоначальных21 tests. Console job4, admission и paired stock CLI
+подготовлены в следующем кандидате, но ещё не скомпилированы/не проверены на
+реальных archived models. Полный cancellation/connected/replacement fault scope
+не закрыт. Существующий Console job3 сохраняет прежнее поведение.
+
+
+## Кандидат Console job4 и paired study
+
+Job4 явно содержит presentation.kind=single_pulse_characterization. Его
+источник — полный stopped-state archive; запрещены одновременная Rs intervention,
+assigned-burst policy и изменение stimulus physics. Новый строгий reader читает
+ProbeSpec/Observation4 отдельно от training reader, проверяет actual onset,
+полноту/clock/числа, physical selector и независимое соответствие peak полному
+CSV. Полная волна при ambiguous peak остаётся диагностикой с training_eligible=false.
+Возврат current base revision должен подтверждать восстановление модели.
+
+`python -m Scripts.StructTrain.TimeLearner.stock_single_pulse STUDY --runtime RUNTIME --output NEW`
+готовит обе пары jobs до первого native действия: исходная пачка с каналами
+и один импульс с теми же каналами. Exact candidate выбирается прежним правилом
+first invalid probe == archived model revision; последняя отличающаяся модель
+не подставляется. Перед каждой пробой проверяются source-state/packet/trace hashes.
+Сначала полный burst сравнивается с исходным Train; затем single-pulse trace
+сравнивается с burst строго до второго фактического onset. После этого момента
+равенство не требуется: предъявления различаются по объявленному протоколу.
+
+Выход study содержит фактические локальные максимумы каждой сомы и записи
+LT/Feedback; они не становятся назначенными response waves или сертификатом.
+Совместный plotter различает в заголовке burst replay и одноимпульсную
+характеристику. Primary должен быть опубликован в Git до построения такого
+verified report. Результаты запуска этого кандидата пока отсутствуют.

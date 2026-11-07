@@ -78,22 +78,25 @@ def prepare(study, output):
     return design
 
 
+def read_complete_burst(packet, trace):
+    """Read primary burst data after valid or explicit whole-window diagnostic audit."""
+    if packet['observation']['valid']:
+        audit_probe(packet, Path(trace))
+        with Path(trace).open(encoding='utf-8', newline='') as stream:
+            rows = list(csv.reader(stream))[1:]
+        samples = [{'time': number(float(row[0])), 'stimulus': number(float(row[1])),
+                    'soma': [number(float(v)) for v in row[2:]]} for row in rows]
+        return packet['observation']['specification'], samples
+    partial = read_partial_probe(packet, Path(trace))
+    require(partial[5]['recorded_window_complete'] and not partial[5]['nonfinite_cells'],
+            'wave_replay_comparison_requires_complete_finite_windows')
+    return partial[1], partial[3]
+
+
 def compare_traces(original_packet, original_trace, replay_packet, replay_trace):
     """Report changes, including a mismatch; do not turn resemblance into PASS."""
-    def read(packet, trace):
-        if packet['observation']['valid']:
-            audit_probe(packet, Path(trace))
-            with Path(trace).open(encoding='utf-8', newline='') as stream:
-                rows = list(csv.reader(stream))[1:]
-            samples = [{'time': number(float(row[0])), 'stimulus': number(float(row[1])),
-                        'soma': [number(float(v)) for v in row[2:]]} for row in rows]
-            return packet['observation']['specification'], samples
-        partial = read_partial_probe(packet, Path(trace))
-        require(partial[5]['recorded_window_complete'] and not partial[5]['nonfinite_cells'],
-                'wave_replay_comparison_requires_complete_finite_windows')
-        return partial[1], partial[3]
-    old_spec, a = read(original_packet, original_trace)
-    new_spec, b = read(replay_packet, replay_trace)
+    old_spec, a = read_complete_burst(original_packet, original_trace)
+    new_spec, b = read_complete_burst(replay_packet, replay_trace)
     same_count = len(a) == len(b)
     same_clock = same_count and all(equal(x['time']-old_spec['begin'], y['time']-new_spec['begin'])
                                     for x, y in zip(a, b))
