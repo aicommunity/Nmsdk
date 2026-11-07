@@ -32,7 +32,7 @@
   "expected_unit_cases": 23,
   "expected_physical_cases": 21,
   "cooperative_capture_required": true,
-  "last_observation": "A1 compilation exit0, execution descendants_remaining; owned job closed. A2 unit23 passed; physical21 running.",
+  "last_observation": "All jobs terminal/closed. A1 build execution rejected; A2 unit23 valid, physical21 JUnit passed but DLL capture failed.",
   "launch_preparation": "Initial command exceeded remote command length before worker/task creation; bounded stdin bootstrap succeeded. No compute restart.",
   "scientific_worker_admitted": false,
   "classification_evaluated": false,
@@ -59,13 +59,17 @@
     "unit_loaded_modules": 37,
     "unit_job_closed": true,
     "unit_junit_sha256": "bcc5c0fbd9b179712ce90ed5fbc0adb3c360387fedb21d3aee1499423e1f3927",
-    "physical_status": "running",
+    "physical_status": "terminal rejected",
     "physical_identity": {
       "pid": 1076,
       "creation_filetime": "134385553877355058",
       "job_name": "Local\\TimeLearner-f7c47a85-a0b9-4953-a68d-b75874429dfd",
       "runtime_fingerprint": "05b95ea46bdca40264768088c155959cf6d5abccba91fd9b9e4e97ae8b583fe4"
     },
-    "full_evidence_published": false
+    "full_evidence_published": "9822ce2e1248787b2f494063d82f90c75a799eec",
+    "physical_assertions_observed": 21,
+    "physical_validity": "incomplete_test_observation",
+    "physical_rejection": "windows_module_path_unavailable",
+    "all_owned_jobs_closed": true
   }
 }

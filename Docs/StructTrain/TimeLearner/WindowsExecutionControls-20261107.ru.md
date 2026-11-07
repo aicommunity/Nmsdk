@@ -91,6 +91,10 @@ Job закрыт. Physical21 ещё выполняется. Финальная �
 A2 evidence и принятие whole SDK gate остаются впереди.
 [Точные Task/Job identities](WindowsAssignedSDKJobs.json).
 
+Итог A2:21/21 physical assertions выполнены, но DLL capture отказал.
+[Полный разбор отклонённого runtime gate](WindowsSDKRuntimeRejection-20261108.ru.md).
+Worker не допущен; положительный JUnit не подменяет отсутствующую provenance.
+
 Нужны успешная сборка актуального согласованного SDK с guard исправлением и
 повтор native regression набора. Затем — полноценный Train/export/frozen Test,
 provenance и публикация. До этих проверок Windows не получает научные jobs.
