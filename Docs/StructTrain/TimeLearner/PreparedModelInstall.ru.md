@@ -78,3 +78,16 @@ released. Scope остаётся admission-only, native compiler/waveforms не 
 Первая попытка запускателя завершилась до worker/tests: отсутствовал runtime_identity;
 во второй добавлены штатные runtime_content_identity/digest_json. Это ошибка
 orchestration manifest, не алгоритма модели; попытки не объединяются в один PASS.
+
+
+[Console/storage проверка a2](FeedbackProfileConsoleJobs-a2.json) запущена на M40.
+Сборка actual Console schema5 прошла; далее требуются26 native controls,
+29 прежних readers,12 реальных diagnostic probes и11 admission/execution controls.
+[Первая попытка](FeedbackProfileConsoleFailureVerification.json) отклонена начальным
+runtime guard до reservation/source updates/build; все5 primary members и785 hashes
+фактического прежнего sourcec5a32/Pulse2726 сверены. Запрошенный root844 не был
+скомпилирован в a1. Во второй попытке отдельный runtime; Pulse Core неизменен
+относительно ранее проверенного2726, gitlink1f97 включает обновлённую документацию.
+Восемь прежних runtime защищены byte hashes. Все12 заданий фиксируются до native
+operations; четыре exact baseline comparisons должны пройти до gain0. Серия не
+обучает и не оценивает классификацию; CapturedPerInput/threshold не меняются.
