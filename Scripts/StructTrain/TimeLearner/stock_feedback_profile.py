@@ -10,6 +10,7 @@ from pathlib import Path
 import struct
 
 from .native_characterization import prepare_feedback_profile_job, prepare_single_pulse_job, prepare_stopped_job
+from .clock_alignment import relative_clocks_equal, specification_frequency
 from .native_evidence import equal, load, measured_wave_plateaus, number, require
 from .native_pipeline_worker import run_job, audit_run_manifest
 from .n1_protocol_robustness import _signed, _write
@@ -31,7 +32,8 @@ def _samples(folder, single):
 def compare_presentations(first, second, single):
     a_spec,a=_samples(first,single);b_spec,b=_samples(second,single)
     same_count=bool(a) and len(a)==len(b)
-    clock=same_count and all(equal(x['time']-a_spec['begin'],y['time']-b_spec['begin']) for x,y in zip(a,b))
+    clock=same_count and relative_clocks_equal([x['time'] for x in a],a_spec['begin'],
+        [x['time'] for x in b],b_spec['begin'],specification_frequency(a_spec,b_spec))
     stimulus=same_count and all(x['stimulus']==y['stimulus'] for x,y in zip(a,b))
     soma=same_count and all(x['soma']==y['soma'] for x,y in zip(a,b))
     return {'same_sample_count':same_count,'relative_clock_equal_with_roundoff':clock,

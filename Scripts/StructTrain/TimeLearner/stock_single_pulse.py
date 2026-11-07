@@ -7,6 +7,7 @@ import hashlib
 import json
 
 from .native_characterization import prepare_single_pulse_job, validate_job
+from .clock_alignment import relative_clocks_equal, specification_frequency
 from .native_evidence import equal, load, measured_wave_plateaus, number, require
 from .native_pipeline_worker import run_job, audit_run_manifest
 from .n1_protocol_robustness import _signed, _write
@@ -28,7 +29,9 @@ def compare_first_prefix(burst_packet, burst_trace, single_packet, single_trace)
     b = [{'time':s['time']-spec['begin'],'stimulus':s['stimulus'],'soma':s['soma']}
          for s in samples if s['time']-spec['begin'] < cutoff]
     same_count = len(a) == len(b) and bool(a)
-    same_clock = same_count and all(equal(x['time'],y['time']) for x,y in zip(a,b))
+    same_clock = same_count and relative_clocks_equal([s['time'] for s in burst if s['time']-begin < cutoff],begin,
+        [s['time'] for s in samples if s['time']-spec['begin'] < cutoff],spec['begin'],
+        specification_frequency(observed['specification'],spec))
     same_input = same_count and all(x['stimulus'] == y['stimulus'] for x,y in zip(a,b))
     same_soma = same_count and all(x['soma'] == y['soma'] for x,y in zip(a,b))
     return {'cutoff_second_actual_onset_relative':cutoff,'samples':len(a),'same_sample_count':same_count,

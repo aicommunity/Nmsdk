@@ -10,6 +10,7 @@ import hashlib
 import json
 
 from .native_evidence import audit_probe, equal, load, number, require
+from .clock_alignment import relative_clocks_equal, specification_frequency
 from .native_characterization import prepare_stopped_job, audit_execution
 from .native_pipeline_worker import run_job, audit_run_manifest
 from .n1_protocol_robustness import _signed, _write
@@ -99,8 +100,8 @@ def compare_traces(original_packet, original_trace, replay_packet, replay_trace)
     old_spec, a = read_complete_burst(original_packet, original_trace)
     new_spec, b = read_complete_burst(replay_packet, replay_trace)
     same_count = len(a) == len(b)
-    same_clock = same_count and all(equal(x['time']-old_spec['begin'], y['time']-new_spec['begin'])
-                                    for x, y in zip(a, b))
+    same_clock = same_count and relative_clocks_equal([x['time'] for x in a],old_spec['begin'],
+        [x['time'] for x in b],new_spec['begin'],specification_frequency(old_spec,new_spec))
     same_input = same_count and all(x['stimulus'] == y['stimulus'] for x, y in zip(a, b))
     same_signal = same_count and all(x['soma'] == y['soma'] for x, y in zip(a, b))
     return {'same_sample_count': same_count, 'relative_clock_equal_with_roundoff': same_clock,
