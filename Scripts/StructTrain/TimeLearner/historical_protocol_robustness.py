@@ -37,6 +37,14 @@ def _dataset(tree):
     return _one(tree, "./Model/Components/NeuronTimeLearner/Components/DatasetMatrix/Parameters")
 
 
+def _target(learner):
+    node = _one(learner, "./InputPattern")
+    values = [float(v) for v in (node.text or "").split()]
+    require((node.get("Rows"), node.get("Cols")) == ("4", "1") and len(values) == 4 and
+            all(math.isfinite(v) and v > 0 for v in values), "unsupported_historical_training_target")
+    return values
+
+
 def _read_patterns(parameters):
     for name, expected in (("NumFeatures", "1"), ("NumSamples", "8"),
                            ("MaxSpikesPerFeature", "4"), ("LoopSamples", "0"),
@@ -61,7 +69,7 @@ def prepare_protocol(work, order, iti):
             and set(order) == set(range(8)), "invalid_historical_protocol_permutation")
     require(type(iti) in (int, float) and math.isfinite(iti) and iti in (1.5, 3.),
             "unsupported_historical_protocol_iti")
-    source = None;source_identity = serialized_neuron(work/"Model_00.xml");prepared = []
+    source = None;target = None;source_identity = serialized_neuron(work/"Model_00.xml");prepared = []
     for filename in ("Model_00.xml", "Parameters_00.xml"):
         path = work/filename;tree = ET.parse(path);root = tree.getroot()
         parameters = _dataset(root);patterns, labels = _read_patterns(parameters)
@@ -69,6 +77,9 @@ def prepare_protocol(work, order, iti):
         require(source is None or source == declared, "historical_protocol_model_parameter_data_disagree")
         source = declared
         learner = _one(root, "./Model/Components/NeuronTimeLearner/Parameters")
+        actual_target = _target(learner)
+        require(target is None or actual_target == target, "historical_protocol_training_target_disagrees")
+        target = actual_target
         require((_one(learner, "./IsNeedToTrain").text or "").strip() == "0",
                 "historical_protocol_must_not_train")
         require((_one(learner, "./NumInputDendrite").text or "").strip() == "4" and
@@ -93,6 +104,7 @@ def prepare_protocol(work, order, iti):
     return {"order": order, "iti_declared": iti, "threshold": THRESHOLD,
             "reset_policy": "historical native Test; fresh process per matrix; no added per-trial reset",
             "model_seconds": MODEL_SECONDS,
+            "training_target": target,
             "samples": [{"sample_id": "phasea-"+str(i), "original_index": i,
                          "pattern_hash": canonical_model_sha256({"isi": [float(v) for v in patterns[i]]}),
                          "pattern": [float(v) for v in patterns[i]], "label": "target" if labels[i] == "1" else "foil"}
@@ -103,6 +115,8 @@ def prepare_protocol(work, order, iti):
 
 def effective_protocol(path, declared):
     root = ET.parse(path).getroot();p = _dataset(root);patterns, labels = _read_patterns(p)
+    learner = _one(root, "./Model/Components/NeuronTimeLearner/Parameters")
+    require(_target(learner) == declared["training_target"], "historical_protocol_training_target_changed")
     require([[float(v) for v in row] for row in patterns] == [s["pattern"] for s in declared["samples"]]
             and labels == ["1" if s["label"] == "target" else "0" for s in declared["samples"]],
             "historical_protocol_effective_matrix_changed")
