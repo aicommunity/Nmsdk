@@ -27,8 +27,10 @@ Exact certificate или доказанную декомпозицию нели�
 
 Семь unit cases production planner прошли на Elder через полный SDK CMake
 configure и отдельный `Test_PulseLib_StimulusSubset` (rootd684cec2e,
-PulseLibe9da428). Есть те же cases в StorageComponents. Artifact publication
-этого gate ещё предстоит; локальная компиляция не применялась.
+PulseLibe9da428). Есть те же cases в StorageComponents. Evidence
+`2831b273c6566c80f998aa7093179ceeb7cbae5d`:71 members /166180B.
+[Metadata-сверка](StimulusSubsetPlannerVerification.json) подтвердила каждый
+member и6 source hashes против Git. Локальная компиляция не применялась.
 
 В feature branch добавлены diagnostic-only schema6 полного наблюдения,
 временная настройка Dataset на легальной границе, snapshot/restore полного
@@ -39,3 +41,28 @@ training pattern, model/source/readback guards и запрет сертифик�
 После их приёмки нужны
 Console, readers, настоящие ablation-пробы и временные графики. Никакой новый
 assignment или порог сходимости этим документом не вводится.
+
+## Служебная подготовка Elder
+
+Первый unit attempt остановлен до компиляции: свободное место ниже2GiB.
+Из закрытого private SDK build удалены474 регенерируемых `.cpp.o/.cc.o/.c.o`,
+125358240B. `_deps`, исходники, linked runtimes, модели и primary сохранены;
+source/runtime hashes проверены до/после. Новый unit attempt прошёл7/7.
+Первая попытка не переоценивалась в успешную.
+
+В завершении metadata-only очистки был пропущен обязательный `note` для
+release. После проверки завершённого владельца, сохранённого producer и
+повторной сверки файлов выполнена явная административная коррекция ровно
+одного maintenance lease. Она сохранена в evidence, не является восстановлением
+compute worker и не ослабляет production запрет automatic stale release.
+Будущие maintenance операции также должны использовать bound owner.
+
+## Следующая приёмка
+
+Начат отдельный normal job `s07-stimulus-subset-api-elder-a1`:roota798182e5,
+PulseLib09617c6. Новая runtime directory,71 unit IDs (14 subset/schema,
+34 прежних recorder,23 certificate) и19 physical IDs:9 новых subset,
+4 full-burst,2 bounded2k и4 single-maximum regressions. Сначала SDK build
+и регистрации CTest, затем тесты; при отказе следующая группа не запускается.
+Результат ещё не принят. Поддержка Console, warm continuation, arbitrary
+physics и настоящие сравнительные ablation-эксперименты этим не заявляются.
