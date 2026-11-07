@@ -85,9 +85,8 @@ Neuron и lazy LTZone разрешаются через общий UContainer, �
 В fixed gate добавлены три controls: реальный lazy LTZone lookup обоих
 learner, empty shape/NaN в дополнительном столбце и неверный порядок stimulus.
 Итого7 новых test functions (каждая Classic+Branch) плюс5 прежних observation
-controls. Дополнительные три controls пока не runtime-проверены; положительная
-приёмка candidate12 ещё ожидается. Проверка на втором сервере и ASan также
-не объявляются выполненными.
+controls. Этот состав прошёл12/12 в normal и адресном ASan на M40;
+receipts ниже сохраняют точную область. Проверка на втором сервере открыта.
 
 MatchMode1 сравнивает входные ISI с сохранённым TrainingPattern. Его Match сам
 по себе не доказывает ответ нейрона. Научные метрики обязаны использовать
@@ -108,5 +107,19 @@ Pulsefe382a0 прошёл12/12 без skips. Первые четыре regressio
 сверены с её фактическими root/Pulse commits. A2 declared root920, но не дошёл
 до checkout: его source hashes относятся к56ac, что указано явно. Старые
 13 runtime files сохранились;28 actual loaded files привязаны к процессу.
-Все группы закрыты и leases released. ASan, второй сервер, полный analyzer
+Все группы закрыты и leases released. Normal receipt сам по себе не включает
+ASan; отдельная ASan-приёмка приведена ниже. Второй сервер, полный analyzer
 scope и этап3 остаются открытыми; положительный научный результат не добавлен.
+
+
+## Адресная ASan приёмка на M40
+
+[Проверка](IsiTemplateValidationAsanVerification.json) подтверждает12/12 на том
+же compiled root87e406bd/Pulsefe382a0. Сверены42 members и766 source hashes
+с точными Git commits; JUnit inventory согласуется с return0. В реально
+загруженных файлах есть libasan, compile/link flags включают address sanitizer.
+ASAN_OPTIONS=detect_leaks=0: отсутствие утечек этим не подтверждается.
+Группа закрыта и lease released. Тринадцать файлов прежнего отдельного runtime
+проверены на сервере до/после повторного использования освобождённого build cache.
+Это не проверка второго сервера, всех режимов analyzer или исправление
+InvalidObservation штатного V2 Train. Начальные неудачные попытки сохранены.
