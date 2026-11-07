@@ -104,7 +104,8 @@ runtime mappings и закрытие всей группы. Дополнител
 [metadata-сверка](AssignedVertexSDKVerification.json) подтвердила каждый
 archive member и 782 source hashes против Git. Старые runtime неизменны.
 Численных локальных проверок не выполнялось. ASan SDK gate на M40 ещё
-выполняется; визуальный отчёт этого нового контрольного случая ещё не готов.
+выполняется. [Визуальный отчёт нового native-контроля](AssignedVertexNativeControlReport-2026-11-07.ru.md)
+содержит обе сомы и фактические входы; полный кэш хранится на M40.
 
 Изменения остаются в
 `codex/timelearner-assigned-peak-ownership`; merge в develop не выполнен.
