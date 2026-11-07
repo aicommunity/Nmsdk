@@ -148,7 +148,7 @@ public:
                 QJsonArray feedback,spikes;
                 for(const auto& row:feedbackSamples){QJsonArray values;for(double v:row)values.append(v);feedback.append(values);}
                 for(double v:ltSpikeTimes)spikes.append(v);
-                QFile control(dir+"/"+name+"-feedback.json");ASSERT_TRUE(control.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                QFile control(dir+"/feedback-control-"+name+".json");ASSERT_TRUE(control.open(QIODevice::WriteOnly|QIODevice::NewOnly));
                 const auto bytes=QJsonDocument(QJsonObject{{"feedback",feedback},{"actual_lt_spike_times",spikes},
                     {"engineering_threshold",1e-6},{"native_probe_training_started",false},{"classification_evaluated",false}}).toJson();
                 ASSERT_EQ(control.write(bytes),bytes.size());
