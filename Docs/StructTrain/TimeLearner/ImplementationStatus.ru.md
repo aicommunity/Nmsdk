@@ -22,7 +22,7 @@ merge и научная разделимость — разные утвержд
 | Baseline recovery SDK | root84d6/Pulse416: normal118 и адресный ASan19 приняты; stock Train/evaluation завершены |
 | Fair-domain compiled SDK | root36f598/Pulse8f057: normal137/137 и адресный ASan38/38 на M40; общая приёмка в develop ещё открыта |
 | Исторический documentation snapshot PulseLib | `2f6b57253bd7ae380a19320ef3835a2701cb4d30`; Core совпадает с tested8f; это не текущий HEAD feature |
-| Текущая feature документация PulseLib | `0475a7ebe21bfd01f843aef36feb77bf629b03d6`; Core совпадает с compiled1f97. Документация согласована с Console gate; scope runtime не расширен |
+| Текущая feature документация PulseLib | `bedf249738d992961674b9c3bdfe9db88a11fcee`; Core совпадает с compiled1f97. Добавлено различие Train/Test maxima и ограничений schema 3; scope runtime не расширен |
 | Prepared-owner / storage Console SDK | root844b278/Pulse1f97: M40 normal26, readers29+9+2, Console12 и4 exact baseline pairs; ASan этого API/Elder открыты |
 | Single-pulse ASan SDK | root5d0b80/Pulse302: M40 native37, Console4 иPython42. Это предыдущий SDK, без нового storage API |
 | Worker-limit Python SDK | rooteae3: 26/26 на каждом сервере; не проверка нейронного обучения |
