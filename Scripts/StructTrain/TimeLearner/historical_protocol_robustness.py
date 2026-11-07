@@ -69,7 +69,8 @@ def prepare_protocol(work, order, iti):
             and set(order) == set(range(8)), "invalid_historical_protocol_permutation")
     require(type(iti) in (int, float) and math.isfinite(iti) and iti in (1.5, 3.),
             "unsupported_historical_protocol_iti")
-    source = None;target = None;source_identity = serialized_neuron(work/"Model_00.xml");prepared = []
+    source = None;target = None;threshold_controls = None
+    source_identity = serialized_neuron(work/"Model_00.xml");prepared = []
     for filename in ("Model_00.xml", "Parameters_00.xml"):
         path = work/filename;tree = ET.parse(path);root = tree.getroot()
         parameters = _dataset(root);patterns, labels = _read_patterns(parameters)
@@ -87,10 +88,21 @@ def prepare_protocol(work, order, iti):
                 ("1" if filename == "Model_00.xml" else "0"),
                 "historical_protocol_unsafe_native_load_modes")
         _one(learner, "./Delay");_one(parameters, "./Delay")
+        controls = {name: (_one(learner, "./"+name).text or "").strip()
+                    for name in ("LTZThreshold", "FixedLTZThreshold", "UseFixedLTZThreshold")}
+        if filename == "Parameters_00.xml":
+            require(float(controls["LTZThreshold"]) == THRESHOLD and
+                    float(controls["FixedLTZThreshold"]) == THRESHOLD and
+                    controls["UseFixedLTZThreshold"] == "0", "historical_protocol_threshold_overlay_changed")
+            threshold_controls = controls
         prepared.append((path, tree, learner, parameters, patterns, labels))
     # Validate both native files before editing either one. A corrupt second
     # file must not leave the first with a partially changed declared protocol.
     for path, tree, learner, parameters, patterns, labels in prepared:
+        # The historical Model contains the baseline parent threshold while
+        # Parameters supplies the declared Test overlay. Native parameter export
+        # must preserve that original overlay, not replace it with Model defaults.
+        for name, value in threshold_controls.items():_one(learner, "./"+name).text = value
         _one(parameters, "./MatrixData").text = "\n".join(v for index in order for v in patterns[index])
         _one(parameters, "./MatrixClasses").text = "\n".join(labels[index] for index in order)
         # Learner owns the effective dataset delay; setting only its child can
@@ -117,6 +129,10 @@ def effective_protocol(path, declared):
     root = ET.parse(path).getroot();p = _dataset(root);patterns, labels = _read_patterns(p)
     learner = _one(root, "./Model/Components/NeuronTimeLearner/Parameters")
     require(_target(learner) == declared["training_target"], "historical_protocol_training_target_changed")
+    require(float(_one(learner, "./LTZThreshold").text) == declared["threshold"] and
+            float(_one(learner, "./FixedLTZThreshold").text) == declared["threshold"] and
+            (_one(learner, "./UseFixedLTZThreshold").text or "").strip() == "0",
+            "historical_protocol_effective_threshold_changed")
     require([[float(v) for v in row] for row in patterns] == [s["pattern"] for s in declared["samples"]]
             and labels == ["1" if s["label"] == "target" else "0" for s in declared["samples"]],
             "historical_protocol_effective_matrix_changed")
