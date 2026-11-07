@@ -1,0 +1,40 @@
+{
+  "kind": "optional_windows_native_preparation_job",
+  "schema_version": 1,
+  "source_root": "8314e98f7dbd93441d81de32e7c7174f0fafac24",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "host": "10.245.1.14",
+  "task": "TimeLearner-WindowsAssignedSDK-A1-20261107",
+  "instance": "{B0946FDD-8180-425F-94BC-466C2E64E577}",
+  "worker_sha256": "8af1796ed6e93ef3ff078084f1494c333edd2d1b4377d22bcb771e2b724dee2d",
+  "source": "C:/Projects/TimeLearnerWorker/source-4b4f32262-a4",
+  "build": "C:/Projects/TimeLearnerWorker/build-a4",
+  "runtime": "C:/Projects/TimeLearnerWorker/runtime-windows-assigned-sdk-a1",
+  "output": "C:/Projects/TimeLearnerWorker/jobs/windows-assigned-sdk-a1",
+  "build_identity": {
+    "pid": 11516,
+    "creation_filetime": "134385546165545362",
+    "job_name": "Local\\TimeLearner-e27821bc-9f45-45cc-8e41-e3773decceb1",
+    "runtime_fingerprint": "bc5c6bc5450ab06fb85e727aa3da5b15f867f57ebb5443f61e14523fc262d3a6"
+  },
+  "build_limits": {
+    "memory_bytes": 4294967296,
+    "maximum_processes": 32,
+    "maximum_wall_seconds": 2400,
+    "compiler_parallelism": 1
+  },
+  "native_limits": {
+    "memory_bytes": 3221225472,
+    "maximum_processes": 1,
+    "unit_wall_seconds": 180,
+    "physical_wall_seconds": 3600
+  },
+  "expected_unit_cases": 23,
+  "expected_physical_cases": 21,
+  "cooperative_capture_required": true,
+  "last_observation": "configure completed; compiler active; no terminal result yet",
+  "launch_preparation": "Initial command exceeded remote command length before worker/task creation; bounded stdin bootstrap succeeded. No compute restart.",
+  "scientific_worker_admitted": false,
+  "classification_evaluated": false,
+  "whole_plan_complete": false
+}
