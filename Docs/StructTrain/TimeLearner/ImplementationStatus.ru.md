@@ -160,5 +160,9 @@ InvalidObservation native V2 stock Train.
 M40:12 native controls,4 реальных Off/On пробы и18 readers прошли. Observer
 не изменил CSV и исходную волну. Записаны фактические Exc/Inh/Feedback/LT:
 до второго входа Classic имеет2 LT events, Branch1. Это не новая классификация
-или исправление assignment; графики каналов, ASan, второй сервер и вся матрица
-нового режима остаются открытыми. Первая compile failure сохранена в evidence.
+или исправление assignment. Адресный ASan того же SDK также прошёл12 native
+controls,4 пробы и18 readers; libasan подтверждён в5 процессах, detect_leaks=0.
+[Совместный channel render](NativeChannelJointVisualVerification.json) завершён:
+5 сом,216 views; четыре выбранных PNG просмотрены по отдельности и сверены с Git.
+Второй сервер и вся interruption/intervention/profile матрица нового режима
+остаются открытыми. Первая compile failure сохранена в evidence.
