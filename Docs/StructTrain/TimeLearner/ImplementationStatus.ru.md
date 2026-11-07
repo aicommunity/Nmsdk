@@ -194,3 +194,13 @@ builder воспроизвёл baseline digest defect и прошёл полож
 сверены с Git и просмотрены индивидуально. Слабый Branch максимум требует
 локального Y; общий масштаб контекстного окна для него недостаточен.
 Полный ручной просмотр cache не заявляется. Это не новая классификация.
+
+
+[Storage FeedbackGain](StorageFeedbackProfiles.ru.md): rootb54330482/Pulsed09613c,
+M40 normal18/18 native и13/13 readers без skips. Проверены inherited custom
+профили, сохранность prototypes/live instances, body/LT разделение, growth,
+Build/Reset/XML с индивидуальными Rs/C, invalid/collision и реальная динамика
+Classic/Branch2000/20000Гц. Все161 primary members и781 source hashes сверены;
+процессы закрыты, lease released. Engineering threshold1e-6 одинаков в controls;
+это не causal intervention в stock0.0117 и не новое обучение. ASan/второй сервер,
+полная матрица и baseline-equivalent stock reconstruction открыты.
