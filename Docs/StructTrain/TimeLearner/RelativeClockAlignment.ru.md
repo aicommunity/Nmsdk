@@ -36,7 +36,8 @@ production comparator, прежние low replays, отказ полному/fra
 437 tool hashes и20 input bindings по опубликованным high/low/original Train
 архивам. Новые native пробы не выполнялись; worker group closed/lease released.
 
-Фикс не завершает training100 study. Branch данные переанализированы, Classic
-ещё надо выполнить на исходных состояниях. Не повторять уже полученные Branch
+Сам фикс не завершал training100 study. Последующий
+[combined gate](HighThresholdCombinedVerification.json) выполнил2 Classic probes
+и переанализировал сохранённые Branch данные без native repeat. Не повторять уже полученные Branch
 пробы только ради нового reader. Старый failed terminal остаётся failed;
 исправленные читатели имеют собственный commit/evidence.
