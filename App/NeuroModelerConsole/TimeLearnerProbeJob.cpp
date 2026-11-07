@@ -8,6 +8,7 @@
 #include "TimeLearner/NumericChecks.h"
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/NativeLearnedState.h"
+#include "TimeLearner/StimulusSubset.h"
 #include <chrono>
 #include <iostream>
 
@@ -29,12 +30,13 @@ struct Job {
     double duration=0.,gap=0.,minimumAmplitude=0.,windowBegin=0.,windowEnd=0.,wallSeconds=0.;
     bool recordSpikes=false,channelDiagnostics=false,singlePulse=false;
     PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow;
+    std::optional<std::vector<std::size_t>> subset;
 };
 bool Boolean(const QJsonValue& v){Require(v.isBool(),"probe_boolean_required");return v.toBool();}
 Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
-    const auto version=Count(d["schema_version"],1,5);
+    const auto version=Count(d["schema_version"],1,6);
     std::set<QString> fields{"kind","schema_version","owner_class","implementation_id","model","profile_archives",
         "stimulus_profile","probe","maximum_model_ticks","maximum_wall_seconds","sha256"};
     if(version>=2){fields.insert("source_stopped");fields.insert("resistance_intervention");}
@@ -51,10 +53,22 @@ Job Read(const QString& path)
     for(const auto& p:j.profiles)Object(p);
     if(version>=3)j.channelDiagnostics=Boolean(d["channel_diagnostics"]);
     if(version>=4) {
-        const auto presentation=Object(d["presentation"]);Keys(presentation,{"kind"});
-        Require(presentation["kind"]==QJsonValue("single_pulse_characterization") ||
-            (version==5 && presentation["kind"]==QJsonValue("native_burst")),"unsupported_probe_presentation");
-        j.singlePulse=presentation["kind"]==QJsonValue("single_pulse_characterization");
+        const auto presentation=Object(d["presentation"]);
+        if(version==6) {
+            Keys(presentation,{"kind","source_ordinals"});
+            Require(presentation["kind"]==QJsonValue("stimulus_subset_characterization"),"unsupported_probe_subset_presentation");
+            j.subset.emplace();
+            for(const auto& value:Array(presentation["source_ordinals"])) {
+                const auto i=Count(value,0,j.model.inputs.size()-1);
+                Require(j.subset->empty() || i>j.subset->back(),"invalid_probe_subset_ordinals");j.subset->push_back(i);
+            }
+            Require(!j.subset->empty(),"empty_probe_subset");
+        } else {
+            Keys(presentation,{"kind"});
+            Require(presentation["kind"]==QJsonValue("single_pulse_characterization") ||
+                (version==5 && presentation["kind"]==QJsonValue("native_burst")),"unsupported_probe_presentation");
+            j.singlePulse=presentation["kind"]==QJsonValue("single_pulse_characterization");
+        }
     }
     if(version>=2) {
         j.stopped=Object(d["source_stopped"]);
@@ -75,6 +89,10 @@ Job Read(const QString& path)
     }
     Require(!j.singlePulse || j.resistanceIntervention.empty(),"single_pulse_intervention_not_supported");
     Require(!j.singlePulse || Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"single_pulse_source_profile_changed");
+    if(j.subset) {
+        Require(j.resistanceIntervention.empty(),"subset_resistance_intervention_forbidden");
+        Require(Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"subset_source_profile_changed");
+    }
     const auto source=Object(d["stimulus_profile"]);
     Keys(source,{"generator_class","amplitude","pulse_length","frequency_hz","frequency_deviation","use_transit_signal","use_pattern_output"});
     j.stimulus={Text(source["generator_class"]),Number(source["amplitude"]),Number(source["pulse_length"]),Number(source["frequency_hz"]),
@@ -88,12 +106,19 @@ Job Read(const QString& path)
     j.recordSpikes=Boolean(p["record_spikes"]);
     Require(!j.recordSpikes,"native_probe_spike_capture_not_supported");
     const auto selection=Text(p["peak_selection"]);
-    Require(selection=="isolated_window" || selection=="assigned_burst_wave" || selection=="single_impulse_maximum","invalid_probe_selection");
-    j.selection=selection=="isolated_window"?PeakSelectionPolicy::IsolatedWindow:
+    Require(j.subset?selection=="none":
+        (selection=="isolated_window" || selection=="assigned_burst_wave" || selection=="single_impulse_maximum"),"invalid_probe_selection");
+    j.selection=(selection=="isolated_window" || selection=="none")?PeakSelectionPolicy::IsolatedWindow:
         selection=="assigned_burst_wave"?PeakSelectionPolicy::AssignedBurstWave:PeakSelectionPolicy::SingleImpulseMaximum;
     Require(!j.singlePulse || j.selection!=PeakSelectionPolicy::AssignedBurstWave,"single_pulse_requires_explicit_peak_window");
     Require(j.singlePulse || j.selection!=PeakSelectionPolicy::SingleImpulseMaximum,"maximum_requires_single_impulse_presentation");
-    const auto w=Object(p["window"]);Keys(w,{"begin","end"});j.windowBegin=Number(w["begin"]);j.windowEnd=Number(w["end"]);
+    if(j.subset) {
+        Require(p["window"].isNull(),"subset_peak_window_forbidden");
+        Require(j.model.branch || j.input==0,"subset_classic_requires_zero_input_index");
+        j.windowBegin=0.;j.windowEnd=j.duration;
+    } else {
+        const auto w=Object(p["window"]);Keys(w,{"begin","end"});j.windowBegin=Number(w["begin"]);j.windowEnd=Number(w["end"]);
+    }
     j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);j.wallSeconds=Number(d["maximum_wall_seconds"]);
     Require(j.wallSeconds>0.,"invalid_probe_wall_budget");return j;
 }
@@ -201,6 +226,16 @@ template<class Owner> int Execute(const Job& j,const QString& output)
                 spec.expectedStimulusIds={spec.expectedStimulusIds.front()};
                 spec.windows={{request.inputId,j.model.branch?0u:j.input,j.windowBegin,j.windowEnd,spec.expectedStimulusIds.front()}};
             }
+            if(j.subset) {
+                auto& spec=request.specification;const auto originalHash=spec.patternHash;
+                const auto selected=PlanStimulusSubset(request.expectedInputIsi,*j.subset);
+                QJsonArray values;for(double value:selected.presentedIsi)values.append(value);
+                spec.schemaVersion=6;spec.waveAssignment=WaveAssignmentPolicy::WindowOnly;
+                spec.peakSelection=PeakSelectionPolicy::IsolatedWindow;spec.windows.clear();
+                spec.stimulusSubset=StimulusSubsetCharacterization{originalHash,j.model.inputs.size(),*j.subset};
+                spec.patternHash=NmsdkTools::CanonicalModelDataSha256(values).toStdString();spec.expectedStimulusIds.clear();
+                for(auto i:*j.subset)spec.expectedStimulusIds.push_back("pulse"+std::to_string(i));
+            }
             request.readModelRevision=[&](){return observer.Read(neuron,ports).toStdString();};
             request.readFullModelRevision=[&](){const auto actual=NmsdkTools::IdentifyModel(neuron,ports);
                 Require(actual["valid"]==QJsonValue(true),"probe_invalid_live_graph");return actual["sha256"].toString().toStdString();};
@@ -260,6 +295,20 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         Require(Parameters(parameters)==Parameters(expected) && idle(),"probe_intervention_parameter_or_controller_mismatch");
         const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());Require(integration.valid,integration.reason.c_str());
         const auto configuration=configurationFor(parameters);
+        const auto presentationReadback=[&]() {
+            auto dataset=owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+            Require(bool(dataset),"subset_dataset_missing");
+            QJsonArray training,pattern;
+            const auto read=[&](const auto& matrix,QJsonArray& result) {
+                Require(matrix.GetCols()==1 && matrix.GetRows()>=0 && matrix.GetRows()<=1000000,"subset_readback_shape_invalid");
+                for(int i=0;i<matrix.GetRows();++i)result.append(matrix(i,0));
+            };
+            read(owner->InputPattern.GetData(),training);read(dataset->MatrixData.GetData(),pattern);
+            return QJsonObject{{"training_pattern",training},{"dataset_pattern",pattern},
+                {"physical_input_count",owner->NumInputDendrite.GetData()},
+                {"dataset_max_spikes",dataset->MaxSpikesPerFeature.GetData()}};
+        };
+        const auto presentationBefore=j.subset?presentationReadback():QJsonObject{};
         if(imported)artifacts.append(Write(output,"probe-configuration.json",EncodeConfiguredNativeTraining(configuration)));
         artifacts.append(Write(output,"initial-state.json",Signed({{"kind","native_probe_initial_state"},{"schema_version",1},
             {"identity",initial},{"parameters",Parameters(parameters)},{"training_started",false},{"search_executed",false},{"dynamics_checkpoint",false}})));
@@ -275,6 +324,13 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         if(imported)artifacts.append(Write(output,"controller-after.json",controlSnapshot()));
         if(execution=="completed" && result.status!=NativeProbeStatus::Completed)execution="probe_rejected";
         if(!unchanged)execution="model_changed";if(!controllerIdle)execution="unexpected_training_activity";
+        if(j.subset) {
+            const auto after=presentationReadback();const bool restored=after==presentationBefore;
+            artifacts.append(Write(output,"subset-restoration.json",Signed({{"kind","native_stimulus_subset_restoration"},
+                {"schema_version",1},{"before",presentationBefore},{"after",after},{"restored",restored},
+                {"model_before",initial},{"model_after",final},{"scientific_training_result",false}})));
+            if(!restored)execution="presentation_not_restored";
+        }
         artifacts.append(Write(output,"final-state.json",Signed({{"kind","native_probe_final_state"},{"schema_version",1},
             {"identity",final},{"parameters",Parameters(owner->ReadNativeParameters())},{"model_unchanged",unchanged},{"controller_idle",controllerIdle}})));
         const QString cancelPath=QDir(output).filePath("cancel.request");
@@ -284,8 +340,8 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        const bool diagnosticJob=Count(j.document["schema_version"],1,5)>=3;
-        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",derived?5:(diagnosticJob?4:(imported?3:2))},
+        const bool diagnosticJob=Count(j.document["schema_version"],1,6)>=3;
+        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",j.subset?6:(derived?5:(diagnosticJob?4:(imported?3:2)))},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},

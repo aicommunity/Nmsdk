@@ -106,3 +106,29 @@ root `928fc7d782ee288a929130d6af3ba35784b34144`, PulseLib
 генератора и квантования. Плановые offsets не доказывают неизменность времени;
 для причинного сравнения обязательны реальные timestamps парной полной пробы.
 Общий пик пачки не становится максимумом закреплённого импульса.
+
+## Console schema6 — подготовлено, ещё не принято
+
+`timelearner_native_probe_job` версии6 импортирует diagnostic stopped-state
+штатным механизмом. `presentation` содержит `kind=stimulus_subset_characterization`
+и непустой строго возрастающий `source_ordinals`. `probe.peak_selection=none`,
+`probe.window=null`: эти поля не изображают действующее измерение пика.
+Для Classic `input_index=0`; для Branch индекс выбирает физическую solo-точку.
+`source_stopped`, исходный stimulus profile и модель обязательны; resistance
+и profile interventions запрещены. Существующие schemas1–5 сохраняются.
+
+Console строит только transient request schema6, передаёт его штатному
+scheduler и сохраняет все samples. `subset-restoration.json` содержит реальные
+InputPattern, Dataset.MatrixData, physical N и MaxSpikes до/после, а также
+identity модели. Несовпадение означает `presentation_not_restored`, без
+положительного научного verdict. Сброс полной динамики после пробы и checkpoint
+посреди неё этим не обещаются.
+
+Python `prepare_subset_job` и `audit_execution` поддерживают эту схему.
+Аудитор проверяет подписанный job, артефакты, idle controller/history,
+модель, реальное восстановление и CSV через явный адаптер заголовка; samples
+и timestamps не изменяются. Разрешение другого trial ID связано с job,
+а прежний native fixture reader сохраняет свой исходный контракт.
+Добавлены6 проверок на настоящем Console corpus и повреждённых/rehashed копиях.
+Локально проверен только AST. До серверного compile/Console/readback gate
+новый CLI нельзя считать принятым или использовать для научных выводов.

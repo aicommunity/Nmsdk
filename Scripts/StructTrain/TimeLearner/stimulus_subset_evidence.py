@@ -10,16 +10,16 @@ from .native_evidence import (EvidenceError, count, equal, number, parse_json_by
                               require, require_primary_trace_clock)
 
 
-def audit_subset(packet, rows, *, allow_draft_without_restoration=False):
+def audit_subset(packet, rows, *, allow_draft_without_restoration=False, expected_trial_id=None):
     try:
-        return _audit_subset(packet, rows, allow_draft_without_restoration)
+        return _audit_subset(packet, rows, allow_draft_without_restoration, expected_trial_id)
     except EvidenceError:
         raise
     except (KeyError, TypeError, ValueError, IndexError, OverflowError) as error:
         raise EvidenceError('malformed_stimulus_subset_evidence:'+str(error)) from error
 
 
-def _audit_subset(p, rows, legacy):
+def _audit_subset(p, rows, legacy, expected_trial_id):
     require(type(p) is dict and p['kind']=='native_stimulus_subset_diagnostic' and
             type(p['schema_version']) is int and p['schema_version'] in (1,2) and
             p['scientific_training_result'] is False, 'unknown_stimulus_subset_wrapper')
@@ -46,7 +46,8 @@ def _audit_subset(p, rows, legacy):
         require(s[key]==q[key],'subset_requested_policy_changed:'+key)
     for key in ['run_id','trial_id','sample_id','pattern_hash']:
         require(type(s[key]) is str and bool(s[key]) and s[key]==q[key], 'subset_identity_mismatch:'+key)
-    require(s['trial_id']==s['run_id']+'/probe0', 'subset_trial_identity_mismatch')
+    require(s['trial_id']==(s['run_id']+'/probe0' if expected_trial_id is None else expected_trial_id),
+            'subset_trial_identity_mismatch')
     require('characterization' not in s and 'characterization' not in q and s['windows']==q['windows']==[] and
             s['wave_assignment']==q['wave_assignment']=='window_only' and
             s['peak_selection']==q['peak_selection']=='isolated_window', 'subset_has_peak_assignment')

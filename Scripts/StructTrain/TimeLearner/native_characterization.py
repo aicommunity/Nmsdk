@@ -24,7 +24,7 @@ PROBE_FIELDS = {'run_id', 'trial_id', 'sample_id', 'protocol_revision', 'input_i
 @_evidence_boundary
 def validate_job(job):
     version = job.get('schema_version') if type(job) is dict else None
-    require(type(version) is int and version in (1, 2, 3, 4, 5), 'unknown_characterization_job')
+    require(type(version) is int and version in (1, 2, 3, 4, 5, 6), 'unknown_characterization_job')
     require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version >= 2 else set()) |
             ({'channel_diagnostics'} if version >= 3 else set()) | ({'presentation'} if version >= 4 else set()) | ({'profile_intervention'} if version == 5 else set()) and
             job['kind'] == 'timelearner_native_probe_job', 'unknown_characterization_job')
@@ -45,12 +45,21 @@ def validate_job(job):
     require(frequency > 0 and number(probe['duration']) > 0 and
             equal(probe['maximum_sample_gap'], 1/frequency) and number(probe['minimum_amplitude']) > 0 and
             1 <= count(probe['maximum_samples']) <= 100000000 and probe['record_spikes'] is False and
-            probe['peak_selection'] in ('isolated_window', 'assigned_burst_wave', 'single_impulse_maximum'), 'characterization_protocol_invalid')
+            probe['peak_selection'] in (('none',) if version == 6 else
+                ('isolated_window', 'assigned_burst_wave', 'single_impulse_maximum')), 'characterization_protocol_invalid')
     require(is_single_pulse(job) or probe['peak_selection'] != 'single_impulse_maximum',
             'maximum_requires_single_impulse_presentation')
     window = probe['window']
-    require(type(window) is dict and set(window) == {'begin', 'end'} and
-            0 <= number(window['begin']) < number(window['end']) <= probe['duration'], 'characterization_window_invalid')
+    if version == 6:
+        require(window is None, 'subset_peak_window_forbidden')
+        require(model['branch'] or probe['input_index'] == 0, 'subset_classic_requires_zero_input_index')
+        subset_presented_isi(job)
+        require(job['resistance_intervention'] == [] and
+                job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
+                'subset_source_or_intervention_changed')
+    else:
+        require(type(window) is dict and set(window) == {'begin', 'end'} and
+                0 <= number(window['begin']) < number(window['end']) <= probe['duration'], 'characterization_window_invalid')
     require(1 <= count(job['maximum_model_ticks']) <= 1000000000 and number(job['maximum_wall_seconds']) > 0,
             'characterization_budget_invalid')
     profile = job['stimulus_profile']
@@ -89,6 +98,37 @@ def validate_job(job):
 
 def is_single_pulse(job):
     return job.get('presentation') == {'kind': 'single_pulse_characterization'}
+
+
+def subset_presented_isi(job):
+    presentation = job['presentation'];source = job['model']['initial_isi']
+    require(type(presentation) is dict and set(presentation) == {'kind', 'source_ordinals'} and
+            presentation['kind'] == 'stimulus_subset_characterization', 'invalid_subset_presentation')
+    indices = presentation['source_ordinals']
+    require(type(indices) is list and 0 < len(indices) <= len(source) and
+            all(type(i) is int and 0 <= i < len(source) for i in indices) and
+            all(b > a for a,b in zip(indices, indices[1:])), 'invalid_subset_source_ordinals')
+    total = 0.
+    for value in source:
+        require(number(value) >= 0, 'invalid_subset_source_interval');total = number(total+value)
+    if len(indices) == len(source):return deepcopy(source)
+    result = [];start = 0
+    for index in indices:
+        gap = 0.
+        for value in source[start:index+1]:gap = number(gap+value)
+        result.append(gap);start = index+1
+    return result
+
+
+def prepare_subset_job(case, input_index, trial_id, source_ordinals, *, maximum_wall_seconds=900,
+                       channel_diagnostics=False):
+    job = prepare_stopped_job(case, input_index, trial_id, maximum_wall_seconds=maximum_wall_seconds,
+                              channel_diagnostics=channel_diagnostics)
+    job.pop('sha256');job.update(schema_version=6, presentation={
+        'kind': 'stimulus_subset_characterization', 'source_ordinals': deepcopy(source_ordinals)})
+    job['probe'].update(peak_selection='none', window=None)
+    job['probe']['protocol_revision'] += '/stimulus-subset-characterization-v1'
+    job = _signed(job);validate_job(job);return job
 
 
 def validate_profile_intervention(value):
@@ -275,7 +315,7 @@ def audit_execution(directory):
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
     validate_job(job);_digest(execution)
     schema = execution['schema_version']
-    require(type(schema) is int and schema in (1, 2, 3, 4, 5), 'characterization_execution_schema')
+    require(type(schema) is int and schema in (1, 2, 3, 4, 5, 6), 'characterization_execution_schema')
     require(set(execution) == {'kind', 'schema_version', 'execution', 'job_sha256', 'model_revision', 'frequency_hz',
             'model_ticks', 'model_time_begin', 'model_time_end', 'training_started', 'search_executed', 'certificate_available',
             'model_unchanged', 'controller_idle', 'probe_status', 'observation_valid', 'observation_complete', 'artifacts',
@@ -285,6 +325,8 @@ def audit_execution(directory):
             ({'profile_intervention_applied'} if schema == 5 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
     imported = job['schema_version'] >= 2
+    subset = job['schema_version'] == 6
+    require((schema == 6) == subset, 'subset_execution_schema_mismatch')
     require((schema >= 4) == (job['schema_version'] >= 3) and (schema == 5) == (job['schema_version'] == 5), 'characterization_diagnostics_schema_mismatch')
     baseline_terminal = schema >= 3 and execution['terminal_phase'] == 'source_baseline'
     if schema >= 3:
@@ -301,6 +343,7 @@ def audit_execution(directory):
         expected_files.update({'source-import.json', 'probe-configuration.json', 'controller-before.json', 'controller-after.json'})
         if job['resistance_intervention']:
             expected_files.update({'baseline_trial_1.json', 'baseline_trial_1.csv'})
+    if subset:expected_files.add('subset-restoration.json')
     if schema >= 4:
         require(type(execution['channel_diagnostic_files']) is list and
                 all(type(v) is str and v in ('probe_diagnostics_1.json', 'probe_diagnostics_2.json')
@@ -313,7 +356,7 @@ def audit_execution(directory):
     require(all(execution[k] is False for k in ('training_started', 'search_executed', 'certificate_available')) and
             execution['evaluation_verdict'] is None, 'characterization_claims_training')
     require(execution['execution'] in ('completed', 'cancelled', 'timeout', 'model_tick_budget_exhausted', 'probe_rejected',
-            'model_changed', 'unexpected_training_activity'), 'characterization_execution_unknown')
+            'model_changed', 'unexpected_training_activity', 'presentation_not_restored'), 'characterization_execution_unknown')
     if schema >= 2:
         require(number(execution['probe_wall_seconds']) > 0 and
                 (execution['execution'] != 'timeout' or execution['probe_wall_seconds'] >= job['maximum_wall_seconds']),
@@ -388,12 +431,15 @@ def audit_execution(directory):
     requested, p = packet['requested_specification'], job['probe']
     require(requested['trial_id'] == p['trial_id']+('/source-baseline' if baseline_terminal else '') and
             all(requested[k] == p[k] for k in ('run_id', 'sample_id', 'maximum_sample_gap', 'minimum_amplitude',
-            'maximum_samples', 'record_spikes', 'peak_selection')) and equal(requested['begin'], 0) and
-            equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(job['model']['initial_isi'][:1] if is_single_pulse(job) else job['model']['initial_isi']) and
+            'maximum_samples', 'record_spikes')) and
+            requested['peak_selection'] == ('isolated_window' if subset else p['peak_selection']) and equal(requested['begin'], 0) and
+            equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(subset_presented_isi(job) if subset else
+                job['model']['initial_isi'][:1] if is_single_pulse(job) else job['model']['initial_isi']) and
             requested['stimulus_profile'] == job['stimulus_profile'], 'characterization_request_changed')
     window = requested['windows']
     i = p['input_index']
-    require(len(window) == 1 and window[0] == {'input_id': 'input'+str(i), 'stimulus_id': 'pulse'+str(0 if is_single_pulse(job) else i),
+    if subset:require(window == [], 'subset_peak_window_forbidden')
+    else:require(len(window) == 1 and window[0] == {'input_id': 'input'+str(i), 'stimulus_id': 'pulse'+str(0 if is_single_pulse(job) else i),
             'channel': 0 if job['model']['branch'] else i, **p['window']}, 'characterization_selected_window_changed')
     observation = packet['observation']
     require(execution['probe_status'] == packet['native_status'] and
@@ -411,7 +457,38 @@ def audit_execution(directory):
         if execution['execution'] == 'model_tick_budget_exhausted':
             require(ticks == job['maximum_model_ticks'], 'characterization_tick_budget_not_reached')
     single_audit = {}
-    if is_single_pulse(job):
+    if subset:
+        import csv
+        from .stimulus_subset_evidence import audit_subset
+        restoration = load(directory/'subset-restoration.json');_digest(restoration)
+        require(set(restoration) == {'kind','schema_version','before','after','restored','model_before','model_after',
+                                    'scientific_training_result','sha256'} and
+                restoration['kind'] == 'native_stimulus_subset_restoration' and type(restoration['schema_version']) is int and
+                restoration['schema_version'] == 1 and restoration['scientific_training_result'] is False and
+                restoration['before'] == restoration['after'] and restoration['restored'] is True and
+                restoration['model_before'] == initial['identity'] and restoration['model_after'] == final['identity'],
+                'subset_restoration_changed')
+        before = restoration['before'];n = len(job['model']['inputs']);source = job['model']['initial_isi']
+        require(set(before) == {'training_pattern','dataset_pattern','physical_input_count','dataset_max_spikes'} and
+                before['training_pattern'] == before['dataset_pattern'] == source and
+                type(before['physical_input_count']) is int and before['physical_input_count'] == n and
+                type(before['dataset_max_spikes']) is int and before['dataset_max_spikes'] == n,
+                'subset_source_readback_changed')
+        require(requested['stimulus_subset'] == {'purpose':'stimulus_subset_characterization',
+                'source_training_pattern_hash':sha(source),'physical_input_count':n,
+                'source_ordinals':job['presentation']['source_ordinals']}, 'subset_requested_source_changed')
+        with trace.open(newline='', encoding='utf-8') as stream:rows = list(csv.reader(stream))
+        channels = 1 if job['model']['branch'] else n
+        require(rows and rows[0] == ['time','stimulus']+['soma'+str(c) for c in range(channels)], 'unknown_console_subset_trace')
+        # Explicit header adapter; every data row and actual timestamp is unchanged.
+        rows[0] = ['native_tick_start_s','stimulus']+['raw_soma_'+str(c) for c in range(channels)]
+        wrapper = {'kind':'native_stimulus_subset_diagnostic','schema_version':2,'source_pattern':source,
+            'evidence':packet,'model_before':initial['identity'],'model_after':final['identity'],
+            'training_pattern_after':before['training_pattern'],'dataset_pattern_after':before['dataset_pattern'],
+            'physical_input_count_after':before['physical_input_count'],'training_target_restored':True,
+            'scientific_training_result':False}
+        single_audit['stimulus_subset_diagnostic'] = audit_subset(wrapper, rows, expected_trial_id=p['trial_id'])
+    elif is_single_pulse(job):
         from .single_pulse_evidence import read_single_pulse
         observation, spec, _, samples, _, quality = read_single_pulse(packet, trace)
         require(requested['characterization'] == {'purpose': 'single_pulse_characterization',
