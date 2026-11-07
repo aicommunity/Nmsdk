@@ -1,0 +1,112 @@
+{
+  "kind": "independent_physical_dimension_metadata_verification",
+  "evidence_commit": "3ebe18aab850a180d58f67a1e2cd2257551c07cc",
+  "compiled_root": "e91b64cb2340ef1df01897db8dad81fc29bd1cf1",
+  "PulseLib": "217dc53c4b1cc010ad6938852a91ee6d2df09e3c",
+  "archive_members_verified": 149,
+  "archive_bytes": 340524,
+  "archive_sha256": "e3266a18d5e6c0a9ea6c34a92d17d188d0df7319a7588e1e95a6c4b5bd57168d",
+  "source_hashes_verified": {
+    "root": 499,
+    "PulseLib": 265
+  },
+  "actual_native_tests_passed": 9,
+  "native_seconds": "833.809",
+  "server_reader_tests_passed": 10,
+  "positive_schema5_conditions": 16,
+  "dimension_topology_frequency_coverage": [
+    [
+      "branch_solo_burst",
+      1,
+      2000
+    ],
+    [
+      "branch_solo_burst",
+      1,
+      20000
+    ],
+    [
+      "branch_solo_burst",
+      2,
+      2000
+    ],
+    [
+      "branch_solo_burst",
+      2,
+      20000
+    ],
+    [
+      "branch_solo_burst",
+      4,
+      2000
+    ],
+    [
+      "branch_solo_burst",
+      4,
+      20000
+    ],
+    [
+      "branch_solo_burst",
+      6,
+      2000
+    ],
+    [
+      "branch_solo_burst",
+      6,
+      20000
+    ],
+    [
+      "classic_burst",
+      1,
+      2000
+    ],
+    [
+      "classic_burst",
+      1,
+      20000
+    ],
+    [
+      "classic_burst",
+      2,
+      2000
+    ],
+    [
+      "classic_burst",
+      2,
+      20000
+    ],
+    [
+      "classic_burst",
+      4,
+      2000
+    ],
+    [
+      "classic_burst",
+      4,
+      20000
+    ],
+    [
+      "classic_burst",
+      6,
+      2000
+    ],
+    [
+      "classic_burst",
+      6,
+      20000
+    ]
+  ],
+  "schema5_fault_captures": 6,
+  "native_unit_executable_rerun": false,
+  "commit_message_unit34_text_is_template_overstatement": false,
+  "actual_loaded_file_records": 73,
+  "protected_runtime_file_bindings_unchanged": 82,
+  "source_dependents_closed_before_update": 1,
+  "local_trace_arithmetic_executed": false,
+  "ASan": true,
+  "ASan_options_requested": "detect_leaks=0",
+  "live_ASan_options_readback_available": false,
+  "leak_detection_verified": false,
+  "classification_evaluated": false,
+  "scientific_verdict": null
+}

@@ -1,7 +1,7 @@
 # Размерная матрица SingleImpulseMaximum
 
 Normal gate на Elder принят:9 native IDs,16 физических условий и10 readers.
-ASan повтор на M40 выполняется отдельно; его успех пока не заявляется.
+ASan повтор на M40 также принят:9 native IDs,16 физических условий и10 readers.
 
 Добавлены четыре native test groups: Classic/Branch ×2000/20000Гц. Каждый
 проверяет N=1,4,6; прежние четыре N=2 cases сохранены отдельно. Это16
@@ -67,3 +67,30 @@ runtime. Численные A/B/argmax проверки выполнены C++ �
 и новые runtime/output paths на M40. Прежний ASan38 относится к исходным N2
 cases и не выдаётся за новое подтверждение N1/4/6. Full-burst attribution,
 N0/прочие physics profiles и полная научная матрица остаются отдельными.
+
+
+## Принятая ASan-проверка на M40
+
+Тот же compiled Root `e91b64cb2340ef1df01897db8dad81fc29bd1cf1` и PulseLib
+`217dc53c4b1cc010ad6938852a91ee6d2df09e3c`, evidence
+`3ebe18aab850a180d58f67a1e2cd2257551c07cc`. Native9:833.809s, readers10,
+без failures/errors/skips. Повторено ровно16 положительных условий
+Classic/Branch ×N1/2/4/6 ×2000/20000 и6 fault captures; unit34 не запускался.
+
+[Независимая сверка](SingleImpulseMaximumDimensionASanVerification.json)
+подтвердила149 primary members,340524 compressed bytes, SHA256
+`e3266a18d5e6c0a9ea6c34a92d17d188d0df7319a7588e1e95a6c4b5bd57168d`,
+499 Root/265 Pulse source hashes, JUnit и все16 условий. Инструментация
+подтверждена compiler/link flags и фактически загруженной libasan среди73
+loaded-file records. Проверены82 неизменённых bindings прежних runtime,
+closure предыдущей группы до обновления source и свежая whole-group closure
+с release текущего lease. Requested ASAN_OPTIONS=detect_leaks=0; live readback
+этих options отсутствует, проверка утечек не заявляется. Поле ASan_verified=false
+первичного terminal — оставшаяся константа producer, а не проверка flags/maps;
+исходник сохранён, отдельная publication verification подтверждает ASan=true.
+
+Это завершает адресную размерную проверку SingleImpulseMaximum. Не завершены
+full-burst assignment и обучение штатной пачкой, N0/все физические профили,
+Console под ASan, convergence и полная научная матрица. Никакой classification
+PASS из этих инженерных проверок не выводится. Численные A/B/argmax выполнялись
+на сервере; локальная независимая сверка читала только metadata/hash/schema.
