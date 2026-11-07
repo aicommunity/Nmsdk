@@ -103,8 +103,9 @@ def render_figure(data, name, left, right, output, local=False):
     overlay.set_ylabel('Actual input\ngenerator units', fontsize=10, color='#a34d00')
     handles.append(line);labels.append('Actual native input; dotted lines: actual LT events')
     axes[-1].set_xlabel('Native absolute time [s]')
-    figure_title(fig, 'Closed native training probe; peak assignment remains '+str(data['peak_observation_valid'])+'\n'+
-                 data['trial_id']+'\n'+data['soma_path']+' | '+name+' | model '+data['model_revision'][:12])
+    figure_title(fig, 'Closed native training probe | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
+                 data['trial_id']+'\n'+data['soma_path']+' | '+name+
+                 (' | local Y per panel' if local else ' | shared Y per panel')+' | model '+data['model_revision'][:12])
     fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(.5,.91), ncol=2, fontsize=9, frameon=False)
     paths=[]
     for extension in ('png', 'svg', 'pdf'):
@@ -168,10 +169,11 @@ def render(directory, output, source_evidence, repository):
         sections.append('<h2>'+html.escape(report['soma_path'])+'</h2>')
         for view in report['views']:
             file=report['folder']+'/'+view['files'][0]
-            sections.append('<p>'+html.escape(view['view'])+'</p><a href="'+file+'"><img style="width:100%;max-width:1920px" src="'+file+'"></a>')
+            sections.append('<p>'+html.escape(view['view']+' | '+view['y_scale'])+'</p><a href="'+file+'"><img style="width:100%;max-width:1920px" src="'+file+'"></a>')
     (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Native channel diagnostics</title>'+
         '<h1>Actual soma, channels, feedback and LT events</h1><p>Native units; SI unverified. Channel deltas subtract '
-        'the first recorded value, not an assumed zero rest. Shared per-panel Y scales. No training or causal verdict.</p>'+
+        'the first recorded value, not an assumed zero rest. Overview/zoom Y scales are shared per panel; '
+        'measured-peak details have explicitly labelled local Y scales. No training or causal verdict.</p>'+
         ''.join(sections),encoding='utf-8')
     sums={p.relative_to(output).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
           for p in output.rglob('*') if p.is_file()}
