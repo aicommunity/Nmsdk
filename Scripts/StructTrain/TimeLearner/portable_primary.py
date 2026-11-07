@@ -44,13 +44,14 @@ def create_native_bundle(sources, output, *, dictionary_bytes=128*1024**2):
                         if p.as_posix() != '.'), 'bundle_logical_file_directory_collision')
     output.mkdir(exist_ok=False)
     archive = output/'primary.tar.xz'
-    with tarfile.open(archive, mode='w:xz', filters=[{'id': lzma.FILTER_LZMA2,
-            'preset': 3, 'dict_size': dictionary_bytes}]) as stream:
-        for name in sorted(paths, key=lambda n: (members[n]['sha256'], n)):
-            path, record = paths[name], members[name]
-            info = tarfile.TarInfo(name); info.size = record['bytes']
-            with path.open('rb') as source:
-                stream.addfile(info, source)
+    with lzma.LZMAFile(archive, mode='wb', filters=[{'id': lzma.FILTER_LZMA2,
+            'preset': 3, 'dict_size': dictionary_bytes}]) as compressed:
+        with tarfile.open(fileobj=compressed, mode='w|') as stream:
+            for name in sorted(paths, key=lambda n: (members[n]['sha256'], n)):
+                path, record = paths[name], members[name]
+                info = tarfile.TarInfo(name); info.size = record['bytes']
+                with path.open('rb') as source:
+                    stream.addfile(info, source)
     # A completed archive is not published if any producer changed its inputs.
     for name, path in paths.items():
         require({'bytes': path.stat().st_size, 'sha256': _sha(path)} == members[name],
