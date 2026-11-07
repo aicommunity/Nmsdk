@@ -103,7 +103,12 @@ ConfiguredNativeTraining IdleConfiguration(const Job& j,const std::vector<InputP
     // search is started. Its internal fixed bounds cannot edit this model.
     ConfiguredNativeTraining c;c.model=actual?*actual:j.model;c.stimulusProfile=j.stimulus;c.runId=j.runId;
     c.protocolRevision=j.protocolRevision;c.sampleId=j.sampleId;c.duration=j.duration;c.maximumSampleGap=j.gap;
-    c.minimumAmplitude=j.minimumAmplitude;c.maximumSamples=j.maximumSamples;c.recordSpikes=j.recordSpikes;c.peakSelection=j.selection;
+    c.minimumAmplitude=j.minimumAmplitude;c.maximumSamples=j.maximumSamples;c.recordSpikes=j.recordSpikes;
+    // This declaration belongs to an idle training owner, not to the transient
+    // diagnostic presentation. Keep its training protocol admissible; runProbe
+    // applies schema5/SingleImpulseMaximum only to the actual single request.
+    c.peakSelection=j.selection==PeakSelectionPolicy::SingleImpulseMaximum?
+        PeakSelectionPolicy::IsolatedWindow:j.selection;
     c.maximumReferenceProbes=parameters.size();c.maximumModelSeconds=j.duration;c.maximumWallSeconds=j.wallSeconds;
     c.search.normalization=j.model.normalization;c.search.maximumProbes=1;c.search.maximumEdits=1;
     c.search.maximumCandidatesPerInput=1;c.search.maximumSweeps=1;c.search.resistanceSubdivisionDepth=0;
