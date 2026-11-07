@@ -1,0 +1,127 @@
+"""Exercise the production Windows backend on the optional remote worker."""
+import copy
+import json
+import os
+from pathlib import Path
+import sys
+import threading
+import time
+import unittest
+
+from .. import windows_process
+from ..native_evidence import EvidenceError
+from ..runtime import digest_json, file_record, runtime_content_identity, source_closure
+
+
+class WindowsProcessTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        if os.name != 'nt':raise unittest.SkipTest('requires the actual Windows worker')
+        sdk = os.environ.get('TIMELEARNER_WINDOWS_SDK_SOURCE')
+        output = os.environ.get('TIMELEARNER_WINDOWS_PROCESS_OUTPUT')
+        if not sdk or not output:raise unittest.SkipTest('requires explicit immutable SDK and evidence paths')
+        cls.root = Path(output);cls.root.mkdir(parents=True, exist_ok=False)
+        cls.lock = cls.root/'worker.lock';cls.source = Path(sdk)
+        backend = file_record(Path(windows_process.__file__))
+        cls.manifest = {'schema_version': 2, 'windows_source_root': str(cls.source),
+            'source_closure': source_closure(cls.source), 'executable': file_record(Path(sys.executable)),
+            'app_ini': file_record(Path(__file__)), 'compiler': file_record(Path(sys.executable)),
+            'resolved_libraries': [file_record(p) for p in Path(sys.executable).parent.glob('*.dll')],
+            'loaded_process_files': None, 'windows_backend': backend,
+            'build_flags': {'role': 'owned_windows_process_fixture', 'windows_backend_sha256': backend['sha256']},
+            'loader_environment': {key: os.environ.get(key) for key in ('PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM')}}
+        cls.manifest['runtime_identity'] = runtime_content_identity(cls.manifest)
+        cls.manifest['runtime_fingerprint'] = digest_json(cls.manifest['runtime_identity'])
+
+    def run_fixture(self, name, code, *, wall=5, processes=1, cancel=None, extra=None):
+        result = windows_process.execute(self.manifest, ['-X', 'utf8', '-c', code, *(extra or [])],
+            self.root, self.root/name, memory_bytes=128*1024**2, maximum_processes=processes,
+            maximum_wall_seconds=wall, lock_file=self.lock, cancel_file=cancel)
+        (self.root/(name+'-observed.json')).write_text(json.dumps(result, indent=2)+'\n')
+        return result
+
+    def complete(self, result, execution='completed'):
+        self.assertEqual(result['execution'], execution, result)
+        self.assertEqual(result['validity'], 'valid', result)
+        self.assertTrue(result['all_processes_closed'])
+        self.assertEqual(result['runtime_provenance'], 'loaded_files_captured')
+        self.assertIsNone(result['scientific_verdict'])
+
+    def test_completed_argv_and_unicode_are_not_shell_commands(self):
+        result = self.run_fixture('quoted', 'import sys,json,time;print(json.dumps(sys.argv[1:],ensure_ascii=False));time.sleep(.3)',
+                                  extra=['with space', 'данные', 'literal&text'])
+        self.complete(result)
+        self.assertEqual(json.loads((self.root/'quoted/stdout.log').read_text(encoding='utf-8')),
+                         ['with space', 'данные', 'literal&text'])
+        limits = json.loads((self.root/'quoted/limits-before-exec.json').read_text())
+        self.assertEqual(limits['memory_bytes'], 128*1024**2)
+        self.assertEqual(limits['maximum_processes'], 1)
+        owner = json.loads((self.root/'quoted/owned-process.json').read_text())
+        self.assertTrue(owner['suspended_until_limits_applied'])
+
+    def test_exit_259_is_a_terminal_nonzero_exit(self):
+        result = self.run_fixture('exit259', 'import time;time.sleep(.3);raise SystemExit(259)')
+        self.complete(result, 'process_error');self.assertEqual(result['returncode'], 259)
+
+    def test_memory_limit_rejects_allocation(self):
+        code = 'import time\ntry:\n a=bytearray(512*1024*1024)\n print("unexpected_allocation")\nexcept MemoryError:\n print("memory_limit_observed")\ntime.sleep(.3)'
+        result = self.run_fixture('memory', code)
+        self.complete(result)
+        self.assertEqual((self.root/'memory/stdout.log').read_text().strip(), 'memory_limit_observed')
+        after = json.loads((self.root/'memory/limits-after.json').read_text())
+        self.assertLessEqual(after['peak_job_memory_bytes'], 128*1024**2)
+
+    def test_timeout_closes_the_owned_job(self):
+        result = self.run_fixture('timeout', 'import time;time.sleep(30)', wall=.3)
+        self.complete(result, 'timeout')
+
+    def test_remaining_owned_descendant_is_closed_and_not_success(self):
+        code = 'import subprocess,sys,time;subprocess.Popen([sys.executable,"-c","import time;time.sleep(30)"],creationflags=0x08000000);time.sleep(.4)'
+        result = self.run_fixture('descendant', code, processes=4)
+        self.complete(result, 'descendants_remaining')
+        self.assertTrue(result['descendants_at_main_exit'])
+
+    def test_cancel_before_start_does_not_resume_a_child(self):
+        cancel = self.root/'cancel-before.request';cancel.write_text('cancel')
+        result = self.run_fixture('cancel-before', 'import time;time.sleep(30)', cancel=cancel)
+        self.assertEqual(result['execution'], 'cancelled');self.assertFalse(result['child_resumed'])
+        self.assertFalse((self.root/'cancel-before/owned-process.json').exists())
+
+    def test_cancel_running_job(self):
+        cancel = self.root/'cancel-running.request';owner = self.root/'cancel-running/owned-process.json'
+        def request():
+            deadline = time.monotonic()+10
+            while not owner.exists() and time.monotonic() < deadline:time.sleep(.02)
+            if owner.exists():time.sleep(.15);cancel.write_text('cancel')
+        thread = threading.Thread(target=request, daemon=True);thread.start()
+        result = self.run_fixture('cancel-running', 'import time;time.sleep(30)', cancel=cancel)
+        thread.join(timeout=10);self.complete(result, 'cancelled');self.assertTrue(result['child_resumed'])
+
+    def test_host_lock_refuses_another_worker(self):
+        cancel = self.root/'lock-first.request';owner = self.root/'lock-first/owned-process.json';results = []
+        thread = threading.Thread(target=lambda: results.append(self.run_fixture('lock-first', 'import time;time.sleep(30)', wall=15, cancel=cancel)))
+        thread.start();deadline = time.monotonic()+10
+        try:
+            while not owner.exists() and time.monotonic() < deadline:time.sleep(.02)
+            self.assertTrue(owner.exists())
+            with self.assertRaisesRegex(RuntimeError, 'windows_worker_already_reserved'):
+                self.run_fixture('lock-second', 'import time;time.sleep(.3)')
+        finally:
+            cancel.write_text('cancel');thread.join(timeout=20)
+        self.assertFalse(thread.is_alive());self.assertEqual(len(results), 1)
+        self.complete(results[0], 'cancelled')
+
+    def test_changed_runtime_is_refused_before_execution(self):
+        changed = copy.deepcopy(self.manifest);changed['executable']['sha256'] = '0'*64
+        with self.assertRaises(EvidenceError):
+            windows_process.execute(changed, [], self.root, self.root/'changed', memory_bytes=128*1024**2,
+                maximum_processes=1, maximum_wall_seconds=1, lock_file=self.lock)
+        self.assertFalse((self.root/'changed').exists())
+
+    def test_invalid_limits_do_not_start_a_child(self):
+        for name, change in [('memory-bool', {'memory_bytes': True}), ('wall-nan', {'maximum_wall_seconds': float('nan')}),
+                             ('process-zero', {'maximum_processes': 0})]:
+            limits = {'memory_bytes': 128*1024**2, 'maximum_processes': 1, 'maximum_wall_seconds': 1, **change}
+            with self.assertRaises(EvidenceError):
+                windows_process.execute(self.manifest, [], self.root, self.root/name, lock_file=self.lock, **limits)
+            self.assertFalse((self.root/name).exists())

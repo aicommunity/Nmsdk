@@ -147,11 +147,13 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
         require(os.environ.get(key) == manifest['loader_environment'].get(key), 'windows_loader_environment_changed:'+key)
     require(cwd.is_dir(), 'invalid_windows_working_directory')
     source = Path(manifest['windows_source_root']).resolve(strict=True)
-    require(source_closure(source) == manifest['source_closure'], 'windows_source_context_changed')
     output = Path(output).resolve();require(not output.exists() and not output.is_relative_to(source) and
             not output.is_relative_to(exe.parent), 'windows_output_overlaps_runtime_or_source')
     output.mkdir(parents=True, exist_ok=False)
     lock_file = Path(lock_file).resolve();lock_file.parent.mkdir(parents=True, exist_ok=True)
+    require(lock_file.suffix == '.lock' and not lock_file.is_relative_to(source) and
+            not lock_file.is_relative_to(exe.parent) and not lock_file.is_relative_to(output),
+            'windows_worker_lock_overlaps_inputs')
     import msvcrt
     lock = lock_file.open('a+b');lock.seek(0)
     if lock_file.stat().st_size == 0:lock.write(b'0');lock.flush();lock.seek(0)
@@ -163,6 +165,7 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
               'returncode': None, 'scientific_verdict': None, 'thread_limit_enforced': False}
     start = time.monotonic();name = 'Local\\TimeLearner-'+str(uuid.uuid4())
     try:
+        require(source_closure(source) == manifest['source_closure'], 'windows_source_context_changed')
         status = api.Memory();status.length = C.sizeof(status);api.check(api.memory_status(C.byref(status)))
         require(status.available_physical >= memory_bytes+256*1024**2, 'insufficient_windows_available_memory')
         require(shutil.disk_usage(output).free >= 1024**3, 'insufficient_windows_disk_space')
@@ -213,6 +216,7 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             if api.wait(process.process, 10000) != 0:raise RuntimeError('windows_owned_process_not_closed')
             api.check(api.exit_code(process.process, C.byref(code)))
             remaining = api.pids(job)
+            result['descendants_at_main_exit'] = remaining
             if remaining:
                 api.check(api.terminate_job(job, 1460));stop_reason = stop_reason or 'descendants_remaining'
                 deadline = time.monotonic()+10
