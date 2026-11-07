@@ -75,15 +75,47 @@ TEST(FinalVerification, OneRecordedVertexCannotCertifyDifferentAssignedImpulses)
         auto p=Protocol(2);p.schemaVersion=schema;
         if(schema==2)p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
         PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
-        auto measured=Observation(p,context,"shared","shared_vertex",{.01,.01});
-        ASSERT_TRUE(measured.valid);
-        // This is also an internally consistent serialized packet: both
-        // windows read channel 0, and both pulses precede the same maximum.
-        measured.specification.baseline.resize(1);
-        measured.specification.windows[1].channel=0;
+        auto s=Observation(p,context,"shared","shared_vertex",{.01,.01}).specification;
+        s.baseline.resize(1);s.windows[1].channel=0;
+        ProbeRecorder recorder(s);
+        for(int tick=0;tick<=20;++tick)
+            recorder.Observe(double(tick)/20.,{.01*std::max(0.,1.-std::abs(tick-12)/2.)},context.effectiveModelRevision);
+        recorder.RecordStimulus("p0",.05);recorder.RecordStimulus("p1",.1);
+        const auto measured=recorder.Close(1.,context.effectiveModelRevision,"window_closed");
+        ASSERT_TRUE(measured.valid); // Historical diagnostic measurement is retained.
         EXPECT_THROW(ValidateProbeMeasurement(p,0,context,measured),std::invalid_argument);
         EXPECT_THROW(ValidateProbeMeasurement(p,1,
             (PreparedVerificationProbe{p.routing,"i1",p.revision,"initial","effective",0}),measured),std::invalid_argument);
+    }
+}
+TEST(FinalVerification, SharedPlateauCannotBeRelabelledBySplittingItsEndpoints)
+{
+    const auto p=Protocol(2);
+    PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
+    auto o=Observation(p,context,"shared","shared_plateau",{.01,.01},{},0.,true);
+    ASSERT_TRUE(o.valid);o.specification.windows[1].channel=0;
+    // Untrusted serialized evidence can give two portions of the same plateau
+    // different start times. Every individual peak remains self-consistent.
+    o.peaks[1].time=o.peaks[0].plateauEnd;
+    o.peaks[1].plateauEnd=*o.peaks[1].time+.05;
+    o.peaks[1].delayFromStimulus=*o.peaks[1].time-o.stimuli[1].time;
+    for(bool reverse:{false,true})
+    {
+        if(reverse){std::reverse(o.specification.windows.begin(),o.specification.windows.end());std::reverse(o.peaks.begin(),o.peaks.end());}
+        EXPECT_THROW(ValidateProbeMeasurement(p,0,context,o),std::invalid_argument);
+    }
+}
+TEST(FinalVerification, EqualTimesOnDifferentChannelsAreIndependentMeasurements)
+{
+    for(unsigned schema:{1u,2u})
+    {
+        auto p=Protocol(2);p.schemaVersion=schema;
+        if(schema==2)p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+        PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
+        const auto o=Observation(p,context,"independent","same_time",{.01,.01},{},0.,true);
+        ASSERT_TRUE(o.valid);EXPECT_NO_THROW(ValidateProbeMeasurement(p,0,context,o));
+        EXPECT_EQ(o.peaks[0].time,o.peaks[1].time);
+        EXPECT_NE(o.specification.windows[0].channel,o.specification.windows[1].channel);
     }
 }
 CapturedReferences References(const VerificationProtocol& p,std::vector<double> raw={},double baseline=0.)
