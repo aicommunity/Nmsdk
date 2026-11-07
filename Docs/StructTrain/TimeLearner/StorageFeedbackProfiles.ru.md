@@ -1,7 +1,7 @@
-# Storage-профили обратной связи: кандидат
+# Storage-профили обратной связи: адресная normal-проверка
 
 Подэтапы4/7 исходного плана. Статус: код и реальные integration fixtures
-подготовлены; адресная серверная приёмка ещё не пройдена.
+подготовлены и прошли адресную normal-проверку на M40; ASan и второй сервер открыты.
 
 MembraneProfile.feedbackGain необязателен: отсутствие сохраняет значение
 базового образа, явный конечный gain>=0 задаётся при создании immutable образа.
@@ -39,7 +39,17 @@ FixedLTZThreshold. Поэтому engineering fixture задаёт оба owner-
 различается только объявленный gain. Это учитывает штатное владение калибровкой.
 
 
-Адресная normal-проверка запущена на M40: [точный job и handle](StorageFeedbackProfilesJobs.json).
-На последней kernel-проверке worker жив и выполняет сборку. Ожидаются18 native
-функций и13 readers; это постановка проверки, а не результат PASS. Уже работающий
-ASan другого SDK использует отдельные source/build и не подтверждает этот профиль.
+Адресная normal-проверка на M40 завершена: [точный job и handle](StorageFeedbackProfilesJobs.json),
+[сверенная приёмка](StorageFeedbackProfilesNormalVerification.json). Rootb54330482/Pulsed09613c:
+18/18 native функций за95.934с и13/13 readers без skips. Все161 members
+сжатого primary365876B и781 source hashes сверены с Git. Проверены12 actual
+feedback control packets. Группа процессов полностью закрыта, lease released;
+оба прежних runtime сохранили записанные byte hashes. Primary commit
+080d21dcff3940df3ce72bf4a21d1c0ceb003e26.
+
+Inherited/explicit2 дали одинаковые sample arrays и LT timestamps; explicit0
+имел нулевой фактический Feedback при существующих LT events и отличающийся
+отклик. Это подтверждает чувствительность инженерного контроля, не механизм
+дополнительных пиков stock-модели. Её коэффициенты и waveform не менялись.
+Уже работающий ASan другого SDK использует отдельные source/build и не
+подтверждает этот профиль; второй сервер и полная матрица также открыты.

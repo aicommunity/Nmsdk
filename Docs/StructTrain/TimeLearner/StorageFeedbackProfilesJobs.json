@@ -9,8 +9,8 @@
   "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-storage-feedback-normal-a1",
   "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-storage-feedback-normal-a1-container",
   "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-storage-feedback-normal-a1",
-  "status_at_last_kernel_observation": "running",
-  "phase_at_last_observation": "building",
+  "status_at_last_kernel_observation": "closed",
+  "phase_at_last_observation": "completed",
   "unit": "timelearner-389cef88-8584-4b84-ac2d-8786751dd856.service",
   "invocation_id": "bd24a57c33ba4f63bdf64c37092dc8d0",
   "initial_main_pid": 1444418,
@@ -27,10 +27,15 @@
   "reader_tests_expected": 13,
   "engineering_threshold": 1e-06,
   "stock_models_modified": false,
-  "acceptance_complete": false,
+  "acceptance_complete": true,
   "ASan_verified": false,
   "second_host_verified": false,
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "restart_policy": "Inspect this exact contained handle and full closure before source/build/runtime reuse. Observation timeout does not mean termination. Active ASan uses a separate source and build."
+  "restart_policy": "Inspect this exact contained handle and full closure before source/build/runtime reuse. Observation timeout does not mean termination. Active ASan uses a separate source and build.",
+  "whole_group_closed": true,
+  "lease_released": true,
+  "native_tests_passed": 18,
+  "reader_tests_passed": 13,
+  "primary_commit": "080d21dcff3940df3ce72bf4a21d1c0ceb003e26"
 }
