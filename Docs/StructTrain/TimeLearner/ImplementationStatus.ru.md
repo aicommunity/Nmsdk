@@ -257,3 +257,11 @@ manifest не сохраняет ASAN_OPTIONS, поэтому эта настр�
 не проверка последующих storage/graph/prepared-owner API и не новое обучение.
 Упоминания «ASan открыт» выше для single-pulse среза заменены этой адресной
 проверкой; Elder и остальная матрица остаются открытыми.
+
+
+[Profile probe admission](FeedbackProfileProbeAdmissionVerification.json): root367b811,
+M409/9 Python tests без skips на archived Classic/Branch sources. Проверены
+schemas2/3/4 compatibility и schema5 builder/negative factors. Все7 primary members
+и432 tool hashes сверены с Git; процессы закрыты/lease released. Новый Console
+profile path подключён в коде, но compiler, execution auditor actual records,
+paired baseline waveform и actual gain0 intervention ещё не проверены.
