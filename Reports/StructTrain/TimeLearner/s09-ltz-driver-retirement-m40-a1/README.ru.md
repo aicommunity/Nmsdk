@@ -1,0 +1,1 @@
+Historical16 LTZ drivers retired; production history238 and restored-path negative passed. Exact Bin16 deletions+one new README. Other configs/data/models/native code unchanged. Both remaining shared copy helpers retained with external callers. No old script/model execution, no scientific verdict or whole migration completion.
