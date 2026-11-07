@@ -135,6 +135,11 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
 
 ## Приёмка по исходным этапам
 
+Source-сверка07.11 [feature против develop](PropertyFeatureSourceDrift-20261107.ru.md)
+подтвердила неизменность всех217 исследованных property slices. Изменения
+общих lifecycle/storage/capacitance/analyzer consumers рассматриваются отдельно;
+runtime/effective-factor matrix этим не закрывается.
+
 | Этап | Подтверждено в ограниченной области | Что мешает закрыть этап целиком |
 |---|---|---|
 |0. Начальное объединение|Принято; последующие изменения объединяются children-first через merge commits|Новые features проходят свою приёмку отдельно|
