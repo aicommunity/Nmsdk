@@ -1,0 +1,67 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-worker-dependency-normal-a2'
+folder=base/'readbacks/s07-feedback-console-normal-a1'
+repo=base/'evidence-feedback-console-normal-a1';incoming=base/'source-feedback-console-normal-a1-r2-delivery'
+parent='844b2789ea0c087c1a0f676d9584ce7b8a7a4d36';prefix='Reports/StructTrain/TimeLearner/s07-feedback-console-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3')
+payloads={};updates={};bundles=[]
+for path,sub in [(folder,'')]:
+ closed=inspect_worker_dependency(Path(str(path)+'-container'),registry,path.name,reservation_optional=True)
+ assert closed['state']=='ready' and closed['closure']['all_processes_closed'],closed
+ bundle=json.loads((path/'bundle.json').read_text());archive=path/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':path.name,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in path.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+sub+('producer.txt' if f.name=='producer.py' else f.name)]=f.read_bytes()
+ for f in Path(str(path)+'-container').iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+sub+'controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+sub+'fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal=={'build_passed':False,'native_gates_executed':False,'feedback_profile_scoped_acceptance_passed':False,'scientific_verdict':None,'whole_plan_complete':False}
+exception=json.loads((folder/'exception.json').read_text());assert 'not runtime.exists()' in exception['traceback']
+assert not (folder/'reservation.json').exists() and not (folder/'build.log').exists()
+actual=base/'source-isi-template-baseline-normal-a1'
+root=subprocess.check_output(['git','-C',str(actual),'rev-parse','HEAD'],text=True).strip();assert root=='c5a32b9a33ce5d5c76d2299ed44ffd4bd3edcba0'
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'terminal':terminal,'actual_source_root_before_any_update':root,'requested_root_not_built':'844b2789ea0c087c1a0f676d9584ce7b8a7a4d36','failure':'new job retained an existing protected runtime path; initial guard rejected it before reservation/source mutation/configure/build','native_compilation_verified':False,'waveforms_executed':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve rejected existing runtime guard before any source update or build\n');git('update-ref','refs/heads/codex/feedback-console-normal-a1-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'bundles':bundles,'terminal':terminal,'reader_result':readers}))

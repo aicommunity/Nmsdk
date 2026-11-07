@@ -1,0 +1,118 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "8a05645a-adb9-4e25-a824-43ae32468a1e",
+  "job_id": "s07-high-threshold-classic-normal-a1",
+  "recorded_unix": 1794029394.4295268,
+  "administrator": {
+    "pid": 1526476,
+    "start_ticks": "310441447",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1526485,
+    "start_ticks": "310441461",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "60b6f097c854ba6f8b3d1041b6e29425667bbc01fbdbe14842b64908c9ad6853",
+      "unit": "timelearner-67708d17-4ab8-4a38-b8e4-a3cb7c6ddc82.service",
+      "invocation_id": "fa99e24db1c948059fdb898c03ddbfcd",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-67708d17-4ab8-4a38-b8e4-a3cb7c6ddc82.service",
+      "initial_main_pid": 1526485,
+      "initial_start_ticks": "310441461",
+      "sha256": "d9e29d920037a9ebe7032b9ec4908db247e2b520f121878d798db27be5ef591f"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-67708d17-4ab8-4a38-b8e4-a3cb7c6ddc82.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Admission controls closed; no native runtime or physical experiment performed.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-feedback-console-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-feedback-console-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-feedback-profile-readers-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-feedback-profile-readers-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-single-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2/study"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-console-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-console-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-high-threshold-classic-a1-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-high-threshold-classic-a1-delivery"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
