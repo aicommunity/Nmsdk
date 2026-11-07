@@ -4315,6 +4315,342 @@
       "replacement": null,
       "reason": "Historical UWatch Interface.xml regex patcher hardcodes four ISI series and clips0/1 stimulus/spike overlays on a dendrite axis. Current reports use actual native soma traces/input timestamps with separate overview/zoom views; old visual layout is not a runtime feature.",
       "original_results": "Configurations, XML interfaces, measurements, models and historical observations retained. Retrieval is not proof of original execution source."
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "8661256826f4b4c363262b602ab7dc430a35d906",
+      "content_sha256": "4a994459762409dedcfafb46482c10aeae476e8a9dfd38af24d01fa2c8616195",
+      "bytes": 4593,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/asymrm_ltzcal_common.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/reset_asymrm_ltzcal_cold.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "c1c80892af5f4479865d8199d4d4f3233d6db69b",
+      "content_sha256": "7ee3aa27be41b7ad97c61b7c0d1ca8c18972b5af9e866a7063e2ae0b3331f3c5",
+      "bytes": 3130,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/reset_asymrm_ltzcal_cold.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/reset_asymrm_ltzcal_cold.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "bacbf59093f7633b82a93a20b12898060f0b9bbc",
+      "content_sha256": "c4e6efc08fbbf4150a7d54463c7ae9aff0f64532e2fa18dff459c2ad87eef4eb",
+      "bytes": 11139,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal_branch.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "dd4a3f01ba5aa50a45070adb3f53879f8e12ff61",
+      "content_sha256": "c05b56ef98792493fe52f2337f94a66f4b618b9f7802abf0590ff896c8b8b375",
+      "bytes": 7563,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal_branch.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_asymrm_ltzcal_branch.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_branch_grid.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "a292ef0b73c35df303c4deeb23cf5785093c103f",
+      "blob_sha1": "4e64a8a657f34eaff835a12e30366678ffc8f1e6",
+      "content_sha256": "4222cccc675758e3c3d428c0ff53b80fc62f5aaa257115e9dcb46402bcc82ca1",
+      "bytes": 4034,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_branch_grid.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_branch_grid.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_ltz_grid.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "d357b6c73d6211e0165a24ad831a0df8e1260943",
+      "blob_sha1": "53b8b29f33bc6a80a5389e26564de22c74146429",
+      "content_sha256": "d87253ea6356d597e8e267332947c752b940039605c479b3a8b1a22d174f906b",
+      "bytes": 7628,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_ltz_grid.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_ltz_grid.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "3449d2684437a1b9260366a7656298c9700f1054",
+      "blob_sha1": "6ac90b9f708b9929fc282cc9dd586ead787fbd05",
+      "content_sha256": "16c099b1f0a4908b727eb29c58b27aaf6ece00a9d4f9ec2aa0bdce0f831fba66",
+      "bytes": 1974,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression_warm.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "3449d2684437a1b9260366a7656298c9700f1054",
+      "blob_sha1": "c66392253a67bb0df2062c36b051cac23003c8cd",
+      "content_sha256": "cf28421ecaf2f71942b2c0477b23ad4d9a8fe8ae025fd32f6cadc72523890e6a",
+      "bytes": 2965,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression_warm.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_regression_warm.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_separability.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "521d8577b8b7af53d4c671bf2df74a958bbf0be1",
+      "blob_sha1": "723407f618df9e2ff4e64b8d5ba1f2c50381901a",
+      "content_sha256": "3c90619d7fff61686ac9fda46e0a250f2fee13b9947d498644154a91448f6c5a",
+      "bytes": 591,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_separability.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/run_separability.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "8d69ce484580431f793b8e3a66028b70a355c544",
+      "content_sha256": "73b138cef1623a2cce26b93be2558f6c583f539b45a5d5a439240093fa22ea21",
+      "bytes": 3561,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal_branch.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "9c049e71c41eb2699a9486be5b1c4596290d0e3c",
+      "blob_sha1": "51e0c0437b86cc86fa2a80793f77276f2a915f43",
+      "content_sha256": "e25b048c26fbe65466198d24c1bafa362d5b5a89eb78991dba8338de531d7537",
+      "bytes": 6629,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal_branch.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_asymrm_ltzcal_branch.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_branch_grid.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "a292ef0b73c35df303c4deeb23cf5785093c103f",
+      "blob_sha1": "acd94d40dbb4b448dba48f1db4c45c5ae1397481",
+      "content_sha256": "372da3f54b060caf621a6ce650650e186a0ca004ed64874dc60265843aca81fd",
+      "bytes": 4352,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_branch_grid.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_branch_grid.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_ltz_grid.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "d357b6c73d6211e0165a24ad831a0df8e1260943",
+      "blob_sha1": "eb18ab097f0d701f302a1f60d1a66fac99895ca8",
+      "content_sha256": "7df1d6f18ab0e9f805d6bf7db7837332b6aeb6b70d23b6ee2066d0473ac61286",
+      "bytes": 5652,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_ltz_grid.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_ltz_grid.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_regression.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "0af3eadc1a7d62e2dae4929dbca0398e2840c702",
+      "blob_sha1": "709181a1a5bbaaa682955af2a2d66140e561029e",
+      "content_sha256": "09a8468dbcb1218c39da8ab224d14c08275055e0099ac0b45fdfb03e14a062c4",
+      "bytes": 5033,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_regression.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/setup_regression.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/smoke_sync_regression.sh",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "0af3eadc1a7d62e2dae4929dbca0398e2840c702",
+      "blob_sha1": "233c863dfa2faf27af972bb5e80478b9bffb2786",
+      "content_sha256": "0c9e6745d3fe77c17dd241091a908db530fb8a1975bea4999404882ae3140acd",
+      "bytes": 2598,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/smoke_sync_regression.sh",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/smoke_sync_regression.sh"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_regression.py",
+      "action": "retired_historical",
+      "archive_commit": "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f",
+      "last_change_commit": "3449d2684437a1b9260366a7656298c9700f1054",
+      "blob_sha1": "f098f9796b6a1debab0cb79dd22ee9b9b3131997",
+      "content_sha256": "dbe3a74882b223d8952ea3a29e2fe9b68b30007d4045d379edbacdf9ef628a49",
+      "bytes": 6835,
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f/Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_regression.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "fc67a3b0958e8becdfbe1cd3f0e4e054d966d54f:Configs/SpikeSamples/StructTrain/SelectivityLtzCalibrate/scripts/verify_regression.py"
+      ],
+      "replacement": null,
+      "reason": "Historical LTZ campaign setup/run/reset/offline-verification dependency group; current production package has no literal callers. Two shared copy helpers remain pending with their external callers; archived data and criteria are not reinterpreted.",
+      "original_results": "preserved; archive commit identifies source retrieval, not the execution version of every old experiment"
     }
   ],
   "reference_review": {
@@ -4348,7 +4684,8 @@
     "retired": 2,
     "source_commit": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
     "source_review": "AsymRmDisplayScaleRetirementReview.json",
-    "runtime_equivalence_attested": false
+    "runtime_equivalence_attested": false,
+    "acceptance": "accepted: both-worker production migration238, restored-path negative, exact16D+README and preserved data/model scope; no native or archived script execution"
   },
   "moved_files": [
     {
@@ -4397,5 +4734,6 @@
       "initial_verified_root_commit": "0aa5d92850bef109a81739ebb8b9aad4d8279aa3",
       "final_checks_per_worker": 20
     }
-  ]
+  ],
+  "status": "; sixteen historical LTZ drivers/common helper/regression verifier retired; shared copy helpers and remaining Python analysis stay pending, no native equivalence claim"
 }
