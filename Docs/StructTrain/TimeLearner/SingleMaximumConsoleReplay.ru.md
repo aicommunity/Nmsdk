@@ -68,10 +68,8 @@ metadata/capacity очереди и immutable runtime не изменялись.
 
 ## Что остаётся открытым
 
-- Дополнительное увеличение положительной вершины для визуального сравнения:
-  построенные detail-графики включают большой отрицательный feedback-выброс,
-  который особенно у Branch сжимает положительную часть по Y.
-- ASan физических компонентов нового schema5 пути: unit ASan34 не заменяет её.
+- ASan проверка физических компонентов нового пути выполняется отдельно;
+  [зарегистрированное задание](SingleImpulseMaximumPhysicalASanJobs.json).
 - Максимум закреплённого импульса при наложении волн в штатной пачке Train.
 - Остальная обязательная матрица, итоговые эксперименты классификации и merge
   законченного этапа в develop.
@@ -106,3 +104,35 @@ Branch. Для сопоставления положительных верши�
 ![Classic: detail около измеренного максимума](../../../Reports/StructTrain/TimeLearner/s07-single-maximum-visual-m40-a1/selected/Classic-measured-peak-00054-detail.png)
 
 ![Branch: detail около измеренного максимума](../../../Reports/StructTrain/TimeLearner/s07-single-maximum-visual-m40-a1/selected/Branch-measured-peak-00060-detail.png)
+
+
+### Дополнение: положительные вершины теперь доступны для просмотра
+
+Ограничение масштаба выбранных detail-графиков устранено дополнительным
+`positive-lobe` видом. Полное исходное отрицательное отклонение остаётся в
+парном `detail`; в увеличении явно написано, что отрицательные значения
+за пределами Y, а их реальные timestamps обозначены треугольниками у нижней
+границы. Нули и вершины взяты относительно объявленного soma baseline,
+без предположения о нулевом rest-state и без изменения primary samples.
+Остальные три панели сохраняют прежний локальный масштаб.
+
+Renderer Root `93df0ca389a16c50a7f3106ee1a175e91ed70c7a` добавляет такой вид
+к отрицательно-положительным local peak деталям при штатном полном render.
+Адресно на M40 прошли три проверки реальных Classic/Branch primary:
+сохранность данных, видимость реального максимума, точные timestamps явно
+обрезанных отсчётов, full-range отрицательное отклонение и размеры/читаемость
+рисунка. Два новых full-range views имеют те же domains и metadata, что и
+предыдущие detail. Полная повторная отрисовка193 views не выполнялась.
+
+Evidence `9e127579528761b3a872998529135ff0ebca5f93`:
+14 compressed metadata/log members,26512 bytes; только два дополнительных
+PNG (596634 bytes). [Независимая сверка384 tool hashes и артефактов](PositiveLobeTemporalReportsVerification.json),
+[просмотр обоих изображений](PositiveLobeTemporalReportsVisualQA.json).
+Кэш: `/media/user/Data/TimeLearnerRefactor/ReportsCache/positive-lobe-report-m40-a1`.
+Это приёмка выбранных научных иллюстраций одиночного измерения, не проверка
+всего визуального набора и не доказательство обучения или классификации.
+Пунктир на графиках обозначает LT events, а не выбранный peak.
+
+![Classic: положительная вершина, полный выброс сохранён выше](../../../Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1/selected/Classic-measured-peak-00054-positive-lobe.png)
+
+![Branch: положительная вершина, полный выброс сохранён выше](../../../Reports/StructTrain/TimeLearner/s07-positive-lobe-report-m40-a1/selected/Branch-measured-peak-00060-positive-lobe.png)
