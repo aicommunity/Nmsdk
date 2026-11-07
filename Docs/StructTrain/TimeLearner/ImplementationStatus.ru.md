@@ -169,13 +169,16 @@ controls,4 пробы и18 readers; libasan подтверждён в5 проц�
 
 
 [Одноимпульсная диагностика](SinglePulseCharacterizationContract.ru.md):
-native-кандидат Pulse302124b/root288b643 реализован в отдельной feature-ветке.
-Добавлены schema4 diagnostic purpose, временный dataset overlay/restore и
-production запрет использования этих наблюдений для training certificate.
-На M40 запущена [адресная приёмка](SinglePulseCharacterizationJobs.json):
-9 новых native функций и12 существующих контролей. Сборка завершена;
-16/21 passed, пять failures связаны с коллизией имён файлов нового fixture.
-Проверка группы подтвердила закрытие; это не успешная приёмка. Имена исправляются
-в следующем commit, прежняя попытка сохраняется. Console job/reader
-для нового режима и оставшаяся fault matrix ещё не реализованы/не приняты.
-Это не изменение assignment и не новое успешное обучение.
+native-кандидат Pulse302124b/rootb5cfae4 прошёл на M40
+[37/37 native функций и13/13 readers](SinglePulseCharacterizationNativeVerification.json)
+без skips. Проверены Classic/Branch, N=1/2/4/6,2000/20000Гц, физический
+selector≠0, точное восстановление burst stimulus/soma после диагностики и
+ошибок callbacks, JSON roundtrip и запрет training certificate для schema4.
+Все267 members трёх архивов и779+777+364 source hashes сверены с Git;
+группы закрыты, leases released. Первая попытка16/21 с20 assertions о коллизиях
+имён сохранена. Вторая дала37/37, но wrapper ошибся каталогом readers:
+исправлен только путь,13 readers выполнены отдельно без повторения native37.
+Оригинальные failed terminals не переписаны под PASS. ASan, Elder и полный
+cancellation/connected/replacement scope открыты. Console job4 и paired stock
+study подготовлены в root5e628b4, но пока не прошли runtime-приёмку.
+Это ещё не исправление assignment и не новое успешное обучение.
