@@ -107,3 +107,10 @@ owner8720/cmd11516/CMake/Ninja/MSVC;15:45UTC журнал достиг14/495. Э
 
 Сборка и научный допуск остаются разными приёмками. Даже после успешной
 компиляции нужны native tests, Windows runtime/provenance и ownership/cancel.
+
+
+Повторная проверка по запросу пользователя: прямой SSH-вход по ключу под user
+снова успешен, hostname DESKTOP-RV8IOD6; через .12 вход также успешен.
+Свежий CIM15:59UTC подтверждает те же A4 owner8720/cmd11516, CMake7736,
+Ninja3644 и MSVC child. Журнал достиг299/495. A4 не перезапускался;
+compile/native-test acceptance ещё не получена.
