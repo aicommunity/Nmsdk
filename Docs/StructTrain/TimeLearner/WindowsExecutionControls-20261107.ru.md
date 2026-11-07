@@ -76,7 +76,20 @@ SHA256 `e6e16fe725a15296f52b5b399f3483f0e02c75fd9d86b92ee8c04dff20037e7f`.
 новый runtime, compiler parallelism1, build Job4GiB/32processes,
 native Job3GiB/1process, unit23 и physical21. Прежний runtime-a6 проверяется
 до и после; исходники обновляются только после закрытия предыдущих задач.
-Сборка и C++ regression этого job ещё не приняты.
+Компиляция завершилась с exit0, но после выхода cmd остался один принадлежащий
+Job дочерний PID10872. Backend закрыл его и сообщил `descendants_remaining`;
+A1 сохранён failed, автоматически до тестов не дошёл. Имя/creation identity
+этого уже закрытого потомка неизвестны: объяснение через compiler service
+не подтверждено. Требуется отдельно улучшить диагностику потомков build.
+
+Отдельный native-only A2 использует неизменённый собранный runtime A1,
+проверяет свежим OpenJobObject отсутствие/пустоту прежней группы, source
+closure и сохранность runtime-a6. Это не повторная сборка и не переоценка A1.
+На настоящем C++ executable23/23 unit checks прошли с Windows schema2
+cooperative capture,37 реально наблюдённых modules, без потомков;
+Job закрыт. Physical21 ещё выполняется. Финальная проверка/публикация полного
+A2 evidence и принятие whole SDK gate остаются впереди.
+[Точные Task/Job identities](WindowsAssignedSDKJobs.json).
 
 Нужны успешная сборка актуального согласованного SDK с guard исправлением и
 повтор native regression набора. Затем — полноценный Train/export/frozen Test,
