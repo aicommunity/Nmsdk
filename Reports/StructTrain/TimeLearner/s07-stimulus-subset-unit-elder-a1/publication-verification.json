@@ -1,0 +1,52 @@
+{
+  "kind": "stimulus_subset_planner_unit_acceptance",
+  "parent": "d684cec2efd5f83d2a0d46aa42b0f19968ba41d3",
+  "PulseLib": "e9da428a4c137bc52a75feeec290e8f71b601f0d",
+  "rows": [
+    {
+      "attempt": "a1",
+      "terminal": {
+        "passed": false,
+        "built": false,
+        "expected_cases": 7,
+        "heartbeat_errors": [],
+        "native_physical_model_executed": false,
+        "native_subset_api_accepted": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false
+      },
+      "closed": true,
+      "reservation": "not_acquired"
+    },
+    {
+      "attempt": "a2",
+      "terminal": {
+        "passed": true,
+        "built": true,
+        "expected_cases": 7,
+        "heartbeat_errors": [],
+        "native_physical_model_executed": false,
+        "native_subset_api_accepted": false,
+        "scientific_verdict": null,
+        "whole_plan_complete": false
+      },
+      "closed": true,
+      "reservation": "released",
+      "inventory": {
+        "expected": 7,
+        "observed": 7,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "c7e11ea0a03f12ae95bbbe42db16a8b2554e07a33887f07e70d550c83f907b7f"
+      }
+    }
+  ],
+  "native_subset_api_accepted": false,
+  "native_physical_model_executed": false,
+  "regenerable_objects_removed": 474,
+  "cache_logical_bytes_removed": 125358240,
+  "cleanup_release_note_error_preserved": true,
+  "manual_metadata_lease_recovery_audited": true,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
