@@ -9,7 +9,7 @@
   "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-feedback-console-normal-a2",
   "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-feedback-console-normal-a2-container",
   "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-console-normal-a2",
-  "status_at_last_kernel_observation": "running",
+  "status_at_last_kernel_observation": "closed",
   "build_passed": true,
   "native_functions_expected": 26,
   "existing_reader_controls_expected": 29,
@@ -30,5 +30,16 @@
   "training_started": false,
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "restart_policy": "Inspect exact contained handle and authoritative closure/released lease before any source/cache/runtime update; do not restart after observation timeout."
+  "restart_policy": "Inspect exact contained handle and authoritative closure/released lease before any source/cache/runtime update; do not restart after observation timeout.",
+  "whole_group_closed": true,
+  "lease_released": true,
+  "native_functions_passed": 26,
+  "native_probes_completed": 12,
+  "exact_baseline_waveform_pairs": 4,
+  "original_terminal_acceptance": false,
+  "original_reader_errors": 1,
+  "corrected_reader_tests_passed": 2,
+  "corrected_reader_primary_commit": "2127a534ac5272031b14ea612020cd2628572ec7",
+  "primary_commit": "fea18ada6b6446ac422fb728d119ec06bc257ae5",
+  "combined_scoped_acceptance": true
 }

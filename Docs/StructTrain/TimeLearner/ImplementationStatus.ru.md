@@ -265,3 +265,19 @@ schemas2/3/4 compatibility и schema5 builder/negative factors. Все7 primary 
 и432 tool hashes сверены с Git; процессы закрыты/lease released. Новый Console
 profile path подключён в коде, но compiler, execution auditor actual records,
 paired baseline waveform и actual gain0 intervention ещё не проверены.
+
+
+[Actual stock feedback intervention](FeedbackProfileConsoleNormalVerification.json):
+root844b278/Pulse1f97, M40 normal26 native +29 прежних readers; все12 Console
+проб завершены/аудированы,4 baseline waveform pairs exact. Все1555 members и789
+source hashes сверены с Git; восемь прежних runtime неизменны, группа закрыта,
+lease released. В initial11 readers9 admission иnegative control прошли, но
+positive test после аудита12 проб прочёл JSON array object-only loader; original
+terminal остаётся failed. Исправлены только test read; [отдельные2 readers](FeedbackProfileConsoleReaderVerification.json)
+прошли без native repeat,9 members/434 tool hashes и1315 неизменных native input
+files сверены. Combined scoped gate принят; это не приёмка всего SDK или плана.
+FeedbackGain0 устранил дополнительные положительные максимумы в двух выбранных
+состояниях при неизменных input/threshold/остальной физике. Это диагностическое
+вмешательство, не новое обучение или классификация; менять default physics
+либо CapturedPerInput на этом основании нельзя. Отчёт/visual QA продолжаются;
+ASan нового API, Elder и полный mode/profile scope открыты.
