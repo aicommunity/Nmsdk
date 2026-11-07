@@ -303,10 +303,6 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     except BaseException as error:
         result.update(reason=str(error), validity='invalid_or_incomplete')
     finally:
-        # These are diagnostic partial observations, not a successful boundary
-        # capture. Preserve them even when capture fails before normal exit.
-        _write(output/'partial-loaded-files.json', list(observed.values()))
-        _write(output/'module-observation-errors.json', module_errors)
         if process.process:
             if api.running(process.process):
                 if assigned:api.terminate_job(job, 1460)
@@ -320,6 +316,10 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             while api.pids(job) and time.monotonic() < deadline:time.sleep(.05)
             result['all_processes_closed'] = not api.pids(job)
             api.close(job)
+        # Diagnostics must not delay owned-process cleanup if storage fails.
+        # Partial observations never replace a successful boundary capture.
+        _write(output/'partial-loaded-files.json', list(observed.values()))
+        _write(output/'module-observation-errors.json', module_errors)
         result.update(wall_seconds=time.monotonic()-start, child_resumed=resumed, job_name=name)
         _write(output/'result.json', result)
         lock.seek(0);msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1);lock.close()
