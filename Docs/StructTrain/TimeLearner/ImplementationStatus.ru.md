@@ -325,3 +325,11 @@ replay false failure при source begin855.486с. Signals/model совпали 
 на4 inputs. Механизм missing этим ещё не установлен. Mechanical analyze_pair
 A/B сохранил все поля двух прежних low summaries. Нового обучения нет. [Отчёт](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md),
 полный temporal cache/selected QA ещё строятся.
+
+
+[Training100 temporal report](HighThresholdTemporalVerification.json) завершён:
+4 cases/10 trial-soma pairs,393 views,1187 cache files проверены; cache131740593B
+на M40. В Git6 PNG1381204B, все6 просмотрены индивидуально. Сверены29 primary
+members/375 tool hashes; group closed/lease released. [Читаемый отчёт](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md)
+показывает single peak иburst3/4 иявно отделяет гипотезу наложения от доказанного
+механизма. Визуальная приёмка всего cache и новая классификация не заявляются.
