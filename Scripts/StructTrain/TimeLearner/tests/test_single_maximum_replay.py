@@ -9,7 +9,7 @@ from ..single_maximum_replay import validate_design
 class SingleMaximumReplayDesignTest(unittest.TestCase):
     def design(self):
         return {'kind':'timelearner_single_maximum_replay','schema_version':1,
-                'source':{'repository':'data','commit':'a'*40,'bundle_path':'Reports/bundle.json',
+                'source':{'repository':'/readonly/data','commit':'a'*40,'bundle_path':'Reports/bundle.json',
                           'archive_path':'Reports/primary.tar.xz'},
                 'cases':[{'id':'Classic','member_prefix':'study/Classic-single'},
                          {'id':'Branch','member_prefix':'study/Branch-single'}]}
@@ -36,3 +36,7 @@ class SingleMaximumReplayDesignTest(unittest.TestCase):
                      {'id':'Other','member_prefix':'study/Classic-single/child'}):
             design=self.design();design['cases'].append(deepcopy(case))
             with self.assertRaises(EvidenceError):validate_design(design)
+
+    def test_repository_cannot_depend_on_an_implicit_working_directory(self):
+        design=self.design();design['source']['repository']='relative/data'
+        with self.assertRaises(EvidenceError):validate_design(design)

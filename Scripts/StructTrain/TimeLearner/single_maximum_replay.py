@@ -36,7 +36,7 @@ def validate_design(design):
             design['schema_version']==1, 'maximum_replay_unknown_design')
     source=design['source']
     require(type(source) is dict and set(source)=={'repository','commit','bundle_path','archive_path'} and
-            type(source['repository']) is str and bool(source['repository']) and
+            type(source['repository']) is str and Path(source['repository']).is_absolute() and
             type(source['commit']) is str and re.fullmatch('[0-9a-f]{40}',source['commit']),
             'maximum_replay_invalid_source')
     _relative(source['bundle_path']);_relative(source['archive_path'])
@@ -63,7 +63,7 @@ def _extract(design,output):
     raw=_git_blob(source,source['archive_path'])
     require(len(raw)==bundle['archive_bytes'] and hashlib.sha256(raw).hexdigest()==bundle['archive_sha256'],
             'maximum_replay_archive_mismatch')
-    seen=set();total=0;selected={case['id']:0 for case in design['cases']}
+    seen=set();total=0;selected={case['id']:0 for case in design['cases']};bindings={}
     with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as archive:
         for member in archive:
             name=_relative(member.name)
@@ -81,9 +81,19 @@ def _extract(design,output):
                     destination=output/case['id']/name[len(prefix):]
                     destination.parent.mkdir(parents=True,exist_ok=True);destination.write_bytes(data)
                     selected[case['id']]+=1
+                    bindings[destination.relative_to(output).as_posix()]=bundle['members'][name]
     require(seen==set(bundle['members']) and all(selected.values()),'maximum_replay_archive_incomplete')
     return {'commit':source['commit'],'archive_path':source['archive_path'],
-            'archive_sha256':bundle['archive_sha256'],'members_verified':len(seen),'selected_members':selected}
+            'archive_sha256':bundle['archive_sha256'],'members_verified':len(seen),'selected_members':selected,
+            'selected_file_bindings':bindings}
+
+
+def _verify_source_cache(root,provenance):
+    for name,record in provenance['selected_file_bindings'].items():
+        path=root/_relative(name)
+        require(not path.is_symlink() and path.is_file() and path.stat().st_size==record['bytes'] and
+                hashlib.sha256(path.read_bytes()).hexdigest()==record['sha256'],
+                'maximum_replay_source_cache_changed')
 
 
 def run(design,runtime,output):
@@ -95,7 +105,7 @@ def run(design,runtime,output):
     output.mkdir(parents=True);_write(output/'design.json',design)
     (output/'jobs').mkdir();(output/'baseline').mkdir()
     provenance=_extract(design,output/'source');_write(output/'source-provenance.json',provenance)
-    rows=[]
+    rows=[];prepared=[]
     for case in design['cases']:
         original=output/'source'/case['id'];original_native=original/'native'
         audit_execution(original_native)
@@ -108,15 +118,25 @@ def run(design,runtime,output):
         require(original_packet['observation']['complete'] and
                 original_packet['observation']['peaks'][0]['candidate_count']>1,
                 'maximum_replay_requires_actual_multi_peak_source')
-        folders={}
+        jobs={}
         for policy in ('isolated_window','single_impulse_maximum'):
             candidate=deepcopy(job);candidate['probe']['trial_id']+='/replay-'+policy
             candidate['probe']['peak_selection']=policy
             if policy=='single_impulse_maximum':candidate['probe']['protocol_revision']+='/single-impulse-maximum-v1'
             candidate.pop('sha256');candidate=_signed(candidate);validate_job(candidate)
             job_path=output/'jobs'/(case['id']+'-'+policy+'.json');_write(job_path,candidate)
+            jobs[policy]={'path':str(job_path),'sha256':candidate['sha256']}
+        prepared.append({'id':case['id'],'original_native':str(original_native),
+                         'source_state':str(source_files[0]),'jobs':jobs})
+    _write(output/'frozen-jobs.json',{'cases':prepared,'all_jobs_frozen_before_native_operations':True})
+    for case in prepared:
+        folders={};original_native=Path(case['original_native'])
+        for policy in ('isolated_window','single_impulse_maximum'):
+            _verify_source_cache(output/'source',provenance)
+            job_path=Path(case['jobs'][policy]['path'])
+            require(load(job_path)['sha256']==case['jobs'][policy]['sha256'],'maximum_replay_job_changed')
             folder=output/'runs'/case['id']/policy
-            result=run_job('probe',job_path,source_files[0],runtime,folder,900.)
+            result=run_job('probe',job_path,Path(case['source_state']),runtime,folder,900.)
             require(result['execution']=='completed' and result['validity']=='valid','maximum_replay_incomplete_execution')
             require(audit_run_manifest(folder/'run-manifest.json')['run_evidence_consistent'],
                     'maximum_replay_inconsistent_manifest')
@@ -125,6 +145,7 @@ def run(design,runtime,output):
                 baseline=compare_presentations(original_native,folders[policy],True)
                 _write(output/'baseline'/ (case['id']+'.json'),baseline)
                 require(baseline['exact_waveform_reproduced'],'maximum_replay_original_waveform_changed')
+        _verify_source_cache(output/'source',provenance)
         comparison=compare_presentations(folders['isolated_window'],folders['single_impulse_maximum'],True)
         require(comparison['exact_waveform_reproduced'],'maximum_replay_policy_changes_physics')
         before=load(folders['isolated_window']/'probe_trial_1.json')
