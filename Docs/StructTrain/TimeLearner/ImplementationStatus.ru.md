@@ -57,14 +57,16 @@ Branch5→58 и31→60. Это не полный search box и не улучше
 В четырёх default Retry случаях совпали модели, summaries и728 native CSV.
 [Сравнительный отчёт](FairDomainStockScientificReport-2026-11-07.ru.md).
 
-[Оценка восьми новых моделей](FairDomainStockEvaluationJobs.json) уже выполняется:
-пять role/job checks прошли, все64 native diagnostic пробы завершены с valid
-наблюдениями. При inherited0.0117 вновь TP1/FP7/FN0/TN0, при100 —
-TP0/FP0/FN1/TN7. Эти серверные числа предварительны до закрытой публикации
-primary; render всех160 trial/soma pairs ещё выполняется, его PID/start ticks
-подтверждены. Обученных моделей с сертификатом по-прежнему0. Условия — исходный
-NSPNeuronGen без дополнительной LTMembrane, без C-trim/PostTune/калибровки.
-Baseline ответы не подставляются вместо результатов новой серии.
+[Оценка восьми новых моделей](FairDomainStockEvaluationVerification.json) завершена:
+пять role/job checks прошли, все64 native diagnostic пробы полны и valid.
+При inherited0.0117 вновь TP1/FP7/FN0/TN0, при100 — TP0/FP0/FN1/TN7.
+Primary опубликован:5043 members, каждый повторно проверен по размеру и SHA256.
+Процессы закрыты, lease released. Все160 trial/soma pairs отрисованы:
+9190 временных views,30302 cache files/2077769934B на M40.
+Четыре выбранных PNG проверены [вручную](FairDomainStockSelectedVisualQA.json);
+это не полный ручной просмотр cache. Обученных моделей с сертификатом0.
+Условия — исходный NSPNeuronGen без дополнительной LTMembrane, без
+C-trim/PostTune/калибровки. Baseline ответы не подставлялись вместо новой серии.
 
 Августовские4/8,5/8,6/8 подтверждены не только исходным визуальным наблюдением:
 выполнены [saved-state replay](HistoricalAugustReplay.ru.md) и
@@ -95,14 +97,14 @@ TP2/FP0 повторяли один target/foil после same-matrix кали�
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
 |9. Скрипты|Корневой пакет и CLI работают; migration222:220 retired+2 moved; семь исторических XML patchers приняты без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
-|11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Завершение оценки нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
+|11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
 
 ## Путь к итоговым выводам
 
-1. Завершить оценку восьми новых фактических моделей и все trial/soma
-   графики. Полный Train, primary audit и matched code comparison этой серии
-   уже приняты; не повторять их ради одного обновления отчёта.
+1. Использовать завершённую оценку восьми фактических моделей и полный
+   temporal cache как основу waveform/peak-assignment аудита. Train,64 пробы
+   и render уже завершены; не повторять их ради обновления отчёта.
 2. Разобрать invalid peak/burst assignment и проверить исправление реальными
    штатными пробами. Budget exhaustion не доказывает PhysicalInfeasible.
 3. Использовать уже принятые августовские replay и cold Train→Test как

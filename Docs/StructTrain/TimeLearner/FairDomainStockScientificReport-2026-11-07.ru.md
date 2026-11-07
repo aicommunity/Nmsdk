@@ -3,7 +3,8 @@
 **Новый порядок расширил фактически проверенные геометрии, но ни один из восьми
 Train не завершился с сертификатом.** Все исходы InvalidObservation. Это
 измеренный отрицательный результат ограниченного поиска, не доказательство
-PhysicalInfeasible. Классификация новых моделей этим Train-сравнением не оценена.
+PhysicalInfeasible. Отдельная завершённая диагностическая оценка64 проб
+не обнаружила улучшения классификации при двух проверенных порогах.
 
 ## Условия
 
@@ -55,12 +56,53 @@ records и typed invalid witnesses учитываются раздельно. Н
 ради исправления publisher. Архив исключает только доказанные duplicate glog
 aliases с отдельным журналом; оригинальные файлы не удалялись.
 
-Следующая оценка использует каждую из восьми фактических stopped моделей и
-потому остаётся diagnostic-only. План:64 полных предъявления восьми PhaseA
-паттернов, inherited threshold без калибровки, reset-per-trial; затем временные
-графики всех160 trial/soma pairs с входными импульсами. Это не independent
-оценка, не исторический порядок/ITI и не завершённое обучение.
-[Задание и исходное наблюдение очереди](FairDomainStockEvaluationJobs.json).
+## Диагностическая классификация и временные графики
+
+Оценка использовала каждую из восьми фактических stopped моделей:64 полных
+предъявления восьми PhaseA паттернов, inherited threshold без калибровки,
+reset-per-trial, окно2с и одна позиция target. Во всех случаях наблюдения
+полны и valid, learned-state hash при frozen evaluation неизменен.
+
+| Порог | Случаев (Classic/Branch × Retry/Advance) | TP | FP | FN | TN |
+|---|---:|---:|---:|---:|---:|
+|0.0117|4, каждый|1|7|0|0|
+|100|4, каждый|0|0|1|7|
+
+Это diagnostic-only после незавершённого обучения, не independent Test и не
+исторический порядок/ITI. Низкий порог даёт срабатывания на все отвлекающие
+паттерны, высокий пропускает target. Два порога не доказывают NonSeparable
+на всей сетке. [Приёмка первичных данных](FairDomainStockEvaluationVerification.json):
+commit77748412dcdfe2a838b10dcfaba69bdac3001abe,5043 members/47970556B xz,
+SHA256920397b42bd8ec191924c63579d02f9d94b1f92b7dfe6a8a194acc06d09cf59f.
+Все members повторно проверены; process group закрыта, lease released.
+Исходные наблюдения очереди сохранены в [журнале](FairDomainStockEvaluationJobs.json).
+
+Полный воспроизводимый отчёт на M40:
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/stock-fair-frozen-normal-a1/index.html`.
+Он содержит160 trial/soma pairs и9190 временных views;30302 файла/2077769934B.
+Для каждой пары есть полный2с обзор и40 непрерывных50мс увеличений с общей
+шкалой Y; дополнительные local-Y details показывают слабую динамику.
+Данные не прорежены; PNG1920×960, минимум14.208px на native tick в увеличениях.
+Потенциал сомы и реальные входные импульсы показаны на общей временной оси.
+Полный cache хранится на M40, Git — сжатые primary, checksums и выбранные PNG.
+
+[Ручная QA четырёх рисунков](FairDomainStockSelectedVisualQA.json) подтвердила
+читаемость подписей и возможность рассмотреть слабую динамику. Это не ручная
+проверка всех160 пар. Единицы потенциала остаются `model_units_SI_unverified`;
+их нельзя автоматически называть вольтами или милливольтами.
+
+Выбранные рисунки (относительные ссылки ведут к Git-артефактам):
+
+- [Classic: target, полный обзор](../../../Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Classic-threshold-low-advance32-target-soma1-overview.png).
+- [Classic: foil, полный обзор](../../../Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Classic-threshold-low-advance32-foil-soma1-overview.png).
+- [Classic: слабая динамика и входной импульс,0.45–0.50с](../../../Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Classic-threshold-low-advance32-target-soma1-zoom-010-detail.png).
+- [Branch: динамика при молчащем выходе,0.15–0.20с](../../../Reports/StructTrain/TimeLearner/s07-stock-fair-selected-visual-m40-a1/Branch-threshold-training100-advance32-target-soma1-zoom-004-detail.png).
+
+В обзорах Classic отрицательные экскурсии совпадают с LT events; одна эта
+картинка не устанавливает причинную роль торможения. В Branch detail в выбранном
+интервале нет входного импульса, но потенциал меняется: молчание выхода не
+означает отсутствия физической динамики. Следующий шаг — связать причины
+InvalidObservation с измеренными пиками штатной пачки.
 
 Нельзя заключить, что нужно лишь повысить budget, что исходная задача физически
 невозможна или что fair traversal уже улучшил классификацию. Следующая

@@ -106,10 +106,13 @@ Silent threshold не делает молчаливые target успешной 
 
 [Fair-domain stock Train](FairDomainStockTrainVerification.json) допущен и
 полностью исполнен:8 preflight/8 Train,16 run manifests; все Train остановлены
-InvalidObservation. Его полная диагностическая оценка64 проб уже получена на
-сервере, но весь worker с render ещё работает; закрытая первичная публикация
-оценки и visual QA ожидаются. Это не повод повторять Train или менять текущий
-runtime. [Статус задания](FairDomainStockEvaluationJobs.json).
+InvalidObservation. Его диагностическая оценка64 проб и render160 trial/soma
+pairs завершены; primary опубликован и проверен, процессы закрыты и lease
+released. [Приёмка](FairDomainStockEvaluationVerification.json) связывает
+9190 views с фактическими моделями. [Ручная visual QA](FairDomainStockSelectedVisualQA.json)
+охватывает четыре PNG. Полный ручной просмотр cache не заявляется.
+Это не повод повторять Train или менять текущий runtime. Исторические
+наблюдения запуска сохранены в [журнале задания](FairDomainStockEvaluationJobs.json).
 
 Обе серии используют исходную физику без дополнительной LTMembrane.
 [Сравнение](FairDomainStockScientificReport-2026-11-07.ru.md) подтверждает расширение
