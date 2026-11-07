@@ -91,3 +91,13 @@ runtime guard до reservation/source updates/build; все5 primary members и7
 Восемь прежних runtime защищены byte hashes. Все12 заданий фиксируются до native
 operations; четыре exact baseline comparisons должны пройти до gain0. Серия не
 обучает и не оценивает классификацию; CapturedPerInput/threshold не меняются.
+
+
+[Actual Console gate](FeedbackProfileConsoleNormalVerification.json) завершён:
+компиляция,26 native controls,29 прежних readers,12 actual probes и4 exact
+baseline pairs. Первичный terminal остался failed из-за единственного test
+array/object loader error после проверки всех12 execution records. Test исправлен;
+[два reader controls](FeedbackProfileConsoleReaderVerification.json) прошли отдельно
+на неизменных primary без повторения native. Combined scoped gate принят;
+initial failed outcome не переписан. Новые diagrams/visual QA, второй host,
+ASan именно нового API и общая матрица остаются обязательными.
