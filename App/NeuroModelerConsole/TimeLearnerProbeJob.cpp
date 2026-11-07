@@ -25,18 +25,19 @@ struct Job {
     std::string ownerClass,runId,trialId,sampleId,protocolRevision;
     std::size_t input=0,maximumTicks=0,maximumSamples=0;
     double duration=0.,gap=0.,minimumAmplitude=0.,windowBegin=0.,windowEnd=0.,wallSeconds=0.;
-    bool recordSpikes=false,channelDiagnostics=false;
+    bool recordSpikes=false,channelDiagnostics=false,singlePulse=false;
     PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow;
 };
 bool Boolean(const QJsonValue& v){Require(v.isBool(),"probe_boolean_required");return v.toBool();}
 Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
-    const auto version=Count(d["schema_version"],1,3);
+    const auto version=Count(d["schema_version"],1,4);
     std::set<QString> fields{"kind","schema_version","owner_class","implementation_id","model","profile_archives",
         "stimulus_profile","probe","maximum_model_ticks","maximum_wall_seconds","sha256"};
     if(version>=2){fields.insert("source_stopped");fields.insert("resistance_intervention");}
-    if(version==3)fields.insert("channel_diagnostics");
+    if(version>=3)fields.insert("channel_diagnostics");
+    if(version==4)fields.insert("presentation");
     Keys(d,fields);
     Require(d["kind"]==QJsonValue("timelearner_native_probe_job"),"unsupported_probe_job");
     Require(Signed(d)==d,"job_digest_mismatch");Text(d["implementation_id"]);
@@ -45,7 +46,11 @@ Job Read(const QString& path)
     Require(j.ownerClass==(j.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"),"probe_owner_mismatch");
     j.profiles=Array(d["profile_archives"]);Require(j.profiles.size()<=32,"probe_profile_budget_exceeded");
     for(const auto& p:j.profiles)Object(p);
-    if(version==3)j.channelDiagnostics=Boolean(d["channel_diagnostics"]);
+    if(version>=3)j.channelDiagnostics=Boolean(d["channel_diagnostics"]);
+    if(version==4) {
+        const auto presentation=Object(d["presentation"]);Keys(presentation,{"kind"});
+        Require(presentation["kind"]==QJsonValue("single_pulse_characterization"),"unsupported_probe_presentation");j.singlePulse=true;
+    }
     if(version>=2) {
         j.stopped=Object(d["source_stopped"]);
         Require(j.stopped["kind"]==QJsonValue("timelearner_stopped_state") && j.stopped["certificate"].isNull(),"probe_requires_stopped_source");
@@ -58,6 +63,8 @@ Job Read(const QString& path)
             Require(seen.insert(i).second && r>0.,"invalid_probe_resistance_intervention");j.resistanceIntervention.emplace_back(i,r);
         }
     }
+    Require(!j.singlePulse || j.resistanceIntervention.empty(),"single_pulse_intervention_not_supported");
+    Require(!j.singlePulse || Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"single_pulse_source_profile_changed");
     const auto source=Object(d["stimulus_profile"]);
     Keys(source,{"generator_class","amplitude","pulse_length","frequency_hz","frequency_deviation","use_transit_signal","use_pattern_output"});
     j.stimulus={Text(source["generator_class"]),Number(source["amplitude"]),Number(source["pulse_length"]),Number(source["frequency_hz"]),
@@ -73,6 +80,7 @@ Job Read(const QString& path)
     const auto selection=Text(p["peak_selection"]);
     Require(selection=="isolated_window" || selection=="assigned_burst_wave","invalid_probe_selection");
     j.selection=selection=="isolated_window"?PeakSelectionPolicy::IsolatedWindow:PeakSelectionPolicy::AssignedBurstWave;
+    Require(!j.singlePulse || j.selection==PeakSelectionPolicy::IsolatedWindow,"single_pulse_requires_explicit_peak_window");
     const auto w=Object(p["window"]);Keys(w,{"begin","end"});j.windowBegin=Number(w["begin"]);j.windowEnd=Number(w["end"]);
     j.maximumTicks=Count(d["maximum_model_ticks"],1,1000000000);j.wallSeconds=Number(d["maximum_wall_seconds"]);
     Require(j.wallSeconds>0.,"invalid_probe_wall_budget");return j;
@@ -154,6 +162,14 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             auto plan=MakeConfiguredNativeTrainingPlan(configuration);auto request=plan.probe;
             request.activeInput=int(j.input);request.inputId="input"+std::to_string(j.input);request.baseModelRevision=identity["sha256"].toString().toStdString();
             request.specification.runId=j.runId;request.specification.trialId=trial;request.specification.windows={plan.inputWindows[j.input]};
+            if(j.singlePulse) {
+                auto& spec=request.specification;const auto originalHash=spec.patternHash;
+                spec.schemaVersion=4;spec.waveAssignment=WaveAssignmentPolicy::WindowOnly;spec.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+                spec.characterization=SinglePulseCharacterization{originalHash,j.model.inputs.size(),j.input};
+                spec.patternHash=NmsdkTools::CanonicalModelDataSha256(QJsonArray{request.expectedInputIsi.front()}).toStdString();
+                spec.expectedStimulusIds={spec.expectedStimulusIds.front()};
+                spec.windows={{request.inputId,j.model.branch?0u:j.input,j.windowBegin,j.windowEnd,spec.expectedStimulusIds.front()}};
+            }
             request.readModelRevision=[&](){return observer.Read(neuron,ports).toStdString();};
             request.readFullModelRevision=[&](){const auto actual=NmsdkTools::IdentifyModel(neuron,ports);
                 Require(actual["valid"]==QJsonValue(true),"probe_invalid_live_graph");return actual["sha256"].toString().toStdString();};
@@ -237,7 +253,7 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        const bool diagnosticJob=Count(j.document["schema_version"],1,3)==3;
+        const bool diagnosticJob=Count(j.document["schema_version"],1,4)>=3;
         QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",diagnosticJob?4:(imported?3:2)},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},

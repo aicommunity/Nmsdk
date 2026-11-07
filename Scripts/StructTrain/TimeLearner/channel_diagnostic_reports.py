@@ -24,7 +24,7 @@ def chart(directory, soma):
     require(accepted['execution'] == 'completed' and accepted['observation_complete'],
             'channel_plot_requires_closed_native_probe')
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
-    require(job['schema_version'] == 3 and job['channel_diagnostics'] is True and
+    require(job['schema_version'] in (3, 4) and job['channel_diagnostics'] is True and
             not job['resistance_intervention'] and execution['terminal_phase'] == 'main_probe',
             'channel_plot_requires_unmodified_main_diagnostic_probe')
     n = 1 if job['model']['branch'] else len(job['model']['inputs'])
@@ -68,6 +68,7 @@ def chart(directory, soma):
             'raw_initial_channel_values': {'Exc': exc[0], 'Inh': inh[0]},
             'diagnostic_peak_indices': peak_indices,
             'peak_observation_valid': packet['observation']['valid'],
+            **({'diagnostic_purpose':'single_pulse_characterization'} if job['schema_version'] == 4 else {}),
             'primary': {name: hashlib.sha256((directory/name).read_bytes()).hexdigest() for name in
                         ('probe_trial_1.json', 'probe_trial_1.csv', 'probe_diagnostics_1.json', 'initial-state.json')}}
 
@@ -104,7 +105,7 @@ def render_figure(data, name, left, right, output, local=False):
     overlay.set_ylabel('Actual input\ngenerator units', fontsize=10, color='#a34d00')
     handles.append(line);labels.append('Actual native input; dotted lines: actual LT events')
     axes[-1].set_xlabel('Native absolute time [s]')
-    figure_title(fig, 'Closed native training probe | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
+    figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native training probe')+' | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
                  data['trial_id']+'\n'+data['soma_path']+' | '+name+
                  (' | local Y per panel' if local else ' | shared Y per panel')+
                  ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12])

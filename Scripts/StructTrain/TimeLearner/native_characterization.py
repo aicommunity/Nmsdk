@@ -23,9 +23,9 @@ PROBE_FIELDS = {'run_id', 'trial_id', 'sample_id', 'protocol_revision', 'input_i
 @_evidence_boundary
 def validate_job(job):
     version = job.get('schema_version') if type(job) is dict else None
-    require(type(version) is int and version in (1, 2, 3), 'unknown_characterization_job')
+    require(type(version) is int and version in (1, 2, 3, 4), 'unknown_characterization_job')
     require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version >= 2 else set()) |
-            ({'channel_diagnostics'} if version == 3 else set()) and
+            ({'channel_diagnostics'} if version >= 3 else set()) | ({'presentation'} if version == 4 else set()) and
             job['kind'] == 'timelearner_native_probe_job', 'unknown_characterization_job')
     _digest(job)
     validate_model_spec(job['model'])
@@ -58,7 +58,12 @@ def validate_job(job):
             type(profile['use_transit_signal']) is bool and type(profile['use_pattern_output']) is bool,
             'characterization_stimulus_invalid')
     number(profile['amplitude'])
-    if version == 3:
+    if version == 4:
+        require(job['presentation'] == {'kind': 'single_pulse_characterization'} and
+                job['resistance_intervention'] == [] and probe['peak_selection'] == 'isolated_window' and
+                job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
+                'single_pulse_presentation_invalid')
+    if version >= 3:
         require(type(job['channel_diagnostics']) is bool, 'characterization_diagnostics_boolean_required')
     if version >= 2:
         source = job['source_stopped'];_digest(source)
@@ -133,6 +138,17 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
     validate_job(job);return job
 
 
+def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_seconds=900, channel_diagnostics=True):
+    """Only transient presentation changes; full source model/target is imported."""
+    job = prepare_stopped_job(case, input_index, trial_id, maximum_wall_seconds=maximum_wall_seconds,
+                              channel_diagnostics=channel_diagnostics)
+    job.update(schema_version=4, presentation={'kind': 'single_pulse_characterization'})
+    job['probe']['peak_selection'] = 'isolated_window'
+    job['probe']['window'] = {'begin': 0., 'end': job['probe']['duration']}
+    job['probe']['protocol_revision'] += '/single-pulse-characterization-v1'
+    job = _signed(job);validate_job(job);return job
+
+
 def expected_import_model(job):
     """Exact physical graph projection for an Rs-only intervention, including aliases."""
     parameters = expected_import_parameters(job)
@@ -165,7 +181,7 @@ def audit_execution(directory):
             ({'channel_diagnostics_enabled', 'channel_diagnostic_files'} if schema == 4 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
     imported = job['schema_version'] >= 2
-    require((schema == 4) == (job['schema_version'] == 3), 'characterization_diagnostics_schema_mismatch')
+    require((schema == 4) == (job['schema_version'] >= 3), 'characterization_diagnostics_schema_mismatch')
     baseline_terminal = schema >= 3 and execution['terminal_phase'] == 'source_baseline'
     if schema >= 3:
         require(imported and execution['terminal_phase'] in ('source_baseline', 'main_probe') and
@@ -261,11 +277,11 @@ def audit_execution(directory):
     require(requested['trial_id'] == p['trial_id']+('/source-baseline' if baseline_terminal else '') and
             all(requested[k] == p[k] for k in ('run_id', 'sample_id', 'maximum_sample_gap', 'minimum_amplitude',
             'maximum_samples', 'record_spikes', 'peak_selection')) and equal(requested['begin'], 0) and
-            equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(job['model']['initial_isi']) and
+            equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(job['model']['initial_isi'][:1] if job['schema_version'] == 4 else job['model']['initial_isi']) and
             requested['stimulus_profile'] == job['stimulus_profile'], 'characterization_request_changed')
     window = requested['windows']
     i = p['input_index']
-    require(len(window) == 1 and window[0] == {'input_id': 'input'+str(i), 'stimulus_id': 'pulse'+str(i),
+    require(len(window) == 1 and window[0] == {'input_id': 'input'+str(i), 'stimulus_id': 'pulse'+str(0 if job['schema_version'] == 4 else i),
             'channel': 0 if job['model']['branch'] else i, **p['window']}, 'characterization_selected_window_changed')
     observation = packet['observation']
     require(execution['probe_status'] == packet['native_status'] and
@@ -282,10 +298,20 @@ def audit_execution(directory):
             require('cancel.request' in expected_files, 'characterization_cancellation_request_missing')
         if execution['execution'] == 'model_tick_budget_exhausted':
             require(ticks == job['maximum_model_ticks'], 'characterization_tick_budget_not_reached')
-    audit = audit_probe(packet, trace)
-    if not audit['valid_observation']:
-        observation, spec, _, samples, _, quality = read_partial_probe(packet, trace)
-        audit_recorded_wave_diagnostics(observation, spec, samples, quality)
+    single_audit = {}
+    if job['schema_version'] == 4:
+        from .single_pulse_evidence import read_single_pulse
+        observation, spec, _, samples, _, quality = read_single_pulse(packet, trace)
+        require(requested['characterization'] == {'purpose': 'single_pulse_characterization',
+                'source_training_pattern_hash': sha(job['model']['initial_isi']),
+                'physical_input_count': len(job['model']['inputs']), 'selected_input_index': i},
+                'single_pulse_source_or_selector_changed')
+        single_audit['single_pulse_diagnostic'] = quality
+    else:
+        audit = audit_probe(packet, trace)
+        if not audit['valid_observation']:
+            observation, spec, _, samples, _, quality = read_partial_probe(packet, trace)
+            audit_recorded_wave_diagnostics(observation, spec, samples, quality)
     if packet['prepared'] is not None:
         prepared = packet['prepared']
         require(prepared['base_model_revision'] == execution['model_revision'] and prepared['protocol_revision'] == p['protocol_revision'] and
@@ -297,6 +323,6 @@ def audit_execution(directory):
         from .probe_channel_diagnostics import audit as audit_channels
         diagnostic_audit['channel_diagnostics'] = audit_channels(directory, job, execution, initial['identity'])
     return {'primary_evidence_checked': True, 'runtime_provenance_checked': False, 'model_unchanged': True,
-            **({'terminal_phase': execution['terminal_phase']} if schema >= 3 else {}), **diagnostic_audit,
+            **({'terminal_phase': execution['terminal_phase']} if schema >= 3 else {}), **diagnostic_audit, **single_audit,
             'execution': execution['execution'], 'observation_valid': execution['observation_valid'],
             'observation_complete': execution['observation_complete'], 'training_started': False, 'evaluation_verdict': None}

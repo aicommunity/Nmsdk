@@ -322,7 +322,7 @@ def _structured_training_exit(mode, job, process, directory):
     boundary, and reject a completed-execution claim paired with exit code 2.
     """
     return (mode in ("train", "diagnostic-evaluate", "probe") and type(job.get("schema_version")) is int and
-            job["schema_version"] in ((1, 2, 3) if mode == "probe" else (1, 2))
+            job["schema_version"] in ((1, 2, 3, 4) if mode == "probe" else (1, 2))
             and process["execution"] == "process_error" and type(process["returncode"]) is int
             and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 

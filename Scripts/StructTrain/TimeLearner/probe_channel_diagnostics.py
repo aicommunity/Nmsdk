@@ -55,7 +55,10 @@ def audit(directory, job, execution, identity):
         trace = directory/(prefix+'1.csv')
         # The enclosing native-characterization audit checks the complete main
         # probe. Read invalid/partial data with its explicit diagnostic adapter.
-        if observation is not None and observation['valid']:
+        if packet['requested_specification']['schema_version'] == 4:
+            from .single_pulse_evidence import read_single_pulse
+            _, spec, _, samples, _, _ = read_single_pulse(packet, trace)
+        elif observation is not None and observation['valid']:
             with trace.open(newline='', encoding='utf-8') as stream:
                 values = list(csv.reader(stream))[1:]
             samples = [{'time': number(float(r[0])),
