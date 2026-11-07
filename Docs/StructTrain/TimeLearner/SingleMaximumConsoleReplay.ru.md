@@ -68,7 +68,9 @@ metadata/capacity очереди и immutable runtime не изменялись.
 
 ## Что остаётся открытым
 
-- Визуальный отчёт новых наблюдений с читаемыми temporal plots.
+- Дополнительное увеличение положительной вершины для визуального сравнения:
+  построенные detail-графики включают большой отрицательный feedback-выброс,
+  который особенно у Branch сжимает положительную часть по Y.
 - ASan физических компонентов нового schema5 пути: unit ASan34 не заменяет её.
 - Максимум закреплённого импульса при наложении волн в штатной пачке Train.
 - Остальная обязательная матрица, итоговые эксперименты классификации и merge
@@ -77,3 +79,30 @@ metadata/capacity очереди и immutable runtime не изменялись.
 SingleImpulseMaximum остаётся diagnostic_only/training_eligible=false.
 Ни сертификат Exact, ни положительный результат классификации этими пробами
 не получены. Общий план и цель остаются незавершёнными.
+
+## Временные графики и визуальная проверка
+
+На M40 построены154 views для всех четырёх сом Classic и39 для сомы Branch.
+Полный воспроизводимый кэш:
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/single-maximum-visual-m40-a1`.
+Это193 views/583 files без SHA256SUMS, не193 независимых эксперимента.
+Источник — неизменяемый primary A2; все459 archive members сверены перед
+построением.24 cached native file bindings совпали с исходным Git bundle.
+
+Compact evidence `9e1fe0ea4a5e6bc3d2d8f163833972c14a1fd46c` содержит20
+сжатых metadata/log members (54024 bytes), manifests и только четыре PNG,
+всего1063398 bytes изображений. Полные SVG/PDF/PNG остаются кэшем на M40.
+[Сверка](SingleMaximumTemporalReportsVerification.json) и
+[визуальное заключение](SingleMaximumTemporalReportsVisualQA.json).
+
+Четыре выбранных1920×1920 изображения просмотрены: подписи читаемы, легенда
+не перекрывает заголовки, actual input и LT events показаны, detail сохраняет
+фактические samples. Overview всего окна служит контекстом: короткий ответ
+на нём сжат по времени. Detail показывает максимум и feedback-падение, но
+большой отрицательный выброс сжимает положительную часть по Y, особенно у
+Branch. Для сопоставления положительных вершин нужно дополнительное
+увеличение; визуальная научная приёмка всего набора пока не объявляется.
+
+![Classic: detail около измеренного максимума](../../../Reports/StructTrain/TimeLearner/s07-single-maximum-visual-m40-a1/selected/Classic-measured-peak-00054-detail.png)
+
+![Branch: detail около измеренного максимума](../../../Reports/StructTrain/TimeLearner/s07-single-maximum-visual-m40-a1/selected/Branch-measured-peak-00060-detail.png)
