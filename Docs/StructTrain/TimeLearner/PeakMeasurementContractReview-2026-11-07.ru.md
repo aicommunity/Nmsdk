@@ -84,7 +84,7 @@ else:
 Наличие нескольких меньших экстремумов само по себе не основание для Ambiguous.
 Первый кандидат реализации — [SingleImpulseMaximum](SingleImpulseMaximum.ru.md):
 выбор самого высокого пика при явно одиночном предъявлении. Приняты normal38/readers25, unit ASan34 и [четыре Console replay](SingleMaximumConsoleReplay.ru.md).
-Он не решает принадлежность волн штатной пачки; native ASan нового пути открыт. Прежние
+Он не решает принадлежность волн штатной пачки; [native ASan38](SingleImpulseMaximumPhysicalASan.ru.md) и [размерная normal/ASan матрица](SingleImpulseMaximumDimensionMatrix.ru.md) приняты. Прежние
 references, schemas и результаты не переоцениваются.
 Ранний спад на 15% не заменяет закрытие окна. Прогноз задержки может предложить
 область исследования, но не может создать пик или доказать его принадлежность.

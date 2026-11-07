@@ -77,7 +77,7 @@ CTest label `unit;timelearner` отличает этот контур от по�
 [Проверка Console](SingleMaximumConsoleReplay.ru.md) принята после исправления
 idle-owner конфигурации. Четыре реальные операции воспроизвели архивные
 Classic/Branch single-pulse трассы без изменения физики. Whole-burst
-assignment, ASan physical integration и классификация остаются открытыми.
+assignment и классификация остаются открытыми. [ASan physical integration](SingleImpulseMaximumPhysicalASan.ru.md) принята отдельно.
 
 Новая размерная матрица N1/4/6 имеет [отдельную постановку](SingleImpulseMaximumDimensionMatrix.ru.md);
 принятые N2 gates не объявляются доказательством всех её условий.
