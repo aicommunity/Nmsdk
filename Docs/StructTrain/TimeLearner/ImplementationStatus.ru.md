@@ -235,3 +235,13 @@ runtime не изменились. Первая compile failure сохранен
 waveform/archived stopped-state intervention не выполнялись; controller
 history/certificate не переносились. ASan этого API, Elder и полная матрица
 остаются открытыми. Это уточняет этапы4/5/7, не закрывает их целиком.
+
+
+[Установка полного графа в свежий контроллер](PreparedModelInstallNormalVerification.json):
+rootc5a32/Pulse2726 прошли M40 normal26/26 native и29/29 readers без skips.
+234 primary members и785 source hashes сверены; процессы закрыты/lease released,
+семь прежних runtime не изменились. Fresh controller не наследует references,
+search/history или certificate; full graph и индивидуальные параметры сохранены.
+Это не waveform proof и не новое обучение. Console profile protocol пока не
+подключён; ASan этого API, Elder и полная матрица открыты. Этапы4/5/7 целиком
+не закрыты. Failed-a1 сохранён отдельно.
