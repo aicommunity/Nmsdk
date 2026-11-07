@@ -23,7 +23,7 @@ pulse3, подтверждая запрет подмены индивидуал�
 Принят [исторический frozen-пилот порядка/ITI с графиками](HistoricalFrozenProtocolScientificReport-2026-11-07.ru.md):
 четыре условия, во всех6/8, TP1/FP2/FN0/TN5; те же два FP, без late spikes.
 128 temporal views построены на M40 из Git primary, шесть выбранных проверены
-визуально. Это не cold retrain, не независимый Test и пока не все16 условий.
+визуально. Это не cold retrain и не независимый Test. Последующая [полная первичная матрица16 условий](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md) принята: target во всех8 позициях на двух Delay, те же6/8 и FP IDs.384 новых temporal views пока ожидаются.
 
 ## Проверенные срезы
 

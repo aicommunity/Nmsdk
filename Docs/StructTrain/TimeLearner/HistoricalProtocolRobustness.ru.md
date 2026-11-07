@@ -173,3 +173,17 @@ admission этого задания не заявлен.
 кэш остаётся на M40 Data; primary данные и выбранные figures доступны в Git.
 Пилотный temporal deliverable завершён; оставшиеся12 условий, вся матрица
 режимов и общий этап11 остаются открытыми.
+
+
+## Полная первичная матрица8×2 принята
+
+Выполнены оставшиеся12 native условий с тем же frozen model/threshold.
+Все16 условий дали6/8, TP1/FP2/FN0/TN5, те же FP sample IDs4 и6,
+late/pre-stimulus events0. Target присутствовал во всех8 позициях на каждом
+Delay.24 новых процесса завершены,8 прежних использованы без повторов;
+группа закрыта/lease released.1002 primary members52316400B сохранены в Git.
+[Полный отчёт по первичным результатам](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md)
+и [независимая сверка](HistoricalProtocolCompletionVerification.json).
+Фраза выше про оставшиеся12 условий относится к границе пилотного снимка:
+их первичные данные теперь приняты;384 новых temporal views ещё ожидаются.
+Это не новые cold trainings и не завершение всего этапа11.
