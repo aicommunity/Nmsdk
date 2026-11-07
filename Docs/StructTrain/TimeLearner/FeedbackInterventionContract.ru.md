@@ -33,7 +33,7 @@ paired native probes с каналами и временными графика�
 порог0.0117, индивидуальные параметры, stimulus и reset policy сохраняются.
 
 
-## Кандидат inherited-image profile
+## Inherited-image profile: адресная normal-проверка
 
 В PulseLib добавлен RegisterFeedbackStorageProfile: цепочка существующих
 membrane/neuron образов, с изменением только выбранного gain и class names.
@@ -46,14 +46,24 @@ effective graph, например, DissociationTC отличается от defa
 controls на2000/20000Гц с inherited/explicit2/explicit0. Дополнительно два
 reader tests используют actual_model_identity каждого native control и
 production audit_profile_delta для строгого сравнения всех остальных полей.
-Эти новые функции ещё не проверены на сервере. Они не являются переносом
+Эти функции и actual graph readers прошли адресную проверку ниже. Они не являются переносом
 конкретных опубликованных stopped моделей с порогом0.0117: engineering
 порог1e-6 и отдельная fixture-морфология обозначены явно.
 
 
-Адресная проверка нового inherited-image пути [запущена на M40](InheritedFeedbackProfileJobs.json).
-На последней проверке cgroup worker1453512 жив, идёт сборка. Заявлены22 native
-функции и15 readers. Ранее закрытое normal18 задание освобождено до использования
-его source/build cache; создан новый runtime, прежние три runtime защищены
-byte hashes. ASan продолжает работать с отдельными source/build предыдущего SDK.
-Статус запуска не является PASS и не закрывает scientific intervention.
+Адресная проверка нового inherited-image пути [завершена на M40](InheritedFeedbackProfileJobs.json).
+[Сверенная приёмка](InheritedFeedbackProfileNormalVerification.json):22/22 native
+за110.494с и15/15 readers без skips,200 primary members/588892B и783 hashes
+исходников сверены с Git. Группа процессов закрыта, lease released, три прежних
+runtime сохранили byte hashes. Primary commit
+b157fd3f9b6dd6ec3f82e48f68c5ff0a57e41a4f.
+
+Native waveform и LT timestamps исходного stock image и explicit2 совпали;
+explicit0 даёт нулевой Feedback при фактических LT events и другой отклик.
+Два actual graph readers подтвердили строгую эквивалентность всех остальных
+полей12 inherited control identities с явными class renames. Это реальные
+native fixtures, а не прежние JSON mutations аудиторных unit tests.
+Нестандартные child C/кинетика сохраняются при growth; отсутствующая LT
+не добавляется. ASan/второй сервер, XML новых образов и применение к конкретным
+полным archived learned/stopped states ещё не проверены. Научный вывод о
+дополнительных пиках опубликованных stock-моделей этим не получен.
