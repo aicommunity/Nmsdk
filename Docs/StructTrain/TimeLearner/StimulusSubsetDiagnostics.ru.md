@@ -67,6 +67,13 @@ PulseLib09617c6. Новая runtime directory,71 unit IDs (14 subset/schema,
 Результат ещё не принят. Поддержка Console, warm continuation, arbitrary
 physics и настоящие сравнительные ablation-эксперименты этим не заявляются.
 
+**Обновление08.11:** a1 завершён:14+34+23 unit и19 physical checks прошли.
+Evidence `6e99697aa51f55021735a5d486bbb9c6724907cc`,187 members,
+646872B compressed. Все members и138 source hashes независимо сверены с Git:
+[metadata receipt](StimulusSubsetNativeVerification.json). Полная группа закрыта,
+резервирование снято. Обёртка первичных данных a1 версии1; полнота её внешнего
+restoration readback ещё неизвестна, хотя внутренние C++ проверки прошли.
+
 ## Подготовленный следующий контроль
 
 Отдельная версия требует sample sink до изменения Dataset: иначе waveform-only

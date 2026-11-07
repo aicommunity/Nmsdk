@@ -1,4 +1,4 @@
-# Состояние реализации TimeLearner — 07.11.2026
+# Состояние реализации TimeLearner — 08.11.2026
 
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
 Полный объём сохраняется в [плане](RefactoringPlan.ru.md). Технический PASS,
@@ -14,7 +14,10 @@ merge и научная разделимость — разные утвержд
 
 Начат [диагностический API подмножеств пачки](StimulusSubsetDiagnostics.ru.md),
 нужный для проверки наложения на неизменном нейроне. Planner7/7 принят;
-schema6 и native restore ещё проходят отдельную приёмку. Это waveform-only
+schema6 прошла71 unit и19 native checks на Elder/normal; результаты и каждый
+из138 source hashes сверены с Git. Последующая версия с обязательным sink,
+фактическим restoration readback и строгим reader проходит отдельную приёмку.
+Это waveform-only
 режим без назначения пиков/сертификатов, не исправление full-burst assignment.
 [Точное действующее задание](StimulusSubsetNativeJobs.json).
 
@@ -24,7 +27,10 @@ production C++ unit checks прошли на Elder/normal и M40/ASan. Диаг�
 чтение schema1/2 сохранено. Полный SDK Elder теперь собран:23/23 нового
 CMake target,21/21 native storage/training и7/7 reader checks прошли.
 [Новый native-контроль с графиками обеих сом](AssignedVertexNativeControlReport-2026-11-07.ru.md)
-подтверждает отказ общей вершины. ASan SDK gate M40 ещё выполняется.
+подтверждает отказ общей вершины. ASan SDK batch M40:build и23 unit прошли,
+но physical21 прерван timeout на последнем case; без финального JUnit и runtime
+capture группа не принята. Неуспешная попытка сохранена целиком, начат отдельный
+job для shared-vertex и Branch20k с независимыми capture и бюджетами.
 Сопоставление волн штатной пачки остаётся открытым; это feature branch.
 
 На M40 выполнена [проверка гипотезы наложения](SuperpositionDiagnostic-2026-11-07.ru.md)
