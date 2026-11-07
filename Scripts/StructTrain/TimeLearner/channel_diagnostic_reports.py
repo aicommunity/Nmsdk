@@ -12,7 +12,7 @@ import json
 import re
 
 from .domain_evidence import _property
-from .native_characterization import audit_execution
+from .native_characterization import audit_execution, is_single_pulse
 from .native_evidence import load, measured_wave_plateaus, number, require
 from .plotting import figure_title, padded_limits, plotting_runtime, time_views
 from .primary_reuse import _git_archive, _stream
@@ -24,7 +24,7 @@ def chart(directory, soma):
     require(accepted['execution'] == 'completed' and accepted['observation_complete'],
             'channel_plot_requires_closed_native_probe')
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
-    require(job['schema_version'] in (3, 4) and job['channel_diagnostics'] is True and
+    require(job['schema_version'] in (3, 4, 5) and job['channel_diagnostics'] is True and
             not job['resistance_intervention'] and execution['terminal_phase'] == 'main_probe',
             'channel_plot_requires_unmodified_main_diagnostic_probe')
     n = 1 if job['model']['branch'] else len(job['model']['inputs'])
@@ -68,7 +68,8 @@ def chart(directory, soma):
             'raw_initial_channel_values': {'Exc': exc[0], 'Inh': inh[0]},
             'diagnostic_peak_indices': peak_indices,
             'peak_observation_valid': packet['observation']['valid'],
-            **({'diagnostic_purpose':'single_pulse_characterization'} if job['schema_version'] == 4 else {}),
+            **({'diagnostic_purpose':'single_pulse_characterization'} if is_single_pulse(job) else {}),
+            **({'storage_profile_intervention':job['profile_intervention']} if job['schema_version']==5 else {}),
             'primary': {name: hashlib.sha256((directory/name).read_bytes()).hexdigest() for name in
                         ('probe_trial_1.json', 'probe_trial_1.csv', 'probe_diagnostics_1.json', 'initial-state.json')}}
 
@@ -166,7 +167,10 @@ def render(directory, output, source_evidence, repository):
               'source_evidence':source_evidence,'runtime':runtime,'reports':reports,
               'source_archive_sha256':hashlib.sha256(archive).hexdigest(),'native_files_verified_in_Git':len(expected),
               'sample_phase':'native_after_children','channel_delta_reference':'first actual recorded sample',
-              'visual_acceptance_complete':False,'causal_intervention_performed':False,'scientific_verdict':None}
+              'visual_acceptance_complete':False,
+              'causal_intervention_performed':job['schema_version']==5 and not job['profile_intervention']['baseline_reconstruction'],
+              **({'storage_profile_intervention':job['profile_intervention'],'causal_claim_requires_paired_control':True} if job['schema_version']==5 else {}),
+              'scientific_verdict':None}
     (output/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     sections=[]
     for report in reports:
