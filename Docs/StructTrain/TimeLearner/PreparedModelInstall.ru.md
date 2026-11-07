@@ -72,7 +72,9 @@ Admission candidate root367b811 прошёл9/9 Python controls на M40 (7 пр
 single-pulse admission и2 profile job controls) на actual archived Classic/Branch
 stopped cases. Проверены обе presentation, baseline/gain0, canonical signing,
 запрет malformed factors/mixed Rs/stimulus edits. Native compilation и candidate
-waveforms этим не проверены. Primary ещё предстоит опубликовать и сверить.
+waveforms этим не проверены. [Primary опубликован и сверён](FeedbackProfileProbeAdmissionVerification.json):
+7 archive members и432 tool source hashes совпали с Git; группа закрыта, lease
+released. Scope остаётся admission-only, native compiler/waveforms не запускались.
 Первая попытка запускателя завершилась до worker/tests: отсутствовал runtime_identity;
 во второй добавлены штатные runtime_content_identity/digest_json. Это ошибка
 orchestration manifest, не алгоритма модели; попытки не объединяются в один PASS.
