@@ -125,3 +125,8 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 - [M40: перенос завершённых runtime и подтверждённая очистка дублей](M40Storage-2026-10-29.ru.md).
 
 - [Проверка принадлежности исходников Git worktree и Elder Bin alias](SourceWorktreeIdentity.ru.md).
+
+
+[Диагностическое storage-вмешательство FeedbackGain](FeedbackProfileScientificReport-2026-11-07.ru.md):
+12 actual probes,4 exact baseline pairs; исходный measurement/physics вопрос сужен,
+новое обучение/классификация и visual QA ещё не завершены.
