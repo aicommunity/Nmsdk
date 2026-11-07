@@ -1,0 +1,23 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-feedback-console-normal-a1",
+      "members": 5,
+      "archive_bytes": 46844,
+      "archive_sha256": "3e29791058ef5d928384d0ce815391fc0cd5370ef22702d0d575fc0117e6607e"
+    }
+  ],
+  "terminal": {
+    "build_passed": false,
+    "native_gates_executed": false,
+    "feedback_profile_scoped_acceptance_passed": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "actual_source_root_before_any_update": "c5a32b9a33ce5d5c76d2299ed44ffd4bd3edcba0",
+  "requested_root_not_built": "844b2789ea0c087c1a0f676d9584ce7b8a7a4d36",
+  "failure": "new job retained an existing protected runtime path; initial guard rejected it before reservation/source mutation/configure/build",
+  "native_compilation_verified": false,
+  "waveforms_executed": false,
+  "scientific_verdict": null
+}
