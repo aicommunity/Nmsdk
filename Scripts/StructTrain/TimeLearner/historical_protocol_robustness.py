@@ -15,7 +15,7 @@ from .historical_model import serialized_neuron
 from .historical_phasea_temporal import read_stream, rising_edges
 from .historical_selectivity import analyze_historical_csv
 from .model_identity import canonical_model_sha256
-from .native_evidence import load, require
+from .native_evidence import load, parse_json_bytes, require
 from .process_runner import execute, verify_runtime
 from .runtime import source_closure
 from .historical_phasea_native import (ROOT, BIN, PULSE, prepare_case,
@@ -143,14 +143,48 @@ def effective_protocol(path, declared):
 
 def read_observations(folder, declared):
     """Use actual native pulses, labels and all edges, not CSV row position."""
-    records = load(folder/"trace-files.json");streams = {};times = None
+    require(type(declared.get("samples")) is list and len(declared["samples"]) == 8 and
+            type(declared.get("order")) is list and len(declared["order"]) == 8 and
+            all(type(i) is int for i in declared["order"]) and set(declared["order"]) == set(range(8)),
+            "historical_protocol_declared_sample_set")
+    require([s.get("original_index") for s in declared["samples"]] == declared["order"] and
+            {s.get("sample_id") for s in declared["samples"]} == {"phasea-"+str(i) for i in range(8)} and
+            all(s["sample_id"] == "phasea-"+str(s["original_index"]) and
+                s.get("label") in ("target", "foil") and
+                type(s.get("pattern")) is list and len(s["pattern"]) == 4 and
+                all(type(v) in (int, float) and math.isfinite(v) and v > 0 for v in s["pattern"]) and
+                canonical_model_sha256({"isi": s["pattern"]}) == s.get("pattern_hash")
+                for s in declared["samples"]) and
+            sum(s["label"] == "target" for s in declared["samples"]) == 1 and
+            next(s["pattern"] for s in declared["samples"] if s["label"] == "target") == declared["training_target"],
+            "historical_protocol_declared_sample_identity")
+    records = parse_json_bytes((folder/"trace-files.json").read_bytes());streams = {};times = None
+    require(type(records) is list and all(type(r) is dict and
+            set(r) == {"source", "role", "path", "bytes", "sha256"} and
+            all(type(r[k]) is str and bool(r[k]) for k in ("source", "role", "path", "sha256")) and
+            type(r["bytes"]) is int and r["bytes"] >= 0 and len(r["sha256"]) == 64 and
+            all(c in "0123456789abcdef" for c in r["sha256"]) for r in records),
+            "historical_protocol_unknown_trace_manifest")
+    sources = {"stimulus": "NeuronTimeLearner.DatasetMatrix.Generator1.Output",
+               "lt_spikes": "NeuronTimeLearner.Neuron.LTZone.Output",
+               "neuron_soma_sum": "NeuronTimeLearner.Neuron.SomaSumPotential",
+               "learner_cached_somas": "NeuronTimeLearner.SomaNeuronAmplitude"}
+    sources.update({"soma"+str(i)+"_"+kind: "NeuronTimeLearner.Neuron.Soma"+str(i)+"."+channel+".Output"
+                    for i in range(1, 5) for kind, channel in (("exc", "ExcChannel"), ("inh", "InhChannel"))})
     expected = {"stimulus", "lt_spikes", "neuron_soma_sum", "learner_cached_somas"}
     expected.update("soma"+str(i)+"_"+kind for i in range(1, 5) for kind in ("exc", "inh"))
     require(len(records) == len(expected) and {r["role"] for r in records} == expected,
             "historical_protocol_trace_set")
     for record in records:
+        require(record["source"] == sources[record["role"]] and
+                Path(record["path"]).name.endswith(record["source"]+".txt"),
+                "historical_protocol_trace_source_mismatch")
         path = (folder/record["path"]).resolve(strict=True)
         require(path.is_relative_to(folder.resolve()), "historical_protocol_trace_path_escape")
+        require(record["source"] == sources[record["role"]] and
+                path.name.endswith(record["source"]+".txt"), "historical_protocol_trace_source_mismatch")
+        require(type(record["bytes"]) is int and path.stat().st_size == record["bytes"],
+                "historical_protocol_trace_size_mismatch")
         clock, data = read_stream(path, 5 if record["role"] == "learner_cached_somas" else 1, record["sha256"])
         require(times is None or times == clock, "historical_protocol_clock_disagreement")
         times = clock;streams[record["role"]] = data
@@ -192,6 +226,35 @@ def read_observations(folder, declared):
             "samples": len(times), "all_recorded_windows_complete": True,
             "training_certificate": None, "independent_evaluation": False,
             "scientific_verdict": None}
+
+
+def analyze_case(folder):
+    """Read a finished native case without recalculating or editing its model."""
+    folder = Path(folder).resolve(strict=True);declared = load(folder/"protocol.json")
+    source = serialized_neuron(folder/"inputs/Model_00.xml")
+    before = serialized_neuron(folder/"preflight/work/Model_00.xml")
+    after = serialized_neuron(folder/"work/Model_00.xml")
+    require(before["sha256"] == recognition_identity(source, THRESHOLD) and after == before,
+            "historical_protocol_frozen_neuron_changed")
+    for phase in (folder/"preflight", folder):
+        result = load(phase/"process/result.json");runtime = load(phase/"process/runtime.json")
+        owned = load(phase/"process/owned-process.json")
+        loaded = parse_json_bytes((phase/"process/loaded-files.json").read_bytes())
+        require(result["execution"] == "completed" and result["returncode"] == 0 and
+                result["runtime_provenance"] == "loaded_files_captured" and type(loaded) is list and
+                runtime["executable"] in loaded and runtime["source_closure"]["root"]["head"] == ROOT and
+                result["runtime_fingerprint"] == owned["runtime_fingerprint"] == runtime["runtime_fingerprint"],
+                "historical_protocol_native_process_evidence_invalid")
+    effective_protocol(folder/"preflight/work/Model_00.xml", declared)
+    effective_protocol(folder/"work/Model_00.xml", declared)
+    observation = read_observations(folder, declared)
+    baseline = declared["order"] == list(range(8)) and declared["iti_declared"] == 1.5
+    if baseline:
+        require((folder/"work/SelectivityLog/results.csv").read_bytes() == (folder/"reference.csv").read_bytes(),
+                "historical_protocol_original_control_csv_changed")
+    observation.update(frozen_neuron_sha256=after["sha256"],
+                       original_control_csv_equal=True if baseline else None)
+    return observation
 
 
 def run_case(source, runtime, output, order, iti):
@@ -249,13 +312,8 @@ def run_case(source, runtime, output, order, iti):
         p = paths[0];traces.append({**stream, "path": str(p.relative_to(output)),
                                   "bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()})
     write(output/"trace-files.json", traces)
-    observation = read_observations(output, declared)
-    baseline = order == list(range(8)) and iti == 1.5
-    if baseline:
-        require((work/"SelectivityLog/results.csv").read_bytes() == reference.read_bytes(),
-                "historical_protocol_original_control_csv_changed")
     require(source_closure(source) == closure, "historical_protocol_source_changed")
-    observation.update(frozen_neuron_sha256=identity["sha256"], original_control_csv_equal=True if baseline else None)
+    observation = analyze_case(output)
     write(output/"observations.json", observation)
     return observation
 

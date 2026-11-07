@@ -1,6 +1,7 @@
 """Protocol mutations of actual archived native configs; execute on workers."""
 import os
 import json
+import copy
 from pathlib import Path
 import tempfile
 import unittest
@@ -8,7 +9,8 @@ import xml.etree.ElementTree as ET
 
 from ..historical_model import serialized_neuron
 from ..historical_phasea_native import prepare_case, parameter_export, write
-from ..historical_protocol_robustness import (CASE, prepare_protocol, effective_protocol)
+from ..historical_protocol_robustness import (CASE, prepare_protocol, effective_protocol,
+                                              analyze_case, read_observations)
 from ..native_evidence import EvidenceError
 
 
@@ -108,6 +110,51 @@ class HistoricalProtocolPreparation(unittest.TestCase):
                     prepare_protocol(work, order, 1.5)
             with self.assertRaisesRegex(EvidenceError, "unsupported_historical_protocol_iti"):
                 prepare_protocol(work, list(range(8)), float("nan"))
+
+
+class HistoricalProtocolNativeObservation(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.case = Path(os.environ["TL_HISTORICAL_PROTOCOL_CASE"]).resolve(strict=True)
+        cls.declared = json.loads((cls.case/"protocol.json").read_text())
+
+    def test_actual_complete_original_control(self):
+        result = analyze_case(self.case)
+        self.assertEqual(result["native_correct"], 6)
+        self.assertEqual(result["native_counts"], {"TP": 1, "FP": 2, "FN": 0, "TN": 5})
+        self.assertEqual(len(result["trials"]), 8);self.assertEqual(result["samples"], 80000)
+        self.assertTrue(result["all_recorded_windows_complete"])
+        self.assertTrue(result["original_control_csv_equal"])
+        self.assertIsNone(result["scientific_verdict"])
+
+    def test_missing_declared_sample_does_not_make_a_partial_matrix_complete(self):
+        declared = copy.deepcopy(self.declared);declared["samples"].pop()
+        with self.assertRaisesRegex(EvidenceError, "historical_protocol_declared_sample_set"):
+            read_observations(self.case, declared)
+
+    def test_label_changes_do_not_reassign_target_to_another_pattern(self):
+        declared = copy.deepcopy(self.declared)
+        declared["samples"][0]["label"] = "foil";declared["samples"][1]["label"] = "target"
+        with self.assertRaisesRegex(EvidenceError, "historical_protocol_declared_sample_identity"):
+            read_observations(self.case, declared)
+
+    def bad_manifest(self, change, reason):
+        records = json.loads((self.case/"trace-files.json").read_text())
+        changed = change(records)
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp);(folder/"trace-files.json").write_text(json.dumps(changed))
+            with self.assertRaisesRegex(EvidenceError, reason):read_observations(folder, self.declared)
+
+    def test_trace_array_is_not_read_as_an_object_envelope(self):
+        self.bad_manifest(lambda r: {"records": r}, "historical_protocol_unknown_trace_manifest")
+
+    def test_source_role_binding_is_checked_before_reading_a_trace(self):
+        def change(records):
+            records[0]["source"] = "DifferentNeuron.Output";return records
+        self.bad_manifest(change, "historical_protocol_trace_source_mismatch")
+
+    def test_duplicate_trace_cannot_replace_required_coverage(self):
+        self.bad_manifest(lambda r: r+[r[0]], "historical_protocol_trace_set")
 
 
 if __name__ == "__main__":
