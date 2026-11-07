@@ -55,9 +55,11 @@ replay. Две реальные пробы отдельно подтвержде
 `Reports/StructTrain/TimeLearner/s07-stock-wave-replay-normal-m40-a1`.
 Каждый member и tool source hash сверены с Git. Архив включает фактические
 пробы, input snapshots, source/graph/clock readback и результаты тестов.
-Новые временные графики именно этих replay ещё не отрисованы; первичные CSV
-готовы. Полные all-pattern графики предыдущей серии этим не заменяются.
+[Временные графики replay](StockWaveReplayVisualVerification.json) завершены:
+пять trial/soma pairs,251 view; шесть PNG проверены вручную. Полный cache
+остаётся на M40. All-pattern графики предыдущей серии этим не заменяются.
 
-Следующий шаг — временные отчёты replay и отдельная single-pulse
-characterization при неизменном training target. Отождествлять число локальных
+[Аудит участка до второго импульса](StockFirstPulse.ru.md) установил три
+максимума Classic ещё до следующего предъявления. Следующий шаг — Exc/Inh/LT
+диагностика; отдельная single-pulse characterization остаётся открытой. Отождествлять число локальных
 максимумов с числом физических откликов пока нельзя. Этап7 и общий план открыты.
