@@ -1,0 +1,77 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-isi-template-baseline-normal-a1'
+folder=base/'readbacks/s07-prepared-model-normal-a1'
+repo=base/'evidence-prepared-model-normal-a1';incoming=base/'source-prepared-model-normal-a1-delivery'
+parent='122a3aea6d11960eec307aec9d74c243a30a3183';prefix='Reports/StructTrain/TimeLearner/s07-prepared-model-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3')
+payloads={};updates={};bundles=[]
+for path,sub in [(folder,'')]:
+ closed=inspect_worker_dependency(Path(str(path)+'-container'),registry,path.name)
+ assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+ bundle=json.loads((path/'bundle.json').read_text());archive=path/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':path.name,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in path.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+sub+('producer.txt' if f.name=='producer.py' else f.name)]=f.read_bytes()
+ for f in Path(str(path)+'-container').iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+sub+'controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+sub+'fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+terminal=json.loads((folder/'terminal.json').read_text())
+verdict=json.loads((folder/'transport-verdict.json').read_text()) if (folder/'transport-verdict.json').exists() else None
+readers=json.loads((folder/'single-pulse-reader-tests.json').read_text()) if (folder/'single-pulse-reader-tests.json').exists() else None
+if terminal['prepared_owner_scoped_acceptance_passed']:
+ assert terminal['build_passed'] and verdict['execution']=='completed' and verdict['validity']=='valid' and verdict['assertion_status']=='passed' and verdict['inventory']['observed']==26
+ assert readers=={'tests_run':13,'successful':True,'failures':0,'errors':0,'skipped':0}
+ graphs=json.loads((folder/'inherited-feedback-graph-tests.json').read_text());assert graphs=={'tests_run':2,'successful':True,'failures':0,'errors':0,'skipped':0}
+ assert len(list((folder/'native12/native').glob('feedback-control-*.json')))==24
+ assert len(list((folder/'native12/native').glob('profile-import-*.json')))==8
+ imports=json.loads((folder/'profiled-graph-import-tests.json').read_text());assert imports=={'tests_run':2,'successful':True,'failures':0,'errors':0,'skipped':0}
+ auditor=json.loads((folder/'feedback-auditor-regression-tests.json').read_text());assert auditor=={'tests_run':10,'successful':True,'failures':0,'errors':0,'skipped':0}
+for record_name,runtime in [('previous-runtime-frozen-files.json',base/'runtime-single-pulse-console-normal-a1'),('accepted-runtime-frozen-files.json',base/'runtime-single-pulse-native-normal-a2'),('profile-previous-runtime-frozen-files.json',base/'runtime-storage-feedback-normal-a1'),('inherited-previous-runtime-frozen-files.json',base/'runtime-inherited-feedback-normal-a1'),('failed-previous-runtime-frozen-files.json',base/'runtime-profile-graph-import-normal-a1'),('profile-import-previous-runtime-frozen-files.json',base/'runtime-profile-graph-import-normal-a2')]:
+ if (folder/record_name).exists():
+  for n,record in json.loads((folder/record_name).read_text()).items():
+   path=runtime/n;assert path.stat().st_size==record['bytes'] and hashlib.sha256(path.read_bytes()).hexdigest()==record['sha256']
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'terminal':terminal,'native_verdict':verdict,'reader_result':readers,'six_previous_runtimes_unchanged':True,'actual_profile_import_graph_tests':imports if terminal['prepared_owner_scoped_acceptance_passed'] else None,'feedback_auditor_regression_tests':auditor if terminal['prepared_owner_scoped_acceptance_passed'] else None,'candidate_waveforms_evaluated':False,'actual_inherited_graph_tests':graphs if terminal['prepared_owner_scoped_acceptance_passed'] else None,'source_profile_import_fixture_threshold':.0117,'stock_models_modified':False,'ASan_verified':False,'second_host_verified':False,'whole_plan_complete':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve actual prepared-owner build attempt and compiler diagnostics without claiming native execution\n');git('update-ref','refs/heads/codex/prepared-model-normal-a1-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'bundles':bundles,'terminal':terminal,'reader_result':readers}))
