@@ -105,3 +105,11 @@ source/rehearsal/archive загрузки остаются strict. Дополн�
 статически, она не является причиной трёх фактических compile errors.
 Исправленный SDK пока не прошёл native gate; ни full-state intervention,
 ни waveform equivalence новым импортом ещё не подтверждены.
+
+
+Исправленная проверка [a2 запущена на M40](ProfiledGraphImportJobs-a2.json).
+На последней kernel-проверке worker1464862 жив и выполняет сборку;
+ModelArchive.cpp уже скомпилирован, SDK ещё не принят. Точная постановка
+остаётся24 native/27 readers. Перед повторным использованием cache проверены
+closed/released и точный failed terminal a1; её архив не изменяется. Создан
+новый runtime-a2, пять прежних runtime, включая failed-a1, защищены hashes.
