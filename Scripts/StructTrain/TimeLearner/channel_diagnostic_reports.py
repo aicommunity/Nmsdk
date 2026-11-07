@@ -68,10 +68,31 @@ def chart(directory, soma):
             'raw_initial_channel_values': {'Exc': exc[0], 'Inh': inh[0]},
             'diagnostic_peak_indices': peak_indices,
             'peak_observation_valid': packet['observation']['valid'],
+            'observation_context': {
+                'complete': packet['observation']['complete'],
+                'packet_valid': packet['observation']['valid'],
+                'packet_reasons': packet['observation']['reasons'],
+                'window_input_ids': [w['input_id'] for w in spec['windows']],
+                'window_channels': sorted({w['channel'] for w in spec['windows']}),
+                'plotted_channel_has_window': any(w['channel'] == soma for w in spec['windows'])},
             **({'diagnostic_purpose':'single_pulse_characterization'} if is_single_pulse(job) else {}),
             **({'storage_profile_intervention':job['profile_intervention']} if job['schema_version']==5 else {}),
             'primary': {name: hashlib.sha256((directory/name).read_bytes()).hexdigest() for name in
                         ('probe_trial_1.json', 'probe_trial_1.csv', 'probe_diagnostics_1.json', 'initial-state.json')}}
+
+
+def observation_caption(data):
+    """Packet validity does not independently classify an additional soma."""
+    context = data.get('observation_context')
+    require(type(context) is dict and
+            all(type(context.get(k)) is bool for k in ('complete','packet_valid','plotted_channel_has_window')) and
+            type(context.get('window_input_ids')) is list and bool(context['window_input_ids']) and
+            all(type(v) is str and bool(v) for v in context['window_input_ids']),
+            'channel_plot_observation_scope_missing')
+    return ('Recorded waveform complete='+str(context['complete'])+
+            ' | packet observation valid='+str(context['packet_valid'])+'\n'+
+            'Packet window input(s): '+', '.join(context['window_input_ids'])+
+            ' | plotted channel has window='+str(context['plotted_channel_has_window']))
 
 
 def render_figure(data, name, left, right, output, local=False):
@@ -93,9 +114,12 @@ def render_figure(data, name, left, right, output, local=False):
                       if local else panel['shared_limits'])
         limits.append(panel_limits)
         ax.set_ylim(*panel_limits);ax.set_xlim(left, right)
-        ax.set_ylabel('Native units\nSI unverified', fontsize=10)
+        ax.set_ylabel('Native units\nSI unverified', fontsize=12)
         extra=('; threshold outside local Y' if i==3 and not panel_limits[0] <= data['threshold'] <= panel_limits[1] else '')
-        ax.set_title(panel['label']+extra, fontsize=11, loc='left');ax.grid(alpha=.25)
+        ax.set_title(panel['label']+extra, fontsize=12, loc='left');ax.grid(alpha=.25)
+        ax.tick_params(axis='both', labelsize=12)
+        ax.xaxis.get_offset_text().set_fontsize(12)
+        ax.yaxis.get_offset_text().set_fontsize(12)
         for spike in data['lt_spike_times']:
             if left <= spike <= right:ax.axvline(spike, color='#8c2c91', linestyle=':', alpha=.65)
         if i == 3:
@@ -103,20 +127,29 @@ def render_figure(data, name, left, right, output, local=False):
             handles.append(level);labels.append('Actual LT threshold '+format(data['threshold'], '.8g'))
     overlay=axes[0].twinx()
     line, = overlay.step(times, data['stimulus'], where='post', color='#d46200', alpha=.7, linewidth=1.1)
-    overlay.set_ylabel('Actual input\ngenerator units', fontsize=10, color='#a34d00')
+    overlay.set_ylabel('Actual input\ngenerator units', fontsize=12, color='#a34d00')
+    overlay.tick_params(axis='both', labelsize=12)
+    overlay.xaxis.get_offset_text().set_fontsize(12)
+    overlay.yaxis.get_offset_text().set_fontsize(12)
     handles.append(line);labels.append('Actual native input; dotted lines: actual LT events')
-    axes[-1].set_xlabel('Native absolute time [s]')
-    figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native burst characterization')+' | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
+    axes[-1].set_xlabel('Native absolute time [s]', fontsize=12)
+    figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native burst characterization')+'\n'+
+                 observation_caption(data)+'\n'+
                  data['trial_id']+'\n'+data['soma_path']+' | '+name+
                  (' | local Y per panel' if local else ' | shared Y per panel')+
-                 ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12])
-    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(.5,.91), ncol=2, fontsize=9, frameon=False)
+                 ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12], font_sizes=(12,))
+    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(.5,.885), ncol=2, fontsize=12, frameon=False)
+    fig.canvas.draw()
+    from matplotlib.text import Text
+    text_sizes=[artist.get_fontsize() for artist in fig.findobj(Text) if artist.get_visible() and artist.get_text()]
+    require(text_sizes and min(text_sizes)>=12, 'channel_plot_font_below_readable_minimum')
     paths=[]
     for extension in ('png', 'svg', 'pdf'):
         path=output/(name+'.'+extension);fig.savefig(path);paths.append(path.name)
     plt.close(fig)
     return {'view': name, 'begin': left, 'end': right, 'files': paths,
             'png_width': 1920, 'png_height': 1920, 'downsampling': False,
+            'minimum_visible_text_fontsize_pt': min(text_sizes),
             'minimum_native_tick_pixels': None if name == 'overview' else 1420.8/(data['frequency_hz']*(right-left)),
             'y_scale': 'local_per_panel' if local else 'shared_per_panel', 'panel_y_limits': limits,
             'shared_panel_y_limits': [p['shared_limits'] for p in panels], 'sample_markers':local,
@@ -162,8 +195,9 @@ def render(directory, output, source_evidence, repository):
                         'base_model_revision':data['model_revision'],'observed_model_revision':data['observed_model_revision'],
                         'raw_initial_channel_values':data['raw_initial_channel_values'],
                         'lt_spike_times':data['lt_spike_times'], 'threshold':data['threshold'],
+                        'observation_context':data['observation_context'],
                         'primary_sha256':data['primary']})
-    manifest={'kind':'native_channel_joint_temporal_report','schema_version':1,
+    manifest={'kind':'native_channel_joint_temporal_report','schema_version':2,
               'source_evidence':source_evidence,'runtime':runtime,'reports':reports,
               'source_archive_sha256':hashlib.sha256(archive).hexdigest(),'native_files_verified_in_Git':len(expected),
               'sample_phase':'native_after_children','channel_delta_reference':'first actual recorded sample',
@@ -181,7 +215,10 @@ def render(directory, output, source_evidence, repository):
     (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Native channel diagnostics</title>'+
         '<h1>Actual soma, channels, feedback and LT events</h1><p>Native units; SI unverified. Channel deltas subtract '
         'the first recorded value, not an assumed zero rest. Overview/zoom Y scales are shared per panel; '
-        'measured-peak details have explicitly labelled local Y scales. No training or causal verdict.</p>'+
+        'measured-peak details have explicitly labelled local Y scales. Packet observation validity applies to '
+        'its declared input windows; an additional plotted soma has no separate peak verdict from that flag. '
+        'Waveform completeness and plotted-channel window membership are shown separately. '
+        'No training or causal verdict.</p>'+
         ''.join(sections),encoding='utf-8')
     sums={p.relative_to(output).as_posix():hashlib.sha256(p.read_bytes()).hexdigest()
           for p in output.rglob('*') if p.is_file()}
