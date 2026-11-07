@@ -1,3 +1,5 @@
+Этот документ сохраняет исходную постановку и последующую поправку CLI fixture null→{}. Проверенная текущая 13-test версия использует object-shaped policy {}; старые null/pending формулировки ниже являются историческими. Новый совместный integration snapshot ещё не принят. Ранее проверенные отдельные snapshots: [declaration13](CorrectedDeclarationPreflightAcceptance.ru.md), [coordinator/live](CompletedGates-2026-11-05.ru.md).
+
 # Pending: проверка downstream declaration до Train
 
 Новый pipeline run/continue до runtime/lease и создания output проверяет объявленные export/evaluate/calibrate/PostTune probe factors. Исторический learned state для такой проверки не создаётся: используются topology/frequency/initial_isi из объявленного cold Train. На границе каждой фазы остаётся полная проверка настоящего predecessor и его первичных данных.
@@ -13,3 +15,6 @@ Portable audit прежних schema1 документов сохраняет п
 Дополнение к pending source после289a28: сверка с Pulsecc NativeRecognitionTrial.cpp и NativeRecognitionObservationValidation.cpp выявила требование минимум одного полного sample interval. Floating slack32epsilon не разрешает окно с нулём шагов. Ранний validator теперь требует ticks>=1; добавлены subtick/zero-ISI declaration и fractional-grid controls, существующий nonfinite test дополнен конечной duration1e308, произведение которой на frequency переполняется. Допуски времени/амплитуды не меняются. ResolvableTimeInterval на реальном absolute begin проверяет native executor; декларация не предсказывает начальное время.
 
 Уже поставленный gate11 остаётся immutable на source427a5f2e, а live6 — на289a28ee. Новые13 checks ещё не выполнялись и этим заданиям не приписываются; общий код пока не принят.
+
+
+04.11 Elder actual A3:12/13 passed, CLI guard test failed before reaching run_pipeline because its unauthorized policy file contained JSON null. native_evidence.load accepts objects only and correctly returned not_an_object at the public CLI argument boundary. The13-test semantic API cases passed except this incorrectly shaped CLI fixture. Changed fixture to{}: still no managed execution authority, but object-shaped JSON reaches downstream semantic validation before policy validation. Expected unknown_response_criterion and absence of output/process remain unchanged. No production code, criterion or execution permission is relaxed. Failed A3 corpus remains preserved; rerun13 and full native coordinator/live regressions still required.

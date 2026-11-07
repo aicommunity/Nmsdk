@@ -1,0 +1,149 @@
+{
+  "figures": [
+    {
+      "case": "Branch-threshold-low-retry32-single-baseline",
+      "view": {
+        "view": "matched-control-tail-detail",
+        "begin": 0.1095,
+        "end": 0.1195,
+        "files": [
+          "matched-control-tail-detail.png",
+          "matched-control-tail-detail.svg",
+          "matched-control-tail-detail.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 1920,
+        "downsampling": false,
+        "minimum_native_tick_pixels": 71.04000000000003,
+        "y_scale": "local_per_panel",
+        "panel_y_limits": [
+          [
+            1.4463928678920545e-05,
+            1.8935757699911627e-05
+          ],
+          [
+            -7.693045885762029e-05,
+            9.170278953798849e-05
+          ],
+          [
+            -1e-12,
+            1e-12
+          ],
+          [
+            1.4463928678920545e-05,
+            1.8935757699911627e-05
+          ]
+        ],
+        "shared_panel_y_limits": [
+          [
+            -0.4091088903747655,
+            0.043042158712582976
+          ],
+          [
+            -0.2115487462192833,
+            0.028408073960325037
+          ],
+          [
+            -0.16,
+            2.16
+          ],
+          [
+            -0.4091088903747655,
+            0.043042158712582976
+          ]
+        ],
+        "sample_markers": true,
+        "threshold_outside_local_Y": true
+      },
+      "model_revision": "54c1a7423740a983d3bc6b4226ff345fb1d49767625c69e993310a0351c5d30f",
+      "control_peak_time": 0.1145,
+      "window_selected_from_baseline_peak": true,
+      "independent_local_Y_per_model": true,
+      "files": {
+        "matched-control-tail-detail.png": "8a639b3e508c725ae5847c78002424f74ee8984d5789b7e510b1098e8dc6d650",
+        "matched-control-tail-detail.svg": "854cf7bfce7efc8ac0f7a6607a2d1c752e89b8b45b889d9b53146141f8a2507d",
+        "matched-control-tail-detail.pdf": "3d4baac37bf81cd0a4cf607b814b3a5123bd2e2298e670fa13bb2870d12ace0a"
+      }
+    },
+    {
+      "case": "Branch-threshold-low-retry32-single-gain0",
+      "view": {
+        "view": "matched-control-tail-detail",
+        "begin": 0.1095,
+        "end": 0.1195,
+        "files": [
+          "matched-control-tail-detail.png",
+          "matched-control-tail-detail.svg",
+          "matched-control-tail-detail.pdf"
+        ],
+        "png_width": 1920,
+        "png_height": 1920,
+        "downsampling": false,
+        "minimum_native_tick_pixels": 71.04000000000003,
+        "y_scale": "local_per_panel",
+        "panel_y_limits": [
+          [
+            5.209796058660565e-05,
+            0.00015228278847088106
+          ],
+          [
+            -1.1629879199688276e-05,
+            0.0001570033691957917
+          ],
+          [
+            -0.08,
+            1.08
+          ],
+          [
+            5.209796058660565e-05,
+            0.00015228278847088106
+          ]
+        ],
+        "shared_panel_y_limits": [
+          [
+            -0.0009855107162255105,
+            0.013304394669044393
+          ],
+          [
+            -0.0009855107162255105,
+            0.013304394669044393
+          ],
+          [
+            -0.08,
+            1.08
+          ],
+          [
+            -0.0009855107162255105,
+            0.013304394669044393
+          ]
+        ],
+        "sample_markers": true,
+        "threshold_outside_local_Y": true
+      },
+      "model_revision": "0000a53557f337a986c4ec4b0046282021974f4955ba8380e8058d1c15d93a9e",
+      "control_peak_time": 0.1145,
+      "window_selected_from_baseline_peak": true,
+      "independent_local_Y_per_model": true,
+      "files": {
+        "matched-control-tail-detail.png": "9d5d79f857b7cf3d74b9e560180993857bb94051dac599616642063c4565d711",
+        "matched-control-tail-detail.svg": "c720cf7881bce553c9bdb7dc62ecbb808e40f6a9f5a3251f3874eaad5d967552",
+        "matched-control-tail-detail.pdf": "1d45b8256f6539b5492f470f2f338343bcb96cf936b66e6fe02e4655a5f91434"
+      }
+    }
+  ],
+  "native_files_verified_in_Git": 24,
+  "source_evidence": {
+    "commit": "fea18ada6b6446ac422fb728d119ec06bc257ae5",
+    "archive_path": "Reports/StructTrain/TimeLearner/s07-feedback-console-normal-m40-a2/primary.tar.xz",
+    "native_member_prefix": "feedback-study/runs/Branch-threshold-low-retry32-single-baseline/native"
+  },
+  "source_archive_sha256": "8f7a7f741763ae1547b7ed8a0817c4a0ea133afc45a7ae81d272de6218fa26b4",
+  "plotting_runtime": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "manual_visual_QA_complete": false,
+  "scientific_verdict": null
+}

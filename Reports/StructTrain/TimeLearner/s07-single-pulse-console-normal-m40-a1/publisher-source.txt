@@ -1,0 +1,74 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-isi-template-baseline-normal-a1'
+folder=base/'readbacks/s07-single-pulse-console-normal-a1'
+repo=base/'evidence-single-pulse-console-normal-a1';incoming=base/'source-single-pulse-console-normal-a2-delivery'
+parent='5d0b80afeefbc5daa57d3ca5f550a5e654f07969';prefix='Reports/StructTrain/TimeLearner/s07-single-pulse-console-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3')
+payloads={};updates={};bundles=[]
+for path,sub in [(folder,'')]:
+ closed=inspect_worker_dependency(Path(str(path)+'-container'),registry,path.name)
+ assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+ bundle=json.loads((path/'bundle.json').read_text());archive=path/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':path.name,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in path.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+sub+('producer.txt' if f.name=='producer.py' else f.name)]=f.read_bytes()
+ for f in Path(str(path)+'-container').iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+sub+'controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+sub+'fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['build_passed'] and terminal['single_pulse_Console_acceptance_passed']
+assert json.loads((folder/'single-pulse-tests.json').read_text())=={'tests_run':42,'successful':True,'failures':0,'errors':0,'skipped':0}
+baseline=json.loads((folder/'builder-signature-baseline.json').read_text());assert baseline['default_controls_passed']==2 and len(baseline['actual_failures'])==4 and all(r['reason']=='worker_digest_mismatch' for r in baseline['actual_failures'])
+analysis=json.loads((folder/'single-pulse-analysis.json').read_text());assert len(analysis['rows'])==2
+for row in analysis['rows']:
+ assert row['burst_matches_original_Train']['exact_waveform_reproduced'] and row['first_prefix']['exact_first_prefix_reproduced']
+ assert row['single_pulse_waveform_quality']['recorded_window_complete'] and not row['single_pulse_waveform_quality']['training_eligible']
+ for mode in ('burst','single'):audit_run_manifest(folder/'single-pulse-study/runs'/(row['name']+'-'+mode)/'run-manifest.json')
+assert len(list((folder/'single-pulse-study/runs').glob('*/run-manifest.json')))==4
+for record_name,runtime in [('previous-runtime-frozen-files.json',base/'runtime-single-pulse-native-normal-a2'),('accepted-runtime-frozen-files.json',base/'runtime-isi-template-fixed-normal-a1')]:
+ for n,record in json.loads((folder/record_name).read_text()).items():
+  path=runtime/n;assert path.stat().st_size==record['bytes'] and hashlib.sha256(path.read_bytes()).hexdigest()==record['sha256']
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'actual_native_probes':4,'Python_tests_passed':42,'unchanged_Core_native37_proof_reused':True,'two_previous_runtimes_unchanged':True,'baseline_builder_failures_reproduced':4,'default_builder_controls_passed':2,'single_pulse_prefix_matches_actual_burst':True,'ASan_verified':False,'second_host_verified':False,'new_channel_graphics_rendered':False,'whole_plan_complete':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve full-state single-pulse Console controls, unchanged first prefixes, actual LT signals and42 readers; reproduce and fix builder signing defect\n');git('update-ref','refs/heads/codex/single-pulse-console-normal-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'bundles':bundles,'native_probes':4,'Python_tests':42}))

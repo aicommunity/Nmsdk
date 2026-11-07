@@ -1,0 +1,110 @@
+{
+  "members": 5043,
+  "source_hashes": 353,
+  "trial_soma_pairs": 160,
+  "temporal_views": 9190,
+  "minimum_native_tick_pixels": 14.208,
+  "archive_sha256": "920397b42bd8ec191924c63579d02f9d94b1f92b7dfe6a8a194acc06d09cf59f",
+  "models": [
+    {
+      "name": "Classic-threshold-low-retry32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      }
+    },
+    {
+      "name": "Classic-threshold-low-advance32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      }
+    },
+    {
+      "name": "Classic-threshold-training100-retry32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      }
+    },
+    {
+      "name": "Classic-threshold-training100-advance32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      }
+    },
+    {
+      "name": "Branch-threshold-low-retry32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      }
+    },
+    {
+      "name": "Branch-threshold-low-advance32",
+      "counts": {
+        "TP": 1,
+        "FP": 7,
+        "FN": 0,
+        "TN": 0
+      }
+    },
+    {
+      "name": "Branch-threshold-training100-retry32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      }
+    },
+    {
+      "name": "Branch-threshold-training100-advance32",
+      "counts": {
+        "TP": 0,
+        "FP": 0,
+        "FN": 1,
+        "TN": 7
+      }
+    }
+  ],
+  "kind": "fair_domain_stock_diagnostic_evaluation_verification",
+  "schema_version": 1,
+  "verified_utc": "2026-11-07T00:06:51.984642+00:00",
+  "evidence_commit": "77748412dcdfe2a838b10dcfaba69bdac3001abe",
+  "evidence_path": "Reports/StructTrain/TimeLearner/s07-stock-fair-evaluation-full-visual-m40-a1",
+  "tool_root": "eae3a302185406b841284abdaf407c56b77891b9",
+  "compiled_root": "36f598524b08ef9a5b72e26e50ef1f34501331e2",
+  "PulseLib": "8f057e69f489ab3eddd5e7f889404b779a85e93e",
+  "archive_bytes": 47970556,
+  "all_primary_members_reverified": true,
+  "native_trials": 64,
+  "completed_training_models": 0,
+  "all_processes_closed": true,
+  "reservation_state": "released",
+  "diagnostic_only": true,
+  "independent_evaluation": false,
+  "calibration": false,
+  "reset_policy": "reset_per_trial",
+  "window_seconds": 2,
+  "target_positions_tested": 1,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "cache_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/stock-fair-frozen-normal-a1/index.html",
+  "cache_files": 30302,
+  "cache_bytes": 2077769934,
+  "full_cache_hashes_verified_on_server": true,
+  "full_cache_manually_reviewed": false,
+  "selected_qa": "FairDomainStockSelectedVisualQA.json"
+}

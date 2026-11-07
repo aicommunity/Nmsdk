@@ -1,0 +1,25 @@
+{
+  "base": "cc97149c90ce98ff24ca688452f4a40d54e0e63d",
+  "runtime_acceptance": false,
+  "methods": [
+    {
+      "name": "ABeforeCalculate",
+      "lines": 81,
+      "original_body_sha256": "b70d16f5d89e5dbb685e1e0115c54fe16a97164a84422143c3c95d795b810cdb",
+      "exact_inverse_transform": true
+    },
+    {
+      "name": "ABeforeDefault",
+      "lines": 9,
+      "original_body_sha256": "6cffcb46a68c33165544f034c9fa10ef902bcae4a823585fa98398105d0ed5e7",
+      "exact_inverse_transform": true
+    },
+    {
+      "name": "ABeforeReset",
+      "lines": 18,
+      "original_body_sha256": "748d913f46bfed203f39561a3573f4de198f2293df4037f873b7a6b8da3a1539",
+      "exact_inverse_transform": true
+    }
+  ],
+  "limitation": "Exact inverse text transform only; real scheduler/component A/B and normal/ASan runtime gates remain required."
+}

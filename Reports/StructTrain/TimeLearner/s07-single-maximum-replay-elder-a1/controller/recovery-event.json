@@ -1,0 +1,98 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "e8433cea-ea7e-4de1-9618-89d40dd17cfe",
+  "job_id": "s07-single-maximum-replay-elder-a1",
+  "recorded_unix": 1794045464.6794686,
+  "administrator": {
+    "pid": 811587,
+    "start_ticks": "361521618",
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.10"
+  },
+  "owner": {
+    "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+    "executable": "/usr/bin/python3.10",
+    "pid": 811599,
+    "start_ticks": "361521631",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-single-maximum-replay-elder-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "b55e4207c16f51f57e26bf17652b422cdd528a94addd5bcec093312f14afd741",
+      "unit": "timelearner-f26a2aa8-1d79-4559-8bef-b4e72d9144b8.service",
+      "invocation_id": "e9023f8e6d0b49b49201f9ec18923504",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f26a2aa8-1d79-4559-8bef-b4e72d9144b8.service",
+      "initial_main_pid": 811599,
+      "initial_start_ticks": "361521631",
+      "sha256": "2744cd86ac233bcc8011ab67fce02e178250de5db1efece0a06c62e9135d4e79"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-f26a2aa8-1d79-4559-8bef-b4e72d9144b8.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Complete SDK worker cgroup closed. Release resources; test/build acceptance is recorded separately.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-single-maximum-replay-elder-a1",
+      "requested_path": "/home/user/timelearner-refactor/readbacks/s07-single-maximum-replay-elder-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/runtime-single-impulse-maximum-elder-normal-a2",
+      "requested_path": "/home/user/timelearner-refactor/runtime-single-impulse-maximum-elder-normal-a2"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "requested_path": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin",
+      "requested_path": "/home/user/timelearner-refactor/source-shared-recognition-normal-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-single-maximum-replay-a1-data",
+      "requested_path": "/home/user/timelearner-refactor/source-single-maximum-replay-a1-data"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/home/user/timelearner-refactor/source-single-maximum-replay-a1-tool",
+      "requested_path": "/home/user/timelearner-refactor/source-single-maximum-replay-a1-tool"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

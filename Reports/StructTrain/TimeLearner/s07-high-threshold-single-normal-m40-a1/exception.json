@@ -1,0 +1,4 @@
+{
+  "reason": "single_pulse_control_waveform_changed",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-high-threshold-single-normal-a1-worker.py\", line 51, in <module>\n    analysis=run(study,out/'console-runtime.json',out/'single-pulse-study',source_threshold=100.)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-high-threshold-single-a1-delivery/Scripts/StructTrain/TimeLearner/stock_single_pulse.py\", line 72, in run\n    require(replay['exact_waveform_reproduced'] and prefix['exact_first_prefix_reproduced'],\n  File \"/media/user/Data/TimeLearnerRefactor/source-high-threshold-single-a1-delivery/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: single_pulse_control_waveform_changed\n"
+}

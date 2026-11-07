@@ -1,0 +1,77 @@
+{
+  "kind": "exact_stock_replay_selected_visual_qa",
+  "schema_version": 1,
+  "reviewed_utc": "2026-11-07T00:36:41.752784+00:00",
+  "method": "Direct inspection of six native server-generated PNGs; exact Git bytes verified.",
+  "figures": [
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1/Branch-threshold-low-retry32-soma1-overview.png",
+      "sha256": "c8372ff5b337d082bc24cdb46fed23df2977a4bce2b079570bf5e2bb897547a4",
+      "manual_review_complete": true,
+      "readable_labels": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "shared",
+      "native_samples_marked": false
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1/Branch-threshold-low-retry32-soma1-zoom-004-detail.png",
+      "sha256": "2135d03d118231555fb5c4cb20a7efc4d1a651b1685dda62f7c2c654a70740d2",
+      "manual_review_complete": true,
+      "readable_labels": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "local_detail",
+      "native_samples_marked": false
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1/Classic-threshold-low-retry32-soma1-overview.png",
+      "sha256": "c11cfee26241c44f7bd2fca2c7865bbb55f7eba7ca12b7c825402a43856c2e2a",
+      "manual_review_complete": true,
+      "readable_labels": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "shared",
+      "native_samples_marked": false
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1/Classic-threshold-low-retry32-soma1-zoom-001.png",
+      "sha256": "ca95af865daf249a9f460d0de7a89af4acf13b189234d22ce3537008e8265dbe",
+      "manual_review_complete": true,
+      "readable_labels": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "shared",
+      "native_samples_marked": false
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1/Branch-threshold-low-retry32-soma1-measured-peak-00389-detail.png",
+      "sha256": "d17016f81f3d151044916a2867cfc32ca7ad4604cace6e59d90a712ebd313781",
+      "manual_review_complete": true,
+      "readable_labels": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "local_detail",
+      "native_samples_marked": true
+    },
+    {
+      "file": "Reports/StructTrain/TimeLearner/s03-stock-wave-replay-visual-m40-a1/Classic-threshold-low-retry32-soma1-measured-peak-00097-detail.png",
+      "sha256": "5739807c24b821cdff41c5e0496764377f75970c0d6547926242ee7a1fef903f",
+      "manual_review_complete": true,
+      "readable_labels": true,
+      "axes_unclipped": true,
+      "input_overlay_visible": true,
+      "y_scale": "local_detail",
+      "native_samples_marked": true
+    }
+  ],
+  "all_views_reviewed": false,
+  "units": "model_units_SI_unverified",
+  "observations": [
+    "Classic 0-50 ms shows several positive excursions separated by negative excursions before the second input at90 ms.",
+    "The third Classic maximum is visible in the 10 ms local-Y detail with native sample markers.",
+    "The weak Branch maximum near194.5 ms is resolved by its 10 ms local-Y detail; the 50 ms detail alone compresses it near zero.",
+    "No LT-event absence is inferred: this probe producer does not record spikes."
+  ],
+  "scientific_verdict": null
+}
