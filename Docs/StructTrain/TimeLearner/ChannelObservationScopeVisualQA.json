@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-07",
+  "evidence_commit": "9ff92911338fe91caa8ebf1fcaa0f4785c5f4be4",
+  "review_method": "Individual full-image inspection of three actual rendered PNGs",
+  "selected_images": [
+    {"file": "Soma1-overview.png", "accepted": true, "checks": ["readable captions and legend", "no title overlap", "input overlay", "complete waveform and packet refusal distinguished"]},
+    {"file": "Soma4-overview.png", "accepted": true, "checks": ["readable captions and legend", "no title overlap", "four stimulus responses visible", "absence of packet window on plotted channel explicit"]},
+    {"file": "Soma4-measured-peak-00209-detail.png", "accepted": true, "checks": ["individual measured samples visible", "no title overlap", "local time and amplitude scale readable", "out-of-range threshold explicit"]}
+  ],
+  "predecessor_visual_acceptance": false,
+  "predecessor_evidence_commit": "65523bff729cf8d1f454218bbc6f60f4032917b9",
+  "predecessor_reason": "Legend overlapped first panel title despite passing file and numeric metadata checks",
+  "full_163_view_cache_manually_reviewed": false,
+  "training_assignment_fixed": false,
+  "whole_plan_complete": false
+}

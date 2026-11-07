@@ -14,7 +14,7 @@
   "protected_old_runtime": "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1",
   "directory": "/home/user/timelearner-refactor/readbacks/s07-feedback-storage-elder-normal-a1",
   "contained_directory": "/home/user/timelearner-refactor/readbacks/s07-feedback-storage-elder-normal-a1-container",
-  "status_at_last_kernel_observation": "running_build",
+  "status_at_last_kernel_observation": "closed",
   "unit": "timelearner-e9c9637f-902d-4855-8151-0b651ba0ab53.service",
   "invocation_id": "cc47f8b8e5ca4dbc9b7cc7ad3fd7a0f1",
   "initial_main_pid": 703871,
@@ -377,5 +377,12 @@
   "classification_evaluated": false,
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "restart_policy": "Inspect exact binding and whole-group closure plus lease before source/cache/runtime reuse. Observation timeout is not terminal."
+  "restart_policy": "Inspect exact binding and whole-group closure plus lease before source/cache/runtime reuse. Observation timeout is not terminal.",
+  "native_tests_passed": 163,
+  "reader_tests_passed": 19,
+  "whole_worker_group_closed": true,
+  "lease_released_after_whole_group_closure": true,
+  "primary_commit": "2d8c76cf319e49d71fc09af69e93acd3b68fdc87",
+  "build_passed": true,
+  "scoped_acceptance_passed": true
 }

@@ -31,7 +31,7 @@ pulse3, подтверждая запрет подмены индивидуал�
 | Fair-domain compiled SDK | root36f598/Pulse8f057: normal137/137 и адресный ASan38/38 на M40; общая приёмка в develop ещё открыта |
 | Исторический documentation snapshot PulseLib | `2f6b57253bd7ae380a19320ef3835a2701cb4d30`; Core совпадает с tested8f; это не текущий HEAD feature |
 | Текущая feature документация PulseLib | `8702d264bc7b4f4c464e200f4a1092e55c6b44ff`; Core совпадает с compiled1f97. Добавлены Train/Test peak contract и количественная диагностика наложения; scope runtime не расширен |
-| Prepared-owner / storage Console SDK | root844b278/Pulse1f97: M40 normal26, readers29+9+2, Console12 и4 exact baseline pairs; ASan этого API/Elder открыты |
+| Prepared-owner / storage Console SDK | M40 root844b278/Pulse1f97: normal26, readers29+9+2, Console12 и4 exact baseline pairs. Elder rootac9/Pulse8702: normal163 и readers19 приняты; API ASan и Console12 на Elder открыты |
 | Single-pulse ASan SDK | root5d0b80/Pulse302: M40 native37, Console4 иPython42. Это предыдущий SDK, без нового storage API |
 | Worker-limit Python SDK | rooteae3: 26/26 на каждом сервере; не проверка нейронного обучения |
 
@@ -43,7 +43,15 @@ pulse3, подтверждая запрет подмены индивидуал�
 capacity/slots не менялись. [Отчёт и ограничения](StaticArchiveCleanup.ru.md),
 [проверка Git primary](StaticArchiveCleanupVerification.json).
 Это освобождение места не заменяет preflight конкретной следующей сборки и не
-означает, что новые storage/Console gates уже выполнены на Elder.
+означает автоматической приёмки всех storage/Console gates на Elder;
+normal163/readers19 подтверждены отдельно в
+[отчёте второго сервера](FeedbackStorageElder-2026-11-07.ru.md).
+
+В [исправленных channel reports](ChannelObservationScope-2026-11-07.ru.md)
+разделены полнота сигнала, отказ packet measurement и принадлежность окна soma.
+На M40 прошли три tests и A/B всех 163 views; три выбранных рисунка просмотрены
+после исправления перекрытия легенды. Это не исправляет C++ assignment и не
+закрывает полную визуальную матрицу этапа11.
 
 Полные SHA, source hashes, первичные архивы и process closure:
 [ASan133](IntegratedSharedAsan133Verification.json),

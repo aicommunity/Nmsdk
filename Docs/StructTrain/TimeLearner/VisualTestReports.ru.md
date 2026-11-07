@@ -116,6 +116,14 @@ NaN, missing ticks и censored хвост видны как разрывы/от�
 
 ## Проверки и приёмка
 
+Адресная проверка 07.11: [область наблюдения и читаемость channel reports](ChannelObservationScope-2026-11-07.ru.md).
+На M40 перестроены 163 views четырёх Classic soma, прошли три tests и metadata
+A/B; три выбранных PNG просмотрены. Разделены waveform completeness, packet
+validity и принадлежность окна каналу; весь текст >=12 pt, layout имеет
+измеряемый зазор легенды. Ранний вариант с перекрытием отклонён и сохранён в
+истории попыток. Это не приёмка всей указанной ниже матрицы и не исправление
+training peak assignment.
+
 Использовать production renderer и реальные native observations на обоих workers.
 Проверить Classic/Branch, N0/N1, все используемые soma, N>4, порядок/ITI,
 reset/continuous, молчание, ранний ответ, late FP, отрицательный baseline,
