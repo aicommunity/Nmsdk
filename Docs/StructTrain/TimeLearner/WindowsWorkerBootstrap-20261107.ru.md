@@ -114,3 +114,32 @@ owner8720/cmd11516/CMake/Ninja/MSVC;15:45UTC журнал достиг14/495. Э
 Свежий CIM15:59UTC подтверждает те же A4 owner8720/cmd11516, CMake7736,
 Ninja3644 и MSVC child. Журнал достиг299/495. A4 не перезапускался;
 compile/native-test acceptance ещё не получена.
+
+
+## MSVC /bigobj и повторное использование завершённого build cache
+
+A4 прошёл прежний DatasetClock compile failure, но остановился на479/495:
+`Test_PulseLib_NativeModelEditor.cpp`, fatal C1128. Количество COFF sections
+превысило стандартный предел. В root
+`00eeba76384b4eabc410a38c670578235c77c31a` добавлен `/bigobj` только для
+Test_PulseLib_StorageComponents при MSVC; нейронные алгоритмы не изменялись.
+
+Перед A5 подтверждено отсутствие A4 owner/cmd и дочерних процессов. Terminal
+A4 оставлен failed, его CMakeCache/build.ninja скопированы в прежний job как
+снимок; записан closed-before-cache-reuse.json. После этого private source
+checkout в каталоге с прежним именем source-4b4f32262-a4 переключён Git на
+00eeba; root gitlinks сохранены. Имя каталога теперь не является его версией.
+Пользовательский C:/Projects/Nmsdk не менялся.
+
+A5 использует готовый build-a4 cache, те же pinned packages и новый runtime-a5.
+CMake/Ninja объявили58 операций вместо495: переиспользуются неизменённые
+объектные файлы, storage fixtures перекомпилируются с /bigobj. Source revision,
+flags и новый deploy root записаны явно. Owner5908/cmd8928 подтверждены CIM;
+16:22UTC сборка12/58. Это не новый PASS.
+
+Подготовительный stdin loader4028 не начал worker: не было сохранённого
+script, output directory и детей. Наблюдение зафиксировано, остановлен именно
+этот loader; чтение до EOF заменено протоколом фиксированной длины payload с
+SHA256. Повторного запуска живой native сборки не было. A5 также записывает
+реальный ERRORLEVEL configure/build прямо в owned cmd: прежний null ExitCode
+PowerShell не превращается в успех.

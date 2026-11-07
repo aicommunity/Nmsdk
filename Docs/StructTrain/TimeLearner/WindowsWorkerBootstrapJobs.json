@@ -160,17 +160,54 @@
       "start_utc": "2026-11-07T15:43:32.2724302Z"
     },
     "observation_session": 77976,
-    "last_verified_execution": "direct_SSH_key_entry_and_fresh_CIM_cmd_CMake_Ninja_compiler_live",
+    "last_verified_execution": "closed_after_MSVC_C1128_in_storage_fixture",
     "last_compiler_observed_utc": "2026-11-07T15:59:20Z",
-    "last_log_step": "299/495",
+    "last_log_step": "479/495",
     "configured": true,
-    "build_passed": null,
+    "build_passed": false,
     "transport": "SSH key through user@10.245.1.12; native Git source packs",
     "source_and_dependencies_isolated": true,
     "previous_attempt_restarted": false,
     "original_user_copy_changed": false,
     "scientific_worker_admitted": false,
     "direct_ssh_verified": true,
-    "jump_ssh_verified": true
+    "jump_ssh_verified": true,
+    "exception": "MSVC C1128 in Test_PulseLib_NativeModelEditor.cpp; /bigobj required",
+    "prior_cache_snapshot": "C:/Projects/TimeLearnerWorker/jobs/windows-bootstrap-a4/closed-before-cache-reuse.json"
+  },
+  "current_attempt": {
+    "attempt": "windows-bootstrap-a5",
+    "source_root": "C:/Projects/TimeLearnerWorker/source-4b4f32262-a4",
+    "source_commit": "00eeba76384b4eabc410a38c670578235c77c31a",
+    "prior_source_checkout_updated_after_verified_closure": true,
+    "build_directory": "C:/Projects/TimeLearnerWorker/build-a4",
+    "prior_build_cache_reused": true,
+    "runtime_directory": "C:/Projects/TimeLearnerWorker/runtime-a5",
+    "directory": "C:/Projects/TimeLearnerWorker/jobs/windows-bootstrap-a5",
+    "owner": {
+      "pid": 5908,
+      "start_utc": "2026-11-07T16:21:37.7785726Z"
+    },
+    "child": {
+      "pid": 8928,
+      "start_utc": "2026-11-07T16:21:40.3555449Z"
+    },
+    "observation_session": 36111,
+    "last_verified_execution": "fresh_CIM_cmd_CMake_Ninja_compiler_live_after_configuration",
+    "last_compiler_observed_utc": "2026-11-07T16:22:09Z",
+    "last_log_step": "12/58",
+    "configured": true,
+    "build_passed": null,
+    "MSVC_storage_target_flag": "/bigobj",
+    "parallelism": 1,
+    "scientific_worker_admitted": false,
+    "original_user_copy_changed": false,
+    "transport_preparation_failure": {
+      "pid": 4028,
+      "start_unix_ms": 1794068325469,
+      "worker_started": false,
+      "native_build_restarted": false,
+      "reason": "EOF-dependent stdin loader replaced by bounded byte payload after verifying no worker file, output directory or child"
+    }
   }
 }
