@@ -179,6 +179,11 @@ selector≠0, точное восстановление burst stimulus/soma по
 имён сохранена. Вторая дала37/37, но wrapper ошибся каталогом readers:
 исправлен только путь,13 readers выполнены отдельно без повторения native37.
 Оригинальные failed terminals не переписаны под PASS. ASan, Elder и полный
-cancellation/connected/replacement scope открыты. Console job4 и paired stock
-study подготовлены в root5e628b4, но пока не прошли runtime-приёмку.
+cancellation/connected/replacement scope открыты. [Console job4 и paired stock study](SinglePulseCharacterizationConsoleVerification.json)
+root5d0b80a прошли четыре реальные пробы и42 Python tests на M40. Один импульс
+дал3 положительных максимума Classic Soma1 и2 Branch Soma1, при2/1 LT events;
+первые180 samples до второго burst onset совпали с исходной пачкой.
+[Научный отчёт](SinglePulseCharacterizationScientificReport-2026-11-07.ru.md)
+отделяет это наблюдение от причинной гипотезы и классификации. Исправленный
+builder воспроизвёл baseline digest defect и прошёл положительные controls.
 Это ещё не исправление assignment и не новое успешное обучение.
