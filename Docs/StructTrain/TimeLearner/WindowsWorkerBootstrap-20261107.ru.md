@@ -37,7 +37,10 @@ Bin checkout исключает Configs/Platform/Help и пока предназ
 
 Qt5 соответствует текущему Linux контуру. Отдельный vcpkg manifest закрепляет
 registry и включает base/charts/svg/serialport, Boost, Curl, Eigen, glog, GTest.
-Release-only x64 DLL triplet. Не включены optional WebEngine/OpenCV/Python/LLM;
+Release-only target x64 DLL triplet. Host triplet в первой попытке остался
+native x64-windows: его tool dependencies собираются Debug+Release отдельно,
+что видно по OpenSSL/Qt5 logs. Это не Debug DLLs приложения и не общая
+Release-only сборка всех host packages. Не включены optional WebEngine/OpenCV/Python/LLM;
 это build options, не изменение нейронной физики. CMake конфигурирует настоящий
 проект с BUILD_TESTING=ON. Цели: NeuroModelerConsole,
 Test_PulseLib_ProbeAlgorithms и Test_PulseLib_StorageComponents.
@@ -75,3 +78,9 @@ publication pipeline ориентированы на Linux. Их нельзя о
 
 На этом снимке Windows научным worker ещё не принят; новые научные результаты
 на нём не получены. Полный исходный план остаётся активным.
+
+Дополнение наблюдения: OpenSSL target/host builds завершены,13:01UTC живы
+те же owner412/cmd6368 и их CMake/vcpkg/MSVC descendants. Собирается Qt5.15.19
+host Debug; available RAM6182412288B, disk free1826246479872B. Конфигурация
+самого Nmsdk ещё не завершена. vcpkg также установил private tool Python3.14.2
+в downloads/tools; это не установка Python пакетов scientific pipeline.
