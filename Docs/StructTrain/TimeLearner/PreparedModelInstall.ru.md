@@ -39,3 +39,19 @@ Core library собрана, но это не runtime-проверка API. Гр
 В fixture использовано GetComponent с правильным общим UEPtr<UContainer>;
 Rdk не изменялся. Failed-a1 остаётся failed. Исправленная постановка сохраняет
 26 native functions/29 readers и ещё должна пройти серверную проверку.
+
+
+Исправленная [a2 проверка запущена на M40](PreparedModelInstallJobs-a2.json).
+На последней kernel-проверке worker1489286 жив, идёт сборка. Ошибочный fixture
+уже скомпилирован, общий SDK ещё не принят. Pulse2726bdf не менялся; изменение
+native root относительно a1 ограничено Test_PulseLib_PreparedModel.cpp. Новый
+runtime отделён от failed-a1; cache используется после fresh closure/released
+lease. Постановка26 native/29 readers сохранена.
+
+В App добавлен черновой TimeLearnerFeedbackProfileImport.h для следующего
+Console протокола. Он проверяет source package, создаёт derived images,
+переносит физический граф и Dataset и вызывает свежий installation API.
+Helper пока не подключён к CLI и не проверен компилятором; текущий server job
+его не содержит. Новый job schema/reader, парные waveform проверки и научная
+интерпретация остаются не реализованными. Нельзя использовать его как действующий
+параметр эксперимента или считать частью принятого SDK.
