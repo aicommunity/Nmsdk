@@ -66,6 +66,26 @@ TEST(TimeLearnerClock,FinalMeasurementCoverageUsesAbsoluteEndpoints)
         ASSERT_TRUE(observation.valid);EXPECT_NO_THROW(ValidateProbeMeasurement(protocol,0,context,observation));
     }
 }
+TEST(FinalVerification, OneRecordedVertexCannotCertifyDifferentAssignedImpulses)
+{
+    // WindowOnly remains readable with its historical meaning. Two window
+    // labels do not turn a single measured channel/vertex into two responses.
+    for(unsigned schema:{1u,2u})
+    {
+        auto p=Protocol(2);p.schemaVersion=schema;
+        if(schema==2)p.stimulusProfile=StimulusProfile{"NPulseGeneratorTransit",1.,.001,2000.,0.,false,false};
+        PreparedVerificationProbe context{p.routing,"i0",p.revision,"initial","effective",0};
+        auto measured=Observation(p,context,"shared","shared_vertex",{.01,.01});
+        ASSERT_TRUE(measured.valid);
+        // This is also an internally consistent serialized packet: both
+        // windows read channel 0, and both pulses precede the same maximum.
+        measured.specification.baseline.resize(1);
+        measured.specification.windows[1].channel=0;
+        EXPECT_THROW(ValidateProbeMeasurement(p,0,context,measured),std::invalid_argument);
+        EXPECT_THROW(ValidateProbeMeasurement(p,1,
+            (PreparedVerificationProbe{p.routing,"i1",p.revision,"initial","effective",0}),measured),std::invalid_argument);
+    }
+}
 CapturedReferences References(const VerificationProtocol& p,std::vector<double> raw={},double baseline=0.)
 {
     std::vector<ReferenceEvidence> evidence;
