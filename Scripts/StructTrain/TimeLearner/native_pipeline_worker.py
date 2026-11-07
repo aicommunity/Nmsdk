@@ -78,7 +78,7 @@ def validate_job(mode, job, source_case=None):
     if mode == "probe":
         from .native_characterization import validate_job as validate_probe_job
         result = validate_probe_job(job)
-        if job['schema_version'] == 2:
+        if job['schema_version'] >= 2:
             from .stopped_evidence import audit_stopped_state
             require(source_case is not None and source_case[0] == job['source_stopped'], 'probe_original_stopped_primary_required')
             audit_stopped_state(*source_case)
@@ -321,7 +321,8 @@ def _structured_training_exit(mode, job, process, directory):
     The caller must still audit signed native data, owned runtime and the stopped
     boundary, and reject a completed-execution claim paired with exit code 2.
     """
-    return (mode in ("train", "diagnostic-evaluate", "probe") and type(job.get("schema_version")) is int and job["schema_version"] in (1, 2)
+    return (mode in ("train", "diagnostic-evaluate", "probe") and type(job.get("schema_version")) is int and
+            job["schema_version"] in ((1, 2, 3) if mode == "probe" else (1, 2))
             and process["execution"] == "process_error" and type(process["returncode"]) is int
             and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 

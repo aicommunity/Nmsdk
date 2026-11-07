@@ -1,5 +1,6 @@
 #include "TimeLearnerProbeJob.h"
 #include "TimeLearnerProbeEvidenceWriter.h"
+#include "TimeLearnerProbeChannelDiagnostics.h"
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeCalculationPolicy.h"
@@ -24,17 +25,18 @@ struct Job {
     std::string ownerClass,runId,trialId,sampleId,protocolRevision;
     std::size_t input=0,maximumTicks=0,maximumSamples=0;
     double duration=0.,gap=0.,minimumAmplitude=0.,windowBegin=0.,windowEnd=0.,wallSeconds=0.;
-    bool recordSpikes=false;
+    bool recordSpikes=false,channelDiagnostics=false;
     PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow;
 };
 bool Boolean(const QJsonValue& v){Require(v.isBool(),"probe_boolean_required");return v.toBool();}
 Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
-    const auto version=Count(d["schema_version"],1,2);
+    const auto version=Count(d["schema_version"],1,3);
     std::set<QString> fields{"kind","schema_version","owner_class","implementation_id","model","profile_archives",
         "stimulus_profile","probe","maximum_model_ticks","maximum_wall_seconds","sha256"};
-    if(version==2){fields.insert("source_stopped");fields.insert("resistance_intervention");}
+    if(version>=2){fields.insert("source_stopped");fields.insert("resistance_intervention");}
+    if(version==3)fields.insert("channel_diagnostics");
     Keys(d,fields);
     Require(d["kind"]==QJsonValue("timelearner_native_probe_job"),"unsupported_probe_job");
     Require(Signed(d)==d,"job_digest_mismatch");Text(d["implementation_id"]);
@@ -43,7 +45,8 @@ Job Read(const QString& path)
     Require(j.ownerClass==(j.model.branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"),"probe_owner_mismatch");
     j.profiles=Array(d["profile_archives"]);Require(j.profiles.size()<=32,"probe_profile_budget_exceeded");
     for(const auto& p:j.profiles)Object(p);
-    if(version==2) {
+    if(version==3)j.channelDiagnostics=Boolean(d["channel_diagnostics"]);
+    if(version>=2) {
         j.stopped=Object(d["source_stopped"]);
         Require(j.stopped["kind"]==QJsonValue("timelearner_stopped_state") && j.stopped["certificate"].isNull(),"probe_requires_stopped_source");
         Require(Signed(j.stopped)==j.stopped && Object(j.stopped["configuration"])["model"]==d["model"],"probe_source_model_declaration_mismatch");
@@ -142,7 +145,12 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         NmsdkTools::ModelRevisionObserver observer;
         std::size_t ticks=0;std::string execution="completed";
         const auto start=std::chrono::steady_clock::now();
+        QJsonArray diagnosticFiles;
+        std::size_t diagnosticSerial=0;
         const auto runProbe=[&](const ConfiguredNativeTraining& configuration,const std::string& trial,const QJsonObject& identity,EvidenceWriter& evidence) {
+            std::unique_ptr<ProbeChannelDiagnostics> diagnostics;
+            if(j.channelDiagnostics)diagnostics=std::make_unique<ProbeChannelDiagnostics>(neuron,j.model.branch?1:built.effective.size(),
+                j.maximumSamples,trial,identity["sha256"].toString().toStdString());
             auto plan=MakeConfiguredNativeTrainingPlan(configuration);auto request=plan.probe;
             request.activeInput=int(j.input);request.inputId="input"+std::to_string(j.input);request.baseModelRevision=identity["sha256"].toString().toStdString();
             request.specification.runId=j.runId;request.specification.trialId=trial;request.specification.windows={plan.inputWindows[j.input]};
@@ -153,6 +161,7 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             request.onPrepared=[&](const auto& p,const auto& spec){end=spec.end;evidence.Prepared(p,spec);};
             request.onSample=[&](const auto& sample){
                 evidence.Sample(sample);
+                if(diagnostics)diagnostics->Sample(sample.time);
                 if(QFileInfo::exists(QDir(output).filePath("cancel.request")))execution="cancelled";
                 else if(std::chrono::duration<double>(std::chrono::steady_clock::now()-start).count()>=j.wallSeconds)execution="timeout";
                 else if(ticks>=j.maximumTicks && Detail::After(end,sample.time))execution="model_tick_budget_exhausted";
@@ -163,7 +172,14 @@ template<class Owner> int Execute(const Job& j,const QString& output)
                 Require(ticks<j.maximumTicks,"probe_tick_budget_without_terminal_packet");
                 ++ticks;model->Calculate();environment->IncreaseModelTimeByStep();
             }
-            evidence.Observation(*result);return std::move(*result);
+            evidence.Observation(*result);
+            if(diagnostics) {
+                const QString name="probe_diagnostics_"+QString::number(++diagnosticSerial)+".json";
+                artifacts.append(Write(output,name,diagnostics->Finish(result->status==NativeProbeStatus::Completed &&
+                    result->observation && result->observation->complete)));
+                diagnosticFiles.append(name);
+            }
+            return std::move(*result);
         };
         const auto configurationFor=[&](const std::vector<InputParameters>& parameters) {
             std::optional<NativeModelSpec> actual;std::vector<int> attachments;for(const auto& p:parameters)attachments.push_back(p.length);
@@ -221,7 +237,8 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",imported?3:2},
+        const bool diagnosticJob=Count(j.document["schema_version"],1,3)==3;
+        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",diagnosticJob?4:(imported?3:2)},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},
@@ -231,6 +248,10 @@ template<class Owner> int Execute(const Job& j,const QString& output)
         if(imported) {
             executionRecord["terminal_phase"]=QString::fromStdString(terminalPhase);
             executionRecord["resistance_intervention_applied"]=interventionApplied;
+        }
+        if(diagnosticJob) {
+            executionRecord["channel_diagnostics_enabled"]=j.channelDiagnostics;
+            executionRecord["channel_diagnostic_files"]=diagnosticFiles;
         }
         Write(output,"execution.json",Signed(executionRecord));
         return execution=="completed"?0:2;

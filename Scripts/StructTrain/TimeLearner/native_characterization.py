@@ -23,8 +23,9 @@ PROBE_FIELDS = {'run_id', 'trial_id', 'sample_id', 'protocol_revision', 'input_i
 @_evidence_boundary
 def validate_job(job):
     version = job.get('schema_version') if type(job) is dict else None
-    require(type(version) is int and version in (1, 2), 'unknown_characterization_job')
-    require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version == 2 else set()) and
+    require(type(version) is int and version in (1, 2, 3), 'unknown_characterization_job')
+    require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version >= 2 else set()) |
+            ({'channel_diagnostics'} if version == 3 else set()) and
             job['kind'] == 'timelearner_native_probe_job', 'unknown_characterization_job')
     _digest(job)
     validate_model_spec(job['model'])
@@ -57,7 +58,9 @@ def validate_job(job):
             type(profile['use_transit_signal']) is bool and type(profile['use_pattern_output']) is bool,
             'characterization_stimulus_invalid')
     number(profile['amplitude'])
-    if version == 2:
+    if version == 3:
+        require(type(job['channel_diagnostics']) is bool, 'characterization_diagnostics_boolean_required')
+    if version >= 2:
         source = job['source_stopped'];_digest(source)
         require(source['kind'] == 'timelearner_stopped_state' and source['state_kind'] == 'diagnostic' and
                 source['certificate'] is None and source['controller_version'] == 2 and
@@ -108,7 +111,8 @@ def expected_import_parameters(job):
     return parameters
 
 
-def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=None, maximum_wall_seconds=900):
+def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=None, maximum_wall_seconds=900,
+                       channel_diagnostics=None):
     from .stopped_evidence import audit_stopped_state
     audit_stopped_state(*case)
     package = case[0];c = package['configuration']
@@ -122,6 +126,10 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
         'stimulus_profile': deepcopy(c['stimulus_profile']), 'probe': probe, 'source_stopped': deepcopy(package),
         'resistance_intervention': deepcopy(resistance_intervention or []),
         'maximum_model_ticks': (int(c['duration']*c['model']['frequency_hz'])+4)*(2 if resistance_intervention else 1), 'maximum_wall_seconds': maximum_wall_seconds})
+    if channel_diagnostics is not None:
+        require(type(channel_diagnostics) is bool, 'characterization_diagnostics_boolean_required')
+        job.update(schema_version=3, channel_diagnostics=channel_diagnostics)
+        job = _signed(job)
     validate_job(job);return job
 
 
@@ -148,16 +156,18 @@ def audit_execution(directory):
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
     validate_job(job);_digest(execution)
     schema = execution['schema_version']
-    require(type(schema) is int and schema in (1, 2, 3), 'characterization_execution_schema')
+    require(type(schema) is int and schema in (1, 2, 3, 4), 'characterization_execution_schema')
     require(set(execution) == {'kind', 'schema_version', 'execution', 'job_sha256', 'model_revision', 'frequency_hz',
             'model_ticks', 'model_time_begin', 'model_time_end', 'training_started', 'search_executed', 'certificate_available',
             'model_unchanged', 'controller_idle', 'probe_status', 'observation_valid', 'observation_complete', 'artifacts',
             'evaluation_verdict', 'sha256'} | ({'probe_wall_seconds'} if schema >= 2 else set()) |
-            ({'terminal_phase', 'resistance_intervention_applied'} if schema == 3 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
+            ({'terminal_phase', 'resistance_intervention_applied'} if schema >= 3 else set()) |
+            ({'channel_diagnostics_enabled', 'channel_diagnostic_files'} if schema == 4 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
-    imported = job['schema_version'] == 2
-    baseline_terminal = schema == 3 and execution['terminal_phase'] == 'source_baseline'
-    if schema == 3:
+    imported = job['schema_version'] >= 2
+    require((schema == 4) == (job['schema_version'] == 3), 'characterization_diagnostics_schema_mismatch')
+    baseline_terminal = schema >= 3 and execution['terminal_phase'] == 'source_baseline'
+    if schema >= 3:
         require(imported and execution['terminal_phase'] in ('source_baseline', 'main_probe') and
                 type(execution['resistance_intervention_applied']) is bool and
                 execution['resistance_intervention_applied'] == (bool(job['resistance_intervention']) and not baseline_terminal) and
@@ -171,6 +181,11 @@ def audit_execution(directory):
         expected_files.update({'source-import.json', 'probe-configuration.json', 'controller-before.json', 'controller-after.json'})
         if job['resistance_intervention']:
             expected_files.update({'baseline_trial_1.json', 'baseline_trial_1.csv'})
+    if schema == 4:
+        require(type(execution['channel_diagnostic_files']) is list and
+                all(type(v) is str and v in ('probe_diagnostics_1.json', 'probe_diagnostics_2.json')
+                    for v in execution['channel_diagnostic_files']), 'channel_diagnostics_invalid_artifact_names')
+        expected_files.update(execution['channel_diagnostic_files'])
     if (directory/'cancel.request').exists():
         require((directory/'cancel.request').stat().st_size <= 65536, 'characterization_cancel_request_too_large')
         expected_files.add('cancel.request')
@@ -277,7 +292,11 @@ def audit_execution(directory):
                 prepared['input_id'] == 'input'+str(i) and prepared['selected_input_index'] == (i if job['model']['branch'] else None),
                 'characterization_prepared_context_changed')
     require((execution['execution'] == 'completed') == (packet['native_status'] == 'completed'), 'characterization_completion_changed')
+    diagnostic_audit = {}
+    if schema == 4:
+        from .probe_channel_diagnostics import audit as audit_channels
+        diagnostic_audit['channel_diagnostics'] = audit_channels(directory, job, execution, initial['identity'])
     return {'primary_evidence_checked': True, 'runtime_provenance_checked': False, 'model_unchanged': True,
-            **({'terminal_phase': execution['terminal_phase']} if schema == 3 else {}),
+            **({'terminal_phase': execution['terminal_phase']} if schema >= 3 else {}), **diagnostic_audit,
             'execution': execution['execution'], 'observation_valid': execution['observation_valid'],
             'observation_complete': execution['observation_complete'], 'training_started': False, 'evaluation_verdict': None}
