@@ -45,7 +45,7 @@ std::filesystem::path OwnTestWorkDirectory(const std::filesystem::path& runtime)
     if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");output && *output)
     {
         const auto native=std::filesystem::weakly_canonical(std::filesystem::absolute(output));
-        const auto work=std::filesystem::path(native.string()+".events-log");
+        const auto work=std::filesystem::path(native.string()+".test-events-log");
         if(insideRuntime(native) || insideRuntime(work) || native.filename().empty() ||
            !std::filesystem::is_directory(work.parent_path()) || !std::filesystem::create_directory(work))
             throw std::runtime_error("PulseLib test log directory is not new or overlaps runtime");
