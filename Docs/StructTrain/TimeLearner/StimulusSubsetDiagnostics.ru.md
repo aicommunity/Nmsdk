@@ -133,6 +133,17 @@ Python `prepare_subset_job` и `audit_execution` поддерживают эту
 Локально проверен только AST. До серверного compile/Console/readback gate
 новый CLI нельзя считать принятым или использовать для научных выводов.
 
+Обновление08.11: compile и Console gate на rootb29e8180 завершены. Выполнены
+6 настоящих проб двух сохранённых diagnostic состояний Classic/Branch:
+full `[0,1,2,3]`, omit `[0,2,3]` и late-single `[3]`; исходные ModelSpec,
+профили, trained inputs и controller history сохранены.6 новых reader checks
+и7 прежних reader regressions прошли без skipped. Все процессы закрыты,
+reservation снята. [Bindings и состояние публикации](StimulusSubsetConsoleJobs.json).
+Server evidence f79cdc4 создан; Git-передача на локальную машину, независимая
+metadata-сверка и публикация в origin ещё не завершены. Графики и анализ
+наложения по новым пробам ещё не построены. Это не cold retrain и не Test
+классификации, а расширение адресной приёмки диагностического контура.
+
 Подготовлен `stimulus_subset_temporal`: все реальные soma channels на отдельных
 панелях с записанным input overlay и метками фактических событий. Ширина PNG2240px,
 высота504px на панель, основной шрифт12pt; SVG допускает масштабирование без
