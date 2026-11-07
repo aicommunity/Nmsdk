@@ -22,6 +22,14 @@ schema6 прошла71 unit и19 native checks на Elder/normal; результ
 режим без назначения пиков/сертификатов, не исправление full-burst assignment.
 [Точное действующее задание](StimulusSubsetNativeJobs.json).
 
+Console schema6 также прошла6 реальных проб и6 reader checks; опубликованы
+сжатые primary и [отчёт с временными графиками](StimulusSubsetControlReport-2026-11-08.ru.md).
+Это low-threshold diagnostic состояния с фактическим порогом0,0117,
+не повтор high-threshold модели с порогом100. Все12 рисунков в кэше M40;
+две выбранные overview проверены визуально. Имя старого каталога не заменяет
+проверку параметров эффективного графа. Для нужных high-threshold состояний
+установлены точные state/model hashes; отдельные full/omit/single ещё требуются.
+
 Исправлен отдельный [дефект повторного учёта общей вершины в сертификате](AssignedVertexCertificateGuard-2026-11-07.ru.md):
 контролируемый counterexample воспроизведён до изменения; после него23/23
 production C++ unit checks прошли на Elder/normal и M40/ASan. Диагностическое

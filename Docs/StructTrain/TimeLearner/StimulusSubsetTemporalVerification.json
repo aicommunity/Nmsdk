@@ -1,0 +1,42 @@
+{
+  "kind": "independent_subset_temporal_metadata_verification",
+  "commit": "b750b3e33c05a1d5f6f6afb7925e368fe909f25e",
+  "archive_members": 25,
+  "archive_sha256": "61e802f958fdab25dce0dbc6171fa880c6ab42f1ecd77a6ae4da9399b1fa361b",
+  "all_archive_members_verified": true,
+  "cases": 6,
+  "figures": 12,
+  "cache_image_files": 24,
+  "selected": {
+    "01-Classic-overview.png": {
+      "bytes": 390918,
+      "sha256": "4116a8a9cd2ea32c3d0f8e570b723259c45bbc7ddf19ad932ebd98aa40bacb2c",
+      "dimensions": [
+        2240,
+        2520
+      ]
+    },
+    "04-Branch-overview.png": {
+      "bytes": 156762,
+      "sha256": "766078e12233bd8c394fd48b53044efe0dc40e0220cef2f5fd7513151dc33e7d",
+      "dimensions": [
+        2240,
+        1008
+      ]
+    }
+  },
+  "effective_source_threshold": 0.0117,
+  "source_conditions_explicit": true,
+  "input_primary_members_verified_by_server": 706,
+  "redundant_log_aliases_omitted_from_derived_cache": 6,
+  "source_primary_unchanged": true,
+  "source_hashes_matched_git": 398,
+  "closed_and_released": true,
+  "selected_visual_QA": {
+    "01-Classic-overview.png": "passed: all four soma panels, actual input overlay, readable axes and explicit low threshold",
+    "04-Branch-overview.png": "passed: soma panel, actual input overlay, readable axes and explicit low threshold"
+  },
+  "new_native_simulations": false,
+  "whole_plan_complete": false,
+  "full_cache_visual_QA": "not claimed"
+}
