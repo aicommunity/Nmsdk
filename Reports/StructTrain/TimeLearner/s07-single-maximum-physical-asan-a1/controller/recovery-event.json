@@ -1,0 +1,138 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "37fb1ac9-28b0-4ea7-8b73-32deee8c3f43",
+  "job_id": "s07-single-maximum-physical-asan-a1",
+  "recorded_unix": 1794049191.4224842,
+  "administrator": {
+    "pid": 1638853,
+    "start_ticks": "312260018",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1638868,
+    "start_ticks": "312260031",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-maximum-physical-asan-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "ada04be90f2057aa9b057ac7f4e91f8c7bd61a9d36818a562fa8252389ce4054",
+      "unit": "timelearner-4fb2a773-0b8d-41aa-aa62-d3366ebc63b1.service",
+      "invocation_id": "eaf93c9f8cc84709a1e98e00c64bf532",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-4fb2a773-0b8d-41aa-aa62-d3366ebc63b1.service",
+      "initial_main_pid": 1638868,
+      "initial_start_ticks": "312260031",
+      "sha256": "01af4e7adc4f2b8b2ae8031f09a95162ed65ca5b4b8788bdd3cf9d2f8ad02314"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-4fb2a773-0b8d-41aa-aa62-d3366ebc63b1.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Analysis worker closed; scientific outcome remains separate.",
+  "resources": [
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-maximum-physical-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-maximum-physical-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-fair-domains-asan38-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-storage-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-feedback-storage-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-asan12-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-isi-template-fixed-asan12-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-channel-diagnostics-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-probe-algorithms-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-probe-algorithms-asan-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-maximum-physical-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-maximum-physical-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-asan-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-asan-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-single-maximum-asan-a1-pulse-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-single-maximum-asan-a1-pulse-delivery"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-single-maximum-asan-a1-root-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-single-maximum-asan-a1-root-delivery"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}
