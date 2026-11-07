@@ -315,3 +315,13 @@ replay false failure при source begin855.486с. Signals/model совпали 
 прошли на M40,9 primary/437 tool hashes/20 input bindings сверены. Допуски
 обучения и физика не менялись. Исходный high attempt сохранён failed; Branch2
 уже выполнены, Classic2 ещё не выполнены. Это не новый успешный Train.
+
+
+[Training100 burst/single diagnostic](HighThresholdCombinedVerification.json)
+завершён:2 новые Classic пробы и2 unchanged reused Branch. Сверены633 primary,
+375 tool hashes и2088 Branch bindings; group closed/lease released, runtime
+не изменился. Exact Train replay иfirst-prefix совпадение подтверждены в обеих
+топологиях. Одиночный импульс имеет1 maximum на выбранной соме, штатный burst —3
+на4 inputs. Механизм missing этим ещё не установлен. Mechanical analyze_pair
+A/B сохранил все поля двух прежних low summaries. Нового обучения нет. [Отчёт](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md),
+полный temporal cache/selected QA ещё строятся.

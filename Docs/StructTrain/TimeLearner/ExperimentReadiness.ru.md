@@ -138,5 +138,7 @@ training target и с явным восстановлением временно
 Это не выбор новой default physics или доказательство разделимости.
 [Clock comparator](RelativeClockAlignment.ru.md) исправлен и проверен отдельно;
 подтверждённого дефекта model transfer в high replay не было. Training100 study
-остаётся неполной: Branch2 сохранены, Classic2 ещё не выполнены. Остаток полного
+завершена в диагностическом scope: Branch2 reused, Classic2 выполнены;
+[verification](HighThresholdCombinedVerification.json). Механизм missing иvisual
+QA ещё требуют анализа. Остаток полного
 плана и условия приёмки выше сохраняются.

@@ -132,3 +132,5 @@ script blobs. Это не runtime readback. Поле `semantic_review=pending` �
 новое обучение/классификация и visual QA ещё не завершены.
 
 [Исправление сравнения относительных часов на реальном replay](RelativeClockAlignment.ru.md).
+
+[Training100: exact replay иодиночный отклик при трёх максимумах пачки](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md).
