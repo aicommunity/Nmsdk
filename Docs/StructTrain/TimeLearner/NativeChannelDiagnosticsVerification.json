@@ -1,0 +1,49 @@
+{
+  "kind": "native_channel_diagnostics_scoped_verification",
+  "schema_version": 1,
+  "verified_utc": "2026-11-07T00:57:56.924352+00:00",
+  "host": "10.245.1.17",
+  "evidence_commit": "e98df4eaaf0d9d4cb38511cab26b7ddaec355e4f",
+  "evidence_path": "Reports/StructTrain/TimeLearner/s07-native-channel-diagnostics-normal-m40-a2",
+  "attempts": [
+    {
+      "attempt": "a2_passed",
+      "root": "18d4d77b90d01168a5cf9b8831ba0bea57967e91",
+      "members_verified": 485,
+      "archive_bytes": 2384744,
+      "archive_sha256": "ab2736e4e5d921ce146456e0c7893022c3b9b105e3f59e17067ed8a51a5e5a7b",
+      "source_hashes_verified": 774,
+      "whole_groups_closed": true,
+      "lease_released": true
+    },
+    {
+      "attempt": "a1_compile_failure",
+      "root": "3bdef559db5af1f68d69a82a079175f620a4f5c9",
+      "members_verified": 22,
+      "archive_bytes": 62960,
+      "archive_sha256": "a4640dd9624cda229dd7ab323dd2f9b9b1df76988269015addbcc7e5affcc29e",
+      "source_hashes_verified": 774,
+      "whole_groups_closed": true,
+      "lease_released": true
+    }
+  ],
+  "compiled_PulseLib": "fe382a0aa729a0692ec3790b0226649b4348410a",
+  "native_controls_passed": 12,
+  "actual_native_probes": 4,
+  "Python_readers_passed": 18,
+  "skipped": 0,
+  "Off_On_CSV_bytes_equal": true,
+  "responses_match_original_Train": true,
+  "two_previous_runtimes_unchanged_verified_on_server": true,
+  "recorded_lt_spike_counts": {
+    "Branch-threshold-low-retry32": 4,
+    "Classic-threshold-low-retry32": 8
+  },
+  "new_channel_graphics_complete": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "job3_false_directly_tested": false,
+  "interrupted_channel_capture_matrix_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

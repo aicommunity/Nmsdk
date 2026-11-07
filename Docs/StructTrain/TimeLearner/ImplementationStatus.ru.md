@@ -154,3 +154,11 @@ hashes опубликованы. [Адресный ASan](IsiTemplateValidationAs
 detect_leaks=0. Второй сервер и весь analyzer scope ещё открыты.
 MatchMode1 сравнивает вход с шаблоном, не доказывает ответ нейрона и не объясняет
 InvalidObservation native V2 stock Train.
+
+
+[Native channel diagnostics](NativeChannelDiagnostics.ru.md): root18d4d/Pulsefe,
+M40:12 native controls,4 реальных Off/On пробы и18 readers прошли. Observer
+не изменил CSV и исходную волну. Записаны фактические Exc/Inh/Feedback/LT:
+до второго входа Classic имеет2 LT events, Branch1. Это не новая классификация
+или исправление assignment; графики каналов, ASan, второй сервер и вся матрица
+нового режима остаются открытыми. Первая compile failure сохранена в evidence.
