@@ -12,7 +12,7 @@
   "initial_start_ticks": "316938416",
   "request_sha256": "c9eca9a8c73bae679b9f0ad872bb1651db30319de4b1fb0d23a11569fc4f1aed",
   "worker_sha256": "e3c155c299367da2654d9da0d84eaa1d31060b0367951450020b1d3ae00e942f",
-  "status": "A1 stopped at a worker identity-check error; A2 running; no full-series acceptance",
+  "status": "A2 complete on server; all14 conditions; primary publication and figures pending",
   "probes_planned": 14,
   "ordering": "Classic full and Branch full before every omission/single-pulse condition",
   "full_control_gate": "Exact recorded input and soma samples and bounded relative-clock equality against historical full burst; stop on mismatch",
@@ -53,19 +53,29 @@
     "initial_start_ticks": "316963650",
     "request_sha256": "2101bacdbe5690d904f4dc164ac5143386c8811f9859a85349e11190df32ce6a",
     "worker_sha256": "6799d88c0de603b6eb29b15ffd057c903711b2cd5652bfcd3048f0f40ece54ec",
-    "status": "running omissions and single pulses; both reused full controls audited and exact historical waveforms confirmed",
+    "status": "completed; all14 cases accepted by worker; runtime unchanged; publication pending",
     "checks": "Compare base audit/initial identity with base expected SHA; compare prepared effective revision with effective expected SHA; all original constraints retained",
     "latest_completed_cases": [
       "Classic-0/native",
       "Branch-0/native",
       "Classic-1/native",
-      "Classic-2/native"
+      "Classic-2/native",
+      "Classic-3/native",
+      "Classic-4/native",
+      "Classic-5/native",
+      "Classic-6/native",
+      "Branch-1/native",
+      "Branch-2/native",
+      "Branch-3/native",
+      "Branch-4/native",
+      "Branch-5/native",
+      "Branch-6/native"
     ],
     "full_controls_reproduced_exactly": [
       "Classic",
       "Branch"
     ],
     "reused_processes": 2,
-    "new_completed_processes_at_last_readback": 2
+    "new_completed_processes_at_last_readback": 12
   }
 }

@@ -495,3 +495,13 @@ base и measured/effective model revisions. Primary не менялись, но�
 симуляций этот рендер не выполнял. [Receipt](StimulusSubsetTemporalVerification.json).
 High-threshold A2 подтвердил обе исторические full-пачки точно и завершил
 первые две omit-пробы Classic; оставшаяся серия выполняется.
+
+
+High-threshold subset A2 завершён:14/14 условий, обе full-пачки точно
+воспроизводят исторические данные, отсутствуют heartbeat/model/restore errors.
+Повторная проверка и публикация всего primary выполняются; новый научный
+отчёт с графиками ещё не готов. Train, классификация и assigned-peak certificate
+в этой серии не выполнялись.
+Потоковая упаковка ffb35ddf принята на реальном corpus:16 tests,700 файлов,
+6 native/manifest audits,104,4MB →1,26MB. Все inner hashes сверены с исходным
+Git primary; [receipt](StreamingPrimaryVerification.json).
