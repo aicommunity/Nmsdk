@@ -73,7 +73,11 @@ C-trim/PostTune/калибровки. Baseline ответы не подстав�
 исправление assignment ещё открыты.
 [Точный replay двух low/Retry candidate](StockWaveReplay.ru.md) после полного
 import/Reset воспроизвёл все soma/input samples и ambiguous. Шесть серверных
-проверок прошли; causal waveform decomposition и single-pulse controls открыты.
+проверок прошли. [Первый импульс](StockFirstPulse.ru.md): до второго onset
+Classic уже имеет3 положительных максимума, Branch —1; четыре адресных tests
+прошли. Это ограничивает предположение «один максимум на импульс», но не
+определяет правило выбора response wave. Replay cache251 view завершён;
+causal waveform decomposition и отдельные single-pulse controls открыты.
 
 Августовские4/8,5/8,6/8 подтверждены не только исходным визуальным наблюдением:
 выполнены [saved-state replay](HistoricalAugustReplay.ru.md) и
