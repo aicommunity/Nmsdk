@@ -478,3 +478,11 @@ ASan evidence dae5697b независимо сверён:494 members,138 source 
 Первая контрольная high-threshold full-проба Classic завершена: recorded input
 и все soma samples точно воспроизвели историческую пачку; относительные clocks
 совпали с ограниченным учётом roundoff. Остальная серия ещё выполняется.
+
+High-threshold A1 остановлен проверкой самого worker: base model_revision
+сравнивался с expected effective revision Branch. При этом native prepared
+содержит правильный effective7ae9b857, initial/base96ea48df также правильный.
+Это ошибка orchestration assertion, не изменение модели. A1 closed/released.
+A2 проверяет обе оси раздельно и повторно использует два завершённых full-control
+process packets только после проверки исходных и скопированных manifests.
+Остановка A1 не переоценивается как успешное выполнение серии.
