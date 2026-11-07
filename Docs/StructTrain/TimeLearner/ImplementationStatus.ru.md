@@ -12,6 +12,12 @@ merge и научная разделимость — разные утвержд
 сопоставления ещё открыто: [source review, файлы и адресная приёмка](PeakMeasurementContractReview-2026-11-07.ru.md).
 Ранее сохранённые InvalidObservation не переоцениваются автоматически в Exact.
 
+Исправлен отдельный [дефект повторного учёта общей вершины в сертификате](AssignedVertexCertificateGuard-2026-11-07.ru.md):
+контролируемый counterexample воспроизведён до изменения; после него23/23
+production C++ unit checks прошли на Elder/normal и M40/ASan. Диагностическое
+чтение schema1/2 сохранено. Полная native интеграция данного среза и
+сопоставление волн штатной пачки остаются открытыми; это feature branch.
+
 На M40 выполнена [проверка гипотезы наложения](SuperpositionDiagnostic-2026-11-07.ru.md)
 для двух архивных high-threshold burst/single пар. Сумма сдвинутых single
 близко воспроизводит все пять soma channels, включая три максимума Soma1
