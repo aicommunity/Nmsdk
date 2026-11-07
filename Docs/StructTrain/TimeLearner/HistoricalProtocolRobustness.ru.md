@@ -84,3 +84,28 @@ A3 использует новый immutable tool snapshot19f24aa и прежн�
 прошёл11 preparation controls, подтверждён живым kernel cgroup. Старые попытки
 и их terminal не переписываются. После pilot acceptance нужны расширение до
 всех target positions, temporal reports/visual QA и интерпретация результатов.
+
+
+### A3 raw baseline и продолжение A4
+
+A3 завершил pre-stimulus иполную40s native матрицу. CSV побайтно совпал с
+архивом: TP1/FP2/FN0/TN5,6/8. После этого reader ошибочно передал JSON array
+trace-files в object-only load и остановился. A3 terminal остался failed,
+но это не отсутствие выполненного native Test: executed2, full matrix1,
+analysis-completed0. [Независимая сверка A3](HistoricalProtocolPilotA3Verification.json)
+проверила95 primary members/4348184 compressed bytes,387 tool hashes и52
+loaded-file bindings двух завершённых процессов; группа closed/lease released.
+
+Reader исправлен с сохранением строгого array schema и source-role bindings.
+Добавлены6 controls на настоящем complete A3 corpus; вместе с подготовкой17
+проверок прошли на Elder. Они включают complete original6/8, отказ при пропавшем
+sample, смене label, object вместоarray, ложном source иduplicate trace.
+
+A4 повторно анализирует baseline без новых Calculate. Каждый используемый файл
+сверен с member hashes опубликованного A3 bundle; старый case read-only. Полные
+12 native streams/80000 frames и все окна приняты новым reader, originalCSV
+неизменен, effective neuron hashca025286 сохраняется. Реальный межпачечный gap
+при declaredDelay1.5 равен примерно1.511s: первое0.01 иnative tick не скрываются
+за округлённой меткой ITI. A4 теперь выполняет только3 оставшиеся условия,
+то есть6 новых native процессов, плюс2 переиспользованных. Это не повторное
+обучение и не независимые повторы; окончательная приёмка2×2 ещё ожидается.
