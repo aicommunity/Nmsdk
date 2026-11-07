@@ -281,7 +281,6 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
                           reason=stop_reason or ('exit_zero' if code.value == 0 else 'nonzero_exit'),
                           returncode=int(code.value), all_processes_closed=True)
             _write(output/'limits-after.json', api.limits(job));_write(output/'loaded-files.json', list(observed.values()))
-            _write(output/'module-observation-errors.json', module_errors)
             for record in observed.values():
                 require(file_record(Path(record['path'])) == record, 'windows_loaded_file_changed')
             verify_runtime(manifest)
@@ -316,11 +315,15 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             while api.pids(job) and time.monotonic() < deadline:time.sleep(.05)
             result['all_processes_closed'] = not api.pids(job)
             api.close(job)
-        # Diagnostics must not delay owned-process cleanup if storage fails.
-        # Partial observations never replace a successful boundary capture.
-        _write(output/'partial-loaded-files.json', list(observed.values()))
-        _write(output/'module-observation-errors.json', module_errors)
-        result.update(wall_seconds=time.monotonic()-start, child_resumed=resumed, job_name=name)
-        _write(output/'result.json', result)
-        lock.seek(0);msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1);lock.close()
+        # Write each immutable report once, after owned-process cleanup. A
+        # storage failure must still release the host reservation.
+        try:
+            _write(output/'partial-loaded-files.json', list(observed.values()))
+            _write(output/'module-observation-errors.json', module_errors)
+            result.update(wall_seconds=time.monotonic()-start, child_resumed=resumed, job_name=name)
+            _write(output/'result.json', result)
+        finally:
+            try:
+                lock.seek(0);msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+            finally:lock.close()
     return result

@@ -40,6 +40,16 @@ class WindowsProcessTest(unittest.TestCase):
         (self.root/(name+'-observed.json')).write_text(json.dumps(result, indent=2)+'\n')
         return result
 
+    def test_diagnostic_write_failure_still_releases_worker_lock(self):
+        # A real collision in an immutable report, created by the owned child.
+        # No replacement writer or fake Windows process API is involved.
+        name = 'diagnostic-collision'
+        destination = str(self.root/name/'module-observation-errors.json')
+        code = 'from pathlib import Path;import time;Path('+repr(destination)+').write_text("collision");time.sleep(.3)'
+        with self.assertRaises(FileExistsError):
+            self.run_fixture(name, code)
+        self.complete(self.run_fixture('after-diagnostic-collision', 'import time;time.sleep(.3)'))
+
     def complete(self, result, execution='completed'):
         self.assertEqual(result['execution'], execution, result)
         self.assertEqual(result['validity'], 'valid', result)
