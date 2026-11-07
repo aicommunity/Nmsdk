@@ -90,9 +90,18 @@ source XML даже с пересчитанной XML checksum. Два неза�
 к полному archived stopped state и paired waveforms остаются следующим gate.
 
 
-Адресная normal-проверка physical graph import [запущена на M40](ProfiledGraphImportJobs.json).
-На последней kernel-проверке worker1461419 жив, идёт сборка root8302e8f76 /
-Pulse1d2a703. Заявлены24 native функции и27 readers; PASS не заявляется.
-Cache предыдущей inherited-image проверки используется только после fresh
-closure/released lease и exclusive reservation. Создан новый runtime;
-четыре прежних runtime защищены byte hashes. ASan остаётся на отдельном SDK.
+Первая normal-проверка physical graph import [завершилась ошибкой сборки](ProfiledGraphImportJobs.json).
+[Проверка failed primary](ProfiledGraphImportFailureVerification.json):25 members,
+783 source hashes сверены с Git; все три compiler errors относятся к преобразованию
+временных UEPtr между типами. Native/reader tests не выполнялись. Группа
+полностью закрыта, lease released. Failed commit afb5c7d144ad92c701e294447180e802fe52741a.
+Rdk не менялся: новый import использует именованные UEPtr.
+
+Предварительно найдено ограничение CheckSnapshot: ordinary snapshot требует
+все параметры в XML. Внутренняя derived-image загрузка допускает пропуск
+FeedbackGain только на проверенных paths с проверенным image gain. Обычные
+source/rehearsal/archive загрузки остаются strict. Дополнительные fixtures
+проверяют отказ неполному source XML с корректной checksum. Эта правка найдена
+статически, она не является причиной трёх фактических compile errors.
+Исправленный SDK пока не прошёл native gate; ни full-state intervention,
+ни waveform equivalence новым импортом ещё не подтверждены.

@@ -316,6 +316,22 @@ template<class Learner> void FullProfileGraphImport() {
                 auto invalid=NmsdkTools::ImportFeedbackProfileGraphForEdit(corrupt,core.storage,core.environment,names,factor,ports);
                 ProfileImportLease unexpected{core.storage,invalid};FAIL()<<"contradictory source gain hidden by substitution";
             } catch(const NmsdkTools::ModelArchiveError& error) {EXPECT_EQ(error.code,"archive_model_mismatch");}
+            // The internal inheritance exception must never weaken ordinary
+            // source/archive completeness checks.
+            ASSERT_TRUE(xml.SelectNode("Neuron"));ASSERT_TRUE(xml.SelectNode("Components"));
+            ASSERT_TRUE(xml.SelectNode("Soma1"));ASSERT_TRUE(xml.SelectNode("Parameters"));
+            ASSERT_TRUE(xml.SelectNode("FeedbackGain"));xml.DelNode();xml.SelectRoot();
+            ASSERT_TRUE(xml.Save(broken));const auto incompleteText=QString::fromStdString(broken);
+            auto incomplete=original;incomplete["native_xml"]=incompleteText;
+            incomplete["native_xml_sha256"]=QString::fromLatin1(QCryptographicHash::hash(incompleteText.toUtf8(),QCryptographicHash::Sha256).toHex());
+            try {
+                auto invalid=NmsdkTools::ImportPhysicalGraphForEdit(incomplete,core.storage,core.environment,ports);
+                ProfileImportLease unexpected{core.storage,invalid};FAIL()<<"incomplete ordinary snapshot accepted";
+            } catch(const NmsdkTools::ModelArchiveError& error) {EXPECT_EQ(error.code,"missing_archive_parameter");}
+            try {
+                auto invalid=NmsdkTools::ImportFeedbackProfileGraphForEdit(incomplete,core.storage,core.environment,names,factor,ports);
+                ProfileImportLease unexpected{core.storage,invalid};FAIL()<<"incomplete source snapshot accepted";
+            } catch(const NmsdkTools::ModelArchiveError& error) {EXPECT_EQ(error.code,"missing_archive_parameter");}
             if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
                 QJsonObject renames;for(const auto& entry:names)renames[QString::fromStdString(entry.first)]=QString::fromStdString(entry.second);
                 const auto record=QJsonObject{{"source_identity",original["identity"]},{"candidate_identity",actual},
