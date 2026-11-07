@@ -1,0 +1,49 @@
+{
+  "kind": "timelearner_worker_dependency_state",
+  "schema_version": 1,
+  "job_id": "s07-channel-observation-scope-normal-a3",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a3-container",
+  "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "efdbfcb16e45870c3139821038968012b6e324f2fd2799962a0e64d9e452387b",
+      "unit": "timelearner-f59e3120-3067-44a8-8af9-3c8a3b12971e.service",
+      "invocation_id": "36546f138677435fabe8f0bb53a5e492",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f59e3120-3067-44a8-8af9-3c8a3b12971e.service",
+      "initial_main_pid": 1577955,
+      "initial_start_ticks": "311310399",
+      "sha256": "1c973bedb9ed6706a07fbff53992554da574bc7aa3809d9d734d3ba5ecfca76a"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-f59e3120-3067-44a8-8af9-3c8a3b12971e.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "reservation_optional": false,
+  "reservation_state": "released",
+  "reservation_token": "1f3e9824-932d-43c9-8d63-4fe4a1f5fed3",
+  "state": "ready",
+  "reason": "dependency_closed_lease_released",
+  "successful_execution_attested": false,
+  "scientific_verdict": null
+}
