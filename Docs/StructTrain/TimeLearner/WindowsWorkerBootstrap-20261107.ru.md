@@ -187,3 +187,7 @@ worker он пока не принят: actual loaded DLL capture, production ow
 containment, quotas, job runner и полноценный Train→Test ещё требуют
 отдельной реализации/приёмки. Этот optional worker не заменяет обязательные
 Linux-проверки плана. Пользовательский C:/Projects/Nmsdk не изменён.
+
+Продолжение подготовки: [12 процессных controls Windows](WindowsExecutionControls-20261107.ru.md).
+Production ownership, readback лимитов и дискретное наблюдение DLL проверены
+отдельно на .14; native cooperative capture и научный pipeline ещё не приняты.
