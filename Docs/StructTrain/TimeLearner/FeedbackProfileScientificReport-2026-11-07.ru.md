@@ -83,7 +83,10 @@ CapturedPerInput на этом профиле; старые references/certifica
 
 ## Визуальная проверка
 
-Полные временные отчёты по12 пробам находятся в подготовке на M40:
+[Полные временные отчёты по12 пробам](FeedbackProfileTemporalReportJobs.json)
+находятся в подготовке на M40; пять chart/compatibility controls прошли,
+проверены все30 trial/soma inputs. Выполнены шесть Branch case reports;
+Classic render продолжается. Планируемое содержание:
 потенциал каждой сомы, наложенные actual input pulses, каналы, Feedback и
 фактические LT events. Нужны общий обзор, непрерывные50мс окна и локальный
 Y для слабых пиков. Выбранные рисунки ещё не приняты вручную; до этого
