@@ -30,6 +30,10 @@ run ID и model revision; они явно указаны на новых рис�
 
 Полные значения индивидуальных сопротивлений, source-state hash и model
 revision находятся в `source_conditions` cache manifest и в исходных пакетах.
+Caption отдельно показывает Base и measured: для Branch второй fingerprint
+относится к модели после выбора solo-входа. Legacy поле `model_revision`
+в manifest сохраняет значение базового fingerprint; поля `base_model_revision`
+и `effective_model_revision` задают обе оси явно.
 Номера импульсов и solo-входа здесь начинаются с0; подписи Soma — с1.
 
 ## Протокол
@@ -67,16 +71,16 @@ units: единицы SI не аттестованы. Выбранные overvie
 проверены визуально; полный кэш всех12 рисунков не объявляется просмотренным.
 
 Полный HTML/PNG/SVG cache на M40:
-`/media/user/Data/TimeLearnerRefactor/ReportsCache/subset-console-temporal-a3/figures/index.html`.
+`/media/user/Data/TimeLearnerRefactor/ReportsCache/subset-console-temporal-a4/figures/index.html`.
 В Git остаются сжатые primary, manifest, метаданные и два выбранных PNG.
 
 ### Classic: full
 
-![Classic: все четыре сомы и реальный вход](../../../Reports/StructTrain/TimeLearner/s07-subset-temporal-m40-a3/selected/01-Classic-overview.png)
+![Classic: все четыре сомы и реальный вход](../../../Reports/StructTrain/TimeLearner/s07-subset-temporal-m40-a4/selected/01-Classic-overview.png)
 
 ### Branch: full, solo-вход3
 
-![Branch: Soma1 и реальный вход](../../../Reports/StructTrain/TimeLearner/s07-subset-temporal-m40-a3/selected/04-Branch-overview.png)
+![Branch: Soma1 и реальный вход](../../../Reports/StructTrain/TimeLearner/s07-subset-temporal-m40-a4/selected/04-Branch-overview.png)
 
 ## Ограничения и следующий эксперимент
 
@@ -97,7 +101,7 @@ Primary Console evidence: `f79cdc46852cf90235ebc306253d809e3c644daa`,706 members
 2951568B compressed; [независимая сверка](StimulusSubsetConsoleVerification.json).
 Compiled root `b29e8180bd8209311f08ed6d085b7cb7298e4170`, PulseLib
 `609a06d31ccad1c382d3df3b8150f7de87b6abfd`. Renderer source
-`8509fa1346cb676d08223238d9f276c1efc51f5d`; raw primary при восстановлении не
+`c2656f39393789afa8a322301cedd9ac07a836ae`; raw primary при восстановлении не
 менялись. Первый strict отказ на дублированных glog alias сохранён отдельно;
 штатный adapter удаляет из производного кэша только дубли с проверенными
 hash/size/owner, сохраняя исходный архив.

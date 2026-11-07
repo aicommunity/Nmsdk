@@ -486,3 +486,12 @@ High-threshold A1 остановлен проверкой самого worker: b
 A2 проверяет обе оси раздельно и повторно использует два завершённых full-control
 process packets только после проверки исходных и скопированных manifests.
 Остановка A1 не переоценивается как успешное выполнение серии.
+
+
+Рендер c2656f39 на опубликованном Console corpus принят:6 cases/12 figures,
+400 source hashes сверены с Git,25 archive members проверены; две выбранные
+overview-фигуры прошли визуальную QA. Caption и source_conditions различают
+base и measured/effective model revisions. Primary не менялись, новых native
+симуляций этот рендер не выполнял. [Receipt](StimulusSubsetTemporalVerification.json).
+High-threshold A2 подтвердил обе исторические full-пачки точно и завершил
+первые две omit-пробы Classic; оставшаяся серия выполняется.

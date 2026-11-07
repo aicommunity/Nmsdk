@@ -53,7 +53,19 @@
     "initial_start_ticks": "316963650",
     "request_sha256": "2101bacdbe5690d904f4dc164ac5143386c8811f9859a85349e11190df32ce6a",
     "worker_sha256": "6799d88c0de603b6eb29b15ffd057c903711b2cd5652bfcd3048f0f40ece54ec",
-    "status": "running; original full controls copied with symlinks preserved and audited before reuse; no new processes for reused controls",
-    "checks": "Compare base audit/initial identity with base expected SHA; compare prepared effective revision with effective expected SHA; all original constraints retained"
+    "status": "running omissions and single pulses; both reused full controls audited and exact historical waveforms confirmed",
+    "checks": "Compare base audit/initial identity with base expected SHA; compare prepared effective revision with effective expected SHA; all original constraints retained",
+    "latest_completed_cases": [
+      "Classic-0/native",
+      "Branch-0/native",
+      "Classic-1/native",
+      "Classic-2/native"
+    ],
+    "full_controls_reproduced_exactly": [
+      "Classic",
+      "Branch"
+    ],
+    "reused_processes": 2,
+    "new_completed_processes_at_last_readback": 2
   }
 }
