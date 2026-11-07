@@ -16,7 +16,8 @@ merge и научная разделимость — разные утвержд
 нужный для проверки наложения на неизменном нейроне. Planner7/7 принят;
 schema6 прошла71 unit и19 native checks на Elder/normal; результаты и каждый
 из138 source hashes сверены с Git. Последующая версия с обязательным sink,
-фактическим restoration readback и строгим reader проходит отдельную приёмку.
+фактическим restoration readback и строгим reader также прошла отдельную
+приёмку:71 unit,20 physical и7 reader checks без skipped.
 Это waveform-only
 режим без назначения пиков/сертификатов, не исправление full-burst assignment.
 [Точное действующее задание](StimulusSubsetNativeJobs.json).
