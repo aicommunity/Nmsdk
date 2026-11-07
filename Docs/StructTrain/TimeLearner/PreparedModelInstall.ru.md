@@ -27,3 +27,11 @@ actual fixture records читаются отдельными production graph-au
 проверяются неизменность source, полный candidate graph и пустые controller
 references/history/search/certificate/request. Это не waveform proof:
 следующий обязательный gate — реальный Console protocol и paired baseline.
+
+
+[Адресный gate запущен на M40](PreparedModelInstallJobs.json): root122a3aea6 /
+Pulse2726bdf;26 native функций и29 readers. На последней kernel-проверке
+worker1483958 жив и выполняет сборку. Новый runtime отделён от шести прежних;
+source/build cache используется после закрытия и освобождения previous24 job.
+Это статус запуска, не PASS. Ранее принятый physical graph import не проверяет
+новый owner installation API; ASan предыдущего SDK также его не покрывает.
