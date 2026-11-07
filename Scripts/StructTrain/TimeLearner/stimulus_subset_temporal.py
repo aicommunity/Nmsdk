@@ -27,6 +27,9 @@ def render(corpus, output, evidence_commit):
         audit=audit_execution(folder);require(audit['execution']=='completed','subset_report_requires_closed_diagnostic')
         quality=audit['stimulus_subset_diagnostic'];job=load(folder/'job.json')
         identity=load(folder/'initial-state.json')['identity']
+        packet=load(folder/'probe_trial_1.json');prepared=packet['prepared']
+        require(prepared['base_model_revision']==identity['sha256']==quality['model_revision'],
+                'subset_report_base_revision_mismatch')
         zones=[node for node in identity['model']['nodes'] if node['path']=='$.LTZone']
         require(len(zones)==1,'subset_report_ltzone_identity_missing')
         zone=zones[0]
@@ -37,9 +40,11 @@ def render(corpus, output, evidence_commit):
                    'effective_lt_threshold':_physical(zone,'Threshold') if 'Threshold' in zone['parameters'] else None,
                    'normalization':job['model']['normalization'],'frequency_hz':job['model']['frequency_hz'],
                    'selected_input_index':job['probe']['input_index'] if job['model']['branch'] else None,
-                   'trained_inputs':job['source_stopped']['trained_inputs'],'model_revision':identity['sha256']}
+                   'trained_inputs':job['source_stopped']['trained_inputs'],'model_revision':identity['sha256'],
+                   'base_model_revision':prepared['base_model_revision'],
+                   'effective_model_revision':prepared['effective_model_revision']}
         conditions[name]=condition
-        packet=load(folder/'probe_trial_1.json');spec=packet['observation']['specification']
+        spec=packet['observation']['specification']
         with (folder/'probe_trial_1.csv').open(newline='',encoding='utf-8') as stream:rows=list(csv.reader(stream))
         samples=[[number(float(value)) for value in row] for row in rows[1:]]
         key='Branch' if job['model']['branch'] else 'Classic'
@@ -73,7 +78,8 @@ def render(corpus, output, evidence_commit):
                          'Frozen diagnostic; no peak assignment or classification verdict\n'
                          'Source '+condition['source_run_id']+' | LT threshold '+str(condition['effective_lt_threshold'])+
                          ' | '+condition['normalization']+' | '+str(condition['frequency_hz'])+' Hz\n'
-                         'Model '+quality['model_revision'][:16]+' | native potential units; SI unverified',fontsize=13)
+                         'Base '+condition['base_model_revision'][:12]+' | measured '+
+                         condition['effective_model_revision'][:12]+' | native potential units; SI unverified',fontsize=13)
             axes[0].step(times,source,where='post',color='#ed8a28',linewidth=1.2,label='Recorded native generator output')
             for event,time in zip(events,event_times):
                 axes[0].axvline(time,color='gray',linestyle=':',linewidth=.9)
