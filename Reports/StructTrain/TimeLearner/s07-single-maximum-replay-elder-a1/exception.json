@@ -1,0 +1,4 @@
+{
+  "reason": "maximum_replay_incomplete_execution",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-single-maximum-replay-elder-a1-worker.py\", line 65, in <module>\n    analysis=run(design,out/'console-runtime.json',out/'replay');write('analysis.json',analysis)\n  File \"/home/user/timelearner-refactor/source-single-maximum-replay-a1-tool/Scripts/StructTrain/TimeLearner/single_maximum_replay.py\", line 140, in run\n    require(result['execution']=='completed' and result['validity']=='valid','maximum_replay_incomplete_execution')\n  File \"/home/user/timelearner-refactor/source-single-maximum-replay-a1-tool/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: maximum_replay_incomplete_execution\n"
+}
