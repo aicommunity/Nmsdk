@@ -106,7 +106,7 @@ def render_figure(data, name, left, right, output, local=False):
     overlay.set_ylabel('Actual input\ngenerator units', fontsize=10, color='#a34d00')
     handles.append(line);labels.append('Actual native input; dotted lines: actual LT events')
     axes[-1].set_xlabel('Native absolute time [s]')
-    figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native training probe')+' | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
+    figure_title(fig, ('Closed native single-pulse characterization' if data.get('diagnostic_purpose') else 'Closed native burst characterization')+' | peak measurement valid='+str(data['peak_observation_valid'])+'\n'+
                  data['trial_id']+'\n'+data['soma_path']+' | '+name+
                  (' | local Y per panel' if local else ' | shared Y per panel')+
                  ' | base '+data['model_revision'][:12]+' | observed '+data['observed_model_revision'][:12])
