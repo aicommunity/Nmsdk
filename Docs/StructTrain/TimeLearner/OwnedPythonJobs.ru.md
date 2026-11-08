@@ -5,6 +5,8 @@
 а запуск, ограничения и завершение всей группы выполняет существующий
 `contained_runner.execute`. Старые результаты и их производители не меняются.
 
+Адаптер Root `edaaa836e27b0ecef1c2f9203fb04ee82d62bd93` прошёл18/18 metadata tests на M40 без пропусков. Evidence `e993215c9d8517222f74928e4e590394f4e8bcb6`, [независимая квитанция](OwnedPythonJobsMetadata18Verification.json): проверены actual log/derived JUnit IDs,625 Scripts files по Git до/после, физическое закрытие owned group и освобождение lease. Контур проверяет две заявленные узкие операции; native runner с detached leaf groups остаётся отдельной работой.
+
 ## Границы
 
 Команда `python3 -B -m Scripts.StructTrain.TimeLearner.owned_python_job run REQUEST`
@@ -83,8 +85,10 @@ Project.ini из pinned Bin, с отдельным immutable manifest. CLI пр�
 
 На момент подготовки документа все эти новые inventories только сформированы
 по исходникам; серверный PASS, удаление AR и retirement Bin2 не утверждаются.
+Эта строка описывает исходный source-only снимок. Текущий принятый результат18 указан выше; остальные задания принимаются по своим независимым квитанциям.
 
 Первый bootstrap17 @204ec3c завершился отказом до тестов: suite file был передан
 как reservation resource, хотя штатный registry принимает directory trees.
 Отрицательная попытка сохранена; новая версия резервирует родительский каталог
 suite и проверяет этот контракт настоящим Reservations fixture (inventory18).
+Evidence отрицательной попытки `b7fd31aa4b8d01559f55431fc2651a088e1d4f75`, [квитанция](OwnedPythonJobsMetadata17NegativeVerification.json): исполнено0 тестов, worker закрыт, leases отсутствуют. В первом collector файл suite был нормализован CRLF→LF; исходный bound suite отдельно проверен по сохранённым raw bytes. Это ограничение явно записано в квитанции, а не выдано за наличие original raw внутри архива. Positive18 сохраняет исходный suite в архиве.

@@ -47,7 +47,11 @@ Maintained native_preparation прошёл24/24 metadata tests на M40;
 [квитанция](NativePreparation24M40A1IndependentVerification.json).
 Затем расширение schema2/repo-module прошло30/30, включая прежние24;
 [квитанция30](NativePreparation30M40A2IndependentVerification.json).
-После merge весь Scripts tree побайтно равен проверенному8bf (435 Python files).
+На снимке приёмки30 весь Scripts tree равен проверенному8bf (435 Python files).
+После него отдельно принят maintained adapter Python/AR:18/18 на M40,
+[квитанция18](OwnedPythonJobsMetadata18Verification.json).
+Первый bootstrap17 завершился до тестов из-за file-versus-directory reservation;
+[отрицательная квитанция](OwnedPythonJobsMetadata17NegativeVerification.json).
 CanonicalSpec wiring и запуск maintained worker полного248 ещё выполняются.
 На Elder удалены89 подтверждённых дубликатов статических библиотек;
 данные/модели/ELF/INI/логи сохранены, собственная группа закрыта.
