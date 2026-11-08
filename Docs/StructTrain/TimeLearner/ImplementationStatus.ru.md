@@ -1,10 +1,10 @@
-# Состояние реализации TimeLearner — 08.11.2026
+# Состояние реализации TimeLearner — 09.11.2026
 
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
 
 Дополнение08.11: prepared source для проверки нового control-lifetime собран в двух private descendants с одинаковыми worker/fixtures: corrected E11/Pulseb287 и unfixed BB1/Pulse800. Старые15s fixtures заменены merge-коммитом проверенной линии17db; два diagnostic-only IDs раскрыты отдельно. Ни targeted20, ни общий candidate-window regression пока не запускались. [Source review, ограничения и точные commits](CandidateWindowTypedCoreSourceReview-20261108.ru.md). [Конкретный Classic-график прослежен до исходного архива](ClassicFlatLTMetadataTrace-20261108.ru.md): отдельной LTMembrane нет, причина flat LT panel остаётся неизвестной. Это metadata/source evidence, не новые научные результаты.
 
-Corrected source уже доставлен в отдельную M40 SDK-копию: восемь HEAD/gitlinks,4020 Git-verified файлов и29 same-SDK imports; actual шестифайловый inventory492 = selected490 + diagnostic2. [Фактическая подготовка и компактное evidence](ManualControlFreshSourcePreparation-20261108.ru.md). CMake/native/model execution отсутствуют; paired unfixed копия пока подготовлена только в Git. Работающий baseline248 не изменён.
+Оба source descendants доставлены в отдельные M40 SDK-копии: по восемь HEAD/gitlinks,4020 Git-verified файлов и29 same-SDK imports. Corrected inventory492 = planned490 + diagnostic2; unfixed inventory476, из него только четыре selected witness controls. [Corrected подготовка](ManualControlFreshSourcePreparation-20261108.ru.md), [unfixed подготовка и source A/B](ManualControlUnfixedFreshSourcePreparation-20261109.ru.md). Различаются только четыре production control-файла и один тестовый TU; CMake/native/model execution отсутствуют. Работающий baseline248 не изменён.
 
 08.11: механическое выделение общего контроллера принято на M40:97/97
 (74 bounded +23 Final/Clock). Ошибочная постановка A1 сохранена в Git отдельно.
