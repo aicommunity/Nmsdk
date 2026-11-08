@@ -379,3 +379,45 @@ implementation этой Windows сборкой не проверялась.
 Это декларация следующей проверки, не результат и не действующий общий Windows
 CLI. Перед запуском требуется свежий штатный runtime/resource preflight;
 отдельного разрешения пользователя на уже согласованный объём не требуется.
+
+
+## Portable witness и single-owner setter: подготовка 8 ноября
+
+[Production portable witness](MatchedOmissionPortable.ru.md) сохраняет всю N+2
+группу, исходные/applied интервалы, policy/budgets, canonical primary и свежий
+assignment. Метод назначения v1 не изменён; в Train он пока не включён.
+На M40 tool root82de17c/Pulsee2c6311 подтверждены40 Python tests и70 из77
+заявленных C++ tests; последнее authoritative наблюдение — работающий kernel
+unit перед отключением VPN. Terminal/cross-language/28 CSV A/B ещё не приняты.
+[Точные попытки и bindings](MatchedOmissionPortableJobs.json). Normal80/Python43
+на root461cbcc/Pulsee2c6311 подготовлен, но попытка соединения не дошла до
+удалённой команды. Состояние M40 нужно проверить до любого обновления cache.
+
+[Сверка calibration/PostTune](CalibrationPostTunePropertyReconciliation.ru.md)
+исправила44 устаревших формулировки реестра, сохранив их исторические поля;
+167 остальных записей неизменны. Это source/metadata review, не повышение
+runtime acceptance.
+
+Отдельный tiny patch Pulse2c3eb8d закрывает legacy SynapseResistanceStep writer
+для native-owned модели. Прежнее значение возвращает true без child writes;
+изменение отклоняется. Legacy N0/N1 сохраняют прежнюю семантику. Подготовлены10
+real-storage ownership/lifecycle/import cases, включая zero-packet ExternalStop
+frozen diagnostic import без фиктивного сертификата; серверного gate ещё нет.
+[Контракт и ограничения](NormalizationPropertyContracts.ru.md).
+
+ClDesc двух learner в Bin918ae5e уточнены: Step — абсолютное сопротивление
+дополнительных синапсов legacy N0, а не приращение. Изменены только Header и
+Description; [XML semantic check](ResistanceStepClDescTextVerification.json)
+подтверждает неизменность всех остальных значений. Runtime resources работающего
+M40 не обновлялись: его снимок по-прежнему использует Bin3b9ca28.
+
+При подготовке отдельной копии Bin исправлена унаследованная относительная
+core.worktree-привязка только новой копии. Две созданные этим подготовительным
+вызовом XML-копии из служебного каталога удалены после точной сверки с изолированной
+копией и Git; старые файлы сохранены.
+[Operation receipt](TimeLearnerBinWorktreeBindingCorrection.json).
+
+Последняя подготовленная ветка содержит Pulse2c3eb8d/Bin918ae5e, а запущенные и
+подготовленные codec gates используют явно указанные прежние gitlinks. Эти
+проверки не переносятся автоматически на новый setter patch. Исходные этапы1–12
+и научная матрица остаются частично выполненными; только этап0 полностью принят.
