@@ -2,19 +2,27 @@
   "kind": "native_manual_control_lifetime_source_inventory",
   "schema_version": 1,
   "status": "source_preparation_only_unrun",
-  "root_base": "c49d59ade0e62bc1acad5de8e53f93eba47bde8a",
+  "root_base": "0619991d88772ecc33b07c752ae76608a4583093",
   "pulse": "353f17baf505edf92ff39fe40422b9dcea023045",
   "unfixed_pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
   "unfixed_root_reproducer": "f74b9fbf9ece38668396c21fa569d688f595bb05",
   "target": "Test_PulseLib_StorageComponents",
-  "new_expected_count": 6,
+  "new_expected_count": 14,
   "new_expected_ids": [
     "NativeManualControlLifetime.ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume",
     "NativeManualControlLifetime.BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume",
     "NativeManualControlLifetime.ClassicActualScalar3TakeoverRevokesClosedConsume",
     "NativeManualControlLifetime.BranchActualScalar3TakeoverRevokesClosedConsume",
     "NativeManualControlLifetime.ClassicActualFixed4TakeoverRevokesClosedConsume",
-    "NativeManualControlLifetime.BranchActualFixed4TakeoverRevokesClosedConsume"
+    "NativeManualControlLifetime.BranchActualFixed4TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.ClassicNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease",
+    "NativeManualControlLifetime.BranchNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease",
+    "NativeManualControlLifetime.ClassicOwnControlledEditAllowsFreshPreparedFinal",
+    "NativeManualControlLifetime.BranchOwnControlledEditAllowsFreshPreparedFinal",
+    "NativeManualControlLifetime.ClassicOpenArmCannotOutliveFailedBegin",
+    "NativeManualControlLifetime.BranchOpenArmCannotOutliveFailedBegin",
+    "NativeManualControlLifetime.ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial",
+    "NativeManualControlLifetime.BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial"
   ],
   "repaired_f74_expected_count": 4,
   "repaired_f74_expected_ids": [
@@ -23,7 +31,7 @@
     "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
     "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
   ],
-  "scoped_expected_count": 10,
+  "scoped_expected_count": 18,
   "scoped_expected_ids": [
     "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
     "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
@@ -34,13 +42,21 @@
     "NativeManualControlLifetime.ClassicActualScalar3TakeoverRevokesClosedConsume",
     "NativeManualControlLifetime.BranchActualScalar3TakeoverRevokesClosedConsume",
     "NativeManualControlLifetime.ClassicActualFixed4TakeoverRevokesClosedConsume",
-    "NativeManualControlLifetime.BranchActualFixed4TakeoverRevokesClosedConsume"
+    "NativeManualControlLifetime.BranchActualFixed4TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.ClassicNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease",
+    "NativeManualControlLifetime.BranchNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease",
+    "NativeManualControlLifetime.ClassicOwnControlledEditAllowsFreshPreparedFinal",
+    "NativeManualControlLifetime.BranchOwnControlledEditAllowsFreshPreparedFinal",
+    "NativeManualControlLifetime.ClassicOpenArmCannotOutliveFailedBegin",
+    "NativeManualControlLifetime.BranchOpenArmCannotOutliveFailedBegin",
+    "NativeManualControlLifetime.ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial",
+    "NativeManualControlLifetime.BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial"
   ],
   "test_source": {
     "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-    "git_blob_sha256": "b146ce7b94617449a8e748c5bff92732e24f20c9826a969f13a900ab325f6547",
-    "bytes": 263098,
-    "literal_tests": 325
+    "git_blob_sha256": "d73f12b8a524bd8aaa8fc6b3a3b8378756d806c35c8ce149c393947b12a914a5",
+    "bytes": 275550,
+    "literal_tests": 333
   },
   "local_build_or_numeric": false,
   "server_dispatch_or_cache_update": false,
@@ -60,5 +76,13 @@
   "amplitude_absolute": 1e-05,
   "minimum_amplitude": 1e-06,
   "full248_or470_accepted_by_this_inventory": false,
-  "scope": "source prepared actual-native control-lifetime tests, not scientific convergence or completed package6"
+  "scope": "source prepared actual-native control-lifetime tests, not scientific convergence or completed package6",
+  "first_six_controls_root": "0619991d88772ecc33b07c752ae76608a4583093",
+  "new_manual_after_finished_without_old_lease_revival": true,
+  "own_controlled_edit_fresh_prepared_admission": true,
+  "open_arm_in_actual_prepared_callback": true,
+  "before_queue_takeover_never_queues_old_raw": true,
+  "open_arm_rejected_inputs_added": 0,
+  "own_edit_exact_required": false,
+  "full_union_488_declared_accepted": false
 }
