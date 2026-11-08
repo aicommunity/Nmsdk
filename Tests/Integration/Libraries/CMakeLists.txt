@@ -54,6 +54,22 @@ add_test(NAME PulseLib_MatchedOmissionAssignment COMMAND Test_PulseLib_MatchedOm
 set_tests_properties(PulseLib_MatchedOmissionAssignment PROPERTIES
     WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner")
 
+# Geometry-only opt-in diagnostic. Context/native/Train gates remain separate.
+add_executable(Test_PulseLib_DeclaredWindowBasinAssignment
+    Test_PulseLib_DeclaredWindowBasinAssignment.cpp ../Support/ProbeAlgorithmMain.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/DeclaredWindowBasinAssignment.cpp)
+target_link_libraries(Test_PulseLib_DeclaredWindowBasinAssignment PRIVATE GTest::gtest Nmsdk::Qt::Core)
+set_target_properties(Test_PulseLib_DeclaredWindowBasinAssignment PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PULSELIB_TEST_OUTPUT_DIR}")
+add_test(NAME PulseLib_DeclaredWindowBasinAssignment COMMAND Test_PulseLib_DeclaredWindowBasinAssignment)
+set_tests_properties(PulseLib_DeclaredWindowBasinAssignment PROPERTIES
+    WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner;diagnostic")
+
 # Fast observer/clock checks compile the actual production implementation.
 # Keep the same cases in the full storage target: this unit executable does
 # not replace native lifecycle, storage, routing or physical response gates.
@@ -120,6 +136,7 @@ set_tests_properties(PulseLib_StimulusSubset PROPERTIES
     WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner")
 
 add_executable(Test_PulseLib_StorageComponents
+    Test_PulseLib_DeclaredWindowBasinAssignment.cpp
     Test_PulseLib_MatchedOmissionEvidence.cpp
     Test_PulseLib_MatchedOmissionAssignment.cpp
     Test_PulseLib_StimulusSubset.cpp
