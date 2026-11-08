@@ -339,3 +339,8 @@ backend отверг запуск из-за дочернего процесса 
 не принят. Последующая короткая проверка quiescent build имеет отдельный
 результат и не переписывает этот отказ. Пользовательский C:/Projects/Nmsdk
 в эти изменения не включён.
+
+
+Усиление JSON identities/dimensions reader затем прошло20 тестов (11+9 новых)
+и replay тех же10 groups на tool rootd37b01d2. Критерий и ответы моделей не
+менялись. [Scoped receipt](MatchedOmissionReaderDimensionsVerification.json).

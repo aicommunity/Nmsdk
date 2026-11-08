@@ -65,3 +65,21 @@ source hashes, original-primary hashes и закрытия lease отражен�
 [MatchedOmissionReaderVerification.json](MatchedOmissionReaderVerification.json).
 Это проверка reader и границ применимости метода, не завершение Train-интеграции
 и не научный результат классификации.
+
+
+## Строгие integer identities и размеры
+
+После исходной приёмки добавлены отдельные проверки JSON integer для schema
+IDs, dimensions, ordinals, sample/support indices и Branch selector. Общие
+number/count контракты, допускающие integral float в других форматах, не менялись.
+Physical input count связывается с фактической первой full-mask до range(N) и
+выделения массивов; произвольного ограничения научной размерности не добавлено.
+
+Срез `d37b01d28b243cf60febf1f01c71a885257a1c63` прошёл на M40 все20 unittest
+methods (исходные11 +9 новых, включая безопасный oversized-N regression) и
+повторный независимый replay тех же10 native groups. Измерительная математика,
+критерий назначения и результаты real groups не изменились. Evidence commit
+`9e283e788edfd71bf2475b70739378f1cbf10fa2`, archive27 файлов/33 308 bytes;
+[проверка метаданных](MatchedOmissionReaderDimensionsVerification.json).
+Численные проверки локально не запускались. Это исправление reader, а не
+завершение Train-интеграции или расширенной матрицы алгоритмов.
