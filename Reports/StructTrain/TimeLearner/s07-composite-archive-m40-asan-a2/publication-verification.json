@@ -1,0 +1,224 @@
+{
+  "facts": {
+    "kind": "current_composite_service_archive_ASan206_failed_attempt",
+    "schema_version": 1,
+    "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+    "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+    "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+    "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+    "collector_tool_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+    "collector_helper_independent_metadata39_evidence": "54574d03581e04d233b832b331979f27c871bfa1",
+    "host": "10.245.1.17",
+    "original_terminal_passed": false,
+    "built": true,
+    "expected_cpp_cases": 206,
+    "observed_JUnit_cases": 144,
+    "observed_failed_cases": 1,
+    "native_leaf_gates_observed": 56,
+    "fresh_closed_leaf_kernel_groups": 56,
+    "outer_kernel_closed": true,
+    "whole_worker_reservation_released": true,
+    "actual_archive_bundles_present": 0,
+    "actual_csv_primary_mirrors_verified": 0,
+    "actual_source_files_Git_verified": 3687,
+    "source_repositories": [
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-root-m40-a1",
+        "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+        "files": 968
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-CvBasicLib",
+        "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+        "files": 132
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-BasicLib",
+        "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+        "files": 43
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-pulse-m40-a1",
+        "commit": "f925e37247bb987980fce80da47831a1c31d04c9",
+        "files": 313
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-HardwareLib",
+        "commit": "de40b008e990105856726e01230dde19f42a90a9",
+        "files": 356
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+        "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+        "files": 1
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Nmsdk-MotionControlLib",
+        "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+        "files": 93
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Rdk",
+        "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+        "files": 1781
+      }
+    ],
+    "actual_loaded_files_hash_verified": 74,
+    "two_prior_core143_and_failed_corebuild_runtimes_before_after_postclosure_equal": true,
+    "current_runtime_file_freeze_verified": true,
+    "resource_before_after_postclosure_equal": true,
+    "materialized_resource_files": 327,
+    "original_operational_diagnostics_preserved": true,
+    "direct_production_COMPOSITE_OUTPUT_route": true,
+    "adapter_or_monkeypatch_used": false,
+    "RDK_USE_LLM": true,
+    "RDK_LLM_BUILD_EMBEDDED": true,
+    "address_sanitizer_instrumentation_loaded_all_observed_leaves": true,
+    "full_ASan206_gate_accepted": false,
+    "ASAN_OPTIONS": "detect_leaks=0",
+    "full_Configs_campaign_materialized": false,
+    "six_bundle_capture_complete": false,
+    "archive_cases_observed": 0,
+    "growth_cases_observed": 0,
+    "source_guard_cases_observed": 0,
+    "not_run_cpp_cases": 62,
+    "maintained_helper_used_for_metadata_binding_not_CPP_success_attestation": true,
+    "source_inventory_derived_from_actual_Git": true,
+    "independent_portable_scalar_geometry_replay": false,
+    "package5_accepted": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "new_build_or_model_run_during_publication": false,
+    "disk_guard": {
+      "guard_triggered": false,
+      "original_reason": null,
+      "last": {
+        "time": 1794150164.4184926,
+        "free_bytes": 341731393536,
+        "owned_scope_increment_bytes": 681754624,
+        "peak_owned_scope_increment_bytes": 681754624,
+        "outer_closed": true
+      },
+      "peak_owned_scope_increment_bytes": 681754624,
+      "minimum_free_bytes": 341703561216,
+      "outer_closed": true,
+      "all_recorded_leaf_groups_closed": true,
+      "leaf_groups": 56
+    },
+    "created_utc": "2026-11-08T15:23:07.665518+00:00"
+  },
+  "original_worker_and_controller_unchanged_during_archive": true,
+  "fresh_worker_after_archive": {
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "c10e661790d0707966e3ab6639e2e3be8189ccc7d97e9acc8003b5f99ba7d15e",
+        "unit": "timelearner-8947461b-b039-45b4-aa94-05de01b636d1.service",
+        "invocation_id": "6a5e9fbe67074e75aa7f9fa278386ce7",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8947461b-b039-45b4-aa94-05de01b636d1.service",
+        "initial_main_pid": 3017888,
+        "initial_start_ticks": "322010062",
+        "sha256": "e7dee0a02c7abbc550fedd0f6cb10e70ab7411326f4afe64a5a60b7057c70084"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 8947461b-b039-45b4-aa94-05de01b636d1",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "6a5e9fbe67074e75aa7f9fa278386ce7"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "lease": {
+      "token": "96d4970b-dd2a-45e2-83b3-9ee38c8b5efa",
+      "job_id": "s07-composite-archive-m40-asan-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3017888,
+        "start_ticks": "322010062",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-archive-m40-asan-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-archive-m40-asan-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-pulse-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-pulse-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-root-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-composite-archive-root-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794144903.5180495,
+      "deadline": 1794150275.5815058,
+      "updated": 1794150165.0591362,
+      "release_note": "Exact current ASan206 worker and every recorded native leaf group freshly closed; original failures and disk-guard reason preserved; scientific outcome separate.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "archive_members": 1812,
+  "compression_dictionary_bytes": 33554432
+}
