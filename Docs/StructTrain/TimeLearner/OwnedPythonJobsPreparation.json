@@ -1,0 +1,55 @@
+{
+  "kind": "timelearner_owned_python_jobs_source_preparation",
+  "schema_version": 1,
+  "base_root": "85d6ee7d577cae2efbcbd2c6c590953a879832df",
+  "source_files": {
+    "Scripts/StructTrain/TimeLearner/contained_runner.py": {
+      "sha256": "753a332bcb444c641b368be57c2a7db021a108cc85c9cc601b90001d1cc9ae07",
+      "bytes": 10032,
+      "git_blob": "f30cbca108eb00df2948404bfd1d687883bd937d"
+    },
+    "Scripts/StructTrain/TimeLearner/archive_retirement.py": {
+      "sha256": "e68fb553ebc3be22e4c4b89a2e2484d8a54cf553aa7bd6c33385718417b2d269",
+      "bytes": 11502,
+      "git_blob": "eb1b2a94e3a6d3e7b24d2027a20f148bb0f06272"
+    },
+    "Scripts/StructTrain/TimeLearner/owned_python_job.py": {
+      "sha256": "1794cc4fb63f2ddd307f08dba9c1b7a8082c44a00bdcb13a1ebb9328b4395400",
+      "bytes": 21519,
+      "git_blob": "932bbccc845aa9b2ff2d1dbb28bfa75e296f0ae7"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_owned_python_job.py": {
+      "sha256": "5a755ecda4c002dbf89f49e44ecf0fc9c2a30edf74599c98aecd4699971f911b",
+      "bytes": 7504,
+      "git_blob": "606eff6d9758e6c724c28df1008d447dc5fe93af"
+    }
+  },
+  "production_apply_plan_sha256": "3186e66808ff58f25b801db8e9cc785545eb38e0344d7b43080739031fc963a2",
+  "prepared_metadata_inventory": [
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_reviewed_typed_request_is_preserved_without_implicit_fields",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_unknown_fields_native_actions_and_path_job_ids_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_invalid_limits_and_boolean_schema_never_clip_to_defaults",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_and_input_bindings_require_full_digest_and_absolute_path",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callbacks_are_checked_before_any_runtime_or_output_side_effect",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_closed_observer_pipe_does_not_raise_into_execution_control",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_readbacks_parent_alias_cannot_redirect_owned_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_retained_glog_alias_is_lstat_readlink_only_even_when_dangling",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_projection_is_verified_against_exact_git_blob_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_only_confirmed_retired_duplicate_removed_with_journal_and_retained_copy",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_changed_target_or_keeper_refused_before_any_deletion",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_missing_or_read_only_lease_cannot_delete",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_symlink_hardlink_and_thin_archive_are_not_eligible",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_plan_cannot_delete_keeper_or_escape_root",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_if_all_copies_retired_one_is_still_retained"
+  ],
+  "prepared_metadata_count": 16,
+  "metadata_runtime_acceptance": false,
+  "script143_port_source": "76ffc4c566a7c6113eb5131de398467103e320fa",
+  "script143_runtime_acceptance": false,
+  "extra13_plan_sha256": "27372841fcf86b372f9012946ae02b8a413289ede6c547bef81913b50962dfab",
+  "extra13_review_sha256": "717c5a904420632439374bbf8d77276fbab9b80044a48b10f97f1120af86ef1c",
+  "extra13_deletions_performed": false,
+  "SDK_or_scientific_attestation": false,
+  "local_checks": "AST, Git blob hashes, exact literal test inventory and diff only; no tests executed"
+}
