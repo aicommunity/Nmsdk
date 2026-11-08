@@ -73,6 +73,35 @@ class OwnedPythonJobTest(unittest.TestCase):
             self.assertFalse(isinstance(replacement, Broken))
             replacement.close()
 
+    def test_callable_hook_failure_stops_only_the_bound_group_and_cannot_pass(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);executable = root/'python';executable.write_bytes(b'not executed')
+            binding = {'initial_main_pid': 123, 'initial_start_ticks': '456', 'unit': 'fixture.service',
+                       'invocation_id': 'a'*32, 'control_group': '/fixture.service'}
+            state = {'ExecMainCode': '1', 'ExecMainStatus': '0'}
+            closed = {'all_processes_closed': True, 'state': state}
+            def start(manifest, arguments, cwd, output, **kwargs):
+                output.mkdir();(output/'request.json').write_text('{}')
+                return binding
+            def fail(_):
+                raise RuntimeError('observer-hook-failure')
+            for hook in ('on_started', 'monitor'):
+                output = root/hook
+                with self.subTest(hook=hook), \
+                     patch('Scripts.StructTrain.TimeLearner.contained_runner.verify_runtime', return_value=executable), \
+                     patch('Scripts.StructTrain.TimeLearner.contained_runner.contained_process.start', side_effect=start), \
+                     patch('Scripts.StructTrain.TimeLearner.contained_runner.contained_process.inspect', return_value=closed), \
+                     patch('Scripts.StructTrain.TimeLearner.contained_runner.contained_process.stop', return_value=closed) as stop:
+                    manifest = {'loader_environment': {}, 'runtime_fingerprint': 'fixture',
+                                'executable': {'sha256': hashlib.sha256(executable.read_bytes()).hexdigest()}}
+                    with patch.dict(subject.os.environ, {}, clear=True):
+                        result = execute(manifest, [], root, output, 1, memory_bytes=128*1024**2,
+                                         tasks=32, **{hook: fail})
+                    stop.assert_called_once_with(output/'contained')
+                    self.assertEqual(result['execution'], 'process_error')
+                    self.assertEqual(result['reason'], 'observer-hook-failure')
+                    self.assertTrue(result['all_processes_closed'])
+
     def test_readbacks_parent_alias_cannot_redirect_owned_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory);base = root/'worker';base.mkdir();outside = root/'outside';outside.mkdir()

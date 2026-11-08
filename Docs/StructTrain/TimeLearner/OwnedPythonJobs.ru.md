@@ -60,22 +60,25 @@ binding/terminal/kernel, не запускают заново.
 Lease освобождает контроллер только через `recover_closed_worker` после доказанного
 закрытия всей cgroup. Ни `operation_passed`, ни descriptor не являются научной
 аттестацией, proof kernel closure другого запуска или общим утверждением о SDK.
+Если запись metadata после execute не удалась, lease может остаться held даже при
+закрытой группе; это требует явного fresh inspect/recovery и не считается успехом.
 Публикация Git и независимая проверка остаются отдельными действиями после closure.
 
 ## Подготовленные проверки
 
-Новый metadata-only inventory: 10 `OwnedPythonJobTest` и существующие 6
+Новый metadata-only inventory: 11 `OwnedPythonJobTest` и существующие 6
 `StaticArchiveCleanupTest` (точный class name читается из actual pinned source при
 составлении suite). Проверяются strict schema/limits/digests, отказ native action
 и traversal, callbacks до side effects, закрытый observer pipe, symlink parent,
-dangling retained alias, Git blob bytes и source epoch/drift. Эти тесты не запускают
+dangling retained alias, Git blob bytes, source epoch/drift и закрытие ровно своей
+bound group при исключении каждого callable observer hook. Эти тесты не запускают
 новые systemd units и не используют модели.
 
 Отдельный адресованный suite143 проверяет неизменённый port source
 `76ffc4c566a7c6113eb5131de398467103e320fa`: 67 wire +39 collector +30 declared time
 scales +7 lossless ConfigDocument. Для последнего передаются как fixture реальные
 Project.ini из pinned Bin, с отдельным immutable manifest. CLI проверяется из этого
-же source и должен сохранять conditional/unknown semantics. Успех адаптера16 не
+же source и должен сохранять conditional/unknown semantics. Успех адаптера17 не
 подменяет успех143, удаление13 AR или перенос старых Bin entrypoints.
 
 На момент подготовки документа все эти новые inventories только сформированы

@@ -19,31 +19,32 @@
       "git_blob": "48b9862c072bc208a03f02cdd978b0a45f2d4d5c"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_owned_python_job.py": {
-      "sha256": "5a755ecda4c002dbf89f49e44ecf0fc9c2a30edf74599c98aecd4699971f911b",
-      "bytes": 7504,
-      "git_blob": "606eff6d9758e6c724c28df1008d447dc5fe93af"
+      "sha256": "3dd2703b6c018a42e96dca08a9a94d8948c94fb55ead73418403e6a2506d15a0",
+      "bytes": 9702,
+      "git_blob": "b43ed471afef73238a998f26313a2e3089c68095"
     }
   },
   "production_apply_plan_sha256": "3186e66808ff58f25b801db8e9cc785545eb38e0344d7b43080739031fc963a2",
   "prepared_metadata_inventory": [
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_only_confirmed_retired_duplicate_removed_with_journal_and_retained_copy",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_changed_target_or_keeper_refused_before_any_deletion",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_missing_or_read_only_lease_cannot_delete",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_symlink_hardlink_and_thin_archive_are_not_eligible",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_plan_cannot_delete_keeper_or_escape_root",
+    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_if_all_copies_retired_one_is_still_retained",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_reviewed_typed_request_is_preserved_without_implicit_fields",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_unknown_fields_native_actions_and_path_job_ids_refuse",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_invalid_limits_and_boolean_schema_never_clip_to_defaults",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_and_input_bindings_require_full_digest_and_absolute_path",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callbacks_are_checked_before_any_runtime_or_output_side_effect",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_closed_observer_pipe_does_not_raise_into_execution_control",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callable_hook_failure_stops_only_the_bound_group_and_cannot_pass",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_readbacks_parent_alias_cannot_redirect_owned_output",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_retained_glog_alias_is_lstat_readlink_only_even_when_dangling",
     "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_projection_is_verified_against_exact_git_blob_bytes",
-    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity",
-    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_only_confirmed_retired_duplicate_removed_with_journal_and_retained_copy",
-    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_changed_target_or_keeper_refused_before_any_deletion",
-    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_missing_or_read_only_lease_cannot_delete",
-    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_symlink_hardlink_and_thin_archive_are_not_eligible",
-    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_plan_cannot_delete_keeper_or_escape_root",
-    "Scripts.StructTrain.TimeLearner.tests.test_static_archive_cleanup.StaticArchiveCleanupTest.test_if_all_copies_retired_one_is_still_retained"
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity"
   ],
-  "prepared_metadata_count": 16,
+  "prepared_metadata_count": 17,
   "metadata_runtime_acceptance": false,
   "script143_port_source": "76ffc4c566a7c6113eb5131de398467103e320fa",
   "script143_runtime_acceptance": false,
@@ -51,5 +52,6 @@
   "extra13_review_sha256": "717c5a904420632439374bbf8d77276fbab9b80044a48b10f97f1120af86ef1c",
   "extra13_deletions_performed": false,
   "SDK_or_scientific_attestation": false,
-  "local_checks": "AST, Git blob hashes, exact literal test inventory and diff only; no tests executed"
+  "local_checks": "AST, Git blob hashes, exact literal test inventory and diff only; no tests executed",
+  "superseded_preparation_inventory": 16
 }
