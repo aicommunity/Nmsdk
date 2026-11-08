@@ -181,3 +181,9 @@ Exact worker PID2921881/start321394325 закрыт, lease released.
 production exports; они не включены в эти65 и не выполнялись без native
 fixtures. Для их отдельной приёмки нужны реальные Classic/Branch complete,
 partial, ambiguous, existing-C0 и warm bundles с Git-bound fixture manifest.
+
+Для package5 current dataset дополнительно должен semantic-совпадать с
+initial source dataset после полного mask restore. Retarget либо сохранённый
+omission mask не разрешены внутри этого family. Сравнивается identity.model;
+raw XML может различаться из-за incidental dynamic serialization. Этот guard
+подготовлен отдельно после65 source и требует фактической package5 приёмки.

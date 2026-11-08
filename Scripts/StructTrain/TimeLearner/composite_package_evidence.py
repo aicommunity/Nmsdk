@@ -35,6 +35,9 @@ def _physical_archive(package):
     require(digest(images)==source['storage_images_sha256'],'composite_actual_trained_storage_changed')
     validate_graph_input_parameters(package['configuration']['model'],identity,package['trained_inputs'])
     audit_snapshot(package['dataset'],dataset=True)
+    # A saved model must not retain an omission mask or retargeted source.
+    # XML may contain incidental dynamic serialization; compare semantics.
+    _same(package['dataset']['identity']['model'],source['initial_dataset']['identity']['model'])
     metadata=archive['metadata'];training=metadata['training']
     require(metadata['implementation_id']==package['implementation_id'] and metadata['state_kind']==package['state_kind']
             and training['status']==package['training_outcome'] and training['target_id']==package['protocol']['sample_id']
