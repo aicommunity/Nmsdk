@@ -6,6 +6,7 @@
 #include "TimeLearner/BoundedTraining.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeResponseDomainCapture.h"
+#include "TimeLearner/ResponseDomainEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -243,6 +244,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         }
     }
     const auto result=learner->TakeNativeProbeResult();ASSERT_TRUE(result);
+    std::optional<ResponseDomainSpec> capturedDomains;
     if(captureDomains) {
         const auto& captured=domainCapture.Observation();
         ResponseDomainSpec domains;domains.modelRevision=captured.modelRevision;
@@ -260,6 +262,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         EXPECT_EQ(diagnostic.channels.size(),captured.channels.size());
         EXPECT_FALSE(diagnostic.TrainingCertificateEligible());
         EXPECT_TRUE(diagnostic.reasons.empty());
+        capturedDomains=domains;
         // Broad competing domains intentionally do not prove causal origin.
         EXPECT_THROW(domainCapture.Close(*result,domains),std::invalid_argument);
     }
@@ -295,6 +298,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
         QFile csv(directory+"/"+QString::fromStdString(name)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         const auto wave=QByteArray::fromStdString(trace.str());ASSERT_EQ(csv.write(wave),wave.size());
+        if(captureDomains) {
+            ASSERT_TRUE(capturedDomains);const auto domainWave=EncodeNativeResponseDomainTrace(domainCapture);
+            const auto traceName=QString::fromStdString(name)+".domains.csv";
+            QFile domainCsv(directory+"/"+traceName);ASSERT_TRUE(domainCsv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            ASSERT_EQ(domainCsv.write(domainWave),domainWave.size());ASSERT_TRUE(domainCsv.flush());domainCsv.close();
+            ASSERT_TRUE(domainCsv.open(QIODevice::ReadOnly));const auto readback=domainCsv.readAll();ASSERT_EQ(readback,domainWave);
+            const auto packet=EncodeNativeResponseDomainEvidence(domainCapture,*capturedDomains,traceName,readback);
+            QFile domainJson(directory+"/"+QString::fromStdString(name)+".domains.json");
+            ASSERT_TRUE(domainJson.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            const auto bytes=QJsonDocument(packet).toJson();ASSERT_EQ(domainJson.write(bytes),bytes.size());
+        }
         QFile file(directory+"/"+QString::fromStdString(name)+".json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         const bool normal=interference==Interference::None || interference==Interference::NoopOwnerBuild;
         const auto bytes=QJsonDocument(QJsonObject{{"schema_version",1},{"kind","native_learner_probe_execution"},
@@ -1006,5 +1020,26 @@ TEST(NativeResponseDomainCapture,ChangedMeasuredPeakCannotHideBehindSameValidity
     ASSERT_TRUE(r.observation->valid);ASSERT_TRUE(r.observation->reasons.empty());
     EXPECT_THROW(f.capture.Close(r,f.domains),std::invalid_argument);
     EXPECT_FALSE(f.capture.Observation().complete);
+}
+TEST(NativeResponseDomainCodec,RequiresClosedCaptureAndExactPrimaryBytes)
+{
+    DomainCaptureFixture f;EXPECT_THROW(EncodeNativeResponseDomainTrace(f.capture),std::invalid_argument);
+    f.AppendAll();f.capture.Close(f.Result(),f.domains);auto csv=EncodeNativeResponseDomainTrace(f.capture);
+    const auto packet=EncodeNativeResponseDomainEvidence(f.capture,f.domains,"trace.csv",csv);
+    EXPECT_EQ(packet["kind"].toString(),"timelearner_native_response_domain_evidence");
+    EXPECT_TRUE(packet["diagnostic_only"].toBool());EXPECT_FALSE(packet["training_certificate_eligible"].toBool());
+    EXPECT_THROW(EncodeNativeResponseDomainEvidence(f.capture,f.domains,"trace.csv",csv+"0,0,0\n"),std::invalid_argument);
+    EXPECT_THROW(EncodeNativeResponseDomainEvidence(f.capture,f.domains,"../trace.csv",csv),std::invalid_argument);
+}
+TEST(NativeResponseDomainCodec,UsesItsOwnImmutableClosureAndKeepsDiagnosticStatus)
+{
+    DomainCaptureFixture f;f.AppendAll();auto native=f.Result();f.capture.Close(native,f.domains);
+    native.currentBaseRevision="unrelated_after_capture";
+    const auto csv=EncodeNativeResponseDomainTrace(f.capture);
+    const auto packet=EncodeNativeResponseDomainEvidence(f.capture,f.domains,"trace.csv",csv);
+    EXPECT_EQ(packet["native_evidence"].toObject()["current_base_revision"].toString(),"base");
+    EXPECT_EQ(packet["analysis"].toObject()["channels"].toArray().size(),1);
+    EXPECT_EQ(packet["analysis"].toObject()["associations"].toArray().size(),1);
+    EXPECT_TRUE(packet["scientific_verdict"].isNull());
 }
 }
