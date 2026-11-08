@@ -9,7 +9,9 @@
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/CompositePortableTrainingProof.h"
 #include "TimeLearner/NativeLearnedState.h"
-#include "TimeLearner/NativeRecognitionState.h"
+#include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
+#include "../../../App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h"
+#include <QTemporaryDir>
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
@@ -1030,3 +1032,85 @@ TEST(NativeCompositePackage,ChangedCurrentParametersRejected){PortableTamper(1);
 TEST(NativeCompositePackage,ChangedCertificateRejected){PortableTamper(2);}
 TEST(NativeCompositePackage,FakeInitialTemplateRejected){PortableTamper(3);}
 TEST(NativeCompositePackage,RuntimeInitialModelRelabelRejected){PortableTamper(4);}
+
+
+namespace {
+QByteArray CompositeFile(const QString& directory,const QString& name) {
+    QFile file(QDir(directory).filePath(name));Require(file.open(QIODevice::ReadOnly),"composite_writer_test_primary_missing");return file.readAll();
+}
+template<class Owner> void PortableArtifactMirror(bool tamper=false,bool duplicate=false) {
+    const auto package=ActualPortablePackage<Owner>();QTemporaryDir directory;ASSERT_TRUE(directory.isValid());QJsonArray artifacts;
+    const auto ref=NmsdkWorker::PublishNativeCompositeArchive(directory.path(),package,artifacts).toObject();
+    const auto index=ParseStrictNativeJsonObject(CompositeFile(directory.path(),"composite-measurements/index.json").toStdString());
+    EXPECT_EQ(index,package["measurement_archive"].toObject());EXPECT_EQ(ref["bytes"],QJsonValue(double(CompositeFile(directory.path(),"composite-measurements/index.json").size())));
+    const auto resolver=[&](const QString& name){return CompositeFile(directory.path(),name);};
+    EXPECT_NO_THROW(DecodeNativeCompositeTrainingArchive(index,resolver));
+    const auto records=index["records"].toArray();std::size_t primary=0;
+    for(int i=0;i<records.size();++i) {
+        const auto name=QString("composite-measurements/group-%1.json").arg(i+1,6,10,QLatin1Char('0'));
+        EXPECT_EQ(ParseStrictNativeJsonObject(CompositeFile(directory.path(),name).toStdString()),records[i].toObject());
+        primary+=std::size_t(records[i].toObject()["raw_trials"].toArray().size());
+    }
+    EXPECT_EQ(std::size_t(artifacts.size()),1+std::size_t(records.size())+primary);
+    if(tamper){const auto path=records[0].toObject()["raw_trials"].toArray()[0].toObject()["primary_ref"].toObject()["relative_path"].toString();
+        QFile file(QDir(directory.path()).filePath(path));ASSERT_TRUE(file.open(QIODevice::Append));ASSERT_EQ(file.write("0\n"),2);file.close();
+        EXPECT_THROW(DecodeNativeCompositeTrainingArchive(index,resolver),std::invalid_argument);}
+    if(duplicate){const auto before=CompositeFile(directory.path(),"composite-measurements/index.json");QJsonArray again;
+        EXPECT_THROW(NmsdkWorker::PublishNativeCompositeArchive(directory.path(),package,again),std::invalid_argument);
+        EXPECT_EQ(CompositeFile(directory.path(),"composite-measurements/index.json"),before);}
+}
+void PortableStreamCounters() {
+    const auto package=ActualPortablePackage<NNeuronTimeLearner>();const auto archive=DecodeNativeCompositeTrainingArchive(package["measurement_archive"].toObject());
+    QTemporaryDir directory;ASSERT_TRUE(directory.isValid());NmsdkWorker::EvidenceWriter stream(directory.path(),2);std::size_t trials=0,samples=0;
+    for(const auto& record:archive.Records())for(const auto& raw:record.rawTrials) {
+        ASSERT_TRUE(raw.packet);stream.Prepared(raw.prepared,raw.actual);for(const auto& sample:raw.samples){stream.Sample(sample);++samples;}
+        stream.Observation(*raw.packet);++trials;
+    }
+    EXPECT_EQ(stream.NativeTrials(),trials);EXPECT_EQ(stream.SampledFrames(),samples);const auto files=stream.Finalize(false);EXPECT_EQ(std::size_t(files.size()),trials*2);
+    const auto counters=package["measurement_archive"].toObject()["counters"].toObject()["attempt"].toObject();
+    EXPECT_EQ(stream.NativeTrials(),std::size_t(counters["native_probes"].toDouble()));EXPECT_EQ(stream.SampledFrames(),std::size_t(counters["sampled_frames"].toDouble()));
+}
+void PortableExecutionEnvelope(bool preflight) {
+    const QJsonObject base{{"kind",preflight?"timelearner_native_preflight_execution":"timelearner_native_training_execution"},
+        {"schema_version",1},{"execution",preflight?"completed":"training_start_failed"}};
+    const auto execution=NmsdkWorker::WrapNativeCompositeExecution(true,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0,preflight);
+    EXPECT_EQ(execution["schema_version"],QJsonValue(3));EXPECT_EQ(execution["base_schema_version"],QJsonValue(1));
+    EXPECT_EQ(execution["model_semantic_hash"],QJsonValue("actual-model"));EXPECT_TRUE(execution["source_origin"].isNull());EXPECT_TRUE(execution["measurement_archive"].isNull());
+    const auto counters=execution["composite_counters"].toObject();if(preflight){EXPECT_EQ(counters["attempt"].toObject()["logical_groups"],QJsonValue(0));
+        EXPECT_EQ(counters["archive"].toObject()["groups"],QJsonValue(0));}else{EXPECT_TRUE(counters["attempt"].isNull());EXPECT_TRUE(counters["archive"].isNull());}
+    EXPECT_EQ(NmsdkWorker::WrapNativeCompositeExecution(false,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0),NmsdkWorker::Signed(base));
+}
+}
+TEST(NativeCompositeConsoleArtifacts,ClassicAllPrimaryAndSidecarsMirrored){PortableArtifactMirror<NNeuronTimeLearner>();}
+TEST(NativeCompositeConsoleArtifacts,BranchAllPrimaryAndSidecarsMirrored){PortableArtifactMirror<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeConsoleArtifacts,TamperedExternalMirrorRejected){PortableArtifactMirror<NNeuronTimeLearner>(true);}
+TEST(NativeCompositeConsoleArtifacts,ExistingPrimaryNeverOverwritten){PortableArtifactMirror<NNeuronTimeLearner>(false,true);}
+TEST(NativeCompositeConsoleArtifacts,ActualAllNPlus2StreamCounters){PortableStreamCounters();}
+TEST(NativeCompositeConsoleArtifacts,PreflightKnownZeroAccounting){PortableExecutionEnvelope(true);}
+TEST(NativeCompositeConsoleArtifacts,FailedStartNeverInventsArchiveAccounting){PortableExecutionEnvelope(false);}
+
+
+namespace {
+template<class Owner> void ActualPortableCliJob(bool defaultSync) {
+    const auto package=ActualPortablePackage<Owner>();auto configuration=package["configuration"].toObject();
+    configuration["run_id"]=QString("cli-composite-%1%2").arg(NativeCompositeFixture<Owner>::branch?"branch":"classic",defaultSync?"-default-sync":"");
+    if(defaultSync){auto search=configuration["search"].toObject();auto tolerances=search["tolerances"].toObject();tolerances["sync"]=.02;
+        search["tolerances"]=tolerances;search["maximum_sweeps"]=1;configuration["search"]=search;}
+    const auto decoded=DecodeConfiguredNativeTraining(configuration);EXPECT_TRUE(decoded.composite);EXPECT_EQ(MakeConfiguredNativeTrainingPlan(decoded).protocol.schemaVersion,4u);
+    const auto job=NmsdkWorker::Signed({{"kind","timelearner_native_training_job"},{"schema_version",1},
+        {"owner_class",NativeCompositeFixture<Owner>::branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"},
+        {"implementation_id",CompositePackageImplementation},{"configuration",configuration},{"profile_archives",QJsonArray{package["neuron"]}},
+        {"optional_modes",QJsonObject{{"sync_capacitance_trim",0},{"post_train_tuning",false},{"auto_calibrate_threshold",false}}},
+        {"calculate_mode",1},{"structure_build_mode",1},{"maximum_model_ticks",240000}});
+    const auto name=NativeCompositeFixture<Owner>::branch?(defaultSync?"branch-default-sync-job.json":"branch-job.json"):
+        (defaultSync?"classic-default-sync-job.json":"classic-job.json");SavePortableObject("native-composite-cli-inputs",name,job);
+    EXPECT_EQ(job["configuration"].toObject()["model"].toObject()["inputs"].toArray()[0].toObject()["attachment"],QJsonValue(2));
+    EXPECT_EQ(decoded.search.tolerances.sync,defaultSync?.02:.2);
+    // The remote CLI must execute these actual profile/source declarations;
+    // writing a job is not evidence that Train/evaluate ran or converged.
+}
+}
+TEST(NativeCompositeConsoleJobs,ClassicActualProfileCold6Job){ActualPortableCliJob<NNeuronTimeLearner>(false);}
+TEST(NativeCompositeConsoleJobs,BranchActualProfileCold6Job){ActualPortableCliJob<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCompositeConsoleJobs,ClassicDefaultSyncMustNotBecomeExact){ActualPortableCliJob<NNeuronTimeLearner>(true);}
+TEST(NativeCompositeConsoleJobs,BranchDefaultSyncMustNotBecomeExact){ActualPortableCliJob<NNeuronTimeLearnerBranch>(true);}
