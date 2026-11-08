@@ -90,3 +90,24 @@ Worker owner PID/start совпадает с kernel binding, unit закрыт, 
 Все новые unit/native/pipeline проверки выполняются на серверах из Git-pushed
 source; локально только AST/static review. Общий runtime должен собираться из объединённого C++service+
 Python closure: старый compiled runtime не подтверждает поддержку cold6.
+
+
+## Подготовка полного primary transport
+
+Отдельный composite_primary проверяет embedded primary_blobs[SHA]={bytes,base64}
+и каждый primary_ref={relative_path,bytes,sha256}. Embedded bytes обязательны;
+если задан external resolver, каждая ссылка должна дополнительно дать те же
+bytes: отсутствие или mismatch не заменяются fallback из другого источника.
+Только точное множество referenced hashes, без скрытых/потерянных blobs;
+канонический base64, полный SHA и размер. Повтор одинаковых bytes в разных
+logical paths сохраняется. primary_bytes/materialized budget считает все
+logical primary_ref, включая одинаковый SHA в разных paths; unique stored bytes
+проверяются отдельно. Это согласовано с NativeCompositeRecordPrimaryBytes.
+
+Файлы переносятся в новый snapshot byte-for-byte. Traversal, альтернативные
+написания пути, case-collisions, file/directory conflicts и symlink ancestors
+не допускаются. Некорректный inventory не создаёт output; существующий каталог
+не переписывается. Проверки данного helper ещё pending. Storage integrity сама
+по себе не подтверждает геометрию, native execution, consumed event, source
+lineage или certificate2. Archive/index/record reader и package5 dispatch
+должны проверять их отдельно; helper не wired как готовый learned auditor.

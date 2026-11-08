@@ -1,12 +1,13 @@
 {
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
-  "suite_id": "composite-cold6-protocol4-declaration-and-condition-regression",
-  "package_fingerprint": "4da13b26bfa9e9c8611a76f14d0b4fee8dc76c915c73f8983744e96afbb0228f",
+  "suite_id": "composite-cold6-protocol4-primary-transport-and-condition-regression",
+  "package_fingerprint": "9b49875307898c82a24b6af169d3818060e5e1e3ea035639cc7de3d75184d363",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery",
-    "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition"
+    "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary"
   ],
   "expected_test_ids": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_each_base_is_a_private_lossless_view_and_original_identity_is_retained",
@@ -47,7 +48,19 @@
     "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_three_admitted_composite_diagnostic_fields_keep_condition_but_change_full_identity",
     "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_invalid_diagnostic_policy_never_gets_a_condition_id_by_stripping_first",
     "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_composite_operative_geometry_source_model_and_admission_stay_in_condition",
-    "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_composite_binding_keeps_binary_relocation_invariance_and_supplement_tamper_detection"
+    "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition.PipelineConditionTest.test_composite_binding_keeps_binary_relocation_invariance_and_supplement_tamper_detection",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_all_n_plus_two_distinct_files_survive_self_contained_roundtrip",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_supplied_resolver_is_additional_requirement_never_missing_blob_fallback",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_content_hash_size_and_exact_blob_inventory_are_required",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_noncanonical_and_malformed_base64_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_materialized_budget_counts_equal_content_at_each_declared_path",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_integral_counts_are_normalized_and_boolean_or_fractional_counts_fail",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_paths_cannot_escape_or_have_multiple_spellings",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_case_collisions_duplicate_paths_and_file_directory_aliases_fail",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_parent_or_file_symlink_never_supplies_primary",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_invalid_snapshot_inventory_creates_nothing_and_existing_output_is_unchanged",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_renaming_csv_changes_only_transport_name_and_does_not_rewrite_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_empty_stopped_inventory_remains_empty_without_fabricated_csv"
   ],
   "fixtures": {}
 }
