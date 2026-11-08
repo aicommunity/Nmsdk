@@ -111,6 +111,15 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     auto generator=learner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);ASSERT_TRUE(generator);
     ASSERT_EQ(learner->DendriteLength.GetData(),lengths);
     ASSERT_TRUE(neuron->template GetComponentL<NPulseMembrane>("Dendrite1_"+std::to_string(inputCount),true));
+    // A revision changes only if preparation changes semantic routing.  The
+    // declared-input override can already equal the initial one-hot routing.
+    std::vector<bool> initialBranchRouting;
+    if(branch)for(unsigned input=0;input<inputCount;++input)
+    {
+        auto synapse=neuron->template GetComponentL<NPulseSynapseCommon>(
+            "Dendrite1_"+std::to_string(inputCount-input)+".ExcSynapse1",true);
+        ASSERT_TRUE(synapse);initialBranchRouting.push_back(synapse->Input.IsConnected());
+    }
     int active=0;
     if(branch && inputCount>1)
     {
@@ -204,13 +213,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         }
         if(branch)
         {
-            if(inputCount>1)EXPECT_NE(declaration.effectiveModelRevision,base);
+            bool routingChanged=false;
             for(unsigned input=0;input<inputCount;++input)
             {
                 auto synapse=neuron->template GetComponentL<NPulseSynapseCommon>(
                     "Dendrite1_"+std::to_string(inputCount-input)+".ExcSynapse1",true);
                 ASSERT_TRUE(synapse);EXPECT_EQ(synapse->Input.IsConnected(),int(input)==active);
+                routingChanged=routingChanged || initialBranchRouting.at(input)!=(int(input)==active);
             }
+            EXPECT_EQ(readRevision(),declaration.effectiveModelRevision);
+            if(routingChanged)EXPECT_NE(declaration.effectiveModelRevision,base);
+            else EXPECT_EQ(declaration.effectiveModelRevision,base);
         }
     };
     request.onSample=[&](const NativeProbeSample& sample) {
