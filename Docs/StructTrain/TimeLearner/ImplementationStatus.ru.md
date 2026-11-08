@@ -328,3 +328,18 @@ Normal55 проверен на Elder; четыре связанные N2 гру�
 stop/edit controls не выдали assignment. Новый алгоритмический блок ещё не
 включён в NativeTrainingService/references/search/final certificate; ASan его
 кода выполняется отдельно от принятого fixture ASan34. Полные этапы6–8 открыты.
+
+
+Windows .14 завершил fresh compilation с return0, но build execution отклонён
+из-за одного оставшегося дочернего процесса; его identity не была записана.
+Все owned процессы закрыты;18 native tests не запускались, scientific worker
+не принят. [Первичные данные и независимая сверка](WindowsDomainBuildRejectionVerification.json)
+сохраняют CMakeCache, закрытый runtime inventory, логи и исходный отказ.
+Следующее действие — установить/проверить lifecycle build tools, не игнорировать
+remaining child и не перезапускать полную сборку вслепую.
+
+Новый [matched omission блок](https://github.com/aicommunity/Nmsdk/blob/2607b1b9e/Docs/StructTrain/TimeLearner/MatchedOmissionAssignment.ru.md)
+прошёл normal55 и native follow-up10 на Elder, а также ASan57 на M40.
+Положительные separated controls дали Valid; coupled — Ambiguous; stop/edit
+не создали assignment. Это selector/native-group, без подключения к обучению,
+independent Python replay и полного диапазона физических моделей.
