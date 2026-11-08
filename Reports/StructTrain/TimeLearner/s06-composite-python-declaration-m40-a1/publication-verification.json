@@ -1,0 +1,83 @@
+{
+  "kind": "composite_python_declaration_suite_acceptance",
+  "source_root": "241159242f7c90d46c426c1009e04c103e560822",
+  "tests": 39,
+  "source_files": 416,
+  "package_fingerprint": "4da13b26bfa9e9c8611a76f14d0b4fee8dc76c915c73f8983744e96afbb0228f",
+  "source_hashes_unchanged": true,
+  "lease": {
+    "token": "c69d4dbd-74a8-490e-a939-444535e85266",
+    "job_id": "s06-composite-python-declaration-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 2736779,
+      "start_ticks": "320860753",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-composite-python-declaration-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-composite-python-declaration-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-composite-python-declaration-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-composite-python-declaration-a1"
+      }
+    ],
+    "state": "released",
+    "created": 1794133410.0622814,
+    "deadline": 1794133530.0622814,
+    "updated": 1794133421.2336264,
+    "release_note": "Declared maintained validation CLI completed synchronously inside the owned worker cgroup; no native model or build executed",
+    "heartbeat_expired": true,
+    "owner_status": "missing",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "kernel_closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d3437eeca4644c80f35905e1a7ed5c6718f16f171643b8122b32bef7af7f6bd2",
+      "unit": "timelearner-d80ff1ce-dcf7-417a-a3a3-632fcff8b233.service",
+      "invocation_id": "9882cf9c6e834d6a98eede7d6597fb25",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-d80ff1ce-dcf7-417a-a3a3-632fcff8b233.service",
+      "initial_main_pid": 2736779,
+      "initial_start_ticks": "320860753",
+      "sha256": "cb73a8add931fadc4bc1d7b199dab4fcaf7e42ff75c12eabbe9efbd3867a58bc"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-d80ff1ce-dcf7-417a-a3a3-632fcff8b233.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "owner_identity_matches_binding": true,
+  "registered_managed_child_graph": false,
+  "production_validation_cli": true,
+  "cpp_builds": 0,
+  "model_calculations": 0,
+  "cold6_native_runtime_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

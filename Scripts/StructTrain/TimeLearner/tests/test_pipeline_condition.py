@@ -191,3 +191,67 @@ class PipelineConditionTest(unittest.TestCase):
         self.assertIsNone(binding["scientific_verdict"])
         condition = ConditionSpec.loads(json.dumps(binding["condition"]))
         self.assertFalse(condition.resolve(binding["artifacts"])["randomness_spec"]["independent_seed_replicates_attested"])
+
+    def composite_spec(self):
+        from .test_composite_configuration import configuration
+        spec=self.spec();cold=spec['phases'][0]['job']['configuration'];n=len(cold['model']['inputs'])
+        contract=configuration(n=n)['composite_measurement'];samples=cold['maximum_samples']
+        for role in ('context_policy','geometry_policy'):
+            contract[role]['maximum_samples']=samples
+            contract[role]['maximum_total_samples']=samples*(n+2)
+        contract['attempt_limits']['maximum_total_samples']=max(samples*(n+2),32000)
+        cold.update(base_schema_version=cold['schema_version'],schema_version=6,
+                    composite_measurement=contract,record_spikes=False,peak_selection='isolated_window',
+                    maximum_sample_gap=1/cold['model']['frequency_hz'])
+        return self.sign_train(spec)
+
+    def test_composite_binding_version_is_distinct_from_managed_pipeline_version(self):
+        spec=self.composite_spec();binding=self.binding(spec)
+        self.assertEqual(spec['schema_version'],2);self.assertEqual(binding['schema_version'],2)
+        self.assertEqual(self.binding()['schema_version'],1)
+        self.assertEqual(binding['supplementary_diagnostics']['role'],'diagnostic_only')
+        self.assertEqual(len(binding['diagnostic_only_paths']),3)
+        self.assertEqual(audit_binding(binding,spec,self.runtime()),binding['condition_fingerprint'])
+
+    def test_three_admitted_composite_diagnostic_fields_keep_condition_but_change_full_identity(self):
+        spec=self.composite_spec();original=self.binding(spec)
+        for field in ('comparison_radius_ticks','influence_absolute','influence_relative'):
+            changed=deepcopy(spec);context=changed['phases'][0]['job']['configuration']['composite_measurement']['context_policy']
+            context[field] = 2 if field=='comparison_radius_ticks' else .0001
+            binding=self.binding(self.sign_train(changed))
+            with self.subTest(field=field):
+                self.assertEqual(binding['condition_fingerprint'],original['condition_fingerprint'])
+                self.assertNotEqual(binding['pipeline_specification_sha256'],original['pipeline_specification_sha256'])
+                self.assertNotEqual(binding['supplementary_diagnostics_sha256'],original['supplementary_diagnostics_sha256'])
+
+    def test_invalid_diagnostic_policy_never_gets_a_condition_id_by_stripping_first(self):
+        spec=self.composite_spec();samples=spec['phases'][0]['job']['configuration']['maximum_samples']
+        for field,value in (('comparison_radius_ticks',0),('comparison_radius_ticks',samples),
+                            ('influence_absolute',float('nan')),('influence_relative',-1)):
+            changed=deepcopy(spec);changed['phases'][0]['job']['configuration']['composite_measurement']['context_policy'][field]=value
+            with self.subTest(field=field,value=value),self.assertRaises((EvidenceError,ValueError)):
+                self.binding(self.sign_train(changed))
+
+    def test_composite_operative_geometry_source_model_and_admission_stay_in_condition(self):
+        spec=self.composite_spec();original=self.binding(spec)['condition_fingerprint']
+        def window(c):c['windows'][0]['begin']+=.0001
+        def geometry(c):c['composite_measurement']['geometry_policy']['repeatability_absolute']*=2
+        def source(c):c['stimulus_profile']['amplitude']*=1.1
+        def model(c):c['model']['inputs'][0]['resistance']*=1.1
+        def baseline(c):c['composite_measurement']['context_policy']['baseline_absolute']*=2
+        def time(c):c['composite_measurement']['context_policy']['time_comparison_tolerance']=.01/c['model']['frequency_hz']
+        def repeat(c):c['composite_measurement']['context_policy']['repeatability_absolute']*=2
+        def probes(c):c['composite_measurement']['context_policy']['maximum_native_probes']+=1
+        for edit in (window,geometry,source,model,baseline,time,repeat,probes):
+            changed=deepcopy(spec);edit(changed['phases'][0]['job']['configuration'])
+            with self.subTest(edit=edit.__name__):
+                self.assertNotEqual(self.binding(self.sign_train(changed))['condition_fingerprint'],original)
+
+    def test_composite_binding_keeps_binary_relocation_invariance_and_supplement_tamper_detection(self):
+        spec=self.composite_spec();runtime=self.runtime();original=self.binding(spec,runtime)
+        for row in [runtime['executable'],runtime['app_ini'],runtime['compiler'],*runtime['resolved_libraries']]:
+            row['path']='/different/runtime/'+Path(row['path']).name
+        self.assertEqual(self.binding(spec,runtime)['condition_fingerprint'],original['condition_fingerprint'])
+        changed=deepcopy(original);changed['supplementary_diagnostics']['context_policy']['influence_absolute']=123.
+        with self.assertRaisesRegex(EvidenceError,'pipeline_condition_binding_changed'):
+            audit_binding(changed,spec,self.runtime())

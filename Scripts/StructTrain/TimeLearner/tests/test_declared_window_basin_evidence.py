@@ -184,6 +184,28 @@ class DeclaredWindowBasinEvidenceTest(unittest.TestCase):
             target=root/'declared-window-basin-diagnostic.json';target.write_bytes(encoded(record))
             self.assertTrue(audit_declared_window_basin_file(target)['geometry_recomputed'])
 
+    def test_file_api_rejects_invalid_group_json(self):
+        record,artifacts=fixture();raw=b'{not valid JSON}'
+        artifacts['group.json']=raw;record['witness_binding']['group']=reference('group.json',raw)
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            for name,data in artifacts.items():(root/name).write_bytes(data)
+            target=root/'declared-window-basin-diagnostic.json';target.write_bytes(encoded(record))
+            with self.assertRaises(EvidenceError):audit_declared_window_basin_file(target)
+
+    def test_file_api_rejects_rehashed_invalid_csv(self):
+        record,artifacts=fixture();portable=json.loads(artifacts['matched-witness.json'])
+        item=portable['traces'][0];name=item['relative_path'];raw=b'not,a,native,trace\n'
+        artifacts[name]=raw;item.update(bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+        group=json.loads(artifacts['group.json']);group['traces'][0]['sha256']=item['sha256']
+        for path,data,key in [('group.json',group,'group'),('matched-witness.json',portable,'portable')]:
+            data=encoded(data);artifacts[path]=data;record['witness_binding'][key]=reference(path,data)
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)
+            for name,data in artifacts.items():(root/name).write_bytes(data)
+            target=root/'declared-window-basin-diagnostic.json';target.write_bytes(encoded(record))
+            with self.assertRaises(EvidenceError):audit_declared_window_basin_file(target)
+
     def test_pre_event_geometry_is_replayed_but_never_promoted(self):
         # Deliberately synthetic packet/CSV evidence, not a physical native run:
         # source1 is made necessary for a vertex before its actual event.

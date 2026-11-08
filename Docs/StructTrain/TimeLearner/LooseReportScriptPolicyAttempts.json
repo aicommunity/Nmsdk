@@ -1,0 +1,68 @@
+{
+  "kind": "report_script_policy_attempt_history",
+  "schema_version": 1,
+  "tested_root": "91323406ce458186baa1fa19e19f7b2249b617e6",
+  "initial_root": "0ba1b84879677b4fb41cd98d9e99e335d8ca8964",
+  "original_a1_launch_results": [
+    {
+      "role": "m40",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 4, in <module>\r\n  File \"<production unittest API glue>\", line 51, in <module>\r\nTypeError: Reservations.release() missing 1 required keyword-only argument: 'note'\r\n",
+      "driver_raw_sha256": "5f5ebd9ea05367ab2b0b807159a9ef377a095743e39ed322307cf4ff1d7b9a1b"
+    },
+    {
+      "role": "elder",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\r\n  File \"<stdin>\", line 4, in <module>\r\n  File \"<production unittest API glue>\", line 51, in <module>\r\nTypeError: Reservations.release() missing 1 required keyword-only argument: 'note'\r\n",
+      "driver_raw_sha256": "c3d1fa2170852c19b11cf35b23bffc593febb217ece7862297e51150c6115df0"
+    }
+  ],
+  "observed_a2_bootstrap_failure": {
+    "scope": "both hosts before worker/unit/lease start",
+    "observed_stderr": "TypeError: a bytes-like object is required, not str; /proc/stat bytes split with string delimiter",
+    "source": "operator tool observation; failed bootstrap did not persist its own stdout/stderr file",
+    "adoption": "existing prepared supervisor bytes were hash-verified, worker/output/log absent; first compute dispatched once; no model/test rerun"
+  },
+  "administrative_reconciliation": [
+    {
+      "role": "m40",
+      "returncode": 0,
+      "stdout": "{\"case\": \"report-policy-own-controller-a1-m40-20261108\", \"token\": \"b8352fbe-3458-4cad-9911-9fd6f5086f3c\", \"state\": \"released\", \"receipt\": \"/media/user/Data/TimeLearnerRefactor/readbacks/admin-reconcile-report-policy-own-controller-a1-m40-20261108\", \"committed\": true, \"other_rows_unchanged\": true, \"schema_metadata_unchanged\": true}\r\n",
+      "stderr": "",
+      "admin_source_sha256": "5db8eda5ef0046854fa5f49f2f27ae61e86bf3770e9f4f6b89e3bb50a07ee94f"
+    },
+    {
+      "role": "elder",
+      "returncode": 0,
+      "stdout": "{\"case\": \"report-policy-own-controller-a1-elder-20261108\", \"token\": \"a028caae-2ef5-4dda-9b9b-0f15042deb99\", \"state\": \"released\", \"receipt\": \"/home/user/timelearner-refactor/readbacks/admin-reconcile-report-policy-own-controller-a1-elder-20261108\", \"committed\": true, \"other_rows_unchanged\": true, \"schema_metadata_unchanged\": true}\r\n",
+      "stderr": "",
+      "admin_source_sha256": "5db8eda5ef0046854fa5f49f2f27ae61e86bf3770e9f4f6b89e3bb50a07ee94f"
+    }
+  ],
+  "collector_attempts": [
+    {
+      "result": "failed_before_primary_archive",
+      "reason": "collector assumed binding.json instead of supported inspect API",
+      "action": "fixed metadata collector only; no test rerun"
+    },
+    {
+      "result": "refused_existing_empty_staging",
+      "reason": "first failed collector had already created its staging directory",
+      "action": "left untouched; used fresh p2 staging"
+    }
+  ],
+  "git_creation_diagnostic": {
+    "worker": "elder",
+    "returncode": 0,
+    "stderr": "error: invalid object 100644 431b0ff098d688ec3e937a95744c0260547b08b6 for 'Docs/Audit/TimeLearner-2026-09-22/after-fixes/py/counterexamples.json'",
+    "independently_verified_commit_scope": "exactly three new report artifact blobs; every preexisting tree entry retained",
+    "original_collector_declared_clean": false
+  },
+  "original_failures_reclassified": false,
+  "tests_rerun_for_publication": 0,
+  "models_run": 0,
+  "production_recovery_api_weakened": false,
+  "whole_plan_complete": false
+}

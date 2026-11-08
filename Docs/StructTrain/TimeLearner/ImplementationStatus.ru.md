@@ -1,6 +1,49 @@
 # Состояние реализации TimeLearner — 08.11.2026
 
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
+
+08.11: механическое выделение общего контроллера принято на M40:97/97
+(74 bounded +23 Final/Clock). Ошибочная постановка A1 сохранена в Git отдельно.
+Новый core143 A1 остановлен при компиляции до тестов; исправленный A2 принят
+на M40:143/143, включая46 actual native core cases. Raw exports/independent replay
+и интеграция service/package/CLI этой проверкой не подтверждаются.
+[Точные commits, handles и receipts](TypedCompositeTrainingJobs.json).
+Service/codecs/CLI остаются незавершённой интеграцией.
+[Composite206: после исправления декларации Elder A3 прошла 12 service cases
+и выявила потерю уведомления об отменённой пробе. Исправление подготовлено
+в Root `cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237` / Pulse
+`88ea9c7ab3583da601b1f01ec84bf6f122875a34`; приёмка всех248 проверок ещё впереди.
+Отдельная ASan-сборка на M40 прошла, затем выполнены13 случаев:12 passed,
+один failed,235 не запускались. Обе исходные PreparedStop проверки прошли.
+`BranchLastCompositeSinkCannotCrossRealGroupDeadline` не достигла last-final
+callback (`slept=false`,elapsed0): нужный сценарий пересечения deadline после
+callback не подтверждён, требуется диагностика более раннего завершения.
+Все14 групп закрыты; [полный отрицательный артефакт независимо проверен](CompositeCancellationM40A1IndependentVerification.json).
+Запущены две отдельные диагностические проверки без sleep, с исходным
+инженерным group budget300s и записью реального времени каждой фазы. Rootf8f /
+Pulse88; живой PID/invocation/start ticks подтверждены ядром ОС. Физика
+и допуски не меняются; полный248 не повторяется до выяснения причины.
+В скопированной inventory-декларации
+обнаружен старый root SHA; raw-файл сохраняется, actual source closure
+проверена отдельно. Это требует явной errata и независимого Git-derived
+inventory; согласованность production preparation пока не принята.
+[Обнаруженные ошибки и обязательное исправление подготовки](NativePreparationMetadataReview-20261108.ru.md).
+M40 ASan206 на предыдущем pin:143 passed,1 failed,62 не запускались;
+ошибка декларации протокола подтверждена, исходники и57 закрытых групп
+независимо проверены. [Квитанция](M40CompositeArchiveA2NegativeVerification.json).
+Windows пока не допущена к SDK-прогонам
+из-за остающегося дочернего процесса сборки](CompositeArchive206AttemptStatus.ru.md).
+Новые шесть native-архивов пока не получены; Python-проверка их чтения
+ещё не выполнена.
+Python wire67 и collector39 прошли совместную проверку106/106 на M40,
+без ошибок и пропусков. Проверены621 Scripts file и433 Python files
+относительно Git; исходники и fixture bytes неизменны.
+[Независимая квитанция106](WireCollectorCombined106M40A1Verification.json),
+[контракт коллектора](CollectorProvenanceContract.ru.md).
+Эти проверки не подтверждают native-архивы, Train → Test или научную разделимость.
+[Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
+готов для14 технических групп; он не заменяет научную матрицу классификации.
+
 Полный объём сохраняется в [плане](RefactoringPlan.ru.md). Технический PASS,
 merge и научная разделимость — разные утверждения; 8/8 не является условием
 завершения. Эта страница содержит текущую сводку; промежуточный журнал сохранён в Git. Исторические попытки
@@ -246,7 +289,7 @@ runtime/effective-factor matrix этим не закрывается.
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration242:240 retired+2 moved; последние16 LTZ drivers приняты обоими серверами без wrappers|Остаются18 AsymRm Python и прочие инструменты; ограниченный path/suffix inventory не равен полному глобальному inventory|
+|9. Скрипты|Корневой пакет и CLI работают; migration354:352 retired+2 moved.109 historical Reports source snapshots удалены с проверенным Git retrieval, остальные Reports blobs сохранены|Остаются связанные инструменты Bin, включая активный анализ и старую матрицу;127 распознанных Bin script paths включают также общие project/build tools. Нужны semantic review/перенос действующих функций, удаление исторических entrypoints и проверка callers; complete=false|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
@@ -272,7 +315,7 @@ runtime/effective-factor matrix этим не закрывается.
 [capabilities](ControllerCapabilities.ru.md),
 [parameter contracts](ParameterControlContracts.ru.md),
 [readiness](ExperimentReadiness.ru.md). Полная lifecycle/storage/growth и
-legacy/V2 матрица остаётся открытой. Migration242 (240 retired+2 moved) не равна
+legacy/V2 матрица остаётся открытой. Migration245 (243 retired+2 moved) не равна
 всему inventory; остаются18 AsymRm Python и другие инструменты. Полная scheduler,
 recovery, publication fault matrix и effective-factor attestation не закрыты.
 Компонентные страницы PulseLib актуализированы.
@@ -335,8 +378,8 @@ final verification, полный composite export/import и научная ма�
 Последняя полная компиляция root818dd80/Pulse3accbed вернула0, но штатный
 backend отверг запуск из-за дочернего процесса неизвестной identity.
 [Сохранённый отказ](https://github.com/aicommunity/Nmsdk/blob/6a98929759d0af8fcdc2f1fc980e9e7ca467e942/Docs/StructTrain/TimeLearner/WindowsDomainBuildRejectionVerification.json)
-не отменён: новые18 portability checks ещё не стартовали, scientific worker
-не принят. Последующая короткая проверка quiescent build имеет отдельный
+не отменён; scientific worker не принят. Новые18 portability checks теперь
+выполняются отдельным A6, описанным ниже. Последующая короткая проверка quiescent build имеет отдельный
 результат и не переписывает этот отказ. Пользовательский C:/Projects/Nmsdk
 в эти изменения не включён.
 
@@ -367,19 +410,18 @@ VS ENV flag и отдельная256MiB quota только для warm/no-op д�
 единственной причины прошлых descendants и не scientific worker admission.
 [Квитанция A5](WindowsDomainBoundedBuildA5Verification.json).
 
-18 native portability gates ещё не запущены: чтение свободной physical memory
-показало690614272 bytes, а подготовленный профиль требует3GiB+256MiB reserve.
-Чужие приложения не останавливались. Проверки загрузки DLL, наблюдений и моделей
-на текущем root818/Pulse3acc остаются следующим отдельным шагом. FCC matched
-implementation этой Windows сборкой не проверялась.
-
-
-[Подготовленное задание Windows18](WindowsDomainNative18PreparedManifest.json)
-фиксирует18 test IDs, compiled source/runtime SHA, cooperative capture и лимиты.
-Это декларация следующей проверки, не результат и не действующий общий Windows
-CLI. Перед запуском требуется свежий штатный runtime/resource preflight;
-отдельного разрешения пользователя на уже согласованный объём не требуется.
-
+18 native portability checks запущены отдельным A6 после свежего preflight:
+свободная RAM10915479552 bytes,57 прежних owned JobObjects отсутствуют,
+source/runtime818dd80/Pulse3accbed совпали с accepted warmA5.
+[Точное задание Windows18](WindowsDomainNative18PreparedManifest.json)
+содержит task/worker/plan identity,18 test IDs, cooperative DLL capture и лимиты
+3GiB+256MiB reserve. Все18 cases приняты:9 JobObjects закрыты,423 actual module
+records,20 source hashes и4 independent reader checks проверены.
+[Квитанция](WindowsDomainNative18Verification.json),
+[адресный отчёт](WindowsDomainNative18Acceptance-20261108.ru.md).
+Повторной сборки и обновления исходников/runtime не было, пользовательский
+C:/Projects/Nmsdk не затронут. Это отдельный portability gate прежнего снимка,
+не FCC/matched implementation и не общий scientific worker admission.
 
 ## Portable witness и single-owner setter: подготовка 8 ноября
 
@@ -400,7 +442,7 @@ runtime acceptance.
 для native-owned модели. Прежнее значение возвращает true без child writes;
 изменение отклоняется. Legacy N0/N1 сохраняют прежнюю семантику. Подготовлены10
 real-storage ownership/lifecycle/import cases, включая zero-packet ExternalStop
-frozen diagnostic import без фиктивного сертификата; отдельный ASan gate выполняется.
+frozen diagnostic import без фиктивного сертификата; все10 прошли на M40/ASan.
 [Контракт и ограничения](NormalizationPropertyContracts.ru.md).
 
 ClDesc двух learner в Bin918ae5e уточнены: Step — абсолютное сопротивление
@@ -416,9 +458,12 @@ core.worktree-привязка только новой копии. Две соз
 [Operation receipt](TimeLearnerBinWorktreeBindingCorrection.json).
 
 Новый отдельный ASan job `s07-native-step-m40-a1` использует root4bfab020,
-Pulse2c3eb8d/Bin918ae5e: план90 C++/43 Python, Python уже прошли,
-сборка выполняется. Kernel binding подтверждён; источник и ресурсы этого job
-заморожены. Проверки прежних снимков не переносятся автоматически на guard.
+Pulse2c3eb8d/Bin918ae5e: все90 C++/43 Python приняты;28 CSV A/B совпали.
+[Independent receipt](NativeResistanceStepAndCodecM40A1Verification.json)
+подтверждает29 source hashes, actual loaded files,327 resource files по Git,
+неизменность обоих runtime и16 kernel/lease closures. Сохранены11 исходных
+operational needs_review и22 notices; научного PASS из них не создавали.
+Проверки прежних снимков не переносились автоматически на guard.
 Исходные этапы1–12 и научная матрица остаются частично выполненными;
 только этап0 полностью принят.
 
@@ -444,3 +489,154 @@ operational needs_review и двадцать provenance notices сохранен
 остаточном влиянии на позднюю. [Уточнённая семантика и ограничения следующего
 метода](PeakAssignmentClarification-2026-11-08.ru.md) исключают автоматическое
 применение influence-exclusive v1 как Train-критерия.
+
+## Следующий измеритель закреплённого пика: код подготовлен
+
+Подготовленный geometry-only модуль `DeclaredWindowBasinAssignment` прошёл
+36/36 в normal и36/36 с ASan на M40: Pulse
+`fce3cdf01db0c883b7f3b03045094f2580f9e981`, root
+`3c2ae1fd696462dad4677a795a05db80f5bac93d`.
+[Независимая квитанция](DeclaredWindowBasinPureM40A2Verification.json).
+Первая попытка34/35 сохранена: исходный пример задавал rising shoulder вместо
+пересекающей границу вершины. Исправлены только тестовые данные, алгоритм не
+менялся; исходная форма стала отдельным положительным тестом.
+[Сохранённый отрицательный gate](DeclaredWindowBasinPureM40A1NegativeVerification.json).
+
+Численные проверки использовали отдельный небольшой harness с настоящими
+production translation units; это не приёмка полного root CMake target/SDK.
+Prep-only controller A2 содержал старую метку root236; actual prepared Git3c2,
+оба численных controller/runtime3c2 и source hashes проверены, mismatch сохранён.
+Локальных сборок и численных tests не было.
+
+Правило использует фиксированное для одной группы объявленное окно и реальные
+вершины полной записи, без разностного максимума и без global veto от отдельной
+поздней вершины вне окна. Слитая вершина и неопределённые локальные кандидаты
+не превращаются в успех. [Контракт](PeakAssignmentClarification-2026-11-08.ru.md)
+сохраняет предел причинной интерпретации: geometry API не проверяет native
+context и не создаёт Train evidence/certificate.
+
+Механическое выделение общего context validator (Pulse8ee/root666) прошло
+71/71 normal и71/71 ASan: [receipt](MatchedContextMechanicalM40A1Verification.json).
+Это pure harness, отдельно от SDK/native. После его приёмки запущен реальный
+SDK140 на immutable663/c3: сборка завершена,43 Python и129 C++ прошли,
+один из130 исполненных cases упал;10 остальных не запускались. Причина —
+fixture требовал effective revision != base даже при уже нужной Branch routing.
+Пик и13 tamper checks этого case прошли; исходный terminal=false сохранён.
+Применён отдельный root-only fix51566b2: реальный полный connection readback и
+равенство/неравенство revision по факту изменения routing. Production physics
+и selector не менялись. После forensic capture и Git-публикации первой попытки отдельный A2 прошёл
+все140 C++ и43 Python. [Квитанция](NativeDeclaredWindowBasinBridgeM40A2Verification.json)
+подтверждает8 valid/2 ambiguous/4 partial native records, все31 kernel closures,
+реальный root CMake/SDK build,36 source hashes,327 resources,28 CSV A/B byte-equal.
+Это принимает native diagnostic bridge, не полный Train pipeline.
+[Отрицательный A1](NativeDeclaredWindowBasinBridgeM40A1NegativeVerification.json)
+остаётся129PASS/1FAIL/10not-run. Его4 failures относятся к одному case207;
+содержимое первичных данных не исправлялось.
+
+Независимый reader1de на M40 прошёл22/23: файловый загрузчик ошибочно разбирал
+CSV как JSON. [Отказ](DeclaredWindowBasinReaderM40A1NegativeVerification.json)
+сохранён;14 actual replays не выполнялись. Подготовлен исправленный readerf71:
+25 unit tests, затем14 actual records, без новых запусков моделей.
+[Точные attempts/bindings](NativeDeclaredWindowBasinJobs.json).
+Typed Train integration остаётся следующим обязательным шагом. Старый v1 и
+исторические результаты не переоцениваются.
+
+## Компактная публикация и оставшаяся миграция
+
+Принят запрет новых loose executable scripts/build launchers в artifactsets
+`Reports/StructTrain/TimeLearner`:32/32 real-Git tests на каждом Linux worker.
+Проверка исторических commit остаётся read-only; новые stage/publish отказывают
+до add/push. Модели, primary archives, метрики и выбранные рисунки разрешены.
+[Контракт](LooseReportScriptPolicy.ru.md), [receipt](LooseReportScriptPolicyVerification.json).
+Исходные неуспешные тестовые/служебные попытки сохранены; точечная операторская
+починка двух собственных legacy controller leases не ослабила recovery API.
+
+Миграция manifest354 принята:352 retired+2 moved. Удалены109 historical
+RootReports Python snapshots; оба worker проверили production history CLI354
+и отказ восстановленного пути. Все86126 остальных Reports blobs сохранены;
+[отчёт](RootReportSnapshotRetirement.ru.md),
+[receipt](RootReportSnapshotRetirementVerification-20261108.json).
+В поддерживаемом Reports prefix loose scripts больше нет; полный этап9 открыт
+из-за оставшихся Bin tools/анализаторов и сквозной приёмки миграции.
+
+
+Независимый readerf71 теперь принят отдельной попыткой A2:25/25 unit и14
+actual record audits по неизменным primary SDK140 A2. Для10 полных групп
+геометрия пересчитана независимо:8 valid и2 ambiguous;4 partial не получили
+доказательства полноты или восстановленной причины отказа. Новых model runs
+не было, старые отказы сохранены. [Receipt](DeclaredWindowBasinReaderM40A2Verification.json),
+Git evidence `bcc46e7d797890b47214a866085f5f71027b5c5b`. Один diagnostic
+отсутствующего Docs blob при подготовке Python-проекции сохранён как needs_review;
+413 используемых Python-файлов проверены по Git до/после. Это подтверждение
+Python replay, а не full SDK source-materialization acceptance или Train certificate.
+
+
+Попытка mechanical A1 собрана, но не принята: подготовленный regex-перечень
+ошибочно включил тело `TEST(TrainingInvalidBudget,name)` как отдельный тест и
+пропустил четыре развёртки макроса. Реально выполнены59 успешных случаев,
+assertion failures0; ожидаемый набор не совпал, worker корректно остановился.
+Фактическая регрессионная матрица —74 BoundedTraining +23 Final/Clock =97,
+а вместе с новым composite46 —143. A1 закрыт, lease освобождён; before/after
+отрицательный capture сохранён. A2 запущен на тех же b145/474 без изменения
+алгоритмов, с точными четырьмя macro IDs и обязательным сравнением с
+`--gtest_list_tests` скомпилированного binary. Ранние ссылки на94/71 обозначают
+ошибочную постановку A1, а не принятую полноту.
+
+
+Mechanical A2 принят:97/97 (74 bounded +23 Final/Clock), actual compiled
+inventory проверен до исполнения;9 native groups +outer закрыты, lease released.
+Git evidence `917b94627c1290517c61774698b16c01995c849c`,
+[независимая проверка](TypedCompositeMechanicalM40A2Verification.json):299
+архивных members,3050 materialized source/resource hashes по Git,75 actual
+loaded files по runtime ledger. Исходный отказ A1 сохранён на сервере с
+postclosure capture; его отдельная Git-публикация ещё ожидается.
+Новый composite core27ba/269 запущен отдельно:143 ожидаемых случая (97+46).
+Результат ещё не принят; service/codecs/CLI и научная матрица не закрыты.
+
+
+Отрицательная mechanical A1 опубликована `da7edb57345de7eb45bb2446a56cefe7d74d4448`:
+188 архивных members,59 реально успешных тестов,38 требуемых случаев не
+исполнены; исходный отказ полноты сохранён. [Receipt](TypedCompositeMechanicalM40A1NegativeVerification.json).
+Composite143 A1 не собран (0 tests): выявлено ограничение константного `UEPtr`,
+а не отсутствие полного типа нейрона; первоначальная include-гипотеза пересмотрена.
+A2 d920/e183 меняет boundary-вызовы на штатный `.Get()` и один fixture-вызов,
+не меняя математику. Полный протокол компиляции A1 сохраняется отдельно.
+
+
+Composite compile A1 опубликован отдельной origin-веткой
+`codex/timelearner-composite-core-compile-a1-evidence`, commit
+`74ee40501aba6d53da318027027aa59f613d5056`:
+[receipt](CompositeCoreM40A1NegativeVerification.json).44 members,3056 frozen
+source hashes проверены по Git;0 тестов и0 model runs. Preset-флаг original
+terminal `new_composite_protocol_exercised=true` сохранён как исходная
+декларация, но observed execution=false. Отказ не объединяется с maintained
+кодом до приёмки исправленного feature: его parent27ba содержит некомпилируемую
+версию269. Все артефакты уже доступны в origin без переноса этой ошибки в код.
+Повторная d920/e183 собрана;97 регрессионных тестов прошли, первый новый
+Classic capture/search/final также прошёл. Остальная46-матрица ещё выполняется.
+
+
+Перед полной приёмкой структурного поиска открыт
+[контроль области действия окна кандидата](CandidateWindowScopeReview-20261108.ru.md):
+нынешние protocol4 окна фиксированы на всю попытку. Fixed-L fixtures не доказывают
+поддержку смещения закреплённого пика за начальное окно при росте L. Адресная
+проверка/явная policy ещё нужны; прогноз задержки не заменяет измерение.
+Параллельно на .14 подготовлены неизменяемые Git donors service/declaration
+кандидата57e/661 (будущая матрица179), [delivery receipt](WindowsCompositeServiceSourceDelivery-20261108.json).
+Сборка и тесты новой версии на .14 ещё не запускались; прежний source cache
+и пользовательский C:/Projects/Nmsdk не менялись.
+
+
+M40 core143 приёмка опубликована `d31a6b80ff2c3b665a80ef3f93b4a42a2d8752d0`:
+[receipt](TypedCompositeCoreM40A2Verification.json), Rootd920/Pulsee183 теперь
+объединены в maintained ветку. Полный compile A1 failure также объединён после
+исправленного PASS, исходный отрицательный verdict сохранён.
+Elder duplicate FetchContent cleanup опубликован
+`a991a4824c97349e54767c8d641741ac1790d218`:
+[receipt](ElderDuplicateFetchcontentRetentionA1Verification.json), net freed
+1,365,618,688B, свободно после операции1,853,362,176B. Сохранена автономная
+копия dependency trees; проектный код/модели/научные primary не удалялись.
+Новый source206 d433/f925: на Elder начался normal compile/runtime gate,
+на Windows выполняется только compile/link. До полного результата их допуск
+не заявляется. Отдельная mechanical05fa/81 scalar-path проверка предшествует
+следующему portable math replay214; она не подменена этими206.

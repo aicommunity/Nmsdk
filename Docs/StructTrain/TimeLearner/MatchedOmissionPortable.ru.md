@@ -66,8 +66,11 @@ fixture groups, 28 CSV побайтно совпали с прежними пе�
 сохранён. Независимая post-closure проверка подтвердила все результаты и
 неизменность runtime/resources: [receipt](MatchedOmissionCodecM40A1RecoveryVerification.json).
 Он не включает три дополнительных complete negative cases и новый setter guard.
-Новый отдельный ASan gate содержит 90 C++/43 Python, включая десять ownership
-controls; его приёмка ещё ожидается. Эти подэтапы не завершают этапы 5–8,
+Новый отдельный ASan gate прошёл все90 C++/43 Python, включая десять ownership
+controls и три дополнительных complete negative outcomes.
+[Independent receipt](NativeResistanceStepAndCodecM40A1Verification.json)
+связывает точный source и primary; исходный terminal=true, все16 kernel groups
+закрыты и lease released. Эти подэтапы не завершают этапы 5–8,
 полную матрицу или научное обучение. Метод v1 остаётся диагностическим и
 не удовлетворяет автоматически уточнённой цели Train.
 

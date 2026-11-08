@@ -1,0 +1,76 @@
+{
+  "kind": "declared_window_basin_pure_normal_asan_pass",
+  "schema_version": 1,
+  "root": "3c2ae1fd696462dad4677a795a05db80f5bac93d",
+  "pulse": "fce3cdf01db0c883b7f3b03045094f2580f9e981",
+  "expected_cases_per_mode": 36,
+  "modes": [
+    {
+      "job": "s07-declared-window-basin-pure-normal-m40-a2",
+      "mode": "normal",
+      "tests_observed": 36,
+      "passed_cases": 36,
+      "failed_test_ids": [],
+      "junit_sha256": "49cdb5eb55447c5ef5e09a214596be6a4acc60a5aa0eafa3d13919d3578cf378",
+      "process_returncode": 0,
+      "actual_loaded_files": 18,
+      "original_after_snapshots_absent_due_to_pass_assertion": [],
+      "postclosure_runtime_matches_original_before": true,
+      "postclosure_prior90_matches_original_before": true,
+      "postclosure_source_matches_original_before": true,
+      "failures": []
+    },
+    {
+      "job": "s07-declared-window-basin-pure-asan-m40-a2",
+      "mode": "asan",
+      "tests_observed": 36,
+      "passed_cases": 36,
+      "failed_test_ids": [],
+      "junit_sha256": "172c75ee37429eede790d534b2ffd1a8df5b937a46d9fd49d4f52c12ebf3f792",
+      "process_returncode": 0,
+      "actual_loaded_files": 19,
+      "original_after_snapshots_absent_due_to_pass_assertion": [],
+      "postclosure_runtime_matches_original_before": true,
+      "postclosure_prior90_matches_original_before": true,
+      "postclosure_source_matches_original_before": true,
+      "failures": []
+    }
+  ],
+  "source_preparation_passed": true,
+  "prep_only_controller_label_mismatches_preserved": [
+    {
+      "job": "s07-declared-window-basin-source-prep-m40-a2",
+      "original_controller_declared_root": "236f1acbe978e645774cd96b10503bbe0d56fbd9",
+      "actual_git_source_root": "3c2ae1fd696462dad4677a795a05db80f5bac93d",
+      "numeric_execution": false,
+      "original_metadata_preserved": true
+    }
+  ],
+  "numeric_controllers_and_native_runtime_source_pins_match": true,
+  "native_cases_observed_total": 72,
+  "native_passed_cases_total": 72,
+  "native_failed_cases_total": 0,
+  "distinct_failing_test_ids": [],
+  "predecessor_negative_evidence_commit": "284879d5a7887198eebb4a53a15fa9d48399642b",
+  "fixture_fix_scope": "Root fixture-only correction; Pulse production algorithm unchanged; original shoulder is a separate positive case; crossing plateau remains negative",
+  "postclosure_snapshots_confirm_original_after_snapshots": true,
+  "original_worker_terminals_reclassified": false,
+  "new_build_or_test_execution_during_collection": false,
+  "compiled_translation_units": [
+    "Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp",
+    "Tests/Integration/Support/ProbeAlgorithmMain.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/DeclaredWindowBasinAssignment.cpp"
+  ],
+  "harness_sha256": "4edb1784b81b6fe06e866a2ad9123cc7bdd280005704f9dd5c8e2f0f83ac1692",
+  "production_root_cmake_blob_sha256": "8e480954a223a2ff0360fa138fccfd92184ed391424f301ff20ffd3934d8efff",
+  "unused_gitlinks_materialization": "standalone exact-commit tree metadata, empty sparse working tree, no alternates",
+  "full_root_cmake_integration_accepted": false,
+  "sdk_source_payload_or_build_validated": false,
+  "native_context_validated": false,
+  "training_certificate_eligible": false,
+  "asan_options": "detect_leaks=0",
+  "leak_check_claimed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

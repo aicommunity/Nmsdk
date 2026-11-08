@@ -306,16 +306,18 @@ def audit_declared_window_basin_file(path):
     try: path = Path(path).resolve(); record = load(path); artifacts = {}
     except EvidenceError: raise
     except (OSError,TypeError,ValueError) as error: raise EvidenceError('missing_or_malformed_declared_basin_record') from error
-    def read(name):
+    def capture(name):
         name = _relative_path(name); source = (path.parent/name).resolve()
         require(source.is_relative_to(path.parent), 'basin_artifact_escapes_directory')
         require(name not in artifacts, 'basin_duplicate_artifact_reference'); artifacts[name] = source.read_bytes()
-        return parse_json_bytes(artifacts[name])
+        # The immutable snapshot contains both JSON envelopes and CSV traces.
+        # Parse by the declared role; never treat every referenced file as JSON.
+        return artifacts[name]
     try:
-        group = read(record['witness_binding']['group']['relative_path'])
+        group = parse_json_bytes(capture(record['witness_binding']['group']['relative_path']))
         portable = record['witness_binding']['portable']
-        if portable is not None: read(portable['relative_path'])
-        for item in group['traces']: read(item['path'])
+        if portable is not None: capture(portable['relative_path'])
+        for item in group['traces']: capture(item['path'])
         return audit_declared_window_basin_evidence(record,artifacts)
     except EvidenceError: raise
     except (KeyError,TypeError,ValueError,AttributeError,OSError) as error:
