@@ -56,10 +56,13 @@
     "NativeCompositeTraining.BranchDirectDataStopDuringNativeGroup"
   ],
   "native_test_source_sha256": "fc4ee150f61226f29ba4b30c974a4e0d5ff5e243e2d8f91c14278b0446ffea54",
-  "required_old_bounded_cases": 71,
+  "required_old_bounded_cases": 74,
   "required_old_final_cases": 23,
   "scope": "Prepared live core native integration; codecs/service composition and scientific acceptance remain separate.",
-  "pulse_feature_commit": "269164d2a2339908a8667e859a04a8e81da50c3c",
+  "pulse_feature_commit": "dafbb2133f989963cf8e536b91d73d61a03e4ec3",
   "pulse_mechanical_commit": "474df05b714415057bbcb4692ce224621ae55ac0",
-  "root_mechanical_commit": "b1457e7e0ae7a63c6aba7599b4189e9465a32e77"
+  "root_mechanical_commit": "b1457e7e0ae7a63c6aba7599b4189e9465a32e77",
+  "required_old_regression_cases": 97,
+  "total_required_cases": 143,
+  "inventory_correction": "Expand four ATTEMPT_INVALID_BUDGET_TEST invocations and exclude macro-body placeholder; crosscheck compiled gtest inventory."
 }
