@@ -94,9 +94,9 @@ lease освобождён, evidence сохранён; полная ASan-при�
 измеренные вершины и signed offsets, отклоняет общую вершину/плато и явно
 не допускает `Hypothesis` к сертификату обучения. ASan здесь проверяет
 utility, а не весь SDK. [Контракт, receipts и подробная подготовка native bridge](ResponseDomainAssociation.ru.md).
-Следующий шаг — связать штатные onPrepared/onSample/result с portable
-evidence и независимым reader; затем отдельно принять метод происхождения
-отклика. Эксклюзивность временного окна сама этого не доказывает.
+Связка штатных onPrepared/onSample/result с portable evidence и независимым
+reader описана ниже. Следующая алгоритмическая задача — отдельно принять
+метод происхождения отклика. Эксклюзивность временного окна сама этого не доказывает.
 
 Связка native capture/portable codec/reader подготовлена и прошла normal-проверку:
 10 integrity/codec checks и4 настоящие Classic/Branch пробы на2000/20000 Гц;
