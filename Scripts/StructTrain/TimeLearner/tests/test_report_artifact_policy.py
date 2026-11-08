@@ -4,6 +4,7 @@ import base64
 import hashlib
 import json
 import lzma
+import os
 import unittest
 
 from . import test_publisher as fixtures
@@ -56,6 +57,9 @@ class ReportArtifactPolicyTest(unittest.TestCase):
                      *((folder/name).as_posix() for name in inventory))
         if executable is not None:
             fixtures.git(self.root, 'update-index', '--chmod=+x', (folder/executable).as_posix())
+            if os.name != 'nt':
+                path = self.root/folder/executable
+                path.chmod(path.stat().st_mode | 0o111)
         fixtures.git(self.root, 'commit', '-m', 'record explicit artifact fixture')
         self.spec['schema_version'] = 2
         self.spec['artifacts'] = [{'repository': '.', 'manifest': manifest, 'manifest_sha256': digest}]
