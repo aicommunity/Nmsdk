@@ -2,7 +2,7 @@
 
 Это source-only перенос двух связанных аудиторов из Bin. Серверные проверки
 ещё не выполнялись; старые entrypoints пока не удалены. Точное происхождение,
-caller search и список 29 подготовленных тестов находятся в
+caller search и список 30 подготовленных тестов находятся в
 [DeclaredTimeScalePortPreparation.json](DeclaredTimeScalePortPreparation.json).
 
 Корневой модуль `Scripts/StructTrain/TimeLearner/declared_time_scales.py`
@@ -44,6 +44,9 @@ Clock связывается с единственным каналом `Project
 положительный `DefaultTimeStep`. Отсутствующие/дублирующиеся поля, неоднозначный
 канал или `UseIndTimeStepFlag=1` оставляют clock неизвестным. Явный компонентный
 `TimeStep` требует effective resolution и не подменяется global/override.
+Как и прежний статический аудитор, перенос консервативно оставляет clock
+неразрешённым для всего документа при любом сохранённом TimeStep, включая
+ancestor/group: выбор наследования без effective readback не имитируется.
 
 Парсер `ConfigDocument` сохраняет реальный диалект Rdk, включая `<00>`, UTF-8
 BOM, комментарии и entities. Маленькое расширение Node предоставляет read-only
@@ -65,13 +68,13 @@ CSV и выводы экспериментов не пересчитываютс
 
 ## Проверки и миграция
 
-Подготовлены 29 новых meaningful tests: реальные numeric tags/attributes,
+Подготовлены 30 новых meaningful tests: реальные numeric tags/attributes,
 неизвестные clock/defaults, зарегистрированные образы, empty/invalid modes,
 конечность произведения/обратной величины, границы, frozen snapshot hash,
 symlinks/size budget, переносимый Git discovery и production CLI. Обязателен
 серверный gate вместе с 7 существующими lossless ConfigDocument tests и
 декларированным корпусом не менее 10 реальных Project.ini. Предлагаемая полная
-script-only регрессия — 142 = 67 wire + 39 collector + 29 новых + 7 parser.
+script-only регрессия — 143 = 67 wire + 39 collector + 30 новых + 7 parser.
 Локально допускаются только source/AST/Git/JSON проверки; C++ и модели в scope
 этого переноса не входят.
 

@@ -9,10 +9,10 @@
   "native_CPP_or_runtime_or_models_modified": false,
   "source_files": {
     "Scripts/StructTrain/TimeLearner/declared_time_scales.py": {
-      "bytes": 14308,
-      "sha256": "25d7fa9bd067211c4a06623cccaeeca5045eb1ca70c3886827ff5ce8dbc806f7",
+      "bytes": 14542,
+      "sha256": "669cbd60ef9ebda4ea31ee0f887602c08463e7595114e3f40ff61761f86a0f50",
       "AST_valid": true,
-      "git_blob": "165cdb8e5e5fcbd5bdf622392dcbd30ef3e5cf4b"
+      "git_blob": "483566941a53c590d3c9f4876aff399d5398a418"
     },
     "Scripts/StructTrain/TimeLearner/config_document.py": {
       "bytes": 8942,
@@ -27,10 +27,10 @@
       "git_blob": "b345a2ae4dc1ab5250b629bd23acbe06a9eb38cb"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_declared_time_scales.py": {
-      "bytes": 17664,
-      "sha256": "f7dc4afb32b4725fa47fa31bd1723ec35435881bd412866aaa83d7a1be702d55",
+      "bytes": 18331,
+      "sha256": "65183148b1c506ab48022b763f8786f8786108cb6b6556f4d3ab08060da6c379",
       "AST_valid": true,
-      "git_blob": "95817e05e6b67bb3bcf1dfaf741cd335fb5b8503"
+      "git_blob": "c5d72787d62c408ef39e19dad672de7616c3afb2"
     }
   },
   "source_entrypoints": [
@@ -206,6 +206,7 @@
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_other_parameters_filename_cannot_bind_a_project_clock",
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_component_time_step_is_not_replaced_with_global_or_override",
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_empty_and_no_rc_document_never_get_positive_classification",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_ancestor_clock_cannot_be_ignored_for_nested_rc_parameters",
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_malformed_document_is_not_assessed_with_consistent_empty_summary",
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_invalid_capacity_tokens_are_retained_as_unresolved",
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_invalid_resistance_is_not_omitted_beside_valid_mode",
@@ -225,15 +226,15 @@
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_tracked_subtree_metacharacters_are_literal_paths",
     "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_cli_empty_discovery_is_nonzero_and_explicitly_not_assessed"
   ],
-  "prepared_literal_test_count": 29,
+  "prepared_literal_test_count": 30,
   "tests_executed": 0,
   "existing_lossless_ConfigDocument_tests_required": 7,
   "proposed_combined_Linux_gate": {
     "wire": 67,
     "collector": 39,
-    "new_declared_time_scales": 29,
+    "new_declared_time_scales": 30,
     "ConfigDocument": 7,
-    "total": 142,
+    "total": 143,
     "actual_10_Project_ini_corpus_must_be_declared_fixture": true,
     "native_6_archive_reader_included": false,
     "model_or_CPP_runs": false,

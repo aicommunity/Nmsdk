@@ -114,6 +114,15 @@ class DeclaredTimeScalesTest(unittest.TestCase):
                 self.assertEqual(record["summary"]["conditionally_assessed_modes"], 0)
                 self.assertIn("no_declared_RC_parameter_blocks", record["issues"])
 
+    def test_ancestor_clock_cannot_be_ignored_for_nested_rc_parameters(self):
+        soma = parameters().removeprefix(b'<SaveProperties>').removesuffix(b'</SaveProperties>')
+        raw = (b'<SaveProperties><Parent Class="ImageWithInheritedClock"><Parameters><TimeStep>8</TimeStep>'
+               b'</Parameters><Components>'+soma+b'</Components></Parent></SaveProperties>')
+        record = subject.audit_declared_pair(project(), raw)
+        self.assertIsNone(mode(record)["q"])
+        self.assertEqual(record["diagnostic_status"], "not_assessed")
+        self.assertIn("component_or_ancestor_TimeStep_requires_effective_resolution", record["clock"]["issues"])
+
     def test_malformed_document_is_not_assessed_with_consistent_empty_summary(self):
         record = subject.audit_declared_pair(project(), b'<Root><Broken></Root>')
         self.assertEqual(record["diagnostic_status"], "not_assessed")

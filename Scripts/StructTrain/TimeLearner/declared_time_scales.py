@@ -128,6 +128,9 @@ def audit_declared_pair(project_raw, parameters_raw, *, parameter_filename="Para
         result["issues"].append(str(error))
         return result
     parents = {id(child): parent for parent, _ in _walk(document.root) for child in parent.children}
+    component_clock_declared = any(node.name == "TimeStep" for node, _ in _walk(document.root))
+    if component_clock_declared:
+        clock["issues"].append("component_or_ancestor_TimeStep_requires_effective_resolution")
     for parameters, path in _walk(document.root):
         if parameters.name != "Parameters":
             continue
@@ -144,7 +147,7 @@ def audit_declared_pair(project_raw, parameters_raw, *, parameter_filename="Para
             block["capacity"] = _positive(_one(document, parameters, "Capacity"), "Capacity")
         except (EvidenceError, ConfigDocumentError) as error:
             block["issues"].append(str(error))
-        if "TimeStep" in names:
+        if component_clock_declared:
             block["issues"].append("component_TimeStep_requires_effective_resolution")
         for field in RESISTANCES:
             if field not in names:
@@ -157,7 +160,7 @@ def audit_declared_pair(project_raw, parameters_raw, *, parameter_filename="Para
                 mode["resistance"] = resistance
                 require(block["capacity"] is not None, "time_scale_capacity_unresolved")
                 require(clock["frequency_hz"] is not None, "time_scale_frequency_unresolved")
-                require("TimeStep" not in names, "time_scale_component_clock_unresolved")
+                require(not component_clock_declared, "time_scale_component_clock_unresolved")
                 try:
                     q = block["capacity"] * resistance * clock["frequency_hz"]
                 except OverflowError:
