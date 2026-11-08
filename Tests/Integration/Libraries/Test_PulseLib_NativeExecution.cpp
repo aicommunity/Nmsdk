@@ -268,6 +268,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             ASSERT_EQ(group.IssuedNativeProbes(),inputCount+2);ASSERT_EQ(closed.packets.size(),inputCount+2);
             ASSERT_EQ(closed.witness.omitEachInput.size(),inputCount);ASSERT_TRUE(closed.assignment);
             if(separatedOmission)EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Valid);
+            else EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Ambiguous);
             EXPECT_EQ(closed.specification.baseModelRevision,base);EXPECT_EQ(readRevision(),base);
             EXPECT_TRUE(closed.witness.fullBefore.fullMaskRestored);EXPECT_TRUE(closed.witness.fullAfter.fullMaskRestored);
             for(const auto& trace:closed.witness.omitEachInput)EXPECT_TRUE(trace.fullMaskRestored);
