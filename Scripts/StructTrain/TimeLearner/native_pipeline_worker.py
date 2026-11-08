@@ -153,6 +153,21 @@ def _artifact_records(directory, execution):
             type(r["path"]) is str for r in records), "pipeline_artifact_schema")
     names = {r["path"] for r in records}
     require(len(names) == len(records), "duplicate_pipeline_artifact")
+    composite = execution.get('schema_version') == 3
+    if composite:
+        from .composite_primary import _paths, filesystem_primary_resolver
+        _paths(list(names)); resolve = filesystem_primary_resolver(directory)
+        for record in records:
+            raw = resolve(record['path'])
+            require(count(record['bytes']) == len(raw) and hashlib.sha256(raw).hexdigest() == record['sha256'],
+                    'pipeline_artifact_changed')
+        actual = set()
+        for path in directory.rglob('*'):
+            require(not path.is_symlink(), 'pipeline_artifact_symlink')
+            if path.is_file() and path != directory/'execution.json':
+                actual.add(path.relative_to(directory).as_posix())
+        require(actual == names, 'pipeline_native_artifact_closure_changed')
+        return names
     for r in records:
         path = PurePosixPath(r["path"])
         require(len(path.parts) == 1 and not path.is_absolute() and path.name not in (".", "..") and
@@ -172,15 +187,23 @@ def audit_execution(mode, directory, job, source_case=None):
     directory = Path(directory)
     execution = load(directory/"execution.json");_digest(execution)
     live = mode == "train" and job["schema_version"] == 2
+    composite = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6
+    if composite:
+        from .composite_measurement_contract import integral_number_view
+        execution = integral_number_view(execution)
+    from .composite_execution_evidence import EXTRA_FIELDS, audit_composite_execution
     from .live_training_worker import EXECUTION_FIELDS as LIVE_EXECUTION_FIELDS
-    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) and
+    require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite else set()) and
             execution["kind"] == "timelearner_native_"+EXECUTION_KINDS[mode]+"_execution" and
-            type(execution["schema_version"]) is int and execution["schema_version"] == (2 if live else 1) and
+            type(execution["schema_version"]) is int and execution["schema_version"] == (3 if composite else 2 if live else 1) and
             execution["job_sha256"] == job["sha256"] and load(directory/"job.json") == job and
             execution["evaluation_verdict"] is None, "pipeline_execution_scope_changed")
     names = _artifact_records(directory, execution)
-    require(execution["execution"] in (("completed", "cancelled", "model_tick_budget_exhausted", "finalization_failed") if live else
-                                      ("completed", "cancelled", "model_tick_budget_exhausted")), "pipeline_execution_status_unknown")
+    statuses = (("completed", "cancelled", "model_tick_budget_exhausted", "finalization_failed") if live else
+                ("completed", "cancelled", "model_tick_budget_exhausted"))
+    if composite and mode == 'train' and not live:
+        statuses += ('training_start_failed',)
+    require(execution["execution"] in statuses, "pipeline_execution_status_unknown")
     ticks = count(execution["model_ticks"])
     if mode != "export":
         config = job["configuration"] if mode in ("train", "preflight") else source_case[0]["configuration"]
@@ -189,6 +212,8 @@ def audit_execution(mode, directory, job, source_case=None):
                 equal(number(execution["model_time_end"])-number(execution["model_time_begin"]), ticks/frequency),
                 "pipeline_clock_changed")
     if mode == "preflight":
+        if composite:
+            audit_composite_execution(execution, directory, names, mode=mode, base_version=1)
         require(execution["execution"] == "completed" and ticks == 0 and
                 execution["training_started"] is False and execution["controller_state"] == "idle" and
                 count(execution["reference_probes"]) == count(execution["observed_probes"]) == 0 and
@@ -225,6 +250,9 @@ def audit_execution(mode, directory, job, source_case=None):
         return {"effective_initial_model_checked": True, "model_revision": execution["model_revision"],
                 "input_count": len(parameters), "integration_channels": len(channels), "training_started": False,
                 "native_execution_verified": False, "evaluation_verdict": None}
+    if composite and mode == 'train' and execution['execution'] == 'training_start_failed':
+        from .composite_execution_evidence import audit_composite_start_failure
+        return audit_composite_start_failure(execution, directory, names, job)
     if live:
         from .live_training_worker import audit_live_training
         from .native_model_spec import audit_initial_threshold
@@ -244,7 +272,7 @@ def audit_execution(mode, directory, job, source_case=None):
         # A fresh service gives the first attempt its native session/1 identity.
         # The declared attempt id remains in execution.json; no physics changes.
         effective_config = {**job["configuration"], "run_id": job["configuration"]["run_id"]+"/session/1"}
-        require(package["configuration"] == effective_config and package["implementation_id"] == job["implementation_id"] and
+        require((composite or package["configuration"] == effective_config) and package["implementation_id"] == job["implementation_id"] and
                 execution["package_sha256"] == package["sha256"] and execution["model_revision"] == package["model_revision"] and
                 execution["training_outcome"] == package["training_outcome"] and
                 execution["attempt_id"] == job["configuration"]["run_id"], "pipeline_training_model_changed")
@@ -260,6 +288,10 @@ def audit_execution(mode, directory, job, source_case=None):
             p["length"] == declared["attachment"] and p["synapses"] == declared["synapses"] and
             (declared["resistance"] is None or p["resistance"] == declared["resistance"])
             for p, declared in zip(initial["parameters"], inputs)), "pipeline_cold_parameters_changed")
+        if composite:
+            from .composite_execution_evidence import audit_initial_planning_configuration
+            audit_initial_planning_configuration(package, job, initial)
+            audit_composite_execution(execution, directory, names, mode=mode, base_version=1, package=package)
         require(execution["execution"] == "completed" or not completed, "interrupted_training_claims_completion")
         return {"training_audit": audit, "completed_boundary": completed, "training_outcome": package["training_outcome"],
                 "native_execution_verified": False, "evaluation_verdict": None}
@@ -333,6 +365,22 @@ def _structured_training_exit(mode, job, process, directory):
 def _snapshot_source(source, destination, *, diagnostic=False):
     source = Path(source).resolve(strict=True)
     stem = source.name.removesuffix("_stopped_state.json" if diagnostic else "_learned_state.json")
+    package = load(source)
+    if package.get('schema_version') == 5:
+        from .composite_package_evidence import audit_composite_package
+        from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths
+        summary_path = source.with_name(stem + ('_stopped_summary.json' if diagnostic else '_learned_summary.json'))
+        summary = load(summary_path) if summary_path.exists() else None
+        audit_composite_package(package, summary)
+        archive = package['measurement_archive']
+        references = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
+        primary = capture_primary_blobs(archive['primary_blobs'], references, archive['maximum_total_primary_bytes'])
+        _paths(list(primary) + [source.name] + ([summary_path.name] if summary is not None else []))
+        write_primary_snapshot(primary, destination)
+        (destination/source.name).write_bytes(source.read_bytes())
+        if summary is not None:
+            (destination/summary_path.name).write_bytes(summary_path.read_bytes())
+        return destination/source.name
     files = [source, source.with_name(stem+("_stopped_summary.json" if diagnostic else "_learned_summary.json"))]
     for p in sorted(source.parent.glob(stem+("_stopped_trial_*.json" if diagnostic else "_state_trial_*.json"))):
         files.extend((p, p.with_suffix(".csv")))

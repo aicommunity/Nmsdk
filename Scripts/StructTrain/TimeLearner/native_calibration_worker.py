@@ -289,14 +289,19 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *
     require(number(maximum_wall_seconds) > 0, "invalid_worker_wall_budget")
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
     _write(output/"runtime-cli-interface.json", cli)
-    inputs = output/"input";inputs.mkdir();primaries = inputs/"source";primaries.mkdir()
-    stem = source_path.name.removesuffix("_learned_state.json")
-    paths = [source_path, source_path.with_name(stem+"_learned_summary.json")]
-    for path in sorted(source_path.parent.glob(stem+"_state_trial_*.json")):
-        paths.extend((path, path.with_suffix(".csv")))
-    for path in paths:
-        require(not path.is_symlink() and path.is_file(), "worker_primary_missing_or_symlink")
-        (primaries/path.name).write_bytes(path.read_bytes())
+    inputs = output/"input";inputs.mkdir();primaries = inputs/"source"
+    if load(source_path).get('schema_version') == 5:
+        from .native_pipeline_worker import _snapshot_source
+        _snapshot_source(source_path, primaries)
+    else:
+        primaries.mkdir()
+        stem = source_path.name.removesuffix("_learned_state.json")
+        paths = [source_path, source_path.with_name(stem+"_learned_summary.json")]
+        for path in sorted(source_path.parent.glob(stem+"_state_trial_*.json")):
+            paths.extend((path, path.with_suffix(".csv")))
+        for path in paths:
+            require(not path.is_symlink() and path.is_file(), "worker_primary_missing_or_symlink")
+            (primaries/path.name).write_bytes(path.read_bytes())
     source_case = load_case(primaries/source_path.name)
     require(validate_job(job, source_case, post_tune=post_tune) == preflight, "worker_source_changed_during_snapshot")
     _write(inputs/"job.json", job)

@@ -15,6 +15,11 @@ OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_obser
 
 
 def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dict) -> dict:
+    if package.get('schema_version') == 5:
+        from .composite_package_evidence import audit_composite_package
+        require(package.get('kind') == 'timelearner_stopped_state', 'unknown_stopped_state_schema')
+        require(not packets and not traces, 'composite_package_legacy_primary_overlay')
+        return audit_composite_package(package, summary)
     require(package.get("kind") == "timelearner_stopped_state" and type(package.get("schema_version")) is int
             and package["schema_version"] in (1, 2, 3, 4)
             and len(package) == {1: 26, 2: 27, 3: 28, 4: 28}[package['schema_version']], "unknown_stopped_state_schema")
@@ -124,6 +129,10 @@ def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dic
 def load_case(path: Path) -> tuple[dict, dict, dict, dict]:
     require(path.name.endswith("_stopped_state.json"), "unexpected_stopped_filename")
     stem = path.name.removesuffix("_stopped_state.json")
+    package = load(path)
+    if package.get('schema_version') == 5:
+        summary_path = path.with_name(stem + '_stopped_summary.json')
+        return package, load(summary_path) if summary_path.exists() else None, {}, {}
     packets, traces = {}, {}
     for trial_path in sorted(path.parent.glob(stem + "_stopped_trial_*.json")):
         packet = load(trial_path); trial = packet["requested_specification"]["trial_id"]

@@ -8,6 +8,7 @@ import binascii
 import hashlib
 from pathlib import Path, PurePosixPath
 import re
+import unicodedata
 
 from .native_evidence import EvidenceError, count, require
 
@@ -20,6 +21,16 @@ def primary_path(value):
     require(str(path) == value and not path.is_absolute() and ':' not in value and '\\' not in value
             and all(part not in ('', '.', '..') for part in value.split('/')),
             'composite_primary_path_unsafe')
+    for segment in value.split('/'):
+        require(not segment.endswith((' ', '.')) and
+                not any(unicodedata.category(char) == 'Cc' or char in '<>"|?*' for char in segment),
+                'composite_primary_path_nonportable_segment')
+        # Win32 recognizes these names with extensions and case variants; it
+        # also treats superscript 1/2/3 as device-number suffixes.
+        stem = segment.split('.', 1)[0].rstrip(' .').upper()
+        reserved = stem in {'CON', 'PRN', 'AUX', 'NUL', 'CONIN$', 'CONOUT$'} or (
+            len(stem) == 4 and stem[:3] in ('COM', 'LPT') and stem[3] in '123456789¹²³')
+        require(not reserved, 'composite_primary_path_reserved_device')
     return value
 
 

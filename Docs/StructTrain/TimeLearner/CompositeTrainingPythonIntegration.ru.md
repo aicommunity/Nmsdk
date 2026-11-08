@@ -119,3 +119,116 @@ evidence`df9531926815565e7c5c1bc1e890c2dde34b5ccb`.
 Storage integrity сама по себе не подтверждает геометрию, native execution, consumed event, source
 lineage или certificate2. Archive/index/record reader и package5 dispatch
 должны проверять их отдельно; helper не wired как готовый learned auditor.
+
+## Подготовленный полный portable reader (следующий source chunk)
+
+Новые composite_source/raw/measurement/certificate/package/summary auditors
+проверяют immutable initial source, actual trained graph/storage, полные N+2
+records, свежую геометрию объявленного окна и semantic proof/certificate IDs.
+Standalone package5 самодостаточен: embedded primary обязательны, summary6
+необязателен и не синтезируется. Legacy flat trial globs не используются для
+новой версии. Явно переданный внешний mirror обязан совпасть byte-for-byte.
+При native execution3 настоящий summary6 обязателен вместе с архивом, каждым
+sidecar и полной рекурсивной artifact closure. Пути primary должны также
+переноситься на Windows: запрещены control characters, trailing dot/space и
+зарезервированные device names; переименование автоматически не выполняется.
+
+Runtime search plan отделён от immutable cold declaration. Warm может менять
+bounds/tolerances/budgets, но N0/N1 остаётся политикой исходного model family.
+Partial records без native group context не подтверждают причину отказа или
+полноту native closure и никогда не становятся reference/final/certificate.
+End wall timestamp после mint не доказывает момент live deadline check.
+
+Это source preparation. Полная native package5 → portable replay → import →
+frozen evaluation приёмка требует общего runtime из согласованных C++/Python
+commits и фактических артефактов producer. Hash-format fixtures и отдельная
+проверка wire-ошибок не заменяют этот gate. Frozen Test продолжает использовать
+общий максимум реакции и реальные spikes, не Train assigned-window criterion.
+
+Wire/hash/dispatch и прежние декларационные проверки выполнены на M40:
+62/62, failures/errors/skips0; source
+`cdce8575f0467d0f173f83ab1ce3e9531fc3594b`, evidence
+`4f4d40561750cee71f9cbf9a349a605d1084b819`.
+428 Python blobs совпадают с Git до/после; все32 members компактного архива
+проверены отдельно (32464 bytes, SHA256
+`2389001756e3606ed0a568c04e17cf6fb2801c1bc55433734b78aa577c230856`).
+Exact worker/kernel owner совпадает, unit закрыт, lease released штатно.
+[Metadata-проверка](CompositeTrainingPythonPortableVerification-20261108.json).
+Первый collector вызов отказал до записи из-за отсутствующего declarative
+expected_source_files; повторная сборка evidence использовала то же завершённое
+задание, тесты не запускались повторно. Native package5 позитивная приёмка,
+реальные C0 fixtures и полная warm/pipeline проверка остаются открытыми.
+
+Следующий warm/number/snapshot source
+`29182db1fd8641e5cfef10ad0a9eebf219b1f7ed` проверен на M40:63/63,
+failures/errors/skips0; evidence
+`57f30ef87512f2f7052b2873d5d2ee91198069e5`. Все428 Python blobs и32 archive
+members проверены независимо;32608 bytes, SHA256
+`5d88a39333b90798f8704155427ff46b6f4dd48d3bd50ed43d3dffe498a65994`.
+Worker PID2901337/start321349983, exact unit закрыт, lease released.
+[Metadata-проверка](CompositeTrainingPythonWarmVerification-20261108.json).
+Тест warm boundary проверяет consistency binding, не выдаёт native training
+certificate. Полный positive native producer/import gate по-прежнему открыт.
+
+Проверка initial dataset/readback и purpose-specific namespace добавлена в
+source`b277540126acc74e8425d88865a6499ee515aa8b`; M40:65/65,
+failures/errors/skips0. Evidence`c6c0abb1a81a6083a7a898c5ae27f50bac8e2173`:
+все429 source blobs и32 archive members проверены;32672 bytes, SHA256
+`525940acbc25396dc648b769011e40d7351b6a52b58437902bf3aae8e8af14c6`.
+Exact worker PID2921881/start321394325 закрыт, lease released.
+[Metadata-проверка](CompositeTrainingPythonDatasetVerification-20261108.json).
+Отдельный test_composite_native_archive содержит7 проверок фактических шести
+production exports; они не включены в эти65 и не выполнялись без native
+fixtures. Для их отдельной приёмки нужны реальные Classic/Branch complete,
+partial, ambiguous, existing-C0 и warm bundles с Git-bound fixture manifest.
+
+Для package5 current dataset дополнительно должен semantic-совпадать с
+initial source dataset после полного mask restore. Retarget либо сохранённый
+omission mask не разрешены внутри этого family. Сравнивается identity.model;
+raw XML может различаться из-за incidental dynamic serialization. Этот guard
+подготовлен отдельно после65 source и требует фактической package5 приёмки.
+
+Accepted final_group_ids новой схемы должны относиться к current_attempt_id
+и одному logical final run/sweep. Одинаковых graph/epoch недостаточно для
+смешения старых и свежих final measurements. Исторические consumed finals
+разрешены среди остальных archive records, но не входят в свежий all-input
+сертификат. Это source guard; нужен реальный multi-sweep regression gate.
+Выбранный final run также должен быть последним фактически наблюдаемым в
+records текущей попытки: сравнивается числовой canonical decimal suffix, включая
+новый partial/rejected group. Полный старый sweep не становится свежим из-за
+совпадения graph/epoch. Переход по live intent без actual record из CSV не
+восстанавливается; его clear остаётся обязанностью native controller.
+
+Следующий подготовленный source chunk уточняет cold execution3: неизменяемая
+initial configuration сохраняет исходный job.run_id; текущий runtime_plan
+получает `/session/1`. Explicit initial input readback заменяет только inputs,
+а не identity первоначальной декларации.
+
+Новый `training_start_failed` допускается только для cold6 execution3/base1.
+Отдельный подписанный `training-start-failure.json` обязан подтверждать отказ,
+null package/archive/source/certificate, неизвестные attempt/archive counters
+и фактические callback counters. Такой результат не экспортируется как
+stopped/completed package и не является научным PASS. Существующий process rc2
+путь остаётся диагностическим; произвольный nonzero либо completed-claim с rc2
+не допускается. Старые схемы не получают нового статуса. Эти wire/adversarial
+контроли подготовлены в source; actual Console/package5 gate ещё требуется.
+
+2026-11-08 на M40 выполнен новый wire/adversarial suite source
+`55ed509fe89053a6fa1aa9e25e26dd64759d13ad`: **67/67**, без skipped/errors/failures.
+Проверены все 430 Python Git blobs до/после; package fingerprint
+`9e5e7a5d901917e54abcb44b7de9065a08d705f0a93491feb076e24f4970f98c`.
+Worker ограничен 1 GiB/tasks64, capacity registry прочитана как null и не изменялась.
+Kernel подтвердил closure точного PID3069176/start322149314; lease released.
+Evidence `be3911d262463a2377c364d97f63313b8223605e`, 33 members/33008 bytes,
+archive SHA256 `71c10aee5045414e0964c4b9c294144db92a0f3bcc968f1565967f1df445bfb2`.
+[Независимая metadata-проверка](CompositeTrainingPythonStartFailureVerification-20261108.json).
+
+Первый publication metadata `ed5588f3b9195951d9f8f8e363df3b2e44863580` не принят:
+локальная копия supervisor была записана Windows с CRLF, в то время как выполненная
+encoded команда содержала LF. Новая p2 публикация содержит точные выполненные bytes;
+исходная сохранена в отдельной Git-ветке, тесты не перезапускались. Runtime worker
+был с самого начала передан точными hash-bound bytes; actual67 result не изменён.
+
+67 подтверждает только wire/identity/nonpromotion contract. Actual native6/7,
+package5/Console execution3/import и C0 legacy controls остаются отдельными gates;
+подготовленные dataset/latest-final guards не объявляются runtime-принятыми.

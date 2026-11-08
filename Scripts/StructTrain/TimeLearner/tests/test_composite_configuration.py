@@ -28,7 +28,7 @@ def configuration(base=1, *, branch=False, n=2):
     if base >= 2: search['n0_candidate_repeats'] = 2
     result = dict(kind='timelearner_native_cold_configuration', schema_version=6, base_schema_version=base,
         model=model, stimulus_profile=dict(generator_class='NPulseGeneratorTransit', amplitude=1.,
-            pulse_length=.001, frequency_hz=2000, frequency_deviation=0., use_transit_signal=True, use_pattern_output=False),
+            pulse_length=.001, frequency_hz=2000, frequency_deviation=0., use_transit_signal=False, use_pattern_output=False),
         run_id='declared-run', protocol_revision='declared-protocol', sample_id='target', duration=.1,
         maximum_sample_gap=.0005, minimum_amplitude=1e-6, maximum_samples=201, record_spikes=False,
         peak_selection='isolated_window', windows=[dict(begin=0., end=.1) for _ in range(n)], search=search,
@@ -156,6 +156,24 @@ class CompositeConfigurationTest(unittest.TestCase):
             elif change=='assignment':p['wave_assignment']='ordered_whole_burst'
             else:p['composite_measurement']['context_policy']['comparison_radius_ticks']=True
             with self.subTest(change=change),self.assertRaises(EvidenceError):validate_composite_protocol(p,config)
+
+    def test_named_logical_inputs_preserve_physical_ordinal_and_actual_origin(self):
+        config=configuration();p=protocol(config)
+        p['inputs'][0]['id']='early-feature';p['inputs'][1]['id']='опорный-вход';p['origin_stimulus_id']='pulse1'
+        validate_composite_protocol(p,config)
+        for change in ('duplicate','wrong_ordinal','unknown_origin','physical_alias'):
+            bad=deepcopy(p)
+            if change=='duplicate':bad['inputs'][1]['id']=bad['inputs'][0]['id']
+            elif change=='wrong_ordinal':bad['inputs'][0]['stimulus_id']='pulse1'
+            elif change=='unknown_origin':bad['origin_stimulus_id']='missing'
+            else:bad['stimulus_ids'][0]='renamed-physical-source'
+            with self.subTest(change=change),self.assertRaises(EvidenceError):validate_composite_protocol(bad,config)
+
+    def test_unsupported_stock_source_factors_are_rejected_before_train(self):
+        for key,value in (('generator_class','OtherGenerator'),('amplitude',0),('pulse_length',.0001),
+                ('frequency_hz',20000),('frequency_deviation',.1),('use_transit_signal',True),('use_pattern_output',True)):
+            value_config=configuration();value_config['stimulus_profile'][key]=value
+            with self.subTest(key=key),self.assertRaises(EvidenceError):project_composite_configuration(value_config)
 
 
 if __name__=='__main__':unittest.main()
