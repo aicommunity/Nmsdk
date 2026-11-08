@@ -1,0 +1,111 @@
+{
+  "kind": "current_composite_cancellation_ASan248_attempt",
+  "schema_version": 1,
+  "root": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+  "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+  "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "collector_tool_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+  "collector_helper_independent_metadata39_evidence": "54574d03581e04d233b832b331979f27c871bfa1",
+  "host": "10.245.1.17",
+  "original_terminal_passed": false,
+  "built": true,
+  "expected_cpp_cases": 248,
+  "observed_JUnit_cases": 13,
+  "observed_failed_cases": 1,
+  "native_leaf_gates_observed": 13,
+  "fresh_closed_leaf_kernel_groups": 13,
+  "outer_kernel_closed": true,
+  "whole_worker_reservation_released": true,
+  "actual_archive_bundles_present": 0,
+  "actual_csv_primary_mirrors_verified": 0,
+  "actual_source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-cancellation-root-m40-a1",
+      "commit": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+      "files": 968
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-cancellation-pulse-m40-a1",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    }
+  ],
+  "actual_loaded_files_hash_verified": 74,
+  "two_prior_core143_and_failed_corebuild_runtimes_before_after_postclosure_equal": true,
+  "current_runtime_file_freeze_verified": true,
+  "resource_before_after_postclosure_equal": true,
+  "materialized_resource_files": 327,
+  "original_operational_diagnostics_preserved": true,
+  "direct_production_COMPOSITE_OUTPUT_route": true,
+  "adapter_or_monkeypatch_used": false,
+  "RDK_USE_LLM": true,
+  "RDK_LLM_BUILD_EMBEDDED": true,
+  "address_sanitizer_instrumentation_loaded_all_observed_leaves": true,
+  "full_ASan248_gate_accepted": false,
+  "numeric_assertion_scope248_passed": false,
+  "inventory_root_metadata_copy_defect": true,
+  "baseline_negative_evidence": "e89e166e3913e4e225eebd75a329b7c52f7d4c8f",
+  "ASAN_OPTIONS": "detect_leaks=0",
+  "full_Configs_campaign_materialized": false,
+  "six_bundle_capture_complete": false,
+  "archive_cases_observed": 0,
+  "growth_cases_observed": 0,
+  "source_guard_cases_observed": 0,
+  "not_run_cpp_cases": 235,
+  "maintained_helper_used_for_metadata_binding_not_CPP_success_attestation": true,
+  "source_inventory_derived_from_actual_Git": true,
+  "independent_portable_scalar_geometry_replay": false,
+  "package5_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "new_build_or_model_run_during_publication": false,
+  "disk_guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "last": {
+      "time": 1794153176.0487022,
+      "free_bytes": 340975648768,
+      "owned_scope_increment_bytes": 661929984,
+      "peak_owned_scope_increment_bytes": 661929984,
+      "outer_closed": true
+    },
+    "peak_owned_scope_increment_bytes": 661929984,
+    "minimum_free_bytes": 340975648768,
+    "outer_closed": true,
+    "all_recorded_leaf_groups_closed": true,
+    "leaf_groups": 13
+  },
+  "created_utc": "2026-11-08T15:53:48.761165+00:00"
+}
