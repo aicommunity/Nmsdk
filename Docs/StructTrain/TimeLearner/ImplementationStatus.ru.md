@@ -568,3 +568,16 @@ Composite143 A1 не собран (0 tests): выявлено ограничен
 а не отсутствие полного типа нейрона; первоначальная include-гипотеза пересмотрена.
 A2 d920/e183 меняет boundary-вызовы на штатный `.Get()` и один fixture-вызов,
 не меняя математику. Полный протокол компиляции A1 сохраняется отдельно.
+
+
+Composite compile A1 опубликован отдельной origin-веткой
+`codex/timelearner-composite-core-compile-a1-evidence`, commit
+`74ee40501aba6d53da318027027aa59f613d5056`:
+[receipt](CompositeCoreM40A1NegativeVerification.json).44 members,3056 frozen
+source hashes проверены по Git;0 тестов и0 model runs. Preset-флаг original
+terminal `new_composite_protocol_exercised=true` сохранён как исходная
+декларация, но observed execution=false. Отказ не объединяется с maintained
+кодом до приёмки исправленного feature: его parent27ba содержит некомпилируемую
+версию269. Все артефакты уже доступны в origin без переноса этой ошибки в код.
+Повторная d920/e183 собрана;97 регрессионных тестов прошли, первый новый
+Classic capture/search/final также прошёл. Остальная46-матрица ещё выполняется.
