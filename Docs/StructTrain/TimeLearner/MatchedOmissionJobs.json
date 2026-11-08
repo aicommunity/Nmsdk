@@ -82,9 +82,20 @@
       "request_sha256": "c349e9373eaf7df2128792651e254883c56216c90f8a6e5903ef08a7947772a9",
       "evidence_commit": "9e301ba0b28be4ec64a85ac143ea9db94d6fd884",
       "verification_receipt": "MatchedOmissionAsanVerification.json"
+    },
+    {
+      "host": "10.245.1.17",
+      "job": "s07-matched-reader-m40-a1",
+      "root": "fa0c70b7d1e8102e207f6a4852c993615d3a538a",
+      "state": "closed_reader11_and_real10_replay_passed_independently_metadata_verified",
+      "evidence_commit": "515a86c42509c136211d46cc5e021145e804b618",
+      "verification_receipt": "MatchedOmissionReaderVerification.json",
+      "new_native_simulations": false,
+      "criterion_changed": false
     }
   ],
-  "remaining": "NativeTrainingService/CapturedReferences/search/final verification composite integration, portable witness codec/reader, expanded topology/profile matrix, ASan, scientific trains",
+  "remaining": "Assignment method applicability; NativeTrainingService/CapturedReferences/search/final verification composite integration; complete portable training witness codec/reader; expanded topology/profile and sanitizer matrix; scientific trains. Existing fixture reader11 and matched ASan57 are accepted only within their receipts.",
   "normal55_scoped_accepted": true,
-  "asan57_scoped_accepted": true
+  "asan57_scoped_accepted": true,
+  "independent_fixture_reader_scoped_accepted": true
 }

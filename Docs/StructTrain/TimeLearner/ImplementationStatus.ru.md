@@ -307,5 +307,35 @@ schema2 содержит все шесть сочетаний проба×сом
 Normal [проверка revision provider в fixtures](NativeFixtureRevisionProviderNormalVerification.json)
 принята по32 исходным тестам:22 invalidation/NoopBuild,8 N2 Typed/Full и2 N6
 Dimensions schema2. Первая проба четырёх A/B-пар совпадает по CSV/native/model/
-features. ASan-повтор с обоими N6 протоколами и auxiliary parity запущен
-отдельно; его результат пока не принят. Это изменение fixtures, не алгоритма.
+features. ASan-повтор с обоими N6 протоколами и auxiliary parity принят по34 тестам
+на отдельном срезе root818dd80/Pulse3accbed. Подробная
+[квитанция соседней ветки](https://github.com/aicommunity/Nmsdk/blob/6a98929759d0af8fcdc2f1fc980e9e7ca467e942/Docs/StructTrain/TimeLearner/NativeFixtureRevisionProviderAsanVerification.json)
+не распространяется автоматически на последующий matched-omission код.
+Это изменение fixtures, не алгоритма.
+
+
+## Параллельная подготовка: matched omission и Windows
+
+На ветке matched omission приняты35 selector tests,2 capture boundary tests,
+10 regression capture/codec tests и10 native controls: два separated Valid,
+четыре coupled Ambiguous, четыре stop/edit без assignment. Normal55 и
+последующий native10 —57 уникальных проверок; отдельный
+[ASan57](MatchedOmissionAsanVerification.json) прошёл на M40, detect_leaks=0.
+Новый [независимый reader](MatchedOmissionReader.ru.md) прошёл11 тестов и
+повторно пересчитал10 real groups, не вызывая C++ и не создавая новых симуляций.
+Raw данные, закрытые leases и source hashes доступны в Git.
+
+Это ещё не подключённый Train measurement path: перед интеграцией нужно
+[разрешить различие full-trace и собственного окна](MatchedOmissionTrainingIntegration.ru.md).
+Неоднозначные группы не повышены до Valid. CapturedReferences, bounded search,
+final verification, полный composite export/import и научная матрица остаются
+в работе. Ни тест reader, ни отсутствие ошибок ASan не доказывают классификацию.
+
+Подготовка Windows .14 выполняется независимо в частном каталоге worker.
+Последняя полная компиляция root818dd80/Pulse3accbed вернула0, но штатный
+backend отверг запуск из-за дочернего процесса неизвестной identity.
+[Сохранённый отказ](https://github.com/aicommunity/Nmsdk/blob/6a98929759d0af8fcdc2f1fc980e9e7ca467e942/Docs/StructTrain/TimeLearner/WindowsDomainBuildRejectionVerification.json)
+не отменён: новые18 portability checks ещё не стартовали, scientific worker
+не принят. Последующая короткая проверка quiescent build имеет отдельный
+результат и не переписывает этот отказ. Пользовательский C:/Projects/Nmsdk
+в эти изменения не включён.
