@@ -2,7 +2,7 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "feb5fa5d4d6ee3c649905e638fc4914d63a5e260",
+  "pulse": "feb3b181224156d4990d7b12fd2c16a8f1df8d7d",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 177060,
-      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
       "expected_test_ids": [
         "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
         "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
@@ -79,8 +79,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 177060,
-      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
       "expected_test_ids": [
         "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
         "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
@@ -98,8 +98,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 177060,
-      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
       "expected_test_ids": [
         "NativeCandidateWindowFactory.ClassicCompleteReferencesAndActualReplayedCandidate",
         "NativeCandidateWindowFactory.BranchCompleteReferencesAndActualReplayedCandidate",
@@ -123,8 +123,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 177060,
-      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
       "expected_test_ids": [
         "NativeCandidateWindowArchive.ClassicActualPrimaryReplaysCompleteReferencesAndProposal",
         "NativeCandidateWindowArchive.BranchActualPrimaryReplaysCompleteReferencesAndProposal",
@@ -153,11 +153,26 @@
       ],
       "count": 24,
       "scope": "actual archive2 writer/replay, original portable references, fresh warm owner lease, partial/tamper and distinct N4/N6 each-ordinal closure; no Train5 admission"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+      "expected_test_ids": [
+        "NativeCandidateWindowBudgetReplay.ActualRefsOnlyHistoryAndEmptyHigherCapWarmReplay",
+        "NativeCandidateWindowBudgetReplay.RehashedHistoricalAttemptCapCannotHideBehindNewLargerCap",
+        "NativeCandidateWindowBudgetReplay.RehashedLaterAttemptCapMustIncludeRetainedOriginalRefs",
+        "NativeCandidateWindowBudgetReplay.EmptyWarmCurrentCapCannotDropRetainedEarlierBytes",
+        "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder",
+        "NativeCandidateWindowBudgetReplay.CandidateCannotBeMovedBeforeItsOriginalReferences"
+      ],
+      "count": 6,
+      "scope": "actual refs-only historical A caps and later retained-prefix cap replay, warm empty current attempt, declared ledger order; no runtime claim"
     }
   ],
-  "expected_count": 96,
+  "expected_count": 102,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 378,
+  "planned_cumulative_scope": 384,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [
@@ -192,7 +207,9 @@
     "classic-window-distinct2-N4",
     "classic-window-distinct2-N6",
     "branch-window-distinct2-N4",
-    "branch-window-distinct2-N6"
+    "branch-window-distinct2-N6",
+    "classic-window-budget-refs-A-empty-B",
+    "classic-window-budget-A-B-empty-C"
   ],
   "primary_files": [
     "full-before.csv",
@@ -262,5 +279,14 @@
     "actual_model_learned6_import_pending": true,
     "numeric_or_compile_run_locally": false,
     "semantic_proof2_includes_complete_native_specification": true
+  },
+  "budget_replay_followup": {
+    "root_base": "80b2571ec396577bfda9efc3c2a836ab89cda050",
+    "pulse_base": "feb5fa5d4d6ee3c649905e638fc4914d63a5e260",
+    "historical_caps_and_prefix_bytes_checked": true,
+    "declared_retained_ledger_order": "contiguous semantic attempts, increasing issued groups, candidates after selected initial refs",
+    "global_cross_process_clock_attestation": false,
+    "new_cases": 6,
+    "runtime_accepted": false
   }
 }

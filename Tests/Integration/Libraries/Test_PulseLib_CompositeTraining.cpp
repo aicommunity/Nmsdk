@@ -1869,3 +1869,68 @@ TEST(NativeCandidateWindowArchive,ClassicN4ActualDistinctAllOrdinalClosure){Wind
 TEST(NativeCandidateWindowArchive,BranchN4ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearnerBranch>(4);}
 TEST(NativeCandidateWindowArchive,ClassicN6ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearner>(6);}
 TEST(NativeCandidateWindowArchive,BranchN6ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearnerBranch>(6);}
+
+namespace {
+const NativeCompositeArchiveDocument& ActualRetainedWindowBudgetArchive(bool withMiddleCandidate=false) {
+    static std::map<bool,NativeCompositeArchiveDocument> cached;const auto found=cached.find(withMiddleCandidate);if(found!=cached.end())return found->second;
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);CaptureWindowReferences(f,false);
+    const auto limits=CompositeAttemptLimits{64,256,64*f.protocol.candidateWindowMeasurement->contextPolicy.maximumTotalSamples,120.,7200.};
+    const auto original=DecodeNativeCompositeTrainingArchive(EncodeNativeCandidateWindowTrainingArchive(*f.attempt).document);
+    f.attempt.reset();f.owner->Reset();f.owner->IsNeedToTrain=true;
+    f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,original,limits,
+        NativeCandidateWindowAttemptDeclaration{"budget-attempt-B",256u*1024u*1024u},f.Time(),Wall());
+    if(withMiddleCandidate) {
+        f.Run(f.Request(0,"budget-attempt-B","budget-attempt-B/search/1"),CompositeMeasurementPurpose::Search);
+        Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
+        const auto middle=DecodeNativeCompositeTrainingArchive(EncodeNativeCandidateWindowTrainingArchive(*f.attempt).document);
+        f.attempt.reset();f.owner->Reset();f.owner->IsNeedToTrain=true;
+        f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,middle,limits,
+            NativeCandidateWindowAttemptDeclaration{"budget-attempt-C",512u*1024u*1024u},f.Time(),Wall());
+    }
+    // The current warm attempt has NO observations. It is a declaration with
+    // zero current counters, not an invented native execution or certificate.
+    Require(f.attempt->IssuedGroups()==0,"budget_fixture_current_attempt_not_empty");
+    auto archive=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    const auto name=withMiddleCandidate?"classic-window-budget-A-B-empty-C":"classic-window-budget-refs-A-empty-B";
+    SaveCompositeArchive(archive,name);SaveCompositeBoundary(f,name);
+    return cached.emplace(withMiddleCandidate,std::move(archive)).first->second;
+}
+void RebindHistoricalWindowCap(QJsonObject& document,const std::string& attempt,std::size_t cap) {
+    const auto decoded=DecodeNativeCompositeTrainingArchive(document);auto wire=document["records"].toArray();std::size_t changed=0;
+    for(std::size_t i=0;i<decoded.Records().size();++i)if(decoded.Records()[i].attemptId==attempt) {
+        auto record=decoded.Records()[i];record.policy.maximumTotalPrimaryBytes=cap;
+        record.semanticProofId=CandidateWindowTrainingSemanticProofId(decoded.Protocol(),record);
+        auto item=wire[int(i)].toObject();auto budget=item["budgets"].toObject();budget["maximum_total_primary_bytes"]=double(cap);item["budgets"]=budget;
+        auto measurement=item["measurement"].toObject();measurement["semantic_proof_id"]=QString::fromStdString(record.semanticProofId);item["measurement"]=measurement;
+        wire[int(i)]=item;++changed;
+    }
+    Require(changed>0,"budget_fixture_no_historical_records_changed");document["records"]=wire;RebindArchive(document);
+}
+void HistoricalAttemptTotalMustFitItsOwnCap() {
+    auto document=ActualRetainedWindowBudgetArchive().document;const auto decoded=DecodeNativeCompositeTrainingArchive(document);
+    ASSERT_EQ(decoded.Records().size(),2u);EXPECT_EQ(decoded.CurrentAttemptId(),"budget-attempt-B");
+    EXPECT_TRUE(std::all_of(decoded.Records().begin(),decoded.Records().end(),[](const auto& r){return r.purpose==CompositeMeasurementPurpose::Reference && !r.windowProposal;}));
+    std::size_t total=0,largest=0;for(const auto& r:decoded.Records()){const auto bytes=CompositeRecordPrimaryBytes(r);total+=bytes;largest=std::max(largest,bytes);}
+    ASSERT_GT(total,largest+1);const auto falseCap=largest+(total-largest)/2;ASSERT_GT(falseCap,largest);ASSERT_LT(falseCap,total);
+    RebindHistoricalWindowCap(document,"candidate-attempt",falseCap);
+    // All individual records fit. Every public measurement/document content ID
+    // was rebound, no candidate proposal can reject this refs-only counterexample.
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(document),std::invalid_argument);
+}
+void HistoricalLaterCapMustIncludeRetainedEarlierReferences() {
+    auto document=ActualRetainedWindowBudgetArchive(true).document;const auto decoded=DecodeNativeCompositeTrainingArchive(document);
+    ASSERT_EQ(decoded.Records().size(),3u);EXPECT_EQ(decoded.CurrentAttemptId(),"budget-attempt-C");
+    const auto prior=CompositeRecordPrimaryBytes(decoded.Records()[0])+CompositeRecordPrimaryBytes(decoded.Records()[1]);
+    const auto own=CompositeRecordPrimaryBytes(decoded.Records()[2]);ASSERT_GT(prior,own+1);
+    const auto falseCap=prior-1;ASSERT_GT(falseCap,own);RebindHistoricalWindowCap(document,"budget-attempt-B",falseCap);
+    // B's own sum fits, but B's cap could not even retain original A refs.
+    // C's larger CURRENT cap cannot retroactively make that history affordable.
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(document),std::invalid_argument);
+}
+}
+TEST(NativeCandidateWindowBudgetReplay,ActualRefsOnlyHistoryAndEmptyHigherCapWarmReplay){const auto& a=ActualRetainedWindowBudgetArchive();const auto d=DecodeNativeCompositeTrainingArchive(a.document);EXPECT_EQ(d.CurrentAttemptId(),"budget-attempt-B");EXPECT_EQ(a.document["counters"].toObject()["attempt"].toObject()["logical_groups"],QJsonValue(0));EXPECT_NO_THROW(CandidateWindowPortableReferenceFactory::Replay(d));}
+TEST(NativeCandidateWindowBudgetReplay,RehashedHistoricalAttemptCapCannotHideBehindNewLargerCap){HistoricalAttemptTotalMustFitItsOwnCap();}
+TEST(NativeCandidateWindowBudgetReplay,RehashedLaterAttemptCapMustIncludeRetainedOriginalRefs){HistoricalLaterCapMustIncludeRetainedEarlierReferences();}
+TEST(NativeCandidateWindowBudgetReplay,EmptyWarmCurrentCapCannotDropRetainedEarlierBytes){auto a=ActualRetainedWindowBudgetArchive().document;const auto d=DecodeNativeCompositeTrainingArchive(a);std::size_t bytes=0;for(const auto& r:d.Records())bytes+=CompositeRecordPrimaryBytes(r);ASSERT_GT(bytes,1u);a["maximum_total_primary_bytes"]=double(bytes-1);RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
+TEST(NativeCandidateWindowBudgetReplay,RetainedGroupsCannotReverseIssuedOrder){auto a=ActualRetainedWindowBudgetArchive().document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),2);const auto first=r[0];r[0]=r[1];r[1]=first;a["records"]=r;RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
+TEST(NativeCandidateWindowBudgetReplay,CandidateCannotBeMovedBeforeItsOriginalReferences){auto a=ActualRetainedWindowBudgetArchive(true).document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),3);QJsonArray moved{r[2],r[0],r[1]};a["records"]=moved;RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
