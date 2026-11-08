@@ -1,0 +1,36 @@
+{
+  "kind": "future_cold7_owning_schema_source_followup",
+  "schema_version": 1,
+  "status": "SOURCE_ONLY_UNRUN",
+  "root_base": "32a5022f1360894a149a84a937895bf7ae7666f3",
+  "pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+  "pulse_ordinary_baseline_merge": "ff787837d1835497a9b022fb64ebf9f34c676b95",
+  "root_ordinary_baseline_merge": "32a5022f1360894a149a84a937895bf7ae7666f3",
+  "source": {
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "index_blob": "7400f0157bb77cd8c6a07e69ae824a0d799df762",
+    "bytes": 295717,
+    "sha256": "544fc697074e5ac54f33d460f59792c686219c4a7140e56c47f01b6b702c6b5b",
+    "literal_TEST_count": 341
+  },
+  "cold7_ids": [
+    "NativeCandidateWindowCold7/ClassicInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/BranchInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/ClassicAllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCandidateWindowCold7/BranchAllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCandidateWindowCold7/ActualCommonPolicyMismatchCannotBecomeInitialDeclaration",
+    "NativeCandidateWindowCold7/ActualReferenceWindowMismatchCannotBecomeInitialDeclaration"
+  ],
+  "new_ids": [
+    "NativeCandidateWindowCold7/ClassicAllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCandidateWindowCold7/BranchAllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+  ],
+  "strengthened_existing_ids": [
+    "NativeCandidateWindowCold7/ClassicInitialDeclarationUsesActualParametersRatherThanTemplate",
+    "NativeCandidateWindowCold7/BranchInitialDeclarationUsesActualParametersRatherThanTemplate"
+  ],
+  "proof_scope": "actual model-backed cold declaration only; no measured C0/reference/Train5 certificate",
+  "no_local_build_numeric_or_server": true,
+  "decoder_physics_tolerances_unchanged": true,
+  "baseline_A4_unchanged": true
+}

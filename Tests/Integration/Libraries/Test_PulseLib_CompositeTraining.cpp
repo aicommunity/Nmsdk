@@ -2317,6 +2317,34 @@ template<class Owner> ConfiguredNativeTraining ActualCold7Declaration(NativeComp
     for(const auto& w:f.protocol.candidateWindowMeasurement->referenceInputWindows)c.windows.emplace_back(w.beginOffset,w.endOffset);
     return c;
 }
+template<class Owner> void ActualCold7AllBaseSchemasHaveOwningNumbers() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto original=ActualCold7Declaration(f);
+    for(int schema=1;schema<=4;++schema) {
+        SCOPED_TRACE(schema);auto c=original;
+        if(schema==2)c.search.n0CandidateRepeats=2;
+        if(schema>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(schema==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        // Model-backed declaration only: this does not mint live references,
+        // a capacitance baseline, a measurement or a Train5 certificate.
+        auto flat=c;flat.composite.reset();flat.candidateWindowPolicy.reset();
+        const auto flatWire=EncodeConfiguredNativeTraining(flat);ASSERT_EQ(flatWire.value("schema_version"),QJsonValue(schema));
+        const auto wire=EncodeConfiguredNativeTraining(c);
+        const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-cold7-envelope/base-":"classic-cold7-envelope/base-")+std::to_string(schema);
+        SavePortableObject(name.c_str(),"producer-wire.json",wire);
+        ASSERT_TRUE(wire.value("base_schema_version").isDouble());ASSERT_EQ(wire.value("base_schema_version"),QJsonValue(schema));
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(7));EXPECT_TRUE(wire.value("record_spikes").isBool());
+        auto actualFlat=wire;actualFlat.remove("base_schema_version");actualFlat.remove("composite_measurement");actualFlat["schema_version"]=schema;
+        EXPECT_EQ(actualFlat,flatWire);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+        const auto bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(bytes.toStdString())),wire);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue(false),QJsonValue(QString::number(schema)),QJsonValue(QJsonValue::Null)}) {
+            auto bad=wire;bad["base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+            EXPECT_THROW(ParseConfiguredNativeTraining(QJsonDocument(bad).toJson(QJsonDocument::Compact).toStdString()),std::invalid_argument);
+        }
+    }
+}
 template<class Owner> void ActualCold7InitialReadback() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto c=ActualCold7Declaration(f);f.attempt.reset();
     for(auto& b:c.search.bounds){b.minimumLength=1;b.maximumLength=8;b.minimumSynapses=1;b.maximumSynapses=3;}
@@ -2325,12 +2353,14 @@ template<class Owner> void ActualCold7InitialReadback() {
     actual=f.owner->ReadNativeParameters();const auto plan=MakeConfiguredNativeTrainingPlan(c);
     const auto captured=CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,actual,0.);
     const auto wire=EncodeConfiguredNativeTraining(captured);EXPECT_EQ(wire["schema_version"],QJsonValue(7));
+    ASSERT_TRUE(wire.value("base_schema_version").isDouble());EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
     EXPECT_EQ(captured.model.inputs[0].attachment,3);EXPECT_EQ(captured.model.inputs[0].synapses,2);
     ASSERT_TRUE(captured.model.inputs[0].resistance);EXPECT_DOUBLE_EQ(*captured.model.inputs[0].resistance,actual[0].resistance);
     EXPECT_EQ(f.modelSpec.inputs[0].attachment,2);EXPECT_FALSE(f.modelSpec.inputs[0].resistance);
     EXPECT_TRUE(captured.search.initialModelRevision.empty());EXPECT_EQ(captured.search.initialModelEpoch,0u);
     EXPECT_FALSE(captured.recordCapacitanceHistory);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
     EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(QJsonDocument(wire).toJson(QJsonDocument::Compact).toStdString())),wire);
     EXPECT_EQ(MakeConfiguredNativeTrainingPlan(captured).protocol.candidateWindowMeasurement->referenceInputWindows,
         plan.protocol.candidateWindowMeasurement->referenceInputWindows);
     const auto name=NativeCompositeFixture<Owner>::branch?"cold7-native-initial-declarations/branch":"cold7-native-initial-declarations/classic";
@@ -2350,6 +2380,8 @@ template<class Owner> void ActualCold7InitialBindingRefusal(bool wrongWindow) {
 }
 TEST(NativeCandidateWindowCold7,ClassicInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearner>();}
 TEST(NativeCandidateWindowCold7,BranchInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowCold7,ClassicAllBaseSchemasKeepNumericTypeThroughSerializedBytes){ActualCold7AllBaseSchemasHaveOwningNumbers<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowCold7,BranchAllBaseSchemasKeepNumericTypeThroughSerializedBytes){ActualCold7AllBaseSchemasHaveOwningNumbers<NNeuronTimeLearnerBranch>();}
 TEST(NativeCandidateWindowCold7,ActualCommonPolicyMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearner>(false);}
 TEST(NativeCandidateWindowCold7,ActualReferenceWindowMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearnerBranch>(true);}
 
