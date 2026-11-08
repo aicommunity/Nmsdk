@@ -927,6 +927,10 @@ template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& 
     if(service.Plan().protocol.schemaVersion==4) {
         write("initial-configuration.json",service.CompositeInitialConfiguration());
         write("runtime-plan.json",EncodeCompositeRuntimePlan(service.Plan()));
+    } else if(service.Plan().protocol.schemaVersion==5) {
+        write("initial-configuration.json",service.CompositeInitialConfiguration());
+        write("runtime-plan-scope.json",{{"kind","native_candidate_window_service_runtime_scope"},{"schema_version",1},
+            {"runtime_plan2_exported",false},{"reason","separate runtime2/package6 codec stage pending"}});
     }
     QJsonObject boundary{
         {"kind","native_composite_fixture_actual_boundary"},{"schema_version",1},{"neuron",snapshot},
@@ -2261,3 +2265,26 @@ TEST(NativeCandidateWindowCold7,ClassicInitialDeclarationUsesActualParametersRat
 TEST(NativeCandidateWindowCold7,BranchInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearnerBranch>();}
 TEST(NativeCandidateWindowCold7,ActualCommonPolicyMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearner>(false);}
 TEST(NativeCandidateWindowCold7,ActualReferenceWindowMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearnerBranch>(true);}
+
+namespace {
+template<class Owner> void CandidateWindowServiceStartsBeforeAnyNativeQueue() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto configuration=ActualCold7Declaration(f);
+    const auto plan=MakeConfiguredNativeTrainingPlan(configuration);const auto initial=f.Revision();f.attempt.reset();
+    f.owner->BeginNativeTraining(plan);const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();
+    EXPECT_EQ(service.SessionAttempt(),1u);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
+    EXPECT_EQ(service.Configuration().runId,configuration.runId+"/session/1");
+    EXPECT_EQ(service.CompositeInitialConfiguration()["schema_version"],QJsonValue(7));
+    EXPECT_EQ(service.CompositeInitialConfiguration()["run_id"],QJsonValue(QString::fromStdString(configuration.runId)));
+    EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());EXPECT_TRUE(service.CompositeReferenceGroupIds().empty());
+    EXPECT_EQ(service.CompositeGroups(),0u);EXPECT_EQ(service.CompositeNativeProbes(),0u);EXPECT_EQ(service.CompositeSampledFrames(),0u);
+    EXPECT_EQ(f.Revision(),initial);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    const auto archive=EncodeNativeCandidateWindowServiceArchive(service);const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document);
+    EXPECT_EQ(decoded.CurrentAttemptId(),service.Configuration().runId);EXPECT_TRUE(decoded.Records().empty());EXPECT_TRUE(decoded.ReferenceGroups().empty());
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-native-window-service5/bootstrap":"classic-native-window-service5/bootstrap";
+    SaveCompositeArchive(archive,name);SaveCompositeBoundary(f,name);f.owner->IsNeedToTrain=false;
+    EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(service.Certificate());EXPECT_EQ(service.CompositeNativeProbes(),0u);
+}
+}
+TEST(NativeCandidateWindowServiceBootstrap,ClassicIdentityAndCold7ExistBeforeFirstQueue){CandidateWindowServiceStartsBeforeAnyNativeQueue<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowServiceBootstrap,BranchIdentityAndCold7ExistBeforeFirstQueue){CandidateWindowServiceStartsBeforeAnyNativeQueue<NNeuronTimeLearnerBranch>();}
