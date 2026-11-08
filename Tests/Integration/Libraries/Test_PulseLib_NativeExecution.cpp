@@ -64,7 +64,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false,bool matchedOmission=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false,bool matchedOmission=false,bool separatedOmission=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -78,7 +78,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
         (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"")+
         (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"")+
-        (captureDomains?"_domain_capture":"")+(matchedOmission?"_matched_omission":"");
+        (captureDomains?"_domain_capture":"")+(matchedOmission?"_matched_omission":"")+(separatedOmission?"_separated_control":"");
     // Reader A/B changes artifact identity only, never the storage class names
     // included in the semantic model identity.
     const std::string name=profileName+(fullRevisionProvider?"_full_revision":"");
@@ -94,6 +94,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     learner->EnablePostTrainTuning=false;learner->AutoCalibrateFixedLTZThreshold=false;
     double gaps[]{.01,.08,.16,.24,.32,.40};
     if(mergedBurst){ASSERT_EQ(inputCount,2u);gaps[1]=.001;}
+    if(separatedOmission){ASSERT_TRUE(matchedOmission);ASSERT_EQ(inputCount,2u);gaps[1]=.5;}
     std::vector<double> isi,onsets;double onset=0.;QJsonArray configuredPattern;
     MDMatrix<double> pattern;pattern.Assign(inputCount,1,0.);
     for(unsigned i=0;i<inputCount;++i)
@@ -266,6 +267,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             ASSERT_EQ(group.State(),NativeMatchedOmissionState::Completed)<<closed.reason;
             ASSERT_EQ(group.IssuedNativeProbes(),inputCount+2);ASSERT_EQ(closed.packets.size(),inputCount+2);
             ASSERT_EQ(closed.witness.omitEachInput.size(),inputCount);ASSERT_TRUE(closed.assignment);
+            if(separatedOmission)EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Valid);
             EXPECT_EQ(closed.specification.baseModelRevision,base);EXPECT_EQ(readRevision(),base);
             EXPECT_TRUE(closed.witness.fullBefore.fullMaskRestored);EXPECT_TRUE(closed.witness.fullAfter.fullMaskRestored);
             for(const auto& trace:closed.witness.omitEachInput)EXPECT_TRUE(trace.fullMaskRestored);
@@ -279,10 +281,10 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             const QString directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name);
             ASSERT_TRUE(QDir().mkpath(directory));QJsonArray packets,traceFiles;
             for(const auto& packet:closed.packets)packets.append(EncodeNativeProbeEvidence(packet));
-            if(closed.assignment) {
+            if(closed.witness.fullBefore.nativeCompleted) {
                 std::vector<const MatchedOmissionTrace*> traces{&closed.witness.fullBefore};
                 for(const auto& omitted:closed.witness.omitEachInput)traces.push_back(&omitted);
-                traces.push_back(&closed.witness.fullAfter);
+                if(closed.witness.fullAfter.nativeCompleted)traces.push_back(&closed.witness.fullAfter);
                 for(std::size_t i=0;i<traces.size();++i) {
                     const auto& trace=*traces[i];const auto& native=closed.packets.at(i);
                     NativeResponseDomainCapture proof;proof.Arm(trace.prepared,native.observation->specification,trace.physicalChannelPaths);
@@ -303,9 +305,39 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                     traceFiles.append(QJsonObject{{"path",fileName},{"presented_ordinals",mask},{"sha256",QString::fromLatin1(QCryptographicHash::hash(csv,QCryptographicHash::Sha256).toHex())}});
                 }
             }
+            QJsonArray assignmentReasons,maxima,paths;
+            for(const auto& path:closed.specification.physicalChannelPaths)paths.append(QString::fromStdString(path));
+            if(closed.assignment) {
+                for(const auto& reason:closed.assignment->reasons)assignmentReasons.append(QString::fromStdString(reason));
+                for(const auto& peak:closed.assignment->maxima) {
+                    QJsonArray support,influences;
+                    for(auto input:peak.supportedInputs)support.append(int(input));
+                    for(auto influence:peak.influenceByInput)influences.append(OmissionInfluenceName(influence));
+                    maxima.append(QJsonObject{{"first_sample",int(peak.maximum.firstSample)},{"last_sample",int(peak.maximum.lastSample)},
+                        {"raw_potential",peak.maximum.rawPotential},{"amplitude",peak.maximum.amplitude},
+                        {"time",peak.maximum.time},{"plateau_end",peak.maximum.plateauEnd},
+                        {"supported_inputs",support},{"influence_by_input",influences},{"unknown",peak.unknown},
+                        {"clipped",peak.clipped},{"precedes_assigned_stimulus",peak.precedesAssignedStimulus}});
+                }
+            }
             QJsonObject summary{{"schema_version",1},{"kind","native_matched_omission_fixture"},
                 {"method",MatchedOmissionResult::MethodId()},{"group_id",QString::fromStdString(groupPlan.groupId)},
                 {"native_probes",int(group.IssuedNativeProbes())},{"packets",packets},{"traces",traceFiles},
+                {"source_pattern_sha256",QString::fromStdString(closed.specification.patternHash)},
+                {"reset_binding",QString::fromStdString(closed.specification.resetBinding)},
+                {"model_instance_binding",QString::fromStdString(closed.specification.modelInstanceBinding)},
+                {"physical_channel_paths",paths},{"assigned_input",int(closed.specification.assignedInput)},
+                {"assigned_channel",int(closed.specification.channel)},
+                {"policy",QJsonObject{{"comparison_radius_ticks",int(groupPlan.policy.comparisonRadiusTicks)},
+                    {"time_comparison_tolerance",groupPlan.policy.timeComparisonTolerance},
+                    {"baseline_absolute",groupPlan.policy.baselineAbsolute},
+                    {"repeatability_absolute",groupPlan.policy.repeatabilityAbsolute},
+                    {"repeatability_relative",groupPlan.policy.repeatabilityRelative},
+                    {"influence_absolute",groupPlan.policy.influenceAbsolute},
+                    {"influence_relative",groupPlan.policy.influenceRelative}}},
+                {"assignment_reasons",assignmentReasons},{"maxima",maxima},
+                {"selected_full_maximum",closed.assignment && closed.assignment->selectedFullMaximum?
+                    QJsonValue(int(*closed.assignment->selectedFullMaximum)):QJsonValue(QJsonValue::Null)},
                 {"reason",QString::fromStdString(closed.reason)},
                 {"assignment_validity",closed.assignment?MatchedOmissionValidityName(closed.assignment->validity):"not_available"},
                 {"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
@@ -1219,3 +1251,6 @@ TEST(NativeMatchedOmissionCapture,CloseNativeRejectsTamperedObservation)
     EXPECT_FALSE(fixture.capture.Observation().complete);
 }
 }
+
+TEST(NativeMatchedOmissionExecution,ClassicSeparatedControl2000) { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,false,false,{},false,false,false,true,true); }
+TEST(NativeMatchedOmissionExecution,BranchSeparatedControl2000) { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,false,false,false,{},false,false,false,true,true); }
