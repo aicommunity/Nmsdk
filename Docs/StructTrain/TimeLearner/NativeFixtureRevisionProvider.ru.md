@@ -56,3 +56,27 @@ BurstAssignment включает иной протокол/критерии. Б�
 reference/verify probes и aggregate certificate. Счётчики и wall time
 по-прежнему относятся только к первой пробе. Это оптимизация test fixture,
 не изменение алгоритма обучения; Exact/классификация не заявляются.
+
+
+## ASan-приёмка scoped fixture изменения
+
+M40 завершил34/34 без skipped:22 invalidation/NoopBuild,8 N2 Typed/Full,
+2 N6 Dimensions schema2 и2 N6 BurstAssignment schema3. Все575 членов архива,
+16 source bindings, source-declared JUnit IDs, реальные libasan/executable,
+неизменность runtime и закрытие/lease независимо сверены:
+[квитанция](NativeFixtureRevisionProviderAsanVerification.json),
+evidence `3acd1922b95e491cbfabb6f53343152ad56d4a4a`.
+ASan options detect_leaks=0: отсутствие утечек не проверялось.
+
+Четыре A/B пары совпали по первой CSV/native observation/model/features.
+Дополнительно14 auxiliary files проверены по bytes либо certificate semantic
+fields с заменой только объявленного run/trial suffix. Для auxiliary probes
+не заявляются отдельные counters или timing. Автоматический needs_review
+сохранён; ручной просмотр всех13 stderr подтвердил только fixture provenance.
+
+Оба N6 протокола текущего typed fixture проходят прежний бюджет1200s.
+Это не стирает старый timeout другого среза и не закрывает весь старый ASan93.
+Compiled root818/Pulse3acc ещё не содержит MatchedOmissionAssignment/NativeGroup;
+проверка нового алгоритмического блока выполняется отдельно. Resource root
+старого build cache указан в receipt; полная Git identity этого resource tree
+здесь отдельно не подтверждена, научная worker-приёмка этим не расширяется.

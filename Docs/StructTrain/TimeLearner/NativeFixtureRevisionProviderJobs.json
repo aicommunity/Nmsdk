@@ -19,9 +19,11 @@
   },
   "asan_options": "detect_leaks=0",
   "per_native_case_wall_limit_seconds": 1200,
-  "last_observed": "worker_started_previous_dependency_closed_and_released",
-  "accepted": false,
+  "last_observed": "closed_asan34_passed_and_independently_verified_lease_released",
+  "accepted": true,
   "training_certificate_eligible": false,
   "whole_plan_complete": false,
-  "comparison_scope": "first probe packet/CSV/model/features/counters plus auxiliary CSV and aggregate certificate; auxiliary counters and wall time unavailable"
+  "comparison_scope": "first probe packet/CSV/model/features/counters plus auxiliary CSV and aggregate certificate; auxiliary counters and wall time unavailable",
+  "evidence_commit": "3acd1922b95e491cbfabb6f53343152ad56d4a4a",
+  "scope": "fixture provider parity/faults and both N6 protocols only; no matched omission code in this compiled snapshot"
 }
