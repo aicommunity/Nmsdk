@@ -39,7 +39,10 @@
       "kernel_control_group_after": "",
       "lease_released": true,
       "postclosure_capture": "/media/user/Data/TimeLearnerRefactor/publication-composite-mechanical-m40-a1",
-      "postclosure_source_files": 3050
+      "postclosure_source_files": 3050,
+      "negative_evidence_commit": "da7edb57345de7eb45bb2446a56cefe7d74d4448",
+      "receipt": "TypedCompositeMechanicalM40A1NegativeVerification.json",
+      "negative_publication_pending": false
     },
     {
       "job_id": "s06-composite-mechanical-m40-a2",
@@ -86,7 +89,7 @@
       "pulse": "269164d2a2339908a8667e859a04a8e81da50c3c",
       "bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
       "rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
-      "state": "started_terminal_outcome_not_verified",
+      "state": "closed_failed_cpp_compilation_before_tests",
       "unit": "timelearner-83a6df1b-97f7-44f1-be4f-a1be7023b68d.service",
       "invocation_id": "04ec688bd99e4a62af549891dfc73a8e",
       "initial_main_pid": 2754480,
@@ -103,7 +106,41 @@
       "container": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-core-m40-a1-container",
       "do_not_restart_on_observation_timeout": true,
       "service_codecs_cli_acceptance": false,
-      "scientific_verdict": null
+      "scientific_verdict": null,
+      "actual_cpp_tests_executed": 0,
+      "built": false,
+      "lease_released": true,
+      "failure": "const UEPtr derived-to-container boundary conversion in NativeCompositeTrainingAttempt.cpp; initial missing-header hypothesis superseded.",
+      "postclosure_source_files": 3056,
+      "negative_publication_pending": true,
+      "postclosure_capture": "/media/user/Data/TimeLearnerRefactor/publication-composite-core-m40-a1-negative"
+    },
+    {
+      "host": "10.245.1.17",
+      "bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "expected_cpp_cases": 143,
+      "native_composite_cases": 46,
+      "old_regression_cases": 97,
+      "compiled_inventory_crosscheck_required": true,
+      "build_parallel_jobs": 2,
+      "do_not_restart_on_observation_timeout": true,
+      "service_codecs_cli_acceptance": false,
+      "scientific_verdict": null,
+      "job_id": "s07-composite-core-m40-a2",
+      "root": "d92022a41d6f448852d2ecfc6f87ca5a719843bc",
+      "pulse": "e183bee14be285862663c094b0b36b3f0dc15747",
+      "state": "started_terminal_outcome_not_verified",
+      "unit": "timelearner-51aa7fe7-27bc-4fb4-99e4-377aee67ef2c.service",
+      "invocation_id": "98c477f7ffb942779a531e3f67f77bd5",
+      "initial_main_pid": 2763443,
+      "initial_start_ticks": "321025373",
+      "request_sha256": "d9027fb46efa4563d009026c1396ff55cc6c0bfe2a7f08a95e4785dac1147d7a",
+      "worker_sha256": "63e707a88803ffefe6a2a1cf652852c0e27b4490b5a8860a412507aebd50b80d",
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
+      "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-core-m40-a2",
+      "container": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-core-m40-a2-container",
+      "production_algorithm_or_tolerances_changed_by_fix": false
     }
   ],
   "prepared_feature": {
