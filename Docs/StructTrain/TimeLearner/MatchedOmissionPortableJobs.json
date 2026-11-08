@@ -36,7 +36,7 @@
       "host": "10.245.1.11",
       "job": "s07-matched-codec-elder-a1",
       "root": "461cbcc3e1f904083a37ce479c9ee79e077588d1",
-      "state": "running_after_explicit_remote_absence_check",
+      "state": "closed_independently_verified_normal_gate_passed",
       "reason": "jump_host_connect_timeout_with_Automats2_disconnected",
       "remote_launch_confirmed": true,
       "cpp_tests_planned": 80,
@@ -51,7 +51,16 @@
       "request_sha256": "d8c3951a9bc70f3f2be34c1a2a1206a305e5ca697ec00eaa8b2e615514cd3f28",
       "python_tests_confirmed_passed": 43,
       "original_transport_failure_preserved": true,
-      "worker_shadowing_fixed": true
+      "worker_shadowing_fixed": true,
+      "terminal_result_verified": true,
+      "original_terminal_passed": true,
+      "cpp_tests_confirmed_passed": 80,
+      "evidence_commit": "9cf4bfa0fcabe605dd83faa0d9fc188f67d52273",
+      "recovery_receipt": "MatchedOmissionCodecElderA1Verification.json",
+      "runtime_resource_freeze_independently_verified": true,
+      "independent_portable_groups": 6,
+      "independent_fixture_groups": 10,
+      "native_csv_ab_equal": 28
     }
   ],
   "new_complete_outcome_controls": [
@@ -60,11 +69,9 @@
     "NonRepeatable"
   ],
   "remaining": [
-    "Recover connectivity and inspect the exact existing M40 kernel binding before any cache update",
-    "Collect and independently verify closed M40 results, cross-language replay and waveform A/B",
-    "Run normal controls including the three additional complete negative outcomes on Elder",
-    "Run sanitizer controls for the additional outcomes with an explicit separate source scope",
-    "Publish compact primary artifacts through Git and verify closure",
+    "Complete sanitizer controls for the additional outcomes and the new resistance-step ownership guard in their separate source scope",
+    "Publish and independently verify that new gate through Git",
+    "Resolve assigned-maximum applicability under the clarified separate-vertex contract",
     "Integrate validated composite measurement with references, search and final verification only after assignment applicability is resolved"
   ],
   "training_certificate_eligible": false,

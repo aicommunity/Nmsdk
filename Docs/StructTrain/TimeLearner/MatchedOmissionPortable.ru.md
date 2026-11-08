@@ -54,17 +54,22 @@ training_certificate_eligible остаются false. C0 witness, модель, 
 На реальных primary требуется независимый Python replay и сравнение с C++;
 исходные CSV контрольного протокола сравниваются с прежним accepted snapshot.
 
-Локально выполнены только AST, literal test inventory и Git checks. Сборки и
-численные проверки выполняются на серверах; результаты ещё не приняты. Успех
-этого подэтапа не завершает этапы 5–8, полную матрицу или научное обучение.
+Локально выполнены только AST, literal test inventory и Git metadata checks.
+На Elder/normal приняты все 80 C++ и 43 Python tests, включая complete
+Missing/Clipped/NonRepeatable. Независимо проверены шесть portable и десять
+fixture groups, 28 CSV побайтно совпали с прежними первичными данными.
+[Receipt](MatchedOmissionCodecElderA1Verification.json), evidence commit
+`9cf4bfa0fcabe605dd83faa0d9fc188f67d52273`.
 
-
-В исходный набор отдельно добавлены complete Missing/Clipped/NonRepeatable
-roundtrip cases: законченный отрицательный результат обязан сохраняться после
-импорта, не становясь Valid или сертификатом. Они выполняются следующим
-серверным gate; первые20 codec cases и40 Python tests уже прошли на M40,
-остальная приёмка первого снимка ещё выполняется. Принятый результат для
-всего нового набора появится только после соответствующих server receipts.
+На M40/ASan первоначальный снимок прошёл 77 C++ и 40 Python tests, но исходная
+обёртка завершилась с ошибкой сравнения runtime inventory. Этот terminal=false
+сохранён. Независимая post-closure проверка подтвердила все результаты и
+неизменность runtime/resources: [receipt](MatchedOmissionCodecM40A1RecoveryVerification.json).
+Он не включает три дополнительных complete negative cases и новый setter guard.
+Новый отдельный ASan gate содержит 90 C++/43 Python, включая десять ownership
+controls; его приёмка ещё ожидается. Эти подэтапы не завершают этапы 5–8,
+полную матрицу или научное обучение. Метод v1 остаётся диагностическим и
+не удовлетворяет автоматически уточнённой цели Train.
 
 Для normal проверки на Elder удалены только13 static AR archives старых
 закрытых runtime a1/a2; последний a4, executable/ini, пользовательский Nmsdk и

@@ -386,12 +386,10 @@ CLI. Перед запуском требуется свежий штатный 
 [Production portable witness](MatchedOmissionPortable.ru.md) сохраняет всю N+2
 группу, исходные/applied интервалы, policy/budgets, canonical primary и свежий
 assignment. Метод назначения v1 не изменён; в Train он пока не включён.
-На M40 tool root82de17c/Pulsee2c6311 подтверждены40 Python tests и70 из77
-заявленных C++ tests; последнее authoritative наблюдение — работающий kernel
-unit перед отключением VPN. Terminal/cross-language/28 CSV A/B ещё не приняты.
-[Точные попытки и bindings](MatchedOmissionPortableJobs.json). Normal80/Python43
-на root461cbcc/Pulsee2c6311 подготовлен, но попытка соединения не дошла до
-удалённой команды. Состояние M40 нужно проверить до любого обновления cache.
+На M40 tool root82de17c/Pulsee2c6311 подтверждены77 C++/40 Python;
+исходная ошибка обёртки и независимая recovery-проверка описаны ниже.
+На Elder root461cbcc/Pulsee2c6311 завершены80 C++/43 Python, первичные данные
+и независимая проверка опубликованы. [Точные попытки и bindings](MatchedOmissionPortableJobs.json).
 
 [Сверка calibration/PostTune](CalibrationPostTunePropertyReconciliation.ru.md)
 исправила44 устаревших формулировки реестра, сохранив их исторические поля;
@@ -402,14 +400,14 @@ runtime acceptance.
 для native-owned модели. Прежнее значение возвращает true без child writes;
 изменение отклоняется. Legacy N0/N1 сохраняют прежнюю семантику. Подготовлены10
 real-storage ownership/lifecycle/import cases, включая zero-packet ExternalStop
-frozen diagnostic import без фиктивного сертификата; серверного gate ещё нет.
+frozen diagnostic import без фиктивного сертификата; отдельный ASan gate выполняется.
 [Контракт и ограничения](NormalizationPropertyContracts.ru.md).
 
 ClDesc двух learner в Bin918ae5e уточнены: Step — абсолютное сопротивление
 дополнительных синапсов legacy N0, а не приращение. Изменены только Header и
 Description; [XML semantic check](ResistanceStepClDescTextVerification.json)
-подтверждает неизменность всех остальных значений. Runtime resources работающего
-M40 не обновлялись: его снимок по-прежнему использует Bin3b9ca28.
+подтверждает неизменность всех остальных значений. Завершённые codec gates
+использовали Bin3b9ca28; новый отдельный guard gate использует Bin918ae5e.
 
 При подготовке отдельной копии Bin исправлена унаследованная относительная
 core.worktree-привязка только новой копии. Две созданные этим подготовительным
@@ -417,11 +415,12 @@ core.worktree-привязка только новой копии. Две соз
 копией и Git; старые файлы сохранены.
 [Operation receipt](TimeLearnerBinWorktreeBindingCorrection.json).
 
-Последняя подготовленная ветка содержит Pulse2c3eb8d/Bin918ae5e, а запущенные и
-подготовленные codec gates используют явно указанные прежние gitlinks. Эти
-проверки не переносятся автоматически на новый setter patch. Исходные этапы1–12
-и научная матрица остаются частично выполненными; только этап0 полностью принят.
-
+Новый отдельный ASan job `s07-native-step-m40-a1` использует root4bfab020,
+Pulse2c3eb8d/Bin918ae5e: план90 C++/43 Python, Python уже прошли,
+сборка выполняется. Kernel binding подтверждён; источник и ресурсы этого job
+заморожены. Проверки прежних снимков не переносятся автоматически на guard.
+Исходные этапы1–12 и научная матрица остаются частично выполненными;
+только этап0 полностью принят.
 
 После восстановления связи M40 проверен по исходному binding: все77 C++ и40
 Python прошли,6 portable/10 fixture readers успешны,28 CSV совпали побайтно.
@@ -433,10 +432,13 @@ actual loaded files и kernel/lease closure.
 Это приёмка численных/codec результатов с отдельно сохранённым отказом
 обёртки, а не объявление исходного pipeline успешным.
 
-На Elder после проверки отсутствия задания запущен normal80/Python43;43
-Python уже прошли, сборка и остальные проверки ещё выполняются. Исправленный
-worker сравнивает runtime с сохранённым JSON snapshot, не с переиспользуемой
-переменной. Новое состояние не отменяет первоначальный transport failure.
+На Elder normal80/Python43 завершены успешно. Evidence commit
+`9cf4bfa0fcabe605dd83faa0d9fc188f67d52273` и
+[независимая квитанция](MatchedOmissionCodecElderA1Verification.json) подтверждают
+точные test IDs, шесть portable/десять fixture readers, 28 побайтных CSV A/B,
+source/runtime/resources hashes и kernel/lease closure. Исходные десять
+operational needs_review и двадцать provenance notices сохранены; их не
+переименовывали в научный PASS. Первоначальный transport failure также сохранён.
 
 Пользователь подтвердил, что отдельная ранняя вершина допустима при небольшом
 остаточном влиянии на позднюю. [Уточнённая семантика и ограничения следующего
