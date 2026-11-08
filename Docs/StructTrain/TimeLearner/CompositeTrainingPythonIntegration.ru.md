@@ -193,3 +193,8 @@ Accepted final_group_ids новой схемы должны относиться
 смешения старых и свежих final measurements. Исторические consumed finals
 разрешены среди остальных archive records, но не входят в свежий all-input
 сертификат. Это source guard; нужен реальный multi-sweep regression gate.
+Выбранный final run также должен быть последним фактически наблюдаемым в
+records текущей попытки: сравнивается числовой canonical decimal suffix, включая
+новый partial/rejected group. Полный старый sweep не становится свежим из-за
+совпадения graph/epoch. Переход по live intent без actual record из CSV не
+восстанавливается; его clear остаётся обязанностью native controller.

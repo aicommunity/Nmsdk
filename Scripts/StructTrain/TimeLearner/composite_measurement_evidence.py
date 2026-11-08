@@ -245,6 +245,14 @@ def audit_composite_measurement_archive(document, configuration, *, runtime_plan
         require(all(record['attempt_id'] == archive['current_attempt_id'] for record in final_records)
                 and len({record['logical_request']['run_id'] for record in final_records}) <= 1,
                 'composite_archive_final_generation_mixed')
+        observed_final_runs = {record['logical_request']['run_id'] for record in archive['records']
+            if record['purpose'] == 'final' and record['attempt_id'] == archive['current_attempt_id']}
+        if final_records:
+            # Namespaces were checked above. A recorded partial/rejected group
+            # starts a newer sweep too; an unrecorded live intent is unknown.
+            latest_run = max(observed_final_runs, key=lambda run: int(run.rsplit('/', 1)[1]))
+            require(all(record['logical_request']['run_id'] == latest_run for record in final_records),
+                    'composite_archive_final_generation_stale')
         counters=archive['counters'];keys(counters,{'attempt','archive'},'composite_archive_counter_fields')
         keys(counters['attempt'],{'logical_groups','native_probes','sampled_frames'},'composite_attempt_counter_fields')
         keys(counters['archive'],{'groups','native_probes','sampled_frames','primary_bytes'},'composite_archive_total_counter_fields')
