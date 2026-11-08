@@ -863,10 +863,21 @@ template<class Owner> ConfiguredNativeTraining CompositeCold(NativeCompositeFixt
     c.maximumReferenceProbes=p.maximumReferenceProbes;c.maximumInvalidReferenceProbes=p.maximumInvalidReferenceProbes;
     c.maximumModelSeconds=p.maximumModelSeconds;c.maximumWallSeconds=p.maximumWallSeconds;c.composite=p.composite;return c;
 }
+void SaveColdEnvelopeWire(bool branch,const std::string& stage,const QJsonObject& object) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const auto directory=QString::fromLocal8Bit(output)+"/"+(branch?"branch-cold6-envelope/":"classic-cold6-envelope/")+QString::fromStdString(stage);
+    Require(QDir().mkpath(directory),"cold_envelope_output_directory");QFile file(directory+"/producer-wire.json");
+    Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"cold_envelope_output_new_only");
+    const auto bytes=QJsonDocument(object).toJson(QJsonDocument::Compact);Require(file.write(bytes)==bytes.size() && file.flush(),"cold_envelope_output_write");
+}
 template<class Owner> void ColdAndProtocolRoundtrip() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);
     const auto wire=EncodeConfiguredNativeTraining(c);EXPECT_EQ(wire["schema_version"].toInt(),6);
+    SaveColdEnvelopeWire(NativeCompositeFixture<Owner>::branch,"original-roundtrip",wire);
+    ASSERT_TRUE(wire.value("base_schema_version").isDouble());ASSERT_EQ(wire.value("base_schema_version"),QJsonValue(1));
     EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    const auto bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(bytes.toStdString())),wire);
     const auto protocol=MakeConfiguredNativeTrainingPlan(c).protocol;const auto encoded=EncodeVerificationProtocol(protocol);
     EXPECT_EQ(DecodeVerificationProtocol(encoded),protocol);EXPECT_EQ(encoded["schema_version"].toInt(),4);
     EXPECT_EQ(CompositeTrainingProtocolBinding(protocol),CompositeTrainingProtocolBinding(DecodeVerificationProtocol(encoded)));
@@ -880,6 +891,32 @@ template<class Owner> void ColdAndProtocolRoundtrip() {
     auto wrong=encoded;wrong["schema_version"]=3;EXPECT_THROW(DecodeVerificationProtocol(wrong),std::invalid_argument);
     wrong=encoded;auto geometry=wrong["composite_measurement"].toObject();geometry["unused"]=0;wrong["composite_measurement"]=geometry;
     EXPECT_THROW(DecodeVerificationProtocol(wrong),std::invalid_argument);
+}
+template<class Owner> void ColdEnvelopeAllBaseSchemasHaveOwningNumbers() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto original=CompositeCold(f);
+    for(int schema=1;schema<=4;++schema) {
+        SCOPED_TRACE(schema);auto c=original;
+        if(schema==2)c.search.n0CandidateRepeats=2;
+        if(schema>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(schema==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        // Only the declared cold policy changes. No C0 or response is invented:
+        // these are actual model-backed encoder/decoder checks, not training.
+        auto flat=c;flat.composite.reset();const auto flatWire=EncodeConfiguredNativeTraining(flat);
+        ASSERT_EQ(flatWire.value("schema_version"),QJsonValue(schema));
+        const auto wire=EncodeConfiguredNativeTraining(c);SaveColdEnvelopeWire(NativeCompositeFixture<Owner>::branch,"base-"+std::to_string(schema),wire);
+        ASSERT_TRUE(wire.value("base_schema_version").isDouble());ASSERT_EQ(wire.value("base_schema_version"),QJsonValue(schema));
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_TRUE(wire.value("record_spikes").isBool());
+        auto actualFlat=wire;actualFlat.remove("base_schema_version");actualFlat.remove("composite_measurement");actualFlat["schema_version"]=schema;
+        EXPECT_EQ(actualFlat,flatWire); // The envelope must preserve EVERY original flat field.
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+        const auto bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(bytes.toStdString())),wire);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue(false),QJsonValue(QString::number(schema)),QJsonValue(QJsonValue::Null)}) {
+            auto bad=wire;bad["base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+            EXPECT_THROW(ParseConfiguredNativeTraining(QJsonDocument(bad).toJson(QJsonDocument::Compact).toStdString()),std::invalid_argument);
+        }
+    }
 }
 template<class Owner> void ColdAutostart(int mode) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);f.attempt.reset();
@@ -925,6 +962,8 @@ template<class Owner> void ActualDimensions(std::size_t n) {
 }
 TEST(NativeCompositeDeclarations,ClassicCold6AndProtocol4StrictRoundtrip){ColdAndProtocolRoundtrip<NNeuronTimeLearner>();}
 TEST(NativeCompositeDeclarations,BranchCold6AndProtocol4StrictRoundtrip){ColdAndProtocolRoundtrip<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeDeclarations,ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes){ColdEnvelopeAllBaseSchemasHaveOwningNumbers<NNeuronTimeLearner>();}
+TEST(NativeCompositeDeclarations,BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes){ColdEnvelopeAllBaseSchemasHaveOwningNumbers<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeAutostart,ClassicCalculateMode0){ColdAutostart<NNeuronTimeLearner>(0);}
 TEST(NativeCompositeAutostart,ClassicCalculateMode1){ColdAutostart<NNeuronTimeLearner>(1);}
 TEST(NativeCompositeAutostart,BranchCalculateMode0){ColdAutostart<NNeuronTimeLearnerBranch>(0);}
