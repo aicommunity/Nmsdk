@@ -1,0 +1,460 @@
+{
+  "kind": "declared_time_scale_auditor_active_move_review",
+  "schema_version": 1,
+  "base_root": "4d683e5b0a505223bba20eb504314f5785a29fa6",
+  "base_user_Bin": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+  "Bin_pre_retirement_merge": "67c72f043f534c0114bcfa68fd7e244bdf573f56",
+  "Bin_commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+  "verified_root_source": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277",
+  "action": "moved_to_root",
+  "source_records": [
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py",
+      "action": "moved_to_root",
+      "archive_commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "blob_sha1": "2c865b33ab4bbd3c9c72c8f636aef18dca977160",
+      "content_sha256": "5ef2a7a21163e8cdacdab27da7fbff7130be979673002a6ab2c200e5b065aa7b",
+      "bytes": 12763,
+      "last_change_commit": "2c7fdd86c8974c3c7a0ac1635c809d8e6cb0d8d7",
+      "replacement": "Scripts/StructTrain/TimeLearner/declared_time_scales.py",
+      "verified_root_commit": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277",
+      "Bin_retirement_commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/36f4ce6ae4cdbea90240dced08425fdf64f3bcf7/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7:Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py"
+      ],
+      "reason": "Active static configuration diagnostic moved to root with corrected finite-positive/unknown/frozen-byte/clock/threshold semantics; conditional zero-G Q only, no integrator/effective-model/storage verdict; old measurements/reports preserved.",
+      "runtime_equivalence_attested": false,
+      "scientific_verdict": null,
+      "final_checks_per_worker": 143,
+      "M40_evidence": "da39534553539e2c37c5cb4f188adc8b49b0311c",
+      "Elder_evidence": "f2fa0b68ac0b8747befed77d8e50c13f03cd8f42"
+    },
+    {
+      "repository": "Bin",
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+      "action": "moved_to_root",
+      "archive_commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "blob_sha1": "689d78e13ece1fdb8cf7df157e73822f23b16701",
+      "content_sha256": "d6fc4ff1b8ef51a72e37266fdd6e1f87a20a6539a0bde9821b05470ec0ecd02f",
+      "bytes": 6462,
+      "last_change_commit": "13b6a7dec175b1aeaeee0700f50f683ab1061970",
+      "replacement": "Scripts/StructTrain/TimeLearner/declared_time_scales.py",
+      "verified_root_commit": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277",
+      "Bin_retirement_commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "archive_url": "https://github.com/aicommunity/Nmsdk-Bin/blob/36f4ce6ae4cdbea90240dced08425fdf64f3bcf7/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+      "retrieval_command": [
+        "git",
+        "-C",
+        "Bin",
+        "show",
+        "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7:Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py"
+      ],
+      "reason": "Active static configuration diagnostic moved to root with corrected finite-positive/unknown/frozen-byte/clock/threshold semantics; conditional zero-G Q only, no integrator/effective-model/storage verdict; old measurements/reports preserved.",
+      "runtime_equivalence_attested": false,
+      "scientific_verdict": null,
+      "final_checks_per_worker": 143,
+      "M40_evidence": "da39534553539e2c37c5cb4f188adc8b49b0311c",
+      "Elder_evidence": "f2fa0b68ac0b8747befed77d8e50c13f03cd8f42"
+    }
+  ],
+  "manifest_counts": {
+    "before": {
+      "retired_files": 352,
+      "moved_files": 2,
+      "total": 354
+    },
+    "after": {
+      "retired_files": 352,
+      "moved_files": 4,
+      "total": 356
+    },
+    "old_354_records_unchanged": true,
+    "complete": false
+  },
+  "canonical_Git_verification": {
+    "kind": "Bin_two_auditor_canonical_Git_removal_verification",
+    "schema_version": 1,
+    "base_user_checkout": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+    "private_premerge": "67c72f043f534c0114bcfa68fd7e244bdf573f56",
+    "merge_tree_equals_accepted36": true,
+    "private_Bin_commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+    "archive_commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+    "rows": [
+      {
+        "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py",
+        "git_blob": "2c865b33ab4bbd3c9c72c8f636aef18dca977160",
+        "bytes": 12763,
+        "sha256": "5ef2a7a21163e8cdacdab27da7fbff7130be979673002a6ab2c200e5b065aa7b",
+        "parent_Git_bytes_verified": true,
+        "child_path_absent": true
+      },
+      {
+        "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+        "git_blob": "689d78e13ece1fdb8cf7df157e73822f23b16701",
+        "bytes": 6462,
+        "sha256": "d6fc4ff1b8ef51a72e37266fdd6e1f87a20a6539a0bde9821b05470ec0ecd02f",
+        "parent_Git_bytes_verified": true,
+        "child_path_absent": true
+      }
+    ],
+    "exact_diff": [
+      [
+        "A",
+        "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/README.md"
+      ],
+      [
+        "D",
+        "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py"
+      ],
+      [
+        "D",
+        "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py"
+      ]
+    ],
+    "all_other_Git_tree_paths_unchanged": true,
+    "user_worktree_HEAD_and_tracked_status_unchanged": true,
+    "initial_working_tree_preimage_check": "failed before mutation; PowerShell incorrectly continued; not accepted as passed",
+    "initial_failed_physical_digest_not_recorded": true,
+    "canonical_Git_object_verification_is_separate": true,
+    "core_autocrlf": "true",
+    "no_runtime_or_numerical_acceptance_claim": true
+  },
+  "dependency_merge_review": {
+    "actual_to_accepted_files": 34,
+    "deleted_prior_historical_scripts": 25,
+    "ClDesc_documents": 2,
+    "other_markdown_documents": 7,
+    "Project_Parameters_CPP_model_changes": false,
+    "merge_tree_exactly_accepted36": true,
+    "actual_user_checkout_unchanged": true
+  },
+  "caller_review": [
+    {
+      "scope": "root_main",
+      "repo": "E:/Science-Repo/nmsdk-matched-witness-codec",
+      "commit": "1506332329ee2dec10150dc2d94b7f20842965cf",
+      "matches": [
+        {
+          "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+          "line": 651,
+          "text": "Частотный аудит, включая значения всех 312 случаев и provenance каждого файла: [JSON](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/fixed_step_config_audit_2026-10-14.json); используемый для него скрипт: [audit_timelearner_step_stability.py](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py). Это статическая проверка конфигов; она не заменяет учёт runtime-значений `G` и `K`.",
+          "role": "historical_report_link_update_to_Git_history"
+        },
+        {
+          "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+          "line": 661,
+          "text": "Сводка всех отслеживаемых конфигов, хеши Train/Project.ini и Parameters_00.xml, минимумы по конфигурациям и точный перечень шести пограничных случаев: [JSON-аудит](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/historical_config_tree_step_audit_2026-10-14.json); повторяемый read-only сканер: [audit_timelearner_config_tree_stability.py](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py). Он исключает неотслеживаемые runtime-копии, чтобы частичные попытки не считались отдельными историческими конфигами.",
+          "role": "historical_report_link_update_to_Git_history"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 40,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 49,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 58,
+          "text": "      \"audit_timelearner_step_stability\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 59,
+          "text": "      \"audit_timelearner_config_tree_stability\"",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 188,
+          "text": "        \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json",
+          "line": 7150,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json",
+          "line": 7160,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/related_script_review.json",
+          "line": 2407,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/related_script_review.json",
+          "line": 2425,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+          "line": 1385,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+          "line": 1396,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-bin-worktree-repair-a1/actual-content-before.json",
+          "line": 51798,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-bin-worktree-repair-a1/actual-content-before.json",
+          "line": 51802,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a1/actual-bin-content.json",
+          "line": 51798,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a1/actual-bin-content.json",
+          "line": 51802,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        }
+      ],
+      "count": 17
+    },
+    {
+      "scope": "root_port",
+      "repo": "E:/Science-Repo/nmsdk-declared-time-scales",
+      "commit": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277",
+      "matches": [
+        {
+          "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+          "line": 651,
+          "text": "Частотный аудит, включая значения всех 312 случаев и provenance каждого файла: [JSON](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/fixed_step_config_audit_2026-10-14.json); используемый для него скрипт: [audit_timelearner_step_stability.py](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py). Это статическая проверка конфигов; она не заменяет учёт runtime-значений `G` и `K`.",
+          "role": "historical_report_link_update_to_Git_history"
+        },
+        {
+          "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+          "line": 661,
+          "text": "Сводка всех отслеживаемых конфигов, хеши Train/Project.ini и Parameters_00.xml, минимумы по конфигурациям и точный перечень шести пограничных случаев: [JSON-аудит](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/diagnostics/historical_config_tree_step_audit_2026-10-14.json); повторяемый read-only сканер: [audit_timelearner_config_tree_stability.py](../../../Bin/Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py). Он исключает неотслеживаемые runtime-копии, чтобы частичные попытки не считались отдельными историческими конфигами.",
+          "role": "historical_report_link_update_to_Git_history"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 40,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 49,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 58,
+          "text": "      \"audit_timelearner_step_stability\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 59,
+          "text": "      \"audit_timelearner_config_tree_stability\"",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/DeclaredTimeScalePortPreparation.json",
+          "line": 188,
+          "text": "        \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json",
+          "line": 7150,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json",
+          "line": 7160,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/related_script_review.json",
+          "line": 2407,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/related_script_review.json",
+          "line": 2425,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+          "line": 1385,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+          "line": 1396,
+          "text": "      \"old_path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "document_or_dated_inventory_record_preserve_or_append_migration"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-bin-worktree-repair-a1/actual-content-before.json",
+          "line": 51798,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-bin-worktree-repair-a1/actual-content-before.json",
+          "line": 51802,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a1/actual-bin-content.json",
+          "line": 51798,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        },
+        {
+          "path": "Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a1/actual-bin-content.json",
+          "line": 51802,
+          "text": "      \"path\": \"Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py\",",
+          "role": "immutable_historical_evidence_preserve"
+        }
+      ],
+      "count": 17
+    },
+    {
+      "scope": "Bin_actual",
+      "repo": "E:/Science-Repo/nmsdk-git/Bin",
+      "commit": "3d5fc67c33f7be9ad3806db0b00b9d92588049bb",
+      "matches": [
+        {
+          "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+          "line": 23,
+          "text": "from audit_timelearner_step_stability import inspect_parameters, project_frequency, sha256_file",
+          "role": "coupled_legacy_import_remove_with_both_entrypoints"
+        }
+      ],
+      "count": 1
+    },
+    {
+      "scope": "Bin_root_pinned",
+      "repo": "E:/Science-Repo/nmsdk-git/Bin",
+      "commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "matches": [
+        {
+          "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+          "line": 23,
+          "text": "from audit_timelearner_step_stability import inspect_parameters, project_frequency, sha256_file",
+          "role": "coupled_legacy_import_remove_with_both_entrypoints"
+        }
+      ],
+      "count": 1
+    },
+    {
+      "scope": "Pulse_root_pinned",
+      "repo": "E:/Science-Repo/pulselib-matched-omission",
+      "commit": "e183bee14be285862663c094b0b36b3f0dc15747",
+      "matches": [],
+      "count": 0
+    },
+    {
+      "scope": "Rdk_root_pinned",
+      "repo": "E:/Science-Repo/nmsdk-git/Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "matches": [],
+      "count": 0
+    }
+  ],
+  "historical_reference_updates": [
+    {
+      "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+      "count": 2,
+      "change": "relative current-script links replaced by full Bin36 Git source links; numerical body/JSON/CSV retained"
+    }
+  ],
+  "current_function": {
+    "module": "Scripts/StructTrain/TimeLearner/declared_time_scales.py",
+    "APIs": [
+      "audit_declared_pair",
+      "audit_case",
+      "audit_config_tree"
+    ],
+    "CLI": [
+      "python",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner",
+      "audit-time-scales",
+      "--config-root",
+      "<absolute tree>",
+      "--discovery",
+      "matrix|tracked-tree",
+      "--output",
+      "<new JSON path>"
+    ],
+    "physics_applicability": "declared conditional zero-G only; unknown without effective/storage resolution",
+    "integrator_stability_verdict": null,
+    "old_report_recalculation": false
+  },
+  "worktree_preparation": {
+    "submodule_inherited_core_worktree_resolved_to_common_admin": true,
+    "extensions_worktreeConfig_observed_true_before_repair": true,
+    "repair_scope": "only owned worktrees/nmsdk-bin-time-scale-migration/config.worktree; subsequent Bin mutations explicit --git-dir/--work-tree",
+    "shared_or_user_worktree_cleanup_performed": false,
+    "initial_physical_preimage_check": "failed; PowerShell continued incorrectly; not accepted as passed",
+    "failed_raw_physical_digest_not_recorded": true,
+    "core_autocrlf_observed": "true",
+    "LF_CRLF_cause_not_retroactively_attested": true,
+    "acceptance_authority": "separate full canonical Git parent/index/tree/blob SHA-256 verification; see canonical_Git_verification"
+  },
+  "server_acceptance": {
+    "script143_each_host_passed": true,
+    "M40_receipt": "DeclaredTimeScalesScript143M40A2Verification.json",
+    "Elder_receipt": "DeclaredTimeScalesScript143ElderA1Verification.json",
+    "new_deletion_numerical_tests_required": false,
+    "full_new_356_production_migration_check": "pending; prior354 accepted and unchanged; no future PASS asserted"
+  },
+  "preserved": [
+    "all dated inventories and hash-bound raw Reports",
+    "all Project.ini and Parameters_00.xml",
+    "all models, numerical CSV/JSON/figures",
+    "all production Scripts/Tests/algorithms/defaults"
+  ],
+  "wrappers_or_historical_code_copies_added": false,
+  "runtime_or_numerical_equivalence_attested": false,
+  "whole_stage9_or_plan_complete": false,
+  "scientific_verdict": null
+}
