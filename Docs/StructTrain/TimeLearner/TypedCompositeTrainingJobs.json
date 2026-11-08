@@ -116,8 +116,8 @@
       "postclosure_capture": "/media/user/Data/TimeLearnerRefactor/publication-composite-core-m40-a1-negative",
       "negative_evidence_commit": "74ee40501aba6d53da318027027aa59f613d5056",
       "negative_evidence_origin_branch": "codex/timelearner-composite-core-compile-a1-evidence",
-      "negative_evidence_merged_into_maintained_root": false,
-      "negative_evidence_merge_reason": "Parent27ba includes unaccepted feature code with failed compilation; retain independent reachable origin branch until fixed core acceptance.",
+      "negative_evidence_merged_into_maintained_root": true,
+      "negative_evidence_merge_reason": "Corrected e183/d920 core accepted by143 actual tests; original compile failure retained unchanged.",
       "receipt": "CompositeCoreM40A1NegativeVerification.json",
       "observed_protocol_exercised": false,
       "original_preset_protocol_exercised_flag_preserved": true
@@ -137,7 +137,7 @@
       "job_id": "s07-composite-core-m40-a2",
       "root": "d92022a41d6f448852d2ecfc6f87ca5a719843bc",
       "pulse": "e183bee14be285862663c094b0b36b3f0dc15747",
-      "state": "started_terminal_outcome_not_verified",
+      "state": "closed_sdk_asan_native_core_assertions_accepted",
       "unit": "timelearner-51aa7fe7-27bc-4fb4-99e4-377aee67ef2c.service",
       "invocation_id": "98c477f7ffb942779a531e3f67f77bd5",
       "initial_main_pid": 2763443,
@@ -147,7 +147,16 @@
       "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
       "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-core-m40-a2",
       "container": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-core-m40-a2-container",
-      "production_algorithm_or_tolerances_changed_by_fix": false
+      "production_algorithm_or_tolerances_changed_by_fix": false,
+      "cpp_tests_verified": 143,
+      "native_core_cases_verified": 46,
+      "old_scalar_cases_verified": 97,
+      "kernel_closures_verified": 56,
+      "lease_released": true,
+      "evidence_commit": "d31a6b80ff2c3b665a80ef3f93b4a42a2d8752d0",
+      "receipt": "TypedCompositeCoreM40A2Verification.json",
+      "actual_raw_export_or_independent_replay_accepted": false,
+      "service_cold6_package5_cli_or_scientific_acceptance": false
     }
   ],
   "prepared_feature": {

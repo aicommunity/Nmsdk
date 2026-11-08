@@ -4,8 +4,9 @@
 
 08.11: механическое выделение общего контроллера принято на M40:97/97
 (74 bounded +23 Final/Clock). Ошибочная постановка A1 сохранена в Git отдельно.
-Новый core143 A1 остановлен при компиляции до тестов; A2 с исправлением
-штатного const-UEPtr boundary-вызова запущен и ещё не принят.
+Новый core143 A1 остановлен при компиляции до тестов; исправленный A2 принят
+на M40:143/143, включая46 actual native core cases. Raw exports/independent replay
+и интеграция service/package/CLI этой проверкой не подтверждаются.
 [Точные commits, handles и receipts](TypedCompositeTrainingJobs.json).
 Service/codecs/CLI остаются незавершённой интеграцией.
 [Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
@@ -592,3 +593,18 @@ Classic capture/search/final также прошёл. Остальная46-ма�
 кандидата57e/661 (будущая матрица179), [delivery receipt](WindowsCompositeServiceSourceDelivery-20261108.json).
 Сборка и тесты новой версии на .14 ещё не запускались; прежний source cache
 и пользовательский C:/Projects/Nmsdk не менялись.
+
+
+M40 core143 приёмка опубликована `d31a6b80ff2c3b665a80ef3f93b4a42a2d8752d0`:
+[receipt](TypedCompositeCoreM40A2Verification.json), Rootd920/Pulsee183 теперь
+объединены в maintained ветку. Полный compile A1 failure также объединён после
+исправленного PASS, исходный отрицательный verdict сохранён.
+Elder duplicate FetchContent cleanup опубликован
+`a991a4824c97349e54767c8d641741ac1790d218`:
+[receipt](ElderDuplicateFetchcontentRetentionA1Verification.json), net freed
+1,365,618,688B, свободно после операции1,853,362,176B. Сохранена автономная
+копия dependency trees; проектный код/модели/научные primary не удалялись.
+Новый source206 d433/f925: на Elder начался normal compile/runtime gate,
+на Windows выполняется только compile/link. До полного результата их допуск
+не заявляется. Отдельная mechanical05fa/81 scalar-path проверка предшествует
+следующему portable math replay214; она не подменена этими206.
