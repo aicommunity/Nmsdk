@@ -225,3 +225,45 @@ TEST(CandidateWindowCold7,InitialDeclarationCannotNormalizeAwayWrongProtocolAssi
     const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
     EXPECT_THROW(CaptureCandidateWindowInitialConfiguration(c.model,p,{{2,1,100.},{1,1,100.}},0.),std::invalid_argument);
 }
+
+namespace {
+void ExpectValidProtocolNotRepresentableByCold7(const ConfiguredNativeTraining& c,const NativeTrainingPlan& p) {
+    ASSERT_NO_THROW(ValidateVerificationProtocol(p.protocol));
+    try{CaptureCandidateWindowInitialConfiguration(c.model,p,{{2,1,100.},{1,1,100.}},0.);FAIL()<<"valid low-level protocol silently normalized";}
+    catch(const std::invalid_argument& e){EXPECT_STREQ(e.what(),"candidate_window_initial_protocol_not_representable");}
+}
+}
+TEST(CandidateWindowCold7,InitialDeclarationRefusesValidRenamedInputIds) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.inputs[0].id="named-first-input";
+    p.inputWindows[0].inputId=p.protocol.inputs[0].id;ExpectValidProtocolNotRepresentableByCold7(c,p);
+}
+TEST(CandidateWindowCold7,InitialDeclarationRefusesValidStimulusRenaming) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.stimulusIds={"early-source","late-source"};
+    for(std::size_t i=0;i<2;++i){p.protocol.inputs[i].stimulusId=p.protocol.stimulusIds[i];p.inputWindows[i].stimulusId=p.protocol.stimulusIds[i];}
+    p.protocol.originStimulusId=p.protocol.stimulusIds[0];ExpectValidProtocolNotRepresentableByCold7(c,p);
+}
+TEST(CandidateWindowCold7,InitialDeclarationRefusesValidStimulusPermutation) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.stimulusIds={"pulse1","pulse0"};
+    for(std::size_t i=0;i<2;++i){p.protocol.inputs[i].stimulusId=p.protocol.stimulusIds[i];p.inputWindows[i].stimulusId=p.protocol.stimulusIds[i];}
+    ExpectValidProtocolNotRepresentableByCold7(c,p);
+}
+TEST(CandidateWindowCold7,InitialDeclarationRefusesValidDifferentOrigin) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.originStimulusId="pulse1";
+    ExpectValidProtocolNotRepresentableByCold7(c,p);
+}
+TEST(CandidateWindowCold7,InitialDeclarationRefusesValidDifferentPatternBinding) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);const auto alternative=std::string(64,'a');
+    ASSERT_NE(p.protocol.patternHash,alternative);p.protocol.patternHash=alternative;p.probe.specification.patternHash=alternative;
+    ExpectValidProtocolNotRepresentableByCold7(c,p);
+}
+TEST(CandidateWindowCold7,InitialDeclarationAllowsRunAndCheckpointResetWithoutProtocolChange) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.search.runId="original-base-run";
+    p.search.initialModelRevision="current-live-model-revision";p.search.initialModelEpoch=7;
+    const auto captured=CaptureCandidateWindowInitialConfiguration(c.model,p,{{2,1,100.},{1,1,100.}},0.);
+    EXPECT_EQ(captured.runId,p.search.runId);EXPECT_TRUE(captured.search.initialModelRevision.empty());EXPECT_EQ(captured.search.initialModelEpoch,0u);
+    const auto reconstructed=MakeConfiguredNativeTrainingPlan(captured);EXPECT_EQ(reconstructed.protocol,p.protocol);
+    ASSERT_EQ(reconstructed.inputWindows.size(),p.inputWindows.size());
+    for(std::size_t i=0;i<p.inputWindows.size();++i){EXPECT_EQ(reconstructed.inputWindows[i].inputId,p.inputWindows[i].inputId);
+        EXPECT_EQ(reconstructed.inputWindows[i].stimulusId,p.inputWindows[i].stimulusId);EXPECT_EQ(reconstructed.inputWindows[i].channel,p.inputWindows[i].channel);
+        EXPECT_DOUBLE_EQ(reconstructed.inputWindows[i].begin,p.inputWindows[i].begin);EXPECT_DOUBLE_EQ(reconstructed.inputWindows[i].end,p.inputWindows[i].end);}
+}
