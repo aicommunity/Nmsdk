@@ -16,9 +16,20 @@
   "request_sha256": "64bb2f93f330bc1ec8ef70291649de14b3580360929d1b708f4fbeb367bdc703",
   "integrity_cases_planned": 7,
   "native_cases_planned": 4,
-  "last_observed": "kernel_bound_worker_live_compiling_storage_components",
+  "last_observed": "capture7_and_native_classic_branch_2000_passed_classic20000_bound_pid1574017_live",
   "accepted": false,
   "portable_serializer_and_reader_implemented": false,
   "training_certificate_eligible": false,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "checks_passed_observed": 7,
+  "native_checks_passed_observed": 2,
+  "corrected_snapshot": {
+    "root": "7b33dd066107c26215410c781d8cbd0e315205f1",
+    "PulseLib": "121b88b7d35b60d9f747b9a2898ba763d360df60",
+    "integrity_cases_planned": 8,
+    "native_cases_planned": 4,
+    "launched": false,
+    "source_delivered_separately": true,
+    "reason": "bind reproduced native peaks and burst measurements, with amplitude mismatch regression"
+  }
 }
