@@ -9,8 +9,11 @@
 `BranchLastCompositeSinkCannotCrossRealGroupDeadline`: last-final callback
 не был достигнут (`slept=false`,elapsed0), хотя итоговый outcome BudgetExhausted.
 Это не PASS post-callback deadline: нужна диагностика фазы более раннего
-исчерпания бюджета. Все14 групп закрыты; отрицательный primary сохраняется
-до обновления cache. Скопированный inventory.root540 отдельно отмечен как
+исчерпания бюджета. Все14 групп закрыты; отрицательный primary
+`eaa4350defa80c932ececaafa58b5373112fc75d` опубликован и
+[независимо проверен](CompositeCancellationM40A1IndependentVerification.json):
+502 members,3687 Git source files,13 фактических JUnit cases, ASan-loaded files,
+неизменность трёх старых runtime и327 ресурсов. Скопированный inventory.root540 отдельно отмечен как
 metadata errata, actual source closure — cc23/88; raw bytes не переписываются.
 
 Последняя Elder A3 завершилась после 12 passed / одной failed проверки;
