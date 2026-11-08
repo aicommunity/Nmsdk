@@ -1,0 +1,2639 @@
+{
+  "kind": "declared_window_basin_temporal_report",
+  "schema_version": 1,
+  "renderer_version": 1,
+  "provenance": {
+    "primary_evidence_commit": "7ec9d4ff731a7775903080d6a96b5d5a9febe340",
+    "reader_evidence_commit": "bcc46e7d797890b47214a866085f5f71027b5c5b",
+    "compiled_root": "51566b251a087589411d0a6bbb848de7d0273b6e",
+    "compiled_pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+    "reader_tool_root": "f71c16b46d3c8150eb860be2aeb6949e57247642",
+    "renderer_root": "d4d3e3830ba6c37b8415286a924cf0c2e5e37bbb"
+  },
+  "full_cache": "/media/user/Data/TimeLearnerRefactor/analysis/declared-window-basin-temporal-m40-a1",
+  "groups": [
+    {
+      "case": "basin_native0",
+      "title": "Classic_2000_N2_i0",
+      "topology": "Classic",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native0/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "9cf0470cbd75c3b10a506acc5c5f7a47a5ea8328f100e1c8d5794529afb2983a",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "absent_within_fixed_basin",
+              "preserved"
+            ],
+            "left": {
+              "first_sample": 0,
+              "last_sample": 19,
+              "record_edge": true
+            },
+            "maximum": {
+              "amplitude": 0.0033828893825672557,
+              "first_sample": 59,
+              "last_sample": 59,
+              "plateau_end": 0.03,
+              "raw_potential": 0.0033828893825672557,
+              "time": 0.03
+            },
+            "necessary_inputs": [
+              0
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 179,
+              "last_sample": 179,
+              "record_edge": false
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.0033828893825672557,
+          "first_sample": 59,
+          "last_sample": 59,
+          "plateau_end": 0.03,
+          "raw_potential": 0.0033828893825672557,
+          "time": 0.03
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.0033828893825672557,
+        "first_sample": 59,
+        "last_sample": 59,
+        "plateau_end": 0.03,
+        "raw_potential": 0.0033828893825672557,
+        "time": 0.03
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00023010094222031263,
+            0.004832119786626565
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00036723847470697456,
+            0.004957719408544157
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.171,
+          "absolute_end_s": 0.341,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.261,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.3415,
+          "absolute_end_s": 0.5115,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.3515,
+              "relative_ms": 9.999999999999954
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.512,
+          "absolute_end_s": 0.682,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.522,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.602,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native0-overview-and-zoom.png",
+        "Figures/basin_native0-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native1",
+      "title": "Classic_2000_N2_i1",
+      "topology": "Classic",
+      "frequency_hz": 2000,
+      "assigned_input": 1,
+      "assigned_channel": 1,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native1/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/declared-window-basin-diagnostic.json",
+      "record_sha256": "0508dbd7fb0b18591d5326a6663da06352c7eebfa87531c4697b8faf0726c78b",
+      "declared_window_ms": [
+        89.0,
+        150.0
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "preserved",
+              "absent_within_fixed_basin"
+            ],
+            "left": {
+              "first_sample": 179,
+              "last_sample": 179,
+              "record_edge": false
+            },
+            "maximum": {
+              "amplitude": 0.004602018844406253,
+              "first_sample": 200,
+              "last_sample": 200,
+              "plateau_end": 0.1005,
+              "raw_potential": 0.004602018844406253,
+              "time": 0.1005
+            },
+            "necessary_inputs": [
+              1
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 340,
+              "last_sample": 340,
+              "record_edge": true
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.004602018844406253,
+          "first_sample": 200,
+          "last_sample": 200,
+          "plateau_end": 0.1005,
+          "raw_potential": 0.004602018844406253,
+          "time": 0.1005
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.004602018844406253,
+        "first_sample": 200,
+        "last_sample": 200,
+        "plateau_end": 0.1005,
+        "raw_potential": 0.004602018844406253,
+        "time": 0.1005
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            84.12,
+            154.88
+          ],
+          "y_raw": [
+            -0.0002725550154517986,
+            0.003679492708599281
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00023010094222031263,
+            0.004832119786626565
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            84.12,
+            154.88
+          ],
+          "y_raw": [
+            -0.00036816150755250023,
+            0.004970180351958753
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.171,
+          "absolute_end_s": 0.341,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.261,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.3415,
+          "absolute_end_s": 0.5115,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.3515,
+              "relative_ms": 9.999999999999954
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.512,
+          "absolute_end_s": 0.682,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.522,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.602,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native1-overview-and-zoom.png",
+        "Figures/basin_native1-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native2",
+      "title": "Branch_2000_N2_i0",
+      "topology": "Branch",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native2/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "67c9f84949624164b7fe1f124219739a30d76eefdc0cdf113e40129521199000",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "absent_within_fixed_basin",
+              "preserved"
+            ],
+            "left": {
+              "first_sample": 0,
+              "last_sample": 19,
+              "record_edge": true
+            },
+            "maximum": {
+              "amplitude": 0.0033828893825672557,
+              "first_sample": 59,
+              "last_sample": 59,
+              "plateau_end": 0.03,
+              "raw_potential": 0.0033828893825672557,
+              "time": 0.03
+            },
+            "necessary_inputs": [
+              0
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 179,
+              "last_sample": 179,
+              "record_edge": false
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.0033828893825672557,
+          "first_sample": 59,
+          "last_sample": 59,
+          "plateau_end": 0.03,
+          "raw_potential": 0.0033828893825672557,
+          "time": 0.03
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.0033828893825672557,
+        "first_sample": 59,
+        "last_sample": 59,
+        "plateau_end": 0.03,
+        "raw_potential": 0.0033828893825672557,
+        "time": 0.03
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "ad082f9f29168bdc851b42cb07f6472f956484028cfbb715eea722e44a7c264c",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "430c120de027ad61efbe0c5aac925330eab5c6fd3abb07618515d567d4b97e62",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.171,
+          "absolute_end_s": 0.341,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.261,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "fe44fcfa8fbd279cd6a58154842f7361a6149ae6aad1c37c7e73d50a86fe464d",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.3415,
+          "absolute_end_s": 0.5115,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.3515,
+              "relative_ms": 9.999999999999954
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "9174c808d1cc358b12727ac05c9a9a6efcc39eb4cf85cc2be061e163f0ddca22",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.512,
+          "absolute_end_s": 0.682,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.522,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.602,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native2-overview-and-zoom.png",
+        "Figures/basin_native2-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native3",
+      "title": "Branch_2000_N2_i1",
+      "topology": "Branch",
+      "frequency_hz": 2000,
+      "assigned_input": 1,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native3/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/declared-window-basin-diagnostic.json",
+      "record_sha256": "1c341194e5309f5b9c57ea6afd797e641ed1d2123be0d01dfc07be65719f5a74",
+      "declared_window_ms": [
+        89.0,
+        150.0
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "preserved",
+              "absent_within_fixed_basin"
+            ],
+            "left": {
+              "first_sample": 179,
+              "last_sample": 179,
+              "record_edge": false
+            },
+            "maximum": {
+              "amplitude": 0.004602018844406253,
+              "first_sample": 200,
+              "last_sample": 200,
+              "plateau_end": 0.1005,
+              "raw_potential": 0.004602018844406253,
+              "time": 0.1005
+            },
+            "necessary_inputs": [
+              1
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 340,
+              "last_sample": 340,
+              "record_edge": true
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.004602018844406253,
+          "first_sample": 200,
+          "last_sample": 200,
+          "plateau_end": 0.1005,
+          "raw_potential": 0.004602018844406253,
+          "time": 0.1005
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.004602018844406253,
+        "first_sample": 200,
+        "last_sample": 200,
+        "plateau_end": 0.1005,
+        "raw_potential": 0.004602018844406253,
+        "time": 0.1005
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00023010094222031263,
+            0.004832119786626565
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            84.12,
+            154.88
+          ],
+          "y_raw": [
+            -0.00036816150755250023,
+            0.004970180351958753
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "67127f1c433560dae4a7837ffe51280159255020f75344140521867bb601f17d",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "e0baaa329eab609abe725e0724485ab0d6a98fea2a3555a5dc330e3016170cea",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.171,
+          "absolute_end_s": 0.341,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.261,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "d3cf4030a8e35ba597e19bb75013958cc694b4869a15c58caf16a6222270afa8",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.3415,
+          "absolute_end_s": 0.5115,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.3515,
+              "relative_ms": 9.999999999999954
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "ab499c4494f33b630cb60eaec3086755c572486aa882c5e2986cf974ef8d44c7",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.512,
+          "absolute_end_s": 0.682,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.522,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.602,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native3-overview-and-zoom.png",
+        "Figures/basin_native3-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native4",
+      "title": "Classic_20000_N2_i0",
+      "topology": "Classic",
+      "frequency_hz": 20000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native4/native/Classic_20000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "77a654f2e8e7e342d94d8ae196ec00ccad2355205b01a2f8026443015992ea5d",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "absent_within_fixed_basin",
+              "preserved"
+            ],
+            "left": {
+              "first_sample": 0,
+              "last_sample": 199,
+              "record_edge": true
+            },
+            "maximum": {
+              "amplitude": 0.003249374479493916,
+              "first_sample": 627,
+              "last_sample": 627,
+              "plateau_end": 0.0314,
+              "raw_potential": 0.003249374479493916,
+              "time": 0.0314
+            },
+            "necessary_inputs": [
+              0
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 1815,
+              "last_sample": 1815,
+              "record_edge": false
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.003249374479493916,
+          "first_sample": 627,
+          "last_sample": 627,
+          "plateau_end": 0.0314,
+          "raw_potential": 0.003249374479493916,
+          "time": 0.0314
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.003249374479493916,
+        "first_sample": 627,
+        "last_sample": 627,
+        "plateau_end": 0.0314,
+        "raw_potential": 0.003249374479493916,
+        "time": 0.0314
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00016381827986941544,
+            0.0034401838772577242
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.0002599499583595133,
+            0.0035093244378534296
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00022079532675498004,
+            0.004636701861854581
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00035222963458294567,
+            0.004755100066869767
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "0b45bf406ccddf14b80c0e3facdd5c3a34d52291807d9428da7410cc398d8506",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 5e-05,
+          "absolute_end_s": 0.17005,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.01005,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.09005,
+              "relative_ms": 90.00000000000001
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "61fb790bd14c381a1ef4a36f134345404caa04a5843df5b0927eea28dfeae90d",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.1701,
+          "absolute_end_s": 0.3401,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.2601,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "b9f148c6f0584dff9df037ad4bd3a381910bebfa16770e1d8aa4eb1f08f12abf",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.34015,
+          "absolute_end_s": 0.51015,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.35015,
+              "relative_ms": 10.000000000000009
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "a9dbb05b7f29274e612242d12b901d54794f7d04dc46dd626cf3f4148ba8fa36",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.5102,
+          "absolute_end_s": 0.6802,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.5202,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.6002,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native4-overview-and-zoom.png",
+        "Figures/basin_native4-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native5",
+      "title": "Classic_20000_N2_i1",
+      "topology": "Classic",
+      "frequency_hz": 20000,
+      "assigned_input": 1,
+      "assigned_channel": 1,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native5/native/Classic_20000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/declared-window-basin-diagnostic.json",
+      "record_sha256": "9a28bc33f82582d6db1fbc1fecde2264b421e2aa9630aafe9ebff7ac6760dfd0",
+      "declared_window_ms": [
+        89.0,
+        150.0
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "preserved",
+              "absent_within_fixed_basin"
+            ],
+            "left": {
+              "first_sample": 1800,
+              "last_sample": 1800,
+              "record_edge": false
+            },
+            "maximum": {
+              "amplitude": 0.004415906535099601,
+              "first_sample": 2028,
+              "last_sample": 2028,
+              "plateau_end": 0.10145,
+              "raw_potential": 0.004415906535099601,
+              "time": 0.10145
+            },
+            "necessary_inputs": [
+              1
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 3400,
+              "last_sample": 3400,
+              "record_edge": true
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.004415906535099601,
+          "first_sample": 2028,
+          "last_sample": 2028,
+          "plateau_end": 0.10145,
+          "raw_potential": 0.004415906535099601,
+          "time": 0.10145
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.004415906535099601,
+        "first_sample": 2028,
+        "last_sample": 2028,
+        "plateau_end": 0.10145,
+        "raw_potential": 0.004415906535099601,
+        "time": 0.10145
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00016381827986941544,
+            0.0034401838772577242
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            84.12,
+            154.88
+          ],
+          "y_raw": [
+            -0.0002621092477910647,
+            0.0035384748451793733
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00022079532675498004,
+            0.004636701861854581
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            84.12,
+            154.88
+          ],
+          "y_raw": [
+            -0.00035327252280796805,
+            0.004769179057907569
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "0b45bf406ccddf14b80c0e3facdd5c3a34d52291807d9428da7410cc398d8506",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 5e-05,
+          "absolute_end_s": 0.17005,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.01005,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.09005,
+              "relative_ms": 90.00000000000001
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "61fb790bd14c381a1ef4a36f134345404caa04a5843df5b0927eea28dfeae90d",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.1701,
+          "absolute_end_s": 0.3401,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.2601,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "b9f148c6f0584dff9df037ad4bd3a381910bebfa16770e1d8aa4eb1f08f12abf",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.34015,
+          "absolute_end_s": 0.51015,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.35015,
+              "relative_ms": 10.000000000000009
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "a9dbb05b7f29274e612242d12b901d54794f7d04dc46dd626cf3f4148ba8fa36",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.5102,
+          "absolute_end_s": 0.6802,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.5202,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.6002,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native5-overview-and-zoom.png",
+        "Figures/basin_native5-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native6",
+      "title": "Branch_20000_N2_i0",
+      "topology": "Branch",
+      "frequency_hz": 20000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native6/native/Branch_20000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "1ab361ebe8d150e7262309cd87d5d4f0ee67cdbee82f0d55f0d96c33dbcb9705",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "absent_within_fixed_basin",
+              "preserved"
+            ],
+            "left": {
+              "first_sample": 0,
+              "last_sample": 199,
+              "record_edge": true
+            },
+            "maximum": {
+              "amplitude": 0.003249374479493916,
+              "first_sample": 627,
+              "last_sample": 627,
+              "plateau_end": 0.0314,
+              "raw_potential": 0.003249374479493916,
+              "time": 0.0314
+            },
+            "necessary_inputs": [
+              0
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 1815,
+              "last_sample": 1815,
+              "record_edge": false
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.003249374479493916,
+          "first_sample": 627,
+          "last_sample": 627,
+          "plateau_end": 0.0314,
+          "raw_potential": 0.003249374479493916,
+          "time": 0.0314
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.003249374479493916,
+        "first_sample": 627,
+        "last_sample": 627,
+        "plateau_end": 0.0314,
+        "raw_potential": 0.003249374479493916,
+        "time": 0.0314
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00016381827986941544,
+            0.0034401838772577242
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.0002599499583595133,
+            0.0035093244378534296
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "ea01e3bbfa218419ab2617021a8f7ec992c0b730a8a6b9a02f95e53680fdd0a7",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 5e-05,
+          "absolute_end_s": 0.17005,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.01005,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.09005,
+              "relative_ms": 90.00000000000001
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "5c4b36aeae33d66a12e8f67a3f9b1351236902a0c43b8a4b3959b1f9e3cf8787",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.1701,
+          "absolute_end_s": 0.3401,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.2601,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "9c058aee7fb7076166c13b5d8f31bdb5c34954c7f3b8285ea4578f53313cf5db",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.34015,
+          "absolute_end_s": 0.51015,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.35015,
+              "relative_ms": 10.000000000000009
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "7ff1992c18756398b35b0323ec2ea1cb0615d17870e1e1ff221fa4666235acd5",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.5102,
+          "absolute_end_s": 0.6802,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.5202,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.6002,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native6-overview-and-zoom.png",
+        "Figures/basin_native6-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native7",
+      "title": "Branch_20000_N2_i1",
+      "topology": "Branch",
+      "frequency_hz": 20000,
+      "assigned_input": 1,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": "valid",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native7/native/Branch_20000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/declared-window-basin-diagnostic.json",
+      "record_sha256": "c625a215d1db93807617e83f6a13889f4316aff628d3ae2d88c33f1122dccc56",
+      "declared_window_ms": [
+        89.0,
+        150.0
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "preserved",
+              "absent_within_fixed_basin"
+            ],
+            "left": {
+              "first_sample": 1800,
+              "last_sample": 1800,
+              "record_edge": false
+            },
+            "maximum": {
+              "amplitude": 0.004415906535099601,
+              "first_sample": 2028,
+              "last_sample": 2028,
+              "plateau_end": 0.10145,
+              "raw_potential": 0.004415906535099601,
+              "time": 0.10145
+            },
+            "necessary_inputs": [
+              1
+            ],
+            "reasons": [],
+            "right": {
+              "first_sample": 3400,
+              "last_sample": 3400,
+              "record_edge": true
+            },
+            "status": "unique_necessary"
+          }
+        ],
+        "measured_maximum": {
+          "amplitude": 0.004415906535099601,
+          "first_sample": 2028,
+          "last_sample": 2028,
+          "plateau_end": 0.10145,
+          "raw_potential": 0.004415906535099601,
+          "time": 0.10145
+        },
+        "reasons": [],
+        "selected_candidate": 0,
+        "validity": "valid"
+      },
+      "selected_peak_as_recorded": {
+        "amplitude": 0.004415906535099601,
+        "first_sample": 2028,
+        "last_sample": 2028,
+        "plateau_end": 0.10145,
+        "raw_potential": 0.004415906535099601,
+        "time": 0.10145
+      },
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.00000000000003
+          ],
+          "y_raw": [
+            -0.00022079532675498004,
+            0.004636701861854581
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            84.12,
+            154.88
+          ],
+          "y_raw": [
+            -0.00035327252280796805,
+            0.004769179057907569
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "fe469adbc6de3fe6cea6659499f8466c75e052c6c5ff9e39c2e30168fa161d2a",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 5e-05,
+          "absolute_end_s": 0.17005,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.01005,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.09005,
+              "relative_ms": 90.00000000000001
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "a7d351b6bed4f8a0c5af3fb40fab556225196b8a926fb996647cf95f480cba25",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.1701,
+          "absolute_end_s": 0.3401,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.2601,
+              "relative_ms": 90.0
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "d73ea26f78e0b4b3606776652e74137983e29628a2db24c8633f954db08bad87",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.34015,
+          "absolute_end_s": 0.51015,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.35015,
+              "relative_ms": 10.000000000000009
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "c9674f842db931eda087f57df08e4953188c03c3e18bc3090b36fc6f5370fbb1",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.5102,
+          "absolute_end_s": 0.6802,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.5202,
+              "relative_ms": 10.000000000000009
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.6002,
+              "relative_ms": 89.99999999999997
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native7-overview-and-zoom.png",
+        "Figures/basin_native7-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native8",
+      "title": "Classic_2000_N2_whole_burst_merged_burst_matched_omission_declared_basin_i0",
+      "topology": "Classic",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": "ambiguous",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native8/native/Classic_2000_N2_native_executor_whole_burst_merged_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "546dd8bbd028201019aba42c83b4e0b84038a78bb55b92034ef117ddd0e04b0e",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "preserved",
+              "preserved"
+            ],
+            "left": {
+              "first_sample": 0,
+              "last_sample": 19,
+              "record_edge": true
+            },
+            "maximum": {
+              "amplitude": 0.0033828893825672557,
+              "first_sample": 59,
+              "last_sample": 59,
+              "plateau_end": 0.03,
+              "raw_potential": 0.0033828893825672557,
+              "time": 0.03
+            },
+            "necessary_inputs": [],
+            "reasons": [
+              "basin_has_no_unique_necessary_input"
+            ],
+            "right": {
+              "first_sample": 182,
+              "last_sample": 182,
+              "record_edge": true
+            },
+            "status": "no_necessary_input"
+          }
+        ],
+        "measured_maximum": null,
+        "reasons": [
+          "highest_window_basin_peak_has_ambiguous_necessity"
+        ],
+        "selected_candidate": null,
+        "validity": "ambiguous"
+      },
+      "selected_peak_as_recorded": null,
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            91.00000000000003
+          ],
+          "y_raw": [
+            -0.0001691444691283628,
+            0.0035520338516956186
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            91.00000000000003
+          ],
+          "y_raw": [
+            -0.0002295240466918591,
+            0.004820004980529041
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00036723847470697456,
+            0.004957719408544157
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "fcf6e20e1138fdaf83affa91423eb391c569e0f292e57fb377205220d7ae8420",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.0915,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0115,
+              "relative_ms": 11.0
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "6ac2e3b4b8246e21fa7afb700488695124835e2eeae19791f9be2e5f7840926a",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.092,
+          "absolute_end_s": 0.183,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.103,
+              "relative_ms": 10.999999999999996
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "cb9d3cc881088864de55921070d4a7788965c1866c1fea1773d195f5ebb9e977",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.1835,
+          "absolute_end_s": 0.2745,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.1935,
+              "relative_ms": 10.000000000000009
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "d3dcfc57b69eaba31fd240e82c24161a1a35c5a7c3ba84513922754862580443",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.275,
+          "absolute_end_s": 0.366,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.285,
+              "relative_ms": 9.999999999999954
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.286,
+              "relative_ms": 10.999999999999954
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native8-overview-and-zoom.png",
+        "Figures/basin_native8-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native9",
+      "title": "Branch_2000_N2_whole_burst_merged_burst_matched_omission_declared_basin_i0",
+      "topology": "Branch",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": "ambiguous",
+      "status": "completed",
+      "complete_group": true,
+      "trace_count": 4,
+      "record_relative_path": "basin_native9/native/Branch_2000_N2_native_executor_whole_burst_merged_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "6c0d41e9a029bc57aadcc947dd0b1dd42f115a0ca31fed3e1e7ea371b118f24c",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": {
+        "candidates": [
+          {
+            "controls": [
+              "preserved",
+              "preserved"
+            ],
+            "left": {
+              "first_sample": 0,
+              "last_sample": 19,
+              "record_edge": true
+            },
+            "maximum": {
+              "amplitude": 0.0033828893825672557,
+              "first_sample": 59,
+              "last_sample": 59,
+              "plateau_end": 0.03,
+              "raw_potential": 0.0033828893825672557,
+              "time": 0.03
+            },
+            "necessary_inputs": [],
+            "reasons": [
+              "basin_has_no_unique_necessary_input"
+            ],
+            "right": {
+              "first_sample": 182,
+              "last_sample": 182,
+              "record_edge": true
+            },
+            "status": "no_necessary_input"
+          }
+        ],
+        "measured_maximum": null,
+        "reasons": [
+          "highest_window_basin_peak_has_ambiguous_necessity"
+        ],
+        "selected_candidate": null,
+        "validity": "ambiguous"
+      },
+      "selected_peak_as_recorded": null,
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            91.00000000000003
+          ],
+          "y_raw": [
+            -0.0001691444691283628,
+            0.0035520338516956186
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "8b66f486aa6b5120a68830d82216c9da9ac9268d735f49cf79b9c8c79373fe36",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.0915,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0115,
+              "relative_ms": 11.0
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "role": "Omit input 0",
+          "source": "native-1.csv",
+          "sha256": "39a9688ee2b40d0c18e4404ddc97d4f902058e27c2eb75b4d724ca4f59f70000",
+          "presented_ordinals": [
+            1
+          ],
+          "absolute_origin_s": 0.092,
+          "absolute_end_s": 0.183,
+          "events": [
+            {
+              "id": "pulse1",
+              "absolute_s": 0.103,
+              "relative_ms": 10.999999999999996
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "role": "Omit input 1",
+          "source": "native-2.csv",
+          "sha256": "0139a0edc66219af2378fc8e9327c80550b33575ac2648d2cfba7a618a00b1a3",
+          "presented_ordinals": [
+            0
+          ],
+          "absolute_origin_s": 0.1835,
+          "absolute_end_s": 0.2745,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.1935,
+              "relative_ms": 10.000000000000009
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "role": "Full repeat",
+          "source": "native-3.csv",
+          "sha256": "a91819fb67ad97e9353bfcc3c3fe19b910dc9c38c93d1aa971e36e4075f74c3e",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.275,
+          "absolute_end_s": 0.366,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.285,
+              "relative_ms": 9.999999999999954
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.286,
+              "relative_ms": 10.999999999999954
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native9-overview-and-zoom.png",
+        "Figures/basin_native9-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native10",
+      "title": "Classic_2000_N2_fault6_i0",
+      "topology": "Classic",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": null,
+      "status": "rejected",
+      "complete_group": false,
+      "trace_count": 1,
+      "record_relative_path": "basin_native10/native/Classic_2000_N2_native_executor_fault6_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "2d8dceeb06395aa1c1b7f95f0fa15335f3e20d9df3847d2ad3ed753e0e0004b4",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": null,
+      "selected_peak_as_recorded": null,
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.0
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.0
+          ],
+          "y_raw": [
+            -0.00023010094222031263,
+            0.004832119786626565
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00036723847470697456,
+            0.004957719408544157
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native10-overview-and-zoom.png",
+        "Figures/basin_native10-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native11",
+      "title": "Branch_2000_N2_fault6_i0",
+      "topology": "Branch",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": null,
+      "status": "rejected",
+      "complete_group": false,
+      "trace_count": 1,
+      "record_relative_path": "basin_native11/native/Branch_2000_N2_native_executor_fault6_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "5a94b22d6b6f53f32d2f2b44eeaf822c6e6cc4940b63c66222d5a2540f8fba8d",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": null,
+      "selected_peak_as_recorded": null,
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.0
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "ad082f9f29168bdc851b42cb07f6472f956484028cfbb715eea722e44a7c264c",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native11-overview-and-zoom.png",
+        "Figures/basin_native11-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native12",
+      "title": "Classic_2000_N2_fault16_i0",
+      "topology": "Classic",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1",
+        "Neuron.Soma2"
+      ],
+      "geometry_validity": null,
+      "status": "rejected",
+      "complete_group": false,
+      "trace_count": 1,
+      "record_relative_path": "basin_native12/native/Classic_2000_N2_native_executor_fault16_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "277a0ea0d83f23b8dd9214d6f48c3653abaf926f06dcd021974449562202f152",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": null,
+      "selected_peak_as_recorded": null,
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.0
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.0
+          ],
+          "y_raw": [
+            -0.00023010094222031263,
+            0.004832119786626565
+          ]
+        },
+        {
+          "channel": "Neuron.Soma2",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00036723847470697456,
+            0.004957719408544157
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native12-overview-and-zoom.png",
+        "Figures/basin_native12-control-panels.png"
+      ]
+    },
+    {
+      "case": "basin_native13",
+      "title": "Branch_2000_N2_fault16_i0",
+      "topology": "Branch",
+      "frequency_hz": 2000,
+      "assigned_input": 0,
+      "assigned_channel": 0,
+      "physical_channels": [
+        "Neuron.Soma1"
+      ],
+      "geometry_validity": null,
+      "status": "rejected",
+      "complete_group": false,
+      "trace_count": 1,
+      "record_relative_path": "basin_native13/native/Branch_2000_N2_native_executor_fault16_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "record_sha256": "17b2b8871277f5fce9b2e3b2ea8d9a68f26cd69aaf73f4d60833a8626873d3e3",
+      "declared_window_ms": [
+        9.000000000000002,
+        69.99999999999999
+      ],
+      "candidate_geometry_as_recorded": null,
+      "selected_peak_as_recorded": null,
+      "axis_limits": [
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "overview",
+          "x_ms": [
+            0.0,
+            170.0
+          ],
+          "y_raw": [
+            -0.00017034688465737414,
+            0.003577284577804857
+          ]
+        },
+        {
+          "channel": "Neuron.Soma1",
+          "panel": "zoom",
+          "x_ms": [
+            4.120000000000003,
+            74.87999999999998
+          ],
+          "y_raw": [
+            -0.00027063115060538045,
+            0.003653520533172636
+          ]
+        }
+      ],
+      "traces": [
+        {
+          "index": 0,
+          "role": "Full before",
+          "source": "native-0.csv",
+          "sha256": "ad082f9f29168bdc851b42cb07f6472f956484028cfbb715eea722e44a7c264c",
+          "presented_ordinals": [
+            0,
+            1
+          ],
+          "absolute_origin_s": 0.0005,
+          "absolute_end_s": 0.1705,
+          "events": [
+            {
+              "id": "pulse0",
+              "absolute_s": 0.0105,
+              "relative_ms": 10.0
+            },
+            {
+              "id": "pulse1",
+              "absolute_s": 0.0905,
+              "relative_ms": 90.0
+            }
+          ]
+        }
+      ],
+      "figures": [
+        "Figures/basin_native13-overview-and-zoom.png",
+        "Figures/basin_native13-control-panels.png"
+      ]
+    }
+  ],
+  "files": {
+    "Figures/basin_native0-overview-and-zoom.png": {
+      "bytes": 233896,
+      "sha256": "004fbeb1ede64c0d0c27b069c995cfa015f788b3813a2d4dd0361f320641dd2f"
+    },
+    "Figures/basin_native0-overview-and-zoom.svg": {
+      "bytes": 164381,
+      "sha256": "f93028c6d6149ecc8d0905f118c15f27cfe9ace441b4bb0831cb76912bf674c4"
+    },
+    "Figures/basin_native0-control-panels.png": {
+      "bytes": 416212,
+      "sha256": "0f1fb90ccd2ae9f999d6b835c16bf5e16f173e343605bcfb536ed6e8b574e4f6"
+    },
+    "Figures/basin_native0-control-panels.svg": {
+      "bytes": 158679,
+      "sha256": "7b8fe389340bfea3719d11b0414b24b041bf9c6c223b42784a2b8368b007e92f"
+    },
+    "Figures/basin_native1-overview-and-zoom.png": {
+      "bytes": 240993,
+      "sha256": "570d10919cb13e40960803787e0f6e9e8cda1cecae28ce7f33ccb9a63961669f"
+    },
+    "Figures/basin_native1-overview-and-zoom.svg": {
+      "bytes": 175463,
+      "sha256": "b4d4a11cfa316d2f6946d3786fbe5b6d6586532874363e7905c47fe60c5e6b17"
+    },
+    "Figures/basin_native1-control-panels.png": {
+      "bytes": 416210,
+      "sha256": "3c8602e454d83e5a6e0ee6486c91336179057e4bbc97fc9cffb07d16a4598838"
+    },
+    "Figures/basin_native1-control-panels.svg": {
+      "bytes": 158613,
+      "sha256": "9405f59831c2c1a5bc3d089c7c0975a93dc07d3127727a35a1f4c34f1a2fad08"
+    },
+    "Figures/basin_native2-overview-and-zoom.png": {
+      "bytes": 157105,
+      "sha256": "e4f2effd975d3a16672d2891fe5f638990f96392aad5422c45902749f155de7a"
+    },
+    "Figures/basin_native2-overview-and-zoom.svg": {
+      "bytes": 124058,
+      "sha256": "965b6f92b830ac25ce84dd083c024eff27ea194e6d6acd87c9501e7bc0a92e3e"
+    },
+    "Figures/basin_native2-control-panels.png": {
+      "bytes": 324952,
+      "sha256": "09faf13624daedf36103a1b31c8cb512e7950e7c067e2378357de5986b8f1bb8"
+    },
+    "Figures/basin_native2-control-panels.svg": {
+      "bytes": 142303,
+      "sha256": "0bdf6bc6f3dd27f5ba8d3b1755fef605444a968fbbc507e46a4e76adbf4f0123"
+    },
+    "Figures/basin_native3-overview-and-zoom.png": {
+      "bytes": 159162,
+      "sha256": "342e50359a49d26483fcc56e024824fdc045fbad888e4b0eebc6350c86ec506b"
+    },
+    "Figures/basin_native3-overview-and-zoom.svg": {
+      "bytes": 130169,
+      "sha256": "7610bc91b0aee94fbef4bedd9c78aec8dddfb45ee9c978303ce5b6bdd47c0301"
+    },
+    "Figures/basin_native3-control-panels.png": {
+      "bytes": 320079,
+      "sha256": "1e539e481a58f027bec004260e643447d6a1d17360a013bdf1c66607e58b43b6"
+    },
+    "Figures/basin_native3-control-panels.svg": {
+      "bytes": 143787,
+      "sha256": "340d3c3913e68b9d381c75f338e3f932ab6186b5ef624fcd4a1ea7b96acae73e"
+    },
+    "Figures/basin_native4-overview-and-zoom.png": {
+      "bytes": 234859,
+      "sha256": "6dcfa20a0c8c80a6fd2bc8aa3fe9b870fb6180cf19a4d4c930b7da628087c178"
+    },
+    "Figures/basin_native4-overview-and-zoom.svg": {
+      "bytes": 165976,
+      "sha256": "a4d3b6eb5fbe441f95e07cd43578fd2a8c97c6d4ba2d45420122136aa58d867a"
+    },
+    "Figures/basin_native4-control-panels.png": {
+      "bytes": 421319,
+      "sha256": "df917b07a30657ab9684b2beb6ef7f08d2b6062d2ade7b8ae3ff894aa6d0fb34"
+    },
+    "Figures/basin_native4-control-panels.svg": {
+      "bytes": 160278,
+      "sha256": "60ac7804af9fd803175ec0be903556ed906aa750f37e0c0aae3ffeb15f68998a"
+    },
+    "Figures/basin_native5-overview-and-zoom.png": {
+      "bytes": 243769,
+      "sha256": "688ac5e6f3e45e26250facfc489e6ff53ddf47f2c5a76ba51ff6bdcd41cf838a"
+    },
+    "Figures/basin_native5-overview-and-zoom.svg": {
+      "bytes": 167418,
+      "sha256": "16a4f070c23998da402a8c3fe7eebd16d555a59fed1f6679c42a7351c3905eec"
+    },
+    "Figures/basin_native5-control-panels.png": {
+      "bytes": 421109,
+      "sha256": "9efe2dda50e22748498f7d53125399d423ec215fcc5615e14360623ed27ea4bb"
+    },
+    "Figures/basin_native5-control-panels.svg": {
+      "bytes": 160212,
+      "sha256": "91992784006520d1335823a372f8464399f68b5c3f8509ea850becbeb61e56c3"
+    },
+    "Figures/basin_native6-overview-and-zoom.png": {
+      "bytes": 159442,
+      "sha256": "42f77589f65fb3ab5011f9aaa8faf9f8489a8f5aea103d906edccd5b3dbf11f7"
+    },
+    "Figures/basin_native6-overview-and-zoom.svg": {
+      "bytes": 124306,
+      "sha256": "2614febf18709bb4fa34f9862c0d1c711437e6934989a05274e27ecf419150f5"
+    },
+    "Figures/basin_native6-control-panels.png": {
+      "bytes": 327755,
+      "sha256": "e578c3fef4b17ae7c6e7c8afaa15ebe4e8613f477e38eb156a7ed50a364b6d12"
+    },
+    "Figures/basin_native6-control-panels.svg": {
+      "bytes": 142521,
+      "sha256": "261332a917a06385673a6e9f341bbfb26dd4d0726927c023ea7dc3430aa2951f"
+    },
+    "Figures/basin_native7-overview-and-zoom.png": {
+      "bytes": 160689,
+      "sha256": "812a8bff10d81838910e1edff758b90022c3758b5a10df9269800575d17d196d"
+    },
+    "Figures/basin_native7-overview-and-zoom.svg": {
+      "bytes": 127364,
+      "sha256": "733d0ba6edb1463b3453b15cf6ac7035d4f1dfc8916e3a2295bdfb3be4ef1cbe"
+    },
+    "Figures/basin_native7-control-panels.png": {
+      "bytes": 323491,
+      "sha256": "2b79af856373fd8d7379231a48ca73fef980804dc03ef29293c476e047426102"
+    },
+    "Figures/basin_native7-control-panels.svg": {
+      "bytes": 145556,
+      "sha256": "d2c9b2eab281ae0473bb96c83c7e791bde90c143a251ffb4a0c80ed859179ce6"
+    },
+    "Figures/basin_native8-overview-and-zoom.png": {
+      "bytes": 267253,
+      "sha256": "f873ca410ac94f33ede7a49fc31f722a89f7804e124ebf36e1eb91d6ef1f5ac8"
+    },
+    "Figures/basin_native8-overview-and-zoom.svg": {
+      "bytes": 159548,
+      "sha256": "664e1d94b5e6ad12bfb1cb05edd664375fa3c86c6ec24801b4784a35d16eb2d8"
+    },
+    "Figures/basin_native8-control-panels.png": {
+      "bytes": 381646,
+      "sha256": "3dec3095f0badac92bc7e13ddf32836837964aaa9e1cf57b4cbc89575848d083"
+    },
+    "Figures/basin_native8-control-panels.svg": {
+      "bytes": 143242,
+      "sha256": "28fb1e113932084a5e4b09f8824660c8fc0db303738ec0563935c9b79739f030"
+    },
+    "Figures/basin_native9-overview-and-zoom.png": {
+      "bytes": 178480,
+      "sha256": "5178d6402f156d41c286e37bad3a3ae1909febc3a6472b7e94e47ea0bc2b8c67"
+    },
+    "Figures/basin_native9-overview-and-zoom.svg": {
+      "bytes": 123309,
+      "sha256": "dc48cb7513752b16906cf64991cf1ddceac12f9c059543dd0607044219360932"
+    },
+    "Figures/basin_native9-control-panels.png": {
+      "bytes": 303196,
+      "sha256": "d6953293158ee7481c6c7e5d2a790e846ffd54b3e7e4c08b7611a1a92fc7b343"
+    },
+    "Figures/basin_native9-control-panels.svg": {
+      "bytes": 129414,
+      "sha256": "1c8179d01840cbcf9933af57203c759c89ee72d2fb773a88b1fde704a832aba8"
+    },
+    "Figures/basin_native10-overview-and-zoom.png": {
+      "bytes": 208996,
+      "sha256": "0b6bcf139a7679c0b51ffb0c6f1890ead7f62b09c2288d25a63f82ca28123e9a"
+    },
+    "Figures/basin_native10-overview-and-zoom.svg": {
+      "bytes": 127699,
+      "sha256": "1c81b3fd1df9177f08c6681dbc14c0c2f29727f932db1b896bf7ab4f721317ef"
+    },
+    "Figures/basin_native10-control-panels.png": {
+      "bytes": 144496,
+      "sha256": "d93d6d9b6730640cf0b5cf5d663d8ec6eb7689aba9bd26353b81c2a5323ea6e4"
+    },
+    "Figures/basin_native10-control-panels.svg": {
+      "bytes": 68396,
+      "sha256": "138ff4ca3fa7fd70c935aed44492bfbe7f9f581f44d81bd0fccfe56c4e5225fa"
+    },
+    "Figures/basin_native11-overview-and-zoom.png": {
+      "bytes": 142409,
+      "sha256": "acfa5ce5a3330897a677c21afa360a76dcf951fb21f2736048f309c3f099c3a3"
+    },
+    "Figures/basin_native11-overview-and-zoom.svg": {
+      "bytes": 100360,
+      "sha256": "a699a06e9dea49a3bd3617cdfba5212039126fb259d48af4baf658d54a638f47"
+    },
+    "Figures/basin_native11-control-panels.png": {
+      "bytes": 115193,
+      "sha256": "ca984dfb8de4e55c7a15d26d7ded1e49355998d18211b19a1a448c5c7f80c2fb"
+    },
+    "Figures/basin_native11-control-panels.svg": {
+      "bytes": 63751,
+      "sha256": "68543fed25d981bc68132a7b6afb396e5ceddf541de04b7f593a502f7628a527"
+    },
+    "Figures/basin_native12-overview-and-zoom.png": {
+      "bytes": 208730,
+      "sha256": "61459f8f984bbb530a985a2824116deefa8dd73459193ba6323a3856e6dcd15a"
+    },
+    "Figures/basin_native12-overview-and-zoom.svg": {
+      "bytes": 127759,
+      "sha256": "314c6e01471ec85a4d6bf0d40685dc24fd3cd00df0f1aff5d8c05666fc4fdd93"
+    },
+    "Figures/basin_native12-control-panels.png": {
+      "bytes": 144425,
+      "sha256": "99367d31f0e6023d446a077d8a235b558528918b12d167267fac92c3006ee39d"
+    },
+    "Figures/basin_native12-control-panels.svg": {
+      "bytes": 68396,
+      "sha256": "ce46e41516cfe2f3da66f5845b623278fe3070ebde915aaa6fe7c8a6555d1f5d"
+    },
+    "Figures/basin_native13-overview-and-zoom.png": {
+      "bytes": 142516,
+      "sha256": "256ea0c61edf438ace8ce9d5aeb60c5ab06c28dd59cc0e8bfd5f9bd44a4a4946"
+    },
+    "Figures/basin_native13-overview-and-zoom.svg": {
+      "bytes": 100415,
+      "sha256": "5bda1f55a38214b63e37f8d6ad85ab4da138d4c16d2ee6631eda50e4af77a784"
+    },
+    "Figures/basin_native13-control-panels.png": {
+      "bytes": 114797,
+      "sha256": "ebba328b5be6ed58959fb58043c34b5efa610d1cce553d58a2bd142b06ab31ee"
+    },
+    "Figures/basin_native13-control-panels.svg": {
+      "bytes": 63751,
+      "sha256": "c91960bb3d6aba4265f09f97c8be08a1c215b80727c2cd2f8c4deaace9923b75"
+    },
+    "TemporalReport.ru.md": {
+      "bytes": 4846,
+      "sha256": "08d4d671568953a42d2da6abd9a7791573b838c585c3a44b0f852ebc7502d508"
+    },
+    "Report.html": {
+      "bytes": 7046,
+      "sha256": "b3229f184c51bd91a3cc25fa5f121b81168ac1a018c0d49ee99709ccce968e35"
+    }
+  },
+  "selected_git_figures": [
+    "Figures/basin_native0-overview-and-zoom.png",
+    "Figures/basin_native0-control-panels.png",
+    "Figures/basin_native7-overview-and-zoom.png",
+    "Figures/basin_native7-control-panels.png",
+    "Figures/basin_native8-overview-and-zoom.png",
+    "Figures/basin_native9-overview-and-zoom.png",
+    "Figures/basin_native10-overview-and-zoom.png",
+    "Figures/basin_native13-overview-and-zoom.png"
+  ],
+  "selected_git_figure_count": 8,
+  "full_group_count": 14,
+  "full_png_count": 28,
+  "full_svg_count": 28,
+  "transform": {
+    "time": "tau_ms=(csv_absolute_time-observation.specification.begin)*1000 independently for each probe",
+    "potentials": "raw recorded values; no scaling/normalization/smoothing/resampling",
+    "stimulus": "raw measured CSV stimulus; aggregate/source signal, no invented per-input waveform",
+    "events": "observed packet events, not expected schedule",
+    "basin": "recorded full-before valley bounds: left.last_sample through right.first_sample; no recomputed selection",
+    "local_y": "per-channel min/max among all recorded controls inside zoom X range, plus explicit margin; exact limits recorded"
+  },
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "matplotlib": "3.9.4",
+    "backend": "Agg"
+  },
+  "new_cpp_or_model_execution": false,
+  "native_causal_lineage_verified_by_python": false,
+  "training_certificate_eligible": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
