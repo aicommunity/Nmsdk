@@ -98,6 +98,16 @@ utility, а не весь SDK. [Контракт, receipts и подробная
 evidence и независимым reader; затем отдельно принять метод происхождения
 отклика. Эксклюзивность временного окна сама этого не доказывает.
 
+Связка native capture/portable codec/reader подготовлена и прошла normal-проверку:
+10 integrity/codec checks и4 настоящие Classic/Branch пробы на2000/20000 Гц;
+reader12/12 на каждом сервере и независимый пересчёт4 C++ пакетов по primary CSV.
+Дополнительно совместный old/new native gate2/2 подтвердил раздельные trial/
+artifact identities. Все эти результаты и исходные отказы по ресурсам доступны
+в Git: [контракт и receipts](ResponseDomainEvidence.ru.md).
+Полная ASan-проверка связки на M40 запущена. Console integration, расширенная
+fault/N матрица, визуальный отчёт и causal attribution остаются открытыми;
+в Train диагностическая Hypothesis не включена.
+
 Миграция расширена до242 записей (240 retired/2 moved): четыре исторических
 AsymRm seed/reset инструмента удалены без wrappers. На обоих workers прошли
 production CLI, negative restored-path control и exact4D+4M scope:

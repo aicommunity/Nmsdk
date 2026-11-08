@@ -44,7 +44,7 @@
   "accepted": false,
   "training_certificate_eligible": false,
   "whole_plan_complete": false,
-  "joint_old_new_artifact_identity_check_complete": false,
+  "joint_old_new_artifact_identity_check_complete": true,
   "artifact_identity_fix_root": "009afde8b225c3e5dd86261c1afb095ab745817a",
   "joint_output_job": {
     "host": "10.245.1.11",
@@ -55,7 +55,28 @@
     "initial_main_pid": 1614995,
     "initial_start_ticks": "367730821",
     "request_sha256": "a82a76767b5ea4829fab7117050478ec39be4f9d76affd961c3d90b00836cb9a",
-    "last_observed": "kernel_bound_worker_live_compiling",
-    "initial_source_delivery_attempt": "invalid_revision_rejected_before_test_launch_fresh_corrected_source_delivered"
+    "last_observed": "closed_joint_native2_passed_lease_released",
+    "initial_source_delivery_attempt": "invalid_revision_rejected_before_test_launch_fresh_corrected_source_delivered",
+    "evidence_commit": "411a04b2ecb1798ea926543d5a7f64c5ed26e95e"
+  },
+  "asan_job": {
+    "host": "10.245.1.17",
+    "job": "s07-domain-evidence-m40-a1",
+    "compiled_root": "1d481d2bd3f2b118abed5b55a4ad1f8be4a5a7e3",
+    "PulseLib": "706813805ac54e21dc1bed46a68c62f358792394",
+    "unit": "timelearner-2c13dbb9-9ccc-4c9e-af46-ff652c361477.service",
+    "invocation_id": "799e5106501b4daa86e14e26f22ceba0",
+    "initial_main_pid": 2190787,
+    "initial_start_ticks": "318299622",
+    "request_sha256": "84ee0ef41da3bf9533f3f1676153b024a6f54c34c949cc1642d7a5dce6bd4b83",
+    "last_observed": "kernel_bound_worker_live_build_complete_test_phase_pending",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-domain-evidence-m40-a1",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-domain-evidence-m40-a1",
+    "checks_planned": 10,
+    "native_cases_planned": 4,
+    "cross_language_packets_planned": 4,
+    "asan_options": "detect_leaks=0"
   }
 }
