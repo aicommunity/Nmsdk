@@ -13,6 +13,8 @@
 #include "TimeLearner/CompositePortableTrainingProof.h"
 #include "TimeLearner/CandidateWindowTrainingDeclarations.h"
 #include "TimeLearner/NativeCandidateWindowBindings.h"
+#include "TimeLearner/CandidateWindowProposalReplay.h"
+#include "TimeLearner/CandidateWindowMeasurementEvidence.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h"
@@ -1544,3 +1546,168 @@ TEST(NativeCandidateWindowBanks,ClassicN6EachActualInputRoutesNPlus2){ActualDist
 TEST(NativeCandidateWindowBanks,BranchN6EachActualInputRoutesNPlus2){ActualDistinctBankRouting<NNeuronTimeLearnerBranch>(6);}
 TEST(NativeCandidateWindowBanks,BranchSharedBankIsLegitimateButNotDistinct){SharedBankReadbackIsLegitimateData();}
 TEST(NativeCandidateWindowBanks,ActualPreparedWrongBankDescriptorRejected){ActualWrongSelectorDataIsRejected();}
+
+namespace {
+template<class Owner> void EnableCandidateWindow(NativeCompositeFixture<Owner>& f,const std::string& attemptId="candidate-attempt",
+    std::size_t primaryBudget=128u*1024u*1024u) {
+    f.attempt.reset();const auto fixed=*f.protocol.compositeMeasurement;
+    f.protocol.schemaVersion=5;f.protocol.compositeMeasurement.reset();CandidateWindowMeasurementContract c;
+    c.contextPolicy=fixed.contextPolicy;c.geometryPolicy=fixed.geometryPolicy;c.referenceInputWindows=fixed.inputWindows;
+    // A declared narrow source/reference window, not adjusted after seeing
+    // this family's observations. Growth must use a new candidate-frame spec.
+    c.referenceInputWindows.front().endOffset=.035;
+    c.candidateWindowPolicy.maximumFeatureTerms=4096;c.candidateWindowPolicy.inputs.resize(f.protocol.inputs.size());
+    for(auto& input:c.candidateWindowPolicy.inputs) {
+        // An explicit engineering proposal, frozen before capture. Neither the
+        // candidate waveform nor its residual is used to tune these values.
+        input.delayFramesPerSegment=f.frequency/100;input.baseLeftGuardFrames=f.frequency/100;
+        input.baseRightGuardFrames=f.frequency/100;input.hardFirstFrame=1;
+        input.hardLastFrame=f.prototype.specification.maximumSamples-1;
+        input.maximumWindowFrames=f.frequency/20;
+    }
+    f.protocol.candidateWindowMeasurement=c;
+    const auto groups=64u;const auto n=f.protocol.inputs.size();
+    f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,f.protocol,
+        CompositeAttemptLimits{groups,groups*(n+2),groups*c.contextPolicy.maximumTotalSamples,120.,7200.},
+        NativeCandidateWindowAttemptDeclaration{attemptId,primaryBudget},f.Time(),Wall());
+}
+template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner>& f,const std::string& stage) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const std::string directory=std::string(NativeCompositeFixture<Owner>::branch?"branch-native-window5/":"classic-native-window5/")+stage;
+    const auto base=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(directory);Require(QDir().mkpath(base),"window5_output_directory");
+    const auto write=[&](const QString& name,const QByteArray& bytes){QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"window5_output_new_only");
+        Require(file.write(bytes)==bytes.size() && file.flush(),"window5_output_write");};
+    const auto record=f.attempt->Record();QJsonArray raw;
+    for(std::size_t i=0;i<record.rawTrials.size();++i) {
+        const auto& trial=record.rawTrials[i];const auto path=QString("raw-%1.csv").arg(qulonglong(i));
+        write(path,EncodeCompositeRawPrimary(trial));raw.append(QJsonObject{{"path",path},{"prepared",EncodeNativeProbePreparation(trial.prepared)},
+            {"actual_specification",EncodeNativeProbeSpecification(trial.actual)},{"packet",trial.packet?QJsonValue(EncodeNativeProbeEvidence(*trial.packet)):QJsonValue(QJsonValue::Null)}});
+    }
+    const auto& group=record.group;const bool complete=record.groupState==NativeMatchedOmissionState::Completed;
+    if(complete) {
+        std::vector<QString> paths;MatchedOmissionPrimary primary;
+        for(std::size_t i=0;i<record.rawTrials.size();++i){const auto path=QString("raw-%1.csv").arg(qulonglong(i));paths.push_back(path);primary.emplace(path,EncodeCompositeRawPrimary(record.rawTrials[i]));}
+        write("matched-witness.json",QJsonDocument(EncodeMatchedOmissionEvidence(group,paths,primary)).toJson());
+    }
+    write("window5-boundary.json",QJsonDocument(QJsonObject{{"kind","native_candidate_window5_factory_fixture"},{"schema_version",1},
+        {"training_certificate_eligible",false},{"protocol",EncodeVerificationProtocol(f.protocol)},
+        {"source_binding",f.attempt->SourceBinding()},{"source_origin",QString::fromStdString(f.attempt->SourceOrigin())},
+        {"owner_family_binding",QString::fromStdString(f.attempt->OwnerFamilyBinding())},{"group_id",QString::fromStdString(record.groupId)},
+        {"candidate_binding",ParseStrictNativeJsonObject(record.candidateBindingJson,128u*1024u*1024u)},
+        {"method_specification",record.candidateWindowSpecification?QJsonValue(EncodeCandidateWindowBasinSpecification(*record.candidateWindowSpecification)):QJsonValue(QJsonValue::Null)},
+        {"proposal",record.windowProposal?QJsonValue(EncodeCandidateWindowProposalData(*record.windowProposal)):QJsonValue(QJsonValue::Null)},
+        {"semantic_proof_id",QString::fromStdString(record.semanticProofId)},{"complete_group",complete},{"raw_trials",raw},
+        {"reason",QString::fromStdString(record.reason)},{"selection",record.selection?QJsonValue(EncodeNativeCompositeSelection(*record.selection)):QJsonValue(QJsonValue::Null)}}).toJson());
+    SaveCompositeBoundary(f,directory.c_str());
+}
+template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true) {
+    f.referenceMeasurements.clear();
+    for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
+        const std::string run="candidate-attempt/capture/1";
+        f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
+        if(save)SaveCandidateWindowGroup(f,"reference-"+std::to_string(i));
+        Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
+        f.referenceMeasurements.push_back(*f.attempt->Measurement());EXPECT_EQ(f.attempt->CandidateWindowReferences(),nullptr);
+    }
+    auto references=CapturedReferences::CaptureComposite(f.protocol,f.referenceMeasurements);
+    f.attempt->CompleteCandidateWindowReferences(references);return references;
+}
+template<class Owner> void WindowReferencesThenCandidate(unsigned hz=2000,bool c0=false,bool growth=false) {
+    NativeCompositeFixture<Owner> f(hz,false,64,c0,true);EnableCandidateWindow(f);
+    const auto initial=f.owner->ReadNativeParameters();const auto originalC0=f.owner->OwnedNativeCapacitanceState();
+    const auto refs=CaptureWindowReferences(f);ASSERT_TRUE(f.attempt->CandidateWindowReferences());
+    EXPECT_EQ(f.attempt->CandidateWindowReferences()->InputCount(),2u);EXPECT_EQ(refs.Inputs().size(),2u);
+    const auto origin=f.attempt->SourceOrigin(),family=f.attempt->OwnerFamilyBinding();
+    if(growth) {
+        auto parameters=initial;parameters[0].length=3;const auto edit=f.owner->ApplyNativeParameters(parameters);
+        ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;ASSERT_NE(f.Revision(),refs.InitialModelRevision());
+    }
+    const auto request=f.Request(0,"candidate-attempt","candidate-attempt/search/1",growth?1:0);
+    bool prepared=false;f.Run(request,CompositeMeasurementPurpose::Search,[&](const auto&){prepared=true;});
+    SaveCandidateWindowGroup(f,growth?"candidate-growth":c0?"candidate-C0":hz==20000?"candidate-20000":"candidate");
+    ASSERT_TRUE(prepared);ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    const auto record=f.attempt->Record();ASSERT_TRUE(record.windowProposal);ASSERT_TRUE(record.candidateWindowSpecification);
+    const auto& proposal=*record.windowProposal;EXPECT_EQ(proposal.reference.initialParameters,initial);
+    EXPECT_EQ(proposal.referenceProofId,refs.Inputs()[0].semanticProofId);EXPECT_EQ(proposal.sourceOrigin,origin);EXPECT_EQ(proposal.ownerFamilyBinding,family);
+    EXPECT_EQ(record.candidateWindowSpecification->coordinateMode,CandidateWindowCoordinateMode::CandidateFrame);
+    EXPECT_EQ(record.candidateWindowSpecification->candidateFrame,proposal.computation.window);
+    const auto& peak=*record.selection->geometry->measuredMaximum;const auto& full=record.group.witness.fullBefore.observation;
+    const auto& samples=full.channels.at(0).samples;
+    EXPECT_DOUBLE_EQ(peak.time,samples.at(peak.firstSample).time);EXPECT_DOUBLE_EQ(peak.rawPotential,samples.at(peak.firstSample).rawPotential);
+    EXPECT_GE(peak.firstSample,proposal.computation.window->firstFrame);EXPECT_LE(peak.lastSample,proposal.computation.window->lastFrame);
+    if(growth) {
+        EXPECT_GT(peak.firstSample,proposal.reference.lastFrame+std::uint64_t(hz/1000));
+        EXPECT_GT(peak.time-full.begin,f.protocol.candidateWindowMeasurement->referenceInputWindows[0].endOffset);
+        EXPECT_EQ(proposal.computation.lengthChange,1u);EXPECT_EQ(proposal.computation.shiftFrames,std::int64_t(hz/100));
+    }
+    EXPECT_EQ(f.owner->OwnedNativeCapacitanceState(),originalC0); // Off has no invented baseline; bound C0 remains the original family.
+    EXPECT_EQ(record.semanticProofId,CandidateWindowTrainingSemanticProofId(f.protocol,record));
+    const auto binding=CandidateWindowProposalReplayFactory::CheckCandidateBinding(*f.attempt->CandidateWindowReferences(),f.protocol,
+        ParseStrictNativeJsonObject(record.candidateBindingJson,128u*1024u*1024u));
+    EXPECT_NO_THROW(CandidateWindowProposalReplayFactory::Replay(*f.attempt->CandidateWindowReferences(),f.protocol,binding,request,
+        "candidate-attempt",record.groupId,f.prototype.specification.maximumSamples,CompositeMeasurementPurpose::Search,proposal));
+    auto falseArithmetic=proposal;++falseArithmetic.computation.shiftFrames;
+    falseArithmetic.windowRecipeId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowRecipeContent(falseArithmetic)).toStdString();
+    falseArithmetic.measurementInstanceId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowInstanceContent(falseArithmetic)).toStdString();
+    EXPECT_THROW(CandidateWindowProposalReplayFactory::Replay(*f.attempt->CandidateWindowReferences(),f.protocol,binding,request,
+        "candidate-attempt",record.groupId,f.prototype.specification.maximumSamples,CompositeMeasurementPurpose::Search,falseArithmetic),std::invalid_argument);
+    // This step supplies measurement factories, not a new search/final admission.
+    FinalVerificationSession final(refs,{"candidate-attempt/final/1",f.Revision(),4,0,0});ASSERT_TRUE(final.NextRequest());
+    EXPECT_THROW(final.ArmComposite(f.attempt->Measurement()->Prepared()),std::invalid_argument);
+    EXPECT_THROW(final.ConsumeComposite(*f.attempt->Measurement(),f.Revision()),std::invalid_argument);EXPECT_FALSE(final.Certificate());
+}
+enum class WindowReferenceStop { NeedSetter,NeedDirect,NeedConnected,Reset,Default,ChangedModel,RebuiltSameSemanticGraph };
+template<class Owner> void WindowReferenceBoundary(WindowReferenceStop action) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true,action==WindowReferenceStop::NeedConnected);EnableCandidateWindow(f);
+    std::vector<ValidatedCompositeMeasurement> evidence;
+    for(std::size_t i=0;i<2;++i){const std::string run="candidate-attempt/capture/1";
+        f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();evidence.push_back(*f.attempt->Measurement());}
+    const auto refs=CapturedReferences::CaptureComposite(f.protocol,evidence);
+    if(action==WindowReferenceStop::NeedSetter)f.owner->IsNeedToTrain=false;
+    if(action==WindowReferenceStop::NeedDirect)f.owner->IsNeedToTrain.SetDataDirect(false);
+    if(action==WindowReferenceStop::NeedConnected)f.flag->Value=false;
+    if(action==WindowReferenceStop::Reset)f.owner->Reset();
+    if(action==WindowReferenceStop::Default)f.owner->Default();
+    if(action==WindowReferenceStop::ChangedModel){auto p=f.owner->ReadNativeParameters();p[0].resistance*=1.01;
+        ASSERT_EQ(f.owner->ApplyNativeParameters(p).status,NativeEditStatus::Applied);}
+    if(action==WindowReferenceStop::RebuiltSameSemanticGraph) {
+        const auto original=f.owner->ReadNativeParameters();auto grown=original;grown[0].length=3;
+        ASSERT_EQ(f.owner->ApplyNativeParameters(grown).status,NativeEditStatus::Applied);
+        ASSERT_EQ(f.owner->ApplyNativeParameters(original).status,NativeEditStatus::Applied);
+        ASSERT_EQ(f.Revision(),refs.InitialModelRevision());
+    }
+    EXPECT_THROW(f.attempt->CompleteCandidateWindowReferences(refs),std::exception);EXPECT_EQ(f.attempt->CandidateWindowReferences(),nullptr);
+}
+void PartialWindowReferencesCannotQueueCandidate() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);
+    f.Run(f.Request(0,"candidate-attempt/capture/1","candidate-attempt/capture/1/0"),CompositeMeasurementPurpose::Reference);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();EXPECT_EQ(f.attempt->CandidateWindowReferences(),nullptr);
+    EXPECT_THROW(CapturedReferences::CaptureComposite(f.protocol,{*f.attempt->Measurement()}),std::invalid_argument);
+    EXPECT_THROW(f.attempt->StartMeasurement(f.Request(0,"candidate-attempt","candidate-attempt/search/1"),CompositeMeasurementPurpose::Search,
+        f.prototype,2.,300.,f.Time(),Wall()),std::invalid_argument);
+    EXPECT_EQ(f.attempt->IssuedNativeProbes(),4u);
+}
+void WindowPrimaryReservationRejectsBeforeQueue() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f,"candidate-attempt",1);
+    EXPECT_THROW(f.attempt->StartMeasurement(f.Request(0,"candidate-attempt/capture/1","candidate-attempt/capture/1/0"),CompositeMeasurementPurpose::Reference,
+        f.prototype,2.,300.,f.Time(),Wall()),CompositeTrainingBudgetExhausted);
+    EXPECT_EQ(f.attempt->IssuedNativeProbes(),0u);EXPECT_EQ(f.rawSamples,0u);
+}
+}
+TEST(NativeCandidateWindowFactory,ClassicCompleteReferencesAndActualReplayedCandidate){WindowReferencesThenCandidate<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowFactory,BranchCompleteReferencesAndActualReplayedCandidate){WindowReferencesThenCandidate<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowFactory,Classic20000ActualReplayedCandidate){WindowReferencesThenCandidate<NNeuronTimeLearner>(20000);}
+TEST(NativeCandidateWindowFactory,Branch20000ActualReplayedCandidate){WindowReferencesThenCandidate<NNeuronTimeLearnerBranch>(20000);}
+TEST(NativeCandidateWindowFactory,ClassicGrowthKeepsImmutableP0AndUsesMovedFrameWindow){WindowReferencesThenCandidate<NNeuronTimeLearner>(2000,false,true);}
+TEST(NativeCandidateWindowFactory,BranchGrowthKeepsImmutableP0AndUsesMovedFrameWindow){WindowReferencesThenCandidate<NNeuronTimeLearnerBranch>(2000,false,true);}
+TEST(NativeCandidateWindowFactory,BoundC0UsesOriginalFamily){WindowReferencesThenCandidate<NNeuronTimeLearner>(2000,true);}
+TEST(NativeCandidateWindowFactory,PartialReferencesNeverReleaseSeedSet){PartialWindowReferencesCannotQueueCandidate();}
+TEST(NativeCandidateWindowFactory,PrimaryByteReservationBeforeQueue){WindowPrimaryReservationRejectsBeforeQueue();}
+TEST(NativeCandidateWindowFactory,NeedSetterFalseBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::NeedSetter);}
+TEST(NativeCandidateWindowFactory,NeedDirectFalseBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::NeedDirect);}
+TEST(NativeCandidateWindowFactory,ConnectedNeedFalseBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearnerBranch>(WindowReferenceStop::NeedConnected);}
+TEST(NativeCandidateWindowFactory,OwnerResetExpiresPreparedReferences){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::Reset);}
+TEST(NativeCandidateWindowFactory,OwnerDefaultExpiresPreparedReferences){WindowReferenceBoundary<NNeuronTimeLearnerBranch>(WindowReferenceStop::Default);}
+TEST(NativeCandidateWindowFactory,ChangedNativeModelBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::ChangedModel);}
+TEST(NativeCandidateWindowFactory,RebuiltSameSemanticGraphCannotReviveReferences){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::RebuiltSameSemanticGraph);}

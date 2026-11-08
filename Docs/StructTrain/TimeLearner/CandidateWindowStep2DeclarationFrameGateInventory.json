@@ -2,7 +2,7 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "f9e5e86e84b44379fb25c249e6e23f79d5b317b0",
+  "pulse": "60fd65e4ccf956175d7c2ae661faba9547364a36",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 142742,
-      "sha256": "6c09c1d09861c6da37bfabc51056c68a27cdbb86252262d586fbde84bb00bb22",
+      "bytes": 158629,
+      "sha256": "4d3c1001be3f2cb4f75a7bebee3b9ba316da3688838da7564733a62938c00ed5",
       "expected_test_ids": [
         "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
         "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
@@ -79,8 +79,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 142742,
-      "sha256": "6c09c1d09861c6da37bfabc51056c68a27cdbb86252262d586fbde84bb00bb22",
+      "bytes": 158629,
+      "sha256": "4d3c1001be3f2cb4f75a7bebee3b9ba316da3688838da7564733a62938c00ed5",
       "expected_test_ids": [
         "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
         "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
@@ -95,11 +95,36 @@
       ],
       "count": 10,
       "scope": "actual parameter/receiver/source/member readback; every input of distinct N4/N6 native groups, no p5 seed or Exact claim"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 158629,
+      "sha256": "4d3c1001be3f2cb4f75a7bebee3b9ba316da3688838da7564733a62938c00ed5",
+      "expected_test_ids": [
+        "NativeCandidateWindowFactory.ClassicCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory.BranchCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory.Classic20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory.Branch20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory.ClassicGrowthKeepsImmutableP0AndUsesMovedFrameWindow",
+        "NativeCandidateWindowFactory.BranchGrowthKeepsImmutableP0AndUsesMovedFrameWindow",
+        "NativeCandidateWindowFactory.BoundC0UsesOriginalFamily",
+        "NativeCandidateWindowFactory.PartialReferencesNeverReleaseSeedSet",
+        "NativeCandidateWindowFactory.PrimaryByteReservationBeforeQueue",
+        "NativeCandidateWindowFactory.NeedSetterFalseBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.NeedDirectFalseBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.ConnectedNeedFalseBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.OwnerResetExpiresPreparedReferences",
+        "NativeCandidateWindowFactory.OwnerDefaultExpiresPreparedReferences",
+        "NativeCandidateWindowFactory.ChangedNativeModelBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.RebuiltSameSemanticGraphCannotReviveReferences"
+      ],
+      "count": 16,
+      "scope": "actual native5 cold/reference/candidate measurement factories; old Train5 consumers blocked; source only"
     }
   ],
-  "expected_count": 56,
+  "expected_count": 72,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 338,
+  "planned_cumulative_scope": 354,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [
@@ -121,7 +146,11 @@
     "classic-distinct-routing-N4/input-*",
     "branch-distinct-routing-N4/input-*",
     "classic-distinct-routing-N6/input-*",
-    "branch-distinct-routing-N6/input-*"
+    "branch-distinct-routing-N6/input-*",
+    "classic-native-window5/reference-*",
+    "branch-native-window5/reference-*",
+    "classic-native-window5/candidate*",
+    "branch-native-window5/candidate*"
   ],
   "primary_files": [
     "full-before.csv",
@@ -133,7 +162,7 @@
     "frame-spec2.json",
     "after-model.json"
   ],
-  "scope": "Declaration/proposal DATA codecs, opaque-input replay source, diagnostic actual frame projection, actual native input bank/routing; complete reference factories/native p5 admission still pending",
+  "scope": "Declaration/proposal DATA, strict closed-input replay, actual frame projection/bank routing, scoped native5 complete-reference and candidate measurement factories; archive2 portable references and Train5/service/CLI remain pending",
   "explicitly_not_accepted": [
     "portable_proposal_replay",
     "allN_reference_seed_factory",
@@ -163,5 +192,19 @@
     "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
     "expected_cases": 248,
     "runtime_accepted": false
+  },
+  "native5_factory_source_controls": {
+    "count": 16,
+    "frequencies_hz": [
+      2000,
+      20000
+    ],
+    "reference_input0_window_end": 0.035,
+    "proposal_shift_frames_per_segment": "frequency_hz / 100 (explicit fixture declaration)",
+    "proposal_left_right_guards": "frequency_hz / 100 (explicit fixture declaration)",
+    "maximum_attempt_wall_seconds": 7200,
+    "local_numeric_or_compile": false,
+    "portable_archive2_implemented": false,
+    "Train5_admission": false
   }
 }
