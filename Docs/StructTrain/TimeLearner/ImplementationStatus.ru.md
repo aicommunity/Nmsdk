@@ -355,4 +355,27 @@ Installed VS18 VsDevCmd содержит guarded async PowerShell telemetry. Э�
 обоснование следующего контролируемого ENV изменения, а не доказательство
 командной строки прошлого PID. A4 проверяет только процесс-локальный штатный
 флаг VSCMD_SKIP_SENDTELEMETRY=1 до vcvars; backend/его guard не ослабляются.
-Успех A4 и запуск18 gates на момент этой записи ещё не приняты.
+A4 не исполнила child: штатный preflight отказал из-за нехватки памяти при
+заявленных4GiB+256MiB reserve.
+[Квитанция A4](WindowsDomainMemoryPreflightRefusalVerification.json).
+
+Отдельная A5 затем прошла штатный backend: completed/valid, return0, все owned
+процессы закрылись, оставшихся descendants нет. Ninja подтвердил no work,
+три runtime и source closure не изменились. Явно изменены два условия: штатный
+VS ENV flag и отдельная256MiB quota только для warm/no-op диагностики, обоснованная
+ранее измеренным95MiB peak. Это не приёмка полной сборки с4GiB, не доказательство
+единственной причины прошлых descendants и не scientific worker admission.
+[Квитанция A5](WindowsDomainBoundedBuildA5Verification.json).
+
+18 native portability gates ещё не запущены: чтение свободной physical memory
+показало690614272 bytes, а подготовленный профиль требует3GiB+256MiB reserve.
+Чужие приложения не останавливались. Проверки загрузки DLL, наблюдений и моделей
+на текущем root818/Pulse3acc остаются следующим отдельным шагом. FCC matched
+implementation этой Windows сборкой не проверялась.
+
+
+[Подготовленное задание Windows18](WindowsDomainNative18PreparedManifest.json)
+фиксирует18 test IDs, compiled source/runtime SHA, cooperative capture и лимиты.
+Это декларация следующей проверки, не результат и не действующий общий Windows
+CLI. Перед запуском требуется свежий штатный runtime/resource preflight;
+отдельного разрешения пользователя на уже согласованный объём не требуется.

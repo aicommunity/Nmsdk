@@ -34,3 +34,38 @@ native lifecycle/storage and impulse response, complete observation windows,
 model export/import, owned process containment/cancellation and the production
 reader/publisher. Windows/Linux numerical comparisons need explicit tolerances;
 do not replace a failed exact-waveform comparison with a silent tolerance.
+
+
+## Private .14 preparation (2026-11-08)
+
+Keep build acceptance and scientific-worker admission separate. The existing
+root818dd80/Pulse3accbed private Release artifacts compiled successfully, but
+the original owned execution was rejected for remaining descendants. A later
+bounded Ninja check reported no work while the unchanged backend again rejected
+remaining conhost/PowerShell processes. Preserve both failures.
+
+The installed VS18 `Common7/Tools/VsDevCmd.bat` guards its asynchronous
+`Send-VsDevShellTelemetry` PowerShell launch with `VSCMD_SKIP_SENDTELEMETRY`.
+For a new controlled headless build, set `VSCMD_SKIP_SENDTELEMETRY=1` in the
+owned batch **before** calling vcvars. Record this process-local environment
+choice, the actual installed script hash and backend result. Do not alter
+machine settings, ignore remaining descendants, or infer the old process's
+command line from this script alone. The flag does not itself admit the worker.
+
+A short existing-build diagnostic may use a separately declared memory budget;
+it is not a full-build budget. The observed earlier no-op Job peak was
+99,479,552 bytes. A separate diagnostic with the VS flag and 256 MiB of Job committed memory
+passed with the unchanged 256 MiB host reserve: no work, no remaining descendants,
+all processes closed and source/three runtime inventories unchanged. This changed
+two declared conditions; it is not a single-factor causal experiment. Its 120 s
+wall limit, source/runtime hashes and owned-process closure remained mandatory.
+See `Docs/StructTrain/TimeLearner/WindowsDomainBoundedBuildA5Verification.json`. Do not use
+that quota silently for native experiments or unexpected recompilation.
+
+The prepared 18 native portability checks retain their distinct 3 GiB quota
+and 256 MiB physical-memory reserve. Check actual free memory before dispatch:
+a reading of 690,614,272 available bytes cannot admit that job. Do not stop
+unrelated applications to make admission pass. Kernel closure, loaded DLL
+identity, exact test inventory and original negative evidence remain required.
+These checks target the root818/Pulse3acc snapshot, not the newer FCC matched-
+omission implementation. They do not certify complete scientific experiments.

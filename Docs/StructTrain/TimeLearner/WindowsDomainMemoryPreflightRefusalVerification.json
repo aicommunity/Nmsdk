@@ -1,0 +1,107 @@
+{
+  "kind": "independent_windows_bounded_build_preparation_verification",
+  "attempt": "a4",
+  "evidence_commit": "c3fd9cb2d06601761f9d9f9894e7ab068a3e95bc",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "archive_members_verified": 38,
+  "archive_bytes": 141456,
+  "archive_sha256": "47fbcd71bd96842bd943d4f17e4d05542ba8443ccd214f7302c06ba69d923969",
+  "pack_bytes": 178004,
+  "pack_sha256": "48b89f4ed3103c7bb7e2083deec6299bae66837c4c7803fb41ba9d90ad2751ce",
+  "native_git_transfer": true,
+  "execution": "process_error",
+  "validity": "invalid_or_incomplete",
+  "reason": "insufficient_windows_available_memory",
+  "returncode": null,
+  "child_resumed": false,
+  "all_processes_closed": null,
+  "fresh_kernel_job_state": "absent",
+  "build_execution_accepted": false,
+  "compile_or_link_observed": false,
+  "no_op_established": false,
+  "source_closure_unchanged": true,
+  "all_three_runtime_inventories_unchanged": true,
+  "build_metadata_changed": [],
+  "backend_verified_against_root_git": true,
+  "installed_vsdevcmd_hash_and_guard_verified": true,
+  "environment_profile": {
+    "kind": "windows_private_build_environment_profile",
+    "only_operational_change_from_a3": true,
+    "environment_delta": {
+      "VSCMD_SKIP_SENDTELEMETRY": {
+        "parent_value": null,
+        "owned_cmd_value": "1"
+      }
+    },
+    "scope": "SETLOCAL batch assignment before vcvars64; no registry or global settings",
+    "installed_vsdevcmd": {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat",
+      "sha256": "a7815e85d636828e5cf70fe4235b11fcb41750896a4d2d60756b43bacaf4f0b2",
+      "size": 11526
+    },
+    "installed_guard_excerpt": [
+      {
+        "line": 248,
+        "text": ""
+      },
+      {
+        "line": 249,
+        "text": "@REM Send Telemetry if user's VS is opted-in"
+      },
+      {
+        "line": 250,
+        "text": "if \"%VSCMD_SKIP_SENDTELEMETRY%\"==\"\" ("
+      },
+      {
+        "line": 251,
+        "text": "    if \"%VSCMD_DEBUG%\" NEQ \"\" ("
+      },
+      {
+        "line": 252,
+        "text": "        @echo [DEBUG:%~nx0] Sending telemetry"
+      },
+      {
+        "line": 253,
+        "text": "        powershell.exe -NoProfile -Command \"& {Import-Module '%~dp0\\Microsoft.VisualStudio.DevShell.dll'; Send-VsDevShellTelemetry -NewInstanceType Cmd;}\""
+      },
+      {
+        "line": 254,
+        "text": "    ) else ("
+      },
+      {
+        "line": 255,
+        "text": "        START \"\" /B powershell.exe -NoProfile -Command \"& {if($PSVersionTable.PSVersion.Major -ge 3){Import-Module '%~dp0\\Microsoft.VisualStudio.DevShell.dll'; Send-VsDevShellTelemetry -NewInstanceType Cmd; }}\" > NUL"
+      },
+      {
+        "line": 256,
+        "text": "    )"
+      },
+      {
+        "line": 257,
+        "text": ")"
+      },
+      {
+        "line": 258,
+        "text": ""
+      },
+      {
+        "line": 259,
+        "text": "@REM Script clean-up of environment variables used to track"
+      }
+    ],
+    "vcvars64": {
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+      "sha256": "6b516d8fcf543c14b2d861e1f45661e0029230fe0dc48e86ce78522801822209",
+      "size": 39
+    },
+    "backend_unchanged": true,
+    "a3_descendant_causal_identity_established": false
+  },
+  "producer_sha256": "1f28ab8950218a59c82b2b21fbc01eeeea3d9a7d44c2d2b28f7c99414882fd09",
+  "internal_archive_prefix": "attempt-a4",
+  "native_tests_started": 0,
+  "numerical_tests_executed_locally": false,
+  "scientific_worker_admitted": false,
+  "prior_failed_attempts_reclassified": false,
+  "whole_plan_complete": false
+}
