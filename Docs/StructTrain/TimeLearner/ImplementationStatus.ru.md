@@ -104,9 +104,11 @@ reader12/12 на каждом сервере и независимый пере�
 Дополнительно совместный old/new native gate2/2 подтвердил раздельные trial/
 artifact identities. Все эти результаты и исходные отказы по ресурсам доступны
 в Git: [контракт и receipts](ResponseDomainEvidence.ru.md).
-Полная ASan-проверка связки на M40 запущена. Console integration, расширенная
-fault/N матрица, визуальный отчёт и causal attribution остаются открытыми;
-в Train диагностическая Hypothesis не включена.
+ASan-проверка capture/codec связки на M40 завершена:10 integrity/codec,
+4 native cases и4 independent packet checks; [receipt](ResponseDomainEvidenceAsanVerification.json).
+[Визуальный отчёт schema2](ResponseDomainDiagnosticReport-2026-11-08.ru.md)
+подготовлен. Console integration, полная fault/N матрица и operational
+attribution остаются открытыми; в Train диагностическая Hypothesis не включена.
 
 Миграция расширена до242 записей (240 retired/2 moved): четыре исторических
 AsymRm seed/reset инструмента удалены без wrappers. На обоих workers прошли
@@ -309,3 +311,12 @@ Normal [проверка revision provider в fixtures](NativeFixtureRevisionPro
 Dimensions schema2. Первая проба четырёх A/B-пар совпадает по CSV/native/model/
 features. ASan-повтор с обоими N6 протоколами и auxiliary parity запущен
 отдельно; его результат пока не принят. Это изменение fixtures, не алгоритма.
+
+
+На третьем worker Windows .14 подготовлены pinned Git donors и запущена новая
+проверка capture/codec/native portability (18 случаев). Первая попытка отказала
+до компиляции из-за sparse scope, скрывшего root Libraries.cpp;
+[receipt отказа](WindowsDomainFixtureFailedVerification.json) сохраняет закрытие
+всех процессов и неизменность прежних runtime. Исправленная fresh попытка
+[зафиксирована отдельно](WindowsDomainFixtureJobs.json); её научная приёмка
+не заявлена. Старые44 Windows checks не повторяются как новый результат.

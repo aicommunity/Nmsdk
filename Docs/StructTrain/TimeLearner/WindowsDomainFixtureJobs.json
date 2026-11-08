@@ -1,0 +1,39 @@
+{
+  "kind": "windows_domain_fixture_jobs",
+  "compiled_root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "PulseLib": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+  "host": "10.245.1.14",
+  "expected_checks": 18,
+  "groups": {
+    "capture_codec": 10,
+    "native_domain_typed": 4,
+    "n6_dimensions_schema2": 2,
+    "n6_burst_assignment_schema3": 2
+  },
+  "scientific_worker_admitted": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false,
+  "attempts": [
+    {
+      "job": "windows-domain-fixture-identity-a1",
+      "task": "TimeLearner-WindowsDomainFixtureIdentity-A1-20261108",
+      "instance": "{053851DA-4F49-49D4-BE8D-269189DAFC14}",
+      "state": "closed_configure_failed",
+      "failure": "root sparse checkout excluded Libraries/Libraries.cpp",
+      "descendants_remaining_not_ignored": true,
+      "evidence_commit": "0990f9420275e10e0fa63a05983eb6c3fa27a256"
+    },
+    {
+      "job": "windows-domain-fixture-identity-a2",
+      "task": "TimeLearner-WindowsDomainFixtureIdentity-A2-20261108",
+      "instance": "{054D8748-91BD-4516-BD91-C8D80D486B9E}",
+      "state": "actual_worker_process_confirmed_live",
+      "worker_pid": 10328,
+      "worker_creation_epoch_ms": 1794112255759,
+      "worker_sha256": "8f90268c7af1640135f899c58a79a5aec19f7aff79d215053b09d5bdaa5ea504",
+      "source": "C:/Projects/TimeLearnerWorker/source-fixture-identity-windows-a2",
+      "build": "C:/Projects/TimeLearnerWorker/build-fixture-identity-windows-a2",
+      "runtime": "C:/Projects/TimeLearnerWorker/runtime-fixture-identity-windows-a2"
+    }
+  ]
+}
