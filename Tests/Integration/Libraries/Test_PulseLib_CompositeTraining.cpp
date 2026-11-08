@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
+#include "NPulseSynapse.h"
 #include "TimeLearner/NativeCompositeTrainingAttempt.h"
 #include "TimeLearner/CompositeTrainingDeclarations.h"
 #include "TimeLearner/ConfiguredNativeTraining.h"
@@ -22,8 +23,10 @@
 #include <functional>
 #include <limits>
 #include <map>
+#include <set>
 #include <stdexcept>
 #include <type_traits>
+#include <thread>
 
 namespace {
 using namespace RDK;using namespace NMSDK;using namespace NMSDK::TimeLearner;
@@ -502,6 +505,121 @@ template<class Owner> void ServicePreparedStop() {
     ASSERT_EQ(service.CompositeMeasurements().size(),1u);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
     EXPECT_EQ(service.CompositeMeasurements()[0].rawTrials.size(),1u);
 }
+enum class RawSinkAction { Throw,Reset,Default,Retarget,RecursiveStop };
+template<class Owner> void ServicePreparedSinkAction(RawSinkAction action) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;
+    const auto original=p.probe.onPrepared;p.probe.onPrepared=[&](const auto& a,const auto& s){
+        if(original)original(a,s);f.owner->IsNeedToTrain=false;
+    };
+    p.observationSink=[&](const NativeProbeResult& packet){
+        ++closed;EXPECT_EQ(closed,1u);EXPECT_EQ(packet.status,NativeProbeStatus::Cancelled);
+        EXPECT_TRUE(packet.requiresFreshVerification);ASSERT_TRUE(packet.observation);EXPECT_FALSE(packet.observation->valid);
+        EXPECT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Finished);
+        if(action==RawSinkAction::Throw)throw std::runtime_error("intentional_cancelled_raw_sink_failure");
+        if(action==RawSinkAction::Reset)f.owner->Reset();
+        if(action==RawSinkAction::Default)f.owner->Default();
+        if(action==RawSinkAction::Retarget){auto target=f.owner->InputPattern.GetData();target(1,0)+=.01;f.owner->InputPattern=target;}
+        if(action==RawSinkAction::RecursiveStop){f.owner->IsNeedToTrain=false;f.owner->IsNeedToTrain=false;}
+    };
+    ServiceStart(f,p);
+    for(std::size_t ticks=0;ticks<4000 && !closed;++ticks){f.model->Calculate();f.environment->IncreaseModelTimeByStep();}
+    ASSERT_EQ(closed,1u);EXPECT_EQ(f.rawSamples,0u);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    if(action==RawSinkAction::Reset){EXPECT_EQ(service.State(),NativeTrainingState::Idle);EXPECT_FALSE(service.CompositeSourceBinding().isEmpty());}
+    else if(action==RawSinkAction::Default){EXPECT_EQ(service.State(),NativeTrainingState::Idle);EXPECT_TRUE(service.CompositeSourceBinding().isEmpty());EXPECT_TRUE(service.CompositeMeasurements().empty());}
+    else if(action==RawSinkAction::Retarget){EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidModel);EXPECT_TRUE(service.CompositeSourceBinding().isEmpty());}
+    else {
+        EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+        ASSERT_EQ(service.CompositeMeasurements().size(),1u);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
+        ASSERT_EQ(service.CompositeMeasurements()[0].rawTrials.size(),1u);EXPECT_TRUE(service.CompositeMeasurements()[0].rawTrials[0].packet);
+        if(action==RawSinkAction::Throw)EXPECT_NE(service.Reason().find("raw_sink_failed"),std::string::npos);
+    }
+}
+template<class Owner> void ServiceWarmDoesNotReplayCancelledRaw() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;bool stopOnce=true;
+    std::set<std::pair<std::string,std::string>> identities;
+    const auto original=p.probe.onPrepared;p.probe.onPrepared=[&](const auto& a,const auto& s){
+        if(original)original(a,s);if(stopOnce){stopOnce=false;f.owner->IsNeedToTrain=false;}
+    };
+    p.observationSink=[&](const NativeProbeResult& packet){
+        ++closed;ASSERT_TRUE(packet.requestedSpecification);
+        EXPECT_TRUE(identities.emplace(packet.requestedSpecification->runId,packet.requestedSpecification->trialId).second);
+    };
+    ServiceStart(f,p);ServiceTicks(f);ASSERT_EQ(closed,1u);ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+    f.owner->Reset();f.owner->BeginNativeTraining(p);EXPECT_EQ(closed,1u);ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.SessionAttempt(),2u);
+    EXPECT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();EXPECT_TRUE(service.Certificate());
+    EXPECT_EQ(closed,1+service.CompositeNativeProbes());EXPECT_EQ(identities.size(),closed);
+}
+template<class Owner> void ServiceNormalSink(bool reset) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;
+    p.observationSink=[&](const NativeProbeResult& packet){
+        ++closed;EXPECT_EQ(packet.status,NativeProbeStatus::Completed);
+        if(reset)f.owner->Reset();else throw std::runtime_error("intentional_normal_raw_sink_failure");
+    };
+    ServiceStart(f,p);
+    for(std::size_t ticks=0;ticks<4000 && !closed;++ticks){f.model->Calculate();f.environment->IncreaseModelTimeByStep();}
+    ASSERT_EQ(closed,1u);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    if(reset)EXPECT_EQ(service.State(),NativeTrainingState::Idle);
+    else {EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);EXPECT_NE(service.Reason().find("raw_sink_failed"),std::string::npos);}
+}
+template<class Owner> void ServiceInvalidRawStillDelivered() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;bool changed=false;
+    const auto original=p.probe.onSample;p.probe.onSample=[&](const auto& frame){
+        if(original)original(frame);if(changed)return;changed=true;
+        // Deliberate actual-physics fault, not a fabricated rejected packet.
+        auto synapse=f.owner->template GetComponentL<NPulseSynapse>("Neuron.Dendrite1_2.ExcSynapse1",true);
+        ASSERT_TRUE(synapse);synapse->Resistance=synapse->Resistance.GetData()*1.01;
+    };
+    p.observationSink=[&](const NativeProbeResult& packet){
+        ++closed;ASSERT_TRUE(packet.requestedSpecification);ASSERT_TRUE(packet.observation);
+        EXPECT_TRUE(packet.status!=NativeProbeStatus::Completed || !packet.observation->valid);
+    };
+    ServiceStart(f,p);ServiceTicks(f);EXPECT_TRUE(changed);EXPECT_EQ(closed,1u);
+    const auto& service=f.owner->NativeTrainingController();EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);
+    ASSERT_EQ(service.CompositeMeasurements().size(),1u);ASSERT_EQ(service.CompositeMeasurements()[0].rawTrials.size(),1u);
+    EXPECT_TRUE(service.CompositeMeasurements()[0].rawTrials[0].packet);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
+}
+template<class Owner> void ServiceSlowRawSinkUsesRealDeadline() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;double elapsed=0.;
+    p.maximumWallSeconds=15.;p.composite->maximumGroupWallSeconds=15.;
+    p.observationSink=[&](const NativeProbeResult& packet){
+        ++closed;EXPECT_EQ(packet.status,NativeProbeStatus::Completed);
+        if(closed==f.protocol.inputs.size()+2) {
+            const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(16));
+            elapsed=NativeTrainingWallTime()-before;
+        }
+    };
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_GE(elapsed,15.);EXPECT_EQ(closed,f.protocol.inputs.size()+2);
+    EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    ASSERT_EQ(service.CompositeMeasurements().size(),1u);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
+}
+template<class Owner> void ObsoleteActorCannotCancelForeignProbe() {
+    NativeCompositeFixture<Owner> f;const auto logical=f.Request(0,"old-owner","old-owner/1");
+    f.attempt->StartMeasurement(logical,CompositeMeasurementPurpose::Reference,f.prototype,2.,300.,f.Time(),Wall());
+    f.attempt->BeforeTick(f.Time(),Wall());ASSERT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Queued);
+    f.owner->CancelNativeProbe("fixture_closes_old_trial");const auto old=f.owner->TakeNativeProbeResult();
+    ASSERT_TRUE(old);ASSERT_EQ(old->status,NativeProbeStatus::Cancelled);
+    auto foreign=f.prototype;foreign.specification.runId="separate-probe";foreign.specification.trialId="separate-probe/1";
+    foreign.routing=f.protocol.routing;foreign.activeInput=0;foreign.inputId=f.protocol.inputs[0].id;
+    foreign.protocolRevision=f.protocol.revision;foreign.baseModelRevision=f.Revision();
+    foreign.readModelRevision=[&](){return f.Revision();};foreign.readFullModelRevision=foreign.readModelRevision;
+    f.owner->QueueNativeProbe(foreign);f.attempt.reset();
+    EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Queued);
+    f.owner->CancelNativeProbe("fixture_closes_its_separate_probe");const auto result=f.owner->TakeNativeProbeResult();
+    ASSERT_TRUE(result);ASSERT_TRUE(result->requestedSpecification);
+    EXPECT_EQ(result->requestedSpecification->trialId,"separate-probe/1");
+}
+template<class Owner> void ActorDestructorDoesNotNotifyApplication() {
+    NativeCompositeFixture<Owner> f;std::size_t callbacks=0;const auto request=f.Request(0,"destructor","destructor/1");
+    f.attempt->StartMeasurement(request,CompositeMeasurementPurpose::Reference,f.prototype,2.,300.,f.Time(),Wall(),{},{},
+        [&](const auto&){++callbacks;});
+    f.attempt->BeforeTick(f.Time(),Wall());ASSERT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Queued);
+    f.attempt.reset();EXPECT_EQ(callbacks,0u);EXPECT_NE(f.owner->NativeProbeState(),NativeProbeStatus::Queued);
+}
 template<class Owner> void ServicePartialReset(bool useDefault) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);ServiceStart(f,p);
     bool interrupted=false;
@@ -544,6 +662,30 @@ TEST(NativeCompositeService,ClassicDirectDataStopBeforeFinalConsume){ServiceStop
 TEST(NativeCompositeService,BranchDirectDataStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearnerBranch>(false);}
 TEST(NativeCompositeService,ClassicPreparedStopHasSingleRawResult){ServicePreparedStop<NNeuronTimeLearner>();}
 TEST(NativeCompositeService,BranchPreparedStopHasSingleRawResult){ServicePreparedStop<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicCancelledSinkThrowIsSingleAttempt){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Throw);}
+TEST(NativeCompositeService,BranchCancelledSinkThrowIsSingleAttempt){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Throw);}
+TEST(NativeCompositeService,ClassicCancelledSinkResetDoesNotFinishOldControl){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Reset);}
+TEST(NativeCompositeService,BranchCancelledSinkResetDoesNotFinishOldControl){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Reset);}
+TEST(NativeCompositeService,ClassicCancelledSinkDefaultCannotReviveFamily){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Default);}
+TEST(NativeCompositeService,BranchCancelledSinkDefaultCannotReviveFamily){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Default);}
+TEST(NativeCompositeService,ClassicCancelledSinkRetargetCannotBeOverwritten){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Retarget);}
+TEST(NativeCompositeService,BranchCancelledSinkRetargetCannotBeOverwritten){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Retarget);}
+TEST(NativeCompositeService,ClassicRecursiveStopDoesNotRepeatRawDelivery){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::RecursiveStop);}
+TEST(NativeCompositeService,BranchRecursiveStopDoesNotRepeatRawDelivery){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::RecursiveStop);}
+TEST(NativeCompositeService,ClassicWarmDoesNotReplayCancelledRaw){ServiceWarmDoesNotReplayCancelledRaw<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchWarmDoesNotReplayCancelledRaw){ServiceWarmDoesNotReplayCancelledRaw<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicNormalSinkThrowStopsBeforeConsume){ServiceNormalSink<NNeuronTimeLearner>(false);}
+TEST(NativeCompositeService,BranchNormalSinkThrowStopsBeforeConsume){ServiceNormalSink<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCompositeService,ClassicNormalSinkResetHasNoStaleContinuation){ServiceNormalSink<NNeuronTimeLearner>(true);}
+TEST(NativeCompositeService,BranchNormalSinkResetHasNoStaleContinuation){ServiceNormalSink<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCompositeService,ClassicInvalidActualPacketStillReachesSink){ServiceInvalidRawStillDelivered<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchInvalidActualPacketStillReachesSink){ServiceInvalidRawStillDelivered<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicSlowSinkCannotCrossRealDeadlineIntoConsume){ServiceSlowRawSinkUsesRealDeadline<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchSlowSinkCannotCrossRealDeadlineIntoConsume){ServiceSlowRawSinkUsesRealDeadline<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicObsoleteActorCannotCancelForeignProbe){ObsoleteActorCannotCancelForeignProbe<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchObsoleteActorCannotCancelForeignProbe){ObsoleteActorCannotCancelForeignProbe<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicDestructorDoesNotNotifyApplication){ActorDestructorDoesNotNotifyApplication<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchDestructorDoesNotNotifyApplication){ActorDestructorDoesNotNotifyApplication<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeService,ClassicResetPreservesPartialEvidence){ServicePartialReset<NNeuronTimeLearner>(false);}
 TEST(NativeCompositeService,BranchResetPreservesPartialEvidence){ServicePartialReset<NNeuronTimeLearnerBranch>(false);}
 TEST(NativeCompositeService,ClassicDefaultInvalidatesSourceFamily){ServicePartialReset<NNeuronTimeLearner>(true);}
