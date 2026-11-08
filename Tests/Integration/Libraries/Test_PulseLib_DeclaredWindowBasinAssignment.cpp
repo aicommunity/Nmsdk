@@ -121,7 +121,17 @@ TEST(DeclaredWindowBasinAssignment,TwoControlMaximaInsideOneFixedBasinAreUnknown
 }
 TEST(DeclaredWindowBasinAssignment,ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown) {
     Fixture f;f.specification.windowEnd=5.;auto control=f.omit0;control[4]=control[5]=control[6]=4.;
+    control[7]=3.; // Both flanks are lower: 4..6 is an actual local-maximum plateau.
     f.Responses(f.full,control,f.omit1);const auto result=f.Select();NoMeasurement(result);EXPECT_EQ(result.validity,Validity::Ambiguous);
+}
+TEST(DeclaredWindowBasinAssignment,RisingShoulderAcrossBasinBoundaryDoesNotManufactureAControlMaximum) {
+    Fixture f;f.specification.windowEnd=5.;auto control=f.omit0;control[4]=control[5]=control[6]=4.;
+    // The original7=6 is higher: 4..6 is a rising shoulder, not a maximum.
+    // Global extraction must not turn it into a peak by cropping at valley5.
+    f.Responses(f.full,control,f.omit1);const auto result=f.Select();
+    ASSERT_EQ(result.validity,Validity::Valid);ASSERT_TRUE(result.measuredMaximum);ASSERT_EQ(result.candidates.size(),1u);
+    EXPECT_EQ(result.measuredMaximum->firstSample,3u);
+    EXPECT_EQ(result.candidates[0].controls[0],BasinControlPresence::AbsentWithinFixedBasin);
 }
 TEST(DeclaredWindowBasinAssignment,ConstantBaselineControlHasNoPeakRatherThanAClippedUnknownPlateau) {
     Fixture f;f.specification.windowEnd=5.;const auto result=f.Select();ASSERT_EQ(result.validity,Validity::Valid);
