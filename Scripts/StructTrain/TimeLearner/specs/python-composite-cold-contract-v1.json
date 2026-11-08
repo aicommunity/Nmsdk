@@ -1,13 +1,14 @@
 {
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
-  "suite_id": "composite-cold6-protocol4-primary-transport-and-condition-regression",
-  "package_fingerprint": "9b49875307898c82a24b6af169d3818060e5e1e3ea035639cc7de3d75184d363",
+  "suite_id": "composite-portable-package-contract-v1",
+  "package_fingerprint": "5b931e17b9a67263585e051586ffa8dc2e196c5c84750dfbd01610eda714f591",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery",
     "Scripts.StructTrain.TimeLearner.tests.test_pipeline_condition",
-    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary"
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract"
   ],
   "expected_test_ids": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_each_base_is_a_private_lossless_view_and_original_identity_is_retained",
@@ -21,6 +22,8 @@
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_insufficient_group_capacity_is_rejected_but_small_attempt_budget_stays_explicit",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_protocol_four_binds_topology_source_and_declared_windows",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_protocol_cannot_move_window_after_observation_or_change_method",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_named_logical_inputs_preserve_physical_ordinal_and_actual_origin",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration.CompositeConfigurationTest.test_unsupported_stock_source_factors_are_rejected_before_train",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_each_base_projects_without_mutation_or_loss",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_legacy_policy_is_explicitly_retry_and_copied",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery.CandidateRecoveryDeclarationTest.test_unversioned_envelope_fields_are_rejected",
@@ -57,10 +60,19 @@
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_integral_counts_are_normalized_and_boolean_or_fractional_counts_fail",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_paths_cannot_escape_or_have_multiple_spellings",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_case_collisions_duplicate_paths_and_file_directory_aliases_fail",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_windows_device_aliases_controls_and_trailing_segments_fail_before_io",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_parent_or_file_symlink_never_supplies_primary",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_invalid_snapshot_inventory_creates_nothing_and_existing_output_is_unchanged",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_renaming_csv_changes_only_transport_name_and_does_not_rewrite_bytes",
-    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_empty_stopped_inventory_remains_empty_without_fabricated_csv"
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_empty_stopped_inventory_remains_empty_without_fabricated_csv",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_private_numeric_view_preserves_semantics_and_does_not_mutate_input",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_nonfinite_private_view_is_rejected_before_hashing",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_csv_path_rename_changes_document_identity_but_not_measurement_proof",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_measurement_identity_retains_attempt_and_actual_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_hash_payload_is_not_promoted_to_a_training_package",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_schema_five_loader_never_uses_old_flat_trial_globs_or_invents_summary",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_schema_five_does_not_ignore_supplied_legacy_primary_overlay",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_preflight_envelope_accepts_known_zero_callbacks_but_rejects_invented_archive"
   ],
   "fixtures": {}
 }

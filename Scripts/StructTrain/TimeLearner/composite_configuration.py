@@ -104,6 +104,15 @@ def project_composite_configuration(configuration):
     require(frequency > 0 and duration > 0 and number(configuration['maximum_sample_gap']) == 1/frequency and
             configuration['record_spikes'] is False and configuration['peak_selection'] == 'isolated_window',
             'unsupported_composite_recorder_or_grid')
+    profile = configuration['stimulus_profile']
+    _keys(profile, {'generator_class', 'amplitude', 'pulse_length', 'frequency_hz',
+                    'frequency_deviation', 'use_transit_signal', 'use_pattern_output'},
+          'unknown_composite_stimulus_profile_fields')
+    require(profile['generator_class'] == model['generator_class'] == 'NPulseGeneratorTransit'
+            and number(profile['frequency_hz']) == frequency and number(profile['amplitude']) > 0
+            and number(profile['pulse_length']) >= 1/frequency and number(profile['frequency_deviation']) == 0
+            and profile['use_transit_signal'] is False and profile['use_pattern_output'] is False,
+            'unsupported_composite_stock_stimulus_profile')
     for window in windows:
         _keys(window, {'begin', 'end'}, 'unknown_composite_window_fields')
         require(0 <= number(window['begin']) < number(window['end']) <= duration,
@@ -154,6 +163,16 @@ def validate_composite_protocol(protocol, configuration):
     require(count(protocol['schema_version']) == 4, 'unknown_composite_protocol_schema')
     model = configuration['model']; n = len(model['inputs'])
     require(type(model['branch']) is bool, 'invalid_composite_routing_declaration')
+    inputs = protocol['inputs']; stimulus_ids = ['pulse'+str(i) for i in range(n)]
+    require(type(inputs) is list and len(inputs) == n, 'composite_protocol_input_dimension')
+    names = []
+    for index, item in enumerate(inputs):
+        _keys(item, {'id', 'stimulus_id'}, 'unknown_composite_protocol_input_fields')
+        require(type(item['id']) is str and bool(item['id']) and item['stimulus_id'] == stimulus_ids[index],
+                'composite_protocol_input_mapping')
+        names.append(item['id'])
+    require(len(set(names)) == n and protocol['origin_stimulus_id'] in stimulus_ids,
+            'composite_protocol_input_or_origin_identity')
     declared = configuration['composite_measurement']
     contract = {key: deepcopy(declared[key]) for key in
                 ('schema_version', 'method_id', 'context_policy', 'geometry_policy')}
@@ -162,9 +181,8 @@ def validate_composite_protocol(protocol, configuration):
     expected = {
         'schema_version': 4, 'routing': 'branch_solo_burst' if model['branch'] else 'classic_burst',
         'revision': configuration['protocol_revision'], 'sample_id': configuration['sample_id'],
-        'pattern_hash': canonical_model_sha256(model['initial_isi']), 'origin_stimulus_id': 'pulse0',
-        'inputs': [{'id': 'input'+str(i), 'stimulus_id': 'pulse'+str(i)} for i in range(n)],
-        'stimulus_ids': ['pulse'+str(i) for i in range(n)],
+        'pattern_hash': canonical_model_sha256(model['initial_isi']), 'origin_stimulus_id': protocol['origin_stimulus_id'],
+        'inputs': inputs, 'stimulus_ids': stimulus_ids,
         'maximum_sample_gap': configuration['maximum_sample_gap'],
         'minimum_amplitude': configuration['minimum_amplitude'],
         'stimulus_profile': configuration['stimulus_profile'], 'wave_assignment': 'window_only',

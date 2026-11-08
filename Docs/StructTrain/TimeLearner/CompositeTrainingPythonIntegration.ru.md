@@ -119,3 +119,28 @@ evidence`df9531926815565e7c5c1bc1e890c2dde34b5ccb`.
 Storage integrity сама по себе не подтверждает геометрию, native execution, consumed event, source
 lineage или certificate2. Archive/index/record reader и package5 dispatch
 должны проверять их отдельно; helper не wired как готовый learned auditor.
+
+## Подготовленный полный portable reader (следующий source chunk)
+
+Новые composite_source/raw/measurement/certificate/package/summary auditors
+проверяют immutable initial source, actual trained graph/storage, полные N+2
+records, свежую геометрию объявленного окна и semantic proof/certificate IDs.
+Standalone package5 самодостаточен: embedded primary обязательны, summary6
+необязателен и не синтезируется. Legacy flat trial globs не используются для
+новой версии. Явно переданный внешний mirror обязан совпасть byte-for-byte.
+При native execution3 настоящий summary6 обязателен вместе с архивом, каждым
+sidecar и полной рекурсивной artifact closure. Пути primary должны также
+переноситься на Windows: запрещены control characters, trailing dot/space и
+зарезервированные device names; переименование автоматически не выполняется.
+
+Runtime search plan отделён от immutable cold declaration. Warm может менять
+bounds/tolerances/budgets, но N0/N1 остаётся политикой исходного model family.
+Partial records без native group context не подтверждают причину отказа или
+полноту native closure и никогда не становятся reference/final/certificate.
+End wall timestamp после mint не доказывает момент live deadline check.
+
+Это source preparation. Полная native package5 → portable replay → import →
+frozen evaluation приёмка требует общего runtime из согласованных C++/Python
+commits и фактических артефактов producer. Hash-format fixtures и отдельная
+проверка wire-ошибок не заменяют этот gate. Frozen Test продолжает использовать
+общий максимум реакции и реальные spikes, не Train assigned-window criterion.

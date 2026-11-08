@@ -82,9 +82,14 @@ def audit_training_capacitance_registry(witnesses, required_witnesses):
 def validate_witness_input_parameters(witness, parameters):
     """Read every claimed input bank and its real stimulus links from the graph."""
     declaration = witness['native_state']['baseline']['model_spec']
+    return validate_graph_input_parameters(declaration, witness['model'], parameters)
+
+
+def validate_graph_input_parameters(declaration, identity, parameters):
+    """The same graph/bank check, without manufacturing a C0 witness."""
     require(type(parameters) is list and len(parameters) == len(declaration['inputs']),
             'training_capacitance_parameter_dimensions_mismatch')
-    nodes = _nodes(witness['model']['model']); expected = set()
+    nodes = _nodes(identity['model']); expected = set()
     for index, value in enumerate(parameters):
         require(type(value) is dict and set(value) == {'length', 'synapses', 'resistance'},
                 'invalid_training_capacitance_input_parameters')
@@ -102,6 +107,6 @@ def validate_witness_input_parameters(witness, parameters):
                     'training_capacitance_resistance_mismatch')
             expected.add(path+':Input')
     import re
-    actual = [b['target'] for b in witness['model']['model']['bindings'] if b['kind'] == 'stimulus_port'
+    actual = [b['target'] for b in identity['model']['bindings'] if b['kind'] == 'stimulus_port'
               and b['source'] == 'burst' and re.fullmatch(r'\$\.Dendrite[1-9][0-9]*_[1-9][0-9]*\.ExcSynapse[1-9][0-9]*:Input', b['target'])]
     require(len(actual) == len(set(actual)) and set(actual) == expected, 'training_capacitance_stimulus_bank_mismatch')

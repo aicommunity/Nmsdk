@@ -76,9 +76,25 @@ class CompositePrimaryTest(unittest.TestCase):
             with self.subTest(path=path),self.assertRaises(EvidenceError):primary_path(path)
 
     def test_case_collisions_duplicate_paths_and_file_directory_aliases_fail(self):
-        for names in (['one.csv','ONE.CSV'],['one.csv','one.csv'],['one.csv','one.csv/two.csv']):
+        for names in (['one.csv','ONE.CSV'],['Folder/one.csv','folder/ONE.CSV'],
+                      ['one.csv','one.csv'],['one.csv','one.csv/two.csv']):
             blobs,refs=inventory({'one.csv':b'primary'});refs=[{**refs[0],'relative_path':name} for name in names]
             with self.subTest(names=names),self.assertRaises(EvidenceError):capture_primary_blobs(blobs,refs,1000)
+
+    def test_windows_device_aliases_controls_and_trailing_segments_fail_before_io(self):
+        invalid = ['one\0.csv','dir\n/trace.csv','one\x7f.csv','dir\x85/trace.csv',
+            'folder./trace.csv','folder /trace.csv','trace.csv.','trace.csv ',
+            'CON','safe/nUl.csv','Aux/trace.csv','PRN.txt','COM1.csv','lPt9/trace.csv',
+            'COM¹.csv','lpt²/trace.csv','CONIN$.csv','CONOUT$/trace.csv','CON .txt',
+            'bad?/trace.csv','one*.csv','a<b.csv','a|b.csv','a"b.csv']
+        with tempfile.TemporaryDirectory() as directory:
+            for path in invalid:
+                output=Path(directory)/'must-not-exist'
+                with self.subTest(path=repr(path)),self.assertRaises(EvidenceError):
+                    write_primary_snapshot({path:b'raw'},output)
+                self.assertFalse(output.exists())
+        for path in ('native/полный-ответ.csv','native/.hidden','native/com10.csv','native/console.csv'):
+            self.assertEqual(primary_path(path),path)
 
     def test_parent_or_file_symlink_never_supplies_primary(self):
         with tempfile.TemporaryDirectory() as folder:
