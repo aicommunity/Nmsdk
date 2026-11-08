@@ -297,6 +297,41 @@
       "kernel_groups_closed": 14,
       "lease_released": true,
       "actual_composite_archives_exported": 0
+    },
+    {
+      "job_id": "s07-composite-cancellation-m40-asan-a1",
+      "host": "10.245.1.17",
+      "root": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+      "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "state": "running_build_at_exact_kernel_observation",
+      "unit": "timelearner-eafa7523-965e-49c9-a5be-76b55474fba3.service",
+      "invocation_id": "e350623ce3004cd48eba7e1e1bbcbd7a",
+      "initial_main_pid": 3263649,
+      "initial_start_ticks": "322770145",
+      "request_sha256": "7574d387a721795559f0c3df6bf877eebefd3302e37e59397263115ab6a366f7",
+      "binding_sha256": "858df64fa137f66fe555780e7c091d430dd9cde9b3cc53d375d9e18151ccbbe7",
+      "worker_sha256": "45e7d4ccb00a8345d72d503042556b5b3e8f8b8415678dc1e2f8e137a1805d2b",
+      "supervisor_sha256": "333e7afce68e434f5a39df60aa78fdf655b722ebf0a4076e4fb8671f01e982da",
+      "expected_cpp_cases": 248,
+      "expected_leaf_gates": 138,
+      "order_policy": "original_prepared_stop2_then_new42_then_remaining_service20_then_archive23_then_all_remaining",
+      "kernel_memory_bytes": 8589934592,
+      "kernel_tasks": 128,
+      "whole_wall_seconds": 21600,
+      "build_parallel_jobs": 2,
+      "asan_options": "detect_leaks=0",
+      "baseline_negative_evidence": "e89e166e3913e4e225eebd75a329b7c52f7d4c8f",
+      "raw_declaration_errata": {
+        "file": "expected-literal-inventory.json",
+        "field": "root",
+        "recorded": "540179d70ddf3764334eb6bb59b7fef691054eee",
+        "actual": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+        "original_bytes_must_be_preserved": true,
+        "independent_Git_derived_inventory_required": true,
+        "production_preparation_consistency_accepted": false
+      },
+      "whole_gate_accepted": false,
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
