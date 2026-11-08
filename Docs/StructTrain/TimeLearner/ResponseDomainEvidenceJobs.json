@@ -1,0 +1,31 @@
+{
+  "kind": "response_domain_evidence_acceptance_jobs",
+  "schema_version": 1,
+  "compiled_root": "0e3d5bca3d89746ac6a14d2fef952083f2cdb968",
+  "PulseLib": "706813805ac54e21dc1bed46a68c62f358792394",
+  "native_job": {
+    "host": "10.245.1.11",
+    "job": "s07-domain-evidence-elder-a2",
+    "unit": "timelearner-23fbd0e6-0996-406d-a745-e49ddd7bd7b7.service",
+    "invocation_id": "2567deb9eb574c938cd56cc72f42fb8e",
+    "initial_main_pid": 1593742,
+    "initial_start_ticks": "367672429",
+    "request_sha256": "840edde5873805a4f961f6c5df389011bcef4c6613ff7a2dcea02ed2133e7f8f",
+    "output": "/home/user/timelearner-refactor/readbacks/s07-domain-evidence-elder-a2",
+    "checks_planned": 10,
+    "native_cases_planned": 4,
+    "last_observed": "capture_and_codec10_passed_native_cases_running",
+    "initial_attempt": "s07-domain-evidence-elder-a1",
+    "initial_attempt_outcome": "refused_before_build_insufficient_disk_space"
+  },
+  "reader_root": "b22e3e443753bca3aa856b19a0e6948d28823b50",
+  "reader_checks_planned_per_worker": 12,
+  "reader_workers": [
+    {"host": "10.245.1.17", "job": "s07-domain-reader-m40-a1", "last_observed": "12_passed_no_skips_publication_pending"},
+    {"host": "10.245.1.11", "job": "s07-domain-reader-elder-a1", "last_observed": "refused_capacity_before_tests_while_native_job_running"}
+  ],
+  "cross_language_primary_packet_checks_complete": false,
+  "accepted": false,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false
+}
