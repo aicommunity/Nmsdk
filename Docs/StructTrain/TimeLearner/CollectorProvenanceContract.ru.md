@@ -37,6 +37,10 @@ supervisor-файле должна быть ровно одна STARTED JSON-с�
 
 `CapturedCollectorInputs.materialize(owned_root, staging)` пишет уже прочитанные
 bytes и descriptor в новый непосредственный дочерний каталог `owned_root`.
+Поскольку value object можно создать вручную, до первого mkdir/open повторно
+проверяются ровно четыре допустимых уникальных basename, неизменяемые bytes,
+размеры/хэши, request/binding/STARTED и совпадение полного descriptor. Произвольные
+имена, повторные роли или несогласованные bytes не приводят к созданию каталога.
 Пути проверяются; каталог и файлы создаются без overwrite через directory fd.
 Исходные журналы повторно не открываются. Результат — явный словарь logical
 member → staged Path для существующего `create_native_bundle`; его формат и
@@ -57,6 +61,10 @@ HEAD и source closure проверяются повторно. Все вызо�
 `literal-TEST-and-attempt-invalid-budget-v1`: строковые literal `TEST(Suite,Name)`
 и существующий `ATTEMPT_INVALID_BUDGET_TEST`. Тело `#define` не считается
 случаем; четыре фактических вызова macro разворачиваются в четыре ID.
+В самой единственной definition этого macro допускается ровно одно gtest
+объявление `TEST(TrainingInvalidBudget,name)`. Добавленное второе TEST или другая
+семья не могут молча уменьшить счётчик: dialect отказывает. Неверный UTF-8
+supervisor-журнала также даёт структурированный EvidenceError до упаковки.
 Это не общий интерпретатор C++/gtest: TEST_F/TEST_P/TYPED_TEST не поддерживаются,
 и compiled `--gtest_list_tests` с фактическим JUnit всё ещё обязательны.
 Число 206 не зашито в helper; оно получается из зафиксированного набора
@@ -120,3 +128,8 @@ Git bytes и файловые изменения проверяются в от�
 preflight новой компиляцией. Тесты запускаются отдельным ограниченным серверным
 metadata job после review исходного pin; локально разрешены только source/AST/Git
 проверки. SDK/cache Elder6dac и текущий M40 numerical job не используются.
+
+Исходный список 33 metadata-проверок из be710 superseded новым списком 38:
+добавлены пять конкретных границ — ручной path escape, повторная роль,
+несовпадение bytes/descriptor, второе TEST в macro и неверный UTF-8. Это изменение
+source/test inventory; прежний запуск тестов не заявлялся и не переоценивается.

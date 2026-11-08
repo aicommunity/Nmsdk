@@ -114,6 +114,46 @@ def _binding(request, binding):
             "collector_binding_identity_invalid")
 
 
+def _bound_descriptor(raw, records):
+    require(type(raw) is dict and set(raw) == set(_ROLES) and
+            all(type(value) is bytes for value in raw.values()) and
+            type(records) is dict and set(records) == set(_ROLES), "collector_captured_roles_invalid")
+    for role, record in records.items():
+        require(type(record) is dict and set(record) == {"source_path", "bytes", "sha256"} and
+                type(record["source_path"]) is str and "\0" not in record["source_path"] and
+                Path(record["source_path"]).is_absolute() and
+                ".." not in Path(record["source_path"]).parts and
+                type(record["bytes"]) is int and record["bytes"] == len(raw[role]) and
+                record["sha256"] == _sha(raw[role]), "collector_captured_descriptor_changed")
+    require(len({row["source_path"] for row in records.values()}) == 4, "collector_log_roles_alias")
+    container = Path(records["request"]["source_path"]).parent
+    require(Path(records["request"]["source_path"]).name == "request.json" and
+            records["binding"]["source_path"] == str(container/"owned-unit.json") and
+            records["worker_progress"]["source_path"] == str(container/"stdout.log"),
+            "collector_worker_stdout_not_owned_container")
+    request, binding = _signed(raw["request"]), _signed(raw["binding"])
+    _binding(request, binding)
+    try:
+        supervisor = raw["supervisor_launch"].decode("utf-8")
+    except UnicodeDecodeError:
+        require(False, "collector_supervisor_log_invalid_utf8")
+    starts = []
+    for number, line in enumerate(supervisor.splitlines(), 1):
+        if line.lstrip().startswith("STARTED"):
+            require(line.startswith("STARTED "), "collector_supervisor_start_malformed")
+            starts.append((number, _json(line[len("STARTED "):].encode("utf-8"))))
+    require(len(starts) == 1, "collector_supervisor_start_missing_or_ambiguous")
+    number, started = starts[0]
+    require(started == binding, "collector_supervisor_binding_mismatch")
+    return {"kind": "timelearner_collector_bound_inputs", "schema_version": 1,
+            "inputs": records, "binding": binding, "request_sha256": request["sha256"],
+            "supervisor_started_line": number, "roles": {
+                "supervisor_launch": "launch_binding_and_supervisor_messages",
+                "worker_progress": "worker_progress_not_supervisor_messages"},
+            "kernel_closure_attested": False, "test_success_attested": False,
+            "scientific_verdict": None}
+
+
 @dataclass(frozen=True)
 class CapturedCollectorInputs:
     """Frozen bytes, not a capability or a kernel/scientific certificate."""
@@ -126,6 +166,19 @@ class CapturedCollectorInputs:
 
     def materialize(self, owned_root, staging):
         """Write captured bytes once inside a fresh, explicit owned staging path."""
+        # This is a public value object, not an unforgeable capture capability.
+        # Validate names and descriptor again before any filesystem operation.
+        require(type(self._files) is tuple and len(self._files) == 4 and
+                all(type(row) is tuple and len(row) == 2 and type(row[0]) is str and
+                    row[0] in _ROLES.values() and type(row[1]) is bytes for row in self._files) and
+                len({row[0] for row in self._files}) == 4, "collector_captured_files_invalid")
+        require(type(self._descriptor_json) is bytes, "collector_captured_descriptor_invalid")
+        descriptor = _json(self._descriptor_json)
+        require(type(descriptor) is dict, "collector_captured_descriptor_invalid")
+        by_name = dict(self._files)
+        raw = {role: by_name[name] for role, name in _ROLES.items()}
+        require(descriptor == _bound_descriptor(raw, descriptor.get("inputs")),
+                "collector_captured_descriptor_changed")
         owned_root = _canonical(owned_root)
         require(owned_root.is_dir(), "collector_owned_root_not_directory")
         staging = _canonical(staging, exists=False)
@@ -165,26 +218,7 @@ def capture_owned_supervisor(container, *, supervisor_log, worker_stdout, maximu
     raw, records = {}, {}
     for role, path in paths.items():
         raw[role], records[role] = _frozen(path, maximum_input_bytes)
-    require(len({row["source_path"] for row in records.values()}) == 4, "collector_log_roles_alias")
-    require(records["worker_progress"]["source_path"] == str(container/"stdout.log"),
-            "collector_worker_stdout_not_owned_container")
-    request, binding = _signed(raw["request"]), _signed(raw["binding"])
-    _binding(request, binding)
-    starts = []
-    for number, line in enumerate(raw["supervisor_launch"].decode("utf-8").splitlines(), 1):
-        if line.lstrip().startswith("STARTED"):
-            require(line.startswith("STARTED "), "collector_supervisor_start_malformed")
-            starts.append((number, _json(line[len("STARTED "):].encode("utf-8"))))
-    require(len(starts) == 1, "collector_supervisor_start_missing_or_ambiguous")
-    number, started = starts[0]
-    require(started == binding, "collector_supervisor_binding_mismatch")
-    descriptor = {"kind": "timelearner_collector_bound_inputs", "schema_version": 1,
-                  "inputs": records, "binding": binding, "request_sha256": request["sha256"],
-                  "supervisor_started_line": number, "roles": {
-                      "supervisor_launch": "launch_binding_and_supervisor_messages",
-                      "worker_progress": "worker_progress_not_supervisor_messages"},
-                  "kernel_closure_attested": False, "test_success_attested": False,
-                  "scientific_verdict": None}
+    descriptor = _bound_descriptor(raw, records)
     return CapturedCollectorInputs((json.dumps(descriptor, indent=2, allow_nan=False)+"\n").encode(),
                                    tuple((_ROLES[role], content) for role, content in raw.items()))
 
@@ -223,7 +257,10 @@ def _literal_cases(raw):
     continuation = False
     for line in text.splitlines():
         if continuation or line.lstrip().startswith("#"):
-            definitions.append(line)
+            if continuation:
+                definitions[-1].append(line)
+            else:
+                definitions.append([line])
             continuation = line.rstrip().endswith("\\")
             kept.append("")
         else:
@@ -237,9 +274,12 @@ def _literal_cases(raw):
              re.finditer(r"^\s*TEST\(\s*(\w+)\s*,\s*(\w+)\s*\)", text, re.M)]
     macros = list(re.finditer(r"^\s*ATTEMPT_INVALID_BUDGET_TEST\(\s*(\w+)\s*,", text, re.M))
     if macros:
-        definitions = "\n".join(definitions)
-        require(len(re.findall(r"#define\s+ATTEMPT_INVALID_BUDGET_TEST\(", definitions)) == 1 and
-                re.search(r"TEST\(\s*TrainingInvalidBudget\s*,\s*name\s*\)", definitions) is not None,
+        definitions = ["\n".join(block) for block in definitions]
+        definitions = [block for block in definitions if re.match(
+            r"\s*#\s*define\s+ATTEMPT_INVALID_BUDGET_TEST\(", block)]
+        require(len(definitions) == 1 and re.findall(
+                r"\b(TEST|TEST_F|TEST_P|TYPED_TEST|TYPED_TEST_P)\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)",
+                definitions[0]) == [("TEST", "TrainingInvalidBudget", "name")],
                 "collector_invalid_budget_macro_changed")
         cases += [(m.start(), "TrainingInvalidBudget/"+m.group(1)) for m in macros]
     values = [case for _, case in sorted(cases)]

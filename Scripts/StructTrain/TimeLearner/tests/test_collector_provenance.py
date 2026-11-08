@@ -153,6 +153,11 @@ class CollectorProvenanceTest(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, "collector_json_invalid"):
             self.capture()
 
+    def test_invalid_UTF8_supervisor_has_structured_refusal(self):
+        self.supervisor.write_bytes(self.contents["a3_supervisor"]+b"\xff")
+        with self.assertRaisesRegex(EvidenceError, "collector_supervisor_log_invalid_utf8"):
+            self.capture()
+
     def test_duplicate_JSON_keys_are_rejected(self):
         binding = json.loads(self.contents["a3_binding"])
         self.supervisor.write_text('STARTED {"kind":"duplicate",'+json.dumps(binding)[1:]+"\n")
@@ -242,6 +247,37 @@ class CollectorProvenanceTest(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, "collector_staging_scope_or_exists"):
             self.capture().materialize(self.container, self.root/"outside")
 
+    def test_manually_constructed_escape_name_refuses_before_filesystem_write(self):
+        captured = self.capture()
+        forged = subject.CapturedCollectorInputs(captured._descriptor_json,
+            (("../escape.log", captured._files[0][1]), *captured._files[1:]))
+        with patch.object(subject.os, "open", side_effect=AssertionError("must not open")), \
+                patch.object(Path, "mkdir", side_effect=AssertionError("must not mkdir")):
+            with self.assertRaisesRegex(EvidenceError, "collector_captured_files_invalid"):
+                forged.materialize(self.root, self.root/"forged")
+        self.assertFalse((self.root/"forged").exists())
+        self.assertFalse((self.root/"escape.log").exists())
+
+    def test_manually_constructed_duplicate_role_refuses_before_filesystem_write(self):
+        captured = self.capture()
+        forged = subject.CapturedCollectorInputs(captured._descriptor_json,
+            (captured._files[0], captured._files[0], *captured._files[2:]))
+        with patch.object(subject.os, "open", side_effect=AssertionError("must not open")), \
+                patch.object(Path, "mkdir", side_effect=AssertionError("must not mkdir")):
+            with self.assertRaisesRegex(EvidenceError, "collector_captured_files_invalid"):
+                forged.materialize(self.root, self.root/"forged")
+        self.assertFalse((self.root/"forged").exists())
+
+    def test_manually_constructed_bytes_must_match_descriptor_before_write(self):
+        captured = self.capture()
+        forged = subject.CapturedCollectorInputs(captured._descriptor_json,
+            ((captured._files[0][0], b"changed bytes"), *captured._files[1:]))
+        with patch.object(subject.os, "open", side_effect=AssertionError("must not open")), \
+                patch.object(Path, "mkdir", side_effect=AssertionError("must not mkdir")):
+            with self.assertRaisesRegex(EvidenceError, "collector_captured_descriptor_changed"):
+                forged.materialize(self.root, self.root/"forged")
+        self.assertFalse((self.root/"forged").exists())
+
     def test_existing_packager_uses_frozen_staged_log_and_descriptor(self):
         captured = self.capture()
         staged = captured.materialize(self.root, self.root/"frozen")
@@ -280,6 +316,14 @@ class CollectorProvenanceTest(unittest.TestCase):
             self.assertEqual(actual["files"][CPP]["sha256"], "05f5cf15b64d6f16950db33ce6724dffd4c3435a5cac7514701dbfefb10ea49a")
         finally:
             self.git("-c", "submodule.recurse=false", "checkout", "--detach", ROOT_A3)
+
+    def test_actual_invalid_budget_macro_cannot_add_a_second_TEST(self):
+        original = self.git("show", ROOT_A3+":Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp")
+        marker = b"TEST(TrainingInvalidBudget,name)"
+        self.assertEqual(original.count(marker), 1)
+        changed = original.replace(marker, b"TEST(UnexpectedSecond,name) {} \\\n"+marker, 1)
+        with self.assertRaisesRegex(EvidenceError, "collector_invalid_budget_macro_changed"):
+            subject._literal_cases(changed)
 
     def test_changed_document_claim_cannot_replace_Git_cases(self):
         claimed = json.loads(self.git("show", ROOT_A3+":"+DOC))

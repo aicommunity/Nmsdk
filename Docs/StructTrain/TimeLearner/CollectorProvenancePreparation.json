@@ -12,20 +12,20 @@
   ],
   "source": {
     "Scripts/StructTrain/TimeLearner/collector_provenance.py": {
-      "bytes": 20489,
-      "sha256": "fd329e48daf5b2924fc16c13b2ae0768b5d73505ee37d08b458e38d2f3d9eda1",
-      "Git_blob": "614969a6ad9301c22566e724e019c30b731097b1"
+      "bytes": 22938,
+      "sha256": "cad48248001a8e3335f73125a7895c801820a92d540af8fc1a7ed2571a4c3501",
+      "Git_blob": "1b3c3bbb7d8ea5960fb891441fa37b9b60620ca6"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_collector_provenance.py": {
-      "bytes": 20636,
-      "sha256": "e6697601c12e68b00cc58defd41bffc141463f6637abde0ea175008aaaa56ae3",
-      "Git_blob": "72fad6031e559f4bd0fed7d98b715d061b65f2d3"
+      "bytes": 23503,
+      "sha256": "8b985c902a7561ad1993555658480f202bb9c3770a8f3266b3c332782cee6500",
+      "Git_blob": "f151aaae77a9ba3668ab7ecfdf0314c1d2271a7d"
     }
   },
   "metadata_test_inventory": {
     "module": "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance",
     "class": "CollectorProvenanceTest",
-    "count": 33,
+    "count": 38,
     "ids": [
       "CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
       "CollectorProvenanceTest.test_actual_90af_wrong_A2_log_is_rejected_for_A3",
@@ -36,6 +36,7 @@
       "CollectorProvenanceTest.test_duplicate_identical_STARTED_refuses_ambiguity",
       "CollectorProvenanceTest.test_mixed_foreign_and_matching_STARTED_refuses_ambiguity",
       "CollectorProvenanceTest.test_malformed_STARTED_JSON_is_rejected",
+      "CollectorProvenanceTest.test_invalid_UTF8_supervisor_has_structured_refusal",
       "CollectorProvenanceTest.test_duplicate_JSON_keys_are_rejected",
       "CollectorProvenanceTest.test_tampered_request_content_digest_is_rejected",
       "CollectorProvenanceTest.test_tampered_binding_content_digest_is_rejected",
@@ -47,9 +48,13 @@
       "CollectorProvenanceTest.test_replacement_during_frozen_read_is_rejected",
       "CollectorProvenanceTest.test_materialize_uses_captured_bytes_not_reopened_inputs",
       "CollectorProvenanceTest.test_materialize_rejects_outside_owned_root",
+      "CollectorProvenanceTest.test_manually_constructed_escape_name_refuses_before_filesystem_write",
+      "CollectorProvenanceTest.test_manually_constructed_duplicate_role_refuses_before_filesystem_write",
+      "CollectorProvenanceTest.test_manually_constructed_bytes_must_match_descriptor_before_write",
       "CollectorProvenanceTest.test_existing_packager_uses_frozen_staged_log_and_descriptor",
       "CollectorProvenanceTest.test_actual_Git_source_derives_full206_with_explicit_subset",
       "CollectorProvenanceTest.test_actual153_stale_nested_fc9_is_rejected_against_Git05f",
+      "CollectorProvenanceTest.test_actual_invalid_budget_macro_cannot_add_a_second_TEST",
       "CollectorProvenanceTest.test_changed_document_claim_cannot_replace_Git_cases",
       "CollectorProvenanceTest.test_changed_source_worktree_cannot_keep_Git_inventory",
       "CollectorProvenanceTest.test_dirty_source_closure_is_rejected",
@@ -237,5 +242,51 @@
     "server_tests_run": false
   },
   "scientific_verdict": null,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "superseded_source_inventory": {
+    "source_root": "be71018c9cb7b121f7471d4f2bc2642e56fabaa2",
+    "count": 33,
+    "ids": [
+      "CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
+      "CollectorProvenanceTest.test_actual_90af_wrong_A2_log_is_rejected_for_A3",
+      "CollectorProvenanceTest.test_actual_A3_log_is_rejected_for_A2_binding",
+      "CollectorProvenanceTest.test_actual_A3_log_is_not_worker_progress",
+      "CollectorProvenanceTest.test_missing_STARTED_refuses_publication_inputs",
+      "CollectorProvenanceTest.test_progress_stream_must_belong_to_the_bound_container",
+      "CollectorProvenanceTest.test_duplicate_identical_STARTED_refuses_ambiguity",
+      "CollectorProvenanceTest.test_mixed_foreign_and_matching_STARTED_refuses_ambiguity",
+      "CollectorProvenanceTest.test_malformed_STARTED_JSON_is_rejected",
+      "CollectorProvenanceTest.test_duplicate_JSON_keys_are_rejected",
+      "CollectorProvenanceTest.test_tampered_request_content_digest_is_rejected",
+      "CollectorProvenanceTest.test_tampered_binding_content_digest_is_rejected",
+      "CollectorProvenanceTest.test_rehashed_foreign_binding_identity_still_fails",
+      "CollectorProvenanceTest.test_missing_request_is_not_inferred_from_log",
+      "CollectorProvenanceTest.test_size_budget_rejects_input_before_parsing",
+      "CollectorProvenanceTest.test_symlink_log_is_not_an_original_capture",
+      "CollectorProvenanceTest.test_append_during_frozen_read_is_rejected",
+      "CollectorProvenanceTest.test_replacement_during_frozen_read_is_rejected",
+      "CollectorProvenanceTest.test_materialize_uses_captured_bytes_not_reopened_inputs",
+      "CollectorProvenanceTest.test_materialize_rejects_outside_owned_root",
+      "CollectorProvenanceTest.test_existing_packager_uses_frozen_staged_log_and_descriptor",
+      "CollectorProvenanceTest.test_actual_Git_source_derives_full206_with_explicit_subset",
+      "CollectorProvenanceTest.test_actual153_stale_nested_fc9_is_rejected_against_Git05f",
+      "CollectorProvenanceTest.test_changed_document_claim_cannot_replace_Git_cases",
+      "CollectorProvenanceTest.test_changed_source_worktree_cannot_keep_Git_inventory",
+      "CollectorProvenanceTest.test_dirty_source_closure_is_rejected",
+      "CollectorProvenanceTest.test_source_epoch_change_during_inventory_is_rejected",
+      "CollectorProvenanceTest.test_unsupported_dialect_cannot_claim_universal_gtest_coverage",
+      "CollectorProvenanceTest.test_missing_git_blob_fails_without_lazy_fetch",
+      "CollectorProvenanceTest.test_actual_c19_preflight_keeps_planned540_actual_d920_and_compiled_null",
+      "CollectorProvenanceTest.test_actual_compiled_manifest_is_distinct_from_plan_and_not_success",
+      "CollectorProvenanceTest.test_compiled_manifest_digest_tamper_is_rejected",
+      "CollectorProvenanceTest.test_not_started_phase_refuses_any_compiled_runtime"
+    ],
+    "execution": "not_run",
+    "reason": "Five reviewed boundaries added; no prior runtime acceptance is changed."
+  },
+  "reviewed_boundary_corrections": [
+    "Public value object validates exact four role basenames/bytes/descriptor before any filesystem operation.",
+    "Supported invalid-budget macro definition has exactly one TEST expansion in TrainingInvalidBudget/name family.",
+    "Invalid UTF-8 supervisor log is a structured EvidenceError."
+  ]
 }
