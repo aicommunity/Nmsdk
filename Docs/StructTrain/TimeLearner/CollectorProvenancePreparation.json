@@ -1,5 +1,5 @@
 {
-  "kind": "collector_provenance_source_preparation",
+  "kind": "collector_provenance_source_and_scoped_metadata_acceptance",
   "schema_version": 1,
   "parent_root": "c4c5d8fd3400f8746a7e8c77cc3b832ca103ce31",
   "branch": "codex/timelearner-collector-provenance",
@@ -67,8 +67,10 @@
       "CollectorProvenanceTest.test_compiled_manifest_digest_tamper_is_rejected",
       "CollectorProvenanceTest.test_not_started_phase_refuses_any_compiled_runtime"
     ],
-    "execution": "not_run",
-    "required_location": "Scoped owned Linux server metadata job after source review; no local unit or numeric execution"
+    "execution": "server_passed_39_0errors_0skips",
+    "required_location": "Scoped owned Linux server metadata job after source review; no local unit or numeric execution",
+    "tested_source_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+    "evidence_commit": "54574d03581e04d233b832b331979f27c871bfa1"
   },
   "fixtures": {
     "metadata_members": 19,
@@ -339,5 +341,29 @@
       "execution": "not_run",
       "reason": "Five reviewed boundaries added; no prior runtime acceptance is changed."
     }
-  ]
+  ],
+  "runtime_verification_after_source_commit": {
+    "host": "10.245.1.17",
+    "via": "10.145.1.12",
+    "job": "s10-collector-provenance-m40-a2",
+    "unit": "timelearner-e7919177-94ca-40e9-82e0-64ecf04cec5b.service",
+    "invocation_id": "42f8256e75db44a4bf4b4f9e71e01b06",
+    "request_sha256": "8dcb866d0123663d87e0b9513f47a935504bfde9d3ec22b49e10cf049a6431f2",
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "wall_seconds": 240,
+    "passed_tests": 39,
+    "errors": 0,
+    "skipped": 0,
+    "whole_kernel_group_closed_and_lease_released": true,
+    "materialized_Scripts_files_Git_verified_before_after": 609,
+    "maintained_helper_used_after_actual_test_pass": true,
+    "frozen_staged_inputs_and_descriptor_independently_verified": true,
+    "independent_receipt_file_name": "CollectorProvenanceM40A2Verification.json",
+    "independent_receipt_sha256": "4ebd7bfafa85df85104f25a4f78c59eebb08cc10bb765bbe0b2b13a69eeb4a5e",
+    "SDK_source_build_cache_runtime_read_or_written": false,
+    "CPP_compilations_or_model_runs": 0,
+    "local_unit_or_numeric_runs": false,
+    "scientific_verdict": null
+  }
 }
