@@ -1,0 +1,18 @@
+{
+  "kind": "fixture_revision_provider_parity_gate",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "PulseLib": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+  "worker": "m40",
+  "fault_checks_passed": 22,
+  "native_provider_checks_passed": 8,
+  "n6_dimensions_checks_passed": 2,
+  "n6_burst_assignment_checks_passed": 2,
+  "provider_pairs_verified": 4,
+  "comparison_scope": "first_probe CSV and native observation, model hashes, features and domain graph; auxiliary CSV and aggregate certificate also compared; auxiliary timing/counters unavailable",
+  "asan_gate": true,
+  "asan_options": "detect_leaks=0",
+  "training_certificate_eligible": false,
+  "all_groups_closed_and_released": true,
+  "runtimes_unchanged": true,
+  "whole_plan_complete": false
+}
