@@ -3,8 +3,7 @@
 Этап9, отдельная конечная группа: три прежних инструмента
 `SelectivityAsymRm/scripts/length_step_guard.py`, `l_train_guard.py`,
 `train_time_budget.py`. Все исходники прочитаны целиком; новый manifest содержит
-245 records:243 retired и2 moved, `complete=false`. Серверная приёмка кандидата
-пока ожидается. Удаление не меняет алгоритмы или физику learner.
+245 records:243 retired и2 moved, `complete=false`. Серверная приёмка завершена на обоих workers. Удаление не меняет алгоритмы или физику learner.
 
 ## Почему эта группа историческая
 
@@ -61,3 +60,35 @@ Git executable-mode и CMake rules найдено803 paths:root652/Pulse1/Bin130
 Maintained artifact_bundle хранит provenance внутри primary archive, но generic
 publisher пока разрешает явно заявленные loose scripts; отдельный будущий guard
 должен прекратить их повторное появление, сохранив старую доказательность.
+
+
+## Приёмка
+
+На Elder и M40 production history CLI проверил все245 retrieval records;
+negative Git fixture, возвращающий length_step_guard.py, получил exit2 и не
+создал positive receipt. Подтверждены exact3D+1M Bin, шесть root paths,
+неизменность остальных code/native trees и полное совпадение803 строк inventory
+с четырьмя Git trees. Никакие старые helpers и модели не исполнялись.
+
+Первые A1 попытки сохранены с terminal=false: CLI245 был успешен, затем
+one-off wrapper неправильно декодировал UTF8 worker через Windows locale и
+сломал ожидаемую русскую подпись ссылки. Исправлена только передача source
+с explicitUTF8. A2 получили новые job IDs после kernel/lease closure; source,
+конфиги и физика остались теми же. Статусы CLI и wrapper не объединены.
+
+[Независимая квитанция](AsymRmAdaptiveGuardRetirementVerification.json)
+проверила по60 members,245 records и411 source hashes на каждом worker,
+local canonical UTF8-LF worker SHA против actual producer/runtime declaration,
+два closed/released attempts на каждом worker и negative Git pack scope.
+Evidence M40:`001d26c0293b97472bfc34aacac4f8bab64e42a3`,
+Elder:`3bbc24f685ef656a32b29fdf7fdc602018e6c3f7`, около162KB каждый.
+Архивы используют объявленный128MiB dictionary; metadata reader применил
+ограничение256MiB. Это компактные Git primary, не полноразмерные figure caches.
+При подготовке Git receiver M40 сначала не хватало .gitattributes в минимальном
+Rdk pack; только собственный ещё неиспользуемый receiver дополнен Git blobs,
+после чего checkout clean. [Delivery receipt](AsymRmAdaptiveGuardDeliveryRepair.json).
+Пользовательские копии и активные model runtimes не менялись.
+
+Полный этап9 и develop-приёмка остаются открытыми; accepted scoped batch не
+означает переноса остальных AsymRm tools, удаления109 loose Reports scripts
+или полного допуска нового experiment pipeline.

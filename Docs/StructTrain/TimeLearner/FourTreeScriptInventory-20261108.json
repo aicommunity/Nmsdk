@@ -6862,7 +6862,7 @@
       "mode": "100644",
       "recognition": "known_script_suffix",
       "scope": "structural_training_candidate",
-      "disposition": "historical_adaptive_helpers_retired_by_current_candidate_pending_server_gate"
+      "disposition": "historical_adaptive_helpers_retired_by_candidate_with_two_worker_scoped_acceptance"
     },
     {
       "repository": "Bin",
@@ -6872,7 +6872,7 @@
       "mode": "100644",
       "recognition": "known_script_suffix",
       "scope": "structural_training_candidate",
-      "disposition": "historical_adaptive_helpers_retired_by_current_candidate_pending_server_gate"
+      "disposition": "historical_adaptive_helpers_retired_by_candidate_with_two_worker_scoped_acceptance"
     },
     {
       "repository": "Bin",
@@ -6912,7 +6912,7 @@
       "mode": "100644",
       "recognition": "known_script_suffix",
       "scope": "structural_training_candidate",
-      "disposition": "historical_adaptive_helpers_retired_by_current_candidate_pending_server_gate"
+      "disposition": "historical_adaptive_helpers_retired_by_candidate_with_two_worker_scoped_acceptance"
     },
     {
       "repository": "Bin",
@@ -8102,7 +8102,7 @@
     "maintained_production_package_or_tests": 411,
     "separate_neuron_physics_study_requires_independent_scope": 13,
     "structtrain_legacy_tool_needs_source_and_consumer_review": 102,
-    "historical_adaptive_helpers_retired_by_current_candidate_pending_server_gate": 3
+    "historical_adaptive_helpers_retired_by_candidate_with_two_worker_scoped_acceptance": 3
   },
   "retirement_candidate": {
     "root_base": "27d6e4b05263da4c76be3a920aa4270ae3ec4713",
@@ -8113,7 +8113,8 @@
       "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/length_step_guard.py",
       "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/train_time_budget.py"
     ],
-    "server_gate_pending": true
+    "server_gate_pending": false,
+    "scoped_acceptance_receipt": "AsymRmAdaptiveGuardRetirementVerification.json"
   },
   "limitations": [
     "Recognition is a full four-tree pass under the stated suffix/mode/CMake rules, not arbitrary language detection.",

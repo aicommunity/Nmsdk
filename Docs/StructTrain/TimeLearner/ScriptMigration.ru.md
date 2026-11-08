@@ -1,4 +1,4 @@
-Кандидат245 (243 retired/2 moved), complete=false: три исторических AsymRm adaptive guards удалены без wrappers, точные Git retrieval и классификации записаны. Серверная приёмка ожидается. [Scope](AsymRmAdaptiveGuardRetirement.ru.md), [полный four-tree inventory](FourTreeScriptInventory-20261108.json). Ниже — хронология предыдущих принятых снимков.
+Принято08.11:245 records (243 retired/2 moved), complete=false. Три исторических AsymRm adaptive guards удалены без wrappers. Оба workers проверили245 retrieval records, restored-path negative, exact3D1M и803 записи четырёх Git trees. [Scope, source и original failed wrappers](AsymRmAdaptiveGuardRetirement.ru.md), [полный классифицированный inventory](FourTreeScriptInventory-20261108.json). Ниже — история прежних снимков.
 
 Принято08.11 в адресном scope:242 records (240 retired/2 moved), complete=false. Четыре исторических AsymRm seed/reset инструмента удалены без wrappers; оба workers проверили все242 записи, negative restored-path control и exact4D+4M scope. Общая миграция и develop-приёмка ещё не завершены. [Область и ограничения](AsymRmSeedRetirement.ru.md). Предыдущие записи ниже относятся к своим снимкам.
 

@@ -246,7 +246,7 @@ runtime/effective-factor matrix этим не закрывается.
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration242:240 retired+2 moved; последние16 LTZ drivers приняты обоими серверами без wrappers|Остаются18 AsymRm Python и прочие инструменты; ограниченный path/suffix inventory не равен полному глобальному inventory|
+|9. Скрипты|Корневой пакет и CLI работают; migration245:243 retired+2 moved; три AsymRm adaptive guards приняты обоими серверами без wrappers|Остаются15 AsymRm Python,109 loose Reports source snapshots и прочие инструменты; four-tree803 inventory классифицирован, не является разрешением удалить всё|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
@@ -272,7 +272,7 @@ runtime/effective-factor matrix этим не закрывается.
 [capabilities](ControllerCapabilities.ru.md),
 [parameter contracts](ParameterControlContracts.ru.md),
 [readiness](ExperimentReadiness.ru.md). Полная lifecycle/storage/growth и
-legacy/V2 матрица остаётся открытой. Migration242 (240 retired+2 moved) не равна
+legacy/V2 матрица остаётся открытой. Migration245 (243 retired+2 moved) не равна
 всему inventory; остаются18 AsymRm Python и другие инструменты. Полная scheduler,
 recovery, publication fault matrix и effective-factor attestation не закрыты.
 Компонентные страницы PulseLib актуализированы.
