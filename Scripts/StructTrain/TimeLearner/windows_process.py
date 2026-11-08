@@ -148,8 +148,95 @@ class _Windows:
         return result
 
 
+def _job_drain_policy(manifest, seconds):
+    require(type(seconds) in (int, float) and math.isfinite(seconds) and seconds >= 0,
+            'invalid_windows_owned_job_drain')
+    flags = manifest.get('build_flags', {})
+    if 'owned_job_drain_seconds' not in flags:
+        require(seconds == 0, 'unsigned_windows_owned_job_drain')
+        return None
+    signed = flags['owned_job_drain_seconds']
+    require(type(signed) in (int, float) and math.isfinite(signed) and signed >= 0 and signed == seconds,
+            'windows_owned_job_drain_policy_mismatch')
+    return {'schema_version': 1, 'policy_id': 'bounded-owned-job-drain-v1',
+            'seconds': float(seconds), 'bounded_by_original_whole_wall': True}
+
+
+def _drain_owned_job(api, job, observed, *, policy, start, maximum_wall_seconds, cancel_file, output):
+    """Observe only live members of this job; never exempt an image or escapee."""
+    from ctypes import wintypes as W
+    kernel = C.WinDLL('kernel32', use_last_error=True)
+    open_process = kernel.OpenProcess
+    open_process.argtypes = (W.DWORD, W.BOOL, W.DWORD);open_process.restype = W.HANDLE
+    entered = time.monotonic();whole_deadline = start+maximum_wall_seconds
+    deadline = min(entered+policy['seconds'], whole_deadline)
+    report = {**policy, 'entered_elapsed': entered-start, 'deadline_elapsed': deadline-start,
+              'natural_empty': False, 'identities': [], 'gaps': [], 'snapshots': [],
+              'observation_scope': 'sampled live owned Job members; not complete spawn history'}
+    _write(output/'owned-job-drain-started.json', {**policy, 'entered_elapsed': entered-start,
+                                                'deadline_elapsed': deadline-start})
+    known = {};last = None
+    while True:
+        now = time.monotonic()
+        if cancel_file and Path(cancel_file).exists():reason = 'cancelled'
+        elif now >= whole_deadline:reason = 'timeout'
+        else:reason = None
+        pids = api.pids(job)
+        if pids != last:
+            report['snapshots'].append({'elapsed': now-start, 'pids': pids});last = pids
+        if reason is None and not pids:
+            report.update(natural_empty=True, outcome='natural_empty', closed_elapsed=now-start)
+            return None, report
+        if reason is None and now >= deadline:reason = 'descendants_remaining'
+        if reason:
+            report.update(outcome=reason, remaining_pids=pids, ended_elapsed=now-start)
+            return reason, report
+        for pid in pids:
+            if time.monotonic() >= deadline:break
+            handle = open_process(0x1000|0x0400|0x0010|0x100000, False, pid)
+            try:
+                if not handle:raise OSError(C.get_last_error(), 'owned_process_open_failed')
+                member = api.W.BOOL();api.check(api.in_job(handle, job, C.byref(member)))
+                require(bool(member.value), 'windows_drain_process_left_owned_job')
+                if not api.running(handle):continue
+                identity = api.identity(handle);key = (pid, identity['creation_filetime'])
+                if key not in known:
+                    item = {'pid': pid, **identity, 'executable_file': file_record(Path(identity['executable'])),
+                            'first_seen_elapsed': time.monotonic()-start, 'own_job_membership_checked': True}
+                    paths = api.modules(handle)
+                    require(any(os.path.samefile(path, identity['executable']) for path in paths),
+                            'windows_drain_executable_mapping_missing')
+                    for path in paths:
+                        require(time.monotonic() < deadline, 'windows_drain_capture_deadline')
+                        record = file_record(path);observed.setdefault(os.path.normcase(str(path)), record)
+                    require(api.identity(handle) == identity, 'windows_drain_process_identity_changed')
+                    known[key] = item;report['identities'].append(item)
+                known[key]['last_seen_elapsed'] = time.monotonic()-start
+            except (OSError, RuntimeError, ValueError) as error:
+                # A disappearing process is a documented snapshot gap. A live
+                # owned process without identity/modules cannot be admitted.
+                try:alive = bool(handle) and api.running(handle)
+                except OSError:alive = True
+                still_member = pid in api.pids(job)
+                report['gaps'].append({'pid': pid, 'elapsed': time.monotonic()-start,
+                                      'reason': str(error), 'still_alive_owned': alive and still_member})
+                now = time.monotonic()
+                deadline_reason = ('cancelled' if cancel_file and Path(cancel_file).exists() else
+                    'timeout' if now >= whole_deadline else 'descendants_remaining' if now >= deadline else None)
+                if deadline_reason:
+                    report.update(outcome=deadline_reason, remaining_pids=api.pids(job))
+                    return deadline_reason, report
+                if alive and still_member:
+                    report.update(outcome='identity_unavailable', remaining_pids=api.pids(job))
+                    return 'owned_process_identity_unavailable', report
+            finally:
+                if handle:api.close(handle)
+        time.sleep(min(.05, max(0, deadline-time.monotonic())))
+
+
 def execute(manifest, arguments, working_directory, output, *, memory_bytes, maximum_processes,
-            maximum_wall_seconds, lock_file, cancel_file=None, cooperative_capture=False):
+            maximum_wall_seconds, lock_file, cancel_file=None, cooperative_capture=False,
+            owned_job_drain_seconds=0):
     """Run one immutable native runtime in an owned, memory-limited Windows job.
 
     A host lock serializes this backend's workers. It does not reserve resources
@@ -162,6 +249,7 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
     require(type(arguments) is list and all(type(s) is str and '\x00' not in s for s in arguments), 'invalid_windows_arguments')
     require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
             for a in arguments), 'capture_directory_is_supervisor_owned')
+    drain_policy = _job_drain_policy(manifest, owned_job_drain_seconds)
     api = _Windows();exe = verify_runtime(manifest);cwd = Path(working_directory).resolve(strict=True)
     backend = file_record(Path(__file__))
     require(manifest.get('windows_backend') == backend and
@@ -201,7 +289,8 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
                'total_physical_bytes': int(status.total_physical), 'memory_budget_bytes': memory_bytes})
         _write(output/'request.json', {'runtime': manifest, 'arguments': arguments, 'working_directory': str(cwd),
                'memory_bytes': memory_bytes, 'maximum_processes': maximum_processes, 'maximum_wall_seconds': maximum_wall_seconds,
-               'job_name': name, 'cancel_file': str(cancel_file) if cancel_file else None})
+               'job_name': name, 'cancel_file': str(cancel_file) if cancel_file else None,
+               **({'owned_job_drain': drain_policy} if drain_policy is not None else {})})
         job = api.create_job(None, name);api.check(job)
         limits = api.Limits();limits.basic.flags = 0x2000|0x200|0x8
         limits.basic.processes = maximum_processes;limits.job_memory = memory_bytes
@@ -272,6 +361,20 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             api.check(api.exit_code(process.process, C.byref(code)))
             remaining = api.pids(job)
             result['descendants_at_main_exit'] = remaining
+            if drain_policy is not None:
+                result['main_returncode'] = int(code.value)
+                if not stop_reason:
+                    if cancel_file and Path(cancel_file).exists():stop_reason = 'cancelled'
+                    elif time.monotonic()-start >= maximum_wall_seconds:stop_reason = 'timeout'
+                if remaining and not stop_reason and code.value == 0:
+                    stop_reason, drain = _drain_owned_job(api, job, observed, policy=drain_policy,
+                        start=start, maximum_wall_seconds=maximum_wall_seconds, cancel_file=cancel_file, output=output)
+                    result['owned_job_drain'] = drain
+                    _write(output/'owned-job-drain.json', drain)
+                else:
+                    result['owned_job_drain'] = {**drain_policy, 'natural_empty': not remaining,
+                        'outcome': 'not_needed' if not remaining else 'skipped_nonzero_or_stopped'}
+                remaining = api.pids(job)
             if remaining:
                 api.check(api.terminate_job(job, 1460));stop_reason = stop_reason or 'descendants_remaining'
                 deadline = time.monotonic()+10
@@ -290,6 +393,10 @@ def execute(manifest, arguments, working_directory, output, *, memory_bytes, max
             if cooperative_capture and not captured:
                 result.update(validity='provenance_missing', reason='windows_cooperative_capture_not_ready',
                               runtime_provenance='not_captured')
+                return result
+            if stop_reason == 'owned_process_identity_unavailable':
+                result.update(execution='process_error', validity='provenance_missing', reason=stop_reason,
+                              runtime_provenance='owned_child_identity_missing')
                 return result
             if os.path.normcase(str(exe)) not in observed:
                 result.update(validity='provenance_missing', reason='windows_executable_mapping_not_observed',

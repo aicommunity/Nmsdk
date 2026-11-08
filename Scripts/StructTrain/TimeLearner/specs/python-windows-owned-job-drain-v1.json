@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "windows-owned-job-drain-v1",
+  "package_fingerprint": "55758b4b87767000392e3cad6ae92fd2630f812e54d0f35dbddec480dc6f797c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_diagnostic_write_failure_still_releases_worker_lock",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_completed_argv_and_unicode_are_not_shell_commands",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_exit_259_is_a_terminal_nonzero_exit",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_memory_limit_rejects_allocation",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_same_allocation_succeeds_with_larger_limit",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_timeout_closes_the_owned_job",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_timeout_after_capture_preserves_runtime_evidence",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_remaining_owned_descendant_is_closed_and_not_success",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_cancel_before_start_does_not_resume_a_child",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_cancel_running_job",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_host_lock_refuses_another_worker",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_changed_runtime_is_refused_before_execution",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_invalid_limits_do_not_start_a_child",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_cooperative_boundary_binds_live_creation_identity",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_wrong_cooperative_identity_closes_the_owned_process",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_fast_exit_without_requested_boundary_is_not_provenance",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_process.WindowsProcessTest.test_windows_gate_specification_declares_process_limits",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_default_zero_preserves_immediate_descendant_refusal_and_old_request",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_opt_in_waits_for_natural_whole_job_closure_with_live_child_identity",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_persistent_child_is_rejected_at_signed_grace_deadline",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_original_whole_wall_caps_a_long_grace",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_cancellation_during_drain_remains_a_failure",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_nonzero_main_is_never_promoted_by_a_grace",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_explicit_signed_zero_still_refuses_remaining_children",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_invalid_unsigned_or_mismatched_policy_never_creates_output"
+  ],
+  "fixtures": {}
+}
