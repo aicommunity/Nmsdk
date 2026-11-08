@@ -182,6 +182,45 @@
       "negative_evidence_commit": "9b9a38f1a5d8842ada5e167d9bdbf33bd24b6381",
       "receipt": "ElderCompositeArchiveA1NegativeVerification.json",
       "scientific_verdict": null
+    },
+    {
+      "job_id": "s07-composite-archive-elder-normal-a2",
+      "host": "10.245.1.11",
+      "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "state": "running_at_kernel_observation",
+      "unit": "timelearner-16b927d0-4641-46de-a6e0-564e1342d82b.service",
+      "invocation_id": "83b18c1595254c73bde6cd02ccb0e018",
+      "initial_main_pid": 2114519,
+      "initial_start_ticks": "371389727",
+      "request_sha256": "6d2486df6d486c92877700b1404dd2db681a154d02acd35709ee53ddce9092f0",
+      "expected_cpp_cases": 206,
+      "last_observed_passed_cpp_cases": 100,
+      "whole_gate_accepted": false,
+      "scientific_verdict": null
+    },
+    {
+      "job_id": "s07-composite-archive-m40-asan-a1",
+      "host": "10.245.1.17",
+      "requested_root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "requested_pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "effective_root_before_failure": "d92022a41d6f448852d2ecfc6f87ca5a719843bc",
+      "effective_pulse_before_failure": "e183bee14be285862663c094b0b36b3f0dc15747",
+      "state": "closed_preflight_os_context_visibility_failure",
+      "unit": "timelearner-e268b197-dd95-4a7a-b947-bd6169ce33b6.service",
+      "invocation_id": "376413c94aac4678b6f659c29284825a",
+      "initial_main_pid": 3014226,
+      "initial_start_ticks": "321959047",
+      "request_sha256": "bc882a9416e78974149112746b3f7e2b6bfc854d191bb6b5160f6412f3b406d8",
+      "expected_cpp_cases": 206,
+      "actual_cpp_tests_observed": 0,
+      "built": false,
+      "source_cache_updated": false,
+      "whole_gate_accepted": false,
+      "kernel_outer_closed": true,
+      "lease_created": false,
+      "negative_publication_pending": true,
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
@@ -220,7 +259,7 @@
     "current_receipt": "ElderDuplicateFetchcontentRetentionA1Verification.json"
   },
   "composite_archive206_next_attempt": {
-    "state": "preparing_not_launched",
+    "state": "elder_a2_running_m40_a2_preparing_after_preflight_negative",
     "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
     "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
     "expected_cpp_cases": 206,
