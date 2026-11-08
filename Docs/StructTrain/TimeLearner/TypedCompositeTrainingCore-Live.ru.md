@@ -50,7 +50,7 @@ Semantic proof identity не зависит от относительного и
 
 Native fixtures используют реальный environment/storage/model/scheduler, actual source waveform и actual steady clock. Group/attempt wall limits явно 300/1800s при 2000 Hz и 1200/7200s при 20000 Hz. Model budget 2s на группу и 120s на попытку; sample/native/group budgets заданы отдельно. Положительный default timing outcome не обещан: физически несинхронный unchanged graph должен честно дать OutsideTolerance.
 
-Также обязательна регрессия прежних 71 BoundedTraining +23 FinalVerification cases. Pure `Test_PulseLib_VerificationAlgorithms` и `Test_PulseLib_StimulusSubset` теперь связывают новый production `CompositeTrainingMeasurement.cpp`, поскольку общий FinalVerification содержит typed admission. Это не copied-body harness. Механический pin нужно проверять отдельно от feature pin. Normal и ASan результаты, exact loaded sources, JUnit completeness и фактический execution inventory должны публиковаться серверным worker через Git; локальных numerical tests/builds не было.
+Также обязательна регрессия прежних 74 BoundedTraining +23 FinalVerification cases. Pure `Test_PulseLib_VerificationAlgorithms` и `Test_PulseLib_StimulusSubset` теперь связывают новый production `CompositeTrainingMeasurement.cpp`, поскольку общий FinalVerification содержит typed admission. Это не copied-body harness. Механический pin нужно проверять отдельно от feature pin. Normal и ASan результаты, exact loaded sources, JUnit completeness и фактический execution inventory должны публиковаться серверным worker через Git; локальных numerical tests/builds не было.
 
 ## Что остаётся следующим исполняемым этапом
 
@@ -60,3 +60,6 @@ Native fixtures используют реальный environment/storage/model/
 4. Runner CLI и independent reader/replay нового Train envelope, затем server-native positive/negative gates, только после этого ограниченные A/B experiments и отдельное научное решение о методе.
 
 На текущем блоке новые protocol/certificate codecs, service/config/package/CLI и AdvanceUnassignedBurst recovery **явно fail closed**, а не подменяются legacy schema3/старым package1–4. Новый режим не включён в defaults/common experiments. Старые ProbeRecorder schemas1–6, diagnostic portable codec1 и v1 метод сохраняют прежний смысл.
+
+
+Для первой серверной сборки269/27ba обнаружен отсутствующий полный тип нейрона; отдельная правка и условия повторной проверки — [CompileFix](TypedCompositeTrainingCompileFix.ru.md). Исходный feature pin не объявляется runtime-принятым.
