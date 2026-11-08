@@ -2,10 +2,14 @@
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeCompositeTrainingAttempt.h"
+#include "TimeLearner/CompositeTrainingDeclarations.h"
+#include "TimeLearner/ConfiguredNativeTraining.h"
+#include "TimeLearner/MatchedOmissionEvidenceJson.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <algorithm>
 #include <chrono>
 #include <cmath>
@@ -41,7 +45,7 @@ public:
     std::map<std::string,ValidatedProbeMeasurement> observedScalars;
     std::vector<double> groupBegins;
     unsigned frequency;std::size_t rawSamples=0,preparations=0;
-    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false):frequency(hz) {
+    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.):frequency(hz) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
         Require(environment->CreateModel("NModel"),"composite_fixture_model");model=dynamic_pointer_cast<UNet>(environment->GetModel());
@@ -58,7 +62,7 @@ public:
         NativeModelSpec s;s.branch=branch;s.frequencyHz=hz;s.neuronClass=registered.neuronClass;
         s.normalization=n0?Normalization::SynapseCount:Normalization::TipResistance;
         s.editPolicy.normalization=s.normalization;s.editPolicy.maximumCableLength=8;
-        s.inputs={{2,1,{}},{1,1,{}}};s.initialIsi={.01,merged?.001:.08};
+        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({i+1==dimension?1:2,1,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
         modelSpec=s;
         const auto built=owner->ConstructNativeModel(s);Require(built.status==NativeModelBuildStatus::Constructed,built.reason.c_str());
         model->Init();model->Reset();
@@ -76,16 +80,17 @@ public:
         protocol.schemaVersion=4;protocol.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
         protocol.revision="native-declared-basin-train-fixture-v1";protocol.sampleId="sample0";
         protocol.patternHash=NmsdkTools::CanonicalModelDataSha256(pattern).toStdString();protocol.originStimulusId="pulse0";
-        protocol.inputs={{"input0","pulse0"},{"input1","pulse1"}};protocol.stimulusIds={"pulse0","pulse1"};
+        for(std::size_t i=0;i<dimension;++i){const auto pulse="pulse"+std::to_string(i);protocol.inputs.push_back({"input"+std::to_string(i),pulse});protocol.stimulusIds.push_back(pulse);}
         protocol.maximumSampleGap=1./hz;protocol.stimulusProfile=StimulusProfile{generator->GetCompClassName(),
             generator->Amplitude.GetData(),generator->PulseLength.GetData(),double(generator->GetTimeStep()),
             generator->FrequencyDeviation.GetData(),generator->UseTransitSignal.GetData(),generator->UsePatternOutput.GetData()};
-        const double second=.01+s.initialIsi[1],duration=second+.08;
-        CompositeMeasurementContract contract;contract.inputWindows={{.009,.07},{second-.001,second+.06}};
+        double onset=0.;CompositeMeasurementContract contract;for(double isi:s.initialIsi){onset+=isi;contract.inputWindows.push_back({onset-.001,onset+.06});}
+        if(dimension==2)contract.inputWindows.front()={.009,.07}; // Preserve the frozen two-input fixture bit-for-bit.
+        const double duration=onset+.08;
         auto& context=contract.contextPolicy;context.timeComparisonTolerance=1e-10;context.baselineAbsolute=1e-12;
         context.repeatabilityAbsolute=1e-10;context.influenceAbsolute=1e-6;
-        context.maximumSamples=std::size_t((duration+.1)*hz);context.maximumTotalSamples=context.maximumSamples*4;context.maximumNativeProbes=4;
-        contract.geometryPolicy.maximumInputs=2;contract.geometryPolicy.maximumSamples=context.maximumSamples;
+        context.maximumSamples=std::size_t((duration+.1)*hz);context.maximumTotalSamples=context.maximumSamples*(dimension+2);context.maximumNativeProbes=dimension+2;
+        contract.geometryPolicy.maximumInputs=dimension;contract.geometryPolicy.maximumSamples=context.maximumSamples;
         contract.geometryPolicy.maximumTotalSamples=context.maximumTotalSamples;contract.geometryPolicy.repeatabilityAbsolute=1e-10;
         protocol.compositeMeasurement=contract;
         auto& p=prototype.specification;p.schemaVersion=3;p.sampleId=protocol.sampleId;p.patternHash=protocol.patternHash;
@@ -96,7 +101,7 @@ public:
         prototype.onSample=[this](const auto&){++rawSamples;};
         // Explicit real-clock budgets; high-frequency native/replay work is
         // intentionally not measured with a zero or synthetic wall clock.
-        CompositeAttemptLimits limits{groupBudget,4*groupBudget,context.maximumTotalSamples*groupBudget,120.,hz==20000?7200.:1800.};
+        CompositeAttemptLimits limits{groupBudget,(dimension+2)*groupBudget,context.maximumTotalSamples*groupBudget,120.,wallBudget>0.?wallBudget:(hz==20000?7200.:1800.)};
         attempt=std::make_unique<NativeCompositeTrainingAttempt>(*owner,protocol,limits,Time(),Wall());
     }
     ~NativeCompositeFixture(){attempt.reset();if(model)model->BreakLinks();environment->DestroyModel();}
@@ -111,9 +116,9 @@ public:
         return {run,trial,protocol.inputs.at(input).id,protocol.sampleId,protocol.patternHash,protocol.revision,Revision(),protocol.routing,epoch,input};
     }
     void Run(const VerificationRequest& request,CompositeMeasurementPurpose purpose,
-        std::function<void(const PreparedCompositeMeasurement&)> prepared={},std::function<void()> tick={}) {
-        attempt->StartMeasurement(request,purpose,prototype,2.,frequency==20000?1200.:300.,Time(),Wall(),std::move(prepared));
-        std::size_t ticks=0;while(attempt->Running() && ticks++<std::size_t(2*frequency)) {
+        std::function<void(const PreparedCompositeMeasurement&)> prepared={},std::function<void()> tick={},double groupLimit=2.,double groupWall=0.) {
+        attempt->StartMeasurement(request,purpose,prototype,groupLimit,groupWall>0.?groupWall:(frequency==20000?1200.:300.),Time(),Wall(),std::move(prepared));
+        std::size_t ticks=0;while(attempt->Running() && ticks++<std::size_t(groupLimit*frequency)) {
             attempt->BeforeTick(Time(),Wall());if(!attempt->Running())break;
             model->Calculate();attempt->AfterTick(Time(),Wall());environment->IncreaseModelTimeByStep();if(tick)tick();
         }
@@ -525,3 +530,76 @@ TEST(NativeCompositeService,ClassicRetargetInvalidatesSourceFamily){ServiceRetar
 TEST(NativeCompositeService,BranchRetargetInvalidatesSourceFamily){ServiceRetarget<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeService,ClassicPrimaryBudgetStopsBeforeQueue){ServicePrimaryBudget<NNeuronTimeLearner>();}
 TEST(NativeCompositeService,BranchPrimaryBudgetStopsBeforeQueue){ServicePrimaryBudget<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> ConfiguredNativeTraining CompositeCold(NativeCompositeFixture<Owner>& f) {
+    const auto p=ServicePlan(f);ConfiguredNativeTraining c;c.model=f.modelSpec;c.stimulusProfile=*f.protocol.stimulusProfile;
+    c.runId="cold6-native-service";c.protocolRevision=f.protocol.revision;c.sampleId=f.protocol.sampleId;
+    c.duration=f.prototype.specification.end;c.maximumSampleGap=f.protocol.maximumSampleGap;c.minimumAmplitude=f.protocol.minimumAmplitude;
+    c.maximumSamples=f.prototype.specification.maximumSamples;c.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    for(const auto& w:f.protocol.compositeMeasurement->inputWindows)c.windows.emplace_back(w.beginOffset,w.endOffset);
+    c.search=p.search;c.search.runId=c.runId;c.search.initialModelRevision.clear();c.search.initialModelEpoch=0;
+    c.maximumReferenceProbes=p.maximumReferenceProbes;c.maximumInvalidReferenceProbes=p.maximumInvalidReferenceProbes;
+    c.maximumModelSeconds=p.maximumModelSeconds;c.maximumWallSeconds=p.maximumWallSeconds;c.composite=p.composite;return c;
+}
+template<class Owner> void ColdAndProtocolRoundtrip() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);
+    const auto wire=EncodeConfiguredNativeTraining(c);EXPECT_EQ(wire["schema_version"].toInt(),6);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    const auto protocol=MakeConfiguredNativeTrainingPlan(c).protocol;const auto encoded=EncodeVerificationProtocol(protocol);
+    EXPECT_EQ(DecodeVerificationProtocol(encoded),protocol);EXPECT_EQ(encoded["schema_version"].toInt(),4);
+    EXPECT_EQ(CompositeTrainingProtocolBinding(protocol),CompositeTrainingProtocolBinding(DecodeVerificationProtocol(encoded)));
+    auto bad=wire;auto policy=bad["composite_measurement"].toObject();auto limits=policy["attempt_limits"].toObject();
+    limits["maximum_groups"]=true;policy["attempt_limits"]=limits;bad["composite_measurement"]=policy;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    bad=wire;bad["base_schema_version"]=5;EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    bad=wire;bad["schema_version"]=1;bad.remove("base_schema_version");EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    auto source=wire["stimulus_profile"].toObject();source["use_transit_signal"]=true;bad=wire;bad["stimulus_profile"]=source;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    auto wrong=encoded;wrong["schema_version"]=3;EXPECT_THROW(DecodeVerificationProtocol(wrong),std::invalid_argument);
+    wrong=encoded;auto geometry=wrong["composite_measurement"].toObject();geometry["unused"]=0;wrong["composite_measurement"]=geometry;
+    EXPECT_THROW(DecodeVerificationProtocol(wrong),std::invalid_argument);
+}
+template<class Owner> void ColdAutostart(int mode) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);f.attempt.reset();
+    f.owner->CalculateMode=mode;f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
+    f.owner->ControllerVersion=2;f.owner->Build();ASSERT_TRUE(f.owner->IsReady());
+    std::size_t raw=0,groups=0;ConfiguredNativeEvidenceSinks sinks;
+    sinks.onPrepared=[&](const auto&,const auto&){++raw;};sinks.onComposite=[&](const auto&){++groups;};
+    f.owner->SetConfiguredNativeEvidenceSinks(sinks);f.owner->IsNeedToTrain=true;ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    ASSERT_TRUE(service.Certificate());EXPECT_EQ(service.Plan().protocol.schemaVersion,4u);EXPECT_EQ(raw,4*groups);
+    EXPECT_EQ(groups,service.CompositeGroups());EXPECT_EQ(raw,service.CompositeNativeProbes());
+}
+template<class Owner> void ActualDimensions(std::size_t n) {
+    NativeCompositeFixture<Owner> f(2000,false,4,false,true,false,n,7200.);const auto groupLimit=(f.prototype.specification.end+.02)*(n+2)+.1;
+    f.Run(f.Request(n-1,"dimensions","dimensions/last"),CompositeMeasurementPurpose::Reference,{},{},groupLimit,6000.);
+    ASSERT_TRUE(f.attempt->Group());const auto& group=*f.attempt->Group();
+    EXPECT_EQ(group.sourceIsi.size(),n);EXPECT_EQ(group.packets.size(),n+2);EXPECT_EQ(f.preparations,n+2);
+    EXPECT_EQ(f.attempt->IssuedNativeProbes(),n+2);EXPECT_EQ(f.attempt->RetainedSamples(),f.rawSamples);
+    ASSERT_TRUE(f.attempt->Selection())<<f.attempt->RejectionReason();
+    EXPECT_NE(f.attempt->Selection()->status,NativeDeclaredWindowBasinStatus::Rejected);
+    MatchedOmissionPrimary primary;std::vector<QString> paths;std::vector<const MatchedOmissionTrace*> traces{&group.witness.fullBefore};
+    for(const auto& t:group.witness.omitEachInput)traces.push_back(&t);traces.push_back(&group.witness.fullAfter);
+    for(std::size_t i=0;i<traces.size();++i){const auto path=QString("dimension-%1.csv").arg(qulonglong(i));paths.push_back(path);
+        primary.emplace(path,EncodeMatchedOmissionPrimaryTrace(*traces[i],group.packets[i]));}
+    EXPECT_NO_THROW(DecodeMatchedOmissionEvidence(EncodeMatchedOmissionEvidence(group,paths,primary),primary));
+    ASSERT_TRUE(f.attempt->Selection()->geometry);const auto& selected=*f.attempt->Selection()->geometry;
+    for(const auto& candidate:selected.candidates)EXPECT_EQ(candidate.controls.size(),n);
+    if(selected.validity==DeclaredWindowBasinValidity::Valid && f.attempt->Selection()->status==NativeDeclaredWindowBasinStatus::Completed) {
+        ASSERT_TRUE(f.attempt->Measurement());ASSERT_TRUE(selected.measuredMaximum);
+        EXPECT_GE(selected.measuredMaximum->time,*f.attempt->Selection()->actualAssignedOnset);
+    } else {EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectionReason().empty());}
+    // This is dimension/context/plumbing coverage, never a convergence claim.
+}
+}
+TEST(NativeCompositeDeclarations,ClassicCold6AndProtocol4StrictRoundtrip){ColdAndProtocolRoundtrip<NNeuronTimeLearner>();}
+TEST(NativeCompositeDeclarations,BranchCold6AndProtocol4StrictRoundtrip){ColdAndProtocolRoundtrip<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeAutostart,ClassicCalculateMode0){ColdAutostart<NNeuronTimeLearner>(0);}
+TEST(NativeCompositeAutostart,ClassicCalculateMode1){ColdAutostart<NNeuronTimeLearner>(1);}
+TEST(NativeCompositeAutostart,BranchCalculateMode0){ColdAutostart<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeCompositeAutostart,BranchCalculateMode1){ColdAutostart<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeCompositeDimensions,ClassicN4ActualLastInput){ActualDimensions<NNeuronTimeLearner>(4);}
+TEST(NativeCompositeDimensions,BranchN4ActualLastInput){ActualDimensions<NNeuronTimeLearnerBranch>(4);}
+TEST(NativeCompositeDimensions,ClassicN6ActualLastInput){ActualDimensions<NNeuronTimeLearner>(6);}
+TEST(NativeCompositeDimensions,BranchN6ActualLastInput){ActualDimensions<NNeuronTimeLearnerBranch>(6);}
