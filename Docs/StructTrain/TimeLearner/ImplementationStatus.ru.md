@@ -2,6 +2,8 @@
 
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
 
+Дополнение08.11: prepared source для проверки нового control-lifetime собран в двух private descendants с одинаковыми worker/fixtures: corrected E11/Pulseb287 и unfixed BB1/Pulse800. Старые15s fixtures заменены merge-коммитом проверенной линии17db; два diagnostic-only IDs раскрыты отдельно. Ни targeted20, ни общий candidate-window regression пока не запускались. [Source review, ограничения и точные commits](CandidateWindowTypedCoreSourceReview-20261108.ru.md). [Конкретный Classic-график прослежен до исходного архива](ClassicFlatLTMetadataTrace-20261108.ru.md): отдельной LTMembrane нет, причина flat LT panel остаётся неизвестной. Это metadata/source evidence, не новые научные результаты.
+
 08.11: механическое выделение общего контроллера принято на M40:97/97
 (74 bounded +23 Final/Clock). Ошибочная постановка A1 сохранена в Git отдельно.
 Новый core143 A1 остановлен при компиляции до тестов; исправленный A2 принят
