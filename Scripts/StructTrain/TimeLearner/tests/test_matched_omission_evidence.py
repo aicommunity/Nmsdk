@@ -5,10 +5,12 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
+from .. import matched_omission_evidence as reader
 from ..matched_omission_evidence import (METHOD, audit_matched_omission_evidence,
                                         audit_matched_omission_file, diagnose_declared_window)
-from ..native_evidence import EvidenceError
+from ..native_evidence import EvidenceError, count, number
 
 
 def fixture(shared=False, partial=False):
@@ -70,6 +72,21 @@ def fixture(shared=False, partial=False):
     return group, primary
 
 
+def branch_fixture():
+    """Same measurements on the one physical Branch soma, assigned to input1."""
+    group, primary = fixture()
+    group.update(physical_channel_paths=['Neuron.Soma1'], assigned_input=1, assigned_channel=0,
+                 selected_full_maximum=1)
+    group['maxima'][0]['precedes_assigned_stimulus'] = True
+    for packet, record in zip(group['packets'], group['traces']):
+        packet['prepared'].update(routing='branch_solo_burst', input_id='input1', selected_input_index=1)
+        packet['observation']['specification']['baseline'] = [2.]
+        name = record['path']
+        raw = ('\n'.join(line.rsplit(',', 1)[0] for line in primary[name].decode().splitlines())+'\n').encode()
+        primary[name] = raw; record['sha256'] = hashlib.sha256(raw).hexdigest()
+    return group, primary
+
+
 class MatchedOmissionEvidenceTest(unittest.TestCase):
     def rejected(self, group, primary):
         with self.assertRaises(EvidenceError): audit_matched_omission_evidence(group, primary)
@@ -110,6 +127,95 @@ class MatchedOmissionEvidenceTest(unittest.TestCase):
     def test_unknown_schema_or_fields_are_rejected(self):
         group, primary = fixture(); group['schema_version']=2; self.rejected(group,primary)
         group, primary = fixture(); group['policy']['silent_fallback']=True; self.rejected(group,primary)
+
+    def test_schema_ids_require_json_integers_instead_of_numeric_equality(self):
+        paths = [('schema_version',), ('packets',0,'evidence_schema_version'),
+                 ('packets',0,'observation','schema_version'),
+                 ('packets',0,'observation','specification','schema_version'),
+                 ('packets',0,'requested_specification','schema_version')]
+        for path in paths:
+            for boolean in (False, True):
+                with self.subTest(path=path, boolean=boolean):
+                    group, primary = fixture(); node = group
+                    for key in path[:-1]: node = node[key]
+                    node[path[-1]] = True if boolean else float(node[path[-1]])
+                    self.rejected(group, primary)
+
+    def test_assigned_indices_are_rejected_before_entering_measurement_math(self):
+        for field in ('assigned_input', 'assigned_channel'):
+            for value in (0., False):
+                with self.subTest(field=field, value=value):
+                    group, primary = fixture(); group[field] = value
+                    with patch.object(reader, '_recompute', side_effect=AssertionError('untyped index reached replay')):
+                        self.rejected(group, primary)
+
+    def test_native_dimensions_and_policy_radius_require_json_integers(self):
+        paths = [('native_probes',), ('policy','comparison_radius_ticks'),
+                 ('packets',0,'prepared','model_epoch'), ('packets',0,'observation','sample_count'),
+                 ('packets',0,'observation','specification','maximum_samples'),
+                 ('packets',0,'requested_specification','maximum_samples'),
+                 ('packets',0,'observation','specification','stimulus_subset','physical_input_count'),
+                 ('packets',0,'requested_specification','stimulus_subset','physical_input_count')]
+        for path in paths:
+            with self.subTest(path=path):
+                group, primary = fixture(); node = group
+                for key in path[:-1]: node = node[key]
+                node[path[-1]] = float(node[path[-1]])
+                self.rejected(group, primary)
+
+    def test_branch_selector_is_an_integer_identity_not_boolean_true_or_float_one(self):
+        group, primary = branch_fixture()
+        self.assertEqual(audit_matched_omission_evidence(group, primary)['assignment_validity'], 'valid')
+        for value in (True, 1.):
+            with self.subTest(value=value):
+                group, primary = branch_fixture()
+                for packet in group['packets']: packet['prepared']['selected_input_index'] = value
+                self.rejected(group, primary)
+
+    def test_manifest_and_requested_source_ordinals_are_strict_integer_ids(self):
+        for path in [('traces',0,'presented_ordinals'),
+                     ('packets',0,'requested_specification','stimulus_subset','source_ordinals'),
+                     ('packets',0,'observation','specification','stimulus_subset','source_ordinals')]:
+            with self.subTest(path=path):
+                group, primary = fixture(); node = group
+                for key in path: node = node[key]
+                node[0] = float(node[0]); self.rejected(group, primary)
+
+    def test_recorded_maximum_and_support_indices_are_strict_bounded_integers(self):
+        paths = [('selected_full_maximum',), ('maxima',0,'first_sample'),
+                 ('maxima',0,'last_sample'), ('maxima',0,'supported_inputs',0)]
+        for path in paths:
+            with self.subTest(path=path):
+                group, primary = fixture(); node = group
+                for key in path[:-1]: node = node[key]
+                node[path[-1]] = float(node[path[-1]]); self.rejected(group, primary)
+        group, primary = fixture(); group['maxima'][0]['last_sample'] = 13; self.rejected(group, primary)
+        group, primary = fixture(); group['maxima'][0]['supported_inputs'] = [2]; self.rejected(group, primary)
+
+    def test_absurd_branch_input_count_is_bounded_by_full_mask_before_any_large_range(self):
+        group, primary = branch_fixture()
+        for packet in group['packets']:
+            for spec in (packet['observation']['specification'], packet['requested_specification']):
+                spec['stimulus_subset']['physical_input_count'] = 2**53-1
+        # This test must fail safely if the inventory guard regresses: never
+        # actually attempt list(range(2**53-1)) on a worker.
+        def bounded_range(*args):
+            stop = args[0] if len(args) == 1 else args[1]
+            if abs(stop) > 64: raise AssertionError('unbounded dimension reached range')
+            return range(*args)
+        with patch.object(reader, 'range', bounded_range, create=True):
+            self.rejected(group, primary)
+
+    def test_shared_numeric_contract_still_accepts_integral_float_measurements(self):
+        self.assertEqual(count(1.), 1); self.assertEqual(number(.25), .25)
+        with self.assertRaises(EvidenceError): number(True)
+        group, primary = fixture(); group['policy']['influence_relative'] = 0.
+        self.assertTrue(audit_matched_omission_evidence(group, primary)['assignment_recomputed'])
+
+    def test_declared_window_adapter_rejects_an_untyped_assigned_index(self):
+        group, primary = fixture(); receipt = audit_matched_omission_evidence(group, primary)
+        group['assigned_input'] = 0.
+        with self.assertRaises(EvidenceError): diagnose_declared_window(group, receipt, .1, .5)
 
     def test_changed_model_epoch_or_trial_is_rejected(self):
         for field,value in [('base_model_revision','other'),('model_epoch',1)]:

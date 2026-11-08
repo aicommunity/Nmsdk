@@ -23,6 +23,31 @@ GROUP_FIELDS = ('schema_version kind method group_id native_probes packets trace
                 'assignment_reasons maxima selected_full_maximum')
 POLICY_FIELDS = ('comparison_radius_ticks time_comparison_tolerance baseline_absolute repeatability_absolute '
                  'repeatability_relative influence_absolute influence_relative')
+MAXIMUM_FIELDS = ('first_sample last_sample amplitude raw_potential time plateau_end clipped '
+                  'supported_inputs influence_by_input unknown precedes_assigned_stimulus')
+
+
+def _dimension(value, reason='matched_invalid_dimension'):
+    """Schema IDs and indices are JSON integers; real-valued measurements are not.
+
+    The shared count contract also accepts integral floats. Do not change that
+    contract or let its normalized return value mask an untyped original index.
+    """
+    require(type(value) is int, reason)
+    return count(value)
+
+
+def _maximum_dimensions(group, frames, inputs):
+    maxima = group['maxima']; require(type(maxima) is list, 'matched_invalid_maxima')
+    for maximum in maxima:
+        _keys(maximum, MAXIMUM_FIELDS)
+        first, last = (_dimension(maximum[key]) for key in ('first_sample', 'last_sample'))
+        require(first <= last < frames, 'matched_maximum_sample_index')
+        support = maximum['supported_inputs']; require(type(support) is list, 'matched_invalid_support_indices')
+        for value in support: require(_dimension(value) < inputs, 'matched_support_input_index')
+    selected = group['selected_full_maximum']
+    if selected is not None:
+        require(_dimension(selected) < len(maxima), 'matched_selected_maximum_index')
 
 
 def _difference(a, b):
@@ -52,7 +77,8 @@ def _maxima(times, raw, baseline, minimum):
 def _trace(packet, record, raw, group, index):
     _keys(packet, 'kind evidence_schema_version native_status current_base_revision reasons '
                   'requires_fresh_verification requested_specification prepared observation')
-    require(packet['kind'] == 'timelearner_native_probe_evidence' and packet['evidence_schema_version'] == 2,
+    require(packet['kind'] == 'timelearner_native_probe_evidence' and
+            _dimension(packet['evidence_schema_version']) == 2,
             'matched_unknown_native_schema')
     require(packet['native_status'] == 'completed' and packet['reasons'] == [] and
             packet['requires_fresh_verification'] is False, 'matched_native_not_completed')
@@ -61,8 +87,14 @@ def _trace(packet, record, raw, group, index):
              'burst_assignments spikes spike_count first_stimulus_time')
     _keys(p, 'routing input_id protocol_revision base_model_revision effective_model_revision model_epoch selected_input_index')
     s = o['specification']
-    for spec in (s, q): _keys(spec, SPEC_FIELDS+' stimulus_subset')
-    require(o['schema_version'] == s['schema_version'] == q['schema_version'] == 6 and
+    for spec in (s, q):
+        _keys(spec, SPEC_FIELDS+' stimulus_subset')
+        _dimension(spec['maximum_samples'])
+        _keys(spec['stimulus_subset'], 'purpose source_training_pattern_hash physical_input_count source_ordinals')
+        _dimension(spec['stimulus_subset']['physical_input_count'])
+        ordinals = spec['stimulus_subset']['source_ordinals']
+        require(type(ordinals) is list and all(type(v) is int for v in ordinals), 'matched_mask_changed')
+    require(_dimension(o['schema_version']) == _dimension(s['schema_version']) == _dimension(q['schema_version']) == 6 and
             o['complete'] is True and o['valid'] is True and o['end_reason'] == 'window_closed' and
             o['reasons'] == [] and o['peaks'] == [] and o['burst_assignments'] == [] and
             o['spikes'] == [] and o['spike_count'] is None, 'matched_invalid_native_observation')
@@ -80,25 +112,33 @@ def _trace(packet, record, raw, group, index):
     require(s['trial_id'] == group['group_id']+'/native/'+str(index) and
             s['effective_model_revision'] == p['effective_model_revision'] and
             packet['current_base_revision'] == p['base_model_revision'], 'matched_context_changed')
-    count(p['model_epoch'])
+    _dimension(p['model_epoch'])
+    sample_count = _dimension(o['sample_count'])
     subset = s['stimulus_subset']
     _keys(subset, 'purpose source_training_pattern_hash physical_input_count source_ordinals')
-    n = count(subset['physical_input_count']); mask = subset['source_ordinals']
+    n = _dimension(subset['physical_input_count']); mask = subset['source_ordinals']
     require(n >= 2 and subset['purpose'] == 'stimulus_subset_characterization' and
             subset['source_training_pattern_hash'] == group['source_pattern_sha256'], 'matched_original_target_changed')
-    require(type(mask) is list and mask and all(type(v) is int and 0 <= v < n for v in mask) and
-            mask == sorted(set(mask)) and mask == record['presented_ordinals'], 'matched_mask_changed')
+    # Bind N to already supplied inventory BEFORE any range(N)/N-sized list.
+    # A stopped group still contains a complete initial full presentation.
+    require(type(mask) is list and mask and len(mask) in (n-1, n) and
+            (index != 0 or len(mask) == n), 'matched_physical_input_inventory')
+    declared_mask = record['presented_ordinals']
+    require(type(declared_mask) is list and all(type(v) is int for v in declared_mask), 'matched_mask_changed')
+    require(all(_dimension(v) < n for v in mask) and
+            mask == sorted(set(mask)) and mask == declared_mask, 'matched_mask_changed')
     require(s['expected_stimulus_ids'] == ['pulse'+str(i) for i in mask], 'matched_event_ids_changed')
     baseline = [number(v) for v in s['baseline']]
     require(len(baseline) == len(group['physical_channel_paths']), 'matched_physical_dimensions')
-    assigned, channel = count(group['assigned_input']), count(group['assigned_channel'])
+    assigned, channel = _dimension(group['assigned_input']), _dimension(group['assigned_channel'])
     require(assigned < n and p['input_id'] == 'input'+str(assigned), 'matched_assigned_input_changed')
+    require(channel < len(baseline), 'matched_assigned_channel_changed')
     if p['routing'] == 'classic_burst':
         require(len(baseline) == n and channel == assigned and p['selected_input_index'] is None,
                 'matched_classic_routing')
     else:
         require(p['routing'] == 'branch_solo_burst' and len(baseline) == 1 and channel == 0 and
-                p['selected_input_index'] == assigned, 'matched_branch_routing')
+                _dimension(p['selected_input_index']) == assigned, 'matched_branch_routing')
     profile = s['stimulus_profile']
     _keys(profile, 'generator_class amplitude pulse_length frequency_hz frequency_deviation use_transit_signal use_pattern_output')
     frequency, amplitude, width = (number(profile[k]) for k in ('frequency_hz', 'amplitude', 'pulse_length'))
@@ -114,10 +154,10 @@ def _trace(packet, record, raw, group, index):
     header = ['time', 'stimulus']+['soma'+str(i) for i in range(len(baseline))]
     require(rows and rows[0] == header and all(len(row) == len(header) for row in rows[1:]), 'matched_trace_columns')
     values = [[number(float(v)) for v in row] for row in rows[1:]]
-    times = [row[0] for row in values]; require_primary_trace_clock(s, o['sample_count'], times)
+    times = [row[0] for row in values]; require_primary_trace_clock(s, sample_count, times)
     require(all(abs(number(t-s['begin'])-i/frequency) <= epsilon for i, t in enumerate(times)), 'matched_grid_changed')
     require(not after(s['end'], times[-1]) and after(s['end'], times[-2]), 'matched_close_frame_changed')
-    require(count(policy['comparison_radius_ticks']) in range(1, len(times)), 'matched_invalid_neighbourhood')
+    require(_dimension(policy['comparison_radius_ticks']) in range(1, len(times)), 'matched_invalid_neighbourhood')
     events = o['stimuli']; require(type(events) is list and [e['id'] for e in events] == s['expected_stimulus_ids'],
                                   'matched_missing_events')
     event_frames = []
@@ -143,7 +183,7 @@ def _trace(packet, record, raw, group, index):
 
 def _support(maximum, before, after_trace, controls, group):
     policy = group['policy']; assigned, channel = group['assigned_input'], group['assigned_channel']
-    radius = count(policy['comparison_radius_ticks'])
+    radius = _dimension(policy['comparison_radius_ticks'])
     first = max(0, maximum['first_sample']-radius)
     last = min(len(before['times'])-1, maximum['last_sample']+radius)
     states = []
@@ -181,6 +221,7 @@ def _choose(maxima, assigned):
 
 def _recompute(group, traces):
     before, repeat = traces[0], traces[-1]; n = before['n']; policy = group['policy']
+    require(n == len(before['mask']), 'matched_physical_input_inventory')
     require(len(traces) == n+2 and before['mask'] == repeat['mask'] == list(range(n)), 'matched_incomplete_group')
     controls = [None]*n
     for trace in traces[1:-1]:
@@ -229,18 +270,18 @@ def audit_matched_omission_evidence(group, primary):
     """primary maps the declared relative CSV names to immutable bytes."""
     try:
         _keys(group, GROUP_FIELDS); _finite_json(group)
-        require(group['kind'] == 'native_matched_omission_fixture' and group['schema_version'] == 1 and
+        require(group['kind'] == 'native_matched_omission_fixture' and _dimension(group['schema_version']) == 1 and
                 group['method'] == METHOD and group['training_certificate_eligible'] is False and
                 group['scientific_verdict'] is None, 'matched_unknown_fixture_schema')
         for key in ('group_id', 'source_pattern_sha256', 'reset_binding', 'model_instance_binding'): _text(group[key])
         paths = group['physical_channel_paths']; require(type(paths) is list and paths and len(set(paths)) == len(paths) and
                 all(type(v) is str and v for v in paths), 'matched_physical_paths')
-        count(group['assigned_channel']); count(group['assigned_input'])
+        _dimension(group['assigned_channel']); _dimension(group['assigned_input'])
         policy = group['policy']; _keys(policy, POLICY_FIELDS)
         for key, value in policy.items(): require(number(value) >= 0, 'matched_negative_policy')
-        require(count(policy['comparison_radius_ticks']) >= 1, 'matched_invalid_neighbourhood')
+        require(_dimension(policy['comparison_radius_ticks']) >= 1, 'matched_invalid_neighbourhood')
         packets, records = group['packets'], group['traces']
-        require(type(packets) is list and type(records) is list and 0 < len(packets) == count(group['native_probes']) and
+        require(type(packets) is list and type(records) is list and 0 < len(packets) == _dimension(group['native_probes']) and
                 len(records) == len(packets), 'matched_missing_primary_trace')
         traces, names = [], set()
         for i, (packet, record) in enumerate(zip(packets, records)):
@@ -252,6 +293,8 @@ def audit_matched_omission_evidence(group, primary):
             traces.append(_trace(packet, record, primary[name], group, i))
         require(set(primary) == names, 'matched_unexpected_primary_files')
         n = traces[0]['n']; require(all(t['n'] == n for t in traces), 'matched_physical_input_count_changed')
+        require(n == len(traces[0]['mask']), 'matched_physical_input_inventory')
+        _maximum_dimensions(group, len(traces[0]['times']), n)
         require(traces[0]['mask'] == list(range(n)) and
                 traces[0]['spec']['pattern_hash'] == group['source_pattern_sha256'], 'matched_missing_initial_full')
         complete = len(traces) == n+2
@@ -301,6 +344,7 @@ def audit_matched_omission_file(path):
 def diagnose_declared_window(group, receipt, begin, end):
     """Applicability comparison only; does not change the audited method/verdict."""
     require(receipt['complete_group'] and receipt['assignment_recomputed'], 'matched_scope_requires_complete_replay')
+    assigned = _dimension(group['assigned_input'])
     begin, end = number(begin), number(end)
     spec = group['packets'][0]['observation']['specification']; origin = number(spec['begin'])
     require(0 <= begin < end <= number(spec['end'])-origin, 'matched_invalid_diagnostic_window')
@@ -309,9 +353,9 @@ def diagnose_declared_window(group, receipt, begin, end):
         within = begin <= number(maximum['time']-origin) and number(maximum['plateau_end']-origin) <= end
         if within:
             inside.append(i)
-            if (maximum['supported_inputs'] == [group['assigned_input']] and not maximum['unknown'] and
+            if (maximum['supported_inputs'] == [assigned] and not maximum['unknown'] and
                     not maximum['clipped'] and not maximum['precedes_assigned_stimulus']): exclusive.append(i)
-        elif (maximum['influence_by_input'][group['assigned_input']] != 'not_supported' and
+        elif (maximum['influence_by_input'][assigned] != 'not_supported' and
               (maximum['unknown'] or len(maximum['supported_inputs']) != 1)):
             shared_outside.append(i)
     return dict(declared_relative_window=[begin, end], hypothesis_only=True,
