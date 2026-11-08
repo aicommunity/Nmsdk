@@ -876,10 +876,21 @@ template<class Owner> ConfiguredNativeTraining CompositeCold(NativeCompositeFixt
     c.maximumReferenceProbes=p.maximumReferenceProbes;c.maximumInvalidReferenceProbes=p.maximumInvalidReferenceProbes;
     c.maximumModelSeconds=p.maximumModelSeconds;c.maximumWallSeconds=p.maximumWallSeconds;c.composite=p.composite;return c;
 }
+void SaveColdEnvelopeWire(bool branch,const std::string& stage,const QJsonObject& object) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const auto directory=QString::fromLocal8Bit(output)+"/"+(branch?"branch-cold6-envelope/":"classic-cold6-envelope/")+QString::fromStdString(stage);
+    Require(QDir().mkpath(directory),"cold_envelope_output_directory");QFile file(directory+"/producer-wire.json");
+    Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"cold_envelope_output_new_only");
+    const auto bytes=QJsonDocument(object).toJson(QJsonDocument::Compact);Require(file.write(bytes)==bytes.size() && file.flush(),"cold_envelope_output_write");
+}
 template<class Owner> void ColdAndProtocolRoundtrip() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);
     const auto wire=EncodeConfiguredNativeTraining(c);EXPECT_EQ(wire["schema_version"].toInt(),6);
+    SaveColdEnvelopeWire(NativeCompositeFixture<Owner>::branch,"original-roundtrip",wire);
+    ASSERT_TRUE(wire.value("base_schema_version").isDouble());ASSERT_EQ(wire.value("base_schema_version"),QJsonValue(1));
     EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    const auto bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(bytes.toStdString())),wire);
     const auto protocol=MakeConfiguredNativeTrainingPlan(c).protocol;const auto encoded=EncodeVerificationProtocol(protocol);
     EXPECT_EQ(DecodeVerificationProtocol(encoded),protocol);EXPECT_EQ(encoded["schema_version"].toInt(),4);
     EXPECT_EQ(CompositeTrainingProtocolBinding(protocol),CompositeTrainingProtocolBinding(DecodeVerificationProtocol(encoded)));
@@ -893,6 +904,32 @@ template<class Owner> void ColdAndProtocolRoundtrip() {
     auto wrong=encoded;wrong["schema_version"]=3;EXPECT_THROW(DecodeVerificationProtocol(wrong),std::invalid_argument);
     wrong=encoded;auto geometry=wrong["composite_measurement"].toObject();geometry["unused"]=0;wrong["composite_measurement"]=geometry;
     EXPECT_THROW(DecodeVerificationProtocol(wrong),std::invalid_argument);
+}
+template<class Owner> void ColdEnvelopeAllBaseSchemasHaveOwningNumbers() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto original=CompositeCold(f);
+    for(int schema=1;schema<=4;++schema) {
+        SCOPED_TRACE(schema);auto c=original;
+        if(schema==2)c.search.n0CandidateRepeats=2;
+        if(schema>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(schema==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        // Only the declared cold policy changes. No C0 or response is invented:
+        // these are actual model-backed encoder/decoder checks, not training.
+        auto flat=c;flat.composite.reset();const auto flatWire=EncodeConfiguredNativeTraining(flat);
+        ASSERT_EQ(flatWire.value("schema_version"),QJsonValue(schema));
+        const auto wire=EncodeConfiguredNativeTraining(c);SaveColdEnvelopeWire(NativeCompositeFixture<Owner>::branch,"base-"+std::to_string(schema),wire);
+        ASSERT_TRUE(wire.value("base_schema_version").isDouble());ASSERT_EQ(wire.value("base_schema_version"),QJsonValue(schema));
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(6));EXPECT_TRUE(wire.value("record_spikes").isBool());
+        auto actualFlat=wire;actualFlat.remove("base_schema_version");actualFlat.remove("composite_measurement");actualFlat["schema_version"]=schema;
+        EXPECT_EQ(actualFlat,flatWire); // The envelope must preserve EVERY original flat field.
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+        const auto bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(bytes.toStdString())),wire);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue(false),QJsonValue(QString::number(schema)),QJsonValue(QJsonValue::Null)}) {
+            auto bad=wire;bad["base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+            EXPECT_THROW(ParseConfiguredNativeTraining(QJsonDocument(bad).toJson(QJsonDocument::Compact).toStdString()),std::invalid_argument);
+        }
+    }
 }
 template<class Owner> void ColdAutostart(int mode) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);f.attempt.reset();
@@ -938,6 +975,8 @@ template<class Owner> void ActualDimensions(std::size_t n) {
 }
 TEST(NativeCompositeDeclarations,ClassicCold6AndProtocol4StrictRoundtrip){ColdAndProtocolRoundtrip<NNeuronTimeLearner>();}
 TEST(NativeCompositeDeclarations,BranchCold6AndProtocol4StrictRoundtrip){ColdAndProtocolRoundtrip<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeDeclarations,ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes){ColdEnvelopeAllBaseSchemasHaveOwningNumbers<NNeuronTimeLearner>();}
+TEST(NativeCompositeDeclarations,BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes){ColdEnvelopeAllBaseSchemasHaveOwningNumbers<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeAutostart,ClassicCalculateMode0){ColdAutostart<NNeuronTimeLearner>(0);}
 TEST(NativeCompositeAutostart,ClassicCalculateMode1){ColdAutostart<NNeuronTimeLearner>(1);}
 TEST(NativeCompositeAutostart,BranchCalculateMode0){ColdAutostart<NNeuronTimeLearnerBranch>(0);}
@@ -1397,10 +1436,37 @@ void PortableExecutionEnvelope(bool preflight) {
         {"schema_version",1},{"execution",preflight?"completed":"training_start_failed"}};
     const auto execution=NmsdkWorker::WrapNativeCompositeExecution(true,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0,preflight);
     EXPECT_EQ(execution["schema_version"],QJsonValue(3));EXPECT_EQ(execution["base_schema_version"],QJsonValue(1));
+    EXPECT_TRUE(execution.value("base_schema_version").isDouble());
+    const auto bytes=QJsonDocument(execution).toJson(QJsonDocument::Compact);const auto parsed=QJsonDocument::fromJson(bytes);
+    ASSERT_TRUE(parsed.isObject());EXPECT_EQ(parsed.object(),execution);
     EXPECT_EQ(execution["model_semantic_hash"],QJsonValue("actual-model"));EXPECT_TRUE(execution["source_origin"].isNull());EXPECT_TRUE(execution["measurement_archive"].isNull());
     const auto counters=execution["composite_counters"].toObject();if(preflight){EXPECT_EQ(counters["attempt"].toObject()["logical_groups"],QJsonValue(0));
         EXPECT_EQ(counters["archive"].toObject()["groups"],QJsonValue(0));}else{EXPECT_TRUE(counters["attempt"].isNull());EXPECT_TRUE(counters["archive"].isNull());}
     EXPECT_EQ(NmsdkWorker::WrapNativeCompositeExecution(false,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0),NmsdkWorker::Signed(base));
+}
+void PortableExecutionEnvelopeOwnsNumericBase() {
+    // Exercise the real writer on the two base versions used by the console:
+    // ordinary execution/preflight (1), and live finalization execution (2).
+    // This is a wire contract test; no native execution is claimed by the data.
+    for(int schema=1;schema<=2;++schema) {
+        SCOPED_TRACE(schema);QJsonObject base{{"kind","timelearner_native_training_execution"},{"schema_version",schema},
+            {"execution","training_start_failed"},{"training_started",false},{"sample_id","sample0"},
+            {"model_ticks",0},{"artifacts",QJsonArray{}},{"package_path",QJsonValue(QJsonValue::Null)}};
+        if(schema==2){base["finalization_path"]="finalization.json";base["finalization_sha256"]="declared-writer-input";}
+        const auto execution=NmsdkWorker::WrapNativeCompositeExecution(true,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0,false);
+        ASSERT_TRUE(execution.value("base_schema_version").isDouble());EXPECT_EQ(execution.value("base_schema_version"),QJsonValue(schema));
+        EXPECT_EQ(execution.value("schema_version"),QJsonValue(3));
+        const auto bytes=QJsonDocument(execution).toJson(QJsonDocument::Compact);const auto parsed=QJsonDocument::fromJson(bytes);
+        ASSERT_TRUE(parsed.isObject());EXPECT_EQ(parsed.object(),execution);
+        for(auto it=base.constBegin();it!=base.constEnd();++it)if(it.key()!="schema_version")EXPECT_EQ(parsed.object().value(it.key()),it.value());
+        auto unwrapped=parsed.object();for(const auto* key:{"base_schema_version","measurement_method","measurement_archive",
+            "model_semantic_hash","source_origin","composite_counters","sha256"})unwrapped.remove(key);
+        unwrapped["schema_version"]=schema;EXPECT_EQ(unwrapped,base);
+        auto unsignedExecution=execution;unsignedExecution.remove("sha256");
+        EXPECT_EQ(execution.value("sha256"),QJsonValue(NmsdkTools::CanonicalModelDataSha256(unsignedExecution)));
+        const auto name="console-envelope-owned/base-"+std::to_string(schema);SavePortableObject(name.c_str(),"producer-wire.json",execution);
+        EXPECT_EQ(NmsdkWorker::WrapNativeCompositeExecution(false,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0),NmsdkWorker::Signed(base));
+    }
 }
 }
 TEST(NativeCompositeConsoleArtifacts,ClassicAllPrimaryAndSidecarsMirrored){PortableArtifactMirror<NNeuronTimeLearner>();}
@@ -1410,6 +1476,7 @@ TEST(NativeCompositeConsoleArtifacts,ExistingPrimaryNeverOverwritten){PortableAr
 TEST(NativeCompositeConsoleArtifacts,ActualAllNPlus2StreamCounters){PortableStreamCounters();}
 TEST(NativeCompositeConsoleArtifacts,PreflightKnownZeroAccounting){PortableExecutionEnvelope(true);}
 TEST(NativeCompositeConsoleArtifacts,FailedStartNeverInventsArchiveAccounting){PortableExecutionEnvelope(false);}
+TEST(NativeCompositeConsoleArtifacts,BaseSchemasKeepOwningNumericTypeAndAllFieldsThroughBytes){PortableExecutionEnvelopeOwnsNumericBase();}
 
 
 namespace {
@@ -1656,10 +1723,11 @@ template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner
         {"reason",QString::fromStdString(record.reason)},{"selection",record.selection?QJsonValue(EncodeNativeCompositeSelection(*record.selection)):QJsonValue(QJsonValue::Null)}}).toJson());
     SaveCompositeBoundary(f,directory.c_str());
 }
-template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true,const std::string& prefix="reference") {
+template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true,const std::string& prefix="reference",
+    const std::string& attemptId="candidate-attempt") {
     f.referenceMeasurements.clear();
     for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
-        const std::string run="candidate-attempt/capture/1";
+        const std::string run=attemptId+"/capture/1";
         f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
         if(save)SaveCandidateWindowGroup(f,prefix+"-"+std::to_string(i));
         Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
@@ -2277,6 +2345,34 @@ template<class Owner> ConfiguredNativeTraining ActualCold7Declaration(NativeComp
     for(const auto& w:f.protocol.candidateWindowMeasurement->referenceInputWindows)c.windows.emplace_back(w.beginOffset,w.endOffset);
     return c;
 }
+template<class Owner> void ActualCold7AllBaseSchemasHaveOwningNumbers() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto original=ActualCold7Declaration(f);
+    for(int schema=1;schema<=4;++schema) {
+        SCOPED_TRACE(schema);auto c=original;
+        if(schema==2)c.search.n0CandidateRepeats=2;
+        if(schema>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(schema==4){c.search.capacitanceSearch=CapacitanceSearchPolicy{};c.search.maximumCandidatesPerInput=8;}
+        // Model-backed declaration only: this does not mint live references,
+        // a capacitance baseline, a measurement or a Train5 certificate.
+        auto flat=c;flat.composite.reset();flat.candidateWindowPolicy.reset();
+        const auto flatWire=EncodeConfiguredNativeTraining(flat);ASSERT_EQ(flatWire.value("schema_version"),QJsonValue(schema));
+        const auto wire=EncodeConfiguredNativeTraining(c);
+        const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-cold7-envelope/base-":"classic-cold7-envelope/base-")+std::to_string(schema);
+        SavePortableObject(name.c_str(),"producer-wire.json",wire);
+        ASSERT_TRUE(wire.value("base_schema_version").isDouble());ASSERT_EQ(wire.value("base_schema_version"),QJsonValue(schema));
+        EXPECT_EQ(wire.value("schema_version"),QJsonValue(7));EXPECT_TRUE(wire.value("record_spikes").isBool());
+        auto actualFlat=wire;actualFlat.remove("base_schema_version");actualFlat.remove("composite_measurement");actualFlat["schema_version"]=schema;
+        EXPECT_EQ(actualFlat,flatWire);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+        const auto bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);
+        EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(bytes.toStdString())),wire);
+        for(const auto& invalid:{QJsonValue(true),QJsonValue(false),QJsonValue(QString::number(schema)),QJsonValue(QJsonValue::Null)}) {
+            auto bad=wire;bad["base_schema_version"]=invalid;
+            EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+            EXPECT_THROW(ParseConfiguredNativeTraining(QJsonDocument(bad).toJson(QJsonDocument::Compact).toStdString()),std::invalid_argument);
+        }
+    }
+}
 template<class Owner> void ActualCold7InitialReadback() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto c=ActualCold7Declaration(f);f.attempt.reset();
     for(auto& b:c.search.bounds){b.minimumLength=1;b.maximumLength=8;b.minimumSynapses=1;b.maximumSynapses=3;}
@@ -2285,12 +2381,14 @@ template<class Owner> void ActualCold7InitialReadback() {
     actual=f.owner->ReadNativeParameters();const auto plan=MakeConfiguredNativeTrainingPlan(c);
     const auto captured=CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,actual,0.);
     const auto wire=EncodeConfiguredNativeTraining(captured);EXPECT_EQ(wire["schema_version"],QJsonValue(7));
+    ASSERT_TRUE(wire.value("base_schema_version").isDouble());EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
     EXPECT_EQ(captured.model.inputs[0].attachment,3);EXPECT_EQ(captured.model.inputs[0].synapses,2);
     ASSERT_TRUE(captured.model.inputs[0].resistance);EXPECT_DOUBLE_EQ(*captured.model.inputs[0].resistance,actual[0].resistance);
     EXPECT_EQ(f.modelSpec.inputs[0].attachment,2);EXPECT_FALSE(f.modelSpec.inputs[0].resistance);
     EXPECT_TRUE(captured.search.initialModelRevision.empty());EXPECT_EQ(captured.search.initialModelEpoch,0u);
     EXPECT_FALSE(captured.recordCapacitanceHistory);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
     EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(ParseConfiguredNativeTraining(QJsonDocument(wire).toJson(QJsonDocument::Compact).toStdString())),wire);
     EXPECT_EQ(MakeConfiguredNativeTrainingPlan(captured).protocol.candidateWindowMeasurement->referenceInputWindows,
         plan.protocol.candidateWindowMeasurement->referenceInputWindows);
     const auto name=NativeCompositeFixture<Owner>::branch?"cold7-native-initial-declarations/branch":"cold7-native-initial-declarations/classic";
@@ -2310,6 +2408,8 @@ template<class Owner> void ActualCold7InitialBindingRefusal(bool wrongWindow) {
 }
 TEST(NativeCandidateWindowCold7,ClassicInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearner>();}
 TEST(NativeCandidateWindowCold7,BranchInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowCold7,ClassicAllBaseSchemasKeepNumericTypeThroughSerializedBytes){ActualCold7AllBaseSchemasHaveOwningNumbers<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowCold7,BranchAllBaseSchemasKeepNumericTypeThroughSerializedBytes){ActualCold7AllBaseSchemasHaveOwningNumbers<NNeuronTimeLearnerBranch>();}
 TEST(NativeCandidateWindowCold7,ActualCommonPolicyMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearner>(false);}
 TEST(NativeCandidateWindowCold7,ActualReferenceWindowMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearnerBranch>(true);}
 
@@ -2525,7 +2625,7 @@ TEST(NativeCandidateWindowService,ClassicActualClippedGroupBudgetIsNotReplacedBy
 TEST(NativeCandidateWindowService,BranchActualClippedGroupBudgetIsNotReplacedByPlanCap){WindowServicePreservesClippedGroupBudget<NNeuronTimeLearnerBranch>();}
 
 namespace {
-template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignService) {
+template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignService,bool newManualAfterFinished=false) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);
     // Declare the foreign plan before the manual reference capture. This also
     // enables protocol5 once; no late window/source retarget is involved.
@@ -2535,10 +2635,15 @@ template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignSe
     VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
     FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);
     const auto request=final.NextRequest();ASSERT_TRUE(request);
+    std::unique_ptr<FinalVerificationSession> afterNewToken;
+    if(newManualAfterFinished) {
+        afterNewToken=std::make_unique<FinalVerificationSession>(refs,*f.attempt->CandidateWindowReferences(),config);
+        const auto repeated=afterNewToken->NextRequest();ASSERT_TRUE(repeated);ASSERT_EQ(repeated->trialId,request->trialId);
+    }
     // Keep the original, REAL group/attempt clocks alive across several later
     // native groups. A short default deadline would mask the ownership issue.
     constexpr double groupModelLimit=30.,groupWallLimit=3600.;
-    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},groupModelLimit,groupWallLimit);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);if(afterNewToken)afterNewToken->ArmCandidateWindow(p);},{},groupModelLimit,groupWallLimit);
     ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
     const auto pending=*f.attempt->Measurement();const auto pendingRecord=f.attempt->Record();
     const auto cachedRevision=f.Revision();const auto ownerLife=f.owner->ObserveLifecycle();
@@ -2634,6 +2739,36 @@ template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignSe
         // Foreign Begin takes over the same executor; Finished/Need=true must
         // not revive the old actor's authority to accept a NEW final input.
         EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+        if(newManualAfterFinished) {
+            // A NEW explicit manual family is legal after Finished. Its token
+            // must neither inherit nor revive the retained old native lease.
+            f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,f.protocol,pendingRecord.attemptLimits,
+                NativeCandidateWindowAttemptDeclaration{"manual-after-finished",128u*1024u*1024u},f.Time(),Wall());
+            ASSERT_NE(f.attempt->OwnerFamilyBinding(),oldFamily);
+            ASSERT_NE(f.attempt->OwnerFamilyBinding(),f.owner->NativeTrainingController().CompositeOwnerFamilyBinding());
+            ASSERT_TRUE(ownerLife.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Revision(),cachedRevision);
+            ASSERT_EQ(f.owner->OwnedNativeCapacitanceState(),oldC0);
+            ASSERT_LT(f.Time()-pendingRecord.startModel,pendingRecord.maximumGroupModelSeconds);ASSERT_LT(Wall()-pendingRecord.startWall,pendingRecord.maximumGroupWallSeconds);
+            ASSERT_LT(f.Time()-earliestAttemptModel,pendingRecord.attemptLimits.maximumModelSeconds);ASSERT_LT(Wall()-earliestAttemptWall,pendingRecord.attemptLimits.maximumWallSeconds);
+            ASSERT_TRUE(afterNewToken);afterNewToken->ConsumeCandidateWindow(pending,cachedRevision);
+            EXPECT_EQ(afterNewToken->Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(afterNewToken->AcceptedInputs(),0u);
+            ASSERT_FALSE(afterNewToken->Rejected().empty());EXPECT_EQ(afterNewToken->Rejected().back().reason,"native_training_owner_control_replaced");
+            SavePortableObject(name.c_str(),"after-new-token-observation.json",{{"kind","old_manual_after_new_manual_factory"},{"schema_version",1},
+                {"old_family",QString::fromStdString(oldFamily)},{"new_manual_family",QString::fromStdString(f.attempt->OwnerFamilyBinding())},
+                {"new_manual_groups_issued",double(f.attempt->IssuedGroups())},{"old_consumer_status",VerificationStatusName(afterNewToken->Status())},
+                {"old_consumer_accepted_inputs",double(afterNewToken->AcceptedInputs())},{"old_rejection_reason",QString::fromStdString(afterNewToken->Rejected().back().reason)},
+                {"private_token_serialized",false},{"actual_native_time",f.Time()}});
+            const auto freshRefs=CaptureWindowReferences(f,true,"manual-after-finished-reference","manual-after-finished");
+            VerificationConfig freshConfig{"manual-after-finished/final/1",f.Revision(),4,0,0};freshConfig.tolerances.sync=.2;
+            FinalVerificationSession fresh(freshRefs,*f.attempt->CandidateWindowReferences(),freshConfig);
+            std::size_t freshInputs=0;while(const auto next=fresh.NextRequest()) {
+                f.Run(*next,CompositeMeasurementPurpose::Final,[&](const auto& p){fresh.ArmCandidateWindow(p);},{},groupModelLimit,groupWallLimit);
+                ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();SaveCandidateWindowGroup(f,"manual-after-finished-final-"+std::to_string(++freshInputs));
+                fresh.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());
+            }
+            ASSERT_EQ(freshInputs,2u);ASSERT_EQ(fresh.AcceptedInputs(),2u);ASSERT_TRUE(fresh.Certificate());EXPECT_EQ(fresh.Status(),VerificationStatus::Exact);
+            SaveWindowCoreCertificate(f,"new-manual-after-finished",*fresh.Certificate());
+        }
     } else {
         ASSERT_EQ(final.AcceptedInputs(),1u);ASSERT_EQ(final.Status(),VerificationStatus::Collecting);
         const auto last=final.NextRequest();ASSERT_TRUE(last);
@@ -2650,3 +2785,257 @@ TEST(NativeCandidateWindowManualAuthority,ClassicForeignBeginThenFinishedDoesNot
 TEST(NativeCandidateWindowManualAuthority,BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(true);}
 TEST(NativeCandidateWindowManualAuthority,ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable){WindowManualClosedMeasurementAuthority<NNeuronTimeLearner>(false);}
 TEST(NativeCandidateWindowManualAuthority,BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(false);}
+
+namespace {
+enum class ManualTakeoverKind { FailedBegin,ScalarThree,FixedFour };
+template<class Owner> void WindowManualOtherServiceTakeover(ManualTakeoverKind kind) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto legacy=CompositeCold(f);
+    if(kind==ManualTakeoverKind::ScalarThree)legacy.composite.reset();
+    auto foreign=MakeConfiguredNativeTrainingPlan(legacy);
+    const auto earliestAttemptModel=f.Time(),earliestAttemptWall=Wall();
+    if(kind==ManualTakeoverKind::FailedBegin) {
+        foreign=ActualWindowServicePlan(f,.2,false);foreign.maximumReferenceProbes=0;
+    } else EnableCandidateWindow(f);
+    const auto refs=CaptureWindowReferences(f);VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);const auto request=final.NextRequest();ASSERT_TRUE(request);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},30.,3600.);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();const auto pending=*f.attempt->Measurement();const auto record=f.attempt->Record();
+    const auto beforeRevision=f.Revision();const auto beforeC0=f.owner->OwnedNativeCapacitanceState();
+    const auto life=f.owner->ObserveLifecycle();const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    const auto beforeSource=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(beforeSource["valid"].toBool());ASSERT_TRUE(beforeC0.isEmpty());
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/":"classic-window-control-lifetime/")+
+        (kind==ManualTakeoverKind::FailedBegin?"failed-begin":kind==ManualTakeoverKind::ScalarThree?"scalar3-takeover":"fixed4-takeover");
+    SaveCandidateWindowGroup(f,"old-before-other-service");const auto historical=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    SaveCompositeArchive(historical,(name+"/old-journal").c_str());
+    std::size_t foreignSamples=0,foreignPrepared=0;std::unique_ptr<NmsdkWorker::EvidenceWriter> scalarWriter;
+    if(kind==ManualTakeoverKind::ScalarThree) {
+        // A real scalar3 source/probe dispatch, stopped by ACTUAL model time.
+        // No Exact claim or invented complete scalar observation is needed.
+        foreign.maximumModelSeconds=.03;foreign.maximumWallSeconds=7200.;
+        if(const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT")) {
+            const auto directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"/foreign-scalar3";
+            Require(QDir().mkpath(directory),"control_lifetime_scalar_directory");
+            scalarWriter=std::make_unique<NmsdkWorker::EvidenceWriter>(directory,NativeCompositeFixture<Owner>::branch?1u:2u);
+        }
+        foreign.probe.onPrepared=[&](const auto& p,const auto& s){++foreignPrepared;if(scalarWriter)scalarWriter->Prepared(p,s);};
+        foreign.probe.onSample=[&](const auto& s){++foreignSamples;if(scalarWriter)scalarWriter->Sample(s);};
+        foreign.observationSink=[&](const auto& p){if(scalarWriter)scalarWriter->Observation(p);};
+    }
+    if(kind==ManualTakeoverKind::FixedFour)foreign.maximumModelSeconds=.8;
+    auto old=std::move(f.attempt);const auto beforeTime=f.Time();f.owner->CalculateMode=1;f.owner->BeginNativeTraining(foreign,true);
+    const auto& service=f.owner->NativeTrainingController();
+    if(kind==ManualTakeoverKind::FailedBegin) {
+        ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
+        ASSERT_EQ(service.SessionAttempt(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(f.Time(),beforeTime);
+        ASSERT_TRUE(service.CompositeSourceBinding().isEmpty()); // Failed BEFORE any service-owned actor exists.
+    } else {
+        ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();ASSERT_EQ(service.SessionAttempt(),1u);
+        ASSERT_EQ(service.Plan().protocol.schemaVersion,kind==ManualTakeoverKind::ScalarThree?3u:4u);
+        ServiceTicks(f);ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_GT(f.Time(),beforeTime);
+        ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
+        EXPECT_FALSE(service.Search() && service.Search()->AppliedEdits());
+        if(kind==ManualTakeoverKind::ScalarThree) {
+            ASSERT_GT(foreignPrepared,0u);ASSERT_GT(foreignSamples,0u);ASSERT_FALSE(service.ObservedPackets().empty());
+            if(scalarWriter)SavePortableObject((name+"/foreign-scalar3").c_str(),"artifacts.json",{{"primary_files",scalarWriter->FinalizeWithPrefix("foreign_scalar3_trial_")}});
+        } else {
+            ASSERT_GT(service.CompositeNativeProbes(),0u);
+            SaveCompositeArchive(EncodeNativeCompositeTrainingArchive(service),(name+"/foreign-fixed4").c_str());
+        }
+    }
+    ASSERT_TRUE(life.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Revision(),beforeRevision);
+    ASSERT_EQ(f.owner->OwnedNativeCapacitanceState(),beforeC0);
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),neuron.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get(),dataset.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
+    const auto afterSource=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterSource["valid"].toBool());ASSERT_EQ(afterSource["model"],beforeSource["model"]);
+    const auto replay=DecodeNativeCompositeTrainingArchive(historical.document);ASSERT_EQ(replay.Records().back().semanticProofId,pending.SemanticProofId());
+    ASSERT_LT(f.Time()-record.startModel,record.maximumGroupModelSeconds);ASSERT_LT(Wall()-record.startWall,record.maximumGroupWallSeconds);
+    ASSERT_LT(f.Time()-earliestAttemptModel,record.attemptLimits.maximumModelSeconds);ASSERT_LT(Wall()-earliestAttemptWall,record.attemptLimits.maximumWallSeconds);
+    final.ConsumeCandidateWindow(pending,beforeRevision);
+    QJsonArray rejections;for(const auto& r:final.Rejected())rejections.append(QString::fromStdString(r.reason));
+    SavePortableObject(name.c_str(),"actual-authority-boundary.json",{{"kind","manual_control_lifetime_other_service_boundary"},{"schema_version",1},
+        {"case",int(kind)},{"foreign_state",NativeTrainingStateName(service.State())},{"foreign_outcome",TrainingStatusName(service.Outcome())},
+        {"foreign_declared_protocol",EncodeVerificationProtocol(foreign.protocol)},
+        {"foreign_actual_protocol",kind==ManualTakeoverKind::FailedBegin?QJsonValue(QJsonValue::Null):QJsonValue(EncodeVerificationProtocol(service.Plan().protocol))},
+        {"foreign_maximum_model_seconds",foreign.maximumModelSeconds},{"foreign_maximum_wall_seconds",foreign.maximumWallSeconds},
+        {"foreign_reason",QString::fromStdString(service.Reason())},{"foreign_session_attempt",double(service.SessionAttempt())},
+        {"foreign_prepared",double(foreignPrepared)},{"foreign_sampled_frames",double(foreignSamples)},
+        {"actual_final_status",VerificationStatusName(final.Status())},{"actual_accepted_inputs",double(final.AcceptedInputs())},{"rejections",rejections},
+        {"historical_archive_replayed",true},{"actual_need",f.owner->IsNeedToTrain.GetData()},
+        {"actual_model_revision",QString::fromStdString(f.Revision())},{"native_time",f.Time()},{"group_start_model",record.startModel},
+        {"group_model_limit",record.maximumGroupModelSeconds},{"actual_group_wall_elapsed",Wall()-record.startWall},{"group_wall_limit",record.maximumGroupWallSeconds}});
+    SaveCompositeBoundary(f,name.c_str());EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+    ASSERT_FALSE(final.Rejected().empty());EXPECT_EQ(final.Rejected().back().reason,"native_training_owner_control_replaced");
+}
+}
+TEST(NativeManualControlLifetime,ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearner>(ManualTakeoverKind::FailedBegin);}
+TEST(NativeManualControlLifetime,BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearnerBranch>(ManualTakeoverKind::FailedBegin);}
+TEST(NativeManualControlLifetime,ClassicActualScalar3TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearner>(ManualTakeoverKind::ScalarThree);}
+TEST(NativeManualControlLifetime,BranchActualScalar3TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearnerBranch>(ManualTakeoverKind::ScalarThree);}
+TEST(NativeManualControlLifetime,ClassicActualFixed4TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearner>(ManualTakeoverKind::FixedFour);}
+TEST(NativeManualControlLifetime,BranchActualFixed4TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearnerBranch>(ManualTakeoverKind::FixedFour);}
+
+namespace {
+template<class Owner> void WindowManualOwnedEditAllowsFreshPreparation() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    const auto family=f.attempt->OwnerFamilyBinding(),origin=f.attempt->SourceOrigin();
+    VerificationConfig oldConfig{"candidate-attempt/final/1",f.Revision(),4,0,0};oldConfig.tolerances.sync=.2;
+    FinalVerificationSession old(refs,*f.attempt->CandidateWindowReferences(),oldConfig);const auto request=old.NextRequest();ASSERT_TRUE(request);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){old.ArmCandidateWindow(p);},{},30.,3600.);
+    ASSERT_TRUE(f.attempt->Measurement());const auto pending=*f.attempt->Measurement();const auto cached=f.Revision();SaveCandidateWindowGroup(f,"before-own-edit");
+    auto current=f.owner->ReadNativeParameters();current[0].length=3;
+    const auto changed=f.owner->ApplyNativeParameters(current);ASSERT_EQ(changed.status,NativeEditStatus::Applied)<<changed.reason;ASSERT_NE(f.Revision(),cached);
+    old.ConsumeCandidateWindow(pending,cached);ASSERT_EQ(old.AcceptedInputs(),0u);ASSERT_EQ(old.Status(),VerificationStatus::InvalidObservation);
+    ASSERT_FALSE(old.Rejected().empty());EXPECT_NE(old.Rejected().back().reason,"native_training_owner_control_replaced");
+    EXPECT_EQ(f.attempt->OwnerFamilyBinding(),family);EXPECT_EQ(f.attempt->SourceOrigin(),origin);
+    VerificationConfig freshConfig{"candidate-attempt/final/2",f.Revision(),4,0,1};freshConfig.tolerances.sync=.2;
+    FinalVerificationSession fresh(refs,*f.attempt->CandidateWindowReferences(),freshConfig);std::size_t inputs=0;
+    while(const auto next=fresh.NextRequest()) {
+        f.Run(*next,CompositeMeasurementPurpose::Final,[&](const auto& p){fresh.ArmCandidateWindow(p);},{},30.,3600.);
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();SaveCandidateWindowGroup(f,"after-own-edit-final-"+std::to_string(++inputs));
+        fresh.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());
+    }
+    ASSERT_EQ(inputs,2u);ASSERT_EQ(fresh.AcceptedInputs(),2u);ASSERT_TRUE(fresh.Certificate());
+    EXPECT_TRUE(fresh.Status()==VerificationStatus::Exact || fresh.Status()==VerificationStatus::OutsideTolerance);
+    EXPECT_EQ(fresh.Certificate()->ReferenceModelRevision(),refs.InitialModelRevision());EXPECT_NE(fresh.Certificate()->ModelRevision(),refs.InitialModelRevision());
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/own-edit":"classic-window-control-lifetime/own-edit";
+    SavePortableObject(name,"actual-owned-edit.json",{{"kind","manual_owned_edit_control_lifetime"},{"schema_version",1},
+        {"old_rejection_reason",QString::fromStdString(old.Rejected().back().reason)},{"actual_fresh_status",VerificationStatusName(fresh.Status())},
+        {"actual_fresh_accepted_inputs",double(fresh.AcceptedInputs())},{"initial_model_revision",QString::fromStdString(refs.InitialModelRevision())},
+        {"actual_current_model_revision",QString::fromStdString(f.Revision())},{"family_preserved",f.attempt->OwnerFamilyBinding()==family},
+        {"source_origin_preserved",f.attempt->SourceOrigin()==origin}});
+    SaveWindowCoreCertificate(f,"own-controlled-edit-new-preparation",*fresh.Certificate());
+}
+
+template<class Owner> void WindowManualOpenArmAfterFailedBeginIsRejected() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto foreign=ActualWindowServicePlan(f,.2,false);foreign.maximumReferenceProbes=0;
+    const auto refs=CaptureWindowReferences(f);VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);const auto first=final.NextRequest();ASSERT_TRUE(first);
+    f.Run(*first,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},30.,3600.);
+    ASSERT_TRUE(f.attempt->Measurement());final.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());ASSERT_EQ(final.AcceptedInputs(),1u);
+    SaveCandidateWindowGroup(f,"open-arm-prior-accepted");const auto next=final.NextRequest();ASSERT_TRUE(next);ASSERT_EQ(next->inputIndex,1u);
+    const auto base=f.Revision();const auto life=f.owner->ObserveLifecycle();bool reached=false;
+    f.Run(*next,CompositeMeasurementPurpose::Final,[&](const auto& prepared){
+        reached=true;ASSERT_TRUE(f.attempt->Running());ASSERT_EQ(f.Revision(),base); // Branch input1 is the actual baseline route.
+        f.owner->BeginNativeTraining(foreign,true);ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Finished);
+        ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::InvalidModel);ASSERT_TRUE(life.IsCurrent());
+        ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Revision(),base);ASSERT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+        // This is still the ORIGINAL open group's actual prepared callback,
+        // not Arm of a closed token (which would fail for an unrelated reason).
+        final.ArmCandidateWindow(prepared);
+    },{},30.,3600.);
+    ASSERT_TRUE(reached);SaveCandidateWindowGroup(f,"open-arm-after-control-takeover");
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/open-arm":"classic-window-control-lifetime/open-arm";
+    QJsonArray reasons;for(const auto& r:final.Rejected())reasons.append(QString::fromStdString(r.reason));
+    SavePortableObject(name,"actual-open-arm.json",{{"kind","native_manual_open_arm_after_failed_begin"},{"schema_version",1},
+        {"actual_final_status",VerificationStatusName(final.Status())},{"accepted_inputs_before",1},{"actual_accepted_inputs_after",double(final.AcceptedInputs())},
+        {"rejections",reasons},{"actual_owner_lifecycle_current",life.IsCurrent()},{"actual_model_revision",QString::fromStdString(f.Revision())}});
+    SaveCompositeBoundary(f,name);EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),1u);EXPECT_FALSE(final.Certificate());
+    ASSERT_FALSE(final.Rejected().empty());EXPECT_EQ(final.Rejected().back().reason,"native_training_owner_control_replaced");
+}
+
+template<class Owner> void WindowManualBeforeQueueTakeoverDoesNotQueueOldTrial() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto foreign=ActualWindowServicePlan(f,.2,false);foreign.maximumReferenceProbes=0;
+    CaptureWindowReferences(f);const auto before=f.Revision();const auto life=f.owner->ObserveLifecycle();const auto nativeBefore=f.attempt->IssuedNativeProbes();
+    const auto modelTime=f.Time(),wall=Wall();std::size_t callbacks=0;
+    f.attempt->StartMeasurement(f.Request(0,"candidate-attempt","candidate-attempt/search/999"),CompositeMeasurementPurpose::Search,
+        f.prototype,30.,3600.,modelTime,wall,{},[&](const auto&){
+            ++callbacks;f.owner->BeginNativeTraining(foreign,true);ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::InvalidModel);
+        });
+    // The real before-queue boundary invokes application code before touching
+    // the executor. No nested Calculate and no artificial native tick occurs.
+    f.attempt->BeforeTick(f.Time(),Wall());
+    ASSERT_EQ(callbacks,1u);ASSERT_TRUE(life.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Revision(),before);ASSERT_EQ(f.Time(),modelTime);
+    EXPECT_FALSE(f.attempt->Running());EXPECT_EQ(f.attempt->IssuedNativeProbes(),nativeBefore);EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);
+    EXPECT_FALSE(f.attempt->Measurement());ASSERT_TRUE(f.attempt->Group());
+    EXPECT_EQ(f.attempt->Group()->reason,"native_training_owner_control_replaced");
+    EXPECT_NE(f.attempt->RejectionReason().find("native_training_owner_control_replaced"),std::string::npos);
+    const auto record=f.attempt->Record();EXPECT_TRUE(record.rawTrials.empty());EXPECT_EQ(record.sampledFrames,0u);SaveCandidateWindowGroup(f,"before-queue-takeover");
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/before-queue":"classic-window-control-lifetime/before-queue";
+    SavePortableObject(name,"actual-before-queue.json",{{"kind","native_manual_before_queue_takeover"},{"schema_version",1},
+        {"callback_count",double(callbacks)},{"old_native_probes_before",double(nativeBefore)},{"old_native_probes_after",double(f.attempt->IssuedNativeProbes())},
+        {"actual_probe_state",NativeProbeStatusName(f.owner->NativeProbeState())},{"reason",QString::fromStdString(f.attempt->RejectionReason())},
+        {"actual_group_reason",QString::fromStdString(f.attempt->Group()->reason)},
+        {"actual_sampled_frames",double(record.sampledFrames)},{"measurement_created",bool(f.attempt->Measurement())}});
+    SaveCompositeBoundary(f,name);
+}
+}
+TEST(NativeManualControlLifetime,ClassicNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease){WindowManualClosedMeasurementAuthority<NNeuronTimeLearner>(true,true);}
+TEST(NativeManualControlLifetime,BranchNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeManualControlLifetime,ClassicOwnControlledEditAllowsFreshPreparedFinal){WindowManualOwnedEditAllowsFreshPreparation<NNeuronTimeLearner>();}
+TEST(NativeManualControlLifetime,BranchOwnControlledEditAllowsFreshPreparedFinal){WindowManualOwnedEditAllowsFreshPreparation<NNeuronTimeLearnerBranch>();}
+TEST(NativeManualControlLifetime,ClassicOpenArmCannotOutliveFailedBegin){WindowManualOpenArmAfterFailedBeginIsRejected<NNeuronTimeLearner>();}
+TEST(NativeManualControlLifetime,BranchOpenArmCannotOutliveFailedBegin){WindowManualOpenArmAfterFailedBeginIsRejected<NNeuronTimeLearnerBranch>();}
+TEST(NativeManualControlLifetime,ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial){WindowManualBeforeQueueTakeoverDoesNotQueueOldTrial<NNeuronTimeLearner>();}
+TEST(NativeManualControlLifetime,BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial){WindowManualBeforeQueueTakeoverDoesNotQueueOldTrial<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto cold=CompositeCold(f);ConfigurePortableCold(f);
+    // A real stopped package5 with immutable source but ZERO native groups.
+    // Restore installs portable proof/plan4, never an executable native actor.
+    f.owner->BeginNativeTraining(MakeConfiguredNativeTrainingPlan(cold),true);
+    ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::CapturingReferences);
+    f.owner->IsNeedToTrain=false;ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+    ASSERT_EQ(f.owner->NativeTrainingController().CompositeNativeProbes(),0u);
+    const auto package=f.owner->ExportNativeLearnedState(CompositePackageImplementation);
+    ASSERT_EQ(package["schema_version"],QJsonValue(5));ASSERT_TRUE(package["certificate"].isNull());ASSERT_EQ(package["reference_complete"],QJsonValue(false));
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/no-actor-interrupt":"classic-window-control-lifetime/no-actor-interrupt";
+    SavePortableBoundary(f,(std::string(name)+"/actual-stopped-source").c_str(),package);
+    const auto imported=f.owner->ImportNativeLearnedState(package,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
+    ASSERT_EQ(f.owner->ControllerVersion.GetData(),2);const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.Plan().protocol.schemaVersion,4u);
+    ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_FALSE(service.Search());
+    const auto importedSource=service.CompositeSourceBinding();ASSERT_FALSE(importedSource.isEmpty());
+    f.owner->IsNeedToTrain=true; // V2 edge Reset happens BEFORE the new manual observation.
+    const auto earliest=f.Time(),earliestWall=Wall();EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);const auto request=final.NextRequest();ASSERT_TRUE(request);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},30.,3600.);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();const auto pending=*f.attempt->Measurement();const auto record=f.attempt->Record();
+    SaveCandidateWindowGroup(f,"before-public-empty-actor-interrupt");const auto historical=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    SaveCompositeArchive(historical,(std::string(name)+"/old-manual-journal").c_str());
+    // Queued manual trials suppress V2 autostart. The imported service still
+    // holds only portable proof, not a native actor, throughout these groups.
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);
+    ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
+    const auto life=f.owner->ObserveLifecycle();const auto revision=f.Revision();const auto beforeTime=f.Time();
+    const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    const auto sourceIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(sourceIdentity["valid"].toBool());
+    const auto probeState=f.owner->NativeProbeState();ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    // Existing PUBLIC friend routing4 -> the actual public service method and
+    // BindNativeTraining. No const_cast, private-access hook or UM reset.
+    NativeLearnerLifecycle::InterruptComposite(*f.owner,"manual_control_no_stored_actor");
+    ASSERT_TRUE(life.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Time(),beforeTime);ASSERT_EQ(f.Revision(),revision);
+    ASSERT_EQ(f.owner->NativeProbeState(),probeState);ASSERT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),neuron.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get(),dataset.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
+    const auto afterSourceIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterSourceIdentity["valid"].toBool());
+    ASSERT_EQ(afterSourceIdentity["model"],sourceIdentity["model"]);
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
+    ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);
+    const auto replay=DecodeNativeCompositeTrainingArchive(historical.document);ASSERT_EQ(replay.Records().back().semanticProofId,pending.SemanticProofId());
+    ASSERT_LT(f.Time()-record.startModel,record.maximumGroupModelSeconds);ASSERT_LT(Wall()-record.startWall,record.maximumGroupWallSeconds);
+    ASSERT_LT(f.Time()-earliest,record.attemptLimits.maximumModelSeconds);ASSERT_LT(Wall()-earliestWall,record.attemptLimits.maximumWallSeconds);
+    final.ConsumeCandidateWindow(pending,revision);
+    QJsonArray reasons;for(const auto& r:final.Rejected())reasons.append(QString::fromStdString(r.reason));
+    SavePortableObject(name,"actual-public-interrupt.json",{{"kind","low_level_manual_control_no_stored_service_actor_interrupt"},{"schema_version",1},
+        {"route","actual stopped package5 import -> plan4 portable-only service -> public NativeLearnerLifecycle::InterruptComposite"},
+        {"actual_final_status",VerificationStatusName(final.Status())},{"actual_accepted_inputs",double(final.AcceptedInputs())},{"rejections",reasons},
+        {"owner_lifecycle_current",life.IsCurrent()},{"actual_need",f.owner->IsNeedToTrain.GetData()},
+        {"actual_service_state",NativeTrainingStateName(service.State())},{"actual_service_session",double(service.SessionAttempt())},
+        {"actual_service_native_probes",double(service.CompositeNativeProbes())},{"native_time_before",beforeTime},{"native_time_after",f.Time()},
+        {"actual_group_wall_elapsed",Wall()-record.startWall},{"group_wall_limit",record.maximumGroupWallSeconds}});
+    SaveCompositeBoundary(f,name);EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+    ASSERT_FALSE(final.Rejected().empty());EXPECT_EQ(final.Rejected().back().reason,"native_training_owner_control_replaced");
+}
+}
+TEST(NativeManualControlLifetime,ClassicImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume){WindowManualImportedNoActorPublicInterruptRevokes<NNeuronTimeLearner>();}
+TEST(NativeManualControlLifetime,BranchImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume){WindowManualImportedNoActorPublicInterruptRevokes<NNeuronTimeLearnerBranch>();}

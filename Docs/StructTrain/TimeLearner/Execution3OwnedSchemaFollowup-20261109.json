@@ -1,0 +1,54 @@
+{
+  "kind": "execution3_owning_base_schema_source_followup",
+  "schema_version": 1,
+  "status": "SOURCE_ONLY_UNRUN",
+  "parent_root": "fe331490521e861c0a3dcebce3596e0fe318a1d6",
+  "pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+  "sources": [
+    {
+      "path": "App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h",
+      "git_blob": "1ddd703b8e8651d8a2be42491211d07f7c5e97a0",
+      "bytes": 3533,
+      "sha256": "2cfa56bd9f4b3bc08e1f4c0384efca6b3ab1558abd9b8ca698946fb7059e8b1c"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "git_blob": "b4c7d59a15d2fcc6ab7539e53453d38c45ffe552",
+      "bytes": 298404,
+      "sha256": "e6fe87eee761da802d63a7cddbeea61c9688e326a2115bf3b6cced3aca3ade31"
+    }
+  ],
+  "literal_TU_TEST_count": 342,
+  "new_ids": [
+    "NativeCompositeConsoleArtifacts/BaseSchemasKeepOwningNumericTypeAndAllFieldsThroughBytes"
+  ],
+  "strengthened_ids": [
+    "NativeCompositeConsoleArtifacts/PreflightKnownZeroAccounting",
+    "NativeCompositeConsoleArtifacts/FailedStartNeverInventsArchiveAccounting"
+  ],
+  "wire_output_paths": [
+    "console-envelope-owned/base-1/producer-wire.json",
+    "console-envelope-owned/base-2/producer-wire.json"
+  ],
+  "scope": "production wrapper typed wire and byte roundtrip only; input documents declare no actual successful Train, live finalization or certificate",
+  "baseline_A4_unchanged": true,
+  "decoder_physics_tolerances_unchanged": true,
+  "no_local_build_numeric_server": true,
+  "three_relevant_mutating_same_object_proxy_sites_fixed": [
+    "Pulse ConfiguredNativeTraining cold6",
+    "Pulse ConfiguredNativeTraining cold7",
+    "Root WrapNativeCompositeExecution execution3"
+  ],
+  "remaining_alias_audit_examples": [
+    {
+      "path": "Pulse NativeOwnedPostTunePhaseImpl.h",
+      "expression": "internal[key]=internal[key].toInt()+1",
+      "classification": "scalar materialized before insertion; no QJsonValueRef RHS survives"
+    },
+    {
+      "path": "Root CandidateWindowDeclarations test",
+      "expression": "first[hard_last_frame]=first[hard_first_frame]",
+      "classification": "both existing keys in test; not producer missing-key insertion"
+    }
+  ]
+}

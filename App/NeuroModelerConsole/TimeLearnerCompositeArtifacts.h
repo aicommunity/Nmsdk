@@ -28,7 +28,9 @@ inline QJsonValue PublishNativeCompositeArchive(const QString& output,const QJso
 inline QJsonObject WrapNativeCompositeExecution(bool composite,QJsonObject base,const QJsonObject& package,const QJsonValue& archive,
     const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false) {
     if(!composite)return Signed(base);
-    base["base_schema_version"]=base["schema_version"];base["schema_version"]=3;
+    // Preserve an owning value before insertion can shift a QJsonValueRef.
+    const QJsonValue baseSchema=base.value("schema_version");
+    base["base_schema_version"]=baseSchema;base["schema_version"]=3;
     base["measurement_method"]=NMSDK::TimeLearner::DeclaredWindowBasinResult::MethodId();base["measurement_archive"]=archive;
     base["model_semantic_hash"]=actualModel;base["source_origin"]=QJsonValue(QJsonValue::Null);
     QJsonValue attempt(QJsonValue::Null),history(QJsonValue::Null);
