@@ -66,7 +66,7 @@ Lease освобождает контроллер только через `recov
 
 ## Подготовленные проверки
 
-Новый metadata-only inventory: 11 `OwnedPythonJobTest` и существующие 6
+Новый metadata-only inventory: 12 `OwnedPythonJobTest` и существующие 6
 `StaticArchiveCleanupTest` (точный class name читается из actual pinned source при
 составлении suite). Проверяются strict schema/limits/digests, отказ native action
 и traversal, callbacks до side effects, закрытый observer pipe, symlink parent,
@@ -78,8 +78,13 @@ bound group при исключении каждого callable observer hook. �
 `76ffc4c566a7c6113eb5131de398467103e320fa`: 67 wire +39 collector +30 declared time
 scales +7 lossless ConfigDocument. Для последнего передаются как fixture реальные
 Project.ini из pinned Bin, с отдельным immutable manifest. CLI проверяется из этого
-же source и должен сохранять conditional/unknown semantics. Успех адаптера17 не
+же source и должен сохранять conditional/unknown semantics. Успех адаптера18 не
 подменяет успех143, удаление13 AR или перенос старых Bin entrypoints.
 
 На момент подготовки документа все эти новые inventories только сформированы
 по исходникам; серверный PASS, удаление AR и retirement Bin2 не утверждаются.
+
+Первый bootstrap17 @204ec3c завершился отказом до тестов: suite file был передан
+как reservation resource, хотя штатный registry принимает directory trees.
+Отрицательная попытка сохранена; новая версия резервирует родительский каталог
+suite и проверяет этот контракт настоящим Reservations fixture (inventory18).

@@ -157,6 +157,16 @@ def _fixture_snapshot(suite, bindings):
     return result
 
 
+def _validation_resources(operation, job):
+    # Reservations owns directory trees, never individual configuration files.
+    resources = [{'path': str(SOURCE), 'access': 'read'}, {'path': operation['source']['path'], 'access': 'read'},
+                 {'path': str(Path(operation['suite']['path']).parent), 'access': 'read'},
+                 *({'path': p, 'access': 'read'} for p in operation['fixtures'].values()),
+                 {'path': str(job), 'access': 'write'}]
+    resources = [{'path': str(_canonical(Path(r['path']))), 'access': r['access']} for r in resources]
+    return list({(r['path'], r['access']): r for r in resources}.values())
+
+
 def _worker(request_path):
     raw, _ = _frozen(Path(request_path), 1024*1024)
     request = validate_request(_json(raw));base, job = _paths(request)
@@ -182,12 +192,7 @@ def _worker(request_path):
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     operation = request['operation'];resources = [{'path': str(base), 'access': 'write'}]
     if operation['kind'] == 'python-validation':
-        resources = [{'path': str(SOURCE), 'access': 'read'}, {'path': operation['source']['path'], 'access': 'read'},
-                     {'path': operation['suite']['path'], 'access': 'read'},
-                     *({'path': p, 'access': 'read'} for p in operation['fixtures'].values()),
-                     {'path': str(job), 'access': 'write'}]
-        resources = [{'path': str(_canonical(Path(r['path']))), 'access': r['access']} for r in resources]
-        resources = list({(r['path'], r['access']): r for r in resources}.values())
+        resources = _validation_resources(operation, job)
     token = None;stop = threading.Event();errors = [];thread = None;passed = False;before = None
     def emit(name, value):
         _write(output/name, value)

@@ -54,6 +54,26 @@ class OwnedPythonJobTest(unittest.TestCase):
         document = request();document['operation']['source']['commit'] = 'HEAD'
         with self.assertRaises(EvidenceError): subject.validate_request(document)
 
+    def test_validation_leases_suite_parent_as_real_directory_tree(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);source = root/'source';source.mkdir()
+            requests = root/'requests';requests.mkdir();suite = requests/'suite.json';suite.write_text('{}')
+            fixture = root/'fixture';fixture.mkdir();job = root/'job';job.mkdir()
+            operation = {'source': {'path': str(source)}, 'suite': {'path': str(suite)},
+                         'fixtures': {'TIMELEARNER_CONFIG_CORPUS': str(fixture)}}
+            registry = subject.Reservations(root/'registry.sqlite3')
+            with patch.object(subject, 'SOURCE', source):
+                resources = subject._validation_resources(operation, job)
+            lease = registry.reserve('actual-directory-tree-contract', resources)
+            try:
+                registry.validate_paths(lease['token'])
+                self.assertEqual({r['canonical_path'] for r in lease['resources']},
+                                 {str(source), str(requests), str(fixture), str(job)})
+                self.assertTrue(all(Path(r['canonical_path']).is_dir() for r in lease['resources']))
+                self.assertEqual(sum(r['access'] == 'write' for r in lease['resources']), 1)
+            finally:
+                registry.release(lease['token'], note='Metadata fixture completed; no contained model or build.')
+
     def test_callbacks_are_checked_before_any_runtime_or_output_side_effect(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
