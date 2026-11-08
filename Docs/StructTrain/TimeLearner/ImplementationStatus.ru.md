@@ -18,6 +18,7 @@ unit, invocation, PID и start ticks. В скопированной inventory-д
 обнаружен старый root SHA; raw-файл сохраняется, actual source closure
 проверена отдельно. Это требует явной errata и независимого Git-derived
 inventory; согласованность production preparation пока не принята.
+[Обнаруженные ошибки и обязательное исправление подготовки](NativePreparationMetadataReview-20261108.ru.md).
 M40 ASan206 на предыдущем pin:143 passed,1 failed,62 не запускались;
 ошибка декларации протокола подтверждена, исходники и57 закрытых групп
 независимо проверены. [Квитанция](M40CompositeArchiveA2NegativeVerification.json).
