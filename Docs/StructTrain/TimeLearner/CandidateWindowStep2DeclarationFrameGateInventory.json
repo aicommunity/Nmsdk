@@ -2,7 +2,7 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "e277b159198433cdb607788b91a3e9b1fd48c7b0",
+  "pulse": "f9e5e86e84b44379fb25c249e6e23f79d5b317b0",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 120617,
-      "sha256": "f8fb824ed43c54189c3b82203dc4d4e902db385d2f82b65eee2c428e1d1ca260",
+      "bytes": 142742,
+      "sha256": "6c09c1d09861c6da37bfabc51056c68a27cdbb86252262d586fbde84bb00bb22",
       "expected_test_ids": [
         "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
         "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
@@ -79,8 +79,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 120617,
-      "sha256": "f8fb824ed43c54189c3b82203dc4d4e902db385d2f82b65eee2c428e1d1ca260",
+      "bytes": 142742,
+      "sha256": "6c09c1d09861c6da37bfabc51056c68a27cdbb86252262d586fbde84bb00bb22",
       "expected_test_ids": [
         "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
         "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
@@ -99,7 +99,7 @@
   ],
   "expected_count": 56,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 296,
+  "planned_cumulative_scope": 338,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [
@@ -157,5 +157,11 @@
       "Classic",
       "Branch"
     ]
+  },
+  "cancellation_baseline_source": {
+    "root": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+    "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+    "expected_cases": 248,
+    "runtime_accepted": false
   }
 }
