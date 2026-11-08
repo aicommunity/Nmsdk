@@ -1609,10 +1609,11 @@ template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner
         {"reason",QString::fromStdString(record.reason)},{"selection",record.selection?QJsonValue(EncodeNativeCompositeSelection(*record.selection)):QJsonValue(QJsonValue::Null)}}).toJson());
     SaveCompositeBoundary(f,directory.c_str());
 }
-template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true,const std::string& prefix="reference") {
+template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true,const std::string& prefix="reference",
+    const std::string& attemptId="candidate-attempt") {
     f.referenceMeasurements.clear();
     for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
-        const std::string run="candidate-attempt/capture/1";
+        const std::string run=attemptId+"/capture/1";
         f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
         if(save)SaveCandidateWindowGroup(f,prefix+"-"+std::to_string(i));
         Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
@@ -2603,3 +2604,91 @@ TEST(NativeCandidateWindowManualAuthority,ClassicForeignBeginThenFinishedDoesNot
 TEST(NativeCandidateWindowManualAuthority,BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(true);}
 TEST(NativeCandidateWindowManualAuthority,ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable){WindowManualClosedMeasurementAuthority<NNeuronTimeLearner>(false);}
 TEST(NativeCandidateWindowManualAuthority,BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(false);}
+
+namespace {
+enum class ManualTakeoverKind { FailedBegin,ScalarThree,FixedFour };
+template<class Owner> void WindowManualOtherServiceTakeover(ManualTakeoverKind kind) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto legacy=CompositeCold(f);
+    if(kind==ManualTakeoverKind::ScalarThree)legacy.composite.reset();
+    auto foreign=MakeConfiguredNativeTrainingPlan(legacy);
+    const auto earliestAttemptModel=f.Time(),earliestAttemptWall=Wall();
+    if(kind==ManualTakeoverKind::FailedBegin) {
+        foreign=ActualWindowServicePlan(f,.2,false);foreign.maximumReferenceProbes=0;
+    } else EnableCandidateWindow(f);
+    const auto refs=CaptureWindowReferences(f);VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);const auto request=final.NextRequest();ASSERT_TRUE(request);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},30.,3600.);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();const auto pending=*f.attempt->Measurement();const auto record=f.attempt->Record();
+    const auto beforeRevision=f.Revision();const auto beforeC0=f.owner->OwnedNativeCapacitanceState();
+    const auto life=f.owner->ObserveLifecycle();const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    const auto beforeSource=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(beforeSource["valid"].toBool());ASSERT_TRUE(beforeC0.isEmpty());
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/":"classic-window-control-lifetime/")+
+        (kind==ManualTakeoverKind::FailedBegin?"failed-begin":kind==ManualTakeoverKind::ScalarThree?"scalar3-takeover":"fixed4-takeover");
+    SaveCandidateWindowGroup(f,"old-before-other-service");const auto historical=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    SaveCompositeArchive(historical,(name+"/old-journal").c_str());
+    std::size_t foreignSamples=0,foreignPrepared=0;std::unique_ptr<NmsdkWorker::EvidenceWriter> scalarWriter;
+    if(kind==ManualTakeoverKind::ScalarThree) {
+        // A real scalar3 source/probe dispatch, stopped by ACTUAL model time.
+        // No Exact claim or invented complete scalar observation is needed.
+        foreign.maximumModelSeconds=.03;foreign.maximumWallSeconds=7200.;
+        if(const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT")) {
+            const auto directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name)+"/foreign-scalar3";
+            Require(QDir().mkpath(directory),"control_lifetime_scalar_directory");
+            scalarWriter=std::make_unique<NmsdkWorker::EvidenceWriter>(directory,NativeCompositeFixture<Owner>::branch?1u:2u);
+        }
+        foreign.probe.onPrepared=[&](const auto& p,const auto& s){++foreignPrepared;if(scalarWriter)scalarWriter->Prepared(p,s);};
+        foreign.probe.onSample=[&](const auto& s){++foreignSamples;if(scalarWriter)scalarWriter->Sample(s);};
+        foreign.observationSink=[&](const auto& p){if(scalarWriter)scalarWriter->Observation(p);};
+    }
+    if(kind==ManualTakeoverKind::FixedFour)foreign.maximumModelSeconds=.8;
+    auto old=std::move(f.attempt);const auto beforeTime=f.Time();f.owner->CalculateMode=1;f.owner->BeginNativeTraining(foreign,true);
+    const auto& service=f.owner->NativeTrainingController();
+    if(kind==ManualTakeoverKind::FailedBegin) {
+        ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::InvalidModel);
+        ASSERT_EQ(service.SessionAttempt(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(f.Time(),beforeTime);
+        ASSERT_TRUE(service.CompositeSourceBinding().isEmpty()); // Failed BEFORE any service-owned actor exists.
+    } else {
+        ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();ASSERT_EQ(service.SessionAttempt(),1u);
+        ASSERT_EQ(service.Plan().protocol.schemaVersion,kind==ManualTakeoverKind::ScalarThree?3u:4u);
+        ServiceTicks(f);ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_GT(f.Time(),beforeTime);
+        ASSERT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();
+        EXPECT_FALSE(service.Search() && service.Search()->AppliedEdits());
+        if(kind==ManualTakeoverKind::ScalarThree) {
+            ASSERT_GT(foreignPrepared,0u);ASSERT_GT(foreignSamples,0u);ASSERT_FALSE(service.ObservedPackets().empty());
+            if(scalarWriter)SavePortableObject((name+"/foreign-scalar3").c_str(),"artifacts.json",{{"primary_files",scalarWriter->FinalizeWithPrefix("foreign_scalar3_trial_")}});
+        } else {
+            ASSERT_GT(service.CompositeNativeProbes(),0u);
+            SaveCompositeArchive(EncodeNativeCompositeTrainingArchive(service),(name+"/foreign-fixed4").c_str());
+        }
+    }
+    ASSERT_TRUE(life.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Revision(),beforeRevision);
+    ASSERT_EQ(f.owner->OwnedNativeCapacitanceState(),beforeC0);
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),neuron.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get(),dataset.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
+    const auto afterSource=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterSource["valid"].toBool());ASSERT_EQ(afterSource["model"],beforeSource["model"]);
+    const auto replay=DecodeNativeCompositeTrainingArchive(historical.document);ASSERT_EQ(replay.Records().back().semanticProofId,pending.SemanticProofId());
+    ASSERT_LT(f.Time()-record.startModel,record.maximumGroupModelSeconds);ASSERT_LT(Wall()-record.startWall,record.maximumGroupWallSeconds);
+    ASSERT_LT(f.Time()-earliestAttemptModel,record.attemptLimits.maximumModelSeconds);ASSERT_LT(Wall()-earliestAttemptWall,record.attemptLimits.maximumWallSeconds);
+    final.ConsumeCandidateWindow(pending,beforeRevision);
+    QJsonArray rejections;for(const auto& r:final.Rejected())rejections.append(QString::fromStdString(r.reason));
+    SavePortableObject(name.c_str(),"actual-authority-boundary.json",{{"kind","manual_control_lifetime_other_service_boundary"},{"schema_version",1},
+        {"case",int(kind)},{"foreign_state",NativeTrainingStateName(service.State())},{"foreign_outcome",TrainingStatusName(service.Outcome())},
+        {"foreign_reason",QString::fromStdString(service.Reason())},{"foreign_session_attempt",double(service.SessionAttempt())},
+        {"foreign_prepared",double(foreignPrepared)},{"foreign_sampled_frames",double(foreignSamples)},
+        {"actual_final_status",VerificationStatusName(final.Status())},{"actual_accepted_inputs",double(final.AcceptedInputs())},{"rejections",rejections},
+        {"historical_archive_replayed",true},{"actual_need",f.owner->IsNeedToTrain.GetData()},
+        {"actual_model_revision",QString::fromStdString(f.Revision())},{"native_time",f.Time()},{"group_start_model",record.startModel},
+        {"group_model_limit",record.maximumGroupModelSeconds},{"actual_group_wall_elapsed",Wall()-record.startWall},{"group_wall_limit",record.maximumGroupWallSeconds}});
+    SaveCompositeBoundary(f,name.c_str());EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+    ASSERT_FALSE(final.Rejected().empty());EXPECT_EQ(final.Rejected().back().reason,"native_training_owner_control_replaced");
+}
+}
+TEST(NativeManualControlLifetime,ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearner>(ManualTakeoverKind::FailedBegin);}
+TEST(NativeManualControlLifetime,BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearnerBranch>(ManualTakeoverKind::FailedBegin);}
+TEST(NativeManualControlLifetime,ClassicActualScalar3TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearner>(ManualTakeoverKind::ScalarThree);}
+TEST(NativeManualControlLifetime,BranchActualScalar3TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearnerBranch>(ManualTakeoverKind::ScalarThree);}
+TEST(NativeManualControlLifetime,ClassicActualFixed4TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearner>(ManualTakeoverKind::FixedFour);}
+TEST(NativeManualControlLifetime,BranchActualFixed4TakeoverRevokesClosedConsume){WindowManualOtherServiceTakeover<NNeuronTimeLearnerBranch>(ManualTakeoverKind::FixedFour);}

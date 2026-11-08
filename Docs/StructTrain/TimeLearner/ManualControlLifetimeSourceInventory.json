@@ -1,0 +1,64 @@
+{
+  "kind": "native_manual_control_lifetime_source_inventory",
+  "schema_version": 1,
+  "status": "source_preparation_only_unrun",
+  "root_base": "c49d59ade0e62bc1acad5de8e53f93eba47bde8a",
+  "pulse": "353f17baf505edf92ff39fe40422b9dcea023045",
+  "unfixed_pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
+  "unfixed_root_reproducer": "f74b9fbf9ece38668396c21fa569d688f595bb05",
+  "target": "Test_PulseLib_StorageComponents",
+  "new_expected_count": 6,
+  "new_expected_ids": [
+    "NativeManualControlLifetime.ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume",
+    "NativeManualControlLifetime.BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume",
+    "NativeManualControlLifetime.ClassicActualScalar3TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.BranchActualScalar3TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.ClassicActualFixed4TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.BranchActualFixed4TakeoverRevokesClosedConsume"
+  ],
+  "repaired_f74_expected_count": 4,
+  "repaired_f74_expected_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
+  ],
+  "scoped_expected_count": 10,
+  "scoped_expected_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeManualControlLifetime.ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume",
+    "NativeManualControlLifetime.BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume",
+    "NativeManualControlLifetime.ClassicActualScalar3TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.BranchActualScalar3TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.ClassicActualFixed4TakeoverRevokesClosedConsume",
+    "NativeManualControlLifetime.BranchActualFixed4TakeoverRevokesClosedConsume"
+  ],
+  "test_source": {
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "git_blob_sha256": "b146ce7b94617449a8e748c5bff92732e24f20c9826a969f13a900ab325f6547",
+    "bytes": 263098,
+    "literal_tests": 325
+  },
+  "local_build_or_numeric": false,
+  "server_dispatch_or_cache_update": false,
+  "same_graph_source_need_lifecycle_and_C0_asserted": true,
+  "actual_group_and_attempt_model_wall_caps_asserted": true,
+  "rejection_reason": "native_training_owner_control_replaced",
+  "actual_source_primary_retained": true,
+  "scalar3_writer": "production EvidenceWriter",
+  "fixed4_writer": "production archive1",
+  "historical_data_replayed_after_takeover": true,
+  "expected_accepted_inputs_after_rejected_consume": 0,
+  "native_dimensions": [
+    2
+  ],
+  "frequency_hz": 2000,
+  "engineering_sync": 0.2,
+  "amplitude_absolute": 1e-05,
+  "minimum_amplitude": 1e-06,
+  "full248_or470_accepted_by_this_inventory": false,
+  "scope": "source prepared actual-native control-lifetime tests, not scientific convergence or completed package6"
+}
