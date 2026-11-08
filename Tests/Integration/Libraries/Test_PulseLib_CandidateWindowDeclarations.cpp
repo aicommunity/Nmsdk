@@ -4,6 +4,8 @@
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/CompositeTrainingDeclarations.h"
 #include "TimeLearner/BoundedTraining.h"
+#include "TimeLearner/ConfiguredNativeTraining.h"
+#include <QJsonDocument>
 #include <QJsonArray>
 #include <limits>
 #include <type_traits>
@@ -131,4 +133,95 @@ TEST(CandidateWindowDeclarations,StandalonePolicyRejectsInvalidHardIntervalAndWi
 TEST(CandidateWindowDeclarations,BoundedTrainingExplicitlyBlocksProtocol5BeforeReferenceFactoryExists) {
     try {ValidateBoundedTrainingInputs(DeclaredProtocol(),BoundedTrainingConfig{},{});FAIL()<<"protocol5 accepted by legacy bounded path";}
     catch(const std::invalid_argument& e){EXPECT_STREQ(e.what(),"candidate_window_training_requires_proposal_admission");}
+}
+
+namespace {
+ConfiguredNativeTraining Cold7Declaration() {
+    const auto p=DeclaredProtocol();ConfiguredNativeTraining c;c.model.frequencyHz=2000;c.model.neuronClass="declared-neuron-storage-image";
+    c.model.inputs={{2,1,100.},{1,1,100.}};c.model.initialIsi={.01,.08};c.model.editPolicy.maximumCableLength=8;
+    c.stimulusProfile=*p.stimulusProfile;c.runId="cold7-declaration";c.protocolRevision=p.revision;c.sampleId=p.sampleId;
+    c.duration=.17;c.maximumSampleGap=p.maximumSampleGap;c.maximumSamples=512;c.maximumReferenceProbes=2;
+    c.maximumModelSeconds=120.;c.maximumWallSeconds=1800.;c.windows={{.009,.07},{.089,.15}};
+    c.search.maximumProbes=64;c.search.maximumEdits=8;c.search.maximumCandidatesPerInput=32;
+    c.search.bounds={{1,8,1,4,1.,1000.},{1,8,1,4,1.,1000.}};
+    NativeCompositeTrainingPolicy common;common.schemaVersion=2;common.contextPolicy=p.candidateWindowMeasurement->contextPolicy;
+    common.geometryPolicy=p.candidateWindowMeasurement->geometryPolicy;common.maximumGroups=64;common.maximumNativeProbes=256;
+    common.maximumTotalSamples=64*2048;common.maximumTotalPrimaryBytes=64*1024*1024;common.maximumGroupModelSeconds=2.;common.maximumGroupWallSeconds=300.;
+    c.composite=common;c.candidateWindowPolicy=p.candidateWindowMeasurement->candidateWindowPolicy;return c;
+}
+}
+TEST(CandidateWindowCold7,ExplicitRoundtripBuildsProtocol5WithOriginalReferenceWindows) {
+    const auto c=Cold7Declaration();const auto wire=EncodeConfiguredNativeTraining(c);const auto plan=MakeConfiguredNativeTrainingPlan(c);
+    EXPECT_EQ(wire["schema_version"],QJsonValue(7));EXPECT_EQ(wire["base_schema_version"],QJsonValue(1));
+    EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    EXPECT_EQ(plan.protocol.schemaVersion,5u);EXPECT_FALSE(plan.protocol.compositeMeasurement);
+    ASSERT_TRUE(plan.protocol.candidateWindowMeasurement);EXPECT_EQ(plan.protocol.candidateWindowMeasurement->referenceInputWindows[0],(CompositeInputWindow{.009,.07}));
+    EXPECT_EQ(plan.protocol.candidateWindowMeasurement->candidateWindowPolicy,*c.candidateWindowPolicy);
+    EXPECT_EQ(plan.search.tolerances.sync,.02);EXPECT_EQ(plan.search.tolerances.amplitudeAbsolute,1e-5);EXPECT_EQ(plan.protocol.minimumAmplitude,1e-6);
+}
+TEST(CandidateWindowCold7,EveryRepeatAndCapacitanceBaseKeepsItsOwnDeclaration) {
+    for(int base=1;base<=4;++base){auto c=Cold7Declaration();if(base>=2)c.search.n0CandidateRepeats=2;
+        if(base>=3){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+        if(base==4)c.search.capacitanceSearch=CapacitanceSearchPolicy{};
+        const auto wire=EncodeConfiguredNativeTraining(c);EXPECT_EQ(wire["base_schema_version"],QJsonValue(base));
+        EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);}
+}
+TEST(CandidateWindowCold7,Cold6RejectsCandidatePolicyInsteadOfPromotingVersion) {
+    auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());wire["schema_version"]=6;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,MissingCommonOrCandidatePolicyCannotUseDefaults) {
+    auto c=Cold7Declaration();c.composite.reset();EXPECT_THROW(EncodeConfiguredNativeTraining(c),std::invalid_argument);
+    auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());auto common=wire["composite_measurement"].toObject();common.remove("candidate_window_policy");
+    wire["composite_measurement"]=common;EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,OldFlatSchemasRefuseNewEnvelopeFields) {
+    for(int schema=1;schema<=4;++schema){auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());wire["schema_version"]=schema;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);}
+}
+TEST(CandidateWindowCold7,BooleanSchemaAndCountsRemainInvalid) {
+    const auto original=EncodeConfiguredNativeTraining(Cold7Declaration());auto wire=original;wire["schema_version"]=true;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+    wire=original;auto common=wire["composite_measurement"].toObject();auto limits=common["attempt_limits"].toObject();limits["maximum_groups"]=true;
+    common["attempt_limits"]=limits;wire["composite_measurement"]=common;EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,UnknownVersionsAndNestedBasesAreNotAtLeastSeven) {
+    for(int version:{5,6,7}){auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());wire["base_schema_version"]=version;
+        EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);}
+    auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());wire["schema_version"]=8;EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+    wire=EncodeConfiguredNativeTraining(Cold7Declaration());auto common=wire["composite_measurement"].toObject();common["schema_version"]=3;
+    wire["composite_measurement"]=common;EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,AdvanceUnassignedRawRecoveryIsNotSilentlyTransferred) {
+    auto c=Cold7Declaration();c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;c.search.maximumInvalidObservations=1;
+    EXPECT_THROW(EncodeConfiguredNativeTraining(c),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,TipResistanceNormalizationDoesNotChangeTolerances) {
+    auto c=Cold7Declaration();c.model.normalization=c.model.editPolicy.normalization=c.search.normalization=Normalization::TipResistance;
+    const auto p=MakeConfiguredNativeTrainingPlan(DecodeConfiguredNativeTraining(EncodeConfiguredNativeTraining(c)));
+    EXPECT_EQ(p.search.normalization,Normalization::TipResistance);EXPECT_EQ(p.search.tolerances.sync,.02);EXPECT_EQ(p.search.n0CandidateRepeats,1u);
+}
+TEST(CandidateWindowCold7,SingleInputUsesOldScalarPathAndExplicitlyRefusesNewMethod) {
+    auto c=Cold7Declaration();c.model.inputs.resize(1);c.model.initialIsi.resize(1);c.windows.resize(1);c.search.bounds.resize(1);c.candidateWindowPolicy->inputs.resize(1);
+    try{MakeConfiguredNativeTrainingPlan(c);FAIL()<<"single-input new method accepted";}catch(const std::invalid_argument& e){EXPECT_STREQ(e.what(),"candidate_window_multi_input_method_requires_at_least_two_inputs");}
+    c.candidateWindowPolicy.reset();c.composite.reset();EXPECT_EQ(MakeConfiguredNativeTrainingPlan(c).protocol.schemaVersion,3u);
+}
+TEST(CandidateWindowCold7,PolicyCannotCarryCapturedSeedsOrEligibilityFlag) {
+    auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());auto common=wire["composite_measurement"].toObject();auto policy=common["candidate_window_policy"].toObject();
+    policy["reference_valid"]=true;common["candidate_window_policy"]=policy;wire["composite_measurement"]=common;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(wire),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,CapacitanceOffNeverInventsHistoryOrCheckpointFields) {
+    const auto wire=EncodeConfiguredNativeTraining(Cold7Declaration());EXPECT_FALSE(wire.contains("capacitance_history"));EXPECT_FALSE(wire.contains("capacitance_search"));
+    EXPECT_FALSE(wire.contains("initial_model_revision"));EXPECT_FALSE(wire.contains("reference_group_ids"));
+    const auto parsed=ParseConfiguredNativeTraining(QJsonDocument(wire).toJson(QJsonDocument::Compact).toStdString());
+    EXPECT_FALSE(parsed.recordCapacitanceHistory);EXPECT_FALSE(parsed.search.capacitanceSearch);EXPECT_EQ(parsed.capacitanceMaximumRelativeChange,0.);
+}
+TEST(CandidateWindowCold7,InitialDeclarationCannotNormalizeAwayMissingActualOrigin) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.originStimulusId="missing-origin";
+    EXPECT_THROW(CaptureCandidateWindowInitialConfiguration(c.model,p,{{2,1,100.},{1,1,100.}},0.),std::invalid_argument);
+}
+TEST(CandidateWindowCold7,InitialDeclarationCannotNormalizeAwayWrongProtocolAssignment) {
+    const auto c=Cold7Declaration();auto p=MakeConfiguredNativeTrainingPlan(c);p.protocol.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
+    EXPECT_THROW(CaptureCandidateWindowInitialConfiguration(c.model,p,{{2,1,100.},{1,1,100.}},0.),std::invalid_argument);
 }

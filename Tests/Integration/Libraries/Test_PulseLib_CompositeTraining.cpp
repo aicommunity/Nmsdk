@@ -2218,3 +2218,46 @@ TEST(NativeCandidateWindowReferenceRelease,ClassicActualEditBeforeReleaseIsRejec
 TEST(NativeCandidateWindowReferenceRelease,BranchActualEditBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearnerBranch>(WindowReleaseRevocation::StructuralEdit);}
 TEST(NativeCandidateWindowReferenceRelease,ClassicOwnerResetBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearner>(WindowReleaseRevocation::Reset);}
 TEST(NativeCandidateWindowReferenceRelease,BranchOwnerDefaultBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearnerBranch>(WindowReleaseRevocation::Default);}
+
+namespace {
+template<class Owner> ConfiguredNativeTraining ActualCold7Declaration(NativeCompositeFixture<Owner>& f) {
+    auto c=CompositeCold(f);EnableCandidateWindow(f);c.composite->schemaVersion=2;
+    c.candidateWindowPolicy=f.protocol.candidateWindowMeasurement->candidateWindowPolicy;c.windows.clear();
+    for(const auto& w:f.protocol.candidateWindowMeasurement->referenceInputWindows)c.windows.emplace_back(w.beginOffset,w.endOffset);
+    return c;
+}
+template<class Owner> void ActualCold7InitialReadback() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto c=ActualCold7Declaration(f);f.attempt.reset();
+    for(auto& b:c.search.bounds){b.minimumLength=1;b.maximumLength=8;b.minimumSynapses=1;b.maximumSynapses=3;}
+    auto actual=f.owner->ReadNativeParameters();actual[0].length=3;actual[0].synapses=2;
+    const auto edit=f.owner->ApplyNativeParameters(actual);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    actual=f.owner->ReadNativeParameters();const auto plan=MakeConfiguredNativeTrainingPlan(c);
+    const auto captured=CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,actual,0.);
+    const auto wire=EncodeConfiguredNativeTraining(captured);EXPECT_EQ(wire["schema_version"],QJsonValue(7));
+    EXPECT_EQ(captured.model.inputs[0].attachment,3);EXPECT_EQ(captured.model.inputs[0].synapses,2);
+    ASSERT_TRUE(captured.model.inputs[0].resistance);EXPECT_DOUBLE_EQ(*captured.model.inputs[0].resistance,actual[0].resistance);
+    EXPECT_EQ(f.modelSpec.inputs[0].attachment,2);EXPECT_FALSE(f.modelSpec.inputs[0].resistance);
+    EXPECT_TRUE(captured.search.initialModelRevision.empty());EXPECT_EQ(captured.search.initialModelEpoch,0u);
+    EXPECT_FALSE(captured.recordCapacitanceHistory);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
+    EXPECT_EQ(MakeConfiguredNativeTrainingPlan(captured).protocol.candidateWindowMeasurement->referenceInputWindows,
+        plan.protocol.candidateWindowMeasurement->referenceInputWindows);
+    const auto name=NativeCompositeFixture<Owner>::branch?"cold7-native-initial-declarations/branch":"cold7-native-initial-declarations/classic";
+    SavePortableObject(name,"initial-configuration.json",wire);SaveCompositeBoundary(f,name);
+    SavePortableObject(name,"declaration-scope.json",{{"kind","native_candidate_window_initial_declaration_scope"},{"schema_version",1},
+        {"actual_model_revision",QString::fromStdString(f.Revision())},{"native_groups_issued",0},{"training_executed",false},
+        {"scope","actual initial graph readback and declaration only; no selected peak or certificate"}});
+}
+template<class Owner> void ActualCold7InitialBindingRefusal(bool wrongWindow) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=ActualCold7Declaration(f);auto plan=MakeConfiguredNativeTrainingPlan(c);
+    if(wrongWindow)plan.inputWindows[0].end+=.001;else plan.composite->geometryPolicy.repeatabilityAbsolute+=1e-6;
+    EXPECT_THROW(CaptureCandidateWindowInitialConfiguration(f.modelSpec,plan,f.owner->ReadNativeParameters(),0.),std::invalid_argument);
+    EXPECT_EQ(f.attempt->IssuedGroups(),0u);EXPECT_FALSE(f.attempt->CandidateWindowReferences());
+    const auto name=wrongWindow?"cold7-native-initial-declarations/wrong-reference-window":"cold7-native-initial-declarations/wrong-common-policy";
+    SavePortableObject(name,"original-configuration.json",EncodeConfiguredNativeTraining(c));SaveCompositeBoundary(f,name);
+}
+}
+TEST(NativeCandidateWindowCold7,ClassicInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowCold7,BranchInitialDeclarationUsesActualParametersRatherThanTemplate){ActualCold7InitialReadback<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowCold7,ActualCommonPolicyMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearner>(false);}
+TEST(NativeCandidateWindowCold7,ActualReferenceWindowMismatchCannotBecomeInitialDeclaration){ActualCold7InitialBindingRefusal<NNeuronTimeLearnerBranch>(true);}
