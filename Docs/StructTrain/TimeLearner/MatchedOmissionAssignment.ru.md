@@ -99,7 +99,7 @@ PulseLibfcc3fed. Все396 членов архива,23 source bindings, исх�
 loaded executable, runtime freeze и закрытие обеих групп подтверждены.
 Сохранён предшествующий disk-preflight refusal без запуска сборки/тестов.
 
-Два новых N2 positive controls (Classic/Branch,2000 Гц, второй interval0.5s)
+Два новых N2 positive controls (Classic/Branch,2000 Гц, второй межимпульсный интервал внутри пачки0.5s)
 дали Valid assignment реального full-максимума. Четыре прежних coupled controls
 на2000/20000 Гц явно проверяют Ambiguous. Четыре stop/edit controls не выдали
 assignment. Всего28 native bursts/CSV; первая завершённая трасса stop/edit
@@ -112,3 +112,25 @@ normal55 и follow-up10 вместе покрывают57 разных tests д�
 Git/hash/metadata/JUnit. Independent Python recomputation, графики этих новых
 групп, ASan57 и подключение к обучению остаются открытыми. Valid assignment
 контрольного пика не означает Exact Train или успешную классификацию.
+
+
+## ASan нового блока
+
+M40 прошёл57/57 в одном compiled срезе root58f5b5181/Pulsefcc3fed:
+35 unit,2 boundary,10 capture/codec regression и10 native group tests.
+Сохранены28 raw CSV. Оба separated controls дали Valid, четыре coupled —
+Ambiguous, четыре stop/edit — без assignment. [Независимая квитанция](MatchedOmissionAsanVerification.json),
+evidence `9e301ba0b28be4ec64a85ac143ea9db94d6fd884`:460 проверенных членов,
+23 source bindings, actual libasan/executable, исходные JUnit IDs,
+неизменность двух runtime и закрытие/lease. Leak detection отключён.
+
+Это приёмка selector/native-group блока на данной матрице, не полный этап7:
+не проверены все размерности/физические профили, independent Python replay,
+новые временные графики и полный training proof path. В частности, правило
+full-trace support может консервативно отклонять более поздний shared отклик
+из-за остаточного влияния предыдущего импульса. До включения в Train необходимо
+сопоставить его область применимости с исходными assigned-impulse windows и
+историческими контрольными трассами; не выдавать разделённый toy control за
+подтверждение всей постановки и не подменять выбранный assigned пик максимумом
+полной пачки. Переход к references/search/final certificate остаётся явным
+интеграционным изменением с собственной проверкой.

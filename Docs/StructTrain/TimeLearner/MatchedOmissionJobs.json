@@ -72,16 +72,19 @@
       "job": "s07-matched-omission-m40-a1",
       "root": "58f5b5181c217e70afd9ab08f18cd966f4640f99",
       "PulseLib": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
-      "state": "kernel_worker_confirmed_live",
+      "state": "closed_asan57_passed_independently_verified",
       "checks_planned": 57,
       "asan_options": "detect_leaks=0",
       "unit": "timelearner-cae125bf-8290-4867-8b93-53ba44fc374d.service",
       "invocation_id": "d651c276d56345098d8e990653c62608",
       "initial_main_pid": 2427782,
       "initial_start_ticks": "318966507",
-      "request_sha256": "c349e9373eaf7df2128792651e254883c56216c90f8a6e5903ef08a7947772a9"
+      "request_sha256": "c349e9373eaf7df2128792651e254883c56216c90f8a6e5903ef08a7947772a9",
+      "evidence_commit": "9e301ba0b28be4ec64a85ac143ea9db94d6fd884",
+      "verification_receipt": "MatchedOmissionAsanVerification.json"
     }
   ],
   "remaining": "NativeTrainingService/CapturedReferences/search/final verification composite integration, portable witness codec/reader, expanded topology/profile matrix, ASan, scientific trains",
-  "normal55_scoped_accepted": true
+  "normal55_scoped_accepted": true,
+  "asan57_scoped_accepted": true
 }
