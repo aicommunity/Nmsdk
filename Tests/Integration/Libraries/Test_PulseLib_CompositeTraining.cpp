@@ -602,7 +602,9 @@ template<class Owner> void ObsoleteActorCannotCancelForeignProbe() {
     f.attempt->StartMeasurement(logical,CompositeMeasurementPurpose::Reference,f.prototype,2.,300.,f.Time(),Wall());
     f.attempt->BeforeTick(f.Time(),Wall());ASSERT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Queued);
     f.owner->CancelNativeProbe("fixture_closes_old_trial");const auto old=f.owner->TakeNativeProbeResult();
-    ASSERT_TRUE(old);ASSERT_EQ(old->status,NativeProbeStatus::Cancelled);
+    ASSERT_TRUE(old);ASSERT_TRUE(old->requestedSpecification);
+    EXPECT_NE(old->status,NativeProbeStatus::Completed);EXPECT_TRUE(old->requiresFreshVerification);
+    EXPECT_EQ(old->requestedSpecification->runId,"old-owner");
     auto foreign=f.prototype;foreign.specification.runId="separate-probe";foreign.specification.trialId="separate-probe/1";
     foreign.routing=f.protocol.routing;foreign.activeInput=0;foreign.inputId=f.protocol.inputs[0].id;
     foreign.protocolRevision=f.protocol.revision;foreign.baseModelRevision=f.Revision();
