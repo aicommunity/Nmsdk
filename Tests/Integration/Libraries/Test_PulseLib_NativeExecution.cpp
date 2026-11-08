@@ -5,6 +5,7 @@
 #include "TimeLearner/ModelIdentity.h"
 #include "TimeLearner/BoundedTraining.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
+#include "TimeLearner/NativeResponseDomainCapture.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -58,7 +59,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -116,6 +117,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     };
     const auto before=NmsdkTools::IdentifyModel(neuron,ports);ASSERT_TRUE(before["valid"].toBool());
     const auto base=readRevision();bool armed=false;
+    NativeResponseDomainCapture domainCapture;
     std::ostringstream trace;trace.imbue(std::locale::classic());
     trace<<std::setprecision(17)<<"native_tick_start_s,stimulus";
     for(unsigned i=0;i<(branch?1u:inputCount);++i)trace<<",raw_soma_"<<i;trace<<'\n';
@@ -168,6 +170,15 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         EXPECT_EQ(actual.modelRevision,declaration.effectiveModelRevision);
         EXPECT_GE(actual.begin,1./frequency);
         EXPECT_EQ(actual.baseline.size(),branch?1u:inputCount);
+        if(captureDomains) {
+            std::vector<std::string> paths;
+            for(std::size_t i=0;i<actual.baseline.size();++i) {
+                const auto path="Soma"+std::to_string(i+1);
+                ASSERT_TRUE(neuron->template GetComponentL<NPulseMembrane>(path,true));
+                paths.push_back(path);
+            }
+            domainCapture.Arm(declaration,actual,std::move(paths));
+        }
         if(observationSchema==3)
         {
             if(branch)EXPECT_EQ(declaration.selectedInputIndex,std::optional<std::size_t>(active));
@@ -187,6 +198,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     request.onSample=[&](const NativeProbeSample& sample) {
         if(interference==Interference::SampleFailure && sampled==10)throw std::runtime_error("injected_sample_failure");
         ++sampled;sourceEvents+=unsigned(sample.newStimuli.size());
+        if(captureDomains)domainCapture.Append(sample);
         trace<<sample.time<<','<<sample.stimulus;
         for(const auto value:sample.potentials)trace<<','<<value;trace<<'\n';
     };
@@ -231,6 +243,26 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         }
     }
     const auto result=learner->TakeNativeProbeResult();ASSERT_TRUE(result);
+    if(captureDomains) {
+        const auto& captured=domainCapture.Observation();
+        ResponseDomainSpec domains;domains.modelRevision=captured.modelRevision;
+        domains.protocolRevision=captured.protocolRevision;domains.patternHash=captured.patternHash;
+        for(const auto& e:captured.events)domains.stimulusIds.push_back(e.id);
+        for(const auto& channel:captured.channels) {
+            domains.channelIds.push_back(channel.channel);
+            for(const auto& e:captured.events)
+                domains.domains.push_back({channel.channel,e.id,e.time,captured.end});
+        }
+        const auto diagnostic=domainCapture.Close(*result,domains);
+        EXPECT_TRUE(domainCapture.Observation().complete);
+        EXPECT_EQ(domainCapture.StimulusSamples().size(),sampled);
+        EXPECT_EQ(diagnostic.associations.size(),captured.channels.size()*captured.events.size());
+        EXPECT_EQ(diagnostic.channels.size(),captured.channels.size());
+        EXPECT_FALSE(diagnostic.TrainingCertificateEligible());
+        EXPECT_TRUE(diagnostic.reasons.empty());
+        // Broad competing domains intentionally do not prove causal origin.
+        EXPECT_THROW(domainCapture.Close(*result,domains),std::invalid_argument);
+    }
     for(const auto& reason:result->reasons)std::cout<<name<<" adapter_reason="<<reason<<std::endl;
     if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
     {
@@ -870,4 +902,102 @@ TEST(NativeLearnerProbeInvalidation, BranchOwnerUnInitCancelsProbe)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::OwnerUnInit); }
 TEST(NativeLearnerProbeInvalidation, BranchTinySourceChangeCannotHideInFormattedSnapshot)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::TinySourceAmplitude); }
+TEST(NativeResponseDomainBridge,Classic2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,false,false,{},false,true); }
+TEST(NativeResponseDomainBridge,Branch2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,false,false,false,{},false,true); }
+TEST(NativeResponseDomainBridge,Classic20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3,false,false,false,{},false,true); }
+TEST(NativeResponseDomainBridge,Branch20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3,false,false,false,{},false,true); }
+
+struct DomainCaptureFixture {
+    NativeResponseDomainCapture capture;
+    ProbeSpec spec;
+    PreparedVerificationProbe context;
+    std::vector<NativeProbeSample> frames;
+    ResponseDomainSpec domains;
+    DomainCaptureFixture() {
+        spec.runId="capture";spec.trialId="capture/trial";spec.sampleId="sample";
+        spec.patternHash="pattern";spec.modelRevision="effective";spec.begin=0.;spec.end=.5;
+        spec.maximumSampleGap=.1;spec.maximumSamples=6;spec.baseline={0.};
+        spec.expectedStimulusIds={"pulse0"};spec.windows={{"input0",0,0.,.5,"pulse0"}};
+        context.baseModelRevision="base";context.effectiveModelRevision="effective";
+        context.protocolRevision="protocol";context.inputId="input0";
+        capture.Arm(context,spec,{"Soma1"});
+        const double values[]{0.,0.,2.,0.,0.,0.};
+        for(std::size_t i=0;i<6;++i) {
+            NativeProbeSample f;f.time=double(i)*.1;f.potentials={values[i]};
+            f.effectiveModelRevision="effective";if(i==1)f.newStimuli={{"pulse0",.1}};
+            frames.push_back(f);
+        }
+        domains.modelRevision="effective";domains.protocolRevision="protocol";domains.patternHash="pattern";
+        domains.channelIds={0};domains.stimulusIds={"pulse0"};domains.domains={{0,"pulse0",.1,.5}};
+    }
+    void AppendAll(){for(const auto& frame:frames)capture.Append(frame);}
+    NativeProbeResult Result() const {
+        ProbeRecorder recorder(spec);
+        for(const auto& frame:frames) {
+            for(const auto& e:frame.newStimuli)recorder.RecordStimulus(e.id,e.time);
+            recorder.Observe(frame.time,frame.potentials,frame.effectiveModelRevision);
+        }
+        NativeProbeResult r;r.status=NativeProbeStatus::Completed;r.prepared=context;
+        r.currentBaseRevision="base";r.observation=recorder.Close(.5,"effective","window_closed");return r;
+    }
+};
+TEST(NativeResponseDomainCapture,ClosedRecordBindsActualEventsAndDistinctBaseRevision)
+{
+    DomainCaptureFixture f;f.AppendAll();const auto result=f.capture.Close(f.Result(),f.domains);
+    ASSERT_EQ(result.associations.size(),1u);EXPECT_EQ(result.associations[0].status,DomainAssociationStatus::Hypothesis);
+    EXPECT_TRUE(f.capture.Observation().complete);EXPECT_FALSE(result.TrainingCertificateEligible());
+}
+TEST(NativeResponseDomainCapture,FailedAppendCannotBeRepairedByAnotherFrame)
+{
+    DomainCaptureFixture f;auto frame=f.frames[0];frame.effectiveModelRevision="changed";
+    EXPECT_THROW(f.capture.Append(frame),std::invalid_argument);
+    EXPECT_THROW(f.capture.Append(f.frames[0]),std::invalid_argument);
+    EXPECT_THROW(f.capture.Close(f.Result(),f.domains),std::invalid_argument);
+    EXPECT_FALSE(f.capture.Observation().complete);
+}
+TEST(NativeResponseDomainCapture,UnknownClosureDiagnosticCannotHideBehindInvalidFlag)
+{
+    DomainCaptureFixture f;f.AppendAll();auto r=f.Result();r.observation->valid=false;
+    r.observation->reasons.push_back("unknown_integrity_failure");
+    EXPECT_THROW(f.capture.Close(r,f.domains),std::invalid_argument);
+    EXPECT_FALSE(f.capture.Observation().complete);
+}
+TEST(NativeResponseDomainCapture,ChangedSelectorOrBaseCannotCloseCapture)
+{
+    for(bool selector:{false,true}) {
+        DomainCaptureFixture f;f.AppendAll();auto r=f.Result();
+        if(selector)r.prepared->selectedInputIndex=0;else r.currentBaseRevision="effective";
+        EXPECT_THROW(f.capture.Close(r,f.domains),std::invalid_argument);
+    }
+}
+TEST(NativeResponseDomainCapture,ChangedEventOrCountCannotCloseCapture)
+{
+    for(bool event:{false,true}) {
+        DomainCaptureFixture f;f.AppendAll();auto r=f.Result();
+        if(event)r.observation->stimuli[0].time=.2;else --r.observation->sampleCount;
+        EXPECT_THROW(f.capture.Close(r,f.domains),std::invalid_argument);
+    }
+}
+TEST(NativeResponseDomainCapture,ReproducedLegacyAmbiguityDoesNotEraseCompleteWaveform)
+{
+    DomainCaptureFixture f;
+    const double values[]{0.,2.,0.,3.,0.,0.};
+    for(std::size_t i=0;i<f.frames.size();++i)f.frames[i].potentials[0]=values[i];
+    f.AppendAll();auto r=f.Result();ASSERT_FALSE(r.observation->valid);ASSERT_TRUE(r.observation->complete);
+    const auto diagnostic=f.capture.Close(r,f.domains);
+    EXPECT_TRUE(f.capture.Observation().complete);EXPECT_FALSE(diagnostic.TrainingCertificateEligible());
+}
+TEST(NativeResponseDomainCapture,LostFrameAndCancelledClosureRemainIncomplete)
+{
+    DomainCaptureFixture f;f.capture.Append(f.frames[0]);
+    EXPECT_THROW(f.capture.Append(f.frames[2]),std::invalid_argument);
+    EXPECT_FALSE(f.capture.Observation().complete);
+    DomainCaptureFixture g;g.AppendAll();auto r=g.Result();r.status=NativeProbeStatus::Cancelled;
+    EXPECT_THROW(g.capture.Close(r,g.domains),std::invalid_argument);
+    EXPECT_FALSE(g.capture.Observation().complete);
+}
 }
