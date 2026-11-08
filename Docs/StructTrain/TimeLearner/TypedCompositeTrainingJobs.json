@@ -415,7 +415,7 @@
       "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
       "bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
       "rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
-      "state": "terminal_failure_pending_independent_evidence_verification",
+      "state": "terminal_failure_independently_verified",
       "expected_cpp_cases": 248,
       "expected_leaf_gates": 138,
       "worker_module": "Scripts.StructTrain.TimeLearner.native_acceptance_worker",
@@ -456,10 +456,19 @@
       "postclosure_server_observation": {
         "all_recorded_units_closed": true,
         "lease_released": true,
-        "root_independently_verified": false,
-        "evidence_publication": "collector_in_progress"
+        "root_independently_verified": true,
+        "evidence_publication": "published_negative_verified"
       },
-      "restart_performed": false
+      "restart_performed": false,
+      "negative_evidence_commit": "a7dae002295800d520b1fd35975283f0daa2362d",
+      "independent_receipt_sha256": "eb2ae97128d03571c16b72adbfa6368759852ade98a53b1b8f92fe0139655336",
+      "primary_rule_result": {
+        "independently_evaluated": 68,
+        "fulfilled": 42,
+        "missing": 26,
+        "worker_success_loop_ran": false
+      },
+      "initial_configuration_schema_valid": false
     }
   ],
   "prepared_feature": {
