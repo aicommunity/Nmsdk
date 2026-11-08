@@ -1,0 +1,55 @@
+{
+  "kind": "portable_matched_omission_acceptance_jobs",
+  "schema_version": 1,
+  "production_pulse_commit": "e2c6311c0cdd219e3a52c278ce637bd777584dc6",
+  "scope": "Portable complete diagnostic witness, unchanged assignment v1; no Train integration or scientific classification claim",
+  "attempts": [
+    {
+      "host": "10.245.1.17",
+      "job": "s07-matched-codec-m40-a1",
+      "root": "82de17c7578f2b80765343980c0fc23d0d3fe490",
+      "state": "last_observed_running_before_vpn_disconnection",
+      "unit": "timelearner-a382f102-54df-400c-a757-176718c0f646.service",
+      "invocation_id": "7bbcdea6ae624f1fb0bae0dd7d8b353d",
+      "initial_main_pid": 2484507,
+      "initial_start_ticks": "319529446",
+      "request_sha256": "1ccd0da9c2b19df9d40cb8f789972b5d815c61be3845a5c27d19619d8bcf95d5",
+      "python_tests_passed_before_disconnection": 40,
+      "cpp_tests_confirmed_passed_before_disconnection": 70,
+      "cpp_tests_planned": 77,
+      "portable_exports_planned": 6,
+      "native_csv_ab_comparisons_planned": 28,
+      "asan_options": "detect_leaks=0",
+      "terminal_result_verified": false,
+      "do_not_restart_due_to_polling_failure": true
+    },
+    {
+      "host": "10.245.1.11",
+      "job": "s07-matched-codec-elder-a1",
+      "root": "461cbcc3e1f904083a37ce479c9ee79e077588d1",
+      "state": "transport_failed_before_remote_command",
+      "reason": "jump_host_connect_timeout_with_Automats2_disconnected",
+      "remote_launch_confirmed": false,
+      "cpp_tests_planned": 80,
+      "python_tests_planned": 43,
+      "portable_exports_planned": 6,
+      "native_csv_ab_comparisons_planned": 28,
+      "preflight_required_before_launch": true
+    }
+  ],
+  "new_complete_outcome_controls": [
+    "Missing",
+    "Clipped",
+    "NonRepeatable"
+  ],
+  "remaining": [
+    "Recover connectivity and inspect the exact existing M40 kernel binding before any cache update",
+    "Collect and independently verify closed M40 results, cross-language replay and waveform A/B",
+    "Run normal controls including the three additional complete negative outcomes on Elder",
+    "Run sanitizer controls for the additional outcomes with an explicit separate source scope",
+    "Publish compact primary artifacts through Git and verify closure",
+    "Integrate validated composite measurement with references, search and final verification only after assignment applicability is resolved"
+  ],
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false
+}
