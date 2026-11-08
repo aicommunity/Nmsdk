@@ -523,3 +523,14 @@ RootReports Python snapshots; оба worker проверили production histor
 [receipt](RootReportSnapshotRetirementVerification-20261108.json).
 В поддерживаемом Reports prefix loose scripts больше нет; полный этап9 открыт
 из-за оставшихся Bin tools/анализаторов и сквозной приёмки миграции.
+
+
+Независимый readerf71 теперь принят отдельной попыткой A2:25/25 unit и14
+actual record audits по неизменным primary SDK140 A2. Для10 полных групп
+геометрия пересчитана независимо:8 valid и2 ambiguous;4 partial не получили
+доказательства полноты или восстановленной причины отказа. Новых model runs
+не было, старые отказы сохранены. [Receipt](DeclaredWindowBasinReaderM40A2Verification.json),
+Git evidence `bcc46e7d797890b47214a866085f5f71027b5c5b`. Один diagnostic
+отсутствующего Docs blob при подготовке Python-проекции сохранён как needs_review;
+413 используемых Python-файлов проверены по Git до/после. Это подтверждение
+Python replay, а не full SDK source-materialization acceptance или Train certificate.
