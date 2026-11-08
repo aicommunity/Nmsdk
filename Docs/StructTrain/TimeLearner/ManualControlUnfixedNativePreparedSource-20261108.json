@@ -1,0 +1,1487 @@
+{
+  "kind": "timelearner_unfixed_manual_control_native_source_integration",
+  "schema_version": 1,
+  "status": "local_source_integration_only_unbuilt_unrun",
+  "original_unfixed_root": "f74b9fbf9ece38668396c21fa569d688f595bb05",
+  "prepared_code_root": "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+  "paired_corrected_code_root": "e11bbd403a5f93790a7ad6c5a245c1964797d63d",
+  "fixture_merge": "668bb6f8848bb4ee2d9694cc7b165d461df21dab",
+  "metadata_merge": "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+  "gitlinks": {
+    "Libraries/Nmsdk-PulseLib": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
+    "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+    "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a"
+  },
+  "merges": [
+    {
+      "commit": "668bb6f8848bb4ee2d9694cc7b165d461df21dab",
+      "first_parent": "f74b9fbf9ece38668396c21fa569d688f595bb05",
+      "second_parent": "17db91ee0e8f308ea39cf7ebef641e1814080337",
+      "changed_path_counts": {
+        "Docs": 1,
+        "Tests": 1
+      },
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeDeadlineReachabilityDiagnostic.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
+        }
+      ]
+    },
+    {
+      "commit": "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+      "first_parent": "668bb6f8848bb4ee2d9694cc7b165d461df21dab",
+      "second_parent": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+      "changed_path_counts": {
+        "Docs": 79,
+        "Reports": 220,
+        "Scripts": 47
+      },
+      "changed_paths": [
+        {
+          "status": "M",
+          "path": "Docs/Audit/TimeLearner-2026-09-26-review/evidence/STRUCTURAL_SYNAPSE_RESISTANCE_HISTORY_2026-10-15.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/AsymRmAdaptiveGuardDeliveryRepair.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/AsymRmAdaptiveGuardRetirement.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/AsymRmAdaptiveGuardRetirementVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CandidateWindowPure40M40A1Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CandidateWindowScopeReview-20261108.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CollectorProvenanceContract.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CollectorProvenanceM40A2Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CollectorProvenancePreparation.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeArchive206AttemptStatus.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeArchive206M40SourceDelivery.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeCancellationFirstPollM40A1.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeCancellationM40A1IndependentVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeCoreM40A1NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeDeadlineDiagnosticFirstPollM40A1.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonDatasetVerification-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonDeclarationVerification-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonIntegration.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonPortableVerification-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonPrimaryVerification-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonStartFailureVerification-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/CompositeTrainingPythonWarmVerification-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinJobs.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinPureM40A1NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinPureM40A2Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinReaderM40A1NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinReaderM40A2Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinTemporalM40A2Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/DeclaredWindowBasinTemporalReport.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/ElderCompositeArchiveA1NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/ElderCompositeArchiveA1StaticRetirementVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/ElderCompositeArchiveA2NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/ElderCompositeArchiveA3NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/ElderCompositeArchiveA3WarmDiskBudgetReview.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/ElderDuplicateFetchcontentRetentionA1Verification.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/GitArtifactPublication.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/LooseReportScriptPolicy.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/LooseReportScriptPolicyAttempts.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/LooseReportScriptPolicyVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/M40CompositeArchiveA1PreflightNegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/M40CompositeArchiveA2NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/MatchedContextMechanicalM40A1Verification.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/MatchedOmissionPortable.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/MatchedOmissionPortableJobs.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativeAcceptanceWorker.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativeCompositeGateDeclarations.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativeDeclaredWindowBasinBridgeM40A1NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativeDeclaredWindowBasinBridgeM40A2Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativeDeclaredWindowBasinJobs.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativePreparationHelper.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativePreparationMetadataReview-20261108.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/NativeResistanceStepAndCodecM40A1Verification.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/NormalizationPropertyContracts.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/PeakAssignmentClarification-2026-11-08.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/PropertyOwnershipReviewFindings-20261108.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/PropertyReview.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/README.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/ResistanceStepOwnershipJobs.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/RootReportSnapshotRetirement-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/RootReportSnapshotRetirement.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/RootReportSnapshotRetirementVerification-20261108.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/ScriptMigration.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/TypedCompositeCoreM40A2Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/TypedCompositeMechanicalM40A1NegativeVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/TypedCompositeMechanicalM40A2Verification.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/TypedCompositeTrainingCore-Live.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/TypedCompositeTrainingCoreGateInventory.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/TypedCompositeTrainingJobs.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/WindowsCompositeA2IndependentVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/WindowsCompositeServiceSourceDelivery-20261108.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/WindowsDomainNative18Acceptance-20261108.ru.md"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/WindowsDomainNative18PreparedManifest.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/WindowsDomainNative18Verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/Wire67Windows26CompileABIndependentVerification.json"
+        },
+        {
+          "status": "A",
+          "path": "Docs/StructTrain/TimeLearner/WireCollectorCombined106M40A1Verification.json"
+        },
+        {
+          "status": "M",
+          "path": "Docs/StructTrain/TimeLearner/script_migration.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s02-closed-owner-baselines-cache-a1/producer.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-duplicate-fetchcontent-retention-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-duplicate-fetchcontent-retention-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-duplicate-fetchcontent-retention-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-duplicate-fetchcontent-retention-a1/verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-normal304-expanded-duplicates-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-normal304-expanded-duplicates-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-normal304-expanded-duplicates-a3/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-normal304-expanded-duplicates-a3/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s02-elder-verified-cache-release-a3/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-elder-a4/controller/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-elder-a4/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-m40-a2/controller/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s03-explicit-historical-analysis-m40-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s05-configured-transport-cold-matched-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s05-configured-transport-cold-matched-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s05-configured-transport-preconditions-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s05-configured-transport-preconditions-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a1-negative/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a1-negative/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a1-negative/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a1-negative/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-mechanical-m40-a2/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-declaration-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-declaration-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-declaration-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a3/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a3/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a3/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a4-p2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a4-p2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-portable-m40-a4-p2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-primary-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-primary-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s06-composite-python-primary-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-integrated-acceptance-asan-focused-a3/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-integrated-acceptance-asan-focused-a3/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-integrated-acceptance-asan-focused-a3/recovery-collector-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-integrated-acceptance-asan-lifecycle-a3/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-integrated-acceptance-asan-lifecycle-a3/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-integrated-sdk-normal141-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-native-output-directory-elder-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-native-output-directory-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-native-output-directory-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-native-output-directory-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-positive-recognition-owner141-a1/controller/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-positive-recognition-owner141-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-recognition-shared-saved-ab-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s06-shared-recognition-ab-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-baseline-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-baseline-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-baseline-native-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-baseline-native-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-fixed-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-fixed-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-fixed-native-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-attempt-invalid-budget-fixed-native-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a1-negative/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a1-negative/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a1-negative/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a1-negative/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-composite-core-m40-a2/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-pure-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-pure-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-pure-m40-a1/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-pure-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-pure-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-pure-m40-a2/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a1/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-reader-m40-a2/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native0-control-panels.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native0-overview-and-zoom.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native10-overview-and-zoom.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native13-overview-and-zoom.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native7-control-panels.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native7-overview-and-zoom.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native8-overview-and-zoom.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Figures/basin_native9-overview-and-zoom.png"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/Report.html"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/TemporalReport.ru.md"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/manifest.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-declared-window-basin-temporal-m40-a2/verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-integrated-acceptance-asan-build-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-integrated-acceptance-asan-build-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-integrated-acceptance-asan-build-a2/recovery-collector-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-integrated-native304-normal-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-integrated-native304-normal-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-joint-asan-owner-readers-a3/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-joint-asan-resource-retry-a1/retry44/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-joint304-asan-stackstore-failure-a2/producer.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-matched-context-mechanical-pure-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-matched-context-mechanical-pure-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-matched-context-mechanical-pure-m40-a1/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a1/verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a2/verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-partition-addressed-asan-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-partition-addressed-asan-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-partition-full-asan-a2-pending/worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-partition-full-asan-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-partition-full-asan-a2/publisher-source.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-step-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-step-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-step-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-native-step-m40-a1/verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-stopped-final-native-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-stopped-final-reader-elder-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s07-stopped-final-reader-m40-a2/publisher-source.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-windows-domain-native18-a6/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-windows-domain-native18-a6/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s07-windows-domain-native18-a6/publication-verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-driver-retirement-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-driver-retirement-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-guard-retirement-elder-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-guard-retirement-elder-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-guard-retirement-elder-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-guard-retirement-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-guard-retirement-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-guard-retirement-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-overlay-retirement-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-asymrm-overlay-retirement-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-ltz-driver-retirement-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-ltz-driver-retirement-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-portable-primary-elder-a2/previous-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-portable-primary-elder-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-portable-primary-elder-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-portable-primary-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-portable-primary-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-psi-retirement-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-psi-retirement-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-report-script-policy-elder-a3/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-report-script-policy-elder-a3/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-report-script-policy-elder-a3/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-report-script-policy-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-report-script-policy-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-report-script-policy-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-root-report-retirement-elder-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-root-report-retirement-elder-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-root-report-retirement-elder-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-root-report-retirement-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-root-report-retirement-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s09-root-report-retirement-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-statistic-traces-elder-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-statistic-traces-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-statistic-traces-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s09-statistic-traces-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/integrated-acceptance-asan-build-a2-worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/integrated-acceptance-asan-build-a2.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/integrated-acceptance-asan-focused-a3-worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/integrated-acceptance-asan-focused-a3.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/integrated-acceptance-asan-lifecycle-a3-worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/integrated-acceptance-asan-lifecycle-a3.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/joint-asan-owner-readers-a3-queue-container.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/joint-asan-owner-readers-a3-queue-worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-asan-chain-replacement-a1/jobs/joint-asan-owner-readers-a3-queue.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-collector-provenance-m40-a2/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-collector-provenance-m40-a2/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-collector-provenance-m40-a2/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-collector-provenance-m40-a2/verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-integrated-coordinator-normal-a3-pending/worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-integrated-coordinator-normal-a3/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-integrated-coordinator-prelaunch-failure-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-integrated-recovery-declaration-a4/previous-a3-controller/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-integrated-recovery-declaration-a4/previous-a3-worker/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-native-elder-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-native-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-native-matrix-elder-a2/previous-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-native-matrix-elder-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-native-matrix-elder-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-elder-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-elder-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-elder-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-elder-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-m40-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-m40-a1/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-m40-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-pipeline-condition-readers-m40-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-publication-lock-recovery-elder-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-publication-lock-recovery-m40-a2/publisher-source.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s10-recovery-prior-timeout-a2/controller/launcher.py"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-wire-collector-combined106-m40-a1/bundle.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-wire-collector-combined106-m40-a1/primary.tar.xz"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-wire-collector-combined106-m40-a1/publication-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "Reports/StructTrain/TimeLearner/s10-wire-collector-combined106-m40-a1/verification.json"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-integrated-coordinator-reader-failure-a1/worker/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-integrated-coordinator-visual-a1-pending/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-integrated-coordinator-visual-a1-pending/worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-integrated-coordinator-visual-a2-pending/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-integrated-coordinator-visual-a2-pending/worker.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-integrated-coordinator-visual-a2/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-managed-coordinator-visual-a6/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-shared-saved-ab-visual-a1/controller/launcher.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-shared-saved-ab-visual-a1/producer.py"
+        },
+        {
+          "status": "D",
+          "path": "Reports/StructTrain/TimeLearner/s11-stopped-final-visual-a1/publisher-source.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/candidate_recovery.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_certificate_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_configuration.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_execution_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_measurement_contract.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_measurement_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_package_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_primary.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_raw_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_runtime_plan.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_source_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/composite_summary_evidence.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/declared_window_basin_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/declared_window_basin_report.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/finalization_boundary_evidence.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/learned_evidence.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/live_training_worker.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/native_calibration_worker.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/native_pipeline_worker.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/native_preparation.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/pipeline_condition.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/publisher.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/recognition_evidence.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/reports.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/specs/native-composite-training-core-v1.json"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/specs/native-controller-scalar-regression-v1.json"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/specs/native-preparation-metadata30-v1.json"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/specs/python-composite-cold-contract-v1.json"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/stopped_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/collector_provenance/actual-metadata.json.gz"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/collector_provenance/source-git-objects.pack"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/native_preparation/actual-metadata.json.gz"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/native_preparation/source-git-objects.pack"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_collector_provenance.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_composite_configuration.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_composite_final_sweep_archive.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_composite_native_archive.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_composite_portable_contract.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_composite_primary.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_declared_window_basin_evidence.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_native_preparation.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_pipeline_condition.py"
+        },
+        {
+          "status": "A",
+          "path": "Scripts/StructTrain/TimeLearner/tests/test_report_artifact_policy.py"
+        },
+        {
+          "status": "M",
+          "path": "Scripts/StructTrain/TimeLearner/training_capacitance_witness.py"
+        }
+      ]
+    }
+  ],
+  "worker_modules": {
+    "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py": {
+      "git_blob": "35a1af582cdf8bfdf11b1e5f48164b82644f1687",
+      "sha256": "69325891153d1fafbc99566a2a1feff1d79792a51852771aedf26ea561179391",
+      "bytes": 31241
+    },
+    "Scripts/StructTrain/TimeLearner/native_preparation.py": {
+      "git_blob": "edbb928183fc90f860cc416ed533666efd7603e6",
+      "sha256": "9e6d29d5d371393b4fdf0af001ab945ba1c1d1ca2387d581d70335535eb3db7f",
+      "bytes": 22872
+    }
+  },
+  "composite_test_source": {
+    "git_blob": "6f54395b559d50765d25ca37f11ac220a97e96a8",
+    "sha256": "0d821558aee13ca238d5a28025b8481c607dd85c9f7572f13f56a90399b39b10",
+    "bytes": 258117,
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "literal_test_count": 321
+  },
+  "targeted_source_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
+  ],
+  "expected_negative_source_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+    "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume"
+  ],
+  "positive_source_ids": [
+    "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+    "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
+  ],
+  "targeted_runtime_count": null,
+  "paired_source_identical_scopes": [
+    "App",
+    "Scripts",
+    "Rdk",
+    "Bin",
+    ".gitmodules",
+    "CMakeLists.txt",
+    "cmake"
+  ],
+  "diagnostic_only_unselected_ids": [
+    "NativeCompositeDeadlineDiagnostic.ClassicUnchangedLastFinalReachability",
+    "NativeCompositeDeadlineDiagnostic.BranchUnchangedLastFinalReachability"
+  ],
+  "limitations": [
+    "expected-negative controls have not run; capture/setup failures are not proof of intended defect",
+    "all-pass-only worker requires separate POS2, NEG1, NEG1 jobs and forensic collection of failed-job primaries",
+    "no configured build or canonical execution spec produced",
+    "inherited renderer CRCRLF bytes preserved; no normalization performed",
+    "no server source/build/cache/runtime touched",
+    "no CLI/default/physics activation or stage completion claimed"
+  ]
+}
