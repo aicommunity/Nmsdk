@@ -1000,4 +1000,11 @@ TEST(NativeResponseDomainCapture,LostFrameAndCancelledClosureRemainIncomplete)
     EXPECT_THROW(g.capture.Close(r,g.domains),std::invalid_argument);
     EXPECT_FALSE(g.capture.Observation().complete);
 }
+TEST(NativeResponseDomainCapture,ChangedMeasuredPeakCannotHideBehindSameValidityAndReasons)
+{
+    DomainCaptureFixture f;auto r=f.Result();f.frames[2].potentials[0]=3.;f.AppendAll();
+    ASSERT_TRUE(r.observation->valid);ASSERT_TRUE(r.observation->reasons.empty());
+    EXPECT_THROW(f.capture.Close(r,f.domains),std::invalid_argument);
+    EXPECT_FALSE(f.capture.Observation().complete);
+}
 }
