@@ -90,6 +90,15 @@ class NativePreparationTest(unittest.TestCase):
     def claims(self):
         return copy.deepcopy(self.prepare()["current"])
 
+    def prepare_module(self, **changes):
+        options = dict(selections=self.selections, selected_ids=self.ids, runplan=self.plan,
+                       partitions=self.partitions, prior_bindings=self.prior,
+                       prior_originals=self.originals, module=self.fixture["repo_module_fixture"],
+                       arguments=["--job", "/tmp/План.json"])
+        options.update(changes)
+        with patch.object(collector, "source_closure", return_value=copy.deepcopy(self.fixture["closure"])):
+            return subject.prepare_native_module_checks(self.root, **options)
+
     def test_actual_cc23_positive_derives_one_consistent248_declaration(self):
         spec = self.prepare(historical={"root": "540179d70ddf3764334eb6bb59b7fef691054eee",
                                        "prior_scope": 179})
@@ -274,3 +283,59 @@ class NativePreparationTest(unittest.TestCase):
                 self.prepare()
         finally:
             path.write_bytes(original)
+
+    def test_repo_module_binds_real_git_source_without_unused_supervisor(self):
+        spec = self.prepare_module()
+        self.assertEqual(spec["schema_version"], 2)
+        self.assertNotIn("supervisor", spec)
+        self.assertNotIn("worker", spec)
+        self.assertEqual(spec["execution"]["mode"], "repo_module")
+        self.assertEqual(spec["execution"]["arguments"], ["--job", "/tmp/План.json"])
+        path = self.fixture["repo_module_fixture"].replace(".", "/")+".py"
+        raw = self.git("show", self.fixture["root"]+":"+path)
+        self.assertEqual(spec["execution"]["source"]["sha256"], hashlib.sha256(raw).hexdigest())
+        self.assertEqual(spec["execution"]["source"]["git_blob"],
+                         self.git("rev-parse", self.fixture["root"]+":"+path).decode().strip())
+        self.assertTrue(spec["module_source_bytes_verified_at_preparation"])
+        self.assertFalse(spec["loaded_module_bytes_verified"])
+        self.assertEqual(json.loads(subject.serialize_preparation(spec)), spec)
+
+    def test_repo_module_rejects_changed_physical_source(self):
+        path = self.root/(self.fixture["repo_module_fixture"].replace(".", "/")+".py")
+        original = path.read_bytes()
+        try:
+            path.write_bytes(original+b"\n# metadata source fault\n")
+            with self.assertRaisesRegex(EvidenceError, "module_source_changed"):
+                self.prepare_module()
+        finally:
+            path.write_bytes(original)
+
+    def test_repo_module_rejects_foreign_module_and_untyped_arguments(self):
+        for changes in [{"module": "os"}, {"module": "Scripts.StructTrain.TimeLearner...escape"},
+                        {"arguments": [True]}, {"arguments": ["bad\nargument"]}]:
+            with self.subTest(changes=changes):
+                with self.assertRaisesRegex(EvidenceError, "repo_module_declaration"):
+                    self.prepare_module(**changes)
+
+    def test_repo_module_rehashed_source_identity_is_still_structured(self):
+        for fault in ["commit", "path", "git_blob"]:
+            with self.subTest(fault=fault):
+                spec = self.prepare_module()
+                spec["execution"]["source"][fault] = {"commit": "0"*40,
+                    "path": "../foreign.py", "git_blob": "not-a-blob"}[fault]
+                spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
+                with self.assertRaisesRegex(EvidenceError, "repo_module_source"):
+                    subject.serialize_preparation(spec)
+
+    def test_repo_module_cannot_rehash_itself_into_loaded_execution_evidence(self):
+        spec = self.prepare_module();spec["loaded_module_bytes_verified"] = True
+        spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
+        with self.assertRaisesRegex(EvidenceError, "attestation_outside_scope"):
+            subject.serialize_preparation(spec)
+
+    def test_repo_module_checks_fresh_closure_after_source_read(self):
+        changed = copy.deepcopy(self.fixture["closure"])
+        changed["root"]["status"] = " M another-file"
+        with patch.object(subject, "_clean_closure", return_value=changed):
+            with self.assertRaisesRegex(EvidenceError, "source_changed_during_module_capture"):
+                self.prepare_module()

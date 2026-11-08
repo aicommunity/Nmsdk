@@ -10,8 +10,10 @@ import base64
 import hashlib
 import json
 import re
+from pathlib import Path
 
-from .collector_provenance import capture_git_case_inventory, _signed, _relative
+from .collector_provenance import (capture_git_case_inventory, _signed, _relative,
+                                  _git_blob, _frozen, _clean_closure, _git)
 from .native_evidence import require
 from .runtime import digest_json
 
@@ -27,6 +29,9 @@ _INVENTORY_KEYS = {"kind", "schema_version", "source_closure", "root_commit", "f
                    "test_success_attested", "scientific_verdict"}
 _FILE_KEYS = {"commit", "path", "git_blob", "bytes", "sha256", "dialect", "suites",
               "ids", "recognized_ids", "outside_declared_scope"}
+_MODULE_SPEC_KEYS = (_SPEC_KEYS - {"worker", "supervisor", "static_embedded_worker_bytes_equal",
+                                 "physical_worker_bytes_verified"}) | {
+    "execution", "module_source_bytes_verified_at_preparation", "loaded_module_bytes_verified"}
 
 
 def _sha(raw):
@@ -233,6 +238,48 @@ def prepare_native_checks(source_root, *, selections, selected_ids, runplan, par
     return {**spec, "sha256": digest_json(spec)}
 
 
+def _module_declaration(module, arguments):
+    require(type(module) is str and re.fullmatch(
+        r"Scripts\.StructTrain\.TimeLearner(?:\.[A-Za-z_]\w*)+", module) and
+        type(arguments) is list and len(arguments) <= 64 and
+        all(type(v) is str and len(v) <= 16384 and not any(ord(c) < 32 for c in v) for v in arguments),
+        "native_preparation_repo_module_declaration")
+    return module.replace(".", "/")+".py"
+
+
+def prepare_native_module_checks(source_root, *, selections, selected_ids, runplan, partitions,
+                                 module, arguments, claims=None, prior_bindings, prior_originals,
+                                 historical=None):
+    """Schema 2: bind a real repo module, not an unused embedded worker body.
+
+    The source check is a preparation-time observation. The execution process
+    must independently verify its loaded module files and fresh source closure.
+    """
+    path = _module_declaration(module, arguments)
+    inventory = capture_git_case_inventory(source_root, selections=selections)
+    expected = _layout(inventory, selected_ids, runplan, partitions)
+    if claims is None:
+        claims = _copy_json(expected)
+    _claims(claims, expected, inventory)
+    raw, source = _git_blob(Path(source_root), inventory["root_commit"], path, 2*1024**2)
+    physical, _ = _frozen(Path(source_root)/path, 2*1024**2)
+    require(raw == physical, "native_preparation_module_source_changed")
+    require(_clean_closure(Path(source_root)) == inventory["source_closure"] and
+            _git(Path(source_root), "rev-parse", "HEAD").decode().strip() == inventory["root_commit"],
+            "native_preparation_source_changed_during_module_capture")
+    spec = {"kind": "timelearner_native_preparation", "schema_version": 2,
+            "source_inventory": inventory, "current": expected, "current_claims": claims,
+            "prior_bindings": _prior_bindings(prior_bindings, prior_originals),
+            "execution": {"mode": "repo_module", "module": module,
+                          "arguments": arguments, "source": source},
+            "module_source_bytes_verified_at_preparation": True,
+            "loaded_module_bytes_verified": False, "historical": historical,
+            "compiled_inventory_verified": False, "kernel_closure_attested": False,
+            "test_success_attested": False, "scientific_verdict": None}
+    spec = _copy_json(spec)
+    return {**spec, "sha256": digest_json(spec)}
+
+
 def current_claims(inventory, *, selected_ids, runplan, partitions):
     """Canonical current fields for maintained declarative frontends."""
     return _copy_json(_layout(inventory, selected_ids, runplan, partitions))
@@ -243,11 +290,11 @@ def serialize_preparation(spec):
     require(type(spec) is dict and spec.get("kind") == "timelearner_native_preparation" and
             spec.get("sha256") == digest_json({k: v for k, v in spec.items() if k != "sha256"}),
             "native_preparation_content_changed")
-    require(set(spec) == _SPEC_KEYS and type(spec.get("schema_version")) is int and
-            spec["schema_version"] == 1, "native_preparation_serialized_schema")
-    require(
-            spec.get("static_embedded_worker_bytes_equal") is True and
-            all(spec.get(k) is False for k in ["physical_worker_bytes_verified",
+    require(type(spec.get("schema_version")) is int and
+            ((spec["schema_version"] == 1 and set(spec) == _SPEC_KEYS) or
+             (spec["schema_version"] == 2 and set(spec) == _MODULE_SPEC_KEYS)),
+            "native_preparation_serialized_schema")
+    require(all(spec.get(k) is False for k in [
                 "compiled_inventory_verified", "kernel_closure_attested", "test_success_attested"])
             and spec.get("scientific_verdict", "missing") is None,
             "native_preparation_attestation_outside_scope")
@@ -258,13 +305,32 @@ def serialize_preparation(spec):
             inventory["compiled_inventory_verified"] is False and
             inventory["test_success_attested"] is False and inventory["scientific_verdict"] is None,
             "native_preparation_serialized_inventory_schema")
-    _keys(spec["worker"], {"bytes", "sha256"})
-    _keys(spec["supervisor"], {"bytes", "sha256", "platform"})
-    require(spec["supervisor"]["platform"] == "posix", "native_preparation_serialized_schema")
-    for item, limit in [(spec["worker"], 2*1024**2), (spec["supervisor"], 8*1024**2)]:
-        require(type(item["bytes"]) is int and 0 <= item["bytes"] <= limit and
-                type(item["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", item["sha256"]),
-                "native_preparation_serialized_object_schema")
+    if spec["schema_version"] == 1:
+        require(spec["static_embedded_worker_bytes_equal"] is True and
+                spec["physical_worker_bytes_verified"] is False,
+                "native_preparation_attestation_outside_scope")
+        _keys(spec["worker"], {"bytes", "sha256"})
+        _keys(spec["supervisor"], {"bytes", "sha256", "platform"})
+        require(spec["supervisor"]["platform"] == "posix", "native_preparation_serialized_schema")
+        for item, limit in [(spec["worker"], 2*1024**2), (spec["supervisor"], 8*1024**2)]:
+            require(type(item["bytes"]) is int and 0 <= item["bytes"] <= limit and
+                    type(item["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", item["sha256"]),
+                    "native_preparation_serialized_object_schema")
+    else:
+        require(spec["module_source_bytes_verified_at_preparation"] is True and
+                spec["loaded_module_bytes_verified"] is False,
+                "native_preparation_attestation_outside_scope")
+        execution = spec["execution"]
+        _keys(execution, {"mode", "module", "arguments", "source"})
+        require(execution["mode"] == "repo_module", "native_preparation_repo_module_declaration")
+        path = _module_declaration(execution["module"], execution["arguments"])
+        source = execution["source"]
+        _keys(source, {"commit", "path", "git_blob", "bytes", "sha256"})
+        require(source["commit"] == inventory["root_commit"] and source["path"] == path and
+                type(source["bytes"]) is int and 0 <= source["bytes"] <= 2*1024**2 and
+                type(source["git_blob"]) is str and re.fullmatch(r"[0-9a-f]{40}", source["git_blob"]) and
+                type(source["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", source["sha256"]),
+                "native_preparation_repo_module_source")
     require(type(inventory["files"]) is dict and type(inventory["source_closure"]) is dict and
             inventory["documents"] == [], "native_preparation_serialized_inventory_schema")
     _ids(inventory["ids"], "native_preparation_serialized_inventory_schema")
