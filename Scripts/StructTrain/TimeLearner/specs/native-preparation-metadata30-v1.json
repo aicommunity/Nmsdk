@@ -1,8 +1,8 @@
 {
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
-  "suite_id": "native-preparation-metadata24-v1",
-  "package_fingerprint": "3924d68833a6ee6d27021d3fe9ae59e34006913199d15f7dbabfff65186d0a94",
+  "suite_id": "native-preparation-metadata30-v1",
+  "package_fingerprint": "c271e3e2bba5bc1d5ed8dcc285be0a7d3db2d0d0f657c4d6b82ba34ae38f6c68",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation"
   ],
@@ -27,6 +27,12 @@
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_recognized_count_and_source_hash_shape_remain_strict",
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_unknown_nested_active_fields_are_rejected",
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_unknown_schema_or_extra_attestation_field_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_repo_module_binds_real_git_source_without_unused_supervisor",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_repo_module_cannot_rehash_itself_into_loaded_execution_evidence",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_repo_module_checks_fresh_closure_after_source_read",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_repo_module_rehashed_source_identity_is_still_structured",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_repo_module_rejects_changed_physical_source",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_repo_module_rejects_foreign_module_and_untyped_arguments",
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_required_leaf_order_is_not_replaced_by_set_equality",
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_tampering_serialized_spec_fails_integrity_check",
     "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_worktree_not_matching_actual_git_is_rejected",
@@ -36,7 +42,7 @@
     "TL_NATIVE_PREPARATION_FIXTURE": {
       "pattern": "*",
       "files": 2,
-      "fingerprint": "54b2b5bbb7d6a1d6bd83818dee5f7b9596a3afa0e51e7b741b830eb443240e39"
+      "fingerprint": "b9ca54786acc89effb87c384c295cdc1842de5dae07c4072d9b04edc263b5a00"
     }
   }
 }
