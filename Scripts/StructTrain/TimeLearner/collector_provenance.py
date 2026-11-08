@@ -250,7 +250,7 @@ def _git_blob(repository, commit, path, maximum_bytes=16*1024**2):
     return raw, {"commit": commit, "path": path, "git_blob": oid, "bytes": len(raw), "sha256": _sha(raw)}
 
 
-def _literal_cases(raw):
+def _literal_cases(raw, suites=None):
     """The declared dialect only; this is not a general C++/gtest interpreter."""
     text = raw.decode("utf-8")
     kept, definitions = [], []
@@ -268,8 +268,14 @@ def _literal_cases(raw):
     text = "\n".join(kept)
     text = re.sub(r"/\*.*?\*/", lambda m: "\n"*m.group().count("\n"), text, flags=re.S)
     text = re.sub(r"//[^\n]*", "", text)
-    require(not re.search(r"^\s*(?:TEST_F|TEST_P|TYPED_TEST|TYPED_TEST_P)\s*\(", text, re.M),
-            "collector_test_dialect_unsupported")
+    outside = []
+    for match in re.finditer(
+            r"^\s*(TEST_F|TEST_P|TYPED_TEST|TYPED_TEST_P)\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)", text, re.M):
+        family, suite, name = match.groups()
+        require(suites is not None and suite not in suites, "collector_test_dialect_unsupported")
+        outside.append({"macro": family, "suite": suite, "id": suite+"/"+name,
+                        "source_line": text[:match.start(1)].count("\n")+1,
+                        "scope": "outside_declared_scope", "coverage_attested": False})
     cases = [(m.start(), m.group(1)+"/"+m.group(2)) for m in
              re.finditer(r"^\s*TEST\(\s*(\w+)\s*,\s*(\w+)\s*\)", text, re.M)]
     macros = list(re.finditer(r"^\s*ATTEMPT_INVALID_BUDGET_TEST\(\s*(\w+)\s*,", text, re.M))
@@ -284,7 +290,7 @@ def _literal_cases(raw):
         cases += [(m.start(), "TrainingInvalidBudget/"+m.group(1)) for m in macros]
     values = [case for _, case in sorted(cases)]
     require(values and len(values) == len(set(values)), "collector_test_cases_empty_or_duplicate")
-    return values
+    return values, outside
 
 
 def _clean_closure(root):
@@ -322,12 +328,12 @@ def capture_git_case_inventory(source_root, *, selections, inventory_documents=(
         raw, record = _git_blob(source_root, commit, path)
         working, _ = _frozen(source_root/path, 16*1024**2)
         require(working == raw, "collector_worktree_git_bytes_changed")
-        recognized = _literal_cases(raw)
+        recognized, outside = _literal_cases(raw, suites)
         ids = [case for case in recognized if suites is None or case.split("/")[0] in suites]
         require(ids and (suites is None or set(suites) == {c.split("/")[0] for c in ids}),
                 "collector_selected_suite_missing")
         files[path] = {**record, "dialect": DIALECT, "suites": suites, "ids": ids,
-                       "recognized_ids": recognized}
+                       "recognized_ids": recognized, "outside_declared_scope": outside}
         all_ids += ids
     require(len(all_ids) == len(set(all_ids)), "collector_inventory_duplicate_case")
     documents = []

@@ -303,7 +303,15 @@ class CollectorProvenanceTest(unittest.TestCase):
         self.assertNotIn("TrainingInvalidBudget/name", value["ids"])
         self.assertEqual(sum(case.startswith("TrainingInvalidBudget/") for case in value["ids"]), 4)
         self.assertEqual(value["files"][CPP]["sha256"], "44acf89749caa4ff7644ffbba6726a60a8f6b8de91398679e52a61ecd39f1cca")
+        outside = value["files"]["Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp"]["outside_declared_scope"]
+        self.assertEqual([(row["macro"], row["suite"]) for row in outside], [("TEST_P", "NativeLearnerExecution")])
+        self.assertTrue(all(row["scope"] == "outside_declared_scope" and not row["coverage_attested"] for row in outside))
         self.assertFalse(value["compiled_inventory_verified"])
+
+    def test_actual_parameterized_suite_selected_is_rejected(self):
+        with self.assertRaisesRegex(EvidenceError, "collector_test_dialect_unsupported"):
+            self.inventory(selections=[{"path": "Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp",
+                "suites": ["NativeLearnerExecution"], "dialect": subject.DIALECT}])
 
     def test_actual153_stale_nested_fc9_is_rejected_against_Git05f(self):
         self.git("-c", "submodule.recurse=false", "checkout", "--detach", ROOT_A2)
