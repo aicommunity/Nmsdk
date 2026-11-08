@@ -95,10 +95,10 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
-        from .candidate_recovery import project_recovery_configuration
+        from .composite_configuration import project_training_configuration
         # Validate the policy envelope, but execute/hash the original record.
         # Effective support still requires the native strict codec/readback.
-        project_recovery_configuration(config)
+        project_training_configuration(config)
         from .native_model_spec import validate_model_spec
         validate_model_spec(config['model'])
         require(type(config) is dict and type(config["model"]) is dict and
@@ -138,6 +138,9 @@ def validate_job(mode, job, source_case=None):
                     "incomplete_diagnostic_evaluation_labels")
     result = {"job_sha256": job["sha256"], "primary_source_checked": mode not in ("train", "preflight"),
               "effective_model_checked": False, "native_configuration_validation_required": True}
+    if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6:
+        from .composite_configuration import composite_declaration_scope
+        result['composite_measurement_declaration'] = composite_declaration_scope(job['configuration'])
     if live:
         from .live_training_worker import validate_live_plan
         result["finalization"] = validate_live_plan(job["finalization_plan"], config, job["implementation_id"])

@@ -42,6 +42,8 @@ def _project(record, *, kind, configuration_field):
 
 def project_recovery_configuration(configuration):
     """Keep unknown base fields: the native strict codec must still check them."""
+    require(type(configuration) is dict and 'composite_measurement' not in configuration,
+            'composite_measurement_requires_configuration_schema_6')
     return _project(configuration, kind="timelearner_native_cold_configuration",
                     configuration_field="search")
 
