@@ -1,5 +1,9 @@
 # Maintained worker native-проверок
 
+Снимокb6d0 прошёл12 metadata tests на M40 (evidence c32a649d3f0526dc8dd9385bf67508d912cc7f2c). Полный C++ jobA3 выполняется на этом неизменяемом снимке. Следующая локальная правка ниже не применяется к работающему source/cache/runtime и не объявляется проверенной этим запуском.
+
+Выявлено дополнительное ограничение generic profile guard: substring check принимал требуемые flags как префикс более длинной строки. Новый `validate_cache_profile` требует полные уникальные CMake cache entries, включая тип и пустые значения; добавлен meaningful regression с лишним fast-math/другой оптимизацией/дублирующимся key и bare flag. Набор теперь13, дополнительная версия ещё не проверена на сервере. Для неизменяемого A3 независимый reader обязан сверить полные фактические строки cache/generated flags с подготовкойA2; его реальные flags не менялись. Глобальные flags при необходимости задаются отдельными полными required entries.
+
 `Scripts/StructTrain/TimeLearner/native_acceptance_worker.py` заменяет копируемое тело worker для очередного проверочного контура C++. Это подготовленная реализация; серверная приёмка worker и полного набора проверок ещё не выполнена.
 
 Вызов: `python3 -m Scripts.StructTrain.TimeLearner.native_acceptance_worker --job /absolute/job.json`. Job содержит schema1 с kind `timelearner_native_acceptance_job`, workspace, preparation, paths (source/build/runtime/output/resources/framework), build (type/parallel/wall_seconds/required_cache_tokens), limits (whole_wall_seconds/leaf_memory_bytes/leaf_tasks/physical_free_floor_bytes/reservation_memory_bytes/reservation_disk_bytes), asan_options, protected_runtimes, artifacts. Правило artifact содержит glob/minimum/maximum; null maximum означает отсутствие верхней границы. Пути принадлежат workspace; build/runtime/output отделены от читаемых директорий. Существующий runtime не используется как выход новой сборки.

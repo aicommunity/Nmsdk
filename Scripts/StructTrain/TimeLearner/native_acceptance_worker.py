@@ -66,6 +66,23 @@ def _relative(value):
     return value
 
 
+def validate_cache_profile(cache, required):
+    """Require complete, unique CMake cache entries, including empty values."""
+    _require(type(cache) is str and type(required) is list and required, "build_profile")
+    entries = {}
+    for line in cache.splitlines():
+        if not line or line.startswith(("#", "//")) or "=" not in line:
+            continue
+        declaration = line.split("=", 1)[0]
+        if ":" in declaration:
+            entries.setdefault(declaration.rsplit(":", 1)[0], []).append(line)
+    for expected in required:
+        _require(type(expected) is str and "\n" not in expected and "\r" not in expected and
+                 "=" in expected and ":" in expected.split("=", 1)[0], "complete_cache_entry_required")
+        name = expected.split("=", 1)[0].rsplit(":", 1)[0]
+        _require(name and entries.get(name) == [expected], "changed_cached_build_profile:"+name)
+
+
 def validate_job(job, preparation, arguments):
     """Validate data/wiring through the production serializer, without execution."""
     from .native_preparation import serialize_preparation
@@ -433,7 +450,7 @@ class Worker:
                 "-DFETCHCONTENT_FULLY_DISCONNECTED=ON","-DFETCHCONTENT_UPDATES_DISCONNECTED=ON"]
             self.command(configure, "configure.log", 180)
             cache = (self.paths["build"]/"CMakeCache.txt").read_text()
-            _require(all(v in cache for v in self.job["build"]["required_cache_tokens"]), "changed_cached_build_profile")
+            validate_cache_profile(cache, self.job["build"]["required_cache_tokens"])
             ini = (self.runtime/"NeuroModelerConsole.ini").read_text()
             _require("LibrariesPath="+str(self.paths["resources"])+"/" in ini.splitlines() and
                      "ClDescPath="+str(self.paths["resources"])+"/ClDesc/" in ini.splitlines(),

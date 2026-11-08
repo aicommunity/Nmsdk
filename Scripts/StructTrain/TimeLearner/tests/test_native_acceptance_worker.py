@@ -60,6 +60,17 @@ def declarations():
 
 
 class NativeAcceptanceWorkerTest(unittest.TestCase):
+    def test_cache_profile_cannot_accept_prefixes_extra_flags_or_duplicate_key(self):
+        flags = 'CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address -fno-omit-frame-pointer'
+        empty = 'CMAKE_CXX_FLAGS:STRING='
+        subject.validate_cache_profile('// comment\n'+flags+'\n'+empty+'\n', [flags, empty])
+        for changed in (flags+' -ffast-math', flags.replace('-O1', '-O3'),
+                        flags+'\n'+flags.replace(':STRING=', ':UNINITIALIZED=')):
+            with self.subTest(changed=changed), self.assertRaisesRegex(ValueError, 'changed_cached_build_profile'):
+                subject.validate_cache_profile(changed+'\n'+empty, [flags, empty])
+        with self.assertRaisesRegex(ValueError, 'complete_cache_entry_required'):
+            subject.validate_cache_profile(flags, ['-fsanitize=address'])
+
     def test_canonical_selection_and_invocation_are_actual_data(self):
         job, prep, arguments = declarations()
         self.assertEqual(subject.validate_job(job, prep, arguments), ["Suite/First", "Suite/Second"])
