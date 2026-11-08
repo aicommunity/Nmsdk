@@ -2,14 +2,14 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "8f0f148a962bc14657b6dc7498d7110837e13117",
+  "pulse": "a3a4ae70e2a13ebccd72450aa482a90d7ae6e925",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
-      "bytes": 8306,
-      "sha256": "cbb8d9fbde187f31299f0398a54d351e6bd08ab5da374cb6caad5fd732308200",
+      "bytes": 9297,
+      "sha256": "d9f9af1b4405df7528207a0a7180db8193c184f77ea240bf1cd804b00520db2d",
       "expected_test_ids": [
         "CandidateWindowDeclarations.Protocol5RoundtripPreservesExplicitReferenceWindowsAndFullPolicy",
         "CandidateWindowDeclarations.Protocol4KeepsItsFixedWindowWire",
@@ -26,9 +26,11 @@
         "CandidateWindowDeclarations.FrameSpec2RoundtripDoesNotPretendFramesWereCaptured",
         "CandidateWindowDeclarations.Spec2CannotCarryBothCoordinateKinds",
         "CandidateWindowDeclarations.UnknownCoordinateAndBooleanFrameAreRejected",
-        "CandidateWindowDeclarations.Spec2RejectsUnknownKeysAndMissingCoordinate"
+        "CandidateWindowDeclarations.Spec2RejectsUnknownKeysAndMissingCoordinate",
+        "CandidateWindowDeclarations.StandalonePolicyRejectsInvalidHardIntervalAndWidth",
+        "CandidateWindowDeclarations.BoundedTrainingExplicitlyBlocksProtocol5BeforeReferenceFactoryExists"
       ],
-      "count": 16
+      "count": 18
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
@@ -51,9 +53,9 @@
       "count": 12
     }
   ],
-  "expected_count": 28,
+  "expected_count": 30,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 268,
+  "planned_cumulative_scope": 270,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [

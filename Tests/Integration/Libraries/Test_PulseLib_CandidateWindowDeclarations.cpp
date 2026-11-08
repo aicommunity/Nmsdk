@@ -3,6 +3,7 @@
 #include "TimeLearner/FinalVerification.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/CompositeTrainingDeclarations.h"
+#include "TimeLearner/BoundedTraining.h"
 #include <QJsonArray>
 #include <limits>
 #include <type_traits>
@@ -119,4 +120,15 @@ TEST(CandidateWindowDeclarations,Spec2RejectsUnknownKeysAndMissingCoordinate) {
     EXPECT_THROW(DecodeCandidateWindowBasinSpecification(wire),std::invalid_argument);
     wire=EncodeCandidateWindowBasinSpecification(FrameSpec());wire.remove("candidate_frame");
     EXPECT_THROW(DecodeCandidateWindowBasinSpecification(wire),std::invalid_argument);
+}
+TEST(CandidateWindowDeclarations,StandalonePolicyRejectsInvalidHardIntervalAndWidth) {
+    auto policy=DeclaredProtocol().candidateWindowMeasurement->candidateWindowPolicy;
+    auto wire=EncodeCandidateWindowPolicy(policy);auto inputs=wire["inputs"].toArray();auto first=inputs[0].toObject();
+    first["hard_last_frame"]=first["hard_first_frame"];inputs[0]=first;wire["inputs"]=inputs;
+    EXPECT_THROW(DecodeCandidateWindowPolicy(wire),std::invalid_argument);
+    policy.inputs[0].maximumWindowFrames=1;EXPECT_THROW(EncodeCandidateWindowPolicy(policy),std::invalid_argument);
+}
+TEST(CandidateWindowDeclarations,BoundedTrainingExplicitlyBlocksProtocol5BeforeReferenceFactoryExists) {
+    try {ValidateBoundedTrainingInputs(DeclaredProtocol(),BoundedTrainingConfig{},{});FAIL()<<"protocol5 accepted by legacy bounded path";}
+    catch(const std::invalid_argument& e){EXPECT_STREQ(e.what(),"candidate_window_training_requires_proposal_admission");}
 }
