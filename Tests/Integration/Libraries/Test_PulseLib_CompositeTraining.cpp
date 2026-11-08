@@ -406,6 +406,9 @@ TEST(NativeCompositeTraining,BranchDirectDataStopDuringNativeGroup){DirectReques
 namespace {
 template<class Owner> NativeTrainingPlan ServicePlan(NativeCompositeFixture<Owner>& f,double sync=.2) {
     NativeTrainingPlan p;p.protocol=f.protocol;p.probe=f.prototype;
+    // The service validates the request declaration BEFORE creating its actor.
+    // Direct actor fixtures fill these fields when a logical group is queued.
+    p.probe.routing=p.protocol.routing;p.probe.protocolRevision=p.protocol.revision;
     p.maximumReferenceProbes=4;p.maximumInvalidReferenceProbes=0;p.maximumModelSeconds=120.;p.maximumWallSeconds=1800.;
     p.search.runId="actual-native-composite-service";p.search.initialModelRevision=f.Revision();
     p.search.maximumProbes=32;p.search.maximumEdits=4;p.search.maximumCandidatesPerInput=1;

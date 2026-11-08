@@ -14,7 +14,16 @@
     "NativeCompositeDimensions.BranchN6ActualLastInput"
   ],
   "count": 10,
-  "source_sha256": "ffde89413d1b379bd7d5ac895b995b30770993aaf71828eae1d5a92318623f5f",
+  "source_sha256": "db1aca276bed90b08712f3af81ea61508cc14de7719118ec10a42c5b61c35245",
   "prior_scope": 169,
-  "new_scope_total": 179
+  "new_scope_total": 179,
+  "service_probe_metadata_fixture_correction": {
+    "parent_root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+    "pulse_unchanged": "f925e37247bb987980fce80da47831a1c31d04c9",
+    "actual_service_failure_before_fix": "native_composite_plan_protocol_mismatch",
+    "negative_evidence_commit": "153751c4b3a3b2c0a25f10540265b41233197f7c",
+    "correction": "Explicit probe routing and protocolRevision in ServicePlan; unchanged production validation and mathematics",
+    "literal_206_ids_unchanged": true,
+    "runtime_acceptance": false
+  }
 }
