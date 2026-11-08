@@ -82,8 +82,21 @@ Classic-6 с ERROR и принял чистый повтор; численные
 
 Выделен общий production extractor измеренных вершин без смены assignment
 policy. На Elder приняты78 unit и15 native cases: [normal93](MeasuredResponseNormalVerification.json).
-ASan/native и A/B на M40 продолжаются; [точные задания](MeasuredResponseJobs.json).
+На M40 завершены78 unit и9 native checks с ASan; Classic N=6 превысил
+wall budget1200 секунд, остальные5 cases и A/B не выполнены. Попытка закрыта,
+lease освобождён, evidence сохранён; полная ASan-приёмка не заявляется:
+[квитанция неполной проверки](MeasuredResponseAsanPartialVerification.json),
+[точные задания](MeasuredResponseJobs.json).
 Это не исправление принадлежности пиков полной пачки и не завершение этапа7.
+
+Подготовлен отдельный production diagnostic `ResponseDomainAssociation`:
+26/26 проверок на Elder и26/26 на M40 с ASan, без skipped. Он сохраняет
+измеренные вершины и signed offsets, отклоняет общую вершину/плато и явно
+не допускает `Hypothesis` к сертификату обучения. ASan здесь проверяет
+utility, а не весь SDK. [Контракт, receipts и подробная подготовка native bridge](ResponseDomainAssociation.ru.md).
+Следующий шаг — связать штатные onPrepared/onSample/result с portable
+evidence и независимым reader; затем отдельно принять метод происхождения
+отклика. Эксклюзивность временного окна сама этого не доказывает.
 
 Миграция расширена до242 записей (240 retired/2 moved): четыре исторических
 AsymRm seed/reset инструмента удалены без wrappers. На обоих workers прошли
