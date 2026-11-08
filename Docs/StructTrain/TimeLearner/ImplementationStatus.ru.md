@@ -43,6 +43,10 @@ Python wire67 и collector39 прошли совместную проверку1
 [Независимая квитанция106](WireCollectorCombined106M40A1Verification.json),
 [контракт коллектора](CollectorProvenanceContract.ru.md).
 Эти проверки не подтверждают native-архивы, Train → Test или научную разделимость.
+Maintained native_preparation прошёл24/24 metadata tests на M40;
+[квитанция](NativePreparation24M40A1IndependentVerification.json).
+После merge весь Scripts tree побайтно равен проверенному5ebb (435 Python files).
+CanonicalSpec wiring и repo-module подготовка полного248 ещё выполняются.
 На Elder удалены89 подтверждённых дубликатов статических библиотек;
 данные/модели/ELF/INI/логи сохранены, собственная группа закрыта.
 [Операция и ограничения места](ElderDuplicateStaticArchiveRetirement-20261108.ru.md).
