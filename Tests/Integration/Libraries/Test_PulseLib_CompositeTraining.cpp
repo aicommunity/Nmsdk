@@ -562,8 +562,14 @@ template<class Owner> void ColdAndProtocolRoundtrip() {
 }
 template<class Owner> void ColdAutostart(int mode) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);f.attempt.reset();
+    // The production setter intentionally refuses ControllerVersion changes
+    // while a native model is owned. Start a real cold owner before opting in.
+    f.owner->Default();f.owner->SetGlobalTimeStep(2000);f.owner->EnablePostTrainTuning=false;
+    f.owner->AutoCalibrateFixedLTZThreshold=false;f.owner->IsNeedToTrain=false;
     f.owner->CalculateMode=mode;f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
-    f.owner->ControllerVersion=2;f.owner->Build();ASSERT_TRUE(f.owner->IsReady());
+    f.owner->ControllerVersion=2;ASSERT_EQ(f.owner->ControllerVersion.GetData(),2);
+    f.owner->Build();ASSERT_TRUE(f.owner->IsReady());f.model->Init();f.model->Reset();
+    ASSERT_TRUE(f.owner->IsInit());ASSERT_TRUE(f.owner->ConfiguredModelInitialized.GetData());
     std::size_t raw=0,groups=0;ConfiguredNativeEvidenceSinks sinks;
     sinks.onPrepared=[&](const auto&,const auto&){++raw;};sinks.onComposite=[&](const auto&){++groups;};
     f.owner->SetConfiguredNativeEvidenceSinks(sinks);f.owner->IsNeedToTrain=true;ServiceTicks(f);
