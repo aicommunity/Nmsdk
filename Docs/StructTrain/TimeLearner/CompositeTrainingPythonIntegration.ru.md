@@ -158,3 +158,14 @@ Exact worker/kernel owner совпадает, unit закрыт, lease released 
 expected_source_files; повторная сборка evidence использовала то же завершённое
 задание, тесты не запускались повторно. Native package5 позитивная приёмка,
 реальные C0 fixtures и полная warm/pipeline проверка остаются открытыми.
+
+Следующий warm/number/snapshot source
+`29182db1fd8641e5cfef10ad0a9eebf219b1f7ed` проверен на M40:63/63,
+failures/errors/skips0; evidence
+`57f30ef87512f2f7052b2873d5d2ee91198069e5`. Все428 Python blobs и32 archive
+members проверены независимо;32608 bytes, SHA256
+`5d88a39333b90798f8704155427ff46b6f4dd48d3bd50ed43d3dffe498a65994`.
+Worker PID2901337/start321349983, exact unit закрыт, lease released.
+[Metadata-проверка](CompositeTrainingPythonWarmVerification-20261108.json).
+Тест warm boundary проверяет consistency binding, не выдаёт native training
+certificate. Полный positive native producer/import gate по-прежнему открыт.
