@@ -1,4 +1,4 @@
-# Готовность к научным экспериментам — 08.11.2026
+# Готовность к научным экспериментам — 09.11.2026
 
 ## Текущий допуск нового burst-контроллера
 
@@ -6,9 +6,27 @@
 Приняты core143, диагностические пробы и отдельная арифметика окон; это разные
 срезы, их нельзя складывать в доказательство готовности всего контроллера.
 Elder service-проверка обнаружила потерю уведомления об отменённой пробе.
-Исправление Root `cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237` / Pulse
-`88ea9c7ab3583da601b1f01ec84bf6f122875a34` подготовлено с248 проверками,
-но ещё не прошло серверную приёмку.
+Исправление на Pulse88 проверено в полном baseline A3 частично:230PASS,
+одинFAIL и17NOT RUN. Падение выявило другой дефект cold6 JSON producer:
+в actual6 source configurations версия записалась строкой `sample0`.
+[Отрицательная попытка независимо принята как отрицательный результат](CompositeFull248A3NegativeAcceptance-20261109.ru.md),
+а весь248 и semantic reader этих конфигураций не приняты.
+
+Минимальный исправленный baseline A4 Root478/Pulse4a уже собран и запущен
+на M40 с250selected/137leaves. На последнем подтверждённом снимке19PASS,
+ошибок нет; затем потеряна связь с jump. Это промежуточный счётчик, текущий
+completion неизвестен. Первые4codec и оставшиеся ранее незапущенные controls
+проверяются перед230regressions. [Подготовка, handles и ограничения](Cold6A4LaunchReview-20261109.ru.md).
+После полного результата отдельно нужны actual6 native archive reader и
+следующие candidate-window/lifetime gates; App execution3/codecs и будущий
+Train5/control-lifetime source не включены в минимальный baseline A4.
+
+Прежние source-only E11/BB1 дополнены общей cold6/cold7/execution3 исправленной
+[парой corrected/unfixed](ColdEnvelopeLifetimePairReadiness-20261109.ru.md),
+которая ещё не получила runtime-приёмку. Не смешивать её со снимком A4.
+27проверок запуска/renderer на другом tool-source и terminal Classic render
+не подтверждают качество обучения: их Git retrieval/Root verification и
+visual QA после сетевого разрыва ещё не завершены.
 
 До следующего целевого cold Train необходимо последовательно принять:
 
