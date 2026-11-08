@@ -89,3 +89,26 @@ Independent Python replay нового assignment ещё отсутствует.
 контроли не являются обученными моделями, не опровергают августовские наблюдения
 и не подтверждают классификацию. NativeTrainingService/final proof integration
 остаётся следующим обязательным [блоком](MatchedOmissionTrainingIntegration.ru.md).
+
+
+## Native controls с полными диагностическими полями
+
+Follow-up10/10 на Elder принят по [независимой квитанции](MatchedOmissionNativeControlsVerification.json),
+evidence `ffe14543d9055c8c52b1e614b172e8077463ff40`, compiled root58f5b5181 /
+PulseLibfcc3fed. Все396 членов архива,23 source bindings, исходные IDs,
+loaded executable, runtime freeze и закрытие обеих групп подтверждены.
+Сохранён предшествующий disk-preflight refusal без запуска сборки/тестов.
+
+Два новых N2 positive controls (Classic/Branch,2000 Гц, второй interval0.5s)
+дали Valid assignment реального full-максимума. Четыре прежних coupled controls
+на2000/20000 Гц явно проверяют Ambiguous. Четыре stop/edit controls не выдали
+assignment. Всего28 native bursts/CSV; первая завершённая трасса stop/edit
+также сохранена. JSON фиксирует policy, support sets, причины и выбранную
+вершину; первичные кривые не заменены только derived summary.
+
+Это10 повторных/дополнительных native cases, не ещё10 новых math cases:
+normal55 и follow-up10 вместе покрывают57 разных tests данного среза.
+Численные вычисления выполнялись только на серверах; локальная сверка —
+Git/hash/metadata/JUnit. Independent Python recomputation, графики этих новых
+групп, ASan57 и подключение к обучению остаются открытыми. Valid assignment
+контрольного пика не означает Exact Train или успешную классификацию.
