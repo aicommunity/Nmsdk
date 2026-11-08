@@ -1,0 +1,142 @@
+{
+  "kind": "independent_historical_protocol_pilot_metadata_verification",
+  "evidence_commit": "72af32bdd057952d94ffe0241a3d6597f6a193f0",
+  "tool_root": "ea5c884e7a8e544e1fa9b4787886ab1058960625",
+  "historical_root": "de02a3809395dd0bbd11e2ba792bfc04a51c89f3",
+  "archive_members_verified": 263,
+  "archive_bytes": 13134272,
+  "archive_sha256": "593efde1cfb4ccbd193bbf68e628cda8c7b1236a2250e93f8a9a14294de1c686",
+  "tool_source_hashes_verified": 387,
+  "actual_new_native_processes_completed": 6,
+  "reused_native_processes": 2,
+  "new_loaded_file_bindings": 156,
+  "reused_baseline_file_bindings_verified": 80,
+  "python_checks_passed": 17,
+  "complete_case_count": 4,
+  "rows": [
+    {
+      "case": "original-order-gap1.5",
+      "source_observation": "reused-baseline-observations.json",
+      "native_correct": 6,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "pre_stimulus_spikes": [],
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "original-order-gap3",
+      "source_observation": "original-order-gap3/observations.json",
+      "native_correct": 6,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "target_positions": [
+        0
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "pre_stimulus_spikes": [],
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    },
+    {
+      "case": "rotated-order-gap1.5",
+      "source_observation": "rotated-order-gap1.5/observations.json",
+      "native_correct": 6,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "pre_stimulus_spikes": [],
+      "actual_inter_burst_gaps": [
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.5110000000000001,
+        1.511000000000001,
+        1.511000000000001,
+        1.5109999999999992
+      ]
+    },
+    {
+      "case": "rotated-order-gap3",
+      "source_observation": "rotated-order-gap3/observations.json",
+      "native_correct": 6,
+      "native_counts": {
+        "TP": 1,
+        "FP": 2,
+        "FN": 0,
+        "TN": 5
+      },
+      "target_positions": [
+        7
+      ],
+      "FP_sample_ids": [
+        "phasea-4",
+        "phasea-6"
+      ],
+      "late_spikes": 0,
+      "pre_stimulus_spikes": [],
+      "actual_inter_burst_gaps": [
+        3.011,
+        3.0109999999999997,
+        3.0109999999999992,
+        3.011000000000001,
+        3.0109999999999992,
+        3.0109999999999992,
+        3.011000000000003
+      ]
+    }
+  ],
+  "group_closed": true,
+  "lease_released": true,
+  "local_trace_arithmetic_executed": false,
+  "independent_training_repeats": false,
+  "whole16_condition_matrix_complete": false,
+  "temporal_report_complete": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

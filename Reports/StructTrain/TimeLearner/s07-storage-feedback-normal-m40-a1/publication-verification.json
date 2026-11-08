@@ -1,0 +1,47 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-storage-feedback-normal-a1",
+      "members": 161,
+      "archive_bytes": 365876,
+      "archive_sha256": "c6bc8daa15a3ff5096abc5b656dd2ef5aa4d34a4bdc1b923cd54af814f91cbf4"
+    }
+  ],
+  "terminal": {
+    "build_passed": true,
+    "native_gates_executed": true,
+    "storage_feedback_scoped_acceptance_passed": true,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "native_verdict": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 18,
+      "observed": 18,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "d26f56f9a83552d80cbc12e49d0ded6b3517f399f75ce13e8dd0bde7d2db2c9d"
+    },
+    "scientific_verdict": null
+  },
+  "reader_result": {
+    "tests_run": 13,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "two_previous_runtimes_unchanged": true,
+  "engineering_threshold": 1e-06,
+  "stock_models_modified": false,
+  "ASan_verified": false,
+  "second_host_verified": false,
+  "whole_plan_complete": false,
+  "scientific_verdict": null
+}

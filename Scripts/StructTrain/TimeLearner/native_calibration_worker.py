@@ -17,6 +17,7 @@ from .learned_evidence import load_case
 from .model_identity import canonical_model_sha256 as sha
 from .native_evidence import EvidenceError, count, equal, load, load_json, number, require
 from .process_runner import execute, verify_runtime
+from .native_process_policy import validate_policy, execute_native, audit_contained_attempt
 from .recognition_evidence import audit_recognition_source
 
 JOB_FIELDS = {"kind", "schema_version", "owner_class", "implementation_id", "frequency_hz",
@@ -277,13 +278,17 @@ def audit_execution(directory, job, source_case, *, post_tune=False):
 
 
 @_evidence_boundary
-def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *, post_tune=False):
+def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *, post_tune=False, process_policy=None):
     job_path, source_path = Path(job_path).resolve(strict=True), Path(source_path).resolve(strict=True)
     job = load(job_path)
     preflight = validate_job(job, load_case(source_path), post_tune=post_tune)
+    policy = validate_policy(process_policy, maximum_wall_seconds)
     runtime = load(Path(runtime_path).resolve(strict=True)); executable = verify_runtime(runtime)
+    from .native_cli import inspect_native_cli
+    cli = inspect_native_cli(runtime, ['posttune' if post_tune else 'calibrate'])
     require(number(maximum_wall_seconds) > 0, "invalid_worker_wall_budget")
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
+    _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();primaries = inputs/"source";primaries.mkdir()
     stem = source_path.name.removesuffix("_learned_state.json")
     paths = [source_path, source_path.with_name(stem+"_learned_summary.json")]
@@ -295,16 +300,21 @@ def run_job(job_path, source_path, runtime_path, output, maximum_wall_seconds, *
     source_case = load_case(primaries/source_path.name)
     require(validate_job(job, source_case, post_tune=post_tune) == preflight, "worker_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
-    process = execute(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
+    if policy is not None:
+        _write(inputs/"process-policy.json", policy)
+    executor = execute if policy is None else execute_native
+    options = {} if policy is None else {"policy": policy}
+    process = executor(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
         "--timelearner-posttune" if post_tune else "--timelearner-calibrate", str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
-        executable.parent, output/"process", maximum_wall_seconds)
+        executable.parent, output/"process", maximum_wall_seconds, **options)
     verify_runtime(runtime)
     require(process["execution"] != "completed" or process["runtime_provenance"] == "loaded_files_captured",
             "worker_loaded_runtime_provenance_missing")
     audit = audit_execution(output/"native", job, source_case, post_tune=post_tune) if process["execution"] == "completed" else None
     analysis_code = [{"path": p.name, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
                      for p in sorted(Path(__file__).parent.glob("*.py"))]
-    result = {"kind": "timelearner_post_tune_run_manifest" if post_tune else "timelearner_calibration_run_manifest", "schema_version": 1,
+    result = {"kind": "timelearner_post_tune_run_manifest" if post_tune else "timelearner_calibration_run_manifest", "schema_version": 2 if policy is not None else 1,
+              **({"process_policy": policy} if policy is not None else {}),
               "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
               "attempt_id": job["specification"]["attempt_id"], "job_sha256": job["sha256"],
               "source_package_path": (primaries/source_path.name).relative_to(output).as_posix(),
@@ -321,11 +331,12 @@ def audit_run_manifest(path, *, post_tune=False):
     """Portable artifact audit; does not attest an arbitrary process record."""
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
+    contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] == 2
     require(set(manifest) == {"kind", "schema_version", "execution", "validity", "attempt_id", "job_sha256",
             "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
-            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} and
+            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} | ({"process_policy"} if contained else set()) and
             manifest["kind"] == ("timelearner_post_tune_run_manifest" if post_tune else "timelearner_calibration_run_manifest") and type(manifest["schema_version"]) is int and
-            manifest["schema_version"] == 1 and manifest["independent_partition_verified"] is False and
+            manifest["schema_version"] in (1, 2) and manifest["independent_partition_verified"] is False and
             manifest["evaluation_verdict"] is None, "unknown_calibration_run_manifest")
     records = manifest["artifacts"]
     require(type(records) is list and all(type(r) is dict and set(r) == {"path", "bytes", "sha256"} and
@@ -352,10 +363,15 @@ def audit_run_manifest(path, *, post_tune=False):
     require(manifest["execution"] == process["execution"] and manifest["runtime_fingerprint"] ==
             process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime))
             and manifest["source_closure"] == runtime["source_closure"], "worker_run_runtime_scope_changed")
-    request = load(root/"process/request.json")
+    if contained:
+        policy = validate_policy(manifest["process_policy"])
+        require(policy is not None and load(root/"input/process-policy.json") == policy, "worker_process_policy_changed")
+        request = audit_contained_attempt(root/"process", runtime, policy, auditable=process["execution"] == "completed")
+    else:
+        request = load(root/"process/request.json")
     arguments = request["arguments"]
-    require(type(arguments) is list and len(arguments) == 6 and all(type(v) is str for v in arguments) and
-            arguments[::2] == ["--app-ini", "--timelearner-posttune" if post_tune else "--timelearner-calibrate", "--timelearner-output"] and
+    require(type(arguments) is list and len(arguments) == (8 if contained else 6) and all(type(v) is str for v in arguments) and
+            arguments[:6:2] == ["--app-ini", "--timelearner-posttune" if post_tune else "--timelearner-calibrate", "--timelearner-output"] and
             arguments[1] == runtime["app_ini"]["path"], "worker_run_process_arguments_changed")
     original_output = PurePosixPath(arguments[5])
     require(original_output.is_absolute() and original_output.name == "native" and
@@ -371,7 +387,7 @@ def audit_run_manifest(path, *, post_tune=False):
                 owned["executable_sha256"] == runtime["executable"]["sha256"] and
                 owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
                 type(loaded) is list and expected_executable in loaded and process["returncode"] == 0 and
-                process["ownership_scope"] == "launched_executable_only", "worker_run_owned_runtime_changed")
+                process["ownership_scope"] == ("bound_cgroup" if contained else "launched_executable_only"), "worker_run_owned_runtime_changed")
     audit = audit_execution(root/"native", job, source_case, post_tune=post_tune) if process["execution"] == "completed" else None
     require(manifest["analysis"] == audit and manifest["validity"] == ("valid" if audit else "unverified_execution") and
             (not audit or process["runtime_provenance"] == "loaded_files_captured"), "worker_run_analysis_changed")

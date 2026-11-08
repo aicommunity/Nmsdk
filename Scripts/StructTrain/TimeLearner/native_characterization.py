@@ -6,6 +6,7 @@ artifacts. Process ownership/runtime evidence remain the supervisor's task.
 from copy import deepcopy
 from pathlib import Path
 import struct
+import re
 
 from .native_calibration_worker import _digest, _evidence_boundary, _signed
 from .native_evidence import audit_probe, count, equal, load, number, require
@@ -23,8 +24,9 @@ PROBE_FIELDS = {'run_id', 'trial_id', 'sample_id', 'protocol_revision', 'input_i
 @_evidence_boundary
 def validate_job(job):
     version = job.get('schema_version') if type(job) is dict else None
-    require(type(version) is int and version in (1, 2), 'unknown_characterization_job')
-    require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version == 2 else set()) and
+    require(type(version) is int and version in (1, 2, 3, 4, 5, 6), 'unknown_characterization_job')
+    require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version >= 2 else set()) |
+            ({'channel_diagnostics'} if version >= 3 else set()) | ({'presentation'} if version >= 4 else set()) | ({'profile_intervention'} if version == 5 else set()) and
             job['kind'] == 'timelearner_native_probe_job', 'unknown_characterization_job')
     _digest(job)
     validate_model_spec(job['model'])
@@ -43,10 +45,21 @@ def validate_job(job):
     require(frequency > 0 and number(probe['duration']) > 0 and
             equal(probe['maximum_sample_gap'], 1/frequency) and number(probe['minimum_amplitude']) > 0 and
             1 <= count(probe['maximum_samples']) <= 100000000 and probe['record_spikes'] is False and
-            probe['peak_selection'] in ('isolated_window', 'assigned_burst_wave'), 'characterization_protocol_invalid')
+            probe['peak_selection'] in (('none',) if version == 6 else
+                ('isolated_window', 'assigned_burst_wave', 'single_impulse_maximum')), 'characterization_protocol_invalid')
+    require(is_single_pulse(job) or probe['peak_selection'] != 'single_impulse_maximum',
+            'maximum_requires_single_impulse_presentation')
     window = probe['window']
-    require(type(window) is dict and set(window) == {'begin', 'end'} and
-            0 <= number(window['begin']) < number(window['end']) <= probe['duration'], 'characterization_window_invalid')
+    if version == 6:
+        require(window is None, 'subset_peak_window_forbidden')
+        require(model['branch'] or probe['input_index'] == 0, 'subset_classic_requires_zero_input_index')
+        subset_presented_isi(job)
+        require(job['resistance_intervention'] == [] and
+                job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
+                'subset_source_or_intervention_changed')
+    else:
+        require(type(window) is dict and set(window) == {'begin', 'end'} and
+                0 <= number(window['begin']) < number(window['end']) <= probe['duration'], 'characterization_window_invalid')
     require(1 <= count(job['maximum_model_ticks']) <= 1000000000 and number(job['maximum_wall_seconds']) > 0,
             'characterization_budget_invalid')
     profile = job['stimulus_profile']
@@ -57,7 +70,22 @@ def validate_job(job):
             type(profile['use_transit_signal']) is bool and type(profile['use_pattern_output']) is bool,
             'characterization_stimulus_invalid')
     number(profile['amplitude'])
-    if version == 2:
+    if version == 5:
+        validate_profile_intervention(job['profile_intervention'])
+        require(job['presentation'] in ({'kind': 'single_pulse_characterization'}, {'kind': 'native_burst'}) and
+                job['resistance_intervention'] == [] and
+                job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
+                'profile_probe_presentation_invalid')
+    if version == 4:
+        require(is_single_pulse(job), 'single_pulse_presentation_invalid')
+    if is_single_pulse(job):
+        require(job['presentation'] == {'kind': 'single_pulse_characterization'} and
+                job['resistance_intervention'] == [] and probe['peak_selection'] in ('isolated_window', 'single_impulse_maximum') and
+                job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
+                'single_pulse_presentation_invalid')
+    if version >= 3:
+        require(type(job['channel_diagnostics']) is bool, 'characterization_diagnostics_boolean_required')
+    if version >= 2:
         source = job['source_stopped'];_digest(source)
         require(source['kind'] == 'timelearner_stopped_state' and source['state_kind'] == 'diagnostic' and
                 source['certificate'] is None and source['controller_version'] == 2 and
@@ -66,6 +94,61 @@ def validate_job(job):
                 'characterization_stopped_source_mismatch')
         expected_import_parameters(job)
     return {'job_sha256': job['sha256'], 'native_configuration_validation_required': True, 'training_started': False}
+
+
+def is_single_pulse(job):
+    return job.get('presentation') == {'kind': 'single_pulse_characterization'}
+
+
+def subset_presented_isi(job):
+    presentation = job['presentation'];source = job['model']['initial_isi']
+    require(type(presentation) is dict and set(presentation) == {'kind', 'source_ordinals'} and
+            presentation['kind'] == 'stimulus_subset_characterization', 'invalid_subset_presentation')
+    indices = presentation['source_ordinals']
+    require(type(indices) is list and 0 < len(indices) <= len(source) and
+            all(type(i) is int and 0 <= i < len(source) for i in indices) and
+            all(b > a for a,b in zip(indices, indices[1:])), 'invalid_subset_source_ordinals')
+    total = 0.
+    for value in source:
+        require(number(value) >= 0, 'invalid_subset_source_interval');total = number(total+value)
+    if len(indices) == len(source):return deepcopy(source)
+    result = [];start = 0
+    for index in indices:
+        gap = 0.
+        for value in source[start:index+1]:gap = number(gap+value)
+        result.append(gap);start = index+1
+    return result
+
+
+def prepare_subset_job(case, input_index, trial_id, source_ordinals, *, maximum_wall_seconds=900,
+                       channel_diagnostics=False):
+    job = prepare_stopped_job(case, input_index, trial_id, maximum_wall_seconds=maximum_wall_seconds,
+                              channel_diagnostics=channel_diagnostics)
+    job.pop('sha256');job.update(schema_version=6, presentation={
+        'kind': 'stimulus_subset_characterization', 'source_ordinals': deepcopy(source_ordinals)})
+    job['probe'].update(peak_selection='none', window=None)
+    job['probe']['protocol_revision'] += '/stimulus-subset-characterization-v1'
+    job = _signed(job);validate_job(job);return job
+
+
+def validate_profile_intervention(value):
+    require(type(value) is dict and set(value) == {'kind', 'image_prefix', 'feedback_gain', 'baseline_reconstruction'} and
+            value['kind'] == 'uniform_feedback_storage_profile' and type(value['image_prefix']) is str and
+            re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,95}', value['image_prefix']) is not None and
+            number(value['feedback_gain']) >= 0 and type(value['baseline_reconstruction']) is bool,
+            'invalid_feedback_profile_intervention')
+
+
+def prepare_feedback_profile_job(case, input_index, trial_id, *, image_prefix, feedback_gain,
+                                 baseline_reconstruction=False, single_pulse=False, maximum_wall_seconds=900):
+    require(type(single_pulse) is bool, 'profile_probe_presentation_invalid')
+    builder = prepare_single_pulse_job if single_pulse else prepare_stopped_job
+    job = builder(case, input_index, trial_id, maximum_wall_seconds=maximum_wall_seconds, channel_diagnostics=True)
+    job.pop('sha256')
+    job.update(schema_version=5, presentation={'kind': 'single_pulse_characterization' if single_pulse else 'native_burst'},
+               profile_intervention={'kind': 'uniform_feedback_storage_profile', 'image_prefix': image_prefix,
+                   'feedback_gain': feedback_gain, 'baseline_reconstruction': baseline_reconstruction})
+    job = _signed(job);validate_job(job);return job
 
 
 def prepare_job(training_job, input_index, trial_id, *, maximum_wall_seconds=None):
@@ -108,7 +191,8 @@ def expected_import_parameters(job):
     return parameters
 
 
-def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=None, maximum_wall_seconds=900):
+def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=None, maximum_wall_seconds=900,
+                       channel_diagnostics=None):
     from .stopped_evidence import audit_stopped_state
     audit_stopped_state(*case)
     package = case[0];c = package['configuration']
@@ -122,7 +206,90 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
         'stimulus_profile': deepcopy(c['stimulus_profile']), 'probe': probe, 'source_stopped': deepcopy(package),
         'resistance_intervention': deepcopy(resistance_intervention or []),
         'maximum_model_ticks': (int(c['duration']*c['model']['frequency_hz'])+4)*(2 if resistance_intervention else 1), 'maximum_wall_seconds': maximum_wall_seconds})
+    if channel_diagnostics is not None:
+        require(type(channel_diagnostics) is bool, 'characterization_diagnostics_boolean_required')
+        job.update(schema_version=3, channel_diagnostics=channel_diagnostics)
+        job.pop('sha256')
+        job = _signed(job)
     validate_job(job);return job
+
+
+def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_seconds=900, channel_diagnostics=True,
+                            peak_selection='isolated_window'):
+    """Only transient presentation changes; full source model/target is imported."""
+    job = prepare_stopped_job(case, input_index, trial_id, maximum_wall_seconds=maximum_wall_seconds,
+                              channel_diagnostics=channel_diagnostics)
+    job.update(schema_version=4, presentation={'kind': 'single_pulse_characterization'})
+    require(peak_selection in ('isolated_window', 'single_impulse_maximum'), 'single_pulse_unknown_peak_selection')
+    job['probe']['peak_selection'] = peak_selection
+    job['probe']['window'] = {'begin': 0., 'end': job['probe']['duration']}
+    job['probe']['protocol_revision'] += '/single-pulse-characterization-v1'
+    if peak_selection == 'single_impulse_maximum':
+        job['probe']['protocol_revision'] += '/single-impulse-maximum-v1'
+    job.pop('sha256')
+    job = _signed(job);validate_job(job);return job
+
+
+def audit_feedback_profile_import(job, record, candidate):
+    _digest(record)
+    from .feedback_intervention import audit_profile_delta
+    from .archive_transfer_reports import graph
+    fields = {'kind', 'schema_version', 'source_stopped_sha256', 'source_identity', 'candidate_identity',
+              'dataset_identity', 'class_renames', 'image_prefix', 'feedback_gain', 'baseline_reconstruction',
+              'image_definitions', 'image_definitions_fingerprint', 'physical_dynamics_reset',
+              'controller_history_copied', 'certificate_copied', 'training_started', 'sha256'}
+    factor, source = job['profile_intervention'], job['source_stopped']
+    require(set(record) == fields and record['kind'] == 'native_feedback_profile_import' and
+            type(record['schema_version']) is int and record['schema_version'] == 1 and
+            record['source_stopped_sha256'] == source['sha256'] and
+            record['source_identity'] == source['neuron']['graph']['identity'] and
+            record['candidate_identity'] == candidate and record['dataset_identity'] == source['dataset']['identity'] and
+            all(record[k] == factor[k] for k in ('image_prefix', 'feedback_gain', 'baseline_reconstruction')) and
+            record['physical_dynamics_reset'] is True and
+            all(record[k] is False for k in ('controller_history_copied', 'certificate_copied', 'training_started')),
+            'profile_probe_import_scope_changed')
+    audit_profile_delta(record['source_identity'], candidate, record['class_renames'],
+                        feedback_gain=None if factor['baseline_reconstruction'] else factor['feedback_gain'])
+    definitions = record['image_definitions']
+    require(type(definitions) is list and 0 < len(definitions) <= 4096, 'profile_probe_invalid_images')
+    semantic, edges = {}, {}
+    def classes(model):
+        names = set()
+        for node in model['nodes']:
+            names.add(node['class'])
+            for name, prop in node['parameters'].items():
+                if name.endswith('ClassName'):
+                    data = prop['data']
+                    if data['type'] == 'utf8' and data['value']:names.add(data['value'])
+        return names
+    for definition in definitions:
+        require(type(definition) is dict and set(definition) == {'name', 'kind', 'base_class', 'snapshot', 'dependencies'} and
+                type(definition['name']) is str and definition['name'] and definition['name'] not in semantic and
+                definition['kind'] in ('native_required', 'derived_image') and type(definition['base_class']) is str and
+                (bool(definition['base_class']) == (definition['kind'] == 'derived_image')) and
+                type(definition['dependencies']) is list and all(type(v) is str and v for v in definition['dependencies']),
+                'profile_probe_invalid_image_definition')
+        model = graph(definition['snapshot'])
+        name, base = definition['name'], definition['base_class']
+        expected = classes(model) - {name}
+        if base:expected.add(base)
+        require(len(set(definition['dependencies'])) == len(definition['dependencies']) and
+                set(definition['dependencies']) == expected, 'profile_probe_image_dependencies_changed')
+        edges[name] = expected
+        semantic[name] = {'kind': definition['kind'], 'base_class': base, 'model': model}
+    require(all(deps <= semantic.keys() for deps in edges.values()) and
+            classes(candidate['model']) <= semantic.keys() and sha(semantic) == record['image_definitions_fingerprint'],
+            'profile_probe_image_closure_or_fingerprint_changed')
+    done, visiting = set(), set()
+    def visit(name, depth):
+        require(depth <= 128 and name not in visiting, 'profile_probe_image_cycle_or_depth')
+        if name in done:return
+        visiting.add(name)
+        for child in edges[name]:visit(child, depth+1)
+        visiting.remove(name);done.add(name)
+    for name in edges:visit(name, 0)
+    return {'image_metadata_checked': True, 'native_xml_readback_proof_required': True,
+            'waveform_equivalence_verified': False, 'scientific_verdict': None}
 
 
 def expected_import_model(job):
@@ -148,16 +315,21 @@ def audit_execution(directory):
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
     validate_job(job);_digest(execution)
     schema = execution['schema_version']
-    require(type(schema) is int and schema in (1, 2, 3), 'characterization_execution_schema')
+    require(type(schema) is int and schema in (1, 2, 3, 4, 5, 6), 'characterization_execution_schema')
     require(set(execution) == {'kind', 'schema_version', 'execution', 'job_sha256', 'model_revision', 'frequency_hz',
             'model_ticks', 'model_time_begin', 'model_time_end', 'training_started', 'search_executed', 'certificate_available',
             'model_unchanged', 'controller_idle', 'probe_status', 'observation_valid', 'observation_complete', 'artifacts',
             'evaluation_verdict', 'sha256'} | ({'probe_wall_seconds'} if schema >= 2 else set()) |
-            ({'terminal_phase', 'resistance_intervention_applied'} if schema == 3 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
+            ({'terminal_phase', 'resistance_intervention_applied'} if schema >= 3 else set()) |
+            ({'channel_diagnostics_enabled', 'channel_diagnostic_files'} if schema >= 4 else set()) |
+            ({'profile_intervention_applied'} if schema == 5 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
-    imported = job['schema_version'] == 2
-    baseline_terminal = schema == 3 and execution['terminal_phase'] == 'source_baseline'
-    if schema == 3:
+    imported = job['schema_version'] >= 2
+    subset = job['schema_version'] == 6
+    require((schema == 6) == subset, 'subset_execution_schema_mismatch')
+    require((schema >= 4) == (job['schema_version'] >= 3) and (schema == 5) == (job['schema_version'] == 5), 'characterization_diagnostics_schema_mismatch')
+    baseline_terminal = schema >= 3 and execution['terminal_phase'] == 'source_baseline'
+    if schema >= 3:
         require(imported and execution['terminal_phase'] in ('source_baseline', 'main_probe') and
                 type(execution['resistance_intervention_applied']) is bool and
                 execution['resistance_intervention_applied'] == (bool(job['resistance_intervention']) and not baseline_terminal) and
@@ -171,6 +343,12 @@ def audit_execution(directory):
         expected_files.update({'source-import.json', 'probe-configuration.json', 'controller-before.json', 'controller-after.json'})
         if job['resistance_intervention']:
             expected_files.update({'baseline_trial_1.json', 'baseline_trial_1.csv'})
+    if subset:expected_files.add('subset-restoration.json')
+    if schema >= 4:
+        require(type(execution['channel_diagnostic_files']) is list and
+                all(type(v) is str and v in ('probe_diagnostics_1.json', 'probe_diagnostics_2.json')
+                    for v in execution['channel_diagnostic_files']), 'channel_diagnostics_invalid_artifact_names')
+        expected_files.update(execution['channel_diagnostic_files'])
     if (directory/'cancel.request').exists():
         require((directory/'cancel.request').stat().st_size <= 65536, 'characterization_cancel_request_too_large')
         expected_files.add('cancel.request')
@@ -178,7 +356,7 @@ def audit_execution(directory):
     require(all(execution[k] is False for k in ('training_started', 'search_executed', 'certificate_available')) and
             execution['evaluation_verdict'] is None, 'characterization_claims_training')
     require(execution['execution'] in ('completed', 'cancelled', 'timeout', 'model_tick_budget_exhausted', 'probe_rejected',
-            'model_changed', 'unexpected_training_activity'), 'characterization_execution_unknown')
+            'model_changed', 'unexpected_training_activity', 'presentation_not_restored'), 'characterization_execution_unknown')
     if schema >= 2:
         require(number(execution['probe_wall_seconds']) > 0 and
                 (execution['execution'] != 'timeout' or execution['probe_wall_seconds'] >= job['maximum_wall_seconds']),
@@ -197,22 +375,30 @@ def audit_execution(directory):
     if imported:
         source_import = load(directory/'source-import.json');_digest(source_import)
         source = job['source_stopped']
-        require(source_import['kind'] == 'native_probe_source_import' and source_import['schema_version'] == 1 and
-                source_import['source_stopped_sha256'] == source['sha256'] and
-                source_import['identity'] == source['neuron']['graph']['identity'] and
-                source_import['parameters'] == source['trained_inputs'] and
-                source_import['physical_dynamics_reset'] is True and source_import['controller_dynamics_reset'] is True and
-                source_import['controller_history_preserved'] is True and
-                source_import['training_started'] is False, 'characterization_source_import_changed')
+        profiled = job['schema_version'] == 5
+        if profiled:
+            audit_feedback_profile_import(job, source_import, initial['identity'])
+            require(execution['profile_intervention_applied'] is True, 'profile_probe_intervention_missing')
+        else:
+            require(source_import['kind'] == 'native_probe_source_import' and source_import['schema_version'] == 1 and
+                    source_import['source_stopped_sha256'] == source['sha256'] and
+                    source_import['identity'] == source['neuron']['graph']['identity'] and
+                    source_import['parameters'] == source['trained_inputs'] and
+                    source_import['physical_dynamics_reset'] is True and source_import['controller_dynamics_reset'] is True and
+                    source_import['controller_history_preserved'] is True and
+                    source_import['training_started'] is False, 'characterization_source_import_changed')
         control = load(directory/'controller-before.json');_digest(control)
         summary = control['summary']
+        expected_history = [] if profiled else source['observed_packets']
         require(control == load(directory/'controller-after.json') and control['kind'] == 'native_probe_controller_snapshot' and
                 control['schema_version'] == 1 and summary['state'] == 'idle' and summary['certificate'] is None and
-                summary['reference_probes'] == 0 and control['observed_packet_count'] == len(source['observed_packets']) and
-                control['observed_packets_sha256'] == sha(source['observed_packets']), 'characterization_imported_controller_changed')
-        require(initial['parameters'] == (expected_import_parameters(job) if applied else source['trained_inputs']) and
-                initial['identity']['model'] == (expected_import_model(job) if applied else source['neuron']['graph']['identity']['model']),
-                'characterization_import_or_intervention_graph_changed')
+                summary['reference_probes'] == 0 and control['observed_packet_count'] == len(expected_history) and
+                control['observed_packets_sha256'] == sha(expected_history), 'characterization_imported_controller_changed')
+        require(initial['parameters'] == (expected_import_parameters(job) if applied else source['trained_inputs']),
+                'characterization_import_parameters_changed')
+        if not profiled:
+            require(initial['identity']['model'] == (expected_import_model(job) if applied else source['neuron']['graph']['identity']['model']),
+                    'characterization_import_or_intervention_graph_changed')
         if applied:
             baseline = load(directory/'baseline_trial_1.json')
             require(baseline['native_status'] == 'completed' and baseline['observation'] is not None and
@@ -245,12 +431,15 @@ def audit_execution(directory):
     requested, p = packet['requested_specification'], job['probe']
     require(requested['trial_id'] == p['trial_id']+('/source-baseline' if baseline_terminal else '') and
             all(requested[k] == p[k] for k in ('run_id', 'sample_id', 'maximum_sample_gap', 'minimum_amplitude',
-            'maximum_samples', 'record_spikes', 'peak_selection')) and equal(requested['begin'], 0) and
-            equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(job['model']['initial_isi']) and
+            'maximum_samples', 'record_spikes')) and
+            requested['peak_selection'] == ('isolated_window' if subset else p['peak_selection']) and equal(requested['begin'], 0) and
+            equal(requested['end'], p['duration']) and requested['pattern_hash'] == sha(subset_presented_isi(job) if subset else
+                job['model']['initial_isi'][:1] if is_single_pulse(job) else job['model']['initial_isi']) and
             requested['stimulus_profile'] == job['stimulus_profile'], 'characterization_request_changed')
     window = requested['windows']
     i = p['input_index']
-    require(len(window) == 1 and window[0] == {'input_id': 'input'+str(i), 'stimulus_id': 'pulse'+str(i),
+    if subset:require(window == [], 'subset_peak_window_forbidden')
+    else:require(len(window) == 1 and window[0] == {'input_id': 'input'+str(i), 'stimulus_id': 'pulse'+str(0 if is_single_pulse(job) else i),
             'channel': 0 if job['model']['branch'] else i, **p['window']}, 'characterization_selected_window_changed')
     observation = packet['observation']
     require(execution['probe_status'] == packet['native_status'] and
@@ -267,17 +456,62 @@ def audit_execution(directory):
             require('cancel.request' in expected_files, 'characterization_cancellation_request_missing')
         if execution['execution'] == 'model_tick_budget_exhausted':
             require(ticks == job['maximum_model_ticks'], 'characterization_tick_budget_not_reached')
-    audit = audit_probe(packet, trace)
-    if not audit['valid_observation']:
-        observation, spec, _, samples, _, quality = read_partial_probe(packet, trace)
-        audit_recorded_wave_diagnostics(observation, spec, samples, quality)
+    single_audit = {}
+    if subset:
+        import csv
+        from .stimulus_subset_evidence import audit_subset
+        restoration = load(directory/'subset-restoration.json');_digest(restoration)
+        require(set(restoration) == {'kind','schema_version','before','after','restored','model_before','model_after',
+                                    'scientific_training_result','sha256'} and
+                restoration['kind'] == 'native_stimulus_subset_restoration' and type(restoration['schema_version']) is int and
+                restoration['schema_version'] == 1 and restoration['scientific_training_result'] is False and
+                restoration['before'] == restoration['after'] and restoration['restored'] is True and
+                restoration['model_before'] == initial['identity'] and restoration['model_after'] == final['identity'],
+                'subset_restoration_changed')
+        before = restoration['before'];n = len(job['model']['inputs']);source = job['model']['initial_isi']
+        require(set(before) == {'training_pattern','dataset_pattern','physical_input_count','dataset_max_spikes'} and
+                before['training_pattern'] == before['dataset_pattern'] == source and
+                type(before['physical_input_count']) is int and before['physical_input_count'] == n and
+                type(before['dataset_max_spikes']) is int and before['dataset_max_spikes'] == n,
+                'subset_source_readback_changed')
+        require(requested['stimulus_subset'] == {'purpose':'stimulus_subset_characterization',
+                'source_training_pattern_hash':sha(source),'physical_input_count':n,
+                'source_ordinals':job['presentation']['source_ordinals']}, 'subset_requested_source_changed')
+        with trace.open(newline='', encoding='utf-8') as stream:rows = list(csv.reader(stream))
+        channels = 1 if job['model']['branch'] else n
+        require(rows and rows[0] == ['time','stimulus']+['soma'+str(c) for c in range(channels)], 'unknown_console_subset_trace')
+        # Explicit header adapter; every data row and actual timestamp is unchanged.
+        rows[0] = ['native_tick_start_s','stimulus']+['raw_soma_'+str(c) for c in range(channels)]
+        wrapper = {'kind':'native_stimulus_subset_diagnostic','schema_version':2,'source_pattern':source,
+            'evidence':packet,'model_before':initial['identity'],'model_after':final['identity'],
+            'training_pattern_after':before['training_pattern'],'dataset_pattern_after':before['dataset_pattern'],
+            'physical_input_count_after':before['physical_input_count'],'training_target_restored':True,
+            'scientific_training_result':False}
+        single_audit['stimulus_subset_diagnostic'] = audit_subset(wrapper, rows, expected_trial_id=p['trial_id'])
+    elif is_single_pulse(job):
+        from .single_pulse_evidence import read_single_pulse
+        observation, spec, _, samples, _, quality = read_single_pulse(packet, trace)
+        require(requested['characterization'] == {'purpose': 'single_pulse_characterization',
+                'source_training_pattern_hash': sha(job['model']['initial_isi']),
+                'physical_input_count': len(job['model']['inputs']), 'selected_input_index': i},
+                'single_pulse_source_or_selector_changed')
+        single_audit['single_pulse_diagnostic'] = quality
+    else:
+        audit = audit_probe(packet, trace)
+        if not audit['valid_observation']:
+            observation, spec, _, samples, _, quality = read_partial_probe(packet, trace)
+            audit_recorded_wave_diagnostics(observation, spec, samples, quality)
     if packet['prepared'] is not None:
         prepared = packet['prepared']
         require(prepared['base_model_revision'] == execution['model_revision'] and prepared['protocol_revision'] == p['protocol_revision'] and
                 prepared['input_id'] == 'input'+str(i) and prepared['selected_input_index'] == (i if job['model']['branch'] else None),
                 'characterization_prepared_context_changed')
     require((execution['execution'] == 'completed') == (packet['native_status'] == 'completed'), 'characterization_completion_changed')
+    diagnostic_audit = {}
+    if schema >= 4:
+        from .probe_channel_diagnostics import audit as audit_channels
+        diagnostic_audit['channel_diagnostics'] = audit_channels(directory, job, execution, initial['identity'])
     return {'primary_evidence_checked': True, 'runtime_provenance_checked': False, 'model_unchanged': True,
-            **({'terminal_phase': execution['terminal_phase']} if schema == 3 else {}),
+            **({'terminal_phase': execution['terminal_phase']} if schema >= 3 else {}), **diagnostic_audit, **single_audit,
             'execution': execution['execution'], 'observation_valid': execution['observation_valid'],
             'observation_complete': execution['observation_complete'], 'training_started': False, 'evaluation_verdict': None}

@@ -12,6 +12,7 @@ from .native_evidence import count, equal, load, number, require
 from .model_identity import canonical_model_sha256 as sha
 from .native_calibration_worker import _artifact_files, _digest, _evidence_boundary, _record, _signed, _write
 from .process_runner import execute, verify_runtime
+from .native_process_policy import validate_policy, execute_native, audit_contained_attempt
 from .learned_evidence import load_case, audit_learned_state
 from .recognition_evidence import audit_recognition_source
 from .recognition_metrics import load_evaluation, score_recognition_evaluation
@@ -77,7 +78,7 @@ def validate_job(mode, job, source_case=None):
     if mode == "probe":
         from .native_characterization import validate_job as validate_probe_job
         result = validate_probe_job(job)
-        if job['schema_version'] == 2:
+        if job['schema_version'] >= 2:
             from .stopped_evidence import audit_stopped_state
             require(source_case is not None and source_case[0] == job['source_stopped'], 'probe_original_stopped_primary_required')
             audit_stopped_state(*source_case)
@@ -94,6 +95,10 @@ def validate_job(mode, job, source_case=None):
     if mode in ("train", "preflight"):
         require(source_case is None, "cold_training_does_not_import_learned_state")
         config = job["configuration"]
+        from .candidate_recovery import project_recovery_configuration
+        # Validate the policy envelope, but execute/hash the original record.
+        # Effective support still requires the native strict codec/readback.
+        project_recovery_configuration(config)
         from .native_model_spec import validate_model_spec
         validate_model_spec(config['model'])
         require(type(config) is dict and type(config["model"]) is dict and
@@ -316,7 +321,8 @@ def _structured_training_exit(mode, job, process, directory):
     The caller must still audit signed native data, owned runtime and the stopped
     boundary, and reject a completed-execution claim paired with exit code 2.
     """
-    return (mode in ("train", "diagnostic-evaluate", "probe") and type(job.get("schema_version")) is int and job["schema_version"] in (1, 2)
+    return (mode in ("train", "diagnostic-evaluate", "probe") and type(job.get("schema_version")) is int and
+            job["schema_version"] in ((1, 2, 3, 4, 5, 6) if mode == "probe" else (1, 2))
             and process["execution"] == "process_error" and type(process["returncode"]) is int
             and process["returncode"] == 2 and (Path(directory)/"execution.json").is_file())
 
@@ -335,22 +341,30 @@ def _snapshot_source(source, destination, *, diagnostic=False):
 
 
 @_evidence_boundary
-def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seconds):
+def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seconds, *, process_policy=None):
     job = load(Path(job_path).resolve(strict=True))
     source_case = _load_source_case(mode, Path(source_path).resolve(strict=True)) if source_path is not None else None
     preflight = validate_job(mode, job, source_case)
+    policy = validate_policy(process_policy, maximum_wall_seconds)
     runtime = load(Path(runtime_path).resolve(strict=True));executable = verify_runtime(runtime)
     require(number(maximum_wall_seconds) > 0, "invalid_pipeline_wall_budget")
+    from .native_cli import inspect_native_cli
+    cli = inspect_native_cli(runtime, [mode])
     output = Path(output).resolve();output.mkdir(parents=True, exist_ok=False)
+    _write(output/"runtime-cli-interface.json", cli)
     inputs = output/"input";inputs.mkdir();source_relative = None
     if source_path is not None:
         snapshot = _snapshot_source(source_path, inputs/"source", diagnostic=mode == "diagnostic-evaluate" or mode == "probe")
         source_case = _load_source_case(mode, snapshot);source_relative = snapshot.relative_to(output).as_posix()
         require(validate_job(mode, job, source_case) == preflight, "pipeline_source_changed_during_snapshot")
     _write(inputs/"job.json", job)
-    process = execute(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
+    if policy is not None:
+        _write(inputs/"process-policy.json", policy)
+    executor = execute if policy is None else execute_native
+    options = ({"cooperative_capture": mode in ("preflight", "probe")} if policy is None else {"policy": policy})
+    process = executor(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
         "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
-        executable.parent, output/"process", maximum_wall_seconds, cooperative_capture=mode in ("preflight", "probe"))
+        executable.parent, output/"process", maximum_wall_seconds, **options)
     verify_runtime(runtime)
     audit = None
     if process["execution"] == "completed" or _structured_training_exit(mode, job, process, output/"native"):
@@ -358,7 +372,8 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         audit = audit_execution(mode, output/"native", job, source_case)
         if process["execution"] != "completed":
             require(load(output/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
-    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 3 if mode == "diagnostic-evaluate" else 2, "operation": mode,
+    result = {"kind": "timelearner_native_pipeline_run_manifest", "schema_version": 4 if policy is not None else 3 if mode == "diagnostic-evaluate" else 2, "operation": mode,
+        **({"process_policy": policy} if policy is not None else {}),
         "execution": process["execution"], "validity": "valid" if audit else "unverified_execution",
         "job_sha256": job["sha256"], "source_package_path": source_relative,
         "runtime_fingerprint": runtime["runtime_fingerprint"], "source_closure": runtime["source_closure"],
@@ -374,15 +389,17 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
 @_evidence_boundary
 def audit_run_manifest(path, *, historical_analysis=None):
     """Recompute portable source, native result and process/runtime bindings."""
-    require(historical_analysis in (None, 'learned-v2-no-capacitance'), 'unknown_pipeline_historical_adapter')
+    require(historical_analysis in (None, 'learned-v2-no-capacitance',
+                                   'training-v3-no-capacitance-history'), 'unknown_pipeline_historical_adapter')
     path = Path(path).resolve(strict=True);root = path.parent
     manifest = load(path);_digest(manifest)
+    contained = type(manifest.get("schema_version")) is int and manifest["schema_version"] == 4
     require(set(manifest) == {"kind", "schema_version", "operation", "execution", "validity", "job_sha256",
             "source_package_path", "runtime_fingerprint", "source_closure", "preflight", "analysis", "analysis_code",
-            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} and
+            "artifacts", "independent_partition_verified", "evaluation_verdict", "sha256"} | ({"process_policy"} if contained else set()) and
             manifest["kind"] == "timelearner_native_pipeline_run_manifest" and
-            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2, 3) and
-            (manifest["schema_version"] == 3) == (manifest["operation"] == "diagnostic-evaluate") and
+            type(manifest["schema_version"]) is int and manifest["schema_version"] in (1, 2, 3, 4) and
+            (contained or (manifest["schema_version"] == 3) == (manifest["operation"] == "diagnostic-evaluate")) and
             manifest["operation"] in FIELDS and manifest["independent_partition_verified"] is False and
             manifest["evaluation_verdict"] is None, "unknown_native_pipeline_run_manifest")
     records = manifest["artifacts"]
@@ -412,8 +429,15 @@ def audit_run_manifest(path, *, historical_analysis=None):
     require(manifest["execution"] == process["execution"] and manifest["runtime_fingerprint"] ==
             process["runtime_fingerprint"] == runtime["runtime_fingerprint"] == digest_json(runtime_content_identity(runtime)) and
             manifest["source_closure"] == runtime["source_closure"], "pipeline_run_runtime_changed")
-    request = load(root/"process/request.json");arguments = request["arguments"]
-    capture_arguments = (type(arguments) is list and len(arguments) == 8 and mode in ("preflight", "probe") and
+    if contained:
+        policy = validate_policy(manifest["process_policy"])
+        require(policy is not None and load(root/"input/process-policy.json") == policy, "pipeline_process_policy_changed")
+        auditable = process["execution"] == "completed" or _structured_training_exit(mode, job, process, root/"native")
+        request = audit_contained_attempt(root/"process", runtime, policy, auditable=auditable)
+    else:
+        request = load(root/"process/request.json")
+    arguments = request["arguments"]
+    capture_arguments = (type(arguments) is list and len(arguments) == 8 and (contained or mode in ("preflight", "probe")) and
                          arguments[6] == "--timelearner-capture-directory")
     require(type(arguments) is list and len(arguments) == (8 if capture_arguments else 6) and all(type(a) is str for a in arguments) and
             arguments[:6:2] == ["--app-ini", "--timelearner-"+mode, "--timelearner-output"] and
@@ -438,11 +462,11 @@ def audit_run_manifest(path, *, historical_analysis=None):
                 owned["executable"] == runtime["executable"]["path"] and
                 owned["executable_sha256"] == runtime["executable"]["sha256"] and
                 owned["runtime_fingerprint"] == runtime["runtime_fingerprint"] and count(owned["pid"]) > 0 and
-                process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == "launched_executable_only" and
+                process["returncode"] == (0 if process["execution"] == "completed" else 2) and process["ownership_scope"] == ("bound_cgroup" if contained else "launched_executable_only") and
                 process["runtime_provenance"] == "loaded_files_captured", "pipeline_owned_runtime_changed")
     audit = audit_execution(mode, root/"native", job, source_case) if auditable else None
     if mode in ("preflight", "probe") and auditable:
-        request = load(root/"process/request.json");arguments = request["arguments"]
+        arguments = request["arguments"]
         if "--timelearner-capture-directory" in arguments:
             require(arguments.count("--timelearner-capture-directory") == 1,
                     "cooperative_capture_argument_changed")
@@ -471,19 +495,33 @@ def audit_run_manifest(path, *, historical_analysis=None):
         require(load(root/"native/execution.json")["execution"] != "completed", "pipeline_nonzero_claims_completed_execution")
     comparison = audit
     adapter_used = False
-    if historical_analysis is not None and manifest['analysis'] != audit:
-        # Explicit adapter for archived training evidence. The only supported
-        # drift is auditor2 -> auditor3 adding capacitance_state=None. Keep
-        # every result, certificate, primary count and runtime check strict.
-        require(manifest['schema_version'] == 1 and mode == 'train' and type(audit) is dict and
+    if historical_analysis is not None:
+        # Recompute with the current auditor first. Only an explicitly selected,
+        # known schema transition may project its result into the archived shape.
+        # The final equality still checks every other field and all native/runtime
+        # bindings above remain mandatory. Do not strip arbitrary version fields.
+        require(mode == 'train' and type(audit) is dict and
                 type(manifest['analysis']) is dict and type(audit.get('training_audit')) is dict and
                 type(manifest['analysis'].get('training_audit')) is dict,
                 'unsupported_pipeline_historical_analysis')
         old, current = manifest['analysis']['training_audit'], audit['training_audit']
-        require(old.get('auditor_version') == 2 and 'capacitance_state' not in old and
-                current.get('auditor_version') == 3 and 'capacitance_state' in current and
-                current['capacitance_state'] is None, 'unsupported_pipeline_historical_analysis')
-        projected = {**current, 'auditor_version': 2};projected.pop('capacitance_state')
+        require(type(old.get('auditor_version')) is int and
+                type(current.get('auditor_version')) is int and
+                'capacitance_history' not in old and 'capacitance_history' not in current,
+                'unsupported_pipeline_historical_analysis')
+        if historical_analysis == 'learned-v2-no-capacitance':
+            require(manifest['schema_version'] == 1 and audit.get('completed_boundary') is True and
+                    old['auditor_version'] == 2 and 'capacitance_state' not in old and
+                    current['auditor_version'] in (3, 5) and 'capacitance_state' in current and
+                    current['capacitance_state'] is None, 'unsupported_pipeline_historical_analysis')
+            projected = {**current, 'auditor_version': 2};projected.pop('capacitance_state')
+        else:
+            completed = audit.get('completed_boundary')
+            require(type(completed) is bool and old['auditor_version'] == 3 and
+                    current['auditor_version'] == (5 if completed else 4) and
+                    'capacitance_state' in old and 'capacitance_state' in current,
+                    'unsupported_pipeline_historical_analysis')
+            projected = {**current, 'auditor_version': 3}
         comparison = {**audit, 'training_audit': projected};adapter_used = True
     require(manifest["analysis"] == comparison and manifest["validity"] == ("valid" if audit else "unverified_execution"),
             "pipeline_run_analysis_changed")

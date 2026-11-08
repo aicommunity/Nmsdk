@@ -1,0 +1,43 @@
+{
+  "kind": "integrated_native_subset_asan_acceptance",
+  "parent": "b711e55358e12dac8104f19d01b8192002b1d614",
+  "PulseLib": "609a06d31ccad1c382d3df3b8150f7de87b6abfd",
+  "inventories": {
+    "subset14": {
+      "expected": 14,
+      "observed": 14,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "c27dcffdb16654cc19107b284919f23e3f06f0cc9345e9577b0db6455343b0c9"
+    },
+    "probe34": {
+      "expected": 34,
+      "observed": 34,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "01a0a17389a4afaed45d4eb618a3a13b055be3520429ada645851c786bd93f33"
+    },
+    "verification23": {
+      "expected": 23,
+      "observed": 23,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "8b3a7be63a52f596747e9437c2f68eb0172771117c3e5794175e20ae863f6373"
+    },
+    "physical10": {
+      "expected": 10,
+      "observed": 10,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "86ac691aecb368ebb5136eac945d925f22ef89a88e15d44d5ddf7b843cc17c3f"
+    }
+  },
+  "reader_checks": 7,
+  "current_and_previous_runtimes_unchanged": true,
+  "all_groups_closed_and_released": true,
+  "ASan_loaded": true,
+  "Console_subset_runtime_compiled": true,
+  "Console_subset_execution_in_this_gate": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

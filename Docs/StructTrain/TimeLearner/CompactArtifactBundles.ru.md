@@ -89,3 +89,47 @@ Regeneration завершилась с status 0. Извлечённый archive
 `index.html` в обоих компактных report directories: изображения имеют ширину
 1920 px, horizontal scroll и прямую PNG ссылку. Wrapper manifest обновлён с
 34 до 35 hashes; сам primary bundle и его восемь внутренних hashes не изменены.
+
+
+## Потоковая упаковка полных native primary (08.11)
+
+`portable_primary.create_native_bundle(sources, output, dictionary_bytes=...)`
+принимает явную карту logical path → файл завершённого задания. Она сохраняет
+каждый logical файл целиком как обычный tar member: hardlinks и внешние
+рецепты восстановления не вводятся. Одинаковые SHA группируются перед
+сжатием, чтобы повторные snapshots использовали словарь XZ. Это не удаление
+старых первичных данных и не изменение научного fingerprint условий.
+
+Упаковка читает содержимое потоково. Разрешены словари8/32/64/128MiB;
+память компрессора больше размера словаря и учитывается лимитом worker.
+Default128MiB выбран для повторяющегося Branch summary67,9MB.
+Manifest записывается только после повторной проверки hash/size всех
+источников. Уже существующий output и конфликт logical file/directory
+отклоняются. Caller обязан заморозить и проверить полный inventory
+принадлежащих заданию файлов до вызова.
+
+Восстановление выполняет прежний `restore_native_bundle`, сохраняя проверку
+каждого member, полноты и checksum архива. Для исторических dereferenced
+glog aliases по-прежнему нужен явный `dereferenced-glog-aliases-v1`.
+Политика aliases не ослабляется.
+
+Первый server gate на34b6ac1b выявил отказ tarfile Python3.12 перед созданием
+основного пакета: kwargs filters попадал в TarFile. Исправлениеffb35ddf
+использует явный LZMAFile и потоковый tar. Повторный gate на M40 запущен:
+16 tests и полная упаковка/восстановление700 файлов6 опубликованных native
+проб с повторным production audit. До завершения gate и публикации receipt
+новый упаковщик не считается принятым для большой серии.
+
+Повторный gate ffb35ddf завершён успешно:16 tests,700 восстановленных файлов
+и6 повторно проверенных production native/manifest cases.104432117 исходных
+bytes упакованы в1257048B, SHA256
+`90ee4cd0f88489045ab7d0c7e1e7b475b6050b64d76246eb8127c03e522ab4b4`.
+Новых модельных расчётов gate не выполнял. Пакет b12794f4 сохраняет исходный
+Python3.12 отказ; Git-передача и независимая сверка ещё выполняются.
+
+Пакет b12794f4 доставлен через Git и независимо проверен:46 outer members,
+все700 inner members и104432117 raw bytes, совпадение всех file bindings
+с исходным опубликованным f79cdc4 (шесть ранее проверенных glog aliases
+не входили в derived input tree). [Receipt](StreamingPrimaryVerification.json).
+Это приёмка потоковой упаковки заданного native corpus; оставшиеся
+runner/publisher и исторические форматы этапа10 этим не закрываются.

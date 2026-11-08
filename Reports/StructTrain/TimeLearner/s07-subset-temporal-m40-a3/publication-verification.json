@@ -1,0 +1,227 @@
+{
+  "kind": "native_subset_temporal_evidence",
+  "source_root": "8509fa1346cb676d08223238d9f276c1efc51f5d",
+  "native_primary_commit": "f79cdc46852cf90235ebc306253d809e3c644daa",
+  "native_bundle_sha256": "58cb4d60280e8ced58af303baccd2ff81236e2745be52fdf582b2cf6211cb76b",
+  "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/subset-console-temporal-a3/figures",
+  "cases": 6,
+  "figures": 12,
+  "selected": 2,
+  "selected_hashes": {
+    "selected/01-Classic-overview.png": "4116a8a9cd2ea32c3d0f8e570b723259c45bbc7ddf19ad932ebd98aa40bacb2c",
+    "selected/04-Branch-overview.png": "766078e12233bd8c394fd48b53044efe0dc40e0220cef2f5fd7513151dc33e7d"
+  },
+  "all_recorded_somas_rendered": true,
+  "full_and_response_views": true,
+  "actual_input_overlay_and_event_times": true,
+  "font_points": 12,
+  "width_pixels": 2240,
+  "height_pixels_per_panel": 504,
+  "all_groups_closed_and_released": true,
+  "earlier_attempt_evidence": "ff6a0097f0334d3d4e46a5d992da290f6e7a4bb0",
+  "source_conditions": {
+    "Classic-full/native": {
+      "source_run_id": "Classic-threshold-low-retry32/session/1",
+      "source_stopped_sha256": "ab16bf831b6e3776c112063cab03b88227f05bfbc38fd8b010b3fc69acad8756",
+      "declared_initial_threshold": 0.0117,
+      "effective_lt_class": "NPulseLTZoneThreshold",
+      "effective_lt_threshold": 0.0117,
+      "normalization": "N1",
+      "frequency_hz": 2000,
+      "selected_input_index": null,
+      "trained_inputs": [
+        {
+          "length": 1,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c"
+    },
+    "Classic-omit-interior/native": {
+      "source_run_id": "Classic-threshold-low-retry32/session/1",
+      "source_stopped_sha256": "ab16bf831b6e3776c112063cab03b88227f05bfbc38fd8b010b3fc69acad8756",
+      "declared_initial_threshold": 0.0117,
+      "effective_lt_class": "NPulseLTZoneThreshold",
+      "effective_lt_threshold": 0.0117,
+      "normalization": "N1",
+      "frequency_hz": 2000,
+      "selected_input_index": null,
+      "trained_inputs": [
+        {
+          "length": 1,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c"
+    },
+    "Classic-later-single/native": {
+      "source_run_id": "Classic-threshold-low-retry32/session/1",
+      "source_stopped_sha256": "ab16bf831b6e3776c112063cab03b88227f05bfbc38fd8b010b3fc69acad8756",
+      "declared_initial_threshold": 0.0117,
+      "effective_lt_class": "NPulseLTZoneThreshold",
+      "effective_lt_threshold": 0.0117,
+      "normalization": "N1",
+      "frequency_hz": 2000,
+      "selected_input_index": null,
+      "trained_inputs": [
+        {
+          "length": 1,
+          "resistance": 2880071.5552629367,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "aeeb20de9f62d39563de925366990cd1547ba560e7fe3101baac820c9335524c"
+    },
+    "Branch-full/native": {
+      "source_run_id": "Branch-threshold-low-retry32/session/1",
+      "source_stopped_sha256": "c6404559f6642706fa2cc43d4874ea37b3adc7c851a59e518d466f717b8fda3c",
+      "declared_initial_threshold": 0.0117,
+      "effective_lt_class": "NPulseLTZoneThreshold",
+      "effective_lt_threshold": 0.0117,
+      "normalization": "N1",
+      "frequency_hz": 2000,
+      "selected_input_index": 3,
+      "trained_inputs": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4"
+    },
+    "Branch-omit-interior/native": {
+      "source_run_id": "Branch-threshold-low-retry32/session/1",
+      "source_stopped_sha256": "c6404559f6642706fa2cc43d4874ea37b3adc7c851a59e518d466f717b8fda3c",
+      "declared_initial_threshold": 0.0117,
+      "effective_lt_class": "NPulseLTZoneThreshold",
+      "effective_lt_threshold": 0.0117,
+      "normalization": "N1",
+      "frequency_hz": 2000,
+      "selected_input_index": 3,
+      "trained_inputs": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4"
+    },
+    "Branch-later-single/native": {
+      "source_run_id": "Branch-threshold-low-retry32/session/1",
+      "source_stopped_sha256": "c6404559f6642706fa2cc43d4874ea37b3adc7c851a59e518d466f717b8fda3c",
+      "declared_initial_threshold": 0.0117,
+      "effective_lt_class": "NPulseLTZoneThreshold",
+      "effective_lt_threshold": 0.0117,
+      "normalization": "N1",
+      "frequency_hz": 2000,
+      "selected_input_index": 3,
+      "trained_inputs": [
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 2,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "model_revision": "57d366c6b4fb725d71e7f034aa0db18e35d5180ba94e437dcb4768238b16b8f4"
+    }
+  },
+  "verified_redundant_aliases_omitted_from_derived_cache": 6,
+  "source_primary_unchanged": true,
+  "new_native_simulations": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

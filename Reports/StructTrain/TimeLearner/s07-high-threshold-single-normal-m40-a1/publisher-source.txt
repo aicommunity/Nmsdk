@@ -1,0 +1,79 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-high-threshold-single-a1-delivery'
+folder=base/'readbacks/s07-high-threshold-single-normal-a1'
+repo=base/'evidence-high-threshold-single-normal-a1';incoming=base/'source-high-threshold-single-a1-delivery'
+parent='33d4646c4ca66fb27693e70ca03009e1c4671bfb';prefix='Reports/StructTrain/TimeLearner/s07-high-threshold-single-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3')
+payloads={};updates={};bundles=[]
+for path,sub in [(folder,'')]:
+ closed=inspect_worker_dependency(Path(str(path)+'-container'),registry,path.name)
+ assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+ bundle=json.loads((path/'bundle.json').read_text());archive=path/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':path.name,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in path.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+sub+('producer.txt' if f.name=='producer.py' else f.name)]=f.read_bytes()
+ for f in Path(str(path)+'-container').iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+sub+'controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+sub+'fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['high_threshold_diagnostic_complete'] is False
+assert json.loads((folder/'exception.json').read_text())['reason']=='single_pulse_control_waveform_changed'
+from Scripts.StructTrain.TimeLearner.stock_wave_replay import compare_traces
+from Scripts.StructTrain.TimeLearner.stock_single_pulse import compare_first_prefix
+from Scripts.StructTrain.TimeLearner.native_evidence import load
+from Scripts.StructTrain.TimeLearner.domain_evidence import _property
+study=folder/'single-pulse-study';design=load(study/'single-pulse-design.json')
+row=next(v for v in design['rows'] if v['name'].startswith('Branch'))
+burst=study/'runs'/(row['name']+'-burst')/'native';single=study/'runs'/(row['name']+'-single')/'native'
+comparison=compare_traces(load(Path(row['original_packet'])),Path(row['original_trace']),load(burst/'probe_trial_1.json'),burst/'probe_trial_1.csv')
+assert comparison['same_sample_count'] and comparison['stimulus_samples_exactly_equal'] and comparison['soma_samples_exactly_equal'] and not comparison['relative_clock_equal_with_roundoff']
+prefix_check=compare_first_prefix(load(burst/'probe_trial_1.json'),burst/'probe_trial_1.csv',load(single/'probe_trial_1.json'),single/'probe_trial_1.csv');assert prefix_check['exact_first_prefix_reproduced']
+for native in [burst,single]:
+ assert audit_run_manifest(native.parent/'run-manifest.json')['run_evidence_consistent']
+ identity=load(native/'initial-state.json')['identity'];zone=next(v for v in identity['model']['nodes'] if v['path']=='$.LTZone');assert _property(zone,'Threshold')==100.
+for n,sha in json.loads((folder/'runtime-frozen-files.json').read_text()).items():assert hashlib.sha256((base/'runtime-feedback-console-normal-a2'/n).read_bytes()).hexdigest()==sha
+readers=None
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'terminal':terminal,'completed_native_probes':2,'unexecuted_native_probes':2,'original_comparison':comparison,'prefix_comparison':prefix_check,'effective_threshold':100.,'runtime_unchanged':True,'failure':'relative clock cancellation after nonzero absolute origin; input and soma samples exactly equal','scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve high-threshold replay rejection from relative clock arithmetic with unchanged actual signals\n');git('update-ref','refs/heads/codex/high-threshold-single-normal-a1-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'bundles':bundles,'terminal':terminal,'reader_result':readers}))
