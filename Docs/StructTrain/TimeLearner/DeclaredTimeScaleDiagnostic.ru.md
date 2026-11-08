@@ -90,3 +90,7 @@ snapshots; две ссылки в историческом audit-докумен�
 полный Git source commit. Старые исследовательские JSON/CSV сохраняются.
 Manifest содержит 356 записей: 352 retired и 4 moved_to_root; complete=false.
 Это адресный перенос двух аудиторов, без приёмки всего этапа9 или научной серии.
+
+Весь новый manifest356 проверен production history CLI на M40: evidence `b553f9c7f253c2dcc09cd992bad4059dd9d555e5`, [независимая квитанция](DeclaredTimeScaleMigration356M40A2Verification.json). Проверены исходные Git blobs всех356 записей, отсутствие старых путей, четыре Root replacements и сохранность первых354 записей. Сравнение производится по canonical Git bytes; неуспешная проверка materialized preimages в private worktree не объявляется успешной и не заменяется предположением о CRLF.
+
+Первый preflight356 отказал до CLI и до создания kernel unit: непреднамеренный import без `-B` создал восемь ignored pyc в projection инструмента, strict source snapshot их отклонил. [Отрицательная квитанция](DeclaredTimeScaleMigration356M40A1NegativeVerification.json), evidence `0f85945acba4027aa402bbb40b528b6f83e406e1` сохраняют0 checks, исходные cache identities и erratum неточного lease note: kernel closure в этом отказе не было и не утверждается. Повтор использует fresh Git projection и `-B`, без ослабления guard, удаления failure evidence или запуска исторических скриптов.
