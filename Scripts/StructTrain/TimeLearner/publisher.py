@@ -7,11 +7,68 @@ from pathlib import Path, PurePosixPath
 import json
 import hashlib
 import re
+import os
+import stat
 import subprocess
 from urllib.parse import urlsplit
 
 from .native_evidence import EvidenceError, require
 from .publication_lock import hold as hold_publication_lock, recover as recover_lock, git_lock_arguments
+
+
+LOOSE_REPORT_SCRIPT_SUFFIXES = frozenset({
+    '.py', '.pyw', '.sh', '.bash', '.zsh', '.fish', '.ksh', '.ps1', '.psm1',
+    '.bat', '.cmd', '.pl', '.rb', '.js', '.mjs', '.cjs', '.lua', '.awk',
+    '.tcl', '.ipynb', '.vbs', '.wsf', '.command', '.c', '.cmake',
+})
+
+
+def _report_artifact(name):
+    return tuple(part.casefold() for part in PurePosixPath(name).parts[:3]) == (
+        'reports', 'structtrain', 'timelearner')
+
+
+def _new_report_artifact_policy(name, mode, header=b''):
+    """New publication policy; old read-only evidence verification stays intact."""
+    if not _report_artifact(name):
+        return
+    path = PurePosixPath(name)
+    reason = ('suffix' if path.suffix.casefold() in LOOSE_REPORT_SCRIPT_SUFFIXES or
+              path.name.casefold() == 'cmakelists.txt' else
+              'git_executable_mode' if mode == '100755' else
+              'shebang' if header.removeprefix(b'\xef\xbb\xbf').startswith(b'#!') else None)
+    require(reason is None, 'loose_report_script_forbidden:'+str(reason)+':'+name)
+
+
+def _working_git_mode(directory, name, actual):
+    result = subprocess.run(['git', '--literal-pathspecs', '-C', str(directory),
+                             'ls-files', '--stage', '-z', '--', name],
+                            capture_output=True, timeout=120)
+    require(result.returncode == 0, 'artifact_index_mode_read_failed:'+name)
+    entries = [entry for entry in result.stdout.split(b'\0') if entry]
+    require(len(entries) <= 1, 'artifact_unmerged_index_path:'+name)
+    mode = '100644'
+    if entries:
+        metadata, path = entries[0].split(b'\t', 1)
+        indexed_mode, _, stage = metadata.decode('ascii').split()
+        require(path.decode('utf-8') == name and stage == '0', 'artifact_unmerged_index_path:'+name)
+        mode = indexed_mode
+    # Windows X_OK/access bits do not describe Git executable mode. Existing
+    # index mode is authoritative there; a suffix/shebang still catches new code.
+    if os.name != 'nt' and mode != '100755':
+        file_mode = _git(directory, 'config', '--type=bool', '--get', '--default', 'true', 'core.fileMode')
+        if file_mode == 'true' and stat.S_IMODE(actual.stat().st_mode) & 0o111:
+            mode = '100755'
+    return mode
+
+
+def _working_digest_and_header(path):
+    digest = hashlib.sha256(); header = b''
+    with path.open('rb') as stream:
+        while chunk := stream.read(1024*1024):
+            if not header:header = chunk[:512]
+            digest.update(chunk)
+    return digest.hexdigest(), header
 
 
 def _git(directory, *args):
@@ -54,7 +111,7 @@ def _artifact_inventory(raw, expected):
     return inventory
 
 
-def _blob_id(directory, commit, name):
+def _blob_entry(directory, commit, name):
     raw = subprocess.check_output(["git", "--literal-pathspecs", "--no-replace-objects", "-C", str(directory),
                                    "ls-tree", "-z", commit, "--", name], timeout=120)
     entries = [v for v in raw.split(b"\0") if v]
@@ -63,34 +120,46 @@ def _blob_id(directory, commit, name):
     mode, kind, oid = meta.decode("ascii").split()
     require(path.decode("utf-8") == name and mode in {"100644", "100755"} and kind == "blob",
             "artifact_is_not_regular_committed_blob:"+name)
-    return oid
+    return mode, oid
 
 
-def _blob_sha256(directory, oid):
+def _blob_id(directory, commit, name):
+    return _blob_entry(directory, commit, name)[1]
+
+
+def _blob_sha256(directory, oid, *, new_report_path=None):
     # Large primary archives are streamed rather than copied into memory.
     with subprocess.Popen(["git", "--no-replace-objects", "-C", str(directory), "cat-file", "blob", oid],
                           stdout=subprocess.PIPE, stderr=subprocess.DEVNULL) as process:
         digest = hashlib.sha256()
+        first = True
         while chunk := process.stdout.read(1024*1024):
+            if first and new_report_path is not None:
+                _new_report_artifact_policy(new_report_path, '100644', chunk[:512])
+            first = False
             digest.update(chunk)
         require(process.wait(timeout=120) == 0, "artifact_blob_read_failed")
     return digest.hexdigest()
 
 
-def verify_artifact_set(directory, commit, record):
+def verify_artifact_set(directory, commit, record, *, enforce_new_artifact_policy=False):
     require(type(record) is dict and set(record) == {"repository", "manifest", "manifest_sha256"},
             "invalid_publication_artifact_set")
     manifest = _artifact_path(record["manifest"])
-    oid = _blob_id(directory, commit, manifest.as_posix())
+    mode, oid = _blob_entry(directory, commit, manifest.as_posix())
+    if enforce_new_artifact_policy:_new_report_artifact_policy(manifest.as_posix(), mode)
     size = int(_git(directory, "cat-file", "-s", oid))
     require(size <= 16*1024*1024, "artifact_manifest_too_large")
     raw = subprocess.check_output(["git", "--no-replace-objects", "-C", str(directory),
                                    "cat-file", "blob", oid], timeout=120)
+    if enforce_new_artifact_policy:_new_report_artifact_policy(manifest.as_posix(), mode, raw[:512])
     inventory = _artifact_inventory(raw, record["manifest_sha256"])
     require(manifest.name not in inventory, "artifact_manifest_cannot_include_itself")
     for name, expected in inventory.items():
         path = (manifest.parent/_artifact_path(name)).as_posix()
-        require(_blob_sha256(directory, _blob_id(directory, commit, path)) == expected,
+        mode, oid = _blob_entry(directory, commit, path)
+        if enforce_new_artifact_policy:_new_report_artifact_policy(path, mode)
+        require(_blob_sha256(directory, oid, new_report_path=path if enforce_new_artifact_policy else None) == expected,
                 "committed_artifact_content_changed:"+path)
     return {**record, "files_verified": len(inventory)+1}
 
@@ -119,8 +188,13 @@ def stage_artifact_set(directory: Path, manifest: str, manifest_sha256: str):
                 "artifact_missing_or_symlink:"+name.as_posix())
         require(Path(_git(actual.parent, "rev-parse", "--show-toplevel")).resolve() == directory,
                 "artifact_belongs_to_other_repository")
+        digest, header = ((manifest_sha256, raw[:512]) if name == relative else
+                          _working_digest_and_header(actual))
+        if _report_artifact(name.as_posix()):
+            _new_report_artifact_policy(name.as_posix(),
+                _working_git_mode(directory, name.as_posix(), actual), header)
         if name != relative:
-            require(hashlib.sha256(actual.read_bytes()).hexdigest() == inventory[name.relative_to(relative.parent).as_posix()],
+            require(digest == inventory[name.relative_to(relative.parent).as_posix()],
                     "working_artifact_content_changed:"+name.as_posix())
     # Literal NUL pathspecs avoid glob expansion and argument-size limits.
     payload = b"".join((":(literal)"+p.as_posix()).encode("utf-8")+b"\0" for p in paths)
@@ -181,7 +255,7 @@ def _module_urls(directory, commit):
     return urls
 
 
-def publication_plan(root: Path, specification):
+def publication_plan(root: Path, specification, *, enforce_new_artifact_policy=False):
     version = specification.get("schema_version") if type(specification) is dict else None
     fields = {"kind", "schema_version", "repositories"} | ({"artifacts"} if version == 2 else set())
     require(type(specification) is dict and set(specification) == fields
@@ -256,7 +330,8 @@ def publication_plan(root: Path, specification):
             require(type(artifact) is dict and type(artifact.get("repository")) is str and
                     artifact["repository"] in records, "unknown_artifact_repository")
             directory, record = records[artifact["repository"]]
-            proof = verify_artifact_set(directory, record["commit"], artifact)
+            proof = verify_artifact_set(directory, record["commit"], artifact,
+                                       enforce_new_artifact_policy=enforce_new_artifact_policy)
             key = (proof["repository"], proof["manifest"])
             require(key not in seen, "duplicate_publication_artifact_set");seen.add(key)
     return ordered
@@ -281,10 +356,10 @@ def publish_closure(root: Path, specification):
         published = []
         version = 2 if type(specification) is dict and specification.get("schema_version") == 2 else 1
         try:
-            plan = publication_plan(root, specification)
+            plan = publication_plan(root, specification, enforce_new_artifact_policy=True)
             for directory, record in plan:
                 # Revalidate the complete local closure before each remote mutation.
-                publication_plan(root, specification)
+                publication_plan(root, specification, enforce_new_artifact_policy=True)
                 target = record["push_url"] if version == 2 else record["remote"]
                 _git(directory, "-c", "push.recurseSubmodules=no", "push", target,
                      record["commit"]+":"+record["branch"])

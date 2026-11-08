@@ -2,7 +2,7 @@
 
 Pulse feature commit: `269164d2a2339908a8667e859a04a8e81da50c3c`.
 
-2026-11-08. Подготовлен первый исполнимый блок нового Train-пути; server build/runtime gate ещё не выполнен. Это не acceptance исходной научной серии и не объявление исправленным всего controller pipeline. Production contract находится в PulseLib `Docs/TimeLearner/TypedCompositeTrainingCore.ru.md`.
+2026-11-08. Подготовлен первый исполнимый блок нового Train-пути; адресный M40 ASan143 build/runtime gate принят; service/export/CLI остаются отдельными этапами. Это не acceptance исходной научной серии и не объявление исправленным всего controller pipeline. Production contract находится в PulseLib `Docs/TimeLearner/TypedCompositeTrainingCore.ru.md`.
 
 Основание: Pulse `c3ac0aad30ccc4b9894e0d4dccb3386d688d504f`, Root reader `1de038cc72e6cb6217233d938939385b9f464945`. Перед feature отдельно зафиксировано механическое выделение scalar acceptance: Pulse `474df05b714415057bbcb4692ce224621ae55ac0` / Root `b1457e7e0ae7a63c6aba7599b4189e9465a32e77`. Исправление ошибочной fixture-гипотезы о неизбежном изменении Branch revision — отдельный Root `51566b251a087589411d0a6bbb848de7d0273b6e`, merged в эту root-ветку через `6c41f2f42280cef3e56bc5ef097aecd2acebd99e`. Отрицательный SDK140 A1 runtime остаётся самостоятельным историческим свидетельством; этот patch не исправлял production context ради зелёного теста.
 
@@ -63,3 +63,17 @@ Native fixtures используют реальный environment/storage/model/
 
 
 Для первой серверной сборки269/27ba обнаружен отсутствующий полный тип нейрона; отдельная правка и условия повторной проверки — [CompileFix](TypedCompositeTrainingCompileFix.ru.md). Исходный feature pin не объявляется runtime-принятым.
+
+
+## Адресная приёмка M40
+
+Исправленный Rootd920/Pulsee183 прошёл143/143:97 прежних scalar и46 actual
+native core cases. [Независимая проверка](TypedCompositeCoreM40A2Verification.json)
+подтвердила1683 архивных members,3056 source/resource files по Git,75 loaded
+files и56 kernel closures; lease released. Original compile failure иошибочная
+mechanical inventory попытка сохранены отдельно. Это реальные storage/scheduler
+assertions и внутренняя typed certificate plumbing; numerical primary exports
+в этом frozen fixture не сохранялись, independent raw replay не принят.
+Service/cold6/package5/Console и научная классификация этим gate не доказаны.
+Окна кандидатов пока фиксированы на попытку; открытый [review](CandidateWindowScopeReview-20261108.ru.md)
+остаётся обязательным перед полной приёмкой этапа7.

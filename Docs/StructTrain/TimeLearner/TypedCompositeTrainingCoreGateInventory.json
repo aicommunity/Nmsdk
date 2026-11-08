@@ -1,7 +1,7 @@
 {
   "kind": "typed_composite_core_gate_inventory",
   "schema_version": 1,
-  "runtime_accepted": false,
+  "runtime_accepted": true,
   "local_numerical_tests_run": false,
   "local_builds_run": false,
   "native_target": "Test_PulseLib_StorageComponents",
@@ -64,5 +64,8 @@
   "root_mechanical_commit": "b1457e7e0ae7a63c6aba7599b4189e9465a32e77",
   "required_old_regression_cases": 97,
   "total_required_cases": 143,
-  "inventory_correction": "Expand four ATTEMPT_INVALID_BUDGET_TEST invocations and exclude macro-body placeholder; crosscheck compiled gtest inventory."
+  "inventory_correction": "Expand four ATTEMPT_INVALID_BUDGET_TEST invocations and exclude macro-body placeholder; crosscheck compiled gtest inventory.",
+  "runtime_acceptance_scope": "M40 ASan143:46 real native core assertions plus97 scalar regressions; no service/package5/CLI/scientific matrix admission.",
+  "runtime_evidence_commit": "d31a6b80ff2c3b665a80ef3f93b4a42a2d8752d0",
+  "runtime_receipt": "TypedCompositeCoreM40A2Verification.json"
 }
