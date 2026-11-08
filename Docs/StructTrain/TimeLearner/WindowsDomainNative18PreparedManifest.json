@@ -1,5 +1,5 @@
 {
-  "kind": "prepared_unlaunched_windows_native_domain_fixture_gate_plan",
+  "kind": "windows_native_domain_fixture_gate_plan",
   "schema_version": 1,
   "prepared_only": false,
   "worker": "user@10.245.1.14",
@@ -108,9 +108,9 @@
   "source_configure_flags_unchanged": true,
   "scientific_worker_admitted": false,
   "whole_plan_complete": false,
-  "dispatch_state": "running_after_fresh_memory_source_and_kernel_preflight",
+  "dispatch_state": "completed_accepted_scoped_diagnostic",
   "requires_runtime_preflight": true,
-  "readiness": "native18_dispatched_with_fresh_10GiB_available_memory",
+  "readiness": "native18_passed_with_actual_module_capture",
   "user_worker_trial_authorization_already_present": true,
   "attempt": {
     "job": "windows-domain-fixture-native-a6",
@@ -122,8 +122,16 @@
     "memory_preflight_available_bytes": 10915479552,
     "prior_kernel_jobs_observed_absent": 57,
     "capture_codec_tests_confirmed_passed": 10,
-    "terminal_verified": false,
+    "terminal_verified": true,
     "no_automatic_retry": true,
-    "rebuild": false
+    "rebuild": false,
+    "native_cases_passed": 18,
+    "native_groups_passed": 9,
+    "domain_reader_checks": 4,
+    "evidence_commit": "2a26896f45693f2d55b2f0f51cab18ed9eb90059",
+    "independent_receipt": "WindowsDomainNative18Verification.json",
+    "task_closed": true,
+    "kernel_jobs_closed": 9,
+    "runtime_inventories_unchanged": 3
   }
 }
