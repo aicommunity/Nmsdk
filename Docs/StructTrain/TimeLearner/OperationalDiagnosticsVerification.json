@@ -1,0 +1,36 @@
+{
+  "kind": "independent_operational_diagnostics_verification",
+  "source_commit": "0c535c4ed2b4961bf3871c8c554e1335335a5fbf",
+  "workers": [
+    {
+      "worker": "m40",
+      "commit": "72f8ca27975ca3f9f37df9410607d213e47f36f6",
+      "archive_members_verified": 224,
+      "archive_bytes": 20044,
+      "archive_sha256": "f3a713a1f904f7bb9a2ec2b35074641588a14380aa8afd55512327be0883571d",
+      "checks_passed": 33,
+      "policy_checks_passed": 11,
+      "source_files_matched_git": true,
+      "all_groups_closed_and_leases_released": true,
+      "final_stderr_empty": true
+    },
+    {
+      "worker": "elder",
+      "commit": "95f43f307e75ead48552d8c7701e84dd241a15f6",
+      "archive_members_verified": 208,
+      "archive_bytes": 17848,
+      "archive_sha256": "613d6e2f16926c339f2c4962c2e5f2a4d30eedef3cf8532427f7b719a3930dcb",
+      "checks_passed": 33,
+      "policy_checks_passed": 11,
+      "source_files_matched_git": true,
+      "all_groups_closed_and_leases_released": true,
+      "final_stderr_empty": true
+    }
+  ],
+  "actual_original_classic6_positive_manifest_rejected": true,
+  "actual_clean_classic6_manifest_accepted": true,
+  "both_actual_manifests_and_streams_bound_to_prior_git_primary": true,
+  "failed_test_wrapper_retained": true,
+  "numerical_tests_executed_locally": false,
+  "whole_plan_complete": false
+}
