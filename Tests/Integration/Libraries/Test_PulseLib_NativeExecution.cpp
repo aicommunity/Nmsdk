@@ -19,6 +19,7 @@
 #include <locale>
 #include <cmath>
 #include <algorithm>
+#include <chrono>
 
 namespace {
 using namespace RDK;
@@ -60,7 +61,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -70,12 +71,15 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     ASSERT_GE(inputCount,1u);ASSERT_LE(inputCount,6u);
     std::string subsetSuffix;
     if(observationSchema==6)for(auto index:sourceOrdinals)subsetSuffix+="_"+std::to_string(index);
-    const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
+    const std::string profileName=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
         (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"")+
         (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"")+
         (captureDomains?"_domain_capture":"");
-    StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
+    // Reader A/B changes artifact identity only, never the storage class names
+    // included in the semantic model identity.
+    const std::string name=profileName+(fullRevisionProvider?"_full_revision":"");
+    StorageProfileSpec profile;profile.name=profileName;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
     auto learner=dynamic_pointer_cast<Learner>(core.storage->TakeObject(branch?"NNeuronTimeLearnerBranch":"NNeuronTimeLearner"));
@@ -109,8 +113,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     }
     const auto phase=learner->TrainingPhase.GetData();const auto need=learner->IsNeedToTrain.GetData();
     const NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
-    NmsdkTools::ModelRevisionObserver subsetRevisionObserver;
-    std::size_t revisionReads=0;bool revisionFailure=false;
+    NmsdkTools::ModelRevisionObserver revisionObserver;
+    std::size_t revisionReads=0,tickRevisionReads=0,fullBoundaryReads=0;bool revisionFailure=false;
     const auto readRevision=[&]() {
         ++revisionReads;if(revisionFailure)throw std::runtime_error("injected_revision_failure");
         const auto identity=NmsdkTools::IdentifyModel(neuron,ports);
@@ -127,7 +131,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     NativeProbeRequest request;request.routing=branch?ProbeRouting::BranchSoloBurst:ProbeRouting::ClassicBurst;
     request.activeInput=active;request.inputId="input"+std::to_string(active);request.protocolRevision="native_burst_N"+std::to_string(inputCount)+"_v1";
     if(observationSchema==3)request.protocolRevision="native_ordered_burst_N"+std::to_string(inputCount)+"_v2";
-    request.baseModelRevision=base;request.expectedInputIsi=isi;request.readModelRevision=readRevision;
+    request.baseModelRevision=base;request.expectedInputIsi=isi;
+    // Match the production adapter: inspect actual typed graph inputs on every
+    // Before/After tick, retaining independent full captures at the boundaries.
+    // The explicit Full provider remains an A/B control for the same physics.
+    request.readModelRevision=[&]() {
+        ++tickRevisionReads;
+        if(fullRevisionProvider)return readRevision();
+        ++revisionReads;if(revisionFailure)throw std::runtime_error("injected_revision_failure");
+        return revisionObserver.Read(neuron,ports).toStdString();
+    };
+    request.readFullModelRevision=[&]() {++fullBoundaryReads;return readRevision();};
     auto& spec=request.specification;spec.runId=name;spec.trialId=name+"/probe0";spec.sampleId="sample0";
     spec.schemaVersion=observationSchema;
     if(observationSchema==3)spec.waveAssignment=WaveAssignmentPolicy::OrderedWholeBurst;
@@ -149,13 +163,6 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         spec.patternHash=NmsdkTools::CanonicalModelDataSha256(presented).toStdString();
         spec.windows.clear();spec.expectedStimulusIds.clear();
         for(auto index:sourceOrdinals)spec.expectedStimulusIds.push_back("pulse"+std::to_string(index));
-        // New waveform-only cases use the already production-validated typed
-        // reader, with independent full captures at both physical boundaries.
-        // Existing regression cases retain their original revision provider.
-        request.readModelRevision=[&]() {
-            ++revisionReads;return subsetRevisionObserver.Read(neuron,ports).toStdString();
-        };
-        request.readFullModelRevision=readRevision;
     }
     if(sharedVertex)
     {
@@ -207,6 +214,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     if(missingSubsetSink)
     {ASSERT_EQ(observationSchema,6u);request.onSample={};}
     const auto prototype=request;
+    const auto firstProbeStarted=std::chrono::steady_clock::now();
     learner->QueueNativeProbe(std::move(request));ASSERT_TRUE(learner->NativeProbeOwnsControl());
     unsigned ticks=0;
     while(learner->NativeProbeState()==NativeProbeStatus::Queued || learner->NativeProbeState()==NativeProbeStatus::Running)
@@ -245,6 +253,10 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         }
     }
     const auto result=learner->TakeNativeProbeResult();ASSERT_TRUE(result);
+    // Freeze accounting before any artifact reads, references or final probes.
+    const auto firstProbeTickRevisionReads=tickRevisionReads,firstProbeFullBoundaryReads=fullBoundaryReads;
+    const auto firstProbeObserverFullReads=revisionObserver.FullReads(),firstProbeObserverCacheHits=revisionObserver.CacheHits();
+    const double firstProbeWallSeconds=std::chrono::duration<double>(std::chrono::steady_clock::now()-firstProbeStarted).count();
     std::optional<ResponseDomainSpec> capturedDomains;
     if(captureDomains) {
         const auto& captured=domainCapture.Observation();
@@ -297,6 +309,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 {"frequency_deviation",p.frequencyDeviation},{"transit",p.useTransitSignal},{"pattern_output",p.usePatternOutput}};
         }
         const auto directory=QString::fromLocal8Bit(output);ASSERT_TRUE(QDir().mkpath(directory));
+        QFile counts(directory+"/"+QString::fromStdString(name)+".revision_reads.json");
+        ASSERT_TRUE(counts.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+        const auto countBytes=QJsonDocument(QJsonObject{{"schema_version",1},{"kind","native_probe_revision_reads"},
+            {"scope","first_probe"},{"revision_provider",fullRevisionProvider?"full":"typed"},
+            {"storage_profile",QString::fromStdString(profileName)},{"run_id",QString::fromStdString(prototype.specification.runId)},
+            {"trial_id",QString::fromStdString(prototype.specification.trialId)},
+            {"native_ticks",int(ticks)},{"sampled_frames",int(sampled)},{"wall_seconds",firstProbeWallSeconds},
+            {"tick_revision_reads",double(firstProbeTickRevisionReads)},{"full_boundary_reads",double(firstProbeFullBoundaryReads)},
+            {"observer_full_reads",double(firstProbeObserverFullReads)},{"observer_cache_hits",double(firstProbeObserverCacheHits)},
+            {"scientific_training_result",false}}).toJson();
+        ASSERT_EQ(counts.write(countBytes),countBytes.size());
         QFile csv(directory+"/"+QString::fromStdString(name)+".csv");ASSERT_TRUE(csv.open(QIODevice::WriteOnly|QIODevice::NewOnly));
         const auto wave=QByteArray::fromStdString(trace.str());ASSERT_EQ(csv.write(wave),wave.size());
         if(captureDomains) {
@@ -365,6 +388,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();return;
     }
     ASSERT_EQ(result->status,NativeProbeStatus::Completed);
+    EXPECT_GE(firstProbeFullBoundaryReads,6u);
     ASSERT_TRUE(result->observation);const auto& observed=*result->observation;
     for(const auto& reason:observed.reasons)std::cout<<name<<" observation_reason="<<reason<<std::endl;
     if(observationSchema==6)
@@ -925,6 +949,14 @@ TEST(NativeResponseDomainBridge,Classic20000)
 { ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3,false,false,false,{},false,true); }
 TEST(NativeResponseDomainBridge,Branch20000)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3,false,false,false,{},false,true); }
+TEST(NativeResponseDomainBridge,ClassicFullRevision2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,false,false,{},false,true,true); }
+TEST(NativeResponseDomainBridge,BranchFullRevision2000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,false,false,false,{},false,true,true); }
+TEST(NativeResponseDomainBridge,ClassicFullRevision20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3,false,false,false,{},false,true,true); }
+TEST(NativeResponseDomainBridge,BranchFullRevision20000)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3,false,false,false,{},false,true,true); }
 
 struct DomainCaptureFixture {
     NativeResponseDomainCapture capture;
