@@ -367,7 +367,9 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         executable.parent, output/"process", maximum_wall_seconds, **options)
     verify_runtime(runtime)
     audit = None
-    if process["execution"] == "completed" or _structured_training_exit(mode, job, process, output/"native"):
+    from .operational_diagnostics import permits_positive_audit
+    operational_clear = permits_positive_audit(output/'process', process.get('operational_diagnostics'))
+    if operational_clear and (process["execution"] == "completed" or _structured_training_exit(mode, job, process, output/"native")):
         require(process["runtime_provenance"] == "loaded_files_captured", "pipeline_loaded_runtime_missing")
         audit = audit_execution(mode, output/"native", job, source_case)
         if process["execution"] != "completed":
@@ -448,7 +450,9 @@ def audit_run_manifest(path, *, historical_analysis=None):
             request["working_directory"] == str(PurePosixPath(runtime["executable"]["path"]).parent) and
             number(request["maximum_wall_seconds"]) > 0 and request["model_time"] is None, "pipeline_process_scope_changed")
     structured_exit = _structured_live_exit if manifest["schema_version"] == 1 else _structured_training_exit
-    auditable = process["execution"] == "completed" or structured_exit(mode, job, process, root/"native")
+    from .operational_diagnostics import permits_positive_audit
+    operational_clear = permits_positive_audit(root/'process', process.get('operational_diagnostics'))
+    auditable = operational_clear and (process["execution"] == "completed" or structured_exit(mode, job, process, root/"native"))
     if auditable:
         from .native_evidence import load_json
         owned = load(root/"process/owned-process.json");loaded = load_json(root/"process/loaded-files.json")
