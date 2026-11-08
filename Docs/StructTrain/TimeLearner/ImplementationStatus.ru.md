@@ -505,3 +505,31 @@ High-threshold subset A2 завершён:14/14 условий, обе full-па
 Потоковая упаковка ffb35ddf принята на реальном corpus:16 tests,700 файлов,
 6 native/manifest audits,104,4MB →1,26MB. Все inner hashes сверены с исходным
 Git primary; [receipt](StreamingPrimaryVerification.json).
+
+Последующая проверка stderr уточняет приёмку14 условий: Classic-6 (single3)
+содержит St12system_error Resource temporarily unavailable при exit0. CSV,
+model identity и restoration checks прошли, но научная приёмка этой пробы
+предварительна до чистого повтора. Это не отменяет точные full-control replays.
+В остальных15 original/reused process records stderr пуст. Риск неограниченного
+std::async при загрузке XML подтверждён в Rdk; b3438347 подготовлен отдельно,
+root-ветка codex/timelearner-bounded-description-load проверяет native loader
+до/после при ограниченных thread slots. Первый build gate остановился на
+отсутствующей штатной registration Libraries.cpp; это исправлено в fixture,
+проверка самого риска ещё не принята.
+Primary2194d833 доставлен через Git:10967 members,19,31MB; независимая сверка
+ещё не завершена. Из него построены28 фигур/35 trial-soma pairs без новых
+симуляций; выбранные рисунки и новый отчёт ещё готовятся к публикации.
+
+High-threshold primary2194d833 независимо проверен полностью:10967 members,
+2209931029 raw bytes,14 completed waveform conditions и явная Classic-6
+операционная оговорка. Рендер df1da70c восстановил данные из Git;28 фигур,
+35 trial/soma pairs,400 code hashes и70 primary bindings сверены. Четыре
+выбранных изображения прошли visual QA.
+[Научный диагностический отчёт](HighThresholdSubsetScientificReport-2026-11-08.ru.md)
+показывает, почему global maximum не заменяет assigned training peak: у Branch
+он раньше подачи импульса2. Назначение пиков, Train и классификация в этом
+исследовании не выполнялись.
+Контроль Rdk загрузчика на исходном10e9 воспроизвёл целевой отказ: обычная
+сериализация32 XML passed, отсутствие spare slots даёт ровно ожидаемый failed
+case. After-gate b343 с metadata2, storage/native5 и чистым Classic-6 replay
+запущен; исправление ещё не принято в develop.

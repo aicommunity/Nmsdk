@@ -12,7 +12,7 @@
   "initial_start_ticks": "316938416",
   "request_sha256": "c9eca9a8c73bae679b9f0ad872bb1651db30319de4b1fb0d23a11569fc4f1aed",
   "worker_sha256": "e3c155c299367da2654d9da0d84eaa1d31060b0367951450020b1d3ae00e942f",
-  "status": "A2 complete on server; all14 conditions; primary publication and figures pending",
+  "status": "all14 diagnostic conditions completed; primary received via Git; Classic-6 operational diagnostic unresolved",
   "probes_planned": 14,
   "ordering": "Classic full and Branch full before every omission/single-pulse condition",
   "full_control_gate": "Exact recorded input and soma samples and bounded relative-clock equality against historical full burst; stop on mismatch",
@@ -77,5 +77,26 @@
     ],
     "reused_processes": 2,
     "new_completed_processes_at_last_readback": 12
-  }
+  },
+  "primary_evidence_commit": "2194d833df5910207dfc8cf2895f8b11608db2f8",
+  "primary_archive_bytes": 19313800,
+  "primary_archive_members": 10967,
+  "runtime_diagnostics": {
+    "Classic-6/native": {
+      "stderr": "St12system_error Resource temporarily unavailable",
+      "process_returncode": 0,
+      "trace_audit": "complete and finite; imported model and target restored",
+      "scientific_acceptance": "provisional pending resource-owner investigation and clean replay"
+    }
+  },
+  "new_reports": {
+    "source": "Git primary 2194d833",
+    "cases": 14,
+    "figures": 28,
+    "trial_soma_pairs": 35,
+    "cache": "/media/user/Data/TimeLearnerRefactor/ReportsCache/high-threshold-subset-temporal-a1/figures/index.html",
+    "status": "rendered, independently verified and four selected figures visually checked; publication pending",
+    "report": "HighThresholdSubsetScientificReport-2026-11-08.ru.md"
+  },
+  "primary_local_verification": "HighThresholdSubsetPrimaryVerification.json"
 }
