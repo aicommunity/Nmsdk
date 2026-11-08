@@ -13,8 +13,13 @@ Service/codecs/CLI остаются незавершённой интеграц�
 и выявила потерю уведомления об отменённой пробе. Исправление подготовлено
 в Root `cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237` / Pulse
 `88ea9c7ab3583da601b1f01ec84bf6f122875a34`; приёмка всех248 проверок ещё впереди.
-На M40 запущена отдельная ASan-сборка этого среза: ядром ОС подтверждены
-unit, invocation, PID и start ticks. В скопированной inventory-декларации
+Отдельная ASan-сборка на M40 прошла, затем выполнены13 случаев:12 passed,
+один failed,235 не запускались. Обе исходные PreparedStop проверки прошли.
+`BranchLastCompositeSinkCannotCrossRealGroupDeadline` не достигла last-final
+callback (`slept=false`,elapsed0): нужный сценарий пересечения deadline после
+callback не подтверждён, требуется диагностика более раннего завершения.
+Все14 групп закрыты; полный отрицательный артефакт проверяется.
+В скопированной inventory-декларации
 обнаружен старый root SHA; raw-файл сохраняется, actual source closure
 проверена отдельно. Это требует явной errata и независимого Git-derived
 inventory; согласованность production preparation пока не принята.

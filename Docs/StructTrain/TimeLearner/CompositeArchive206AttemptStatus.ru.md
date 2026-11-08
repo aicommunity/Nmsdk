@@ -3,6 +3,16 @@
 Это техническая приёмка service/archive, а не научная классификация и не
 завершение этапов 5–8. Принятый M40 core143 остаётся отдельным результатом.
 
+Следующая cancellation248 на Rootcc23/Pulse88 собрана на M40/ASan, но
+остановилась после13 случаев:12 passed,1 failed,235 не запускались.
+Обе первоначальные PreparedStop проверки прошли. Ошибка
+`BranchLastCompositeSinkCannotCrossRealGroupDeadline`: last-final callback
+не был достигнут (`slept=false`,elapsed0), хотя итоговый outcome BudgetExhausted.
+Это не PASS post-callback deadline: нужна диагностика фазы более раннего
+исчерпания бюджета. Все14 групп закрыты; отрицательный primary сохраняется
+до обновления cache. Скопированный inventory.root540 отдельно отмечен как
+metadata errata, actual source closure — cc23/88; raw bytes не переписываются.
+
 Последняя Elder A3 завершилась после 12 passed / одной failed проверки;
 193 случая не запускались. Обнаружена потеря уведомления об отменённой пробе
 при остановке из onPrepared. Исправление доставки результатов подготовлено
