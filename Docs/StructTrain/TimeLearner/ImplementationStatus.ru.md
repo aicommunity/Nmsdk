@@ -12,7 +12,7 @@ Service/codecs/CLI остаются незавершённой интеграц�
 [Composite206: после исправления декларации Elder A3 прошла 12 service cases
 и выявила потерю уведомления об отменённой пробе. Исправление разрабатывается.
 M40 ASan206 работает на предыдущем pin. Windows пока не допущена к SDK-прогонам
-завершения дочерних процессов](CompositeArchive206AttemptStatus.ru.md).
+из-за остающегося дочернего процесса сборки](CompositeArchive206AttemptStatus.ru.md).
 Новые шесть native-архивов пока не получены; Python-проверка их чтения
 ещё не выполнена.
 [Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
