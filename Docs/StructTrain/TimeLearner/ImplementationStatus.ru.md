@@ -449,17 +449,33 @@ operational needs_review и двадцать provenance notices сохранен
 
 ## Следующий измеритель закреплённого пика: код подготовлен
 
-В отдельных неизменяемых ветках подготовлен geometry-only модуль
-`DeclaredWindowBasinAssignment`: Pulse `fce3cdf01db0c883b7f3b03045094f2580f9e981`,
-root `236f1acbe978e645774cd96b10503bbe0d56fbd9`. Это35 новых production-source
-C++ tests и отдельный небольшой CMake target без полного SDK. Локально численные
-проверки не запускались; server normal/ASan gate готовится отдельно.
+Подготовленный geometry-only модуль `DeclaredWindowBasinAssignment` прошёл
+36/36 в normal и36/36 с ASan на M40: Pulse
+`fce3cdf01db0c883b7f3b03045094f2580f9e981`, root
+`3c2ae1fd696462dad4677a795a05db80f5bac93d`.
+[Независимая квитанция](DeclaredWindowBasinPureM40A2Verification.json).
+Первая попытка34/35 сохранена: исходный пример задавал rising shoulder вместо
+пересекающей границу вершины. Исправлены только тестовые данные, алгоритм не
+менялся; исходная форма стала отдельным положительным тестом.
+[Сохранённый отрицательный gate](DeclaredWindowBasinPureM40A1NegativeVerification.json).
+
+Численные проверки использовали отдельный небольшой harness с настоящими
+production translation units; это не приёмка полного root CMake target/SDK.
+Prep-only controller A2 содержал старую метку root236; actual prepared Git3c2,
+оба численных controller/runtime3c2 и source hashes проверены, mismatch сохранён.
+Локальных сборок и численных tests не было.
 
 Правило использует фиксированное для одной группы объявленное окно и реальные
 вершины полной записи, без разностного максимума и без global veto от отдельной
 поздней вершины вне окна. Слитая вершина и неопределённые локальные кандидаты
 не превращаются в успех. [Контракт](PeakAssignmentClarification-2026-11-08.ru.md)
 сохраняет предел причинной интерпретации: geometry API не проверяет native
-context и не создаёт Train evidence/certificate. Следующий кодовый шаг — общий
-context validator и настоящий native diagnostic bridge, затем типизированная
-Train integration. Старый v1 и исторические результаты не переоцениваются.
+context и не создаёт Train evidence/certificate.
+
+Отдельно подготовлены и pushed механическое выделение общего context validator
+(Pulse8ee/root666,71 pure cases) и native diagnostic bridge
+(Pulsec3ac/root663,14 native cases с полным artifact binding). Их серверная
+приёмка ещё ожидается. Full SDK M40 gate140 готовится на immutable663/c3;
+до приёмки механического подэтапа его сборка/расчёты не запускаются.
+Typed Train integration остаётся следующим обязательным шагом. Старый v1 и
+исторические результаты не переоцениваются.
