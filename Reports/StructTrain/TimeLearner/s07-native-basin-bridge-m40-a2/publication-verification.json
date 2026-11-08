@@ -1,0 +1,164 @@
+{
+  "kind": "native_basin_bridge_sdk_asan_publication",
+  "schema_version": 1,
+  "facts": {
+    "kind": "native_declared_basin_bridge_sdk_asan_gate",
+    "schema_version": 1,
+    "root": "51566b251a087589411d0a6bbb848de7d0273b6e",
+    "pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+    "worker": "m40",
+    "capture_phase": "postclosure_confirm_original_success",
+    "original_terminal_native_basin_bridge_gate_passed": true,
+    "original_orchestrator_success": true,
+    "original_outputs_preserved": true,
+    "manifest_fingerprint_scope": "prelaunch_snapshot_with_null_loaded_process_files_actual_loaded_files_audited_separately",
+    "publication_observer_attempt": "observer-a1",
+    "original_native_needs_review_statuses_preserved": 25,
+    "original_native_runtime_notice_stderr_lines": 50,
+    "new_build_or_model_run": false,
+    "native_gates_passed": 30,
+    "native_cpp_assertions_passed": 140,
+    "native_resistance_step_ownership_checks_passed": 10,
+    "native_declared_basin_bridge_cases_passed": 14,
+    "native_declared_basin_cpp_outcomes": {
+      "valid": 8,
+      "ambiguous": 2,
+      "partial_null": 4
+    },
+    "bridge_portable_v1_context_reader_receipts": 10,
+    "geometry_independent_python_replay": false,
+    "root_cmake_three_targets_configured_built_exercised": true,
+    "full_sdk_matrix_accepted": false,
+    "python_tests_passed_original_server": 43,
+    "independent_portable_readers_original_server": 6,
+    "independent_fixture_readers_original_server": 10,
+    "original_native_csv_byte_equal": 28,
+    "current_runtime_before_after_postclosure_equal": true,
+    "old_runtime_before_after_postclosure_equal": true,
+    "resource_before_after_postclosure_equal": true,
+    "unique_actual_loaded_files_hash_verified": 77,
+    "materialized_resource_files_hash_verified": 327,
+    "fixture_source_hashes_postclosure": 36,
+    "tool_python_source_hashes_postclosure": 411,
+    "cmakecache_capture_phase": "original_producer_snapshot_confirmed_postclosure",
+    "asan_options": "detect_leaks=0",
+    "asan_gate": true,
+    "leak_check_claimed": false,
+    "matched_native_training_service_integration": false,
+    "training_certificate_eligible": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "created_utc": "2026-11-08T09:41:20.555075+00:00"
+  },
+  "original_output_unchanged_before_after_archive": true,
+  "original_controller_unchanged_before_after_archive": true,
+  "fresh_closure_after_archive": {
+    "job": "s07-native-basin-bridge-m40-a2",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "640daa6f9b113a6f3a4e2201fb7496e0f5a91461068784a1a284c40cc7d00efe",
+        "unit": "timelearner-07bd9926-abca-4a18-8b0c-29e5c3008aca.service",
+        "invocation_id": "517e88dedb8c46ed97ffde9870ec851e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-07bd9926-abca-4a18-8b0c-29e5c3008aca.service",
+        "initial_main_pid": 2647474,
+        "initial_start_ticks": "320454836",
+        "sha256": "6feb21933ebb2dc1cc1ff37ee29cdeb6d41801a14259727e912ba8293eb45951"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-07bd9926-abca-4a18-8b0c-29e5c3008aca.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "leases": [
+      {
+        "token": "c01f7ce0-8ff0-49f1-855f-62ba179f75a4",
+        "job_id": "s07-native-basin-bridge-m40-a2",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 2647474,
+          "start_ticks": "320454836",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-basin-bridge-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-basin-bridge-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-pulse-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-pulse-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-root-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-root-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-response-features-rdk-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-response-features-rdk-a1"
+          }
+        ],
+        "state": "released",
+        "created": 1794129350.9136703,
+        "deadline": 1794130932.5931897,
+        "updated": 1794130832.8249066,
+        "release_note": "Analysis worker closed; scientific outcome remains separate.",
+        "heartbeat_expired": false,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ]
+  },
+  "compression_dictionary_bytes": 33554432,
+  "archive_members": 1086
+}
