@@ -8,6 +8,8 @@
 #include "TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/CompositePortableTrainingProof.h"
+#include "TimeLearner/NativeLearnedState.h"
+#include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
@@ -908,3 +910,123 @@ TEST(NativeCompositePortableMath,ClassicRejectedWarmKeepsHistoricalReferenceData
 TEST(NativeCompositePortableMath,BranchRejectedWarmKeepsHistoricalReferenceData){RejectedWarmRetainsHistoricalData<NNeuronTimeLearnerBranch>();}
 
 TEST(NativeCompositePortableMath,WholeOlderActualFinalSweepRejected){FreshFinalSweeps(2);}
+
+
+namespace {
+constexpr const char* CompositePackageImplementation="native-composite-package-fixture-v1";
+template<class Owner> void ConfigurePortableCold(NativeCompositeFixture<Owner>& f,bool c0=false,bool growth=false) {
+    auto c=CompositeCold(f);c.recordCapacitanceHistory=c0;c.capacitanceMaximumRelativeChange=c0?.2:0.;
+    if(growth){c.search.bounds.front().maximumLength=3;c.search.tolerances.sync=.02;c.search.maximumSweeps=2;}
+    f.attempt.reset();
+    f.owner->Default();f.owner->SetGlobalTimeStep(2000);f.owner->EnablePostTrainTuning=false;
+    f.owner->AutoCalibrateFixedLTZThreshold=false;f.owner->IsNeedToTrain=false;f.owner->CalculateMode=1;
+    f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
+    f.owner->ControllerVersion=2;Require(f.owner->ControllerVersion.GetData()==2,"package_fixture_controller_readback");
+    f.owner->Build();f.model->Init();f.model->Reset();Require(f.owner->IsReady() && f.owner->IsInit(),"package_fixture_not_ready");
+    Require(f.owner->ConfiguredModelInitialized.GetData(),"package_fixture_cold_not_constructed");
+}
+void SavePortableObject(const char* directory,const char* name,const QJsonObject& document) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const auto base=QString::fromLocal8Bit(output)+"/"+directory;Require(QDir().mkpath(base),"package_fixture_directory");
+    QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"package_fixture_new_only");
+    const auto bytes=QJsonDocument(document).toJson();Require(file.write(bytes)==bytes.size() && file.flush(),"package_fixture_write");
+}
+template<class Owner> void SavePortableBoundary(NativeCompositeFixture<Owner>& f,const char* name,const QJsonObject& package) {
+    SaveCompositeArchive(EncodeNativeCompositeTrainingArchive(f.owner->NativeTrainingController()),name);SaveCompositeBoundary(f,name);
+    const bool stopped=package["kind"]==QJsonValue("timelearner_stopped_state");
+    SavePortableObject(name,stopped?"train_stopped_state.json":"train_learned_state.json",package);
+    SavePortableObject(name,stopped?"train_stopped_summary.json":"train_learned_summary.json",
+        EncodeNativeTrainingState(f.owner->NativeTrainingController(),f.Revision(),f.owner->ReadNativeParameters()));
+}
+template<class Owner,bool C0=false> const QJsonObject& ActualPortablePackage() {
+    static QJsonObject package;if(package.isEmpty()) {
+        NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigurePortableCold(f,C0);f.owner->IsNeedToTrain=true;ServiceTicks(f);
+        Require(f.owner->NativeTrainingController().Outcome()==TrainingStatus::Exact,f.owner->NativeTrainingController().Reason().c_str());
+        package=f.owner->ExportNativeLearnedState(CompositePackageImplementation);
+        const auto name=C0?(NativeCompositeFixture<Owner>::branch?"package5-branch-C0":"package5-classic-C0"):
+            (NativeCompositeFixture<Owner>::branch?"package5-branch":"package5-classic");SavePortableBoundary(f,name,package);
+    }return package;
+}
+template<class Owner,bool C0=false> void PortablePackageRoundtrip(bool warm) {
+    const auto source=ActualPortablePackage<Owner,C0>();NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.attempt.reset();f.owner->IsNeedToTrain=false;
+    const auto imported=f.owner->ImportNativeLearnedState(source,CompositePackageImplementation);ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(service.Certificate());ASSERT_TRUE(service.References());
+    EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());EXPECT_EQ(service.Plan().protocol.schemaVersion,4u);
+    EXPECT_EQ(service.CompositeSourceBinding(),source["measurement_archive"].toObject()["source_binding"].toObject());
+    EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);
+    const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());EXPECT_EQ(summary["schema_version"].toInt(),6);
+    EXPECT_EQ(summary["search_history_retained"],QJsonValue(false));EXPECT_TRUE(summary["search_probes"].isNull());EXPECT_TRUE(summary["accepted_parameters"].isNull());
+    EXPECT_EQ(f.owner->ExportNativeLearnedState(CompositePackageImplementation),source);
+    if(!warm)return;
+    const auto family=service.CompositeOwnerFamilyBinding();const auto binding=service.CompositeSourceBinding();const auto ids=service.CompositeReferenceGroupIds();
+    const auto capture=service.CaptureRevision();const auto oldAttempt=service.SessionAttempt();const auto oldOrigin=f.owner->ReadNativeTrainingCapacitance();
+    f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->IsReady());f.owner->IsNeedToTrain=true;ServiceTicks(f);
+    const auto& restarted=f.owner->NativeTrainingController();ASSERT_EQ(restarted.Outcome(),TrainingStatus::Exact)<<restarted.Reason();
+    EXPECT_EQ(restarted.CompositeSourceBinding(),binding);EXPECT_EQ(restarted.CompositeOwnerFamilyBinding(),family);EXPECT_EQ(restarted.CompositeReferenceGroupIds(),ids);
+    EXPECT_EQ(restarted.CaptureRevision(),capture);EXPECT_EQ(restarted.SessionAttempt(),oldAttempt+1);EXPECT_EQ(f.owner->ReadNativeTrainingCapacitance(),oldOrigin);
+    EXPECT_NE(restarted.Configuration().runId,source["runtime_plan"].toObject()["run_id"].toString().toStdString());
+    const auto result=f.owner->ExportNativeLearnedState(CompositePackageImplementation);
+    SavePortableBoundary(f,NativeCompositeFixture<Owner>::branch?(C0?"package5-branch-C0-warm":"package5-branch-warm"):
+        (C0?"package5-classic-C0-warm":"package5-classic-warm"),result);
+}
+template<class Owner> const QJsonObject& ActualEditedStoppedPackage() {
+    static QJsonObject package;if(package.isEmpty()) {
+        NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigurePortableCold(f,false,true);f.owner->IsNeedToTrain=true;
+        bool edited=false;for(std::size_t tick=0;tick<60000 && f.owner->NativeTrainingController().State()!=NativeTrainingState::Finished;++tick) {
+            f.model->Calculate();f.environment->IncreaseModelTimeByStep();
+            if(f.owner->ReadNativeParameters().front().length==3){edited=true;f.owner->IsNeedToTrain=false;break;}
+        }
+        Require(edited,"owned_search_did_not_reach_declared_growth_control");
+        Require(f.owner->NativeTrainingController().State()==NativeTrainingState::Finished,"edited_package_not_stopped");
+        package=f.owner->ExportNativeLearnedState(CompositePackageImplementation);
+        SavePortableBoundary(f,NativeCompositeFixture<Owner>::branch?"package5-branch-edited-stopped":"package5-classic-edited-stopped",package);
+    }return package;
+}
+template<class Owner> void PortableEditedStopped() {
+    const auto source=ActualEditedStoppedPackage<Owner>();NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.attempt.reset();f.owner->IsNeedToTrain=false;
+    ASSERT_EQ(source["schema_version"].toInt(),5);ASSERT_TRUE(source["certificate"].isNull());
+    const auto imported=f.owner->ImportNativeLearnedState(source,CompositePackageImplementation);ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    EXPECT_EQ(f.owner->ReadNativeParameters().front().length,3);EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+    EXPECT_NE(f.Revision(),source["capture_revision"].toString().toStdString());EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
+    EXPECT_EQ(source["configuration"].toObject()["model"].toObject()["inputs"].toArray().at(0).toObject()["attachment"].toInt(),2);
+    EXPECT_EQ(f.owner->ExportNativeLearnedState(CompositePackageImplementation),source);
+}
+template<class Owner> void PortablePartialStopped() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigurePortableCold(f);bool interrupted=false;ConfiguredNativeEvidenceSinks sinks;
+    std::size_t sampled=0;sinks.onSample=[&](const auto&){++sampled;};
+    f.owner->SetConfiguredNativeEvidenceSinks(sinks);f.owner->IsNeedToTrain=true;
+    for(std::size_t tick=0;tick<4000 && !interrupted;++tick){f.model->Calculate();f.environment->IncreaseModelTimeByStep();
+        if(sampled){interrupted=true;f.owner->IsNeedToTrain=false;}}
+    ASSERT_TRUE(interrupted);
+    const auto source=f.owner->ExportNativeLearnedState(CompositePackageImplementation);EXPECT_TRUE(source["certificate"].isNull());EXPECT_EQ(source["reference_complete"],QJsonValue(false));
+    SavePortableBoundary(f,NativeCompositeFixture<Owner>::branch?"package5-branch-partial":"package5-classic-partial",source);
+    const auto prepared=PrepareNativeLearnedState(source,f.storage,f.environment,CompositePackageImplementation);EXPECT_FALSE(prepared->service.References());EXPECT_FALSE(prepared->service.Certificate());
+    EXPECT_EQ(prepared->service.CompositeMeasurements().size(),1u);EXPECT_FALSE(prepared->service.CompositeMeasurements().front().consumed);
+}
+void RebindPortable(QJsonObject& source){source.remove("sha256");source["sha256"]=NmsdkTools::CanonicalModelDataSha256(source);}
+void PortableTamper(unsigned kind) {
+    auto source=ActualPortablePackage<NNeuronTimeLearner>();NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+    if(kind==0)source["unreleased_unknown_field"]=true;
+    if(kind==1){auto values=source["trained_inputs"].toArray();auto first=values[0].toObject();first["length"]=3;values[0]=first;source["trained_inputs"]=values;}
+    if(kind==2){auto cert=source["certificate"].toObject();cert["exact"]=false;source["certificate"]=cert;}
+    if(kind==3){auto cfg=source["configuration"].toObject();auto model=cfg["model"].toObject();auto values=model["inputs"].toArray();auto first=values[0].toObject();
+        first["attachment"]=3;values[0]=first;model["inputs"]=values;cfg["model"]=model;source["configuration"]=cfg;}
+    if(kind==4){auto runtime=source["runtime_plan"].toObject();runtime["initial_model_revision"]="fake-template";source["runtime_plan"]=runtime;}
+    RebindPortable(source);EXPECT_THROW(PrepareNativeLearnedState(source,f.storage,f.environment,CompositePackageImplementation),std::invalid_argument);
+}
+}
+TEST(NativeCompositePackage,ClassicPhysicalRoundtrip){PortablePackageRoundtrip<NNeuronTimeLearner>(false);}
+TEST(NativeCompositePackage,BranchPhysicalRoundtrip){PortablePackageRoundtrip<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCompositePackage,ClassicImportedWarmPreservesInitialFamily){PortablePackageRoundtrip<NNeuronTimeLearner>(true);}
+TEST(NativeCompositePackage,BranchImportedWarmPreservesInitialFamily){PortablePackageRoundtrip<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCompositePackage,ClassicImportedC0WarmPreservesBaseline){PortablePackageRoundtrip<NNeuronTimeLearner,true>(true);}
+TEST(NativeCompositePackage,BranchImportedC0WarmPreservesBaseline){PortablePackageRoundtrip<NNeuronTimeLearnerBranch,true>(true);}
+TEST(NativeCompositePackage,ClassicStoppedActualEditIsNotInitialTemplate){PortableEditedStopped<NNeuronTimeLearner>();}
+TEST(NativeCompositePackage,BranchStoppedActualEditIsNotInitialTemplate){PortableEditedStopped<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositePackage,ClassicPartialGroupNeverClaimsClosure){PortablePartialStopped<NNeuronTimeLearner>();}
+TEST(NativeCompositePackage,BranchPartialGroupNeverClaimsClosure){PortablePartialStopped<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositePackage,UnknownPackageFieldRejected){PortableTamper(0);}
+TEST(NativeCompositePackage,ChangedCurrentParametersRejected){PortableTamper(1);}
+TEST(NativeCompositePackage,ChangedCertificateRejected){PortableTamper(2);}
+TEST(NativeCompositePackage,FakeInitialTemplateRejected){PortableTamper(3);}
+TEST(NativeCompositePackage,RuntimeInitialModelRelabelRejected){PortableTamper(4);}

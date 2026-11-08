@@ -1,0 +1,39 @@
+{
+  "status": "source_preparation_only",
+  "numeric_tests_run_locally": false,
+  "suite": "NativeCompositePackage",
+  "count": 15,
+  "cases": [
+    "NativeCompositePackage.ClassicPhysicalRoundtrip",
+    "NativeCompositePackage.BranchPhysicalRoundtrip",
+    "NativeCompositePackage.ClassicImportedWarmPreservesInitialFamily",
+    "NativeCompositePackage.BranchImportedWarmPreservesInitialFamily",
+    "NativeCompositePackage.ClassicImportedC0WarmPreservesBaseline",
+    "NativeCompositePackage.BranchImportedC0WarmPreservesBaseline",
+    "NativeCompositePackage.ClassicStoppedActualEditIsNotInitialTemplate",
+    "NativeCompositePackage.BranchStoppedActualEditIsNotInitialTemplate",
+    "NativeCompositePackage.ClassicPartialGroupNeverClaimsClosure",
+    "NativeCompositePackage.BranchPartialGroupNeverClaimsClosure",
+    "NativeCompositePackage.UnknownPackageFieldRejected",
+    "NativeCompositePackage.ChangedCurrentParametersRejected",
+    "NativeCompositePackage.ChangedCertificateRejected",
+    "NativeCompositePackage.FakeInitialTemplateRejected",
+    "NativeCompositePackage.RuntimeInitialModelRelabelRejected"
+  ],
+  "source_sha256": "d18eb4241e5c95348f8dc814c6856c7c00590956cf373bbb7abd1e88b91de7e0",
+  "prior_scope": 214,
+  "new_scope_total": 229,
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "does_not_claim": [
+    "runtime_acceptance",
+    "automatic_recognition_exact",
+    "search_traversal_reexecution",
+    "wall_time_attestation",
+    "dynamic_window_search_completeness"
+  ],
+  "pending": [
+    "Console_execution3_writer",
+    "CLI_Train_to_Test",
+    "per_candidate_window_policy"
+  ]
+}
