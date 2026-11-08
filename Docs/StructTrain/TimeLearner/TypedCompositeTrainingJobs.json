@@ -473,7 +473,7 @@
     {
       "job_id": "s07-composite-cold6-m40-asan-a4",
       "host": "10.245.1.17",
-      "state": "running_build_at_last_kernel_observation",
+      "state": "running_at_last_confirmed_observation_current_state_unknown_during_network_gap",
       "root": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
       "pulse": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
       "expected_cpp_cases": 250,
@@ -495,7 +495,21 @@
       "do_not_restart_on_observation_timeout": true,
       "whole_gate_accepted": false,
       "compiled_inventory_verified": false,
-      "scientific_verdict": null
+      "scientific_verdict": null,
+      "last_confirmed_server_unix_time": 1794177029,
+      "observed_passed_cases": 19,
+      "observed_failed_cases": 0,
+      "observed_closed_leaf_gates": 16,
+      "observed_binary_inventory_cases": 1626,
+      "last_running_case": "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume",
+      "network_gap": {
+        "jump": "10.245.1.12:22",
+        "ssh_timeout_before_remote_execution": true,
+        "independent_root_tcp_timeout_seconds": 4,
+        "repeat_readonly_ssh_timeout_seconds": 15,
+        "job_restart_performed": false,
+        "current_completion_unknown": true
+      }
     }
   ],
   "prepared_feature": {
