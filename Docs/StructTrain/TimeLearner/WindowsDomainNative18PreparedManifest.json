@@ -1,7 +1,7 @@
 {
   "kind": "prepared_unlaunched_windows_native_domain_fixture_gate_plan",
   "schema_version": 1,
-  "prepared_only": true,
+  "prepared_only": false,
   "worker": "user@10.245.1.14",
   "source_root": "C:/Projects/TimeLearnerWorker/source-fixture-identity-windows-a2",
   "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-fixture-identity-windows-a2",
@@ -108,8 +108,22 @@
   "source_configure_flags_unchanged": true,
   "scientific_worker_admitted": false,
   "whole_plan_complete": false,
-  "dispatch_state": "not_dispatched",
+  "dispatch_state": "running_after_fresh_memory_source_and_kernel_preflight",
   "requires_runtime_preflight": true,
-  "readiness": "memory_and_portability_gate_pending",
-  "user_worker_trial_authorization_already_present": true
+  "readiness": "native18_dispatched_with_fresh_10GiB_available_memory",
+  "user_worker_trial_authorization_already_present": true,
+  "attempt": {
+    "job": "windows-domain-fixture-native-a6",
+    "task": "TimeLearner-WindowsDomainFixtureNative-A6-20261108",
+    "instance": "{8F3C9248-A378-4B87-A182-518244323E35}",
+    "worker_sha256": "b3d28a1029cd8a8c6f6624916a7b35e168b918e7dc48c4b4f31ddab285259725",
+    "plan_sha256": "8710744f9452fd17a1bd5a2a4eda8841ba17d31b851d01bc37eb4acf0757f410",
+    "output": "C:/Projects/TimeLearnerWorker/jobs/windows-domain-fixture-native-a6",
+    "memory_preflight_available_bytes": 10915479552,
+    "prior_kernel_jobs_observed_absent": 57,
+    "capture_codec_tests_confirmed_passed": 10,
+    "terminal_verified": false,
+    "no_automatic_retry": true,
+    "rebuild": false
+  }
 }
