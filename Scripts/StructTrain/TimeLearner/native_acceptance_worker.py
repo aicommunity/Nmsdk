@@ -279,7 +279,7 @@ class Worker:
         remaining = max(1, int(self.job["limits"]["whole_wall_seconds"]-(time.monotonic()-self.started)))
         spec = {"kind":"timelearner_native_test_gate", "schema_version":3,
             "runtime_manifest":str(manifest), "source_root":str(self.source), "expected_test_ids":ids,
-            "maximum_wall_seconds":min(leaf["wall_seconds"], remaining), "asan_options":self.job["asan_options"],
+            "maximum_wall_seconds":min(leaf["wall_seconds"], remaining), "asan_options":self.job["asan_options"] or "",
             "cooperative_runtime_capture":True, "process_limits":{
                 "memory_bytes":self.job["limits"]["leaf_memory_bytes"], "tasks":self.job["limits"]["leaf_tasks"]}}
         self.write(name+"-spec.json", spec)
