@@ -20,13 +20,14 @@
 #include <cmath>
 #include <algorithm>
 #include <chrono>
+#include <limits>
 
 namespace {
 using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
-enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude,WrongObservationChannel,WrongSoloSelector };
+enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude,WrongObservationChannel,WrongSoloSelector,TinyPhysicalCapacitance };
 
 QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const ProbeObservation& observation)
 {
@@ -233,6 +234,15 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             }
             case Interference::SourceAmplitude:generator->Amplitude=1.5;break;
             case Interference::TinySourceAmplitude:generator->Amplitude=1.+1e-12;break;
+            case Interference::TinyPhysicalCapacitance:
+            {
+                auto channel=neuron->template GetComponentL<NPulseChannel>("Dendrite1_"+std::to_string(inputCount)+".ExcChannel",true);
+                ASSERT_TRUE(channel);ASSERT_TRUE(channel->IsReady());
+                const auto previous=channel->Capacity.GetData();
+                channel->Capacity=std::nextafter(previous,std::numeric_limits<double>::infinity());
+                EXPECT_NE(channel->Capacity.GetData(),previous);EXPECT_TRUE(channel->IsReady());
+                EXPECT_NE(readRevision(),base);break;
+            }
             case Interference::SourceFrequency:generator->Frequency=100.;break;
             case Interference::Pattern:
                 learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true)->MatrixData(0,0)=.02;break;
@@ -941,6 +951,10 @@ TEST(NativeLearnerProbeInvalidation, BranchOwnerUnInitCancelsProbe)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::OwnerUnInit); }
 TEST(NativeLearnerProbeInvalidation, BranchTinySourceChangeCannotHideInFormattedSnapshot)
 { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::TinySourceAmplitude); }
+TEST(NativeLearnerProbeInvalidation,ClassicOneUlpPhysicalCapacitanceChange)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::TinyPhysicalCapacitance); }
+TEST(NativeLearnerProbeInvalidation,BranchOneUlpPhysicalCapacitanceChange)
+{ ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::TinyPhysicalCapacitance); }
 TEST(NativeResponseDomainBridge,Classic2000)
 { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,false,false,{},false,true); }
 TEST(NativeResponseDomainBridge,Branch2000)
