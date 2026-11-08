@@ -3,7 +3,7 @@
   "schema_version": 1,
   "root_base": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
   "pulse_base": "f925e37247bb987980fce80da47831a1c31d04c9",
-  "pulse_source": "686c86bc862191def0bda9f75b533150c0a92413",
+  "pulse_source": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
   "status": "source_prepared_pending_parent_review",
   "runtime_accepted": false,
   "local_numeric_tests_run": false,
@@ -24,6 +24,9 @@
     "NativeCompositeService/BranchInvalidActualPacketStillReachesSink",
     "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
     "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact",
+    "NativeCompositeService/BranchMutableBeforeConsumeStopsOnSecondActualGroup",
+    "NativeCompositeService/BranchMutableCompositeSinkStopsOnSecondActualGroup",
+    "NativeCompositeService/BranchMutableRawSinkStopsOnSecondActualPacket",
     "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation",
     "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume",
     "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe",
@@ -42,6 +45,9 @@
     "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink",
     "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
     "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact",
+    "NativeCompositeService/ClassicMutableBeforeConsumeStopsOnSecondActualGroup",
+    "NativeCompositeService/ClassicMutableCompositeSinkStopsOnSecondActualGroup",
+    "NativeCompositeService/ClassicMutableRawSinkStopsOnSecondActualPacket",
     "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation",
     "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume",
     "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe",
@@ -49,8 +55,8 @@
     "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume",
     "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw"
   ],
-  "new_controls_count": 36,
-  "total_required_cases": 242,
+  "new_controls_count": 42,
+  "total_required_cases": 248,
   "files": {
     "Test_PulseLib_BoundedTraining.cpp": {
       "count": 74,
@@ -162,7 +168,7 @@
       "sha256": "239d9d99adc7415112bd8d4bc3f31686aea041124721043e7999e081ec29b8d0"
     },
     "Test_PulseLib_CompositeTraining.cpp": {
-      "count": 141,
+      "count": 147,
       "ids": [
         "NativeCompositeTraining/ClassicCaptureSearchFinal2000",
         "NativeCompositeTraining/BranchCaptureSearchFinal2000",
@@ -281,6 +287,9 @@
         "NativeCompositeService/BranchInvalidActualPacketStillReachesSink",
         "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
         "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact",
+        "NativeCompositeService/BranchMutableBeforeConsumeStopsOnSecondActualGroup",
+        "NativeCompositeService/BranchMutableCompositeSinkStopsOnSecondActualGroup",
+        "NativeCompositeService/BranchMutableRawSinkStopsOnSecondActualPacket",
         "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation",
         "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume",
         "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe",
@@ -299,6 +308,9 @@
         "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink",
         "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
         "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact",
+        "NativeCompositeService/ClassicMutableBeforeConsumeStopsOnSecondActualGroup",
+        "NativeCompositeService/ClassicMutableCompositeSinkStopsOnSecondActualGroup",
+        "NativeCompositeService/ClassicMutableRawSinkStopsOnSecondActualPacket",
         "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation",
         "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume",
         "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe",
@@ -306,7 +318,7 @@
         "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume",
         "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw"
       ],
-      "sha256": "b24ca6c4a7f2e11989fbb6f3e802c10d883645635da814491c2cf77187a8793d"
+      "sha256": "a35fc01fdba7725883511d7ef1fbd2f869fd1d453896b6afb15cec4ceda5f88f"
     },
     "Test_PulseLib_NativeExecution.cpp": {
       "count": 4,
@@ -350,5 +362,20 @@
     "normal C0 strict; diagnostic cancel C0 failure retained explicitly without interrupting terminalization",
     "independent stable beforeConsume/compositeSink copies and deferred SyncOutcome after successful postconsume delivery and fresh group/attempt wall checks",
     "ABA same text IDs after Reset exercised through actual production lifecycle hook"
-  ]
+  ],
+  "mutable_functor_controls": {
+    "stages": [
+      "raw",
+      "beforeCompositeConsume",
+      "compositeSink"
+    ],
+    "topologies": [
+      "Classic",
+      "Branch"
+    ],
+    "requires": "internal mutable-by-value counter triggers ExternalStop on second actual native packet/group",
+    "copyback_authority": "same actor, attempt, generation and notification lifecycle token; never replacement control/model",
+    "remaining_staged_raw_callables_updated": true,
+    "callback_throw_no_retry": true
+  }
 }

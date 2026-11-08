@@ -651,6 +651,23 @@ template<class Owner> void ServiceLastCompositeSinkUsesRealGroupDeadline() {
     EXPECT_TRUE(slept);EXPECT_GE(elapsed,15.);EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
     EXPECT_FALSE(service.Certificate());EXPECT_NE(service.Reason().find("group_time_budget"),std::string::npos);
 }
+enum class MutableSinkStage { Raw,BeforeConsume,Composite };
+template<class Owner> void ServiceMutableNthStop(MutableSinkStage stage) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t seen=0;bool hit=false;
+    if(stage==MutableSinkStage::Raw) {
+        p.observationSink=[&,inside=0u](const NativeProbeResult&) mutable {
+            ++seen;if(++inside==2){hit=true;f.owner->IsNeedToTrain=false;}
+        };
+    } else {
+        const auto sink=[&,inside=0u](const NativeCompositeMeasurementRecord&) mutable {
+            ++seen;if(++inside==2){hit=true;f.owner->IsNeedToTrain=false;}
+        };
+        if(stage==MutableSinkStage::BeforeConsume)p.beforeCompositeConsume=sink;else p.compositeSink=sink;
+    }
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_TRUE(hit);EXPECT_EQ(seen,2u);EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+    EXPECT_FALSE(service.Certificate());
+}
 template<class Owner> void ObsoleteActorCannotCancelForeignProbe() {
     {
     NativeCompositeFixture<Owner> f;const auto logical=f.Request(0,"old-owner","old-owner/1");
@@ -773,6 +790,12 @@ TEST(NativeCompositeService,ClassicLastCompositeSinkThrowCannotPublishExact){Ser
 TEST(NativeCompositeService,BranchLastCompositeSinkThrowCannotPublishExact){ServiceRecordSinkLifetime<NNeuronTimeLearnerBranch>(true,true);}
 TEST(NativeCompositeService,ClassicLastCompositeSinkCannotCrossRealGroupDeadline){ServiceLastCompositeSinkUsesRealGroupDeadline<NNeuronTimeLearner>();}
 TEST(NativeCompositeService,BranchLastCompositeSinkCannotCrossRealGroupDeadline){ServiceLastCompositeSinkUsesRealGroupDeadline<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicMutableRawSinkStopsOnSecondActualPacket){ServiceMutableNthStop<NNeuronTimeLearner>(MutableSinkStage::Raw);}
+TEST(NativeCompositeService,BranchMutableRawSinkStopsOnSecondActualPacket){ServiceMutableNthStop<NNeuronTimeLearnerBranch>(MutableSinkStage::Raw);}
+TEST(NativeCompositeService,ClassicMutableBeforeConsumeStopsOnSecondActualGroup){ServiceMutableNthStop<NNeuronTimeLearner>(MutableSinkStage::BeforeConsume);}
+TEST(NativeCompositeService,BranchMutableBeforeConsumeStopsOnSecondActualGroup){ServiceMutableNthStop<NNeuronTimeLearnerBranch>(MutableSinkStage::BeforeConsume);}
+TEST(NativeCompositeService,ClassicMutableCompositeSinkStopsOnSecondActualGroup){ServiceMutableNthStop<NNeuronTimeLearner>(MutableSinkStage::Composite);}
+TEST(NativeCompositeService,BranchMutableCompositeSinkStopsOnSecondActualGroup){ServiceMutableNthStop<NNeuronTimeLearnerBranch>(MutableSinkStage::Composite);}
 TEST(NativeCompositeService,ClassicResetPreservesPartialEvidence){ServicePartialReset<NNeuronTimeLearner>(false);}
 TEST(NativeCompositeService,BranchResetPreservesPartialEvidence){ServicePartialReset<NNeuronTimeLearnerBranch>(false);}
 TEST(NativeCompositeService,ClassicDefaultInvalidatesSourceFamily){ServicePartialReset<NNeuronTimeLearner>(true);}

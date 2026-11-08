@@ -9,7 +9,7 @@ Pulse `f925e37247bb987980fce80da47831a1c31d04c9` выполнил 12 checks и �
 Negative evidence `90af73022c3c0955eaafa368ef5a7e00702147b1` сохраняется.
 Ожидание не ослаблено, алгоритм выбора максимумов/окон и допуски не изменены.
 
-Исправление Pulse `686c86bc862191def0bda9f75b533150c0a92413` разделяет
+Исправление Pulse `88ea9c7ab3583da601b1f01ec84bf6f122875a34` разделяет
 сохранение фактического packet и application notification. Включены capture
 до validation, собственный run/trial cancel guard, cursor текущей группы,
 exactly-once staged service delivery после внутренних изменений, lifecycle и
@@ -25,13 +25,17 @@ SyncOutcome/service certificate публикуется после успешно
 [документе PulseLib](../../../Libraries/Nmsdk-PulseLib/Docs/TimeLearner/CompositeRawCancellationDelivery.ru.md).
 
 [Точный inventory](CompositeCancellationDeliveryGateInventory.json) содержит
-старые **206** IDs и **36** новых Classic/Branch checks: cancellation sink
+старые **206** IDs и **42** новых Classic/Branch checks: cancellation sink
 throw/reset/default/retarget/recursive stop, warm без исторического replay,
 normal sink throw/reset, фактическая порча физики с доставкой raw packet,
 реальная задержка sink, destructor без callback, устаревший actor против новой
 отдельной пробы, ABA с повторёнными IDs после Reset, C0 corruption при отмене,
 Default/throw из before/post-consume callbacks и slow last-composite delivery.
-Всего **242** обязательных cases; compiled gtest inventory
+Три вида mutable-by-value sink также обязаны остановиться на втором actual
+packet/group; callable state копируется обратно только в то же управление с
+совпадающими actor/attempt/generation/lifecycle, включая обновление остальных
+staged raw copies. После замены управления writeback запрещён.
+Всего **248** обязательных cases; compiled gtest inventory
 необходимо сверить до запуска. Старые cohort inventories остаются описаниями
 своих сохранённых снимков; новое полное задание использует этот inventory.
 
@@ -43,7 +47,7 @@ BudgetExhausted без service certificate; ранее измеренные refe
 в last-final случае. Early timeout до callback не PASS.
 
 Порядок приёмки: source review → scoped server build → старый prepared-stop
-и новые callback/lifetime controls → все 242 → actual6 archive exports →
+и новые callback/lifetime controls → все 248 → actual6 archive exports →
 независимый Python replay и legacy C0 graph controls. Будущие package5/Console
 и новые candidate-window bridge ветки в этот исходный снимок не подмешаны.
 Пока source не принят, существующие серверные runtime/source не обновляются.
