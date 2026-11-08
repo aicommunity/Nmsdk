@@ -53,10 +53,10 @@ Maintained native_preparation прошёл24/24 metadata tests на M40;
 Первый bootstrap17 завершился до тестов из-за file-versus-directory reservation;
 [отрицательная квитанция](OwnedPythonJobsMetadata17NegativeVerification.json).
 CanonicalSpec wiring и запуск maintained worker полного248 ещё выполняются.
-На Elder удалены89 подтверждённых дубликатов статических библиотек;
+На Elder удалены89, затем ещё13 подтверждённых дубликатов статических библиотек;
 данные/модели/ELF/INI/логи сохранены, собственная группа закрыта.
 [Операция и ограничения места](ElderDuplicateStaticArchiveRetirement-20261108.ru.md).
-После публикации свободно около1,89GB, запас над следующим preflight мал;
+После второй операции свободно около1,93GB, запас над следующим preflight мал;
 готовность Elder к новой полной сборке пока не подтверждена.
 [Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
 готов для14 технических групп; он не заменяет научную матрицу классификации.

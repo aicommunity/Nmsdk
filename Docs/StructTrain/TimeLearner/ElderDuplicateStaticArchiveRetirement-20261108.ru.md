@@ -52,3 +52,11 @@ Worker уже выполнялся; повторный запуск не про�
 при несовпадении отказ сохраняется. Повторная проверка завершилась exit0,
 receipt и derived file hashes неизменны. Это не приёмка общего production
 launcher; переход к maintained launcher/declarative spec остаётся задачей9/10.
+
+Следующая отдельная операция `s02-extra13-static-retirement-elder-a1` выполнена через maintained `owned_python_job` Root `edaaa836e27b0ecef1c2f9203fb04ee82d62bd93`. Удалены ровно13 дополнительных подтверждённых дубликатов в двух явно перечисленных старых runtimes:121819188 logical bytes,121843712 allocated bytes. Общий итог двух успешных операций —102 AR-файла. Никакие ELF, INI, модели, primary data, логи, source или общий build-cache этой операцией не удалялись.
+
+Evidence `f1f2aa133385fd930828d671316c56e76724e1c9`, [проверка операции](ElderExtra13StaticRetirementA1Verification.json), [проверка owned launcher](ElderExtra13StaticRetirementA1GeneralVerification.json). Проверены exact plan/review SHA,13 keepers,102→89 retained regular files,5 сохранённых aliases,16 fresh guards,28 fsynced journal events, закрытие всей собственной группы и освобождение lease. Каждый guard сохраняет84 известных kernel closures и207 legacy records с прежним ограничением видимости двух OS helpers. Наличие legacy identity не объявляется kernel proof.
+
+Фактическое свободное место1814167552→1934655488 bytes; delta120487936 не приравнивается сумме allocated removed bytes из-за параллельных расходов файловой системы. Это около1,93GB после удаления, не гарантия места для полной сборки. Перед следующим C++ job обязателен свежий preflight.
+
+После удаления будущие проверки шести затронутых target/keeper runtimes используют actual postimage из primary, а не прежний whole-runtime equality. Derived future-baseline SHA `a883d175f774b1c2f24366e1107cbf61df5386608cb3c2199277cd91b047fc2a`; остальные прежние baselines сохраняются. В raw stderr оставлены два предупреждения Git о запрещённом lazy fetch; fetch не включался, исходники и кэш SDK не обновлялись. Журнал, исходные plan/review и снимки доступны в compact primary этой операции.
