@@ -36,5 +36,25 @@
   "failure_source": "Test_PulseLib_NativeExecution.cpp:207 unconditional effective revision inequality; unchanged baseline routing is legal",
   "fixture_fix_root_prepared": "51566b251a087589411d0a6bbb848de7d0273b6e",
   "fixture_fix_changes_production_physics": false,
-  "forensic_publication_pending": true
+  "forensic_publication_pending": false,
+  "negative_evidence_commit": "89a74d940c2b1e480d1c0201e475c1d49a8fcd59",
+  "negative_receipt": "NativeDeclaredWindowBasinBridgeM40A1NegativeVerification.json",
+  "followup_attempt": {
+    "job": "s07-native-basin-bridge-m40-a2",
+    "root": "51566b251a087589411d0a6bbb848de7d0273b6e",
+    "pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+    "state": "running_native_tests_after_sdk_build",
+    "unit": "timelearner-07bd9926-abca-4a18-8b0c-29e5c3008aca.service",
+    "invocation_id": "517e88dedb8c46ed97ffde9870ec851e",
+    "initial_main_pid": 2647474,
+    "initial_start_ticks": "320454836",
+    "request_sha256": "640daa6f9b113a6f3a4e2201fb7496e0f5a91461068784a1a284c40cc7d00efe",
+    "cpp_tests_planned": 140,
+    "cpp_tests_confirmed_passed": 130,
+    "python_tests_confirmed_passed": 43,
+    "previously_failed_branch_input1_at_2000_now_passed": true,
+    "terminal_result_verified": false,
+    "native_geometry_independent_python_replay": false,
+    "do_not_restart_on_poll_timeout": true
+  }
 }
