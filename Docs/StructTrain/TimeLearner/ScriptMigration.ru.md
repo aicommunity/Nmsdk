@@ -1,4 +1,4 @@
-Подготовлено08.11:242 records (240 retired/2 moved), complete=false. Четыре исторических AsymRm seed/reset инструмента удалены в отдельной feature-ветке; источник каждого доступен по полному Git SHA. Серверная приёмка этой группы ещё открыта. [Область и ограничения](AsymRmSeedRetirement.ru.md). Предыдущие записи ниже относятся к своим снимкам.
+Принято08.11 в адресном scope:242 records (240 retired/2 moved), complete=false. Четыре исторических AsymRm seed/reset инструмента удалены без wrappers; оба workers проверили все242 записи, negative restored-path control и exact4D+4M scope. Общая миграция и develop-приёмка ещё не завершены. [Область и ограничения](AsymRmSeedRetirement.ru.md). Предыдущие записи ниже относятся к своим снимкам.
 
 Принято06.11:215 records (213 retired/2 moved),complete=false. Десять оставшихся AsymRm shell-драйверов удалены после проверок обоих workers; конфиги, модели, измерения и исходные report bodies сохранены. [Область и Git-источники](AsymRmDriverRetirement.ru.md). Ограниченный path/suffix inventory Bin теперь131; полнота всей миграции не заявляется. Ниже — хронология прежних снимков.
 
