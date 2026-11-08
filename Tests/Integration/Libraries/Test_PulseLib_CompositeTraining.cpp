@@ -912,7 +912,7 @@ void SaveCompositeArchive(const NativeCompositeArchiveDocument& archive,const ch
     const auto records=archive.document["records"].toArray();for(int i=0;i<records.size();++i)
         write(base+QString("/composite-measurements/group-%1.json").arg(i+1,6,10,QLatin1Char('0')),QJsonDocument(records[i].toObject()).toJson());
 }
-template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& f,const char* name) {
+template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& f,const char* name,std::optional<std::size_t> coreEpoch={}) {
     const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;const auto base=QString::fromLocal8Bit(output)+"/"+name;
     Require(QDir().mkpath(base),"composite_boundary_output_directory");const auto write=[&](const char* name,const QJsonObject& data) {
         QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"composite_boundary_output_new_only");
@@ -928,17 +928,21 @@ template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& 
         write("initial-configuration.json",service.CompositeInitialConfiguration());
         write("runtime-plan.json",EncodeCompositeRuntimePlan(service.Plan()));
     }
-    write("after-model.json",QJsonObject{
+    QJsonObject boundary{
         {"kind","native_composite_fixture_actual_boundary"},{"schema_version",1},{"neuron",snapshot},
         {"dataset",NmsdkTools::ExportDatasetSnapshot(dataset.Get())},{"actual_inputs",parameters},
         {"model_revision",QString::fromStdString(f.Revision())},{"model_epoch",double(service.ModelEpoch())},
-        {"optional_C0_state",f.owner->OwnedNativeCapacitanceState().isEmpty()?QJsonValue(QJsonValue::Null):QJsonValue(f.owner->OwnedNativeCapacitanceState())}});
+        {"optional_C0_state",f.owner->OwnedNativeCapacitanceState().isEmpty()?QJsonValue(QJsonValue::Null):QJsonValue(f.owner->OwnedNativeCapacitanceState())}};
+    if(coreEpoch){boundary["model_epoch"]=double(*coreEpoch);boundary["model_epoch_scope"]="typed_core_controller";}
+    write("after-model.json",boundary);
     QJsonArray references;if(service.References())for(const auto& ref:service.References()->Inputs())references.append(QJsonObject{
         {"input_id",QString::fromStdString(ref.id)},{"group_id",QString::fromStdString(ref.measurementGroupId)},
         {"semantic_proof_id",QString::fromStdString(ref.semanticProofId)},{"raw_potential",ref.rawPotential}});
-    write("boundary-math.json",QJsonObject{{"kind","native_composite_fixture_boundary_math"},{"schema_version",1},
+    QJsonObject math{{"kind","native_composite_fixture_boundary_math"},{"schema_version",1},
         {"reference_complete",bool(service.References())},{"references",references},{"outcome",TrainingStatusName(service.Outcome())},
-        {"reason",QString::fromStdString(service.Reason())},{"certificate",service.Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Certificate())):QJsonValue(QJsonValue::Null)}});
+        {"reason",QString::fromStdString(service.Reason())},{"certificate",service.Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Certificate())):QJsonValue(QJsonValue::Null)}};
+    if(coreEpoch)math["scope"]="inactive_native_service_not_the_typed_core";
+    write("boundary-math.json",math);
 }
 template<class Owner> QJsonObject& ActualServiceCertificateData(){static QJsonObject data;return data;}
 template<class Owner> const NativeCompositeArchiveDocument& ActualServiceArchive() {
@@ -1601,12 +1605,12 @@ template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner
         {"reason",QString::fromStdString(record.reason)},{"selection",record.selection?QJsonValue(EncodeNativeCompositeSelection(*record.selection)):QJsonValue(QJsonValue::Null)}}).toJson());
     SaveCompositeBoundary(f,directory.c_str());
 }
-template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true) {
+template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true,const std::string& prefix="reference") {
     f.referenceMeasurements.clear();
     for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
         const std::string run="candidate-attempt/capture/1";
         f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
-        if(save)SaveCandidateWindowGroup(f,"reference-"+std::to_string(i));
+        if(save)SaveCandidateWindowGroup(f,prefix+"-"+std::to_string(i));
         Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
         f.referenceMeasurements.push_back(*f.attempt->Measurement());EXPECT_EQ(f.attempt->CandidateWindowReferences(),nullptr);
     }
@@ -1934,3 +1938,198 @@ TEST(NativeCandidateWindowBudgetReplay,RehashedLaterAttemptCapMustIncludeRetaine
 TEST(NativeCandidateWindowBudgetReplay,EmptyWarmCurrentCapCannotDropRetainedEarlierBytes){auto a=ActualRetainedWindowBudgetArchive().document;const auto d=DecodeNativeCompositeTrainingArchive(a);std::size_t bytes=0;for(const auto& r:d.Records())bytes+=CompositeRecordPrimaryBytes(r);ASSERT_GT(bytes,1u);a["maximum_total_primary_bytes"]=double(bytes-1);RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
 TEST(NativeCandidateWindowBudgetReplay,RetainedGroupsCannotReverseIssuedOrder){auto a=ActualRetainedWindowBudgetArchive().document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),2);const auto first=r[0];r[0]=r[1];r[1]=first;a["records"]=r;RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
 TEST(NativeCandidateWindowBudgetReplay,CandidateCannotBeMovedBeforeItsOriginalReferences){auto a=ActualRetainedWindowBudgetArchive(true).document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),3);QJsonArray moved{r[2],r[0],r[1]};a["records"]=moved;RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
+
+namespace {
+template<class Owner> void SaveWindowCoreCertificate(NativeCompositeFixture<Owner>& f,const char* stage,const TrainingCertificate& certificate) {
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-core5/":"classic-window-core5/")+stage;
+    SavePortableObject(name.c_str(),"certificate3.json",QJsonObject{{"kind","native_candidate_window_typed_core_boundary"},{"schema_version",1},
+        {"scope","typed_core_before_service_package6"},{"protocol",EncodeVerificationProtocol(f.protocol)},
+        {"source_origin",QString::fromStdString(f.attempt->SourceOrigin())},{"source_binding",f.attempt->SourceBinding()},
+        {"model_revision",QString::fromStdString(f.Revision())},{"certificate",EncodeTrainingCertificate(certificate)}});
+    SaveCompositeArchive(EncodeNativeCandidateWindowTrainingArchive(*f.attempt),name.c_str());SaveCompositeBoundary(f,name.c_str(),certificate.ModelEpoch());
+    // The archive here remains the actor measurement journal (no service
+    // consumption/final selection). This is not a completed package6 export.
+}
+template<class Owner> void WindowTypedSearch(bool n0=true,bool c0=false) {
+    NativeCompositeFixture<Owner> f(2000,false,64,c0,n0);EnableCandidateWindow(f);const auto references=CaptureWindowReferences(f);
+    ASSERT_TRUE(f.attempt->CandidateWindowReferences());const auto closed=*f.attempt->CandidateWindowReferences();
+    BoundedTrainingConfig cfg;cfg.runId="candidate-attempt";cfg.initialModelRevision=f.Revision();cfg.maximumProbes=32;cfg.maximumEdits=8;
+    cfg.maximumCandidatesPerInput=2;cfg.maximumSweeps=1;cfg.normalization=n0?Normalization::SynapseCount:Normalization::TipResistance;
+    cfg.n0CandidateRepeats=n0?2:1;cfg.tolerances.sync=.2;
+    const auto parameters=f.owner->ReadNativeParameters();for(const auto& p:parameters)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    // This fixed-parameter standalone core fixture does not claim native N1
+    // service/domain orchestration; that remains the next service substep.
+    BoundedTrainingSession search(references,closed,cfg,parameters,false,f.owner->ReadNativeTrainingCapacitance());std::size_t logical=0;
+    while(const auto action=search.NextAction()) {
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);ASSERT_LT(++logical,32u);
+        const auto request=f.Request(action->inputIndex,action->runId,action->trialId,action->modelEpoch);std::size_t arms=0;
+        const auto rawPrepared=f.prototype.onPrepared;f.prototype.onPrepared=[&,rawPrepared,serial=action->serial](const auto& p,const auto& spec){
+            if(rawPrepared)rawPrepared(p,spec);EXPECT_THROW(search.Arm(serial,p),std::invalid_argument);
+        };
+        f.Run(request,action->finalVerification?CompositeMeasurementPurpose::Final:CompositeMeasurementPurpose::Search,[&,serial=action->serial](const auto& p){
+            ++arms;EXPECT_THROW(search.ArmComposite(serial,p),std::invalid_argument);search.ArmCandidateWindow(serial,p);
+        });
+        f.prototype.onPrepared=rawPrepared;
+        SaveCandidateWindowGroup(f,"core-search-"+std::to_string(action->serial));ASSERT_EQ(arms,1u);
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+        ASSERT_TRUE(f.attempt->Group()->packets.front().observation);
+        EXPECT_THROW(search.Consume(*f.attempt->Group()->packets.front().observation,f.Revision()),std::invalid_argument);
+        EXPECT_THROW(search.ConsumeComposite(*f.attempt->Measurement(),f.Revision()),std::invalid_argument);
+        search.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());
+    }
+    ASSERT_EQ(search.Status(),TrainingStatus::Exact)<<search.Reason();ASSERT_TRUE(search.Certificate());const auto& cert=*search.Certificate();
+    EXPECT_EQ(cert.SchemaVersion(),3u);EXPECT_EQ(cert.CompositeProofIds().size(),2u);EXPECT_EQ(cert.FinalWindowRecipeIds().size(),2u);
+    EXPECT_EQ(cert.FinalMeasurementInstanceIds().size(),2u);EXPECT_EQ(cert.CandidateWindowAttemptId(),"candidate-attempt");
+    EXPECT_TRUE(cert.Matches(f.Revision(),references,cfg.tolerances,ModelStateKind::LearnedSolo,search.ModelEpoch()));
+    EXPECT_FALSE(cert.Matches(f.Revision(),references,cfg.tolerances,ModelStateKind::Recognition,search.ModelEpoch()));
+    EXPECT_EQ(f.attempt->IssuedGroups(),logical+2);EXPECT_EQ(f.attempt->IssuedNativeProbes(),(logical+2)*4);EXPECT_EQ(search.IssuedProbes(),logical);
+    if(n0){ASSERT_EQ(search.CandidateRepeats().size(),1u);EXPECT_EQ(search.CandidateRepeats()[0].trialIds.size(),2u);}
+    EXPECT_EQ(f.owner->OwnedNativeCapacitanceState().isEmpty(),!c0);
+    const auto wire=EncodeTrainingCertificate(cert);EXPECT_EQ(wire["schema_version"],QJsonValue(3));
+    EXPECT_EQ(wire["protocol_binding"],QJsonValue(NmsdkTools::CanonicalModelDataSha256(EncodeVerificationProtocol(f.protocol))));
+    auto unsignedWire=wire;unsignedWire.remove("semantic_certificate_id");EXPECT_EQ(wire["semantic_certificate_id"],QJsonValue(NmsdkTools::CanonicalModelDataSha256(unsignedWire)));
+    SaveWindowCoreCertificate(f,n0?c0?"search-N0-C0":"search-N0":"search-N1-fixed",cert);
+    QJsonArray evidence;for(const auto& e:search.Evidence())evidence.append(QJsonObject{{"input_index",double(e.inputIndex)},
+        {"trial_id",QString::fromStdString(e.trialId)},{"anchor_trial_id",QString::fromStdString(e.anchorTrialId)},
+        {"model_revision",QString::fromStdString(e.modelRevision)},{"model_epoch",double(e.modelEpoch)},
+        {"actual_raw_potential",e.measuredRawPotential},{"amplitude_residual",e.amplitudeResidual},
+        {"timing_low",e.timingResidualLow},{"timing_high",e.timingResidualHigh},{"within_amplitude",e.withinAmplitude},{"within_timing",e.withinTiming}});
+    const auto dir=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-core5/":"classic-window-core5/")+(n0?c0?"search-N0-C0":"search-N0":"search-N1-fixed");
+    SavePortableObject(dir.c_str(),"core-search.json",QJsonObject{{"kind","native_candidate_window_core_search"},{"schema_version",1},
+        {"normalization",n0?"N0":"N1"},{"standalone_fixed_parameters",true},{"native_N1_domain_service_exercised",false},
+        {"outcome",TrainingStatusName(search.Status())},{"reason",QString::fromStdString(search.Reason())},
+        {"issued_core_probes",double(search.IssuedProbes())},{"native_probes",double(f.attempt->IssuedNativeProbes())},
+        {"raw_samples",double(f.attempt->RetainedSamples())},{"n0_candidate_repeats",double(cfg.n0CandidateRepeats)},{"candidate_evidence",evidence}});
+}
+template<class Owner> void WindowTypedFinal(unsigned hz=2000,bool defaultSync=false,bool c0=false) {
+    NativeCompositeFixture<Owner> f(hz,false,64,c0,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    VerificationConfig cfg{"candidate-attempt/final/1",f.Revision(),4,0,0};if(!defaultSync)cfg.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),cfg);std::size_t probes=0;
+    while(const auto request=final.NextRequest()) {
+        f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& prepared){final.ArmCandidateWindow(prepared);});
+        SaveCandidateWindowGroup(f,"core-final-"+std::to_string(++probes));ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+        final.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());
+    }
+    ASSERT_TRUE(final.Certificate());const auto& cert=*final.Certificate();EXPECT_EQ(cert.SchemaVersion(),3u);EXPECT_EQ(final.AcceptedInputs(),2u);
+    EXPECT_EQ(cert.Exact(),!defaultSync);EXPECT_EQ(final.Status(),defaultSync?VerificationStatus::OutsideTolerance:VerificationStatus::Exact);
+    EXPECT_EQ(cert.Tolerances().sync,defaultSync?.02:.2);EXPECT_EQ(cert.Tolerances().amplitudeAbsolute,1e-5);EXPECT_EQ(f.protocol.minimumAmplitude,1e-6);
+    ASSERT_GE(f.groupBegins.size(),4u);EXPECT_GT(f.groupBegins.back()-f.groupBegins[f.groupBegins.size()-2],cfg.tolerances.sync);
+    const auto& anchor=f.observedScalars.at(cert.Residuals().back().trialId);
+    for(std::size_t i=0;i<2;++i){const auto& r=cert.Residuals()[i];const auto& actual=f.observedScalars.at(r.trialId);
+        EXPECT_DOUBLE_EQ(r.targetRawPotential,refs.Inputs()[i].rawPotential);EXPECT_DOUBLE_EQ(r.measuredRawPotential,actual.rawPotential);
+        EXPECT_DOUBLE_EQ(r.timingResidualLow,i==1?0.:actual.arrival-anchor.plateauEnd);EXPECT_DOUBLE_EQ(r.timingResidualHigh,i==1?0.:actual.plateauEnd-anchor.arrival);}
+    SaveWindowCoreCertificate(f,defaultSync?"default-sync":hz==20000?"final-20000":c0?"final-C0":"final",cert);
+}
+enum class CoreWindowRevocation { NeedSetter,NeedDirect,NeedConnected,Reset,Default,Edit,StructuralABA,C0Edit };
+template<class Owner> void WindowCoreConsumeRevoked(CoreWindowRevocation kind) {
+    const bool c0=kind==CoreWindowRevocation::C0Edit;
+    NativeCompositeFixture<Owner> f(2000,false,64,c0,true,kind==CoreWindowRevocation::NeedConnected);EnableCandidateWindow(f);
+    const auto refs=CaptureWindowReferences(f);FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),{"candidate-attempt/final/1",f.Revision(),4,0,0});
+    const auto request=final.NextRequest();ASSERT_TRUE(request);f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);});
+    SaveCandidateWindowGroup(f,"core-before-revocation");ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    const auto measurement=*f.attempt->Measurement();const auto cachedRevision=f.Revision();
+    if(kind==CoreWindowRevocation::NeedSetter)f.owner->IsNeedToTrain=false;
+    if(kind==CoreWindowRevocation::NeedDirect)f.owner->IsNeedToTrain.SetDataDirect(false);
+    if(kind==CoreWindowRevocation::NeedConnected)f.flag->Value=false;
+    if(kind==CoreWindowRevocation::Reset)f.owner->Reset();
+    if(kind==CoreWindowRevocation::Default)f.owner->Default();
+    if(kind==CoreWindowRevocation::Edit || kind==CoreWindowRevocation::StructuralABA) {
+        const auto original=f.owner->ReadNativeParameters();auto changed=original;changed[0].length=3;
+        ASSERT_EQ(f.owner->ApplyNativeParameters(changed).status,NativeEditStatus::Applied);
+        if(kind==CoreWindowRevocation::StructuralABA){ASSERT_EQ(f.owner->ApplyNativeParameters(original).status,NativeEditStatus::Applied);ASSERT_EQ(f.Revision(),cachedRevision);}
+    }
+    if(kind==CoreWindowRevocation::C0Edit) {
+        auto correction=f.owner->ReadNativeTrainingCapacitance();ASSERT_TRUE(correction);ASSERT_FALSE(correction->membraneScales.empty());
+        correction->membraneScales.begin()->second=1.01;
+        const auto edit=f.owner->ApplyNativeTrainingParameters(f.owner->ReadNativeParameters(),correction);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    }
+    // Cached caller strings cannot revive the actual expired/changed owner.
+    final.ConsumeCandidateWindow(measurement,cachedRevision);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+    EXPECT_EQ(final.Status(),kind==CoreWindowRevocation::NeedSetter || kind==CoreWindowRevocation::NeedDirect || kind==CoreWindowRevocation::NeedConnected?
+        VerificationStatus::ExternalStop:VerificationStatus::InvalidObservation);
+    const auto directory=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-core5/":"classic-window-core5/")+"revoked";
+    const bool graph=bool(f.owner->template GetComponentL<NPulseNeuron>("Neuron",true)) &&
+        bool(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true)) &&
+        bool(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true));
+    const bool inspect=graph && kind!=CoreWindowRevocation::Default;
+    SavePortableObject(directory.c_str(),"core-revocation.json",QJsonObject{{"kind","native_candidate_window_core_revocation"},{"schema_version",1},
+        {"revocation_case",int(kind)},{"actual_final_status",VerificationStatusName(final.Status())},{"accepted_inputs",double(final.AcceptedInputs())},
+        {"cached_model_revision_before",QString::fromStdString(cachedRevision)},{"actual_graph_available_after",graph},
+        {"actual_model_revision_read",inspect},{"actual_model_revision_after",inspect?QJsonValue(QString::fromStdString(f.Revision())):QJsonValue(QJsonValue::Null)},
+        {"certificate",final.Certificate()?QJsonValue(EncodeTrainingCertificate(*final.Certificate())):QJsonValue(QJsonValue::Null)}});
+    if(inspect)SaveCompositeBoundary(f,directory.c_str(),final.ModelEpoch());
+}
+void ReferenceAndLegacyTokensCannotEnterWindowFinal() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    FinalVerificationSession noClosed(refs,{"candidate-attempt/final/1",f.Revision(),4,0,0});ASSERT_TRUE(noClosed.NextRequest());
+    const auto& raw=f.attempt->Group()->packets.front();ASSERT_TRUE(raw.prepared);ASSERT_TRUE(raw.observation);
+    EXPECT_THROW(noClosed.Arm(*raw.prepared),std::invalid_argument);EXPECT_THROW(noClosed.Consume(*raw.observation,f.Revision()),std::invalid_argument);
+    EXPECT_THROW(noClosed.ArmCandidateWindow(f.referenceMeasurements[0].Prepared()),std::invalid_argument);
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),{"candidate-attempt/final/1",f.Revision(),4,0,0});ASSERT_TRUE(final.NextRequest());
+    final.ArmCandidateWindow(f.referenceMeasurements[0].Prepared());EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_FALSE(final.Certificate());
+}
+void SearchAndOldSweepCannotEnterWindowFinal(bool oldSweep) {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    const auto source=oldSweep?f.Request(0,"candidate-attempt/final/1","candidate-attempt/final/1/verify/0/1"):
+        f.Request(0,"candidate-attempt","candidate-attempt/search/1");
+    f.Run(source,oldSweep?CompositeMeasurementPurpose::Final:CompositeMeasurementPurpose::Search);ASSERT_TRUE(f.attempt->Measurement());
+    SaveCandidateWindowGroup(f,"core-wrong-purpose-or-sweep");
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),{"candidate-attempt/final/2",f.Revision(),4,0,0});ASSERT_TRUE(final.NextRequest());
+    final.ArmCandidateWindow(f.attempt->Measurement()->Prepared());EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_FALSE(final.Certificate());
+}
+void WindowCoreRejectsAnotherClosedFamily() {
+    std::optional<CandidateWindowReferenceSet> old;
+    {NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);CaptureWindowReferences(f,true,"family-A");old=*f.attempt->CandidateWindowReferences();}
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f,true,"family-B");
+    ASSERT_NE(old->OwnerFamilyBinding(),f.attempt->OwnerFamilyBinding());
+    EXPECT_THROW(FinalVerificationSession(refs,*old,VerificationConfig{"candidate-attempt/final/1",f.Revision(),4,0,0}),std::invalid_argument);
+}
+void WindowCoreModelDeadlineIncludesDelayedAdmission() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),{"candidate-attempt/final/1",f.Revision(),4,0,0});
+    const auto request=final.NextRequest();ASSERT_TRUE(request);f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);});
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();SaveCandidateWindowGroup(f,"core-before-deadline");
+    const auto measured=*f.attempt->Measurement();const auto revision=f.Revision();const auto raw=f.rawSamples;const auto native=f.attempt->IssuedNativeProbes();
+    // Advance the REAL scheduler/model clock once per tick, not a zero/fake
+    // clock or a sleep too short to prove that a native callback was reached.
+    for(unsigned tick=0;tick<4200;++tick){f.model->Calculate();f.environment->IncreaseModelTimeByStep();}
+    ASSERT_EQ(f.Revision(),revision);EXPECT_EQ(f.rawSamples,raw);EXPECT_EQ(f.attempt->IssuedNativeProbes(),native);
+    final.ConsumeCandidateWindow(measured,revision);EXPECT_EQ(final.Status(),VerificationStatus::BudgetExhausted);
+    EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+}
+void WindowCoreBranchEditInvalidatesAllFinalInputs() {
+    NativeCompositeFixture<NNeuronTimeLearnerBranch> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),{"candidate-attempt/final/1",f.Revision(),4,0,0});
+    const auto request=final.NextRequest();ASSERT_TRUE(request);ASSERT_EQ(request->inputIndex,1u);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);});ASSERT_TRUE(f.attempt->Measurement());
+    SaveCandidateWindowGroup(f,"core-before-branch-edit");final.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());ASSERT_EQ(final.AcceptedInputs(),1u);
+    auto changed=f.owner->ReadNativeParameters();changed[0].length=3;const auto edit=f.owner->ApplyNativeParameters(changed);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    final.Invalidate(f.Revision());EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_EQ(final.ModelEpoch(),1u);EXPECT_FALSE(final.Certificate());
+    const auto fresh=final.NextRequest();ASSERT_TRUE(fresh);EXPECT_EQ(fresh->inputIndex,1u);EXPECT_EQ(fresh->epoch,1u);EXPECT_NE(fresh->trialId,request->trialId);
+    EXPECT_EQ(fresh->baseModelRevision,f.Revision());SaveCompositeBoundary(f,"branch-window-core5/after-coupled-edit",final.ModelEpoch());
+}
+}
+TEST(NativeCandidateWindowTrainingCore,ClassicN0FreshSearchAndFinalCertificate3){WindowTypedSearch<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowTrainingCore,BranchN0FreshSearchAndFinalCertificate3){WindowTypedSearch<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowTrainingCore,ClassicN1FixedParameterStandaloneCore){WindowTypedSearch<NNeuronTimeLearner>(false);}
+TEST(NativeCandidateWindowTrainingCore,BranchN1FixedParameterStandaloneCore){WindowTypedSearch<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCandidateWindowTrainingCore,ClassicBoundC0KeepsOriginalTargetFamily){WindowTypedSearch<NNeuronTimeLearner>(true,true);}
+TEST(NativeCandidateWindowTrainingCore,BranchBoundC0FreshAllNFinal){WindowTypedFinal<NNeuronTimeLearnerBranch>(2000,false,true);}
+TEST(NativeCandidateWindowTrainingCore,Classic20000FreshActualFinal){WindowTypedFinal<NNeuronTimeLearner>(20000);}
+TEST(NativeCandidateWindowTrainingCore,Branch20000FreshActualFinal){WindowTypedFinal<NNeuronTimeLearnerBranch>(20000);}
+TEST(NativeCandidateWindowTrainingCore,ClassicDefaultSyncRemainsOutsideTolerance){WindowTypedFinal<NNeuronTimeLearner>(2000,true);}
+TEST(NativeCandidateWindowTrainingCore,BranchDefaultSyncRemainsOutsideTolerance){WindowTypedFinal<NNeuronTimeLearnerBranch>(2000,true);}
+TEST(NativeCandidateWindowTrainingCore,SetterFalseBetweenCloseAndConsume){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::NeedSetter);}
+TEST(NativeCandidateWindowTrainingCore,DirectFalseBetweenCloseAndConsume){WindowCoreConsumeRevoked<NNeuronTimeLearnerBranch>(CoreWindowRevocation::NeedDirect);}
+TEST(NativeCandidateWindowTrainingCore,ConnectedFalseBetweenCloseAndConsume){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::NeedConnected);}
+TEST(NativeCandidateWindowTrainingCore,OwnerResetExpiresClosedMeasurement){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::Reset);}
+TEST(NativeCandidateWindowTrainingCore,OwnerDefaultExpiresClosedMeasurement){WindowCoreConsumeRevoked<NNeuronTimeLearnerBranch>(CoreWindowRevocation::Default);}
+TEST(NativeCandidateWindowTrainingCore,ActualStructuralEditDefeatsCachedRevision){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::Edit);}
+TEST(NativeCandidateWindowTrainingCore,SameSemanticGraphAfterRebuildCannotReviveMeasurement){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::StructuralABA);}
+TEST(NativeCandidateWindowTrainingCore,OwnedC0EditDefeatsCachedRevision){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::C0Edit);}
+TEST(NativeCandidateWindowTrainingCore,ReferenceAndUnqualifiedLegacyApiCannotArmFinal){ReferenceAndLegacyTokensCannotEnterWindowFinal();}
+TEST(NativeCandidateWindowTrainingCore,SearchPurposeCannotBecomeFinal){SearchAndOldSweepCannotEnterWindowFinal(false);}
+TEST(NativeCandidateWindowTrainingCore,PreviousWholeSweepCannotArmNewFinal){SearchAndOldSweepCannotEnterWindowFinal(true);}
+TEST(NativeCandidateWindowTrainingCore,IdenticalModelDifferentOwnerFamilyCannotReplaceOriginalRefs){WindowCoreRejectsAnotherClosedFamily();}
+TEST(NativeCandidateWindowTrainingCore,RealModelClockDeadlineGuardsDelayedConsume){WindowCoreModelDeadlineIncludesDelayedAdmission();}
+TEST(NativeCandidateWindowTrainingCore,BranchControlledEditRequiresFreshAllNFinal){WindowCoreBranchEditInvalidatesAllFinalInputs();}
