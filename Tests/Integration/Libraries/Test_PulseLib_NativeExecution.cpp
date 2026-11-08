@@ -73,7 +73,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     const std::string name=std::string(branch?"Branch":"Classic")+"_"+std::to_string(frequency)+"_N"+std::to_string(inputCount)+"_native_executor"+
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
         (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"")+
-        (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"");
+        (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"")+
+        (captureDomains?"_domain_capture":"");
     StorageProfileSpec profile;profile.name=name;profile.frequencyHz=frequency;
     profile.neuronBaseClass="NSPNeuronGen";profile.initialThreshold=1.;
     const auto registered=RegisterStorageProfile(core.storage,core.environment,profile);
