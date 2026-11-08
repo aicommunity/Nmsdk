@@ -343,6 +343,38 @@
       },
       "whole_gate_accepted": false,
       "scientific_verdict": null
+    },
+    {
+      "job_id": "s07-composite-deadline-m40-asan-a1",
+      "host": "10.245.1.17",
+      "root": "f8f58334a8b203d017ada5e3d3300e6287286751",
+      "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "state": "running_build_at_exact_kernel_observation",
+      "unit": "timelearner-62dc0fcd-a7dd-4f8b-b63b-0cdccec01fb8.service",
+      "invocation_id": "d5d8363e368240fba2b62f9762e547ca",
+      "initial_main_pid": 3287496,
+      "initial_start_ticks": "322926251",
+      "binding_sha256": "b3d59a0673088f440c3dd11ee6cdb3604cbee5f1eef4fd1559d91097ea36031b",
+      "expected_cpp_cases": 2,
+      "expected_leaf_gates": 2,
+      "expected_ids": [
+        "NativeCompositeDeadlineDiagnostic/ClassicUnchangedLastFinalReachability",
+        "NativeCompositeDeadlineDiagnostic/BranchUnchangedLastFinalReachability"
+      ],
+      "worker_sha256": "2b7eb42b8b2a7a61b541e6ea3428fe60b9f6893c1703942df9fe690843a0c730",
+      "supervisor_sha256": "13b74333e5ffb19bae03ad67f4e2e19ba0d620bbe564b69d9a77c85952b12c85",
+      "source_tu_sha256": "8d66f5cdef82e458debc2f2e7994d07e8ed5d07aaa29ef9e697d74dcbc06692a",
+      "group_wall_seconds": 300,
+      "deliberate_callback_sleep": false,
+      "kernel_memory_bytes": 8589934592,
+      "kernel_tasks": 128,
+      "whole_wall_seconds": 21600,
+      "leaf_wall_seconds": 1200,
+      "asan_options": "detect_leaks=0",
+      "baseline_negative_evidence": "eaa4350defa80c932ececaafa58b5373112fc75d",
+      "scope": "diagnostic reachability and actual phase timing; original248 not rerun",
+      "whole_gate_accepted": false,
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
