@@ -382,3 +382,8 @@ Python; это не приёмка всех оставшихся legacy launcher
 Все остальные Reports blobs, включая исторические checksum-bound manifests,
 сохранены. Новый внешний retrieval index не меняет старые доказательства.
 Серверная проверка данного snapshot пока pending.
+
+Приёмка109-record batch завершена на обоих workers: production354 retrieval
+records, restored-path negative,113-entry source diff,86126 остальных Reports
+blobs и412 production Python source hashes. Полные SHA и сохранённый collector
+refusal приведены в RootReportSnapshotRetirement. complete=false остаётся.

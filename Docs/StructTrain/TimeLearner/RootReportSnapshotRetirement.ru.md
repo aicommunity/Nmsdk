@@ -52,3 +52,40 @@ maintained Docs, без изменений остальных Report blobs и pr
 Старые скрипты не материализуются и не запускаются; модели не рассчитываются.
 Серверная приёмка на момент этого source commit ещё pending.
 Полный этап9, научный результат и весь план этим подэтапом не завершаются.
+
+## Приёмка завершена на обоих workers
+
+Проверенный source root: `0153d505861403ec3dc2b721a6b0321b270e2e69`.
+Elder evidence: `3f3aa18a67cc69fe2ad1912bec06300a2e49ca88`;
+M40 evidence: `f342e24c5f614551541fea48cf77bb1be7898a16`.
+Оба production CLI реально извлекли все 354 старых blobs из отдельных Git
+object stores, сверили размер/SHA и отсутствие старых путей. Restored-path
+negative fixture на обоих отклонён (exit2, migration_old_path_still_present,
+положительный output отсутствует). Это 354 retrieval records, а не 354
+научных теста. Все 109 старых исходников дополнительно прочитаны и AST-parsed;
+они не материализованы как исполняемые файлы и не запускались.
+
+Git scope на проверенном source commit — ровно 109 удалений и четыре
+maintained Docs изменения. Остальные 86126 Reports blobs совпадают; production
+Scripts/Tests/native sources и gitlinks не менялись. Все 412 production Python
+source hashes на обоих workers независимо сопоставлены с Git, before/after
+совпадают. Worker reserve/release находится внутри его собственного bounded
+unit: PID/start_ticks lease owner совпадает с kernel binding. Оба unit закрыты,
+lease released с обязательным пояснением; managed child graph этим не
+объявляется зарегистрированным. Выполнялись только синхронные Git/production
+history CLI subprocesses; C++ builds и расчётов моделей не было.
+
+Каждый compact archive содержит 43 members, dictionary 32 MiB. Elder archive
+197068 bytes/SHA256 `72b1155b88970bf04a88bc4341b93bd8cf74e07f82d79ef6dad075415163c23d`;
+M40 archive 197444 bytes/SHA256 `e5049a24e684241265f1218bcecea4d3731747ea7245ccfef9bcc7a6c3b7b273`.
+Outer/member hashes, exact source hashes, identity/closure и negative receipts
+проверены отдельно; [машиночитаемая сверка](RootReportSnapshotRetirementVerification-20261108.json).
+Первый collector отказал до упаковки из-за неподдерживаемого dictionary16MiB.
+Его исходные bytes и отказ сохранены в архивах; новая p2 упаковка использует
+штатный32MiB. Успешные CLI-проверки не перезапускались и не переоценивались.
+
+На Elder после приёмки отдельный source занимает37146624 bytes, job913408,
+evidence object store5521408; измеренное свободное место488349696 bytes.
+Это не разрешение больших сборок при почти полном диске. Capacity/schema и
+чужие задания не менялись; удалений серверных данных в этом подэтапе нет.
+Полный этап9 и вся итоговая научная приёмка остаются незавершёнными.
