@@ -1,3 +1,5 @@
+Принято08.11 в адресном scope:242 records (240 retired/2 moved), complete=false. Четыре исторических AsymRm seed/reset инструмента удалены без wrappers; оба workers проверили все242 записи, negative restored-path control и exact4D+4M scope. Общая миграция и develop-приёмка ещё не завершены. [Область и ограничения](AsymRmSeedRetirement.ru.md). Предыдущие записи ниже относятся к своим снимкам.
+
 Принято06.11:215 records (213 retired/2 moved),complete=false. Десять оставшихся AsymRm shell-драйверов удалены после проверок обоих workers; конфиги, модели, измерения и исходные report bodies сохранены. [Область и Git-источники](AsymRmDriverRetirement.ru.md). Ограниченный path/suffix inventory Bin теперь131; полнота всей миграции не заявляется. Ниже — хронология прежних снимков.
 
 Принято04.11:166 records (164 retired/2 moved),complete=false. Удалены8 исторических PhaseA tools после двух actual CLI/negative/scope gates; августовские модели/конфиги/CSV/тело REPORT сохранены. [Приёмка](PhaseAToolRetirement.ru.md). Ниже — хронология прежних снимков.
