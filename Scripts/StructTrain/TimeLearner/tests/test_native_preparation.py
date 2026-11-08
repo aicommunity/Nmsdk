@@ -241,13 +241,22 @@ class NativePreparationTest(unittest.TestCase):
                     subject.serialize_preparation(spec)
 
     def test_rehashed_recognized_count_and_source_hash_shape_remain_strict(self):
-        for fault in ["count", "source_hash"]:
+        for fault in ["count", "source_hash", "dirty_closure", "missing_root", "wrong_root_head",
+                      "mismatched_child_gitlink"]:
             with self.subTest(fault=fault):
                 spec = self.prepare()
                 if fault == "count":
                     spec["source_inventory"]["count"] = True
-                else:
+                elif fault == "source_hash":
                     spec["source_inventory"]["files"][CPP]["sha256"] = "not-a-hash"
+                elif fault == "dirty_closure":
+                    spec["source_inventory"]["source_closure"]["root"]["status"] = " M changed"
+                elif fault == "missing_root":
+                    del spec["source_inventory"]["source_closure"]["root"]
+                elif fault == "wrong_root_head":
+                    spec["source_inventory"]["source_closure"]["root"]["head"] = "0"*40
+                else:
+                    spec["source_inventory"]["source_closure"]["Libraries/Nmsdk-PulseLib"]["head"] = "0"*40
                 spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
                 with self.assertRaisesRegex(EvidenceError, "serialized_inventory_schema"):
                     subject.serialize_preparation(spec)

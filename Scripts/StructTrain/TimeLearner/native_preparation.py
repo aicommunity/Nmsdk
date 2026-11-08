@@ -284,6 +284,14 @@ def serialize_preparation(spec):
             "native_preparation_serialized_inventory_schema")
     for name, row in inventory["source_closure"].items():
         _keys(row, {"head", "status"} if name == "root" else {"head", "status", "recorded_gitlink"})
+        require(type(row["head"]) is str and re.fullmatch(r"[0-9a-f]{40}", row["head"]) and
+                row["status"] == "" and (name == "root" or row["head"] == row["recorded_gitlink"]),
+                "native_preparation_serialized_inventory_schema")
+    require(type(inventory["root_commit"]) is str and
+            re.fullmatch(r"[0-9a-f]{40}", inventory["root_commit"]) and
+            "root" in inventory["source_closure"] and
+            inventory["source_closure"]["root"]["head"] == inventory["root_commit"],
+            "native_preparation_serialized_inventory_schema")
     current = spec["current"]
     _keys(current, {"root", "pulse", "inventory", "runplan", "partitions", "counts"})
     _keys(current["inventory"], {"root", "total", "unique", "files"})
