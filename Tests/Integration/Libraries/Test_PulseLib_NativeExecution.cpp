@@ -6,10 +6,12 @@
 #include "TimeLearner/BoundedTraining.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeResponseDomainCapture.h"
+#include "TimeLearner/NativeMatchedOmissionGroup.h"
 #include "TimeLearner/ResponseDomainEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
 #include <QJsonArray>
+#include <QCryptographicHash>
 #include <QDir>
 #include <QFile>
 #include <type_traits>
@@ -62,7 +64,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false,bool matchedOmission=false)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -76,7 +78,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
         (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"")+
         (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"")+
-        (captureDomains?"_domain_capture":"");
+        (captureDomains?"_domain_capture":"")+(matchedOmission?"_matched_omission":"");
     // Reader A/B changes artifact identity only, never the storage class names
     // included in the semantic model identity.
     const std::string name=profileName+(fullRevisionProvider?"_full_revision":"");
@@ -214,6 +216,104 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     };
     if(missingSubsetSink)
     {ASSERT_EQ(observationSchema,6u);request.onSample={};}
+    if(matchedOmission) {
+        ASSERT_EQ(observationSchema,3u);ASSERT_FALSE(captureDomains);ASSERT_EQ(inputCount,2u);
+        ASSERT_TRUE(interference==Interference::None || interference==Interference::ExternalStop || interference==Interference::TinyPhysicalCapacitance);
+        NativeProbeBindings bindings;bindings.owner=learner.Get();bindings.neuron=neuron;
+        bindings.dataset=learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+        bindings.inputCount=int(inputCount);bindings.branch=branch;
+        for(unsigned i=0;i<(branch?1u:inputCount);++i)
+            bindings.somas.push_back(neuron->template GetComponentL<NPulseMembrane>("Soma"+std::to_string(i+1),true));
+        spec.stimulusProfile=StimulusProfile{generator->GetCompClassName(),generator->Amplitude.GetData(),
+            generator->PulseLength.GetData(),double(generator->GetTimeStep()),generator->FrequencyDeviation.GetData(),
+            generator->UseTransitSignal.GetData(),generator->UsePatternOutput.GetData()};
+        NativeMatchedOmissionPlan groupPlan;groupPlan.fullBurst=request;groupPlan.groupId=name+"/group0";
+        groupPlan.channel=branch?0u:std::size_t(active);
+        for(const auto& soma:bindings.somas) {ASSERT_TRUE(soma);groupPlan.physicalChannelPaths.push_back(soma->GetLongName(learner.Get()));}
+        // Measurement-group tolerances are explicit, independent of Train tolerances.
+        groupPlan.policy.timeComparisonTolerance=1e-10;groupPlan.policy.baselineAbsolute=1e-12;
+        groupPlan.policy.repeatabilityAbsolute=1e-10;groupPlan.policy.repeatabilityRelative=0.;
+        groupPlan.policy.influenceAbsolute=1e-6;groupPlan.policy.influenceRelative=0.;
+        groupPlan.policy.maximumSamples=spec.maximumSamples;groupPlan.policy.maximumTotalSamples=spec.maximumSamples*(inputCount+2);
+        groupPlan.policy.maximumNativeProbes=inputCount+2;
+        groupPlan.maximumModelSeconds=(duration+.1)*(inputCount+2);groupPlan.maximumWallSeconds=600.;
+        NativeMatchedOmissionGroup group;bool requested=true,injected=false;
+        NativeMatchedOmissionAdapter driver;
+        driver.queue=[&](auto value){learner->QueueNativeProbe(std::move(value));};
+        driver.probeState=[&](){return learner->NativeProbeState();};
+        driver.takeResult=[&](){return learner->TakeNativeProbeResult();};
+        driver.cancel=[&](const auto& reason){learner->CancelNativeProbe(reason);};
+        driver.readModelRevision=readRevision;driver.requested=[&](){return requested;};
+        const auto modelTime=[&](){return core.environment->GetTime().GetDoubleTime();};
+        const auto wallTime=[](){return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();};
+        group.Start(groupPlan,bindings,modelTime(),wallTime());unsigned groupTicks=0;
+        while(group.State()==NativeMatchedOmissionState::Running) {
+            ASSERT_LT(groupTicks++,unsigned(groupPlan.maximumModelSeconds*frequency)+10u);
+            if(!injected && group.Result().packets.size()==1 && interference!=Interference::None) {
+                injected=true;
+                if(interference==Interference::ExternalStop)requested=false;
+                else {
+                    auto channel=neuron->template GetComponentL<NPulseChannel>("Dendrite1_"+std::to_string(inputCount)+".ExcChannel",true);
+                    ASSERT_TRUE(channel);channel->Capacity=std::nextafter(channel->Capacity.GetData(),std::numeric_limits<double>::infinity());
+                }
+            }
+            group.BeforeTick(driver,modelTime(),wallTime());
+            if(group.State()!=NativeMatchedOmissionState::Running)break;
+            model->Calculate();group.AfterTick(driver,modelTime(),wallTime());core.environment->IncreaseModelTimeByStep();
+        }
+        const auto& closed=group.Result();
+        if(interference==Interference::None) {
+            ASSERT_EQ(group.State(),NativeMatchedOmissionState::Completed)<<closed.reason;
+            ASSERT_EQ(group.IssuedNativeProbes(),inputCount+2);ASSERT_EQ(closed.packets.size(),inputCount+2);
+            ASSERT_EQ(closed.witness.omitEachInput.size(),inputCount);ASSERT_TRUE(closed.assignment);
+            EXPECT_EQ(closed.specification.baseModelRevision,base);EXPECT_EQ(readRevision(),base);
+            EXPECT_TRUE(closed.witness.fullBefore.fullMaskRestored);EXPECT_TRUE(closed.witness.fullAfter.fullMaskRestored);
+            for(const auto& trace:closed.witness.omitEachInput)EXPECT_TRUE(trace.fullMaskRestored);
+        }
+        else {
+            EXPECT_TRUE(injected);EXPECT_EQ(group.IssuedNativeProbes(),1u);EXPECT_EQ(closed.packets.size(),1u);
+            EXPECT_FALSE(closed.assignment);
+            EXPECT_EQ(group.State(),interference==Interference::ExternalStop?NativeMatchedOmissionState::Cancelled:NativeMatchedOmissionState::Rejected);
+        }
+        if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+            const QString directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name);
+            ASSERT_TRUE(QDir().mkpath(directory));QJsonArray packets,traceFiles;
+            for(const auto& packet:closed.packets)packets.append(EncodeNativeProbeEvidence(packet));
+            if(closed.assignment) {
+                std::vector<const MatchedOmissionTrace*> traces{&closed.witness.fullBefore};
+                for(const auto& omitted:closed.witness.omitEachInput)traces.push_back(&omitted);
+                traces.push_back(&closed.witness.fullAfter);
+                for(std::size_t i=0;i<traces.size();++i) {
+                    const auto& trace=*traces[i];const auto& native=closed.packets.at(i);
+                    NativeResponseDomainCapture proof;proof.Arm(trace.prepared,native.observation->specification,trace.physicalChannelPaths);
+                    std::size_t event=0;
+                    for(std::size_t frame=0;frame<trace.stimulusSamples.size();++frame) {
+                        NativeProbeSample sample;sample.time=trace.observation.channels.front().samples.at(frame).time;
+                        sample.stimulus=trace.stimulusSamples[frame];sample.effectiveModelRevision=trace.prepared.effectiveModelRevision;
+                        for(const auto& channel:trace.observation.channels)sample.potentials.push_back(channel.samples.at(frame).rawPotential);
+                        while(event<trace.observation.events.size() && trace.observation.events[event].time<=sample.time) {
+                            const auto& emitted=trace.observation.events[event++];sample.newStimuli.push_back({emitted.id,emitted.time});
+                        }
+                        proof.Append(sample);
+                    }
+                    proof.CloseNative(native);const auto csv=EncodeNativeResponseDomainTrace(proof);
+                    const auto fileName="native-"+QString::number(i)+".csv";QFile file(directory+"/"+fileName);
+                    ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_EQ(file.write(csv),csv.size());file.close();
+                    QJsonArray mask;for(auto ordinal:trace.presentedOrdinals)mask.append(int(ordinal));
+                    traceFiles.append(QJsonObject{{"path",fileName},{"presented_ordinals",mask},{"sha256",QString::fromLatin1(QCryptographicHash::hash(csv,QCryptographicHash::Sha256).toHex())}});
+                }
+            }
+            QJsonObject summary{{"schema_version",1},{"kind","native_matched_omission_fixture"},
+                {"method",MatchedOmissionResult::MethodId()},{"group_id",QString::fromStdString(groupPlan.groupId)},
+                {"native_probes",int(group.IssuedNativeProbes())},{"packets",packets},{"traces",traceFiles},
+                {"reason",QString::fromStdString(closed.reason)},
+                {"assignment_validity",closed.assignment?MatchedOmissionValidityName(closed.assignment->validity):"not_available"},
+                {"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+            QFile file(directory+"/group.json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+            const auto bytes=QJsonDocument(summary).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
+        }
+        core.environment->DestroyModel();return;
+    }
     const auto prototype=request;
     const auto firstProbeStarted=std::chrono::steady_clock::now();
     learner->QueueNativeProbe(std::move(request));ASSERT_TRUE(learner->NativeProbeOwnsControl());
@@ -1089,5 +1189,33 @@ TEST(NativeResponseDomainCodec,UsesItsOwnImmutableClosureAndKeepsDiagnosticStatu
     EXPECT_EQ(packet["analysis"].toObject()["channels"].toArray().size(),1);
     EXPECT_EQ(packet["analysis"].toObject()["associations"].toArray().size(),1);
     EXPECT_TRUE(packet["scientific_verdict"].isNull());
+}
+}
+
+TEST(NativeMatchedOmissionExecution,Classic2000) { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,Branch2000) { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,Classic20000) { ExecuteProbeThroughLearner<NNeuronTimeLearner>(20000,Interference::None,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,Branch20000) { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(20000,Interference::None,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,ClassicExternalStopBetweenControls) { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::ExternalStop,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,BranchExternalStopBetweenControls) { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::ExternalStop,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,ClassicPhysicalEditBetweenControls) { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::TinyPhysicalCapacitance,2,3,false,false,false,{},false,false,false,true); }
+TEST(NativeMatchedOmissionExecution,BranchPhysicalEditBetweenControls) { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::TinyPhysicalCapacitance,2,3,false,false,false,{},false,false,false,true); }
+
+namespace {
+TEST(NativeMatchedOmissionCapture,CloseNativeVerifiesWaveformWithoutDomainHypothesis)
+{
+    DomainCaptureFixture fixture;fixture.AppendAll();const auto native=fixture.Result();
+    fixture.capture.CloseNative(native);
+    EXPECT_TRUE(fixture.capture.Observation().complete);
+    EXPECT_EQ(fixture.capture.ClosedNativeEvidence().currentBaseRevision,native.currentBaseRevision);
+    EXPECT_FALSE(EncodeNativeResponseDomainTrace(fixture.capture).isEmpty());
+    EXPECT_THROW(fixture.capture.CloseNative(native),std::invalid_argument);
+}
+TEST(NativeMatchedOmissionCapture,CloseNativeRejectsTamperedObservation)
+{
+    DomainCaptureFixture fixture;fixture.AppendAll();auto native=fixture.Result();
+    native.observation->sampleCount+=1;
+    EXPECT_THROW(fixture.capture.CloseNative(native),std::invalid_argument);
+    EXPECT_FALSE(fixture.capture.Observation().complete);
 }
 }
