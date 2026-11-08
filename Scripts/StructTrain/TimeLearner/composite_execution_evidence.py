@@ -31,6 +31,8 @@ def audit_initial_planning_configuration(package, job, initial):
 
 
 def audit_composite_execution(execution, directory, names, *, mode, base_version, package=None):
+    from .composite_measurement_contract import integral_number_view
+    execution = integral_number_view(execution)
     directory = Path(directory)
     require(count(execution['schema_version']) == 3 and count(execution['base_schema_version']) == base_version
             and execution['measurement_method'] == METHOD, 'composite_execution_version_or_method')

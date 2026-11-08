@@ -70,6 +70,13 @@ def audit_composite_summary(document, package, archive_audit):
         return dict(summary_consistent=True, search_history_retained=False, native_execution_verified=False,
                     evaluation_verdict=None)
     count(summary['applied_edits']); count(summary['search_probes'])
+    accepted = summary['accepted_parameters']
+    require(type(accepted) is list and len(accepted) == len(package['protocol']['inputs']),
+            'composite_summary_accepted_parameter_dimension')
+    for value in accepted:
+        keys(value, {'length', 'synapses', 'resistance'}, 'composite_summary_accepted_parameter_fields')
+        require(count(value['length']) >= 1 and 1 <= count(value['synapses']) <= 128 and number(value['resistance']) > 0,
+                'composite_summary_accepted_parameter_value')
     records = {record['group_id']: record for record in archive['records']}
     target = {record['logical_request']['input_id']: record['measurement']['raw_potential'] for record in references}
     tolerances = summary['tolerances']; cap_candidates = 0
@@ -113,4 +120,5 @@ def audit_composite_summary(document, package, archive_audit):
     domains = [audit_resistance_domain(record) for record in summary['resistance_domains']]
     return dict(summary_consistent=True, search_history_retained=True, candidates_recomputed=len(summary['candidates']),
                 capacitance_candidates=cap_candidates, resistance_domains=domains, native_execution_verified=False,
-                evaluation_verdict=None)
+                search_decisions_replayed=False, parameter_change_cost_recomputed=False,
+                rejection_reasons_recomputed=False, evaluation_verdict=None)

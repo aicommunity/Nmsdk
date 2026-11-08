@@ -75,6 +75,35 @@ class CompositePortableContractTest(unittest.TestCase):
                 execution=dict(native_trials=0, sampled_frames=0)))
         result = audit_composite_execution(execution, '.', set(), mode='preflight', base_version=1)
         self.assertFalse(result['owned_archive_present']); self.assertIsNone(result['evaluation_verdict'])
+        numeric = deepcopy(execution); numeric['schema_version'] = 3.; numeric['base_schema_version'] = 1.
+        self.assertEqual(result, audit_composite_execution(numeric, '.', set(), mode='preflight', base_version=1))
+        numeric['schema_version'] = True
+        with self.assertRaises(EvidenceError): audit_composite_execution(numeric, '.', set(), mode='preflight', base_version=1)
         execution['composite_counters']['execution']['native_trials'] = 1
         with self.assertRaises(EvidenceError): audit_composite_execution(execution, '.', set(), mode='preflight', base_version=1)
 
+    def test_warm_boundary_request_binds_current_runtime_not_immutable_initial_run(self):
+        from ..finalization_boundary_evidence import audit_boundary
+        def signed(value): return {**value, 'sha256': digest(value)}
+        parameters = dict(IsNeedToTrain=True, CalculateMode=1, ControllerVersion=2,
+            CalibrateLTZThresholdFraction=.5, AutoCalibrateFixedLTZThreshold=False,
+            EnablePostTrainTuning=False, EnablePostTrainMidThreshold=False)
+        bindings = {key:dict(connected=False, external_data_source=False, sources=[]) for key in parameters}
+        request = signed(dict(kind='native_training_request_intent', schema_version=1,
+            controls=dict(parameters=parameters, bindings=bindings), run_id='warm/session/2', session_attempt=2,
+            model_epoch=0, initial_model_revision='unattested-test-binding', protocol_revision='protocol',
+            pattern_hash='pattern', started_model_time=0., dynamic_checkpoint=False, calibrated=False, evaluation_verdict=None))
+        solo = signed(dict(kind='timelearner_stopped_state', schema_version=5, training_outcome='external_stop',
+            certificate=None, session_attempt=2, configuration=dict(run_id='initial/session/1', model=dict(branch=False)),
+            runtime_plan=dict(run_id='warm/session/2'), protocol=dict(revision='protocol', pattern_hash='pattern')))
+        boundary = signed(dict(kind='timelearner_finalization_boundary', schema_version=2, source_solo=solo,
+            dynamic_checkpoint=False, mid_probe_resume_supported=False, recognition_success=None,
+            training_outcome='external_stop', diagnostic_only=True, controls=dict(parameters=parameters, bindings=bindings),
+            training_request=request, phase_requests=dict(target_reference=False, post_tune=False,
+                post_train_mid=False, legacy_parallel_peak=False)))
+        result = audit_boundary(boundary)
+        self.assertFalse(result['training_evidence_checked']); self.assertIsNone(result['scientific_verdict'])
+        bad = deepcopy(boundary); bad['training_request']['run_id'] = 'initial/session/1'
+        bad['training_request'] = signed({k:v for k,v in bad['training_request'].items() if k != 'sha256'})
+        bad = signed({k:v for k,v in bad.items() if k != 'sha256'})
+        with self.assertRaises(EvidenceError): audit_boundary(bad)

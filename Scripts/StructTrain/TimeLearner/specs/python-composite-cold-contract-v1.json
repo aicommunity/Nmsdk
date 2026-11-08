@@ -2,7 +2,7 @@
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
   "suite_id": "composite-portable-package-contract-v1",
-  "package_fingerprint": "5b931e17b9a67263585e051586ffa8dc2e196c5c84750dfbd01610eda714f591",
+  "package_fingerprint": "7b46e0b8057d4fb9497a9b27fe99542134ebaaa6eda740fedbec25fde3251059",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery",
@@ -72,7 +72,8 @@
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_hash_payload_is_not_promoted_to_a_training_package",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_schema_five_loader_never_uses_old_flat_trial_globs_or_invents_summary",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_schema_five_does_not_ignore_supplied_legacy_primary_overlay",
-    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_preflight_envelope_accepts_known_zero_callbacks_but_rejects_invented_archive"
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_preflight_envelope_accepts_known_zero_callbacks_but_rejects_invented_archive",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_warm_boundary_request_binds_current_runtime_not_immutable_initial_run"
   ],
   "fixtures": {}
 }

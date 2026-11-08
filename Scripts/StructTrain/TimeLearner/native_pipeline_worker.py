@@ -188,6 +188,9 @@ def audit_execution(mode, directory, job, source_case=None):
     execution = load(directory/"execution.json");_digest(execution)
     live = mode == "train" and job["schema_version"] == 2
     composite = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6
+    if composite:
+        from .composite_measurement_contract import integral_number_view
+        execution = integral_number_view(execution)
     from .composite_execution_evidence import EXTRA_FIELDS, audit_composite_execution
     from .live_training_worker import EXECUTION_FIELDS as LIVE_EXECUTION_FIELDS
     require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite else set()) and
