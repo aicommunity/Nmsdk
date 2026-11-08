@@ -1,9 +1,10 @@
 # Условная диагностика объявленных временных масштабов
 
-Это source-only перенос двух связанных аудиторов из Bin. Серверные проверки
-ещё не выполнялись; старые entrypoints пока не удалены. Точное происхождение,
-caller search и список 30 подготовленных тестов находятся в
+Перенос двух связанных аудиторов из Bin прошёл общий набор143/143 на M40 и143/143 на Elder:67 wire +39 collector +30 новых диагностик +7 lossless ConfigDocument. Source `4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277`. [Квитанция M40](DeclaredTimeScalesScript143M40A2Verification.json), [квитанция Elder](DeclaredTimeScalesScript143ElderA1Verification.json) подтверждают exact IDs/CLI/log/JUnit, десять actual Bin Project.ini blobs, source/fixture bytes до/после, закрытие owned groups и освобождение leases. Старые entrypoints пока не удалены: их migration/retirement требует отдельного изменения Bin и проверки ссылок. Точное происхождение,
+caller search и список30 тестов находятся в
 [DeclaredTimeScalePortPreparation.json](DeclaredTimeScalePortPreparation.json).
+
+Первый прогон143 на M40 source76 дал142 PASS/1 ERROR: ветвевой `import subprocess` делал это имя local для всего main, из-за чего handler ошибки no-overwrite сам завершался UnboundLocalError. Исправление удаляет только этот import, используя общий module binding. [Отрицательная квитанция](DeclaredTimeScalesScript143M40A1NegativeVerification.json) сохранена; ошибка не скрыта повторным успешным прогоном. Повторный M40 и Elder использовали одинаковые143 IDs и один source4e9. Python3.10/3.12 печатают разные формы test description; reader сопоставляет фактически напечатанное имя с единственным declared ID, сохраняя raw logs.
 
 Корневой модуль `Scripts/StructTrain/TimeLearner/declared_time_scales.py`
 вычисляет условный `Q=C*R*f` только для явно заданных конечных положительных

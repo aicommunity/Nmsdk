@@ -55,6 +55,8 @@ Maintained native_preparation прошёл24/24 metadata tests на M40;
 CanonicalSpec wiring и запуск maintained worker полного248 ещё выполняются.
 Сам worker отдельно прошёл12/12 metadata tests; [приёмка и следующий gate](NativeAcceptanceWorkerAcceptance-20261108.ru.md).
 Полный248, actual native archives и Train→Test этим не приняты.
+Root port условной диагностики конфигов принят143/143 на обоих Linux workers;
+[контракт и квитанции](DeclaredTimeScaleDiagnostic.ru.md). Старые Bin entrypoints ещё требуют отдельного retirement.
 На Elder удалены89, затем ещё13 подтверждённых дубликатов статических библиотек;
 данные/модели/ELF/INI/логи сохранены, собственная группа закрыта.
 [Операция и ограничения места](ElderDuplicateStaticArchiveRetirement-20261108.ru.md).
