@@ -36,6 +36,25 @@ synapse class: после construction, во время reference/search, пос
 Отдельно positive legacy N0 и no-effect N1 controls, heterogeneous bank и
 несовместимый synapse class. Проверка только первого tip Rs недостаточна.
 
+**Candidate correction, ещё без runtime gate.** В отдельной ветке
+`codex/timelearner-native-resistance-step`, Pulse candidate
+`2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b` от Pulse
+`e2c6311c0cdd219e3a52c278ce637bd777584dc6` добавляется ранний guard обоих
+setters: `if(NativeTrainingOwned || NativeModelDeclaration || NativeRecognition)
+return value==SynapseResistanceStep.GetData();`. Он блокирует changed scalar до
+любых child writes и принимает прежний scalar без повторного применения к
+неоднородному native bank. Legacy N0 и N1 поведение не меняется; finite/positive
+validation сюда не включена. Изменения не влияют на общую bool-семантику
+Build/Calculate/Reset. BeforeDefault очищает все3 markers до legacy defaults;
+Reset их сохраняет, native mirror/import не используют этот setter.
+
+Основные8 новых storage cases и ещё2 zero-packet stopped diagnostic recognition
+import cases (каждый N0/N1), всего10 без skip/env, с границами покрытия описаны в
+[контракте нормализации](NormalizationPropertyContracts.ru.md#candidate-ownership-guard-для-legacystep).
+Source diff и tests ещё не равны принятому runtime исправлению. Active
+reference/search, completed certificates, connected sources и несовместимые
+synapse equations не следует считать проверенными этим узким gate.
+
 ## PROPERTY-CONTROL-RISING-001: external rising-edge restart требует решения
 
 **Наблюдаемый source факт.** После native ownership V2 ordinary setter

@@ -132,6 +132,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_IsiTemplateValidation.cpp
     Test_PulseLib_LifecycleContracts.cpp
     Test_PulseLib_TimingPropertyContracts.cpp
+    Test_PulseLib_ResistanceStepOwnership.cpp
     Test_PulseLib_HotReadoutReset.cpp
     Test_PulseLib_LoadedLearnerReadout.cpp
     Test_PulseLib_ModelInspection.cpp
