@@ -25,7 +25,7 @@ origin. Physical path mapping без отдельного effective graph не �
 поля peaks и burst assignments; добавлен отрицательный тест подмены амплитуды.
 PASS старой версии на новое усиление автоматически не переносится.
 
-Следующий gate должен включать8 integrity checks,2 codec checks,4 native
+Normal gate включает8 integrity checks,2 codec checks,4 native
 Classic/Branch cases на2000/20000 Гц и независимый Python reader с mutation
 tests. ASan/native на M40 и расширенная fault/N=1/4/6 матрица остаются
 отдельными требованиями. Ни этот пакет, ни его receipt не подтверждают
@@ -37,12 +37,13 @@ inventory и журналом. [Независимая квитанция](Respo
 evidence `b07c853b84873791d05a3cb87f149492a4839ecd`.
 Это independent fixture tests, пока без проверки пакетов C++ producer.
 На Elder первая попытка reader отказала до тестов из-за занятой capacity;
-ограничение не обходилось. C++ codec10 прошёл, native4 ещё выполняются.
+ограничение не обходилось. После освобождения capacity reader прошёл12 тестов и4 настоящих пакета;
+результаты приведены ниже.
 [Задания](ResponseDomainEvidenceJobs.json).
 
 Review выявил конфликт имён старых и новых native fixtures при совместном
 output directory. Исправление добавляет `_domain_capture` в trial/artifact
-identity. Текущий compiled root0e3d5bca предшествует этому изменению; нужен
+identity. Основной normal gate compiled root0e3d5bca предшествует этому изменению; нужен
 отдельный совместный filter старого и нового случая в общий свежий каталог.
 
 Перед сборкой Elder обнаружена нехватка диска. Удалены22 неиспользуемых
@@ -50,8 +51,8 @@ identity. Текущий compiled root0e3d5bca предшествует этом
 исходники и primary не удалялись. Свободное место выросло с660692992 до
 1408937984 bytes. Отказ первоначального задания сохранён; новое использует
 отдельный attempt/runtime. Metadata очистки сохранены на сервере в
-`readbacks/s00-runtime-space-recovery-elder-20261108-a1` и должны войти
-в итоговую публикацию этого подэтапа.
+`readbacks/s00-runtime-space-recovery-elder-20261108-a1` и включены
+в сводную публикацию этого подэтапа.
 
 Normal-проверка исправленного capture/codec на Elder завершена:10 integrity/
 codec checks и4 native cases Classic/Branch на2000/20000 Гц без skipped.
