@@ -534,3 +534,15 @@ Git evidence `bcc46e7d797890b47214a866085f5f71027b5c5b`. Один diagnostic
 отсутствующего Docs blob при подготовке Python-проекции сохранён как needs_review;
 413 используемых Python-файлов проверены по Git до/после. Это подтверждение
 Python replay, а не full SDK source-materialization acceptance или Train certificate.
+
+
+Попытка mechanical A1 собрана, но не принята: подготовленный regex-перечень
+ошибочно включил тело `TEST(TrainingInvalidBudget,name)` как отдельный тест и
+пропустил четыре развёртки макроса. Реально выполнены59 успешных случаев,
+assertion failures0; ожидаемый набор не совпал, worker корректно остановился.
+Фактическая регрессионная матрица —74 BoundedTraining +23 Final/Clock =97,
+а вместе с новым composite46 —143. A1 закрыт, lease освобождён; before/after
+отрицательный capture сохранён. A2 запущен на тех же b145/474 без изменения
+алгоритмов, с точными четырьмя macro IDs и обязательным сравнением с
+`--gtest_list_tests` скомпилированного binary. Ранние ссылки на94/71 обозначают
+ошибочную постановку A1, а не принятую полноту.
