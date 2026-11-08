@@ -505,3 +505,17 @@ High-threshold subset A2 завершён:14/14 условий, обе full-па
 Потоковая упаковка ffb35ddf принята на реальном corpus:16 tests,700 файлов,
 6 native/manifest audits,104,4MB →1,26MB. Все inner hashes сверены с исходным
 Git primary; [receipt](StreamingPrimaryVerification.json).
+
+Последующая проверка stderr уточняет приёмку14 условий: Classic-6 (single3)
+содержит St12system_error Resource temporarily unavailable при exit0. CSV,
+model identity и restoration checks прошли, но научная приёмка этой пробы
+предварительна до чистого повтора. Это не отменяет точные full-control replays.
+В остальных15 original/reused process records stderr пуст. Риск неограниченного
+std::async при загрузке XML подтверждён в Rdk; b3438347 подготовлен отдельно,
+root-ветка codex/timelearner-bounded-description-load проверяет native loader
+до/после при ограниченных thread slots. Первый build gate остановился на
+отсутствующей штатной registration Libraries.cpp; это исправлено в fixture,
+проверка самого риска ещё не принята.
+Primary2194d833 доставлен через Git:10967 members,19,31MB; независимая сверка
+ещё не завершена. Из него построены28 фигур/35 trial-soma pairs без новых
+симуляций; выбранные рисунки и новый отчёт ещё готовятся к публикации.
