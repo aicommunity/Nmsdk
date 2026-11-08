@@ -67,3 +67,30 @@ Arithmetic result является только данными. Модуль н�
 Следующий bridge должен связать окно с полным reference capture, реальным
 owner/input map, source/model epoch и заранее объявленной группой проб.
 Фиксированное окно текущего service пока остаётся открытым ограничением.
+
+## Подготовленный native bridge: ещё без runtime-приёмки
+
+Source-кандидат Root `c1b3ad79afd8559eac01561412928be714367085` / Pulse
+`60fd65e4ccf956175d7c2ae661faba9547364a36` добавляет отдельный protocol5
+cold constructor, staged actual references всех входов и закрытый complete-set
+factory. P0/C0 берутся из исходного эффективного графа. Перед выдачей complete
+set повторно проверяются реальные live tokens, owner lifecycle и принадлежность
+узлов; физический Reset отдельной пробы разрешён, подмена графа — нет.
+
+Окно кандидата вычисляется из исходного reference set и actual readback,
+проходит strict encode/decode и independent proposal replay, затем фиксируется
+перед первой пробой. После закрытия используется реальная геометрия full/omit/
+repeat данных. Прогноз не выдаёт амплитуду или сертификат. Невидимый direct-value
+ABA вне поддерживаемого пути edits не объявляется обнаруживаемым.
+
+В исходниках подготовлены16 новых native controls:2000/20000Гц, growth,
+C0Off/bound, partial, остановка, Reset/Default и восстановление того же model
+hash после перестройки графа. Они ещё не выполнялись на сервере. Root source
+review этого подэтапа не заменяет их исполнения.
+
+Остаются обязательными archive2/portable reference replay, привязка нового
+primary-byte budget к proof2 и соответствие duplicated policy fields,
+интеграция typed bounded/final consumers, service/CLI и реальное обучение.
+Старые protocol4 consumers сохраняются; admission нового пути поиска и
+сертификатов пока явно запрещён. Новые source-only schemas не переоценивают
+исторические данные и не меняют принятый SDK автоматически.
