@@ -536,7 +536,6 @@ def main(argv: list[str] | None = None) -> int:
                               "validity": "invalid", "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "inventory":
-        import subprocess
         from .native_evidence import EvidenceError
         from .inventory import write_inventory
         try:

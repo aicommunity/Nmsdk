@@ -21,10 +21,10 @@
       "git_blob": "7df76c1a4ba3df81c4821176c8b37fff5c349d4f"
     },
     "Scripts/StructTrain/TimeLearner/__main__.py": {
-      "bytes": 66540,
-      "sha256": "41b3915b14041971ccda4aeffd7396e52d7e12c085fd9fc3129061adcb30af2f",
+      "bytes": 66514,
+      "sha256": "02adfa0cc20a5fd1144ca004c6b1ea93c7ca51c78ee6d3bccdd0734c4e2fefe6",
       "AST_valid": true,
-      "git_blob": "b345a2ae4dc1ab5250b629bd23acbe06a9eb38cb"
+      "git_blob": "0736ce0a2d97e156cbde77f0e6a5deb6b7429c78"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_declared_time_scales.py": {
       "bytes": 18331,
@@ -244,5 +244,16 @@
   "source_execution_attestation": false,
   "scientific_verdict": null,
   "whole_plan_complete": false,
-  "source_byte_basis": "exact staged Git blob bytes; AST only locally; no numerical or unit execution"
+  "source_byte_basis": "exact staged Git blob bytes; AST only locally; no numerical or unit execution",
+  "prior_gate": {
+    "source_root": "76ffc4c566a7c6113eb5131de398467103e320fa",
+    "job": "s09-declared-time-scales-script143-m40-a1",
+    "executed": 143,
+    "passed": 142,
+    "errors": 1,
+    "skipped": 0,
+    "outcome": "closed_failed",
+    "reason": "main branch-local import subprocess shadowed module binding in exception handler; original no-overwrite FileExistsError masked by UnboundLocalError",
+    "existing_regression": "DeclaredTimeScalesTest.test_cli_writes_strict_diagnostic_and_never_overwrites_existing_output"
+  }
 }

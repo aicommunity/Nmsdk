@@ -87,3 +87,8 @@ script-only регрессия — 143 = 67 wire + 39 collector + 30 новых 
 snapshots; две ссылки в историческом audit-документе должны указывать на Git
 history/migration record после удаления. Старые исследовательские JSON/CSV
 сохраняются. Retirement и изменение gitlink Bin — отдельный последующий этап.
+
+Первый серверный script143 @76ffc4c: 142 PASS, 1 ERROR, 0 SKIP.
+Регрессия no-overwrite обнаружила затенение глобального subprocess локальным
+import в другой ветви CLI main; исправлен только этот binding. Негативный запуск
+сохраняется, для нового source требуется свежий полный143 с теми же ID.
