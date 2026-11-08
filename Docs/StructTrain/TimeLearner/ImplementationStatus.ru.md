@@ -372,10 +372,13 @@ VS ENV flag и отдельная256MiB quota только для warm/no-op д�
 source/runtime818dd80/Pulse3accbed совпали с accepted warmA5.
 [Точное задание Windows18](WindowsDomainNative18PreparedManifest.json)
 содержит task/worker/plan identity,18 test IDs, cooperative DLL capture и лимиты
-3GiB+256MiB reserve. Первые13 cases прошли; terminal/evidence ещё ожидаются.
+3GiB+256MiB reserve. Все18 cases приняты:9 JobObjects закрыты,423 actual module
+records,20 source hashes и4 independent reader checks проверены.
+[Квитанция](WindowsDomainNative18Verification.json),
+[адресный отчёт](WindowsDomainNative18Acceptance-20261108.ru.md).
 Повторной сборки и обновления исходников/runtime не было, пользовательский
-C:/Projects/Nmsdk не затронут. Это отдельный portability gate, не FCC/matched
-implementation и не общий scientific worker admission.
+C:/Projects/Nmsdk не затронут. Это отдельный portability gate прежнего снимка,
+не FCC/matched implementation и не общий scientific worker admission.
 
 ## Portable witness и single-owner setter: подготовка 8 ноября
 
@@ -443,3 +446,20 @@ operational needs_review и двадцать provenance notices сохранен
 остаточном влиянии на позднюю. [Уточнённая семантика и ограничения следующего
 метода](PeakAssignmentClarification-2026-11-08.ru.md) исключают автоматическое
 применение influence-exclusive v1 как Train-критерия.
+
+## Следующий измеритель закреплённого пика: код подготовлен
+
+В отдельных неизменяемых ветках подготовлен geometry-only модуль
+`DeclaredWindowBasinAssignment`: Pulse `fce3cdf01db0c883b7f3b03045094f2580f9e981`,
+root `236f1acbe978e645774cd96b10503bbe0d56fbd9`. Это35 новых production-source
+C++ tests и отдельный небольшой CMake target без полного SDK. Локально численные
+проверки не запускались; server normal/ASan gate готовится отдельно.
+
+Правило использует фиксированное для одной группы объявленное окно и реальные
+вершины полной записи, без разностного максимума и без global veto от отдельной
+поздней вершины вне окна. Слитая вершина и неопределённые локальные кандидаты
+не превращаются в успех. [Контракт](PeakAssignmentClarification-2026-11-08.ru.md)
+сохраняет предел причинной интерпретации: geometry API не проверяет native
+context и не создаёт Train evidence/certificate. Следующий кодовый шаг — общий
+context validator и настоящий native diagnostic bridge, затем типизированная
+Train integration. Старый v1 и исторические результаты не переоцениваются.
