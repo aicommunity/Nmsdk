@@ -3,7 +3,7 @@
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
 Полный объём сохраняется в [плане](RefactoringPlan.ru.md). Технический PASS,
 merge и научная разделимость — разные утверждения; 8/8 не является условием
-завершения. Эта страница заменяет накопительную сводку. Исторические попытки
+завершения. Эта страница содержит текущую сводку; промежуточный журнал сохранён в Git. Исторические попытки
 и отрицательные результаты сохранены в Git и отдельных receipts.
 
 Уточнение 07.11.2026 после просмотра Classic burst: Train измеряет максимум
@@ -28,7 +28,12 @@ Console schema6 также прошла6 реальных проб и6 reader ch
 не повтор high-threshold модели с порогом100. Все12 рисунков в кэше M40;
 две выбранные overview проверены визуально. Имя старого каталога не заменяет
 проверку параметров эффективного графа. Для нужных high-threshold состояний
-установлены точные state/model hashes; отдельные full/omit/single ещё требуются.
+выполнены14 full/omit/single условий с точными state/model hashes.
+[Научный отчёт с четырьмя проверенными иллюстрациями](HighThresholdSubsetScientificReport-2026-11-08.ru.md),
+[primary receipt](HighThresholdSubsetPrimaryVerification.json),
+[temporal receipt](HighThresholdSubsetTemporalVerification.json). Полный кэш28 фигур
+на M40; в Git — сжатые первичные данные, метаданные и выбранные рисунки.
+Все пробы диагностические, без Train/классификации/assigned certificate.
 
 Исправлен отдельный [дефект повторного учёта общей вершины в сертификате](AssignedVertexCertificateGuard-2026-11-07.ru.md):
 контролируемый counterexample воспроизведён до изменения; после него23/23
@@ -37,9 +42,11 @@ production C++ unit checks прошли на Elder/normal и M40/ASan. Диаг�
 CMake target,21/21 native storage/training и7/7 reader checks прошли.
 [Новый native-контроль с графиками обеих сом](AssignedVertexNativeControlReport-2026-11-07.ru.md)
 подтверждает отказ общей вершины. ASan SDK batch M40:build и23 unit прошли,
-но physical21 прерван timeout на последнем case; без финального JUnit и runtime
-capture группа не принята. Неуспешная попытка сохранена целиком, начат отдельный
-job для shared-vertex и Branch20k с независимыми capture и бюджетами.
+но прежний physical21 прерван timeout; неуспешная попытка сохранена целиком.
+Последующая интегрированная сборка b711/Pulse609 прошла71 unit,10 physical
+и7 reader checks: [receipt](IntegratedSubsetASanVerification.json).
+Отдельный дефект записи EventsLog прошёл адресную проверку:
+[receipt](TestLogOwnershipASanVerification.json). Это не полная матрица.
 Сопоставление волн штатной пачки остаётся открытым; это feature branch.
 
 На M40 выполнена [проверка гипотезы наложения](SuperpositionDiagnostic-2026-11-07.ru.md)
@@ -54,6 +61,24 @@ pulse3, подтверждая запрет подмены индивидуал�
 четыре условия, во всех6/8, TP1/FP2/FN0/TN5; те же два FP, без late spikes.
 128 temporal views построены на M40 из Git primary, шесть выбранных проверены
 визуально. Это не cold retrain и не независимый Test. Последующая [полная первичная матрица16 условий](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md) принята: target во всех8 позициях на двух Delay, те же6/8 и FP IDs.Полный temporal комплект512 views/128 presentations и оглавление приняты;384 новых,128 использованы по hashes. Это одна frozen историческая модель, не полный этап11.
+
+
+Проверка Rdk загрузчика выполнена на M40 и Elder: before воспроизводит отказ
+без свободных потоков, after проходит2 metadata checks на каждом сервере.
+На M40 дополнительно5 storage/physical checks и чистый Classic-6 replay:
+входы/потенциалы4 сом и JSON каналов побитово совпали с исходной пробой,
+stderr пуст. Исходный ERROR сохраняется; точное место прежнего исключения
+не доказано. [Диагностика](DescriptionLoadingResourceDiagnostic.ru.md),
+[квитанция M40](RdkDescriptionLoadingVerification.json),
+[квитанция Elder](RdkDescriptionLoadingElderVerification.json).
+
+Исправление открытия существующего worker ledger прошло44 проверки на каждом
+сервере: [документ](ExistingWorkerLedger.ru.md),
+[независимая сверка](ExistingWorkerLedgerVerification.json). Оно не закрывает
+весь scheduler/publisher scope этапа10. Следующая операционная проверка ошибок
+stdout/stderr прошла по33 проверки на обоих серверах: [политика](OperationalDiagnostics.ru.md).
+На M40 production portable auditor отклонил исходный положительный manifest
+Classic-6 с ERROR и принял чистый повтор; численные файлы не переписывались.
 
 ## Проверенные срезы
 
@@ -227,309 +252,7 @@ Compiled receipts сохраняют прежний Bin37ff: действующ�
 Неудачные проверки остаются evidence своего среза, не переписываются под PASS.
 
 
-[Legacy ISI-template analyzer](IsiTemplateValidationNormalVerification.json):
-корректный baseline воспроизвёл4 regression failures при5 passing controls;
-исправленный Pulsefe382a0 прошёл12/12 на M40. Baseline/fixed primary и source
-hashes опубликованы. [Адресный ASan](IsiTemplateValidationAsanVerification.json)
-того же root87/Pulsefe также прошёл12/12 на M40; libasan фактически загружен,
-detect_leaks=0. Второй сервер и весь analyzer scope ещё открыты.
-MatchMode1 сравнивает вход с шаблоном, не доказывает ответ нейрона и не объясняет
-InvalidObservation native V2 stock Train.
-
-
-[Native channel diagnostics](NativeChannelDiagnostics.ru.md): root18d4d/Pulsefe,
-M40:12 native controls,4 реальных Off/On пробы и18 readers прошли. Observer
-не изменил CSV и исходную волну. Записаны фактические Exc/Inh/Feedback/LT:
-до второго входа Classic имеет2 LT events, Branch1. Это не новая классификация
-или исправление assignment. Адресный ASan того же SDK также прошёл12 native
-controls,4 пробы и18 readers; libasan подтверждён в5 процессах, detect_leaks=0.
-[Совместный channel render](NativeChannelJointVisualVerification.json) завершён:
-5 сом,216 views; четыре выбранных PNG просмотрены по отдельности и сверены с Git.
-Второй сервер и вся interruption/intervention/profile матрица нового режима
-остаются открытыми. Первая compile failure сохранена в evidence.
-
-
-[Одноимпульсная диагностика](SinglePulseCharacterizationContract.ru.md):
-native-кандидат Pulse302124b/rootb5cfae4 прошёл на M40
-[37/37 native функций и13/13 readers](SinglePulseCharacterizationNativeVerification.json)
-без skips. Проверены Classic/Branch, N=1/2/4/6,2000/20000Гц, физический
-selector≠0, точное восстановление burst stimulus/soma после диагностики и
-ошибок callbacks, JSON roundtrip и запрет training certificate для schema4.
-Все267 members трёх архивов и779+777+364 source hashes сверены с Git;
-группы закрыты, leases released. Первая попытка16/21 с20 assertions о коллизиях
-имён сохранена. Вторая дала37/37, но wrapper ошибся каталогом readers:
-исправлен только путь,13 readers выполнены отдельно без повторения native37.
-Оригинальные failed terminals не переписаны под PASS.
-[Адресный ASan](SinglePulseCharacterizationAsanVerification.json) root5d0b80/Pulse302
-прошёл37 native,4 Console и42 Python checks на M40; Elder и полный
-cancellation/connected/replacement scope остаются открытыми. [Console job4 и paired stock study](SinglePulseCharacterizationConsoleVerification.json)
-root5d0b80a прошли четыре реальные пробы и42 Python tests на M40. Один импульс
-дал3 положительных максимума Classic Soma1 и2 Branch Soma1, при2/1 LT events;
-первые180 samples до второго burst onset совпали с исходной пачкой.
-[Научный отчёт](SinglePulseCharacterizationScientificReport-2026-11-07.ru.md)
-отделяет это наблюдение от причинной гипотезы и классификации. Исправленный
-builder воспроизвёл baseline digest defect и прошёл положительные controls.
-Это ещё не исправление assignment и не новое успешное обучение.
-
-
-[Single-pulse temporal report](SinglePulseCharacterizationVisualVerification.json)
-завершён:5 сом,193 views,583 cache files на M40; четыре выбранных PNG
-сверены с Git и просмотрены индивидуально. Слабый Branch максимум требует
-локального Y; общий масштаб контекстного окна для него недостаточен.
-Полный ручной просмотр cache не заявляется. Это не новая классификация.
-
-
-[Storage FeedbackGain](StorageFeedbackProfiles.ru.md): rootb54330482/Pulsed09613c,
-M40 normal18/18 native и13/13 readers без skips. Проверены inherited custom
-профили, сохранность prototypes/live instances, body/LT разделение, growth,
-Build/Reset/XML с индивидуальными Rs/C, invalid/collision и реальная динамика
-Classic/Branch2000/20000Гц. Все161 primary members и781 source hashes сверены;
-процессы закрыты, lease released. Engineering threshold1e-6 одинаков в controls;
-это не causal intervention в stock0.0117 и не новое обучение. ASan/второй сервер,
-полная матрица и baseline-equivalent stock reconstruction открыты.
-
-
-[Effective graph delta auditor](FeedbackInterventionContract.ru.md) проверен
-на M40:10/10 reader controls,11 primary members и368 tool source hashes
-сверены с Git. Исходные два actual imported stock graphs привязаны к прежним
-Console primary. Разрешены только объявленные image renames и uniform gain;
-порог, физика каналов, индивидуальные Rs/C, связи, порядок и частота должны
-совпадать полностью. Это data-consistency audit, а не native intervention,
-image closure proof, baseline waveform equivalence или научный verdict.
-
-
-[Inherited-image feedback profiles](FeedbackInterventionContract.ru.md):
-rootabf13d2b/Pulse73f0365 прошли M40 normal22/22 native и15/15 readers.
-В реальных fixture-моделях original/explicit2 дали одинаковые волны/LT events;
-production auditor подтвердил полный effective graph, кроме объявленных image
-renames. Для explicit0 сохранены все остальные поля и меняется реальный отклик.
-200 primary members и783 source hashes сверены, процессы закрыты/lease released.
-Это engineering1e-6 с fixture-морфологией; archived stock0.0117 intervention,
-ASan нового API, второй сервер и XML новых образов остаются открытыми.
-
-
-[Полный physical graph import через feedback images](FeedbackInterventionContract.ru.md):
-root8978f104a/Pulse32ea8ae прошли M40 normal24/24 native и27/27 readers.
-225 primary members и783 source hashes сверены с Git. Подтверждены individual
-C/Rs, native roundtrip, unchanged source, отказ image-gain mismatch и
-противоречивому/неполному source XML. Внутреннее наследование gain не ослабляет
-обычную archive completeness. Процессы закрыты/lease released; пять прежних
-runtime не изменились. Первая compile failure сохранена отдельно. Candidate
-waveform/archived stopped-state intervention не выполнялись; controller
-history/certificate не переносились. ASan этого API, Elder и полная матрица
-остаются открытыми. Это уточняет этапы4/5/7, не закрывает их целиком.
-
-
-[Установка полного графа в свежий контроллер](PreparedModelInstallNormalVerification.json):
-rootc5a32/Pulse2726 прошли M40 normal26/26 native и29/29 readers без skips.
-234 primary members и785 source hashes сверены; процессы закрыты/lease released,
-семь прежних runtime не изменились. Fresh controller не наследует references,
-search/history или certificate; full graph и индивидуальные параметры сохранены.
-Это не waveform proof и не новое обучение. Console profile protocol пока не
-подключён; ASan этого API, Elder и полная матрица открыты. Этапы4/5/7 целиком
-не закрыты. Failed-a1 сохранён отдельно.
-
-
-[ASan одноимпульсного native/Console контура](SinglePulseCharacterizationAsanVerification.json):
-root5d0b80a/Pulse302124b, M40:37 native,4 реальные Console пробы и42 Python
-проверки без skips. Все618 primary members и781 source hashes сверены с Git;
-libasan загружен в пяти native процессах. Группа закрыта/lease released, два
-предыдущих ASan runtime не изменились. Producer задаёт detect_leaks=0; runtime
-manifest не сохраняет ASAN_OPTIONS, поэтому эта настройка подтверждается
-архивным producer, не process environment readback. Это не leak check,
-не проверка последующих storage/graph/prepared-owner API и не новое обучение.
-Упоминания «ASan открыт» выше для single-pulse среза заменены этой адресной
-проверкой; Elder и остальная матрица остаются открытыми.
-
-
-[Profile probe admission](FeedbackProfileProbeAdmissionVerification.json): root367b811,
-M409/9 Python tests без skips на archived Classic/Branch sources. Проверены
-schemas2/3/4 compatibility и schema5 builder/negative factors. Все7 primary members
-и432 tool hashes сверены с Git; процессы закрыты/lease released. Новый Console
-profile path подключён в коде, но compiler, execution auditor actual records,
-paired baseline waveform и actual gain0 intervention ещё не проверены.
-
-
-[Actual stock feedback intervention](FeedbackProfileConsoleNormalVerification.json):
-root844b278/Pulse1f97, M40 normal26 native +29 прежних readers; все12 Console
-проб завершены/аудированы,4 baseline waveform pairs exact. Все1555 members и789
-source hashes сверены с Git; восемь прежних runtime неизменны, группа закрыта,
-lease released. В initial11 readers9 admission иnegative control прошли, но
-positive test после аудита12 проб прочёл JSON array object-only loader; original
-terminal остаётся failed. Исправлены только test read; [отдельные2 readers](FeedbackProfileConsoleReaderVerification.json)
-прошли без native repeat,9 members/434 tool hashes и1315 неизменных native input
-files сверены. Combined scoped gate принят; это не приёмка всего SDK или плана.
-FeedbackGain0 устранил дополнительные положительные максимумы в двух выбранных
-состояниях при неизменных input/threshold/остальной физике. Это диагностическое
-вмешательство, не новое обучение или классификация; менять default physics
-либо CapturedPerInput на этом основании нельзя. Отчёт/visual QA продолжаются;
-ASan нового API, Elder и полный mode/profile scope открыты.
-
-
-[Диагностика missing при исходном пороге100](HighThresholdSinglePulseJobs.json)
-запущена на M40 из отдельного tool snapshot с прежним immutable compiled SDK.
-Это selector архивных training100/Retry состояний, не threshold intervention.
-Запланированы4 actual burst/single probes; результат ещё не принят. Временные
-[отчёты feedback12](FeedbackProfileTemporalReportJobs.json) строятся параллельно;
-5 chart controls прошли, ручная visual QA остаётся открытой.
-
-
-[Feedback temporal report](FeedbackProfileVisualVerification.json) завершён:
-30 trial/soma pairs,1213 views+2 matched-tail details,3669 cache files проверены,
-полный cache403646846B на M40. В Git6 выбранных PNG1468877B; все6 просмотрены
-индивидуально. Сверены70+8 primary members и373 unique tool hashes; оба workers
-closed/leases released. Ручная QA всего cache не заявляется. [Читаемый научный
-отчёт с изображениями](FeedbackProfileScientificReport-2026-11-07.ru.md) отделяет
-causal intervention от обучения/классификации и показывает изменение LT Output.
-
-[Relative clock comparator](RelativeClockAlignment.ru.md): исправлен actual
-replay false failure при source begin855.486с. Signals/model совпали точно;
-ошибка была только в учёте cancellation roundoff. Пять actual-corpus controls
-прошли на M40,9 primary/437 tool hashes/20 input bindings сверены. Допуски
-обучения и физика не менялись. Исходный high attempt сохранён failed; Branch2
-уже выполнены, Classic2 ещё не выполнены. Это не новый успешный Train.
-
-
-[Training100 burst/single diagnostic](HighThresholdCombinedVerification.json)
-завершён:2 новые Classic пробы и2 unchanged reused Branch. Сверены633 primary,
-375 tool hashes и2088 Branch bindings; group closed/lease released, runtime
-не изменился. Exact Train replay иfirst-prefix совпадение подтверждены в обеих
-топологиях. Одиночный импульс имеет1 maximum на выбранной соме, штатный burst —3
-на4 inputs. Механизм missing этим ещё не установлен. Mechanical analyze_pair
-A/B сохранил все поля двух прежних low summaries. Нового обучения нет. [Отчёт](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md),
-полный temporal cache/selected QA ещё строятся.
-
-
-[Training100 temporal report](HighThresholdTemporalVerification.json) завершён:
-4 cases/10 trial-soma pairs,393 views,1187 cache files проверены; cache131740593B
-на M40. В Git6 PNG1381204B, все6 просмотрены индивидуально. Сверены29 primary
-members/375 tool hashes; group closed/lease released. [Читаемый отчёт](HighThresholdSinglePulseScientificReport-2026-11-07.ru.md)
-показывает single peak иburst3/4 иявно отделяет гипотезу наложения от доказанного
-механизма. Визуальная приёмка всего cache и новая классификация не заявляются.
-
-
-## Последние принятые изменения 07.11
-
-[Размерная матрица single maximum](SingleImpulseMaximumDimensionMatrix.ru.md)
-подтверждена normal иASan: по9 native IDs и10 readers, по16 физических условий
-Classic/Branch ×N1/2/4/6 ×2000/20000 и6 fault captures. Это диагностический
-одиночный импульс, N1 fixture/threshold100. Реальное обучение полной пачкой,
-N0/полная physics matrix этим не закрыты; Console ASan принят отдельно ниже. Последний ASan
-worker завершён, whole group closed/lease released; повтор не запущен.
-
-[Миграция16 LTZ drivers](LtzDriverRetirement.ru.md) вошла в Bin/root develop
-через merge commits. Production history238 и restored-path negative прошли
-на обоих серверах. Все архивные исходники238 записей и288 actual tool hashes
-каждого worker сверены независимо; configs/models/primary не изменены.
-Остаются два LTZ copy helpers с внешними callers и17 Python tools этого
-каталога, другие группы scripts также требуют review. Stage9 partial.
-
-Уточнение пользователя о слившейся общей вершине применяется как консервативная
-рабочая политика: её нельзя выдать за два независимо подтверждённых пика
-закреплённых импульсов. Это unresolved assignment, а не доказательство
-PhysicalInfeasible или отсутствия вклада импульса. Научная неопределённость
-сохранена; одиночный отклик с меньшими добавочными максимумами — другой случай.
-Все исходные этапы1–12 по-прежнему частичны, цель полного плана активна.
-
-
-[ASan Console replay4](SingleMaximumConsoleASanVerification.json) принят:
-4 actual processes,5 design tests, exact archive/A-B traces, actual libasan maps,
-459 compact primary members/384 tool hashes/424 manifest artifact bindings.
-Runtime неизменен, whole group closed/lease released. Это одиночная диагностика,
-не Train, classification или полная принадлежность пиков пачки. Предыдущие
-указания об открытом адресном ASan Console gate заменены этим receipt.
-
-
-08.11: две раздельные ASan-проверки (shared vertex и Branch20k) прошли,
-но общий freeze gate отклонён: runtime изменился только в трёх EventsLog paths.
-[Receipt](AssignedVertexASanSplitVerification.json). Исправление владельца
-тестового WorkDirectory прошло4 native ASan проверки; обе runtime неизменны,
-контрольная waveform побитово идентична. [Receipt](TestLogOwnershipASanVerification.json).
-Это не приёмка Windows-пересборки или полного этапа2.
-Новая интегрированная ASan-сборка schema6 выполняется на M40; параллельно
-готовятся14 диагностических high-threshold проб по точным состояниям
-[постановки](HighThresholdSubsetStudyDesign.json), без запуска Train.
-
-Подготовка high-threshold завершена на M40:14 jobs, точные selectors Classic0
-и Branch2, source files сверены с исходными Git manifests. Ни одной новой
-native-пробы подготовки не запускала. Summary Branch67,9MB потребовал явного
-лимита128MiB на member при прежнем общем лимите512MiB; исходный отказ сохранён.
-Повторные истории обучения в новый компактный архив не включены, остаются
-ссылки на исходные Git commits и полные file bindings.
-[Задания подготовки](HighThresholdSubsetPreparationJobs.json).
-
-Компактный пакет подготовки767f579e передан через Git и независимо сверён:
-55 members,1300 bindings исторических файлов,14 jobs; архив1,11MB без
-повторных source histories. [Receipt](HighThresholdSubsetPreparationVerification.json).
-Фактические high-threshold subset пробы ещё не запускались.
-
-
-Интегрированная ASan-проверка b711/Pulse609 завершена:71 unit,10 physical
-и7 reader checks прошли. Runtime текущей и прежней сборок неизменны,
-все группы закрыты и reservation снята. Evidence dae5697b (494 members,383616B);
-это не Console gate того же задания и не полная приёмка этапа7.
-После этой проверки запущен [high-threshold replay](HighThresholdSubsetStudyJobs.json):
-сначала обе full-пачки сравниваются с опубликованными историческими трассами.
-Без совпадения к остальным условиям перехода нет. Это диагностика stopped
-состояний, без Train, классификации и сертификата закреплённого пика.
-
-ASan evidence dae5697b независимо сверён:494 members,138 source hashes,
-81 JUnit cases и8 restoration packets. [Receipt](IntegratedSubsetASanVerification.json).
-Первая контрольная high-threshold full-проба Classic завершена: recorded input
-и все soma samples точно воспроизвели историческую пачку; относительные clocks
-совпали с ограниченным учётом roundoff. Остальная серия ещё выполняется.
-
-High-threshold A1 остановлен проверкой самого worker: base model_revision
-сравнивался с expected effective revision Branch. При этом native prepared
-содержит правильный effective7ae9b857, initial/base96ea48df также правильный.
-Это ошибка orchestration assertion, не изменение модели. A1 closed/released.
-A2 проверяет обе оси раздельно и повторно использует два завершённых full-control
-process packets только после проверки исходных и скопированных manifests.
-Остановка A1 не переоценивается как успешное выполнение серии.
-
-
-Рендер c2656f39 на опубликованном Console corpus принят:6 cases/12 figures,
-400 source hashes сверены с Git,25 archive members проверены; две выбранные
-overview-фигуры прошли визуальную QA. Caption и source_conditions различают
-base и measured/effective model revisions. Primary не менялись, новых native
-симуляций этот рендер не выполнял. [Receipt](StimulusSubsetTemporalVerification.json).
-High-threshold A2 подтвердил обе исторические full-пачки точно и завершил
-первые две omit-пробы Classic; оставшаяся серия выполняется.
-
-
-High-threshold subset A2 завершён:14/14 условий, обе full-пачки точно
-воспроизводят исторические данные, отсутствуют heartbeat/model/restore errors.
-Повторная проверка и публикация всего primary выполняются; новый научный
-отчёт с графиками ещё не готов. Train, классификация и assigned-peak certificate
-в этой серии не выполнялись.
-Потоковая упаковка ffb35ddf принята на реальном corpus:16 tests,700 файлов,
-6 native/manifest audits,104,4MB →1,26MB. Все inner hashes сверены с исходным
-Git primary; [receipt](StreamingPrimaryVerification.json).
-
-Последующая проверка stderr уточняет приёмку14 условий: Classic-6 (single3)
-содержит St12system_error Resource temporarily unavailable при exit0. CSV,
-model identity и restoration checks прошли, но научная приёмка этой пробы
-предварительна до чистого повтора. Это не отменяет точные full-control replays.
-В остальных15 original/reused process records stderr пуст. Риск неограниченного
-std::async при загрузке XML подтверждён в Rdk; b3438347 подготовлен отдельно,
-root-ветка codex/timelearner-bounded-description-load проверяет native loader
-до/после при ограниченных thread slots. Первый build gate остановился на
-отсутствующей штатной registration Libraries.cpp; это исправлено в fixture,
-проверка самого риска ещё не принята.
-Primary2194d833 доставлен через Git:10967 members,19,31MB; независимая сверка
-ещё не завершена. Из него построены28 фигур/35 trial-soma pairs без новых
-симуляций; выбранные рисунки и новый отчёт ещё готовятся к публикации.
-
-High-threshold primary2194d833 независимо проверен полностью:10967 members,
-2209931029 raw bytes,14 completed waveform conditions и явная Classic-6
-операционная оговорка. Рендер df1da70c восстановил данные из Git;28 фигур,
-35 trial/soma pairs,400 code hashes и70 primary bindings сверены. Четыре
-выбранных изображения прошли visual QA.
-[Научный диагностический отчёт](HighThresholdSubsetScientificReport-2026-11-08.ru.md)
-показывает, почему global maximum не заменяет assigned training peak: у Branch
-он раньше подачи импульса2. Назначение пиков, Train и классификация в этом
-исследовании не выполнялись.
-Контроль Rdk загрузчика на исходном10e9 воспроизвёл целевой отказ: обычная
-сериализация32 XML passed, отсутствие spare slots даёт ровно ожидаемый failed
-case. After-gate b343 с metadata2, storage/native5 и чистым Classic-6 replay
-запущен; исправление ещё не принято в develop.
+Журнал промежуточных статусов и дополнительных scoped gates до этой сверки
+сохранён в Git: `9348ff8497966900a7bdbf418f084189089b2722`, тот же путь.
+Ссылки на первичные receipts и профильные отчёты остаются действующими.
+Записи «выполняется» в историческом журнале не описывают текущие процессы.

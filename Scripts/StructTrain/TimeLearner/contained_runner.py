@@ -13,6 +13,7 @@ from .native_evidence import load, require
 from .process_runner import verify_runtime, _start_identity, _write
 from .process_limits import validate_limits
 from .runtime import loaded_process_files
+from .operational_diagnostics import inspect_streams
 
 
 def _returncode(state):
@@ -155,5 +156,6 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
               'runtime_provenance': provenance, 'mapping_error': mapping_error,
               'runtime_fingerprint': manifest['runtime_fingerprint'], 'ownership_scope': 'bound_cgroup',
               'all_processes_closed': closed, 'scientific_verdict': None}
+    result['operational_diagnostics'] = inspect_streams(output)
     _write(output/'result.json', result)
     return result

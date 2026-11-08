@@ -49,6 +49,13 @@ class ContainedRunnerTest(unittest.TestCase):
         return execute(manifest or self.manifest(), args or ['.3'], self.root, output, wall,
                        memory_bytes=128*1024**2, tasks=32, cooperative_capture=cooperative)
 
+    def test_exit_zero_preserves_execution_but_records_operational_error(self):
+        result=self.run_process(self.manifest(name='shell.rs2',binary='/bin/sh'),
+            ['-c', "printf 'E20261108 02:41:59.575289 123 loader.cpp:2] caught error\\n' >&2; sleep .1"])
+        self.assertEqual(result['execution'],'completed')
+        self.assertEqual(result['returncode'],0)
+        self.assertEqual(result['operational_diagnostics']['status'],'error')
+
     def wait(self, callback, timeout=8):
         deadline = time.monotonic()+timeout
         while time.monotonic()<deadline:

@@ -374,6 +374,9 @@ Source этих контрольных моделей имеет search_unresolv
 
 Добавлены production команды `train`, `export`, `evaluate` и
 `analyze --format pipeline-run`: [контракт, CLI и ограничения](../../../Docs/StructTrain/TimeLearner/NativePipelineWorker.ru.md).
+Завершение exit0 отдельно от операционной диагностики: ERROR или неизвестный
+stderr запрещают положительный pipeline audit. Первичные потоки и данные
+сохраняются; [политика и проверка реального Classic-6](../../../Docs/StructTrain/TimeLearner/OperationalDiagnostics.ru.md).
 Это отдельные owned Console операции с immutable runtime и сохранёнными primary
 data, без шаблонного Test fallback. Первый выпуск требует optional modes Off
 и reset-per-trial evaluation. Общая очередь и полная матрица остаются открытыми.
