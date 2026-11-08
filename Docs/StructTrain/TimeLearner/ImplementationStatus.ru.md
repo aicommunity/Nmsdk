@@ -421,3 +421,24 @@ core.worktree-привязка только новой копии. Две соз
 подготовленные codec gates используют явно указанные прежние gitlinks. Эти
 проверки не переносятся автоматически на новый setter patch. Исходные этапы1–12
 и научная матрица остаются частично выполненными; только этап0 полностью принят.
+
+
+После восстановления связи M40 проверен по исходному binding: все77 C++ и40
+Python прошли,6 portable/10 fixture readers успешны,28 CSV совпали побайтно.
+Original orchestrator terminal=false сохранён: в one-off worker переменная
+runtime inventory была перезаписана baseline CSV bytes. Отдельная проверка
+before/after/on-disk подтвердила неизменность runtime/resources, source hashes,
+actual loaded files и kernel/lease closure.
+[Recovery receipt](MatchedOmissionCodecM40A1RecoveryVerification.json).
+Это приёмка численных/codec результатов с отдельно сохранённым отказом
+обёртки, а не объявление исходного pipeline успешным.
+
+На Elder после проверки отсутствия задания запущен normal80/Python43;43
+Python уже прошли, сборка и остальные проверки ещё выполняются. Исправленный
+worker сравнивает runtime с сохранённым JSON snapshot, не с переиспользуемой
+переменной. Новое состояние не отменяет первоначальный transport failure.
+
+Пользователь подтвердил, что отдельная ранняя вершина допустима при небольшом
+остаточном влиянии на позднюю. [Уточнённая семантика и ограничения следующего
+метода](PeakAssignmentClarification-2026-11-08.ru.md) исключают автоматическое
+применение influence-exclusive v1 как Train-критерия.

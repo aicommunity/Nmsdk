@@ -1,0 +1,288 @@
+{
+  "kind": "source_based_design_anchor_verification",
+  "schema_version": 1,
+  "root_base": "90231e7ebc752ca5aca4a6c4a4e211d1c6e1323a",
+  "pulse_base": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+  "gitlink": "160000 commit 2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b\tLibraries/Nmsdk-PulseLib",
+  "document_path": "E:\\Science-Repo\\nmsdk-matched-train-typed-design\\Docs\\StructTrain\\TimeLearner\\MatchedOmissionTrainTypedPath-2c3eb8d.ru.md",
+  "document_sha256": "181d3901b7a6c32fcefd6b1abba38c81d5f7d29b2a1b0e719af97f7d1be6e900",
+  "unique_source_anchors": 34,
+  "anchors": [
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/BoundedTraining.cpp",
+      "line": 152,
+      "source_line": "        protocol.schemaVersion!=3 || config.bounds.size()!=protocol.inputs.size() || initial.size()!=protocol.inputs.size() || initial.empty())",
+      "source_sha256": "65515e13b61ad7e038b34549ca82534963bc7a017023d011742d8dffa66dc8cd"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/BoundedTraining.cpp",
+      "line": 783,
+      "source_line": "        const bool advance=config.invalidMeasurementRecovery==InvalidMeasurementRecovery::AdvanceUnassignedBurst &&",
+      "source_sha256": "65515e13b61ad7e038b34549ca82534963bc7a017023d011742d8dffa66dc8cd"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/BoundedTraining.cpp",
+      "line": 822,
+      "source_line": "    const auto trial=pending->trialId;pending.reset();armed.reset();",
+      "source_sha256": "65515e13b61ad7e038b34549ca82534963bc7a017023d011742d8dffa66dc8cd"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+      "line": 143,
+      "source_line": "    NativeTrainingPlan plan;auto& p=plan.protocol;p.schemaVersion=3;",
+      "source_sha256": "6abfc856c4ff39faa8fc9d2242cde4daaaf3251434f7452164c3ccd7a57751bb"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/ConfiguredNativeTraining.cpp",
+      "line": 245,
+      "source_line": "        result[\"schema_version\"]=5;",
+      "source_sha256": "6abfc856c4ff39faa8fc9d2242cde4daaaf3251434f7452164c3ccd7a57751bb"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/FinalVerification.cpp",
+      "line": 361,
+      "source_line": "        const auto index=order.at(position);",
+      "source_sha256": "36a613a0c1b7b8e487032d010a794d44538e1b3fe38dccd25e589d44e58bb7c8"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/FinalVerification.cpp",
+      "line": 370,
+      "source_line": "void FinalVerificationSession::Finish()",
+      "source_sha256": "36a613a0c1b7b8e487032d010a794d44538e1b3fe38dccd25e589d44e58bb7c8"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/FinalVerification.h",
+      "line": 108,
+      "source_line": "    unsigned SchemaVersion() const { return 1; }",
+      "source_sha256": "79a20c42892fad0ab8f97ea29ee54043e0be1919088bc46e3b14ced2130ec7ad"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/FinalVerification.h",
+      "line": 46,
+      "source_line": "struct ValidatedProbeMeasurement { double rawPotential,arrival,plateauEnd; };",
+      "source_sha256": "79a20c42892fad0ab8f97ea29ee54043e0be1919088bc46e3b14ced2130ec7ad"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeLearnedState.cpp",
+      "line": 210,
+      "source_line": "        proof.emplace(ReplayNativeTrainingProof(protocol,service.Certificate()->Tolerances(),",
+      "source_sha256": "30f4218f37958173f9f58f9c95d69a945f0be0549668c85b0ef4a46d635a6023"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeLearnedState.cpp",
+      "line": 275,
+      "source_line": "        package[\"schema_version\"]=c.search.capacitanceSearch?4:3;package[\"capacitance_history\"]=EncodeBoundaryHistory(history);",
+      "source_sha256": "30f4218f37958173f9f58f9c95d69a945f0be0549668c85b0ef4a46d635a6023"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeLearnedState.cpp",
+      "line": 317,
+      "source_line": "    const auto protocol=DecodeVerificationProtocol(Object(package[\"protocol\"]));auto plan=Plan(c,protocol);",
+      "source_sha256": "30f4218f37958173f9f58f9c95d69a945f0be0549668c85b0ef4a46d635a6023"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeLearnerLifecycle.h",
+      "line": 109,
+      "source_line": " owner.NativeTrainingOwned=false;owner.NativeTrainingControl.InvalidateTarget();",
+      "source_sha256": "3d7f390b6d8c4c4202cced9d495fac688e484dc8c07ea6245ddc42ccdaee7d32"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeLearnerLifecycle.h",
+      "line": 120,
+      "source_line": "  if(!owner.NativeLifecycleDepth)owner.NativeTrainingControl.ResetControl();",
+      "source_sha256": "3d7f390b6d8c4c4202cced9d495fac688e484dc8c07ea6245ddc42ccdaee7d32"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeLearnerLifecycle.h",
+      "line": 72,
+      "source_line": "  const auto adapter=TimeLearner::BindNativeTraining(owner,owner.NativeProbeControl,owner.NativeTrainingEditDepth);",
+      "source_sha256": "3d7f390b6d8c4c4202cced9d495fac688e484dc8c07ea6245ddc42ccdaee7d32"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeMatchedOmissionGroup.cpp",
+      "line": 152,
+      "source_line": "        s.schemaVersion=6;s.trialId=plan.groupId+\"/native/\"+std::to_string(issued);",
+      "source_sha256": "7a79fa93b3bdfc6ce90bb775dc278d4e60fc365678436410d2276305c642b1f1"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeMatchedOmissionGroup.cpp",
+      "line": 171,
+      "source_line": "            if(prepared)prepared(p,actual);",
+      "source_sha256": "7a79fa93b3bdfc6ce90bb775dc278d4e60fc365678436410d2276305c642b1f1"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeMatchedOmissionGroup.cpp",
+      "line": 204,
+      "source_line": "            result.assignment=SelectMatchedOmissionMaximum(result.specification,plan.policy,result.witness);",
+      "source_sha256": "7a79fa93b3bdfc6ce90bb775dc278d4e60fc365678436410d2276305c642b1f1"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeMatchedOmissionGroup.cpp",
+      "line": 27,
+      "source_line": "    Require(b.owner && b.neuron && b.dataset && b.inputCount>1 && n==std::size_t(b.inputCount),",
+      "source_sha256": "7a79fa93b3bdfc6ce90bb775dc278d4e60fc365678436410d2276305c642b1f1"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeMatchedOmissionGroup.cpp",
+      "line": 71,
+      "source_line": "    std::ostringstream identity;identity<<plan.groupId;",
+      "source_sha256": "7a79fa93b3bdfc6ce90bb775dc278d4e60fc365678436410d2276305c642b1f1"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeMatchedOmissionGroup.h",
+      "line": 28,
+      "source_line": "    // Declarations only: elapsed/enforcement attestation is not retained here.",
+      "source_sha256": "6fe31b77e12f7bf135e08524ed8dc351b519bc45f8bd89bc447e7e8cb3ba1d9f"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingProof.cpp",
+      "line": 25,
+      "source_line": "NativeTrainingProof ReplayNativeTrainingProof(const VerificationProtocol& protocol,const VerificationTolerances& tolerances,",
+      "source_sha256": "f96add4506f5f1f5e2d0bdfe7a5f786992922960f7791dde6582455a8bd05cbe"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "line": 146,
+      "source_line": "void NativeTrainingService::BindTrialCapacitance(const NativeTrainingAdapter& a,const NativeProbeRequest& request)",
+      "source_sha256": "5c69bc6f48a2d69bf35e4b0453b473be85df931dd1d370e5f8a687221356450a"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "line": 155,
+      "source_line": "void NativeTrainingService::ValidateTrialCapacitance(const NativeTrainingAdapter& a,const NativeProbeResult& result)",
+      "source_sha256": "5c69bc6f48a2d69bf35e4b0453b473be85df931dd1d370e5f8a687221356450a"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "line": 170,
+      "source_line": "NativeProbeRequest NativeTrainingService::Request(std::size_t input,const std::string& run,const std::string& trial,",
+      "source_sha256": "5c69bc6f48a2d69bf35e4b0453b473be85df931dd1d370e5f8a687221356450a"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "line": 327,
+      "source_line": "void NativeTrainingService::CheckBudget(const NativeTrainingAdapter& a,double modelTime,double wallTime)",
+      "source_sha256": "5c69bc6f48a2d69bf35e4b0453b473be85df931dd1d370e5f8a687221356450a"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "line": 359,
+      "source_line": "void NativeTrainingService::RecordCancelled(const NativeTrainingAdapter& a)",
+      "source_sha256": "5c69bc6f48a2d69bf35e4b0453b473be85df931dd1d370e5f8a687221356450a"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "line": 50,
+      "source_line": "    Require(value.protocol.schemaVersion==3 && value.probe.specification.schemaVersion==3 &&",
+      "source_sha256": "5c69bc6f48a2d69bf35e4b0453b473be85df931dd1d370e5f8a687221356450a"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/ProbeEvidenceDecode.cpp",
+      "line": 117,
+      "source_line": "VerificationProtocol DecodeVerificationProtocol(const QJsonObject& o)",
+      "source_sha256": "64a40d39b9615a85100fdc7ab82031b081bdc2f7aa283536b93bfc5883a866cb"
+    },
+    {
+      "repository": "P",
+      "commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "path": "Core/TimeLearner/ProbeEvidenceJson.cpp",
+      "line": 133,
+      "source_line": "QJsonObject EncodeVerificationProtocol(const VerificationProtocol& p)",
+      "source_sha256": "bdc6e269bbc5c376354d29e704dc8e1a572f653f905d0b5eb38093b0ff7e3dd1"
+    },
+    {
+      "repository": "R",
+      "commit": "90231e7ebc752ca5aca4a6c4a4e211d1c6e1323a",
+      "path": "App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h",
+      "line": 27,
+      "source_line": "    void Prepared(const NMSDK::TimeLearner::PreparedVerificationProbe&,const NMSDK::TimeLearner::ProbeSpec&){Open();}",
+      "source_sha256": "d9ca2aa78e7003db8902fa0f0f88dcbcf2c19a5821a9d47aa69d794ff35a6c29"
+    },
+    {
+      "repository": "R",
+      "commit": "90231e7ebc752ca5aca4a6c4a4e211d1c6e1323a",
+      "path": "App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h",
+      "line": 43,
+      "source_line": "    QJsonArray Finalize(bool stopped)",
+      "source_sha256": "d9ca2aa78e7003db8902fa0f0f88dcbcf2c19a5821a9d47aa69d794ff35a6c29"
+    },
+    {
+      "repository": "R",
+      "commit": "90231e7ebc752ca5aca4a6c4a4e211d1c6e1323a",
+      "path": "App/NeuroModelerConsole/TimeLearnerTrainingJob.cpp",
+      "line": 209,
+      "source_line": "        owner->SetConfiguredNativeEvidenceSinks({[evidence](const auto& p,const auto& s){evidence->Prepared(p,s);},",
+      "source_sha256": "1a58f40787ffdff10dcda26ba2a282e311de9eba06b345f6f72618a91b739a65"
+    },
+    {
+      "repository": "R",
+      "commit": "90231e7ebc752ca5aca4a6c4a4e211d1c6e1323a",
+      "path": "App/NeuroModelerConsole/TimeLearnerTrainingJob.cpp",
+      "line": 227,
+      "source_line": "        const auto revision=identity[\"sha256\"].toString().toStdString();const auto package=owner->ExportNativeLearnedState(job.implementation);",
+      "source_sha256": "1a58f40787ffdff10dcda26ba2a282e311de9eba06b345f6f72618a91b739a65"
+    }
+  ],
+  "numerical_tests_run": false,
+  "cpp_compilation_run": false,
+  "network_used": false,
+  "result": "metadata_verified_not_implementation_acceptance"
+}
