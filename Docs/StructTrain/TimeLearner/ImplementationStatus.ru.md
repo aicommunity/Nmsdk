@@ -519,3 +519,17 @@ root-ветка codex/timelearner-bounded-description-load проверяет na
 Primary2194d833 доставлен через Git:10967 members,19,31MB; независимая сверка
 ещё не завершена. Из него построены28 фигур/35 trial-soma pairs без новых
 симуляций; выбранные рисунки и новый отчёт ещё готовятся к публикации.
+
+High-threshold primary2194d833 независимо проверен полностью:10967 members,
+2209931029 raw bytes,14 completed waveform conditions и явная Classic-6
+операционная оговорка. Рендер df1da70c восстановил данные из Git;28 фигур,
+35 trial/soma pairs,400 code hashes и70 primary bindings сверены. Четыре
+выбранных изображения прошли visual QA.
+[Научный диагностический отчёт](HighThresholdSubsetScientificReport-2026-11-08.ru.md)
+показывает, почему global maximum не заменяет assigned training peak: у Branch
+он раньше подачи импульса2. Назначение пиков, Train и классификация в этом
+исследовании не выполнялись.
+Контроль Rdk загрузчика на исходном10e9 воспроизвёл целевой отказ: обычная
+сериализация32 XML passed, отсутствие spare slots даёт ровно ожидаемый failed
+case. After-gate b343 с metadata2, storage/native5 и чистым Classic-6 replay
+запущен; исправление ещё не принято в develop.
