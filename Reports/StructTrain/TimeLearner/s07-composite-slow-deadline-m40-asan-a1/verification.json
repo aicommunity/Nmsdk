@@ -1,0 +1,89 @@
+{
+  "kind": "native_slow_sink_deadline_targeted4",
+  "schema_version": 1,
+  "root": "17db91ee0e8f308ea39cf7ebef641e1814080337",
+  "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+  "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "collector_tool_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+  "host": "10.245.1.17",
+  "original_terminal_passed": true,
+  "built": true,
+  "expected_cpp_cases": 4,
+  "observed_JUnit_cases": 4,
+  "observed_failed_cases": 0,
+  "native_leaf_gates_observed": 4,
+  "fresh_closed_leaf_kernel_groups": 4,
+  "outer_kernel_closed": true,
+  "whole_worker_reservation_released": true,
+  "actual_source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-slow-deadline-root-m40-a1",
+      "commit": "17db91ee0e8f308ea39cf7ebef641e1814080337",
+      "files": 968
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-cancellation-pulse-m40-a1",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    }
+  ],
+  "actual_loaded_files_hash_verified": 74,
+  "five_protected_runtimes_unchanged": true,
+  "full248_accepted": false,
+  "post_callback_deadline_tested": true,
+  "group_wall_seconds": 60,
+  "actual_sleep_minimum_asserted_seconds": 60,
+  "source_sleep_seconds": 61,
+  "whole_attempt_wall_seconds": 1800,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "disk_guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "last": {
+      "time": 1794155656.0358236,
+      "free_bytes": 339657269248,
+      "owned_scope_increment_bytes": 654798848,
+      "peak_owned_scope_increment_bytes": 654798848,
+      "outer_closed": true
+    },
+    "peak_owned_scope_increment_bytes": 654798848,
+    "minimum_free_bytes": 339657269248,
+    "outer_closed": true,
+    "all_recorded_leaf_groups_closed": true,
+    "leaf_groups": 4
+  },
+  "created_utc": "2026-11-08T16:37:19.155291+00:00"
+}
