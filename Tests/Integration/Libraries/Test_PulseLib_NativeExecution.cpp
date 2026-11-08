@@ -8,6 +8,7 @@
 #include "TimeLearner/NativeResponseDomainCapture.h"
 #include "TimeLearner/MatchedOmissionEvidenceJson.h"
 #include "TimeLearner/NativeMatchedOmissionGroup.h"
+#include "TimeLearner/NativeDeclaredWindowBasinAssignment.h"
 #include "TimeLearner/ResponseDomainEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonDocument>
@@ -24,6 +25,7 @@
 #include <algorithm>
 #include <chrono>
 #include <limits>
+#include <functional>
 
 namespace {
 using namespace RDK;
@@ -65,7 +67,7 @@ QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const 
         {"actual_stimuli",stimuli},{"peaks",peaks},{"burst_assignments",assignments}};
 }
 
-template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false,bool matchedOmission=false,bool separatedOmission=false)
+template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Interference interference=Interference::None,unsigned inputCount=2,unsigned observationSchema=2,bool mergedBurst=false,bool boundedTraining=false,bool sharedVertex=false,std::vector<std::size_t> sourceOrdinals={},bool missingSubsetSink=false,bool captureDomains=false,bool fullRevisionProvider=false,bool matchedOmission=false,bool separatedOmission=false,bool declaredBasin=false,int assignedOverride=-1)
 {
     const bool branch=std::is_same<Learner,NNeuronTimeLearnerBranch>::value;
     const auto& core=NmsdkTests::InitEngineForPulseLibTests();
@@ -79,7 +81,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         (interference==Interference::None?"":"_fault"+std::to_string(int(interference)))+
         (observationSchema==3?"_whole_burst":"")+(mergedBurst?"_merged_burst":"")+(boundedTraining?"_bounded":"")+(sharedVertex?"_shared_vertex":"")+
         (observationSchema==6?"_subset"+subsetSuffix:"")+(missingSubsetSink?"_missing_sink":"")+
-        (captureDomains?"_domain_capture":"")+(matchedOmission?"_matched_omission":"")+(separatedOmission?"_separated_control":"");
+        (captureDomains?"_domain_capture":"")+(matchedOmission?"_matched_omission":"")+(separatedOmission?"_separated_control":"")+
+        (declaredBasin?"_declared_basin_i"+std::to_string(assignedOverride):"");
     // Reader A/B changes artifact identity only, never the storage class names
     // included in the semantic model identity.
     const std::string name=profileName+(fullRevisionProvider?"_full_revision":"");
@@ -116,6 +119,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         ASSERT_TRUE(point0);ASSERT_TRUE(point1);
         if(point0->Input.IsConnected() && !point1->Input.IsConnected())active=1;
     }
+    if(declaredBasin){ASSERT_TRUE(matchedOmission);ASSERT_GE(assignedOverride,0);ASSERT_LT(unsigned(assignedOverride),inputCount);active=assignedOverride;}
     const auto phase=learner->TrainingPhase.GetData();const auto need=learner->IsNeedToTrain.GetData();
     const NmsdkTools::ModelBoundarySources ports{{&generator->Output,"burst"}};
     NmsdkTools::ModelRevisionObserver revisionObserver;
@@ -268,8 +272,10 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             ASSERT_EQ(group.State(),NativeMatchedOmissionState::Completed)<<closed.reason;
             ASSERT_EQ(group.IssuedNativeProbes(),inputCount+2);ASSERT_EQ(closed.packets.size(),inputCount+2);
             ASSERT_EQ(closed.witness.omitEachInput.size(),inputCount);ASSERT_TRUE(closed.assignment);
-            if(separatedOmission)EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Valid);
-            else EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Ambiguous);
+            if(!declaredBasin) {
+                if(separatedOmission)EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Valid);
+                else EXPECT_EQ(closed.assignment->validity,MatchedOmissionValidity::Ambiguous);
+            }
             EXPECT_EQ(closed.specification.baseModelRevision,base);EXPECT_EQ(readRevision(),base);
             EXPECT_TRUE(closed.witness.fullBefore.fullMaskRestored);EXPECT_TRUE(closed.witness.fullAfter.fullMaskRestored);
             for(const auto& trace:closed.witness.omitEachInput)EXPECT_TRUE(trace.fullMaskRestored);
@@ -278,6 +284,156 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             EXPECT_TRUE(injected);EXPECT_EQ(group.IssuedNativeProbes(),1u);EXPECT_EQ(closed.packets.size(),1u);
             EXPECT_FALSE(closed.assignment);
             EXPECT_EQ(group.State(),interference==Interference::ExternalStop?NativeMatchedOmissionState::Cancelled:NativeMatchedOmissionState::Rejected);
+        }
+        std::optional<QJsonObject> basinArtifact;
+        if(declaredBasin) {
+            NativeDeclaredWindowBasinSpecification declared;declared.groupId=groupPlan.groupId;
+            declared.inputId=request.inputId;declared.assignedInput=std::size_t(active);declared.channel=groupPlan.channel;
+            // Fixed fixture declaration from source onsets, before looking at
+            // response maxima; no post-hoc peak centering or predictor proof.
+            declared.windowBeginOffset=onsets[std::size_t(active)]-.001;
+            declared.windowEndOffset=onsets[std::size_t(active)]+.06;
+            DeclaredWindowBasinPolicy geometryPolicy;geometryPolicy.maximumInputs=inputCount;
+            geometryPolicy.maximumSamples=groupPlan.policy.maximumSamples;
+            geometryPolicy.maximumTotalSamples=groupPlan.policy.maximumTotalSamples;
+            geometryPolicy.repeatabilityAbsolute=groupPlan.policy.repeatabilityAbsolute;
+            const auto timeBefore=modelTime();const auto revisionBefore=readRevision();const auto stateBefore=learner->NativeProbeState();
+            const auto selected=SelectNativeDeclaredWindowBasinMaximum(declared,geometryPolicy,closed);
+            EXPECT_EQ(modelTime(),timeBefore);EXPECT_EQ(readRevision(),revisionBefore);EXPECT_EQ(learner->NativeProbeState(),stateBefore);
+            EXPECT_FALSE(NativeDeclaredWindowBasinResult::TrainingCertificateEligible);
+            std::size_t rejectedTampering=0;
+            if(interference!=Interference::None) {
+                EXPECT_EQ(selected.status,NativeDeclaredWindowBasinStatus::Rejected);EXPECT_FALSE(selected.geometry);
+                EXPECT_FALSE(selected.reasons.empty());
+            }
+            else {
+                ASSERT_EQ(selected.status,NativeDeclaredWindowBasinStatus::Completed);
+                ASSERT_TRUE(selected.geometry);EXPECT_TRUE(selected.reasons.empty());
+                auto withoutV1Assignment=closed;withoutV1Assignment.assignment.reset();
+                const auto independent=SelectNativeDeclaredWindowBasinMaximum(declared,geometryPolicy,withoutV1Assignment);
+                ASSERT_EQ(independent.status,NativeDeclaredWindowBasinStatus::Completed);ASSERT_TRUE(independent.geometry);
+                EXPECT_EQ(independent.geometry->validity,selected.geometry->validity);
+                if(mergedBurst) {
+                    EXPECT_EQ(selected.geometry->validity,DeclaredWindowBasinValidity::Ambiguous);
+                    EXPECT_FALSE(selected.geometry->measuredMaximum);
+                }
+                else {
+                    ASSERT_EQ(selected.geometry->validity,DeclaredWindowBasinValidity::Valid);
+                    ASSERT_TRUE(selected.geometry->measuredMaximum);ASSERT_TRUE(selected.actualAssignedOnset);
+                    EXPECT_GE(selected.geometry->measuredMaximum->time,*selected.actualAssignedOnset);
+                    EXPECT_GE(selected.geometry->measuredMaximum->firstSample,
+                        std::size_t(std::llround((*selected.actualAssignedOnset-closed.witness.fullBefore.observation.begin)*frequency)));
+                    const auto& actual=closed.witness.fullBefore.observation.channels[groupPlan.channel].samples[
+                        selected.geometry->measuredMaximum->firstSample];
+                    EXPECT_EQ(selected.geometry->measuredMaximum->time,actual.time);
+                    EXPECT_EQ(selected.geometry->measuredMaximum->rawPotential,actual.rawPotential);
+                }
+                using Edit=std::function<void(NativeMatchedOmissionResult&)>;
+                const std::vector<Edit> edits{
+                    [](auto& value){value.reason="cancelled";},
+                    [](auto& value){value.packets.pop_back();},
+                    [](auto& value){value.sourceIsi[0]+=.001;},
+                    [](auto& value){value.appliedSourceIsi[0]+=.001;},
+                    [](auto& value){value.appliedPresentedIsi[1][0]+=.001;},
+                    [](auto& value){value.witness.omitEachInput[0].prepared.effectiveModelRevision="tampered";},
+                    [](auto& value){value.witness.omitEachInput[0].resetBinding="tampered";},
+                    [](auto& value){value.witness.omitEachInput[0].stimulusSamples[0]=1.;},
+                    [](auto& value){value.packets[1].observation->specification.maximumSamples=value.policy.maximumSamples+1;},
+                    [](auto& value){value.packets[1].observation->stimuli[0].time+=.001;},
+                    [](auto& value){value.packets[1].requestedSpecification->stimulusSubset->sourceTrainingPatternHash="tampered";}
+                };
+                for(std::size_t i=0;i<edits.size();++i) {
+                    SCOPED_TRACE(i);auto tampered=closed;edits[i](tampered);
+                    const auto rejected=SelectNativeDeclaredWindowBasinMaximum(declared,geometryPolicy,tampered);
+                    EXPECT_EQ(rejected.status,NativeDeclaredWindowBasinStatus::Rejected);EXPECT_FALSE(rejected.geometry);
+                    EXPECT_FALSE(rejected.reasons.empty());++rejectedTampering;
+                }
+                for(bool method:{false,true}) {
+                    auto changed=declared;if(method)changed.methodId="matched-omission-assigned-maximum-v1";else changed.groupId+="/other";
+                    const auto rejected=SelectNativeDeclaredWindowBasinMaximum(changed,geometryPolicy,closed);
+                    EXPECT_EQ(rejected.status,NativeDeclaredWindowBasinStatus::Rejected);EXPECT_FALSE(rejected.geometry);++rejectedTampering;
+                }
+                // Adversarial PACKET replay control, deliberately not a native
+                // physical response: replace soma samples and regenerate the
+                // closed recorder evidence using production ProbeRecorder.
+                // A well-formed geometry/packet can still be pre-causal, so it
+                // must not be promoted by the native-to-geometry bridge.
+                auto synthetic=closed;std::vector<MatchedOmissionTrace*> syntheticTraces{&synthetic.witness.fullBefore};
+                for(auto& value:synthetic.witness.omitEachInput)syntheticTraces.push_back(&value);
+                syntheticTraces.push_back(&synthetic.witness.fullAfter);
+                for(std::size_t i=0;i<syntheticTraces.size();++i) {
+                    auto& response=*syntheticTraces[i];const bool retained=std::find(response.presentedOrdinals.begin(),
+                        response.presentedOrdinals.end(),std::size_t(active))!=response.presentedOrdinals.end();
+                    for(auto& channel:response.observation.channels)for(std::size_t frame=0;frame<channel.samples.size();++frame)
+                        channel.samples[frame].rawPotential=channel.baseline+(retained && channel.channel==groupPlan.channel && frame==1?.001:0.);
+                    auto& packet=synthetic.packets[i];ProbeRecorder recorder(packet.observation->specification);std::size_t event=0;
+                    const auto frames=response.stimulusSamples.size();
+                    for(std::size_t frame=0;frame<frames;++frame) {
+                        const double time=response.observation.channels.front().samples[frame].time;
+                        while(event<response.observation.events.size() && !NMSDK::TimeLearner::Detail::After(response.observation.events[event].time,time)) {
+                            const auto& stimulus=response.observation.events[event++];recorder.RecordStimulus(stimulus.id,stimulus.time);
+                        }
+                        std::vector<double> values;for(const auto& channel:response.observation.channels)values.push_back(channel.samples[frame].rawPotential);
+                        recorder.Observe(time,values,response.prepared.effectiveModelRevision);
+                    }
+                    packet.observation=recorder.Close(response.observation.channels.front().samples.back().time,
+                        response.prepared.effectiveModelRevision,"window_closed");
+                    ASSERT_TRUE(packet.observation->valid);ASSERT_TRUE(packet.observation->complete);
+                }
+                auto broad=declared;broad.windowBeginOffset=0.;broad.windowEndOffset=duration;
+                const auto causalRejection=SelectNativeDeclaredWindowBasinMaximum(broad,geometryPolicy,synthetic);
+                EXPECT_EQ(causalRejection.status,NativeDeclaredWindowBasinStatus::CausalityRejected);
+                EXPECT_FALSE(causalRejection.geometry);EXPECT_FALSE(causalRejection.reasons.empty());
+            }
+            EXPECT_EQ(modelTime(),timeBefore);EXPECT_EQ(readRevision(),revisionBefore);EXPECT_EQ(learner->NativeProbeState(),stateBefore);
+            if(std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+                QJsonArray reasons;for(const auto& reason:selected.reasons)reasons.append(QString::fromStdString(reason));
+                const char* status=selected.status==NativeDeclaredWindowBasinStatus::Completed?"completed":
+                    selected.status==NativeDeclaredWindowBasinStatus::CausalityRejected?"causality_rejected":"rejected";
+                QJsonObject record{{"kind","native_declared_window_basin_diagnostic"},{"schema_version",1},
+                    {"method",NativeDeclaredWindowBasinResult::MethodId()},{"group_id",QString::fromStdString(declared.groupId)},
+                    {"assigned_input",active},{"channel",double(declared.channel)},
+                    {"window_begin_offset",declared.windowBeginOffset},{"window_end_offset",declared.windowEndOffset},
+                    {"specification",QJsonObject{{"schema_version",int(declared.schemaVersion)},{"method_id",QString::fromStdString(declared.methodId)},
+                        {"group_id",QString::fromStdString(declared.groupId)},{"input_id",QString::fromStdString(declared.inputId)},
+                        {"assigned_input",double(declared.assignedInput)},{"channel",double(declared.channel)},
+                        {"window_begin_offset",declared.windowBeginOffset},{"window_end_offset",declared.windowEndOffset}}},
+                    {"geometry_policy",QJsonObject{{"schema_version",int(geometryPolicy.schemaVersion)},
+                        {"maximum_inputs",double(geometryPolicy.maximumInputs)},{"maximum_samples",double(geometryPolicy.maximumSamples)},
+                        {"maximum_total_samples",double(geometryPolicy.maximumTotalSamples)},{"repeatability_absolute",geometryPolicy.repeatabilityAbsolute}}},
+                    {"minimum_amplitude",closed.specification.minimumAmplitude},
+                    {"status",status},{"status_enum",int(selected.status)},{"reasons",reasons},{"rejected_tampering",double(rejectedTampering)},
+                    {"actual_assigned_onset",selected.actualAssignedOnset?QJsonValue(*selected.actualAssignedOnset):QJsonValue(QJsonValue::Null)},
+                    {"geometry_validity",selected.geometry?QJsonValue(DeclaredWindowBasinValidityName(selected.geometry->validity)):QJsonValue(QJsonValue::Null)},
+                    {"geometry",QJsonValue(QJsonValue::Null)},{"measured_maximum",QJsonValue(QJsonValue::Null)},
+                    {"diagnostic_only",true},{"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+                const auto encodeMaximum=[](const ResponseMaximum& maximum) {
+                    return QJsonObject{{"first_sample",double(maximum.firstSample)},{"last_sample",double(maximum.lastSample)},
+                        {"raw_potential",maximum.rawPotential},{"amplitude",maximum.amplitude},{"time",maximum.time},{"plateau_end",maximum.plateauEnd}};
+                };
+                if(selected.geometry) {
+                    const auto& geometry=*selected.geometry;QJsonArray candidates,geometryReasons;
+                    for(const auto& reason:geometry.reasons)geometryReasons.append(QString::fromStdString(reason));
+                    for(const auto& candidate:geometry.candidates) {
+                        const auto anchor=[](const BasinAnchor& value) {return QJsonObject{{"first_sample",double(value.firstSample)},
+                            {"last_sample",double(value.lastSample)},{"record_edge",value.recordEdge}};};
+                        QJsonArray controls,necessary,candidateReasons;
+                        for(auto state:candidate.controls)controls.append(BasinControlPresenceName(state));
+                        for(auto input:candidate.necessaryInputs)necessary.append(double(input));
+                        for(const auto& reason:candidate.reasons)candidateReasons.append(QString::fromStdString(reason));
+                        candidates.append(QJsonObject{{"maximum",encodeMaximum(candidate.maximum)},{"left",anchor(candidate.left)},
+                            {"right",anchor(candidate.right)},{"status",BasinCandidateStatusName(candidate.status)},
+                            {"controls",controls},{"necessary_inputs",necessary},{"reasons",candidateReasons}});
+                    }
+                    record["geometry"]=QJsonObject{{"validity",DeclaredWindowBasinValidityName(geometry.validity)},{"reasons",geometryReasons},
+                        {"candidates",candidates},{"selected_candidate",geometry.selectedCandidate?QJsonValue(double(*geometry.selectedCandidate)):QJsonValue(QJsonValue::Null)},
+                        {"measured_maximum",geometry.measuredMaximum?QJsonValue(encodeMaximum(*geometry.measuredMaximum)):QJsonValue(QJsonValue::Null)}};
+                }
+                if(selected.geometry && selected.geometry->measuredMaximum) {
+                    record["measured_maximum"]=encodeMaximum(*selected.geometry->measuredMaximum);
+                }
+                basinArtifact=std::move(record);
+            }
         }
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
             const QString directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name);
@@ -346,7 +502,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 {"assignment_validity",closed.assignment?MatchedOmissionValidityName(closed.assignment->validity):"not_available"},
                 {"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
             QFile file(directory+"/group.json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-            const auto bytes=QJsonDocument(summary).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
+            const auto bytes=QJsonDocument(summary).toJson();ASSERT_EQ(file.write(bytes),bytes.size());ASSERT_TRUE(file.flush());
+            QJsonValue portableReference(QJsonValue::Null),sourceSpecificationHash(QJsonValue::Null);
             if(interference==Interference::None) {
                 const auto portable=EncodeMatchedOmissionEvidence(closed,portablePaths,portablePrimary);
                 const auto encoded=QJsonDocument(portable).toJson();
@@ -354,9 +511,26 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 EXPECT_EQ(EncodeMatchedOmissionEvidence(imported,portablePaths,portablePrimary),portable);
                 QFile outputFile(directory+"/matched-witness.json");
                 ASSERT_TRUE(outputFile.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-                ASSERT_EQ(outputFile.write(encoded),encoded.size());
+                ASSERT_EQ(outputFile.write(encoded),encoded.size());ASSERT_TRUE(outputFile.flush());
+                portableReference=QJsonObject{{"relative_path","matched-witness.json"},{"bytes",double(encoded.size())},
+                    {"sha256",QString::fromLatin1(QCryptographicHash::hash(encoded,QCryptographicHash::Sha256).toHex())}};
+                sourceSpecificationHash=NmsdkTools::CanonicalModelDataSha256(portable["specification"]);
             }
             else EXPECT_THROW(EncodeMatchedOmissionEvidence(closed,portablePaths,portablePrimary),std::invalid_argument);
+            if(basinArtifact) {
+                (*basinArtifact)["witness_binding"]=QJsonObject{{"complete_group",portableReference.isObject()},
+                    {"group_id",QString::fromStdString(closed.specification.groupId)},
+                    {"source_pattern_sha256",QString::fromStdString(closed.specification.patternHash)},
+                    {"source_specification_sha256",sourceSpecificationHash},
+                    {"base_model_revision",QString::fromStdString(closed.specification.baseModelRevision)},
+                    {"effective_model_revision",QString::fromStdString(closed.specification.effectiveModelRevision)},
+                    {"protocol_revision",QString::fromStdString(closed.specification.protocolRevision)},
+                    {"group",QJsonObject{{"relative_path","group.json"},{"bytes",double(bytes.size())},
+                        {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}}},
+                    {"portable",portableReference}};
+                QFile artifact(directory+"/declared-window-basin-diagnostic.json");ASSERT_TRUE(artifact.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                const auto encoded=QJsonDocument(*basinArtifact).toJson();ASSERT_EQ(artifact.write(encoded),encoded.size());ASSERT_TRUE(artifact.flush());
+            }
         }
         core.environment->DestroyModel();return;
     }
@@ -1268,3 +1442,24 @@ TEST(NativeMatchedOmissionCapture,CloseNativeRejectsTamperedObservation)
 
 TEST(NativeMatchedOmissionExecution,ClassicSeparatedControl2000) { ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::None,2,3,false,false,false,{},false,false,false,true,true); }
 TEST(NativeMatchedOmissionExecution,BranchSeparatedControl2000) { ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::None,2,3,false,false,false,{},false,false,false,true,true); }
+
+namespace {
+template<class Learner> void ExecuteDeclaredBasin(unsigned frequency,int input,
+    Interference interference=Interference::None,bool merged=false) {
+    ExecuteProbeThroughLearner<Learner>(frequency,interference,2,3,merged,false,false,{},false,false,false,true,false,true,input);
+}
+}
+TEST(NativeDeclaredWindowBasinExecution,ClassicInput0At2000){ExecuteDeclaredBasin<NNeuronTimeLearner>(2000,0);}
+TEST(NativeDeclaredWindowBasinExecution,ClassicInput1At2000){ExecuteDeclaredBasin<NNeuronTimeLearner>(2000,1);}
+TEST(NativeDeclaredWindowBasinExecution,BranchInput0At2000){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,0);}
+TEST(NativeDeclaredWindowBasinExecution,BranchInput1At2000){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,1);}
+TEST(NativeDeclaredWindowBasinExecution,ClassicInput0At20000){ExecuteDeclaredBasin<NNeuronTimeLearner>(20000,0);}
+TEST(NativeDeclaredWindowBasinExecution,ClassicInput1At20000){ExecuteDeclaredBasin<NNeuronTimeLearner>(20000,1);}
+TEST(NativeDeclaredWindowBasinExecution,BranchInput0At20000){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(20000,0);}
+TEST(NativeDeclaredWindowBasinExecution,BranchInput1At20000){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(20000,1);}
+TEST(NativeDeclaredWindowBasinExecution,ClassicMergedInput0At2000){ExecuteDeclaredBasin<NNeuronTimeLearner>(2000,0,Interference::None,true);}
+TEST(NativeDeclaredWindowBasinExecution,BranchMergedInput0At2000){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,0,Interference::None,true);}
+TEST(NativeDeclaredWindowBasinExecution,ClassicExternalStopBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearner>(2000,0,Interference::ExternalStop);}
+TEST(NativeDeclaredWindowBasinExecution,BranchExternalStopBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,0,Interference::ExternalStop);}
+TEST(NativeDeclaredWindowBasinExecution,ClassicPhysicalEditBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearner>(2000,0,Interference::TinyPhysicalCapacitance);}
+TEST(NativeDeclaredWindowBasinExecution,BranchPhysicalEditBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,0,Interference::TinyPhysicalCapacitance);}
