@@ -9,6 +9,7 @@
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/CompositePortableTrainingProof.h"
 #include "TimeLearner/CandidateWindowTrainingDeclarations.h"
+#include "TimeLearner/NativeCandidateWindowBindings.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h"
@@ -61,7 +62,7 @@ public:
     std::map<std::string,ValidatedProbeMeasurement> observedScalars;
     std::vector<double> groupBegins;
     unsigned frequency;std::size_t rawSamples=0,preparations=0;
-    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.):frequency(hz) {
+    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false):frequency(hz) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
         Require(environment->CreateModel("NModel"),"composite_fixture_model");model=dynamic_pointer_cast<UNet>(environment->GetModel());
@@ -78,7 +79,7 @@ public:
         NativeModelSpec s;s.branch=branch;s.frequencyHz=hz;s.neuronClass=registered.neuronClass;
         s.normalization=n0?Normalization::SynapseCount:Normalization::TipResistance;
         s.editPolicy.normalization=s.normalization;s.editPolicy.maximumCableLength=8;
-        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({i+1==dimension?1:2,1,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
+        for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({distinctAttachments?int(dimension-i):(i+1==dimension?1:2),1,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
         modelSpec=s;
         const auto built=owner->ConstructNativeModel(s);Require(built.status==NativeModelBuildStatus::Constructed,built.reason.c_str());
         model->Init();model->Reset();
@@ -103,6 +104,7 @@ public:
         double onset=0.;CompositeMeasurementContract contract;for(double isi:s.initialIsi){onset+=isi;contract.inputWindows.push_back({onset-.001,onset+.06});}
         if(dimension==2)contract.inputWindows.front()={.009,.07}; // Preserve the frozen two-input fixture bit-for-bit.
         const double duration=onset+.08;
+        if(distinctAttachments)for(auto& w:contract.inputWindows)w.endOffset=std::min(w.beginOffset+.121,duration);
         auto& context=contract.contextPolicy;context.timeComparisonTolerance=1e-10;context.baselineAbsolute=1e-12;
         context.repeatabilityAbsolute=1e-10;context.influenceAbsolute=1e-6;
         context.maximumSamples=std::size_t((duration+.1)*hz);context.maximumTotalSamples=context.maximumSamples*(dimension+2);context.maximumNativeProbes=dimension+2;
@@ -1180,3 +1182,113 @@ TEST(NativeCandidateWindowFrames,ChangedActualModelCannotReachGeometry){NativeFr
 TEST(NativeCandidateWindowFrames,ChangedActualEventCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::ChangedEvent);}
 TEST(NativeCandidateWindowFrames,ChangedFullRepeatCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::ChangedRepeat);}
 TEST(NativeCandidateWindowFrames,ChangedDeclaredGroupCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::WrongGroup);}
+
+namespace {
+template<class Owner> CandidateWindowPhysicalReadback ActualBankData(NativeCompositeFixture<Owner>& f) {
+    // Attachment EXPECTATIONS in tests come from the separately declared fixture
+    // model, not from the readback helper's output or its path formatter.
+    std::vector<int> attachments;for(const auto& p:f.owner->ReadNativeParameters())attachments.push_back(p.length);
+    return ReadNativeCandidateWindowPhysical(f.owner->NativeProbeModelBindings(),attachments,f.protocol,f.modelSpec,
+        f.owner->ReadNativeTrainingCapacitance());
+}
+template<class Owner> void ExpectDeclaredBanks(NativeCompositeFixture<Owner>& f,const CandidateWindowPhysicalReadback& data) {
+    ASSERT_EQ(data.inputBanks.size(),f.modelSpec.inputs.size());ASSERT_EQ(data.parameters.size(),f.modelSpec.inputs.size());
+    for(std::size_t i=0;i<f.modelSpec.inputs.size();++i) {
+        const auto& spec=f.modelSpec.inputs[i];const auto& bank=data.inputBanks[i];
+        const std::string path="$.Dendrite"+std::to_string(NativeCompositeFixture<Owner>::branch?1:i+1)+"_"+std::to_string(spec.attachment);
+        EXPECT_EQ(data.parameters[i].length,spec.attachment);EXPECT_EQ(data.parameters[i].synapses,spec.synapses);
+        EXPECT_EQ(bank.inputOrdinal,i);EXPECT_EQ(bank.inputId,"input"+std::to_string(i));EXPECT_EQ(bank.stimulusId,"pulse"+std::to_string(i));
+        EXPECT_EQ(bank.bankPath,path);EXPECT_EQ(bank.receiverPath,path+".ExcChannel");
+        ASSERT_EQ(bank.excitationSynapsePaths.size(),std::size_t(spec.synapses));
+        EXPECT_EQ(bank.excitationSynapsePaths.front(),path+".ExcSynapse1");
+    }
+}
+template<class Owner> void ActualDistinctBankData(std::size_t n) {
+    NativeCompositeFixture<Owner> f(2000,false,n+2,false,true,false,n,7200.,true);const auto data=ActualBankData(f);
+    ExpectDeclaredBanks(f,data);EXPECT_FALSE(data.capacitance);EXPECT_EQ(f.preparations,0u);
+    for(std::size_t i=0;i<n;++i)EXPECT_EQ(f.modelSpec.inputs[i].attachment,int(n-i));
+    if(NativeCompositeFixture<Owner>::branch) {std::set<std::string> banks;for(const auto& b:data.inputBanks)banks.insert(b.bankPath);EXPECT_EQ(banks.size(),n);}
+}
+template<class Owner> void SaveNativeRoutingControl(NativeCompositeFixture<Owner>& f,std::size_t input,
+    const CandidateWindowPhysicalReadback& before,const CandidateWindowPhysicalReadback& after,const QJsonArray& prepared) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const std::string directory=std::string(NativeCompositeFixture<Owner>::branch?"branch-distinct-routing-N":"classic-distinct-routing-N")+
+        std::to_string(f.modelSpec.inputs.size())+"/input-"+std::to_string(input);
+    const auto base=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(directory);Require(QDir().mkpath(base),"routing_output_directory");
+    const auto write=[&](const QString& name,const QByteArray& bytes){QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"routing_output_new_only");
+        Require(file.write(bytes)==bytes.size() && file.flush(),"routing_output_write");};
+    const auto& group=*f.attempt->Group();std::vector<const MatchedOmissionTrace*> traces{&group.witness.fullBefore};
+    for(const auto& t:group.witness.omitEachInput)traces.push_back(&t);traces.push_back(&group.witness.fullAfter);
+    MatchedOmissionPrimary primary;std::vector<QString> paths;
+    for(std::size_t i=0;i<traces.size();++i) {
+        const auto name=i==0?QString("full-before.csv"):i+1==traces.size()?QString("full-after.csv"):QString("omit-%1.csv").arg(qulonglong(i-1));
+        const auto bytes=EncodeMatchedOmissionPrimaryTrace(*traces[i],group.packets[i]);paths.push_back(name);primary.emplace(name,bytes);write(name,bytes);
+    }
+    write("matched-witness.json",QJsonDocument(EncodeMatchedOmissionEvidence(group,paths,primary)).toJson());
+    write("routing.json",QJsonDocument(QJsonObject{{"kind","native_candidate_window_routing_control"},{"schema_version",1},
+        {"diagnostic_only",true},{"training_certificate_eligible",false},{"protocol",EncodeVerificationProtocol(f.protocol)},
+        {"expected_fixture_model",EncodeNativeModelSpec(f.modelSpec)},{"assigned_input",double(input)},
+        {"source_binding",f.attempt->SourceBinding()},{"source_origin",QString::fromStdString(f.attempt->SourceOrigin())},
+        {"before",EncodeCandidateWindowPhysicalReadback(before)},{"after",EncodeCandidateWindowPhysicalReadback(after)},
+        {"prepared_routes",prepared},{"selection",f.attempt->Selection()?QJsonValue(EncodeNativeCompositeSelection(*f.attempt->Selection())):QJsonValue(QJsonValue::Null)}}).toJson());
+    SaveCompositeBoundary(f,directory.c_str());
+}
+template<class Owner> void ActualDistinctBankRouting(std::size_t n) {
+    NativeCompositeFixture<Owner> f(2000,false,n+2,false,true,false,n,7200.,true);const auto initial=f.Revision();
+    for(std::size_t input=0;input<n;++input) {
+        const auto before=ActualBankData(f);ExpectDeclaredBanks(f,before);QJsonArray preparations;const auto caller=f.prototype.onPrepared;
+        f.prototype.onPrepared=[&,input,caller](const auto& prepared,const auto& spec) {
+            if(caller)caller(prepared,spec);const auto b=f.owner->NativeProbeModelBindings();
+            EXPECT_NO_THROW(ValidateNativeCandidateWindowPreparedSelector(b,before,f.protocol,f.modelSpec,input,prepared));
+            const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+            QJsonArray connected;
+            for(std::size_t i=0;i<n;++i) {
+                const auto name="Dendrite"+std::to_string(NativeCompositeFixture<Owner>::branch?1:i+1)+"_"+std::to_string(f.modelSpec.inputs[i].attachment)+".ExcSynapse1";
+                const auto synapse=b.neuron->template GetComponentL<NPulseSynapseCommon>(name,true);ASSERT_TRUE(synapse);
+                const auto links=synapse->Input.GetDataSources();const bool active=links.size()==1 && links.front()==&source->Output;
+                EXPECT_EQ(active,NativeCompositeFixture<Owner>::branch?i==input:true);connected.append(active);
+                if(NativeCompositeFixture<Owner>::branch && i==input) {ASSERT_FALSE(b.soloSynapses.empty());EXPECT_EQ(b.soloSynapses.front(),synapse.Get());}
+            }
+            const auto identity=NmsdkTools::IdentifyModel(b.neuron.Get(),{{&source->Output,"burst"}});
+            EXPECT_EQ(identity["sha256"],QJsonValue(QString::fromStdString(prepared.effectiveModelRevision)));
+            preparations.append(QJsonObject{{"prepared",EncodeNativeProbePreparation(prepared)},{"actual_effective_identity",identity},{"actual_fixture_bank_connections",connected}});
+        };
+        const auto limit=(f.prototype.specification.end+.02)*(n+2)+.1;
+        f.Run(f.Request(input,"distinct-routing","distinct-routing/"+std::to_string(input)),CompositeMeasurementPurpose::Reference,{},{},limit,600.);
+        f.prototype.onPrepared=caller;ASSERT_TRUE(f.attempt->Group());const auto& group=*f.attempt->Group();
+        ASSERT_EQ(group.reason,"omission_group_closed")<<f.attempt->RejectionReason();EXPECT_EQ(group.packets.size(),n+2);
+        EXPECT_EQ(std::size_t(preparations.size()),n+2);const auto after=ActualBankData(f);ExpectDeclaredBanks(f,after);
+        EXPECT_EQ(EncodeCandidateWindowPhysicalReadback(before),EncodeCandidateWindowPhysicalReadback(after));EXPECT_EQ(f.Revision(),initial);
+        SaveNativeRoutingControl(f,input,before,after,preparations);
+        // Geometry may honestly be Missing/Ambiguous for a declared window.
+        // Routing/source dimension coverage makes no Exact or allN target claim.
+    }
+}
+void SharedBankReadbackIsLegitimateData() {
+    NativeCompositeFixture<NNeuronTimeLearnerBranch> f(2000,false,4,false,true,false,4);const auto data=ActualBankData(f);
+    ExpectDeclaredBanks(f,data);ASSERT_EQ(data.inputBanks.size(),4u);
+    EXPECT_EQ(data.inputBanks[0].bankPath,data.inputBanks[1].bankPath);EXPECT_EQ(data.inputBanks[1].bankPath,data.inputBanks[2].bankPath);
+    EXPECT_NE(data.inputBanks[2].bankPath,data.inputBanks[3].bankPath);
+}
+void ActualWrongSelectorDataIsRejected() {
+    NativeCompositeFixture<NNeuronTimeLearnerBranch> f(2000,false,4,false,true,false,2,1800.,true);const auto before=ActualBankData(f);
+    const auto caller=f.prototype.onPrepared;std::size_t checked=0;
+    f.prototype.onPrepared=[&](const auto& prepared,const auto& spec) {
+        if(caller)caller(prepared,spec);auto b=f.owner->NativeProbeModelBindings();
+        EXPECT_NO_THROW(ValidateNativeCandidateWindowPreparedSelector(b,before,f.protocol,f.modelSpec,1,prepared));
+        const auto wrong=b.neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse1",true);ASSERT_TRUE(wrong);ASSERT_FALSE(b.soloSynapses.empty());
+        b.soloSynapses[0]=wrong.Get();EXPECT_THROW(ValidateNativeCandidateWindowPreparedSelector(b,before,f.protocol,f.modelSpec,1,prepared),std::invalid_argument);++checked;
+    };
+    f.Run(f.Request(1,"wrong-selector","wrong-selector/reference"),CompositeMeasurementPurpose::Reference);EXPECT_EQ(checked,4u);
+}
+}
+TEST(NativeCandidateWindowBanks,ClassicN4ActualDistinctBankReadback){ActualDistinctBankData<NNeuronTimeLearner>(4);}
+TEST(NativeCandidateWindowBanks,BranchN4ActualDistinctBankReadback){ActualDistinctBankData<NNeuronTimeLearnerBranch>(4);}
+TEST(NativeCandidateWindowBanks,ClassicN6ActualDistinctBankReadback){ActualDistinctBankData<NNeuronTimeLearner>(6);}
+TEST(NativeCandidateWindowBanks,BranchN6ActualDistinctBankReadback){ActualDistinctBankData<NNeuronTimeLearnerBranch>(6);}
+TEST(NativeCandidateWindowBanks,ClassicN4EachActualInputRoutesNPlus2){ActualDistinctBankRouting<NNeuronTimeLearner>(4);}
+TEST(NativeCandidateWindowBanks,BranchN4EachActualInputRoutesNPlus2){ActualDistinctBankRouting<NNeuronTimeLearnerBranch>(4);}
+TEST(NativeCandidateWindowBanks,ClassicN6EachActualInputRoutesNPlus2){ActualDistinctBankRouting<NNeuronTimeLearner>(6);}
+TEST(NativeCandidateWindowBanks,BranchN6EachActualInputRoutesNPlus2){ActualDistinctBankRouting<NNeuronTimeLearnerBranch>(6);}
+TEST(NativeCandidateWindowBanks,BranchSharedBankIsLegitimateButNotDistinct){SharedBankReadbackIsLegitimateData();}
+TEST(NativeCandidateWindowBanks,ActualPreparedWrongBankDescriptorRejected){ActualWrongSelectorDataIsRejected();}

@@ -2,7 +2,7 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "6c9d16d4749cd39633a94ec9749bf2dcfb88db89",
+  "pulse": "e277b159198433cdb607788b91a3e9b1fd48c7b0",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 110095,
-      "sha256": "4257545ad358f665a8e62ff36fcba43e5c825b3f3a5b5f1045197d3f66497253",
+      "bytes": 120617,
+      "sha256": "f8fb824ed43c54189c3b82203dc4d4e902db385d2f82b65eee2c428e1d1ca260",
       "expected_test_ids": [
         "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
         "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
@@ -76,11 +76,30 @@
       ],
       "count": 16,
       "scope": "synthetic DATA codecs and identity relationships; no opaque ReferenceSet or native/Train authority"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 120617,
+      "sha256": "f8fb824ed43c54189c3b82203dc4d4e902db385d2f82b65eee2c428e1d1ca260",
+      "expected_test_ids": [
+        "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.ClassicN6ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.BranchN6ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.ClassicN4EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.BranchN4EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.ClassicN6EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.BranchN6EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.BranchSharedBankIsLegitimateButNotDistinct",
+        "NativeCandidateWindowBanks.ActualPreparedWrongBankDescriptorRejected"
+      ],
+      "count": 10,
+      "scope": "actual parameter/receiver/source/member readback; every input of distinct N4/N6 native groups, no p5 seed or Exact claim"
     }
   ],
-  "expected_count": 46,
+  "expected_count": 56,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 286,
+  "planned_cumulative_scope": 296,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [
@@ -98,7 +117,11 @@
   "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
   "new_primary_directories": [
     "classic-growth/frame-spec2-candidate",
-    "branch-growth/frame-spec2-candidate"
+    "branch-growth/frame-spec2-candidate",
+    "classic-distinct-routing-N4/input-*",
+    "branch-distinct-routing-N4/input-*",
+    "classic-distinct-routing-N6/input-*",
+    "branch-distinct-routing-N6/input-*"
   ],
   "primary_files": [
     "full-before.csv",
@@ -110,7 +133,7 @@
     "frame-spec2.json",
     "after-model.json"
   ],
-  "scope": "Strict declaration/proposal DATA codecs, opaque-input replay source, and diagnostic actual frame timestamp projection; replay/native positive acceptance pending actual reference factories",
+  "scope": "Declaration/proposal DATA codecs, opaque-input replay source, diagnostic actual frame projection, actual native input bank/routing; complete reference factories/native p5 admission still pending",
   "explicitly_not_accepted": [
     "portable_proposal_replay",
     "allN_reference_seed_factory",
@@ -120,5 +143,19 @@
     "service_or_CLI_dispatch",
     "N4_N6_distinct_routing",
     "growth_policy_integration"
-  ]
+  ],
+  "actual_bank_fixture_limits": {
+    "frequency_hz": 2000,
+    "maximum_attempt_wall_seconds": 7200,
+    "maximum_group_wall_seconds": 600,
+    "bank_routing_cases_have_all_input_ordinals": true,
+    "native_group_bursts_per_dimension": {
+      "N4": 24,
+      "N6": 48
+    },
+    "applied_to_each": [
+      "Classic",
+      "Branch"
+    ]
+  }
 }
