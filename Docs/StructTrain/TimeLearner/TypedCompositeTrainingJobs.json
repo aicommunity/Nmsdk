@@ -157,6 +157,31 @@
       "receipt": "TypedCompositeCoreM40A2Verification.json",
       "actual_raw_export_or_independent_replay_accepted": false,
       "service_cold6_package5_cli_or_scientific_acceptance": false
+    },
+    {
+      "job_id": "s07-composite-archive-elder-normal-a1",
+      "host": "10.245.1.11",
+      "root": "d433acf6ed250e7ed5da781970b3963a51c56a26",
+      "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "state": "closed_cpp_assertion_failure",
+      "unit": "timelearner-b7e9d18e-4937-4a42-bf85-5b98728773e0.service",
+      "invocation_id": "e4cacfdc59604505b57abb4adbf8698d",
+      "initial_main_pid": 2054614,
+      "initial_start_ticks": "371085178",
+      "request_sha256": "8dea32e9eb6e6a5c27eea86ac0aed717b7112a50102a37ffd6b77f88580dfb87",
+      "expected_cpp_cases": 206,
+      "actual_cpp_tests_observed": 112,
+      "actual_cpp_tests_passed": 111,
+      "actual_cpp_assertions_failed": 1,
+      "not_run": 94,
+      "build_link_passed": true,
+      "whole_gate_accepted": false,
+      "kernel_groups_closed": 25,
+      "lease_released": true,
+      "actual_composite_archives_exported": 0,
+      "negative_evidence_commit": "9b9a38f1a5d8842ada5e167d9bdbf33bd24b6381",
+      "receipt": "ElderCompositeArchiveA1NegativeVerification.json",
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
@@ -190,6 +215,18 @@
     "date": "2026-11-08",
     "available_bytes": 488185856,
     "status": "insufficient_for_next_full_sdk_build",
-    "action": "No large source delivery or build started. Cleanup candidates only inventoried; no data or cache deleted during this observation."
+    "action": "No large source delivery or build started. Cleanup candidates only inventoried; no data or cache deleted during this observation.",
+    "historical_observation_superseded": true,
+    "current_receipt": "ElderDuplicateFetchcontentRetentionA1Verification.json"
+  },
+  "composite_archive206_next_attempt": {
+    "state": "preparing_not_launched",
+    "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+    "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+    "expected_cpp_cases": 206,
+    "cpp_source_sha256": "05f5cf15b64d6f16950db33ce6724dffd4c3435a5cac7514701dbfefb10ea49a",
+    "requires_disk_preflight": true,
+    "requires_new_runtime_and_request": true,
+    "whole_gate_accepted": false
   }
 }
