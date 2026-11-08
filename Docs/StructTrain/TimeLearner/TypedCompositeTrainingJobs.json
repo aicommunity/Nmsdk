@@ -253,6 +253,30 @@
       "kernel_tasks": 128,
       "build_parallel_jobs": 2,
       "scientific_verdict": null
+    },
+    {
+      "job_id": "s07-composite-archive-elder-normal-a3",
+      "host": "10.245.1.11",
+      "root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+      "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "state": "running_build_at_kernel_observation",
+      "unit": "timelearner-2d975306-4b77-4b3a-806d-3dc49a434a16.service",
+      "invocation_id": "48a5c775770248f194c3ef5670f4b1e5",
+      "initial_main_pid": 2187248,
+      "initial_start_ticks": "371604926",
+      "request_sha256": "68bfae505b0bd86e06d9433da363479302a7d84a60580fe7e66ac1cd2224bd4d",
+      "expected_cpp_cases": 206,
+      "expected_leaf_gates": 96,
+      "order_policy": "service22_then_archive23_then_all_remaining",
+      "runplan_order_sha256": "4c09128f17f7ae265fa227992b8749da3fc193a64a123f4ef33ac3a550d013f7",
+      "kernel_memory_bytes": 6442450944,
+      "kernel_tasks": 128,
+      "disk_preflight_bytes": 1342177280,
+      "owned_incremental_disk_cap_bytes": 805306368,
+      "minimum_physical_free_bytes": 536870912,
+      "budget_basis": "ElderCompositeArchiveA3WarmDiskBudgetReview.json",
+      "whole_gate_accepted": false,
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
@@ -295,10 +319,10 @@
     "elder": {
       "root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
       "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
-      "state": "preparing_after_service_fixture_correction",
+      "state": "normal_a3_running_build",
       "source_cpp_sha256": "44acf89749caa4ff7644ffbba6726a60a8f6b8de91398679e52a61ecd39f1cca",
       "full_scope_preserved": true,
-      "disk_budget_review_pending": true
+      "disk_budget_review_pending": false
     },
     "m40": {
       "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
