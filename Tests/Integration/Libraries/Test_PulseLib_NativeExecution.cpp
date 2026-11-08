@@ -285,6 +285,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             EXPECT_FALSE(closed.assignment);
             EXPECT_EQ(group.State(),interference==Interference::ExternalStop?NativeMatchedOmissionState::Cancelled:NativeMatchedOmissionState::Rejected);
         }
+        std::optional<QJsonObject> basinArtifact;
         if(declaredBasin) {
             NativeDeclaredWindowBasinSpecification declared;declared.groupId=groupPlan.groupId;
             declared.inputId=request.inputId;declared.assignedInput=std::size_t(active);declared.channel=groupPlan.channel;
@@ -385,24 +386,53 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 EXPECT_FALSE(causalRejection.geometry);EXPECT_FALSE(causalRejection.reasons.empty());
             }
             EXPECT_EQ(modelTime(),timeBefore);EXPECT_EQ(readRevision(),revisionBefore);EXPECT_EQ(learner->NativeProbeState(),stateBefore);
-            if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
-                const QString directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name);ASSERT_TRUE(QDir().mkpath(directory));
+            if(std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
                 QJsonArray reasons;for(const auto& reason:selected.reasons)reasons.append(QString::fromStdString(reason));
+                const char* status=selected.status==NativeDeclaredWindowBasinStatus::Completed?"completed":
+                    selected.status==NativeDeclaredWindowBasinStatus::CausalityRejected?"causality_rejected":"rejected";
                 QJsonObject record{{"kind","native_declared_window_basin_diagnostic"},{"schema_version",1},
                     {"method",NativeDeclaredWindowBasinResult::MethodId()},{"group_id",QString::fromStdString(declared.groupId)},
                     {"assigned_input",active},{"channel",double(declared.channel)},
                     {"window_begin_offset",declared.windowBeginOffset},{"window_end_offset",declared.windowEndOffset},
-                    {"status",int(selected.status)},{"reasons",reasons},{"rejected_tampering",double(rejectedTampering)},
+                    {"specification",QJsonObject{{"schema_version",int(declared.schemaVersion)},{"method_id",QString::fromStdString(declared.methodId)},
+                        {"group_id",QString::fromStdString(declared.groupId)},{"input_id",QString::fromStdString(declared.inputId)},
+                        {"assigned_input",double(declared.assignedInput)},{"channel",double(declared.channel)},
+                        {"window_begin_offset",declared.windowBeginOffset},{"window_end_offset",declared.windowEndOffset}}},
+                    {"geometry_policy",QJsonObject{{"schema_version",int(geometryPolicy.schemaVersion)},
+                        {"maximum_inputs",double(geometryPolicy.maximumInputs)},{"maximum_samples",double(geometryPolicy.maximumSamples)},
+                        {"maximum_total_samples",double(geometryPolicy.maximumTotalSamples)},{"repeatability_absolute",geometryPolicy.repeatabilityAbsolute}}},
+                    {"minimum_amplitude",closed.specification.minimumAmplitude},
+                    {"status",status},{"status_enum",int(selected.status)},{"reasons",reasons},{"rejected_tampering",double(rejectedTampering)},
                     {"actual_assigned_onset",selected.actualAssignedOnset?QJsonValue(*selected.actualAssignedOnset):QJsonValue(QJsonValue::Null)},
                     {"geometry_validity",selected.geometry?QJsonValue(DeclaredWindowBasinValidityName(selected.geometry->validity)):QJsonValue(QJsonValue::Null)},
-                    {"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
-                if(selected.geometry && selected.geometry->measuredMaximum) {
-                    const auto& maximum=*selected.geometry->measuredMaximum;
-                    record["measured_maximum"]=QJsonObject{{"first_sample",double(maximum.firstSample)},{"last_sample",double(maximum.lastSample)},
+                    {"geometry",QJsonValue(QJsonValue::Null)},{"measured_maximum",QJsonValue(QJsonValue::Null)},
+                    {"diagnostic_only",true},{"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+                const auto encodeMaximum=[](const ResponseMaximum& maximum) {
+                    return QJsonObject{{"first_sample",double(maximum.firstSample)},{"last_sample",double(maximum.lastSample)},
                         {"raw_potential",maximum.rawPotential},{"amplitude",maximum.amplitude},{"time",maximum.time},{"plateau_end",maximum.plateauEnd}};
+                };
+                if(selected.geometry) {
+                    const auto& geometry=*selected.geometry;QJsonArray candidates,geometryReasons;
+                    for(const auto& reason:geometry.reasons)geometryReasons.append(QString::fromStdString(reason));
+                    for(const auto& candidate:geometry.candidates) {
+                        const auto anchor=[](const BasinAnchor& value) {return QJsonObject{{"first_sample",double(value.firstSample)},
+                            {"last_sample",double(value.lastSample)},{"record_edge",value.recordEdge}};};
+                        QJsonArray controls,necessary,candidateReasons;
+                        for(auto state:candidate.controls)controls.append(BasinControlPresenceName(state));
+                        for(auto input:candidate.necessaryInputs)necessary.append(double(input));
+                        for(const auto& reason:candidate.reasons)candidateReasons.append(QString::fromStdString(reason));
+                        candidates.append(QJsonObject{{"maximum",encodeMaximum(candidate.maximum)},{"left",anchor(candidate.left)},
+                            {"right",anchor(candidate.right)},{"status",BasinCandidateStatusName(candidate.status)},
+                            {"controls",controls},{"necessary_inputs",necessary},{"reasons",candidateReasons}});
+                    }
+                    record["geometry"]=QJsonObject{{"validity",DeclaredWindowBasinValidityName(geometry.validity)},{"reasons",geometryReasons},
+                        {"candidates",candidates},{"selected_candidate",geometry.selectedCandidate?QJsonValue(double(*geometry.selectedCandidate)):QJsonValue(QJsonValue::Null)},
+                        {"measured_maximum",geometry.measuredMaximum?QJsonValue(encodeMaximum(*geometry.measuredMaximum)):QJsonValue(QJsonValue::Null)}};
                 }
-                QFile artifact(directory+"/declared-window-basin-diagnostic.json");ASSERT_TRUE(artifact.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-                const auto bytes=QJsonDocument(record).toJson();ASSERT_EQ(artifact.write(bytes),bytes.size());ASSERT_TRUE(artifact.flush());
+                if(selected.geometry && selected.geometry->measuredMaximum) {
+                    record["measured_maximum"]=encodeMaximum(*selected.geometry->measuredMaximum);
+                }
+                basinArtifact=std::move(record);
             }
         }
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
@@ -472,7 +502,8 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 {"assignment_validity",closed.assignment?MatchedOmissionValidityName(closed.assignment->validity):"not_available"},
                 {"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
             QFile file(directory+"/group.json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-            const auto bytes=QJsonDocument(summary).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
+            const auto bytes=QJsonDocument(summary).toJson();ASSERT_EQ(file.write(bytes),bytes.size());ASSERT_TRUE(file.flush());
+            QJsonValue portableReference(QJsonValue::Null),sourceSpecificationHash(QJsonValue::Null);
             if(interference==Interference::None) {
                 const auto portable=EncodeMatchedOmissionEvidence(closed,portablePaths,portablePrimary);
                 const auto encoded=QJsonDocument(portable).toJson();
@@ -480,9 +511,26 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 EXPECT_EQ(EncodeMatchedOmissionEvidence(imported,portablePaths,portablePrimary),portable);
                 QFile outputFile(directory+"/matched-witness.json");
                 ASSERT_TRUE(outputFile.open(QIODevice::WriteOnly|QIODevice::NewOnly));
-                ASSERT_EQ(outputFile.write(encoded),encoded.size());
+                ASSERT_EQ(outputFile.write(encoded),encoded.size());ASSERT_TRUE(outputFile.flush());
+                portableReference=QJsonObject{{"relative_path","matched-witness.json"},{"bytes",double(encoded.size())},
+                    {"sha256",QString::fromLatin1(QCryptographicHash::hash(encoded,QCryptographicHash::Sha256).toHex())}};
+                sourceSpecificationHash=NmsdkTools::CanonicalModelDataSha256(portable["specification"]);
             }
             else EXPECT_THROW(EncodeMatchedOmissionEvidence(closed,portablePaths,portablePrimary),std::invalid_argument);
+            if(basinArtifact) {
+                (*basinArtifact)["witness_binding"]=QJsonObject{{"complete_group",portableReference.isObject()},
+                    {"group_id",QString::fromStdString(closed.specification.groupId)},
+                    {"source_pattern_sha256",QString::fromStdString(closed.specification.patternHash)},
+                    {"source_specification_sha256",sourceSpecificationHash},
+                    {"base_model_revision",QString::fromStdString(closed.specification.baseModelRevision)},
+                    {"effective_model_revision",QString::fromStdString(closed.specification.effectiveModelRevision)},
+                    {"protocol_revision",QString::fromStdString(closed.specification.protocolRevision)},
+                    {"group",QJsonObject{{"relative_path","group.json"},{"bytes",double(bytes.size())},
+                        {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}}},
+                    {"portable",portableReference}};
+                QFile artifact(directory+"/declared-window-basin-diagnostic.json");ASSERT_TRUE(artifact.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                const auto encoded=QJsonDocument(*basinArtifact).toJson();ASSERT_EQ(artifact.write(encoded),encoded.size());ASSERT_TRUE(artifact.flush());
+            }
         }
         core.environment->DestroyModel();return;
     }
