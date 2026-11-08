@@ -45,3 +45,23 @@ bounded N+2 FSM, реальные закрытые packet/trace witnesses, contr
 reference/search/final-verification transport и отдельная версионированная
 certificate/reader проверка. Научная сходимость или избирательность этим
 блоком не заявляется; весь план остаётся открытым.
+
+
+## Native measurement group
+
+`NativeMatchedOmissionGroup` подготовлен для выполненияN+2 штатных проб без
+вложенного Calculate и edits между контролями. Native weak/lifecycle handles
+проверяют сохранность экземпляров; фактические target pattern/classes readback
+проверяются после восстановления каждой пробы. Raw callbacks проходят
+production CloseNative/replay отдельно от прежней domain hypothesis.
+
+[Адресные серверные задания](MatchedOmissionJobs.json):35 unit cases,2 boundary
+checks,10 прежних capture/codec controls и8 реальных групп Classic/Branch на
+2000/20000 Гц, включая stop/edit между контролями. Первая компиляция отклонена
+из-за неправильного преобразования const UEPtr; исправление отдельно сохранено,
+повторная попытка ещё не принята. Локально численные тесты не запускались.
+
+Группа пока не подключена к NativeTrainingService, CapturedReferences, поиску
+и FinalVerification. Старый schema3 validator не ослаблен. Для рабочего нового
+Train требуются versioned composite proof, сохранение/replay и интеграция
+операционной assignment policy. Это следующий блок работы, а не закрытый этап7.

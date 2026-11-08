@@ -1,0 +1,32 @@
+{
+  "kind": "native_matched_omission_acceptance_jobs",
+  "whole_plan_complete": false,
+  "accepted": false,
+  "training_certificate_eligible": false,
+  "groups_planned": {
+    "production_selector_unit": 35,
+    "native_capture_boundary": 2,
+    "previous_capture_codec_regression": 10,
+    "real_native_group": 8
+  },
+  "attempts": [
+    {
+      "host": "10.245.1.11",
+      "job": "s07-matched-omission-elder-a1",
+      "root": "948014e472e4a3c9fd5929f98f829e8d9d67eb2b",
+      "PulseLib": "eac362ed962189d13e21cd39dae926ceabe6c295",
+      "state": "closed_build_failed_before_tests",
+      "reason": "const UEPtr conversion at graph traversal roots",
+      "evidence_commit": "116de430002a2aaabc275ef8fe2013a619819bdf"
+    },
+    {
+      "host": "10.245.1.11",
+      "job": "s07-matched-omission-elder-a2",
+      "root": "9e5249421e2ae8f06183b19fad278289cf98522a",
+      "PulseLib": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
+      "state": "launched_after_previous_owned_job_closed",
+      "worker_sha256": "0fbeb4edcdc04cab15aa701381395f57d754229a289257dbc2c58aa13865cc90"
+    }
+  ],
+  "remaining": "NativeTrainingService/CapturedReferences/search/final verification composite integration, portable witness codec/reader, expanded topology/profile matrix, ASan, scientific trains"
+}
