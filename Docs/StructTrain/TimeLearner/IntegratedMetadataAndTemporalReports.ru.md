@@ -30,3 +30,17 @@
 A4/A5 render завершились до построения из-за выбора Python без matplotlib; A6 явно запускает существующее plot-venv. Ошибки сохранены в metadata, модели повторно не рассчитывались. Битовая воспроизводимость SVG/PDF с изменёнными timestamps/fonts не обещается.
 
 Открыты совместные C++/ASan/Owner и managed-runtime gates, перенос package в production, ConditionSpec wiring, вся физическая/режимная/научная матрица. Полностью принят только этап0; этапы1–12 остаются частичными.
+
+
+## Уточнение source dataflow LT/Soma — 08.11.2026
+
+[Read-only аудит Pulse88/RdkD6](LTSomaSignalSourceAudit-20261108.ru.md)
+разделяет Soma.SumPotential, отдельную LTMembrane и LTZone.Potential/Output.
+У NPulseLTZoneThreshold inherited Potential действительно обновляется и служит
+comparator input. Flat auxiliary panel сама по себе не доказывает отсутствие
+физического сигнала; missing source/read должен быть unknown/error, не zero.
+LT=Off/On в штатном BuildStructure меняет также feedback destination, поэтому
+это сравнение полного узла/топологии. Чистую RC-инерцию следует проверять
+отдельно внутри LT=On при неизменном body profile. Прежние samples, spike markers,
+engineering результаты и августовские визуальные наблюдения не переоцениваются;
+новые runtime comparisons этим source audit не выполнялись.
