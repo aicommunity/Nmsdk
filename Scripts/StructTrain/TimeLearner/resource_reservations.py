@@ -97,47 +97,116 @@ def _disk_device(path):
     return path.stat().st_dev
 
 
+def _ledger_tables(*, quantities, managed_units):
+    return {
+        'metadata': 'CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)',
+        'leases': ('CREATE TABLE IF NOT EXISTS leases ('
+                   'token TEXT PRIMARY KEY, job_id TEXT UNIQUE NOT NULL, owner TEXT NOT NULL, '
+                   'resources TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN (\'held\',\'released\')), '
+                   'created REAL NOT NULL, deadline REAL NOT NULL, updated REAL NOT NULL, release_note TEXT' +
+                   (', demands TEXT NOT NULL' if quantities else '') +
+                   (', controller TEXT NOT NULL' if managed_units else '') + ')'),
+        **({'managed_unit_intents': ('CREATE TABLE IF NOT EXISTS managed_unit_intents ('
+                                    'attempt_id TEXT PRIMARY KEY, token TEXT NOT NULL, '
+                                    'directory TEXT UNIQUE NOT NULL, state TEXT NOT NULL, intent TEXT NOT NULL)')}
+           if managed_units else {})}
+
+
+def _normalized_sql(value):
+    return ''.join(value.lower().replace('IF NOT EXISTS'.lower(), '').split())
+
+
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
+    @classmethod
+    def open_existing(cls, database, *, managed_units=False):
+        """Reopen this worker's ledger using its persisted quantity policy.
+
+        Never creates a ledger or migrates its schema. Managed-unit ownership
+        remains an explicit caller choice; discovering schema3 cannot enable it.
+        """
+        _identity()
+        _require(type(managed_units) is bool, 'invalid_managed_unit_policy')
+        requested = Path(database).absolute()
+        _require(not requested.is_symlink(), 'reservation_database_symlink')
+        _require(requested.is_file(), 'reservation_existing_database_required')
+        path = requested.resolve(strict=True)
+        try:
+            connection = sqlite3.connect(path.as_uri() + '?mode=ro', uri=True, timeout=10)
+            try:
+                metadata = dict(connection.execute('SELECT key,value FROM metadata'))
+                tables = dict(connection.execute("SELECT name,sql FROM sqlite_master WHERE type='table'"))
+            finally:
+                connection.close()
+        except sqlite3.Error as error:
+            raise ReservationError('reservation_existing_metadata_unreadable') from error
+        schema = metadata.get('schema_version')
+        _require(schema in ('1', '2', '3') and
+                 metadata.get('worker_host') == socket.gethostname(),
+                 'reservation_ledger_schema_or_worker_changed')
+        _require(managed_units == (schema == '3'), 'reservation_existing_managed_policy_mismatch')
+        capacity = None
+        expected = {'schema_version', 'worker_host'}
+        if schema != '1':
+            expected |= {'capacity', 'disk_device'}
+            try:
+                capacity = _quantities(json.loads(metadata.get('capacity', 'null')),
+                                       capacity=True, managed_units=managed_units)
+            except (ValueError, TypeError) as error:
+                raise ReservationError('reservation_invalid_persisted_capacity') from error
+            _require(metadata.get('disk_device') == str(path.parent.stat().st_dev),
+                     'reservation_database_filesystem_changed')
+        _require(set(metadata) == expected, 'reservation_existing_metadata_keys_changed')
+        for name, sql in _ledger_tables(quantities=capacity is not None, managed_units=managed_units).items():
+            _require(name in tables and _normalized_sql(tables[name]) == _normalized_sql(sql),
+                     'reservation_existing_table_schema_changed')
+        # Reopening must not invoke the constructor's CREATE TABLE path: lost
+        # ownership tables are evidence of corruption, never an empty registry.
+        registry = cls.__new__(cls)
+        registry._set_policy(requested, capacity=capacity, managed_units=managed_units)
+        registry._existing_only = True
+        registry._initialized = True
+        with registry._transaction():
+            pass
+        return registry
+
     @property
     def capacity(self):
         return dict(self._capacity) if self._capacity is not None else None
 
     def __init__(self, database, *, capacity=None, managed_units=False):
         _identity()  # Reject unsupported workers before creating any ledger files.
+        self._set_policy(database, capacity=capacity, managed_units=managed_units)
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        self._existing_only = False
+        self._initialized = False
+        with self._transaction() as connection:
+            tables = _ledger_tables(quantities=self.capacity is not None, managed_units=managed_units)
+            for name in ('metadata', 'leases'):
+                connection.execute(tables[name])
+            for key, value in self.metadata.items():
+                connection.execute('INSERT OR IGNORE INTO metadata VALUES (?,?)', (key, value))
+                _require(connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()[0] == value,
+                         'reservation_ledger_schema_or_worker_changed')
+            if managed_units:
+                connection.execute(tables['managed_unit_intents'])
+        self._initialized = True
+
+    def _set_policy(self, database, *, capacity, managed_units):
         _require(type(managed_units) is bool and (not managed_units or capacity is not None),
                  'managed_unit_budget_policy_required')
         self.managed_units = managed_units
         self.requested_path = Path(database).absolute()
         _require(not self.requested_path.is_symlink(), 'reservation_database_symlink')
         self.path = self.requested_path.resolve(strict=False)
-        self.path.parent.mkdir(parents=True, exist_ok=True)
         self.host = socket.gethostname()
         self._capacity = _quantities(capacity, capacity=True, managed_units=managed_units) if capacity is not None else None
-        self.disk_device = self.path.parent.stat().st_dev if capacity is not None else None
+        self.disk_device = _disk_device(self.path.parent) if capacity is not None else None
         self.schema = '3' if managed_units else '2' if self.capacity is not None else '1'
         self.metadata = {'schema_version': self.schema, 'worker_host': self.host}
         if self.capacity is not None:
             self.metadata['capacity'] = _json(self.capacity)
             self.metadata['disk_device'] = str(self.disk_device)
-        self._initialized = False
-        with self._transaction() as connection:
-            connection.execute('CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY, value TEXT NOT NULL)')
-            connection.execute('CREATE TABLE IF NOT EXISTS leases ('
-                               'token TEXT PRIMARY KEY, job_id TEXT UNIQUE NOT NULL, owner TEXT NOT NULL, '
-                               'resources TEXT NOT NULL, state TEXT NOT NULL CHECK(state IN (\'held\',\'released\')), '
-                               'created REAL NOT NULL, deadline REAL NOT NULL, updated REAL NOT NULL, release_note TEXT'+
-                               (', demands TEXT NOT NULL' if self.capacity is not None else '')+
-                               (', controller TEXT NOT NULL' if managed_units else '')+')')
-            for key, value in self.metadata.items():
-                connection.execute('INSERT OR IGNORE INTO metadata VALUES (?,?)', (key, value))
-                _require(connection.execute('SELECT value FROM metadata WHERE key=?', (key,)).fetchone()[0] == value,
-                         'reservation_ledger_schema_or_worker_changed')
-            if managed_units:
-                connection.execute('CREATE TABLE IF NOT EXISTS managed_unit_intents ('
-                                   'attempt_id TEXT PRIMARY KEY, token TEXT NOT NULL, '
-                                   'directory TEXT UNIQUE NOT NULL, state TEXT NOT NULL, intent TEXT NOT NULL)')
-        self._initialized = True
 
     @contextmanager
     def _transaction(self):
@@ -145,7 +214,8 @@ class Reservations:
         _require(self.requested_path.resolve(strict=False) == self.path, 'reservation_database_alias_changed')
         if self.capacity is not None:
             _require(self.path.parent.stat().st_dev == self.disk_device, 'reservation_database_filesystem_changed')
-        connection = sqlite3.connect(self.path, timeout=10, isolation_level=None)
+        connection = (sqlite3.connect(self.path.as_uri() + '?mode=rw', uri=True, timeout=10, isolation_level=None)
+                      if self._existing_only else sqlite3.connect(self.path, timeout=10, isolation_level=None))
         connection.row_factory = sqlite3.Row
         try:
             _require(connection.execute('PRAGMA journal_mode=WAL').fetchone()[0] == 'wal', 'reservation_wal_unavailable')
