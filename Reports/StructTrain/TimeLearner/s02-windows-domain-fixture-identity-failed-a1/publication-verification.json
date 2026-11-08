@@ -1,0 +1,46 @@
+{
+  "kind": "failed_windows_domain_fixture_preparation",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "terminal": {
+    "passed": false,
+    "build_execution_accepted": false,
+    "gates_passed": 0,
+    "expected_cases": 18,
+    "runtimes_unchanged": true,
+    "diagnostic_only": true,
+    "scientific_verdict": null,
+    "training_certificate_eligible": false,
+    "scientific_worker_admitted": false,
+    "classification_evaluated": false,
+    "whole_plan_complete": false,
+    "publication_ready_for_independent_metadata_review": false
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "descendants_remaining",
+    "validity": "valid",
+    "reason": "descendants_remaining",
+    "returncode": 12,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [
+      11380,
+      15172
+    ],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 12,
+    "wall_seconds": 76.01663220021874,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-ac7d0193-52ac-427e-8fee-c9718e117df4"
+  },
+  "kernel_job_state": "absent",
+  "identified_configure_failure": "root sparse checkout excluded tracked Libraries/Libraries.cpp",
+  "numerical_tests_started": false,
+  "scientific_worker_admitted": false,
+  "whole_plan_complete": false
+}
