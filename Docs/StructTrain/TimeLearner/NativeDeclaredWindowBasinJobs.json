@@ -43,18 +43,50 @@
     "job": "s07-native-basin-bridge-m40-a2",
     "root": "51566b251a087589411d0a6bbb848de7d0273b6e",
     "pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
-    "state": "running_native_tests_after_sdk_build",
+    "state": "closed_actual_sdk_and_native_bridge_accepted",
     "unit": "timelearner-07bd9926-abca-4a18-8b0c-29e5c3008aca.service",
     "invocation_id": "517e88dedb8c46ed97ffde9870ec851e",
     "initial_main_pid": 2647474,
     "initial_start_ticks": "320454836",
     "request_sha256": "640daa6f9b113a6f3a4e2201fb7496e0f5a91461068784a1a284c40cc7d00efe",
     "cpp_tests_planned": 140,
-    "cpp_tests_confirmed_passed": 130,
+    "cpp_tests_confirmed_passed": 140,
     "python_tests_confirmed_passed": 43,
     "previously_failed_branch_input1_at_2000_now_passed": true,
-    "terminal_result_verified": false,
+    "terminal_result_verified": true,
     "native_geometry_independent_python_replay": false,
-    "do_not_restart_on_poll_timeout": true
+    "do_not_restart_on_poll_timeout": true,
+    "original_terminal_passed": true,
+    "evidence_commit": "7ec9d4ff731a7775903080d6a96b5d5a9febe340",
+    "receipt": "NativeDeclaredWindowBasinBridgeM40A2Verification.json",
+    "kernel_closures_verified": 31,
+    "lease_released": true,
+    "source_files_verified": 36,
+    "native_records": {
+      "valid": 8,
+      "ambiguous": 2,
+      "partial": 4
+    },
+    "native_csv_ab_equal": 28
+  },
+  "reader_attempts": [
+    {
+      "job": "s07-declared-window-basin-reader-m40-a1",
+      "tool_root": "1de038cc72e6cb6217233d938939385b9f464945",
+      "state": "closed_failed_csv_parsed_as_json",
+      "unit_tests_observed": 23,
+      "unit_tests_passed": 22,
+      "actual_native_replays_attempted": 0,
+      "evidence_commit": "38d5374b62fd3c3e6bd50f5dd47d1359edcc6907",
+      "receipt": "DeclaredWindowBasinReaderM40A1NegativeVerification.json",
+      "original_negative_preserved": true
+    }
+  ],
+  "reader_fix_prepared": {
+    "root": "f71c16b46d3c8150eb860be2aeb6949e57247642",
+    "unit_tests": 25,
+    "actual_native_records_planned": 14,
+    "production_fix": "capture referenced files as bytes; parse JSON envelopes by role; CSV checked by native trace reader",
+    "no_model_rerun": true
   }
 }

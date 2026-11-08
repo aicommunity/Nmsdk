@@ -481,16 +481,20 @@ fixture требовал effective revision != base даже при уже ну�
 Пик и13 tamper checks этого case прошли; исходный terminal=false сохранён.
 Применён отдельный root-only fix51566b2: реальный полный connection readback и
 равенство/неравенство revision по факту изменения routing. Production physics
-и selector не менялись. После forensic capture и Git-публикации первой попытки запущен отдельный A2:
-130/140 C++ и43 Python уже прошли, включая прежний failed BranchInput1At2000;
-оставшиеся20k/negative bridge cases ещё выполняются. Старый A1 не перезапускался.
-[Квитанция отрицательного A1](NativeDeclaredWindowBasinBridgeM40A1NegativeVerification.json)
-подтверждает его точные129PASS/1FAIL/10not-run и28 побайтных CSV A/B,
-четыре сохранённых native diagnostics и неизменность исходной физики.
-[Точные bindings и состояние](NativeDeclaredWindowBasinJobs.json).
-Независимый Python reader подготовлен отдельным tool root1de:23 tests и replay
-14 actual records будут выполнены после закрытия SDK job без изменения его
-source/runtime. Его результаты пока не приняты.
+и selector не менялись. После forensic capture и Git-публикации первой попытки отдельный A2 прошёл
+все140 C++ и43 Python. [Квитанция](NativeDeclaredWindowBasinBridgeM40A2Verification.json)
+подтверждает8 valid/2 ambiguous/4 partial native records, все31 kernel closures,
+реальный root CMake/SDK build,36 source hashes,327 resources,28 CSV A/B byte-equal.
+Это принимает native diagnostic bridge, не полный Train pipeline.
+[Отрицательный A1](NativeDeclaredWindowBasinBridgeM40A1NegativeVerification.json)
+остаётся129PASS/1FAIL/10not-run. Его4 failures относятся к одному case207;
+содержимое первичных данных не исправлялось.
+
+Независимый reader1de на M40 прошёл22/23: файловый загрузчик ошибочно разбирал
+CSV как JSON. [Отказ](DeclaredWindowBasinReaderM40A1NegativeVerification.json)
+сохранён;14 actual replays не выполнялись. Подготовлен исправленный readerf71:
+25 unit tests, затем14 actual records, без новых запусков моделей.
+[Точные attempts/bindings](NativeDeclaredWindowBasinJobs.json).
 Typed Train integration остаётся следующим обязательным шагом. Старый v1 и
 исторические результаты не переоцениваются.
 
@@ -504,7 +508,10 @@ Typed Train integration остаётся следующим обязательн
 Исходные неуспешные тестовые/служебные попытки сохранены; точечная операторская
 починка двух собственных legacy controller leases не ослабила recovery API.
 
-Миграция manifest245 принята; следующая отдельная группа —109 historical
-RootReports Python snapshots. Их active imports не найдены; текущие numeric
-primary/models/archives/report bodies сохраняются. Удаление и history retrieval
-ещё проверяются в отдельной ветке; весь этап9 пока не завершён.
+Миграция manifest354 принята:352 retired+2 moved. Удалены109 historical
+RootReports Python snapshots; оба worker проверили production history CLI354
+и отказ восстановленного пути. Все86126 остальных Reports blobs сохранены;
+[отчёт](RootReportSnapshotRetirement.ru.md),
+[receipt](RootReportSnapshotRetirementVerification-20261108.json).
+В поддерживаемом Reports prefix loose scripts больше нет; полный этап9 открыт
+из-за оставшихся Bin tools/анализаторов и сквозной приёмки миграции.
