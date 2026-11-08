@@ -190,4 +190,3 @@ class PortableMatchedOmissionTest(unittest.TestCase):
     def test_verdict_and_training_eligibility_never_follow_process_success(self):
         for field,value in [('diagnostic_only',False),('training_certificate_eligible',True),('scientific_verdict','PASS')]:
             document, primary = fixture(); document[field] = value; self.rejected(document,primary)
-
