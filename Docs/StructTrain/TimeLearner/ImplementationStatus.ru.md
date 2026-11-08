@@ -335,8 +335,8 @@ final verification, полный composite export/import и научная ма�
 Последняя полная компиляция root818dd80/Pulse3accbed вернула0, но штатный
 backend отверг запуск из-за дочернего процесса неизвестной identity.
 [Сохранённый отказ](https://github.com/aicommunity/Nmsdk/blob/6a98929759d0af8fcdc2f1fc980e9e7ca467e942/Docs/StructTrain/TimeLearner/WindowsDomainBuildRejectionVerification.json)
-не отменён: новые18 portability checks ещё не стартовали, scientific worker
-не принят. Последующая короткая проверка quiescent build имеет отдельный
+не отменён; scientific worker не принят. Новые18 portability checks теперь
+выполняются отдельным A6, описанным ниже. Последующая короткая проверка quiescent build имеет отдельный
 результат и не переписывает этот отказ. Пользовательский C:/Projects/Nmsdk
 в эти изменения не включён.
 
@@ -367,19 +367,15 @@ VS ENV flag и отдельная256MiB quota только для warm/no-op д�
 единственной причины прошлых descendants и не scientific worker admission.
 [Квитанция A5](WindowsDomainBoundedBuildA5Verification.json).
 
-18 native portability gates ещё не запущены: чтение свободной physical memory
-показало690614272 bytes, а подготовленный профиль требует3GiB+256MiB reserve.
-Чужие приложения не останавливались. Проверки загрузки DLL, наблюдений и моделей
-на текущем root818/Pulse3acc остаются следующим отдельным шагом. FCC matched
-implementation этой Windows сборкой не проверялась.
-
-
-[Подготовленное задание Windows18](WindowsDomainNative18PreparedManifest.json)
-фиксирует18 test IDs, compiled source/runtime SHA, cooperative capture и лимиты.
-Это декларация следующей проверки, не результат и не действующий общий Windows
-CLI. Перед запуском требуется свежий штатный runtime/resource preflight;
-отдельного разрешения пользователя на уже согласованный объём не требуется.
-
+18 native portability checks запущены отдельным A6 после свежего preflight:
+свободная RAM10915479552 bytes,57 прежних owned JobObjects отсутствуют,
+source/runtime818dd80/Pulse3accbed совпали с accepted warmA5.
+[Точное задание Windows18](WindowsDomainNative18PreparedManifest.json)
+содержит task/worker/plan identity,18 test IDs, cooperative DLL capture и лимиты
+3GiB+256MiB reserve. Первые13 cases прошли; terminal/evidence ещё ожидаются.
+Повторной сборки и обновления исходников/runtime не было, пользовательский
+C:/Projects/Nmsdk не затронут. Это отдельный portability gate, не FCC/matched
+implementation и не общий scientific worker admission.
 
 ## Portable witness и single-owner setter: подготовка 8 ноября
 
@@ -400,7 +396,7 @@ runtime acceptance.
 для native-owned модели. Прежнее значение возвращает true без child writes;
 изменение отклоняется. Legacy N0/N1 сохраняют прежнюю семантику. Подготовлены10
 real-storage ownership/lifecycle/import cases, включая zero-packet ExternalStop
-frozen diagnostic import без фиктивного сертификата; отдельный ASan gate выполняется.
+frozen diagnostic import без фиктивного сертификата; все10 прошли на M40/ASan.
 [Контракт и ограничения](NormalizationPropertyContracts.ru.md).
 
 ClDesc двух learner в Bin918ae5e уточнены: Step — абсолютное сопротивление
@@ -416,9 +412,12 @@ core.worktree-привязка только новой копии. Две соз
 [Operation receipt](TimeLearnerBinWorktreeBindingCorrection.json).
 
 Новый отдельный ASan job `s07-native-step-m40-a1` использует root4bfab020,
-Pulse2c3eb8d/Bin918ae5e: план90 C++/43 Python, Python уже прошли,
-сборка выполняется. Kernel binding подтверждён; источник и ресурсы этого job
-заморожены. Проверки прежних снимков не переносятся автоматически на guard.
+Pulse2c3eb8d/Bin918ae5e: все90 C++/43 Python приняты;28 CSV A/B совпали.
+[Independent receipt](NativeResistanceStepAndCodecM40A1Verification.json)
+подтверждает29 source hashes, actual loaded files,327 resource files по Git,
+неизменность обоих runtime и16 kernel/lease closures. Сохранены11 исходных
+operational needs_review и22 notices; научного PASS из них не создавали.
+Проверки прежних снимков не переносились автоматически на guard.
 Исходные этапы1–12 и научная матрица остаются частично выполненными;
 только этап0 полностью принят.
 

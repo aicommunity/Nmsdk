@@ -10,7 +10,7 @@ Code review PulseLib `025d809f7b86cc79e18ddd711c6adc40e2396bf8` охватыва
 | Свойство | Тип/default/единицы | Фактический setter/consumer и lifecycle | Условия применения и проверки |
 |---|---|---|---|
 | NormalizationMode | int, 1; N0=0 structural, N1=1 tip Rs | Setter отвергает иные значения, а при native declaration — любое отличие от объявленного mode. N0 очищает derived resistance bounds; N1 может принять реальные tips только при полном readback и принудительно задаёт Ns=1 | Native search.normalization должен совпасть с ModelSpec. N0 и N1 имеют одинаковую CapturedPerInput цель, но разные управляющие переменные. Не требовать разных L; проверять действующий bank/updates |
-| SynapseResistanceStep | double, 1e9 Ом | Legacy setter в N0 применяет candidate value к extra Exc synapses k>=2 существующих tip membranes; в N1 сразу возвращает true без физического эффекта. Новый candidate guard при NativeTrainingOwned/NativeModelDeclaration/NativeRecognition принимает только прежнее значение и сразу возвращается без child writes; изменённое значение отклоняется до физической записи | N1-factor no-effect сохраняется в legacy. Native editor управляет bank через explicit policy и readback, не этот legacy setter. Guard ещё требует отдельного серверного gate; он не добавляет finite/positive validation и не меняет физику |
+| SynapseResistanceStep | double, 1e9 Ом | Legacy setter в N0 применяет candidate value к extra Exc synapses k>=2 существующих tip membranes; в N1 сразу возвращает true без физического эффекта. Новый candidate guard при NativeTrainingOwned/NativeModelDeclaration/NativeRecognition принимает только прежнее значение и сразу возвращается без child writes; изменённое значение отклоняется до физической записи | N1-factor no-effect сохраняется в legacy. Native editor управляет bank через explicit policy и readback, не этот legacy setter. Guard прошёл scoped ASan gate на M40 (10 storage cases); он не добавляет finite/positive validation и не меняет физику |
 | SynapseResistanceBase | double, 8.6e7 Ом | Setter отвергает <=0, но не NaN/Inf. Legacy baseline и fallback для загружаемых/невалидных tips; изменение само по себе не заменяет все live Rs | Native initial individual Rs принадлежат ModelSpec/storage и learned state. Нельзя объявлять uniform live replacement без effective readback. Нужны cold/load ordering/anchor/per-input controls |
 | ResistanceAdjustGain | double, 0.4, безразмерный | Setter принимает 0<g<=1, NaN не отклоняется. Legacy P-regulator; EffectiveResistanceGain динамически меняется при overshoot/undershoot | Не параметр native bounded candidate search. Gain change требует реального regulator-path positive control, а не различия результатов любой пары runs |
 | AttenuationGamma | double, -1 (auto); показатель на сегмент | Setter не валидирует; <=0 инициирует оценку/fallback. Legacy используется в attenuation feedforward при length edit; auto-estimator может перезаписывать | Не измеренная амплитуда и не критерий сходимости. Native measured search не подтверждает timing по gamma. Проверять valid amplitude, Ns/Rs context, конечность и реальное применение |
@@ -116,5 +116,9 @@ historical scaled conversion и calibrated recognition этим не подтв�
 `NativeResistanceStepOwnership.*:LegacyResistanceStep.*` в существующем
 `Test_PulseLib_StorageComponents`.
 
-Проверки кода/диффа локальные; C++ build и runtime tests выполняются отдельно
-на серверах. До receipt нового gate finding не считается runtime-resolved.
+Адресный серверный gate принят на M40: все10 storage cases прошли в составе
+90 C++/43 Python с ASan `detect_leaks=0`, без skipped и без leak claim.
+[Независимая квитанция](NativeResistanceStepAndCodecM40A1Verification.json)
+связывает source2c3eb8d, Bin918ae5e, actual loaded files и неизменные resources.
+Это исправление ordinary setter в перечисленных boundary states, не полная
+матрица нормализации, connected sources или доказательство успешного обучения.
