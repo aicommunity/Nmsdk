@@ -1,0 +1,116 @@
+{
+  "kind": "native_declared_basin_bridge_sdk_assertion_failure",
+  "schema_version": 1,
+  "root": "663baa837e9e698b8e851b828cbabdef128db68b",
+  "pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+  "worker": "m40",
+  "capture_phase": "postclosure_observer_only_original_failed",
+  "original_terminal_native_basin_bridge_gate_passed": false,
+  "original_orchestrator_success": false,
+  "original_outputs_preserved": true,
+  "original_worker_terminals_reclassified": false,
+  "manifest_fingerprint_scope": "prelaunch_snapshot_with_null_loaded_process_files_actual_loaded_files_audited_separately",
+  "publication_observer_attempt": "observer-negative-a1",
+  "original_native_needs_review_statuses_preserved": 15,
+  "new_build_or_model_run": false,
+  "expected_cpp_cases": 140,
+  "native_gates_observed": 20,
+  "native_gates_passed": 19,
+  "native_cpp_cases_observed": 130,
+  "native_cpp_cases_passed": 129,
+  "native_cpp_cases_failed": 1,
+  "native_cpp_cases_not_dispatched": 10,
+  "not_dispatched_gates": [
+    {
+      "name": "basin_native4",
+      "tests": 1
+    },
+    {
+      "name": "basin_native5",
+      "tests": 1
+    },
+    {
+      "name": "basin_native6",
+      "tests": 1
+    },
+    {
+      "name": "basin_native7",
+      "tests": 1
+    },
+    {
+      "name": "basin_native8",
+      "tests": 1
+    },
+    {
+      "name": "basin_native9",
+      "tests": 1
+    },
+    {
+      "name": "basin_native10",
+      "tests": 1
+    },
+    {
+      "name": "basin_native11",
+      "tests": 1
+    },
+    {
+      "name": "basin_native12",
+      "tests": 1
+    },
+    {
+      "name": "basin_native13",
+      "tests": 1
+    }
+  ],
+  "failed_test_ids": [
+    "NativeDeclaredWindowBasinExecution/BranchInput1At2000"
+  ],
+  "failed_native_leaf_unit_metadata_retained_without_live_processes": true,
+  "native_resistance_step_ownership_checks_passed": 10,
+  "native_declared_basin_bridge_cases_passed": 3,
+  "native_declared_basin_artifact_count": 4,
+  "native_declared_basin_cpp_outcomes_available": {
+    "valid": 4,
+    "ambiguous": 0,
+    "partial_null": 0
+  },
+  "independent_old_context_reader_phase_reached": false,
+  "geometry_independent_python_replay": false,
+  "root_cmake_three_targets_configured_built_exercised": true,
+  "full_sdk_matrix_accepted": false,
+  "python_tests_passed_original_server": 43,
+  "independent_portable_readers_original_server": 0,
+  "independent_fixture_readers_original_server": 0,
+  "postclosure_native_csv_byte_equal": 28,
+  "postclosure_native_csv_byte_compared": 28,
+  "current_runtime_before_postclosure_equal": true,
+  "current_runtime_original_after_snapshot_exists": false,
+  "old_runtime_before_after_postclosure_equal": true,
+  "resource_before_postclosure_equal": true,
+  "resource_original_after_snapshot_exists": false,
+  "unique_actual_loaded_files_hash_verified": 77,
+  "materialized_resource_files_hash_verified": 327,
+  "fixture_source_hashes_postclosure": 36,
+  "tool_python_source_hashes_postclosure": 411,
+  "cmakecache_capture_phase": "postclosure_only_original_producer_did_not_reach_capture",
+  "original_source_capture_completed": false,
+  "postclosure_source_captured_ready": true,
+  "original_missing_phases_preserved": [
+    "fixture-source-hashes.json",
+    "CMakeCache.txt",
+    "current-runtime-after.json",
+    "resource-files-after.json",
+    "cross-language-result.json",
+    "native-basin-records.json",
+    "native-waveform-ab.json"
+  ],
+  "asan_options": "detect_leaks=0",
+  "asan_gate": true,
+  "leak_check_claimed": false,
+  "matched_native_training_service_integration": false,
+  "training_certificate_eligible": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "source_review_diagnosis": "Root fixture requires effective revision != base even when Branch input1 routing is already identical; line207 assertion failed four times; recorded geometry is valid. Diagnosis does not reclassify original failure; correction requires separate immutable pin and attempt.",
+  "created_utc": "2026-11-08T09:14:17.045844+00:00"
+}

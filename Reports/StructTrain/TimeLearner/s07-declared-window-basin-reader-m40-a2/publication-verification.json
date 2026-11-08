@@ -1,0 +1,139 @@
+{
+  "kind": "declared_window_basin_independent_reader_publication",
+  "schema_version": 1,
+  "facts": {
+    "kind": "declared_window_basin_independent_python_reader_gate",
+    "schema_version": 1,
+    "tool_root": "f71c16b46d3c8150eb860be2aeb6949e57247642",
+    "compiled_root": "51566b251a087589411d0a6bbb848de7d0273b6e",
+    "compiled_pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+    "primary_evidence_commit": "7ec9d4ff731a7775903080d6a96b5d5a9febe340",
+    "primary_evidence_prefix": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a2",
+    "primary_archive_sha256": "fe4ebc07082d3a51e1b3131cc6faf9d6737aad0b5bc2aa35eea4a455be33264d",
+    "original_terminal_success": true,
+    "original_outputs_preserved": true,
+    "python_unit_tests_passed": 25,
+    "actual_records_audited": 14,
+    "complete_geometry_replays": 10,
+    "complete_valid": 8,
+    "complete_ambiguous": 2,
+    "partial_nonpromotion_checks": 4,
+    "partial_rejection_reason_recomputed": false,
+    "native_execution_verified_by_python": false,
+    "causal_lineage_verified_by_python": false,
+    "tool_python_source_hashes_verified": 413,
+    "source_materialization": "bare pinned Git and Scripts archive projection only",
+    "full_root_source_closure_accepted": false,
+    "source_materialization_diagnostics_status": "needs_review",
+    "source_archive_omitted_Docs_blob_diagnostic_lines": 1,
+    "prior_reader_failure_evidence": "38d5374b62fd3c3e6bd50f5dd47d1359edcc6907",
+    "actual_python_loaded_file_count": 17,
+    "protected_current_and_old_runtime_before_after_postclosure_equal": true,
+    "new_cpp_or_model_execution": false,
+    "compiled_source_cache_or_runtime_modified": false,
+    "training_certificate_eligible": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "created_utc": "2026-11-08T10:24:13.013090+00:00"
+  },
+  "original_output_unchanged": true,
+  "original_container_unchanged": true,
+  "fresh_closure_after_archive": {
+    "job": "s07-declared-window-basin-reader-m40-a2",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "3bb7d4f89bd34a46367cdf9af00c01f1d2666c7e7b1302c5fe2ecc28cd95570a",
+        "unit": "timelearner-93540dd1-7c92-4f80-97f3-153c775ad34a.service",
+        "invocation_id": "39da1a78c5544fd2a1ed02271c03be5a",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-93540dd1-7c92-4f80-97f3-153c775ad34a.service",
+        "initial_main_pid": 2735872,
+        "initial_start_ticks": "320858044",
+        "sha256": "ad14b58fc59ddb122d4eb38abbee52486d9a2bbf8839719bd191f4e0d2ceb34d"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-93540dd1-7c92-4f80-97f3-153c775ad34a.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "leases": [
+      {
+        "token": "71087f0b-e637-48d6-803b-534fba9f7c88",
+        "job_id": "s07-declared-window-basin-reader-m40-a2",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 2735872,
+          "start_ticks": "320858044",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-basin-bridge-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-basin-bridge-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/incoming-declared-window-basin-reader-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/incoming-declared-window-basin-reader-m40-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-declared-window-basin-reader-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-declared-window-basin-reader-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-reader-root-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-reader-root-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-root-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-root-m40-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794133382.98321,
+        "deadline": 1794133502.98321,
+        "updated": 1794133390.9327772,
+        "release_note": "Bounded pure gate/source preparation worker closed; assertion verdict remains separate.",
+        "heartbeat_expired": false,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ]
+  },
+  "archive_members": 1140
+}

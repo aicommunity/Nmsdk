@@ -1,0 +1,261 @@
+{
+  "kind": "windows_native_domain18_scoped_acceptance",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "pulse": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+  "terminal": {
+    "passed": true,
+    "groups_finished": 9,
+    "expected_cases": 18,
+    "runtime_inventories_unchanged": {
+      "runtime-a6": true,
+      "runtime-windows-assigned-sdk-a1": true,
+      "runtime-fixture-identity-windows-a2": true
+    },
+    "scientific_worker_admitted": false,
+    "training_certificate_eligible": false,
+    "classification_evaluated": false,
+    "whole_plan_complete": false
+  },
+  "source_closure": {
+    "root": {
+      "head": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "3b9ca28d8a86c1ab30af50614855288c1f66d05a",
+      "head": "3b9ca28d8a86c1ab30af50614855288c1f66d05a",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+      "head": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "head": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "status": ""
+    }
+  },
+  "kernel_jobs": [
+    {
+      "label": "capture_codec10",
+      "job_name": "Local\\TimeLearner-2c8febcd-3984-4dff-851f-87d8470d6072",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "Classic2000",
+      "job_name": "Local\\TimeLearner-1448d37e-9189-4697-b5fe-45d298e5a062",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "Classic20000",
+      "job_name": "Local\\TimeLearner-e33b1600-720a-4e0c-ba89-106952b0d23f",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "Branch2000",
+      "job_name": "Local\\TimeLearner-cd89c4e4-7fd0-4818-875b-a445b3cfda59",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "Branch20000",
+      "job_name": "Local\\TimeLearner-3c6df9f5-ac14-494a-b30c-204bf4516e80",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "ClassicN6dimensions",
+      "job_name": "Local\\TimeLearner-06cf3344-9f3c-4080-aee6-a97721cd2f7d",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "BranchN6dimensions",
+      "job_name": "Local\\TimeLearner-c0b5f7f4-b84f-4820-8198-4cc1cbc20874",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "ClassicN6burst",
+      "job_name": "Local\\TimeLearner-1209400c-d73a-4619-ae52-d1f8c8356631",
+      "kernel_state": "absent"
+    },
+    {
+      "label": "BranchN6burst",
+      "job_name": "Local\\TimeLearner-1f147d79-4b49-449c-ae9a-29e0d8c5c807",
+      "kernel_state": "absent"
+    }
+  ],
+  "groups": [
+    {
+      "label": "capture_codec10",
+      "ids": [
+        "NativeResponseDomainCapture/ClosedRecordBindsActualEventsAndDistinctBaseRevision",
+        "NativeResponseDomainCapture/FailedAppendCannotBeRepairedByAnotherFrame",
+        "NativeResponseDomainCapture/UnknownClosureDiagnosticCannotHideBehindInvalidFlag",
+        "NativeResponseDomainCapture/ChangedSelectorOrBaseCannotCloseCapture",
+        "NativeResponseDomainCapture/ChangedEventOrCountCannotCloseCapture",
+        "NativeResponseDomainCapture/ReproducedLegacyAmbiguityDoesNotEraseCompleteWaveform",
+        "NativeResponseDomainCapture/LostFrameAndCancelledClosureRemainIncomplete",
+        "NativeResponseDomainCapture/ChangedMeasuredPeakCannotHideBehindSameValidityAndReasons",
+        "NativeResponseDomainCodec/RequiresClosedCaptureAndExactPrimaryBytes",
+        "NativeResponseDomainCodec/UsesItsOwnImmutableClosureAndKeepsDiagnosticStatus"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "Classic2000",
+      "ids": [
+        "NativeResponseDomainBridge/Classic2000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "Classic20000",
+      "ids": [
+        "NativeResponseDomainBridge/Classic20000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "Branch2000",
+      "ids": [
+        "NativeResponseDomainBridge/Branch2000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "Branch20000",
+      "ids": [
+        "NativeResponseDomainBridge/Branch20000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "ClassicN6dimensions",
+      "ids": [
+        "NativeLearnerDimensions/ClassicSixInputs2000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "BranchN6dimensions",
+      "ids": [
+        "NativeLearnerDimensions/BranchSixInputs2000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "ClassicN6burst",
+      "ids": [
+        "NativeBurstAssignment/ClassicSix2000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    },
+    {
+      "label": "BranchN6burst",
+      "ids": [
+        "NativeBurstAssignment/BranchSix2000"
+      ],
+      "runtime_fingerprint": null,
+      "cooperative_capture": "completed"
+    }
+  ],
+  "actual_module_capture": [
+    {
+      "label": "capture_codec10",
+      "files": 47,
+      "pid": 15152,
+      "creation_filetime": "134385984086597448"
+    },
+    {
+      "label": "Classic2000",
+      "files": 47,
+      "pid": 14252,
+      "creation_filetime": "134385984151669892"
+    },
+    {
+      "label": "Classic20000",
+      "files": 47,
+      "pid": 8248,
+      "creation_filetime": "134385984258639702"
+    },
+    {
+      "label": "Branch2000",
+      "files": 47,
+      "pid": 4148,
+      "creation_filetime": "134385984505963704"
+    },
+    {
+      "label": "Branch20000",
+      "files": 47,
+      "pid": 5084,
+      "creation_filetime": "134385984596227116"
+    },
+    {
+      "label": "ClassicN6dimensions",
+      "files": 47,
+      "pid": 1120,
+      "creation_filetime": "134385984839252312"
+    },
+    {
+      "label": "BranchN6dimensions",
+      "files": 47,
+      "pid": 11112,
+      "creation_filetime": "134385985093246424"
+    },
+    {
+      "label": "ClassicN6burst",
+      "files": 47,
+      "pid": 17164,
+      "creation_filetime": "134385985225356535"
+    },
+    {
+      "label": "BranchN6burst",
+      "files": 47,
+      "pid": 10020,
+      "creation_filetime": "134385985476996386"
+    }
+  ],
+  "cases": 18,
+  "domain_reader_checks": 4,
+  "reader_root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "fcc_reader_root_matched": false,
+  "source_hash_capture_scope": "postclosure readback, not retroactive pre-execution attestation",
+  "all_three_runtime_inventories_unchanged": true,
+  "new_build_performed": false,
+  "prior_failed_attempts_reclassified": false,
+  "scientific_worker_admitted": false,
+  "whole_plan_complete": false,
+  "task_closure": {
+    "task_state": 3,
+    "running_count": 0,
+    "last_result": 0
+  }
+}

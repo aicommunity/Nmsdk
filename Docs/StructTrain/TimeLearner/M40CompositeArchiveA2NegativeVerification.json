@@ -1,0 +1,115 @@
+{
+  "kind": "independent_M40_ASan206_original_failed_attempt_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "e89e166e3913e4e225eebd75a329b7c52f7d4c8f",
+  "parent_root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+  "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+  "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "archive_members_verified": 1812,
+  "archive_bytes": 1417400,
+  "archive_sha256": "b0236a5a1cbb4487587fa4b67e4d942aae85cde3f9ec75f2d53687ab066c6d49",
+  "pack_bytes": 1512124,
+  "pack_sha256": "50a0ef4c5c0f259712530ae574e997ed09eb98a014eacf63bd7822ff159a6b98",
+  "original_terminal_passed": false,
+  "build_link_passed": true,
+  "declared_cpp_cases": 206,
+  "actual_JUnit_completed": 144,
+  "actual_JUnit_assertion_passed": 143,
+  "actual_JUnit_failed": 1,
+  "not_run": 62,
+  "failure": {
+    "id": "NativeCompositeService/ClassicCalculateMode0Exact",
+    "gate": "composite-native-46",
+    "failure_text": [
+      "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:428\nExpected equality of these values:\n  f.owner->NativeTrainingController().State()\n    Which is: 4-byte object <03-00 00-00>\n  NativeTrainingState::CapturingReferences\n    Which is: 4-byte object <01-00 00-00>\nnative_composite_plan_protocol_mismatch",
+      "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:435\nExpected equality of these values:\n  service.Outcome()\n    Which is: 4-byte object <05-00 00-00>\n  TrainingStatus::Exact\n    Which is: 4-byte object <02-00 00-00>\nnative_composite_plan_protocol_mismatch"
+    ],
+    "declaration_line": 530
+  },
+  "failure_lines": [
+    428,
+    435
+  ],
+  "all56leaf_and_outer_kernel_groups_closed_observed_server": true,
+  "whole_worker_reservation_released": true,
+  "original_failed_unit_metadata_preserved": true,
+  "source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-storage-recipes",
+      "commit": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "files": 968
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-matched-omission",
+      "commit": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "files": 313
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    }
+  ],
+  "all7gitlinks_clean_matching": true,
+  "source_capture_ready_before_mutation": true,
+  "actual_loaded_files_metadata_verified": 74,
+  "address_sanitizer_loaded_all56leaves": true,
+  "ASAN_OPTIONS": "detect_leaks=0",
+  "sanitizer_error_patterns_in_captured_streams": false,
+  "full_ASan206_acceptance": false,
+  "RDK_USE_LLM": true,
+  "RDK_LLM_BUILD_EMBEDDED": true,
+  "two_prior_core_runtimes_before_after_postclosure_equal": true,
+  "current_runtime_before_postclosure_equal": true,
+  "resource327_Git_verified_and_unchanged": true,
+  "actual_six_archive_exports": 0,
+  "archive_growth_sourceguard_cases_executed": 0,
+  "collector_helper_tool_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+  "collector_helper_metadata39_evidence": "54574d03581e04d233b832b331979f27c871bfa1",
+  "explicit_supervisor_STARTED_binding_and_frozen_staged_bytes_independently_verified": true,
+  "source_inventory_derived_from_Git206": true,
+  "planned_vs_actualSDK_vs_compiled_separation_verified": true,
+  "descriptor_build_kernel_test_science_attestation_flags_false": true,
+  "local_numerical_or_CPP_or_unit_execution": false,
+  "new_build_model_or_test_rerun_during_collection": false,
+  "package5_accepted": false,
+  "independent_geometry_scalar_replay": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "git_import": "unpack_objects_no_refs_no_checkout"
+}

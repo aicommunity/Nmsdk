@@ -762,7 +762,17 @@
       "contract": "NormalizationPropertyContracts.ru.md",
       "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
       "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
-      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only",
+      "current_guard_source_commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "current_factor_scope": "legacy N0 absolute extra-contact resistance; legacy N1 no physical effect; native ownership rejects changed ordinary setter before child writes",
+      "scoped_runtime_acceptance": {
+        "status": "accepted",
+        "receipt": "NativeResistanceStepAndCodecM40A1Verification.json",
+        "evidence_commit": "84244771d6f5bbe2fdf097a5d08bde760605e8fb",
+        "host": "10.245.1.17",
+        "asan_options": "detect_leaks=0",
+        "scope": "10 real-storage cases across Classic/Branch N0/N1, construction, Reset/Build, prepared import and zero-packet stopped diagnostic recognition; active search, completed certificates and connected-source bypass remain outside this gate"
+      }
     },
     {
       "component": "NNeuronTimeLearner",
@@ -933,7 +943,17 @@
       "contract": "NormalizationPropertyContracts.ru.md",
       "runtime_acceptance": "partial; conditional factor and full normalization matrix pending",
       "source_commit": "025d809f7b86cc79e18ddd711c6adc40e2396bf8",
-      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only"
+      "factor_scope": "legacy/regulator or explicit native policy; states are diagnostics only",
+      "current_guard_source_commit": "2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b",
+      "current_factor_scope": "legacy N0 absolute extra-contact resistance; legacy N1 no physical effect; native ownership rejects changed ordinary setter before child writes",
+      "scoped_runtime_acceptance": {
+        "status": "accepted",
+        "receipt": "NativeResistanceStepAndCodecM40A1Verification.json",
+        "evidence_commit": "84244771d6f5bbe2fdf097a5d08bde760605e8fb",
+        "host": "10.245.1.17",
+        "asan_options": "detect_leaks=0",
+        "scope": "10 real-storage cases across Classic/Branch N0/N1, construction, Reset/Build, prepared import and zero-packet stopped diagnostic recognition; active search, completed certificates and connected-source bypass remain outside this gate"
+      }
     },
     {
       "component": "NNeuronTimeLearnerBranch",

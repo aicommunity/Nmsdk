@@ -36,7 +36,7 @@ synapse class: после construction, во время reference/search, пос
 Отдельно positive legacy N0 и no-effect N1 controls, heterogeneous bank и
 несовместимый synapse class. Проверка только первого tip Rs недостаточна.
 
-**Candidate correction, ещё без runtime gate.** В отдельной ветке
+**Correction и адресная runtime-проверка.** В отдельной ветке
 `codex/timelearner-native-resistance-step`, Pulse candidate
 `2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b` от Pulse
 `e2c6311c0cdd219e3a52c278ce637bd777584dc6` добавляется ранний guard обоих
@@ -51,9 +51,10 @@ Reset их сохраняет, native mirror/import не используют э
 Основные8 новых storage cases и ещё2 zero-packet stopped diagnostic recognition
 import cases (каждый N0/N1), всего10 без skip/env, с границами покрытия описаны в
 [контракте нормализации](NormalizationPropertyContracts.ru.md#candidate-ownership-guard-для-legacystep).
-Source diff и tests ещё не равны принятому runtime исправлению. Active
-reference/search, completed certificates, connected sources и несовместимые
-synapse equations не следует считать проверенными этим узким gate.
+Scoped correction принято: все10 cases прошли на M40/ASan в составе90 C++
+и43 Python, полный evidence и [independent receipt](NativeResistanceStepAndCodecM40A1Verification.json)
+опубликованы. Active reference/search, completed certificates, connected
+sources и несовместимые synapse equations этим узким gate не проверены.
 
 ## PROPERTY-CONTROL-RISING-001: external rising-edge restart требует решения
 
