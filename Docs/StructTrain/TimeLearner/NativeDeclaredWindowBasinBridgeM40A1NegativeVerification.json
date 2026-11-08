@@ -1,0 +1,106 @@
+{
+  "kind": "independent_native_basin_bridge_sdk_negative_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "89a74d940c2b1e480d1c0201e475c1d49a8fcd59",
+  "parent_root": "663baa837e9e698b8e851b828cbabdef128db68b",
+  "pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+  "evidence_kind": "native_declared_basin_bridge_sdk_assertion_failure",
+  "original_terminal_success": false,
+  "original_failure_and_producers_preserved": true,
+  "native_junit_cases_verified": 130,
+  "native_cpp_passed": 129,
+  "native_cpp_failed": 1,
+  "native_cpp_not_dispatched": 10,
+  "native_gates_verified": 20,
+  "failure_test_id": "NativeDeclaredWindowBasinExecution/BranchInput1At2000",
+  "failure_cpp_line": 207,
+  "failure_assertions": 4,
+  "failure_equal_effective_base_hash": "cb4217d166dd19cfdb2821bed9fb9c863ea08f7864382063310c82c2ece33af4",
+  "actual_bridge_records_available": 4,
+  "actual_bridge_records_cpp_geometry_valid": 4,
+  "bridge_primary_paths": [
+    {
+      "case": "basin_native0",
+      "record": "basin_native0/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "primary_csvs": [
+        "basin_native0/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-0.csv",
+        "basin_native0/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-1.csv",
+        "basin_native0/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-2.csv",
+        "basin_native0/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-3.csv"
+      ]
+    },
+    {
+      "case": "basin_native1",
+      "record": "basin_native1/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/declared-window-basin-diagnostic.json",
+      "primary_csvs": [
+        "basin_native1/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-0.csv",
+        "basin_native1/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-1.csv",
+        "basin_native1/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-2.csv",
+        "basin_native1/native/Classic_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-3.csv"
+      ]
+    },
+    {
+      "case": "basin_native2",
+      "record": "basin_native2/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/declared-window-basin-diagnostic.json",
+      "primary_csvs": [
+        "basin_native2/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-0.csv",
+        "basin_native2/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-1.csv",
+        "basin_native2/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-2.csv",
+        "basin_native2/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i0/native-3.csv"
+      ]
+    },
+    {
+      "case": "basin_native3",
+      "record": "basin_native3/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/declared-window-basin-diagnostic.json",
+      "primary_csvs": [
+        "basin_native3/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-0.csv",
+        "basin_native3/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-1.csv",
+        "basin_native3/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-2.csv",
+        "basin_native3/native/Branch_2000_N2_native_executor_whole_burst_matched_omission_declared_basin_i1/native-3.csv"
+      ]
+    }
+  ],
+  "independent_geometry_or_old_context_replay_phase_executed": false,
+  "server_python_tests_from_original_result": 43,
+  "native_csv_exact_bytes_independently_compared": 28,
+  "archive_members_verified": 769,
+  "archive_bytes": 646224,
+  "archive_sha256": "e06848f9c45140713a5786a64e03ea4b2adcc55a3e0ae454258a4ec0848d0966",
+  "compression_dictionary_bytes": 33554432,
+  "fixture_source_git_hashes_postclosure_verified": 36,
+  "tool_script_git_hashes_postclosure_verified": 411,
+  "original_source_capture_completed": false,
+  "postclosure_source_capture_ready": true,
+  "original_missing_phases_preserved": [
+    "fixture-source-hashes.json",
+    "CMakeCache.txt",
+    "current-runtime-after.json",
+    "resource-files-after.json",
+    "cross-language-result.json",
+    "native-basin-records.json",
+    "native-waveform-ab.json"
+  ],
+  "runtime_before_postclosure_dictionaries_equal": true,
+  "old_runtime_before_after_postclosure_dictionaries_equal": true,
+  "resource_before_postclosure_dictionaries_equal": true,
+  "actual_loaded_file_entries_verified": 77,
+  "immutable_resource_root_git_files_verified": 327,
+  "bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "original_operational_needs_review_notices_preserved": 30,
+  "all_owned_kernel_process_groups_closed": 21,
+  "exact_kernel_units_groups_absent": 20,
+  "failed_leaf_metadata_retained_with_zero_pid_and_absent_kernel_group": 1,
+  "original_lease_released": true,
+  "original_outputs_unchanged_during_publication": true,
+  "metadata_capture_stream_source_copy_failure_preserved_in_completion_note": true,
+  "asan_gate": true,
+  "asan_options": "detect_leaks=0",
+  "leak_check_claimed": false,
+  "new_build_or_models_rerun": false,
+  "local_numerical_tests_executed": false,
+  "training_certificate_eligible": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "pack_sha256": "029be7ab2adb23a973e55a9f15aa3eff2c3f5f8af30c4041beda7594baa92a4e",
+  "git_import": "unpack-objects_no_checkout_no_ref_update"
+}
