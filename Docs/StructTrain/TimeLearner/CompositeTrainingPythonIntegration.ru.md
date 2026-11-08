@@ -107,7 +107,15 @@ logical primary_ref, включая одинаковый SHA в разных pat
 Файлы переносятся в новый snapshot byte-for-byte. Traversal, альтернативные
 написания пути, case-collisions, file/directory conflicts и symlink ancestors
 не допускаются. Некорректный inventory не создаёт output; существующий каталог
-не переписывается. Проверки данного helper ещё pending. Storage integrity сама
-по себе не подтверждает геометрию, native execution, consumed event, source
+не переписывается. Helper и прежние regressions проверены на M40:51/51,
+failures/errors/skips0, source root`bb489c3b3bb69b0d0aeda485350ce8a81ce42c5b`,
+evidence`df9531926815565e7c5c1bc1e890c2dde34b5ccb`.
+32 archive members/31816 bytes, SHA256
+`2efa318d0d1974bcf6799e523c3c3db6b55e979eb8672a88af841e4bf83f5c61`;
+418 точных Git source hashes, все outer/member hashes и owner/kernel closure
+проверены отдельно. Операционный worker и supervisor byte-for-byte те же,
+что в принятой39-suite; менялся только declarative specification.
+[Metadata-сверка](CompositeTrainingPythonPrimaryVerification-20261108.json).
+Storage integrity сама по себе не подтверждает геометрию, native execution, consumed event, source
 lineage или certificate2. Archive/index/record reader и package5 dispatch
 должны проверять их отдельно; helper не wired как готовый learned auditor.
