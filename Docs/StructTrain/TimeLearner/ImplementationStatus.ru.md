@@ -475,8 +475,14 @@ context и не создаёт Train evidence/certificate.
 Механическое выделение общего context validator (Pulse8ee/root666) прошло
 71/71 normal и71/71 ASan: [receipt](MatchedContextMechanicalM40A1Verification.json).
 Это pure harness, отдельно от SDK/native. После его приёмки запущен реальный
-SDK140 на immutable663/c3: сборка завершена,43 Python и118 из140 C++ прошли;
-остальные8 прежних native и14 новых bridge cases ещё выполняются.
+SDK140 на immutable663/c3: сборка завершена,43 Python и129 C++ прошли,
+один из130 исполненных cases упал;10 остальных не запускались. Причина —
+fixture требовал effective revision != base даже при уже нужной Branch routing.
+Пик и13 tamper checks этого case прошли; исходный terminal=false сохранён.
+Готов отдельный root-only fix51566b2: реальный полный connection readback и
+равенство/неравенство revision по факту изменения routing. Production physics
+и selector не менялись. Следующий отдельный A2 готовится после forensic capture
+первой попытки; прежний source/runtime не перезапускается.
 [Точные bindings и состояние](NativeDeclaredWindowBasinJobs.json).
 Независимый Python reader подготовлен отдельным tool root1de:23 tests и replay
 14 actual records будут выполнены после закрытия SDK job без изменения его
