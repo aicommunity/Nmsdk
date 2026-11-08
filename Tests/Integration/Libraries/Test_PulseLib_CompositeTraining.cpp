@@ -2133,3 +2133,88 @@ TEST(NativeCandidateWindowTrainingCore,PreviousWholeSweepCannotArmNewFinal){Sear
 TEST(NativeCandidateWindowTrainingCore,IdenticalModelDifferentOwnerFamilyCannotReplaceOriginalRefs){WindowCoreRejectsAnotherClosedFamily();}
 TEST(NativeCandidateWindowTrainingCore,RealModelClockDeadlineGuardsDelayedConsume){WindowCoreModelDeadlineIncludesDelayedAdmission();}
 TEST(NativeCandidateWindowTrainingCore,BranchControlledEditRequiresFreshAllNFinal){WindowCoreBranchEditInvalidatesAllFinalInputs();}
+
+namespace {
+template<class Owner> void ExpectWindowReferenceStage(const NativeCompositeFixture<Owner>& f,std::size_t count,bool complete) {
+    EXPECT_EQ(bool(f.attempt->CandidateWindowReferences()),complete);
+    ASSERT_EQ(f.attempt->CandidateWindowRecords().size(),count);
+    for(const auto& record:f.attempt->CandidateWindowRecords()) {
+        EXPECT_EQ(record.purpose,CompositeMeasurementPurpose::Reference);EXPECT_EQ(record.consumed,complete);
+        if(complete)EXPECT_EQ(record.trainingRequestedAtConsume,std::optional<bool>(true));
+        else EXPECT_FALSE(record.trainingRequestedAtConsume);
+    }
+}
+template<class Owner> std::vector<ValidatedCompositeMeasurement> StageWindowAllReferences(NativeCompositeFixture<Owner>& f,const std::string& prefix) {
+    std::vector<ValidatedCompositeMeasurement> measurements;
+    for(std::size_t input=0;input<f.protocol.inputs.size();++input) {
+        const std::string run="candidate-attempt/capture/1";
+        f.Run(f.Request(input,run,run+"/"+std::to_string(input)),CompositeMeasurementPurpose::Reference);
+        Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
+        measurements.push_back(*f.attempt->Measurement());ExpectWindowReferenceStage(f,input+1,false);
+        SaveCandidateWindowGroup(f,prefix+"-"+std::to_string(input));
+    }
+    return measurements;
+}
+template<class Owner> void SaveWindowReferenceRelease(NativeCompositeFixture<Owner>& f,const char* stage) {
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-reference-release5/":"classic-window-reference-release5/")+stage;
+    const auto* closed=f.attempt->CandidateWindowReferences();QJsonArray groups,proofs,targets;
+    if(closed){for(const auto& id:closed->ReferenceGroupIds())groups.append(QString::fromStdString(id));
+        for(const auto& id:closed->ReferenceProofIds())proofs.append(QString::fromStdString(id));for(const auto raw:closed->TargetRawPotentials())targets.append(raw);}
+    SaveCompositeArchive(EncodeNativeCandidateWindowTrainingArchive(*f.attempt),name.c_str());
+    SavePortableObject(name.c_str(),"reference-release.json",{{"kind","native_candidate_window_reference_release_boundary"},{"schema_version",1},
+        {"scope","actor_allN_release_before_service5"},{"reference_complete",bool(closed)},
+        {"selected_original_group_ids",groups},{"selected_original_proof_ids",proofs},{"actual_original_raw_targets",targets},
+        {"service_or_package6_completed",false}});
+}
+template<class Owner> void WindowReferenceReleaseCommitsAllN() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);EnableCandidateWindow(f);
+    const auto measured=StageWindowAllReferences(f,"release-staged");const auto refs=CapturedReferences::CaptureComposite(f.protocol,measured);
+    ExpectWindowReferenceStage(f,2,false);SaveWindowReferenceRelease(f,"before-complete");
+    f.attempt->CompleteCandidateWindowReferences(refs);ExpectWindowReferenceStage(f,2,true);
+    ASSERT_TRUE(f.attempt->CandidateWindowReferences());EXPECT_EQ(f.attempt->CandidateWindowReferences()->TargetRawPotentials().size(),2u);
+    for(std::size_t i=0;i<2;++i)EXPECT_DOUBLE_EQ(f.attempt->CandidateWindowReferences()->TargetRawPotentials()[i],refs.Inputs()[i].rawPotential);
+    SaveWindowReferenceRelease(f,"complete");
+}
+template<class Owner> void WindowReferenceReleaseRejectsOtherFamily() {
+    std::optional<CapturedReferences> previous;
+    {NativeCompositeFixture<Owner> f(2000,false,64,false,true);EnableCandidateWindow(f);previous=CaptureWindowReferences(f,true,"release-family-A");}
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto measured=StageWindowAllReferences(f,"release-family-B");
+    const auto refs=CapturedReferences::CaptureComposite(f.protocol,measured);ASSERT_NE(previous->CompositeOwnerScope(),refs.CompositeOwnerScope());
+    const auto before=EncodeNativeCandidateWindowTrainingArchive(*f.attempt).document;
+    EXPECT_THROW(f.attempt->CompleteCandidateWindowReferences(*previous),std::invalid_argument);
+    ExpectWindowReferenceStage(f,2,false);EXPECT_EQ(EncodeNativeCandidateWindowTrainingArchive(*f.attempt).document,before);
+    SaveWindowReferenceRelease(f,"wrong-family-not-promoted");
+    f.attempt->CompleteCandidateWindowReferences(refs);ExpectWindowReferenceStage(f,2,true);SaveWindowReferenceRelease(f,"correct-family-after-refusal");
+}
+template<class Owner> void WindowReferenceReleaseRejectsDuplicateEvidence() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto measured=StageWindowAllReferences(f,"release-duplicate-control");
+    const std::vector<ValidatedCompositeMeasurement> duplicate{measured[0],measured[0]};
+    EXPECT_THROW(CapturedReferences::CaptureComposite(f.protocol,duplicate),std::invalid_argument);ExpectWindowReferenceStage(f,2,false);
+    SaveWindowReferenceRelease(f,"duplicate-data-not-promoted");
+    const auto refs=CapturedReferences::CaptureComposite(f.protocol,measured);f.attempt->CompleteCandidateWindowReferences(refs);
+    ExpectWindowReferenceStage(f,2,true);SaveWindowReferenceRelease(f,"complete-after-duplicate-refusal");
+}
+enum class WindowReleaseRevocation { StructuralEdit,Reset,Default };
+template<class Owner> void WindowReferenceReleaseRechecksOwner(WindowReleaseRevocation kind) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto measured=StageWindowAllReferences(f,"release-before-revocation");
+    const auto refs=CapturedReferences::CaptureComposite(f.protocol,measured);SaveWindowReferenceRelease(f,"before-revocation");
+    const auto before=EncodeNativeCandidateWindowTrainingArchive(*f.attempt).document;
+    if(kind==WindowReleaseRevocation::StructuralEdit){auto p=f.owner->ReadNativeParameters();p[0].length=3;
+        const auto edit=f.owner->ApplyNativeParameters(p);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;}
+    else if(kind==WindowReleaseRevocation::Reset)f.owner->Reset();else f.owner->Default();
+    EXPECT_THROW(f.attempt->CompleteCandidateWindowReferences(refs),std::invalid_argument);ExpectWindowReferenceStage(f,2,false);
+    EXPECT_EQ(EncodeNativeCandidateWindowTrainingArchive(*f.attempt).document,before);SaveWindowReferenceRelease(f,"revoked-not-promoted");
+    if(kind==WindowReleaseRevocation::StructuralEdit)SaveCompositeBoundary(f,NativeCompositeFixture<Owner>::branch?
+        "branch-window-reference-release5/actual-after-edit":"classic-window-reference-release5/actual-after-edit",0);
+}
+}
+TEST(NativeCandidateWindowReferenceRelease,ClassicStagedPrefixCommitsOnlyAsCompleteAllN){WindowReferenceReleaseCommitsAllN<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowReferenceRelease,BranchStagedPrefixCommitsOnlyAsCompleteAllN){WindowReferenceReleaseCommitsAllN<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowReferenceRelease,ClassicWrongFamilyCannotPromoteAnyRecord){WindowReferenceReleaseRejectsOtherFamily<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowReferenceRelease,BranchWrongFamilyCannotPromoteAnyRecord){WindowReferenceReleaseRejectsOtherFamily<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowReferenceRelease,ClassicDuplicateEvidenceDoesNotPromotePrefix){WindowReferenceReleaseRejectsDuplicateEvidence<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowReferenceRelease,BranchDuplicateEvidenceDoesNotPromotePrefix){WindowReferenceReleaseRejectsDuplicateEvidence<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowReferenceRelease,ClassicActualEditBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearner>(WindowReleaseRevocation::StructuralEdit);}
+TEST(NativeCandidateWindowReferenceRelease,BranchActualEditBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearnerBranch>(WindowReleaseRevocation::StructuralEdit);}
+TEST(NativeCandidateWindowReferenceRelease,ClassicOwnerResetBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearner>(WindowReleaseRevocation::Reset);}
+TEST(NativeCandidateWindowReferenceRelease,BranchOwnerDefaultBeforeReleaseIsRejected){WindowReferenceReleaseRechecksOwner<NNeuronTimeLearnerBranch>(WindowReleaseRevocation::Default);}
