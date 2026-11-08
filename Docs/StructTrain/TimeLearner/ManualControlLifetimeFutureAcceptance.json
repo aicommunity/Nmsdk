@@ -361,7 +361,10 @@
           "test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
           "test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit"
         ],
-        "executed_here": false
+        "executed_here": false,
+        "repeat_required_by_default": false,
+        "code_scope_reuse_accepted_source": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+        "execution_if_needed_requires_documented_change_or_concern": true
       },
       {
         "commit": "e11bbd403a5f93790a7ad6c5a245c1964797d63d",
@@ -402,7 +405,10 @@
           "test_native_preparation.NativePreparationTest.test_repo_module_cannot_rehash_itself_into_loaded_execution_evidence",
           "test_native_preparation.NativePreparationTest.test_repo_module_checks_fresh_closure_after_source_read"
         ],
-        "executed_here": false
+        "executed_here": false,
+        "repeat_required_by_default": false,
+        "code_scope_reuse_accepted_source": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+        "execution_if_needed_requires_documented_change_or_concern": true
       }
     ],
     "requires_loaded_worker_and_imports_in_SAME_sdk": true,
@@ -2857,7 +2863,7 @@
   "preconditions": [
     "root-owned baseline248 actual terminal/kernel closure and independent receipt; no active SDK/cache updates",
     "review actual paired bb1/e11 merge/manifests, exact recorded Pulse800/b287 and disclosed six fixture changes/diagnostic additions; integrations source-only",
-    "remote metadata13+prepare30 on actual source integration, not inherited pass",
+    "reuse prior code-scoped13/30 only after dependency-byte proof; NO rote per-SDK rerun; mandatory fresh actual eight-repository/materialization/sameSDK import/production canonical capture",
     "actual clean eight-repository Git and materialized source closure, all required module bytes",
     "review exact owned fresh preconfigured normal/ASAN CMake cache/generated flags/compiler/Qt/GTest/resources/LLM policy",
     "production prepare_native_module_checks and serialize_preparation using actual checkout HEAD/module/argv/source/IDs/runplan",
@@ -2958,7 +2964,9 @@
     "compiled_native_technical": false,
     "independent_archive2_protocol5_proposal_geometry_cert3_replay": false,
     "all_pattern_temporal_renderer_review": false,
-    "scientific_matrix": false
+    "scientific_matrix": false,
+    "prior_metadata_tested_code_reusable": true,
+    "fresh_eight_repo_SDK_integration": false
   },
   "remaining": [
     "unfixed actual expected-red outcomes and corrected20 normal/ASAN",
@@ -2986,5 +2994,361 @@
     "maintained_worker": "Linux /proc/contained backend on approved M40/Elder through existing jump/owned workflow",
     "Windows_native_gate_accepted": false
   },
-  "root_source_index_reference": "743e5b577a76d57f94fd93b840f11d0587426bad"
+  "root_source_index_reference": "743e5b577a76d57f94fd93b840f11d0587426bad",
+  "metadata_acceptance_reuse": {
+    "kind": "code_scoped_metadata_reuse_not_fresh_integration_acceptance",
+    "worker13": {
+      "accepted_source": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+      "evidence": "f8dcb43ad8bb38440b2c6c75b86b04791f1a3460",
+      "scripts_tree_equal": {
+        "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c": "2d49bcd6b0608f60ff57a53acb80310e56ebd9d0",
+        "e11bbd403a5f93790a7ad6c5a245c1964797d63d": "2d49bcd6b0608f60ff57a53acb80310e56ebd9d0",
+        "bb1d24ea950ff068c25f7db7186517b55eef3dbd": "2d49bcd6b0608f60ff57a53acb80310e56ebd9d0"
+      },
+      "same_tested_source_reusable": true,
+      "does_not_expand_original_test_scope": true,
+      "repeat_per_SDK_copy_required_by_default": false
+    },
+    "preparer30": {
+      "accepted_source": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+      "evidence": "e70610024aeb18662417bbf18d2b6fce430282ea",
+      "same_tested_source_reusable": true,
+      "static_import_closure_count": 16,
+      "static_import_closure": [
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/__init__.py",
+            "git_blob": "901425a9756dc528fa7c5ce00cd13d76b020dfc7",
+            "bytes": 79,
+            "sha256": "3ae9d4d5d19fd781ecba11907d899b2383714019aa048fb10c945ad1d7415221"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/__init__.py",
+            "git_blob": "901425a9756dc528fa7c5ce00cd13d76b020dfc7",
+            "bytes": 79,
+            "sha256": "3ae9d4d5d19fd781ecba11907d899b2383714019aa048fb10c945ad1d7415221"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/candidate_recovery.py",
+            "git_blob": "375a2a5302a377110d76f65537ff5c02ee0df90a",
+            "bytes": 3964,
+            "sha256": "53d03021f6edd1987549d070a7fd6a6f66ffd30d832cf9aeb3f0575db75ea6cc"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/candidate_recovery.py",
+            "git_blob": "375a2a5302a377110d76f65537ff5c02ee0df90a",
+            "bytes": 3964,
+            "sha256": "53d03021f6edd1987549d070a7fd6a6f66ffd30d832cf9aeb3f0575db75ea6cc"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/candidate_recovery_evidence.py",
+            "git_blob": "21f2652095fb5a15ad21069a173971f934fa78f4",
+            "bytes": 9977,
+            "sha256": "c979ba2d9aa2a5a90c3e7ea62e13a089d5fd07bd88e8be87c5e984febb43cd2d"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/candidate_recovery_evidence.py",
+            "git_blob": "21f2652095fb5a15ad21069a173971f934fa78f4",
+            "bytes": 9977,
+            "sha256": "c979ba2d9aa2a5a90c3e7ea62e13a089d5fd07bd88e8be87c5e984febb43cd2d"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/candidate_recovery_history.py",
+            "git_blob": "fe1daf725c5da12582afa94b36c9ab5234115eb9",
+            "bytes": 8599,
+            "sha256": "5ac7994bfb2d1bc45f34bdcc3c67fd1eba3ecaf7352384dd47da21cc28c18b2d"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/candidate_recovery_history.py",
+            "git_blob": "fe1daf725c5da12582afa94b36c9ab5234115eb9",
+            "bytes": 8599,
+            "sha256": "5ac7994bfb2d1bc45f34bdcc3c67fd1eba3ecaf7352384dd47da21cc28c18b2d"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/capacitance_evidence.py",
+            "git_blob": "d4c83f6246f67580501799a2cad63ccab4e47a41",
+            "bytes": 11577,
+            "sha256": "85a984c8441b56953e7af8407b0826d6ff72e711b8521998b4b75e01cba9eb2c"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/capacitance_evidence.py",
+            "git_blob": "d4c83f6246f67580501799a2cad63ccab4e47a41",
+            "bytes": 11577,
+            "sha256": "85a984c8441b56953e7af8407b0826d6ff72e711b8521998b4b75e01cba9eb2c"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/capacitance_policy.py",
+            "git_blob": "273c54daf24856bfe0bed1986222be9d6b8f0b16",
+            "bytes": 1921,
+            "sha256": "18ad6830faa83fdbe72ee5436526398104be34f02cbe0ac90e982a679bb7d6cc"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/capacitance_policy.py",
+            "git_blob": "273c54daf24856bfe0bed1986222be9d6b8f0b16",
+            "bytes": 1921,
+            "sha256": "18ad6830faa83fdbe72ee5436526398104be34f02cbe0ac90e982a679bb7d6cc"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py",
+            "git_blob": "8e4cc5ee61f43cc6dc5506312a7e899427a977db",
+            "bytes": 23404,
+            "sha256": "2b8e2e08078ead5a27646d11bd2041c175fb0e628a5836132215a488ef2d1ff6"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py",
+            "git_blob": "8e4cc5ee61f43cc6dc5506312a7e899427a977db",
+            "bytes": 23404,
+            "sha256": "2b8e2e08078ead5a27646d11bd2041c175fb0e628a5836132215a488ef2d1ff6"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/domain_evidence.py",
+            "git_blob": "9b906b5b297925cb7bd5fe6b47c044d7fec553b6",
+            "bytes": 15104,
+            "sha256": "042d6df5a4f76148dca07264e5fc6f481fb4379c696984e2f40f71d89eb80f69"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/domain_evidence.py",
+            "git_blob": "9b906b5b297925cb7bd5fe6b47c044d7fec553b6",
+            "bytes": 15104,
+            "sha256": "042d6df5a4f76148dca07264e5fc6f481fb4379c696984e2f40f71d89eb80f69"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/model_identity.py",
+            "git_blob": "3e8cb2a4c008eed9b7b9e369922b0377072a22f8",
+            "bytes": 1811,
+            "sha256": "d09cee240b12c3b0989ffc33b5a4443f1dfcb4d081f668c1a52c251675f8714d"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/model_identity.py",
+            "git_blob": "3e8cb2a4c008eed9b7b9e369922b0377072a22f8",
+            "bytes": 1811,
+            "sha256": "d09cee240b12c3b0989ffc33b5a4443f1dfcb4d081f668c1a52c251675f8714d"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/native_evidence.py",
+            "git_blob": "aa9a7f7fd945539176ae92a89a3f4e10c78dbaf5",
+            "bytes": 43511,
+            "sha256": "246932557a8ca15b4e1d05c8c6066e1b6ffedbb06697af06f33309780e1af99c"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/native_evidence.py",
+            "git_blob": "aa9a7f7fd945539176ae92a89a3f4e10c78dbaf5",
+            "bytes": 43511,
+            "sha256": "246932557a8ca15b4e1d05c8c6066e1b6ffedbb06697af06f33309780e1af99c"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/native_preparation.py",
+            "git_blob": "edbb928183fc90f860cc416ed533666efd7603e6",
+            "bytes": 22872,
+            "sha256": "9e6d29d5d371393b4fdf0af001ab945ba1c1d1ca2387d581d70335535eb3db7f"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/native_preparation.py",
+            "git_blob": "edbb928183fc90f860cc416ed533666efd7603e6",
+            "bytes": 22872,
+            "sha256": "9e6d29d5d371393b4fdf0af001ab945ba1c1d1ca2387d581d70335535eb3db7f"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/probe_diagnostics.py",
+            "git_blob": "ab3730cd410804241d4154c964ec6034595c5b00",
+            "bytes": 9738,
+            "sha256": "890443bdcd8199c943a68aa5e1c49449410c6e2d7b273a8fa1c49837eb709259"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/probe_diagnostics.py",
+            "git_blob": "ab3730cd410804241d4154c964ec6034595c5b00",
+            "bytes": 9738,
+            "sha256": "890443bdcd8199c943a68aa5e1c49449410c6e2d7b273a8fa1c49837eb709259"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/runtime.py",
+            "git_blob": "5076c55cc37003e4601108530e7a4ae8778eaea2",
+            "bytes": 8971,
+            "sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/runtime.py",
+            "git_blob": "5076c55cc37003e4601108530e7a4ae8778eaea2",
+            "bytes": 8971,
+            "sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/tests/test_native_preparation.py",
+            "git_blob": "b6a7084d76b1106e6d504fff5879cf547fffd890",
+            "bytes": 18998,
+            "sha256": "3e2cf5c7788f919ca5aa0d4626efdd4dc0dae3660a92446541f70a86511d6221"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/tests/test_native_preparation.py",
+            "git_blob": "b6a7084d76b1106e6d504fff5879cf547fffd890",
+            "bytes": 18998,
+            "sha256": "3e2cf5c7788f919ca5aa0d4626efdd4dc0dae3660a92446541f70a86511d6221"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/training_capacitance_history.py",
+            "git_blob": "5a011b37002620389a329a64e05d8a01a667f02a",
+            "bytes": 9484,
+            "sha256": "14fe9c654ae96fa5eeace3b1697f87322a61e882efe0730bc64994d0fed28f77"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/training_capacitance_history.py",
+            "git_blob": "5a011b37002620389a329a64e05d8a01a667f02a",
+            "bytes": 9484,
+            "sha256": "14fe9c654ae96fa5eeace3b1697f87322a61e882efe0730bc64994d0fed28f77"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/training_capacitance_witness.py",
+            "git_blob": "16eef963c3f5b5235e40fedce03acd339d1a924e",
+            "bytes": 7134,
+            "sha256": "a36300eefee510d62af9bd62afdec0c3ad2782f7f104bf1a258ff61aa8d1e7db"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/training_capacitance_witness.py",
+            "git_blob": "16eef963c3f5b5235e40fedce03acd339d1a924e",
+            "bytes": 7134,
+            "sha256": "a36300eefee510d62af9bd62afdec0c3ad2782f7f104bf1a258ff61aa8d1e7db"
+          },
+          "E11_BB1_same_bytes": true
+        }
+      ],
+      "AST_dynamic_import_calls": [],
+      "bound_fixtures": [
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/native_preparation/actual-metadata.json.gz",
+            "git_blob": "c60ccdb57624e8224175ae700035e828c0f8ef46",
+            "bytes": 11123,
+            "sha256": "e955d72c98a53c5891125db40df11fd16a0101875c6723d377db753a98a2c924"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/native_preparation/actual-metadata.json.gz",
+            "git_blob": "c60ccdb57624e8224175ae700035e828c0f8ef46",
+            "bytes": 11123,
+            "sha256": "e955d72c98a53c5891125db40df11fd16a0101875c6723d377db753a98a2c924"
+          },
+          "E11_BB1_same_bytes": true
+        },
+        {
+          "accepted_source": {
+            "commit": "8bf773d4ce6f3b23d79796a8536e5c54d526341a",
+            "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/native_preparation/source-git-objects.pack",
+            "git_blob": "e0990cc0741165bfc923fd7ea23f0c929f2cd009",
+            "bytes": 2155704,
+            "sha256": "18dad5c65f9b72a80a75e03e1fd3ae39ec60e233addb37f10ee23607ca4e2007"
+          },
+          "current_provider": {
+            "commit": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+            "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/native_preparation/source-git-objects.pack",
+            "git_blob": "e0990cc0741165bfc923fd7ea23f0c929f2cd009",
+            "bytes": 2155704,
+            "sha256": "18dad5c65f9b72a80a75e03e1fd3ae39ec60e233addb37f10ee23607ca4e2007"
+          },
+          "E11_BB1_same_bytes": true
+        }
+      ],
+      "whole_Scripts_delta_to_db2": [
+        "M\tScripts/StructTrain/TimeLearner/contained_runner.py",
+        "A\tScripts/StructTrain/TimeLearner/native_acceptance_worker.py",
+        "M\tScripts/StructTrain/TimeLearner/native_gate.py",
+        "A\tScripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py"
+      ],
+      "delta_outside_preparer_static_import_closure": true,
+      "different_whole_package_fingerprint_is_NEW_INPUT_not_replaced_by_old_acceptance": true,
+      "repeat_per_SDK_copy_required_by_default": false
+    },
+    "mandatory_fresh_integration": [
+      "actual eight-repository Git closure and physical materialization",
+      "actual checked-out HEAD and current module bytes, clean source",
+      "real SAME-SDK import module paths and current package/input fingerprints",
+      "production prepare_native_module_checks + serialize_preparation for actual new source/runplan/argv",
+      "actual loaded worker/dependency bytes and native compiled/kernel/assertion evidence in separately required gates"
+    ],
+    "rerun_metadata_only_if": [
+      "tested code/import dependency/fixture bytes differ from accepted scope",
+      "actual Python/runtime/import behavior changed or ambiguous",
+      "specific unresolved concern with documented reason and chosen relevant tests"
+    ],
+    "mock_unit_repeat_cannot_replace_fresh_integration": true,
+    "native20_legacy248_additional222_gates_unchanged": true,
+    "this_audit_executed_tests": false
+  }
 }
