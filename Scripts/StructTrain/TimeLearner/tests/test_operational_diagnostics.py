@@ -64,3 +64,18 @@ class OperationalDiagnosticsTest(unittest.TestCase):
     def test_legacy_missing_record_is_recomputed_not_assumed_clear(self):
         (self.root/'stderr.log').write_text('E20261108 02:41:59.575289 123 loader.cpp:2] caught error\n')
         self.assertFalse(permits_positive_audit(self.root, None))
+
+    def test_rehashed_portable_copy_cannot_hide_original_contained_error(self):
+        original = self.root/'contained';original.mkdir()
+        (original/'stdout.log').write_bytes(b'')
+        (original/'stderr.log').write_text('E20261108 02:41:59.575289 123 loader.cpp:2] caught error\n')
+        result = inspect_streams(self.root)
+        self.assertFalse(result['contained_streams_match'])
+        self.assertIn('contained_stream_copy_mismatch', result['reasons'])
+        self.assertFalse(permits_positive_audit(self.root, result))
+
+    def test_identical_contained_streams_keep_positive_audit(self):
+        original = self.root/'contained';original.mkdir()
+        for name in ['stdout.log','stderr.log']:(original/name).write_bytes((self.root/name).read_bytes())
+        self.assertTrue(inspect_streams(self.root)['contained_streams_match'])
+        self.assertTrue(permits_positive_audit(self.root))
