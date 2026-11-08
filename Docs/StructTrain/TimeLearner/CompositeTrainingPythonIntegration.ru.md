@@ -144,3 +144,17 @@ frozen evaluation приёмка требует общего runtime из сог
 commits и фактических артефактов producer. Hash-format fixtures и отдельная
 проверка wire-ошибок не заменяют этот gate. Frozen Test продолжает использовать
 общий максимум реакции и реальные spikes, не Train assigned-window criterion.
+
+Wire/hash/dispatch и прежние декларационные проверки выполнены на M40:
+62/62, failures/errors/skips0; source
+`cdce8575f0467d0f173f83ab1ce3e9531fc3594b`, evidence
+`4f4d40561750cee71f9cbf9a349a605d1084b819`.
+428 Python blobs совпадают с Git до/после; все32 members компактного архива
+проверены отдельно (32464 bytes, SHA256
+`2389001756e3606ed0a568c04e17cf6fb2801c1bc55433734b78aa577c230856`).
+Exact worker/kernel owner совпадает, unit закрыт, lease released штатно.
+[Metadata-проверка](CompositeTrainingPythonPortableVerification-20261108.json).
+Первый collector вызов отказал до записи из-за отсутствующего declarative
+expected_source_files; повторная сборка evidence использовала то же завершённое
+задание, тесты не запускались повторно. Native package5 позитивная приёмка,
+реальные C0 fixtures и полная warm/pipeline проверка остаются открытыми.
