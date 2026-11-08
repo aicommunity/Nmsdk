@@ -1,0 +1,72 @@
+{
+  "facts": {
+    "kind": "mechanical_controller_core_sdk_asan_acceptance",
+    "schema_version": 1,
+    "root": "b1457e7e0ae7a63c6aba7599b4189e9465a32e77",
+    "pulse": "474df05b714415057bbcb4692ce224621ae55ac0",
+    "cpp_tests_passed": 97,
+    "native_gates_passed": 9,
+    "kernel_closures_verified": 10,
+    "materialized_source_files_git_verified": 3050,
+    "loaded_files_hash_verified": 75,
+    "runtime_current_and_previous_unchanged": true,
+    "original_diagnostics_preserved": true,
+    "new_composite_protocol_exercised": false,
+    "new_model_runs_in_collector": false,
+    "full_sdk_matrix_accepted": false,
+    "training_certificate_eligible": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false
+  },
+  "original_outputs_preserved": true,
+  "fresh_closure_after_archive": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s06-composite-mechanical-m40-a2",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s06-composite-mechanical-m40-a2-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "98d234692e4725611833d922dc836a83c4fd4332a50204cccb800c4d73ecbdd7",
+        "unit": "timelearner-2cbd22ef-886c-4b4e-ae77-e82809c944f3.service",
+        "invocation_id": "74385299b296456f90f3ff569f5c52fb",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2cbd22ef-886c-4b4e-ae77-e82809c944f3.service",
+        "initial_main_pid": 2746631,
+        "initial_start_ticks": "320944547",
+        "sha256": "ce0b342f9eb1c5c66da08f315ea6e81dc2244b4e24bb800bc225d29639a78cce"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-2cbd22ef-886c-4b4e-ae77-e82809c944f3.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "65a8a859-4784-4bd1-85cb-3c39f70b8b1f",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "archive_members": 299
+}
