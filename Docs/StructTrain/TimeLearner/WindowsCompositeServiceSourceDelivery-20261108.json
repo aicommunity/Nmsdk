@@ -1,0 +1,89 @@
+{
+  "deliveries": [
+    {
+      "commit": "57e76b8ccd1620797d9450fd28011ac52ff2082a",
+      "source": "C:/Projects/TimeLearnerWorker/source-composite-service-root-win-a1",
+      "alternates": false,
+      "pack_bytes": 4347816,
+      "pack_sha256": "a321fdc661e98d639a3d299c4dc499db6c956ed74e8e4f013fdb7482af0ddb2a",
+      "clean": true,
+      "label": "root",
+      "local_pack": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\tl-composite-service-win-root-57e7.pack",
+      "pack_trailer_sha1": "51c69751457b56ddb37eddfb29607b00f481ae4a",
+      "native_git_transport": true,
+      "excluded_paths": [
+        "Docs",
+        "Reports"
+      ],
+      "submodules_not_materialized": true
+    },
+    {
+      "commit": "661c3d932b7084348e071154e2c1541007fcf17e",
+      "source": "C:/Projects/TimeLearnerWorker/source-composite-service-pulse-win-a1",
+      "alternates": false,
+      "pack_bytes": 741518,
+      "pack_sha256": "0efb9a49546c421dfdf659cc6629b5780ecb5d0206f6d9041d018af08aaa099c",
+      "clean": true,
+      "label": "pulse",
+      "local_pack": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\tl-composite-service-win-pulse-661c.pack",
+      "pack_trailer_sha1": "ed1358c30ac7a65a2dabf9e3a6b6790c4601d7d7",
+      "native_git_transport": true,
+      "excluded_paths": [
+        "Docs",
+        "Reports"
+      ],
+      "submodules_not_materialized": true
+    },
+    {
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "source": "C:/Projects/TimeLearnerWorker/source-composite-service-bin-win-a1",
+      "alternates": false,
+      "pack_bytes": 2540879,
+      "pack_sha256": "1a65ef286970fb88ab202835ec360f0831f661ecd7b1e2182d7a04bec195a7dd",
+      "clean": true,
+      "label": "bin",
+      "local_pack": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner-native-step-bin-resources-m40-a1.pack",
+      "pack_trailer_sha1": "68f16d640a3392133d367059da1f2c62cda95712",
+      "native_git_transport": true,
+      "excluded_paths": [
+        "Docs",
+        "Reports",
+        "Configs",
+        "Platform",
+        "Help"
+      ],
+      "submodules_not_materialized": true
+    }
+  ],
+  "build_or_worker_started": false,
+  "original_user_project_modified": false,
+  "kind": "windows_composite_service_immutable_source_delivery",
+  "schema_version": 1,
+  "host": "10.245.1.14",
+  "observed_available_physical_memory_bytes": 10106953728,
+  "observed_free_disk_bytes": 1773752430592,
+  "expected_future_native_cases": 179,
+  "actual_cpp_build_or_tests_started": false,
+  "full_source_closure_materialized": false,
+  "existing_accepted_source_cache_unchanged": true,
+  "scientific_worker_admitted": false,
+  "whole_plan_complete": false,
+  "bin_materialization": "Only .gitattributes, RTlibs, ClDesc and WatchPresets; no claim of Configs availability.",
+  "pending": [
+    "Kernel closure and source/cache identity preflight before source update",
+    "Bounded VS2026 full compile/link with telemetry guard and fixed Git links",
+    "Addressed native runtime gates with current source and loaded-module capture"
+  ],
+  "transport_attempts": [
+    {
+      "launcher": "persistent Node helper environment",
+      "exitcode": 255,
+      "remote_donors_after_failure": "All three paths inspected absent; no source cache modification."
+    },
+    {
+      "launcher": "PowerShell exec environment",
+      "exitcode": 0,
+      "result": "Three native Git packs verified; no build or source cache mutation."
+    }
+  ]
+}
