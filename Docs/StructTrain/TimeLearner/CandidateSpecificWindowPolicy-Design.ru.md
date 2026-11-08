@@ -231,7 +231,7 @@ Source binding2 остаётся immutable physical initial source; его не 
 4. **Strict portability.** `CompositeTrainingDeclarations`, `ProbeEvidenceJson`, `NativeCompositeTrainingRecord`, `NativeCompositeTrainingEvidence`, `CompositePortableTrainingProof`, `NativeCompositeLearnedState`, `ConfiguredNativeTraining`: новые dispatch branches/IDs, полный replay recipe из primary/reference/current-model feature witnesses. Old fixed-window byte/decision regression — отдельный gate.
 5. **Root adapters/CLI.** `App/NeuroModelerConsole/TimeLearner{CompositeArtifacts,TrainingJob,ProbeEvidenceWriter}`, `Scripts/StructTrain/TimeLearner/composite_*` readers/managed pipeline/condition projection и maintained tests: actual complete group/spec/policy/source transport, никаких inferred proposal defaults. Обновить versioned docs/entry points и gate inventories, hash source только по binary Git blob.
 
-Сначала закончить фактические gates206/механический97/214/229/240. Design не разрешает обновить active source/cache. Каждый последующий шаг — отдельная ветка/commit, после review и server acceptance merge --no-ff по принятому плану.
+Source preparation изолированного pure STEP1 разрешена после source review design и не должна ждать всех240. Она не разрешает обновить active source/cache. Native integration/runtime admission отдельно требует соответствующих принятых prerequisites206/механический97/214/229/240. Каждый последующий шаг — отдельная ветка/commit, после review и server acceptance merge --no-ff по принятому плану.
 
 ## 13. Адресные acceptance controls
 

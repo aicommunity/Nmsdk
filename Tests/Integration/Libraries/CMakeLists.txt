@@ -71,6 +71,22 @@ add_test(NAME PulseLib_DeclaredWindowBasinAssignment COMMAND Test_PulseLib_Decla
 set_tests_properties(PulseLib_DeclaredWindowBasinAssignment PROPERTIES
     WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner;diagnostic")
 
+# Pure candidate-window arithmetic. No native/storage admission is provided.
+add_executable(Test_PulseLib_CandidateWindowPolicy
+    Test_PulseLib_CandidateWindowPolicy.cpp ../Support/ProbeAlgorithmMain.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPolicy.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/TrainingCapacitance.cpp)
+target_link_libraries(Test_PulseLib_CandidateWindowPolicy PRIVATE GTest::gtest Nmsdk::Qt::Core)
+set_target_properties(Test_PulseLib_CandidateWindowPolicy PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${PULSELIB_TEST_OUTPUT_DIR}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${PULSELIB_TEST_OUTPUT_DIR}")
+add_test(NAME PulseLib_CandidateWindowPolicy COMMAND Test_PulseLib_CandidateWindowPolicy)
+set_tests_properties(PulseLib_CandidateWindowPolicy PROPERTIES
+    WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner;arithmetic")
+
 # Fast observer/clock checks compile the actual production implementation.
 # Keep the same cases in the full storage target: this unit executable does
 # not replace native lifecycle, storage, routing or physical response gates.
