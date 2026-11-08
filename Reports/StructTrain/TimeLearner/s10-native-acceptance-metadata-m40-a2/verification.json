@@ -1,0 +1,115 @@
+{
+  "kind": "native_acceptance_worker13_passed_metadata_gate",
+  "schema_version": 1,
+  "tool_root": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+  "expected_tests": 13,
+  "observed_tests": 13,
+  "passed_tests": 13,
+  "package_fingerprint": "d3dd9564a993abc98ee17d7edb793d71a6b09d0e188dcb2c3e8a77e9a5a8ab5f",
+  "TimeLearner_python_files": 437,
+  "Scripts_files_Git_verified": 628,
+  "actual_log_case_ids_verified": true,
+  "production_validation_CLI": true,
+  "bound_fixture_files": 0,
+  "failures": [],
+  "errors": [],
+  "skips": [],
+  "original_terminal": {
+    "metadata13_passed": true,
+    "expected_python_cases": 13,
+    "actual_python_cases": 13,
+    "heartbeat_errors": [],
+    "CPP_compile_or_run": false,
+    "SDK_source_build_runtime_read_or_write": false,
+    "new_model_runs": 0,
+    "kernel_closure_attested_by_worker": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "source_root": "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c",
+    "lease_release_policy": "Supervisor only after exact outer kernel group is closed"
+  },
+  "kernel_and_lease": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "597b9907722ab34bb19a4af8237aaf425c076b522945ea6f5c1c103fcb3789d2",
+        "unit": "timelearner-56ede351-cd0c-4e6d-af71-f86d44db08cd.service",
+        "invocation_id": "bbb26650fd73437baa0d66f18e9df761",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-56ede351-cd0c-4e6d-af71-f86d44db08cd.service",
+        "initial_main_pid": 3661306,
+        "initial_start_ticks": "324092517",
+        "sha256": "15d4655d263e8b3a7ae8d7de1795980a199d3f1e24ad73ea8889c2a34d617f87"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-56ede351-cd0c-4e6d-af71-f86d44db08cd.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "lease": {
+      "token": "030ae0c5-7cf9-4f4d-93ed-f4096da65aac",
+      "job_id": "s10-native-acceptance-metadata-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3661306,
+        "start_ticks": "324092517",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-acceptance-metadata-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-acceptance-metadata-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-acceptance-metadata-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-acceptance-metadata-m40-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794165727.653653,
+      "deadline": 1794165847.653653,
+      "updated": 1794165729.6667728,
+      "release_note": "Exact metadata worker kernel group closed; all Git/unittest child processes belonged to this group. No SDK/model job was started.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "peak_owned_allocated_bytes": 35569664,
+    "minimum_free_bytes": 338486722560,
+    "outer_closed": true
+  },
+  "actual_python_loaded_files_verified": 15,
+  "actual_supervisor_bound_by_maintained_helper": true,
+  "native_preparation_used_as_own_success_authority": false,
+  "active_SDK_source_build_runtime_access": false,
+  "CPP_or_models_run": false,
+  "full248_accepted": false,
+  "scientific_verdict": null,
+  "created_utc": "2026-11-08T19:22:53.877328+00:00"
+}
