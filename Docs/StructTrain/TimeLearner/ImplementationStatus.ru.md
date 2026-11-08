@@ -53,6 +53,8 @@ Maintained native_preparation прошёл24/24 metadata tests на M40;
 Первый bootstrap17 завершился до тестов из-за file-versus-directory reservation;
 [отрицательная квитанция](OwnedPythonJobsMetadata17NegativeVerification.json).
 CanonicalSpec wiring и запуск maintained worker полного248 ещё выполняются.
+Сам worker отдельно прошёл12/12 metadata tests; [приёмка и следующий gate](NativeAcceptanceWorkerAcceptance-20261108.ru.md).
+Полный248, actual native archives и Train→Test этим не приняты.
 На Elder удалены89, затем ещё13 подтверждённых дубликатов статических библиотек;
 данные/модели/ELF/INI/логи сохранены, собственная группа закрыта.
 [Операция и ограничения места](ElderDuplicateStaticArchiveRetirement-20261108.ru.md).
