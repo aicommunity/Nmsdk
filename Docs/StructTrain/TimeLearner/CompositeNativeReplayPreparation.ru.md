@@ -78,11 +78,15 @@ summary6 или XML-файл из отдельных полей ради про�
    Проверить exact STARTED log через maintained provenance helper. Записать
    actual evidence commit и SHA полного файлового manifest. Не выдать export
    existence за kernel closure или завершённый полный cohort.
-2. В новом owned analysis каталоге восстановить шесть role directories через
-   Git evidence и/или byte-preserved серверный cache с одними и теми же SHA.
-   Первичные JSON/CSV не переупаковывать посредством парсера и не изменять.
-   Если компактная публикация содержит ссылки на полный cache, до replay
-   сверить каждый реально использованный файл с manifest; missing bytes — отказ.
+2. Все первичные JSON/CSV и модели, используемые опубликованным результатом,
+   обязаны храниться с исходными bytes в сжатом Git evidence, с полным manifest
+   размеров/SHA и проверяемой привязкой к публикации. В новом owned analysis
+   каталоге восстановить шесть role directories из этих сохранённых bytes.
+   Same-host byte-preserved cache допустим как staging для анализа и полный render
+   cache после сверки каждого файла с Git manifest; он не является единственным
+   авторитетным источником. Одной hash-ссылки на отсутствующий в Git primary
+   недостаточно. Первичные данные не ресериализовать и не собирать fake package;
+   missing Git-backed bytes — отказ, а не fallback на cache.
 3. Сделать frozen read capture: regular files, canonical relative path, отсутствие
    symlink/escape/duplicate destinations, размер и SHA256 каждого файла, стабильность
    до/после чтения. Полный observed set должен совпасть с JSON+CSV union, либо
@@ -169,7 +173,10 @@ snapshot hashes и semantic identity (`audit_snapshot`, :53), model_revision
 против neuron identity, epoch, current actual_inputs против native graph, dataset
 semantic identity против initial source после mask restore, C0 state/witness и
 reference inventory/proofs против audited archive. XML digest и semantic hash
-сами по себе не доказывают native import либо XML→graph equivalence.
+подтверждают только согласованность сохранённых описаний. Без реального native
+import и отдельной проверки фактического native graph/response boundary audit
+не доказывает native_xml↔semantic graph equivalence, восстановление модели,
+её response или корректность Rdk lifecycle.
 
 Существующий `audit_composite_certificate(package, archive_audit)` (:29) требует
 полный package context. До actual package5 запрещено вызывать его с выдуманным

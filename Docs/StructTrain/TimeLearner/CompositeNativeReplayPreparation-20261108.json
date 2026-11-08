@@ -659,7 +659,8 @@
       "strict actual boundary schema1 only; do not fabricate package5 or summary6",
       "full plan/actual model/dataset/parameters/C0 and reference inventory checked before residual replay",
       "complete/certificate-null/nonpromotion expectations are per actual role, never a universal Exact claim",
-      "native XML digest/semantic identity are not native import proof"
+      "native XML digest/semantic identity are not native import proof",
+      "Without actual native import plus a separate actual graph/response check, boundary digest/semantic consistency does not establish native_xml-to-semantic-graph equivalence, model restoration, response or Rdk lifecycle correctness"
     ],
     "required_future_tests": [
       "actual complete Classic/Branch certificate residuals against all N inputs",
@@ -668,5 +669,12 @@
       "changed native XML bytes/model revision/epoch/actual inputs/dataset mask/C0/ref proof rejected even if document is rehashed",
       "mutated raw amplitude/timing/certificate proof list rejected; no promotion by codec success"
     ]
+  },
+  "fixture_publication_policy": {
+    "all_primary_json_csv_and_models_used_by_published_result": "must be byte-preserved in compressed Git evidence with complete bytes/SHA manifest and publication binding",
+    "same_host_cache": "analysis staging and full render cache only; verify against Git-backed bytes before use",
+    "hash_only_reference_to_cache_is_sufficient": false,
+    "missing_Git_primary": "reject; no cache fallback",
+    "data_reserialization_or_fake_package": false
   }
 }
