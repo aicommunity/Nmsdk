@@ -2,7 +2,7 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "a3a4ae70e2a13ebccd72450aa482a90d7ae6e925",
+  "pulse": "35f04bcffb530b17b489938cb8335dc28c1e0e15",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
@@ -51,11 +51,36 @@
         "NativeCandidateWindowFrames.ChangedDeclaredGroupCannotReachGeometry"
       ],
       "count": 12
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowProposalData.cpp",
+      "bytes": 7707,
+      "sha256": "6915d4633dfadf8c3b2293558b1d44f721e63d5f5d96766f530c60baf8b7009e",
+      "expected_test_ids": [
+        "CandidateWindowProposalData.StrictDataRoundtripDoesNotMintOpaqueReferenceOrReplayAuthority",
+        "CandidateWindowProposalData.BooleanSchemaCannotEqualOne",
+        "CandidateWindowProposalData.BooleanZeroIndicesAndEpochAreNotCounts",
+        "CandidateWindowProposalData.InexactSignedShiftAndAbsurdIndexAreRejectedBeforeUse",
+        "CandidateWindowProposalData.NonfiniteFeatureDoesNotBecomeAProposal",
+        "CandidateWindowProposalData.ChangedGridCannotHideBehindRehashedIdentifiers",
+        "CandidateWindowProposalData.ReferenceEdgeIsNotAnInteriorPlateauSeed",
+        "CandidateWindowProposalData.DeclaredSampleBudgetMustContainCandidateInterval",
+        "CandidateWindowProposalData.OffKeepsBothCapacitanceStatesNull",
+        "CandidateWindowProposalData.SameValueDuplicateJsonFieldIsRejectedAtByteBoundary",
+        "CandidateWindowProposalData.PredictedPeakIsNotARecognizedDataField",
+        "CandidateWindowProposalData.ChangedComputationWithoutHashRebindingIsRejected",
+        "CandidateWindowProposalData.ReboundFalseComputationIsStillOnlyDataAndNeedsOpaqueReplay",
+        "CandidateWindowProposalData.GroupRelabelChangesInstanceWithoutChangingRecipe",
+        "CandidateWindowProposalData.ChangedCandidateEpochAndPolicyChangeRecipe",
+        "CandidateWindowProposalData.MalformedHashAndEmptyReferenceCannotBecomeDataProof"
+      ],
+      "count": 16,
+      "scope": "synthetic DATA codecs and identity relationships; no opaque ReferenceSet or native/Train authority"
     }
   ],
-  "expected_count": 30,
+  "expected_count": 46,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 270,
+  "planned_cumulative_scope": 286,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [
@@ -85,7 +110,7 @@
     "frame-spec2.json",
     "after-model.json"
   ],
-  "scope": "Strict declaration codecs and diagnostic actual frame timestamp projection only",
+  "scope": "Strict declaration/proposal DATA codecs, opaque-input replay source, and diagnostic actual frame timestamp projection; replay/native positive acceptance pending actual reference factories",
   "explicitly_not_accepted": [
     "portable_proposal_replay",
     "allN_reference_seed_factory",
