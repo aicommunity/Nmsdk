@@ -75,7 +75,18 @@ Frozen Test сохраняет свою whole-response/global maximum и actual 
 Test должны быть зафиксированы полный model hash и реальный проверенный порог.
 Partial/stopped результаты diagnostic-only, без научного PASS.
 
-Проверки данного нового Python-кода ещё не выполнены. Все новые unit/native/
-pipeline проверки выполняются на серверах из Git-pushed source; локально только
-AST/static review. Общий runtime должен собираться из объединённого C++service+
+Cold6/protocol4 declaration и condition projection проверены на M40: production
+validation CLI,39/39 методов, failures/errors/skips0. Проверенный source root
+`241159242f7c90d46c426c1009e04c103e560822`, evidence
+`28f90a67a4bcc39df43f8f78235b088f5f65b960`.
+416 исходных Python blobs совпадают с Git до/после; каждый member32-file
+compact archive проверен отдельно (31096 bytes, SHA256
+`bfa74259822e88d8a7b7ee372e8d300839059c5e1554a7637322794536287b9f`).
+Worker owner PID/start совпадает с kernel binding, unit закрыт, leasereleased
+штатным release(note). Зарегистрированный managed child graph не заявляется.
+[Независимая metadata-сверка](CompositeTrainingPythonDeclarationVerification-20261108.json).
+
+Это проверка деклараций/регрессий, не новых native measurements или обучения.
+Все новые unit/native/pipeline проверки выполняются на серверах из Git-pushed
+source; локально только AST/static review. Общий runtime должен собираться из объединённого C++service+
 Python closure: старый compiled runtime не подтверждает поддержку cold6.
