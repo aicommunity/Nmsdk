@@ -599,16 +599,16 @@ template<class Owner> void ServiceInvalidRawStillDelivered() {
 }
 template<class Owner> void ServiceSlowRawSinkUsesRealDeadline() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;double elapsed=0.;
-    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=15.;
+    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=60.;
     p.observationSink=[&](const NativeProbeResult& packet){
         ++closed;EXPECT_EQ(packet.status,NativeProbeStatus::Completed);
         if(closed==f.protocol.inputs.size()+2) {
-            const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(16));
+            const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(61));
             elapsed=NativeTrainingWallTime()-before;
         }
     };
     ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
-    EXPECT_GE(elapsed,15.);EXPECT_EQ(closed,f.protocol.inputs.size()+2);
+    EXPECT_GE(elapsed,60.);EXPECT_EQ(closed,f.protocol.inputs.size()+2);
     EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
     EXPECT_NE(service.Reason().find("group_time_budget"),std::string::npos);
     ASSERT_EQ(service.CompositeMeasurements().size(),1u);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
@@ -652,17 +652,62 @@ template<class Owner> void ServiceRecordSinkLifetime(bool postConsume,bool throw
 }
 template<class Owner> void ServiceLastCompositeSinkUsesRealGroupDeadline() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);bool slept=false;double elapsed=0.;
-    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=15.;
+    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=60.;
     p.compositeSink=[&](const NativeCompositeMeasurementRecord& record){
         if(record.purpose!=CompositeMeasurementPurpose::Final || !record.consumed ||
             f.owner->NativeTrainingController().CompositeFinalGroupIds().size()!=f.protocol.inputs.size())return;
         EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
-        slept=true;const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(16));
+        slept=true;const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(61));
         elapsed=NativeTrainingWallTime()-before;
     };
     ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
-    EXPECT_TRUE(slept);EXPECT_GE(elapsed,15.);EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
+    EXPECT_TRUE(slept);EXPECT_GE(elapsed,60.);EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
     EXPECT_FALSE(service.Certificate());EXPECT_NE(service.Reason().find("group_time_budget"),std::string::npos);
+}
+
+// Diagnostic only: keep the existing native model, mathematical tolerances and
+// ordinary 300-second engineering group budget. No clock is replaced and no
+// callback sleeps. Record the path before choosing a cheaper deadline control.
+template<class Owner> void ServiceLastCompositeSinkReachabilityDiagnostic() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);
+    QJsonArray events;bool reachedLastFinal=false;
+    const auto observe=[&](const char* stage,const NativeCompositeMeasurementRecord& record) {
+        const double now=NativeTrainingWallTime();
+        const auto finals=f.owner->NativeTrainingController().CompositeFinalGroupIds().size();
+        const bool last=record.purpose==CompositeMeasurementPurpose::Final && record.consumed && finals==f.protocol.inputs.size();
+        if(last && std::string(stage)=="after_consume")reachedLastFinal=true;
+        events.append(QJsonObject{{"stage",QString::fromLatin1(stage)},{"wall",now},{"group_id",QString::fromStdString(record.groupId)},
+            {"run_id",QString::fromStdString(record.logical.runId)},{"input_id",QString::fromStdString(record.logical.inputId)},
+            {"purpose",int(record.purpose)},{"consumed",record.consumed},{"final_group_count",double(finals)},
+            {"last_final",last},{"elapsed_from_group_start",now-record.startWall}});
+    };
+    p.beforeCompositeConsume=[&](const auto& record){observe("before_consume",record);};
+    p.compositeSink=[&](const auto& record){observe("after_consume",record);};
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    QJsonArray groups;
+    for(const auto& record:service.CompositeMeasurements())groups.append(QJsonObject{
+        {"group_id",QString::fromStdString(record.groupId)},{"run_id",QString::fromStdString(record.logical.runId)},
+        {"input_id",QString::fromStdString(record.logical.inputId)},{"purpose",int(record.purpose)},
+        {"state",int(record.groupState)},{"reason",QString::fromStdString(record.reason)},{"consumed",record.consumed},
+        {"start_wall",record.startWall},{"end_wall",record.endWall},{"elapsed",record.endWall-record.startWall},
+        {"maximum_group_wall_seconds",record.maximumGroupWallSeconds},
+        {"raw_trials",double(record.rawTrials.size())},{"sampled_frames",double(record.sampledFrames)}});
+    const QJsonObject diagnostic{{"kind","native_composite_last_final_reachability"},{"schema_version",1},
+        {"topology",NativeCompositeFixture<Owner>::branch?"Branch":"Classic"},
+        {"declared_group_wall_seconds",p.composite->maximumGroupWallSeconds},{"contains_sleep",false},
+        {"last_final_entered",reachedLastFinal},{"outcome",int(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"groups",groups},{"callback_events",events},
+        {"contains_evaluation_verdict",false}};
+    if(const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT")) {
+        const auto base=QString::fromLocal8Bit(output)+"/deadline-reachability";
+        Require(QDir().mkpath(base),"deadline_diagnostic_output_directory");
+        QFile file(base+(NativeCompositeFixture<Owner>::branch?"/branch.json":"/classic.json"));
+        Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"deadline_diagnostic_output_new_only");
+        const auto bytes=QJsonDocument(diagnostic).toJson();
+        Require(file.write(bytes)==bytes.size() && file.flush(),"deadline_diagnostic_output_write");
+    }
+    EXPECT_TRUE(reachedLastFinal)<<service.Reason();EXPECT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    EXPECT_EQ(p.composite->maximumGroupWallSeconds,300.);EXPECT_TRUE(service.Certificate());
 }
 enum class MutableSinkStage { Raw,BeforeConsume,Composite };
 template<class Owner> void ServiceMutableNthStop(MutableSinkStage stage) {
@@ -803,6 +848,8 @@ TEST(NativeCompositeService,ClassicLastCompositeSinkThrowCannotPublishExact){Ser
 TEST(NativeCompositeService,BranchLastCompositeSinkThrowCannotPublishExact){ServiceRecordSinkLifetime<NNeuronTimeLearnerBranch>(true,true);}
 TEST(NativeCompositeService,ClassicLastCompositeSinkCannotCrossRealGroupDeadline){ServiceLastCompositeSinkUsesRealGroupDeadline<NNeuronTimeLearner>();}
 TEST(NativeCompositeService,BranchLastCompositeSinkCannotCrossRealGroupDeadline){ServiceLastCompositeSinkUsesRealGroupDeadline<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeDeadlineDiagnostic,ClassicUnchangedLastFinalReachability){ServiceLastCompositeSinkReachabilityDiagnostic<NNeuronTimeLearner>();}
+TEST(NativeCompositeDeadlineDiagnostic,BranchUnchangedLastFinalReachability){ServiceLastCompositeSinkReachabilityDiagnostic<NNeuronTimeLearnerBranch>();}
 TEST(NativeCompositeService,ClassicMutableRawSinkStopsOnSecondActualPacket){ServiceMutableNthStop<NNeuronTimeLearner>(MutableSinkStage::Raw);}
 TEST(NativeCompositeService,BranchMutableRawSinkStopsOnSecondActualPacket){ServiceMutableNthStop<NNeuronTimeLearnerBranch>(MutableSinkStage::Raw);}
 TEST(NativeCompositeService,ClassicMutableBeforeConsumeStopsOnSecondActualGroup){ServiceMutableNthStop<NNeuronTimeLearner>(MutableSinkStage::BeforeConsume);}
