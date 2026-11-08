@@ -217,6 +217,41 @@ class NativePreparationTest(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, "attestation_outside_scope"):
             subject.serialize_preparation(spec)
 
+    def test_rehashed_unknown_schema_or_extra_attestation_field_is_rejected(self):
+        for key, value in [("schema_version", 2), ("schema_version", True),
+                           ("build_success_attested", True)]:
+            with self.subTest(key=key, value=value):
+                spec = self.prepare();spec[key] = value
+                spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
+                with self.assertRaisesRegex(EvidenceError, "serialized_schema"):
+                    subject.serialize_preparation(spec)
+
+    def test_rehashed_inventory_promotion_is_rejected(self):
+        spec = self.prepare();spec["source_inventory"]["test_success_attested"] = True
+        spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
+        with self.assertRaisesRegex(EvidenceError, "serialized_inventory_schema"):
+            subject.serialize_preparation(spec)
+
+    def test_rehashed_unknown_nested_active_fields_are_rejected(self):
+        for field in ["worker", "supervisor", "current"]:
+            with self.subTest(field=field):
+                spec = self.prepare();spec[field]["kernel_closure_attested"] = True
+                spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
+                with self.assertRaisesRegex(EvidenceError, "serialized_object_schema"):
+                    subject.serialize_preparation(spec)
+
+    def test_rehashed_recognized_count_and_source_hash_shape_remain_strict(self):
+        for fault in ["count", "source_hash"]:
+            with self.subTest(fault=fault):
+                spec = self.prepare()
+                if fault == "count":
+                    spec["source_inventory"]["count"] = True
+                else:
+                    spec["source_inventory"]["files"][CPP]["sha256"] = "not-a-hash"
+                spec["sha256"] = digest_json({k: v for k, v in spec.items() if k != "sha256"})
+                with self.assertRaisesRegex(EvidenceError, "serialized_inventory_schema"):
+                    subject.serialize_preparation(spec)
+
     def test_mutating_caller_plan_cannot_rewrite_prepared_spec(self):
         spec = self.prepare();original = subject.serialize_preparation(spec)
         self.plan[0]["wall_seconds"] += 1

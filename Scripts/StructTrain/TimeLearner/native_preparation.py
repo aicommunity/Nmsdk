@@ -11,13 +11,22 @@ import hashlib
 import json
 import re
 
-from .collector_provenance import capture_git_case_inventory, _signed
+from .collector_provenance import capture_git_case_inventory, _signed, _relative
 from .native_evidence import require
 from .runtime import digest_json
 
 
 _BINDING_KEYS = {"kind", "schema_version", "request_sha256", "unit", "invocation_id",
                  "control_group", "initial_main_pid", "initial_start_ticks", "sha256"}
+_SPEC_KEYS = {"kind", "schema_version", "source_inventory", "current", "current_claims",
+              "prior_bindings", "worker", "supervisor", "static_embedded_worker_bytes_equal",
+              "historical", "physical_worker_bytes_verified", "compiled_inventory_verified",
+              "kernel_closure_attested", "test_success_attested", "scientific_verdict", "sha256"}
+_INVENTORY_KEYS = {"kind", "schema_version", "source_closure", "root_commit", "files",
+                   "documents", "ids", "count", "compiled_inventory_verified",
+                   "test_success_attested", "scientific_verdict"}
+_FILE_KEYS = {"commit", "path", "git_blob", "bytes", "sha256", "dialect", "suites",
+              "ids", "recognized_ids", "outside_declared_scope"}
 
 
 def _sha(raw):
@@ -41,6 +50,11 @@ def _ids(value, reason):
 
 def _label(value):
     return type(value) is str and bool(value) and not any(ord(c) < 32 for c in value)
+
+
+def _keys(value, keys):
+    require(type(value) is dict and set(value) == set(keys),
+            "native_preparation_serialized_object_schema")
 
 
 def embedded_worker_bytes(supervisor, *, platform):
@@ -229,11 +243,75 @@ def serialize_preparation(spec):
     require(type(spec) is dict and spec.get("kind") == "timelearner_native_preparation" and
             spec.get("sha256") == digest_json({k: v for k, v in spec.items() if k != "sha256"}),
             "native_preparation_content_changed")
-    require(type(spec.get("schema_version")) is int and spec["schema_version"] == 1 and
+    require(set(spec) == _SPEC_KEYS and type(spec.get("schema_version")) is int and
+            spec["schema_version"] == 1, "native_preparation_serialized_schema")
+    require(
             spec.get("static_embedded_worker_bytes_equal") is True and
             all(spec.get(k) is False for k in ["physical_worker_bytes_verified",
                 "compiled_inventory_verified", "kernel_closure_attested", "test_success_attested"])
             and spec.get("scientific_verdict", "missing") is None,
             "native_preparation_attestation_outside_scope")
+    inventory = spec["source_inventory"]
+    require(type(inventory) is dict and set(inventory) == _INVENTORY_KEYS and
+            inventory["kind"] == "timelearner_git_case_inventory" and
+            type(inventory["schema_version"]) is int and inventory["schema_version"] == 1 and
+            inventory["compiled_inventory_verified"] is False and
+            inventory["test_success_attested"] is False and inventory["scientific_verdict"] is None,
+            "native_preparation_serialized_inventory_schema")
+    _keys(spec["worker"], {"bytes", "sha256"})
+    _keys(spec["supervisor"], {"bytes", "sha256", "platform"})
+    require(spec["supervisor"]["platform"] == "posix", "native_preparation_serialized_schema")
+    for item, limit in [(spec["worker"], 2*1024**2), (spec["supervisor"], 8*1024**2)]:
+        require(type(item["bytes"]) is int and 0 <= item["bytes"] <= limit and
+                type(item["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", item["sha256"]),
+                "native_preparation_serialized_object_schema")
+    require(type(inventory["files"]) is dict and type(inventory["source_closure"]) is dict and
+            inventory["documents"] == [], "native_preparation_serialized_inventory_schema")
+    _ids(inventory["ids"], "native_preparation_serialized_inventory_schema")
+    require(type(inventory["count"]) is int and inventory["count"] == len(inventory["ids"]),
+            "native_preparation_serialized_inventory_schema")
+    source_ids = []
+    for path, row in inventory["files"].items():
+        _keys(row, _FILE_KEYS)
+        _relative(path)
+        require(row["path"] == path and row["commit"] == inventory["root_commit"] and
+                type(row["bytes"]) is int and row["bytes"] >= 0 and
+                type(row["git_blob"]) is str and re.fullmatch(r"[0-9a-f]{40}", row["git_blob"]) and
+                type(row["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", row["sha256"]),
+                "native_preparation_serialized_inventory_schema")
+        source_ids += _ids(row["ids"], "native_preparation_serialized_inventory_schema")
+    require(len(source_ids) == len(set(source_ids)) and set(source_ids) == set(inventory["ids"]),
+            "native_preparation_serialized_inventory_schema")
+    for name, row in inventory["source_closure"].items():
+        _keys(row, {"head", "status"} if name == "root" else {"head", "status", "recorded_gitlink"})
+    current = spec["current"]
+    _keys(current, {"root", "pulse", "inventory", "runplan", "partitions", "counts"})
+    _keys(current["inventory"], {"root", "total", "unique", "files"})
+    _keys(current["counts"], {"selected_cases", "leaf_gates"})
+    require(type(current["runplan"]) is list and all(type(r) is dict and
+            type(r.get("expected_ids")) is list for r in current["runplan"]),
+            "native_preparation_serialized_object_schema")
+    selected = [v for row in current["runplan"] for v in row["expected_ids"]]
+    expected = _layout(inventory, selected, current["runplan"], current["partitions"])
+    require(digest_json(expected) == digest_json(current), "native_preparation_current_claim_mismatch")
+    _claims(spec["current_claims"], expected, inventory)
+    require(type(spec["prior_bindings"]) is list, "native_preparation_binding_collection")
+    originals, bindings = {}, []
+    for row in spec["prior_bindings"]:
+        _keys(row, {"binding_path", "binding", "original_bytes", "original_sha256", "original_base64"})
+        require(_label(row["binding_path"]) and type(row["original_base64"]) is str and
+                len(row["original_base64"]) <= 90*1024,
+                "native_preparation_binding_original_missing")
+        try:
+            raw = base64.b64decode(row["original_base64"], validate=True)
+        except (TypeError, ValueError):
+            require(False, "native_preparation_binding_original_missing")
+        require(type(row["original_bytes"]) is int and len(raw) == row["original_bytes"] and
+                _sha(raw) == row["original_sha256"] and row["binding_path"] not in originals,
+                "native_preparation_binding_original_missing")
+        originals[row["binding_path"]] = raw
+        bindings.append({"binding_path": row["binding_path"], "binding": row["binding"]})
+    require(_prior_bindings(bindings, originals) == spec["prior_bindings"],
+            "native_preparation_binding_changed")
     return (json.dumps(spec, ensure_ascii=False, sort_keys=True, indent=2,
                        allow_nan=False) + "\n").encode("utf-8")
