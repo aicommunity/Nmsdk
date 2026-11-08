@@ -546,3 +546,14 @@ assertion failures0; ожидаемый набор не совпал, worker к�
 алгоритмов, с точными четырьмя macro IDs и обязательным сравнением с
 `--gtest_list_tests` скомпилированного binary. Ранние ссылки на94/71 обозначают
 ошибочную постановку A1, а не принятую полноту.
+
+
+Mechanical A2 принят:97/97 (74 bounded +23 Final/Clock), actual compiled
+inventory проверен до исполнения;9 native groups +outer закрыты, lease released.
+Git evidence `917b94627c1290517c61774698b16c01995c849c`,
+[независимая проверка](TypedCompositeMechanicalM40A2Verification.json):299
+архивных members,3050 materialized source/resource hashes по Git,75 actual
+loaded files по runtime ledger. Исходный отказ A1 сохранён на сервере с
+postclosure capture; его отдельная Git-публикация ещё ожидается.
+Новый composite core27ba/269 запущен отдельно:143 ожидаемых случая (97+46).
+Результат ещё не принят; service/codecs/CLI и научная матрица не закрыты.
