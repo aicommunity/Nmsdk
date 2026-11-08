@@ -586,16 +586,16 @@ template<class Owner> void ServiceInvalidRawStillDelivered() {
 }
 template<class Owner> void ServiceSlowRawSinkUsesRealDeadline() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t closed=0;double elapsed=0.;
-    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=15.;
+    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=60.;
     p.observationSink=[&](const NativeProbeResult& packet){
         ++closed;EXPECT_EQ(packet.status,NativeProbeStatus::Completed);
         if(closed==f.protocol.inputs.size()+2) {
-            const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(16));
+            const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(61));
             elapsed=NativeTrainingWallTime()-before;
         }
     };
     ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
-    EXPECT_GE(elapsed,15.);EXPECT_EQ(closed,f.protocol.inputs.size()+2);
+    EXPECT_GE(elapsed,60.);EXPECT_EQ(closed,f.protocol.inputs.size()+2);
     EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
     EXPECT_NE(service.Reason().find("group_time_budget"),std::string::npos);
     ASSERT_EQ(service.CompositeMeasurements().size(),1u);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
@@ -639,16 +639,16 @@ template<class Owner> void ServiceRecordSinkLifetime(bool postConsume,bool throw
 }
 template<class Owner> void ServiceLastCompositeSinkUsesRealGroupDeadline() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);bool slept=false;double elapsed=0.;
-    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=15.;
+    p.maximumWallSeconds=1800.;p.composite->maximumGroupWallSeconds=60.;
     p.compositeSink=[&](const NativeCompositeMeasurementRecord& record){
         if(record.purpose!=CompositeMeasurementPurpose::Final || !record.consumed ||
             f.owner->NativeTrainingController().CompositeFinalGroupIds().size()!=f.protocol.inputs.size())return;
         EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
-        slept=true;const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(16));
+        slept=true;const double before=NativeTrainingWallTime();std::this_thread::sleep_for(std::chrono::seconds(61));
         elapsed=NativeTrainingWallTime()-before;
     };
     ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
-    EXPECT_TRUE(slept);EXPECT_GE(elapsed,15.);EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
+    EXPECT_TRUE(slept);EXPECT_GE(elapsed,60.);EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
     EXPECT_FALSE(service.Certificate());EXPECT_NE(service.Reason().find("group_time_budget"),std::string::npos);
 }
 
