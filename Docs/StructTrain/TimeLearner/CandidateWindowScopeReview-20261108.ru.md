@@ -45,3 +45,25 @@ Fixed-window compatibility остаётся воспроизводимой; её
 
 Реализация и адресные проверки переданы в текущую работу по общему контроллеру.
 Этот документ фиксирует открытый пункт, а не объявляет его исправленным.
+
+## Проверенный следующий подэтап
+
+Отдельный pure module подготовлен на Root
+`df06a7014f7b62a09b394d4aea31ea96c831feeb` / Pulse
+`e7a38933051706f8f2fa76fe322c3fe7401ee52a`.
+На M40 обычная и ASan-сборки прошли по 40/40 случаев. Проверяется один
+детерминированный frame interval по immutable arithmetic seed и actual-parameter
+facts: границы, переполнения, размеры, declared grid/source/reset policy,
+учёт изменений L/Ns/Rs/C. Прогноз не возвращает измеренную амплитуду/время.
+
+Evidence `72da089b46d64aaa9bd8a4abdc6acfddf0c8bebb` опубликован;
+[независимая проверка](CandidateWindowPure40M40A1Verification.json)
+сверила 139 членов архива, source Git blobs, compiled inventory/JUnit,
+загруженные библиотеки и закрытие трёх групп. Это standalone target projection,
+а не полный root CMake/SDK gate; проверка утечек не заявляется.
+
+Arithmetic result является только данными. Модуль не предоставляет способа
+создать trusted reference seed из raw facts и ещё не подключён к native Train.
+Следующий bridge должен связать окно с полным reference capture, реальным
+owner/input map, source/model epoch и заранее объявленной группой проб.
+Фиксированное окно текущего service пока остаётся открытым ограничением.
