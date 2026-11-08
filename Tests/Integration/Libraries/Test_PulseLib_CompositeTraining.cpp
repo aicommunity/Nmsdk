@@ -15,6 +15,7 @@
 #include "TimeLearner/NativeCandidateWindowBindings.h"
 #include "TimeLearner/CandidateWindowProposalReplay.h"
 #include "TimeLearner/CandidateWindowMeasurementEvidence.h"
+#include "TimeLearner/CandidateWindowPortableReferences.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h"
@@ -1711,3 +1712,160 @@ TEST(NativeCandidateWindowFactory,OwnerResetExpiresPreparedReferences){WindowRef
 TEST(NativeCandidateWindowFactory,OwnerDefaultExpiresPreparedReferences){WindowReferenceBoundary<NNeuronTimeLearnerBranch>(WindowReferenceStop::Default);}
 TEST(NativeCandidateWindowFactory,ChangedNativeModelBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::ChangedModel);}
 TEST(NativeCandidateWindowFactory,RebuiltSameSemanticGraphCannotReviveReferences){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::RebuiltSameSemanticGraph);}
+
+namespace {
+template<class Owner> const NativeCompositeArchiveDocument& ActualWindowArchive(bool c0=false) {
+    static std::map<bool,NativeCompositeArchiveDocument> cached;const auto found=cached.find(c0);if(found!=cached.end())return found->second;
+    NativeCompositeFixture<Owner> f(2000,false,64,c0,true);EnableCandidateWindow(f);CaptureWindowReferences(f);
+    f.Run(f.Request(0,"candidate-attempt","candidate-attempt/search/1"),CompositeMeasurementPurpose::Search);
+    Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
+    auto archive=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    const auto name=NativeCompositeFixture<Owner>::branch?(c0?"branch-window-archive2-C0":"branch-window-archive2"):
+        (c0?"classic-window-archive2-C0":"classic-window-archive2");
+    SaveCompositeArchive(archive,name);SaveCompositeBoundary(f,name);
+    return cached.emplace(c0,std::move(archive)).first->second;
+}
+template<class Owner> void WindowArchiveReplay(bool c0=false) {
+    const auto& archive=ActualWindowArchive<Owner>(c0);const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document,[&](const QString& p){return archive.primary.at(p);});
+    EXPECT_EQ(decoded.Document(),archive.document);EXPECT_EQ(decoded.Protocol().schemaVersion,5u);EXPECT_EQ(decoded.ReferenceGroups().size(),2u);
+    EXPECT_TRUE(decoded.FinalGroups().empty());const auto refs=CandidateWindowPortableReferenceFactory::Replay(decoded);
+    EXPECT_EQ(refs.InputCount(),2u);EXPECT_EQ(refs.SourceOrigin(),decoded.SourceOrigin());EXPECT_EQ(refs.OwnerFamilyBinding(),decoded.OwnerFamilyBinding());
+    EXPECT_NO_THROW(DecodeNativeCompositeTrainingArchive(QJsonDocument(archive.document).toJson(QJsonDocument::Compact)));
+    EXPECT_THROW(CompositePortableTrainingProof::Replay(decoded,VerificationTolerances{},decoded.Records().back().logical.baseModelRevision,0),std::invalid_argument);
+}
+void WindowArchiveReject(const std::function<void(QJsonObject&)>& tamper) {
+    auto data=ActualWindowArchive<NNeuronTimeLearner>().document;tamper(data);RebindArchive(data);
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(data),std::invalid_argument);
+}
+void MutateWindowRecord(QJsonObject& data,int index,const std::function<void(QJsonObject&)>& tamper) {
+    auto records=data["records"].toArray();auto record=records[index].toObject();tamper(record);records[index]=record;data["records"]=records;
+}
+void WindowArchiveRename() {
+    const auto& source=ActualWindowArchive<NNeuronTimeLearner>();auto data=source.document;auto records=data["records"].toArray();std::map<QString,QString> names;
+    for(int i=0;i<records.size();++i) {auto record=records[i].toObject();auto raw=record["raw_trials"].toArray();auto native=record["native_group"].toObject();auto traces=native["traces"].toArray();
+        for(int j=0;j<raw.size();++j){auto item=raw[j].toObject();auto ref=item["primary_ref"].toObject();const auto old=ref["relative_path"].toString();const auto name="renamed/"+old;
+            names.emplace(name,old);ref["relative_path"]=name;item["primary_ref"]=ref;raw[j]=item;auto trace=traces[j].toObject();trace["relative_path"]=name;traces[j]=trace;}
+        record["raw_trials"]=raw;native["traces"]=traces;record["native_group"]=native;records[i]=record;}
+    data["records"]=records;RebindArchive(data);EXPECT_NE(data["artifact_document_sha256"],source.document["artifact_document_sha256"]);
+    const auto replay=DecodeNativeCompositeTrainingArchive(data,[&](const QString& name){return source.primary.at(names.at(name));});
+    const auto original=DecodeNativeCompositeTrainingArchive(source.document);ASSERT_EQ(replay.Records().size(),original.Records().size());
+    for(std::size_t i=0;i<replay.Records().size();++i)EXPECT_EQ(replay.Records()[i].semanticProofId,original.Records()[i].semanticProofId);
+}
+void ReboundWindowClaimStillRequiresReplay(bool falsePhysicalReadback) {
+    const auto& original=ActualWindowArchive<NNeuronTimeLearner>();const auto decoded=DecodeNativeCompositeTrainingArchive(original.document);
+    auto record=decoded.Records().back();ASSERT_TRUE(record.windowProposal);auto& proposal=*record.windowProposal;
+    if(falsePhysicalReadback) {
+        auto binding=ParseStrictNativeJsonObject(record.candidateBindingJson,128u*1024u*1024u);auto physical=binding["physical_readback"].toObject();
+        auto values=physical["parameters"].toArray();auto first=values[0].toObject();first["resistance"]=first["resistance"].toDouble()*1.1;
+        values[0]=first;physical["parameters"]=values;binding["physical_readback"]=physical;
+        record.candidateBindingJson=QJsonDocument(binding).toJson(QJsonDocument::Compact).toStdString();
+        proposal.candidateBinding=NmsdkTools::CanonicalModelDataSha256(binding).toStdString();proposal.candidate.parameters[0].resistance*=1.1;
+        proposal.computation=CalculateCandidateWindowArithmetic(decoded.Protocol().candidateWindowMeasurement->candidateWindowPolicy,proposal.reference,proposal.candidate);
+        ASSERT_EQ(proposal.computation.status,CandidateWindowComputationStatus::Computed);
+    } else ++proposal.computation.shiftFrames;
+    proposal.windowRecipeId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowRecipeContent(proposal)).toStdString();
+    proposal.measurementInstanceId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowInstanceContent(proposal)).toStdString();
+    EXPECT_NO_THROW(DecodeCandidateWindowProposalData(EncodeCandidateWindowProposalData(proposal)));
+    record.semanticProofId=CandidateWindowTrainingSemanticProofId(decoded.Protocol(),record);
+    auto data=original.document;MutateWindowRecord(data,2,[&](auto& wire){wire["window_proposal"]=EncodeCandidateWindowProposalData(proposal);
+        const auto binding=ParseStrictNativeJsonObject(record.candidateBindingJson,128u*1024u*1024u);wire["candidate_binding"]=binding;
+        wire["candidate_witness_id"]=NmsdkTools::CanonicalModelDataSha256(binding);auto measured=wire["measurement"].toObject();
+        measured["semantic_proof_id"]=QString::fromStdString(record.semanticProofId);wire["measurement"]=measured;});RebindArchive(data);
+    // Every public content ID is self-consistent; rejection must still follow
+    // from real graph/control-knob or independently recomputed policy facts.
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(data),std::invalid_argument);
+}
+void WindowInstanceBindingIsSemanticContent() {
+    const auto& original=ActualWindowArchive<NNeuronTimeLearner>();const auto decoded=DecodeNativeCompositeTrainingArchive(original.document);
+    auto record=decoded.Records().back();const auto changed=record.group.specification.modelInstanceBinding+"-changed";
+    record.group.specification.modelInstanceBinding=changed;record.group.witness.fullBefore.modelInstanceBinding=changed;
+    record.group.witness.fullAfter.modelInstanceBinding=changed;for(auto& control:record.group.witness.omitEachInput)control.modelInstanceBinding=changed;
+    EXPECT_NE(CandidateWindowTrainingSemanticProofId(decoded.Protocol(),record),record.semanticProofId);
+    auto data=original.document;MutateWindowRecord(data,2,[&](auto& r){auto native=r["native_group"].toObject();
+        auto spec=native["specification"].toObject();spec["model_instance_binding"]=QString::fromStdString(changed);native["specification"]=spec;
+        auto traces=native["traces"].toArray();for(int i=0;i<traces.size();++i){auto trace=traces[i].toObject();auto binding=trace["binding"].toObject();
+            binding["model_instance_binding"]=QString::fromStdString(changed);trace["binding"]=binding;traces[i]=trace;}
+        native["traces"]=traces;r["native_group"]=native;});RebindArchive(data);
+    // Consistent changed opaque labels are DATA, not a new execution claim.
+    // They nevertheless cannot reuse the previous measurement content ID.
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(data),std::invalid_argument);
+}
+template<class Owner> void WindowArchiveWarm(bool c0=false) {
+    NativeCompositeFixture<Owner> f(2000,false,64,c0,true);EnableCandidateWindow(f);const auto references=CaptureWindowReferences(f);
+    const auto cold=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);const auto replay=DecodeNativeCompositeTrainingArchive(cold.document);
+    const auto originalParameters=f.owner->ReadNativeParameters();const auto source=f.attempt->SourceOrigin(),family=f.attempt->OwnerFamilyBinding();
+    f.attempt.reset();auto candidate=originalParameters;candidate[0].length=3;
+    const auto edit=f.owner->ApplyNativeParameters(candidate);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
+    f.owner->Reset();f.owner->IsNeedToTrain=true;const auto& context=f.protocol.candidateWindowMeasurement->contextPolicy;
+    f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,replay,CompositeAttemptLimits{64,256,64*context.maximumTotalSamples,120.,7200.},
+        NativeCandidateWindowAttemptDeclaration{"warm-candidate",128u*1024u*1024u},f.Time(),Wall());
+    ASSERT_TRUE(f.attempt->CandidateWindowReferences());EXPECT_EQ(f.attempt->SourceOrigin(),source);EXPECT_EQ(f.attempt->OwnerFamilyBinding(),family);
+    EXPECT_EQ(f.attempt->IssuedGroups(),0u);EXPECT_EQ(f.attempt->IssuedNativeProbes(),0u);
+    f.Run(f.Request(0,"warm-candidate","warm-candidate/search/1",1),CompositeMeasurementPurpose::Search);ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    const auto record=f.attempt->Record();ASSERT_TRUE(record.windowProposal);EXPECT_EQ(record.windowProposal->reference.initialParameters,originalParameters);
+    EXPECT_EQ(record.windowProposal->referenceProofId,references.Inputs()[0].semanticProofId);EXPECT_EQ(record.windowProposal->computation.lengthChange,1u);
+    EXPECT_EQ(f.attempt->CandidateWindowRecords().size(),3u);const auto after=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    const auto decoded=DecodeNativeCompositeTrainingArchive(after.document);EXPECT_EQ(decoded.ReferenceGroups(),replay.ReferenceGroups());
+    EXPECT_EQ(decoded.CurrentAttemptId(),"warm-candidate");EXPECT_EQ(decoded.Records()[0].semanticProofId,replay.Records()[0].semanticProofId);
+    const auto counters=after.document["counters"].toObject();EXPECT_EQ(counters["attempt"].toObject()["logical_groups"],QJsonValue(1));
+    EXPECT_EQ(counters["archive"].toObject()["groups"],QJsonValue(3));
+    const auto name=NativeCompositeFixture<Owner>::branch?(c0?"branch-window-warm2-C0":"branch-window-warm2"):(c0?"classic-window-warm2-C0":"classic-window-warm2");
+    SaveCompositeArchive(after,name);SaveCompositeBoundary(f,name);
+}
+void WindowPartialArchive() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);CaptureWindowReferences(f);
+    bool stopped=false;f.Run(f.Request(0,"candidate-attempt","candidate-attempt/search/1"),CompositeMeasurementPurpose::Search,{},[&](){
+        if(!stopped && f.rawSamples){stopped=true;f.owner->IsNeedToTrain.SetDataDirect(false);}});
+    ASSERT_TRUE(stopped);EXPECT_FALSE(f.attempt->Measurement());const auto archive=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    const auto replay=DecodeNativeCompositeTrainingArchive(archive.document);ASSERT_EQ(replay.Records().size(),3u);
+    EXPECT_FALSE(replay.Records().back().consumed);EXPECT_TRUE(replay.Records().back().semanticProofId.empty());
+    EXPECT_NO_THROW(CandidateWindowPortableReferenceFactory::Replay(replay));SaveCompositeArchive(archive,"classic-window-partial2");SaveCompositeBoundary(f,"classic-window-partial2");
+    auto promoted=archive.document;MutateWindowRecord(promoted,2,[](auto& r){r["consumed"]=true;r["training_requested_at_consume"]=true;});RebindArchive(promoted);
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(promoted),std::invalid_argument);
+}
+template<class Owner> void WindowDimensionArchive(std::size_t n) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true,false,n,7200.,true);EnableCandidateWindow(f);
+    for(std::size_t input=0;input<n;++input) {
+        const std::string run="candidate-attempt/capture/1";const auto limit=(f.prototype.specification.end+.02)*(n+2)+.1;
+        f.Run(f.Request(input,run,run+"/"+std::to_string(input)),CompositeMeasurementPurpose::Reference,{},{},limit,600.);
+        ASSERT_TRUE(f.attempt->Group());const auto record=f.attempt->Record();ASSERT_EQ(record.groupState,NativeMatchedOmissionState::Completed)<<record.reason;
+        EXPECT_EQ(record.group.packets.size(),n+2);EXPECT_EQ(record.rawTrials.size(),n+2);EXPECT_EQ(record.logical.inputIndex,input);
+        EXPECT_EQ(f.attempt->CandidateWindowReferences(),nullptr);
+        // Independent declared fixture expectations, not helper-formatted paths.
+        const auto readback=ParseStrictNativeJsonObject(record.candidateBindingJson,128u*1024u*1024u)["physical_readback"].toObject()["input_banks"].toArray();
+        ASSERT_EQ(std::size_t(readback.size()),n);
+        for(std::size_t i=0;i<n;++i)EXPECT_EQ(readback[int(i)].toObject()["bank_path"],QString("$.Dendrite%1_%2").arg(NativeCompositeFixture<Owner>::branch?1:int(i+1)).arg(int(n-i)));
+    }
+    const auto archive=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document);
+    EXPECT_EQ(decoded.Records().size(),n);EXPECT_TRUE(decoded.ReferenceGroups().empty());EXPECT_TRUE(decoded.FinalGroups().empty());
+    EXPECT_THROW(CandidateWindowPortableReferenceFactory::Replay(decoded),std::invalid_argument);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-distinct2-N":"classic-window-distinct2-N")+std::to_string(n);
+    SaveCompositeArchive(archive,name.c_str());SaveCompositeBoundary(f,name.c_str());
+    // Positive actual dimension/routing closure; geometry/targets remain
+    // honestly unpromoted. This does not promise allN training convergence.
+}
+}
+TEST(NativeCandidateWindowArchive,ClassicActualPrimaryReplaysCompleteReferencesAndProposal){WindowArchiveReplay<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowArchive,BranchActualPrimaryReplaysCompleteReferencesAndProposal){WindowArchiveReplay<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowArchive,ActualBoundC0MapsReplayedWithoutFakeBaseline){WindowArchiveReplay<NNeuronTimeLearner>(true);}
+TEST(NativeCandidateWindowArchive,CsvRenameChangesArtifactDocumentOnly){WindowArchiveRename();}
+TEST(NativeCandidateWindowArchive,MissingExternalPrimaryNeverFallsBack){const auto& a=ActualWindowArchive<NNeuronTimeLearner>();EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a.document,[](const QString&){return QByteArray{};}),std::invalid_argument);}
+TEST(NativeCandidateWindowArchive,ChangedPrimaryRejected){const auto& a=ActualWindowArchive<NNeuronTimeLearner>();EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a.document,[&](const QString& p){return a.primary.at(p)+"0";}),std::invalid_argument);}
+TEST(NativeCandidateWindowArchive,NewRecordCannotMasqueradeAsArchive1){WindowArchiveReject([](auto& a){a["schema_version"]=1;});}
+TEST(NativeCandidateWindowArchive,Protocol4CannotCarryArchive2){WindowArchiveReject([](auto& a){auto p=a["protocol"].toObject();p["schema_version"]=4;a["protocol"]=p;});}
+TEST(NativeCandidateWindowArchive,IncompleteSelectedReferencesCannotMintProposalAuthority){WindowArchiveReject([](auto& a){auto refs=a["reference_group_ids"].toArray();refs.removeLast();a["reference_group_ids"]=refs;});}
+TEST(NativeCandidateWindowArchive,ChangedReferenceFrameOrNativeInstanceBindingRejected){WindowArchiveReject([](auto& a){MutateWindowRecord(a,2,[](auto& r){auto p=r["window_proposal"].toObject();auto seed=p["reference"].toObject();seed["first_frame"]=seed["first_frame"].toDouble()+1;p["reference"]=seed;r["window_proposal"]=p;});});WindowInstanceBindingIsSemanticContent();}
+TEST(NativeCandidateWindowArchive,ChangedPolicyRejectedBeforeAuthority){WindowArchiveReject([](auto& a){auto p=a["protocol"].toObject();auto c=p["composite_measurement"].toObject();auto w=c["candidate_window_policy"].toObject();w["maximum_feature_terms"]=true;c["candidate_window_policy"]=w;p["composite_measurement"]=c;a["protocol"]=p;});}
+TEST(NativeCandidateWindowArchive,ChangedCandidateReadbackRejected){WindowArchiveReject([](auto& a){MutateWindowRecord(a,2,[](auto& r){auto b=r["candidate_binding"].toObject();auto physical=b["physical_readback"].toObject();auto parameters=physical["parameters"].toArray();auto first=parameters[0].toObject();first["resistance"]=first["resistance"].toDouble()*1.1;parameters[0]=first;physical["parameters"]=parameters;b["physical_readback"]=physical;r["candidate_binding"]=b;r["candidate_witness_id"]=NmsdkTools::CanonicalModelDataSha256(b);});});}
+TEST(NativeCandidateWindowArchive,ReboundFalseReadbackAndProofStillFailActualGraphReplay){ReboundWindowClaimStillRequiresReplay(true);}
+TEST(NativeCandidateWindowArchive,ReboundFalseArithmeticAndProofStillFailPolicyReplay){ReboundWindowClaimStillRequiresReplay(false);}
+TEST(NativeCandidateWindowArchive,ChangedPrimaryByteCapChangesSemanticProof){WindowArchiveReject([](auto& a){MutateWindowRecord(a,2,[](auto& r){auto b=r["budgets"].toObject();b["maximum_total_primary_bytes"]=b["maximum_total_primary_bytes"].toDouble()-1;r["budgets"]=b;});});}
+TEST(NativeCandidateWindowArchive,ChangedAttemptRelabelCannotReuseProof){WindowArchiveReject([](auto& a){MutateWindowRecord(a,2,[](auto& r){r["attempt_id"]="relabelled";});});}
+TEST(NativeCandidateWindowArchive,ActualPartialCandidateIsNeverPromoted){WindowPartialArchive();}
+TEST(NativeCandidateWindowArchive,ClassicWarmUsesPortableOriginalReferencesAfterGrowth){WindowArchiveWarm<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowArchive,BranchWarmUsesPortableOriginalReferencesAfterGrowth){WindowArchiveWarm<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowArchive,BoundC0WarmKeepsOriginalFamily){WindowArchiveWarm<NNeuronTimeLearner>(true);}
+TEST(NativeCandidateWindowArchive,ClassicN4ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearner>(4);}
+TEST(NativeCandidateWindowArchive,BranchN4ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearnerBranch>(4);}
+TEST(NativeCandidateWindowArchive,ClassicN6ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearner>(6);}
+TEST(NativeCandidateWindowArchive,BranchN6ActualDistinctAllOrdinalClosure){WindowDimensionArchive<NNeuronTimeLearnerBranch>(6);}

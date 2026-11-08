@@ -2,6 +2,8 @@
 
 Статус: source types/schema preparation, без runtime acceptance и без подключения service/CLI/defaults. Нормативный подробный контракт находится в PulseLib `Docs/TimeLearner/CandidateWindowTraining-Step2Contract.ru.md`; типы — `Core/TimeLearner/CandidateWindowTrainingBoundary.h`.
 
+Текущий follow-up: после исходного types review реализованы scoped native5 complete-reference/candidate measurement factories и отдельный archive2 portable reference/proposal replay. Исторические абзацы/pins ниже описывают последовательность source review. Runtime acceptance для STEP2 отсутствует; старые Bounded/Final5 guards, service/CLI/defaults остаются закрытыми. Текущий inventory — `CandidateWindowStep2DeclarationFrameGateInventory.json`; native/portable scope — `CandidateWindowStep2NativeFactory.ru.md`.
+
 Pulse source pin этого review: `5e4faf0d94c2ea74dcc0f8e38a3e3f085eb124b1` (parent `e7a38933051706f8f2fa76fe322c3fe7401ee52a`). Никаких существующих production .cpp или serializers этот Pulse commit не меняет.
 
 Основание: source-reviewed design `CandidateSpecificWindowPolicy-Design.ru.md`, чистая арифметика Rootdf06/Pulsee7 и отдельный normal40+ASan40 evidence72da089b46d64aaa9bd8a4abdc6acfddf0c8bebb. Pure40 не подтверждает native seed, actual graph/Branch bank membership или Train admission. Frozen206/214/229/240 и их результаты не переосмысляются.

@@ -2,7 +2,7 @@
   "kind": "candidate_window_step2_declarations_frame_specification_gate",
   "schema_version": 1,
   "status": "source_preparation_only",
-  "pulse": "60fd65e4ccf956175d7c2ae661faba9547364a36",
+  "pulse": "feb5fa5d4d6ee3c649905e638fc4914d63a5e260",
   "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
   "target": "Test_PulseLib_StorageComponents",
   "inventories": [
@@ -34,8 +34,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 158629,
-      "sha256": "4d3c1001be3f2cb4f75a7bebee3b9ba316da3688838da7564733a62938c00ed5",
+      "bytes": 177060,
+      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
       "expected_test_ids": [
         "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
         "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
@@ -79,8 +79,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 158629,
-      "sha256": "4d3c1001be3f2cb4f75a7bebee3b9ba316da3688838da7564733a62938c00ed5",
+      "bytes": 177060,
+      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
       "expected_test_ids": [
         "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
         "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
@@ -98,8 +98,8 @@
     },
     {
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 158629,
-      "sha256": "4d3c1001be3f2cb4f75a7bebee3b9ba316da3688838da7564733a62938c00ed5",
+      "bytes": 177060,
+      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
       "expected_test_ids": [
         "NativeCandidateWindowFactory.ClassicCompleteReferencesAndActualReplayedCandidate",
         "NativeCandidateWindowFactory.BranchCompleteReferencesAndActualReplayedCandidate",
@@ -120,11 +120,44 @@
       ],
       "count": 16,
       "scope": "actual native5 cold/reference/candidate measurement factories; old Train5 consumers blocked; source only"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 177060,
+      "sha256": "50aefb5ccc8fd265a01c32bb80fa7b6142cdf0110a1a4846d313a2d8e0cb1e62",
+      "expected_test_ids": [
+        "NativeCandidateWindowArchive.ClassicActualPrimaryReplaysCompleteReferencesAndProposal",
+        "NativeCandidateWindowArchive.BranchActualPrimaryReplaysCompleteReferencesAndProposal",
+        "NativeCandidateWindowArchive.ActualBoundC0MapsReplayedWithoutFakeBaseline",
+        "NativeCandidateWindowArchive.CsvRenameChangesArtifactDocumentOnly",
+        "NativeCandidateWindowArchive.MissingExternalPrimaryNeverFallsBack",
+        "NativeCandidateWindowArchive.ChangedPrimaryRejected",
+        "NativeCandidateWindowArchive.NewRecordCannotMasqueradeAsArchive1",
+        "NativeCandidateWindowArchive.Protocol4CannotCarryArchive2",
+        "NativeCandidateWindowArchive.IncompleteSelectedReferencesCannotMintProposalAuthority",
+        "NativeCandidateWindowArchive.ChangedReferenceFrameOrNativeInstanceBindingRejected",
+        "NativeCandidateWindowArchive.ChangedPolicyRejectedBeforeAuthority",
+        "NativeCandidateWindowArchive.ChangedCandidateReadbackRejected",
+        "NativeCandidateWindowArchive.ReboundFalseReadbackAndProofStillFailActualGraphReplay",
+        "NativeCandidateWindowArchive.ReboundFalseArithmeticAndProofStillFailPolicyReplay",
+        "NativeCandidateWindowArchive.ChangedPrimaryByteCapChangesSemanticProof",
+        "NativeCandidateWindowArchive.ChangedAttemptRelabelCannotReuseProof",
+        "NativeCandidateWindowArchive.ActualPartialCandidateIsNeverPromoted",
+        "NativeCandidateWindowArchive.ClassicWarmUsesPortableOriginalReferencesAfterGrowth",
+        "NativeCandidateWindowArchive.BranchWarmUsesPortableOriginalReferencesAfterGrowth",
+        "NativeCandidateWindowArchive.BoundC0WarmKeepsOriginalFamily",
+        "NativeCandidateWindowArchive.ClassicN4ActualDistinctAllOrdinalClosure",
+        "NativeCandidateWindowArchive.BranchN4ActualDistinctAllOrdinalClosure",
+        "NativeCandidateWindowArchive.ClassicN6ActualDistinctAllOrdinalClosure",
+        "NativeCandidateWindowArchive.BranchN6ActualDistinctAllOrdinalClosure"
+      ],
+      "count": 24,
+      "scope": "actual archive2 writer/replay, original portable references, fresh warm owner lease, partial/tamper and distinct N4/N6 each-ordinal closure; no Train5 admission"
     }
   ],
-  "expected_count": 72,
+  "expected_count": 96,
   "prior_planned_scope": 240,
-  "planned_cumulative_scope": 354,
+  "planned_cumulative_scope": 378,
   "numeric_tests_run_locally": false,
   "new_runtime_acceptance": false,
   "required_regressions": [
@@ -150,7 +183,16 @@
     "classic-native-window5/reference-*",
     "branch-native-window5/reference-*",
     "classic-native-window5/candidate*",
-    "branch-native-window5/candidate*"
+    "branch-native-window5/candidate*",
+    "classic-window-archive2*",
+    "branch-window-archive2*",
+    "classic-window-warm2*",
+    "branch-window-warm2*",
+    "classic-window-partial2",
+    "classic-window-distinct2-N4",
+    "classic-window-distinct2-N6",
+    "branch-window-distinct2-N4",
+    "branch-window-distinct2-N6"
   ],
   "primary_files": [
     "full-before.csv",
@@ -162,7 +204,7 @@
     "frame-spec2.json",
     "after-model.json"
   ],
-  "scope": "Declaration/proposal DATA, strict closed-input replay, actual frame projection/bank routing, scoped native5 complete-reference and candidate measurement factories; archive2 portable references and Train5/service/CLI remain pending",
+  "scope": "Declaration/proposal DATA, strict closed-input replay, actual frame/bank routing, native5 complete-reference and candidate factories, archive2 strict portable replay/owned restart. Train5/service/CLI remain pending.",
   "explicitly_not_accepted": [
     "portable_proposal_replay",
     "allN_reference_seed_factory",
@@ -204,7 +246,21 @@
     "proposal_left_right_guards": "frequency_hz / 100 (explicit fixture declaration)",
     "maximum_attempt_wall_seconds": 7200,
     "local_numeric_or_compile": false,
-    "portable_archive2_implemented": false,
+    "portable_archive2_implemented": true,
     "Train5_admission": false
+  },
+  "native5_archive2_source_controls": {
+    "count": 24,
+    "records_schema": 2,
+    "protocol_schema": 5,
+    "complete_refs_derived_from_primary": true,
+    "new_lease_preserves_original_targets": true,
+    "old_certificate4_replay_explicitly_rejects5": true,
+    "semantic_proof2_includes_primary_byte_cap": true,
+    "old4_paths_preserved": true,
+    "distinct_dimensions_are_routing_not_convergence_acceptance": true,
+    "actual_model_learned6_import_pending": true,
+    "numeric_or_compile_run_locally": false,
+    "semantic_proof2_includes_complete_native_specification": true
   }
 }
