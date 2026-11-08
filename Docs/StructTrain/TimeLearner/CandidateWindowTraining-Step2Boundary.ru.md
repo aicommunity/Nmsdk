@@ -26,3 +26,13 @@ Root helper correction6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e уже включ
 ## Механическая точка перед spec2
 
 Pulse `d6888c9309a797ab8c3e1cc4c06907105fc1d883` выносит неизменные `PatternHash`/`CheckNativeEnvelope` из `NativeDeclaredWindowBasinAssignment.cpp` в private `NativeBasinValidation.h/.cpp`. Текст старого selector body проверен на точное равенство после единственной квалификации helper call; порядок проверок/reasons/политика1 не меняются. Это отдельный source pin для future A/B SDK gate, runtime acceptance отсутствует. Новый .cpp попадает в существующий Pulse production glob, pure40 target его не компилирует. Следующий spec2 path обязан вызывать этот общий helper, а не повторять native envelope checks или анализировать whitelist v1 outcomes.
+
+## Source-подэтап declaration codecs и actual frame projection
+
+Pulse `8f0f148a962bc14657b6dc7498d7110837e13117` реализует strict protocol5/contract2/spec2 declaration roundtrip и diagnostic frame-coordinate selector. Contract types и validation находятся в низких отдельных headers/.cpp: old pure verification targets получают только pure validator, без зависимости от full native/JSON codec. Protocol4 serialization остаётся отдельной точной ветвью; raw/schema3 и существующие composite4 factories не допускают protocol5. Service/CLI/defaults не затронуты.
+
+Spec2 candidate interval фиксирован в индексах; shared context/native envelope проверяется до доступа к actual fullBefore retained timestamps. Недостающие frames явно отклоняются без dt padding. Старый spec1 и spec2 пользуются общей прежней geometry/causality процедурой; сначала выделяются настоящие full waveform extrema. Результат этого selector остаётся diagnostic и не превращается в proposal proof или Train certificate.
+
+Подготовлены 16 declaration/opaque-boundary checks и 12 настоящих native N2 frame/context checks в production C++ test target, всего28; точные literal IDs/Git-blob hashes — `CandidateWindowStep2DeclarationFrameGateInventory.json`. Два normal source fixtures сохраняют все four actual CSV + native matched witness + source/after-model snapshots и spec2/selection sidecar. Они проверяют frame projection, а не policy minting или сходимость. Новые tests не исполнялись локально или на сервере.
+
+Следующие ОБЯЗАТЕЛЬНЫЕ части STEP2 остаются открытыми: strict portable proposal replay и recipe binding; allN opaque seed release из настоящих refs; actual owner/input bank snapshot; native protocol5 preparation/closure/consume guards; actual growth/policy/warm/tamper/lifetime tests; отдельный N4/N6 distinct-bank routing. Текущий declaration/frame подэтап не является полным STEP2 или устранением fixed-window search blocker.

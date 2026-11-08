@@ -8,6 +8,7 @@
 #include "TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/CompositePortableTrainingProof.h"
+#include "TimeLearner/CandidateWindowTrainingDeclarations.h"
 #include "TimeLearner/NativeLearnedState.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerProbeEvidenceWriter.h"
@@ -1123,3 +1124,59 @@ TEST(NativeCompositeConsoleJobs,ClassicActualProfileCold6Job){ActualPortableCliJ
 TEST(NativeCompositeConsoleJobs,BranchActualProfileCold6Job){ActualPortableCliJob<NNeuronTimeLearnerBranch>(false);}
 TEST(NativeCompositeConsoleJobs,ClassicDefaultSyncMustNotBecomeExact){ActualPortableCliJob<NNeuronTimeLearner>(true);}
 TEST(NativeCompositeConsoleJobs,BranchDefaultSyncMustNotBecomeExact){ActualPortableCliJob<NNeuronTimeLearnerBranch>(true);}
+
+namespace {
+enum class FrameSpecTamper { None,MissingFrames,DuplicateControl,MissingControl,ChangedModel,ChangedEvent,ChangedRepeat,WrongGroup };
+template<class Owner> void NativeFrameSpecification(FrameSpecTamper tamper=FrameSpecTamper::None,bool referenceTime=false,bool c0=false) {
+    NativeCompositeFixture<Owner> f(2000,false,4,c0);
+    // Fixed BEFORE queue, independent of the actual selected peak. This test
+    // exercises native frame projection; it does not mint a policy proposal.
+    CandidateWindowBasinSpecification declared;declared.inputId="input0";declared.assignedInput=0;
+    declared.channel=NativeCompositeFixture<Owner>::branch?0u:0u;
+    if(referenceTime)declared.referenceTime=CompositeInputWindow{.009,.07};
+    else {declared.coordinateMode=CandidateWindowCoordinateMode::CandidateFrame;declared.candidateFrame=CandidateFrameWindow{18,140};}
+    f.Run(f.Request(0,"frame-spec2","frame-spec2/reference"),CompositeMeasurementPurpose::Reference);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();ASSERT_TRUE(f.attempt->Group());
+    auto group=*f.attempt->Group();declared.groupId=group.specification.groupId;
+    ASSERT_EQ(f.owner->OwnedNativeCapacitanceState().isEmpty(),!c0);
+    const auto& original=*f.attempt->Selection()->geometry->measuredMaximum;
+    if(tamper==FrameSpecTamper::MissingFrames)declared.candidateFrame=CandidateFrameWindow{18,100000};
+    if(tamper==FrameSpecTamper::DuplicateControl)group.witness.omitEachInput.push_back(group.witness.omitEachInput.front());
+    if(tamper==FrameSpecTamper::MissingControl)group.witness.omitEachInput.pop_back();
+    if(tamper==FrameSpecTamper::ChangedModel)group.witness.fullBefore.currentBaseRevision="changed";
+    if(tamper==FrameSpecTamper::ChangedEvent)group.witness.fullBefore.observation.events[0].time+=.0005;
+    if(tamper==FrameSpecTamper::ChangedRepeat)group.witness.fullAfter.observation.channels[0].samples[30].rawPotential+=1.;
+    if(tamper==FrameSpecTamper::WrongGroup)declared.groupId+="-wrong";
+    const auto selected=SelectNativeDeclaredWindowBasinMaximum(declared,f.protocol.compositeMeasurement->geometryPolicy,group);
+    if(tamper!=FrameSpecTamper::None) {
+        EXPECT_EQ(selected.status,NativeDeclaredWindowBasinStatus::Rejected);EXPECT_FALSE(selected.geometry);EXPECT_FALSE(selected.reasons.empty());
+        if(tamper==FrameSpecTamper::MissingFrames)EXPECT_EQ(selected.reasons.front(),"window_frames_not_captured");return;
+    }
+    ASSERT_EQ(selected.status,NativeDeclaredWindowBasinStatus::Completed);ASSERT_TRUE(selected.geometry);
+    ASSERT_EQ(selected.geometry->validity,DeclaredWindowBasinValidity::Valid);ASSERT_TRUE(selected.geometry->measuredMaximum);
+    const auto& peak=*selected.geometry->measuredMaximum;const auto& samples=group.witness.fullBefore.observation.channels[0].samples;
+    EXPECT_DOUBLE_EQ(peak.rawPotential,original.rawPotential);EXPECT_DOUBLE_EQ(peak.time,original.time);
+    EXPECT_DOUBLE_EQ(peak.time,samples.at(peak.firstSample).time);EXPECT_DOUBLE_EQ(peak.plateauEnd,samples.at(peak.lastSample).time);
+    EXPECT_FALSE(NativeDeclaredWindowBasinResult::TrainingCertificateEligible);
+    if(!referenceTime && !c0) {
+        const std::string stage="frame-spec2-candidate";SaveGrowthGroup(f,stage.c_str());
+        const std::string directory=std::string(NativeCompositeFixture<Owner>::branch?"branch-growth/":"classic-growth/")+stage;
+        SavePortableObject(directory.c_str(),"frame-spec2.json",QJsonObject{{"kind","native_frame_spec2_diagnostic"},{"schema_version",1},
+            {"training_certificate_eligible",false},{"frame_specification",EncodeCandidateWindowBasinSpecification(declared)},
+            {"geometry_policy",EncodeCompositeGeometryPolicy(f.protocol.compositeMeasurement->geometryPolicy)},
+            {"selection",EncodeNativeCompositeSelection(selected)}});
+    }
+}
+}
+TEST(NativeCandidateWindowFrames,ClassicActualFrameTimestampsAndOffWithoutC0){NativeFrameSpecification<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowFrames,BranchActualFrameTimestampsAndOffWithoutC0){NativeFrameSpecification<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowFrames,ClassicReferenceTimeSpec2KeepsSpec1Result){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::None,true);}
+TEST(NativeCandidateWindowFrames,BranchReferenceTimeSpec2KeepsSpec1Result){NativeFrameSpecification<NNeuronTimeLearnerBranch>(FrameSpecTamper::None,true);}
+TEST(NativeCandidateWindowFrames,ActualBoundC0DoesNotInventNewBaseline){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::None,false,true);}
+TEST(NativeCandidateWindowFrames,MissingActualFramesNeverUseDtPadding){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::MissingFrames);}
+TEST(NativeCandidateWindowFrames,DuplicateOmissionCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::DuplicateControl);}
+TEST(NativeCandidateWindowFrames,MissingOmissionCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::MissingControl);}
+TEST(NativeCandidateWindowFrames,ChangedActualModelCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::ChangedModel);}
+TEST(NativeCandidateWindowFrames,ChangedActualEventCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::ChangedEvent);}
+TEST(NativeCandidateWindowFrames,ChangedFullRepeatCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::ChangedRepeat);}
+TEST(NativeCandidateWindowFrames,ChangedDeclaredGroupCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::WrongGroup);}

@@ -1,0 +1,97 @@
+{
+  "kind": "candidate_window_step2_declarations_frame_specification_gate",
+  "schema_version": 1,
+  "status": "source_preparation_only",
+  "pulse": "8f0f148a962bc14657b6dc7498d7110837e13117",
+  "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
+  "target": "Test_PulseLib_StorageComponents",
+  "inventories": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
+      "bytes": 8306,
+      "sha256": "cbb8d9fbde187f31299f0398a54d351e6bd08ab5da374cb6caad5fd732308200",
+      "expected_test_ids": [
+        "CandidateWindowDeclarations.Protocol5RoundtripPreservesExplicitReferenceWindowsAndFullPolicy",
+        "CandidateWindowDeclarations.Protocol4KeepsItsFixedWindowWire",
+        "CandidateWindowDeclarations.Contract2CannotFallBackToOldInputWindowsAlias",
+        "CandidateWindowDeclarations.OldContractRejectsNewPolicyFields",
+        "CandidateWindowDeclarations.UnknownProtocolIsNotAnAtLeastFiveBranch",
+        "CandidateWindowDeclarations.BooleanPolicyVersionAndCountAreRejected",
+        "CandidateWindowDeclarations.IntegralNumericCountHasTheSameDeclaredMeaning",
+        "CandidateWindowDeclarations.FeatureDimensionIsCheckedBeforePolicyScan",
+        "CandidateWindowDeclarations.UnknownPolicyAndMultipleProposalsAreRejected",
+        "CandidateWindowDeclarations.DeclaredEnvelopeMustFitMaximumSamples",
+        "CandidateWindowDeclarations.FixedAndCandidateContractsCannotCoexist",
+        "CandidateWindowDeclarations.RawReferenceCaptureCannotMintProtocol5Authority",
+        "CandidateWindowDeclarations.FrameSpec2RoundtripDoesNotPretendFramesWereCaptured",
+        "CandidateWindowDeclarations.Spec2CannotCarryBothCoordinateKinds",
+        "CandidateWindowDeclarations.UnknownCoordinateAndBooleanFrameAreRejected",
+        "CandidateWindowDeclarations.Spec2RejectsUnknownKeysAndMissingCoordinate"
+      ],
+      "count": 16
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 110095,
+      "sha256": "4257545ad358f665a8e62ff36fcba43e5c825b3f3a5b5f1045197d3f66497253",
+      "expected_test_ids": [
+        "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
+        "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
+        "NativeCandidateWindowFrames.ClassicReferenceTimeSpec2KeepsSpec1Result",
+        "NativeCandidateWindowFrames.BranchReferenceTimeSpec2KeepsSpec1Result",
+        "NativeCandidateWindowFrames.ActualBoundC0DoesNotInventNewBaseline",
+        "NativeCandidateWindowFrames.MissingActualFramesNeverUseDtPadding",
+        "NativeCandidateWindowFrames.DuplicateOmissionCannotReachGeometry",
+        "NativeCandidateWindowFrames.MissingOmissionCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedActualModelCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedActualEventCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedFullRepeatCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedDeclaredGroupCannotReachGeometry"
+      ],
+      "count": 12
+    }
+  ],
+  "expected_count": 28,
+  "prior_planned_scope": 240,
+  "planned_cumulative_scope": 268,
+  "numeric_tests_run_locally": false,
+  "new_runtime_acceptance": false,
+  "required_regressions": [
+    {
+      "maintained_declaration": "native-controller-scalar-regression-v1",
+      "expected_count": 97,
+      "compiled_inventory_crosscheck_required": true
+    },
+    {
+      "maintained_prior_scope": "source-prepared composite240 and native diagnostic bridge14 as independently declared",
+      "accepted_by_this_change": false,
+      "literal_inventory_required": true
+    }
+  ],
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "new_primary_directories": [
+    "classic-growth/frame-spec2-candidate",
+    "branch-growth/frame-spec2-candidate"
+  ],
+  "primary_files": [
+    "full-before.csv",
+    "omit-0.csv",
+    "omit-1.csv",
+    "full-after.csv",
+    "matched-witness.json",
+    "declared-window.json",
+    "frame-spec2.json",
+    "after-model.json"
+  ],
+  "scope": "Strict declaration codecs and diagnostic actual frame timestamp projection only",
+  "explicitly_not_accepted": [
+    "portable_proposal_replay",
+    "allN_reference_seed_factory",
+    "actual_candidate_bank_factory",
+    "native_protocol5_attempt",
+    "Train_admission",
+    "service_or_CLI_dispatch",
+    "N4_N6_distinct_routing",
+    "growth_policy_integration"
+  ]
+}
