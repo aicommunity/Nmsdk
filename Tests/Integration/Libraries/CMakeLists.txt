@@ -120,6 +120,7 @@ set_tests_properties(PulseLib_StimulusSubset PROPERTIES
     WORKING_DIRECTORY "${DEPLOY_ROOT}" LABELS "unit;timelearner")
 
 add_executable(Test_PulseLib_StorageComponents
+    Test_PulseLib_MatchedOmissionEvidence.cpp
     Test_PulseLib_MatchedOmissionAssignment.cpp
     Test_PulseLib_StimulusSubset.cpp
     Test_PulseLib_StorageComponents.cpp

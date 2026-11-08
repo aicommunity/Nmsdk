@@ -74,7 +74,7 @@ def _maxima(times, raw, baseline, minimum):
             for a, b, clipped in sorted(regions)]
 
 
-def _trace(packet, record, raw, group, index):
+def _trace(packet, record, raw, group, index, *, expected_input_id=None):
     _keys(packet, 'kind evidence_schema_version native_status current_base_revision reasons '
                   'requires_fresh_verification requested_specification prepared observation')
     require(packet['kind'] == 'timelearner_native_probe_evidence' and
@@ -131,7 +131,8 @@ def _trace(packet, record, raw, group, index):
     baseline = [number(v) for v in s['baseline']]
     require(len(baseline) == len(group['physical_channel_paths']), 'matched_physical_dimensions')
     assigned, channel = _dimension(group['assigned_input']), _dimension(group['assigned_channel'])
-    require(assigned < n and p['input_id'] == 'input'+str(assigned), 'matched_assigned_input_changed')
+    input_id = 'input'+str(assigned) if expected_input_id is None else expected_input_id
+    require(assigned < n and p['input_id'] == input_id, 'matched_assigned_input_changed')
     require(channel < len(baseline), 'matched_assigned_channel_changed')
     if p['routing'] == 'classic_burst':
         require(len(baseline) == n and channel == assigned and p['selected_input_index'] is None,

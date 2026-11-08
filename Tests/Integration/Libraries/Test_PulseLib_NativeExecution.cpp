@@ -6,6 +6,7 @@
 #include "TimeLearner/BoundedTraining.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "TimeLearner/NativeResponseDomainCapture.h"
+#include "TimeLearner/MatchedOmissionEvidenceJson.h"
 #include "TimeLearner/NativeMatchedOmissionGroup.h"
 #include "TimeLearner/ResponseDomainEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
@@ -281,6 +282,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
         if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
             const QString directory=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(name);
             ASSERT_TRUE(QDir().mkpath(directory));QJsonArray packets,traceFiles;
+            MatchedOmissionPrimary portablePrimary;std::vector<QString> portablePaths;
             for(const auto& packet:closed.packets)packets.append(EncodeNativeProbeEvidence(packet));
             if(closed.witness.fullBefore.nativeCompleted) {
                 std::vector<const MatchedOmissionTrace*> traces{&closed.witness.fullBefore};
@@ -302,6 +304,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                     proof.CloseNative(native);const auto csv=EncodeNativeResponseDomainTrace(proof);
                     const auto fileName="native-"+QString::number(i)+".csv";QFile file(directory+"/"+fileName);
                     ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_EQ(file.write(csv),csv.size());file.close();
+                    portablePaths.push_back(fileName);portablePrimary.emplace(fileName,csv);
                     QJsonArray mask;for(auto ordinal:trace.presentedOrdinals)mask.append(int(ordinal));
                     traceFiles.append(QJsonObject{{"path",fileName},{"presented_ordinals",mask},{"sha256",QString::fromLatin1(QCryptographicHash::hash(csv,QCryptographicHash::Sha256).toHex())}});
                 }
@@ -344,6 +347,16 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
                 {"training_certificate_eligible",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}};
             QFile file(directory+"/group.json");ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));
             const auto bytes=QJsonDocument(summary).toJson();ASSERT_EQ(file.write(bytes),bytes.size());
+            if(interference==Interference::None) {
+                const auto portable=EncodeMatchedOmissionEvidence(closed,portablePaths,portablePrimary);
+                const auto encoded=QJsonDocument(portable).toJson();
+                const auto imported=DecodeMatchedOmissionEvidence(encoded,portablePrimary);
+                EXPECT_EQ(EncodeMatchedOmissionEvidence(imported,portablePaths,portablePrimary),portable);
+                QFile outputFile(directory+"/matched-witness.json");
+                ASSERT_TRUE(outputFile.open(QIODevice::WriteOnly|QIODevice::NewOnly));
+                ASSERT_EQ(outputFile.write(encoded),encoded.size());
+            }
+            else EXPECT_THROW(EncodeMatchedOmissionEvidence(closed,portablePaths,portablePrimary),std::invalid_argument);
         }
         core.environment->DestroyModel();return;
     }
