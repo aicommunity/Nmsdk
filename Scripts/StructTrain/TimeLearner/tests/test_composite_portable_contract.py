@@ -26,6 +26,45 @@ def hash_payload():
 
 
 class CompositePortableContractTest(unittest.TestCase):
+    def test_retained_dataset_readback_must_match_isi_source_physics_and_dimensions(self):
+        from ..composite_source_evidence import audit_dataset_source
+        import struct
+        config=configuration();profile=config['stimulus_profile'];isi=config['model']['initial_isi']
+        def prop(kind, value, **extra): return dict(binding=False, data=dict(type=kind,value=value,**extra))
+        nodes={'$':dict(**{'class':config['model']['dataset_class']},parameters=dict(
+            MatrixData=prop('binary64_matrix',[[struct.pack('>d',v).hex()] for v in isi],rows='2',columns='1'),
+            NumSamples=prop('signed_integer','1'),NumFeatures=prop('signed_integer','1'),MaxSpikesPerFeature=prop('signed_integer','2'))),
+            '$.Generator1':dict(**{'class':profile['generator_class']},frequency_hz='2000',parameters={})}
+        for name,key in [('Amplitude','amplitude'),('PulseLength','pulse_length'),('FrequencyDeviation','frequency_deviation')]:
+            nodes['$.Generator1']['parameters'][name]=prop('binary64',struct.pack('>d',profile[key]).hex())
+        for name,key in [('UseTransitSignal','use_transit_signal'),('UsePatternOutput','use_pattern_output')]:
+            nodes['$.Generator1']['parameters'][name]=prop('boolean',profile[key])
+        audit_dataset_source(nodes,config['model'],profile,isi)
+        for node,name,field,value in [('$','MatrixData','rows','3'),('$','MatrixData','value',[['0000000000000000']]*2),
+                ('$','NumFeatures','value','2'),('$.Generator1','Amplitude','value','0000000000000000'),
+                ('$.Generator1','UseTransitSignal','value',True)]:
+            bad=deepcopy(nodes);bad[node]['parameters'][name]['data'][field]=value
+            with self.subTest(name=name,field=field),self.assertRaises(EvidenceError):
+                audit_dataset_source(bad,config['model'],profile,isi)
+        bad=deepcopy(nodes);bad['$.Generator1']['parameters']['Amplitude']['binding']=True
+        with self.assertRaises(EvidenceError):audit_dataset_source(bad,config['model'],profile,isi)
+
+    def test_purpose_namespaces_bind_logical_trial_epoch_group_and_attempt(self):
+        from ..composite_measurement_contract import validate_logical_namespace
+        for purpose,run,trial in [('search','run/session/2','run/session/2/search/3'),
+                ('reference','run/session/2/capture/0','run/session/2/capture/0/1'),
+                ('final','run/session/2/final/1','run/session/2/final/1/verify/4/2')]:
+            record=dict(purpose=purpose,attempt_id='run/session/2',group_id=trial+'/composite/0',
+                        logical_request=dict(run_id=run,trial_id=trial,model_epoch=4))
+            validate_logical_namespace(record)
+            for field in ('attempt_id','group_id'):
+                bad=deepcopy(record);bad[field]+='x'
+                with self.assertRaises(EvidenceError):validate_logical_namespace(bad)
+            bad=deepcopy(record);bad['logical_request']['trial_id']+='x'
+            with self.assertRaises(EvidenceError):validate_logical_namespace(bad)
+        record['logical_request']['model_epoch']=3
+        with self.assertRaises(EvidenceError):validate_logical_namespace(record)
+
     def test_private_numeric_view_preserves_semantics_and_does_not_mutate_input(self):
         original = dict(schema_version=1., indices=[0., 2.], bool_value=True, amplitude=.125)
         before = deepcopy(original); view = integral_number_view(original)

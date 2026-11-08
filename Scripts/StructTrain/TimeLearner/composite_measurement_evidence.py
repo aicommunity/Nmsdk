@@ -5,7 +5,6 @@ attests Rdk execution. Partial groups remain insufficient, never negative
 scientific evidence and never a substitute for a consumed measurement.
 """
 import csv
-import re
 
 from .composite_configuration import METHOD, validate_composite_protocol
 from .composite_measurement_contract import (ARCHIVE_FIELDS, RECORD_FIELDS, LOGICAL_FIELDS,
@@ -151,11 +150,9 @@ def _record(record, protocol, configuration, source, origin, family, primary):
             and logical['pattern_hash'] == protocol['pattern_hash'] and logical['protocol_revision'] == protocol['revision']
             and logical['routing'] == protocol['routing'], 'composite_logical_protocol_binding')
     for field in ('run_id','trial_id','base_model_revision'): _text(logical[field])
-    attempt_id=_text(record['attempt_id']);run_id=logical['run_id']
-    require(run_id==attempt_id or re.fullmatch(re.escape(attempt_id)+r'/(?:capture|final)/(?:0|[1-9][0-9]*)',run_id) is not None,
-            'composite_logical_attempt_namespace')
-    require(logical['trial_id'].startswith(run_id+'/') and len(logical['trial_id'])>len(run_id)+1,
-            'composite_logical_trial_namespace')
+    attempt_id=_text(record['attempt_id'])
+    from .composite_measurement_contract import validate_logical_namespace
+    validate_logical_namespace(record)
     count(logical['model_epoch'])
     channel = index if protocol['routing'] == 'classic_burst' else 0
     window = protocol['composite_measurement']['input_windows'][index]

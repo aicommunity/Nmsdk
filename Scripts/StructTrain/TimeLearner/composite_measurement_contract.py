@@ -6,6 +6,7 @@ execution. Readers must separately replay primary/context/geometry and source.
 from .composite_configuration import METHOD
 from .model_identity import canonical_model_sha256
 from .native_evidence import number, require
+import re
 
 ARCHIVE_FIELDS = set(('kind schema_version method_id protocol source_origin owner_family_binding '
     'source_binding maximum_total_primary_bytes records reference_group_ids final_group_ids counters '
@@ -30,6 +31,25 @@ SOURCE_FIELDS = set(('kind schema_version initial_model initial_native_snapshot 
 CANDIDATE_FIELDS = {'kind', 'source_origin', 'model_identity', 'storage_images_sha256', 'optional_C0_witness'}
 PURPOSE = {'reference': 0, 'search': 1, 'final': 2}
 STATUS = {'rejected': 0, 'completed': 1, 'causality_rejected': 2}
+
+
+def validate_logical_namespace(record):
+    """First producer's purpose-specific measurement namespace, not filenames."""
+    from .native_evidence import count
+    logical=record['logical_request']; attempt=record['attempt_id']; purpose=record['purpose']
+    require(type(attempt) is str and attempt and purpose in PURPOSE, 'composite_logical_attempt_namespace')
+    decimal=r'(?:0|[1-9][0-9]*)'; run=logical['run_id']; trial=logical['trial_id']; group=record['group_id']
+    if purpose=='search':
+        require(run==attempt,'composite_logical_attempt_namespace'); prefix=run+'/search/'
+    else:
+        phase='capture' if purpose=='reference' else 'final'
+        require(type(run) is str and re.fullmatch(re.escape(attempt+'/'+phase+'/')+decimal,run) is not None,
+                'composite_logical_attempt_namespace')
+        prefix=run+'/' if purpose=='reference' else run+'/verify/'+str(count(logical['model_epoch']))+'/'
+    require(type(trial) is str and re.fullmatch(re.escape(prefix)+decimal,trial) is not None,
+            'composite_logical_trial_namespace')
+    require(type(group) is str and re.fullmatch(re.escape(trial+'/composite/')+decimal,group) is not None,
+            'composite_logical_group_namespace')
 
 
 def integral_number_view(value):

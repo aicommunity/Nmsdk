@@ -63,6 +63,30 @@ def audit_snapshot(snapshot, *, dataset=False):
     return nodes
 
 
+def audit_dataset_source(nodes, declaration, profile, isi):
+    """Read the retained effective dataset/source, not its creation template."""
+    import struct
+    require('$' in nodes and '$.Generator1' in nodes, 'composite_initial_dataset_generator_missing')
+    root, generator = nodes['$'], nodes['$.Generator1']
+    require(root['class'] == declaration['dataset_class'] and generator['class'] == profile['generator_class']
+            and generator['frequency_hz'] == str(profile['frequency_hz']), 'composite_initial_dataset_class_or_clock')
+    def parameter(node, name, kind):
+        item = node['parameters'][name]
+        require(item['binding'] is False and item['data']['type'] == kind,
+                'composite_initial_dataset_parameter_binding_or_type')
+        return item['data']
+    binary64 = lambda value: struct.pack('>d', 0. if number(value) == 0 else number(value)).hex()
+    matrix = parameter(root, 'MatrixData', 'binary64_matrix')
+    _same(matrix, dict(type='binary64_matrix', rows=str(len(isi)), columns='1', value=[[binary64(value)] for value in isi]))
+    for name, value in [('NumSamples', 1), ('NumFeatures', 1), ('MaxSpikesPerFeature', len(isi))]:
+        require(parameter(root, name, 'signed_integer')['value'] == str(value), 'composite_initial_dataset_dimensions')
+    for name, key in [('Amplitude', 'amplitude'), ('PulseLength', 'pulse_length'), ('FrequencyDeviation', 'frequency_deviation')]:
+        require(parameter(generator, name, 'binary64')['value'] == binary64(profile[key]),
+                'composite_initial_dataset_source_number')
+    for name, key in [('UseTransitSignal', 'use_transit_signal'), ('UsePatternOutput', 'use_pattern_output')]:
+        require(parameter(generator, name, 'boolean')['value'] is profile[key], 'composite_initial_dataset_source_boolean')
+
+
 def audit_source_binding(source, source_origin, configuration):
     project_composite_configuration(configuration)
     keys(source, SOURCE_FIELDS, 'composite_initial_source_fields')
@@ -87,6 +111,10 @@ def audit_source_binding(source, source_origin, configuration):
     _same(source['applied_source_isi'], configuration['model']['initial_isi'])
     require(source['pattern_hash'] == digest(source['applied_source_isi']), 'composite_initial_source_pattern')
     profile = configuration['stimulus_profile']
+    require(initial['$']['class'] == configuration['model']['neuron_class']
+            and initial['$']['frequency_hz'] == str(configuration['model']['frequency_hz']),
+            'composite_initial_neuron_class_or_clock')
+    audit_dataset_source(dataset, source['model_spec'], profile, source['applied_source_isi'])
     _same(source['actual_source_profile'], [profile[k] for k in ('generator_class', 'amplitude', 'pulse_length',
           'frequency_hz', 'frequency_deviation', 'use_transit_signal', 'use_pattern_output')])
     images = _images(source['storage_images'])

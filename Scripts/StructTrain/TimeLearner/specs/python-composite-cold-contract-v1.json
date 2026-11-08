@@ -2,7 +2,7 @@
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
   "suite_id": "composite-portable-package-contract-v1",
-  "package_fingerprint": "7b46e0b8057d4fb9497a9b27fe99542134ebaaa6eda740fedbec25fde3251059",
+  "package_fingerprint": "fe4756d20aee09081828ad4216ca6bfd264837bb06141dbc79676eb2ae6e226c",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery",
@@ -65,6 +65,8 @@
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_invalid_snapshot_inventory_creates_nothing_and_existing_output_is_unchanged",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_renaming_csv_changes_only_transport_name_and_does_not_rewrite_bytes",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_primary.CompositePrimaryTest.test_empty_stopped_inventory_remains_empty_without_fabricated_csv",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_retained_dataset_readback_must_match_isi_source_physics_and_dimensions",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_purpose_namespaces_bind_logical_trial_epoch_group_and_attempt",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_private_numeric_view_preserves_semantics_and_does_not_mutate_input",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_nonfinite_private_view_is_rejected_before_hashing",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_csv_path_rename_changes_document_identity_but_not_measurement_proof",
