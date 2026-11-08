@@ -212,3 +212,23 @@ stopped/completed package и не является научным PASS. Суще
 путь остаётся диагностическим; произвольный nonzero либо completed-claim с rc2
 не допускается. Старые схемы не получают нового статуса. Эти wire/adversarial
 контроли подготовлены в source; actual Console/package5 gate ещё требуется.
+
+2026-11-08 на M40 выполнен новый wire/adversarial suite source
+`55ed509fe89053a6fa1aa9e25e26dd64759d13ad`: **67/67**, без skipped/errors/failures.
+Проверены все 430 Python Git blobs до/после; package fingerprint
+`9e5e7a5d901917e54abcb44b7de9065a08d705f0a93491feb076e24f4970f98c`.
+Worker ограничен 1 GiB/tasks64, capacity registry прочитана как null и не изменялась.
+Kernel подтвердил closure точного PID3069176/start322149314; lease released.
+Evidence `be3911d262463a2377c364d97f63313b8223605e`, 33 members/33008 bytes,
+archive SHA256 `71c10aee5045414e0964c4b9c294144db92a0f3bcc968f1565967f1df445bfb2`.
+[Независимая metadata-проверка](CompositeTrainingPythonStartFailureVerification-20261108.json).
+
+Первый publication metadata `ed5588f3b9195951d9f8f8e363df3b2e44863580` не принят:
+локальная копия supervisor была записана Windows с CRLF, в то время как выполненная
+encoded команда содержала LF. Новая p2 публикация содержит точные выполненные bytes;
+исходная сохранена в отдельной Git-ветке, тесты не перезапускались. Runtime worker
+был с самого начала передан точными hash-bound bytes; actual67 result не изменён.
+
+67 подтверждает только wire/identity/nonpromotion contract. Actual native6/7,
+package5/Console execution3/import и C0 legacy controls остаются отдельными gates;
+подготовленные dataset/latest-final guards не объявляются runtime-принятыми.
