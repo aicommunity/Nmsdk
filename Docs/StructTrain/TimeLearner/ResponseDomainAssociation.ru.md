@@ -33,7 +33,14 @@ guard samples и исходные индексы, N=1/2/4/6, разные physic
 Независимо проверены все 66 членов архива, исходники по Git, JUnit inventory,
 фактически загруженный executable, неизменность runtime и освобождение lease.
 Receipt: [ResponseDomainNormalVerification.json](ResponseDomainNormalVerification.json).
-ASan-проверка на M40 и native bridge остаются отдельными условиями приёмки.
+На M40 также прошли 26/26 без пропусков с ASan. Evidence commit:
+`68440c23ba1832e25d012aa3c3383fbec8658d84`, receipt:
+[ResponseDomainAsanVerification.json](ResponseDomainAsanVerification.json).
+Это отдельная сборка production utility, не полная сборка SDK. Проверены
+все 100 членов архива, включая две неудачные подготовительные попытки:
+неверную привязку worker script и подключение вложенного CMake Google Test
+без родительской настройки версии. Исправления запускателя не меняли
+проверяемые C++ исходники. Native bridge ещё не принят.
 На локальной машине численные тесты не выполнялись.
 
 ## Следующий этап: bridge штатной пробы
