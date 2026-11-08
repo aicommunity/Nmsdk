@@ -51,4 +51,7 @@ Evidence `43377c50075f015bed68d5717afdffac23201c6e` находится в
 
 Исходный обязательный union248 должен выполняться отдельно после проверки
 maintained preparation helper. Два diagnostic IDs считаются отдельно;
-compiled universe250 и source suite64 не подменяют executed248.
+Четыре выбранных source TU содержат250 случаев, включая два diagnostic;
+captured `gtest_list_tests` этого бинарника содержит1624 уникальных случая.
+Source suite64, source-selected250 и binary inventory1624 не подменяют
+executed248. Остальные compiled cases этим подэтапом не проверены.
