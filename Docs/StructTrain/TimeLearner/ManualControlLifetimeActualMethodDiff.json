@@ -3,75 +3,82 @@
   "schema_version": 1,
   "status": "source_only_not_runtime_accepted",
   "pulse_before": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
-  "pulse_after": "353f17baf505edf92ff39fe40422b9dcea023045",
+  "pulse_after": "b2878e565febe20a4ba7c9c64536d6e66f672626",
   "root_unfixed_reproducer": "f74b9fbf9ece38668396c21fa569d688f595bb05",
-  "changed_method_count": 9,
+  "changed_method_count": 10,
   "changed_methods": [
     {
       "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
       "method": "NativeCompositeTrainingAttempt::Bind(",
       "before_sha256": "f68ba19671edb1cf4f00bf7e54619779486fa71e3d1186cfd187f64cd05e5ce7",
       "after_sha256": "e86acc6a33e40fa521c05a2886298ecdc2785c1cdbba9f7f59eb425c18ece7d7",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/Bind\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/Bind\n@@ -6,10 +6,22 @@\n         owner.NativeTrainingControl.State()!=NativeTrainingState::Searching,\"composite_train_owner_service_already_active\");\n     ownerLife=owner.ObserveLifecycle();\n     observeOwner=[&owner](){return owner.ObserveLifecycle();};\n-    requireOwnerControl=[this,&owner](){\n-        const auto state=owner.NativeTrainingControl.State();\n-        if(state==NativeTrainingState::CapturingReferences || state==NativeTrainingState::Searching)\n-            Require(owner.NativeTrainingControl.composite.get()==this,\"another_native_training_service_owns_executor\");\n+    auto& control=owner.NativeTrainingControl;\n+    if(!control.ownerControlLifetime)\n+        control.ownerControlLifetime=std::make_shared<const NativeTrainingService::OwnerControlLifetime>();\n+    requireOwnerControl=[this,&owner,observed=std::weak_ptr<const NativeTrainingService::OwnerControlLifetime>(control.ownerControlLifetime)](){\n+        Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        if(!owner.IsNeedToTrain.GetData())throw CompositeTrainingStopped();\n+        const auto& current=owner.NativeTrainingControl;\n+        // An owned actor is constructed before service publication. A private\n+        // restart/refresh has already replaced its cancelled/lifecycle lease;\n+        // neither this exception nor Finished refreshes a manual observation.\n+        if(current.composite.get()==this)return;\n+        const auto state=current.State();\n+        Require(state!=NativeTrainingState::CapturingReferences && state!=NativeTrainingState::Searching,\n+            \"another_native_training_service_owns_executor\");\n+        const auto live=observed.lock();\n+        Require(bool(live) && live==current.ownerControlLifetime,\"native_training_owner_control_replaced\");\n     };\n     initialEpoch=owner.NativeTrainingControl.ModelEpoch();\n     bindings=[&owner](){return owner.NativeProbeModelBindings();};\n@@ -22,6 +34,7 @@\n         Require(ownerLife.IsCurrent(),\"composite_train_owner_lifecycle_changed\");\n         if(beforeNativeQueue)beforeNativeQueue(request);\n         Require(!cancelled && ownerLife.IsCurrent(),\"composite_train_queue_interrupted\");\n+        requireOwnerControl();\n         ownedRawRun=request.specification.runId;ownedRawTrial=request.specification.trialId;\n         // Only the executor's copy retains the actor. Its reusable group\n         // prototype must not form actor -> group -> callback -> actor cycles.\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeCompositeTrainingAttempt::Bind(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeCompositeTrainingAttempt::Bind(\n@@ -6,10 +6,22 @@\n         owner.NativeTrainingControl.State()!=NativeTrainingState::Searching,\"composite_train_owner_service_already_active\");\n     ownerLife=owner.ObserveLifecycle();\n     observeOwner=[&owner](){return owner.ObserveLifecycle();};\n-    requireOwnerControl=[this,&owner](){\n-        const auto state=owner.NativeTrainingControl.State();\n-        if(state==NativeTrainingState::CapturingReferences || state==NativeTrainingState::Searching)\n-            Require(owner.NativeTrainingControl.composite.get()==this,\"another_native_training_service_owns_executor\");\n+    auto& control=owner.NativeTrainingControl;\n+    if(!control.ownerControlLifetime)\n+        control.ownerControlLifetime=std::make_shared<const NativeTrainingService::OwnerControlLifetime>();\n+    requireOwnerControl=[this,&owner,observed=std::weak_ptr<const NativeTrainingService::OwnerControlLifetime>(control.ownerControlLifetime)](){\n+        Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        if(!owner.IsNeedToTrain.GetData())throw CompositeTrainingStopped();\n+        const auto& current=owner.NativeTrainingControl;\n+        // An owned actor is constructed before service publication. A private\n+        // restart/refresh has already replaced its cancelled/lifecycle lease;\n+        // neither this exception nor Finished refreshes a manual observation.\n+        if(current.composite.get()==this)return;\n+        const auto state=current.State();\n+        Require(state!=NativeTrainingState::CapturingReferences && state!=NativeTrainingState::Searching,\n+            \"another_native_training_service_owns_executor\");\n+        const auto live=observed.lock();\n+        Require(bool(live) && live==current.ownerControlLifetime,\"native_training_owner_control_replaced\");\n     };\n     initialEpoch=owner.NativeTrainingControl.ModelEpoch();\n     bindings=[&owner](){return owner.NativeProbeModelBindings();};\n@@ -22,6 +34,7 @@\n         Require(ownerLife.IsCurrent(),\"composite_train_owner_lifecycle_changed\");\n         if(beforeNativeQueue)beforeNativeQueue(request);\n         Require(!cancelled && ownerLife.IsCurrent(),\"composite_train_queue_interrupted\");\n+        requireOwnerControl();\n         ownedRawRun=request.specification.runId;ownedRawTrial=request.specification.trialId;\n         // Only the executor's copy retains the actor. Its reusable group\n         // prototype must not form actor -> group -> callback -> actor cycles.\n"
     },
     {
       "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
       "method": "NativeCompositeTrainingAttempt::InitializeShared(",
       "before_sha256": "07e6c1bf90558a42608ef2d1fdbb5b118e1cbe66c7079f6164303aeaf63e99ee",
       "after_sha256": "f9e50accbccb36ba536d526ebb7f5d9fc7ca59b3354ecae71eef2e4d11efcad8",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/InitializeShared\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/InitializeShared\n@@ -52,6 +52,7 @@\n     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n     lease->requireCurrent=[this](){\n         Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        requireOwnerControl();\n         if(!adapter.requested())throw CompositeTrainingStopped();\n     };\n     CheckBoundary();\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeCompositeTrainingAttempt::InitializeShared(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeCompositeTrainingAttempt::InitializeShared(\n@@ -52,6 +52,7 @@\n     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n     lease->requireCurrent=[this](){\n         Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        requireOwnerControl();\n         if(!adapter.requested())throw CompositeTrainingStopped();\n     };\n     CheckBoundary();\n"
     },
     {
       "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
       "method": "NativeCompositeTrainingAttempt::RestartOwned(",
       "before_sha256": "4c7a3adc4df338413d90c05ee78354dc13d9798cef2e9e3f78816ec8e8dc188f",
       "after_sha256": "9a77b731833da96d2f94e14c3803390b685e2121fc6b6fd6eeccedbdbccee25a",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/RestartOwned\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/RestartOwned\n@@ -16,6 +16,7 @@\n     liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});\n     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n     lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        requireOwnerControl();\n         if(!adapter.requested())throw CompositeTrainingStopped();};\n     issuedGroups=completedNativeProbes=totalSamples=activeSamples=0;logicalTrials.clear();\n     group.reset();prepared.reset();measurement.reset();selection.reset();activeIdentity.reset();rawTrials.clear();\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeCompositeTrainingAttempt::RestartOwned(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeCompositeTrainingAttempt::RestartOwned(\n@@ -16,6 +16,7 @@\n     liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});\n     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n     lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        requireOwnerControl();\n         if(!adapter.requested())throw CompositeTrainingStopped();};\n     issuedGroups=completedNativeProbes=totalSamples=activeSamples=0;logicalTrials.clear();\n     group.reset();prepared.reset();measurement.reset();selection.reset();activeIdentity.reset();rawTrials.clear();\n"
     },
     {
       "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
       "method": "NativeCompositeTrainingAttempt::RefreshOwnedAfterEdit(",
       "before_sha256": "20566d46eff36e6abea4310e9abc8bfd92e4b3026deb84e04b623ebb7eb71d8a",
       "after_sha256": "3de4744004fbefbe71d1835d2e16f21d8892b845d4542b7b66670b3954f49114",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/RefreshOwnedAfterEdit\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/RefreshOwnedAfterEdit\n@@ -7,6 +7,7 @@\n     liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});\n     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n     lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        requireOwnerControl();\n         if(!adapter.requested())throw CompositeTrainingStopped();};\n     // Attempt clocks/counters and immutable source family are NOT restarted.\n }"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeCompositeTrainingAttempt::RefreshOwnedAfterEdit(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeCompositeTrainingAttempt::RefreshOwnedAfterEdit(\n@@ -7,6 +7,7 @@\n     liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});\n     lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n     lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n+        requireOwnerControl();\n         if(!adapter.requested())throw CompositeTrainingStopped();};\n     // Attempt clocks/counters and immutable source family are NOT restarted.\n }"
     },
     {
       "path": "Core/TimeLearner/NativeTrainingService.cpp",
       "method": "NativeTrainingService::Start(",
       "before_sha256": "b36a931ff89aa98cf7ae8aeeb981a01a49b6a868f74c2618e3b0810e1f39cdd3",
       "after_sha256": "e8e89ef7e7f6bc69b54464ac16ad1e94a50a3f565adfb422ef62e4636c427e20",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/Start\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/Start\n@@ -90,7 +90,8 @@\n     referenceProbes=invalidReferences=0;if(!references){referenceEvidence.clear();referencePackets.clear();}\n     finalPackets.clear();observedPackets.clear();incompleteCaptureConstraint.reset();\n     certificate.reset();search.reset();activeAction.reset();\n-    waiting=false;reason.clear();outcome=TrainingStatus::Searching;++attempt;\n+    waiting=false;reason.clear();outcome=TrainingStatus::Searching;\n+    InvalidateOwnerControlLifetime();++attempt;\n     plan.search.runId+=\"/session/\"+std::to_string(attempt);\n     state=NativeTrainingState::CapturingReferences;\n     if(references)BeginSearch(a);\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeTrainingService::Start(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeTrainingService::Start(\n@@ -90,7 +90,8 @@\n     referenceProbes=invalidReferences=0;if(!references){referenceEvidence.clear();referencePackets.clear();}\n     finalPackets.clear();observedPackets.clear();incompleteCaptureConstraint.reset();\n     certificate.reset();search.reset();activeAction.reset();\n-    waiting=false;reason.clear();outcome=TrainingStatus::Searching;++attempt;\n+    waiting=false;reason.clear();outcome=TrainingStatus::Searching;\n+    InvalidateOwnerControlLifetime();++attempt;\n     plan.search.runId+=\"/session/\"+std::to_string(attempt);\n     state=NativeTrainingState::CapturingReferences;\n     if(references)BeginSearch(a);\n"
     },
     {
       "path": "Core/TimeLearner/NativeTrainingService.cpp",
       "method": "NativeTrainingService::ResetControl(",
       "before_sha256": "da965aa1ddc32054a8175748ccba0ff2a59cd9577176c63c75b0840460c512e8",
       "after_sha256": "9dc8b40723b38fd7d5d04d008c8b614b4d333f4aefced2fbecfa96adedfd418c",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/ResetControl\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/ResetControl\n@@ -1,5 +1,6 @@\n void NativeTrainingService::ResetControl()\n {\n+    InvalidateOwnerControlLifetime();\n     if(composite){composite->RevokeLive();++compositeGeneration;}\n     if(!references && attempt>0 && !plan.search.initialModelRevision.empty() && !incompleteCaptureConstraint)\n         incompleteCaptureConstraint.emplace(plan.search.initialModelRevision,plan.search.initialModelEpoch);\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeTrainingService::ResetControl(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeTrainingService::ResetControl(\n@@ -1,5 +1,6 @@\n void NativeTrainingService::ResetControl()\n {\n+    InvalidateOwnerControlLifetime();\n     if(composite){composite->RevokeLive();++compositeGeneration;}\n     if(!references && attempt>0 && !plan.search.initialModelRevision.empty() && !incompleteCaptureConstraint)\n         incompleteCaptureConstraint.emplace(plan.search.initialModelRevision,plan.search.initialModelEpoch);\n"
     },
     {
       "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
       "method": "NativeTrainingService::StartComposite(",
       "before_sha256": "64c01eb365362906bc1a8c4eb916f5f05f9a82a917e7229e785ea34791d8a61f",
       "after_sha256": "c652011d962271f947d3b53c5abbdcf7435675ffd818753b6120370bee91e8e1",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/StartComposite\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/StartComposite\n@@ -55,6 +55,7 @@\n     compositeCancellationDiagnostics.clear();\n     if(!references){referencePackets.clear();referenceEvidence.clear();}\n     certificate.reset();search.reset();activeAction.reset();waiting=false;compositeHarvested=true;reason.clear();outcome=TrainingStatus::Searching;\n+    InvalidateOwnerControlLifetime();\n     ++attempt;++compositeGeneration;plan.search.runId+=\"/session/\"+std::to_string(attempt);\n     state=NativeTrainingState::CapturingReferences;incompleteCaptureConstraint.reset();\n     if(references)CompositeBeginSearch(a);\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeTrainingService::StartComposite(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeTrainingService::StartComposite(\n@@ -55,6 +55,7 @@\n     compositeCancellationDiagnostics.clear();\n     if(!references){referencePackets.clear();referenceEvidence.clear();}\n     certificate.reset();search.reset();activeAction.reset();waiting=false;compositeHarvested=true;reason.clear();outcome=TrainingStatus::Searching;\n+    InvalidateOwnerControlLifetime();\n     ++attempt;++compositeGeneration;plan.search.runId+=\"/session/\"+std::to_string(attempt);\n     state=NativeTrainingState::CapturingReferences;incompleteCaptureConstraint.reset();\n     if(references)CompositeBeginSearch(a);\n"
     },
     {
       "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
       "method": "NativeTrainingService::StartCandidateWindowComposite(",
       "before_sha256": "a58b00497c86f17a348211ee742313d23303f43b3d65b4ddabe2e53e8772cbf6",
       "after_sha256": "79ef66266ecddbf5452fdf35952049e78f18d4705f7b073df2e13e5746709d06",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/StartCandidateWindowComposite\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/StartCandidateWindowComposite\n@@ -53,6 +53,7 @@\n     auto binding=revision;actor->CheckBoundary();actor->CheckClock(m,NativeTrainingWallTime());\n     static_assert(std::is_nothrow_move_assignable_v<NativeTrainingPlan>);\n     static_assert(std::is_nothrow_move_assignable_v<std::optional<TrainingCapacitance>>);\n+    InvalidateOwnerControlLifetime();\n     plan=std::move(runtime);composite.swap(actor);compositeSourceBinding.swap(source);compositeInitialConfiguration.swap(initial);\n     compositeOwnerFamily.swap(family);compositeRecords.swap(records);compositePrimaryBytes=bytes;compositeCapacitance=std::move(capacitance);\n     compositeCandidateReferences.swap(closed);search.swap(preparedSearch);attempt=nextAttempt;++compositeGeneration;\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeTrainingService::StartCandidateWindowComposite(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeTrainingService::StartCandidateWindowComposite(\n@@ -53,6 +53,7 @@\n     auto binding=revision;actor->CheckBoundary();actor->CheckClock(m,NativeTrainingWallTime());\n     static_assert(std::is_nothrow_move_assignable_v<NativeTrainingPlan>);\n     static_assert(std::is_nothrow_move_assignable_v<std::optional<TrainingCapacitance>>);\n+    InvalidateOwnerControlLifetime();\n     plan=std::move(runtime);composite.swap(actor);compositeSourceBinding.swap(source);compositeInitialConfiguration.swap(initial);\n     compositeOwnerFamily.swap(family);compositeRecords.swap(records);compositePrimaryBytes=bytes;compositeCapacitance=std::move(capacitance);\n     compositeCandidateReferences.swap(closed);search.swap(preparedSearch);attempt=nextAttempt;++compositeGeneration;\n"
     },
     {
       "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
       "method": "NativeTrainingService::CaptureCompositeInterrupt(",
       "before_sha256": "b4cfacd1e7eb210049a419f47e5be8a6668d19bee7d603a0d0b5d51f1cd28b35",
       "after_sha256": "577a259ef9a8b11a44932bd4d99a1ce129fe9b55337b0ac95b8af241b4603723",
-      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/CaptureCompositeInterrupt\n+++ 353f17baf505edf92ff39fe40422b9dcea023045/CaptureCompositeInterrupt\n@@ -1,4 +1,5 @@\n void NativeTrainingService::CaptureCompositeInterrupt(const NativeTrainingAdapter& a,const std::string& diagnostic) {\n+    InvalidateOwnerControlLifetime();\n     if(!composite)return;const auto actor=composite;\n     ++compositeGeneration;\n     actor->InterruptOwnedRaw(diagnostic,true);\n"
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeTrainingService::CaptureCompositeInterrupt(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeTrainingService::CaptureCompositeInterrupt(\n@@ -1,4 +1,5 @@\n void NativeTrainingService::CaptureCompositeInterrupt(const NativeTrainingAdapter& a,const std::string& diagnostic) {\n+    InvalidateOwnerControlLifetime();\n     if(!composite)return;const auto actor=composite;\n     ++compositeGeneration;\n     actor->InterruptOwnedRaw(diagnostic,true);\n"
+    },
+    {
+      "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+      "method": "NativeTrainingService::InterruptComposite(",
+      "before_sha256": "e54425c27980a2bc6db8aef9309648fbb0ec1541a26bf6e9ed901d2c3db24863",
+      "after_sha256": "19acc11e7c738602af4dcb0ba8a249c8410fd1f658eeb847a6283d85789d03e1",
+      "actual_body_diff": "--- 800f92ae1f9e0133cefc0ccfe36abc3d8c99727f/NativeTrainingService::InterruptComposite(\n+++ b2878e565febe20a4ba7c9c64536d6e66f672626/NativeTrainingService::InterruptComposite(\n@@ -1,4 +1,5 @@\n void NativeTrainingService::InterruptComposite(const NativeTrainingAdapter& a,const std::string& diagnostic) {\n+    InvalidateOwnerControlLifetime();\n     if(!composite)return;const auto actor=composite;\n     // Fresh authority for this actual owner hook, not a refreshed training\n     // lease. It expires if a callback starts another Reset/Default operation.\n"
     }
   ],
-  "unchanged_callback_and_service_method_count": 14,
+  "unchanged_callback_and_service_method_count": 13,
   "unchanged_callback_and_service_methods": [
     {
       "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
@@ -163,13 +170,6 @@
       "git_method_bytes_sha256": "fc6b02de399bbab31e4c8bb771a9c47d7a66eb94ce0e27dbdbfd27e418149fc7",
       "bytes": 608,
       "unchanged": true
-    },
-    {
-      "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
-      "method": "NativeTrainingService::InterruptComposite(",
-      "git_method_bytes_sha256": "e54425c27980a2bc6db8aef9309648fbb0ec1541a26bf6e9ed901d2c3db24863",
-      "bytes": 748,
-      "unchanged": true
     }
   ],
   "unchanged_production_blobs": [
@@ -241,5 +241,7 @@
     "source_service470",
     "math_A_B"
   ],
-  "scope": "actual Git method-body diff metadata, not execution evidence"
+  "scope": "actual Git method-body diff metadata, not execution evidence",
+  "prior_source_reviewed_pulse": "353f17baf505edf92ff39fe40422b9dcea023045",
+  "followup": "public InterruptComposite invalidates before empty-actor early return; no callback ordering or generation changes"
 }

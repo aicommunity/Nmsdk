@@ -2,12 +2,12 @@
   "kind": "native_manual_control_lifetime_source_inventory",
   "schema_version": 1,
   "status": "source_preparation_only_unrun",
-  "root_base": "4ecad219705ccd71f041d1aa97fa89d3b1eea667",
-  "pulse": "353f17baf505edf92ff39fe40422b9dcea023045",
+  "root_base": "85ca858ae3c8ec39aaa527211868facb17208ad9",
+  "pulse": "b2878e565febe20a4ba7c9c64536d6e66f672626",
   "unfixed_pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
   "unfixed_root_reproducer": "f74b9fbf9ece38668396c21fa569d688f595bb05",
   "target": "Test_PulseLib_StorageComponents",
-  "new_expected_count": 14,
+  "new_expected_count": 16,
   "new_expected_ids": [
     "NativeManualControlLifetime.ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume",
     "NativeManualControlLifetime.BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume",
@@ -22,7 +22,9 @@
     "NativeManualControlLifetime.ClassicOpenArmCannotOutliveFailedBegin",
     "NativeManualControlLifetime.BranchOpenArmCannotOutliveFailedBegin",
     "NativeManualControlLifetime.ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial",
-    "NativeManualControlLifetime.BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial"
+    "NativeManualControlLifetime.BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial",
+    "NativeManualControlLifetime.ClassicImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume",
+    "NativeManualControlLifetime.BranchImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume"
   ],
   "repaired_f74_expected_count": 4,
   "repaired_f74_expected_ids": [
@@ -31,7 +33,7 @@
     "NativeCandidateWindowManualAuthority.ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
     "NativeCandidateWindowManualAuthority.BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable"
   ],
-  "scoped_expected_count": 18,
+  "scoped_expected_count": 20,
   "scoped_expected_ids": [
     "NativeCandidateWindowManualAuthority.ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
     "NativeCandidateWindowManualAuthority.BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
@@ -50,13 +52,15 @@
     "NativeManualControlLifetime.ClassicOpenArmCannotOutliveFailedBegin",
     "NativeManualControlLifetime.BranchOpenArmCannotOutliveFailedBegin",
     "NativeManualControlLifetime.ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial",
-    "NativeManualControlLifetime.BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial"
+    "NativeManualControlLifetime.BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial",
+    "NativeManualControlLifetime.ClassicImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume",
+    "NativeManualControlLifetime.BranchImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume"
   ],
   "test_source": {
     "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-    "git_blob_sha256": "9f21fdbd902c89da8a94c553606a2fe5550e61fd720385ed5504a3076e8afe37",
-    "bytes": 277509,
-    "literal_tests": 333
+    "git_blob_sha256": "7fe59b7d36fe625e6e888826cde27d83b768f93f713083fce905331d8e17e904",
+    "bytes": 285106,
+    "literal_tests": 335
   },
   "local_build_or_numeric": false,
   "server_dispatch_or_cache_update": false,
@@ -90,6 +94,11 @@
     "actual-authority-boundary.json",
     "actual-owned-edit.json",
     "actual-open-arm.json",
-    "actual-before-queue.json"
-  ]
+    "actual-before-queue.json",
+    "actual-public-interrupt.json"
+  ],
+  "prior_source_reviewed_pulse": "353f17baf505edf92ff39fe40422b9dcea023045",
+  "no_stored_actor_interrupt_via_actual_package5_import": true,
+  "public_route": "NativeLearnerLifecycle plan4 -> public InterruptComposite + BindNativeTraining",
+  "new_public_hook_or_private_access_trick": false
 }

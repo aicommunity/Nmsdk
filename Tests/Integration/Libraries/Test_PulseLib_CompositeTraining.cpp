@@ -2824,3 +2824,72 @@ TEST(NativeManualControlLifetime,ClassicOpenArmCannotOutliveFailedBegin){WindowM
 TEST(NativeManualControlLifetime,BranchOpenArmCannotOutliveFailedBegin){WindowManualOpenArmAfterFailedBeginIsRejected<NNeuronTimeLearnerBranch>();}
 TEST(NativeManualControlLifetime,ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial){WindowManualBeforeQueueTakeoverDoesNotQueueOldTrial<NNeuronTimeLearner>();}
 TEST(NativeManualControlLifetime,BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial){WindowManualBeforeQueueTakeoverDoesNotQueueOldTrial<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto cold=CompositeCold(f);ConfigurePortableCold(f);
+    // A real stopped package5 with immutable source but ZERO native groups.
+    // Restore installs portable proof/plan4, never an executable native actor.
+    f.owner->BeginNativeTraining(MakeConfiguredNativeTrainingPlan(cold),true);
+    ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::CapturingReferences);
+    f.owner->IsNeedToTrain=false;ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+    ASSERT_EQ(f.owner->NativeTrainingController().CompositeNativeProbes(),0u);
+    const auto package=f.owner->ExportNativeLearnedState(CompositePackageImplementation);
+    ASSERT_EQ(package["schema_version"],QJsonValue(5));ASSERT_TRUE(package["certificate"].isNull());ASSERT_EQ(package["reference_complete"],QJsonValue(false));
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/no-actor-interrupt":"classic-window-control-lifetime/no-actor-interrupt";
+    SavePortableBoundary(f,(std::string(name)+"/actual-stopped-source").c_str(),package);
+    const auto imported=f.owner->ImportNativeLearnedState(package,CompositePackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    f.owner->Build();f.model->Init();f.model->Reset();ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
+    ASSERT_EQ(f.owner->ControllerVersion.GetData(),2);const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.Plan().protocol.schemaVersion,4u);
+    ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_FALSE(service.Search());
+    const auto importedSource=service.CompositeSourceBinding();ASSERT_FALSE(importedSource.isEmpty());
+    f.owner->IsNeedToTrain=true; // V2 edge Reset happens BEFORE the new manual observation.
+    const auto earliest=f.Time(),earliestWall=Wall();EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
+    VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);const auto request=final.NextRequest();ASSERT_TRUE(request);
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},30.,3600.);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();const auto pending=*f.attempt->Measurement();const auto record=f.attempt->Record();
+    SaveCandidateWindowGroup(f,"before-public-empty-actor-interrupt");const auto historical=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    SaveCompositeArchive(historical,(std::string(name)+"/old-manual-journal").c_str());
+    // Queued manual trials suppress V2 autostart. The imported service still
+    // holds only portable proof, not a native actor, throughout these groups.
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);
+    ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
+    const auto life=f.owner->ObserveLifecycle();const auto revision=f.Revision();const auto beforeTime=f.Time();
+    const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    const auto sourceIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(sourceIdentity["valid"].toBool());
+    const auto probeState=f.owner->NativeProbeState();ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    // Existing PUBLIC friend routing4 -> the actual public service method and
+    // BindNativeTraining. No const_cast, private-access hook or UM reset.
+    NativeLearnerLifecycle::InterruptComposite(*f.owner,"manual_control_no_stored_actor");
+    ASSERT_TRUE(life.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Time(),beforeTime);ASSERT_EQ(f.Revision(),revision);
+    ASSERT_EQ(f.owner->NativeProbeState(),probeState);ASSERT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),neuron.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get(),dataset.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
+    const auto afterSourceIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterSourceIdentity["valid"].toBool());
+    ASSERT_EQ(afterSourceIdentity["model"],sourceIdentity["model"]);
+    ASSERT_EQ(service.State(),NativeTrainingState::Idle);ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_EQ(service.CompositeSourceBinding(),importedSource);
+    ASSERT_EQ(service.CompositeGroups(),0u);ASSERT_EQ(service.CompositeNativeProbes(),0u);
+    const auto replay=DecodeNativeCompositeTrainingArchive(historical.document);ASSERT_EQ(replay.Records().back().semanticProofId,pending.SemanticProofId());
+    ASSERT_LT(f.Time()-record.startModel,record.maximumGroupModelSeconds);ASSERT_LT(Wall()-record.startWall,record.maximumGroupWallSeconds);
+    ASSERT_LT(f.Time()-earliest,record.attemptLimits.maximumModelSeconds);ASSERT_LT(Wall()-earliestWall,record.attemptLimits.maximumWallSeconds);
+    final.ConsumeCandidateWindow(pending,revision);
+    QJsonArray reasons;for(const auto& r:final.Rejected())reasons.append(QString::fromStdString(r.reason));
+    SavePortableObject(name,"actual-public-interrupt.json",{{"kind","low_level_manual_control_no_stored_service_actor_interrupt"},{"schema_version",1},
+        {"route","actual stopped package5 import -> plan4 portable-only service -> public NativeLearnerLifecycle::InterruptComposite"},
+        {"actual_final_status",VerificationStatusName(final.Status())},{"actual_accepted_inputs",double(final.AcceptedInputs())},{"rejections",reasons},
+        {"owner_lifecycle_current",life.IsCurrent()},{"actual_need",f.owner->IsNeedToTrain.GetData()},
+        {"actual_service_state",NativeTrainingStateName(service.State())},{"actual_service_session",double(service.SessionAttempt())},
+        {"actual_service_native_probes",double(service.CompositeNativeProbes())},{"native_time_before",beforeTime},{"native_time_after",f.Time()},
+        {"actual_group_wall_elapsed",Wall()-record.startWall},{"group_wall_limit",record.maximumGroupWallSeconds}});
+    SaveCompositeBoundary(f,name);EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+    ASSERT_FALSE(final.Rejected().empty());EXPECT_EQ(final.Rejected().back().reason,"native_training_owner_control_replaced");
+}
+}
+TEST(NativeManualControlLifetime,ClassicImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume){WindowManualImportedNoActorPublicInterruptRevokes<NNeuronTimeLearner>();}
+TEST(NativeManualControlLifetime,BranchImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume){WindowManualImportedNoActorPublicInterruptRevokes<NNeuronTimeLearnerBranch>();}
