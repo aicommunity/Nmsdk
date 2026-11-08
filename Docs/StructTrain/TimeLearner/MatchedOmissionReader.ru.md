@@ -41,8 +41,27 @@ Expected[i]+cable delay и закрывает per-input окно; predictor ли
 
 ## Проверки
 
-Подготовлены11 контролируемых Python cases: независимый пересчёт, высокий
+На M40 прошли11 контролируемых Python cases: независимый пересчёт, высокий
 shared поздний пик, partial stop, tampered support/selection, потеря/дубли/
 extra files, неизвестная schema, changed model/epoch/trial, NaN/Inf, источник,
-baseline/event drift, ложная полнота и escaping path. На момент подготовки
-численные тесты и анализ ещё не запускались. Они выполняются только на workers.
+baseline/event drift, ложная полнота и escaping path. Проверка выполнена на worker, tool root
+`fa0c70b7d1e8102e207f6a4852c993615d3a538a`; локально выполнена только проверка
+метаданных и hash. Дополнительно reader перепроверил10 реальных native groups
+из ASan evidence `9e301ba0b28be4ec64a85ac143ea9db94d6fd884`:
+шесть полных назначений пересчитаны независимо от C++, у четырёх остановленных
+групп проверена только сохранённая первая полная проба. Новых симуляций не было.
+
+Результаты: два separated controls остаются Valid, четыре coupled controls —
+Ambiguous, четыре stop/edit — без assignment. В coupled controls exclusive
+первый пик лежит внутри диагностической гипотезы окна [.009,.07] s, а более
+высокий shared peak находится снаружи. Это воспроизводит конкретное ограничение
+v1, описанное выше; гипотеза окна восстановлена из fixture prototype, а не
+зарегистрирована до измерения. Она не разрешает менять результат на Valid.
+
+Evidence commit `515a86c42509c136211d46cc5e021145e804b618`, компактный archive
+27 файлов/33 216 bytes. Исходная ASan primary data повторно не копируется:
+её commit и hash записаны в primary-git.json. Локальная проверка всех members,
+source hashes, original-primary hashes и закрытия lease отражена в
+[MatchedOmissionReaderVerification.json](MatchedOmissionReaderVerification.json).
+Это проверка reader и границ применимости метода, не завершение Train-интеграции
+и не научный результат классификации.
