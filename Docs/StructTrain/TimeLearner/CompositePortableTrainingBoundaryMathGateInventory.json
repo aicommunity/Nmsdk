@@ -1,0 +1,33 @@
+{
+  "status": "source_preparation_only",
+  "numeric_tests_run_locally": false,
+  "suite": "NativeCompositePortableMath",
+  "count": 8,
+  "cases": [
+    "NativeCompositePortableMath.ClassicMatchesLiveCertificateByteSemantics",
+    "NativeCompositePortableMath.BranchMatchesLiveCertificateByteSemantics",
+    "NativeCompositePortableMath.DefaultSyncRemainsOutsideTolerance",
+    "NativeCompositePortableMath.CurrentFinalSetUsesOnlyLatestActualSweep",
+    "NativeCompositePortableMath.MixedActualFinalSweepsRejected",
+    "NativeCompositePortableMath.ClassicRejectedWarmKeepsHistoricalReferenceData",
+    "NativeCompositePortableMath.BranchRejectedWarmKeepsHistoricalReferenceData",
+    "NativeCompositePortableMath.WholeOlderActualFinalSweepRejected"
+  ],
+  "source_sha256": "f24961489a2e33661ece5d981f641ad75fd6a65930463bae08a6ce823c51dc43",
+  "prior_scope": 206,
+  "new_scope_total": 214,
+  "additional_actual_bundle": "classic-two-final-sweeps",
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "does_not_claim": [
+    "search_traversal_reexecution",
+    "historical_wall_time_attestation",
+    "live_authority_from_import",
+    "recognition_exact_inheritance"
+  ],
+  "pending": [
+    "package5_actual_physical_import",
+    "owned_warm_adoption",
+    "Console_Train_to_Test",
+    "per_candidate_window_policy"
+  ]
+}

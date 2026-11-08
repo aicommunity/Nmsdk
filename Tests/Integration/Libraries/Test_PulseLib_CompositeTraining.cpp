@@ -7,6 +7,7 @@
 #include "TimeLearner/MatchedOmissionEvidenceJson.h"
 #include "TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "TimeLearner/ModelArchive.h"
+#include "TimeLearner/CompositePortableTrainingProof.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
@@ -33,6 +34,8 @@ static_assert(!std::is_aggregate_v<PreparedCompositeMeasurement>);
 static_assert(!std::is_aggregate_v<ValidatedCompositeMeasurement>);
 static_assert(!std::is_default_constructible_v<DecodedNativeCompositeArchive>);
 static_assert(!std::is_aggregate_v<DecodedNativeCompositeArchive>);
+static_assert(!std::is_default_constructible_v<CompositePortableTrainingProof>);
+static_assert(!std::is_aggregate_v<CompositePortableTrainingProof>);
 void Require(bool value,const char* reason){if(!value)throw std::runtime_error(reason);}
 double Wall(){return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 class CompositeTrainingFlag : public UNet {
@@ -664,12 +667,14 @@ template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& 
         {"reference_complete",bool(service.References())},{"references",references},{"outcome",TrainingStatusName(service.Outcome())},
         {"reason",QString::fromStdString(service.Reason())},{"certificate",service.Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Certificate())):QJsonValue(QJsonValue::Null)}});
 }
+template<class Owner> QJsonObject& ActualServiceCertificateData(){static QJsonObject data;return data;}
 template<class Owner> const NativeCompositeArchiveDocument& ActualServiceArchive() {
     // One real native service execution per topology/process. Later adversarial
     // cases replay immutable exported data; they do not synthesize waveforms.
     static std::optional<NativeCompositeArchiveDocument> archive;if(!archive) {
         NativeCompositeFixture<Owner> f(2000,false,64,false,true);ServiceStart(f,ServicePlan(f));ServiceTicks(f);
         const auto& service=f.owner->NativeTrainingController();Require(service.Outcome()==TrainingStatus::Exact,service.Reason().c_str());
+        ActualServiceCertificateData<Owner>()=EncodeTrainingCertificate(*service.Certificate());
         archive=EncodeNativeCompositeTrainingArchive(service);const auto* name=NativeCompositeFixture<Owner>::branch?"branch-service":"classic-service";
         SaveCompositeArchive(*archive,name);SaveCompositeBoundary(f,name);
     }return *archive;
@@ -837,3 +842,67 @@ template<class Owner> void SourceChangedBeforeConsume() {
 }
 TEST(NativeCompositeSourceGuard,ClassicActualSourceChangedBetweenCloseAndConsume){SourceChangedBeforeConsume<NNeuronTimeLearner>();}
 TEST(NativeCompositeSourceGuard,BranchActualSourceChangedBetweenCloseAndConsume){SourceChangedBeforeConsume<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> void PortableFinalMath() {
+    const auto& source=ActualServiceArchive<Owner>();const auto& expected=ActualServiceCertificateData<Owner>();
+    const auto decoded=DecodeNativeCompositeTrainingArchive(source.document);const auto t=expected["tolerances"].toObject();
+    const VerificationTolerances tolerances{t["amplitude_absolute"].toDouble(),t["amplitude_relative"].toDouble(),t["sync"].toDouble()};
+    const auto proof=CompositePortableTrainingProof::Replay(decoded,tolerances,expected["model_revision"].toString().toStdString(),std::size_t(expected["model_epoch"].toDouble()));
+    ASSERT_TRUE(proof.References());ASSERT_TRUE(proof.Certificate());EXPECT_EQ(EncodeTrainingCertificate(*proof.Certificate()),expected);
+    EXPECT_FALSE(proof.Certificate()->Matches(proof.ModelRevision(),*proof.References(),tolerances,ModelStateKind::Recognition,proof.ModelEpoch()));
+    EXPECT_THROW(CompositePortableTrainingProof::Replay(decoded,tolerances,"different-model",proof.ModelEpoch()),std::invalid_argument);
+    EXPECT_THROW(CompositePortableTrainingProof::Replay(decoded,tolerances,proof.ModelRevision(),proof.ModelEpoch()+1),std::invalid_argument);
+}
+void PortableDefaultSync() {
+    const auto& source=ActualServiceArchive<NNeuronTimeLearner>();const auto& expected=ActualServiceCertificateData<NNeuronTimeLearner>();
+    const auto proof=CompositePortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(source.document),
+        {1e-5,0.,.02},expected["model_revision"].toString().toStdString(),std::size_t(expected["model_epoch"].toDouble()));
+    ASSERT_TRUE(proof.Certificate());EXPECT_FALSE(proof.Certificate()->Exact());EXPECT_DOUBLE_EQ(proof.Certificate()->Tolerances().sync,.02);
+    EXPECT_GT(std::max(std::fabs(proof.Certificate()->Residuals().front().timingResidualLow),
+        std::fabs(proof.Certificate()->Residuals().front().timingResidualHigh)),.02);
+}
+const NativeCompositeArchiveDocument& ActualTwoSweepArchive() {
+    static std::optional<NativeCompositeArchiveDocument> archive;if(!archive) {
+        NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);auto plan=ServicePlan(f,.02);plan.search.maximumSweeps=2;
+        ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+        Require(service.Outcome()==TrainingStatus::BudgetExhausted,"two_sweep_fixture_must_not_promote_outside_tolerance");Require(!service.Certificate(),"two_sweep_fixture_certificate");
+        archive=EncodeNativeCompositeTrainingArchive(service);SaveCompositeArchive(*archive,"classic-two-final-sweeps");SaveCompositeBoundary(f,"classic-two-final-sweeps");
+    }return *archive;
+}
+void FreshFinalSweeps(int selection) {
+    const auto& source=ActualTwoSweepArchive();auto object=source.document;const auto decoded=DecodeNativeCompositeTrainingArchive(object);
+    std::map<std::string,std::vector<std::string>> runs;for(const auto& record:decoded.Records())if(record.purpose==CompositeMeasurementPurpose::Final && record.consumed)
+        runs[record.logical.runId].push_back(record.groupId);
+    ASSERT_EQ(runs.size(),2u);for(const auto& [run,groups]:runs)EXPECT_EQ(groups.size(),2u);
+    if(selection) {
+        auto finals=object["final_group_ids"].toArray();const auto first=runs.begin()->second.front();finals[0]=QString::fromStdString(first);
+        if(selection==2)finals[1]=QString::fromStdString(runs.begin()->second.back());
+        object["final_group_ids"]=finals;RebindArchive(object);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(object),std::invalid_argument);
+    } else {
+        const auto current=decoded.FinalGroups();ASSERT_EQ(current.size(),2u);for(const auto& id:current) {
+            const auto found=std::find_if(decoded.Records().begin(),decoded.Records().end(),[&](const auto& r){return r.groupId==id;});
+            ASSERT_NE(found,decoded.Records().end());EXPECT_EQ(found->logical.runId,runs.rbegin()->first);
+        }
+    }
+}
+template<class Owner> void RejectedWarmRetainsHistoricalData() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto plan=ServicePlan(f);ServiceStart(f,plan);ServiceTicks(f);
+    const auto& before=f.owner->NativeTrainingController();ASSERT_EQ(before.Outcome(),TrainingStatus::Exact);
+    const auto oldSource=before.CompositeSourceBinding();const auto refs=before.CompositeReferenceGroupIds();const auto count=before.CompositeMeasurements().size();
+    const auto raw=f.preparations;const auto attempt=before.SessionAttempt();f.owner->Reset();plan.composite->maximumTotalPrimaryBytes=1;
+    f.owner->BeginNativeTraining(plan);const auto& failed=f.owner->NativeTrainingController();EXPECT_EQ(failed.Outcome(),TrainingStatus::InvalidModel);
+    EXPECT_FALSE(failed.Certificate());EXPECT_EQ(failed.SessionAttempt(),attempt);EXPECT_EQ(f.preparations,raw);
+    EXPECT_EQ(failed.CompositeSourceBinding(),oldSource);EXPECT_EQ(failed.CompositeReferenceGroupIds(),refs);EXPECT_EQ(failed.CompositeMeasurements().size(),count);
+    EXPECT_NO_THROW(DecodeNativeCompositeTrainingArchive(EncodeNativeCompositeTrainingArchive(failed).document));
+}
+}
+TEST(NativeCompositePortableMath,ClassicMatchesLiveCertificateByteSemantics){PortableFinalMath<NNeuronTimeLearner>();}
+TEST(NativeCompositePortableMath,BranchMatchesLiveCertificateByteSemantics){PortableFinalMath<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositePortableMath,DefaultSyncRemainsOutsideTolerance){PortableDefaultSync();}
+TEST(NativeCompositePortableMath,CurrentFinalSetUsesOnlyLatestActualSweep){FreshFinalSweeps(0);}
+TEST(NativeCompositePortableMath,MixedActualFinalSweepsRejected){FreshFinalSweeps(1);}
+TEST(NativeCompositePortableMath,ClassicRejectedWarmKeepsHistoricalReferenceData){RejectedWarmRetainsHistoricalData<NNeuronTimeLearner>();}
+TEST(NativeCompositePortableMath,BranchRejectedWarmKeepsHistoricalReferenceData){RejectedWarmRetainsHistoricalData<NNeuronTimeLearnerBranch>();}
+
+TEST(NativeCompositePortableMath,WholeOlderActualFinalSweepRejected){FreshFinalSweeps(2);}
