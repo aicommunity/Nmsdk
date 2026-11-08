@@ -1,0 +1,1754 @@
+{
+  "kind": "cold6_baseline_A4_source_preparation",
+  "schema_version": 1,
+  "status": "LOCAL_SOURCE_ONLY_NO_SDK_BUILD_OR_RUN",
+  "code_root": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+  "pulse": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+  "parents": [
+    "d2ee4691cbe04fbc8c82f585d27fb3a4da80ed61",
+    "db2e01a84fe51dd31dd20ef63b8703cacfd77f6c"
+  ],
+  "merge_method": "ordinary merge --no-ff",
+  "preserved_after_worker_merge": [
+    {
+      "path": "App",
+      "git_object": "0e74d4ce09a9862b49ec5be652a7da1905ee9c8e",
+      "identical_to_d2": true
+    },
+    {
+      "path": "Tests",
+      "git_object": "3b710f75745f791956267112a99a2dbe8c9ed167",
+      "identical_to_d2": true
+    },
+    {
+      "path": "CMakeLists.txt",
+      "git_object": "2a54513b75286c025142c1972f26a74b3ee2e176",
+      "identical_to_d2": true
+    },
+    {
+      "path": "cmake",
+      "git_object": "499ab75fbd9b0a5835677f212eceffa87e070c18",
+      "identical_to_d2": true
+    },
+    {
+      "path": "Bin",
+      "git_object": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "identical_to_d2": true
+    },
+    {
+      "path": "Rdk",
+      "git_object": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "identical_to_d2": true
+    },
+    {
+      "path": "Libraries/Nmsdk-PulseLib",
+      "git_object": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+      "identical_to_d2": true
+    }
+  ],
+  "Scripts_tree_identical_db2": "2d49bcd6b0608f60ff57a53acb80310e56ebd9d0",
+  "actual_module_sources": [
+    {
+      "commit": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "path": "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py",
+      "git_blob": "35a1af582cdf8bfdf11b1e5f48164b82644f1687",
+      "bytes": 31241,
+      "sha256": "69325891153d1fafbc99566a2a1feff1d79792a51852771aedf26ea561179391"
+    },
+    {
+      "commit": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "path": "Scripts/StructTrain/TimeLearner/native_preparation.py",
+      "git_blob": "edbb928183fc90f860cc416ed533666efd7603e6",
+      "bytes": 22872,
+      "sha256": "9e6d29d5d371393b4fdf0af001ab945ba1c1d1ca2387d581d70335535eb3db7f"
+    }
+  ],
+  "code_scoped_worker13_preparer30_reuse": "same dependency byte proof; no rote metadata43 repeat; actual8repo/materialization/sameSDK/canonical capture mandatory",
+  "target": "Test_PulseLib_StorageComponents",
+  "case_files": [
+    {
+      "commit": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp",
+      "git_blob": "c40ead669c3b6591ae13c243481249acedf20799",
+      "bytes": 85071,
+      "sha256": "e65774d0938d2359dc752dab7083e9a8a0668e5e54789776bdd71ab7b428f24d",
+      "declared_source_count": 74,
+      "selected_ids": [
+        "BoundedTrainingFiniteRanking/ClassicN0Zero",
+        "BoundedTrainingFiniteRanking/ClassicN1Zero",
+        "BoundedTrainingFiniteRanking/BranchN0Zero",
+        "BoundedTrainingFiniteRanking/BranchN1Zero",
+        "BoundedTrainingFiniteRanking/ClassicN0Overflow",
+        "BoundedTrainingFiniteRanking/ClassicN1Overflow",
+        "BoundedTrainingFiniteRanking/BranchN0Overflow",
+        "BoundedTrainingFiniteRanking/BranchN1Overflow",
+        "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing",
+        "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+        "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+        "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
+        "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+        "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+        "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+        "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+        "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+        "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+        "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+        "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+        "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+        "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+        "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+        "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+        "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+        "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+        "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+        "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+        "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+        "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+        "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+        "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+        "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+        "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+        "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+        "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+        "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+        "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+        "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+        "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+        "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+        "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+        "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+        "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+        "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+        "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+        "TrainingTermination/MaximumSweepsClassicN0",
+        "TrainingTermination/MaximumSweepsClassicN1",
+        "TrainingTermination/MaximumSweepsBranchN0",
+        "TrainingTermination/MaximumSweepsBranchN1",
+        "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+        "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+        "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+        "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+        "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+        "BoundedTrainingCapacitance/CompleteMapFollowsProbesCandidatesAndRepeats",
+        "BoundedTrainingCapacitance/UnitScaleExtensionIsRetainedAfterEdit",
+        "BoundedTrainingCapacitance/LostDormantScaleRejectsOtherwiseMatchingInputReadback",
+        "BoundedTrainingCapacitance/UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension",
+        "BoundedTrainingCapacitance/DomainCannotDiscardFullCapacitanceContext",
+        "BoundedTrainingFairDomains/AdvanceVisitsOtherGeometriesBeforeSpendingTheWholeResistanceMesh",
+        "BoundedTrainingFairDomains/SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves",
+        "BoundedTrainingFairDomains/EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit",
+        "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference",
+        "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+        "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers",
+        "TrainingInvalidBudget/ClassicN0",
+        "TrainingInvalidBudget/ClassicN1",
+        "TrainingInvalidBudget/BranchN0",
+        "TrainingInvalidBudget/BranchN1"
+      ],
+      "unselected_inherited_diagnostic": []
+    },
+    {
+      "commit": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_FinalVerification.cpp",
+      "git_blob": "40583384f75ba02838dee31c8888e4bf72a21573",
+      "bytes": 29262,
+      "sha256": "239d9d99adc7415112bd8d4bc3f31686aea041124721043e7999e081ec29b8d0",
+      "declared_source_count": 23,
+      "selected_ids": [
+        "TimeLearnerClock/FinalMeasurementCoverageUsesAbsoluteEndpoints",
+        "FinalVerification/OneRecordedVertexCannotCertifyDifferentAssignedImpulses",
+        "FinalVerification/SharedPlateauCannotBeRelabelledBySplittingItsEndpoints",
+        "FinalVerification/EqualTimesOnDifferentChannelsAreIndependentMeasurements",
+        "FinalVerification/SharedVertexCannotEnterReferencesOrFinalCertificate",
+        "FinalVerification/RequiresEveryInputAndMeasuredReferenceForDimensionsOneThroughSix",
+        "FinalVerification/NativeSourcePhysicsCannotChangeBetweenReferencesAndVerification",
+        "FinalVerification/LocalSuccessDoesNotReplaceFreshGlobalSweep",
+        "FinalVerification/UsesFreshAnchorTimingAndPreservesSignedTimingResiduals",
+        "FinalVerification/DoesNotReplaceOriginalTolerancesWithPercentOrOneTimeStep",
+        "FinalVerification/CapturedPerInputUsesRawPotentialNotChangedBaselineDeviation",
+        "FinalVerification/PlateauUncertaintyCannotBeHiddenBySelectingItsFirstSample",
+        "FinalVerification/ModelChangeInvalidatesAllInputsEvenWhenSameHashIsRestored",
+        "FinalVerification/CertificateBindsReferencesCriteriaEpochAndSoloState",
+        "FinalVerification/ExternalStopAndBudgetExhaustionCannotIssueExact",
+        "FinalVerification/BoundedRecoveryUsesANewTrialAndNeverTheRejectedMeasurement",
+        "FinalVerification/DoesNotTrustValidFlagForMalformedNumericsOrSchema",
+        "FinalVerification/CapturingReferencesRequiresAllInputsAndOneInitialModel",
+        "FinalVerification/WholeBurstPolicyBindsReferencesAndCertificate",
+        "FinalVerification/Schema3RequiresOwnPhysicalChannelAndCompleteModelDimensions",
+        "FinalVerification/AssignedPolicyBindsReferencesAndCertificateAndRejectsPolicyChanges",
+        "FinalVerification/Schema3BranchRequiresActualSelectedInputBeforeArming",
+        "FinalVerification/UnknownOrChangedRuntimeContextInvalidatesPreviouslyVerifiedInputs"
+      ],
+      "unselected_inherited_diagnostic": []
+    },
+    {
+      "commit": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "git_blob": "642caaf47c382ae6222ea9cd7682b93001b120f7",
+      "bytes": 107854,
+      "sha256": "c2c44963d2e60c111dd57a8b2f9ec7dcc62e111a9b43fbccde92e6e0a4664121",
+      "declared_source_count": 151,
+      "selected_ids": [
+        "NativeCompositeTraining/ClassicCaptureSearchFinal2000",
+        "NativeCompositeTraining/BranchCaptureSearchFinal2000",
+        "NativeCompositeTraining/ClassicCaptureSearchFinal20000",
+        "NativeCompositeTraining/BranchCaptureSearchFinal20000",
+        "NativeCompositeTraining/ClassicReferencePurposeCannotCertifyFinal",
+        "NativeCompositeTraining/BranchReferencePurposeCannotCertifyFinal",
+        "NativeCompositeTraining/ClassicStoppedPartialGroupCannotCreateProof",
+        "NativeCompositeTraining/BranchStoppedPartialGroupCannotCreateProof",
+        "NativeCompositeTraining/ClassicPhysicalEditInvalidatesFinal",
+        "NativeCompositeTraining/BranchPhysicalEditInvalidatesFinal",
+        "NativeCompositeTraining/ClassicExpiredLiveAttemptRejectsClosedProof",
+        "NativeCompositeTraining/BranchExpiredLiveAttemptRejectsClosedProof",
+        "NativeCompositeTraining/ClassicMergedVertexRemainsRejected",
+        "NativeCompositeTraining/BranchMergedVertexRemainsRejected",
+        "NativeCompositeTraining/ClassicRawProbeCannotEnterCompositeProtocol",
+        "NativeCompositeTraining/BranchRawProbeCannotEnterCompositeProtocol",
+        "NativeCompositeTraining/ClassicClosedGroupCannotServeNextFinalInput",
+        "NativeCompositeTraining/BranchClosedGroupCannotServeNextFinalInput",
+        "NativeCompositeTraining/ClassicChangedDeclaredWindowCannotRelabelCapture",
+        "NativeCompositeTraining/BranchChangedDeclaredWindowCannotRelabelCapture",
+        "NativeCompositeTraining/ClassicExistingC0CaptureSearchFinal2000",
+        "NativeCompositeTraining/BranchExistingC0CaptureSearchFinal2000",
+        "NativeCompositeTraining/ClassicGroupBudgetRejectsBeforeNativeQueue",
+        "NativeCompositeTraining/BranchGroupBudgetRejectsBeforeNativeQueue",
+        "NativeCompositeTraining/ClassicCachedRevisionCannotHideActualPhysicalEdit",
+        "NativeCompositeTraining/BranchCachedRevisionCannotHideActualPhysicalEdit",
+        "NativeCompositeTraining/ClassicDefaultSyncRemainsOutsideTolerance",
+        "NativeCompositeTraining/BranchDefaultSyncRemainsOutsideTolerance",
+        "NativeCompositeTraining/ClassicOwnerResetExpiresUnchangedPhysicalProof",
+        "NativeCompositeTraining/BranchOwnerResetExpiresUnchangedPhysicalProof",
+        "NativeCompositeTraining/ClassicOwnerDefaultReconstructExpiresIdenticalProof",
+        "NativeCompositeTraining/BranchOwnerDefaultReconstructExpiresIdenticalProof",
+        "NativeCompositeTraining/ClassicPoolReuseReconstructExpiresIdenticalProof",
+        "NativeCompositeTraining/BranchPoolReuseReconstructExpiresIdenticalProof",
+        "NativeCompositeTraining/ClassicPreparedDeclarationExpiresAfterOwnerReset",
+        "NativeCompositeTraining/BranchPreparedDeclarationExpiresAfterOwnerReset",
+        "NativeCompositeTraining/ClassicN0FreshRepeatCaptureSearchFinal2000",
+        "NativeCompositeTraining/BranchN0FreshRepeatCaptureSearchFinal2000",
+        "NativeCompositeTraining/ClassicSetterStopBetweenFinalCloseAndConsume",
+        "NativeCompositeTraining/BranchSetterStopBetweenFinalCloseAndConsume",
+        "NativeCompositeTraining/ClassicDirectDataStopBetweenFinalCloseAndConsume",
+        "NativeCompositeTraining/BranchDirectDataStopBetweenFinalCloseAndConsume",
+        "NativeCompositeTraining/ClassicConnectedStopBetweenFinalCloseAndConsume",
+        "NativeCompositeTraining/BranchConnectedStopBetweenFinalCloseAndConsume",
+        "NativeCompositeTraining/ClassicDirectDataStopDuringNativeGroup",
+        "NativeCompositeTraining/BranchDirectDataStopDuringNativeGroup",
+        "NativeCompositeService/ClassicCalculateMode0Exact",
+        "NativeCompositeService/ClassicCalculateMode1Exact",
+        "NativeCompositeService/BranchCalculateMode0Exact",
+        "NativeCompositeService/BranchCalculateMode1Exact",
+        "NativeCompositeService/ClassicDefaultSyncOutsideTolerance",
+        "NativeCompositeService/BranchDefaultSyncOutsideTolerance",
+        "NativeCompositeService/ClassicWarmResetPreservesInitialFamilyAndC0",
+        "NativeCompositeService/BranchWarmResetPreservesInitialFamilyAndC0",
+        "NativeCompositeService/ClassicSetterStopBeforeFinalConsume",
+        "NativeCompositeService/BranchSetterStopBeforeFinalConsume",
+        "NativeCompositeService/ClassicDirectDataStopBeforeFinalConsume",
+        "NativeCompositeService/BranchDirectDataStopBeforeFinalConsume",
+        "NativeCompositeService/ClassicPreparedStopHasSingleRawResult",
+        "NativeCompositeService/BranchPreparedStopHasSingleRawResult",
+        "NativeCompositeService/ClassicCancelledSinkThrowIsSingleAttempt",
+        "NativeCompositeService/BranchCancelledSinkThrowIsSingleAttempt",
+        "NativeCompositeService/ClassicCancelledSinkResetDoesNotFinishOldControl",
+        "NativeCompositeService/BranchCancelledSinkResetDoesNotFinishOldControl",
+        "NativeCompositeService/ClassicCancelledSinkDefaultCannotReviveFamily",
+        "NativeCompositeService/BranchCancelledSinkDefaultCannotReviveFamily",
+        "NativeCompositeService/ClassicCancelledSinkRetargetCannotBeOverwritten",
+        "NativeCompositeService/BranchCancelledSinkRetargetCannotBeOverwritten",
+        "NativeCompositeService/ClassicRecursiveStopDoesNotRepeatRawDelivery",
+        "NativeCompositeService/BranchRecursiveStopDoesNotRepeatRawDelivery",
+        "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw",
+        "NativeCompositeService/BranchWarmDoesNotReplayCancelledRaw",
+        "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume",
+        "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume",
+        "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation",
+        "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation",
+        "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink",
+        "NativeCompositeService/BranchInvalidActualPacketStillReachesSink",
+        "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume",
+        "NativeCompositeService/BranchSlowSinkCannotCrossRealDeadlineIntoConsume",
+        "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe",
+        "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe",
+        "NativeCompositeService/ClassicDestructorDoesNotNotifyApplication",
+        "NativeCompositeService/BranchDestructorDoesNotNotifyApplication",
+        "NativeCompositeService/ClassicC0MutationCannotPreventCancelledTerminalization",
+        "NativeCompositeService/BranchC0MutationCannotPreventCancelledTerminalization",
+        "NativeCompositeService/ClassicBeforeConsumeDefaultUsesStableRecord",
+        "NativeCompositeService/BranchBeforeConsumeDefaultUsesStableRecord",
+        "NativeCompositeService/ClassicBeforeConsumeThrowStopsWithoutCertificate",
+        "NativeCompositeService/BranchBeforeConsumeThrowStopsWithoutCertificate",
+        "NativeCompositeService/ClassicCompositeSinkDefaultUsesStableRecord",
+        "NativeCompositeService/BranchCompositeSinkDefaultUsesStableRecord",
+        "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact",
+        "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact",
+        "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
+        "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
+        "NativeCompositeService/ClassicMutableRawSinkStopsOnSecondActualPacket",
+        "NativeCompositeService/BranchMutableRawSinkStopsOnSecondActualPacket",
+        "NativeCompositeService/ClassicMutableBeforeConsumeStopsOnSecondActualGroup",
+        "NativeCompositeService/BranchMutableBeforeConsumeStopsOnSecondActualGroup",
+        "NativeCompositeService/ClassicMutableCompositeSinkStopsOnSecondActualGroup",
+        "NativeCompositeService/BranchMutableCompositeSinkStopsOnSecondActualGroup",
+        "NativeCompositeService/ClassicResetPreservesPartialEvidence",
+        "NativeCompositeService/BranchResetPreservesPartialEvidence",
+        "NativeCompositeService/ClassicDefaultInvalidatesSourceFamily",
+        "NativeCompositeService/BranchDefaultInvalidatesSourceFamily",
+        "NativeCompositeService/ClassicRetargetInvalidatesSourceFamily",
+        "NativeCompositeService/BranchRetargetInvalidatesSourceFamily",
+        "NativeCompositeService/ClassicPrimaryBudgetStopsBeforeQueue",
+        "NativeCompositeService/BranchPrimaryBudgetStopsBeforeQueue",
+        "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+        "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+        "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+        "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+        "NativeCompositeAutostart/ClassicCalculateMode0",
+        "NativeCompositeAutostart/ClassicCalculateMode1",
+        "NativeCompositeAutostart/BranchCalculateMode0",
+        "NativeCompositeAutostart/BranchCalculateMode1",
+        "NativeCompositeDimensions/ClassicN4ActualLastInput",
+        "NativeCompositeDimensions/BranchN4ActualLastInput",
+        "NativeCompositeDimensions/ClassicN6ActualLastInput",
+        "NativeCompositeDimensions/BranchN6ActualLastInput",
+        "NativeCompositeArchive/ClassicActualServiceStrictReplay",
+        "NativeCompositeArchive/BranchActualServiceStrictReplay",
+        "NativeCompositeArchive/CsvRenameChangesDocumentOnly",
+        "NativeCompositeArchive/MissingExternalPrimaryCannotFallBack",
+        "NativeCompositeArchive/ChangedExternalPrimaryRejected",
+        "NativeCompositeArchive/ExtraEmbeddedBlobRejected",
+        "NativeCompositeArchive/BooleanSchemaRejected",
+        "NativeCompositeArchive/BooleanCounterRejected",
+        "NativeCompositeArchive/ChangedAttemptNamespaceRejected",
+        "NativeCompositeArchive/ChangedCandidateModelRejected",
+        "NativeCompositeArchive/ChangedModelEpochRejected",
+        "NativeCompositeArchive/ChangedActualOriginRejected",
+        "NativeCompositeArchive/ChangedGeometryPolicyRejected",
+        "NativeCompositeArchive/ChangedMeasuredPeakRejected",
+        "NativeCompositeArchive/ChangedActualEventTimestampRejected",
+        "NativeCompositeArchive/ChangedRawSpecificationRejected",
+        "NativeCompositeArchive/MissingControlRejected",
+        "NativeCompositeArchive/DuplicateControlRejected",
+        "NativeCompositeArchive/StaleCurrentAttemptFinalsRejected",
+        "NativeCompositeArchive/ActualPartialStopNeverPromotes",
+        "NativeCompositeWindowLimitation/ClassicActualGrowthLeavesInitialWindow",
+        "NativeCompositeWindowLimitation/BranchActualGrowthLeavesInitialWindow",
+        "NativeCompositeArchive/ActualBoundC0RawWitnessesBindUnmutedBase",
+        "NativeCompositeArchive/ActualWarmReferencesAreNotNewAttemptWork",
+        "NativeCompositeArchive/ActualMergedAmbiguousGroupStaysDiagnostic",
+        "NativeCompositeSourceGuard/ClassicActualSourceChangedBetweenCloseAndConsume",
+        "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume"
+      ],
+      "unselected_inherited_diagnostic": [
+        "NativeCompositeDeadlineDiagnostic/ClassicUnchangedLastFinalReachability",
+        "NativeCompositeDeadlineDiagnostic/BranchUnchangedLastFinalReachability"
+      ]
+    },
+    {
+      "commit": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp",
+      "git_blob": "5bca0f3a56a2fd0865c72ddb994df667305b8ef1",
+      "bytes": 113966,
+      "sha256": "90fa68fcd7c531cb3ebd8bb1c731a25fcd09ecbbd22c37098e2e082ab96f81c9",
+      "declared_source_count": 4,
+      "selected_ids": [
+        "NativePreparationCancellation/ClassicCallbackKeepsSingleCancelledResult",
+        "NativePreparationCancellation/BranchCallbackKeepsSingleCancelledResult",
+        "NativePreparationCancellation/ClassicSubsetRestoresFullPresentation",
+        "NativePreparationCancellation/BranchSubsetRestoresFullPresentation"
+      ],
+      "unselected_inherited_diagnostic": []
+    }
+  ],
+  "source_scope_count": 252,
+  "selected_count": 250,
+  "two_inherited_diagnostic_not_selected": [
+    "NativeCompositeDeadlineDiagnostic/ClassicUnchangedLastFinalReachability",
+    "NativeCompositeDeadlineDiagnostic/BranchUnchangedLastFinalReachability"
+  ],
+  "source_counts_not_full_binary_gtest_inventory": true,
+  "priority_first4": [
+    "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+    "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+  ],
+  "static_A2_order_matches_parent_reported_A3_failure_index": 230,
+  "prior_notrun17_from_historical_declaration_pending_raw_A3_match": [
+    "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeAutostart/ClassicCalculateMode0",
+    "NativeCompositeAutostart/ClassicCalculateMode1",
+    "NativeCompositeAutostart/BranchCalculateMode0",
+    "NativeCompositeAutostart/BranchCalculateMode1",
+    "NativeCompositeDimensions/ClassicN4ActualLastInput",
+    "NativeCompositeDimensions/BranchN4ActualLastInput",
+    "NativeCompositeDimensions/ClassicN6ActualLastInput",
+    "NativeCompositeDimensions/BranchN6ActualLastInput",
+    "NativePreparationCancellation/ClassicCallbackKeepsSingleCancelledResult",
+    "NativePreparationCancellation/BranchCallbackKeepsSingleCancelledResult",
+    "NativePreparationCancellation/ClassicSubsetRestoresFullPresentation",
+    "NativePreparationCancellation/BranchSubsetRestoresFullPresentation",
+    "NativeCompositeWindowLimitation/ClassicActualGrowthLeavesInitialWindow",
+    "NativeCompositeWindowLimitation/BranchActualGrowthLeavesInitialWindow",
+    "NativeCompositeSourceGuard/ClassicActualSourceChangedBetweenCloseAndConsume",
+    "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume"
+  ],
+  "notrun_tail_dedup_after_first4": [
+    "NativeCompositeAutostart/ClassicCalculateMode0",
+    "NativeCompositeAutostart/ClassicCalculateMode1",
+    "NativeCompositeAutostart/BranchCalculateMode0",
+    "NativeCompositeAutostart/BranchCalculateMode1",
+    "NativeCompositeDimensions/ClassicN4ActualLastInput",
+    "NativeCompositeDimensions/BranchN4ActualLastInput",
+    "NativeCompositeDimensions/ClassicN6ActualLastInput",
+    "NativeCompositeDimensions/BranchN6ActualLastInput",
+    "NativePreparationCancellation/ClassicCallbackKeepsSingleCancelledResult",
+    "NativePreparationCancellation/BranchCallbackKeepsSingleCancelledResult",
+    "NativePreparationCancellation/ClassicSubsetRestoresFullPresentation",
+    "NativePreparationCancellation/BranchSubsetRestoresFullPresentation",
+    "NativeCompositeWindowLimitation/ClassicActualGrowthLeavesInitialWindow",
+    "NativeCompositeWindowLimitation/BranchActualGrowthLeavesInitialWindow",
+    "NativeCompositeSourceGuard/ClassicActualSourceChangedBetweenCloseAndConsume",
+    "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume"
+  ],
+  "remaining_regression230": [
+    "NativeCompositeService/ClassicPreparedStopHasSingleRawResult",
+    "NativeCompositeService/BranchPreparedStopHasSingleRawResult",
+    "NativeCompositeService/BranchBeforeConsumeDefaultUsesStableRecord",
+    "NativeCompositeService/BranchBeforeConsumeThrowStopsWithoutCertificate",
+    "NativeCompositeService/BranchC0MutationCannotPreventCancelledTerminalization",
+    "NativeCompositeService/BranchCancelledSinkDefaultCannotReviveFamily",
+    "NativeCompositeService/BranchCancelledSinkResetDoesNotFinishOldControl",
+    "NativeCompositeService/BranchCancelledSinkRetargetCannotBeOverwritten",
+    "NativeCompositeService/BranchCancelledSinkThrowIsSingleAttempt",
+    "NativeCompositeService/BranchCompositeSinkDefaultUsesStableRecord",
+    "NativeCompositeService/BranchDestructorDoesNotNotifyApplication",
+    "NativeCompositeService/BranchInvalidActualPacketStillReachesSink",
+    "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
+    "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact",
+    "NativeCompositeService/BranchMutableBeforeConsumeStopsOnSecondActualGroup",
+    "NativeCompositeService/BranchMutableCompositeSinkStopsOnSecondActualGroup",
+    "NativeCompositeService/BranchMutableRawSinkStopsOnSecondActualPacket",
+    "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation",
+    "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume",
+    "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe",
+    "NativeCompositeService/BranchRecursiveStopDoesNotRepeatRawDelivery",
+    "NativeCompositeService/BranchSlowSinkCannotCrossRealDeadlineIntoConsume",
+    "NativeCompositeService/BranchWarmDoesNotReplayCancelledRaw",
+    "NativeCompositeService/ClassicBeforeConsumeDefaultUsesStableRecord",
+    "NativeCompositeService/ClassicBeforeConsumeThrowStopsWithoutCertificate",
+    "NativeCompositeService/ClassicC0MutationCannotPreventCancelledTerminalization",
+    "NativeCompositeService/ClassicCancelledSinkDefaultCannotReviveFamily",
+    "NativeCompositeService/ClassicCancelledSinkResetDoesNotFinishOldControl",
+    "NativeCompositeService/ClassicCancelledSinkRetargetCannotBeOverwritten",
+    "NativeCompositeService/ClassicCancelledSinkThrowIsSingleAttempt",
+    "NativeCompositeService/ClassicCompositeSinkDefaultUsesStableRecord",
+    "NativeCompositeService/ClassicDestructorDoesNotNotifyApplication",
+    "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink",
+    "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
+    "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact",
+    "NativeCompositeService/ClassicMutableBeforeConsumeStopsOnSecondActualGroup",
+    "NativeCompositeService/ClassicMutableCompositeSinkStopsOnSecondActualGroup",
+    "NativeCompositeService/ClassicMutableRawSinkStopsOnSecondActualPacket",
+    "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation",
+    "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume",
+    "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe",
+    "NativeCompositeService/ClassicRecursiveStopDoesNotRepeatRawDelivery",
+    "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume",
+    "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw",
+    "NativeCompositeService/ClassicCalculateMode0Exact",
+    "NativeCompositeService/ClassicCalculateMode1Exact",
+    "NativeCompositeService/BranchCalculateMode0Exact",
+    "NativeCompositeService/BranchCalculateMode1Exact",
+    "NativeCompositeService/ClassicDefaultSyncOutsideTolerance",
+    "NativeCompositeService/BranchDefaultSyncOutsideTolerance",
+    "NativeCompositeService/ClassicWarmResetPreservesInitialFamilyAndC0",
+    "NativeCompositeService/BranchWarmResetPreservesInitialFamilyAndC0",
+    "NativeCompositeService/ClassicSetterStopBeforeFinalConsume",
+    "NativeCompositeService/BranchSetterStopBeforeFinalConsume",
+    "NativeCompositeService/ClassicDirectDataStopBeforeFinalConsume",
+    "NativeCompositeService/BranchDirectDataStopBeforeFinalConsume",
+    "NativeCompositeService/ClassicResetPreservesPartialEvidence",
+    "NativeCompositeService/BranchResetPreservesPartialEvidence",
+    "NativeCompositeService/ClassicDefaultInvalidatesSourceFamily",
+    "NativeCompositeService/BranchDefaultInvalidatesSourceFamily",
+    "NativeCompositeService/ClassicRetargetInvalidatesSourceFamily",
+    "NativeCompositeService/BranchRetargetInvalidatesSourceFamily",
+    "NativeCompositeService/ClassicPrimaryBudgetStopsBeforeQueue",
+    "NativeCompositeService/BranchPrimaryBudgetStopsBeforeQueue",
+    "NativeCompositeArchive/ClassicActualServiceStrictReplay",
+    "NativeCompositeArchive/BranchActualServiceStrictReplay",
+    "NativeCompositeArchive/CsvRenameChangesDocumentOnly",
+    "NativeCompositeArchive/MissingExternalPrimaryCannotFallBack",
+    "NativeCompositeArchive/ChangedExternalPrimaryRejected",
+    "NativeCompositeArchive/ExtraEmbeddedBlobRejected",
+    "NativeCompositeArchive/BooleanSchemaRejected",
+    "NativeCompositeArchive/BooleanCounterRejected",
+    "NativeCompositeArchive/ChangedAttemptNamespaceRejected",
+    "NativeCompositeArchive/ChangedCandidateModelRejected",
+    "NativeCompositeArchive/ChangedModelEpochRejected",
+    "NativeCompositeArchive/ChangedActualOriginRejected",
+    "NativeCompositeArchive/ChangedGeometryPolicyRejected",
+    "NativeCompositeArchive/ChangedMeasuredPeakRejected",
+    "NativeCompositeArchive/ChangedActualEventTimestampRejected",
+    "NativeCompositeArchive/ChangedRawSpecificationRejected",
+    "NativeCompositeArchive/MissingControlRejected",
+    "NativeCompositeArchive/DuplicateControlRejected",
+    "NativeCompositeArchive/StaleCurrentAttemptFinalsRejected",
+    "NativeCompositeArchive/ActualPartialStopNeverPromotes",
+    "NativeCompositeArchive/ActualBoundC0RawWitnessesBindUnmutedBase",
+    "NativeCompositeArchive/ActualWarmReferencesAreNotNewAttemptWork",
+    "NativeCompositeArchive/ActualMergedAmbiguousGroupStaysDiagnostic",
+    "BoundedTrainingFiniteRanking/ClassicN0Zero",
+    "BoundedTrainingFiniteRanking/ClassicN1Zero",
+    "BoundedTrainingFiniteRanking/BranchN0Zero",
+    "BoundedTrainingFiniteRanking/BranchN1Zero",
+    "BoundedTrainingFiniteRanking/ClassicN0Overflow",
+    "BoundedTrainingFiniteRanking/ClassicN1Overflow",
+    "BoundedTrainingFiniteRanking/BranchN0Overflow",
+    "BoundedTrainingFiniteRanking/BranchN1Overflow",
+    "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing",
+    "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+    "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+    "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
+    "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+    "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+    "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+    "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+    "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+    "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+    "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+    "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+    "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+    "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+    "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+    "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+    "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+    "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+    "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+    "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+    "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+    "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+    "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+    "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+    "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+    "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+    "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+    "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+    "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+    "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+    "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+    "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+    "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+    "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+    "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+    "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+    "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+    "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+    "TrainingTermination/MaximumSweepsClassicN0",
+    "TrainingTermination/MaximumSweepsClassicN1",
+    "TrainingTermination/MaximumSweepsBranchN0",
+    "TrainingTermination/MaximumSweepsBranchN1",
+    "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+    "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+    "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+    "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+    "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+    "BoundedTrainingCapacitance/CompleteMapFollowsProbesCandidatesAndRepeats",
+    "BoundedTrainingCapacitance/UnitScaleExtensionIsRetainedAfterEdit",
+    "BoundedTrainingCapacitance/LostDormantScaleRejectsOtherwiseMatchingInputReadback",
+    "BoundedTrainingCapacitance/UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension",
+    "BoundedTrainingCapacitance/DomainCannotDiscardFullCapacitanceContext",
+    "BoundedTrainingFairDomains/AdvanceVisitsOtherGeometriesBeforeSpendingTheWholeResistanceMesh",
+    "BoundedTrainingFairDomains/SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves",
+    "BoundedTrainingFairDomains/EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit",
+    "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference",
+    "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+    "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers",
+    "TrainingInvalidBudget/ClassicN0",
+    "TrainingInvalidBudget/ClassicN1",
+    "TrainingInvalidBudget/BranchN0",
+    "TrainingInvalidBudget/BranchN1",
+    "TimeLearnerClock/FinalMeasurementCoverageUsesAbsoluteEndpoints",
+    "FinalVerification/OneRecordedVertexCannotCertifyDifferentAssignedImpulses",
+    "FinalVerification/SharedPlateauCannotBeRelabelledBySplittingItsEndpoints",
+    "FinalVerification/EqualTimesOnDifferentChannelsAreIndependentMeasurements",
+    "FinalVerification/SharedVertexCannotEnterReferencesOrFinalCertificate",
+    "FinalVerification/RequiresEveryInputAndMeasuredReferenceForDimensionsOneThroughSix",
+    "FinalVerification/NativeSourcePhysicsCannotChangeBetweenReferencesAndVerification",
+    "FinalVerification/LocalSuccessDoesNotReplaceFreshGlobalSweep",
+    "FinalVerification/UsesFreshAnchorTimingAndPreservesSignedTimingResiduals",
+    "FinalVerification/DoesNotReplaceOriginalTolerancesWithPercentOrOneTimeStep",
+    "FinalVerification/CapturedPerInputUsesRawPotentialNotChangedBaselineDeviation",
+    "FinalVerification/PlateauUncertaintyCannotBeHiddenBySelectingItsFirstSample",
+    "FinalVerification/ModelChangeInvalidatesAllInputsEvenWhenSameHashIsRestored",
+    "FinalVerification/CertificateBindsReferencesCriteriaEpochAndSoloState",
+    "FinalVerification/ExternalStopAndBudgetExhaustionCannotIssueExact",
+    "FinalVerification/BoundedRecoveryUsesANewTrialAndNeverTheRejectedMeasurement",
+    "FinalVerification/DoesNotTrustValidFlagForMalformedNumericsOrSchema",
+    "FinalVerification/CapturingReferencesRequiresAllInputsAndOneInitialModel",
+    "FinalVerification/WholeBurstPolicyBindsReferencesAndCertificate",
+    "FinalVerification/Schema3RequiresOwnPhysicalChannelAndCompleteModelDimensions",
+    "FinalVerification/AssignedPolicyBindsReferencesAndCertificateAndRejectsPolicyChanges",
+    "FinalVerification/Schema3BranchRequiresActualSelectedInputBeforeArming",
+    "FinalVerification/UnknownOrChangedRuntimeContextInvalidatesPreviouslyVerifiedInputs",
+    "NativeCompositeTraining/ClassicCaptureSearchFinal2000",
+    "NativeCompositeTraining/BranchCaptureSearchFinal2000",
+    "NativeCompositeTraining/ClassicCaptureSearchFinal20000",
+    "NativeCompositeTraining/BranchCaptureSearchFinal20000",
+    "NativeCompositeTraining/ClassicReferencePurposeCannotCertifyFinal",
+    "NativeCompositeTraining/BranchReferencePurposeCannotCertifyFinal",
+    "NativeCompositeTraining/ClassicStoppedPartialGroupCannotCreateProof",
+    "NativeCompositeTraining/BranchStoppedPartialGroupCannotCreateProof",
+    "NativeCompositeTraining/ClassicPhysicalEditInvalidatesFinal",
+    "NativeCompositeTraining/BranchPhysicalEditInvalidatesFinal",
+    "NativeCompositeTraining/ClassicExpiredLiveAttemptRejectsClosedProof",
+    "NativeCompositeTraining/BranchExpiredLiveAttemptRejectsClosedProof",
+    "NativeCompositeTraining/ClassicMergedVertexRemainsRejected",
+    "NativeCompositeTraining/BranchMergedVertexRemainsRejected",
+    "NativeCompositeTraining/ClassicRawProbeCannotEnterCompositeProtocol",
+    "NativeCompositeTraining/BranchRawProbeCannotEnterCompositeProtocol",
+    "NativeCompositeTraining/ClassicClosedGroupCannotServeNextFinalInput",
+    "NativeCompositeTraining/BranchClosedGroupCannotServeNextFinalInput",
+    "NativeCompositeTraining/ClassicChangedDeclaredWindowCannotRelabelCapture",
+    "NativeCompositeTraining/BranchChangedDeclaredWindowCannotRelabelCapture",
+    "NativeCompositeTraining/ClassicExistingC0CaptureSearchFinal2000",
+    "NativeCompositeTraining/BranchExistingC0CaptureSearchFinal2000",
+    "NativeCompositeTraining/ClassicGroupBudgetRejectsBeforeNativeQueue",
+    "NativeCompositeTraining/BranchGroupBudgetRejectsBeforeNativeQueue",
+    "NativeCompositeTraining/ClassicCachedRevisionCannotHideActualPhysicalEdit",
+    "NativeCompositeTraining/BranchCachedRevisionCannotHideActualPhysicalEdit",
+    "NativeCompositeTraining/ClassicDefaultSyncRemainsOutsideTolerance",
+    "NativeCompositeTraining/BranchDefaultSyncRemainsOutsideTolerance",
+    "NativeCompositeTraining/ClassicOwnerResetExpiresUnchangedPhysicalProof",
+    "NativeCompositeTraining/BranchOwnerResetExpiresUnchangedPhysicalProof",
+    "NativeCompositeTraining/ClassicOwnerDefaultReconstructExpiresIdenticalProof",
+    "NativeCompositeTraining/BranchOwnerDefaultReconstructExpiresIdenticalProof",
+    "NativeCompositeTraining/ClassicPoolReuseReconstructExpiresIdenticalProof",
+    "NativeCompositeTraining/BranchPoolReuseReconstructExpiresIdenticalProof",
+    "NativeCompositeTraining/ClassicPreparedDeclarationExpiresAfterOwnerReset",
+    "NativeCompositeTraining/BranchPreparedDeclarationExpiresAfterOwnerReset",
+    "NativeCompositeTraining/ClassicN0FreshRepeatCaptureSearchFinal2000",
+    "NativeCompositeTraining/BranchN0FreshRepeatCaptureSearchFinal2000",
+    "NativeCompositeTraining/ClassicSetterStopBetweenFinalCloseAndConsume",
+    "NativeCompositeTraining/BranchSetterStopBetweenFinalCloseAndConsume",
+    "NativeCompositeTraining/ClassicDirectDataStopBetweenFinalCloseAndConsume",
+    "NativeCompositeTraining/BranchDirectDataStopBetweenFinalCloseAndConsume",
+    "NativeCompositeTraining/ClassicConnectedStopBetweenFinalCloseAndConsume",
+    "NativeCompositeTraining/BranchConnectedStopBetweenFinalCloseAndConsume",
+    "NativeCompositeTraining/ClassicDirectDataStopDuringNativeGroup",
+    "NativeCompositeTraining/BranchDirectDataStopDuringNativeGroup"
+  ],
+  "proposed_runplan_NOT_Canonical": [
+    {
+      "name": "cold6-codec-first",
+      "expected_ids": [
+        "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+        "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+        "NativeCompositeDeclarations/ClassicCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes",
+        "NativeCompositeDeclarations/BranchCold6AllBaseSchemasKeepNumericTypeThroughSerializedBytes"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-70",
+      "expected_ids": [
+        "NativeCompositeAutostart/ClassicCalculateMode0"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-71",
+      "expected_ids": [
+        "NativeCompositeAutostart/ClassicCalculateMode1"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-72",
+      "expected_ids": [
+        "NativeCompositeAutostart/BranchCalculateMode0"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-73",
+      "expected_ids": [
+        "NativeCompositeAutostart/BranchCalculateMode1"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-74",
+      "expected_ids": [
+        "NativeCompositeDimensions/ClassicN4ActualLastInput"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-75",
+      "expected_ids": [
+        "NativeCompositeDimensions/BranchN4ActualLastInput"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-76",
+      "expected_ids": [
+        "NativeCompositeDimensions/ClassicN6ActualLastInput"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-77",
+      "expected_ids": [
+        "NativeCompositeDimensions/BranchN6ActualLastInput"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-78",
+      "expected_ids": [
+        "NativePreparationCancellation/ClassicCallbackKeepsSingleCancelledResult"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-79",
+      "expected_ids": [
+        "NativePreparationCancellation/BranchCallbackKeepsSingleCancelledResult"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-80",
+      "expected_ids": [
+        "NativePreparationCancellation/ClassicSubsetRestoresFullPresentation"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-composite-native-81",
+      "expected_ids": [
+        "NativePreparationCancellation/BranchSubsetRestoresFullPresentation"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-growth-native-0",
+      "expected_ids": [
+        "NativeCompositeWindowLimitation/ClassicActualGrowthLeavesInitialWindow"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-growth-native-1",
+      "expected_ids": [
+        "NativeCompositeWindowLimitation/BranchActualGrowthLeavesInitialWindow"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-sourceguard-native-0",
+      "expected_ids": [
+        "NativeCompositeSourceGuard/ClassicActualSourceChangedBetweenCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-tail-sourceguard-native-1",
+      "expected_ids": [
+        "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-58",
+      "expected_ids": [
+        "NativeCompositeService/ClassicPreparedStopHasSingleRawResult"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-59",
+      "expected_ids": [
+        "NativeCompositeService/BranchPreparedStopHasSingleRawResult"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-0",
+      "expected_ids": [
+        "NativeCompositeService/BranchBeforeConsumeDefaultUsesStableRecord"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-1",
+      "expected_ids": [
+        "NativeCompositeService/BranchBeforeConsumeThrowStopsWithoutCertificate"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-2",
+      "expected_ids": [
+        "NativeCompositeService/BranchC0MutationCannotPreventCancelledTerminalization"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-3",
+      "expected_ids": [
+        "NativeCompositeService/BranchCancelledSinkDefaultCannotReviveFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-4",
+      "expected_ids": [
+        "NativeCompositeService/BranchCancelledSinkResetDoesNotFinishOldControl"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-5",
+      "expected_ids": [
+        "NativeCompositeService/BranchCancelledSinkRetargetCannotBeOverwritten"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-6",
+      "expected_ids": [
+        "NativeCompositeService/BranchCancelledSinkThrowIsSingleAttempt"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-7",
+      "expected_ids": [
+        "NativeCompositeService/BranchCompositeSinkDefaultUsesStableRecord"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-8",
+      "expected_ids": [
+        "NativeCompositeService/BranchDestructorDoesNotNotifyApplication"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-9",
+      "expected_ids": [
+        "NativeCompositeService/BranchInvalidActualPacketStillReachesSink"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-10",
+      "expected_ids": [
+        "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-11",
+      "expected_ids": [
+        "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-12",
+      "expected_ids": [
+        "NativeCompositeService/BranchMutableBeforeConsumeStopsOnSecondActualGroup"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-13",
+      "expected_ids": [
+        "NativeCompositeService/BranchMutableCompositeSinkStopsOnSecondActualGroup"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-14",
+      "expected_ids": [
+        "NativeCompositeService/BranchMutableRawSinkStopsOnSecondActualPacket"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-15",
+      "expected_ids": [
+        "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-16",
+      "expected_ids": [
+        "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-17",
+      "expected_ids": [
+        "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-18",
+      "expected_ids": [
+        "NativeCompositeService/BranchRecursiveStopDoesNotRepeatRawDelivery"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-19",
+      "expected_ids": [
+        "NativeCompositeService/BranchSlowSinkCannotCrossRealDeadlineIntoConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-20",
+      "expected_ids": [
+        "NativeCompositeService/BranchWarmDoesNotReplayCancelledRaw"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-21",
+      "expected_ids": [
+        "NativeCompositeService/ClassicBeforeConsumeDefaultUsesStableRecord"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-22",
+      "expected_ids": [
+        "NativeCompositeService/ClassicBeforeConsumeThrowStopsWithoutCertificate"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-23",
+      "expected_ids": [
+        "NativeCompositeService/ClassicC0MutationCannotPreventCancelledTerminalization"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-24",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCancelledSinkDefaultCannotReviveFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-25",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCancelledSinkResetDoesNotFinishOldControl"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-26",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCancelledSinkRetargetCannotBeOverwritten"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-27",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCancelledSinkThrowIsSingleAttempt"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-28",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCompositeSinkDefaultUsesStableRecord"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-29",
+      "expected_ids": [
+        "NativeCompositeService/ClassicDestructorDoesNotNotifyApplication"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-30",
+      "expected_ids": [
+        "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-31",
+      "expected_ids": [
+        "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-32",
+      "expected_ids": [
+        "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-33",
+      "expected_ids": [
+        "NativeCompositeService/ClassicMutableBeforeConsumeStopsOnSecondActualGroup"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-34",
+      "expected_ids": [
+        "NativeCompositeService/ClassicMutableCompositeSinkStopsOnSecondActualGroup"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-35",
+      "expected_ids": [
+        "NativeCompositeService/ClassicMutableRawSinkStopsOnSecondActualPacket"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-36",
+      "expected_ids": [
+        "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-37",
+      "expected_ids": [
+        "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-38",
+      "expected_ids": [
+        "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-39",
+      "expected_ids": [
+        "NativeCompositeService/ClassicRecursiveStopDoesNotRepeatRawDelivery"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-40",
+      "expected_ids": [
+        "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-callback-native-41",
+      "expected_ids": [
+        "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-46",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCalculateMode0Exact"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-47",
+      "expected_ids": [
+        "NativeCompositeService/ClassicCalculateMode1Exact"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-48",
+      "expected_ids": [
+        "NativeCompositeService/BranchCalculateMode0Exact"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-49",
+      "expected_ids": [
+        "NativeCompositeService/BranchCalculateMode1Exact"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-50",
+      "expected_ids": [
+        "NativeCompositeService/ClassicDefaultSyncOutsideTolerance"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-51",
+      "expected_ids": [
+        "NativeCompositeService/BranchDefaultSyncOutsideTolerance"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-52",
+      "expected_ids": [
+        "NativeCompositeService/ClassicWarmResetPreservesInitialFamilyAndC0"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-53",
+      "expected_ids": [
+        "NativeCompositeService/BranchWarmResetPreservesInitialFamilyAndC0"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-54",
+      "expected_ids": [
+        "NativeCompositeService/ClassicSetterStopBeforeFinalConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-55",
+      "expected_ids": [
+        "NativeCompositeService/BranchSetterStopBeforeFinalConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-56",
+      "expected_ids": [
+        "NativeCompositeService/ClassicDirectDataStopBeforeFinalConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-57",
+      "expected_ids": [
+        "NativeCompositeService/BranchDirectDataStopBeforeFinalConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-60",
+      "expected_ids": [
+        "NativeCompositeService/ClassicResetPreservesPartialEvidence"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-61",
+      "expected_ids": [
+        "NativeCompositeService/BranchResetPreservesPartialEvidence"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-62",
+      "expected_ids": [
+        "NativeCompositeService/ClassicDefaultInvalidatesSourceFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-63",
+      "expected_ids": [
+        "NativeCompositeService/BranchDefaultInvalidatesSourceFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-64",
+      "expected_ids": [
+        "NativeCompositeService/ClassicRetargetInvalidatesSourceFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-65",
+      "expected_ids": [
+        "NativeCompositeService/BranchRetargetInvalidatesSourceFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-66",
+      "expected_ids": [
+        "NativeCompositeService/ClassicPrimaryBudgetStopsBeforeQueue"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-67",
+      "expected_ids": [
+        "NativeCompositeService/BranchPrimaryBudgetStopsBeforeQueue"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-archive-native23",
+      "expected_ids": [
+        "NativeCompositeArchive/ClassicActualServiceStrictReplay",
+        "NativeCompositeArchive/BranchActualServiceStrictReplay",
+        "NativeCompositeArchive/CsvRenameChangesDocumentOnly",
+        "NativeCompositeArchive/MissingExternalPrimaryCannotFallBack",
+        "NativeCompositeArchive/ChangedExternalPrimaryRejected",
+        "NativeCompositeArchive/ExtraEmbeddedBlobRejected",
+        "NativeCompositeArchive/BooleanSchemaRejected",
+        "NativeCompositeArchive/BooleanCounterRejected",
+        "NativeCompositeArchive/ChangedAttemptNamespaceRejected",
+        "NativeCompositeArchive/ChangedCandidateModelRejected",
+        "NativeCompositeArchive/ChangedModelEpochRejected",
+        "NativeCompositeArchive/ChangedActualOriginRejected",
+        "NativeCompositeArchive/ChangedGeometryPolicyRejected",
+        "NativeCompositeArchive/ChangedMeasuredPeakRejected",
+        "NativeCompositeArchive/ChangedActualEventTimestampRejected",
+        "NativeCompositeArchive/ChangedRawSpecificationRejected",
+        "NativeCompositeArchive/MissingControlRejected",
+        "NativeCompositeArchive/DuplicateControlRejected",
+        "NativeCompositeArchive/StaleCurrentAttemptFinalsRejected",
+        "NativeCompositeArchive/ActualPartialStopNeverPromotes",
+        "NativeCompositeArchive/ActualBoundC0RawWitnessesBindUnmutedBase",
+        "NativeCompositeArchive/ActualWarmReferencesAreNotNewAttemptWork",
+        "NativeCompositeArchive/ActualMergedAmbiguousGroupStaysDiagnostic"
+      ],
+      "wall_seconds": 9000
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-0",
+      "expected_ids": [
+        "BoundedTrainingFiniteRanking/ClassicN0Zero",
+        "BoundedTrainingFiniteRanking/ClassicN1Zero",
+        "BoundedTrainingFiniteRanking/BranchN0Zero",
+        "BoundedTrainingFiniteRanking/BranchN1Zero",
+        "BoundedTrainingFiniteRanking/ClassicN0Overflow",
+        "BoundedTrainingFiniteRanking/ClassicN1Overflow",
+        "BoundedTrainingFiniteRanking/BranchN0Overflow",
+        "BoundedTrainingFiniteRanking/BranchN1Overflow",
+        "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing",
+        "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+        "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+        "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-1",
+      "expected_ids": [
+        "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+        "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+        "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+        "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+        "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+        "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+        "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+        "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+        "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+        "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+        "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+        "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-2",
+      "expected_ids": [
+        "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+        "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+        "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+        "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+        "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+        "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+        "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+        "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+        "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+        "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+        "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+        "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-3",
+      "expected_ids": [
+        "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+        "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+        "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+        "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+        "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+        "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+        "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+        "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+        "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-4",
+      "expected_ids": [
+        "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+        "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+        "TrainingTermination/MaximumSweepsClassicN0",
+        "TrainingTermination/MaximumSweepsClassicN1",
+        "TrainingTermination/MaximumSweepsBranchN0",
+        "TrainingTermination/MaximumSweepsBranchN1",
+        "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+        "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+        "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+        "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+        "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+        "BoundedTrainingCapacitance/CompleteMapFollowsProbesCandidatesAndRepeats"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-5",
+      "expected_ids": [
+        "BoundedTrainingCapacitance/UnitScaleExtensionIsRetainedAfterEdit",
+        "BoundedTrainingCapacitance/LostDormantScaleRejectsOtherwiseMatchingInputReadback",
+        "BoundedTrainingCapacitance/UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension",
+        "BoundedTrainingCapacitance/DomainCannotDiscardFullCapacitanceContext",
+        "BoundedTrainingFairDomains/AdvanceVisitsOtherGeometriesBeforeSpendingTheWholeResistanceMesh",
+        "BoundedTrainingFairDomains/SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves",
+        "BoundedTrainingFairDomains/EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit",
+        "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference",
+        "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+        "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers",
+        "TrainingInvalidBudget/ClassicN0",
+        "TrainingInvalidBudget/ClassicN1"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_BoundedTraining-6",
+      "expected_ids": [
+        "TrainingInvalidBudget/BranchN0",
+        "TrainingInvalidBudget/BranchN1"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_FinalVerification-0",
+      "expected_ids": [
+        "TimeLearnerClock/FinalMeasurementCoverageUsesAbsoluteEndpoints",
+        "FinalVerification/OneRecordedVertexCannotCertifyDifferentAssignedImpulses",
+        "FinalVerification/SharedPlateauCannotBeRelabelledBySplittingItsEndpoints",
+        "FinalVerification/EqualTimesOnDifferentChannelsAreIndependentMeasurements",
+        "FinalVerification/SharedVertexCannotEnterReferencesOrFinalCertificate",
+        "FinalVerification/RequiresEveryInputAndMeasuredReferenceForDimensionsOneThroughSix",
+        "FinalVerification/NativeSourcePhysicsCannotChangeBetweenReferencesAndVerification",
+        "FinalVerification/LocalSuccessDoesNotReplaceFreshGlobalSweep",
+        "FinalVerification/UsesFreshAnchorTimingAndPreservesSignedTimingResiduals",
+        "FinalVerification/DoesNotReplaceOriginalTolerancesWithPercentOrOneTimeStep",
+        "FinalVerification/CapturedPerInputUsesRawPotentialNotChangedBaselineDeviation",
+        "FinalVerification/PlateauUncertaintyCannotBeHiddenBySelectingItsFirstSample"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-Test_PulseLib_FinalVerification-1",
+      "expected_ids": [
+        "FinalVerification/ModelChangeInvalidatesAllInputsEvenWhenSameHashIsRestored",
+        "FinalVerification/CertificateBindsReferencesCriteriaEpochAndSoloState",
+        "FinalVerification/ExternalStopAndBudgetExhaustionCannotIssueExact",
+        "FinalVerification/BoundedRecoveryUsesANewTrialAndNeverTheRejectedMeasurement",
+        "FinalVerification/DoesNotTrustValidFlagForMalformedNumericsOrSchema",
+        "FinalVerification/CapturingReferencesRequiresAllInputsAndOneInitialModel",
+        "FinalVerification/WholeBurstPolicyBindsReferencesAndCertificate",
+        "FinalVerification/Schema3RequiresOwnPhysicalChannelAndCompleteModelDimensions",
+        "FinalVerification/AssignedPolicyBindsReferencesAndCertificateAndRejectsPolicyChanges",
+        "FinalVerification/Schema3BranchRequiresActualSelectedInputBeforeArming",
+        "FinalVerification/UnknownOrChangedRuntimeContextInvalidatesPreviouslyVerifiedInputs"
+      ],
+      "wall_seconds": 600
+    },
+    {
+      "name": "cold6-regression-composite-native-0",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicCaptureSearchFinal2000"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-1",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchCaptureSearchFinal2000"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-2",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicCaptureSearchFinal20000"
+      ],
+      "wall_seconds": 9000
+    },
+    {
+      "name": "cold6-regression-composite-native-3",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchCaptureSearchFinal20000"
+      ],
+      "wall_seconds": 9000
+    },
+    {
+      "name": "cold6-regression-composite-native-4",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicReferencePurposeCannotCertifyFinal"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-5",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchReferencePurposeCannotCertifyFinal"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-6",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicStoppedPartialGroupCannotCreateProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-7",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchStoppedPartialGroupCannotCreateProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-8",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicPhysicalEditInvalidatesFinal"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-9",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchPhysicalEditInvalidatesFinal"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-10",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicExpiredLiveAttemptRejectsClosedProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-11",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchExpiredLiveAttemptRejectsClosedProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-12",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicMergedVertexRemainsRejected"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-13",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchMergedVertexRemainsRejected"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-14",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicRawProbeCannotEnterCompositeProtocol"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-15",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchRawProbeCannotEnterCompositeProtocol"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-16",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicClosedGroupCannotServeNextFinalInput"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-17",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchClosedGroupCannotServeNextFinalInput"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-18",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicChangedDeclaredWindowCannotRelabelCapture"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-19",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchChangedDeclaredWindowCannotRelabelCapture"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-20",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicExistingC0CaptureSearchFinal2000"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-21",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchExistingC0CaptureSearchFinal2000"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-22",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicGroupBudgetRejectsBeforeNativeQueue"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-23",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchGroupBudgetRejectsBeforeNativeQueue"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-24",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicCachedRevisionCannotHideActualPhysicalEdit"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-25",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchCachedRevisionCannotHideActualPhysicalEdit"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-26",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicDefaultSyncRemainsOutsideTolerance"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-27",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchDefaultSyncRemainsOutsideTolerance"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-28",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicOwnerResetExpiresUnchangedPhysicalProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-29",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchOwnerResetExpiresUnchangedPhysicalProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-30",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicOwnerDefaultReconstructExpiresIdenticalProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-31",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchOwnerDefaultReconstructExpiresIdenticalProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-32",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicPoolReuseReconstructExpiresIdenticalProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-33",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchPoolReuseReconstructExpiresIdenticalProof"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-34",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicPreparedDeclarationExpiresAfterOwnerReset"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-35",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchPreparedDeclarationExpiresAfterOwnerReset"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-36",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicN0FreshRepeatCaptureSearchFinal2000"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-37",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchN0FreshRepeatCaptureSearchFinal2000"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-38",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicSetterStopBetweenFinalCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-39",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchSetterStopBetweenFinalCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-40",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicDirectDataStopBetweenFinalCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-41",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchDirectDataStopBetweenFinalCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-42",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicConnectedStopBetweenFinalCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-43",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchConnectedStopBetweenFinalCloseAndConsume"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-44",
+      "expected_ids": [
+        "NativeCompositeTraining/ClassicDirectDataStopDuringNativeGroup"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "cold6-regression-composite-native-45",
+      "expected_ids": [
+        "NativeCompositeTraining/BranchDirectDataStopDuringNativeGroup"
+      ],
+      "wall_seconds": 2400
+    }
+  ],
+  "proposed_leaf_count": 137,
+  "all_selected_unique_disjoint": true,
+  "actual_A3_raw_JUnit_and_independent_negative_receipt_required_before_run": true,
+  "negative_evidence_commit": "a7dae002295800d520b1fd35975283f0daa2362d",
+  "runtime_order": [
+    "first failingClassic/Branch declarations +focusedbase1–4 codecs",
+    "then16tail IDs afterdedupBranch (original17notrun)",
+    "then230 remaining regression IDs including long20k/C0"
+  ],
+  "existing_A3_source_cache_runtime_must_stay_frozen_until_collection_verified": true,
+  "noheldoverlap_required_before_any_SDK_build_reuse": true,
+  "no_actual_source_materialization_or_canonical_or_resource_admission_observed_here": true,
+  "runnable_Canonical_created": false,
+  "futureTrain5_token_code_pulled": false,
+  "physics_targets_tolerances_decoder_changed": false,
+  "local_build_numeric_server_rerun": false,
+  "full248_or250_runtime_accepted": false,
+  "scientific_verdict": null,
+  "independent_negative_verification_observed_here": false,
+  "parent_reported_original_archive_configuration_observation": {
+    "source": "parent read of immutable negative Git primary; no waveform analysis here",
+    "archive_initial_configuration_count": 6,
+    "schema_version": 6,
+    "base_schema_version_type": "string",
+    "base_schema_version": "sample0",
+    "preserve_original_bytes": true,
+    "no_inference_of_invalid_dynamics": true
+  },
+  "A4_must_regenerate_all_six_archive_bundles_with_fixed_producer": true,
+  "prior_source_configuration_cannot_inherit_group_only_archive23_acceptance": true
+}
