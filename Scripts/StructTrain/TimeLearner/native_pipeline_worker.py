@@ -199,8 +199,11 @@ def audit_execution(mode, directory, job, source_case=None):
             execution["job_sha256"] == job["sha256"] and load(directory/"job.json") == job and
             execution["evaluation_verdict"] is None, "pipeline_execution_scope_changed")
     names = _artifact_records(directory, execution)
-    require(execution["execution"] in (("completed", "cancelled", "model_tick_budget_exhausted", "finalization_failed") if live else
-                                      ("completed", "cancelled", "model_tick_budget_exhausted")), "pipeline_execution_status_unknown")
+    statuses = (("completed", "cancelled", "model_tick_budget_exhausted", "finalization_failed") if live else
+                ("completed", "cancelled", "model_tick_budget_exhausted"))
+    if composite and mode == 'train' and not live:
+        statuses += ('training_start_failed',)
+    require(execution["execution"] in statuses, "pipeline_execution_status_unknown")
     ticks = count(execution["model_ticks"])
     if mode != "export":
         config = job["configuration"] if mode in ("train", "preflight") else source_case[0]["configuration"]
@@ -247,6 +250,9 @@ def audit_execution(mode, directory, job, source_case=None):
         return {"effective_initial_model_checked": True, "model_revision": execution["model_revision"],
                 "input_count": len(parameters), "integration_channels": len(channels), "training_started": False,
                 "native_execution_verified": False, "evaluation_verdict": None}
+    if composite and mode == 'train' and execution['execution'] == 'training_start_failed':
+        from .composite_execution_evidence import audit_composite_start_failure
+        return audit_composite_start_failure(execution, directory, names, job)
     if live:
         from .live_training_worker import audit_live_training
         from .native_model_spec import audit_initial_threshold

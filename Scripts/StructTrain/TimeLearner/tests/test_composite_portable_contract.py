@@ -146,3 +146,53 @@ class CompositePortableContractTest(unittest.TestCase):
         bad['training_request'] = signed({k:v for k,v in bad['training_request'].items() if k != 'sha256'})
         bad = signed({k:v for k,v in bad.items() if k != 'sha256'})
         with self.assertRaises(EvidenceError): audit_boundary(bad)
+
+    def test_cold_initial_declaration_retains_original_run_while_runtime_owns_session(self):
+        from ..composite_execution_evidence import audit_initial_planning_configuration
+        config=configuration();config['model']['inputs'][0]['resistance']=None
+        actual=[dict(length=1,synapses=1,resistance=2.),dict(length=1,synapses=1,resistance=1.)]
+        initial=dict(parameters=actual,identity=dict(wire_fixture='not-native-attestation'))
+        declaration=deepcopy(config);declaration['model']['inputs'][0]['resistance']=2.
+        package=dict(configuration=declaration,runtime_plan=dict(run_id=config['run_id']+'/session/1'),
+            measurement_archive=dict(source_binding=dict(initial_model=deepcopy(initial['identity']))))
+        audit_initial_planning_configuration(package,dict(configuration=config),initial)
+        for field in ('configuration','runtime_plan'):
+            bad=deepcopy(package)
+            bad[field]['run_id']=config['run_id']+'/session/1' if field=='configuration' else config['run_id']
+            with self.subTest(field=field),self.assertRaises(EvidenceError):
+                audit_initial_planning_configuration(bad,dict(configuration=config),initial)
+
+    def test_start_failure_receipt_keeps_unknown_accounting_and_no_model_package(self):
+        from ..composite_execution_evidence import audit_composite_start_failure
+        # Wire-only refusal fixture; no trained graph or native execution claim.
+        job=dict(schema_version=1,configuration=configuration())
+        revision='1'*64
+        execution=dict(schema_version=3,base_schema_version=1,measurement_method='declared-window-basin-necessity-v1',
+            execution='training_start_failed',completed_boundary=False,package_path=None,package_sha256=None,
+            attempt_id=job['configuration']['run_id'],training_outcome='invalid_model',model_revision=revision,
+            model_semantic_hash=revision,measurement_archive=None,source_origin=None,
+            composite_counters=dict(attempt=None,archive=None,execution=dict(native_trials=2,sampled_frames=20)))
+        failure=dict(kind='timelearner_native_training_start_failure',schema_version=1,outcome='invalid_model',
+            reason='wire-only-owned-start-refusal',model_revision=revision,dynamic_checkpoint=False,source_origin=None,
+            measurement_archive=None,certificate=None,contains_evaluation_verdict=False)
+        with tempfile.TemporaryDirectory() as directory:
+            path=Path(directory)/'training-start-failure.json'
+            def save(value):path.write_text(json.dumps({**value,'sha256':digest(value)}),encoding='utf-8')
+            save(failure);names={'job.json','initial-state.json','training-start-failure.json'}
+            audit=audit_composite_start_failure(execution,directory,names,job)
+            self.assertFalse(audit['owned_source_captured']);self.assertFalse(audit['completed_boundary'])
+            self.assertFalse(audit['native_execution_verified']);self.assertIsNone(audit['evaluation_verdict'])
+            for field,value in [('certificate',{}),('outcome','exact'),('reason',''),('dynamic_checkpoint',True),
+                    ('model_revision','2'*64),('contains_evaluation_verdict',True),('schema_version',True)]:
+                save({**failure,field:value})
+                with self.subTest(field=field),self.assertRaises(EvidenceError):
+                    audit_composite_start_failure(execution,directory,names,job)
+            save(failure)
+            for field,value in [('package_path','train_stopped_state.json'),('completed_boundary',True),
+                    ('base_schema_version',2),('model_semantic_hash','2'*64),('execution','completed')]:
+                with self.subTest(field=field),self.assertRaises(EvidenceError):
+                    audit_composite_start_failure({**execution,field:value},directory,names,job)
+            bad=deepcopy(execution);bad['composite_counters']['attempt']={}
+            with self.assertRaises(EvidenceError):audit_composite_start_failure(bad,directory,names,job)
+            with self.assertRaises(EvidenceError):audit_composite_start_failure(execution,directory,names|{'train_stopped_state.json'},job)
+            with self.assertRaises(EvidenceError):audit_composite_start_failure(execution,directory,names-{'training-start-failure.json'},job)

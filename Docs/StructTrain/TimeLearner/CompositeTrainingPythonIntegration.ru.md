@@ -198,3 +198,17 @@ records текущей попытки: сравнивается числовой
 новый partial/rejected group. Полный старый sweep не становится свежим из-за
 совпадения graph/epoch. Переход по live intent без actual record из CSV не
 восстанавливается; его clear остаётся обязанностью native controller.
+
+Следующий подготовленный source chunk уточняет cold execution3: неизменяемая
+initial configuration сохраняет исходный job.run_id; текущий runtime_plan
+получает `/session/1`. Explicit initial input readback заменяет только inputs,
+а не identity первоначальной декларации.
+
+Новый `training_start_failed` допускается только для cold6 execution3/base1.
+Отдельный подписанный `training-start-failure.json` обязан подтверждать отказ,
+null package/archive/source/certificate, неизвестные attempt/archive counters
+и фактические callback counters. Такой результат не экспортируется как
+stopped/completed package и не является научным PASS. Существующий process rc2
+путь остаётся диагностическим; произвольный nonzero либо completed-claim с rc2
+не допускается. Старые схемы не получают нового статуса. Эти wire/adversarial
+контроли подготовлены в source; actual Console/package5 gate ещё требуется.

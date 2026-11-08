@@ -12,9 +12,48 @@ EXTRA_FIELDS = {'base_schema_version', 'measurement_method', 'measurement_archiv
                 'model_semantic_hash', 'source_origin', 'composite_counters'}
 
 
+def audit_composite_start_failure(execution, directory, names, job):
+    """A signed pre-source refusal is diagnostic data, never a model package."""
+    require(execution['schema_version'] == 3 and execution['base_schema_version'] == 1
+            and job['schema_version'] == 1 and job['configuration']['schema_version'] == 6
+            and execution['execution'] == 'training_start_failed'
+            and execution['completed_boundary'] is False
+            and execution['package_path'] is None and execution['package_sha256'] is None
+            and execution['attempt_id'] == job['configuration']['run_id'],
+            'composite_start_failure_scope')
+    require('training-start-failure.json' in names and not ({'train_learned_state.json',
+            'train_stopped_state.json', 'train_learned_summary.json', 'train_stopped_summary.json'} & names),
+            'composite_start_failure_package_or_missing_receipt')
+    failure = load(Path(directory)/'training-start-failure.json')
+    keys(failure, {'kind', 'schema_version', 'outcome', 'reason', 'model_revision', 'dynamic_checkpoint',
+        'source_origin', 'measurement_archive', 'certificate', 'contains_evaluation_verdict', 'sha256'},
+        'composite_start_failure_fields')
+    from .composite_measurement_contract import integral_number_view
+    original = failure; failure = integral_number_view(failure)
+    from .stopped_evidence import OUTCOMES
+    require(original['sha256'] == digest({k:v for k,v in original.items() if k != 'sha256'})
+            and failure['kind'] == 'timelearner_native_training_start_failure'
+            and count(failure['schema_version']) == 1 and failure['outcome'] in OUTCOMES
+            and failure['outcome'] == execution['training_outcome']
+            and type(failure['reason']) is str and bool(failure['reason'])
+            and failure['dynamic_checkpoint'] is False and failure['source_origin'] is None
+            and failure['measurement_archive'] is None and failure['certificate'] is None
+            and failure['contains_evaluation_verdict'] is False,
+            'composite_start_failure_binding')
+    revision = execution['model_revision']
+    require(revision is None or type(revision) is str and len(revision) == 64
+            and all(c in '0123456789abcdef' for c in revision), 'composite_start_failure_model_revision')
+    require(failure['model_revision'] == execution['model_semantic_hash'] == revision,
+            'composite_start_failure_model_binding')
+    audit_composite_execution(execution, directory, names, mode='train', base_version=1)
+    return dict(training_start_failure=failure, completed_boundary=False,
+        training_outcome=failure['outcome'], owned_source_captured=False,
+        native_execution_verified=False, evaluation_verdict=None)
+
+
 def audit_initial_planning_configuration(package, job, initial):
     """Only actual initial input readback replaces creation input defaults."""
-    expected = {**job['configuration'], 'run_id': job['configuration']['run_id'] + '/session/1'}
+    expected = dict(job['configuration'])
     actual_inputs = initial['parameters']
     require(len(actual_inputs) == len(expected['model']['inputs']), 'composite_initial_input_dimension')
     inputs = []
@@ -25,7 +64,7 @@ def audit_initial_planning_configuration(package, job, initial):
         inputs.append({**declared, 'resistance': actual['resistance']})
     expected['model'] = {**expected['model'], 'inputs': inputs}
     _same(package['configuration'], expected)
-    require(package['runtime_plan']['run_id'] == expected['run_id'], 'composite_initial_runtime_attempt')
+    require(package['runtime_plan']['run_id'] == expected['run_id'] + '/session/1', 'composite_initial_runtime_attempt')
     source = package['measurement_archive']['source_binding']
     _same(source['initial_model'], initial['identity'])
 

@@ -2,7 +2,7 @@
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
   "suite_id": "composite-portable-package-contract-v1",
-  "package_fingerprint": "6348d1893b368385f2eb6662f42101b18176028f6990678c91845c0113746aff",
+  "package_fingerprint": "9e5e7a5d901917e54abcb44b7de9065a08d705f0a93491feb076e24f4970f98c",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_composite_configuration",
     "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery",
@@ -75,7 +75,9 @@
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_schema_five_loader_never_uses_old_flat_trial_globs_or_invents_summary",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_schema_five_does_not_ignore_supplied_legacy_primary_overlay",
     "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_preflight_envelope_accepts_known_zero_callbacks_but_rejects_invented_archive",
-    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_warm_boundary_request_binds_current_runtime_not_immutable_initial_run"
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_warm_boundary_request_binds_current_runtime_not_immutable_initial_run",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_cold_initial_declaration_retains_original_run_while_runtime_owns_session",
+    "Scripts.StructTrain.TimeLearner.tests.test_composite_portable_contract.CompositePortableContractTest.test_start_failure_receipt_keeps_unknown_accounting_and_no_model_package"
   ],
   "fixtures": {}
 }
