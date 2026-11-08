@@ -187,3 +187,9 @@ initial source dataset после полного mask restore. Retarget либо
 omission mask не разрешены внутри этого family. Сравнивается identity.model;
 raw XML может различаться из-за incidental dynamic serialization. Этот guard
 подготовлен отдельно после65 source и требует фактической package5 приёмки.
+
+Accepted final_group_ids новой схемы должны относиться к current_attempt_id
+и одному logical final run/sweep. Одинаковых graph/epoch недостаточно для
+смешения старых и свежих final measurements. Исторические consumed finals
+разрешены среди остальных archive records, но не входят в свежий all-input
+сертификат. Это source guard; нужен реальный multi-sweep regression gate.

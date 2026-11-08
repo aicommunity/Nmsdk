@@ -240,6 +240,11 @@ def audit_composite_measurement_archive(document, configuration, *, runtime_plan
                         and rows[identity]['consumed'] and rows[identity]['measured'] and rows[identity]['native_closure_recomputed'],
                         'composite_archive_unverified_accepted_group')
         require(not set(archive['reference_group_ids']) & set(archive['final_group_ids']),'composite_archive_reference_final_overlap')
+        final_ids = set(archive['final_group_ids'])
+        final_records = [record for record in archive['records'] if record['group_id'] in final_ids]
+        require(all(record['attempt_id'] == archive['current_attempt_id'] for record in final_records)
+                and len({record['logical_request']['run_id'] for record in final_records}) <= 1,
+                'composite_archive_final_generation_mixed')
         counters=archive['counters'];keys(counters,{'attempt','archive'},'composite_archive_counter_fields')
         keys(counters['attempt'],{'logical_groups','native_probes','sampled_frames'},'composite_attempt_counter_fields')
         keys(counters['archive'],{'groups','native_probes','sampled_frames','primary_bytes'},'composite_archive_total_counter_fields')
