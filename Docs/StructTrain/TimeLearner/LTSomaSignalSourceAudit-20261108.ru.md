@@ -312,3 +312,15 @@ Soma.SumPotential и не разрешает подставить full-window ma
 в сжатом Git evidence; cache — staging/full-render convenience, не единственный
 источник. Никакие jobs/adapter/instrumentation этим документом не реализованы и
 не запущены; scientific causality и полная матрица остаются открытыми.
+
+
+## Привязка конкретной Classic flat LT-панели
+
+[Отдельный metadata trace](ClassicFlatLTMetadataTrace-20261108.ru.md) связывает
+три Classic PNG исходного threshold100 отчёта с Git primary cd8d…, actual
+compiled Root844/Pulse1f97 и renderer Root360ed…. Сохранённый graph/descriptor
+содержит Threshold image, Activity=true, no LTMembrane и восемь LT Inputs links;
+точный producer использует Common/direct Potential без fallback0. Per-sample
+Ready/Init/actual calculation trace не опубликован; flat_cause остаётся null.
+Это локальная metadata/структурная проверка, без новых численных запусков,
+изменения графиков или переоценки positive Soma и исторических наблюдений.
