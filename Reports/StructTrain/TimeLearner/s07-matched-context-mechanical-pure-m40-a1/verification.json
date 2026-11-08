@@ -1,0 +1,100 @@
+{
+  "kind": "matched_omission_context_extraction_mechanical_pure_normal_asan_pass",
+  "schema_version": 1,
+  "root": "666658a2374226e5f889e099f1a3202ecd473d01",
+  "pulse": "8ee53286629fa4d8871aa07373514b5815a3c68d",
+  "expected_cases_per_mode": 71,
+  "gates": [
+    {
+      "job": "s07-matched-context-mechanical-pure-normal-m40-a1",
+      "mode": "normal",
+      "target": "Test_PulseLib_MatchedOmissionAssignment",
+      "slug": "v1",
+      "tests_observed": 35,
+      "passed_cases": 35,
+      "failed_test_ids": [],
+      "junit_sha256": "bddc32441428cb4d46b9b9bd2872e55b6cdc44f0be802d74e5b3bb0e6a9ec0f3",
+      "process_returncode": 0,
+      "actual_loaded_files": 18
+    },
+    {
+      "job": "s07-matched-context-mechanical-pure-normal-m40-a1",
+      "mode": "normal",
+      "target": "Test_PulseLib_DeclaredWindowBasinAssignment",
+      "slug": "basin",
+      "tests_observed": 36,
+      "passed_cases": 36,
+      "failed_test_ids": [],
+      "junit_sha256": "6f7dad682f0bf28f459e14c3ac758a9b4266f0f9bde683af041e2a4b5e7524ce",
+      "process_returncode": 0,
+      "actual_loaded_files": 18
+    },
+    {
+      "job": "s07-matched-context-mechanical-pure-asan-m40-a1",
+      "mode": "asan",
+      "target": "Test_PulseLib_MatchedOmissionAssignment",
+      "slug": "v1",
+      "tests_observed": 35,
+      "passed_cases": 35,
+      "failed_test_ids": [],
+      "junit_sha256": "02db603c71a75d1312393bf86cae1b3dc6214422fccabeee88e61384071a5b04",
+      "process_returncode": 0,
+      "actual_loaded_files": 19
+    },
+    {
+      "job": "s07-matched-context-mechanical-pure-asan-m40-a1",
+      "mode": "asan",
+      "target": "Test_PulseLib_DeclaredWindowBasinAssignment",
+      "slug": "basin",
+      "tests_observed": 36,
+      "passed_cases": 36,
+      "failed_test_ids": [],
+      "junit_sha256": "ccd77247dbcd5c115d59825e8b02d98da0092fc00ab6d56e709e1a685af077b8",
+      "process_returncode": 0,
+      "actual_loaded_files": 19
+    }
+  ],
+  "mode_totals": {
+    "normal": 71,
+    "asan": 71
+  },
+  "source_preparation_passed": true,
+  "prep_only_controller_label_mismatches_preserved": [],
+  "numeric_controllers_and_native_runtime_source_pins_match": true,
+  "native_cases_observed_total": 142,
+  "native_passed_cases_total": 142,
+  "native_failed_cases_total": 0,
+  "distinct_failing_test_ids": [],
+  "predecessor_negative_evidence_commit": "284879d5a7887198eebb4a53a15fa9d48399642b",
+  "predecessor_geometry_acceptance_commit": "993121d12cc05fdbafc1a1039b1560ad55870489",
+  "mechanical_scope": "Shared matched-omission context validator extraction; v1 assignment criterion unchanged; geometry source unchanged; native bridge absent from this pin",
+  "postclosure_snapshots_confirm_original_after_snapshots": true,
+  "original_worker_terminals_reclassified": false,
+  "new_build_or_test_execution_during_collection": false,
+  "compiled_translation_units": {
+    "Test_PulseLib_MatchedOmissionAssignment": [
+      "Tests/Integration/Libraries/Test_PulseLib_MatchedOmissionAssignment.cpp",
+      "Tests/Integration/Support/ProbeAlgorithmMain.cpp",
+      "Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.cpp",
+      "Libraries/Nmsdk-PulseLib/Core/TimeLearner/MatchedOmissionAssignment.cpp",
+      "Libraries/Nmsdk-PulseLib/Core/TimeLearner/MatchedOmissionValidation.cpp"
+    ],
+    "Test_PulseLib_DeclaredWindowBasinAssignment": [
+      "Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp",
+      "Tests/Integration/Support/ProbeAlgorithmMain.cpp",
+      "Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.cpp",
+      "Libraries/Nmsdk-PulseLib/Core/TimeLearner/DeclaredWindowBasinAssignment.cpp"
+    ]
+  },
+  "harness_sha256": "6632a33587834e9f554af63a0ea5632712e0d2b640903f5ccd7554d55d2bb496",
+  "production_root_cmake_blob_sha256": "2e4b3c27365917fcc56508f945231bf67352ef1cc013f4f9bb8673dd9dc34c2c",
+  "unused_gitlinks_materialization": "standalone exact-commit tree metadata, empty sparse working tree, no alternates",
+  "full_root_cmake_integration_accepted": false,
+  "sdk_source_payload_or_build_validated": false,
+  "native_context_validated": false,
+  "training_certificate_eligible": false,
+  "asan_options": "detect_leaks=0",
+  "leak_check_claimed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
