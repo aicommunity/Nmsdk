@@ -80,6 +80,17 @@ stdout/stderr прошла по33 проверки на обоих сервер�
 На M40 production portable auditor отклонил исходный положительный manifest
 Classic-6 с ERROR и принял чистый повтор; численные файлы не переписывались.
 
+Выделен общий production extractor измеренных вершин без смены assignment
+policy. На Elder приняты78 unit и15 native cases: [normal93](MeasuredResponseNormalVerification.json).
+ASan/native и A/B на M40 продолжаются; [точные задания](MeasuredResponseJobs.json).
+Это не исправление принадлежности пиков полной пачки и не завершение этапа7.
+
+Миграция расширена до242 записей (240 retired/2 moved): четыре исторических
+AsymRm seed/reset инструмента удалены без wrappers. На обоих workers прошли
+production CLI, negative restored-path control и exact4D+4M scope:
+[приёмка](AsymRmSeedRetirementVerification.json). Осталось18 AsymRm Python;
+полная миграция и develop-приёмка остаются открытыми.
+
 ## Проверенные срезы
 
 | Срез | Подтверждено и ограничения |
@@ -212,7 +223,7 @@ runtime/effective-factor matrix этим не закрывается.
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration238:236 retired+2 moved; последние16 LTZ drivers приняты обоими серверами без wrappers|Остаются22 AsymRm Python и прочие инструменты; limited Bin inventory126 не равен полному глобальному inventory|
+|9. Скрипты|Корневой пакет и CLI работают; migration242:240 retired+2 moved; последние16 LTZ drivers приняты обоими серверами без wrappers|Остаются18 AsymRm Python и прочие инструменты; ограниченный path/suffix inventory не равен полному глобальному inventory|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
@@ -238,8 +249,8 @@ runtime/effective-factor matrix этим не закрывается.
 [capabilities](ControllerCapabilities.ru.md),
 [parameter contracts](ParameterControlContracts.ru.md),
 [readiness](ExperimentReadiness.ru.md). Полная lifecycle/storage/growth и
-legacy/V2 матрица остаётся открытой. Migration238 (236 retired+2 moved) не равна
-всему inventory; остаются22 AsymRm Python и другие инструменты. Полная scheduler,
+legacy/V2 матрица остаётся открытой. Migration242 (240 retired+2 moved) не равна
+всему inventory; остаются18 AsymRm Python и другие инструменты. Полная scheduler,
 recovery, publication fault matrix и effective-factor attestation не закрыты.
 Компонентные страницы PulseLib актуализированы.
 [Пять свойств и общие тексты двух ClDesc](ClDescControllerContractReconciliation-20261107.ru.md)
