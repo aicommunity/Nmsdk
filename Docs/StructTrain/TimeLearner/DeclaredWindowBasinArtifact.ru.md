@@ -38,3 +38,41 @@ source_specification_sha256=null, complete_group=false, rejected status и null
 geometry/measurement. Он никогда не выдаётся за replayable полный N+2 witness.
 Проверка Python reader будет отдельно фиксировать полноту replay, а не просто
 успешное чтение JSON. Scientific verdict остаётся null, eligibility=false.
+
+## Независимый reader, отдельный tool source
+
+`Scripts/StructTrain/TimeLearner/declared_window_basin_evidence.py` не является
+частью frozen SDK build root663baa837/Pulsec3ac0aa. Его собственный Git commit
+фиксируется отдельно в worker metadata. API audit_declared_window_basin_file
+читает только hash-bound безопасные относительные references; report по --output
+создаётся с NewOnly вне primary directory.
+
+Reader повторно проверяет packet/CSV/source/context через существующий строгий
+portable reader, связывает group.json с теми же native packets/primary и
+пересчитывает **новую** геометрию самостоятельно (run compression/plateaus,
+measured valleys, per-control presence, необходимость, выбор, repeat topology).
+Старый v1 outcome не выбирает новую вершину. Pointwise native full repeat
+проверяется отдельно; policy нового метода читается только из actual record.
+Source-spec fingerprint использует существующий length-framed UTF8/binary64-v1,
+а не generic json.dumps и не предположение о Qt Compact spelling. Exact file
+hashes проверяют реально записанные JSON bytes независимо от этого fingerprint.
+
+Actual assigned event time/frame проверяется отдельно. Pre-event geometry не
+возвращается как измерение даже при корректном packet replay. Partial records
+проверяются на digest/первый native trace и отсутствие promotion; receipt явно
+ставит geometry_recomputed=false и rejection_reason_recomputed=false. Нельзя
+объявлять их полным replay native context или всего метода.
+
+Контролируемые unit fixtures и adversarial inputs расположены в
+`tests/test_declared_window_basin_evidence.py`. Synthetic causality fixture явно
+помечен packet/CSV control, не native physics evidence. Reader не подтверждает
+live execution/reset ownership или причинную lineage и не создаёт сертификаты.
+Только AST/syntax проверяются локально; numerical unit и cross-language replay
+на actual14 artifacts выполняются отдельным серверным gate с pinned reader.
+
+Предобъявленный inventory нового модуля —23 unittest methods:
+`Scripts.StructTrain.TimeLearner.tests.test_declared_window_basin_evidence`.
+CLI replay: `python -m Scripts.StructTrain.TimeLearner.declared_window_basin_evidence`
+с путём к actual diagnostic record. Native14 gate должен независимо показать10
+complete geometry replays и4 partial nonpromotable records. Новый reader не
+меняет compiled root/Pulse pins или критерии ранее сохранённого v1 evidence.
