@@ -415,7 +415,7 @@
       "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
       "bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
       "rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
-      "state": "running_full_cohort_not_accepted",
+      "state": "terminal_failure_pending_independent_evidence_verification",
       "expected_cpp_cases": 248,
       "expected_leaf_gates": 138,
       "worker_module": "Scripts.StructTrain.TimeLearner.native_acceptance_worker",
@@ -443,7 +443,23 @@
       "worker_source_updated_during_job": false,
       "do_not_restart_on_observation_timeout": true,
       "whole_gate_accepted": false,
-      "scientific_verdict": null
+      "scientific_verdict": null,
+      "observed_cpp_cases": 231,
+      "observed_passed_cases": 230,
+      "observed_failed_cases": 1,
+      "not_run_cases": 17,
+      "observed_closed_leaf_gates": 121,
+      "failed_case_ids": [
+        "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip"
+      ],
+      "failure_message": "invalid_native_configuration_number",
+      "postclosure_server_observation": {
+        "all_recorded_units_closed": true,
+        "lease_released": true,
+        "root_independently_verified": false,
+        "evidence_publication": "collector_in_progress"
+      },
+      "restart_performed": false
     }
   ],
   "prepared_feature": {
