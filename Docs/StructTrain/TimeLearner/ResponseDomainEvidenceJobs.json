@@ -14,18 +14,29 @@
     "output": "/home/user/timelearner-refactor/readbacks/s07-domain-evidence-elder-a2",
     "checks_planned": 10,
     "native_cases_planned": 4,
-    "last_observed": "capture_and_codec10_passed_native_cases_running",
+    "last_observed": "capture_and_codec10_and_native3_passed_branch20000_still_bound_group_live",
     "initial_attempt": "s07-domain-evidence-elder-a1",
     "initial_attempt_outcome": "refused_before_build_insufficient_disk_space"
   },
   "reader_root": "b22e3e443753bca3aa856b19a0e6948d28823b50",
   "reader_checks_planned_per_worker": 12,
   "reader_workers": [
-    {"host": "10.245.1.17", "job": "s07-domain-reader-m40-a1", "last_observed": "12_passed_no_skips_publication_pending"},
-    {"host": "10.245.1.11", "job": "s07-domain-reader-elder-a1", "last_observed": "refused_capacity_before_tests_while_native_job_running"}
+    {
+      "host": "10.245.1.17",
+      "job": "s07-domain-reader-m40-a1",
+      "last_observed": "12_passed_no_skips_closed_released_evidence_verified",
+      "evidence_commit": "b07c853b84873791d05a3cb87f149492a4839ecd"
+    },
+    {
+      "host": "10.245.1.11",
+      "job": "s07-domain-reader-elder-a1",
+      "last_observed": "refused_capacity_before_tests_while_native_job_running"
+    }
   ],
   "cross_language_primary_packet_checks_complete": false,
   "accepted": false,
   "training_certificate_eligible": false,
-  "whole_plan_complete": false
+  "whole_plan_complete": false,
+  "joint_old_new_artifact_identity_check_complete": false,
+  "artifact_identity_fix_root": "009afde8b225c3e5dd86261c1afb095ab745817a"
 }
