@@ -40,6 +40,26 @@ def build_binding(specification, runtime):
     phases = semantic["phases"]
     train = phases[0]["job"]
     config = train["configuration"]
+    supplementary = None
+    diagnostic_paths = []
+    if config.get('schema_version') == 6:
+        # _validate(preflight=True) above has already checked the FULL policy.
+        # Strip only these exact admitted diagnostic roles for this new method;
+        # invalid/unknown policies never reach scientific identity construction.
+        from .composite_configuration import (DIAGNOSTIC_ONLY_CONTEXT_FIELDS,
+                                               METHOD, project_composite_configuration)
+        project_composite_configuration(spec['phases'][0]['job']['configuration'])
+        require(config['composite_measurement']['method_id'] == METHOD,
+                'unknown_composite_condition_projection')
+        context = config['composite_measurement']['context_policy']
+        supplementary = {
+            'kind': 'timelearner_composite_supplementary_diagnostics', 'schema_version': 1,
+            'method_id': METHOD,
+            'context_policy': {key: context.pop(key) for key in sorted(DIAGNOSTIC_ONLY_CONTEXT_FIELDS)},
+            'role': 'diagnostic_only',
+        }
+        diagnostic_paths = ['/phases/0/job/configuration/composite_measurement/context_policy/'+key
+                            for key in sorted(DIAGNOSTIC_ONLY_CONTEXT_FIELDS)]
     model = config["model"]
     downstream = [{"operation": p["operation"], "trials": p["job"].get("trials", [])}
                   for p in phases[1:]]
@@ -49,9 +69,9 @@ def build_binding(specification, runtime):
         "model_spec": {"declaration": model},
         "storage_profiles": {"archives": train["profile_archives"]},
         "initial_state": {"policy": "declared_cold_model", "model": model},
-        # Keep the entire semantic declaration as well as role projections:
-        # an unclassified scientific field must not silently disappear.
-        "training_plan": {"complete_declaration": semantic},
+        # Keep every unclassified field. Only the three explicitly validated
+        # cold6 diagnostic roles above have a separately retained projection.
+        "training_plan": {"operative_declaration" if supplementary is not None else "complete_declaration": semantic},
         "input_data": {"training_isi": model["initial_isi"], "downstream": downstream},
         "presentation_protocol": {"training": config, "downstream": downstream},
         "calibration_spec": {"phases": [p for p in phases if p["operation"] in ("calibrate", "posttune")],
@@ -67,7 +87,7 @@ def build_binding(specification, runtime):
     artifacts = {role: artifact(role, value) for role, value in payloads.items()}
     condition = ConditionSpec(controller_version=2, amplitude_goal="captured_per_input",
                               **{role: value["sha256"] for role, value in artifacts.items()})
-    return {"kind": "timelearner_managed_condition_binding", "schema_version": 1,
+    result = {"kind": "timelearner_managed_condition_binding", "schema_version": 2 if supplementary is not None else 1,
             "pipeline_specification_sha256": digest(spec),
             "runtime_fingerprint": runtime["runtime_fingerprint"],
             "condition": condition.to_object(), "condition_fingerprint": condition.fingerprint,
@@ -75,6 +95,11 @@ def build_binding(specification, runtime):
             "omitted_metadata_paths": sorted(omitted), "declaration_only": True,
             "effective_model_verified": False, "native_execution_verified": False,
             "scientific_verdict": None}
+    if supplementary is not None:
+        result.update(supplementary_diagnostics=supplementary,
+                      supplementary_diagnostics_sha256=digest(supplementary),
+                      diagnostic_only_paths=diagnostic_paths)
+    return result
 
 
 def audit_binding(binding, specification, runtime):
