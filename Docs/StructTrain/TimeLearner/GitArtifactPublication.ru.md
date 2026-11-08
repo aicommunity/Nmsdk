@@ -92,3 +92,10 @@ Child refs на момент проверки уже совпадали с gitli
 не утверждение о миграции всех producers. Квитанции фиксируют конкретные
 коммиты и состояние refs во время выполнения: дальнейшее продвижение веток
 не превращает их в проверку нового HEAD. Новые gitlinks требуют новой closure.
+
+
+Новая loose-script policy принята на root91323406:32/32 real Git tests на
+каждом Linux worker,20 regressions и12 policy methods. [Область, failed attempts
+и конкретная административная reconciliation](LooseReportScriptPolicy.ru.md),
+[независимая квитанция](LooseReportScriptPolicyVerification.json). Это не удаление
+уже существующих109 исторических loose sources и не завершение всего publisher.
