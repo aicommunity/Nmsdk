@@ -1,0 +1,25 @@
+{
+  "kind": "independent_rdk_description_before_after_metadata_verification",
+  "commit": "374127ae49c361ef35364019b86ea3b67dfb7c51",
+  "archive_members_verified": 626,
+  "archive_bytes": 3928516,
+  "archive_sha256": "6a5703892cdf0b725b164ed5b6136fc6a7f9da454d82e87c614b9518421c83c1",
+  "expanded_bytes_verified": 96495492,
+  "before_expected_failed_case": [
+    "RuntimeDescriptions/LoadsWhenOwnBoundedGroupHasNoSpareThreadSlots"
+  ],
+  "after_metadata_checks_passed": 2,
+  "physical_checks_passed": 5,
+  "root_diff_is_only_rdk_gitlink": true,
+  "fixture_source_matched_git": true,
+  "clean_replay_stimulus_and_all_soma_csv_byte_identical": true,
+  "channel_diagnostic_json_files_byte_identical": 1,
+  "clean_replay_stderr_empty": true,
+  "prior_resource_error_retained": true,
+  "exact_old_exception_stack_source_proven": false,
+  "current_and_previous_runtimes_unchanged": true,
+  "all_groups_closed_and_released": true,
+  "second_worker_verified": false,
+  "numerical_tests_executed_locally": false,
+  "whole_plan_complete": false
+}
