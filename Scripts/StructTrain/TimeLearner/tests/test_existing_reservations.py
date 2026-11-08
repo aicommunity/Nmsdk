@@ -76,3 +76,24 @@ class ExistingReservationsTest(unittest.TestCase):
             Reservations.open_existing(database)
         with sqlite3.connect(database) as connection:
             self.assertEqual(list(connection.execute("SELECT name FROM sqlite_master WHERE type='table'")), [('other',)])
+
+    def test_lost_ownership_tables_are_never_recreated(self):
+        for missing in ('leases', 'managed_unit_intents'):
+            capacity = {'slots': 1, 'memory_bytes': 2**30, 'disk_bytes': 2**30, 'tasks': 128}
+            database = self.root/missing
+            Reservations(database, capacity=capacity, managed_units=True)
+            with sqlite3.connect(database) as connection:
+                connection.execute('DROP TABLE '+missing)
+            with self.assertRaisesRegex(ReservationError, 'table_schema_changed'):
+                Reservations.open_existing(database, managed_units=True)
+            with sqlite3.connect(database) as connection:
+                self.assertEqual(list(connection.execute('SELECT name FROM sqlite_master WHERE name=?', (missing,))), [])
+
+    def test_ownership_table_constraints_cannot_be_silently_weakened(self):
+        database = self.root/'weakened'
+        Reservations(database)
+        with sqlite3.connect(database) as connection:
+            connection.execute('DROP TABLE leases')
+            connection.execute('CREATE TABLE leases (token TEXT, job_id TEXT)')
+        with self.assertRaisesRegex(ReservationError, 'table_schema_changed'):
+            Reservations.open_existing(database)
