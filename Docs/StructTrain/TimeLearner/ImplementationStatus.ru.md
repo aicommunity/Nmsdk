@@ -472,10 +472,14 @@ Prep-only controller A2 содержал старую метку root236; actual
 сохраняет предел причинной интерпретации: geometry API не проверяет native
 context и не создаёт Train evidence/certificate.
 
-Отдельно подготовлены и pushed механическое выделение общего context validator
-(Pulse8ee/root666,71 pure cases) и native diagnostic bridge
-(Pulsec3ac/root663,14 native cases с полным artifact binding). Их серверная
-приёмка ещё ожидается. Full SDK M40 gate140 готовится на immutable663/c3;
-до приёмки механического подэтапа его сборка/расчёты не запускаются.
+Механическое выделение общего context validator (Pulse8ee/root666) прошло
+71/71 normal и71/71 ASan: [receipt](MatchedContextMechanicalM40A1Verification.json).
+Это pure harness, отдельно от SDK/native. После его приёмки запущен реальный
+SDK140 на immutable663/c3: сборка завершена,43 Python и118 из140 C++ прошли;
+остальные8 прежних native и14 новых bridge cases ещё выполняются.
+[Точные bindings и состояние](NativeDeclaredWindowBasinJobs.json).
+Независимый Python reader подготовлен отдельным tool root1de:23 tests и replay
+14 actual records будут выполнены после закрытия SDK job без изменения его
+source/runtime. Его результаты пока не приняты.
 Typed Train integration остаётся следующим обязательным шагом. Старый v1 и
 исторические результаты не переоцениваются.

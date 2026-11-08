@@ -17,9 +17,17 @@
   "production_root_cmake_target_accepted": false,
   "native_bridge_accepted": false,
   "remaining": [
-    "Mechanical shared context validation A/B: 71 pure cases normal/ASan",
-    "Full SDK production target and native bridge gate",
-    "Independent replay of native declared-window outcomes",
+    "Finish running actual SDK/native140 gate and verify its artifacts",
+    "Run independent reader23 and replay14 actual native records without runtime changes",
     "Typed Train reference/search/final verification integration"
-  ]
+  ],
+  "mechanical_context_gate": {
+    "root": "666658a2374226e5f889e099f1a3202ecd473d01",
+    "pulse": "8ee53286629fa4d8871aa07373514b5815a3c68d",
+    "normal_tests_passed": 71,
+    "asan_tests_passed": 71,
+    "evidence_commit": "a7bcf529ce762f2e4ce43a58387e6813a2e491e4",
+    "receipt": "MatchedContextMechanicalM40A1Verification.json",
+    "scope": "pure harness, not actual SDK/native context acceptance"
+  }
 }
