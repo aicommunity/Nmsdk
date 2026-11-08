@@ -1,0 +1,73 @@
+{
+  "status": "source_preparation_only",
+  "numeric_tests_run_locally": false,
+  "cases": [
+    "NativeCompositeArchive.ClassicActualServiceStrictReplay",
+    "NativeCompositeArchive.BranchActualServiceStrictReplay",
+    "NativeCompositeArchive.CsvRenameChangesDocumentOnly",
+    "NativeCompositeArchive.MissingExternalPrimaryCannotFallBack",
+    "NativeCompositeArchive.ChangedExternalPrimaryRejected",
+    "NativeCompositeArchive.ExtraEmbeddedBlobRejected",
+    "NativeCompositeArchive.BooleanSchemaRejected",
+    "NativeCompositeArchive.BooleanCounterRejected",
+    "NativeCompositeArchive.ChangedAttemptNamespaceRejected",
+    "NativeCompositeArchive.ChangedCandidateModelRejected",
+    "NativeCompositeArchive.ChangedModelEpochRejected",
+    "NativeCompositeArchive.ChangedActualOriginRejected",
+    "NativeCompositeArchive.ChangedGeometryPolicyRejected",
+    "NativeCompositeArchive.ChangedMeasuredPeakRejected",
+    "NativeCompositeArchive.ChangedActualEventTimestampRejected",
+    "NativeCompositeArchive.ChangedRawSpecificationRejected",
+    "NativeCompositeArchive.MissingControlRejected",
+    "NativeCompositeArchive.DuplicateControlRejected",
+    "NativeCompositeArchive.StaleCurrentAttemptFinalsRejected",
+    "NativeCompositeArchive.ActualPartialStopNeverPromotes",
+    "NativeCompositeWindowLimitation.ClassicActualGrowthLeavesInitialWindow",
+    "NativeCompositeWindowLimitation.BranchActualGrowthLeavesInitialWindow",
+    "NativeCompositeArchive.ActualBoundC0RawWitnessesBindUnmutedBase",
+    "NativeCompositeArchive.ActualWarmReferencesAreNotNewAttemptWork",
+    "NativeCompositeArchive.ActualMergedAmbiguousGroupStaysDiagnostic",
+    "NativeCompositeSourceGuard.ClassicActualSourceChangedBetweenCloseAndConsume",
+    "NativeCompositeSourceGuard.BranchActualSourceChangedBetweenCloseAndConsume"
+  ],
+  "count": 27,
+  "source_sha256": "f59bb0e3e67a2390bd97aa2ef4f5999f49dcad136fc2a8bd08f9cda4faa4c42b",
+  "prior_scope": 179,
+  "new_scope_total": 206,
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "required_actual_bundles": [
+    "classic-service",
+    "branch-service",
+    "classic-partial",
+    "branch-C0",
+    "classic-warm",
+    "branch-ambiguous"
+  ],
+  "each_bundle": [
+    "composite-measurements/index.json",
+    "composite-measurements/group-*.json",
+    "composite-measurements/group-*/*.csv",
+    "initial-configuration.json",
+    "runtime-plan.json",
+    "after-model.json",
+    "boundary-math.json"
+  ],
+  "growth_bundles": [
+    "classic-growth/initial-broad",
+    "classic-growth/initial-tight",
+    "classic-growth/after-growth-wide",
+    "classic-growth/after-growth-initial-window",
+    "branch-growth/initial-broad",
+    "branch-growth/initial-tight",
+    "branch-growth/after-growth-wide",
+    "branch-growth/after-growth-initial-window"
+  ],
+  "pending": [
+    "remote_compile_and_numeric_gate",
+    "independent_actual_archive_replay",
+    "temporal_render_all_primary_patterns",
+    "package5_actual_physical_import_and_portable_math",
+    "Console_Train_to_Test",
+    "versioned_group_specific_candidate_window_policy_before_full_stage7_acceptance"
+  ]
+}

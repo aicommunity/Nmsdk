@@ -5,11 +5,17 @@
 #include "TimeLearner/CompositeTrainingDeclarations.h"
 #include "TimeLearner/ConfiguredNativeTraining.h"
 #include "TimeLearner/MatchedOmissionEvidenceJson.h"
+#include "TimeLearner/NativeCompositeTrainingEvidence.h"
+#include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/StorageProfiles.h"
 #include "TimeLearner/ProbeEvidenceJson.h"
 #include "../Support/ConsoleLikeInit.h"
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <QDir>
+#include <QCryptographicHash>
+#include <QFile>
+#include <cstdlib>
 #include <algorithm>
 #include <chrono>
 #include <cmath>
@@ -25,6 +31,8 @@ static_assert(!std::is_default_constructible_v<PreparedCompositeMeasurement>);
 static_assert(!std::is_default_constructible_v<ValidatedCompositeMeasurement>);
 static_assert(!std::is_aggregate_v<PreparedCompositeMeasurement>);
 static_assert(!std::is_aggregate_v<ValidatedCompositeMeasurement>);
+static_assert(!std::is_default_constructible_v<DecodedNativeCompositeArchive>);
+static_assert(!std::is_aggregate_v<DecodedNativeCompositeArchive>);
 void Require(bool value,const char* reason){if(!value)throw std::runtime_error(reason);}
 double Wall(){return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 class CompositeTrainingFlag : public UNet {
@@ -168,7 +176,10 @@ template<class Owner> void SearchAndFinal(unsigned hz,bool boundC0=false,bool n0
     EXPECT_EQ(search.IssuedProbes(),logical);EXPECT_EQ(f.preparations,(logical+2)*4);
     EXPECT_EQ(f.attempt->IssuedNativeProbes(),(logical+2)*4);EXPECT_EQ(f.attempt->RetainedSamples(),f.rawSamples);
     if(n0){ASSERT_EQ(search.CandidateRepeats().size(),1u);EXPECT_EQ(search.CandidateRepeats()[0].trialIds.size(),2u);EXPECT_TRUE(search.CandidateRepeats()[0].complete);}
-    EXPECT_THROW(EncodeTrainingCertificate(certificate),std::invalid_argument); // No fake old-schema export.
+    const auto encodedCertificate=EncodeTrainingCertificate(certificate);EXPECT_EQ(encodedCertificate["schema_version"].toInt(),2);
+    EXPECT_EQ(encodedCertificate["method_id"],QJsonValue(DeclaredWindowBasinResult::MethodId()));
+    auto unsignedCertificate=encodedCertificate;unsignedCertificate.remove("semantic_certificate_id");
+    EXPECT_EQ(encodedCertificate["semantic_certificate_id"],QJsonValue(NmsdkTools::CanonicalModelDataSha256(unsignedCertificate)));
     ASSERT_GT(f.groupBegins.at(1)-f.groupBegins.at(0),cfg.tolerances.sync);
     const auto& anchor=f.observedScalars.at(certificate.Residuals().back().trialId);
     for(std::size_t i=0;i<2;++i) {
@@ -584,6 +595,9 @@ template<class Owner> void ActualDimensions(std::size_t n) {
     for(std::size_t i=0;i<traces.size();++i){const auto path=QString("dimension-%1.csv").arg(qulonglong(i));paths.push_back(path);
         primary.emplace(path,EncodeMatchedOmissionPrimaryTrace(*traces[i],group.packets[i]));}
     EXPECT_NO_THROW(DecodeMatchedOmissionEvidence(EncodeMatchedOmissionEvidence(group,paths,primary),primary));
+    if(f.attempt->Selection()->status==NativeDeclaredWindowBasinStatus::CausalityRejected) {
+        EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->Selection()->geometry);EXPECT_FALSE(f.attempt->Selection()->reasons.empty());return;
+    }
     ASSERT_TRUE(f.attempt->Selection()->geometry);const auto& selected=*f.attempt->Selection()->geometry;
     for(const auto& candidate:selected.candidates)EXPECT_EQ(candidate.controls.size(),n);
     if(selected.validity==DeclaredWindowBasinValidity::Valid && f.attempt->Selection()->status==NativeDeclaredWindowBasinStatus::Completed) {
@@ -603,3 +617,217 @@ TEST(NativeCompositeDimensions,ClassicN4ActualLastInput){ActualDimensions<NNeuro
 TEST(NativeCompositeDimensions,BranchN4ActualLastInput){ActualDimensions<NNeuronTimeLearnerBranch>(4);}
 TEST(NativeCompositeDimensions,ClassicN6ActualLastInput){ActualDimensions<NNeuronTimeLearner>(6);}
 TEST(NativeCompositeDimensions,BranchN6ActualLastInput){ActualDimensions<NNeuronTimeLearnerBranch>(6);}
+
+namespace {
+void RebindArchive(QJsonObject& object){object.remove("artifact_document_sha256");object["artifact_document_sha256"]=NmsdkTools::CanonicalModelDataSha256(object);}
+void SaveCompositeArchive(const NativeCompositeArchiveDocument& archive,const char* name) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;const auto base=QString::fromLocal8Bit(output)+"/"+name;
+    const auto write=[&](const QString& path,const QByteArray& bytes){const auto slash=path.lastIndexOf('/');Require(QDir().mkpath(path.left(slash)),"composite_archive_output_directory");
+        QFile file(path);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"composite_archive_output_new_only");
+        Require(file.write(bytes)==bytes.size() && file.flush(),"composite_archive_output_write");};
+    write(base+"/composite-measurements/index.json",QJsonDocument(archive.document).toJson());
+    for(const auto& [path,bytes]:archive.primary)write(base+"/"+path,bytes);
+    const auto records=archive.document["records"].toArray();for(int i=0;i<records.size();++i)
+        write(base+QString("/composite-measurements/group-%1.json").arg(i+1,6,10,QLatin1Char('0')),QJsonDocument(records[i].toObject()).toJson());
+}
+template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& f,const char* name) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;const auto base=QString::fromLocal8Bit(output)+"/"+name;
+    Require(QDir().mkpath(base),"composite_boundary_output_directory");const auto write=[&](const char* name,const QJsonObject& data) {
+        QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"composite_boundary_output_new_only");
+        const auto bytes=QJsonDocument(data).toJson();Require(file.write(bytes)==bytes.size() && file.flush(),"composite_boundary_output_write");};
+    const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    const auto generator=dataset->template GetComponentL<NPulseGeneratorTransit>("Generator1",true);
+    const auto snapshot=NmsdkTools::ExportPhysicalGraphForEdit(neuron.Get(),{{&generator->Output,"burst"}});
+    QJsonArray parameters;for(const auto& p:f.owner->ReadNativeParameters())parameters.append(QJsonObject{
+        {"length",p.length},{"synapses",p.synapses},{"resistance",p.resistance}});
+    const auto& service=f.owner->NativeTrainingController();
+    if(service.Plan().protocol.schemaVersion==4) {
+        write("initial-configuration.json",service.CompositeInitialConfiguration());
+        write("runtime-plan.json",EncodeCompositeRuntimePlan(service.Plan()));
+    }
+    write("after-model.json",QJsonObject{
+        {"kind","native_composite_fixture_actual_boundary"},{"schema_version",1},{"neuron",snapshot},
+        {"dataset",NmsdkTools::ExportDatasetSnapshot(dataset.Get())},{"actual_inputs",parameters},
+        {"model_revision",QString::fromStdString(f.Revision())},{"model_epoch",double(service.ModelEpoch())},
+        {"optional_C0_state",f.owner->OwnedNativeCapacitanceState().isEmpty()?QJsonValue(QJsonValue::Null):QJsonValue(f.owner->OwnedNativeCapacitanceState())}});
+    QJsonArray references;if(service.References())for(const auto& ref:service.References()->Inputs())references.append(QJsonObject{
+        {"input_id",QString::fromStdString(ref.id)},{"group_id",QString::fromStdString(ref.measurementGroupId)},
+        {"semantic_proof_id",QString::fromStdString(ref.semanticProofId)},{"raw_potential",ref.rawPotential}});
+    write("boundary-math.json",QJsonObject{{"kind","native_composite_fixture_boundary_math"},{"schema_version",1},
+        {"reference_complete",bool(service.References())},{"references",references},{"outcome",TrainingStatusName(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"certificate",service.Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Certificate())):QJsonValue(QJsonValue::Null)}});
+}
+template<class Owner> const NativeCompositeArchiveDocument& ActualServiceArchive() {
+    // One real native service execution per topology/process. Later adversarial
+    // cases replay immutable exported data; they do not synthesize waveforms.
+    static std::optional<NativeCompositeArchiveDocument> archive;if(!archive) {
+        NativeCompositeFixture<Owner> f(2000,false,64,false,true);ServiceStart(f,ServicePlan(f));ServiceTicks(f);
+        const auto& service=f.owner->NativeTrainingController();Require(service.Outcome()==TrainingStatus::Exact,service.Reason().c_str());
+        archive=EncodeNativeCompositeTrainingArchive(service);const auto* name=NativeCompositeFixture<Owner>::branch?"branch-service":"classic-service";
+        SaveCompositeArchive(*archive,name);SaveCompositeBoundary(f,name);
+    }return *archive;
+}
+template<class Owner> void ArchiveRoundtrip() {
+    const auto& archive=ActualServiceArchive<Owner>();const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document,[&](const QString& path){return archive.primary.at(path);});
+    EXPECT_EQ(decoded.Document(),archive.document);EXPECT_EQ(decoded.ReferenceGroups().size(),2u);EXPECT_EQ(decoded.FinalGroups().size(),2u);
+    EXPECT_EQ(decoded.Records().size(),archive.document["records"].toArray().size());
+    const auto bytes=QJsonDocument(archive.document).toJson(QJsonDocument::Compact);EXPECT_NO_THROW(DecodeNativeCompositeTrainingArchive(bytes));
+}
+void MutateFirstRecord(QJsonObject& archive,const std::function<void(QJsonObject&)>& change) {
+    auto records=archive["records"].toArray();auto record=records[0].toObject();change(record);records[0]=record;archive["records"]=records;RebindArchive(archive);
+}
+void ExpectArchiveReject(const std::function<void(QJsonObject&)>& change) {
+    auto artifact=ActualServiceArchive<NNeuronTimeLearner>().document;change(artifact);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(artifact),std::invalid_argument);
+}
+void ArchiveRename() {
+    const auto& source=ActualServiceArchive<NNeuronTimeLearner>();auto renamed=source.document;auto records=renamed["records"].toArray();std::map<QString,QString> names;
+    for(int i=0;i<records.size();++i){auto record=records[i].toObject();auto raw=record["raw_trials"].toArray();auto native=record["native_group"].toObject();auto traces=native["traces"].toArray();
+        for(int j=0;j<raw.size();++j){auto item=raw[j].toObject();auto ref=item["primary_ref"].toObject();const auto old=ref["relative_path"].toString();const auto name="renamed/"+old;
+            names.emplace(name,old);ref["relative_path"]=name;item["primary_ref"]=ref;raw[j]=item;auto trace=traces[j].toObject();trace["relative_path"]=name;traces[j]=trace;}
+        record["raw_trials"]=raw;native["traces"]=traces;record["native_group"]=native;records[i]=record;}
+    renamed["records"]=records;RebindArchive(renamed);EXPECT_NE(renamed["artifact_document_sha256"],source.document["artifact_document_sha256"]);
+    const auto decoded=DecodeNativeCompositeTrainingArchive(renamed,[&](const QString& name){return source.primary.at(names.at(name));});
+    ASSERT_EQ(decoded.Records().size(),source.document["records"].toArray().size());for(int i=0;i<records.size();++i)
+        EXPECT_EQ(QString::fromStdString(decoded.Records()[i].semanticProofId),records[i].toObject()["measurement"].toObject()["semantic_proof_id"].toString());
+}
+void PartialArchive() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);ServiceStart(f,ServicePlan(f));bool stopped=false;
+    ServiceTicks(f,[&](){if(f.rawSamples && !stopped){stopped=true;f.owner->IsNeedToTrain.SetDataDirect(false);}});
+    ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);
+    auto archive=EncodeNativeCompositeTrainingArchive(f.owner->NativeTrainingController());SaveCompositeArchive(archive,"classic-partial");SaveCompositeBoundary(f,"classic-partial");
+    const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document);ASSERT_EQ(decoded.Records().size(),1u);
+    EXPECT_FALSE(decoded.Records()[0].consumed);EXPECT_TRUE(decoded.Records()[0].semanticProofId.empty());EXPECT_TRUE(decoded.ReferenceGroups().empty());EXPECT_TRUE(decoded.FinalGroups().empty());
+    MutateFirstRecord(archive.document,[](auto& r){r["consumed"]=true;r["training_requested_at_consume"]=true;});
+    EXPECT_THROW(DecodeNativeCompositeTrainingArchive(archive.document),std::invalid_argument);
+}
+}
+TEST(NativeCompositeArchive,ClassicActualServiceStrictReplay){ArchiveRoundtrip<NNeuronTimeLearner>();}
+TEST(NativeCompositeArchive,BranchActualServiceStrictReplay){ArchiveRoundtrip<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeArchive,CsvRenameChangesDocumentOnly){ArchiveRename();}
+TEST(NativeCompositeArchive,MissingExternalPrimaryCannotFallBack){const auto& a=ActualServiceArchive<NNeuronTimeLearner>();EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a.document,[](const QString&){return QByteArray{};}),std::invalid_argument);}
+TEST(NativeCompositeArchive,ChangedExternalPrimaryRejected){const auto& a=ActualServiceArchive<NNeuronTimeLearner>();EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a.document,[&](const QString& p){return a.primary.at(p)+"0";}),std::invalid_argument);}
+TEST(NativeCompositeArchive,ExtraEmbeddedBlobRejected){ExpectArchiveReject([](auto& a){auto blobs=a["primary_blobs"].toObject();const QByteArray bytes="unreferenced";blobs[QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())]=QJsonObject{{"bytes",double(bytes.size())},{"base64",QString::fromLatin1(bytes.toBase64())}};a["primary_blobs"]=blobs;RebindArchive(a);});}
+TEST(NativeCompositeArchive,BooleanSchemaRejected){ExpectArchiveReject([](auto& a){a["schema_version"]=true;RebindArchive(a);});}
+TEST(NativeCompositeArchive,BooleanCounterRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto c=r["counters"].toObject();c["native_probes"]=true;r["counters"]=c;});});}
+TEST(NativeCompositeArchive,ChangedAttemptNamespaceRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){r["attempt_id"]="other-attempt";});});}
+TEST(NativeCompositeArchive,ChangedCandidateModelRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto c=r["candidate_binding"].toObject();c["storage_images_sha256"]="changed";r["candidate_binding"]=c;r["candidate_witness_id"]=NmsdkTools::CanonicalModelDataSha256(c);});});}
+TEST(NativeCompositeArchive,ChangedModelEpochRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto q=r["logical_request"].toObject();q["model_epoch"]=2;r["logical_request"]=q;});});}
+TEST(NativeCompositeArchive,ChangedActualOriginRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto m=r["measurement"].toObject();m["actual_origin_time"]=m["actual_origin_time"].toDouble()+.01;r["measurement"]=m;});});}
+TEST(NativeCompositeArchive,ChangedGeometryPolicyRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto policy=r["geometry_policy"].toObject();policy["repeatability_absolute"]=.5;r["geometry_policy"]=policy;});});}
+TEST(NativeCompositeArchive,ChangedMeasuredPeakRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto m=r["measurement"].toObject();m["raw_potential"]=m["raw_potential"].toDouble()+1.;r["measurement"]=m;});});}
+TEST(NativeCompositeArchive,ChangedActualEventTimestampRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto raw=r["raw_trials"].toArray();auto item=raw[0].toObject();auto events=item["actual_stimuli"].toArray();auto event=events[0].toObject();event["time"]=event["time"].toDouble()+.0005;events[0]=event;item["actual_stimuli"]=events;raw[0]=item;r["raw_trials"]=raw;});});}
+TEST(NativeCompositeArchive,ChangedRawSpecificationRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto raw=r["raw_trials"].toArray();auto item=raw[0].toObject();auto spec=item["actual_specification"].toObject();spec["begin"]=spec["begin"].toDouble()+.0001;item["actual_specification"]=spec;raw[0]=item;r["raw_trials"]=raw;});});}
+TEST(NativeCompositeArchive,MissingControlRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto raw=r["raw_trials"].toArray();raw.removeAt(1);r["raw_trials"]=raw;});});}
+TEST(NativeCompositeArchive,DuplicateControlRejected){ExpectArchiveReject([](auto& a){MutateFirstRecord(a,[](auto& r){auto raw=r["raw_trials"].toArray();raw[1]=raw[0];r["raw_trials"]=raw;});});}
+TEST(NativeCompositeArchive,StaleCurrentAttemptFinalsRejected){ExpectArchiveReject([](auto& a){a["current_attempt_id"]="another-current-attempt";auto c=a["counters"].toObject();c["attempt"]=QJsonObject{{"logical_groups",0},{"native_probes",0},{"sampled_frames",0}};a["counters"]=c;RebindArchive(a);});}
+TEST(NativeCompositeArchive,ActualPartialStopNeverPromotes){PartialArchive();}
+
+namespace {
+template<class Owner> void SaveGrowthGroup(NativeCompositeFixture<Owner>& f,const char* stage) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const std::string relative=std::string(NativeCompositeFixture<Owner>::branch?"branch-growth/":"classic-growth/")+stage;
+    const auto base=QString::fromLocal8Bit(output)+"/"+QString::fromStdString(relative);Require(QDir().mkpath(base),"growth_output_directory");
+    const auto write=[&](const QString& name,const QByteArray& bytes){QFile file(base+"/"+name);Require(file.open(QIODevice::WriteOnly|QIODevice::NewOnly),"growth_output_new_only");
+        Require(file.write(bytes)==bytes.size() && file.flush(),"growth_output_write");};
+    const auto& group=*f.attempt->Group();std::vector<const MatchedOmissionTrace*> traces{&group.witness.fullBefore};
+    for(const auto& t:group.witness.omitEachInput)traces.push_back(&t);traces.push_back(&group.witness.fullAfter);
+    MatchedOmissionPrimary primary;std::vector<QString> paths;for(std::size_t i=0;i<traces.size();++i) {
+        const auto path=i==0?QString("full-before.csv"):i+1==traces.size()?QString("full-after.csv"):QString("omit-%1.csv").arg(qulonglong(i-1));
+        paths.push_back(path);const auto bytes=EncodeMatchedOmissionPrimaryTrace(*traces[i],group.packets[i]);primary.emplace(path,bytes);write(path,bytes);
+    }
+    write("matched-witness.json",QJsonDocument(EncodeMatchedOmissionEvidence(group,paths,primary)).toJson());
+    const auto& window=f.protocol.compositeMeasurement->inputWindows[0];write("declared-window.json",QJsonDocument(QJsonObject{
+        {"kind","native_composite_window_limitation_fixture"},{"schema_version",1},{"diagnostic_only",true},{"training_certificate_eligible",false},
+        {"source_binding",f.attempt->SourceBinding()},{"source_origin",QString::fromStdString(f.attempt->SourceOrigin())},
+        {"assigned_input",0},{"window_begin_offset",window.beginOffset},{"window_end_offset",window.endOffset},
+        {"geometry_policy",EncodeCompositeGeometryPolicy(f.protocol.compositeMeasurement->geometryPolicy)},
+        {"selection",f.attempt->Selection()?QJsonValue(EncodeNativeCompositeSelection(*f.attempt->Selection())):QJsonValue(QJsonValue::Null)}}).toJson());
+    SaveCompositeBoundary(f,relative.c_str());
+}
+template<class Owner> void GrowthLeavesInitialDeclaredWindow() {
+    NativeCompositeFixture<Owner> f(2000,false,16,false,true);
+    f.Run(f.Request(0,"growth-initial","growth-initial/0"),CompositeMeasurementPurpose::Reference);
+    SaveGrowthGroup(f,"initial-broad");ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    const auto initial=*f.attempt->Selection()->geometry->measuredMaximum;
+    const double initialOffset=initial.time-f.attempt->Group()->witness.fullBefore.observation.begin;
+    // Declared NOW, before the edit and either subsequent independent group.
+    // This is a geometry window, not a synchronization/training tolerance.
+    const CompositeInputWindow initialWindow{initialOffset-.001,initial.plateauEnd-f.attempt->Group()->witness.fullBefore.observation.begin+.001};
+    const auto broadWindow=f.protocol.compositeMeasurement->inputWindows[0];
+    const auto resetAttempt=[&](){f.attempt.reset();const auto& c=f.protocol.compositeMeasurement->contextPolicy;
+        f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,f.protocol,
+            CompositeAttemptLimits{16,64,16*c.maximumTotalSamples,120.,1800.},f.Time(),Wall());};
+    f.protocol.compositeMeasurement->inputWindows[0]=initialWindow;resetAttempt();
+    f.Run(f.Request(0,"growth-initial-tight","growth-initial-tight/0"),CompositeMeasurementPurpose::Reference);
+    SaveGrowthGroup(f,"initial-tight");ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    f.attempt.reset();auto parameters=f.owner->ReadNativeParameters();ASSERT_EQ(parameters[0].length,2);
+    parameters[0].length=3;const auto changed=f.owner->ApplyNativeParameters(parameters);
+    ASSERT_EQ(changed.status,NativeEditStatus::Applied)<<changed.reason;
+    f.protocol.compositeMeasurement->inputWindows[0]=broadWindow;
+    resetAttempt();f.Run(f.Request(0,"growth-wide","growth-wide/0"),CompositeMeasurementPurpose::Reference);
+    SaveGrowthGroup(f,"after-growth-wide");ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    const auto shifted=*f.attempt->Selection()->geometry->measuredMaximum;
+    const auto shiftedOffset=shifted.time-f.attempt->Group()->witness.fullBefore.observation.begin;
+    ASSERT_GT(shiftedOffset,initialWindow.endOffset); // Actual native measurement, no delay prediction.
+    f.protocol.compositeMeasurement->inputWindows[0]=initialWindow;resetAttempt();
+    f.Run(f.Request(0,"growth-initial-window","growth-initial-window/0"),CompositeMeasurementPurpose::Reference);
+    SaveGrowthGroup(f,"after-growth-initial-window");ASSERT_TRUE(f.attempt->Selection());EXPECT_EQ(f.attempt->Selection()->status,NativeDeclaredWindowBasinStatus::Completed);
+    ASSERT_TRUE(f.attempt->Selection()->geometry);EXPECT_NE(f.attempt->Selection()->geometry->validity,DeclaredWindowBasinValidity::Valid);
+    EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectionReason().empty());
+    // These deliberately independent measurement families demonstrate a fixed
+    // window limitation. They do not relabel an old capture or authorize Train.
+}
+}
+TEST(NativeCompositeWindowLimitation,ClassicActualGrowthLeavesInitialWindow){GrowthLeavesInitialDeclaredWindow<NNeuronTimeLearner>();}
+TEST(NativeCompositeWindowLimitation,BranchActualGrowthLeavesInitialWindow){GrowthLeavesInitialDeclaredWindow<NNeuronTimeLearnerBranch>();}
+
+namespace {
+void ActualC0Archive() {
+    NativeCompositeFixture<NNeuronTimeLearnerBranch> f(2000,false,64,true,true);ServiceStart(f,ServicePlan(f));ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    const auto archive=EncodeNativeCompositeTrainingArchive(service);SaveCompositeArchive(archive,"branch-C0");SaveCompositeBoundary(f,"branch-C0");
+    const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document);for(const auto& record:decoded.Records()) {
+        ASSERT_EQ(record.nativeTrialWitnessIds.size(),4u);ASSERT_FALSE(record.capacitanceWitnesses.empty());
+        for(const auto& [trial,id]:record.nativeTrialWitnessIds)EXPECT_EQ(record.capacitanceWitnesses.at(id).modelRevision,record.logical.baseModelRevision);
+    }
+}
+void ActualWarmArchive() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);auto plan=ServicePlan(f);ServiceStart(f,plan);ServiceTicks(f);
+    ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::Exact);const auto initial=f.owner->NativeTrainingController().CompositeInitialConfiguration();
+    const auto refs=f.owner->NativeTrainingController().CompositeReferenceGroupIds();f.owner->Reset();f.owner->BeginNativeTraining(plan);ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+    const auto archive=EncodeNativeCompositeTrainingArchive(service);SaveCompositeArchive(archive,"classic-warm");SaveCompositeBoundary(f,"classic-warm");
+    const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document);EXPECT_EQ(decoded.ReferenceGroups(),refs);EXPECT_EQ(service.CompositeInitialConfiguration(),initial);
+    ASSERT_FALSE(decoded.Records().empty());EXPECT_NE(decoded.Records().front().attemptId,decoded.CurrentAttemptId());
+    const auto counters=archive.document["counters"].toObject();EXPECT_EQ(counters["archive"].toObject()["groups"].toDouble(),
+        counters["attempt"].toObject()["logical_groups"].toDouble()+2.);
+}
+void ActualAmbiguousArchive() {
+    NativeCompositeFixture<NNeuronTimeLearnerBranch> f(2000,true,64,false,true);ServiceStart(f,ServicePlan(f));ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();EXPECT_NE(service.Outcome(),TrainingStatus::Exact);EXPECT_FALSE(service.Certificate());
+    const auto archive=EncodeNativeCompositeTrainingArchive(service);SaveCompositeArchive(archive,"branch-ambiguous");SaveCompositeBoundary(f,"branch-ambiguous");
+    const auto decoded=DecodeNativeCompositeTrainingArchive(archive.document);ASSERT_FALSE(decoded.Records().empty());const auto& record=decoded.Records().back();
+    ASSERT_TRUE(record.selection);ASSERT_TRUE(record.selection->geometry);EXPECT_NE(record.selection->geometry->validity,DeclaredWindowBasinValidity::Valid);
+    EXPECT_FALSE(record.consumed);EXPECT_TRUE(record.semanticProofId.empty());EXPECT_TRUE(decoded.FinalGroups().empty());
+}
+}
+TEST(NativeCompositeArchive,ActualBoundC0RawWitnessesBindUnmutedBase){ActualC0Archive();}
+TEST(NativeCompositeArchive,ActualWarmReferencesAreNotNewAttemptWork){ActualWarmArchive();}
+TEST(NativeCompositeArchive,ActualMergedAmbiguousGroupStaysDiagnostic){ActualAmbiguousArchive();}
+
+namespace {
+template<class Owner> void SourceChangedBeforeConsume() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto plan=ServicePlan(f);bool changed=false;
+    plan.beforeCompositeConsume=[&](const auto& record){if(record.purpose==CompositeMeasurementPurpose::Final && !changed){
+        changed=true;const auto revision=f.Revision();const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        source->Amplitude=1.5;EXPECT_EQ(f.Revision(),revision); // Source numbers are outside the neuron's boundary-port identity.
+    }};
+    ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();EXPECT_TRUE(changed);
+    EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);EXPECT_FALSE(service.Certificate());EXPECT_TRUE(service.CompositeFinalGroupIds().empty());
+    ASSERT_FALSE(service.CompositeMeasurements().empty());EXPECT_FALSE(service.CompositeMeasurements().back().consumed);
+    EXPECT_NE(service.Reason().find("source_boundary_changed"),std::string::npos);
+}
+}
+TEST(NativeCompositeSourceGuard,ClassicActualSourceChangedBetweenCloseAndConsume){SourceChangedBeforeConsume<NNeuronTimeLearner>();}
+TEST(NativeCompositeSourceGuard,BranchActualSourceChangedBetweenCloseAndConsume){SourceChangedBeforeConsume<NNeuronTimeLearnerBranch>();}
