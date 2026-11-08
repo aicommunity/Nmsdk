@@ -99,6 +99,46 @@ def _disk_device(path):
 
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
+    @classmethod
+    def open_existing(cls, database, *, managed_units=False):
+        """Reopen this worker's ledger using its persisted quantity policy.
+
+        Never creates a ledger or migrates its schema. Managed-unit ownership
+        remains an explicit caller choice; discovering schema3 cannot enable it.
+        """
+        _identity()
+        _require(type(managed_units) is bool, 'invalid_managed_unit_policy')
+        requested = Path(database).absolute()
+        _require(not requested.is_symlink(), 'reservation_database_symlink')
+        _require(requested.is_file(), 'reservation_existing_database_required')
+        path = requested.resolve(strict=True)
+        try:
+            connection = sqlite3.connect(path.as_uri() + '?mode=ro', uri=True, timeout=10)
+            try:
+                metadata = dict(connection.execute('SELECT key,value FROM metadata'))
+            finally:
+                connection.close()
+        except sqlite3.Error as error:
+            raise ReservationError('reservation_existing_metadata_unreadable') from error
+        schema = metadata.get('schema_version')
+        _require(schema in ('1', '2', '3') and
+                 metadata.get('worker_host') == socket.gethostname(),
+                 'reservation_ledger_schema_or_worker_changed')
+        _require(managed_units == (schema == '3'), 'reservation_existing_managed_policy_mismatch')
+        capacity = None
+        expected = {'schema_version', 'worker_host'}
+        if schema != '1':
+            expected |= {'capacity', 'disk_device'}
+            try:
+                capacity = _quantities(json.loads(metadata.get('capacity', 'null')),
+                                       capacity=True, managed_units=managed_units)
+            except (ValueError, TypeError) as error:
+                raise ReservationError('reservation_invalid_persisted_capacity') from error
+            _require(metadata.get('disk_device') == str(path.parent.stat().st_dev),
+                     'reservation_database_filesystem_changed')
+        _require(set(metadata) == expected, 'reservation_existing_metadata_keys_changed')
+        return cls(requested, capacity=capacity, managed_units=managed_units)
+
     @property
     def capacity(self):
         return dict(self._capacity) if self._capacity is not None else None
