@@ -259,7 +259,7 @@
       "host": "10.245.1.11",
       "root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
       "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
-      "state": "running_build_at_kernel_observation",
+      "state": "closed_cpp_prepared_cancellation_notification_failure",
       "unit": "timelearner-2d975306-4b77-4b3a-806d-3dc49a434a16.service",
       "invocation_id": "48a5c775770248f194c3ef5670f4b1e5",
       "initial_main_pid": 2187248,
@@ -276,7 +276,19 @@
       "minimum_physical_free_bytes": 536870912,
       "budget_basis": "ElderCompositeArchiveA3WarmDiskBudgetReview.json",
       "whole_gate_accepted": false,
-      "scientific_verdict": null
+      "scientific_verdict": null,
+      "actual_cpp_tests_observed": 13,
+      "actual_cpp_tests_passed": 12,
+      "actual_cpp_failed_cases": 1,
+      "not_run": 193,
+      "failed_case": "NativeCompositeService/ClassicPreparedStopHasSingleRawResult",
+      "failure_reason": "observationSink deliveries0 expected1; cancelled raw trial retained",
+      "negative_evidence_commit": "ec2935e8511f89da6457e896dba21099037b796c",
+      "collector_mapping_negative_commit": "90af73022c3c0955eaafa368ef5a7e00702147b1",
+      "receipt": "ElderCompositeArchiveA3NegativeVerification.json",
+      "kernel_groups_closed": 14,
+      "lease_released": true,
+      "actual_composite_archives_exported": 0
     }
   ],
   "prepared_feature": {
@@ -319,10 +331,11 @@
     "elder": {
       "root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
       "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
-      "state": "normal_a3_running_build",
+      "state": "idle_after_cancellation_notification_failure",
       "source_cpp_sha256": "44acf89749caa4ff7644ffbba6726a60a8f6b8de91398679e52a61ecd39f1cca",
       "full_scope_preserved": true,
-      "disk_budget_review_pending": false
+      "disk_budget_review_pending": false,
+      "next_source_fix_pending": true
     },
     "m40": {
       "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
