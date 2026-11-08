@@ -135,6 +135,8 @@ Service хранит controller selection refs/finals и связывает их
 
 Private service commit acceptance обновляет journal record только после typed accepted counter delta и последнего fresh Need/lease check; public bool не mint authority. Service archive2 writer экспортирует эти реальные consumed/reference/final selections. Actor-only STEP2 writer по-прежнему не притворяется completed Train. Partial/native rejected groups сохраняются, но не становятся measurements/certificates.
 
+Для initial references новое5 значение `consumed` означает **включено в COMPLETE allN ReferenceSet**, а не просто «один input успешно измерен/staged». До полного release каждый measured reference record остаётся `consumed=false` (и не имеет claimed Need-at-consume=true), хотя его actual valid geometry/proof сохраняются. После `CaptureComposite` + `CompleteCandidateWindowReferences` все selected N records атомарно получают consumed/Need-at-consume=true; только затем начинается search. Нельзя перенести legacy4 per-input `record.consumed=true` в5: strict archive2 справедливо отвергает такую продвинутую partial family. При Reset/stop до allN retained measured prefix — diagnostic/staged, usable seed set отсутствует.
+
 ### Edits, reset, retarget и import
 
 - Между probes/группами параметры меняет только existing owner native editor. После Applied — actual readback/revision, model epoch, invalidation all Branch anchors/finals, новая live guard generation; original source/family/seed/P0 неизменны. Semantic attempt остаётся прежним.
