@@ -162,7 +162,10 @@ def _worker(request_path):
     request = validate_request(_json(raw));base, job = _paths(request)
     context_raw, _ = _frozen(job/'launch-context.json', 1024*1024)
     context = _json(context_raw);runtime = _json(_frozen(job/'process/contained/runtime.json', 1024*1024)[0])
-    require(runtime['source_closure']['launch_context_sha256'] == hashlib.sha256(context_raw).hexdigest(),
+    require(runtime['app_ini']['path'] == str(Path(request_path)) and
+            runtime['app_ini']['sha256'] == hashlib.sha256(raw).hexdigest() and
+            runtime['source_closure']['tool_root'] == request['tool_commit'] and
+            runtime['source_closure']['launch_context_sha256'] == hashlib.sha256(context_raw).hexdigest(),
             'owned_job_launch_context_changed')
     unit_request = _json(_frozen(job/'process/contained/request.json', 1024*1024)[0])
     require(context['client'] == unit_request['controller'] and context['boot_id'] == unit_request['boot_id'] ==
