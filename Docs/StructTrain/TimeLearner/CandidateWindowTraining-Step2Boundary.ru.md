@@ -22,3 +22,7 @@ Pulse source pin этого review: `5e4faf0d94c2ea74dcc0f8e38a3e3f085eb124b1` (
 Root helper correction6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e уже включён отдельным merge commit47e86014391d887b63b7436249b7b64e1df6ff42. Шесть future composite inventories сверены с точными Git-index bytes merged CompositeTraining TU SHA256 `db1aca276bed90b08712f3af81ea61508cc14de7719118ec10a42c5b61c35245`. Это source metadata, а не новый runtime результат.
 
 Локально выполняются только Git/diff/text checks; C++ compile/syntax-only и numerical tests не запускались. Никакие server source/build/runtime caches не изменялись.
+
+## Механическая точка перед spec2
+
+Pulse `d6888c9309a797ab8c3e1cc4c06907105fc1d883` выносит неизменные `PatternHash`/`CheckNativeEnvelope` из `NativeDeclaredWindowBasinAssignment.cpp` в private `NativeBasinValidation.h/.cpp`. Текст старого selector body проверен на точное равенство после единственной квалификации helper call; порядок проверок/reasons/политика1 не меняются. Это отдельный source pin для future A/B SDK gate, runtime acceptance отсутствует. Новый .cpp попадает в существующий Pulse production glob, pure40 target его не компилирует. Следующий spec2 path обязан вызывать этот общий helper, а не повторять native envelope checks или анализировать whitelist v1 outcomes.
