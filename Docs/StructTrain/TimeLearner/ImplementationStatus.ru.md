@@ -4,6 +4,8 @@
 
 Дополнение08.11: prepared source для проверки нового control-lifetime собран в двух private descendants с одинаковыми worker/fixtures: corrected E11/Pulseb287 и unfixed BB1/Pulse800. Старые15s fixtures заменены merge-коммитом проверенной линии17db; два diagnostic-only IDs раскрыты отдельно. Ни targeted20, ни общий candidate-window regression пока не запускались. [Source review, ограничения и точные commits](CandidateWindowTypedCoreSourceReview-20261108.ru.md). [Конкретный Classic-график прослежен до исходного архива](ClassicFlatLTMetadataTrace-20261108.ru.md): отдельной LTMembrane нет, причина flat LT panel остаётся неизвестной. Это metadata/source evidence, не новые научные результаты.
 
+Corrected source уже доставлен в отдельную M40 SDK-копию: восемь HEAD/gitlinks,4020 Git-verified файлов и29 same-SDK imports; actual шестифайловый inventory492 = selected490 + diagnostic2. [Фактическая подготовка и компактное evidence](ManualControlFreshSourcePreparation-20261108.ru.md). CMake/native/model execution отсутствуют; paired unfixed копия пока подготовлена только в Git. Работающий baseline248 не изменён.
+
 08.11: механическое выделение общего контроллера принято на M40:97/97
 (74 bounded +23 Final/Clock). Ошибочная постановка A1 сохранена в Git отдельно.
 Новый core143 A1 остановлен при компиляции до тестов; исправленный A2 принят
