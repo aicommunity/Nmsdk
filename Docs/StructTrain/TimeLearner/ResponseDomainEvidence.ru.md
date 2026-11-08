@@ -18,7 +18,7 @@ features/graph. Исключительность окна не становит�
 origin. Physical path mapping без отдельного effective graph не считается
 независимо подтверждённым; OS/runtime provenance проверяется внешним runner.
 
-Полная серверная приёмка codec/reader ещё не выполнена. Первоначальные 7 integrity
+Полная матрица приёмки codec/reader ещё не выполнена. Первоначальные 7 integrity
 и4 native cases прошли на Elder, но относятся к предшествующему снимку:
 [receipt](NativeResponseDomainInitialVerification.json). В нём review нашёл
 недостаточную сверку измерений replay. Исправленная версия сравнивает все
@@ -52,3 +52,21 @@ identity. Текущий compiled root0e3d5bca предшествует этом
 отдельный attempt/runtime. Metadata очистки сохранены на сервере в
 `readbacks/s00-runtime-space-recovery-elder-20261108-a1` и должны войти
 в итоговую публикацию этого подэтапа.
+
+Normal-проверка исправленного capture/codec на Elder завершена:10 integrity/
+codec checks и4 native cases Classic/Branch на2000/20000 Гц без skipped.
+Затем независимый reader прошёл12 тестов и пересчитал все4 настоящих C++
+пакета по сохранённым CSV, включая features, domain graph и прежние recorder
+diagnostics. Source revisions producer и consumer записаны раздельно.
+[Сводная независимая квитанция](ResponseDomainEvidenceNormalVerification.json),
+evidence `b10750b5cde0c9977b0d1861f3c205a4ef3fdd07` содержит270 проверенных
+членов архива, primary, два отказа по ресурсам и receipt очистки диска.
+Группы закрыты, leases released, текущий и прежний runtime не изменились.
+
+Это согласованность production producer и независимого consumer на данной
+матрице, не доказательство причинной принадлежности пика. Reader отдельно
+возвращает false для causal origin, OS execution и независимой проверки путей
+физического графа; runtime-происхождение подтверждается внешними native gates.
+Совместный old/new output gate выполняется отдельно на root с исправлением
+идентификаторов. ASan новой capture/codec связки, расширенная N/fault матрица,
+визуальный отчёт и интеграция Console/контроллера остаются открытыми.

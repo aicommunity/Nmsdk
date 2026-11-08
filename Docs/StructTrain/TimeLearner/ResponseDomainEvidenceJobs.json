@@ -14,9 +14,10 @@
     "output": "/home/user/timelearner-refactor/readbacks/s07-domain-evidence-elder-a2",
     "checks_planned": 10,
     "native_cases_planned": 4,
-    "last_observed": "capture_and_codec10_and_native3_passed_branch20000_still_bound_group_live",
+    "last_observed": "closed_capture_codec10_native4_passed_lease_released",
     "initial_attempt": "s07-domain-evidence-elder-a1",
-    "initial_attempt_outcome": "refused_before_build_insufficient_disk_space"
+    "initial_attempt_outcome": "refused_before_build_insufficient_disk_space",
+    "evidence_commit": "b10750b5cde0c9977b0d1861f3c205a4ef3fdd07"
   },
   "reader_root": "b22e3e443753bca3aa856b19a0e6948d28823b50",
   "reader_checks_planned_per_worker": 12,
@@ -31,12 +32,30 @@
       "host": "10.245.1.11",
       "job": "s07-domain-reader-elder-a1",
       "last_observed": "refused_capacity_before_tests_while_native_job_running"
+    },
+    {
+      "host": "10.245.1.11",
+      "job": "s07-domain-reader-elder-a2",
+      "last_observed": "12_unit_and_4_actual_cpp_primary_packets_passed_closed_released",
+      "evidence_commit": "b10750b5cde0c9977b0d1861f3c205a4ef3fdd07"
     }
   ],
-  "cross_language_primary_packet_checks_complete": false,
+  "cross_language_primary_packet_checks_complete": true,
   "accepted": false,
   "training_certificate_eligible": false,
   "whole_plan_complete": false,
   "joint_old_new_artifact_identity_check_complete": false,
-  "artifact_identity_fix_root": "009afde8b225c3e5dd86261c1afb095ab745817a"
+  "artifact_identity_fix_root": "009afde8b225c3e5dd86261c1afb095ab745817a",
+  "joint_output_job": {
+    "host": "10.245.1.11",
+    "job": "s07-domain-joint-elder-a1",
+    "compiled_root": "1d481d2bd3f2b118abed5b55a4ad1f8be4a5a7e3",
+    "unit": "timelearner-89e7dadb-1c00-4e81-8065-9bff59cece46.service",
+    "invocation_id": "b78668fdecad42479826adfa0554581b",
+    "initial_main_pid": 1614995,
+    "initial_start_ticks": "367730821",
+    "request_sha256": "a82a76767b5ea4829fab7117050478ec39be4f9d76affd961c3d90b00836cb9a",
+    "last_observed": "kernel_bound_worker_live_compiling",
+    "initial_source_delivery_attempt": "invalid_revision_rejected_before_test_launch_fresh_corrected_source_delivered"
+  }
 }
