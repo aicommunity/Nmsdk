@@ -2,7 +2,7 @@
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
   "suite_id": "windows-owned-job-drain-v1",
-  "package_fingerprint": "55758b4b87767000392e3cad6ae92fd2630f812e54d0f35dbddec480dc6f797c",
+  "package_fingerprint": "4d166c7fd5d299b50ae649693def6dc0fc160e984eba17e582d388b0d07d7ae9",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_windows_process",
     "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain"
@@ -32,6 +32,7 @@
     "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_cancellation_during_drain_remains_a_failure",
     "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_nonzero_main_is_never_promoted_by_a_grace",
     "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_explicit_signed_zero_still_refuses_remaining_children",
+    "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_injected_open_failure_for_a_real_owned_child_cannot_become_success",
     "Scripts.StructTrain.TimeLearner.tests.test_windows_job_drain.WindowsJobDrainTest.test_invalid_unsigned_or_mismatched_policy_never_creates_output"
   ],
   "fixtures": {}

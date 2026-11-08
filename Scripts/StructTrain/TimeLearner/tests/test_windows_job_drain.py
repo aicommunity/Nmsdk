@@ -7,6 +7,7 @@ import sys
 import threading
 import time
 import unittest
+from unittest.mock import patch
 
 from ..windows_process import execute
 from ..native_evidence import EvidenceError
@@ -30,14 +31,15 @@ class WindowsJobDrainTest(unittest.TestCase):
             'build_flags':{'role':'actual_windows_owned_job_drain_fixture','windows_backend_sha256':backend['sha256']},
             'loader_environment':{k:os.environ.get(k) for k in ('PATH','QT_PLUGIN_PATH','QT_QPA_PLATFORM')}}
 
-    def manifest(self,seconds=None):
+    def manifest(self,seconds=None,fault_label=None):
         result=deepcopy(self.base)
         if seconds is not None:result['build_flags']['owned_job_drain_seconds']=seconds
+        if fault_label is not None:result['build_flags']['controlled_test_fault_injection']=fault_label
         result['runtime_identity']=runtime_content_identity(result);result['runtime_fingerprint']=digest_json(result['runtime_identity'])
         return result
 
-    def run_case(self,name,*,sleep=1.,seconds=None,wall=10,code=0,cancel=None,override=None):
-        manifest=self.manifest(seconds);output=self.root/name
+    def run_case(self,name,*,sleep=1.,seconds=None,wall=10,code=0,cancel=None,override=None,fault_label=None):
+        manifest=self.manifest(seconds,fault_label);output=self.root/name
         kwargs={} if seconds is None else {'owned_job_drain_seconds':seconds}
         if override is not None:kwargs['owned_job_drain_seconds']=override
         result=execute(manifest,['-B','-X','utf8',str(self.driver),'parent','--directory',str(output/'data'),
@@ -93,6 +95,20 @@ class WindowsJobDrainTest(unittest.TestCase):
         result,out=self.run_case('signed-zero',seconds=0.)
         self.assertEqual(result['execution'],'descendants_remaining');self.assertFalse(result['owned_job_drain']['natural_empty'])
         self.assertIn('owned_job_drain',json.loads((out/'request.json').read_text(encoding='utf-8')))
+
+    def test_injected_open_failure_for_a_real_owned_child_cannot_become_success(self):
+        # Real parent/child, limits, Job membership and cleanup remain in use.
+        # Only this query is fault-injected; this is not an observed OS denial.
+        import ctypes
+        def denied(_pid):ctypes.set_last_error(5);return None
+        with patch('Scripts.StructTrain.TimeLearner.windows_process._open_owned_process',side_effect=denied):
+            result,out=self.run_case('controlled-open-failure',sleep=30.,seconds=4.,fault_label='OpenProcess query deliberately returns NULL')
+        self.assertEqual(result['execution'],'process_error');self.assertEqual(result['validity'],'provenance_missing')
+        self.assertEqual(result['reason'],'owned_process_identity_unavailable')
+        self.assertFalse(result['owned_job_drain']['natural_empty'])
+        self.assertTrue(any(gap['alive_state']=='unknown' and gap['still_in_owned_job'] for gap in result['owned_job_drain']['gaps']))
+        request=json.loads((out/'request.json').read_text(encoding='utf-8'))
+        self.assertIn('controlled_test_fault_injection',request['runtime']['build_flags'])
 
     def test_invalid_unsigned_or_mismatched_policy_never_creates_output(self):
         for index,value in enumerate((True,False,-1.,float('nan'),float('inf'))):

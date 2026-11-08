@@ -162,12 +162,16 @@ def _job_drain_policy(manifest, seconds):
             'seconds': float(seconds), 'bounded_by_original_whole_wall': True}
 
 
-def _drain_owned_job(api, job, observed, *, policy, start, maximum_wall_seconds, cancel_file, output):
-    """Observe only live members of this job; never exempt an image or escapee."""
+def _open_owned_process(pid):
     from ctypes import wintypes as W
     kernel = C.WinDLL('kernel32', use_last_error=True)
     open_process = kernel.OpenProcess
     open_process.argtypes = (W.DWORD, W.BOOL, W.DWORD);open_process.restype = W.HANDLE
+    return open_process(0x1000|0x0400|0x0010|0x100000, False, pid)
+
+
+def _drain_owned_job(api, job, observed, *, policy, start, maximum_wall_seconds, cancel_file, output):
+    """Observe only live members of this job; never exempt an image or escapee."""
     entered = time.monotonic();whole_deadline = start+maximum_wall_seconds
     deadline = min(entered+policy['seconds'], whole_deadline)
     report = {**policy, 'entered_elapsed': entered-start, 'deadline_elapsed': deadline-start,
@@ -177,23 +181,23 @@ def _drain_owned_job(api, job, observed, *, policy, start, maximum_wall_seconds,
                                                 'deadline_elapsed': deadline-start})
     known = {};last = None
     while True:
+        pids = api.pids(job)
         now = time.monotonic()
         if cancel_file and Path(cancel_file).exists():reason = 'cancelled'
         elif now >= whole_deadline:reason = 'timeout'
+        elif now >= deadline:reason = 'descendants_remaining'
         else:reason = None
-        pids = api.pids(job)
         if pids != last:
             report['snapshots'].append({'elapsed': now-start, 'pids': pids});last = pids
-        if reason is None and not pids:
-            report.update(natural_empty=True, outcome='natural_empty', closed_elapsed=now-start)
-            return None, report
-        if reason is None and now >= deadline:reason = 'descendants_remaining'
         if reason:
             report.update(outcome=reason, remaining_pids=pids, ended_elapsed=now-start)
             return reason, report
+        if reason is None and not pids:
+            report.update(natural_empty=True, outcome='natural_empty', closed_elapsed=now-start)
+            return None, report
         for pid in pids:
             if time.monotonic() >= deadline:break
-            handle = open_process(0x1000|0x0400|0x0010|0x100000, False, pid)
+            handle = _open_owned_process(pid)
             try:
                 if not handle:raise OSError(C.get_last_error(), 'owned_process_open_failed')
                 member = api.W.BOOL();api.check(api.in_job(handle, job, C.byref(member)))
@@ -215,18 +219,21 @@ def _drain_owned_job(api, job, observed, *, policy, start, maximum_wall_seconds,
             except (OSError, RuntimeError, ValueError) as error:
                 # A disappearing process is a documented snapshot gap. A live
                 # owned process without identity/modules cannot be admitted.
-                try:alive = bool(handle) and api.running(handle)
-                except OSError:alive = True
+                alive = None
+                if handle:
+                    try:alive = api.running(handle)
+                    except OSError:pass
                 still_member = pid in api.pids(job)
                 report['gaps'].append({'pid': pid, 'elapsed': time.monotonic()-start,
-                                      'reason': str(error), 'still_alive_owned': alive and still_member})
+                    'reason': str(error), 'alive_state': 'unknown' if alive is None else 'alive' if alive else 'exited',
+                    'still_in_owned_job': still_member})
                 now = time.monotonic()
                 deadline_reason = ('cancelled' if cancel_file and Path(cancel_file).exists() else
                     'timeout' if now >= whole_deadline else 'descendants_remaining' if now >= deadline else None)
                 if deadline_reason:
                     report.update(outcome=deadline_reason, remaining_pids=api.pids(job))
                     return deadline_reason, report
-                if alive and still_member:
+                if still_member and alive is not False:
                     report.update(outcome='identity_unavailable', remaining_pids=api.pids(job))
                     return 'owned_process_identity_unavailable', report
             finally:
