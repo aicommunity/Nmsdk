@@ -9,8 +9,9 @@
 и интеграция service/package/CLI этой проверкой не подтверждаются.
 [Точные commits, handles и receipts](TypedCompositeTrainingJobs.json).
 Service/codecs/CLI остаются незавершённой интеграцией.
-[Composite206: Elder A1 остановлен на устаревшем ожидании теста;
-исправленная A2 готовится. Windows требует отдельной диагностики
+[Composite206: Elder A2 прошла core143 и остановилась на декларации service-пробы;
+Root-only исправление готово, следующая попытка готовится. M40 ASan206 работает
+на предыдущем pin. Windows требует отдельной проверки
 завершения дочерних процессов](CompositeArchive206AttemptStatus.ru.md).
 Новые шесть native-архивов пока не получены; Python-проверка их чтения
 ещё не выполнена.

@@ -188,7 +188,7 @@
       "host": "10.245.1.11",
       "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
       "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
-      "state": "running_at_kernel_observation",
+      "state": "closed_cpp_service_declaration_failure",
       "unit": "timelearner-16b927d0-4641-46de-a6e0-564e1342d82b.service",
       "invocation_id": "83b18c1595254c73bde6cd02ccb0e018",
       "initial_main_pid": 2114519,
@@ -197,7 +197,18 @@
       "expected_cpp_cases": 206,
       "last_observed_passed_cpp_cases": 100,
       "whole_gate_accepted": false,
-      "scientific_verdict": null
+      "scientific_verdict": null,
+      "actual_cpp_tests_observed": 144,
+      "actual_cpp_tests_passed": 143,
+      "actual_cpp_failed_cases": 1,
+      "not_run": 62,
+      "failed_case": "NativeCompositeService/ClassicCalculateMode0Exact",
+      "failure_reason": "native_composite_plan_protocol_mismatch",
+      "negative_evidence_commit": "153751c4b3a3b2c0a25f10540265b41233197f7c",
+      "receipt": "ElderCompositeArchiveA2NegativeVerification.json",
+      "kernel_groups_closed": 57,
+      "lease_released": true,
+      "actual_composite_archives_exported": 0
     },
     {
       "job_id": "s07-composite-archive-m40-asan-a1",
@@ -280,13 +291,19 @@
     "current_receipt": "ElderDuplicateFetchcontentRetentionA1Verification.json"
   },
   "composite_archive206_next_attempt": {
-    "state": "elder_normal_a2_and_m40_asan_a2_running_at_recorded_observations",
-    "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
-    "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
     "expected_cpp_cases": 206,
-    "cpp_source_sha256": "05f5cf15b64d6f16950db33ce6724dffd4c3435a5cac7514701dbfefb10ea49a",
-    "requires_disk_preflight": true,
-    "requires_new_runtime_and_request": true,
+    "elder": {
+      "root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+      "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "state": "preparing_after_service_fixture_correction",
+      "source_cpp_sha256": "44acf89749caa4ff7644ffbba6726a60a8f6b8de91398679e52a61ecd39f1cca",
+      "full_scope_preserved": true,
+      "disk_budget_review_pending": true
+    },
+    "m40": {
+      "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "state": "asan_a2_build_running_at_last_kernel_observation"
+    },
     "whole_gate_accepted": false
   }
 }
