@@ -1,0 +1,110 @@
+{
+  "kind": "native_last_final_reachability_diagnostic2",
+  "schema_version": 1,
+  "root": "f8f58334a8b203d017ada5e3d3300e6287286751",
+  "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+  "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "collector_tool_root": "dfd534da637e411bcce5eff8acc37f821069d9bf",
+  "host": "10.245.1.17",
+  "original_terminal_passed": true,
+  "built": true,
+  "expected_cpp_cases": 2,
+  "observed_JUnit_cases": 2,
+  "observed_failed_cases": 0,
+  "native_leaf_gates_observed": 2,
+  "fresh_closed_leaf_kernel_groups": 2,
+  "outer_kernel_closed": true,
+  "whole_worker_reservation_released": true,
+  "actual_source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-deadline-root-m40-a1",
+      "commit": "f8f58334a8b203d017ada5e3d3300e6287286751",
+      "files": 968
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-cancellation-pulse-m40-a1",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1/Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    }
+  ],
+  "actual_loaded_files_hash_verified": 74,
+  "four_protected_runtimes_unchanged": true,
+  "actual_diagnostics": [
+    {
+      "topology": "classic",
+      "primary": {
+        "bytes": 9575,
+        "sha256": "ec0cbdaafc41644d9739201354383f5f592c36dd1317253b4f42a28bf51bc9a4"
+      },
+      "groups": 6,
+      "maximum_record_elapsed": 20.67143876105547,
+      "maximum_callback_elapsed": 21.107970003969967,
+      "last_final_entered": true
+    },
+    {
+      "topology": "branch",
+      "primary": {
+        "bytes": 9569,
+        "sha256": "5f65757efb8782adf882a2c72c5511923e05f6336b1cf938cd5cd7cd26f8cc0d"
+      },
+      "groups": 6,
+      "maximum_record_elapsed": 15.673858559690416,
+      "maximum_callback_elapsed": 16.10850944602862,
+      "last_final_entered": true
+    }
+  ],
+  "full248_accepted": false,
+  "post_callback_deadline_tested": false,
+  "sleep": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "disk_guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "last": {
+      "time": 1794154361.537272,
+      "free_bytes": 340316332032,
+      "owned_scope_increment_bytes": 654618624,
+      "peak_owned_scope_increment_bytes": 654618624,
+      "outer_closed": true
+    },
+    "peak_owned_scope_increment_bytes": 654618624,
+    "minimum_free_bytes": 340316332032,
+    "outer_closed": true,
+    "all_recorded_leaf_groups_closed": true,
+    "leaf_groups": 2
+  },
+  "created_utc": "2026-11-08T16:14:30.820448+00:00"
+}
