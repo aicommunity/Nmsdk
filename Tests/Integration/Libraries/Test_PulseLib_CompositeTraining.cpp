@@ -103,7 +103,7 @@ public:
     std::string Revision() const {
         const auto n=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
         const auto g=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
-        const auto id=NmsdkTools::IdentifyModel(n,{{&g->Output,"burst"}});Require(id["valid"].toBool(),"composite_fixture_identity");
+        const auto id=NmsdkTools::IdentifyModel(n.Get(),{{&g->Output,"burst"}});Require(id["valid"].toBool(),"composite_fixture_identity");
         return id["sha256"].toString().toStdString();
     }
     VerificationRequest Request(std::size_t input,const std::string& run,const std::string& trial,std::size_t epoch=0) const {
