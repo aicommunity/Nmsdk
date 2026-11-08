@@ -52,7 +52,7 @@ Maintained native_preparation прошёл24/24 metadata tests на M40;
 [квитанция18](OwnedPythonJobsMetadata18Verification.json).
 Первый bootstrap17 завершился до тестов из-за file-versus-directory reservation;
 [отрицательная квитанция](OwnedPythonJobsMetadata17NegativeVerification.json).
-CanonicalSpec wiring и запуск maintained worker полного248 ещё выполняются.
+CanonicalSpec wiring проверен, полный248 на M40 запущен один раз (A3), результат ещё не принят.
 Сам worker отдельно прошёл12/12 metadata tests; [приёмка и следующий gate](NativeAcceptanceWorkerAcceptance-20261108.ru.md).
 Полный248, actual native archives и Train→Test этим не приняты.
 Root port условной диагностики конфигов принят143/143 на обоих Linux workers;

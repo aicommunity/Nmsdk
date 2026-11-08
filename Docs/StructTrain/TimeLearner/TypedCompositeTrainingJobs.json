@@ -407,6 +407,43 @@
       "scope": "four last-raw/last-composite deadline controls only; source suite64/source-selected250/binary inventory1624 are not executed full248",
       "whole_gate_accepted": false,
       "scientific_verdict": null
+    },
+    {
+      "job_id": "s07-composite-cancellation-m40-asan-a3",
+      "host": "10.245.1.17",
+      "root": "b6d0f752ca1668b6a908a435438020db58d2018e",
+      "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "state": "running_full_cohort_not_accepted",
+      "expected_cpp_cases": 248,
+      "expected_leaf_gates": 138,
+      "worker_module": "Scripts.StructTrain.TimeLearner.native_acceptance_worker",
+      "canonical_preparation_sha256": "c8d3d7d81ef893c14e53fac40638eeb2045518ec366af18edba4d8d66e97461f",
+      "preparation_evidence": "00889ef4b1fd62f3ec4fe723f125791a8620fc3c",
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a3",
+      "readback": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3",
+      "container": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container",
+      "supervisor_pid": 3420828,
+      "supervisor_start_ticks": "323717892",
+      "supervisor_POSIX_LF_sha256": "80590e8618e2b57d453fe06d583239694686248406a3a9174dac1ecb73afee53",
+      "job_file_sha256": "506dd87a8e1e91e2f4aaec69bcbf8e38e830eeb370a515f79f685ce6b9b8b450",
+      "canonical_file_sha256": "acc34d2a4c7d59b1fac36b9166c2de2e236d6b7dc59b58fbc450e6d1ff05fcef",
+      "kernel_binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "a85affc5a4f15ed3479b0240121645d9436640bde4f2680a9e481193ab0d6537",
+        "unit": "timelearner-536b9711-f70b-4676-8077-4bbd1bcf98bf.service",
+        "invocation_id": "8bc393d258f545dc8d82b1de280851de",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-536b9711-f70b-4676-8077-4bbd1bcf98bf.service",
+        "initial_main_pid": 3420946,
+        "initial_start_ticks": "323717949",
+        "sha256": "271746e0d4a77bf0975ca6a9e77005fd5d35d89e1171acad4e01c96f8923e2aa"
+      },
+      "worker_source_updated_during_job": false,
+      "do_not_restart_on_observation_timeout": true,
+      "whole_gate_accepted": false,
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
