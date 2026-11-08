@@ -3,7 +3,7 @@
   "schema_version": 1,
   "root_base": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
   "pulse_base": "f925e37247bb987980fce80da47831a1c31d04c9",
-  "pulse_source": "1ac4be9d6583120c3229bda7036a9c6a72f20c05",
+  "pulse_source": "686c86bc862191def0bda9f75b533150c0a92413",
   "status": "source_prepared_pending_parent_review",
   "runtime_accepted": false,
   "local_numeric_tests_run": false,
@@ -12,24 +12,36 @@
   "prior206_ids_preserved": true,
   "prior_required_cases": 206,
   "new_controls": [
+    "NativeCompositeService/BranchBeforeConsumeDefaultUsesStableRecord",
+    "NativeCompositeService/BranchBeforeConsumeThrowStopsWithoutCertificate",
+    "NativeCompositeService/BranchC0MutationCannotPreventCancelledTerminalization",
     "NativeCompositeService/BranchCancelledSinkDefaultCannotReviveFamily",
     "NativeCompositeService/BranchCancelledSinkResetDoesNotFinishOldControl",
     "NativeCompositeService/BranchCancelledSinkRetargetCannotBeOverwritten",
     "NativeCompositeService/BranchCancelledSinkThrowIsSingleAttempt",
+    "NativeCompositeService/BranchCompositeSinkDefaultUsesStableRecord",
     "NativeCompositeService/BranchDestructorDoesNotNotifyApplication",
     "NativeCompositeService/BranchInvalidActualPacketStillReachesSink",
+    "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
+    "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact",
     "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation",
     "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume",
     "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe",
     "NativeCompositeService/BranchRecursiveStopDoesNotRepeatRawDelivery",
     "NativeCompositeService/BranchSlowSinkCannotCrossRealDeadlineIntoConsume",
     "NativeCompositeService/BranchWarmDoesNotReplayCancelledRaw",
+    "NativeCompositeService/ClassicBeforeConsumeDefaultUsesStableRecord",
+    "NativeCompositeService/ClassicBeforeConsumeThrowStopsWithoutCertificate",
+    "NativeCompositeService/ClassicC0MutationCannotPreventCancelledTerminalization",
     "NativeCompositeService/ClassicCancelledSinkDefaultCannotReviveFamily",
     "NativeCompositeService/ClassicCancelledSinkResetDoesNotFinishOldControl",
     "NativeCompositeService/ClassicCancelledSinkRetargetCannotBeOverwritten",
     "NativeCompositeService/ClassicCancelledSinkThrowIsSingleAttempt",
+    "NativeCompositeService/ClassicCompositeSinkDefaultUsesStableRecord",
     "NativeCompositeService/ClassicDestructorDoesNotNotifyApplication",
     "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink",
+    "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
+    "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact",
     "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation",
     "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume",
     "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe",
@@ -37,8 +49,8 @@
     "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume",
     "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw"
   ],
-  "new_controls_count": 24,
-  "total_required_cases": 230,
+  "new_controls_count": 36,
+  "total_required_cases": 242,
   "files": {
     "Test_PulseLib_BoundedTraining.cpp": {
       "count": 74,
@@ -150,7 +162,7 @@
       "sha256": "239d9d99adc7415112bd8d4bc3f31686aea041124721043e7999e081ec29b8d0"
     },
     "Test_PulseLib_CompositeTraining.cpp": {
-      "count": 129,
+      "count": 141,
       "ids": [
         "NativeCompositeTraining/ClassicCaptureSearchFinal2000",
         "NativeCompositeTraining/BranchCaptureSearchFinal2000",
@@ -257,24 +269,36 @@
         "NativeCompositeArchive/ActualMergedAmbiguousGroupStaysDiagnostic",
         "NativeCompositeSourceGuard/ClassicActualSourceChangedBetweenCloseAndConsume",
         "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume",
+        "NativeCompositeService/BranchBeforeConsumeDefaultUsesStableRecord",
+        "NativeCompositeService/BranchBeforeConsumeThrowStopsWithoutCertificate",
+        "NativeCompositeService/BranchC0MutationCannotPreventCancelledTerminalization",
         "NativeCompositeService/BranchCancelledSinkDefaultCannotReviveFamily",
         "NativeCompositeService/BranchCancelledSinkResetDoesNotFinishOldControl",
         "NativeCompositeService/BranchCancelledSinkRetargetCannotBeOverwritten",
         "NativeCompositeService/BranchCancelledSinkThrowIsSingleAttempt",
+        "NativeCompositeService/BranchCompositeSinkDefaultUsesStableRecord",
         "NativeCompositeService/BranchDestructorDoesNotNotifyApplication",
         "NativeCompositeService/BranchInvalidActualPacketStillReachesSink",
+        "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
+        "NativeCompositeService/BranchLastCompositeSinkThrowCannotPublishExact",
         "NativeCompositeService/BranchNormalSinkResetHasNoStaleContinuation",
         "NativeCompositeService/BranchNormalSinkThrowStopsBeforeConsume",
         "NativeCompositeService/BranchObsoleteActorCannotCancelForeignProbe",
         "NativeCompositeService/BranchRecursiveStopDoesNotRepeatRawDelivery",
         "NativeCompositeService/BranchSlowSinkCannotCrossRealDeadlineIntoConsume",
         "NativeCompositeService/BranchWarmDoesNotReplayCancelledRaw",
+        "NativeCompositeService/ClassicBeforeConsumeDefaultUsesStableRecord",
+        "NativeCompositeService/ClassicBeforeConsumeThrowStopsWithoutCertificate",
+        "NativeCompositeService/ClassicC0MutationCannotPreventCancelledTerminalization",
         "NativeCompositeService/ClassicCancelledSinkDefaultCannotReviveFamily",
         "NativeCompositeService/ClassicCancelledSinkResetDoesNotFinishOldControl",
         "NativeCompositeService/ClassicCancelledSinkRetargetCannotBeOverwritten",
         "NativeCompositeService/ClassicCancelledSinkThrowIsSingleAttempt",
+        "NativeCompositeService/ClassicCompositeSinkDefaultUsesStableRecord",
         "NativeCompositeService/ClassicDestructorDoesNotNotifyApplication",
         "NativeCompositeService/ClassicInvalidActualPacketStillReachesSink",
+        "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
+        "NativeCompositeService/ClassicLastCompositeSinkThrowCannotPublishExact",
         "NativeCompositeService/ClassicNormalSinkResetHasNoStaleContinuation",
         "NativeCompositeService/ClassicNormalSinkThrowStopsBeforeConsume",
         "NativeCompositeService/ClassicObsoleteActorCannotCancelForeignProbe",
@@ -282,7 +306,7 @@
         "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume",
         "NativeCompositeService/ClassicWarmDoesNotReplayCancelledRaw"
       ],
-      "sha256": "ad99a8f1e2d7796134f789844e8f4a638394b6b4b14aaae95840007d1dd37850"
+      "sha256": "b24ca6c4a7f2e11989fbb6f3e802c10d883645635da814491c2cf77187a8793d"
     },
     "Test_PulseLib_NativeExecution.cpp": {
       "count": 4,
@@ -302,11 +326,16 @@
       "Classic",
       "Branch"
     ],
-    "wall_budget_seconds": 15,
+    "group_wall_budget_seconds": 15,
+    "attempt_wall_budget_seconds": 1800,
     "actual_sleep_seconds": 16,
     "clock": "NativeTrainingWallTime/steady_clock",
     "requires_entered_real_completed_packet_callback": true,
-    "expected": "BudgetExhausted without reference/final consume or certificate"
+    "stages": [
+      "last raw of first reference group",
+      "last final composite record before certificate publication"
+    ],
+    "expected": "BudgetExhausted without service certificate; preexisting references retained in final-record case"
   },
   "remaining_gates": [
     "parent_source_review",
@@ -315,5 +344,11 @@
     "actual6_archive_export_and_independent_python_replay",
     "legacy_C0_graph_regression",
     "full_future_package5_Console_gate"
+  ],
+  "followup_scope": [
+    "Rdk BeforeReset/BeforeDefault lifecycle advanced before hook: cleanup authority matches exact executor generation plus run/trial, fresh hook token only for diagnostic delivery",
+    "normal C0 strict; diagnostic cancel C0 failure retained explicitly without interrupting terminalization",
+    "independent stable beforeConsume/compositeSink copies and deferred SyncOutcome after successful postconsume delivery and fresh group/attempt wall checks",
+    "ABA same text IDs after Reset exercised through actual production lifecycle hook"
   ]
 }
