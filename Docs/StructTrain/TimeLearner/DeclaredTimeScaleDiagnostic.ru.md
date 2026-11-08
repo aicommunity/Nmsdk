@@ -1,6 +1,6 @@
 # Условная диагностика объявленных временных масштабов
 
-Перенос двух связанных аудиторов из Bin прошёл общий набор143/143 на M40 и143/143 на Elder:67 wire +39 collector +30 новых диагностик +7 lossless ConfigDocument. Source `4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277`. [Квитанция M40](DeclaredTimeScalesScript143M40A2Verification.json), [квитанция Elder](DeclaredTimeScalesScript143ElderA1Verification.json) подтверждают exact IDs/CLI/log/JUnit, десять actual Bin Project.ini blobs, source/fixture bytes до/после, закрытие owned groups и освобождение leases. Старые entrypoints пока не удалены: их migration/retirement требует отдельного изменения Bin и проверки ссылок. Точное происхождение,
+Перенос двух связанных аудиторов из Bin прошёл общий набор143/143 на M40 и143/143 на Elder:67 wire +39 collector +30 новых диагностик +7 lossless ConfigDocument. Source `4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277`. [Квитанция M40](DeclaredTimeScalesScript143M40A2Verification.json), [квитанция Elder](DeclaredTimeScalesScript143ElderA1Verification.json) подтверждают exact IDs/CLI/log/JUnit, десять actual Bin Project.ini blobs, source/fixture bytes до/после, закрытие owned groups и освобождение leases. Старые entrypoints удалены без wrappers в Bin `8cb6dba07b30432272984c8ce3136b48ad06f064`; это перенос активной функции, а не удаление научных данных. [Migration record](DeclaredTimeScaleAuditorMigration.json) содержит точные Git-источники и проверку области изменения. Точное происхождение,
 caller search и список30 тестов находятся в
 [DeclaredTimeScalePortPreparation.json](DeclaredTimeScalePortPreparation.json).
 
@@ -69,27 +69,24 @@ CSV и выводы экспериментов не пересчитываютс
 
 ## Проверки и миграция
 
-Подготовлены 30 новых meaningful tests: реальные numeric tags/attributes,
+Набор содержит 30 новых meaningful tests: реальные numeric tags/attributes,
 неизвестные clock/defaults, зарегистрированные образы, empty/invalid modes,
 конечность произведения/обратной величины, границы, frozen snapshot hash,
-symlinks/size budget, переносимый Git discovery и production CLI. Обязателен
-серверный gate вместе с 7 существующими lossless ConfigDocument tests и
-декларированным корпусом не менее 10 реальных Project.ini. Предлагаемая полная
+symlinks/size budget, переносимый Git discovery и production CLI. На обоих
+серверах пройден gate вместе с 7 существующими lossless ConfigDocument tests и
+декларированным корпусом 10 реальных Project.ini. Полная адресная
 script-only регрессия — 143 = 67 wire + 39 collector + 30 новых + 7 parser.
 Локально допускаются только source/AST/Git/JSON проверки; C++ и модели в scope
 этого переноса не входят.
 
-До root review source/migration scope и серверной приёмки оба старых файла Bin
-остаются на месте. После review удаляются ровно два entrypoints, без wrappers
-и сохранения исторических копий в current tree. Полные source SHA, blob IDs,
-пути и все 13 найденных точных текстовых ссылок зафиксированы в preparation.
+После source/migration review и двухсерверной приёмки удалены ровно два
+entrypoints, без wrappers и сохранения исторических копий в current tree.
+Полные source SHA, blob IDs, last-path commits и пути зафиксированы в
+[migration record](DeclaredTimeScaleAuditorMigration.json). Исходная
+[preparation](DeclaredTimeScalePortPreparation.json) остаётся снимком подготовки.
 Единственный исполняемый caller — импорт tree-аудитором step-аудитора; других
 совпадений в Pulse/Rdk нет. Dated inventories и raw Reports остаются historical
-snapshots; две ссылки в историческом audit-документе должны указывать на Git
-history/migration record после удаления. Старые исследовательские JSON/CSV
-сохраняются. Retirement и изменение gitlink Bin — отдельный последующий этап.
-
-Первый серверный script143 @76ffc4c: 142 PASS, 1 ERROR, 0 SKIP.
-Регрессия no-overwrite обнаружила затенение глобального subprocess локальным
-import в другой ветви CLI main; исправлен только этот binding. Негативный запуск
-сохраняется, для нового source требуется свежий полный143 с теми же ID.
+snapshots; две ссылки в историческом audit-документе теперь указывают на
+полный Git source commit. Старые исследовательские JSON/CSV сохраняются.
+Manifest содержит 356 записей: 352 retired и 4 moved_to_root; complete=false.
+Это адресный перенос двух аудиторов, без приёмки всего этапа9 или научной серии.
