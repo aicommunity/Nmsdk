@@ -1,0 +1,74 @@
+{
+  "kind": "composite_native_core_cpp_compile_failure",
+  "schema_version": 1,
+  "root": "27ba5aa2906d5e5a1ecc081044fffb8dc82e6c38",
+  "pulse": "269164d2a2339908a8667e859a04a8e81da50c3c",
+  "capture_phase": "postclosure_failed_compilation_before_next_cache_mutation",
+  "source_files_git_verified": 3056,
+  "source_repositories": [
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-feature-root-a1",
+      "commit": "27ba5aa2906d5e5a1ecc081044fffb8dc82e6c38",
+      "files": 968
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-feature-pulse-a1",
+      "commit": "269164d2a2339908a8667e859a04a8e81da50c3c",
+      "files": 306
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-response-features-rdk-a1",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    }
+  ],
+  "cmakecache_snapshot_sha256": "e0541f63103706e19c1e4ca0dc35324ef14a2ddeae7fac4d59f3f9477a286206",
+  "original_terminal_success": false,
+  "built": false,
+  "original_expected_cpp_cases_declared": 143,
+  "actual_cpp_tests_executed": 0,
+  "actual_python_tests_executed": 0,
+  "compiled_test_inventory_executed": false,
+  "native_model_executions": 0,
+  "native_runtime_accepted": false,
+  "first_compile_error": "NativeCompositeTrainingAttempt.cpp:68:40 UEPtr<NPulseNeuron> cannot convert to UEPtr<UContainer>",
+  "build_log_first_error_line": 65,
+  "compiler_and_make_diagnostic_lines": 16,
+  "build_exit_code": 2,
+  "outer_worker_exit_code": 1,
+  "original_new_composite_protocol_exercised_flag": true,
+  "observed_new_composite_protocol_exercised": false,
+  "original_protocol_flag_scope": "producer preset in terminal even when compilation fails; preserved as declaration, not execution evidence",
+  "missing_original_postbuild_snapshots_preserved": [
+    "current-runtime-before.json",
+    "current-runtime-after.json",
+    "compiled-test-inventory.log",
+    "compiled-inventory-crosscheck.json",
+    "test-inventory.json",
+    "fixture-source-hashes.json",
+    "CMakeCache.txt",
+    "resource-files-before.json",
+    "resource-files-after.json"
+  ],
+  "current_runtime_before_snapshot_exists": false,
+  "protected_mechanical_a2_runtime_before_after_postclosure_equal": true,
+  "controller_runtime_manifest_scope": "Python build worker only; no tested native runtime manifest",
+  "failed_unit_metadata_retained": true,
+  "failed_unit_main_pid": 0,
+  "failed_unit_kernel_cgroup_absent": true,
+  "lease_released": true,
+  "original_error_logs_and_terminals_preserved": true,
+  "live_source_cache_opened": false,
+  "live_build_cache_opened": false,
+  "new_build_or_model_run": false,
+  "numerical_result_claimed": false,
+  "training_certificate_eligible": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "created_utc": "2026-11-08T10:56:00.694866+00:00"
+}
