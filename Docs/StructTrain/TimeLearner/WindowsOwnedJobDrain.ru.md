@@ -58,3 +58,36 @@ review; все API tests выполняются на .14 из Git-pushed source.
 policy30, свежими output/PDB paths, before/after source/cache/object/4runtime
 guards. No-op не заменяет этот контроль. Full build и native admission остаются
 следующими отдельными gate; подготовленный source не означает их прохождения.
+
+## Фактическая проверка 2026-11-08
+
+Source `034b72ff703362500f07ccfbcf0e24408f144a60`: 415 Python blobs,
+package fingerprint `4d166c7fd5d299b50ae649693def6dc0fc160e984eba17e582d388b0d07d7ae9`.
+Новый immutable tools checkout отделён от SDK d433/Pulse f925; оба источника
+явно записаны в receipts. Первоначальный запуск API-A1 выполнил **0** тестов:
+validation.run_suite очистил environment paths, и две setUpClass были skipped.
+Этот bootstrap отказ сохранён в `2e966e03848a184611df82882eb11990f952af51`.
+
+Fresh API-A2 использует maintained validation.preflight с точным inventory,
+затем стандартный unittest.TextTestRunner и три явно объявленных environment
+bindings. Никакого override `_environment` или изменения validation API нет.
+Результат: **26 выполнено, 0 skipped/errors/failures**. Для 23 actual Job requests
+проверено закрытие в kernel; default0 refusal сохранён. Естественное завершение,
+grace timeout, whole-wall timeout, cancel и nonzero различаются. NULL OpenProcess
+проверен явно помеченной fault injection на реальном owned child: unknown-alive
+ещё присутствующий процесс даёт provenance_missing, не success. Это не наблюдение
+фактического OS access denial. Evidence `a7333a2f15416642be8b26787900b128d7dc09df`.
+
+Реальные compile A/B сохранены в `683e32714837daa5e6e70ad6e1c690bf7f00335f`:
+обе получили main exit0 и новые object files; оригинальный object, cache, SDK,
+tools и четыре runtime не изменились. Signed0 control честно отказал по
+descendants_remaining. Signed30 treatment также **отказал**: pinned vctip PID8836,
+creation_filetime134386191573170570, SHA25641fe46... оставался живым все 30 секунд.
+В drain захвачены 89 module files, identity gaps отсутствуют; отдельный observer
+всей компиляции сохранил 6 fast-exit gaps, полный spawn history не заявляется.
+После deadline закрыт только owned Job; свежий collector подтвердил kernel absence.
+
+API gate подтверждает контракт backend, но 30s не устранил наблюдаемый отказ
+реального toolchain. Windows full build/native admission остаются **не приняты**.
+Увеличение deadline, глобальные настройки VS и исключения по executable не
+применялись. Исходные отрицательные A2/A3 не переоценены.
