@@ -18,6 +18,25 @@ from .plotting import figure_title, padded_limits, plotting_runtime, time_views
 from .primary_reuse import _git_archive, _stream
 
 
+RENDERER_VERSION = 3
+
+
+def lt_threshold_display(threshold, limits):
+    """Describe a reference level without changing the recorded-data axis."""
+    threshold = number(threshold)
+    require(type(limits) in (tuple, list) and len(limits) == 2,
+            'channel_threshold_axis_invalid')
+    low, high = (number(value) for value in limits)
+    require(low < high, 'channel_threshold_axis_invalid')
+    position = 'above' if threshold > high else 'below' if threshold < low else 'inside'
+    text = format(threshold, '.17g')
+    return {'source': '$.LTZone.Threshold', 'value': threshold, 'value_text': text,
+            'position': position, 'line_drawn': position == 'inside',
+            'annotation': 'Actual LT threshold '+text+
+                (' ('+position+' displayed Y)' if position != 'inside' else ''),
+            'axis_range_policy': 'recorded_values_only'}
+
+
 def chart(directory, soma):
     directory = Path(directory)
     accepted = audit_execution(directory)
@@ -51,9 +70,8 @@ def chart(directory, soma):
         {'label': 'Recorded LT decision potential',
          'series': [('LT Potential', series('$.LTZone.Potential'))]},
     ]
-    for i, panel in enumerate(panels):
+    for panel in panels:
         values = [v for _, signal in panel['series'] for v in signal]
-        if i == 3:values.append(threshold)
         panel['shared_limits'] = padded_limits(values)
     signal=panels[0]['series'][0][1]
     peak_indices=[first for first,_ in measured_wave_plateaus(
@@ -101,6 +119,7 @@ def render_figure(data, name, left, right, output, local=False, positive_lobe=Fa
     require(not positive_lobe or local, 'positive_lobe_requires_local_view')
     times = data['times'];panels = data['panels']
     focus=None
+    threshold_display=None
     fig, axes = plt.subplots(4, 1, figsize=(12, 12), dpi=160, sharex=True)
     fig.subplots_adjust(left=.12, right=.86, bottom=.06, top=.79, hspace=.43)
     handles=[];labels=[];colors=['#154c9a', '#b45f06', '#228b22', '#7d3c98'];limits=[]
@@ -130,16 +149,21 @@ def render_figure(data, name, left, right, output, local=False, positive_lobe=Fa
         limits.append(panel_limits)
         ax.set_ylim(*panel_limits);ax.set_xlim(left, right)
         ax.set_ylabel('Native units\nSI unverified', fontsize=12)
-        extra=('; threshold outside local Y' if i==3 and not panel_limits[0] <= data['threshold'] <= panel_limits[1] else '')
-        ax.set_title(panel['label']+extra+('; positive-lobe Y; triangles = below range' if positive_lobe and i==0 else ''), fontsize=12, loc='left');ax.grid(alpha=.25)
+        ax.set_title(panel['label']+('; positive-lobe Y; triangles = below range' if positive_lobe and i==0 else ''), fontsize=12, loc='left');ax.grid(alpha=.25)
         ax.tick_params(axis='both', labelsize=12)
         ax.xaxis.get_offset_text().set_fontsize(12)
         ax.yaxis.get_offset_text().set_fontsize(12)
         for spike in data['lt_spike_times']:
             if left <= spike <= right:ax.axvline(spike, color='#8c2c91', linestyle=':', alpha=.65)
         if i == 3:
-            level = ax.axhline(data['threshold'], color='#477a32', linestyle='--', linewidth=1.)
-            handles.append(level);labels.append('Actual LT threshold '+format(data['threshold'], '.8g'))
+            threshold_display=lt_threshold_display(data['threshold'], panel_limits)
+            if threshold_display['line_drawn']:
+                level = ax.axhline(data['threshold'], color='#477a32', linestyle='--', linewidth=1.)
+                handles.append(level);labels.append(threshold_display['annotation'])
+            else:
+                ax.text(1., 1.02, threshold_display['annotation'], transform=ax.transAxes,
+                        horizontalalignment='right', verticalalignment='bottom', fontsize=12,
+                        color='#477a32')
     overlay=axes[0].twinx()
     line, = overlay.step(times, data['stimulus'], where='post', color='#d46200', alpha=.7, linewidth=1.1)
     overlay.set_ylabel('Actual input\ngenerator units', fontsize=12, color='#a34d00')
@@ -178,6 +202,7 @@ def render_figure(data, name, left, right, output, local=False, positive_lobe=Fa
         path=output/(name+'.'+extension);fig.savefig(path);paths.append(path.name)
     plt.close(fig)
     return {'view': name, 'begin': left, 'end': right, 'files': paths,
+            'renderer_version': RENDERER_VERSION,
             'png_width': 1920, 'png_height': 1920, 'downsampling': False,
             'minimum_visible_text_fontsize_pt': min(text_sizes),
             'legend_layout': layout,
@@ -185,6 +210,8 @@ def render_figure(data, name, left, right, output, local=False, positive_lobe=Fa
             'y_scale': 'positive_lobe_soma_local_other_panels' if positive_lobe else 'local_per_panel' if local else 'shared_per_panel', 'panel_y_limits': limits,
             'shared_panel_y_limits': [p['shared_limits'] for p in panels], 'sample_markers':local,
             'threshold_outside_local_Y': local and not limits[3][0] <= data['threshold'] <= limits[3][1],
+            'threshold_outside_displayed_Y': not threshold_display['line_drawn'],
+            'lt_threshold_display': threshold_display,
             **({'positive_lobe_focus':focus} if positive_lobe else {})}
 
 
@@ -234,7 +261,9 @@ def render(directory, output, source_evidence, repository):
                         'lt_spike_times':data['lt_spike_times'], 'threshold':data['threshold'],
                         'observation_context':data['observation_context'],
                         'primary_sha256':data['primary']})
-    manifest={'kind':'native_channel_joint_temporal_report','schema_version':2,
+    manifest={'kind':'native_channel_joint_temporal_report','schema_version':3,
+              'renderer_version':RENDERER_VERSION,
+              'lt_axis_range_policy':'recorded_values_only; threshold annotated separately',
               'source_evidence':source_evidence,'runtime':runtime,'reports':reports,
               'source_archive_sha256':hashlib.sha256(archive).hexdigest(),'native_files_verified_in_Git':len(expected),
               'sample_phase':'native_after_children','channel_delta_reference':'first actual recorded sample',
@@ -251,8 +280,10 @@ def render(directory, output, source_evidence, repository):
             sections.append('<p>'+html.escape(view['view']+' | '+view['y_scale'])+'</p><a href="'+file+'"><img style="width:100%;max-width:1920px" src="'+file+'"></a>')
     (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><title>Native channel diagnostics</title>'+
         '<h1>Actual soma, channels, feedback and LT events</h1><p>Native units; SI unverified. Channel deltas subtract '
-        'the first recorded value, not an assumed zero rest. Overview/zoom Y scales are shared per panel; '
-        'measured-peak details have explicitly labelled local Y scales. Packet observation validity applies to '
+        'the first recorded value, not an assumed zero rest. Overview/zoom Y scales use the full recorded data per panel; '
+        'an LT threshold outside the displayed Y range is labelled with its exact value and direction, '
+        'without stretching the signal axis to include it. '
+        'Measured-peak details have explicitly labelled local Y scales. Packet observation validity applies to '
         'its declared input windows; an additional plotted soma has no separate peak verdict from that flag. '
         'Waveform completeness and plotted-channel window membership are shown separately. '
         'Positive-lobe views explicitly clip negative soma samples with triangle markers; '

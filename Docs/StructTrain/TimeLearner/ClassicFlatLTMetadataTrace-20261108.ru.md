@@ -147,3 +147,15 @@ runtime Ready/Init/Activity, фактическое выполнение LT ACal
 новый максимум, единицы SI, response mechanism или training verdict здесь не
 вычислялся. Краткая карта общего source dataflow остаётся в
 [LTSomaSignalSourceAudit-20261108.ru.md](LTSomaSignalSourceAudit-20261108.ru.md).
+
+
+## Последующее image QA масштаба — 09.11.2026
+
+[Отдельный source/readability review](ChannelLTOverviewReadabilitySourceReview-20261109.ru.md)
+локально просмотрел исходные exact Classic single overview/detail PNG. В detail
+уже видна ненулевая LT curve; overview визуально сжат порогом100, который source
+добавлял в его Y limits. Это более узкий вывод о представлении single, без CSV
+пересчёта и без переноса на burst raw-zero состояние. Отсутствующие Ready/Init/
+per-tick execution поля остаются неизвестными, но не нужны для установления
+этого scale artifact. Renderer fix пока source-only, новый render не запускался;
+исходные файлы и исторические научные наблюдения сохранены.
