@@ -169,3 +169,15 @@ Worker PID2901337/start321349983, exact unit закрыт, lease released.
 [Metadata-проверка](CompositeTrainingPythonWarmVerification-20261108.json).
 Тест warm boundary проверяет consistency binding, не выдаёт native training
 certificate. Полный positive native producer/import gate по-прежнему открыт.
+
+Проверка initial dataset/readback и purpose-specific namespace добавлена в
+source`b277540126acc74e8425d88865a6499ee515aa8b`; M40:65/65,
+failures/errors/skips0. Evidence`c6c0abb1a81a6083a7a898c5ae27f50bac8e2173`:
+все429 source blobs и32 archive members проверены;32672 bytes, SHA256
+`525940acbc25396dc648b769011e40d7351b6a52b58437902bf3aae8e8af14c6`.
+Exact worker PID2921881/start321394325 закрыт, lease released.
+[Metadata-проверка](CompositeTrainingPythonDatasetVerification-20261108.json).
+Отдельный test_composite_native_archive содержит7 проверок фактических шести
+production exports; они не включены в эти65 и не выполнялись без native
+fixtures. Для их отдельной приёмки нужны реальные Classic/Branch complete,
+partial, ambiguous, existing-C0 и warm bundles с Git-bound fixture manifest.
