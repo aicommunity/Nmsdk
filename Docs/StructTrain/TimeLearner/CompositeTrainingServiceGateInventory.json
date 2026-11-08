@@ -1,0 +1,45 @@
+{
+  "status": "source_preparation_only",
+  "numeric_tests_run_locally": false,
+  "suite": "NativeCompositeService",
+  "count": 22,
+  "cases": [
+    "NativeCompositeService.ClassicCalculateMode0Exact",
+    "NativeCompositeService.ClassicCalculateMode1Exact",
+    "NativeCompositeService.BranchCalculateMode0Exact",
+    "NativeCompositeService.BranchCalculateMode1Exact",
+    "NativeCompositeService.ClassicDefaultSyncOutsideTolerance",
+    "NativeCompositeService.BranchDefaultSyncOutsideTolerance",
+    "NativeCompositeService.ClassicWarmResetPreservesInitialFamilyAndC0",
+    "NativeCompositeService.BranchWarmResetPreservesInitialFamilyAndC0",
+    "NativeCompositeService.ClassicSetterStopBeforeFinalConsume",
+    "NativeCompositeService.BranchSetterStopBeforeFinalConsume",
+    "NativeCompositeService.ClassicDirectDataStopBeforeFinalConsume",
+    "NativeCompositeService.BranchDirectDataStopBeforeFinalConsume",
+    "NativeCompositeService.ClassicPreparedStopHasSingleRawResult",
+    "NativeCompositeService.BranchPreparedStopHasSingleRawResult",
+    "NativeCompositeService.ClassicResetPreservesPartialEvidence",
+    "NativeCompositeService.BranchResetPreservesPartialEvidence",
+    "NativeCompositeService.ClassicDefaultInvalidatesSourceFamily",
+    "NativeCompositeService.BranchDefaultInvalidatesSourceFamily",
+    "NativeCompositeService.ClassicRetargetInvalidatesSourceFamily",
+    "NativeCompositeService.BranchRetargetInvalidatesSourceFamily",
+    "NativeCompositeService.ClassicPrimaryBudgetStopsBeforeQueue",
+    "NativeCompositeService.BranchPrimaryBudgetStopsBeforeQueue"
+  ],
+  "source_sha256": "b7ce8e30c92711852fa0db2644a9049de678349d68bcbe89290be5fccd7d9208",
+  "regression_inventory": {
+    "BoundedTraining": 74,
+    "FinalVerification": 23,
+    "NativeCompositeTraining": 46,
+    "NativePreparationCancellation": 4,
+    "new_service": 22,
+    "total": 169
+  },
+  "pending": [
+    "server_compile_and_numeric_gate",
+    "cold6_autostart",
+    "portable_package5_import_actual_model_and_fake_template_negative",
+    "Console_Train_to_Test"
+  ]
+}

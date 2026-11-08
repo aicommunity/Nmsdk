@@ -8,6 +8,7 @@
 #include <QJsonArray>
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <functional>
 #include <limits>
 #include <map>
@@ -103,7 +104,7 @@ public:
     std::string Revision() const {
         const auto n=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
         const auto g=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
-        const auto id=NmsdkTools::IdentifyModel(n,{{&g->Output,"burst"}});Require(id["valid"].toBool(),"composite_fixture_identity");
+        const auto id=NmsdkTools::IdentifyModel(n.Get(),{{&g->Output,"burst"}});Require(id["valid"].toBool(),"composite_fixture_identity");
         return id["sha256"].toString().toStdString();
     }
     VerificationRequest Request(std::size_t input,const std::string& run,const std::string& trial,std::size_t epoch=0) const {
@@ -372,3 +373,155 @@ TEST(NativeCompositeTraining,ClassicConnectedStopBetweenFinalCloseAndConsume){Re
 TEST(NativeCompositeTraining,BranchConnectedStopBetweenFinalCloseAndConsume){RequestRemovedBeforeFinalConsume<NNeuronTimeLearnerBranch>(RequestStop::Connected);}
 TEST(NativeCompositeTraining,ClassicDirectDataStopDuringNativeGroup){DirectRequestRemovedDuringGroup<NNeuronTimeLearner>();}
 TEST(NativeCompositeTraining,BranchDirectDataStopDuringNativeGroup){DirectRequestRemovedDuringGroup<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> NativeTrainingPlan ServicePlan(NativeCompositeFixture<Owner>& f,double sync=.2) {
+    NativeTrainingPlan p;p.protocol=f.protocol;p.probe=f.prototype;
+    p.maximumReferenceProbes=4;p.maximumInvalidReferenceProbes=0;p.maximumModelSeconds=120.;p.maximumWallSeconds=1800.;
+    p.search.runId="actual-native-composite-service";p.search.initialModelRevision=f.Revision();
+    p.search.maximumProbes=32;p.search.maximumEdits=4;p.search.maximumCandidatesPerInput=1;
+    p.search.normalization=Normalization::SynapseCount;p.search.n0CandidateRepeats=1;p.search.tolerances.sync=sync;
+    for(const auto& actual:f.owner->ReadNativeParameters())
+        p.search.bounds.push_back({actual.length,actual.length,actual.synapses,actual.synapses,actual.resistance,actual.resistance});
+    for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
+        const auto& w=f.protocol.compositeMeasurement->inputWindows[i];
+        p.inputWindows.push_back({f.protocol.inputs[i].id,NativeCompositeFixture<Owner>::branch?0u:i,
+            w.beginOffset,w.endOffset,f.protocol.inputs[i].stimulusId});
+    }
+    NativeCompositeTrainingPolicy policy;policy.contextPolicy=f.protocol.compositeMeasurement->contextPolicy;
+    policy.geometryPolicy=f.protocol.compositeMeasurement->geometryPolicy;policy.maximumGroups=64;
+    policy.maximumNativeProbes=256;policy.maximumTotalSamples=64*policy.contextPolicy.maximumTotalSamples;
+    policy.maximumTotalPrimaryBytes=64*1024*1024;policy.maximumGroupModelSeconds=2.;policy.maximumGroupWallSeconds=300.;
+    p.composite=policy;return p;
+}
+template<class Owner> void ServiceTicks(NativeCompositeFixture<Owner>& f,std::function<void()> afterTick={}) {
+    std::size_t ticks=0;
+    while(f.owner->NativeTrainingController().State()!=NativeTrainingState::Finished && ++ticks<120*2000) {
+        f.model->Calculate();f.environment->IncreaseModelTimeByStep();if(afterTick)afterTick();
+    }
+    ASSERT_LT(ticks,120*2000u)<<f.owner->NativeTrainingController().Reason();
+}
+template<class Owner> void ServiceStart(NativeCompositeFixture<Owner>& f,NativeTrainingPlan plan) {
+    f.attempt.reset();f.owner->BeginNativeTraining(std::move(plan));
+    ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::CapturingReferences)
+        <<f.owner->NativeTrainingController().Reason();
+}
+template<class Owner> void ServiceExact(int mode) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.owner->CalculateMode=mode;
+    std::size_t rawClosed=0;auto p=ServicePlan(f);p.observationSink=[&](const auto&){++rawClosed;};
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
+    ASSERT_TRUE(service.References());EXPECT_EQ(service.Certificate()->SchemaVersion(),2u);
+    EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    EXPECT_EQ(service.CompositeReferenceGroupIds().size(),2u);EXPECT_EQ(service.CompositeFinalGroupIds().size(),2u);
+    EXPECT_EQ(rawClosed,service.CompositeNativeProbes());EXPECT_EQ(rawClosed,f.preparations);
+    EXPECT_EQ(rawClosed,4*service.CompositeGroups());EXPECT_EQ(service.CompositeSampledFrames(),f.rawSamples);
+    EXPECT_EQ(service.Search()->IssuedProbes(),service.CompositeGroups()-2);
+    EXPECT_EQ(service.Search()->AcceptedCompositeObservations(),service.Search()->IssuedProbes());
+    std::size_t primary=0;for(const auto& record:service.CompositeMeasurements()) {
+        EXPECT_TRUE(record.consumed);EXPECT_EQ(record.rawTrials.size(),4u);EXPECT_EQ(record.group.packets.size(),4u);
+        EXPECT_TRUE(record.capacitanceWitnesses.empty());EXPECT_TRUE(record.nativeTrialWitnessIds.empty());
+        primary+=CompositeRecordPrimaryBytes(record);
+    }
+    EXPECT_EQ(primary,service.CompositePrimaryBytes());
+    const auto& source=service.CompositeSourceBinding();EXPECT_EQ(source["schema_version"].toInt(),2);
+    EXPECT_TRUE(source["initial_native_snapshot"].isObject());EXPECT_TRUE(source["initial_dataset"].isObject());
+}
+template<class Owner> void ServiceDefaultSync() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f,.02);
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_NE(service.Outcome(),TrainingStatus::Exact);ASSERT_TRUE(service.Certificate());
+    EXPECT_FALSE(service.Certificate()->Exact());EXPECT_DOUBLE_EQ(service.Certificate()->Tolerances().sync,.02);
+    EXPECT_GT(std::max(std::fabs(service.Certificate()->Residuals().front().timingResidualLow),
+        std::fabs(service.Certificate()->Residuals().front().timingResidualHigh)),.02);
+}
+template<class Owner> void ServiceWarmReset() {
+    NativeCompositeFixture<Owner> f(2000,false,64,true,true);auto p=ServicePlan(f);ServiceStart(f,p);ServiceTicks(f);
+    const auto& old=f.owner->NativeTrainingController();ASSERT_EQ(old.Outcome(),TrainingStatus::Exact)<<old.Reason();
+    const auto source=old.CompositeSourceBinding();const auto references=old.CompositeReferenceGroupIds();
+    const auto oldProof=old.Certificate()->CompositeProofIds();const auto oldC0=f.owner->ReadNativeTrainingCapacitance()->origin;
+    const auto prepared=f.preparations;f.owner->Reset();
+    ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    ASSERT_TRUE(f.owner->NativeTrainingController().References());
+    f.owner->BeginNativeTraining(p);ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Searching)
+        <<f.owner->NativeTrainingController().Reason();ServiceTicks(f);
+    const auto& warm=f.owner->NativeTrainingController();ASSERT_EQ(warm.Outcome(),TrainingStatus::Exact)<<warm.Reason();
+    EXPECT_EQ(warm.CompositeSourceBinding(),source);EXPECT_EQ(warm.CompositeReferenceGroupIds(),references);
+    EXPECT_NE(warm.Certificate()->CompositeProofIds(),oldProof);EXPECT_EQ(f.owner->ReadNativeTrainingCapacitance()->origin,oldC0);
+    EXPECT_EQ(f.preparations-prepared,4*warm.Search()->IssuedProbes());EXPECT_EQ(warm.SessionAttempt(),2u);
+    EXPECT_EQ(warm.CompositeNativeProbes(),f.preparations-prepared);
+    ASSERT_GE(warm.CompositeMeasurements().size(),2u);
+    EXPECT_NE(warm.CompositeMeasurements().front().liveAttemptBinding,warm.CompositeMeasurements().back().liveAttemptBinding);
+}
+template<class Owner> void ServiceStopBeforeConsume(bool setter) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);bool stopped=false;
+    p.beforeCompositeConsume=[&](const NativeCompositeMeasurementRecord& record){
+        if(record.purpose==CompositeMeasurementPurpose::Final && !stopped) {
+            stopped=true;if(setter)f.owner->IsNeedToTrain=false;else f.owner->IsNeedToTrain.SetDataDirect(false);
+        }
+    };
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_TRUE(stopped);EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(service.Certificate());
+    EXPECT_TRUE(service.CompositeFinalGroupIds().empty());ASSERT_FALSE(service.CompositeMeasurements().empty());
+    EXPECT_FALSE(service.CompositeMeasurements().back().consumed);
+}
+template<class Owner> void ServicePreparedStop() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);std::size_t prepared=0,closed=0;
+    const auto original=p.probe.onPrepared;p.probe.onPrepared=[&](const auto& a,const auto& s){if(original)original(a,s);++prepared;f.owner->IsNeedToTrain=false;};
+    p.observationSink=[&](const auto& result){++closed;EXPECT_EQ(result.status,NativeProbeStatus::Cancelled);};
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_EQ(prepared,1u);EXPECT_EQ(closed,1u);
+    EXPECT_EQ(f.rawSamples,0u);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    ASSERT_EQ(service.CompositeMeasurements().size(),1u);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
+    EXPECT_EQ(service.CompositeMeasurements()[0].rawTrials.size(),1u);
+}
+template<class Owner> void ServicePartialReset(bool useDefault) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);ServiceStart(f,p);
+    bool interrupted=false;
+    for(std::size_t ticks=0;ticks<4000 && !interrupted;++ticks) {
+        f.model->Calculate();f.environment->IncreaseModelTimeByStep();
+        if(f.rawSamples) {interrupted=true;if(useDefault)f.owner->Default();else f.owner->Reset();}
+    }
+    EXPECT_TRUE(interrupted);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_EQ(service.State(),NativeTrainingState::Idle);EXPECT_FALSE(service.Certificate());
+    if(useDefault){EXPECT_TRUE(service.CompositeSourceBinding().isEmpty());EXPECT_TRUE(service.CompositeMeasurements().empty());}
+    else {EXPECT_FALSE(service.CompositeSourceBinding().isEmpty());ASSERT_EQ(service.CompositeMeasurements().size(),1u);
+        EXPECT_FALSE(service.CompositeMeasurements().back().consumed);EXPECT_GT(service.CompositeMeasurements().back().sampledFrames,0u);}
+}
+template<class Owner> void ServiceRetarget() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);ServiceStart(f,p);
+    for(std::size_t ticks=0;ticks<4000 && !f.rawSamples;++ticks){f.model->Calculate();f.environment->IncreaseModelTimeByStep();}
+    ASSERT_GT(f.rawSamples,0u);auto target=f.owner->InputPattern.GetData();target(1,0)+=.01;
+    f.owner->InputPattern=target;const auto& service=f.owner->NativeTrainingController();
+    EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidModel);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    EXPECT_TRUE(service.CompositeSourceBinding().isEmpty());EXPECT_TRUE(service.CompositeMeasurements().empty());
+}
+template<class Owner> void ServicePrimaryBudget() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);p.composite->maximumTotalPrimaryBytes=1;
+    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);EXPECT_EQ(f.preparations,0u);EXPECT_EQ(f.rawSamples,0u);
+    EXPECT_TRUE(service.CompositeMeasurements().empty());EXPECT_FALSE(service.Certificate());
+}
+}
+TEST(NativeCompositeService,ClassicCalculateMode0Exact){ServiceExact<NNeuronTimeLearner>(0);}
+TEST(NativeCompositeService,ClassicCalculateMode1Exact){ServiceExact<NNeuronTimeLearner>(1);}
+TEST(NativeCompositeService,BranchCalculateMode0Exact){ServiceExact<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeCompositeService,BranchCalculateMode1Exact){ServiceExact<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeCompositeService,ClassicDefaultSyncOutsideTolerance){ServiceDefaultSync<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchDefaultSyncOutsideTolerance){ServiceDefaultSync<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicWarmResetPreservesInitialFamilyAndC0){ServiceWarmReset<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchWarmResetPreservesInitialFamilyAndC0){ServiceWarmReset<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicSetterStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearner>(true);}
+TEST(NativeCompositeService,BranchSetterStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCompositeService,ClassicDirectDataStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearner>(false);}
+TEST(NativeCompositeService,BranchDirectDataStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCompositeService,ClassicPreparedStopHasSingleRawResult){ServicePreparedStop<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchPreparedStopHasSingleRawResult){ServicePreparedStop<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicResetPreservesPartialEvidence){ServicePartialReset<NNeuronTimeLearner>(false);}
+TEST(NativeCompositeService,BranchResetPreservesPartialEvidence){ServicePartialReset<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCompositeService,ClassicDefaultInvalidatesSourceFamily){ServicePartialReset<NNeuronTimeLearner>(true);}
+TEST(NativeCompositeService,BranchDefaultInvalidatesSourceFamily){ServicePartialReset<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCompositeService,ClassicRetargetInvalidatesSourceFamily){ServiceRetarget<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchRetargetInvalidatesSourceFamily){ServiceRetarget<NNeuronTimeLearnerBranch>();}
+TEST(NativeCompositeService,ClassicPrimaryBudgetStopsBeforeQueue){ServicePrimaryBudget<NNeuronTimeLearner>();}
+TEST(NativeCompositeService,BranchPrimaryBudgetStopsBeforeQueue){ServicePrimaryBudget<NNeuronTimeLearnerBranch>();}
