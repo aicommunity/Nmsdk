@@ -70,5 +70,11 @@ evidence `b10750b5cde0c9977b0d1861f3c205a4ef3fdd07` содержит270 пров
 физического графа; runtime-происхождение подтверждается внешними native gates.
 Совместный old/new output gate2/2 прошёл в одном процессе/каталоге на root
 с исправлением идентификаторов. [Квитанция](ResponseDomainJointOutputVerification.json),
-evidence `411a04b2ecb1798ea926543d5a7f64c5ed26e95e`:78 проверенных членов архива. ASan новой capture/codec связки запущена на M40; расширенная N/fault матрица,
-визуальный отчёт и интеграция Console/контроллера остаются открытыми.
+evidence `411a04b2ecb1798ea926543d5a7f64c5ed26e95e`:78 проверенных членов архива. ASan новой capture/codec связки завершена на M40:10 integrity/codec,
+4 native cases и4 независимых packet checks, без skipped; фактическая загрузка
+libasan и неизменность обоих runtime проверены. Leak detection отключён
+(`detect_leaks=0`), это не leak gate. [Независимая квитанция](ResponseDomainEvidenceAsanVerification.json),
+evidence `e842e11901a3a0b15db2868de70cbf8a2bb24f7a`.
+[Временные графики schema2](ResponseDomainDiagnosticReport-2026-11-08.ru.md)
+подготовлены и проверены. Расширенная N/fault ASan-матрица и интеграция
+Console/контроллера остаются открытыми.
