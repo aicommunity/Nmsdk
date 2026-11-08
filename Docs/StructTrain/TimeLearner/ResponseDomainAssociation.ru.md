@@ -26,5 +26,60 @@ guard samples и исходные индексы, N=1/2/4/6, разные physic
 неполные/повреждённые записи. Отдельная native applicability-проверка и
 интеграция в обучение остаются необходимыми; unit PASS их не заменяет.
 
-Статус: код и fixtures подготовлены. На локальной машине численные тесты
-не выполнялись; требуется серверная сборка/проверка.
+На Elder прошли все 26 проверок без пропусков. Evidence commit:
+`aa9051831d1014185969686a7d64852fb083b51e`; compiled root:
+`bd6722a49c59e337065c53d63411cb0095443adc`; PulseLib:
+`a21adcb1cf0d0b9fb9f29cfdb3722414b1fcae3e`.
+Независимо проверены все 66 членов архива, исходники по Git, JUnit inventory,
+фактически загруженный executable, неизменность runtime и освобождение lease.
+Receipt: [ResponseDomainNormalVerification.json](ResponseDomainNormalVerification.json).
+ASan-проверка на M40 и native bridge остаются отдельными условиями приёмки.
+На локальной машине численные тесты не выполнялись.
+
+## Следующий этап: bridge штатной пробы
+
+Это подготовка интеграции, а не разрешение использовать Hypothesis в Train.
+Production-адаптер должен получить `PreparedVerificationProbe` и фактический
+`ProbeSpec` из `NativeProbeRequest.onPrepared`, отсчёты и `newStimuli` из
+`onSample`, а complete/result — после закрытия штатной пробы. Он не вызывает
+`Calculate`, не меняет target, storage, структуру или правила сброса.
+
+Компоненты: PulseLib `Core/TimeLearner/NativeProbe.h/.cpp` и отдельный
+diagnostic adapter; корневые `Tests/Integration/Libraries/Test_PulseLib_NativeExecution.cpp`
+и reader в `Scripts/StructTrain/TimeLearner`. API adapter отделить от
+`NativeTrainingService`: отсутствие результата/ошибка artifact sink не должны
+превращаться в успешное измерение. У незавершённой пробы нельзя достраивать
+complete по числу уже полученных отсчётов.
+
+Сохранять spec и observation, base/effective revision, epoch, routing,
+Branch selector, идентичность реальных физических каналов, actual onsets,
+baseline и максимальный допустимый gap, полный список измеренных максимумов,
+исходные индексы, plateau bounds, знаковые смещения и причины отказа.
+Результат связывать с hash первичной трассы и версией метода. Reader повторно
+вычисляет результат из первичных данных на сервере; проверка только hash
+самого JSON не подтверждает правильность его численных полей.
+
+Обязательные проверки native bridge:
+
+- Classic/Branch через штатный scheduler: фактические каналы, routing и
+  selector совпадают с effective graph; дополнительные Calculate отсутствуют.
+- Полная обычная пачка и отдельный single-pulse режим представлены разными
+  протоколами; один не заменяет другой.
+- N=1/2/4/6, 2000/20000 Гц; повторное чтение пакета не меняет результат.
+- Поздняя предыдущая волна, общая вершина, plateau с onset внутри,
+  меньшие экстремумы и поздний более высокий максимум; отсутствие отклика
+  постороннего импульса не аннулирует независимую диагностическую гипотезу.
+- Подмена timestamp, source index, pattern/model revision, physical channel
+  или selector, пропуск конкурирующей области, gap и incomplete запрещают
+  положительный diagnostic receipt.
+- Уже сохранённые 14 high-threshold условий разобрать тем же production
+  методом на сервере. Они являются исследовательскими/отрицательными
+  контролями и не обязаны превращаться в успешное обучение.
+
+Отдельно после bridge требуется метод `AttributionEvidence`: область
+применимости, подтверждающие пробы, конкурирующие объяснения и причины
+unresolved. Single/omit-пробы способны опровергнуть назначение, но не дают
+универсального разложения нелинейной пачки. Эксклюзивность окна не является
+такой приёмкой. Только после неё согласованно версионировать Train-контракт,
+`ProbeObservation`, `FinalVerification`, `NativeTrainingService`, serializers
+и Python readers. До этого `TrainingCertificateEligible=false` сохраняется.
