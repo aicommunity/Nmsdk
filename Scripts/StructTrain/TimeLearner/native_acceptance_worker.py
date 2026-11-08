@@ -67,7 +67,11 @@ def _relative(value):
 
 
 def validate_job(job, preparation, arguments):
-    """Validate data/wiring without launching, importing SDK APIs or building."""
+    """Validate data/wiring through the production serializer, without execution."""
+    from .native_preparation import serialize_preparation
+    # Use the same production canonical contract as the separate preparer.
+    # A content hash alone cannot establish consistency between copied fields.
+    serialize_preparation(preparation)
     _require(type(job) is dict and set(job) == {
         "kind", "schema_version", "workspace", "preparation", "paths", "build",
         "limits", "asan_options", "protected_runtimes", "artifacts"}, "job_schema")
@@ -94,6 +98,7 @@ def validate_job(job, preparation, arguments):
              type(job["build"]["parallel"]) is int and job["build"]["parallel"] in (1, 2) and
              type(job["build"]["wall_seconds"]) is int and job["build"]["wall_seconds"] > 0 and
              type(job["build"]["required_cache_tokens"]) is list and
+             bool(job["build"]["required_cache_tokens"]) and
              all(type(v) is str and v for v in job["build"]["required_cache_tokens"]), "build_profile")
     _require(type(job["limits"]) is dict and set(job["limits"]) == {
         "whole_wall_seconds", "leaf_memory_bytes", "leaf_tasks", "physical_free_floor_bytes",
@@ -163,9 +168,10 @@ class Worker:
                      for p in self.protected for k in ("build", "runtime", "output")), "protected_write_path_overlap")
         _require(all(self.paths[k].is_dir() for k in ("source", "resources", "framework")),
                  "missing_read_only_directory")
-        from . import runtime, native_gate, resource_reservations, contained_process
+        from . import runtime, native_gate, resource_reservations, contained_process, native_preparation, collector_provenance
         self.api = runtime, native_gate, resource_reservations, contained_process
-        self.imports = {m.__name__:str(Path(m.__file__).resolve()) for m in self.api}
+        self.imports = {m.__name__:str(Path(m.__file__).resolve()) for m in
+                        (*self.api, native_preparation, collector_provenance)}
         _require(all(Path(p).is_relative_to(self.source) for p in self.imports.values()), "mixed_SDK_imports")
         self.registry = resource_reservations.Reservations.open_existing(self.base/"resource-reservations.sqlite3")
         self.token = None
@@ -302,9 +308,69 @@ class Worker:
         self.write("progress.json", {"passed_cases":len(self.passed), "closed_leaf_gates":self.gates,
             "current_gate":name, "expected_cases":len(self.expected)})
 
+    def final_captures(self, runtime_before, frozen, before_source, closure):
+        """Attempt every independent observation even if an earlier one fails."""
+        errors, protected_after = [], {}
+        def capture(label, operation):
+            try:
+                operation()
+            except BaseException as error:
+                errors.append({"capture":label, "reason":str(error)})
+        def current_runtime():
+            actual = self.inventory(self.runtime)
+            self.write("current-runtime-after.json", actual)
+            _require(actual == runtime_before, "current_runtime_changed")
+        if runtime_before is not None:
+            capture("current_runtime", current_runtime)
+        for path, expected in frozen.items():
+            def protected(path=path, expected=expected):
+                actual = self.inventory(Path(path))
+                protected_after[path] = actual
+                _require(actual == expected, "protected_runtime_or_resources_changed:"+path)
+            capture("protected:"+path, protected)
+        capture("protected_inventory_write", lambda:self.write("protected-files-after.json", protected_after))
+        if before_source is not None:
+            def source_bytes():
+                actual, _ = self.source_files()
+                self.write("source-hashes-after.json", actual)
+                _require(actual == before_source, "source_changed_during_run")
+            capture("source_bytes", source_bytes)
+        if closure is not None:
+            def source_identity():
+                actual = self.api[0].source_closure(self.source)
+                self.write("source-closure-after.json", actual)
+                _require(actual == closure, "source_closure_changed_during_run")
+            def resource_identity():
+                head = self.git(self.paths["resources"], "rev-parse", "HEAD").decode().strip()
+                self.write("resource-closure-after.json", {"head":head})
+                _require(head == closure["Bin"]["recorded_gitlink"], "resource_commit_changed_during_run")
+            capture("source_closure", source_identity)
+            capture("resource_closure", resource_identity)
+        if "build" in self.paths:
+            def build_metadata():
+                build = self.paths["build"]
+                cache = build/"CMakeCache.txt"
+                if cache.is_file() and not cache.is_symlink():
+                    (self.out/"CMakeCache-terminal.txt").write_bytes(cache.read_bytes())
+                commands = {}
+                for relative in ("Rdk/CMakeFiles/rdk.static.qt.dir",
+                                 "Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir",
+                                 "Tests/Integration/Libraries/CMakeFiles/Test_PulseLib_StorageComponents.dir"):
+                    for name in ("flags.make", "link.txt"):
+                        path = build/relative/name
+                        if path.is_file() and not path.is_symlink():
+                            raw = path.read_bytes()
+                            commands[relative+"/"+name] = {"bytes":len(raw),
+                                "sha256":hashlib.sha256(raw).hexdigest(),"text":raw.decode("utf-8")}
+                self.write("generated-build-commands.json", commands)
+            capture("build_metadata", build_metadata)
+        capture("capture_errors_write", lambda:self.write("final-capture-errors.json", errors))
+        return errors
+
     def run(self):
         passed, built, frozen = False, False, {}
         before_source = None
+        closure = None
         runtime_before = None
         thread = None
         try:
@@ -412,21 +478,10 @@ class Worker:
             self.stop.set()
             if thread:
                 thread.join(timeout=20)
-            try:
-                if runtime_before is not None:
-                    runtime_after = self.inventory(self.runtime)
-                    self.write("current-runtime-after.json", runtime_after)
-                    _require(runtime_after == runtime_before, "current_runtime_changed")
-                after = {p:self.inventory(Path(p)) for p in frozen}
-                self.write("protected-files-after.json", after)
-                _require(after == frozen, "protected_runtime_or_resources_changed")
-                if before_source is not None:
-                    actual, _ = self.source_files()
-                    self.write("source-hashes-after.json", actual)
-                    _require(actual == before_source, "source_changed_during_run")
-            except BaseException as error:
-                passed = False
-                self.write("final-capture-error.json", {"reason":str(error)})
+                if thread.is_alive():
+                    self.heartbeat_errors.append("heartbeat_shutdown_not_completed")
+            capture_errors = self.final_captures(runtime_before, frozen, before_source, closure)
+            passed = passed and not capture_errors
             passed = passed and not self.heartbeat_errors
             assertions_passed = (len(self.observed) == len(set(self.observed)) == len(self.expected) and
                                  set(self.passed) == set(self.expected) and not self.failed)
@@ -435,6 +490,7 @@ class Worker:
                 "expected_cpp_cases":len(self.expected), "audited_completed_cpp_cases":len(self.observed),
                 "actual_audited_assertion_passed_cpp_cases":len(self.passed), "actual_audited_failed_cpp_ids":self.failed,
                 "completed_leaf_gates":self.gates, "heartbeat_errors":self.heartbeat_errors,
+                "final_capture_errors":capture_errors,
                 "scientific_verdict":None, "whole_plan_complete":False,
                 "lease_release_policy":"external owner only after exact outer and all recorded leaf kernel groups are closed"})
         return 0 if passed else 1
