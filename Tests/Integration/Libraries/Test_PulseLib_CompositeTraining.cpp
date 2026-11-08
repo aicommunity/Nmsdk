@@ -449,10 +449,12 @@ template<class Owner> void ServiceExact(int mode) {
 template<class Owner> void ServiceDefaultSync() {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f,.02);
     ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
-    EXPECT_NE(service.Outcome(),TrainingStatus::Exact);ASSERT_TRUE(service.Certificate());
-    EXPECT_FALSE(service.Certificate()->Exact());EXPECT_DOUBLE_EQ(service.Certificate()->Tolerances().sync,.02);
-    EXPECT_GT(std::max(std::fabs(service.Certificate()->Residuals().front().timingResidualLow),
-        std::fabs(service.Certificate()->Residuals().front().timingResidualHigh)),.02);
+    EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);EXPECT_FALSE(service.Certificate());
+    ASSERT_TRUE(service.Search());const auto& negativeFinal=service.Search()->Certificate();ASSERT_TRUE(negativeFinal);
+    // One configured sweep cannot promote an outside-tolerance final pass.
+    EXPECT_FALSE(negativeFinal->Exact());EXPECT_DOUBLE_EQ(negativeFinal->Tolerances().sync,.02);
+    EXPECT_GT(std::max(std::fabs(negativeFinal->Residuals().front().timingResidualLow),
+        std::fabs(negativeFinal->Residuals().front().timingResidualHigh)),.02);
 }
 template<class Owner> void ServiceWarmReset() {
     NativeCompositeFixture<Owner> f(2000,false,64,true,true);auto p=ServicePlan(f);ServiceStart(f,p);ServiceTicks(f);
