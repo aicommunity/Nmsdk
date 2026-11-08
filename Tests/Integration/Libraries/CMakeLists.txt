@@ -5,10 +5,14 @@ message(STATUS "Libraries integration tests directory created")
 set(PULSELIB_TEST_OUTPUT_DIR "${DEPLOY_ROOT}")
 
 add_executable(Test_Rdk_RuntimeDescriptions
-    Test_Rdk_RuntimeDescriptions.cpp ../Support/ProbeAlgorithmMain.cpp)
-target_link_libraries(Test_Rdk_RuntimeDescriptions PRIVATE rdk.static.qt GTest::gtest Nmsdk::Qt::Core)
+    Test_Rdk_RuntimeDescriptions.cpp ../Support/ProbeAlgorithmMain.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp)
+target_link_libraries(Test_Rdk_RuntimeDescriptions PRIVATE rdk.static.qt
+    Rdk-HardwareLib.qt Nmsdk-MotionControlLib.qt Nmsdk-PulseLib.qt
+    GTest::gtest Nmsdk::Qt::Core)
 target_include_directories(Test_Rdk_RuntimeDescriptions PRIVATE
-    ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include ${CMAKE_SOURCE_DIR}/Rdk/Core)
+    ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include ${CMAKE_SOURCE_DIR}/Rdk/Core
+    ${CMAKE_SOURCE_DIR}/Libraries)
 set_target_properties(Test_Rdk_RuntimeDescriptions PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${PULSELIB_TEST_OUTPUT_DIR}"
     RUNTIME_OUTPUT_DIRECTORY_DEBUG "${PULSELIB_TEST_OUTPUT_DIR}"
