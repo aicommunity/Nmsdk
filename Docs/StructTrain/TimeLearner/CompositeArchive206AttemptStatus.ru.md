@@ -59,6 +59,16 @@ Evidence `e86b5081515efa75a4195c264866be23e8a79f56` и
 этих системных процессов не заявляется.
 [Идентификаторы попыток](TypedCompositeTrainingJobs.json).
 
+M40 A1 опубликована как `c19d2eb325541667ef770eacee8e8f132ad99ba3`;
+[независимая проверка](M40CompositeArchiveA1PreflightNegativeVerification.json)
+подтверждает неизменность 3680 materialized source files относительно их
+Git blobs, CMake и принятого runtime143. M40 A2 после исправления подготовки
+прошла preflight, получила отдельную группу процессов с 8 GiB/128 tasks
+и начала сборку на тех же Root540/Pulsef925. Наблюдение ядра ОС подтвердило
+живой PID; итогового ASan206 verdict пока нет. Две проверки идут параллельно:
+Elder/normal и M40/ASan. Existing registry capacity=null на M40 сохранена;
+память и число процессов ограничивает ядро ОС, резервирование путей действует.
+
 ## Windows: сборка не принята из-за завершения процессов
 
 A2 на .14 собрал Console и StorageComponents: основной процесс вернул 0.

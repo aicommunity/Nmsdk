@@ -219,7 +219,28 @@
       "whole_gate_accepted": false,
       "kernel_outer_closed": true,
       "lease_created": false,
-      "negative_publication_pending": true,
+      "negative_publication_pending": false,
+      "scientific_verdict": null,
+      "negative_evidence_commit": "c19d2eb325541667ef770eacee8e8f132ad99ba3",
+      "receipt": "M40CompositeArchiveA1PreflightNegativeVerification.json"
+    },
+    {
+      "job_id": "s07-composite-archive-m40-asan-a2",
+      "host": "10.245.1.17",
+      "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
+      "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "state": "running_build_at_kernel_observation",
+      "unit": "timelearner-8947461b-b039-45b4-aa94-05de01b636d1.service",
+      "invocation_id": "6a5e9fbe67074e75aa7f9fa278386ce7",
+      "initial_main_pid": 3017888,
+      "initial_start_ticks": "322010062",
+      "request_sha256": "c10e661790d0707966e3ab6639e2e3be8189ccc7d97e9acc8003b5f99ba7d15e",
+      "expected_cpp_cases": 206,
+      "whole_gate_accepted": false,
+      "asan_options": "detect_leaks=0",
+      "kernel_memory_bytes": 8589934592,
+      "kernel_tasks": 128,
+      "build_parallel_jobs": 2,
       "scientific_verdict": null
     }
   ],
@@ -259,7 +280,7 @@
     "current_receipt": "ElderDuplicateFetchcontentRetentionA1Verification.json"
   },
   "composite_archive206_next_attempt": {
-    "state": "elder_a2_running_m40_a2_preparing_after_preflight_negative",
+    "state": "elder_normal_a2_and_m40_asan_a2_running_at_recorded_observations",
     "root": "540179d70ddf3764334eb6bb59b7fef691054eee",
     "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
     "expected_cpp_cases": 206,
