@@ -42,6 +42,7 @@ set_tests_properties(PulseLib_ResponseDomains PROPERTIES WORKING_DIRECTORY "${DE
 add_executable(Test_PulseLib_MatchedOmissionAssignment
     Test_PulseLib_MatchedOmissionAssignment.cpp ../Support/ProbeAlgorithmMain.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.cpp
+    ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MatchedOmissionValidation.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Nmsdk-PulseLib/Core/TimeLearner/MatchedOmissionAssignment.cpp)
 target_link_libraries(Test_PulseLib_MatchedOmissionAssignment PRIVATE GTest::gtest Nmsdk::Qt::Core)
 set_target_properties(Test_PulseLib_MatchedOmissionAssignment PROPERTIES
