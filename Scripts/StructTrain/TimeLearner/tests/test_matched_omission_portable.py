@@ -190,3 +190,36 @@ class PortableMatchedOmissionTest(unittest.TestCase):
     def test_verdict_and_training_eligibility_never_follow_process_success(self):
         for field,value in [('diagnostic_only',False),('training_certificate_eligible',True),('scientific_verdict','PASS')]:
             document, primary = fixture(); document[field] = value; self.rejected(document,primary)
+
+    def test_complete_missing_response_remains_a_negative_operational_outcome(self):
+        document, primary = fixture()
+        for record in document['traces']:
+            rows = list(csv.reader(io.StringIO(primary[record['relative_path']].decode())))
+            for row in rows[1:]:row[2:] = ['2']*(len(row)-2)
+            rehash(record,primary,('\n'.join(','.join(row) for row in rows)+'\n').encode())
+        document['assignment'].update(validity='missing',reasons=['no_exclusive_assigned_full_maximum'],
+                                      maxima=[],selected_full_maximum=None,measured_maximum=None)
+        result = audit_portable_matched_evidence(document,primary)
+        self.assertEqual(result['assignment_validity'],'missing'); self.assertFalse(result['training_certificate_eligible'])
+
+    def test_complete_clipped_response_does_not_become_a_valid_peak(self):
+        document, primary = fixture()
+        for index in (0,2,3):
+            record=document['traces'][index];rows=list(csv.reader(io.StringIO(primary[record['relative_path']].decode())))
+            rows[-1][2]='10';rehash(record,primary,('\n'.join(','.join(row) for row in rows)+'\n').encode())
+        a = document['assignment'];a.update(validity='clipped',reasons=['possibly_assigned_maximum_is_clipped'],
+                                           selected_full_maximum=None,measured_maximum=None)
+        a['maxima'].append(dict(first_sample=12,last_sample=12,amplitude=8.,raw_potential=10.,time=1.2,plateau_end=1.2,
+            comparison_first_sample=11,comparison_last_sample=12,supported_inputs=[0],
+            influence_by_input=['supported','not_supported'],unknown=False,precedes_assigned_stimulus=False,clipped=True))
+        result=audit_portable_matched_evidence(document,primary)
+        self.assertEqual(result['assignment_validity'],'clipped');self.assertFalse(result['training_certificate_eligible'])
+
+    def test_complete_nonrepeatable_group_retains_its_failure(self):
+        document, primary = fixture();record=document['traces'][3]
+        rows=list(csv.reader(io.StringIO(primary[record['relative_path']].decode())))
+        rows[4][2]='5.5';rehash(record,primary,('\n'.join(','.join(row) for row in rows)+'\n').encode())
+        document['assignment'].update(validity='non_repeatable',reasons=['full_response_not_repeatable'],
+                                      maxima=[],selected_full_maximum=None,measured_maximum=None)
+        result=audit_portable_matched_evidence(document,primary)
+        self.assertEqual(result['assignment_validity'],'non_repeatable');self.assertFalse(result['training_certificate_eligible'])

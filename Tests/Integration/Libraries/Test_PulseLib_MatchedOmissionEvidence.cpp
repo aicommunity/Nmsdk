@@ -90,6 +90,13 @@ struct MatchedCodecFixture {
         result.reason="omission_group_closed";
     }
     QJsonObject Encode() const {return EncodeMatchedOmissionEvidence(result,paths,primary);}
+    void RefreshPrimary() {
+        std::vector<const MatchedOmissionTrace*> traces{&result.witness.fullBefore};
+        for(const auto& trace:result.witness.omitEachInput)traces.push_back(&trace);
+        traces.push_back(&result.witness.fullAfter);primary.clear();
+        for(std::size_t i=0;i<traces.size();++i)primary.emplace(paths[i],EncodeMatchedOmissionPrimaryTrace(*traces[i],result.packets[i]));
+        result.assignment=SelectMatchedOmissionMaximum(result.specification,result.policy,result.witness);
+    }
 };
 void ChangeTrace(QJsonObject& object,int index,const std::function<void(QJsonObject&)>& change)
 {
@@ -211,5 +218,32 @@ TEST(MatchedOmissionCodec,RecognitionAndTrainingClaimsRemainSeparate)
     MatchedCodecFixture f;auto object=f.Encode();object["training_certificate_eligible"]=true;
     EXPECT_THROW(DecodeMatchedOmissionEvidence(object,f.primary),std::invalid_argument);
     object=f.Encode();object["scientific_verdict"]="PASS";EXPECT_THROW(DecodeMatchedOmissionEvidence(object,f.primary),std::invalid_argument);
+}
+TEST(MatchedOmissionCodec,CompleteMissingResponseSurvivesImport)
+{
+    MatchedCodecFixture f;
+    std::vector<MatchedOmissionTrace*> traces{&f.result.witness.fullBefore,&f.result.witness.fullAfter};
+    for(auto& trace:f.result.witness.omitEachInput)traces.push_back(&trace);
+    for(auto trace:traces)for(auto& channel:trace->observation.channels)
+        for(auto& sample:channel.samples)sample.rawPotential=channel.baseline;
+    f.RefreshPrimary();const auto encoded=f.Encode();const auto imported=DecodeMatchedOmissionEvidence(encoded,f.primary);
+    ASSERT_TRUE(imported.assignment);EXPECT_EQ(imported.assignment->validity,MatchedOmissionValidity::Missing);
+    EXPECT_TRUE(imported.assignment->maxima.empty());EXPECT_FALSE(imported.assignment->measuredMaximum);
+}
+TEST(MatchedOmissionCodec,CompleteClippedResponseDoesNotBecomeAValidPeak)
+{
+    MatchedCodecFixture f;
+    for(auto trace:{&f.result.witness.fullBefore,&f.result.witness.fullAfter,&f.result.witness.omitEachInput[1]})
+        trace->observation.channels[0].samples.back().rawPotential=10.;
+    f.RefreshPrimary();const auto encoded=f.Encode();const auto imported=DecodeMatchedOmissionEvidence(encoded,f.primary);
+    ASSERT_TRUE(imported.assignment);EXPECT_EQ(imported.assignment->validity,MatchedOmissionValidity::Clipped);
+    EXPECT_FALSE(imported.assignment->selectedFullMaximum);EXPECT_FALSE(encoded["training_certificate_eligible"].toBool());
+}
+TEST(MatchedOmissionCodec,CompleteNonrepeatableGroupRetainsItsFailure)
+{
+    MatchedCodecFixture f;f.result.witness.fullAfter.observation.channels[0].samples[3].rawPotential=5.5;
+    f.RefreshPrimary();const auto encoded=f.Encode();const auto imported=DecodeMatchedOmissionEvidence(encoded,f.primary);
+    ASSERT_TRUE(imported.assignment);EXPECT_EQ(imported.assignment->validity,MatchedOmissionValidity::NonRepeatable);
+    EXPECT_FALSE(imported.assignment->measuredMaximum);EXPECT_FALSE(encoded["training_certificate_eligible"].toBool());
 }
 }

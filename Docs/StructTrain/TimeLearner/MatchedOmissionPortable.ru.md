@@ -46,7 +46,7 @@ training_certificate_eligible остаются false. C0 witness, модель, 
 
 ## Адресная приёмка
 
-Подготовлены 20 новых C++ codec tests и 20 Python reader tests. Дополнительно
+Подготовлены 23 новых C++ codec tests и 23 Python reader tests. Дополнительно
 нужны прежние 20 fixture reader tests, 35 selector, 2 capture boundary,
 10 capture/codec regression и 10 настоящих native groups: из шести полных групп
 сохраняется portable witness, четыре stop/edit должны отказать его экспорту.
@@ -57,3 +57,19 @@ training_certificate_eligible остаются false. C0 witness, модель, 
 Локально выполнены только AST, literal test inventory и Git checks. Сборки и
 численные проверки выполняются на серверах; результаты ещё не приняты. Успех
 этого подэтапа не завершает этапы 5–8, полную матрицу или научное обучение.
+
+
+В исходный набор отдельно добавлены complete Missing/Clipped/NonRepeatable
+roundtrip cases: законченный отрицательный результат обязан сохраняться после
+импорта, не становясь Valid или сертификатом. Они выполняются следующим
+серверным gate; первые20 codec cases и40 Python tests уже прошли на M40,
+остальная приёмка первого снимка ещё выполняется. Принятый результат для
+всего нового набора появится только после соответствующих server receipts.
+
+Для normal проверки на Elder удалены только13 static AR archives старых
+закрытых runtime a1/a2; последний a4, executable/ini, пользовательский Nmsdk и
+первичные данные не затронуты. Доступное место увеличилось на136433664 bytes.
+[Cleanup receipt](ElderS07StaticArchiveRetirementVerification.json) сохраняет
+preimages, журнал, kernel/lease closure и явные ограничения проверки protected
+login helpers. Это разрешённая очистка build cache, а не удаление исторических
+измерений и не подтверждение новых numerical tests.
