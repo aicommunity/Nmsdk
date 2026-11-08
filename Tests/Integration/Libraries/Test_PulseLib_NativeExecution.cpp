@@ -238,10 +238,11 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             {
                 auto channel=neuron->template GetComponentL<NPulseChannel>("Dendrite1_"+std::to_string(inputCount)+".ExcChannel",true);
                 ASSERT_TRUE(channel);ASSERT_TRUE(channel->IsReady());
+                const auto previousRevision=readRevision();
                 const auto previous=channel->Capacity.GetData();
                 channel->Capacity=std::nextafter(previous,std::numeric_limits<double>::infinity());
                 EXPECT_NE(channel->Capacity.GetData(),previous);EXPECT_TRUE(channel->IsReady());
-                EXPECT_NE(readRevision(),base);break;
+                EXPECT_NE(readRevision(),previousRevision);break;
             }
             case Interference::SourceFrequency:generator->Frequency=100.;break;
             case Interference::Pattern:
