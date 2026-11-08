@@ -27,13 +27,22 @@
       "job": "windows-domain-fixture-identity-a2",
       "task": "TimeLearner-WindowsDomainFixtureIdentity-A2-20261108",
       "instance": "{054D8748-91BD-4516-BD91-C8D80D486B9E}",
-      "state": "actual_worker_process_confirmed_live",
+      "state": "closed_build_return0_but_descendant_remaining_native_not_started",
       "worker_pid": 10328,
       "worker_creation_epoch_ms": 1794112255759,
       "worker_sha256": "8f90268c7af1640135f899c58a79a5aec19f7aff79d215053b09d5bdaa5ea504",
       "source": "C:/Projects/TimeLearnerWorker/source-fixture-identity-windows-a2",
       "build": "C:/Projects/TimeLearnerWorker/build-fixture-identity-windows-a2",
-      "runtime": "C:/Projects/TimeLearnerWorker/runtime-fixture-identity-windows-a2"
+      "runtime": "C:/Projects/TimeLearnerWorker/runtime-fixture-identity-windows-a2",
+      "build_returncode": 0,
+      "build_wall_seconds": 2041.570763499476,
+      "descendants_at_main_exit": [
+        9556
+      ],
+      "descendant_identity": "not_captured_unknown",
+      "all_owned_processes_closed": true,
+      "native_checks_started": 0,
+      "build_execution_accepted": false
     }
   ]
 }
