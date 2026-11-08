@@ -21,8 +21,21 @@ late larger peak, ties, plateaus, clipping и absolute-clock cases; native
 Classic/Branch и storage checks. Совпадение этих результатов не доказывает
 готовность нового алгоритма атрибуции: schema3 сохраняет прежний смысл.
 
-Статус: кандидат; обе серверные сборки и все78 unit cases прошли. Native
-проверки и A/B ещё не завершены: [точные задания](MeasuredResponseJobs.json).
+На Elder принята normal-проверка:78 unit и15 отдельных native cases, включая
+Classic/Branch,2000/20000 Гц, N=1/2/4/6, shared-vertex guard и single-impulse
+maximum. Все93 JUnit IDs сверены с заданиями; пять изменённых source bindings
+совпали с Git. Текущий и прежний runtime неизменны, группы закрыты, lease released.
+[Независимая квитанция](MeasuredResponseNormalVerification.json), Git-primary
+`0e7a30ff19b4d67846cc98f27b98ed9dd3862d74`:625 members,457932 compressed bytes.
+Новых обученных моделей и результатов классификации этот gate не создаёт.
+
+Служебный stderr сборочного worker содержит только проверенные сообщения Git
+о detached checkout трёх объявленных commits. Его точные1102 bytes/SHA сохранены
+в приёмке отдельно от model-process diagnostics. Первоначальный publisher
+ожидал пустой служебный stderr и отказал до создания evidence commit; после
+проверки конкретных сообщений повторялась только упаковка, не модели.
+
+Статус: ASan/native и A/B на M40 ещё выполняются: [точные задания](MeasuredResponseJobs.json).
 Продолжать наблюдение этих же групп; неполный gate не перезапускать по таймауту
 наблюдения. Математическую цель,
 CapturedPerInput, reference N−1, tolerances, протокол подачи и частоты не меняет.
