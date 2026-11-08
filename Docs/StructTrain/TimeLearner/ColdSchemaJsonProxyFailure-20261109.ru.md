@@ -11,8 +11,14 @@ roundtrip:230 PASS,1 FAIL,17 not run. Сообщение
 Обе операции mutable `operator[]` возвращают Qt JSON proxy. Вставка нового
 ключа слева может сдвинуть позицию, на которую всё ещё ссылается правый proxy.
 Ранее реализованный recovery5 уже читает owning `result.value(...)` безопасно.
-Цепочка source соответствует наблюдаемому отказу строгого числового decoder;
-точное испорченное значение конкретного raw-файла ещё требует проверки evidence.
+Цепочка source соответствует наблюдаемому отказу строгого числового decoder.
+[Проверка фактических JSON envelope](Cold6ActualEnvelopeForensics-20261109.json)
+в Git evidence `a7dae002295800d520b1fd35975283f0daa2362d` установила: во всех
+шести initial-configuration schema6 поле `base_schema_version` содержит строку
+**`sample0`**, то есть текст соседнего `sample_id`, вместо номера. Member paths,
+размеры, SHA256 каждого JSON и архива записаны; waveform/численный анализ локально
+не выполнялся, исходные файлы не менялись. Это наблюдаемый producer corruption,
+а не основание ослаблять strict Number.
 
 Минимальное baseline-исправление подготовлено в Pulse
 `4a5c2ec9df9a9f704dcd8260714323494bfa4415`, отдельная ветка
