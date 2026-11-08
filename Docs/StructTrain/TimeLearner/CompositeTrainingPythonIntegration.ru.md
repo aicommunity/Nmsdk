@@ -90,3 +90,32 @@ Worker owner PID/start совпадает с kernel binding, unit закрыт, 
 Все новые unit/native/pipeline проверки выполняются на серверах из Git-pushed
 source; локально только AST/static review. Общий runtime должен собираться из объединённого C++service+
 Python closure: старый compiled runtime не подтверждает поддержку cold6.
+
+
+## Подготовка полного primary transport
+
+Отдельный composite_primary проверяет embedded primary_blobs[SHA]={bytes,base64}
+и каждый primary_ref={relative_path,bytes,sha256}. Embedded bytes обязательны;
+если задан external resolver, каждая ссылка должна дополнительно дать те же
+bytes: отсутствие или mismatch не заменяются fallback из другого источника.
+Только точное множество referenced hashes, без скрытых/потерянных blobs;
+канонический base64, полный SHA и размер. Повтор одинаковых bytes в разных
+logical paths сохраняется. primary_bytes/materialized budget считает все
+logical primary_ref, включая одинаковый SHA в разных paths; unique stored bytes
+проверяются отдельно. Это согласовано с NativeCompositeRecordPrimaryBytes.
+
+Файлы переносятся в новый snapshot byte-for-byte. Traversal, альтернативные
+написания пути, case-collisions, file/directory conflicts и symlink ancestors
+не допускаются. Некорректный inventory не создаёт output; существующий каталог
+не переписывается. Helper и прежние regressions проверены на M40:51/51,
+failures/errors/skips0, source root`bb489c3b3bb69b0d0aeda485350ce8a81ce42c5b`,
+evidence`df9531926815565e7c5c1bc1e890c2dde34b5ccb`.
+32 archive members/31816 bytes, SHA256
+`2efa318d0d1974bcf6799e523c3c3db6b55e979eb8672a88af841e4bf83f5c61`;
+418 точных Git source hashes, все outer/member hashes и owner/kernel closure
+проверены отдельно. Операционный worker и supervisor byte-for-byte те же,
+что в принятой39-suite; менялся только declarative specification.
+[Metadata-сверка](CompositeTrainingPythonPrimaryVerification-20261108.json).
+Storage integrity сама по себе не подтверждает геометрию, native execution, consumed event, source
+lineage или certificate2. Archive/index/record reader и package5 dispatch
+должны проверять их отдельно; helper не wired как готовый learned auditor.
