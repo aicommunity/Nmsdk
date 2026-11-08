@@ -242,7 +242,13 @@ template<class Owner> void RawAdmission() {
     EXPECT_THROW(final.Arm(raw),std::invalid_argument);EXPECT_EQ(final.IssuedProbes(),0u);
     EXPECT_THROW(final.Consume(ProbeObservation{},f.Revision()),std::invalid_argument);EXPECT_FALSE(final.Certificate());
     EXPECT_THROW(CapturedReferences::Capture(f.protocol,{}),std::invalid_argument);
-    EXPECT_THROW(EncodeVerificationProtocol(f.protocol),std::invalid_argument);
+    // Protocol4 now has an explicit portable declaration codec. Encoding it
+    // grants neither raw admission nor a live composite measurement lease.
+    const auto declaration=EncodeVerificationProtocol(f.protocol);EXPECT_EQ(declaration["schema_version"],QJsonValue(4));
+    EXPECT_EQ(DecodeVerificationProtocol(declaration),f.protocol);
+    auto stripped=declaration;stripped.remove("composite_measurement");EXPECT_THROW(DecodeVerificationProtocol(stripped),std::invalid_argument);
+    auto mislabeled=declaration;mislabeled["schema_version"]=3;EXPECT_THROW(DecodeVerificationProtocol(mislabeled),std::invalid_argument);
+    EXPECT_EQ(final.IssuedProbes(),0u);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
 }
 template<class Owner> void ReplayedGroup() {
     NativeCompositeFixture<Owner> f;const auto refs=f.Capture();FinalVerificationSession final(refs,{"final",f.Revision(),4,0,0});
