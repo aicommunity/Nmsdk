@@ -25,14 +25,27 @@
       "job": "s07-matched-omission-elder-a2",
       "root": "9e5249421e2ae8f06183b19fad278289cf98522a",
       "PulseLib": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
-      "state": "compiler_process_confirmed_live_after_native_group_correction",
+      "state": "closed_normal55_passed_lease_released",
       "worker_sha256": "0fbeb4edcdc04cab15aa701381395f57d754229a289257dbc2c58aa13865cc90",
       "unit": "timelearner-901bb0e2-5a18-4ab0-8638-a5a565b81b07.service",
       "invocation_id": "4b703d8b451845f08f6c1505ca9d3417",
       "initial_main_pid": 1701851,
       "initial_start_ticks": "368303373",
-      "request_sha256": "a0a2209cd5310bf639a0bf6416d736d2a1427ebb7fbb26e7594eb9a3aadc4b9b"
+      "request_sha256": "a0a2209cd5310bf639a0bf6416d736d2a1427ebb7fbb26e7594eb9a3aadc4b9b",
+      "evidence_commit": "f2802e7f23043391100d0ec85b8ea1c063d47a12",
+      "verification_receipt": "MatchedOmissionNormalVerification.json"
+    },
+    {
+      "host": "10.245.1.11",
+      "job": "s07-matched-omission-elder-a3",
+      "root": "58f5b5181c217e70afd9ab08f18cd966f4640f99",
+      "PulseLib": "fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8",
+      "state": "launch_requested",
+      "native_cases_planned": 10,
+      "reason": "preserve support diagnostics and completed traces of negative cases; add two separated positive controls",
+      "pure_math_code_changed": false
     }
   ],
-  "remaining": "NativeTrainingService/CapturedReferences/search/final verification composite integration, portable witness codec/reader, expanded topology/profile matrix, ASan, scientific trains"
+  "remaining": "NativeTrainingService/CapturedReferences/search/final verification composite integration, portable witness codec/reader, expanded topology/profile matrix, ASan, scientific trains",
+  "normal55_scoped_accepted": true
 }

@@ -65,3 +65,27 @@ checks,10 прежних capture/codec controls и8 реальных групп 
 и FinalVerification. Старый schema3 validator не ослаблен. Для рабочего нового
 Train требуются versioned composite proof, сохранение/replay и интеграция
 операционной assignment policy. Это следующий блок работы, а не закрытый этап7.
+
+
+## Проверенный normal срез
+
+Elder завершил55/55 проверок без skipped:35 unit,2 CloseNative boundary,
+10 прежних capture/codec и8 native measurement-group случаев. Все386 членов
+архива,23 source bindings, исходные JUnit IDs, loaded executable, неизменность
+обоих runtime и закрытие/lease проверены независимо:
+[квитанция](MatchedOmissionNormalVerification.json),
+evidence `f2802e7f23043391100d0ec85b8ea1c063d47a12`.
+Compiled root9e5249421 / PulseLibfcc3fed. Это normal-проверка, не ASan.
+
+Четыре связанные N2 реакции Classic/Branch на2000/20000 Гц дали Ambiguous.
+Четыре stop/edit controls не выдали assignment и остановились после первой
+пробы. Всего20 настоящих native bursts; четыре полные группы сохраняют16 CSV.
+В данном срезе первая завершённая трасса stop/edit controls не экспортировалась
+в CSV, хотя native packet сохранён. Artifact follow-up исправляет это,
+записывает причины/support sets и добавляет два separated positive controls.
+Не переносить на follow-up приёмку только по сходству исходников.
+
+Independent Python replay нового assignment ещё отсутствует. Связанные N2
+контроли не являются обученными моделями, не опровергают августовские наблюдения
+и не подтверждают классификацию. NativeTrainingService/final proof integration
+остаётся следующим обязательным [блоком](MatchedOmissionTrainingIntegration.ru.md).
