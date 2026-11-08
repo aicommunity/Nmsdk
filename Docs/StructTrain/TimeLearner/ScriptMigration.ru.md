@@ -375,3 +375,15 @@ negative fixture. Все20 members и380 Git source hashes на worker неза�
 прошёл verify-migration222 и restored-path negative на обоих серверах.
 Текущий manifest:220 retired+2 moved, complete=false. В AsymRm scripts остаются22
 Python; это не приёмка всех оставшихся legacy launchers/analyzers.
+
+
+08.11: [109 исторических Reports source snapshots](RootReportSnapshotRetirement.ru.md)
+удалены без wrappers; manifest354 (352 retired/2 moved), complete=false.
+Все остальные Reports blobs, включая исторические checksum-bound manifests,
+сохранены. Новый внешний retrieval index не меняет старые доказательства.
+Серверная проверка данного snapshot пока pending.
+
+Приёмка109-record batch завершена на обоих workers: production354 retrieval
+records, restored-path negative,113-entry source diff,86126 остальных Reports
+blobs и412 production Python source hashes. Полные SHA и сохранённый collector
+refusal приведены в RootReportSnapshotRetirement. complete=false остаётся.
