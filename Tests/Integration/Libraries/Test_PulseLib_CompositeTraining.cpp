@@ -2476,3 +2476,130 @@ TEST(NativeCandidateWindowService,ClassicMergedVertexRemainsDiagnostic){WindowSe
 TEST(NativeCandidateWindowService,BranchMergedVertexRemainsDiagnostic){WindowServiceMergedIsDiagnostic<NNeuronTimeLearnerBranch>();}
 TEST(NativeCandidateWindowService,ClassicActualClippedGroupBudgetIsNotReplacedByPlanCap){WindowServicePreservesClippedGroupBudget<NNeuronTimeLearner>();}
 TEST(NativeCandidateWindowService,BranchActualClippedGroupBudgetIsNotReplacedByPlanCap){WindowServicePreservesClippedGroupBudget<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignService) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    // Declare the foreign plan before the manual reference capture. This also
+    // enables protocol5 once; no late window/source retarget is involved.
+    const auto earliestAttemptModel=f.Time(),earliestAttemptWall=Wall();
+    const auto foreignPlan=ActualWindowServicePlan(f,.2,false);
+    const auto refs=CaptureWindowReferences(f);
+    VerificationConfig config{"candidate-attempt/final/1",f.Revision(),4,0,0};config.tolerances.sync=.2;
+    FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);
+    const auto request=final.NextRequest();ASSERT_TRUE(request);
+    // Keep the original, REAL group/attempt clocks alive across several later
+    // native groups. A short default deadline would mask the ownership issue.
+    constexpr double groupModelLimit=30.,groupWallLimit=3600.;
+    f.Run(*request,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},groupModelLimit,groupWallLimit);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    const auto pending=*f.attempt->Measurement();const auto pendingRecord=f.attempt->Record();
+    const auto cachedRevision=f.Revision();const auto ownerLife=f.owner->ObserveLifecycle();
+    const auto oldC0=f.owner->OwnedNativeCapacitanceState();ASSERT_TRUE(oldC0.isEmpty());
+    ASSERT_TRUE(pendingRecord.windowProposal);ASSERT_TRUE(pendingRecord.candidateWindowSpecification);
+    ASSERT_EQ(pendingRecord.windowProposal->candidateModelRevision,cachedRevision);
+    const auto frozenProposal=EncodeCandidateWindowProposalData(*pendingRecord.windowProposal);
+    const auto neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+    ASSERT_TRUE(neuron);ASSERT_TRUE(dataset);ASSERT_TRUE(source);
+    const auto datasetIdentity=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(datasetIdentity["valid"].toBool());
+    const auto beforeTime=f.Time();const auto oldGroups=f.attempt->IssuedGroups(),oldProbes=f.attempt->IssuedNativeProbes();
+    const auto stage=foreignService?"foreign-service-old-pending":"own-next-group-old-pending";
+    SaveCandidateWindowGroup(f,stage);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-window-live-authority/":"classic-window-live-authority/")+
+        (foreignService?"foreign-finished":"own-next-group");
+    const auto historicalArchive=EncodeNativeCandidateWindowTrainingArchive(*f.attempt);
+    SaveCompositeArchive(historicalArchive,(name+"/old-manual-journal").c_str());
+    ASSERT_EQ(final.AcceptedInputs(),0u);ASSERT_FALSE(final.Certificate());
+    const auto oldFamily=f.attempt->OwnerFamilyBinding();
+    std::unique_ptr<NativeCompositeTrainingAttempt> retainedManual;
+    if(foreignService) {
+        // Deliberately retain the old public manual actor. ServiceStart would
+        // destroy it, preventing this exact takeover/release regression.
+        retainedManual=std::move(f.attempt);
+        f.owner->CalculateMode=1;f.owner->BeginNativeTraining(foreignPlan,true);
+        ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::CapturingReferences)
+            <<f.owner->NativeTrainingController().Reason();
+        ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+        ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();
+        ASSERT_TRUE(service.Search());ASSERT_EQ(service.Search()->AppliedEdits(),0u);
+        ASSERT_EQ(service.SessionAttempt(),1u);ASSERT_NE(service.CompositeOwnerFamilyBinding(),oldFamily);
+        ASSERT_EQ(retainedManual->IssuedGroups(),oldGroups);ASSERT_EQ(retainedManual->IssuedNativeProbes(),oldProbes);
+        SaveWindowService(f,"foreign-finished-while-manual-proof-pending");
+    } else {
+        // A new raw executor generation belonging to THIS manual actor must
+        // not revoke an otherwise current closed measurement by itself.
+        const auto next=f.Request(0,"candidate-attempt","candidate-attempt/search/999");
+        f.Run(next,CompositeMeasurementPurpose::Search,{},{},groupModelLimit,groupWallLimit);
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();SaveCandidateWindowGroup(f,"own-intervening-group");
+        ASSERT_EQ(f.attempt->IssuedGroups(),oldGroups+1);ASSERT_EQ(f.attempt->IssuedNativeProbes(),oldProbes+4);
+        const auto ownRecord=f.attempt->Record();ASSERT_TRUE(ownRecord.windowProposal);
+        ASSERT_EQ(ownRecord.windowProposal->candidateModelRevision,pendingRecord.windowProposal->candidateModelRevision);
+        ASSERT_EQ(ownRecord.windowProposal->candidateBinding,pendingRecord.windowProposal->candidateBinding);
+    }
+    // Ordinary scheduler execution advanced native time. No Reset, Build,
+    // source/parameter edit, graph replacement or synthetic clock is used.
+    ASSERT_GT(f.Time(),beforeTime);ASSERT_TRUE(ownerLife.IsCurrent());ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseNeuron>("Neuron",true).Get(),neuron.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true).Get(),dataset.Get());
+    ASSERT_EQ(f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true).Get(),source.Get());
+    ASSERT_EQ(f.Revision(),cachedRevision);
+    ASSERT_EQ(f.owner->OwnedNativeCapacitanceState(),oldC0);EXPECT_FALSE(f.owner->ReadNativeTrainingCapacitance());
+    const auto afterDataset=NmsdkTools::IdentifyModel(dataset.Get());ASSERT_TRUE(afterDataset["valid"].toBool());
+    ASSERT_EQ(afterDataset["model"],datasetIdentity["model"]);
+    // Portable replay is intentionally independent of the current executor
+    // owner. A takeover does not erase valid historical full/omit/repeat DATA.
+    const auto historicalReplay=DecodeNativeCompositeTrainingArchive(historicalArchive.document);
+    ASSERT_EQ(historicalReplay.ReferenceGroups().size(),2u);ASSERT_EQ(historicalReplay.Records().size(),3u);
+    ASSERT_EQ(historicalReplay.Records().back().groupId,pendingRecord.groupId);
+    ASSERT_EQ(historicalReplay.Records().back().semanticProofId,pending.SemanticProofId());
+    ASSERT_TRUE(historicalReplay.Records().back().windowProposal);
+    ASSERT_EQ(EncodeCandidateWindowProposalData(*historicalReplay.Records().back().windowProposal),frozenProposal);
+    const auto admissionModel=f.Time(),admissionWall=Wall();
+    ASSERT_LT(admissionModel-pendingRecord.startModel,pendingRecord.maximumGroupModelSeconds);
+    ASSERT_LT(admissionWall-pendingRecord.startWall,pendingRecord.maximumGroupWallSeconds);
+    // These REAL timestamps precede actor construction, so the differences
+    // conservatively upper-bound the attempt's own elapsed values.
+    ASSERT_LT(admissionModel-earliestAttemptModel,pendingRecord.attemptLimits.maximumModelSeconds);
+    ASSERT_LT(admissionWall-earliestAttemptWall,pendingRecord.attemptLimits.maximumWallSeconds);
+    final.ConsumeCandidateWindow(pending,cachedRevision);
+    // Save the ACTUAL observation even when the proposed negative assertion
+    // below is red. Historical data validity is not a current live lease.
+    SavePortableObject(name.c_str(),"live-authority-observation.json",{{"kind","candidate_window_manual_live_authority_control"},{"schema_version",1},
+        {"foreign_service_executed",foreignService},{"declared_expected_live_revocation",foreignService},
+        {"old_group_id",QString::fromStdString(pendingRecord.groupId)},{"old_family",QString::fromStdString(oldFamily)},
+        {"old_logical_run",QString::fromStdString(pendingRecord.logical.runId)},{"old_logical_trial",QString::fromStdString(pendingRecord.logical.trialId)},
+        {"historical_measurement_primary_retained",true},{"historical_archive_replayed_after_intervening_work",true},
+        {"historical_semantic_proof_id",QString::fromStdString(pending.SemanticProofId())},
+        {"owner_lifecycle_current",ownerLife.IsCurrent()},{"actual_need_to_train",f.owner->IsNeedToTrain.GetData()},
+        {"model_revision_before",QString::fromStdString(cachedRevision)},{"model_revision_after",QString::fromStdString(f.Revision())},
+        {"group_start_model",pendingRecord.startModel},{"admission_model",admissionModel},{"group_model_limit",pendingRecord.maximumGroupModelSeconds},
+        {"group_start_wall",pendingRecord.startWall},{"admission_wall",admissionWall},{"group_wall_limit",pendingRecord.maximumGroupWallSeconds},
+        {"earliest_attempt_model",earliestAttemptModel},{"earliest_attempt_wall",earliestAttemptWall},
+        {"attempt_model_limit",pendingRecord.attemptLimits.maximumModelSeconds},{"attempt_wall_limit",pendingRecord.attemptLimits.maximumWallSeconds},
+        {"actual_C0_remains_absent",f.owner->OwnedNativeCapacitanceState().isEmpty()},
+        {"executor_control_generation_publicly_observed",false},{"actual_final_status",VerificationStatusName(final.Status())},
+        {"actual_accepted_inputs",double(final.AcceptedInputs())},{"certificate",final.Certificate()?QJsonValue(EncodeTrainingCertificate(*final.Certificate())):QJsonValue(QJsonValue::Null)}});
+    SaveCompositeBoundary(f,name.c_str());
+    if(foreignService) {
+        // Expected control contract, not a claim that Pulse800 implements it.
+        // Foreign Begin takes over the same executor; Finished/Need=true must
+        // not revive the old actor's authority to accept a NEW final input.
+        EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(final.AcceptedInputs(),0u);EXPECT_FALSE(final.Certificate());
+    } else {
+        ASSERT_EQ(final.AcceptedInputs(),1u);ASSERT_EQ(final.Status(),VerificationStatus::Collecting);
+        const auto last=final.NextRequest();ASSERT_TRUE(last);
+        f.Run(*last,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},groupModelLimit,groupWallLimit);
+        ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();SaveCandidateWindowGroup(f,"own-next-group-final-input1");
+        final.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());
+        ASSERT_TRUE(final.Certificate());EXPECT_EQ(final.AcceptedInputs(),2u);EXPECT_EQ(final.Status(),VerificationStatus::Exact);
+        SaveWindowCoreCertificate(f,"own-next-groups-still-allowed",*final.Certificate());
+        SaveCompositeArchive(EncodeNativeCandidateWindowTrainingArchive(*f.attempt),(name+"/after-own-groups-journal").c_str());
+    }
+}
+}
+TEST(NativeCandidateWindowManualAuthority,ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume){WindowManualClosedMeasurementAuthority<NNeuronTimeLearner>(true);}
+TEST(NativeCandidateWindowManualAuthority,BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCandidateWindowManualAuthority,ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable){WindowManualClosedMeasurementAuthority<NNeuronTimeLearner>(false);}
+TEST(NativeCandidateWindowManualAuthority,BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable){WindowManualClosedMeasurementAuthority<NNeuronTimeLearnerBranch>(false);}
