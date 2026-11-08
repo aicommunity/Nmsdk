@@ -469,6 +469,33 @@
         "worker_success_loop_ran": false
       },
       "initial_configuration_schema_valid": false
+    },
+    {
+      "job_id": "s07-composite-cold6-m40-asan-a4",
+      "host": "10.245.1.17",
+      "state": "running_build_at_last_kernel_observation",
+      "root": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
+      "pulse": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+      "expected_cpp_cases": 250,
+      "expected_leaf_gates": 137,
+      "required_primary_rules": 72,
+      "canonical_preparation_semantic_sha256": "10267db2adccc71feeabdb459d3d37f2d2637fbe441c2971f5311afc6904122c",
+      "preparation_evidence_commit": "eca61ea7ca395b687b7c6709b1b46cccfb70f885",
+      "root_launch_review": "Cold6A4LaunchReview-20261109.ru.md",
+      "request_sha256": "d3dd281ce9a1657ecfacb6d33d61b048aaef985ba342d86f7cbd331b4d46f98e",
+      "outer_binding_sha256": "19900e040d6e018e249f870fbc120b216fbd22633090b2088e95c52a01282d42",
+      "outer_unit": "timelearner-69d33d86-2d26-4e49-aa61-e99d53d363d8.service",
+      "outer_invocation_id": "6ed02749e035459ca3eee0a65c8b650d",
+      "initial_main_pid": 18434,
+      "initial_start_ticks": "325076930",
+      "supervisor_pid": 18316,
+      "supervisor_start_ticks": "325076869",
+      "root_independently_observed_running": true,
+      "restart_performed": false,
+      "do_not_restart_on_observation_timeout": true,
+      "whole_gate_accepted": false,
+      "compiled_inventory_verified": false,
+      "scientific_verdict": null
     }
   ],
   "prepared_feature": {
