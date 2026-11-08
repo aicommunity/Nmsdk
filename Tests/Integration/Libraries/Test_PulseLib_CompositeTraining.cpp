@@ -2607,6 +2607,11 @@ template<class Owner> void WindowManualClosedMeasurementAuthority(bool foreignSe
             ASSERT_TRUE(afterNewToken);afterNewToken->ConsumeCandidateWindow(pending,cachedRevision);
             EXPECT_EQ(afterNewToken->Status(),VerificationStatus::InvalidObservation);EXPECT_EQ(afterNewToken->AcceptedInputs(),0u);
             ASSERT_FALSE(afterNewToken->Rejected().empty());EXPECT_EQ(afterNewToken->Rejected().back().reason,"native_training_owner_control_replaced");
+            SavePortableObject(name.c_str(),"after-new-token-observation.json",{{"kind","old_manual_after_new_manual_factory"},{"schema_version",1},
+                {"old_family",QString::fromStdString(oldFamily)},{"new_manual_family",QString::fromStdString(f.attempt->OwnerFamilyBinding())},
+                {"new_manual_groups_issued",double(f.attempt->IssuedGroups())},{"old_consumer_status",VerificationStatusName(afterNewToken->Status())},
+                {"old_consumer_accepted_inputs",double(afterNewToken->AcceptedInputs())},{"old_rejection_reason",QString::fromStdString(afterNewToken->Rejected().back().reason)},
+                {"private_token_serialized",false},{"actual_native_time",f.Time()}});
             const auto freshRefs=CaptureWindowReferences(f,true,"manual-after-finished-reference","manual-after-finished");
             VerificationConfig freshConfig{"manual-after-finished/final/1",f.Revision(),4,0,0};freshConfig.tolerances.sync=.2;
             FinalVerificationSession fresh(freshRefs,*f.attempt->CandidateWindowReferences(),freshConfig);
@@ -2706,6 +2711,9 @@ template<class Owner> void WindowManualOtherServiceTakeover(ManualTakeoverKind k
     QJsonArray rejections;for(const auto& r:final.Rejected())rejections.append(QString::fromStdString(r.reason));
     SavePortableObject(name.c_str(),"actual-authority-boundary.json",{{"kind","manual_control_lifetime_other_service_boundary"},{"schema_version",1},
         {"case",int(kind)},{"foreign_state",NativeTrainingStateName(service.State())},{"foreign_outcome",TrainingStatusName(service.Outcome())},
+        {"foreign_declared_protocol",EncodeVerificationProtocol(foreign.protocol)},
+        {"foreign_actual_protocol",kind==ManualTakeoverKind::FailedBegin?QJsonValue(QJsonValue::Null):QJsonValue(EncodeVerificationProtocol(service.Plan().protocol))},
+        {"foreign_maximum_model_seconds",foreign.maximumModelSeconds},{"foreign_maximum_wall_seconds",foreign.maximumWallSeconds},
         {"foreign_reason",QString::fromStdString(service.Reason())},{"foreign_session_attempt",double(service.SessionAttempt())},
         {"foreign_prepared",double(foreignPrepared)},{"foreign_sampled_frames",double(foreignSamples)},
         {"actual_final_status",VerificationStatusName(final.Status())},{"actual_accepted_inputs",double(final.AcceptedInputs())},{"rejections",rejections},
@@ -2746,6 +2754,12 @@ template<class Owner> void WindowManualOwnedEditAllowsFreshPreparation() {
     ASSERT_EQ(inputs,2u);ASSERT_EQ(fresh.AcceptedInputs(),2u);ASSERT_TRUE(fresh.Certificate());
     EXPECT_TRUE(fresh.Status()==VerificationStatus::Exact || fresh.Status()==VerificationStatus::OutsideTolerance);
     EXPECT_EQ(fresh.Certificate()->ReferenceModelRevision(),refs.InitialModelRevision());EXPECT_NE(fresh.Certificate()->ModelRevision(),refs.InitialModelRevision());
+    const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/own-edit":"classic-window-control-lifetime/own-edit";
+    SavePortableObject(name,"actual-owned-edit.json",{{"kind","manual_owned_edit_control_lifetime"},{"schema_version",1},
+        {"old_rejection_reason",QString::fromStdString(old.Rejected().back().reason)},{"actual_fresh_status",VerificationStatusName(fresh.Status())},
+        {"actual_fresh_accepted_inputs",double(fresh.AcceptedInputs())},{"initial_model_revision",QString::fromStdString(refs.InitialModelRevision())},
+        {"actual_current_model_revision",QString::fromStdString(f.Revision())},{"family_preserved",f.attempt->OwnerFamilyBinding()==family},
+        {"source_origin_preserved",f.attempt->SourceOrigin()==origin}});
     SaveWindowCoreCertificate(f,"own-controlled-edit-new-preparation",*fresh.Certificate());
 }
 
@@ -2797,6 +2811,7 @@ template<class Owner> void WindowManualBeforeQueueTakeoverDoesNotQueueOldTrial()
     SavePortableObject(name,"actual-before-queue.json",{{"kind","native_manual_before_queue_takeover"},{"schema_version",1},
         {"callback_count",double(callbacks)},{"old_native_probes_before",double(nativeBefore)},{"old_native_probes_after",double(f.attempt->IssuedNativeProbes())},
         {"actual_probe_state",NativeProbeStatusName(f.owner->NativeProbeState())},{"reason",QString::fromStdString(f.attempt->RejectionReason())},
+        {"actual_group_reason",QString::fromStdString(f.attempt->Group()->reason)},
         {"actual_sampled_frames",double(record.sampledFrames)},{"measurement_created",bool(f.attempt->Measurement())}});
     SaveCompositeBoundary(f,name);
 }

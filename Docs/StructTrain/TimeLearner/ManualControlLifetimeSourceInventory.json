@@ -2,7 +2,7 @@
   "kind": "native_manual_control_lifetime_source_inventory",
   "schema_version": 1,
   "status": "source_preparation_only_unrun",
-  "root_base": "0619991d88772ecc33b07c752ae76608a4583093",
+  "root_base": "4ecad219705ccd71f041d1aa97fa89d3b1eea667",
   "pulse": "353f17baf505edf92ff39fe40422b9dcea023045",
   "unfixed_pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
   "unfixed_root_reproducer": "f74b9fbf9ece38668396c21fa569d688f595bb05",
@@ -54,8 +54,8 @@
   ],
   "test_source": {
     "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-    "git_blob_sha256": "d73f12b8a524bd8aaa8fc6b3a3b8378756d806c35c8ce149c393947b12a914a5",
-    "bytes": 275550,
+    "git_blob_sha256": "9f21fdbd902c89da8a94c553606a2fe5550e61fd720385ed5504a3076e8afe37",
+    "bytes": 277509,
     "literal_tests": 333
   },
   "local_build_or_numeric": false,
@@ -84,5 +84,12 @@
   "before_queue_takeover_never_queues_old_raw": true,
   "open_arm_rejected_inputs_added": 0,
   "own_edit_exact_required": false,
-  "full_union_488_declared_accepted": false
+  "full_union_488_declared_accepted": false,
+  "actual_status_artifacts": [
+    "after-new-token-observation.json",
+    "actual-authority-boundary.json",
+    "actual-owned-edit.json",
+    "actual-open-arm.json",
+    "actual-before-queue.json"
+  ]
 }
