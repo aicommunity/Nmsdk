@@ -1436,10 +1436,37 @@ void PortableExecutionEnvelope(bool preflight) {
         {"schema_version",1},{"execution",preflight?"completed":"training_start_failed"}};
     const auto execution=NmsdkWorker::WrapNativeCompositeExecution(true,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0,preflight);
     EXPECT_EQ(execution["schema_version"],QJsonValue(3));EXPECT_EQ(execution["base_schema_version"],QJsonValue(1));
+    EXPECT_TRUE(execution.value("base_schema_version").isDouble());
+    const auto bytes=QJsonDocument(execution).toJson(QJsonDocument::Compact);const auto parsed=QJsonDocument::fromJson(bytes);
+    ASSERT_TRUE(parsed.isObject());EXPECT_EQ(parsed.object(),execution);
     EXPECT_EQ(execution["model_semantic_hash"],QJsonValue("actual-model"));EXPECT_TRUE(execution["source_origin"].isNull());EXPECT_TRUE(execution["measurement_archive"].isNull());
     const auto counters=execution["composite_counters"].toObject();if(preflight){EXPECT_EQ(counters["attempt"].toObject()["logical_groups"],QJsonValue(0));
         EXPECT_EQ(counters["archive"].toObject()["groups"],QJsonValue(0));}else{EXPECT_TRUE(counters["attempt"].isNull());EXPECT_TRUE(counters["archive"].isNull());}
     EXPECT_EQ(NmsdkWorker::WrapNativeCompositeExecution(false,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0),NmsdkWorker::Signed(base));
+}
+void PortableExecutionEnvelopeOwnsNumericBase() {
+    // Exercise the real writer on the two base versions used by the console:
+    // ordinary execution/preflight (1), and live finalization execution (2).
+    // This is a wire contract test; no native execution is claimed by the data.
+    for(int schema=1;schema<=2;++schema) {
+        SCOPED_TRACE(schema);QJsonObject base{{"kind","timelearner_native_training_execution"},{"schema_version",schema},
+            {"execution","training_start_failed"},{"training_started",false},{"sample_id","sample0"},
+            {"model_ticks",0},{"artifacts",QJsonArray{}},{"package_path",QJsonValue(QJsonValue::Null)}};
+        if(schema==2){base["finalization_path"]="finalization.json";base["finalization_sha256"]="declared-writer-input";}
+        const auto execution=NmsdkWorker::WrapNativeCompositeExecution(true,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0,false);
+        ASSERT_TRUE(execution.value("base_schema_version").isDouble());EXPECT_EQ(execution.value("base_schema_version"),QJsonValue(schema));
+        EXPECT_EQ(execution.value("schema_version"),QJsonValue(3));
+        const auto bytes=QJsonDocument(execution).toJson(QJsonDocument::Compact);const auto parsed=QJsonDocument::fromJson(bytes);
+        ASSERT_TRUE(parsed.isObject());EXPECT_EQ(parsed.object(),execution);
+        for(auto it=base.constBegin();it!=base.constEnd();++it)if(it.key()!="schema_version")EXPECT_EQ(parsed.object().value(it.key()),it.value());
+        auto unwrapped=parsed.object();for(const auto* key:{"base_schema_version","measurement_method","measurement_archive",
+            "model_semantic_hash","source_origin","composite_counters","sha256"})unwrapped.remove(key);
+        unwrapped["schema_version"]=schema;EXPECT_EQ(unwrapped,base);
+        auto unsignedExecution=execution;unsignedExecution.remove("sha256");
+        EXPECT_EQ(execution.value("sha256"),QJsonValue(NmsdkTools::CanonicalModelDataSha256(unsignedExecution)));
+        const auto name="console-envelope-owned/base-"+std::to_string(schema);SavePortableObject(name.c_str(),"producer-wire.json",execution);
+        EXPECT_EQ(NmsdkWorker::WrapNativeCompositeExecution(false,base,{},QJsonValue(QJsonValue::Null),"actual-model",0,0),NmsdkWorker::Signed(base));
+    }
 }
 }
 TEST(NativeCompositeConsoleArtifacts,ClassicAllPrimaryAndSidecarsMirrored){PortableArtifactMirror<NNeuronTimeLearner>();}
@@ -1449,6 +1476,7 @@ TEST(NativeCompositeConsoleArtifacts,ExistingPrimaryNeverOverwritten){PortableAr
 TEST(NativeCompositeConsoleArtifacts,ActualAllNPlus2StreamCounters){PortableStreamCounters();}
 TEST(NativeCompositeConsoleArtifacts,PreflightKnownZeroAccounting){PortableExecutionEnvelope(true);}
 TEST(NativeCompositeConsoleArtifacts,FailedStartNeverInventsArchiveAccounting){PortableExecutionEnvelope(false);}
+TEST(NativeCompositeConsoleArtifacts,BaseSchemasKeepOwningNumericTypeAndAllFieldsThroughBytes){PortableExecutionEnvelopeOwnsNumericBase();}
 
 
 namespace {
