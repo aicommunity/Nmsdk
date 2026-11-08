@@ -2288,3 +2288,191 @@ template<class Owner> void CandidateWindowServiceStartsBeforeAnyNativeQueue() {
 }
 TEST(NativeCandidateWindowServiceBootstrap,ClassicIdentityAndCold7ExistBeforeFirstQueue){CandidateWindowServiceStartsBeforeAnyNativeQueue<NNeuronTimeLearner>();}
 TEST(NativeCandidateWindowServiceBootstrap,BranchIdentityAndCold7ExistBeforeFirstQueue){CandidateWindowServiceStartsBeforeAnyNativeQueue<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> NativeTrainingPlan ActualWindowServicePlan(NativeCompositeFixture<Owner>& f,double sync=.2,bool repeat=true,bool c0=false) {
+    auto c=ActualCold7Declaration(f);c.runId="actual-native-window-service5";c.search.runId=c.runId;
+    c.search.normalization=f.modelSpec.normalization;c.search.n0CandidateRepeats=repeat && c.search.normalization==Normalization::SynapseCount?2:1;
+    c.search.maximumSweeps=1;c.search.tolerances.sync=sync;c.maximumWallSeconds=7200.;
+    if(c0){c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;}
+    auto plan=MakeConfiguredNativeTrainingPlan(c);plan.probe.onPrepared=f.prototype.onPrepared;plan.probe.onSample=f.prototype.onSample;return plan;
+}
+template<class Owner> void SaveWindowService(NativeCompositeFixture<Owner>& f,const std::string& stage) {
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-native-window-service5/":"classic-native-window-service5/")+stage;
+    const auto& service=f.owner->NativeTrainingController();const auto archive=EncodeNativeCandidateWindowServiceArchive(service);
+    SaveCompositeArchive(archive,name.c_str());SaveCompositeBoundary(f,name.c_str());QJsonArray evidence,domains,references;
+    if(service.References())for(const auto& r:service.References()->Inputs())references.append(QJsonObject{{"input_id",QString::fromStdString(r.id)},
+        {"group_id",QString::fromStdString(r.measurementGroupId)},{"semantic_proof_id",QString::fromStdString(r.semanticProofId)},{"actual_raw_target",r.rawPotential}});
+    const auto& policy=*service.Plan().composite;
+    if(service.Search()) {
+        for(const auto& d:service.Search()->Domains())domains.append(EncodeResistanceDomainAssessment(d));
+        for(const auto& e:service.Search()->Evidence())evidence.append(QJsonObject{{"input_index",double(e.inputIndex)},
+            {"trial_id",QString::fromStdString(e.trialId)},{"anchor_trial_id",QString::fromStdString(e.anchorTrialId)},
+            {"model_revision",QString::fromStdString(e.modelRevision)},{"model_epoch",double(e.modelEpoch)},
+            {"actual_raw_potential",e.measuredRawPotential},{"amplitude_residual",e.amplitudeResidual},
+            {"timing_low",e.timingResidualLow},{"timing_high",e.timingResidualHigh},
+            {"within_amplitude",e.withinAmplitude},{"within_timing",e.withinTiming}});
+    }
+    SavePortableObject(name.c_str(),"service5-boundary.json",{{"kind","native_candidate_window_service_boundary"},{"schema_version",1},
+        {"scope","actual Service5 before separate runtime2/learned6/summary7 codec stage"},{"outcome",TrainingStatusName(service.Outcome())},
+        {"reason",QString::fromStdString(service.Reason())},{"session_attempt",double(service.SessionAttempt())},
+        {"model_epoch",double(service.ModelEpoch())},{"reference_complete",bool(service.References())},
+        {"original_references",references},{"current_attempt_id",QString::fromStdString(service.Configuration().runId)},
+        {"current_attempt_limits",QJsonObject{{"maximum_groups",double(policy.maximumGroups)},{"maximum_native_probes",double(policy.maximumNativeProbes)},
+            {"maximum_total_samples",double(policy.maximumTotalSamples)},{"maximum_model_seconds",service.Plan().maximumModelSeconds},
+            {"maximum_wall_seconds",service.Plan().maximumWallSeconds},{"maximum_group_model_seconds",policy.maximumGroupModelSeconds},
+            {"maximum_group_wall_seconds",policy.maximumGroupWallSeconds},{"maximum_total_primary_bytes",double(policy.maximumTotalPrimaryBytes)}}},
+        {"certificate",service.Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Certificate())):QJsonValue(QJsonValue::Null)},
+        {"last_core_certificate",service.Search() && service.Search()->Certificate()?QJsonValue(EncodeTrainingCertificate(*service.Search()->Certificate())):QJsonValue(QJsonValue::Null)},
+        {"actual_candidate_evidence",evidence},{"actual_resistance_domains",domains},{"completed_portable_package6",false}});
+}
+template<class Owner> void WindowServiceExact(int mode,bool n0=true,bool c0=false,bool defaultSync=false) {
+    NativeCompositeFixture<Owner> f(2000,false,64,c0,n0);auto plan=ActualWindowServicePlan(f,defaultSync?.02:.2,true,c0);f.owner->CalculateMode=mode;
+    std::size_t rawClosed=0,completeReferences=0,finals=0;plan.observationSink=[&](const auto&){++rawClosed;};
+    plan.compositeSink=[&](const auto& record){const auto& service=f.owner->NativeTrainingController();
+        if(record.purpose==CompositeMeasurementPurpose::Reference) {
+            ++completeReferences;
+            if(completeReferences==1){EXPECT_FALSE(service.References());EXPECT_TRUE(service.CompositeReferenceGroupIds().empty());EXPECT_FALSE(record.consumed);EXPECT_FALSE(record.trainingRequestedAtConsume);}
+            else {ASSERT_TRUE(service.References());EXPECT_EQ(service.CompositeReferenceGroupIds().size(),2u);
+                for(const auto& r:service.CompositeMeasurements())if(r.purpose==CompositeMeasurementPurpose::Reference){EXPECT_TRUE(r.consumed);EXPECT_EQ(r.trainingRequestedAtConsume,std::optional<bool>(true));}}
+        }
+        if(record.purpose==CompositeMeasurementPurpose::Final && record.consumed){++finals;EXPECT_FALSE(service.Certificate());}
+    };
+    ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(service.Search());ASSERT_TRUE(service.References());
+    EXPECT_EQ(service.Outcome(),defaultSync?TrainingStatus::BudgetExhausted:TrainingStatus::Exact)<<service.Reason();
+    if(defaultSync){EXPECT_FALSE(service.Certificate());ASSERT_TRUE(service.Search()->Certificate());EXPECT_FALSE(service.Search()->Certificate()->Exact());}
+    else {ASSERT_TRUE(service.Certificate());EXPECT_EQ(service.Certificate()->SchemaVersion(),3u);EXPECT_TRUE(service.Certificate()->Exact());}
+    EXPECT_EQ(completeReferences,2u);EXPECT_EQ(finals,2u);EXPECT_EQ(rawClosed,service.CompositeNativeProbes());EXPECT_EQ(rawClosed,f.preparations);
+    EXPECT_EQ(service.CompositeSampledFrames(),f.rawSamples);EXPECT_EQ(service.CompositeNativeProbes(),4*service.CompositeGroups());
+    EXPECT_EQ(service.Search()->IssuedProbes(),service.CompositeGroups()-2);EXPECT_EQ(service.Configuration().tolerances.sync,defaultSync?.02:.2);
+    EXPECT_EQ(service.Configuration().tolerances.amplitudeAbsolute,1e-5);EXPECT_EQ(service.Plan().protocol.minimumAmplitude,1e-6);
+    if(n0) {ASSERT_FALSE(service.Search()->CandidateRepeats().empty());EXPECT_EQ(service.Search()->CandidateRepeats()[0].trialIds.size(),2u);}
+    else {ASSERT_FALSE(service.Search()->Domains().empty());for(const auto& domain:service.Search()->Domains())EXPECT_EQ(domain.status,ResistanceDomainStatus::Available);}
+    for(const auto& r:service.CompositeMeasurements()){EXPECT_EQ(r.attemptId,service.Configuration().runId);EXPECT_EQ(r.semanticProofId,CandidateWindowTrainingSemanticProofId(service.Plan().protocol,r));
+        EXPECT_EQ(r.policy.maximumGroupModelSeconds,r.maximumGroupModelSeconds);EXPECT_EQ(r.policy.maximumGroupWallSeconds,r.maximumGroupWallSeconds);}
+    if(c0){for(const auto& r:service.CompositeMeasurements()){ASSERT_EQ(r.nativeTrialWitnessIds.size(),4u);for(const auto& [trial,id]:r.nativeTrialWitnessIds)
+        EXPECT_EQ(r.capacitanceWitnesses.at(id).modelRevision,r.logical.baseModelRevision);}}
+    else EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    SaveWindowService(f,defaultSync?"default-sync":c0?"bound-C0":n0?mode?"N0-mode1":"N0-mode0":"N1-real-domain");
+}
+template<class Owner> void WindowServiceGrowth(bool warm) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto plan=ActualWindowServicePlan(f,.02,false);plan.search.maximumCandidatesPerInput=2;
+    plan.search.bounds[0].minimumLength=2;plan.search.bounds[0].maximumLength=3;bool stoppedOnOwnedGrowth=false;
+    ServiceStart(f,plan);
+    ServiceTicks(f,[&](){const auto& service=f.owner->NativeTrainingController();if(warm && !stoppedOnOwnedGrowth && service.State()==NativeTrainingState::Searching &&
+        service.ModelEpoch()>0 && f.owner->ReadNativeParameters()[0].length==3){stoppedOnOwnedGrowth=true;f.owner->IsNeedToTrain=false;}});
+    const auto& first=f.owner->NativeTrainingController();ASSERT_TRUE(first.References());const auto references=*first.References();
+    const auto source=first.CompositeSourceBinding();const auto initial=first.CompositeInitialConfiguration();const auto oldGroups=first.CompositeReferenceGroupIds();
+    const auto history=first.CompositeMeasurements().size();ASSERT_TRUE(first.Search());EXPECT_GT(first.Search()->AppliedEdits(),0u);
+    if(warm) {
+        ASSERT_TRUE(stoppedOnOwnedGrowth);ASSERT_EQ(f.owner->ReadNativeParameters()[0].length,3);ASSERT_NE(f.Revision(),references.InitialModelRevision());
+        SaveWindowService(f,"grown-before-warm");f.owner->Reset();bool stoppedOnFreshInput=false;
+        plan.compositeSink=[&](const auto& record){if(record.purpose==CompositeMeasurementPurpose::Search && record.logical.inputIndex==0 && record.consumed){
+            stoppedOnFreshInput=true;f.owner->IsNeedToTrain=false;}};
+        f.owner->BeginNativeTraining(plan);ASSERT_EQ(first.State(),NativeTrainingState::Searching)<<first.Reason();EXPECT_EQ(first.SessionAttempt(),2u);
+        EXPECT_EQ(first.CompositeMeasurements().size(),history);EXPECT_EQ(first.CompositeGroups(),0u);EXPECT_EQ(first.CompositeNativeProbes(),0u);
+        EXPECT_EQ(first.References()->Inputs(),references.Inputs());EXPECT_EQ(f.owner->ReadNativeParameters()[0].length,3);
+        ServiceTicks(f);ASSERT_TRUE(stoppedOnFreshInput);EXPECT_EQ(first.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(first.Certificate());
+        EXPECT_EQ(first.CompositeSourceBinding(),source);EXPECT_EQ(first.CompositeInitialConfiguration(),initial);EXPECT_EQ(first.CompositeReferenceGroupIds(),oldGroups);
+        EXPECT_GT(first.CompositeMeasurements().size(),history);
+        for(const auto& r:first.CompositeMeasurements())if(r.attemptId==first.Configuration().runId && r.windowProposal)
+            EXPECT_EQ(r.windowProposal->reference.initialParameters[0].length,2);
+        for(const auto& id:oldGroups){const auto found=std::find_if(first.CompositeMeasurements().begin(),first.CompositeMeasurements().end(),[&](const auto& r){return r.groupId==id;});
+            ASSERT_NE(found,first.CompositeMeasurements().end());EXPECT_NE(found->attemptId,first.Configuration().runId);}
+        SaveWindowService(f,"warm-after-owned-growth");
+    } else {
+        EXPECT_NE(first.Outcome(),TrainingStatus::Exact);EXPECT_FALSE(first.Certificate());bool observedGrowth=false;
+        for(const auto& r:first.CompositeMeasurements())if(r.purpose==CompositeMeasurementPurpose::Search && r.logical.inputIndex==0 && r.windowProposal &&
+            r.windowProposal->candidate.parameters[0].length==3 && r.selection && r.selection->geometry && r.selection->geometry->measuredMaximum) {
+            const auto& peak=*r.selection->geometry->measuredMaximum;EXPECT_GT(peak.time-r.group.witness.fullBefore.observation.begin,
+                first.Plan().protocol.candidateWindowMeasurement->referenceInputWindows[0].endOffset);EXPECT_FALSE(r.semanticProofId.empty());observedGrowth=true;}
+        EXPECT_TRUE(observedGrowth);EXPECT_EQ(first.CompositeFinalGroupIds().size(),2u);SaveWindowService(f,"actual-owned-growth-outside-initial-window");
+    }
+}
+template<class Owner> void WindowServiceN1ActualDomain() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,false);auto plan=ActualWindowServicePlan(f,.02,false);plan.search.maximumCandidatesPerInput=2;
+    // The initial physical candidate deliberately misses default sync. A
+    // second bounded point requires the REAL native effective-domain action;
+    // an engineering .2 immediate success would never reach that provider.
+    ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(service.Search());
+    EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted)<<service.Reason();EXPECT_FALSE(service.Certificate());
+    ASSERT_FALSE(service.Search()->Domains().empty());bool available=false;
+    for(const auto& d:service.Search()->Domains())if(d.status==ResistanceDomainStatus::Available) {
+        available=true;EXPECT_FALSE(d.previewModelJson.empty());EXPECT_FALSE(d.previewModelRevision.empty());EXPECT_EQ(d.geometry.size(),2u);
+    }
+    EXPECT_TRUE(available);EXPECT_EQ(service.Configuration().tolerances.sync,.02);EXPECT_EQ(service.Configuration().tolerances.amplitudeAbsolute,1e-5);
+    EXPECT_EQ(service.CompositeFinalGroupIds().size(),2u);SaveWindowService(f,"N1-real-domain-default-sync");
+}
+template<class Owner> void WindowServicePartialWarm() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto plan=ActualWindowServicePlan(f,.2,false);bool stopped=false;
+    plan.compositeSink=[&](const auto& r){if(!stopped && r.purpose==CompositeMeasurementPurpose::Reference && r.logical.inputIndex==0){stopped=true;f.owner->IsNeedToTrain=false;}};
+    ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(stopped);ASSERT_FALSE(service.References());
+    ASSERT_EQ(service.CompositeMeasurements().size(),1u);const auto old=service.CompositeMeasurements()[0].groupId;const auto source=service.CompositeSourceBinding();
+    EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);EXPECT_FALSE(service.CompositeMeasurements()[0].trainingRequestedAtConsume);SaveWindowService(f,"partial-before-warm");
+    f.owner->Reset();f.owner->BeginNativeTraining(plan);ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences)<<service.Reason();
+    EXPECT_EQ(service.SessionAttempt(),2u);EXPECT_FALSE(service.References());EXPECT_EQ(service.CompositeGroups(),0u);ServiceTicks(f);
+    ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.References());EXPECT_EQ(service.CompositeSourceBinding(),source);
+    ASSERT_FALSE(service.CompositeMeasurements().empty());EXPECT_EQ(service.CompositeMeasurements()[0].groupId,old);EXPECT_FALSE(service.CompositeMeasurements()[0].consumed);
+    EXPECT_FALSE(service.CompositeMeasurements()[0].trainingRequestedAtConsume);for(const auto& id:service.CompositeReferenceGroupIds())EXPECT_NE(id,old);
+    SaveWindowService(f,"partial-warm-fresh-allN");
+}
+enum class WindowServiceFault { NeedSetter,NeedDirect,NeedConnected,Source,FinalSinkStop,FinalSinkThrow };
+template<class Owner> void WindowServiceRejectsCallbackFault(WindowServiceFault fault) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true,fault==WindowServiceFault::NeedConnected);auto plan=ActualWindowServicePlan(f,.2,false);bool reached=false;
+    if(fault==WindowServiceFault::FinalSinkStop || fault==WindowServiceFault::FinalSinkThrow)plan.compositeSink=[&](const auto& r){
+        if(r.purpose==CompositeMeasurementPurpose::Final && r.logical.inputIndex==(NativeCompositeFixture<Owner>::branch?0u:1u)) {
+            reached=true;EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
+            if(fault==WindowServiceFault::FinalSinkThrow)throw std::runtime_error("service5-final-sink-control");f.owner->IsNeedToTrain=false;}};
+    else plan.beforeCompositeConsume=[&](const auto& r){if(r.purpose==CompositeMeasurementPurpose::Reference && r.logical.inputIndex==1){
+        reached=true;EXPECT_FALSE(f.owner->NativeTrainingController().References());
+        if(fault==WindowServiceFault::NeedSetter)f.owner->IsNeedToTrain=false;
+        else if(fault==WindowServiceFault::NeedDirect)f.owner->IsNeedToTrain.SetDataDirect(false);
+        else if(fault==WindowServiceFault::NeedConnected)f.flag->Value=false;
+        else {const auto before=f.Revision();f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true)->Amplitude=1.5;EXPECT_EQ(f.Revision(),before);}}};
+    ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(reached);EXPECT_FALSE(service.Certificate());
+    EXPECT_EQ(service.Outcome(),fault==WindowServiceFault::Source || fault==WindowServiceFault::FinalSinkThrow?TrainingStatus::InvalidObservation:TrainingStatus::ExternalStop);
+    if(fault!=WindowServiceFault::FinalSinkStop && fault!=WindowServiceFault::FinalSinkThrow){EXPECT_FALSE(service.References());EXPECT_TRUE(service.CompositeReferenceGroupIds().empty());
+        for(const auto& r:service.CompositeMeasurements()){EXPECT_FALSE(r.consumed);EXPECT_FALSE(r.trainingRequestedAtConsume);}}
+    SaveWindowService(f,"callback-fault");
+}
+template<class Owner> void WindowServiceMergedIsDiagnostic() {
+    NativeCompositeFixture<Owner> f(2000,true,64,false,true);auto plan=ActualWindowServicePlan(f,.2,false);ServiceStart(f,plan);ServiceTicks(f);
+    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.Outcome(),TrainingStatus::InvalidObservation);EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());
+    ASSERT_FALSE(service.CompositeMeasurements().empty());const auto& r=service.CompositeMeasurements().back();EXPECT_FALSE(r.consumed);
+    ASSERT_TRUE(r.selection);ASSERT_TRUE(r.selection->geometry);EXPECT_NE(r.selection->geometry->validity,DeclaredWindowBasinValidity::Valid);SaveWindowService(f,"merged-diagnostic");
+}
+template<class Owner> void WindowServicePreservesClippedGroupBudget() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto plan=ActualWindowServicePlan(f,.2,false);plan.maximumModelSeconds=.8;plan.composite->maximumGroupModelSeconds=.8;
+    ServiceStart(f,plan);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.Outcome(),TrainingStatus::BudgetExhausted);
+    EXPECT_FALSE(service.Certificate());EXPECT_FALSE(service.References());bool clipped=false;
+    for(const auto& r:service.CompositeMeasurements()){EXPECT_EQ(r.policy.maximumGroupModelSeconds,r.maximumGroupModelSeconds);
+        if(r.maximumGroupModelSeconds<plan.composite->maximumGroupModelSeconds){clipped=true;EXPECT_FALSE(r.consumed);EXPECT_NE(r.groupState,NativeMatchedOmissionState::Completed);}}
+    EXPECT_TRUE(clipped);EXPECT_GT(service.CompositeSampledFrames(),0u);SaveWindowService(f,"actual-clipped-group-budget");
+}
+}
+TEST(NativeCandidateWindowService,ClassicN0CalculateMode0FreshAllNFinal){WindowServiceExact<NNeuronTimeLearner>(0);}
+TEST(NativeCandidateWindowService,BranchN0CalculateMode0FreshAllNFinal){WindowServiceExact<NNeuronTimeLearnerBranch>(0);}
+TEST(NativeCandidateWindowService,ClassicN0CalculateMode1FreshAllNFinal){WindowServiceExact<NNeuronTimeLearner>(1);}
+TEST(NativeCandidateWindowService,BranchN0CalculateMode1FreshAllNFinal){WindowServiceExact<NNeuronTimeLearnerBranch>(1);}
+TEST(NativeCandidateWindowService,ClassicN1UsesActualEffectiveDomainProvider){WindowServiceN1ActualDomain<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowService,BranchN1UsesActualEffectiveDomainProvider){WindowServiceN1ActualDomain<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowService,ClassicDefaultSyncRemainsNonExact){WindowServiceExact<NNeuronTimeLearner>(1,true,false,true);}
+TEST(NativeCandidateWindowService,BranchDefaultSyncRemainsNonExact){WindowServiceExact<NNeuronTimeLearnerBranch>(1,true,false,true);}
+TEST(NativeCandidateWindowService,ClassicBoundC0WitnessesStayOnBaseRevision){WindowServiceExact<NNeuronTimeLearner>(1,true,true);}
+TEST(NativeCandidateWindowService,BranchBoundC0WitnessesStayOnBaseRevision){WindowServiceExact<NNeuronTimeLearnerBranch>(1,true,true);}
+TEST(NativeCandidateWindowService,ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory){WindowServiceGrowth<NNeuronTimeLearner>(true);}
+TEST(NativeCandidateWindowService,BranchWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory){WindowServiceGrowth<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCandidateWindowService,ClassicPartialWarmDiscardsExpiredSeedsAndRecapturesAllN){WindowServicePartialWarm<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowService,BranchPartialWarmDiscardsExpiredSeedsAndRecapturesAllN){WindowServicePartialWarm<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowService,ClassicSetterFalseBeforeAllNDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearner>(WindowServiceFault::NeedSetter);}
+TEST(NativeCandidateWindowService,BranchDirectFalseBeforeAllNDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearnerBranch>(WindowServiceFault::NeedDirect);}
+TEST(NativeCandidateWindowService,ClassicConnectedFalseBeforeAllNDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearner>(WindowServiceFault::NeedConnected);}
+TEST(NativeCandidateWindowService,BranchActualSourceEditBeforeReleaseDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearnerBranch>(WindowServiceFault::Source);}
+TEST(NativeCandidateWindowService,ClassicLastSinkStopCannotPublishCertificate){WindowServiceRejectsCallbackFault<NNeuronTimeLearner>(WindowServiceFault::FinalSinkStop);}
+TEST(NativeCandidateWindowService,BranchLastSinkThrowCannotPublishCertificate){WindowServiceRejectsCallbackFault<NNeuronTimeLearnerBranch>(WindowServiceFault::FinalSinkThrow);}
+TEST(NativeCandidateWindowService,ClassicOwnedGrowthMeasuresPeakBeyondInitialReferenceWindow){WindowServiceGrowth<NNeuronTimeLearner>(false);}
+TEST(NativeCandidateWindowService,BranchOwnedGrowthMeasuresPeakBeyondInitialReferenceWindow){WindowServiceGrowth<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCandidateWindowService,ClassicMergedVertexRemainsDiagnostic){WindowServiceMergedIsDiagnostic<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowService,BranchMergedVertexRemainsDiagnostic){WindowServiceMergedIsDiagnostic<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowService,ClassicActualClippedGroupBudgetIsNotReplacedByPlanCap){WindowServicePreservesClippedGroupBudget<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowService,BranchActualClippedGroupBudgetIsNotReplacedByPlanCap){WindowServicePreservesClippedGroupBudget<NNeuronTimeLearnerBranch>();}
