@@ -9,6 +9,11 @@
 и интеграция service/package/CLI этой проверкой не подтверждаются.
 [Точные commits, handles и receipts](TypedCompositeTrainingJobs.json).
 Service/codecs/CLI остаются незавершённой интеграцией.
+[Composite206: Elder A1 остановлен на устаревшем ожидании теста;
+исправленная A2 готовится. Windows требует отдельной диагностики
+завершения дочерних процессов](CompositeArchive206AttemptStatus.ru.md).
+Новые шесть native-архивов пока не получены; Python-проверка их чтения
+ещё не выполнена.
 [Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
 готов для14 технических групп; он не заменяет научную матрицу классификации.
 
