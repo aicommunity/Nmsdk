@@ -309,8 +309,8 @@ schema2 содержит все шесть сочетаний проба×сом
 Normal [проверка revision provider в fixtures](NativeFixtureRevisionProviderNormalVerification.json)
 принята по32 исходным тестам:22 invalidation/NoopBuild,8 N2 Typed/Full и2 N6
 Dimensions schema2. Первая проба четырёх A/B-пар совпадает по CSV/native/model/
-features. ASan-повтор с обоими N6 протоколами и auxiliary parity запущен
-отдельно; его результат пока не принят. Это изменение fixtures, не алгоритма.
+features. ASan-повтор с обоими N6 протоколами и auxiliary parity прошёл34/34,
+независимая [сверка](NativeFixtureRevisionProviderAsanVerification.json) завершена. Это изменение fixtures, не алгоритма.
 
 
 На третьем worker Windows .14 подготовлены pinned Git donors и запущена новая
@@ -320,3 +320,11 @@ features. ASan-повтор с обоими N6 протоколами и auxilia
 всех процессов и неизменность прежних runtime. Исправленная fresh попытка
 [зафиксирована отдельно](WindowsDomainFixtureJobs.json); её научная приёмка
 не заявлена. Старые44 Windows checks не повторяются как новый результат.
+
+
+В отдельной [feature-ветке matched omission](https://github.com/aicommunity/Nmsdk/blob/72f6b38d4/Docs/StructTrain/TimeLearner/MatchedOmissionAssignment.ru.md)
+подготовлены production selector и bounded nativeN+2 measurement group.
+Normal55 проверен на Elder; четыре связанные N2 группы дали Ambiguous,
+stop/edit controls не выдали assignment. Новый алгоритмический блок ещё не
+включён в NativeTrainingService/references/search/final certificate; ASan его
+кода выполняется отдельно от принятого fixture ASan34. Полные этапы6–8 открыты.
