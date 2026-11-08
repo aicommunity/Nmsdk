@@ -1,0 +1,150 @@
+{
+  "kind": "native_acceptance_preparation_closed_metadata",
+  "schema_version": 1,
+  "source_root": "b6d0f752ca1668b6a908a435438020db58d2018e",
+  "actual_clean_repositories": 8,
+  "materialized_source_files": 3719,
+  "canonical_preparation_sha256": "c8d3d7d81ef893c14e53fac40638eeb2045518ec366af18edba4d8d66e97461f",
+  "selected_cases_planned": 248,
+  "leaf_gates_planned": 138,
+  "test_cases_executed": 0,
+  "SDK_source_read_only": true,
+  "artifact_rules": 68,
+  "source_guard_controls": "actual selected JUnit/assertions, no explicit primary writer",
+  "runtime_role_label_errata": "Inherited supervisor role text mentions update17db; actual source-before=after b6, reservation source access read, no pack import/checkout in A2 worker",
+  "CPP_compile_or_run": false,
+  "full248_dispatched": false,
+  "source_and_protected_snapshots_verified": true,
+  "actual_kernel_and_lease": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "4a89624dd0031131a8389ec9aaa8c2acbe02de9bf841ff11fa6c3c73a430ebb2",
+        "unit": "timelearner-79ffa6bd-1a9d-4d69-9076-fd22fe50be77.service",
+        "invocation_id": "c4f040654c22499b9e76b69c0f30430d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-79ffa6bd-1a9d-4d69-9076-fd22fe50be77.service",
+        "initial_main_pid": 3416383,
+        "initial_start_ticks": "323663179",
+        "sha256": "217cb040b032df27c6b9518276496f9c293364f5e4fcac4768f84bf37bcd543a"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-79ffa6bd-1a9d-4d69-9076-fd22fe50be77.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "lease": {
+      "token": "5c2f4bc5-f19f-4909-a4d8-072a31e005d3",
+      "job_id": "s10-native-acceptance-preparation-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3416383,
+        "start_ticks": "323663179",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-acceptance-preparation-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-acceptance-preparation-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-acceptance-metadata-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-acceptance-metadata-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-preparation-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-preparation-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794161434.663207,
+      "deadline": 1794161574.688932,
+      "updated": 1794161456.4745877,
+      "release_note": "Exact preparation ownunit closed; synchronous Git/hash/canonical metadata children closed in this group; no compile/model/leaf/native job started.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "peak_owned_allocated_bytes": 65998848,
+    "minimum_free_bytes": 339187417088,
+    "outer_closed": true
+  },
+  "scientific_verdict": null
+}
