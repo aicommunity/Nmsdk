@@ -1,0 +1,42 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "native-preparation-metadata24-v1",
+  "package_fingerprint": "3924d68833a6ee6d27021d3fe9ae59e34006913199d15f7dbabfff65186d0a94",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_actual_cc23_positive_derives_one_consistent248_declaration",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_actual_nested05f_source_claim_cannot_override_a35",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_actual_stale_inventory_root540_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_actual_three_operator_corrupted_binding_claims_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_boolean_and_nonfinite_active_claims_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_duplicate_leaf_and_duplicate_case_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_embedded_worker_mismatch_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_leaf_name_cannot_escape_the_owned_output_directory",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_literal_bytes_writer_has_exact_byte_consistency",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_missing_original_binding_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_modified_original_without_new_digest_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_multiple_dynamic_or_unknown_worker_writers_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_mutating_caller_plan_cannot_rewrite_prepared_spec",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_original_binding_bytes_and_integrity_digest_are_not_rewritten",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_posix_newline_and_utf8_policy_are_explicit",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_recomputed_content_digest_does_not_authorize_kernel_attestation",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_inventory_promotion_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_recognized_count_and_source_hash_shape_remain_strict",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_unknown_nested_active_fields_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_rehashed_unknown_schema_or_extra_attestation_field_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_required_leaf_order_is_not_replaced_by_set_equality",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_tampering_serialized_spec_fails_integrity_check",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_worktree_not_matching_actual_git_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_preparation.NativePreparationTest.test_wrong_count_and_incomplete_partition_are_rejected"
+  ],
+  "fixtures": {
+    "TL_NATIVE_PREPARATION_FIXTURE": {
+      "pattern": "*",
+      "files": 2,
+      "fingerprint": "54b2b5bbb7d6a1d6bd83818dee5f7b9596a3afa0e51e7b741b830eb443240e39"
+    }
+  }
+}
