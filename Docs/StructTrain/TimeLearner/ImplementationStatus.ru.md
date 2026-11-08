@@ -20,10 +20,11 @@ Windows пока не допущена к SDK-прогонам
 из-за остающегося дочернего процесса сборки](CompositeArchive206AttemptStatus.ru.md).
 Новые шесть native-архивов пока не получены; Python-проверка их чтения
 ещё не выполнена.
-Python wire-проверки67/67 и проверки метаданных коллектора39/39 прошли
-отдельно; код и доказательства объединены. Совместная проверка106 ещё не
-выполнена. [Контракт коллектора](CollectorProvenanceContract.ru.md),
-[независимая квитанция39](CollectorProvenanceM40A2Verification.json).
+Python wire67 и collector39 прошли совместную проверку106/106 на M40,
+без ошибок и пропусков. Проверены621 Scripts file и433 Python files
+относительно Git; исходники и fixture bytes неизменны.
+[Независимая квитанция106](WireCollectorCombined106M40A1Verification.json),
+[контракт коллектора](CollectorProvenanceContract.ru.md).
 Эти проверки не подтверждают native-архивы, Train → Test или научную разделимость.
 [Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
 готов для14 технических групп; он не заменяет научную матрицу классификации.
@@ -273,7 +274,7 @@ runtime/effective-factor matrix этим не закрывается.
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration245:243 retired+2 moved; три AsymRm adaptive guards приняты обоими серверами без wrappers|Остаются15 AsymRm Python,109 loose Reports source snapshots и прочие инструменты; four-tree803 inventory классифицирован, не является разрешением удалить всё|
+|9. Скрипты|Корневой пакет и CLI работают; migration354:352 retired+2 moved.109 historical Reports source snapshots удалены с проверенным Git retrieval, остальные Reports blobs сохранены|Остаются связанные инструменты Bin, включая активный анализ и старую матрицу;127 распознанных Bin script paths включают также общие project/build tools. Нужны semantic review/перенос действующих функций, удаление исторических entrypoints и проверка callers; complete=false|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|
