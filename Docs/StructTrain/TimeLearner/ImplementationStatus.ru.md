@@ -344,3 +344,15 @@ backend отверг запуск из-за дочернего процесса 
 Усиление JSON identities/dimensions reader затем прошло20 тестов (11+9 новых)
 и replay тех же10 groups на tool rootd37b01d2. Критерий и ответы моделей не
 менялись. [Scoped receipt](MatchedOmissionReaderDimensionsVerification.json).
+
+
+Windows .14: отдельная bounded попыткаa3 подтвердила `ninja: no work to do`,
+но снова была отклонена штатным backend: после main exit остались conhost.exe
+и powershell.exe. Обе process identities теперь сохранены; a2 PID9556 задним
+числом не идентифицируется. Три runtime inventories не изменились; native tests
+не запускались. [Квитанция a3](WindowsDomainNoopBuildRejectionVerification.json).
+Installed VS18 VsDevCmd содержит guarded async PowerShell telemetry. Это
+обоснование следующего контролируемого ENV изменения, а не доказательство
+командной строки прошлого PID. A4 проверяет только процесс-локальный штатный
+флаг VSCMD_SKIP_SENDTELEMETRY=1 до vcvars; backend/его guard не ослабляются.
+Успех A4 и запуск18 gates на момент этой записи ещё не приняты.
