@@ -302,3 +302,10 @@ schema2 содержит все шесть сочетаний проба×сом
 обоих серверах. Это ограниченная приёмка измерений и визуализации, не Train
 и не классификация. Причинная принадлежность пика и интеграция нового
 измерителя в Train остаются открытыми; этап7 и исходная цель не завершены.
+
+
+Normal [проверка revision provider в fixtures](NativeFixtureRevisionProviderNormalVerification.json)
+принята по32 исходным тестам:22 invalidation/NoopBuild,8 N2 Typed/Full и2 N6
+Dimensions schema2. Первая проба четырёх A/B-пар совпадает по CSV/native/model/
+features. ASan-повтор с обоими N6 протоколами и auxiliary parity запущен
+отдельно; его результат пока не принят. Это изменение fixtures, не алгоритма.

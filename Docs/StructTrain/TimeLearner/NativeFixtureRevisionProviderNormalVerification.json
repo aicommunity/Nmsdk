@@ -1,0 +1,135 @@
+{
+  "kind": "independent_fixture_identity_metadata_verification",
+  "passed": true,
+  "evidence_commit": "fdd3e78de7719ca6d02d0d4433cc7ce0ff419c2e",
+  "compiled_root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "PulseLib": "3accbed3c5d6ac2eaff98970227485a9d899835c",
+  "archive_members_verified": 509,
+  "archive_bytes": 393592,
+  "archive_sha256": "4d17799ca0104ea8fd745f18f5820808a23a342b7149a126df05a9a3771a09a9",
+  "source_fixture_hashes_verified": 16,
+  "junit_test_ids": [
+    "NativeLearnerProbeInvalidation/ClassicPhysicalResetWithUnchangedModelHash",
+    "NativeLearnerProbeInvalidation/BranchPhysicalResetWithUnchangedModelHash",
+    "NativeLearnerProbeInvalidation/ClassicSourceAmplitudeChange",
+    "NativeLearnerProbeInvalidation/BranchSourceAmplitudeChange",
+    "NativeLearnerProbeInvalidation/ClassicSourceFrequencyChange",
+    "NativeLearnerProbeInvalidation/BranchPatternChange",
+    "NativeLearnerProbeInvalidation/ClassicDeletedSynapse",
+    "NativeLearnerProbeInvalidation/BranchDeletedSynapse",
+    "NativeLearnerProbeInvalidation/ClassicExternalStopPreservesTargetAndThreshold",
+    "NativeLearnerProbeInvalidation/BranchExternalStopPreservesTargetAndThreshold",
+    "NativeLearnerProbeInvalidation/ClassicImplicitResetDuringBuildKeepsControl",
+    "NativeLearnerProbeInvalidation/BranchImplicitResetDuringBuildKeepsControl",
+    "NativeLearnerProbeInvalidation/ClassicNoopBuildDoesNotInvalidateProbe",
+    "NativeLearnerProbeInvalidation/BranchNoopBuildDoesNotInvalidateProbe",
+    "NativeLearnerProbeInvalidation/ClassicPreparationCallbackFailure",
+    "NativeLearnerProbeInvalidation/BranchSampleSinkFailure",
+    "NativeLearnerProbeInvalidation/ClassicRevisionProviderFailure",
+    "NativeLearnerProbeInvalidation/ClassicOwnerUnInitCancelsProbe",
+    "NativeLearnerProbeInvalidation/BranchOwnerUnInitCancelsProbe",
+    "NativeLearnerProbeInvalidation/BranchTinySourceChangeCannotHideInFormattedSnapshot",
+    "NativeLearnerProbeInvalidation/ClassicOneUlpPhysicalCapacitanceChange",
+    "NativeLearnerProbeInvalidation/BranchOneUlpPhysicalCapacitanceChange",
+    "NativeResponseDomainBridge/Classic2000",
+    "NativeResponseDomainBridge/ClassicFullRevision2000",
+    "NativeResponseDomainBridge/Classic20000",
+    "NativeResponseDomainBridge/ClassicFullRevision20000",
+    "NativeResponseDomainBridge/Branch2000",
+    "NativeResponseDomainBridge/BranchFullRevision2000",
+    "NativeResponseDomainBridge/Branch20000",
+    "NativeResponseDomainBridge/BranchFullRevision20000",
+    "NativeLearnerDimensions/ClassicSixInputs2000",
+    "NativeLearnerDimensions/BranchSixInputs2000"
+  ],
+  "junit_checks_passed": 32,
+  "native_provider_cases": 8,
+  "n6_cases": 2,
+  "provider_pairs_verified": 4,
+  "provider_parity_scope": "first probe canonical CSV bytes, native evidence except exact declared run/trial suffix, stored semantic model identities, features and domain graph; later assertions individually passed",
+  "operational_diagnostics": {
+    "typed_faults22": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "Classic2000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "ClassicFullRevision2000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "Classic20000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "ClassicFullRevision20000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "Branch2000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "BranchFullRevision2000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "Branch20000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "BranchFullRevision20000": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "ClassicN6": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    },
+    "BranchN6": {
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2
+    }
+  },
+  "operational_clear_not_asserted": true,
+  "loaded_maps_verified_against_archived_runtime": true,
+  "remote_loaded_files_rehashed_locally": false,
+  "runtime_freezes_equal": true,
+  "all_archived_process_groups_closed": true,
+  "lease_released": true,
+  "asan_gate": false,
+  "numerical_trace_recomputation_locally": false,
+  "scientific_verdict": null,
+  "training_certificate_eligible": false,
+  "whole_plan_complete": false,
+  "manual_operational_review": {
+    "streams_reviewed": 11,
+    "all_stderr_exact_fixture_runtime_identity_and_work_directory_notices": true,
+    "automatic_needs_review_preserved": true,
+    "historical_scorer_not_reclassified": true
+  }
+}

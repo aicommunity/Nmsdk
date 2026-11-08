@@ -21,18 +21,25 @@ observer full reads/cache hits, ticks, samples и wall time **первой** п�
 Весь testcase может включать дополнительные reference/final probes; его
 время нельзя делить только на число ticks первой пробы.
 
-Добавлены4 Full-контроля Classic/Branch N2 на2000/20000 Гц. Приёмка ещё не
-выполнена: нужна серверная A/B сверка всех stimulus/soma arrays, model hashes,
-наблюдений и исходов с учётом явно различающихся trial IDs; чувствительные
-контроли source/pattern/physics/lifecycle/reader failure; N6/2000 и ASan.
+Добавлены4 Full-контроля Classic/Branch N2 на2000/20000 Гц.
+Normal-проверка Elder завершена:32 случая без skipped, включая22 invalidation
+с NoopBuild controls,8 Typed/Full и2 N6 Dimensions schema2. Четыре A/B-пары
+имеют идентичные CSV первой пробы, model identities, native observations,
+features и domain graph после исключения только объявленного run/trial suffix.
+[Независимая квитанция](NativeFixtureRevisionProviderNormalVerification.json),
+evidence `fdd3e78de7719ca6d02d0d4433cc7ce0ff419c2e`:509 членов архива.
+Автоматический operational status needs_review сохранён. Отдельно просмотрены
+все11 stderr: только две штатные строки fixture provenance, без иных строк.
+Вспомогательные reference/verify пробы в этом A/B проверены assertions каждого
+случая отдельно; их прямое сравнение и ASan остаются следующим gate.
 Ранее сохранённые Full-runtime и primary следует использовать как контроль,
 не повторяя дорогую исходную матрицу без необходимости.
 
 Таймаут прежнего Classic N6 ASan1200s не объявляется доказанным следствием
 IdentifyModel. Подтверждён избыточный путь fixture; его вклад требует измерения.
 Не меняются алгоритмы Train, допуски, окна, частота, routing, длительность или
-размер научной матрицы. Активная серверная ASan-проверка использует прежний
-неизменяемый снимок и этим локальным изменением не обновляется.
+размер научной матрицы. Завершённая capture/codec ASan-проверка сохраняет прежний неизменяемый
+снимок. Новая fixture ASan-проверка получает отдельный runtime, как описано ниже.
 
 
 ## Адресная следующая проверка
