@@ -1,0 +1,112 @@
+{
+  "kind": "exact_old_static_archive_retirement",
+  "parent": "58f5b5181c217e70afd9ab08f18cd966f4640f99",
+  "terminal": {
+    "cleanup_complete": true,
+    "files_removed": 13,
+    "logical_bytes_removed": 136457038,
+    "heartbeat_errors": [],
+    "only_approved_13_static_archives": true,
+    "latest_a4_runtime_opened_or_changed": false,
+    "user_project_opened_or_changed": false,
+    "builds_started": 0,
+    "native_tests_started": 0,
+    "scientific_verdict": null,
+    "approved_login_helper_exception_unknowns_explicit": true,
+    "whole_plan_complete": false
+  },
+  "closed": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "1e67a8b0ae4f8fa7cb332679ce45c72f70081f590169b0e86391cc13c03ef4a4",
+      "unit": "timelearner-6eaf5822-d579-4a8c-937e-58a2507b90ec.service",
+      "invocation_id": "c06f3e38637b49df87fd2a16442f7ae4",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6eaf5822-d579-4a8c-937e-58a2507b90ec.service",
+      "initial_main_pid": 1793297,
+      "initial_start_ticks": "369001257",
+      "sha256": "44c36715947e536ca3aef999b8e8b996cc06f13ed9657932a4639aa2fdb33f7d"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-6eaf5822-d579-4a8c-937e-58a2507b90ec.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "failed_a1_closed": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2d40e7c5ddf093010eea6182bc46747c9c0deff1f5c20bb4e3d777948e1d2679",
+      "unit": "timelearner-e9cd0d63-442a-4e12-9dff-ef0a25c77125.service",
+      "invocation_id": "54935d5a978c4bf193fce2abdfe4f923",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e9cd0d63-442a-4e12-9dff-ef0a25c77125.service",
+      "initial_main_pid": 1792038,
+      "initial_start_ticks": "368991027",
+      "sha256": "560a054657fbf54de967998893ad16581e57bf81d8d9cf5b663b79d581d7f11f"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "268435456",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt e9cd0d63-442a-4e12-9dff-ef0a25c77125",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "54935d5a978c4bf193fce2abdfe4f923"
+    },
+    "memory_max": 268435456,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "lease_released": true,
+  "currently_held_jobs_at_publication": [],
+  "non_target_hashes_rechecked": true,
+  "all_13_deleted_paths_rechecked": true,
+  "disk_before": {
+    "available_bytes": 717815808,
+    "free_bytes": 26313080832
+  },
+  "disk_after": {
+    "available_bytes": 854249472,
+    "free_bytes": 26449514496
+  },
+  "available_delta_bytes": 136433664,
+  "fresh_available_bytes": 854142976,
+  "duplicates_only": false,
+  "old_runtime_inventory_changed_only_by_static_archive_removal": true,
+  "latest_a4_runtime_opened_or_changed": false,
+  "user_project_opened_or_changed": false,
+  "protected_login_helper_exception_unknowns_explicit": true,
+  "native_tests_started": 0,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}
