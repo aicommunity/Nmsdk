@@ -88,7 +88,18 @@ def render(corpus, output, source_evidence):
                 channel = mapping['channel']; physical = mapping['physical_path']
                 y_limits = shared[case['topology'],physical]
                 values = [row[ch_index+2] for row in case['values']]
-                for view, left, right in time_views(spec['begin'], spec['end'], case['frequency_hz']):
+                views = [(name,left,right,None) for name,left,right in
+                         time_views(spec['begin'],spec['end'],case['frequency_hz'])]
+                # Keep the uniform tiles, but do not make an onset coincide
+                # with their floating-point boundary in every detailed view.
+                # These extra windows use actual recorded events, never a
+                # delay prediction or a reconstructed pattern schedule.
+                for event_index,event in enumerate(case['events'],1):
+                    left=max(spec['begin'],event['time']-20/case['frequency_hz'])
+                    right=min(spec['end'],event['time']+80/case['frequency_hz'])
+                    require(right>left,'domain_report_invalid_event_context')
+                    views.append((f'input-{event_index:03d}',left,right,event))
+                for view, left, right, anchor in views:
                     fig, axis = plt.subplots(figsize=(12,6), dpi=160)
                     try:
                         fig.subplots_adjust(left=.12,right=.86,bottom=.16,top=.67)
@@ -110,7 +121,8 @@ def render(corpus, output, source_evidence):
                         axis.set_xlim(left,right);axis.set_ylim(*y_limits);axis.grid(alpha=.25)
                         axis.set_xlabel('Native absolute time [s]')
                         axis.set_ylabel('Soma potential [native units; SI unverified]')
-                        figure_title(fig, f'{case["topology"]} | {physical} | {case["frequency_hz"]:g} Hz | {view}\n'
+                        event_label = '' if anchor is None else f' | {anchor["id"]} at {anchor["time"]:.9g} s'
+                        figure_title(fig, f'{case["topology"]} | {physical} | {case["frequency_hz"]:g} Hz | {view}{event_label}\n'
                             f'Trial {spec["trial_id"]}\n'
                             'Diagnostic waveform; declared domains do not prove peak origin\n'
                             f'Base {case["prepared"]["base_model_revision"][:12]} | measured {spec["effective_model_revision"][:12]}',
@@ -133,6 +145,11 @@ def render(corpus, output, source_evidence):
                              'full_sample_count':len(times),'plotted_sample_count':len(times),'downsampling':False,
                              'matplotlib_path_simplification':False,'actual_input_overlay':True,
                              'actual_event_times':[e['time'] for e in case['events']],
+                             'purpose':'actual_stimulus_context' if anchor is not None else
+                                       'whole_observation' if view=='overview' else 'native_tick_tile',
+                             'anchored_to_actual_event':anchor is not None,
+                             'actual_event_id':None if anchor is None else anchor['id'],
+                             'actual_event_time':None if anchor is None else anchor['time'],
                              'potential_units':'native_units_SI_unverified','files':files}
                         case_record['figure_indices'].append(len(figures));figures.append(row)
                         if view=='overview':selected.append({'case_index':serial-1,'channel':channel,'png':files[0]})
@@ -149,19 +166,21 @@ def render(corpus, output, source_evidence):
     (output/'index.html').write_text('<!doctype html><html><head><meta charset="utf-8"><title>Native domain diagnostic waveforms</title>'
         '<style>body{font-family:sans-serif;margin:20px}.frame{overflow-x:auto}.frame img{width:1920px;max-width:none;height:auto}</style></head><body>'
         '<h1>Native domain diagnostic waveforms</h1><p>All recorded somas; actual input overlays and stimulus timestamps. '
-        'Overview plus 100-native-tick tiles, with no downsampling. Each zoom retains at least eight pixels per tick. '
+        'Overview plus 100-native-tick tiles and actual-event input views (20 ticks before, 80 after onset), '
+        'clipped only at the recorded observation boundaries, with no downsampling. Each zoom retains at least eight pixels per tick. '
         'Shared potential Y limits compare corresponding somas within each topology across frequencies. '
         'Open images at full size or scroll horizontally; browser fit-to-window may reduce apparent resolution.</p>'
         '<p>Native potential units, SI unverified. Diagnostic captures only: no proven peak origin, training certificate, '
         'spike-silence claim or eight-pattern classification verdict.</p>'+''.join(entries)+'</body></html>',encoding='utf-8')
     generated={p.relative_to(output).as_posix():_binding(p) for p in sorted(output.rglob('*')) if p.is_file()}
-    manifest={'kind':'timelearner_response_domain_temporal_report','schema_version':1,
+    manifest={'kind':'timelearner_response_domain_temporal_report','schema_version':2,
         'declared_source_evidence':source_evidence,'source_evidence_independently_verified':False,
         'primary_file_bindings':bindings,'cases':case_records,'case_count':len(cases),
         'trial_soma_pairs':sum(len(c['mapping']) for c in cases),'figures':figures,'selected_overviews':selected,
         'figure_files':generated,'plotting_runtime':runtime,
         'y_scale':'shared per (topology, physical soma path) across frequencies',
         'downsampling':False,'time_frame':'absolute_model_time','tick_tile_width':100,
+        'anchored_to_actual_events':True,'event_context_ticks_before':20,'event_context_ticks_after':80,
         'diagnostic_only':True,'training_certificate_eligible':False,'causal_origin_verified':False,
         'physical_paths_independently_verified':False,'spike_response':'unknown','scientific_verdict':None}
     with (output/'manifest.json').open('x',encoding='utf-8') as stream:

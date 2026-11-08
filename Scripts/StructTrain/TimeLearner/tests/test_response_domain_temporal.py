@@ -55,7 +55,29 @@ class ResponseDomainTemporalTest(unittest.TestCase):
         result=render(self.corpus,self.output,'a'*40)
         self.assertEqual(result['case_count'],2);self.assertEqual(result['trial_soma_pairs'],4)
         self.assertEqual(len(result['selected_overviews']),4)
-        self.assertEqual(len(result['figures']),8)
+        self.assertEqual(len(result['figures']),16)
+        self.assertEqual(result['schema_version'],2)
+        self.assertTrue(result['anchored_to_actual_events'])
+        centered=[f for f in result['figures'] if f['view'].startswith('input-')]
+        self.assertEqual(len(centered),8)
+        for figure in centered:
+            self.assertTrue(figure['anchored_to_actual_event'])
+            self.assertEqual(figure['purpose'],'actual_stimulus_context')
+            source=load(self.corpus/figure['packet'])
+            spec=source['native_evidence']['observation']['specification']
+            events=source['native_evidence']['observation']['stimuli']
+            event=next(e for e in events if e['id']==figure['actual_event_id'])
+            self.assertEqual(figure['actual_event_time'],event['time'])
+            self.assertEqual(figure['x_bounds_s'],[
+                max(spec['begin'],event['time']-20/figure['frequency_hz']),
+                min(spec['end'],event['time']+80/figure['frequency_hz'])])
+            left,right=figure['x_bounds_s']
+            if spec['begin']<event['time']<spec['end']:
+                self.assertLess(left,event['time']);self.assertLess(event['time'],right)
+            # The literal fixture contains a complete one-tick digital pulse;
+            # both its actual leading edge and end fit the anchored context.
+            self.assertLess(left,event['time'])
+            self.assertGreaterEqual(right,event['time']+spec['stimulus_profile']['pulse_length'])
         self.assertEqual({c['frequency_hz'] for c in result['cases']},{10.,20.})
         self.assertFalse(result['training_certificate_eligible']);self.assertFalse(result['causal_origin_verified'])
         self.assertFalse(result['physical_paths_independently_verified']);self.assertIsNone(result['scientific_verdict'])
