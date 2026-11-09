@@ -330,7 +330,8 @@ def collect(manifest_path, manifest_sha256):
     require(not registry.managed_units, 'native_collection_managed_registry_unsupported')
     lease = registry.reserve(manifest['collection_id'], [{'path': str(output), 'access': 'write'}]+
         [{'path': p, 'access': 'read'} for p in sorted(read_roots)], ttl_seconds=120,
-        demands={'slots': 1, 'memory_bytes': 512*1024**2, 'disk_bytes': bounds['maximum_output_bytes']}
+        demands={'slots': 1, 'memory_bytes': (1024 if version == 3 else 512)*1024**2,
+                 'disk_bytes': bounds['maximum_output_bytes']}
         if registry.capacity is not None else None)
     stopped, errors = threading.Event(), []
 
