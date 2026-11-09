@@ -228,5 +228,38 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
             subject.capture_inputs(self.plan,path,digest(raw))
         self.assertFalse(self.external.exists());self.assertFalse(self.controller.exists())
 
+    def test_many_prior_directories_use_existing_declared_protected_read_scope(self):
+        from ..resource_reservations import _resources
+        parent=self.case/'closed-original';parent.mkdir()
+        priors=[]
+        for index in range(80):
+            directory=parent/str(index);directory.mkdir()
+            path=directory/'binding.json';raw=encode({'kind':'metadata-scope-fixture'})
+            path.write_bytes(raw);priors.append({'path':str(path),'sha256':digest(raw)})
+        self.plan['prior_bindings']=priors
+        self.job['protected_runtimes'].append(str(parent))
+        self.plan['native_job']=self.binding('job.json',self.job)
+        rows=subject.resources(self.plan,self.case/'owner-job',self.controls/'plan.json')
+        self.assertIn({'path':str(parent),'access':'read'},rows)
+        self.assertTrue(all({'path':str(Path(p['path']).parent),'access':'read'} not in rows for p in priors))
+        self.assertLessEqual(len(_resources(rows)),64)
+        self.assertNotIn({'path':str(self.case),'access':'read'},rows)
+        self.assertNotIn({'path':str(parent),'access':'write'},rows)
+        self.assertFalse(self.external.exists());self.assertFalse(self.controller.exists())
+
+    def test_uncovered_prior_directories_do_not_gain_an_undeclared_ancestor(self):
+        from ..resource_reservations import _resources,ReservationError
+        parent=self.case/'independent-originals';parent.mkdir()
+        priors=[]
+        for index in range(80):
+            directory=parent/str(index);directory.mkdir()
+            path=directory/'binding.json';raw=encode({'kind':'metadata-scope-fixture'})
+            path.write_bytes(raw);priors.append({'path':str(path),'sha256':digest(raw)})
+        self.plan['prior_bindings']=priors
+        rows=subject.resources(self.plan,self.case/'owner-job',self.controls/'plan.json')
+        self.assertNotIn({'path':str(parent),'access':'read'},rows)
+        with self.assertRaisesRegex(ReservationError,'invalid_reservation_resources'):_resources(rows)
+        self.assertFalse(self.external.exists());self.assertFalse(self.controller.exists())
+
 
 if __name__=='__main__':unittest.main()

@@ -109,7 +109,13 @@ def resources(plan, job_directory, plan_path):
     state=validate_plan(plan)
     plan_parent=_path(str(Path(plan_path).parent))
     _,require,_=_api();require(plan_parent.is_relative_to(state['base']),'canonical_plan_outside_workspace')
-    rows=[{'path':str(p),'access':'read'} for p in [ROOT,plan_parent,*state['reads']]]+[
+    # All these scopes are read-only and already explicitly declared. A prior
+    # binding's directory needs no second lease row when a protected original
+    # output already covers it. Never introduce a new common ancestor or fold
+    # write scopes into this reduction; the registry's 64-row cap stays intact.
+    reads=set([ROOT,plan_parent,*state['reads']])
+    reads=sorted((p for p in reads if not any(p!=q and p.is_relative_to(q) for q in reads)),key=str)
+    rows=[{'path':str(p),'access':'read'} for p in reads]+[
         {'path':str(state['output']),'access':'write'},{'path':str(job_directory),'access':'write'}]
     return list({(r['path'],r['access']):r for r in rows}.values())
 
