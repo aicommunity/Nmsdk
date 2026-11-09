@@ -2,7 +2,7 @@ param([Parameter(Mandatory=$true)][string]$ToolRoot,
       [Parameter(Mandatory=$true)][ValidatePattern('^[0-9a-f]{40}$')][string]$ToolCommit,
       [Parameter(Mandatory=$true)][ValidatePattern('^[0-9a-f]{40}$')][string]$SpecificationBlob,
       [Parameter(Mandatory=$true)][ValidatePattern('^[a-z0-9-]+$')][string]$Attempt,
-      [ValidateSet('sdk-build.py','audit-closed-build.py')][string]$WorkerName='sdk-build.py')
+      [ValidateSet('sdk-build.py','audit-closed-build.py','validate-native.py')][string]$WorkerName='sdk-build.py')
 $ErrorActionPreference='Stop'
 $ProgressPreference='SilentlyContinue'
 [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
@@ -51,7 +51,7 @@ $action.Path='C:\Windows\System32\cmd.exe';$action.Arguments='/d /c "'+$batch+'"
 $registered=$folder.RegisterTaskDefinition($name,$definition,2,$user,$null,2,$null)
 [IO.File]::WriteAllText($control+'/task.xml',$registered.Xml,$utf8)
 $instance=$registered.Run($null)
-$receipt=@{kind=$(if($WorkerName -eq 'sdk-build.py'){'windows_sdk_build_dispatch'}else{'windows_closed_build_audit_dispatch'});task=$name;instance=$instance.InstanceGuid;
+$receipt=@{kind=$(switch($WorkerName){'sdk-build.py'{'windows_sdk_build_dispatch'};'audit-closed-build.py'{'windows_closed_build_audit_dispatch'};default{'windows_native_validation_dispatch'}});task=$name;instance=$instance.InstanceGuid;
     tool_commit=$ToolCommit;specification_git_blob=$SpecificationBlob;worker_sha256=$spec.worker_sha256;
     scientific_verdict=$null;output=$spec.output_root}
 [IO.File]::WriteAllText($control+'/dispatch.json',($receipt|ConvertTo-Json -Depth 5)+"`n",$utf8)
