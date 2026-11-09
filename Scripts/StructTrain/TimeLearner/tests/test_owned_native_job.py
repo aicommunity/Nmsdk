@@ -99,7 +99,8 @@ class OwnedNativeMetadataTest(unittest.TestCase):
             self.assertEqual({p.name for p in root.iterdir()},before)
 
     def test_process_identity_cannot_turn_unknown_or_boolean_pid_into_closed(self):
-        valid={'pid':os.getpid(),'start_ticks':'1','boot_id':'a'*36,'uid':os.getuid()}
+        valid=subject._identity()
+        self.assertTrue(subject._same_process(valid))
         for key,value in [('pid',True),('pid',0),('start_ticks','01'),('uid',False),('boot_id','short')]:
             bad={**valid,key:value}
             with self.subTest(key=key,value=value),self.assertRaisesRegex(ValueError,'owned_native_process_identity_invalid'):
