@@ -16,8 +16,10 @@ function Invoke-CheckedGit {
         $code = $LASTEXITCODE
     } finally { $ErrorActionPreference = $previous }
     foreach ($entry in $lines) {
+        # Windows PowerShell 5.1 wraps the first stderr line and subsequent
+        # stderr lines with different IDs, even when Git exits successfully.
         if ($entry -is [System.Management.Automation.ErrorRecord] -and
-            $entry.FullyQualifiedErrorId -ne 'NativeCommandError') { throw $entry }
+            $entry.FullyQualifiedErrorId -notin @('NativeCommandError','NativeCommandErrorMessage')) { throw $entry }
     }
     if ($null -eq $code) { throw 'Git did not supply a native exit code' }
     Assert-NativeExitCode $code ('git '+($ArgumentList -join ' '))
