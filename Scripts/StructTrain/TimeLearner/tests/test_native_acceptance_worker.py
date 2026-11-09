@@ -1,7 +1,9 @@
 """Worker metadata/configuration regressions; run on workers only, no compilation/model run."""
 import copy
 import json
+import os
 from pathlib import Path
+import shutil
 import tempfile
 import subprocess
 import unittest
@@ -92,7 +94,20 @@ class NativeAcceptanceWorkerTest(unittest.TestCase):
                 'cmake_minimum_required(VERSION 3.16)\nproject(NativeProfile NONE)\n', encoding="utf-8")
             self.assertFalse(paths["build"].exists())
             arguments = subject.configure_arguments(job, paths, protected)
+            # An explicitly declared fixture binds the installed tool, without
+            # copying it or claiming the complete operating-system toolchain.
+            binding = json.loads((Path(os.environ["TIMELEARNER_NATIVE_PROFILE_CMAKE"])/
+                                  "cmake-dependency.json").read_bytes())
+            self.assertEqual(set(binding), {"kind", "schema_version", "path", "sha256"})
+            self.assertEqual(binding["kind"], "timelearner_cmake_configure_dependency")
+            self.assertIs(type(binding["schema_version"]), int)
+            self.assertEqual(binding["schema_version"], 1)
+            cmake = Path(shutil.which(arguments[0])).resolve(strict=True)
+            self.assertEqual(str(cmake), binding["path"])
+            self.assertEqual(subject._sha(cmake), binding["sha256"])
             subprocess.run(arguments, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=60)
+            self.assertEqual(Path(shutil.which(arguments[0])).resolve(strict=True), cmake)
+            self.assertEqual(subject._sha(cmake), binding["sha256"])
             cache = (paths["build"]/"CMakeCache.txt").read_text(encoding="utf-8")
             subject.validate_cache_profile(cache, job["build"]["required_cache_tokens"])
             self.assertIn("CMAKE_HOME_DIRECTORY:INTERNAL="+str(paths["source"]), cache.splitlines())
