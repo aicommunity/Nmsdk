@@ -10,7 +10,6 @@ import gzip
 import hashlib
 import importlib.util
 import json
-import msvcrt
 import os
 from pathlib import Path
 import subprocess
@@ -92,6 +91,7 @@ def main():
     parser.add_argument('--specification', required=True, type=Path)
     args = parser.parse_args()
     require(os.name == 'nt' and __debug__, 'normal_windows_python_required')
+    import msvcrt
     specification = private_path(args.specification)
     spec = json.loads(specification.read_bytes())
     require(spec['kind'] == 'timelearner_closed_windows_build_audit' and
@@ -123,6 +123,12 @@ def main():
             originals[name] = expected
         terminal = json.loads((original/'terminal.json').read_bytes())
         result = json.loads((original/'build-result.json').read_bytes())
+        original_spec = json.loads((original/'specification.json').read_bytes())
+        require(private_path(original_spec['source_root']) == source and
+                private_path(original_spec['runtime_root']) == runtime and
+                private_path(original_spec['installed_dependencies']) == dependencies and
+                original_spec['source_commit'] == spec['source_commit'] and
+                original_spec['namespace_git_blob'] == spec['namespace_git_blob'], 'original_build_binding_changed')
         require(terminal['build_accepted'] is False and result['returncode'] == 0 and
                 result['validity'] == 'valid' and result['all_processes_closed'] is True and
                 result['execution'] == 'descendants_remaining', 'unexpected_original_build_outcome')
@@ -135,6 +141,15 @@ def main():
             require(path.is_relative_to(source) and path.is_file() and path.stat().st_size == record['bytes'] and
                     digest(path) == record['sha256'], 'source_file_changed:'+name)
             guard()
+        physical = set()
+        for folder, children, files in os.walk(source, followlinks=False):
+            children[:] = [name for name in children if name != '.git']
+            for name in [*children, *files]:
+                path = Path(folder)/name
+                require(not path.is_symlink() and not path.is_junction(), 'source_namespace_reparse')
+            physical.update((Path(folder)/name).relative_to(source).as_posix()
+                            for name in files if name != '.git')
+        require(physical == set(namespace), 'source_physical_namespace_changed')
         # Reuse the exact original production inventory/checking paths, after
         # verifying all source bytes; do not copy their implementation here.
         sys.path.insert(0, str(source))
