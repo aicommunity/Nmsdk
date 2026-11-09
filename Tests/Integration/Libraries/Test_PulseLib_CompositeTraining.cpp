@@ -3413,7 +3413,16 @@ void WindowPackageDifferences(const QJsonValue& expected,const QJsonValue& actua
         if(value.isUndefined())return QJsonObject{{"type","missing"}};
         return value;
     };
-    differences.append(QJsonObject{{"path",path},{"expected",bounded(expected)},{"actual",bounded(actual)}});
+    QJsonObject difference{{"path",path},{"expected",bounded(expected)},{"actual",bounded(actual)}};
+    if(expected.isString() && actual.isString()) {
+        const auto left=expected.toString(),right=actual.toString();int first=0;
+        while(first<std::min(left.size(),right.size()) && left[first]==right[first])++first;
+        const int start=std::max(0,first-160);
+        difference["first_difference_character"]=first;
+        difference["expected_difference_context"]=left.mid(start,480);
+        difference["actual_difference_context"]=right.mid(start,480);
+    }
+    differences.append(difference);
 }
 template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool warm=false) {
     const auto source=ActualWindowPackage<Owner>(asymmetric?WindowPackageSource::AsymmetricC0:WindowPackageSource::Complete);
