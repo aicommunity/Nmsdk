@@ -279,17 +279,19 @@ def validate_original_roles(original_paths, regular_files):
 
 
 def collect(manifest_path, manifest_sha256):
-    manifest, raw, record = _read(manifest_path, 1024**2)
+    manifest, raw, record = _read(manifest_path, 2*1024**2)
     require(record['sha256'] == manifest_sha256, 'native_collection_manifest_digest')
     version = manifest.get('schema_version')
     _keys(manifest, 'kind schema_version tool base output repository parent collection_id original_paths '
           'readonly_inventory regular_files original_outcome children bounds supervisor_dialect old_lease_token scientific_verdict' +
-          (' incomplete_children' if version == 2 else ''),
+          (' incomplete_children' if version in (2, 3) else ''),
           'native_collection_manifest_schema')
     require(manifest['kind'] == 'timelearner_closed_native_acceptance_collection' and
-            type(version) is int and version in (1, 2) and
+            type(version) is int and version in (1, 2, 3) and
             manifest['scientific_verdict'] is None and manifest['supervisor_dialect'] == 'owned-native-json-lines-v1',
             'native_collection_manifest_version')
+    require(len(raw) <= (2 if version == 3 else 1)*1024**2,
+            'native_collection_manifest_size_limit')
     require(Path(manifest['tool']['path']) == ROOT, 'native_collection_tool_namespace')
     tool_before = owned_python_job._source_snapshot(ROOT, manifest['tool']['commit'])
     base = provenance._canonical(Path(manifest['base']))
@@ -303,8 +305,10 @@ def collect(manifest_path, manifest_sha256):
     inventory = manifest['readonly_inventory']
     observation = read_readonly_inventory(inventory)
     bounds = manifest['bounds']
-    require(bounds == {'maximum_capture_bytes': (64 if version == 1 else 256)*1024**2,
-                       'maximum_output_bytes': (128 if version == 1 else 512)*1024**2,
+    # Schema3 preserves the full 348 MB native119 A2 negative run. Earlier
+    # profiles retain their exact limits; no originals are omitted to fit them.
+    require(bounds == {'maximum_capture_bytes': {1:64, 2:256, 3:512}[version]*1024**2,
+                       'maximum_output_bytes': {1:128, 2:512, 3:1024}[version]*1024**2,
                        'minimum_free_bytes': 512*1024**2}, 'native_collection_fixed_copy_bounds')
     validate_original_roles(manifest['original_paths'], manifest['regular_files'])
     _check_original(manifest, observation)
