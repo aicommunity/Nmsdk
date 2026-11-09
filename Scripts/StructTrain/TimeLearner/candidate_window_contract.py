@@ -105,7 +105,7 @@ def validate_policy(policy, inputs, maximum_samples):
 
 
 def configuration_view(configuration):
-    """Private common-field validation only; never a public cold7 CLI dispatch."""
+    """Private common-field view; the original cold7 record is executed unchanged."""
     require(type(configuration) is dict and bounded_count(configuration.get('schema_version'))==7,
             'candidate_window_requires_cold7_declaration')
     common=configuration.get('composite_measurement')

@@ -128,6 +128,9 @@ def project_composite_configuration(configuration):
 
 def project_training_configuration(configuration):
     """Select the explicit envelope without changing legacy1–5 validation."""
+    if type(configuration) is dict and configuration.get('schema_version') == 7:
+        from .candidate_window_contract import configuration_view
+        return project_composite_configuration(configuration_view(configuration))
     if type(configuration) is dict and configuration.get('schema_version') == 6:
         return project_composite_configuration(configuration)
     from .candidate_recovery import project_recovery_configuration
