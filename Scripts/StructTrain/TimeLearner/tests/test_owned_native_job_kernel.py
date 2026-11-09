@@ -116,6 +116,13 @@ class OwnedNativeKernelTest(unittest.TestCase):
         original=subject._write
         def write(path,value):
             if Path(path).name=='started-binding.json':
+                # Fault only after the real worker has created its own lease;
+                # otherwise an early stop tests a different no-reservation path.
+                deadline=time.monotonic()+10
+                while not (self.output/'reservation.json').is_file() and time.monotonic()<deadline:
+                    time.sleep(.02)
+                if not (self.output/'reservation.json').is_file():
+                    raise AssertionError('real fixture reservation did not become observable')
                 raise OSError('explicit_fixture_started_receipt_failure')
             return original(path,value)
         with patch.object(subject,'_write',side_effect=write):
