@@ -65,12 +65,20 @@ def audit_native_packets(packets):
     return result
 
 
-def audit_raw_trials(record, protocol, configuration, primary, packets):
+def audit_raw_trials(record, protocol, configuration, primary, packets, *,
+                     maximum_samples_limit=None, declared_duration=None, ordinal_stimulus_ids=None,
+                     partial_duration_unbound=False, actual_event_frame_interval=False):
     raw = record['raw_trials']; logical = record['logical_request']
     require(type(raw) is list, 'composite_raw_trial_inventory')
     n = len(protocol['inputs']); assigned = count(logical['input_index'])
     require(assigned < n, 'composite_raw_assigned_index')
     channels = n if protocol['routing'] == 'classic_burst' else 1
+    # Archive2 may declare a candidate-specific native sample budget. These
+    # explicit DATA arguments do not alter the schema1 equality/default path.
+    ids = ['pulse'+str(i) for i in range(n)] if ordinal_stimulus_ids is None else ordinal_stimulus_ids
+    require(type(ids) is list and len(ids)==n and len(set(ids))==n and
+            all(type(v) is str and v for v in ids),'composite_raw_stimulus_ordinal_ids')
+    duration=configuration['duration'] if declared_duration is None else number(declared_duration)
     seen = {}; frames = 0; bytes_count = 0
     for ordinal, trial in enumerate(raw):
         keys(trial, RAW_FIELDS, 'composite_raw_trial_fields')
@@ -94,12 +102,13 @@ def audit_raw_trials(record, protocol, configuration, primary, packets):
             require(count(prepared['selected_input_index']) == assigned, 'composite_raw_branch_solo_index')
         require(spec['sample_id'] == logical['sample_id'] == protocol['sample_id']
                 and spec['run_id'] == logical['run_id'] and spec['maximum_sample_gap'] == protocol['maximum_sample_gap']
-                and count(spec['maximum_samples']) == count(configuration['maximum_samples'])
+                and (count(spec['maximum_samples']) == count(configuration['maximum_samples']) if maximum_samples_limit is None
+                     else 0 < count(spec['maximum_samples']) <= count(maximum_samples_limit))
                 and number(spec['minimum_amplitude']) == number(protocol['minimum_amplitude']),
                 'composite_raw_source_or_recorder_binding')
         _same(spec['stimulus_profile'], protocol['stimulus_profile'])
-        require(number(spec['end']) > number(spec['begin']) and
-                number(spec['end']) == number(spec['begin'])+number(configuration['duration']),
+        require(number(spec['end']) > number(spec['begin']) and (partial_duration_unbound or
+                number(spec['end']) == number(spec['begin'])+number(duration)),
                 'composite_raw_actual_window')
         subset = spec['stimulus_subset']
         keys(subset, {'purpose', 'source_training_pattern_hash', 'physical_input_count', 'source_ordinals'},
@@ -111,7 +120,7 @@ def audit_raw_trials(record, protocol, configuration, primary, packets):
         require(type(mask) is list, 'composite_raw_subset_inventory')
         expected = list(range(n)) if ordinal in (0, n+1) else [i for i in range(n) if i != ordinal-1]
         require([count(i) for i in mask] == expected, 'composite_raw_subset_order')
-        _same(spec['expected_stimulus_ids'], ['pulse'+str(i) for i in expected])
+        _same(spec['expected_stimulus_ids'], [ids[i] for i in expected])
         require(type(spec['baseline']) is list and len(spec['baseline']) == channels, 'composite_raw_baseline_dimension')
         baseline = [number(v) for v in spec['baseline']]
         reference = trial['primary_ref']; raw_bytes = primary[reference['relative_path']]
@@ -130,8 +139,12 @@ def audit_raw_trials(record, protocol, configuration, primary, packets):
         for index, event in enumerate(events):
             keys(event, {'id', 'time', 'frame_index'}, 'composite_raw_event_fields')
             frame = count(event['frame_index'])
-            require(index < len(expected) and event['id'] == 'pulse'+str(expected[index])
-                    and previous < frame < len(times) and number(event['time']) == times[frame],
+            event_time=number(event['time'])
+            on_frame=(0 <= frame < len(times) and event_time <= times[frame]
+                      and (frame==0 or event_time > times[frame-1])) if actual_event_frame_interval else (
+                      frame < len(times) and event_time==times[frame])
+            ordered=previous<=frame if actual_event_frame_interval else previous<frame
+            require(index < len(expected) and event['id'] == ids[expected[index]] and ordered and on_frame,
                     'composite_raw_actual_event_binding')
             previous = frame
         packet = packets.get(identity)

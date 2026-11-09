@@ -200,6 +200,9 @@ def _record(record, protocol, configuration, source, origin, family, primary):
 
 def audit_composite_measurement_archive(document, configuration, *, runtime_plan=None, external_resolver=None):
     """Strict archive/index consistency; certificate and actual import are separate."""
+    if type(document) is dict and document.get('schema_version') == 2:
+        from .candidate_window_archive_evidence import audit_candidate_window_archive
+        return audit_candidate_window_archive(document,configuration,runtime_plan=runtime_plan,external_resolver=external_resolver)
     try:
         keys(document,ARCHIVE_FIELDS,'unknown_composite_measurement_archive_fields'); _finite_json(document)
         require(document['kind']=='timelearner_composite_measurement_archive' and count(document['schema_version'])==1

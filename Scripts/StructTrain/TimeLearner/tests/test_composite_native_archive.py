@@ -10,6 +10,10 @@ from ..composite_primary import capture_primary_blobs, filesystem_primary_resolv
 from ..native_evidence import EvidenceError, load
 
 CASES = ('classic-service','branch-service','classic-partial','branch-C0','classic-warm','branch-ambiguous')
+# Exact metadata inventory from Git b4feb38a primary.tar.xz, six index.json only.
+# Expected coverage is checked against independently replayed measurements below.
+MEASURED = {'classic-service':6,'branch-service':6,'branch-C0':6,'classic-warm':6,
+            'classic-partial':0,'branch-ambiguous':0}
 
 
 class CompositeNativeArchiveTest(unittest.TestCase):
@@ -35,6 +39,7 @@ class CompositeNativeArchiveTest(unittest.TestCase):
                 self.assertTrue(result['archive_counters_recomputed']);self.assertTrue(result['attempt_membership_recomputed'])
                 self.assertFalse(result['native_execution_verified']);self.assertIsNone(result['scientific_verdict'])
                 self.assertEqual(len(result['groups']),len(case[1]['records']))
+                self.assertEqual(sum(row['measured'] for row in result['groups']),MEASURED[name])
                 for row in result['groups']:
                     if row['measured']:
                         self.assertTrue(row['native_closure_recomputed']);self.assertTrue(row['geometry_recomputed'])
