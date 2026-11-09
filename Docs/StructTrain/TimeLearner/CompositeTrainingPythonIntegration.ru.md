@@ -232,3 +232,16 @@ encoded команда содержала LF. Новая p2 публикация
 67 подтверждает только wire/identity/nonpromotion contract. Actual native6/7,
 package5/Console execution3/import и C0 legacy controls остаются отдельными gates;
 подготовленные dataset/latest-final guards не объявляются runtime-принятыми.
+
+
+## Подготовка real-native replay после шести экспортов
+
+Отдельно зафиксирован [план семи real-native проверок и временных отчётов](CompositeNativeReplayPreparation.ru.md)
+с [машинным source/fixture контрактом](CompositeNativeReplayPreparation-20261108.json).
+Это source preparation от Root `cb7721c80125f1ca3df86cc69d651a0303346c31`: 440 Python Git blobs,
+exact семь literal IDs, шесть actual producer roles. Ни replay, ни render здесь не запускались.
+Concrete suite и fixture fingerprints ожидают закрытого immutable C++ export и review.
+Существующие семь тестов не закрывают boundary certificate2/package5/native import/execution3;
+current six producer не пишет package5 или отдельный `models/native.xml`, а отдельным трём
+final-sweep тестам требуется седьмой реальный export. Эти ограничения сохраняют все
+предыдущие wire67 результаты в их первоначальной области.

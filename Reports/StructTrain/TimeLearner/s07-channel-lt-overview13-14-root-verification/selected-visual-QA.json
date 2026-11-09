@@ -1,0 +1,31 @@
+{
+  "kind": "selected_channel_LT_overview_visual_QA",
+  "schema_version": 1,
+  "reviewed_date": "2026-11-09",
+  "image": {
+    "evidence_commit": "ae8626784d85be59a1f3c249edf73ed9bc7ed153",
+    "path": "Reports/StructTrain/TimeLearner/s07-channel-lt-overview-render-m40-a1/selected/Classic-burst-Soma1-overview.png",
+    "bytes": 295230,
+    "sha256": "2612389f37b46267ea35b971e887bdf99b484697efcf20fe2d469a9fc7fd0651"
+  },
+  "method": "Direct view_image inspection of the exact Git PNG; no local numerical analysis or re-rendering.",
+  "scope": {
+    "selected_overviews_reviewed": 1,
+    "all_rendered_views_reviewed": false,
+    "full_corpus_visual_acceptance": false
+  },
+  "checks": {
+    "soma_potential_and_actual_stimulus_overlay_readable": true,
+    "recorded_LT_potential_visibly_nonzero": true,
+    "threshold_100_labelled_above_displayed_Y_without_fake_line": true,
+    "titles_legends_axis_labels_not_clipped": true,
+    "complete_waveform_and_invalid_peak_packet_distinguished": true
+  },
+  "interpretation": {
+    "old_flat_LT_panel_for_this_view_is_axis_scale_artifact": true,
+    "no_new_physical_model_or_LT_membrane_introduced": true,
+    "assigned_peak_validity_regraded": false,
+    "training_convergence_claimed": false,
+    "scientific_verdict": null
+  }
+}

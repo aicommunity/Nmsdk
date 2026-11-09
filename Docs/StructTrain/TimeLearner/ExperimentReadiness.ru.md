@@ -1,4 +1,4 @@
-# Готовность к научным экспериментам — 08.11.2026
+# Готовность к научным экспериментам — 09.11.2026
 
 ## Текущий допуск нового burst-контроллера
 
@@ -6,9 +6,48 @@
 Приняты core143, диагностические пробы и отдельная арифметика окон; это разные
 срезы, их нельзя складывать в доказательство готовности всего контроллера.
 Elder service-проверка обнаружила потерю уведомления об отменённой пробе.
-Исправление Root `cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237` / Pulse
-`88ea9c7ab3583da601b1f01ec84bf6f122875a34` подготовлено с248 проверками,
-но ещё не прошло серверную приёмку.
+Исправление на Pulse88 проверено в полном baseline A3 частично:230PASS,
+одинFAIL и17NOT RUN. Падение выявило другой дефект cold6 JSON producer:
+в actual6 source configurations версия записалась строкой `sample0`.
+[Отрицательная попытка независимо принята как отрицательный результат](CompositeFull248A3NegativeAcceptance-20261109.ru.md),
+а весь248 и semantic reader этих конфигураций не приняты.
+
+Минимальный исправленный baseline A4 Root478/Pulse4a завершён на M40:
+250PASS/0FAIL/error/skip,137leaves/138closedgroups, released lease.
+[Native assertions и transport/provenance независимо приняты](CompositeFull250A4Acceptance-20261109.ru.md);
+обрыв VPN не потребовал повторного запуска. Код/evidence объединены в
+maintained feature branch. [Actual6 native archive reader принят:7/7](CompositeNativeA4Semantic7Acceptance-20261109.ru.md),
+на неизменённых archive1 exports; отдельно нужны candidate-window/lifetime gates; App execution3/codecs и будущий
+Train5/control-lifetime source не включены в минимальный baseline A4.
+
+Прежние source-only E11/BB1 дополнены общей cold6/cold7/execution3 исправленной
+[парой corrected/unfixed](ColdEnvelopeLifetimePairReadiness-20261109.ru.md),
+которая доставлена в отдельные source-копии, но ещё не собрана и не получила
+runtime-приёмку. Fresh-build worker profile прошёл19/19 configure-only tests на sourcea208
+([приёмка и ограничения](NativeAcceptanceWorker.ru.md)); сама будущая SDK-пара ещё не собрана.
+Не смешивать эту пару со снимком A4.
+27проверок запуска/renderer на другом tool-source и Classic render независимо
+приняты. [Выбранный overview просмотрен](ClassicLTReadableOverview-20261109.ru.md):
+LT Potential ненулевой, старуюflatpanel объясняет масштаб threshold100.
+Full163visualQA не заявляется. Эти проверки не подтверждают качество обучения
+и не меняют прежний packet observation valid=False.
+
+Дополнительный source-only blocker archive2: в Root `7ad96da0e66fe1ef51fc76acb2114174ab6a4e68`
+`Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp`, `SaveCompositeBoundary`,
+для service protocol5 пишет `runtime-plan-scope.json` с `runtime_plan2_exported:false`,
+а public reader `composite_archive_case.py` в Root7352 требует оригинальный
+`runtime-plan.json`. Поэтому будущие33 native checks и45DATA+8archive1 checks
+по отдельности не подтверждают archive2→public CLI. Нужны настоящий owning
+runtime2 export, unmocked positive whole-archive2 auditor/CLI и rehashed tamper
+на его реальных выходах. Дополнительно source7352
+`candidate_window_archive_evidence.py:291–295` передаёт runtime plan в
+`validate_protocol`, где ожидается cold configuration7: это разные документы.
+Нужен отдельный строгий runtime2 validator/binding test;45DATA+8archive1
+не покрывают этот positive join и не принимают archive2.
+Не реконструировать недостающий план из index или
+старого archive1. Это выявлено чтением исходников, runtime ещё не проверен.
+
+[Scoped reader53 принят](CandidateWindowReader53Acceptance-20261109.ru.md), но следующий73 gate завершился72PASS/1FAIL в fixture boundary; полный runtime2/export admission отсутствует. [Corrected33](ColdEnvelopeLifetime33Launch-20261109.ru.md) остановился при компиляции до0/33 tests из-за missing owning include; отрицательный результат опубликован, direct include исправлен только в source. Исправленная свежая пара готовится отдельно.
 
 До следующего целевого cold Train необходимо последовательно принять:
 

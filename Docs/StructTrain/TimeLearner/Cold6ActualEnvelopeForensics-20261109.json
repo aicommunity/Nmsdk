@@ -1,0 +1,75 @@
+{
+  "kind": "cold6_envelope_actual_artifact_metadata_forensics",
+  "schema_version": 1,
+  "evidence_commit": "a7dae002295800d520b1fd35975283f0daa2362d",
+  "archive_path": "Reports/StructTrain/TimeLearner/s07-composite-cancellation-m40-asan-a3/primary.tar.xz",
+  "archive_sha256": "84a08abdd5879aa2a7e5a16374932184c8649b06a26b5ee205c9c252ff2b17d3",
+  "initial_configurations": [
+    {
+      "member": "s07-composite-cancellation-m40-asan-a3/worker/archive-native23/native-composite/classic-service/initial-configuration.json",
+      "bytes": 4203,
+      "sha256": "64028e780518f4d211e3c896b075b40cccadbf402b81c5ac59426ec456a3297d",
+      "schema_version": 6,
+      "base_schema_version_type": "string",
+      "base_schema_version": "sample0",
+      "sample_id": "sample0",
+      "raw_mutated": false
+    },
+    {
+      "member": "s07-composite-cancellation-m40-asan-a3/worker/archive-native23/native-composite/classic-warm/initial-configuration.json",
+      "bytes": 4211,
+      "sha256": "8d031992225ee228da681b74565122bc602761b63da6736e8a1409d0718dc087",
+      "schema_version": 6,
+      "base_schema_version_type": "string",
+      "base_schema_version": "sample0",
+      "sample_id": "sample0",
+      "raw_mutated": false
+    },
+    {
+      "member": "s07-composite-cancellation-m40-asan-a3/worker/archive-native23/native-composite/branch-C0/initial-configuration.json",
+      "bytes": 4210,
+      "sha256": "a646f90724df3b58913b893622cc4cdb72e0d2cb95fd9bf5f04db4decce5cc3c",
+      "schema_version": 6,
+      "base_schema_version_type": "string",
+      "base_schema_version": "sample0",
+      "sample_id": "sample0",
+      "raw_mutated": false
+    },
+    {
+      "member": "s07-composite-cancellation-m40-asan-a3/worker/archive-native23/native-composite/classic-partial/initial-configuration.json",
+      "bytes": 4201,
+      "sha256": "aead153447103d1a473554c2e4e940e2947ec0ef4249a638337b8ac74b5ec8cb",
+      "schema_version": 6,
+      "base_schema_version_type": "string",
+      "base_schema_version": "sample0",
+      "sample_id": "sample0",
+      "raw_mutated": false
+    },
+    {
+      "member": "s07-composite-cancellation-m40-asan-a3/worker/archive-native23/native-composite/branch-service/initial-configuration.json",
+      "bytes": 4201,
+      "sha256": "d2bcb9d9da47df388d4ce34362998afd252dcc3a81194677054acd28f0299b1b",
+      "schema_version": 6,
+      "base_schema_version_type": "string",
+      "base_schema_version": "sample0",
+      "sample_id": "sample0",
+      "raw_mutated": false
+    },
+    {
+      "member": "s07-composite-cancellation-m40-asan-a3/worker/archive-native23/native-composite/branch-ambiguous/initial-configuration.json",
+      "bytes": 4213,
+      "sha256": "fc45425ce9dbf11e07c78108af717e390042f7761398057514f06ff9ed7769ef",
+      "schema_version": 6,
+      "base_schema_version_type": "string",
+      "base_schema_version": "sample0",
+      "sample_id": "sample0",
+      "raw_mutated": false
+    }
+  ],
+  "scope": "metadata field types/values only; no waveform, numerical, C++ or model execution",
+  "conclusion": "all six encoded cold6 base-schema tags contain sample_id text rather than a numeric version",
+  "strict_reader_must_not_coerce_this_value": true,
+  "original_raw_artifacts_unchanged": true,
+  "physical_waveform_validity_inferred": false,
+  "scientific_verdict": null
+}

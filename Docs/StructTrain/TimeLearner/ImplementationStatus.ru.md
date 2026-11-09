@@ -1,6 +1,28 @@
-# Состояние реализации TimeLearner — 08.11.2026
+# Состояние реализации TimeLearner — 09.11.2026
 
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
+
+## Последнее подтверждённое состояние09.11
+
+Полный baseline A3 завершился отрицательно —231 actual cases =230 PASS +1 FAIL,17 не запускались. Ошибка `NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip`: `invalid_native_configuration_number`. [Отрицательный результат опубликован и независимо проверен](CompositeFull248A3NegativeAcceptance-20261109.ru.md): outer и121 leaf закрыты, lease освобождён;42/68 artifact rules выполнены,26 относятся к not-run cases. Во всех actual6 конфигурациях версия ошибочно записана строкой `sample0`; semantic/config acceptance false. Исходники/cache/runtime не менялись и job не перезапускался. [Qt JSON producer defect и точечный baseline fix](ColdSchemaJsonProxyFailure-20261109.ru.md) не ослабляют строгий decoder и не исправляют старые primary на месте.
+
+[Baseline A4 принят](CompositeFull250A4Acceptance-20261109.ru.md): **250PASS/0FAIL/error/skip**,137leaves/138closed groups, released lease. Source Root478/Pulse4a, actual binary inventory1626. После восстановления связи Root проверил тот же завершившийся запуск, затем независимо повторил v2 metadata verifier:4551archive members,3719Gitfiles/8repos,11protected roots,72/72artifact rules,26records/101CSV-reference byte equality, полный model/XML transport и exact reservation/request/recovery/runtime linkage. Старый снимок19PASS сохранён как история обрыва, не текущий результат. Код и evidence объединены обычными merge в maintained feature branch; Bin8cb сохранён как потомок tested918 с идентичными runtime resource trees. Отдельный [actual6 semantic reader принят:7/7](CompositeNativeA4Semantic7Acceptance-20261109.ru.md), sourceCEC/archive1. Configured Train→Test, archive2/candidate-window и научная матрица пока не приняты. [Точные pins/handles и история](TypedCompositeTrainingJobs.json).
+
+Для следующего control-lifetime A/B опубликована [симметричная source-only пара](ColdEnvelopeLifetimePairReadiness-20261109.ru.md): corrected Root7ad/Pulse4b и deliberate-unfixed Root053/Pulsefeb. Общие cold6/cold7/execution3 кодеки и тесты совпадают; Root trees различаются только Pulse gitlink, в Pulse сохранён только deliberate lifetime diff. Эта пара доставлена в две отдельные immutable M40 source-копии:8clean repositories/4020Git files/29same-SDK imports в каждой. [Независимая квитанция materialization](../../../Reports/StructTrain/TimeLearner/s10-cold-envelope-pair-source-root-verification/independent-verification.json) подтверждает transport/source scope, но сборка и33runtime checks ещё не выполнялись. Прежние E11/BB1 и runtime не менялись. Перед свежей сборкой проверяется исправление worker: явное применение ASan/LLM profile вместо зависимости от предварительно заполненного CMake cache; metadata19 принят:19/19 на sourcea208, evidence7b1fc; Root metadata receiptc862 подтверждает source/fixture/runtime/closure/lease. Это configure-only gate, не сборка будущего SDK. Наличие одинаковых20controls не даёт права ожидать fullR20 PASS на negative-control реализации.
+
+[Corrected33 завершился ошибкой компиляции](ColdEnvelopeLifetime33Launch-20261109.ru.md) на свежей Root2504/Pulse4b SDK:0/33tests/0leaf. В portable references TU отсутствовал direct include владельца двух evidence declarations. Kernel closed и exact lease released; отрицательная публикация e79 и independent proof44850 приняты с0tests/130missing artifact rules. Source-only Pulse637 добавляет только `ProbeEvidenceJson.h`; исправленная сборка пока не выполнялась. A4 не заменяется, runtime2/Train5/science не принимаются.
+
+[Reader53 принят в ограниченной области](CandidateWindowReader53Acceptance-20261109.ru.md):53/53 на source7352, включая прежние actual archive1 и CLI consistency. Это не admission известного P1 runtime2 join и не scientific PASS. Следующая source1292 попытка73 завершилась72PASS/1FAIL в ошибочном ожидании C-cursor fixture; её original readback сохранён, test-only correction264/263 подготовлен отдельно, полной приёмки73 ещё нет.
+
+Renderer3 и изоляция plotting caches приняты:13/13metadata и14/14renderer checks, evidence671bac получен и независимо проверен Root. Отдельный renderae862 закрыт и опубликован:4somas/163views остаются в M40 cache, в Git один выбранный PNG. [Читаемый Classic burst overview](ClassicLTReadableOverview-20261109.ru.md) просмотрен Root: LT-потенциал явноненулевой, прежнююflatpanel этого изображения объясняет включённый в масштаб threshold100. Новыйrenderer подписывает порог отдельно; модель/первичные данные/packetvalidFalse не менялись. Это не новая научная классификация и не full163visualQA. Код и compact evidence объединены в maintained feature branch обычными merges. [Диагностика LT decision path](LTDecisionPathNextGate-20261109.ru.md) остаётся условным инструментом для другого реального несоответствия, а не обязательным повтором уже объяснённого flatoverview.
+
+## Предыдущие снимки и принятые адресные проверки
+
+Ниже сохранены сообщения своих исходных snapshots. Их «ещё не запущен» и «работает» относятся к дате и pins соответствующего абзаца; для baseline A3/A4 и future source pair использовать последний подтверждённый срез выше.
+
+Дополнение08.11: prepared source для проверки нового control-lifetime собран в двух private descendants с одинаковыми worker/fixtures: corrected E11/Pulseb287 и unfixed BB1/Pulse800. Старые15s fixtures заменены merge-коммитом проверенной линии17db; два diagnostic-only IDs раскрыты отдельно. Ни targeted20, ни общий candidate-window regression пока не запускались. [Source review, ограничения и точные commits](CandidateWindowTypedCoreSourceReview-20261108.ru.md). [Конкретный Classic-график прослежен до исходного архива](ClassicFlatLTMetadataTrace-20261108.ru.md): отдельной LTMembrane нет, причина flat LT panel остаётся неизвестной. Это metadata/source evidence, не новые научные результаты.
+
+Оба source descendants доставлены в отдельные M40 SDK-копии: по восемь HEAD/gitlinks,4020 Git-verified файлов и29 same-SDK imports. Corrected inventory492 = planned490 + diagnostic2; unfixed inventory476, из него только четыре selected witness controls. [Corrected подготовка](ManualControlFreshSourcePreparation-20261108.ru.md), [unfixed подготовка и source A/B](ManualControlUnfixedFreshSourcePreparation-20261109.ru.md). Различаются только четыре production control-файла и один тестовый TU; CMake/native/model execution отсутствуют. Работающий baseline248 не изменён.
 
 08.11: механическое выделение общего контроллера принято на M40:97/97
 (74 bounded +23 Final/Clock). Ошибочная постановка A1 сохранена в Git отдельно.
@@ -19,10 +41,12 @@ Service/codecs/CLI остаются незавершённой интеграц�
 callback (`slept=false`,elapsed0): нужный сценарий пересечения deadline после
 callback не подтверждён, требуется диагностика более раннего завершения.
 Все14 групп закрыты; [полный отрицательный артефакт независимо проверен](CompositeCancellationM40A1IndependentVerification.json).
-Запущены две отдельные диагностические проверки без sleep, с исходным
-инженерным group budget300s и записью реального времени каждой фазы. Rootf8f /
-Pulse88; живой PID/invocation/start ticks подтверждены ядром ОС. Физика
-и допуски не меняются; полный248 не повторяется до выяснения причины.
+Две отдельные диагностические проверки без sleep прошли на Rootf8f/Pulse88:
+обычные группы занимали до21,108s, поэтому15s было недостаточно.
+Четыре исправленных теста с group budget60s/реальной задержкой61s тоже прошли;
+ожидаются BudgetExhausted и отсутствие сертификата после callback.
+[Приёмка и точные границы](CompositeDeadlineFixtureAcceptance-20261108.ru.md).
+Физика и допуски не менялись. Полный248 ещё не повторён и не принят.
 В скопированной inventory-декларации
 обнаружен старый root SHA; raw-файл сохраняется, actual source closure
 проверена отдельно. Это требует явной errata и независимого Git-derived
@@ -41,6 +65,25 @@ Python wire67 и collector39 прошли совместную проверку1
 [Независимая квитанция106](WireCollectorCombined106M40A1Verification.json),
 [контракт коллектора](CollectorProvenanceContract.ru.md).
 Эти проверки не подтверждают native-архивы, Train → Test или научную разделимость.
+Maintained native_preparation прошёл24/24 metadata tests на M40;
+[квитанция](NativePreparation24M40A1IndependentVerification.json).
+Затем расширение schema2/repo-module прошло30/30, включая прежние24;
+[квитанция30](NativePreparation30M40A2IndependentVerification.json).
+На снимке приёмки30 весь Scripts tree равен проверенному8bf (435 Python files).
+После него отдельно принят maintained adapter Python/AR:18/18 на M40,
+[квитанция18](OwnedPythonJobsMetadata18Verification.json).
+Первый bootstrap17 завершился до тестов из-за file-versus-directory reservation;
+[отрицательная квитанция](OwnedPythonJobsMetadata17NegativeVerification.json).
+CanonicalSpec wiring проверен, полный248 на M40 запущен один раз (A3), результат ещё не принят.
+Сам worker отдельно прошёл12/12 metadata tests, затем проверка полного значения CMake-профиля —13/13; [приёмка и следующий gate](NativeAcceptanceWorkerAcceptance-20261108.ru.md).
+Полный248, actual native archives и Train→Test этим не приняты.
+Root port условной диагностики конфигов принят143/143 на обоих Linux workers;
+[контракт и квитанции](DeclaredTimeScaleDiagnostic.ru.md). Два старых Bin entrypoints удалены в отдельной ветке; production history-check356 принят. Пользовательская рабочая копия Bin сохранена; окончательные merge в develop ещё впереди.
+На Elder удалены89, затем ещё13 подтверждённых дубликатов статических библиотек;
+данные/модели/ELF/INI/логи сохранены, собственная группа закрыта.
+[Операция и ограничения места](ElderDuplicateStaticArchiveRetirement-20261108.ru.md).
+После второй операции свободно около1,93GB, запас над следующим preflight мал;
+готовность Elder к новой полной сборке пока не подтверждена.
 [Временной отчёт с входами поверх потенциала](DeclaredWindowBasinTemporalReport.ru.md)
 готов для14 технических групп; он не заменяет научную матрицу классификации.
 
@@ -289,7 +332,7 @@ runtime/effective-factor matrix этим не закрывается.
 |6. Общий контроллер|Общий native service, configured controller и topology adapters существуют|Принять оставшийся общий срез, завершить legacy/V2 A/B, дублирующиеся hooks и multirate verification|
 |7. Алгоритмы|Measured bounded L/Ns/Rs search, N0 repeats, финальная проверка; C0 API принят, bounded C-search — кандидат|Полная bounds/quantization/nonmonotonicity/invalid-probe/physics/reset матрица, приёмка кандидата и stock measurement recovery|
 |8. Recognition/PostTune/calibration|Versioned solo/recognition states, transactions, measured threshold confirmation и frozen controls работают в проверенных случаях|Все PostTune/inhibition/reset modes, commit/rollback/interruption и независимая оценка|
-|9. Скрипты|Корневой пакет и CLI работают; migration354:352 retired+2 moved.109 historical Reports source snapshots удалены с проверенным Git retrieval, остальные Reports blobs сохранены|Остаются связанные инструменты Bin, включая активный анализ и старую матрицу;127 распознанных Bin script paths включают также общие project/build tools. Нужны semantic review/перенос действующих функций, удаление исторических entrypoints и проверка callers; complete=false|
+|9. Скрипты|Корневой пакет и CLI работают; migration356:352 retired+4 moved. Два действующих аудитора перенесены после143/143 на обоих workers, production356 retrieval принят;109 historical Reports source snapshots удалены, остальные Reports blobs сохранены|Остаются связанные инструменты Bin, включая активный анализ и старую матрицу; из127 script paths исходного снимка удалены ещё2. Общие project/build tools требуют отдельного scope review. Нужны перенос остальных действующих функций, удаление исторических entrypoints и проверка callers; complete=false|
 |10. Запуск/provenance/publish|Есть owned processes, leases/budgets, fail-closed publisher и реальные coordinator controls|Полная effective-factor attestation, scheduler/cancel/recovery/publication fault matrix; declarative ConditionSpec binding её не заменяет|
 |11. Научные проверки|Августовские saved-state replay и настоящий cold Train→Test воспроизвели4/8,5/8,6/8; есть N2 controls и временные отчёты|Разбор InvalidObservation нового V2 stock среза, legacy/V2 A/B, target в каждой позиции, order/ITI/reset и independent frozen matrix|
 |12. Документация|Поддерживаемые сводки согласуются с receipts; исходные отчёты сохранены|Сквозная актуализация root/PulseLib/Bin/config/ClDesc/defaults и завершение миграции ссылок|

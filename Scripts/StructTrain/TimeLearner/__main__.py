@@ -335,7 +335,30 @@ def main(argv: list[str] | None = None) -> int:
     reuse.add_argument("--reference-commit")
     reuse.add_argument("--reference-archive")
     reuse.add_argument("--output", type=Path, required=True)
+    scales = commands.add_parser("audit-time-scales", help="report conditional declared zero-G RC diagnostics")
+    scales.add_argument("--config-root", type=Path, required=True)
+    scales.add_argument("--discovery", choices=("matrix", "tracked-tree"), required=True)
+    scales.add_argument("--frequency-hz", type=float)
+    scales.add_argument("--output", type=Path)
     args = parser.parse_args(argv)
+    if args.command == "audit-time-scales":
+        from .declared_time_scales import audit_config_tree
+        from .native_evidence import EvidenceError
+        try:
+            result = audit_config_tree(args.config_root, discovery=args.discovery,
+                                       explicit_frequency_hz=args.frequency_hz)
+            text = json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
+            if args.output is None:
+                print(text, end="")
+            else:
+                with args.output.open("x", encoding="utf-8") as output:
+                    output.write(text)
+            return 0 if result["diagnostic_coverage"] == "complete" else 2
+        except (EvidenceError, OSError, ValueError, subprocess.CalledProcessError) as error:
+            print(json.dumps({"kind": "timelearner_declared_time_scale_error", "reason": str(error),
+                              "integrator_stability_verdict": None, "scientific_verdict": None},
+                             allow_nan=False), file=sys.stderr)
+            return 2
     if args.command == "pipeline":
         from .managed_pipeline import run_pipeline, audit_pipeline, reconcile_pipeline
         from .native_evidence import load, require, EvidenceError
@@ -513,7 +536,6 @@ def main(argv: list[str] | None = None) -> int:
                               "validity": "invalid", "reason": str(error), "evaluation_verdict": None}), file=sys.stderr)
             return 2
     elif args.command == "inventory":
-        import subprocess
         from .native_evidence import EvidenceError
         from .inventory import write_inventory
         try:

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 import re
+from types import MappingProxyType
 
 
 class ConfigDocumentError(ValueError):
@@ -58,6 +59,12 @@ class Node:
     content_end: int = -1
     children: list[Node] = field(default_factory=list)
     self_closing: bool = False
+    _attributes: dict[str, str] = field(default_factory=dict, repr=False)
+
+    @property
+    def attributes(self):
+        """Read-only decoded attributes; names may identify registered images."""
+        return MappingProxyType(self._attributes)
 
 
 @dataclass(frozen=True)
@@ -134,13 +141,14 @@ class ConfigDocument:
                 header = tag[:-1] if self_closing else tag
                 match = re.match(r"([^\s]+)(.*)\Z", header, re.S)
                 require(match is not None and valid_name(match[1]), "invalid_config_tag_name")
-                attributes, seen = match[2], set()
+                attributes, seen, values = match[2], set(), {}
                 while attributes.strip():
                     attr = re.match(r"\s+([^\s=]+)\s*=\s*(['\"])(.*?)\2", attributes, re.S)
                     require(attr is not None and valid_name(attr[1]) and attr[1] not in seen, "invalid_or_duplicate_config_attribute")
-                    decode_text(attr[3].encode("utf-8"))
+                    values[attr[1]] = decode_text(attr[3].encode("utf-8"))
                     seen.add(attr[1]);attributes = attributes[attr.end():]
-                node = Node(match[1], end + 1, end + 1 if self_closing else -1, self_closing=self_closing)
+                node = Node(match[1], end + 1, end + 1 if self_closing else -1,
+                            self_closing=self_closing, _attributes=values)
                 (stack[-1].children if stack else roots).append(node)
                 nodes += 1
                 require(nodes <= 1000000 and len(stack) < 256, "config_structure_limit")

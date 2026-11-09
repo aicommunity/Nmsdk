@@ -36,12 +36,15 @@ def inspect_attempt(output):
 
 
 def execute(manifest, arguments, working_directory, output, maximum_wall_seconds,
-            cancel_file=None, *, memory_bytes, tasks, cooperative_capture=False, managed_reservation=None):
+            cancel_file=None, *, memory_bytes, tasks, cooperative_capture=False, managed_reservation=None,
+            on_started=None, monitor=None):
     require(type(arguments) is list and all(type(a) is str and '\0' not in a for a in arguments),
             'invalid_process_arguments')
     require(type(cooperative_capture) is bool and all(a.split('=', 1)[0] != '--timelearner-capture-directory'
             for a in arguments), 'capture_directory_is_supervisor_owned')
     validate_limits(memory_bytes, tasks, maximum_wall_seconds, wall_reason='invalid_contained_wall_budget')
+    require((on_started is None or callable(on_started)) and (monitor is None or callable(monitor)),
+            'contained_callback_not_callable')
     executable = verify_runtime(manifest)
     cwd = Path(working_directory).resolve(strict=True)
     require(cwd.is_dir(), 'invalid_process_working_directory')
@@ -75,9 +78,13 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
                'executable': str(executable), 'executable_sha256': manifest['executable']['sha256'],
                'runtime_fingerprint': manifest['runtime_fingerprint'], 'unit': binding['unit'],
                'invocation_id': binding['invocation_id'], 'control_group': binding['control_group']})
+        if on_started is not None:
+            on_started(binding)
         capture_attempted = False
         while True:
             last = contained_process.inspect(output/'contained')
+            if monitor is not None:
+                monitor(last)
             if last['all_processes_closed']:
                 state, returncode = last['state'], _returncode(last['state'])
                 if state.get('Result') == 'timeout':

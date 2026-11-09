@@ -18,7 +18,7 @@ class PositiveLobeNativeReportTest(unittest.TestCase):
         index=min(range(len(data['times'])),key=lambda i:abs(data['times'][i]-peak['time']))
         left,right=data['times'][index-10],data['times'][index+10]
         before=json.dumps(data,sort_keys=True)
-        with tempfile.TemporaryDirectory(dir=os.environ['TIMELEARNER_REPORT_TEST_DIR']) as folder:
+        with tempfile.TemporaryDirectory(dir=os.environ.get('TIMELEARNER_REPORT_TEST_DIR')) as folder:
             result=render_figure(data,'positive-lobe' if focused else 'full-range',left,right,Path(folder),local=True,positive_lobe=focused)
             from PIL import Image
             with Image.open(Path(folder)/result['files'][0]) as image:

@@ -73,3 +73,11 @@ IDs, JUnit, loaded files и source closure. При достаточном док
 
 После её закрытия helper внедряется и проверяется отдельно; работающие
 source/cache/runtime не обновляются ради исправления метаданных.
+
+Подэтап принят на M40:24/24 metadata tests, source5ebb/evidence4ff9,
+[квитанция](NativePreparation24M40A1IndependentVerification.json).
+Утверждения API ограничены подготовкой данных и указанными проверками;
+интеграция actual canonicalSpec в maintained worker и полный248 ещё открыты.
+Desired source snapshot может сначала размещаться отдельным preparation-only
+шагом в свободном owned workspace. Проверка данных должна завершиться до
+сборки/проб; сам helper ничего не обновляет и не выполняет.
