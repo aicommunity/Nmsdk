@@ -393,17 +393,32 @@ class Worker:
         self.write(name+"-result.json", result)
         self.gates += 1
         inventory = result.get("inventory")
-        actual, failed, incomplete = observed_junit(self.out/name/"native.xml")
+        # A killed/timed-out gtest often never writes its final XML. Preserve
+        # the typed process outcome; missing or corrupt XML is not a new
+        # FileNotFoundError hiding the original failure, nor a passing case.
+        actual, failed, incomplete = [], [], []
+        observation_error = None
+        try:
+            actual, failed, incomplete = observed_junit(self.out/name/"native.xml")
+        except (OSError, ET.ParseError, ValueError, KeyError) as error:
+            observation_error = {"type":type(error).__name__, "reason":str(error)}
         self.observed += actual
         self.failed += failed
         self.passed += [case for case in actual if case not in failed]
         self.write(name+"-actual-tests.json", {"observed_ids":actual, "failed_ids":failed,
-            "not_completed_ids":incomplete, "source":"native.xml"})
+            "not_completed_ids":incomplete, "source":"native.xml",
+            "observation_error":observation_error,
+            "unobserved_expected_ids":[case for case in ids if case not in actual],
+            "gate_execution":result.get("execution"), "gate_validity":result.get("validity"),
+            "gate_reason":result.get("reason"), "scientific_verdict":None})
+        _require(result["validity"] == "valid" and result["assertion_status"] == "passed" and inventory and
+                 inventory["observed"] == len(ids) and not inventory["failed_test_ids"],
+                 "native_gate_rejected:"+name+":"+str(result.get("execution"))+":"+
+                 str(result.get("validity"))+":"+str(result.get("reason")))
+        _require(observation_error is None, "native_JUnit_unreadable:"+name)
         request = json.loads((self.out/name/"process/contained/request.json").read_bytes())
         _require(request["environment"]["TIMELEARNER_COMPOSITE_OUTPUT"] == str(self.out/name/"native-composite"),
                  "native_output_route_changed")
-        _require(result["validity"] == "valid" and result["assertion_status"] == "passed" and inventory and
-                 inventory["observed"] == len(ids) and not inventory["failed_test_ids"], "native_assertions_failed:"+name)
         _require(set(actual) == set(ids) and not incomplete and not failed, "actual_JUnit_selection_mismatch")
         self.write("progress.json", {"passed_cases":len(self.passed), "closed_leaf_gates":self.gates,
             "current_gate":name, "expected_cases":len(self.expected)})
