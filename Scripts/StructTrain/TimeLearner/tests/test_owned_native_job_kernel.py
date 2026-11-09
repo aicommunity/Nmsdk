@@ -25,7 +25,21 @@ class OwnedNativeKernelTest(unittest.TestCase):
         bound=os.environ.get('TIMELEARNER_OWNED_NATIVE_TEST_OUTPUT')
         if not bound:
             self.fail('missing consumed TIMELEARNER_OWNED_NATIVE_TEST_OUTPUT fixture')
-        parent=Path(bound).resolve(strict=True)
+        fixture=subject._canonical(Path(bound))
+        declared=json.loads((fixture/'kernel-output.json').read_bytes())
+        self.assertEqual(set(declared),{'kind','schema_version','job_id','path'})
+        self.assertEqual(declared['kind'],'timelearner_owned_native_kernel_output')
+        self.assertIs(type(declared['schema_version']),int);self.assertEqual(declared['schema_version'],1)
+        self.assertIs(type(declared['job_id']),str)
+        self.assertTrue(declared['job_id'] and all(c.isalnum() or c in '-_' for c in declared['job_id']))
+        parent=subject._canonical(Path(declared['path']),exists=False)
+        temporary=subject._canonical(Path(os.environ['TMPDIR']))
+        # Read-only fixture data may name only this real owned job's WRITE tree.
+        self.assertEqual(parent,temporary.parent/'kernel-cases')
+        self.assertEqual(parent.parent.name,'worker')
+        self.assertEqual(parent.parent.parent.name,declared['job_id'])
+        self.assertTrue(any(parent==base/'readbacks'/declared['job_id']/'worker/kernel-cases' for base in subject._BASES))
+        parent.mkdir(exist_ok=True)
         self.root=parent/self._testMethodName;self.root.mkdir(exist_ok=False)
         self.controller=self.root/'controller';self.controller.mkdir()
         self.output=self.root/'native-output'
