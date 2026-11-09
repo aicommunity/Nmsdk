@@ -525,7 +525,7 @@
     {
       "job_id": "s07-cold-envelope-manual-corrected-m40-a1",
       "host": "M40",
-      "state": "build_failed_zero_tests_negative_evidence_pending",
+      "state": "build_failed_zero_tests_negative_evidence_verified",
       "root": "2504bb86062867b4028106a120e724b8b86bcb84",
       "pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
       "expected_cpp_cases": 33,
@@ -553,7 +553,9 @@
         "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPortableReferences.cpp:30:12: error: ‘DecodeNativeTrainingCapacitanceWitness’ was not declared in this scope; did you mean ‘TrainingCapacitanceWitness’?",
         "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPortableReferences.cpp:60:14: error: ‘EncodeVerificationProtocol’ was not declared in this scope; did you mean ‘VerificationProtocol’?"
       ],
-      "source_only_compile_fix": "637b7fb6b66df242f9b7383ce179aa543ca45aed"
+      "source_only_compile_fix": "637b7fb6b66df242f9b7383ce179aa543ca45aed",
+      "negative_evidence_commit": "e79b071271b7a6ef37d04d0d1b3035073ab3e318",
+      "negative_evidence_independent_receipt_sha256": "44850c70e40e00321a3a444cfb9d24f2d47d0b054838266da6f90f148d8c8dd1"
     }
   ],
   "prepared_feature": {

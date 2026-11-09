@@ -47,6 +47,8 @@ runtime2 export, unmocked positive whole-archive2 auditor/CLI и rehashed tamper
 Не реконструировать недостающий план из index или
 старого archive1. Это выявлено чтением исходников, runtime ещё не проверен.
 
+[Scoped reader53 принят](CandidateWindowReader53Acceptance-20261109.ru.md), но следующий73 gate завершился72PASS/1FAIL в fixture boundary; полный runtime2/export admission отсутствует. [Corrected33](ColdEnvelopeLifetime33Launch-20261109.ru.md) остановился при компиляции до0/33 tests из-за missing owning include; отрицательный результат опубликован, direct include исправлен только в source. Исправленная свежая пара готовится отдельно.
+
 До следующего целевого cold Train необходимо последовательно принять:
 
 1. Lifecycle/cancellation и service-интеграцию; получить реальные native-архивы
