@@ -1,5 +1,10 @@
 # Сверка актуальных статусов параметров, 06.11.2026
 
+Дополнение09.11: [bounded control/peak reconciliation](ControlPeakPropertyReconciliation-20261109.ru.md)
+по Pulsef7/Rdkd6 уточняет семь свойств каждого learner и их владельцев.
+Все исходные runtime evidence statuses ниже сохранены. Это source review,
+не новый прогон; rising finding остаётся source-only/open.
+
 При повторной проверке найден устаревший раздел
 [ParameterSearchContracts](ParameterSearchContracts.ru.md): он всё ещё считал
 открытым дефект конечности timing setters и отсутствие measured length proposal.
