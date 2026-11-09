@@ -525,7 +525,7 @@
     {
       "job_id": "s07-cold-envelope-manual-corrected-m40-a1",
       "host": "M40",
-      "state": "running_build_no_tests_confirmed",
+      "state": "build_failed_zero_tests_negative_evidence_pending",
       "root": "2504bb86062867b4028106a120e724b8b86bcb84",
       "pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
       "expected_cpp_cases": 33,
@@ -541,11 +541,19 @@
       "binding_sha256": "71b20df09304b831c3c557a03d561d056ca8236734dac5d519f4cea3ebc42562",
       "kernel_request_sha256": "e4778547ad75f6b70249f2f227a707062925cf7656fdde6b40299a8193efb072",
       "reservation_token": "85327992-8d03-4d58-bb4d-a210f297c0d0",
-      "observed_unix": 1794211289.4821808,
-      "completed_cases": null,
+      "observed_unix": 1794211952.3390152,
+      "completed_cases": 0,
       "runtime_accepted": false,
       "scientific_verdict": null,
-      "launch_report": "ColdEnvelopeLifetime33Launch-20261109.ru.md"
+      "launch_report": "ColdEnvelopeLifetime33Launch-20261109.ru.md",
+      "executed_leaf_gates": 0,
+      "kernel_all_processes_closed": true,
+      "reservation_state": "released",
+      "compiler_errors": [
+        "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPortableReferences.cpp:30:12: error: ‘DecodeNativeTrainingCapacitanceWitness’ was not declared in this scope; did you mean ‘TrainingCapacitanceWitness’?",
+        "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPortableReferences.cpp:60:14: error: ‘EncodeVerificationProtocol’ was not declared in this scope; did you mean ‘VerificationProtocol’?"
+      ],
+      "source_only_compile_fix": "637b7fb6b66df242f9b7383ce179aa543ca45aed"
     }
   ],
   "prepared_feature": {
