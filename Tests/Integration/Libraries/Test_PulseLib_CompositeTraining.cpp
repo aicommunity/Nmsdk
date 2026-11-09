@@ -3267,3 +3267,233 @@ TEST(NativeCandidateWindowPortableMath,RehashedForeignReferenceProofCannotJoinAc
     EXPECT_EQ(document["primary_blobs"],s.archive.document["primary_blobs"]);
     EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(document),s.tolerances,s.revision,s.epoch),std::invalid_argument);
 }
+
+namespace {
+constexpr const char* CandidateWindowPackageImplementation="native-candidate-window-package6-fixture-v1";
+enum class WindowPackageSource { Complete,AsymmetricC0,GrownStopped,RawPartial,ReferencePrefix,DefaultSync,StopAfterFinal };
+template<class Owner> void ConfigureWindowPackageCold(NativeCompositeFixture<Owner>& f,WindowPackageSource kind) {
+    auto c=ActualCold7Declaration(f);const bool c0=kind==WindowPackageSource::AsymmetricC0;
+    c.search.tolerances.sync=kind==WindowPackageSource::GrownStopped || kind==WindowPackageSource::DefaultSync?.02:.2;
+    if(kind==WindowPackageSource::GrownStopped){c.search.maximumCandidatesPerInput=2;c.search.bounds[0].maximumLength=3;}
+    if(c0) {
+        // Uniform values belong to storage images, not live child overlays.
+        // Different excitation/inhibition capacities exercise actual asymmetric
+        // child physics and immutable per-role C0 without changing input banks.
+        StorageProfileSpec profile;const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
+        profile.name=std::string(test->test_suite_name())+"_"+test->name()+"_Package6Asymmetric";
+        profile.neuronBaseClass="NSPNeuronGen";profile.frequencyHz=2000;profile.initialThreshold=1.;
+        profile.body.inhChannel.capacity=2e-9;profile.body.inhChannel.resistance=9e7;profile.body.inhChannel.restingResistance=9e7;
+        c.model.neuronClass=RegisterStorageProfile(f.storage,f.environment,profile).neuronClass;
+        c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;
+    }
+    f.attempt.reset();f.owner->Default();f.owner->SetGlobalTimeStep(2000);f.owner->EnablePostTrainTuning=false;
+    f.owner->AutoCalibrateFixedLTZThreshold=false;f.owner->IsNeedToTrain=false;f.owner->CalculateMode=1;
+    f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
+    f.owner->ControllerVersion=2;Require(f.owner->ControllerVersion.GetData()==2,"window_package_controller_readback");
+    f.owner->Build();f.model->Init();f.model->Reset();f.modelSpec=c.model;
+    Require(f.owner->IsReady() && f.owner->IsInit() && f.owner->ConfiguredModelInitialized.GetData(),"window_package_cold_not_constructed");
+}
+template<class Owner> void SaveWindowPackage(NativeCompositeFixture<Owner>& f,const std::string& stage,const QJsonObject& package) {
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"package6-branch/":"package6-classic/")+stage;
+    const auto archive=EncodeNativeCandidateWindowServiceArchive(f.owner->NativeTrainingController());
+    Require(archive.document==package["measurement_archive"].toObject(),"window_package_primary_not_exact_export");SaveCompositeArchive(archive,name.c_str());
+    const auto source=archive.document["source_binding"].toObject();
+    SavePortableObject(name.c_str(),package["kind"]==QJsonValue("timelearner_stopped_state")?"train_stopped_state.json":"train_learned_state.json",package);
+    SavePortableObject(name.c_str(),"initial-configuration.json",package["configuration"].toObject());
+    SavePortableObject(name.c_str(),"runtime-plan.json",package["runtime_plan"].toObject());
+    SavePortableObject(name.c_str(),"source-model.json",source["initial_native_snapshot"].toObject());
+    SavePortableObject(name.c_str(),"after-model.json",package["neuron"].toObject()["graph"].toObject());
+    SavePortableObject(name.c_str(),"actual-dataset.json",package["dataset"].toObject());
+    SavePortableObject(name.c_str(),"package-scope.json",{{"kind","native_package6_roundtrip_scope"},{"schema_version",1},
+        {"native_package6_exported",true},{"runtime_plan2_exported",true},{"state_summary7_exported",false},
+        {"Console_execution4_exported",false},{"Python_package6_audited",false},{"scientific_acceptance",false}});
+}
+template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource kind=WindowPackageSource::Complete) {
+    static std::map<WindowPackageSource,QJsonObject> packages;const auto found=packages.find(kind);if(found!=packages.end())return found->second;
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigureWindowPackageCold(f,kind);
+    bool stopped=false;std::size_t samples=0;ConfiguredNativeEvidenceSinks sinks;
+    if(kind==WindowPackageSource::RawPartial)sinks.onSample=[&](const auto&){++samples;};
+    if(kind==WindowPackageSource::ReferencePrefix || kind==WindowPackageSource::StopAfterFinal)sinks.onComposite=[&](const auto& r){
+        const bool prefix=kind==WindowPackageSource::ReferencePrefix && r.purpose==CompositeMeasurementPurpose::Reference && r.logical.inputIndex==0;
+        const bool final=kind==WindowPackageSource::StopAfterFinal && r.purpose==CompositeMeasurementPurpose::Final && r.consumed &&
+            r.logical.inputIndex==(NativeCompositeFixture<Owner>::branch?0u:1u);
+        if(!stopped && (prefix || final)){stopped=true;f.owner->IsNeedToTrain=false;}};
+    f.owner->SetConfiguredNativeEvidenceSinks(sinks);f.owner->IsNeedToTrain=true;
+    ServiceTicks(f,[&](){if(!stopped && ((kind==WindowPackageSource::RawPartial && samples>0) ||
+        (kind==WindowPackageSource::GrownStopped && f.owner->NativeTrainingController().ModelEpoch()>0 && f.owner->ReadNativeParameters()[0].length==3)))
+        {stopped=true;f.owner->IsNeedToTrain=false;}});
+    f.owner->SetConfiguredNativeEvidenceSinks({});const auto& service=f.owner->NativeTrainingController();
+    const bool completed=kind==WindowPackageSource::Complete || kind==WindowPackageSource::AsymmetricC0;
+    Require(service.State()==NativeTrainingState::Finished,"window_package_not_closed");
+    if(completed)Require(service.Certificate() && service.Outcome()==TrainingStatus::Exact,"window_package_source_not_completed");
+    else {Require(!service.Certificate(),"window_package_stopped_source_has_certificate");
+        if(kind!=WindowPackageSource::DefaultSync)Require(stopped,"window_package_stop_control_not_reached");}
+    const auto package=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    Require(package["schema_version"]==QJsonValue(6),"window_package_public_dispatch_not_schema6");
+    SaveWindowPackage(f,"source-"+std::to_string(int(kind)),package);return packages.emplace(kind,package).first->second;
+}
+template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool warm=false) {
+    const auto source=ActualWindowPackage<Owner>(asymmetric?WindowPackageSource::AsymmetricC0:WindowPackageSource::Complete);
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.attempt.reset();f.owner->IsNeedToTrain=false;
+    const auto imported=f.owner->ImportNativeLearnedState(source,CandidateWindowPackageImplementation);ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(service.References());ASSERT_TRUE(service.Certificate());
+    EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
+    EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(service.Search());
+    EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());EXPECT_EQ(f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation),source);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(service.Plan()),source["runtime_plan"].toObject());
+    EXPECT_THROW(EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()),std::invalid_argument); // summary7 remains a separate stage.
+    if(asymmetric) {
+        const auto exc=f.owner->template GetComponentL<NPulseChannel>("Neuron.Soma1.ExcChannel",true);
+        const auto inh=f.owner->template GetComponentL<NPulseChannel>("Neuron.Soma1.InhChannel",true);ASSERT_TRUE(exc);ASSERT_TRUE(inh);
+        EXPECT_DOUBLE_EQ(exc->Capacity.GetData(),1e-9);EXPECT_DOUBLE_EQ(inh->Capacity.GetData(),2e-9);EXPECT_DOUBLE_EQ(inh->Resistance.GetData(),9e7);
+        ASSERT_FALSE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+        EXPECT_EQ(f.owner->OwnedNativeCapacitanceState()["baseline"],source["capacitance_state"].toObject()["baseline"]);
+    } else EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    if(!warm)return;
+    const auto originalRefs=service.References()->Inputs();const auto ids=service.CompositeReferenceGroupIds();const auto family=service.CompositeOwnerFamilyBinding();
+    const auto original=service.CompositeInitialConfiguration(),binding=service.CompositeSourceBinding();const auto oldCount=service.CompositeMeasurements().size();
+    const auto oldAttempt=service.SessionAttempt();auto plan=service.Plan();plan.search.runId="package6-imported-warm";
+    plan.search.tolerances.sync=.25;plan.maximumWallSeconds+=60.;plan.composite->maximumTotalPrimaryBytes*=2;
+    f.owner->Reset();f.owner->BeginNativeTraining(plan);ServiceTicks(f);ASSERT_TRUE(service.Certificate())<<service.Reason();
+    EXPECT_EQ(service.References()->Inputs(),originalRefs);EXPECT_EQ(service.CompositeReferenceGroupIds(),ids);
+    EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);EXPECT_EQ(service.CompositeSourceBinding(),binding);EXPECT_EQ(service.CompositeInitialConfiguration(),original);
+    EXPECT_EQ(service.SessionAttempt(),oldAttempt+1);EXPECT_GT(service.CompositeMeasurements().size(),oldCount);
+    EXPECT_EQ(service.Plan().search.tolerances.sync,.25);EXPECT_NE(service.Plan().maximumWallSeconds,source["runtime_plan"].toObject()["maximum_wall_seconds"].toDouble());
+    const auto result=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    EXPECT_EQ(result["configuration"],source["configuration"]);EXPECT_NE(result["runtime_plan"],source["runtime_plan"]);
+    auto prepared=PrepareNativeLearnedState(result,f.storage,f.environment,CandidateWindowPackageImplementation);
+    EXPECT_EQ(prepared->service.References()->Inputs(),originalRefs);EXPECT_EQ(prepared->service.Plan().search.tolerances.sync,.25);
+    SaveWindowPackage(f,asymmetric?"asymmetric-imported-warm":"imported-warm",result);
+}
+template<class Owner> void WindowPackageStopped(WindowPackageSource kind) {
+    const auto source=ActualWindowPackage<Owner>(kind);ASSERT_EQ(source["kind"],QJsonValue("timelearner_stopped_state"));ASSERT_TRUE(source["certificate"].isNull());
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.attempt.reset();f.owner->IsNeedToTrain=false;
+    const auto imported=f.owner->ImportNativeLearnedState(source,CandidateWindowPackageImplementation);ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    const auto& service=f.owner->NativeTrainingController();EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_FALSE(service.Certificate());EXPECT_FALSE(service.Search());
+    EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());EXPECT_EQ(f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation),source);
+    const auto proof=CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(source["measurement_archive"].toObject()),
+        service.Plan().search.tolerances,f.Revision(),service.ModelEpoch());
+    if(kind==WindowPackageSource::GrownStopped){EXPECT_EQ(f.owner->ReadNativeParameters()[0].length,3);ASSERT_TRUE(service.References());
+        EXPECT_NE(f.Revision(),service.References()->InitialModelRevision());EXPECT_EQ(service.References()->InitialModelRevision(),source["capture_revision"].toString().toStdString());}
+    if(kind==WindowPackageSource::RawPartial || kind==WindowPackageSource::ReferencePrefix){EXPECT_FALSE(service.References());EXPECT_FALSE(proof.WindowReferences());
+        ASSERT_FALSE(service.CompositeMeasurements().empty());for(const auto& r:service.CompositeMeasurements())EXPECT_FALSE(r.consumed);}
+    if(kind==WindowPackageSource::DefaultSync){ASSERT_TRUE(proof.Certificate());EXPECT_FALSE(proof.Certificate()->Exact());EXPECT_DOUBLE_EQ(service.Plan().search.tolerances.sync,.02);}
+    if(kind==WindowPackageSource::StopAfterFinal){ASSERT_TRUE(proof.Certificate());EXPECT_TRUE(proof.Certificate()->Exact());
+        EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_TRUE(source["certificate"].isNull());}
+}
+enum class WindowPackageTamper { Extra,TrainedParameters,InitialParameters,ModelRevision,Epoch,Certificate,Protocol4,Archive1,Runtime1,Cold6,C0Lost,StoppedCertificate };
+void RejectWindowPackageTamper(WindowPackageTamper kind) {
+    auto package=ActualWindowPackage<NNeuronTimeLearner>(kind==WindowPackageTamper::C0Lost?WindowPackageSource::AsymmetricC0:
+        kind==WindowPackageTamper::StoppedCertificate?WindowPackageSource::StopAfterFinal:WindowPackageSource::Complete);
+    if(kind==WindowPackageTamper::Extra)package["unreleased_unknown_field"]=true;
+    if(kind==WindowPackageTamper::TrainedParameters || kind==WindowPackageTamper::InitialParameters) {
+        auto configuration=package["configuration"].toObject();auto model=configuration["model"].toObject();
+        auto values=package["trained_inputs"].toArray();
+        if(kind==WindowPackageTamper::InitialParameters)values=model["inputs"].toArray();auto first=values[0].toObject();
+        first[kind==WindowPackageTamper::TrainedParameters?"length":"attachment"]=3;values[0]=first;
+        if(kind==WindowPackageTamper::TrainedParameters)package["trained_inputs"]=values;
+        else {model["inputs"]=values;configuration["model"]=model;package["configuration"]=configuration;}
+    }
+    if(kind==WindowPackageTamper::ModelRevision)package["model_revision"]="fake-initial-template";
+    if(kind==WindowPackageTamper::Epoch)package["model_epoch"]=package["model_epoch"].toDouble()+1.;
+    if(kind==WindowPackageTamper::Protocol4 || kind==WindowPackageTamper::Archive1 || kind==WindowPackageTamper::Runtime1 || kind==WindowPackageTamper::Cold6) {
+        const auto key=kind==WindowPackageTamper::Protocol4?"protocol":kind==WindowPackageTamper::Archive1?"measurement_archive":kind==WindowPackageTamper::Runtime1?"runtime_plan":"configuration";
+        auto item=package[key].toObject();item["schema_version"]=kind==WindowPackageTamper::Protocol4?4:kind==WindowPackageTamper::Cold6?6:1;package[key]=item;
+    }
+    if(kind==WindowPackageTamper::C0Lost)package["capacitance_state"]=QJsonValue(QJsonValue::Null);
+    if(kind==WindowPackageTamper::Certificate){auto cert=package["certificate"].toObject();auto ids=cert["final_window_recipe_ids"].toArray();ids[0]="foreign-recipe";
+        cert["final_window_recipe_ids"]=ids;cert.remove("semantic_certificate_id");cert["semantic_certificate_id"]=NmsdkTools::CanonicalModelDataSha256(cert);package["certificate"]=cert;}
+    if(kind==WindowPackageTamper::StoppedCertificate){const auto runtime=DecodeCandidateWindowRuntimePlan(package["runtime_plan"].toObject(),DecodeVerificationProtocol(package["protocol"].toObject()));
+        const auto proof=CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(package["measurement_archive"].toObject()),runtime.search.tolerances,
+            package["model_revision"].toString().toStdString(),std::size_t(package["model_epoch"].toDouble()));Require(bool(proof.Certificate()),"stopped_math_certificate_source");package["certificate"]=EncodeTrainingCertificate(*proof.Certificate());}
+    RebindPortable(package);NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+    EXPECT_THROW(PrepareNativeLearnedState(package,f.storage,f.environment,CandidateWindowPackageImplementation),std::invalid_argument);
+}
+}
+TEST(NativeCandidateWindowPackage,ClassicActualPhysicalRoundtrip){WindowPackageRoundtrip<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowPackage,BranchActualPhysicalRoundtrip){WindowPackageRoundtrip<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowPackage,AsymmetricChildPhysicsAndC0Roundtrip){WindowPackageRoundtrip<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCandidateWindowPackage,ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime){WindowPackageRoundtrip<NNeuronTimeLearner>(false,true);}
+TEST(NativeCandidateWindowPackage,BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime){WindowPackageRoundtrip<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeCandidateWindowPackage,ClassicStoppedActualGrowthIsNotInitialTemplate){WindowPackageStopped<NNeuronTimeLearner>(WindowPackageSource::GrownStopped);}
+TEST(NativeCandidateWindowPackage,BranchStoppedActualGrowthIsNotInitialTemplate){WindowPackageStopped<NNeuronTimeLearnerBranch>(WindowPackageSource::GrownStopped);}
+TEST(NativeCandidateWindowPackage,ClassicRawPartialKeepsNativeDataWithoutTargets){WindowPackageStopped<NNeuronTimeLearner>(WindowPackageSource::RawPartial);}
+TEST(NativeCandidateWindowPackage,BranchRawPartialKeepsNativeDataWithoutTargets){WindowPackageStopped<NNeuronTimeLearnerBranch>(WindowPackageSource::RawPartial);}
+TEST(NativeCandidateWindowPackage,ReferencePrefixCannotBecomeCompleteTargets){WindowPackageStopped<NNeuronTimeLearner>(WindowPackageSource::ReferencePrefix);}
+TEST(NativeCandidateWindowPackage,DefaultSyncStoppedPackageKeepsNullCertificate){WindowPackageStopped<NNeuronTimeLearner>(WindowPackageSource::DefaultSync);}
+TEST(NativeCandidateWindowPackage,StopAfterCompleteExactFinalRemainsDiagnostic){WindowPackageStopped<NNeuronTimeLearner>(WindowPackageSource::StopAfterFinal);}
+TEST(NativeCandidateWindowPackage,UnknownFieldRejected){RejectWindowPackageTamper(WindowPackageTamper::Extra);}
+TEST(NativeCandidateWindowPackage,ChangedCurrentParametersRejected){RejectWindowPackageTamper(WindowPackageTamper::TrainedParameters);}
+TEST(NativeCandidateWindowPackage,FakeInitialTemplateRejected){RejectWindowPackageTamper(WindowPackageTamper::InitialParameters);}
+TEST(NativeCandidateWindowPackage,ChangedCurrentModelRejected){RejectWindowPackageTamper(WindowPackageTamper::ModelRevision);}
+TEST(NativeCandidateWindowPackage,ChangedCurrentEpochRejected){RejectWindowPackageTamper(WindowPackageTamper::Epoch);}
+TEST(NativeCandidateWindowPackage,RehashedForeignCertificateRecipeRejected){RejectWindowPackageTamper(WindowPackageTamper::Certificate);}
+TEST(NativeCandidateWindowPackage,Protocol4CannotMasqueradeInPackage6){RejectWindowPackageTamper(WindowPackageTamper::Protocol4);}
+TEST(NativeCandidateWindowPackage,Archive1CannotMasqueradeInPackage6){RejectWindowPackageTamper(WindowPackageTamper::Archive1);}
+TEST(NativeCandidateWindowPackage,Runtime1CannotMasqueradeInPackage6){RejectWindowPackageTamper(WindowPackageTamper::Runtime1);}
+TEST(NativeCandidateWindowPackage,Cold6CannotMasqueradeInPackage6){RejectWindowPackageTamper(WindowPackageTamper::Cold6);}
+TEST(NativeCandidateWindowPackage,OwnedC0CannotBeDropped){RejectWindowPackageTamper(WindowPackageTamper::C0Lost);}
+TEST(NativeCandidateWindowPackage,StoppedPackageCannotCarryExactMathematicalCertificate){RejectWindowPackageTamper(WindowPackageTamper::StoppedCertificate);}
+TEST(NativeCandidateWindowPackage,ActualForeignDatasetCannotReplaceRestoredFullSource) {
+    auto package=ActualWindowPackage<NNeuronTimeLearner>();NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+    const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
+    auto pattern=dataset->MatrixData.GetData();pattern(0,0)+=.001;dataset->MatrixData=pattern;
+    package["dataset"]=NmsdkTools::ExportDatasetSnapshot(dataset.Get());RebindPortable(package);
+    EXPECT_THROW(PrepareNativeLearnedState(package,f.storage,f.environment,CandidateWindowPackageImplementation),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPackage,ActualInitialSnapshotCannotReplaceGrownCurrentGraph) {
+    auto package=ActualWindowPackage<NNeuronTimeLearner>(WindowPackageSource::GrownStopped);const auto source=package["measurement_archive"].toObject()["source_binding"].toObject();
+    ASSERT_NE(package["model_revision"],source["initial_model"].toObject()["sha256"]);auto physical=package["neuron"].toObject();
+    physical["graph"]=source["initial_native_snapshot"];physical.remove("sha256");physical["sha256"]=NmsdkTools::CanonicalModelDataSha256(physical);
+    package["neuron"]=physical;RebindPortable(package);NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+    EXPECT_THROW(PrepareNativeLearnedState(package,f.storage,f.environment,CandidateWindowPackageImplementation),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPackage,Old5AndNew6HaveNoWireAlias) {
+    auto old=ActualPortablePackage<NNeuronTimeLearner>();auto current=ActualWindowPackage<NNeuronTimeLearner>();
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);f.attempt.reset();old["schema_version"]=6;RebindPortable(old);
+    EXPECT_THROW(PrepareNativeLearnedState(old,f.storage,f.environment,CompositePackageImplementation),std::invalid_argument);
+    current["schema_version"]=5;RebindPortable(current);
+    EXPECT_THROW(PrepareNativeLearnedState(current,f.storage,f.environment,CandidateWindowPackageImplementation),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPackage,CoherentTerminalRewriteNeedsOriginalExportBinding) {
+    // Archive DATA has no authoritative final service outcome. This deliberately
+    // demonstrates the semantic-import limit; it must never be counted as a
+    // completed producer execution or accepted classification provenance.
+    const auto original=ActualWindowPackage<NNeuronTimeLearner>(WindowPackageSource::StopAfterFinal);
+    ASSERT_EQ(original["kind"],QJsonValue("timelearner_stopped_state"));ASSERT_TRUE(original["certificate"].isNull());
+    const auto protocol=DecodeVerificationProtocol(original["protocol"].toObject());
+    const auto runtime=DecodeCandidateWindowRuntimePlan(original["runtime_plan"].toObject(),protocol);
+    const auto proof=CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(original["measurement_archive"].toObject()),
+        runtime.search.tolerances,original["model_revision"].toString().toStdString(),std::size_t(original["model_epoch"].toDouble()));
+    ASSERT_TRUE(proof.Certificate());ASSERT_TRUE(proof.Certificate()->Exact());auto data=original;
+    data["kind"]="timelearner_completed_state";data["state_kind"]="learned_solo";data["training_outcome"]="exact";data["reason"]="exact";
+    data["certificate"]=EncodeTrainingCertificate(*proof.Certificate());auto physical=data["neuron"].toObject();
+    auto metadata=physical["metadata"].toObject();metadata["state_kind"]="learned_solo";auto training=metadata["training"].toObject();
+    training["status"]="exact";training["certificate"]=QJsonObject{{"state_identity",data["model_revision"]},{"status","exact"}};
+    for(const auto& key:{"reference_complete","capture_revision","capture_epoch","reason"})training.remove(key);
+    metadata["training"]=training;physical["metadata"]=metadata;physical.remove("sha256");
+    physical["sha256"]=NmsdkTools::CanonicalModelDataSha256(physical);data["neuron"]=physical;RebindPortable(data);
+    EXPECT_EQ(data["measurement_archive"],original["measurement_archive"]);EXPECT_EQ(data["neuron"].toObject()["graph"],original["neuron"].toObject()["graph"]);
+    EXPECT_NE(data["sha256"],original["sha256"]); // Existing execution.package_sha256 must still bind the ORIGINAL export.
+    const auto oldBytes=QJsonDocument(original).toJson(),newBytes=QJsonDocument(data).toJson();
+    EXPECT_NE(QCryptographicHash::hash(oldBytes,QCryptographicHash::Sha256),QCryptographicHash::hash(newBytes,QCryptographicHash::Sha256));
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+    const auto prepared=PrepareNativeLearnedState(data,f.storage,f.environment,CandidateWindowPackageImplementation);
+    ASSERT_TRUE(prepared->service.Certificate());EXPECT_EQ(prepared->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(prepared->service.Search());
+    SavePortableObject("package6-classic/coherent-data-only-promotion","original-export.json",original);
+    SavePortableObject("package6-classic/coherent-data-only-promotion","recomputed-data.json",data);
+    SavePortableObject("package6-classic/coherent-data-only-promotion","scope.json",{{"native_DATA_semantics_replayed",true},
+        {"original_service_completed",false},{"completed_classification_authorized",false},{"external_original_execution_binding_required",true}});
+}
+TEST(NativeCandidateWindowPackage,StartedZeroGroupAttemptIsDiagnosticWithRealInitialSource) {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);ConfigureWindowPackageCold(f,WindowPackageSource::Complete);
+    const auto configuration=ParseConfiguredNativeTraining(f.owner->ControllerConfiguration.GetData());
+    f.owner->BeginNativeTraining(MakeConfiguredNativeTrainingPlan(configuration));const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences);ASSERT_FALSE(service.CompositeSourceBinding().isEmpty());
+    EXPECT_TRUE(service.CompositeMeasurements().empty());EXPECT_EQ(service.CompositeGroups(),0u);f.owner->IsNeedToTrain=false;
+    const auto package=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    EXPECT_EQ(package["kind"],QJsonValue("timelearner_stopped_state"));EXPECT_TRUE(package["certificate"].isNull());
+    const auto prepared=PrepareNativeLearnedState(package,f.storage,f.environment,CandidateWindowPackageImplementation);
+    EXPECT_EQ(prepared->service.State(),NativeTrainingState::Finished);EXPECT_FALSE(prepared->service.References());EXPECT_FALSE(prepared->service.Certificate());
+    EXPECT_TRUE(prepared->service.CompositeMeasurements().empty());SaveWindowPackage(f,"started-zero-group",package);
+}
