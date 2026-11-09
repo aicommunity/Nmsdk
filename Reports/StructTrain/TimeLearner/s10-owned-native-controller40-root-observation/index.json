@@ -6,7 +6,7 @@
   "executed_tests": 40,
   "passed": 40,
   "full_collection_accepted": false,
-  "nested_kernel_units_independently_attested": false,
+  "nested_kernel_units_independently_attested": true,
   "scientific_verdict": null,
   "files": {
     "OwnedNative40RootFreshPreflight.json": {
@@ -92,6 +92,23 @@
       "stored": "OwnedNative40KernelOutput.json.gz",
       "stored_bytes": 179,
       "stored_sha256": "64add84accb63a4bc32f27afa54960b8d33b390edb719533bb27434301c87779"
+    },
+    "nested-kernel-readback.json": {
+      "original_bytes": 238917,
+      "original_sha256": "220543f4ad62362d9e0c1252112f2f37159957704b16feb5e38a6d73758f3716",
+      "stored": "nested-kernel-readback.json.gz",
+      "stored_bytes": 28910,
+      "stored_sha256": "7be520d687351e855f82c9f684e12503b71a8836bd1cfe609bd05f18f200a7cb"
+    },
+    "nested-kernel-observer-v2.py": {
+      "original_bytes": 9091,
+      "original_sha256": "6a4b16b3bee9a35d6e02766b518a488c14582c448c46995a64b560ead766e8d6",
+      "stored": "nested-kernel-observer-v2.py.gz",
+      "stored_bytes": 3291,
+      "stored_sha256": "3045409052cdafacd5899e21ef82c705c55b9465014ab21bc050e797de672326"
     }
-  }
+  },
+  "actual_nested_test_units": 11,
+  "kernel_test_cases": 9,
+  "deliberately_held_dedicated_negative_leases": 2
 }
