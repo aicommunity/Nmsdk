@@ -267,3 +267,101 @@ TEST(CandidateWindowCold7,InitialDeclarationAllowsRunAndCheckpointResetWithoutPr
         EXPECT_EQ(reconstructed.inputWindows[i].stimulusId,p.inputWindows[i].stimulusId);EXPECT_EQ(reconstructed.inputWindows[i].channel,p.inputWindows[i].channel);
         EXPECT_DOUBLE_EQ(reconstructed.inputWindows[i].begin,p.inputWindows[i].begin);EXPECT_DOUBLE_EQ(reconstructed.inputWindows[i].end,p.inputWindows[i].end);}
 }
+
+namespace {
+// Synthetic declaration fixture only: no model, waveform or native execution.
+NativeTrainingPlan Runtime2Declaration() {
+    auto plan=MakeConfiguredNativeTrainingPlan(Cold7Declaration());
+    plan.search.runId="runtime-only/session/3";plan.search.initialModelRevision="bound-runtime-revision";
+    plan.search.initialModelEpoch=7;return plan;
+}
+}
+TEST(CandidateWindowRuntime2,RoundtripPreservesBoundRuntimeWithoutColdConfigurationFields) {
+    const auto plan=Runtime2Declaration();const auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_EQ(wire["schema_version"],2);EXPECT_FALSE(wire.contains("kind"));EXPECT_FALSE(wire.contains("model"));
+    const auto decoded=DecodeCandidateWindowRuntimePlan(wire,plan.protocol);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(decoded),wire);EXPECT_EQ(decoded.search.runId,plan.search.runId);
+    EXPECT_EQ(decoded.search.initialModelRevision,plan.search.initialModelRevision);EXPECT_EQ(decoded.search.initialModelEpoch,7u);
+    EXPECT_FALSE(decoded.observationSink);EXPECT_FALSE(decoded.compositeSink);EXPECT_FALSE(decoded.beforeCompositeConsume);
+    EXPECT_TRUE(decoded.inputWindows.empty());
+}
+TEST(CandidateWindowRuntime2,SerializedNumbersOwnStorageAfterAllTemporaryDocumentsAreDestroyed) {
+    const auto plan=Runtime2Declaration();QByteArray bytes;
+    {const auto wire=EncodeCandidateWindowRuntimePlan(plan);bytes=QJsonDocument(wire).toJson(QJsonDocument::Compact);}
+    const auto document=ParseStrictNativeJsonObject(bytes.toStdString());
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(document,plan.protocol)),document);
+}
+TEST(CandidateWindowRuntime2,RuntimeSearchAndBudgetsNeedNotEqualOriginalCold7Declaration) {
+    const auto original=EncodeConfiguredNativeTraining(Cold7Declaration());auto plan=Runtime2Declaration();
+    plan.search.tolerances.sync=.03125;plan.search.maximumSweeps=3;plan.maximumWallSeconds+=10.;
+    plan.composite->maximumTotalPrimaryBytes+=1024;
+    const auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_NE(wire["run_id"],original["run_id"]);EXPECT_NE(wire["search"].toObject()["tolerances"],original["search"].toObject()["tolerances"]);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(wire,plan.protocol)),wire);
+}
+TEST(CandidateWindowRuntime2,ProtocolBindingCannotBeReusedForChangedProtocolOrPolicy) {
+    const auto plan=Runtime2Declaration();const auto wire=EncodeCandidateWindowRuntimePlan(plan);auto changed=plan.protocol;
+    changed.revision="another-runtime-protocol";EXPECT_THROW(DecodeCandidateWindowRuntimePlan(wire,changed),std::invalid_argument);
+    auto bad=wire;auto common=bad["composite_measurement"].toObject();auto policy=common["candidate_window_policy"].toObject();
+    policy["maximum_feature_terms"]=65;common["candidate_window_policy"]=policy;bad["composite_measurement"]=common;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,plan.protocol),std::invalid_argument);
+}
+TEST(CandidateWindowRuntime2,WrongVersionUnknownFieldsAndCold7AreNotRuntimeDeclarations) {
+    const auto plan=Runtime2Declaration();const auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    for(const auto version:QJsonArray{1,3,true,2.5}) {auto bad=wire;bad["schema_version"]=version;
+        EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,plan.protocol),std::invalid_argument);}
+    auto bad=wire;bad["native_execution_verified"]=true;EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,plan.protocol),std::invalid_argument);
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(EncodeConfiguredNativeTraining(Cold7Declaration()),plan.protocol),std::invalid_argument);
+}
+TEST(CandidateWindowRuntime2,SearchBoundsToleranceAndRepeatPolicyAreValidated) {
+    auto plan=Runtime2Declaration();plan.search.bounds[0].minimumResistance=0.;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+    plan=Runtime2Declaration();plan.search.tolerances.sync=-1.;EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+    plan=Runtime2Declaration();plan.search.normalization=Normalization::TipResistance;plan.search.n0CandidateRepeats=2;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+}
+TEST(CandidateWindowRuntime2,AttemptAndGroupBudgetsKeepTheirActualUnitsAndInequalities) {
+    auto plan=Runtime2Declaration();plan.composite->maximumNativeProbes=plan.protocol.inputs.size()+1;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+    plan=Runtime2Declaration();plan.composite->maximumTotalSamples=plan.composite->contextPolicy.maximumTotalSamples-1;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+    plan=Runtime2Declaration();plan.composite->maximumGroupWallSeconds=plan.maximumWallSeconds+1.;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+    plan=Runtime2Declaration();plan.composite->maximumGroupWallSeconds=plan.maximumWallSeconds;
+    EXPECT_NO_THROW(EncodeCandidateWindowRuntimePlan(plan));
+}
+TEST(CandidateWindowRuntime2,BooleanFractionalMissingAndOverflowCountsAreRejected) {
+    const auto plan=Runtime2Declaration();const auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    for(const auto value:QJsonArray{true,1.5,9007199254740992.}) {auto bad=wire;bad["initial_model_epoch"]=value;
+        EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,plan.protocol),std::invalid_argument);}
+    auto bad=wire;bad.remove("protocol_binding");EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,plan.protocol),std::invalid_argument);
+}
+TEST(CandidateWindowRuntime2,UnboundPlanAndOtherRecoveryCannotMasqueradeAsStartedService) {
+    auto plan=Runtime2Declaration();plan.search.initialModelRevision.clear();EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+    plan=Runtime2Declaration();plan.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceUnassignedBurst;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(plan),std::invalid_argument);
+}
+TEST(CandidateWindowRuntime2,CapacitanceSearchAndHistoryFlagRemainDeclarationsNotOwnedC0Evidence) {
+    auto plan=Runtime2Declaration();plan.search.capacitanceSearch=CapacitanceSearchPolicy{};
+    // The low-level service5 owner validates actual C0 separately; unlike the
+    // cold configuration builder it does not require this recording flag.
+    const auto unrecorded=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_EQ(unrecorded["record_capacitance_history"],false);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(unrecorded,plan.protocol)),unrecorded);
+    plan.recordCapacitanceHistory=true;const auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_FALSE(wire.contains("optional_C0_witness"));EXPECT_FALSE(wire["search"].toObject()["capacitance_search"].isNull());
+    const auto decoded=DecodeCandidateWindowRuntimePlan(wire,plan.protocol);
+    ASSERT_TRUE(decoded.search.capacitanceSearch);EXPECT_EQ(decoded.search.capacitanceSearch,plan.search.capacitanceSearch);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(decoded),wire);
+}
+TEST(CandidateWindowRuntime2,Runtime1CodecRemainsExplicitAndRejectsRuntime2) {
+    auto plan=Runtime2Declaration();const auto wire=EncodeCandidateWindowRuntimePlan(plan);
+    EXPECT_THROW(DecodeCompositeRuntimePlan(wire,plan.protocol),std::invalid_argument);
+    const auto candidate=*plan.protocol.candidateWindowMeasurement;plan.protocol.schemaVersion=4;plan.protocol.candidateWindowMeasurement.reset();
+    CompositeMeasurementContract fixed;fixed.contextPolicy=candidate.contextPolicy;fixed.geometryPolicy=candidate.geometryPolicy;
+    fixed.inputWindows=candidate.referenceInputWindows;plan.protocol.compositeMeasurement=fixed;plan.composite->schemaVersion=1;
+    const auto old=EncodeCompositeRuntimePlan(plan);EXPECT_EQ(old["schema_version"],1);EXPECT_FALSE(old.contains("protocol_binding"));
+    EXPECT_FALSE(old["composite_measurement"].toObject().contains("candidate_window_policy"));
+    EXPECT_EQ(EncodeCompositeRuntimePlan(DecodeCompositeRuntimePlan(old,plan.protocol)),old);
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(old,plan.protocol),std::invalid_argument);
+}

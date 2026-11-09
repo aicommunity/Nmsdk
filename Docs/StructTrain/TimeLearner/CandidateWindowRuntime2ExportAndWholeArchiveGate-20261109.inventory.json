@@ -1,0 +1,305 @@
+{
+  "kind": "candidate_window_runtime2_source_preparation",
+  "schema_version": 1,
+  "status": "source_only_not_dispatched",
+  "base_root": "7ad96da0e66fe1ef51fc76acb2114174ab6a4e68",
+  "base_pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+  "runtime2": {
+    "version": 2,
+    "protocol_binding": "CanonicalModelDataSha256(EncodeVerificationProtocol(protocol5))",
+    "original_cold7_separate": true,
+    "manual_runtime_contract_implemented": false,
+    "live_authority_restored": false
+  },
+  "restrictions": [
+    {
+      "rule": "protocol5_and_policy2",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 36
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+        "line_first": 46,
+        "line_last": 50
+      }
+    },
+    {
+      "rule": "bound_run_revision_and_input_dimension",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 42
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/BoundedTraining.cpp",
+        "line_first": 145,
+        "line_last": 154
+      }
+    },
+    {
+      "rule": "exact_json_count_domain",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 44
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/CompositeTrainingDeclarations.cpp",
+        "line_first": 14,
+        "line_last": 15
+      }
+    },
+    {
+      "rule": "search_positive_budgets_depth_repeat_normalization",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 47
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/BoundedTraining.cpp",
+        "line_first": 148,
+        "line_last": 154
+      }
+    },
+    {
+      "rule": "retry_recovery_zero_invalid_allowance_permitted",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 52
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/BoundedTraining.cpp",
+        "line_first": 185,
+        "line_last": 193
+      }
+    },
+    {
+      "rule": "finite_nonnegative_tolerances_and_perinput_ranges",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 55
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/BoundedTraining.cpp",
+        "line_first": 156,
+        "line_last": 166
+      }
+    },
+    {
+      "rule": "bounded_capacitance_search_declaration",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 61
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/BoundedTraining.cpp",
+        "line_first": 94,
+        "line_last": 133
+      }
+    },
+    {
+      "rule": "positive_exact_attempt_groups_native_samples_primarybytes",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 62
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+        "line_first": 60,
+        "line_last": 61
+      }
+    },
+    {
+      "rule": "reference_cap_N_native_cap_N_plus_2_sample_cap_context_total",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 64
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+        "line_first": 50,
+        "line_last": 65
+      }
+    },
+    {
+      "rule": "positive_model_wall_and_group_not_exceeding_attempt",
+      "implementation": {
+        "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+        "line": 66
+      },
+      "baseline": {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+        "line_first": 62,
+        "line_last": 65
+      }
+    }
+  ],
+  "explicitly_not_required": [
+    "maximum_invalid_reference_probes > 0",
+    "maximum_invalid_observations > 0",
+    "runtime search/tolerances/caps equal original cold7",
+    "search maximum_probes equals raw native probe cap",
+    "capacitance_search requires record_capacitance_history on low-level service5"
+  ],
+  "count_initializer_loop": {
+    "types": {
+      "initialModelEpoch": "std::size_t",
+      "maximumProbes": "std::size_t",
+      "maximumEdits": "std::size_t",
+      "maximumCandidatesPerInput": "std::size_t",
+      "maximumSweeps": "std::size_t",
+      "maximumInvalidObservations": "std::size_t",
+      "n0CandidateRepeats": "std::size_t",
+      "maximumReferenceProbes": "std::size_t",
+      "maximumInvalidReferenceProbes": "std::size_t"
+    },
+    "type_sources": [
+      {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/BoundedTraining.h",
+        "lines": [
+          26,
+          40
+        ]
+      },
+      {
+        "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+        "path": "Core/TimeLearner/NativeTrainingService.h",
+        "lines": [
+          13,
+          22
+        ]
+      }
+    ],
+    "resistance_subdivision_depth": "unsigned; serialized separately, not in mixed initializer list"
+  },
+  "build_registration": {
+    "commit": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+    "path": "CMakeLists.txt",
+    "line": 20,
+    "rule": "file(GLOB PULSE_SOURCES CONFIGURE_DEPENDS Core/*.cpp Core/TimeLearner/*.cpp)",
+    "new_translation_unit": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+    "cmake_lists_sha256": "7b882dc35bd38bf0d3cf38225ffd59ceb901190995cd0c8440e0ac12760188d6",
+    "actual_cmake_configure_verified": false,
+    "git_blob": "5042dc53742f063888f6ec2714ee1b1f38221464"
+  },
+  "unchanged_runtime1": {
+    "path": "Core/TimeLearner/CompositeTrainingDeclarations.cpp",
+    "baseline_sha256": "375a19028364832f7ec2e633d25f1bd44378f8f7ac226813428ea20d9b9981e5",
+    "working_text_lf_normalized_equals_baseline": true,
+    "repository_blob_unchanged": true,
+    "git_blob": "e1d454fa27c20a214f41ca90e24194a66ae7c119"
+  },
+  "tests": {
+    "kind": "synthetic_declarations_no_native_waveforms",
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
+    "count": 11,
+    "literal_ids": [
+      "CandidateWindowRuntime2.RoundtripPreservesBoundRuntimeWithoutColdConfigurationFields",
+      "CandidateWindowRuntime2.SerializedNumbersOwnStorageAfterAllTemporaryDocumentsAreDestroyed",
+      "CandidateWindowRuntime2.RuntimeSearchAndBudgetsNeedNotEqualOriginalCold7Declaration",
+      "CandidateWindowRuntime2.ProtocolBindingCannotBeReusedForChangedProtocolOrPolicy",
+      "CandidateWindowRuntime2.WrongVersionUnknownFieldsAndCold7AreNotRuntimeDeclarations",
+      "CandidateWindowRuntime2.SearchBoundsToleranceAndRepeatPolicyAreValidated",
+      "CandidateWindowRuntime2.AttemptAndGroupBudgetsKeepTheirActualUnitsAndInequalities",
+      "CandidateWindowRuntime2.BooleanFractionalMissingAndOverflowCountsAreRejected",
+      "CandidateWindowRuntime2.UnboundPlanAndOtherRecoveryCannotMasqueradeAsStartedService",
+      "CandidateWindowRuntime2.CapacitanceSearchAndHistoryFlagRemainDeclarationsNotOwnedC0Evidence",
+      "CandidateWindowRuntime2.Runtime1CodecRemainsExplicitAndRejectsRuntime2"
+    ],
+    "executed": false
+  },
+  "actual_service_export_checks": {
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "helper": "SaveWindowService",
+    "checks": [
+      "encode-decode-encode declaration equality",
+      "run_id equals actual service.Configuration().runId",
+      "SaveCompositeBoundary writes actual runtime2 from service.Plan()"
+    ],
+    "executed": false
+  },
+  "remaining_gates": [
+    "server C++ runtime2 declaration cohort",
+    "real service5 cold7/runtime2/archive2 primary export",
+    "dedicated Python runtime2 validator and unmocked dispatcher/CLI with retained audits",
+    "cross-layer rehashed metadata negative controls",
+    "independent Git metadata and owned closure verification"
+  ],
+  "implementation_pulse_commit": "073869082041e3f66a3f6bfb3c69b84b4d1276f6",
+  "pulse_sources": [
+    {
+      "path": "Core/TimeLearner/CandidateWindowTrainingDeclarations.h",
+      "git_blob": "4b6432d190a74f7b407a6a2ae37ff54d9dd1e9ad",
+      "bytes": 1115,
+      "sha256": "b0752f4199e6e149a6cd5a418139f941fd1047832405e404674a077112504405"
+    },
+    {
+      "path": "Core/TimeLearner/CandidateWindowRuntimePlan.cpp",
+      "git_blob": "1989e836e8af3c23bbc305c8bce8ee21c41f493c",
+      "bytes": 11573,
+      "sha256": "194f2ba0a32d9b3f4bf582ba2836e4e7def68f49d781e2c5d3e938703c73118d"
+    }
+  ],
+  "root_staged_sources": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
+      "git_blob": "97d6e3e2e24f92d40d349e3112ef40608bf90616",
+      "bytes": 29360,
+      "sha256": "50f282ec076ff06a6068cdf38be15158379a96788797eaca3005b64be6b40b63"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "git_blob": "4c421b2f49ffbc0707facb6409cccfa16c3461b2",
+      "bytes": 298701,
+      "sha256": "3c61e398de1f347918e5388495c5223a9c3b769bcdf5ce3be6ac8e5c20702362"
+    }
+  ],
+  "feature_pulse_materialization": {
+    "mode": "gitlink-only in root private worktree",
+    "physical_source_worktree": "E:\\Science-Repo\\pulselib-candidate-window-runtime2-codec",
+    "full_sdk_source_materialized": false,
+    "runtime_source_or_cache_modified": false
+  },
+  "first_actual_gate": {
+    "status": "not_dispatched",
+    "fixture_kind": "real_service5_exports_only",
+    "manual_archives_excluded": true,
+    "canonical_output_leaf": "must be resolved from future owned native gate; not yet assigned",
+    "cases": [
+      {
+        "cpp_id": "NativeCandidateWindowService.ClassicN0CalculateMode0FreshAllNFinal",
+        "case_prefix": "classic-native-window-service5/N0-mode0"
+      },
+      {
+        "cpp_id": "NativeCandidateWindowService.BranchN0CalculateMode0FreshAllNFinal",
+        "case_prefix": "branch-native-window-service5/N0-mode0"
+      }
+    ],
+    "required_documents": [
+      "initial-configuration.json",
+      "runtime-plan.json",
+      "composite-measurements/index.json"
+    ],
+    "required_primary": "all referenced actual CSV bytes, both embedded and external, plus producer sidecars/source provenance",
+    "assertions": [
+      "cold7 schema7 and protocol5/archive2/runtime2 remain distinct",
+      "nonzero actual measurements and non-reference proposals",
+      "all input reference/final IDs audited with independent geometry/proposal and exact counters",
+      "strict external primary mirror",
+      "public analyze CLI reads original case and retains full compact audit outside it",
+      "rehashed reference/graph/prefix-cap negatives do not pass",
+      "native execution/live authority/certificate/science flags remain unpromoted"
+    ],
+    "test_execution": "server-only after immutable source + real fixture review"
+  }
+}
