@@ -1,7 +1,8 @@
 param([Parameter(Mandatory=$true)][string]$ToolRoot,
       [Parameter(Mandatory=$true)][ValidatePattern('^[0-9a-f]{40}$')][string]$ToolCommit,
       [Parameter(Mandatory=$true)][ValidatePattern('^[0-9a-f]{40}$')][string]$SpecificationBlob,
-      [Parameter(Mandatory=$true)][ValidatePattern('^[a-z0-9-]+$')][string]$Attempt)
+      [Parameter(Mandatory=$true)][ValidatePattern('^[a-z0-9-]+$')][string]$Attempt,
+      [ValidateSet('sdk-build.py','audit-closed-build.py')][string]$WorkerName='sdk-build.py')
 $ErrorActionPreference='Stop'
 $ProgressPreference='SilentlyContinue'
 [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
@@ -14,7 +15,7 @@ if(-not $root.StartsWith('C:\Projects\TimeLearnerWorker\',[StringComparison]::Or
 if(((Invoke-CheckedGit @('-C',$root,'rev-parse','HEAD')) -join '') -ne $ToolCommit) {throw 'Tool HEAD differs'}
 $raw=(Invoke-CheckedGit @('-C',$root,'cat-file','blob',$SpecificationBlob)) -join "`n"
 $spec=ConvertFrom-Json -InputObject $raw
-$worker=Join-Path $PSScriptRoot 'sdk-build.py'
+$worker=Join-Path $PSScriptRoot $WorkerName
 if((Get-FileHash -LiteralPath $worker -Algorithm SHA256).Hash.ToLowerInvariant() -ne $spec.worker_sha256) {
     throw 'Worker content differs'
 }
@@ -50,7 +51,7 @@ $action.Path='C:\Windows\System32\cmd.exe';$action.Arguments='/d /c "'+$batch+'"
 $registered=$folder.RegisterTaskDefinition($name,$definition,2,$user,$null,2,$null)
 [IO.File]::WriteAllText($control+'/task.xml',$registered.Xml,$utf8)
 $instance=$registered.Run($null)
-$receipt=@{kind='windows_sdk_build_dispatch';task=$name;instance=$instance.InstanceGuid;
+$receipt=@{kind=$(if($WorkerName -eq 'sdk-build.py'){'windows_sdk_build_dispatch'}else{'windows_closed_build_audit_dispatch'});task=$name;instance=$instance.InstanceGuid;
     tool_commit=$ToolCommit;specification_git_blob=$SpecificationBlob;worker_sha256=$spec.worker_sha256;
     scientific_verdict=$null;output=$spec.output_root}
 [IO.File]::WriteAllText($control+'/dispatch.json',($receipt|ConvertTo-Json -Depth 5)+"`n",$utf8)
