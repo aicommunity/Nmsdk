@@ -1,5 +1,7 @@
 # Парная проверка control-lifetime: фактический запуск corrected33
 
+> Последующее состояние: попытка завершилась ошибкой компиляции **до тестов:0/33**,0leaf. `CandidateWindowPortableReferences.cpp` не видел `DecodeNativeTrainingCapacitanceWitness` и `EncodeVerificationProtocol`; оба объявлены в `ProbeEvidenceJson.h`. Kernel closed, exact lease85327992 released. [Свежий readback](../../../Reports/StructTrain/TimeLearner/s07-cold-envelope-manual-corrected-m40-a1-root-launch/build-failure-metadata.json.gz). Полная отрицательная публикация и independent proof готовятся; RUNNING ниже — исторический снимок. Source-only Pulsefix `637b7fb6b66df242f9b7383ce179aa543ca45aed` добавляет direct owning include, без изменения алгоритма. Исправленная сборка ещё не выполнялась.
+
 Единственный запуск `s07-cold-envelope-manual-corrected-m40-a1` начат на M40. На authoritative observation `1794211289.4821808` kernel подтверждает RUNNING; configure завершён, тесты ещё не подтверждены. Это снимок запуска, не результат33 и не научный verdict.
 
 Source Root `2504bb86062867b4028106a120e724b8b86bcb84`, Pulse `4b70b0bfb41510691971de86ce5c4993bb382b8b`. Native source38 → selected33,22leaves: codecs11, cold7guards2, lifetime20; пять Console случаев исключены явно. У unfixed варианта остаётся отдельный контроль2positive+2negative, без требования fullR20 PASS.
