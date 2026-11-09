@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Native119: оба targets собраны](NativePackage6-119Launch-20261109.ru.md), первые17 actual cases прошли; N4 routing kernel-live, полного результата119 ещё нет. Прежние cold7 fixture failures в новом запуске прошли. SDK/native6 ещё не приняты целиком.
+
 [Reader73 A2 принят и опубликован](Runtime2Reader73A2Outcome-20261109.ru.md):73/73 на неизменном actual157 corpus,54 members/15 Git roles независимо проверены, evidence8228 опубликован и no-ff merged. Уточнено: старый FAIL был ошибочным ожиданием cursor budget в fixture (272 вместо264), production runtime2 reader здесь не менялся. Native package6 corpus не выбран, научного допуска нет.
 
 [Native119: свежая SDK доставлена и supervisor запущен](NativePackage6-119Launch-20261109.ru.md):4050 Git-verified files/8repos, canonical completed0/29 same-SDK imports; точный cohort119/42leaves. Новая сборка включает Console и integration target. Native результата ещё нет; maintained gitlinks прежние, scientific acceptance отсутствует.
