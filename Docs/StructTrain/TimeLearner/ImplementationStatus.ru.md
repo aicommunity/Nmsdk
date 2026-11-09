@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+**Native119 A1 завершён неполностью:** оба targets собраны, 19 actual cases прошли, следующий Classic N6 routing остановлен лимитом 2400 s без итогового JUnit; полный cohort не принят. Root повторно проверил закрытие supervisor, outer и всех записанных children. [Исходные terminal/timeout/log observations](../../../Reports/StructTrain/TimeLearner/s07-package6-native119-launch-root-observation/timeout-terminal-readback.json.gz) и [состояние закрытия](../../../Reports/StructTrain/TimeLearner/s07-package6-native119-launch-root-observation/closed-status.json.gz) сохранены. Это заменяет прежний RUNNING ниже; scientific verdict отсутствует. Обработка отсутствующего JUnit исправляется отдельно, первоначальный запуск не изменяется и не перезапускается автоматически.
+
 [Native119:19 actual checks прошли](NativePackage6-119Launch-20261109.ru.md), включая обе N4 routing проверки; N6 routing kernel-live, terminal ещё отсутствует. Это инженерная проверка, не новая научная N4 классификация.
 
 [Полный отрицательный native48 опубликован](Native48FrozenPreservationAcceptance-20261109.ru.md):116 members/113 originals, exact9PASS2FAIL/37not-run,4030 SDK Git bodies и645 collector files независимо сверены; source14/14 и actual collection приняты, evidence85b0662 опубликован/no-ff merged. Pending полной публикации A1 ниже закрыт. Это сохранение отрицательного результата, не native119/scientific acceptance.
