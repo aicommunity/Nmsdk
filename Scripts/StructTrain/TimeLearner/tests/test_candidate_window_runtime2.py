@@ -124,10 +124,14 @@ class CandidateWindowRuntime2DeclarationTest(unittest.TestCase):
         with self.assertRaises(EvidenceError):audit_candidate_window_runtime_plan(plan,config,p)
         # The shared owner counts ONE baseline plus seed inventory, whose
         # current==unit==minimum==maximum values deduplicate to ONE seed.
-        # Thus two contexts reserve 272//2=136 slots: 8 lengths+128 counts.
-        policy=plan['search']['capacitance_search'];policy.update(minimum_scale=1.,maximum_scale=1.,maximum_contexts=4,maximum_cursor_elements=272)
+        # Length inventory is capped by maximum_candidates_per_input:
+        # min(4,8)=4 lengths +128 counts=132; two contexts need 264 slots.
+        self.assertEqual(plan['search']['maximum_candidates_per_input'],4)
+        self.assertEqual(tuple(plan['search']['bounds'][0][k] for k in
+            ('minimum_length','maximum_length','minimum_synapses','maximum_synapses')),(1,8,1,128))
+        policy=plan['search']['capacitance_search'];policy.update(minimum_scale=1.,maximum_scale=1.,maximum_contexts=4,maximum_cursor_elements=264)
         audit_candidate_window_runtime_plan(plan,config,p)
-        policy['maximum_cursor_elements']=271
+        policy['maximum_cursor_elements']=263
         with self.assertRaisesRegex(EvidenceError,'C_cursor_budget'):audit_candidate_window_runtime_plan(plan,config,p)
 
 
