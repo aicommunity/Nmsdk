@@ -1,5 +1,7 @@
 # Следующая native проверка48: согласованная source preparation
 
+> Текущее решение: следующая native48 будет собрана из НОВОЙ полной SDK956 в source-native48-fresh-m40-a1 и новом build-native48-fresh-m40-a1. План incremental reuse/source-update ниже исторический и superseded;438старыхobjects/184flags не используются заново и остаются неизменными. Разработка отдельного existing-SDK updater отменена как необязательная для этого процесса. Cohort48/37leaves/185rules/physics/profile15 сохраняются; нужны полная4030-file Git delivery иcanonical-only production preparation.
+
 Source Root `956443560ebdb788a0642856381c9c6a7a554b76` получен обычным no-ff merge95e813 (общий test-only fix) и35fba3 (штатный owned-native controller). App/Tests/CMake и gitlinks точно соответствуют95; весь Scripts tree точно35. Pulse остаётся `f7a0e3e63ec29d4647790a695606d1ca32164ef3`. Runtime-проверки этого merged SDK ещё нет.
 
 ПланV2 `3938176fcdaa5b48216b1ced0528581d45616915` опубликован в origin/codex/timelearner-native48-source-control-plan-v2; prefix Reports/StructTrain/TimeLearner/s10-native48-a4-source-control-plan-v2. Root независимо сверил [полные Git-derived дельты и состав cohort](Native48SourceControlRootReview-20261109.json):218 paths от f015 до956,3 пути test-fix и215 путей controller merge. Projected executable/source delta —18Scripts+1test TU. Старый план44903, ошибочно перечислявший только test-fix delta как полный, сохранён в V2 evidence и не используется для обновления SDK.
