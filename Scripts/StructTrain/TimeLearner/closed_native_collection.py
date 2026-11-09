@@ -199,6 +199,30 @@ def _read_json_lines(path):
     return [provenance._json(line) for line in raw.splitlines() if line.strip()], raw, record
 
 
+def read_readonly_inventory(inventory):
+    packed, packed_record = provenance._frozen(Path(inventory['path']), 1024**2)
+    require(packed_record['bytes'] == inventory['compressed_bytes'] and
+            packed_record['sha256'] == inventory['compressed_sha256'], 'native_collection_inventory_digest')
+    require(type(inventory['raw_bytes']) is int and 0 < inventory['raw_bytes'] <= 16*1024**2,
+            'native_collection_inventory_expanded_limit')
+    with gzip.GzipFile(fileobj=io.BytesIO(packed)) as stream:
+        observed_raw = stream.read(inventory['raw_bytes']+1)
+    require(len(observed_raw) == inventory['raw_bytes'] and _sha(observed_raw) == inventory['raw_sha256'],
+            'native_collection_inventory_expanded_digest')
+    return provenance._json(observed_raw)
+
+
+def validate_original_roles(original_paths, regular_files):
+    roots = {original_paths[tag]: tag for tag in ('native-output', 'controller')}
+    archive_paths = []
+    for row in regular_files:
+        require(row['root'] in roots and row['archive_path'] == roots[row['root']]+'/'+
+                provenance._relative(row['relative_path']), 'native_collection_original_role_scope')
+        archive_paths.append(row['archive_path'])
+    require(archive_paths and len(archive_paths) == len(set(archive_paths)),
+            'native_collection_original_archive_alias')
+
+
 def collect(manifest_path, manifest_sha256):
     manifest, raw, record = _read(manifest_path, 1024**2)
     require(record['sha256'] == manifest_sha256, 'native_collection_manifest_digest')
@@ -220,27 +244,11 @@ def collect(manifest_path, manifest_sha256):
     require(provenance._git(repository, 'rev-parse', 'HEAD').decode().strip() == manifest['parent'],
             'native_collection_evidence_parent')
     inventory = manifest['readonly_inventory']
-    packed, packed_record = provenance._frozen(Path(inventory['path']), 1024**2)
-    require(packed_record['bytes'] == inventory['compressed_bytes'] and
-            packed_record['sha256'] == inventory['compressed_sha256'], 'native_collection_inventory_digest')
-    require(type(inventory['raw_bytes']) is int and 0 < inventory['raw_bytes'] <= 16*1024**2,
-            'native_collection_inventory_expanded_limit')
-    with gzip.GzipFile(fileobj=io.BytesIO(packed)) as stream:
-        observed_raw = stream.read(inventory['raw_bytes']+1)
-    require(len(observed_raw) == inventory['raw_bytes'] and _sha(observed_raw) == inventory['raw_sha256'],
-            'native_collection_inventory_expanded_digest')
-    observation = provenance._json(observed_raw)
+    observation = read_readonly_inventory(inventory)
     bounds = manifest['bounds']
     require(bounds == {'maximum_capture_bytes': 64*1024**2, 'maximum_output_bytes': 128*1024**2,
                        'minimum_free_bytes': 512*1024**2}, 'native_collection_fixed_copy_bounds')
-    roots = {manifest['original_paths'][tag]: tag for tag in ('native-output', 'controller')}
-    archive_paths = []
-    for row in manifest['regular_files']:
-        require(row['root'] in roots and row['archive_path'] == roots[row['root']]+'/'+
-                provenance._relative(row['relative_path']), 'native_collection_original_role_scope')
-        archive_paths.append(row['archive_path'])
-    require(archive_paths and len(archive_paths) == len(set(archive_paths)),
-            'native_collection_original_archive_alias')
+    validate_original_roles(manifest['original_paths'], manifest['regular_files'])
     _check_original(manifest, observation)
     declarations = list(manifest['regular_files'])
     for role, path, archive in [('frozen-manifest', Path(manifest_path), 'observer/frozen-inputs.json'),

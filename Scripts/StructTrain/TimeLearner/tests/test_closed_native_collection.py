@@ -1,11 +1,13 @@
 """Real filesystem regressions for frozen native collection; WORKERS ONLY."""
 import hashlib
+import gzip
 from pathlib import Path
 import tempfile
 import unittest
 
 from .. import archive_retirement
-from ..closed_native_collection import verify_closed_namespace, _source_namespace
+from ..closed_native_collection import (verify_closed_namespace, _source_namespace,
+                                       read_readonly_inventory, validate_original_roles)
 from ..native_evidence import EvidenceError
 
 
@@ -63,3 +65,40 @@ class ClosedNativeNamespaceTest(unittest.TestCase):
         (self.directory/'extra').symlink_to(self.file.name)
         with self.assertRaisesRegex(EvidenceError, 'source_file_link'):
             _source_namespace(self.directory, {self.file.name: self.record})
+
+    def test_original_role_cannot_read_outside_its_reserved_original_roots(self):
+        paths = {'native-output': str(self.directory), 'controller': str(self.directory.parent/'controller')}
+        with self.assertRaisesRegex(EvidenceError, 'original_role_scope'):
+            validate_original_roles(paths, [dict(root=str(self.directory.parent/'other'),
+                relative_path='terminal.json', archive_path='native-output/terminal.json')])
+
+    def test_original_role_cannot_disguise_a_controller_file_as_native_output(self):
+        paths = {'native-output': str(self.directory), 'controller': str(self.directory.parent/'controller')}
+        with self.assertRaisesRegex(EvidenceError, 'original_role_scope'):
+            validate_original_roles(paths, [dict(root=paths['controller'], relative_path='terminal.json',
+                                                archive_path='native-output/terminal.json')])
+
+    def test_duplicate_archive_destination_cannot_silently_drop_an_original_role(self):
+        paths = {'native-output': str(self.directory), 'controller': str(self.directory.parent/'controller')}
+        role = dict(root=str(self.directory), relative_path='terminal.json', archive_path='native-output/terminal.json')
+        with self.assertRaisesRegex(EvidenceError, 'original_archive_alias'):
+            validate_original_roles(paths, [role, dict(role)])
+
+    def test_inventory_expansion_cannot_exceed_its_declared_length(self):
+        raw = b'{"retained":"original"}\n'
+        packed = gzip.compress(raw)
+        path = self.directory/'inventory.json.gz'; path.write_bytes(packed)
+        declaration = dict(path=str(path), compressed_bytes=len(packed),
+            compressed_sha256=hashlib.sha256(packed).hexdigest(), raw_bytes=len(raw)-1,
+            raw_sha256=hashlib.sha256(raw[:-1]).hexdigest())
+        with self.assertRaisesRegex(EvidenceError, 'inventory_expanded_digest'):
+            read_readonly_inventory(declaration)
+
+    def test_inventory_exact_bytes_are_read_without_synthesizing_fields(self):
+        raw = b'{"retained":"original"}\n'
+        packed = gzip.compress(raw)
+        path = self.directory/'inventory.json.gz'; path.write_bytes(packed)
+        declaration = dict(path=str(path), compressed_bytes=len(packed),
+            compressed_sha256=hashlib.sha256(packed).hexdigest(), raw_bytes=len(raw),
+            raw_sha256=hashlib.sha256(raw).hexdigest())
+        self.assertEqual(read_readonly_inventory(declaration), {'retained': 'original'})
