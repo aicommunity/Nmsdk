@@ -1,0 +1,72 @@
+{
+  "kind": "timelearner_runtime2_reader73_preparation",
+  "schema_version": 1,
+  "status": "source_preparation_only_not_dispatched",
+  "source_commit": "1292babb67ee653d04316f7f6927a3d23d5d682c",
+  "code_commit": "a85094b240f93cf4d6f24f917f7b950936a3dcfc",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "package_fingerprint": "cb44469b00318b7d2c103af0626f77259ba172294b5289b133faa85b90b02d8c",
+  "source_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-runtime2-reader-m40-a1",
+  "tool_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+  "plan_path": "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a1",
+  "fixture_path": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+  "readback_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-candidate-window-runtime2-reader73-m40-a1",
+  "request_sha256": "b4cff4487b058aa9703179cf0f1f3a6f1d6a57dd00373ee7e8598c851ed5e76a",
+  "suite_sha256": "55fe10aaf2ae4ebc8049d5f2fa2da73167fe8c0087a82df841cbbe2fee85ec1b",
+  "cohort_counts": {
+    "existing_DATA_units": 39,
+    "existing_CLI_transport": 6,
+    "actual_archive1": 7,
+    "actual_six_CLI": 1,
+    "runtime2_declarations": 10,
+    "whole_synthetic_archive2": 10,
+    "total": 73
+  },
+  "output_scope": {
+    "primary_inputs_unchanged": true,
+    "unit_log_and_result": true,
+    "CLI_reports_written_and_reread_inside_test": true,
+    "six_CLI_reports_retained_after_test": false,
+    "native_execution_verified": false,
+    "training_certificate_verified": false,
+    "scientific_verdict": null
+  },
+  "source_delivery": {
+    "method": "existing Git-only private source delivery helper; no source SCP/tar generation",
+    "checkout": "all643 Scripts only; Python452",
+    "control_objects": "original .gitattributes/.gitignore/.gitmodules ODB-only",
+    "fixture_reuse": "existing immutable157; no unpack/copy/rewrite",
+    "metadata": "new reviewed plan files materialized from committed Git blobs only"
+  },
+  "sourceprep_limits": {
+    "maximum_allocated_bytes": 134217728,
+    "minimum_free_bytes": 805306368
+  },
+  "execution_limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "execution_disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "known_pending": {
+    "runtime2_P1_source_fix": true,
+    "whole_archive2_synthetic_join_source_present": true,
+    "whole_actual_archive2_positive_join": false,
+    "actual_archive2_service_exports_available": false,
+    "required_followup": "genuine service5 originalcold7+owningruntime2+archive2 externalprimary whole publicdispatcher/CLI plus coherent rehashed tamper gate",
+    "manual33_no_fake_servicePlan": true,
+    "no_main_merge_or_archive2_native_acceptance_from_73": true
+  },
+  "dispatch_authorized": false,
+  "server_writes_performed": false,
+  "local_tests_executed": false,
+  "frozen53_scope": {
+    "source": "7352f62bfd77ea86606845866a06bab7400454a3",
+    "plan": "fd7dec1a98b9b3978aedfbaea814968b6f3dba5d",
+    "changed": false,
+    "collector_owner": "/root/experiment_evidence_review"
+  }
+}

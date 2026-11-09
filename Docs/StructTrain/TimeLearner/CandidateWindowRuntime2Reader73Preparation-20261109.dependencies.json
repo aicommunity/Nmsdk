@@ -1,0 +1,206 @@
+{
+  "kind": "timelearner_runtime2_reader73_source_dependencies",
+  "schema_version": 1,
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "validation_source_commit": "1292babb67ee653d04316f7f6927a3d23d5d682c",
+  "production_adapter": "Scripts.StructTrain.TimeLearner.owned_python_job",
+  "action": "python-validation",
+  "tool_source_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+  "validation_source_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-runtime2-reader-m40-a1",
+  "tool_materialized_scripts_expected": 632,
+  "tool_git_bytes": 9116328,
+  "adapter_static_local_import_closure": {
+    "Scripts/StructTrain/TimeLearner/archive_retirement.py": {
+      "tool_sha256": "e68fb553ebc3be22e4c4b89a2e2484d8a54cf553aa7bd6c33385718417b2d269",
+      "source_sha256": "e68fb553ebc3be22e4c4b89a2e2484d8a54cf553aa7bd6c33385718417b2d269",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/candidate_recovery.py": {
+      "tool_sha256": "53d03021f6edd1987549d070a7fd6a6f66ffd30d832cf9aeb3f0575db75ea6cc",
+      "source_sha256": "53d03021f6edd1987549d070a7fd6a6f66ffd30d832cf9aeb3f0575db75ea6cc",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/candidate_recovery_evidence.py": {
+      "tool_sha256": "c979ba2d9aa2a5a90c3e7ea62e13a089d5fd07bd88e8be87c5e984febb43cd2d",
+      "source_sha256": "c979ba2d9aa2a5a90c3e7ea62e13a089d5fd07bd88e8be87c5e984febb43cd2d",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/candidate_recovery_history.py": {
+      "tool_sha256": "5ac7994bfb2d1bc45f34bdcc3c67fd1eba3ecaf7352384dd47da21cc28c18b2d",
+      "source_sha256": "5ac7994bfb2d1bc45f34bdcc3c67fd1eba3ecaf7352384dd47da21cc28c18b2d",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/capacitance_evidence.py": {
+      "tool_sha256": "85a984c8441b56953e7af8407b0826d6ff72e711b8521998b4b75e01cba9eb2c",
+      "source_sha256": "85a984c8441b56953e7af8407b0826d6ff72e711b8521998b4b75e01cba9eb2c",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/capacitance_policy.py": {
+      "tool_sha256": "18ad6830faa83fdbe72ee5436526398104be34f02cbe0ac90e982a679bb7d6cc",
+      "source_sha256": "18ad6830faa83fdbe72ee5436526398104be34f02cbe0ac90e982a679bb7d6cc",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/collector_provenance.py": {
+      "tool_sha256": "2b8e2e08078ead5a27646d11bd2041c175fb0e628a5836132215a488ef2d1ff6",
+      "source_sha256": "2b8e2e08078ead5a27646d11bd2041c175fb0e628a5836132215a488ef2d1ff6",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/contained_process.py": {
+      "tool_sha256": "187645c22246b0468950d6c09c3be4be940ec908b4f56156831713377150abef",
+      "source_sha256": "187645c22246b0468950d6c09c3be4be940ec908b4f56156831713377150abef",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/contained_runner.py": {
+      "tool_sha256": "753a332bcb444c641b368be57c2a7db021a108cc85c9cc601b90001d1cc9ae07",
+      "source_sha256": "0603af649c05c533ca2cbbd2389aadab704e59c2a2011d25123e5731dad8a148",
+      "byte_identical": false
+    },
+    "Scripts/StructTrain/TimeLearner/domain_evidence.py": {
+      "tool_sha256": "042d6df5a4f76148dca07264e5fc6f481fb4379c696984e2f40f71d89eb80f69",
+      "source_sha256": "042d6df5a4f76148dca07264e5fc6f481fb4379c696984e2f40f71d89eb80f69",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/managed_reservation_graph.py": {
+      "tool_sha256": "b28cfb370a1b67128f53f51b0c007fcd204d1bd04834fd4593c91a374c5b0bbf",
+      "source_sha256": "b28cfb370a1b67128f53f51b0c007fcd204d1bd04834fd4593c91a374c5b0bbf",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/model_identity.py": {
+      "tool_sha256": "d09cee240b12c3b0989ffc33b5a4443f1dfcb4d081f668c1a52c251675f8714d",
+      "source_sha256": "d09cee240b12c3b0989ffc33b5a4443f1dfcb4d081f668c1a52c251675f8714d",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/native_evidence.py": {
+      "tool_sha256": "246932557a8ca15b4e1d05c8c6066e1b6ffedbb06697af06f33309780e1af99c",
+      "source_sha256": "246932557a8ca15b4e1d05c8c6066e1b6ffedbb06697af06f33309780e1af99c",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/operational_diagnostics.py": {
+      "tool_sha256": "d6528d5ce143388effc3d014f2fe7c75861e0152343d46a6cf162c28b9a9cbe4",
+      "source_sha256": "d6528d5ce143388effc3d014f2fe7c75861e0152343d46a6cf162c28b9a9cbe4",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/owned_python_job.py": {
+      "tool_sha256": "0ba0b1cca145e5ed442a19ace9c706cd034acd717b65589e03cb64c311944ec5",
+      "source_sha256": "0ba0b1cca145e5ed442a19ace9c706cd034acd717b65589e03cb64c311944ec5",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/probe_diagnostics.py": {
+      "tool_sha256": "890443bdcd8199c943a68aa5e1c49449410c6e2d7b273a8fa1c49837eb709259",
+      "source_sha256": "890443bdcd8199c943a68aa5e1c49449410c6e2d7b273a8fa1c49837eb709259",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/process_limits.py": {
+      "tool_sha256": "13bed5774330dd1969a6732cce6535a7514a4eb5fd9f6ac037c8897824815127",
+      "source_sha256": "13bed5774330dd1969a6732cce6535a7514a4eb5fd9f6ac037c8897824815127",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/process_runner.py": {
+      "tool_sha256": "417f553d0f3a10a4128aeb96c99692e4a44a89b48c7e3758b995089c1d9eea31",
+      "source_sha256": "417f553d0f3a10a4128aeb96c99692e4a44a89b48c7e3758b995089c1d9eea31",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/resource_reservations.py": {
+      "tool_sha256": "7f14953fb1527fbb7ee992a0c4499be65c3ca232652a569369313f74dd8c1b97",
+      "source_sha256": "7f14953fb1527fbb7ee992a0c4499be65c3ca232652a569369313f74dd8c1b97",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/runtime.py": {
+      "tool_sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4",
+      "source_sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/static_archive_cleanup.py": {
+      "tool_sha256": "3186e66808ff58f25b801db8e9cc785545eb38e0344d7b43080739031fc963a2",
+      "source_sha256": "3186e66808ff58f25b801db8e9cc785545eb38e0344d7b43080739031fc963a2",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/training_capacitance_history.py": {
+      "tool_sha256": "14fe9c654ae96fa5eeace3b1697f87322a61e882efe0730bc64994d0fed28f77",
+      "source_sha256": "14fe9c654ae96fa5eeace3b1697f87322a61e882efe0730bc64994d0fed28f77",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/training_capacitance_witness.py": {
+      "tool_sha256": "a36300eefee510d62af9bd62afdec0c3ad2782f7f104bf1a258ff61aa8d1e7db",
+      "source_sha256": "a36300eefee510d62af9bd62afdec0c3ad2782f7f104bf1a258ff61aa8d1e7db",
+      "byte_identical": true
+    },
+    "Scripts/StructTrain/TimeLearner/validation.py": {
+      "tool_sha256": "1d83eb8a66472d63bb8ccd373e4273d966c1820ce6b0732afe40ed5ea4ac1bd0",
+      "source_sha256": "1d83eb8a66472d63bb8ccd373e4273d966c1820ce6b0732afe40ed5ea4ac1bd0",
+      "byte_identical": true
+    }
+  },
+  "static_external_import_roots": [
+    "__future__",
+    "argparse",
+    "bisect",
+    "contextlib",
+    "copy",
+    "csv",
+    "dataclasses",
+    "gzip",
+    "hashlib",
+    "io",
+    "json",
+    "math",
+    "os",
+    "pathlib",
+    "re",
+    "shutil",
+    "signal",
+    "socket",
+    "sqlite3",
+    "stat",
+    "struct",
+    "subprocess",
+    "sys",
+    "threading",
+    "time",
+    "traceback",
+    "typing",
+    "unittest",
+    "uuid",
+    "zlib"
+  ],
+  "validation_cpp_dependencies": [],
+  "required_interpreter": "/usr/bin/python3.12",
+  "required_runtime_modules": "Python standard library; no Qt/native SDK/build/NumPy/plot runtime is requested",
+  "fixture_original": {
+    "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "path": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+    "files": 157,
+    "bytes": 74969578,
+    "fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+    "access": "read",
+    "reextract_or_rewrite": false
+  },
+  "evidence_reuse": {
+    "prior_tool_actual7_receipt": "1f1e8a5ef47abd4d7d644748ddc5a8624f3f0e75",
+    "scope": "unchanged ToolCEC maintained production action only; new reader source/import/suite remain fresh checks"
+  },
+  "preflight_required": [
+    "M40 hostname and interpreter exact executable identity",
+    "ToolCEC HEAD/clean/all Scripts bytes unchanged",
+    "fresh source1292 HEAD/clean/all Scripts Git bytes and452-package fingerprint",
+    "suite/request exact Git blob SHA",
+    "fixture157 regular/no symlink files exact unchanged SHA/FP before and after",
+    "new plan/source/job canonical paths absent before prep",
+    "MemAvailable >= memory cap plus256MiB",
+    "disk free >= floor512MiB plus output128MiB; sourceprep usesfloor768MiB and128MiB projection cap",
+    "read/write resource lease conflict check; capacity-null limitation recorded; no registry metadata changes",
+    "no overlapping existing native metadata19/future33 sources/runtime paths",
+    "same-SDK validation imports originate from fresh source1292, not ToolCEC",
+    "source remains Scripts-only/no SDK materialization; no numeric local execution"
+  ],
+  "nonidentical_dependency_scope": {
+    "path": "Scripts/StructTrain/TimeLearner/contained_runner.py",
+    "delta": "source1292 forwards TIMELEARNER_COMPOSITE_OUTPUT; actual owned-job runner remains unchanged ToolCEC",
+    "no_native_invocation_from_53": true
+  },
+  "runtime2_contract": {
+    "Pulse": "073869082041e3f66a3f6bfb3c69b84b4d1276f6",
+    "Cpp_runtime2_sha256": "194f2ba0a32d9b3f4bf582ba2836e4e7def68f49d781e2c5d3e938703c73118d",
+    "scope": "field/cursor contract source only; no native runtime dependency in73"
+  }
+}
