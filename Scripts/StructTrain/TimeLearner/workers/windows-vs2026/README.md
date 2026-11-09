@@ -69,3 +69,21 @@ unrelated applications to make admission pass. Kernel closure, loaded DLL
 identity, exact test inventory and original negative evidence remain required.
 These checks target the root818/Pulse3acc snapshot, not the newer FCC matched-
 omission implementation. They do not certify complete scientific experiments.
+
+## Exact private SDK preparation
+
+`GitPreparation.psm1` and `verify-sdk.ps1` validate an explicitly declared root
+commit, its actual submodule closure and the complete physical source namespace
+from a Git blob. They reject extra files, changed bytes, missing repositories and
+reparse directories. `Complete-PreparedGitClone` only completes an unborn clone
+inside `C:/Projects/TimeLearnerWorker`; it refuses an existing checkout and reads
+long sparse specifications from Git blobs rather than a command-line JSON value.
+Native exit codes must equal zero, including signed Windows failures. PowerShell
+5.1 native stderr records are diagnostics, never part of an OID/JSON return value.
+
+Run `test-git-preparation.ps1` with fresh `-OutputDirectory`, `-SdkRoot`,
+`-SdkCommit` and `-SdkNamespaceBlob`. The actual .14 package6 preparation passed
+11 checks, including 4052 SDK files/eight repositories and a 322-pattern fixture;
+the two preceding negative attempts remain in the report. See
+`Docs/StructTrain/TimeLearner/WindowsPackage6SDKPreparation-20261109.ru.md`.
+These checks do not compile C++, run a model, or admit a scientific worker.
