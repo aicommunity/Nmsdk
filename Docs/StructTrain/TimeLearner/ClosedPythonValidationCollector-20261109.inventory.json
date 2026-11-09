@@ -3,30 +3,30 @@
   "schema_version": 1,
   "status": "source_only_not_executed",
   "base_root": "a5e028517452ed421bbabe795b741ef7e7e1b379",
-  "source_commit": "resolve_from_following_source_commit",
+  "source_commit": "resolve_from_following_test_only_source_commit",
   "source_files": {
     "Scripts/StructTrain/TimeLearner/closed_python_validation.py": {
-      "git_blob": "365c23fcaddbb3562c50993f20cd0e7c9f1f1be6",
       "mode": "100644",
+      "git_blob": "365c23fcaddbb3562c50993f20cd0e7c9f1f1be6",
       "bytes": 43434,
       "sha256": "c991b51e4f3a15146d9060c377a4874b822f3c537c7dad18dd36bb4f2ebc837a"
     },
     "Scripts/StructTrain/TimeLearner/resource_reservations.py": {
-      "git_blob": "9d7ce3eec4e5f967a9e7cb078a8909e07d2dd97c",
       "mode": "100644",
+      "git_blob": "9d7ce3eec4e5f967a9e7cb078a8909e07d2dd97c",
       "bytes": 28055,
       "sha256": "76b7bedf0ba68f1f3cb20d08e0eeb99fc07e4a76dff66d5b25dfda2d99df876b"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_closed_python_validation.py": {
-      "git_blob": "9c646b1b9b1118b2429b1679ee4cc5950b35416f",
       "mode": "100644",
-      "bytes": 19280,
-      "sha256": "a0f0a534581a5293df0a5b1a995bc0655e3032079a809c4b8ccb4f385c48791c"
+      "git_blob": "fa55fe836470d6acae40d65deebb6c36876f0f56",
+      "bytes": 19295,
+      "sha256": "5b5eba37671f543a6f2ed8a89281110217248e22d92a961d2a802c18e7038beb"
     }
   },
   "Scripts_files": 637,
   "package_Python_files": 446,
-  "package_fingerprint": "f4be7a0f06f2e2fd32a67b4035f74c161464c16d365f1c48ae47092f0bd6d329",
+  "package_fingerprint": "bdcf216712beaa7c0bb964e1b6996cd0d9244ed99f6039250234504668a2624e",
   "cohorts": {
     "Scripts.StructTrain.TimeLearner.tests.test_closed_python_validation": 28,
     "Scripts.StructTrain.TimeLearner.tests.test_resource_reservations": 15,
@@ -131,11 +131,25 @@
     "SourceTool": "accepted ToolCEC separate from new validation source",
     "required_outcome": "all66 actual IDs, zero failures/errors/skips, source before/after, exact owned kernel closure and released resource lease",
     "dispatch_state": "not_dispatched",
-    "requires_Root_source_and_resource_review": true
+    "requires_Root_source_and_resource_review": true,
+    "suite_id": "closed-python-validation-collector66-a2"
   },
   "next_real_integration": {
     "positive_closed40": "production CLI after metadata source/gate review; extra18path observers opaque; separate Root kernel proof",
     "negative_closed73": "production CLI after metadata source/gate review; preserve original72+1/failurediagnostics/controller1/workerfalse; no rerun",
     "real40_or73_accepted_by_synthetic_tests": false
+  },
+  "negative_A1_history": {
+    "source": "382180add59275c9c8bcc449a973cc0577015918",
+    "plan": "5d64cf11535ff28443f335c10194c2713c49897c",
+    "actual": {
+      "executed": 66,
+      "passed": 65,
+      "errors": 1,
+      "failures": 0,
+      "skipped": 0
+    },
+    "test_only_fix": "spy positional database parameter renamed; uri=True kwargs preserved",
+    "raw_readback_sha256": "20e7c30f5957e71dad0b8f9d07bcbe8f83fd7279cc5b75c10c5392b32f53c2ea"
   }
 }

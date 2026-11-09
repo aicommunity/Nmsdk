@@ -239,8 +239,8 @@ class ReadonlyReservationsSnapshotTest(unittest.TestCase):
             lease = registry.reserve('synthetic',[{'path':str(root/'owned'),'access':'write'}],ttl_seconds=60)
             registry.release(lease['token'],note='synthetic metadata only')
             original = sqlite3.connect;statements = [];uris = []
-            def connect(uri,*args,**kwargs):
-                uris.append(uri);connection = original(uri,*args,**kwargs);connection.set_trace_callback(statements.append);return connection
+            def connect(database,*args,**kwargs):
+                uris.append(database);connection = original(database,*args,**kwargs);connection.set_trace_callback(statements.append);return connection
             before = db.read_bytes()
             with mock.patch.object(Reservations,'_transaction',side_effect=AssertionError('writer forbidden')):
                 with mock.patch.object(sqlite3,'connect',side_effect=connect):view = Reservations.read_snapshot(db)
