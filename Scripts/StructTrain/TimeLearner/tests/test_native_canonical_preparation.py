@@ -184,11 +184,25 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
         owned_python_job.validate_request(request)
         request['operation']['command']='arbitrary'
         with self.assertRaises(ValueError):owned_python_job.validate_request(request)
-        rows=subject.resources(self.plan,self.case/'owner-job')
+        separate=self.case/'separate-plan';separate.mkdir()
+        rows=subject.resources(self.plan,self.case/'owner-job',separate/'plan.json')
         self.assertIn({'path':str(self.external),'access':'write'},rows)
+        self.assertIn({'path':str(separate),'access':'read'},rows)
         self.assertIn({'path':str(self.sdk),'access':'read'},rows)
         self.assertNotIn({'path':str(self.sdk),'access':'write'},rows)
         self.assertTrue(all(not str(r['path']).endswith('.json') for r in rows))
+
+    def test_original_plan_and_control_bytes_are_refrozen_before_publication(self):
+        raw=encode(self.plan);path=self.controls/'plan.json';path.write_bytes(raw)
+        before=subject.capture_inputs(self.plan,path,digest(raw))
+        self.assertIn(str(path),before);self.assertIn(str(self.controls/'cohort.json'),before)
+        changed=self.controls/'cohort.json';old=changed.read_bytes();changed.write_bytes(old+b' ')
+        with self.assertRaisesRegex(ValueError,'canonical_input_changed'):
+            subject.capture_inputs(self.plan,path,digest(raw))
+        changed.write_bytes(old);path.write_bytes(raw+b' ')
+        with self.assertRaisesRegex(ValueError,'canonical_plan_changed'):
+            subject.capture_inputs(self.plan,path,digest(raw))
+        self.assertFalse(self.external.exists());self.assertFalse(self.controller.exists())
 
 
 if __name__=='__main__':unittest.main()

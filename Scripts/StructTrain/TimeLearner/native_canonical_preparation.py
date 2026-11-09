@@ -105,11 +105,23 @@ def validate_plan(plan):
             'controller':controller,'output':output,'reads':reads,'prior':prior}
 
 
-def resources(plan, job_directory):
+def resources(plan, job_directory, plan_path):
     state=validate_plan(plan)
-    rows=[{'path':str(p),'access':'read'} for p in [ROOT,*state['reads']]]+[
+    plan_parent=_path(str(Path(plan_path).parent))
+    _,require,_=_api();require(plan_parent.is_relative_to(state['base']),'canonical_plan_outside_workspace')
+    rows=[{'path':str(p),'access':'read'} for p in [ROOT,plan_parent,*state['reads']]]+[
         {'path':str(state['output']),'access':'write'},{'path':str(job_directory),'access':'write'}]
     return list({(r['path'],r['access']):r for r in rows}.values())
+
+
+def capture_inputs(plan, plan_path, plan_digest):
+    """Re-freeze original control bytes, including a separately stored plan."""
+    provenance,require,_=_api();raw,_=provenance._frozen(Path(plan_path),1024**2)
+    require(_hash(raw)==plan_digest and provenance._json(raw)==plan,'canonical_plan_changed')
+    records={str(plan_path):_hash(raw)}
+    for binding in [plan['source']['namespace'],plan['cohort'],plan['native_job'],*plan['prior_bindings']]:
+        _,raw,_=_binding(binding);records[binding['path']]=_hash(raw)
+    return records
 
 
 def verify_namespace(source, expected):
@@ -197,9 +209,10 @@ def produce(plan, plan_path, plan_digest, output, registry, token, guard, emit):
     rows=[r for r in Reservations.read_snapshot(registry.path)['leases'] if r['token']==token]
     require(len(rows)==1 and rows[0]['state']=='held' and rows[0]['owner']['pid']==os.getpid(),
             'canonical_not_owned_worker')
-    required=resources(plan,Path(output).parent)
+    required=resources(plan,Path(output).parent,plan_path)
     require(all(any(v['canonical_path']==r['path'] and v['access']==r['access'] for v in rows[0]['resources']) for r in required),
             'canonical_lease_resources_changed')
+    inputs_before=capture_inputs(plan,plan_path,plan_digest);emit('canonical-inputs-before.json',inputs_before)
     for path,binding,_ in state['prior']:
         observed=inspect(Path(path).parent)
         require(observed['all_processes_closed'] and observed['binding']==binding,'canonical_prior_not_closed')
@@ -234,6 +247,8 @@ def produce(plan, plan_path, plan_digest, output, registry, token, guard, emit):
         require(relative in namespace and row['sha256']==namespace[relative]['sha256'] and
                 row['git_blob']==namespace[relative]['git_blob'],'canonical_child_module_changed')
     require(result['configure_arguments']==state['configure'],'canonical_child_configure_changed')
+    inputs_after=capture_inputs(plan,plan_path,plan_digest);emit('canonical-inputs-after.json',inputs_after)
+    require(inputs_after==inputs_before,'canonical_inputs_changed_during_preparation')
     guard();registry.validate_paths(token)
     state['output'].mkdir(exist_ok=False)
     (state['output']/'canonical-preparation.json').write_bytes(canonical)

@@ -203,7 +203,7 @@ def _worker(request_path):
         resources = _validation_resources(operation, job)
     elif operation['kind']=='native-canonical-preparation':
         from .native_canonical_preparation import resources as canonical_resources
-        resources=canonical_resources(_pinned(operation['plan']),job)
+        resources=canonical_resources(_pinned(operation['plan']),job,operation['plan']['path'])
     token = None;stop = threading.Event();errors = [];thread = None;passed = False;before = None
     def emit(name, value):
         _write(output/name, value)
