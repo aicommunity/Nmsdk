@@ -1,0 +1,39 @@
+# Разделение экспортируемой модели и её текущей динамики
+
+## Что воспроизведено
+
+Одиночный Classic roundtrip на Root22ac72921219310cebf5bfcb8d9fac6ffbc79bad/Pulsef1 завершился **1 выполнено/0PASS/1FAIL**,223.045s, без OOM. Оба targets собраны. Supervisor2944218 и outeraef990e5 завершены, единственный child закрыт; original sources/build/runtime/outputs сохранены. Это реальный отрицательный результат со штатным JUnit, не переоценка прежнего неполного cohort31.
+
+[Полный исходный JUnit и field differences](../../../Reports/StructTrain/TimeLearner/s07-package6-rest-state-cause-root-observation/terminal-junit-and-differences.json) выявили восемь различий, без truncation: dataset/native_xml и его digest; neuron/graph/native_xml и его digest; snapshot/native_xml и digest class_definitions[13]; neuron archive digest и package digest. Все остальные поля пакета совпали, включая model identities, связи, параметры, references, certificate, runtime plan и measurement archive.
+
+**Native XML neuron и DatasetMatrix после import побайтно совпал с initial rest snapshot этого же обучения.** В этой конкретной fixed fixture исходная и конечная физические revisions равны; это установлено измерением, не является общим требованием к обучению. [Hash proof](../../../Reports/StructTrain/TimeLearner/s07-package6-rest-state-cause-root-observation/initial-rest-hash-proof.json) связывает actual diff с original source_binding. [XML comparison](../../../Reports/StructTrain/TimeLearner/s07-package6-rest-state-cause-root-observation/initial-vs-trained-xml-comparison.json) показывает остаточные потенциалы, выходы синапса, SumChannelInput и другие динамические состояния. Rest включает ненулевой channel output−1; обнуление всех каналов было бы ошибкой. Для class definition наблюдалось отдельное изменение XML приватного image instance после native initialization/reuse; корректность общего исправления ещё должна быть проверена.
+
+## Изменение реализации
+
+Candidate Pulse **c8d73222c0660bce92dafe51ea11afbda43ecc39**, отдельная ветка codex/timelearner-rest-state-archive, изменяет ModelArchive.cpp:
+
+1. Snapshot живого графа сохраняется для штатной native reconstruction приватного экземпляра.
+2. Приватный экземпляр проходит native Init/Reset через operation ledger; Build/Reset bool не используются как ошибки.
+3. RequireMatch строго сравнивает исходную и полученную физическую identity: каждый индивидуальный параметр, child class, частоту, граф и binding. Любое стирание обученных Rs/C или heterogeneity приводит к отказу.
+4. В модельный архив с уже объявленным dynamic_checkpoint=false попадает XML native rest state приватного экземпляра. Живой нейрон и стимульный генератор не сбрасываются.
+5. DatasetMatrix экспортируется тем же private rest путём. Приватные storage-image instances явно Reset после Init: TakeObject может вернуть уже initialized pool object, для которого Init сам по себе не устанавливает свежую динамику. Shared prototype не изменяется, Default не добавляется.
+
+```text
+live native snapshot + complete physical identity
+    -> private native Load/Init
+    -> native Reset of private object
+    -> strict physical identity equality
+    -> serialize native rest state
+```
+
+Это не mid-probe checkpoint и не маскировка несовпадения whitelist-обнулениями. Существующие schema1/2 readers продолжают принимать исторические native XML; новые exports имеют native rest representation. Сопоставление immutable модели и научной идентичности использует полный физический fingerprint. Исторические package bytes не переписываются. Нужен отдельный контроль совместимости старых пакетов после изменения representation; exact byte equality старого динамического payload и нового rest payload не обещается как миграция.
+
+В integration helper ActualWindowPackage добавлена проверка полного native SaveComponent живого нейрона и DatasetMatrix до/после export. Она выполняется на реальных завершённых/остановленных package fixtures, а не на копии production функции. Строгое package roundtrip EXPECT_EQ сохранено. Изменение **пока не собрано и не проверено runtime**; frozen отрицательный Root22ac не менялся. Перед приёмкой нужны Classic/Branch, C0/asymmetric, warm/stopped/partial, все model archive/ports/storage regressions, actual reader16 и Console cold7 Train→Test.
+
+## Дополнительные worker ограничения
+
+Windows Root4eb/Pulsef1 скомпилирован и слинкован с main returncode0. Оба PE существуют: Console12060672bytes/SHA bac00b2e6c56fb5c7c81f3ba018fed4e13201e4cc08ad79993f4caab51bd6d84; StorageComponents24581632bytes/SHA02a020423d1dce16a699a08fcc4410e942709d4896f0cd91afdcc74085e571ce. Повторно сверены все4067 SDK files/8 HEAD: tracked clean/no alternates. Прежний MSVC optional C0 assert устранён на уровне compile/link; runtime C0 present/warm ещё не принят.
+
+**Исходный Windows job остаётся отрицательным:** execution=descendants_remaining, descendant9768 при выходе main, all_processes_closed=true после owned cleanup;2179.851s, peak committed Job memory2232799232bytes. Task instances0/MainPID16152 missing. [Readback](../../../Reports/StructTrain/TimeLearner/s07-package6-rest-state-cause-root-observation/windows-postbuild-source-and-pe.json). Тип/назначение9768 не установлен и не называется бездоказательно harmless helper. Shared dependency after-inventory не выполнен исходным driver из-за раннего отказа; original build_accepted=false не меняется. До повторного использования runtime нужны отдельная frozen-source/dependency/runtime проверка и реальные owned tests; не расширять generic executor правилом «любой orphan при exit0 допустим».
+
+На Elder свободно2.4GiB, held leases и активных compiler tools при проверке не найдено. Три крупных source copies не содержат CMake .o candidates; все13 build-* суммарно малы относительно source/readbacks. [Read-only inventories](../../../Reports/StructTrain/TimeLearner/s07-package6-rest-state-cause-root-observation/elder-space-inventory.json). Ни исходники, ни уникальные данные, ни непроверенные каталоги не удалены. Для новой полной сборки Elder требуется дополнительное место. M40 продолжает быть основным работающим native worker; обе обязательные Linux-проверки полного плана сохраняются.
