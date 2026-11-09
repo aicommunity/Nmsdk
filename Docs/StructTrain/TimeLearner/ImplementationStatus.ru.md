@@ -1,5 +1,12 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+## Уточнение последней проверки 09.11
+
+Последняя попытка A3 на Root `f015db2d4f6ac8c239e07c050ff596524604060c` / Pulse `f7a0e3e63ec29d4647790a695606d1ca32164ef3` завершилась ошибкой компиляции test TU: **0/37 tests, 0 leaf**. Pulse library скомпилирована; девять compiler errors имеют две причины: protected getter в тестовом коде и два EXPECT_THROW на одной строке. Root повторно прочитал terminal и kernel state: MainPID=0, пустой ControlGroup, тот же invocation; полный compiler log совпал по SHA256. [Снимок Root и полный сжатый журнал](../../../Reports/StructTrain/TimeLearner/s07-cold-envelope-manual-corrected-m40-a3-root-observation/terminal-observation.json.gz). Это не scientific FAIL модели и не PASS нового контроллера. Отрицательная публикация `f2a16f8f66814fa2ce064434eb0d1ea4130bd659` доступна в origin; её независимая приёмка ещё выполняется. Следующее исправление ограничено test TU, production protected API не расширяется.
+
+A3 использовала закрытый build-cache A2 после отдельной проверки сохранности; runtime A3 новый. Это incremental build, а не новая чистая сборка. Исходные A1/A2 observations сохраняются; абзацы ниже про их RUNNING/«ещё не собрана» являются историческими снимками, не текущим состоянием.
+
+
 **Полностью принят только исходный этап 0. Этапы 1–12 выполнены частично.**
 
 ## Последнее подтверждённое состояние09.11
