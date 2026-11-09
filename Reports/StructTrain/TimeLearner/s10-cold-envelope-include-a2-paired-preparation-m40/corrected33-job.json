@@ -1,0 +1,718 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "preparation": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-cold-envelope-canonical-m40-a2/canonical-preparation.json",
+  "paths": {
+    "source": "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a2",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-cold-envelope-manual-corrected-m40-a2",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-cold-envelope-manual-corrected-m40-a2",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a2",
+    "resources": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+    "framework": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+  },
+  "build": {
+    "type": "RelWithDebInfo",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address -fno-omit-frame-pointer",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=-fsanitize=address",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=-fsanitize=address",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "RDK_USE_LLM:BOOL=ON",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=ON",
+      "RDK_LLM_LLAMA_CPP_DIR:PATH=/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 21600,
+    "leaf_memory_bytes": 4294967296,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 536870912,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 17179869184
+  },
+  "asan_options": "detect_leaks=0",
+  "protected_runtimes": [
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a3",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cold6-m40-asan-a4",
+    "/media/user/Data/TimeLearnerRefactor/source-manual-control-corrected-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/source-manual-control-unfixed-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+    "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-unfixed-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/build-cold-envelope-manual-corrected-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-s07-cold-envelope-manual-corrected-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1-container"
+  ],
+  "artifacts": [
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/original-roundtrip/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold6-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/classic-cold7-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/classic/declaration-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/original-roundtrip/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold6-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-3/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/branch-cold7-envelope/base-4/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/initial-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/cold7-native-initial-declarations/branch/declaration-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/console-envelope-owned/base-1/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native-composite/console-envelope-owned/base-2/producer-wire.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-common-policy/original-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-common-policy/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-common-policy/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-reference-window/original-configuration.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-reference-window/after-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native-composite/cold7-native-initial-declarations/wrong-reference-window/boundary-math.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "common-codec-11/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "cold7-declaration-guards-2/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-01/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-01/native-composite/classic-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-02/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-02/native-composite/branch-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-window-live-authority/own-next-group/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native-composite/classic-window-live-authority/own-next-group/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-03/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-04/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-window-live-authority/own-next-group/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-04/native-composite/branch-window-live-authority/own-next-group/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-04/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-05/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-05/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-05/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-05/native-composite/classic-window-control-lifetime/failed-begin/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-06/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-06/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-06/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-06/native-composite/branch-window-control-lifetime/failed-begin/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-07/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-07/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-07/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-07/native-composite/classic-window-control-lifetime/scalar3-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-08/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-08/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-08/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-08/native-composite/branch-window-control-lifetime/scalar3-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-09/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-09/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-09/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-09/native-composite/classic-window-control-lifetime/fixed4-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-10/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-10/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-10/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-10/native-composite/branch-window-control-lifetime/fixed4-takeover/actual-authority-boundary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/classic-window-live-authority/foreign-finished/after-new-token-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-11/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-12/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-window-live-authority/foreign-finished/live-authority-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-window-live-authority/foreign-finished/old-manual-journal/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/branch-window-live-authority/foreign-finished/after-new-token-observation.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-12/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-13/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-13/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-13/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-13/native-composite/classic-window-control-lifetime/own-edit/actual-owned-edit.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-13/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-14/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-14/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-14/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-14/native-composite/branch-window-control-lifetime/own-edit/actual-owned-edit.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-14/native-composite/**/certificate3.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-15/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-15/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-15/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-15/native-composite/classic-window-control-lifetime/open-arm/actual-open-arm.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-16/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-16/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-16/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-16/native-composite/branch-window-control-lifetime/open-arm/actual-open-arm.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-17/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-17/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-17/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-17/native-composite/classic-window-control-lifetime/before-queue/actual-before-queue.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-18/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-18/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-18/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-18/native-composite/branch-window-control-lifetime/before-queue/actual-before-queue.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-19/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-19/native-composite/classic-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-19/native-composite/classic-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-19/native-composite/classic-window-control-lifetime/no-actor-interrupt/actual-public-interrupt.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-20/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "manual-r20-20/native-composite/branch-native-window5/**/window5-boundary.json",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-20/native-composite/branch-native-window5/**/*.csv",
+      "minimum": 1,
+      "maximum": null
+    },
+    {
+      "glob": "manual-r20-20/native-composite/branch-window-control-lifetime/no-actor-interrupt/actual-public-interrupt.json",
+      "minimum": 1,
+      "maximum": 1
+    }
+  ]
+}
