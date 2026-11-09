@@ -23,7 +23,9 @@ function Invoke-CheckedGit {
     }
     if ($null -eq $code) { throw 'Git did not supply a native exit code' }
     Assert-NativeExitCode $code ('git '+($ArgumentList -join ' '))
-    return @($lines | ForEach-Object { $_.ToString() })
+    # Stderr diagnostics must never become part of a parsed OID or JSON blob.
+    return @($lines | Where-Object { $_ -isnot [System.Management.Automation.ErrorRecord] } |
+        ForEach-Object { $_.ToString() })
 }
 
 function Get-PrivateSdkPath {
