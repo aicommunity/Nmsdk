@@ -560,14 +560,14 @@
     {
       "job_id": "s07-cold-envelope-manual-corrected-m40-a2",
       "host": "M40",
-      "state": "running_build_no_tests_confirmed",
+      "state": "build_failed_zero_tests_negative_evidence_pending",
       "root": "807da9b50835f4da61cda1e069d3b4d7e750b8c8",
       "pulse": "637b7fb6b66df242f9b7383ce179aa543ca45aed",
       "expected_cpp_cases": 33,
       "expected_leaf_gates": 22,
       "required_primary_rules": 130,
       "compiled_inventory_known": false,
-      "completed_cases": null,
+      "completed_cases": 0,
       "control_evidence_commit": "e3dd5f78b8297ed7cdf6f4f7441193569b3a1eec",
       "canonical_raw_sha256": "070dde0adce34a44ecbcef5db081d406df682a2c3bdd1f4ee3374edcccf24e80",
       "job_raw_sha256": "c00b66fb35e2b25805e7fdffb00fb7c2050ad1d3cbd90e786d1f673fdb57aa0f",
@@ -578,12 +578,19 @@
       "binding_sha256": "b0be57dd54d74ba7966818fe525e3d6fbec81b150e2b83621477661cde6268d7",
       "kernel_request_sha256": "e8143305f6914f4c0dd5aa26c07797248eb00bc0646a54e1ce8daa969ebfc209",
       "reservation_token": "54f4272d-0020-48e5-8487-c5b6bd74a274",
-      "observed_unix": 1794213229.9826908,
+      "observed_unix": 1794213837.4698393,
       "runtime_accepted": false,
       "scientific_verdict": null,
       "previous_attempt": "s07-cold-envelope-manual-corrected-m40-a1",
       "production_delta": "single owning evidence header include",
-      "launch_report": "ColdEnvelopeLifetime33Launch-20261109.ru.md"
+      "launch_report": "ColdEnvelopeLifetime33Launch-20261109.ru.md",
+      "executed_leaf_gates": 0,
+      "kernel_all_processes_closed": true,
+      "reservation_state": "released",
+      "compiler_errors": [
+        "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a2/Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp:401:77: error: no match for ‘operator==’ (operand types are ‘QJsonObject’ and ‘QJsonValueRef’)"
+      ],
+      "source_only_compile_fix": "de26c3b475a406e02fc9a908953879984681590b"
     }
   ],
   "prepared_feature": {
