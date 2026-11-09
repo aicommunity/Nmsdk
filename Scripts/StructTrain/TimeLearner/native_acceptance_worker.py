@@ -384,6 +384,23 @@ class Worker:
         self.guard()
         name, ids = leaf["name"], leaf["expected_ids"]
         _require(name and all(c.isalnum() or c in "_.-" for c in name) and name not in (".", ".."), "leaf_name")
+        def progress(status, result=None, observation_error=None, validation_reason=None):
+            result = result or {}
+            self.write("progress.json", {
+                "kind":"timelearner_native_cohort_progress", "schema_version":2,
+                # Retain the old assertion-count field; it is not job admission.
+                "passed_cases":len(self.passed), "completed_cases":len(self.observed),
+                "failed_test_ids":list(self.failed), "completed_leaf_gates":self.gates,
+                "current_gate":name, "current_gate_status":status,
+                "current_gate_execution":result.get("execution"),
+                "current_gate_validity":result.get("validity"),
+                "current_gate_assertion_status":result.get("assertion_status"),
+                "current_gate_reason":result.get("reason"), "observation_error":observation_error,
+                "validation_reason":validation_reason,
+                "expected_cases":len(self.expected), "scientific_verdict":None})
+        # A previous accepted leaf must not remain the apparent current leaf
+        # if runtime capture or the next native invocation fails.
+        progress("running")
         manifest = self.out/(name+"-runtime.json")
         self.write(manifest.name, self.api[0].snapshot(self.source, self.runtime/"Test_PulseLib_StorageComponents",
             self.runtime/"NeuroModelerConsole.ini", self.paths["build"]/"CMakeCache.txt"))
@@ -416,17 +433,23 @@ class Worker:
             "unobserved_expected_ids":[case for case in ids if case not in actual],
             "gate_execution":result.get("execution"), "gate_validity":result.get("validity"),
             "gate_reason":result.get("reason"), "scientific_verdict":None})
-        _require(result["validity"] == "valid" and result["assertion_status"] == "passed" and inventory and
-                 inventory["observed"] == len(ids) and not inventory["failed_test_ids"],
-                 "native_gate_rejected:"+name+":"+str(result.get("execution"))+":"+
-                 str(result.get("validity"))+":"+str(result.get("reason")))
-        _require(observation_error is None, "native_JUnit_unreadable:"+name)
-        request = json.loads((self.out/name/"process/contained/request.json").read_bytes())
-        _require(request["environment"]["TIMELEARNER_COMPOSITE_OUTPUT"] == str(self.out/name/"native-composite"),
-                 "native_output_route_changed")
-        _require(set(actual) == set(ids) and not incomplete and not failed, "actual_JUnit_selection_mismatch")
-        self.write("progress.json", {"passed_cases":len(self.passed), "closed_leaf_gates":self.gates,
-            "current_gate":name, "expected_cases":len(self.expected)})
+        # Preserve real completed/failed IDs before any rejecting assertion.
+        # The final accepted update follows every gate/XML/route validation.
+        progress("checking", result, observation_error)
+        try:
+            _require(result["validity"] == "valid" and result["assertion_status"] == "passed" and inventory and
+                     inventory["observed"] == len(ids) and not inventory["failed_test_ids"],
+                     "native_gate_rejected:"+name+":"+str(result.get("execution"))+":"+
+                     str(result.get("validity"))+":"+str(result.get("reason")))
+            _require(observation_error is None, "native_JUnit_unreadable:"+name)
+            request = json.loads((self.out/name/"process/contained/request.json").read_bytes())
+            _require(request["environment"]["TIMELEARNER_COMPOSITE_OUTPUT"] == str(self.out/name/"native-composite"),
+                     "native_output_route_changed")
+            _require(set(actual) == set(ids) and not incomplete and not failed, "actual_JUnit_selection_mismatch")
+        except BaseException as error:
+            progress("rejected", result, observation_error, str(error))
+            raise
+        progress("accepted", result)
 
     def final_captures(self, runtime_before, frozen, before_source, closure):
         """Attempt every independent observation even if an earlier one fails."""
