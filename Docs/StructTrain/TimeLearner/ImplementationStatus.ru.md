@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Native119: свежая SDK доставлена и supervisor запущен](NativePackage6-119Launch-20261109.ru.md):4050 Git-verified files/8repos, canonical completed0/29 same-SDK imports; точный cohort119/42leaves. Новая сборка включает Console и integration target. Native результата ещё нет; maintained gitlinks прежние, scientific acceptance отсутствует.
+
 [Package6 reader34 завершён](Package6Reader34Outcome-20261109.ru.md):34/34 PASS на M40, Source/Tool unchanged, исходный completed/0 и последующее отсутствие bound group подтверждены, собственный lease released. Это metadata/DATA проверки, без actual C++ corpus и без научного допуска. Native package6/summary7/execution4 реализованы в отдельной feature-ветке, ещё не приняты сквозной сборкой и Train→Test; поддерживаемые gitlinks не изменены. Ниже сохранены последовательные исторические снимки; их формулировки «ещё не запущен/не опубликован» не заменяют более поздние результаты выше.
 
 [Negative73 collection принят как сохранение FAIL](Negative73MaintainedCollection-20261109.ru.md):original72PASS/1FAIL неизменен; actualCLI/stage/published5 artifacts/55members independently verified. Это закрывает проверку отрицательного collection, не reader defect и не научный допуск.
