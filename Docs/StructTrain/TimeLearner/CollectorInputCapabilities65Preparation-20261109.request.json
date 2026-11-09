@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-collector-input-capabilities65-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1/suite.json",
+      "sha256": "5cb9219d23178571be3c04569772d1b4db501f8f16de09974112914f49816ed2"
+    },
+    "fixtures": {}
+  }
+}

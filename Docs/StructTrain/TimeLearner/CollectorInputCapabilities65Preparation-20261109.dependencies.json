@@ -1,0 +1,74 @@
+{
+  "kind": "collector_capabilities65_preparation_dependencies",
+  "schema_version": 1,
+  "tool": {
+    "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+    "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+    "Scripts_files": 632,
+    "package_Python_files": 441,
+    "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d"
+  },
+  "validation_source": {
+    "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+    "path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+    "Scripts_files": 635,
+    "package_Python_files": 444,
+    "package_fingerprint": "295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317"
+  },
+  "plan": {
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+    "commit": "resolve from separate docs-only preparation commit"
+  },
+  "actual_source_local_fixtures": [
+    {
+      "mode": "100644",
+      "git_blob": "066f709580d6409625b228b1920a60bd6acfd6a8",
+      "bytes": 25553,
+      "sha256": "39d377049147e2304693f81ce59bd1aba797ed7193a394f824b9176b84c4d15d",
+      "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/collector_provenance/actual-metadata.json.gz"
+    },
+    {
+      "mode": "100644",
+      "git_blob": "c0c4d03fc4f7cc144e676ff3986e1e235b93153c",
+      "bytes": 2155232,
+      "sha256": "2f986654c3b880b3aaf4235f559dc2326401ee4106ab8e16368dc16e946b3bb5",
+      "path": "Scripts/StructTrain/TimeLearner/tests/fixtures/collector_provenance/source-git-objects.pack"
+    }
+  ],
+  "external_fixture_bindings": {},
+  "expected_tracked_file_reads": 638,
+  "expected_tests": 65,
+  "fresh_job_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-input-capabilities65-m40-a1",
+  "owned_lease_resources": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-input-capabilities65-m40-a1",
+      "access": "write"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "access": "read"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "access": "read"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "access": "read"
+    }
+  ],
+  "preparation_limits": {
+    "maximum_incremental_allocated_bytes": 134217728,
+    "minimum_free_before_bytes": 805306368,
+    "minimum_available_memory_bytes": 805306368
+  },
+  "test_limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240
+  },
+  "no_shared_SDK_source_build_runtime_access": true,
+  "no_TEST_DIR_fixture": true,
+  "TMPDIR_owned_by_existing_worker": true,
+  "status": "prepared_metadata_only_not_dispatched"
+}
