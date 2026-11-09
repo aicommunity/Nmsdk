@@ -631,8 +631,12 @@
       "build_mode": "incremental_after_verified_closed_A2_cache",
       "root_observation": "Reports/StructTrain/TimeLearner/s07-cold-envelope-manual-corrected-m40-a3-root-observation/terminal-observation.json.gz",
       "negative_evidence_commit": "f2a16f8f66814fa2ce064434eb0d1ea4130bd659",
-      "negative_evidence_independently_accepted": false,
-      "reservation_snapshot_note": "Original worker reservation.json is an acquisition snapshot (held); actual final release must be validated from registry/evidence, not inferred from that file."
+      "negative_evidence_independently_accepted": true,
+      "reservation_snapshot_note": "Original worker reservation.json is an acquisition snapshot (held); actual final release must be validated from registry/evidence, not inferred from that file.",
+      "negative_evidence_independent_receipt_sha256": "b673b19b2786fc831f933806665289075e6ae419fba5164404d7ae0f0fd75eed",
+      "reservation_state": "released",
+      "kernel_all_processes_closed": true,
+      "compiled_native_runtime_prepared": false
     }
   ],
   "prepared_feature": {
