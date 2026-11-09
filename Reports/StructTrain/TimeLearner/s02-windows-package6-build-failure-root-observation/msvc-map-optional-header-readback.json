@@ -1,0 +1,34 @@
+{
+    "optional":  {
+                     "sha256":  "3bfc80a64908f77eaba10ec9a1e2c3b0746dd65e993c8c8d636696ada184f683",
+                     "snippets":  [
+
+                                  ]
+                 },
+    "xtree":  {
+                  "sha256":  "867a86f513afabe0258ad0cc697217b09d580179f6a3e2ce7ab9c887ac45a503",
+                  "snippets":  [
+                                   {
+                                       "line":  937,
+                                       "text":  "    _Tree(_Tree\u0026\u0026 _Right)\n        : _Mypair(_One_then_variadic_args_t{}, _Right.key_comp(), // intentionally copy comparator, see LWG-2227\n              _One_then_variadic_args_t{}, _STD move(_Right._Getal())) {\n        _Alloc_sentinel_and_proxy();\n        _Swap_val_excluding_comp(_Right);\n    }\n\n    _Tree(_Tree\u0026\u0026 _Right, const allocator_type\u0026 _Al)\n        : _Mypair(_One_then_variadic_args_t{}, _Right.key_comp(), // intentionally copy comparator, see LWG-2227\n              _One_then_variadic_args_t{}, _Al) {"
+                                   },
+                                   {
+                                       "line":  944,
+                                       "text":  "    _Tree(_Tree\u0026\u0026 _Right, const allocator_type\u0026 _Al)\n        : _Mypair(_One_then_variadic_args_t{}, _Right.key_comp(), // intentionally copy comparator, see LWG-2227\n              _One_then_variadic_args_t{}, _Al) {\n        if constexpr (!_Alnode_traits::is_always_equal::value) {\n            if (_Getal() != _Right._Getal()) {\n                auto _Alproxy     = _STD _Get_proxy_allocator(_Getal());\n                const auto _Scary = _Get_scary();\n                _Container_proxy_ptr\u003c_Alty\u003e _Proxy(_Alproxy, *_Scary);\n                _Tree_head_scoped_ptr\u003c_Alnode, _Scary_val\u003e _Sentinel(_Getal(), *_Scary);\n                _Copy\u003c_Strategy::_Move\u003e(_Right);"
+                                   }
+                               ]
+              },
+    "map":  {
+                "sha256":  "34b79b08daba1489b8506e79a211b3412a0ca3dbd9472c5e5c9cd87b546838b1",
+                "snippets":  [
+                                 {
+                                     "line":  165,
+                                     "text":  "    map(map\u0026\u0026 _Right) : _Mybase(_STD move(_Right)) {}\n\n    map(map\u0026\u0026 _Right, const allocator_type\u0026 _Al) : _Mybase(_STD move(_Right), _Al) {}\n\n    map\u0026 operator=(map\u0026\u0026 _Right) noexcept(_Alnode_traits::is_always_equal::value \u0026\u0026 is_nothrow_move_assignable_v\u003c_Pr\u003e) {\n        _Mybase::operator=(_STD move(_Right));\n        return *this;\n    }\n\n    mapped_type\u0026 operator[](key_type\u0026\u0026 _Keyval) { // find element matching _Keyval or insert value-initialized value"
+                                 },
+                                 {
+                                     "line":  167,
+                                     "text":  "    map(map\u0026\u0026 _Right, const allocator_type\u0026 _Al) : _Mybase(_STD move(_Right), _Al) {}\n\n    map\u0026 operator=(map\u0026\u0026 _Right) noexcept(_Alnode_traits::is_always_equal::value \u0026\u0026 is_nothrow_move_assignable_v\u003c_Pr\u003e) {\n        _Mybase::operator=(_STD move(_Right));\n        return *this;\n    }\n\n    mapped_type\u0026 operator[](key_type\u0026\u0026 _Keyval) { // find element matching _Keyval or insert value-initialized value\n        return _Try_emplace(_STD move(_Keyval)).first-\u003e_Myval.second;\n    }"
+                                 }
+                             ]
+            }
+}
