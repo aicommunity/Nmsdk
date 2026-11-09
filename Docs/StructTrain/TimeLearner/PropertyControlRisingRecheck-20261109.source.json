@@ -1,0 +1,667 @@
+{
+  "kind": "timelearner_property_control_rising_source_receipt",
+  "schema_version": 1,
+  "finding_id": "PROPERTY-CONTROL-RISING-001",
+  "status": "source_only_contract_proposal_no_behavior_change",
+  "base_root": "956443560ebdb788a0642856381c9c6a7a554b76",
+  "Pulse_gitlink": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+  "Rdk_gitlink": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "Rdk_local_HEAD_used_as_source": false,
+  "source_files": [
+    {
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "path": "Core/Engine/UProperty.h",
+      "git_blob": "3576a7a8bdd92503d46ef50a985b565a9cec172b",
+      "bytes": 38699,
+      "sha256": "9855ff9af7408ad50b062dd51075697c4de1ec0378c1467a364871fe316c80ce",
+      "line_count": 1505,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "protected_source_and_null_construction",
+          "first_line": 410,
+          "last_line": 470,
+          "bytes": 2462,
+          "sha256": "11c7cc469d9d1a1e5cfa9867e4afcd7da3787d0fcda9a0f13791b2e6ecdfd09c",
+          "utf8_text": "//friend class OwnerT;\npublic: // Данные\ntypedef const T& (OwnerT::*GetterRT)(void) const;\ntypedef bool (OwnerT::*SetterRT)(const T&);\n\nprotected: // Указатель\n// Указатель геттер-указатель\nGetterRT GetterR;\nSetterRT SetterR;\n\nprotected:\n// --------------------------\nUVBaseDataProperty<T>* ExternalDataSource;\n\nprotected:\n/*Getter(0), Setter(0), */\nbool IsConnectedFlag;\n\n/// Указатель на подключенные выходы\nstd::vector<UIPropertyOutput*> ConnectedOutputs;\n\n/*Getter(0), Setter(0), */\nmutable UVBaseDataProperty<T>* CachedConnectedOutput;\n\nprotected: // Local storage (from UPropertyLocal)\n// -----------------------------\nbool CheckEqualsFlag;\n\n// Привязка внешней ссылки как источника данных\nmutable T v;\n\npublic: // Указатель\n// --------------------------\n// Конструкторы и деструкторы\n// --------------------------\n// Конструктор для свойств без регистрации в компоненте\nUVProperty(OwnerT * const owner, SetterRT setmethod , GetterRT getmethod, bool thread_safe = false) :\n  UVBaseProperty<T, OwnerT>(owner), GetterR(getmethod), SetterR(setmethod), ExternalDataSource(0),\n  IsConnectedFlag(false), CachedConnectedOutput(0), CheckEqualsFlag(true), v()\n{\n if (thread_safe && !this->Mutex)\n  this->Mutex = UCreateMutex();\n}\n\n// Конструктор для свойств с внешними данными\nUVProperty(OwnerT * const owner, T * const pdata, SetterRT setmethod=0, bool thread_safe = false) :\n  UVBaseProperty<T, OwnerT>(owner, pdata), GetterR(0), SetterR(setmethod), ExternalDataSource(0),\n  IsConnectedFlag(false), CachedConnectedOutput(0), CheckEqualsFlag(true), v()\n{\n if (thread_safe && !this->Mutex)\n  this->Mutex = UCreateMutex();\n}\n\n// Конструктор для свойств с регистрацией в компоненте (объединенная функциональность UPropertyLocal)\nUVProperty(const string &name, OwnerT * const owner, unsigned int type, SetterRT setmethod=0, bool thread_safe = false) :\n  UVBaseProperty<T, OwnerT>(owner), GetterR(0), SetterR(setmethod), ExternalDataSource(0),\n  IsConnectedFlag(false), CachedConnectedOutput(0), CheckEqualsFlag(true), v()\n{\n if (thread_safe && !this->Mutex)\n  this->Mutex = UCreateMutex();\n dynamic_cast<UComponent* const>(owner)->AddLookupProperty(name,type,this,false);\n"
+        },
+        {
+          "label": "connected_and_external_GetData",
+          "first_line": 608,
+          "last_line": 702,
+          "bytes": 2591,
+          "sha256": "8b10b3b8098cf8fc36f9c43b8eb3d403de1059964ee96094c8b5246d811dfd78",
+          "utf8_text": "inline const T& GetData(void) const\n{\n // Fast path for unconnected properties (most common case) - ~99% of calls\n#ifndef _MSC_VER\n if (!IsConnectedFlag && !this->ExternalDataSource) [[likely]]\n#else\n if (!IsConnectedFlag && !this->ExternalDataSource)\n#endif\n {\n  // Thread-safe fast path: use shared lock if mutex exists\n  if (this->Mutex)\n  {\n   UGenericMutexSharedLocker locker(this->Mutex);\n   return v;\n  }\n  return v;\n }\n\n#ifndef _MSC_VER\n if (this->ExternalDataSource) [[unlikely]]\n#else\n if (this->ExternalDataSource)\n#endif\n {\n  // External data source: delegate to it (it should handle its own thread safety)\n  return this->ExternalDataSource->GetData();\n }\n\n#ifndef _MSC_VER\n if (IsConnectedFlag) [[unlikely]]\n#else\n if (IsConnectedFlag)\n#endif\n {\n  // Connected property: need to update from connected output\n  if (this->Mutex)\n  {\n   // First, check if update is needed with shared lock\n   ULongTime outputTime = 0;\n   UVBaseDataProperty<T>* cachedOutput = nullptr;\n   {\n    UGenericMutexSharedLocker locker(this->Mutex);\n    // Cache typed pointer on first access\n    if (!CachedConnectedOutput && !ConnectedOutputs.empty())\n     CachedConnectedOutput = dynamic_cast<UVBaseDataProperty<T>*>(ConnectedOutputs[0]);\n    \n    cachedOutput = CachedConnectedOutput;\n    if (cachedOutput)\n    {\n     outputTime = cachedOutput->GetUpdateTime();\n    }\n   }\n   \n   // If update needed, acquire exclusive lock\n   if (cachedOutput && outputTime > this->UpdateTime)\n   {\n    UGenericMutexExclusiveLocker exclusiveLocker(this->Mutex);\n    // Re-check after acquiring exclusive lock (double-check pattern)\n    outputTime = cachedOutput->GetUpdateTime();\n    //if (outputTime > this->UpdateTime) // ToDo: its disables until direct access using .v used.\n    {\n     v = cachedOutput->GetData();\n     this->UpdateTime = outputTime;\n    }\n   }\n   \n   // Return value with shared lock\n   {\n    UGenericMutexSharedLocker locker(this->Mutex);\n    return v;\n   }\n  }\n  else\n  {\n   // No mutex: original logic\n   // Cache typed pointer on first access\n   if (!CachedConnectedOutput && !ConnectedOutputs.empty())\n    CachedConnectedOutput = dynamic_cast<UVBaseDataProperty<T>*>(ConnectedOutputs[0]);\n   \n   if (CachedConnectedOutput)\n   {\n    // Cache data with update time check to avoid unnecessary copies\n    ULongTime outputTime = CachedConnectedOutput->GetUpdateTime();\n    //if (outputTime > this->UpdateTime) // ToDo: its disables until direct access using .v used.\n    {\n     v = CachedConnectedOutput->GetData();\n     this->UpdateTime = outputTime;\n    }\n   }\n   return v;\n  }\n }\n\n return v;\n}\n"
+        },
+        {
+          "label": "ordinary_SetData",
+          "first_line": 705,
+          "last_line": 749,
+          "bytes": 866,
+          "sha256": "3779397df6ffe05dce0eb27075e3d337d2a4916f50edd658dda3a6eed788a5d8",
+          "utf8_text": "virtual void SetData(const T &value)\n{\n if (this->ExternalDataSource)\n {\n  this->ExternalDataSource->SetData(value);\n  return;\n }\n\n if (IsConnectedFlag)\n  return;\n\n // Thread-safe path: use exclusive lock if mutex exists\n if (this->Mutex)\n {\n  UGenericMutexExclusiveLocker locker(this->Mutex);\n  \n  if (CheckEqualsFlag && value == v)\n   return;\n\n  if (this->Owner)\n  {\n   if (this->SetterR && !(this->Owner->*(this->SetterR))(value))\n    throw UIProperty::EPropertySetterFail(this->GetOwnerName(),this->GetName());\n  }\n\n  v=value;\n  this->RenewUpdateTime();\n  return;\n }\n \n // No mutex: original logic\n if (CheckEqualsFlag && value == v)\n  return;\n\n if (this->Owner)\n {\n  if (this->SetterR && !(this->Owner->*(this->SetterR))(value))\n   throw UIProperty::EPropertySetterFail(this->GetOwnerName(),this->GetName());\n }\n\n v=value;\n this->RenewUpdateTime();\n return;\n}\n\n"
+        },
+        {
+          "label": "SetDataDirect",
+          "first_line": 752,
+          "last_line": 785,
+          "bytes": 529,
+          "sha256": "df961ac4ba61209b2d5b38306b956ac5d97526e41a43ea6a21dbdce432393541",
+          "utf8_text": "void SetDataDirect(const T &value)\n{\n if (this->ExternalDataSource)\n {\n  this->ExternalDataSource->SetData(value);\n  return;\n }\n\n if (IsConnectedFlag)\n  return;\n\n // Thread-safe path: use exclusive lock if mutex exists\n if (this->Mutex)\n {\n  UGenericMutexExclusiveLocker locker(this->Mutex);\n  \n  if (CheckEqualsFlag && value == v)\n   return;\n\n  v=value;\n  this->RenewUpdateTime();\n  return;\n }\n \n // No mutex: original logic\n if (CheckEqualsFlag && value == v)\n  return;\n\n v=value;\n this->RenewUpdateTime();\n return;\n}\n\npublic:\n"
+        },
+        {
+          "label": "AttachTo_connected_read",
+          "first_line": 789,
+          "last_line": 815,
+          "bytes": 570,
+          "sha256": "cd8e2442cd1c4cf859e44cdf2970fe5e6a87f60afe59acb87530f223317073ee",
+          "utf8_text": "bool AttachTo(UVBaseDataProperty<T>* prop)\n{\n // Thread-safe path: use exclusive lock if mutex exists\n if (this->Mutex)\n {\n  UGenericMutexExclusiveLocker locker(this->Mutex);\n  bool res=UVBaseDataProperty<T>::AttachTo(prop);\n  if(res)\n  {\n   IsConnectedFlag=true;\n   // Cache typed pointer for optimization\n   CachedConnectedOutput = prop;\n  }\n  return res;\n }\n \n // No mutex: original logic\n bool res=UVBaseDataProperty<T>::AttachTo(prop);\n if(res)\n {\n  IsConnectedFlag=true;\n  // Cache typed pointer for optimization\n  CachedConnectedOutput = prop;\n }\n return res;\n}\n\n"
+        },
+        {
+          "label": "source_inspection_SetPointer",
+          "first_line": 839,
+          "last_line": 870,
+          "bytes": 1096,
+          "sha256": "8ae568a4120ae9f76a731d175aaf0e5e740311819db886b3f9c1cc774c2561fd",
+          "utf8_text": "bool CanInspectDataSources(void) const override { return true; }\nbool UsesExternalDataSource(void) const override { return ExternalDataSource != nullptr; }\nstd::vector<const UIProperty*> GetDataSources(void) const override\n{\n // Match GetData's precedence. Do not read data or populate the lazy cache.\n if(ExternalDataSource) return {ExternalDataSource};\n if(!IsConnectedFlag) return {};\n return std::vector<const UIProperty*>(ConnectedOutputs.begin(), ConnectedOutputs.end());\n}\n\nint GetNumPointers(void) const\n{\n return int(ConnectedOutputs.size());\n}\n\n// Устанавливает указатель на указатель выход\nbool SetPointer(int index, UIPropertyOutput* property)\n{\n IsConnectedFlag=true;\n // Cache typed pointer for optimization\n CachedConnectedOutput = dynamic_cast<UVBaseDataProperty<T>*>(property);\n ConnectedOutputs.assign(1,property);\n this->ResetUpdateTime();\n return true;\n}\n\n/// Возвращает указатель на указатель\nbool ResetPointer(int index, UIPropertyOutput* property)\n{\n if(index==-1 && property==nullptr)\n {\n  DetachFrom();\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/NNeuronTimeLearner.cpp",
+      "git_blob": "0c48d1515ea06dc9f7972ca275a0dc179a89b38e",
+      "bytes": 288048,
+      "sha256": "796b408334df2005a06169e9f26cbe1a98e941b356eaf1a0a0b4cfff1ec6cad1",
+      "line_count": 7760,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "Classic_SetIsNeedToTrain",
+          "first_line": 2787,
+          "last_line": 2810,
+          "bytes": 867,
+          "sha256": "73b266bdd03b5b3313c7e1d7151c81e3f5786ed71aae51acc9b3c628c139a8ae",
+          "utf8_text": "/// Raise/clear training flag; applies Training/Fixed LTZ threshold\nbool NNeuronTimeLearner::SetIsNeedToTrain(const bool &value)\n{\n if(NativeRecognition)return !value;\n if(ControllerVersion.GetData()==2)\n {\n  if(NativeTrainingOwned)\n  {\n   if(value && !IsNeedToTrain.GetData()){NativeTrainingRequestIntent.Clear();NativeTrainingControl.ResetControl();NativeProbeControl.ResetControl();}\n   if(!value)NativeTrainingControl.ExternalStop(TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth));\n  }\n  return true;\n }\n if(NativeTrainingOwned)\n {\n  if(!value)NativeTrainingControl.ExternalStop(TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth));\n  return true;\n }\n if(NativeProbeControl.OwnsControl())\n {\n  if(!value)NativeProbeControl.Cancel(\"external_stop\");\n  return true;\n }\n if(CalculateMode == 1 && !value)\n"
+        },
+        {
+          "label": "Classic_BeginNativeTraining",
+          "first_line": 4417,
+          "last_line": 4467,
+          "bytes": 3132,
+          "sha256": "b8bc049098657fb5317bf9564793b3e3f95785b3030a00dc62809603149548ac",
+          "utf8_text": "}\nbool NNeuronTimeLearner::NativeLiveFinalizationDone() const {return NativeLiveFinalization && NativeLiveFinalization->Done();}\nQJsonObject NNeuronTimeLearner::NativeLiveFinalizationReport() const {return NativeLiveFinalization?NativeLiveFinalization->Report():QJsonObject{};}\nvoid NNeuronTimeLearner::BeginNativeTraining(TimeLearner::NativeTrainingPlan plan,bool recaptureReferences)\n{\n if(NativeRecognition)throw std::logic_error(\"native_recognition_requires_explicit_solo_import_or_cold_model\");\n if(TimeLearner::NativeTrainingIsActive(NativeTrainingControl))\n  throw std::logic_error(\"native_training_already_active\");\n if(NativeLiveFinalization && (IsNeedToTrain.IsConnected() || IsNeedToTrain.UsesExternalDataSource()) && !IsNeedToTrain.GetData())\n  throw std::logic_error(\"live_finalization_external_request_not_active\");\n NativeTrainingRequestIntent.Clear();\n NativeTrainingOwned=true;NativeProbeControl.ResetControl();\n if(recaptureReferences)NativeTrainingControl.InvalidateTarget();else NativeTrainingControl.ResetControl();\n if(!NativeLiveFinalization || (!IsNeedToTrain.IsConnected() && !IsNeedToTrain.UsesExternalDataSource()))\n  IsNeedToTrain.SetDataDirect(true);\n TrainingPhase.SetDataDirect(kPhaseSync);\n try\n {\n  if(!IsReady() || !IsInit())throw std::invalid_argument(\"native_training_requires_initialized_ready_learner\");\n  if(!NativeEditFailure.empty())throw std::invalid_argument(\"native_model_requires_repair_after_failed_edit\");\n  if(SyncCapacitanceTrim.GetData()>0)throw std::invalid_argument(\"native_training_capacitance_trim_not_yet_supported\");\n  if(NativeLiveFinalization)\n  {\n   ValidateNativeFinalizationPlan();\n   NativeLiveFinalization->RequireArmed();\n   TimeLearner::ValidateNativeOwnedPhaseFrequency(*this);\n   NativeLiveFinalization->CheckTrainingDesign(*this,false);\n  }\n  else if(EnablePostTrainTuning.GetData() || AutoCalibrateFixedLTZThreshold.GetData())\n   throw std::invalid_argument(\"native_training_post_tune_calibration_not_yet_supported\");\n  const auto neuron=GetComponentL<NPulseNeuron>(\"Neuron\",true);\n  if(!neuron || neuron->UseElementDefaults.GetData())\n   throw std::invalid_argument(\"native_training_requires_storage_owned_physics\");\n  ValidateNativeModelDeclaration();\n  const auto requestControls=TimeLearner::ReadNativeFinalizationControls(*this);\n  const double startedTime=Environment->GetTime().GetDoubleTime();\n  NativeTrainingControl.Start(std::move(plan),TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth),\n      Environment->GetTime().GetDoubleTime(),TimeLearner::NativeTrainingWallTime());\n  NativeTrainingRequestIntent.Capture(requestControls,NativeTrainingControl,startedTime);\n  if(NativeLiveFinalization)NativeLiveFinalization->Started(*this);\n }\n catch(const std::exception& error)\n {\n  NativeTrainingControl.FailConfiguration(error.what());\n  if(NativeLiveFinalization)NativeLiveFinalization->FailConfiguration(error.what());\n }\n catch(...)\n {\n  NativeTrainingControl.FailConfiguration(\"native_training_start_exception\");\n  if(NativeLiveFinalization)NativeLiveFinalization->FailConfiguration(\"native_training_start_exception\");\n }\n"
+        },
+        {
+          "label": "Classic_mode0_finished_flag_write",
+          "first_line": 7546,
+          "last_line": 7569,
+          "bytes": 1218,
+          "sha256": "001d76b6a225c7bb47f659024ab457c35ad04e7f53c9421627a623f5fd17e23a",
+          "utf8_text": " {\n  if(NativeTrainingOwned)\n  {\n   const auto lifetime=ObserveLifecycle();\n   NativeProbeControl.AfterChildren(NativeProbeModelBindings(),Environment->GetTime().GetDoubleTime());\n   if(!lifetime.IsCurrent())return true;\n   NativeTrainingControl.AfterTick(TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth),\n       Environment->GetTime().GetDoubleTime(),TimeLearner::NativeTrainingWallTime());\n   if(!lifetime.IsCurrent())return true;\n   if(NativeTrainingControl.State()==TimeLearner::NativeTrainingState::Finished)\n   {\n    if(NativeLiveFinalization)\n     NativeLiveFinalization->TrainingFinished(*this,Environment->GetTime().GetDoubleTime());\n    TrainingPhase.SetDataDirect(NativeTrainingControl.Outcome()==TimeLearner::TrainingStatus::Exact?kPhaseDone:kPhaseFailed);\n    if(CalculateMode.GetData()==0 && (!NativeLiveFinalization || !NativeLiveFinalization->Pending()))\n    {\n     if(!NativeLiveFinalization || (!IsNeedToTrain.IsConnected() && !IsNeedToTrain.UsesExternalDataSource()))\n      IsNeedToTrain.SetDataDirect(false);\n    }\n   }\n   if(auto current=GetComponentL<NPulseNeuron>(\"Neuron\",true))Output=current->Output;\n   return true;\n  }\n  if(NativeProbeControl.OwnsControl())\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/NNeuronTimeLearnerBranch.cpp",
+      "git_blob": "5397bac8fcb04bd186651899081d2b1f33ec6a8a",
+      "bytes": 333236,
+      "sha256": "fe81e0a7112b8e23611aafd973c577ddac3c868b344e94bf44ba4674047566b4",
+      "line_count": 8870,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "Branch_SetIsNeedToTrain",
+          "first_line": 3553,
+          "last_line": 3577,
+          "bytes": 876,
+          "sha256": "49c6a5b018e4f3002642974443f34c58bceaf885e5806935afaae8a84cf3b9ca",
+          "utf8_text": "/// Raise/clear training flag; applies Training/Fixed LTZ threshold\nbool NNeuronTimeLearnerBranch::SetIsNeedToTrain(const bool &value)\n{\n if(NativeRecognition)return !value;\n if(ControllerVersion.GetData()==2)\n {\n  if(NativeTrainingOwned)\n  {\n   if(value && !IsNeedToTrain.GetData()){NativeTrainingRequestIntent.Clear();NativeTrainingControl.ResetControl();NativeProbeControl.ResetControl();}\n   if(!value)NativeTrainingControl.ExternalStop(TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth));\n  }\n  return true;\n }\n if(NativeTrainingOwned)\n {\n  if(!value)NativeTrainingControl.ExternalStop(TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth));\n  return true;\n }\n if(NativeProbeControl.OwnsControl())\n {\n  if(!value)NativeProbeControl.Cancel(\"external_stop\");\n  return true;\n }\n if(CalculateMode == 1 && !value)\n {\n"
+        },
+        {
+          "label": "Branch_BeginNativeTraining",
+          "first_line": 5195,
+          "last_line": 5248,
+          "bytes": 3293,
+          "sha256": "2a3c9649841f1423ef69ec00c7b1a343bdb8a6fe7e48120e5f67a739d194e212",
+          "utf8_text": "  IsNeedToTrain.SetDataDirect(false);\n}\nbool NNeuronTimeLearnerBranch::NativeLiveFinalizationDone() const {return NativeLiveFinalization && NativeLiveFinalization->Done();}\nQJsonObject NNeuronTimeLearnerBranch::NativeLiveFinalizationReport() const {return NativeLiveFinalization?NativeLiveFinalization->Report():QJsonObject{};}\nvoid NNeuronTimeLearnerBranch::BeginNativeTraining(TimeLearner::NativeTrainingPlan plan,bool recaptureReferences)\n{\n if(NativeRecognition)throw std::logic_error(\"native_recognition_requires_explicit_solo_import_or_cold_model\");\n if(TimeLearner::NativeTrainingIsActive(NativeTrainingControl))\n  throw std::logic_error(\"native_training_already_active\");\n if(NativeLiveFinalization && (IsNeedToTrain.IsConnected() || IsNeedToTrain.UsesExternalDataSource()) && !IsNeedToTrain.GetData())\n  throw std::logic_error(\"live_finalization_external_request_not_active\");\n NativeTrainingRequestIntent.Clear();\n NativeTrainingOwned=true;NativeProbeControl.ResetControl();\n if(recaptureReferences)NativeTrainingControl.InvalidateTarget();else NativeTrainingControl.ResetControl();\n if(!NativeLiveFinalization || (!IsNeedToTrain.IsConnected() && !IsNeedToTrain.UsesExternalDataSource()))\n  IsNeedToTrain.SetDataDirect(true);\n TrainingPhase.SetDataDirect(kPhaseSync);\n try\n {\n  if(!IsReady() || !IsInit())throw std::invalid_argument(\"native_training_requires_initialized_ready_learner\");\n  if(!NativeEditFailure.empty())throw std::invalid_argument(\"native_model_requires_repair_after_failed_edit\");\n  if(SyncCapacitanceTrim.GetData()>0)throw std::invalid_argument(\"native_training_capacitance_trim_not_yet_supported\");\n  if(NativeLiveFinalization)\n  {\n   ValidateNativeFinalizationPlan();\n   NativeLiveFinalization->RequireArmed();\n   TimeLearner::ValidateNativeOwnedPhaseFrequency(*this);\n   NativeLiveFinalization->CheckTrainingDesign(*this,true);\n  }\n  else if(EnablePostTrainTuning.GetData() || AutoCalibrateFixedLTZThreshold.GetData())\n   throw std::invalid_argument(\"native_training_post_tune_calibration_not_yet_supported\");\n  const auto neuron=GetComponentL<NPulseNeuron>(\"Neuron\",true);\n  if(!neuron || neuron->UseElementDefaults.GetData())\n   throw std::invalid_argument(\"native_training_requires_storage_owned_physics\");\n  ValidateNativeModelDeclaration();\n  const auto requestControls=TimeLearner::ReadNativeFinalizationControls(*this);\n  const double startedTime=Environment->GetTime().GetDoubleTime();\n  NativeTrainingControl.Start(std::move(plan),TimeLearner::BindNativeTraining(*this,NativeProbeControl,NativeTrainingEditDepth),\n      Environment->GetTime().GetDoubleTime(),TimeLearner::NativeTrainingWallTime());\n  NativeTrainingRequestIntent.Capture(requestControls,NativeTrainingControl,startedTime);\n  if(NativeLiveFinalization)NativeLiveFinalization->Started(*this);\n }\n catch(const std::exception& error)\n {\n  NativeTrainingControl.FailConfiguration(error.what());\n  if(NativeLiveFinalization)NativeLiveFinalization->FailConfiguration(error.what());\n }\n catch(...)\n {\n  NativeTrainingControl.FailConfiguration(\"native_training_start_exception\");\n  if(NativeLiveFinalization)NativeLiveFinalization->FailConfiguration(\"native_training_start_exception\");\n }\n}\nTimeLearner::ResistanceDomainAssessment NNeuronTimeLearnerBranch::AssessNativeTrainingResistanceDomain(\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/TimeLearner/NativeLearnerLifecycle.h",
+      "git_blob": "141381e93e5a75e016891edfab2c12333f560fb8",
+      "bytes": 7679,
+      "sha256": "7ae5fedc8d0c1f9684ea4b4d374109723a47c188b709a92ff01fe9f6376fced7",
+      "line_count": 150,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "V2_configured_autostart_and_native_tick",
+          "first_line": 58,
+          "last_line": 100,
+          "bytes": 2841,
+          "sha256": "42c6fd6bb61b358b2c69ef89b96d16f30b9390a0e3e5e90b728e12538b243c52",
+          "utf8_text": "  return true;\n }\n if(owner.ControllerVersion.GetData()==2 && owner.NativeEditFailure.empty() && owner.IsNeedToTrain.GetData() &&\n    owner.NativeTrainingControl.State()==TimeLearner::NativeTrainingState::Idle &&\n    (!owner.NativeProbeControl.OwnsControl() || owner.NativeProbeControl.AtEditBoundary()))\n {\n  try\n  {\n   if(!owner.NativeConfiguredPlan || owner.NativeConfiguredText!=owner.ControllerConfiguration.GetData())\n    throw std::invalid_argument(\"configured_native_model_requires_build\");\n   auto plan=TimeLearner::MakeConfiguredNativeTrainingPlan(*owner.NativeConfiguredPlan);\n   if(plan.recordCapacitanceHistory)owner.BindNativeTrainingCapacitance(owner.NativeConfiguredPlan->capacitanceMaximumRelativeChange);\n   plan.probe.onPrepared=owner.NativeConfiguredSinks.onPrepared;plan.probe.onSample=owner.NativeConfiguredSinks.onSample;\n   plan.observationSink=owner.NativeConfiguredSinks.onObservation;\n   plan.compositeSink=owner.NativeConfiguredSinks.onComposite;plan.beforeCompositeConsume=owner.NativeConfiguredSinks.beforeCompositeConsume;\n   owner.BeginNativeTraining(std::move(plan));\n  }\n  catch(const std::exception& error)\n  {owner.NativeTrainingOwned=true;owner.NativeEditFailure=error.what();owner.NativeTrainingControl.FailConfiguration(error.what());}\n }\n\n if(!owner.NativeEditFailure.empty()){owner.ForceSkipComponentCalculation();return true;}\n if(owner.NativeTrainingOwned)\n {\n  const auto lifetime=owner.ObserveLifecycle();\n  const auto adapter=TimeLearner::BindNativeTraining(owner,owner.NativeProbeControl,owner.NativeTrainingEditDepth);\n  owner.NativeTrainingControl.BeforeTick(adapter,owner.Environment->GetTime().GetDoubleTime(),TimeLearner::NativeTrainingWallTime());\n  if(!lifetime.IsCurrent()){owner.ForceSkipComponentCalculation();return true;}\n  if(owner.NativeProbeControl.OwnsControl())\n   owner.NativeProbeControl.BeforeChildren(owner.NativeProbeModelBindings(),owner.Environment->GetTime().GetDoubleTime());\n  if(!lifetime.IsCurrent()){owner.ForceSkipComponentCalculation();return true;}\n  if(!owner.NativeEditFailure.empty() || owner.NativeProbeControl.Status()==TimeLearner::NativeProbeStatus::Rejected ||\n      owner.NativeProbeControl.Status()==TimeLearner::NativeProbeStatus::Cancelled ||\n      (owner.NativeTrainingControl.State()==TimeLearner::NativeTrainingState::Finished &&\n       owner.NativeTrainingControl.Outcome()==TimeLearner::TrainingStatus::InvalidModel &&\n       !owner.NativeProbeControl.OwnsControl()))owner.ForceSkipComponentCalculation();\n  return true;\n }\n if(owner.NativeProbeControl.OwnsControl())\n {\n  owner.NativeProbeControl.BeforeChildren(owner.NativeProbeModelBindings(),owner.Environment->GetTime().GetDoubleTime());\n  if(integrationFailure(owner.TrainingFailureReason.GetData()) ||\n      owner.NativeProbeControl.Status()==TimeLearner::NativeProbeStatus::Rejected ||\n"
+        },
+        {
+          "label": "Default_and_Reset_control_boundaries",
+          "first_line": 114,
+          "last_line": 150,
+          "bytes": 1692,
+          "sha256": "b87ca66cc8a6e016fc9d28844c69d735ffc06d374ec62fce5d5ca948738e8549",
+          "utf8_text": "    template<class Owner, class BaseHook>\n    static bool BeforeDefault(Owner& owner, BaseHook baseHook)\n{\n InterruptComposite(owner,\"learner_default\");\n owner.InterruptNativePostTunePhase(\"learner_default\");owner.NativePostTunePhase.reset();owner.NativeLiveFinalization.reset();\n owner.NativeRecognition.reset();\n owner.NativeConfiguredPlan.reset();owner.NativeConfiguredSinks={};owner.NativeConfiguredText.clear();\n owner.NativeModelDeclaration.reset();owner.NativeLearnedCapacitanceState={};\n owner.NativeTrainingRequestIntent.Clear();\n owner.NativeTrainingOwned=false;owner.NativeTrainingControl.InvalidateTarget();\n owner.NativeEditFailure.clear();owner.NativeProbeControl.ResetControl();baseHook();return true;\n}\n\n    template<class Owner, class BaseHook>\n    static bool BeforeReset(Owner& owner, BaseHook baseHook)\n{\n InterruptComposite(owner,\"learner_reset\");\n owner.InterruptNativePostTunePhase(\"learner_reset\");\n if(!owner.NativeLifecycleDepth)owner.NativeTrainingRequestIntent.Clear();\n if(owner.NativeTrainingOwned)\n {\n  if(!owner.NativeLifecycleDepth)owner.NativeTrainingControl.ResetControl();\n  else if(TimeLearner::NativeTrainingIsActive(owner.NativeTrainingControl))owner.NativeTrainingControl.FailConfiguration(\"learner_implicit_reset\");\n }\n if(!owner.NativeLifecycleDepth)owner.NativeProbeControl.ResetControl();\n else owner.NativeProbeControl.Cancel(\"learner_implicit_reset\");\n if(!owner.NativeTrainingOwned && !owner.NativeRecognition && owner.ControllerVersion.GetData()!=2 &&\n    !owner.ConfiguredModelInitialized.GetData())\n {\n  owner.BindLegacyGraphRoles();\n  TimeLearner::InitializeLegacyReadouts(owner,owner.NativeEditFailure);\n }\n baseHook();return true;\n}\n\n};\n}\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/TimeLearner/NativeTrainingService.cpp",
+      "git_blob": "81f0a480c628630e038e851d4a87c165db928731",
+      "bytes": 33113,
+      "sha256": "59080d856daa06fb93f64047da22e4585abccf42803df615167e32b4ba08166d",
+      "line_count": 488,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "scalar_start_restart_guards",
+          "first_line": 35,
+          "last_line": 82,
+          "bytes": 3673,
+          "sha256": "6fe4a3fac3926670fcdafff819672b6da152e853cd8c93b15c4c1669e7ea24a0",
+          "utf8_text": "}\n\nvoid NativeTrainingService::Start(NativeTrainingPlan value,const NativeTrainingAdapter& a,double modelTime,double wallTime)\n{\n    if(value.protocol.schemaVersion==4){StartComposite(std::move(value),a,modelTime,wallTime);return;}\n    if(value.protocol.schemaVersion==5){StartCandidateWindowComposite(std::move(value),a,modelTime,wallTime);return;}\n    Require(!value.composite,\"unexpected_native_composite_policy\");\n    Require(state==NativeTrainingState::Idle,\"native_training_requires_reset_before_restart\");\n    Require(!value.search.capacitanceSearch || value.recordCapacitanceHistory,\n        \"native_capacitance_search_requires_recorded_C0_history\");\n    Require(bool(a.readParameters) && bool(a.readModelRevision) && bool(a.apply) && bool(a.queue) &&\n        bool(a.probeState) && bool(a.takeResult) && bool(a.cancel),\"incomplete_native_training_adapter\");\n    Require(value.search.normalization!=Normalization::TipResistance || bool(a.assessResistanceDomain),\n        \"native_n1_requires_effective_domain_provider\");\n    const auto capabilities=int(bool(a.readCapacitanceWitness))+int(bool(a.applyWithCapacitance))+\n        int(bool(a.assessResistanceDomainWithCapacitance));\n    Require(capabilities==0 || capabilities==3,\"incomplete_native_training_capacitance_adapter\");\n    Require(!value.recordCapacitanceHistory || capabilities==3,\"native_training_requires_capacitance_history_adapter\");\n    Require(value.protocol.schemaVersion==3 && value.probe.specification.schemaVersion==3 &&\n        value.protocol.inputs.size()==value.inputWindows.size() && !value.protocol.inputs.empty() &&\n        value.maximumReferenceProbes>=value.protocol.inputs.size() &&\n        std::isfinite(value.maximumModelSeconds) && value.maximumModelSeconds>0. &&\n        std::isfinite(value.maximumWallSeconds) && value.maximumWallSeconds>0. &&\n        std::isfinite(modelTime) && std::isfinite(wallTime),\"invalid_native_training_plan\");\n    Require(value.search.runId.size()>0 && value.probe.specification.begin==0. &&\n        value.probe.routing==value.protocol.routing && value.probe.protocolRevision==value.protocol.revision &&\n        value.probe.specification.sampleId==value.protocol.sampleId &&\n        value.probe.specification.patternHash==value.protocol.patternHash &&\n        value.probe.specification.expectedStimulusIds==value.protocol.stimulusIds &&\n        value.probe.specification.stimulusProfile==value.protocol.stimulusProfile &&\n        value.probe.specification.minimumAmplitude==value.protocol.minimumAmplitude &&\n        value.probe.specification.waveAssignment==value.protocol.waveAssignment &&\n        value.probe.specification.peakSelection==value.protocol.peakSelection,\n        \"native_training_protocol_mismatch\");\n    if(a.validateExecution)a.validateExecution();\n    const auto revision=a.readModelRevision();Require(!revision.empty(),\"missing_native_training_model_revision\");\n    if(incompleteCaptureConstraint)\n        Require(revision==incompleteCaptureConstraint->first && retainedEpoch==incompleteCaptureConstraint->second,\n            \"incomplete_reference_capture_requires_original_model_or_explicit_cold_restart\");\n    value.search.initialModelRevision=revision;\n    ValidateBoundedTrainingInputs(value.protocol,value.search,a.readParameters());\n    if(references)\n        Require(references->Protocol()==value.protocol && revision==referenceBinding,\n            \"native_training_reference_binding_changed\");\n    for(std::size_t i=0;i<value.inputWindows.size();++i)\n    {\n        const auto& window=value.inputWindows[i];\n        Require(window.inputId==value.protocol.inputs[i].id && window.stimulusId==value.protocol.inputs[i].stimulusId &&\n"
+        },
+        {
+          "label": "scalar_bound_start_family_and_attempt",
+          "first_line": 118,
+          "last_line": 133,
+          "bytes": 1141,
+          "sha256": "71ddfc079acbeaa9cf192bb7d3dc1ff62919b7cd239b85a03c756c369b667237",
+          "utf8_text": "        for(const auto& key:required)keptWitnesses.emplace(key,capacitanceHistory->witnesses.at(key));\n        capacitanceHistory->trialWitnessIds=std::move(keptTrials);capacitanceHistory->witnesses=std::move(keptWitnesses);\n    }\n    plan=std::move(value);plan.search.initialModelRevision=revision;plan.probe.readModelRevision=a.readModelRevision;\n    plan.probe.readFullModelRevision=a.readFullModelRevision;\n    if(references || incompleteCaptureConstraint)plan.search.initialModelEpoch=retainedEpoch;\n    else retainedEpoch=plan.search.initialModelEpoch;\n    startModel=lastModel=modelTime;startWall=lastWall=wallTime;\n    referenceProbes=invalidReferences=0;if(!references){referenceEvidence.clear();referencePackets.clear();}\n    finalPackets.clear();observedPackets.clear();incompleteCaptureConstraint.reset();\n    certificate.reset();search.reset();activeAction.reset();\n    waiting=false;reason.clear();outcome=TrainingStatus::Searching;\n    InvalidateOwnerControlLifetime();++attempt;\n    plan.search.runId+=\"/session/\"+std::to_string(attempt);\n    state=NativeTrainingState::CapturingReferences;\n    if(references)BeginSearch(a);\n"
+        },
+        {
+          "label": "BeforeTick_request_predicate",
+          "first_line": 206,
+          "last_line": 216,
+          "bytes": 598,
+          "sha256": "ba697e2b3543438c583834291a26b35d86244cb3d73b2361063f9adc58619d2e",
+          "utf8_text": "void NativeTrainingService::BeforeTick(const NativeTrainingAdapter& a,double modelTime,double wallTime)\n{\n    if(plan.protocol.schemaVersion==4){BeforeComposite(a,modelTime,wallTime);return;}\n    if(plan.protocol.schemaVersion==5){BeforeComposite(a,modelTime,wallTime);return;}\n    if(!Active(state))return;\n    try\n    {\n        if(a.trainingRequested && !a.trainingRequested()){ExternalStop(a);return;}\n        CheckBudget(a,modelTime,wallTime);if(!Active(state) || waiting)return;\n        if(a.validateExecution)a.validateExecution();\n        if(state==NativeTrainingState::CapturingReferences)\n"
+        },
+        {
+          "label": "AfterTick_request_predicate",
+          "first_line": 279,
+          "last_line": 289,
+          "bytes": 615,
+          "sha256": "6926e0feeac3fbcac60322631d9d2b97868ccbb0447b0853a6388bcb1892db22",
+          "utf8_text": "void NativeTrainingService::AfterTick(const NativeTrainingAdapter& a,double modelTime,double wallTime)\n{\n    if(plan.protocol.schemaVersion==4){AfterComposite(a,modelTime,wallTime);return;}\n    if(plan.protocol.schemaVersion==5){AfterComposite(a,modelTime,wallTime);return;}\n    if(!Active(state))return;\n    try\n    {\n        if(a.trainingRequested && !a.trainingRequested()){ExternalStop(a);return;}\n        CheckBudget(a,modelTime,wallTime);if(!Active(state) || !waiting)return;\n        const auto status=a.probeState();\n        if(status==NativeProbeStatus::Queued || status==NativeProbeStatus::Running)return;\n"
+        },
+        {
+          "label": "Finish_SyncOutcome_Stop_ResetControl",
+          "first_line": 349,
+          "last_line": 394,
+          "bytes": 3214,
+          "sha256": "7944ac1af87626641421967fa2b0dcfac5846785a569026f8871faf581ba00ca",
+          "utf8_text": "void NativeTrainingService::Finish(TrainingStatus result,const std::string& diagnostic)\n{\n    if(search)retainedEpoch=search->ModelEpoch();\n    outcome=result;reason=diagnostic;state=NativeTrainingState::Finished;waiting=false;activeAction.reset();\n    if(result!=TrainingStatus::Exact && !(result==TrainingStatus::SearchUnresolved && search && search->Certificate()))\n        certificate.reset();\n}\nvoid NativeTrainingService::SyncOutcome()\n{\n    if(!search)return;retainedEpoch=search->ModelEpoch();const auto status=search->Status();\n    if(status==TrainingStatus::Searching || status==TrainingStatus::Verifying)return;\n    certificate=search->Certificate();\n    Finish(status,search->Reason().empty()?TrainingStatusName(status):search->Reason());\n}\nvoid NativeTrainingService::ExternalStop(const NativeTrainingAdapter& a)\n{\n    if(plan.protocol.schemaVersion==4){if(Active(state))StopComposite(a,TrainingStatus::ExternalStop,\"external_stop\");return;}\n    if(plan.protocol.schemaVersion==5){if(Active(state))StopComposite(a,TrainingStatus::ExternalStop,\"external_stop\");return;}\n    if(!Active(state))return;a.cancel(\"external_stop\");if(search)search->ExternalStop();\n    Finish(TrainingStatus::ExternalStop,\"external_stop\");\n    RecordCancelled(a);\n}\nvoid NativeTrainingService::RecordCancelled(const NativeTrainingAdapter& a)\n{\n    try{if(auto result=a.takeResult()){observedPackets.push_back(*result);if(plan.observationSink)plan.observationSink(*result);}}\n    catch(const std::exception& error){reason+=\";cancelled_observation_sink_failed:\"+std::string(error.what());}\n    catch(...){reason+=\";cancelled_observation_sink_failed\";}\n}\nvoid NativeTrainingService::FailConfiguration(const std::string& diagnostic)\n{Finish(TrainingStatus::InvalidModel,diagnostic);}\nvoid NativeTrainingService::ResetControl()\n{\n    InvalidateOwnerControlLifetime();\n    if(composite){composite->RevokeLive();++compositeGeneration;}\n    if(!references && attempt>0 && !plan.search.initialModelRevision.empty() && !incompleteCaptureConstraint)\n        incompleteCaptureConstraint.emplace(plan.search.initialModelRevision,plan.search.initialModelEpoch);\n    state=NativeTrainingState::Idle;outcome=TrainingStatus::Searching;reason.clear();waiting=false;\n    search.reset();activeAction.reset();if(!references){referenceEvidence.clear();referencePackets.clear();}\n    if(capacitanceHistory)capacitanceHistory->domainBaseWitnessIds.clear();\n    referenceProbes=invalidReferences=0;compositeRequest.reset();compositeReferenceMeasurements.clear();\n    compositeRawNotifications.clear();\n    compositeCancellationDiagnostics.clear();\n}\nvoid NativeTrainingService::InvalidateTarget()\n{ResetControl();certificate.reset();references.reset();referenceEvidence.clear();referencePackets.clear();finalPackets.clear();observedPackets.clear();incompleteCaptureConstraint.reset();referenceBinding.clear();retainedEpoch=0;plan={};capacitanceHistory.reset();\n composite.reset();compositeImportedProof.reset();compositeCandidateReferences.reset();compositeSourceBinding={};compositeInitialConfiguration={};compositeOwnerFamily.clear();compositeFinalRun.clear();compositeRecords.clear();compositeReferenceGroups.clear();compositeFinalGroups.clear();\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+      "git_blob": "4bfaa92d84692cdb4f5d1fc81720d375834d8789",
+      "bytes": 49381,
+      "sha256": "c118cabda271f3a718ae68ad9e428dd0a17eb87e9baec1e3159eaeb785b477af",
+      "line_count": 614,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "composite_warm_Start",
+          "first_line": 90,
+          "last_line": 151,
+          "bytes": 5566,
+          "sha256": "8ddf30342e8c6b89e78fc1dd87b6f256d1815e97492672a6343f6a2d5be0e250",
+          "utf8_text": "void NativeTrainingService::StartComposite(NativeTrainingPlan value,const NativeTrainingAdapter& a,double m,double w) {\n    Require(state==NativeTrainingState::Idle,\"native_training_requires_reset_before_restart\");Validate(value);\n    Require(a.createComposite && a.readParameters && a.readModelRevision && a.apply && a.cancel && a.trainingRequested,\n        \"incomplete_native_composite_owner_adapter\");\n    Require(a.trainingRequested(),\"native_composite_training_request_not_active\");\n    Require(std::isfinite(m) && std::isfinite(w),\"invalid_native_training_plan\");if(a.validateExecution)a.validateExecution();\n    const auto revision=a.readModelRevision();Require(!revision.empty(),\"missing_native_training_model_revision\");\n    if(references)Require(references->Protocol()==value.protocol && revision==referenceBinding,\"native_training_reference_binding_changed\");\n    if(incompleteCaptureConstraint)Require(revision==incompleteCaptureConstraint->first && retainedEpoch==incompleteCaptureConstraint->second,\n        \"incomplete_reference_capture_requires_original_model_or_explicit_cold_restart\");\n    value.search.initialModelRevision=revision;if(references || incompleteCaptureConstraint)value.search.initialModelEpoch=retainedEpoch;\n    ValidateBoundedTrainingInputs(value.protocol,value.search,a.readParameters());\n    CompositeRefreshCapacitance(a,{},false);ValidateBoundedTrainingCapacitance(value.search,compositeCapacitance);\n    Require(!value.recordCapacitanceHistory || compositeCapacitance,\"native_composite_capacitance_history_requires_owned_C0\");\n    Require(!compositeCapacitance || (a.readCapacitanceWitness && a.applyWithCapacitance && a.assessResistanceDomainWithCapacitance),\n        \"native_composite_owned_capacitance_requires_boundary_adapter\");\n    Require(value.search.normalization!=Normalization::TipResistance || a.assessResistanceDomain,\"native_n1_requires_effective_domain_provider\");\n    // Validate retained data before changing a live generation or history.\n    // A rejected warm declaration is not a partially committed new attempt.\n    auto retainedRecords=compositeRecords;\n    const std::set<std::string> retained(compositeReferenceGroups.begin(),compositeReferenceGroups.end());\n    if(references)std::erase_if(retainedRecords,[&](const auto& r){return !retained.count(r.groupId);});\n    else retainedRecords.clear();\n    std::size_t retainedBytes=0;for(const auto& r:retainedRecords) {\n        const auto bytes=CompositeRecordPrimaryBytes(r);\n        Require(bytes<=value.composite->maximumTotalPrimaryBytes && retainedBytes<=value.composite->maximumTotalPrimaryBytes-bytes,\n            \"native_composite_retained_reference_byte_budget\");retainedBytes+=bytes;\n    }\n    if(!compositeSourceBinding.isEmpty())Require(compositeSourceBinding[\"model_spec\"].toObject()[\"normalization\"]==\n        QJsonValue(value.search.normalization==Normalization::SynapseCount?\"N0\":\"N1\"),\"composite_normalization_requires_new_model_family\");\n    // Construction happens while the actual owner's service is still Idle.\n    // Warm restart keeps the original source family; it never recaptures it.\n    if(composite)composite->RestartOwned(Limits(value),m,w,revision);\n    else if(compositeImportedProof) {\n        Require(bool(a.createImportedComposite),\"native_composite_imported_owner_adapter_missing\");\n        composite=a.createImportedComposite(*compositeImportedProof,Limits(value),m,w);\n        Require(bool(composite) && composite->SourceBinding()==compositeSourceBinding &&\n            composite->OwnerFamilyBinding()==compositeOwnerFamily,\"native_composite_imported_source_family_changed\");\n    } else {\n        Require(!references,\"native_composite_imported_family_requires_owned_adoption\");\n        composite=a.createComposite(value.protocol,Limits(value),m,w);Require(bool(composite),\"missing_native_composite_authority\");\n        compositeSourceBinding=composite->SourceBinding();compositeOwnerFamily=composite->OwnerFamilyBinding();\n        Require(compositeSourceBinding[\"model_spec\"].toObject()[\"normalization\"]==\n            QJsonValue(value.search.normalization==Normalization::SynapseCount?\"N0\":\"N1\"),\"composite_normalization_requires_new_model_family\");\n        compositeInitialConfiguration=EncodeConfiguredNativeTraining(CaptureCompositeInitialConfiguration(\n            DecodeNativeModelSpec(compositeSourceBinding[\"model_spec\"].toObject()),value,a.readParameters(),\n            compositeCapacitance?compositeCapacitance->maximumRelativeChange:0.));\n    }\n    compositeRecords=std::move(retainedRecords);compositePrimaryBytes=retainedBytes;\n    if(!references){compositeReferenceGroups.clear();compositeReferenceMeasurements.clear();}\n    plan=std::move(value);startModel=lastModel=m;startWall=lastWall=w;\n    retainedEpoch=plan.search.initialModelEpoch;referenceProbes=invalidReferences=0;\n    observedPackets.clear();finalPackets.clear();compositeFinalGroups.clear();compositeFinalRun.clear();compositeRequest.reset();\n    compositeRawNotifications.clear();compositeRawTrialIds.clear();\n    compositeCancellationDiagnostics.clear();\n    if(!references){referencePackets.clear();referenceEvidence.clear();}\n    certificate.reset();search.reset();activeAction.reset();waiting=false;compositeHarvested=true;reason.clear();outcome=TrainingStatus::Searching;\n    InvalidateOwnerControlLifetime();\n    ++attempt;++compositeGeneration;plan.search.runId+=\"/session/\"+std::to_string(attempt);\n    state=NativeTrainingState::CapturingReferences;incompleteCaptureConstraint.reset();\n    if(references)CompositeBeginSearch(a);\n}\n"
+        },
+        {
+          "label": "candidate_window_retained_family",
+          "first_line": 152,
+          "last_line": 181,
+          "bytes": 3317,
+          "sha256": "7a3b38c54e9cc67a850b171614f39849c35b1b823403c1f1f4e75728041857e3",
+          "utf8_text": "void NativeTrainingService::StartCandidateWindowComposite(NativeTrainingPlan value,const NativeTrainingAdapter& a,double m,double w) {\n    Require(state==NativeTrainingState::Idle,\"native_training_requires_reset_before_restart\");ValidateCandidateWindowPlan(value);\n    Require(a.createCandidateWindowComposite && a.readParameters && a.readModelRevision && a.apply && a.cancel && a.trainingRequested,\n        \"incomplete_native_candidate_window_owner_adapter\");\n    Require(a.trainingRequested(),\"native_composite_training_request_not_active\");\n    Require(std::isfinite(m) && std::isfinite(w),\"invalid_native_training_plan\");if(a.validateExecution)a.validateExecution();\n    const auto revision=a.readModelRevision();const auto parameters=a.readParameters();Require(!revision.empty(),\"missing_native_training_model_revision\");\n    if(!compositeSourceBinding.isEmpty())Require(plan.protocol==value.protocol && revision==referenceBinding &&\n        compositeSourceBinding[\"model_spec\"].toObject()[\"normalization\"]==QJsonValue(value.search.normalization==Normalization::SynapseCount?\"N0\":\"N1\"),\n        \"native_candidate_window_retained_family_changed\");\n    if(incompleteCaptureConstraint)Require(revision==incompleteCaptureConstraint->first && retainedEpoch==incompleteCaptureConstraint->second,\n        \"incomplete_reference_capture_requires_original_model_or_explicit_cold_restart\");\n    value.search.initialModelRevision=revision;if(references || incompleteCaptureConstraint)value.search.initialModelEpoch=retainedEpoch;\n    ValidateCandidateWindowTrainingConfiguration(value.protocol,value.search,parameters);\n    const auto witness=a.readCapacitanceWitness?a.readCapacitanceWitness():std::optional<TrainingCapacitanceWitness>{};\n    auto capacitance=witness?std::optional<TrainingCapacitance>(witness->parameters):std::nullopt;\n    ValidateBoundedTrainingCapacitance(value.search,capacitance);\n    Require(!witness || witness->modelRevision==revision,\"native_composite_capacitance_revision_mismatch\");\n    Require(!value.recordCapacitanceHistory || capacitance,\"native_composite_capacitance_history_requires_owned_C0\");\n    Require(!capacitance || (a.readCapacitanceWitness && a.applyWithCapacitance && a.assessResistanceDomainWithCapacitance),\n        \"native_composite_owned_capacitance_requires_boundary_adapter\");\n    Require(value.search.normalization!=Normalization::TipResistance || a.assessResistanceDomain,\"native_n1_requires_effective_domain_provider\");\n    Require(attempt<9007199254740991ULL && compositeGeneration<std::numeric_limits<std::size_t>::max(),\"native_candidate_window_session_overflow\");\n    const auto nextAttempt=attempt+1;auto runtime=value;runtime.search.runId+=\"/session/\"+std::to_string(nextAttempt);\n    NativeCandidateWindowAttemptDeclaration declaration{runtime.search.runId,value.composite->maximumTotalPrimaryBytes};\n    auto records=compositeRecords;std::size_t bytes=0;for(const auto& r:records) {\n        const auto size=CompositeRecordPrimaryBytes(r);Require(size<=declaration.maximumTotalPrimaryBytes && bytes<=declaration.maximumTotalPrimaryBytes-size,\n            \"native_composite_retained_reference_byte_budget\");bytes+=size;\n    }\n    std::shared_ptr<NativeCompositeTrainingAttempt> actor;auto source=compositeSourceBinding;auto initial=compositeInitialConfiguration;\n"
+        },
+        {
+          "label": "candidate_window_start_commit",
+          "first_line": 200,
+          "last_line": 219,
+          "bytes": 1905,
+          "sha256": "b7f94331f522ce8be65bb764308935959085f63b2703054f93aa1eb8fe916cf6",
+          "utf8_text": "            runtime.search.normalization==Normalization::TipResistance,capacitance);\n    } else Require(!closed,\"native_candidate_window_unexpected_complete_reference_set\");\n    // All allocations/cold7/archive replay precede this fresh actual guard and\n    // publication. A rejected restart leaves the previous family/ledger intact.\n    auto binding=revision;actor->CheckBoundary();actor->CheckClock(m,NativeTrainingWallTime());\n    static_assert(std::is_nothrow_move_assignable_v<NativeTrainingPlan>);\n    static_assert(std::is_nothrow_move_assignable_v<std::optional<TrainingCapacitance>>);\n    InvalidateOwnerControlLifetime();\n    plan=std::move(runtime);composite.swap(actor);compositeSourceBinding.swap(source);compositeInitialConfiguration.swap(initial);\n    compositeOwnerFamily.swap(family);compositeRecords.swap(records);compositePrimaryBytes=bytes;compositeCapacitance=std::move(capacitance);\n    compositeCandidateReferences.swap(closed);search.swap(preparedSearch);attempt=nextAttempt;++compositeGeneration;\n    startModel=lastModel=m;startWall=lastWall=w;retainedEpoch=plan.search.initialModelEpoch;\n    compositeNativeProbes=compositeGroups=compositeSampledFrames=0;referenceProbes=invalidReferences=0;\n    compositeReferenceMeasurements.clear();observedPackets.clear();finalPackets.clear();compositeFinalGroups.clear();compositeFinalRun.clear();\n    compositeRequest.reset();compositeRawNotifications.clear();compositeRawTrialIds.clear();compositeCancellationDiagnostics.clear();\n    if(!references){referencePackets.clear();referenceEvidence.clear();compositeReferenceGroups.clear();}\n    certificate.reset();activeAction.reset();waiting=false;compositeHarvested=true;reason.clear();outcome=TrainingStatus::Searching;\n    incompleteCaptureConstraint.reset();state=references?NativeTrainingState::Searching:NativeTrainingState::CapturingReferences;\n    referenceBinding.swap(binding);\n}\n"
+        },
+        {
+          "label": "composite_cancel_harvest_interrupt",
+          "first_line": 583,
+          "last_line": 613,
+          "bytes": 1860,
+          "sha256": "e3acc09533cab06fac5bdb7bcea344be05b7551cd882a5ab5ea8a93da71347d6",
+          "utf8_text": "}\nvoid NativeTrainingService::StopComposite(const NativeTrainingAdapter& a,TrainingStatus terminal,const std::string& diagnostic) {\n    if(!ActiveComposite(state))return;\n    const auto actor=composite;const auto generation=compositeGeneration,session=attempt;\n    CaptureCompositeInterrupt(a,diagnostic);\n    if(composite!=actor || attempt!=session || compositeGeneration!=generation+1)return;\n    if(search){if(terminal==TrainingStatus::BudgetExhausted)search->ExhaustBudget();else search->ExternalStop();}\n    Finish(terminal,diagnostic+compositeCancellationDiagnostics);\n    DeliverCompositeRaw(a,actor);\n}\nvoid NativeTrainingService::CaptureCompositeInterrupt(const NativeTrainingAdapter& a,const std::string& diagnostic) {\n    InvalidateOwnerControlLifetime();\n    if(!composite)return;const auto actor=composite;\n    ++compositeGeneration;\n    actor->InterruptOwnedRaw(diagnostic,true);\n    if(compositeDispatchDepth)return;\n    actor->SuspendOwned(diagnostic);CollectCompositeRaw(a,actor,true);ArchiveComposite(actor);\n    waiting=false;compositeRequest.reset();\n}\nvoid NativeTrainingService::InterruptComposite(const NativeTrainingAdapter& a,const std::string& diagnostic) {\n    InvalidateOwnerControlLifetime();\n    if(!composite)return;const auto actor=composite;\n    // Fresh authority for this actual owner hook, not a refreshed training\n    // lease. It expires if a callback starts another Reset/Default operation.\n    const auto deliveryLife=actor->ownerLife.IsAlive()?actor->observeOwner():RDK::UModuleLifecycleObservation{};\n    CaptureCompositeInterrupt(a,diagnostic);\n    // Lifecycle hooks intentionally finish their own Reset/Default afterward.\n    // Delivery is the final service operation; callbacks cannot be followed by\n    // stale control/archive writes in this interruption frame.\n    DeliverCompositeRaw(a,actor,deliveryLife);\n}\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/TimeLearner/NativeProbe.cpp",
+      "git_blob": "166dbbaeabbc58d6ff149313ff0a194cfd3aeb5d",
+      "bytes": 30948,
+      "sha256": "1a1dfb9390857166ccd16b2b33e86688efc903a1e0d6da3f9bfd74bca3acd203",
+      "line_count": 524,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "Finish_restore_Cancel_ResetControl",
+          "first_line": 461,
+          "last_line": 512,
+          "bytes": 2945,
+          "sha256": "d60fc79da3ef7306f991581a5e67672f8985a24fe425c1e8b6a3236d18844ef0",
+          "utf8_text": "    sourceSaved=false;\n}\nvoid NativeProbeExecutor::Finish(double time,const std::string& reason,NativeProbeStatus status)\n{\n    NativeProbeResult completed;completed.status=status;completed.prepared=prepared;\n    completed.requestedSpecification=request.specification;\n    if(status!=NativeProbeStatus::Completed)completed.reasons.push_back(reason);\n    try\n    {\n        if(recorder)completed.observation=recorder->Close(time,CanReadModel()?ReadRevision(true):\"\",reason);\n    }\n    catch(const std::exception& error){completed.reasons.push_back(error.what());completed.status=NativeProbeStatus::Rejected;}\n    try\n    {\n        Restore();\n        if(CanReadModel() && request.readModelRevision)\n            completed.currentBaseRevision=ReadRevision(true);\n        if(completed.currentBaseRevision.empty())\n        {completed.reasons.push_back(\"native_base_revision_unavailable\");completed.status=NativeProbeStatus::Rejected;}\n        else if(completed.currentBaseRevision!=request.baseModelRevision)\n        {completed.reasons.push_back(\"native_base_revision_changed\");completed.status=NativeProbeStatus::Rejected;}\n        if(physical && ownerLife.IsAlive())\n            NmsdkTools::RequireNativeOperationsUnchanged(*physical->owner,operationSequence);\n    }\n    catch(const std::exception& error){completed.reasons.push_back(error.what());completed.status=NativeProbeStatus::Rejected;}\n    completed.requiresFreshVerification=completed.status!=NativeProbeStatus::Completed ||\n        (completed.observation && std::find(completed.observation->reasons.begin(),completed.observation->reasons.end(),\n            \"model_revision_changed\")!=completed.observation->reasons.end());\n    if(completed.observation && (completed.status!=NativeProbeStatus::Completed || !completed.reasons.empty()))\n    {\n        completed.observation->valid=false;\n        completed.observation->reasons.insert(completed.observation->reasons.end(),completed.reasons.begin(),completed.reasons.end());\n    }\n    state=completed.status;result=std::move(completed);recorder.reset();\n    if(!presentationSaved){physical.reset();watched.clear();}\n}\nvoid NativeProbeExecutor::Failure(double time,const std::string& reason)\n{ Finish(time,reason,NativeProbeStatus::Rejected); }\nstd::string NativeProbeExecutor::ReadRevision(bool full) const\n{return full && request.readFullModelRevision?request.readFullModelRevision():request.readModelRevision();}\nvoid NativeProbeExecutor::Cancel(const std::string& reason)\n{\n    if(state==NativeProbeStatus::Queued || state==NativeProbeStatus::Running)\n        Finish(lastTime,reason,NativeProbeStatus::Cancelled);\n}\nvoid NativeProbeExecutor::ResetControl()\n{\n    ++controlGeneration;\n    Cancel(\"learner_reset\");Restore();physical.reset();recorder.reset();result.reset();prepared.reset();\n    request=NativeProbeRequest{};seenTrials.clear();state=NativeProbeStatus::Idle;\n}\nstd::optional<NativeProbeResult> NativeProbeExecutor::TakeResult()\n"
+        }
+      ]
+    },
+    {
+      "commit": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+      "path": "Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+      "git_blob": "fae9f8acde530f05ddcf2e63e205947a153552d5",
+      "bytes": 60889,
+      "sha256": "3a1132d6207c4482b283a760baadd0a8b4b8eaec29476d483c9b642f3a01e46e",
+      "line_count": 740,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "RevokeLive_and_raw_interrupt",
+          "first_line": 590,
+          "last_line": 623,
+          "bytes": 2091,
+          "sha256": "dfdc1f8d6ce670fa836a7fcae48eb30a9777567063cfa448423c37115bebc1d4",
+          "utf8_text": "void NativeCompositeTrainingAttempt::RevokeLive(){cancelled=true;lease.reset();}\nvoid NativeCompositeTrainingAttempt::RetainRawPacket(const NativeProbeResult& packet) {\n    if(packet.requestedSpecification)for(auto& trial:rawTrials)\n        if(trial.actual.trialId==packet.requestedSpecification->trialId &&\n            trial.actual.runId==packet.requestedSpecification->runId){trial.packet=packet;break;}\n}\nstd::vector<NativeProbeResult> NativeCompositeTrainingAttempt::TakeRetainedRawPackets() {\n    std::vector<NativeProbeResult> packets;if(!group)return packets;\n    const auto& journal=group->Result().packets;\n    Require(rawDeliveryCursor<=journal.size(),\"composite_raw_delivery_cursor_changed\");\n    while(rawDeliveryCursor<journal.size()) {\n        RetainRawPacket(journal[rawDeliveryCursor]);packets.push_back(journal[rawDeliveryCursor]);++rawDeliveryCursor;\n    }\n    return packets;\n}\nvoid NativeCompositeTrainingAttempt::InterruptOwnedRaw(const std::string& reason,bool lifecycleAuthority) {\n    RevokeLive();\n    // May run from a preparation/sample callback. Capture the actual executor\n    // result now, before Reset clears it, without re-entering a group frame.\n    if(cancelOwnedRaw)if(auto packet=cancelOwnedRaw(reason,lifecycleAuthority)) {\n        RetainRawPacket(*packet);interruptedRawPackets.push_back(std::move(*packet));\n    }\n}\nvoid NativeCompositeTrainingAttempt::SuspendOwned(const std::string& reason) {\n    InterruptOwnedRaw(reason);\n    NativeMatchedOmissionAdapter authority;authority.onRetainedPacket=adapter.onRetainedPacket;\n    // Already captured packets are plain historical data, not an owner getter.\n    authority.takeResult=[this]()->std::optional<NativeProbeResult>{\n        if(interruptedRawPackets.empty())return {};\n        auto packet=std::move(interruptedRawPackets.front());interruptedRawPackets.erase(interruptedRawPackets.begin());return packet;\n    };\n    if(Running())group->Cancel(authority,reason);\n    if(group)while(auto packet=authority.takeResult())group->RetainPacket(authority,std::move(*packet));\n    CloseGroup();RevokeLive();\n"
+        },
+        {
+          "label": "RestartOwned_initial_family",
+          "first_line": 626,
+          "last_line": 647,
+          "bytes": 1969,
+          "sha256": "aa51f00a35c8dabb6eb53e97f135f1bb0a5a6c1ba03a3a15ddc3ad0a0cfcd412",
+          "utf8_text": "void NativeCompositeTrainingAttempt::RestartOwned(CompositeAttemptLimits value,double m,double w,const std::string& revision) {\n    // Only the owning service can carry this immutable source family across a\n    // legal Reset. Default/pool/retarget clear that service-owned family.\n    Require(ownerLife.IsAlive() && !Running(),\"composite_warm_restart_owner_not_available\");\n    ownerLife=observeOwner();Require(ownerLife.IsCurrent(),\"composite_warm_restart_owner_not_current\");\n    Require(value.maximumGroups && value.maximumNativeProbes && value.maximumTotalSamples &&\n        std::isfinite(value.maximumModelSeconds) && value.maximumModelSeconds>0. &&\n        std::isfinite(value.maximumWallSeconds) && value.maximumWallSeconds>0.,\"invalid_composite_attempt_limits\");\n    Require(value.maximumGroups<=9007199254740991ULL && value.maximumNativeProbes<=9007199254740991ULL &&\n        value.maximumTotalSamples<=9007199254740991ULL && std::isfinite(m) && std::isfinite(w),\"inexact_composite_attempt_limits\");\n    limits=value;startModel=lastModel=m;startWall=lastWall=w;cancelled=false;\n    Require(m==actualModelTime() && adapter.requested() && adapter.readModelRevision()==revision,\n        \"composite_warm_restart_current_binding_changed\");\n    // Keep sourceOrigin, sourceBinding, initial revision/epoch, images and C0.\n    CheckBoundary();generation=NextAttemptGeneration();\n    liveAttemptBinding=Hash(QJsonArray{Text(ownerScope),QString::number(qulonglong(generation))});\n    lease=std::make_shared<CompositeTrainingDetail::LiveLease>();\n    lease->requireCurrent=[this](){Require(!cancelled && ownerLife.IsCurrent(),\"expired_composite_training_attempt\");\n        requireOwnerControl();\n        if(!adapter.requested())throw CompositeTrainingStopped();};\n    issuedGroups=completedNativeProbes=totalSamples=activeSamples=0;logicalTrials.clear();\n    group.reset();prepared.reset();measurement.reset();selection.reset();activeIdentity.reset();rawTrials.clear();\n"
+        }
+      ]
+    },
+    {
+      "commit": "956443560ebdb788a0642856381c9c6a7a554b76",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+      "git_blob": "e9b97e169d975536e720814f5540ca769026ce80",
+      "bytes": 519164,
+      "sha256": "9fcca3aa409f3417ba4f1c599227304ccd43038652bdd4b3317bc3eb94b44658",
+      "line_count": 6656,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "ConnectedStop_real_sources_and_stages",
+          "first_line": 4223,
+          "last_line": 4311,
+          "bytes": 6751,
+          "sha256": "64bc1633c0ed62f4aa3e594c70a2734e84349ff470da4784a099155078dd0cc6",
+          "utf8_text": "template<class Learner> void ConnectedStop(ConnectedStopPoint point,int calculateMode)\n{\n    const auto& core=NmsdkTests::InitEngineForPulseLibTests();\n    EditingRig<Learner> rig(2000,1,\"connected_stop_\"+std::to_string(int(point))+\"_mode\"+std::to_string(calculateMode),false,2,false);\n    rig.learner->CalculateMode=calculateMode;\n    const auto configuration=Configuration(rig);\n    rig.learner->ControllerVersion=2;\n    rig.learner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(configuration)).toJson(QJsonDocument::Compact).toStdString();\n    rig.learner->Build();rig.learner->Init();ASSERT_TRUE(rig.learner->NativeModelEditFailure().empty());\n    rig.neuron=rig.learner->template GetComponentL<NPulseNeuron>(\"Neuron\",true);\n    rig.source=rig.learner->template GetComponentL<NPulseGeneratorTransit>(\"DatasetMatrix.Generator1\",true);\n    rig.ports.clear();rig.ports.emplace(&rig.source->Output,\"burst\");\n    UEPtr<ConnectedTrainingFlag> flag(new ConnectedTrainingFlag);\n    flag->SetStorage(core.storage);flag->SetEnvironment(core.environment);flag->Default();\n    flag->Name=\"ExternalTrainingFlag\";flag->Activity=true;flag->SetGlobalTimeStep(rig.frequency);\n    UEPtr<UContainer> node=flag;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;\n    ASSERT_TRUE(rig.learner->IsNeedToTrain.SetPointer(0,&flag->Value));\n    ASSERT_TRUE(rig.learner->IsNeedToTrain.IsConnected());ASSERT_TRUE(rig.learner->IsNeedToTrain.GetData());\n    auto plan=TrainingPlan(rig);bool requested=false;std::size_t observations=0;\n    std::vector<InputParameters> parametersAtStop;\n    std::ostringstream trace;\n    plan.probe.onPrepared=[&](const auto&,const auto&) {\n        trace.str({});trace.clear();trace.imbue(std::locale::classic());trace<<std::setprecision(17)<<\"time,stimulus\";\n        for(std::size_t i=0;i<(rig.branch?1u:rig.inputCount);++i)trace<<\",soma\"<<i;trace<<'\\n';\n    };\n    plan.probe.onSample=[&](const NativeProbeSample& frame) {\n        trace<<frame.time<<','<<frame.stimulus;for(double value:frame.potentials)trace<<','<<value;trace<<'\\n';\n        if(point==ConnectedStopPoint::AfterSample && !requested)\n        {parametersAtStop=rig.learner->ReadNativeParameters();flag->Value=false;requested=true;}\n    };\n    plan.observationSink=[&](const NativeProbeResult& packet) {\n        const auto stem=rig.name+\"_stopped_trial_\"+std::to_string(++observations);\n        Artifact(stem+\".json\",QJsonDocument(EncodeNativeProbeEvidence(packet)).toJson());\n        Artifact(stem+\".csv\",QByteArray::fromStdString(trace.str()));\n    };\n    rig.learner->BeginNativeTraining(plan);\n    for(unsigned ticks=0;;++ticks)\n    {\n        ASSERT_LT(ticks,40000u);const auto& service=rig.learner->NativeTrainingController();\n        if(point==ConnectedStopPoint::KeepTrue && ticks==20)break;\n        if((point==ConnectedStopPoint::Early && ticks==10) ||\n           (point==ConnectedStopPoint::Partial && service.ReferencePackets().size()==1) ||\n           (point==ConnectedStopPoint::Search && service.Search() && service.Search()->AppliedEdits()>0))\n        {parametersAtStop=rig.learner->ReadNativeParameters();flag->Value=false;requested=true;}\n        rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();\n        if(requested)break; // The stop must be observed in this native tick.\n        ASSERT_NE(service.State(),NativeTrainingState::Finished)<<service.Reason();\n    }\n    const auto& service=rig.learner->NativeTrainingController();\n    const bool keep=point==ConnectedStopPoint::KeepTrue;\n    Artifact(rig.name+\"_connected_stop.json\",QJsonDocument(QJsonObject{\n        {\"kind\",\"native_connected_training_stop\"},{\"schema_version\",1},{\"calculate_mode\",calculateMode},\n        {\"controller_version\",rig.learner->ControllerVersion.GetData()},\n        {\"stop_point\",int(point)},{\"connected\",rig.learner->IsNeedToTrain.IsConnected()},\n        {\"source_value\",flag->Value.GetData()},{\"learner_need\",rig.learner->IsNeedToTrain.GetData()},\n        {\"stop_requested\",requested},{\"state\",NativeTrainingStateName(service.State())},\n        {\"outcome\",TrainingStatusName(service.Outcome())},{\"reason\",QString::fromStdString(service.Reason())},\n        {\"certificate_present\",bool(service.Certificate())},{\"reference_packets\",double(service.ReferencePackets().size())},\n        {\"observed_packets\",double(service.ObservedPackets().size())},{\"probe_state\",NativeProbeStatusName(rig.learner->NativeProbeState())},\n        {\"parameters_preserved\",keep || parametersAtStop==rig.learner->ReadNativeParameters()},\n        {\"evaluation_verdict\",QJsonValue(QJsonValue::Null)}}).toJson());\n    EXPECT_EQ(flag->Value.GetData(),keep);EXPECT_EQ(rig.learner->IsNeedToTrain.GetData(),keep);\n    EXPECT_TRUE(rig.learner->IsNeedToTrain.IsConnected());EXPECT_FALSE(service.Certificate());\n    if(keep)\n    {EXPECT_EQ(service.State(),NativeTrainingState::CapturingReferences);EXPECT_EQ(service.Outcome(),TrainingStatus::Searching);}\n    else\n    {\n        ASSERT_EQ(service.State(),NativeTrainingState::Finished);\n        EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_EQ(service.Reason(),\"external_stop\");\n        EXPECT_EQ(rig.learner->ReadNativeParameters(),parametersAtStop);\n        EXPECT_NE(rig.learner->NativeProbeState(),NativeProbeStatus::Queued);EXPECT_NE(rig.learner->NativeProbeState(),NativeProbeStatus::Running);\n        const auto state=rig.learner->ExportNativeLearnedState(\"native-connected-stop-fixture-v1\");\n        EXPECT_EQ(state[\"kind\"].toString(),\"timelearner_stopped_state\");\n        Artifact(rig.name+\"_stopped_state.json\",QJsonDocument(state).toJson());\n        Artifact(rig.name+\"_stopped_summary.json\",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());\n    }\n    rig.learner->IsNeedToTrain.DetachFrom();\n    if(keep)rig.learner->IsNeedToTrain=false; // Local cleanup after the positive-control observation.\n}\n#define CONNECTED_STOP_TESTS(TOPOLOGY,TYPE,MODE) \\\nTEST(NativeConnectedStop,TOPOLOGY##MODE##Early){ConnectedStop<TYPE>(ConnectedStopPoint::Early,MODE);} \\\nTEST(NativeConnectedStop,TOPOLOGY##MODE##Partial){ConnectedStop<TYPE>(ConnectedStopPoint::Partial,MODE);} \\\nTEST(NativeConnectedStop,TOPOLOGY##MODE##Search){ConnectedStop<TYPE>(ConnectedStopPoint::Search,MODE);} \\\nTEST(NativeConnectedStop,TOPOLOGY##MODE##AfterSample){ConnectedStop<TYPE>(ConnectedStopPoint::AfterSample,MODE);} \\\nTEST(NativeConnectedStop,TOPOLOGY##MODE##KeepTrue){ConnectedStop<TYPE>(ConnectedStopPoint::KeepTrue,MODE);}\nCONNECTED_STOP_TESTS(Classic,NNeuronTimeLearner,0)\nCONNECTED_STOP_TESTS(Classic,NNeuronTimeLearner,1)\nCONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,0)\nCONNECTED_STOP_TESTS(Branch,NNeuronTimeLearnerBranch,1)\n"
+        },
+        {
+          "label": "TrainingIntent_explicit_reset_begin",
+          "first_line": 4314,
+          "last_line": 4397,
+          "bytes": 6600,
+          "sha256": "40d87ebfa2c0a49085481d1fedf1eb1c551cf7be2c5cf4f66423877d8ba7e1e1",
+          "utf8_text": "template<class Learner> void TrainingIntentLifecycle(int mode,bool connected)\n{\n    EditingRig<Learner> rig(2000,1,\"request_intent_\"+std::to_string(mode)+(connected?\"_connected\":\"_local\"));\n    auto plan=TrainingPlan(rig);plan.maximumModelSeconds=.01;\n    rig.learner->CalculateMode=mode;rig.learner->CalibrateLTZThresholdFraction=.37;\n    UEPtr<ConnectedTrainingFlag> flag;\n    if(connected) {\n        const auto& core=NmsdkTests::InitEngineForPulseLibTests();\n        flag=UEPtr<ConnectedTrainingFlag>(new ConnectedTrainingFlag);\n        flag->SetStorage(core.storage);flag->SetEnvironment(core.environment);flag->Default();\n        flag->Name=\"RequestIntentProvider\";flag->Activity=true;flag->SetGlobalTimeStep(rig.frequency);\n        UEPtr<UContainer> node=flag;ASSERT_NE(rig.model->AddComponent(node),ForbiddenId);flag->Init();flag->Value=true;\n        ASSERT_TRUE(rig.learner->IsNeedToTrain.SetPointer(0,&flag->Value));\n    }\n    EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());\n    rig.learner->BeginNativeTraining(plan);\n    const auto first=rig.learner->NativeTrainingRequest();ASSERT_FALSE(first.isEmpty());\n    EXPECT_EQ(first[\"kind\"],QJsonValue(\"native_training_request_intent\"));\n    auto unsignedFirst=first;unsignedFirst.remove(\"sha256\");\n    EXPECT_EQ(first[\"sha256\"],QJsonValue(NmsdkTools::CanonicalModelDataSha256(unsignedFirst)));\n    const auto controls=first[\"controls\"].toObject(),parameters=controls[\"parameters\"].toObject();\n    EXPECT_EQ(parameters[\"CalculateMode\"],QJsonValue(mode));EXPECT_TRUE(parameters[\"IsNeedToTrain\"].toBool());\n    EXPECT_DOUBLE_EQ(parameters[\"CalibrateLTZThresholdFraction\"].toDouble(),.37);\n    EXPECT_EQ(controls[\"bindings\"].toObject()[\"IsNeedToTrain\"].toObject()[\"connected\"],QJsonValue(connected));\n    // A later control edit is observable separately; it cannot rewrite the\n    // declaration that a future finalization driver must validate.\n    rig.learner->CalibrateLTZThresholdFraction=.63;\n    for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks) {\n        ASSERT_LT(ticks,100u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();\n    }\n    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::BudgetExhausted);\n    EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);\n    EXPECT_EQ(rig.learner->IsNeedToTrain.GetData(),connected || mode==1);\n    if(flag)EXPECT_TRUE(flag->Value.GetData());\n    const auto unchangedModel=rig.Revision();std::string driftReason;\n    try {(void)CaptureNativeFinalizationBoundary(*rig.learner,\"request-intent-test\",true);}\n    catch(const std::logic_error& error){driftReason=error.what();}\n    EXPECT_EQ(driftReason,\"native_training_request_controls_changed\");\n    EXPECT_EQ(rig.Revision(),unchangedModel);EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);\n    auto edited=rig.learner->NativeTrainingRequest();edited[\"controls\"]=QJsonObject{};\n    EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);\n    const auto bad=rig.learner->ImportNativeLearnedState(QJsonObject{},\"request-intent-test\");\n    EXPECT_NE(bad.status,NativeModelBuildStatus::Adopted);EXPECT_EQ(rig.learner->NativeTrainingRequest(),first);\n    const auto geometry=rig.learner->ReadNativeParameters();rig.learner->Reset();\n    EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());EXPECT_EQ(rig.learner->ReadNativeParameters(),geometry);\n    rig.learner->BeginNativeTraining(plan);const auto second=rig.learner->NativeTrainingRequest();ASSERT_FALSE(second.isEmpty());\n    EXPECT_GT(second[\"session_attempt\"].toDouble(),first[\"session_attempt\"].toDouble());\n    EXPECT_DOUBLE_EQ(second[\"controls\"].toObject()[\"parameters\"].toObject()[\"CalibrateLTZThresholdFraction\"].toDouble(),.63);\n    if(flag)flag->Value=false;else rig.learner->IsNeedToTrain=false;\n    rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();\n    EXPECT_EQ(rig.learner->NativeTrainingController().Outcome(),TrainingStatus::ExternalStop);\n    EXPECT_EQ(rig.learner->NativeTrainingRequest(),second);EXPECT_FALSE(rig.learner->NativeTrainingController().Certificate());\n    const auto stopped=CaptureNativeFinalizationBoundary(*rig.learner,\"request-intent-test\",true);\n    EXPECT_TRUE(stopped.DiagnosticOnly());EXPECT_EQ(stopped.Document()[\"schema_version\"],QJsonValue(2));\n    EXPECT_EQ(stopped.Document()[\"training_request\"],second);\n    const auto imported=rig.learner->ImportNativeLearnedState(stopped.Solo(),\"request-intent-test\");\n    EXPECT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;\n    const auto afterImport=rig.learner->NativeTrainingRequest();EXPECT_TRUE(afterImport.isEmpty());\n    rig.learner->Build();rig.learner->Init();\n    rig.learner->Reset();if(flag)flag->Value=true;\n    rig.learner->BeginNativeTraining(plan);const auto third=rig.learner->NativeTrainingRequest();ASSERT_FALSE(third.isEmpty());\n    const auto unchanged=rig.learner->InputPattern.GetData();rig.learner->InputPattern=unchanged;\n    EXPECT_EQ(rig.learner->NativeTrainingRequest(),third);\n    auto changed=unchanged;changed(0,0)+=.001;rig.learner->InputPattern=changed;\n    EXPECT_TRUE(rig.learner->NativeTrainingRequest().isEmpty());\n    Artifact(rig.name+\"_request_intent.json\",QJsonDocument(QJsonObject{\n        {\"kind\",\"native_training_request_intent_lifecycle\"},{\"schema_version\",2},\n        {\"calculate_mode\",mode},{\"connected\",connected},{\"first\",first},{\"second\",second},{\"third\",third},\n        {\"after_retarget\",rig.learner->NativeTrainingRequest()},\n        {\"control_drift_reason\",QString::fromStdString(driftReason)},\n        {\"stopped_boundary\",stopped.Document()},{\"import_adopted\",imported.status==NativeModelBuildStatus::Adopted},\n        {\"after_import\",afterImport},\n        {\"final_outcome\",TrainingStatusName(rig.learner->NativeTrainingController().Outcome())},\n        {\"final_reason\",QString::fromStdString(rig.learner->NativeTrainingController().Reason())},\n        {\"calibrated\",false},{\"evaluation_verdict\",QJsonValue(QJsonValue::Null)}}).toJson());\n    if(flag)rig.learner->IsNeedToTrain.DetachFrom();\n}\n#define TRAINING_INTENT_TESTS(TOPOLOGY,TYPE) \\\nTEST(NativeTrainingIntent,TOPOLOGY##Local0){TrainingIntentLifecycle<TYPE>(0,false);} \\\nTEST(NativeTrainingIntent,TOPOLOGY##Local1){TrainingIntentLifecycle<TYPE>(1,false);} \\\nTEST(NativeTrainingIntent,TOPOLOGY##Connected0){TrainingIntentLifecycle<TYPE>(0,true);} \\\nTEST(NativeTrainingIntent,TOPOLOGY##Connected1){TrainingIntentLifecycle<TYPE>(1,true);}\nTRAINING_INTENT_TESTS(Classic,NNeuronTimeLearner)\nTRAINING_INTENT_TESTS(Branch,NNeuronTimeLearnerBranch)\n"
+        },
+        {
+          "label": "Exact_Reset_Warm_and_retarget",
+          "first_line": 4633,
+          "last_line": 4666,
+          "bytes": 2717,
+          "sha256": "2e08046516d7f7c30325196a8213fe6aabdc5cf55bed0ea4335cd553e34db7a0",
+          "utf8_text": "TEST(NativeTrainingService,ExactAutoCompletionResetWarmRestartAndRetarget)\n{\n    EditingRig<NNeuronTimeLearner> rig(2000,1,\"service_exact_warm\");rig.learner->CalculateMode=0;\n    auto plan=TrainingPlan(rig,.2);\n    RecordNativeTrainingProof(plan,rig.name,rig.inputCount);\n    for(auto& bound:plan.search.bounds){bound.maximumLength=bound.minimumLength;bound.maximumResistance=bound.minimumResistance;}\n    const auto run=[&] {\n        rig.learner->BeginNativeTraining(plan);\n        for(unsigned ticks=0;rig.learner->NativeTrainingController().State()!=NativeTrainingState::Finished;++ticks)\n        {ASSERT_LT(ticks,20000u);rig.model->Calculate();rig.environment->IncreaseModelTimeByStep();}\n    };\n    run();const auto& service=rig.learner->NativeTrainingController();\n    Artifact(rig.name+\"_cold_outcome.json\",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());\n    ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());\n    EXPECT_FALSE(rig.learner->IsNeedToTrain.GetData());EXPECT_TRUE(service.Certificate()->Exact());\n    const auto captured=service.References()->Inputs();const auto hash=rig.Revision();\n    ASSERT_EQ(service.ReferenceObservations().size(),2u);\n    const auto originalReferenceTrial=service.ReferenceObservations()[0].observation.specification.trialId;\n    rig.learner->Reset();EXPECT_EQ(rig.Revision(),hash);ASSERT_TRUE(service.Certificate());\n    ASSERT_EQ(service.ReferenceObservations().size(),2u);\n    run();EXPECT_EQ(service.Outcome(),TrainingStatus::Exact);EXPECT_EQ(service.IssuedReferenceProbes(),0u);\n    Artifact(rig.name+\"_warm_outcome.json\",QJsonDocument(EncodeNativeTrainingState(service,rig.Revision(),rig.learner->ReadNativeParameters())).toJson());\n    ASSERT_TRUE(service.References());EXPECT_EQ(service.References()->Inputs(),captured);\n    ASSERT_EQ(service.ReferenceObservations().size(),2u);\n    EXPECT_EQ(service.ReferenceObservations()[0].observation.specification.trialId,originalReferenceTrial);\n    auto pattern=rig.learner->InputPattern.GetData();pattern(1,0)+=.01;rig.learner->InputPattern=pattern;\n    EXPECT_FALSE(service.References());EXPECT_FALSE(service.Certificate());\n    EXPECT_TRUE(service.ReferenceObservations().empty());\n    EXPECT_NE(service.Outcome(),TrainingStatus::Exact);\n    Artifact(rig.name+\"_retarget_control.json\",QJsonDocument(QJsonObject{\n        {\"kind\",\"native_retarget_invalidation\"},{\"schema_version\",1},\n        {\"references\",bool(service.References())},{\"certificate\",bool(service.Certificate())},\n        {\"outcome\",TrainingStatusName(service.Outcome())},{\"scientific_verdict\",QJsonValue(QJsonValue::Null)}}).toJson());\n}\n"
+        }
+      ]
+    },
+    {
+      "commit": "956443560ebdb788a0642856381c9c6a7a554b76",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "git_blob": "9e3dc7984368c902ecec4e05b86ff9d620a64ef4",
+      "bytes": 301393,
+      "sha256": "2f62224ddd3dbbec2e0768516e556cb504afb5e27d3c0527a7217e3713b1ca18",
+      "line_count": 3092,
+      "slice_encoding": "exact Git bytes decoded UTF-8; original line endings retained",
+      "slices": [
+        {
+          "label": "ServiceWarmReset",
+          "first_line": 487,
+          "last_line": 510,
+          "bytes": 2045,
+          "sha256": "9e0539cdb6b7bf6b9fcb9c6f9a9d32e6659a4c11a6e5c37bade82a3d45339874",
+          "utf8_text": "    const auto oldProof=old.Certificate()->CompositeProofIds();const auto oldC0=f.owner->ReadNativeTrainingCapacitance()->origin;\n    const auto prepared=f.preparations;f.owner->Reset();\n    ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Idle);\n    ASSERT_TRUE(f.owner->NativeTrainingController().References());\n    f.owner->BeginNativeTraining(p);ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Searching)\n        <<f.owner->NativeTrainingController().Reason();ServiceTicks(f);\n    const auto& warm=f.owner->NativeTrainingController();ASSERT_EQ(warm.Outcome(),TrainingStatus::Exact)<<warm.Reason();\n    EXPECT_EQ(warm.CompositeSourceBinding(),source);EXPECT_EQ(warm.CompositeReferenceGroupIds(),references);\n    EXPECT_NE(warm.Certificate()->CompositeProofIds(),oldProof);EXPECT_EQ(f.owner->ReadNativeTrainingCapacitance()->origin,oldC0);\n    EXPECT_EQ(f.preparations-prepared,4*warm.Search()->IssuedProbes());EXPECT_EQ(warm.SessionAttempt(),2u);\n    EXPECT_EQ(warm.CompositeNativeProbes(),f.preparations-prepared);\n    ASSERT_GE(warm.CompositeMeasurements().size(),2u);\n    EXPECT_NE(warm.CompositeMeasurements().front().liveAttemptBinding,warm.CompositeMeasurements().back().liveAttemptBinding);\n}\ntemplate<class Owner> void ServiceStopBeforeConsume(bool setter) {\n    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto p=ServicePlan(f);bool stopped=false;\n    p.beforeCompositeConsume=[&](const NativeCompositeMeasurementRecord& record){\n        if(record.purpose==CompositeMeasurementPurpose::Final && !stopped) {\n            stopped=true;if(setter)f.owner->IsNeedToTrain=false;else f.owner->IsNeedToTrain.SetDataDirect(false);\n        }\n    };\n    ServiceStart(f,p);ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();\n    EXPECT_TRUE(stopped);EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);EXPECT_FALSE(service.Certificate());\n    EXPECT_TRUE(service.CompositeFinalGroupIds().empty());ASSERT_FALSE(service.CompositeMeasurements().empty());\n"
+        },
+        {
+          "label": "configured_ColdAutostart",
+          "first_line": 934,
+          "last_line": 950,
+          "bytes": 1536,
+          "sha256": "dad2c9d9041b70894fb4a51b0c54626e12ded77d47aeef55451738853fded69e",
+          "utf8_text": "template<class Owner> void ColdAutostart(int mode) {\n    NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=CompositeCold(f);f.attempt.reset();\n    // The production setter intentionally refuses ControllerVersion changes\n    // while a native model is owned. Start a real cold owner before opting in.\n    f.owner->Default();f.owner->SetGlobalTimeStep(2000);f.owner->EnablePostTrainTuning=false;\n    f.owner->AutoCalibrateFixedLTZThreshold=false;f.owner->IsNeedToTrain=false;\n    f.owner->CalculateMode=mode;f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();\n    f.owner->ControllerVersion=2;ASSERT_EQ(f.owner->ControllerVersion.GetData(),2);\n    f.owner->Build();ASSERT_TRUE(f.owner->IsReady());f.model->Init();f.model->Reset();\n    ASSERT_TRUE(f.owner->IsInit());ASSERT_TRUE(f.owner->ConfiguredModelInitialized.GetData());\n    std::size_t raw=0,groups=0;ConfiguredNativeEvidenceSinks sinks;\n    sinks.onPrepared=[&](const auto&,const auto&){++raw;};sinks.onComposite=[&](const auto&){++groups;};\n    f.owner->SetConfiguredNativeEvidenceSinks(sinks);f.owner->IsNeedToTrain=true;ServiceTicks(f);\n    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();\n    ASSERT_TRUE(service.Certificate());EXPECT_EQ(service.Plan().protocol.schemaVersion,4u);EXPECT_EQ(raw,4*groups);\n    EXPECT_EQ(groups,service.CompositeGroups());EXPECT_EQ(raw,service.CompositeNativeProbes());\n}\n"
+        },
+        {
+          "label": "existing_warm_and_stop_case_ids",
+          "first_line": 801,
+          "last_line": 826,
+          "bytes": 3315,
+          "sha256": "6ca6a92e7085718333d341eb59149fe867280be820db4932ffdf8a822d9dd9a7",
+          "utf8_text": "TEST(NativeCompositeService,ClassicCalculateMode0Exact){ServiceExact<NNeuronTimeLearner>(0);}\nTEST(NativeCompositeService,ClassicCalculateMode1Exact){ServiceExact<NNeuronTimeLearner>(1);}\nTEST(NativeCompositeService,BranchCalculateMode0Exact){ServiceExact<NNeuronTimeLearnerBranch>(0);}\nTEST(NativeCompositeService,BranchCalculateMode1Exact){ServiceExact<NNeuronTimeLearnerBranch>(1);}\nTEST(NativeCompositeService,ClassicDefaultSyncOutsideTolerance){ServiceDefaultSync<NNeuronTimeLearner>();}\nTEST(NativeCompositeService,BranchDefaultSyncOutsideTolerance){ServiceDefaultSync<NNeuronTimeLearnerBranch>();}\nTEST(NativeCompositeService,ClassicWarmResetPreservesInitialFamilyAndC0){ServiceWarmReset<NNeuronTimeLearner>();}\nTEST(NativeCompositeService,BranchWarmResetPreservesInitialFamilyAndC0){ServiceWarmReset<NNeuronTimeLearnerBranch>();}\nTEST(NativeCompositeService,ClassicSetterStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearner>(true);}\nTEST(NativeCompositeService,BranchSetterStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearnerBranch>(true);}\nTEST(NativeCompositeService,ClassicDirectDataStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearner>(false);}\nTEST(NativeCompositeService,BranchDirectDataStopBeforeFinalConsume){ServiceStopBeforeConsume<NNeuronTimeLearnerBranch>(false);}\nTEST(NativeCompositeService,ClassicPreparedStopHasSingleRawResult){ServicePreparedStop<NNeuronTimeLearner>();}\nTEST(NativeCompositeService,BranchPreparedStopHasSingleRawResult){ServicePreparedStop<NNeuronTimeLearnerBranch>();}\nTEST(NativeCompositeService,ClassicCancelledSinkThrowIsSingleAttempt){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Throw);}\nTEST(NativeCompositeService,BranchCancelledSinkThrowIsSingleAttempt){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Throw);}\nTEST(NativeCompositeService,ClassicCancelledSinkResetDoesNotFinishOldControl){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Reset);}\nTEST(NativeCompositeService,BranchCancelledSinkResetDoesNotFinishOldControl){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Reset);}\nTEST(NativeCompositeService,ClassicCancelledSinkDefaultCannotReviveFamily){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Default);}\nTEST(NativeCompositeService,BranchCancelledSinkDefaultCannotReviveFamily){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Default);}\nTEST(NativeCompositeService,ClassicCancelledSinkRetargetCannotBeOverwritten){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::Retarget);}\nTEST(NativeCompositeService,BranchCancelledSinkRetargetCannotBeOverwritten){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::Retarget);}\nTEST(NativeCompositeService,ClassicRecursiveStopDoesNotRepeatRawDelivery){ServicePreparedSinkAction<NNeuronTimeLearner>(RawSinkAction::RecursiveStop);}\nTEST(NativeCompositeService,BranchRecursiveStopDoesNotRepeatRawDelivery){ServicePreparedSinkAction<NNeuronTimeLearnerBranch>(RawSinkAction::RecursiveStop);}\nTEST(NativeCompositeService,ClassicWarmDoesNotReplayCancelledRaw){ServiceWarmDoesNotReplayCancelledRaw<NNeuronTimeLearner>();}\nTEST(NativeCompositeService,BranchWarmDoesNotReplayCancelledRaw){ServiceWarmDoesNotReplayCancelledRaw<NNeuronTimeLearnerBranch>();}\n"
+        },
+        {
+          "label": "Need_false_factory_case_ids",
+          "first_line": 1865,
+          "last_line": 1868,
+          "bytes": 622,
+          "sha256": "0ab74b09f95fb61de26298c21df114c6a1fab12e882ef743ef7376afbae23ddd",
+          "utf8_text": "TEST(NativeCandidateWindowFactory,NeedSetterFalseBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::NeedSetter);}\nTEST(NativeCandidateWindowFactory,NeedDirectFalseBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::NeedDirect);}\nTEST(NativeCandidateWindowFactory,ConnectedNeedFalseBeforeReferenceCompletion){WindowReferenceBoundary<NNeuronTimeLearnerBranch>(WindowReferenceStop::NeedConnected);}\nTEST(NativeCandidateWindowFactory,OwnerResetExpiresPreparedReferences){WindowReferenceBoundary<NNeuronTimeLearner>(WindowReferenceStop::Reset);}\n"
+        },
+        {
+          "label": "Need_false_before_consume_case_ids",
+          "first_line": 2292,
+          "last_line": 2295,
+          "bytes": 628,
+          "sha256": "0d32a22259516a00bf6255cb12c488fe46184c53f0d2dd64e96fbf9953f28585",
+          "utf8_text": "TEST(NativeCandidateWindowTrainingCore,SetterFalseBetweenCloseAndConsume){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::NeedSetter);}\nTEST(NativeCandidateWindowTrainingCore,DirectFalseBetweenCloseAndConsume){WindowCoreConsumeRevoked<NNeuronTimeLearnerBranch>(CoreWindowRevocation::NeedDirect);}\nTEST(NativeCandidateWindowTrainingCore,ConnectedFalseBetweenCloseAndConsume){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::NeedConnected);}\nTEST(NativeCandidateWindowTrainingCore,OwnerResetExpiresClosedMeasurement){WindowCoreConsumeRevoked<NNeuronTimeLearner>(CoreWindowRevocation::Reset);}\n"
+        },
+        {
+          "label": "candidate_window_service_case_ids",
+          "first_line": 2651,
+          "last_line": 2667,
+          "bytes": 2372,
+          "sha256": "f77f977e53a8787bad2c3012bf2303e60bd135175381eb4b7870e92f9c51389b",
+          "utf8_text": "TEST(NativeCandidateWindowService,ClassicN0CalculateMode0FreshAllNFinal){WindowServiceExact<NNeuronTimeLearner>(0);}\nTEST(NativeCandidateWindowService,BranchN0CalculateMode0FreshAllNFinal){WindowServiceExact<NNeuronTimeLearnerBranch>(0);}\nTEST(NativeCandidateWindowService,ClassicN0CalculateMode1FreshAllNFinal){WindowServiceExact<NNeuronTimeLearner>(1);}\nTEST(NativeCandidateWindowService,BranchN0CalculateMode1FreshAllNFinal){WindowServiceExact<NNeuronTimeLearnerBranch>(1);}\nTEST(NativeCandidateWindowService,ClassicN1UsesActualEffectiveDomainProvider){WindowServiceN1ActualDomain<NNeuronTimeLearner>();}\nTEST(NativeCandidateWindowService,BranchN1UsesActualEffectiveDomainProvider){WindowServiceN1ActualDomain<NNeuronTimeLearnerBranch>();}\nTEST(NativeCandidateWindowService,ClassicDefaultSyncRemainsNonExact){WindowServiceExact<NNeuronTimeLearner>(1,true,false,true);}\nTEST(NativeCandidateWindowService,BranchDefaultSyncRemainsNonExact){WindowServiceExact<NNeuronTimeLearnerBranch>(1,true,false,true);}\nTEST(NativeCandidateWindowService,ClassicBoundC0WitnessesStayOnBaseRevision){WindowServiceExact<NNeuronTimeLearner>(1,true,true);}\nTEST(NativeCandidateWindowService,BranchBoundC0WitnessesStayOnBaseRevision){WindowServiceExact<NNeuronTimeLearnerBranch>(1,true,true);}\nTEST(NativeCandidateWindowService,ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory){WindowServiceGrowth<NNeuronTimeLearner>(true);}\nTEST(NativeCandidateWindowService,BranchWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory){WindowServiceGrowth<NNeuronTimeLearnerBranch>(true);}\nTEST(NativeCandidateWindowService,ClassicPartialWarmDiscardsExpiredSeedsAndRecapturesAllN){WindowServicePartialWarm<NNeuronTimeLearner>();}\nTEST(NativeCandidateWindowService,BranchPartialWarmDiscardsExpiredSeedsAndRecapturesAllN){WindowServicePartialWarm<NNeuronTimeLearnerBranch>();}\nTEST(NativeCandidateWindowService,ClassicSetterFalseBeforeAllNDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearner>(WindowServiceFault::NeedSetter);}\nTEST(NativeCandidateWindowService,BranchDirectFalseBeforeAllNDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearnerBranch>(WindowServiceFault::NeedDirect);}\nTEST(NativeCandidateWindowService,ClassicConnectedFalseBeforeAllNDoesNotPromotePrefix){WindowServiceRejectsCallbackFault<NNeuronTimeLearner>(WindowServiceFault::NeedConnected);}\n"
+        }
+      ]
+    }
+  ],
+  "external_activation_trace": {
+    "pinned_scope": [
+      "Core",
+      "Tests/Unit/Engine"
+    ],
+    "Git_grep_term": "ExternalDataSource",
+    "matches": [
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UClassImageRegistry.cpp:126:    if((input->IsConnected() || input->UsesExternalDataSource()) &&",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UClassImageRegistry.cpp:135:     Append(result, input->UsesExternalDataSource() ? \"external\" : \"pointer\");",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UComponent.h:581: virtual bool UsesExternalDataSource(void) const { return false; }",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UNet.cpp:43:  if(!input || !input->CanInspectDataSources() || !input->IsConnected() || input->UsesExternalDataSource())continue;",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:422:UVBaseDataProperty<T>* ExternalDataSource;",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:447:  UVBaseProperty<T, OwnerT>(owner), GetterR(getmethod), SetterR(setmethod), ExternalDataSource(0),",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:456:  UVBaseProperty<T, OwnerT>(owner, pdata), GetterR(0), SetterR(setmethod), ExternalDataSource(0),",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:465:  UVBaseProperty<T, OwnerT>(owner), GetterR(0), SetterR(setmethod), ExternalDataSource(0),",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:612: if (!IsConnectedFlag && !this->ExternalDataSource) [[likely]]",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:614: if (!IsConnectedFlag && !this->ExternalDataSource)",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:627: if (this->ExternalDataSource) [[unlikely]]",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:629: if (this->ExternalDataSource)",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:633:  return this->ExternalDataSource->GetData();",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:707: if (this->ExternalDataSource)",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:709:  this->ExternalDataSource->SetData(value);",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:754: if (this->ExternalDataSource)",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:756:  this->ExternalDataSource->SetData(value);",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:825:  ExternalDataSource = nullptr;",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:834: ExternalDataSource = nullptr;",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:840:bool UsesExternalDataSource(void) const override { return ExternalDataSource != nullptr; }",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:844: if(ExternalDataSource) return {ExternalDataSource};",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:984: if(this->ExternalDataSource)",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:985:  return this->ExternalDataSource->GetData();",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:1007: if(this->ExternalDataSource)",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UProperty.h:1009:  this->ExternalDataSource->SetData(value);",
+      "d6c9df759a3ee20ad42fa0a83841f19385fba60a:Core/Engine/UStorage.cpp:65:   else if(input->UsesExternalDataSource())input->ResetPointer(-1,nullptr);"
+    ],
+    "AttachTo_is_connected_read": true,
+    "public_activation_of_IsNeedToTrain_external_alias": "not_traced",
+    "actual_runtime_reachability_claimed": false,
+    "absence_in_scoped_search_is_not_global_unreachability_proof": true
+  },
+  "existing_test_source_coverage": [
+    {
+      "name": "initial_autostart",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "scope": "literal source IDs; no compiled/runtime acceptance",
+      "tests": [
+        {
+          "id": "NativeCompositeAutostart.ClassicCalculateMode0",
+          "line": 980
+        },
+        {
+          "id": "NativeCompositeAutostart.ClassicCalculateMode1",
+          "line": 981
+        },
+        {
+          "id": "NativeCompositeAutostart.BranchCalculateMode0",
+          "line": 982
+        },
+        {
+          "id": "NativeCompositeAutostart.BranchCalculateMode1",
+          "line": 983
+        }
+      ]
+    },
+    {
+      "name": "composite_warm_and_cancelled_history",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "scope": "literal source IDs; no compiled/runtime acceptance",
+      "tests": [
+        {
+          "id": "NativeCompositeService.ClassicWarmResetPreservesInitialFamilyAndC0",
+          "line": 807
+        },
+        {
+          "id": "NativeCompositeService.BranchWarmResetPreservesInitialFamilyAndC0",
+          "line": 808
+        },
+        {
+          "id": "NativeCompositeService.ClassicWarmDoesNotReplayCancelledRaw",
+          "line": 825
+        },
+        {
+          "id": "NativeCompositeService.BranchWarmDoesNotReplayCancelledRaw",
+          "line": 826
+        }
+      ]
+    },
+    {
+      "name": "candidate_factory_need_false",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "scope": "literal source IDs; no compiled/runtime acceptance",
+      "tests": [
+        {
+          "id": "NativeCandidateWindowFactory.NeedSetterFalseBeforeReferenceCompletion",
+          "line": 1865
+        },
+        {
+          "id": "NativeCandidateWindowFactory.NeedDirectFalseBeforeReferenceCompletion",
+          "line": 1866
+        },
+        {
+          "id": "NativeCandidateWindowFactory.ConnectedNeedFalseBeforeReferenceCompletion",
+          "line": 1867
+        }
+      ]
+    },
+    {
+      "name": "candidate_core_need_false",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "scope": "literal source IDs; no compiled/runtime acceptance",
+      "tests": [
+        {
+          "id": "NativeCandidateWindowTrainingCore.SetterFalseBetweenCloseAndConsume",
+          "line": 2292
+        },
+        {
+          "id": "NativeCandidateWindowTrainingCore.DirectFalseBetweenCloseAndConsume",
+          "line": 2293
+        },
+        {
+          "id": "NativeCandidateWindowTrainingCore.ConnectedFalseBetweenCloseAndConsume",
+          "line": 2294
+        }
+      ]
+    },
+    {
+      "name": "candidate_service_warm_partial_and_need_false",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "scope": "literal source IDs; no compiled/runtime acceptance",
+      "tests": [
+        {
+          "id": "NativeCandidateWindowService.ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory",
+          "line": 2661
+        },
+        {
+          "id": "NativeCandidateWindowService.BranchWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory",
+          "line": 2662
+        },
+        {
+          "id": "NativeCandidateWindowService.ClassicPartialWarmDiscardsExpiredSeedsAndRecapturesAllN",
+          "line": 2663
+        },
+        {
+          "id": "NativeCandidateWindowService.BranchPartialWarmDiscardsExpiredSeedsAndRecapturesAllN",
+          "line": 2664
+        },
+        {
+          "id": "NativeCandidateWindowService.ClassicSetterFalseBeforeAllNDoesNotPromotePrefix",
+          "line": 2665
+        },
+        {
+          "id": "NativeCandidateWindowService.BranchDirectFalseBeforeAllNDoesNotPromotePrefix",
+          "line": 2666
+        },
+        {
+          "id": "NativeCandidateWindowService.ClassicConnectedFalseBeforeAllNDoesNotPromotePrefix",
+          "line": 2667
+        }
+      ]
+    },
+    {
+      "name": "connected_stop",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+      "scope": "mechanically expanded source macro IDs only; not compiled/runtime acceptance",
+      "source_first_line": 4223,
+      "source_last_line": 4311,
+      "test_ids": [
+        "NativeConnectedStop.Classic0Early",
+        "NativeConnectedStop.Classic0Partial",
+        "NativeConnectedStop.Classic0Search",
+        "NativeConnectedStop.Classic0AfterSample",
+        "NativeConnectedStop.Classic0KeepTrue",
+        "NativeConnectedStop.Classic1Early",
+        "NativeConnectedStop.Classic1Partial",
+        "NativeConnectedStop.Classic1Search",
+        "NativeConnectedStop.Classic1AfterSample",
+        "NativeConnectedStop.Classic1KeepTrue",
+        "NativeConnectedStop.Branch0Early",
+        "NativeConnectedStop.Branch0Partial",
+        "NativeConnectedStop.Branch0Search",
+        "NativeConnectedStop.Branch0AfterSample",
+        "NativeConnectedStop.Branch0KeepTrue",
+        "NativeConnectedStop.Branch1Early",
+        "NativeConnectedStop.Branch1Partial",
+        "NativeConnectedStop.Branch1Search",
+        "NativeConnectedStop.Branch1AfterSample",
+        "NativeConnectedStop.Branch1KeepTrue"
+      ]
+    },
+    {
+      "name": "intent_explicit_restart",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+      "scope": "mechanically expanded source macro IDs only; not compiled/runtime acceptance",
+      "source_first_line": 4314,
+      "source_last_line": 4397,
+      "test_ids": [
+        "NativeTrainingIntent.ClassicLocal0",
+        "NativeTrainingIntent.ClassicLocal1",
+        "NativeTrainingIntent.ClassicConnected0",
+        "NativeTrainingIntent.ClassicConnected1",
+        "NativeTrainingIntent.BranchLocal0",
+        "NativeTrainingIntent.BranchLocal1",
+        "NativeTrainingIntent.BranchConnected0",
+        "NativeTrainingIntent.BranchConnected1"
+      ]
+    },
+    {
+      "name": "scalar_exact_reset_warm_retarget",
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeModelEditor.cpp",
+      "scope": "literal source ID; explicit Reset/Begin",
+      "test_ids": [
+        "NativeTrainingService.ExactAutoCompletionResetWarmRestartAndRetarget"
+      ],
+      "line": 4633
+    }
+  ],
+  "proposed_V2_contract": {
+    "tick_observed_low_then_high_permits_warm_restart": true,
+    "constant_true_restarts": false,
+    "initial_Idle_start_remains_distinct": true,
+    "local_setter_immediate_revocation_preserved": true,
+    "original_complete_references_P0_C0_family_preserved": true,
+    "standard_Rdk_connected_and_alias_writer_behavior_preserved": true,
+    "V1_changed": false,
+    "implemented": false
+  },
+  "runtime_control_proposals": [
+    {
+      "scenario": "local_vs_connected_observed_stop_then_rise",
+      "topologies": [
+        "Classic",
+        "Branch"
+      ],
+      "CalculateModes": [
+        0,
+        1
+      ],
+      "terminal": "ExternalStop",
+      "baseline_current_path_difference_first": true
+    },
+    {
+      "scenario": "local_vs_connected_after_finished",
+      "terminal_states": [
+        "Exact",
+        "SearchUnresolved_or_BudgetExhausted"
+      ],
+      "constant_true_control": true,
+      "do_not_require_new_physics_to_reach_Exact": true
+    },
+    {
+      "scenario": "direct_vs_setter_and_unobserved_ABA",
+      "false_must_be_observed_for_restart_contract": true,
+      "mixed_direct_false_local_true_during_raw_probe_is_separate_unproven_branch": true
+    },
+    {
+      "scenario": "explicit_owner_Reset_then_autostart_contrast",
+      "same_current_physics_and_original_family": true,
+      "old_owner_live_lease_must_expire": true
+    },
+    {
+      "scenario": "external_alias_control",
+      "admission": "pending actual production activation trace; AttachTo cannot substitute"
+    }
+  ],
+  "new_TEST_ids_created": false,
+  "new_gate_framework_created": false,
+  "frozen_source35_native48_modified": false,
+  "runtime_claims": {
+    "compiler_run": false,
+    "local_tests_run": false,
+    "server_tests_run": false,
+    "scientific_verdict": null,
+    "different_paths_proven_learning_bug": false
+  }
+}
