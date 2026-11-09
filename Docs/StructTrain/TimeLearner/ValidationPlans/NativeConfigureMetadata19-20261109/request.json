@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-native-configure-metadata19-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 300
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native-configure-metadata-m40-a1",
+      "commit": "a208663decacaecbbe079499e442b6b9dbf1fb32"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-configure-metadata19-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeConfigureMetadata19-20261109/suite.json",
+      "sha256": "58fc5b70034b0f6acd7b4a2e94444c9e36b84d59086b6322a4840f2833d1170d"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE_PROFILE_CMAKE": "/media/user/Data/TimeLearnerRefactor/requests/native-configure-metadata19-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeConfigureMetadata19-20261109/cmake"
+    }
+  }
+}

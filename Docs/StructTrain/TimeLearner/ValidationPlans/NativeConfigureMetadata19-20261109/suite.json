@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "native-configure-profile-metadata19-m40-a1",
+  "package_fingerprint": "de446c7fe2ecd6ff3f5b65c6e0c87e47db3949dffdba387e412d675c9b46ea53",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_fresh_configure_materializes_profile_in_real_cmake_cache",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_unknown_profile_tokens_remain_postconditions_not_assignments",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_conflicting_canonical_paths_values_and_types",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_configure_rejects_duplicate_bare_flags_and_unsupported_types",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_llama_source_requires_canonical_existing_protected_directory",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_embedded_llm_missing_declaration_rejected_before_output_creation",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_cache_profile_cannot_accept_prefixes_extra_flags_or_duplicate_key",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_canonical_selection_and_invocation_are_actual_data",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_stale_hash_and_preparation_pass_claim_cannot_be_used",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_missing_count_or_reused_leaf_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_boolean_budgets_and_escaping_artifact_paths_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_partial_failed_and_skipped_junit_never_fills_expected_cases",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_duplicate_junit_case_is_not_two_observations",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_json_rejects_duplicate_nonfinite_and_aliased_job",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_inventory_keeps_symlink_text_and_excludes_git_metadata",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_protected_output_is_rejected_before_creating_any_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_rehashed_inconsistent_preparation_fields_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_runtime_drift_and_unreadable_protected_path_do_not_suppress_other_captures",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_identical_materialized_bytes_do_not_hide_changed_source_or_resource_commit"
+  ],
+  "fixtures": {
+    "TIMELEARNER_NATIVE_PROFILE_CMAKE": {
+      "pattern": "cmake-dependency.json",
+      "files": 1,
+      "fingerprint": "e44664ef28a1aa9549940645f718a6e757e6d96b275d5f4d6c01e9c74f693207"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "kind": "native_configure_metadata19_frozen_preparation",
+  "schema_version": 1,
+  "status": "PREPARATION_ONLY_NOT_DISPATCHED",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-native-configure-metadata-m40-a1",
+    "commit": "a208663decacaecbbe079499e442b6b9dbf1fb32",
+    "package_fingerprint": "de446c7fe2ecd6ff3f5b65c6e0c87e47db3949dffdba387e412d675c9b46ea53",
+    "expected_AST_tests": 19,
+    "python_files": 437,
+    "physical_projection_files": 633
+  },
+  "tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+    "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+    "status": ""
+  },
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 300
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "controls_projection_root": "/media/user/Data/TimeLearnerRefactor/requests/native-configure-metadata19-m40-a1",
+  "controls_relative_prefix": "Docs/StructTrain/TimeLearner/ValidationPlans/NativeConfigureMetadata19-20261109",
+  "suite": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native-configure-metadata19-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeConfigureMetadata19-20261109/suite.json",
+    "bytes": 3724,
+    "sha256": "58fc5b70034b0f6acd7b4a2e94444c9e36b84d59086b6322a4840f2833d1170d"
+  },
+  "request": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native-configure-metadata19-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeConfigureMetadata19-20261109/request.json",
+    "bytes": 1218,
+    "sha256": "8f7f05df0893f511ef9bd2ba13d41ada47ec9daf250bcddcd6660f504e71237f"
+  },
+  "fixture": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native-configure-metadata19-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeConfigureMetadata19-20261109/cmake/cmake-dependency.json",
+    "bytes": 186,
+    "sha256": "71d8671414b9e5e4f3ff5caded33d8389c007724f8dd65b99a1e01417aeefe90",
+    "fixture_fingerprint": "e44664ef28a1aa9549940645f718a6e757e6d96b275d5f4d6c01e9c74f693207",
+    "consumed_executable_binding": {
+      "kind": "timelearner_cmake_configure_dependency",
+      "schema_version": 1,
+      "path": "/usr/bin/cmake",
+      "sha256": "1c5227af4edd22d8d689def545e18ee458260c0fd579eba2187967f38817e638"
+    },
+    "binding_scope": "One installed executable, checked before/after TinyCMake NONE configure; not wholeOSmoduleclosure"
+  },
+  "source_pack": {
+    "pack_bytes": 5655093,
+    "pack_sha256": "c82d6f27c324c4b7f41626465fca5e85ed984f50e379f92fa5c941c8d84c384d",
+    "sparse_patterns": [
+      "!/*",
+      "/Scripts/",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ]
+  },
+  "old_478_worker_replay_unchanged": true,
+  "metadata13_30_not_reexecuted": true,
+  "CMake_or_test_or_model_executed": false,
+  "compiled_SDK_gitlinks_materialized": false,
+  "scientific_verdict": null
+}
