@@ -291,7 +291,8 @@ def audit_candidate_window_archive(document, configuration, *, runtime_plan=None
         if runtime_plan is not None:
             require(type(runtime_plan) is dict and archive['current_attempt_id']==runtime_plan['run_id'],
                     'candidate_window_runtime_attempt_binding')
-            validate_protocol(protocol,integral_number_view(runtime_plan))
+            from .candidate_window_runtime_plan import audit_candidate_window_runtime_plan
+            runtime_audit=audit_candidate_window_runtime_plan(integral_number_view(runtime_plan),configuration,protocol)
             policy=runtime_plan['composite_measurement']
             _same(policy['candidate_window_policy'],protocol['composite_measurement']['candidate_window_policy'])
             require(count(policy['schema_version'])==2 and count(policy['maximum_total_primary_bytes'])==count(archive['maximum_total_primary_bytes']),
@@ -312,6 +313,7 @@ def audit_candidate_window_archive(document, configuration, *, runtime_plan=None
         return dict(reader_version=2,method_id=METHOD,source=source,groups=rows,reference_set_recomputed=bool(references),
             archive_counters_recomputed=True,attempt_membership_recomputed=True,retained_prefix_budgets_recomputed=True,
             current_runtime_budget_binding_checked=runtime_plan is not None,primary_files_checked=len(primary),
+            current_runtime_plan=None if runtime_plan is None else runtime_audit,
             primary_bytes=totals['primary_bytes'],artifact_document_sha256=archive['artifact_document_sha256'],
             native_execution_verified=False,live_authority_restored=False,training_certificate_verified=False,scientific_verdict=None)
     except EvidenceError:raise
