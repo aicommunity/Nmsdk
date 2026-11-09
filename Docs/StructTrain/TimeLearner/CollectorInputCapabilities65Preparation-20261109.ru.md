@@ -5,6 +5,14 @@
 без нового launcher/orchestrator. Dispatch требует source/request review и
 свежего readback подготовки.
 
+Первый metadata-only pin `110f016a71daf835419272c03d384a1f11fe6d9a`
+не использовался на сервере: локальная проверка выявила, что вложенные хэши
+suite/request/source-manifest/dependencies были рассчитаны по Windows CRLF,
+а Git сохраняет LF. Он сохранён в истории. Текущие привязки рассчитаны по
+точным LF bytes; request ссылается на canonical Git suite. Код 2caf и все 65 IDs
+не меняются. Перед передачей проверяется равенство staged Git blob bytes и
+записанных привязок; материализация берёт только эти Git bytes.
+
 Validation source frozen: `2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae`.
 635 tracked Scripts, 444 package Python files,
 FP `295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317`.
