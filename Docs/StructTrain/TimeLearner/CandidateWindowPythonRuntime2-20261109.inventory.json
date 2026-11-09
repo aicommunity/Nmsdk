@@ -1,0 +1,99 @@
+{
+  "kind": "timelearner_candidate_window_runtime2_reader_source_inventory",
+  "schema_version": 1,
+  "status": "source_only_unrun",
+  "code_commit": "a85094b240f93cf4d6f24f917f7b950936a3dcfc",
+  "base_frozen_reader53": "7352f62bfd77ea86606845866a06bab7400454a3",
+  "pulse_runtime2_contract": "073869082041e3f66a3f6bfb3c69b84b4d1276f6",
+  "cpp_Git_bytes": {
+    "Core/TimeLearner/CandidateWindowRuntimePlan.cpp": {
+      "bytes": 11573,
+      "sha256": "194f2ba0a32d9b3f4bf582ba2836e4e7def68f49d781e2c5d3e938703c73118d"
+    },
+    "Core/TimeLearner/BoundedTraining.cpp": {
+      "bytes": 67975,
+      "sha256": "d843f7a03d7b47caff9f9a410e894b4ac23e441cef5ce961b8fe86ace650ddf2"
+    },
+    "Core/TimeLearner/MeasuredCapacitanceSearch.cpp": {
+      "bytes": 5926,
+      "sha256": "c727528c8d20d8e7fc94119435317f95d3b01a722a07b3bf0469a02626729d0b"
+    }
+  },
+  "source_Git_bytes": {
+    "Scripts/StructTrain/TimeLearner/candidate_window_archive_evidence.py": {
+      "bytes": 25853,
+      "sha256": "0f017be16866896ef300419af7006afe21d0f64bd5633cb827f08e942bd13981",
+      "git_blob": "fc9344ee9311269ae05cd4409b0e110c83ab5099"
+    },
+    "Scripts/StructTrain/TimeLearner/candidate_window_runtime_plan.py": {
+      "bytes": 7659,
+      "sha256": "d46dda8e10d890705476b9e8a2b167c712ac1b5f8494855d33fc51df0ade4831",
+      "git_blob": "d8448a5b0f87a05802959e24b26d2c0592f24faf"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/synthetic_candidate_archive2.py": {
+      "bytes": 16141,
+      "sha256": "c31346afaf06fd3e79be728a2b1985ebf24d702349d87adeadfb36a8984da004",
+      "git_blob": "841061bb7ae7cb5863456f03e8212b57f75538c9"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_candidate_window_runtime2.py": {
+      "bytes": 15587,
+      "sha256": "dc842ff01e85cba3dcb280d84a9116506419bc24a3d314bacaf5a1410c0ee2aa",
+      "git_blob": "9bfe0515ccdfba82610b34567438c8909d0286c3"
+    }
+  },
+  "python_files": 452,
+  "package_fingerprint": "cb44469b00318b7d2c103af0626f77259ba172294b5289b133faa85b90b02d8c",
+  "source_Scripts_files": 643,
+  "source_Scripts_bytes": 9300579,
+  "test_classes": {
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_real_runtime_shape_binds_full_protocol_and_is_not_cold7",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_warm_current_model_epoch_search_tolerances_and_caps_may_differ_initial_cold",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_runtime_normalization_is_not_silently_copied_from_initial_model",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_cold7_clone_runtime1_and_scope_marker_are_not_runtime2",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_wrong_protocol_or_candidate_policy_binding_rejects",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_unknown_fields_and_boolean_fractional_or_nonfinite_numbers_fail",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_search_bounds_and_tolerances_remain_strict_typed_declarations",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_reference_raw_sample_and_group_time_budgets_bind_actual_plan",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_search_declaration_preserves_false_record_flag_without_inventing_C0",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked"
+    ],
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_unmocked_whole_archive2_dispatch_replays_refs_proposals_primary_and_runtime2",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_unmocked_public_CLI_reads_original_documents_and_all_external_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_missing_runtime_original_is_not_filled_from_cold_or_index",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_missing_or_changed_mirror_cannot_fall_back_to_embedded_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_foreign_reference_proof_does_not_mint_seed_authority",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_physical_Rs_claim_is_checked_against_full_graph",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_changed_candidate_window_is_not_prediction_as_measurement",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_warm_empty_attempt_retains_original_references_and_own_history_budgets",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_historical_prefix_cap_cannot_hide_behind_higher_warm_cap",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_raw_trace_changes_are_detected_independently_of_peak_metadata"
+    ]
+  },
+  "test_methods": 20,
+  "scopes": {
+    "runtime_declaration": 10,
+    "whole_synthetic_dispatcher_CLI_DATA": 10,
+    "unmocked_whole_join": true,
+    "synthetic_graph_XML_clocks_waveforms": true,
+    "original_native_archive1_upgraded": false,
+    "native_execution_verified": false,
+    "live_authority_restored": false,
+    "training_certificate_verified": false,
+    "whole_actual_archive2_accepted": false,
+    "scientific_verdict": null
+  },
+  "local_checks": [
+    "AST parse only",
+    "Git diff --check",
+    "source parity with runtime2/shared C cursor/seed owner"
+  ],
+  "tests_executed": false,
+  "pending": [
+    "Root review",
+    "remote20tests",
+    "regression oldschema1/53 scope with new package pin asneeded",
+    "genuine service5 originalcold7+owningruntime2+archive2 externalprimary actual whole dispatcher/CLI+rehashedtamper gate"
+  ]
+}
