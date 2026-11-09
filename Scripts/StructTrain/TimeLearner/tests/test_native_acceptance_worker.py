@@ -85,6 +85,32 @@ def configure_fixture(root):
 
 
 class NativeAcceptanceWorkerTest(unittest.TestCase):
+    def test_shared_preflight_rejects_repeated_read_resource_before_any_output(self):
+        for role in ("source", "resources", "framework"):
+            with self.subTest(role=role), tempfile.TemporaryDirectory() as directory:
+                job,_,_,paths,_=configure_fixture(Path(directory).resolve())
+                job["protected_runtimes"].append(str(paths[role]))
+                with self.assertRaisesRegex(ValueError,"^duplicate_reservation_resource$"):
+                    subject.validate_job_paths(job)
+                for name in ("output","runtime","build"):
+                    self.assertFalse(paths[name].exists())
+
+    def test_shared_preflight_rejects_duplicate_protected_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            job,_,_,paths,protected=configure_fixture(Path(directory).resolve())
+            job["protected_runtimes"].append(str(protected[0]))
+            with self.assertRaisesRegex(ValueError,"^duplicate_reservation_resource$"):
+                subject.validate_job_paths(job)
+            self.assertFalse(paths["output"].exists())
+
+    def test_shared_preflight_allows_distinct_nested_read_directories(self):
+        with tempfile.TemporaryDirectory() as directory:
+            job,_,_,paths,_=configure_fixture(Path(directory).resolve())
+            nested=paths["resources"]/"profile";nested.mkdir()
+            job["protected_runtimes"].append(str(nested))
+            self.assertIn(nested,subject.validate_job_paths(job)[2])
+            self.assertFalse(paths["output"].exists())
+
     def test_shared_path_preflight_does_not_create_worker_output(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory).resolve()
