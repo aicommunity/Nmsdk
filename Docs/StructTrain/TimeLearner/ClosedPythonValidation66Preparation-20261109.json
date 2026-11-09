@@ -10,8 +10,8 @@
   },
   "request": {
     "path": "Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.request.json",
-    "bytes": 915,
-    "sha256": "d6d73d0868541207c1f3928513c62c5b0f2de806ffe3870937695cd0777ff6e8"
+    "bytes": 989,
+    "sha256": "e46c5c2a4a4920348e6aa565a512d95259dac75be5242932ad33f997a98afa8f"
   },
   "source_manifest": {
     "path": "Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.source-manifest.json",
@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "path": "Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.dependencies.json",
-    "bytes": 3976,
-    "sha256": "c43367e94dd61d995ba49f92c9b03b18c6d84246fec898ec1e99a718fa5afc29"
+    "bytes": 4939,
+    "sha256": "457006da44661ce4fde8c19b777a2279f1252c339adbdf791c7b93e47e7b7ab4"
   },
   "tests": 66,
   "new_tests": 28,
@@ -96,5 +96,10 @@
     "Scripts.StructTrain.TimeLearner.tests.test_existing_reservations.ExistingReservationsTest.test_ownership_table_constraints_cannot_be_silently_weakened"
   ],
   "actual40_or73_collection_admitted": false,
-  "scientific_verdict": null
+  "scientific_verdict": null,
+  "previous_control_plan": {
+    "commit": "8fdf5a57019b8415cd0d5c14f94b388a10d86796",
+    "status": "undelivered_and_undispatched_history",
+    "change": "remove avoidable flat request/suite dependency; use Git-tracked nested controls directly"
+  }
 }

@@ -17,7 +17,18 @@
   },
   "plan": {
     "path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1",
-    "commit": "separate_docs_only_plan_commit"
+    "commit": "separate_docs_only_plan_commit",
+    "tracked_suite_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.suite.json",
+    "tracked_request_path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.request.json",
+    "run_command": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner.owned_python_job",
+      "run",
+      "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.request.json"
+    ],
+    "flattened_copies_required": false
   },
   "projections": {
     "source_patterns": [
@@ -79,7 +90,8 @@
   "preparation": {
     "minimum_free_bytes": 805306368,
     "minimum_MemAvailable_bytes": 805306368,
-    "maximum_incremental_allocated_bytes": 134217728
+    "maximum_incremental_allocated_bytes": 134217728,
+    "mode": "read-only metadata verification only; no flat copies/excludes or prep writer reservation"
   },
   "validation": {
     "memory_bytes": 536870912,
@@ -89,10 +101,11 @@
   },
   "owned_read_roots": [
     "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a1",
-    "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/plan-closed-python-validation66-m40-a1/Docs/StructTrain/TimeLearner",
     "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
   ],
   "owned_write_root": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-closed-python-validation66-m40-a1",
   "tests_dispatched": false,
-  "no_SDK_or_model_or_cpp_access": true
+  "no_SDK_or_model_or_cpp_access": true,
+  "previous_undelivered_control_plan": "8fdf5a57019b8415cd0d5c14f94b388a10d86796"
 }

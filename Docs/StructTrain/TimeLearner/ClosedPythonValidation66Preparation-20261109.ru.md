@@ -21,9 +21,14 @@ Patterns — явные ordered arrays, их сохраняет sorted-key JSON 
 SDK/submodules не materialized/verified, Git-only projections безalternates/lazyfetch, чужие caches не затрагиваются.
 
 Source/plan пакуются отдельными roots/trees; source остаётся382, plan — следующий docs-only commit.
-После reviewed delivery existingV2 нужен bounded metadata prep: свежиеpath/capacity/free checks, source/tool snapshots,
-проверка637/446/FP, пятиcontrols и6Docs противGit, explicitpatternarrays, flatrequest/suite new-only, releasedprep lease.
-Root отдельно reviewed actualreadback перед единственным ownedvalidation66 dispatch. Новый CPP/model запуск здесь отсутствует.
+После reviewed delivery existingV2 нужны только READONLY metadata checks: source/tool snapshots,
+проверка637/446/FP, пятиcontrols и6Docs противGit, explicitpatternarrays, AST66 и свежиеpath/capacity/free checks.
+Request ссылается ПРЯМО на Git-tracked Docs/StructTrain/TimeLearner/ClosedPythonValidation66Preparation-20261109.suite.json.
+Штатный owned_python_job.run получает Git-tracked nested request.json из того же Docs path и выполняет свой полный preflight.
+Не создавать flat request/suite copies, excludes, preparation output или prep writer reservation.
+Первый control snapshot8fdf5a57019b8415cd0d5c14f94b388a10d86796 сохранён вGit как undelivered/undispatched history;
+избавление от flatten dependency не меняет Source382, suitebytes,66IDs или ограничения.
+Root reviewed actualreadonlyreadback перед единственным ownedvalidation66 dispatch. Новый CPP/model запуск здесь отсутствует.
 
 После positive66 + exactownedclosure/sourceequality нужен настоящий CLI сбор закрытого40, затем negative73.
 Это отдельная приёмка integration; unit gate не доказывает completeprepare/реальныеnested11units или научнуювалидность.
