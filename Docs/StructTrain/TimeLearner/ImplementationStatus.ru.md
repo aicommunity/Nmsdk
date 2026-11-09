@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Owned controller40 actual run](OwnedNativeController40Launch-20261109.ru.md):40/40PASS на M40, outerclosed/ownleasereleased, readonly fixtures unchanged. Полная приёмка требует отдельной kernel proof9cases и maintained collection; это не допуск native48/научной матрицы.
+
 [Root coverage review](NativeBankFixtureCoverageReview-20261109.ru.md): source-only testfix029/docs95 подготовлен; прежние37 не покрывают11 затронутых случаев. Следующий обязательный native cohort48 =37+11. До него нужен отдельный40-case gate maintained owned_native_job; source-only и планы не считаются runtime-приёмкой.
 
 [Collector65 принят](CollectorInputCapabilities65Acceptance-20261109.ru.md):65/65 metadata tests и реальное применение трёх maintained input APIs при сборе их закрытого запуска; evidence771f и независимый Root replay. Source2caf/evidence объединены no-ff, SDK/gitlinks не изменены. Это закрывает helper gate, но production collector CLI и negative73 publication ещё открыты.
