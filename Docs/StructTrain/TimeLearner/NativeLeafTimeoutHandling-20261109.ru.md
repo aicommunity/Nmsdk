@@ -1,0 +1,11 @@
+# Сохранение первичной причины остановки native gate
+
+Native119 A1 успешно собрал оба targets и подтвердил 19 cases. Следующий `NativeCandidateWindowBanks/ClassicN6EachActualInputRoutesNPlus2` остановлен внешним лимитом 2400 s. GTest не успел записать итоговый XML. Worker сохранил typed gate result `execution=timeout`, но затем безусловное чтение XML заменило верхнюю причину на FileNotFoundError.
+
+Исправление касается `native_acceptance_worker.Worker.gate`: результат процесса сохраняется до разбора XML; отсутствие, повреждение или дубли XML фиксируются отдельной ошибкой наблюдения. Число выполненных cases берётся только из реально завершённых записей XML; ожидаемые, но ненаблюдённые IDs записываются отдельно. Сначала проверяется исходный typed gate outcome, затем полнота/согласованность JUnit и runtime route. Ни timeout, ни пустой/повреждённый отчёт не могут дать положительную приёмку.
+
+На M40 **13/13 PASS**: девять адресных metadata tests вызывают production `Worker.gate` с контролируемым native-gate adapter (timeout без XML/с partial XML/с truncated XML, process error, ложный success без/с повреждённым XML, нормальное завершение, failed case и duplicate ID); четыре прежние регрессии проверяют JUnit и независимые final captures. Source `b76f23f07a101bc4a9d1b0c9cc7de916a430e8bf`, controls `f9bdfe97dff29d4c822fec1f6e06672234dac894`. Они не заменяют повторную проверку реального N6 расчёта и не являются новым scientific result.
+
+Контроллер завершён с кодом 0 за 16.273 s, diagnostics clear. Root сверил 13 фактических имён в unittest log, равенство source/Tool до и после, закрытие группы и освобождение собственного lease `ecf3faa5-566c-4251-9f98-9497dcc915f2`. [Сжатые исходные наблюдения](../../../Reports/StructTrain/TimeLearner/s10-native-leaf-terminal13-root-observation/index.json) доступны для повторной проверки; original N6 timeout не переоценивается.
+
+Не изменены лимит 2400 s, входные интервалы, число входов/проб, математические критерии, модель и проверки model revision. Исходный отрицательный запуск не перезапускается и не исправляется задним числом. SIGTERM stack попал в `IdentifyModel/ModelRevisionObserver::Read`; одиночная выборка стека не доказывает, что весь расход времени приходится на этот путь. Оптимизация требует отдельного измерения с сохранением обнаружения изменений модели.
