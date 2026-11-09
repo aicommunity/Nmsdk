@@ -1,0 +1,21 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "native-reservation-duplicate-preflight-5",
+  "package_fingerprint": "1972cddb6ef50a7ffaf5ee13aecdc9274329b3b5adec54f47b90cf79b5e3de46",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_rejects_repeated_read_resource_before_any_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_rejects_duplicate_protected_directory",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_allows_distinct_nested_read_directories",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_path_preflight_does_not_create_worker_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_keeps_namespace_guard_before_later_path_errors"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_rejects_repeated_read_resource_before_any_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_rejects_duplicate_protected_directory",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_allows_distinct_nested_read_directories",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_path_preflight_does_not_create_worker_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_acceptance_worker.NativeAcceptanceWorkerTest.test_shared_preflight_keeps_namespace_guard_before_later_path_errors"
+  ],
+  "fixtures": {}
+}
