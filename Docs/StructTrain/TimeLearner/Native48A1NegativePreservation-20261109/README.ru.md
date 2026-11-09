@@ -1,0 +1,11 @@
+# Native48 A1: frozen negative preservation
+
+Оригинальный build завершён успешно, но cohort не завершён:11actual=9PASS+2FAIL,37case IDs не выполнены. Сохраняются исходные exception/полные configure/build/gtest logs/native.xml, source/runtime beforeafter, controller/request/closures/released f0b1, доступные original producer JSON/CSV и185artifact availability rows(21inrange/164outofrange). Это отрицательный partial result, не48PASS и не научный вывод.
+
+Root readonly A2 дал113regularfiles/31965477B, actual1glog symlink (2 — число root keys, не linkcount), source4030 exact match и8runtime filehashes==savedafter. Link metadata берётся существующим archive_retirement._link/snapshot без dereference; regularfiles остаются typed RequiredFileRoles. Старый f01 rejection зафиксирован как observer event без выдуманного rawstderr/exactlinkpath. Source/units/старые artifacts не меняются.
+
+Fixed one-shot metadata body использует только maintained capture_required_file_roles/materialize/portable_primary, RSM phaseheartbeat/release и existing atomic control helpers. Это data-only bounded preservation, не новый CLI/framework/worker. Capture bound64MiB +portable expanded64MiB явно заданы; XZdictionary32MiB, output128MiB, memory512MiB/t32/wall240. Все117inputroles(113original+4observer/control) и prepared-only proof входят в archive, ничего не обрезается. Финальный receipt/inventory только после повторных source/input/runtime/link/closure checks и собственного releasedlease.
+
+У originalnative supervisor JSON-kind STARTED, поэтому literal-line capture_owned_supervisor не вызывается и лог не переписывается: exact1binding join делает scopedmetadata check; rawbody сохранён. Нет fakeSchema3, syntheticmodeldata, rawCSV calculations, старых75MBfixture copies, CLR lifecycle вызовов или научной интерпретации.
+
+Evidence parent точно956 и все егоgitlinks; helpersV2 создают лишь новый private Gitroot с5controls, output находится под Reports/StructTrain/TimeLearner. Existingpublisherstage добавляет ровно4artifacts+inventory; standardGit plumbing сохраняет полный parenttree. Source956/futureCPP не становится принятым вследствие отрицательной evidencebranch. Root выполняет/проверяет/публикует; локально только Git/JSON/AST metadata, без tests/CPP/models/plots/server calls.
