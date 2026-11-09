@@ -1,0 +1,49 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-native48-fresh-m40-a1",
+    "commit": "956443560ebdb788a0642856381c9c6a7a554b76",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native48-full-sdk-canonical-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/Native48FullSDKCanonical-20261109/namespace.json",
+      "sha256": "1a799043fb547ad25bb17486bdcd24a1862a3668c102b55b2e219c1beb32021c"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native48-full-sdk-canonical-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/Native48FullSDKCanonical-20261109/cohort.json",
+    "sha256": "17d8f55056c5db46f41cb1224ce9c42f52d269c9df361da8da85ffeb0b6f676b"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native48-full-sdk-canonical-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/Native48FullSDKCanonical-20261109/native-job.json",
+    "sha256": "b93fccc53816834881b42289645ccdb56b45e46e7645268d9c3a397ff8917281"
+  },
+  "prior_bindings": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cold6-m40-asan-a4-container/owned-unit.json",
+      "sha256": "039a595469df7a029b5882dbe43b3f463972423966367015051f14568f1f0b29"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1-container/owned-unit.json",
+      "sha256": "8ff17078a8043a9799735c8eb3a9e674cb1a9a5278419fb9f160cad6dbbd8a6b"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a2-container/owned-unit.json",
+      "sha256": "15a3639b2dfcc517601623f181818d7e6c18d0941eacecb87020e1737b91766f"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native-lifetime37-a3-source-update-m40-a2-container/owned-unit.json",
+      "sha256": "f573f34a91c632fbf6e71ece1a9f45172148bd29c2526d95c90f0d40737a9d53"
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a3-container/owned-unit.json",
+      "sha256": "4cff618cb941b56a218d5b3709362764043b0caaae0cda23ccb7a1c7ef46ffae"
+    }
+  ],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-native48-fresh-canonical-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+    "commit": "35fba3d1544f98b60401fa738aaba4ea2c6d1bff"
+  },
+  "require_fresh_build": true
+}
