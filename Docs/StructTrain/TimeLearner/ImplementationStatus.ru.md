@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Новая fullSDK956 доставлена](Native48SourceControlReadiness-20261109.ru.md#новая-полная-sdk-доставлена):8cleanrepos/4030Git-verifiedphysicalfiles,7gitlinksexact,noalternates. SourceNative48fresh готова кnamespace/canonical checks; сборка/48tests ещё не запускались.
+
 [Collector66 A1](ClosedPythonCollector66A1Outcome-20261109.ru.md):65PASS/1ERROR в test SQLite spy; originalsource/Tool unchanged, exactouterclosed/leasereleased. Новый source-only testfix готовится отдельно;66 иreal40/73 CLI collection не приняты. Native48 переведён на свежую полнуюSDK/новуюсборку; старыеA3source/cache сохраняются, отдельныйexisting-SDK updater не нужен.
 
 [Root956 donor доставлен отдельно](Native48SourceControlReadiness-20261109.ru.md#изолированная-доставка-root956):1014physicalGitfiles verified, исправленный pack с5Gitcontrols. Прежняя SDK/build/runtime не обновлялись; full4030/import/native48 acceptance остаётся pending.
