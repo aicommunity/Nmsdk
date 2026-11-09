@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Полный отрицательный native48 опубликован](Native48FrozenPreservationAcceptance-20261109.ru.md):116 members/113 originals, exact9PASS2FAIL/37not-run,4030 SDK Git bodies и645 collector files независимо сверены; source14/14 и actual collection приняты, evidence85b0662 опубликован/no-ff merged. Pending полной публикации A1 ниже закрыт. Это сохранение отрицательного результата, не native119/scientific acceptance.
+
 [Native119: оба targets собраны](NativePackage6-119Launch-20261109.ru.md), первые17 actual cases прошли; N4 routing kernel-live, полного результата119 ещё нет. Прежние cold7 fixture failures в новом запуске прошли. SDK/native6 ещё не приняты целиком.
 
 [Reader73 A2 принят и опубликован](Runtime2Reader73A2Outcome-20261109.ru.md):73/73 на неизменном actual157 corpus,54 members/15 Git roles независимо проверены, evidence8228 опубликован и no-ff merged. Уточнено: старый FAIL был ошибочным ожиданием cursor budget в fixture (272 вместо264), production runtime2 reader здесь не менялся. Native package6 corpus не выбран, научного допуска нет.
