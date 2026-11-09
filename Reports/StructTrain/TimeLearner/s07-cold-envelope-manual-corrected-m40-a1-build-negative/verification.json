@@ -1,0 +1,243 @@
+{
+  "kind": "native_lifetime33_actual_build_failure",
+  "schema_version": 1,
+  "root": "2504bb86062867b4028106a120e724b8b86bcb84",
+  "pulse": "4b70b0bfb41510691971de86ce5c4993bb382b8b",
+  "source_files": 4020,
+  "source_repositories": 8,
+  "source_cases": 38,
+  "selected_cases": 33,
+  "planned_leaves": 22,
+  "actual_test_cases": 0,
+  "actual_leaf_intents": 0,
+  "compiler_error_lines": [
+    "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPortableReferences.cpp:30:12: error: \u2018DecodeNativeTrainingCapacitanceWitness\u2019 was not declared in this scope; did you mean \u2018TrainingCapacitanceWitness\u2019?",
+    "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1/Libraries/Nmsdk-PulseLib/Core/TimeLearner/CandidateWindowPortableReferences.cpp:60:14: error: \u2018EncodeVerificationProtocol\u2019 was not declared in this scope; did you mean \u2018VerificationProtocol\u2019?"
+  ],
+  "build_completed": false,
+  "all130primary_rules_independently_evaluated": true,
+  "fulfilled_primary_rules": 0,
+  "worker_primary_loop_completed": false,
+  "original_worker_outcome": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": false,
+    "expected_cpp_cases": 33,
+    "audited_completed_cpp_cases": 0,
+    "actual_audited_assertion_passed_cpp_cases": 0,
+    "actual_audited_failed_cpp_ids": [],
+    "completed_leaf_gates": 0,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "kernel_and_lease": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "e4778547ad75f6b70249f2f227a707062925cf7656fdde6b40299a8193efb072",
+        "unit": "timelearner-5890f934-1da5-4234-adf1-1f307df7cf38.service",
+        "invocation_id": "8496a8af420f469fafb69edf7e483f75",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5890f934-1da5-4234-adf1-1f307df7cf38.service",
+        "initial_main_pid": 1146096,
+        "initial_start_ticks": "328645927",
+        "sha256": "71b20df09304b831c3c557a03d561d056ca8236734dac5d519f4cea3ebc42562"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 5890f934-1da5-4234-adf1-1f307df7cf38",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "8496a8af420f469fafb69edf7e483f75"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "lease": {
+      "token": "85327992-8d03-4d58-bb4d-a210f297c0d0",
+      "job_id": "s07-cold-envelope-manual-corrected-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1146096,
+        "start_ticks": "328645927",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-cold-envelope-manual-corrected-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-cold-envelope-manual-corrected-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-cold-envelope-manual-corrected-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-cold-envelope-manual-corrected-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cold6-m40-asan-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cold6-m40-asan-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-manual-control-corrected-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-manual-control-corrected-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-manual-control-unfixed-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-manual-control-unfixed-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794211261.8218474,
+      "deadline": 1794211902.9941719,
+      "updated": 1794211810.611209,
+      "release_note": "Maintained cohort outer and every canonical recorded request/immutable leaf binding freshly closed; original pre-stop outcome preserved; no scientific success implied.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    "expected_leaf_intents": [
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/common-codec-11/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/cold7-declaration-guards-2/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-01/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-02/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-03/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-04/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-05/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-06/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-07/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-08/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-09/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-10/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-11/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-12/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-13/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-14/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-15/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-16/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-17/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-18/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-19/process/contained/request.json",
+      "/media/user/Data/TimeLearnerRefactor/readbacks/s07-cold-envelope-manual-corrected-m40-a1/manual-r20-20/process/contained/request.json"
+    ],
+    "actual_leaf_intents": 0
+  },
+  "guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "last": {
+      "time": 1794211810.5578823,
+      "free_bytes": 335737143296,
+      "owned_scope_increment_bytes": 554070016,
+      "outer_closed": true,
+      "recorded_children": 0,
+      "deferred_partial_requests": {}
+    },
+    "peak_owned_scope_increment_bytes": 554070016,
+    "minimum_free_bytes": 335737143296,
+    "outer_closed": true,
+    "all_recorded_leaf_groups_closed": true,
+    "leaf_groups": 0,
+    "unresolved_closure_errors": [],
+    "record_errors": [],
+    "original_outcome_preserved_before_cleanup": true
+  },
+  "canonical_raw_sha256": "c8d5b299a71e0d2ad2c85afe8be2e074c3f96402d2a2d5cf8a54eb76f069cb57",
+  "job_raw_sha256": "1784d14b30ce3fce54050b340029a9e07a9c68c37e666045409ad467a63fabc2",
+  "profile15_exact": true,
+  "source_and_protected_unchanged": true,
+  "semantic_reader_acceptance": false,
+  "scientific_verdict": null
+}
