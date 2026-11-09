@@ -23,7 +23,8 @@ Train5/control-lifetime source не включены в минимальный b
 Прежние source-only E11/BB1 дополнены общей cold6/cold7/execution3 исправленной
 [парой corrected/unfixed](ColdEnvelopeLifetimePairReadiness-20261109.ru.md),
 которая доставлена в отдельные source-копии, но ещё не собрана и не получила
-runtime-приёмку. Fresh-build worker profile проверяется отдельными19 tests.
+runtime-приёмку. Fresh-build worker profile прошёл19/19 configure-only tests на sourcea208
+([приёмка и ограничения](NativeAcceptanceWorker.ru.md)); сама будущая SDK-пара ещё не собрана.
 Не смешивать эту пару со снимком A4.
 27проверок запуска/renderer на другом tool-source и Classic render независимо
 приняты. [Выбранный overview просмотрен](ClassicLTReadableOverview-20261109.ru.md):
