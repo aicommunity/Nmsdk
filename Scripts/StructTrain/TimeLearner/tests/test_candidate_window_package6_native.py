@@ -111,3 +111,18 @@ class CandidateWindowPackage6NativeTest(unittest.TestCase):
         self.assertEqual(package['schema_version'],5)
         result=audit_composite_package(package,external_resolver=filesystem_primary_resolver(directory))
         self.assertTrue(result['certificate_consistent']);self.assertFalse(result['native_execution_verified'])
+
+    def test_actual_summary7_binds_source_groups_model_and_residuals(self):
+        for topology in ('classic','branch'):
+            package,directory=self.case('package6-'+topology+'/source-0')
+            summary=load(directory/'train_learned_summary.json')
+            result=audit_candidate_window_package(package,summary,external_resolver=filesystem_primary_resolver(directory))
+            self.assertTrue(result['summary_checked']);self.assertTrue(result['summary']['summary_consistent'])
+            self.assertFalse(result['native_execution_verified'])
+
+    def test_actual_summary7_cannot_be_relabelled_or_change_source_outcome(self):
+        package,directory=self.case('package6-classic/source-0');summary=load(directory/'train_learned_summary.json')
+        for field,value in [('schema_version',6),('outcome','external_stop'),('actual_model_revision','different-model')]:
+            bad=deepcopy(summary);bad[field]=value
+            with self.subTest(field=field), self.assertRaises(EvidenceError):
+                audit_candidate_window_package(package,bad,external_resolver=filesystem_primary_resolver(directory))

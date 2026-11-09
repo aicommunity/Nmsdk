@@ -107,9 +107,11 @@ def audit_candidate_window_package(document, summary=None, *, external_resolver=
                     and package['certificate'] is None and package['reason'],
                     'candidate_window_stopped_package_claims_training')
             certificate=None
-        # Summary7 is a separately versioned assertion. Never invent it from
-        # the package or run the old summary6 codec against protocol5 DATA.
-        require(summary is None,'candidate_window_summary7_reader_not_yet_implemented')
+        # A supplied summary is mandatory evidence, never synthesized from DATA.
+        summary_audit=None
+        if summary is not None:
+            from .candidate_window_summary_evidence import audit_candidate_window_summary
+            summary_audit=audit_candidate_window_summary(summary,package,group_audit)
         counters=archive['counters']['archive']
         return dict(auditor_version=1,package_schema_version=6,package_digest_verified=True,
             certificate_consistent=certificate is not None,exact=certificate['exact'] if certificate else None,
@@ -119,7 +121,8 @@ def audit_candidate_window_package(document, summary=None, *, external_resolver=
             logical_groups=counters['groups'],native_probes=counters['native_probes'],sampled_frames=counters['sampled_frames'],
             primary_bytes=counters['primary_bytes'],source_origin=archive['source_origin'],
             owner_family_binding=archive['owner_family_binding'],composite_measurements=group_audit,
-            runtime_plan=runtime,capacitance_state=capacitance,summary_checked=False,summary=None,search_history_retained=None,
+            runtime_plan=runtime,capacitance_state=capacitance,summary_checked=summary is not None,summary=summary_audit,
+            search_history_retained=summary_audit['search_history_retained'] if summary_audit else None,
             terminal_provenance_verified=False,native_import_verified=False,native_execution_verified=False,
             live_authority_restored=False,completed_classification_requires_original_execution_binding=True,evaluation_verdict=None)
     except EvidenceError:raise

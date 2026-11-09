@@ -135,7 +135,7 @@ def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) ->
     else:
         require(declaration["branch"] and declaration["normalization"] == "N1" and len(bounds) == n,
                 "unsupported_historical_conversion")
-        if source.get('schema_version') == 5:
+        if source.get('schema_version') in (5,6):
             from .composite_certificate_evidence import reference_amplitudes
             require(source['reference_complete'] is True, 'composite_conversion_requires_complete_references')
             refs = reference_amplitudes(source)
