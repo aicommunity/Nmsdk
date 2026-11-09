@@ -1,0 +1,30 @@
+{
+    "kind":  "windows_git_preparation_tests",
+    "executed":  5,
+    "cases":  [
+                  {
+                      "name":  "ZeroNativeExitAccepted",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "ActualNegativeCmdExitRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "PositiveAndUnsignedExitRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "MissingGitRepositoryRejected",
+                      "passed":  true
+                  },
+                  {
+                      "name":  "PersonalProjectRefusedBeforeGitWrite",
+                      "passed":  true
+                  }
+              ],
+    "status":  "failed",
+    "reason":  " * branch            baf1d06a051bf48c60cc5a6d2ccf7537ca992dbe -\u003e FETCH_HEAD",
+    "native_models_or_cpp_tests":  false,
+    "scientific_verdict":  null
+}
