@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Native48 fresh A1 завершён](Native48FreshA1Outcome-20261109.ru.md):сборка успешна,11actual=9PASS/2FAIL,37NOT RUN. Fixture требует consumed-probe boundary; test-onlyfix4d35 подготовлен, не проверен. Outer/leaf closed, собственный lease released. Полная публикация A1 pending; научного допуска нет.
+
 [Actual40 collection опубликован](OwnedNativeController40MaintainedCollection-20261109.ru.md):existing CLI/stage, exact5 artifacts/325members independently verified, noff source/evidence integrated. Negative73 пока остановлен readonly Gitrole validation до записи новых артефактов.
 
 [FullSDK canonical принят, native48 запущен](Native48FullSDKCanonicalLaunch-20261109.ru.md):4030files/8repos/29imports сверены, свежая сборка работает на M40. Результата48 ещё нет; service5/package6 и научная серия остаются открыты.
