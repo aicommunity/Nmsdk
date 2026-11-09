@@ -10,4 +10,6 @@ Build source остаётся immutable4eb; последующие докуме�
 
 После сборки обязательны реальные Classic/Branch C0 absent/present, asymmetric children, warm continuation, rejected restart/owner authority, export/import и подтверждение обеих целевых сборок. Linux cohort31 с Pulse674 не проверял f1 и завершился OOM/roundtrip mismatch. Windows compile PASS не исправит автоматически эти отдельные проблемы и не заменит Linux/full119/Console/scientific gates.
 
+Повторное наблюдение подтвердило настоящий build child cmd16152/creation_filetime134387295385025142, Job Local\\TimeLearner-a67064cc-7b4a-4a13-9afc-fe9cff993263, runtime fingerprintbbf9e65462f137331d902e6b5613ff26b93850467dfbbd0be386f217e9a68921. В этой новой SDK также наблюдался cl.exe9708. [Сырые process/файловые records](../../../Reports/StructTrain/TimeLearner/s02-capacitance-publication-windows-root-observation/owned-build-progress.json). Dispatch не подменяет завершение сборки.
+
 После получения отрицательного31 в этом feature tree добавлена только диагностика строгого roundtrip comparison: bounded JSON-pointer field differences, без изменения expected equality или production data. Она не входит в уже работающий Windows SDK4eb; требует отдельной серверной сборки и single-case проверки. Значения длинных строк ограничены prefix/suffix; полный archive не дублируется в диагностике.
