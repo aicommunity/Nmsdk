@@ -119,56 +119,76 @@ def _normalized_sql(value):
 class Reservations:
     """One SQLite WAL ledger on a local filesystem per worker; never on NFS."""
     @classmethod
-    def open_existing(cls, database, *, managed_units=False):
-        """Reopen this worker's ledger using its persisted quantity policy.
-
-        Never creates a ledger or migrates its schema. Managed-unit ownership
-        remains an explicit caller choice; discovering schema3 cannot enable it.
-        """
+    @contextmanager
+    def _existing_reader(cls, database, *, managed_units=False):
+        """Read persisted policy and records in one SQL read transaction."""
         _identity()
         _require(type(managed_units) is bool, 'invalid_managed_unit_policy')
         requested = Path(database).absolute()
         _require(not requested.is_symlink(), 'reservation_database_symlink')
         _require(requested.is_file(), 'reservation_existing_database_required')
         path = requested.resolve(strict=True)
+        connection = None
         try:
-            connection = sqlite3.connect(path.as_uri() + '?mode=ro', uri=True, timeout=10)
-            try:
-                metadata = dict(connection.execute('SELECT key,value FROM metadata'))
-                tables = dict(connection.execute("SELECT name,sql FROM sqlite_master WHERE type='table'"))
-            finally:
-                connection.close()
+            connection = sqlite3.connect(path.as_uri() + '?mode=ro', uri=True, timeout=10, isolation_level=None)
+            connection.row_factory = sqlite3.Row
+            connection.execute('BEGIN')  # deferred SELECT snapshot; no PRAGMA or writer reservation
+            metadata = dict(connection.execute('SELECT key,value FROM metadata'))
+            tables = dict(connection.execute("SELECT name,sql FROM sqlite_master WHERE type='table'"))
+            schema = metadata.get('schema_version')
+            _require(schema in ('1', '2', '3') and metadata.get('worker_host') == socket.gethostname(),
+                     'reservation_ledger_schema_or_worker_changed')
+            _require(managed_units == (schema == '3'), 'reservation_existing_managed_policy_mismatch')
+            capacity = None
+            expected = {'schema_version', 'worker_host'}
+            if schema != '1':
+                expected |= {'capacity', 'disk_device'}
+                try:
+                    capacity = _quantities(json.loads(metadata.get('capacity', 'null')), capacity=True, managed_units=managed_units)
+                except (ValueError, TypeError) as error:
+                    raise ReservationError('reservation_invalid_persisted_capacity') from error
+                _require(metadata.get('disk_device') == str(path.parent.stat().st_dev), 'reservation_database_filesystem_changed')
+            _require(set(metadata) == expected, 'reservation_existing_metadata_keys_changed')
+            for name, sql in _ledger_tables(quantities=capacity is not None, managed_units=managed_units).items():
+                _require(name in tables and _normalized_sql(tables[name]) == _normalized_sql(sql), 'reservation_existing_table_schema_changed')
+            registry = cls.__new__(cls)
+            registry._set_policy(requested, capacity=capacity, managed_units=managed_units)
+            registry._existing_only = True;registry._initialized = True
+            yield registry, connection
         except sqlite3.Error as error:
             raise ReservationError('reservation_existing_metadata_unreadable') from error
-        schema = metadata.get('schema_version')
-        _require(schema in ('1', '2', '3') and
-                 metadata.get('worker_host') == socket.gethostname(),
-                 'reservation_ledger_schema_or_worker_changed')
-        _require(managed_units == (schema == '3'), 'reservation_existing_managed_policy_mismatch')
-        capacity = None
-        expected = {'schema_version', 'worker_host'}
-        if schema != '1':
-            expected |= {'capacity', 'disk_device'}
-            try:
-                capacity = _quantities(json.loads(metadata.get('capacity', 'null')),
-                                       capacity=True, managed_units=managed_units)
-            except (ValueError, TypeError) as error:
-                raise ReservationError('reservation_invalid_persisted_capacity') from error
-            _require(metadata.get('disk_device') == str(path.parent.stat().st_dev),
-                     'reservation_database_filesystem_changed')
-        _require(set(metadata) == expected, 'reservation_existing_metadata_keys_changed')
-        for name, sql in _ledger_tables(quantities=capacity is not None, managed_units=managed_units).items():
-            _require(name in tables and _normalized_sql(tables[name]) == _normalized_sql(sql),
-                     'reservation_existing_table_schema_changed')
-        # Reopening must not invoke the constructor's CREATE TABLE path: lost
-        # ownership tables are evidence of corruption, never an empty registry.
-        registry = cls.__new__(cls)
-        registry._set_policy(requested, capacity=capacity, managed_units=managed_units)
-        registry._existing_only = True
-        registry._initialized = True
+        finally:
+            if connection is not None:connection.close()
+
+    @classmethod
+    def open_existing(cls, database, *, managed_units=False):
+        """Reopen the existing writer API; never creates/migrates a ledger."""
+        with cls._existing_reader(database, managed_units=managed_units) as (registry, _):
+            pass
         with registry._transaction():
             pass
         return registry
+
+    @classmethod
+    def read_snapshot(cls, database, *, managed_units=False):
+        """Consistent SQL-readonly observation, without constructor/writer APIs.
+
+        SQLite may acquire reader locks/use existing WAL sidecars. This is no
+        promise of filesystem byte immutability during concurrent writers.
+        """
+        requested = Path(database).absolute()
+        _require(not any(p.is_symlink() for p in (requested, *requested.parents)), 'reservation_readonly_path_alias')
+        _require(requested.is_file() and requested.resolve(strict=True) == requested, 'reservation_existing_database_required')
+        before = requested.stat()
+        with cls._existing_reader(requested, managed_units=managed_units) as (registry, connection):
+            values, graphs = registry._inspection_rows(connection)
+            result = registry._inspection_view(values, graphs)
+            after = requested.stat()
+            _require((before.st_dev, before.st_ino) == (after.st_dev, after.st_ino) and registry.path == requested,
+                     'reservation_readonly_database_identity_changed')
+            result['SQL_access'] = 'mode=ro; BEGIN deferred; SELECT only'
+            result['database_identity'] = {'path':str(requested), 'device':after.st_dev, 'inode':after.st_ino}
+            return result
 
     @property
     def capacity(self):
@@ -436,12 +456,16 @@ class Reservations:
 
     def inspect(self):
         with self._transaction() as connection:
-            values = [self._decode(row) for row in connection.execute('SELECT * FROM leases ORDER BY created,token')]
-            graphs = None
-            if self.managed_units:
-                graphs = [{'token': row['token'], 'state': row['state'], 'intent': json.loads(row['intent'])}
-                          for row in connection.execute('SELECT * FROM managed_unit_intents ORDER BY attempt_id')]
+            values, graphs = self._inspection_rows(connection)
+        return self._inspection_view(values, graphs)
 
+    def _inspection_rows(self, connection):
+        values = [self._decode(row) for row in connection.execute('SELECT * FROM leases ORDER BY created,token')]
+        graphs = ([{'token':row['token'], 'state':row['state'], 'intent':json.loads(row['intent'])}
+            for row in connection.execute('SELECT * FROM managed_unit_intents ORDER BY attempt_id')] if self.managed_units else None)
+        return values, graphs
+
+    def _inspection_view(self, values, graphs):
         now = time.time()
         for value in values:
             value['heartbeat_expired'] = value['deadline'] < now
