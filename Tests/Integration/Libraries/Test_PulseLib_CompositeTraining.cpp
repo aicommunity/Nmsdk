@@ -1561,11 +1561,45 @@ TEST(NativeCandidateWindowFrames,ChangedFullRepeatCannotReachGeometry){NativeFra
 TEST(NativeCandidateWindowFrames,ChangedDeclaredGroupCannotReachGeometry){NativeFrameSpecification<NNeuronTimeLearner>(FrameSpecTamper::WrongGroup);}
 
 namespace {
+template<class Owner> NativeProbeBindings ObservedBankBindings(NativeCompositeFixture<Owner>& f,bool prepared=false) {
+    // Read-only graph DATA for the public bank/selector helpers below. This is
+    // not the owner's private executor descriptor or a live-admission factory;
+    // never pass it to NativeProbeExecutor. The actual attempt still owns all
+    // native lifecycle and scheduler hooks.
+    Require(f.modelSpec.editPolicy.inhibition.empty() &&
+        std::all_of(f.modelSpec.inputs.begin(),f.modelSpec.inputs.end(),[](const auto& input){return input.synapses==1;}),
+        "bank_fixture_requires_single_synapse_without_inhibition");
+    NativeProbeBindings b;b.owner=f.owner.Get();b.branch=NativeCompositeFixture<Owner>::branch;
+    b.neuron=f.owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+    b.dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);
+    b.inputCount=f.owner->NumInputDendrite.GetData();
+    Require(b.neuron && b.dataset,"bank_fixture_actual_graph_missing");
+    if(b.branch && prepared) {
+        const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        Require(bool(source),"bank_fixture_actual_source_missing");
+        // Observe connections, not expected ordinal/path data. With this
+        // fixture's Ns=1/no-inhibition scope the prepared Branch has exactly
+        // one source-connected synapse; the tests independently check its bank.
+        const std::function<void(UContainer*)> collect=[&](UContainer* node) {
+            if(auto synapse=dynamic_cast<NPulseSynapseCommon*>(node)) {
+                Require(synapse->Input.CanInspectDataSources() && !synapse->Input.UsesExternalDataSource(),
+                    "bank_fixture_input_connections_not_inspectable");
+                const auto links=synapse->Input.GetDataSources();
+                if(links.size()==1 && links.front()==&source->Output)b.soloSynapses.push_back(synapse);
+            }
+            std::vector<NameT> names;node->GetComponentsList(names);
+            for(const auto& name:names) {const auto child=node->GetComponent(name,true);Require(bool(child),"bank_fixture_actual_child_missing");collect(child.Get());}
+        };
+        collect(b.neuron.Get());Require(b.soloSynapses.size()==1,"bank_fixture_prepared_single_connected_synapse");
+    }
+    return b;
+}
+
 template<class Owner> CandidateWindowPhysicalReadback ActualBankData(NativeCompositeFixture<Owner>& f) {
     // Attachment EXPECTATIONS in tests come from the separately declared fixture
     // model, not from the readback helper's output or its path formatter.
     std::vector<int> attachments;for(const auto& p:f.owner->ReadNativeParameters())attachments.push_back(p.length);
-    return ReadNativeCandidateWindowPhysical(f.owner->NativeProbeModelBindings(),attachments,f.protocol,f.modelSpec,
+    return ReadNativeCandidateWindowPhysical(ObservedBankBindings(f),attachments,f.protocol,f.modelSpec,
         f.owner->ReadNativeTrainingCapacitance());
 }
 template<class Owner> void ExpectDeclaredBanks(NativeCompositeFixture<Owner>& f,const CandidateWindowPhysicalReadback& data) {
@@ -1615,7 +1649,7 @@ template<class Owner> void ActualDistinctBankRouting(std::size_t n) {
     for(std::size_t input=0;input<n;++input) {
         const auto before=ActualBankData(f);ExpectDeclaredBanks(f,before);QJsonArray preparations;const auto caller=f.prototype.onPrepared;
         f.prototype.onPrepared=[&,input,caller](const auto& prepared,const auto& spec) {
-            if(caller)caller(prepared,spec);const auto b=f.owner->NativeProbeModelBindings();
+            if(caller)caller(prepared,spec);const auto b=ObservedBankBindings(f,true);
             EXPECT_NO_THROW(ValidateNativeCandidateWindowPreparedSelector(b,before,f.protocol,f.modelSpec,input,prepared));
             const auto source=f.owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
             QJsonArray connected;
@@ -1651,7 +1685,7 @@ void ActualWrongSelectorDataIsRejected() {
     NativeCompositeFixture<NNeuronTimeLearnerBranch> f(2000,false,4,false,true,false,2,1800.,true);const auto before=ActualBankData(f);
     const auto caller=f.prototype.onPrepared;std::size_t checked=0;
     f.prototype.onPrepared=[&](const auto& prepared,const auto& spec) {
-        if(caller)caller(prepared,spec);auto b=f.owner->NativeProbeModelBindings();
+        if(caller)caller(prepared,spec);auto b=ObservedBankBindings(f,true);
         EXPECT_NO_THROW(ValidateNativeCandidateWindowPreparedSelector(b,before,f.protocol,f.modelSpec,1,prepared));
         const auto wrong=b.neuron->GetComponentL<NPulseSynapseCommon>("Dendrite1_2.ExcSynapse1",true);ASSERT_TRUE(wrong);ASSERT_FALSE(b.soloSynapses.empty());
         b.soloSynapses[0]=wrong.Get();EXPECT_THROW(ValidateNativeCandidateWindowPreparedSelector(b,before,f.protocol,f.modelSpec,1,prepared),std::invalid_argument);++checked;
@@ -2198,7 +2232,8 @@ void ReferenceAndLegacyTokensCannotEnterWindowFinal() {
     NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);EnableCandidateWindow(f);const auto refs=CaptureWindowReferences(f);
     FinalVerificationSession noClosed(refs,{"candidate-attempt/final/1",f.Revision(),4,0,0});ASSERT_TRUE(noClosed.NextRequest());
     const auto& raw=f.attempt->Group()->packets.front();ASSERT_TRUE(raw.prepared);ASSERT_TRUE(raw.observation);
-    EXPECT_THROW(noClosed.Arm(*raw.prepared),std::invalid_argument);EXPECT_THROW(noClosed.Consume(*raw.observation,f.Revision()),std::invalid_argument);
+    EXPECT_THROW(noClosed.Arm(*raw.prepared),std::invalid_argument);
+    EXPECT_THROW(noClosed.Consume(*raw.observation,f.Revision()),std::invalid_argument);
     EXPECT_THROW(noClosed.ArmCandidateWindow(f.referenceMeasurements[0].Prepared()),std::invalid_argument);
     FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),{"candidate-attempt/final/1",f.Revision(),4,0,0});ASSERT_TRUE(final.NextRequest());
     final.ArmCandidateWindow(f.referenceMeasurements[0].Prepared());EXPECT_EQ(final.Status(),VerificationStatus::InvalidObservation);EXPECT_FALSE(final.Certificate());
