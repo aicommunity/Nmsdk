@@ -1,0 +1,341 @@
+{
+  "kind": "closed_python_actual40_existing_collector_publication_plan",
+  "schema_version": 1,
+  "status": "data_only_Git_source_preparation_not_executed",
+  "collector_source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+    "production_382_byte_identical": true,
+    "actual66A2_pass_observed_by_Root": true
+  },
+  "unchanged_manifest": {
+    "commit": "9c9cc17a732fe31d17429401e5af3a6545f11f53",
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidationActual40Collection-20261109.manifest.json",
+    "relative_path": "Docs/StructTrain/TimeLearner/ClosedPythonValidationActual40Collection-20261109.manifest.json",
+    "bytes": 39617,
+    "sha256": "19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb",
+    "job_original": "s10-owned-native-controller40-m40-a1"
+  },
+  "new_evidence_repository": {
+    "path": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+    "parent": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+    "parent_tree": "f4190f214d6adb82c0929b1952dd0fd332485717",
+    "shallow_parent": true,
+    "source_or_SDK_checkout": false,
+    "all_parent_tree_objects": 3844,
+    "all_parent_tree_oid_list_sha256": "ec69d6d01cc0a944180cd1a1b072aa1b9c135c877d69699fc35fc5b6c0aa454a",
+    "parent_gitlinks_preserved_metadata_only": {
+      "Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "Libraries/Nmsdk-MotionControlLib": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "Libraries/Nmsdk-PulseLib": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
+      "Libraries/Rdk-BasicLib": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "Libraries/Rdk-CvBasicLib": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "Libraries/Rdk-HardwareLib": "de40b008e990105856726e01230dde19f42a90a9",
+      "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a"
+    },
+    "controls": {
+      ".gitattributes": {
+        "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+        "bytes": 616,
+        "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef"
+      },
+      ".gitignore": {
+        "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+        "bytes": 2042,
+        "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6"
+      },
+      ".gitmodules": {
+        "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+        "bytes": 967,
+        "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809"
+      },
+      "Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore": {
+        "git_blob": "3da99d1f874b9ee9a9b4546ccd57395b36272998",
+        "bytes": 65,
+        "sha256": "7a60afdfab0e76d41339f0bed73c194faceb7f774ec5c7c60812071729b1232c"
+      },
+      "LLM/.gitignore": {
+        "git_blob": "7effe3bf3f003b4abcb0ad9f240a0a28cc069505",
+        "bytes": 265,
+        "sha256": "1fa6b740ecd7393a2caac759c549d093dd51d86a29d18ffa3b99ca8792644573"
+      }
+    },
+    "parent_pack": {
+      "local_path": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\closed_python_actual40_parent9ed_evidence_a1.pack",
+      "bytes": 2105835,
+      "sha256": "3800d808662845ef6f6fdce427fbd35380b2968896e1ee0d9f4b30e05ad72cf0",
+      "objects": 3850,
+      "omitted_blob_bodies": "all parent blobs except five controls; no fetching/alternates/old source/Reports/SDK body hydration"
+    }
+  },
+  "readonly_prepare_before_evidence_Git_writes": {
+    "working_directory": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "environment": {
+      "GIT_NO_LAZY_FETCH": "1"
+    },
+    "arguments": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-c",
+      "import json;from pathlib import Path;from Scripts.StructTrain.TimeLearner.closed_python_validation import prepare_closed_collection;p=prepare_closed_collection(Path('/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidationActual40Collection-20261109.manifest.json'),'19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb');print(json.dumps({'prepared_readonly':True,'manifest_sha256':p.manifest_sha256,'original_gate':p.outcome,'original_binding':p.observation['closure']['binding'],'collection_writes':False,'scientific_verdict':None},allow_nan=False))"
+    ],
+    "requires": "exact maintained prepare_closed_collection success; no publication output/evidenceRepo exists before this call; input control+observer projections already prepared",
+    "failure": "preserve stdout/stderr; no evidence Gitinit/mkdir/collect/stage/commit"
+  },
+  "parent_initialization_after_prepare_only": {
+    "existing_helper": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner_deliver_empty_private_source_v2.py",
+    "helper_sha256": "87ee30282b008f7e2d8870565f6b2532bcf3a907833c81add36e216474b58bc4",
+    "parameters_no_credentials": {
+      "host": "10.245.1.17",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "destination": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+      "pack": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\closed_python_actual40_parent9ed_evidence_a1.pack",
+      "patterns": [
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    },
+    "required_fresh_canonical_absence": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+    "identity_checks": [
+      "canonical parent BASE, no symlink ancestors",
+      "HEAD==9ed and root_tree exact",
+      "all parent tree objects present; no lazy fetch",
+      "index at parent with unrelated skip-worktree entries; no global/shared config changes",
+      "five controls raw bytes match declared Git and source parent",
+      "no alternatives or source submodule materialization"
+    ],
+    "Reports_parent_mkdir_after_init": {
+      "arguments": [
+        "/usr/bin/python3.12",
+        "-B",
+        "-c",
+        "from pathlib import Path;Path('/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner').mkdir(parents=True,exist_ok=False)"
+      ],
+      "scope": "new private evidenceRepo only, before collector; needed existing output.parent for disk preflight"
+    }
+  },
+  "collect": {
+    "working_directory": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "environment": {
+      "GIT_NO_LAZY_FETCH": "1"
+    },
+    "arguments": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner.closed_python_validation",
+      "collect",
+      "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidationActual40Collection-20261109.manifest.json",
+      "--manifest-sha256",
+      "19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb",
+      "--output",
+      "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1"
+    ],
+    "override_only": "output CLI argument changed from old outside-Git BASE/publication path; manifest bytes unchanged",
+    "owned_limits": {
+      "memory_bytes": 536870912,
+      "tasks": 32,
+      "maximum_wall_seconds": 240
+    },
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728,
+    "output": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1",
+    "original_outcome_required": {
+      "tests": 40,
+      "passed": 40,
+      "failures": [],
+      "errors": [],
+      "skipped": []
+    },
+    "requires_final_receipt": "collection_status completed, original_gate passed40, final4 artifacts plus last inventory, own lease released, exact original/source/fixtures invariance",
+    "collection_is_not_original_test_rerun": true
+  },
+  "stage": {
+    "working_directory": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "arguments": [
+      "/usr/bin/python3.12",
+      "-B",
+      "-m",
+      "Scripts.StructTrain.TimeLearner.closed_python_validation",
+      "stage",
+      "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1",
+      "--repository",
+      "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1"
+    ],
+    "existing_owners": [
+      "closed_python_validation.stage_collection_artifacts",
+      "publisher.stage_artifact_set"
+    ],
+    "expected_files_staged": 5,
+    "expected_index_additions": [
+      "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1/artifact-inventory.json",
+      "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1/capture-proof.json",
+      "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1/packed/bundle.json",
+      "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1/packed/primary.tar.xz",
+      "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1/verification.json"
+    ],
+    "allowed_changed_index_paths_only": true,
+    "final_inventory_entries": [
+      "capture-proof.json",
+      "packed/bundle.json",
+      "packed/primary.tar.xz",
+      "verification.json"
+    ],
+    "raw_staging": "captured/, top-level observers and .finalizing-* preserved unmodified in same local output; never git add all; no local info/exclude rules introduced",
+    "no_raw_input_copy_or_reserialization": true,
+    "requires_after_outer": "returned execute outcome completed/0 plus fresh exact-bound all-group closure and released collection ownlease; stdout alone insufficient"
+  },
+  "standard_Git_commit_after_verified_stage": {
+    "working_directory": "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+    "preconditions": [
+      "HEAD==9ed; exact5 staged A paths and no D/M of parent paths",
+      "every staged artifact Git bytes match maintained final inventory and released ownlease receipt",
+      "git diff-tree newcommit..parent changes only exact5 additions, gitlinks unchanged"
+    ],
+    "write_tree_arguments": [
+      "git",
+      "-C",
+      "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+      "write-tree",
+      "--missing-ok"
+    ],
+    "write_tree_stdout_binding": "new_tree exact40artifact tree, not guessed or copied",
+    "commit_tree_arguments": [
+      "git",
+      "-C",
+      "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+      "-c",
+      "user.name=Codex",
+      "-c",
+      "user.email=codex@openai.com",
+      "commit-tree",
+      "${new_tree}",
+      "-p",
+      "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "-m",
+      "evidence: preserve closed owned native controller40 metadata"
+    ],
+    "commit_tree_stdout_binding": "new_evidence_commit captured only after success; standard Git plumbing, not a new publisher",
+    "new_branch": "refs/heads/codex/timelearner-owned-native-controller40-maintained-a1-evidence",
+    "update_ref_arguments": [
+      "git",
+      "-C",
+      "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1",
+      "update-ref",
+      "refs/heads/codex/timelearner-owned-native-controller40-maintained-a1-evidence",
+      "${new_evidence_commit}",
+      "0000000000000000000000000000000000000000"
+    ],
+    "no_force_amend_rebase_squash_or_history_rewrite": true
+  },
+  "Git_only_readback_and_publication": {
+    "scope": "new commit+all needed new/root tree objects+five new artifact blobs; parent9ed already in local root ODB; no primary157 payload duplication",
+    "remote_pack_requires": "exact pack bytes/fullSHA/object inventory recorded after commit; no rerun/republish if observation times out",
+    "local_import": "git unpack-objects into sharedRoot ODB only, no checkout/ref changes until independent metadata verification",
+    "artifact_verifier": {
+      "API": "Scripts.StructTrain.TimeLearner.publisher.verify_artifact_set",
+      "directory": "${local_shared_root}",
+      "commit": "${new_evidence_commit}",
+      "record": {
+        "repository": ".",
+        "manifest": "Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1/artifact-inventory.json",
+        "manifest_sha256": "${actual_final_inventory_sha256}"
+      },
+      "enforce_new_artifact_policy": true
+    },
+    "push_after_review": [
+      "git",
+      "-C",
+      "${local_shared_root}",
+      "-c",
+      "push.recurseSubmodules=no",
+      "push",
+      "origin",
+      "${new_evidence_commit}:refs/heads/codex/timelearner-owned-native-controller40-maintained-a1-evidence"
+    ],
+    "remote_reachability": [
+      "git",
+      "-C",
+      "${local_shared_root}",
+      "ls-remote",
+      "--exit-code",
+      "origin",
+      "refs/heads/codex/timelearner-owned-native-controller40-maintained-a1-evidence"
+    ],
+    "publish_closure_full_SDK_not_claimed": "metadata evidence only; parent7 gitlinks preserved, no child source materialization or new child publication claimed"
+  },
+  "scientific_verdict": null,
+  "nested_kernel_closure_attested": false,
+  "outer_containment": {
+    "existing_API": "Scripts.StructTrain.TimeLearner.contained_runner.execute",
+    "no_owned_python_job_operation_added": true,
+    "no_TEMP_embedded_worker_or_supervisor_loop": true,
+    "controller_control_root": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collect-owned-native-controller40-m40-a1",
+    "process_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collect-owned-native-controller40-m40-a1/process",
+    "execute_arguments": {
+      "manifest": "actual runtimeManifest constructed on server from below owner APIs; never guessed hashes",
+      "arguments": [
+        "/usr/bin/python3.12",
+        "-B",
+        "-m",
+        "Scripts.StructTrain.TimeLearner.closed_python_validation",
+        "collect",
+        "/media/user/Data/TimeLearnerRefactor/plan-closed-python-actual40-negative73-collection-m40-a1/Docs/StructTrain/TimeLearner/ClosedPythonValidationActual40Collection-20261109.manifest.json",
+        "--manifest-sha256",
+        "19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb",
+        "--output",
+        "/media/user/Data/TimeLearnerRefactor/evidence-owned-native-controller40-maintained-a1/Reports/StructTrain/TimeLearner/s10-owned-native-controller40-maintained-a1"
+      ],
+      "working_directory": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collect-owned-native-controller40-m40-a1/process",
+      "maximum_wall_seconds": 240,
+      "memory_bytes": 536870912,
+      "tasks": 32,
+      "cooperative_capture": false,
+      "managed_reservation": null,
+      "on_started": "minimal Root callback persists exact STARTED binding with original callback/runtime/source bytes and SHA; no presentation exception may abort closure",
+      "monitor": null
+    },
+    "runtime_bindings": {
+      "schema_version": 2,
+      "source_closure": {
+        "kind": "owned_python_metadata_projection",
+        "tool_root": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+        "launch_context_sha256": "SHA256 of actual raw persisted /media/user/Data/TimeLearnerRefactor/readbacks/s10-collect-owned-native-controller40-m40-a1/launch-context.json bytes",
+        "SDK_source_verified": false,
+        "scope": "closed Python metadata collection only; no native SDK/compiler/model validation"
+      },
+      "executable": "runtime.file_record(Path(sys.executable)) for actual /usr/bin/python3.12",
+      "app_ini": "runtime.file_record(exact unchanged manifest40 path) with required SHA19a5e38c6019e68c7337dc11ac073464572219d21387098d9495275aa88011cb",
+      "compiler": "same runtime.file_record(Path(sys.executable)); legacy field is Python interpreter",
+      "resolved_libraries": "runtime.resolved_libraries(Path(sys.executable)) on actual host",
+      "loaded_process_files": null,
+      "loader_environment": {},
+      "build_flags": {
+        "role": "Python closed validation metadata collection only; legacy compiler field is Python interpreter"
+      },
+      "runtime_identity": "runtime.runtime_content_identity(actual_manifest)",
+      "runtime_fingerprint": "runtime.digest_json(actual_runtime_identity)"
+    },
+    "lease_ownership": "collector CLI reserves the sole new publication lease; direct module CLI process must be unit initialMainPID, checked after actual binding; no outer reservation that conflicts with it",
+    "required_records": [
+      "exact runtime.json and runtime fingerprint",
+      "fixed original argv/cwd/limits and original manifestSHA",
+      "on_started exact unit/invocation/PID/startticks/requestSHA binding persisted and stdout STARTED",
+      "contained request/owned-unit/stdout/stderr and returned result",
+      "fresh postouter contained_process.inspect(process/contained) exactsame binding/all_processes_closed/MainPID0/emptycgroup",
+      "read_snapshot central ledger exact collection_id/token/ownerPID-start/resources/released state; original40 and dedicated held ledgers unchanged"
+    ],
+    "failure_or_missing_final_receipt": "preserve original controller reason and all partialfiles; no stage/commit; never restart from observation timeout",
+    "only_authorized_recovery_if_necessary": {
+      "owner_API": "Reservations.open_existing(BASE/resource-reservations.sqlite3).recover_closed_worker(token, outer/process/contained, note=...)",
+      "requires": "fresh whole-group closure plus exact collection_id/token/owner/binding; only the new collector lease, record recovery as resource recovery not success",
+      "prohibited": "no recover/release old40 outerlease or any of its dedicated private held ledgers"
+    }
+  },
+  "server_calls_or_test_execution_by_preparer": false,
+  "local_preparation_scope": "Git objects, source read, JSON and hashes only; no project imports/tests"
+}

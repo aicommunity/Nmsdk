@@ -1,0 +1,109 @@
+{
+  "kind": "negative73_reference_Git_capability_reconciliation",
+  "schema_version": 1,
+  "status": "data_only_fresh_projection_prepared_not_delivered",
+  "source_unchanged": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+  "original_negative73_unchanged": true,
+  "old_manifest": {
+    "commit": "9c9cc17a732fe31d17429401e5af3a6545f11f53",
+    "sha256": "bf953ac282bb79d734c359c35af75515bfbf93a94258c0c3778182d0c4058109",
+    "preserved": true
+  },
+  "old_readonly_failure": {
+    "reason": "collector_git_role_object_unavailable",
+    "missing_blob": "6668c33902cb024a263297f7a847287b0e5c654a",
+    "repository": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+    "before_Git_writes_or_collection": true,
+    "raw_sha256": "e7b7cccd867357c2d3d69d683f4bfff9997ff00787ad3ae50264c3994815b984"
+  },
+  "checked_existing_origin": {
+    "path": "/media/user/Data/TimeLearnerRefactor/evidence-native-acceptance-full250-m40-a4",
+    "HEAD": "unborn",
+    "HEAD_returncode": 128,
+    "evidence_ref": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "required_blob6668_present_bytes": 1092073,
+    "raw_sha256": "e5c5cf89b82a968e3d16db356038a8a56c067057cac41d1acb0cb140674d87c0",
+    "not_modified": true,
+    "reason_unusable_as_current_typed_Git_role": "API requires exact40char actualHEAD; do not move oldHEAD or relax source"
+  },
+  "source_of_owner_path": {
+    "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "archive_member": "s07-composite-cold6-m40-asan-a4/observer/publisher-source.py",
+    "source_sha256": "70902c342fbcfa83a36ce404cda782ef0eaae83afbb06534a54bd1b2f820e379",
+    "line257": "repo = BASE / evidence-native-acceptance-full250-m40-a4",
+    "lines265_267": "all four report payloads put in evidence commit; only evidence ref was written, no HEAD checkout"
+  },
+  "new_reference": {
+    "path": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+    "HEAD": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "patterns": [
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ],
+    "materialized_files": 5,
+    "required_ODB_roles": [
+      {
+        "role": "actual157-primary-reference-0",
+        "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+        "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/bundle.json",
+        "git_blob": "1818e031a257e0657653c8aa3b5950b031eead67",
+        "expected_bytes": 1015442,
+        "expected_sha256": "e67428fbcf469781b1e8bb8613b49b2b7a80a7faf4d00fc17a052eafca936fd4",
+        "maximum_bytes": 1015442
+      },
+      {
+        "role": "actual157-primary-reference-1",
+        "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+        "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/primary.tar.xz",
+        "git_blob": "0634e7f7f2d820c749571a9322e1ded4e8c140f9",
+        "expected_bytes": 1836352,
+        "expected_sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008",
+        "maximum_bytes": 1836352
+      },
+      {
+        "role": "actual157-primary-reference-2",
+        "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+        "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/publication-verification.json",
+        "git_blob": "6668c33902cb024a263297f7a847287b0e5c654a",
+        "expected_bytes": 1092073,
+        "expected_sha256": "a1ec7bc4c0ab41bc5f14933fbe454dd0c81e291a54d65eafee113d65edcc3b39",
+        "maximum_bytes": 1092073
+      },
+      {
+        "role": "actual157-primary-reference-3",
+        "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+        "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+        "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/verification.json",
+        "git_blob": "1715172454708b571ece151ecd513312167fbb14",
+        "expected_bytes": 535471,
+        "expected_sha256": "ffd4478de073d10f1bb7debcdfef530f54e95703e00498258c1209d2e37181ba",
+        "maximum_bytes": 535471
+      }
+    ],
+    "all_tree_objects_required": true,
+    "only_four_role_blobs_plus_five_controls_required": true,
+    "no_full157_75MB_fixture_copy": true,
+    "no_old_ODB_hydration_or_native48_path_access": true
+  },
+  "new_manifest": {
+    "path": "Docs/StructTrain/TimeLearner/ClosedPythonValidationNegative73CollectionA2-20261109.manifest.json",
+    "bytes": 29909,
+    "sha256": "48b376260d67d7210dc6580c5a4687bd6648971192e646775dc05eca9774e5c1",
+    "delta_only": [
+      "four primary Gitrole repository and repository_head",
+      "one new explicit five-control reference projection"
+    ],
+    "role_commit_path_blob_bytes_sha_max_and_expected_outcome_unchanged": true
+  },
+  "scientific_verdict": null
+}
