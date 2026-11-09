@@ -71,7 +71,7 @@ def validate_request(value):
             and all(type(n) is int and n > 0 for n in value['disk'].values()), 'owned_job_disk_schema')
     operation = value['operation']
     require(type(operation) is dict and operation.get('kind') in
-            ('python-validation', 'duplicate-static-archives'), 'owned_job_operation')
+            ('python-validation', 'duplicate-static-archives', 'native-canonical-preparation'), 'owned_job_operation')
     if operation['kind'] == 'python-validation':
         require(set(operation) == {'kind', 'source', 'suite', 'fixtures'} and
                 type(operation['source']) is dict and set(operation['source']) == {'path', 'commit'} and
@@ -81,6 +81,9 @@ def validate_request(value):
         require(type(operation['source']['path']) is str and Path(operation['source']['path']).is_absolute() and
                 _commit(operation['source']['commit']), 'owned_job_validation_source_binding')
         _file_binding(operation['suite'])
+    elif operation['kind']=='native-canonical-preparation':
+        require(set(operation)=={'kind','plan'},'owned_job_canonical_schema')
+        _file_binding(operation['plan'])
     else:
         require(set(operation) == {'kind', 'plan', 'review'}, 'owned_job_archive_schema')
         _file_binding(operation['plan']);_file_binding(operation['review'])
@@ -91,7 +94,8 @@ def _paths(request):
     base = _canonical(Path(request['execution_root']))
     require(socket.gethostname() == request['worker_host'] and SOURCE.is_relative_to(base), 'owned_job_worker_changed')
     operation = request['operation']
-    files = [operation['suite']] if operation['kind'] == 'python-validation' else [operation['plan'], operation['review']]
+    files = ([operation['suite']] if operation['kind']=='python-validation' else
+             [operation['plan']] if operation['kind']=='native-canonical-preparation' else [operation['plan'],operation['review']])
     for row in files:
         require(Path(row['path']).is_relative_to(base), 'owned_job_input_outside_execution_root')
     if operation['kind'] == 'python-validation':
@@ -197,6 +201,9 @@ def _worker(request_path):
     operation = request['operation'];resources = [{'path': str(base), 'access': 'write'}]
     if operation['kind'] == 'python-validation':
         resources = _validation_resources(operation, job)
+    elif operation['kind']=='native-canonical-preparation':
+        from .native_canonical_preparation import resources as canonical_resources
+        resources=canonical_resources(_pinned(operation['plan']),job)
     token = None;stop = threading.Event();errors = [];thread = None;passed = False;before = None
     def emit(name, value):
         _write(output/name, value)
@@ -241,6 +248,13 @@ def _worker(request_path):
                     _json(_frozen(output/'validation/suite.json', 16*1024**2)[0]) == suite and
                     record['executed_tests'] == len(suite['expected_test_ids']) and not record['skipped'] and
                     not record['failures'] and not record['errors'], 'owned_job_validation_failed')
+        elif operation['kind']=='native-canonical-preparation':
+            from .native_canonical_preparation import produce
+            plan=_pinned(operation['plan']);emit('canonical-plan.json',plan)
+            def canonical_guard():
+                require(not errors,'owned_job_heartbeat_failed')
+                require(shutil.disk_usage(base).free>=request['disk']['minimum_free_bytes'],'owned_job_disk_floor')
+            produce(plan,operation['plan']['path'],operation['plan']['sha256'],output,registry,token,canonical_guard,emit)
         else:
             from .archive_retirement import retire
             plan, review = _pinned(operation['plan']), _pinned(operation['review'])
