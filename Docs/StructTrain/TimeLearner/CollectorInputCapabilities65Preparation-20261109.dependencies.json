@@ -16,8 +16,29 @@
     "package_fingerprint": "295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317"
   },
   "plan": {
-    "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
     "commit": "resolve from separate docs-only preparation commit"
+  },
+  "projection": {
+    "source_patterns": [
+      "/Scripts/",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules"
+    ],
+    "plan_patterns": [
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules"
+    ],
+    "order_contract": "explicit ordered arrays; never derive from object/map enumeration",
+    "canonical_serialization": "UTF-8 LF Git blob bytes; sort_keys must preserve each array order"
   },
   "actual_source_local_fixtures": [
     {
@@ -53,7 +74,7 @@
       "access": "read"
     },
     {
-      "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
       "access": "read"
     }
   ],

@@ -17,12 +17,12 @@
   "request": {
     "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
     "bytes": 927,
-    "sha256": "24cbfae65f9a70ea100a2243823e3fffb6ea0a1a33667f568c943be37a86694c"
+    "sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81"
   },
   "dependencies": {
     "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
-    "bytes": 2834,
-    "sha256": "59faf14ecff6d56bda70ca8beb1119888fd4fa95b94b0d896389626e17f13ae4"
+    "bytes": 3864,
+    "sha256": "5d1e9dadfc46f3c2706f1f4dfaaed41cd2f6165a7f0924e9bfc0210470213565"
   },
   "expected_test_ids": [
     "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
@@ -93,6 +93,22 @@
   ],
   "old_tests": 39,
   "new_tests": 26,
+  "preparation_history": {
+    "deprecated_CRLF_pin": "110f016a71daf835419272c03d384a1f11fe6d9a",
+    "server_A1_plan_commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+    "server_A1_plan_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+    "server_A1_producer_command_sha256": "8c69f08f727e54c0237ff61b67d9a546ed26e49295188eabc5b51d190bec802c",
+    "server_A1_failed_receipt": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1/prepared-metadata.json",
+      "bytes": 5993,
+      "sha256": "90bbdfa3355b34846671c90b5edf51ee1625c5a1206d426d433fff1f6a011225"
+    },
+    "server_A1_released_lease_token": "6b942305-f599-43a7-a964-89820d972cbf",
+    "server_A1_cause": "sorted nested map changed expected sparse-pattern order; no test job or flat suite/request created",
+    "readonly_cause_audit_sha256": "333c7a95ea70e04de802a642189c52895ac7b6b62e1961327cb80292066e2e73",
+    "old_source_and_plan_unchanged": true,
+    "server_A1_tests_dispatched": false
+  },
   "tests_executed_locally": false,
   "scientific_verdict": null
 }
