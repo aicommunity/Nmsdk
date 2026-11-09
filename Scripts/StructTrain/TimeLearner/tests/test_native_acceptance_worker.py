@@ -85,6 +85,26 @@ def configure_fixture(root):
 
 
 class NativeAcceptanceWorkerTest(unittest.TestCase):
+    def test_shared_path_preflight_does_not_create_worker_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve()
+            job,_,_,paths,protected=configure_fixture(root)
+            actual=subject.validate_job_paths(job)
+            self.assertEqual(actual[:3],(root,paths,protected))
+            self.assertEqual(actual[3],subject.configure_arguments(job,paths,protected))
+            self.assertFalse(paths["output"].exists())
+            self.assertFalse(paths["runtime"].exists())
+            self.assertFalse(paths["build"].exists())
+
+    def test_shared_preflight_keeps_namespace_guard_before_later_path_errors(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory).resolve()
+            job,_,_,paths,_=configure_fixture(root)
+            job["protected_runtimes"]=[str(root/"missing")]
+            with self.assertRaisesRegex(ValueError,"worker_loaded_from_other_SDK"):
+                subject.validate_job_paths(job,loaded_source_root=root/"wrongSDK")
+            self.assertFalse(paths["output"].exists())
+
     def test_fresh_configure_materializes_profile_in_real_cmake_cache(self):
         # A real configure-only project demonstrates the original fresh-cache
         # failure; NONE enables no compiler language and builds no SDK/model.
