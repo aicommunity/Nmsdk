@@ -17,6 +17,13 @@ keyword `uri=True` штатного SQLite API, поэтому Python выдал
 передаётся original connect; `*args/**kwargs`, реальный SQL trace, запрет
 writer `_transaction`, проверки valid released ledger и неизменных DB bytes
 сохранены. `closed_python_validation.py` и `resource_reservations.py` не меняются.
+Первый test-only pin `6fbf31b0e744ba16991b3fea3e231e6ff252744b` не запускался:
+Root source review до A2 выявил вторую ошибку того же assertion. Проверка
+`'CREATE' in sql.upper()` ложно отвергала `SELECT ... ORDER BY created,token`.
+Следующий normal commit проверяет именно command/opcode: разрешены SELECT,
+точный deferred BEGIN и ROLLBACK, а PRAGMA, DDL/DML и BEGIN IMMEDIATE не
+допускаются. Запрет writer API, реальная valid ledger и DB byte checks не
+ослабляются. Это статический контрпример, не второй фактический test failure.
 24 collector metadata cases, 3 остальных readonly cases и 38 существующих
 regressions прошли; это не заменяет требование нового полного positive66.
 

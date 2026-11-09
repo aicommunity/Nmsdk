@@ -6,27 +6,27 @@
   "source_commit": "resolve_from_following_test_only_source_commit",
   "source_files": {
     "Scripts/StructTrain/TimeLearner/closed_python_validation.py": {
-      "mode": "100644",
       "git_blob": "365c23fcaddbb3562c50993f20cd0e7c9f1f1be6",
+      "mode": "100644",
       "bytes": 43434,
       "sha256": "c991b51e4f3a15146d9060c377a4874b822f3c537c7dad18dd36bb4f2ebc837a"
     },
     "Scripts/StructTrain/TimeLearner/resource_reservations.py": {
-      "mode": "100644",
       "git_blob": "9d7ce3eec4e5f967a9e7cb078a8909e07d2dd97c",
+      "mode": "100644",
       "bytes": 28055,
       "sha256": "76b7bedf0ba68f1f3cb20d08e0eeb99fc07e4a76dff66d5b25dfda2d99df876b"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_closed_python_validation.py": {
+      "git_blob": "6e402908b8b85a0ac9a79eecfb966c4a233a8355",
       "mode": "100644",
-      "git_blob": "fa55fe836470d6acae40d65deebb6c36876f0f56",
-      "bytes": 19295,
-      "sha256": "5b5eba37671f543a6f2ed8a89281110217248e22d92a961d2a802c18e7038beb"
+      "bytes": 19461,
+      "sha256": "79b92089b823369fac55b062b3c6cbdde9dd5bc2544795c4bc995c5e81ecf88c"
     }
   },
   "Scripts_files": 637,
   "package_Python_files": 446,
-  "package_fingerprint": "bdcf216712beaa7c0bb964e1b6996cd0d9244ed99f6039250234504668a2624e",
+  "package_fingerprint": "17bf9cecf967dfdcafb67a3296572a57ecebb39981c4f02737bc7bf4e4c888aa",
   "cohorts": {
     "Scripts.StructTrain.TimeLearner.tests.test_closed_python_validation": 28,
     "Scripts.StructTrain.TimeLearner.tests.test_resource_reservations": 15,
@@ -151,5 +151,11 @@
     },
     "test_only_fix": "spy positional database parameter renamed; uri=True kwargs preserved",
     "raw_readback_sha256": "20e7c30f5957e71dad0b8f9d07bcbe8f83fd7279cc5b75c10c5392b32f53c2ea"
+  },
+  "source_only_followup": {
+    "parent": "6fbf31b0e744ba16991b3fea3e231e6ff252744b",
+    "not_executed": true,
+    "reason": "SQL substring CREATE also matched identifier created; assert command/opcode instead",
+    "production_382_unchanged": true
   }
 }

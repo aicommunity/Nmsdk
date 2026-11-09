@@ -246,7 +246,11 @@ class ReadonlyReservationsSnapshotTest(unittest.TestCase):
                 with mock.patch.object(sqlite3,'connect',side_effect=connect):view = Reservations.read_snapshot(db)
             self.assertEqual(view['leases'][0]['token'],lease['token']);self.assertEqual(view['leases'][0]['state'],'released')
             self.assertTrue(all('mode=ro' in str(uri) for uri in uris));self.assertIn('BEGIN',statements)
-            self.assertFalse(any(any(word in sql.upper() for word in ('PRAGMA','IMMEDIATE','INSERT','UPDATE','CREATE','DELETE')) for sql in statements))
+            for sql in statements:
+                normalized = sql.strip().removesuffix(';').strip().upper()
+                command = normalized.split(None,1)[0]
+                self.assertIn(command,('SELECT','BEGIN','ROLLBACK'))
+                if command != 'SELECT':self.assertIn(normalized,('BEGIN','ROLLBACK'))
             self.assertEqual(db.read_bytes(),before)
 
     def test_valid_read_then_schema_tamper_and_alias_are_rejected(self):
