@@ -1,5 +1,7 @@
 # Общие preflight-проверки входов metadata collector
 
+> Последующая [приёмка65 и actual integration](CollectorInputCapabilities65Acceptance-20261109.ru.md) завершена. Ниже сохранена исходная постановка source preparation; её слова «ещё не запускались» относятся к исходному снимку. Maintained production collector CLI остаётся открытым.
+
 Статус: source preparation. Локально выполнялись только Git/text/JSON/AST
 проверки. Unit tests и новый server gate ещё не запускались. Изменение не
 затрагивает SDK/cache/runtime, learner, алгоритмы, old53/73 source или primary.
