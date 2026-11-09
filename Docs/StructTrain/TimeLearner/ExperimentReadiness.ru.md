@@ -31,6 +31,16 @@ LT Potential ненулевой, старуюflatpanel объясняет мас
 Full163visualQA не заявляется. Эти проверки не подтверждают качество обучения
 и не меняют прежний packet observation valid=False.
 
+Дополнительный source-only blocker archive2: в Root `7ad96da0e66fe1ef51fc76acb2114174ab6a4e68`
+`Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp`, `SaveCompositeBoundary`,
+для service protocol5 пишет `runtime-plan-scope.json` с `runtime_plan2_exported:false`,
+а public reader `composite_archive_case.py` в Root7352 требует оригинальный
+`runtime-plan.json`. Поэтому будущие33 native checks и45DATA+8archive1 checks
+по отдельности не подтверждают archive2→public CLI. Нужны настоящий owning
+runtime2 export, unmocked positive whole-archive2 auditor/CLI и rehashed tamper
+на его реальных выходах. Не реконструировать недостающий план из index или
+старого archive1. Это выявлено чтением исходников, runtime ещё не проверен.
+
 До следующего целевого cold Train необходимо последовательно принять:
 
 1. Lifecycle/cancellation и service-интеграцию; получить реальные native-архивы
