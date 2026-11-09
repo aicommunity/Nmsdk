@@ -1,5 +1,10 @@
 # Два findings для следующего property/lifecycle реестра
 
+Дополнение09.11: [bounded control/peak reconciliation](ControlPeakPropertyReconciliation-20261109.ru.md)
+подтверждает сохраняющийся rising gap на Pulsef7/Rdkd6, уточняя локальный setter
+и connected/direct paths. Исходный обзор ниже сохранён со своим snapshot;
+новых runtime controls или исправления rising semantics эта сверка не добавляет.
+
 Read-only source review root `9a782e211a7321b2253dacb018d2235a67b8a445`,
 PulseLib `fcc3fed0dc63fc0d8ae8dcfdb0f85bd5d004baf8`.
 Эти пункты не исправлены calibration/PostTune reconciliation. Новых numerical
