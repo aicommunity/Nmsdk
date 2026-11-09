@@ -1,0 +1,82 @@
+{
+  "kind": "runtime2_cursor_fixture_source_correction",
+  "schema_version": 1,
+  "status": "source_only_unrun",
+  "base_failed_source": "1292babb67ee653d04316f7f6927a3d23d5d682c",
+  "code_commit": "d169ecc4751aa5925023d52e9abfeda284c0dd05",
+  "changed_Scripts": {
+    "Scripts/StructTrain/TimeLearner/tests/test_candidate_window_runtime2.py": {
+      "bytes": 15902,
+      "sha256": "befe9bc79485645e5ed0c33dbb50c9dd33dc2fef6d2782b47f467d47154ca7ad",
+      "git_blob": "0c06a89b235044309a9d39041517e25494d5a177"
+    }
+  },
+  "production_Scripts_diff_empty": true,
+  "test_ids_unchanged": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_real_runtime_shape_binds_full_protocol_and_is_not_cold7",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_warm_current_model_epoch_search_tolerances_and_caps_may_differ_initial_cold",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_runtime_normalization_is_not_silently_copied_from_initial_model",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_cold7_clone_runtime1_and_scope_marker_are_not_runtime2",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_wrong_protocol_or_candidate_policy_binding_rejects",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_unknown_fields_and_boolean_fractional_or_nonfinite_numbers_fail",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_search_bounds_and_tolerances_remain_strict_typed_declarations",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_reference_raw_sample_and_group_time_budgets_bind_actual_plan",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_search_declaration_preserves_false_record_flag_without_inventing_C0",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_unmocked_whole_archive2_dispatch_replays_refs_proposals_primary_and_runtime2",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_unmocked_public_CLI_reads_original_documents_and_all_external_primary",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_missing_runtime_original_is_not_filled_from_cold_or_index",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_missing_or_changed_mirror_cannot_fall_back_to_embedded_primary",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_foreign_reference_proof_does_not_mint_seed_authority",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_physical_Rs_claim_is_checked_against_full_graph",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_changed_candidate_window_is_not_prediction_as_measurement",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_warm_empty_attempt_retains_original_references_and_own_history_budgets",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_historical_prefix_cap_cannot_hide_behind_higher_warm_cap",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_raw_trace_changes_are_detected_independently_of_peak_metadata"
+  ],
+  "source_Scripts_files": 643,
+  "source_Scripts_bytes": 9300894,
+  "Python_files": 452,
+  "package_fingerprint": "db126c94bb8df9e61dbef60a71446e5c74bb506986323cd3c044f57dc35e1e0c",
+  "original_failure": {
+    "plan": "03b7c72af05879bba9f7dd48c69f2c3518b3a418",
+    "executed": 73,
+    "passed": 72,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "test_id": "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked",
+    "original_cursor_values": [
+      272,
+      271
+    ],
+    "original_failed_source_preserved": true,
+    "negative_Git_evidence_pin_pending": true
+  },
+  "corrected_declared_boundary": {
+    "maximum_candidates_per_input": 4,
+    "length_domain": [
+      1,
+      8
+    ],
+    "synapses_domain": [
+      1,
+      128
+    ],
+    "length_inventory": 4,
+    "synapse_count_inventory": 128,
+    "contexts": 2,
+    "required_per_context": 132,
+    "positive_cursor_elements": 264,
+    "negative_cursor_elements": 263
+  },
+  "local_checks": [
+    "AST parse only",
+    "Git diff --check",
+    "C++/Python shared owner/source fixture review"
+  ],
+  "tests_executed": false,
+  "preparation_A2_created": false,
+  "server_sources_changed": false,
+  "scientific_verdict": null
+}

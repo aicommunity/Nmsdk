@@ -27,7 +27,12 @@ def analyze(args: argparse.Namespace) -> dict:
     require(args.format in ("threshold-candidate", "native-calibration-assessment", "calibrated-state", "calibration-transaction", "posttune-transaction") or args.source_solo is None, "source_solo_option_is_only_for_threshold_candidates")
     require(args.format == "native-calibration-assessment" or args.evaluation is None, "evaluation_option_is_only_for_native_calibration")
     source = args.source.resolve(strict=True)
-    if args.format == "historical-selectivity":
+    if args.format == "native-composite-measurements":
+        from .composite_archive_case import audit_composite_archive_case
+        require(args.output is None or not args.output.resolve().is_relative_to(source),
+                'composite_analysis_output_overlaps_original_case')
+        result = audit_composite_archive_case(args.source)
+    elif args.format == "historical-selectivity":
         from .historical_selectivity import analyze_historical_csv
         result = analyze_historical_csv(source, args.expected_trial_ids)
     elif args.format == "legacy-statistic-traces":
@@ -252,7 +257,7 @@ def main(argv: list[str] | None = None) -> int:
     inventory.add_argument('--include-related', action='store_true', help='schema3 review catalog: also match TimeLearner tokens in committed script content; never execute tools')
     analysis = commands.add_parser("analyze", help="audit original native evidence; no recognition verdict")
     analysis.add_argument("source", type=Path)
-    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces'), required=True)
+    analysis.add_argument("--format", choices=('capacitance-region', 'capacitance-history', 'capacitance-witness', 'capacitance-binding', 'training-capacitance-bridge', 'domain', 'probe', 'learned-solo', 'stopped-solo', 'recognition', 'recognition-owner', 'recognition-trial', 'recognition-evaluation', 'threshold-candidate', 'calibrated-state', 'calibration-transaction', 'posttune-transaction', 'calibration-run', 'posttune-run', 'pipeline-run', 'native-calibration-assessment', 'posttune-reconstruction', 'posttune-transient', 'legacy-posttune-freerun', 'native-live-finalization', 'branch-dynamics', 'historical-selectivity', 'stopped-final-pass', 'legacy-statistic-traces', 'native-composite-measurements'), required=True)
     analysis.add_argument("--expected-trial-ids", nargs="+", help="independently declared IDs required for historical-selectivity CSV")
     analysis.add_argument("--rest-bound", type=float, help="descriptive channel envelope for branch-dynamics; legacy default 1")
     analysis.add_argument("--soma-abs-limit", type=float, help="optional descriptive soma bound for branch-dynamics")
