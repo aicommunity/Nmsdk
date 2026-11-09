@@ -3,6 +3,7 @@ from copy import deepcopy
 import unittest
 
 from ..composite_configuration import project_composite_configuration, project_training_configuration
+from ..candidate_recovery import project_recovery_configuration
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import EvidenceError
 from ..native_pipeline_worker import validate_job
@@ -29,7 +30,7 @@ def job(config):
 
 
 class CandidateWindowTrainingJobTest(unittest.TestCase):
-    def test_actual_train_and_preflight_entry_accept_explicit_cold7(self):
+    def test_production_train_and_preflight_validation_accept_explicit_cold7(self):
         for branch in (False, True):
             for n in (2, 4, 6):
                 for mode in ('train', 'preflight'):
@@ -95,3 +96,10 @@ class CandidateWindowTrainingJobTest(unittest.TestCase):
             value = cold7(); value['schema_version'] = version
             with self.subTest(version=version), self.assertRaises(EvidenceError):
                 validate_job('train', job(value))
+
+    def test_unchanged_legacy_recovery_rejection_does_not_block_the_new_entry(self):
+        value = cold7()
+        with self.assertRaisesRegex(EvidenceError, 'composite_measurement_requires_configuration_schema_6'):
+            project_recovery_configuration(value)
+        self.assertEqual(project_training_configuration(value)['schema_version'], 1)
+        self.assertEqual(validate_job('preflight', job(value))['composite_measurement_declaration']['protocol_schema'], 5)
