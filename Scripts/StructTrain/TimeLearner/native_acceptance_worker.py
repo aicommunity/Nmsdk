@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
+import re
 import shutil
 import subprocess
 import sys
@@ -66,6 +67,74 @@ def _relative(value):
     return value
 
 
+def _declared_cache_profile(required):
+    """Parse complete postconditions; a cache name has exactly one declaration."""
+    _require(type(required) is list and required, "build_profile")
+    result = {}
+    for line in required:
+        _require(type(line) is str and not any(c in line for c in "\r\n\0"),
+                 "complete_cache_entry_required")
+        match = re.fullmatch(r"([A-Za-z_][A-Za-z0-9_]*):([A-Z_]+)=(.*)", line)
+        _require(match is not None, "complete_cache_entry_required")
+        name, kind, value = match.groups()
+        _require(kind in {"BOOL", "FILEPATH", "PATH", "STRING", "INTERNAL", "STATIC", "UNINITIALIZED"},
+                 "unsupported_cache_type:"+name)
+        _require(name not in result, "duplicate_declared_cache_key:"+name)
+        result[name] = (kind, value, line)
+    return result
+
+
+def configure_arguments(job, paths, protected):
+    """Apply the declared build profile without turning arbitrary checks into -D."""
+    declared = _declared_cache_profile(job["build"]["required_cache_tokens"])
+    fixed = {
+        "CMAKE_BUILD_TYPE": ("STRING", job["build"]["type"]),
+        "NMSDK_DEPLOY_ROOT": ("PATH", str(paths["runtime"])),
+        "NMSDK_RESOURCE_ROOT": ("PATH", str(paths["resources"])),
+        # Keep the historical untyped parallel setting/cache representation.
+        "NMSDK_BUILD_PARALLEL_JOBS": ("UNINITIALIZED", str(job["build"]["parallel"])),
+        "FETCHCONTENT_SOURCE_DIR_GOOGLETEST": ("PATH", str(paths["framework"])),
+        "FETCHCONTENT_FULLY_DISCONNECTED": ("BOOL", "ON"),
+        "FETCHCONTENT_UPDATES_DISCONNECTED": ("BOOL", "ON"),
+    }
+    for name, wanted in {**fixed, "CMAKE_HOME_DIRECTORY": ("INTERNAL", str(paths["source"]))}.items():
+        if name in declared:
+            _require(declared[name][:2] == wanted, "canonical_configure_conflict:"+name)
+    arguments = ["cmake", "-S", str(paths["source"]), "-B", str(paths["build"])]
+    arguments += ["-D"+name+(":"+kind if kind != "UNINITIALIZED" else "")+"="+value
+                  for name, (kind, value) in fixed.items()]
+    active = job["build"]["type"].upper()
+    flags = {"CMAKE_C_FLAGS", "CMAKE_CXX_FLAGS", "CMAKE_EXE_LINKER_FLAGS",
+             "CMAKE_SHARED_LINKER_FLAGS", "CMAKE_MODULE_LINKER_FLAGS", "CMAKE_STATIC_LINKER_FLAGS",
+             "CMAKE_C_FLAGS_"+active, "CMAKE_CXX_FLAGS_"+active}
+    booleans = {"RDK_USE_LLM", "RDK_LLM_BUILD_EMBEDDED"}
+    for name, (kind, value, _) in declared.items():
+        if name in flags:
+            _require(kind == "STRING", "configure_flag_type:"+name)
+            arguments.append("-D"+name+":STRING="+value)
+        elif name in booleans:
+            _require(kind == "BOOL" and value in ("ON", "OFF"), "configure_bool:"+name)
+            arguments.append("-D"+name+":BOOL="+value)
+        elif name == "RDK_LLM_LLAMA_CPP_DIR":
+            _require(kind == "PATH", "configure_llama_type")
+            path = Path(value)
+            try:
+                valid = (path.is_absolute() and path.is_relative_to(Path(job["workspace"])) and
+                         path.resolve(strict=True) == path and path.is_dir() and
+                         not any(p.is_symlink() for p in (path, *path.parents)))
+            except OSError:
+                valid = False
+            _require(valid, "configure_llama_path")
+            _require(path in protected, "configure_llama_not_protected")
+            arguments.append("-DRDK_LLM_LLAMA_CPP_DIR:PATH="+str(path))
+        elif re.fullmatch(r"CMAKE_(C|CXX)_FLAGS_(RELEASE|RELWITHDEBINFO)", name):
+            _require(False, "inactive_configuration_flags:"+name)
+        # Unknown, syntactically valid entries remain read-only postconditions.
+    if declared.get("RDK_LLM_BUILD_EMBEDDED", (None, None))[1] == "ON":
+        _require("RDK_LLM_LLAMA_CPP_DIR" in declared, "configure_embedded_llama_source_required")
+    return arguments
+
+
 def validate_cache_profile(cache, required):
     """Require complete, unique CMake cache entries, including empty values."""
     _require(type(cache) is str and type(required) is list and required, "build_profile")
@@ -76,10 +145,7 @@ def validate_cache_profile(cache, required):
         declaration = line.split("=", 1)[0]
         if ":" in declaration:
             entries.setdefault(declaration.rsplit(":", 1)[0], []).append(line)
-    for expected in required:
-        _require(type(expected) is str and "\n" not in expected and "\r" not in expected and
-                 "=" in expected and ":" in expected.split("=", 1)[0], "complete_cache_entry_required")
-        name = expected.split("=", 1)[0].rsplit(":", 1)[0]
+    for name, (_, _, expected) in _declared_cache_profile(required).items():
         _require(name and entries.get(name) == [expected], "changed_cached_build_profile:"+name)
 
 
@@ -117,6 +183,7 @@ def validate_job(job, preparation, arguments):
              type(job["build"]["required_cache_tokens"]) is list and
              bool(job["build"]["required_cache_tokens"]) and
              all(type(v) is str and v for v in job["build"]["required_cache_tokens"]), "build_profile")
+    _declared_cache_profile(job["build"]["required_cache_tokens"])
     _require(type(job["limits"]) is dict and set(job["limits"]) == {
         "whole_wall_seconds", "leaf_memory_bytes", "leaf_tasks", "physical_free_floor_bytes",
         "reservation_memory_bytes", "reservation_disk_bytes"} and
@@ -185,6 +252,7 @@ class Worker:
                      for p in self.protected for k in ("build", "runtime", "output")), "protected_write_path_overlap")
         _require(all(self.paths[k].is_dir() for k in ("source", "resources", "framework")),
                  "missing_read_only_directory")
+        self.configure = configure_arguments(job, self.paths, self.protected)
         from . import runtime, native_gate, resource_reservations, contained_process, native_preparation, collector_provenance
         self.api = runtime, native_gate, resource_reservations, contained_process
         self.imports = {m.__name__:str(Path(m.__file__).resolve()) for m in
@@ -442,13 +510,8 @@ class Worker:
             temporary = self.out/"compiler-tmp"
             temporary.mkdir()
             os.environ["TMPDIR"] = str(temporary)
-            configure = ["cmake","-S",self.source,"-B",self.paths["build"],
-                "-DCMAKE_BUILD_TYPE="+self.job["build"]["type"], "-DNMSDK_DEPLOY_ROOT="+str(self.runtime),
-                "-DNMSDK_RESOURCE_ROOT="+str(self.paths["resources"]),
-                "-DNMSDK_BUILD_PARALLEL_JOBS="+str(self.job["build"]["parallel"]),
-                "-DFETCHCONTENT_SOURCE_DIR_GOOGLETEST="+str(self.paths["framework"]),
-                "-DFETCHCONTENT_FULLY_DISCONNECTED=ON","-DFETCHCONTENT_UPDATES_DISCONNECTED=ON"]
-            self.command(configure, "configure.log", 180)
+            self.write("configure-arguments.json", self.configure)
+            self.command(self.configure, "configure.log", 180)
             cache = (self.paths["build"]/"CMakeCache.txt").read_text()
             validate_cache_profile(cache, self.job["build"]["required_cache_tokens"])
             ini = (self.runtime/"NeuroModelerConsole.ini").read_text()

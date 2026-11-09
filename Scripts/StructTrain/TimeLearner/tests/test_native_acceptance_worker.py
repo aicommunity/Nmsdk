@@ -1,8 +1,9 @@
-"""Metadata-only worker regressions; no compilation, numerical or model run."""
+"""Worker metadata/configuration regressions; run on workers only, no compilation/model run."""
 import copy
 import json
 from pathlib import Path
 import tempfile
+import subprocess
 import unittest
 from unittest.mock import patch
 from types import SimpleNamespace
@@ -59,7 +60,123 @@ def declarations():
     return job, prep, arguments
 
 
+def configure_fixture(root):
+    job, prep, arguments = declarations()
+    job["workspace"] = str(root)
+    paths = {name:root/name for name in job["paths"]}
+    job["paths"] = {name:str(path) for name, path in paths.items()}
+    for name in ("source", "resources", "framework"):
+        paths[name].mkdir()
+    llama = root/"llama source"; llama.mkdir()
+    job["build"]["type"] = "RelWithDebInfo"
+    required = ["CMAKE_BUILD_TYPE:STRING=RelWithDebInfo",
+                "CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address -fno-omit-frame-pointer",
+                "CMAKE_C_FLAGS:STRING=", "CMAKE_CXX_FLAGS:STRING=",
+                "CMAKE_EXE_LINKER_FLAGS:STRING=-fsanitize=address",
+                "CMAKE_SHARED_LINKER_FLAGS:STRING=-fsanitize=address",
+                "CMAKE_MODULE_LINKER_FLAGS:STRING=", "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+                "RDK_USE_LLM:BOOL=ON", "RDK_LLM_BUILD_EMBEDDED:BOOL=ON",
+                "RDK_LLM_LLAMA_CPP_DIR:PATH="+str(llama)]
+    job["build"]["required_cache_tokens"] = required
+    job["protected_runtimes"] = [str(llama)]
+    return job, prep, arguments, paths, [llama]
+
+
 class NativeAcceptanceWorkerTest(unittest.TestCase):
+    def test_fresh_configure_materializes_profile_in_real_cmake_cache(self):
+        # A real configure-only project demonstrates the original fresh-cache
+        # failure; NONE enables no compiler language and builds no SDK/model.
+        with tempfile.TemporaryDirectory() as directory:
+            job, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            (paths["source"]/"CMakeLists.txt").write_text(
+                'cmake_minimum_required(VERSION 3.16)\nproject(NativeProfile NONE)\n', encoding="utf-8")
+            self.assertFalse(paths["build"].exists())
+            arguments = subject.configure_arguments(job, paths, protected)
+            subprocess.run(arguments, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=60)
+            cache = (paths["build"]/"CMakeCache.txt").read_text(encoding="utf-8")
+            subject.validate_cache_profile(cache, job["build"]["required_cache_tokens"])
+            self.assertIn("CMAKE_HOME_DIRECTORY:INTERNAL="+str(paths["source"]), cache.splitlines())
+            self.assertIn("NMSDK_DEPLOY_ROOT:PATH="+str(paths["runtime"]), cache.splitlines())
+            self.assertFalse((paths["build"]/"compile_commands.json").exists())
+
+    def test_unknown_profile_tokens_remain_postconditions_not_assignments(self):
+        with tempfile.TemporaryDirectory() as directory:
+            job, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            job["build"]["required_cache_tokens"].append("FOREIGN_POSTCONDITION:INTERNAL=never-executed")
+            arguments = subject.configure_arguments(job, paths, protected)
+            self.assertFalse(any("FOREIGN_POSTCONDITION" in value for value in arguments))
+            self.assertIn("-DCMAKE_CXX_FLAGS:STRING=", arguments)
+            self.assertIn("-DCMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address -fno-omit-frame-pointer", arguments)
+
+    def test_configure_rejects_conflicting_canonical_paths_values_and_types(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            conflicts = ["CMAKE_BUILD_TYPE:STRING=Release", "NMSDK_DEPLOY_ROOT:PATH=/other",
+                         "NMSDK_RESOURCE_ROOT:FILEPATH="+str(paths["resources"]),
+                         "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/other",
+                         "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=OFF",
+                         "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2",
+                         "CMAKE_HOME_DIRECTORY:INTERNAL=/other"]
+            for entry in conflicts:
+                job = copy.deepcopy(original)
+                name = entry.split(":", 1)[0]
+                job["build"]["required_cache_tokens"] = [v for v in job["build"]["required_cache_tokens"]
+                                                        if not v.startswith(name+":")]+[entry]
+                with self.subTest(entry=entry), self.assertRaisesRegex(ValueError, "canonical_configure_conflict"):
+                    subject.configure_arguments(job, paths, protected)
+            self.assertFalse(paths["build"].exists())
+
+    def test_configure_rejects_duplicate_bare_flags_and_unsupported_types(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            invalid = [("CMAKE_CXX_FLAGS:STRING=", "duplicate_declared_cache_key"),
+                       ("CMAKE_CXX_FLAGS:PATH=/other", "duplicate_declared_cache_key"),
+                       ("-fsanitize=address", "complete_cache_entry_required"),
+                       ("FOREIGN:BYTE=value", "unsupported_cache_type"),
+                       ("FOREIGN:STRING=bad\nvalue", "complete_cache_entry_required"),
+                       ("FOREIGN:STRING=bad\0value", "complete_cache_entry_required"),
+                       ("CMAKE_CXX_FLAGS_RELEASE:STRING=-O3", "inactive_configuration_flags")]
+            for entry, reason in invalid:
+                job = copy.deepcopy(original); job["build"]["required_cache_tokens"].append(entry)
+                with self.subTest(entry=entry), self.assertRaisesRegex(ValueError, reason):
+                    subject.configure_arguments(job, paths, protected)
+            for entry, reason in [("CMAKE_CXX_FLAGS:PATH=/other", "configure_flag_type"),
+                                  ("RDK_USE_LLM:BOOL=TRUE", "configure_bool")]:
+                job = copy.deepcopy(original); name = entry.split(":", 1)[0]
+                job["build"]["required_cache_tokens"] = [v for v in job["build"]["required_cache_tokens"]
+                                                        if not v.startswith(name+":")]+[entry]
+                with self.subTest(entry=entry), self.assertRaisesRegex(ValueError, reason):
+                    subject.configure_arguments(job, paths, protected)
+
+    def test_llama_source_requires_canonical_existing_protected_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            job, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            source = protected[0]
+            alias = source.with_name("llama-alias"); alias.symlink_to(source, target_is_directory=True)
+            bad = [(source, [], "configure_llama_not_protected"),
+                   (source/"missing", protected, "configure_llama_path"),
+                   (alias, [alias], "configure_llama_path"),
+                   (source/".."/source.name, protected, "configure_llama_path")]
+            for value, keep, reason in bad:
+                changed = copy.deepcopy(job)
+                changed["build"]["required_cache_tokens"] = [v for v in changed["build"]["required_cache_tokens"]
+                                                           if not v.startswith("RDK_LLM_LLAMA_CPP_DIR:")]
+                changed["build"]["required_cache_tokens"].append("RDK_LLM_LLAMA_CPP_DIR:PATH="+str(value))
+                with self.subTest(value=str(value)), self.assertRaisesRegex(ValueError, reason):
+                    subject.configure_arguments(changed, paths, keep)
+
+    def test_embedded_llm_missing_declaration_rejected_before_output_creation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            job, prep, arguments, paths, protected = configure_fixture(Path(directory).resolve())
+            job["build"]["required_cache_tokens"] = [v for v in job["build"]["required_cache_tokens"]
+                                                     if not v.startswith("RDK_LLM_LLAMA_CPP_DIR:")]
+            module = paths["source"]/"Scripts/StructTrain/TimeLearner/native_acceptance_worker.py"
+            with patch.object(subject, "__file__", str(module)), \
+                 self.assertRaisesRegex(ValueError, "configure_embedded_llama_source_required"):
+                subject.Worker(job, prep, arguments)
+            self.assertFalse(paths["output"].exists())
+            self.assertFalse(paths["runtime"].exists())
+
     def test_cache_profile_cannot_accept_prefixes_extra_flags_or_duplicate_key(self):
         flags = 'CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O1 -g1 -fsanitize=address -fno-omit-frame-pointer'
         empty = 'CMAKE_CXX_FLAGS:STRING='
