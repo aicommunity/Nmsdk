@@ -1,0 +1,11 @@
+# Согласованность будущего SDK с принятой миграцией Bin — 10.11.2026
+
+При локальной сверке этапа9 обнаружено: integrated root8fb4f7da07d85abb3e104337016662a0ad5c04cf уже содержит352 retired+4 moved records, но его Bin gitlink918ae5e1a2d6085b9ff148f7162eb9e744126592 сохраняет5 уже выведенных старых путей. Maintained root использует более новый Bin8cb6dba07b30432272984c8ce3136b48ad06f064; исходное расхождение связано со снимками feature SDK, а не с повторным появлением файлов в принятой миграции.
+
+Будущая integration-ветка закрепляет уже опубликованный descendant Bin8cb. Новый child commit не создаётся и история не переписывается: Bin8cb содержит прежний918, а origin ref codex/timelearner-time-scale-migration подтверждён exact git ls-remote. Текущий M40 SDKf22/Bin918 и ресурсы работающего run не изменяются. Старые результаты сохраняют собственные gitlinks.
+
+[Проверка полных Git trees/blobs](FutureBinMigrationClosure-20261110.json) доказывает: удалены ровно3 historical AsymRm control helpers и2 перенесённых time-scale auditors; изменены/добавлены только2 README/report MD. Все остальные15764 entries (path/mode/object) побайтно одинаковы по Git identity. Конфиги, модели, данные, бинарные ресурсы и научные результаты не меняются. Все5 старых путей присутствуют в migration manifest; архивные commit/blob/content SHA проверены, а оба moved auditor указывают на существующий root declared_time_scales.py. Historical helpers не возвращаются и wrappers не создаются.
+
+Это read-only Git metadata audit плюс исправление будущего gitlink, не повторная runtime/CLI приёмка143 и не завершение миграции: complete=false. Полный production migration CLI и fresh recursive checkout с новой root closure требуется проверить на workers после восстановления VPN. Дополнительное local извлечение/исполнение исторических скриптов не выполнялось.
+
+**Перед следующей сборкой:** source namespace и declaration должны указывать на новый root и Bin8cb; нужен новый private resources checkout с HEAD8cb. Существующий source-native-step-bin-resources-m40-a1 принадлежит918 и читается работающим run — checkout/update там запрещён. Нельзя заменить только root gitlink и повторно использовать resource manifest918 как8cb. Проверки effective model/Train→Test остаются отдельными; эта миграция не исправляет оставшееся class image XML roundtrip различие.

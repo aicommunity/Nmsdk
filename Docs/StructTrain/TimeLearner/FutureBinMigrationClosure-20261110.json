@@ -1,0 +1,103 @@
+{
+  "kind": "timelearner_future_Bin_migration_closure",
+  "schema_version": 1,
+  "scope": "local immutable Git tree/blob verification only; no runtime/CLI or numerical acceptance",
+  "root_before": "8fb4f7da07d85abb3e104337016662a0ad5c04cf",
+  "old_Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "new_Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+  "new_Bin_contains_old": true,
+  "tree_delta": [
+    {
+      "status": "M",
+      "path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/REPORT.md"
+    },
+    {
+      "status": "D",
+      "path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/l_train_guard.py"
+    },
+    {
+      "status": "D",
+      "path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/length_step_guard.py"
+    },
+    {
+      "status": "D",
+      "path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/train_time_budget.py"
+    },
+    {
+      "status": "A",
+      "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/README.md"
+    },
+    {
+      "status": "D",
+      "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py"
+    },
+    {
+      "status": "D",
+      "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py"
+    }
+  ],
+  "unchanged_other_entries": 15764,
+  "unchanged_entries_sha256": "661f55da28039f62cd706ac8f741a782e74c5dfa1419a075dcd4fa1179a78257",
+  "retired_and_moved_checks": [
+    {
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/l_train_guard.py",
+      "action": "retired_historical",
+      "archive_commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "blob_sha1": "0551b9e13d5053acc2d7f56b79da48155399d46b",
+      "content_sha256": "9763fbbd3d6125d4948405e765e1aa5790b6ce4d9b3dd9356a6c15a59aee0aa4",
+      "absent_in_new_Bin": true,
+      "replacement": null,
+      "replacement_root_blob": null
+    },
+    {
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/length_step_guard.py",
+      "action": "retired_historical",
+      "archive_commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "blob_sha1": "dca5e2ffedc53bb7d10943b119c512837f8baccd",
+      "content_sha256": "d95c87b2c41e0497a6ea6e0b4d3da7c77b3631d6ceef711d35fbe491f57b8bfd",
+      "absent_in_new_Bin": true,
+      "replacement": null,
+      "replacement_root_blob": null
+    },
+    {
+      "old_path": "Configs/SpikeSamples/StructTrain/SelectivityAsymRm/scripts/train_time_budget.py",
+      "action": "retired_historical",
+      "archive_commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "blob_sha1": "4842fd0c7b9c0e24d9f573cdc780bf54e300fc42",
+      "content_sha256": "569a0d143f4a46db6703454fc2b9b45c6fdd7425774e89f300587956185a2a3e",
+      "absent_in_new_Bin": true,
+      "replacement": null,
+      "replacement_root_blob": null
+    },
+    {
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+      "action": "moved_to_root",
+      "archive_commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "blob_sha1": "689d78e13ece1fdb8cf7df157e73822f23b16701",
+      "content_sha256": "d6fc4ff1b8ef51a72e37266fdd6e1f87a20a6539a0bde9821b05470ec0ecd02f",
+      "absent_in_new_Bin": true,
+      "replacement": "Scripts/StructTrain/TimeLearner/declared_time_scales.py",
+      "replacement_root_blob": "483566941a53c590d3c9f4876aff399d5398a418"
+    },
+    {
+      "old_path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py",
+      "action": "moved_to_root",
+      "archive_commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "blob_sha1": "2c865b33ab4bbd3c9c72c8f636aef18dca977160",
+      "content_sha256": "5ef2a7a21163e8cdacdab27da7fbff7130be979673002a6ab2c200e5b065aa7b",
+      "absent_in_new_Bin": true,
+      "replacement": "Scripts/StructTrain/TimeLearner/declared_time_scales.py",
+      "replacement_root_blob": "483566941a53c590d3c9f4876aff399d5398a418"
+    }
+  ],
+  "configs_models_measurements_unchanged": true,
+  "migration_complete": false,
+  "active_SDK_changed": false,
+  "full_migration_CLI_revalidation_pending": true,
+  "remote_reachability": {
+    "remote": "origin",
+    "ref": "refs/heads/codex/timelearner-time-scale-migration",
+    "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+    "verification": "git ls-remote, exact40SHA match"
+  }
+}
