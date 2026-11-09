@@ -83,6 +83,7 @@ def verify(args):
     keep = {'observer/frozen-inputs.json','observer/readonly-inventory.json.gz','observer/capture-proof.json',
             'native-output/terminal.json','native-output/canonical-preparation.json','native-output/source-closure.json',
             'native-output/source-closure-after.json','native-output/CMakeCache-terminal.txt',
+            'native-output/current-runtime-before.json','native-output/current-runtime-after.json',
             'postclosure-build/CMakeCache.txt','controller/supervisor-result.json','controller/supervisor.log'}
     with tarfile.open(fileobj=io.BytesIO(files['packed/primary.tar.xz']),mode='r:xz') as stream:
         for entry in stream:
@@ -116,19 +117,31 @@ def verify(args):
     assert terminal==observed['original_terminal'] and terminal['built'] is True
     assert terminal['scientific_verdict'] is None and terminal['whole_plan_complete'] is False
     prepared = read('native-output/canonical-preparation.json')
+    leaf_ids = {r['name']:r['expected_ids'] for r in prepared['current']['runplan']}
     selected = [i for r in prepared['current']['runplan'] for i in r['expected_ids']]
     cases, failures = [], []
     for name in manifest['children']:
         if name in manifest['incomplete_children']:
             declaration = manifest['incomplete_children'][name]
             assert declaration['execution']=='timeout' and declaration['junit_state']=='missing'
+            assert declaration['record_state'] in ('missing','present')
             assert 'native-output/'+name+'/native.xml' not in members
             gate = read('native-output/'+name+'-result.json')
             assert gate==read('native-output/'+name+'/result.json')
             assert gate['execution']=='timeout' and gate['validity']=='incomplete_test_observation'
             assert gate['assertion_status']=='not_assessed' and gate['inventory'] is None
+            assert gate['reason']==declaration['gate_reason'] and gate['scientific_verdict'] is None
             process = read('native-output/'+name+'/process/result.json')
             assert process['execution']=='timeout' and process['all_processes_closed'] is True
+            record_name = 'native-output/'+name+'-actual-tests.json'
+            assert (record_name in members)==(declaration['record_state']=='present')
+            if record_name in members:
+                record = read(record_name)
+                assert record['observed_ids']==record['failed_ids']==record['not_completed_ids']==[]
+                assert record['unobserved_expected_ids']==leaf_ids[name]
+                assert record['source']=='native.xml' and record['scientific_verdict'] is None
+                assert record['observation_error']['type']=='FileNotFoundError'
+                assert all(record['gate_'+k]==gate[k] for k in ('execution','validity','reason'))
             continue
         xml = ET.fromstring(kept['native-output/'+name+'/native.xml'])
         ids, bad = [], []
@@ -150,6 +163,8 @@ def verify(args):
     assert proof['original_outcome']==receipt['original_outcome']==original
     closure = read('native-output/source-closure.json')
     assert closure==read('native-output/source-closure-after.json')
+    assert read('native-output/current-runtime-before.json')==read('native-output/current-runtime-after.json')
+    assert observed['runtime_postclosure_matches_saved_after']==read('native-output/current-runtime-after.json')
     roots = sorted((n for n in closure if n!='root'),key=len,reverse=True)
     groups = {}
     for name,row in observed['source_namespace_physical_tracked_postclosure'].items():
@@ -180,13 +195,22 @@ def verify(args):
         assert len(raw)==row['bytes'] and sha(raw)==row['sha256']
     snapshot = load(Path(args.observer).read_bytes())
     state = snapshot['original_state']; own = snapshot['current_collection_lease']
-    assert snapshot['collector_receipt']==receipt and not state['supervisor_live']
+    assert snapshot['collector_receipt']==receipt and not state['supervisor_live'] and not state['unbound_outer_intent']
     assert state['outer']['all_processes_closed'] and state['outer']['binding']==observed['outer']['binding']
     assert state['result']['record_errors']==[] and len(state['result']['children_closed'])==len(manifest['children'])
+    cleanup = read('controller/supervisor-result.json')
+    assert cleanup['outer_closed'] and cleanup['record_errors']==[]
+    assert cleanup['outer_binding']==state['outer']['binding']
+    assert len(cleanup['children_closed'])==len(manifest['children'])
+    events = [load(line) for line in kept['controller/supervisor.log'].splitlines() if line.strip()]
+    assert [r['binding'] for r in events if r.get('kind')=='STARTED']==[state['outer']['binding']]
     for child in state['result']['children_closed']:
         name = Path(child['directory']).parents[1].name
         assert manifest['children'][name]=={'directory':child['directory'],'binding':child['binding']}
         assert child['closure']['all_processes_closed'] and child['closure']['binding']==child['binding']
+        matches = [r for r in cleanup['children_closed'] if r['directory']==child['directory']]
+        assert len(matches)==1 and matches[0]['closure']['all_processes_closed']
+        assert matches[0]['binding']==matches[0]['closure']['binding']==child['binding']
     assert own['state']=='released' and own['owner_status']=='missing'
     assert all(own[k]==receipt['released_collection_lease'][k]==proof['own_reservation'][k]
                for k in ('token','job_id','owner','resources'))
