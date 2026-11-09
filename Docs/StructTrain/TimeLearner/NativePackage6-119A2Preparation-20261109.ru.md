@@ -13,3 +13,11 @@
 Все старые runtime/source/output/controller защищены от записи. Ресурсы, runtime и исходники работающего A2 не обновляются. Сборка остаётся ASan RelWithDebInfo с теми же flags и двумя compilation jobs, оба targets обязательны. Никакого научного PASS этот запуск сам по себе не создаёт: после native acceptance нужны actual package6 Python roundtrip checks и реальный Console Train→export→calibration→frozen Test.
 
 Декларации: [canonical plan](ValidationPlans/NativePackage6-119A2-20261109/canonical-plan.json), [точный cohort](ValidationPlans/NativePackage6-119A2-20261109/cohort.json), [native job](ValidationPlans/NativePackage6-119A2-20261109/native-job.json), [Git delivery observations](ValidationPlans/NativePackage6-119A2-20261109/source-delivery-observation.json). Состояние этого документа при подготовке — ещё не результат запуска.
+
+## Фактический запуск A2
+
+Canonical operation завершён на M40 с кодом 0 за 75.323 s, diagnostics clear. Root независимо сверил все поля 4052 namespace rows с Git-based ledger, 29 SDK imports, 119 cases/42 leaves/308 artifact rules, 15 prior bindings и SHA обоих сформированных native controls. Tool и входные контрольные файлы до/после совпадают, подготовительный lease `40311aab-a029-4d6e-b2dd-e429e4c2a31b` освобождён после закрытия группы.
+
+Создан native controller `/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2-controller`; supervisor PID2168477/start331762638. Последняя непосредственная kernel-проверка подтверждает живой supervisor и running outer unit `timelearner-693a3e78-66f1-47d2-8c6a-eba12d47b3bb.service`, invocation `f965136fc14e4476904dc090fa6e222d`, MainPID2172881/start331763867. Binding SHA `f4e153f1b1a5906ab8cda586a63a418054671d89ea5ccdab69a5d03e5941e5a2`. Это подтверждение запуска, а не успешной компиляции или tests.
+
+[Исходные сжатые canonical/readback/STARTED/kernel наблюдения](../../../Reports/StructTrain/TimeLearner/s07-package6-native119-a2-launch-root-observation/index.json) опубликованы в Git. Полного native результата и нового scientific verdict пока нет. Отдельно остаётся полная compact preservation отрицательного A1: текущий collector schema1 требует завершённые JUnit для всех записанных children и не может честно принять timeout leaf без XML; имеющиеся terminal/частичный inventory не выдаются за полный архив всех A1 primary.
