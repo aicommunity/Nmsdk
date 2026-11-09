@@ -1,0 +1,123 @@
+{
+  "kind": "closed_native_acceptance_preservation_receipt",
+  "schema_version": 1,
+  "collection_status": "completed",
+  "original_outcome": {
+    "planned": 48,
+    "executed": 11,
+    "passed": 9,
+    "failed_ids": [
+      "NativeCandidateWindowCold7/ClassicInitialDeclarationUsesActualParametersRatherThanTemplate",
+      "NativeCandidateWindowCold7/BranchInitialDeclarationUsesActualParametersRatherThanTemplate"
+    ],
+    "not_run_ids": [
+      "NativeCandidateWindowCold7/ActualCommonPolicyMismatchCannotBecomeInitialDeclaration",
+      "NativeCandidateWindowCold7/ActualReferenceWindowMismatchCannotBecomeInitialDeclaration",
+      "NativeCandidateWindowBanks/ClassicN4ActualDistinctBankReadback",
+      "NativeCandidateWindowBanks/BranchN4ActualDistinctBankReadback",
+      "NativeCandidateWindowBanks/ClassicN6ActualDistinctBankReadback",
+      "NativeCandidateWindowBanks/BranchN6ActualDistinctBankReadback",
+      "NativeCandidateWindowBanks/ClassicN4EachActualInputRoutesNPlus2",
+      "NativeCandidateWindowBanks/BranchN4EachActualInputRoutesNPlus2",
+      "NativeCandidateWindowBanks/ClassicN6EachActualInputRoutesNPlus2",
+      "NativeCandidateWindowBanks/BranchN6EachActualInputRoutesNPlus2",
+      "NativeCandidateWindowBanks/BranchSharedBankIsLegitimateButNotDistinct",
+      "NativeCandidateWindowBanks/ActualPreparedWrongBankDescriptorRejected",
+      "NativeCandidateWindowTrainingCore/ReferenceAndUnqualifiedLegacyApiCannotArmFinal",
+      "NativeCandidateWindowArchive/ClassicActualPrimaryReplaysCompleteReferencesAndProposal",
+      "NativeCandidateWindowArchive/BranchActualPrimaryReplaysCompleteReferencesAndProposal",
+      "NativeCandidateWindowArchive/ActualBoundC0MapsReplayedWithoutFakeBaseline",
+      "NativeCandidateWindowBudgetReplay/RetainedGroupsCannotReverseIssuedOrder",
+      "NativeCandidateWindowManualAuthority/ClassicForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+      "NativeCandidateWindowManualAuthority/BranchForeignBeginThenFinishedDoesNotReviveOldManualConsume",
+      "NativeCandidateWindowManualAuthority/ClassicOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+      "NativeCandidateWindowManualAuthority/BranchOwnNextGroupsKeepCurrentClosedMeasurementUsable",
+      "NativeManualControlLifetime/ClassicFailedBeginWithoutStoredCompositeRevokesClosedConsume",
+      "NativeManualControlLifetime/BranchFailedBeginWithoutStoredCompositeRevokesClosedConsume",
+      "NativeManualControlLifetime/ClassicActualScalar3TakeoverRevokesClosedConsume",
+      "NativeManualControlLifetime/BranchActualScalar3TakeoverRevokesClosedConsume",
+      "NativeManualControlLifetime/ClassicActualFixed4TakeoverRevokesClosedConsume",
+      "NativeManualControlLifetime/BranchActualFixed4TakeoverRevokesClosedConsume",
+      "NativeManualControlLifetime/ClassicNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease",
+      "NativeManualControlLifetime/BranchNewManualAfterFinishedHasFreshAuthorityWithoutRevivingOldLease",
+      "NativeManualControlLifetime/ClassicOwnControlledEditAllowsFreshPreparedFinal",
+      "NativeManualControlLifetime/BranchOwnControlledEditAllowsFreshPreparedFinal",
+      "NativeManualControlLifetime/ClassicOpenArmCannotOutliveFailedBegin",
+      "NativeManualControlLifetime/BranchOpenArmCannotOutliveFailedBegin",
+      "NativeManualControlLifetime/ClassicBeforeQueueTakeoverDoesNotQueueOldRawTrial",
+      "NativeManualControlLifetime/BranchBeforeQueueTakeoverDoesNotQueueOldRawTrial",
+      "NativeManualControlLifetime/ClassicImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume",
+      "NativeManualControlLifetime/BranchImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume"
+    ]
+  },
+  "manifest_sha256": "e23c49477cdc9f7f0c3215bd781f56eee50e6f3892b7b03e5017a6cce4e710ff",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "8e1a9a8cdd0d8c4ebd6419fcb23967b557da51854bf9f9a310eb5b679304033a",
+    "packed/bundle.json": "3faad957b89dce8532b1752568ec5cfb1617519adf292ecd89e99660ed08f698",
+    "capture-proof.json": "4e28bcb71e657daf34be612925081e906f15da28d8c388904b7f6fac53c0eed4"
+  },
+  "released_collection_lease": {
+    "token": "79afbd40-fea1-4483-9189-37c82aa2d8d1",
+    "job_id": "s10-native48-frozen-preservation-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 1965843,
+      "start_ticks": "331091279",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-native48-fresh-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/build-native48-fresh-m40-a1"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native48-frozen-preservation-m40-a1/Reports/StructTrain/TimeLearner/s07-native48-frozen-preservation-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native48-frozen-preservation-m40-a1/Reports/StructTrain/TimeLearner/s07-native48-frozen-preservation-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native48-fresh-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native48-fresh-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native48-fresh-m40-a1-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native48-fresh-m40-a1-controller"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-frozen-collection-m40-a4/Docs/StructTrain/TimeLearner/ValidationPlans/NativeFrozenCollectionA4-20261109",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-frozen-collection-m40-a4/Docs/StructTrain/TimeLearner/ValidationPlans/NativeFrozenCollectionA4-20261109"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native48-fresh-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native48-fresh-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-frozen-collection-m40-a3",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-frozen-collection-m40-a3"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native48-fresh-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native48-fresh-m40-a1"
+      }
+    ],
+    "state": "released",
+    "created": 1794235723.2193062,
+    "deadline": 1794235853.2926428,
+    "updated": 1794235734.9543722,
+    "release_note": "Closed native metadata preserved or collection failed; original outcome unchanged.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "collector_external_cgroup_attested": false,
+  "scientific_verdict": null
+}

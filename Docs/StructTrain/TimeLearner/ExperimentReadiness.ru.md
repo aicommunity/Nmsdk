@@ -1,5 +1,24 @@
 # Готовность к научным экспериментам — 09.11.2026
 
+[Native48 fresh A1 завершён](Native48FreshA1Outcome-20261109.ru.md):сборка успешна,11actual=9PASS/2FAIL,37NOT RUN. Fixture требует consumed-probe boundary; test-onlyfix4d35 подготовлен, не проверен. Outer/leaf closed, собственный lease released. Полная публикация A1 pending; научного допуска нет.
+
+[FullSDK canonical принят, native48 запущен](Native48FullSDKCanonicalLaunch-20261109.ru.md):4030files/8repos/29imports сверены, свежая сборка работает на M40. Результата48 ещё нет; service5/package6 и научная серия остаются открыты.
+
+## Последнее состояние допуска
+
+[Canonical preparation A2](NativeCanonical25A2Outcome-20261109.ru.md) прошла25/25 metadata проверок на M40. Исправлена только test fixture: читаются exact Scripts Git blobs, production canonical/owner не менялись. Предыдущая A1 сохранила13PASS/12not-run и отдельный setup error.
+
+Свежая полная SDK956 доставлена и сверена:8repos/4030physicalfiles. Следующие обязательные шаги — actual full-SDK canonical preparation, новая сборка и48 адресных native проверок (37 прежних +11 затронутых). Они ещё не выполнены; новый assigned-window научный контур не допущен. Baseline250 и исторические научные результаты сохраняют ранее принятый объём.
+
+Дополнительный открытый алгоритмический/интеграционный пункт подтверждён в Pulse `f7a0e3e63ec29d4647790a695606d1ca32164ef3`, `Core/TimeLearner/NativeLearnedState.cpp`: экспорт service protocol5 явно запрещён с `candidate_window_training_requires_package6`. Поэтому48PASS также не завершит новый Train→export→Test: требуется настоящий versioned package6 и его import/evaluation, без подстановки старого protocol4. Этот запрет сохраняет честность результата; снимать его без полной реализации формата нельзя.
+
+## Уточнение последней проверки 09.11
+
+Последняя попытка A3 на Root `f015db2d4f6ac8c239e07c050ff596524604060c` / Pulse `f7a0e3e63ec29d4647790a695606d1ca32164ef3` завершилась ошибкой компиляции test TU: **0/37 tests, 0 leaf**. Pulse library скомпилирована; девять compiler errors имеют две причины: protected getter в тестовом коде и два EXPECT_THROW на одной строке. Root повторно прочитал terminal и kernel state: MainPID=0, пустой ControlGroup, тот же invocation; полный compiler log совпал по SHA256. [Снимок Root и полный сжатый журнал](../../../Reports/StructTrain/TimeLearner/s07-cold-envelope-manual-corrected-m40-a3-root-observation/terminal-observation.json.gz). Это не scientific FAIL модели и не PASS нового контроллера. Отрицательная публикация `f2a16f8f66814fa2ce064434eb0d1ea4130bd659` доступна в origin; Root независимо повторил metadata verifier9fe07; [receiptb673](../../../Reports/StructTrain/TimeLearner/s07-cold-envelope-manual-corrected-m40-a3-root-observation/build-negative-independent-verification.json) подтверждает0/37tests,154missing rules, exact closure и released lease. Объектный cache переход380→438 проверен по SHA:378 неизменных,2 пересобраны,58 новых,0 потеряно;15 профильных cache entries сохранены. Build завершился до native-runtime preparation: current-runtime-before/after отсутствуют, новый CPP runtime не считается проверенным. Следующее исправление ограничено test TU, production protected API не расширяется.
+
+A3 использовала закрытый build-cache A2 после отдельной проверки сохранности; runtime A3 новый. Это incremental build, а не новая чистая сборка. Исходные A1/A2 observations сохраняются; абзацы ниже про их RUNNING/«ещё не собрана» являются историческими снимками, не текущим состоянием.
+
+
 ## Текущий допуск нового burst-контроллера
 
 Новый контур сопоставления закреплённых пиков пока не допущен к научной серии.
