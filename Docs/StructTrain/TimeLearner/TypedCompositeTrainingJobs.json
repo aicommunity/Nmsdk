@@ -560,7 +560,7 @@
     {
       "job_id": "s07-cold-envelope-manual-corrected-m40-a2",
       "host": "M40",
-      "state": "build_failed_zero_tests_negative_evidence_pending",
+      "state": "build_failed_zero_tests_negative_evidence_verified",
       "root": "807da9b50835f4da61cda1e069d3b4d7e750b8c8",
       "pulse": "637b7fb6b66df242f9b7383ce179aa543ca45aed",
       "expected_cpp_cases": 33,
@@ -590,7 +590,9 @@
       "compiler_errors": [
         "/media/user/Data/TimeLearnerRefactor/source-cold-envelope-manual-corrected-m40-a2/Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp:401:77: error: no match for ‘operator==’ (operand types are ‘QJsonObject’ and ‘QJsonValueRef’)"
       ],
-      "source_only_compile_fix": "de26c3b475a406e02fc9a908953879984681590b"
+      "source_only_compile_fix": "de26c3b475a406e02fc9a908953879984681590b",
+      "negative_evidence_commit": "687d994317bc61a7b69621075690e66ac2aea900",
+      "negative_evidence_independent_receipt_sha256": "9660245c0a99d633246afe3028fe7b1523d13493e2c26fc8982206d200c2f542"
     }
   ],
   "prepared_feature": {
