@@ -304,6 +304,10 @@ def collect(manifest_path, manifest_sha256):
             'native_collection_evidence_parent')
     inventory = manifest['readonly_inventory']
     observation = read_readonly_inventory(inventory)
+    if version == 3:
+        require(observation.get('children') == manifest['children'], 'native_collection_observed_child_map_changed')
+    else:
+        require(type(observation.get('leaf')) is dict, 'native_collection_legacy_leaf_observation_missing')
     bounds = manifest['bounds']
     # Schema3 preserves the full 348 MB native119 A2 negative run. Earlier
     # profiles retain their exact limits; no originals are omitted to fit them.
@@ -353,9 +357,16 @@ def collect(manifest_path, manifest_sha256):
         proof = dict(kind='closed_native_acceptance_capture', schema_version=version, capture_status='prepared_only',
             original_outcome=manifest['original_outcome'], regular_capture_descriptor=captured.descriptor,
             links_no_follow=observation['retained_symlinks_no_follow'], original_outer=observation['outer'],
-            original_leaf=observation['leaf'], original_released_lease=observation['released_original_lease'],
+            original_released_lease=observation['released_original_lease'],
             own_reservation=lease, collector_tool_snapshot=tool_before, original_model_JSON_CSV_rewritten=False,
             supervisor_dialect=manifest['supervisor_dialect'], capture_owned_supervisor_used=False, scientific_verdict=None)
+        if version == 3:
+            proof['original_children']={name:contained_process.inspect(row['directory'])
+                                        for name,row in manifest['children'].items()}
+            require(all(value['all_processes_closed'] is True and value['binding'] == manifest['children'][name]['binding']
+                        for name,value in proof['original_children'].items()), 'native_collection_proof_child_not_closed')
+        else:
+            proof['original_leaf']=observation['leaf']
         markers._write(output/'capture-proof.json', proof); sources['observer/capture-proof.json'] = output/'capture-proof.json'
         expanded = sum(p.stat().st_size for p in sources.values())
         require(expanded <= bounds['maximum_capture_bytes'], 'native_collection_expanded_budget')
