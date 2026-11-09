@@ -2,10 +2,10 @@
   "kind": "runtime2_service5_native_export_source_closure",
   "schema_version": 1,
   "status": "source_only_no_projection_build_tests",
-  "private_root_source": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+  "private_root_source": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
   "merge_parents": [
-    "99699404aeeb679a82006ad6e68635c0a81b877a",
-    "f015db2d4f6ac8c239e07c050ff596524604060c"
+    "9dd748fc80cb3f55bd2b5ada9e8e9018f50543d2",
+    "95e8130d9b21fee85aa89beef8d072badc5b621b"
   ],
   "input_root": "7fd28cf7b31aaf4e2fd09fd700745efb8bddf71c",
   "worker_fix_ordinary_merge": "a208663decacaecbbe079499e442b6b9dbf1fb32",
@@ -29,49 +29,49 @@
   },
   "source_files": {
     "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
       "bytes": 29360,
       "sha256": "50f282ec076ff06a6068cdf38be15158379a96788797eaca3005b64be6b40b63",
       "git_blob": "97d6e3e2e24f92d40d349e3112ef40608bf90616"
     },
     "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "bytes": 299329,
-      "sha256": "d111ad1e8c33804b55c3d0cd2a34eb61bed05f860be02024e73ef20fd6c9b56c",
-      "git_blob": "465b9fcc9005b618cd82880592cd449823503a18"
+      "bytes": 301690,
+      "sha256": "2d7d97df5b03b6bf21e6d9962718617c177215cc63872809e47d117dff417bc9",
+      "git_blob": "961ed9be06d460a566ae020b4ffb009f641828cf"
     },
     "Tests/Integration/Libraries/CMakeLists.txt": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Tests/Integration/Libraries/CMakeLists.txt",
       "bytes": 14762,
       "sha256": "912d79712ed5774d8e156fc213bef64e5ded7278ba51253082dfc1914c228a0d",
       "git_blob": "44e715f3ef780bd76037a7a3e07baeb2fe8aafed"
     },
     "Scripts/StructTrain/TimeLearner/native_gate.py": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Scripts/StructTrain/TimeLearner/native_gate.py",
       "bytes": 10087,
       "sha256": "f522f0e3d4150c3fa11323588e7bf82c9aab11671658a2fecd67fa80224f3e5d",
       "git_blob": "c8e4bcbdd8a3461ec9b561d77a2ee3a01fafb16e"
     },
     "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Scripts/StructTrain/TimeLearner/native_acceptance_worker.py",
       "bytes": 34616,
       "sha256": "72d9fe6dbbcc7f333db17517002ad6b775cdd15e878e9d537bd37c69d910e0af",
       "git_blob": "be2a737431d97687282c2ed19a02a2aee3e580c3"
     },
     "Scripts/StructTrain/TimeLearner/contained_runner.py": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Scripts/StructTrain/TimeLearner/contained_runner.py",
       "bytes": 9778,
       "sha256": "e271f4c64457f8613b71a9438af30efa3bcc73aa470c846b66a7a8a005f4fe3a",
       "git_blob": "fe075d8bcd75bfab7f18304da5f091420b7ce2ff"
     },
     "Scripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py": {
-      "commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+      "commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
       "path": "Scripts/StructTrain/TimeLearner/tests/test_native_acceptance_worker.py",
       "bytes": 23536,
       "sha256": "78ed39fcbce830e2a8a2cc6cde4507646d267f14dc504c8a64ef41580ba1abc9",
@@ -131,6 +131,8 @@
   "historical_document_tip": "99699404aeeb679a82006ad6e68635c0a81b877a",
   "materialized_delta_vs_input": [
     "Docs/StructTrain/TimeLearner/NativeAcceptanceWorker.ru.md",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.inventory.json",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.ru.md",
     "Docs/StructTrain/TimeLearner/PortableJsonValueOwnership-20261109.ru.md",
     "Docs/StructTrain/TimeLearner/Runtime2Service5ActualExportGatePreparation-20261109.ru.md",
     "Docs/StructTrain/TimeLearner/Runtime2Service5ActualExportGatePreparation-20261109.selection.json",
@@ -141,8 +143,8 @@
     "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
   ],
   "materialized_current_merge_delta": [
-    "Docs/StructTrain/TimeLearner/PortableJsonValueOwnership-20261109.ru.md",
-    "Libraries/Nmsdk-PulseLib",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.inventory.json",
+    "Docs/StructTrain/TimeLearner/NativeBankFixturePublicGraphReadback-20261109.ru.md",
     "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
   ],
   "known_portable_ownership_fix": {
@@ -151,6 +153,28 @@
     "Root_input": "f015db2d4f6ac8c239e07c050ff596524604060c",
     "Root_ordinary_merge": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
     "only_conflict": "Pulse gitlink resolved to merged Pulse retaining eff3a20 plus f7a0e3",
+    "runtime_accepted": false
+  },
+  "previous_ownership_code_root": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+  "previous_preparation_tip": "9dd748fc80cb3f55bd2b5ada9e8e9018f50543d2",
+  "common_fixture_fix": {
+    "code": "029c720a8cff5c9c082d1cb318b60632c5546748",
+    "documentation": "95e8130d9b21fee85aa89beef8d072badc5b621b",
+    "ordinary_merge": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+    "Cpp_files": 1,
+    "Cpp_insertions": 39,
+    "Cpp_deletions": 4,
+    "existing_directly_affected_ids": 11,
+    "new_TEST_ids": 0,
+    "production_trees_unchanged": {
+      "App": true,
+      "Scripts": true,
+      "CMakeLists.txt": true,
+      "cmake": true,
+      "Libraries": true,
+      "Rdk": true,
+      "Bin": true
+    },
     "runtime_accepted": false
   }
 }

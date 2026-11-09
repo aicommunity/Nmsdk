@@ -2,7 +2,7 @@
   "kind": "runtime2_service5_native_export_python_join_plan",
   "schema_version": 1,
   "status": "source_only_not_CanonicalSpec_not_dispatched",
-  "source_code_commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+  "source_code_commit": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
   "native_target": "Test_PulseLib_StorageComponents",
   "minimum_Cpp_selection": [
     {
@@ -63,17 +63,17 @@
     {
       "id": "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2059
+      "line": 2093
     },
     {
       "id": "NativeCandidateWindowService.ClassicN0CalculateMode0FreshAllNFinal",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2620
+      "line": 2655
     },
     {
       "id": "NativeCandidateWindowService.BranchN0CalculateMode0FreshAllNFinal",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2621
+      "line": 2656
     }
   ],
   "minimum_Cpp_count": 14,
@@ -112,22 +112,22 @@
     {
       "id": "NativeCandidateWindowService.ClassicPartialWarmDiscardsExpiredSeedsAndRecapturesAllN",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2632
+      "line": 2667
     },
     {
       "id": "NativeCandidateWindowService.BranchMergedVertexRemainsDiagnostic",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2643
+      "line": 2678
     },
     {
       "id": "NativeCandidateWindowService.BranchBoundC0WitnessesStayOnBaseRevision",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2629
+      "line": 2664
     },
     {
       "id": "NativeCandidateWindowService.ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2630
+      "line": 2665
     }
   ],
   "exact_case_output_suffixes": {
@@ -253,5 +253,25 @@
     "only_conflict": "Pulse gitlink resolved to merged Pulse retaining eff3a20 plus f7a0e3",
     "runtime_accepted": false
   },
-  "chronology_coverage_reuse": "Only after accepted frozen37 receipt and explicit exact tested dependency equivalence; no such acceptance claimed here and declared selection remains14 until reviewed adjustment."
+  "chronology_coverage_reuse": "Only after accepted frozen37 receipt and explicit exact tested dependency equivalence; no such acceptance claimed here and declared selection remains14 until reviewed adjustment.",
+  "common_fixture_fix": {
+    "code": "029c720a8cff5c9c082d1cb318b60632c5546748",
+    "documentation": "95e8130d9b21fee85aa89beef8d072badc5b621b",
+    "ordinary_merge": "fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4",
+    "Cpp_files": 1,
+    "Cpp_insertions": 39,
+    "Cpp_deletions": 4,
+    "existing_directly_affected_ids": 11,
+    "new_TEST_ids": 0,
+    "production_trees_unchanged": {
+      "App": true,
+      "Scripts": true,
+      "CMakeLists.txt": true,
+      "cmake": true,
+      "Libraries": true,
+      "Rdk": true,
+      "Bin": true
+    },
+    "runtime_accepted": false
+  }
 }

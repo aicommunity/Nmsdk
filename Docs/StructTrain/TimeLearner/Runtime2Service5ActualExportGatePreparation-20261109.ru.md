@@ -1,13 +1,14 @@
 # Реальный Service5 export → независимый archive2/Python/CLI gate
 
 Статус: только source preparation. Текущий private native source — обычный
-merge-коммит `c265fe7e2afe398701df2d21c203a1d7aa466ec9` с родителями
-`99699404aeeb679a82006ad6e68635c0a81b877a` и
-`f015db2d4f6ac8c239e07c050ff596524604060c`. Первый merge354 включал worker fix
+merge-коммит `fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4` с родителями
+`9dd748fc80cb3f55bd2b5ada9e8e9018f50543d2` и
+`95e8130d9b21fee85aa89beef8d072badc5b621b`. Первый merge354 включал worker fix
 `a208663decacaecbbe079499e442b6b9dbf1fb32` в исходный runtime2 Root
 `9d798eb7715c4bcb052d7ba338ef026deb1d9d3b`; второй сохраняет этот fix и
 добавил закреплённый Pulse dependency. Третий mergec265 включает два исправления
-владения JSON и исправленный chronology regression. Сборки, CMake, серверные команды,
+владения JSON и исправленный chronology regression. Четвёртый mergefd9 включает
+общий test-only fix публичного graph descriptor. Сборки, CMake, серверные команды,
 тесты, source projections и графики не выполнялись. Main/develop и frozen
 33/53/73/A2 sources не менялись.
 
@@ -15,7 +16,7 @@ merge-коммит `c265fe7e2afe398701df2d21c203a1d7aa466ec9` с родител�
 
 Все шаги выполнены через `merge --no-ff`. В mergec265 единственный конфликт —
 Pulse gitlink; он разрешён на отдельный Pulse mergea43, включающий оба родителя.
-Root C++ delta относительно предыдущего code6d358 — только исправление owning
+Root C++ delta mergec265 относительно предыдущего code6d358 — только исправление owning
 copies/точной причины отказа в `RetainedGroupsCannotReverseIssuedOrder`.
 App, CMake/cmake, Rdk и Bin тождественны7fd28. Worker/test bytes
 тождественныa208. Полные Git-byte hashes и tree equality записаны в
@@ -37,11 +38,24 @@ owning first/second, доказывает перестановку двух ра
 именно `candidate_window_archive_group_order`. Wire/schema/math не меняются;
 исправления ещё не имеют runtime acceptance.
 
+Mergefd9 без конфликтов включает общий code fix
+`029c720a8cff5c9c082d1cb318b60632c5546748` и его documentation tip95e8130d9.
+Delta этого merge — один C++ test TU (39 добавлений, 4 удаления) и два документа.
+Три protected-вызова заменены fixture-local descriptor, который читает публичный
+actual graph/connected source synapse в явном Ns=1/no-inhibition scope. Все
+независимые expected-bank/actual-route/identity assertions сохранены; два
+`EXPECT_THROW` разнесены по строкам. Это общая compile-readiness правка для
+11 существующих cases, без новых TEST IDs и без утверждения private executor
+authority. App, Scripts, CMake/cmake и все gitlinks тождественны предыдущему
+tip9dd748; Pulse a43 не менялся. Подробнее —
+`NativeBankFixturePublicGraphReadback-20261109.ru.md`. Этот merge также не
+проверен компиляцией или запуском.
+
 Root+семь gitlinks составляют будущую восьмирепозиторную SDK closure:
 
 | Путь | Commit |
 |---|---|
-| Root code | c265fe7e2afe398701df2d21c203a1d7aa466ec9 |
+| Root code | fd9a43550fa6a92aa5de86ed3798acd7ef4a6ab4 |
 | Libraries/Nmsdk-PulseLib | a43dbc727d32d626cd082cda8ab27bbe320d9f37 |
 | Rdk | d6c9df759a3ee20ad42fa0a83841f19385fba60a |
 | Bin | 918ae5e1a2d6085b9ff148f7162eb9e744126592 |
@@ -257,7 +271,7 @@ foreign ref proof/recipe/instance/measurement/document; physical Rs claim при
 
 ## Prerequisites и acceptance scope
 
-До настоящего запуска отдельно review: fresh SDK8/rootc265/Pulsea43 Git-byte
+До настоящего запуска отдельно review: fresh SDK8/rootfd9/Pulsea43 Git-byte
 closure, compiler/Qt/LLM dependencies, target build and loaded-runtime capture,
 compiled literal inventory14, exact production-created native request, новые
 paths/resources/limits и output-route collision map. Из source-only этого
