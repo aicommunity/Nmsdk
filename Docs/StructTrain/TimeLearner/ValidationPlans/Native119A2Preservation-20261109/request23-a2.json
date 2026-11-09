@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-native119-a2-preservation23-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a2",
+      "commit": "0240f78e4e97a24e6c46bc49c8d318758ba4da89"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native119-a2-failure-preservation-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/Native119A2Preservation-20261109/suite23-a2.json",
+      "sha256": "90895a0fa4b2b31dee7b3aa804188ca961dd3f8de3b6be52ac041799053f7a13"
+    },
+    "fixtures": {}
+  }
+}

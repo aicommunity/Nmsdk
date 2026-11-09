@@ -1,4 +1,4 @@
-"""Independent stdlib/Git hash reader for closed-native preservation schema2.
+"""Independent stdlib/Git hash reader for closed-native preservation schema2/3.
 
 Does not import project code, execute tests/models, or analyze CSV numbers.
 Kernel observations are supplied separately; cleanup never proves test success.
@@ -65,20 +65,20 @@ def verify(args):
     names = ['artifact-inventory.json','capture-proof.json','packed/bundle.json','packed/primary.tar.xz','verification.json']
     files = {n:git(repo,'show',args.commit+':'+args.prefix+'/'+n) for n in names}
     manifest = load(files['capture-proof.json'])
-    assert manifest['schema_version']==2
+    version=manifest['schema_version'];assert type(version) is int and version in (2,3)
     inventory = load(files['artifact-inventory.json'])
     assert set(inventory)==set(names)-{'artifact-inventory.json'}
     assert all(sha(files[n])==h for n,h in inventory.items())
     proof = manifest
     receipt = load(files['verification.json']); bundle = load(files['packed/bundle.json'])
-    assert receipt['schema_version']==2 and receipt['collection_status']=='completed'
+    assert receipt['schema_version']==version and receipt['collection_status']=='completed'
     assert receipt['scientific_verdict'] is None and receipt['collector_external_cgroup_attested'] is False
     assert receipt['artifact_hashes']=={n:h for n,h in inventory.items() if n!='verification.json'}
     assert proof['original_model_JSON_CSV_rewritten'] is False and proof['capture_owned_supervisor_used'] is False
     assert bundle['archive_bytes']==len(files['packed/primary.tar.xz'])
     assert bundle['archive_sha256']==sha(files['packed/primary.tar.xz'])
     assert bundle['compression']['dictionary_bytes']==32*1024**2
-    assert bundle['expanded_bytes']<=256*1024**2
+    assert bundle['expanded_bytes']<=(512 if version==3 else 256)*1024**2
     members, kept, expanded = {}, {}, 0
     keep = {'observer/frozen-inputs.json','observer/readonly-inventory.json.gz','observer/capture-proof.json',
             'native-output/terminal.json','native-output/canonical-preparation.json','native-output/source-closure.json',
@@ -96,8 +96,9 @@ def verify(args):
                 kept[entry.name] = raw
     assert expanded==bundle['expanded_bytes'] and members==bundle['members']
     manifest = load(kept['observer/frozen-inputs.json'])
-    assert manifest['schema_version']==2 and manifest['supervisor_dialect']=='owned-native-json-lines-v1'
-    control = git(repo,'show',args.control_commit+':'+args.plan_directory+'/manifest.json')
+    assert manifest['schema_version']==version and manifest['supervisor_dialect']=='owned-native-json-lines-v1'
+    safe(args.manifest_name)
+    control = git(repo,'show',args.control_commit+':'+args.plan_directory+'/'+args.manifest_name)
     assert control==kept['observer/frozen-inputs.json'] and sha(control)==receipt['manifest_sha256']
     observed_raw = gzip.decompress(kept['observer/readonly-inventory.json.gz'])
     assert sha(observed_raw)==manifest['readonly_inventory']['raw_sha256']
@@ -211,6 +212,13 @@ def verify(args):
         matches = [r for r in cleanup['children_closed'] if r['directory']==child['directory']]
         assert len(matches)==1 and matches[0]['closure']['all_processes_closed']
         assert matches[0]['binding']==matches[0]['closure']['binding']==child['binding']
+    if version==3:
+        assert 'original_leaf' not in proof
+        assert set(proof['original_children'])==set(manifest['children'])
+        assert observed['children']==manifest['children']
+        for name,value in proof['original_children'].items():
+            assert value['all_processes_closed'] is True
+            assert value['binding']==manifest['children'][name]['binding']
     assert own['state']=='released' and own['owner_status']=='missing'
     assert all(own[k]==receipt['released_collection_lease'][k]==proof['own_reservation'][k]
                for k in ('token','job_id','owner','resources'))
@@ -231,6 +239,7 @@ def verify(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--manifest-name',default='manifest.json')
     for name in ('repo','commit','prefix','control-commit','plan-directory','children-root','pulse-repo','observer','output'):
         parser.add_argument('--'+name,required=True)
     args = parser.parse_args()
