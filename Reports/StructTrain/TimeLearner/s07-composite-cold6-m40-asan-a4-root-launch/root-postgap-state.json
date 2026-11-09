@@ -1,0 +1,151 @@
+{
+  "terminal": {
+    "job_validation_passed": true,
+    "cohort_assertions_passed": true,
+    "built": true,
+    "expected_cpp_cases": 250,
+    "audited_completed_cpp_cases": 250,
+    "actual_audited_assertion_passed_cpp_cases": 250,
+    "actual_audited_failed_cpp_ids": [],
+    "completed_leaf_gates": 137,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d3dd281ce9a1657ecfacb6d33d61b048aaef985ba342d86f7cbd331b4d46f98e",
+      "unit": "timelearner-69d33d86-2d26-4e49-aa61-e99d53d363d8.service",
+      "invocation_id": "6ed02749e035459ca3eee0a65c8b650d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-69d33d86-2d26-4e49-aa61-e99d53d363d8.service",
+      "initial_main_pid": 18434,
+      "initial_start_ticks": "325076930",
+      "sha256": "19900e040d6e018e249f870fbc120b216fbd22633090b2088e95c52a01282d42"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-69d33d86-2d26-4e49-aa61-e99d53d363d8.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "e089a631-eb64-4d63-b7c4-18e91831f034",
+      "job_id": "s07-composite-cold6-m40-asan-a4",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 18434,
+        "start_ticks": "325076930",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cancellation-m40-asan-a3-container"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cold6-m40-asan-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-cold6-m40-asan-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-archive-m40-asan-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cancellation-m40-asan-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cold6-m40-asan-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-cold6-m40-asan-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-core-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-deadline-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-composite-slow-deadline-m40-asan-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794175571.8736684,
+      "deadline": 1794187837.0907836,
+      "updated": 1794187738.497473,
+      "release_note": "Maintained cohort outer and every canonical recorded request/immutable leaf binding freshly closed; original pre-stop outcome preserved; no scientific success implied.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
