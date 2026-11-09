@@ -5,14 +5,11 @@ repos and literal metadata TEST declarations. No C++ is compiled or modeled.
 """
 import copy
 import hashlib
-import io
 import json
 import os
-from pathlib import Path
-import shutil
+from pathlib import Path, PurePosixPath
 import subprocess
 import sys
-import tarfile
 import tempfile
 import unittest
 
@@ -32,9 +29,36 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
         cls.root=Path(cls.temporary.name).resolve()
         cls.base=next(b for b in subject.BASES if cls.root.is_relative_to(b))
         cls.sdk=cls.root/'sdk';cls.sdk.mkdir()
-        archive=subprocess.check_output(['git','-C',str(subject.ROOT),'archive','HEAD','Scripts'])
-        with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
-            tar.extractall(cls.sdk,filter='data')
+        # Sparse source deliberately omits unrelated Root blobs. archive may
+        # inspect attributes outside Scripts; request only this exact Git set.
+        entries=[]
+        for entry in cls.git(subject.ROOT,'ls-tree','-r','-z','HEAD','--','Scripts').split(b'\0'):
+            if not entry:continue
+            header,name=entry.split(b'\t',1);mode,kind,oid=header.decode('ascii').split()
+            relative=name.decode('utf-8');parts=relative.split('/')
+            if (kind!='blob' or mode not in ('100644','100755') or parts[0]!='Scripts' or
+                    PurePosixPath(relative).is_absolute() or '\\' in relative or
+                    any(p in ('','.','..') for p in parts)):
+                raise ValueError('fixture_Scripts_Git_entry_not_regular_safe_path')
+            entries.append((relative,mode,oid))
+        if not entries or len({p for p,_,_ in entries})!=len(entries):
+            raise ValueError('fixture_Scripts_Git_projection_empty_or_duplicate')
+        raw=cls.git(subject.ROOT,'cat-file','--batch',data=('\n'.join(o for _,_,o in entries)+'\n').encode('ascii'))
+        cursor=0
+        for relative,mode,oid in entries:
+            end=raw.index(b'\n',cursor);header=raw[cursor:end].decode('ascii').split();cursor=end+1
+            if len(header)!=3 or header[:2]!=[oid,'blob'] or not header[2].isdigit():
+                raise ValueError('fixture_Scripts_Git_batch_header')
+            size=int(header[2]);content=raw[cursor:cursor+size];cursor+=size
+            if len(content)!=size or raw[cursor:cursor+1]!=b'\n':
+                raise ValueError('fixture_Scripts_Git_batch_length')
+            cursor+=1
+            if hashlib.sha1(b'blob '+str(size).encode('ascii')+b'\0'+content).hexdigest()!=oid:
+                raise ValueError('fixture_Scripts_Git_blob_changed')
+            path=cls.sdk/relative;path.parent.mkdir(parents=True,exist_ok=True)
+            with path.open('xb') as stream:stream.write(content)
+            path.chmod(0o755 if mode=='100755' else 0o644)
+        if cursor!=len(raw):raise ValueError('fixture_Scripts_Git_batch_trailing_bytes')
         test=cls.sdk/'Tests/actual.cpp';test.parent.mkdir()
         test.write_text('TEST(Suite,First) {}\nTEST(Suite,Second) {}\n',encoding='utf-8')
         cls.git(cls.sdk,'init','--quiet')
@@ -70,8 +94,8 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
     def tearDownClass(cls):cls.temporary.cleanup()
 
     @staticmethod
-    def git(root,*args):
-        return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.PIPE,
+    def git(root,*args,data=None):
+        return subprocess.check_output(['git','-C',str(root),*args],input=data,stderr=subprocess.PIPE,
             env=dict(os.environ,GIT_NO_LAZY_FETCH='1',GIT_OPTIONAL_LOCKS='0'))
 
     def setUp(self):
