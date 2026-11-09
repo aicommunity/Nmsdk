@@ -2056,7 +2056,23 @@ TEST(NativeCandidateWindowBudgetReplay,ActualRefsOnlyHistoryAndEmptyHigherCapWar
 TEST(NativeCandidateWindowBudgetReplay,RehashedHistoricalAttemptCapCannotHideBehindNewLargerCap){HistoricalAttemptTotalMustFitItsOwnCap();}
 TEST(NativeCandidateWindowBudgetReplay,RehashedLaterAttemptCapMustIncludeRetainedOriginalRefs){HistoricalLaterCapMustIncludeRetainedEarlierReferences();}
 TEST(NativeCandidateWindowBudgetReplay,EmptyWarmCurrentCapCannotDropRetainedEarlierBytes){auto a=ActualRetainedWindowBudgetArchive().document;const auto d=DecodeNativeCompositeTrainingArchive(a);std::size_t bytes=0;for(const auto& r:d.Records())bytes+=CompositeRecordPrimaryBytes(r);ASSERT_GT(bytes,1u);a["maximum_total_primary_bytes"]=double(bytes-1);RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
-TEST(NativeCandidateWindowBudgetReplay,RetainedGroupsCannotReverseIssuedOrder){auto a=ActualRetainedWindowBudgetArchive().document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),2);const auto first=r[0];r[0]=r[1];r[1]=first;a["records"]=r;RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
+TEST(NativeCandidateWindowBudgetReplay,RetainedGroupsCannotReverseIssuedOrder) {
+    auto a=ActualRetainedWindowBudgetArchive().document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),2);
+    const QJsonValue first=r.at(0);const QJsonValue second=r.at(1);
+    const auto firstId=first.toObject().value("group_id").toString();
+    const auto secondId=second.toObject().value("group_id").toString();
+    ASSERT_FALSE(firstId.isEmpty());ASSERT_FALSE(secondId.isEmpty());ASSERT_NE(firstId,secondId);
+    r[0]=second;r[1]=first;
+    ASSERT_EQ(r.at(0).toObject().value("group_id").toString(),secondId);
+    ASSERT_EQ(r.at(1).toObject().value("group_id").toString(),firstId);
+    a["records"]=r;RebindArchive(a);
+    try {
+        (void)DecodeNativeCompositeTrainingArchive(a);
+        FAIL()<<"Reversed retained groups were accepted";
+    } catch(const std::invalid_argument& error) {
+        EXPECT_STREQ(error.what(),"candidate_window_archive_group_order");
+    }
+}
 TEST(NativeCandidateWindowBudgetReplay,CandidateCannotBeMovedBeforeItsOriginalReferences){auto a=ActualRetainedWindowBudgetArchive(true).document;auto r=a["records"].toArray();ASSERT_EQ(r.size(),3);QJsonArray moved{r[2],r[0],r[1]};a["records"]=moved;RebindArchive(a);EXPECT_THROW(DecodeNativeCompositeTrainingArchive(a),std::invalid_argument);}
 
 namespace {
