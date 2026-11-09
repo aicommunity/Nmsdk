@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-candidate-window-runtime2-reader73-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-runtime2-reader-m40-a2",
+      "commit": "d8f3ebf26c882b4ebb54a40a3ab6e9857077d942"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a2/suite.json",
+      "sha256": "918565d27c9f47eb3b9145bd6e176e54dcc00c1e7206a5444d1f76ac50d9bcc0"
+    },
+    "fixtures": {
+      "TIMELEARNER_COMPOSITE_NATIVE_ARCHIVES": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1"
+    }
+  }
+}

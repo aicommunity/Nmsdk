@@ -1,0 +1,126 @@
+{
+  "kind": "timelearner_runtime2_reader73_A2_preparation",
+  "schema_version": 1,
+  "status": "source_preparation_only_not_dispatched",
+  "source_commit": "d8f3ebf26c882b4ebb54a40a3ab6e9857077d942",
+  "code_commit": "d169ecc4751aa5925023d52e9abfeda284c0dd05",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "package_fingerprint": "db126c94bb8df9e61dbef60a71446e5c74bb506986323cd3c044f57dc35e1e0c",
+  "source_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-runtime2-reader-m40-a2",
+  "tool_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+  "plan_path": "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a2",
+  "fixture_path": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+  "readback_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-candidate-window-runtime2-reader73-m40-a2",
+  "request_sha256": "e2002a2bf58a853b23a7e52759e810e40418ca189b59d605623748a037333ad7",
+  "suite_sha256": "918565d27c9f47eb3b9145bd6e176e54dcc00c1e7206a5444d1f76ac50d9bcc0",
+  "cohort_counts": {
+    "existing_DATA_units": 39,
+    "existing_CLI_transport": 6,
+    "actual_archive1": 7,
+    "actual_six_CLI": 1,
+    "runtime2_declarations": 10,
+    "whole_synthetic_archive2": 10,
+    "total": 73
+  },
+  "output_scope": {
+    "primary_inputs_unchanged": true,
+    "unit_log_and_result": true,
+    "CLI_reports_written_and_reread_inside_test": true,
+    "six_CLI_reports_retained_after_test": false,
+    "native_execution_verified": false,
+    "training_certificate_verified": false,
+    "scientific_verdict": null
+  },
+  "source_delivery": {
+    "method": "existing Git-only private source delivery helper; no source SCP/tar generation",
+    "checkout": "all643 Scripts only; Python452",
+    "control_objects": "original .gitattributes/.gitignore/.gitmodules ODB-only",
+    "fixture_reuse": "existing immutable157; no unpack/copy/rewrite",
+    "metadata": "new reviewed plan files materialized from committed Git blobs only"
+  },
+  "sourceprep_limits": {
+    "maximum_allocated_bytes": 134217728,
+    "minimum_free_bytes": 805306368
+  },
+  "execution_limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "execution_disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "known_pending": {
+    "runtime2_P1_source_fix": true,
+    "whole_archive2_synthetic_join_source_present": true,
+    "whole_actual_archive2_positive_join": false,
+    "actual_archive2_service_exports_available": false,
+    "required_followup": "genuine service5 originalcold7+owningruntime2+archive2 externalprimary whole publicdispatcher/CLI plus coherent rehashed tamper gate",
+    "manual33_no_fake_servicePlan": true,
+    "no_main_merge_or_archive2_native_acceptance_from_73": true,
+    "future_actual_service5_source_requirement": {
+      "Root": "9d798eb7715c4bcb052d7ba338ef026deb1d9d3b",
+      "Pulse": "0432ac49cdac4cfc475954472802621db72a7b64",
+      "mandatory_ordinary_merge_before_SDK": "a208663decacaecbbe079499e442b6b9dbf1fb32",
+      "scope": "futureactualservice5gate only; not dependency or acceptance of thisPythonA2gate"
+    }
+  },
+  "dispatch_authorized": false,
+  "server_writes_performed": false,
+  "local_tests_executed": false,
+  "frozen53_scope": {
+    "source": "7352f62bfd77ea86606845866a06bab7400454a3",
+    "plan": "fd7dec1a98b9b3978aedfbaea814968b6f3dba5d",
+    "changed": false,
+    "collector_owner": "/root/experiment_evidence_review"
+  },
+  "gate_admission_prerequisites": {
+    "original73negative_Git_pin": null,
+    "independent_negative_verifier_pass": false,
+    "sharedhelper_metadata_gate_pass": false,
+    "Root_review_before_projection_and_dispatch_required": true
+  },
+  "source_correction": {
+    "base1292_production_diff_empty": true,
+    "onlychanged_Scripts": "Scripts/StructTrain/TimeLearner/tests/test_candidate_window_runtime2.py",
+    "fixed_cursor_positive": 264,
+    "fixed_cursor_negative": 263,
+    "explicit_fixture_maxCandidates": 4,
+    "test_IDs_unchanged": true
+  },
+  "upfront_metadata_roles": {
+    "flatfiles": {
+      "suite.json": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.suite.json",
+      "request.json": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.request.json",
+      "fixture-manifest.json": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.fixture-manifest.json",
+      "source-manifest.json": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.source-manifest.json",
+      "dependencies.json": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.dependencies.json",
+      "descriptor.json": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.json",
+      "plan.ru.md": "Docs/StructTrain/TimeLearner/CandidateWindowRuntime2Reader73A2Preparation-20261109.ru.md"
+    },
+    "preparation_snapshot_paths": [
+      "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a2/preparation-tool-source.json",
+      "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a2/preparation-validation-source.json",
+      "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a2/preparation-fixture-snapshot.json"
+    ],
+    "receipt": "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-runtime2-reader73-m40-a2/prepared-metadata.json",
+    "control_objects_ODB_only": [
+      ".gitattributes",
+      ".gitignore",
+      ".gitmodules"
+    ],
+    "note": "materialize role paths fromthisreviewedmetadataGitcommit onlyafterprerequisites; no placeholders are runtimewitnesses"
+  },
+  "original73A1": {
+    "source": "1292babb67ee653d04316f7f6927a3d23d5d682c",
+    "plan": "03b7c72af05879bba9f7dd48c69f2c3518b3a418",
+    "executed": 73,
+    "passed": 72,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "unchanged": true,
+    "negative_evidence_pin_pending": true
+  }
+}
