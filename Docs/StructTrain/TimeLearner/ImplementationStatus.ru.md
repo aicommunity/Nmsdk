@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Согласованный source956/план native48 V2](Native48SourceControlReadiness-20261109.ru.md) независимо сверен Root: C++95/Scripts35,218точных Git deltas,48cases/37leaves/185rules. Server SDK/build/runtime не менялись; это подготовка, не приёмка следующего контроллера.
+
 [Научная сводка09.11](ScientificResults-2026-11-09.ru.md) отделяет воспроизведённую historicalN4 model6/8 во всех16порядок/Delay условиях, engineeringN2 Same-Matrix positives и stopped-stock diagnostics. Новая серия на исправленном assigned-window контроллере ещё не принята; существующие результаты и графические отчёты не объявляются отсутствующими.
 
 [Owned controller40 actual run](OwnedNativeController40Launch-20261109.ru.md):40/40PASS на M40, outerclosed/ownleasereleased, readonly fixtures unchanged. Root отдельно подтвердил11actualunits/9cases и2преднамеренно heldnegativeledgers; полная приёмка требует maintained collection; это не допуск native48/научной матрицы.
