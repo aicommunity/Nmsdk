@@ -1,0 +1,354 @@
+{
+  "kind": "timelearner_closed_python_validation_collection",
+  "schema_version": 1,
+  "collection_id": "s10-collect-candidate-window-runtime2-reader73-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "collector_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+    "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6"
+  },
+  "job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-candidate-window-runtime2-reader73-m40-a2",
+    "id": "s10-candidate-window-runtime2-reader73-m40-a2",
+    "original_tool": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c"
+    },
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-package6-reader-metadata-m40-a1",
+      "commit": "e91c20213824580ea4199997896e7ac2f9e606ba"
+    },
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/runtime2-reader73-regression-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/Runtime2Reader73Regression-20261109",
+      "commit": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7"
+    },
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "5c4ea7883c57db37b9cf272ab93ed1ae8e8ed14cdfc61df2580bc5fe4a1a941b",
+      "unit": "timelearner-f05895ef-93c6-4773-bd8b-1fae9245f945.service",
+      "invocation_id": "6d9cb0b1b7984a588f87571260d9bfbf",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f05895ef-93c6-4773-bd8b-1fae9245f945.service",
+      "initial_main_pid": 1745207,
+      "initial_start_ticks": "330795333",
+      "sha256": "9ccf64eb7215794dc1b68c6a52816b138822bf72484fe94cebcfa0c4614fe9ce"
+    },
+    "lease_token": "7f91dc55-bbe8-445f-b8e2-1b82a1f6bc40",
+    "request_sha256": "8ee4da6acd3ac51456f06b7b0abb05b31600cc30c633351c6a32c9d2db2f501e",
+    "suite_sha256": "2b667b353150bae280ef89422540cf32428509dc5ebfd9ea1bab432281c77c40"
+  },
+  "expected": {
+    "suite_id": "s10-candidate-window-runtime2-reader73-m40-a2",
+    "package_fingerprint": "11e773283bca1c3b82f5abb3862c6cc23ed6797b9df1deaf1206b2e60f1fd539",
+    "test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_C0_off_requires_no_C_property_but_invented_changed_family_is_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_N4_N6_distinct_Branch_attachment_and_ordinal_graph_data",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_actual_assigned_event_causality_not_predictor_time_is_enforced",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_boolean_fraction_nonfinite_overflow_and_hard_envelope_fail_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_candidate_cannot_precede_complete_retained_references",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_changed_complete_source_reset_policy_and_selection_fail_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_changed_primary_cannot_be_hidden_by_cpp_selection_metadata",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_changed_protocol_mapping_origin_windows_and_policy_are_not_normalized_away",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_cold7_common_view_preserves_original_and_does_not_enable_legacy_parser",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_complete_portable_context_and_new_geometry_replay_from_actual_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_contraction_has_signed_shift_and_never_wraps_unsigned_frames",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_cumulative_group_probe_and_sample_caps_are_not_per_record_only",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_frame_projection_uses_actual_irregular_timestamps",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_full_repeat_topology_change_and_shared_vertex_do_not_mint_valid_peak",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_heterogeneous_within_bank_Rs_is_unsupported_not_flattened",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_local_window_does_not_veto_unrelated_higher_late_vertex",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_missing_declared_frame_rejects_without_interpolation_or_clamping",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_new_attempt_cap_also_covers_retained_prior_history",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_partial_actual_event_interval_is_explicit_not_a_legacy_tolerance_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_partial_reference_capture_cannot_publish_consumed_prefix",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_proof2_keeps_caps_actual_primary_and_declared_policy_but_not_live_addresses_or_paths",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_proposal_is_recomputed_from_original_references_and_current_graph_facts",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_protocol4_and_cold6_are_not_promoted_by_archive2_dispatch",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_real_content_graph_checks_different_Rs_across_inputs",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_reference_seed_cannot_be_recaptured_from_trained_graph_or_other_epoch",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_reference_window_must_fit_actual_group_duration_without_timestep_tolerance",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_rehashed_missing_receiver_link_wrong_source_or_bound_Rs_rejects",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_reopened_attempt_and_nonincreasing_group_ordinal_reject",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_retained_prefix_cap_is_checked_against_historical_not_only_current_limit",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_schema1_raw_default_keeps_exact_sample_declaration",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_self_consistent_rehashed_wrong_seed_is_not_reference_authority",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_shared_Branch_bank_is_legal_DATA_without_claiming_distinct_routing",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_specification2_does_not_accept_ambiguous_coordinate_modes",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_structural_growth_shifts_window_and_counts_all_input_feature_changes",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_unchanged_candidate_window_uses_reference_plateau_not_any_waveform",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_unit_C0_extension_does_not_manufacture_capacitance_change",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_unknown_archive_schema_boolean_and_extra_fields_fail_closed",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_unknown_grid_phase_reset_and_policy_are_rejected",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_archive_evidence.CandidateWindowDataTest.test_wrong_live_instance_context_cannot_be_fixed_by_recipe_rehash",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveAnalysisCliTest.test_exact_original_document_bytes_are_bound_without_reencoding",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveAnalysisCliTest.test_existing_report_is_never_overwritten",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveAnalysisCliTest.test_format_wires_mandatory_documents_and_real_filesystem_resolver",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveAnalysisCliTest.test_missing_original_json_never_uses_embedded_or_legacy_flat_fallback",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveAnalysisCliTest.test_new_report_cannot_be_written_inside_immutable_case",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveAnalysisCliTest.test_unknown_archive_schema_and_malformed_duplicate_json_fail_explicitly",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_existing_C0_and_warm_accounting_are_retained",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_partial_and_ambiguous_exports_do_not_promote_invalid_measurements",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_sidecars_match_each_retained_record_without_filename_identity_claim",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_actual_six_service_exports_replay_all_retained_primary_and_counters",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_csv_relocation_preserves_actual_measurement_proofs_but_changes_document_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_resigned_incomplete_native_group_or_counter_changes_fail",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_native_archive.CompositeNativeArchiveTest.test_supplied_external_mirror_cannot_fall_back_to_good_embedded_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_composite_archive_analysis_cli.CompositeArchiveActualCliTest.test_six_actual_case_reports_persist_full_audits_and_nonzero_positive_coverage",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_region_and_context_count_limits_are_checked",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_C_search_declaration_preserves_false_record_flag_without_inventing_C0",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_cold7_clone_runtime1_and_scope_marker_are_not_runtime2",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_real_runtime_shape_binds_full_protocol_and_is_not_cold7",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_reference_raw_sample_and_group_time_budgets_bind_actual_plan",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_runtime_normalization_is_not_silently_copied_from_initial_model",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_search_bounds_and_tolerances_remain_strict_typed_declarations",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_unknown_fields_and_boolean_fractional_or_nonfinite_numbers_fail",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_warm_current_model_epoch_search_tolerances_and_caps_may_differ_initial_cold",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowRuntime2DeclarationTest.test_wrong_protocol_or_candidate_policy_binding_rejects",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_missing_or_changed_mirror_cannot_fall_back_to_embedded_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_missing_runtime_original_is_not_filled_from_cold_or_index",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_changed_candidate_window_is_not_prediction_as_measurement",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_foreign_reference_proof_does_not_mint_seed_authority",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_historical_prefix_cap_cannot_hide_behind_higher_warm_cap",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_physical_Rs_claim_is_checked_against_full_graph",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_rehashed_raw_trace_changes_are_detected_independently_of_peak_metadata",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_unmocked_public_CLI_reads_original_documents_and_all_external_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_unmocked_whole_archive2_dispatch_replays_refs_proposals_primary_and_runtime2",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_runtime2.CandidateWindowWholeArchive2SyntheticTest.test_warm_empty_attempt_retains_original_references_and_own_history_budgets"
+    ],
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "diagnostic_fragments": {},
+    "gate_outcome": "passed",
+    "controller_execution": "completed",
+    "controller_returncode": 0,
+    "worker_operation_passed": true
+  },
+  "files": [],
+  "git": [
+    {
+      "role": "collector-code-0",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/closed_python_validation.py",
+      "git_blob": "365c23fcaddbb3562c50993f20cd0e7c9f1f1be6",
+      "expected_bytes": 43434,
+      "expected_sha256": "c991b51e4f3a15146d9060c377a4874b822f3c537c7dad18dd36bb4f2ebc837a",
+      "maximum_bytes": 43434
+    },
+    {
+      "role": "collector-code-1",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py",
+      "git_blob": "64ebcc9ffa5f8db437fedabb1097d8ba93b9e8fe",
+      "expected_bytes": 44094,
+      "expected_sha256": "0e094f97d0d332a12f51ab1df4e86aa5de04812745600c26446d64470bf4040e",
+      "maximum_bytes": 44094
+    },
+    {
+      "role": "collector-code-2",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/owned_python_job.py",
+      "git_blob": "eacf09ed9b1c177e80e6d71c33cd231e611b24f9",
+      "expected_bytes": 22237,
+      "expected_sha256": "0ba0b1cca145e5ed442a19ace9c706cd034acd717b65589e03cb64c311944ec5",
+      "maximum_bytes": 22237
+    },
+    {
+      "role": "collector-code-3",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/resource_reservations.py",
+      "git_blob": "9d7ce3eec4e5f967a9e7cb078a8909e07d2dd97c",
+      "expected_bytes": 28055,
+      "expected_sha256": "76b7bedf0ba68f1f3cb20d08e0eeb99fc07e4a76dff66d5b25dfda2d99df876b",
+      "maximum_bytes": 28055
+    },
+    {
+      "role": "collector-code-4",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/runtime.py",
+      "git_blob": "5076c55cc37003e4601108530e7a4ae8778eaea2",
+      "expected_bytes": 8971,
+      "expected_sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4",
+      "maximum_bytes": 8971
+    },
+    {
+      "role": "collector-code-5",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/portable_primary.py",
+      "git_blob": "a91d0a09fa6ee63369482d931496e0db4a9f50ba",
+      "expected_bytes": 11174,
+      "expected_sha256": "c3f970d9b45047af9f6c155c723d44d2a505a470cf4fe76a5fb75035adac3293",
+      "maximum_bytes": 11174
+    },
+    {
+      "role": "collector-code-6",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/publisher.py",
+      "git_blob": "7b2c9bdba425b11f533215d03fd9802c031b86f1",
+      "expected_bytes": 21396,
+      "expected_sha256": "067f56ff299c07fff202a2fcc56d3f68d8fc5263baaedf856fd6d06b896c4ffb",
+      "maximum_bytes": 21396
+    },
+    {
+      "role": "collector-code-7",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "repository_head": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "path": "Scripts/StructTrain/TimeLearner/contained_process.py",
+      "git_blob": "273b38b5239ece528fe2b6f12bc96bdd620f3df1",
+      "expected_bytes": 15185,
+      "expected_sha256": "187645c22246b0468950d6c09c3be4be940ec908b4f56156831713377150abef",
+      "maximum_bytes": 15185
+    },
+    {
+      "role": "actual157-primary-reference-0",
+      "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+      "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/bundle.json",
+      "git_blob": "1818e031a257e0657653c8aa3b5950b031eead67",
+      "expected_bytes": 1015442,
+      "expected_sha256": "e67428fbcf469781b1e8bb8613b49b2b7a80a7faf4d00fc17a052eafca936fd4",
+      "maximum_bytes": 1015442
+    },
+    {
+      "role": "actual157-primary-reference-1",
+      "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+      "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/primary.tar.xz",
+      "git_blob": "0634e7f7f2d820c749571a9322e1ded4e8c140f9",
+      "expected_bytes": 1836352,
+      "expected_sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008",
+      "maximum_bytes": 1836352
+    },
+    {
+      "role": "actual157-primary-reference-2",
+      "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+      "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/publication-verification.json",
+      "git_blob": "6668c33902cb024a263297f7a847287b0e5c654a",
+      "expected_bytes": 1092073,
+      "expected_sha256": "a1ec7bc4c0ab41bc5f14933fbe454dd0c81e291a54d65eafee113d65edcc3b39",
+      "maximum_bytes": 1092073
+    },
+    {
+      "role": "actual157-primary-reference-3",
+      "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+      "repository_head": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/verification.json",
+      "git_blob": "1715172454708b571ece151ecd513312167fbb14",
+      "expected_bytes": 535471,
+      "expected_sha256": "ffd4478de073d10f1bb7debcdfef530f54e95703e00498258c1209d2e37181ba",
+      "maximum_bytes": 535471
+    },
+    {
+      "role": "original-plan-0",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/runtime2-reader73-regression-m40-a2",
+      "repository_head": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "commit": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/Runtime2Reader73Regression-20261109/suite.json",
+      "git_blob": "56f2ddbcf63dea3192ba9549fb7996b5ae8dad9f",
+      "expected_bytes": 14180,
+      "expected_sha256": "2b667b353150bae280ef89422540cf32428509dc5ebfd9ea1bab432281c77c40",
+      "maximum_bytes": 14180
+    },
+    {
+      "role": "original-plan-1",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/runtime2-reader73-regression-m40-a2",
+      "repository_head": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "commit": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/Runtime2Reader73Regression-20261109/request.json",
+      "git_blob": "3b925386af68468af27f2e5bd704686e6925ab63",
+      "expected_bytes": 1144,
+      "expected_sha256": "8ee4da6acd3ac51456f06b7b0abb05b31600cc30c633351c6a32c9d2db2f501e",
+      "maximum_bytes": 1144
+    },
+    {
+      "role": "original-plan-2",
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/runtime2-reader73-regression-m40-a2",
+      "repository_head": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "commit": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/Runtime2Reader73Regression-20261109/scope.json",
+      "git_blob": "aa88b1a94c3055881a54d15e81691973a19aa76a",
+      "expected_bytes": 669,
+      "expected_sha256": "4137960e35b05165ccfead227e009cd9c1a7725595418628e794638295f5c588",
+      "maximum_bytes": 669
+    }
+  ],
+  "projections": [
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-closed-python-validation-m40-a2",
+      "commit": "9ed63543922cf67a991bef25fcd8ac0f5a80a5f6",
+      "patterns": [
+        "/Scripts/",
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-package6-reader-metadata-m40-a1",
+      "commit": "e91c20213824580ea4199997896e7ac2f9e606ba",
+      "patterns": [
+        "/Scripts/",
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/requests/runtime2-reader73-regression-m40-a2",
+      "commit": "14b6ff4ae217e0a195a2754c59fc553023a6f4a7",
+      "patterns": [
+        "!/*",
+        "/Docs/StructTrain/TimeLearner/ValidationPlans/Runtime2Reader73Regression-20261109/"
+      ]
+    },
+    {
+      "repository": "/media/user/Data/TimeLearnerRefactor/reference-composite-native-a4-b4feb-negative73-a1",
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "patterns": [
+        "/.gitattributes",
+        "/.gitignore",
+        "/.gitmodules",
+        "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+        "/LLM/.gitignore"
+      ]
+    }
+  ],
+  "fixture_reference_roles": [
+    "actual157-primary-reference-0",
+    "actual157-primary-reference-1",
+    "actual157-primary-reference-2",
+    "actual157-primary-reference-3"
+  ],
+  "extra_metadata_note": "Corrected full73 replay on unchanged original157 primary; original negative73 retained separately. New native6 corpus not selected.",
+  "limits": {
+    "maximum_capture_bytes": 67108864,
+    "maximum_git_bytes": 16777216,
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  }
+}
