@@ -87,3 +87,43 @@ Run `test-git-preparation.ps1` with fresh `-OutputDirectory`, `-SdkRoot`,
 the two preceding negative attempts remain in the report. See
 `Docs/StructTrain/TimeLearner/WindowsPackage6SDKPreparation-20261109.ru.md`.
 These checks do not compile C++, run a model, or admit a scientific worker.
+
+## Closed-build audit and native validation (2026-11-10)
+
+`launch-sdk-build.ps1` dispatches one fresh scheduled attempt. Its optional
+`-WorkerName` selects `sdk-build.py` (the default), `audit-closed-build.py`, or
+`validate-native.py`. Every choice binds the exact tool commit, specification
+Git blob and worker/Python hashes. The launcher refuses an existing attempt,
+existing output, or another active TimeLearner task. Keep sources, resources,
+build and runtime separate, and do not edit a running attempt.
+
+`audit-closed-build.py` audits artifacts from a terminal owned build. It requires
+the original main process and named Job to be absent, verifies the original
+negative result and bound records, compares the entire physical SDK namespace,
+dependency/tool inventories and runtime before/after, and checks the selected
+executable hashes. It executes no compiled test. An independent successful audit
+does not rewrite `build_accepted=false` or excuse remaining descendants.
+
+`validate-native.py` consumes that exact audit and the unchanged source/runtime.
+It invokes the **production schema4 native gate and Windows Job backend from the
+compiled SDK**. It does not replace the backend with a test copy. Complete actual
+JUnit inventory, cooperative loaded-module capture, owned-process closure and
+source/runtime preservation are required. Its `native_checks_passed` remains
+separate from scientific-worker admission and the original build outcome.
+The backend reports Job committed-memory semantics; a thread-count limit is not
+claimed. Specify the native wall/memory/process budgets for each new attempt.
+
+Actual scope on .14: Root `4eb58ccc62204c663dfe2815cda680534fb34353`, Pulse
+`f1df2500d43ecab4723d2536cd4a7ce073416feb`. The closed-build audit passed with
+4067 SDK files/eight repositories, 17287 dependency files and 62 runtime files
+unchanged. A subsequent native gate passed **4/4** Classic/Branch bootstrap and
+bound-C0 checks in 340.192 s, captured 48 loaded modules and closed its complete
+Job. The original build remains rejected for remaining descendants. See the
+[exact scope and receipts](https://github.com/aicommunity/Nmsdk/blob/d539de8cee0af7050eb39185f3b149b08c9318ff/Docs/StructTrain/TimeLearner/NativeRestStateArchive-20261110.ru.md).
+
+These checks do not establish package6 roundtrip, complete Console Train-to-Test,
+cross-platform numerical equivalence or classification performance. General
+Linux managed-runner, reservation and publication support must not be inferred
+from this dedicated Windows native gate. Full compressed audit inventories and
+native primary data still require their separate Git publication; the linked
+metadata receipts alone do not constitute that full archive.

@@ -1,0 +1,62 @@
+{
+  "kind": "timelearner_windows_tool_integration",
+  "schema_version": 1,
+  "scope": "immutable source/index byte equality; no new runtime or scientific acceptance",
+  "integration_parent": "77f934c3dcb3e47c978872e3604f5cfe8520f949",
+  "tool_source": "53e08dadef6dffd591929b966607f248e0f5fceb",
+  "changed_files": [
+    {
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/WindowsClosedBuildAudit-20261110/delivery.json",
+      "source_git_blob": "0c78a3d2b2c711679e957cad3492861eced4eb2f",
+      "integrated_index_blob": "0c78a3d2b2c711679e957cad3492861eced4eb2f"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/WindowsClosedBuildAudit-20261110/specification.json",
+      "source_git_blob": "9aa71b2e8c34d57d1b5294b82156416ab622c151",
+      "integrated_index_blob": "9aa71b2e8c34d57d1b5294b82156416ab622c151"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/WindowsNativeF1C0-20261110/delivery.json",
+      "source_git_blob": "9df11a60fb804d79af732a3c1999cbcf3735d59f",
+      "integrated_index_blob": "9df11a60fb804d79af732a3c1999cbcf3735d59f"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/ValidationPlans/WindowsNativeF1C0-20261110/specification.json",
+      "source_git_blob": "90b62bd346a3a8a1d081655b6d4813994a5acde3",
+      "integrated_index_blob": "90b62bd346a3a8a1d081655b6d4813994a5acde3"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/workers/windows-vs2026/README.md",
+      "source_git_blob": "7ad4a082213c77e1825c0c2d234ce1a0a9cab728",
+      "integrated_index_blob": "7ad4a082213c77e1825c0c2d234ce1a0a9cab728"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/workers/windows-vs2026/audit-closed-build.py",
+      "source_git_blob": "d0c8d0da9401678b8913f1548e051e5afe9e1592",
+      "integrated_index_blob": "d0c8d0da9401678b8913f1548e051e5afe9e1592"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/workers/windows-vs2026/launch-sdk-build.ps1",
+      "source_git_blob": "c44086fa47398dd27eee9ad215becfa2d4b9235b",
+      "integrated_index_blob": "c44086fa47398dd27eee9ad215becfa2d4b9235b"
+    },
+    {
+      "path": "Scripts/StructTrain/TimeLearner/workers/windows-vs2026/validate-native.py",
+      "source_git_blob": "2e9948f08da19eed7443c6275aa2729f2c31a3d6",
+      "integrated_index_blob": "2e9948f08da19eed7443c6275aa2729f2c31a3d6"
+    }
+  ],
+  "unchanged_children": {
+    "Libraries/Nmsdk-PulseLib": "e685563db13be0204510f3da99c666b323513a30",
+    "Bin": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+    "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a"
+  },
+  "model_and_algorithm_code_unchanged": true,
+  "actual_checked_sdk": {
+    "root": "4eb58ccc62204c663dfe2815cda680534fb34353",
+    "pulse": "f1df2500d43ecab4723d2536cd4a7ce073416feb",
+    "native_tests_passed": 4
+  },
+  "future_sdk_windows_native_admission": false,
+  "active_linux_sdk_modified": false
+}

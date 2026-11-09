@@ -1,0 +1,7 @@
+# Windows tools в едином будущем SDK — 10.11.2026
+
+В future integration parent77f934c3dcb3e47c978872e3604f5cfe8520f949 объединён no-ff feature53e08dadef6dffd591929b966607f248e0f5fceb: audit-closed-build.py, validate-native.py, выбор worker в launcher, README и четыре frozen validation declarations. [Полная source/index квитанция](WindowsToolsIntegration-20261110.json) подтверждает8 точных blobs. C++/алгоритмы/конфиги не изменились; gitlinks Pulsee685563db13be0204510f3da99c666b323513a30, Bin8cb6dba07b30432272984c8ce3136b48ad06f064 и Rdkd6c9df759a3ee20ad42fa0a83841f19385fba60a сохранены.
+
+Ранее выполненные independent closed-build audit и4/4 native tests относятся строго к Windows Root4eb/Pulsef1 и исходным manifests. Source equality подтверждает перенос тех же worker functions, не новую Windows runtime приёмку будущего SDK. Generic backend не ослаблялся; прежний descendants_remaining/build_accepted=false сохранён. Для нового SDK нужны отдельные source/build/runtime/dependency/namespace records и собственные audit/native tests; старые frozen specifications не переименовываются в новые. Доступ к user C:/Projects/Nmsdk не изменён.
+
+Текущий M40 SDKf22 и его supervisor3205693 не менялись; после отключения VPN его состояние не подтверждено. Полные scientific pipeline, модельный export/import, cross-platform численное сравнение и обязательные оба Linux worker остаются отдельными gates. Это source integration этапа2/10/12, не завершение исходных этапов и не scientific PASS.
