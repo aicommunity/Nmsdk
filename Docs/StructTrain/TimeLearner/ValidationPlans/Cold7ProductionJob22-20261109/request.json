@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-cold7-production-job22-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-cold7-production-job-m40-a1",
+      "commit": "79d707d4b05e257d52f2b2e1d7f8cff14f6c6228"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/cold7-production-job22-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/Cold7ProductionJob22-20261109/suite.json",
+      "sha256": "7a5cb24dd1d9aa652a690769c82882f23af4347ff091e6c94ac8ef0206bf694f"
+    },
+    "fixtures": {}
+  }
+}
