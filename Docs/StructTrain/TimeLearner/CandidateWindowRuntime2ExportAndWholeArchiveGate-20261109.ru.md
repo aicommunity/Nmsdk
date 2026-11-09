@@ -1,5 +1,7 @@
 # Runtime2 exporter и полный archive2 → Python → CLI gate
 
+> Следующий source-only compile dependency: A2 stopped before tests на несовместимом `QJsonObject == QJsonValueRef` в physical snapshot guard. Commonfix `de26c3b475a406e02fc9a908953879984681590b` сравнивает owning `QJsonValue` и `candidate.value(...)`, сохраняя strict JSON type/equality и причину отказа. Он объединён `--no-ff` в runtime2 Pulse `eff3a20ab7264811c3217eee24fc140bb46e8b07`. Новый codec/schema/поиск не менялись; compile/runtime gate этой линии пока отсутствует.
+
 > Source-only dependency update: после actual corrected33 build failure в Root2504/Pulse4b общий Pulsefix `637b7fb6b66df242f9b7383ce179aa543ca45aed` добавляет direct `ProbeEvidenceJson.h` для portable reference replay. Он объединён `--no-ff` в runtime2 Pulse `0432ac49cdac4cfc475954472802621db72a7b64`; codec/runtime2 schema и criteria не менялись. Прежние073/d286 остаются исходным source-only snapshot, проверенная сборка этой новой линии ещё отсутствует.
 
 Статус: отдельная source preparation от Root
