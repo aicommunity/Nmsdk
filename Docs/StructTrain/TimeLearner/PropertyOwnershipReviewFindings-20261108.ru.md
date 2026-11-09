@@ -1,5 +1,9 @@
 # Два findings для следующего property/lifecycle реестра
 
+**Сверка10.11:** основной текст ниже — исторический обзор Pulsefcc, не список неизменных дефектов текущего кода. PROPERTY-OWNERSHIP-STEP-001 исправлен guard в Pulse2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b; guard присутствует и в accepted Pulse4a5c2ec9df9a9f704dcd8260714323494bfa4415, и в candidate e685563db13be0204510f3da99c666b323513a30. [Новая точная source-квитанция](PropertyOwnershipReconciliation-20261110.json) фиксирует оба класса, blob/полные file SHA256 и тело setter. [Контракт и ранее принятый scoped ASan10](NormalizationPropertyContracts.ru.md#candidate-ownership-guard-для-legacystep) подтверждают boundary states, но active capture/search, ordinary completed/scaled/calibrated recognition и общий property matrix ещё не закрыты. Не вносить guard повторно по историческому описанию ниже.
+
+PROPERTY-CONTROL-RISING-001 имеет отдельный [observed-request candidate](https://github.com/aicommunity/Nmsdk/blob/ec9f1eeb28ec93de323fc22f2d538bbba2ffc4fc/Docs/StructTrain/TimeLearner/RestObservedRegression-20261110.ru.md):13 новых controls входят в отдельный regression18 на SDKf22/e685. Runtime PASS этих13 пока не принят. Последняя подтверждённая стадия — C++ build; после потери VPN статус задания не угадывается и оно не перезапускается.
+
 Дополнение09.11: [bounded control/peak reconciliation](ControlPeakPropertyReconciliation-20261109.ru.md)
 подтверждает сохраняющийся rising gap на Pulsef7/Rdkd6, уточняя локальный setter
 и connected/direct paths. Исходный обзор ниже сохранён со своим snapshot;
