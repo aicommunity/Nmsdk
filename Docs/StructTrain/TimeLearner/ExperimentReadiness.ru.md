@@ -38,7 +38,12 @@ Full163visualQA не заявляется. Эти проверки не подт
 `runtime-plan.json`. Поэтому будущие33 native checks и45DATA+8archive1 checks
 по отдельности не подтверждают archive2→public CLI. Нужны настоящий owning
 runtime2 export, unmocked positive whole-archive2 auditor/CLI и rehashed tamper
-на его реальных выходах. Не реконструировать недостающий план из index или
+на его реальных выходах. Дополнительно source7352
+`candidate_window_archive_evidence.py:291–295` передаёт runtime plan в
+`validate_protocol`, где ожидается cold configuration7: это разные документы.
+Нужен отдельный строгий runtime2 validator/binding test;45DATA+8archive1
+не покрывают этот positive join и не принимают archive2.
+Не реконструировать недостающий план из index или
 старого archive1. Это выявлено чтением исходников, runtime ещё не проверен.
 
 До следующего целевого cold Train необходимо последовательно принять:
