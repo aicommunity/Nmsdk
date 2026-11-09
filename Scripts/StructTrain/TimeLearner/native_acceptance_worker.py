@@ -533,7 +533,9 @@ class Worker:
             _require("LibrariesPath="+str(self.paths["resources"])+"/" in ini.splitlines() and
                      "ClDescPath="+str(self.paths["resources"])+"/ClDesc/" in ini.splitlines(),
                      "configured_resource_path_mismatch")
-            self.command(["cmake","--build",self.paths["build"],"--target","Test_PulseLib_StorageComponents",
+            # Compile the production job/transport entry points as well as the
+            # component tests. Inline artifact tests do not compile the Console.
+            self.command(["cmake","--build",self.paths["build"],"--target","Test_PulseLib_StorageComponents","NeuroModelerConsole",
                 "--parallel",str(self.job["build"]["parallel"])], "build.log", self.job["build"]["wall_seconds"])
             built = True
             os.environ["QT_QPA_PLATFORM"] = "offscreen"
