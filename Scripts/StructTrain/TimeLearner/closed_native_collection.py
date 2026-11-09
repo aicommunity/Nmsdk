@@ -315,7 +315,7 @@ def collect(manifest_path, manifest_sha256):
     declarations = list(manifest['regular_files'])
     for role, path, archive in [('frozen-manifest', Path(manifest_path), 'observer/frozen-inputs.json'),
                                 ('readonly-inventory', Path(inventory['path']), 'observer/readonly-inventory.json.gz')]:
-        _, entry = provenance._frozen(path, 1024**2)
+        _, entry = provenance._frozen(path, (2 if version == 3 and role == 'frozen-manifest' else 1)*1024**2)
         declarations.append(dict(role=role, root=str(path.parent), relative_path=path.name, expected_bytes=entry['bytes'],
             expected_sha256=entry['sha256'], maximum_bytes=max(entry['bytes'], 1), staged_name=role+'.dat', archive_path=archive))
     requirements = [provenance.RequiredFileRole(**{k: (Path(v) if k == 'root' else v)
