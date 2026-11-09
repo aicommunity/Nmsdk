@@ -11,6 +11,7 @@
 #include "TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "TimeLearner/ModelArchive.h"
 #include "TimeLearner/CompositePortableTrainingProof.h"
+#include "TimeLearner/CandidateWindowPortableTrainingProof.h"
 #include "TimeLearner/CandidateWindowTrainingDeclarations.h"
 #include "TimeLearner/NativeCandidateWindowBindings.h"
 #include "TimeLearner/CandidateWindowProposalReplay.h"
@@ -50,6 +51,8 @@ static_assert(!std::is_default_constructible_v<DecodedNativeCompositeArchive>);
 static_assert(!std::is_aggregate_v<DecodedNativeCompositeArchive>);
 static_assert(!std::is_default_constructible_v<CompositePortableTrainingProof>);
 static_assert(!std::is_aggregate_v<CompositePortableTrainingProof>);
+static_assert(!std::is_default_constructible_v<CandidateWindowPortableTrainingProof>);
+static_assert(!std::is_aggregate_v<CandidateWindowPortableTrainingProof>);
 void Require(bool value,const char* reason){if(!value)throw std::runtime_error(reason);}
 double Wall(){return std::chrono::duration<double>(std::chrono::steady_clock::now().time_since_epoch()).count();}
 class CompositeTrainingFlag : public UNet {
@@ -3090,3 +3093,177 @@ template<class Owner> void WindowManualImportedNoActorPublicInterruptRevokes() {
 }
 TEST(NativeManualControlLifetime,ClassicImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume){WindowManualImportedNoActorPublicInterruptRevokes<NNeuronTimeLearner>();}
 TEST(NativeManualControlLifetime,BranchImportedPlan4WithoutLiveActorPublicInterruptRevokesManualConsume){WindowManualImportedNoActorPublicInterruptRevokes<NNeuronTimeLearnerBranch>();}
+
+namespace {
+enum class PortableWindowSource { Complete,DefaultSync,BoundC0,PartialReference,Merged,TwoSweeps,WarmAfterGrowth };
+struct PortableWindowBoundary {
+    NativeCompositeArchiveDocument archive;
+    QJsonObject liveCertificate;
+    VerificationTolerances tolerances;
+    std::string revision;
+    std::size_t epoch=0;
+    TrainingStatus outcome=TrainingStatus::InvalidModel;
+};
+template<class Owner> const PortableWindowBoundary& ActualPortableWindowBoundary(PortableWindowSource kind=PortableWindowSource::Complete) {
+    // Shared immutable real producer output, never a fabricated scalar packet
+    // or an actor journal re-labelled as a service-completed final selection.
+    static std::map<PortableWindowSource,PortableWindowBoundary> saved;
+    const auto found=saved.find(kind);if(found!=saved.end())return found->second;
+    const bool merged=kind==PortableWindowSource::Merged,c0=kind==PortableWindowSource::BoundC0;
+    NativeCompositeFixture<Owner> f(2000,merged,64,c0,true);
+    const bool outside=kind==PortableWindowSource::DefaultSync || kind==PortableWindowSource::TwoSweeps || kind==PortableWindowSource::WarmAfterGrowth;
+    auto plan=ActualWindowServicePlan(f,outside?.02:.2,kind!=PortableWindowSource::WarmAfterGrowth,c0);bool stopped=false;
+    if(kind==PortableWindowSource::TwoSweeps)plan.search.maximumSweeps=2;
+    if(kind==PortableWindowSource::PartialReference)plan.compositeSink=[&](const auto& r){
+        if(!stopped && r.purpose==CompositeMeasurementPurpose::Reference && r.logical.inputIndex==0){stopped=true;f.owner->IsNeedToTrain=false;}};
+    if(kind==PortableWindowSource::WarmAfterGrowth) {
+        plan.search.maximumCandidatesPerInput=2;plan.search.bounds[0].minimumLength=2;plan.search.bounds[0].maximumLength=3;
+        ServiceStart(f,plan);ServiceTicks(f,[&](){const auto& s=f.owner->NativeTrainingController();
+            if(!stopped && s.State()==NativeTrainingState::Searching && s.ModelEpoch()>0 && f.owner->ReadNativeParameters()[0].length==3)
+            {stopped=true;f.owner->IsNeedToTrain=false;}});
+        const auto& before=f.owner->NativeTrainingController();Require(stopped && before.References(),"portable_window_growth_source_not_reached");
+        const auto targets=before.References()->Inputs();const auto origin=before.CompositeSourceBinding();
+        const auto oldGroups=before.CompositeReferenceGroupIds();const auto oldCount=before.CompositeMeasurements().size();
+        SaveWindowService(f,"portable-proof6-before-warm");f.owner->Reset();stopped=false;
+        plan.compositeSink=[&](const auto& r){if(r.purpose==CompositeMeasurementPurpose::Search && r.logical.inputIndex==0 && r.consumed)
+            {stopped=true;f.owner->IsNeedToTrain=false;}};
+        f.owner->BeginNativeTraining(plan);ServiceTicks(f);const auto& after=f.owner->NativeTrainingController();
+        Require(stopped && after.References() && after.References()->Inputs()==targets && after.CompositeSourceBinding()==origin &&
+            after.CompositeReferenceGroupIds()==oldGroups && after.CompositeMeasurements().size()>oldCount &&
+            f.Revision()!=after.References()->InitialModelRevision(),"portable_window_warm_original_targets_not_retained");
+    } else {ServiceStart(f,plan);ServiceTicks(f);}
+    const auto& service=f.owner->NativeTrainingController();PortableWindowBoundary value;
+    value.archive=EncodeNativeCandidateWindowServiceArchive(service);value.tolerances=service.Configuration().tolerances;
+    value.revision=f.Revision();value.epoch=service.ModelEpoch();value.outcome=service.Outcome();
+    if(service.Certificate())value.liveCertificate=EncodeTrainingCertificate(*service.Certificate());
+    const auto suffix=std::string("portable-proof6-")+std::to_string(int(kind));SaveWindowService(f,suffix);
+    const auto decoded=DecodeNativeCompositeTrainingArchive(value.archive.document);
+    if(kind==PortableWindowSource::Complete || kind==PortableWindowSource::BoundC0) {
+        Require(service.Certificate() && service.Certificate()->Exact() && decoded.FinalGroups().size()==2,
+            "portable_window_source_requires_actual_completed_service");
+    }
+    const auto proof=CandidateWindowPortableTrainingProof::Replay(decoded,value.tolerances,value.revision,value.epoch);
+    const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-native-window-service5/":"classic-native-window-service5/")+suffix;
+    SavePortableObject(name.c_str(),"portable-proof.json",{{"kind","candidate_window_portable_boundary_proof"},{"schema_version",1},
+        {"scope","archive2/native/geometry/proposal and accepted residual DATA; not package6 or controller execution replay"},
+        {"actual_model_revision",QString::fromStdString(value.revision)},{"actual_model_epoch",double(value.epoch)},
+        {"service_outcome",TrainingStatusName(value.outcome)},{"service_certificate",value.liveCertificate.isEmpty()?QJsonValue(QJsonValue::Null):QJsonValue(value.liveCertificate)},
+        {"complete_original_references",bool(proof.References())},{"replayed_certificate",proof.Certificate()?QJsonValue(EncodeTrainingCertificate(*proof.Certificate())):QJsonValue(QJsonValue::Null)},
+        {"completed_portable_package6",false},{"native_execution_attested_by_portable_proof",false}});
+    return saved.emplace(kind,std::move(value)).first->second;
+}
+CandidateWindowPortableTrainingProof WindowProof(const PortableWindowBoundary& source) {
+    return CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(source.archive.document),
+        source.tolerances,source.revision,source.epoch);
+}
+template<class Owner> void PortableWindowMatchesLive(bool c0=false) {
+    const auto& source=ActualPortableWindowBoundary<Owner>(c0?PortableWindowSource::BoundC0:PortableWindowSource::Complete);
+    const auto proof=WindowProof(source);ASSERT_TRUE(proof.References());ASSERT_TRUE(proof.WindowReferences());ASSERT_TRUE(proof.Certificate());
+    EXPECT_EQ(proof.Certificate()->SchemaVersion(),3u);EXPECT_TRUE(proof.Certificate()->Exact());
+    EXPECT_EQ(EncodeTrainingCertificate(*proof.Certificate()),source.liveCertificate);EXPECT_NO_THROW(proof.RequireCertificate(source.liveCertificate));
+    EXPECT_FALSE(proof.Certificate()->Matches(source.revision,*proof.References(),source.tolerances,ModelStateKind::Recognition,source.epoch));
+    const auto& p=proof.Archive().Protocol();double previousBegin=0.;bool separated=false;
+    for(const auto& id:proof.Archive().FinalGroups()) {
+        const auto r=std::find_if(proof.Archive().Records().begin(),proof.Archive().Records().end(),[&](const auto& r){return r.groupId==id;});
+        ASSERT_NE(r,proof.Archive().Records().end());if(previousBegin!=0.)separated=std::fabs(r->group.witness.fullBefore.observation.begin-previousBegin)>source.tolerances.sync;
+        previousBegin=r->group.witness.fullBefore.observation.begin;
+        ASSERT_TRUE(r->windowProposal);EXPECT_EQ(r->windowProposal->protocolBinding,proof.WindowReferences()->ProtocolBinding());
+        if(c0) {EXPECT_EQ(r->nativeTrialWitnessIds.size(),p.inputs.size()+2);for(const auto& [trial,witness]:r->nativeTrialWitnessIds)
+            EXPECT_EQ(r->capacitanceWitnesses.at(witness).modelRevision,r->logical.baseModelRevision);}
+        else EXPECT_TRUE(r->capacitanceWitnesses.empty());
+    }
+    EXPECT_TRUE(separated); // Different absolute clocks cannot become arrival residuals.
+}
+void PortableWindowTwoSweeps(int tamper) {
+    const auto& source=ActualPortableWindowBoundary<NNeuronTimeLearner>(PortableWindowSource::TwoSweeps);
+    auto document=source.archive.document;const auto decoded=DecodeNativeCompositeTrainingArchive(document);
+    std::map<std::string,std::vector<std::string>> runs;for(const auto& r:decoded.Records())
+        if(r.purpose==CompositeMeasurementPurpose::Final && r.consumed)runs[r.logical.runId].push_back(r.groupId);
+    ASSERT_EQ(runs.size(),2u);for(const auto& [run,ids]:runs)ASSERT_EQ(ids.size(),2u);
+    if(tamper) {
+        auto ids=document["final_group_ids"].toArray();ids[0]=QString::fromStdString(runs.begin()->second[0]);
+        if(tamper==2)ids[1]=QString::fromStdString(runs.begin()->second[1]);document["final_group_ids"]=ids;RebindArchive(document);
+        EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(document),source.tolerances,source.revision,source.epoch),std::invalid_argument);
+    } else {
+        const auto proof=WindowProof(source);ASSERT_TRUE(proof.Certificate());EXPECT_FALSE(proof.Certificate()->Exact());
+        EXPECT_EQ(proof.Certificate()->CandidateWindowFinalRunId(),runs.rbegin()->first);
+    }
+}
+}
+TEST(NativeCandidateWindowPortableMath,ClassicActualServiceCertificateMatchesExactly){PortableWindowMatchesLive<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowPortableMath,BranchActualServiceCertificateMatchesExactly){PortableWindowMatchesLive<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowPortableMath,ActualBoundC0KeepsOriginalBaseWitness){PortableWindowMatchesLive<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCandidateWindowPortableMath,DefaultSyncCannotBecomeExact) {
+    const auto& source=ActualPortableWindowBoundary<NNeuronTimeLearner>(PortableWindowSource::DefaultSync);const auto proof=WindowProof(source);
+    ASSERT_TRUE(proof.Certificate());EXPECT_FALSE(proof.Certificate()->Exact());EXPECT_TRUE(source.liveCertificate.isEmpty());
+    EXPECT_EQ(source.outcome,TrainingStatus::BudgetExhausted);EXPECT_DOUBLE_EQ(proof.Certificate()->Tolerances().sync,.02);
+    EXPECT_GT(std::max(std::fabs(proof.Certificate()->Residuals()[0].timingResidualLow),std::fabs(proof.Certificate()->Residuals()[0].timingResidualHigh)),.02);
+}
+TEST(NativeCandidateWindowPortableMath,WrongCurrentModelOrEpochRejected) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();const auto decoded=DecodeNativeCompositeTrainingArchive(s.archive.document);
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(decoded,s.tolerances,"another-model",s.epoch),std::invalid_argument);
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(decoded,s.tolerances,s.revision,s.epoch+1),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPortableMath,NegativeAndNonfiniteTolerancesRejected) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();const auto decoded=DecodeNativeCompositeTrainingArchive(s.archive.document);
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(decoded,{-1.,0.,.02},s.revision,s.epoch),std::invalid_argument);
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(decoded,{1e-5,0.,std::numeric_limits<double>::quiet_NaN()},s.revision,s.epoch),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPortableMath,RehashedCertificateCannotReplaceActualWindowIdentities) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();const auto proof=WindowProof(s);
+    for(const auto& key:{"final_window_recipe_ids","final_measurement_instance_ids","final_semantic_proof_ids"}) {
+        auto claim=s.liveCertificate;auto ids=claim[key].toArray();ASSERT_FALSE(ids.isEmpty());ids[0]="different-proof";claim[key]=ids;
+        claim.remove("semantic_certificate_id");claim["semantic_certificate_id"]=NmsdkTools::CanonicalModelDataSha256(claim);
+        EXPECT_THROW(proof.RequireCertificate(claim),std::invalid_argument);
+    }
+}
+TEST(NativeCandidateWindowPortableMath,LatestActualSweepReplaysOutsideTolerance){PortableWindowTwoSweeps(0);}
+TEST(NativeCandidateWindowPortableMath,MixedActualSweepsRejected){PortableWindowTwoSweeps(1);}
+TEST(NativeCandidateWindowPortableMath,WholeOlderActualSweepRejected){PortableWindowTwoSweeps(2);}
+TEST(NativeCandidateWindowPortableMath,PartialReferenceHasNoClosedTargetsOrCertificate) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>(PortableWindowSource::PartialReference);const auto proof=WindowProof(s);
+    EXPECT_FALSE(proof.References());EXPECT_FALSE(proof.WindowReferences());EXPECT_FALSE(proof.Certificate());
+    ASSERT_EQ(proof.Archive().Records().size(),1u);EXPECT_FALSE(proof.Archive().Records()[0].consumed);
+    EXPECT_THROW(proof.RequireCertificate(ActualPortableWindowBoundary<NNeuronTimeLearner>().liveCertificate),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPortableMath,MergedReferenceRemainsDiagnostic) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearnerBranch>(PortableWindowSource::Merged);const auto proof=WindowProof(s);
+    EXPECT_FALSE(proof.References());EXPECT_FALSE(proof.Certificate());EXPECT_EQ(s.outcome,TrainingStatus::InvalidObservation);
+}
+TEST(NativeCandidateWindowPortableMath,WarmGrowthRetainsOriginalTargetsWithoutBorrowingOldFinals) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>(PortableWindowSource::WarmAfterGrowth);const auto proof=WindowProof(s);
+    ASSERT_TRUE(proof.References());ASSERT_TRUE(proof.WindowReferences());EXPECT_FALSE(proof.Certificate());
+    EXPECT_NE(s.revision,proof.References()->InitialModelRevision());EXPECT_EQ(s.outcome,TrainingStatus::ExternalStop);
+    for(const auto& id:proof.Archive().ReferenceGroups()) {const auto& records=proof.Archive().Records();
+        const auto found=std::find_if(records.begin(),records.end(),[&](const auto& r){return r.groupId==id;});ASSERT_NE(found,records.end());
+        EXPECT_NE(found->attemptId,proof.Archive().CurrentAttemptId());}
+}
+TEST(NativeCandidateWindowPortableMath,MissingExternalPrimaryCannotFallBackToEmbeddedBytes) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(s.archive.document,[](const QString&){return QByteArray{};}),s.tolerances,s.revision,s.epoch),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPortableMath,FixedProtocol4CannotEnterPortableProtocol5Proof) {
+    const auto& s=ActualServiceArchive<NNeuronTimeLearner>();
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(s.document),{1e-5,0.,.02},"model",0),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPortableMath,IncompleteSelectedFinalSetHasNoCertificate) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();auto document=s.archive.document;
+    auto finals=document["final_group_ids"].toArray();ASSERT_EQ(finals.size(),2);finals.removeLast();document["final_group_ids"]=finals;RebindArchive(document);
+    const auto proof=CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(document),s.tolerances,s.revision,s.epoch);
+    ASSERT_TRUE(proof.References());EXPECT_FALSE(proof.Certificate());EXPECT_THROW(proof.RequireCertificate(s.liveCertificate),std::invalid_argument);
+}
+TEST(NativeCandidateWindowPortableMath,RehashedForeignReferenceProofCannotJoinActualFinal) {
+    const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();const auto decoded=DecodeNativeCompositeTrainingArchive(s.archive.document);
+    const auto id=decoded.FinalGroups().front();const auto found=std::find_if(decoded.Records().begin(),decoded.Records().end(),[&](const auto& r){return r.groupId==id;});
+    ASSERT_NE(found,decoded.Records().end());auto record=*found;ASSERT_TRUE(record.windowProposal);auto& proposal=*record.windowProposal;
+    proposal.referenceProofId="foreign-original-reference";
+    proposal.windowRecipeId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowRecipeContent(proposal)).toStdString();
+    proposal.measurementInstanceId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowInstanceContent(proposal)).toStdString();
+    EXPECT_NO_THROW(DecodeCandidateWindowProposalData(EncodeCandidateWindowProposalData(proposal)));
+    record.semanticProofId=CandidateWindowTrainingSemanticProofId(decoded.Protocol(),record);auto document=s.archive.document;
+    MutateWindowRecord(document,std::size_t(found-decoded.Records().begin()),[&](auto& wire){
+        wire["window_proposal"]=EncodeCandidateWindowProposalData(proposal);auto measurement=wire["measurement"].toObject();
+        measurement["semantic_proof_id"]=QString::fromStdString(record.semanticProofId);wire["measurement"]=measurement;});RebindArchive(document);
+    EXPECT_EQ(document["primary_blobs"],s.archive.document["primary_blobs"]);
+    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(document),s.tolerances,s.revision,s.epoch),std::invalid_argument);
+}
