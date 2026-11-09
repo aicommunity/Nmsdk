@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Reader73 A2 принят и опубликован](Runtime2Reader73A2Outcome-20261109.ru.md):73/73 на неизменном actual157 corpus,54 members/15 Git roles независимо проверены, evidence8228 опубликован и no-ff merged. Уточнено: старый FAIL был ошибочным ожиданием cursor budget в fixture (272 вместо264), production runtime2 reader здесь не менялся. Native package6 corpus не выбран, научного допуска нет.
+
 [Native119: свежая SDK доставлена и supervisor запущен](NativePackage6-119Launch-20261109.ru.md):4050 Git-verified files/8repos, canonical completed0/29 same-SDK imports; точный cohort119/42leaves. Новая сборка включает Console и integration target. Native результата ещё нет; maintained gitlinks прежние, scientific acceptance отсутствует.
 
 [Package6 reader34 завершён](Package6Reader34Outcome-20261109.ru.md):34/34 PASS на M40, Source/Tool unchanged, исходный completed/0 и последующее отсутствие bound group подтверждены, собственный lease released. Это metadata/DATA проверки, без actual C++ corpus и без научного допуска. Native package6/summary7/execution4 реализованы в отдельной feature-ветке, ещё не приняты сквозной сборкой и Train→Test; поддерживаемые gitlinks не изменены. Ниже сохранены последовательные исторические снимки; их формулировки «ещё не запущен/не опубликован» не заменяют более поздние результаты выше.
