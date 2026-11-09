@@ -1,0 +1,95 @@
+{
+  "kind": "owned_native40_source_only_frozen_plan",
+  "schema_version": 1,
+  "status": "NO_DELIVERY_NO_DISPATCH",
+  "source": {
+    "source_commit": "35fba3d1544f98b60401fa738aaba4ea2c6d1bff",
+    "source_root": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+    "package_fingerprint": "e2a17aa5e05638df1920e74ea26b497ef40bebc8f9cfef3feda385464d052dfd",
+    "python_package_files": 447,
+    "materialized_source_files": 643,
+    "pack_bytes": 5704402,
+    "pack_sha256": "79de2536b9ead79c5db923633d5d08d835d00349e09a2370f6b03d6ab4b43798",
+    "sparse_patterns": [
+      "!/*",
+      "/Scripts/",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules",
+      "/Docs/Audit/TimeLearner-2026-09-26-review/plans/AGENT_PLAN_2026-10-20/tools/cable_model/.gitignore",
+      "/LLM/.gitignore"
+    ]
+  },
+  "tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+    "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c"
+  },
+  "suite": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/suite.json",
+    "bytes": 7334,
+    "sha256": "d5807ccb4cc47f1f84d8d33e9a794d958c05cf35b80fc8747ddd93d834446611",
+    "methods": 40,
+    "partitions": [
+      21,
+      10,
+      9
+    ]
+  },
+  "request": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/request.json",
+    "bytes": 1428,
+    "sha256": "6e6bd9b03b30ab7565cb6f060ddb305c40c70ab80f9de1d125f0437c02d2f93c"
+  },
+  "fixtures": {
+    "cmake": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake/cmake-dependency.json",
+      "bytes": 186,
+      "sha256": "71d8671414b9e5e4f3ff5caded33d8389c007724f8dd65b99a1e01417aeefe90",
+      "fingerprint": "e44664ef28a1aa9549940645f718a6e757e6d96b275d5f4d6c01e9c74f693207",
+      "binary": {
+        "kind": "timelearner_cmake_configure_dependency",
+        "schema_version": 1,
+        "path": "/usr/bin/cmake",
+        "sha256": "1c5227af4edd22d8d689def545e18ee458260c0fd579eba2187967f38817e638"
+      }
+    },
+    "kernel-output": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output/kernel-output.json",
+      "bytes": 247,
+      "sha256": "32b30f365e08d74bac10a2ce936ddb462fbb523c509de3c5ad31b793bda61e7b",
+      "fingerprint": "8038ee96fb9f97bf7e009cc3e285d74c60ab05d0f0a79149bf11912e8b5973b7",
+      "declaration": {
+        "kind": "timelearner_owned_native_kernel_output",
+        "schema_version": 1,
+        "job_id": "s10-owned-native-controller40-m40-a1",
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-owned-native-controller40-m40-a1/worker/kernel-cases"
+      },
+      "fixture_access": "READ; marker byte-unchanged before/after",
+      "lifecycle_outputs_access": "WRITE under actual own job/worker/kernel-cases only; TMPDIR-parent relation checked"
+    }
+  },
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 64,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "projection_root": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1",
+  "source_side_effects": "None locally except Git/hash/AST; no local tests",
+  "expected_runtime_tests": "21worker(old19 regression +2path),10metadata,9 actual-kernel; noCpp/model/nativeintegration",
+  "kernel_units": "Eachcase real owned outer256MiB/t32; nested child128MiB/t16; all finite path/identity closure receipts retained. Deliberate partial-JSON case leaves dedicated test ledger held, no externalregistry cleanup.",
+  "public_native_job_integration": "PENDING separate nextnative48 corrected run; privatefixture success does not itself admit nativeSDK",
+  "before_any_delivery_preconditions": [
+    "Root exact plan review",
+    "Fresh targetabsence/aliases/resources/centralheld-overlap",
+    "ToolCEC immutableGit/import checks",
+    "Source/controlpacks SHA +rootGitcontrol blobs",
+    "Installed /usr/bin/cmake exact path/SHA unchanged versus consumed fixture"
+  ],
+  "source_delivery_or_dispatch": false,
+  "CMake_test_model_executed": false,
+  "scientific_verdict": null
+}

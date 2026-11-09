@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-owned-native-controller40-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 64,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-owned-native-controller40-m40-a1",
+      "commit": "35fba3d1544f98b60401fa738aaba4ea2c6d1bff"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/suite.json",
+      "sha256": "d5807ccb4cc47f1f84d8d33e9a794d958c05cf35b80fc8747ddd93d834446611"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE_PROFILE_CMAKE": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/cmake",
+      "TIMELEARNER_OWNED_NATIVE_TEST_OUTPUT": "/media/user/Data/TimeLearnerRefactor/requests/owned-native-controller40-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/OwnedNativeController40-20261109/kernel-output"
+    }
+  }
+}
