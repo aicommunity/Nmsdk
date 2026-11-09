@@ -1,0 +1,725 @@
+{
+  "kind": "collector65_fixed_closed_metadata_inputs",
+  "schema_version": 1,
+  "job_id": "s10-collector-input-capabilities65-m40-a1",
+  "collection_source_commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+  "original_tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "plan_commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+  "expected_tests": 65,
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_A3_binding_and_explicit_arbitrary_log_path",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_90af_wrong_A2_log_is_rejected_for_A3",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_A3_log_is_rejected_for_A2_binding",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_A3_log_is_not_worker_progress",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_missing_STARTED_refuses_publication_inputs",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_progress_stream_must_belong_to_the_bound_container",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_duplicate_identical_STARTED_refuses_ambiguity",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_mixed_foreign_and_matching_STARTED_refuses_ambiguity",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_malformed_STARTED_JSON_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_invalid_UTF8_supervisor_has_structured_refusal",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_duplicate_JSON_keys_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_tampered_request_content_digest_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_tampered_binding_content_digest_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_rehashed_foreign_binding_identity_still_fails",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_missing_request_is_not_inferred_from_log",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_size_budget_rejects_input_before_parsing",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_symlink_log_is_not_an_original_capture",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_append_during_frozen_read_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_replacement_during_frozen_read_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_materialize_uses_captured_bytes_not_reopened_inputs",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_materialize_rejects_outside_owned_root",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_manually_constructed_escape_name_refuses_before_filesystem_write",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_manually_constructed_duplicate_role_refuses_before_filesystem_write",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_manually_constructed_bytes_must_match_descriptor_before_write",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_existing_packager_uses_frozen_staged_log_and_descriptor",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_Git_source_derives_full206_with_explicit_subset",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_parameterized_suite_selected_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual153_stale_nested_fc9_is_rejected_against_Git05f",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_invalid_budget_macro_cannot_add_a_second_TEST",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_changed_document_claim_cannot_replace_Git_cases",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_changed_source_worktree_cannot_keep_Git_inventory",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_dirty_source_closure_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_source_epoch_change_during_inventory_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_unsupported_dialect_cannot_claim_universal_gtest_coverage",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_missing_git_blob_fails_without_lazy_fetch",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_c19_preflight_keeps_planned540_actual_d920_and_compiled_null",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_actual_compiled_manifest_is_distinct_from_plan_and_not_success",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_compiled_manifest_digest_tamper_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_provenance.CollectorProvenanceTest.test_not_started_phase_refuses_any_compiled_runtime",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_required_files_stage_captured_bytes_after_original_changes",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_entire_manifest_is_validated_before_any_file_is_read",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_missing_required_input_never_creates_a_staging_directory",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_duplicate_roles_staged_aliases_and_source_aliases_fail",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_total_size_budget_is_checked_before_partial_capture",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_control_paths_and_boolean_budgets_fail_before_filesystem_reads",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_wrong_frozen_content_and_symlink_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_file_declared_size_mismatch_rejects_before_body_capture",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_constructed_unsafe_capture_is_rejected_before_any_write",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_captured_descriptor_cannot_hide_changed_bytes_or_malformed_requirements",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_git_role_binds_head_commit_path_blob_and_bytes_without_retaining_primary",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_same_blob_in_wrong_repository_does_not_supply_the_declared_role",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_wrong_git_path_oid_and_content_digest_fail_without_fallback",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_git_size_is_checked_before_object_body_read",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_git_tree_is_not_a_regular_blob_role",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_git_declared_byte_count_is_checked_before_body_even_with_large_limit",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_module_selection_captures_both_literal_classes_without_import",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_class_selection_does_not_count_other_class_in_same_module",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_two_class_selectors_reuse_one_source_and_match_exact_union",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_method_unknown_class_and_duplicate_selection_are_explicitly_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_dynamic_class_member_and_load_tests_hooks_are_unsupported",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_inherited_and_conditional_cases_are_not_silently_undercounted",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_source_physical_edit_head_change_and_size_limit_are_checked",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_malformed_selector_manifest_is_rejected_before_git_or_file_reads",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_class_scope_allows_local_test_named_variables_without_dynamic_members",
+    "Scripts.StructTrain.TimeLearner.tests.test_collector_input_capabilities.CollectorInputCapabilitiesTest.test_required_files_keep_both_observer_snapshots_without_normalizing_bytes"
+  ],
+  "source_package_fingerprint": "295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317",
+  "tool_package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+  "external_scientific_fixtures": {},
+  "binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "957c2ed2390c8177c22593c0076f4d77beb6dfc2825ed14ac90d4cbccef8d4f0",
+    "unit": "timelearner-bf68cd0d-3693-4918-bd2c-ec9e0862a740.service",
+    "invocation_id": "e2e621af304748a1929b05c06f44a676",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bf68cd0d-3693-4918-bd2c-ec9e0862a740.service",
+    "initial_main_pid": 1238910,
+    "initial_start_ticks": "329161708",
+    "sha256": "0bf3c26be8c03d533b35527e89ece80474a773e3da4731d2f8c18cceb8343b17"
+  },
+  "lease_token": "4f15c8af-3394-4092-b760-a3d19b3360ea",
+  "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+  "suite_sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+  "request_sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81",
+  "producer_name": "collector65_publish_closed_a1.py",
+  "input_files": {
+    "CollectorCapabilities65RootActualPreparation.err": {
+      "bytes": 135,
+      "sha256": "e234608f4a4b94fed3c649c87272322d45f5bb00201cf565126ce921e90af04b"
+    },
+    "CollectorCapabilities65RootActualPreparation.json": {
+      "bytes": 5242,
+      "sha256": "4ee92c8bcc13acb7825b89b985eaf9e8bcded5e984c31fcf5721145172a38785"
+    },
+    "CollectorCapabilities65RootActualPreparationA2.err": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "CollectorCapabilities65RootActualPreparationA2.json": {
+      "bytes": 13504,
+      "sha256": "c31c1bc85cd6d699367ea1970218cb81beb34d4b12942a49f3a56ea76c10ff43"
+    },
+    "CollectorCapabilities65RootPlanA2Absence.err": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "CollectorCapabilities65RootPlanA2Absence.json": {
+      "bytes": 316,
+      "sha256": "512232d010ecc17db8ab6ae884e7b1ced6d70e7d09eb474b4a859fb71a97e7e1"
+    },
+    "CollectorCapabilities65RootPlanA2Delivery.json": {
+      "bytes": 1091,
+      "sha256": "1f364da80114d295fccebe596b13584bc68ed8c2c5d096f21d5575e28b6f67ad"
+    },
+    "CollectorCapabilities65RootPlanDelivery.json": {
+      "bytes": 1091,
+      "sha256": "912869899bada7128d3a3831a093c9b641eb5c40b9a3c466bc083a018a946946"
+    },
+    "CollectorCapabilities65RootPrepA1ReadonlyAudit.err": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "CollectorCapabilities65RootPrepA1ReadonlyAudit.json": {
+      "bytes": 13726,
+      "sha256": "333c7a95ea70e04de802a642189c52895ac7b6b62e1961327cb80292066e2e73"
+    },
+    "CollectorCapabilities65RootReadonlyDiscovery.err": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "CollectorCapabilities65RootReadonlyDiscovery.json": {
+      "bytes": 2624,
+      "sha256": "decf894385bde89313d3964bf63470e4a982a14096eb4001d4571cb4b2701baf"
+    },
+    "CollectorCapabilities65RootRunTransport.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "CollectorCapabilities65RootRunTransport.stdout": {
+      "bytes": 1871,
+      "sha256": "c802645f0fef3ce70f205864df30ca5f3519a89b9e800cc78cb91e9f36f42125"
+    },
+    "CollectorCapabilities65RootSourceDelivery.json": {
+      "bytes": 546,
+      "sha256": "c9ce847078d2da3a229a2441aaadcd2f032b5167ea925b5b8dc7334c6e478de8"
+    },
+    "CollectorCapabilities65RootTerminalReadback.err": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "CollectorCapabilities65RootTerminalReadback.json": {
+      "bytes": 13086,
+      "sha256": "68984885a82c133691f1670f57aab87788fbac6ab9fb1ef34cfd84239268a6da"
+    },
+    "collector65_publish_closed_a1.py": {
+      "bytes": 19795,
+      "sha256": "ce51b63cd3be91285e31dc7c1486ebf5ae2ebbd61c1f4bb0a3f03cb2e455a89d"
+    },
+    "collector_capabilities65_prepare_after_delivery.txt": {
+      "bytes": 13696,
+      "sha256": "8c69f08f727e54c0237ff61b67d9a546ed26e49295188eabc5b51d190bec802c"
+    },
+    "collector_capabilities65_prepare_after_delivery_a2.txt": {
+      "bytes": 18482,
+      "sha256": "112bff40b66cc48450e3ae4c676a33a9e2ae9abf70cd77efd8f33b28c2f3b89b"
+    },
+    "collector_capabilities65_prep_a1_readonly_audit.txt": {
+      "bytes": 6635,
+      "sha256": "ed24b72144df44d9d32ba14c037a00410768ecb7da0467cf908e90371c3e2d98"
+    },
+    "collector_capabilities65_readonly_discovery.txt": {
+      "bytes": 3045,
+      "sha256": "eb8ffd802ddebca068519042e0bfb0a4f5a4c9eb197eb69062d902816d186d82"
+    },
+    "collector_capabilities65_plan_a2_readonly_absence.txt": {
+      "bytes": 750,
+      "sha256": "724deab05be9c24655fa5e4015348d5b1ca807f1dbfec347b819de9de906a26a"
+    },
+    "collector_capabilities65_source2caf_plan110f.json": {
+      "bytes": 186222,
+      "sha256": "34bfeb05aa30ac8de36444c950537dae75d964dd67a7b7927e9db63f40951962"
+    },
+    "collector_capabilities65_source2caf_planac4c.json": {
+      "bytes": 182436,
+      "sha256": "2aae0f1c2725800ee947eaed07ee166726b589ff41a53b5858de1d0d7be222c9"
+    },
+    "collector_capabilities65_plan884dad_a2.json": {
+      "bytes": 3873,
+      "sha256": "45418219cda1960047dd41e61030a8409af2c09b90febc17e529081d00c9305f"
+    },
+    "collector_capabilities65_A2_delivery_preparation.json": {
+      "bytes": 3535,
+      "sha256": "952239a6def4e7543f2cc9b6deee5e6727f8784041171f56eb3d4e0c7b87b019"
+    },
+    "timelearner_deliver_empty_private_source_v2.py": {
+      "bytes": 2834,
+      "sha256": "87ee30282b008f7e2d8870565f6b2532bcf3a907833c81add36e216474b58bc4"
+    },
+    "unexecuted-review-producer-b016.py": {
+      "bytes": 16298,
+      "sha256": "b016a10c5e9fefc0686a3405c2e7bdd87b1d06aee0bba02da182684c8f7dcf22"
+    },
+    "unexecuted-review-input-manifest-a1.json": {
+      "bytes": 40053,
+      "sha256": "5adc19dd1e02535685fef892154f279a2b7244d964a727bc3e7341d7b5eca9db"
+    },
+    "unexecuted-review-command-a1.txt": {
+      "bytes": 250,
+      "sha256": "1ef75fd5b2585ad86d493a1985bdd75db4cd8e545d8f1ddc8e7e4b8fd5ad123d"
+    },
+    ".gitattributes": {
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    }
+  },
+  "git_roles": [
+    {
+      "role": "plan-00",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+      "git_blob": "2037b29aceb038ba4000ed944a97eea6add3587d",
+      "expected_bytes": 12687,
+      "expected_sha256": "ee5e29009bf965f7468ce0ef03569c5e5919f3dc38d3d253072792a2b6c7ec67",
+      "maximum_bytes": 12687
+    },
+    {
+      "role": "plan-01",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+      "git_blob": "e5b39921c7c2b2812dc752ebd9b46e18eefe62d3",
+      "expected_bytes": 10795,
+      "expected_sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+      "maximum_bytes": 10795
+    },
+    {
+      "role": "plan-02",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+      "git_blob": "644a33dabab767b14750e453acfabf1323149d01",
+      "expected_bytes": 927,
+      "expected_sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81",
+      "maximum_bytes": 927
+    },
+    {
+      "role": "plan-03",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+      "git_blob": "5755ebae887e933e6b86dfcefa0ba419eaf4c456",
+      "expected_bytes": 172329,
+      "expected_sha256": "dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de",
+      "maximum_bytes": 172329
+    },
+    {
+      "role": "plan-04",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+      "git_blob": "8f4a109f8a090fff9c819bd5279643ccdfa830db",
+      "expected_bytes": 3864,
+      "expected_sha256": "5d1e9dadfc46f3c2706f1f4dfaaed41cd2f6165a7f0924e9bfc0210470213565",
+      "maximum_bytes": 3864
+    },
+    {
+      "role": "plan-05",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+      "git_blob": "041261ab25aae385baedb828a518107e92d36bdb",
+      "expected_bytes": 7182,
+      "expected_sha256": "f815d9552744688ed3b50f073a8e69842c8d4f4775ecc5144486fd2f9ae3a171",
+      "maximum_bytes": 7182
+    },
+    {
+      "role": "plan-06",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": ".gitattributes",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "expected_bytes": 616,
+      "expected_sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "maximum_bytes": 616
+    },
+    {
+      "role": "plan-07",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": ".gitignore",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "expected_bytes": 2042,
+      "expected_sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "maximum_bytes": 2042
+    },
+    {
+      "role": "plan-08",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+      "repository_head": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+      "path": ".gitmodules",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "expected_bytes": 967,
+      "expected_sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "maximum_bytes": 967
+    },
+    {
+      "role": "prior-plan-00",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+      "git_blob": "acfe2345a36ae814f59a1abe04ed602f8ebabe7f",
+      "expected_bytes": 2834,
+      "expected_sha256": "59faf14ecff6d56bda70ca8beb1119888fd4fa95b94b0d896389626e17f13ae4",
+      "maximum_bytes": 2834
+    },
+    {
+      "role": "prior-plan-01",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+      "git_blob": "f6dd52b55cdde2cda1a7dfb2ce45dc512e4625c1",
+      "expected_bytes": 11638,
+      "expected_sha256": "d33124521fbb2d95d3bad1140d79e7904a4555830e64cc2c28138cccc0042ae2",
+      "maximum_bytes": 11638
+    },
+    {
+      "role": "prior-plan-02",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+      "git_blob": "63ea9f95a751d72a16d3ed26623b44f9b16a7341",
+      "expected_bytes": 927,
+      "expected_sha256": "24cbfae65f9a70ea100a2243823e3fffb6ea0a1a33667f568c943be37a86694c",
+      "maximum_bytes": 927
+    },
+    {
+      "role": "prior-plan-03",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+      "git_blob": "4072362ce395408115b8e0066f630b750707cc9a",
+      "expected_bytes": 4928,
+      "expected_sha256": "476c1a87cbecde6ae0f65e9fd275bce7c737145b60e2aec2a5cfcc5b80957d40",
+      "maximum_bytes": 4928
+    },
+    {
+      "role": "prior-plan-04",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+      "git_blob": "5755ebae887e933e6b86dfcefa0ba419eaf4c456",
+      "expected_bytes": 172329,
+      "expected_sha256": "dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de",
+      "maximum_bytes": 172329
+    },
+    {
+      "role": "prior-plan-05",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+      "git_blob": "e5b39921c7c2b2812dc752ebd9b46e18eefe62d3",
+      "expected_bytes": 10795,
+      "expected_sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+      "maximum_bytes": 10795
+    },
+    {
+      "role": "prior-plan-06",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": ".gitattributes",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "expected_bytes": 616,
+      "expected_sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "maximum_bytes": 616
+    },
+    {
+      "role": "prior-plan-07",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": ".gitignore",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "expected_bytes": 2042,
+      "expected_sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "maximum_bytes": 2042
+    },
+    {
+      "role": "prior-plan-08",
+      "repository": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+      "repository_head": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "commit": "ac4c22203c9dced37631bef07308f24e61d7df40",
+      "path": ".gitmodules",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "expected_bytes": 967,
+      "expected_sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "maximum_bytes": 967
+    },
+    {
+      "role": "collection-source-00",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "repository_head": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py",
+      "git_blob": "64ebcc9ffa5f8db437fedabb1097d8ba93b9e8fe",
+      "expected_bytes": 44094,
+      "expected_sha256": "0e094f97d0d332a12f51ab1df4e86aa5de04812745600c26446d64470bf4040e",
+      "maximum_bytes": 44094
+    },
+    {
+      "role": "collection-source-01",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "repository_head": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_collector_input_capabilities.py",
+      "git_blob": "559e3a3d9d3bdfb6f7ef98b9dbc22c91799050e8",
+      "expected_bytes": 16812,
+      "expected_sha256": "8ce5a3fda6f87e31c97e118cf51797853af9058a640f6ccfa9e3b76926477808",
+      "maximum_bytes": 16812
+    },
+    {
+      "role": "collection-source-02",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "repository_head": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "path": "Scripts/StructTrain/TimeLearner/tests/test_collector_provenance.py",
+      "git_blob": "03ddfbc8b3d6ee78a8ab377545a2485205d36a57",
+      "expected_bytes": 24222,
+      "expected_sha256": "3bb17896bc540e067faf06f4139006e9e9e1aa136fb64ee9f36ff3c4fc3f6ab1",
+      "maximum_bytes": 24222
+    },
+    {
+      "role": "collection-source-03",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "repository_head": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "path": ".gitattributes",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "expected_bytes": 616,
+      "expected_sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "maximum_bytes": 616
+    },
+    {
+      "role": "collection-source-04",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "repository_head": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "path": ".gitignore",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "expected_bytes": 2042,
+      "expected_sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "maximum_bytes": 2042
+    },
+    {
+      "role": "collection-source-05",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+      "repository_head": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+      "path": ".gitmodules",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "expected_bytes": 967,
+      "expected_sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "maximum_bytes": 967
+    },
+    {
+      "role": "original-tool-00",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "repository_head": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": "Scripts/StructTrain/TimeLearner/owned_python_job.py",
+      "git_blob": "eacf09ed9b1c177e80e6d71c33cd231e611b24f9",
+      "expected_bytes": 22237,
+      "expected_sha256": "0ba0b1cca145e5ed442a19ace9c706cd034acd717b65589e03cb64c311944ec5",
+      "maximum_bytes": 22237
+    },
+    {
+      "role": "original-tool-01",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "repository_head": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": "Scripts/StructTrain/TimeLearner/runtime.py",
+      "git_blob": "5076c55cc37003e4601108530e7a4ae8778eaea2",
+      "expected_bytes": 8971,
+      "expected_sha256": "590bcee9b8f4b6612ebe6ff3b95eb9d76a1475a9aaee15c95a2232db85e3bfc4",
+      "maximum_bytes": 8971
+    },
+    {
+      "role": "original-tool-02",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "repository_head": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": "Scripts/StructTrain/TimeLearner/collector_provenance.py",
+      "git_blob": "8e4cc5ee61f43cc6dc5506312a7e899427a977db",
+      "expected_bytes": 23404,
+      "expected_sha256": "2b8e2e08078ead5a27646d11bd2041c175fb0e628a5836132215a488ef2d1ff6",
+      "maximum_bytes": 23404
+    },
+    {
+      "role": "original-tool-03",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "repository_head": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": ".gitattributes",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "expected_bytes": 616,
+      "expected_sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "maximum_bytes": 616
+    },
+    {
+      "role": "original-tool-04",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "repository_head": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": ".gitignore",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "expected_bytes": 2042,
+      "expected_sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "maximum_bytes": 2042
+    },
+    {
+      "role": "original-tool-05",
+      "repository": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+      "repository_head": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+      "path": ".gitmodules",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "expected_bytes": 967,
+      "expected_sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "maximum_bytes": 967
+    }
+  ],
+  "required_job_paths": [
+    "request.json",
+    "launch-context.json",
+    "preflight.json",
+    "supervisor.log",
+    "controller-result.json",
+    "monitor.jsonl",
+    "monitor-final.json",
+    "closure-and-reservation.json",
+    "lease-recovery.json",
+    "process/runtime.json",
+    "process/contained/request.json",
+    "process/contained/runtime.json",
+    "process/contained/owned-unit.json",
+    "process/contained/stdout.log",
+    "process/contained/stderr.log",
+    "worker/temporary-environment.json",
+    "worker/reservation.json",
+    "worker/tool-source-before.json",
+    "worker/tool-source-after.json",
+    "worker/validation-source-before.json",
+    "worker/validation-source-after.json",
+    "worker/fixtures-before.json",
+    "worker/fixtures-after.json",
+    "worker/validation-process.json",
+    "worker/terminal.json",
+    "worker/validation/suite.json",
+    "worker/validation/result.json",
+    "worker/validation/unittest.log"
+  ],
+  "plan_files": [
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+      "bytes": 12687,
+      "sha256": "ee5e29009bf965f7468ce0ef03569c5e5919f3dc38d3d253072792a2b6c7ec67",
+      "archive_name": "CollectorInputCapabilities65Preparation-20261109.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+      "bytes": 10795,
+      "sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+      "archive_name": "CollectorInputCapabilities65Preparation-20261109.suite.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+      "bytes": 927,
+      "sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81",
+      "archive_name": "CollectorInputCapabilities65Preparation-20261109.request.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+      "bytes": 172329,
+      "sha256": "dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de",
+      "archive_name": "CollectorInputCapabilities65Preparation-20261109.source-manifest.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+      "bytes": 3864,
+      "sha256": "5d1e9dadfc46f3c2706f1f4dfaaed41cd2f6165a7f0924e9bfc0210470213565",
+      "archive_name": "CollectorInputCapabilities65Preparation-20261109.dependencies.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+      "bytes": 7182,
+      "sha256": "f815d9552744688ed3b50f073a8e69842c8d4f4775ecc5144486fd2f9ae3a171",
+      "archive_name": "CollectorInputCapabilities65Preparation-20261109.ru.md"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 616,
+      "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "archive_name": ".gitattributes"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 2042,
+      "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "archive_name": ".gitignore"
+    },
+    {
+      "path": ".gitmodules",
+      "bytes": 967,
+      "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "archive_name": ".gitmodules"
+    },
+    {
+      "path": "suite.json",
+      "bytes": 10795,
+      "sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+      "archive_name": "suite.json"
+    },
+    {
+      "path": "request.json",
+      "bytes": 927,
+      "sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81",
+      "archive_name": "request.json"
+    }
+  ],
+  "prior_plan_files": [
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+      "bytes": 2834,
+      "sha256": "59faf14ecff6d56bda70ca8beb1119888fd4fa95b94b0d896389626e17f13ae4",
+      "archive_name": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+      "bytes": 11638,
+      "sha256": "d33124521fbb2d95d3bad1140d79e7904a4555830e64cc2c28138cccc0042ae2",
+      "archive_name": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+      "bytes": 927,
+      "sha256": "24cbfae65f9a70ea100a2243823e3fffb6ea0a1a33667f568c943be37a86694c",
+      "archive_name": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+      "bytes": 4928,
+      "sha256": "476c1a87cbecde6ae0f65e9fd275bce7c737145b60e2aec2a5cfcc5b80957d40",
+      "archive_name": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+      "bytes": 172329,
+      "sha256": "dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de",
+      "archive_name": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+      "bytes": 10795,
+      "sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+      "archive_name": "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json"
+    },
+    {
+      "path": ".gitattributes",
+      "bytes": 616,
+      "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "archive_name": ".gitattributes"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 2042,
+      "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "archive_name": ".gitignore"
+    },
+    {
+      "path": ".gitmodules",
+      "bytes": 967,
+      "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "archive_name": ".gitmodules"
+    },
+    {
+      "path": "prepared-metadata.json",
+      "bytes": 5993,
+      "sha256": "90bbdfa3355b34846671c90b5edf51ee1625c5a1206d426d433fff1f6a011225",
+      "archive_name": "prepared-metadata.json"
+    }
+  ],
+  "no_tests_or_models_or_CPP_execution": true,
+  "scientific_verdict": null,
+  "preexec_review_history": {
+    "old_b016_executed": false,
+    "new_pre_import_namespace_module_Git_binding": true,
+    "parent_CEC_fulltree_metadata_capability": true,
+    "parent_pack_scope": "CEC commit and tree objects only; no source index/SDK blob access"
+  }
+}

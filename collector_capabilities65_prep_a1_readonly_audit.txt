@@ -1,0 +1,103 @@
+set -eu
+cd /media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2
+/usr/bin/python3.12 -B - <<'PY'
+"""Read-only diagnosis of one failed metadata preparation; no retry/write/test."""
+import base64
+import hashlib
+import json
+import os
+from pathlib import Path
+import socket
+import subprocess
+
+from Scripts.StructTrain.TimeLearner.collector_provenance import _frozen
+from Scripts.StructTrain.TimeLearner.owned_python_job import _source_snapshot
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+
+B = Path('/media/user/Data/TimeLearnerRefactor')
+T = B/'source-channel-lt-overview-tool-m40-a2'
+S = B/'source-collector-input-capabilities-m40-a1'
+P = B/'plan-collector-input-capabilities65-m40-a1'
+J = B/'readbacks/s10-collector-input-capabilities65-m40-a1'
+TOOL = 'cec33f2fcceb8c8f815e3494173bf48dcd39ed6c'
+SOURCE = '2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae'
+PLAN = 'ac4c22203c9dced37631bef07308f24e61d7df40'
+STEM = 'Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109'
+controls = ['/.gitattributes','/.gitignore','/.gitmodules']
+suffixes = ['.json','.suite.json','.request.json','.source-manifest.json','.dependencies.json','.ru.md']
+delivered_patterns = ['/'+STEM+suffix for suffix in suffixes]+controls
+erroneous_expected_patterns = sorted(delivered_patterns[:-3])+controls
+ENV = {**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_OPTIONAL_LOCKS':'0','GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null'}
+
+
+def git(root,*arguments):
+    return subprocess.check_output(['git','-C',str(root),*arguments],env=ENV)
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+
+
+assert socket.gethostname()=='M40' and Path.cwd()==T
+for root in (B,T,S,P):
+    assert root.is_dir() and root.resolve()==root and all(not p.is_symlink() for p in (root,*root.parents))
+for root,commit in ((T,TOOL),(S,SOURCE),(P,PLAN)):
+    assert git(root,'rev-parse','HEAD').decode().strip()==commit
+    assert not git(root,'status','--porcelain','--untracked-files=no','--ignore-submodules=all').strip()
+    assert not (root/'.git/objects/info/alternates').exists()
+source_status = git(S,'status','--porcelain','--untracked-files=all','--ignore-submodules=all').decode()
+plan_status = git(P,'status','--porcelain','--untracked-files=all','--ignore-submodules=all').decode()
+assert not source_status
+assert plan_status == '?? prepared-metadata.json\n'
+actual_patterns = git(P,'sparse-checkout','list').decode().splitlines()
+assert actual_patterns==delivered_patterns and actual_patterns!=erroneous_expected_patterns
+source_before = _source_snapshot(S,SOURCE)
+tool_before = _source_snapshot(T,TOOL)
+raw,manifest_file = _frozen(P/(STEM+'.source-manifest.json'),256*1024)
+assert raw==git(P,'show',PLAN+':'+STEM+'.source-manifest.json')
+assert manifest_file['sha256']=='dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de'
+manifest = json.loads(raw)
+expected_scripts = {p:r for p,r in manifest['records'].items() if p.startswith('Scripts/')}
+assert set(source_before['files'])==set(expected_scripts) and len(expected_scripts)==635 and len(manifest['records'])==638
+for path,record in expected_scripts.items():
+    assert all(source_before['files'][path][key]==record[key] for key in ('bytes','sha256','git_blob'))
+control_records = {}
+for name in manifest['control_files']:
+    expected = manifest['records'][name]
+    for root,commit in ((S,SOURCE),(P,PLAN)):
+        data,actual = _frozen(root/name,8192)
+        assert actual['bytes']==expected['bytes'] and actual['sha256']==expected['sha256']
+        assert data==git(root,'show',commit+':'+name)
+        assert git(root,'rev-parse',commit+':'+name).decode().strip()==expected['git_blob']
+    control_records[name]=expected
+package = {p.removeprefix('Scripts/StructTrain/TimeLearner/'):r['sha256'] for p,r in source_before['files'].items() if p.startswith('Scripts/StructTrain/TimeLearner/') and p.endswith('.py')}
+assert len(package)==444 and digest(package)=='295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317'
+assert len(tool_before['files'])==632
+plan_files = {}
+for suffix in suffixes:
+    path=STEM+suffix;data,record=_frozen(P/path,256*1024)
+    assert data==git(P,'show',PLAN+':'+path)
+    plan_files[path]={'bytes':record['bytes'],'sha256':record['sha256'],'git_blob':git(P,'rev-parse',PLAN+':'+path).decode().strip()}
+failure_raw,failure_record = _frozen(P/'prepared-metadata.json',64*1024)
+failure=json.loads(failure_raw)
+assert failure['status']=='failed_preparation_no_dispatch' and failure['tests_dispatched'] is False and failure['kernel_units_dispatched'] is False
+assert failure['binding']['source_commit']==SOURCE and failure['binding']['plan_commit']==PLAN
+registry=Reservations.open_existing(B/'resource-reservations.sqlite3')
+leases=[r for r in registry.inspect()['leases'] if r['job_id']=='collector65-source-plan-prep-m40-a1']
+assert len(leases)==1 and leases[0]['token']=='6b942305-f599-43a7-a964-89820d972cbf' and leases[0]['state']=='released'
+for key in ('token','job_id','owner','resources','state','created','deadline','updated','release_note'):
+    assert leases[0][key]==failure['prep_lease_after'][key]
+for name in ('suite.json','request.json'):
+    assert not (P/name).exists() and not (P/name).is_symlink()
+assert not J.exists() and not J.is_symlink()
+assert _source_snapshot(S,SOURCE)==source_before and _source_snapshot(T,TOOL)==tool_before
+print(json.dumps({'kind':'collector65_preparation_a1_readonly_cause_audit','schema_version':1,
+    'cause':'sort_keys=True changed nested plan_files key order; projection compared derived sorted order with explicitly delivered positive-pattern order',
+    'actual_patterns':actual_patterns,'erroneous_expected_patterns':erroneous_expected_patterns,'same_positive_pattern_members':set(actual_patterns)==set(erroneous_expected_patterns),
+    'source_commit':SOURCE,'plan_commit':PLAN,'source_scripts':635,'source_package_python_files':444,'source_package_fingerprint':digest(package),
+    'source_status':source_status,'plan_status':plan_status,'controls':control_records,'plan_files':plan_files,
+    'original_failure_receipt':{'path':str(P/'prepared-metadata.json'),'bytes':failure_record['bytes'],'sha256':failure_record['sha256'],'base64':base64.b64encode(failure_raw).decode()},
+    'released_prep_lease':leases[0],'source_tool_before_after_equal':True,'flat_suite_request_absent':True,'job_root_absent':True,
+    'writes_performed':False,'tests_dispatched':False,'kernel_units_dispatched':False,'scientific_verdict':None},sort_keys=True),flush=True)
+
+PY

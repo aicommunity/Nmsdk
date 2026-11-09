@@ -1,0 +1,209 @@
+set -eu
+cd /media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2
+/usr/bin/python3.12 -B - <<'PY'
+"""PREPARATION ONLY. Fixed Git delivery projection; never starts validation."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import socket
+import stat
+import subprocess
+import sys
+import threading
+import time
+
+from Scripts.StructTrain.TimeLearner.owned_python_job import _source_snapshot
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+
+# Replaced with a frozen JSON literal by the local metadata-only writer.
+BINDING = json.loads('{"deprecated_preparation_commit": "110f016a71daf835419272c03d384a1f11fe6d9a", "pack": {"bytes": 5760196, "objects": 4494, "path": "C:\\\\Users\\\\Bakhshiev\\\\AppData\\\\Local\\\\Temp\\\\collector_capabilities65_source2caf_planac4c.pack", "sha256": "4ad3100f940b677ce627ea014fb46eac2f6308483c3efdcfd8270ceec26ac05c"}, "plan_commit": "ac4c22203c9dced37631bef07308f24e61d7df40", "plan_files": {"Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json": {"bytes": 2834, "git_blob": "acfe2345a36ae814f59a1abe04ed602f8ebabe7f", "sha256": "59faf14ecff6d56bda70ca8beb1119888fd4fa95b94b0d896389626e17f13ae4"}, "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json": {"bytes": 11638, "git_blob": "f6dd52b55cdde2cda1a7dfb2ce45dc512e4625c1", "sha256": "d33124521fbb2d95d3bad1140d79e7904a4555830e64cc2c28138cccc0042ae2"}, "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json": {"bytes": 927, "git_blob": "63ea9f95a751d72a16d3ed26623b44f9b16a7341", "sha256": "24cbfae65f9a70ea100a2243823e3fffb6ea0a1a33667f568c943be37a86694c"}, "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md": {"bytes": 4928, "git_blob": "4072362ce395408115b8e0066f630b750707cc9a", "sha256": "476c1a87cbecde6ae0f65e9fd275bce7c737145b60e2aec2a5cfcc5b80957d40"}, "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json": {"bytes": 172329, "git_blob": "5755ebae887e933e6b86dfcefa0ba419eaf4c456", "sha256": "dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de"}, "Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json": {"bytes": 10795, "git_blob": "e5b39921c7c2b2812dc752ebd9b46e18eefe62d3", "sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1"}}, "source_commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae", "source_fingerprint": "295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317", "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c", "tool_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d"}')
+BASE = Path('/media/user/Data/TimeLearnerRefactor')
+TOOL = BASE/'source-channel-lt-overview-tool-m40-a2'
+SOURCE = BASE/'source-collector-input-capabilities-m40-a1'
+PLAN = BASE/'plan-collector-input-capabilities65-m40-a1'
+JOB = BASE/'readbacks/s10-collector-input-capabilities65-m40-a1'
+STEM = 'Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109'
+ENV = {**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_OPTIONAL_LOCKS': '0',
+       'GIT_CONFIG_NOSYSTEM': '1', 'GIT_CONFIG_GLOBAL': '/dev/null'}
+CAP = 134217728
+FLOOR = 805306368
+
+
+def git(root, *arguments, payload=None):
+    return subprocess.check_output(['git', '-C', str(root), *arguments], input=payload, env=ENV)
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+
+
+def checked_path(path, exists):
+    assert path.is_absolute() and '..' not in path.parts
+    for parent in (path, *path.parents):
+        assert not parent.is_symlink(), str(parent)
+    assert path.resolve(strict=exists) == path
+    assert path.exists() == exists
+
+
+def frozen(path, expected):
+    before = path.lstat()
+    def identity(value):
+        return tuple(getattr(value, key) for key in ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns'))
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and before.st_size == expected['bytes']
+    with path.open('rb') as stream:
+        assert identity(os.fstat(stream.fileno())) == identity(before)
+        raw = stream.read(expected['bytes']+1)
+        assert identity(os.fstat(stream.fileno())) == identity(before)
+    assert identity(path.lstat()) == identity(before)
+    assert len(raw) == expected['bytes'] and hashlib.sha256(raw).hexdigest() == expected['sha256']
+    return raw
+
+
+def allocated():
+    result = 0
+    for root in (SOURCE, PLAN):
+        if not root.exists():
+            continue
+        for parent, directories, files in os.walk(root, followlinks=False):
+            for name in [*directories, *files]:
+                entry = Path(parent)/name
+                status = entry.lstat()
+                assert not stat.S_ISLNK(status.st_mode)
+                result += status.st_blocks*512
+    return result
+
+
+def projection(root, commit, patterns):
+    checked_path(root, True)
+    checked_path(root/'.git', True)
+    assert git(root, 'rev-parse', 'HEAD').decode().strip() == commit
+    assert not git(root, 'status', '--porcelain', '--untracked-files=all', '--ignore-submodules=all').strip()
+    assert not (root/'.git/objects/info/alternates').exists()
+    remote = subprocess.run(['git', '-C', str(root), 'config', '--get-regexp', r'^remote\..*\.url$'], env=ENV, capture_output=True)
+    assert remote.returncode == 1 and not remote.stdout and not remote.stderr
+    actual_patterns = git(root, 'sparse-checkout', 'list').decode().splitlines()
+    assert actual_patterns == patterns
+    gitlinks = {}
+    for row in git(root, 'ls-tree', '-r', commit).splitlines():
+        header, relative = row.split(b'\t', 1)
+        mode, kind, oid = header.split()
+        if mode == b'160000':
+            assert kind == b'commit'
+            name = relative.decode();gitlinks[name] = oid.decode()
+            assert not (root/name).exists() and not (root/name).is_symlink()
+    return {'commit': commit, 'sparse_patterns': actual_patterns,
+            'standalone': True, 'alternates': False, 'gitlinks_metadata_only':gitlinks,
+            'SDK_gitlinks_materialized': False}
+
+
+assert socket.gethostname() == 'M40' and Path.cwd() == TOOL
+for path in (BASE, TOOL, BASE/'readbacks'):
+    checked_path(path, True)
+for path in (SOURCE, PLAN):
+    checked_path(path, True)
+checked_path(JOB, False)
+for name in ('suite.json', 'request.json', 'prepared-metadata.json'):
+    checked_path(PLAN/name, False)
+free_before = shutil.disk_usage(BASE).free
+memory = int(next(line.split()[1] for line in Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemAvailable:')))*1024
+assert free_before >= FLOOR and memory >= FLOOR
+registry = Reservations.open_existing(BASE/'resource-reservations.sqlite3')
+assert not registry.managed_units, 'preparation needs separate review if registry managed-unit policy changed'
+resources = [{'path': str(TOOL), 'access': 'read'}, {'path': str(SOURCE), 'access': 'read'}, {'path': str(PLAN), 'access': 'write'}]
+lease = registry.reserve('collector65-source-plan-prep-m40-a1', resources, ttl_seconds=120,
+                         demands={'slots': 1, 'memory_bytes': CAP, 'disk_bytes': CAP} if registry.capacity is not None else None)
+stop = threading.Event()
+errors = []
+
+
+def heartbeat():
+    while not stop.wait(10):
+        try:
+            registry.heartbeat(lease['token'], ttl_seconds=120)
+            registry.validate_paths(lease['token'])
+            assert shutil.disk_usage(BASE).free >= FLOOR
+        except BaseException as error:
+            errors.append(repr(error))
+            return
+
+
+thread = threading.Thread(target=heartbeat, daemon=True)
+thread.start()
+started = time.monotonic()
+passed = False
+try:
+    registry.validate_paths(lease['token'])
+    tool_before = _source_snapshot(TOOL, BINDING['tool_commit'])
+    tool_package = {p.removeprefix('Scripts/StructTrain/TimeLearner/'): r['sha256'] for p, r in tool_before['files'].items()
+                    if p.startswith('Scripts/StructTrain/TimeLearner/') and p.endswith('.py')}
+    assert len(tool_before['files']) == 632 and len(tool_package) == 441 and digest(tool_package) == BINDING['tool_fingerprint']
+    controls = ['/.gitattributes', '/.gitignore', '/.gitmodules']
+    source_projection = projection(SOURCE, BINDING['source_commit'], ['/Scripts/', *controls])
+    assert allocated() <= CAP and shutil.disk_usage(BASE).free >= FLOOR and not errors
+    plan_projection = projection(PLAN, BINDING['plan_commit'], ['/'+p for p in BINDING['plan_files']]+controls)
+    for path, binding in BINDING['plan_files'].items():
+        raw = frozen(PLAN/path, binding)
+        assert raw == git(PLAN, 'show', BINDING['plan_commit']+':'+path)
+        assert git(PLAN, 'rev-parse', BINDING['plan_commit']+':'+path).decode().strip() == binding['git_blob']
+    prep = json.loads((PLAN/(STEM+'.json')).read_bytes())
+    for key in ('source_manifest', 'suite', 'request', 'dependencies'):
+        declaration = prep[key]
+        assert declaration['bytes'] == BINDING['plan_files'][declaration['path']]['bytes']
+        assert declaration['sha256'] == BINDING['plan_files'][declaration['path']]['sha256']
+    manifest = json.loads((PLAN/(STEM+'.source-manifest.json')).read_bytes())
+    expected_scripts = {p:r for p,r in manifest['records'].items() if p.startswith('Scripts/')}
+    source_snapshot = _source_snapshot(SOURCE, BINDING['source_commit'])
+    assert set(source_snapshot['files']) == set(expected_scripts) and len(source_snapshot['files']) == 635
+    for path, binding in manifest['records'].items():
+        assert frozen(SOURCE/path, binding) == git(SOURCE, 'show', BINDING['source_commit']+':'+path)
+        assert git(SOURCE, 'rev-parse', BINDING['source_commit']+':'+path).decode().strip() == binding['git_blob']
+        if path.startswith('Scripts/'):
+            assert source_snapshot['files'][path]['git_blob'] == binding['git_blob']
+    for path in manifest['control_files']:
+        binding = manifest['records'][path]
+        assert frozen(PLAN/path, binding) == git(PLAN, 'show', BINDING['plan_commit']+':'+path)
+    package = {p.removeprefix('Scripts/StructTrain/TimeLearner/'): r['sha256'] for p, r in source_snapshot['files'].items()
+               if p.startswith('Scripts/StructTrain/TimeLearner/') and p.endswith('.py')}
+    assert len(package) == 444 and digest(package) == BINDING['source_fingerprint']
+    suite = json.loads((PLAN/(STEM+'.suite.json')).read_bytes())
+    request = json.loads((PLAN/(STEM+'.request.json')).read_bytes())
+    assert len(suite['expected_test_ids']) == len(set(suite['expected_test_ids'])) == 65
+    assert suite['fixtures'] == request['operation']['fixtures'] == {}
+    assert request['operation']['suite']['sha256'] == prep['suite']['sha256']
+    for suffix, target in [('.suite.json', 'suite.json'), ('.request.json', 'request.json')]:
+        raw = git(PLAN, 'show', BINDING['plan_commit']+':'+STEM+suffix)
+        with (PLAN/target).open('xb') as stream:
+            stream.write(raw);stream.flush();os.fsync(stream.fileno())
+    assert _source_snapshot(SOURCE, BINDING['source_commit']) == source_snapshot
+    assert _source_snapshot(TOOL, BINDING['tool_commit']) == tool_before
+    assert not any((SOURCE/p).exists() or (SOURCE/p).is_symlink() for p in ('Docs', 'Reports', 'Pulse', 'PulseLib', 'Rdk', 'Bin'))
+    assert not JOB.exists() and not JOB.is_symlink()
+    assert allocated() <= CAP and shutil.disk_usage(BASE).free >= FLOOR and not errors
+    registry.validate_paths(lease['token'])
+    passed = True
+finally:
+    stop.set();thread.join(timeout=15)
+    assert not thread.is_alive()
+    registry.release(lease['token'], note='collector65 metadata Git source/plan preparation closed; no kernel unit, validation, SDK or scientific work started')
+    lease_after = next(v for v in registry.inspect()['leases'] if v['token'] == lease['token'])
+    assert lease_after['state'] == 'released' and lease_after['job_id'] == lease['job_id'] and lease_after['owner'] == lease['owner']
+    receipt = {'kind':'collector_capabilities65_server_preparation', 'schema_version':1,
+               'status':'prepared_not_dispatched' if passed else 'failed_preparation_no_dispatch',
+               'binding':BINDING, 'elapsed_seconds':time.monotonic()-started, 'source_SDK_scope':False,
+               'tests_dispatched':False, 'kernel_units_dispatched':False, 'native_work_dispatched':False,
+               'source_scripts':635 if passed else None, 'source_package_python_files':444 if passed else None,
+               'source_package_fingerprint':digest(package) if passed else None, 'expected_tests':65,
+               'source_projection':source_projection if passed else None, 'plan_projection':plan_projection if passed else None,
+               'prep_lease':lease, 'prep_lease_after':lease_after, 'registry_capacity':registry.capacity,
+               'free_before_bytes':free_before, 'free_after_bytes':shutil.disk_usage(BASE).free,
+               'MemAvailable_before_bytes':memory, 'allocated_source_plan_bytes':allocated(),
+               'allocation_cap_bytes':CAP, 'physical_floor_bytes':FLOOR, 'heartbeat_errors':errors,
+               'job_root_absent':not JOB.exists(), 'scientific_verdict':None}
+    if PLAN.is_dir():
+        with (PLAN/'prepared-metadata.json').open('x', encoding='utf-8') as stream:
+            json.dump(receipt, stream, indent=2, allow_nan=False);stream.write('\n');stream.flush();os.fsync(stream.fileno())
+    print(json.dumps(receipt, sort_keys=True, allow_nan=False), flush=True)
+
+PY

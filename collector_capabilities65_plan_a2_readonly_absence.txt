@@ -1,0 +1,11 @@
+set -eu
+/usr/bin/python3.12 -B - <<'PY'
+from pathlib import Path
+import json,socket
+B=Path('/media/user/Data/TimeLearnerRefactor');P=B/'plan-collector-input-capabilities65-m40-a2';J=B/'readbacks/s10-collector-input-capabilities65-m40-a1'
+assert socket.gethostname()=='M40'
+for path in (B,B/'source-collector-input-capabilities-m40-a1',B/'plan-collector-input-capabilities65-m40-a1'):
+ assert path.is_dir() and path.resolve()==path and all(not p.is_symlink() for p in (path,*path.parents))
+for path in (P,J):assert not path.exists() and not path.is_symlink() and path.resolve()==path
+print(json.dumps({'kind':'collector65_fresh_PLAN_A2_absence_preflight','new_plan':str(P),'job':str(J),'both_absent':True,'writes':False,'tests_dispatched':False}))
+PY

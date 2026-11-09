@@ -1,0 +1,34 @@
+set -eu
+cd /media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2
+/usr/bin/python3.12 -B - <<'PY'
+import hashlib,json,os,pathlib,shutil,socket,subprocess,sys
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+base=pathlib.Path('/media/user/Data/TimeLearnerRefactor')
+tool=base/'source-channel-lt-overview-tool-m40-a2'
+paths=[base/'source-collector-input-capabilities-m40-a1',base/'plan-collector-input-capabilities65-m40-a1',base/'readbacks/s10-collector-input-capabilities65-m40-a1']
+assert socket.gethostname()=='M40' and pathlib.Path.cwd()==tool
+for root in (base,tool,base/'readbacks'):
+    assert root.is_dir() and root.resolve()==root and all(not p.is_symlink() for p in (root,*root.parents))
+for path in paths:
+    assert not path.exists() and not path.is_symlink() and path.resolve()==path
+env={**os.environ,'GIT_NO_LAZY_FETCH':'1','GIT_OPTIONAL_LOCKS':'0'}
+def git(*args):return subprocess.check_output(['git','-C',str(tool),*args],env=env)
+assert git('rev-parse','HEAD').decode().strip()=='cec33f2fcceb8c8f815e3494173bf48dcd39ed6c'
+assert not git('status','--porcelain','--untracked-files=all','--ignore-submodules=all').strip()
+registry=Reservations.open_existing(base/'resource-reservations.sqlite3');view=registry.inspect()
+assert not registry.managed_units,'policy changed; preparation needs separate review'
+def overlap(a,b):
+    a,b=pathlib.Path(a),pathlib.Path(b)
+    return a==b or a.is_relative_to(b) or b.is_relative_to(a)
+held=[r for r in view['leases'] if r['state']=='held']
+resources=[{'path':str(p),'access':'write'} for p in paths]+[{'path':str(tool),'access':'read'}]
+conflicts=[{'token':r['token'],'job_id':r['job_id'],'resource':p,'planned':want} for r in held for p in r['resources'] for want in resources if overlap(p['canonical_path'],want['path']) and 'write' in (p['access'],want['access'])]
+assert not conflicts
+free=shutil.disk_usage(base).free
+mem=int(next(line.split()[1] for line in pathlib.Path('/proc/meminfo').read_text().splitlines() if line.startswith('MemAvailable:')))*1024
+assert free>=805306368 and mem>=805306368
+if registry.capacity is not None:
+    assert view['available']['slots']>=1 and view['available']['memory_bytes']>=536870912 and view['available']['disk_bytes']>=134217728
+runtime=pathlib.Path(sys.executable).resolve(strict=True)
+print(json.dumps({'kind':'collector65_readonly_preparation_discovery','host':socket.gethostname(),'tool_commit':'cec33f2fcceb8c8f815e3494173bf48dcd39ed6c','new_paths_absent':[str(p) for p in paths],'planned_resources':resources,'overlapping_held_leases':conflicts,'held_leases':held,'registry_capacity':registry.capacity,'registry_available':view.get('available'),'free_bytes':free,'MemAvailable_bytes':mem,'runtime':{'requested':'/usr/bin/python3.12','actual':str(runtime),'bytes':runtime.stat().st_size,'sha256':hashlib.sha256(runtime.read_bytes()).hexdigest(),'version':sys.version},'writes':False,'tests_dispatched':False,'kernel_units_dispatched':False,'scientific_verdict':None},sort_keys=True))
+PY

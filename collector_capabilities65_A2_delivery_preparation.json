@@ -1,0 +1,70 @@
+{
+  "kind": "collector_capabilities65_fresh_A2_preparation",
+  "schema_version": 1,
+  "source_commit": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+  "source_path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+  "source_retransferred": false,
+  "plan_commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+  "helper_parameters_no_credentials": {
+    "host": "10.245.1.17",
+    "commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+    "destination": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+    "pack": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\collector_capabilities65_plan884dad_a2.pack",
+    "patterns": [
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+      "/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+      "/.gitattributes",
+      "/.gitignore",
+      "/.gitmodules"
+    ]
+  },
+  "helper": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\timelearner_deliver_empty_private_source_v2.py",
+  "helper_sha256": "87ee30282b008f7e2d8870565f6b2532bcf3a907833c81add36e216474b58bc4",
+  "plan_pack": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\collector_capabilities65_plan884dad_a2.pack",
+    "bytes": 2164687,
+    "sha256": "7fef1e8064b55f5c6629a27c7f660d4a0c65ecf8f7386bc949754a94f2c48028",
+    "objects": 3847
+  },
+  "readonly_absence_command": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\collector_capabilities65_plan_a2_readonly_absence.txt",
+    "bytes": 750,
+    "sha256": "724deab05be9c24655fa5e4015348d5b1ca807f1dbfec347b819de9de906a26a"
+  },
+  "preparation_command": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\collector_capabilities65_prepare_after_delivery_a2.txt",
+    "bytes": 18482,
+    "sha256": "112bff40b66cc48450e3ae4c676a33a9e2ae9abf70cd77efd8f33b28c2f3b89b"
+  },
+  "focused_diff": {
+    "path": "C:\\Users\\Bakhshiev\\AppData\\Local\\Temp\\collector_capabilities65_prepare_a2.focused.diff",
+    "bytes": 6227,
+    "sha256": "bd903d69c19d170637a9ee60c394325b969e26505a677bc9d96e13ad97841d87"
+  },
+  "suite_sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1",
+  "request_sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81",
+  "source_manifest_sha256": "dd623cfc5a7bd7088f684b9dae433d1cc5b32255fea75b2fb3985305680126de",
+  "new_prep_job": "collector65-source-plan-prep-m40-a2",
+  "original_failure_receipt": {
+    "path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1/prepared-metadata.json",
+    "bytes": 5993,
+    "sha256": "90bbdfa3355b34846671c90b5edf51ee1625c5a1206d426d433fff1f6a011225"
+  },
+  "original_A1_immutable_files": 10,
+  "tests": 65,
+  "old39_new26_unchanged": true,
+  "package_fingerprint": "295a7335089c7cab55f4efb9fefbd0952d2598a478d561a2d7535fd5258f8317",
+  "test_limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240
+  },
+  "external_fixtures": {},
+  "dispatch_state": "not_dispatched",
+  "tests_executed_locally": false,
+  "scientific_verdict": null
+}
