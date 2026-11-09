@@ -1020,8 +1020,9 @@ template<class Owner> void SaveCompositeBoundary(NativeCompositeFixture<Owner>& 
         write("runtime-plan.json",EncodeCompositeRuntimePlan(service.Plan()));
     } else if(service.Plan().protocol.schemaVersion==5) {
         write("initial-configuration.json",service.CompositeInitialConfiguration());
-        write("runtime-plan-scope.json",{{"kind","native_candidate_window_service_runtime_scope"},{"schema_version",1},
-            {"runtime_plan2_exported",false},{"reason","separate runtime2/package6 codec stage pending"}});
+        // The successfully started service owns both documents. Manual actors
+        // without a service5 plan deliberately do not acquire these files.
+        write("runtime-plan.json",EncodeCandidateWindowRuntimePlan(service.Plan()));
     }
     QJsonObject boundary{
         {"kind","native_composite_fixture_actual_boundary"},{"schema_version",1},{"neuron",snapshot},
@@ -2523,6 +2524,9 @@ template<class Owner> NativeTrainingPlan ActualWindowServicePlan(NativeComposite
 template<class Owner> void SaveWindowService(NativeCompositeFixture<Owner>& f,const std::string& stage) {
     const auto name=std::string(NativeCompositeFixture<Owner>::branch?"branch-native-window-service5/":"classic-native-window-service5/")+stage;
     const auto& service=f.owner->NativeTrainingController();const auto archive=EncodeNativeCandidateWindowServiceArchive(service);
+    const auto runtime=EncodeCandidateWindowRuntimePlan(service.Plan());
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(runtime,service.Plan().protocol)),runtime);
+    EXPECT_EQ(runtime["run_id"],QString::fromStdString(service.Configuration().runId));
     SaveCompositeArchive(archive,name.c_str());SaveCompositeBoundary(f,name.c_str());QJsonArray evidence,domains,references;
     if(service.References())for(const auto& r:service.References()->Inputs())references.append(QJsonObject{{"input_id",QString::fromStdString(r.id)},
         {"group_id",QString::fromStdString(r.measurementGroupId)},{"semantic_proof_id",QString::fromStdString(r.semanticProofId)},{"actual_raw_target",r.rawPotential}});
