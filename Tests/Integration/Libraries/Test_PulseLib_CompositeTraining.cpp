@@ -3343,6 +3343,12 @@ template<class Owner> void SaveWindowPackage(NativeCompositeFixture<Owner>& f,co
         {"native_package6_exported",true},{"runtime_plan2_exported",true},{"state_summary7_exported",true},
         {"Console_execution4_exported",false},{"Python_package6_audited",false},{"scientific_acceptance",false}});
 }
+std::string LivePackageComponentXml(const UEPtr<UNet>& component) {
+    Require(bool(component),"package_export_live_component_missing");USerStorageXML xml;std::string bytes;
+    Require(xml.Create("PackageExportLiveGuard") && component->SaveComponent(&xml,true,ptPubParameter|ptPubState|pgSystem),
+        "package_export_live_component_save");
+    xml.SelectRoot();Require(xml.Save(bytes),"package_export_live_component_xml");return bytes;
+}
 template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource kind=WindowPackageSource::Complete) {
     static std::map<WindowPackageSource,QJsonObject> packages;const auto found=packages.find(kind);if(found!=packages.end())return found->second;
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigureWindowPackageCold(f,kind);
@@ -3363,7 +3369,12 @@ template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource
     if(completed)Require(service.Certificate() && service.Outcome()==TrainingStatus::Exact,"window_package_source_not_completed");
     else {Require(!service.Certificate(),"window_package_stopped_source_has_certificate");
         if(kind!=WindowPackageSource::DefaultSync)Require(stopped,"window_package_stop_control_not_reached");}
+    const auto liveNeuron=f.owner->template GetComponentL<UNet>("Neuron",true);
+    const auto liveDataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
+    const auto neuronBefore=LivePackageComponentXml(liveNeuron),datasetBefore=LivePackageComponentXml(liveDataset);
     const auto package=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    EXPECT_EQ(LivePackageComponentXml(liveNeuron),neuronBefore)<<"export must reset its private copy, not live neuron dynamics";
+    EXPECT_EQ(LivePackageComponentXml(liveDataset),datasetBefore)<<"export must not reset the live stimulus clock or generator";
     Require(package["schema_version"]==QJsonValue(6),"window_package_public_dispatch_not_schema6");
     WindowPackageSummaries<Owner>().emplace(kind,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
     SaveWindowPackage(f,"source-"+std::to_string(int(kind)),package);return packages.emplace(kind,package).first->second;
