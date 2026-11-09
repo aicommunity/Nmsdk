@@ -279,17 +279,19 @@ def validate_original_roles(original_paths, regular_files):
 
 
 def collect(manifest_path, manifest_sha256):
-    manifest, raw, record = _read(manifest_path, 1024**2)
+    manifest, raw, record = _read(manifest_path, 2*1024**2)
     require(record['sha256'] == manifest_sha256, 'native_collection_manifest_digest')
     version = manifest.get('schema_version')
     _keys(manifest, 'kind schema_version tool base output repository parent collection_id original_paths '
           'readonly_inventory regular_files original_outcome children bounds supervisor_dialect old_lease_token scientific_verdict' +
-          (' incomplete_children' if version == 2 else ''),
+          (' incomplete_children' if version in (2, 3) else ''),
           'native_collection_manifest_schema')
     require(manifest['kind'] == 'timelearner_closed_native_acceptance_collection' and
-            type(version) is int and version in (1, 2) and
+            type(version) is int and version in (1, 2, 3) and
             manifest['scientific_verdict'] is None and manifest['supervisor_dialect'] == 'owned-native-json-lines-v1',
             'native_collection_manifest_version')
+    require(len(raw) <= (2 if version == 3 else 1)*1024**2,
+            'native_collection_manifest_size_limit')
     require(Path(manifest['tool']['path']) == ROOT, 'native_collection_tool_namespace')
     tool_before = owned_python_job._source_snapshot(ROOT, manifest['tool']['commit'])
     base = provenance._canonical(Path(manifest['base']))
@@ -302,16 +304,22 @@ def collect(manifest_path, manifest_sha256):
             'native_collection_evidence_parent')
     inventory = manifest['readonly_inventory']
     observation = read_readonly_inventory(inventory)
+    if version == 3:
+        require(observation.get('children') == manifest['children'], 'native_collection_observed_child_map_changed')
+    else:
+        require(type(observation.get('leaf')) is dict, 'native_collection_legacy_leaf_observation_missing')
     bounds = manifest['bounds']
-    require(bounds == {'maximum_capture_bytes': (64 if version == 1 else 256)*1024**2,
-                       'maximum_output_bytes': (128 if version == 1 else 512)*1024**2,
+    # Schema3 preserves the full 348 MB native119 A2 negative run. Earlier
+    # profiles retain their exact limits; no originals are omitted to fit them.
+    require(bounds == {'maximum_capture_bytes': {1:64, 2:256, 3:512}[version]*1024**2,
+                       'maximum_output_bytes': {1:128, 2:512, 3:1024}[version]*1024**2,
                        'minimum_free_bytes': 512*1024**2}, 'native_collection_fixed_copy_bounds')
     validate_original_roles(manifest['original_paths'], manifest['regular_files'])
     _check_original(manifest, observation)
     declarations = list(manifest['regular_files'])
     for role, path, archive in [('frozen-manifest', Path(manifest_path), 'observer/frozen-inputs.json'),
                                 ('readonly-inventory', Path(inventory['path']), 'observer/readonly-inventory.json.gz')]:
-        _, entry = provenance._frozen(path, 1024**2)
+        _, entry = provenance._frozen(path, (2 if version == 3 and role == 'frozen-manifest' else 1)*1024**2)
         declarations.append(dict(role=role, root=str(path.parent), relative_path=path.name, expected_bytes=entry['bytes'],
             expected_sha256=entry['sha256'], maximum_bytes=max(entry['bytes'], 1), staged_name=role+'.dat', archive_path=archive))
     requirements = [provenance.RequiredFileRole(**{k: (Path(v) if k == 'root' else v)
@@ -326,7 +334,8 @@ def collect(manifest_path, manifest_sha256):
     require(not registry.managed_units, 'native_collection_managed_registry_unsupported')
     lease = registry.reserve(manifest['collection_id'], [{'path': str(output), 'access': 'write'}]+
         [{'path': p, 'access': 'read'} for p in sorted(read_roots)], ttl_seconds=120,
-        demands={'slots': 1, 'memory_bytes': 512*1024**2, 'disk_bytes': bounds['maximum_output_bytes']}
+        demands={'slots': 1, 'memory_bytes': (1024 if version == 3 else 512)*1024**2,
+                 'disk_bytes': bounds['maximum_output_bytes']}
         if registry.capacity is not None else None)
     stopped, errors = threading.Event(), []
 
@@ -348,9 +357,16 @@ def collect(manifest_path, manifest_sha256):
         proof = dict(kind='closed_native_acceptance_capture', schema_version=version, capture_status='prepared_only',
             original_outcome=manifest['original_outcome'], regular_capture_descriptor=captured.descriptor,
             links_no_follow=observation['retained_symlinks_no_follow'], original_outer=observation['outer'],
-            original_leaf=observation['leaf'], original_released_lease=observation['released_original_lease'],
+            original_released_lease=observation['released_original_lease'],
             own_reservation=lease, collector_tool_snapshot=tool_before, original_model_JSON_CSV_rewritten=False,
             supervisor_dialect=manifest['supervisor_dialect'], capture_owned_supervisor_used=False, scientific_verdict=None)
+        if version == 3:
+            proof['original_children']={name:contained_process.inspect(row['directory'])
+                                        for name,row in manifest['children'].items()}
+            require(all(value['all_processes_closed'] is True and value['binding'] == manifest['children'][name]['binding']
+                        for name,value in proof['original_children'].items()), 'native_collection_proof_child_not_closed')
+        else:
+            proof['original_leaf']=observation['leaf']
         markers._write(output/'capture-proof.json', proof); sources['observer/capture-proof.json'] = output/'capture-proof.json'
         expanded = sum(p.stat().st_size for p in sources.values())
         require(expanded <= bounds['maximum_capture_bytes'], 'native_collection_expanded_budget')
