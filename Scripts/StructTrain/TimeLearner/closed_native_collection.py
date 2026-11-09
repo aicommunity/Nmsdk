@@ -129,6 +129,61 @@ def _source_namespace(root, expected):
                 'native_collection_source_bytes_changed')
 
 
+def verify_native_observations(output, runplan, children, incomplete_children=None):
+    """Read actual JUnit, or retain a declared closed timeout with no XML.
+
+    Ownership/kernel closure are checked independently by verify_child_records.
+    This function never completes an expected ID from a process exit or plan.
+    Schema1 callers omit incomplete_children and keep their original contract.
+    """
+    selected = {r['name']: r['expected_ids'] for r in runplan}
+    incomplete_children = {} if incomplete_children is None else incomplete_children
+    require(type(incomplete_children) is dict and set(incomplete_children) <= set(children),
+            'native_collection_incomplete_child_scope')
+    actual, failed = [], []
+    for name in children:
+        require(name in selected, 'native_collection_child_outside_plan')
+        if name in incomplete_children:
+            declaration = incomplete_children[name]
+            _keys(declaration, 'execution gate_reason junit_state record_state',
+                  'native_collection_incomplete_child_schema')
+            require(declaration['execution'] == 'timeout' and declaration['junit_state'] == 'missing' and
+                    declaration['record_state'] in ('missing', 'present'),
+                    'native_collection_incomplete_child_contract')
+            gate, _, _ = _read(output/(name+'-result.json'))
+            copied, _, _ = _read(output/name/'result.json')
+            process, _, _ = _read(output/name/'process/result.json')
+            require(gate == copied and gate['execution'] == declaration['execution'] and
+                    gate['reason'] == declaration['gate_reason'] and
+                    gate['validity'] == 'incomplete_test_observation' and
+                    gate['assertion_status'] == 'not_assessed' and gate['inventory'] is None and
+                    gate['scientific_verdict'] is None and
+                    process['execution'] == 'timeout' and process['all_processes_closed'] is True,
+                    'native_collection_timeout_outcome_changed')
+            require(not (output/name/'native.xml').exists(), 'native_collection_timeout_xml_state_changed')
+            record_path = output/(name+'-actual-tests.json')
+            require(record_path.exists() == (declaration['record_state'] == 'present'),
+                    'native_collection_timeout_record_state_changed')
+            if record_path.exists():
+                record, _, _ = _read(record_path)
+                require(record['source'] == 'native.xml' and
+                        record['observed_ids'] == record['failed_ids'] == record['not_completed_ids'] == [] and
+                        record['unobserved_expected_ids'] == selected[name] and
+                        record['gate_execution'] == gate['execution'] and
+                        record['gate_validity'] == gate['validity'] and record['gate_reason'] == gate['reason'] and
+                        record['observation_error']['type'] == 'FileNotFoundError' and
+                        record['scientific_verdict'] is None, 'native_collection_timeout_invented_cpp_observation')
+            continue
+        record, _, _ = _read(output/(name+'-actual-tests.json'))
+        require(record['source'] == 'native.xml' and
+                observed_junit(output/name/'native.xml') ==
+                (record['observed_ids'], record['failed_ids'], record['not_completed_ids']),
+                'native_collection_actual_junit_changed')
+        require(record['not_completed_ids'] == [], 'native_collection_incomplete_cpp_case')
+        actual += record['observed_ids']; failed += record['failed_ids']
+    return actual, failed
+
+
 def _check_original(manifest, observation):
     paths = {k: provenance._canonical(Path(v)) for k, v in manifest['original_paths'].items()}
     output, controller = paths['native-output'], paths['controller']
@@ -140,8 +195,9 @@ def _check_original(manifest, observation):
             terminal['actual_audited_assertion_passed_cpp_cases'] == outcome['passed'] and
             terminal['actual_audited_failed_cpp_ids'] == outcome['failed_ids'] and
             terminal['scientific_verdict'] is None, 'native_collection_original_outcome_changed')
+    pending = outcome['not_run_ids'] if manifest['schema_version'] == 1 else outcome['not_completed_ids']
     require(outcome['executed'] == outcome['passed']+len(outcome['failed_ids']) and
-            outcome['planned'] == outcome['executed']+len(outcome['not_run_ids']),
+            outcome['planned'] == outcome['executed']+len(pending),
             'native_collection_original_count_mismatch')
     controller_state = owned_native_job.status(controller)
     require(not controller_state['supervisor_live'] and not controller_state['unbound_outer_intent'] and
@@ -151,19 +207,11 @@ def _check_original(manifest, observation):
     verify_child_records(controller, output, manifest['children'], observation['outer']['binding'])
     prepared, _, _ = _read(output/'canonical-preparation.json')
     selected = [i for leaf in prepared['current']['runplan'] for i in leaf['expected_ids']]
-    actual = []
-    failed = []
-    for name in manifest['children']:
-        record, _, _ = _read(output/(name+'-actual-tests.json'))
-        require(record['source'] == 'native.xml' and
-                observed_junit(output/name/'native.xml') ==
-                (record['observed_ids'], record['failed_ids'], record['not_completed_ids']),
-                'native_collection_actual_junit_changed')
-        require(record['not_completed_ids'] == [], 'native_collection_incomplete_cpp_case')
-        actual += record['observed_ids']; failed += record['failed_ids']
+    actual, failed = verify_native_observations(output, prepared['current']['runplan'], manifest['children'],
+        manifest.get('incomplete_children'))
     require(len(selected) == len(set(selected)) == outcome['planned'] and
             len(actual) == len(set(actual)) == outcome['executed'] and failed == outcome['failed_ids'] and
-            [i for i in selected if i not in actual] == outcome['not_run_ids'],
+            [i for i in selected if i not in actual] == pending,
             'native_collection_actual_cpp_inventory_changed')
     rows = [r for r in Reservations.read_snapshot(Path(manifest['base'])/'resource-reservations.sqlite3')['leases']
             if r['token'] == manifest['old_lease_token']]
@@ -233,11 +281,13 @@ def validate_original_roles(original_paths, regular_files):
 def collect(manifest_path, manifest_sha256):
     manifest, raw, record = _read(manifest_path, 1024**2)
     require(record['sha256'] == manifest_sha256, 'native_collection_manifest_digest')
+    version = manifest.get('schema_version')
     _keys(manifest, 'kind schema_version tool base output repository parent collection_id original_paths '
-          'readonly_inventory regular_files original_outcome children bounds supervisor_dialect old_lease_token scientific_verdict',
+          'readonly_inventory regular_files original_outcome children bounds supervisor_dialect old_lease_token scientific_verdict' +
+          (' incomplete_children' if version == 2 else ''),
           'native_collection_manifest_schema')
     require(manifest['kind'] == 'timelearner_closed_native_acceptance_collection' and
-            type(manifest['schema_version']) is int and manifest['schema_version'] == 1 and
+            type(version) is int and version in (1, 2) and
             manifest['scientific_verdict'] is None and manifest['supervisor_dialect'] == 'owned-native-json-lines-v1',
             'native_collection_manifest_version')
     require(Path(manifest['tool']['path']) == ROOT, 'native_collection_tool_namespace')
@@ -253,7 +303,8 @@ def collect(manifest_path, manifest_sha256):
     inventory = manifest['readonly_inventory']
     observation = read_readonly_inventory(inventory)
     bounds = manifest['bounds']
-    require(bounds == {'maximum_capture_bytes': 64*1024**2, 'maximum_output_bytes': 128*1024**2,
+    require(bounds == {'maximum_capture_bytes': (64 if version == 1 else 256)*1024**2,
+                       'maximum_output_bytes': (128 if version == 1 else 512)*1024**2,
                        'minimum_free_bytes': 512*1024**2}, 'native_collection_fixed_copy_bounds')
     validate_original_roles(manifest['original_paths'], manifest['regular_files'])
     _check_original(manifest, observation)
@@ -294,7 +345,7 @@ def collect(manifest_path, manifest_sha256):
         output.mkdir(); identity = (output.stat().st_dev, output.stat().st_ino)
         staged = captured.materialize(output, output/'captured')
         sources = {r['archive_path']: staged['collector-file-inputs/'+r['staged_name']] for r in declarations}
-        proof = dict(kind='closed_native_acceptance_capture', schema_version=1, capture_status='prepared_only',
+        proof = dict(kind='closed_native_acceptance_capture', schema_version=version, capture_status='prepared_only',
             original_outcome=manifest['original_outcome'], regular_capture_descriptor=captured.descriptor,
             links_no_follow=observation['retained_symlinks_no_follow'], original_outer=observation['outer'],
             original_leaf=observation['leaf'], original_released_lease=observation['released_original_lease'],
@@ -321,7 +372,7 @@ def collect(manifest_path, manifest_sha256):
             all(released[0][k] == lease[k] for k in ('token', 'job_id', 'owner', 'resources')) and
             (output.stat().st_dev, output.stat().st_ino) == identity, 'native_collection_final_lease_or_directory')
     provenance._canonical(output)
-    receipt = dict(kind='closed_native_acceptance_preservation_receipt', schema_version=1, collection_status='completed',
+    receipt = dict(kind='closed_native_acceptance_preservation_receipt', schema_version=version, collection_status='completed',
         original_outcome=manifest['original_outcome'], manifest_sha256=record['sha256'], artifact_hashes=artifacts,
         released_collection_lease=released[0], collector_external_cgroup_attested=False, scientific_verdict=None)
     artifacts['verification.json'] = markers._atomic_marker(output/'verification.json', receipt)['sha256']
