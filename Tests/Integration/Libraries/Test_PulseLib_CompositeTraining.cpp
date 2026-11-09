@@ -2425,7 +2425,25 @@ template<class Owner> void ActualCold7AllBaseSchemasHaveOwningNumbers() {
     }
 }
 template<class Owner> void ActualCold7InitialReadback() {
-    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto c=ActualCold7Declaration(f);f.attempt.reset();
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto c=ActualCold7Declaration(f);
+    // A freshly constructed Idle executor has no consumed-probe edit boundary.
+    // Characterize once through the real native scheduler/runner; the actor
+    // consumes all raw results and restores routing before the public edit.
+    ASSERT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);
+    const std::string run="candidate-attempt/capture/1";
+    f.Run(f.Request(0,run,run+"/0"),CompositeMeasurementPurpose::Reference);
+    ASSERT_TRUE(f.attempt->Measurement())<<f.attempt->RejectionReason();
+    ASSERT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Completed);
+    ASSERT_TRUE(f.owner->NativeProbeOwnsControl());ASSERT_TRUE(f.owner->IsNativeProbeAtEditBoundary());
+    ASSERT_FALSE(f.attempt->CandidateWindowReferences());EXPECT_FALSE(f.attempt->Record().consumed);
+    EXPECT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(f.owner->NativeTrainingController().References());EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
+    const auto characterizationGroups=f.attempt->IssuedGroups(),characterizationProbes=f.attempt->IssuedNativeProbes();
+    const auto characterizationSamples=f.attempt->RetainedSamples();
+    ASSERT_EQ(characterizationGroups,1u);ASSERT_EQ(characterizationProbes,f.protocol.inputs.size()+2);
+    EXPECT_EQ(characterizationProbes,f.preparations);EXPECT_GT(characterizationSamples,0u);
+    SaveCandidateWindowGroup(f,"cold7-pre-edit-characterization");f.attempt.reset();
+    ASSERT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Completed);ASSERT_TRUE(f.owner->IsNativeProbeAtEditBoundary());
     for(auto& b:c.search.bounds){b.minimumLength=1;b.maximumLength=8;b.minimumSynapses=1;b.maximumSynapses=3;}
     auto actual=f.owner->ReadNativeParameters();actual[0].length=3;actual[0].synapses=2;
     const auto edit=f.owner->ApplyNativeParameters(actual);ASSERT_EQ(edit.status,NativeEditStatus::Applied)<<edit.reason;
@@ -2435,7 +2453,7 @@ template<class Owner> void ActualCold7InitialReadback() {
     ASSERT_TRUE(wire.value("base_schema_version").isDouble());EXPECT_EQ(wire.value("base_schema_version"),QJsonValue(1));
     EXPECT_EQ(captured.model.inputs[0].attachment,3);EXPECT_EQ(captured.model.inputs[0].synapses,2);
     ASSERT_TRUE(captured.model.inputs[0].resistance);EXPECT_DOUBLE_EQ(*captured.model.inputs[0].resistance,actual[0].resistance);
-    EXPECT_EQ(f.modelSpec.inputs[0].attachment,2);EXPECT_FALSE(f.modelSpec.inputs[0].resistance);
+    EXPECT_EQ(f.modelSpec.inputs[0].attachment,2);EXPECT_EQ(f.modelSpec.inputs[0].synapses,1);EXPECT_FALSE(f.modelSpec.inputs[0].resistance);
     EXPECT_TRUE(captured.search.initialModelRevision.empty());EXPECT_EQ(captured.search.initialModelEpoch,0u);
     EXPECT_FALSE(captured.recordCapacitanceHistory);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
     EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(wire)),wire);
@@ -2445,8 +2463,10 @@ template<class Owner> void ActualCold7InitialReadback() {
     const auto name=NativeCompositeFixture<Owner>::branch?"cold7-native-initial-declarations/branch":"cold7-native-initial-declarations/classic";
     SavePortableObject(name,"initial-configuration.json",wire);SaveCompositeBoundary(f,name);
     SavePortableObject(name,"declaration-scope.json",{{"kind","native_candidate_window_initial_declaration_scope"},{"schema_version",1},
-        {"actual_model_revision",QString::fromStdString(f.Revision())},{"native_groups_issued",0},{"training_executed",false},
-        {"scope","actual initial graph readback and declaration only; no selected peak or certificate"}});
+        {"actual_model_revision",QString::fromStdString(f.Revision())},{"native_groups_issued",double(characterizationGroups)},
+        {"native_probes_issued",double(characterizationProbes)},{"sampled_frames",double(characterizationSamples)},
+        {"characterization_only",true},{"training_executed",false},{"selected_peak_used_for_declaration",false},
+        {"scope","one actual pre-edit characterization supplies the consumed native edit boundary; declaration uses edited physical readback, not its peak; no training certificate"}});
 }
 template<class Owner> void ActualCold7InitialBindingRefusal(bool wrongWindow) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);const auto c=ActualCold7Declaration(f);auto plan=MakeConfiguredNativeTrainingPlan(c);
