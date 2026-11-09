@@ -62,7 +62,9 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
     args = list(arguments)
     if cooperative_capture:
         args.extend(['--timelearner-capture-directory', str(output)])
-    environment = {key: os.environ[key] for key in ('ASAN_OPTIONS', 'TIMELEARNER_EXECUTION_OUTPUT') if key in os.environ}
+    environment = {key: os.environ[key] for key in
+                   ('ASAN_OPTIONS', 'TIMELEARNER_EXECUTION_OUTPUT', 'TIMELEARNER_COMPOSITE_OUTPUT')
+                   if key in os.environ}
     begin = time.monotonic()
     outcome, reason, mappings, mapping_error = 'process_error', 'launch_not_completed', None, None
     provenance, closure, last, binding = 'invalid_or_incomplete_runtime', None, None, None

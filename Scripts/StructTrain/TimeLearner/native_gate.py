@@ -122,7 +122,9 @@ def run_native_gate(specification, output):
     environment = {key: runtime["loader_environment"].get(key)
                    for key in (("PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM") if spec['schema_version'] == 4
                                else ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM"))}
-    environment.update(ASAN_OPTIONS=spec["asan_options"], TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"))
+    environment.update(ASAN_OPTIONS=spec["asan_options"],
+                       TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"),
+                       TIMELEARNER_COMPOSITE_OUTPUT=str(output/"native-composite"))
     with _environment(environment):
         runner, limits = execute, {}
         if spec['schema_version'] == 3:

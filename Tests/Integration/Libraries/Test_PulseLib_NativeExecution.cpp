@@ -32,7 +32,7 @@ using namespace RDK;
 using namespace NMSDK;
 using namespace NMSDK::TimeLearner;
 class NativeLearnerExecution : public ::testing::TestWithParam<std::pair<bool,unsigned>> {};
-enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude,WrongObservationChannel,WrongSoloSelector,TinyPhysicalCapacitance };
+enum class Interference { None,PhysicalReset,SourceAmplitude,SourceFrequency,Pattern,DeleteSynapse,ExternalStop,OwnerBuild,NoopOwnerBuild,PrepareFailure,SampleFailure,RevisionFailure,OwnerUnInit,TinySourceAmplitude,WrongObservationChannel,WrongSoloSelector,TinyPhysicalCapacitance,PreparedCancel };
 
 QJsonObject BoundedProbeArtifact(const PreparedVerificationProbe& context,const ProbeObservation& observation)
 {
@@ -173,7 +173,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     if(observationSchema==6)
     {
         ASSERT_FALSE(mergedBurst);ASSERT_FALSE(boundedTraining);ASSERT_FALSE(sharedVertex);
-        ASSERT_TRUE(interference==Interference::None || interference==Interference::ExternalStop);
+        ASSERT_TRUE(interference==Interference::None || interference==Interference::ExternalStop || interference==Interference::PreparedCancel);
         request.protocolRevision="native_subset_waveform_N"+std::to_string(inputCount)+"_v1";
         spec.stimulusSubset=StimulusSubsetCharacterization{spec.patternHash,inputCount,sourceOrdinals};
         const auto plan=PlanStimulusSubset(isi,sourceOrdinals);QJsonArray presented;
@@ -225,6 +225,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             if(routingChanged)EXPECT_NE(declaration.effectiveModelRevision,base);
             else EXPECT_EQ(declaration.effectiveModelRevision,base);
         }
+        if(interference==Interference::PreparedCancel)learner->CancelNativeProbe("prepared_external_stop");
     };
     request.onSample=[&](const NativeProbeSample& sample) {
         if(interference==Interference::SampleFailure && sampled==10)throw std::runtime_error("injected_sample_failure");
@@ -591,7 +592,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             case Interference::RevisionFailure:revisionFailure=true;break;
             case Interference::OwnerUnInit:learner->UnInit();break;
             case Interference::PrepareFailure:case Interference::SampleFailure:
-            case Interference::WrongObservationChannel:case Interference::WrongSoloSelector:break;
+            case Interference::WrongObservationChannel:case Interference::WrongSoloSelector:case Interference::PreparedCancel:break;
             case Interference::None:break;
             }
         }
@@ -708,7 +709,7 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
     }
     if(interference!=Interference::None && interference!=Interference::NoopOwnerBuild)
     {
-        const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild || interference==Interference::OwnerUnInit
+        const auto expected=interference==Interference::ExternalStop || interference==Interference::OwnerBuild || interference==Interference::OwnerUnInit || interference==Interference::PreparedCancel
             ?NativeProbeStatus::Cancelled:NativeProbeStatus::Rejected;
         EXPECT_EQ(result->status,expected);
         if(result->observation)EXPECT_FALSE(result->observation->valid);
@@ -721,12 +722,17 @@ template<class Learner> void ExecuteProbeThroughLearner(unsigned frequency,Inter
             EXPECT_NE(std::find(result->reasons.begin(),result->reasons.end(),expectedReason),result->reasons.end());
             EXPECT_FALSE(armed);EXPECT_EQ(sampled,0u);
         }
-        if(observationSchema==6 && interference==Interference::ExternalStop)
+        if(observationSchema==6 && (interference==Interference::ExternalStop || interference==Interference::PreparedCancel))
         {
             auto dataset=learner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
             ASSERT_EQ(dataset->MatrixData.GetRows(),int(inputCount));
             for(unsigned i=0;i<inputCount;++i)EXPECT_EQ(dataset->MatrixData(i,0),isi[i]);
             EXPECT_EQ(readRevision(),base);EXPECT_EQ(learner->DendriteLength.GetData(),lengths);
+        }
+        if(interference==Interference::PreparedCancel) {
+            EXPECT_TRUE(armed);EXPECT_EQ(sampled,0u);EXPECT_FALSE(learner->TakeNativeProbeResult());
+            EXPECT_NE(std::find(result->reasons.begin(),result->reasons.end(),"prepared_external_stop"),result->reasons.end());
+            EXPECT_EQ(readRevision(),base);
         }
         if(interference==Interference::DeleteSynapse)EXPECT_TRUE(result->currentBaseRevision.empty());
         dynamic_pointer_cast<UNet>(model)->BreakLinks();core.environment->DestroyModel();return;
@@ -1476,3 +1482,8 @@ TEST(NativeDeclaredWindowBasinExecution,ClassicExternalStopBetweenControls){Exec
 TEST(NativeDeclaredWindowBasinExecution,BranchExternalStopBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,0,Interference::ExternalStop);}
 TEST(NativeDeclaredWindowBasinExecution,ClassicPhysicalEditBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearner>(2000,0,Interference::TinyPhysicalCapacitance);}
 TEST(NativeDeclaredWindowBasinExecution,BranchPhysicalEditBetweenControls){ExecuteDeclaredBasin<NNeuronTimeLearnerBranch>(2000,0,Interference::TinyPhysicalCapacitance);}
+
+TEST(NativePreparationCancellation,ClassicCallbackKeepsSingleCancelledResult){ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::PreparedCancel);}
+TEST(NativePreparationCancellation,BranchCallbackKeepsSingleCancelledResult){ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::PreparedCancel);}
+TEST(NativePreparationCancellation,ClassicSubsetRestoresFullPresentation){ExecuteProbeThroughLearner<NNeuronTimeLearner>(2000,Interference::PreparedCancel,2,6,false,false,false,{0});}
+TEST(NativePreparationCancellation,BranchSubsetRestoresFullPresentation){ExecuteProbeThroughLearner<NNeuronTimeLearnerBranch>(2000,Interference::PreparedCancel,2,6,false,false,false,{1});}
