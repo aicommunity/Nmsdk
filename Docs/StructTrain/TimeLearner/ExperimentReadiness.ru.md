@@ -1,5 +1,7 @@
 # Готовность к научным экспериментам — 09.11.2026
 
+[FullSDK canonical принят, native48 запущен](Native48FullSDKCanonicalLaunch-20261109.ru.md):4030files/8repos/29imports сверены, свежая сборка работает на M40. Результата48 ещё нет; service5/package6 и научная серия остаются открыты.
+
 ## Последнее состояние допуска
 
 [Canonical preparation A2](NativeCanonical25A2Outcome-20261109.ru.md) прошла25/25 metadata проверок на M40. Исправлена только test fixture: читаются exact Scripts Git blobs, production canonical/owner не менялись. Предыдущая A1 сохранила13PASS/12not-run и отдельный setup error.

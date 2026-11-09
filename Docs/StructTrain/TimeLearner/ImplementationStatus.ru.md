@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[FullSDK canonical принят, native48 запущен](Native48FullSDKCanonicalLaunch-20261109.ru.md):4030files/8repos/29imports сверены, свежая сборка работает на M40. Результата48 ещё нет; service5/package6 и научная серия остаются открыты.
+
 [Canonical25 A2](NativeCanonical25A2Outcome-20261109.ru.md):25/25PASS на M40, все logIDs/Source/Tool equality и ownclosure/releasedlease сверены Root. Actual full4030 canonical integration и native48 остаются следующими отдельными проверками.
 
 [Canonical25 A1](NativeCanonical25A1Outcome-20261109.ru.md):13 owner PASS,12 новых not-run из-за git archive в fixture; source/tool unchanged, outerclosed и собственный lease released. Готовится test-only исправление, production canonical и native48 пока не приняты.
