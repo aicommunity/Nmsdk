@@ -3368,6 +3368,42 @@ template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource
     WindowPackageSummaries<Owner>().emplace(kind,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
     SaveWindowPackage(f,"source-"+std::to_string(int(kind)),package);return packages.emplace(kind,package).first->second;
 }
+// Keep the strict package equality assertion, but preserve useful field paths:
+// GTest's opaque QJsonObject dump cannot identify an import/export regression.
+void WindowPackageDifferences(const QJsonValue& expected,const QJsonValue& actual,
+    const QString& path,QJsonArray& differences,bool& truncated,unsigned depth=0) {
+    if(expected==actual)return;
+    if(differences.size()>=32){truncated=true;return;}
+    if(depth<16 && expected.isObject() && actual.isObject()) {
+        const auto left=expected.toObject(),right=actual.toObject();std::set<QString> keys;
+        for(const auto& key:left.keys())keys.insert(key);for(const auto& key:right.keys())keys.insert(key);
+        for(const auto& key:keys) {
+            auto escaped=key;escaped.replace("~","~0");escaped.replace("/","~1");
+            WindowPackageDifferences(left.value(key),right.value(key),path+"/"+escaped,differences,truncated,depth+1);
+            if(truncated)return;
+        }
+        return;
+    }
+    if(depth<16 && expected.isArray() && actual.isArray()) {
+        const auto left=expected.toArray(),right=actual.toArray();
+        if(left.size()!=right.size())differences.append(QJsonObject{{"path",path},{"expected_count",left.size()},{"actual_count",right.size()}});
+        for(int i=0;i<std::min(left.size(),right.size());++i) {
+            WindowPackageDifferences(left[i],right[i],path+"/"+QString::number(i),differences,truncated,depth+1);
+            if(truncated)return;
+        }
+        return;
+    }
+    auto bounded=[](const QJsonValue& value)->QJsonValue {
+        if(value.isString() && value.toString().size()>256) {
+            const auto text=value.toString();return QJsonObject{{"type","string"},{"characters",text.size()},
+                {"prefix",text.left(128)},{"suffix",text.right(128)}};
+        }
+        if(value.isObject() || value.isArray())return QJsonObject{{"type",value.isObject()?"object":"array"},{"depth_limit",true}};
+        if(value.isUndefined())return QJsonObject{{"type","missing"}};
+        return value;
+    };
+    differences.append(QJsonObject{{"path",path},{"expected",bounded(expected)},{"actual",bounded(actual)}});
+}
 template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool warm=false) {
     const auto source=ActualWindowPackage<Owner>(asymmetric?WindowPackageSource::AsymmetricC0:WindowPackageSource::Complete);
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.attempt.reset();f.owner->IsNeedToTrain=false;
@@ -3375,7 +3411,17 @@ template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool war
     const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(service.References());ASSERT_TRUE(service.Certificate());
     EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
     EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(service.Search());
-    EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());EXPECT_EQ(f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation),source);
+    EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+    const auto reexport=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    if(reexport!=source) {
+        QJsonArray differences;bool truncated=false;WindowPackageDifferences(source,reexport,"",differences,truncated);
+        const auto name=std::string(NativeCompositeFixture<Owner>::branch?"package6-branch/":"package6-classic/")+
+            (asymmetric?"roundtrip-C0-diagnostics":"roundtrip-diagnostics");
+        SavePortableObject(name.c_str(),"package-differences.json",{{"kind","native_package6_roundtrip_differences"},
+            {"schema_version",1},{"differences",differences},{"truncated",truncated},{"scientific_acceptance",false}});
+        ADD_FAILURE()<<"package6 roundtrip field differences: "<<QJsonDocument(differences).toJson(QJsonDocument::Compact).constData();
+    }
+    EXPECT_EQ(reexport,source);
     EXPECT_EQ(EncodeCandidateWindowRuntimePlan(service.Plan()),source["runtime_plan"].toObject());
     const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());EXPECT_EQ(summary.value("schema_version"),QJsonValue(7));
     EXPECT_EQ(summary.value("search_history_retained"),QJsonValue(false));EXPECT_TRUE(summary.value("search_probes").isNull());
