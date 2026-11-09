@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Package6 reader34 завершён](Package6Reader34Outcome-20261109.ru.md):34/34 PASS на M40, Source/Tool unchanged, исходный completed/0 и последующее отсутствие bound group подтверждены, собственный lease released. Это metadata/DATA проверки, без actual C++ corpus и без научного допуска. Native package6/summary7/execution4 реализованы в отдельной feature-ветке, ещё не приняты сквозной сборкой и Train→Test; поддерживаемые gitlinks не изменены. Ниже сохранены последовательные исторические снимки; их формулировки «ещё не запущен/не опубликован» не заменяют более поздние результаты выше.
+
 [Negative73 collection принят как сохранение FAIL](Negative73MaintainedCollection-20261109.ru.md):original72PASS/1FAIL неизменен; actualCLI/stage/published5 artifacts/55members independently verified. Это закрывает проверку отрицательного collection, не reader defect и не научный допуск.
 
 [Native48 fresh A1 завершён](Native48FreshA1Outcome-20261109.ru.md):сборка успешна,11actual=9PASS/2FAIL,37NOT RUN. Fixture требует consumed-probe boundary; test-onlyfix4d35 подготовлен, не проверен. Outer/leaf closed, собственный lease released. Полная публикация A1 pending; научного допуска нет.
