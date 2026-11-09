@@ -181,6 +181,9 @@ def _check_original(manifest, observation):
         require(provenance._git(repository, 'rev-parse', 'HEAD').decode().strip() == row['head'] and
                 not provenance._git(repository, 'status', '--porcelain', '--untracked-files=no',
                                     '--ignore-submodules=all').strip(), 'native_collection_source_git_changed')
+    actual_cache, _ = provenance._frozen(paths['build']/'CMakeCache.txt', 16*1024**2)
+    saved_cache, _ = provenance._frozen(output/'CMakeCache-terminal.txt', 16*1024**2)
+    require(actual_cache == saved_cache, 'native_collection_saved_build_cache_changed')
     runtime = paths['runtime']
     snapshot = archive_retirement.snapshot(runtime.parent, [runtime.name])
     projected = _regular_projection(snapshot, runtime.name)
@@ -214,10 +217,14 @@ def read_readonly_inventory(inventory):
 
 def validate_original_roles(original_paths, regular_files):
     roots = {original_paths[tag]: tag for tag in ('native-output', 'controller')}
+    if 'build' in original_paths:
+        roots[original_paths['build']] = 'postclosure-build'
     archive_paths = []
     for row in regular_files:
         require(row['root'] in roots and row['archive_path'] == roots[row['root']]+'/'+
                 provenance._relative(row['relative_path']), 'native_collection_original_role_scope')
+        require(roots[row['root']] != 'postclosure-build' or row['relative_path'] == 'CMakeCache.txt',
+                'native_collection_build_role_not_cache')
         archive_paths.append(row['archive_path'])
     require(archive_paths and len(archive_paths) == len(set(archive_paths)),
             'native_collection_original_archive_alias')

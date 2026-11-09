@@ -102,3 +102,12 @@ class ClosedNativeNamespaceTest(unittest.TestCase):
             compressed_sha256=hashlib.sha256(packed).hexdigest(), raw_bytes=len(raw),
             raw_sha256=hashlib.sha256(raw).hexdigest())
         self.assertEqual(read_readonly_inventory(declaration), {'retained': 'original'})
+
+    def test_declared_build_role_allows_only_the_actual_CMake_cache(self):
+        paths = {'native-output': str(self.directory), 'controller': str(self.directory.parent/'controller'),
+                 'build': str(self.directory.parent/'build')}
+        cache = dict(root=paths['build'], relative_path='CMakeCache.txt', archive_path='postclosure-build/CMakeCache.txt')
+        validate_original_roles(paths, [cache])
+        with self.assertRaisesRegex(EvidenceError, 'build_role_not_cache'):
+            validate_original_roles(paths, [dict(root=paths['build'], relative_path='other-file',
+                                                archive_path='postclosure-build/other-file')])
