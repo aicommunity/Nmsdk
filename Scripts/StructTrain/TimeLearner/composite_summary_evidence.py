@@ -29,10 +29,10 @@ def _measurement(records, identity, proof):
     return record
 
 
-def audit_composite_summary(document, package, archive_audit):
+def _audit_summary(document, package, archive_audit, *, schema_version):
     keys(document, FIELDS, 'unknown_composite_summary_fields'); _finite_json(document)
     summary = integral_number_view(document); archive = package['measurement_archive']
-    require(summary['kind'] == 'native_training_state_summary' and count(summary['schema_version']) == 6
+    require(summary['kind'] == 'native_training_state_summary' and count(summary['schema_version']) == schema_version
             and summary['state'] == 'finished' and summary['measurement_method'] == METHOD
             and summary['contains_evaluation_verdict'] is False,
             'composite_summary_schema_state_or_evaluation_claim')
@@ -122,3 +122,7 @@ def audit_composite_summary(document, package, archive_audit):
                 capacitance_candidates=cap_candidates, resistance_domains=domains, native_execution_verified=False,
                 search_decisions_replayed=False, parameter_change_cost_recomputed=False,
                 rejection_reasons_recomputed=False, evaluation_verdict=None)
+
+
+def audit_composite_summary(document, package, archive_audit):
+    return _audit_summary(document, package, archive_audit, schema_version=6)

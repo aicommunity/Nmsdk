@@ -21,7 +21,7 @@ AUDITOR_VERSION = 5
 def audit_learned_state(package: dict[str, Any], summary: dict[str, Any],
                         packets: dict[str, dict[str, Any]],
                         traces: dict[str, Path]) -> dict[str, Any]:
-    if package.get('schema_version') == 5:
+    if package.get('schema_version') in (5,6):
         from .composite_package_evidence import audit_composite_package
         require(package.get('kind') == 'timelearner_completed_state', 'unknown_learned_state_schema')
         require(not packets and not traces, 'composite_package_legacy_primary_overlay')
@@ -98,7 +98,7 @@ def load_case(package_path: Path) -> tuple[dict, dict, dict, dict]:
     require(package_path.name.endswith("_learned_state.json"), "unexpected_package_filename")
     stem = package_path.name.removesuffix("_learned_state.json")
     package = load(package_path)
-    if package.get('schema_version') == 5:
+    if package.get('schema_version') in (5,6):
         summary_path = package_path.with_name(stem + '_learned_summary.json')
         # Embedded N+2 primary is mandatory. Optional summary is an additional
         # assertion, never reconstructed from legacy flat-trial filenames.

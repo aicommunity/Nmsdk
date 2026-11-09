@@ -67,6 +67,9 @@ def _physical_archive(package):
 
 def audit_composite_package(document, summary=None, *, external_resolver=None):
     """Replay embedded groups/certificate; no execution or import is inferred."""
+    if type(document) is dict and document.get('schema_version')==6:
+        from .candidate_window_package_evidence import audit_candidate_window_package
+        return audit_candidate_window_package(document,summary,external_resolver=external_resolver)
     try:
         keys(document,FIELDS,'unknown_composite_package_fields');_finite_json(document)
         require(count(document['schema_version'])==5 and document['sha256']==digest({k:v for k,v in document.items() if k!='sha256'}),

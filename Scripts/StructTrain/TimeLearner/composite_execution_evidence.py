@@ -12,10 +12,11 @@ EXTRA_FIELDS = {'base_schema_version', 'measurement_method', 'measurement_archiv
                 'model_semantic_hash', 'source_origin', 'composite_counters'}
 
 
-def audit_composite_start_failure(execution, directory, names, job):
+def _audit_start_failure(execution, directory, names, job, *, execution_version, configuration_version):
     """A signed pre-source refusal is diagnostic data, never a model package."""
-    require(execution['schema_version'] == 3 and execution['base_schema_version'] == 1
-            and job['schema_version'] == 1 and job['configuration']['schema_version'] == 6
+    require((execution_version,configuration_version) in ((3,6),(4,7)), 'unsupported_execution_configuration_pair')
+    require(execution['schema_version'] == execution_version and execution['base_schema_version'] == 1
+            and job['schema_version'] == 1 and job['configuration']['schema_version'] == configuration_version
             and execution['execution'] == 'training_start_failed'
             and execution['completed_boundary'] is False
             and execution['package_path'] is None and execution['package_sha256'] is None
@@ -45,7 +46,8 @@ def audit_composite_start_failure(execution, directory, names, job):
             and all(c in '0123456789abcdef' for c in revision), 'composite_start_failure_model_revision')
     require(failure['model_revision'] == execution['model_semantic_hash'] == revision,
             'composite_start_failure_model_binding')
-    audit_composite_execution(execution, directory, names, mode='train', base_version=1)
+    _audit_execution(execution, directory, names, mode='train', base_version=1,
+                     execution_version=execution_version, package_version=configuration_version-1)
     return dict(training_start_failure=failure, completed_boundary=False,
         training_outcome=failure['outcome'], owned_source_captured=False,
         native_execution_verified=False, evaluation_verdict=None)
@@ -69,11 +71,13 @@ def audit_initial_planning_configuration(package, job, initial):
     _same(source['initial_model'], initial['identity'])
 
 
-def audit_composite_execution(execution, directory, names, *, mode, base_version, package=None):
+def _audit_execution(execution, directory, names, *, mode, base_version, package=None,
+                     execution_version, package_version):
+    require((execution_version,package_version) in ((3,5),(4,6)), 'unsupported_execution_package_pair')
     from .composite_measurement_contract import integral_number_view
     execution = integral_number_view(execution)
     directory = Path(directory)
-    require(count(execution['schema_version']) == 3 and count(execution['base_schema_version']) == base_version
+    require(count(execution['schema_version']) == execution_version and count(execution['base_schema_version']) == base_version
             and execution['measurement_method'] == METHOD, 'composite_execution_version_or_method')
     counters = execution['composite_counters']
     keys(counters, {'attempt', 'archive', 'execution'}, 'composite_execution_counter_fields')
@@ -92,7 +96,7 @@ def audit_composite_execution(execution, directory, names, *, mode, base_version
             require(counters['attempt'] is None and counters['archive'] is None,
                     'composite_failed_start_invented_accounting')
         return dict(owned_archive_present=False, native_execution_verified=False, evaluation_verdict=None)
-    require(package is not None and package['schema_version'] == 5, 'composite_execution_package_missing')
+    require(package is not None and package['schema_version'] == package_version, 'composite_execution_package_missing')
     record = execution['measurement_archive']; keys(record, {'path', 'bytes', 'sha256'}, 'composite_execution_archive_record')
     name = primary_path(record['path']); require(name in names, 'composite_execution_archive_unpublished')
     raw = filesystem_primary_resolver(directory)(name)
@@ -119,3 +123,12 @@ def audit_composite_execution(execution, directory, names, *, mode, base_version
         for trial in group['raw_trials']:
             require(trial['primary_ref']['relative_path'] in names, 'composite_execution_primary_unpublished')
     return dict(owned_archive_present=True, package_audit=audited, native_execution_verified=False, evaluation_verdict=None)
+
+
+def audit_composite_start_failure(execution, directory, names, job):
+    return _audit_start_failure(execution, directory, names, job, execution_version=3, configuration_version=6)
+
+
+def audit_composite_execution(execution, directory, names, *, mode, base_version, package=None):
+    return _audit_execution(execution, directory, names, mode=mode, base_version=base_version,
+                            package=package, execution_version=3, package_version=5)
