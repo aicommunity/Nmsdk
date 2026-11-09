@@ -12,21 +12,22 @@ Elder service-проверка обнаружила потерю уведомл�
 [Отрицательная попытка независимо принята как отрицательный результат](CompositeFull248A3NegativeAcceptance-20261109.ru.md),
 а весь248 и semantic reader этих конфигураций не приняты.
 
-Минимальный исправленный baseline A4 Root478/Pulse4a уже собран и запущен
-на M40 с250selected/137leaves. На последнем подтверждённом снимке19PASS,
-ошибок нет; затем потеряна связь с jump. Это промежуточный счётчик, текущий
-completion неизвестен. Первые4codec и оставшиеся ранее незапущенные controls
-проверяются перед230regressions. [Подготовка, handles и ограничения](Cold6A4LaunchReview-20261109.ru.md).
-После полного результата отдельно нужны actual6 native archive reader и
+Минимальный исправленный baseline A4 Root478/Pulse4a завершён на M40:
+250PASS/0FAIL/error/skip,137leaves/138closedgroups, released lease.
+[Native assertions и transport/provenance независимо приняты](CompositeFull250A4Acceptance-20261109.ru.md);
+обрыв VPN не потребовал повторного запуска. Код/evidence объединены в
+maintained feature branch. Отдельно нужны actual6 native archive reader и
 следующие candidate-window/lifetime gates; App execution3/codecs и будущий
 Train5/control-lifetime source не включены в минимальный baseline A4.
 
 Прежние source-only E11/BB1 дополнены общей cold6/cold7/execution3 исправленной
 [парой corrected/unfixed](ColdEnvelopeLifetimePairReadiness-20261109.ru.md),
 которая ещё не получила runtime-приёмку. Не смешивать её со снимком A4.
-27проверок запуска/renderer на другом tool-source и terminal Classic render
-не подтверждают качество обучения: их Git retrieval/Root verification и
-visual QA после сетевого разрыва ещё не завершены.
+27проверок запуска/renderer на другом tool-source и Classic render независимо
+приняты. [Выбранный overview просмотрен](ClassicLTReadableOverview-20261109.ru.md):
+LT Potential ненулевой, старуюflatpanel объясняет масштаб threshold100.
+Full163visualQA не заявляется. Эти проверки не подтверждают качество обучения
+и не меняют прежний packet observation valid=False.
 
 До следующего целевого cold Train необходимо последовательно принять:
 

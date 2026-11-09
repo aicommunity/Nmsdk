@@ -473,7 +473,7 @@
     {
       "job_id": "s07-composite-cold6-m40-asan-a4",
       "host": "10.245.1.17",
-      "state": "terminal_pass_pending_independent_archive_verification",
+      "state": "terminal_pass_independently_verified_assertions_and_transport",
       "root": "478cc35c0f1a314c34ad93aa0095b61836c658ec",
       "pulse": "4a5c2ec9df9a9f704dcd8260714323494bfa4415",
       "expected_cpp_cases": 250,
@@ -493,8 +493,8 @@
       "root_independently_observed_running": true,
       "restart_performed": false,
       "do_not_restart_on_observation_timeout": true,
-      "whole_gate_accepted": false,
-      "compiled_inventory_verified": false,
+      "whole_gate_accepted": true,
+      "compiled_inventory_verified": true,
       "scientific_verdict": null,
       "last_confirmed_server_unix_time": 1794177029,
       "observed_passed_cases": 250,
@@ -512,7 +512,12 @@
       },
       "root_independently_observed_outer_closed": true,
       "root_independently_observed_lease_released": true,
-      "network_gap_resolved": true
+      "network_gap_resolved": true,
+      "whole_gate_scope": "250 native C++ assertions and artifact transport/provenance only; semantic archive reader and scientific acceptance remain false",
+      "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "independent_receipt_sha256": "a0464283ef95aa6a51a254f842b5d4ba23dfb8388945b85eab29faca52d82455",
+      "semantic_archive_reader_accepted": false,
+      "full_production_cold_decoder_accepted": false
     }
   ],
   "prepared_feature": {

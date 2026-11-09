@@ -1,9 +1,11 @@
 # Конкретные Classic LT-панели: цепочка Git metadata — 08.11.2026
 
+**Уточнение09.11:** [повторный Classic burst render на тех же primary](ClassicLTReadableOverview-20261109.ru.md) независимо проверен и просмотрен: LT-потенциал ненулевой, его скрывала шкала с threshold100. Это снимает вопрос о flatness выбранного burst overview, не меняя модель/packet validity. Ниже сохранён source/metadata аудит08.11 и его тогдашние неизвестные; исходный JSON не переписывается.
+
 Выполнена только локальная read-only проверка metadata и структурного XML из
 Git. CSV не разбирались, сигналы не пересчитывались, PNG не строились/не
 просматривались заново, модели не импортировались и серверы не читались.
-**Причина flat LT panel остаётся неизвестной (`flat_cause=null`).**
+**На metadata-only снимке08.11 причина flat LT panel оставалась неизвестной (`flat_cause=null`).**
 Полные commit/path/blob/SHA/JSON pointers и границы доказательств:
 [ClassicFlatLTMetadataTrace-20261108.json](ClassicFlatLTMetadataTrace-20261108.json).
 
