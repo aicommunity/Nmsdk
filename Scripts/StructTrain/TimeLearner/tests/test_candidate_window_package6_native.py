@@ -10,6 +10,7 @@ from pathlib import Path
 import unittest
 
 from ..candidate_window_package_evidence import audit_candidate_window_package
+from ..composite_package_evidence import audit_composite_package
 from ..composite_primary import filesystem_primary_resolver
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import EvidenceError, load, require
@@ -104,3 +105,9 @@ class CandidateWindowPackage6NativeTest(unittest.TestCase):
         result=audit_candidate_window_package(load(rewritten))
         self.assertFalse(result['terminal_provenance_verified']);self.assertFalse(result['native_execution_verified'])
         self.assertTrue(result['completed_classification_requires_original_execution_binding'])
+
+    def test_actual_legacy_package5_full_primary_regression_remains_selected(self):
+        package,directory=self.case('package5-classic')
+        self.assertEqual(package['schema_version'],5)
+        result=audit_composite_package(package,external_resolver=filesystem_primary_resolver(directory))
+        self.assertTrue(result['certificate_consistent']);self.assertFalse(result['native_execution_verified'])

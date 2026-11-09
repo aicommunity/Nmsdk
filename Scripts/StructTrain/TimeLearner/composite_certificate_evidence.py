@@ -69,7 +69,8 @@ def audit_composite_certificate(package, archive_audit):
     for index,value in enumerate(protocol['inputs']):
         reference,current=references[index],finals[index];measured=current['measurement'];target=number(reference['measurement']['raw_potential'])
         raw=number(measured['raw_potential']);error=number(raw-target);tolerance=number(absolute+relative*abs(target))
-        low=number(measured['arrival']-anchor['plateau_end']);high=number(measured['plateau_end']-anchor['arrival'])
+        low=number(measured['arrival']-anchor['plateau_end']) if index+1!=n else 0.
+        high=number(measured['plateau_end']-anchor['arrival']) if index+1!=n else 0.
         within_amplitude=abs(error)<=tolerance;within_timing=max(abs(low),abs(high))<=sync
         expected=dict(input_id=value['id'],trial_id=current['logical_request']['trial_id'],
             effective_model_revision=current['native_group']['specification']['effective_model_revision'],
