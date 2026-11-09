@@ -2903,7 +2903,11 @@ template<class Owner> void WindowManualOtherServiceTakeover(ManualTakeoverKind k
         foreign.probe.onSample=[&](const auto& s){++foreignSamples;if(scalarWriter)scalarWriter->Sample(s);};
         foreign.observationSink=[&](const auto& p){if(scalarWriter)scalarWriter->Observation(p);};
     }
-    if(kind==ManualTakeoverKind::FixedFour)foreign.maximumModelSeconds=.8;
+    if(kind==ManualTakeoverKind::FixedFour) {
+        // This is an actual admitted protocol4 takeover, not the failed-Begin
+        // control above. Its group budget must fit inside its attempt budget.
+        foreign.maximumModelSeconds=.8;foreign.composite->maximumGroupModelSeconds=.8;
+    }
     auto old=std::move(f.attempt);const auto beforeTime=f.Time();f.owner->CalculateMode=1;f.owner->BeginNativeTraining(foreign,true);
     const auto& service=f.owner->NativeTrainingController();
     if(kind==ManualTakeoverKind::FailedBegin) {
