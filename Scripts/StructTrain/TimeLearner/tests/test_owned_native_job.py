@@ -58,7 +58,14 @@ class OwnedNativeMetadataTest(unittest.TestCase):
             root=Path(temp).resolve();path=root/'input.json';path.write_bytes(b'{"value":1}')
             binding={'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}
             self.assertEqual(subject._file_record(binding)[0],{'value':1})
+            external={k:{'path':str(path),'identity':subject._control_identity(path),
+                'sha256':binding['sha256']} for k in ('job','preparation')}
+            subject._control_guard(root,{},external)
+
             path.write_bytes(b'{"value":2}')
+            with self.assertRaisesRegex(ValueError,'owned_native_external_control_identity_changed'):
+                subject._control_guard(root,{},external)
+
             with self.assertRaisesRegex(ValueError,'owned_native_input_changed'):
                 subject._file_record(binding)
             link=root/'alias.json';link.symlink_to(path)

@@ -205,7 +205,9 @@ def preflight(request_path, *, existing_controller=False):
             'preparation':preparation,'preparation_raw':prepraw,'base':base,'controller':controller,
             'paths':paths,'protected':protected,'configure':configure,'resources':resources,
             'tool_snapshot':snapshot,'module_raw':module_raw,'module_record':module_record,
-            'backend':backend,'memory_available':memory,'disk_free':free}
+            'backend':backend,'memory_available':memory,'disk_free':free,
+            'external_controls':{k:{'path':request[k]['path'],'identity':_control_identity(Path(request[k]['path'])),
+                'sha256':request[k]['sha256']} for k in ('job','preparation')}}
 
 
 def launch(request_path):
@@ -220,6 +222,7 @@ def launch(request_path):
         (directory/'inputs').mkdir()
         (directory/'inputs/job.json').write_bytes(plan['job_raw'])
         (directory/'inputs/preparation.json').write_bytes(plan['preparation_raw'])
+        _write(directory/'external-control-identities.json',plan['external_controls'])
         _write(directory/'tool-source.json', plan['tool_snapshot'])
         _write(directory/'module-source.json', {'relative_path':Path(__file__).relative_to(SOURCE).as_posix(),
                'commit':plan['request']['tool_commit'],**plan['module_record'],
@@ -442,17 +445,29 @@ def _control_identity(path):
     return [row.st_dev,row.st_ino,row.st_size,row.st_mtime_ns,row.st_ctime_ns]
 
 
-def _control_guard(directory, expected):
+def _control_guard(directory, expected, external=None):
     for name, record in expected.items():
         path = directory/'inputs'/name
         require(_control_identity(path)==record['identity'] and
                 _sha(_frozen(path,16*1024**2)[0])==record['sha256'],
                 'owned_native_consumed_control_identity_changed')
+    if external is not None:
+        require(type(external) is dict and set(external)=={'job','preparation'},
+                'owned_native_external_control_identity_schema')
+        for record in external.values():
+            require(type(record) is dict and set(record)=={'path','identity','sha256'},
+                    'owned_native_external_control_identity_schema')
+            path=Path(record['path'])
+            require(_control_identity(path)==record['identity'] and
+                    _sha(_frozen(path,16*1024**2)[0])==record['sha256'],
+                    'owned_native_external_control_identity_changed')
 
 
 def _supervise_validated(request_path):
     plan = preflight(request_path,existing_controller=True)
     directory=plan['controller']
+    external=_json(_frozen(directory/'external-control-identities.json',1024**2)[0])
+    require(external==plan['external_controls'],'owned_native_external_controls_changed_since_launch')
     require(_frozen(directory/'inputs/job.json',16*1024**2)[0]==plan['job_raw'] and
             _frozen(directory/'inputs/preparation.json',16*1024**2)[0]==plan['preparation_raw'],
             'owned_native_control_copy_changed')
@@ -475,7 +490,7 @@ def _supervise_validated(request_path):
             'maximum_wall_seconds':job['limits']['whole_wall_seconds']},
             {'minimum_free_bytes':job['limits']['physical_free_floor_bytes'],'maximum_increment_bytes':job['limits']['reservation_disk_bytes']},
             [plan['paths']['source'],plan['paths']['build'],plan['paths']['runtime'],plan['paths']['output'],directory],
-            control_guard=lambda:_control_guard(directory,controls))
+            control_guard=lambda:_control_guard(directory,controls,external))
     require(_frozen(directory/'inputs/job.json',16*1024**2)[0]==plan['job_raw'] and
             _frozen(directory/'inputs/preparation.json',16*1024**2)[0]==plan['preparation_raw'],
             'owned_native_consumed_control_changed')
@@ -571,7 +586,10 @@ def recover(controller):
     try:
         controls=_json(_frozen(directory/'consumed-control-identities.json',1024**2)[0])
         require(set(controls)=={'job.json','preparation.json'},'owned_native_control_identity_schema')
-        _control_guard(directory,controls)
+        external=_json(_frozen(directory/'external-control-identities.json',1024**2)[0])
+        require(all(external[k]['path']==request[k]['path'] and external[k]['sha256']==request[k]['sha256']
+                    for k in ('job','preparation')),'owned_native_external_binding_changed')
+        _control_guard(directory,controls,external)
     except BaseException as error:
         errors.append({'phase':'controlled_inputs','reason':str(error)})
     before,closed,children=_finish(directory,Path(job['paths']['output']),expected,
