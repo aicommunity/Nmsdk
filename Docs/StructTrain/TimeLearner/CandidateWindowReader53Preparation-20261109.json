@@ -1,0 +1,63 @@
+{
+  "kind": "timelearner_reader53_preparation",
+  "schema_version": 1,
+  "status": "source_preparation_only_not_dispatched",
+  "source_commit": "7352f62bfd77ea86606845866a06bab7400454a3",
+  "code_commit": "ef5ba0aad470e2bbcc05f3d078d45785415992c1",
+  "tool_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "package_fingerprint": "46b93a6f59995d9c4c9cabd258d46481248d0d59d8ad3142ea23a046827cd45c",
+  "source_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-reader2-m40-a1",
+  "tool_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+  "plan_path": "/media/user/Data/TimeLearnerRefactor/plan-candidate-window-reader53-m40-a1",
+  "fixture_path": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+  "readback_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-candidate-window-reader53-m40-a1",
+  "request_sha256": "81d81bdc7ddb960e5ce59dc8d128214745a33843dd6449b812240a5ed959c2b9",
+  "suite_sha256": "7f646fae0412405860ebae9769475821debd8900320e30630669b57e9f6e14ab",
+  "cohort_counts": {
+    "DATA_units": 39,
+    "CLI_transport": 6,
+    "actual_archive1": 7,
+    "actual_six_CLI": 1,
+    "total": 53
+  },
+  "output_scope": {
+    "primary_inputs_unchanged": true,
+    "unit_log_and_result": true,
+    "CLI_reports_written_and_reread_inside_test": true,
+    "six_CLI_reports_retained_after_test": false,
+    "native_execution_verified": false,
+    "training_certificate_verified": false,
+    "scientific_verdict": null
+  },
+  "source_delivery": {
+    "method": "existing Git-only private source delivery helper; no source SCP/tar generation",
+    "checkout": "all Scripts only",
+    "control_objects": "original .gitattributes/.gitignore/.gitmodules ODB-only",
+    "fixture_reuse": "existing immutable157; no unpack/copy/rewrite",
+    "metadata": "new reviewed plan files materialized from committed Git blobs only"
+  },
+  "sourceprep_limits": {
+    "maximum_allocated_bytes": 134217728,
+    "minimum_free_bytes": 805306368
+  },
+  "execution_limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "execution_disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "known_pending": {
+    "whole_archive2_positive_join": false,
+    "actual_archive2_exports_available": false,
+    "producer_defect": "future33 service5 emits runtime-plan-scope.json/runtime_plan2_exported:false, not genuine runtime-plan.json",
+    "reader_P1": "archive2 source7352 line294 validates runtime_plan through cold7 configuration_view; dedicated runtime2 validator/bindings required",
+    "required_followup": "owning genuine runtime2 export + strict reader runtime2 joining + actual full dispatcher/CLI positive and rehashed tamper gate",
+    "no_main_merge_or_archive2_acceptance_from_53": true
+  },
+  "dispatch_authorized": false,
+  "server_writes_performed": false,
+  "local_tests_executed": false
+}

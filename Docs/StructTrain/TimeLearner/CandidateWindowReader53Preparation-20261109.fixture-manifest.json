@@ -1,0 +1,1043 @@
+{
+  "kind": "git_primary_six_composite_native_fixture_projection",
+  "schema_version": 1,
+  "status": "EXISTING_IMMUTABLE_FIXTURE_REUSE_PENDING_FRESH_PREFLIGHT",
+  "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+  "archive": {
+    "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/primary.tar.xz",
+    "git_blob": "0634e7f7f2d820c749571a9322e1ded4e8c140f9",
+    "bytes": 1836352,
+    "sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008"
+  },
+  "bundle": {
+    "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/bundle.json",
+    "git_blob": "1818e031a257e0657653c8aa3b5950b031eead67",
+    "bytes": 1015442,
+    "sha256": "e67428fbcf469781b1e8bb8613b49b2b7a80a7faf4d00fc17a052eafca936fd4"
+  },
+  "archive_members": 4551,
+  "selected_member_prefix": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/",
+  "projection_root": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+  "case_order": [
+    "classic-service",
+    "branch-service",
+    "classic-partial",
+    "branch-C0",
+    "classic-warm",
+    "branch-ambiguous"
+  ],
+  "cases": {
+    "classic-service": {
+      "files": 35,
+      "bytes": 5717959,
+      "json_files": 11,
+      "csv_files": 24,
+      "fingerprint": "066ef7c82ff8a0b79197b6e940052059d36a4aca6e5b59b280573f52a6cd3a80"
+    },
+    "branch-service": {
+      "files": 35,
+      "bytes": 4389112,
+      "json_files": 11,
+      "csv_files": 24,
+      "fingerprint": "3afa46efc34fa1f56681c808cd2b90407376181d90e829234cdfe325a3080422"
+    },
+    "classic-partial": {
+      "files": 7,
+      "bytes": 1858574,
+      "json_files": 6,
+      "csv_files": 1,
+      "fingerprint": "8e17ad96f14989dea22c0a48dc7dcca7e60b259d57c6be52f8d5a3c0f31d9088"
+    },
+    "branch-C0": {
+      "files": 35,
+      "bytes": 55535231,
+      "json_files": 11,
+      "csv_files": 24,
+      "fingerprint": "581fb62541a1d84e6b097eef5b950e74ac56a8030d92fd47ea802a577e56be0a"
+    },
+    "classic-warm": {
+      "files": 35,
+      "bytes": 5751050,
+      "json_files": 11,
+      "csv_files": 24,
+      "fingerprint": "5634ea332e0e0aa243d8f76e1712aa57640cbbf746b5f93067618cf9e5154a92"
+    },
+    "branch-ambiguous": {
+      "files": 10,
+      "bytes": 1717652,
+      "json_files": 6,
+      "csv_files": 4,
+      "fingerprint": "ae6c1500473f3852ca63fe3f2d0abb38f177f5f6350c39c58788ccaf8c35c7d6"
+    }
+  },
+  "files": 157,
+  "total_bytes": 74969578,
+  "pattern": "**/*.*",
+  "fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+  "records": [
+    {
+      "relative_path": "branch-C0/after-model.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/after-model.json",
+      "bytes": 1089727,
+      "sha256": "402998afbfb8249819c1ceef45c08064e7c2139eb920cf2d171ffe593002b3ac"
+    },
+    {
+      "relative_path": "branch-C0/boundary-math.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/boundary-math.json",
+      "bytes": 3443,
+      "sha256": "d8b29d91ccfd56568813183a1f763eeeb343dc4281692a610f8f2a1523c123ef"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000001.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000001.json",
+      "bytes": 4013231,
+      "sha256": "6d381ff1da3037b7d930b6657a4113ea8fcf686ae9e3158e4339434a2639f3c7"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000001/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000001/full-after.csv",
+      "bytes": 14438,
+      "sha256": "9174c808d1cc358b12727ac05c9a9a6efcc39eb4cf85cc2be061e163f0ddca22"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000001/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000001/full-before.csv",
+      "bytes": 13534,
+      "sha256": "ad082f9f29168bdc851b42cb07f6472f956484028cfbb715eea722e44a7c264c"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000001/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 10257,
+      "sha256": "430c120de027ad61efbe0c5aac925330eab5c6fd3abb07618515d567d4b97e62"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000001/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 13982,
+      "sha256": "fe44fcfa8fbd279cd6a58154842f7361a6149ae6aad1c37c7e73d50a86fe464d"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000002.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000002.json",
+      "bytes": 4013216,
+      "sha256": "f2f96c6fa147cecf0fa23f132c83ad431c774b5f82315ca30f636d209ae9150c"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000002/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000002/full-after.csv",
+      "bytes": 12425,
+      "sha256": "bed7cbf049c5b671367b779c313e52c44442c67eaea094bc06573a3cb87be48c"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000002/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000002/full-before.csv",
+      "bytes": 14338,
+      "sha256": "b4337fe58bda5d1f950a6a3ce437c5c58cab5160be40b4de4aa230818967238a"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000002/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 10811,
+      "sha256": "935e322fd6802f3b39796f38acf0d61cf9a64e1c3198c928573cfac20e7b75e6"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000002/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 12565,
+      "sha256": "4740d2de36113382e393af2cfa196dcfa8729522746d46e2da43141d46dfcdd6"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000003.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000003.json",
+      "bytes": 4012928,
+      "sha256": "1d5854152a9f42cffd29d8b9ca38f479452f942faa355982ebeb1f8e4e526a45"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000003/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000003/full-after.csv",
+      "bytes": 12714,
+      "sha256": "fcae2f34dcf9ff2ba0cf1aad8b7ac459abcbf864c83f11a77839ddde26d15d7e"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000003/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000003/full-before.csv",
+      "bytes": 12500,
+      "sha256": "e90ae4a86f6a63ec19998bf3ab1ce4d40c8ac272856486002dd79ad62283d692"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000003/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 9218,
+      "sha256": "04c0992005b07c68d0536084d8c2b2125652c4868e32567f30000ccb72ff1ef5"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000003/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 12553,
+      "sha256": "486d020c2a7da4f03bbd8e41007ca85aeff860d54aacf433fee71fe2127834f8"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000004.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000004.json",
+      "bytes": 4012899,
+      "sha256": "6d4a0968785b22529dd27c58efdad523ff0584cb0ad287060ba6a81e740bd44d"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000004/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000004/full-after.csv",
+      "bytes": 13421,
+      "sha256": "d5347abbada3a1b5d2a98b001a04c4b67d7ac83e3356b5c1256b135769bb1946"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000004/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000004/full-before.csv",
+      "bytes": 13408,
+      "sha256": "8ef71416a37a4fe9864e2cf6b3251f3b387042034dfc721225d7b2821a75af50"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000004/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 10169,
+      "sha256": "c1d3f12bd156cbfca6f2805dd78594cc9617db6612fd7c715e5610b5e59d7bb1"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000004/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 13481,
+      "sha256": "a10c2c7645f9a53384e8c52a95d8ed166e81f8110eaf113d93420f80b6eac00e"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000005.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000005.json",
+      "bytes": 4013429,
+      "sha256": "ea1eecea5ad29d942c9e3ed11f634be0f908a0e72b6fe59f611830e23ede9acc"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000005/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000005/full-after.csv",
+      "bytes": 13433,
+      "sha256": "db8895f4150f0806fec34abca27633d791fb57e01383ce9e1dc7a01134c5558c"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000005/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000005/full-before.csv",
+      "bytes": 13446,
+      "sha256": "a297572dd628deed33a2a7f01893c155c6c89d26c0b1a180e9dcb656483f21e9"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000005/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 10163,
+      "sha256": "8eac110a4e94c0e3bcfaf9e5d79f60949f5c3484b249c8ef1c21adffa0daaf6d"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000005/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 13501,
+      "sha256": "d25e3d4f613f2270ecd4389f65951f255e78cd898243e677e64d40e34277a0aa"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000006.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000006.json",
+      "bytes": 4013432,
+      "sha256": "00076ddd535345aa1d3a590dff316b5034cf21d9fa74864b0233f75b9f81e3ff"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000006/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000006/full-after.csv",
+      "bytes": 13665,
+      "sha256": "3e260e4722cb06f3f1776cf7e52bc966e96efe2344a0c3b48b4c183138e4d945"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000006/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000006/full-before.csv",
+      "bytes": 13404,
+      "sha256": "b666d989c1c2dbb98954726fe3a2a73426f524de8dc609ae45bce709c28754ab"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000006/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 10170,
+      "sha256": "f16a10bb2786f1189fdad63c8a25d4477b316f4d9c1689ab1642374fe803c55d"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/group-000006/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 13484,
+      "sha256": "c9d9c1d30c2e21f95c59b5dfc469b53497f0001faadc3a23ba4887b8b54ce752"
+    },
+    {
+      "relative_path": "branch-C0/composite-measurements/index.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/composite-measurements/index.json",
+      "bytes": 30054988,
+      "sha256": "92f33b49df0076c8868ded8d3160544b8575a52441024677ef176e19e7482bba"
+    },
+    {
+      "relative_path": "branch-C0/initial-configuration.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/initial-configuration.json",
+      "bytes": 4202,
+      "sha256": "747f152b59cdcc7b7feda02fc9717aeb4bcaaf7c74f25c188e611329d8b36f25"
+    },
+    {
+      "relative_path": "branch-C0/runtime-plan.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-C0/runtime-plan.json",
+      "bytes": 2656,
+      "sha256": "c8a2719a370f6275f0bd9c8679a16bb48f004013fdf20d72af48137a01296a05"
+    },
+    {
+      "relative_path": "branch-ambiguous/after-model.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/after-model.json",
+      "bytes": 184286,
+      "sha256": "dc2024da13db1f6bf42fd996c31aa0fa6d57deaaea491f9a2ac37b209eef84b6"
+    },
+    {
+      "relative_path": "branch-ambiguous/boundary-math.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/boundary-math.json",
+      "bytes": 281,
+      "sha256": "e75502913a4583f23a7a504846bd36401b954ea6045314025fb063b85283fc83"
+    },
+    {
+      "relative_path": "branch-ambiguous/composite-measurements/group-000001.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/composite-measurements/group-000001.json",
+      "bytes": 185309,
+      "sha256": "e95702e92814eae8c0f6424979029c522147650f9b6c87943562919a5118658c"
+    },
+    {
+      "relative_path": "branch-ambiguous/composite-measurements/group-000001/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/composite-measurements/group-000001/full-after.csv",
+      "bytes": 7428,
+      "sha256": "a91819fb67ad97e9353bfcc3c3fe19b910dc9c38c93d1aa971e36e4075f74c3e"
+    },
+    {
+      "relative_path": "branch-ambiguous/composite-measurements/group-000001/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/composite-measurements/group-000001/full-before.csv",
+      "bytes": 7472,
+      "sha256": "8b66f486aa6b5120a68830d82216c9da9ac9268d735f49cf79b9c8c79373fe36"
+    },
+    {
+      "relative_path": "branch-ambiguous/composite-measurements/group-000001/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 6722,
+      "sha256": "39a9688ee2b40d0c18e4404ddc97d4f902058e27c2eb75b4d724ca4f59f70000"
+    },
+    {
+      "relative_path": "branch-ambiguous/composite-measurements/group-000001/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 6860,
+      "sha256": "0139a0edc66219af2378fc8e9327c80550b33575ac2648d2cfba7a618a00b1a3"
+    },
+    {
+      "relative_path": "branch-ambiguous/composite-measurements/index.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/composite-measurements/index.json",
+      "bytes": 1312434,
+      "sha256": "87e307505bd309dd7226761dd72962f233dfdb8a0815ba8184c894b360d678e3"
+    },
+    {
+      "relative_path": "branch-ambiguous/initial-configuration.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/initial-configuration.json",
+      "bytes": 4205,
+      "sha256": "583e2a0ffadc1a9bc7d8d2159d08e5f4705c2a061dddf7a6e4b80a6e564cc0ab"
+    },
+    {
+      "relative_path": "branch-ambiguous/runtime-plan.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-ambiguous/runtime-plan.json",
+      "bytes": 2655,
+      "sha256": "c2b901f962d4c2853ba5e78062f44a6e882d636b56122e092d4bb419b737f9c9"
+    },
+    {
+      "relative_path": "branch-service/after-model.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/after-model.json",
+      "bytes": 183591,
+      "sha256": "803808ebe5a6be1ed34c1cb1f1c61a3ea7df07cb3ffa2b8d07b2f8f388206aa1"
+    },
+    {
+      "relative_path": "branch-service/boundary-math.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/boundary-math.json",
+      "bytes": 3443,
+      "sha256": "ffc021ebcb922b0b6c0f8d1a1c596dd23e4121325400951587767efcb000c495"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000001.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000001.json",
+      "bytes": 186441,
+      "sha256": "5ccac92dcfcadeec352f0d7facdae9cf33ca1914bd22d708fba42789fe3a7f3a"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000001/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000001/full-after.csv",
+      "bytes": 14438,
+      "sha256": "9174c808d1cc358b12727ac05c9a9a6efcc39eb4cf85cc2be061e163f0ddca22"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000001/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000001/full-before.csv",
+      "bytes": 13534,
+      "sha256": "ad082f9f29168bdc851b42cb07f6472f956484028cfbb715eea722e44a7c264c"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000001/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 10257,
+      "sha256": "430c120de027ad61efbe0c5aac925330eab5c6fd3abb07618515d567d4b97e62"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000001/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 13982,
+      "sha256": "fe44fcfa8fbd279cd6a58154842f7361a6149ae6aad1c37c7e73d50a86fe464d"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000002.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000002.json",
+      "bytes": 186425,
+      "sha256": "5c7f1b1421567b71040e7f6fecdd743af5dceaa18e14f33b633a1818bc137c81"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000002/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000002/full-after.csv",
+      "bytes": 12425,
+      "sha256": "bed7cbf049c5b671367b779c313e52c44442c67eaea094bc06573a3cb87be48c"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000002/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000002/full-before.csv",
+      "bytes": 14338,
+      "sha256": "b4337fe58bda5d1f950a6a3ce437c5c58cab5160be40b4de4aa230818967238a"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000002/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 10811,
+      "sha256": "935e322fd6802f3b39796f38acf0d61cf9a64e1c3198c928573cfac20e7b75e6"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000002/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 12565,
+      "sha256": "4740d2de36113382e393af2cfa196dcfa8729522746d46e2da43141d46dfcdd6"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000003.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000003.json",
+      "bytes": 186150,
+      "sha256": "a9a30714e6f65121f8d20208e4d521cc04ab982e5c867203ef2aaed1af432d38"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000003/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000003/full-after.csv",
+      "bytes": 12714,
+      "sha256": "fcae2f34dcf9ff2ba0cf1aad8b7ac459abcbf864c83f11a77839ddde26d15d7e"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000003/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000003/full-before.csv",
+      "bytes": 12500,
+      "sha256": "e90ae4a86f6a63ec19998bf3ab1ce4d40c8ac272856486002dd79ad62283d692"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000003/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 9218,
+      "sha256": "04c0992005b07c68d0536084d8c2b2125652c4868e32567f30000ccb72ff1ef5"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000003/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 12553,
+      "sha256": "486d020c2a7da4f03bbd8e41007ca85aeff860d54aacf433fee71fe2127834f8"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000004.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000004.json",
+      "bytes": 186122,
+      "sha256": "c2327667b31e0781d3d2628f2c3b3da0bf1e5375466ed141a90cee4883e5e9ca"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000004/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000004/full-after.csv",
+      "bytes": 13421,
+      "sha256": "d5347abbada3a1b5d2a98b001a04c4b67d7ac83e3356b5c1256b135769bb1946"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000004/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000004/full-before.csv",
+      "bytes": 13408,
+      "sha256": "8ef71416a37a4fe9864e2cf6b3251f3b387042034dfc721225d7b2821a75af50"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000004/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 10169,
+      "sha256": "c1d3f12bd156cbfca6f2805dd78594cc9617db6612fd7c715e5610b5e59d7bb1"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000004/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 13481,
+      "sha256": "a10c2c7645f9a53384e8c52a95d8ed166e81f8110eaf113d93420f80b6eac00e"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000005.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000005.json",
+      "bytes": 186611,
+      "sha256": "606736d87c8b112013df8966390fece810030088ae52959ccd2c5ca93303970a"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000005/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000005/full-after.csv",
+      "bytes": 13433,
+      "sha256": "db8895f4150f0806fec34abca27633d791fb57e01383ce9e1dc7a01134c5558c"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000005/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000005/full-before.csv",
+      "bytes": 13446,
+      "sha256": "a297572dd628deed33a2a7f01893c155c6c89d26c0b1a180e9dcb656483f21e9"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000005/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 10163,
+      "sha256": "8eac110a4e94c0e3bcfaf9e5d79f60949f5c3484b249c8ef1c21adffa0daaf6d"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000005/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 13501,
+      "sha256": "d25e3d4f613f2270ecd4389f65951f255e78cd898243e677e64d40e34277a0aa"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000006.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000006.json",
+      "bytes": 186612,
+      "sha256": "29315ba8d6de867f0a610febc74180fcac3ee3aecfeeefebf3a1fcaa2a87a8df"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000006/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000006/full-after.csv",
+      "bytes": 13665,
+      "sha256": "3e260e4722cb06f3f1776cf7e52bc966e96efe2344a0c3b48b4c183138e4d945"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000006/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000006/full-before.csv",
+      "bytes": 13404,
+      "sha256": "b666d989c1c2dbb98954726fe3a2a73426f524de8dc609ae45bce709c28754ab"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000006/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 10170,
+      "sha256": "f16a10bb2786f1189fdad63c8a25d4477b316f4d9c1689ab1642374fe803c55d"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/group-000006/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 13484,
+      "sha256": "c9d9c1d30c2e21f95c59b5dfc469b53497f0001faadc3a23ba4887b8b54ce752"
+    },
+    {
+      "relative_path": "branch-service/composite-measurements/index.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/composite-measurements/index.json",
+      "bytes": 2775788,
+      "sha256": "839283178ab56af4e97780250a4150a86ee10a92ae430ea7c5ed7f0265fad5ae"
+    },
+    {
+      "relative_path": "branch-service/initial-configuration.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/initial-configuration.json",
+      "bytes": 4193,
+      "sha256": "8a98222931ce8749247eb8336a6e16a27be8cf0909b375313575c9bae1c14199"
+    },
+    {
+      "relative_path": "branch-service/runtime-plan.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/branch-service/runtime-plan.json",
+      "bytes": 2656,
+      "sha256": "42f3f4d5c847aa71de9fcb25076db2c455f2a377bde8b069a3d3b852c65545b3"
+    },
+    {
+      "relative_path": "classic-partial/after-model.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/after-model.json",
+      "bytes": 268766,
+      "sha256": "1925ff5213b912a65e3e037d73c9e81ad9d56f5afd71a5e1f240f09c2fe76b8e"
+    },
+    {
+      "relative_path": "classic-partial/boundary-math.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/boundary-math.json",
+      "bytes": 230,
+      "sha256": "54406e5eb690c6f666bcb0bde0e82948488326f336a0bd985d5072d3e9cc34a5"
+    },
+    {
+      "relative_path": "classic-partial/composite-measurements/group-000001.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/composite-measurements/group-000001.json",
+      "bytes": 175458,
+      "sha256": "69dbda732404bde25f1896e7f47b4c2bab00c08986f775cbf1c327b0f3a85752"
+    },
+    {
+      "relative_path": "classic-partial/composite-measurements/group-000001/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/composite-measurements/group-000001/full-before.csv",
+      "bytes": 55,
+      "sha256": "7974ddbc50b30198449b19aabb3eb2cc676c3243c0345a45f8affb26c7eccc90"
+    },
+    {
+      "relative_path": "classic-partial/composite-measurements/index.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/composite-measurements/index.json",
+      "bytes": 1407216,
+      "sha256": "b3a79f4387945dd5c6ac3c481e605752c830d2bc97a4ee18a3c1c03d0adff70d"
+    },
+    {
+      "relative_path": "classic-partial/initial-configuration.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/initial-configuration.json",
+      "bytes": 4193,
+      "sha256": "aae2c44f8591699d7dfe91d3aa20e7c21b5a8088004f0425e7a7ef3ed291a82e"
+    },
+    {
+      "relative_path": "classic-partial/runtime-plan.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-partial/runtime-plan.json",
+      "bytes": 2656,
+      "sha256": "af7c008520c8d1740731ea3765bbaebd387137fe13122681ba7c741981f4dbf0"
+    },
+    {
+      "relative_path": "classic-service/after-model.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/after-model.json",
+      "bytes": 269549,
+      "sha256": "d284f25794fa9be92e99f505904d36967160c506f4c626a4512dda7bf65e2cfa"
+    },
+    {
+      "relative_path": "classic-service/boundary-math.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/boundary-math.json",
+      "bytes": 3443,
+      "sha256": "f00eabeb8a6c7c3e5e6b517f3f02f19e77a85c5265e462ba26eb0b0159d62c50"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000001.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000001.json",
+      "bytes": 242712,
+      "sha256": "3baa8baa614f4f014a48c3062c8e959b87a03a0a0ce9c16970ebc3226b3cffa4"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000001/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000001/full-after.csv",
+      "bytes": 21688,
+      "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000001/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000001/full-before.csv",
+      "bytes": 20784,
+      "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000001/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 14239,
+      "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000001/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 21310,
+      "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000002.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000002.json",
+      "bytes": 242696,
+      "sha256": "fb2b8ced05b5440b8e5b9b58e843846b1c380f09da9713df3034f9a6da185ef5"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000002/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000002/full-after.csv",
+      "bytes": 19646,
+      "sha256": "15eba6d82b7af256a81358774cce7f67dc347d60bec44cce03f17a25b6fbc522"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000002/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000002/full-before.csv",
+      "bytes": 21559,
+      "sha256": "2c8eeb42f6551bf102b48550d8598caf8b6806d6aa71943d7632d495eb2c48ba"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000002/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 14785,
+      "sha256": "cdbfd9d494a994c6f9af3434820a8eacfd772fa0bffb93875512380945d78e84"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000002/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 19889,
+      "sha256": "68fe67f158a692b9de7e96048369402b26da1b962d22ac7e30988c03d0bdc96e"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000003.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000003.json",
+      "bytes": 242423,
+      "sha256": "0760359e84926a6600f06049a6d6fb1b635f2ed2d01b02ecaf618fa49bc44a78"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000003/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000003/full-after.csv",
+      "bytes": 19935,
+      "sha256": "53431db6c19e1fd3d239f36c82ad539942480490f54e8139e7c4ae36c04ffdb7"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000003/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000003/full-before.csv",
+      "bytes": 19721,
+      "sha256": "bb3c79c97f180a9852fc13c3f9f02a73a049fabac159019d9deeff81895889e5"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000003/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 13192,
+      "sha256": "523c968b90cbf6d03f23a3b08561f3923140c115d5db48e4f500e0a91f13c4d1"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000003/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 19877,
+      "sha256": "7017f914d28402f15145b5e8a33b52eb721ae1dd4972dd2b6d1d77b1e75e4788"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000004.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000004.json",
+      "bytes": 242393,
+      "sha256": "4f203bc6520944d12936009f8eba140db8bdd186e17f993fee402406244b30c5"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000004/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000004/full-after.csv",
+      "bytes": 20671,
+      "sha256": "59a8df7e84c7befe97cf432359867020a2d224bb656653e7ceb1f9ef3c7b4679"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000004/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000004/full-before.csv",
+      "bytes": 20658,
+      "sha256": "5581d56db42816a10fced3339d64e2c3664b1f55d42036f36343c5a69ed293c8"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000004/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 14151,
+      "sha256": "25fdbd4c56a489288b27ae3d8fb931f679740928fe16888b4bc5fc177cbda7c6"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000004/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 20809,
+      "sha256": "252c680039ed7987aad0eaccc669fec49d8977d8bc6309cf8ad891b33652abe0"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000005.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000005.json",
+      "bytes": 242864,
+      "sha256": "331c5974959277bd2c1e552a4f1c6dfbdd030b0518e33276078923be0dff3abb"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000005/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000005/full-after.csv",
+      "bytes": 20654,
+      "sha256": "711dc0fe5ca8dbf29fc5b621378058f859ec122624c430cbe898153eee663abf"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000005/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000005/full-before.csv",
+      "bytes": 20667,
+      "sha256": "8f00f769da45fd43b5898e3efd0c0846dcd60f6ef357dd311c8f700969c04989"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000005/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 14137,
+      "sha256": "1b145677db55a51e578d05088b9df070167ca9f79ae8f8bb981051cefa2ca29b"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000005/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 20825,
+      "sha256": "fe76bc50b77226a412d11566c6b3ec38ca2073fd266159676edf3b56a7f280f1"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000006.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000006.json",
+      "bytes": 242871,
+      "sha256": "e1f7846aacbc0f37fd1681cf5aa75b9b92b83668a65f9a715f031487653353e4"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000006/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000006/full-after.csv",
+      "bytes": 20915,
+      "sha256": "80e8c54973f300d12ac74b102f53aa0386f1483f5c38f3d9787f49e79248fe91"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000006/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000006/full-before.csv",
+      "bytes": 20654,
+      "sha256": "8290d24f3bc9f84bdb5bee4261aef6ef283efc4efaac3784c68c8b019f33b65e"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000006/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 14152,
+      "sha256": "45e4945179bfc4f63b8daf62cca41a9a2e3b4f871a27957da930337bfcb635a7"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/group-000006/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 20812,
+      "sha256": "29a36492f28495af6814ecb1427a9e76f15be6edfb7f8c42c5e68a162470e1c8"
+    },
+    {
+      "relative_path": "classic-service/composite-measurements/index.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/composite-measurements/index.json",
+      "bytes": 3526427,
+      "sha256": "2602e90942591b14ce3dbafa156d6afd7591d18168d236005abb59a672fd1072"
+    },
+    {
+      "relative_path": "classic-service/initial-configuration.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/initial-configuration.json",
+      "bytes": 4195,
+      "sha256": "e23f9cb770205ecd2ce1e7f34f39bb1b66c7172aaf6eb414df578ed9278364bc"
+    },
+    {
+      "relative_path": "classic-service/runtime-plan.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-service/runtime-plan.json",
+      "bytes": 2656,
+      "sha256": "79b2b853f861bc3f0416811b7f1f47a7dffdcb173aba6f60bd90b6961dd9bccf"
+    },
+    {
+      "relative_path": "classic-warm/after-model.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/after-model.json",
+      "bytes": 270405,
+      "sha256": "16122cb097777ac4a233dcd3e67871337731dbf322090e69b9147ccfa3b5c469"
+    },
+    {
+      "relative_path": "classic-warm/boundary-math.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/boundary-math.json",
+      "bytes": 3441,
+      "sha256": "ef5fcbd7d9af569defcd2312b02c524fb46343313e431f4a54a08f6b91552a26"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000001.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000001.json",
+      "bytes": 243135,
+      "sha256": "b037eef046e0a29c63fb833e68a90c398340dfc50bc70727ada5128f45ac389a"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000001/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000001/full-after.csv",
+      "bytes": 21688,
+      "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000001/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000001/full-before.csv",
+      "bytes": 20784,
+      "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000001/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 14239,
+      "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000001/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 21310,
+      "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000002.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000002.json",
+      "bytes": 243120,
+      "sha256": "f379e3c7b8d5553a028ee28a94b3e9ff8c5d6a37229d79d82930aab4ba17a719"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000002/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000002/full-after.csv",
+      "bytes": 19646,
+      "sha256": "15eba6d82b7af256a81358774cce7f67dc347d60bec44cce03f17a25b6fbc522"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000002/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000002/full-before.csv",
+      "bytes": 21559,
+      "sha256": "2c8eeb42f6551bf102b48550d8598caf8b6806d6aa71943d7632d495eb2c48ba"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000002/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 14785,
+      "sha256": "cdbfd9d494a994c6f9af3434820a8eacfd772fa0bffb93875512380945d78e84"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000002/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 19889,
+      "sha256": "68fe67f158a692b9de7e96048369402b26da1b962d22ac7e30988c03d0bdc96e"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000003.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000003.json",
+      "bytes": 242775,
+      "sha256": "2a2cfaadaeffda42a86d53bf288d6c82aa15e85259ec71bb7d62692205eb32cd"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000003/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000003/full-after.csv",
+      "bytes": 21131,
+      "sha256": "561af1c4fb850832ba0a6a4ce89734f5ec2f6e2ad28bd54d8613177cb1a44a7a"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000003/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000003/full-before.csv",
+      "bytes": 21144,
+      "sha256": "628067fba0f479b417261c70115c3d60e007d291956990f8e558bfc4c1a3efef"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000003/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 14617,
+      "sha256": "67043467f61d7212a9bcef901fe11b5654940fbfd6ed70fb379e693ca3e8df29"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000003/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 21311,
+      "sha256": "a99d51ff2cffff9427474fcc3a7e3645c64ca05ff3f4aee64bade0d13fcc55d1"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000004.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000004.json",
+      "bytes": 242816,
+      "sha256": "6c619425f742b4bc327239ce383e523d3567ab701e6487254f6813c08f35b5c6"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000004/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000004/full-after.csv",
+      "bytes": 21145,
+      "sha256": "d62683d3b34faeb53422579a541cda0f43a4c1cd90876967e5609da3eb1273ce"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000004/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000004/full-before.csv",
+      "bytes": 21133,
+      "sha256": "6bf975675c5dbc69999fd23b2eb68a8af7ea050a2b829d8d873d65cbe056daf1"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000004/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 14600,
+      "sha256": "f306517eda5c1963afc80dcb6fdd2fffb62d552d430d6632040877bf98305ffe"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000004/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 21325,
+      "sha256": "ea4b770f53591838f3cb1ef475fba780bf5225128ed3a7196467a7e2b46f7ac4"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000005.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000005.json",
+      "bytes": 243252,
+      "sha256": "eda1b1c587d605175f7a34dda3b7d2ac97cf601df76a04c8d36651814c26dad8"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000005/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000005/full-after.csv",
+      "bytes": 21128,
+      "sha256": "5b3d4a78422e13a221b45dacc736626781d6169291598d2ca7f3285c8a25e5db"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000005/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000005/full-before.csv",
+      "bytes": 21143,
+      "sha256": "020cefcc6f806af8c7c301d378ae482faf5182a9bea38bcec432837af8e64aeb"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000005/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 14603,
+      "sha256": "d43ffe34fcf668f653f3be513bc4563fbb493575c56d0e478098d55df9b5928a"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000005/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 21314,
+      "sha256": "e59a34829b5ff6e0af312bde4229b68828b560b13c17ed9514ce0e0d61d91362"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000006.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000006.json",
+      "bytes": 243260,
+      "sha256": "692462eb2debb25503efa9eeeaad70fd57798c566ad536b1f9a0b274790600e9"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000006/full-after.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000006/full-after.csv",
+      "bytes": 21131,
+      "sha256": "9eb11b0a291edddbdfa6b0fd86e23c95c4ad31b1eb29a4c81d453ba09b93fb2d"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000006/full-before.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000006/full-before.csv",
+      "bytes": 21131,
+      "sha256": "8570f5ac59b41bfec9e6b196f88789334d242800a0209a8764dc8f6c129aebd9"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000006/omit-0.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 14630,
+      "sha256": "216d1d0b696f7a045b5e60d4ed2af062185dd092f925e93004e0482992fc97bd"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/group-000006/omit-1.csv",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 21311,
+      "sha256": "00d556584fcce5fb31d4d1acf946518d9a3ebe964236870dac953aded8defbd4"
+    },
+    {
+      "relative_path": "classic-warm/composite-measurements/index.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/composite-measurements/index.json",
+      "bytes": 3545290,
+      "sha256": "9328af05841e4a64ac2d3707509dd96ab7d1421884eaf3591b972b091ac798b8"
+    },
+    {
+      "relative_path": "classic-warm/initial-configuration.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/initial-configuration.json",
+      "bytes": 4203,
+      "sha256": "669e01c86638a85b24ab0fdad015c43133811d70accd78e3f3711cfddf95727e"
+    },
+    {
+      "relative_path": "classic-warm/runtime-plan.json",
+      "archive_member": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/classic-warm/runtime-plan.json",
+      "bytes": 2656,
+      "sha256": "091a2d1eedabff2bf224cabc2c6086f1475e73e4c04017c4d56be5835c6e55ba"
+    }
+  ],
+  "all_selected_are_regular_original_members": true,
+  "all_selected_hashes_match_bundle": true,
+  "no_CSV_values_parsed_or_semantic_reader_executed": true,
+  "no_seventh_fixture_or_synthetic_record": true,
+  "original_A4_paths_are_not_projection_source": true,
+  "projection_requirements": [
+    "new absent canonical destination; no existing output reuse",
+    "materialize selected original bytes only as regular files; preserve case relative paths",
+    "no symlinks, hardlinks, path escapes, extras or newline normalization",
+    "hash all157 files against this manifest before publish; no following outside paths",
+    "write manifest outside fixture root; fixture root contains onlysixcase directories",
+    "freeze permissions and rehash before/after semantic job; originalarchive/runtime/source immutable"
+  ],
+  "original_declaration": {
+    "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+    "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.fixture-manifest.json",
+    "sha256": "4c6fdf511166693ba427a670648fe27cf2faeda22688ca191715f8fe16530286",
+    "original_status": "DECLARED_NOT_MATERIALIZED"
+  },
+  "materialization_policy": "read-only reuse already prepared/accepted157; do not extract/copy/rewrite any primary"
+}
