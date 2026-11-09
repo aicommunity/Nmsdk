@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Actual40 collection опубликован](OwnedNativeController40MaintainedCollection-20261109.ru.md):existing CLI/stage, exact5 artifacts/325members independently verified, noff source/evidence integrated. Negative73 пока остановлен readonly Gitrole validation до записи новых артефактов.
+
 [FullSDK canonical принят, native48 запущен](Native48FullSDKCanonicalLaunch-20261109.ru.md):4030files/8repos/29imports сверены, свежая сборка работает на M40. Результата48 ещё нет; service5/package6 и научная серия остаются открыты.
 
 [Canonical25 A2](NativeCanonical25A2Outcome-20261109.ru.md):25/25PASS на M40, все logIDs/Source/Tool equality и ownclosure/releasedlease сверены Root. Actual full4030 canonical integration и native48 остаются следующими отдельными проверками.
