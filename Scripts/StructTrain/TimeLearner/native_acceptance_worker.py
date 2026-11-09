@@ -230,29 +230,44 @@ def observed_junit(path):
     return observed, failed, not_completed
 
 
+def validate_job_paths(job, *, loaded_source_root=None):
+    """Side-effect-free path/configure preflight, shared with the owned controller.
+
+    Worker supplies its actual __file__ root for the original namespace check.
+    A metadata-only controller omits it and makes no loaded-SDK attestation.
+    """
+    base = Path(job["workspace"])
+    def canonical(path, exists=False):
+        _require(path.is_absolute() and path.is_relative_to(base) and
+                 path.resolve(strict=exists) == path and
+                 not any(p.is_symlink() for p in (path, *path.parents)), "workspace_path_alias:"+str(path))
+        return path
+    _require(base.is_absolute() and base.resolve(strict=True) == base and
+             not any(p.is_symlink() for p in (base, *base.parents)), "workspace_alias")
+    paths = {name:canonical(Path(value)) for name,value in job["paths"].items()}
+    all_paths = list(paths.values())
+    _require(len(set(all_paths)) == len(all_paths) and all(
+        not a.is_relative_to(b) and not b.is_relative_to(a)
+        for i,a in enumerate(all_paths) for b in all_paths[i+1:]), "overlapping_job_paths")
+    if loaded_source_root is not None:
+        _require(loaded_source_root == paths["source"], "worker_loaded_from_other_SDK")
+    _require(not paths["output"].exists() and not paths["runtime"].exists(), "nonempty_new_output")
+    protected = [canonical(Path(value), True) for value in job["protected_runtimes"]]
+    _require(all(p.is_dir() for p in protected), "protected_runtime_not_directory")
+    _require(all(not p.is_relative_to(paths[k]) and not paths[k].is_relative_to(p)
+                 for p in protected for k in ("build", "runtime", "output")), "protected_write_path_overlap")
+    _require(all(paths[k].is_dir() for k in ("source", "resources", "framework")), "missing_read_only_directory")
+    return base, paths, protected, configure_arguments(job, paths, protected)
+
+
 class Worker:
     def __init__(self, job, preparation, arguments):
         self.expected = validate_job(job, preparation, arguments)
         self.job, self.preparation = job, preparation
-        self.base = Path(job["workspace"])
-        _require(self.base.is_absolute() and self.base.resolve(strict=True) == self.base and
-                 not any(p.is_symlink() for p in (self.base, *self.base.parents)), "workspace_alias")
-        self.paths = {name: self.canonical(Path(value)) for name, value in job["paths"].items()}
-        all_paths = list(self.paths.values())
-        _require(len(set(all_paths)) == len(all_paths) and all(
-            not a.is_relative_to(b) and not b.is_relative_to(a)
-            for i,a in enumerate(all_paths) for b in all_paths[i+1:]), "overlapping_job_paths")
+        self.base, self.paths, self.protected, self.configure = validate_job_paths(
+            job, loaded_source_root=Path(__file__).resolve().parents[3])
         self.source = self.paths["source"]
-        _require(Path(__file__).resolve().parents[3] == self.source, "worker_loaded_from_other_SDK")
         self.out, self.runtime = self.paths["output"], self.paths["runtime"]
-        _require(not self.out.exists() and not self.runtime.exists(), "nonempty_new_output")
-        self.protected = [self.canonical(Path(v), True) for v in job["protected_runtimes"]]
-        _require(all(p.is_dir() for p in self.protected), "protected_runtime_not_directory")
-        _require(all(not p.is_relative_to(self.paths[k]) and not self.paths[k].is_relative_to(p)
-                     for p in self.protected for k in ("build", "runtime", "output")), "protected_write_path_overlap")
-        _require(all(self.paths[k].is_dir() for k in ("source", "resources", "framework")),
-                 "missing_read_only_directory")
-        self.configure = configure_arguments(job, self.paths, self.protected)
         from . import runtime, native_gate, resource_reservations, contained_process, native_preparation, collector_provenance
         self.api = runtime, native_gate, resource_reservations, contained_process
         self.imports = {m.__name__:str(Path(m.__file__).resolve()) for m in
