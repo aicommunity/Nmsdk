@@ -4,6 +4,8 @@
 
 Последнее завершение: [отдельный cohort31 остановлен OOM](Fixed4Package6-31Failure-20261109.ru.md), kernel limit4GiB, отсутствует итоговый package6 JUnit. Приняты только2 fixed4 controls;29 package6 IDs неполны. До OOM журнал сообщил четыре roundtrip equality failures. Корпус не допускается к reader16 или научной оценке. Новая Windows C0-holder сборка запущена на отдельном SDK4eb/Pulsef1; результата компиляции пока нет.
 
+Для локализации запущен [отдельный реальный Classic roundtrip](https://github.com/aicommunity/Nmsdk/blob/fd3b14229c4728007207f6487315fe193a41935e/Docs/StructTrain/TimeLearner/Package6RoundtripDiagnostic-20261109.ru.md), Source22ac/Pulsef1,4067files/8repos. Canonical completed0/clear76.979s, native supervisor2944218/start333234910 и outeraef990e5 kernel-live; verdict ещё отсутствует. Строгое package equality сохранено. Потеря физики пока не доказана: предшествующий model revision assertion не отказал; сохранённые source и поздний warm имеют одинаковые model/dataset/neuron identity и XML. Это не проверка непосредственного failing reexport и не новый scientific PASS.
+
 ## Последняя подтверждённая проверка
 
 | Срез | Факт и границы |
