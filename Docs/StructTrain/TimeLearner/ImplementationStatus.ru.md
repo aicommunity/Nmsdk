@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Научная сводка09.11](ScientificResults-2026-11-09.ru.md) отделяет воспроизведённую historicalN4 model6/8 во всех16порядок/Delay условиях, engineeringN2 Same-Matrix positives и stopped-stock diagnostics. Новая серия на исправленном assigned-window контроллере ещё не принята; существующие результаты и графические отчёты не объявляются отсутствующими.
+
 [Owned controller40 actual run](OwnedNativeController40Launch-20261109.ru.md):40/40PASS на M40, outerclosed/ownleasereleased, readonly fixtures unchanged. Root отдельно подтвердил11actualunits/9cases и2преднамеренно heldnegativeledgers; полная приёмка требует maintained collection; это не допуск native48/научной матрицы.
 
 [Root coverage review](NativeBankFixtureCoverageReview-20261109.ru.md): source-only testfix029/docs95 подготовлен; прежние37 не покрывают11 затронутых случаев. Следующий обязательный native cohort48 =37+11. До него нужен отдельный40-case gate maintained owned_native_job; source-only и планы не считаются runtime-приёмкой.
