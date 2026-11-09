@@ -3712,3 +3712,89 @@ TEST(NativeCandidateWindowConsoleArtifact,Cold6ConfiguredDispatchRetainsExactExe
 TEST(NativeCandidateWindowSource6Recognition,ClassicFrozenWholePatternKeepsSourceExactSeparate){WindowSourceRecognition<NNeuronTimeLearner>();}
 TEST(NativeCandidateWindowSource6Recognition,BranchFrozenWholePatternKeepsSourceExactSeparate){WindowSourceRecognition<NNeuronTimeLearnerBranch>();}
 TEST(NativeCandidateWindowSource6Recognition,StoppedSourceRemainsDiagnosticDuringWholePatternTrial){WindowSourceRecognition<NNeuronTimeLearner>(true);}
+
+namespace {
+template<class Owner> void AttachObservedRequestFlag(NativeCompositeFixture<Owner>& f) {
+    f.flag=UEPtr<CompositeTrainingFlag>(new CompositeTrainingFlag);f.flag->SetStorage(f.storage);f.flag->SetEnvironment(f.environment);
+    f.flag->Default();f.flag->Name="ObservedRequestFlag";f.flag->Activity=true;f.flag->SetGlobalTimeStep(f.frequency);
+    UEPtr<UContainer> component=f.flag;Require(f.model->AddComponent(component)!=ForbiddenId,"observed_request_flag_attach");
+    f.flag->Init();f.flag->Value=false;
+    Require(f.owner->IsNeedToTrain.SetPointer(0,&f.flag->Value),"observed_request_flag_connect");
+}
+template<class Owner> void ObservedRequestRestart(bool connected,int mode,bool stopPartial=false) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigureWindowPackageCold(f,WindowPackageSource::Complete);
+    f.owner->CalculateMode=mode;if(connected)AttachObservedRequestFlag(f);
+    const auto request=[&](bool value){if(connected)f.flag->Value=value;else f.owner->IsNeedToTrain.SetDataDirect(value);};
+    const auto tick=[&](){f.model->Calculate();f.environment->IncreaseModelTimeByStep();};
+    std::size_t samples=0;bool stopped=false;ConfiguredNativeEvidenceSinks sinks;
+    if(stopPartial)sinks.onSample=[&](const auto&){++samples;};
+    f.owner->SetConfiguredNativeEvidenceSinks(sinks);request(true);
+    ServiceTicks(f,[&](){if(stopPartial && samples && !stopped){stopped=true;request(false);}});
+    const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.SessionAttempt(),1u);
+    ASSERT_EQ(service.Outcome(),stopPartial?TrainingStatus::ExternalStop:TrainingStatus::Exact)<<service.Reason();
+    ASSERT_EQ(bool(service.Certificate()),!stopPartial);ASSERT_EQ(bool(service.References()),!stopPartial);
+    const auto source=service.CompositeSourceBinding(),configuration=service.CompositeInitialConfiguration();
+    const auto family=service.CompositeOwnerFamilyBinding(),capture=service.CaptureRevision(),revision=f.Revision();
+    const auto epoch=service.CaptureEpoch();const auto oldGroups=service.CompositeMeasurements().size();
+    const auto oldReferences=service.CompositeReferenceGroupIds();
+    const auto captured=service.References();ASSERT_FALSE(service.CompositeMeasurements().empty());
+    ASSERT_FALSE(service.CompositeMeasurements().front().rawTrials.empty());
+    const auto firstRaw=EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front());
+    SaveWindowPackage(f,stopPartial?"request-partial":"request-cold",f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation));
+    if(!stopPartial && (connected || mode==1)) {
+        ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());
+        for(unsigned i=0;i<8;++i)tick();
+        EXPECT_EQ(service.SessionAttempt(),1u);EXPECT_EQ(service.State(),NativeTrainingState::Finished);
+        // An unobserved connected/direct false->true between native ticks is
+        // not claimed as an edge. This deliberately bypasses the local setter.
+        request(false);request(true);tick();EXPECT_EQ(service.SessionAttempt(),1u);
+    }
+    request(false);tick();ASSERT_EQ(service.State(),NativeTrainingState::Finished);
+    request(true);tick();ASSERT_EQ(service.SessionAttempt(),2u)<<service.Reason();
+    EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeInitialConfiguration(),configuration);
+    EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);EXPECT_EQ(service.CaptureRevision(),capture);EXPECT_EQ(service.CaptureEpoch(),epoch);
+    EXPECT_EQ(f.Revision(),revision);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    ASSERT_GE(service.CompositeMeasurements().size(),oldGroups);
+    if(!stopPartial) {
+        EXPECT_EQ(service.CompositeReferenceGroupIds(),oldReferences);ASSERT_TRUE(service.References());
+        EXPECT_EQ(service.References()->Inputs(),captured->Inputs());
+    }
+    EXPECT_EQ(EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front()),firstRaw);
+    ServiceTicks(f);ASSERT_EQ(service.Outcome(),TrainingStatus::Exact)<<service.Reason();ASSERT_TRUE(service.Certificate());
+    EXPECT_EQ(service.SessionAttempt(),2u);EXPECT_EQ(service.CompositeSourceBinding(),source);EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);
+    EXPECT_EQ(service.CaptureRevision(),capture);EXPECT_EQ(service.CaptureEpoch(),epoch);
+    EXPECT_GT(service.CompositeMeasurements().size(),oldGroups);EXPECT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
+    EXPECT_EQ(EncodeCompositeRawPrimary(service.CompositeMeasurements().front().rawTrials.front()),firstRaw);
+    if(captured)EXPECT_EQ(service.References()->Inputs(),captured->Inputs());
+    SaveWindowPackage(f,"request-warm",f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation));
+    for(unsigned i=0;i<8;++i)tick();EXPECT_EQ(service.SessionAttempt(),2u);
+    SavePortableObject(NativeCompositeFixture<Owner>::branch?"branch-observed-request":"classic-observed-request","request-boundary.json",
+        {{"kind","native_observed_request_restart"},{"schema_version",1},{"connected",connected},{"calculate_mode",mode},
+         {"stopped_partial",stopPartial},{"observed_raw_samples",double(samples)},{"initial_attempt",1},{"warm_attempt",2},
+         {"original_family_preserved",service.CompositeOwnerFamilyBinding()==family},{"original_source_preserved",service.CompositeSourceBinding()==source},
+         {"scientific_acceptance",false}});
+}
+}
+TEST(NativeObservedRequest,ClosedSessionRequiresObservedLowAndAvailableBoundary) {
+    NativeTrainingService service;service.FailConfiguration("closed-request-test");
+    EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(true,true));EXPECT_EQ(service.State(),NativeTrainingState::Finished);
+    EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(false,true));
+    EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(true,false));EXPECT_EQ(service.Reason(),"closed-request-test");
+    EXPECT_TRUE(service.ObserveTrainingRequestAtBoundary(true,true));EXPECT_EQ(service.State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(true,true));
+    service.FailConfiguration("second-closed-request-test");EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(true,true));
+    EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(false,true));service.ResetControl();service.FailConfiguration("reset-disarms-edge");
+    EXPECT_FALSE(service.ObserveTrainingRequestAtBoundary(true,true));EXPECT_EQ(service.Reason(),"reset-disarms-edge");
+}
+TEST(NativeObservedRequest,ClassicConnectedMode0WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearner>(true,0);}
+TEST(NativeObservedRequest,ClassicConnectedMode1WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearner>(true,1);}
+TEST(NativeObservedRequest,BranchConnectedMode0WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearnerBranch>(true,0);}
+TEST(NativeObservedRequest,BranchConnectedMode1WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearnerBranch>(true,1);}
+TEST(NativeObservedRequest,ClassicDirectMode0WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearner>(false,0);}
+TEST(NativeObservedRequest,ClassicDirectMode1WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearner>(false,1);}
+TEST(NativeObservedRequest,BranchDirectMode0WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearnerBranch>(false,0);}
+TEST(NativeObservedRequest,BranchDirectMode1WarmKeepsOriginalFamily){ObservedRequestRestart<NNeuronTimeLearnerBranch>(false,1);}
+TEST(NativeObservedRequest,ClassicConnectedPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearner>(true,1,true);}
+TEST(NativeObservedRequest,BranchConnectedPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearnerBranch>(true,1,true);}
+TEST(NativeObservedRequest,ClassicDirectPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearner>(false,1,true);}
+TEST(NativeObservedRequest,BranchDirectPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearnerBranch>(false,1,true);}
