@@ -254,6 +254,11 @@ def validate_job_paths(job, *, loaded_source_root=None):
     _require(not paths["output"].exists() and not paths["runtime"].exists(), "nonempty_new_output")
     protected = [canonical(Path(value), True) for value in job["protected_runtimes"]]
     _require(all(p.is_dir() for p in protected), "protected_runtime_not_directory")
+    # The reservation registry rejects repeated canonical resources regardless
+    # of access mode. Detect the same invalid declaration before creating an
+    # output/controller or starting a build, including shared read-only inputs.
+    _require(len(set(protected)) == len(protected) and
+             not set(protected).intersection(all_paths), "duplicate_reservation_resource")
     _require(all(not p.is_relative_to(paths[k]) and not paths[k].is_relative_to(p)
                  for p in protected for k in ("build", "runtime", "output")), "protected_write_path_overlap")
     _require(all(paths[k].is_dir() for k in ("source", "resources", "framework")), "missing_read_only_directory")
