@@ -9,10 +9,12 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
 import shutil
+import stat
 import threading
 
 from . import archive_retirement, collector_provenance as provenance
@@ -53,6 +55,22 @@ def verify_closed_namespace(directory, declarations, expected_links):
         relative = provenance._relative(row['relative_path'])
         require(relative not in expected, 'native_collection_duplicate_regular_path')
         expected[relative] = {'bytes': row['expected_bytes'], 'sha256': row['expected_sha256']}
+    # Check names and sizes before hashing: an undeclared large cache must not
+    # turn a bounded frozen capture into an unbounded filesystem read.
+    regular, links = set(), set()
+    for path in directory.rglob('*'):
+        entry = path.lstat()
+        if stat.S_ISDIR(entry.st_mode):
+            continue
+        relative = path.relative_to(directory).as_posix()
+        if stat.S_ISLNK(entry.st_mode):
+            links.add(relative)
+            continue
+        require(stat.S_ISREG(entry.st_mode) and relative in expected and
+                entry.st_size == expected[relative]['bytes'], 'native_collection_regular_namespace_changed')
+        regular.add(relative)
+    require(regular == set(expected), 'native_collection_regular_namespace_changed')
+    require(links == set(expected_links), 'native_collection_link_namespace_changed')
     observed = archive_retirement.snapshot(directory.parent, [directory.name])
     require(_regular_projection(observed, directory.name) == expected,
             'native_collection_regular_namespace_changed')
@@ -205,13 +223,24 @@ def collect(manifest_path, manifest_sha256):
     packed, packed_record = provenance._frozen(Path(inventory['path']), 1024**2)
     require(packed_record['bytes'] == inventory['compressed_bytes'] and
             packed_record['sha256'] == inventory['compressed_sha256'], 'native_collection_inventory_digest')
-    observed_raw = gzip.decompress(packed)
-    require(len(observed_raw) == inventory['raw_bytes'] <= 16*1024**2 and _sha(observed_raw) == inventory['raw_sha256'],
+    require(type(inventory['raw_bytes']) is int and 0 < inventory['raw_bytes'] <= 16*1024**2,
+            'native_collection_inventory_expanded_limit')
+    with gzip.GzipFile(fileobj=io.BytesIO(packed)) as stream:
+        observed_raw = stream.read(inventory['raw_bytes']+1)
+    require(len(observed_raw) == inventory['raw_bytes'] and _sha(observed_raw) == inventory['raw_sha256'],
             'native_collection_inventory_expanded_digest')
     observation = provenance._json(observed_raw)
     bounds = manifest['bounds']
     require(bounds == {'maximum_capture_bytes': 64*1024**2, 'maximum_output_bytes': 128*1024**2,
                        'minimum_free_bytes': 512*1024**2}, 'native_collection_fixed_copy_bounds')
+    roots = {manifest['original_paths'][tag]: tag for tag in ('native-output', 'controller')}
+    archive_paths = []
+    for row in manifest['regular_files']:
+        require(row['root'] in roots and row['archive_path'] == roots[row['root']]+'/'+
+                provenance._relative(row['relative_path']), 'native_collection_original_role_scope')
+        archive_paths.append(row['archive_path'])
+    require(archive_paths and len(archive_paths) == len(set(archive_paths)),
+            'native_collection_original_archive_alias')
     _check_original(manifest, observation)
     declarations = list(manifest['regular_files'])
     for role, path, archive in [('frozen-manifest', Path(manifest_path), 'observer/frozen-inputs.json'),
