@@ -2,7 +2,7 @@
   "kind": "runtime2_service5_native_export_python_join_plan",
   "schema_version": 1,
   "status": "source_only_not_CanonicalSpec_not_dispatched",
-  "source_code_commit": "6d3582540dd78cc4d81b4942e95e2c31319bc930",
+  "source_code_commit": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
   "native_target": "Test_PulseLib_StorageComponents",
   "minimum_Cpp_selection": [
     {
@@ -61,17 +61,22 @@
       "line": 357
     },
     {
+      "id": "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder",
+      "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "line": 2059
+    },
+    {
       "id": "NativeCandidateWindowService.ClassicN0CalculateMode0FreshAllNFinal",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2604
+      "line": 2620
     },
     {
       "id": "NativeCandidateWindowService.BranchN0CalculateMode0FreshAllNFinal",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2605
+      "line": 2621
     }
   ],
-  "minimum_Cpp_count": 13,
+  "minimum_Cpp_count": 14,
   "execution_order": [
     {
       "name": "runtime2-declarations11",
@@ -90,6 +95,12 @@
       ]
     },
     {
+      "name": "native-exact-chronology-control1",
+      "ids": [
+        "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder"
+      ]
+    },
+    {
       "name": "service5-real-positives2",
       "ids": [
         "NativeCandidateWindowService.ClassicN0CalculateMode0FreshAllNFinal",
@@ -101,22 +112,22 @@
     {
       "id": "NativeCandidateWindowService.ClassicPartialWarmDiscardsExpiredSeedsAndRecapturesAllN",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2616
+      "line": 2632
     },
     {
       "id": "NativeCandidateWindowService.BranchMergedVertexRemainsDiagnostic",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2627
+      "line": 2643
     },
     {
       "id": "NativeCandidateWindowService.BranchBoundC0WitnessesStayOnBaseRevision",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2613
+      "line": 2629
     },
     {
       "id": "NativeCandidateWindowService.ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory",
       "source": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
-      "line": 2614
+      "line": 2630
     }
   ],
   "exact_case_output_suffixes": {
@@ -139,6 +150,9 @@
     "NativeCandidateWindowService.ClassicWarmAfterOwnedGrowthKeepsOriginalTargetsAndHistory": [
       "classic-native-window-service5/grown-before-warm",
       "classic-native-window-service5/warm-after-owned-growth"
+    ],
+    "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder": [
+      "classic-window-budget-refs-A-empty-B"
     ]
   },
   "output_route": "maintained native_acceptance_worker -> native_gate -> contained_runner -> kernelrequest.environment.TIMELEARNER_COMPOSITE_OUTPUT=<owned-leaf>/native-composite",
@@ -184,7 +198,7 @@
   "acceptance_before_Python": [
     "fresh SDK8repositories actual sourceclosure and loadedruntime verified; no activecache changes",
     "build actualtarget with declaredcompiler/Qt/LLMsource constraints; do not invent configspec",
-    "actualcompiled gtestlist matches exactselectedliteralIDs; realJUnit andwholeunitclosure/lease/sourceproof",
+    "actualcompiled gtestlist matches exactselectedliteral14IDs; realJUnit andwholeunitclosure/lease/sourceproof",
     "actualproducer role inventory/versions/SHA for everycase; originalcold7/runtime2 ownedservice only; all CSV andmodel snapshots retained"
   ],
   "Python_join_checks": [
@@ -223,5 +237,21 @@
     "Pulse": "eff3a20ab7264811c3217eee24fc140bb46e8b07",
     "fix": "de26c3b475a406e02fc9a908953879984681590b",
     "fresh_compiled_coverage": false
-  }
+  },
+  "manual_chronology_output_scope": {
+    "id": "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder",
+    "genuine_Service5_runtime_plan": false,
+    "CLI_case_eligible": false,
+    "retain_original_manual_DATA_archive_CSV_boundary": true,
+    "do_not_synthesize_cold7_runtime2": true
+  },
+  "known_portable_ownership_fix": {
+    "source_fix": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+    "Pulse_ordinary_merge": "a43dbc727d32d626cd082cda8ab27bbe320d9f37",
+    "Root_input": "f015db2d4f6ac8c239e07c050ff596524604060c",
+    "Root_ordinary_merge": "c265fe7e2afe398701df2d21c203a1d7aa466ec9",
+    "only_conflict": "Pulse gitlink resolved to merged Pulse retaining eff3a20 plus f7a0e3",
+    "runtime_accepted": false
+  },
+  "chronology_coverage_reuse": "Only after accepted frozen37 receipt and explicit exact tested dependency equivalence; no such acceptance claimed here and declared selection remains14 until reviewed adjustment."
 }

@@ -1,21 +1,23 @@
 # Реальный Service5 export → независимый archive2/Python/CLI gate
 
 Статус: только source preparation. Текущий private native source — обычный
-merge-коммит `6d3582540dd78cc4d81b4942e95e2c31319bc930` с родителями
-`354182191bffa26c003a7583a65491e37ce5da8b` и
-`7fd28cf7b31aaf4e2fd09fd700745efb8bddf71c`. Первый merge354 включал worker fix
+merge-коммит `c265fe7e2afe398701df2d21c203a1d7aa466ec9` с родителями
+`99699404aeeb679a82006ad6e68635c0a81b877a` и
+`f015db2d4f6ac8c239e07c050ff596524604060c`. Первый merge354 включал worker fix
 `a208663decacaecbbe079499e442b6b9dbf1fb32` в исходный runtime2 Root
 `9d798eb7715c4bcb052d7ba338ef026deb1d9d3b`; второй сохраняет этот fix и
-добавляет новый закреплённый Pulse dependency. Сборки, CMake, серверные команды,
+добавил закреплённый Pulse dependency. Третий mergec265 включает два исправления
+владения JSON и исправленный chronology regression. Сборки, CMake, серверные команды,
 тесты, source projections и графики не выполнялись. Main/develop и frozen
 33/53/73/A2 sources не менялись.
 
 ## Конкретная source closure
 
-Оба шага выполнены через `merge --no-ff`, без конфликтов.
-Materialized delta относительно7fd28 — только NativeAcceptanceWorker docs,
-`native_acceptance_worker.py` и его Python test. App, Tests, CMake/cmake,
-Libraries, Pulse gitlink, Rdk и Bin тождественны7fd28. Worker/test bytes
+Все шаги выполнены через `merge --no-ff`. В mergec265 единственный конфликт —
+Pulse gitlink; он разрешён на отдельный Pulse mergea43, включающий оба родителя.
+Root C++ delta относительно предыдущего code6d358 — только исправление owning
+copies/точной причины отказа в `RetainedGroupsCannotReverseIssuedOrder`.
+App, CMake/cmake, Rdk и Bin тождественны7fd28. Worker/test bytes
 тождественныa208. Полные Git-byte hashes и tree equality записаны в
 `.source-closure.json`.
 
@@ -25,14 +27,22 @@ fix `de26c3b475a406e02fc9a908953879984681590b`: сравнение `QJsonObject`
 candidate.value(...)`. Предшествующий compile failure с нулём выполненных
 tests сохраняется отдельно; исходные Root9d798/Pulse0432 и merge354 не
 переписаны. Этот source dependency не меняет declared math/schema и ещё не
-проверен fresh compile/gate13.
+проверен fresh compile/gate14.
+
+Текущий Pulse `a43dbc727d32d626cd082cda8ab27bbe320d9f37` — обычный mergeeff3a20
+с `f7a0e3e63ec29d4647790a695606d1ca32164ef3`. Delta — ровно две замены
+получения значения на owning `.value(...)` в `CandidateWindowPortableReferences`
+и `CandidateWindowProposalReplay`. В Root chronology test теперь сохраняет
+owning first/second, доказывает перестановку двух разных group IDs и проверяет
+именно `candidate_window_archive_group_order`. Wire/schema/math не меняются;
+исправления ещё не имеют runtime acceptance.
 
 Root+семь gitlinks составляют будущую восьмирепозиторную SDK closure:
 
 | Путь | Commit |
 |---|---|
-| Root code | 6d3582540dd78cc4d81b4942e95e2c31319bc930 |
-| Libraries/Nmsdk-PulseLib | eff3a20ab7264811c3217eee24fc140bb46e8b07 |
+| Root code | c265fe7e2afe398701df2d21c203a1d7aa466ec9 |
+| Libraries/Nmsdk-PulseLib | a43dbc727d32d626cd082cda8ab27bbe320d9f37 |
 | Rdk | d6c9df759a3ee20ad42fa0a83841f19385fba60a |
 | Bin | 918ae5e1a2d6085b9ff148f7162eb9e744126592 |
 | Libraries/Nmsdk-MotionControlLib | 85e4494e8596b0998feebff7da2f8d421a6df66f |
@@ -47,18 +57,29 @@ cache/windows33A2 paths не обновлять. Существующие compil
 dependency settings проверяются maintained preparation workflow; не ссылаться
 на удалённый старый FetchContent cache и не придумывать CanonicalSpec.
 
-## Минимальный C++ набор: 11 + 2 = 13
+## Минимальный C++ набор: 11 + 1 + 2 = 14
 
 Target — `Test_PulseLib_StorageComponents`, настоящий SDK integration executable.
 `Tests/Integration/Libraries/CMakeLists.txt` включает оба maintained test source
 в этот target. Нового harness, test body copies или standalone SDK substitute
 нет. После fresh build compiled `--gtest_list_tests` обязан подтвердить exact
-13 literal IDs до выполнения; source regex inventory сам по себе не доказывает
+14 literal IDs до выполнения; source regex inventory сам по себе не доказывает
 наличие compiled tests.
 
 Сначала все одиннадцать literal `CandidateWindowRuntime2.*` из
 `Test_PulseLib_CandidateWindowDeclarations.cpp` (точные IDs/строки/hash в
-`.selection.json`), затем:
+`.selection.json`), затем исправленный chronology control:
+
+```text
+NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder
+```
+
+Он использует настоящий production archive encoder/decoder и построенный
+native reference archive. Проверка не относится к одиннадцати synthetic runtime
+declarations. Отдельный frozen gate37 также готовит этот case; его будущий receipt
+не считается уже полученным. Повторное покрытие можно исключить только после
+явного сопоставления accepted receipt и точных test/production dependencies,
+без подмены фактического inventory. Затем два Service5 cases:
 
 ```text
 NativeCandidateWindowService.ClassicN0CalculateMode0FreshAllNFinal
@@ -100,13 +121,20 @@ native-composite/classic-native-window-service5/N0-mode0/
 native-composite/branch-native-window-service5/N0-mode0/
 ```
 
+Chronology control дополнительно пишет native manual-DATA suffix
+`native-composite/classic-window-budget-refs-A-empty-B/` через
+`ActualRetainedWindowBudgetArchive(false)`. Он distinct от обоих Service5
+outputs. Этот helper не владеет service5 runtime plan: его файлы нельзя выдавать
+за полноценный cold7/runtime2 CLI case или достраивать недостающий plan.
+Его original archive/CSV/boundary сохраняются как отдельный typed replay control.
+
 Одиннадцать declaration-only tests не вызывают этих export writers. Два cases
 имеют разные topology prefixes; совпадающие run/trial/local group names внутри
 разных cases не дают права смешивать их records. Один case/test запускается
 один раз в fresh output; повторное выполнение в том же output запрещено.
 
 Реальные дополнительные producers поддерживаются исходником и предлагаются
-как **отдельное расширение после минимального13**, не как неявно выбранные tests:
+как **отдельное расширение после минимального14**, не как неявно выбранные tests:
 
 | Exact test suffix (`NativeCandidateWindowService.`) | Реальные output suffixes |
 |---|---|
@@ -144,7 +172,8 @@ references/certificate и unconsumed geometry !=Valid. C0 producer записы�
    original references/proofs/targets, current limits, certificate/last core
    certificate, actual candidate residual evidence and resistance domains.
 
-Точные version checks: cold7, runtime2, protocol5/contract2, archive2/record2,
+Для двух Service5 cases точные version checks: cold7, runtime2,
+protocol5/contract2, archive2/record2,
 method specification2, Recorder6. Минимально обязательно наличие всех шести
 named JSON + всех CSV и record sidecars. Full manifest/SHA/file count формируется
 **после** actual producer completion, из реальных файлов; не генерируется по
@@ -228,14 +257,14 @@ foreign ref proof/recipe/instance/measurement/document; physical Rs claim при
 
 ## Prerequisites и acceptance scope
 
-До настоящего запуска отдельно review: fresh SDK8/root6d358/Pulseeff3 Git-byte
+До настоящего запуска отдельно review: fresh SDK8/rootc265/Pulsea43 Git-byte
 closure, compiler/Qt/LLM dependencies, target build and loaded-runtime capture,
-compiled literal inventory13, exact production-created native request, новые
+compiled literal inventory14, exact production-created native request, новые
 paths/resources/limits и output-route collision map. Из source-only этого
 документа runnable CanonicalSpec/request не создаётся. Подготовка/запуск идут
 через existing production capabilities, не новый orchestrator.
 
-Приёмка требует actual C++13 JUnit, all process closure/leases, immutable source/
+Приёмка требует actual C++14 JUnit, all process closure/leases, immutable source/
 runtime provenance, complete producer byte inventory, independent Python/CLI
 full replay/rehashed negatives и сохранённые per-case reports. Native/analysis
 failures сохраняются; runtime/model/status не правятся ради зелёного результата.
