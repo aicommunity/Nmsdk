@@ -1,5 +1,7 @@
 # Runtime2 exporter и полный archive2 → Python → CLI gate
 
+> Source-only dependency update: после actual corrected33 build failure в Root2504/Pulse4b общий Pulsefix `637b7fb6b66df242f9b7383ce179aa543ca45aed` добавляет direct `ProbeEvidenceJson.h` для portable reference replay. Он объединён `--no-ff` в runtime2 Pulse `0432ac49cdac4cfc475954472802621db72a7b64`; codec/runtime2 schema и criteria не менялись. Прежние073/d286 остаются исходным source-only snapshot, проверенная сборка этой новой линии ещё отсутствует.
+
 Статус: отдельная source preparation от Root
 `7ad96da0e66fe1ef51fc76acb2114174ab6a4e68` / PulseLib
 `4b70b0bfb41510691971de86ce5c4993bb382b8b`. Текущий frozen33 и reader7352

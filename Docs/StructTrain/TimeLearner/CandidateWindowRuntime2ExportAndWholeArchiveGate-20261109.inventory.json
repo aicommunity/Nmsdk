@@ -301,5 +301,12 @@
       "native execution/live authority/certificate/science flags remain unpromoted"
     ],
     "test_execution": "server-only after immutable source + real fixture review"
+  },
+  "common_compile_include_dependency": {
+    "fix": "637b7fb6b66df242f9b7383ce179aa543ca45aed",
+    "runtime2_pulse_merge": "0432ac49cdac4cfc475954472802621db72a7b64",
+    "parent_runtime2_pulse": "073869082041e3f66a3f6bfb3c69b84b4d1276f6",
+    "code_delta": "one direct owning header include in CandidateWindowPortableReferences.cpp",
+    "runtime_accepted": false
   }
 }
