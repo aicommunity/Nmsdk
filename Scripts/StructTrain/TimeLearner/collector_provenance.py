@@ -6,6 +6,7 @@ same contained launch. Callers still need fresh kernel/lease closure, compiled
 inventory, producer auditors and an independent publication reader.
 """
 from dataclasses import dataclass
+import ast
 import hashlib
 import json
 import os
@@ -15,7 +16,7 @@ import stat
 import subprocess
 import uuid
 
-from .native_evidence import require
+from .native_evidence import EvidenceError, require
 from .runtime import digest_json, runtime_content_identity, source_closure
 
 
@@ -24,6 +25,8 @@ _COMMIT = re.compile(r"[0-9a-f]{40}")
 _CASE = re.compile(r"([A-Za-z_]\w*)[/.]([A-Za-z_]\w*)")
 _ROLES = {"request": "request.json", "binding": "owned-unit.json",
           "supervisor_launch": "supervisor.log", "worker_progress": "worker-stdout.log"}
+_INPUT_ROLE = re.compile(r"[A-Za-z][A-Za-z0-9_.-]*")
+_SHA256 = re.compile(r"[0-9a-f]{64}")
 
 
 def _sha(raw):
@@ -76,7 +79,7 @@ def _frozen(path, maximum_bytes):
     with os.fdopen(descriptor, "rb") as stream:
         opened = os.fstat(stream.fileno())
         require(_identity(before) == _identity(opened), "collector_file_changed_during_read")
-        raw = stream.read(maximum_bytes + 1)
+        raw = stream.read(before.st_size + 1)
         after_open = os.fstat(stream.fileno())
     after_path = path.lstat()
     require(len(raw) == before.st_size and len(raw) <= maximum_bytes and
@@ -154,6 +157,42 @@ def _bound_descriptor(raw, records):
             "scientific_verdict": None}
 
 
+def _stage_frozen_files(owned_root, staging, files, prefix):
+    require(type(files) is tuple and files and all(type(row) is tuple and len(row) == 2
+            and type(row[0]) is str and _INPUT_ROLE.fullmatch(row[0]) is not None
+            and row[0] not in (".", "..") and type(row[1]) is bytes for row in files)
+            and len({row[0].casefold() for row in files}) == len(files), "collector_staged_files_invalid")
+    owned_root = _canonical(owned_root)
+    require(owned_root.is_dir(), "collector_owned_root_not_directory")
+    staging = _canonical(staging, exists=False)
+    require(staging.parent == owned_root and not staging.exists(), "collector_staging_scope_or_exists")
+    require(os.mkdir in os.supports_dir_fd and os.open in os.supports_dir_fd,
+            "collector_directory_fd_required")
+    root_identity = _identity(owned_root.stat())
+    root_fd = os.open(owned_root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    result = {}
+    try:
+        require(_identity(os.fstat(root_fd)) == root_identity, "collector_owned_root_changed")
+        os.mkdir(staging.name, mode=0o700, dir_fd=root_fd)
+        stage_fd = os.open(staging.name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=root_fd)
+        try:
+            for name, raw in files:
+                fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                             0o600, dir_fd=stage_fd)
+                with os.fdopen(fd, "wb") as stream:
+                    stream.write(raw)
+                path = staging/name
+                require(_canonical(path).read_bytes() == raw, "collector_staged_bytes_changed")
+                result[prefix + name] = path
+        finally:
+            os.close(stage_fd)
+        require(owned_root.stat().st_ino == root_identity[1] and
+                owned_root.stat().st_dev == root_identity[0], "collector_owned_root_changed")
+    finally:
+        os.close(root_fd)
+    return result
+
+
 @dataclass(frozen=True)
 class CapturedCollectorInputs:
     """Frozen bytes, not a capability or a kernel/scientific certificate."""
@@ -179,35 +218,8 @@ class CapturedCollectorInputs:
         raw = {role: by_name[name] for role, name in _ROLES.items()}
         require(descriptor == _bound_descriptor(raw, descriptor.get("inputs")),
                 "collector_captured_descriptor_changed")
-        owned_root = _canonical(owned_root)
-        require(owned_root.is_dir(), "collector_owned_root_not_directory")
-        staging = _canonical(staging, exists=False)
-        require(staging.parent == owned_root and not staging.exists(), "collector_staging_scope_or_exists")
-        require(os.mkdir in os.supports_dir_fd and os.open in os.supports_dir_fd,
-                "collector_directory_fd_required")
-        root_identity = _identity(owned_root.stat())
-        root_fd = os.open(owned_root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
-        result = {}
-        try:
-            require(_identity(os.fstat(root_fd)) == root_identity, "collector_owned_root_changed")
-            os.mkdir(staging.name, mode=0o700, dir_fd=root_fd)
-            stage_fd = os.open(staging.name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=root_fd)
-            try:
-                for name, raw in (*self._files, ("descriptor.json", self._descriptor_json)):
-                    fd = os.open(name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
-                                 0o600, dir_fd=stage_fd)
-                    with os.fdopen(fd, "wb") as stream:
-                        stream.write(raw)
-                    path = staging/name
-                    require(_canonical(path).read_bytes() == raw, "collector_staged_bytes_changed")
-                    result["collector-provenance/" + name] = path
-            finally:
-                os.close(stage_fd)
-            require(owned_root.stat().st_ino == root_identity[1] and
-                    owned_root.stat().st_dev == root_identity[0], "collector_owned_root_changed")
-        finally:
-            os.close(root_fd)
-        return result
+        return _stage_frozen_files(owned_root, staging,
+            (*self._files, ("descriptor.json", self._descriptor_json)), "collector-provenance/")
 
 
 def capture_owned_supervisor(container, *, supervisor_log, worker_stdout, maximum_input_bytes=16*1024**2):
@@ -225,7 +237,7 @@ def capture_owned_supervisor(container, *, supervisor_log, worker_stdout, maximu
 
 def _git(repository, *arguments):
     return subprocess.check_output(["git", "-C", str(repository), *arguments],
-        env={**os.environ, "GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0"})
+        env={**os.environ, "GIT_NO_LAZY_FETCH": "1", "GIT_OPTIONAL_LOCKS": "0"}, stderr=subprocess.PIPE)
 
 
 def _relative(path):
@@ -235,7 +247,10 @@ def _relative(path):
     return path
 
 
-def _git_blob(repository, commit, path, maximum_bytes=16*1024**2):
+def _git_blob(repository, commit, path, maximum_bytes=16*1024**2, *, expected_bytes=None):
+    if expected_bytes is not None:
+        require(type(expected_bytes) is int and 0 <= expected_bytes <= 2**53-1,
+                "collector_input_count_invalid")
     _relative(path)
     entry = _git(repository, "ls-tree", "-z", commit, "--", path).split(b"\0")
     require(len(entry) == 2 and entry[1] == b"", "collector_git_blob_missing")
@@ -243,11 +258,353 @@ def _git_blob(repository, commit, path, maximum_bytes=16*1024**2):
     mode, kind, oid = header.decode().split()
     require(mode in ("100644", "100755") and kind == "blob" and recorded_path.decode() == path,
             "collector_git_regular_blob_required")
+    require(_git(repository, "cat-file", "-t", oid).strip() == b"blob", "collector_git_regular_blob_required")
     size = int(_git(repository, "cat-file", "-s", oid).decode().strip())
     require(size <= maximum_bytes, "collector_git_blob_size_budget")
+    require(expected_bytes is None or size == expected_bytes, "collector_git_blob_declared_size_changed")
     raw = _git(repository, "cat-file", "blob", oid)
     require(len(raw) == size, "collector_git_blob_size_changed")
     return raw, {"commit": commit, "path": path, "git_blob": oid, "bytes": len(raw), "sha256": _sha(raw)}
+
+
+def _input_count(value, *, positive=False):
+    require(type(value) is int and 0 <= value <= 2**53-1 and (not positive or value > 0),
+            "collector_input_count_invalid")
+    return value
+
+
+def _input_path(value):
+    _relative(value)
+    require(not any(ord(char) < 32 or ord(char) == 127 for char in value), "collector_input_path_invalid")
+    try:
+        value.encode("utf-8")
+    except UnicodeError as error:
+        raise EvidenceError("collector_input_path_invalid") from error
+    return value
+
+
+def _input_root(value):
+    require(isinstance(value, (str, Path)), "collector_absolute_path_required")
+    text = str(value)
+    require(text and not any(ord(char) < 32 or ord(char) == 127 for char in text), "collector_input_root_invalid")
+    try:
+        text.encode("utf-8")
+    except UnicodeError as error:
+        raise EvidenceError("collector_input_root_invalid") from error
+    require(Path(value).is_absolute() and ".." not in Path(value).parts, "collector_absolute_path_required")
+    return value
+
+
+@dataclass(frozen=True)
+class RequiredFileRole:
+    role: str
+    root: Path
+    relative_path: str
+    expected_bytes: int
+    expected_sha256: str
+    maximum_bytes: int
+    staged_name: str
+
+
+@dataclass(frozen=True)
+class GitInputRole:
+    role: str
+    repository: Path
+    repository_head: str
+    commit: str
+    path: str
+    git_blob: str
+    expected_bytes: int
+    expected_sha256: str
+    maximum_bytes: int
+
+
+def _file_role(value):
+    require(type(value) is RequiredFileRole and type(value.role) is str and
+            _INPUT_ROLE.fullmatch(value.role) is not None, "collector_file_role_invalid")
+    _input_root(value.root)
+    _input_path(value.relative_path)
+    require(type(value.expected_sha256) is str and _SHA256.fullmatch(value.expected_sha256) is not None,
+            "collector_input_sha256_invalid")
+    require(_input_count(value.expected_bytes) <= _input_count(value.maximum_bytes, positive=True),
+            "collector_input_size_budget")
+    require(type(value.staged_name) is str and _INPUT_ROLE.fullmatch(value.staged_name) is not None and
+            value.staged_name.casefold() not in (".", "..", "descriptor.json"), "collector_input_staged_name_invalid")
+
+
+def _git_role(value):
+    require(type(value) is GitInputRole and type(value.role) is str and
+            _INPUT_ROLE.fullmatch(value.role) is not None, "collector_git_role_invalid")
+    _input_root(value.repository)
+    for token in (value.repository_head, value.commit, value.git_blob):
+        require(type(token) is str and _COMMIT.fullmatch(token) is not None, "collector_commit_invalid")
+    _input_path(value.path)
+    require(type(value.expected_sha256) is str and _SHA256.fullmatch(value.expected_sha256) is not None,
+            "collector_input_sha256_invalid")
+    require(_input_count(value.expected_bytes) <= _input_count(value.maximum_bytes, positive=True),
+            "collector_input_size_budget")
+
+
+def _requirements(values, validator, maximum_total_bytes):
+    require(type(values) in (list, tuple) and bool(values), "collector_input_roles_required")
+    _input_count(maximum_total_bytes, positive=True)
+    # Validate the WHOLE manifest before reading any member.
+    for value in values:
+        validator(value)
+    require(len({value.role for value in values}) == len(values), "collector_duplicate_input_role")
+    require(sum(value.expected_bytes for value in values) <= maximum_total_bytes,
+            "collector_input_total_size_budget")
+
+
+def _file_descriptor(requirements, files):
+    require(type(requirements) is tuple, "collector_captured_file_roles_invalid")
+    _requirements(requirements, _file_role, 2**53-1)
+    require(type(files) is tuple and len(files) == len(requirements) and
+            all(type(row) is tuple and len(row) == 2 and type(row[1]) is bytes for row in files),
+            "collector_captured_file_roles_invalid")
+    names = [value.staged_name.casefold() for value in requirements]
+    require(len(set(names)) == len(names), "collector_duplicate_staged_input")
+    paths = [str(Path(value.root)/value.relative_path) for value in requirements]
+    require(len(set(paths)) == len(paths), "collector_input_role_path_alias")
+    rows = {}
+    for value, (name, raw) in zip(requirements, files):
+        require(name == value.staged_name and len(raw) == value.expected_bytes and
+                _sha(raw) == value.expected_sha256, "collector_captured_file_role_changed")
+        rows[value.role] = {"root": str(Path(value.root)), "relative_path": value.relative_path,
+            "source_path": str(Path(value.root)/value.relative_path), "staged_name": name,
+            "bytes": len(raw), "sha256": _sha(raw), "maximum_bytes": value.maximum_bytes}
+    return {"kind": "timelearner_collector_required_files", "schema_version": 1, "roles": rows,
+            "kernel_closure_attested": False, "test_success_attested": False, "scientific_verdict": None}
+
+
+@dataclass(frozen=True)
+class CapturedFileRoles:
+    """Captured metadata bytes; public construction cannot grant any authority."""
+    _requirements: tuple
+    _files: tuple
+
+    @property
+    def descriptor(self):
+        return _file_descriptor(self._requirements, self._files)
+
+    def materialize(self, owned_root, staging):
+        descriptor = self.descriptor  # validate all names/bytes BEFORE mkdir/open
+        encoded = (json.dumps(descriptor, indent=2, allow_nan=False)+"\n").encode()
+        return _stage_frozen_files(owned_root, staging,
+            (*self._files, ("descriptor.json", encoded)), "collector-file-inputs/")
+
+
+def capture_required_file_roles(requirements, *, maximum_total_bytes=64*1024**2):
+    """Capture all explicitly required inputs before the publisher creates output."""
+    _requirements(requirements, _file_role, maximum_total_bytes)
+    names = [value.staged_name.casefold() for value in requirements]
+    require(len(set(names)) == len(names), "collector_duplicate_staged_input")
+    files = []
+    try:
+        paths = []
+        for value in requirements:
+            root = _canonical(value.root)
+            require(root.is_dir(), "collector_input_root_not_directory")
+            paths.append(root/value.relative_path)
+        require(len(set(paths)) == len(paths), "collector_input_role_path_alias")
+        for value, path in zip(requirements, paths):
+            path = _canonical(path)
+            require(path.lstat().st_size == value.expected_bytes, "collector_required_input_size_changed")
+            raw, record = _frozen(path, value.maximum_bytes)
+            require(record["bytes"] == value.expected_bytes and record["sha256"] == value.expected_sha256,
+                    "collector_required_input_changed")
+            files.append((value.staged_name, raw))
+    except OSError as error:
+        raise EvidenceError("collector_required_input_unavailable") from error
+    captured = CapturedFileRoles(tuple(requirements), tuple(files))
+    captured.descriptor
+    return captured
+
+
+def verify_git_input_roles(requirements, *, maximum_total_bytes=128*1024**2):
+    """Validate explicit Git ODB capabilities; do not retain/duplicate primary bytes."""
+    _requirements(requirements, _git_role, maximum_total_bytes)
+    rows = {}
+    try:
+        for value in requirements:
+            repository = _canonical(value.repository)
+            require(repository.is_dir(), "collector_input_root_not_directory")
+            require(_git(repository, "rev-parse", "HEAD").decode().strip() == value.repository_head,
+                    "collector_git_role_head_changed")
+            require(_git(repository, "rev-parse", value.commit+":"+value.path).decode().strip() == value.git_blob,
+                    "collector_git_role_object_changed")
+            raw, record = _git_blob(repository, value.commit, value.path, value.maximum_bytes,
+                                    expected_bytes=value.expected_bytes)
+            require(record["git_blob"] == value.git_blob and record["bytes"] == value.expected_bytes and
+                    record["sha256"] == value.expected_sha256, "collector_git_role_object_changed")
+            require(_git(repository, "rev-parse", "HEAD").decode().strip() == value.repository_head,
+                    "collector_git_role_head_changed")
+            rows[value.role] = {"repository": str(repository), "repository_head": value.repository_head,
+                **record, "maximum_bytes": value.maximum_bytes, "payload_retained": False}
+    except (OSError, subprocess.CalledProcessError) as error:
+        raise EvidenceError("collector_git_role_object_unavailable") from error
+    return {"kind": "timelearner_collector_git_input_roles", "schema_version": 1, "roles": rows,
+            "kernel_closure_attested": False, "test_success_attested": False, "scientific_verdict": None}
+
+
+def _assignment_targets(statement):
+    roots = statement.targets if isinstance(statement, ast.Assign) else [statement.target]
+    return [node for root in roots for node in ast.walk(root)
+            if isinstance(node, (ast.Name, ast.Attribute)) and isinstance(node.ctx, ast.Store)]
+
+
+def _python_cases(raw, selected_class):
+    """Closed literal dialect, never an import or a replacement test loader."""
+    try:
+        tree = ast.parse(raw)
+    except (SyntaxError, UnicodeError, ValueError) as error:
+        raise EvidenceError("collector_python_source_invalid") from error
+    module_aliases = set()
+    case_aliases = set()
+    for node in tree.body:
+        if isinstance(node, ast.Import):
+            module_aliases.update(item.asname or item.name for item in node.names if item.name == "unittest")
+        if isinstance(node, ast.ImportFrom) and node.module == "unittest":
+            case_aliases.update(item.asname or item.name for item in node.names if item.name == "TestCase")
+        require(not (isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == "load_tests"),
+                "collector_python_dynamic_inventory_unsupported")
+    def standard_case(base):
+        return (isinstance(base, ast.Name) and base.id in case_aliases or
+                isinstance(base, ast.Attribute) and base.attr == "TestCase" and
+                isinstance(base.value, ast.Name) and base.value.id in module_aliases)
+    def skip_decorator(node):
+        call = node.func if isinstance(node, ast.Call) else node
+        return isinstance(call, ast.Attribute) and isinstance(call.value, ast.Name) and \
+            call.value.id in module_aliases and call.attr in ("skip", "skipIf", "skipUnless")
+    classes = [node for node in tree.body if isinstance(node, ast.ClassDef)]
+    outside = [node.name for node in classes if selected_class is not None and node.name != selected_class]
+    if selected_class is not None:
+        classes = [node for node in classes if node.name == selected_class]
+        require(len(classes) == 1, "collector_python_selected_class_missing")
+    selected = []
+    for node in classes:
+        if not node.bases or all(isinstance(base, ast.Name) and base.id == "object" for base in node.bases):
+            require(selected_class is None, "collector_python_selected_class_not_testcase")
+            outside.append(node.name)
+            continue
+        require(len(node.bases) == 1 and standard_case(node.bases[0]) and not node.keywords and
+                all(skip_decorator(item) for item in node.decorator_list),
+                "collector_python_dynamic_or_inherited_class_unsupported")
+        methods = [item for item in node.body if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef))
+                   and item.name.startswith("test")]
+        require(all(isinstance(item, ast.FunctionDef) and
+                    all(skip_decorator(decorator) for decorator in item.decorator_list) for item in methods),
+                "collector_python_dynamic_test_method_unsupported")
+        require(len({item.name for item in methods}) == len(methods), "collector_python_duplicate_literal_test")
+        # Test functions installed by assignments/conditionals/inherited bases
+        # are outside this dialect, even if an expected count happens to match.
+        for statement in node.body:
+            if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue  # local variables/closures are not class test members
+            for item in ast.walk(statement):
+                require(not (isinstance(item, ast.Name) and isinstance(item.ctx, ast.Store) and
+                             item.id.startswith("test")), "collector_python_dynamic_inventory_unsupported")
+                if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)) and item.name.startswith("test"):
+                    require(False, "collector_python_dynamic_inventory_unsupported")
+                if isinstance(item, (ast.Assign, ast.AnnAssign, ast.AugAssign, ast.NamedExpr)):
+                    targets = _assignment_targets(item)
+                    require(not any(isinstance(target, ast.Name) and target.id.startswith("test") or
+                                    isinstance(target, ast.Attribute) and target.attr.startswith("test") for target in targets),
+                            "collector_python_dynamic_inventory_unsupported")
+        selected.append((node.name, [item.name for item in methods]))
+    selected_names = {name for name, _ in selected}
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            continue
+        for item in ast.walk(node):
+            require(not isinstance(item, ast.ClassDef), "collector_python_conditional_class_unsupported")
+            require(not (isinstance(item, ast.Name) and item.id in selected_names),
+                    "collector_python_dynamic_inventory_unsupported")
+            require(not (isinstance(item, ast.Name) and isinstance(item.ctx, ast.Store) and
+                         item.id in module_aliases | case_aliases), "collector_python_dynamic_inventory_unsupported")
+            if isinstance(item, (ast.Assign, ast.AnnAssign, ast.AugAssign, ast.NamedExpr)):
+                targets = _assignment_targets(item)
+                require(not any(isinstance(target, ast.Name) and target.id in module_aliases | case_aliases
+                                for target in targets), "collector_python_dynamic_inventory_unsupported")
+                require(not any(isinstance(target, ast.Name) and target.id in selected_names or
+                                isinstance(target, ast.Attribute) and isinstance(target.value, ast.Name) and
+                                target.value.id in selected_names for target in targets),
+                        "collector_python_dynamic_inventory_unsupported")
+                if isinstance(item, ast.Assign):
+                    require(not any(isinstance(value, ast.Name) and value.id in selected_names
+                                    for value in ast.walk(item.value)),
+                            "collector_python_dynamic_inventory_unsupported")
+            if isinstance(item, ast.Call):
+                require(not any(isinstance(argument, ast.Name) and argument.id in selected_names for argument in item.args),
+                        "collector_python_dynamic_inventory_unsupported")
+    require(selected and all(methods for _, methods in selected), "collector_python_literal_tests_missing")
+    return selected, outside
+
+
+def capture_python_selection_inventory(source_root, commit, selectors, expected_test_ids, *, maximum_source_bytes=8*1024**2):
+    """Match explicit module/class selections to frozen Git+physical literal tests.
+
+    The production unittest loader and actual log/result IDs remain required.
+    Dynamic/method/inherited selection is rejected rather than guessed.
+    """
+    require(type(commit) is str and _COMMIT.fullmatch(commit) is not None, "collector_commit_invalid")
+    _input_root(source_root)
+    _input_count(maximum_source_bytes, positive=True)
+    require(type(selectors) in (list, tuple) and selectors and
+            all(type(value) is str and re.fullmatch(r"[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+", value) and
+                value.startswith("Scripts.StructTrain.TimeLearner.tests.test_") for value in selectors) and
+            len(set(selectors)) == len(selectors),
+            "collector_python_selectors_invalid")
+    require(type(expected_test_ids) in (list, tuple) and expected_test_ids and
+            all(type(value) is str and value for value in expected_test_ids) and
+            len(set(expected_test_ids)) == len(expected_test_ids), "collector_python_expected_ids_invalid")
+    try:
+        source_root = _canonical(source_root)
+        require(source_root.is_dir(), "collector_input_root_not_directory")
+        require(_git(source_root, "rev-parse", "HEAD").decode().strip() == commit, "collector_python_source_head_changed")
+        paths = {}
+        for entry in _git(source_root, "ls-tree", "-r", "-z", commit, "--", "Scripts/StructTrain/TimeLearner/tests").split(b"\0"):
+            if entry:
+                header, path = entry.split(b"\t", 1)
+                mode, kind, oid = header.decode().split()
+                if mode in ("100644", "100755") and kind == "blob" and path.endswith(b".py"):
+                    paths[path.decode()] = oid
+        contents = {}
+        records = {}
+        selections = []
+        ids = []
+        retained = 0
+        for selector in selectors:
+            parts = selector.split(".")
+            matches = [(index, "/".join(parts[:index])+".py") for index in range(1, len(parts)+1)
+                       if "/".join(parts[:index])+".py" in paths]
+            require(len(matches) == 1, "collector_python_selector_source_missing_or_ambiguous")
+            length, path = matches[0]
+            require(len(parts)-length in (0, 1), "collector_python_method_selector_unsupported")
+            chosen = None if length == len(parts) else parts[-1]
+            if path not in contents:
+                require(retained < maximum_source_bytes, "collector_python_source_size_budget")
+                raw, record = _git_blob(source_root, commit, path, maximum_source_bytes-retained)
+                working, _ = _frozen(source_root/path, maximum_source_bytes-retained)
+                require(raw == working, "collector_python_physical_source_changed")
+                retained += len(raw)
+                contents[path] = raw
+                records[path] = record
+            classes, outside = _python_cases(contents[path], chosen)
+            selected_ids = [".".join(parts[:length])+"."+name+"."+method
+                            for name, methods in classes for method in methods]
+            ids.extend(selected_ids)
+            selections.append({"selector": selector, "path": path, "class": chosen,
+                               "literal_test_ids": selected_ids, "outside_declared_scope": outside})
+        require(len(ids) == len(set(ids)) and set(ids) == set(expected_test_ids), "collector_python_literal_inventory_changed")
+        require(_git(source_root, "rev-parse", "HEAD").decode().strip() == commit, "collector_python_source_head_changed")
+    except (OSError, subprocess.CalledProcessError, UnicodeError) as error:
+        raise EvidenceError("collector_python_source_unavailable") from error
+    return {"kind": "timelearner_collector_python_literal_inventory", "schema_version": 1,
+            "dialect": "literal-python-unittest-module-class-v1", "source_root": str(source_root),
+            "source_commit": commit, "sources": records, "selections": selections, "literal_test_ids": sorted(ids),
+            "runtime_inventory_verified": False, "tests_executed": False, "SDK_source_verified": False,
+            "kernel_closure_attested": False, "test_success_attested": False, "scientific_verdict": None}
 
 
 def _literal_cases(raw, suites=None):
