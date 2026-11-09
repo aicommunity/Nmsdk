@@ -92,3 +92,35 @@ Project.ini из pinned Bin, с отдельным immutable manifest. CLI пр�
 Отрицательная попытка сохранена; новая версия резервирует родительский каталог
 suite и проверяет этот контракт настоящим Reservations fixture (inventory18).
 Evidence отрицательной попытки `b7fd31aa4b8d01559f55431fc2651a088e1d4f75`, [квитанция](OwnedPythonJobsMetadata17NegativeVerification.json): исполнено0 тестов, worker закрыт, leases отсутствуют. В первом collector файл suite был нормализован CRLF→LF; исходный bound suite отдельно проверен по сохранённым raw bytes. Это ограничение явно записано в квитанции, а не выдано за наличие original raw внутри архива. Positive18 сохраняет исходный suite в архиве.
+
+## Подготовка изоляции кэшей графиков — 09.11.2026
+
+Новая source-only версия worker задаёт `MPLCONFIGDIR=worker/tmp/matplotlib`
+и `XDG_CACHE_HOME=worker/tmp/xdg-cache` вместе с прежним `TMPDIR=worker/tmp`.
+Все три каталога создаёт сам worker; фактические пути сохраняются в
+`worker/temporary-environment.json`. Дочерняя production validation получает
+эти переменные через прежний `environment`. Новых request fields, действий
+или runner API нет. Это исключает зависимость writable Matplotlib/XDG caches
+от домашнего каталога user-systemd; исторические jobs и их metadata не меняются.
+
+Новый адресный metadata test вызывает production `_worker`, подменяя только
+проверки outer-unit/source и registry для временного fixture. Он запускает
+настоящий metadata child с переданным worker окружением; child пишет маркеры
+в полученные cache paths. Проверяются пути внутри owned TMPDIR и отсутствие
+записей в прежних caller cache directories. Затем тест намеренно прерывает
+validation boundary: положительный результат validation или модели не создаётся.
+Inventory этого модуля теперь13: прежние12 и один новый test. Прежний PASS18
+не подтверждает новую проекцию среды автоматически; шесть неизменённых AR tests
+не добавлены в этот адресный scope без отдельной причины. Серверные проверки
+нового source ещё не выполнялись. [Точные IDs и Git blob bindings](OwnedPlotCacheIsolationPreparation-20261109.json).
+
+Для будущих14 renderer tests отдельно подготовлен интерпретатор
+`/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1/bin/python`:
+это настоящий скопированный executable внутри новой venv, не ссылка на
+`/usr/bin/python3.12`. Поэтому штатная canonicalization `file_record` сохраняет
+нужный prefix. Site-packages побайтно совпадают с прежней plot venv; imports
+Matplotlib3.9.4, NumPy2.5.4 и Pillow13.0.0 проверены на сервере без создания
+графиков или запуска tests. Прежняя среда,60 Git-restored native files и source7930
+проверены до/после подготовки. Эта operational preparation не является PASS14.
+Будущий source с исправлением кэшей получит другой каталог и fingerprint;
+подготовленный source7930 остаётся отдельным неизменяемым снимком.

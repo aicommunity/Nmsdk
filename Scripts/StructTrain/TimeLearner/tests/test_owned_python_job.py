@@ -1,11 +1,13 @@
 """Request and filesystem boundaries; no neural or native build fixtures."""
 import copy
 import hashlib
+import json
+import os
 from pathlib import Path
 import subprocess
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from .. import owned_python_job as subject
 from ..archive_retirement import snapshot
@@ -73,6 +75,64 @@ class OwnedPythonJobTest(unittest.TestCase):
                 self.assertEqual(sum(r['access'] == 'write' for r in lease['resources']), 1)
             finally:
                 registry.release(lease['token'], note='Metadata fixture completed; no contained model or build.')
+
+    def test_worker_projects_actual_child_plotting_caches_inside_owned_TMPDIR(self):
+        # Mock the existing outer-unit/source attestations, then observe a real
+        # metadata child launched with the production _worker environment.
+        # No new unit, validation success document or model is fabricated.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);job = root/'job';job.mkdir();tool = root/'tool';tool.mkdir()
+            inputs = root/'inputs';inputs.mkdir();old_mpl = root/'old-mpl';old_mpl.mkdir()
+            old_xdg = root/'old-xdg';old_xdg.mkdir()
+            suite = inputs/'suite.json'
+            subject._write(suite, {'expected_test_ids': ['metadata.environment.probe'], 'fixtures': {}})
+            document = request();document['operation']['source']['path'] = str(tool)
+            document['operation']['suite'] = {'path': str(suite), 'sha256': hashlib.sha256(suite.read_bytes()).hexdigest()}
+            request_path = inputs/'request.json';subject._write(request_path, document)
+            fields = Path('/proc/self/stat').read_text().rsplit(') ', 1)[1].split()
+            client = {'pid': os.getpid(), 'start_ticks': fields[19]}
+            boot = Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+            context = {'client': client, 'boot_id': boot};subject._write(job/'launch-context.json', context)
+            contained = job/'process/contained';contained.mkdir(parents=True)
+            subject._write(contained/'runtime.json', {
+                'app_ini': {'path': str(request_path), 'sha256': hashlib.sha256(request_path.read_bytes()).hexdigest()},
+                'source_closure': {'tool_root': document['tool_commit'],
+                    'launch_context_sha256': hashlib.sha256((job/'launch-context.json').read_bytes()).hexdigest()}})
+            subject._write(contained/'request.json', {'controller': client, 'boot_id': boot, 'uid': os.getuid()})
+            binding = {'initial_main_pid': client['pid'], 'initial_start_ticks': client['start_ticks'],
+                       'control_group': Path('/proc/self/cgroup').read_text().strip().removeprefix('0::')}
+            registry = Mock();registry.capacity = None
+            registry.reserve.return_value = {'token': 'metadata-environment-lease'}
+            real_run = subprocess.run;observed = []
+            def observe_child(arguments, **kwargs):
+                self.assertEqual(arguments[2:4], ['-m', 'Scripts.StructTrain.TimeLearner.validation'])
+                code = ("import json,os;from pathlib import Path;"
+                        "v={k:os.environ[k] for k in ('TMPDIR','MPLCONFIGDIR','XDG_CACHE_HOME')};"
+                        "[Path(p,'metadata-probe').write_text('owned') for p in v.values()];print(json.dumps(v))")
+                result = real_run([subject.sys.executable, '-B', '-c', code], cwd=kwargs['cwd'],
+                                  env=kwargs['env'], capture_output=True, text=True, check=True)
+                observed.append(json.loads(result.stdout))
+                raise RuntimeError('metadata-environment-probe-stop')
+            with patch.dict(subject.os.environ, {'TMPDIR': str(root), 'MPLCONFIGDIR': str(old_mpl),
+                                                 'XDG_CACHE_HOME': str(old_xdg)}), \
+                 patch.object(subject, 'SOURCE', tool), \
+                 patch.object(subject, '_paths', return_value=(root, job)), \
+                 patch.object(subject, 'inspect', return_value={'binding': binding}), \
+                 patch.object(subject.Reservations, 'open_existing', return_value=registry), \
+                 patch.object(subject, '_source_snapshot', side_effect=lambda path, commit: {'root': str(path), 'commit': commit}), \
+                 patch.object(subject.subprocess, 'run', side_effect=observe_child), \
+                 patch.object(subject.sys, 'dont_write_bytecode', True):
+                self.assertEqual(subject._worker(request_path), 1)
+            expected = {'TMPDIR': str(job/'worker/tmp'), 'MPLCONFIGDIR': str(job/'worker/tmp/matplotlib'),
+                        'XDG_CACHE_HOME': str(job/'worker/tmp/xdg-cache')}
+            self.assertEqual(observed, [expected])
+            self.assertEqual(json.loads((job/'worker/temporary-environment.json').read_text()), expected)
+            self.assertEqual(json.loads((job/'worker/exception.json').read_text())['reason'],
+                             'metadata-environment-probe-stop')
+            self.assertFalse(json.loads((job/'worker/terminal.json').read_text())['operation_passed'])
+            self.assertEqual(list(old_mpl.iterdir()), []);self.assertEqual(list(old_xdg.iterdir()), [])
+            for path in expected.values():
+                self.assertEqual((Path(path)/'metadata-probe').read_text(), 'owned')
 
     def test_callbacks_are_checked_before_any_runtime_or_output_side_effect(self):
         with tempfile.TemporaryDirectory() as directory:

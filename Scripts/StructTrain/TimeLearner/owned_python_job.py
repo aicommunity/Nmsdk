@@ -188,6 +188,10 @@ def _worker(request_path):
             'owned_job_worker_not_bound_main')
     output = job/'worker';output.mkdir(exist_ok=False)
     temporary = output/'tmp';temporary.mkdir();os.environ['TMPDIR'] = str(temporary)
+    for name, directory in (('MPLCONFIGDIR', 'matplotlib'), ('XDG_CACHE_HOME', 'xdg-cache')):
+        cache = temporary/directory;cache.mkdir();os.environ[name] = str(cache)
+    _write(output/'temporary-environment.json',
+           {name: os.environ[name] for name in ('TMPDIR', 'MPLCONFIGDIR', 'XDG_CACHE_HOME')})
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1';sys.dont_write_bytecode = True
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     operation = request['operation'];resources = [{'path': str(base), 'access': 'write'}]
