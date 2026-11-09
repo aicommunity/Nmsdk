@@ -16,13 +16,15 @@ Elder service-проверка обнаружила потерю уведомл�
 250PASS/0FAIL/error/skip,137leaves/138closedgroups, released lease.
 [Native assertions и transport/provenance независимо приняты](CompositeFull250A4Acceptance-20261109.ru.md);
 обрыв VPN не потребовал повторного запуска. Код/evidence объединены в
-maintained feature branch. Отдельно нужны actual6 native archive reader и
-следующие candidate-window/lifetime gates; App execution3/codecs и будущий
+maintained feature branch. [Actual6 native archive reader принят:7/7](CompositeNativeA4Semantic7Acceptance-20261109.ru.md),
+на неизменённых archive1 exports; отдельно нужны candidate-window/lifetime gates; App execution3/codecs и будущий
 Train5/control-lifetime source не включены в минимальный baseline A4.
 
 Прежние source-only E11/BB1 дополнены общей cold6/cold7/execution3 исправленной
 [парой corrected/unfixed](ColdEnvelopeLifetimePairReadiness-20261109.ru.md),
-которая ещё не получила runtime-приёмку. Не смешивать её со снимком A4.
+которая доставлена в отдельные source-копии, но ещё не собрана и не получила
+runtime-приёмку. Fresh-build worker profile проверяется отдельными19 tests.
+Не смешивать эту пару со снимком A4.
 27проверок запуска/renderer на другом tool-source и Classic render независимо
 приняты. [Выбранный overview просмотрен](ClassicLTReadableOverview-20261109.ru.md):
 LT Potential ненулевой, старуюflatpanel объясняет масштаб threshold100.

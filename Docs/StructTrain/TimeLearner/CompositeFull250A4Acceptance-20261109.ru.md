@@ -1,5 +1,7 @@
 # Baseline A4: приняты 250 native checks и перенос первичных артефактов
 
+**Последующее дополнение:** [production Python reader прошёл7/7 на этих шести actual archives](CompositeNativeA4Semantic7Acceptance-20261109.ru.md). Исходная metadata-only квитанция ниже сохраняет свой scope; это не C++ cold decoder/App/package acceptance.
+
 На M40 завершён прежний единственный запуск A4: **250 PASS,0 FAIL/error/skip**,137 leaves. После восстановления VPN Root повторно проверил тот же binding `19900e040d6e018e249f870fbc120b216fbd22633090b2088e95c52a01282d42`: внешний unit/group отсутствует, lease освобождён. Работа не перезапускалась. Actual C++ snapshot остаётся Root `478cc35c0f1a314c34ad93aa0095b61836c658ec` / Pulse `4a5c2ec9df9a9f704dcd8260714323494bfa4415`; binary содержит1626 ID, selected scope250. Это не утверждение о прохождении всех1626.
 
 Evidence `b4feb38aeed9940c4292b532b3de0e3ab853685e`, origin branch `codex/timelearner-native-acceptance-full250-m40-a4-evidence`. [Архив](../../../Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/primary.tar.xz):4551members,1,836,352 compressed bytes, SHA256 `15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008`.

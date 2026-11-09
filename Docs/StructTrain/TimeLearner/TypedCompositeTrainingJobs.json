@@ -513,11 +513,14 @@
       "root_independently_observed_outer_closed": true,
       "root_independently_observed_lease_released": true,
       "network_gap_resolved": true,
-      "whole_gate_scope": "250 native C++ assertions and artifact transport/provenance only; semantic archive reader and scientific acceptance remain false",
+      "whole_gate_scope": "250 native C++ assertions and artifact transport/provenance; separate semantic reader7 accepted as recorded below; scientific acceptance remains false",
       "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
       "independent_receipt_sha256": "a0464283ef95aa6a51a254f842b5d4ba23dfb8388945b85eab29faca52d82455",
-      "semantic_archive_reader_accepted": false,
-      "full_production_cold_decoder_accepted": false
+      "semantic_archive_reader_accepted": true,
+      "full_production_cold_decoder_accepted": false,
+      "semantic_archive_reader_scope": "7 server assertions on six actual schema1 archives, including original primary/geometry/counters/partial controls; no certificate/App acceptance",
+      "semantic_reader_evidence_commit": "1f1e8a5ef47abd4d7d644748ddc5a8624f3f0e75",
+      "semantic_reader_independent_receipt_sha256": "7bf79275eec4e154099ec50ac8b7379602c8af7c857ba5886d18dc77b6c83a2f"
     }
   ],
   "prepared_feature": {
