@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 09.11.2026
 
+[Negative73 collection принят как сохранение FAIL](Negative73MaintainedCollection-20261109.ru.md):original72PASS/1FAIL неизменен; actualCLI/stage/published5 artifacts/55members independently verified. Это закрывает проверку отрицательного collection, не reader defect и не научный допуск.
+
 [Native48 fresh A1 завершён](Native48FreshA1Outcome-20261109.ru.md):сборка успешна,11actual=9PASS/2FAIL,37NOT RUN. Fixture требует consumed-probe boundary; test-onlyfix4d35 подготовлен, не проверен. Outer/leaf closed, собственный lease released. Полная публикация A1 pending; научного допуска нет.
 
 [Actual40 collection опубликован](OwnedNativeController40MaintainedCollection-20261109.ru.md):existing CLI/stage, exact5 artifacts/325members independently verified, noff source/evidence integrated. Negative73 пока остановлен readonly Gitrole validation до записи новых артефактов.
