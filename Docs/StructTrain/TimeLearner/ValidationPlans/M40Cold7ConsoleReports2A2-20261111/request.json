@@ -1,0 +1,57 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-cold7-console-reports2-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "89e97f3631345560c0e087e0e21fb8f9b192cef0",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 64,
+    "maximum_wall_seconds": 10800
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 4294967296
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-streamed-fixture-identity-m40-a1",
+      "commit": "89e97f3631345560c0e087e0e21fb8f9b192cef0"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/cold7-console-reports2-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40Cold7ConsoleReports2A2-20261111/suite.json",
+      "sha256": "094234e05ab2acf8d9657386ff3034dbf3dbb0164f283c90c805ebe1d3d28b47"
+    },
+    "fixtures": {
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_000": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_001": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_002": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_003": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_004": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_005": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_006": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_007": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_008": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_009": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_010": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_011": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_012": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_013": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_014": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_015": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_016": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_017": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_CONSOLE_PRIMARY": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_019": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_020": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_PRIMARY_FORMAT_021": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-cold7-console2-controller-m40-a4/worker/native-cold7",
+      "TIMELEARNER_COLD7_CONSOLE_REPORT_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/cold7-console-reports2-a2/Docs/StructTrain/TimeLearner/ValidationPlans/M40Cold7ConsoleReports2A2-20261111/fixture"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 268435456,
+      "maximum_total_bytes": 1073741824
+    }
+  }
+}

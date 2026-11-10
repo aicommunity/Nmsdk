@@ -1,0 +1,130 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "actual-cold7-console-full-sample-reports2-explicit-large-input-budgets",
+  "package_fingerprint": "383a8952fefc9c80cd47435d6e1ee5391037efe65b5364a5fc62beb0dca9fb4e",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_reports"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_reports.CandidateWindowCalibrationReportsTest.test_every_declared_matrix_and_soma_has_full_sample_input_overlays",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_reports.CandidateWindowPipelineReportsTest.test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports"
+  ],
+  "fixtures": {
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_000": {
+      "pattern": "**/*.1916730",
+      "files": 1,
+      "fingerprint": "c6ffbbfdba51492f51be589dd3025f702317bed07b069598d89134e8c3defa56"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_001": {
+      "pattern": "**/*.1917060",
+      "files": 1,
+      "fingerprint": "c3cabc123f2d9d24fe0c650d3a527dc801ef406a3b764236212be825f0747815"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_002": {
+      "pattern": "**/*.1920226",
+      "files": 1,
+      "fingerprint": "f1002d57a4052f7b382e44e11b799b6424203d96c332fac08a2a77067b8637f0"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_003": {
+      "pattern": "**/*.1921513",
+      "files": 1,
+      "fingerprint": "9f78240c48953a47567288f8fb527d885c35a1848044a67c2a3a414952b1d007"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_004": {
+      "pattern": "**/*.1924276",
+      "files": 1,
+      "fingerprint": "bbbdf37629383e0636e6142dcbc465f0d4c1e6a7416323b823bad8f6ac0ee9dd"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_005": {
+      "pattern": "**/*.1942244",
+      "files": 1,
+      "fingerprint": "d1a053d10cddd4bd9910a3209f93add764937237c2ab695937df18bd52329515"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_006": {
+      "pattern": "**/*.1951947",
+      "files": 1,
+      "fingerprint": "f04f8439f3f0b8419913e669f655bcdcc582ef74aee3102ba7fd315c5a3af4b0"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_007": {
+      "pattern": "**/*.1956834",
+      "files": 1,
+      "fingerprint": "eaefa20fb3ba829e795f585677f0fd3328e66bc4608502d727db8008e894c37f"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_008": {
+      "pattern": "**/*.1958718",
+      "files": 1,
+      "fingerprint": "9dad38ce20a1532d1d1bdfda3d4599cf4076285a76985be45149b9c8c11d5af1"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_009": {
+      "pattern": "**/*.1959075",
+      "files": 1,
+      "fingerprint": "8e273d49277921988c086e5d9925c4bb82f3dc6ce25a889d92db02003b5f6046"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_010": {
+      "pattern": "**/*.1963108",
+      "files": 1,
+      "fingerprint": "0a07f116c11ad4c7ce7d3033e45f7a5746d41badc908906aa7d5ca5614933cd7"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_011": {
+      "pattern": "**/*.1964851",
+      "files": 1,
+      "fingerprint": "8be75f794ecebd091441af6292eea522909eedbe8b51bf0d857a5dad27d51898"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_012": {
+      "pattern": "**/*.1968384",
+      "files": 1,
+      "fingerprint": "b6163dcae9c10ce69c0620ac30e862587f16afe5a5706cda0fa61a0420a137f1"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_013": {
+      "pattern": "**/*.1990298",
+      "files": 1,
+      "fingerprint": "b6a17be7161a30dbca74f7ba040ebee58fa156c7f381d99824148a8f7579764a"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_014": {
+      "pattern": "**/*.2000457",
+      "files": 1,
+      "fingerprint": "4d71caa60b0876c8a5a0baf70cc600930ca708f7091c76d47b80fee12abcf837"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_015": {
+      "pattern": "**/*.2006346",
+      "files": 1,
+      "fingerprint": "9789a4815ffd5cf95827b9f77c8457b43c8edebd6e5da481687643bf9d1acc75"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_016": {
+      "pattern": "**/*.ack",
+      "files": 16,
+      "fingerprint": "fe60353afe16489ccfe2101d6f5c46febf6fa5cd9c6a50134ce7119da6065a68"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_017": {
+      "pattern": "**/*.csv",
+      "files": 384,
+      "fingerprint": "c20d09604cbc52051de00f5543a390bb2be50d19a75aefff2f98844b2bbe9b6e"
+    },
+    "TIMELEARNER_COLD7_CONSOLE_PRIMARY": {
+      "pattern": "**/*.json",
+      "files": 628,
+      "fingerprint": "d2e628f8e0a15c3029394f3c2d02f7c9d8b64b606e23ab55004b811ca7688cd3"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_019": {
+      "pattern": "**/*.log",
+      "files": 80,
+      "fingerprint": "0bea2e53b81665a8cd92713e272b03577ac0e5b3bc7ce4bf64572ada30fa6251"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_020": {
+      "pattern": "**/*.py",
+      "files": 16,
+      "fingerprint": "2d6bdbd547ec9b437cf15d120efd4dcde1f425a79a15095fc9cb12ebb693097c"
+    },
+    "TIMELEARNER_COLD7_PRIMARY_FORMAT_021": {
+      "pattern": "**/*.sqlite3",
+      "files": 4,
+      "fingerprint": "246f830eb51964784bb620e2b361a7f46ede81c9c9ae5b87f65681f3d2570def"
+    },
+    "TIMELEARNER_COLD7_CONSOLE_REPORT_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "a0f72aa76be249798587aaa045a088fb712e5851959ff037d4634d1e86b5a70b"
+    }
+  }
+}

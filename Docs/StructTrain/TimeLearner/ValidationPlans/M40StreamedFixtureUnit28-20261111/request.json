@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-streamed-fixture-unit28-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6bb8baeba6e01999860ad31813ab089b7a194e65",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-streamed-fixture-identity-m40-a1",
+      "commit": "89e97f3631345560c0e087e0e21fb8f9b192cef0"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/streamed-fixture-unit28-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StreamedFixtureUnit28-20261111/suite.json",
+      "sha256": "c5f9de65fc23803228a6de399a598d6fe6eab6f1c9b26a979bdf898a1947472a"
+    },
+    "fixtures": {}
+  }
+}
