@@ -1,0 +1,19 @@
+{
+  "original_refusal": {
+    "pid": 37856,
+    "status": "closed",
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\r\n  File \"/usr/lib/python3.10/runpy.py\", line 196, in _run_module_as_main\r\n    return _run_code(code, main_globals, None,\r\n  File \"/usr/lib/python3.10/runpy.py\", line 86, in _run_code\r\n    exec(code, run_globals)\r\n  File \"/home/user/timelearner-refactor/source-native-image-rest-runner-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 617, in <module>\r\n    raise SystemExit(main())\r\n  File \"/home/user/timelearner-refactor/source-native-image-rest-runner-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 610, in main\r\n    if args.action=='launch':return launch(args.request)\r\n  File \"/home/user/timelearner-refactor/source-native-image-rest-runner-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 214, in launch\r\n    plan = preflight(request_path)\r\n  File \"/home/user/timelearner-refactor/source-native-image-rest-runner-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 197, in preflight\r\n    require(memory>=job['limits']['reservation_memory_bytes']+256*1024**2 and\r\n  File \"/home/user/timelearner-refactor/source-native-image-rest-runner-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\r\n    raise EvidenceError(reason)\r\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_native_capacity_preflight\r\n",
+    "exitCode": 1,
+    "signal": null
+  },
+  "cleanup": {
+    "pid": 33916,
+    "status": "closed",
+    "stdout": "{\"removed_object_files\": 1010, \"removed_logical_bytes\": 292562912, \"free_before\": 13215219712, \"free_after\": 13509931008, \"runtime_and_primary_preserved\": true, \"inventory_sha256\": \"71d4abb19f752c588d96fc27546c35fdc19cc4344c0aa45624c16e0d845dfc6d\"}\r\n",
+    "stderr": "",
+    "exitCode": 0,
+    "signal": null
+  },
+  "scope": "old build .o cache only; no original runtime/primary/log deletion"
+}
