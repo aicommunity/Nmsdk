@@ -1,0 +1,144 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+      "suites": [
+        "NativeClassImageReplay",
+        "NativeLoadHistory"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_ModelArchive.cpp",
+      "suites": [
+        "NativeArchiveTelemetry",
+        "TimeLearnerModelArchive"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowPackage"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeClassImageReplay/ActualMembraneCopyAndLoadStages",
+    "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease",
+    "NativeArchiveTelemetry/At2000",
+    "NativeArchiveTelemetry/At20000",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+    "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+    "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/DetachedChildAt2000",
+    "NativeLoadHistory/FreshAt20000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "NativeLoadHistory/DetachedChildAt20000"
+  ],
+  "runplan": [
+    {
+      "name": "load-and-xml-controls-8",
+      "expected_ids": [
+        "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+        "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "actual-membrane-stages",
+      "expected_ids": [
+        "NativeClassImageReplay/ActualMembraneCopyAndLoadStages"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "actual-class-image-replay",
+      "expected_ids": [
+        "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "archive-waveforms",
+      "expected_ids": [
+        "NativeArchiveTelemetry/At2000",
+        "NativeArchiveTelemetry/At20000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "packages-5",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 3600
+    }
+  ],
+  "partitions": [
+    {
+      "name": "load-and-xml-controls-8",
+      "count": 8,
+      "ids": [
+        "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+        "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+        "NativeLoadHistory/FreshAt2000",
+        "NativeLoadHistory/ConnectedChildAt2000",
+        "NativeLoadHistory/DetachedChildAt2000",
+        "NativeLoadHistory/FreshAt20000",
+        "NativeLoadHistory/ConnectedChildAt20000",
+        "NativeLoadHistory/DetachedChildAt20000"
+      ]
+    },
+    {
+      "name": "actual-membrane-stages",
+      "count": 1,
+      "ids": [
+        "NativeClassImageReplay/ActualMembraneCopyAndLoadStages"
+      ]
+    },
+    {
+      "name": "actual-class-image-replay",
+      "count": 1,
+      "ids": [
+        "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+      ]
+    },
+    {
+      "name": "archive-waveforms",
+      "count": 2,
+      "ids": [
+        "NativeArchiveTelemetry/At2000",
+        "NativeArchiveTelemetry/At20000"
+      ]
+    },
+    {
+      "name": "packages-5",
+      "count": 5,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    }
+  ]
+}
