@@ -3,12 +3,15 @@ import contextlib
 import io
 import os
 import json
+from copy import deepcopy
 from pathlib import Path
 import unittest
 from unittest.mock import patch
 
 from ..__main__ import main
 from ..native_evidence import load, require
+from ..native_evidence import EvidenceError
+from ..stock_candidate_window_study import validate_candidate_envelopes
 
 
 class StockCandidateWindowStudyTest(unittest.TestCase):
@@ -44,6 +47,13 @@ class StockCandidateWindowStudyTest(unittest.TestCase):
                 self.assertEqual(job['profile_archives'], [])
                 self.assertEqual(c['search']['bounds'][3]['maximum_length'], 1)
                 self.assertEqual(c['search']['bounds'][3]['minimum_resistance'], 86e6)
+                origins = load(prepared/'reference-origin.json')['characterization'][case]
+                validate_candidate_envelopes(c, origins)
+                bad_envelope = deepcopy(c)
+                for item in bad_envelope['composite_measurement']['candidate_window_policy']['inputs']:
+                    item['base_left_guard_frames'] = item['base_right_guard_frames'] = 0
+                with self.assertRaises(EvidenceError):
+                    validate_candidate_envelopes(bad_envelope, origins)
             rejected_case = spec['cases'][0]
             condition_path = prepared/'conditions'/(rejected_case+'.json')
             original_condition = condition_path.read_bytes()

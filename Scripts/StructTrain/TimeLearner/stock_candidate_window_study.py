@@ -6,7 +6,7 @@ New Train captures its own references; no learned model or certificate is seeded
 from copy import deepcopy
 from pathlib import Path
 
-from .candidate_window_contract import POLICY_ID
+from .candidate_window_contract import GRID_TAGS, POLICY_ID, calculate_window
 from .candidate_window_package_evidence import audit_candidate_window_package
 from .collector_provenance import frozen_digest
 from .composite_configuration import METHOD
@@ -29,6 +29,35 @@ def _frame(time, frequency):
     value = number(time);frame = round(value*frequency)
     require(frame >= 0 and equal(value, frame/frequency), 'stock_cold7_reference_not_on_native_grid')
     return frame
+
+
+def validate_candidate_envelopes(config, origins):
+    """Arithmetic admission on diagnostic coordinates, not a measurement proof.
+
+The native reference seed is the measured peak/plateau, not the configured
+reference window. A singleton maximum therefore needs nonzero proposal guards.
+New Train still obtains every authoritative grid/reference itself.
+"""
+    model = config['model']
+    initial = [dict(length=p['attachment'], synapses=p['synapses'], resistance=p['resistance'])
+        for p in model['inputs']]
+    grid = dict(frequency_hz=model['frequency_hz'],
+        source_origin='diagnostic-coordinate-admission-only',
+        source_pattern_binding=digest(model['initial_isi']),
+        source_profile_binding=digest(config['stimulus_profile']), **GRID_TAGS)
+    extremes = [initial]
+    for length, resistance in (('minimum_length', 'maximum_resistance'),
+                               ('maximum_length', 'minimum_resistance')):
+        extremes.append([dict(length=b[length], synapses=1, resistance=b[resistance])
+            for b in config['search']['bounds']])
+    for origin in origins:
+        seed = dict(input_index=origin['input_index'], first_frame=origin['assigned_peak_frame'],
+            last_frame=origin['assigned_plateau_last_frame'], frame_count=origin['sample_count'],
+            grid=grid, initial_parameters=initial, initial_capacitance=None)
+        for parameters in extremes:
+            facts = dict(grid=grid, declared_maximum_samples=config['maximum_samples'],
+                parameters=parameters, capacitance=None)
+            calculate_window(config['composite_measurement']['candidate_window_policy'], seed, facts)
 
 
 def prepare(source, runtime_path, output):
@@ -77,11 +106,13 @@ def prepare(source, runtime_path, output):
             # Total L=1 latency is only an initial linear proposal hypothesis.
             # No derivative/monotonicity or measured-candidate claim follows.
             policies.append(dict(delay_frames_per_segment=delay,
-                base_left_guard_frames=0, base_right_guard_frames=0,
+                base_left_guard_frames=40, base_right_guard_frames=40,
                 length_guard_frames=0, synapse_count_guard_frames=0,
                 resistance_change_guard_frames=5, capacitance_change_guard_frames=0,
                 hard_first_frame=1, hard_last_frame=3600, maximum_window_frames=160))
             origin.append(dict(input_index=i, actual_onset_frame=onset, assigned_peak_frame=vertex,
+                assigned_plateau_last_frame=_frame(peak['plateau_end'], 2000),
+                sample_count=observation['sample_count'],
                 captured_characterization_amplitude=peak['amplitude'],
                 packet=frozen_digest(packet_path, 256*1024**2),
                 trace=frozen_digest(packet_path.with_suffix('.csv'), 256*1024**2)))
@@ -113,6 +144,7 @@ def prepare(source, runtime_path, output):
                 candidate_window_policy=dict(schema_version=1, policy_id=POLICY_ID,
                     seed_rule='immutable_reference_full_before', coordinate_mode='relative_native_frame_interval',
                     proposals_per_logical_request=1, maximum_feature_terms=4096, inputs=policies)))
+        validate_candidate_envelopes(config, origin)
         job = _signed(dict(kind='timelearner_native_training_job', schema_version=1,
             owner_class='NNeuronTimeLearner'+('Branch' if topology == 'Branch' else ''),
             implementation_id='stock-measured-reference-cold7-N4-N1-pilot-v1', configuration=config,
