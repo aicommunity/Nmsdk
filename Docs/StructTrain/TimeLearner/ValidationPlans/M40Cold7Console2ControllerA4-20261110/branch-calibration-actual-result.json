@@ -1,0 +1,83 @@
+{
+  "result": {
+    "phases": [
+      {
+        "operation": "measured-grid",
+        "unit": "timelearner-e41af900-4074-4a5b-915f-b86e15daefa1.service",
+        "audit": {
+          "run_evidence_consistent": true,
+          "full_grid_model_binding_verified": true,
+          "native_execution_verified": false,
+          "independent_partition_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "operation": "fresh-frozen",
+        "unit": "timelearner-49c46cf9-8de3-4e58-a69b-b9e187837dad.service",
+        "audit": {
+          "run_evidence_consistent": true,
+          "operation": "evaluate",
+          "native_execution_verified": false,
+          "independent_partition_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "operation": "silent-nonseparable",
+        "unit": "timelearner-ff556e9d-6bac-454b-b34f-3402b9f448b8.service",
+        "audit": {
+          "run_evidence_consistent": true,
+          "full_grid_model_binding_verified": false,
+          "native_execution_verified": false,
+          "independent_partition_verified": false,
+          "evaluation_verdict": null
+        }
+      },
+      {
+        "operation": "rollback-frozen",
+        "unit": "timelearner-ad094ce0-e5fc-43d9-87bf-8e3a017b3374.service",
+        "audit": {
+          "run_evidence_consistent": true,
+          "operation": "evaluate",
+          "native_execution_verified": false,
+          "independent_partition_verified": false,
+          "evaluation_verdict": null
+        }
+      }
+    ],
+    "calibration_status": "calibrated",
+    "thresholds": [
+      0.006653359175157936,
+      0.0074146773741799454,
+      0.008180406786891737,
+      1
+    ],
+    "frozen_counts": {
+      "TP": 2,
+      "FP": 0,
+      "FN": 0,
+      "TN": 2,
+      "targets": 2,
+      "foils": 2,
+      "target_trials_with_outside_spikes": 0,
+      "accuracy": 1,
+      "target_hit_rate": 1,
+      "foil_response_rate": 0
+    },
+    "silent_control_status": "nonseparable",
+    "source_unchanged": true,
+    "changed_threshold_rollback": {
+      "source_threshold": 1,
+      "candidate_threshold": 0.008180406786891737,
+      "source_model_revision": "b01e666aa82cf2277360f78564a3f535e07a9a90359453085befbcad9d90912c",
+      "candidate_model_revision": "dfa4ab6124948e01724fb9866b67d95b37b467f96962b36299d27e8077816103",
+      "fresh_restored_response_matches_source": true
+    },
+    "scientific_verdict": null,
+    "independent_partition_verified": false
+  },
+  "parent_controller_live_at_observation": true,
+  "scope": "Branch N2 N0 Sync0.2 historical same-matrix engineering control; full Console2 and native119 incomplete",
+  "scientific_verdict": null
+}

@@ -1,0 +1,73 @@
+{
+  "results": {
+    "Classic-window-N0": {
+      "phases": [
+        {
+          "operation": "preflight",
+          "unit": "timelearner-68b89c88-a78d-4a50-96bf-954a0f65ae89.service",
+          "job_sha256": "14f0a13c8a08bce25d36a242037893e1c1055446d88cb32d762f5d84d46f0ccd",
+          "manifest_sha256": "77d8c5a2cc257b8b2f0fb8fb86f57528354023395b19aeb00cd9eac9603f6ab2"
+        },
+        {
+          "operation": "train",
+          "unit": "timelearner-6ec381e5-09c1-472e-b865-ec7b66c17bbf.service",
+          "job_sha256": "14f0a13c8a08bce25d36a242037893e1c1055446d88cb32d762f5d84d46f0ccd",
+          "manifest_sha256": "227d38a2554a88e9f8536307333fa11194eac9e4c7f263b0f8b1f21b41b5b1d9"
+        },
+        {
+          "operation": "export",
+          "unit": "timelearner-66ea468d-8d3f-4ada-9b91-1d1551e0fb3f.service",
+          "job_sha256": "7340a620b8471353d1bae216aae29c3254e13c1760df0c9e018f76842577dbb2",
+          "manifest_sha256": "d2b0168bd8efb528069b33b393b724b15114ba31adb2c790bbb480487617e6ae"
+        },
+        {
+          "operation": "evaluate",
+          "unit": "timelearner-61d74da9-c33a-47f3-a031-181adf189c85.service",
+          "job_sha256": "a88609834b70205c5ec396b8dc9a8490bad24e616727918f5d351d0b2096ff5f",
+          "manifest_sha256": "d675dd877b1ab5f24d3cbe2a6f86541211e630b0383d03b5bc0e84a97f1173d0"
+        }
+      ],
+      "training_outcome": "exact",
+      "solo_sha256": "de3dc1c473a6c09390d0789bb517f182ac827db878555ee66e88c3957fe4a4d3",
+      "recognition_sha256": "ff358a190753e706c2c3c809e4f8fcdd4198cb87d95fb2b58495f9f497baef75",
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    },
+    "Branch-window-N0": {
+      "phases": [
+        {
+          "operation": "preflight",
+          "unit": "timelearner-93ea28c3-2a90-4396-ba87-e0c78d61aa0c.service",
+          "job_sha256": "b810a0047aa68727b9f08de11d491091438cc6e71ac394433625aebca0477ff6",
+          "manifest_sha256": "bca3bcab4741a16c7d6063a79992a53908c8b1af7fb57fa3803b1912189fb03a"
+        },
+        {
+          "operation": "train",
+          "unit": "timelearner-49699b6d-e464-4362-bd25-57a65811b9ea.service",
+          "job_sha256": "b810a0047aa68727b9f08de11d491091438cc6e71ac394433625aebca0477ff6",
+          "manifest_sha256": "5a97e66ddd99557d02668a4c35fa9730bc8d18e5fe0f0c2d8c149fff48366405"
+        },
+        {
+          "operation": "export",
+          "unit": "timelearner-2d55a6ab-ddfc-4d09-8f80-329aefe6f7f7.service",
+          "job_sha256": "bf5b2bd3135f908f499905dd9b68a0f3a71c8815908b5a0f0fa99179ef35170e",
+          "manifest_sha256": "f7ad8cd0e86de3a0ccfe6e9fd44606dc6aee9476fd84e7de3e4e7f5b1f08c61b"
+        },
+        {
+          "operation": "evaluate",
+          "unit": "timelearner-53679f70-3025-4cf7-8650-5f9689b48588.service",
+          "job_sha256": "d1c128032134d7ce31c7fa149eb888ea107bbdfa754d3b5b88831b96ee7c9340",
+          "manifest_sha256": "73cd5c2ead6e25822cd415fa625096f4210af242a3b15b508ad3118bb2e291ea"
+        }
+      ],
+      "training_outcome": "exact",
+      "solo_sha256": "e098910a3150e61e0b810df7c05c2c51d8f8a597751c91b2f585503fdb09dd3a",
+      "recognition_sha256": "530e327f17f003190ca824168c5bd527bd5aae0d2b355adcb686121aeca7a1a1",
+      "scientific_verdict": null,
+      "independent_partition_verified": false
+    }
+  },
+  "parent_controller_live_at_observation": true,
+  "scope": "engineering N2 N0 Sync0.2, initial fixed threshold; full calibration suite remains incomplete",
+  "scientific_verdict": null
+}
