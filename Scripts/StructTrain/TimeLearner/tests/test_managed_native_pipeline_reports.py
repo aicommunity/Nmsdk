@@ -10,16 +10,22 @@ from ..recognition_metrics import load_evaluation
 
 
 class ManagedNativePipelineReportsTest(unittest.TestCase):
+    case_names = ("Classic-v1", "Classic-v2", "Branch-v1", "Branch-v2")
+    expected_pairs = 24
+
+    def report_bindings(self):
+        return (os.environ.get("TIMELEARNER_MANAGED_PIPELINE_PRIMARY"),
+                os.environ.get("TIMELEARNER_MANAGED_PIPELINE_REPORTS"))
+
     def test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports(self):
-        source = os.environ.get("TIMELEARNER_MANAGED_PIPELINE_PRIMARY")
-        output = os.environ.get("TIMELEARNER_MANAGED_PIPELINE_REPORTS")
+        source, output = self.report_bindings()
         if not source or not output:
             self.skipTest("requires real managed pipeline primary data and a new report cache")
         from PIL import Image
         source, output = Path(source), Path(output)
         output.mkdir(parents=True, exist_ok=False)
         pairs = 0
-        for name in ("Classic-v1", "Classic-v2", "Branch-v1", "Branch-v2"):
+        for name in self.case_names:
             run = source/name/"runs/evaluate"
             before = hashlib.sha256((run/"run-manifest.json").read_bytes()).hexdigest()
             report = output/name
@@ -55,4 +61,4 @@ class ManagedNativePipelineReportsTest(unittest.TestCase):
             for root in (report, evaluation):
                 for name, digest in load(root/"SHA256SUMS.json").items():
                     self.assertEqual(hashlib.sha256((root/name).read_bytes()).hexdigest(), digest)
-        self.assertEqual(pairs, 24)
+        self.assertEqual(pairs, self.expected_pairs)
