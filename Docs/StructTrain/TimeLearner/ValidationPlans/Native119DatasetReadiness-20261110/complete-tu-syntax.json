@@ -1,0 +1,77 @@
+{
+  "result.json": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 9.019504035823047,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "aa8b8763750530fb229ec546d94c8aa79d64cb2145ae35688f52a2b44b26a139",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "whole-group-closure.json": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "2df26d46c46c7a92aa712540ef498f3e905040a8d2118b6b281f63d5e82e6654",
+      "unit": "timelearner-8c558dc9-ccf6-4ecb-867e-0d0e3942f475.service",
+      "invocation_id": "f9368c613dba4a18a9e097ab3d1c59d6",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8c558dc9-ccf6-4ecb-867e-0d0e3942f475.service",
+      "initial_main_pid": 1629034,
+      "initial_start_ticks": "341497655",
+      "sha256": "0fe3937f9bc0589b866b0908d6f96fd547bdb3787c2edc4a8abd405662da2d4c"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-8c558dc9-ccf6-4ecb-867e-0d0e3942f475.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  }
+}
