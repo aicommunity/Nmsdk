@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "independent-console2-full-primary-restore-and-model-audits1",
+  "package_fingerprint": "5c793ed858ff848c6a3fb05acf985fbcc677073a65383bddbbef1368dc4b7857",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_console2_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_console2_compact_primary.Console2CompactPrimaryTest.test_complete_archive_restores_and_reaudits_actual_trained_models"
+  ],
+  "fixtures": {
+    "TIMELEARNER_CONSOLE2_COMPACT_PRIMARY": {
+      "pattern": "*.json",
+      "files": 5,
+      "fingerprint": "c0839b10d5331ea95f2d58b72fca282c3aa67868243a3bc7b513dceefdc3f844"
+    },
+    "TIMELEARNER_CONSOLE2_COMPACT_ARCHIVE": {
+      "pattern": "*.xz",
+      "files": 1,
+      "fingerprint": "5eb018e99ad2a6e921b296b3da3403c4bcc26439b1362954cbd442ee6ba0d34c"
+    }
+  }
+}

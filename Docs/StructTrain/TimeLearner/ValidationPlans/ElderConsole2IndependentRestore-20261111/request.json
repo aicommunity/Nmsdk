@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-console2-independent-restore-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "bd28739f0a3878105aeb3a9f83d94a369fa66a0e",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-console2-independent-restore-elder-a1",
+      "commit": "615593a219356f03173bd31f25ffdaf58ab528ca"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/console2-independent-restore-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderConsole2IndependentRestore-20261111/suite.json",
+      "sha256": "9b6cf2875b261af915accc77d6cef4f8021fdd02c9f75627f1572df2638c4b4c"
+    },
+    "fixtures": {
+      "TIMELEARNER_CONSOLE2_COMPACT_PRIMARY": "/home/user/timelearner-refactor/fixtures/console2-compact-primary-a1",
+      "TIMELEARNER_CONSOLE2_COMPACT_ARCHIVE": "/home/user/timelearner-refactor/fixtures/console2-compact-primary-a1"
+    }
+  }
+}
