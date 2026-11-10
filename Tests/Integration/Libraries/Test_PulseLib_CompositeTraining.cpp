@@ -3304,16 +3304,27 @@ TEST(NativeCandidateWindowPortableMath,RehashedForeignReferenceProofCannotJoinAc
     const auto& s=ActualPortableWindowBoundary<NNeuronTimeLearner>();const auto decoded=DecodeNativeCompositeTrainingArchive(s.archive.document);
     const auto id=decoded.FinalGroups().front();const auto found=std::find_if(decoded.Records().begin(),decoded.Records().end(),[&](const auto& r){return r.groupId==id;});
     ASSERT_NE(found,decoded.Records().end());auto record=*found;ASSERT_TRUE(record.windowProposal);auto& proposal=*record.windowProposal;
-    proposal.referenceProofId="foreign-original-reference";
+    // Use an actual well-formed proof belonging to another input. An arbitrary
+    // label would fail wire syntax before the reference ownership check.
+    const auto foreign=std::find_if(decoded.Records().begin(),decoded.Records().end(),[&](const auto& r){
+        return r.purpose==CompositeMeasurementPurpose::Reference && r.logical.inputIndex!=record.logical.inputIndex &&
+            !r.semanticProofId.empty();});
+    ASSERT_NE(foreign,decoded.Records().end());ASSERT_NE(foreign->semanticProofId,proposal.referenceProofId);
+    proposal.referenceProofId=foreign->semanticProofId;
     proposal.windowRecipeId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowRecipeContent(proposal)).toStdString();
     proposal.measurementInstanceId=NmsdkTools::CanonicalModelDataSha256(CandidateWindowInstanceContent(proposal)).toStdString();
-    EXPECT_NO_THROW(DecodeCandidateWindowProposalData(EncodeCandidateWindowProposalData(proposal)));
+    ASSERT_NO_THROW(DecodeCandidateWindowProposalData(EncodeCandidateWindowProposalData(proposal)));
     record.semanticProofId=CandidateWindowTrainingSemanticProofId(decoded.Protocol(),record);auto document=s.archive.document;
     MutateWindowRecord(document,std::size_t(found-decoded.Records().begin()),[&](auto& wire){
         wire["window_proposal"]=EncodeCandidateWindowProposalData(proposal);auto measurement=wire["measurement"].toObject();
         measurement["semantic_proof_id"]=QString::fromStdString(record.semanticProofId);wire["measurement"]=measurement;});RebindArchive(document);
     EXPECT_EQ(document["primary_blobs"],s.archive.document["primary_blobs"]);
-    EXPECT_THROW(CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(document),s.tolerances,s.revision,s.epoch),std::invalid_argument);
+    try {
+        (void)CandidateWindowPortableTrainingProof::Replay(DecodeNativeCompositeTrainingArchive(document),s.tolerances,s.revision,s.epoch);
+        FAIL()<<"foreign input reference must not join the actual final measurement";
+    } catch(const std::invalid_argument& error) {
+        EXPECT_STREQ(error.what(),"candidate_window_proposal_replay_mismatch");
+    }
 }
 
 namespace {
