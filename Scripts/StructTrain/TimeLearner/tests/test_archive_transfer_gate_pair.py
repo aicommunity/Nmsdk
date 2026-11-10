@@ -1,8 +1,11 @@
 """Validate reports against real closed native pairs, then corrupt evidence."""
 import json
+import hashlib
 import os
 from pathlib import Path
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 import xml.etree.ElementTree as ET
@@ -87,6 +90,36 @@ class ArchiveTransferGatePair(unittest.TestCase):
     def test_censored_window(self):
         self.edit("native/telemetry-matrix-precise-boundary-fixture-2000.json",
                   lambda x:x.update(complete=False), "incomplete_window")
+
+
+    def test_actual_cli_plots(self):
+        # Retain this artifact cache in the owned worker's TMPDIR for visual
+        # review. Production inputs remain read-only; no model is rerun.
+        parent = Path(tempfile.mkdtemp(prefix="archive-pair-cli-"))
+        output = parent/"report"
+        run = subprocess.run([sys.executable, "-B", "-m",
+            "Scripts.StructTrain.TimeLearner.archive_transfer_reports",
+            "--input-format", "native-gate-pair", "--input", str(self.root),
+            "--output", str(output), "--plots"], cwd=Path(__file__).resolve().parents[4],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
+        (parent/"cli.stdout.log").write_bytes(run.stdout)
+        (parent/"cli.stderr.log").write_bytes(run.stderr)
+        self.assertEqual(run.returncode, 0, run.stderr.decode(errors="replace"))
+        report = json.loads((output/"validation.json").read_text())
+        self.assertEqual(report["case_soma_pairs"], 2)
+        self.assertIsNone(report["scientific_verdict"])
+        from PIL import Image
+        for name, case in report["cases"].items():
+            self.assertTrue(case["figures"])
+            self.assertEqual(case["observed_soma_paths"], ["$.Soma2"])
+            for figure in case["figures"]:
+                png = output/name/figure["path"]
+                self.assertEqual(hashlib.sha256(png.read_bytes()).hexdigest(), figure["sha256"])
+                with Image.open(png) as image:
+                    self.assertEqual(image.size, (figure["png_width"], figure["png_height"]))
+                    self.assertGreaterEqual(image.width, 1600)
+                    self.assertGreaterEqual(image.height, 800)
+                self.assertFalse(figure["downsampling"])
 
 
 if __name__ == "__main__":unittest.main()
