@@ -1,0 +1,15 @@
+test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances (Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_window_study.StockCandidateWindowStudyTest.test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances) ... FAIL
+
+======================================================================
+FAIL: test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances (Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_window_study.StockCandidateWindowStudyTest.test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-stock-cold7-measured-pilot-m40-a1/Scripts/StructTrain/TimeLearner/tests/test_stock_candidate_window_study.py", line 36, in test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances
+    self.assertEqual(code, 0, transcript.getvalue())
+AssertionError: 2 != 0 : {"execution": "failed", "reason": "[Errno 2] No such file or directory: '/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/runtime.json'", "scientific_verdict": null}
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.397s
+
+FAILED (failures=1)
