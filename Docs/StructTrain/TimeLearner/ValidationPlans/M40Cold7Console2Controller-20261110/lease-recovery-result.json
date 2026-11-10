@@ -1,0 +1,21 @@
+{
+  "original_schema_policy_refusal": {
+    "pid": 22852,
+    "status": "closed",
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\r\n  File \"<string>\", line 11, in <module>\r\n  File \"/media/user/Data/TimeLearnerRefactor/source-managed-python-controller-m40-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 166, in open_existing\r\n    with cls._existing_reader(database, managed_units=managed_units) as (registry, _):\r\n  File \"/usr/lib/python3.12/contextlib.py\", line 137, in __enter__\r\n    return next(self.gen)\r\n           ^^^^^^^^^^^^^^\r\n  File \"/media/user/Data/TimeLearnerRefactor/source-managed-python-controller-m40-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 141, in _existing_reader\r\n    _require(managed_units == (schema == '3'), 'reservation_existing_managed_policy_mismatch')\r\n  File \"/media/user/Data/TimeLearnerRefactor/source-managed-python-controller-m40-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\r\n    raise ReservationError(reason)\r\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_existing_managed_policy_mismatch\r\n",
+    "exitCode": 1,
+    "signal": null
+  },
+  "explicit_schema3_recovery": {
+    "pid": 20160,
+    "status": "closed",
+    "stdout": "{\"Classic-window-N0\": {\"held_before\": 1, \"held_after\": 0, \"recovery_events\": 1}, \"Branch-window-N0\": {\"held_before\": 1, \"held_after\": 0, \"recovery_events\": 1}}\r\n",
+    "stderr": "",
+    "exitCode": 0,
+    "signal": null
+  },
+  "original_outcome_unchanged": true,
+  "full_receipt_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-cold7-controller-a1-lease-recovery-a2",
+  "scientific_verdict": null
+}
