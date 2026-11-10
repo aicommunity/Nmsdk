@@ -1,0 +1,139 @@
+{
+  "host": "10.245.1.17",
+  "result": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "completed",
+    "validity": "valid",
+    "assertion_status": "passed",
+    "reason": "complete_declared_test_inventory",
+    "inventory": {
+      "expected": 29,
+      "observed": 29,
+      "failed_test_ids": [],
+      "assertion_status": "passed",
+      "sha256": "7c698bdaaed5d7535496d560b79bde74d656ec52d323167fa659d36862ca7bbe"
+    },
+    "scientific_verdict": null
+  },
+  "junit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<testsuites tests=\"29\" failures=\"0\" disabled=\"0\" errors=\"0\" time=\"1193.624\" timestamp=\"2026-11-10T23:19:58.201\" name=\"AllTests\">\n  <testsuite name=\"NativeCandidateWindowPackage\" tests=\"29\" failures=\"0\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"1193.624\" timestamp=\"2026-11-10T23:19:58.201\">\n    <testcase name=\"ClassicActualPhysicalRoundtrip\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3610\" status=\"run\" result=\"completed\" time=\"39.504\" timestamp=\"2026-11-10T23:19:58.201\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"BranchActualPhysicalRoundtrip\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3611\" status=\"run\" result=\"completed\" time=\"33.424\" timestamp=\"2026-11-10T23:20:37.705\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"AsymmetricChildPhysicsAndC0Roundtrip\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3612\" status=\"run\" result=\"completed\" time=\"265.304\" timestamp=\"2026-11-10T23:21:11.130\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3613\" status=\"run\" result=\"completed\" time=\"43.572\" timestamp=\"2026-11-10T23:25:36.435\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3614\" status=\"run\" result=\"completed\" time=\"324.412\" timestamp=\"2026-11-10T23:26:20.007\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ClassicStoppedActualGrowthIsNotInitialTemplate\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3615\" status=\"run\" result=\"completed\" time=\"31.725\" timestamp=\"2026-11-10T23:31:44.419\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"BranchStoppedActualGrowthIsNotInitialTemplate\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3616\" status=\"run\" result=\"completed\" time=\"25.334\" timestamp=\"2026-11-10T23:32:16.145\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ClassicRawPartialKeepsNativeDataWithoutTargets\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3617\" status=\"run\" result=\"completed\" time=\"4.423\" timestamp=\"2026-11-10T23:32:41.479\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"BranchRawPartialKeepsNativeDataWithoutTargets\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3618\" status=\"run\" result=\"completed\" time=\"3.925\" timestamp=\"2026-11-10T23:32:45.903\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ReferencePrefixCannotBecomeCompleteTargets\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3619\" status=\"run\" result=\"completed\" time=\"7.887\" timestamp=\"2026-11-10T23:32:49.828\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"DefaultSyncStoppedPackageKeepsNullCertificate\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3620\" status=\"run\" result=\"completed\" time=\"56.959\" timestamp=\"2026-11-10T23:32:57.716\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"StopAfterCompleteExactFinalRemainsDiagnostic\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3621\" status=\"run\" result=\"completed\" time=\"43.117\" timestamp=\"2026-11-10T23:33:54.675\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"UnknownFieldRejected\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3622\" status=\"run\" result=\"completed\" time=\"0.533\" timestamp=\"2026-11-10T23:34:37.793\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ChangedCurrentParametersRejected\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3623\" status=\"run\" result=\"completed\" time=\"2.495\" timestamp=\"2026-11-10T23:34:38.327\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"FakeInitialTemplateRejected\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3624\" status=\"run\" result=\"completed\" time=\"0.563\" timestamp=\"2026-11-10T23:34:40.823\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ChangedCurrentModelRejected\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3625\" status=\"run\" result=\"completed\" time=\"2.465\" timestamp=\"2026-11-10T23:34:41.386\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ChangedCurrentEpochRejected\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3626\" status=\"run\" result=\"completed\" time=\"2.484\" timestamp=\"2026-11-10T23:34:43.852\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"RehashedForeignCertificateRecipeRejected\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3627\" status=\"run\" result=\"completed\" time=\"2.507\" timestamp=\"2026-11-10T23:34:46.336\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"Protocol4CannotMasqueradeInPackage6\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3628\" status=\"run\" result=\"completed\" time=\"0.545\" timestamp=\"2026-11-10T23:34:48.844\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"Archive1CannotMasqueradeInPackage6\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3629\" status=\"run\" result=\"completed\" time=\"0.556\" timestamp=\"2026-11-10T23:34:49.389\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"Runtime1CannotMasqueradeInPackage6\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3630\" status=\"run\" result=\"completed\" time=\"0.535\" timestamp=\"2026-11-10T23:34:49.945\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"Cold6CannotMasqueradeInPackage6\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3631\" status=\"run\" result=\"completed\" time=\"0.552\" timestamp=\"2026-11-10T23:34:50.480\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"OwnedC0CannotBeDropped\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3632\" status=\"run\" result=\"completed\" time=\"252.069\" timestamp=\"2026-11-10T23:34:51.032\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"StoppedPackageCannotCarryExactMathematicalCertificate\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3633\" status=\"run\" result=\"completed\" time=\"5.096\" timestamp=\"2026-11-10T23:39:03.102\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ActualForeignDatasetCannotReplaceRestoredFullSource\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3634\" status=\"run\" result=\"completed\" time=\"2.866\" timestamp=\"2026-11-10T23:39:08.199\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"ActualInitialSnapshotCannotReplaceGrownCurrentGraph\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3653\" status=\"run\" result=\"completed\" time=\"2.061\" timestamp=\"2026-11-10T23:39:11.066\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"Old5AndNew6HaveNoWireAlias\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3660\" status=\"run\" result=\"completed\" time=\"30.34\" timestamp=\"2026-11-10T23:39:13.127\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"CoherentTerminalRewriteNeedsOriginalExportBinding\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3667\" status=\"run\" result=\"completed\" time=\"5.353\" timestamp=\"2026-11-10T23:39:43.468\" classname=\"NativeCandidateWindowPackage\" />\n    <testcase name=\"StartedZeroGroupAttemptIsDiagnosticWithRealInitialSource\" file=\"/media/user/Data/TimeLearnerRefactor/source-dataset-ready-fixture-m40-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp\" line=\"3697\" status=\"run\" result=\"completed\" time=\"3.003\" timestamp=\"2026-11-10T23:39:48.821\" classname=\"NativeCandidateWindowPackage\" />\n  </testsuite>\n</testsuites>\n",
+  "ids": [
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+    "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeCandidateWindowPackage/ClassicStoppedActualGrowthIsNotInitialTemplate",
+    "NativeCandidateWindowPackage/BranchStoppedActualGrowthIsNotInitialTemplate",
+    "NativeCandidateWindowPackage/ClassicRawPartialKeepsNativeDataWithoutTargets",
+    "NativeCandidateWindowPackage/BranchRawPartialKeepsNativeDataWithoutTargets",
+    "NativeCandidateWindowPackage/ReferencePrefixCannotBecomeCompleteTargets",
+    "NativeCandidateWindowPackage/DefaultSyncStoppedPackageKeepsNullCertificate",
+    "NativeCandidateWindowPackage/StopAfterCompleteExactFinalRemainsDiagnostic",
+    "NativeCandidateWindowPackage/UnknownFieldRejected",
+    "NativeCandidateWindowPackage/ChangedCurrentParametersRejected",
+    "NativeCandidateWindowPackage/FakeInitialTemplateRejected",
+    "NativeCandidateWindowPackage/ChangedCurrentModelRejected",
+    "NativeCandidateWindowPackage/ChangedCurrentEpochRejected",
+    "NativeCandidateWindowPackage/RehashedForeignCertificateRecipeRejected",
+    "NativeCandidateWindowPackage/Protocol4CannotMasqueradeInPackage6",
+    "NativeCandidateWindowPackage/Archive1CannotMasqueradeInPackage6",
+    "NativeCandidateWindowPackage/Runtime1CannotMasqueradeInPackage6",
+    "NativeCandidateWindowPackage/Cold6CannotMasqueradeInPackage6",
+    "NativeCandidateWindowPackage/OwnedC0CannotBeDropped",
+    "NativeCandidateWindowPackage/StoppedPackageCannotCarryExactMathematicalCertificate",
+    "NativeCandidateWindowPackage/ActualForeignDatasetCannotReplaceRestoredFullSource",
+    "NativeCandidateWindowPackage/ActualInitialSnapshotCannotReplaceGrownCurrentGraph",
+    "NativeCandidateWindowPackage/Old5AndNew6HaveNoWireAlias",
+    "NativeCandidateWindowPackage/CoherentTerminalRewriteNeedsOriginalExportBinding",
+    "NativeCandidateWindowPackage/StartedZeroGroupAttemptIsDiagnosticWithRealInitialSource"
+  ],
+  "process": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 1194.7846243386157,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "6bade2a24dcb4115c3e98e2fb172aa025aa04bf515f2571a7f4eccd58a0d650b",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "needs_review",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 2,
+      "reasons": [],
+      "examples": [
+        {
+          "stream": "stderr.log",
+          "chunk": 1,
+          "severity": "unclassified",
+          "excerpt": "PulseLibTestRuntime executable=/media/user/Data/TimeLearnerRefactor/runtime-native119-dataset-ready-normal-a1/Test_PulseLib_StorageComponents ini=/media/user/Data/TimeLearnerRefactor/runtime-native119-dataset-ready-normal-a1/NeuroModelerConsole.ini"
+        },
+        {
+          "stream": "stderr.log",
+          "chunk": 2,
+          "severity": "unclassified",
+          "excerpt": "PulseLibTestRuntime work_directory=/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-dataset-ready-normal-a1/native-package6-29/native.test-events-log"
+        }
+      ],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 7511,
+          "sha256": "31cf24156de8faaf0d025c18f44dd3d3eb498ecd12c8a64cf943794680e77268"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 411,
+          "sha256": "a57e2655bc1ea20d62bedfd9b054d25887e0483b5f8417952fb5c370072e57db"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "c4e356a989d019b0753d7561aa86a1c1b6d9797800e40858ec6a9e27d94d0a71",
+      "unit": "timelearner-645f4cdb-b42f-4789-9187-69711ffb50a5.service",
+      "invocation_id": "aabce54d0b8640759a73f1dada39d96a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-645f4cdb-b42f-4789-9187-69711ffb50a5.service",
+      "initial_main_pid": 1751368,
+      "initial_start_ticks": "341719560",
+      "sha256": "671e4a1c7970c3fa4675a86af2df0d9d5fdacfd09dcba36e11862b9077e8f010"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-645f4cdb-b42f-4789-9187-69711ffb50a5.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  }
+}
