@@ -30,3 +30,7 @@ Matched group содержит N+2 настоящих предъявления: 
 6. Для candidate-window/omission объявления при N=1 пока требуется явный capability refusal до дорогого Train. Такой отказ — ожидаемый negative control, а не выполнение positive N=1 требования всей архитектуры. Если метод расширяется, обновить весь C++/Python/serialization слой и existing rejection tests в отдельном математически обоснованном этапе.
 
 Текущий full119 cohort не содержит все перечисленные одновходовые end-to-end cases. Он не закрывает эту часть полной матрицы. Существующие single-input probes и source-review уменьшают неопределённость, но не дают статуса «N=1 полностью принято». Проверки выполняются только на серверах; текущие immutable сборки119 не меняются.
+
+## Первый actual Windows native8
+
+[Текущий SDK8ec на .14:6PASS/2FAIL](https://github.com/aicommunity/Nmsdk/blob/e0869cd548b7148b509011021a87882baab417af/Docs/StructTrain/TimeLearner/WindowsSingleInput8-20261110.ru.md),8 completed без skips. Все4 single-input probes2000/20000Hz и2 Branch recognition cases прошли. Два full-transfer cases остановлены на fresh-process bootstrap: унаследованный TIMELEARNER_EXECUTION_OUTPUT уже занялся parent EventsLog, child отклонён до импорта. Main Train и same-process comparison дошли до child launch; fresh import и дальнейшие assertions не подтверждены. Исправление обоих completed/stopped callers подготовлено отдельно, ещё не скомпилировано/runtime не принято. Исходные отрицательные observations сохраняются; full N=1 matrix остаётся открытой.
