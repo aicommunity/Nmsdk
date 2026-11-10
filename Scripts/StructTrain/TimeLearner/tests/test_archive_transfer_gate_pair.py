@@ -98,9 +98,9 @@ class ArchiveTransferGatePair(unittest.TestCase):
         parent = Path(tempfile.mkdtemp(prefix="archive-pair-cli-"))
         output = parent/"report"
         run = subprocess.run([sys.executable, "-B", "-m",
-            "Scripts.StructTrain.TimeLearner.archive_transfer_reports",
-            "--input-format", "native-gate-pair", "--input", str(self.root),
-            "--output", str(output), "--plots"], cwd=Path(__file__).resolve().parents[4],
+            "Scripts.StructTrain.TimeLearner", "report", str(self.root),
+            "--format", "native-archive-transfer-pair", "--output", str(output)],
+            cwd=Path(__file__).resolve().parents[4],
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=180)
         (parent/"cli.stdout.log").write_bytes(run.stdout)
         (parent/"cli.stderr.log").write_bytes(run.stderr)

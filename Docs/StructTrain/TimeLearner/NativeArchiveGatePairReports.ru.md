@@ -17,10 +17,9 @@ completed0/whole bound cgroup closed/loaded runtime из process/result.json,
 Пример после закрытия исходного задания:
 
 ```text
-python3 -B -m Scripts.StructTrain.TimeLearner.archive_transfer_reports \
-  --input-format native-gate-pair \
-  --input /path/to/closed-native-job/archive-waveforms \
-  --output /path/to/new-report-cache --plots
+python3 -B -m Scripts.StructTrain.TimeLearner report \
+  /path/to/closed-native-job/archive-waveforms \
+  --format native-archive-transfer-pair --output /path/to/new-report-cache
 ```
 
 Графики показывает штатный renderer: physical soma `$.Soma2` исходной модели
@@ -29,6 +28,8 @@ python3 -B -m Scripts.StructTrain.TimeLearner.archive_transfer_reports \
 Это characterization одним импульсом, не пачка Train и не распознавание
 восьми паттернов. Другие сомы этим тестом не измеряются; покрытие отчёта
 ограничено реально записанной Soma2, а не всем деревом модели.
+Output должен быть новым каталогом вне исходных данных и source checkout.
+Отдельный module CLI также сохраняется; его default legacy16 не изменён.
 
 В отчёте сохраняется исходная operational diagnostics, включая needs_review;
 она не переименовывается в clear. Полный родительский cohort, legacy16,

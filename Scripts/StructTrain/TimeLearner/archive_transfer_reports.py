@@ -251,22 +251,36 @@ def _audit_gate_pair(root):
 def audit_gate_pair(root):return checked(_audit_gate_pair, root)
 
 
+def _write_report(root, output, data, report, plots):
+    root = Path(root).resolve(strict=True);output = Path(output).resolve()
+    source = Path(__file__).resolve().parents[3]
+    require(not output.exists() and not output.is_relative_to(root) and not root.is_relative_to(output)
+            and not output.is_relative_to(source) and not source.is_relative_to(output),
+            "archive_transfer_report_output_overlaps_input_or_source")
+    runtime = plotting_runtime() if plots else None
+    output.mkdir(parents=True, exist_ok=False)
+    if plots:
+        for name, value in data.items():
+            report["cases"][name]["figures"] = render(value, output/name,
+                source_label="Source physical soma", loaded_label="Fresh-process imported soma",
+                context="Versioned model transfer characterization; not selectivity",
+                state_description="Native import and Reset; one pulse", physical_soma_ids=[2])
+    report["plotting_runtime"] = runtime
+    (output/"validation.json").write_text(json.dumps(report, indent=2, allow_nan=False)+"\n")
+    return report
+
+
+def render_gate_pair(root, output):
+    return _write_report(root, output, *audit_gate_pair(root), True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True);parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--input-format", choices=("legacy16", "native-gate-pair"), default="legacy16")
     parser.add_argument("--plots", action="store_true");args = parser.parse_args()
     data, report = (audit_run if args.input_format == "legacy16" else audit_gate_pair)(args.input)
-    runtime = plotting_runtime() if args.plots else None
-    args.output.mkdir(parents=True, exist_ok=False)
-    if args.plots:
-        for name, value in data.items():
-            report["cases"][name]["figures"] = render(value, args.output/name,
-                source_label="Source physical soma", loaded_label="Fresh-process imported soma",
-                context="Versioned model transfer characterization; not selectivity",
-                state_description="Native import and Reset; one pulse", physical_soma_ids=[2])
-    report["plotting_runtime"] = runtime
-    (args.output/"validation.json").write_text(json.dumps(report, indent=2, allow_nan=False)+"\n")
+    _write_report(args.input, args.output, data, report, args.plots)
 
 
 if __name__ == "__main__":main()
