@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "actual-stock-cold4-burst-probes8",
+  "package_fingerprint": "490fffa1969d9a1adefc9f6ee3c95d21c47962fd5575c156daf040683a083e8a",
+  "execution": "completed",
+  "assertion_status": "failed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_characterization.StockColdCharacterizationTest.test_public_cold_stock_assigned_probes_preserve_actual_graph_and_primary"
+  ],
+  "executed_tests": 1,
+  "failures": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_characterization.StockColdCharacterizationTest.test_public_cold_stock_assigned_probes_preserve_actual_graph_and_primary"
+  ],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD_PROBE_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold4-probes8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold4Probes8-20261111/fixture",
+      "files": 2,
+      "fingerprint": "15951b16b81a7ba903727bd8852c49de10cbfe4d95134d91d5a0ee2021caf1c6"
+    },
+    "TIMELEARNER_STOCK_COLD_NATIVE_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-dataset-ready-normal-a1",
+      "files": 1,
+      "fingerprint": "269d9ffda64e282805992a4bb11a11d1dd551ff014bf1e476d91b1594f71f3ea"
+    },
+    "TIMELEARNER_STOCK_COLD_NATIVE_INI": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-dataset-ready-normal-a1",
+      "files": 1,
+      "fingerprint": "b6bb0f8178de9b7fb3df914b4e3408322394d21ff5036973bc45c57b1b264a79"
+    }
+  },
+  "scientific_verdict": null
+}

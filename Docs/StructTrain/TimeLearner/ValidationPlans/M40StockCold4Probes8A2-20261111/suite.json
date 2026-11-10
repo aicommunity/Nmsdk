@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "actual-stock-cold4-burst-probes8-progress-path-fixed-a2",
+  "package_fingerprint": "b6e50850a445f5c643a5b19efc58e5d310a074d79b840930365b12f1fc11726c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_characterization"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_characterization.StockColdCharacterizationTest.test_public_cold_stock_assigned_probes_preserve_actual_graph_and_primary"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD_PROBE_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "7893bccec80779a1f1c9f94926415e8074e53705fb2ed41c48212654711f8974"
+    },
+    "TIMELEARNER_STOCK_COLD_NATIVE_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "269d9ffda64e282805992a4bb11a11d1dd551ff014bf1e476d91b1594f71f3ea"
+    },
+    "TIMELEARNER_STOCK_COLD_NATIVE_INI": {
+      "pattern": "*.ini",
+      "files": 1,
+      "fingerprint": "b6bb0f8178de9b7fb3df914b4e3408322394d21ff5036973bc45c57b1b264a79"
+    }
+  }
+}
