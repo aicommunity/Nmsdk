@@ -1,0 +1,20 @@
+{
+  "initial": {
+    "pid": 7592,
+    "status": "closed",
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\r\n  File \"C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner_deliver_empty_private_source_v2.py\", line 29, in <module>\r\n    run(['git','-C',destination,'-c','submodule.recurse=false','checkout','--detach',root])\r\n    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\timelearner_deliver_empty_private_source_v2.py\", line 10, in run\r\n    if status:raise RuntimeError(str(status)+':'+err.decode(errors='replace'))\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nRuntimeError: 128:fatal: 'origin' does not appear to be a git repository\r\nfatal: Could not read from remote repository.\r\n\r\nPlease make sure you have the correct access rights\r\nand the repository exists.\r\nfatal: could not fetch f5dd4749f067e60edfc5b27b67f1f19a9c703477 from promisor remote\r\n\r\n",
+    "exitCode": 1,
+    "signal": null
+  },
+  "completion": {
+    "pid": 27644,
+    "status": "closed",
+    "stdout": "{\"destination\": \"/media/user/Data/TimeLearnerRefactor/requests/cold7-console-reports2-a3\", \"commit\": \"1dc30fe43c554ff803763a2e61c91548b99b73bc\", \"checkout_clean\": true, \"supplement_applied\": true}\r\n",
+    "stderr": "",
+    "exitCode": 0,
+    "signal": null
+  },
+  "source_or_runtime_changed": false,
+  "scientific_verdict": null
+}
