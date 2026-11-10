@@ -59,5 +59,5 @@ class StockColdCharacterizationTest(unittest.TestCase):
             self.assertTrue(row['probe']['model_unchanged'])
             self.assertFalse(row['probe']['training_started'])
             self.assertIs(type(row['probe']['observation_valid']), bool)
-        registry = Reservations.open_existing(result/'leases.sqlite3')
+        registry = Reservations.open_existing(result/'leases.sqlite3', managed_units=True)
         self.assertEqual([r['state'] for r in registry.inspect()['leases']], ['released'])
