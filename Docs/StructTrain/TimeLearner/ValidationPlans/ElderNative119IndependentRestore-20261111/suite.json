@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "independent-native119-full-primary-replay-from-m40",
+  "package_fingerprint": "46b10040e3b2150851117d3df9ace2544a13e9383fc5b034357d86ffb7d92183",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native119_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native119_compact_primary.Native119CompactPrimaryTest.test_complete_restore_replays_all_junit_rules_and_original_model_states"
+  ],
+  "fixtures": {
+    "TIMELEARNER_NATIVE119_COMPACT_PRIMARY": {
+      "pattern": "*.json",
+      "files": 5,
+      "fingerprint": "19e6ca4a9fdd47656c335df73da3d029d259085170db779e85992289dc982523"
+    },
+    "TIMELEARNER_NATIVE119_COMPACT_ARCHIVE": {
+      "pattern": "*.xz",
+      "files": 1,
+      "fingerprint": "a650d9d50cf107ad7e3d7c001c0cf4ad7c5b18f61154846c1da8833f4f499197"
+    }
+  }
+}

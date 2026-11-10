@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "independent-native119-full-primary-replay-from-elder",
+  "package_fingerprint": "46b10040e3b2150851117d3df9ace2544a13e9383fc5b034357d86ffb7d92183",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native119_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native119_compact_primary.Native119CompactPrimaryTest.test_complete_restore_replays_all_junit_rules_and_original_model_states"
+  ],
+  "fixtures": {
+    "TIMELEARNER_NATIVE119_COMPACT_PRIMARY": {
+      "pattern": "*.json",
+      "files": 5,
+      "fingerprint": "4c096d775ec459c7b27ddb3c099b874275efbefec86b8a4c70e6e0aa47ad7180"
+    },
+    "TIMELEARNER_NATIVE119_COMPACT_ARCHIVE": {
+      "pattern": "*.xz",
+      "files": 1,
+      "fingerprint": "9555972bf99f1f52cceef16f3f5f94ad6bb8750e600de5ae88f73755cc6ae5ec"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-native119-independent-restore-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "bd28739f0a3878105aeb3a9f83d94a369fa66a0e",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 64,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native119-independent-restore-a1",
+      "commit": "cd9d431bfc1cc8dd69bafd1d0ee2b4df3801cb0f"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native119-independent-restore-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Native119IndependentRestore-20261111/suite.json",
+      "sha256": "5943416a7dddcab533d1ed894cbcbc4f23d94a4c8ef5588ca11da9d2f9fbf70c"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE119_COMPACT_PRIMARY": "/media/user/Data/TimeLearnerRefactor/fixtures/native119-elder-compact-primary-a1",
+      "TIMELEARNER_NATIVE119_COMPACT_ARCHIVE": "/media/user/Data/TimeLearnerRefactor/fixtures/native119-elder-compact-primary-a1"
+    }
+  }
+}
