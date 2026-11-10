@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "managed-python-controller-production-boundaries15",
+  "package_fingerprint": "0c3040d893e68a210c49b81d185a86eb94b22663cd5689022c62982b275fbfb0",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callable_hook_failure_stops_only_the_bound_group_and_cannot_pass",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callbacks_are_checked_before_any_runtime_or_output_side_effect",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_closed_observer_pipe_does_not_raise_into_execution_control",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_controller_validation_cannot_import_another_source_directory",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_controller_validation_requires_same_tool_and_validation_commit",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_invalid_limits_and_boolean_schema_never_clip_to_defaults",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_readbacks_parent_alias_cannot_redirect_owned_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_retained_glog_alias_is_lstat_readlink_only_even_when_dangling",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_reviewed_typed_request_is_preserved_without_implicit_fields",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_and_input_bindings_require_full_digest_and_absolute_path",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_projection_is_verified_against_exact_git_blob_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_unknown_fields_native_actions_and_path_job_ids_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_validation_leases_suite_parent_as_real_directory_tree",
+    "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_worker_projects_actual_child_plotting_caches_inside_owned_TMPDIR"
+  ],
+  "fixtures": {}
+}
