@@ -18,6 +18,8 @@
 
 ## Приёмка и оставшиеся действия
 
-Доставка и полная сверка SDK выполняются. Runtime build ещё не принят. После сверки namespace — свежая bounded сборка; после terminal результата — проверка целостности и полного закрытия процессов. Сохранить исходные отрицательные результаты, если остаются descendants. Native запуск возможен лишь через действующий production gate и точный audited runtime.
+Полная сверка SDK прошла:4078/4078 файлов,8 clean repositories, без alternates; [исходный readback](ValidationPlans/WindowsNative119OpenArm-20261110/sdk-verification.json). Дополнительная остановка ручного wrapper произошла из-за отсутствующей UTF-8 настройки при чтении Git blob с кириллическими путями; production verify-sdk.ps1 уже задаёт UTF-8, его контракт сохранён, исходники не менялись. После явной настройки повторная сверка прошла.
+
+Штатный launcher отправил свежую сборку: Scheduled Task instance `{7D84AED3-4052-478D-86FF-3E33F9ED566C}`, task_state4/running и реальный Python PID9516 подтверждены, terminal отсутствовал. [Original dispatch и live-process observation](ValidationPlans/WindowsNative119OpenArm-20261110/launch-live-observation.json). Это активное сборочное задание; build acceptance и native scientific admission ещё не получены. После terminal результата — проверка целостности и полного закрытия процессов. Сохранить исходные отрицательные результаты, если остаются descendants. Native запуск возможен лишь через действующий production gate и точный audited runtime.
 
 При подготовке native заданий не считать наличие бинарника научным допуском. Требуются exact test inventory, actual loaded DLL identity, полные наблюдения, source/runtime preservation и Job closure. Console Train→Test, независимые научные условия, cross-platform численные сравнения и публикация полных compact primary остаются отдельными проверками.
