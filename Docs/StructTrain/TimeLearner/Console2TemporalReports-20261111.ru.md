@@ -25,4 +25,3 @@
 ![Overview trial-0001-soma-001](Figures/Console2-20261111/Branch-window-N0/trial-0001-soma-001/overview.png)
 
 ![Zoom trial-0001-soma-001](Figures/Console2-20261111/Branch-window-N0/trial-0001-soma-001/zoom-003.png)
-
