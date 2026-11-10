@@ -7,3 +7,5 @@
 Бюджет controller задаётся отдельно: для Console2 планируется256MiB/32tasks; helper резервирует controller256MiB плюс native child4GiB, managed capacity6GiB. Это не общий агрегатный лимит всех серверных задач. Wall/output guard сохраняются. Допуск или физиологические параметры моделей не изменяются.
 
 Приёмка: штатные проверки request/source boundaries на сервере и полный повтор фактического cold7 Console2. Требуются новый cold Train, complete export, threshold measured calibration/confirmation и frozen Test, actual lease intents/native unit bindings и исходные model/observation артефакты. Source-only изменение ещё не означает PASS. N2/N0 с SyncTolerance0.2 остаётся инженерным сценарием; обязательные N4/0.02 и полная матрица плана не закрываются.
+
+Адресные production boundary checks выполнены на M40:15/15, без failures/errors/skips,16.324440s, outer exit0 и whole cgroup closed. Actor297cf709cd03137935f2129bb85721943454873a, package fingerprint0c3040d893e68a210c49b81d185a86eb94b22663cd5689022c62982b275fbfb0. Это не проверка выполнения native фаз: фактический Console2 с новым controller operation запущен отдельно, его результат пока открыт.
