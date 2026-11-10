@@ -44,4 +44,14 @@ Windows A1 также завершён отрицательно: MSVC C2664 в �
 
 Добавлен отдельный diagnostic ActualMembraneCopyAndLoadStages: чтение shared prototype, native Alloc(false), Init/Reset и загрузка исходной definition с наблюдениями до/после каждого шага. Общий prototype не изменяется, размеры матрицы не исправляются вручную; full physical comparison обязателен. Новый diagnostic ещё не скомпилирован и не выполнен. Его прохождение само по себе не исправит исходный replay или full roundtrip.
 
+## Следующая серия: native image stages8
+
+Source58c3150f1d0ba7a8a183b3bc6970eca88d6409dc/Pulse608/Bin8cb/Rdkd6 доставлен в новый private source-native-image-stages-m40-a3 через8 самостоятельных Git projections. [Декларация A4](ValidationPlans/NativeImageStages8A4-20261110/cohort.json) задаёт отдельные processes: сначала1 stage diagnostic, затем6 generic Load controls, последним1 исходный archive replay. Fail-fast сохранён; порядок selected_ids совпадает с фактическим runplan. Все8 проверок всё ещё требуют runtime-подтверждения.
+
+Исходная подготовка A3 отказала до сборки: первый caller создал11 ignored pyc, что строгий source snapshot запретил; удалён только созданный Python-кэш, повторный caller использует -B/PYTHONDONTWRITEBYTECODE. Следующий owned preparation завершился закрытым FAIL из-за рассогласования selected_ids и runplan после перестановки generic controls. [Отказы сохранены](../../../Reports/StructTrain/TimeLearner/s04-native-load-history-preparation-root-observation/m40-a3-canonical-refusals.json), исходная A3 declaration не переписана.
+
+[Подготовка A4](../../../Reports/StructTrain/TimeLearner/s04-native-load-history-preparation-root-observation/m40-a4-canonical-result.json) завершена completed/exit0, whole group closed, diagnostics clear; проверены4073files и73 prior bindings. [Native launch](../../../Reports/StructTrain/TimeLearner/s04-native-load-history-preparation-root-observation/m40-a3-native-launch.json) создал supervisor64326/start337561771, boot0340843f-8a05-4b7e-bd66-afeefecdbe55. Build/runtime/output новые, исходники предыдущих runs не обновляются. На момент записи native verdict отсутствует; launch не является приёмкой сборки или тестов.
+
+[Полный metadata diff всех трёх A2 cycles](../../../Reports/StructTrain/TimeLearner/s04-native-load-history-preparation-root-observation/m40-a2-archive-difference-summary.json) показывает ровно native_xml definition13 и два производных SHA; остальные поля совпадают. Первичные JSON сохранены отдельно, этот производный diff их не заменяет.
+
 После runtime наблюдений исправлять подтверждённую причину на уровне владельца и проверять actual package5/reader16/full119/Console Train→Test. Не менять поле XML вручную и не заменять требования сходимости более лёгкой scientific задачей. Полная приёмка стадий1–12 остаётся открытой.
