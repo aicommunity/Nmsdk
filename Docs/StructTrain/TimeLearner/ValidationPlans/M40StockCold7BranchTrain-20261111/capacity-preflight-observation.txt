@@ -1,0 +1,29 @@
+MemAvailable:   43226580 kB
+/dev/sda       3936820731904 3438753640448 298010963968  93% /media/user/Data
+{
+  "kind": "timelearner_contained_request",
+  "schema_version": 1,
+  "attempt_id": "00c01787-65e6-4556-9f60-5d00c7eebba7",
+  "unit": "timelearner-00c01787-65e6-4556-9f60-5d00c7eebba7.service",
+  "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+  "uid": 1000,
+  "controller": {
+    "pid": 2435894,
+    "start_ticks": "342835501"
+  },
+  "executable": "/usr/bin/python3.12",
+  "arguments": [
+    "-B",
+    "-m",
+    "Scripts.StructTrain.TimeLearner.owned_python_job",
+    "_worker",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold7-preflight2-m40-a2/request.json"
+  ],
+  "working_directory": "/media/user/Data/TimeLearnerRefactor/source-stock-cold7-measured-pilot-m40-a2",
+  "runtime_fingerprint": "f483a8eed48b94bc816cf284fdc0186716d224c83f9f536b3f27379f961273a5",
+  "memory_bytes": 2147483648,
+  "tasks": 128,
+  "maximum_wall_seconds": 900,
+  "environment": {},
+  "sha256": "b6b6154dadc2171cfea28d5f6890750ca5f5e30961fc06ca9e728f8cba4f3382"
+}

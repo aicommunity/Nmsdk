@@ -1,0 +1,39 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-stock-cold7-classic-train-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "ef74e72f0ffaeacdc977c0160e646cec39655666",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 128,
+    "maximum_wall_seconds": 2400
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 4294967296
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-stock-cold7-measured-train-m40-a1",
+      "commit": "ef74e72f0ffaeacdc977c0160e646cec39655666"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold7-classic-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold7ClassicTrain-20261111/suite.json",
+      "sha256": "9ae2f7cfcd8c9fed985599d8eff7a95dd655bf7c9934c079820833278915613c"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD7_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold7-classic-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold7ClassicTrain-20261111/fixture",
+      "TIMELEARNER_STOCK_COLD7_CHARACTERIZATION": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result",
+      "TIMELEARNER_STOCK_COLD7_CHARACTERIZATION_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result",
+      "TIMELEARNER_STOCK_COLD7_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-native119-dataset-ready-normal-a1",
+      "TIMELEARNER_STOCK_COLD7_RUNTIME_INI": "/media/user/Data/TimeLearnerRefactor/runtime-native119-dataset-ready-normal-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 268435456,
+      "maximum_total_bytes": 536870912
+    }
+  }
+}
