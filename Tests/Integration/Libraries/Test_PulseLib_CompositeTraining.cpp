@@ -3635,8 +3635,20 @@ TEST(NativeCandidateWindowPackage,ActualForeignDatasetCannotReplaceRestoredFullS
     auto package=ActualWindowPackage<NNeuronTimeLearner>();NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
     const auto dataset=f.owner->template GetComponentL<NDatasetMatrix>("DatasetMatrix",true);ASSERT_TRUE(dataset);
     auto pattern=dataset->MatrixData.GetData();pattern(0,0)+=.001;dataset->MatrixData=pattern;
-    package["dataset"]=NmsdkTools::ExportDatasetSnapshot(dataset.Get());RebindPortable(package);
-    EXPECT_THROW(PrepareNativeLearnedState(package,f.storage,f.environment,CandidateWindowPackageImplementation),std::invalid_argument);
+    ASSERT_FALSE(dataset->IsReady());
+    // MatrixData invalidates this component's structural readiness. Apply it
+    // through the dataset lifecycle before exporting a physical snapshot.
+    dataset->Build();dataset->Init();
+    ASSERT_TRUE(dataset->IsReady());ASSERT_TRUE(dataset->IsInit());
+    ASSERT_DOUBLE_EQ(dataset->MatrixData.GetData()(0,0),pattern(0,0));
+    const auto foreign=NmsdkTools::ExportDatasetSnapshot(dataset.Get());
+    ASSERT_NE(foreign,package["dataset"].toObject());package["dataset"]=foreign;RebindPortable(package);
+    try {
+        (void)PrepareNativeLearnedState(package,f.storage,f.environment,CandidateWindowPackageImplementation);
+        FAIL()<<"a changed actual dataset must not replace the captured training source";
+    } catch(const std::invalid_argument& error) {
+        EXPECT_STREQ(error.what(),"composite_package_source_isi_changed");
+    }
 }
 TEST(NativeCandidateWindowPackage,ActualInitialSnapshotCannotReplaceGrownCurrentGraph) {
     auto package=ActualWindowPackage<NNeuronTimeLearner>(WindowPackageSource::GrownStopped);const auto source=package["measurement_archive"].toObject()["source_binding"].toObject();
