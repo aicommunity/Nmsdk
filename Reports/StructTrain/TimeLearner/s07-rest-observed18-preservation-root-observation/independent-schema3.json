@@ -1,0 +1,31 @@
+{
+  "kind": "independent_native_timeout_preservation_verification",
+  "schema_version": 1,
+  "status": "passed_metadata",
+  "commit": "cc9ae2e13c733bc6b51b0aed102dd8b14316ec82",
+  "original_outcome": {
+    "planned": 18,
+    "executed": 14,
+    "passed": 13,
+    "failed_ids": [
+      "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+    ],
+    "not_completed_ids": [
+      "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+      "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+      "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+      "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+    ]
+  },
+  "original_files": 1553,
+  "archive_members": 1556,
+  "archive_bytes": 4052500,
+  "expanded_bytes": 302408320,
+  "original_source_git_files": 4067,
+  "collector_source_git_files": 651,
+  "collection_lease": "84c22435-d144-4ca3-a8a4-26900d698957",
+  "collector_external_cgroup_attested": false,
+  "local_numeric_or_test_execution": false,
+  "scientific_verdict": null,
+  "reader_sha256": "6fa3d4264dc65ac535095dd2ce0446b2917d94a6008efb4dee4e6d6afb27bd59"
+}
