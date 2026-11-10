@@ -1,0 +1,23 @@
+# Сквозная Console-приёмка cold7 — постановка 10.11.2026
+
+Два новых server-only cases проверяют настоящий публичный путь для Classic/Branch, N=2, N0, C-trim/PostTune Off. Это инженерный протокол с исходным CapturedPerInput и явно объявленным SyncTolerance0.2; он не заменяет default0.02/stock N4 или всю матрицу N0/N1/физики. Runtime verdict пока отсутствует: локально проверен только AST, без импорта/запуска тестов и моделей.
+
+## Объявленный путь
+
+1. Требовать реальный закрытый corpus package6 из полного native119. Отсутствующая environment binding или source package — ошибка, не skip. Проверить actual source package через production auditor и external primary resolver. Classic/Branch source-0 должны быть exact/certificate-consistent cold7/N0/N2 со строго указанными исходными tolerances.
+2. Взять только начальную configuration и immutable storage definitions из source neuron archive. Изменить run_id нового cold задания. Сохранённые references, certificate, search history и trained parameters не передаются как seed. Реальный Console cold initial-state и production audit обязаны подтвердить объявленное исходное состояние; XML model archive здесь поставляет образы, не обученный Test.
+3. Публичные preflight → Train → export → fixed-threshold evaluation выполняются через тот же поддерживаемый CLI и process-policy. Каждая операция имеет отдельные durable intent/unit binding, capture/loaded-runtime, run manifest и whole cgroup closure. Exact/завершение Train проверяются отдельно от valid process/data.
+4. Export импортирует фактический результат именно нового Train. Identity conversion объявлена явно; модель frozen Test должна совпадать до/после каждой полной пробы. Четыре предъявления target/foil/foil/target, полные2s окна, actual soma/input/threshold-potential samples и spikes. Общий максимум Test не подменяет критерий закреплённого импульса Train. Sample/trial IDs и pattern hashes задаются до запуска; labels не зависят от порядка строк.
+5. Из фактических нестреляющих calibration observations предлагаются threshold candidates: внешние границы и середины между соседними измеренными LTZ peaks. Каждый кандидат проверяется настоящими spiking runs, выбранный порог требует native confirmation. Протокол явно historical_same_matrix; независимый partition не заявляется.
+6. Frozen evaluation новой модели после калибровки. Если calibrated — confirmation должна существовать, observed labels/TP/FP/FN/TN сверяются. Nonseparable/confirmation_failed сохраняются отдельно и требуют полного rollback к исходному recognition source; они не объявляются классификационным PASS.
+7. Дополнительный silent candidate должен дать Nonseparable, вернуть весь исходный model и подтвердить rollback новым native process/frozen replay. Source solo/model files остаются неизменными.
+
+Физические фазы используют существующие production CLI, auditors и проверенные общие helper scenarios test_managed_native_pipeline/test_managed_native_calibration. Новый test module импортирует их как modules, чтобы unittest не включал импортированные TestCase классы в собственный inventory. В helper pipeline добавлен opt-in preflight, default=False и исходные8 сценариев не меняют порядок/число своих фаз.
+
+## Входная декларация и границы
+
+TIMELEARNER_CANDIDATE_WINDOW_CONSOLE указывает на immutable JSON с ровно runtime, corpus, controller, output. runtime — проверенный manifest именно NeuroModelerConsole согласованного SDK; corpus — закрытый native-package6-29/native-composite; controller — настоящий managed controller; output — новый каталог. Полные пути/хеши и validation suite с ровно двумя ожидаемыми IDs фиксируются после завершения producer и вычисления fixture fingerprint. Не запускать на ещё изменяемом корпусе.
+
+Имена cases: CandidateWindowConsolePipelineTest.test_classic_cold7_public_preflight_train_export_measured_calibration_frozen_test и соответствующий branch case в Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_pipeline. Требуется production owned Python validation wrapper с записью original execution/typed statuses, lease/lock и exact fixture inventory. До запуска проверить свободное место и закрытие producer119. Бинарники/source работающих119 не изменяются.
+
+Приёмка — фактические2 completed cases без skips, original CLI manifests всех новых фаз, model/threshold rollback и сохранённые primary; затем readable temporal reports всех предъявленных patterns/somas с actual input overlays и visual QA. Тестовые PASS не считаются научным успехом stock N4. Все этапы1–12 пока частичны; full119, reader16 и научная матрица остаются самостоятельными gates.

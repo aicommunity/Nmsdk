@@ -41,7 +41,7 @@ class ManagedNativePipelineTest(unittest.TestCase):
         cls.templates = Path(cls.spec["templates"])
         cls.positive_templates = Path(cls.spec["positive_templates"])
 
-    def case(self, name, *, positive=False):
+    def case(self, name, *, positive=False, preflight=False):
         root = self.output/name
         root.mkdir()
         capacity = {"slots": 1, "memory_bytes": 6*1024**3, "disk_bytes": 1024**3, "tasks": 512}
@@ -89,6 +89,8 @@ class ManagedNativePipelineTest(unittest.TestCase):
         job = load(templates/(name+"-train/input/job.json"))
         self.assertEqual(job["schema_version"], 1)
         job["configuration"]["run_id"] += "/managed-cold-pipeline"
+        if preflight:
+            invoke("preflight", job)
         trained = invoke("train", job)
         execution = load(trained/"native/execution.json")
         if not positive:
@@ -140,7 +142,7 @@ class ManagedNativePipelineTest(unittest.TestCase):
         actual = load(evaluated/"native/execution.json")
         self.assertEqual(actual["observed_trials"], actual["expected_trials"])
         self.assertEqual(actual["observed_trials"], len(evaluation["trials"]))
-        self.assertEqual(len({r["unit"] for r in records}), 3)
+        self.assertEqual(len({r["unit"] for r in records}), 4 if preflight else 3)
         registry.release(lease["token"], note="Three real public native phases closed; full-model frozen identity audited.")
         self.assertEqual(registry.inspect()["leases"][0]["state"], "released")
         (root/"result.json").write_text(json.dumps({"phases": records,
