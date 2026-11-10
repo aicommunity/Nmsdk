@@ -17,3 +17,13 @@ Gate выполнен за22.779s:8 completed,6PASS/2FAIL, без skips. [Origin
 ## Кандидат исправления child output
 
 В Test_PulseLib_NativeModelEditor.cpp оба QProcess callers (completed и stopped boundary) получают отдельный fresh output под owned run/native-child-processes/<rig.name>. Его EventsLog отличается от parent; родительский flat native trace directory сохраняется. Образ модели, baseline/storage physics, Train/Reset/Build порядок, пороги, допуски и CSV comparison не меняются. ConsoleLikeInit по-прежнему отвергает занятый/пересекающийся с runtime путь. Полная real integration TU исправления скомпилирована syntax-only на M40 за9.527997s, return0/whole group closed/operational diagnostics clear; [original process result](ValidationPlans/WindowsSingleInput8-20261110/child-output-full-tu-syntax.json). Это не link/runtime. Подготовлен новый отдельный [Windows SDK/build](ValidationPlans/WindowsNativeChildOutput-20261110/preparation-plan.json); повтор8 и stopped boundary обязателен. Полный primary syntax job ещё не опубликован. Runtime текущих Linux119 не изменялся.
+
+## Подготовка corrected Windows runtime
+
+SDKe086 доставлен и проверен:4078 files/8clean repos, без alternates. Попытка build-a1 не запустила compiler: backend insufficient_windows_available_memory, child_resumed=false. [Original refusal](ValidationPlans/WindowsNativeChildOutput-20261110/admission-refusal-a1.json).
+
+Причина дефицита — мой зависший ad-hoc PowerShell metadata reader PID3692, занимавший около9.8GB working set. Его encoded command идентифицирован по собственному native8 job/log query и остановлен; модели/пользовательские приложения не останавливались. [Exact stop observation](ValidationPlans/WindowsNativeChildOutput-20261110/metadata-reader-stop.json). Повторное отдельное наблюдение подтвердило отсутствие PID и10,280,050,688bytes свободной физической памяти. Первичный immediate stop readback ещё показывал finishing PID; это не финальное подтверждение.
+
+Небольшой readback успешно получен через [IO.File]::ReadAllText фиксированных файлов без recursive Get-Content pipeline; original negative native8 сохранён. Возможное расширение ETS metadata при ConvertTo-Json в Windows PowerShell5.1 пока гипотеза причины разрастания; bounded reproduction не выполнен. Повторять прежнюю команду не следует.
+
+Подготовлена отдельная attempt-a2 с тем же лимитом4GiB/32processes/7200s и тем же неизменным sourcee086; [spec](ValidationPlans/WindowsNativeChildOutput-20261110/build-specification-a2.json). Исходная memory refusal не переписывается.

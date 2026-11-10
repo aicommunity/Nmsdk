@@ -1,0 +1,34 @@
+{
+  "records": {
+    "exception.json": {
+      "reason": "owned_build_not_accepted",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Projects\\TimeLearnerWorker\\source-native-child-output-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 173, in main\n    require(result['execution'] == 'completed' and result['validity'] == 'valid' and\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            result.get('all_processes_closed') is True, 'owned_build_not_accepted')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Projects\\TimeLearnerWorker\\source-native-child-output-win-a1\\Scripts\\StructTrain\\TimeLearner\\workers\\windows-vs2026\\sdk-build.py\", line 22, in require\n    raise RuntimeError(reason)\nRuntimeError: owned_build_not_accepted\n"
+    },
+    "build-result.json": {
+      "kind": "timelearner_windows_process_result",
+      "schema_version": 1,
+      "execution": "process_error",
+      "validity": "invalid_or_incomplete",
+      "reason": "insufficient_windows_available_memory",
+      "returncode": null,
+      "scientific_verdict": null,
+      "thread_limit_enforced": false,
+      "memory_limit_semantics": "job_committed_virtual_memory",
+      "wall_budget_scope": "whole_attempt_including_preparation",
+      "wall_seconds": 0.9851390002295375,
+      "child_resumed": false,
+      "job_name": "Local\\TimeLearner-ef14899e-ab27-4843-8c52-2e2be3c8e692"
+    },
+    "terminal.json": {
+      "kind": "timelearner_windows_sdk_build",
+      "build_accepted": false,
+      "scientific_models_executed": false,
+      "scientific_worker_admitted": false,
+      "scientific_verdict": null
+    }
+  },
+  "now": {
+    "total_physical_bytes": 14928011264,
+    "free_physical_bytes": 372297728
+  }
+}
