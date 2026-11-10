@@ -5,6 +5,7 @@ New Train captures its own references; no learned model or certificate is seeded
 """
 from copy import deepcopy
 from pathlib import Path
+import os
 
 from .candidate_window_contract import GRID_TAGS, POLICY_ID, calculate_window
 from .candidate_window_package_evidence import audit_candidate_window_package
@@ -196,10 +197,15 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
         for p in sorted(source.rglob('*.json'))}
     output.mkdir(parents=True)
     _write(output/'condition.json', condition)
+    controller_state = inspect(controller)
+    require(controller_state['execution'] == 'running' and not controller_state['all_processes_closed']
+        and controller_state['binding']['initial_main_pid'] == os.getpid(), 'stock_cold7_controller_not_owner')
+    controller_memory = controller_state['memory_max']
+    _write(output/'controller-limits-readback.json', controller_state)
     registry = Reservations(output/'leases.sqlite3', managed_units=True,
-        capacity=dict(slots=1, memory_bytes=8*1024**3, disk_bytes=4*1024**3, tasks=512))
+        capacity=dict(slots=1, memory_bytes=controller_memory+6*1024**3, disk_bytes=4*1024**3, tasks=512))
     lease = registry.reserve('stock-cold7-'+case, [dict(path=str(output/'runs'), access='write')],
-        demands=dict(slots=1, memory_bytes=6*1024**3, disk_bytes=2*1024**3, tasks=256),
+        demands=dict(slots=1, memory_bytes=controller_memory+4*1024**3, disk_bytes=2*1024**3, tasks=256),
         controller_directory=str(controller), ttl_seconds=3600)
     policy = policy_for_reservation(registry, lease['token'], memory_bytes=4*1024**3, tasks=64)
     initial = run_job('preflight', job_path, None, runtime_path, output/'runs/preflight', 180., process_policy=policy)
