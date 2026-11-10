@@ -1,0 +1,30 @@
+{
+  "kind": "timelearner_windows_native_validation",
+  "schema_version": 1,
+  "source_root": "C:/Projects/TimeLearnerWorker/source-native-image-stages-win-a2",
+  "source_commit": "24fd3778a793f2fdb57bc09ef3c7a4b4f70da9f9",
+  "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-native-image-stages-win-a2",
+  "closed_build_audit": "C:/Projects/TimeLearnerWorker/jobs/windows-image-stages-closed-build-audit-a2",
+  "output_root": "C:/Projects/TimeLearnerWorker/jobs/windows-native-image-stages7-a1",
+  "cmake_cache": "C:/Projects/TimeLearnerWorker/build-native-image-stages-win-a2/CMakeCache.txt",
+  "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c",
+  "audit_records": {
+    "runtime-files.json.gz": "bde4cdcb92027a300542262f58a5383962a6f359b8772a1054c8f52b4e6b9af5",
+    "terminal.json": "e9f82e45576a680fc025a576635488814c190452b4af69a3fb4b772141525fca",
+    "audit.json": "996bba80345780dafdef5337962ea275314c00ef5d35d118b98ce8f8054b4dec"
+  },
+  "expected_test_ids": [
+    "NativeCandidateWindowServiceBootstrap/ClassicIdentityAndCold7ExistBeforeFirstQueue",
+    "NativeCandidateWindowServiceBootstrap/BranchIdentityAndCold7ExistBeforeFirstQueue",
+    "NativeCandidateWindowService/ClassicBoundC0WitnessesStayOnBaseRevision",
+    "NativeCandidateWindowService/BranchBoundC0WitnessesStayOnBaseRevision",
+    "NativeClassImageReplay/ActualMembraneCopyAndLoadStages",
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/FreshAt20000"
+  ],
+  "maximum_wall_seconds": 7200,
+  "process_limits": {
+    "memory_bytes": 4294967296,
+    "maximum_processes": 32
+  }
+}
