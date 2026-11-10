@@ -2,7 +2,7 @@
 Only tracked, byte-identical Reports materializations in declared retired SDKs.
 Git objects, refs, other files and every untracked report remain untouched.
 """
-import hashlib,json,os,stat,subprocess,sys,time,gzip,shutil
+import hashlib,json,os,stat,subprocess,sys,time,gzip,shutil,resource
 from pathlib import Path
 from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
 
@@ -15,7 +15,7 @@ source-process-supervisor-a1 source-process-supervisor-a2 source-publisher-a1
 source-publisher-a2 source-artifact-publication-elder-evidence-a1
 source-native-posttune-console-evidence-normal-a2
 source-capacitance-state-normal-b1 source-order-fixed-a1'''.split()
-OUT=BASE/'readbacks/s02-elder-tracked-report-cache-retirement-a2'
+OUT=BASE/'readbacks/s02-elder-tracked-report-cache-retirement-a3'
 def require(value,reason):
     if not value:raise RuntimeError(reason)
 def git(root,*args,data=None):
@@ -63,12 +63,13 @@ registry=Reservations.open_existing(BASE/'resource-reservations.sqlite3')
 lease=registry.reserve(OUT.name,[{'path':str(p),'access':'write'} for p in roots]+[
     {'path':p,'access':'write'} for p in commons if not any(Path(p).is_relative_to(r) for r in roots)]+[
     {'path':str(OUT),'access':'write'}],ttl_seconds=120,
-    demands={'slots':1,'memory_bytes':268435456,'disk_bytes':134217728})
+    demands={'slots':1,'memory_bytes':536870912,'disk_bytes':134217728})
 write('reservation.json',lease);token=lease['token'];last=time.monotonic()
 def guard():
     global last
-    if time.monotonic()-last>10:registry.heartbeat(token,ttl_seconds=120);last=time.monotonic()
-    registry.validate_paths(token)
+    require(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024<400*1024**2,'inventory_memory_budget')
+    if time.monotonic()-last>10:
+        registry.heartbeat(token,ttl_seconds=120);registry.validate_paths(token);last=time.monotonic()
 terminal={'scientific_verdict':None,'completed':False,'removed_files':0,'removed_logical_bytes':0}
 try:
     write('processes-before.json',inspect_processes(roots))
@@ -76,7 +77,7 @@ try:
     plans=[]
     # Validate every selected file before the first index update or unlink.
     for root in roots:
-        guard();head=git(root,'rev-parse','HEAD').decode().strip()
+        guard();registry.validate_paths(token);head=git(root,'rev-parse','HEAD').decode().strip()
         require(not git(root,'diff','HEAD','--name-only','--','Reports').strip(),'modified_tracked_report')
         rows=[]
         for entry in git(root,'ls-files','--stage','-z','--','Reports').split(b'\0'):
@@ -89,21 +90,31 @@ try:
             require(p.resolve(strict=True).is_relative_to(root/'Reports'),'report_alias')
             ident,actual,digest=hashes(p);require(actual==oid,'report_not_equal_Git_blob');guard()
             rows.append({'path':relative,'git_blob':oid,'sha256':digest,'identity':ident})
+            require(len(rows)<=100000,'per_root_file_budget')
         objects=git(root,'cat-file','--batch-check',data=''.join(v['git_blob']+'\n' for v in rows).encode()).decode().splitlines()
         require(len(objects)==len(rows),'Git_object_count')
         for line,row in zip(objects,rows):
             require(line.split()==[row['git_blob'],'blob',str(row['identity'][2])],'Git_blob_missing_or_size')
         index=Path(git(root,'rev-parse','--path-format=absolute','--git-path','index').decode().strip())
         (OUT/(root.name+'-index-before.gz')).write_bytes(gzip.compress(index.read_bytes(),mtime=0))
-        plans.append({'root':str(root),'head':head,'stash':git(root,'stash','list').decode(),'files':rows})
+        inventory=root.name+'-verified-files.json.gz'
+        with gzip.open(OUT/inventory,'wt',encoding='utf-8') as stream:json.dump(rows,stream,ensure_ascii=False)
+        plans.append({'root':str(root),'head':head,'stash':git(root,'stash','list').decode(),
+            'inventory':inventory,'inventory_sha256':hashlib.sha256((OUT/inventory).read_bytes()).hexdigest(),
+            'files':len(rows)})
+        rows=[]
     (OUT/'verified-plan.json.gz').write_bytes(gzip.compress(json.dumps(plans,ensure_ascii=False).encode(),mtime=0))
     write('processes-before-unlink.json',inspect_processes(roots));guard()
     with (OUT/'removed.jsonl').open('x') as log:
         for plan in plans:
+            registry.validate_paths(token)
             root=Path(plan['root']);require(git(root,'rev-parse','HEAD').decode().strip()==plan['head'],'HEAD_changed')
-            paths=b''.join(v['path'].encode()+b'\0' for v in plan['files'])
+            require(hashlib.sha256((OUT/plan['inventory']).read_bytes()).hexdigest()==plan['inventory_sha256'],'inventory_changed')
+            with gzip.open(OUT/plan['inventory'],'rt',encoding='utf-8') as stream:rows=json.load(stream)
+            require(len(rows)==plan['files'],'inventory_count')
+            paths=b''.join(v['path'].encode()+b'\0' for v in rows)
             git(root,'update-index','--skip-worktree','-z','--stdin',data=paths)
-            for row in plan['files']:
+            for row in rows:
                 guard();p=root/row['path'];require(p.resolve(strict=True).is_relative_to(root/'Reports'),'unlink_alias')
                 ident,oid,digest=hashes(p)
                 require(ident==row['identity'] and oid==row['git_blob'] and digest==row['sha256'],'unlink_identity_changed')
@@ -112,10 +123,12 @@ try:
             require(git(root,'rev-parse','HEAD').decode().strip()==plan['head'] and
                 git(root,'stash','list').decode()==plan['stash'],'HEAD_or_stash_changed')
             require(not git(root,'diff','HEAD','--name-only','--','Reports').strip(),'retirement_not_clean')
+            rows=[]
     terminal['free_bytes_after']=shutil.disk_usage(BASE).free;terminal['completed']=True
 except BaseException as error:
     terminal['error']=type(error).__name__+':'+str(error);raise
 finally:
+    terminal['self_peak_rss_bytes']=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss*1024
     registry.release(token,note='one-off verified tracked Reports cache operation terminated; no descendants retained')
     write('terminal.json',terminal)
     write('reservation-final.json',Reservations.read_snapshot(BASE/'resource-reservations.sqlite3'))
