@@ -1,5 +1,14 @@
 # Передача владения архивом: проверка кандидата
 
+Обновление: контрольный C0 на старом SDKff42 также завершился kernel OOM при
+4GiB, wall1821.0976375229657s, returncode−9. JUnit отсутствует, assertions
+not_assessed; loaded-runtime capture не успел завершиться. Группа закрыта,
+lease released. [Точные10 исходных metadata files](ValidationPlans/NativePackage6C0Baseline-20261110/terminal-readback.json)
+сохранены lossless/base64 с размерами и SHA256. Это подтверждает наличие
+проблемы до XML/Load исправлений, но не устанавливает единственную причину
+и не является приёмкой move-кандидата. Полные первичные данные обоих isolated
+C0 прогонов ещё требуют компактной Git-публикации.
+
 10.11.2026 подготовлена отдельная SDK-версия
 `355c60df066bdc8da09bd6d7872b47f6e71c0494`, PulseLib
 `165d49da7e65cd6ac59bca2812ce52884ddd50c2`, Rdk
