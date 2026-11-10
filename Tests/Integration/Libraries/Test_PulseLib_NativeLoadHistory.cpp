@@ -43,7 +43,7 @@ void RunLoadHistory(unsigned int frequency, PreviousGraph previous)
     {
         membrane->SetEnvironment(core.environment);
         membrane->SetGlobalTimeStep(frequency);
-        NmsdkTools::InitializeAndResetNative(membrane);
+        NmsdkTools::InitializeAndResetNative(static_pointer_cast<UContainer>(membrane));
     }
     ASSERT_FALSE(source->InputFeedbackSignal.IsConnected());
     // An explicit, nonzero local input distinguishes lost data from two
