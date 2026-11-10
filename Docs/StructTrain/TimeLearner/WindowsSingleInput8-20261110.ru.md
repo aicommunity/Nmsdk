@@ -27,3 +27,5 @@ SDKe086 доставлен и проверен:4078 files/8clean repos, без a
 Небольшой readback успешно получен через [IO.File]::ReadAllText фиксированных файлов без recursive Get-Content pipeline; original negative native8 сохранён. Возможное расширение ETS metadata при ConvertTo-Json в Windows PowerShell5.1 пока гипотеза причины разрастания; bounded reproduction не выполнен. Повторять прежнюю команду не следует.
 
 Подготовлена отдельная attempt-a2 с тем же лимитом4GiB/32processes/7200s и тем же неизменным sourcee086; [spec](ValidationPlans/WindowsNativeChildOutput-20261110/build-specification-a2.json). Исходная memory refusal не переписывается.
+
+A2 действительно запущен: Scheduled Task instance `{15C47ACE-A492-4353-888F-FFDD5A4CD50D}`, state4/running, Python PID5612; старый metadata PID отсутствует, free physical9,737,224,192bytes. [Original live observation](ValidationPlans/WindowsNativeChildOutput-20261110/a2-launch-live-observation.json). Build/native outcome ещё неизвестен. После приёмки runtime повторить исходные8 и добавить stopped-boundary controls для второго исправленного caller.
