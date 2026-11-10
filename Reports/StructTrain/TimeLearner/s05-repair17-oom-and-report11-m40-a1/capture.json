@@ -1,0 +1,2905 @@
+{
+  "kind": "timelearner_closed_oom_and_plot_capture",
+  "schema_version": 1,
+  "compiled_root": "f39b9ebdcd0e7a64e388d778ca32374a65ae4e0c",
+  "pulse": "991d933a5a3f6fe1d17986118656be98cda31392",
+  "rdk": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+  "source_namespace_verified": 4074,
+  "original_terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 17,
+    "audited_completed_cpp_cases": 12,
+    "actual_audited_assertion_passed_cpp_cases": 12,
+    "actual_audited_failed_cpp_ids": [],
+    "completed_leaf_gates": 5,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "completed_ids": [
+    "TimeLearnerModelArchive/RejectsContradictoryNativeImageXmlWithExistingClass",
+    "TimeLearnerModelArchive/RejectsContradictoryDerivedImageXmlWithExistingClass",
+    "NativeLoadHistory/FreshAt2000",
+    "NativeLoadHistory/ConnectedChildAt2000",
+    "NativeLoadHistory/DetachedChildAt2000",
+    "NativeLoadHistory/FreshAt20000",
+    "NativeLoadHistory/ConnectedChildAt20000",
+    "NativeLoadHistory/DetachedChildAt20000",
+    "NativeClassImageReplay/ActualMembraneCopyAndLoadStages",
+    "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease",
+    "NativeArchiveTelemetry/At2000",
+    "NativeArchiveTelemetry/At20000"
+  ],
+  "package_kernel": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "9f70ab8b4629f2317527142696e52bb3faf6944722096e10e43e587dafe0a031",
+      "unit": "timelearner-224e7153-f48e-4c14-aef0-72a88b8820c0.service",
+      "invocation_id": "ceaccb542c2546c6a70ef2b7bdde2772",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-224e7153-f48e-4c14-aef0-72a88b8820c0.service",
+      "initial_main_pid": 433160,
+      "initial_start_ticks": "338463910",
+      "sha256": "b753000e98f8d1322cc8d2624010d5d03dac75e17a490bae41d448edc1050452"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "oom-kill",
+      "ExecMainCode": "2",
+      "ExecMainStatus": "9",
+      "ControlGroup": "",
+      "MemoryMax": "4294967296",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 224e7153-f48e-4c14-aef0-72a88b8820c0",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "ceaccb542c2546c6a70ef2b7bdde2772"
+    },
+    "memory_max": 4294967296,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "kernel_memory_readback": "Result=oom-kill\nExecMainCode=2\nExecMainStatus=9\nMemoryPeak=4294967296\nMemoryMax=4294967296\nInvocationID=ceaccb542c2546c6a70ef2b7bdde2772\n",
+  "original_leases_released": [
+    {
+      "job_id": "s05-native-load-xml-repair17-m40-a1",
+      "token": "85f51a63-14c2-48e0-9c02-9ced2cbc55fb",
+      "state": "released"
+    },
+    {
+      "job_id": "s03-native-archive-gate-pair-report11-m40-a1",
+      "token": "c426a146-35a5-49d8-a1cc-8f5c1f05da27",
+      "state": "released"
+    },
+    {
+      "job_id": "s03-native-archive-gate-pair-report11-m40-a2",
+      "token": "0f09a690-cc36-494b-9fa5-a813ecbd7f52",
+      "state": "released"
+    }
+  ],
+  "report_a1_passed": 10,
+  "report_a1_failed": 1,
+  "report_a2_passed": 11,
+  "original_files": [
+    {
+      "archive_path": "native-output/CMakeCache-terminal.txt",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/CMakeCache-terminal.txt",
+      "bytes": 83638,
+      "sha256": "846ee32cf0fec19999c86e15485bbf5b93aed423b201f2e67020b6e00e994772"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/native/actual-class-image-cycle-0.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/native/actual-class-image-cycle-0.json",
+      "bytes": 2029685,
+      "sha256": "6fba510c2de445cd64e86e01ff694c915e58f10ec1f6ca08002cd427290da351"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/native/actual-class-image-cycle-1.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/native/actual-class-image-cycle-1.json",
+      "bytes": 2029685,
+      "sha256": "20da3960b7d731b22665e7fdc2b1912f1b18875369c5b7bb24776b716f8786fc"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/native/actual-class-image-cycle-2.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/native/actual-class-image-cycle-2.json",
+      "bytes": 2029685,
+      "sha256": "6018fbf67027d77c994a8b8ad6f5474b9263dd2d4ccedba189356d80aebe371e"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141523.426490",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141523.426490",
+      "bytes": 290,
+      "sha256": "d53630126bbfac8b325b82cd1fedce08afe645408936f5537736a2b3ec6b765c"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/native.xml",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/native.xml",
+      "bytes": 692,
+      "sha256": "8e230d1f300b4288cc3b55d4f37205743a111c647bb910a19933746b23515b0c"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/capture-ack.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/capture-ack.json",
+      "bytes": 113,
+      "sha256": "0763b14d53ae1ca4c10765c517aee454acafc00864ce2acb74db2da49b7b7869"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/capture-ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/capture-ready.json",
+      "bytes": 97,
+      "sha256": "80777d2cdbcd237846bb833cdebe47a3b4913dc41dba13ccda2f22b7cae68669"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "8400ffafa9b9e07e10af77c3e88d94d780a57724c27e6c3720d7b9e6193eb410"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "b6307142b708070997cee1b92100441f93676443fbb0a5068bf3771d103c96a0"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "4dcb3f413d1cf7db7b57e9bdbfedcfee6027ab04c6ed2dc02f2f921753364c46"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/request.json",
+      "bytes": 1660,
+      "sha256": "6510f68b69afc31527f405ab0917df1c88495f0fc975d7659da5f07616b0a84b"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/stderr.log",
+      "bytes": 412,
+      "sha256": "02209e825b29479615c79ff6a28982de25037674ae947a12a8578e30795205c1"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/contained/stdout.log",
+      "bytes": 611,
+      "sha256": "7c42f9b11eeecc5cf2704e44246d8bd21f35b74dfec5e914df14a13a53faeb8b"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/loaded-files.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/loaded-files.json",
+      "bytes": 12529,
+      "sha256": "0eeae00e697ededf7bee42b5424b9aa0a6cc6f90f9e8f6baed1b4f118af94c71"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/owned-process.json",
+      "bytes": 675,
+      "sha256": "42c134a96b2f450d91e49874b40a62cd2898d06b978c766aee7068d82771b567"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/request.json",
+      "bytes": 629,
+      "sha256": "94a95213cc8a289598f3db7931cc6e5a0fc1bd15c2fa497f24466e39c771c7fe"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/result.json",
+      "bytes": 1856,
+      "sha256": "b5f96e9dab57005de7606936e72a8266013288116663d7d7df0c7f8870d88b70"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/stderr.log",
+      "bytes": 412,
+      "sha256": "02209e825b29479615c79ff6a28982de25037674ae947a12a8578e30795205c1"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/stdout.log",
+      "bytes": 611,
+      "sha256": "7c42f9b11eeecc5cf2704e44246d8bd21f35b74dfec5e914df14a13a53faeb8b"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/terminal-unit-state.json",
+      "bytes": 1299,
+      "sha256": "d5d0a0176babf71d0205c7088a5c018998585712c6f444a7914bb347ac18083a"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/process/whole-group-closure.json",
+      "bytes": 1212,
+      "sha256": "8c3138a3577484af47630c1e24ab7c52c753505133920a3f6d2734506bf6c83b"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/result.json",
+      "bytes": 438,
+      "sha256": "cfa7328d2ee3fc23dba2d5868aa01396ae1bd133dc75be11a26b4f7bc541749f"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay/specification.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay/specification.json",
+      "bytes": 599,
+      "sha256": "8d6df4148cc7477ab18f131019575cee465e15c27e6588091bda4cee901e9e67"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay-actual-tests.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay-actual-tests.json",
+      "bytes": 384,
+      "sha256": "206dec7c22d795efa6c48de61ce592dd35c8412d0975419faf569490fa2127ba"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay-result.json",
+      "bytes": 438,
+      "sha256": "cfa7328d2ee3fc23dba2d5868aa01396ae1bd133dc75be11a26b4f7bc541749f"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay-runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay-runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-class-image-replay-spec.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-class-image-replay-spec.json",
+      "bytes": 599,
+      "sha256": "8d6df4148cc7477ab18f131019575cee465e15c27e6588091bda4cee901e9e67"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/native/actual-membrane-copy-load-stages.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/native/actual-membrane-copy-load-stages.json",
+      "bytes": 305192,
+      "sha256": "544981ccbe803e1f8f96f680843f13efd3f2a018127405cc5b2abea2c1d3058f"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141511.425659",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141511.425659",
+      "bytes": 290,
+      "sha256": "a0adcbf90690a8f4e46db800f8960526de65f19fad32f7e7ee902e985672487e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/native.xml",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/native.xml",
+      "bytes": 673,
+      "sha256": "aeef931d6ed176cb98157c1a2efb83426b023dd27d8218c25eb482965709b966"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/capture-ack.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/capture-ack.json",
+      "bytes": 113,
+      "sha256": "f025204f429d17da090c685ef52273205c555d91f90169d7528c4642694183ee"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/capture-ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/capture-ready.json",
+      "bytes": 97,
+      "sha256": "69eb843a4c327b6e42a0a4fe38e1a2d24b5d6f920b34a5f222f4ee97850f9e58"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "0d94c0eebaa88408be8dcbeefe0e64965a700b0e2b93788f501904bce44498f8"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "2a15f3563b6466d315222a84f0225115b28fdf003bbc3ffe49c7091d732793ff"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "878dd515a5a2c953818f9b93e2e33a675bcd6062b114ed6b26a29e6462818405"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/request.json",
+      "bytes": 1632,
+      "sha256": "2d60fc65c34cdc7d3dfaa517eb88f7a3dc98d1e61aabf75e5f2fde6420805652"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/stderr.log",
+      "bytes": 409,
+      "sha256": "e2cfbec40d5caf3a9ca23b2bc5fedb73424f25e14afad9bbd3c319ba98136d1d"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/contained/stdout.log",
+      "bytes": 560,
+      "sha256": "d42b908c2a93a037b307bb016cbfc5817586c967ccd82de7bed024d5321cac06"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/loaded-files.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/loaded-files.json",
+      "bytes": 12529,
+      "sha256": "0eeae00e697ededf7bee42b5424b9aa0a6cc6f90f9e8f6baed1b4f118af94c71"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/owned-process.json",
+      "bytes": 675,
+      "sha256": "346524c124622cfa2bbb6e2b71e3e2e739ee128f6a166fd0d703229bc5f5df98"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/request.json",
+      "bytes": 607,
+      "sha256": "27c55ce62d38ab121575c39528e7e660878a36be55e0a45a1f338f94efb91a99"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/result.json",
+      "bytes": 1852,
+      "sha256": "f8dd2a2e9511d12297df29cb2906b0294aa2ed2a291a8b5e9d44a2dbbac932b8"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/stderr.log",
+      "bytes": 409,
+      "sha256": "e2cfbec40d5caf3a9ca23b2bc5fedb73424f25e14afad9bbd3c319ba98136d1d"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/stdout.log",
+      "bytes": 560,
+      "sha256": "d42b908c2a93a037b307bb016cbfc5817586c967ccd82de7bed024d5321cac06"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/terminal-unit-state.json",
+      "bytes": 1299,
+      "sha256": "35ce6a3064e82e7255a2c6c90804a9b480ead63f851aed5ef5660b95c14c8b04"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/process/whole-group-closure.json",
+      "bytes": 1212,
+      "sha256": "35b8d67fa4d498ba76ca96b2bd54361f23d04319258a565ff214e7ea91bd65d8"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/result.json",
+      "bytes": 438,
+      "sha256": "ef4417b854bf25492a2db52c9f42b88106f4a8e19bafd3f6b75dbb3f35b2902e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages/specification.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages/specification.json",
+      "bytes": 580,
+      "sha256": "c91dddb109e646774cc5a2e925511eb946cc45f3446881a410771395a82eafda"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages-actual-tests.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages-actual-tests.json",
+      "bytes": 368,
+      "sha256": "2322bd2c72cd2001c7be5ea76edb4e0d5213969c8201ea6541968c2dd4e2ccef"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages-result.json",
+      "bytes": 438,
+      "sha256": "ef4417b854bf25492a2db52c9f42b88106f4a8e19bafd3f6b75dbb3f35b2902e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages-runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages-runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/actual-membrane-stages-spec.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/actual-membrane-stages-spec.json",
+      "bytes": 580,
+      "sha256": "c91dddb109e646774cc5a2e925511eb946cc45f3446881a410771395a82eafda"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-matrix-precise-boundary-child-2000.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141603.428811",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-matrix-precise-boundary-child-2000.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141603.428811",
+      "bytes": 290,
+      "sha256": "34f8f4ebe4abb303976f0b080dd7b0b8bcf7303054787f780c47d79eed602468"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-matrix-precise-boundary-child-20000.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141646.431158",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-matrix-precise-boundary-child-20000.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141646.431158",
+      "bytes": 290,
+      "sha256": "d0523a0d1bc340ad042e2e3ea1a2422133e69021e19faecc94a0e3ec501019ee"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-matrix-precise-boundary-fixture-2000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-matrix-precise-boundary-fixture-2000.json",
+      "bytes": 1243886,
+      "sha256": "dd79539ecfb838d8ecfd91da4bafd51bb1dcd0d27b0fbe96c8008d39ee435bcd"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-matrix-precise-boundary-fixture-20000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-matrix-precise-boundary-fixture-20000.json",
+      "bytes": 1396897,
+      "sha256": "624ffb854bde297b0504b95255791b1acb7d942c01cd09dce9160f323425e03c"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-matrix-precise-boundary-import-verification-2000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-matrix-precise-boundary-import-verification-2000.json",
+      "bytes": 226942,
+      "sha256": "6d111a6ae901fe56845cff669d2907f232a1f7301c86750f593066503f121e02"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-matrix-precise-boundary-import-verification-20000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-matrix-precise-boundary-import-verification-20000.json",
+      "bytes": 379613,
+      "sha256": "2d1a551f676603b8ecc7a5aa7dc81b14838266d411c2d451f624b35756466711"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-witness-2000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-witness-2000.json",
+      "bytes": 6126567,
+      "sha256": "61b7a490ba6b395e98dff6eb2c128650f769f0596380724d9c39af2a00f2aa74"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native/telemetry-witness-20000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native/telemetry-witness-20000.json",
+      "bytes": 6129052,
+      "sha256": "931b77e0b2aeb95aabb7a68b6b4ff01de2070408fd19a41312cfd53ebb88bf24"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141545.427774",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141545.427774",
+      "bytes": 290,
+      "sha256": "2d99c8dd9f1d689dd8d1a57d08a4b93935c60582050e594a9a7331a6d7241abd"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/native.xml",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/native.xml",
+      "bytes": 945,
+      "sha256": "6a7881f6157b0e0b688e949456363faf73e8b8f2bdefecd176cd24cd7225680f"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/capture-ack.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/capture-ack.json",
+      "bytes": 113,
+      "sha256": "2ab110c25112d046bfdfbce29e437d786fbb52df0831b6fc47158e74e73cb692"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/capture-ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/capture-ready.json",
+      "bytes": 97,
+      "sha256": "ea7f451c607afe47fd3df33c08a85bd2ff35281aa8eb6b7a0759ba9bae5dbddc"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "11b94846566c943901215453ac5eb09361923bec963f112fb599dac389d55ffa"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "2e058338abb6b3ba6ec765bbf346d0f12c50580d087c8b1641222e536837b037"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "1ad7b536c7ebe8db0bb0a1b1135d837a9dd674a6df6f30ae617758add4ca493e"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/request.json",
+      "bytes": 1618,
+      "sha256": "dc521733f00abc788ad50225ee5a286fa8b9cdf5985d3657f551d798d74c2c98"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/stderr.log",
+      "bytes": 404,
+      "sha256": "7f881076e358324ddc388e1902060c925fce7e2bcaaea3fa3a1b3a5406d09954"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/contained/stdout.log",
+      "bytes": 623,
+      "sha256": "714a556cdeb74a454e495d792cf7ade10cf389f43f36a01ee14ecaf82b4bcc72"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/loaded-files.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/loaded-files.json",
+      "bytes": 12529,
+      "sha256": "0eeae00e697ededf7bee42b5424b9aa0a6cc6f90f9e8f6baed1b4f118af94c71"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/owned-process.json",
+      "bytes": 675,
+      "sha256": "07f0318ed92d40d3784618e06ee9fee07431310b68538763c5213692a20c543a"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/request.json",
+      "bytes": 603,
+      "sha256": "ea24361d63e5dd9d7084024e23e5e75ce308d0215acc2a8ba4069c90e21a7c04"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/result.json",
+      "bytes": 1847,
+      "sha256": "224ac177fd36e87f29a8d4bc8c3300c4e0e39dd18ca1bd6e9ffa2ac9eb6553d4"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/stderr.log",
+      "bytes": 404,
+      "sha256": "7f881076e358324ddc388e1902060c925fce7e2bcaaea3fa3a1b3a5406d09954"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/stdout.log",
+      "bytes": 623,
+      "sha256": "714a556cdeb74a454e495d792cf7ade10cf389f43f36a01ee14ecaf82b4bcc72"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/terminal-unit-state.json",
+      "bytes": 1299,
+      "sha256": "84d72a58a28cc9645978e5866c7926e1674bfa7eac93916275bc9137135fa376"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/process/whole-group-closure.json",
+      "bytes": 1212,
+      "sha256": "31803c46cdfc796f93a80368518237ef216649be67516ee25798f67e9ec996e1"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/result.json",
+      "bytes": 438,
+      "sha256": "77dde5ddb1c99b1c306d75c6f91d331ded110156f39f6188131af5f906b0e51c"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms/specification.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms/specification.json",
+      "bytes": 588,
+      "sha256": "a02167e93e806c41b76e52785553cc0a76ac857680ecd8c7676775db9b0c7e9b"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms-actual-tests.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms-actual-tests.json",
+      "bytes": 381,
+      "sha256": "6bda2ce230def3d4a3eadeb926614341a8965f98036a0c1446fcc55bcff0220c"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms-result.json",
+      "bytes": 438,
+      "sha256": "77dde5ddb1c99b1c306d75c6f91d331ded110156f39f6188131af5f906b0e51c"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms-runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms-runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/archive-waveforms-spec.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/archive-waveforms-spec.json",
+      "bytes": 588,
+      "sha256": "a02167e93e806c41b76e52785553cc0a76ac857680ecd8c7676775db9b0c7e9b"
+    },
+    {
+      "archive_path": "native-output/build.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/build.log",
+      "bytes": 63417,
+      "sha256": "9095e9545ce3b0c18ed9938361ec68dcb6d1416097c232e34570a86514fa3fdb"
+    },
+    {
+      "archive_path": "native-output/canonical-preparation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/canonical-preparation.json",
+      "bytes": 208175,
+      "sha256": "8aa974e557de1379c74da6d7d776a09292d9138404ceababf6b9c9147baee903"
+    },
+    {
+      "archive_path": "native-output/compiled-inventory-crosscheck.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/compiled-inventory-crosscheck.json",
+      "bytes": 136789,
+      "sha256": "bca38d90f770db116784fc57229ecabd7a914d06d4fb4299e702f5cf9bf87b21"
+    },
+    {
+      "archive_path": "native-output/compiled-test-inventory.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/compiled-test-inventory.log",
+      "bytes": 84729,
+      "sha256": "2ab5300f80f7aa952ec239fbd7006047a11bb66c9c8ded860b018249575d9abf"
+    },
+    {
+      "archive_path": "native-output/configure-arguments.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/configure-arguments.json",
+      "bytes": 1265,
+      "sha256": "577b914608a57226c5361d7c19e16bfe3e0cfa4cd5defef11285ebd0b427d876"
+    },
+    {
+      "archive_path": "native-output/configure.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/configure.log",
+      "bytes": 2854,
+      "sha256": "dfa2c454aec65962885d1f873f4460cd5df5c856a831ec1888a284d03dcb4055"
+    },
+    {
+      "archive_path": "native-output/current-runtime-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/current-runtime-after.json",
+      "bytes": 1475,
+      "sha256": "4109acd9a5acccf136c0cd28eab3c080a7031b1e23fd6fbb1a8e04570f734721"
+    },
+    {
+      "archive_path": "native-output/current-runtime-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/current-runtime-before.json",
+      "bytes": 1475,
+      "sha256": "4109acd9a5acccf136c0cd28eab3c080a7031b1e23fd6fbb1a8e04570f734721"
+    },
+    {
+      "archive_path": "native-output/exception.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/exception.json",
+      "bytes": 965,
+      "sha256": "adb5640f7f12246e82723312c382fe7c65ed2320968631893b8a43308521c91d"
+    },
+    {
+      "archive_path": "native-output/final-capture-errors.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/final-capture-errors.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "archive_path": "native-output/generated-build-commands.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/generated-build-commands.json",
+      "bytes": 33142,
+      "sha256": "bd2ebbaec378c3ae104b3ab766b24a99a3172c0a7fde9d6e445bd7941fc22510"
+    },
+    {
+      "archive_path": "native-output/job.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/job.json",
+      "bytes": 6920,
+      "sha256": "bebb327f8f1b9c76f74c5877ea34eba8df616f01fe74fdc496967026c548c192"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/contradictory-image-NPChannel.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/contradictory-image-NPChannel.json",
+      "bytes": 1154057,
+      "sha256": "9779d45603987d5defa5de4e710d205dcd33acde285af16019b1c8fc2251efca"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/contradictory-image-NPExcChannelBio.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/contradictory-image-NPExcChannelBio.json",
+      "bytes": 1154059,
+      "sha256": "7fbef2ae6bbf2d70de46b7c8900869cf01389354a455ba02facfce2c164c330a"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/native-load-history-ConnectedChildAt2000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/native-load-history-ConnectedChildAt2000.json",
+      "bytes": 14357,
+      "sha256": "d69143e6327ede726441c4d3323d365a1d99eea09a7167a843d57b81babf88d6"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/native-load-history-ConnectedChildAt20000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/native-load-history-ConnectedChildAt20000.json",
+      "bytes": 14367,
+      "sha256": "0ac74c3fffa696bb4dfbc21b98f031d2c6fa2525bf1278df03dd58d06c47d994"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/native-load-history-DetachedChildAt2000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/native-load-history-DetachedChildAt2000.json",
+      "bytes": 14356,
+      "sha256": "7c725435e54349442d1200e1815d69abd9c49336158a157bb64bf156c9b0bb52"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/native-load-history-DetachedChildAt20000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/native-load-history-DetachedChildAt20000.json",
+      "bytes": 14366,
+      "sha256": "95c453fe770017f9dff51bd3d405358ebfe1285df2bcca84b2608156eae4ffcd"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/native-load-history-FreshAt2000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/native-load-history-FreshAt2000.json",
+      "bytes": 14345,
+      "sha256": "64341d51b57de0a0c10f1d767897e4865cb6b6e28ffa72e8707c67ffe2158205"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native/native-load-history-FreshAt20000.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native/native-load-history-FreshAt20000.json",
+      "bytes": 14358,
+      "sha256": "1f6a63f6f1af421e6dbf4df0f2fede73a982add8992710afc24e407244b4cf3b"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141456.424757",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141456.424757",
+      "bytes": 290,
+      "sha256": "237c523285d4b84e4ad7152300af458d6c65fe5b6d6000db1d03616b8c586a8a"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/native.xml",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/native.xml",
+      "bytes": 3050,
+      "sha256": "cef56b9e00480310c4576a90a8b9ea0de60dbebcd0c363474cc37df713961d74"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/capture-ack.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/capture-ack.json",
+      "bytes": 113,
+      "sha256": "e2d4124b6c6b2a4faed8f3d3fb28861295425c25b5342d94090e73eca768f2e5"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/capture-ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/capture-ready.json",
+      "bytes": 97,
+      "sha256": "2c844518de713758e8d77332525b753b05fd39ec97f1c6442cc274c668fcf973"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "f0202d219e9b07ba14b2b59fec73eb8667e04c9cfceb1e70784e406ab7e166b8"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "5fd5dd2f677e1b35b0f58c2b056dd2e7010943b3b3a52e4aef583478e771d3eb"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "e3b258516dd66bb29fa8ba282c8539ab709c6dce1378f7c9f0dc8b22aaab8e94"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/request.json",
+      "bytes": 1951,
+      "sha256": "eeae88bda1888cb2b9abf960c0d6fb93de167e7a8be2d959329d79a444ad8add"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/stderr.log",
+      "bytes": 410,
+      "sha256": "35f7e897a95dd4694b49044e920b2a32beaa85233e40efad550abace5ab00e02"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/contained/stdout.log",
+      "bytes": 1858,
+      "sha256": "5043c05208977fd30267e4c7a63426d31f4f6d92c525084fdddc1185e1abe774"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/loaded-files.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/loaded-files.json",
+      "bytes": 12529,
+      "sha256": "0eeae00e697ededf7bee42b5424b9aa0a6cc6f90f9e8f6baed1b4f118af94c71"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/owned-process.json",
+      "bytes": 675,
+      "sha256": "e27845a807d0da123dc27436d7cfc07f6a9bbdc6eb55f04d8e3c89bd25e2271f"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/request.json",
+      "bytes": 924,
+      "sha256": "4a421498c1f321ce45689b6c0eb3aecdf87daed8d8c8d93015640ea25f9436b4"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/result.json",
+      "bytes": 1855,
+      "sha256": "23bbad818c0147ea230b6803ee503c95955d119cb77f74c84034bcf79243c263"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/stderr.log",
+      "bytes": 410,
+      "sha256": "35f7e897a95dd4694b49044e920b2a32beaa85233e40efad550abace5ab00e02"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/stdout.log",
+      "bytes": 1858,
+      "sha256": "5043c05208977fd30267e4c7a63426d31f4f6d92c525084fdddc1185e1abe774"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/terminal-unit-state.json",
+      "bytes": 1299,
+      "sha256": "8394957d831edc950fc8216289b3485caeea5af141af112cad4f98641b8f5b7a"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/process/whole-group-closure.json",
+      "bytes": 1212,
+      "sha256": "9ce34ec0f054e3014f41e66ee8b8892cdf701c595379998cee6d237805793255"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/result.json",
+      "bytes": 438,
+      "sha256": "2092d10a13a5a5fabae03918523ef3e9cd96e9f847b099d43582c321f1eaf1b5"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8/specification.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8/specification.json",
+      "bytes": 945,
+      "sha256": "d21ebef9baf64163f123f741fce85642af7ad81f53dcf9e671b1b082667e1e80"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8-actual-tests.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8-actual-tests.json",
+      "bytes": 732,
+      "sha256": "11b66c5b81b05bb3d63b461e729c975e818646bd5a58961e25ce1af6426ae6c3"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8-result.json",
+      "bytes": 438,
+      "sha256": "2092d10a13a5a5fabae03918523ef3e9cd96e9f847b099d43582c321f1eaf1b5"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8-runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8-runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/load-and-xml-controls-8-spec.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/load-and-xml-controls-8-spec.json",
+      "bytes": 945,
+      "sha256": "d21ebef9baf64163f123f741fce85642af7ad81f53dcf9e671b1b082667e1e80"
+    },
+    {
+      "archive_path": "native-output/owned-build.log.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/owned-build.log.json",
+      "bytes": 323,
+      "sha256": "b57163948d88599fdebbc0cf132611e0f8183728e249d8bd0b1d458c9400b222"
+    },
+    {
+      "archive_path": "native-output/owned-compiled-test-inventory.log.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/owned-compiled-test-inventory.log.json",
+      "bytes": 244,
+      "sha256": "b26a0b8d1a0b68ca59e601e460530a1f5a681c9b875b3268a57be5cd302725f9"
+    },
+    {
+      "archive_path": "native-output/owned-configure.log.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/owned-configure.log.json",
+      "bytes": 1408,
+      "sha256": "3e2b685146c3cd16f1f2a91be5c838de83e97fdd7079dabdc57c9fdb4fe5bc7b"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/actual-dataset.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/actual-dataset.json",
+      "bytes": 16895,
+      "sha256": "9f60b31fc4ec2f31facac1c60edf71e32659c0863efbfe0a92582df5eb627371"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/after-model.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/after-model.json",
+      "bytes": 155279,
+      "sha256": "cd9490ee37cb8ecaae1da9542138adfff0c41becb09fe34bf58c5ed2dbdf934b"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/full-after.csv",
+      "bytes": 14438,
+      "sha256": "9174c808d1cc358b12727ac05c9a9a6efcc39eb4cf85cc2be061e163f0ddca22"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/full-before.csv",
+      "bytes": 13534,
+      "sha256": "ad082f9f29168bdc851b42cb07f6472f956484028cfbb715eea722e44a7c264c"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 10257,
+      "sha256": "430c120de027ad61efbe0c5aac925330eab5c6fd3abb07618515d567d4b97e62"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 13982,
+      "sha256": "fe44fcfa8fbd279cd6a58154842f7361a6149ae6aad1c37c7e73d50a86fe464d"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000001.json",
+      "bytes": 187495,
+      "sha256": "50f9756afbd068bb4d3d43d57bbb0c72b908b83384dfb63be29d99c1f7847f52"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/full-after.csv",
+      "bytes": 12425,
+      "sha256": "bed7cbf049c5b671367b779c313e52c44442c67eaea094bc06573a3cb87be48c"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/full-before.csv",
+      "bytes": 14338,
+      "sha256": "b4337fe58bda5d1f950a6a3ce437c5c58cab5160be40b4de4aa230818967238a"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 10811,
+      "sha256": "935e322fd6802f3b39796f38acf0d61cf9a64e1c3198c928573cfac20e7b75e6"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 12565,
+      "sha256": "4740d2de36113382e393af2cfa196dcfa8729522746d46e2da43141d46dfcdd6"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000002.json",
+      "bytes": 187479,
+      "sha256": "f8e39a12cdf1cd49c1f3634458d85706239193e51e0e06ee817fa3792acdcec4"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/full-after.csv",
+      "bytes": 12714,
+      "sha256": "fcae2f34dcf9ff2ba0cf1aad8b7ac459abcbf864c83f11a77839ddde26d15d7e"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/full-before.csv",
+      "bytes": 12500,
+      "sha256": "e90ae4a86f6a63ec19998bf3ab1ce4d40c8ac272856486002dd79ad62283d692"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 9218,
+      "sha256": "04c0992005b07c68d0536084d8c2b2125652c4868e32567f30000ccb72ff1ef5"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 12553,
+      "sha256": "486d020c2a7da4f03bbd8e41007ca85aeff860d54aacf433fee71fe2127834f8"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000003.json",
+      "bytes": 191357,
+      "sha256": "9d999227181ba08f541075310d2defea12ac647dea6469edc81b70b6cb2eea2c"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/full-after.csv",
+      "bytes": 13421,
+      "sha256": "d5347abbada3a1b5d2a98b001a04c4b67d7ac83e3356b5c1256b135769bb1946"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/full-before.csv",
+      "bytes": 13408,
+      "sha256": "8ef71416a37a4fe9864e2cf6b3251f3b387042034dfc721225d7b2821a75af50"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 10169,
+      "sha256": "c1d3f12bd156cbfca6f2805dd78594cc9617db6612fd7c715e5610b5e59d7bb1"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 13481,
+      "sha256": "a10c2c7645f9a53384e8c52a95d8ed166e81f8110eaf113d93420f80b6eac00e"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000004.json",
+      "bytes": 191323,
+      "sha256": "d110aeca4754e505c6506b7ef3d06cf660b572b08ad549fb4d33537972ef6499"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/full-after.csv",
+      "bytes": 13433,
+      "sha256": "db8895f4150f0806fec34abca27633d791fb57e01383ce9e1dc7a01134c5558c"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/full-before.csv",
+      "bytes": 13446,
+      "sha256": "a297572dd628deed33a2a7f01893c155c6c89d26c0b1a180e9dcb656483f21e9"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 10163,
+      "sha256": "8eac110a4e94c0e3bcfaf9e5d79f60949f5c3484b249c8ef1c21adffa0daaf6d"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 13501,
+      "sha256": "d25e3d4f613f2270ecd4389f65951f255e78cd898243e677e64d40e34277a0aa"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000005.json",
+      "bytes": 191845,
+      "sha256": "0e70589528f7fab145e79046a2a9835cf4ff509dfd5a0cb85fb4e3af5f9cda93"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/full-after.csv",
+      "bytes": 13665,
+      "sha256": "3e260e4722cb06f3f1776cf7e52bc966e96efe2344a0c3b48b4c183138e4d945"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/full-before.csv",
+      "bytes": 13404,
+      "sha256": "b666d989c1c2dbb98954726fe3a2a73426f524de8dc609ae45bce709c28754ab"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 10170,
+      "sha256": "f16a10bb2786f1189fdad63c8a25d4477b316f4d9c1689ab1642374fe803c55d"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 13484,
+      "sha256": "c9d9c1d30c2e21f95c59b5dfc469b53497f0001faadc3a23ba4887b8b54ce752"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/group-000006.json",
+      "bytes": 191839,
+      "sha256": "59d3fbc431b8d1855e1d9d635724350d36b630b9c02dab19655e7b90c756c46c"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/composite-measurements/index.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/composite-measurements/index.json",
+      "bytes": 2806018,
+      "sha256": "c953ff8a0dfbea4575ec47e710337c4a7aa06d8b20d22b3d3b0de8d524214b82"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/initial-configuration.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/initial-configuration.json",
+      "bytes": 5668,
+      "sha256": "b219b71e08f345c1a41700148523b1dde3dfb0db3c959cccec7d941a666f5f9e"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/package-scope.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/package-scope.json",
+      "bytes": 302,
+      "sha256": "a26d6720856654d61d25a22478b2b4e8ed95485655cc9e934bb3fd9c8689eee8"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/runtime-plan.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/runtime-plan.json",
+      "bytes": 4218,
+      "sha256": "69eef441464a72a09ca2e1d1d1f9893442c0fd8c8066cddd2faad223b6ae1aef"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/source-model.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/source-model.json",
+      "bytes": 155279,
+      "sha256": "cd9490ee37cb8ecaae1da9542138adfff0c41becb09fe34bf58c5ed2dbdf934b"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/train_learned_state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/train_learned_state.json",
+      "bytes": 3930085,
+      "sha256": "0dba2419d566ab38f66758f3092f16dad1ee7fab351dc16a2d700ea59bd3e8d2"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-branch/source-0/train_learned_summary.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-branch/source-0/train_learned_summary.json",
+      "bytes": 13161,
+      "sha256": "014799734aad51a5a059e5cf1cf940281f51dab3c724adb17b2d16d0bf6efa56"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/actual-dataset.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/actual-dataset.json",
+      "bytes": 16895,
+      "sha256": "9f60b31fc4ec2f31facac1c60edf71e32659c0863efbfe0a92582df5eb627371"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/after-model.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/after-model.json",
+      "bytes": 236229,
+      "sha256": "7e5c0c06dc2efea375f6b6adaca8d7315377bb94a73826ae991796c2fbed5372"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/full-after.csv",
+      "bytes": 21688,
+      "sha256": "4856dcad07ad979d036e09c2d41383651d25951e3bd1347d8ef931d1e3423de1"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/full-before.csv",
+      "bytes": 20784,
+      "sha256": "4750dac9a51d088d8a4be1a3d2f17a53d652f1614d9867accfac7de87968feb6"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/omit-0.csv",
+      "bytes": 14239,
+      "sha256": "ddcd086115a1077233dbf51b586ba95d3567278fc935644d9735a9346c187292"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001/omit-1.csv",
+      "bytes": 21310,
+      "sha256": "36af494c7f74a70db7e708a45d7507e465630845806805dc630a05e3ebd06ed3"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000001.json",
+      "bytes": 243839,
+      "sha256": "3e2fdb3c2854aa3eb1c7210794b5a407a47bf03b706e997b353738b9cb207c34"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/full-after.csv",
+      "bytes": 19646,
+      "sha256": "15eba6d82b7af256a81358774cce7f67dc347d60bec44cce03f17a25b6fbc522"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/full-before.csv",
+      "bytes": 21559,
+      "sha256": "2c8eeb42f6551bf102b48550d8598caf8b6806d6aa71943d7632d495eb2c48ba"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/omit-0.csv",
+      "bytes": 14785,
+      "sha256": "cdbfd9d494a994c6f9af3434820a8eacfd772fa0bffb93875512380945d78e84"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002/omit-1.csv",
+      "bytes": 19889,
+      "sha256": "68fe67f158a692b9de7e96048369402b26da1b962d22ac7e30988c03d0bdc96e"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000002.json",
+      "bytes": 243822,
+      "sha256": "6d575c0300dfa1c5f6525b510769b8c2857aa63161ecf2bd7d42dcb7c840a59a"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/full-after.csv",
+      "bytes": 19935,
+      "sha256": "53431db6c19e1fd3d239f36c82ad539942480490f54e8139e7c4ae36c04ffdb7"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/full-before.csv",
+      "bytes": 19721,
+      "sha256": "bb3c79c97f180a9852fc13c3f9f02a73a049fabac159019d9deeff81895889e5"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/omit-0.csv",
+      "bytes": 13192,
+      "sha256": "523c968b90cbf6d03f23a3b08561f3923140c115d5db48e4f500e0a91f13c4d1"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003/omit-1.csv",
+      "bytes": 19877,
+      "sha256": "7017f914d28402f15145b5e8a33b52eb721ae1dd4972dd2b6d1d77b1e75e4788"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000003.json",
+      "bytes": 247701,
+      "sha256": "97bdd00a8e1b62fd537961117e9108a8f18ae33e9223ecf151837826e423853f"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/full-after.csv",
+      "bytes": 20671,
+      "sha256": "59a8df7e84c7befe97cf432359867020a2d224bb656653e7ceb1f9ef3c7b4679"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/full-before.csv",
+      "bytes": 20658,
+      "sha256": "5581d56db42816a10fced3339d64e2c3664b1f55d42036f36343c5a69ed293c8"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/omit-0.csv",
+      "bytes": 14151,
+      "sha256": "25fdbd4c56a489288b27ae3d8fb931f679740928fe16888b4bc5fc177cbda7c6"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004/omit-1.csv",
+      "bytes": 20809,
+      "sha256": "252c680039ed7987aad0eaccc669fec49d8977d8bc6309cf8ad891b33652abe0"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000004.json",
+      "bytes": 247666,
+      "sha256": "9a4d4666c56903e976916472f4ca83249f7fc4a895c0d3d7e1ec8db61bfa114d"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/full-after.csv",
+      "bytes": 20654,
+      "sha256": "711dc0fe5ca8dbf29fc5b621378058f859ec122624c430cbe898153eee663abf"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/full-before.csv",
+      "bytes": 20667,
+      "sha256": "8f00f769da45fd43b5898e3efd0c0846dcd60f6ef357dd311c8f700969c04989"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/omit-0.csv",
+      "bytes": 14137,
+      "sha256": "1b145677db55a51e578d05088b9df070167ca9f79ae8f8bb981051cefa2ca29b"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005/omit-1.csv",
+      "bytes": 20825,
+      "sha256": "fe76bc50b77226a412d11566c6b3ec38ca2073fd266159676edf3b56a7f280f1"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000005.json",
+      "bytes": 248165,
+      "sha256": "349a49f50066e11365d34797f9f9c7077d0e661ec96e09058eb401a38e897dcd"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/full-after.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/full-after.csv",
+      "bytes": 20915,
+      "sha256": "80e8c54973f300d12ac74b102f53aa0386f1483f5c38f3d9787f49e79248fe91"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/full-before.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/full-before.csv",
+      "bytes": 20654,
+      "sha256": "8290d24f3bc9f84bdb5bee4261aef6ef283efc4efaac3784c68c8b019f33b65e"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/omit-0.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/omit-0.csv",
+      "bytes": 14152,
+      "sha256": "45e4945179bfc4f63b8daf62cca41a9a2e3b4f871a27957da930337bfcb635a7"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/omit-1.csv",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006/omit-1.csv",
+      "bytes": 20812,
+      "sha256": "29a36492f28495af6814ecb1427a9e76f15be6edfb7f8c42c5e68a162470e1c8"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/group-000006.json",
+      "bytes": 248177,
+      "sha256": "0f59d2f6eaf055a24b8e0684c2578dc9d38b8b025641203851810f5c1226882f"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/composite-measurements/index.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/composite-measurements/index.json",
+      "bytes": 3557307,
+      "sha256": "0b320d4dd1cf59fe7ba55e494bbc5c17d4c8feeb286b3ad3339d0ec923bb13c3"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/initial-configuration.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/initial-configuration.json",
+      "bytes": 5670,
+      "sha256": "1c454e71d056a08719ab843656a921dbe9ac6e55e5260d844f037c028ce628e6"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/package-scope.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/package-scope.json",
+      "bytes": 302,
+      "sha256": "a26d6720856654d61d25a22478b2b4e8ed95485655cc9e934bb3fd9c8689eee8"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/runtime-plan.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/runtime-plan.json",
+      "bytes": 4218,
+      "sha256": "cd3f8dfb8320fa6ce4ee7b4f13cbbc0ddd6f42c8fa48877642690f73318b08a7"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/source-model.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/source-model.json",
+      "bytes": 236229,
+      "sha256": "7e5c0c06dc2efea375f6b6adaca8d7315377bb94a73826ae991796c2fbed5372"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/train_learned_state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/train_learned_state.json",
+      "bytes": 4812360,
+      "sha256": "b1f7268f1e16a74203fbaa38602dafca8b413f8f145318160338976744cb6c98"
+    },
+    {
+      "archive_path": "native-output/packages-5/native-composite/package6-classic/source-0/train_learned_summary.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native-composite/package6-classic/source-0/train_learned_summary.json",
+      "bytes": 13161,
+      "sha256": "93a6b59b06a81a7d11fdb2803d66410e6fb73d3241c27eb759c345704a63d99e"
+    },
+    {
+      "archive_path": "native-output/packages-5/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141722.433160",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-141722.433160",
+      "bytes": 290,
+      "sha256": "11fdd6757402ceecc3d87a35197858d90544786317cac9c41fc0b876848af801"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "304dcd12dc9186ebfa513ce78294010988c2de1c9a387b1c047ae26a050350c1"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "a4303e9b7143cc6b343e22d613ccdfe41d46c53c7a8d91eb3ffb8d59fad73d46"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "fdaa9d12e4652141c1fc0d3a1d162973de732505a05cd2d492dcd326c32ecee4"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/request.json",
+      "bytes": 1905,
+      "sha256": "161ad83a2433b72d671120568a36b5831ba9c1645069829d361fdedf858f64eb"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/stderr.log",
+      "bytes": 397,
+      "sha256": "fb5b08a49cdebe416a7b832d9935f69298f5ddb91b5648d6e4f8044380aa5145"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/contained/stdout.log",
+      "bytes": 944,
+      "sha256": "509103a28511ad6993cf5d9f6c39b135ac9929e0d5be2a4f41d322f9ebb7c7de"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/owned-process.json",
+      "bytes": 675,
+      "sha256": "a49cffdc7650983f3b4f0d069f60ea04890f6c69df2c4ff9b68050345c0aee21"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/request.json",
+      "bytes": 904,
+      "sha256": "254f21c8b5268ab37183504234637ccb6f772d4f611185b2f32d9f5daa2b9ed4"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/result.json",
+      "bytes": 1881,
+      "sha256": "1c605d02063d43a63372c6cc30eb3584d0f4029143edf49046745fb2ff59812b"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/stderr.log",
+      "bytes": 397,
+      "sha256": "fb5b08a49cdebe416a7b832d9935f69298f5ddb91b5648d6e4f8044380aa5145"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/stdout.log",
+      "bytes": 944,
+      "sha256": "509103a28511ad6993cf5d9f6c39b135ac9929e0d5be2a4f41d322f9ebb7c7de"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/terminal-unit-state.json",
+      "bytes": 1300,
+      "sha256": "8bec13bece4ca3c7b0b559921aa4bd0ebcbc8804b01aca4a800d66d9beb0defd"
+    },
+    {
+      "archive_path": "native-output/packages-5/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/process/whole-group-closure.json",
+      "bytes": 1300,
+      "sha256": "8bec13bece4ca3c7b0b559921aa4bd0ebcbc8804b01aca4a800d66d9beb0defd"
+    },
+    {
+      "archive_path": "native-output/packages-5/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/result.json",
+      "bytes": 291,
+      "sha256": "66e351fe8659fc647d3a94873e3bf6c392aaaa5a9afb178a8020abb49a6b1887"
+    },
+    {
+      "archive_path": "native-output/packages-5/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/packages-5/specification.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5/specification.json",
+      "bytes": 917,
+      "sha256": "846ffa3a3bd0577ffd8da585f4ae40dd3e1f7c4674154cccb7d66153c6cc74c6"
+    },
+    {
+      "archive_path": "native-output/packages-5-actual-tests.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5-actual-tests.json",
+      "bytes": 939,
+      "sha256": "e38dca1e0f17da3b23430883150b83b352b8a9a40a071a9dcda8fc49ae171583"
+    },
+    {
+      "archive_path": "native-output/packages-5-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5-result.json",
+      "bytes": 291,
+      "sha256": "66e351fe8659fc647d3a94873e3bf6c392aaaa5a9afb178a8020abb49a6b1887"
+    },
+    {
+      "archive_path": "native-output/packages-5-runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5-runtime.json",
+      "bytes": 24357,
+      "sha256": "24d94599b2a9d55cbdd411c6b753a8204fe9e6159630e8902aa62554ff09775e"
+    },
+    {
+      "archive_path": "native-output/packages-5-spec.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/packages-5-spec.json",
+      "bytes": 917,
+      "sha256": "846ffa3a3bd0577ffd8da585f4ae40dd3e1f7c4674154cccb7d66153c6cc74c6"
+    },
+    {
+      "archive_path": "native-output/progress.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/progress.json",
+      "bytes": 873,
+      "sha256": "7e0478bc2084742e69baeb4c0afcb98f9b95bd067e67f550fedb627438ea0952"
+    },
+    {
+      "archive_path": "native-output/protected-files-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/protected-files-after.json",
+      "bytes": 2100360,
+      "sha256": "512adfd9eb461b1a511e11dc5f5d9590cc5c9271324e655f7fc91e50391846c8"
+    },
+    {
+      "archive_path": "native-output/protected-files-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/protected-files-before.json",
+      "bytes": 2100360,
+      "sha256": "512adfd9eb461b1a511e11dc5f5d9590cc5c9271324e655f7fc91e50391846c8"
+    },
+    {
+      "archive_path": "native-output/reservation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/reservation.json",
+      "bytes": 11321,
+      "sha256": "0bb978d0f951727d56b5b857882f39c6d3fa7ae96d25f5d4c4fbeac50b5d77f4"
+    },
+    {
+      "archive_path": "native-output/resource-Git-bytes.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/resource-Git-bytes.json",
+      "bytes": 100408,
+      "sha256": "0ab36c4c787cc8144f39913de872a9fd5566b567bc49256a3cf20e5f417e888a"
+    },
+    {
+      "archive_path": "native-output/resource-closure-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/resource-closure-after.json",
+      "bytes": 57,
+      "sha256": "25349caa2454a6dbcabc0c2d414222d2bcf7c3311e84342430ff89e59bbc776d"
+    },
+    {
+      "archive_path": "native-output/source-closure-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/source-closure-after.json",
+      "bytes": 1304,
+      "sha256": "be1803bb2c13c0e88eecd27cfe70873cfc06acbd56f8e71789267fe8a951a687"
+    },
+    {
+      "archive_path": "native-output/source-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/source-closure.json",
+      "bytes": 1304,
+      "sha256": "be1803bb2c13c0e88eecd27cfe70873cfc06acbd56f8e71789267fe8a951a687"
+    },
+    {
+      "archive_path": "native-output/source-hashes-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/source-hashes-after.json",
+      "bytes": 1014197,
+      "sha256": "ceb79f8df21f6acb390d5c9bb3d89a267440d01381f463df5551afc3764c64d4"
+    },
+    {
+      "archive_path": "native-output/source-hashes-before-build.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/source-hashes-before-build.json",
+      "bytes": 1014197,
+      "sha256": "ceb79f8df21f6acb390d5c9bb3d89a267440d01381f463df5551afc3764c64d4"
+    },
+    {
+      "archive_path": "native-output/source-imports.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/source-imports.json",
+      "bytes": 1097,
+      "sha256": "4bf0b7cc21181a4f430a8346d13a5915a1cb5df9722281751f8a49c62bf22604"
+    },
+    {
+      "archive_path": "native-output/source-materialization.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/source-materialization.json",
+      "bytes": 13945830,
+      "sha256": "cc22bb0d57973d30ee6a7b4fab690b0b58ab04cd7f2056aad6c4898a729a0dc9"
+    },
+    {
+      "archive_path": "native-output/terminal.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1/terminal.json",
+      "bytes": 507,
+      "sha256": "87de11b16e55a4a634ebcc79be84f39f312a0681835a5eb4bd9946c159042737"
+    },
+    {
+      "archive_path": "controller/child-binding-actual-class-image-replay.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-binding-actual-class-image-replay.json",
+      "bytes": 747,
+      "sha256": "bbdfe75816481b0356c2e9544883bebc9255b4e6452999836817b401540d5b57"
+    },
+    {
+      "archive_path": "controller/child-binding-actual-membrane-stages.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-binding-actual-membrane-stages.json",
+      "bytes": 744,
+      "sha256": "f17f80f621c954f484018e68edb75f99213ece6904bbd03de1a2fa56bbd3b10e"
+    },
+    {
+      "archive_path": "controller/child-binding-archive-waveforms.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-binding-archive-waveforms.json",
+      "bytes": 739,
+      "sha256": "8b24e6525be17dbd19080d62489f265c2fbf0d6775c7e2763d505121ca362604"
+    },
+    {
+      "archive_path": "controller/child-binding-load-and-xml-controls-8.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-binding-load-and-xml-controls-8.json",
+      "bytes": 745,
+      "sha256": "c09511a6dc28bd3958d1be849706d9a81797b6276632b7edf2cbc4220ed6f715"
+    },
+    {
+      "archive_path": "controller/child-binding-packages-5.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-binding-packages-5.json",
+      "bytes": 732,
+      "sha256": "008b9e03f5e6e7efd4b04e6f1857c0050dbc76d415992494ccb6ecda6bb9db75"
+    },
+    {
+      "archive_path": "controller/child-closures.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-closures.json",
+      "bytes": 10771,
+      "sha256": "0cd50d3dd1ddc0bec880d11568cc4dc899dc016e04188b3b322f13ffead1f161"
+    },
+    {
+      "archive_path": "controller/child-intent-actual-class-image-replay.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-intent-actual-class-image-replay.json",
+      "bytes": 148,
+      "sha256": "b791082e3f94be0714aa6c916249e8bf14450232364c1e03e0987880d100d372"
+    },
+    {
+      "archive_path": "controller/child-intent-actual-membrane-stages.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-intent-actual-membrane-stages.json",
+      "bytes": 145,
+      "sha256": "4df2512f11d577a16ff362bf9b60ffdc5c2627b93d5eeded7d5ef5c9f83ab7ef"
+    },
+    {
+      "archive_path": "controller/child-intent-archive-waveforms.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-intent-archive-waveforms.json",
+      "bytes": 140,
+      "sha256": "46c3cbee0ddcdd5b0fa39e7b57a5c6e2e04fbf2facad3e11856d192143fc915b"
+    },
+    {
+      "archive_path": "controller/child-intent-load-and-xml-controls-8.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-intent-load-and-xml-controls-8.json",
+      "bytes": 146,
+      "sha256": "1cb8cc7e73c4dad31c7d880daec6bdb9458e9b9217ef00038c888e6257524f0e"
+    },
+    {
+      "archive_path": "controller/child-intent-packages-5.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/child-intent-packages-5.json",
+      "bytes": 133,
+      "sha256": "aa11d21312b817af275d5c4e56ce9ca6b3abb693d36d86eacc4b8596dd10a36c"
+    },
+    {
+      "archive_path": "controller/consumed-control-identities.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/consumed-control-identities.json",
+      "bytes": 453,
+      "sha256": "66f3d387da20f2e87cdea5ccd969234bf9067b1a0e3e335676070251ea9f60b9"
+    },
+    {
+      "archive_path": "controller/external-control-identities.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/external-control-identities.json",
+      "bytes": 704,
+      "sha256": "a9216f4f97e149b8a26b8bde23e6039b39473047642ab86c4d498642b3eebf50"
+    },
+    {
+      "archive_path": "controller/inputs/job.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/inputs/job.json",
+      "bytes": 6920,
+      "sha256": "bebb327f8f1b9c76f74c5877ea34eba8df616f01fe74fdc496967026c548c192"
+    },
+    {
+      "archive_path": "controller/inputs/preparation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/inputs/preparation.json",
+      "bytes": 208175,
+      "sha256": "8aa974e557de1379c74da6d7d776a09292d9138404ceababf6b9c9147baee903"
+    },
+    {
+      "archive_path": "controller/launch-intent.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/launch-intent.json",
+      "bytes": 423,
+      "sha256": "c8fafea9637e3e6588e376bfbfea684db6adf2bdfc2ff8b114e1ab5bdbca38bc"
+    },
+    {
+      "archive_path": "controller/launched.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/launched.json",
+      "bytes": 360,
+      "sha256": "87a545c3061e0d4b0cface5d5be449500f779c4096f1fe13a367f0663e85c256"
+    },
+    {
+      "archive_path": "controller/lease-recovery.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/lease-recovery.json",
+      "bytes": 13355,
+      "sha256": "c871754598bfa42a369d23c1658fa4c2d5362f88df872ee8f5a169c3e10a4f6c"
+    },
+    {
+      "archive_path": "controller/module-source.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/module-source.json",
+      "bytes": 37764,
+      "sha256": "53dd2b29b1f71a6942f21ab019b79e611d78c5e13985b491c7d1eb21a5067d67"
+    },
+    {
+      "archive_path": "controller/original-outcome.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/original-outcome.json",
+      "bytes": 2011,
+      "sha256": "bd3aa9148d11c270746e6d1a1d16f7765e4bf6d455fcd0a20effe473ecb84730"
+    },
+    {
+      "archive_path": "controller/outer-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/outer-closure.json",
+      "bytes": 1301,
+      "sha256": "cff21ff053dd2e1206dac2cb1fab1ac51490c6e19d2bdaec28393fafccfa3502"
+    },
+    {
+      "archive_path": "controller/preflight.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/preflight.json",
+      "bytes": 1666,
+      "sha256": "1ba4fbf8fe40c5c7bebf62d752362235cc435fd4f9a98d57f82dbe1b17640686"
+    },
+    {
+      "archive_path": "controller/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "controller/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "controller/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/limits-readback.json",
+      "bytes": 1068,
+      "sha256": "0577708d1129483431c2cd30c7d933b294811efc2eb4c3cc8327d1ccffa38527"
+    },
+    {
+      "archive_path": "controller/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "675d30684a5ddb40dafcff41d45046650a26486616acdd78b0abbde9a721e091"
+    },
+    {
+      "archive_path": "controller/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "f6cfa0153ab0197fabe09215c5c85fe4b1ab201af1577a4c0cbe35c6b8efbfcd"
+    },
+    {
+      "archive_path": "controller/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/request.json",
+      "bytes": 983,
+      "sha256": "fa55ea9d3e652d0b486f7d3e14d03d42ec0c1f2198f8fa6b6229e4698f715309"
+    },
+    {
+      "archive_path": "controller/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/runtime.json",
+      "bytes": 4725,
+      "sha256": "c4aef11360986def3e376378eed34b9068840414381e2a7d9b2a5d64729c0ddf"
+    },
+    {
+      "archive_path": "controller/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "controller/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "controller/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/process/contained/stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "controller/recorded-child-bindings.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/recorded-child-bindings.json",
+      "bytes": 3565,
+      "sha256": "5078bfb1b133e6e3713875fd9eb989e372bb4f01d57571220c502e95b60ee1a8"
+    },
+    {
+      "archive_path": "controller/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/request.json",
+      "bytes": 727,
+      "sha256": "8962ea8caf9f213f16f1bf81ef0ffab7942c710f129e49beadda118b4ec47f5f"
+    },
+    {
+      "archive_path": "controller/reservation-final.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/reservation-final.json",
+      "bytes": 12148,
+      "sha256": "b321e790fadcf432595a6cb5a32bbe5f596c2d6a946409e0eb7e217dd8094304"
+    },
+    {
+      "archive_path": "controller/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/runtime.json",
+      "bytes": 4725,
+      "sha256": "c4aef11360986def3e376378eed34b9068840414381e2a7d9b2a5d64729c0ddf"
+    },
+    {
+      "archive_path": "controller/seen-child-intents.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/seen-child-intents.json",
+      "bytes": 635,
+      "sha256": "7c6981a578cd54dad07570725c1eb317fb3ea70ea10cb8a9ddb964c8a7ef7330"
+    },
+    {
+      "archive_path": "controller/started-binding.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/started-binding.json",
+      "bytes": 565,
+      "sha256": "675d30684a5ddb40dafcff41d45046650a26486616acdd78b0abbde9a721e091"
+    },
+    {
+      "archive_path": "controller/supervisor-identity.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/supervisor-identity.json",
+      "bytes": 118,
+      "sha256": "01da9feeeea0d3a67949bea5c690e3946c52766f13bfcbc69b49bca4767b8925"
+    },
+    {
+      "archive_path": "controller/supervisor-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/supervisor-result.json",
+      "bytes": 13515,
+      "sha256": "2f1e344adb3056b1cbbc291a33226f8c165365d79fa6be58abec2bdb9683f893"
+    },
+    {
+      "archive_path": "controller/supervisor.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/supervisor.log",
+      "bytes": 577,
+      "sha256": "a085fe0f641d98107bffb2c43491efa9bc65171bcd7b66b49a5f0dda16958c0d"
+    },
+    {
+      "archive_path": "controller/tool-source.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-load-xml-repair17-m40-a1-controller/tool-source.json",
+      "bytes": 275876,
+      "sha256": "38def3b1d5b89dfe49d113fe2a466d8df3ee6904c9cd3202ccf2fc9f9dc3ae7a"
+    },
+    {
+      "archive_path": "report-a1/closure-and-reservation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/closure-and-reservation.json",
+      "bytes": 3759,
+      "sha256": "707a9c732f40c31fafda4191c7f30e09a195e6f236622199f0f1509319a91a56"
+    },
+    {
+      "archive_path": "report-a1/controller-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/controller-result.json",
+      "bytes": 1189,
+      "sha256": "b37321732c6a6328ace01bd0dacfb92c2becdebcd3746cb49f199285d97c5f89"
+    },
+    {
+      "archive_path": "report-a1/launch-context.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/launch-context.json",
+      "bytes": 254,
+      "sha256": "c921ee875cd6c838db375b8622c04ab7bc00d7726316e17d78d28fb23975e9e7"
+    },
+    {
+      "archive_path": "report-a1/lease-recovery.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/lease-recovery.json",
+      "bytes": 3836,
+      "sha256": "ac203c3f198d945000a13b2702dc791a15e0811d85fe4d6c4f57dc507b716298"
+    },
+    {
+      "archive_path": "report-a1/monitor-final.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/monitor-final.json",
+      "bytes": 130,
+      "sha256": "91393ef8f9be77deb62210fd656774247897798e1d48b6d8a403a89e107de192"
+    },
+    {
+      "archive_path": "report-a1/monitor.jsonl",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/monitor.jsonl",
+      "bytes": 2391,
+      "sha256": "7fbbc8fddc1139ca12bb9130c9f0b932dba7bc055a0c042e06be789583cad5c5"
+    },
+    {
+      "archive_path": "report-a1/preflight.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/preflight.json",
+      "bytes": 75,
+      "sha256": "30dde689c902049af35e0d2e72e59577331fabbeedf38e940302e0d69c8b2a8d"
+    },
+    {
+      "archive_path": "report-a1/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "report-a1/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "report-a1/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/limits-readback.json",
+      "bytes": 1066,
+      "sha256": "9393bd0c64d188629db2c2fe9a9b7960659109a3563b8ffb4192fdaaa15784b2"
+    },
+    {
+      "archive_path": "report-a1/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "9f87e92e4c1bb9ea8978da86c2f75336fed7e5adbf610d5eb16b203c12c1eb10"
+    },
+    {
+      "archive_path": "report-a1/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "058e45ba9ce7a9c2e3407eabdad7b5f03d330400ceeb3583722818f6f426f59e"
+    },
+    {
+      "archive_path": "report-a1/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/request.json",
+      "bytes": 968,
+      "sha256": "71a33d57e7fa29c597791478a5d559420f1b8b554c198bce7d4309aade82d5db"
+    },
+    {
+      "archive_path": "report-a1/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/runtime.json",
+      "bytes": 2970,
+      "sha256": "722b8a00c0931de08abff49bce486b243438cb737dd46fec805e589ecddd7b4c"
+    },
+    {
+      "archive_path": "report-a1/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "report-a1/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "report-a1/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/contained/stdout.log",
+      "bytes": 2379,
+      "sha256": "eaa5f278ef8bf9a05a3588dc0026b295cff2f50f5337cd25e28366932899faef"
+    },
+    {
+      "archive_path": "report-a1/process/loaded-files.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/loaded-files.json",
+      "bytes": 976,
+      "sha256": "5db1cd600717b928b17c897be8b83233874937be4f56f87d03f9db48a09c5d28"
+    },
+    {
+      "archive_path": "report-a1/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/owned-process.json",
+      "bytes": 586,
+      "sha256": "9d6c9af7164fa513190da13ade5ecfda56c3d68d39f6778b07ed6f077072157e"
+    },
+    {
+      "archive_path": "report-a1/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/request.json",
+      "bytes": 569,
+      "sha256": "e4f31b5a5a09a9608c20540535d35fa5479073fda6d6bcc1c34f9143dc3bfd2c"
+    },
+    {
+      "archive_path": "report-a1/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/result.json",
+      "bytes": 1189,
+      "sha256": "b37321732c6a6328ace01bd0dacfb92c2becdebcd3746cb49f199285d97c5f89"
+    },
+    {
+      "archive_path": "report-a1/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/runtime.json",
+      "bytes": 2970,
+      "sha256": "722b8a00c0931de08abff49bce486b243438cb737dd46fec805e589ecddd7b4c"
+    },
+    {
+      "archive_path": "report-a1/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "report-a1/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/stdout.log",
+      "bytes": 2379,
+      "sha256": "eaa5f278ef8bf9a05a3588dc0026b295cff2f50f5337cd25e28366932899faef"
+    },
+    {
+      "archive_path": "report-a1/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/terminal-unit-state.json",
+      "bytes": 1299,
+      "sha256": "3529c110d7b3d1b650ccffe5cc9328f7d61d63c3c76026142c82980165d5111e"
+    },
+    {
+      "archive_path": "report-a1/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/process/whole-group-closure.json",
+      "bytes": 1299,
+      "sha256": "3529c110d7b3d1b650ccffe5cc9328f7d61d63c3c76026142c82980165d5111e"
+    },
+    {
+      "archive_path": "report-a1/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/request.json",
+      "bytes": 1316,
+      "sha256": "f00b8619837f12207b269ae3020f86517f6aff7eed211e54f665c0c6cb5a6696"
+    },
+    {
+      "archive_path": "report-a1/supervisor.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/supervisor.log",
+      "bytes": 553,
+      "sha256": "b4f33e7ea256089deca805ef6d45005119bb77ce83fe18f774ed6a412ccf1851"
+    },
+    {
+      "archive_path": "report-a1/worker/exception.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/exception.json",
+      "bytes": 625,
+      "sha256": "d0a95cc8a1308230ec0fdbee5121af31aa5d304f6c0a39a1363ca50e4eed038a"
+    },
+    {
+      "archive_path": "report-a1/worker/fixtures-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/fixtures-after.json",
+      "bytes": 8327,
+      "sha256": "a4eba864a8a0fb0a1f47e3540c81e26e99faf7b436077376f80955d6ffa59409"
+    },
+    {
+      "archive_path": "report-a1/worker/fixtures-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/fixtures-before.json",
+      "bytes": 8327,
+      "sha256": "a4eba864a8a0fb0a1f47e3540c81e26e99faf7b436077376f80955d6ffa59409"
+    },
+    {
+      "archive_path": "report-a1/worker/reservation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/reservation.json",
+      "bytes": 1858,
+      "sha256": "0146201ba605f72ffda0efb8fb7a79c6f80bdbbd51542bcebdfee0afa7c20b2f"
+    },
+    {
+      "archive_path": "report-a1/worker/temporary-environment.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/temporary-environment.json",
+      "bytes": 392,
+      "sha256": "f56a5bc294911f1ac36323de69df757987209e97aafd2f0d91ec2940b8ccdf81"
+    },
+    {
+      "archive_path": "report-a1/worker/terminal.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/terminal.json",
+      "bytes": 249,
+      "sha256": "93e778c64077ec54c2ed356e17f231e3e4fa20e512ecb2f9911cc0eb03955197"
+    },
+    {
+      "archive_path": "report-a1/worker/tmp/archive-pair-cli-u9bms85v/cli.stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/tmp/archive-pair-cli-u9bms85v/cli.stderr.log",
+      "bytes": 161,
+      "sha256": "597098ed02a940332f5cb0e2d9c01964a6ac000f3bf34be3f22c03d5fdd66160"
+    },
+    {
+      "archive_path": "report-a1/worker/tmp/archive-pair-cli-u9bms85v/cli.stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/tmp/archive-pair-cli-u9bms85v/cli.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "report-a1/worker/tool-source-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/tool-source-after.json",
+      "bytes": 263747,
+      "sha256": "1b3f097244dd820888b859d56440e58fb1b9f7cf6221084790f0d3e211246f74"
+    },
+    {
+      "archive_path": "report-a1/worker/tool-source-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/tool-source-before.json",
+      "bytes": 263747,
+      "sha256": "1b3f097244dd820888b859d56440e58fb1b9f7cf6221084790f0d3e211246f74"
+    },
+    {
+      "archive_path": "report-a1/worker/validation/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/validation/result.json",
+      "bytes": 2523,
+      "sha256": "7477cdb6acfd6c83f48b8d196d265cbf81ada87592c6fcd330e0549dcf20580a"
+    },
+    {
+      "archive_path": "report-a1/worker/validation/suite.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/validation/suite.json",
+      "bytes": 2153,
+      "sha256": "3fa283c827bd78809e37bf97b44b4b4e49c2af39f90f056c5b16e210ca4d09dc"
+    },
+    {
+      "archive_path": "report-a1/worker/validation/unittest.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/validation/unittest.log",
+      "bytes": 2651,
+      "sha256": "12e4bb2485570aa0f49e37666bacceb3a13f29f45d73ebad0681e3d9e8a19d12"
+    },
+    {
+      "archive_path": "report-a1/worker/validation-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/validation-process.json",
+      "bytes": 772,
+      "sha256": "b6208d42e2dfbb4dd450328bf53d6c3d309bb3b7ef98f6b4de1c520d3057e334"
+    },
+    {
+      "archive_path": "report-a1/worker/validation-source-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/validation-source-after.json",
+      "bytes": 271742,
+      "sha256": "d4d70badf526f416f4fe6555f48f29a2b7653f65810f8a2e8f059d1f500f0048"
+    },
+    {
+      "archive_path": "report-a1/worker/validation-source-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a1/worker/validation-source-before.json",
+      "bytes": 271742,
+      "sha256": "d4d70badf526f416f4fe6555f48f29a2b7653f65810f8a2e8f059d1f500f0048"
+    },
+    {
+      "archive_path": "report-a2/closure-and-reservation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/closure-and-reservation.json",
+      "bytes": 3723,
+      "sha256": "694154a5e1d8069f141d65b03589293e02830e2d146249f21aa968a00d0eed36"
+    },
+    {
+      "archive_path": "report-a2/controller-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/controller-result.json",
+      "bytes": 1180,
+      "sha256": "410ed9e2bcfba36077e193abf083b27aa34f15657ab6928aac37a7a2d2c7cc1c"
+    },
+    {
+      "archive_path": "report-a2/launch-context.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/launch-context.json",
+      "bytes": 254,
+      "sha256": "4f4eee44934c7c38d5972f19dac558964359e1bb6e4dca46dbb3c9963ccbd4f9"
+    },
+    {
+      "archive_path": "report-a2/lease-recovery.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/lease-recovery.json",
+      "bytes": 3855,
+      "sha256": "e8e851e20e8cab8592530adc5d99345ebe5a724a8d11d8ca14d808446bb3463f"
+    },
+    {
+      "archive_path": "report-a2/monitor-final.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/monitor-final.json",
+      "bytes": 131,
+      "sha256": "d2d1f7f1fc4b13f254b10274d0f11e61353e767b27b96c54ef661ceaf2034fe5"
+    },
+    {
+      "archive_path": "report-a2/monitor.jsonl",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/monitor.jsonl",
+      "bytes": 3610,
+      "sha256": "92d4f21248c6150978613c2081a7a987be6f5d75661afadb49304a094cd59a6a"
+    },
+    {
+      "archive_path": "report-a2/preflight.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/preflight.json",
+      "bytes": 75,
+      "sha256": "776a83d73456adda9a8359186a0dcd6f231419f4aadff7440c23ae78e72e858d"
+    },
+    {
+      "archive_path": "report-a2/process/contained/launch-result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/launch-result.json",
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    {
+      "archive_path": "report-a2/process/contained/launcher.py",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/launcher.py",
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    {
+      "archive_path": "report-a2/process/contained/limits-readback.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/limits-readback.json",
+      "bytes": 1066,
+      "sha256": "322adc95a503c95d2121e12ec8a5ee0c3d39d173b2a864fc6926fe3b7e5b5b1b"
+    },
+    {
+      "archive_path": "report-a2/process/contained/owned-unit.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/owned-unit.json",
+      "bytes": 565,
+      "sha256": "a31c0b12d249816ef9724f6dd10b6899c564942680c40379c6cc3d317bae0c60"
+    },
+    {
+      "archive_path": "report-a2/process/contained/ready.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/ready.json",
+      "bytes": 43,
+      "sha256": "bcfb7010ec252c740bd070f33d74dc914f9d57bb7426bb27c8796f3f8ddbd741"
+    },
+    {
+      "archive_path": "report-a2/process/contained/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/request.json",
+      "bytes": 1023,
+      "sha256": "583f87c4b84c693b93594eddb4bf99b732ce5a0e780b9c63790098b184ecb504"
+    },
+    {
+      "archive_path": "report-a2/process/contained/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/runtime.json",
+      "bytes": 3080,
+      "sha256": "49bed87d1fdbfd694686cebc84876f716afc48aa48f4947046bb2f7365c6eb46"
+    },
+    {
+      "archive_path": "report-a2/process/contained/start.ack",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/start.ack",
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    {
+      "archive_path": "report-a2/process/contained/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "report-a2/process/contained/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/contained/stdout.log",
+      "bytes": 2262,
+      "sha256": "71360c732a3160201b0f76c461f4b8375503cb6ebc8da9bfd601a22c0eb5e962"
+    },
+    {
+      "archive_path": "report-a2/process/loaded-files.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/loaded-files.json",
+      "bytes": 1031,
+      "sha256": "99d2b68b0a2d5e7295f36f6db67c63a7641f8487e6ac5adbaac7fa90a671b6e8"
+    },
+    {
+      "archive_path": "report-a2/process/owned-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/owned-process.json",
+      "bytes": 641,
+      "sha256": "9e009836c14340e60982aeee1654b0554123609279dbb7a6545987079bebde72"
+    },
+    {
+      "archive_path": "report-a2/process/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/request.json",
+      "bytes": 569,
+      "sha256": "45ab6778eb49227b2cdf56efebf74b7add27c6c8599f75edaef462bee076ef9e"
+    },
+    {
+      "archive_path": "report-a2/process/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/result.json",
+      "bytes": 1180,
+      "sha256": "410ed9e2bcfba36077e193abf083b27aa34f15657ab6928aac37a7a2d2c7cc1c"
+    },
+    {
+      "archive_path": "report-a2/process/runtime.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/runtime.json",
+      "bytes": 3080,
+      "sha256": "49bed87d1fdbfd694686cebc84876f716afc48aa48f4947046bb2f7365c6eb46"
+    },
+    {
+      "archive_path": "report-a2/process/stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "report-a2/process/stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/stdout.log",
+      "bytes": 2262,
+      "sha256": "71360c732a3160201b0f76c461f4b8375503cb6ebc8da9bfd601a22c0eb5e962"
+    },
+    {
+      "archive_path": "report-a2/process/terminal-unit-state.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/terminal-unit-state.json",
+      "bytes": 1297,
+      "sha256": "ed870ff0208bf2e3d67510f23467ade2120248f48479282b927e49cd3a54f719"
+    },
+    {
+      "archive_path": "report-a2/process/whole-group-closure.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/process/whole-group-closure.json",
+      "bytes": 1212,
+      "sha256": "a1c45180058d11b99c7f962df56f2d1febff7bcc0036c193fbe9857ee79d550b"
+    },
+    {
+      "archive_path": "report-a2/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/request.json",
+      "bytes": 1319,
+      "sha256": "0063f7d6a99569a39df40f7811adf26b776b4547f9c838cce8dfd302d64854c3"
+    },
+    {
+      "archive_path": "report-a2/supervisor.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/supervisor.log",
+      "bytes": 553,
+      "sha256": "fec67c9e9b93411960c24e1e56ead94b89b6f596da5affee3f7976520b9d562c"
+    },
+    {
+      "archive_path": "report-a2/worker/fixtures-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/fixtures-after.json",
+      "bytes": 8327,
+      "sha256": "a4eba864a8a0fb0a1f47e3540c81e26e99faf7b436077376f80955d6ffa59409"
+    },
+    {
+      "archive_path": "report-a2/worker/fixtures-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/fixtures-before.json",
+      "bytes": 8327,
+      "sha256": "a4eba864a8a0fb0a1f47e3540c81e26e99faf7b436077376f80955d6ffa59409"
+    },
+    {
+      "archive_path": "report-a2/worker/reservation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/reservation.json",
+      "bytes": 1913,
+      "sha256": "a566f119be1d39213750d32a54a9cd1fa3f9d8c6c57ee41390388d453c2d4f6b"
+    },
+    {
+      "archive_path": "report-a2/worker/temporary-environment.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/temporary-environment.json",
+      "bytes": 392,
+      "sha256": "21edba989f9429f12895b2bd43dac3e5532cc4ff8ed2ac38bcc1e36c90bf8e72"
+    },
+    {
+      "archive_path": "report-a2/worker/terminal.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/terminal.json",
+      "bytes": 248,
+      "sha256": "10f2cfd0cb7d2d454c48123ab38819a476cdf65da8b6408830021294b5b0d04d"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/cli.stderr.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/cli.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/cli.stdout.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/cli.stdout.log",
+      "bytes": 18960,
+      "sha256": "533f7ba501ac029cbce050bd743cc0e55695fd38837fd874cddd1509899e4d4a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/validation.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/validation.json",
+      "bytes": 27448,
+      "sha256": "1293d3ee455db01ac7e1050ba21a86fbeda6826036194bf496214ddd8b2b138f"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/matplotlib/fontlist-v390.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/matplotlib/fontlist-v390.json",
+      "bytes": 140732,
+      "sha256": "ed4071b5c3f2150877f61d52615c87d33c2a80a8f34c6b77a9b7039f2afc7c29"
+    },
+    {
+      "archive_path": "report-a2/worker/tool-source-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tool-source-after.json",
+      "bytes": 263747,
+      "sha256": "1b3f097244dd820888b859d56440e58fb1b9f7cf6221084790f0d3e211246f74"
+    },
+    {
+      "archive_path": "report-a2/worker/tool-source-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tool-source-before.json",
+      "bytes": 263747,
+      "sha256": "1b3f097244dd820888b859d56440e58fb1b9f7cf6221084790f0d3e211246f74"
+    },
+    {
+      "archive_path": "report-a2/worker/validation/result.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/validation/result.json",
+      "bytes": 2398,
+      "sha256": "d51a25c0f2d579f735ac2166e988be5a8057d48adac6de269a6169780785b152"
+    },
+    {
+      "archive_path": "report-a2/worker/validation/suite.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/validation/suite.json",
+      "bytes": 2153,
+      "sha256": "13b36daea2a3f0a03b8f80e1496f7dc544676c7aec0bfacad7e409592bf59826"
+    },
+    {
+      "archive_path": "report-a2/worker/validation/unittest.log",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/validation/unittest.log",
+      "bytes": 1842,
+      "sha256": "ac854cedac63b325482eb3ae89e5efa64efde852dd8a871d35e53037142b97cb"
+    },
+    {
+      "archive_path": "report-a2/worker/validation-process.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/validation-process.json",
+      "bytes": 830,
+      "sha256": "823853c5658a3ae7518f95968b98200e689d1acf6a741ee02f6fd06485e45580"
+    },
+    {
+      "archive_path": "report-a2/worker/validation-source-after.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/validation-source-after.json",
+      "bytes": 271742,
+      "sha256": "d4d70badf526f416f4fe6555f48f29a2b7653f65810f8a2e8f059d1f500f0048"
+    },
+    {
+      "archive_path": "report-a2/worker/validation-source-before.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/validation-source-before.json",
+      "bytes": 271742,
+      "sha256": "d4d70badf526f416f4fe6555f48f29a2b7653f65810f8a2e8f059d1f500f0048"
+    },
+    {
+      "archive_path": "native-controls/canonical-plan.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110/canonical-plan.json",
+      "bytes": 22283,
+      "sha256": "bd17120a389ebc26d9f757946fbe5304190e5496af3693dca11ab150ef3c3d3b"
+    },
+    {
+      "archive_path": "native-controls/cohort.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110/cohort.json",
+      "bytes": 5094,
+      "sha256": "0dc1abccf3aa05ad725fc0e53eb9abe8ca19ed6eece2a2a4981a04a22afd1f44"
+    },
+    {
+      "archive_path": "native-controls/namespace.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110/namespace.json",
+      "bytes": 1013905,
+      "sha256": "2fb78193e77c2d1127793f06dfd54d869b262de577f9a94427d877840f98e7ab"
+    },
+    {
+      "archive_path": "native-controls/native-job.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110/native-job.json",
+      "bytes": 6920,
+      "sha256": "bebb327f8f1b9c76f74c5877ea34eba8df616f01fe74fdc496967026c548c192"
+    },
+    {
+      "archive_path": "native-controls/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-load-xml-repair17-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeLoadXmlRepair17-20261110/request.json",
+      "bytes": 835,
+      "sha256": "eff53ab92382f5add530a804be4c36dc66e237d72e763832d781fc327e661380"
+    },
+    {
+      "archive_path": "report-controls-a2/plot-environment.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-archive-gate-pair-report11-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveGatePairReport11-20261110/plot-environment.json",
+      "bytes": 1021,
+      "sha256": "c64900ec5a4e6d55bc53616831ea167b88e136e59ba5db1aba42ba44a9cd39f3"
+    },
+    {
+      "archive_path": "report-controls-a2/request-a2.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-archive-gate-pair-report11-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveGatePairReport11-20261110/request-a2.json",
+      "bytes": 1319,
+      "sha256": "0063f7d6a99569a39df40f7811adf26b776b4547f9c838cce8dfd302d64854c3"
+    },
+    {
+      "archive_path": "report-controls-a2/request.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-archive-gate-pair-report11-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveGatePairReport11-20261110/request.json",
+      "bytes": 1316,
+      "sha256": "f00b8619837f12207b269ae3020f86517f6aff7eed211e54f665c0c6cb5a6696"
+    },
+    {
+      "archive_path": "report-controls-a2/suite-a2.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-archive-gate-pair-report11-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveGatePairReport11-20261110/suite-a2.json",
+      "bytes": 2153,
+      "sha256": "13b36daea2a3f0a03b8f80e1496f7dc544676c7aec0bfacad7e409592bf59826"
+    },
+    {
+      "archive_path": "report-controls-a2/suite.json",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/requests/native-archive-gate-pair-report11-m40-a2/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveGatePairReport11-20261110/suite.json",
+      "bytes": 2153,
+      "sha256": "3fa283c827bd78809e37bf97b44b4b4e49c2af39f90f056c5b16e210ca4d09dc"
+    }
+  ],
+  "retained_internal_symlinks": [
+    {
+      "role": "native-output",
+      "path": "actual-class-image-replay/native.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141523.426490"
+    },
+    {
+      "role": "native-output",
+      "path": "actual-membrane-stages/native.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141511.425659"
+    },
+    {
+      "role": "native-output",
+      "path": "archive-waveforms/native/telemetry-matrix-precise-boundary-child-2000.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141603.428811"
+    },
+    {
+      "role": "native-output",
+      "path": "archive-waveforms/native/telemetry-matrix-precise-boundary-child-20000.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141646.431158"
+    },
+    {
+      "role": "native-output",
+      "path": "archive-waveforms/native.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141545.427774"
+    },
+    {
+      "role": "native-output",
+      "path": "load-and-xml-controls-8/native.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141456.424757"
+    },
+    {
+      "role": "native-output",
+      "path": "packages-5/native.test-events-log/EventsLog/NeuroModeler.INFO",
+      "target": "NeuroModeler.M40.user.log.INFO.20261110-141722.433160"
+    }
+  ],
+  "full_png_cache_retained": [
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f2000/soma-2-overview-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f2000/soma-2-overview-shared.png",
+      "bytes": 130274,
+      "sha256": "09ac20e2493b86b5177606b4f366ac2654346ae9ed5865ab643f24f2717bdd28"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f2000/soma-2-zoom-001-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f2000/soma-2-zoom-001-shared.png",
+      "bytes": 120448,
+      "sha256": "50a63741f31e421cf2c70692bb47616db65a1851f36068e998534b4e9bc4f454"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f2000/soma-2-zoom-002-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f2000/soma-2-zoom-002-shared.png",
+      "bytes": 122762,
+      "sha256": "ef4baddd6917ca229f5fd00510b539b9d8d24785ffa5a9aea32b18c38a2e1d3a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-overview-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-overview-shared.png",
+      "bytes": 132942,
+      "sha256": "0f395e9f3b8980869bcf51a285490c9ebf2a5a5386f6ef10e349885677b9a892"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-001-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-001-detail.png",
+      "bytes": 96551,
+      "sha256": "b0973c9dce20b95a6a9343c46419e0aa11c4c0266803a59d50d9adbc1ceb72e3"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-001-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-001-shared.png",
+      "bytes": 101801,
+      "sha256": "f5ed92dd2734810b565d155fdfa456b2d2e3fd6b3c161b7045b45ff9b22b613f"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-002-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-002-detail.png",
+      "bytes": 115642,
+      "sha256": "a458430c8d5e04e3c0d9a923ab71c6d13fce5a962ae4531788c12d0f4867544a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-002-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-002-shared.png",
+      "bytes": 106077,
+      "sha256": "bcc16683173e3cb519e51041da91e7e2e96c2e447d0ca0f9ec064b88b662d211"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-003-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-003-detail.png",
+      "bytes": 129641,
+      "sha256": "9b096dffef457f5aae7b4bb35010f20e40196353e5b3e4c92d64b59bbe6e85f9"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-003-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-003-shared.png",
+      "bytes": 108025,
+      "sha256": "1e019afe3c547f23c4dd77e742f659232b46e4fe1dcb0f8ecd3b01a1d2507fec"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-004-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-004-detail.png",
+      "bytes": 130086,
+      "sha256": "6364ee69901ec8e03962d1213ebd14241a480ab3fc886c500a8faa7d867c1e70"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-004-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-004-shared.png",
+      "bytes": 110700,
+      "sha256": "35585c3266351e1e6a65412844c50906fd4e39010fc802f846250b9c3c52ac9f"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-005-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-005-detail.png",
+      "bytes": 123722,
+      "sha256": "94b6035ee8f3993e160ba6331570ce381f1abe985e858d8ef3ef43efcc6e66de"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-005-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-005-shared.png",
+      "bytes": 110080,
+      "sha256": "b55b4a32b6843de6b2f8d4fb5648d491fac025d5ec1624d855f4bbf8372f68b1"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-006-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-006-detail.png",
+      "bytes": 125647,
+      "sha256": "df32cfa8379985f9d364cf39c403cb1292a643a2a84dea7bae436181761b54d9"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-006-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-006-shared.png",
+      "bytes": 112082,
+      "sha256": "5341466c0906931c5884807ffc76ebbb1835bb31a1c386890673b466100c5bd9"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-007-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-007-detail.png",
+      "bytes": 124391,
+      "sha256": "7f14b14d34dcf79510461e5a3cf6113d6df16439c4c8c70bf8db8bda0a871b55"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-007-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-007-shared.png",
+      "bytes": 110654,
+      "sha256": "7ed1d10a7327e655b10b55c1a46f21a9eb28e386eb1c48b556448d85863eca8a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-008-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-008-detail.png",
+      "bytes": 132412,
+      "sha256": "13ceb1866a6a3d74f8ef205312a376da26ec1c455e9b063e9ed65cf27ec492d6"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-008-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-008-shared.png",
+      "bytes": 110546,
+      "sha256": "db0e4548f574e0dfe0219926201cf4223d91d2e84470c56a9f06561d24bd2af6"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-009-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-009-detail.png",
+      "bytes": 125141,
+      "sha256": "05e2c6dae693e63b1b45260bf1b7492e626059fbc0eeb0d27dcf34720aae0003"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-009-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-009-shared.png",
+      "bytes": 108947,
+      "sha256": "1007f74354a34114a48bd6fbe5f1c4ebabbf42a48a5723bd81a78e7e9b739d20"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-010-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-010-detail.png",
+      "bytes": 121863,
+      "sha256": "773776b324ddf40781c55dc68fe8160e1dc1706ce447d6ff9151bf665ddd5d4b"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-010-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-010-shared.png",
+      "bytes": 108513,
+      "sha256": "9e27d142b344563be07c60cd6d818d34866d1f6a41acb78f407f428eddad15d1"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-011-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-011-detail.png",
+      "bytes": 128385,
+      "sha256": "b37fa4dbca02df9e1fc5616b942d8c6b134599e056fee3b9ce1f2dcc693cc665"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-011-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-011-shared.png",
+      "bytes": 106489,
+      "sha256": "4c506b1588cba8b7ff3221e18344bc0019bb781cbd7ea219c700feb1c7dbef7f"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-012-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-012-detail.png",
+      "bytes": 128036,
+      "sha256": "d60e248642a5c5848afff652404d58964484fbaf316f6087b44cb323c7029c71"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-012-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-012-shared.png",
+      "bytes": 108156,
+      "sha256": "55384fdebaf7a88b03246326e3cf8d659e000812da3a82460ded6312e992a002"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-013-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-013-detail.png",
+      "bytes": 135075,
+      "sha256": "28f5474d53675b6513465188fc6157301b1b4fc5236a4924fd8cce63c250136c"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-013-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-013-shared.png",
+      "bytes": 107785,
+      "sha256": "32006aaa93d387d90cd3fe368f12880eb5f2e0a83946a4f16012ea33181653d1"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-014-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-014-detail.png",
+      "bytes": 132837,
+      "sha256": "6be689ce5b90f4bb45ef6a824baa7a4bd1f878bf93f9718594a06b15953414b2"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-014-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-014-shared.png",
+      "bytes": 109442,
+      "sha256": "425f853cef0cecd430c28345c2cb50f764a2b679920e21ba677d0ed0e7311e7a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-015-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-015-detail.png",
+      "bytes": 132526,
+      "sha256": "e38e882755305c3bac6c00c01af331c3edf1f39a5a3763a1dc4d707e80bf27a7"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-015-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-015-shared.png",
+      "bytes": 108252,
+      "sha256": "e1c527abb33d9cfbbd02fd6db218436704488cd8074b82e5804c8bc5de9a41aa"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-016-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-016-detail.png",
+      "bytes": 133514,
+      "sha256": "9379a060d3c5969a75df8f9096c41381ef5936376ded682597d2f34827abca39"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-016-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-016-shared.png",
+      "bytes": 110412,
+      "sha256": "e34cebca7d0c9e7a546331f710f9ee6fad12d9cb520fe5cf5db160df35ff0fa9"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-017-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-017-detail.png",
+      "bytes": 132431,
+      "sha256": "9f068a80ac1b8a6dfcf840e065375e8b6640e1f633e71b148906e19571f5313a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-017-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-017-shared.png",
+      "bytes": 108769,
+      "sha256": "a9e1749204fc35ccb60351a2b68cb8b99ef6551905cf95b65d29ac2f66adcc08"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-018-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-018-detail.png",
+      "bytes": 132614,
+      "sha256": "cf096527f64f524506e1296bfc1bc0ab7acc6fcae8ca4152daafb65c18e99d03"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-018-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-018-shared.png",
+      "bytes": 109415,
+      "sha256": "e735da4ef481c1d1ee3f63d44bed1751ab5c87c911ae868eb6be7de4104e26c1"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-019-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-019-detail.png",
+      "bytes": 130098,
+      "sha256": "b83cfb99dec3ac9db0018b64f152d8186418523587afbbe54f5a94a390f80be4"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-019-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-019-shared.png",
+      "bytes": 108653,
+      "sha256": "064876388e306302ad0fff11771ce4ce370e13a16a3da45c93fb6309f79a9da3"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-020-detail.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-020-detail.png",
+      "bytes": 138446,
+      "sha256": "a58816636a80857a706acde0f2fcf22a6f184dddc976d1ab4876200cf612e57a"
+    },
+    {
+      "archive_path": "report-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-020-shared.png",
+      "original_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-native-archive-gate-pair-report11-m40-a2/worker/tmp/archive-pair-cli-_62p4z8t/report/telemetry-matrix-precise-boundary-f20000/soma-2-zoom-020-shared.png",
+      "bytes": 108468,
+      "sha256": "68b4be7995a601409137b619aba21c7f327960102602cac668342ba502bf3bbf"
+    }
+  ],
+  "selected_pngs": [
+    {
+      "path": "selected/overview-2000.png",
+      "bytes": 130274,
+      "sha256": "09ac20e2493b86b5177606b4f366ac2654346ae9ed5865ab643f24f2717bdd28"
+    },
+    {
+      "path": "selected/overview-20000.png",
+      "bytes": 132942,
+      "sha256": "0f395e9f3b8980869bcf51a285490c9ebf2a5a5386f6ef10e349885677b9a892"
+    }
+  ],
+  "archive": {
+    "bytes": 1796972,
+    "sha256": "ae373a8c3027c7b7d6f879ceed45a9672e11144150b07b44dd863eb85cd31013",
+    "members": 414,
+    "original_bytes": 69296789
+  },
+  "collector_mode": "explicit closed OOM capture; native collector v1 cannot admit OOM missing-JUnit",
+  "outer_capture_cgroup_attested": false,
+  "scientific_verdict": null
+}
