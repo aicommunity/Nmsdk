@@ -1,5 +1,9 @@
 # Два findings для следующего property/lifecycle реестра
 
+**Сверка10.11:** основной текст ниже — исторический обзор Pulsefcc, не список неизменных дефектов текущего кода. PROPERTY-OWNERSHIP-STEP-001 исправлен guard в Pulse2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b; guard присутствует и в accepted Pulse4a5c2ec9df9a9f704dcd8260714323494bfa4415, и в candidate e685563db13be0204510f3da99c666b323513a30. [Новая точная source-квитанция](PropertyOwnershipReconciliation-20261110.json) фиксирует оба класса, blob/полные file SHA256 и тело setter. [Контракт и ранее принятый scoped ASan10](NormalizationPropertyContracts.ru.md#candidate-ownership-guard-для-legacystep) подтверждают boundary states, но active capture/search, ordinary completed/scaled/calibrated recognition и общий property matrix ещё не закрыты. Не вносить guard повторно по историческому описанию ниже.
+
+PROPERTY-CONTROL-RISING-001: [actual13 NativeObservedRequest controls на SDKf22/e685 прошли](https://github.com/aicommunity/Nmsdk/blob/8d4c1ab9f598622d263877ab7d383717cc563fa5/Docs/StructTrain/TimeLearner/NativeImageRest-20261110.ru.md) в regression18, который целиком завершился14 executed/13PASS/1FAIL/4not-run из-за следующего независимого package roundtrip. Проверены Classic/Branch, connected/direct input, CalculateMode0/1, finished/partial-stop, постоянный true и ненаблюдаемый ABA; fresh request допускается только после наблюдённого low→true на закрытой границе с сохранением исходной family/references/raw. Это scoped V2/N2 evidence: C0-on, иные N/профили, unresolved/finalization/retarget и весь active/recognition property matrix не закрыты. Новая regression20 проверяет перенос image и повторяет эти13; её итог ещё отсутствует.
+
 Дополнение09.11: [bounded control/peak reconciliation](ControlPeakPropertyReconciliation-20261109.ru.md)
 подтверждает сохраняющийся rising gap на Pulsef7/Rdkd6, уточняя локальный setter
 и connected/direct paths. Исходный обзор ниже сохранён со своим snapshot;
