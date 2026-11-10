@@ -17,6 +17,7 @@ from ..candidate_window_package_evidence import audit_candidate_window_package
 from ..composite_primary import filesystem_primary_resolver
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import load, require
+from ..process_runner import verify_runtime
 from . import test_managed_native_pipeline as pipeline_checks
 from . import test_managed_native_calibration as calibration_checks
 
@@ -26,9 +27,21 @@ class CandidateWindowConsolePipelineTest(unittest.TestCase):
     def setUpClass(cls):
         binding = os.environ.get('TIMELEARNER_CANDIDATE_WINDOW_CONSOLE')
         require(binding is not None, 'cold7_console_fixture_binding_required')
-        cls.spec = load(Path(binding))
+        control = Path(binding).resolve(strict=True)
+        require(control.is_dir(), 'cold7_console_control_directory_required')
+        cls.spec = load(control/'declaration.json')
         require(type(cls.spec) is dict and set(cls.spec) == {'runtime', 'corpus', 'controller', 'output'},
                 'cold7_console_fixture_declaration')
+        corpus_binding = os.environ.get('TIMELEARNER_NATIVE_PACKAGE6_FIXTURES')
+        runtime_binding = os.environ.get('TIMELEARNER_CONSOLE_RUNTIME_FILES')
+        require(corpus_binding is not None and runtime_binding is not None, 'cold7_console_all_fixture_bindings_required')
+        require(Path(cls.spec['corpus']).resolve(strict=True) == Path(corpus_binding).resolve(strict=True),
+                'cold7_console_corpus_binding_changed')
+        runtime_path = Path(cls.spec['runtime']).resolve(strict=True)
+        require(runtime_path.parent == control, 'cold7_console_runtime_metadata_not_in_controls')
+        runtime = load(runtime_path);verify_runtime(runtime)
+        require(Path(runtime['executable']['path']).parent.resolve(strict=True) == Path(runtime_binding).resolve(strict=True),
+                'cold7_console_actual_runtime_binding_changed')
         cls.output = Path(cls.spec['output'])
         cls.output.mkdir(parents=True, exist_ok=False)
         cls.templates = cls.positive_templates = cls.output/'declarations'
