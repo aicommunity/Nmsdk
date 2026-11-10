@@ -4,6 +4,18 @@
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 
+Для сохранения закрытых заданий Linux `owned_python_job` поддерживает отдельную
+операцию `closed-primary-bundle` с привязанным SHA-256 manifest. Manifest задаёт
+полное множество файлов и glog-алиасов, точные kernel bindings всех сохранённых
+owned units и явные ограничения размера. Коллектор проверяет полное пространство
+имён и закрытие units до и после потокового создания lossless `primary.tar.xz`.
+Исходные файлы и результаты не изменяются; неизвестные ссылки, добавленные файлы,
+живые процессы и изменения первичных данных запрещают итоговое подтверждение.
+`primary-bundle-proof.json` подтверждает сбор байтов и закрытие процессов:
+он не подтверждает сходимость, научный PASS или публикацию в Git. Независимая
+проверка восстановления и Git closure остаются отдельными обязательными шагами.
+Windows этой операцией пока не поддерживается.
+
 `stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
 создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
 входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).

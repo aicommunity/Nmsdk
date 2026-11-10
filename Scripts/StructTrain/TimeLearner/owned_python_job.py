@@ -72,7 +72,8 @@ def validate_request(value):
             and all(type(n) is int and n > 0 for n in value['disk'].values()), 'owned_job_disk_schema')
     operation = value['operation']
     require(type(operation) is dict and operation.get('kind') in
-            (*_VALIDATION_KINDS, 'duplicate-static-archives', 'native-canonical-preparation'), 'owned_job_operation')
+            (*_VALIDATION_KINDS, 'duplicate-static-archives', 'native-canonical-preparation',
+             'closed-primary-bundle'), 'owned_job_operation')
     if operation['kind'] in _VALIDATION_KINDS:
         fields = {'kind', 'source', 'suite', 'fixtures'}
         require(set(operation) in (fields, fields | {'fixture_byte_limits'}) and
@@ -93,6 +94,9 @@ def validate_request(value):
         if operation['kind'] == 'python-controller-validation':
             require(operation['source']['commit'] == value['tool_commit'],
                     'owned_job_controller_validation_requires_same_commit')
+    elif operation['kind']=='closed-primary-bundle':
+        require(set(operation) == {'kind', 'manifest'}, 'owned_job_primary_bundle_schema')
+        _file_binding(operation['manifest'])
     elif operation['kind']=='native-canonical-preparation':
         require(set(operation)=={'kind','plan'},'owned_job_canonical_schema')
         _file_binding(operation['plan'])
@@ -107,6 +111,7 @@ def _paths(request):
     require(socket.gethostname() == request['worker_host'] and SOURCE.is_relative_to(base), 'owned_job_worker_changed')
     operation = request['operation']
     files = ([operation['suite']] if operation['kind'] in _VALIDATION_KINDS else
+             [operation['manifest']] if operation['kind']=='closed-primary-bundle' else
              [operation['plan']] if operation['kind']=='native-canonical-preparation' else [operation['plan'],operation['review']])
     for row in files:
         require(Path(row['path']).is_relative_to(base), 'owned_job_input_outside_execution_root')
@@ -224,6 +229,9 @@ def _worker(request_path):
     elif operation['kind']=='native-canonical-preparation':
         from .native_canonical_preparation import resources as canonical_resources
         resources=canonical_resources(_pinned(operation['plan']),job,operation['plan']['path'])
+    elif operation['kind']=='closed-primary-bundle':
+        from .closed_primary_bundle import resources as bundle_resources
+        resources=bundle_resources(_pinned(operation['manifest']),job,operation['manifest']['path'],SOURCE)
     token = None;stop = threading.Event();errors = [];thread = None;passed = False;before = None
     def emit(name, value):
         _write(output/name, value)
@@ -282,6 +290,15 @@ def _worker(request_path):
                     _json(_frozen(output/'validation/suite.json', 16*1024**2)[0]) == suite and
                     record['executed_tests'] == len(suite['expected_test_ids']) and not record['skipped'] and
                     not record['failures'] and not record['errors'], 'owned_job_validation_failed')
+        elif operation['kind']=='closed-primary-bundle':
+            from .closed_primary_bundle import collect
+            manifest = _pinned(operation['manifest']);emit('primary-bundle-manifest.json', manifest)
+            def bundle_guard():
+                require(not errors, 'owned_job_heartbeat_failed')
+                registry.validate_paths(token)
+                require(shutil.disk_usage(base).free >= request['disk']['minimum_free_bytes'], 'owned_job_disk_floor')
+            collect(manifest, output/'packed-primary', bundle_guard, emit)
+            require(_pinned(operation['manifest']) == manifest, 'owned_job_bundle_manifest_changed')
         elif operation['kind']=='native-canonical-preparation':
             from .native_canonical_preparation import produce
             plan=_pinned(operation['plan']);emit('canonical-plan.json',plan)
