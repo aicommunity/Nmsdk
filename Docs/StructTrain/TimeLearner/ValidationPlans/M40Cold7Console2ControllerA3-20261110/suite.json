@@ -1,0 +1,40 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "cold7-console2-contained-controller-composite-identity-a3",
+  "package_fingerprint": "e57e441a7dac9949dc17e40a276f10e31f015ec4e2baf74221056bb75105b9cf",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_pipeline"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_pipeline.CandidateWindowConsolePipelineTest.test_branch_cold7_public_preflight_train_export_measured_calibration_frozen_test",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_pipeline.CandidateWindowConsolePipelineTest.test_classic_cold7_public_preflight_train_export_measured_calibration_frozen_test"
+  ],
+  "fixtures": {
+    "TIMELEARNER_NATIVE_PACKAGE6_FIXTURES": {
+      "pattern": "**/*.json",
+      "files": 407,
+      "fingerprint": "c14b7a0c72d9c2560e22776456dc8fe9961bd9b9920e47e00c8c483397753f38"
+    },
+    "TIMELEARNER_NATIVE_PACKAGE6_PRIMARY_CSV": {
+      "pattern": "**/*.csv",
+      "files": 294,
+      "fingerprint": "0102df9b3db879e0593c352a9bf8e427cb79f21560d4c8009a93b4f6dc173fbf"
+    },
+    "TIMELEARNER_CONSOLE_RUNTIME_FILES": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "969b5b798436a14059262d55211322e9873595b786e2b4d5e736d423b6bcd65e"
+    },
+    "TIMELEARNER_CONSOLE_RUNTIME_INI": {
+      "pattern": "*.ini",
+      "files": 1,
+      "fingerprint": "b6bb0f8178de9b7fb3df914b4e3408322394d21ff5036973bc45c57b1b264a79"
+    },
+    "TIMELEARNER_CANDIDATE_WINDOW_CONSOLE": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "ac169f6a6121572428296c8c49c5fb5e0d39bb2cd1bbb85c9d632ac3fbb32d8a"
+    }
+  }
+}
