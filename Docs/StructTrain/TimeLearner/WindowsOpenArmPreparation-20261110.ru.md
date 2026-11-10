@@ -23,3 +23,9 @@
 Штатный launcher отправил свежую сборку: Scheduled Task instance `{7D84AED3-4052-478D-86FF-3E33F9ED566C}`, task_state4/running и реальный Python PID9516 подтверждены, terminal отсутствовал. [Original dispatch и live-process observation](ValidationPlans/WindowsNative119OpenArm-20261110/launch-live-observation.json). Это активное сборочное задание; build acceptance и native scientific admission ещё не получены. После terminal результата — проверка целостности и полного закрытия процессов. Сохранить исходные отрицательные результаты, если остаются descendants. Native запуск возможен лишь через действующий production gate и точный audited runtime.
 
 При подготовке native заданий не считать наличие бинарника научным допуском. Требуются exact test inventory, actual loaded DLL identity, полные наблюдения, source/runtime preservation и Job closure. Console Train→Test, независимые научные условия, cross-platform численные сравнения и публикация полных compact primary остаются отдельными проверками.
+
+## Исходное завершение сборки
+
+CMake/compiler return0, оба PE созданы; исходный controlled build **не принят**: execution=descendants_remaining, validity=valid, all_processes_closed=true после штатной очистки backend. Scheduled instance отсутствует, task_state3; исходный terminal build_accepted=false сохранён. [Exact readback/record hashes](ValidationPlans/WindowsNative119OpenArm-20261110/closed-build-readback.json). Это не compile failure и не допуск native/scientific испытаний.
+
+Подготовлен отдельный [closed-build audit](ValidationPlans/WindowsNative119OpenArm-20261110/closed-audit-specification.json): повторная проверка исходного kernel Job/main PID,4078 source files/8repos, зависимостей, tools, полного runtime и обоих target hashes, без выполнения моделей. Original outcome не переписывается. Аудит пока не запускался.
