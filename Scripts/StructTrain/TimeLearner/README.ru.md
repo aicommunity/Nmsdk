@@ -16,6 +16,15 @@ owned units и явные ограничения размера. Коллект�
 проверка восстановления и Git closure остаются отдельными обязательными шагами.
 Windows этой операцией пока не поддерживается.
 
+`stock-cold-characterization prepare --topology both --output JOBS` объявляет
+восемь диагностических проб свежей `NSPNeuronGen`: Classic/Branch × четыре
+закреплённых импульса. `run --source JOBS --runtime-manifest RUNTIME.json
+--controller OWNED_CONTROLLER --output RESULT` использует native `probe` и
+managed leases. Проверяются эффективная stock-физика без LT-мембраны,
+неизменность графа и первичные данные. Это не Train: широкое диагностическое
+окно не становится окном обучения, а невалидное назначение пика сохраняется
+отдельно. Применение на сервере требует отдельной runtime-приёмки.
+
 `stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
 создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
 входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).

@@ -220,6 +220,13 @@ def main(argv: list[str] | None = None) -> int:
     stock.add_argument("--runtime-manifest", type=Path, required=True)
     stock.add_argument("--initial-threshold", type=float, help="explicit native model-spec2 construction value; e.g. 100 for training")
     stock.add_argument("--output", type=Path, required=True)
+    cold = commands.add_parser("stock-cold-characterization", help="characterize fresh stock N4 assigned burst responses; no Train")
+    cold.add_argument("action", choices=("prepare", "run"))
+    cold.add_argument("--source", type=Path)
+    cold.add_argument("--topology", choices=("both", "Classic", "Branch"), default="both")
+    cold.add_argument("--runtime-manifest", type=Path)
+    cold.add_argument("--controller", type=Path)
+    cold.add_argument("--output", type=Path, required=True)
     pair = commands.add_parser("stock-threshold-study", help="paired cold stock Train at explicit thresholds 0.0117 and 100 on one runtime")
     pair.add_argument("action", choices=("prepare", "run", "analyze", "failure-report"))
     pair.add_argument("source", type=Path)
@@ -840,6 +847,23 @@ def main(argv: list[str] | None = None) -> int:
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({"execution": "failed", "validity": "unverified", "reason": str(error),
                               "scientific_verdict": None}), file=sys.stderr)
+            return 2
+    elif args.command == "stock-cold-characterization":
+        from .native_evidence import EvidenceError, require
+        from .stock_cold_characterization import prepare, run
+        try:
+            if args.action == 'prepare':
+                require(args.source is args.runtime_manifest is args.controller is None,
+                        'stock_cold_prepare_has_execution_arguments')
+                result = prepare(args.output, args.topology)
+            else:
+                require(all(v is not None for v in (args.source, args.runtime_manifest, args.controller))
+                        and args.topology == 'both', 'stock_cold_run_requires_explicit_bindings')
+                result = run(args.source, args.runtime_manifest, args.controller, args.output)
+            print(json.dumps(result, allow_nan=False));return 0
+        except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
+            print(json.dumps({'execution': 'failed', 'reason': str(error),
+                'training_started': False, 'scientific_verdict': None}), file=sys.stderr)
             return 2
     elif args.command == "stock-phasea-preflight":
         import tarfile
