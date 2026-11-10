@@ -1,5 +1,12 @@
 # Передача владения архивом: проверка кандидата
 
+Промежуточная проверка SDK355 на M40: оба targets собраны; первые10 actual
+JUnit cases completed/run без failure/error/skip. Новый ownership case прошёл
+за7.165s, Load/XML8 и membrane stages также прошли. [Наблюдение10 случаев](ValidationPlans/NativeArchiveMove18-20261110/first10-readback.json).
+Остальные cases ещё выполняются; полного18-case PASS и вывода об устранении
+C0 OOM пока нет. Исходный raw XML и полные primary будут включены в итоговую
+компактную публикацию, текущий readback её не заменяет.
+
 Обновление: контрольный C0 на старом SDKff42 также завершился kernel OOM при
 4GiB, wall1821.0976375229657s, returncode−9. JUnit отсутствует, assertions
 not_assessed; loaded-runtime capture не успел завершиться. Группа закрыта,
