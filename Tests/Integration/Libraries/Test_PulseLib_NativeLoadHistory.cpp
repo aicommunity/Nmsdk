@@ -133,7 +133,7 @@ void RunLoadHistory(unsigned int frequency, PreviousGraph previous)
             {"after_native_load", afterLoad}, {"after_native_reset", afterReset},
             {"physical_comparison", physical}, {"native_source_xml", QString::fromStdString(xmlBytes)},
             {"time_s", time}, {"feedback", feedback}, {"scientific_verdict", QJsonValue(QJsonValue::Null)}};
-        QFile file(QString::fromLocal8Bit(output) + "/native-load-history.json");
+        QFile file(QString::fromLocal8Bit(output) + "/native-load-history-" + test->name() + ".json");
         ASSERT_TRUE(file.open(QIODevice::WriteOnly));
         const auto bytes = QJsonDocument(observation).toJson(QJsonDocument::Indented);
         ASSERT_EQ(file.write(bytes), bytes.size());
