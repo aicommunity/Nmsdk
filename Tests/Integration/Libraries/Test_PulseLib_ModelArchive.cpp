@@ -482,4 +482,38 @@ TEST(TimeLearnerModelArchive, CalibrationMustMatchActualZoneWithoutInventingAThr
     ASSERT_TRUE(imported); EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),imported)["match"].toBool());
     core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
 }
+
+void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto source = Prepared(frequency, true, true);
+    ASSERT_TRUE(source);
+    const auto before = NmsdkTools::CaptureModelIdentity(source);
+    const auto original = NmsdkTools::ExportModelArchive(source, Metadata());
+    ASSERT_FALSE(original["class_definitions"].toArray().isEmpty());
+    for(int cycle = 0; cycle < 3; ++cycle)
+    {
+        auto imported = NmsdkTools::ImportModelArchive(original, core.storage, core.environment,
+            "native-archive-fixture-v1");
+        ASSERT_TRUE(imported) << "cycle=" << cycle;
+        const auto again = NmsdkTools::ExportModelArchive(imported, Metadata());
+        EXPECT_EQ(again["class_definitions"], original["class_definitions"])
+            << "private image rest state must survive native import and pool reuse; cycle=" << cycle;
+        EXPECT_EQ(again, original) << "cycle=" << cycle;
+        EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(before, imported)["match"].toBool());
+        core.storage->ReturnObject(imported);
+    }
+    EXPECT_EQ(NmsdkTools::CaptureModelIdentity(source), before);
+    core.storage->ReturnObject(source);
+}
+
+TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt2000)
+{
+    RepeatedPrivateImageRestRoundtrip(2000);
+}
+
+TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt20000)
+{
+    RepeatedPrivateImageRestRoundtrip(20000);
+}
 }
