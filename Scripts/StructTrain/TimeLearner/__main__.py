@@ -866,7 +866,8 @@ def main(argv: list[str] | None = None) -> int:
                 require(args.controller is not None and args.case is not None, 'stock_cold7_execution_bindings_required')
                 result = run(args.source, args.runtime_manifest, args.controller, args.case, args.output,
                     preflight_only=args.action == 'preflight')
-            print(json.dumps(result, allow_nan=False));return 0
+            print(json.dumps(result, allow_nan=False))
+            return 0 if args.action == 'prepare' or result['validity'] == 'valid' else 2
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({'execution': 'failed', 'reason': str(error), 'scientific_verdict': None}), file=sys.stderr)
             return 2

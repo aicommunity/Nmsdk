@@ -17,6 +17,7 @@ from .native_characterization import audit_execution
 from .native_evidence import equal, load, number, require
 from .native_pipeline_worker import audit_run_manifest, run_job, validate_job
 from .native_process_policy import policy_for_reservation
+from .model_identity import canonical_model_sha256 as digest
 from .process_runner import verify_runtime
 from .resource_reservations import Reservations
 from .stock_cold_characterization import jobs as characterization_jobs
@@ -143,6 +144,8 @@ def prepare(source, runtime_path, output):
 def run(source, runtime_path, controller, case, output, *, preflight_only=False):
     source = Path(source).resolve(strict=True);output = Path(output).resolve()
     require(not output.exists(), 'stock_cold7_result_exists')
+    require(not source.is_relative_to(output) and not output.is_relative_to(source),
+        'stock_cold7_output_overlaps_preparation')
     index = load(source/'index.json')
     require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] == 1
         and case in index['jobs'], 'stock_cold7_unknown_plan_or_case')
@@ -151,7 +154,16 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
     job_path = source/'jobs'/(case+'.json');job = load(job_path)
     validate_job('train', job)
     require(job['sha256'] == index['jobs'][case], 'stock_cold7_job_changed')
+    expected_initial = load(source/'initial'/(case+'.json'))
+    code = dict(pulse_core=runtime['source_closure']['Libraries/Nmsdk-PulseLib']['head'],
+        rdk_core=runtime['source_closure']['Rdk']['head'], console_driver=runtime['source_closure']['root']['head'])
+    condition = load(source/'conditions'/(case+'.json'))
+    require(condition == _condition(job, expected_initial, code, runtime,
+        algorithm_id='stock-measured-reference-cold7-N4-N1-pilot-v1'), 'stock_cold7_condition_changed')
+    before = {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+        for p in sorted(source.rglob('*.json'))}
     output.mkdir(parents=True)
+    _write(output/'condition.json', condition)
     registry = Reservations(output/'leases.sqlite3', managed_units=True,
         capacity=dict(slots=1, memory_bytes=8*1024**3, disk_bytes=4*1024**3, tasks=512))
     lease = registry.reserve('stock-cold7-'+case, [dict(path=str(output/'runs'), access='write')],
@@ -162,17 +174,21 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
     require(initial['execution'] == 'completed' and initial['validity'] == 'valid', 'stock_cold7_preflight_invalid')
     identity = load(output/'runs/preflight/native/initial-state.json')['identity']
     audit_stock_profile(identity, branch=job['configuration']['model']['branch'])
-    require(identity == load(source/'initial'/(case+'.json')), 'stock_cold7_initial_graph_changed')
+    require(identity == expected_initial, 'stock_cold7_initial_graph_changed')
     if preflight_only:
         require(inspect(output/'runs/preflight/process/contained')['all_processes_closed'],
             'stock_cold7_preflight_group_live')
+        require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+            for p in sorted(source.rglob('*.json'))}, 'stock_cold7_preparation_changed')
         registry.release(lease['token'], note='Declared stock cold7 preflight closed; Train not started.')
         record = dict(kind='timelearner_stock_candidate_window_preflight_result', schema_version=1,
             case=case, execution=initial['execution'], validity=initial['validity'],
-            initial_model_revision=identity['sha256'], training_started=False, scientific_verdict=None)
+            initial_model_revision=identity['sha256'], condition_fingerprint=digest(condition['condition']),
+            training_started=False, scientific_verdict=None)
         _write(output/'index.json', record)
         return record
-    result = run_job('train', job_path, None, runtime_path, output/'runs/train', 1800., process_policy=policy)
+    result = run_job('train', job_path, None, runtime_path, output/'runs/train',
+        job['configuration']['maximum_wall_seconds'], process_policy=policy)
     require(inspect(output/'runs/train/process/contained')['all_processes_closed'], 'stock_cold7_train_group_live')
     package_audit = None;package_path = None
     if result['validity'] == 'valid':
@@ -185,8 +201,11 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
         package_audit = audit_candidate_window_package(load(package_path), summary=summary,
             external_resolver=filesystem_primary_resolver(root))
     registry.release(lease['token'], note='Cold Train native groups closed; execution and convergence remain distinct.')
+    require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+        for p in sorted(source.rglob('*.json'))}, 'stock_cold7_preparation_changed')
     record = dict(kind='timelearner_stock_candidate_window_training_result', schema_version=1,
-        case=case, execution=result['execution'], validity=result['validity'], package_audit=package_audit,
+        case=case, condition_fingerprint=digest(condition['condition']), execution=result['execution'],
+        validity=result['validity'], package_audit=package_audit,
         package_path=None if package_path is None else package_path.relative_to(output).as_posix(),
         classification_assessed=False, scientific_verdict=None)
     _write(output/'index.json', record)

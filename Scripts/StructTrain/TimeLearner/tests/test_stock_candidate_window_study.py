@@ -2,6 +2,7 @@
 import contextlib
 import io
 import os
+import json
 from pathlib import Path
 import unittest
 from unittest.mock import patch
@@ -43,6 +44,20 @@ class StockCandidateWindowStudyTest(unittest.TestCase):
                 self.assertEqual(job['profile_archives'], [])
                 self.assertEqual(c['search']['bounds'][3]['maximum_length'], 1)
                 self.assertEqual(c['search']['bounds'][3]['minimum_resistance'], 86e6)
+            rejected_case = spec['cases'][0]
+            condition_path = prepared/'conditions'/(rejected_case+'.json')
+            original_condition = condition_path.read_bytes()
+            changed = load(condition_path);changed['condition']['amplitude_goal'] = 'not_the_declared_goal'
+            condition_path.write_text(json.dumps(changed), encoding='utf-8')
+            try:
+                bad = output/'rejected-condition'
+                code = main(['stock-candidate-window-study', 'preflight', str(prepared),
+                    '--runtime-manifest', spec['runtime'], '--controller', spec['controller'],
+                    '--case', rejected_case, '--output', str(bad)])
+                self.assertEqual(code, 2, transcript.getvalue())
+                self.assertFalse(bad.exists())
+            finally:
+                condition_path.write_bytes(original_condition)
             for case in spec['cases']:
                 code = main(['stock-candidate-window-study', spec['operation'], str(prepared),
                     '--runtime-manifest', spec['runtime'], '--controller', spec['controller'],
