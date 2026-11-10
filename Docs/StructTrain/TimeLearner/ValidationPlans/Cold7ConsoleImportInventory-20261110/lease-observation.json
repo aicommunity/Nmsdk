@@ -1,0 +1,34 @@
+[
+  {
+    "token": "93c08391-fcc2-4e57-ba62-69854cdeacbd",
+    "job_id": "s10-cold7-console-import-m40-a2",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 1128247,
+      "start_ticks": "340099848",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-cold7-console-import-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-cold7-console-import-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-cold7-console-checks-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-cold7-console-checks-m40-a1"
+      }
+    ],
+    "state": "released",
+    "created": 1794325804.7323153,
+    "deadline": 1794325984.7323153,
+    "updated": 1794325809.0110328,
+    "release_note": "Import/inventory only, no test methods or models; whole child group closed",
+    "heartbeat_expired": true,
+    "owner_status": "missing",
+    "inspection_required": false,
+    "scientific_verdict": null
+  }
+]

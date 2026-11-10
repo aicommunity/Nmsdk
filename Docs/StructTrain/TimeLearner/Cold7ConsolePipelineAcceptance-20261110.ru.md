@@ -1,6 +1,6 @@
 # Сквозная Console-приёмка cold7 — постановка 10.11.2026
 
-Два новых server-only cases проверяют настоящий публичный путь для Classic/Branch, N=2, N0, C-trim/PostTune Off. Это инженерный протокол с исходным CapturedPerInput и явно объявленным SyncTolerance0.2; он не заменяет default0.02/stock N4 или всю матрицу N0/N1/физики. Runtime verdict пока отсутствует: локально проверен только AST, без импорта/запуска тестов и моделей.
+Два новых server-only cases проверяют настоящий публичный путь для Classic/Branch, N=2, N0, C-trim/PostTune Off. Это инженерный протокол с исходным CapturedPerInput и явно объявленным SyncTolerance0.2; он не заменяет default0.02/stock N4 или всю матрицу N0/N1/физики. Физические фазы пока не выполнены. На M40 прошла отдельная import/inventory проверка Python entry point:0.474s/return0/diagnostics clear,675 Scripts blobs, ровно2 collected cases; test methods/models не запускались.
 
 ## Объявленный путь
 
@@ -21,3 +21,9 @@ TIMELEARNER_CANDIDATE_WINDOW_CONSOLE указывает на immutable control d
 Имена cases: CandidateWindowConsolePipelineTest.test_classic_cold7_public_preflight_train_export_measured_calibration_frozen_test и соответствующий branch case в Scripts.StructTrain.TimeLearner.tests.test_candidate_window_console_pipeline. Требуется production owned Python validation wrapper с записью original execution/typed statuses, lease/lock и exact fixture inventory. До запуска проверить свободное место и закрытие producer119. Бинарники/source работающих119 не изменяются.
 
 Приёмка — фактические2 completed cases без skips, original CLI manifests всех новых фаз, model/threshold rollback и сохранённые primary; затем readable temporal reports всех предъявленных patterns/somas с actual input overlays и visual QA. Тестовые PASS не считаются научным успехом stock N4. Все этапы1–12 пока частичны; full119, reader16 и научная матрица остаются самостоятельными gates.
+
+## Серверная проверка entry point
+
+[Полный compact import evidence](https://github.com/aicommunity/Nmsdk/tree/fdc3845a0f81bf971be300f0f14bd00520a55a14/Reports/StructTrain/TimeLearner/Cold7ConsoleImportInventory-20261110):21 originals/312515bytes,53500bytes lossless archive. [Независимый verifier](ValidationPlans/Cold7ConsoleImportInventory-20261110/verification.json) сверил все archive hashes и675 source Git blobs,2 distinct IDs и исходный default preflight=False. [Свежая lease observation](ValidationPlans/Cold7ConsoleImportInventory-20261110/lease-observation.json) подтверждает released/owner missing; whole Python cgroup closed. M40 legacy registry не подтверждает aggregate quantity accounting. Это не2/2 runtime PASS.
+
+Исходный metadata setup A1 остановился до reservation/child из-за compiler=None в transient interpreter manifest; точный traceback сохранён в setup-failure-a1.json. A2 указала фактический Python interpreter в обязательном поле, не запускала компилятор C++ и не меняла тесты/модели. Source actor19078e867bdb7974a7d00cbc9970e0d6843ef38e/package fingerprint50583710b4d7ee8a61b2b56d26b601772aafd1444993291a8f737e663230d5eb. Source Scripts projection не выдаётся за проверку всех SDK gitlinks.
