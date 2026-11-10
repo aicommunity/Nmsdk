@@ -17,7 +17,7 @@ import threading
 import time
 import traceback
 
-from .collector_provenance import _canonical, _frozen, _git_blob, _json
+from .collector_provenance import _canonical, _frozen, _git_blob, _json, frozen_digest
 from .contained_process import inspect
 from .contained_runner import execute
 from .native_evidence import EvidenceError, require
@@ -74,7 +74,8 @@ def validate_request(value):
     require(type(operation) is dict and operation.get('kind') in
             (*_VALIDATION_KINDS, 'duplicate-static-archives', 'native-canonical-preparation'), 'owned_job_operation')
     if operation['kind'] in _VALIDATION_KINDS:
-        require(set(operation) == {'kind', 'source', 'suite', 'fixtures'} and
+        fields = {'kind', 'source', 'suite', 'fixtures'}
+        require(set(operation) in (fields, fields | {'fixture_byte_limits'}) and
                 type(operation['source']) is dict and set(operation['source']) == {'path', 'commit'} and
                 type(operation['fixtures']) is dict and all(type(k) is str and
                 k.startswith(('TIMELEARNER_', 'TL_')) and type(v) is str for k, v in operation['fixtures'].items()),
@@ -82,6 +83,13 @@ def validate_request(value):
         require(type(operation['source']['path']) is str and Path(operation['source']['path']).is_absolute() and
                 _commit(operation['source']['commit']), 'owned_job_validation_source_binding')
         _file_binding(operation['suite'])
+        if 'fixture_byte_limits' in operation:
+            limits = operation['fixture_byte_limits']
+            require(type(limits) is dict and set(limits) ==
+                    {'maximum_file_bytes', 'maximum_total_bytes'} and
+                    all(type(v) is int and 0 < v < 2**63 for v in limits.values()) and
+                    limits['maximum_file_bytes'] <= limits['maximum_total_bytes'],
+                    'owned_job_fixture_byte_limits')
         if operation['kind'] == 'python-controller-validation':
             require(operation['source']['commit'] == value['tool_commit'],
                     'owned_job_controller_validation_requires_same_commit')
@@ -150,17 +158,22 @@ def _ancestry():
     return result
 
 
-def _fixture_snapshot(suite, bindings):
+def _fixture_snapshot(suite, bindings, *, maximum_file_bytes=64*1024**2, maximum_total_bytes=None):
     from .validation import _digest
     require(type(suite.get('fixtures')) is dict and set(suite['fixtures']) == set(bindings),
             'owned_job_fixture_bindings')
-    result = {}
+    result = {};total_bytes = 0
     for name, declaration in suite['fixtures'].items():
         root = _canonical(Path(bindings[name]));pattern = declaration['pattern']
         require(type(pattern) is str and pattern and not Path(pattern).is_absolute() and
                 '..' not in Path(pattern).parts and '\\' not in pattern, 'owned_job_fixture_pattern')
-        records = {p.relative_to(root).as_posix(): _frozen(p, 64*1024**2)[1]
-                   for p in sorted(root.glob(pattern))}
+        records = {}
+        for path in sorted(root.glob(pattern)):
+            record = frozen_digest(path, maximum_file_bytes)
+            total_bytes += record['bytes']
+            require(maximum_total_bytes is None or total_bytes <= maximum_total_bytes,
+                    'owned_job_fixture_total_bytes_exceeded')
+            records[path.relative_to(root).as_posix()] = record
         fingerprint = _digest({p: r['sha256'] for p, r in records.items()})
         require(records and len(records) == declaration['files'] and
                 fingerprint == declaration['fingerprint'], 'owned_job_fixture_content_changed')
@@ -232,7 +245,8 @@ def _worker(request_path):
             emit('validation-source-before.json', snapshot)
             suite = _pinned(operation['suite'])
             require(type(suite.get('expected_test_ids')) is list and suite['expected_test_ids'], 'owned_job_suite_inventory')
-            fixtures = _fixture_snapshot(suite, operation['fixtures']);emit('fixtures-before.json', fixtures)
+            fixture_limits = operation.get('fixture_byte_limits', {})
+            fixtures = _fixture_snapshot(suite, operation['fixtures'], **fixture_limits);emit('fixtures-before.json', fixtures)
             arguments = [sys.executable, '-B', '-m', 'Scripts.StructTrain.TimeLearner.validation',
                          operation['suite']['path'], '--output', str(output/'validation')]
             for name, path in operation['fixtures'].items():
@@ -257,7 +271,7 @@ def _worker(request_path):
                 emit('validation-process.json', {'returncode': returncode, 'arguments': arguments})
             require(_source_snapshot(source['path'], source['commit']) == snapshot, 'owned_job_validation_source_changed')
             emit('validation-source-after.json', snapshot)
-            require(_fixture_snapshot(suite, operation['fixtures']) == fixtures, 'owned_job_fixture_epoch_changed')
+            require(_fixture_snapshot(suite, operation['fixtures'], **fixture_limits) == fixtures, 'owned_job_fixture_epoch_changed')
             emit('fixtures-after.json', fixtures)
             require(_pinned(operation['suite']) == suite, 'owned_job_suite_changed_during_run')
             record = _json(_frozen(output/'validation/result.json', 16*1024**2)[0])
