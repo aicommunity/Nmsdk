@@ -6,12 +6,12 @@
 |---|---|
 | Linux SDKf39 | [Repair17](NativeArchiveRepair17Oom-20261110.ru.md):12 audited PASS/5 unobserved; полный gate не принят. Load/XML8 и два fresh-process waveform transfers прошли |
 | Память C0 | Isolated SDKf39 и pre-repair SDKff42 оба остановлены kernel OOM при4GiB. Это проблема исполнения/неполной проверки, не научная несходимость. [Точные terminal records старого C0 и кандидат исправления](https://github.com/aicommunity/Nmsdk/blob/12743f3ded0cedab43dd63d6e3e4614d2eb2c994/Docs/StructTrain/TimeLearner/NativeArchiveMoveOwnership.ru.md) |
-| Новый кандидат | Pulse165d49d устраняет deep copies при std::move декодированного архива. SDK355c60d: оба targets собраны, первые10 actual JUnit PASS, весь18-case gate ещё выполняется; C0 memory result не принят. [Замороженная декларация](https://github.com/aicommunity/Nmsdk/blob/601ac11df7e0ccf2122175e0ba5094ee5b093dbc/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveMove18-20261110/cohort.json) |
+| Новый кандидат | Pulse165d49d: адресный move/copy ownership PASS. SDK355 на M40 завершён15 audited PASS, C0 kernel OOM4GiB/incomplete, две warm проверки не запущены; full18 там не принят. [Исходные terminal records](https://github.com/aicommunity/Nmsdk/blob/0b1ea04e53c102a079b65319942fd699377f1b9d/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveMove18-20261110/terminal-readback.json) |
 | Windows .14 | SDKf39 closed-build audit принят отдельно от исходного descendants_remaining. Isolated C0 normal1/1 PASS не заменяет Linux ASan и общую матрицу |
 | Данные и графики | [Новый reader/CLI11/11 и два просмотренных1920×960 waveform графика опубликованы](NativeArchiveGatePairReports.ru.md). Это проверка переноса, не классификация; actual reader16 остаётся открытым |
-| Elder | [Удаление подтверждённых Reports copies завершено](ElderTrackedReportCacheRetirement.ru.md), после очистки было около16.1GiB; normal18 на том же SDK355 запущен после совместимой подготовки. Полная compact capture аудита ещё открыта |
+| Elder | [Normal18 завершён18/18 PASS; полный lossless primary опубликован и независимо проверен](ElderNormal18Preservation-20261110.ru.md):713 originals,2.30MB archive, включая модели/трассы/closures. Около16GiB свободно. Полная публикация cleanup inventories — отдельный открытый пункт |
 
-Следующие обязательные результаты: завершённый18-case gate и memory comparison, полные compact primary isolated C0, затем общий native119/actual package reader16/Console cold Train→export→calibration→frozen Test и оставшаяся матрица режимов/физики. Различимые ранние пики разрешены пользователем; истинно слитая принадлежность остаётся неоднозначной. Train использует максимум закреплённого импульса, Test — отклик полного паттерна.
+Следующие обязательные результаты: полный native119/actual package reader16/Console cold Train→export→calibration→frozen Test, memory comparison и полные compact primary isolated C0 и оставшаяся матрица режимов/физики. Различимые ранние пики разрешены пользователем; истинно слитая принадлежность остаётся неоднозначной. Train использует максимум закреплённого импульса, Test — отклик полного паттерна.
 
 ## Исторические срезы и адресные проверки
 

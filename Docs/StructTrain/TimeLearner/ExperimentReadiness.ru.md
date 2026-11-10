@@ -5,10 +5,10 @@
 Последние факты:
 
 - SDKf39 на M40:12 audited PASS/5 unobserved в17-case gate. Load/XML и два свежих процесса waveform transfer проверены, Packages5 не принят из-за OOM. [Опубликованные primary и границы проверки](NativeArchiveRepair17Oom-20261110.ru.md).
-- Isolated C0 старого SDKff42 также завершился kernel OOM при4GiB. Новый SDK355/Pulse165 с исправлением move ownership собран отдельно для18 проверок при прежнем лимите; первые10 JUnit cases прошли. [Исходные terminal records, декларация и необходимые следующие проверки](https://github.com/aicommunity/Nmsdk/blob/12743f3ded0cedab43dd63d6e3e4614d2eb2c994/Docs/StructTrain/TimeLearner/NativeArchiveMoveOwnership.ru.md). Полный18-case PASS ещё не получен.
+- Isolated C0 старого SDKff42 также завершился kernel OOM при4GiB. SDK355/Pulse165 на M40:15 audited PASS, C0 incomplete/OOM4GiB, две warm проверки не запущены; полный18-case gate не принят. [Точные terminal records](https://github.com/aicommunity/Nmsdk/blob/0b1ea04e53c102a079b65319942fd699377f1b9d/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveMove18-20261110/terminal-readback.json). Move/copy ownership имеет отдельный PASS и не объявляется достаточным исправлением памяти.
 - Windows SDKf39: отдельный closed-build audit и normal C0 roundtrip1/1 пройдены. Это ограниченный дополнительный worker, а не замена обязательной Linux-приёмке.
 - [Reader/CLI11/11 и два просмотренных временных графика](NativeArchiveGatePairReports.ru.md) опубликованы. Full actual package reader16, Console cold Train→Test и общая mode/physics matrix остаются открытыми.
-- Elder: [подтверждённые tracked Reports copies удалены](ElderTrackedReportCacheRetirement.ru.md), после очистки было около16.1GiB; normal18 того же SDK355 запущен в отдельном runtime. Полная публикация/проверка cleanup primary ещё открыта.
+- Elder: [тот же SDK355 в normal Release завершил18/18](ElderNormal18Preservation-20261110.ru.md), включая C0 и обе warm проверки; полный primary713 originals/2.30MB опубликован в Git и независимо проверен. Свободно около16GiB. Различие с M40 ASan ещё не объяснено контролируемым A/B. Cleanup inventory publication остаётся отдельным открытым пунктом.
 
 [Прежние оперативные снимки](ExperimentReadinessHistory-through-20261110.ru.md) сохранены отдельно. Их исходные отрицательные результаты и промежуточные статусы не переоцениваются. [Состояние всех этапов и исторические receipts](ImplementationStatus.ru.md).
 
