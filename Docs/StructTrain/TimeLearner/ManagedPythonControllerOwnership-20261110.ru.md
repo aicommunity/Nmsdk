@@ -1,0 +1,9 @@
+# Владелец managed lease при Python-проверке
+
+Реальный cold7 Console2 diagnostic на M40 (actor19078e867bdb7974a7d00cbc9970e0d6843ef38e) завершил2/2 errors до первого model/preflight: managed_controller_not_lease_owner. Обычный python-validation запускает дочерний Python, тогда как managed reservation требует PID/start_ticks основного процесса contained unit. Контроллер был указан правильно, но owner был другим процессом. Исходный отказ сохраняется в SDK-отчёте; это ошибка инфраструктуры постановки, а не результат обучения.
+
+Новый явный operation kind python-controller-validation выполняет production validation.run_suite внутри основного contained worker. Он разрешён только при совпадении validation/tool commit и canonical source directory. Иначе cached imports могли бы незаметно выбрать другую реализацию. Прежний python-validation с отдельным интерпретатором сохраняется. Не меняются строгие PID/start_ticks проверки managed_reservation_graph, native units, source/fixture readback, whole-group closure и release policy. Режим не допускает произвольный код или неявное переключение fallback.
+
+Бюджет controller задаётся отдельно: для Console2 планируется256MiB/32tasks; helper резервирует controller256MiB плюс native child4GiB, managed capacity6GiB. Это не общий агрегатный лимит всех серверных задач. Wall/output guard сохраняются. Допуск или физиологические параметры моделей не изменяются.
+
+Приёмка: штатные проверки request/source boundaries на сервере и полный повтор фактического cold7 Console2. Требуются новый cold Train, complete export, threshold measured calibration/confirmation и frozen Test, actual lease intents/native unit bindings и исходные model/observation артефакты. Source-only изменение ещё не означает PASS. N2/N0 с SyncTolerance0.2 остаётся инженерным сценарием; обязательные N4/0.02 и полная матрица плана не закрываются.

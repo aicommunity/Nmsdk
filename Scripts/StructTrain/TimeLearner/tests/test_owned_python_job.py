@@ -27,6 +27,24 @@ def request():
 
 
 class OwnedPythonJobTest(unittest.TestCase):
+    def test_controller_validation_requires_same_tool_and_validation_commit(self):
+        value = request()
+        value['operation']['kind'] = 'python-controller-validation'
+        with self.assertRaisesRegex(EvidenceError, 'requires_same_commit'):
+            subject.validate_request(value)
+        value['operation']['source']['commit'] = value['tool_commit']
+        self.assertEqual(subject.validate_request(value), value)
+
+    def test_controller_validation_cannot_import_another_source_directory(self):
+        value = request()
+        value['operation']['kind'] = 'python-controller-validation'
+        value['operation']['source']['commit'] = value['tool_commit']
+        with patch.object(subject, 'SOURCE', Path(value['execution_root'])/'other-source'), \
+             patch.object(subject, '_canonical', side_effect=lambda p, **kwargs: p), \
+             patch.object(subject.socket, 'gethostname', return_value='M40'):
+            with self.assertRaisesRegex(EvidenceError, 'requires_same_source'):
+                subject._paths(value)
+
     def test_reviewed_typed_request_is_preserved_without_implicit_fields(self):
         value = request();before = copy.deepcopy(value)
         self.assertEqual(subject.validate_request(value), before)

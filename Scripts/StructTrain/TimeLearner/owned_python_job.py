@@ -27,6 +27,7 @@ from .runtime import file_record, resolved_libraries, runtime_content_identity, 
 
 SOURCE = Path(__file__).resolve().parents[3]
 _BASES = {Path('/home/user/timelearner-refactor'), Path('/media/user/Data/TimeLearnerRefactor')}
+_VALIDATION_KINDS = ('python-validation', 'python-controller-validation')
 
 
 def _write(path, value):
@@ -71,8 +72,8 @@ def validate_request(value):
             and all(type(n) is int and n > 0 for n in value['disk'].values()), 'owned_job_disk_schema')
     operation = value['operation']
     require(type(operation) is dict and operation.get('kind') in
-            ('python-validation', 'duplicate-static-archives', 'native-canonical-preparation'), 'owned_job_operation')
-    if operation['kind'] == 'python-validation':
+            (*_VALIDATION_KINDS, 'duplicate-static-archives', 'native-canonical-preparation'), 'owned_job_operation')
+    if operation['kind'] in _VALIDATION_KINDS:
         require(set(operation) == {'kind', 'source', 'suite', 'fixtures'} and
                 type(operation['source']) is dict and set(operation['source']) == {'path', 'commit'} and
                 type(operation['fixtures']) is dict and all(type(k) is str and
@@ -81,6 +82,9 @@ def validate_request(value):
         require(type(operation['source']['path']) is str and Path(operation['source']['path']).is_absolute() and
                 _commit(operation['source']['commit']), 'owned_job_validation_source_binding')
         _file_binding(operation['suite'])
+        if operation['kind'] == 'python-controller-validation':
+            require(operation['source']['commit'] == value['tool_commit'],
+                    'owned_job_controller_validation_requires_same_commit')
     elif operation['kind']=='native-canonical-preparation':
         require(set(operation)=={'kind','plan'},'owned_job_canonical_schema')
         _file_binding(operation['plan'])
@@ -94,13 +98,16 @@ def _paths(request):
     base = _canonical(Path(request['execution_root']))
     require(socket.gethostname() == request['worker_host'] and SOURCE.is_relative_to(base), 'owned_job_worker_changed')
     operation = request['operation']
-    files = ([operation['suite']] if operation['kind']=='python-validation' else
+    files = ([operation['suite']] if operation['kind'] in _VALIDATION_KINDS else
              [operation['plan']] if operation['kind']=='native-canonical-preparation' else [operation['plan'],operation['review']])
     for row in files:
         require(Path(row['path']).is_relative_to(base), 'owned_job_input_outside_execution_root')
-    if operation['kind'] == 'python-validation':
+    if operation['kind'] in _VALIDATION_KINDS:
         for path in [operation['source']['path'], *operation['fixtures'].values()]:
             require(Path(path).is_absolute() and Path(path).is_relative_to(base), 'owned_job_source_or_fixture_outside_root')
+        if operation['kind'] == 'python-controller-validation':
+            require(_canonical(Path(operation['source']['path'])) == SOURCE,
+                    'owned_job_controller_validation_requires_same_source')
     _canonical(base/'readbacks')
     return base, _canonical(base/'readbacks'/request['job_id'], exists=False)
 
@@ -199,7 +206,7 @@ def _worker(request_path):
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1';sys.dont_write_bytecode = True
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     operation = request['operation'];resources = [{'path': str(base), 'access': 'write'}]
-    if operation['kind'] == 'python-validation':
+    if operation['kind'] in _VALIDATION_KINDS:
         resources = _validation_resources(operation, job)
     elif operation['kind']=='native-canonical-preparation':
         from .native_canonical_preparation import resources as canonical_resources
@@ -220,7 +227,7 @@ def _worker(request_path):
                     errors.append(str(error));return
         thread = threading.Thread(target=heartbeat, daemon=True);thread.start()
         before = _source_snapshot(SOURCE, request['tool_commit']);emit('tool-source-before.json', before)
-        if operation['kind'] == 'python-validation':
+        if operation['kind'] in _VALIDATION_KINDS:
             source = operation['source'];snapshot = _source_snapshot(source['path'], source['commit'])
             emit('validation-source-before.json', snapshot)
             suite = _pinned(operation['suite'])
@@ -233,15 +240,28 @@ def _worker(request_path):
             environment = dict(os.environ)
             for name in ('PYTHONPATH', 'PYTHONHOME'):
                 environment.pop(name, None)
-            result = subprocess.run(arguments, cwd=source['path'], env=environment)
-            emit('validation-process.json', {'returncode': result.returncode, 'arguments': arguments})
+            if operation['kind'] == 'python-controller-validation':
+                # Managed reservations identify the contained main PID as the
+                # lease owner. A child interpreter cannot borrow that identity.
+                # Same-source/commit checks above also prevent cached imports
+                # from silently selecting a different validation implementation.
+                from .validation import run_suite
+                record = run_suite(suite, operation['fixtures'], output/'validation')
+                returncode = 0 if record['assertion_status'] == 'passed' else 1
+                emit('validation-process.json', {'returncode': returncode,
+                    'execution_mode': 'contained_controller_in_process', 'pid': os.getpid(),
+                    'module': 'Scripts.StructTrain.TimeLearner.validation'})
+            else:
+                result = subprocess.run(arguments, cwd=source['path'], env=environment)
+                returncode = result.returncode
+                emit('validation-process.json', {'returncode': returncode, 'arguments': arguments})
             require(_source_snapshot(source['path'], source['commit']) == snapshot, 'owned_job_validation_source_changed')
             emit('validation-source-after.json', snapshot)
             require(_fixture_snapshot(suite, operation['fixtures']) == fixtures, 'owned_job_fixture_epoch_changed')
             emit('fixtures-after.json', fixtures)
             require(_pinned(operation['suite']) == suite, 'owned_job_suite_changed_during_run')
             record = _json(_frozen(output/'validation/result.json', 16*1024**2)[0])
-            require(result.returncode == 0 and record['assertion_status'] == 'passed' and
+            require(returncode == 0 and record['assertion_status'] == 'passed' and
                     record['kind'] == 'timelearner_python_validation_result' and record['schema_version'] == 1 and
                     record['suite_id'] == suite['suite_id'] and record['package_fingerprint'] == suite['package_fingerprint'] and
                     record['expected_test_ids'] == suite['expected_test_ids'] and
