@@ -486,9 +486,16 @@ TEST(TimeLearnerModelArchive, CalibrationMustMatchActualZoneWithoutInventingAThr
 void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto clock = dynamic_pointer_cast<UNet>(core.environment->GetModel());
+    ASSERT_TRUE(clock);
+    clock->SetEnvironment(core.environment);
+    clock->SetGlobalTimeStep(frequency);
     auto source = Prepared(frequency, true, true);
     ASSERT_TRUE(source);
-    const auto before = NmsdkTools::CaptureModelIdentity(source);
+    EXPECT_EQ(source->GetTimeStep(), frequency);
+    const auto before = NmsdkTools::IdentifyModel(source);
     const auto original = NmsdkTools::ExportModelArchive(source, Metadata());
     ASSERT_FALSE(original["class_definitions"].toArray().isEmpty());
     for(int cycle = 0; cycle < 3; ++cycle)
@@ -503,7 +510,7 @@ void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
         EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(before, imported)["match"].toBool());
         core.storage->ReturnObject(imported);
     }
-    EXPECT_EQ(NmsdkTools::CaptureModelIdentity(source), before);
+    EXPECT_EQ(NmsdkTools::IdentifyModel(source), before);
     core.storage->ReturnObject(source);
 }
 
