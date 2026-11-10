@@ -47,10 +47,10 @@ New Train still obtains every authoritative grid/reference itself.
         source_pattern_binding=digest(model['initial_isi']),
         source_profile_binding=digest(config['stimulus_profile']), **GRID_TAGS)
     extremes = [initial]
-    for length, resistance in (('minimum_length', 'maximum_resistance'),
-                               ('maximum_length', 'minimum_resistance')):
-        extremes.append([dict(length=b[length], synapses=1, resistance=b[resistance])
-            for b in config['search']['bounds']])
+    for length in ('minimum_length', 'maximum_length'):
+        for resistance in ('minimum_resistance', 'maximum_resistance'):
+            extremes.append([dict(length=b[length], synapses=1, resistance=b[resistance])
+                for b in config['search']['bounds']])
     for origin in origins:
         seed = dict(input_index=origin['input_index'], first_frame=origin['assigned_peak_frame'],
             last_frame=origin['assigned_plateau_last_frame'], frame_count=origin['sample_count'],
@@ -109,7 +109,10 @@ def prepare(source, runtime_path, output):
             policies.append(dict(delay_frames_per_segment=delay,
                 base_left_guard_frames=40, base_right_guard_frames=40,
                 length_guard_frames=0, synapse_count_guard_frames=0,
-                resistance_change_guard_frames=5, capacitance_change_guard_frames=0,
+                # Keep every declared unchanged/min/max corner above frame1.
+                # This bounds a proposal, not the physical timing uncertainty.
+                resistance_change_guard_frames=min(5, max(0, (vertex-1-40)//4)),
+                capacitance_change_guard_frames=0,
                 hard_first_frame=1, hard_last_frame=3600, maximum_window_frames=160))
             origin.append(dict(input_index=i, actual_onset_frame=onset, assigned_peak_frame=vertex,
                 assigned_plateau_last_frame=_frame(peak['plateau_end'], 2000),

@@ -54,6 +54,10 @@ class StockCandidateWindowStudyTest(unittest.TestCase):
                     item['base_left_guard_frames'] = item['base_right_guard_frames'] = 0
                 with self.assertRaises(EvidenceError):
                     validate_candidate_envelopes(bad_envelope, origins)
+                early_boundary = deepcopy(c)
+                early_boundary['composite_measurement']['candidate_window_policy']['inputs'][0]['resistance_change_guard_frames'] = 5
+                with self.assertRaises(EvidenceError):
+                    validate_candidate_envelopes(early_boundary, origins)
             rejected_case = spec['cases'][0]
             condition_path = prepared/'conditions'/(rejected_case+'.json')
             original_condition = condition_path.read_bytes()
