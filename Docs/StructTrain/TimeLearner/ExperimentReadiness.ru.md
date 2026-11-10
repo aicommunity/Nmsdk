@@ -5,7 +5,7 @@
 Последние факты:
 
 - SDKf39 на M40:12 audited PASS/5 unobserved в17-case gate. Load/XML и два свежих процесса waveform transfer проверены, Packages5 не принят из-за OOM. [Опубликованные primary и границы проверки](NativeArchiveRepair17Oom-20261110.ru.md).
-- Isolated C0 старого SDKff42 также завершился kernel OOM при4GiB. Новый SDK355/Pulse165 с исправлением move ownership собирается отдельно для18 проверок при прежнем лимите. [Исходные terminal records, декларация и необходимые следующие проверки](https://github.com/aicommunity/Nmsdk/blob/38cfeb8e28afb0b8d02bd165f5f109905f47fcd1/Docs/StructTrain/TimeLearner/NativeArchiveMoveOwnership.ru.md). PASS ещё не получен.
+- Isolated C0 старого SDKff42 также завершился kernel OOM при4GiB. Новый SDK355/Pulse165 с исправлением move ownership собран отдельно для18 проверок при прежнем лимите; первые10 JUnit cases прошли. [Исходные terminal records, декларация и необходимые следующие проверки](https://github.com/aicommunity/Nmsdk/blob/12743f3ded0cedab43dd63d6e3e4614d2eb2c994/Docs/StructTrain/TimeLearner/NativeArchiveMoveOwnership.ru.md). Полный18-case PASS ещё не получен.
 - Windows SDKf39: отдельный closed-build audit и normal C0 roundtrip1/1 пройдены. Это ограниченный дополнительный worker, а не замена обязательной Linux-приёмке.
 - [Reader/CLI11/11 и два просмотренных временных графика](NativeArchiveGatePairReports.ru.md) опубликованы. Full actual package reader16, Console cold Train→Test и общая mode/physics matrix остаются открытыми.
 - Elder доступен по SSH, но до очистки имел около2.3GiB свободного диска. Проверяется освобождение только tracked Reports materializations старых SDK, совпадающих с сохранёнными Git blobs. Новая сборка на Elder не началась.

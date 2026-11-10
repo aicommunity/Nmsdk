@@ -45,4 +45,3 @@ A2 использует source root877c1534686d4769142eb690b25799950c1fac81, Pul
 Старые утверждения о запрете нового экспорта относятся к Pulsef7: service protocol5 требовал ещё не реализованный package6. В Pulse674 package6 уже реализован и собран, но это не доказывает roundtrip и Console Train→Test. Возвращать protocol5 в старый package5 ради обхода запрета нельзя.
 
 Версии wire-форматов независимы от ControllerVersion и ModelSpec: в новом кандидате configuration7, service protocol5, measurement archive2, runtime plan2, learned package6, certificate3, summary7 и Console execution4. Совместимость прежних версий проверяется отдельными ветвями чтения; переименование номера не является миграцией данных.
-
