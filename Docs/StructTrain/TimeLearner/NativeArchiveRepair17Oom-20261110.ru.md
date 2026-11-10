@@ -74,6 +74,21 @@ counterpart использует SDKf39 после closed-build audit. Его Jo
 virtual-memory cap и Linux ASan cgroup memory имеют разную семантику;
 успех одного OS/compiler сам по себе не локализует причину другого.
 
+Windows counterpart SDKf39 завершил ровно этот C0 case: **1/1 PASS**,237.448s
+по actual JUnit, process239.783s/return0/valid, all_processes_closed=true,
+cooperative_capture=completed,48 executable module mappings. Это normal
+MSVC runtime с4GiB Job committed-virtual-memory cap, не Linux ASan.
+Исходная Windows build procedure остаётся build_accepted=false из-за
+descendants_at_main_exit при main return0; отдельный closed-build audit
+прошёл, проверив4074 source/17287 dependencies/62 runtime files и оба PE.
+Его результат не переписывает первоначальный build outcome.
+
+[Точный case/process readback](../../../Reports/StructTrain/TimeLearner/s05-repair17-oom-and-report11-root-observation/windows-C0-single-readback.json)
+сохранён. Полный Windows primary ещё требует Git-упаковки и независимой
+проверки; полный package matrix, warm continuation и научная классификация
+этим одним case не принимаются. Pre-fix Linux ASan comparison запущен
+отдельно; до его завершения причинность двух последних исправлений не установлена.
+
 ## Отчёты с временными графиками
 
 [Новый reader/общий CLI](NativeArchiveGatePairReports.ru.md) проверяется отдельно
