@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_windows_native_validation",
+  "schema_version": 1,
+  "source_root": "C:/Projects/TimeLearnerWorker/source-native-load-xml-repair-win-a1",
+  "source_commit": "f39b9ebdcd0e7a64e388d778ca32374a65ae4e0c",
+  "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-native-load-xml-repair-win-a1",
+  "closed_build_audit": "C:/Projects/TimeLearnerWorker/jobs/windows-native-load-xml-repair-closed-build-audit-a1",
+  "output_root": "C:/Projects/TimeLearnerWorker/jobs/windows-native-package6-C0-single-a1",
+  "cmake_cache": "C:/Projects/TimeLearnerWorker/build-native-load-xml-repair-win-a1/CMakeCache.txt",
+  "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c",
+  "audit_records": {
+    "runtime-files.json.gz": "6ae7cc9ed080d5499a4a80844cf21344beeb13b301716e3703e493c900bd8310",
+    "terminal.json": "f5a737774fe3bee2e49fa156a39a69cb0fef16c0a6520bcea71d4051f642b3b6",
+    "audit.json": "58cbf77a45fb549c8733bc97703ee791baf697eee1f4c8e8a0b83938469e9871"
+  },
+  "expected_test_ids": [
+    "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+  ],
+  "maximum_wall_seconds": 7200,
+  "process_limits": {
+    "memory_bytes": 4294967296,
+    "maximum_processes": 32
+  }
+}
