@@ -304,6 +304,13 @@ void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = f
     const auto output = directory + prefix + "import-verification-" + QString::number(frequency) + ".json";
     Write(input,fixture);
     QProcess child; auto environment = QProcessEnvironment::systemEnvironment();
+    // InitEngine reserves <execution-output>.test-events-log exclusively per
+    // process. A native-gate child must not inherit its parent's occupied path.
+    // Keep both child artifacts and its native EventsLog inside this run.
+    const auto childOutput = directory + prefix + "child-" + QString::number(frequency);
+    ASSERT_TRUE(std::filesystem::create_directory(childOutput.toStdString()));
+    environment.insert("TIMELEARNER_EXECUTION_OUTPUT",childOutput);
+    environment.insert("TIMELEARNER_COMPOSITE_OUTPUT",childOutput + "/native-composite");
     environment.insert("TIMELEARNER_ARCHIVE_CHILD_INPUT",input); environment.insert("TIMELEARNER_ARCHIVE_CHILD_OUTPUT",output);
     child.setProcessEnvironment(environment);
     child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));
