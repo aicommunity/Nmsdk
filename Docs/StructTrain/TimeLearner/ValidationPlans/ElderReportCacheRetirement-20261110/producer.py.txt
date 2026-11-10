@@ -15,7 +15,7 @@ source-process-supervisor-a1 source-process-supervisor-a2 source-publisher-a1
 source-publisher-a2 source-artifact-publication-elder-evidence-a1
 source-native-posttune-console-evidence-normal-a2
 source-capacitance-state-normal-b1 source-order-fixed-a1'''.split()
-OUT=BASE/'readbacks/s02-elder-tracked-report-cache-retirement-a1'
+OUT=BASE/'readbacks/s02-elder-tracked-report-cache-retirement-a2'
 def require(value,reason):
     if not value:raise RuntimeError(reason)
 def git(root,*args,data=None):
@@ -39,7 +39,7 @@ def inspect_processes(roots):
         try:
             if proc.stat().st_uid!=os.getuid():continue
             comm=(proc/'comm').read_text().strip()
-            if comm in ('(sd-pam)','sshd','sshd-session'):
+            if comm in ('(sd-pam)','sshd','sshd-session','ssh-agent'):
                 ignored.append({'pid':int(proc.name),'comm':comm,'scope':'PAM/SSH helper; paths not inspected'});continue
             values=[(proc/'cwd').resolve(strict=True),(proc/'exe').resolve(strict=True)]
             for fd in (proc/'fd').iterdir():
