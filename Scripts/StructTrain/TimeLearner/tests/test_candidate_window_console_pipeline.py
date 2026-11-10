@@ -24,6 +24,10 @@ from . import test_managed_native_calibration as calibration_checks
 
 
 class CandidateWindowConsolePipelineTest(unittest.TestCase):
+    # Actual package6 measured-grid auditing exceeded the former 256 MiB
+    # controller cap. This is separate from each native model's 4 GiB cap.
+    controller_reserve_bytes = 2*1024**3
+
     @classmethod
     def setUpClass(cls):
         binding = os.environ.get('TIMELEARNER_CANDIDATE_WINDOW_CONSOLE')
