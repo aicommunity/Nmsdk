@@ -8,6 +8,8 @@
 
 ## Обновление после восстановления связи
 
+**Последний runtime20:** SDK739/Pulse608 завершён3 executed/2PASS/1FAIL/17not-run. Новые image/pool-reuse2000/20000Hz checks прошли, но Classic package roundtrip сохранил прежнюю InputFeedbackSignal matrix-shape ошибку; candidate608 недостаточен. [Полный compact primary20 опубликован и независимо проверен](NativeImageRest20Preservation-20261110.ru.md). Source/runtime unchanged, supervisor/outer/3children закрыты, lease released. [Точный результат и следующий адресный lifecycle контроль](https://github.com/aicommunity/Nmsdk/blob/04b2c5d550ed268dab272011df6069ea1b485174/Docs/StructTrain/TimeLearner/NativeImageRest-20261110.ru.md). Утверждения о работающем20 ниже являются предыдущими срезами. Full119/reader16/Console Train→Test и научный допуск остаются открытыми.
+
 [SDKf22/e685 завершён14/13PASS/1FAIL/4not-run](https://github.com/aicommunity/Nmsdk/blob/8d4c1ab9f598622d263877ab7d383717cc563fa5/Docs/StructTrain/TimeLearner/NativeImageRest-20261110.ru.md): все13 observed-request controls приняты в своём V2/N2 scope, Classic package roundtrip выявил точное InputFeedbackSignal matrix-shape различие storage image. Source/runtime unchanged, outer/14children closed, old lease released; [полный compact archive опубликован и независимо проверен](RestObserved18Preservation-20261110.ru.md). Новый Pulse608 исправляет representation через native private rest/import, SDK739/Bin8cb собирается в другом runtime для20 controls, включая2 новых2000/20000Hz image/pool-reuse проверки. Helper25/25 и canonicalA3 приняты; C++20 пока без verdict. Это не full119, actual reader16, Console Train→Test или новый scientific PASS.
 
 ## Последняя подтверждённая проверка
