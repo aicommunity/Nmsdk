@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseMembrane.h"
-#include "../../../Libraries/Nmsdk-PulseLib/Core/NConstGenerator.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseChannel.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/NPulseGenerator.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelArchive.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelIdentity.h"
@@ -71,14 +71,12 @@ void RunLoadHistory(unsigned int frequency, PreviousGraph previous)
 
     if(previous != PreviousGraph::Fresh)
     {
-        auto oldSource = dynamic_pointer_cast<NConstGenerator>(
-            core.storage->TakeObject("NPNeuronPosCGenerator"));
+        // A membrane accepts channels/synapses, not generator children. Reuse
+        // its native channel as the prior internal source so this control
+        // reaches LoadComponent on a legal component graph.
+        auto oldSource = target->GetComponentL<NPulseChannel>("ExcChannel", true);
         ASSERT_TRUE(oldSource);
-        oldSource->Name = "PreviousFeedback";
-        UEPtr<UContainer> child = oldSource;
-        ASSERT_NE(target->AddComponent(child), ForbiddenId);
-        oldSource->SetEnvironment(core.environment);
-        oldSource->SetGlobalTimeStep(frequency);
+        oldSource->SetName("PreviousFeedback");
         NmsdkTools::InitializeAndResetNative(oldSource);
         MDMatrix<double> oldValue;
         oldValue.Assign(1, 1, .75);
