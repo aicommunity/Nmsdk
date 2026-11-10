@@ -112,7 +112,7 @@ def run(source, runtime_path, controller, output):
         require(inspect(folder/'process/contained')['all_processes_closed'], 'stock_cold_probe_group_live')
         run_audit = audit_run_manifest(folder/'run-manifest.json')
         rows.append(dict(name=name, physical=physical, probe=audit, run=run_audit))
-        _write(output/'progress-'+str(len(rows))+'.json', rows)
+        _write(output/('progress-'+str(len(rows))+'.json'), rows)
     require(before == {p.name: frozen_digest(p, 1024**2) for p in source.iterdir() if p.is_file()},
         'stock_cold_probe_sources_changed')
     registry.release(lease['token'], note='All declared cold diagnostic probe units closed; no Train/science claim.')
