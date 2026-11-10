@@ -211,6 +211,30 @@ void Artifact(const std::string& name,const QByteArray& data)
         ASSERT_TRUE(file.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_EQ(file.write(data),data.size());
     }
 }
+QProcessEnvironment LearnedStateChildEnvironment(const std::string& name,const QString& temporaryRoot)
+{
+    auto environment=QProcessEnvironment::systemEnvironment();
+    QDir root(temporaryRoot);
+    if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        root=QDir(QString::fromLocal8Bit(output));
+        if(!root.cdUp())throw std::runtime_error("learned_child_output_parent_missing");
+    }
+    // Keep child artifacts outside the parent's flat native trace directory,
+    // but inside the owned run. ConsoleLikeInit reserves its EventsLog using
+    // this process-specific output; inheriting the parent's path is invalid.
+    if(!root.exists("native-child-processes") && !root.mkdir("native-child-processes"))
+        throw std::runtime_error("learned_child_output_root_creation_failed");
+    if(!root.cd("native-child-processes"))throw std::runtime_error("learned_child_output_root_missing");
+    const auto leaf=QString::fromStdString(name);
+    if(leaf.isEmpty() || leaf.contains('/') || leaf.contains('\\') || !root.mkdir(leaf))
+        throw std::runtime_error("learned_child_output_must_be_fresh");
+    const auto output=root.absoluteFilePath(leaf);
+    environment.insert("TIMELEARNER_EXECUTION_OUTPUT",output);
+    environment.insert("TIMELEARNER_COMPOSITE_OUTPUT",output+"/native-composite");
+    return environment;
+}
+
 template<class Learner> struct EditingRig {
     bool branch=std::is_base_of<NNeuronTimeLearnerBranch,Learner>::value;
     unsigned frequency;int normalization;
@@ -3777,7 +3801,7 @@ template<class Learner> void LearnedBoundary(int normalization,double sync=.02,u
     const auto path=directory.path()+"/learned.json",output=directory.path()+"/imported.json";
     QFile serialized(path);ASSERT_TRUE(serialized.open(QIODevice::WriteOnly|QIODevice::NewOnly));
     ASSERT_GT(serialized.write(QJsonDocument(package).toJson()),0);serialized.close();
-    QProcess child;auto childEnv=QProcessEnvironment::systemEnvironment();
+    QProcess child;auto childEnv=LearnedStateChildEnvironment(rig.name,directory.path());
     childEnv.insert("TIMELEARNER_LEARNED_IMPORT",path);childEnv.insert("TIMELEARNER_LEARNED_OUTPUT",output);
     childEnv.insert("TIMELEARNER_LEARNED_START_US",QString::number(frozenStart));child.setProcessEnvironment(childEnv);
     child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});
@@ -4567,7 +4591,7 @@ template<class Learner> void StoppedBoundary(StoppedCase scenario,const std::str
     Artifact(rig.name+"_frozen_evidence.json",QJsonDocument(EncodeNativeProbeEvidence(*frozen)).toJson());
     QTemporaryDir directory;ASSERT_TRUE(directory.isValid());const auto path=directory.path()+"/stopped.json",output=directory.path()+"/fresh.json";
     QFile serialized(path);ASSERT_TRUE(serialized.open(QIODevice::WriteOnly|QIODevice::NewOnly));ASSERT_GT(serialized.write(QJsonDocument(package).toJson()),0);serialized.close();
-    QProcess child;auto childEnv=QProcessEnvironment::systemEnvironment();childEnv.insert("TIMELEARNER_LEARNED_IMPORT",path);
+    QProcess child;auto childEnv=LearnedStateChildEnvironment(rig.name,directory.path());childEnv.insert("TIMELEARNER_LEARNED_IMPORT",path);
     childEnv.insert("TIMELEARNER_LEARNED_OUTPUT",output);childEnv.insert("TIMELEARNER_LEARNED_START_US",QString::number(frozenStart));
     child.setProcessEnvironment(childEnv);child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));
     child.setArguments({"--gtest_filter=NativeLearnedState.FreshProcessImport"});child.start();ASSERT_TRUE(child.waitForStarted(30000));ASSERT_TRUE(child.waitForFinished(120000));
