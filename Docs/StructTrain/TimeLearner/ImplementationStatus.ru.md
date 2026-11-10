@@ -9,7 +9,7 @@
 | Новый кандидат | Pulse165d49d устраняет deep copies при std::move декодированного архива. SDK355c60d: оба targets собраны, первые10 actual JUnit PASS, весь18-case gate ещё выполняется; C0 memory result не принят. [Замороженная декларация](https://github.com/aicommunity/Nmsdk/blob/601ac11df7e0ccf2122175e0ba5094ee5b093dbc/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveMove18-20261110/cohort.json) |
 | Windows .14 | SDKf39 closed-build audit принят отдельно от исходного descendants_remaining. Isolated C0 normal1/1 PASS не заменяет Linux ASan и общую матрицу |
 | Данные и графики | [Новый reader/CLI11/11 и два просмотренных1920×960 waveform графика опубликованы](NativeArchiveGatePairReports.ru.md). Это проверка переноса, не классификация; actual reader16 остаётся открытым |
-| Elder | SSH доступен; перед очисткой около2.3GiB свободного диска. Идёт проверка tracked Reports caches старых SDK против Git. Новая сборка на Elder пока не запущена |
+| Elder | [Удаление подтверждённых Reports copies завершено](ElderTrackedReportCacheRetirement.ru.md), после очистки было около16.1GiB; normal18 на том же SDK355 запущен после совместимой подготовки. Полная compact capture аудита ещё открыта |
 
 Следующие обязательные результаты: завершённый18-case gate и memory comparison, полные compact primary isolated C0, затем общий native119/actual package reader16/Console cold Train→export→calibration→frozen Test и оставшаяся матрица режимов/физики. Различимые ранние пики разрешены пользователем; истинно слитая принадлежность остаётся неоднозначной. Train использует максимум закреплённого импульса, Test — отклик полного паттерна.
 

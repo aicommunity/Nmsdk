@@ -8,7 +8,7 @@
 - Isolated C0 старого SDKff42 также завершился kernel OOM при4GiB. Новый SDK355/Pulse165 с исправлением move ownership собран отдельно для18 проверок при прежнем лимите; первые10 JUnit cases прошли. [Исходные terminal records, декларация и необходимые следующие проверки](https://github.com/aicommunity/Nmsdk/blob/12743f3ded0cedab43dd63d6e3e4614d2eb2c994/Docs/StructTrain/TimeLearner/NativeArchiveMoveOwnership.ru.md). Полный18-case PASS ещё не получен.
 - Windows SDKf39: отдельный closed-build audit и normal C0 roundtrip1/1 пройдены. Это ограниченный дополнительный worker, а не замена обязательной Linux-приёмке.
 - [Reader/CLI11/11 и два просмотренных временных графика](NativeArchiveGatePairReports.ru.md) опубликованы. Full actual package reader16, Console cold Train→Test и общая mode/physics matrix остаются открытыми.
-- Elder доступен по SSH, но до очистки имел около2.3GiB свободного диска. Проверяется освобождение только tracked Reports materializations старых SDK, совпадающих с сохранёнными Git blobs. Новая сборка на Elder не началась.
+- Elder: [подтверждённые tracked Reports copies удалены](ElderTrackedReportCacheRetirement.ru.md), после очистки было около16.1GiB; normal18 того же SDK355 запущен в отдельном runtime. Полная публикация/проверка cleanup primary ещё открыта.
 
 [Прежние оперативные снимки](ExperimentReadinessHistory-through-20261110.ru.md) сохранены отдельно. Их исходные отрицательные результаты и промежуточные статусы не переоцениваются. [Состояние всех этапов и исторические receipts](ImplementationStatus.ru.md).
 
