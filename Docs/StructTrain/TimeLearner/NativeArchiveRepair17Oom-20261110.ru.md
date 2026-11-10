@@ -6,9 +6,12 @@ M40 fresh build Root `f39b9ebdcd0e7a64e388d778ca32374a65ae4e0c`, Pulse
 Итог исходной декларации17: **12 audited completed / 12 PASS / 5 unobserved**.
 Полный17-case gate **не пройден**.
 
-Принятые здесь наблюдения ещё требуют полного сохранения и независимой
-приёмки первичных данных; текущие оригиналы находятся на M40 в
-`readbacks/s05-native-load-xml-repair17-m40-a1` и соседнем controller.
+Полное сохранение выполнено в evidence219ceb0c439ef91ce410cf564f9a1dc9f2f63364:
+414 originals,1796972 bytes compressed primary, два выбранных1920×960 PNG.
+Проверены все hashes,4074 compiled-source и652/650 reader/runner blobs.
+См. [рисунки, независимую сверку и ограничения capture](NativeArchiveGatePairReports.ru.md).
+Оригиналы на M40 `readbacks/s05-native-load-xml-repair17-m40-a1` и соседний
+controller сохранены. Приёмка полного17 этим не заменяется.
 
 | Часть | Фактический результат |
 |---|---|
@@ -52,4 +55,5 @@ Console Train→Test и научная матрица остаются откр�
 Подготовлено отдельное owned Python environment с copied interpreter и
 существующими matplotlib3.9.4/Pillow13.0.0 из неизменённого plot-venv-a1;
 повтор использует тот же reader source и те же25 fixture hashes.
-Первый отказ сохранён, новый PASS пока не заявлен.
+Первый отказ сохранён; повтор A2 прошёл11/11 и создал44 читаемых вида.
+Два выбранных рисунка просмотрены и опубликованы; полный набор остаётся кэшем.
