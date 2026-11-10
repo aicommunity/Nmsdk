@@ -1,0 +1,55 @@
+{
+  "validation": {
+    "kind": "timelearner_python_validation_result",
+    "schema_version": 1,
+    "suite_id": "package6-native16-on-accepted-SDK22-native119",
+    "package_fingerprint": "50583710b4d7ee8a61b2b56d26b601772aafd1444993291a8f737e663230d5eb",
+    "execution": "completed",
+    "assertion_status": "passed",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_actual_legacy_package5_full_primary_regression_remains_selected",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_actual_summary7_binds_source_groups_model_and_residuals",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_actual_summary7_cannot_be_relabelled_or_change_source_outcome",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_asymmetric_actual_C0_uses_immutable_origin_and_effective_children",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_branch_reverse_order_actual_model_and_cert3",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_classic_complete_actual_model_original_targets_and_cert3",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_coherent_public_rewrite_still_cannot_attest_original_completion",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_declared_external_resolver_cannot_fall_back_to_embedded_primary",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_default_sync_actual_finals_remain_nonexact_and_public_null",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_imported_warm_keeps_original_family_with_current_runtime",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_raw_partials_keep_primary_without_promoting_targets",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_reference_prefix_is_not_allN_capture",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_rehashed_certificate_recipe_tamper_does_not_replace_actual_measurement",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_started_zero_group_attempt_binds_current_physics",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_stop_after_exact_final_is_math_exact_but_not_completed",
+      "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_package6_native.CandidateWindowPackage6NativeTest.test_stopped_actual_growth_is_not_reconstructed_from_initial_template"
+    ],
+    "executed_tests": 16,
+    "failures": [],
+    "errors": [],
+    "skipped": [],
+    "fixtures": {
+      "TIMELEARNER_NATIVE_PACKAGE6_FIXTURES": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-dataset-ready-normal-a1/native-package6-29/native-composite",
+        "files": 407,
+        "fingerprint": "7c37dd9b174863dc5b531b9bde36a37fafe2b088ee8f2f00e6d2cebaa5d20549"
+      },
+      "TIMELEARNER_NATIVE_PACKAGE6_PRIMARY_CSV": {
+        "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-dataset-ready-normal-a1/native-package6-29/native-composite",
+        "files": 294,
+        "fingerprint": "0102df9b3db879e0593c352a9bf8e427cb79f21560d4c8009a93b4f6dc173fbf"
+      }
+    },
+    "scientific_verdict": null
+  },
+  "transport": {
+    "pid": 19960,
+    "status": "closed",
+    "stdout": "STARTED {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"76b75764acfe43264da55295d16c86fff6933db5f839a96a828afa570436a293\", \"unit\": \"timelearner-781a0510-5477-414f-806e-4691c7843869.service\", \"invocation_id\": \"cf1b86bb8e904792a43b7a1db00bedcb\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-781a0510-5477-414f-806e-4691c7843869.service\", \"initial_main_pid\": 2150134, \"initial_start_ticks\": \"342185602\", \"sha256\": \"607e792447e5c86485f83d1cde07fbedcbbc54daa329ab60802d5e815d8a4c27\"}\r\n{\"controller\": {\"kind\": \"timelearner_process_result\", \"schema_version\": 2, \"execution\": \"completed\", \"reason\": \"exit_zero_and_whole_group_closed\", \"returncode\": 0, \"wall_seconds\": 51.85768870776519, \"model_time\": null, \"runtime_provenance\": \"loaded_files_captured\", \"mapping_error\": null, \"runtime_fingerprint\": \"22d65024aecff878c22549e8272747a4437436d85128a8700571ff5ab230a1c0\", \"ownership_scope\": \"bound_cgroup\", \"all_processes_closed\": true, \"scientific_verdict\": null, \"operational_diagnostics\": {\"kind\": \"timelearner_operational_diagnostics\", \"schema_version\": 1, \"policy\": \"owned-streams-v1\", \"status\": \"clear\", \"error_records\": 0, \"warning_records\": 0, \"unclassified_stderr_chunks\": 0, \"reasons\": [], \"examples\": [], \"streams\": [{\"path\": \"stdout.log\", \"bytes\": 3765, \"sha256\": \"0e98c55a0118f57eb11ea68e0e85d559e390dd25fd68a3f8dfda438d031d05bb\"}, {\"path\": \"stderr.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}], \"contained_streams_match\": true, \"scientific_verdict\": null}}, \"worker_terminal\": {\"operation_passed\": true, \"operation\": \"python-validation\", \"heartbeat_errors\": [], \"lease_release\": \"controller only after whole cgroup closure\", \"selected_validation_scope_requires_source_review\": true, \"scientific_verdict\": null}, \"scientific_verdict\": null}\r\n",
+    "stderr": "",
+    "exitCode": 0,
+    "signal": null
+  },
+  "scope": "reader16 on accepted SDK22 native119 subject",
+  "scientific_verdict": null
+}
