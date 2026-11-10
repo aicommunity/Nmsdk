@@ -52,7 +52,7 @@ def prepare(source, runtime_path, output):
             probe = audit_execution(folder/'native')
             require(probe['observation_valid'] and probe['observation_complete'],
                 'stock_cold7_characterization_peak_invalid')
-            recorded_runtime = load(folder/'runtime.json')
+            recorded_runtime = load(folder/'process/runtime.json')
             require(recorded_runtime['source_closure'] == runtime['source_closure'] and
                 recorded_runtime['executable']['sha256'] == runtime['executable']['sha256'],
                 'stock_cold7_characterization_runtime_changed')
