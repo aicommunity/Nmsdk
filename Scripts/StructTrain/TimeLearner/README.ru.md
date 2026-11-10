@@ -16,6 +16,14 @@ owned units и явные ограничения размера. Коллект�
 проверка восстановления и Git closure остаются отдельными обязательными шагами.
 Windows этой операцией пока не поддерживается.
 
+`stock-candidate-window-study prepare COLD_CHARACTERIZATION --runtime-manifest RUNTIME
+--output JOBS` создаёт два stock N4/N1 cold7 задания по проверенным начальным
+наблюдениям. `preflight JOBS` и `train JOBS` требуют явные `--case`, `--controller`,
+`--runtime-manifest`, `--output`. Новое обучение само захватывает per-input references;
+характеристика задаёт только proposal windows. Исходный SyncTolerance=.02 сохранён.
+Линейный прогноз задержки является гипотезой; его нельзя считать измерением или
+доказательством сходимости. Runtime-приёмка нового pilot остаётся отдельной.
+
 `stock-cold-characterization prepare --topology both --output JOBS` объявляет
 восемь диагностических проб свежей `NSPNeuronGen`: Classic/Branch × четыре
 закреплённых импульса. `run --source JOBS --runtime-manifest RUNTIME.json
