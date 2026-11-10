@@ -1,6 +1,6 @@
 # Native119: корректная постановка проверки принадлежности эталона
 
-Исходный SDK8ec на M40 завершил65/119:64 PASS,1 FAIL,54 not-run;38 leaf gates. Full119 не принят. [Исходный terminal/progress](ValidationPlans/Native119ForeignReference-20261110/m40-terminal-readback.json), [JUnit17](ValidationPlans/Native119ForeignReference-20261110/m40-portable-proof6-native.xml), [наблюдение kernel closure](ValidationPlans/Native119ForeignReference-20261110/m40-owner-closure.json). Полный compact primary этого задания ещё не опубликован; указанные metadata не заменяют его.
+Исходный SDK8ec на каждом из M40 и Elder завершил65/119:64 PASS,1 FAIL,54 not-run;38 leaf gates. Full119 не принят. [Исходный terminal/progress](ValidationPlans/Native119ForeignReference-20261110/m40-terminal-readback.json), [JUnit17](ValidationPlans/Native119ForeignReference-20261110/m40-portable-proof6-native.xml), [наблюдение kernel closure](ValidationPlans/Native119ForeignReference-20261110/m40-owner-closure.json). Полный compact primary этого задания ещё не опубликован; указанные metadata не заменяют его.
 
 Отказ: NativeCandidateWindowPortableMath/RehashedForeignReferenceProofCannotJoinActualFinal. Полный17-case leaf отработал663.205s,16PASS/1FAIL. Проверка устанавливает referenceProofId=foreign-original-reference и ожидает, что standalone decode пройдёт; действующий wire-контракт требует64 lowercase hexadecimal chars, поэтому возникает candidate_window_hash_id_format до проверки принадлежности. Это воспроизведённая ошибка постановки теста; production не менялся.
 
@@ -8,4 +8,4 @@
 
 Изменён только Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp. Lifecycle, scheduler, физика, цель CapturedPerInput, допуски, данные и критерии сходимости не менялись. Кандидат пока не скомпилирован и не проверен runtime. Следующий шаг — серверная проверка полной TU и адресный production native gate, затем полный119/reader16/Console.
 
-Elder на последнем наблюдении продолжал тот же portable-proof6-17; он не остановлен по результату M40. Windows .14 отдельно собирает неизменный SDK8ec; её runtime не обновляется на лету. Научных выводов из данного fixture отказа не делаем.
+Elder самостоятельно завершился с тем же единственным fixture отказом; [terminal/progress](ValidationPlans/Native119ForeignReference-20261110/elder-terminal-readback.json), [JUnit17](ValidationPlans/Native119ForeignReference-20261110/elder-portable-proof6-native.xml), [kernel closures](ValidationPlans/Native119ForeignReference-20261110/elder-owner-closure.json). На каждом сервере outer и38 leaf process groups закрыты; record_errors пусты. Windows .14 отдельно собирает неизменный SDK8ec; её runtime не обновляется на лету. Научных выводов из данного fixture отказа не делаем.
