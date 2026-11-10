@@ -202,7 +202,7 @@ TEST(NativeClassImageReplay, ActualMembraneCopyAndLoadStages)
             {"external_source", object->InputFeedbackSignal.UsesExternalDataSource()},
             {"source_count", int(object->InputFeedbackSignal.GetDataSources().size())},
             {"native_xml", QString::fromStdString(bytes)},
-            {"physical_identity", NmsdkTools::IdentifyModel(object)}});
+            {"physical_identity", NmsdkTools::IdentifyModel(static_pointer_cast<UContainer>(object))}});
     };
     // Observe the shared prototype without resetting or editing it. All later
     // operations use caller-owned native instances; none normalize input sizes.
