@@ -6,6 +6,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelIdentity.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeOperationChecks.h"
 #include "../Support/ConsoleLikeInit.h"
+#include "../../../Rdk/Core/Engine/UComponentFactory.h"
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
@@ -158,6 +159,95 @@ TEST(NativeLoadHistory, DetachedChildAt2000) { RunLoadHistory(2000, PreviousGrap
 TEST(NativeLoadHistory, FreshAt20000) { RunLoadHistory(20000, PreviousGraph::Fresh); }
 TEST(NativeLoadHistory, ConnectedChildAt20000) { RunLoadHistory(20000, PreviousGraph::ConnectedChild); }
 TEST(NativeLoadHistory, DetachedChildAt20000) { RunLoadHistory(20000, PreviousGraph::DetachedChild); }
+
+TEST(NativeClassImageReplay, ActualMembraneCopyAndLoadStages)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();
+    core.environment->SetUseIndTimeStepFlag(false);
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto clock = dynamic_pointer_cast<UNet>(core.environment->GetModel());
+    ASSERT_TRUE(clock);
+    clock->SetGlobalTimeStep(2000);
+    QFile fixture(QFileInfo(QString::fromLocal8Bit(__FILE__)).dir().absoluteFilePath(
+        "../Data/NativeWindowPackage6Classic/learned-state.json.qz"));
+    ASSERT_TRUE(fixture.open(QIODevice::ReadOnly));
+    const auto raw = qUncompress(fixture.readAll());
+    ASSERT_EQ(QCryptographicHash::hash(raw, QCryptographicHash::Sha256).toHex(),
+        QByteArray("1c8d50628e7eea87c2bad230428526000802ec73e9627bd5d7d7f414bb69e05c"));
+    QJsonParseError error;
+    const auto package = QJsonDocument::fromJson(raw, &error).object();
+    ASSERT_EQ(error.error, QJsonParseError::NoError);
+    const auto archive = package["neuron"].toObject();
+    NmsdkTools::PrepareModelArchive(archive, core.storage, core.environment,
+        archive["metadata"].toObject()["implementation_id"].toString());
+    const auto definition = archive["class_definitions"].toArray().at(13).toObject();
+    const auto name = definition["name"].toString();
+    ASSERT_EQ(name, QString("NativeCandidateWindowPackage_ClassicActualPhysicalRoundtrip_Body_Membrane"));
+    auto factory = dynamic_pointer_cast<UVirtualMethodFactory>(
+        core.storage->GetComponentFactory(name.toStdString()));
+    ASSERT_TRUE(factory);
+    auto prototype = dynamic_pointer_cast<NPulseMembrane>(factory->GetComponent());
+    ASSERT_TRUE(prototype);
+    QJsonArray stages;
+    const auto record = [&](const char* phase, const UEPtr<NPulseMembrane>& object) {
+        USerStorageXML xml;
+        EXPECT_TRUE(xml.Create("NativeImageStage"));
+        EXPECT_TRUE(object->SaveComponent(&xml, true, ptPubParameter | ptPubState | pgSystem));
+        xml.SelectRoot();
+        std::string bytes;
+        EXPECT_TRUE(xml.Save(bytes));
+        stages.append(QJsonObject{{"phase", phase}, {"input", InputValue(object)},
+            {"connected", object->InputFeedbackSignal.IsConnected()},
+            {"external_source", object->InputFeedbackSignal.UsesExternalDataSource()},
+            {"source_count", int(object->InputFeedbackSignal.GetDataSources().size())},
+            {"native_xml", QString::fromStdString(bytes)},
+            {"physical_identity", NmsdkTools::IdentifyModel(object)}});
+    };
+    // Observe the shared prototype without resetting or editing it. All later
+    // operations use caller-owned native instances; none normalize input sizes.
+    record("registered_prototype", prototype);
+    auto copy = dynamic_pointer_cast<NPulseMembrane>(prototype->Alloc(core.storage, false));
+    ASSERT_TRUE(copy);
+    ASSERT_NE(copy.Get(), prototype.Get());
+    copy->SetEnvironment(core.environment);
+    record("after_native_alloc_false", copy);
+    NmsdkTools::InitializeAndResetNative(copy);
+    record("after_native_alloc_init_reset", copy);
+    auto loaded = dynamic_pointer_cast<NPulseMembrane>(
+        core.storage->TakeObject(definition["base_class"].toString().toStdString()));
+    ASSERT_TRUE(loaded);
+    loaded->SetEnvironment(core.environment);
+    record("target_before_native_load", loaded);
+    loaded->UnInit();
+    const auto snapshot = definition["snapshot"].toObject();
+    USerStorageXML xml;
+    ASSERT_TRUE(xml.Load(snapshot["native_xml"].toString().toStdString(), "TimeLearnerNativeGraph"));
+    ASSERT_TRUE(xml.SelectNode(snapshot["component_name"].toString().toStdString()));
+    TProjectLoadDiagnostics diagnostics;
+    ASSERT_TRUE(loaded->LoadComponent(&xml, true, &diagnostics));
+    ASSERT_TRUE(diagnostics.errors.empty());
+    ASSERT_TRUE(diagnostics.warnings.empty());
+    record("after_saved_definition_native_load", loaded);
+    NmsdkTools::InitializeAndResetNative(loaded);
+    record("after_saved_definition_init_reset", loaded);
+    const auto physical = NmsdkTools::VerifyModelIdentity(snapshot["identity"].toObject(), loaded);
+    EXPECT_TRUE(physical["valid"].toBool());
+    EXPECT_TRUE(physical["match"].toBool());
+    if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        QFile file(QString::fromLocal8Bit(output) + "/actual-membrane-copy-load-stages.json");
+        ASSERT_TRUE(file.open(QIODevice::WriteOnly));
+        const auto bytes = QJsonDocument(QJsonObject{{"kind", "actual_membrane_copy_load_stages"},
+            {"schema_version", 1}, {"source_definition", definition}, {"stages", stages},
+            {"physical_comparison", physical}, {"diagnostic_only", true},
+            {"scientific_verdict", QJsonValue(QJsonValue::Null)}}).toJson(QJsonDocument::Indented);
+        ASSERT_EQ(file.write(bytes), bytes.size());
+    }
+    copy->Free();
+    loaded->Free();
+    core.environment->DestroyModel();
+}
 
 TEST(NativeClassImageReplay, ClassicActualSavedModelAcrossNativeGraphRelease)
 {
