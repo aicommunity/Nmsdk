@@ -1,0 +1,117 @@
+{
+  "kind": "native119_live_kernel_observation",
+  "worker": "M40",
+  "canonical": {
+    "controller": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 83.7802368607372,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "cab3ddb9760cb1ad4313ae47183d964775230314a04ed855b0b13b5e7069c886",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "clear",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "worker_terminal": {
+      "operation_passed": true,
+      "operation": "native-canonical-preparation",
+      "heartbeat_errors": [],
+      "lease_release": "controller only after whole cgroup closure",
+      "selected_validation_scope_requires_source_review": true,
+      "scientific_verdict": null
+    },
+    "scientific_verdict": null
+  },
+  "launch": {
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-normal-a1-controller",
+    "supervisor": {
+      "pid": 1049443,
+      "start_ticks": "339920576",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "scientific_verdict": null
+  },
+  "status": {
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-normal-a1-controller",
+    "supervisor_identity": {
+      "pid": 1049443,
+      "start_ticks": "339920576",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000
+    },
+    "supervisor_identity_known": true,
+    "supervisor_live": true,
+    "outer": {
+      "execution": "running",
+      "all_processes_closed": false,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "011752b97f4f3087ac6d6d5d50c4ee6afe76705a1b259d9a88bc35f076875a4f",
+        "unit": "timelearner-8d9a053b-4154-4868-99ae-2cc451ef2f23.service",
+        "invocation_id": "e279b6d26ef74661ad28cb7321a57e6d",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d9a053b-4154-4868-99ae-2cc451ef2f23.service",
+        "initial_main_pid": 1055243,
+        "initial_start_ticks": "339921991",
+        "sha256": "7c519181d5b1fbb4efadca919fb6fb912e3c25ff1cda72f24c7971dea3117981"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "1055243",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d9a053b-4154-4868-99ae-2cc451ef2f23.service",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 8d9a053b-4154-4868-99ae-2cc451ef2f23",
+        "LoadState": "loaded",
+        "ActiveState": "active",
+        "SubState": "running",
+        "InvocationID": "e279b6d26ef74661ad28cb7321a57e6d"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "unbound_outer_intent": false,
+    "result": null,
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}
