@@ -454,6 +454,65 @@ TEST(TimeLearnerModelArchive, RejectsMalformedArchiveBeforeRegistration)
     core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
 }
 
+void RejectInconsistentExistingImagePhysics(const QString& imageName)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto model = Prepared(2000);
+    const auto identity = NmsdkTools::IdentifyModel(model);
+    auto archive = NmsdkTools::ExportModelArchive(model,Metadata());
+    auto definitions = archive["class_definitions"].toArray();
+    bool changed = false;
+    for(int i = 0; i < definitions.size(); ++i)
+    {
+        auto definition = definitions[i].toObject();
+        if(definition["name"].toString() != imageName) continue;
+        ASSERT_TRUE(core.storage->CheckClass(imageName.toStdString()));
+        auto snapshot = definition["snapshot"].toObject();
+        USerStorageXML xml;
+        ASSERT_TRUE(xml.Load(snapshot["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph"));
+        ASSERT_TRUE(xml.SelectNode(snapshot["component_name"].toString().toStdString()));
+        ASSERT_TRUE(xml.SelectNode("Parameters"));
+        ASSERT_TRUE(xml.SelectNode("Capacity"));
+        bool valid = false;
+        const double capacity = QString::fromStdString(xml.GetNodeText()).toDouble(&valid);
+        ASSERT_TRUE(valid && std::isfinite(capacity) && capacity > 0.);
+        ASSERT_TRUE(xml.SetNodeText(QString::number(2. * capacity,'g',17).toStdString()));
+        xml.SelectRoot();
+        std::string bytes;
+        ASSERT_TRUE(xml.Save(bytes));
+        snapshot["native_xml"] = QString::fromStdString(bytes);
+        snapshot["native_xml_sha256"] = QString::fromLatin1(QCryptographicHash::hash(
+            QByteArray::fromStdString(bytes),QCryptographicHash::Sha256).toHex());
+        // Keep the declared identity unchanged: all file hashes are valid, but
+        // the native XML describes different physics. Existing registration
+        // must not make this contradictory document acceptable.
+        definition["snapshot"] = snapshot;
+        definitions[i] = definition;
+        changed = true;
+        break;
+    }
+    ASSERT_TRUE(changed) << imageName.toStdString();
+    archive["class_definitions"] = definitions;
+    Seal(archive);
+    const auto classes = core.storage->GetNumClasses();
+    if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        std::filesystem::create_directories(output);
+        Write(QString::fromLocal8Bit(output) + "/contradictory-image-" + imageName + ".json",archive);
+    }
+    ExpectImportFailure(archive,"archive_model_mismatch");
+    EXPECT_EQ(core.storage->GetNumClasses(),classes);
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(identity,model)["match"].toBool());
+    model->BreakLinks();
+    model->Free();
+}
+
+TEST(TimeLearnerModelArchive, RejectsContradictoryNativeImageXmlWithExistingClass)
+{ RejectInconsistentExistingImagePhysics("NPChannel"); }
+
+TEST(TimeLearnerModelArchive, RejectsContradictoryDerivedImageXmlWithExistingClass)
+{ RejectInconsistentExistingImagePhysics("NPExcChannelBio"); }
+
 TEST(TimeLearnerModelArchive, RejectsLostGraphInformationEvenWithUpdatedFileHashes)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests(); auto model = Prepared(2000);

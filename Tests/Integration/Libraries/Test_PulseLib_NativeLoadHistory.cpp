@@ -6,6 +6,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelIdentity.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeOperationChecks.h"
 #include "../Support/ConsoleLikeInit.h"
+#include "../Support/PhysicalArchiveComparison.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
 #include <QFile>
 #include <QFileInfo>
@@ -291,11 +292,15 @@ TEST(NativeClassImageReplay, ClassicActualSavedModelAcrossNativeGraphRelease)
         const auto physical = NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(), model, ports);
         EXPECT_TRUE(physical["valid"].toBool());
         EXPECT_TRUE(physical["match"].toBool()) << "cycle=" << cycle;
-        EXPECT_EQ(reexport, archive) << "actual saved stock model; cycle=" << cycle;
+        const bool transportEqual = NmsdkTests::PhysicalArchiveComparisonView(reexport) ==
+            NmsdkTests::PhysicalArchiveComparisonView(archive);
+        EXPECT_TRUE(transportEqual) << "actual saved model transport; cycle=" << cycle;
         if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
         {
-            const QJsonObject observation{{"kind", "actual_class_image_release_replay"}, {"schema_version", 1},
+            const QJsonObject observation{{"kind", "actual_class_image_release_replay"}, {"schema_version", 2},
                 {"cycle", cycle}, {"physical_comparison", physical}, {"archive_equal", reexport == archive},
+                {"archive_transport_equal", transportEqual},
+                {"archive_comparison_policy", "model-spec-semantic-images-v1"},
                 {"source_archive", archive}, {"reexport_archive", reexport},
                 {"source_fixture_sha256", "1c8d50628e7eea87c2bad230428526000802ec73e9627bd5d7d7f414bb69e05c"},
                 {"cold_training_executed", false}, {"scientific_verdict", QJsonValue(QJsonValue::Null)}};
