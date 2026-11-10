@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/home/user/timelearner-refactor",
+  "source": {
+    "path": "/home/user/timelearner-refactor/source-dataset-ready-fixture-elder-a1",
+    "commit": "22e9714bbe66d29a661bb6829e1c992f24fc1362",
+    "namespace": {
+      "path": "/home/user/timelearner-refactor/requests/native119-dataset-ready-normal-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderNative119DatasetReady-20261110/namespace.json",
+      "sha256": "9320269096f6352ff18e82d2220de1ca97aab5f9f0f2327526a48cde1f6daf7f"
+    }
+  },
+  "cohort": {
+    "path": "/home/user/timelearner-refactor/requests/native119-dataset-ready-normal-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderNative119DatasetReady-20261110/cohort.json",
+    "sha256": "64b97b7dbff45e3d09fb3be33e1c3840eef1db321cc857188a15e43361e8dc8f"
+  },
+  "native_job": {
+    "path": "/home/user/timelearner-refactor/requests/native119-dataset-ready-normal-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderNative119DatasetReady-20261110/native-job.json",
+    "sha256": "16acbe463cd4edc8a117af70fdb2383fb98f67894eb675354be7dba7a50b78d3"
+  },
+  "prior_bindings": [],
+  "external_output": "/home/user/timelearner-refactor/readbacks/s07-native119-dataset-ready-canonical-normal-a1",
+  "native_tool": {
+    "path": "/home/user/timelearner-refactor/source-native-image-rest-runner-a1",
+    "commit": "1386206616d82952166ece926e814cd2c5aafbb9"
+  },
+  "require_fresh_build": true
+}
