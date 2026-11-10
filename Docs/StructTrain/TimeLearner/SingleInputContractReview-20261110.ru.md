@@ -1,0 +1,31 @@
+# Один физический вход N=1: контракт и оставшаяся проверка — 10.11.2026
+
+Это source review согласованного SDK355c60df066bdc8da09bd6d7872b47f6e71c0494 / Pulse165d49da7e65cd6ac59bca2812ce52884ddd50c2. N=1 означает число физических входов/закреплённых импульсов; это не нормализация N1 (TipResistance), применимая и к многовходовой модели. Runtime-приёмка полного одновходового cold Train→export/import этим документом не объявляется.
+
+## Что действительно есть в исходниках
+
+- NativeModelBuilder принимает непустое множество inputs, включая1; Classic строит один dendrite/soma, Branch один cable/attachment. NativeTrainingService и FinalVerification также допускают непустой набор. Опорный вход N−1 при N=1 равен0: нет отдельного неопорного входа для R/Ns tuning, но захват эталона и свежая финальная проба остаются обязательными.
+- Test_PulseLib_NativeExecution.cpp содержит NativeLearnerDimensions/ClassicSingleInput2000, BranchSingleInput2000, ClassicSingleInput20000, BranchSingleInput20000. ExecuteProbeThroughLearner выполняет реальные native probes на storage-компонентах, записывает stimulus/soma traces, затем строит FinalVerificationSession и проверяет измеренные residuals/certificate. Это реальные физические пробы, но не полный автоматический cold Train learner ControllerVersion2 и не перенос завершённой модели в новый процесс.
+- CandidateWindowCold7/SingleInputUsesOldScalarPathAndExplicitlyRefusesNewMethod проверяет отказ объявленного candidate-window метода при N=1 и отдельно принимает явную scalar/protocol3 конфигурацию после удаления composite/candidate declarations. Это metadata/codec test, не доказательство runtime.
+- BoundedTraining/SingleInputStillRequiresRealFinalProbe проверяет общий алгоритмический контракт. Он не заменяет storage/Console integration.
+
+[Точные исходники SDK](https://github.com/aicommunity/Nmsdk/tree/355c60df066bdc8da09bd6d7872b47f6e71c0494/Tests/Integration/Libraries), [исходники PulseLib](https://github.com/aicommunity/Nmsdk-PulseLib/tree/165d49da7e65cd6ac59bca2812ce52884ddd50c2/Core/TimeLearner).
+
+## Почему нельзя просто заменить >=2 на >=1
+
+Ограничение проходит через ConfiguredNativeTraining, CandidateWindowContractValidation, NativeCandidateWindowBindings, CompositeTrainingMeasurement, MatchedOmissionValidation, NativeMatchedOmissionGroup и MatchedOmissionEvidenceJson. Есть соответствующие Python ограничения в composite_configuration, candidate_window_contract, matched_omission_evidence и matched_omission_portable. DeclaredWindowBasinAssignment также имеет явный отказ для одного входа и собственный negative test.
+
+Matched group содержит N+2 настоящих предъявления: full-before, omission каждого импульса, full-after. При N=1 omission даёт пустой mask. ValidStimulusSubset и PlanStimulusSubset сейчас требуют непустые ordinals; источнику не задан штатный empty-stimulus протокол. Маска не может быть заменена выключением источника/изменением амплитуды или мутацией profile без нового явного контракта и witness. Глобальный максимум одиночного отклика не должен автоматически притворяться доказательством нового multi-input necessity метода.
+
+Расширение до N=1 нельзя ограничить арифметикой окон или числовыми checks. Нужны либо отдельно объявленный single-input measurement adapter поверх уже существующего scalar/native пути, либо полноценный no-stimulus control с native lifecycle, effective profile, raw traces и roundtrip codecs. Выбор должен быть явным в конфигурации и артефактах. Тихий fallback с cold7/protocol5 на protocol3 недопустим.
+
+## Адресная приёмка N=1 для полного плана
+
+1. Classic/Branch ×2000/20000Hz ×N0/TipResistance: fresh native cold configuration с одним входом. Исходный uniform storage profile создаётся штатно, Build/Init/Reset выполняются в штатном порядке. Effective readback должен показать ровно объявленный граф, dataset и source schedule; отсутствие второй ветви нельзя вывести только из parent InputCount.
+2. Явно заявленный single-input protocol: действительный пик закреплённого импульса, захват CapturedPerInput и отдельная свежая финальная проба. Сохранить amplitude absolute1e-5/relative0/minimum1e-6 и SyncTolerance/default0.02. Self-anchor timing residual0 не означает право не измерять пик; missing/nonfinite/clipped остаются ошибками наблюдения.
+3. CalculateMode0 автоматически завершает управление;1 допускает внешнее управление. External stop не получает Exact. Reset learner и reset физической пробы проверяются отдельно. На штатном scheduler не добавлять вложенный Calculate и не проверять lifecycle bool как признак сходимости.
+4. Экспорт результата и импорт в новый native owner/процесс: storage physics, индивидуальные Rs/C, graph/links, частота, source target, threshold/calibration provenance и solo/recognition state. Проверить семантический fingerprint и импульсный отклик, включая сохранённый rest-state.
+5. Порог и классификация оцениваются отдельно. Даже Exact одного входа не доказывает разделимость target/foil; frozen Test должен сохранять модель, фиксировать все окна и реальные spikes.
+6. Для candidate-window/omission объявления при N=1 пока требуется явный capability refusal до дорогого Train. Такой отказ — ожидаемый negative control, а не выполнение positive N=1 требования всей архитектуры. Если метод расширяется, обновить весь C++/Python/serialization слой и existing rejection tests в отдельном математически обоснованном этапе.
+
+Текущий full119 cohort не содержит все перечисленные одновходовые end-to-end cases. Он не закрывает эту часть полной матрицы. Существующие single-input probes и source-review уменьшают неопределённость, но не дают статуса «N=1 полностью принято». Проверки выполняются только на серверах; текущие immutable сборки119 не меняются.
