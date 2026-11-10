@@ -1,0 +1,91 @@
+{
+  "kind": "closed_native_acceptance_preservation_receipt",
+  "schema_version": 3,
+  "collection_status": "completed",
+  "original_outcome": {
+    "planned": 7,
+    "executed": 1,
+    "passed": 0,
+    "failed_ids": [
+      "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+    ],
+    "not_completed_ids": [
+      "NativeLoadHistory/FreshAt2000",
+      "NativeLoadHistory/ConnectedChildAt2000",
+      "NativeLoadHistory/DetachedChildAt2000",
+      "NativeLoadHistory/FreshAt20000",
+      "NativeLoadHistory/ConnectedChildAt20000",
+      "NativeLoadHistory/DetachedChildAt20000"
+    ]
+  },
+  "manifest_sha256": "60eefd5099d42bfa6674e3b1a94ba807f9c2dc4e94b4e2f8588eca80f7cdd81d",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "ea75f2e2e1b0904d188bc443140ef695ccd7fb56ee8779908182e86dee75dd98",
+    "packed/bundle.json": "7c143b5d2b5d183c8768d4fae75aace8a43ed08774135e3c64dd214032ce00d4",
+    "capture-proof.json": "ac5e60663af422da41c315c648d5fecb8f9108f9509970be4f70ba5d49c1ae6f"
+  },
+  "released_collection_lease": {
+    "token": "d4214587-5596-40a1-947b-2b28fb6905ba",
+    "job_id": "s04-native-replay7-preservation-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 153984,
+      "start_ticks": "337690490",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-native-load-replay7-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/build-native-load-replay7-m40-a2"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-replay7-m40-a1/Reports/StructTrain/TimeLearner/s04-native-replay7-preservation-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-replay7-m40-a1/Reports/StructTrain/TimeLearner/s04-native-replay7-preservation-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-replay7-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-replay7-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-replay7-m40-a2-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-load-replay7-m40-a2-controller"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-replay7-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeReplay7Collection-20261110",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-replay7-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeReplay7Collection-20261110"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-load-replay7-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-load-replay7-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-load-history-replay-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-load-history-replay-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3"
+      }
+    ],
+    "state": "released",
+    "created": 1794301714.029577,
+    "deadline": 1794301844.052657,
+    "updated": 1794301725.360506,
+    "release_note": "Closed native metadata preserved or collection failed; original outcome unchanged.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "collector_external_cgroup_attested": false,
+  "scientific_verdict": null
+}
