@@ -6,6 +6,10 @@
 
 Адресный Classic roundtrip Source22ac/Pulsef1 завершён1FAIL/223.045s, без OOM. [Непосредственная причина и исходный JUnit](https://github.com/aicommunity/Nmsdk/blob/d539de8cee0af7050eb39185f3b149b08c9318ff/Docs/StructTrain/TimeLearner/NativeRestStateArchive-20261110.ru.md): восемь различий касаются XML динамики и зависимых hashes; остальные поля, включая физическую identity, совпали. Actual XML нейрона/DatasetMatrix точно равен их initial native rest XML: import штатно сбрасывает динамику, тогда как export сохранял её остатки. Новый Pulse c8d7322 сериализует native rest на приватной копии со строгой проверкой всей физики и сохранности живого состояния; это пока candidate. SDK65d/Pulsec8 собрана: первый Classic case завершился1FAIL за222.882s без OOM, остальные4 не запускались. Сохранность полного live XML и совпадение neuron/DatasetMatrix rest XML подтверждены; осталось различие XML одного storage image и производных hashes. Строгое package equality не ослабляется. Outer и child закрыты, originals на M40 сохранены; полный compact archive этого run ещё не опубликован. Исторические пакеты не переписываются, сравнение не ослабляется.
 
+## Обновление после восстановления связи
+
+[SDKf22/e685 завершён14/13PASS/1FAIL/4not-run](https://github.com/aicommunity/Nmsdk/blob/8d4c1ab9f598622d263877ab7d383717cc563fa5/Docs/StructTrain/TimeLearner/NativeImageRest-20261110.ru.md): все13 observed-request controls приняты в своём V2/N2 scope, Classic package roundtrip выявил точное InputFeedbackSignal matrix-shape различие storage image. Source/runtime unchanged, outer/14children closed, old lease released; полный compact archive сохраняется отдельно. Новый Pulse608 исправляет representation через native private rest/import, SDK739/Bin8cb собирается в другом runtime для20 controls, включая2 новых2000/20000Hz image/pool-reuse проверки. Helper25/25 и canonicalA3 приняты; C++20 пока без verdict. Это не full119, actual reader16, Console Train→Test или новый scientific PASS.
+
 ## Последняя подтверждённая проверка
 
 | Срез | Факт и границы |
