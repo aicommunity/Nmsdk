@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 from .loaded_readout_reports import render, snapshot
 from .model_identity import canonical_model_sha256
 from .native_evidence import EvidenceError, number, parse_json_bytes, require
+from .native_gate import audit_junit
 from .plotting import plotting_runtime
 
 
@@ -205,11 +206,58 @@ def _audit_run(root):
 def audit_run(root):return checked(_audit_run, root)
 
 
+def _audit_gate_pair(root):
+    """Two explicit telemetry controls; never evidence for the legacy16 corpus."""
+    records = []
+    def read(name):
+        raw, record = snapshot(root, name);records.append(record);return parse_json_bytes(raw)
+    result = read("result.json")
+    process = read("process/result.json")
+    expected = ["NativeArchiveTelemetry/At2000", "NativeArchiveTelemetry/At20000"]
+    require(result.get("kind") == "timelearner_native_test_gate_result" and
+            type(result.get("schema_version")) is int and result["schema_version"] == 1 and
+            result.get("execution") == "completed" and result.get("validity") == "valid" and
+            result.get("assertion_status") == "passed" and
+            result.get("reason") == "complete_declared_test_inventory" and
+            result.get("scientific_verdict", "missing") is None,
+            "archive_transfer_native_gate_not_passed")
+    require(process.get("kind") == "timelearner_process_result" and
+            type(process.get("schema_version")) is int and process["schema_version"] == 2 and
+            process.get("execution") == "completed" and type(process.get("returncode")) is int and
+            process["returncode"] == 0 and process.get("ownership_scope") == "bound_cgroup" and
+            process.get("all_processes_closed") is True and
+            process.get("runtime_provenance") == "loaded_files_captured" and
+            process.get("mapping_error", "missing") is None and
+            process.get("scientific_verdict", "missing") is None,
+            "archive_transfer_native_process_not_closed_or_unproven")
+    # Recompute from the actual XML. A copied green result.json is insufficient.
+    _, junit_record = snapshot(root, "native.xml");records.append(junit_record)
+    inventory = audit_junit(root/"native.xml", expected)
+    require(inventory["assertion_status"] == "passed" and result.get("inventory") == inventory,
+            "archive_transfer_native_gate_inventory_changed")
+    data = {f"telemetry-matrix-precise-boundary-f{frequency}":
+            read_case(root/"native", "telemetry-matrix-precise-boundary", True, frequency, True, True)
+            for frequency in (2000, 20000)}
+    return data, {"kind": "native_archive_transfer_report", "schema_version": 2,
+                  "input_format": "native-gate-pair", "native_validation": result,
+                  "execution_validation": process,
+                  "gate_primary": records, "expected_test_ids": expected,
+                  "cases": {k: v["summary"] for k, v in data.items()},
+                  "case_soma_pairs": len(data), "legacy16_admitted": False,
+                  "whole_parent_cohort_admitted": False,
+                  "scientific_verdict": None, "training_certificate": None}
+
+
+def audit_gate_pair(root):return checked(_audit_gate_pair, root)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, required=True);parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--input-format", choices=("legacy16", "native-gate-pair"), default="legacy16")
     parser.add_argument("--plots", action="store_true");args = parser.parse_args()
-    data, report = audit_run(args.input);runtime = plotting_runtime() if args.plots else None
+    data, report = (audit_run if args.input_format == "legacy16" else audit_gate_pair)(args.input)
+    runtime = plotting_runtime() if args.plots else None
     args.output.mkdir(parents=True, exist_ok=False)
     if args.plots:
         for name, value in data.items():
