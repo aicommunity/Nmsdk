@@ -3007,10 +3007,16 @@ template<class Owner> void WindowManualOpenArmAfterFailedBeginIsRejected() {
     FinalVerificationSession final(refs,*f.attempt->CandidateWindowReferences(),config);const auto first=final.NextRequest();ASSERT_TRUE(first);
     f.Run(*first,CompositeMeasurementPurpose::Final,[&](const auto& p){final.ArmCandidateWindow(p);},{},30.,3600.);
     ASSERT_TRUE(f.attempt->Measurement());final.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());ASSERT_EQ(final.AcceptedInputs(),1u);
-    SaveCandidateWindowGroup(f,"open-arm-prior-accepted");const auto next=final.NextRequest();ASSERT_TRUE(next);ASSERT_EQ(next->inputIndex,1u);
-    const auto base=f.Revision();const auto life=f.owner->ObserveLifecycle();bool reached=false;
+    SaveCandidateWindowGroup(f,"open-arm-prior-accepted");const auto next=final.NextRequest();ASSERT_TRUE(next);
+    ASSERT_EQ(first->inputIndex,NativeCompositeFixture<Owner>::branch?1u:0u);
+    ASSERT_EQ(next->inputIndex,NativeCompositeFixture<Owner>::branch?0u:1u);
+    const auto base=f.Revision();const auto life=f.owner->ObserveLifecycle();bool reached=false;std::string preparedRevision;
     f.Run(*next,CompositeMeasurementPurpose::Final,[&](const auto& prepared){
-        reached=true;ASSERT_TRUE(f.attempt->Running());ASSERT_EQ(f.Revision(),base); // Branch input1 is the actual baseline route.
+        reached=true;ASSERT_TRUE(f.attempt->Running());preparedRevision=f.Revision();ASSERT_FALSE(preparedRevision.empty());
+        // Branch final verification keeps its native reverse order: the
+        // second input is0 and its temporary solo route may differ from the
+        // baseline. Failed Begin must restore that route and revoke this arm.
+        if constexpr(!NativeCompositeFixture<Owner>::branch)ASSERT_EQ(preparedRevision,base);
         f.owner->BeginNativeTraining(foreign,true);ASSERT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Finished);
         ASSERT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::InvalidModel);ASSERT_TRUE(life.IsCurrent());
         ASSERT_TRUE(f.owner->IsNeedToTrain.GetData());ASSERT_EQ(f.Revision(),base);ASSERT_TRUE(f.owner->OwnedNativeCapacitanceState().isEmpty());
@@ -3020,6 +3026,10 @@ template<class Owner> void WindowManualOpenArmAfterFailedBeginIsRejected() {
     },{},30.,3600.);
     ASSERT_TRUE(reached);SaveCandidateWindowGroup(f,"open-arm-after-control-takeover");
     const auto name=NativeCompositeFixture<Owner>::branch?"branch-window-control-lifetime/open-arm":"classic-window-control-lifetime/open-arm";
+    SavePortableObject(name,"open-arm-routing-context.json",{{"kind","native_manual_open_arm_routing_context"},{"schema_version",1},
+        {"first_accepted_input_index",double(first->inputIndex)},{"open_input_index",double(next->inputIndex)},
+        {"baseline_model_revision",QString::fromStdString(base)},{"prepared_model_revision",QString::fromStdString(preparedRevision)},
+        {"after_failed_begin_model_revision",QString::fromStdString(f.Revision())},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
     QJsonArray reasons;for(const auto& r:final.Rejected())reasons.append(QString::fromStdString(r.reason));
     SavePortableObject(name,"actual-open-arm.json",{{"kind","native_manual_open_arm_after_failed_begin"},{"schema_version",1},
         {"actual_final_status",VerificationStatusName(final.Status())},{"accepted_inputs_before",1},{"actual_accepted_inputs_after",double(final.AcceptedInputs())},
