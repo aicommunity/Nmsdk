@@ -179,6 +179,7 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageProfiles.cpp
     Test_PulseLib_ModelIdentity.cpp
     Test_PulseLib_ModelArchive.cpp
+    Test_PulseLib_NativeLoadHistory.cpp
     Test_PulseLib_ControllerCompatibility.cpp
     Test_PulseLib_LegacyController.cpp
     Test_PulseLib_ProbeObservation.cpp
