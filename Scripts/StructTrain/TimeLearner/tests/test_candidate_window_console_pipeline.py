@@ -12,6 +12,7 @@ import math
 import os
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 from ..candidate_window_package_evidence import audit_candidate_window_package
 from ..composite_primary import filesystem_primary_resolver
@@ -96,6 +97,14 @@ class CandidateWindowConsolePipelineTest(unittest.TestCase):
                 training_normalization='N0', physical_inputs=2, scientific_verdict=None), indent=2)+'\n', encoding='utf-8')
 
     def cold_pipeline_and_calibration(self, name):
+        # The Python controller has no Qt loader environment of its own. Public
+        # native operations must run with the immutable Console declaration,
+        # including offscreen Qt, rather than silently changing that manifest.
+        runtime = load(Path(self.spec['runtime']))
+        with patch.dict(os.environ, runtime['loader_environment']):
+            self._cold_pipeline_and_calibration(name)
+
+    def _cold_pipeline_and_calibration(self, name):
         # These maintained helpers execute public CLI commands, audit the real
         # manifests and native graph, check whole cgroup closure and match
         # durable reservation intents. They never fabricate simulator outputs.
