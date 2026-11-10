@@ -1,5 +1,25 @@
 # Передача владения архивом: проверка кандидата
 
+**Итог SDK355/M40:**15 audited completed PASS; C0 остановлен kernel OOM при
+4GiB за1798.0285016261041s, returncode−9, без итогового JUnit; две warm проверки
+не запущены. Полный18-case gate не принят. [Точные terminal/closure records](ValidationPlans/NativeArchiveMove18-20261110/terminal-readback.json)
+сохраняют исходный отрицательный результат. Исправление move прошло свой
+адресный тест, но недостаточно для всего memory-сценария.
+
+До OOM source Train и export завершились:39 files/88467238 bytes, summary7
+finished/exact,0 edits/4 probes,8184 sampled frames/301080 raw primary bytes.
+Model revision0185754b40a2fc4dd306b8a60ed9c3869f22bf96672a25a251c45119833b4155
+совпадает с прежним C0. Это engineering SyncTolerance0.2, не stock default0.02
+и не классификация. Import/reexport/comparison ещё не приняты; между ними нет
+достаточных phase markers, поэтому точное место OOM пока не установлено.
+
+[Измерение размеров Source package](ValidationPlans/NativeArchiveMove18-20261110/source-size-diagnostic.json)
+показывает33.49MB pretty JSON, measurement_archive10.83MB в compact UTF8 и
+103876 JSON containers. Большие повторяемые поля — C0/storage-image witnesses;
+raw measurements составляют около301KB. Это область дальнейшего профилирования,
+а не доказанная единственная причина OOM. Полные primary ещё требуют Git capture.
+Дальнейшие прежние записи «выполняется» ниже являются промежуточными снимками.
+
 Промежуточная проверка SDK355 на M40: оба targets собраны; первые10 actual
 JUnit cases completed/run без failure/error/skip. Новый ownership case прошёл
 за7.165s, Load/XML8 и membrane stages также прошли. [Наблюдение10 случаев](ValidationPlans/NativeArchiveMove18-20261110/first10-readback.json).

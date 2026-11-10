@@ -32,6 +32,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 #include <QFile>
+#include <QSaveFile>
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
@@ -39,10 +40,14 @@
 #include <functional>
 #include <limits>
 #include <map>
+#include <optional>
 #include <set>
 #include <stdexcept>
 #include <type_traits>
 #include <thread>
+#if defined(__linux__)
+#include <sys/resource.h>
+#endif
 
 namespace {
 using namespace RDK;using namespace NMSDK;using namespace NMSDK::TimeLearner;
@@ -3304,6 +3309,33 @@ TEST(NativeCandidateWindowPortableMath,RehashedForeignReferenceProofCannotJoinAc
 namespace {
 constexpr const char* CandidateWindowPackageImplementation="native-candidate-window-package6-fixture-v1";
 enum class WindowPackageSource { Complete,AsymmetricC0,GrownStopped,RawPartial,ReferencePrefix,DefaultSync,StopAfterFinal };
+
+// Bounded diagnostics only: no graph capture, hashing, Reset or Calculate.
+// Each phase has one atomic file; the training heartbeat replaces one file.
+void WindowPackagePhase(const char* phase,WindowPackageSource kind,
+    const NativeTrainingService* service=nullptr,std::optional<double> modelTime=std::nullopt,
+    const QJsonObject& details={}) {
+    const auto output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");if(!output)return;
+    const auto* test=::testing::UnitTest::GetInstance()->current_test_info();Require(test,"package_phase_test_context");
+    const auto directory=QString::fromLocal8Bit(output)+"/package6-phases/"+
+        QString::fromLatin1(test->test_suite_name())+"."+QString::fromLatin1(test->name())+"/source-"+QString::number(int(kind));
+    Require(QDir().mkpath(directory),"package_phase_directory");
+    QJsonObject document{{"kind","native_package6_phase"},{"schema_version",1},{"phase",QString::fromLatin1(phase)},
+        {"source_variant",int(kind)},{"wall_steady_seconds",Wall()},
+        {"model_time",modelTime && std::isfinite(*modelTime)?QJsonValue(*modelTime):QJsonValue(QJsonValue::Null)},
+        {"details",details},{"process_self_peak_rss_bytes",QJsonValue(QJsonValue::Null)},
+        {"scientific_verdict",QJsonValue(QJsonValue::Null)}};
+#if defined(__linux__)
+    rusage usage{};if(getrusage(RUSAGE_SELF,&usage)==0)document["process_self_peak_rss_bytes"]=double(usage.ru_maxrss)*1024.;
+#endif
+    if(service)document["training"]=QJsonObject{{"state_code",int(service->State())},
+        {"outcome_code",int(service->Outcome())},{"certificate_present",bool(service->Certificate())},
+        {"groups",QString::number(qulonglong(service->CompositeGroups()))},
+        {"native_probes",QString::number(qulonglong(service->CompositeNativeProbes()))},
+        {"sampled_frames",QString::number(qulonglong(service->CompositeSampledFrames()))}};
+    QSaveFile file(directory+"/"+QString::fromLatin1(phase)+".json");Require(file.open(QIODevice::WriteOnly),"package_phase_open");
+    const auto bytes=QJsonDocument(document).toJson();Require(file.write(bytes)==bytes.size() && file.commit(),"package_phase_commit");
+}
 template<class Owner> std::map<WindowPackageSource,QJsonObject>& WindowPackageSummaries() {
     static std::map<WindowPackageSource,QJsonObject> values;return values;
 }
@@ -3353,8 +3385,11 @@ std::string LivePackageComponentXml(const UEPtr<UNet>& component) {
     xml.SelectRoot();Require(xml.Save(bytes),"package_export_live_component_xml");return bytes;
 }
 template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource kind=WindowPackageSource::Complete) {
-    static std::map<WindowPackageSource,QJsonObject> packages;const auto found=packages.find(kind);if(found!=packages.end())return found->second;
-    NativeCompositeFixture<Owner> f(2000,false,64,false,true);ConfigureWindowPackageCold(f,kind);
+    static std::map<WindowPackageSource,QJsonObject> packages;const auto found=packages.find(kind);
+    if(found!=packages.end()){WindowPackagePhase("source-cache-hit",kind);return found->second;}
+    WindowPackagePhase("source-fixture-begin",kind);
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);WindowPackagePhase("source-fixture-created",kind);
+    ConfigureWindowPackageCold(f,kind);WindowPackagePhase("source-configured",kind,&f.owner->NativeTrainingController(),f.Time());
     bool stopped=false;std::size_t samples=0;ConfiguredNativeEvidenceSinks sinks;
     if(kind==WindowPackageSource::RawPartial)sinks.onSample=[&](const auto&){++samples;};
     if(kind==WindowPackageSource::ReferencePrefix || kind==WindowPackageSource::StopAfterFinal)sinks.onComposite=[&](const auto& r){
@@ -3363,10 +3398,13 @@ template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource
             r.logical.inputIndex==(NativeCompositeFixture<Owner>::branch?0u:1u);
         if(!stopped && (prefix || final)){stopped=true;f.owner->IsNeedToTrain=false;}};
     f.owner->SetConfiguredNativeEvidenceSinks(sinks);f.owner->IsNeedToTrain=true;
+    WindowPackagePhase("training-loop-begin",kind,&f.owner->NativeTrainingController(),f.Time());double nextHeartbeat=Wall()+10.;
     ServiceTicks(f,[&](){if(!stopped && ((kind==WindowPackageSource::RawPartial && samples>0) ||
         (kind==WindowPackageSource::GrownStopped && f.owner->NativeTrainingController().ModelEpoch()>0 && f.owner->ReadNativeParameters()[0].length==3)))
-        {stopped=true;f.owner->IsNeedToTrain=false;}});
+        {stopped=true;f.owner->IsNeedToTrain=false;}
+        const auto now=Wall();if(now>=nextHeartbeat){WindowPackagePhase("training-loop-latest",kind,&f.owner->NativeTrainingController(),f.Time());nextHeartbeat=now+10.;}});
     f.owner->SetConfiguredNativeEvidenceSinks({});const auto& service=f.owner->NativeTrainingController();
+    WindowPackagePhase("training-loop-returned",kind,&service,f.Time());
     const bool completed=kind==WindowPackageSource::Complete || kind==WindowPackageSource::AsymmetricC0;
     Require(service.State()==NativeTrainingState::Finished,"window_package_not_closed");
     if(completed)Require(service.Certificate() && service.Outcome()==TrainingStatus::Exact,"window_package_source_not_completed");
@@ -3374,13 +3412,18 @@ template<class Owner> const QJsonObject& ActualWindowPackage(WindowPackageSource
         if(kind!=WindowPackageSource::DefaultSync)Require(stopped,"window_package_stop_control_not_reached");}
     const auto liveNeuron=f.owner->template GetComponentL<UNet>("Neuron",true);
     const auto liveDataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
+    WindowPackagePhase("source-live-xml-begin",kind,&service,f.Time());
     const auto neuronBefore=LivePackageComponentXml(liveNeuron),datasetBefore=LivePackageComponentXml(liveDataset);
+    WindowPackagePhase("source-export-begin",kind,&service,f.Time());
     const auto package=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    WindowPackagePhase("source-export-returned",kind,&service,f.Time());
     EXPECT_EQ(LivePackageComponentXml(liveNeuron),neuronBefore)<<"export must reset its private copy, not live neuron dynamics";
     EXPECT_EQ(LivePackageComponentXml(liveDataset),datasetBefore)<<"export must not reset the live stimulus clock or generator";
     Require(package["schema_version"]==QJsonValue(6),"window_package_public_dispatch_not_schema6");
     WindowPackageSummaries<Owner>().emplace(kind,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
-    SaveWindowPackage(f,"source-"+std::to_string(int(kind)),package);return packages.emplace(kind,package).first->second;
+    WindowPackagePhase("source-save-begin",kind,&service,f.Time());
+    SaveWindowPackage(f,"source-"+std::to_string(int(kind)),package);
+    WindowPackagePhase("source-saved",kind,&service,f.Time());return packages.emplace(kind,package).first->second;
 }
 // Preserve raw field differences as diagnostics. The physical transport contract
 // compares image parameters/structure/bindings, not transient image buffers;
@@ -3429,16 +3472,26 @@ void WindowPackageDifferences(const QJsonValue& expected,const QJsonValue& actua
     differences.append(difference);
 }
 template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool warm=false) {
-    const auto source=ActualWindowPackage<Owner>(asymmetric?WindowPackageSource::AsymmetricC0:WindowPackageSource::Complete);
+    const auto kind=asymmetric?WindowPackageSource::AsymmetricC0:WindowPackageSource::Complete;
+    const auto source=ActualWindowPackage<Owner>(kind);WindowPackagePhase("roundtrip-source-returned",kind);
+    WindowPackagePhase("destination-fixture-begin",kind);
     NativeCompositeFixture<Owner> f(2000,false,64,false,true);f.attempt.reset();f.owner->IsNeedToTrain=false;
-    const auto imported=f.owner->ImportNativeLearnedState(source,CandidateWindowPackageImplementation);ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    WindowPackagePhase("destination-import-begin",kind,&f.owner->NativeTrainingController(),f.Time());
+    const auto imported=f.owner->ImportNativeLearnedState(source,CandidateWindowPackageImplementation);
+    WindowPackagePhase("destination-import-returned",kind,&f.owner->NativeTrainingController(),f.Time(),
+        {{"status_code",int(imported.status)},{"reason",QString::fromStdString(imported.reason)}});
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
     const auto& service=f.owner->NativeTrainingController();ASSERT_TRUE(service.References());ASSERT_TRUE(service.Certificate());
     EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Plan().protocol.schemaVersion,5u);
     EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(service.Search());
     EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+    WindowPackagePhase("destination-reexport-begin",kind,&service,f.Time());
     const auto reexport=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    WindowPackagePhase("destination-reexport-returned",kind,&service,f.Time());
+    WindowPackagePhase("comparison-views-begin",kind,&service,f.Time());
     const auto expectedTransport=NmsdkTests::LearnedStateComparisonView(source);
     const auto actualTransport=NmsdkTests::LearnedStateComparisonView(reexport);
+    WindowPackagePhase("comparison-views-created",kind,&service,f.Time());
     if(reexport!=source) {
         QJsonArray differences;bool truncated=false;WindowPackageDifferences(source,reexport,"",differences,truncated);
         const auto name=std::string(NativeCompositeFixture<Owner>::branch?"package6-branch/":"package6-classic/")+
@@ -3449,6 +3502,7 @@ template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool war
             {"comparison_policy","model-spec-semantic-images-v1"},{"scientific_acceptance",false}});
     }
     EXPECT_EQ(actualTransport,expectedTransport);
+    WindowPackagePhase("comparison-returned",kind,&service,f.Time());
     EXPECT_EQ(EncodeCandidateWindowRuntimePlan(service.Plan()),source["runtime_plan"].toObject());
     const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());EXPECT_EQ(summary.value("schema_version"),QJsonValue(7));
     EXPECT_EQ(summary.value("search_history_retained"),QJsonValue(false));EXPECT_TRUE(summary.value("search_probes").isNull());
@@ -3465,14 +3519,23 @@ template<class Owner> void WindowPackageRoundtrip(bool asymmetric=false,bool war
     const auto original=service.CompositeInitialConfiguration(),binding=service.CompositeSourceBinding();const auto oldCount=service.CompositeMeasurements().size();
     const auto oldAttempt=service.SessionAttempt();auto plan=service.Plan();plan.search.runId="package6-imported-warm";
     plan.search.tolerances.sync=.25;plan.maximumWallSeconds+=60.;plan.composite->maximumTotalPrimaryBytes*=2;
-    f.owner->Reset();f.owner->BeginNativeTraining(plan);ServiceTicks(f);ASSERT_TRUE(service.Certificate())<<service.Reason();
+    WindowPackagePhase("warm-control-begin",kind,&service,f.Time());
+    f.owner->Reset();f.owner->BeginNativeTraining(plan);
+    WindowPackagePhase("warm-loop-begin",kind,&service,f.Time());double warmHeartbeat=Wall()+10.;
+    ServiceTicks(f,[&](){const auto now=Wall();if(now>=warmHeartbeat){
+        WindowPackagePhase("warm-loop-latest",kind,&service,f.Time());warmHeartbeat=now+10.;}});
+    WindowPackagePhase("warm-loop-returned",kind,&service,f.Time());ASSERT_TRUE(service.Certificate())<<service.Reason();
     EXPECT_EQ(service.References()->Inputs(),originalRefs);EXPECT_EQ(service.CompositeReferenceGroupIds(),ids);
     EXPECT_EQ(service.CompositeOwnerFamilyBinding(),family);EXPECT_EQ(service.CompositeSourceBinding(),binding);EXPECT_EQ(service.CompositeInitialConfiguration(),original);
     EXPECT_EQ(service.SessionAttempt(),oldAttempt+1);EXPECT_GT(service.CompositeMeasurements().size(),oldCount);
     EXPECT_EQ(service.Plan().search.tolerances.sync,.25);EXPECT_NE(service.Plan().maximumWallSeconds,source["runtime_plan"].toObject()["maximum_wall_seconds"].toDouble());
+    WindowPackagePhase("warm-export-begin",kind,&service,f.Time());
     const auto result=f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation);
+    WindowPackagePhase("warm-export-returned",kind,&service,f.Time());
     EXPECT_EQ(result["configuration"],source["configuration"]);EXPECT_NE(result["runtime_plan"],source["runtime_plan"]);
+    WindowPackagePhase("warm-prepare-begin",kind,&service,f.Time());
     auto prepared=PrepareNativeLearnedState(result,f.storage,f.environment,CandidateWindowPackageImplementation);
+    WindowPackagePhase("warm-prepare-returned",kind,&service,f.Time());
     EXPECT_EQ(prepared->service.References()->Inputs(),originalRefs);EXPECT_EQ(prepared->service.Plan().search.tolerances.sync,.25);
     SaveWindowPackage(f,asymmetric?"asymmetric-imported-warm":"imported-warm",result);
 }
