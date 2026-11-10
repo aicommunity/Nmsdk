@@ -1,5 +1,7 @@
 # TimeLearner reproducibility artifacts
 
+11.11: [complete Console2 primary and independent Elder restore](../../../Docs/StructTrain/TimeLearner/ClosedPrimaryCollection-20261111.ru.md), [reviewed temporal figures](../../../Docs/StructTrain/TimeLearner/Console2TemporalReports-20261111.ru.md), [full native119 compact archives for both workers](../../../Docs/StructTrain/TimeLearner/Native119CompactPrimary-20261111.ru.md). Native119 independent archive restoration remains pending. [Fresh stock N4 assigned burst characterization](../../../Docs/StructTrain/TimeLearner/StockCold4Characterization-20261111.ru.md) passed all8 native probes; no Train or classification claim.
+
 Historical scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Their acceptance applies to the documented source snapshots; fixed-threshold silent models are not successful detections.
 
 Current whole-plan status: [maintained implementation status](../../../Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md) and [scientific readiness](../../../Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).
