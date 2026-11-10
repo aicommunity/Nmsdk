@@ -1,5 +1,7 @@
 # Готовность к научным экспериментам — 10.11.2026
 
+**Уточнение после восстановления связи:** actual saved-model replay SDKdcc/Pulse608 завершён1 executed/0PASS/1FAIL/6not-run при успешной сборке. Три цикла имеют совпадающий полный physical identity, однако archive equality нарушается в InputFeedbackSignal storage-образа. Допуск Train→Test пока не принят; нового научного результата нет. Windows e633 завершён ошибкой компиляции нового теста; прежние4/4 не распространяются на608. [Записи завершения, три исходных наблюдения и дальнейшая диагностика](https://github.com/aicommunity/Nmsdk/blob/58c3150f1d0ba7a8a183b3bc6970eca88d6409dc/Docs/StructTrain/TimeLearner/NativeLoadHistoryAndReplay-20261110.ru.md). Утверждения о выполняющихся прежних заданиях ниже — исторические срезы.
+
 **Новый assigned-window контур пока не допущен к научной N4 серии.** Предыдущие научные результаты сохранены; сборка, сохранение отрицательного прогона и успешные проверки формата сами по себе не подтверждают новое обучение. Полностью принят этап0; этапы1–12 остаются частичными. [Состояние реализации](ImplementationStatus.ru.md), [научные результаты](ScientificResults-2026-11-09.ru.md) и [полный план](RefactoringPlan.ru.md) описывают разные оси готовности.
 
 Предыдущий [cohort31 остановлен OOM](Fixed4Package6-31Failure-20261109.ru.md), kernel limit4GiB, без итогового package6 JUnit. Приняты только2 fixed4 controls;29 package6 IDs неполны. До OOM журнал сообщил четыре roundtrip equality failures. Этот корпус не допускается к reader16 или научной оценке.
