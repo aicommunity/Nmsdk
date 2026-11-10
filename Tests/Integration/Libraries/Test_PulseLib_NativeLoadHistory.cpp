@@ -5,6 +5,7 @@
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelArchive.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ModelIdentity.h"
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeOperationChecks.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "../Support/ConsoleLikeInit.h"
 #include "../Support/PhysicalArchiveComparison.h"
 #include "../../../Rdk/Core/Engine/UComponentFactory.h"
@@ -18,6 +19,7 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <vector>
+#include <utility>
 
 namespace {
 using namespace RDK;
@@ -158,6 +160,45 @@ TEST(NativeLoadHistory, DetachedChildAt2000) { RunLoadHistory(2000, PreviousGrap
 TEST(NativeLoadHistory, FreshAt20000) { RunLoadHistory(20000, PreviousGraph::Fresh); }
 TEST(NativeLoadHistory, ConnectedChildAt20000) { RunLoadHistory(20000, PreviousGraph::ConnectedChild); }
 TEST(NativeLoadHistory, DetachedChildAt20000) { RunLoadHistory(20000, PreviousGraph::DetachedChild); }
+
+TEST(NativeArchiveOwnership, MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent)
+{
+    using namespace NMSDK::TimeLearner;
+    QFile fixture(QFileInfo(QString::fromLocal8Bit(__FILE__)).dir().absoluteFilePath(
+        "../Data/NativeWindowPackage6Classic/learned-state.json.qz"));
+    ASSERT_TRUE(fixture.open(QIODevice::ReadOnly));
+    const auto raw = qUncompress(fixture.readAll());
+    ASSERT_EQ(QCryptographicHash::hash(raw, QCryptographicHash::Sha256).toHex(),
+        QByteArray("1c8d50628e7eea87c2bad230428526000802ec73e9627bd5d7d7f414bb69e05c"));
+    QJsonParseError error;
+    const auto package = QJsonDocument::fromJson(raw, &error).object();
+    ASSERT_EQ(error.error, QJsonParseError::NoError);
+    auto decoded = DecodeNativeCompositeTrainingArchive(package["measurement_archive"].toObject());
+    ASSERT_FALSE(decoded.Records().empty());
+    ASSERT_FALSE(decoded.Records().front().rawTrials.empty());
+    ASSERT_FALSE(decoded.Records().front().rawTrials.front().samples.empty());
+    const auto* records = decoded.Records().data();
+    const auto* samples = decoded.Records().front().rawTrials.front().samples.data();
+    const auto document = decoded.Document();
+    const auto protocol = decoded.Protocol();
+    const auto groups = decoded.ReferenceGroups();
+    const auto attempt = decoded.CurrentAttemptId();
+    auto moved = std::move(decoded);
+    EXPECT_EQ(moved.Records().data(), records);
+    EXPECT_EQ(moved.Records().front().rawTrials.front().samples.data(), samples);
+    auto copied = moved;
+    EXPECT_NE(copied.Records().data(), records);
+    EXPECT_NE(copied.Records().front().rawTrials.front().samples.data(), samples);
+    EXPECT_EQ(copied.Document(), document);
+    EXPECT_EQ(copied.Records().size(), moved.Records().size());
+    copied = std::move(moved);
+    EXPECT_EQ(copied.Records().data(), records);
+    EXPECT_EQ(copied.Records().front().rawTrials.front().samples.data(), samples);
+    EXPECT_EQ(copied.Document(), document);
+    EXPECT_EQ(copied.Protocol(), protocol);
+    EXPECT_EQ(copied.ReferenceGroups(), groups);
+    EXPECT_EQ(copied.CurrentAttemptId(), attempt);
+}
 
 TEST(NativeClassImageReplay, ActualMembraneCopyAndLoadStages)
 {
