@@ -1,5 +1,23 @@
 # Состояние реализации TimeLearner — 10.11.2026
 
+Полностью принят этап0. Этапы1–12 остаются частичными; число адресных PASS не заменяет исходную обязательную матрицу. Нового научного результата классификации пока нет.
+
+| Область | Последнее подтверждённое состояние |
+|---|---|
+| Linux SDKf39 | [Repair17](NativeArchiveRepair17Oom-20261110.ru.md):12 audited PASS/5 unobserved; полный gate не принят. Load/XML8 и два fresh-process waveform transfers прошли |
+| Память C0 | Isolated SDKf39 и pre-repair SDKff42 оба остановлены kernel OOM при4GiB. Это проблема исполнения/неполной проверки, не научная несходимость. [Точные terminal records старого C0 и кандидат исправления](https://github.com/aicommunity/Nmsdk/blob/38cfeb8e28afb0b8d02bd165f5f109905f47fcd1/Docs/StructTrain/TimeLearner/NativeArchiveMoveOwnership.ru.md) |
+| Новый кандидат | Pulse165d49d устраняет deep copies при std::move декодированного архива. SDK355c60d, свежая M40 сборка и18-case gate запущены; результат ещё не принят. [Замороженная декларация](https://github.com/aicommunity/Nmsdk/blob/601ac11df7e0ccf2122175e0ba5094ee5b093dbc/Docs/StructTrain/TimeLearner/ValidationPlans/NativeArchiveMove18-20261110/cohort.json) |
+| Windows .14 | SDKf39 closed-build audit принят отдельно от исходного descendants_remaining. Isolated C0 normal1/1 PASS не заменяет Linux ASan и общую матрицу |
+| Данные и графики | [Новый reader/CLI11/11 и два просмотренных1920×960 waveform графика опубликованы](NativeArchiveGatePairReports.ru.md). Это проверка переноса, не классификация; actual reader16 остаётся открытым |
+| Elder | SSH доступен; перед очисткой около2.3GiB свободного диска. Идёт проверка tracked Reports caches старых SDK против Git. Новая сборка на Elder пока не запущена |
+
+Следующие обязательные результаты: завершённый18-case gate и memory comparison, полные compact primary isolated C0, затем общий native119/actual package reader16/Console cold Train→export→calibration→frozen Test и оставшаяся матрица режимов/физики. Различимые ранние пики разрешены пользователем; истинно слитая принадлежность остаётся неоднозначной. Train использует максимум закреплённого импульса, Test — отклик полного паттерна.
+
+## Исторические срезы и адресные проверки
+
+Следующие записи — исторические наблюдения своих снимков. Слова «текущий», «последний» и «выполняется» в них не заменяют сводку выше.
+
+
 **Последний завершённый M40 gate:** [SDKf39 завершён12 audited PASS/5 unobserved из17; Packages5 остановлен kernel OOM на4GiB](NativeArchiveRepair17Oom-20261110.ru.md). Восемь Load/XML контролей и два fresh-process waveform transfers прошли, но полный package gate не принят. Причина OOM и область отдельного C0 случая требуют дальнейшей диагностики; это не научный отрицательный результат. Изолированный Linux ASan C0 также дал OOM на4GiB; Windows normal counterpart прошёл1/1. Сравнение с pre-fix Linux runtime ещё выполняется. [Reader/CLI11/11 и два просмотренных крупных графика опубликованы](NativeArchiveGatePairReports.ru.md); это диагностика переноса, не классификация. Все исходные этапы1–12 частичны.
 
 
@@ -17,7 +35,7 @@
 
 Уточнена future Git closure: [Bin8cb вместо918](https://github.com/aicommunity/Nmsdk/blob/48ffadeef8789056da18023b7ec500774dab0733/Docs/StructTrain/TimeLearner/FutureBinMigrationClosure-20261110.ru.md) исключает5 уже retired/moved путей, которые противоречили текущему migration manifest352+4. Остальные15764 Bin entries идентичны; configs/models/data не меняются, child ref в origin подтверждён. Это локальная проверка Git metadata; полный migration CLI на workers и fresh recursive checkout ещё нужны. Рабочий M40 SDKf22/Bin918 и его resources не изменены; для нового SDK потребуется новый private resources8cb.
 
-## Исторические срезы и адресные проверки
+
 
 Следующие абзацы сохранены как журнал своих pins и попыток. Их формулировки «текущий», «работает» и «ещё не запущен» не заменяют итог выше и [оперативный допуск](ExperimentReadiness.ru.md).
 
