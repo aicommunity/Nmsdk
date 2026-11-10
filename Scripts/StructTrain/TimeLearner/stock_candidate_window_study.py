@@ -23,7 +23,7 @@ from .process_runner import verify_runtime
 from .resource_reservations import Reservations
 from .stock_cold_characterization import jobs as characterization_jobs
 from .stock_phasea_preflight import audit_stock_profile
-from .stock_threshold_study import _condition
+from .stock_threshold_study import _condition, audit_final_stock
 
 
 def _frame(time, frequency):
@@ -231,7 +231,7 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
     result = run_job('train', job_path, None, runtime_path, output/'runs/train',
         job['configuration']['maximum_wall_seconds'], process_policy=policy)
     require(inspect(output/'runs/train/process/contained')['all_processes_closed'], 'stock_cold7_train_group_live')
-    package_audit = None;package_path = None
+    package_audit = None;package_path = None;physical_audit = None
     if result['validity'] == 'valid':
         audit_run_manifest(output/'runs/train/run-manifest.json')
         root = output/'runs/train/native'
@@ -239,14 +239,16 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
         require(len(packages) == 1, 'stock_cold7_actual_terminal_package_required')
         package_path = packages[0]
         summary = load(package_path.with_name(package_path.name.replace('_state.json', '_summary.json')))
-        package_audit = audit_candidate_window_package(load(package_path), summary=summary,
+        package = load(package_path)
+        physical_audit = audit_final_stock(expected_initial, package['neuron']['graph']['identity'])
+        package_audit = audit_candidate_window_package(package, summary=summary,
             external_resolver=filesystem_primary_resolver(root))
     registry.release(lease['token'], note='Cold Train native groups closed; execution and convergence remain distinct.')
     require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
         for p in sorted(source.rglob('*.json'))}, 'stock_cold7_preparation_changed')
     record = dict(kind='timelearner_stock_candidate_window_training_result', schema_version=1,
         case=case, condition_fingerprint=digest(condition['condition']), execution=result['execution'],
-        validity=result['validity'], package_audit=package_audit,
+        validity=result['validity'], package_audit=package_audit, physical_audit=physical_audit,
         package_path=None if package_path is None else package_path.relative_to(output).as_posix(),
         classification_assessed=False, scientific_verdict=None)
     _write(output/'index.json', record)
