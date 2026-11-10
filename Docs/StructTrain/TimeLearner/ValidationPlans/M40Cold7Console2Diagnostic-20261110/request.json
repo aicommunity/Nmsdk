@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-cold7-console2-diagnostic-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6bb8baeba6e01999860ad31813ab089b7a194e65",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 128,
+    "maximum_wall_seconds": 10800
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-cold7-console-checks-m40-a1",
+      "commit": "19078e867bdb7974a7d00cbc9970e0d6843ef38e"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/cold7-console2-diagnostic-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Cold7Console2Diagnostic-20261110/suite.json",
+      "sha256": "f94c6bba70470336d09ec4356d25b21fcc104dd6fad13243651a628ea7f61d50"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE_PACKAGE6_FIXTURES": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-foreign-reference-normal-a1/native-package6-29/native-composite",
+      "TIMELEARNER_NATIVE_PACKAGE6_PRIMARY_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-foreign-reference-normal-a1/native-package6-29/native-composite",
+      "TIMELEARNER_CONSOLE_RUNTIME_FILES": "/media/user/Data/TimeLearnerRefactor/runtime-native119-foreign-reference-normal-a1",
+      "TIMELEARNER_CONSOLE_RUNTIME_INI": "/media/user/Data/TimeLearnerRefactor/runtime-native119-foreign-reference-normal-a1",
+      "TIMELEARNER_CANDIDATE_WINDOW_CONSOLE": "/media/user/Data/TimeLearnerRefactor/requests/cold7-console2-diagnostic-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Cold7Console2Diagnostic-20261110/fixture"
+    }
+  }
+}
