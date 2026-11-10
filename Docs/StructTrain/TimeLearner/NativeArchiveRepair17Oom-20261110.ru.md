@@ -46,6 +46,34 @@ Source/runtime после задания сохранены. Автоматич�
 простое увеличение cap не является исправлением. Whole package/reader16,
 Console Train→Test и научная матрица остаются открытыми.
 
+## Изолированный C0: повторный OOM
+
+Fresh process того же SDKf39 также остановлен OOM на4GiB через1798.632s,
+не по timeout. Native group
+`timelearner-2102ee0b-5728-4f5b-a552-8b3a63db8437.service`, invocation
+`9ee6edacc57b4ccab9474b895d39bfa0`, MainPID520962/start338632340,
+MemoryPeak=MemoryMax=4294967296. Группа закрыта; lease
+af21428d-e5f1-4a74-84fa-502902a81e01 released. Это исключает объяснение
+только накоплением между предыдущими cases. Итогового JUnit снова нет;
+case остаётся not_assessed, не PASS и не PhysicalInfeasible.
+
+До отказа записаны39 файлов исходного C0 package,88467244 bytes,
+`gate/native-composite/package6-branch/source-1`. Source summary7 сообщает
+state=finished/outcome=exact, reference_complete=true,
+certificate_matches_actual_model=true, applied_edits=0, search_probes=4.
+Это сохранённое завершение инженерного холодного источника, не успешный
+roundtrip, Test или классификация. Полный пакет ещё требует отдельного
+сохранения и codec-проверки; отсутствие фазовых markers пока не позволяет
+точно назвать строку импорта/replay, на которой исчерпана память.
+
+Подготовлен сравнимый pre-fix SDKff42/Pulse608/Rdkd6 контроль: тот же C0 case,
+исходник Test_PulseLib_CompositeTraining.cpp и PhysicalArchiveComparison.h
+побайтно совпадают с SDKf39, тот же4GiB cap и ASAN_OPTIONS=detect_leaks=0.
+Ни один runtime не пересобирается и не меняется. Независимый Windows normal
+counterpart использует SDKf39 после closed-build audit. Его Job committed
+virtual-memory cap и Linux ASan cgroup memory имеют разную семантику;
+успех одного OS/compiler сам по себе не локализует причину другого.
+
 ## Отчёты с временными графиками
 
 [Новый reader/общий CLI](NativeArchiveGatePairReports.ru.md) проверяется отдельно
