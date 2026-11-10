@@ -1,0 +1,122 @@
+"""One-off audit transcript source; not an installed launcher or scientific test.
+Only tracked, byte-identical Reports materializations in declared retired SDKs.
+Git objects, refs, other files and every untracked report remain untouched.
+"""
+import hashlib,json,os,stat,subprocess,sys,time,gzip,shutil
+from pathlib import Path
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+
+BASE=Path('/home/user/timelearner-refactor')
+NAMES='''source-connected-stop-audit-a1 source-recognition-metrics-a1
+source-recognition-metrics-a2 source-metrics-stop-integration-a1
+source-visual-report-audit-a1 source-visual-reports-a1 source-visual-reports-a2
+source-visual-reports-a3 source-series-detail-a1 source-series-detail-a2
+source-process-supervisor-a1 source-process-supervisor-a2 source-publisher-a1
+source-publisher-a2 source-artifact-publication-elder-evidence-a1
+source-native-posttune-console-evidence-normal-a2
+source-capacitance-state-normal-b1 source-order-fixed-a1'''.split()
+OUT=BASE/'readbacks/s02-elder-tracked-report-cache-retirement-a1'
+def require(value,reason):
+    if not value:raise RuntimeError(reason)
+def git(root,*args,data=None):
+    return subprocess.check_output(['git','-c','submodule.recurse=false','-C',str(root),*args],
+        input=data,env=dict(os.environ,GIT_NO_LAZY_FETCH='1',GIT_OPTIONAL_LOCKS='0'))
+def write(name,value):
+    (OUT/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
+def identity(p):
+    s=p.lstat();require(stat.S_ISREG(s.st_mode),'not_regular_file')
+    return [s.st_dev,s.st_ino,s.st_size,s.st_mtime_ns,s.st_mode]
+def hashes(p):
+    before=identity(p);one=hashlib.sha1(('blob '+str(before[2])+'\0').encode());two=hashlib.sha256()
+    with p.open('rb') as f:
+        for b in iter(lambda:f.read(1024*1024),b''):one.update(b);two.update(b)
+    require(identity(p)==before,'file_changed_during_hash')
+    return before,one.hexdigest(),two.hexdigest()
+def inspect_processes(roots):
+    ignored=[];checked=0
+    for proc in Path('/proc').iterdir():
+        if not proc.name.isdecimal():continue
+        try:
+            if proc.stat().st_uid!=os.getuid():continue
+            comm=(proc/'comm').read_text().strip()
+            if comm in ('(sd-pam)','sshd','sshd-session'):
+                ignored.append({'pid':int(proc.name),'comm':comm,'scope':'PAM/SSH helper; paths not inspected'});continue
+            values=[(proc/'cwd').resolve(strict=True),(proc/'exe').resolve(strict=True)]
+            for fd in (proc/'fd').iterdir():
+                try:
+                    v=fd.resolve(strict=True)
+                    if v.is_absolute():values.append(v)
+                except FileNotFoundError:pass
+            require(not any(v==r or v.is_relative_to(r) for r in roots for v in values),
+                'live_process_uses_retired_source_'+proc.name)
+            checked+=1
+        except (FileNotFoundError,ProcessLookupError):continue
+    return {'checked_user_processes':checked,'explicit_helper_exclusions':ignored}
+
+require(BASE.resolve(strict=True)==BASE and not OUT.exists(),'fresh_canonical_output_required')
+roots=[BASE/n for n in NAMES]
+require(all(r.resolve(strict=True)==r and r.parent==BASE and (r/'Reports').is_dir() and
+    (r/'Reports').resolve(strict=True)==r/'Reports' for r in roots),'retired_root_alias_or_missing')
+commons=sorted({str((r/Path(git(r,'rev-parse','--git-common-dir').decode().strip())).resolve(strict=True)) for r in roots})
+OUT.mkdir()
+registry=Reservations.open_existing(BASE/'resource-reservations.sqlite3')
+lease=registry.reserve(OUT.name,[{'path':str(p),'access':'write'} for p in roots]+[
+    {'path':p,'access':'write'} for p in commons if not any(Path(p).is_relative_to(r) for r in roots)]+[
+    {'path':str(OUT),'access':'write'}],ttl_seconds=120,
+    demands={'slots':1,'memory_bytes':268435456,'disk_bytes':134217728})
+write('reservation.json',lease);token=lease['token'];last=time.monotonic()
+def guard():
+    global last
+    if time.monotonic()-last>10:registry.heartbeat(token,ttl_seconds=120);last=time.monotonic()
+    registry.validate_paths(token)
+terminal={'scientific_verdict':None,'completed':False,'removed_files':0,'removed_logical_bytes':0}
+try:
+    write('processes-before.json',inspect_processes(roots))
+    terminal['free_bytes_before']=shutil.disk_usage(BASE).free
+    plans=[]
+    # Validate every selected file before the first index update or unlink.
+    for root in roots:
+        guard();head=git(root,'rev-parse','HEAD').decode().strip()
+        require(not git(root,'diff','HEAD','--name-only','--','Reports').strip(),'modified_tracked_report')
+        rows=[]
+        for entry in git(root,'ls-files','--stage','-z','--','Reports').split(b'\0'):
+            if not entry:continue
+            meta,relative=entry.split(b'\t',1);mode,oid,stage=meta.decode().split();relative=relative.decode('utf-8')
+            require(stage=='0' and mode in ('100644','100755') and relative.startswith('Reports/') and
+                '\n' not in relative and '\r' not in relative and '..' not in Path(relative).parts,'unsupported_report_index')
+            p=root/relative
+            if not p.exists():continue
+            require(p.resolve(strict=True).is_relative_to(root/'Reports'),'report_alias')
+            ident,actual,digest=hashes(p);require(actual==oid,'report_not_equal_Git_blob');guard()
+            rows.append({'path':relative,'git_blob':oid,'sha256':digest,'identity':ident})
+        objects=git(root,'cat-file','--batch-check',data=''.join(v['git_blob']+'\n' for v in rows).encode()).decode().splitlines()
+        require(len(objects)==len(rows),'Git_object_count')
+        for line,row in zip(objects,rows):
+            require(line.split()==[row['git_blob'],'blob',str(row['identity'][2])],'Git_blob_missing_or_size')
+        index=Path(git(root,'rev-parse','--path-format=absolute','--git-path','index').decode().strip())
+        (OUT/(root.name+'-index-before.gz')).write_bytes(gzip.compress(index.read_bytes(),mtime=0))
+        plans.append({'root':str(root),'head':head,'stash':git(root,'stash','list').decode(),'files':rows})
+    (OUT/'verified-plan.json.gz').write_bytes(gzip.compress(json.dumps(plans,ensure_ascii=False).encode(),mtime=0))
+    write('processes-before-unlink.json',inspect_processes(roots));guard()
+    with (OUT/'removed.jsonl').open('x') as log:
+        for plan in plans:
+            root=Path(plan['root']);require(git(root,'rev-parse','HEAD').decode().strip()==plan['head'],'HEAD_changed')
+            paths=b''.join(v['path'].encode()+b'\0' for v in plan['files'])
+            git(root,'update-index','--skip-worktree','-z','--stdin',data=paths)
+            for row in plan['files']:
+                guard();p=root/row['path'];require(p.resolve(strict=True).is_relative_to(root/'Reports'),'unlink_alias')
+                ident,oid,digest=hashes(p)
+                require(ident==row['identity'] and oid==row['git_blob'] and digest==row['sha256'],'unlink_identity_changed')
+                p.unlink();log.write(json.dumps({'root':str(root),**row})+'\n');log.flush()
+                terminal['removed_files']+=1;terminal['removed_logical_bytes']+=ident[2]
+            require(git(root,'rev-parse','HEAD').decode().strip()==plan['head'] and
+                git(root,'stash','list').decode()==plan['stash'],'HEAD_or_stash_changed')
+            require(not git(root,'diff','HEAD','--name-only','--','Reports').strip(),'retirement_not_clean')
+    terminal['free_bytes_after']=shutil.disk_usage(BASE).free;terminal['completed']=True
+except BaseException as error:
+    terminal['error']=type(error).__name__+':'+str(error);raise
+finally:
+    registry.release(token,note='one-off verified tracked Reports cache operation terminated; no descendants retained')
+    write('terminal.json',terminal)
+    write('reservation-final.json',Reservations.read_snapshot(BASE/'resource-reservations.sqlite3'))
+    print(json.dumps(terminal),flush=True)
