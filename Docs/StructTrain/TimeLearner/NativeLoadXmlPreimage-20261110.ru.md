@@ -48,6 +48,22 @@ Native cgroup закрыт, lease released, source-before/source-after иден�
 сценариев. Исправление изоляции output/log дочернего процесса включено;
 старый contract17 сохраняется как отрицательный результат fixture.
 
+## Повторная сборка
+
+На M40 запущена отдельная fresh build SDKf39 для gate17. Frozen controls
+`81eab18f26ac9b998cd7f243fd0a18316485d0dd` проверяют те же 4074 code files;
+новые пути source/build/runtime не пересекаются с работающими заданиями.
+Canonical A1 остановился до сборки: после перестановки partitions selected_ids
+не были переставлены в тот же порядок. Этот отказ сохранён; A2 исправляет
+только декларацию и прошёл проверку за 80.52 s, completed0/whole group closed,
+operational diagnostics clear. Проверены 86 прежних bindings.
+
+[Последнее наблюдение владельца](../../../Reports/StructTrain/TimeLearner/s05-native-load-xml-repair17-preparation-root-observation/native-owner-observation.json)
+подтверждает живой supervisor399987/start338340735 и outer405767/start338342163,
+kernel cgroup running. [Доставка и подготовка](../../../Reports/StructTrain/TimeLearner/s05-native-load-xml-repair17-preparation-root-observation/canonical-and-delivery.json)
+сохранены отдельно. Это подтверждение запуска, **не результат компиляции или
+17 тестов**; при следующем обращении требуется новое наблюдение этих handles.
+
 Научная постановка, CapturedPerInput, допуски и выбор закреплённого пика
 не изменены. Полный119, reader16, Console cold Train→Test/calibration/frozen
 evaluation и матрица физических профилей остаются обязательными.
