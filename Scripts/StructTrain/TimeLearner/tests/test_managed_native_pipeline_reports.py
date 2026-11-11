@@ -17,6 +17,9 @@ class ManagedNativePipelineReportsTest(unittest.TestCase):
         return (os.environ.get("TIMELEARNER_MANAGED_PIPELINE_PRIMARY"),
                 os.environ.get("TIMELEARNER_MANAGED_PIPELINE_REPORTS"))
 
+    def case_run(self, source, name):
+        return source/name/"runs/evaluate"
+
     def test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports(self):
         source, output = self.report_bindings()
         if not source or not output:
@@ -26,7 +29,7 @@ class ManagedNativePipelineReportsTest(unittest.TestCase):
         output.mkdir(parents=True, exist_ok=False)
         pairs = 0
         for name in self.case_names:
-            run = source/name/"runs/evaluate"
+            run = self.case_run(source, name)
             before = hashlib.sha256((run/"run-manifest.json").read_bytes()).hexdigest()
             report = output/name
             render_pipeline_run(run/"run-manifest.json", report)
