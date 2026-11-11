@@ -28,18 +28,17 @@ set_target_properties(Test_QMessageBox_Production PROPERTIES AUTOMOC ON)
 # Configure output for the production test into DEPLOY_ROOT
 # Use the same settings as for the main application
 set_target_properties(Test_QMessageBox_Production PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
 
 # Find Qt5 or Qt6
-find_package(Qt5 COMPONENTS Core Test Widgets REQUIRED)
-find_package(Qt6 COMPONENTS Core Test Widgets QUIET)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Test Widgets REQUIRED)
 
-if(Qt6_FOUND)
+if(QT_VERSION_MAJOR EQUAL 6)
     target_link_libraries(Test_MenuBar Qt6::Core Qt6::Test Qt6::Widgets)
     target_link_libraries(Test_QMessageBox Qt6::Core Qt6::Widgets)
     target_link_libraries(Test_QMessageBox_Production Qt6::Core Qt6::Widgets)
@@ -67,9 +66,9 @@ target_include_directories(Test_MenuBar PRIVATE
 add_executable(Test_PluginLoading test_plugin_loading.cpp)
 set_target_properties(Test_PluginLoading PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
-if(Qt6_FOUND)
+if(QT_VERSION_MAJOR EQUAL 6)
     target_link_libraries(Test_PluginLoading Qt6::Core Qt6::Test)
 else()
     target_link_libraries(Test_PluginLoading Qt5::Core Qt5::Test)
@@ -80,9 +79,9 @@ endif()
 add_executable(Test_AppStartup test_app_startup.cpp)
 set_target_properties(Test_AppStartup PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
-if(Qt6_FOUND)
+if(QT_VERSION_MAJOR EQUAL 6)
     target_link_libraries(Test_AppStartup Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
 else()
     target_link_libraries(Test_AppStartup Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
@@ -93,9 +92,9 @@ endif()
 add_executable(Test_QMessageBoxStyleCrash test_qmessagebox_style_crash.cpp)
 set_target_properties(Test_QMessageBoxStyleCrash PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
-if(Qt6_FOUND)
+if(QT_VERSION_MAJOR EQUAL 6)
     target_link_libraries(Test_QMessageBoxStyleCrash Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
 else()
     target_link_libraries(Test_QMessageBoxStyleCrash Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
@@ -106,9 +105,9 @@ endif()
 add_executable(Test_QMessageBoxWithStyles test_qmessagebox_with_styles.cpp)
 set_target_properties(Test_QMessageBoxWithStyles PROPERTIES
     AUTOMOC ON
-    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
-if(Qt6_FOUND)
+if(QT_VERSION_MAJOR EQUAL 6)
     target_link_libraries(Test_QMessageBoxWithStyles Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
 else()
     target_link_libraries(Test_QMessageBoxWithStyles Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Test)
@@ -206,13 +205,13 @@ set_target_properties(Test_UModernDiagramWidget_Movement PROPERTIES
     AUTORCC ON
 )
 set_target_properties(Test_UModernDiagramWidget_Movement PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${DEPLOY_ROOT}"
-    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${DEPLOY_ROOT}"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
+    RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}"
 )
-if(Qt6_FOUND)
+if(QT_VERSION_MAJOR EQUAL 6)
     target_link_libraries(Test_UModernDiagramWidget_Movement Qt6::Core Qt6::Widgets Qt6::Gui Qt6::Test)
     target_compile_definitions(Test_UModernDiagramWidget_Movement PRIVATE QT_VERSION_MAJOR=6)
 else()

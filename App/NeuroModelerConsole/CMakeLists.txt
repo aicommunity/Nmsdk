@@ -47,32 +47,6 @@ target_link_libraries(NeuroModelerConsole PRIVATE
   Nmsdk::Qt::Concurrent
 )
 
-find_package(CURL QUIET)
-if(CURL_FOUND)
-  target_link_libraries(NeuroModelerConsole PRIVATE CURL::libcurl)
-endif()
-
-# Boost libraries (required by rdk.static.qt)
-# Use MODULE mode on all platforms (FindBoost.cmake correctly determines library names)
-find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
-if(Boost_FOUND)
-  # Use modern targets if available, otherwise fall back to variables
-  if(TARGET Boost::program_options)
-    target_link_libraries(NeuroModelerConsole PRIVATE
-      Boost::program_options
-      Boost::thread
-      Boost::filesystem
-      Boost::system
-      Boost::chrono
-      Boost::atomic
-    )
-  else()
-    # Fallback to the legacy approach if targets are not available
-    target_link_libraries(NeuroModelerConsole PRIVATE ${Boost_LIBRARIES})
-    target_include_directories(NeuroModelerConsole PRIVATE ${Boost_INCLUDE_DIRS})
-  endif()
-endif()
-
 # Deploy non-Qt DLLs from vcpkg to Bin/Platform/Win (Qt is from C:\Qt)
 include(${CMAKE_SOURCE_DIR}/cmake/DeployVcpkgDlls.cmake)
 deploy_vcpkg_dlls(NeuroModelerConsole)

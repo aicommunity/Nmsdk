@@ -115,7 +115,6 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UQuickLinkDialog.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownViewerWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownDocWindow.cpp
-  ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramWidget.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramScene.cpp
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UModernDiagramView.cpp
@@ -140,6 +139,15 @@ target_sources(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Libraries/Rdk-BasicLib/GUI/Qt/BasicLibComponentGuiRegistration.cpp
   ${CMAKE_SOURCE_DIR}/Libraries/Rdk-CvBasicLib/GUI/Qt/CvBasicLibComponentGuiRegistration.cpp
 )
+
+if(RDK_USE_QT_WEBENGINE)
+  # A conditional Q_OBJECT header must only enter AUTOMOC when enabled.
+  # Keeping its disabled, empty moc output in the graph can leave stale output
+  # when WebEngine is subsequently enabled in the same build tree.
+  target_sources(NeuroModeler PRIVATE
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.cpp
+    ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/UMarkdownWebEnginePage.h)
+endif()
 
 # Explicitly state that the UI file must be processed only once
 # This prevents duplicate generation rules on Windows
@@ -229,61 +237,6 @@ target_link_libraries(NeuroModeler
     rdk.static.qt
 )
 
-find_package(CURL QUIET)
-if(CURL_FOUND)
-  target_link_libraries(NeuroModeler PRIVATE CURL::libcurl)
-endif()
-
-# Google glog for logging (same as in Rdk/CMakeLists.txt)
-find_package(glog QUIET)
-if(NOT glog_FOUND)
-  find_path(GLOG_INCLUDE_DIR glog/logging.h
-    PATHS
-      /usr/include
-      /usr/local/include
-      /opt/homebrew/include
-  )
-  find_library(GLOG_LIBRARY
-    NAMES glog
-    PATHS
-      /usr/lib
-      /usr/local/lib
-      /opt/homebrew/lib
-  )
-  if(GLOG_INCLUDE_DIR AND GLOG_LIBRARY)
-    add_library(glog::glog UNKNOWN IMPORTED)
-    set_target_properties(glog::glog PROPERTIES
-      IMPORTED_LOCATION "${GLOG_LIBRARY}"
-      INTERFACE_INCLUDE_DIRECTORIES "${GLOG_INCLUDE_DIR}"
-    )
-    set(glog_FOUND TRUE)
-  endif()
-endif()
-if(glog_FOUND)
-  target_link_libraries(NeuroModeler PRIVATE glog::glog)
-endif()
-
-# Boost libraries (required by rdk.static.qt)
-# Use MODULE mode on all platforms (FindBoost.cmake correctly determines library names)
-find_package(Boost QUIET COMPONENTS program_options thread filesystem system chrono atomic)
-if(Boost_FOUND)
-  # Use modern targets if available, otherwise fall back to variables
-  if(TARGET Boost::program_options)
-    target_link_libraries(NeuroModeler PRIVATE
-      Boost::program_options
-      Boost::thread
-      Boost::filesystem
-      Boost::system
-      Boost::chrono
-      Boost::atomic
-    )
-  else()
-    # Fallback to the legacy approach if targets are not available
-    target_link_libraries(NeuroModeler PRIVATE ${Boost_LIBRARIES})
-    target_include_directories(NeuroModeler PRIVATE ${Boost_INCLUDE_DIRS})
-  endif()
-endif()
-
 target_include_directories(NeuroModeler PRIVATE
   ${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt
   ${CMAKE_SOURCE_DIR}/Rdk/Deploy/Include
@@ -299,7 +252,6 @@ target_compile_definitions(NeuroModeler PRIVATE
   QT_WIDGETS_LIB
   RDK_APP_VERSION="${GIT_VERSION_STRING}"
   $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:RDK_USE_QT_WEBENGINE>
-  $<$<BOOL:${glog_FOUND}>:RDK_USE_GLOG>
 )
 
 # Optional dependencies
@@ -307,166 +259,20 @@ if (RDK_USE_OPENCV AND OpenCV_FOUND)
   target_link_libraries(NeuroModeler PRIVATE ${OpenCV_LIBS})
 endif()
 
-# Copy style files to the output directory
-set(STYLES_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Styles")
-set(STYLES_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Styles")
-
+# App-local styles and shared help preserve the GUI's existing lookup rules
+# with isolated runtime/<configuration> output directories.
 add_custom_command(TARGET NeuroModeler POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}"
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${STYLES_DEST_DIR}/icons"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${STYLES_SOURCE_DIR}/default.qss"
-        "${STYLES_DEST_DIR}/default.qss"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${STYLES_SOURCE_DIR}/theme.json"
-        "${STYLES_DEST_DIR}/theme.json"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${STYLES_SOURCE_DIR}/dark.qss"
-        "${STYLES_DEST_DIR}/dark.qss"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${STYLES_SOURCE_DIR}/dark-theme.json"
-        "${STYLES_DEST_DIR}/dark-theme.json"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${STYLES_SOURCE_DIR}/icons/checkbox-checked.svg"
-        "${STYLES_DEST_DIR}/icons/checkbox-checked.svg"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        "${STYLES_SOURCE_DIR}/icons/checkbox-checked-dark.svg"
-        "${STYLES_DEST_DIR}/icons/checkbox-checked-dark.svg"
-    COMMENT "Copying style files to Bin/Styles/"
-)
-
-# Copy help files to the output directory
-set(HELP_SOURCE_DIR "${CMAKE_SOURCE_DIR}/Bin/Help")
-set(HELP_DEST_DIR "${CMAKE_SOURCE_DIR}/Bin/Help")
-
-add_custom_command(TARGET NeuroModeler POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${HELP_DEST_DIR}/en"
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${HELP_DEST_DIR}/ru"
-    COMMAND ${CMAKE_COMMAND} -E make_directory "${HELP_DEST_DIR}/styles"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${HELP_SOURCE_DIR}/en"
-        "${HELP_DEST_DIR}/en"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${HELP_SOURCE_DIR}/ru"
-        "${HELP_DEST_DIR}/ru"
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
-        "${HELP_SOURCE_DIR}/styles"
-        "${HELP_DEST_DIR}/styles"
-    COMMENT "Copying help files to Bin/Help/"
-)
+  COMMAND "${CMAKE_COMMAND}" -E copy_directory
+    "${CMAKE_SOURCE_DIR}/Rdk/GUI/Qt/Styles" "$<TARGET_FILE_DIR:NeuroModeler>/Styles"
+  COMMAND "${CMAKE_COMMAND}" -E copy_directory
+    "${CMAKE_SOURCE_DIR}/Bin/Help" "$<TARGET_FILE_DIR:NeuroModeler>/../Help"
+  VERBATIM COMMENT "Deploy application styles and help")
 
 # Include function for deploying DLLs from vcpkg
 include(${CMAKE_SOURCE_DIR}/cmake/DeployVcpkgDlls.cmake)
 
 # Deploy all required DLLs from vcpkg
 deploy_vcpkg_dlls(NeuroModeler)
-
-# Copy Qt WebEngine files to the output directory (Windows only)
-# Qt WebEngine requires QtWebEngineProcess.exe and other files to work
-if(WIN32 AND RDK_USE_QT_WEBENGINE AND Qt5WebEngineWidgets_FOUND)
-    # Get the Qt path from vcpkg or a local installation
-    get_target_property(QT_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
-    if(QT_QMAKE_EXECUTABLE)
-        get_filename_component(QT_BIN_DIR "${QT_QMAKE_EXECUTABLE}" DIRECTORY)
-
-        # Also check the path from vcpkg_installed
-        if(EXISTS "${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/bin")
-            set(_vcpkg_bin_dir "${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/bin")
-            set(_vcpkg_debug_bin_dir "${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/debug/bin")
-        endif()
-
-        # List of possible paths to QtWebEngineProcess.exe (release)
-        set(_webengine_process_paths
-            "${QT_BIN_DIR}/QtWebEngineProcess.exe"
-            "${QT_BIN_DIR}/../tools/qt5/bin/QtWebEngineProcess.exe"
-        )
-        if(DEFINED _vcpkg_bin_dir)
-            list(APPEND _webengine_process_paths
-                "${_vcpkg_bin_dir}/QtWebEngineProcess.exe"
-                "${_vcpkg_bin_dir}/../tools/qt5/bin/QtWebEngineProcess.exe"
-            )
-        endif()
-
-        # Search for and copy the release version
-        set(_found_release FALSE)
-        foreach(_path IN LISTS _webengine_process_paths)
-            if(EXISTS "${_path}")
-                add_custom_command(TARGET NeuroModeler POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                        "${_path}"
-                        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/QtWebEngineProcess.exe"
-                    COMMENT "Copying QtWebEngineProcess.exe from ${_path}"
-                )
-                set(_found_release TRUE)
-                break()
-            endif()
-        endforeach()
-        if(NOT _found_release)
-            message(WARNING "QtWebEngineProcess.exe not found. Checked: ${_webengine_process_paths}")
-        endif()
-
-        # List of possible paths to QtWebEngineProcessd.exe (debug)
-        get_filename_component(QT_ROOT_DIR "${QT_BIN_DIR}" DIRECTORY)
-        set(_webengine_processd_paths
-            # Typical location for system Qt 5.15.2 on Windows
-            "${QT_BIN_DIR}/QtWebEngineProcessd.exe"
-            # Alternative layouts (debug/tools), including vcpkg Qt5
-            "${QT_ROOT_DIR}/debug/bin/QtWebEngineProcessd.exe"
-            "${QT_BIN_DIR}/../debug/bin/QtWebEngineProcessd.exe"
-            "${QT_ROOT_DIR}/tools/qt5/bin/QtWebEngineProcessd.exe"
-        )
-        if(DEFINED _vcpkg_debug_bin_dir)
-            list(APPEND _webengine_processd_paths
-                "${_vcpkg_debug_bin_dir}/QtWebEngineProcessd.exe"
-                "${_vcpkg_debug_bin_dir}/../tools/qt5/bin/QtWebEngineProcessd.exe"
-            )
-        endif()
-
-        # Search for and copy the debug version
-        set(_found_debug FALSE)
-        foreach(_path IN LISTS _webengine_processd_paths)
-            if(EXISTS "${_path}")
-                add_custom_command(TARGET NeuroModeler POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                        "${_path}"
-                        "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/QtWebEngineProcessd.exe"
-                    COMMENT "Copying QtWebEngineProcessd.exe from ${_path}"
-                )
-                set(_found_debug TRUE)
-                break()
-            endif()
-        endforeach()
-        if(NOT _found_debug)
-            message(WARNING "QtWebEngineProcessd.exe not found. Checked: ${_webengine_processd_paths}")
-        endif()
-
-        # Copy the resources directory (if it exists)
-        get_filename_component(QT_ROOT_DIR "${QT_BIN_DIR}" DIRECTORY)
-        set(QT_RESOURCES_DIR "${QT_ROOT_DIR}/resources")
-        if(EXISTS "${QT_RESOURCES_DIR}")
-            add_custom_command(TARGET NeuroModeler POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    "${QT_RESOURCES_DIR}"
-                    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources"
-                COMMENT "Copying Qt WebEngine resources to output directory"
-            )
-        endif()
-
-        # Copy the translations/qtwebengine_locales directory (if it exists)
-        set(QT_TRANSLATIONS_DIR "${QT_ROOT_DIR}/translations")
-        if(EXISTS "${QT_TRANSLATIONS_DIR}")
-            add_custom_command(TARGET NeuroModeler POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/translations"
-                COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    "${QT_TRANSLATIONS_DIR}"
-                    "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/translations"
-                COMMENT "Copying Qt WebEngine translations to output directory"
-            )
-        endif()
-    else()
-        message(WARNING "Cannot find Qt5::qmake to locate Qt WebEngine files")
-    endif()
-endif()
 
 # rdk.llm.embedded after other libs so EnsureEmbeddedLlamaProviderRegistered resolves.
 if(RDK_USE_LLM AND RDK_LLM_BUILD_EMBEDDED)

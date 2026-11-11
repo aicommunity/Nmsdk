@@ -1,51 +1,35 @@
-# Toolchain wrapper for vcpkg + Ninja discovery (Windows)
-#
-# Goals:
-# - Avoid Qt Creator auto-generated vcpkg toolchain wrapper (`build/*/vcpkg-dependencies/toolchain.cmake`)
-#   which may embed preset-only syntax like `${env:VCPKG_ROOT}` (invalid in CMake language).
-# - Make win-msvc-debug/release presets portable: resolve VCPKG_ROOT from environment at configure time.
-# - Provide a stable way to locate ninja.exe inside vcpkg downloads (no hardcoded version in presets).
-# - Keep using in-repo overlay ports (boost-build fix for vc144 -> vc140).
-
-cmake_minimum_required(VERSION 3.15)
-
-# Resolve repository root from this file location: <repo>/cmake/vcpkg_toolchain_from_env.cmake
-get_filename_component(_NMSDK_REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
-
-# Ensure VCPKG_ROOT is present
+# Keep installed dependencies outside disposable application build trees.
+# The binary cache remains managed by vcpkg (LOCALAPPDATA/vcpkg/archives by default).
 if(NOT DEFINED ENV{VCPKG_ROOT} OR "$ENV{VCPKG_ROOT}" STREQUAL "")
-  message(FATAL_ERROR "VCPKG_ROOT env var is not set. Please set VCPKG_ROOT to your vcpkg folder (e.g. E:/vcpkg).")
+  message(FATAL_ERROR "Set VCPKG_ROOT to a bootstrapped vcpkg checkout.")
 endif()
-file(TO_CMAKE_PATH "$ENV{VCPKG_ROOT}" _VCPKG_ROOT)
-
-# Previously we added overlay ports (vcpkg-overlay-ports) here by default,
-# including our custom boost-modular-build-helper. Now we want to test
-# a \"clean\" vcpkg without overlays, so we do not touch VCPKG_OVERLAY_PORTS at all.
-# If overlays are needed again, they can be configured either via
-# CMakePresets (cacheVariable VCPKG_OVERLAY_PORTS) or via an environment variable.
-
-# If generator is Ninja, ensure CMAKE_MAKE_PROGRAM points to a real ninja.exe.
-# Qt Creator sometimes doesn't provide a valid path and CMake errors out early.
-if(CMAKE_GENERATOR MATCHES "^Ninja")
-  if(NOT DEFINED CMAKE_MAKE_PROGRAM OR "${CMAKE_MAKE_PROGRAM}" STREQUAL "")
-    file(GLOB _NINJA_CANDIDATES
-      LIST_DIRECTORIES false
-      "${_VCPKG_ROOT}/downloads/tools/ninja-*-windows/ninja.exe"
-      "${_VCPKG_ROOT}/downloads/tools/ninja/*/ninja.exe"
-    )
-    list(LENGTH _NINJA_CANDIDATES _NINJA_COUNT)
-    if(_NINJA_COUNT EQUAL 0)
-      message(FATAL_ERROR "Could not locate ninja.exe under ${_VCPKG_ROOT}/downloads/tools. Run vcpkg once or install Ninja.")
-    endif()
-    # Just pick the first candidate; in practice there is usually only one.
-    list(GET _NINJA_CANDIDATES 0 _NINJA_EXE)
-    if(NOT EXISTS "${_NINJA_EXE}")
-      message(FATAL_ERROR "Could not locate ninja.exe under ${_VCPKG_ROOT}/downloads/tools. Run vcpkg once or install Ninja.")
-    endif()
-    set(CMAKE_MAKE_PROGRAM "${_NINJA_EXE}" CACHE FILEPATH "Ninja executable" FORCE)
+file(TO_CMAKE_PATH "$ENV{VCPKG_ROOT}" _nmsdk_vcpkg_root)
+if(NOT EXISTS "${_nmsdk_vcpkg_root}/scripts/buildsystems/vcpkg.cmake")
+  message(FATAL_ERROR "VCPKG_ROOT does not contain scripts/buildsystems/vcpkg.cmake")
+endif()
+# x64-windows otherwise selects the newest VS instance independently of the
+# application. Keep v143 dependencies on VS2022 when VS2026 is also installed.
+if(CMAKE_HOST_WIN32 AND NMSDK_EXPECTED_TOOLSET STREQUAL "v143")
+  set(_nmsdk_vswhere "$ENV{ProgramFiles\(x86\)}/Microsoft Visual Studio/Installer/vswhere.exe")
+  if(NOT EXISTS "${_nmsdk_vswhere}")
+    message(FATAL_ERROR "VS2022 discovery requires the Visual Studio Installer (vswhere).")
   endif()
+  execute_process(COMMAND "${_nmsdk_vswhere}" -latest -products * -version "[17.0,18.0)"
+    -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+    OUTPUT_VARIABLE _nmsdk_vs2022 OUTPUT_STRIP_TRAILING_WHITESPACE RESULT_VARIABLE _nmsdk_vs_result)
+  if(NOT _nmsdk_vs_result EQUAL 0 OR NOT IS_DIRECTORY "${_nmsdk_vs2022}")
+    message(FATAL_ERROR "v143 presets require VS2022 with Desktop development with C++ installed.")
+  endif()
+  set(ENV{VCPKG_VISUAL_STUDIO_PATH} "${_nmsdk_vs2022}")
 endif()
-
-# Chainload vcpkg toolchain
-include("${_VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
-
+get_filename_component(_nmsdk_root "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
+set(NMSDK_DEPS_ROOT "${_nmsdk_root}/.deps" CACHE PATH "Persistent dependency store; do not clean with application builds")
+set(NMSDK_DEPENDENCY_PROFILE "default" CACHE STRING "Isolated dependency feature/toolset profile")
+if(NOT DEFINED VCPKG_INSTALLED_DIR)
+  set(VCPKG_INSTALLED_DIR "${NMSDK_DEPS_ROOT}/vcpkg/${NMSDK_DEPENDENCY_PROFILE}" CACHE PATH "Persistent vcpkg manifest installation")
+endif()
+# A caller may select another pinned manifest (v142 uses Qt 6.5.3).
+if(NOT DEFINED VCPKG_MANIFEST_DIR)
+  set(VCPKG_MANIFEST_DIR "${_nmsdk_root}" CACHE PATH "vcpkg manifest directory")
+endif()
+include("${_nmsdk_vcpkg_root}/scripts/buildsystems/vcpkg.cmake")

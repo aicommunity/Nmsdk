@@ -1,3 +1,5 @@
+> Current CMake build instructions: [Windows and Linux presets](Docs/Build-Windows.md). [Build audit](Docs/Build-Audit-2026-11-11.md).
+
 # Neuro Modeler SDK (Nmsdk)
 
 ## RU

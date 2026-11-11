@@ -89,7 +89,7 @@ Debug
 Debug_Build
 Release_Build
 InstallSources
-build-*
+build-*/
 *.orig
 *.stat
 *.res
@@ -117,3 +117,8 @@ save.tmp
 /Testing/
 Reports/*
 !Reports/README.md
+
+# Persistent dependencies and local build validation logs
+/.deps/
+/.build-audit/
+CMakeUserPresets.json

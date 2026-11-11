@@ -1,0 +1,13 @@
+# Reject mixed compiler environments before compiling thousands of files.
+if(MSVC AND CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  if(MSVC_VERSION LESS 1929)
+    message(FATAL_ERROR "MSVC 2019 16.11 (v142) or newer is required")
+  endif()
+  if(NMSDK_EXPECTED_TOOLSET STREQUAL "v142" AND NOT MSVC_VERSION LESS 1930)
+    message(FATAL_ERROR "This preset requires v142. Run Scripts/Build-Windows.ps1 to select its developer environment.")
+  elseif(NMSDK_EXPECTED_TOOLSET STREQUAL "v143" AND (MSVC_VERSION LESS 1930 OR NOT MSVC_VERSION LESS 1950))
+    message(FATAL_ERROR "This preset requires v143. Run Scripts/Build-Windows.ps1.")
+  elseif(NMSDK_EXPECTED_TOOLSET STREQUAL "v145" AND MSVC_VERSION LESS 1950)
+    message(FATAL_ERROR "This preset requires v145 (Visual Studio 2026).")
+  endif()
+endif()

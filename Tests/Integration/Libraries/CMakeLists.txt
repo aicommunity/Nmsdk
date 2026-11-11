@@ -2,11 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 message(STATUS "Libraries integration tests directory created")
 
-if(WIN32)
-    set(PULSELIB_TEST_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/Bin/Platform/Win")
-else()
-    set(PULSELIB_TEST_OUTPUT_DIR "${CMAKE_SOURCE_DIR}/Bin/Platform/Linux")
-endif()
+set(PULSELIB_TEST_OUTPUT_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}")
 
 add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_StorageComponents.cpp
@@ -25,7 +21,7 @@ target_link_libraries(Test_PulseLib_StorageComponents
         Rdk-HardwareLib.qt
         Nmsdk-MotionControlLib.qt
         Nmsdk-PulseLib.qt
-        gtest
+        GTest::gtest
 )
 
 target_include_directories(Test_PulseLib_StorageComponents
