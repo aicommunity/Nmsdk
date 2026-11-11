@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-cpp-syntax-flags4-m40-f1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-recovery-boundary7-f1",
+      "commit": "420eefb8e2fb57124cc3b4e944da1525b23d2111"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-boundary7-f1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryBoundary7F1-20261111/flags-suite.json",
+      "sha256": "b7f22f5e9ad5ce6387767ee0c73e8ecd6e958acb32b4bf16aa319f99e9449edd"
+    },
+    "fixtures": {}
+  }
+}
