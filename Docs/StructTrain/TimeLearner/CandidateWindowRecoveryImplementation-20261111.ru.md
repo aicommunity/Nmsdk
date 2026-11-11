@@ -1,6 +1,6 @@
 # Восстановление поиска composite/candidate-window: контракт реализации
 
-Статус: открытый подэтап7. В отдельной ветке реализован фундамент native-допуска отказа; серверная проверка ещё не выполнена. Переход search cursor, wire/config policy, persistence и их приёмка остаются не реализованы. Основание — [реальные N4 графики](ClassicWindowTemporal-20261111.ru.md) и независимый [replay](../../../Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111/replay.json): L=54 missing в прогнозном окне, ambiguous в полном. Переход к глобальному максимуму или ослабление назначения не допускается.
+Статус: открытый подэтап7. Фундамент native-допуска отказа проверен29/29 на Elder и M40, все30groups закрыты и reservations released на каждом. [Переход search cursor реализован в ядре](CandidateWindowRecoveryCore-20261111.ru.md), но ещё не проверен на серверах. Service delivery, wire/config policy, persistence и их приёмка остаются не реализованы. Основание — [реальные N4 графики](ClassicWindowTemporal-20261111.ru.md) и независимый [replay](../../../Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111/replay.json): L=54 missing в прогнозном окне, ambiguous в полном. Переход к глобальному максимуму или ослабление назначения не допускается.
 
 ## Фактический разрыв API
 

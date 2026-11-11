@@ -4067,3 +4067,168 @@ TEST(NativeCandidateWindowRejection,CapabilityExpiresWhenNextGroupCloses){Reject
 TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterAttemptDestruction){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::DestroyAttempt);}
 TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterSameSemanticGraphRebuild){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::SameGraphRebuilt);}
 TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterExternalStop){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::ExternalStop);}
+
+namespace {
+enum class WindowRecoveryCase { Advance, RepeatedN0, DefaultRetry, StringOnly, InvalidBudget, ProbeBudget, EditBudget, ExternalStop, WrongRevision };
+
+template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,2,1800.,false,ambiguous?1.8:0.,ambiguous?64:8);
+    EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
+        auto& policy=contract.candidateWindowPolicy.inputs[0];
+        policy.delayFramesPerSegment=ambiguous?0:3*f.frequency/100;
+        policy.baseLeftGuardFrames=ambiguous?0:2;
+        policy.baseRightGuardFrames=ambiguous?f.frequency:2;
+        if(ambiguous){policy.hardLastFrame=18*f.frequency/10-1;policy.maximumWindowFrames=18*f.frequency/10;}
+    });
+    f.attempt->EnableRejectedSearchAdmission();
+    const auto references=CaptureWindowReferences(f,false,"reference","candidate-attempt",ambiguous?10.:2.);
+    if(ambiguous) {
+        auto current=f.owner->ReadNativeParameters();current[0].length=54;
+        ASSERT_EQ(f.owner->ApplyNativeParameters(current).status,NativeEditStatus::Applied);
+    }
+    const auto initial=f.owner->ReadNativeParameters();
+    BoundedTrainingConfig cfg;cfg.runId="candidate-attempt";cfg.initialModelRevision=f.Revision();
+    cfg.initialModelEpoch=ambiguous?1:0;cfg.maximumProbes=mode==WindowRecoveryCase::ProbeBudget?4:64;
+    cfg.maximumEdits=mode==WindowRecoveryCase::EditBudget?1:8;cfg.maximumCandidatesPerInput=4;
+    cfg.maximumSweeps=1;cfg.maximumInvalidObservations=mode==WindowRecoveryCase::InvalidBudget?1:2;
+    cfg.normalization=n1?Normalization::TipResistance:Normalization::SynapseCount;cfg.resistanceSubdivisionDepth=0;
+    cfg.n0CandidateRepeats=mode==WindowRecoveryCase::RepeatedN0?2:1;cfg.tolerances.sync=0.;
+    cfg.invalidMeasurementRecovery=mode==WindowRecoveryCase::DefaultRetry?
+        InvalidMeasurementRecovery::RetrySameCandidate:InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+    for(const auto& p:initial)cfg.bounds.push_back({p.length,p.length,p.synapses,p.synapses,p.resistance,p.resistance});
+    cfg.bounds[0].maximumLength=ambiguous?55:4;
+    BoundedTrainingSession search(references,*f.attempt->CandidateWindowReferences(),cfg,initial,n1,
+        f.owner->ReadNativeTrainingCapacitance());
+    std::size_t logical=0,domains=0;bool recovered=false,editedAfterRecovery=false;
+    std::vector<InputParameters> rejectedPoint;std::size_t probesAtFailure=0;
+    while(const auto action=search.NextAction()) {
+        ASSERT_LT(++logical,64u);
+        if(action->kind==TrainingActionKind::ResistanceDomain) {
+            const auto revision=f.Revision();
+            const auto domain=f.owner->AssessNativeTrainingResistanceDomain(action->parameters,action->inputIndex,action->capacitance);
+            EXPECT_EQ(f.Revision(),revision);search.AssessedDomain(action->serial,domain,revision);++domains;continue;
+        }
+        if(action->kind==TrainingActionKind::Edit) {
+            if(recovered) {
+                EXPECT_NE(action->parameters.at(0).length,rejectedPoint.at(0).length);
+                EXPECT_EQ(f.owner->ReadNativeParameters(),rejectedPoint); // queued edits have no physical side effects
+                editedAfterRecovery=true;
+            }
+            const auto result=f.owner->ApplyNativeTrainingParameters(action->parameters,action->capacitance);
+            ASSERT_EQ(result.status,NativeEditStatus::Applied)<<result.reason;
+            search.Applied(action->serial,f.owner->ReadNativeParameters(),f.Revision(),f.owner->ReadNativeTrainingCapacitance());
+            continue;
+        }
+        ASSERT_EQ(action->kind,TrainingActionKind::Probe);ASSERT_FALSE(action->finalVerification);
+        if(editedAfterRecovery && (mode==WindowRecoveryCase::Advance || mode==WindowRecoveryCase::RepeatedN0)) {
+            EXPECT_EQ(action->inputIndex,initial.size()-1); // fresh anchor, never the retired one
+            EXPECT_EQ(search.CandidateWindowRecoveries().size(),1u);EXPECT_FALSE(search.Certificate());
+            if(n1)EXPECT_GE(domains,2u);
+            return;
+        }
+        f.Run(f.Request(action->inputIndex,action->runId,action->trialId,action->modelEpoch),CompositeMeasurementPurpose::Search,
+            [&,serial=action->serial](const auto& p){search.ArmCandidateWindow(serial,p);},{},ambiguous?10.:2.);
+        if(f.attempt->Measurement()) {
+            search.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());continue;
+        }
+        ASSERT_TRUE(f.attempt->RejectedMeasurement())<<f.attempt->RejectionReason();
+        const auto failure=*f.attempt->RejectedMeasurement();
+        EXPECT_EQ(failure.Validity(),ambiguous?DeclaredWindowBasinValidity::Ambiguous:DeclaredWindowBasinValidity::Missing);
+        const auto evidence=search.Evidence().size(),accepted=search.AcceptedCompositeObservations(),invalid=search.InvalidObservations();
+        probesAtFailure=search.IssuedProbes();rejectedPoint=search.Parameters();
+        SaveCandidateWindowGroup(f,"core-rejected-"+std::to_string(action->serial));
+        if(mode==WindowRecoveryCase::DefaultRetry || mode==WindowRecoveryCase::StringOnly) {
+            if(mode==WindowRecoveryCase::DefaultRetry) {
+                EXPECT_THROW(search.RejectCandidateWindow(failure,f.Revision()),std::invalid_argument);
+                EXPECT_EQ(search.InvalidObservations(),invalid);
+            }
+            search.RejectCandidateWindow("composite_train_assignment_missing");
+            EXPECT_TRUE(search.CandidateWindowRecoveries().empty());
+            const auto next=search.NextAction();ASSERT_TRUE(next);EXPECT_EQ(next->kind,TrainingActionKind::Probe);
+            EXPECT_EQ(next->parameters,rejectedPoint);EXPECT_EQ(search.Parameters(),rejectedPoint);
+            EXPECT_EQ(search.IssuedProbes(),probesAtFailure);EXPECT_EQ(search.InvalidObservations(),invalid+1);
+            EXPECT_FALSE(search.Certificate());return;
+        }
+        if(mode==WindowRecoveryCase::ExternalStop) {
+            f.owner->IsNeedToTrain=false;search.RejectCandidateWindow(failure,f.Revision());
+            EXPECT_EQ(search.Status(),TrainingStatus::ExternalStop);EXPECT_TRUE(search.CandidateWindowRecoveries().empty());
+            EXPECT_EQ(search.InvalidObservations(),invalid);EXPECT_FALSE(search.Certificate());return;
+        }
+        if(mode==WindowRecoveryCase::WrongRevision) {
+            search.RejectCandidateWindow(failure,"wrong-native-model-revision");
+            EXPECT_EQ(search.Status(),TrainingStatus::InvalidModel);EXPECT_TRUE(search.CandidateWindowRecoveries().empty());
+            EXPECT_EQ(search.InvalidObservations(),invalid);EXPECT_FALSE(search.Certificate());return;
+        }
+        search.RejectCandidateWindow(failure,f.Revision());recovered=true;
+        EXPECT_EQ(search.Evidence().size(),evidence);EXPECT_EQ(search.AcceptedCompositeObservations(),accepted);
+        EXPECT_EQ(search.IssuedProbes(),probesAtFailure);EXPECT_EQ(search.Parameters(),rejectedPoint);
+        EXPECT_EQ(search.InvalidObservations(),invalid+1);EXPECT_FALSE(search.Certificate());
+        const auto& event=search.CandidateWindowRecoveries().back();
+        EXPECT_EQ(event.groupId,failure.Prepared().GroupId());EXPECT_EQ(event.rejectedContentId,failure.ContentId());
+        EXPECT_EQ(event.transition.trialId,action->trialId);EXPECT_EQ(event.transition.actionSerial,action->serial);
+        EXPECT_EQ(event.transition.modelEpoch,action->modelEpoch);EXPECT_EQ(event.transition.fullParameters,rejectedPoint);
+        EXPECT_EQ(event.issuedProbes,probesAtFailure);EXPECT_EQ(event.acceptedCompositeObservations,accepted);
+        EXPECT_EQ(event.transition.invalidBefore,invalid);EXPECT_EQ(event.transition.invalidAfter,invalid+1);
+        if(search.Status()==TrainingStatus::Searching) {
+            EXPECT_EQ(event.transition.disposition,CandidateRecoveryDisposition::CursorAdvanced);
+            EXPECT_THROW(search.RejectCandidateWindow(failure,f.Revision()),std::invalid_argument);
+            EXPECT_EQ(search.InvalidObservations(),invalid+1); // replay does not spend/restore another allowance
+        }
+    }
+    if(mode==WindowRecoveryCase::InvalidBudget) {
+        EXPECT_EQ(search.Status(),TrainingStatus::InvalidObservation);ASSERT_EQ(search.CandidateWindowRecoveries().size(),2u);
+        EXPECT_EQ(search.CandidateWindowRecoveries().back().transition.disposition,CandidateRecoveryDisposition::InvalidBudgetStop);
+        EXPECT_EQ(search.InvalidObservations(),2u);
+    } else if(mode==WindowRecoveryCase::ProbeBudget || mode==WindowRecoveryCase::EditBudget) {
+        EXPECT_EQ(search.Status(),TrainingStatus::BudgetExhausted);ASSERT_EQ(search.CandidateWindowRecoveries().size(),1u);
+        EXPECT_EQ(search.IssuedProbes(),probesAtFailure);EXPECT_EQ(search.InvalidObservations(),1u);
+        if(mode==WindowRecoveryCase::ProbeBudget)EXPECT_EQ(search.IssuedProbes(),cfg.maximumProbes);
+        else EXPECT_EQ(search.AppliedEdits(),cfg.maximumEdits);
+    } else ADD_FAILURE()<<"Recovery never queued a fresh candidate/anchor: "<<search.Reason();
+    EXPECT_FALSE(search.Certificate());EXPECT_TRUE(recovered);
+}
+
+void WindowRecoveryWireBoundaries() {
+    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+    auto config=ActualCold7Declaration(f);const auto old=EncodeConfiguredNativeTraining(config);
+    const auto baseline=MakeConfiguredNativeTrainingPlan(config);
+    config.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+    config.search.maximumInvalidObservations=1;
+    EXPECT_THROW(EncodeConfiguredNativeTraining(config),std::invalid_argument);
+    EXPECT_THROW(MakeConfiguredNativeTrainingPlan(config),std::invalid_argument);
+    auto flat=config;flat.composite.reset();flat.candidateWindowPolicy.reset();
+    EXPECT_THROW(EncodeConfiguredNativeTraining(flat),std::invalid_argument); // no silent default-policy export
+    auto runtime=baseline;runtime.search.invalidMeasurementRecovery=config.search.invalidMeasurementRecovery;
+    runtime.search.maximumInvalidObservations=1;
+    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(runtime),std::invalid_argument);
+    const auto revision=f.Revision();f.attempt.reset();
+    // The component reports configuration failures through its service state.
+    EXPECT_NO_THROW(f.owner->BeginNativeTraining(runtime));
+    EXPECT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Finished);
+    EXPECT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::InvalidModel);
+    EXPECT_EQ(f.owner->NativeTrainingController().Reason(),"candidate_window_recovery_requires_versioned_service");
+    EXPECT_FALSE(f.owner->NativeTrainingController().Search());EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
+    EXPECT_EQ(f.Revision(),revision);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(old)),old);
+    EXPECT_THROW(ValidateInvalidMeasurementRecovery(config.search.invalidMeasurementRecovery,0),std::invalid_argument);
+    EXPECT_THROW(ValidateInvalidMeasurementRecovery(static_cast<InvalidMeasurementRecovery>(99),1),std::invalid_argument);
+}
+}
+TEST(NativeCandidateWindowRecovery,ClassicN0AdvancesAndRejectsReplay){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance);}
+TEST(NativeCandidateWindowRecovery,BranchN0AdvancesAndRejectsReplay){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance);}
+TEST(NativeCandidateWindowRecovery,ClassicN1ReassessesActualDomains){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,true);}
+TEST(NativeCandidateWindowRecovery,BranchN1ReassessesActualDomains){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,true);}
+TEST(NativeCandidateWindowRecovery,ClassicN0RepeatedCandidatesRequireFreshAnchor){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::RepeatedN0);}
+TEST(NativeCandidateWindowRecovery,BranchN0RepeatedCandidatesRequireFreshAnchor){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::RepeatedN0);}
+TEST(NativeCandidateWindowRecovery,ClassicDefaultPolicyCannotAdvance){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::DefaultRetry);}
+TEST(NativeCandidateWindowRecovery,BranchDefaultPolicyCannotAdvance){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::DefaultRetry);}
+TEST(NativeCandidateWindowRecovery,ClassicStringCannotAuthorizeAdvance){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::StringOnly);}
+TEST(NativeCandidateWindowRecovery,BranchStringCannotAuthorizeAdvance){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::StringOnly);}
+TEST(NativeCandidateWindowRecovery,RecoveryDoesNotReplenishInvalidBudget){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::InvalidBudget);}
+TEST(NativeCandidateWindowRecovery,RecoveryDoesNotReplenishProbeBudget){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::ProbeBudget);}
+TEST(NativeCandidateWindowRecovery,RecoveryDoesNotReplenishEditBudget){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::EditBudget);}
+TEST(NativeCandidateWindowRecovery,ExternalStopRevokesPendingRecovery){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::ExternalStop);}
+TEST(NativeCandidateWindowRecovery,WrongRevisionCannotAdvance){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::WrongRevision);}
+TEST(NativeCandidateWindowRecovery,ClassicAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,false,true);}
+TEST(NativeCandidateWindowRecovery,BranchAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,false,true);}
+TEST(NativeCandidateWindowRecovery,UnversionedWireAndServiceCannotAdmitNewPolicy){WindowRecoveryWireBoundaries();}
