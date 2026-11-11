@@ -290,7 +290,7 @@ def main(argv: list[str] | None = None) -> int:
     analysis.add_argument("--output", type=Path, help="new output file; an existing file is never replaced")
     report = commands.add_parser("report", help="large native soma/input diagnostic figures with portable primary data")
     report.add_argument("source", type=Path, help="recognition evaluation spec")
-    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
+    report.add_argument("--format", choices=("capacitance-search", "capacitance-region", "pipeline-run", "recognition-evaluation", "recognition-transport", "threshold-candidate-evaluation", "probe", "probe-diagnostic", "legacy-posttune-freerun", "probe-set", "native-test-run", "native-archive-transfer-pair", "dataset-clock", "calibration-transaction", "calibration-run", "posttune-transaction", "posttune-run", "native-live-finalization"), default="recognition-evaluation")
     report.add_argument("--primary-inventory", type=Path, help="declared native live primary inventory/composition")
     report.add_argument("--artifacts", type=Path, help="native-test-run directory containing native.xml and native/")
     report.add_argument("--model", type=Path)
@@ -689,7 +689,12 @@ def main(argv: list[str] | None = None) -> int:
             require(args.format == "posttune-transaction" or args.source_solo is None, "report_source_solo_is_only_for_posttune")
             require(args.format == "native-live-finalization" or args.primary_inventory is None,
                     "primary_inventory_is_only_for_live_finalization")
-            if args.format == "native-live-finalization":
+            if args.format == "native-archive-transfer-pair":
+                from .archive_transfer_reports import render_gate_pair
+                require(args.trace is None and args.model is None,
+                        "archive_transfer_report_declares_its_own_primary_files")
+                result = render_gate_pair(args.source.resolve(strict=True), args.output.resolve())
+            elif args.format == "native-live-finalization":
                 from .live_finalization_reports import render_live_finalization
                 require(args.primary_inventory is not None and args.trace is None and args.model is None,
                         "live_report_requires_primary_inventory_and_no_model_or_trace_overlay")

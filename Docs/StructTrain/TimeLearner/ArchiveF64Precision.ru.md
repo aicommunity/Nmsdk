@@ -1,5 +1,13 @@
 # Точность физики и индивидуальных параметров ModelArchive
 
+**Уточнение10.11:** ниже сохранена история ранних постановок и их тогдашние
+статусы. Новый SDKf39 прошёл два literal telemetry controls при2000/20000Hz:
+полные source/import soma и input arrays совпадают. [Опубликованные данные,
+крупные графики и reader11/11](NativeArchiveGatePairReports.ru.md).
+Это high-precision matrix+boundary subset, не весь прежний16-case corpus
+и не проверка timestep convergence. Его результат не заменяет неизвестные
+или отдельные исторические outcomes ниже.
+
 Это отдельная проверка versioned ModelArchive, а не native hot XML checkpoint.
 ModelIdentity кодирует double как IEEE754 bits; наличие такого fingerprint
 само по себе не доказывает точность сериализации и восстановления параметров.

@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_retired_report_cache_metadata_check",
+  "schema_version": 1,
+  "scope": "six exact metadata files and plan totals; not full inventory/log/index audit",
+  "metadata_hashes": {
+    "terminal.json": "a53cf2a5c02e60ee60ad4598c6b3049e0bab5ade436a3fbc5b389f1c8d29521e",
+    "reservation.json": "f6353337789e2853a9cacc914328c561815b213262ee2024caad0d43d1d2258a",
+    "reservation-final.json": "35b82e069b22f0ea89efa05c93a1fcf324ff9fcf134010ef7bdfe8f256ebd0e0",
+    "processes-before.json": "3e2ee0cd507030458e7ebd737f010c66423c2e8892578c48c947199b4d052517",
+    "processes-before-unlink.json": "3e2ee0cd507030458e7ebd737f010c66423c2e8892578c48c947199b4d052517",
+    "verified-plan.json.gz": "09781d7724fe84b2112a3e60e5d90d3022b741371c66ca69b8ca72b4dc64fbbc"
+  },
+  "retired_roots": 18,
+  "declared_plan_files": 1258684,
+  "terminal": {
+    "scientific_verdict": null,
+    "completed": true,
+    "removed_files": 1258684,
+    "removed_logical_bytes": 12043062096,
+    "free_bytes_before": 2420293632,
+    "free_bytes_after": 17256710144,
+    "self_peak_rss_bytes": 195657728
+  },
+  "lease": "c733eeb9-c7d5-4709-b83c-60b5873365b2",
+  "lease_released": true,
+  "fresh_owner_missing_and_capacity_check": {
+    "cleanup_terminal": {
+      "scientific_verdict": null,
+      "completed": true,
+      "removed_files": 1258684,
+      "removed_logical_bytes": 12043062096,
+      "free_bytes_before": 2420293632,
+      "free_bytes_after": 17256710144,
+      "self_peak_rss_bytes": 195657728
+    },
+    "cleanup_owner_missing": true,
+    "held": [],
+    "capacity": {
+      "disk_bytes": 15032385536,
+      "memory_bytes": 25769803776,
+      "slots": 1
+    },
+    "free_bytes": 17256341504
+  },
+  "full_primary_publication_and_inventory_verification_pending": true,
+  "scientific_verdict": null
+}

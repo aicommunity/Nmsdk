@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "native-archive-gate-pair-report11-m40-a1",
+  "package_fingerprint": "a584aaf54ed751da1bfe1e340f7dd406ce0597d63321b45186d9ad88b1ae8212",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_actual_native_pair",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_unknown_gate_schema",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_false_green_after_process_failure",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_unclosed_process",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_missing_loaded_runtime_proof",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_changed_inventory_digest",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_duplicate_native_condition",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_skipped_native_condition",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_missing_actual_probe",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_censored_window",
+    "Scripts.StructTrain.TimeLearner.tests.test_archive_transfer_gate_pair.ArchiveTransferGatePair.test_actual_cli_plots"
+  ],
+  "fixtures": {
+    "TL_NATIVE_ARCHIVE_GATE_PAIR": {
+      "pattern": "**/*.json",
+      "files": 24,
+      "fingerprint": "adc39027f42bf62493fa0b06186be2eaf06aeda22b4a773fe55785967b914e76"
+    },
+    "TL_NATIVE_ARCHIVE_GATE_PAIR_XML": {
+      "pattern": "native.xml",
+      "files": 1,
+      "fingerprint": "f14126d5e90d92cd0ad1f4a867ef998376dce7fa9ae11f647efe1a45085689dd"
+    }
+  }
+}
