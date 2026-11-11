@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-stock-cold8-train-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "c2c837e149a1cd9a0af799e27acc813df21ebb69",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 4294967296
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-stock-cold8-train-a1",
+      "commit": "c2c837e149a1cd9a0af799e27acc813df21ebb69"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8TrainA1-20261112/suite.json",
+      "sha256": "0c4383488c19cea0a8e909bdb6753aeed25cb2793016906e1ca3986eeeb1c864"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold8-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8TrainA1-20261112/fixture",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-cold8-preflight-m40-a2/worker/native-stock-cold8/prepared",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+    }
+  }
+}
