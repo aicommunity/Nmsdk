@@ -4501,6 +4501,12 @@ template<class Owner> std::vector<NativeProbeSample> RecoveryBoundaryResponse(Na
     request.routing=service.Plan().protocol.routing;request.activeInput=0;
     request.inputId=service.Plan().protocol.inputs[0].id;request.protocolRevision=service.Plan().protocol.revision;
     request.baseModelRevision=f.Revision();request.modelEpoch=service.ModelEpoch();
+    auto& spec=request.specification;spec.schemaVersion=6;spec.windows.clear();spec.characterization.reset();
+    spec.waveAssignment=WaveAssignmentPolicy::WindowOnly;spec.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    spec.expectedStimulusIds=service.Plan().protocol.stimulusIds;
+    StimulusSubsetCharacterization subset{service.Plan().protocol.patternHash,service.Plan().protocol.inputs.size(),{}};
+    for(std::size_t i=0;i<subset.physicalInputCount;++i)subset.sourceOrdinals.push_back(i);
+    spec.stimulusSubset=std::move(subset); // Complete native burst, no scalar peak admission.
     request.readModelRevision=[&f]{return f.Revision();};request.readFullModelRevision=request.readModelRevision;
     auto samples=std::make_shared<std::vector<NativeProbeSample>>();
     request.onSample=[samples](const NativeProbeSample& sample){samples->push_back(sample);};
