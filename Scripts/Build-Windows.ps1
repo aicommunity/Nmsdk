@@ -13,19 +13,43 @@ $ErrorActionPreference = 'Stop'
 $originalEnvironment = @{}
 Get-ChildItem Env: | ForEach-Object { $originalEnvironment[$_.Name] = $_.Value }
 try {
+  # Generic QT_ROOT presets are opt-in; the wrapper supplies their environment.
+  if($Preset.EndsWith('-localqt')) { $env:NMSDK_SHOW_QT_ROOT_PRESETS = '1' }
   $requestedVcpkgRoot = $env:VCPKG_ROOT
   $preferredCmake = (Get-Command cmake -CommandType Application -ErrorAction SilentlyContinue).Source
   $repo = Split-Path $PSScriptRoot -Parent
-  if($Preset -notmatch '^win-vs(2019|2022|2026)-(ninja|msbuild)-(debug|release)-(localqt|vcpkgqt)$') {
-    throw 'Select a Windows preset from cmake --list-presets. See Docs/Build-Windows.md.'
+  $basePreset = $Preset
+  $registeredPreset = $null
+  $userPresetsPath = Join-Path $repo 'CMakeUserPresets.json'
+  if(Test-Path -LiteralPath $userPresetsPath) {
+    $userPresets = Get-Content -LiteralPath $userPresetsPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    $registeredPreset = $userPresets.configurePresets | Where-Object {
+      $_.name -eq $Preset -and $_.vendor.'nmsdk/qt-discovery/1.0'.generated
+    } | Select-Object -First 1
+    if($registeredPreset) { $basePreset = $registeredPreset.inherits }
+  }
+  if($basePreset -notmatch '^win-vs(2019|2022|2026)-(ninja|msbuild)-(debug|release)-(localqt|vcpkgqt)$') {
+    throw 'Select a registered local Qt preset or a generic Windows preset. See Docs/Build-Windows.md.'
   }
   $vsYear = $Matches[1]
   $generator = $Matches[2]
+  $isLocalQt = $Matches[4] -eq 'localqt'
+  $requiredVsMajor = $null
+  if($registeredPreset) {
+    $requiredVsMajor = $registeredPreset.vendor.'microsoft.com/VisualStudioSettings/CMake/1.0'.vsInstanceVersion
+    $pinnedQtRoot = $registeredPreset.environment.QT_ROOT
+    if($PSBoundParameters.ContainsKey('QtRoot') -and $QtRoot -and
+       (Resolve-Path -LiteralPath $QtRoot).Path -ne (Resolve-Path -LiteralPath $pinnedQtRoot).Path) {
+      throw 'This preset pins another Qt kit. Select or register the required kit instead of overriding -QtRoot.'
+    }
+    $QtRoot = $pinnedQtRoot
+  }
   $toolsetPattern = switch($vsYear) { '2019' {'^14\.2[9]\.'} '2022' {'^14\.(3\d|4\d)\.'} '2026' {'^14\.5\d\.'} }
   $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
   if(!(Test-Path -LiteralPath $vswhere)) { throw 'Install Visual Studio Build Tools and its Desktop development with C++ workload.' }
   $instances = & $vswhere -all -products '*' -format json | ConvertFrom-Json
   $selection = foreach($instance in $instances) {
+    if($requiredVsMajor -and !($instance.installationVersion.StartsWith("$requiredVsMajor."))) { continue }
     if($vsYear -eq '2022' -and !$instance.installationVersion.StartsWith('17.')) { continue }
     $toolsRoot = Join-Path $instance.installationPath 'VC/Tools/MSVC'
     if(Test-Path -LiteralPath $toolsRoot) {
@@ -38,6 +62,7 @@ try {
   }
   if($generator -eq 'msbuild') {
     $major = switch($vsYear) { '2019' {'16.'} '2022' {'17.'} '2026' {'18.'} }
+    if($requiredVsMajor) { $major = "$requiredVsMajor." }
     $selection = $selection | Where-Object {$_.Instance.installationVersion.StartsWith($major)}
   }
   $chosen = $selection | Sort-Object Version -Descending | Select-Object -First 1
@@ -62,7 +87,7 @@ try {
     $env:PATH = "$ninjaBin;$env:PATH"
   }
   if(!(Get-Command cmake -ErrorAction SilentlyContinue)) { throw 'Install CMake >= 3.23 and put it on PATH.' }
-  $cmakeMinimum = if($vsYear -eq '2026' -and $generator -eq 'msbuild') { [version]'4.2' } else { [version]'3.23' }
+  $cmakeMinimum = if($chosen.Instance.installationVersion.StartsWith('18.') -and $generator -eq 'msbuild') { [version]'4.2' } else { [version]'3.23' }
   $cmakeExecutable = $null
   $cmakeCandidates = @($preferredCmake, (Get-Command cmake -CommandType Application -ErrorAction SilentlyContinue).Source,
     (Join-Path $chosen.Instance.installationPath 'Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe')) |
@@ -75,7 +100,7 @@ try {
   }
   if(!$cmakeExecutable) { throw "Install native Windows CMake >= $cmakeMinimum and put it on PATH." }
   if($QtRoot) { $env:QT_ROOT = (Resolve-Path -LiteralPath $QtRoot).Path }
-  if($Action -in @('configure','all','rebuild') -and $Preset.EndsWith('-localqt') -and !$env:QT_ROOT) { throw 'Set QT_ROOT or pass -QtRoot for a complete local Qt 5.15+ / Qt 6 installation.' }
+  if($Action -in @('configure','all','rebuild') -and $isLocalQt -and !$env:QT_ROOT) { throw 'Set QT_ROOT or pass -QtRoot for a complete local Qt 5.15+ / Qt 6 installation.' }
   if(!$env:VCPKG_ROOT) { throw 'Set VCPKG_ROOT to a bootstrapped vcpkg checkout.' }
   # A global plugin path pointing at another Qt can make even a successful build
   # crash before main(). The deployed runtime selects its own matching plugins.

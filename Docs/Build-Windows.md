@@ -30,6 +30,7 @@
 Для обычного вызова CMake/Ninja из терминала сначала активируйте x64 developer environment нужного toolset:
 
 ```powershell
+$env:NMSDK_SHOW_QT_ROOT_PRESETS = "1" # явно показать общие QT_ROOT-пресеты
 cmake --list-presets
 cmake --preset win-vs2022-ninja-release-localqt
 cmake --build --preset win-vs2022-ninja-release-localqt --parallel 8
@@ -179,17 +180,36 @@ PATH, CMake package registry и настроек Qt Creator. `-SearchRoot` до�
 ./Scripts/Register-LocalQtPresets.ps1 -SearchRoot <каталог-с-версиями-Qt>
 ```
 
-Команда добавляет Debug/Release для VS2022 Ninja в игнорируемый Git
-`CMakeUserPresets.json`. Например: `Qt 5.15.2 (msvc2019_64) | MSVC 2022 ninja release`.
+Команда находит установленные MSVC toolsets через vswhere и добавляет Debug/Release
+для доступных Ninja/MSBuild в игнорируемый Git `CMakeUserPresets.json`.
+Проверяется фактическая версия установленного компилятора относительно версии,
+которой собран Qt. v142 внутри VS2022 доступен и для Ninja, и для MSBuild через
+генератор VS2022; в названии такого варианта указано `(VS 2022)`.
+Отсутствующие компиляторы не регистрируются. Например: `Qt 5.15.2 (msvc2019_64) | MSVC 2022 ninja release`.
 Затем выполните **CMake: Select Configure Preset** и выберите нужную строку;
 при необходимости выберите одноимённый **Build Preset**. Кнопка **Configure**
 использует уже выбранный вариант и не показывает отдельный диалог Qt.
 Если список не обновился, выполните **Developer: Reload Window**.
 
-Для других компиляторов/генераторов передайте `-BasePreset` с именами общих
-`*-localqt` пресетов. Для WebEngine используйте `-WithWebEngine`.
+Чтобы ограничить набор, передайте `-BasePreset` с именами нужных общих
+`*-localqt` пресетов. Указанный компилятор и система сборки должны быть установлены. Для WebEngine используйте `-WithWebEngine`.
 Неполные kit исключаются. Для каждого kit создаётся отдельный каталог сборки;
 зависимости продолжают использовать общую установку соответствующего профиля `.deps`.
 Повторный запуск обновляет сгенерированные записи, сохраняя остальные пользовательские
 пресеты. Предыдущий файл сохраняется в `.build-audit/CMakeUserPresets.before-qt.json`.
 Локальные абсолютные пути в общий `CMakePresets.json` не попадают.
+
+## Общие localqt-пресеты и список VSCode
+
+В обычном списке отображаются варианты с конкретным проверенным Qt kit и установленным
+компилятором, созданные `Register-LocalQtPresets.ps1`. Это устраняет дублирующие варианты,
+которые зависели от QT_ROOT в старом окружении VSCode. После установки/удаления Qt или
+компиляторов выполните регистрацию повторно. Если список VSCode не обновился, используйте
+**Developer: Reload Window** и выберите новые Configure/Build Preset.
+
+Общие `win-vs...-localqt` остаются переносимыми профилями. Для прямого вызова CMake
+они включаются явно через `NMSDK_SHOW_QT_ROOT_PRESETS=1` вместе с `QT_ROOT` и нужным
+developer environment. `Scripts/Build-Windows.ps1` включает этот режим сам и поддерживает
+как общие имена, так и имена зарегистрированных Qt-пресетов. Linux-пресеты не менялись.
+Общий профиль `win-vs2019-msbuild-...` использует генератор VS2019; зарегистрированный
+профиль может использовать установленный VS2022 с v142, что видно по его названию.

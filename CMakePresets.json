@@ -66,25 +66,57 @@
     },
     {
       "name": "win-vs2019-ninja-debug-localqt",
-      "displayName": "MSVC 2019 ninja Debug (localqt)",
+      "displayName": "MSVC 2019 ninja Debug (localqt) [QT_ROOT]",
       "inherits": "win-vs2019-ninja",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2019-ninja-release-localqt",
-      "displayName": "MSVC 2019 ninja Release (localqt)",
+      "displayName": "MSVC 2019 ninja Release (localqt) [QT_ROOT]",
       "inherits": "win-vs2019-ninja",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2019-ninja-debug-vcpkgqt",
@@ -132,23 +164,55 @@
     },
     {
       "name": "win-vs2019-msbuild-debug-localqt",
-      "displayName": "MSVC 2019 msbuild Debug (localqt)",
+      "displayName": "MSVC 2019 msbuild Debug (localqt) [QT_ROOT]",
       "inherits": "win-vs2019-msbuild",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2019-msbuild-release-localqt",
-      "displayName": "MSVC 2019 msbuild Release (localqt)",
+      "displayName": "MSVC 2019 msbuild Release (localqt) [QT_ROOT]",
       "inherits": "win-vs2019-msbuild",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2019-msbuild-debug-vcpkgqt",
@@ -195,25 +259,57 @@
     },
     {
       "name": "win-vs2022-ninja-debug-localqt",
-      "displayName": "MSVC 2022 ninja Debug (localqt)",
+      "displayName": "MSVC 2022 ninja Debug (localqt) [QT_ROOT]",
       "inherits": "win-vs2022-ninja",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2022-ninja-release-localqt",
-      "displayName": "MSVC 2022 ninja Release (localqt)",
+      "displayName": "MSVC 2022 ninja Release (localqt) [QT_ROOT]",
       "inherits": "win-vs2022-ninja",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2022-ninja-debug-vcpkgqt",
@@ -260,23 +356,55 @@
     },
     {
       "name": "win-vs2022-msbuild-debug-localqt",
-      "displayName": "MSVC 2022 msbuild Debug (localqt)",
+      "displayName": "MSVC 2022 msbuild Debug (localqt) [QT_ROOT]",
       "inherits": "win-vs2022-msbuild",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2022-msbuild-release-localqt",
-      "displayName": "MSVC 2022 msbuild Release (localqt)",
+      "displayName": "MSVC 2022 msbuild Release (localqt) [QT_ROOT]",
       "inherits": "win-vs2022-msbuild",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2022-msbuild-debug-vcpkgqt",
@@ -323,25 +451,57 @@
     },
     {
       "name": "win-vs2026-ninja-debug-localqt",
-      "displayName": "MSVC 2026 ninja Debug (localqt)",
+      "displayName": "MSVC 2026 ninja Debug (localqt) [QT_ROOT]",
       "inherits": "win-vs2026-ninja",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2026-ninja-release-localqt",
-      "displayName": "MSVC 2026 ninja Release (localqt)",
+      "displayName": "MSVC 2026 ninja Release (localqt) [QT_ROOT]",
       "inherits": "win-vs2026-ninja",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2026-ninja-debug-vcpkgqt",
@@ -388,23 +548,55 @@
     },
     {
       "name": "win-vs2026-msbuild-debug-localqt",
-      "displayName": "MSVC 2026 msbuild Debug (localqt)",
+      "displayName": "MSVC 2026 msbuild Debug (localqt) [QT_ROOT]",
       "inherits": "win-vs2026-msbuild",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2026-msbuild-release-localqt",
-      "displayName": "MSVC 2026 msbuild Release (localqt)",
+      "displayName": "MSVC 2026 msbuild Release (localqt) [QT_ROOT]",
       "inherits": "win-vs2026-msbuild",
       "cacheVariables": {
         "NMSDK_QT_PROVIDER": "local",
         "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
         "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
-      }
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
       "name": "win-vs2026-msbuild-debug-vcpkgqt",
@@ -605,7 +797,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2019-ninja-release-localqt",
@@ -614,7 +821,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2019-ninja-debug-vcpkgqt",
@@ -641,7 +863,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2019-msbuild-release-localqt",
@@ -650,7 +887,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2019-msbuild-debug-vcpkgqt",
@@ -677,7 +929,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2022-ninja-release-localqt",
@@ -686,7 +953,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2022-ninja-debug-vcpkgqt",
@@ -713,7 +995,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2022-msbuild-release-localqt",
@@ -722,7 +1019,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2022-msbuild-debug-vcpkgqt",
@@ -749,7 +1061,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2026-ninja-release-localqt",
@@ -758,7 +1085,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2026-ninja-debug-vcpkgqt",
@@ -785,7 +1127,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2026-msbuild-release-localqt",
@@ -794,7 +1151,22 @@
       "targets": [
         "NeuroModeler",
         "NeuroModelerConsole"
-      ]
+      ],
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
       "name": "win-vs2026-msbuild-debug-vcpkgqt",
@@ -893,6 +1265,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -908,6 +1295,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -953,6 +1355,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -968,6 +1385,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1013,6 +1445,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1028,6 +1475,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1073,6 +1535,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1088,6 +1565,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1133,6 +1625,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1148,6 +1655,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1193,6 +1715,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
@@ -1208,6 +1745,21 @@
       "environment": {
         "QT_PLUGIN_PATH": null,
         "QML2_IMPORT_PATH": null
+      },
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
