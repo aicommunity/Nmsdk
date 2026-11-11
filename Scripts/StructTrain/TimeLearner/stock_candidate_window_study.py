@@ -193,6 +193,83 @@ def prepare(source, runtime_path, output):
     return result
 
 
+def recovery_declaration(job, name):
+    """Upgrade only the explicit rejection policy; retain the measured objective."""
+    validate_job('train', job)
+    require(job == _signed(job), 'stock_cold8_source_job_digest')
+    config = job['configuration']
+    require(config['schema_version'] == 7 and len(config['model']['inputs']) == 4 and
+        config['model']['normalization'] == 'N1' and
+        config['search']['tolerances'] == dict(amplitude_absolute=1e-5, amplitude_relative=0., sync=.02) and
+        config['minimum_amplitude'] == 1e-6 and config['search']['maximum_invalid_observations'] > 0 and
+        job['profile_archives'] == [], 'stock_cold8_requires_original_strict_N4')
+    changed = deepcopy(job)
+    changed['configuration'].update(schema_version=8, run_id=name,
+        invalid_measurement_recovery='advance_rejected_candidate_window')
+    changed = _signed(changed)
+    validate_job('preflight', changed);validate_job('train', changed)
+    return changed
+
+
+def prepare_recovery(source, runtime_path, output):
+    """Rebind an audited cold7 declaration, never an old learned state.
+
+    Earlier measured coordinates are proposal hypotheses only. The new native
+    preflight must reproduce the complete cold identity; Train recaptures every
+    reference. Cross-runtime reuse does not attest new measurement validity.
+    """
+    source = Path(source).resolve(strict=True);output = Path(output)
+    require(not output.exists(), 'stock_cold8_preparation_exists')
+    index = load(source/'index.json');old_runtime = load(source/'runtime.json')
+    require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] == 1 and
+        set(index['jobs']) == {'Classic-stock-cold7-N1', 'Branch-stock-cold7-N1'},
+        'stock_cold8_original_plan_inventory')
+    runtime = load(Path(runtime_path));verify_runtime(runtime)
+    def code(r):
+        return dict(pulse_core=r['source_closure']['Libraries/Nmsdk-PulseLib']['head'],
+            rdk_core=r['source_closure']['Rdk']['head'], console_driver=r['source_closure']['root']['head'])
+    origins = load(source/'reference-origin.json')
+    require(origins['references_recaptured_by_new_train'] is True and origins['learned_state_imported'] is False,
+        'stock_cold8_original_reference_scope')
+    prepared = []
+    before = {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+        for p in sorted(source.rglob('*.json'))}
+    for old_name, expected_hash in index['jobs'].items():
+        old = load(source/'jobs'/(old_name+'.json'))
+        require(old['sha256'] == expected_hash, 'stock_cold8_original_job_changed')
+        identity = load(source/'initial'/(old_name+'.json'))
+        audit_stock_profile(identity, branch=old['configuration']['model']['branch'])
+        require(load(source/'conditions'/(old_name+'.json')) ==
+            _condition(old, identity, code(old_runtime), old_runtime,
+                       algorithm_id='stock-measured-reference-cold7-N4-N1-pilot-v1'),
+            'stock_cold8_original_condition_changed')
+        validate_candidate_envelopes(old['configuration'], origins['characterization'][old_name])
+        name = old_name.replace('-cold7-', '-cold8-')
+        job = recovery_declaration(old, name)
+        prepared.append((old_name, name, job, identity))
+    require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
+        for p in sorted(source.rglob('*.json'))}, 'stock_cold8_original_plan_changed_during_read')
+    output.mkdir(parents=True)
+    for directory in ('jobs', 'conditions', 'initial'):(output/directory).mkdir()
+    for _, name, job, identity in prepared:
+        _write(output/'jobs'/(name+'.json'), job)
+        _write(output/'initial'/(name+'.json'), identity)
+        _write(output/'conditions'/(name+'.json'), _condition(job, identity, code(runtime), runtime,
+            algorithm_id='stock-measured-reference-cold8-N4-N1-pilot-v1'))
+    _write(output/'runtime.json', runtime)
+    _write(output/'reference-origin.json', dict(
+        characterization={name:origins['characterization'][old_name] for old_name,name,_,_ in prepared},
+        references_recaptured_by_new_train=True, learned_state_imported=False,
+        delay_model_is_initial_total_latency_hypothesis=True, scientific_verdict=None))
+    _write(output/'source-plan.json', dict(path=str(source), files=before,
+        source_runtime=old_runtime, measured_coordinate_role='diagnostic_proposal_only',
+        effective_native_preflight_required=True, scientific_verdict=None))
+    result = dict(kind='timelearner_stock_candidate_window_plan', schema_version=2,
+        jobs={name:job['sha256'] for _,name,job,_ in prepared}, scientific_verdict=None)
+    _write(output/'index.json', result)
+    return result
+
+
 def run(source, runtime_path, controller, case, output, *, preflight_only=False, finalization_seconds=0.):
     finalization_seconds = number(finalization_seconds)
     require(finalization_seconds >= 0., 'stock_cold7_invalid_execution_limits')
@@ -203,12 +280,15 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False,
     require(not source.is_relative_to(output) and not output.is_relative_to(source),
         'stock_cold7_output_overlaps_preparation')
     index = load(source/'index.json')
-    require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] == 1
+    require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] in (1, 2)
         and case in index['jobs'], 'stock_cold7_unknown_plan_or_case')
+    recovery = index['schema_version'] == 2
     runtime = load(Path(runtime_path));verify_runtime(runtime)
     require(runtime == load(source/'runtime.json'), 'stock_cold7_runtime_changed')
     job_path = source/'jobs'/(case+'.json');job = load(job_path)
     validate_job('train', job)
+    require(job['configuration']['schema_version'] == (8 if recovery else 7),
+        'stock_candidate_plan_configuration_version_mismatch')
     execution_limits = training_execution_limits(job['configuration'], finalization_seconds)
     require(job['sha256'] == index['jobs'][case], 'stock_cold7_job_changed')
     expected_initial = load(source/'initial'/(case+'.json'))
@@ -216,7 +296,8 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False,
         rdk_core=runtime['source_closure']['Rdk']['head'], console_driver=runtime['source_closure']['root']['head'])
     condition = load(source/'conditions'/(case+'.json'))
     require(condition == _condition(job, expected_initial, code, runtime,
-        algorithm_id='stock-measured-reference-cold7-N4-N1-pilot-v1'), 'stock_cold7_condition_changed')
+        algorithm_id=('stock-measured-reference-cold8-N4-N1-pilot-v1' if recovery else
+                      'stock-measured-reference-cold7-N4-N1-pilot-v1')), 'stock_cold7_condition_changed')
     before = {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
         for p in sorted(source.rglob('*.json'))}
     output.mkdir(parents=True)
@@ -263,7 +344,12 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False,
         summary = load(package_path.with_name(package_path.name.replace('_state.json', '_summary.json')))
         package = load(package_path)
         physical_audit = audit_final_stock(expected_initial, package['neuron']['graph']['identity'])
-        package_audit = audit_candidate_window_package(package, summary=summary,
+        if recovery:
+            from .candidate_window_package_evidence import audit_candidate_window_recovery_package
+            package_reader = audit_candidate_window_recovery_package
+        else:
+            package_reader = audit_candidate_window_package
+        package_audit = package_reader(package, summary=summary,
             external_resolver=filesystem_primary_resolver(root))
     registry.release(lease['token'], note='Cold Train native groups closed; execution and convergence remain distinct.')
     require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
