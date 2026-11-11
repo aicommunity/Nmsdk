@@ -13,8 +13,8 @@
 
 | Worker | Задание | Последнее подтверждение |
 |---|---|---|
-| Elder-1 | `s07-n1-geometry-full-sdk-elder-a1` | Supervisor PID1441287/start_ticks393161186 жив; kernel cgroup running; начата компиляция полного SDK |
-| M40 | `s07-n1-geometry-full-sdk-m40-a1` | Supervisor PID3039462/start_ticks343706756 жив; kernel cgroup running; финальный результат отсутствует |
+| Elder-1 | `s07-n1-geometry-full-sdk-elder-a1` | Полный SDK и Console собраны; первый gate принят, native119 продолжается |
+| M40 | `s07-n1-geometry-full-sdk-m40-a1` | Полный SDK и Console собраны; первый gate принят, native119 продолжается |
 
 Контроллер собирает реальные `Test_PulseLib_StorageComponents` и `NeuroModelerConsole`, затем исполняет прежний selected native119 cohort с 43 gates и 310 artifact rules. Это проверяет интеграцию нового production codec и поиска с SDK. Численные 98 случаев приняты отдельно; число 119 не следует трактовать как полный список всех тестов binary или обязательную mode/physics/scientific matrix.
 
@@ -32,6 +32,8 @@
 
 Нужны terminal native119, закрытие всех owned groups, освобождение leases и compact primary. Только после проверки сборки и регрессий — физический Console A/B исправленного N1, свежая all-input verification и отчёты реакций на паттерны. Прогноз задержки не заменяет измеренный закреплённый пик. Бюджет поиска и timeout не являются Exact или PhysicalInfeasible.
 
-Windows .14 доступна по ключу; наблюдены 9404395520 B свободной RAM и отсутствие запущенных TimeLearner Scheduled Tasks. Она ещё не допущена к полному научному pipeline. Этот read-only осмотр не считается запуском третьего эксперимента; пользовательский `C:/Projects/Nmsdk` не менялся.
+На Windows .14 через Git подготовлен тот же SDK subject: независимо сверены 4096/4096 файлов и восемь чистых repositories без alternates. Запущена отдельная сборка `TimeLearner-windows-n1-geometry-full-sdk-build-a1`. Подтверждены активная задача, owned cmd PID15964/creation FILETIME134388369282676342 и реальные процессы cl/Ninja/CMake. [Декларация и readbacks](ValidationPlans/WindowsN1GeometryFullSDKA1-20261111). Квота Windows Job — 4 GiB, compiler parallelism=1, установка зависимостей выключена. Финального результата сборки ещё нет.
+
+Таким образом, три машины действительно выполняют вычислительную проверку: две — native119 после SDK-сборки, третья — MSVC compile/link. Windows ещё не допущена к полному научному pipeline; пользовательский `C:/Projects/Nmsdk` не менялся. Сохранены ошибки транспортного помощника до checkout/compile: пустой SSH exit255 из Node-контекста, отказ импорта локального модуля при исходной process execution policy и ошибочная замена токена SHA в команде проверки pack. Root/Bin завершены только после проверки уже импортированных packs и fresh/unborn состояния. Использована process-local RemoteSigned; глобальная policy не менялась. Итоговый полный namespace-проверяющий механизм оставлен без ослаблений.
 
 Полностью принят по-прежнему только этап 0 исходного плана; этапы 1–12 остаются частичными. Ветки опубликованы отдельно; develop merge ожидает соответствующей приёмки, выполняется через `--no-ff`, сначала child, затем root.
