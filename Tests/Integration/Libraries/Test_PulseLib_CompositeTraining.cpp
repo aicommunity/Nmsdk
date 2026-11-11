@@ -20,6 +20,7 @@
 #include "TimeLearner/NativeLearnedState.h"
 #include "TimeLearner/NativeCompositeLearnedState.h"
 #include "TimeLearner/NativeTrainingBindings.h"
+#include "TimeLearner/CandidateWindowRecoveryLedger.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
@@ -4180,6 +4181,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
         EXPECT_EQ(event.issuedProbes,probesAtFailure);EXPECT_EQ(event.acceptedCompositeObservations,accepted);
         EXPECT_EQ(event.transition.invalidBefore,invalid);EXPECT_EQ(event.transition.invalidAfter,invalid+1);
         const auto eventDocument=EncodeCandidateWindowRecoveryEvidence(event);
+        EXPECT_EQ(EncodeCandidateWindowRecoveryEvidence(DecodeCandidateWindowRecoveryEvidence(eventDocument)),eventDocument);
         EXPECT_EQ(eventDocument["kind"].toString(),"timelearner_candidate_window_recovery_event");
         EXPECT_EQ(eventDocument["schema_version"].toInt(),1);
         EXPECT_EQ(eventDocument["rejected_content_id"].toString().toStdString(),failure.ContentId());
@@ -4356,7 +4358,23 @@ template<class Owner> void NativeRecoveryService(bool n1=false,ServiceRecoveryIn
             EXPECT_TRUE(found->semanticProofId.empty());EXPECT_EQ(e.rejectedContentId,CandidateWindowRejectedGroupContentId(service.Plan().protocol,*found));
             events.append(QJsonObject{{"event",EncodeCandidateWindowRecoveryEvidence(e)},{"runtime_plan",delivery.runtimePlan}});
         }
-        SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),"recovery-service");
+        const auto savedArchive=EncodeNativeCandidateWindowServiceArchive(service);
+        SaveCompositeArchive(savedArchive,"recovery-service");
+        const auto replayedArchive=DecodeNativeCompositeTrainingArchive(savedArchive.document);
+        const auto ledger=EncodeCandidateWindowRecoveryLedger(service.CandidateWindowRecoveryDeliveries(),replayedArchive,
+            service.CandidateWindowRecoveryDeliveryLogIntact());
+        const auto restoredDeliveries=DecodeCandidateWindowRecoveryLedger(ledger,replayedArchive);
+        EXPECT_EQ(restoredDeliveries.size(),service.CandidateWindowRecoveryDeliveries().size());
+        EXPECT_EQ(EncodeCandidateWindowRecoveryLedger(restoredDeliveries,replayedArchive,true),ledger);
+        SavePortableObject("recovery-service","recovery-ledger.json",ledger);
+        EXPECT_THROW(EncodeCandidateWindowRecoveryLedger(restoredDeliveries,replayedArchive,false),std::invalid_argument);
+        auto bad=restoredDeliveries;bad.push_back(bad.front());
+        EXPECT_THROW(EncodeCandidateWindowRecoveryLedger(bad,replayedArchive,true),std::invalid_argument);
+        bad=restoredDeliveries;bad.front().event.transition.fullParameters[0].length+=1;
+        EXPECT_THROW(EncodeCandidateWindowRecoveryLedger(bad,replayedArchive,true),std::invalid_argument);
+        auto badClaim=ledger;badClaim["independent_delivery_completeness_verified"]=true;badClaim.remove("sha256");
+        badClaim["sha256"]=NmsdkTools::CanonicalModelDataSha256(badClaim);
+        EXPECT_THROW(DecodeCandidateWindowRecoveryLedger(badClaim,replayedArchive),std::invalid_argument);
         SavePortableObject("recovery-service","initial-configuration.json",service.CompositeInitialConfiguration());
         SavePortableObject("recovery-service","runtime-plan.json",EncodeCandidateWindowRuntimePlan(service.Plan()));
         SavePortableObject("recovery-service","deliveries.json",QJsonObject{{"kind","native_recovery_service_fixture"},{"schema_version",1},{"deliveries",events}});
@@ -4417,3 +4435,56 @@ template<class Owner> void NativeServiceResetFromRevisionReadback() {
 }
 TEST(NativeServiceCallbackReentrancy,ClassicRevisionReadbackResetCannotConsumeRetiredSearch){NativeServiceResetFromRevisionReadback<NNeuronTimeLearner>();}
 TEST(NativeServiceCallbackReentrancy,BranchRevisionReadbackResetCannotConsumeRetiredSearch){NativeServiceResetFromRevisionReadback<NNeuronTimeLearnerBranch>();}
+
+namespace {
+QJsonObject RecoveryCodecData(bool capacitance=false) {
+    // Deliberately DATA only: this fixture has no native proof or live owner.
+    CandidateWindowRecoveryEvidence event;auto& e=event.transition;
+    e.actionSerial=3;e.inputIndex=0;e.candidateInputIndex=0;e.modelEpoch=2;e.invalidBefore=1;e.invalidAfter=2;
+    e.runId="codec-run";e.trialId="codec-run/search/3";e.baseModelRevision="before";e.effectiveModelRevision="effective";
+    e.fullParameters={{3,2,86e6},{1,1,42e6}};e.validity=PeakValidity::Missing;
+    e.disposition=CandidateRecoveryDisposition::CursorAdvanced;e.statusAfter=TrainingStatus::Searching;
+    if(capacitance)e.capacitance=TrainingCapacitance{"heterogeneous-origin",.5,{{"cable/1",.8},{"cable/3",1.2}}};
+    event.groupId="codec-group";event.rejectedContentId=std::string(64,'a');event.sourceOrigin=std::string(64,'b');
+    event.ownerScope="codec-owner";event.candidateWitnessId=std::string(64,'c');
+    event.issuedProbes=4;event.appliedEdits=2;event.acceptedCompositeObservations=2;
+    return EncodeCandidateWindowRecoveryEvidence(event);
+}
+QJsonObject RehashRecoveryData(QJsonObject value) {
+    value.remove("event_id");value["event_id"]=NmsdkTools::CanonicalModelDataSha256(value);return value;
+}
+}
+TEST(NativeCandidateWindowRecoveryEventCodec,RoundtripRetainsFullHeterogeneousCapacitanceData) {
+    const auto wire=RecoveryCodecData(true);const auto value=DecodeCandidateWindowRecoveryEvidence(wire);
+    ASSERT_TRUE(value.transition.capacitance);EXPECT_EQ(value.transition.capacitance->membraneScales.size(),2u);
+    EXPECT_DOUBLE_EQ(value.transition.capacitance->membraneScales.at("cable/1"),.8);
+    EXPECT_DOUBLE_EQ(value.transition.capacitance->membraneScales.at("cable/3"),1.2);
+    EXPECT_EQ(EncodeCandidateWindowRecoveryEvidence(value),wire);
+}
+TEST(NativeCandidateWindowRecoveryEventCodec,RehashedUnknownFieldsAndEnumsCannotBeNormalizedAway) {
+    auto wire=RecoveryCodecData();wire["unknown"]=1;
+    EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
+    for(const auto& key:{"phase","validity","disposition","status_after"}) {
+        wire=RecoveryCodecData();auto transition=wire["transition"].toObject();transition[key]="unknown";
+        wire["transition"]=transition;
+        EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
+    }
+    wire=RecoveryCodecData();wire["schema_version"]=2;
+    EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
+}
+TEST(NativeCandidateWindowRecoveryEventCodec,RehashedFractionBooleanOverflowAndLostCMapAreRejected) {
+    for(const auto& number:{QJsonValue(true),QJsonValue(.5),QJsonValue(-1),QJsonValue(9007199254740992.)}) {
+        auto wire=RecoveryCodecData();wire["issued_probes"]=number;
+        EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
+    }
+    auto wire=RecoveryCodecData(true);auto transition=wire["transition"].toObject();auto c=transition["capacitance"].toObject();
+    c.remove("membrane_scales");transition["capacitance"]=c;wire["transition"]=transition;
+    EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
+}
+TEST(NativeCandidateWindowRecoveryEventCodec,ChangedBytesAndInconsistentOutcomeCannotSurviveReadback) {
+    auto wire=RecoveryCodecData();wire["group_id"]="changed";
+    EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(wire),std::invalid_argument);
+    wire=RecoveryCodecData();auto transition=wire["transition"].toObject();transition["status_after"]="invalid_observation";
+    wire["transition"]=transition;
+    EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
+}
