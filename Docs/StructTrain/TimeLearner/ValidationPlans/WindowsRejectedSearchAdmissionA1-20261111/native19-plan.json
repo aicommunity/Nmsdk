@@ -1,0 +1,35 @@
+{
+  "source_root": "C:/Projects/TimeLearnerWorker/source-rejected-search-admission-win-a1",
+  "source_commit": "04f830a3a0f6c36cb9eb22b48075aa545b8aeb6c",
+  "closed_build_audit": "C:/Projects/TimeLearnerWorker/jobs/windows-rejected-search-closed-build-audit-a1",
+  "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-rejected-search-admission-win-a1",
+  "cmake_cache": "C:/Projects/TimeLearnerWorker/build-rejected-search-admission-win-a1/CMakeCache.txt",
+  "output_root": "C:/Projects/TimeLearnerWorker/jobs/windows-rejected-search-diagnostic19-a1",
+  "expected_test_ids": [
+    "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+    "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+    "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+  ],
+  "maximum_wall_seconds": 1800,
+  "process_limits": {
+    "memory_bytes": 3221225472,
+    "maximum_processes": 32
+  },
+  "scope": "Portability/lifecycle control of the same 19 cases passed on both Linux original root04f/Pulse558 attempts. Not corrected B1/native29 acceptance, not scientific worker admission. Ten original Linux failures remain preserved and are rerun in full corrected Linux B1."
+}
