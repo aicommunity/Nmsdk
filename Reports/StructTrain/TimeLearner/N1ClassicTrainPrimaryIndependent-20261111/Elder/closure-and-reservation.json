@@ -1,0 +1,86 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "40aaeeb7a9990d626a150b205c54935d2ff0351fb076050b91e2063da999ce73",
+      "unit": "timelearner-6abd0f2a-353d-4cc2-a9fa-64fd2a85cc07.service",
+      "invocation_id": "1068f14d01f24860ac581ab2b076db44",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6abd0f2a-353d-4cc2-a9fa-64fd2a85cc07.service",
+      "initial_main_pid": 1857364,
+      "initial_start_ticks": "394204186",
+      "sha256": "f030f9ed9bb3828c2ea319fc1108b3eff934441228c2eacec8937937e5ef3515"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "38260",
+      "KillMode": "control-group",
+      "Description": "timelearner-6abd0f2a-353d-4cc2-a9fa-64fd2a85cc07.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "cc9e2210-2ef3-48e1-9411-eb9b903e134c",
+      "job_id": "s11-n1-classic-primary-independent-restore-elder-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 1857364,
+        "start_ticks": "394204186",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/fixtures/n1-classic-primary-a1/Reports/StructTrain/TimeLearner/N1ClassicTrainPrimary-20261111",
+          "requested_path": "/home/user/timelearner-refactor/fixtures/n1-classic-primary-a1/Reports/StructTrain/TimeLearner/N1ClassicTrainPrimary-20261111"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s11-n1-classic-primary-independent-restore-elder-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s11-n1-classic-primary-independent-restore-elder-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/requests/n1-classic-primary-restore-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1ClassicPrimaryRestoreA1-20261111",
+          "requested_path": "/home/user/timelearner-refactor/requests/n1-classic-primary-restore-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1ClassicPrimaryRestoreA1-20261111"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-n1-classic-primary-restore-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-n1-classic-primary-restore-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794372273.4775527,
+      "deadline": 1794372440.8141458,
+      "updated": 1794372335.403622,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 4294967296,
+        "slots": 1
+      },
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

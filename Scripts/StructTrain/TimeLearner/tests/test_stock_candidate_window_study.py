@@ -20,7 +20,8 @@ class StockCandidateWindowStudyTest(unittest.TestCase):
         require(binding is not None, 'stock_cold7_controls_required')
         controls = Path(binding).resolve(strict=True)
         spec = load(controls/'declaration.json')
-        require(set(spec) == {'runtime', 'source', 'controller', 'output', 'operation', 'cases'} and
+        fields = {'runtime', 'source', 'controller', 'output', 'operation', 'cases'}
+        require(set(spec) in (fields, fields | {'finalization_seconds'}) and
             spec['operation'] in ('preflight', 'train') and spec['cases'] in (
                 ['Classic-stock-cold7-N1'], ['Branch-stock-cold7-N1'],
                 ['Classic-stock-cold7-N1', 'Branch-stock-cold7-N1']), 'stock_cold7_controls_schema')
@@ -73,9 +74,12 @@ class StockCandidateWindowStudyTest(unittest.TestCase):
             finally:
                 condition_path.write_bytes(original_condition)
             for case in spec['cases']:
-                code = main(['stock-candidate-window-study', spec['operation'], str(prepared),
+                arguments = ['stock-candidate-window-study', spec['operation'], str(prepared),
                     '--runtime-manifest', spec['runtime'], '--controller', spec['controller'],
-                    '--case', case, '--output', str(output/case)])
+                    '--case', case, '--output', str(output/case)]
+                if 'finalization_seconds' in spec:
+                    arguments += ['--finalization-seconds', str(spec['finalization_seconds'])]
+                code = main(arguments)
                 (output/(case+'-cli.log')).write_text(transcript.getvalue(), encoding='utf-8')
                 self.assertEqual(code, 0, transcript.getvalue())
                 result = load(output/case/'index.json')
@@ -86,3 +90,13 @@ class StockCandidateWindowStudyTest(unittest.TestCase):
                 else:
                     self.assertFalse(result['classification_assessed'])
                     self.assertIsNotNone(result['package_audit'])
+                    limits = load(output/case/'execution-limits.json')
+                    native_budget = load(prepared/'jobs'/(case+'.json'))['configuration']['maximum_wall_seconds']
+                    allowance = spec.get('finalization_seconds', 0.)
+                    self.assertEqual(limits['native_search_wall_seconds'], native_budget)
+                    self.assertEqual(limits['process_finalization_seconds'], allowance)
+                    self.assertEqual(limits['process_maximum_wall_seconds'], native_budget+allowance)
+                    request = load(output/case/'runs/train/process/request.json')
+                    self.assertEqual(request['maximum_wall_seconds'], native_budget+allowance)
+                    package = load(output/case/result['package_path'])
+                    self.assertEqual(package['runtime_plan']['maximum_wall_seconds'], native_budget)

@@ -1,0 +1,7 @@
+{
+  "source_data_and_limits_unchanged": true,
+  "original_a1_a2_preserved": true,
+  "reason": "JavaScript JSON.parse/stringify rounds Python nanosecond integer identities above 2^53. Manifest A3 is the exact Python-generated JSON, transported as text; only CRLF converted to LF before Git hashing. No numeric parsing or reserialization.",
+  "manifest_sha256": "6e4780ee167129645627b07c2087cc7d30841a350b8d6422697bc114d7c48166",
+  "scientific_verdict": null
+}

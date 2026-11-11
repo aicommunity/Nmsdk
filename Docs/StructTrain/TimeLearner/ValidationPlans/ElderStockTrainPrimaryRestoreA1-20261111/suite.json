@@ -1,0 +1,20 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "actual-M40-stock-N4-Train-primary-independent-Elder-restore-v1",
+  "package_fingerprint": "513c4b6a66129015c0d418085daf3ec74dee32c109d5dc9af116630c5eda434f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_train_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_train_compact_primary.StockTrainCompactPrimaryTest.test_branch_archive_replays_all_groups_stopped_model_and_rejects_corrupt_primary",
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_train_compact_primary.StockTrainCompactPrimaryTest.test_classic_archive_preserves_timeout_and_unfinished_observation_without_model"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_TRAIN_COMPACT_PRIMARY": {
+      "pattern": "*/*",
+      "files": 12,
+      "fingerprint": "292f25d98d4aecf340eaa21f0b67b27f759cbefb38cd891253531e19cafacf2a"
+    }
+  }
+}
