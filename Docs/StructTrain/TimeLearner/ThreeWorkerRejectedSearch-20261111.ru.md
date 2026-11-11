@@ -1,5 +1,43 @@
 # Параллельная проверка rejected-search на трёх машинах
 
+## Обновление после первых завершённых Linux-проверок
+
+Исходные Elder A2 и M40 A3 завершены одинаково: SDK собран, реально выполнены
+29/29 случаев, 19 PASS / 10 FAIL. Gate execution=process_error, validity=valid;
+job_validation_passed=false. Обе попытки **не приняты**. Проверены закрытие
+outer и единственного child cgroup, released reservation; очистка не заменяет
+исходный отрицательный outcome. Полные terminal/test ID readbacks и сведения
+о закрытии сохранены рядом с декларациями исходных попыток.
+
+Десять отказов распределяются так:
+
+* Два прежних valid 20000 Hz cases: общий leaf повторно пишет уже существующие
+  reference paths; отказ window5_output_new_only. Следующая декларация
+  изолирует каждый из 29 случаев в отдельном leaf/output.
+* Четыре новых Missing cases: все предшествующие проверки closed capability
+  выполнены, но NaN mutation выявляет выход private MatchedOmission Failure
+  вместо стандартной ошибки. В Pulse af612baaa496c72d87c8a8bf911d749969b94d76
+  оба публичных content-ID API преобразуют эту внутреннюю ошибку в
+  std::invalid_argument с исходной причиной. Проверка не ослаблена; дополнительно
+  такая же NaN mutation проверяется для прежнего valid API.
+* Два Ambiguous fixtures: заявленные left/right guards по 2 с выводили
+  предлагаемое окно за разрешённый envelope. Left guard=0 / right guard=1 с
+  задаются до reference capture; clipping и подбор по candidate waveform
+  не добавлялись. Реальное получение Ambiguous в исправленном fixture ещё
+  должно быть подтверждено.
+* Два budget fixtures: ошибочно требовался только флаг общего attempt budget.
+  Production NativeMatchedOmissionGroup отдельно выставляет BudgetExhausted
+  при своём deadline. Исправленный тест требует typed group/attempt exhaustion
+  или typed отказ Start, а также отсутствие measurement/rejection capability;
+  произвольный отказ не считается прохождением.
+
+Исправленный subject: root9d51f808047f08e0cbfa0e440061f9bf04e8ba88 / Pulseaf612ba.
+Декларации B1 содержат те же 29 test IDs, по одному на leaf; их серверная
+проверка готовится в новых source/build/runtime/output каталогах. Пока эти
+правки не получили runtime-приёмку. Windows build A1 относится к прежнему
+root04f/Pulse558, а не к исправленному subject. Нижеследующий раздел описывает
+снимок первоначального запуска, не текущую занятость.
+
 ## Предмет проверки
 
 Одна версия SDK: root `04f830a3a0f6c36cb9eb22b48075aa545b8aeb6c`,
