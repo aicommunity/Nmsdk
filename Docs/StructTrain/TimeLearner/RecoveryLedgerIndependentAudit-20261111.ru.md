@@ -1,5 +1,9 @@
 # Независимый аудит переносимого recovery ledger
 
+**Оперативный статус 11.11.2026:** независимый replay фактических C++ package7/summary8 и непустого recovery ledger принят на Elder **9/9** ([результат](ValidationPlans/ElderClosedNativePackage7Audit9F2-20261111/RESULT.ru.md)). Это DATA acceptance, не успешный перенос модели и не научная классификация. M40 F1 завершён226 PASS/1 FAIL/13 not-run; Windows F1 —3 PASS/11 FAIL. M40 F3 успешно собран, но первый case обнаружил сброс Finished→Idle при native Build после import:0 PASS/1 FAIL/13 not-run. Все эти задания закрыты. Исправление Pulse1110808 подготовлено; набор14 roundtrip +4 active-Build проверок передаётся на M40, compiler/runtime приёмки ещё нет. Console и frozen recognition нового package7, затем контрольная научная серия остаются открытыми. Исходный план не завершён.
+
+Ниже сохранены предыдущие снимки: их running/запущен заменены оперативным статусом выше.
+
 Поддерживаемый читатель: `Scripts/StructTrain/TimeLearner/candidate_window_recovery_ledger.py`.
 Это проверка сохранённых DATA, а не выполнение модели или восстановление контроллера.
 
