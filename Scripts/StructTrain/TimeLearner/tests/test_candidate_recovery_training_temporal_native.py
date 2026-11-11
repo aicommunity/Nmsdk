@@ -30,12 +30,14 @@ class CandidateRecoveryTrainingTemporalNativeTest(unittest.TestCase):
         files = {p:hashlib.sha256(p.read_bytes()).hexdigest() for p in native.rglob('*')
             if p.is_file() and not p.is_symlink()}
         output = Path(os.environ['TMPDIR'])/'Branch-N4-recovery-temporal'
-        report = render(native, output, groups)
+        report = render(native, output, groups, native_window_zooms=True)
         self.assertEqual(report['package_audit']['training_outcome'], 'invalid_observation')
         self.assertEqual([g['ordinal'] for g in report['groups']], groups)
         self.assertEqual([g['selection']['geometry']['validity'] for g in report['groups']],
             ['valid']+['missing']*5)
-        self.assertEqual(len(report['figures']), 12)
+        self.assertEqual(len(report['figures']), 24)
+        self.assertEqual(report['schema_version'], 2)
+        self.assertFalse(report['native_window_zoom_policy']['peak_assignment_changed'])
         self.assertEqual({f['channel'] for f in report['figures']}, {0})
         self.assertTrue(all(len(g['primary_references']) == 6 for g in report['groups']))
         self.assertFalse(report['downsampling'])
@@ -43,6 +45,8 @@ class CandidateRecoveryTrainingTemporalNativeTest(unittest.TestCase):
         self.assertFalse(report['visual_acceptance_complete'])
         self.assertIsNone(report['scientific_verdict'])
         for figure in report['figures']:
+            if figure['view'].endswith('-native'):
+                self.assertGreaterEqual(figure['minimum_native_tick_pixels'], 8.)
             for filename in figure['files']:
                 self.assertGreater((output/filename).stat().st_size, 100)
             with Image.open(output/figure['files'][0]) as image:

@@ -16,7 +16,7 @@ from .native_evidence import load, number, require
 from .plotting import figure_title, padded_limits, plotting_runtime
 
 
-def render(native, output, group_numbers):
+def render(native, output, group_numbers, *, native_window_zooms=False):
     native = Path(native).resolve(strict=True)
     output = Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(native) and
@@ -24,6 +24,7 @@ def render(native, output, group_numbers):
     require(type(group_numbers) is list and group_numbers and
             all(type(i) is int and i > 0 for i in group_numbers) and
             len(set(group_numbers)) == len(group_numbers), 'training_report_group_inventory')
+    require(type(native_window_zooms) is bool, 'training_report_native_zoom_flag')
     packages = [native/n for n in ('train_stopped_state.json', 'train_learned_state.json')
                 if (native/n).is_file()]
     require(len(packages) == 1, 'training_report_package_missing_or_ambiguous')
@@ -80,13 +81,22 @@ def render(native, output, group_numbers):
                 primary_references=[s['reference'] for s in series]))
             for channel in range(count):
                 limits = padded_limits([v[channel+2] for s in series for v in s['values']])
-                for view, bounds in [('overview', [0., duration]), ('detail', detail)]:
+                views = [('overview', [0., duration]), ('detail', detail)]
+                if native_window_zooms:
+                    # Fifty native frames on each side of either boundary.
+                    # This is an axis choice, never a new peak assignment.
+                    views += [(label, [max(0., boundary-50/frequency),
+                                       min(duration, boundary+50/frequency)])
+                              for label,boundary in zip(('window-left-native', 'window-right-native'), window)]
+                for view, bounds in views:
+                    native_zoom = view.endswith('-native')
                     fig, axes = plt.subplots(len(series), 1, figsize=(18, 3*len(series)), sharex=True)
                     for ax, s in zip(list(axes), series):
                         begin = number(s['specification']['begin'])
                         times = [v[0]-begin for v in s['values']]
                         name = Path(s['reference']['relative_path']).stem
-                        ax.plot(times, [v[channel+2] for v in s['values']], color='#1755a4', linewidth=1.4)
+                        ax.plot(times, [v[channel+2] for v in s['values']], color='#1755a4', linewidth=1.4,
+                                marker='.' if native_zoom else None, markersize=1.8)
                         ax.axvspan(*window, color='#aa3f9d', alpha=.13,
                                    label='proposed assignment window (not a peak)')
                         ax.set_xlim(*bounds); ax.set_ylim(*limits); ax.grid(alpha=.25)
@@ -106,13 +116,22 @@ def render(native, output, group_numbers):
                         f'outcome={audit["training_outcome"]}\n'
                         'Full and omission responses; no classification or new peak assignment')
                     fig.subplots_adjust(top=.84, bottom=.05, left=.10, right=.88, hspace=.45)
+                    tick_pixels = None
+                    if native_zoom:
+                        # Measure the actual axes at the exported PNG DPI.
+                        tick_pixels = min(ax.get_position().width*fig.get_figwidth()*160
+                            for ax in axes)/(bounds[1]-bounds[0])/frequency
+                        require(tick_pixels >= 8., 'training_report_native_ticks_not_readable')
                     filenames = []
                     for extension in ('png', 'svg', 'pdf'):
                         filename = f'group-{ordinal:06d}-soma-{channel:03d}-{view}.{extension}'
                         fig.savefig(output/filename, dpi=160); filenames.append(filename)
                     plt.close(fig)
-                    figures.append(dict(group=ordinal, channel=channel, view=view,
-                        x_bounds_seconds=bounds, y_bounds=limits, files=filenames))
+                    figure = dict(group=ordinal, channel=channel, view=view,
+                        x_bounds_seconds=bounds, y_bounds=limits, files=filenames)
+                    if native_zoom:
+                        figure['minimum_native_tick_pixels'] = tick_pixels
+                    figures.append(figure)
     manifest = dict(kind='timelearner_composite_training_temporal_report', schema_version=1,
         package_sha256=hashlib.sha256(raw_package).hexdigest(),
         summary_sha256=hashlib.sha256(raw_summary).hexdigest(), package_audit=audit,
@@ -121,6 +140,11 @@ def render(native, output, group_numbers):
         input_transform='unaltered recorded CSV aggregate stimulus for each control',
         training_certificate_eligible=False, scientific_verdict=None,
         visual_acceptance_complete=False)
+    if native_window_zooms:
+        manifest.update(schema_version=2, native_window_zoom_policy={
+            'axis_selection': 'fifty_native_frames_each_side_of_declared_window_boundary',
+            'minimum_tick_pixels': 8, 'sample_markers': True,
+            'peak_assignment_changed': False})
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     return manifest
 
@@ -130,8 +154,10 @@ def main(argv=None):
     parser.add_argument('native', type=Path)
     parser.add_argument('output', type=Path)
     parser.add_argument('--groups', nargs='+', type=int, required=True)
+    parser.add_argument('--native-window-zooms', action='store_true',
+        help='also show both proposed window edges with at least eight pixels per native tick')
     args = parser.parse_args(argv)
-    result = render(args.native, args.output, args.groups)
+    result = render(args.native, args.output, args.groups, native_window_zooms=args.native_window_zooms)
     print(json.dumps(dict(groups=len(result['groups']), figures=len(result['figures']),
                           scientific_verdict=None)))
 
