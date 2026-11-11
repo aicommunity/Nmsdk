@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "actual-Branch-N4-source7-recorded-full-window-replay-and-native-tick-temporal-a1",
+  "package_fingerprint": "e0071a4086f8fd4de656b37a61f87c88f87ec1ed986e66823dcaf9f1c02c95f3",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_diagnostic_replay_native",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_training_temporal_native"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_diagnostic_replay_native.CandidateRecoveryDiagnosticReplayNativeTest.test_real_Branch_N4_recovery_windows_and_full_traces_keep_stopped_state",
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_recovery_training_temporal_native.CandidateRecoveryTrainingTemporalNativeTest.test_actual_Branch_recovery_rejections_have_soma_and_own_input_figures"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECOVERY_N4_STOPPED_NATIVE": {
+      "pattern": "**/*.json",
+      "files": 202,
+      "fingerprint": "98840b9b6aa1e87e5df5e5a01831c0bff19c3e6d6930bcf1e57e61bdad1430c8"
+    },
+    "TIMELEARNER_RECOVERY_N4_STOPPED_NATIVE_CSV": {
+      "pattern": "**/*.csv",
+      "files": 336,
+      "fingerprint": "b8613793c6d58cb1bfdcc93b1bcc548f94bbccd5d1388c7a0c76e8479d2602bb"
+    }
+  }
+}

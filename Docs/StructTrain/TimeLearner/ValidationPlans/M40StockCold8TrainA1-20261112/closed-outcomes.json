@@ -1,0 +1,105 @@
+{
+  "kind": "strict_N4_cold8_closed_outcome_projection",
+  "schema_version": 1,
+  "rows": [
+    {
+      "case": "Classic-stock-cold8-N1",
+      "execution": "completed",
+      "artifact_validity": "valid",
+      "training_outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:missing",
+      "certificate": null,
+      "logical_groups": 24,
+      "native_probes": 144,
+      "sampled_frames": 518544,
+      "primary_bytes": 55717251,
+      "search_probes": 20,
+      "applied_edits": 9,
+      "parameters": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "native_wall_seconds": 778.6958210049197,
+      "all_native_processes_closed": true,
+      "recovery_dispositions": [
+        "cursor_advanced",
+        "cursor_advanced",
+        "cursor_advanced",
+        "cursor_advanced",
+        "invalid_budget_stop"
+      ],
+      "classification_assessed": false,
+      "state_sha256": "f4b62e0736e8946a7f5c95324c3cfc69e1a37d9d06ab6e57634646cdf1293f07",
+      "summary_sha256": "34afbe490119c8121d7acc25bedf80cf7741064c28decff48180fc838af63c8a",
+      "scientific_verdict": null
+    },
+    {
+      "case": "Branch-stock-cold8-N1",
+      "execution": "completed",
+      "artifact_validity": "valid",
+      "training_outcome": "invalid_observation",
+      "reason": "rejected_candidate_window:missing",
+      "certificate": null,
+      "logical_groups": 28,
+      "native_probes": 168,
+      "sampled_frames": 604968,
+      "primary_bytes": 24442733,
+      "search_probes": 24,
+      "applied_edits": 11,
+      "parameters": [
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 7,
+          "resistance": 86000000,
+          "synapses": 1
+        },
+        {
+          "length": 1,
+          "resistance": 86000000,
+          "synapses": 1
+        }
+      ],
+      "native_wall_seconds": 403.23607906512916,
+      "all_native_processes_closed": true,
+      "recovery_dispositions": [
+        "cursor_advanced",
+        "cursor_advanced",
+        "cursor_advanced",
+        "cursor_advanced",
+        "invalid_budget_stop"
+      ],
+      "classification_assessed": false,
+      "state_sha256": "33ef9a5673bec6d352f73f63a12c18f2fb2e2b4f32b06a76bfa102d29933d8b1",
+      "summary_sha256": "eef05184c08c92f248e6c10c8ad77d2a5b0a103a2c3529236f32bb617c0044df",
+      "scientific_verdict": null
+    }
+  ],
+  "scientific_verdict": null
+}
