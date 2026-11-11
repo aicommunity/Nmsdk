@@ -1,6 +1,11 @@
 # Переход bounded search после закрытого отказа candidate-window
 
-Статус: новый код ядра, серверная проверка впереди. Предыдущий фундамент
+Статус: core C1 принят на M40145/145, все48child groups и outer закрыты,
+lease released; [полный terminal](ValidationPlans/M40CandidateWindowRecoveryCoreC1-20261111/completed-terminal.json)
+и [closure](ValidationPlans/M40CandidateWindowRecoveryCoreC1-20261111/completed-closure-and-lease.json).
+Source root8fac40bb545b314d606e41bec8a5f5b86e2dea46 /
+Pulse1c0fa37d2141a9dfa1a988c2c7ef14fd33e6efd0. Elder ещё выполняет C1;
+полный compact primary C1 ещё не опубликован. Предыдущий фундамент
 допуска проверен на root9d51f808047f08e0cbfa0e440061f9bf04e8ba88 / Pulseaf612ba:
 Elder и M40 выполнили29/29 cases,29 отдельных leaf gates; outer+29child groups
 закрыты, reservations released, record_errors=[] на каждом сервере.
@@ -46,7 +51,8 @@ Classic/Branch, N0/N1 с actual native domains, повторные N0 candidates
 anchor, Missing/Ambiguous, default и строковую причину, replay, общий invalid/
 probe/edit budgets, external stop и неверную revision. Выполняются штатные
 native probes и реальные изменения графа, а не копия тела контроллера.
-Количество18 — декларация, пока не результат выполнения.
+Эти18 cases выполнены в составе принятого M40 C1. Это пока не двухсерверная
+приёмка и не проверка последующих wire/event изменений.
 
 Этот набор не доказывает native-сценарий потери ранее валидной точки именно
 при RestoreBest, частичный N0 repeat с последующим изменившимся откликом,

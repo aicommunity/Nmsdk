@@ -4177,6 +4177,25 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
         EXPECT_EQ(event.transition.modelEpoch,action->modelEpoch);EXPECT_EQ(event.transition.fullParameters,rejectedPoint);
         EXPECT_EQ(event.issuedProbes,probesAtFailure);EXPECT_EQ(event.acceptedCompositeObservations,accepted);
         EXPECT_EQ(event.transition.invalidBefore,invalid);EXPECT_EQ(event.transition.invalidAfter,invalid+1);
+        const auto eventDocument=EncodeCandidateWindowRecoveryEvidence(event);
+        EXPECT_EQ(eventDocument["kind"].toString(),"timelearner_candidate_window_recovery_event");
+        EXPECT_EQ(eventDocument["schema_version"].toInt(),1);
+        EXPECT_EQ(eventDocument["rejected_content_id"].toString().toStdString(),failure.ContentId());
+        EXPECT_EQ(EncodeCandidateWindowRecoveryEvidence(event),eventDocument);
+        const auto eventName="event-"+std::to_string(action->serial)+".json";
+        SavePortableObject("recovery-events",eventName.c_str(),eventDocument);
+        auto malformed=event;malformed.groupId.clear();
+        EXPECT_THROW(EncodeCandidateWindowRecoveryEvidence(malformed),std::invalid_argument);
+        malformed=event;malformed.transition.invalidAfter=malformed.transition.invalidBefore;
+        EXPECT_THROW(EncodeCandidateWindowRecoveryEvidence(malformed),std::invalid_argument);
+        malformed=event;malformed.rejectedContentId="not-a-content-hash";
+        EXPECT_THROW(EncodeCandidateWindowRecoveryEvidence(malformed),std::invalid_argument);
+        malformed=event;malformed.transition.fullParameters[0].resistance=std::numeric_limits<double>::quiet_NaN();
+        EXPECT_THROW(EncodeCandidateWindowRecoveryEvidence(malformed),std::invalid_argument);
+        malformed=event;malformed.acceptedCompositeObservations=malformed.issuedProbes+1;
+        EXPECT_THROW(EncodeCandidateWindowRecoveryEvidence(malformed),std::invalid_argument);
+        malformed=event;malformed.ownerScope+="/different-owner";
+        EXPECT_NE(EncodeCandidateWindowRecoveryEvidence(malformed)["event_id"],eventDocument["event_id"]);
         if(search.Status()==TrainingStatus::Searching) {
             EXPECT_EQ(event.transition.disposition,CandidateRecoveryDisposition::CursorAdvanced);
             EXPECT_THROW(search.RejectCandidateWindow(failure,f.Revision()),std::invalid_argument);
