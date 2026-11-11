@@ -15,6 +15,8 @@ from ..native_evidence import load, require
 
 
 class StockCandidateRecoveryTrainTest(unittest.TestCase):
+    expected_plan_version = 2
+
     def train_case(self, case):
         controls = Path(os.environ['TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS']).resolve(strict=True)
         spec = load(controls/'declaration.json')
@@ -23,7 +25,8 @@ class StockCandidateRecoveryTrainTest(unittest.TestCase):
         source = Path(spec['source']).resolve(strict=True)
         require(source == Path(os.environ['TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE']).resolve(strict=True),
             'stock_cold8_train_plan_binding')
-        require(load(source/'index.json')['schema_version'] == 2, 'stock_cold8_train_requires_plan2')
+        require(load(source/'index.json')['schema_version'] == self.expected_plan_version,
+            'stock_cold8_train_declared_plan_mismatch')
         runtime_path = Path(spec['runtime'])
         require(runtime_path.parent.resolve(strict=True) == controls, 'stock_cold8_train_runtime_binding')
         runtime = load(runtime_path)
