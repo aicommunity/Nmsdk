@@ -1,0 +1,58 @@
+{
+  "reason": null,
+  "record_errors": [],
+  "last_before_cleanup": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "66a2ae470c8b2c4df540f309bdd5152b2283be2dea4987d01d0c49f1588353ca",
+      "unit": "timelearner-97c94888-c6b2-4675-996f-61b0e2b232bf.service",
+      "invocation_id": "d6a64a9ffa2c4fdda50db221012b1d2c",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-97c94888-c6b2-4675-996f-61b0e2b232bf.service",
+      "initial_main_pid": 3283196,
+      "initial_start_ticks": "398999395",
+      "sha256": "23eae8fea687d09a118176d7f33175832cd37833e393e343754e6e79de790b9a"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 97c94888-c6b2-4675-996f-61b0e2b232bf",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "d6a64a9ffa2c4fdda50db221012b1d2c"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "outer_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "66a2ae470c8b2c4df540f309bdd5152b2283be2dea4987d01d0c49f1588353ca",
+    "unit": "timelearner-97c94888-c6b2-4675-996f-61b0e2b232bf.service",
+    "invocation_id": "d6a64a9ffa2c4fdda50db221012b1d2c",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-97c94888-c6b2-4675-996f-61b0e2b232bf.service",
+    "initial_main_pid": 3283196,
+    "initial_start_ticks": "398999395",
+    "sha256": "23eae8fea687d09a118176d7f33175832cd37833e393e343754e6e79de790b9a"
+  },
+  "outer_closed": true,
+  "children_closed": [],
+  "disk_peak_increment": 159744,
+  "minimum_free": 5440028672,
+  "execution_success_not_inferred_from_cleanup": true,
+  "scientific_verdict": null
+}

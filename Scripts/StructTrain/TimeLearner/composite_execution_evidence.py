@@ -14,7 +14,7 @@ EXTRA_FIELDS = {'base_schema_version', 'measurement_method', 'measurement_archiv
 
 def _audit_start_failure(execution, directory, names, job, *, execution_version, configuration_version):
     """A signed pre-source refusal is diagnostic data, never a model package."""
-    require((execution_version,configuration_version) in ((3,6),(4,7)), 'unsupported_execution_configuration_pair')
+    require((execution_version,configuration_version) in ((3,6),(4,7),(5,8)), 'unsupported_execution_configuration_pair')
     require(execution['schema_version'] == execution_version and execution['base_schema_version'] == 1
             and job['schema_version'] == 1 and job['configuration']['schema_version'] == configuration_version
             and execution['execution'] == 'training_start_failed'
@@ -73,7 +73,7 @@ def audit_initial_planning_configuration(package, job, initial):
 
 def _audit_execution(execution, directory, names, *, mode, base_version, package=None,
                      execution_version, package_version):
-    require((execution_version,package_version) in ((3,5),(4,6)), 'unsupported_execution_package_pair')
+    require((execution_version,package_version) in ((3,5),(4,6),(5,7)), 'unsupported_execution_package_pair')
     from .composite_measurement_contract import integral_number_view
     execution = integral_number_view(execution)
     directory = Path(directory)

@@ -35,6 +35,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 #include <QFile>
+#include <QFileInfo>
 #include <QSaveFile>
 #include <cstdlib>
 #include <algorithm>
@@ -4492,7 +4493,7 @@ TEST(NativeCandidateWindowRecoveryEventCodec,ChangedBytesAndInconsistentOutcomeC
 
 namespace {
 constexpr const char* RecoveryPackageImplementation="native-recovery-package7-fixture";
-struct RecoveryPackageFixtureData {QJsonObject package;std::vector<NativeProbeSample> response;};
+struct RecoveryPackageFixtureData {QJsonObject package;std::vector<NativeProbeSample> response;QJsonObject summary;};
 std::string RecoveryPackageDirectory() {
     const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
     Require(test,"recovery_package_test_identity_missing");
@@ -4577,7 +4578,7 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     SavePortableObject(RecoveryPackageDirectory().c_str(),"source-package.json",package);
     SavePortableObject(RecoveryPackageDirectory().c_str(),"source-summary.json",summary);
     SaveRecoveryResponse("source-response.json",response);
-    return cache.emplace(key,RecoveryPackageFixtureData{package,std::move(response)}).first->second;
+    return cache.emplace(key,RecoveryPackageFixtureData{package,std::move(response),summary}).first->second;
 }
 template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed=false,bool c0=false,bool warm=false) {
     const auto source=ActualRecoveryPackage<Owner>(n1,completed,c0);
@@ -4799,3 +4800,73 @@ TEST(NativeRecoveryRecognition7,ClassicStoppedN1DiagnosticTargetAndFoil){Recover
 TEST(NativeRecoveryRecognition7,BranchStoppedN1ScaledDiagnosticTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(true,false);}
 TEST(NativeRecoveryRecognition7,ClassicAsymmetricC0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(false,true,true);}
 TEST(NativeRecoveryRecognition7,BranchAsymmetricC0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(false,true,true);}
+
+namespace {
+template<class Owner> void RecoveryConsoleArtifact(bool completed) {
+    const auto source=ActualRecoveryPackage<Owner>(false,completed);
+    QTemporaryDir temporary;ASSERT_TRUE(temporary.isValid());QString output=temporary.path();
+    if(const auto root=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT"))
+        output=QString::fromLocal8Bit(root)+"/"+QString::fromStdString(RecoveryPackageDirectory())+"/console-artifacts";
+    QJsonArray artifacts;
+    const auto descriptor=NmsdkWorker::PublishNativeCompositeArchive(output,source.package,artifacts);
+    ASSERT_TRUE(descriptor.isObject());
+    const auto archive=source.package["measurement_archive"].toObject();
+    const auto counters=archive["counters"].toObject()["attempt"].toObject();
+    const auto raw=std::size_t(counters["native_probes"].toDouble());
+    const auto frames=std::size_t(counters["sampled_frames"].toDouble());
+    const auto configuration=DecodeConfiguredNativeTraining(source.package["configuration"].toObject());
+    const auto resolver=[&](const QString& path){return CompositeFile(output,path);};
+    EXPECT_NO_THROW(DecodeNativeCompositeTrainingArchive(archive,resolver));
+    artifacts.append(NmsdkWorker::Write(output,completed?"train_learned_state.json":"train_stopped_state.json",source.package));
+    artifacts.append(NmsdkWorker::Write(output,completed?"train_learned_summary.json":"train_stopped_summary.json",source.summary));
+    for(int base=1;base<=2;++base) {
+        // These are explicit wrapper test arguments, not execution counters
+        // claimed to have been observed by an external Console process.
+        const QJsonObject original{{"kind","timelearner_native_training_execution"},{"schema_version",base},
+            {"execution","completed"},{"model_revision",source.package["model_revision"]}};
+        const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(configuration,original,source.package,descriptor,
+            source.package["model_revision"],raw,frames);
+        EXPECT_EQ(original["schema_version"],QJsonValue(base));EXPECT_EQ(wire["schema_version"],QJsonValue(5));
+        EXPECT_EQ(wire["base_schema_version"],QJsonValue(base));
+        EXPECT_EQ(wire["recovery_ledger_sha256"],source.package["recovery_ledger"].toObject()["sha256"]);
+        EXPECT_EQ(wire["recovery_delivery_count"],QJsonValue(source.package["recovery_ledger"].toObject()["deliveries"].toArray().size()));
+        EXPECT_EQ(wire["composite_counters"].toObject()["attempt"],QJsonValue(counters));
+        EXPECT_EQ(ParseStrictNativeJsonObject(QJsonDocument(wire).toJson(QJsonDocument::Compact).toStdString()),wire);
+        NmsdkWorker::Write(output,QString("wrapper-base%1.json").arg(base),wire);
+    }
+    NmsdkWorker::Write(output,"wrapper-scope.json",{{"actual_console_process_executed",false},
+        {"execution_counters_are_test_arguments",true},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+}
+void RecoveryPreSourceExecution(bool preflight) {
+    const auto source=ActualRecoveryPackage<NNeuronTimeLearner>().package;
+    const auto configuration=DecodeConfiguredNativeTraining(source["configuration"].toObject());
+    for(int base=1;base<=2;++base) {
+        const QJsonObject original{{"kind",preflight?"timelearner_native_preflight_execution":"timelearner_native_training_execution"},
+            {"schema_version",base},{"execution",preflight?"completed":"training_start_failed"},{"model_revision","actual-initial-model"}};
+        const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(configuration,original,{},QJsonValue(QJsonValue::Null),"actual-initial-model",0,0,preflight);
+        EXPECT_EQ(wire["schema_version"],QJsonValue(5));EXPECT_EQ(wire["base_schema_version"],QJsonValue(base));
+        EXPECT_TRUE(wire["recovery_ledger_sha256"].isNull());EXPECT_TRUE(wire["recovery_delivery_count"].isNull());
+        EXPECT_TRUE(wire["source_origin"].isNull());EXPECT_TRUE(wire["measurement_archive"].isNull());
+        const auto counters=wire["composite_counters"].toObject();
+        if(preflight)EXPECT_EQ(counters["attempt"].toObject()["logical_groups"],QJsonValue(0));
+        else EXPECT_TRUE(counters["attempt"].isNull());
+        SavePortableObject(RecoveryPackageDirectory().c_str(),(std::string(preflight?"preflight":"start-failure")+"-base"+std::to_string(base)+".json").c_str(),wire);
+    }
+}
+}
+TEST(NativeRecoveryConsoleArtifact,ClassicStoppedPublicationAndExecution5){RecoveryConsoleArtifact<NNeuronTimeLearner>(false);}
+TEST(NativeRecoveryConsoleArtifact,BranchStoppedPublicationAndExecution5){RecoveryConsoleArtifact<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeRecoveryConsoleArtifact,ClassicCompletedPublicationAndExecution5){RecoveryConsoleArtifact<NNeuronTimeLearner>(true);}
+TEST(NativeRecoveryConsoleArtifact,BranchCompletedPublicationAndExecution5){RecoveryConsoleArtifact<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeRecoveryConsoleArtifact,Preflight5KeepsNullLedgerAndKnownZeroCounters){RecoveryPreSourceExecution(true);}
+TEST(NativeRecoveryConsoleArtifact,BeforeSourceFailure5DoesNotInventLedger){RecoveryPreSourceExecution(false);}
+TEST(NativeRecoveryConsoleArtifact,RehashedForeignLedgerRejectedBeforeAnyPublication) {
+    auto package=ActualRecoveryPackage<NNeuronTimeLearner>().package;
+    auto ledger=package["recovery_ledger"].toObject();ledger["source_origin"]=QString(64,QLatin1Char('0'));RebindPortable(ledger);
+    package["recovery_ledger"]=ledger;auto neuron=package["neuron"].toObject();auto metadata=neuron["metadata"].toObject();
+    metadata["recovery_ledger_sha256"]=ledger["sha256"];neuron["metadata"]=metadata;RebindPortable(neuron);
+    package["neuron"]=neuron;RebindPortable(package);
+    QTemporaryDir temporary;ASSERT_TRUE(temporary.isValid());QJsonArray artifacts;
+    EXPECT_THROW(NmsdkWorker::PublishNativeCompositeArchive(temporary.path(),package,artifacts),std::invalid_argument);
+    EXPECT_TRUE(artifacts.isEmpty());EXPECT_FALSE(QFileInfo::exists(temporary.path()+"/composite-measurements"));
+}

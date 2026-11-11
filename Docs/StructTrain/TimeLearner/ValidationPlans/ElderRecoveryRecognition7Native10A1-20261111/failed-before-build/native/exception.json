@@ -1,0 +1,4 @@
+{
+  "reason": "reservation_capacity_exhausted",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 528, in run\n    lease = self.registry.reserve(self.out.name, resources, ttl_seconds=120, **demands)\n  File \"/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 310, in reserve\n    _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),\n  File \"/home/user/timelearner-refactor/source-recovery-recognition7-native10-a1/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_capacity_exhausted\n"
+}

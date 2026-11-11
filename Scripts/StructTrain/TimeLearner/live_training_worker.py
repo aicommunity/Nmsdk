@@ -96,6 +96,8 @@ def audit_live_training(directory, job, execution, names):
     from .composite_execution_evidence import audit_initial_planning_configuration, audit_composite_execution
     if job['configuration'].get('schema_version') == 7:
         from .candidate_window_execution_evidence import audit_candidate_window_execution as audit_composite_execution
+    elif job['configuration'].get('schema_version') == 8:
+        from .candidate_window_recovery_execution_evidence import audit_candidate_window_recovery_execution as audit_composite_execution
     live = load(directory/"finalization.json")
     _signed(live, LIVE_FIELDS, "native_live_finalization")
     require(execution["finalization_path"] == "finalization.json" and "finalization.json" in names and
@@ -121,7 +123,7 @@ def audit_live_training(directory, job, execution, names):
     source = audit = transaction = phase = None
     boundary = live["boundary"]
     if boundary is None:
-        if job['configuration'].get('schema_version') in (6,7):
+        if job['configuration'].get('schema_version') in (6,7,8):
             audit_composite_execution(execution, directory, names, mode='train', base_version=2)
         require(not execution["completed_boundary"] and all(execution[k] is None for k in
                 ("package_path", "package_sha256", "model_revision", "training_outcome")) and
@@ -143,7 +145,7 @@ def audit_live_training(directory, job, execution, names):
                 boundary["training_request"] == live["training_request"] and
                 boundary["implementation_id"] == job["implementation_id"], "live_job_source_boundary_changed")
         expected = {**job["configuration"], "run_id": job["configuration"]["run_id"]+"/session/1"}
-        composite = job['configuration'].get('schema_version') in (6,7)
+        composite = job['configuration'].get('schema_version') in (6,7,8)
         require((composite or package["configuration"] == expected) and package["implementation_id"] == job["implementation_id"] and
                 execution["package_sha256"] == package["sha256"] and execution["model_revision"] == package["model_revision"] and
                 execution["training_outcome"] == package["training_outcome"], "live_job_training_source_changed")

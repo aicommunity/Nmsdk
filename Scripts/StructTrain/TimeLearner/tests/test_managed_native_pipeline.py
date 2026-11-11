@@ -125,8 +125,8 @@ class ManagedNativePipelineTest(unittest.TestCase):
         self.assertEqual(execution["training_outcome"], "exact")
         solo_path = trained/"native/train_learned_state.json"
         solo = load(solo_path)
-        if job["configuration"]["schema_version"] in (6, 7):
-            # Composite cold6/cold7 preserve the complete initial declaration.
+        if job["configuration"]["schema_version"] in (6, 7, 8):
+            # Composite cold6/cold7/cold8 preserve the complete initial declaration.
             # Scalar service configurations use a separate session identity.
             self.assertEqual(solo["configuration"], job["configuration"])
         else:

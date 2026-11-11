@@ -1,5 +1,7 @@
 # Незакрытый Console boundary cold8/package7
 
+**Реализация добавлена, но ещё не принята compiler/runtime проверками.** Header publication7/execution5, Python dispatch8/5, общий ledger binding и live/base2 dispatch реализованы. Добавлены7 C++ real-source producer cases и7 Python DATA cases на фактическом закрытом source7 corpus. Эти wrapper checks явно не являются выполнением внешнего Console. Отдельные настоящий Console preflight/Train/export/Test и сохранение старого wire3/4 обязательны. Текущие M40 F7 и Elder A2 используют прежние неизменные source и этого кода не содержат.
+
 Проверка исходников подтвердила дополнительные причины, почему native API
 проверки ещё не дают допуска к новой Console научной серии.
 TimeLearnerCompositeArtifacts.h принимает для publication только package5/6;

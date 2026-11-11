@@ -141,10 +141,10 @@ def validate_job(mode, job, source_case=None):
     if mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 6:
         from .composite_configuration import composite_declaration_scope
         result['composite_measurement_declaration'] = composite_declaration_scope(job['configuration'])
-    elif mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 7:
+    elif mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (7,8):
         from .candidate_window_contract import configuration_view
         configuration_view(job['configuration'])
-        result['composite_measurement_declaration'] = dict(configuration_schema=7,protocol_schema=5,
+        result['composite_measurement_declaration'] = dict(configuration_schema=job['configuration']['schema_version'],protocol_schema=5,
             native_effective_preflight_required=True,live_measurement_admission_verified=False,
             training_certificate_verified=False)
     if live:
@@ -159,7 +159,7 @@ def _artifact_records(directory, execution):
             type(r["path"]) is str for r in records), "pipeline_artifact_schema")
     names = {r["path"] for r in records}
     require(len(names) == len(records), "duplicate_pipeline_artifact")
-    composite = execution.get('schema_version') in (3,4)
+    composite = execution.get('schema_version') in (3,4,5)
     if composite:
         from .composite_primary import _paths, filesystem_primary_resolver
         _paths(list(names)); resolve = filesystem_primary_resolver(directory)
@@ -193,18 +193,23 @@ def audit_execution(mode, directory, job, source_case=None):
     directory = Path(directory)
     execution = load(directory/"execution.json");_digest(execution)
     live = mode == "train" and job["schema_version"] == 2
-    adaptive = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 7
-    composite = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (6,7)
+    recovery = mode in ('train', 'preflight') and job['configuration'].get('schema_version') == 8
+    adaptive = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (7,8)
+    composite = mode in ('train', 'preflight') and job['configuration'].get('schema_version') in (6,7,8)
     if composite:
         from .composite_measurement_contract import integral_number_view
         execution = integral_number_view(execution)
     from .composite_execution_evidence import EXTRA_FIELDS, audit_composite_execution
     if adaptive:
         from .candidate_window_execution_evidence import audit_candidate_window_execution as audit_composite_execution
+    if recovery:
+        from .candidate_window_recovery_execution_evidence import (EXTRA_FIELDS as RECOVERY_FIELDS,
+            audit_candidate_window_recovery_execution as audit_composite_execution)
+        EXTRA_FIELDS = EXTRA_FIELDS | RECOVERY_FIELDS
     from .live_training_worker import EXECUTION_FIELDS as LIVE_EXECUTION_FIELDS
     require(set(execution) == COMMON_EXECUTION | EXECUTION_FIELDS[mode] | (LIVE_EXECUTION_FIELDS if live else set()) | (EXTRA_FIELDS if composite else set()) and
             execution["kind"] == "timelearner_native_"+EXECUTION_KINDS[mode]+"_execution" and
-            type(execution["schema_version"]) is int and execution["schema_version"] == (4 if adaptive else 3 if composite else 2 if live else 1) and
+            type(execution["schema_version"]) is int and execution["schema_version"] == (5 if recovery else 4 if adaptive else 3 if composite else 2 if live else 1) and
             execution["job_sha256"] == job["sha256"] and load(directory/"job.json") == job and
             execution["evaluation_verdict"] is None, "pipeline_execution_scope_changed")
     names = _artifact_records(directory, execution)
@@ -263,6 +268,8 @@ def audit_execution(mode, directory, job, source_case=None):
         from .composite_execution_evidence import audit_composite_start_failure
         if adaptive:
             from .candidate_window_execution_evidence import audit_candidate_window_start_failure as audit_composite_start_failure
+        if recovery:
+            from .candidate_window_recovery_execution_evidence import audit_candidate_window_recovery_start_failure as audit_composite_start_failure
         return audit_composite_start_failure(execution, directory, names, job)
     if live:
         from .live_training_worker import audit_live_training
