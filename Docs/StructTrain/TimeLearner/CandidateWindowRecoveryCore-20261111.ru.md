@@ -1,10 +1,13 @@
 # Переход bounded search после закрытого отказа candidate-window
 
-Статус: core C1 принят на M40145/145, все48child groups и outer закрыты,
+Статус: core C1 принят на M40 и Elder145/145 на каждом, все48child groups и outer закрыты,
 lease released; [полный terminal](ValidationPlans/M40CandidateWindowRecoveryCoreC1-20261111/completed-terminal.json)
 и [closure](ValidationPlans/M40CandidateWindowRecoveryCoreC1-20261111/completed-closure-and-lease.json).
 Source root8fac40bb545b314d606e41bec8a5f5b86e2dea46 /
-Pulse1c0fa37d2141a9dfa1a988c2c7ef14fd33e6efd0. Elder ещё выполняет C1;
+Pulse1c0fa37d2141a9dfa1a988c2c7ef14fd33e6efd0.
+[Elder terminal](ValidationPlans/ElderCandidateWindowRecoveryCoreC1-20261111/completed-terminal.json)
+и [closure](ValidationPlans/ElderCandidateWindowRecoveryCoreC1-20261111/completed-closure-and-lease.json)
+подтверждают такую же приёмку и released lease;
 полный compact primary C1 ещё не опубликован. Предыдущий фундамент
 допуска проверен на root9d51f808047f08e0cbfa0e440061f9bf04e8ba88 / Pulseaf612ba:
 Elder и M40 выполнили29/29 cases,29 отдельных leaf gates; outer+29child groups
@@ -16,9 +19,13 @@ Elder и M40 выполнили29/29 cases,29 отдельных leaf gates; out
 2776140bytes XZ, SHA256ef485b91f9e3e3586681d9351d3905b628c00c9c3cdeb2f470c9c040a4c9d12b.
 Commit214bf5888665c9bc15d9e1a514aa09e30571d07a включён через merge commit.
 После Git-переноса сверены hashes всех4 payload artifacts; независимый
-семантический replay ещё не выполнен. Elder1267files инвентаризированы,
-но collector получил reservation_capacity_exhausted при занятом C1;
-полный Elder compact primary остаётся открытым пунктом.
+семантический replay ещё не выполнен. Elder primary также сохранён:
+[inventory](../../../Reports/StructTrain/TimeLearner/RejectionFactory29B1-Elder-20261111/artifact-inventory.json),
+2690864bytes XZ /86837056bytes expanded,
+SHA25655b790adb3f9e98e066a1a026476c0a0387a13572c930c0fa9357617386c12c2.
+Commit11f4774722ec000561c0cbe4bc802c909acc6a06 включён через merge commit;
+после Git-переноса проверены все4 payload hashes. Два прежних collector
+capacity refusals сохранены; successful collection lease released.
 
 ## Изменения ядра
 
@@ -51,8 +58,8 @@ Classic/Branch, N0/N1 с actual native domains, повторные N0 candidates
 anchor, Missing/Ambiguous, default и строковую причину, replay, общий invalid/
 probe/edit budgets, external stop и неверную revision. Выполняются штатные
 native probes и реальные изменения графа, а не копия тела контроллера.
-Эти18 cases выполнены в составе принятого M40 C1. Это пока не двухсерверная
-приёмка и не проверка последующих wire/event изменений.
+Эти18 cases выполнены в составе принятого C1 на двух серверах.
+Это не проверка последующих wire/event изменений и не полный этап7.
 
 Этот набор не доказывает native-сценарий потери ранее валидной точки именно
 при RestoreBest, частичный N0 repeat с последующим изменившимся откликом,

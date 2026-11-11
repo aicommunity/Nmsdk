@@ -1,6 +1,7 @@
 # Форматы объявлений recovery: cold8 и runtime3
 
-Статус: Python readers проверены81/81 на M40; C++ roundtrip и cross-language
+Статус: Python readers проверены81/81 на M40; C++ C2 принят146/146 на M40,
+включая два native wire roundtrip. Elder C2 и independent cross-language
 проверка native producer ещё требуются. Это отдельное изменение
 после frozen C1 root8fac40bb/Pulse1c0fa37; работающий C1 его не проверяет.
 
@@ -10,7 +11,14 @@
 binding и совпадении external output с owned job directory. Декларации C2C
 исправляют эти ошибки. Canonical M40 принята за79.77с с clear diagnostics
 и закрытым cgroup; запущена отдельная SDK сборка/native146, supervisor
-PID82620/start346617135. Результата146 пока нет. Неудачные прежние outcomes
+PID82620/start346617135. C2 завершён146/146 valid PASS, outer и49child groups
+закрыты, lease released: [terminal](ValidationPlans/M40CandidateWindowRecoveryWireC2C-20261111/completed-terminal.json),
+[closure](ValidationPlans/M40CandidateWindowRecoveryWireC2C-20261111/completed-closure-and-lease.json).
+Elder canonical принята за67.53с, но native launch остановлен до создания
+задания проверкой диска: около6.03GB свободно при требовании4GiB reservation
++2GiB floor. Смена научных параметров или запуск без проверки места не выполнялись.
+Проверен отдельный план удаления старых generated build caches; удалений ещё нет.
+Неудачные прежние outcomes
 сохранены; их нельзя считать сборкой либо результатом C++ тестов.
 
 Cold8 сохраняет все поля cold7, включая base_schema_version1..4, и добавляет

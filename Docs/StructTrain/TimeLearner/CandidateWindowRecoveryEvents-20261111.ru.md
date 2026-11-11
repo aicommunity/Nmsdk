@@ -16,7 +16,16 @@ effective revision, физические параметры/C, validity, current
 опубликованного measurement не становится разрешением recovery. Восемь новых
 DATA tests проверяют форму, mutations, старую runtime version, отрицательные
 primary joins и честное отсутствие доказательства полноты пустого event set.
-Серверные проверки этого Python изменения ещё впереди.
+M40 проверил89/89 DATA cases на root3faf36fbd6864d105c0ea9357685d31a54c5136c,
+package fingerprint4c1a663d9f34261e6876796db4ab342a3b031f93fc3e8daed7e8d37417a6a893.
+Failures/errors/skipped=[], whole cgroup closed, lease released/owner missing.
+[Exact result/integrity](ValidationPlans/M40CandidateWindowRecoveryEvents89A2-20261111/readback-integrity.json).
+Первая попытка дала88/89: изменённый negative fixture сохранял clock marker
+валидного measurement, поэтому не доходил до recovery eligibility. Clock marker
+исправлен; отдельный positive-control archive audit теперь подтверждает, что
+отрицательный сценарий доходит до требуемого запрета valid geometry. Старый
+отрицательный outcome сохранён. Native positive Missing/Ambiguous event joins
+и C++ serializer этим DATA набором не подтверждены.
 
 Проверка supplied events не подтверждает полноту service ledger: невозможно
 восстановить все generic отказы/declined edits из одних групп измерений.
