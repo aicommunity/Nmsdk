@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 11.11.2026
 
+Новая полная SDK-проверка исправленного N1 запущена на обоих Linux workers: отдельные immutable source/build/runtime, 4096 сверенных исходных файлов, сборка Console и StorageComponents, затем selected native119. При последней проверке оба supervisors и kernel groups живы; terminal verdict ещё отсутствует. [Протокол, exact subjects и сохранённые ошибки подготовки](https://github.com/aicommunity/Nmsdk/blob/76308d0e41d239993c8fccb2bd664544558c1585/Docs/StructTrain/TimeLearner/N1GeometryFullSDKProgress-20261111.ru.md). Эти задания не равны stock N4 Train A/B или завершению обязательной научной матрицы.
+
 Адресный N1 geometry/Rs A/B принят на Elder и M40: исправленный production C++ проходит 98/98 случаев на каждом, исходный даёт два ожидаемых отказа среди тех же 98. Численный PASS не подтверждает завершение native Train или научной матрицы; новая полная SDK-сборка и Console A/B ещё нужны. [Полный протокол и первичные данные](https://github.com/aicommunity/Nmsdk/blob/aef8038e65ef35418480682049dc82780ac5a9de/Docs/StructTrain/TimeLearner/N1GeometryFairness-20261111.ru.md).
 
 Полностью принят этап0. Этапы1–12 остаются частичными; число адресных PASS не заменяет исходную обязательную матрицу. Нового научного результата классификации пока нет.
