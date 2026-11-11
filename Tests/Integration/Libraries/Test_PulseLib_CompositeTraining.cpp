@@ -4493,6 +4493,11 @@ TEST(NativeCandidateWindowRecoveryEventCodec,ChangedBytesAndInconsistentOutcomeC
 namespace {
 constexpr const char* RecoveryPackageImplementation="native-recovery-package7-fixture";
 struct RecoveryPackageFixtureData {QJsonObject package;std::vector<NativeProbeSample> response;};
+std::string RecoveryPackageDirectory() {
+    const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
+    Require(test,"recovery_package_test_identity_missing");
+    return std::string("package7/")+test->test_suite_name()+"/"+test->name();
+}
 
 template<class Owner> std::vector<NativeProbeSample> RecoveryBoundaryResponse(NativeCompositeFixture<Owner>& f) {
     const auto& service=f.owner->NativeTrainingController();Require(service.State()==NativeTrainingState::Finished,"recovery_response_requires_closed_boundary");
@@ -4526,7 +4531,7 @@ void SaveRecoveryResponse(const char* name,const std::vector<NativeProbeSample>&
     QJsonArray rows;const auto begin=samples.front().time;
     for(const auto& sample:samples) {QJsonArray row{sample.time-begin,sample.stimulus};
         for(double value:sample.potentials)row.append(value);rows.append(row);}
-    SavePortableObject("package7",name,{{"kind","native_boundary_response_fixture"},{"schema_version",1},
+    SavePortableObject(RecoveryPackageDirectory().c_str(),name,{{"kind","native_boundary_response_fixture"},{"schema_version",1},
         {"routing","native_burst_active_input0"},{"relative_time_stimulus_potentials",rows},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
 }
 template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bool n1=false,bool completed=false,bool c0=false) {
@@ -4554,7 +4559,8 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     f.owner->AutoCalibrateFixedLTZThreshold=false;f.owner->IsNeedToTrain=false;f.owner->CalculateMode=1;
     f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
     f.owner->ControllerVersion=2;f.owner->Build();f.model->Init();f.model->Reset();f.modelSpec=c.model;
-    Require(f.owner->ConfiguredModelInitialized.GetData(),"recovery_package_configured_cold_not_built");
+    Require(f.owner->IsReady() && f.owner->IsInit() && f.owner->ConfiguredModelInitialized.GetData(),
+        "recovery_package_configured_cold_not_ready_initialized");
     f.owner->IsNeedToTrain=true;ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
     Require(service.State()==NativeTrainingState::Finished,"recovery_package_boundary_not_finished");
     Require(bool(service.Certificate())==completed,"recovery_package_unexpected_certificate");
@@ -4567,8 +4573,9 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     Require(package["schema_version"]==QJsonValue(7),"recovery_package_public_export_not_version7");
     const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());
     EXPECT_EQ(summary["schema_version"],QJsonValue(8));EXPECT_EQ(summary["recovery_ledger"],package["recovery_ledger"]);
-    SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),"package7");
-    SavePortableObject("package7","source-package.json",package);SavePortableObject("package7","source-summary.json",summary);
+    SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),RecoveryPackageDirectory().c_str());
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"source-package.json",package);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"source-summary.json",summary);
     SaveRecoveryResponse("source-response.json",response);
     return cache.emplace(key,RecoveryPackageFixtureData{package,std::move(response)}).first->second;
 }
@@ -4576,7 +4583,14 @@ template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed
     const auto source=ActualRecoveryPackage<Owner>(n1,completed,c0);
     NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);f.attempt.reset();f.owner->IsNeedToTrain=false;
     const auto imported=f.owner->ImportNativeLearnedState(source.package,RecoveryPackageImplementation);
-    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    // Adoption marks the owner not ready. Complete its ordinary native
+    // lifecycle before a probe; never bypass the readiness guard.
+    const auto adoptedRevision=f.Revision();
+    f.owner->Build();f.owner->Init();
+    ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
+    EXPECT_EQ(f.Revision(),adoptedRevision);
+    const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_FALSE(service.Search());EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());
     EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);EXPECT_EQ(bool(service.Certificate()),completed);
     EXPECT_EQ(f.Revision(),source.package["model_revision"].toString().toStdString());
@@ -4595,7 +4609,8 @@ template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed
         }
     }
     EXPECT_EQ(f.Revision(),source.package["model_revision"].toString().toStdString());
-    SavePortableObject("package7","imported-package.json",exported);SavePortableObject("package7","imported-summary.json",summary);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"imported-package.json",exported);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"imported-summary.json",summary);
     SaveRecoveryResponse("imported-response.json",response);
     if(c0) {
         const auto exc=f.owner->template GetComponentL<NPulseChannel>("Neuron.Soma1.ExcChannel",true);
@@ -4615,7 +4630,7 @@ template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed
     EXPECT_NE(warmed["recovery_ledger"].toObject()["measurement_archive_document_id"],originalLedger["measurement_archive_document_id"]);
     auto prepared=PrepareNativeLearnedState(warmed,f.storage,f.environment,RecoveryPackageImplementation);
     EXPECT_EQ(prepared->service.CandidateWindowRecoveryDeliveries().size(),service.CandidateWindowRecoveryDeliveries().size());
-    SavePortableObject("package7","warm-retry-package.json",warmed);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"warm-retry-package.json",warmed);
 }
 template<class Owner> void RejectRecoveryPackageTampering() {
     const auto source=ActualRecoveryPackage<Owner>().package;
