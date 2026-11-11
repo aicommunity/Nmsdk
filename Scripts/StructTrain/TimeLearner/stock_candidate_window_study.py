@@ -32,6 +32,22 @@ def _frame(time, frequency):
     return frame
 
 
+def training_execution_limits(configuration, finalization_seconds=0.):
+    """Bound process lifetime separately from the unchanged native search budget.
+
+Zero preserves historical equal-deadline execution. A positive, explicitly
+    declared allowance covers process startup and native stop/export of diagnostic
+    DATA; it never changes the configuration passed to the learner.
+"""
+    native = number(configuration['maximum_wall_seconds'])
+    allowance = number(finalization_seconds)
+    require(native > 0. and allowance >= 0., 'stock_cold7_invalid_execution_limits')
+    timeout = number(native+allowance)
+    return dict(kind='timelearner_stock_training_execution_limits', schema_version=1,
+        native_search_wall_seconds=native, process_finalization_seconds=allowance,
+        process_maximum_wall_seconds=timeout)
+
+
 def validate_candidate_envelopes(config, origins):
     """Arithmetic admission on diagnostic coordinates, not a measurement proof.
 
@@ -177,7 +193,11 @@ def prepare(source, runtime_path, output):
     return result
 
 
-def run(source, runtime_path, controller, case, output, *, preflight_only=False):
+def run(source, runtime_path, controller, case, output, *, preflight_only=False, finalization_seconds=0.):
+    finalization_seconds = number(finalization_seconds)
+    require(finalization_seconds >= 0., 'stock_cold7_invalid_execution_limits')
+    require(not preflight_only or finalization_seconds == 0.,
+        'stock_cold7_finalization_allowance_requires_train')
     source = Path(source).resolve(strict=True);output = Path(output).resolve()
     require(not output.exists(), 'stock_cold7_result_exists')
     require(not source.is_relative_to(output) and not output.is_relative_to(source),
@@ -189,6 +209,7 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
     require(runtime == load(source/'runtime.json'), 'stock_cold7_runtime_changed')
     job_path = source/'jobs'/(case+'.json');job = load(job_path)
     validate_job('train', job)
+    execution_limits = training_execution_limits(job['configuration'], finalization_seconds)
     require(job['sha256'] == index['jobs'][case], 'stock_cold7_job_changed')
     expected_initial = load(source/'initial'/(case+'.json'))
     code = dict(pulse_core=runtime['source_closure']['Libraries/Nmsdk-PulseLib']['head'],
@@ -228,8 +249,9 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False)
             training_started=False, scientific_verdict=None)
         _write(output/'index.json', record)
         return record
+    _write(output/'execution-limits.json', execution_limits)
     result = run_job('train', job_path, None, runtime_path, output/'runs/train',
-        job['configuration']['maximum_wall_seconds'], process_policy=policy)
+        execution_limits['process_maximum_wall_seconds'], process_policy=policy)
     require(inspect(output/'runs/train/process/contained')['all_processes_closed'], 'stock_cold7_train_group_live')
     package_audit = None;package_path = None;physical_audit = None
     if result['validity'] == 'valid':
