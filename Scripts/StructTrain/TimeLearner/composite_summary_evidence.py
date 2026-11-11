@@ -29,8 +29,12 @@ def _measurement(records, identity, proof):
     return record
 
 
-def _audit_summary(document, package, archive_audit, *, schema_version):
-    keys(document, FIELDS, 'unknown_composite_summary_fields'); _finite_json(document)
+def _audit_summary(document, package, archive_audit, *, schema_version, recovery=False):
+    keys(document, FIELDS | ({'recovery_ledger','contains_controller_checkpoint'} if recovery else set()),
+         'unknown_composite_summary_fields'); _finite_json(document)
+    if recovery:
+        require(document['contains_controller_checkpoint'] is False,'recovery_summary_is_not_checkpoint')
+        _same(document['recovery_ledger'],package['recovery_ledger'])
     summary = integral_number_view(document); archive = package['measurement_archive']
     require(summary['kind'] == 'native_training_state_summary' and count(summary['schema_version']) == schema_version
             and summary['state'] == 'finished' and summary['measurement_method'] == METHOD

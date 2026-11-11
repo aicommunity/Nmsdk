@@ -7,10 +7,12 @@ prove that the producer actually completed; this auditor never claims it did.
 import re
 import struct
 
-from .candidate_window_archive_evidence import audit_candidate_window_archive
+from .candidate_window_archive_evidence import (audit_candidate_window_archive,
+                                               audit_candidate_window_recovery_archive)
 from .candidate_window_certificate_evidence import (audit_candidate_window_certificate,
                                                    replay_candidate_window_certificate)
-from .candidate_window_runtime_plan import audit_candidate_window_runtime_plan
+from .candidate_window_runtime_plan import (audit_candidate_window_runtime_plan,
+                                            audit_candidate_window_runtime_recovery_plan)
 from .composite_certificate_evidence import accepted_measurement_records
 from .composite_measurement_contract import integral_number_view
 from .composite_package_evidence import FIELDS, COMPLETED, STOPPED, _physical_archive
@@ -21,9 +23,11 @@ from .native_evidence import EvidenceError, count, number, require
 from .response_domain_evidence import _same, _text, _finite_json
 
 
-def _runtime_context(package):
+def _runtime_context(package, *, recovery=False):
     plan=package['runtime_plan'];archive=package['measurement_archive'];configuration=package['configuration']
-    result=audit_candidate_window_runtime_plan(plan,configuration,package['protocol'])
+    reader=(audit_candidate_window_runtime_recovery_plan if recovery and count(plan['schema_version'])==3
+            else audit_candidate_window_runtime_plan)
+    result=reader(plan,configuration,package['protocol'])
     require(plan['search']['normalization']==configuration['model']['normalization'],
             'candidate_window_package_normalization_changed')
     require(plan['run_id']==archive['current_attempt_id'],'candidate_window_package_current_attempt')
@@ -36,7 +40,7 @@ def _runtime_context(package):
     return result
 
 
-def _archive_metadata(package, references):
+def _archive_metadata(package, references, *, recovery=False):
     """Bind the exact native saved metadata, including the actual LT threshold."""
     graph=package['neuron']['graph']['identity']['model']
     paths=[row['cached_ltzone'] for row in graph['caches'] if row.get('cached_ltzone')]
@@ -59,14 +63,26 @@ def _archive_metadata(package, references):
     expected=dict(implementation_id=package['implementation_id'],state_kind=package['state_kind'],training=training,
         calibration=dict(status='fixed',protocol='fixed-trained-graph',ltzone_path=path,threshold=threshold),
         conversion=dict(mode='none'))
+    if recovery:expected['recovery_ledger_sha256']=package['recovery_ledger']['sha256']
     _same(package['neuron']['metadata'],expected)
 
 
 def audit_candidate_window_package(document, summary=None, *, external_resolver=None):
+    return _audit_candidate_window_package(document,summary,external_resolver=external_resolver,recovery=False)
+
+
+def audit_candidate_window_recovery_package(document, summary=None, *, external_resolver=None):
+    """Audit package7/summary8 without rewriting them into a legacy schema."""
+    return _audit_candidate_window_package(document,summary,external_resolver=external_resolver,recovery=True)
+
+
+def _audit_candidate_window_package(document, summary, *, external_resolver, recovery):
     """Replay actual embedded/raw primary and certificate DATA, never a lease."""
     try:
-        keys(document,FIELDS,'candidate_window_package6_fields');_finite_json(document)
-        require(count(document['schema_version'])==6 and document['sha256']==digest({
+        version=7 if recovery else 6
+        keys(document,FIELDS | ({'recovery_ledger'} if recovery else set()),
+             'candidate_window_package7_fields' if recovery else 'candidate_window_package6_fields');_finite_json(document)
+        require(count(document['schema_version'])==version and document['sha256']==digest({
             k:v for k,v in document.items() if k!='sha256'}),'candidate_window_package6_schema_or_digest')
         package=integral_number_view(document);archive=package['measurement_archive'];protocol=package['protocol']
         require(package['kind'] in ('timelearner_completed_state','timelearner_stopped_state')
@@ -77,7 +93,8 @@ def audit_candidate_window_package(document, summary=None, *, external_resolver=
         require(count(package['session_attempt'])>0 and type(package['reference_complete']) is bool
                 and type(package['reason']) is str,'candidate_window_package6_attempt_or_reason')
         _same(archive['protocol'],protocol)
-        group_audit=audit_candidate_window_archive(document['measurement_archive'],package['configuration'],
+        archive_reader=audit_candidate_window_recovery_archive if recovery else audit_candidate_window_archive
+        group_audit=archive_reader(document['measurement_archive'],package['configuration'],
             runtime_plan=package['runtime_plan'],external_resolver=external_resolver)
         source=archive['source_binding'];_same(package['capture_revision'],source['initial_model']['sha256'])
         require(count(package['capture_epoch'])==count(source['initial_epoch']),'candidate_window_package_capture_epoch')
@@ -87,9 +104,20 @@ def audit_candidate_window_package(document, summary=None, *, external_resolver=
             require(record['logical_request']['base_model_revision']==package['capture_revision']
                     and count(record['logical_request']['model_epoch'])==count(package['capture_epoch']),
                     'candidate_window_package_reference_model')
-        runtime=_runtime_context(package)
+        runtime=_runtime_context(package,recovery=recovery)
+        recovery_audit=None
+        if recovery:
+            from .candidate_window_recovery_ledger import audit_candidate_window_recovery_ledger
+            recovery_audit=audit_candidate_window_recovery_ledger(document['recovery_ledger'],
+                document['measurement_archive'],document['configuration'],external_resolver=external_resolver)
+            require(count(package['configuration']['schema_version'])==8 or
+                    count(package['runtime_plan']['schema_version'])==3 or bool(package['recovery_ledger']['deliveries']),
+                    'candidate_window_package_requires_explicit_recovery_family')
+        else:
+            require(count(package['configuration']['schema_version'])==7,
+                    'candidate_window_legacy_package_cannot_drop_recovery_family')
         capacitance=_physical_archive(package)
-        _archive_metadata(package,references)
+        _archive_metadata(package,references,recovery=recovery)
         images={row['name'] for row in package['neuron']['class_definitions']}
         required=package['dataset']['required_class_names']
         require(type(required) is list and all(type(name) is str and name in images for name in required),
@@ -110,10 +138,12 @@ def audit_candidate_window_package(document, summary=None, *, external_resolver=
         # A supplied summary is mandatory evidence, never synthesized from DATA.
         summary_audit=None
         if summary is not None:
-            from .candidate_window_summary_evidence import audit_candidate_window_summary
-            summary_audit=audit_candidate_window_summary(summary,package,group_audit)
+            from .candidate_window_summary_evidence import (audit_candidate_window_summary,
+                                                           audit_candidate_window_recovery_summary)
+            summary_reader=audit_candidate_window_recovery_summary if recovery else audit_candidate_window_summary
+            summary_audit=summary_reader(summary,package,group_audit)
         counters=archive['counters']['archive']
-        return dict(auditor_version=1,package_schema_version=6,package_digest_verified=True,
+        return dict(auditor_version=2 if recovery else 1,package_schema_version=version,package_digest_verified=True,
             certificate_consistent=certificate is not None,exact=certificate['exact'] if certificate else None,
             mathematical_exact=None if math is None else math['exact'],
             stopped_math_is_not_completion=not completed and math is not None,
@@ -122,6 +152,7 @@ def audit_candidate_window_package(document, summary=None, *, external_resolver=
             primary_bytes=counters['primary_bytes'],source_origin=archive['source_origin'],
             owner_family_binding=archive['owner_family_binding'],composite_measurements=group_audit,
             runtime_plan=runtime,capacitance_state=capacitance,summary_checked=summary is not None,summary=summary_audit,
+            **({'recovery_ledger':recovery_audit} if recovery else {}),
             search_history_retained=summary_audit['search_history_retained'] if summary_audit else None,
             terminal_provenance_verified=False,native_import_verified=False,native_execution_verified=False,
             live_authority_restored=False,completed_classification_requires_original_execution_binding=True,evaluation_verdict=None)

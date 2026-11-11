@@ -15,7 +15,7 @@ OUTCOMES = {"external_stop", "budget_exhausted", "invalid_model", "invalid_obser
 
 
 def audit_stopped_state(package: dict, summary: dict, packets: dict, traces: dict) -> dict:
-    if package.get('schema_version') in (5,6):
+    if package.get('schema_version') in (5,6,7):
         from .composite_package_evidence import audit_composite_package
         require(package.get('kind') == 'timelearner_stopped_state', 'unknown_stopped_state_schema')
         require(not packets and not traces, 'composite_package_legacy_primary_overlay')
@@ -130,7 +130,7 @@ def load_case(path: Path) -> tuple[dict, dict, dict, dict]:
     require(path.name.endswith("_stopped_state.json"), "unexpected_stopped_filename")
     stem = path.name.removesuffix("_stopped_state.json")
     package = load(path)
-    if package.get('schema_version') in (5,6):
+    if package.get('schema_version') in (5,6,7):
         summary_path = path.with_name(stem + '_stopped_summary.json')
         return package, load(summary_path) if summary_path.exists() else None, {}, {}
     packets, traces = {}, {}

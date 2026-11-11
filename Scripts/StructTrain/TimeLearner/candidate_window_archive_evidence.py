@@ -251,6 +251,19 @@ def _accepted(archive, rows, protocol):
 
 
 def audit_candidate_window_archive(document, configuration, *, runtime_plan=None, external_resolver=None):
+    return _audit_candidate_window_archive(document,configuration,runtime_plan=runtime_plan,
+        external_resolver=external_resolver,runtime_version=2)
+
+
+def audit_candidate_window_recovery_archive(document, configuration, *, runtime_plan, external_resolver=None):
+    """Explicit package7 path; a warm retry may retain runtime2 as current."""
+    version=count(runtime_plan['schema_version'])
+    require(version in (2,3),'candidate_window_recovery_archive_runtime_version')
+    return _audit_candidate_window_archive(document,configuration,runtime_plan=runtime_plan,
+        external_resolver=external_resolver,runtime_version=version)
+
+
+def _audit_candidate_window_archive(document, configuration, *, runtime_plan, external_resolver, runtime_version):
     """Audit archived DATA; no bool/hash/wrapper becomes live authority."""
     try:
         keys(document,ARCHIVE_FIELDS,'candidate_window_archive_fields');_finite_json(document)
@@ -291,8 +304,11 @@ def audit_candidate_window_archive(document, configuration, *, runtime_plan=None
         if runtime_plan is not None:
             require(type(runtime_plan) is dict and archive['current_attempt_id']==runtime_plan['run_id'],
                     'candidate_window_runtime_attempt_binding')
-            from .candidate_window_runtime_plan import audit_candidate_window_runtime_plan
-            runtime_audit=audit_candidate_window_runtime_plan(integral_number_view(runtime_plan),configuration,protocol)
+            from .candidate_window_runtime_plan import (audit_candidate_window_runtime_plan,
+                                                        audit_candidate_window_runtime_recovery_plan)
+            reader=(audit_candidate_window_runtime_recovery_plan if runtime_version==3 else
+                    audit_candidate_window_runtime_plan)
+            runtime_audit=reader(integral_number_view(runtime_plan),configuration,protocol)
             policy=runtime_plan['composite_measurement']
             _same(policy['candidate_window_policy'],protocol['composite_measurement']['candidate_window_policy'])
             require(count(policy['schema_version'])==2 and count(policy['maximum_total_primary_bytes'])==count(archive['maximum_total_primary_bytes']),
