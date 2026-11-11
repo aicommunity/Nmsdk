@@ -43,7 +43,23 @@ Elder вместо фактического Elder-1. Отказ сохранён
 fetch в partial clone. Они сохранены в stderr; утверждение о полностью чистом
 diagnostic status не делается. Проверка исходников и все тесты завершились.
 
-Пока reader не подключён к package7/summary8, Console и frozen recognition.
+Reader подключён к отдельному DATA-пути package7/summary8: новая схема
+проверяется непосредственно, исходные документы не преобразуются в package6.
+Проверяются hash пакета и neuron archive, recovery hash в native metadata,
+равенство ledger в summary8, отсутствие controller checkpoint, эффективная
+физика, ссылки на измерения и текущий runtime2/3 с фактическими бюджетами.
+Старый package6/summary7 путь остаётся отдельным. Loaders learned/stopped
+распознают новую схему и не создают отсутствующую summary.
+
+На Elder завершён адресный набор **107/107 PASS** source d6ddd8779: прежние
+archive/runtime/package6 и event/ledger проверки плюс десять новых проверок
+version dispatch, warm runtime2, runtime3, начальной модели и group budgets.
+[Точные условия и readbacks](ValidationPlans/ElderRecoveryPackage7DataG2-20261111/).
+Это DATA-контроли на synthetic primary; положительные package7/summary8 joins
+по полному новому C++ corpus ещё не приняты. До их проверки этот путь не даёт
+допуска для нового дорогостоящего Train.
+
+Console и frozen recognition ещё требуют поддержки и проверки нового пути.
 Ни принятие формата, ни связность всех переданных событий не доказывают
 полноту журнала действий, Exact или качество классификации. Отсутствующие
 события нельзя восстановить по одному списку supplied deliveries.

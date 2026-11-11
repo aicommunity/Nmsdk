@@ -1,0 +1,53 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "completed",
+  "reason": "exit_zero_and_whole_group_closed",
+  "returncode": 0,
+  "wall_seconds": 22.58540937071666,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "ebb73918208a216fbef6440b097c08d81220977fb304d5cc4c0a9276c892882b",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 2,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "warning: lazy fetching disabled; some objects may not be available"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 2,
+        "severity": "unclassified",
+        "excerpt": "warning: lazy fetching disabled; some objects may not be available"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 18927,
+        "sha256": "50e5e08221f7a02cb9d13fb2c7891b4fb2908cf4fef81b0325d18e81584dd1c4"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 134,
+        "sha256": "68be4927aa8241991f56007e23f06f95714f2d962211a726d8b737c0ec22efe0"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}
