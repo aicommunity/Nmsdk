@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-native-recovery-wire-interop6-m40-a1",
+  "package_fingerprint": "a7f5caf9b6cb9c0c34918d1a46c590341e39700162e999a4224970d48395415b",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest.test_branch_native_documents_cannot_be_downgraded",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest.test_branch_native_legacy_documents",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest.test_branch_native_recovery_documents",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest.test_classic_native_documents_cannot_be_downgraded",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest.test_classic_native_legacy_documents",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_recovery_wire_interop.NativeRecoveryWireInteropTest.test_classic_native_recovery_documents"
+  ],
+  "fixtures": {
+    "TIMELEARNER_NATIVE_RECOVERY_WIRE_FIXTURE": {
+      "pattern": "**/*.json",
+      "files": 11,
+      "fingerprint": "d594c55e86f8f7c0c770df396e75d25cad225088beee1857f21b560c07c14ff3"
+    }
+  }
+}
