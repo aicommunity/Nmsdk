@@ -7,7 +7,6 @@ import json
 import os
 from pathlib import Path
 import re
-import shutil
 import subprocess
 import unittest
 
@@ -76,23 +75,44 @@ class N1GeometryCppABTest(unittest.TestCase):
         binding = os.environ.get('TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS')
         require(binding is not None, 'decision_cpp_controls_required')
         spec = load(Path(binding)/'declaration.json')
-        require(set(spec) == {'before', 'after', 'output'} and all(set(spec[n]) ==
+        require(set(spec) == {'before', 'after', 'output', 'toolchain'} and all(set(spec[n]) ==
             {'directory', 'root_commit', 'pulse_commit'} for n in ('before', 'after')),
             'decision_cpp_controls_schema')
+        toolchain = spec['toolchain']
+        require(set(toolchain) == {'qt_major', 'qt_dir', 'generator', 'compiler', 'make_program',
+            'gtest_dir', 'gtest_source'} and toolchain['qt_major'] in (5, 6) and
+            toolchain['generator'] == 'Unix Makefiles' and
+            bool(toolchain['gtest_dir']) != bool(toolchain['gtest_source']), 'decision_cpp_toolchain_schema')
+        dependencies = []
+        qt = Path(toolchain['qt_dir'])/('Qt'+str(toolchain['qt_major'])+'Config.cmake')
+        dependencies.append(qt)
+        if toolchain['gtest_dir']:
+            dependencies.append(Path(toolchain['gtest_dir'])/'GTestConfig.cmake')
+        else:
+            dependency = Path(toolchain['gtest_source']).resolve(strict=True)
+            dependencies += [f for f in dependency.rglob('*') if '.git' not in f.relative_to(dependency).parts
+                and f.is_file()]
+        require(len(dependencies) <= 10000 and sum(f.stat().st_size for f in dependencies) <= 64*1024**2,
+            'decision_cpp_dependency_inventory_budget')
+        dependency_before = {str(f): frozen_digest(f, 32*1024**2) for f in dependencies}
         output = Path(spec['output']);output.mkdir(parents=True, exist_ok=False)
         snapshots = {n: _source(Path(spec[n]['directory']), spec[n]['root_commit'], spec[n]['pulse_commit'])
                      for n in ('before', 'after')}
         harness = Path(spec['after']['directory'])/'Tests/Integration/Algorithms'
-        compiler = Path(shutil.which('c++')).resolve(strict=True)
+        compiler = Path(toolchain['compiler']).resolve(strict=True)
         results, expected = {}, None
         regression = ('BoundedTrainingN1GeometryFairness/'
             'ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode')
         for name in ('before', 'after'):
             root = Path(spec[name]['directory']);folder = output/name;folder.mkdir()
             build = folder/'build'
-            configure = ['cmake', '-S', str(harness), '-B', str(build), '-G', 'Ninja',
-                '-DCMAKE_BUILD_TYPE=Release', '-DQT_MAJOR=5',
+            configure = ['cmake', '-S', str(harness), '-B', str(build), '-G', toolchain['generator'],
+                '-DCMAKE_BUILD_TYPE=Release', '-DQT_MAJOR='+str(toolchain['qt_major']),
+                '-DQt'+str(toolchain['qt_major'])+'_DIR='+toolchain['qt_dir'],
+                '-DCMAKE_CXX_COMPILER='+str(compiler), '-DCMAKE_MAKE_PROGRAM='+toolchain['make_program'],
                 '-DNMSDK_TRAINING_ALGORITHM_SOURCE_ROOT='+str(root)]
+            configure += (['-DGTest_DIR='+toolchain['gtest_dir']] if toolchain['gtest_dir'] else
+                ['-DNMSDK_GTEST_SOURCE_ROOT='+toolchain['gtest_source']])
             _command(configure, folder/'configure.log', 180)
             _command(['cmake', '--build', str(build), '--parallel', '2'], folder/'build.log', 600)
             executable = build/'runtime/Test_PulseLib_TrainingAlgorithms'
@@ -124,7 +144,9 @@ class N1GeometryCppABTest(unittest.TestCase):
                 runtime=runtime, scientific_verdict=None)
         self.assertEqual(snapshots, {n: _source(Path(spec[n]['directory']),
             spec[n]['root_commit'], spec[n]['pulse_commit']) for n in ('before', 'after')})
+        self.assertEqual(dependency_before, {str(f): frozen_digest(f, 32*1024**2) for f in dependencies})
         (output/'source-inventories.json').write_text(json.dumps(snapshots, indent=2)+'\n')
+        (output/'dependency-inventory.json').write_text(json.dumps(dependency_before, indent=2)+'\n')
         (output/'result.json').write_text(json.dumps(dict(kind='timelearner_n1_geometry_cpp_ab',
             schema_version=1, results=results, before_expected_failure=True, physical_models_executed=False,
             scientific_verdict=None), indent=2, allow_nan=False)+'\n')
