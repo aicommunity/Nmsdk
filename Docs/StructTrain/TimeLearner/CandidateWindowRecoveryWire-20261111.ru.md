@@ -8,7 +8,7 @@ Cold8 сохраняет все поля cold7, включая base_schema_versi
 обязательное invalid_measurement_recovery=advance_rejected_candidate_window.
 Нужны candidate-window contract и положительный общий invalid budget.
 Flat/scalar конфигурация с этой policy запрещена. Cold7 не принимает новое поле;
-декодирование cold8 через cold7 без него запрещено. Старые cold1..7 сохраняют
+смена только номера cold8 на7 при сохранении поля policy запрещена. Старые cold1..7 сохраняют
 прежний смысл и формат вывода. Повторная сериализация cold8 сохраняет policy.
 
 Runtime3 сохраняет полный active search и protocol binding runtime2, но явно
@@ -32,6 +32,7 @@ cross-language audit JSON от actual native producer на workers.
 Service пока явно запрещает новую policy. Package6, archive/history, ordered
 recovery events, независимый replay и Save/Load ещё не подключены. Успешный
 codec roundtrip не разрешает дорогой Train и не завершает этап7.
+
 ## Проверенная область
 
 На M40 выполнены81/81 объявленных DATA tests, failures/errors/skipped=[];
@@ -46,4 +47,3 @@ Whole cgroup закрыт, lease released/owner missing, operational diagnostics
 `.gitignore`; её outcome сохранён отдельно. A2 использует новый исходный
 каталог с полным набором root metadata. Эти81 не являются новыми научными
 прогонами, приёмкой C++ wire или всего этапа7.
-
