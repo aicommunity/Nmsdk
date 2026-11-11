@@ -1,8 +1,9 @@
 # Форматы объявлений recovery: cold8 и runtime3
 
-Статус: Python readers проверены81/81 на M40; C++ C2 принят146/146 на M40,
-включая два native wire roundtrip. Elder C2 и independent cross-language
-проверка native producer ещё требуются. Это отдельное изменение
+Статус: Python readers проверены81/81 на M40; C++ C2 принят146/146 на M40
+и Elder, включая два native wire roundtrip на каждом. Outer+49child groups
+закрыты, leases released. Независимый Python reader на реальных C++ cold8/
+runtime3/legacy documents принят6/6: [primary и результат](ValidationPlans/M40NativeRecoveryWireInterop6A1-20261111/completed/worker/validation/result.json). Это отдельное изменение
 после frozen C1 root8fac40bb/Pulse1c0fa37; работающий C1 его не проверяет.
 
 Следующий frozen C2 root5643f8319/Pulse0fb035a содержит146 cases/49leaf gates.
@@ -23,7 +24,7 @@ Elder canonical принята за67.53с, но native launch остановл�
 [точный receipt](ValidationPlans/ElderObsoleteGeneratedBuilds-20261111/retirement-completed.json).
 Elder native146 запущен, supervisor PID2684254/start396745925;
 [launch](ValidationPlans/ElderCandidateWindowRecoveryWireC2C-20261111/native-launch-receipt.json).
-Итоговой приёмки Elder C2 пока нет.
+Elder C2 завершён146/146 valid PASS: [terminal](ValidationPlans/ElderCandidateWindowRecoveryWireC2C-20261111/completed-terminal.json), [closure и lease](ValidationPlans/ElderCandidateWindowRecoveryWireC2C-20261111/completed-closure-and-lease.json). Это проверка frozen C2, не нового service/ledger source.
 Неудачные прежние outcomes
 сохранены; их нельзя считать сборкой либо результатом C++ тестов.
 
