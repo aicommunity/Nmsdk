@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_manual_visual_inspection",
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "selection_git_commit": "e86def6e85a27b965722ee965e84d7acd163f058",
+  "inspected": [
+    "Classic-window-N0/trial-0000-soma-001/overview.png",
+    "Classic-window-N0/trial-0000-soma-001/zoom-002-detail.png",
+    "Classic-window-N0/trial-0001-soma-001/overview.png",
+    "Classic-window-N0/trial-0001-soma-001/zoom-002-detail.png",
+    "Branch-window-N0/trial-0000-soma-001/overview.png",
+    "Branch-window-N0/trial-0000-soma-001/zoom-002-detail.png",
+    "Branch-window-N0/trial-0001-soma-001/overview.png",
+    "Branch-window-N0/trial-0001-soma-001/zoom-002-detail.png",
+    "Classic-window-N0/trial-0000-soma-002/overview.png",
+    "Classic-window-N0/trial-0001-soma-002/overview.png"
+  ],
+  "inspected_png_count": 10,
+  "full_cache_inspected": false,
+  "all_selected_pngs_inspected": false,
+  "observations": [
+    "Overview labels, legends, actual input pulses and native LT event markers are readable.",
+    "Both unique patterns and all three soma channels are represented.",
+    "Target overview shows a large negative post-event excursion; shared Y preserves it but compresses small positive lobes.",
+    "Local detail views make subthreshold lobes and actual input pulse widths readable; local Y is explicitly labelled.",
+    "Zoom-002 does not cover the later LT event or the foil second impulse; adjacent cached zooms are required to inspect those in detail."
+  ],
+  "scientific_verdict": null
+}

@@ -1,6 +1,6 @@
 # Состояние реализации TimeLearner — 12.11.2026
 
-Полный Console cold8 primary опубликован в Git ([корпус](ValidationPlans/M40RecoveryConsoleCold8ClosedCorpusA1-20261112/RESULT.ru.md)); графики строятся на M40 ([проверенный plotting runtime/A2](ValidationPlans/M40RecoveryConsoleCold8ReportsA2-20261112/)). Полностью принят только исходный этап0; этапы1–12 остаются частичными. Адресные проверки ниже не подменяют полный [аудит плана](PlanCompletionAudit-2026-11-04.ru.md), научную матрицу или merges в develop. Основная пользовательская копия E:/Science-Repo/nmsdk-git не используется для этих запусков; работа идёт в отдельном nmsdk-composite-recovery.
+Полный Console cold8 primary опубликован в Git ([корпус](ValidationPlans/M40RecoveryConsoleCold8ClosedCorpusA1-20261112/RESULT.ru.md)); временные графики построены и проверены1/1 на M40 ([отчёт и выбранные изображения](RecoveryConsoleCold8TemporalReport-20261112.ru.md)). Полностью принят только исходный этап0; этапы1–12 остаются частичными. Адресные проверки ниже не подменяют полный [аудит плана](PlanCompletionAudit-2026-11-04.ru.md), научную матрицу или merges в develop. Основная пользовательская копия E:/Science-Repo/nmsdk-git не используется для этих запусков; работа идёт в отдельном nmsdk-composite-recovery.
 
 | Проверка | Текущее доказанное состояние | Граница результата |
 |---|---|---|
@@ -13,7 +13,7 @@
 
 Сохраняются CapturedPerInput, anchor N−1, штатный lifecycle/scheduler и историческая доказательность августовских4/8–6/8 в исходном протоколе. Series D не возобновлялась. Корректность текущих тестов не закрывает остальные пункты property/storage/growth, алгоритмов, conversion/PostTune/calibration, миграции scripts, очередей/публикации, полной матрицы и документации. [Готовность научных экспериментов](ExperimentReadiness.ru.md).
 
-Ближайшие шаги: опубликовать полные Console/Elder32 primary, семантически проверить M40 native32 corpus и построить временные графики; затем повторить строгий N4 cold/evaluation и оставшуюся обязательную матрицу. Открыто отдельное [Windows file-identity наблюдение](WindowsCollectorIdentityObservation-20261111.ru.md); Linux guard не ослаблялся.
+Ближайшие шаги: опубликовать полный Elder32 primary и независимо проверить новые Console/M40 native32 corpora; временные графики Console уже построены, выборочно просмотрены и сохранены в Git; затем повторить строгий N4 cold/evaluation и оставшуюся обязательную матрицу. Открыто отдельное [Windows file-identity наблюдение](WindowsCollectorIdentityObservation-20261111.ru.md); Linux guard не ослаблялся.
 
 Предыдущие оперативные записи до этой приёмки сохранены [отдельно](ImplementationStatus-BeforeNative32-20261111.ru.md). Ниже сохранены более ранние исторические срезы и подробные ограничения; их running/ещё не реализовано относятся к указанным снимкам и не заменяют таблицу выше.
 
