@@ -23,21 +23,38 @@ from . import test_managed_native_pipeline as pipeline_checks
 from . import test_managed_native_calibration as calibration_checks
 
 
-class CandidateWindowConsolePipelineTest(unittest.TestCase):
+class CompositeConsolePipelineFixture:
+    """Shared real-process harness; subclasses supply audited source templates."""
+    fixture_environment = 'TIMELEARNER_CANDIDATE_WINDOW_CONSOLE'
+    corpus_environment = 'TIMELEARNER_NATIVE_PACKAGE6_FIXTURES'
+    configuration_version = 7
+    phase = 'cold7'
     # Actual package6 measured-grid auditing exceeded the former 256 MiB
     # controller cap. This is separate from each native model's 4 GiB cap.
     controller_reserve_bytes = 2*1024**3
 
     @classmethod
+    def prepare_corpus(cls, corpus):
+        return corpus
+
+    @classmethod
+    def read_template(cls, corpus, branch):
+        directory = corpus/('package6-branch' if branch else 'package6-classic')/'source-0'
+        raw = (directory/'train_learned_state.json').read_bytes()
+        package = load(directory/'train_learned_state.json')
+        audit = audit_candidate_window_package(package, external_resolver=filesystem_primary_resolver(directory))
+        return package, raw, audit
+
+    @classmethod
     def setUpClass(cls):
-        binding = os.environ.get('TIMELEARNER_CANDIDATE_WINDOW_CONSOLE')
+        binding = os.environ.get(cls.fixture_environment)
         require(binding is not None, 'cold7_console_fixture_binding_required')
         control = Path(binding).resolve(strict=True)
         require(control.is_dir(), 'cold7_console_control_directory_required')
         cls.spec = load(control/'declaration.json')
         require(type(cls.spec) is dict and set(cls.spec) == {'runtime', 'corpus', 'controller', 'output'},
                 'cold7_console_fixture_declaration')
-        corpus_binding = os.environ.get('TIMELEARNER_NATIVE_PACKAGE6_FIXTURES')
+        corpus_binding = os.environ.get(cls.corpus_environment)
         runtime_binding = os.environ.get('TIMELEARNER_CONSOLE_RUNTIME_FILES')
         require(corpus_binding is not None and runtime_binding is not None, 'cold7_console_all_fixture_bindings_required')
         require(Path(cls.spec['corpus']).resolve(strict=True) == Path(corpus_binding).resolve(strict=True),
@@ -51,19 +68,17 @@ class CandidateWindowConsolePipelineTest(unittest.TestCase):
         cls.output.mkdir(parents=True, exist_ok=False)
         cls.templates = cls.positive_templates = cls.output/'declarations'
         cls.templates.mkdir()
+        corpus = cls.prepare_corpus(Path(cls.spec['corpus']))
         for name, branch in (('Classic-window-N0', False), ('Branch-window-N0', True)):
-            directory = Path(cls.spec['corpus'])/('package6-branch' if branch else 'package6-classic')/'source-0'
-            raw = (directory/'train_learned_state.json').read_bytes()
-            package = load(directory/'train_learned_state.json')
-            audit = audit_candidate_window_package(package, external_resolver=filesystem_primary_resolver(directory))
+            package, raw, audit = cls.read_template(corpus, branch)
             require(audit['exact'] is True and audit['certificate_consistent'] is True,
                     'cold7_console_requires_complete_actual_source_fixture')
             config = deepcopy(package['configuration'])
-            require(config['schema_version'] == 7 and config['model']['branch'] is branch and
+            require(config['schema_version'] == cls.configuration_version and config['model']['branch'] is branch and
                     config['model']['normalization'] == 'N0' and len(config['model']['inputs']) == 2 and
                     config['search']['tolerances'] == dict(amplitude_absolute=1e-5, amplitude_relative=0., sync=.2),
                     'cold7_console_engineering_fixture_changed')
-            config['run_id'] += '/fresh-public-cold7-console'
+            config['run_id'] += '/fresh-public-'+cls.phase+'-console'
             implementation = package['implementation_id']
             owner = 'NNeuronTimeLearner'+('Branch' if branch else '')
             train = pipeline_checks.signed(dict(kind='timelearner_native_training_job', schema_version=1,
@@ -127,6 +142,7 @@ class CandidateWindowConsolePipelineTest(unittest.TestCase):
         finally:
             self.spec, self.output = initial_spec, initial_output
 
+class CandidateWindowConsolePipelineTest(CompositeConsolePipelineFixture, unittest.TestCase):
     def test_classic_cold7_public_preflight_train_export_measured_calibration_frozen_test(self):
         self.cold_pipeline_and_calibration('Classic-window-N0')
 
