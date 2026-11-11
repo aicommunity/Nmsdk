@@ -4037,7 +4037,11 @@ template<class Owner> void RejectedBudgetCannotPromote() {
         f.attempt->BeforeTick(f.Time(),Wall());if(!f.attempt->Running())break;
         f.model->Calculate();f.attempt->AfterTick(f.Time(),Wall());f.environment->IncreaseModelTimeByStep();
     }
-    EXPECT_TRUE(declined || f.attempt->TimeBudgetExhausted());
+    // A native group's deadline can expire before the whole attempt budget.
+    // Require the typed budget state; an arbitrary rejection is insufficient.
+    EXPECT_TRUE(declined || f.attempt->TimeBudgetExhausted() ||
+        f.attempt->Record().groupState==NativeMatchedOmissionState::BudgetExhausted)
+        <<f.attempt->RejectionReason();
     EXPECT_FALSE(f.attempt->Running());EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectedMeasurement());
 }
 }
