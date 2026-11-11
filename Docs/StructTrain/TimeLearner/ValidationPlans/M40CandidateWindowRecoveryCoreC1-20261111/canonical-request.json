@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-window-recovery-core-prepare-m40-c1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-core-c1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryCoreC1-20261111/canonical-plan.json",
+      "sha256": "53c0280e25bd956b6f7bd7c9d900dd946f9101a6adf3e6b32f7d11d6f8f3bf60"
+    }
+  }
+}
