@@ -1,5 +1,7 @@
 # TimeLearner reproducibility artifacts
 
+Current12.11: [strict N4 Train closed outcomes](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold8TrainA1-20261112/RESULT.ru.md) — both processes/data audits accepted, both training outcomes invalid_observation, no certificates/classification. [Full compact N4 primary](StockCold8N4StoppedPrimary-20261112/bundle.json) preserves all observations and models. [Branch window diagnostics and eight reviewed PNGs](../../../Docs/StructTrain/TimeLearner/RecoveryN4BranchWindowReport-20261112.ru.md) demonstrate five assigned peaks excluded by the forecast window; full-window DATA replay does not retroactively complete Train. [Full Elder native32 primary](RecoveryConsole32NativeClosedCorpus-Elder-20261112/bundle.json) is also retained; independent whole-corpus semantic replay remains pending. Older dated snapshots below keep their original scope.
+
 Historical scoped checks05.11: [ASan44, managed live6 and reviewed obsolete build-cache cleanup](../../../Docs/StructTrain/TimeLearner/CompletedGates-2026-11-05.ru.md). Their acceptance applies to the documented source snapshots; fixed-threshold silent models are not successful detections.
 
 Current whole-plan status: [maintained implementation status](../../../Docs/StructTrain/TimeLearner/ImplementationStatus.ru.md) and [scientific readiness](../../../Docs/StructTrain/TimeLearner/ExperimentReadiness.ru.md).

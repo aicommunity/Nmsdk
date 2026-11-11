@@ -20,4 +20,6 @@ Native protocol остаётся full-before → все omission controls → fu
 
 ## Приёмка и ограничения
 
-Подготовлены четыре declaration regressions и наследуемый реальный preflight для обеих stock топологий (plan3 вместо2) через production CLI/native path. Серверная приёмка этого исправления и новый cold Train ещё не выполнены. Далее проверить реальные candidate proposals на полном диапазоне и свежую финальную верификацию всех inputs; не обещать Exact или8/8. Полные режимы/physics/PostTune и оригинальные этапы1–12 не закрыты этим исправлением.
+Подготовлены четыре declaration regressions и наследуемый реальный preflight для обеих stock топологий (plan3 вместо2) через production CLI/native path. [Серверная declaration/native-preflight приёмка выполнена5/5](ValidationPlans/M40ObservationDomainPreflightA1-20261112/RESULT.ru.md). Новый cold Train ещё не выполнен. Далее проверить реальные candidate proposals на полном диапазоне и свежую финальную верификацию всех inputs; не обещать Exact или8/8. Полные режимы/physics/PostTune и оригинальные этапы1–12 не закрыты этим исправлением.
+
+Plan3 — версия Python-плана задания, не ControllerVersion и не StructureBuildMode. Native конфигурация остаётся8, runtime/физика неизменны.

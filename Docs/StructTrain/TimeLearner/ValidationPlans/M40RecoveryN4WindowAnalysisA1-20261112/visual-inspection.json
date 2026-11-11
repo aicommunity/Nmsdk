@@ -1,0 +1,26 @@
+{
+  "kind": "timelearner_manual_visual_inspection",
+  "schema_version": 1,
+  "date": "2026-11-12",
+  "inspected": [
+    "group-000018-soma-000-detail.png",
+    "group-000020-soma-000-detail.png",
+    "group-000020-soma-000-overview.png",
+    "group-000020-soma-000-window-left-native.png",
+    "group-000022-soma-000-window-left-native.png",
+    "group-000028-soma-000-detail.png",
+    "group-000028-soma-000-overview.png",
+    "group-000028-soma-000-window-left-native.png"
+  ],
+  "inspected_png_count": 8,
+  "all_selected_pngs_inspected": true,
+  "full_cache_inspected": false,
+  "observations": [
+    "Clear separate third response in full-before/full-after disappears only in omit-2; actual input overlays differ correctly for every omission.",
+    "Group20 assigned maximum precedes the proposed window edge by one native frame; group28 shows a larger earlier displacement.",
+    "Native edge views show actual samples at readable spacing.",
+    "soma0 is CSV channel zero, corresponding to the single Branch Soma1.SumPotential, not an Rdk child named Soma0.",
+    "Orange input is zero in these narrow post-stimulus edge views because actual stimulus occurred earlier; overview/detail preserve its actual time."
+  ],
+  "scientific_verdict": null
+}
