@@ -1,0 +1,25 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s08-recovery-execution5-data-m40-a1",
+  "package_fingerprint": "5ba4f259dfe36c93ca2286a06b6085061b3c6fa7188df8ec5ff92ebca6fca13e",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_actual_source7_and_both_base_wrappers_bind_nonempty_ledger",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_digest_protects_ledger_fields",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_external_primary_corruption_is_not_hidden_by_embedded_bytes",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_missing_recovery_binding_cannot_be_legacy_execution4",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_package6_cannot_be_accepted_in_execution5",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_pre_source_payload_has_null_ledger_and_distinct_known_counters",
+    "Scripts.StructTrain.TimeLearner.tests.test_recovery_execution5_data.RecoveryExecution5DataTest.test_rehashed_wrong_hash_and_count_are_rejected"
+  ],
+  "fixtures": {
+    "TIMELEARNER_CLOSED_PACKAGE7_SOURCE": {
+      "pattern": "**/*",
+      "files": 3,
+      "fingerprint": "38b09722d9112183b9afa514f9a6d61cd43bff0e9308d72cd397acf44bdf9db5"
+    }
+  }
+}
