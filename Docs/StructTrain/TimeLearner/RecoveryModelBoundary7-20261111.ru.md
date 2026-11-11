@@ -1,5 +1,7 @@
 # Recovery: модель7 и сводка8
 
+**Production snapshot7 проверен12/12 на Elder** ([результат](ValidationPlans/ElderPipelinePackage7Audit12F1-20261111/RESULT.ru.md)): реальный package7/summary8 и48primary files сохранены через общий pipeline, повреждённый/отсутствующий внешний CSV отклоняется до записи. Native transfer/Console/frozen recognition source7 остаются открытыми; предыдущий9/9 DATA audit — отдельный завершённый снимок.
+
 Уточнение11.11: independent Python audit фактического package7/summary8 принят9/9 на Elder; native transfer после Build пока не принят. В production pipeline обнаружен отдельный пропуск: _snapshot_source распознавал только5/6, поэтому7 шёл по legacy trial-file пути. Добавлена явная передача7 через общий composite reader и обязательная сверка внешних primary с embedded bytes до записи снимка. Три новые проверки используют тот же настоящий C++ corpus: полный перенос package+summary+48CSV, повреждение внешнего CSV и отсутствие CSV. Это новое изменение ещё не принято серверным прогоном; предыдущие9/9 его не проверяли.
 
 Статус: реализация и адресные tests добавлены; серверная компиляция и runtime

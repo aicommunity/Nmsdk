@@ -1,5 +1,7 @@
 # Состояние реализации TimeLearner — 11.11.2026
 
+**Production snapshot7 проверен12/12 на Elder** ([результат](ValidationPlans/ElderPipelinePackage7Audit12F1-20261111/RESULT.ru.md)): реальный package7/summary8 и48primary files сохранены через общий pipeline, повреждённый/отсутствующий внешний CSV отклоняется до записи. Native transfer/Console/frozen recognition source7 остаются открытыми; предыдущий9/9 DATA audit — отдельный завершённый снимок.
+
 **Оперативный статус 11.11.2026:** независимый replay фактических C++ package7/summary8 и непустого recovery ledger принят на Elder **9/9** ([результат](ValidationPlans/ElderClosedNativePackage7Audit9F2-20261111/RESULT.ru.md)). Это DATA acceptance, не успешный перенос модели и не научная классификация. M40 F1 завершён226 PASS/1 FAIL/13 not-run; Windows F1 —3 PASS/11 FAIL. M40 F3 успешно собран, но первый case обнаружил сброс Finished→Idle при native Build после import:0 PASS/1 FAIL/13 not-run. Все эти задания закрыты. Исправление Pulse1110808 подготовлено; набор14 roundtrip +4 active-Build проверок передаётся на M40, compiler/runtime приёмки ещё нет. Console и frozen recognition нового package7, затем контрольная научная серия остаются открытыми. Исходный план не завершён.
 
 Ниже сохранены предыдущие снимки: их running/запущен заменены оперативным статусом выше.
