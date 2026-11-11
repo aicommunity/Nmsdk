@@ -17,6 +17,8 @@ Windows .14: компиляция завершилась returncode=0, но ис
 
 Дополнение source review: Pulse362c6653778de61df8a2d81fdf512a8fcd2a09f8 меняет только две строки комментария CandidateCursor в BoundedTraining.h: N1 interleaving теперь не зависит от invalid recovery policy. Алгоритм и runtime не менялись; source SHA выполненных SDK/probe/Train проверок остаётся Pulse5f1a4ac. Эта правка не расширяет runtime-приёмку. Независимый DATA replay нового Classic подтвердил: группа12 valid в recorded/full окнах, группы14/18 missing→ambiguous. Scalar AdvanceUnassignedBurst не поддержан composite/candidate-window runtime2; требуется новый типизированный контракт. [Replay и конкретная постановка реализации](https://github.com/aicommunity/Nmsdk/blob/codex/timelearner-managed-python-controller/Docs/StructTrain/TimeLearner/CandidateWindowRecoveryImplementation-20261111.ru.md).
 
+Контрольный SDK до исправления на Elder завершён: root5ba0a2e81759a28f378117757aa3a5b91f1c57ab / Pulsec10206d5e338792d42b58ab28e48e7364b07e481; полная сборка SDK/Console, выбранные native roundtrip проверки2/2 passed, один leaf gate, source/capture errors=[]; original kernel Result=success/ExecMainStatus=0, outer+child closed. Это не повтор119 и не сравнение качества обучения. [Фактические terminal records](ValidationPlans/ElderN1GeometryBeforeFullSDKA1-20261111/native-sdk-actual-terminal.json). Before runtime готов к дальнейшему matched Console A/B; сама физическая серия ещё открыта.
+
 ## Новый неизменяемый SDK subject
 
 - Root `fcfd8bdff149c14cbe67149e996945d122bf954d`.
