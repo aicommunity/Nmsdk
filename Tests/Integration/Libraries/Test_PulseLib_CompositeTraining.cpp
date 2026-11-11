@@ -4205,7 +4205,9 @@ void WindowRecoveryWireBoundaries() {
     EXPECT_THROW(MakeConfiguredNativeTrainingPlan(config),std::invalid_argument);
     auto flat=config;flat.composite.reset();flat.candidateWindowPolicy.reset();
     EXPECT_THROW(EncodeConfiguredNativeTraining(flat),std::invalid_argument); // no silent default-policy export
-    auto runtime=baseline;runtime.search.invalidMeasurementRecovery=config.search.invalidMeasurementRecovery;
+    auto runtime=baseline;runtime.search.initialModelRevision=f.Revision();
+    EXPECT_NO_THROW(EncodeCandidateWindowRuntimePlan(runtime));
+    runtime.search.invalidMeasurementRecovery=config.search.invalidMeasurementRecovery;
     runtime.search.maximumInvalidObservations=1;
     EXPECT_THROW(EncodeCandidateWindowRuntimePlan(runtime),std::invalid_argument);
     const auto revision=f.Revision();f.attempt.reset();
