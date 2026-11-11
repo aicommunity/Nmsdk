@@ -1,6 +1,6 @@
 # Подготовка распознавания из recovery model7
 
-**Native-приёмка принята на Elder: 10/10.** Rootca8be945/Pulse1110808, свежая сборка, десять реальных conversions/import и двадцать frozen target/foil trials. [Результат и точные ограничения](ValidationPlans/ElderRecoveryRecognition7Native10A2-20261111/RESULT.ru.md). Полный primary corpus опубликован в Git (4.27MB сжатых данных); независимый Python replay6 подготовлен отдельно и пока не принят. Это технические N=2/Sync0.2 cases, не N4 научная матрица.
+**Native-приёмка принята на Elder: 10/10.** Rootca8be945/Pulse1110808, свежая сборка, десять реальных conversions/import и двадцать frozen target/foil trials. [Результат и точные ограничения](ValidationPlans/ElderRecoveryRecognition7Native10A2-20261111/RESULT.ru.md). Полный primary corpus опубликован в Git (4.27MB сжатых данных); [независимый Python replay принят6/6](ValidationPlans/ElderRecoveryRecognition7Independent6A2-20261111/RESULT.ru.md), включая полное восстановление и source/fixture before/after checks. Это технические N=2/Sync0.2 cases, не N4 научная матрица.
 
 Исторический native18 использовал rootbdefc540/Pulse1110808 и этих добавлений не содержал; его частичный исход не подменяет новый native10.
 
