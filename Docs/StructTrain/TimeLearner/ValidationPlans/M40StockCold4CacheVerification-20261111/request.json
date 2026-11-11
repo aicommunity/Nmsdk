@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-stock-cold4-cache-verification-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "889b0997025606493ee8095ece7089fa0e609554",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 64,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-stock-cold-primary-cache-reader-m40-a1",
+      "commit": "889b0997025606493ee8095ece7089fa0e609554"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold4-cache-verification-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40StockCold4CacheVerification-20261111/suite.json",
+      "sha256": "5e4d10052b7f88c4e60958ec7146a209f2100d158a2be0b1591dcf3d3ae26e0e"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD_COMPACT_PRIMARY": "/media/user/Data/TimeLearnerRefactor/requests/stock-cold4-cache-verification-a1/Reports/StructTrain/TimeLearner/StockCold4-20261111/Elder",
+      "TIMELEARNER_STOCK_COLD_REPORT_CACHE": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-cross-reader-m40-a1/worker/tmp/stock-cold-reports"
+    }
+  }
+}

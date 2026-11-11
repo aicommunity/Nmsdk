@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "stock-cold4-independent-primary-and-immutable-cache-m40-a1",
+  "package_fingerprint": "50f1123229c9a29ff7e68c3f45eb5bebaf679fafe4837e90a4a528f10920fb33",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_compact_primary.StockColdCompactPrimaryTest.test_complete_archive_and_real_assigned_peaks_and_corruption_control"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD_COMPACT_PRIMARY": {
+      "pattern": "*",
+      "files": 6,
+      "fingerprint": "28be811ff6e7f7dbf13d3648877c1bf14b5d6df33df65171b4719779b2a878e2"
+    },
+    "TIMELEARNER_STOCK_COLD_REPORT_CACHE": {
+      "pattern": "**/manifest.json",
+      "files": 9,
+      "fingerprint": "b94d9e8db1788389ea29f002039d2efbbc56e0558f98cda61e154dd2410d3322"
+    }
+  }
+}
