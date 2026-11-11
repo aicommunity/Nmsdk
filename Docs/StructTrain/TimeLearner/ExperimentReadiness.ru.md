@@ -14,6 +14,10 @@
 
 [Прежние оперативные снимки](ExperimentReadinessHistory-through-20261110.ru.md) сохранены отдельно. Их исходные отрицательные результаты и промежуточные статусы не переоцениваются. [Состояние всех этапов и исторические receipts](ImplementationStatus.ru.md).
 
+
+
+Уточнение11.11 после actual cold Train: [Classic timeout и Branch valid budget_exhausted](https://github.com/aicommunity/Nmsdk/blob/8e1e5b9107e70a35fe2c05cf03787402e5f89a9b/Docs/StructTrain/TimeLearner/StockCold7MeasuredPilotOutcome-20261111.ru.md). Все process groups закрыты, leases released. Branch132 logical groups/792 native probes,128 search probes,64edits; остановленный пакет и effective stock physics проверены. Классификация не оценивалась. Обнаружено ограничение обхода N1 geometry/Rs, связанное с retry_same_candidate; исправление и native A/B ещё открыты. [Читаемые исходные N4 графики](https://github.com/aicommunity/Nmsdk/blob/8e1e5b9107e70a35fe2c05cf03787402e5f89a9b/Docs/StructTrain/TimeLearner/StockCold4TemporalReports-20261111.ru.md) и cross-worker primary audit приняты; это один target pattern с четырьмя assigned-input пробами на topology, не полная target/foil matrix.
+
 ## Что требуется до первой новой научной серии
 
 1. Выполнено для выбранного native119 cohort: полный primary обоих workers сохранён в Git и независимо восстановлен на противоположных workers; проверены4868 members,43 gates/119 unique cases,310 artifact rules и13 package states на архив. Это не заменяет всю режимную и научную матрицу.
