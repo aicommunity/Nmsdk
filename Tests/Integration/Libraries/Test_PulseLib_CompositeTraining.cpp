@@ -4689,7 +4689,7 @@ TEST(NativeRecoveryPackage7,BranchLegacy6CannotMasqueradeAsRecovery7){LegacyPack
 
 namespace {
 template<class Owner> void ActiveBuildStillRevokesComposite(bool candidateWindows) {
-    NativeCompositeFixture<Owner> f;auto plan=ServicePlan(f);
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);auto plan=ServicePlan(f);
     if(candidateWindows)plan=MakeConfiguredNativeTrainingPlan(ActualCold7Declaration(f));
     ServiceStart(f,std::move(plan));const auto revision=f.Revision();
     const auto& service=f.owner->NativeTrainingController();
