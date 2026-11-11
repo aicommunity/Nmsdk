@@ -1,0 +1,2296 @@
+{
+  "manifest": {
+    "kind": "timelearner_closed_primary_bundle",
+    "schema_version": 1,
+    "base": "/media/user/Data/TimeLearnerRefactor",
+    "roots": [
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3",
+        "prefix": "stock-cold4-original",
+        "files": {
+          "closure-and-reservation.json": {
+            "bytes": 3689,
+            "sha256": "a20b76a71e1a05f5e490f711aeea9810079182d9488a272fe45d62530e811b7e"
+          },
+          "controller-result.json": {
+            "bytes": 1177,
+            "sha256": "266309477088cc0b603f23623fa2178e046b7b9620bcea611a30bf61aacf6b73"
+          },
+          "launch-context.json": {
+            "bytes": 258,
+            "sha256": "f408b385696a095484cba7d04c157d2dd6db20f8b80f9f42b4d2b04a0957d2f9"
+          },
+          "lease-recovery.json": {
+            "bytes": 3752,
+            "sha256": "4d343ea4d18b15540f47982fa2e0365e6624abd548d5434434a0d055320f2341"
+          },
+          "monitor-final.json": {
+            "bytes": 131,
+            "sha256": "b87b3321f15f205ce540960d7c68e3b196b05af74debef8a672398200c9de44c"
+          },
+          "monitor.jsonl": {
+            "bytes": 6027,
+            "sha256": "9ef4b18a32f04755e02d2d88f1bb48a469d1eec48e720d385dc771c939908d75"
+          },
+          "preflight.json": {
+            "bytes": 75,
+            "sha256": "437a297ae3385bc40b2e55c8ee7dc1fea4907d321b3516adf6d2b4df352ad02a"
+          },
+          "process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "process/contained/limits-readback.json": {
+            "bytes": 1070,
+            "sha256": "a4a017cd4f79935a31ebebffb60dc057563a60ea00dc78667937dfc729a3ee72"
+          },
+          "process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "e2318adc5b4d7b205a417f82c75e6301222e86a651583429453444413faa788f"
+          },
+          "process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "816cb82f3e9df5162ace9408e1bd0174d709bbc91ec4a7e276062cce448c7439"
+          },
+          "process/contained/request.json": {
+            "bytes": 964,
+            "sha256": "c78ddf9b614c93a91d495275037f641e9ab79ba0bac92197b6e3adbccbe2437d"
+          },
+          "process/contained/runtime.json": {
+            "bytes": 2956,
+            "sha256": "5f43cfde1ad69c6a54a57585dac34baa752f8b4c1bc6464602f0b50b371b3f26"
+          },
+          "process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/loaded-files.json": {
+            "bytes": 976,
+            "sha256": "5db1cd600717b928b17c897be8b83233874937be4f56f87d03f9db48a09c5d28"
+          },
+          "process/owned-process.json": {
+            "bytes": 587,
+            "sha256": "5fdda604b038c6568a2132a16db3e3c7aaa47b0f9e17d8cfefb5a1877ee89ad8"
+          },
+          "process/request.json": {
+            "bytes": 550,
+            "sha256": "584808f9207434e5faf7aa33d9ff0649039c37751f1313c0ca415d95e763a1f8"
+          },
+          "process/result.json": {
+            "bytes": 1177,
+            "sha256": "266309477088cc0b603f23623fa2178e046b7b9620bcea611a30bf61aacf6b73"
+          },
+          "process/runtime.json": {
+            "bytes": 2956,
+            "sha256": "5f43cfde1ad69c6a54a57585dac34baa752f8b4c1bc6464602f0b50b371b3f26"
+          },
+          "process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "process/terminal-unit-state.json": {
+            "bytes": 1300,
+            "sha256": "200b99f5e25cbc2f9fcfdf1b42011753cd0770677681b4a5907384dd18f65494"
+          },
+          "process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "514e3c4ba4e979feea324240049136916460ad2e80833c8bc6c9d05a163ff4bc"
+          },
+          "request.json": {
+            "bytes": 1573,
+            "sha256": "aefd283e0e881b2fe98f678c7b1f2c7173d202511cf0afd422204c8e8f9dc314"
+          },
+          "supervisor.log": {
+            "bytes": 554,
+            "sha256": "c2e96d9ef0409cf94e7650a885f1c06bfd5bf6050edbdd63f99956bc3b50d705"
+          },
+          "worker/fixtures-after.json": {
+            "bytes": 1703,
+            "sha256": "8598575c2924959a26e93550737d0ac218db8a70b9d546a0204f5624c144550d"
+          },
+          "worker/fixtures-before.json": {
+            "bytes": 1703,
+            "sha256": "8598575c2924959a26e93550737d0ac218db8a70b9d546a0204f5624c144550d"
+          },
+          "worker/native-stock-cold4/cli-transcript.log": {
+            "bytes": 7905,
+            "sha256": "7c178269b476d2cc163b2b3dceac89bfde875ced3d5cd09e5930667cf35f6511"
+          },
+          "worker/native-stock-cold4/prepared/Branch-cold-stock-input0.json": {
+            "bytes": 2187,
+            "sha256": "e71fb8308278b6c4f6f9ef56c77ce11d8b0500955ffc2d76b9dca8a052ee4322"
+          },
+          "worker/native-stock-cold4/prepared/Branch-cold-stock-input1.json": {
+            "bytes": 2187,
+            "sha256": "87c47cff91d6dc54052ff73d71bf99634c301c59a21ba6cc82ae85354ddfbc13"
+          },
+          "worker/native-stock-cold4/prepared/Branch-cold-stock-input2.json": {
+            "bytes": 2187,
+            "sha256": "bf57f3e9564b0733da9340d754a032469aafb1b593693b2d5777f80cb8f35a36"
+          },
+          "worker/native-stock-cold4/prepared/Branch-cold-stock-input3.json": {
+            "bytes": 2187,
+            "sha256": "3ea321b3f9b17e9edb731bfb48a0d5a5584e4da7b35dd32edb6aa4c6f4fab2b7"
+          },
+          "worker/native-stock-cold4/prepared/Classic-cold-stock-input0.json": {
+            "bytes": 2211,
+            "sha256": "e1eb3324af8812977cdf3baa7bf218348830a762087d124e603255aed39c806a"
+          },
+          "worker/native-stock-cold4/prepared/Classic-cold-stock-input1.json": {
+            "bytes": 2211,
+            "sha256": "c5c83c80c22dfb325ae89aec1a9f779257640e6e3c15fd3781e8a89da1d6cb4d"
+          },
+          "worker/native-stock-cold4/prepared/Classic-cold-stock-input2.json": {
+            "bytes": 2211,
+            "sha256": "078a7f047f303b5e4147235190a0af8284cbee6858f3651c3b1b4a9f3b236727"
+          },
+          "worker/native-stock-cold4/prepared/Classic-cold-stock-input3.json": {
+            "bytes": 2211,
+            "sha256": "9dc67125d61ced2e53e85a2d018bc0d88d8b40fa96db407bf618228093a9b844"
+          },
+          "worker/native-stock-cold4/prepared/index.json": {
+            "bytes": 1018,
+            "sha256": "b2c9eab42065ba86e519e6e89ecf802f8cfbde5cd32d888e3930f4fd9c172841"
+          },
+          "worker/native-stock-cold4/result/design.json": {
+            "bytes": 1018,
+            "sha256": "b2c9eab42065ba86e519e6e89ecf802f8cfbde5cd32d888e3930f4fd9c172841"
+          },
+          "worker/native-stock-cold4/result/index.json": {
+            "bytes": 9023,
+            "sha256": "33ea9307fca606f0a206bb60b8066eed1fe1bc06561053aca631ba568abd29d0"
+          },
+          "worker/native-stock-cold4/result/leases.sqlite3": {
+            "bytes": 45056,
+            "sha256": "e92a394912e29cbf42900b69415d87569e52ecef31795716d6c810df8ee92de8"
+          },
+          "worker/native-stock-cold4/result/progress-1.json": {
+            "bytes": 1036,
+            "sha256": "98c13ad49af6dd23643235a8914f94b98e7858a1da1dc3e40d976337d1497c62"
+          },
+          "worker/native-stock-cold4/result/progress-2.json": {
+            "bytes": 2069,
+            "sha256": "60c3c48b982809a61267e7b15630aa8f6b413e0d0831b7a459131dd756623f4f"
+          },
+          "worker/native-stock-cold4/result/progress-3.json": {
+            "bytes": 3102,
+            "sha256": "2321d26c4b404b0c677707ae175825b7aa8677217659de7f33b40c5ef0dce6cf"
+          },
+          "worker/native-stock-cold4/result/progress-4.json": {
+            "bytes": 4135,
+            "sha256": "04b6f785fc8bf27bee849a4b040578ea8e0852ca1d4e9bd16cb06a490a36f3cd"
+          },
+          "worker/native-stock-cold4/result/progress-5.json": {
+            "bytes": 5165,
+            "sha256": "5c4731b9c7260cd9f8013c1302f00f298ac4c7564a7654a8e8fa658a63af6c35"
+          },
+          "worker/native-stock-cold4/result/progress-6.json": {
+            "bytes": 6195,
+            "sha256": "29d466049fb763a1c2c0b5d49cfaa5e7e589547651325cd2f695400e5357737d"
+          },
+          "worker/native-stock-cold4/result/progress-7.json": {
+            "bytes": 7225,
+            "sha256": "68b67f8a7a96af3de192659fdacefe7377085655f01fdaae5577bfb485be9675"
+          },
+          "worker/native-stock-cold4/result/progress-8.json": {
+            "bytes": 8255,
+            "sha256": "8ad27199506f945402644a5d471f75e59526d24fe3468a1425e276d839593e89"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/input/job.json": {
+            "bytes": 2187,
+            "sha256": "e71fb8308278b6c4f6f9ef56c77ce11d8b0500955ffc2d76b9dca8a052ee4322"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/execution.json": {
+            "bytes": 1894,
+            "sha256": "d843654bfcf596d19e92d0964e9b90264f8188d99840ee6061d5e3015042ed20"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/final-state.json": {
+            "bytes": 72272,
+            "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/initial-state.json": {
+            "bytes": 72311,
+            "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/job.json": {
+            "bytes": 2560,
+            "sha256": "84f18d3580b40f92f7b7c29b5cba8aa62946c6799d42246215ebf385691fdbd2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/owner-configuration.json": {
+            "bytes": 3999,
+            "sha256": "8d70d0ea68f0633c518d84803e954eedb0882ba1da96290eef7d0c8b8c3f9108"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/probe_trial_1.csv": {
+            "bytes": 145589,
+            "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/probe_trial_1.json": {
+            "bytes": 6688,
+            "sha256": "a50188473c9bbe9d1f3602bdd4a248d533e29c0845fffc64831cec5e06485b6f"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014815.2366164": {
+            "bytes": 291,
+            "sha256": "c719c6d9a9f70bce423bf76ba4c8a1c16771d3dfeb17e734c4fd338be1038f89"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "ddfb85364825921f21f7baaa20020034bf532a54117155fb9821ac79433ca2cf"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "0f087071e3b65cd8775edeb1e71268298fa97b4552d7dfbe6ece819b642b2fd3"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "a44f63c4b1a17ed54e1a94117d21452f3f2ae0e2bce4ae4feb0b02f3e65148e4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "1f35167f96eb97b2380a67a07db5a73164391d58112a2ac2c82333528cbf6600"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "64282bb15a8e43d16fb8639a3fcf791b1ec292fc1e5deee497cb169ab143485e"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/request.json": {
+            "bytes": 1586,
+            "sha256": "edc617d4674e7239e02326543c75e25d490719bded3ef476b6a16d05110abb36"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "682981ae6187f4d5faa91a75c54885dd8a2bee9a27b2bcdc104ff9d2ec60fec1"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/request.json": {
+            "bytes": 922,
+            "sha256": "f4ea6160c9e15ac543ea263184dfff79ea42aea81f5f62bc135c934d092c328b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/reservation-context.json": {
+            "bytes": 3049,
+            "sha256": "76b2c63ce0d4e8af116e7111df255a0db524a6db7c91f7a2973f86a3260fed13"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/result.json": {
+            "bytes": 1175,
+            "sha256": "275416e88346ae5ff836cd40bcd81c150887157cb11474a8ce8d10cd236eee10"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "b2e35f55a883963b4664286203cfa904681111b153a4917e6705741b5c79f5cc"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "3d2ef3100363ae4c72252546e637b8e2407b7473b428153586fc56a8b26aafa3"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/run-manifest.json": {
+            "bytes": 35829,
+            "sha256": "998a21c56d75db36d174d73101ecd2f456e2a6dc67326a9cf9a96ccba78a8e58"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/runtime-cli-interface.json": {
+            "bytes": 5502,
+            "sha256": "953f931b81693c373fb6e6c2a442f6a49522b5f6a3f29ec20b53efb5835fd1c1"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/input/job.json": {
+            "bytes": 2187,
+            "sha256": "87c47cff91d6dc54052ff73d71bf99634c301c59a21ba6cc82ae85354ddfbc13"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/execution.json": {
+            "bytes": 1894,
+            "sha256": "ddba1ca85c7770f7bb3b8cf9ead1e3aac36e79e0cffd9eb411adad1bb1ae6306"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/final-state.json": {
+            "bytes": 72272,
+            "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/initial-state.json": {
+            "bytes": 72311,
+            "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/job.json": {
+            "bytes": 2560,
+            "sha256": "4e56d5054d3a13848db8a5826dd0698ed6b07d1d3644c130f006dca61e103709"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/owner-configuration.json": {
+            "bytes": 3999,
+            "sha256": "9ebe8d4a452aafd8e2089b5f156178474a7a812b68d458ba6cead405b7d802e7"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/probe_trial_1.csv": {
+            "bytes": 145589,
+            "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/probe_trial_1.json": {
+            "bytes": 6702,
+            "sha256": "8ae1f424852774932b0473acbbeeeff9fdea2230fc1584de9b32b884633c52ed"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014818.2366519": {
+            "bytes": 291,
+            "sha256": "84a7dba3bbaf8fd2b49b5d86b97e090015c1abf6f9d7809769fbbbe65a60265d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "6aecc2e96e7063daa586144a5642054de1dc97cc9344baf99057d77f7f8eaa9e"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "47fb1e0b854a81dd7bbb41ff90bf4bda361ea7bd5b6161433336dc2a7c5b77a1"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "d3b0a396bec2bdc4d53eeac275040e36c22b1f48ec1500cb899967b4f667c8cc"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "d2b3d7620af2a31c49255a909dcf8846080bb4fe5a584bb6e5a1c330f34c4dc8"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "f4fb072dddb89671a93ecf560918738fd16df259cf891f196bef3e7db0d6024b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/request.json": {
+            "bytes": 1586,
+            "sha256": "d0089ffcbd1cdd4b5084c04460e65d8e4c3844e16e7d1a52fb6d2b06e4150591"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "81cc99e72878f0e84c2e9c786aac94b7c8526137034f71908622f6b5b968b67e"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/request.json": {
+            "bytes": 922,
+            "sha256": "e0f4d7cd27818d6183b7de23bc806f839ff82b82d50154411477233869294fda"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/reservation-context.json": {
+            "bytes": 3049,
+            "sha256": "31e6cb68d01b29d3953246233f9fc2a64797ba99e8b32a8b35db65956a538a53"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/result.json": {
+            "bytes": 1176,
+            "sha256": "a7c0c7b0653222c4ab32359f1bca6302b5ae9c12e1abf10a10af844947da6dc2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "912d7706429838e63acc4c0af517630bb82bddb902c8baaa22d123e74e37d079"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "2114f696b9dbfeeb8e8e4ec2ca50dd33b8f5496523ac5f7b0a06539e3f947c32"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/run-manifest.json": {
+            "bytes": 35829,
+            "sha256": "80ebfcb375b0f0387e7c4138c723b922c77e6063cf35b80329379e50a6c9f521"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/runtime-cli-interface.json": {
+            "bytes": 5503,
+            "sha256": "ab78c5e53925cea25db8468e090623d817fbcc5abe20d20d7b85d22b8ebc2f97"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/input/job.json": {
+            "bytes": 2187,
+            "sha256": "bf57f3e9564b0733da9340d754a032469aafb1b593693b2d5777f80cb8f35a36"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/execution.json": {
+            "bytes": 1894,
+            "sha256": "babf12bec4ae826fa2db2ff6ce2d88aaf9e2d609c3b48311b5a49387349d5e34"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/final-state.json": {
+            "bytes": 72272,
+            "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/initial-state.json": {
+            "bytes": 72311,
+            "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/job.json": {
+            "bytes": 2560,
+            "sha256": "0da9e87e76dca08bdde36f27c4e2da32a2becf7eac553b7ad41d83a5b82f65e3"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/owner-configuration.json": {
+            "bytes": 3999,
+            "sha256": "3a039bc29bd676f93bf97294ce93fdebd177bf0a35e6962211a42a79732032ed"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/probe_trial_1.csv": {
+            "bytes": 145589,
+            "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/probe_trial_1.json": {
+            "bytes": 6700,
+            "sha256": "5f5c01caa031ec84e555a09b6ea9af46ea0330e137694c24dc90da7173d87b44"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014822.2367137": {
+            "bytes": 291,
+            "sha256": "625b9cbaa7ccbc9209a680b46b389048174249a5f94362f6fb300c5dec2c8a96"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "f6ed1901d7504e69aad9004df7e3261f8815bf583a020535d5c7131228d92b95"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "9ea3983ee1af5d8d5f78341637cb6425e2a5a11a37be058e452d0a9c1e9a2c02"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "b9ee3d256684b03caa1f0166f27705f056940c4fcb96cee75e4cfe31720ae6af"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "ca9c085325e47d3b1113dec5f8508896a1b3206949bb33c83616034c8d8e841b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "7d0e2ee9166e423ebcbc41784d6be0950540aa9a980b3495b863013f6f9e1d92"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/request.json": {
+            "bytes": 1586,
+            "sha256": "0c906973f30f69b93551c5ef8da07d9c3d60323e8c876c8b36962c05fa8ea730"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "2b9621ed8cf80c5fe07a4dc0a977ea4c2344e07c6fa0c23f6cfe05c09b0ed515"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/request.json": {
+            "bytes": 922,
+            "sha256": "e1d1742d9770d6c8c96f17aee738489b20894a2372c17dc8a8ca19494fdaf6e8"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/reservation-context.json": {
+            "bytes": 3049,
+            "sha256": "8197528f73c2e2af006980c63be9930d032e461f90e2ed2923e5d20df472b694"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/result.json": {
+            "bytes": 1175,
+            "sha256": "885f976e331902d727f416136c572797e8df44c3b10189e90242d96b5b8cfb64"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "cc8215657efb8acc1595e74d88a5fa6e3445fa6832113d5d7f7c49880faca5a3"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "5ae5acab6b1c75f9d695377f4934dbdd086162091eb6ef8fe5a4f4b5d2bc3aaa"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/run-manifest.json": {
+            "bytes": 35829,
+            "sha256": "0f5c6058688ce00f3ad04850da63358b77b33474c26fff6ae4e2f8be22374144"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/runtime-cli-interface.json": {
+            "bytes": 5501,
+            "sha256": "52a8d7af7d52380526c9e4a4a341f05dfad9c0ec248a5253895665c6809b2e3a"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/input/job.json": {
+            "bytes": 2187,
+            "sha256": "3ea321b3f9b17e9edb731bfb48a0d5a5584e4da7b35dd32edb6aa4c6f4fab2b7"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/execution.json": {
+            "bytes": 1894,
+            "sha256": "7308be1f4202e92e2e96c99fcbab8f62897e6392fdd115e35c55e8e5a10cca20"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/final-state.json": {
+            "bytes": 72272,
+            "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/initial-state.json": {
+            "bytes": 72311,
+            "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/job.json": {
+            "bytes": 2560,
+            "sha256": "91ed47a124e83fe45621f3deaf117ec1a07ede8a90b416d01cb7c26c4b085af2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/owner-configuration.json": {
+            "bytes": 3999,
+            "sha256": "889b8cc8f7501c2c984ece2144e61b00007174233bfd87ede53a8b610f8f380c"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/probe_trial_1.csv": {
+            "bytes": 145589,
+            "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/probe_trial_1.json": {
+            "bytes": 6702,
+            "sha256": "9c857635b02a7d061b4bd9f9f41f07e8e7ed0bc1014fbcb870b9609716ecb9f5"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014825.2369965": {
+            "bytes": 291,
+            "sha256": "724323804bda0e2509a1f317019dc25e7e0376b83f8c3c0744183c1e01dfe4b4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "f3589dd94de33e4e5f44a14b532dac3f95feb8368928e1a0b1cd3d0bd9391889"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "10d022db9fde11e0532f5c833ffec70daa56cd5541c679954dd076a4914a5a91"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "0e1ac4e4d91f9ccaefff30fb8774dbc51baaccb40940e8fb7f2d0ded98aa8999"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "3e6f25067020556a6bb2db708e2a59116f652714bb75270deb3f83a7f5b73acc"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "05b489aaec0114c5223ffec866c0b7c066109f90b2024314c2232c6d5da4be9b"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/request.json": {
+            "bytes": 1586,
+            "sha256": "9469463314975943637a793fa4becf97d25d4249a2798725b3f76dadfaa161ea"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "cbe7489e7215f22689663cd6f381f36cf2bee1be6055d01b564a5a3f45029349"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/request.json": {
+            "bytes": 922,
+            "sha256": "8ce961c26f8ca53cb1acbc8eaca2918190bd5645dd59b5f70f078d320d196d78"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/reservation-context.json": {
+            "bytes": 3049,
+            "sha256": "b082f922b8a61dca5fbb6d5fc3dd875240a5e60e795b42aac8fe1f91385cb19a"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/result.json": {
+            "bytes": 1176,
+            "sha256": "b872becab8e16b4055cc51684a367839789c3fb883d733b48649130e624f56ce"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "d8994f92f9ba336436b44ae007f277403d50b5c6dfc55c744c3f3fde7635426a"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "452d1a50bfbf182225eadba31bb8f93b9a2b60b371ca013e7de9b081498e1c40"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/run-manifest.json": {
+            "bytes": 35829,
+            "sha256": "51b416146eef82fe0a18c7b240f5bbfc94b2a4e152b84499a6759615629a12d4"
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/runtime-cli-interface.json": {
+            "bytes": 5503,
+            "sha256": "cf7aecf8fc8fbc554a482686fd81702a70705c7e5c33a0541e92a047759733a6"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/input/job.json": {
+            "bytes": 2211,
+            "sha256": "e1eb3324af8812977cdf3baa7bf218348830a762087d124e603255aed39c806a"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/execution.json": {
+            "bytes": 1896,
+            "sha256": "279f45e0da0cc7f210d292412113e358e8a7e1c2b605b78c486eb4d84a19f4bf"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/final-state.json": {
+            "bytes": 221990,
+            "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/initial-state.json": {
+            "bytes": 222029,
+            "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/job.json": {
+            "bytes": 2602,
+            "sha256": "e36b08aac6cd18a6aa97bcf1e6a7ad0721fcddcc21aadc5b99c309aa4eac51ef"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/owner-configuration.json": {
+            "bytes": 4046,
+            "sha256": "1e64fe3a333b8da0787b59b022e76b00a3f8d7df685f3ea91ac03bdd57aa27ca"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/probe_trial_1.csv": {
+            "bytes": 390311,
+            "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/probe_trial_1.json": {
+            "bytes": 6748,
+            "sha256": "404cd1387968c948f3577a419408606612069792a77aeff71c561046ad498ce6"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014758.2364251": {
+            "bytes": 291,
+            "sha256": "c3e25d21d3590fff17bdb077ee99a9f8d9585706166234f8f4ac230ff7618e6c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "ab5a0a31ac5404a640d868a946e7a84764f4e55b5ab517ba40f25bdf35179c80"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "84813efde2bf9cd0d06a5178acf4de6f7007a968cebd73a8be8842e23a460883"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "c6ca294957f3b4df49224cd816e33692aaa65494ed3335f9552783ec4c1c6162"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "10c9366a1d33d209c18cff03bb032030f7e266cc580a8837db6c549577c20219"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "3abe38baa6d2dd2a73278a1dbb3216deb21b93dd3670e9f6e2b68efc4619fc99"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/request.json": {
+            "bytes": 1589,
+            "sha256": "42275e7ede8ac001fc87e6adbedaf4fbfe631584cf84b88673321d9570832845"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "0ebe2fd6ac47aee378047aa752fa6ad8a8027b7174c9d17520913908b5904f12"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/request.json": {
+            "bytes": 925,
+            "sha256": "922267742a9c89de57dd28185c3c12d51fe4eb44590a04c3baec9f22cabe9821"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/reservation-context.json": {
+            "bytes": 3050,
+            "sha256": "d51021637c7c567dd2599d6e04e32febb41755a6ebe06f8e42a531ae62dfd04e"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/result.json": {
+            "bytes": 1177,
+            "sha256": "6e44cb15bdfb1ba41db1ead2c7e1f797b5caf7fe42f578deed467cbf0b5b02d4"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "5afb5dfae28d4eb8f288863796b27fd36c04db121682fd25dae577fd09a6d191"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "d213e6b24310f52acca62e521ed8776773c6aee394facc2b3e14951aaec266d0"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/run-manifest.json": {
+            "bytes": 35831,
+            "sha256": "99635b6e79b0c85341e302496388f280bc92954a09eb748dfd243145f12ed7ea"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/runtime-cli-interface.json": {
+            "bytes": 5503,
+            "sha256": "6ec9d1122d0700e0da68441d8fd3141e0aa807c139c9fba98528f16af635e040"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/input/job.json": {
+            "bytes": 2211,
+            "sha256": "c5c83c80c22dfb325ae89aec1a9f779257640e6e3c15fd3781e8a89da1d6cb4d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/execution.json": {
+            "bytes": 1896,
+            "sha256": "deb6e2c3441cb52cd554fcde753ea489426db469e50405b7ebfb8029fc53e205"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/final-state.json": {
+            "bytes": 221990,
+            "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/initial-state.json": {
+            "bytes": 222029,
+            "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/job.json": {
+            "bytes": 2602,
+            "sha256": "86117106c6bcbded7702517deb852cd8c184ec14e4186d49c464b69cae34ccf1"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/owner-configuration.json": {
+            "bytes": 4046,
+            "sha256": "299074b9b1fd52713f2e2fc1812f93f2343aa8fb4a0be987c9d9639da337bf58"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/probe_trial_1.csv": {
+            "bytes": 390311,
+            "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/probe_trial_1.json": {
+            "bytes": 6762,
+            "sha256": "247603615ab7245c2d11eaa30c1f8a3adeafced987c16fea7a2a9095eaa32ca0"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014802.2364695": {
+            "bytes": 291,
+            "sha256": "a4e1c206c71ede5f46deb7c23fa257ea72ace7178818a97795eaaf7086a753cb"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "2e6defab8df4c90a8b03bc4115941ca50c04a090a5bca805c448411f1dcdc33a"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "11d9640f38aabab817202c1f1d08ee9cef2b2efd0337d965cb0fb53e87620683"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "70e800d7577edb88195b1faab89b287dc0c4e54ac981be5370e7d2aa895147bd"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "14fe8abc66ca13c95861454eb00d54a34155f7aca35b3bf481750cc0322e78bd"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "912a892363c49a4a3526571905edb5f55e6645bc341681872f70746018378f0b"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/request.json": {
+            "bytes": 1589,
+            "sha256": "b09aa0f54249701a364c2f036a626d74f6d4d882d73aef7582cfdec1f3cda60f"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "cc36b8371bcb1ba817d3f95f52e48191dfd674f0bdb81279a745c8b18947e5f1"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/request.json": {
+            "bytes": 925,
+            "sha256": "00c8364eb37d5c373a17cccd508241a4e001e1fb2fd75fce2b523c9b5a9e7da1"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/reservation-context.json": {
+            "bytes": 3050,
+            "sha256": "c5aad082d72cdbaad6892bf14aaee7cd46cd8f6acb15ee6dd0a57fd2af636244"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/result.json": {
+            "bytes": 1176,
+            "sha256": "b39a76a92d5be353a364e8ab32b73f8e13fc859ed9d875d9b74df9abc2129630"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "17886fe2b227ddb2c205441a8d46c21bee431d5cd5ab29ff1898d0a4efcf3c24"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "55632bbfa1e235867df53c35282067fcbdc01a4420aecd8dd66ac486326955ba"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/run-manifest.json": {
+            "bytes": 35831,
+            "sha256": "5ba5685d36d66406d7227b769ce9c09e41af5c558cc112d4c94b9e4499869dc1"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/runtime-cli-interface.json": {
+            "bytes": 5503,
+            "sha256": "20d58511f5b4cce919f753269075901017d19028308d90ec207d53b2f0c5a678"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/input/job.json": {
+            "bytes": 2211,
+            "sha256": "078a7f047f303b5e4147235190a0af8284cbee6858f3651c3b1b4a9f3b236727"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/execution.json": {
+            "bytes": 1895,
+            "sha256": "4a34a477d2bf4924c6679b6dc37f85090d4b77feabf1a01f43ecd9cc22d1c166"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/final-state.json": {
+            "bytes": 221990,
+            "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/initial-state.json": {
+            "bytes": 222029,
+            "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/job.json": {
+            "bytes": 2602,
+            "sha256": "08da0572f177f742e037d509cab506927f301b90c08aadc0de314436c0f7f853"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/owner-configuration.json": {
+            "bytes": 4046,
+            "sha256": "02fab21a8a7fcd6f4ace43645f9cc39476ed94c5d37f2e30866bb95ca2277685"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/probe_trial_1.csv": {
+            "bytes": 390311,
+            "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/probe_trial_1.json": {
+            "bytes": 6760,
+            "sha256": "c01b5ab98fcf25881d7a572c2da6edd38a54920a9cb05abadda8caec14834be0"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014807.2365140": {
+            "bytes": 291,
+            "sha256": "12ed3d67d4390bb6810ab8ff0a10b9efc96a3c8c11934cabd413ae0428381a25"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "cebab35bab6eca1037da26d33992bebb26b793d0c649e239c8a4f70bf3e0ec47"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "c46dd9d5dd3767f975994f4f0b7b42e4c0fed8676015c02e513286e6a2d5193c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "cdc483a19945f9022c3ff6d7fc546251de30de43c4133dead86666ecdb9a7a2d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "56b5eaf11c460af68133c287c7630ad74dec8527c15b0a3a82c9839e0dc1a3e4"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "7755c838c384c74f841e5a614fcb54fe629f3080e7f247f121f2158fa5e867c1"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/request.json": {
+            "bytes": 1589,
+            "sha256": "b454dab4d24fec78dda6d866550d0dddab13f6124c92ebae955ca5799fc3eba7"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "8037713828bf7faa955867a6a816cc15836d557b306604921bad11dc3a6558da"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/request.json": {
+            "bytes": 925,
+            "sha256": "13ffc988c553690c6edb5524ed7de6f5d0e2e46104b63e208af9b50208f1a74b"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/reservation-context.json": {
+            "bytes": 3050,
+            "sha256": "b4d5fca40dc66368d7c192e87be79614d1f5a2be55fcd049fd5b8c64ada9a9d3"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/result.json": {
+            "bytes": 1176,
+            "sha256": "ff16df113bc4665b12eb18476b3311310889d473256f75dfbc4c150a1bb2caf9"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "bf023592946a52057bea772358b40c3f9c2ccff77ad2818be623000d817ea542"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "10a264980f0dd2ea1853b2b6219f0894378b8840e2bc5823946e91112a8adbb7"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/run-manifest.json": {
+            "bytes": 35831,
+            "sha256": "d48d4d9010105a5fa0efd8dcc061a101fc8c587cba52066065522ad7fbde91a9"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/runtime-cli-interface.json": {
+            "bytes": 5502,
+            "sha256": "97255e3c3fa4a0d0e58324a1f6d6ec23021aa6b968b2c44d146648547072683b"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/input/job.json": {
+            "bytes": 2211,
+            "sha256": "9dc67125d61ced2e53e85a2d018bc0d88d8b40fa96db407bf618228093a9b844"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/input/process-policy.json": {
+            "bytes": 527,
+            "sha256": "bb6a08745ae3c439b7f76302d133a62a7ee10fe26f077476de940a98dad001e4"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/execution.json": {
+            "bytes": 1896,
+            "sha256": "5cfd730bb9a45ba4db40851892d4bdc6715be54ffccf9dfd50f2711b2e458573"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/final-state.json": {
+            "bytes": 221990,
+            "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/initial-state.json": {
+            "bytes": 222029,
+            "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/job.json": {
+            "bytes": 2602,
+            "sha256": "c89d977277cdada3a1cde7a2e82b491d953a5d6a5dfccf0d8651e338ddce1bb3"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/owner-configuration.json": {
+            "bytes": 4046,
+            "sha256": "fa14d98af067f888b35f2d0d187e8742283bf8a26db1aa997208f955b14c0271"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/probe_trial_1.csv": {
+            "bytes": 390311,
+            "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/probe_trial_1.json": {
+            "bytes": 6762,
+            "sha256": "1c40d55dba675a87349817517bdf4f65f62ed05e883300a47921d35b752b3159"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261111-014811.2365705": {
+            "bytes": 291,
+            "sha256": "e6198f69fcdc1f3acf4c145c861b467a44af6c65654e1239045feb3f5be3a12d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/capture-ack.json": {
+            "bytes": 114,
+            "sha256": "b75be5a2f099acd8d57e4a40832a28a11fef824e598b51e1205f11299ef286db"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/capture-ready.json": {
+            "bytes": 98,
+            "sha256": "bdd8f573bbe0f66af95280b232015f7c781dbbd0a9576400829477f0eb84810d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/launch-result.json": {
+            "bytes": 54,
+            "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/launcher.py": {
+            "bytes": 601,
+            "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/limits-readback.json": {
+            "bytes": 1068,
+            "sha256": "31b4cb493caa1de5c3b0d34a44967820f08378b7cf0f36156415606eb1eaf9ef"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/owned-unit.json": {
+            "bytes": 566,
+            "sha256": "1cc65ba15f507a57abbf98506a31224b3b438dd9726c0917a1eeb9e0fad9c35b"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/ready.json": {
+            "bytes": 44,
+            "sha256": "945d2e0696c678bfd4a1818ec00d7b625cad612519623b3b9f5ef79ad85445dc"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/request.json": {
+            "bytes": 1589,
+            "sha256": "789372f220fc73db3e94f56e16ef8b5032e584dee3ed9d191abc0550860192d1"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/start.ack": {
+            "bytes": 18,
+            "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/loaded-files.json": {
+            "bytes": 4838,
+            "sha256": "afd39d37bc3ca1e4be16fd2214e8055bb8b2a7de568ced2cd36aee71b1504ac2"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/owned-process.json": {
+            "bytes": 666,
+            "sha256": "e2be7035a0390c9de5a3dca4b8b009c9a81cd8657e0262b787acd6779410d25b"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/request.json": {
+            "bytes": 925,
+            "sha256": "83c8d9461ca45bd6af2e0b1d77addfdd34d5c5498246a88ac01080f95f291e58"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/reservation-context.json": {
+            "bytes": 3050,
+            "sha256": "46a02cfe72a0f9edbfc59cb4faee5924bd8d68061e482ed4490705c2a1c57c7c"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/result.json": {
+            "bytes": 1176,
+            "sha256": "fae83c559c5ed64de8aab27e0422a802d689f59cfd2b5857c81989ef516cfdda"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/runtime.json": {
+            "bytes": 12670,
+            "sha256": "f2c476d8725224089eb582ebc448e33235bd3c95920faeda4ac467c25c809559"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/stderr.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/stdout.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/terminal-unit-state.json": {
+            "bytes": 1298,
+            "sha256": "7c88f11749ac8711f58be2d6f169bbe2e1e180d9eb0f27381e489942d993620a"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/whole-group-closure.json": {
+            "bytes": 1213,
+            "sha256": "0c1981cc30db3e98c0aa4beed9875967d9fbb68bc1bd463c674580b5c8215476"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/run-manifest.json": {
+            "bytes": 35831,
+            "sha256": "5b9b12307a580242ff6a9b3adb33d8a2319d5623e6fe41842f0e94ce7afe368e"
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/runtime-cli-interface.json": {
+            "bytes": 5503,
+            "sha256": "759554414e706efb5af6da3958df9e745c5e9cd89f6a78681cdfda30318bd524"
+          },
+          "worker/reservation.json": {
+            "bytes": 1877,
+            "sha256": "283d6177c2f26a4367bf8b8c357cc679e569ad5fe7dc743caf690f6c19059355"
+          },
+          "worker/temporary-environment.json": {
+            "bytes": 350,
+            "sha256": "9da2c98cb6f6008a35e63d986765ee50e07105686b18126c8f112632500adc17"
+          },
+          "worker/terminal.json": {
+            "bytes": 259,
+            "sha256": "5f9ab9b5b527b3eacc9b6f4657c7fe14a36807d8403057e09042c95317d4d554"
+          },
+          "worker/tool-source-after.json": {
+            "bytes": 281988,
+            "sha256": "2b6401fc74d2c9a47e3b5d8cbd7841c85041b9463c5610691eb0db696f8d4715"
+          },
+          "worker/tool-source-before.json": {
+            "bytes": 281988,
+            "sha256": "2b6401fc74d2c9a47e3b5d8cbd7841c85041b9463c5610691eb0db696f8d4715"
+          },
+          "worker/validation/result.json": {
+            "bytes": 1472,
+            "sha256": "bc19ae72196e09db1d4d7d9b4bf7aa21f853c450257d854a90e5fb8440b90c8e"
+          },
+          "worker/validation/suite.json": {
+            "bytes": 1134,
+            "sha256": "c114f3ede9f540fb730766ece9525732f1d58381e6db52e75d0408d323744cc2"
+          },
+          "worker/validation/unittest.log": {
+            "bytes": 354,
+            "sha256": "d038ad01fa6f4a4e0d73c43ae3b365f3576ee75645b5b705ff28622f8f9ce0bf"
+          },
+          "worker/validation-process.json": {
+            "bytes": 153,
+            "sha256": "77a4c9af6b44c85eb0585d573189de6b764640d0b2a4d7fc06f5cf1000e0ca63"
+          },
+          "worker/validation-source-after.json": {
+            "bytes": 281988,
+            "sha256": "2b6401fc74d2c9a47e3b5d8cbd7841c85041b9463c5610691eb0db696f8d4715"
+          },
+          "worker/validation-source-before.json": {
+            "bytes": 281988,
+            "sha256": "2b6401fc74d2c9a47e3b5d8cbd7841c85041b9463c5610691eb0db696f8d4715"
+          }
+        },
+        "links": {
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411600,
+              54,
+              1794350895606323437,
+              1794350895606323437,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014815.2366164",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411644,
+              54,
+              1794350898908827911,
+              1794350898908827911,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014818.2366519",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411688,
+              54,
+              1794350902237320201,
+              1794350902237320201,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014822.2367137",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411740,
+              54,
+              1794350905734438828,
+              1794350905734438828,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014825.2369965",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411426,
+              54,
+              1794350878453606903,
+              1794350878453606903,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014758.2364251",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411471,
+              54,
+              1794350882779387101,
+              1794350882779387101,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014802.2364695",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411514,
+              54,
+              1794350887012169720,
+              1794350887012169720,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014807.2365140",
+            "link_not_followed": true
+          },
+          "worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.INFO": {
+            "mode": 41471,
+            "identity": [
+              2048,
+              57411557,
+              54,
+              1794350891315290059,
+              1794350891315290059,
+              1
+            ],
+            "link_text": "NeuroModeler.M40.user.log.INFO.20261111-014811.2365705",
+            "link_not_followed": true
+          }
+        }
+      }
+    ],
+    "closed_units": [
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "5390057c43acde6de2d2180229b94e541258244b31359951e576a1be23de0c77",
+          "unit": "timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "invocation_id": "9617749632a942d698ab9695cb82913b",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "initial_main_pid": 2355190,
+          "initial_start_ticks": "342606649",
+          "sha256": "b279c550ad22b751f4d314e6fdc68251dc3e2a99e981055e92479554780a638e"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "aa4ce5cc4146661dafdeeeb5fe36d709511cd4a5701b04d7b87fe005adb0c3bb",
+          "unit": "timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "invocation_id": "4c81dd9b631843b6a599a8f23ad161fc",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "initial_main_pid": 2366164,
+          "initial_start_ticks": "342609303",
+          "sha256": "29837d2359fb8d2a7f4711bda5a72acc9b5e52db6762b6eaa38493d1dcd209cd"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "45e1146b44ecdd115d34915c95134c99e539e6ecc8467ef250e6960dc7d8914f",
+          "unit": "timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "invocation_id": "3aebd6ea3fbb431294b9e64e4d31b125",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "initial_main_pid": 2366519,
+          "initial_start_ticks": "342609633",
+          "sha256": "64f2ca9773c86c105f15746776903fa16c518bec8b5af92fcdca2c0acf0ffa6c"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "04c7928cea99a8ba5bdb26e61ed7f0fc79118e0157f479e8ea9c7ed1c5ea2531",
+          "unit": "timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "invocation_id": "bfa06229b90543b8aa2eaca7299418f9",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "initial_main_pid": 2367137,
+          "initial_start_ticks": "342609965",
+          "sha256": "37e05728be663c5c40a47cb0bf7aef37cdd29cce61d3db2a1f7852df3310df15"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "dbeef7195ab525b932ae2a24e98de2bd37468382d39cbca3337342294302b007",
+          "unit": "timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "invocation_id": "affa3b9a72544be8bf114c415e89a179",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "initial_main_pid": 2369965,
+          "initial_start_ticks": "342610315",
+          "sha256": "534be00c581ff0f3125f6f2b73f5906a28cfae92bb7b160053689974118b52f0"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "6be4e1ced6aa0f8a4d44ecf0483b6f3dd9241e13e2651a05fdec771e3c3298cc",
+          "unit": "timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "invocation_id": "aef4cf12de7e4a4c90919c26c28ed720",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "initial_main_pid": 2364251,
+          "initial_start_ticks": "342607589",
+          "sha256": "63f58ba0e23a454b51810ff73c89110a423383e673611fd4d6d6c39d5b754107"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "50fcd1056be1283876acece505273ba93f599c8602c8bb62194c45fbfd613661",
+          "unit": "timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "invocation_id": "42d108c0905c4d1aba25fed594d8c53f",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "initial_main_pid": 2364695,
+          "initial_start_ticks": "342608021",
+          "sha256": "c32cbba994b86ebf8c375a6229bf446c924bd37546ec151d3a3385721018646f"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f3a437c6680bb4a89b9078116b618ba6d4206d02105f3fbacfd5a3c214127c99",
+          "unit": "timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "invocation_id": "2a060039b1924825ba48edf5b6672bf5",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "initial_main_pid": 2365140,
+          "initial_start_ticks": "342608442",
+          "sha256": "f57b1f04ed22de6feb026677d313e3d12e2f7e274b1ce1987edfb880fbf5002b"
+        }
+      },
+      {
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "a5a263d1c241217cbf480b95fcb1ddbcedf454158b807a382cecd71f1c03efa5",
+          "unit": "timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "invocation_id": "307891a2ec0c4941a2fa20cd69dc6366",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "initial_main_pid": 2365705,
+          "initial_start_ticks": "342608874",
+          "sha256": "fc72194245f93ac33aeb1b4c14d614d569b0e49f269238e33a8308405426f05b"
+        }
+      }
+    ],
+    "bounds": {
+      "maximum_file_bytes": 268435456,
+      "maximum_total_bytes": 1073741824,
+      "maximum_archive_bytes": 268435456
+    },
+    "scientific_verdict": null
+  },
+  "before": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "5390057c43acde6de2d2180229b94e541258244b31359951e576a1be23de0c77",
+          "unit": "timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "invocation_id": "9617749632a942d698ab9695cb82913b",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "initial_main_pid": 2355190,
+          "initial_start_ticks": "342606649",
+          "sha256": "b279c550ad22b751f4d314e6fdc68251dc3e2a99e981055e92479554780a638e"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "aa4ce5cc4146661dafdeeeb5fe36d709511cd4a5701b04d7b87fe005adb0c3bb",
+          "unit": "timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "invocation_id": "4c81dd9b631843b6a599a8f23ad161fc",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "initial_main_pid": 2366164,
+          "initial_start_ticks": "342609303",
+          "sha256": "29837d2359fb8d2a7f4711bda5a72acc9b5e52db6762b6eaa38493d1dcd209cd"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "45e1146b44ecdd115d34915c95134c99e539e6ecc8467ef250e6960dc7d8914f",
+          "unit": "timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "invocation_id": "3aebd6ea3fbb431294b9e64e4d31b125",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "initial_main_pid": 2366519,
+          "initial_start_ticks": "342609633",
+          "sha256": "64f2ca9773c86c105f15746776903fa16c518bec8b5af92fcdca2c0acf0ffa6c"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "04c7928cea99a8ba5bdb26e61ed7f0fc79118e0157f479e8ea9c7ed1c5ea2531",
+          "unit": "timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "invocation_id": "bfa06229b90543b8aa2eaca7299418f9",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "initial_main_pid": 2367137,
+          "initial_start_ticks": "342609965",
+          "sha256": "37e05728be663c5c40a47cb0bf7aef37cdd29cce61d3db2a1f7852df3310df15"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "dbeef7195ab525b932ae2a24e98de2bd37468382d39cbca3337342294302b007",
+          "unit": "timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "invocation_id": "affa3b9a72544be8bf114c415e89a179",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "initial_main_pid": 2369965,
+          "initial_start_ticks": "342610315",
+          "sha256": "534be00c581ff0f3125f6f2b73f5906a28cfae92bb7b160053689974118b52f0"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "6be4e1ced6aa0f8a4d44ecf0483b6f3dd9241e13e2651a05fdec771e3c3298cc",
+          "unit": "timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "invocation_id": "aef4cf12de7e4a4c90919c26c28ed720",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "initial_main_pid": 2364251,
+          "initial_start_ticks": "342607589",
+          "sha256": "63f58ba0e23a454b51810ff73c89110a423383e673611fd4d6d6c39d5b754107"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "50fcd1056be1283876acece505273ba93f599c8602c8bb62194c45fbfd613661",
+          "unit": "timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "invocation_id": "42d108c0905c4d1aba25fed594d8c53f",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "initial_main_pid": 2364695,
+          "initial_start_ticks": "342608021",
+          "sha256": "c32cbba994b86ebf8c375a6229bf446c924bd37546ec151d3a3385721018646f"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f3a437c6680bb4a89b9078116b618ba6d4206d02105f3fbacfd5a3c214127c99",
+          "unit": "timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "invocation_id": "2a060039b1924825ba48edf5b6672bf5",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "initial_main_pid": 2365140,
+          "initial_start_ticks": "342608442",
+          "sha256": "f57b1f04ed22de6feb026677d313e3d12e2f7e274b1ce1987edfb880fbf5002b"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "a5a263d1c241217cbf480b95fcb1ddbcedf454158b807a382cecd71f1c03efa5",
+          "unit": "timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "invocation_id": "307891a2ec0c4941a2fa20cd69dc6366",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "initial_main_pid": 2365705,
+          "initial_start_ticks": "342608874",
+          "sha256": "fc72194245f93ac33aeb1b4c14d614d569b0e49f269238e33a8308405426f05b"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    }
+  ],
+  "after": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "5390057c43acde6de2d2180229b94e541258244b31359951e576a1be23de0c77",
+          "unit": "timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "invocation_id": "9617749632a942d698ab9695cb82913b",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "initial_main_pid": 2355190,
+          "initial_start_ticks": "342606649",
+          "sha256": "b279c550ad22b751f4d314e6fdc68251dc3e2a99e981055e92479554780a638e"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-bc740126-fae5-44f1-874a-0f57f7ff3e40.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "aa4ce5cc4146661dafdeeeb5fe36d709511cd4a5701b04d7b87fe005adb0c3bb",
+          "unit": "timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "invocation_id": "4c81dd9b631843b6a599a8f23ad161fc",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "initial_main_pid": 2366164,
+          "initial_start_ticks": "342609303",
+          "sha256": "29837d2359fb8d2a7f4711bda5a72acc9b5e52db6762b6eaa38493d1dcd209cd"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-8d9d96fc-416f-4da6-bfac-28560c1f4355.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "45e1146b44ecdd115d34915c95134c99e539e6ecc8467ef250e6960dc7d8914f",
+          "unit": "timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "invocation_id": "3aebd6ea3fbb431294b9e64e4d31b125",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "initial_main_pid": 2366519,
+          "initial_start_ticks": "342609633",
+          "sha256": "64f2ca9773c86c105f15746776903fa16c518bec8b5af92fcdca2c0acf0ffa6c"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-36f01139-9730-4c35-aa35-618084cb4677.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "04c7928cea99a8ba5bdb26e61ed7f0fc79118e0157f479e8ea9c7ed1c5ea2531",
+          "unit": "timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "invocation_id": "bfa06229b90543b8aa2eaca7299418f9",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "initial_main_pid": 2367137,
+          "initial_start_ticks": "342609965",
+          "sha256": "37e05728be663c5c40a47cb0bf7aef37cdd29cce61d3db2a1f7852df3310df15"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-a6bd400b-4e08-43ca-944d-221ca40b2c29.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "dbeef7195ab525b932ae2a24e98de2bd37468382d39cbca3337342294302b007",
+          "unit": "timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "invocation_id": "affa3b9a72544be8bf114c415e89a179",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "initial_main_pid": 2369965,
+          "initial_start_ticks": "342610315",
+          "sha256": "534be00c581ff0f3125f6f2b73f5906a28cfae92bb7b160053689974118b52f0"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-8d63d5ec-2a54-4aed-bdf1-7bc6c46bd313.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "6be4e1ced6aa0f8a4d44ecf0483b6f3dd9241e13e2651a05fdec771e3c3298cc",
+          "unit": "timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "invocation_id": "aef4cf12de7e4a4c90919c26c28ed720",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "initial_main_pid": 2364251,
+          "initial_start_ticks": "342607589",
+          "sha256": "63f58ba0e23a454b51810ff73c89110a423383e673611fd4d6d6c39d5b754107"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-96ac9547-48c2-40d8-83d0-a1011d100e50.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "50fcd1056be1283876acece505273ba93f599c8602c8bb62194c45fbfd613661",
+          "unit": "timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "invocation_id": "42d108c0905c4d1aba25fed594d8c53f",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "initial_main_pid": 2364695,
+          "initial_start_ticks": "342608021",
+          "sha256": "c32cbba994b86ebf8c375a6229bf446c924bd37546ec151d3a3385721018646f"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-3ac5ce04-f657-488c-835b-d090ce738fcb.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "f3a437c6680bb4a89b9078116b618ba6d4206d02105f3fbacfd5a3c214127c99",
+          "unit": "timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "invocation_id": "2a060039b1924825ba48edf5b6672bf5",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "initial_main_pid": 2365140,
+          "initial_start_ticks": "342608442",
+          "sha256": "f57b1f04ed22de6feb026677d313e3d12e2f7e274b1ce1987edfb880fbf5002b"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-ec7cc14c-3d3c-4f4a-9c15-30292bae1a54.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-cold4-probes8-m40-a3/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained",
+      "observation": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "a5a263d1c241217cbf480b95fcb1ddbcedf454158b807a382cecd71f1c03efa5",
+          "unit": "timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "invocation_id": "307891a2ec0c4941a2fa20cd69dc6366",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "initial_main_pid": 2365705,
+          "initial_start_ticks": "342608874",
+          "sha256": "fc72194245f93ac33aeb1b4c14d614d569b0e49f269238e33a8308405426f05b"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-04e0a89d-35bb-43a0-a001-297dbe6163b4.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    }
+  ],
+  "bundle": {
+    "kind": "compact_native_primary",
+    "schema_version": 1,
+    "archive_bytes": 134500,
+    "archive_sha256": "2f32dca682e5bc324a00a0c910c31b2fb672261ac527a1b13497fe1b5ce52f65",
+    "compression": {
+      "codec": "xz-lzma2",
+      "dictionary_bytes": 33554432,
+      "member_order": "content_sha256_then_logical_name"
+    },
+    "expanded_bytes": 6606197,
+    "unique_content_bytes": 2126964
+  },
+  "collection_status": "completed",
+  "original_files_rewritten": false,
+  "original_outcome_unchanged": true,
+  "scientific_verdict": null
+}
