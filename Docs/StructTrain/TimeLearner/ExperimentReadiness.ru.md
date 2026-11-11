@@ -1,4 +1,4 @@
-# Готовность к научным экспериментам — 11.11.2026
+# Готовность к научным экспериментам — 12.11.2026
 
 Свежий M40 SDK8362d58f/Pulse1110808 принят32/32 в техническом scope: active Build guards, header publication7/execution5, старый Console wire и source7 recognition. [Результат](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md). Elder ранее принял native recognition10/10 и независимый replay6/6; также завершил отдельную свежую сборку и тот же набор32/32.
 
@@ -6,7 +6,7 @@
 
 До нового научного N4 вывода остаются:
 
-1. Сохранить принятый Console lifecycle/source/fixture result в полном primary corpus, выполнить независимый повторный анализ и собрать полный compact primary и графики всех Test предъявлений с actual input spikes в читаемом масштабе. Подтвердить real threshold candidate и frozen model.
+1. Полный Console primary уже сохранён в Git; выполнить независимый повторный анализ и завершить построение полный compact primary и графики всех Test предъявлений с actual input spikes в читаемом масштабе. Подтвердить real threshold candidate и frozen model.
 2. Опубликовать полный Elder32 corpus и семантически проверить опубликованный M40 native32 corpus; ограничения старых неуспешных попыток сохранить отдельно.
 3. Повторить N4 при исходных default tolerances/заявленной физике, не заменяя их техническими N2/Sync0.2. Незавершённый Train допускает только явно diagnostic Test, не обычную научную классификацию.
 4. Выполнить исторический replay/cold retrain, отдельные permutation/ITI и полную матрицу исходного плана с явными reset/calibration protocols. Отрицательный валидный результат допускается;8/8 не обязательно.

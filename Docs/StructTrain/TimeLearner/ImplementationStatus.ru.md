@@ -1,6 +1,6 @@
-# Состояние реализации TimeLearner — 11.11.2026
+# Состояние реализации TimeLearner — 12.11.2026
 
-Полностью принят только исходный этап0; этапы1–12 остаются частичными. Адресные проверки ниже не подменяют полный [аудит плана](PlanCompletionAudit-2026-11-04.ru.md), научную матрицу или merges в develop. Основная пользовательская копия E:/Science-Repo/nmsdk-git не используется для этих запусков; работа идёт в отдельном nmsdk-composite-recovery.
+Полный Console cold8 primary опубликован в Git ([корпус](ValidationPlans/M40RecoveryConsoleCold8ClosedCorpusA1-20261112/RESULT.ru.md)); графики строятся на M40 ([проверенный plotting runtime/A2](ValidationPlans/M40RecoveryConsoleCold8ReportsA2-20261112/)). Полностью принят только исходный этап0; этапы1–12 остаются частичными. Адресные проверки ниже не подменяют полный [аудит плана](PlanCompletionAudit-2026-11-04.ru.md), научную матрицу или merges в develop. Основная пользовательская копия E:/Science-Repo/nmsdk-git не используется для этих запусков; работа идёт в отдельном nmsdk-composite-recovery.
 
 | Проверка | Текущее доказанное состояние | Граница результата |
 |---|---|---|
