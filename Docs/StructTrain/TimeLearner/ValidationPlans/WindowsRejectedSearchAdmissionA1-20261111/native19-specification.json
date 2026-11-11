@@ -1,0 +1,47 @@
+{
+  "source_root": "C:/Projects/TimeLearnerWorker/source-rejected-search-admission-win-a1",
+  "source_commit": "04f830a3a0f6c36cb9eb22b48075aa545b8aeb6c",
+  "closed_build_audit": "C:/Projects/TimeLearnerWorker/jobs/windows-rejected-search-closed-build-audit-a1",
+  "runtime_root": "C:/Projects/TimeLearnerWorker/runtime-rejected-search-admission-win-a1",
+  "cmake_cache": "C:/Projects/TimeLearnerWorker/build-rejected-search-admission-win-a1/CMakeCache.txt",
+  "output_root": "C:/Projects/TimeLearnerWorker/jobs/windows-rejected-search-diagnostic19-a1",
+  "expected_test_ids": [
+    "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+    "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+    "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+    "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+    "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+    "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+  ],
+  "maximum_wall_seconds": 1800,
+  "process_limits": {
+    "memory_bytes": 3221225472,
+    "maximum_processes": 32
+  },
+  "kind": "timelearner_windows_native_validation",
+  "schema_version": 1,
+  "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c",
+  "audit_records": {
+    "audit.json": "e6e8b4d26fff4c1846c6d290c126d74fabb481f499b6e1623740baf671a4f738",
+    "dependencies-after.json.gz": "50ff4c5d44baef7ab81c751ba329d87aca47d072b3999bc1cd5be8fe7efdeab8",
+    "kernel-after.json": "be3ef7348005d93932836a92b14fed385769308e398ddcc6a632264062bdde7e",
+    "kernel-before.json": "be3ef7348005d93932836a92b14fed385769308e398ddcc6a632264062bdde7e",
+    "producer.py": "aab7797e4dc3d30649ad0231653a8bae6e52ced1d76a057c26afa51258d44c43",
+    "runtime-files.json.gz": "4d7b22b79d20235e3c8dba23a3fdce7b032326e5097ad9d0283aefbe09283cda",
+    "specification.json": "56f497ed68cea09fcfff0b6ce5acaf74fc42779d7cbc893678381a23f4822e2d",
+    "terminal.json": "c3b33236047983c9f2cb0ddf6a66f834295f28368f4e3756feff9c82de1b226a"
+  }
+}
