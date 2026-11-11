@@ -18,6 +18,8 @@
 #include "TimeLearner/CandidateWindowMeasurementEvidence.h"
 #include "TimeLearner/CandidateWindowPortableReferences.h"
 #include "TimeLearner/NativeLearnedState.h"
+#include "TimeLearner/NativeCompositeLearnedState.h"
+#include "TimeLearner/NativeTrainingBindings.h"
 #include "TimeLearner/NativeRecognitionState.h"
 #include "TimeLearner/NativeRecognitionObservationValidation.h"
 #include "../../../App/NeuroModelerConsole/TimeLearnerCompositeArtifacts.h"
@@ -4259,13 +4261,14 @@ template<class Owner> void WindowRecoveryWireBoundaries() {
     bad=encodedRuntime;bad["unknown_recovery_field"]=true;
     EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,runtime.protocol),std::invalid_argument);
     const auto revision=f.Revision();f.attempt.reset();
-    // The component reports configuration failures through its service state.
     EXPECT_NO_THROW(f.owner->BeginNativeTraining(runtime));
-    EXPECT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Finished);
-    EXPECT_EQ(f.owner->NativeTrainingController().Outcome(),TrainingStatus::InvalidModel);
-    EXPECT_EQ(f.owner->NativeTrainingController().Reason(),"candidate_window_recovery_requires_versioned_service");
+    EXPECT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::CapturingReferences);
+    EXPECT_TRUE(f.owner->NativeTrainingController().CandidateWindowRecoveryDeliveryLogIntact());
+    EXPECT_TRUE(f.owner->NativeTrainingController().CandidateWindowRecoveryDeliveries().empty());
     EXPECT_FALSE(f.owner->NativeTrainingController().Search());EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
     EXPECT_EQ(f.Revision(),revision);
+    EXPECT_THROW(EncodeNativeTrainingState(f.owner->NativeTrainingController(),revision,f.owner->ReadNativeParameters()),std::invalid_argument);
+    f.owner->Reset();EXPECT_EQ(f.owner->NativeTrainingController().State(),NativeTrainingState::Idle);
     EXPECT_EQ(EncodeConfiguredNativeTraining(DecodeConfiguredNativeTraining(old)),old);
     EXPECT_THROW(ValidateInvalidMeasurementRecovery(config.search.invalidMeasurementRecovery,0),std::invalid_argument);
     EXPECT_THROW(ValidateInvalidMeasurementRecovery(static_cast<InvalidMeasurementRecovery>(99),1),std::invalid_argument);
@@ -4288,5 +4291,129 @@ TEST(NativeCandidateWindowRecovery,ExternalStopRevokesPendingRecovery){WindowRec
 TEST(NativeCandidateWindowRecovery,WrongRevisionCannotAdvance){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::WrongRevision);}
 TEST(NativeCandidateWindowRecovery,ClassicAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,false,true);}
 TEST(NativeCandidateWindowRecovery,BranchAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,false,true);}
-TEST(NativeCandidateWindowRecovery,ClassicVersionedWireRoundtripDoesNotEnableService){WindowRecoveryWireBoundaries<NNeuronTimeLearner>();}
-TEST(NativeCandidateWindowRecovery,BranchVersionedWireRoundtripDoesNotEnableService){WindowRecoveryWireBoundaries<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowRecovery,ClassicVersionedWireRoundtripStartsNativeService){WindowRecoveryWireBoundaries<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRecovery,BranchVersionedWireRoundtripStartsNativeService){WindowRecoveryWireBoundaries<NNeuronTimeLearnerBranch>();}
+
+namespace {
+enum class ServiceRecoveryIntervention { None, ExternalStop, Reset };
+
+template<class Call> void RequireRecoveryDiagnostic(Call call,const char* reason) {
+    try{call();ADD_FAILURE()<<"Expected explicit refusal: "<<reason;}
+    catch(const std::invalid_argument& e){EXPECT_EQ(std::string(e.what()),reason);}
+}
+
+template<class Owner> void NativeRecoveryService(bool n1=false,ServiceRecoveryIntervention intervention=ServiceRecoveryIntervention::None) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);auto c=ActualCold7Declaration(f);
+    c.search.normalization=c.model.normalization;
+    c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+    c.search.maximumInvalidObservations=2;c.search.maximumCandidatesPerInput=4;
+    c.search.maximumProbes=32;c.search.maximumEdits=8;c.search.maximumSweeps=1;
+    c.search.resistanceSubdivisionDepth=0;c.search.tolerances.sync=0.;c.maximumModelSeconds=100.;
+    c.search.bounds[0].minimumLength=2;c.search.bounds[0].maximumLength=4;
+    auto& window=c.candidateWindowPolicy->inputs[0];window.delayFramesPerSegment=3*f.frequency/100;
+    window.baseLeftGuardFrames=window.baseRightGuardFrames=2;
+    auto plan=MakeConfiguredNativeTrainingPlan(c);bool intervened=false,advanced=false;
+    plan.beforeCompositeConsume=[&](const NativeCompositeMeasurementRecord& r) {
+        if(intervention==ServiceRecoveryIntervention::None || intervened || r.purpose!=CompositeMeasurementPurpose::Search ||
+            !r.selection || !r.selection->geometry ||
+            r.selection->geometry->validity!=DeclaredWindowBasinValidity::Missing)return;
+        intervened=true;
+        if(intervention==ServiceRecoveryIntervention::ExternalStop)f.owner->IsNeedToTrain=false;
+        else f.owner->Reset();
+    };
+    plan.compositeSink=[&](const NativeCompositeMeasurementRecord& r) {
+        const auto& delivered=f.owner->NativeTrainingController().CandidateWindowRecoveryDeliveries();
+        if(!delivered.empty() && r.purpose==CompositeMeasurementPurpose::Search && r.groupId!=delivered.front().event.groupId &&
+            f.owner->ReadNativeParameters()!=delivered.front().event.transition.fullParameters)advanced=true;
+    };
+    ServiceStart(f,plan);std::size_t ticks=0;
+    while(++ticks<120*f.frequency) {
+        f.model->Calculate();f.environment->IncreaseModelTimeByStep();
+        const auto state=f.owner->NativeTrainingController().State();
+        if(state==NativeTrainingState::Finished || (intervened && state==NativeTrainingState::Idle))break;
+    }
+    ASSERT_LT(ticks,120*f.frequency);const auto& service=f.owner->NativeTrainingController();
+    ASSERT_TRUE(service.CandidateWindowRecoveryDeliveryLogIntact());
+    if(intervention!=ServiceRecoveryIntervention::None) {
+        ASSERT_TRUE(intervened);EXPECT_TRUE(service.CandidateWindowRecoveryDeliveries().empty());EXPECT_FALSE(service.Certificate());
+        if(intervention==ServiceRecoveryIntervention::ExternalStop) {
+            EXPECT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.Outcome(),TrainingStatus::ExternalStop);
+        } else EXPECT_EQ(service.State(),NativeTrainingState::Idle);
+        SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),"recovery-service");
+        SavePortableObject("recovery-service","intervention.json",QJsonObject{{"kind","native_recovery_intervention_fixture"},
+            {"schema_version",1},{"state",NativeTrainingStateName(service.State())},{"events",0},{"certificate",QJsonValue(QJsonValue::Null)}});
+    } else {
+        ASSERT_EQ(service.State(),NativeTrainingState::Finished);ASSERT_FALSE(service.CandidateWindowRecoveryDeliveries().empty());
+        EXPECT_TRUE(advanced);ASSERT_TRUE(service.Search());
+        EXPECT_EQ(service.CandidateWindowRecoveryDeliveries().size(),service.Search()->CandidateWindowRecoveries().size());
+        std::set<std::string> groups;QJsonArray events;
+        for(const auto& delivery:service.CandidateWindowRecoveryDeliveries()) {
+            const auto& e=delivery.event;ASSERT_TRUE(groups.insert(e.groupId).second);
+            EXPECT_EQ(delivery.runtimePlan,EncodeCandidateWindowRuntimePlan(service.Plan()));
+            const auto found=std::find_if(service.CompositeMeasurements().begin(),service.CompositeMeasurements().end(),
+                [&](const auto& r){return r.groupId==e.groupId;});ASSERT_NE(found,service.CompositeMeasurements().end());
+            EXPECT_FALSE(found->consumed);ASSERT_TRUE(found->trainingRequestedAtConsume);EXPECT_TRUE(*found->trainingRequestedAtConsume);
+            EXPECT_TRUE(found->semanticProofId.empty());EXPECT_EQ(e.rejectedContentId,CandidateWindowRejectedGroupContentId(service.Plan().protocol,*found));
+            events.append(QJsonObject{{"event",EncodeCandidateWindowRecoveryEvidence(e)},{"runtime_plan",delivery.runtimePlan}});
+        }
+        SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),"recovery-service");
+        SavePortableObject("recovery-service","initial-configuration.json",service.CompositeInitialConfiguration());
+        SavePortableObject("recovery-service","runtime-plan.json",EncodeCandidateWindowRuntimePlan(service.Plan()));
+        SavePortableObject("recovery-service","deliveries.json",QJsonObject{{"kind","native_recovery_service_fixture"},{"schema_version",1},{"deliveries",events}});
+        const auto revision=f.Revision();
+        RequireRecoveryDiagnostic([&]{EncodeNativeTrainingState(service,revision,f.owner->ReadNativeParameters());},
+            "candidate_window_recovery_requires_versioned_summary_ledger");
+        RequireRecoveryDiagnostic([&]{NativeCandidateWindowStateFactory::Export(*f.owner,f.modelSpec,service,
+            f.owner->ReadNativeParameters(),2,1,1,"native-recovery-service-fixture",nullptr);},
+            "candidate_window_recovery_requires_versioned_model_ledger");
+        const auto count=service.CandidateWindowRecoveryDeliveries().size();f.owner->Reset();
+        EXPECT_EQ(service.CandidateWindowRecoveryDeliveries().size(),count);
+        auto retry=plan;retry.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::RetrySameCandidate;
+        f.owner->BeginNativeTraining(retry);ASSERT_EQ(service.State(),NativeTrainingState::Searching)<<service.Reason();
+        EXPECT_EQ(service.CandidateWindowRecoveryDeliveries().size(),count);
+        RequireRecoveryDiagnostic([&]{EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());},
+            "candidate_window_recovery_requires_versioned_summary_ledger");
+        f.owner->Reset();auto target=f.owner->InputPattern.GetData();target(1,0)+=.01;f.owner->InputPattern=target;
+        EXPECT_TRUE(service.CandidateWindowRecoveryDeliveries().empty());EXPECT_TRUE(service.CandidateWindowRecoveryDeliveryLogIntact());
+    }
+}
+}
+TEST(NativeCandidateWindowRecoveryService,ClassicN0MissingAdvancesAndRetainsLedger){NativeRecoveryService<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRecoveryService,BranchN0MissingAdvancesAndRetainsLedger){NativeRecoveryService<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowRecoveryService,ClassicN1MissingAdvancesAndRetainsLedger){NativeRecoveryService<NNeuronTimeLearner>(true);}
+TEST(NativeCandidateWindowRecoveryService,BranchN1MissingAdvancesAndRetainsLedger){NativeRecoveryService<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCandidateWindowRecoveryService,ClassicStopBeforeDeliveryCannotRecover){NativeRecoveryService<NNeuronTimeLearner>(false,ServiceRecoveryIntervention::ExternalStop);}
+TEST(NativeCandidateWindowRecoveryService,BranchStopBeforeDeliveryCannotRecover){NativeRecoveryService<NNeuronTimeLearnerBranch>(false,ServiceRecoveryIntervention::ExternalStop);}
+TEST(NativeCandidateWindowRecoveryService,ClassicResetBeforeDeliveryCannotRecover){NativeRecoveryService<NNeuronTimeLearner>(false,ServiceRecoveryIntervention::Reset);}
+TEST(NativeCandidateWindowRecoveryService,BranchResetBeforeDeliveryCannotRecover){NativeRecoveryService<NNeuronTimeLearnerBranch>(false,ServiceRecoveryIntervention::Reset);}
+
+namespace {
+template<class Owner> void NativeServiceResetFromRevisionReadback() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    const auto c=ActualCold7Declaration(f);auto plan=MakeConfiguredNativeTrainingPlan(c);f.attempt.reset();
+    NativeTrainingService service;NativeProbeExecutor unusedScalarProbe;unsigned editDepth=0;
+    auto adapter=BindNativeTraining(*f.owner,unusedScalarProbe,editDepth);
+    bool armed=false,reset=false;plan.beforeCompositeConsume=[&](const NativeCompositeMeasurementRecord& r) {
+        if(r.purpose==CompositeMeasurementPurpose::Search)armed=true;
+    };
+    const auto actualReadback=adapter.readModelRevision;
+    adapter.readModelRevision=[&] {
+        const auto revision=actualReadback();
+        if(armed && !reset){reset=true;service.ResetControl();}
+        return revision;
+    };
+    // Real native adapter/model/scheduler; only the public callback boundary
+    // injects reentrancy. The revision itself is never fabricated.
+    service.Start(plan,adapter,f.Time(),Wall());ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences);
+    std::size_t ticks=0;
+    while(!reset && ++ticks<120*f.frequency) {
+        service.BeforeTick(adapter,f.Time(),Wall());f.model->Calculate();service.AfterTick(adapter,f.Time(),Wall());
+        f.environment->IncreaseModelTimeByStep();
+    }
+    ASSERT_TRUE(reset);EXPECT_EQ(service.State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(service.Search());EXPECT_FALSE(service.Certificate());EXPECT_TRUE(service.References());
+    SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),"recovery-readback-reset");
+}
+}
+TEST(NativeServiceCallbackReentrancy,ClassicRevisionReadbackResetCannotConsumeRetiredSearch){NativeServiceResetFromRevisionReadback<NNeuronTimeLearner>();}
+TEST(NativeServiceCallbackReentrancy,BranchRevisionReadbackResetCannotConsumeRetiredSearch){NativeServiceResetFromRevisionReadback<NNeuronTimeLearnerBranch>();}
