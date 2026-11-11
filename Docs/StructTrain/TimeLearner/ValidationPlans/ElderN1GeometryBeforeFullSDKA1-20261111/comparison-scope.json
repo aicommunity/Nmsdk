@@ -1,0 +1,30 @@
+{
+  "kind": "matched_native_N1_algorithm_AB_subjects",
+  "scope": "Fresh full SDK baseline compile plus two actual native model roundtrips; not another full native119 acceptance claim",
+  "before": {
+    "root": "5ba0a2e81759a28f378117757aa3a5b91f1c57ab",
+    "pulse": "c10206d5e338792d42b58ab28e48e7364b07e481"
+  },
+  "after": {
+    "root": "fcfd8bdff149c14cbe67149e996945d122bf954d",
+    "pulse": "5f1a4ac6f9aff208ada7f8bcf62645c9d79a6615"
+  },
+  "production_pulse_changed_files": [
+    "Core/TimeLearner/BoundedTraining.cpp"
+  ],
+  "app_and_root_production_build_source_changed_files": [],
+  "common_python_train_controller": "fd55a9936ba6018ca86e583c0e844b10fb582d56",
+  "common_native_search_wall_seconds": 1800,
+  "common_process_finalization_seconds": 300,
+  "common_process_timeout_seconds": 2100,
+  "common_maximum_search_probes": 128,
+  "common_goal": "CapturedPerInput",
+  "common_sync_tolerance": 0.02,
+  "common_amplitude_absolute": 0.00001,
+  "common_amplitude_relative": 0,
+  "common_minimum_amplitude": 0.000001,
+  "anchor_input": 3,
+  "requires": "Current SDK/native119 groups close and leases release before compiling baseline on this worker; controls do not resume Series D",
+  "native_roundtrip_cases": 2,
+  "required_artifacts": 18
+}
