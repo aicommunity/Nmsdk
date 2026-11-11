@@ -4584,12 +4584,14 @@ template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed
     NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);f.attempt.reset();f.owner->IsNeedToTrain=false;
     const auto imported=f.owner->ImportNativeLearnedState(source.package,RecoveryPackageImplementation);
     ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    ASSERT_TRUE(f.owner->NativeTrainingController().HasDetachedCompositeBoundary());
     // Adoption marks the owner not ready. Complete its ordinary native
     // lifecycle before a probe; never bypass the readiness guard.
     const auto adoptedRevision=f.Revision();
     f.owner->Build();f.owner->Init();
     ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
     EXPECT_EQ(f.Revision(),adoptedRevision);
+    EXPECT_TRUE(f.owner->NativeTrainingController().HasDetachedCompositeBoundary());
     const auto& service=f.owner->NativeTrainingController();
     ASSERT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_FALSE(service.Search());EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());
     EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);EXPECT_EQ(bool(service.Certificate()),completed);
@@ -4622,7 +4624,10 @@ template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed
     const auto originalLedger=source.package["recovery_ledger"].toObject();const auto refs=service.References()->Inputs();
     auto retry=service.Plan();retry.search.runId="package7-imported-warm-retry";
     retry.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::RetrySameCandidate;
-    const auto attempts=service.SessionAttempt();f.owner->Reset();f.owner->BeginNativeTraining(retry);ServiceTicks(f);
+    const auto attempts=service.SessionAttempt();f.owner->Reset();
+    EXPECT_EQ(service.State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(service.HasDetachedCompositeBoundary());
+    f.owner->BeginNativeTraining(retry);ServiceTicks(f);
     ASSERT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.SessionAttempt(),attempts+1);
     EXPECT_EQ(service.References()->Inputs(),refs);const auto warmed=f.owner->ExportNativeLearnedState(RecoveryPackageImplementation);
     EXPECT_EQ(warmed["schema_version"],QJsonValue(7));EXPECT_EQ(warmed["runtime_plan"].toObject()["schema_version"],QJsonValue(2));
@@ -4681,3 +4686,25 @@ TEST(NativeRecoveryPackage7,ClassicMissingForeignOrDuplicateLedgerCannotMutateOw
 TEST(NativeRecoveryPackage7,BranchMissingForeignOrDuplicateLedgerCannotMutateOwner){RejectRecoveryPackageTampering<NNeuronTimeLearnerBranch>();}
 TEST(NativeRecoveryPackage7,ClassicLegacy6CannotMasqueradeAsRecovery7){LegacyPackageCannotMasqueradeAsRecovery<NNeuronTimeLearner>();}
 TEST(NativeRecoveryPackage7,BranchLegacy6CannotMasqueradeAsRecovery7){LegacyPackageCannotMasqueradeAsRecovery<NNeuronTimeLearnerBranch>();}
+
+namespace {
+template<class Owner> void ActiveBuildStillRevokesComposite(bool candidateWindows) {
+    NativeCompositeFixture<Owner> f;auto plan=ServicePlan(f);
+    if(candidateWindows)plan=MakeConfiguredNativeTrainingPlan(ActualCold7Declaration(f));
+    ServiceStart(f,std::move(plan));const auto revision=f.Revision();
+    const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::CapturingReferences);
+    ASSERT_FALSE(service.HasDetachedCompositeBoundary());
+    // A real registered structural setter requests native Build. This is not
+    // a manual write to Ready, nor an implicit Reset used to repair a test.
+    f.owner->SetStructureBuildMode(1);ASSERT_FALSE(f.owner->IsReady());
+    f.owner->Build();ASSERT_TRUE(f.owner->IsReady());
+    EXPECT_EQ(service.State(),NativeTrainingState::Idle);
+    EXPECT_FALSE(service.HasDetachedCompositeBoundary());
+    EXPECT_FALSE(service.Certificate());EXPECT_EQ(f.Revision(),revision);
+}
+}
+TEST(NativeCompositeBuildBoundary,ClassicActiveProtocol4BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearner>(false);}
+TEST(NativeCompositeBuildBoundary,BranchActiveProtocol4BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCompositeBuildBoundary,ClassicActiveProtocol5BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearner>(true);}
+TEST(NativeCompositeBuildBoundary,BranchActiveProtocol5BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearnerBranch>(true);}

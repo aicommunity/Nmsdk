@@ -1,0 +1,53 @@
+[
+  {
+    "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-recovery-package7-native14-m40-f3/native-001/process/contained",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "b71c7a8b43865ca8b36be748032a5f884f153695042bc18009896b2afb80954d",
+      "unit": "timelearner-5223255d-37dc-45ee-b45e-118859c1064f.service",
+      "invocation_id": "da653719173a445287192c430f0f9a90",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5223255d-37dc-45ee-b45e-118859c1064f.service",
+      "initial_main_pid": 1221438,
+      "initial_start_ticks": "348841868",
+      "sha256": "806b36b38950646872ca2c882e6c05d79716188192c0e55b760e1ec5e4695659"
+    },
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "b71c7a8b43865ca8b36be748032a5f884f153695042bc18009896b2afb80954d",
+        "unit": "timelearner-5223255d-37dc-45ee-b45e-118859c1064f.service",
+        "invocation_id": "da653719173a445287192c430f0f9a90",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5223255d-37dc-45ee-b45e-118859c1064f.service",
+        "initial_main_pid": 1221438,
+        "initial_start_ticks": "348841868",
+        "sha256": "806b36b38950646872ca2c882e6c05d79716188192c0e55b760e1ec5e4695659"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 5223255d-37dc-45ee-b45e-118859c1064f",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "da653719173a445287192c430f0f9a90"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    }
+  }
+]

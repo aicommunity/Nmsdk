@@ -42,7 +42,9 @@ class ClosedNativePackage7SourceTest(unittest.TestCase):
         cls.directory=cls.restored/'case/native-composite/package7'
         cls.package=load(cls.directory/'source-package.json')
         cls.summary=load(cls.directory/'source-summary.json')
-        cls.resolver=filesystem_primary_resolver(cls.directory)
+        # Functions stored on a class otherwise bind a spurious `self` when
+        # used by individual tests; keep the production resolver unchanged.
+        cls.resolver=staticmethod(filesystem_primary_resolver(cls.directory))
         before=deepcopy((cls.package,cls.summary))
         cls.audit=audit_candidate_window_recovery_package(cls.package,cls.summary,external_resolver=cls.resolver)
         require((cls.package,cls.summary)==before,'closed_native_package7_auditor_mutated_input')
@@ -83,13 +85,14 @@ class ClosedNativePackage7SourceTest(unittest.TestCase):
         self.assertFalse(self.summary['contains_controller_checkpoint'])
 
     def test_actual_summary_cannot_claim_checkpoint_or_drop_ledger(self):
-        for field,value in [('contains_controller_checkpoint',True),('recovery_ledger',None)]:
+        for field,value,reason in [('contains_controller_checkpoint',True,'recovery_summary_is_not_checkpoint'),
+                                   ('recovery_ledger',None,'domain_recomputed')]:
             changed=deepcopy(self.summary);changed[field]=value
-            with self.subTest(field=field),self.assertRaises(EvidenceError):
+            with self.subTest(field=field),self.assertRaisesRegex(EvidenceError,reason):
                 audit_candidate_window_recovery_package(self.package,changed,external_resolver=self.resolver)
 
     def test_modified_external_primary_cannot_fall_back_to_embedded_bytes(self):
-        with self.assertRaises(EvidenceError):
+        with self.assertRaisesRegex(EvidenceError,'composite_external_primary_mismatch'):
             audit_candidate_window_recovery_package(self.package,self.summary,
                 external_resolver=lambda name:self.resolver(name)+b'changed')
 
@@ -99,7 +102,7 @@ class ClosedNativePackage7SourceTest(unittest.TestCase):
         changed['neuron']['metadata']['recovery_ledger_sha256']=ledger['sha256']
         resign(changed['neuron']);resign(changed)
         summary=deepcopy(self.summary);summary['recovery_ledger']=deepcopy(ledger)
-        with self.assertRaises(EvidenceError):
+        with self.assertRaisesRegex(EvidenceError,'candidate_window_recovery_ledger_replay_or_order'):
             audit_candidate_window_recovery_package(changed,summary,external_resolver=self.resolver)
 
     def test_coherently_dropped_events_still_cannot_prove_history_completeness(self):

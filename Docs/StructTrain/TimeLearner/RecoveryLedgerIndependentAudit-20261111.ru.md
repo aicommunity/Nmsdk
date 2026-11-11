@@ -60,6 +60,20 @@ version dispatch, warm runtime2, runtime3, начальной модели и gr
 допуска для нового дорогостоящего Train.
 
 Console и frozen recognition ещё требуют поддержки и проверки нового пути.
+
+Реальный C++ source package7 теперь сохранён losslessly:12 groups/48 primary
+files и2 recovery deliveries. Закрытые source case и controller упакованы
+штатным collector:19,157,820 expanded bytes →476,888 bytes XZ; через Git
+переданы на локальную машину и Elder. [Архив и исходный отрицательный контекст](../../../Reports/StructTrain/TimeLearner/Package7ClassicN0ClosedSourceF1-20261111/).
+
+Первый независимый Elder набор восстановил весь bundle и успешно проверил
+исходный package7/summary8 с непустым ledger. Полный набор ещё не принят:
+8/9 отмечены PASS и1 error, а часть negative cases могла проходить по
+неправильной причине. Test resolver, сохранённый как обычная class function,
+получал дополнительный self. Исправление использует staticmethod и проверяет
+конкретные причины отказа; runtime повтор ещё требуется. Исходный result и
+traceback сохранены в [audit9 F1](ValidationPlans/ElderClosedNativePackage7Audit9F1-20261111/).
+Исходный C++ roundtrip остаётся failed; DATA replay его не переименовывает.
 Ни принятие формата, ни связность всех переданных событий не доказывают
 полноту журнала действий, Exact или качество классификации. Отсутствующие
 события нельзя восстановить по одному списку supplied deliveries.
