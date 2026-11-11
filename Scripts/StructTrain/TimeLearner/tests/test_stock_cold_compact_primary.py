@@ -58,18 +58,31 @@ class StockColdCompactPrimaryTest(unittest.TestCase):
             # disposable, fully checked copy of the compact primary fixture.
             controls = os.environ.get('TIMELEARNER_STOCK_COLD_REPORT_CONTROLS')
             render_output = None
+            rendered = None
             if controls is not None:
                 require(load(Path(controls)/'render.json') == {'render': True},
                     'stock_cold_report_controls_schema')
                 render_output = str(Path(os.environ['TMPDIR'])/'stock-cold-reports')
+            cache = os.environ.get('TIMELEARNER_STOCK_COLD_REPORT_CACHE')
+            if cache is not None:
+                require(controls is None, 'stock_cold_report_render_and_reuse_conflict')
+                render_output = str(Path(cache).resolve(strict=True))
+                rendered = load(Path(render_output)/'manifest.json')
+                self.assertEqual(rendered['primary_audit'], audit)
             if render_output is not None:
-                rendered = render_result(directory, Path(render_output))
+                if rendered is None:
+                    rendered = render_result(directory, Path(render_output))
                 self.assertEqual(len(rendered['reports']), 8)
                 self.assertEqual(rendered['trial_soma_pairs'], 20)
                 from PIL import Image
                 for report in rendered['reports']:
                     folder = Path(render_output)/report['name']
                     item = load(folder/'manifest.json')
+                    native = directory/'runs'/report['name']/'native'
+                    self.assertEqual(item['source_packet_sha256'],
+                        hashlib.sha256((native/'probe_trial_1.json').read_bytes()).hexdigest())
+                    self.assertEqual(item['source_trace_sha256'],
+                        hashlib.sha256((native/'probe_trial_1.csv').read_bytes()).hexdigest())
                     topology = 'Branch' if report['name'].startswith('Branch-') else 'Classic'
                     self.assertEqual(len(item['figures']), 1 if topology == 'Branch' else 4)
                     self.assertFalse(item['spike_recording_enabled'])
@@ -81,7 +94,7 @@ class StockColdCompactPrimaryTest(unittest.TestCase):
                         for view in views:
                             if view['y_scale'] == 'shared':
                                 self.assertEqual(view['y_limits'],
-                                    rendered['common_y_limits'][topology][figure['channel']])
+                                    list(rendered['common_y_limits'][topology][figure['channel']]))
                             if view['view'].startswith('zoom-'):
                                 self.assertGreaterEqual(view['minimum_native_tick_pixels_on_zoom'], 8.)
                             self.assertFalse(view['downsampling'])
@@ -90,7 +103,7 @@ class StockColdCompactPrimaryTest(unittest.TestCase):
                     for name, digest in load(folder/'SHA256SUMS.json').items():
                         self.assertEqual(hashlib.sha256((folder/name).read_bytes()).hexdigest(), digest)
                 proof['rendered'] = dict(output=render_output, reports=8, trial_soma_pairs=20,
-                    visual_acceptance_complete=False)
+                    reused_immutable_cache=cache is not None, visual_acceptance_complete=False)
             target = Path(os.environ['TMPDIR'])/'stock-cold-independent-primary.json'
             target.write_text(json.dumps(proof, indent=2, allow_nan=False)+'\n')
         self.assertEqual(before, {n: frozen_digest(source/n, 16*1024**2) for n in expected})
