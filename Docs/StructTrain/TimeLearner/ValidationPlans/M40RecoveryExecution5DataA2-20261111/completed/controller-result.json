@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "completed",
+  "reason": "exit_zero_and_whole_group_closed",
+  "returncode": 0,
+  "wall_seconds": 31.723609800916165,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "2f351ce517dbcb37adae0dd8e4dc87493b799d4ed2901d879878c8c552df99aa",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 1,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "HEAD is now at 403f94a fixture"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 2200,
+        "sha256": "9dc5325c438d7540dc7b19d920e5154ebc62f73bebef29762508bee50de2c98a"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 31,
+        "sha256": "d4fc45f20520d21fd1d86a744da44a31532522befa49496bf3ae5f581388d859"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

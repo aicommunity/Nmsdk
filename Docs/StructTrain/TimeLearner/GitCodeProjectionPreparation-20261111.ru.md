@@ -1,5 +1,7 @@
 # Подготовка частичной Git-проекции кода
 
+**Серверная приёмка:** три real-Git tests и семь execution5 DATA tests прошли10/10 на M40. [Результаты](ValidationPlans/M40RecoveryExecution5DataA2-20261111/RESULT.ru.md). Strict source guard реального A2 прошёл до job,630Scripts files/515Python. Full SDK и numeric/native admission этим не подтверждаются.
+
 В M40 execution5 DATA A1 исходные тесты не выполнялись: guard чистоты кода
 остановился на отсутствующем Git blob корневого .gitignore. Ранее checkout
 отказал на .gitattributes. Ошибки связаны с неполным набором объектов
