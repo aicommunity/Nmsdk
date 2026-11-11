@@ -4,6 +4,7 @@ import unittest
 
 from ..candidate_window_recovery_events import (validate_candidate_window_recovery_event,
     audit_candidate_window_recovery_events)
+from ..candidate_window_archive_evidence import audit_candidate_window_archive
 from ..composite_measurement_contract import expected_artifact_document_id
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import EvidenceError
@@ -69,7 +70,11 @@ class CandidateWindowRecoveryEventDataTest(unittest.TestCase):
     def test_real_valid_geometry_without_measurement_cannot_authorize_recovery(self):
         event,archive,configuration,runtime,primary=self.make()
         archive['records'][2].update(consumed=False,measurement=None)
+        archive['records'][2]['clock_observation']['wall_enforcement']='not_completed'
         archive['artifact_document_sha256']=expected_artifact_document_id(archive)
+        # The negative must reach recovery admission, not fail an unrelated
+        # stale clock/measurement identity in the modified DATA fixture.
+        audit_candidate_window_archive(archive,configuration,external_resolver=primary.__getitem__)
         with self.assertRaisesRegex(EvidenceError,'requires_unassigned_peak'):
             audit_candidate_window_recovery_events([event],archive,configuration,runtime,external_resolver=primary.__getitem__)
 
