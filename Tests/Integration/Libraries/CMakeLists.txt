@@ -4,6 +4,10 @@ message(STATUS "Libraries integration tests directory created")
 
 set(PULSELIB_TEST_OUTPUT_DIR "${DEPLOY_ROOT}")
 
+set(NMSDK_TRAINING_ALGORITHM_SOURCE_ROOT "${CMAKE_SOURCE_DIR}")
+set(NMSDK_TRAINING_ALGORITHM_RUNTIME "${PULSELIB_TEST_OUTPUT_DIR}")
+include("${CMAKE_CURRENT_LIST_DIR}/TrainingAlgorithms.cmake")
+
 add_executable(Test_Rdk_RuntimeDescriptions
     Test_Rdk_RuntimeDescriptions.cpp ../Support/ProbeAlgorithmMain.cpp
     ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp)
