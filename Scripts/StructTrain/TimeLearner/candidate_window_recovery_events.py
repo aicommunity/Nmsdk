@@ -55,14 +55,20 @@ def validate_candidate_window_recovery_event(event):
         raise EvidenceError('malformed_candidate_window_recovery_event') from error
 
 
-def audit_candidate_window_recovery_events(events, archive, configuration, runtime_plan, *, external_resolver=None):
+def audit_candidate_window_recovery_events(events, archive, configuration, runtime_plan, *, external_resolver=None,
+                                           attempt_id=None):
     """Replay primary first; bind supplied ordered events without claiming coverage."""
     try:
         require(type(events) is list,'candidate_window_recovery_event_inventory')
         protocol=archive['protocol']
         runtime_audit=audit_candidate_window_runtime_recovery_plan(runtime_plan,configuration,protocol)
         primary_audit=audit_candidate_window_archive(archive,configuration,external_resolver=external_resolver)
-        require(archive['current_attempt_id']==runtime_plan['run_id'],'candidate_window_recovery_runtime_attempt')
+        selected_attempt=archive['current_attempt_id'] if attempt_id is None else attempt_id
+        _text(selected_attempt)
+        require(selected_attempt==runtime_plan['run_id'] and
+                (selected_attempt==archive['current_attempt_id'] or
+                 any(r['attempt_id']==selected_attempt for r in archive['records'])),
+                'candidate_window_recovery_runtime_attempt')
         common=runtime_plan['composite_measurement'];_same(archive['maximum_total_primary_bytes'],common['maximum_total_primary_bytes'])
         records=archive['records'];by_group={r['group_id']:(i,r) for i,r in enumerate(records)}
         for record in records:
