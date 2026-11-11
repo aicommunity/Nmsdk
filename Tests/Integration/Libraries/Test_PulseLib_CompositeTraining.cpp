@@ -4196,21 +4196,49 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
     EXPECT_FALSE(search.Certificate());EXPECT_TRUE(recovered);
 }
 
-void WindowRecoveryWireBoundaries() {
-    NativeCompositeFixture<NNeuronTimeLearner> f(2000,false,64,false,true);
+template<class Owner> void WindowRecoveryWireBoundaries() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
     auto config=ActualCold7Declaration(f);const auto old=EncodeConfiguredNativeTraining(config);
     const auto baseline=MakeConfiguredNativeTrainingPlan(config);
     config.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
     config.search.maximumInvalidObservations=1;
-    EXPECT_THROW(EncodeConfiguredNativeTraining(config),std::invalid_argument);
-    EXPECT_THROW(MakeConfiguredNativeTrainingPlan(config),std::invalid_argument);
+    const auto encoded=EncodeConfiguredNativeTraining(config);
+    EXPECT_EQ(encoded["schema_version"].toInt(),8);
+    EXPECT_EQ(encoded["invalid_measurement_recovery"].toString(),"advance_rejected_candidate_window");
+    const auto decoded=DecodeConfiguredNativeTraining(encoded);
+    EXPECT_EQ(decoded.search.invalidMeasurementRecovery,config.search.invalidMeasurementRecovery);
+    EXPECT_EQ(EncodeConfiguredNativeTraining(decoded),encoded);
+    EXPECT_EQ(MakeConfiguredNativeTrainingPlan(decoded).search.invalidMeasurementRecovery,config.search.invalidMeasurementRecovery);
+    auto bad=encoded;bad["schema_version"]=7;EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    bad=encoded;bad["invalid_measurement_recovery"]="retry_same_candidate";
+    EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    bad=encoded;auto limits=bad["search"].toObject();limits["maximum_invalid_observations"]=0;bad["search"]=limits;
+    EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
+    bad=encoded;bad["unknown_recovery_field"]=true;EXPECT_THROW(DecodeConfiguredNativeTraining(bad),std::invalid_argument);
     auto flat=config;flat.composite.reset();flat.candidateWindowPolicy.reset();
     EXPECT_THROW(EncodeConfiguredNativeTraining(flat),std::invalid_argument); // no silent default-policy export
     auto runtime=baseline;runtime.search.initialModelRevision=f.Revision();
-    EXPECT_NO_THROW(EncodeCandidateWindowRuntimePlan(runtime));
+    const auto oldRuntime=EncodeCandidateWindowRuntimePlan(runtime);
+    EXPECT_EQ(oldRuntime["schema_version"].toInt(),2);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(oldRuntime,runtime.protocol)),oldRuntime);
     runtime.search.invalidMeasurementRecovery=config.search.invalidMeasurementRecovery;
     runtime.search.maximumInvalidObservations=1;
-    EXPECT_THROW(EncodeCandidateWindowRuntimePlan(runtime),std::invalid_argument);
+    const auto encodedRuntime=EncodeCandidateWindowRuntimePlan(runtime);
+    EXPECT_EQ(encodedRuntime["schema_version"].toInt(),3);
+    EXPECT_EQ(EncodeCandidateWindowRuntimePlan(DecodeCandidateWindowRuntimePlan(encodedRuntime,runtime.protocol)),encodedRuntime);
+    SavePortableObject("recovery-wire","initial-configuration.json",encoded);
+    SavePortableObject("recovery-wire","runtime-plan.json",encodedRuntime);
+    SavePortableObject("recovery-wire","protocol.json",EncodeVerificationProtocol(runtime.protocol));
+    SavePortableObject("recovery-wire","legacy-configuration.json",old);
+    SavePortableObject("recovery-wire","legacy-runtime-plan.json",oldRuntime);
+    bad=encodedRuntime;bad["schema_version"]=2;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,runtime.protocol),std::invalid_argument);
+    bad=encodedRuntime;limits=bad["search"].toObject();limits["invalid_measurement_recovery"]="retry_same_candidate";bad["search"]=limits;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,runtime.protocol),std::invalid_argument);
+    bad=encodedRuntime;limits=bad["search"].toObject();limits["maximum_invalid_observations"]=0;bad["search"]=limits;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,runtime.protocol),std::invalid_argument);
+    bad=encodedRuntime;bad["unknown_recovery_field"]=true;
+    EXPECT_THROW(DecodeCandidateWindowRuntimePlan(bad,runtime.protocol),std::invalid_argument);
     const auto revision=f.Revision();f.attempt.reset();
     // The component reports configuration failures through its service state.
     EXPECT_NO_THROW(f.owner->BeginNativeTraining(runtime));
@@ -4241,4 +4269,5 @@ TEST(NativeCandidateWindowRecovery,ExternalStopRevokesPendingRecovery){WindowRec
 TEST(NativeCandidateWindowRecovery,WrongRevisionCannotAdvance){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::WrongRevision);}
 TEST(NativeCandidateWindowRecovery,ClassicAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearner>(WindowRecoveryCase::Advance,false,true);}
 TEST(NativeCandidateWindowRecovery,BranchAmbiguousSearchQueuesFreshCandidate){WindowRecoveryCore<NNeuronTimeLearnerBranch>(WindowRecoveryCase::Advance,false,true);}
-TEST(NativeCandidateWindowRecovery,UnversionedWireAndServiceCannotAdmitNewPolicy){WindowRecoveryWireBoundaries();}
+TEST(NativeCandidateWindowRecovery,ClassicVersionedWireRoundtripDoesNotEnableService){WindowRecoveryWireBoundaries<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRecovery,BranchVersionedWireRoundtripDoesNotEnableService){WindowRecoveryWireBoundaries<NNeuronTimeLearnerBranch>();}

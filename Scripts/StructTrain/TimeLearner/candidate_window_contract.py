@@ -105,15 +105,22 @@ def validate_policy(policy, inputs, maximum_samples):
 
 
 def configuration_view(configuration):
-    """Private common-field view; the original cold7 record is executed unchanged."""
-    require(type(configuration) is dict and bounded_count(configuration.get('schema_version'))==7,
+    """Private common-field view; retain the exact cold7/8 record for execution."""
+    require(type(configuration) is dict and bounded_count(configuration.get('schema_version')) in (7,8),
             'candidate_window_requires_cold7_declaration')
+    recovery=configuration['schema_version']==8
+    if recovery:
+        require(configuration.get('invalid_measurement_recovery')=='advance_rejected_candidate_window',
+                'unsupported_candidate_window_recovery_envelope')
+        require(bounded_count(configuration['search']['maximum_invalid_observations'])>0,
+                'candidate_window_recovery_requires_invalid_budget')
     common=configuration.get('composite_measurement')
     keys(common,COMPOSITE_FIELDS|{'candidate_window_policy'},'candidate_window_native_policy2_fields')
     require(bounded_count(common['schema_version'])==2,'candidate_window_native_policy2_required')
     n=len(configuration['model']['inputs'])
     validate_policy(common['candidate_window_policy'],n,common['context_policy']['maximum_samples'])
     view=deepcopy(configuration);view['schema_version']=6
+    if recovery:view.pop('invalid_measurement_recovery')
     view['composite_measurement'].pop('candidate_window_policy');view['composite_measurement']['schema_version']=1
     project_composite_configuration(view)
     return view

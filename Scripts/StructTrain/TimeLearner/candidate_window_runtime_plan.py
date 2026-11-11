@@ -37,12 +37,21 @@ def _capacitance_contexts(policy):
 
 def audit_candidate_window_runtime_plan(plan, configuration, protocol):
     """Validate active runtime2 against the immutable protocol, not cold search."""
+    return _audit_candidate_window_runtime_plan(plan,configuration,protocol,version=2)
+
+
+def audit_candidate_window_runtime_recovery_plan(plan, configuration, protocol):
+    """Validate explicit runtime3 DATA; never restore a live rejection capability."""
+    return _audit_candidate_window_runtime_plan(plan,configuration,protocol,version=3)
+
+
+def _audit_candidate_window_runtime_plan(plan, configuration, protocol, *, version):
     try:
         # Only ORIGINAL configuration is a cold7 document. This call never
         # feeds runtime2 through configuration_view (the frozen7352 P1).
         validate_protocol(protocol,configuration)
         keys(plan,RUNTIME2_FIELDS,'candidate_window_runtime2_fields');_finite_json(plan)
-        require(count(plan['schema_version'])==2 and plan['protocol_binding']==digest(protocol),
+        require(count(plan['schema_version'])==version and plan['protocol_binding']==digest(protocol),
                 'candidate_window_runtime2_schema_or_protocol_binding')
         _text(plan['run_id']);_text(plan['initial_model_revision']);count(plan['initial_model_epoch'])
         n=len(protocol['inputs'])
@@ -51,11 +60,13 @@ def audit_candidate_window_runtime_plan(plan, configuration, protocol):
         require(number(plan['maximum_model_seconds'])>0 and number(plan['maximum_wall_seconds'])>0
                 and type(plan['record_capacitance_history']) is bool,'candidate_window_runtime2_clock_or_history')
         search=plan['search'];keys(search,SEARCH_FIELDS,'candidate_window_runtime2_search_fields')
-        require(search['normalization'] in ('N0','N1') and search['invalid_measurement_recovery']=='retry_same_candidate',
+        recovery='retry_same_candidate' if version==2 else 'advance_rejected_candidate_window'
+        require(search['normalization'] in ('N0','N1') and search['invalid_measurement_recovery']==recovery,
                 'candidate_window_runtime2_normalization_or_recovery')
         for key in ('maximum_probes','maximum_edits','maximum_candidates_per_input','maximum_sweeps'):
             require(count(search[key])>0,'candidate_window_runtime2_positive_search_budget')
-        count(search['maximum_invalid_observations'])
+        invalid=count(search['maximum_invalid_observations'])
+        require(version==2 or invalid>0,'candidate_window_recovery_requires_invalid_budget')
         require(count(search['resistance_subdivision_depth'])<=20,'candidate_window_runtime2_subdivision_depth')
         repeats=count(search['n0_candidate_repeats'])
         require(1<=repeats<=128 and (search['normalization']=='N0' or repeats==1),'candidate_window_runtime2_candidate_repeats')
@@ -98,7 +109,7 @@ def audit_candidate_window_runtime_plan(plan, configuration, protocol):
                 require(lengths<=reserve and counts<=reserve-lengths,'candidate_window_runtime2_C_cursor_budget')
                 region=count(bound['maximum_length'])-(count(bounds[i+1]['minimum_length']) if protocol['routing']=='branch_solo_burst' else 0)
                 require(region<=0 or region<=count(policy['maximum_membranes']),'candidate_window_runtime2_C_region_budget')
-        return dict(runtime_plan_schema_version=2,run_id=plan['run_id'],protocol_binding=plan['protocol_binding'],
+        return dict(runtime_plan_schema_version=version,run_id=plan['run_id'],protocol_binding=plan['protocol_binding'],
             normalization=search['normalization'],n0_candidate_repeats=repeats,runtime_plan_validated=True,
             current_search_derived_from_cold_configuration=False,live_authority_restored=False,
             native_execution_verified=False,training_certificate_verified=False,scientific_verdict=None)
