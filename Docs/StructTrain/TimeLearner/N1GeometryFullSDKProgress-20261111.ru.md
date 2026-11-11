@@ -2,6 +2,18 @@
 
 Адресный C++ A/B принят на Elder и M40: исправленная версия проходит 98/98 на каждом сервере; исходная даёт два ожидаемых отказа. [Протокол и границы результата](N1GeometryFairness-20261111.ru.md). Это не результат обучения stock N4 и не завершение этапа 7.
 
+## Проверенное обновление результатов 2026-11-11
+
+Оба Linux SDK-задания завершены: 119/119 объявленных C++ случаев на каждом сервере, 43 gates; errors=[]; все 44 owned groups (outer + 43 children) закрыты, SDK leases released. Сохранённые terminal/readbacks — в тех же ValidationPlans. Компактная публикация всех новых native119 primary и независимое восстановление ещё не выполнены. Старые live-status ниже являются историческими снимками.
+
+M40: свежие восемь stock N4 проб завершены, все observation valid/complete. Все восемь CSV побайтно совпадают с исходными контрольными пробами; это проверка исходного отклика, не обучение или классификация. Elder: аналогичное задание также завершено (54.51 с parent): 8/8 valid/complete, все owned процессы закрыты, lease released. Запуск выполнен после подтверждения закрытия и освобождения lease независимого восстановления старых Train-архивов.
+
+Windows .14: компиляция завершилась returncode=0, но исходный build outcome descendants_remaining сохранён, build_accepted=false. Последующая отдельная проверка закрытого состояния прошла. Набор native100 завершён: expected=observed=100, assertion_status=passed, execution=completed, validity=valid. Это 98 адресных C++ случаев и два model roundtrip, а не 100 научных экспериментов. Scientific worker admission остаётся false. Полная публикация compact primary и контроль полного экспериментального пути Windows остаются открыты.
+
+Новый Classic stock N4/N1 Train на M40 завершился с typed outcome invalid_observation, а не timeout: 613.14 с native, 743.80 с parent, 4 edits, 14 search probes, 18 composite groups / 108 native probes. После роста до L=[54,1,1,1] объявленное окно [1546,1626] кадров не содержит локальной вершины; selection.geometry.validity=missing. Отдельная глобальная omission-диагностика ambiguous не является причиной, возвращённой используемым declared-window измерителем. Требуются визуальный разбор и проверка прогнозирования окон; сертификат null, Test не запускался. Точные readbacks сохранены на ветке codex/timelearner-managed-python-controller, Docs/StructTrain/TimeLearner/ValidationPlans/M40N1AfterClassicTrainA1-20261111. Это отрицательный диагностический результат; научная цель остаётся открытой.
+
+Следующие таблицы и описания активных процессов сохранены как снимок до этого обновления, их нельзя читать как текущее состояние.
+
 ## Новый неизменяемый SDK subject
 
 - Root `fcfd8bdff149c14cbe67149e996945d122bf954d`.
