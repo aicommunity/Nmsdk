@@ -6,7 +6,7 @@ M40: canonical D1 отклонён до сборки (`native_preparation_leaf_u
 
 Состав:98 decision,29 rejection/factory,19 core/wire,76 delivery/callback и затронутых прежних composite service/source guards;125 отдельных leaf groups. Новые service cases сохраняют archive2/primary и deliveries/runtime; direct core cases сохраняют versioned event JSON. Новые cases ещё не являются принятыми проверками.
 
-Elder продолжает прежний C2 root5643/Pulse0fb: последняя проверка живого supervisor2684254/start396745925 показала45 закрытых leaf results без ошибок; terminal ещё отсутствовал. Не смешивать это с текущим source service222.
+Elder продолжает прежний C2 root5643/Pulse0fb: набор завершён146/146 PASS; outer+49child groups закрыты, lease released, owner missing. Полные terminal и closure-and-lease сохранены в Elder C2C. Не смешивать это с текущим source service222.
 
 Windows .14 исключена из расписания для апгрейда по просьбе пользователя, пока он не сообщит о готовности. На ней ничего нового не запускалось.
 
@@ -15,3 +15,5 @@ Windows .14 исключена из расписания для апгрейда
 Остаются: версия model/summary с полным recovery ledger, boundary import, Console, independent native event joins, ambiguous service/C-context/partial-repeat recovery, проверки затронутой матрицы и stockN4 A/B. Старые package6/summary7 намеренно отказывают при наличии новой policy/history вместо молчаливой потери событий. Эти отказы не закрывают поддержку versioned export/import. До её приёмки дорогой Train с новой policy не запускать.
 
 Следующий source включает строгий DecodeCandidateWindowRecoveryEvidence и portable delivery ledger. Читатель проверяет исходный archive2 через production decoder, все supplied entries связывает с реальным group/content ID, физическими параметрами/C, runtime3 и общими бюджетами; roundtrip и отрицательные cases добавлены, но не приняты. Ledger сохраняет independent_delivery_completeness_verified=false: это ещё не полный журнал всех действий и не checkpoint. Model package/summary/import и Console остаются незавершёнными; старые экспортёры по-прежнему запрещают потерю нового журнала.
+
+Следующий проверяемый source — root1b01765a627dd55e05ac5208c343ac80ba7238d4/Pulse5446397966d6fb2a1e8ae6b27d0e7d38674537c0;226 cases/129 leaf groups. Исходный snapshot f3de243 был передан, но не запускался: до сборки статическая проверка выявила, что DATA fixture C использовал нештатные пути/origin. Fixture исправлен под реальные правила ValidateTrainingCapacitance; новый snapshot размещён отдельно, условия E1 обновлены до первой canonical preparation. Ни старый runtime, ни работающий job не менялись.
