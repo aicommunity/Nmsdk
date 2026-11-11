@@ -19,6 +19,7 @@ from .native_evidence import equal, load, number, require
 from .native_pipeline_worker import audit_run_manifest, run_job, validate_job
 from .native_process_policy import policy_for_reservation
 from .model_identity import canonical_model_sha256 as digest
+from .n1_protocol_robustness import _signed as _resign
 from .process_runner import verify_runtime
 from .resource_reservations import Reservations
 from .stock_cold_characterization import jobs as characterization_jobs
@@ -196,7 +197,7 @@ def prepare(source, runtime_path, output):
 def recovery_declaration(job, name):
     """Upgrade only the explicit rejection policy; retain the measured objective."""
     validate_job('train', job)
-    require(job == _signed(job), 'stock_cold8_source_job_digest')
+    require(job == _resign(job), 'stock_cold8_source_job_digest')
     config = job['configuration']
     require(config['schema_version'] == 7 and len(config['model']['inputs']) == 4 and
         config['model']['normalization'] == 'N1' and
@@ -206,7 +207,7 @@ def recovery_declaration(job, name):
     changed = deepcopy(job)
     changed['configuration'].update(schema_version=8, run_id=name,
         invalid_measurement_recovery='advance_rejected_candidate_window')
-    changed = _signed(changed)
+    changed = _resign(changed)
     validate_job('preflight', changed);validate_job('train', changed)
     return changed
 

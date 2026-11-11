@@ -3,7 +3,7 @@ from copy import deepcopy
 import unittest
 
 from ..composite_configuration import project_training_configuration
-from ..native_calibration_worker import _signed
+from ..n1_protocol_robustness import _signed
 from ..native_evidence import EvidenceError
 from ..stock_candidate_window_study import recovery_declaration
 from .test_candidate_window_training_job import cold7, job
