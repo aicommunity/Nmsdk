@@ -1,0 +1,26 @@
+test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports (Scripts.StructTrain.TimeLearner.tests.test_recovery_console_reports.RecoveryConsoleReportsTest.test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports) ... ERROR
+
+======================================================================
+ERROR: test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports (Scripts.StructTrain.TimeLearner.tests.test_recovery_console_reports.RecoveryConsoleReportsTest.test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-recovery-console-reports-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 35, in plotting_runtime
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-recovery-console-reports-a1/Scripts/StructTrain/TimeLearner/tests/test_managed_native_pipeline_reports.py", line 35, in test_actual_frozen_patterns_have_readable_full_sample_soma_input_reports
+    render_pipeline_run(run/"run-manifest.json", report)
+  File "/media/user/Data/TimeLearnerRefactor/source-recovery-console-reports-a1/Scripts/StructTrain/TimeLearner/live_pipeline_reports.py", line 66, in render_pipeline_run
+    runtime = plotting_runtime();output.mkdir(parents=True, exist_ok=False)
+              ^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-recovery-console-reports-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 40, in plotting_runtime
+    raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: plotting_runtime_unavailable:No module named 'matplotlib'
+
+----------------------------------------------------------------------
+Ran 1 test in 39.112s
+
+FAILED (errors=1)
