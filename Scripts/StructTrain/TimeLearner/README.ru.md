@@ -4,6 +4,35 @@
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 
+Для сохранения закрытых заданий Linux `owned_python_job` поддерживает отдельную
+операцию `closed-primary-bundle` с привязанным SHA-256 manifest. Manifest задаёт
+полное множество файлов и glog-алиасов, точные kernel bindings всех сохранённых
+owned units и явные ограничения размера. Коллектор проверяет полное пространство
+имён и закрытие units до и после потокового создания lossless `primary.tar.xz`.
+Исходные файлы и результаты не изменяются; неизвестные ссылки, добавленные файлы,
+живые процессы и изменения первичных данных запрещают итоговое подтверждение.
+`primary-bundle-proof.json` подтверждает сбор байтов и закрытие процессов:
+он не подтверждает сходимость, научный PASS или публикацию в Git. Независимая
+проверка восстановления и Git closure остаются отдельными обязательными шагами.
+Windows этой операцией пока не поддерживается.
+
+`stock-candidate-window-study prepare COLD_CHARACTERIZATION --runtime-manifest RUNTIME
+--output JOBS` создаёт два stock N4/N1 cold7 задания по проверенным начальным
+наблюдениям. `preflight JOBS` и `train JOBS` требуют явные `--case`, `--controller`,
+`--runtime-manifest`, `--output`. Новое обучение само захватывает per-input references;
+характеристика задаёт только proposal windows. Исходный SyncTolerance=.02 сохранён.
+Линейный прогноз задержки является гипотезой; его нельзя считать измерением или
+доказательством сходимости. Runtime-приёмка нового pilot остаётся отдельной.
+
+`stock-cold-characterization prepare --topology both --output JOBS` объявляет
+восемь диагностических проб свежей `NSPNeuronGen`: Classic/Branch × четыре
+закреплённых импульса. `run --source JOBS --runtime-manifest RUNTIME.json
+--controller OWNED_CONTROLLER --output RESULT` использует native `probe` и
+managed leases. Проверяются эффективная stock-физика без LT-мембраны,
+неизменность графа и первичные данные. Это не Train: широкое диагностическое
+окно не становится окном обучения, а невалидное назначение пика сохраняется
+отдельно. Применение на сервере требует отдельной runtime-приёмки.
+
 `stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
 создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
 входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).

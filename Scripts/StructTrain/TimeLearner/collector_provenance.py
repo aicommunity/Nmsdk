@@ -88,6 +88,29 @@ def _frozen(path, maximum_bytes):
     return raw, {"source_path": str(path), "bytes": len(raw), "sha256": _sha(raw)}
 
 
+def frozen_digest(path, maximum_bytes):
+    """Hash bounded regular input without retaining its bytes in memory."""
+    require(type(maximum_bytes) is int and maximum_bytes > 0, "collector_invalid_size_budget")
+    path = _canonical(path)
+    before = path.lstat()
+    require(stat.S_ISREG(before.st_mode) and before.st_size <= maximum_bytes,
+            "collector_file_type_or_size")
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_BINARY", 0) | getattr(os, "O_NOFOLLOW", 0))
+    digest = hashlib.sha256();count = 0
+    with os.fdopen(descriptor, "rb") as stream:
+        require(_identity(before) == _identity(os.fstat(stream.fileno())),
+                "collector_file_changed_during_read")
+        while block := stream.read(1024*1024):
+            count += len(block)
+            require(count <= maximum_bytes, "collector_file_changed_during_read")
+            digest.update(block)
+        after_open = os.fstat(stream.fileno())
+    require(count == before.st_size and
+            _identity(before) == _identity(after_open) == _identity(path.lstat()),
+            "collector_file_changed_during_read")
+    return {"source_path": str(path), "bytes": count, "sha256": digest.hexdigest()}
+
+
 def _binding(request, binding):
     require(set(request) == {"kind", "schema_version", "attempt_id", "unit", "boot_id", "uid",
             "controller", "executable", "arguments", "working_directory", "runtime_fingerprint",

@@ -12,9 +12,14 @@ from ..recognition_metrics import load_evaluation
 
 
 class ManagedNativeCalibrationReportsTest(unittest.TestCase):
+    case_names = ("Classic-v1", "Classic-v2", "Branch-v1", "Branch-v2")
+
+    def report_bindings(self):
+        return (os.environ.get("TIMELEARNER_MANAGED_CALIBRATION_PRIMARY"),
+                os.environ.get("TIMELEARNER_MANAGED_CALIBRATION_REPORTS"))
+
     def test_every_declared_matrix_and_soma_has_full_sample_input_overlays(self):
-        source = os.environ.get("TIMELEARNER_MANAGED_CALIBRATION_PRIMARY")
-        output = os.environ.get("TIMELEARNER_MANAGED_CALIBRATION_REPORTS")
+        source, output = self.report_bindings()
         if not source or not output:
             self.skipTest("requires actual completed managed calibration runs and a new report cache")
         from PIL import Image
@@ -45,7 +50,7 @@ class ManagedNativeCalibrationReportsTest(unittest.TestCase):
                     self.assertTrue(pdf.read_bytes().startswith(b"%PDF-"))
             return len(pairs)
 
-        for name in ("Classic-v1", "Classic-v2", "Branch-v1", "Branch-v2"):
+        for name in self.case_names:
             result = load(source/name/"result.json")
             phases = ("measured-grid", "silent-nonseparable", "fresh-frozen")
             if "changed_threshold_rollback" in result:

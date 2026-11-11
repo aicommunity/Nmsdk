@@ -66,7 +66,8 @@ class ManagedNativeCalibrationTest(unittest.TestCase):
             capacity={"slots": 1, "memory_bytes": 6*1024**3, "disk_bytes": 1024**3, "tasks": 512})
         lease = registry.reserve("managed-calibration-"+name,
             [{"path": str(root/"runs"), "access": "write"}],
-            demands={"slots": 1, "memory_bytes": 4*1024**3+512*1024**2,
+            demands={"slots": 1, "memory_bytes": 4*1024**3+
+                     getattr(self, 'controller_reserve_bytes', 512*1024**2),
                      "disk_bytes": 512*1024**2, "tasks": 256},
             controller_directory=self.spec["controller"], ttl_seconds=1800)
         policy = policy_for_reservation(registry, lease["token"], memory_bytes=4*1024**3, tasks=64)

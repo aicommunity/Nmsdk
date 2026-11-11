@@ -45,7 +45,8 @@ class ManagedNativePipelineTest(unittest.TestCase):
         root = self.output/name
         root.mkdir()
         capacity = {"slots": 1, "memory_bytes": 6*1024**3, "disk_bytes": 1024**3, "tasks": 512}
-        demands = {"slots": 1, "memory_bytes": 4*1024**3+256*1024**2,
+        demands = {"slots": 1, "memory_bytes": 4*1024**3+
+                   getattr(self, 'controller_reserve_bytes', 256*1024**2),
                    "disk_bytes": 512*1024**2, "tasks": 256}
         registry = Reservations(root/"leases.sqlite3", capacity=capacity, managed_units=True)
         lease = registry.reserve("managed-cold-pipeline-"+name,
@@ -124,7 +125,12 @@ class ManagedNativePipelineTest(unittest.TestCase):
         self.assertEqual(execution["training_outcome"], "exact")
         solo_path = trained/"native/train_learned_state.json"
         solo = load(solo_path)
-        self.assertEqual(solo["configuration"]["run_id"], job["configuration"]["run_id"]+"/session/1")
+        if job["configuration"]["schema_version"] in (6, 7):
+            # Composite cold6/cold7 preserve the complete initial declaration.
+            # Scalar service configurations use a separate session identity.
+            self.assertEqual(solo["configuration"], job["configuration"])
+        else:
+            self.assertEqual(solo["configuration"]["run_id"], job["configuration"]["run_id"]+"/session/1")
         export = load(templates/(name+"-export/input/job.json"))
         export["source_solo"] = solo
         exported = invoke("export", export, solo_path)

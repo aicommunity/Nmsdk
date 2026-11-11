@@ -17,7 +17,7 @@ import threading
 import time
 import traceback
 
-from .collector_provenance import _canonical, _frozen, _git_blob, _json
+from .collector_provenance import _canonical, _frozen, _git_blob, _json, frozen_digest
 from .contained_process import inspect
 from .contained_runner import execute
 from .native_evidence import EvidenceError, require
@@ -27,6 +27,7 @@ from .runtime import file_record, resolved_libraries, runtime_content_identity, 
 
 SOURCE = Path(__file__).resolve().parents[3]
 _BASES = {Path('/home/user/timelearner-refactor'), Path('/media/user/Data/TimeLearnerRefactor')}
+_VALIDATION_KINDS = ('python-validation', 'python-controller-validation')
 
 
 def _write(path, value):
@@ -71,9 +72,11 @@ def validate_request(value):
             and all(type(n) is int and n > 0 for n in value['disk'].values()), 'owned_job_disk_schema')
     operation = value['operation']
     require(type(operation) is dict and operation.get('kind') in
-            ('python-validation', 'duplicate-static-archives', 'native-canonical-preparation'), 'owned_job_operation')
-    if operation['kind'] == 'python-validation':
-        require(set(operation) == {'kind', 'source', 'suite', 'fixtures'} and
+            (*_VALIDATION_KINDS, 'duplicate-static-archives', 'native-canonical-preparation',
+             'closed-primary-bundle'), 'owned_job_operation')
+    if operation['kind'] in _VALIDATION_KINDS:
+        fields = {'kind', 'source', 'suite', 'fixtures'}
+        require(set(operation) in (fields, fields | {'fixture_byte_limits'}) and
                 type(operation['source']) is dict and set(operation['source']) == {'path', 'commit'} and
                 type(operation['fixtures']) is dict and all(type(k) is str and
                 k.startswith(('TIMELEARNER_', 'TL_')) and type(v) is str for k, v in operation['fixtures'].items()),
@@ -81,6 +84,19 @@ def validate_request(value):
         require(type(operation['source']['path']) is str and Path(operation['source']['path']).is_absolute() and
                 _commit(operation['source']['commit']), 'owned_job_validation_source_binding')
         _file_binding(operation['suite'])
+        if 'fixture_byte_limits' in operation:
+            limits = operation['fixture_byte_limits']
+            require(type(limits) is dict and set(limits) ==
+                    {'maximum_file_bytes', 'maximum_total_bytes'} and
+                    all(type(v) is int and 0 < v < 2**63 for v in limits.values()) and
+                    limits['maximum_file_bytes'] <= limits['maximum_total_bytes'],
+                    'owned_job_fixture_byte_limits')
+        if operation['kind'] == 'python-controller-validation':
+            require(operation['source']['commit'] == value['tool_commit'],
+                    'owned_job_controller_validation_requires_same_commit')
+    elif operation['kind']=='closed-primary-bundle':
+        require(set(operation) == {'kind', 'manifest'}, 'owned_job_primary_bundle_schema')
+        _file_binding(operation['manifest'])
     elif operation['kind']=='native-canonical-preparation':
         require(set(operation)=={'kind','plan'},'owned_job_canonical_schema')
         _file_binding(operation['plan'])
@@ -94,13 +110,17 @@ def _paths(request):
     base = _canonical(Path(request['execution_root']))
     require(socket.gethostname() == request['worker_host'] and SOURCE.is_relative_to(base), 'owned_job_worker_changed')
     operation = request['operation']
-    files = ([operation['suite']] if operation['kind']=='python-validation' else
+    files = ([operation['suite']] if operation['kind'] in _VALIDATION_KINDS else
+             [operation['manifest']] if operation['kind']=='closed-primary-bundle' else
              [operation['plan']] if operation['kind']=='native-canonical-preparation' else [operation['plan'],operation['review']])
     for row in files:
         require(Path(row['path']).is_relative_to(base), 'owned_job_input_outside_execution_root')
-    if operation['kind'] == 'python-validation':
+    if operation['kind'] in _VALIDATION_KINDS:
         for path in [operation['source']['path'], *operation['fixtures'].values()]:
             require(Path(path).is_absolute() and Path(path).is_relative_to(base), 'owned_job_source_or_fixture_outside_root')
+        if operation['kind'] == 'python-controller-validation':
+            require(_canonical(Path(operation['source']['path'])) == SOURCE,
+                    'owned_job_controller_validation_requires_same_source')
     _canonical(base/'readbacks')
     return base, _canonical(base/'readbacks'/request['job_id'], exists=False)
 
@@ -143,17 +163,22 @@ def _ancestry():
     return result
 
 
-def _fixture_snapshot(suite, bindings):
+def _fixture_snapshot(suite, bindings, *, maximum_file_bytes=64*1024**2, maximum_total_bytes=None):
     from .validation import _digest
     require(type(suite.get('fixtures')) is dict and set(suite['fixtures']) == set(bindings),
             'owned_job_fixture_bindings')
-    result = {}
+    result = {};total_bytes = 0
     for name, declaration in suite['fixtures'].items():
         root = _canonical(Path(bindings[name]));pattern = declaration['pattern']
         require(type(pattern) is str and pattern and not Path(pattern).is_absolute() and
                 '..' not in Path(pattern).parts and '\\' not in pattern, 'owned_job_fixture_pattern')
-        records = {p.relative_to(root).as_posix(): _frozen(p, 64*1024**2)[1]
-                   for p in sorted(root.glob(pattern))}
+        records = {}
+        for path in sorted(root.glob(pattern)):
+            record = frozen_digest(path, maximum_file_bytes)
+            total_bytes += record['bytes']
+            require(maximum_total_bytes is None or total_bytes <= maximum_total_bytes,
+                    'owned_job_fixture_total_bytes_exceeded')
+            records[path.relative_to(root).as_posix()] = record
         fingerprint = _digest({p: r['sha256'] for p, r in records.items()})
         require(records and len(records) == declaration['files'] and
                 fingerprint == declaration['fingerprint'], 'owned_job_fixture_content_changed')
@@ -199,11 +224,14 @@ def _worker(request_path):
     os.environ['PYTHONDONTWRITEBYTECODE'] = '1';sys.dont_write_bytecode = True
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     operation = request['operation'];resources = [{'path': str(base), 'access': 'write'}]
-    if operation['kind'] == 'python-validation':
+    if operation['kind'] in _VALIDATION_KINDS:
         resources = _validation_resources(operation, job)
     elif operation['kind']=='native-canonical-preparation':
         from .native_canonical_preparation import resources as canonical_resources
         resources=canonical_resources(_pinned(operation['plan']),job,operation['plan']['path'])
+    elif operation['kind']=='closed-primary-bundle':
+        from .closed_primary_bundle import resources as bundle_resources
+        resources=bundle_resources(_pinned(operation['manifest']),job,operation['manifest']['path'],SOURCE)
     token = None;stop = threading.Event();errors = [];thread = None;passed = False;before = None
     def emit(name, value):
         _write(output/name, value)
@@ -220,12 +248,13 @@ def _worker(request_path):
                     errors.append(str(error));return
         thread = threading.Thread(target=heartbeat, daemon=True);thread.start()
         before = _source_snapshot(SOURCE, request['tool_commit']);emit('tool-source-before.json', before)
-        if operation['kind'] == 'python-validation':
+        if operation['kind'] in _VALIDATION_KINDS:
             source = operation['source'];snapshot = _source_snapshot(source['path'], source['commit'])
             emit('validation-source-before.json', snapshot)
             suite = _pinned(operation['suite'])
             require(type(suite.get('expected_test_ids')) is list and suite['expected_test_ids'], 'owned_job_suite_inventory')
-            fixtures = _fixture_snapshot(suite, operation['fixtures']);emit('fixtures-before.json', fixtures)
+            fixture_limits = operation.get('fixture_byte_limits', {})
+            fixtures = _fixture_snapshot(suite, operation['fixtures'], **fixture_limits);emit('fixtures-before.json', fixtures)
             arguments = [sys.executable, '-B', '-m', 'Scripts.StructTrain.TimeLearner.validation',
                          operation['suite']['path'], '--output', str(output/'validation')]
             for name, path in operation['fixtures'].items():
@@ -233,21 +262,43 @@ def _worker(request_path):
             environment = dict(os.environ)
             for name in ('PYTHONPATH', 'PYTHONHOME'):
                 environment.pop(name, None)
-            result = subprocess.run(arguments, cwd=source['path'], env=environment)
-            emit('validation-process.json', {'returncode': result.returncode, 'arguments': arguments})
+            if operation['kind'] == 'python-controller-validation':
+                # Managed reservations identify the contained main PID as the
+                # lease owner. A child interpreter cannot borrow that identity.
+                # Same-source/commit checks above also prevent cached imports
+                # from silently selecting a different validation implementation.
+                from .validation import run_suite
+                record = run_suite(suite, operation['fixtures'], output/'validation')
+                returncode = 0 if record['assertion_status'] == 'passed' else 1
+                emit('validation-process.json', {'returncode': returncode,
+                    'execution_mode': 'contained_controller_in_process', 'pid': os.getpid(),
+                    'module': 'Scripts.StructTrain.TimeLearner.validation'})
+            else:
+                result = subprocess.run(arguments, cwd=source['path'], env=environment)
+                returncode = result.returncode
+                emit('validation-process.json', {'returncode': returncode, 'arguments': arguments})
             require(_source_snapshot(source['path'], source['commit']) == snapshot, 'owned_job_validation_source_changed')
             emit('validation-source-after.json', snapshot)
-            require(_fixture_snapshot(suite, operation['fixtures']) == fixtures, 'owned_job_fixture_epoch_changed')
+            require(_fixture_snapshot(suite, operation['fixtures'], **fixture_limits) == fixtures, 'owned_job_fixture_epoch_changed')
             emit('fixtures-after.json', fixtures)
             require(_pinned(operation['suite']) == suite, 'owned_job_suite_changed_during_run')
             record = _json(_frozen(output/'validation/result.json', 16*1024**2)[0])
-            require(result.returncode == 0 and record['assertion_status'] == 'passed' and
+            require(returncode == 0 and record['assertion_status'] == 'passed' and
                     record['kind'] == 'timelearner_python_validation_result' and record['schema_version'] == 1 and
                     record['suite_id'] == suite['suite_id'] and record['package_fingerprint'] == suite['package_fingerprint'] and
                     record['expected_test_ids'] == suite['expected_test_ids'] and
                     _json(_frozen(output/'validation/suite.json', 16*1024**2)[0]) == suite and
                     record['executed_tests'] == len(suite['expected_test_ids']) and not record['skipped'] and
                     not record['failures'] and not record['errors'], 'owned_job_validation_failed')
+        elif operation['kind']=='closed-primary-bundle':
+            from .closed_primary_bundle import collect
+            manifest = _pinned(operation['manifest']);emit('primary-bundle-manifest.json', manifest)
+            def bundle_guard():
+                require(not errors, 'owned_job_heartbeat_failed')
+                registry.validate_paths(token)
+                require(shutil.disk_usage(base).free >= request['disk']['minimum_free_bytes'], 'owned_job_disk_floor')
+            collect(manifest, output/'packed-primary', bundle_guard, emit)
+            require(_pinned(operation['manifest']) == manifest, 'owned_job_bundle_manifest_changed')
         elif operation['kind']=='native-canonical-preparation':
             from .native_canonical_preparation import produce
             plan=_pinned(operation['plan']);emit('canonical-plan.json',plan)
