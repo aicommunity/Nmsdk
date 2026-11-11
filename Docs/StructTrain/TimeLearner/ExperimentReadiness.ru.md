@@ -1,22 +1,12 @@
 # Готовность к научным экспериментам — 11.11.2026
 
-**Оперативное уточнение:** [проверка на трёх машинах](ThreeWorkerRejectedSearch-20261111.ru.md)
-дала на Elder и M40 одинаковые 19 PASS / 10 FAIL из реально выполненных29;
-попытки не приняты, все owned groups закрыты, reservations released.
-Исправлены граница исключений NaN и две ошибки fixtures; новый B1 разделяет
-каждый случай в отдельный leaf; после успешной canonical preparation новый
-SDK build/native29 запущен на обоих Linux workers. Его runtime-приёмка ещё
-впереди. Windows .14 завершила компиляцию прежнего subject root04f/Pulse558
-сreturncode0, но исходный outcome descendants_remaining остаётся отказом.
-Независимый closed-build audit прошёл; отдельный diagnostic19 для переносимости
-ранее прошедших случаев завершён19/19 valid PASS, все native процессы закрыты.
-Полный primary207files опубликован компактным Git pack и побайтно проверен
-после переноса; независимый semantic replay ещё нужен. Scientific worker
-admissionfalse; этот subset не подменяет полный29 B1 на обоих Linux workers.
-Закрытый native допуск Missing/Ambiguous Search реализован отдельно;
-продвижение поиска по нему и новая сериализуемая recovery policy ещё не готовы.
-Runtime2 остаётся retry-only. Приведённые ниже принятые результаты относятся
-к предыдущим версиям, а не к новой реализации.
+****Оперативное уточнение:** исправленный B1 на Elder и M40 завершён **29/29 PASS** на каждом, все outer/child groups закрыты, reservations released. Первоначальные19 PASS/10 FAIL остаются отдельными отрицательными попытками. [История и точные readbacks](ThreeWorkerRejectedSearch-20261111.ru.md). Полный B1 primary инвентаризирован:1267 файлов на каждом сервере; его compact-публикация ещё не завершена.
+
+Новый переход поиска после закрытого Missing/Ambiguous реализован в ядре с явной policy AdvanceRejectedCandidateWindow. C1 root8fac40bb/Pulse1c0fa37 содержит145 cases (98 прежних decision,29 factory,18 новых native recovery),48leaf gates. Canonical preparation прошла на обоих Linux workers; SDK сборки запущены, результата145 пока нет. [Контракт и ограничения ядра](CandidateWindowRecoveryCore-20261111.ru.md). Service delivery, versioned wire/package/history и независимый replay ещё не готовы. Runtime2 остаётся retry-only; запуск дорогого Train с новой policy пока не разрешён.
+
+Windows .14 доступна и сейчас свободна. Её диагностический набор предыдущего subject завершён19/19 valid PASS; все native процессы закрыты. Исходный build outcome descendants_remaining сохранён, independent closed-build audit принят, scientific worker admission=false. Полный primary207files опубликован компактным Git pack и побайтно проверен; semantic replay ещё нужен. Windows subset не заменяет Linux B1 и не подтверждает текущий C1.
+
+Приведённые ниже принятые результаты относятся к соответствующим прежним версиям, а не к ещё не проверенному новому core.
 
 Новая SDK-комбинация fcfd8bd/Pulse5f1a4ac проверена на Elder и M40: selected native119 принят 119/119 на каждом, все owned groups закрыты и leases released. Свежие stock N4 пробы также завершены 8/8 valid/complete на каждом. Windows .14: native100 прошёл 100/100; исходный SDK build outcome descendants_remaining сохранён, scientific admission пока false. [Обновлённый протокол и readbacks](https://github.com/aicommunity/Nmsdk/blob/6f982aac50c70c1d6a6be93a7f95df1852f24a4a/Docs/StructTrain/TimeLearner/N1GeometryFullSDKProgress-20261111.ru.md). Новый Classic N4/N1 Train completed/0, но обучение invalid_observation: после L=54 прогнозное окно не содержит вершины. Сертификат null, Test не запускался. Это дефект/ограничение измерения, не отрицательная классификация и не доказательство физической недостижимости. [Разбор и первичный readback решений](https://github.com/aicommunity/Nmsdk/blob/68097dd8a/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1AfterClassicTrainA1-20261111/RESULT.ru.md). [Временной отчёт Classic с фактическими full/omission графиками](https://github.com/aicommunity/Nmsdk/blob/92711d75d/Docs/StructTrain/TimeLearner/ClassicWindowTemporal-20261111.ru.md) готов: production проверки2/2,24 фигуры в кэше M40,6 выбранных PNG просмотрены и сохранены в Git. Независимый [replay полного окна](https://github.com/aicommunity/Nmsdk/blob/da60ef538/Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111/replay.json) прошёл1/1: L=3 valid в обоих окнах, L=54 missing→ambiguous. Расширение окна не восстанавливает допустимый пик input0. Source review подтвердил, что AdvanceUnassignedBurst не поддержан текущим composite/candidate-window runtime2; [конкретный контракт реализации](https://github.com/aicommunity/Nmsdk/blob/da60ef538/Docs/StructTrain/TimeLearner/CandidateWindowRecoveryImplementation-20261111.ru.md) зафиксирован, но функция ещё не реализована. На Elder контрольный SDK исходного N1 собран, выбранные native roundtrip2/2 passed; all owned groups closed, lease released. Это подготовка строгого A/B, а не сравнение качества обучения. [Полный primary нового Classic Train опубликован](https://github.com/aicommunity/Nmsdk/blob/bd4fca8f47b767a0b5670c4ed778a6680c155650/Docs/StructTrain/TimeLearner/N1ClassicTrainPrimary-20261111.ru.md):463 members,10.2MB XZ вместо259MB raw. Независимое восстановление на Elder принято1/1:463/463 members, package/summary/stock physics, повреждённый derived CSV отвергнут; source archive unchanged. Каталог6 исходных bundle-файлов сохраняет прежний Git tree; производные receipts размещены отдельно. Typed composite recovery остаётся не реализован. Итоговая научная матрица ещё не завершена.
 

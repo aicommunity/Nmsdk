@@ -1,6 +1,32 @@
 # Параллельная проверка rejected-search на трёх машинах
 
-## Обновление после первых завершённых Linux-проверок
+## Текущее состояние после B1 и запуска C1
+
+Исправленный B1 завершён на обоих Linux workers: **29/29 PASS**, по29
+отдельных leaf gates, job_validation_passed=true. Outer и все29 child groups
+закрыты, исходные reservations released, record_errors=[]. Точные результаты:
+[M40](ValidationPlans/M40RejectedSearchAdmissionB1-20261111/completed-tests.json),
+[Elder](ValidationPlans/ElderRejectedSearchAdmissionB1-20261111/completed-tests.json).
+Это приёмка фабрики закрытых rejected measurements, не всего алгоритма обучения.
+
+Read-only inventory полного B1 обнаружил на каждом сервере1267 файлов:
+85096988bytes на M40 и84852590bytes на Elder. Инвентаризация проверяет source,
+runtime, полное множество тестов и закрытие процессов. Compact primary ещё
+собирается; наличие инвентаризации не означает публикацию первичных данных.
+
+Следующий C1 использует root8fac40bb545b314d606e41bec8a5f5b86e2dea46 /
+Pulse1c0fa37d2141a9dfa1a988c2c7ef14fd33e6efd0:98 прежних decision cases,
+29 factory cases и18 новых native core recovery cases, всего145 /48leaf gates.
+Canonical preparation прошла на обоих workers. SDK сборки запущены отдельно:
+M40 PID3969723/start346223644, Elder PID2302635/start395680605.
+Результата145 пока нет. Service/wire/persistence recovery остаются открыты;
+новые дорогие Train с этой policy пока запрещены.
+
+Windows .14 доступна и свободна после завершённых19 диагностических cases
+предыдущей версии. Для текущего C1 её сборка не подготовлена. Завершённые
+Windows задачи нельзя учитывать как текущую вычислительную загрузку.
+
+## История первых завершённых Linux-проверок
 
 Исходные Elder A2 и M40 A3 завершены одинаково: SDK собран, реально выполнены
 29/29 случаев, 19 PASS / 10 FAIL. Gate execution=process_error, validity=valid;
@@ -23,8 +49,7 @@ outer и единственного child cgroup, released reservation; очис
 * Два Ambiguous fixtures: заявленные left/right guards по 2 с выводили
   предлагаемое окно за разрешённый envelope. Left guard=0 / right guard=1 с
   задаются до reference capture; clipping и подбор по candidate waveform
-  не добавлялись. Реальное получение Ambiguous в исправленном fixture ещё
-  должно быть подтверждено.
+  не добавлялись. Получение Ambiguous затем подтверждено в B1 на обоих workers.
 * Два budget fixtures: ошибочно требовался только флаг общего attempt budget.
   Production NativeMatchedOmissionGroup отдельно выставляет BudgetExhausted
   при своём deadline. Исправленный тест требует typed group/attempt exhaustion
@@ -37,7 +62,7 @@ preparation принята на M40 за84.90с и Elder за67.71с; запущ
 SDK build/native29. Подтверждены live supervisors M40 PID3780876/start345701433
 и Elder PID2115216/start395158404 с работающими outer kernel groups. Их точные
 launch/status receipts сохранены в ValidationPlans/*RejectedSearchAdmissionB1.
-Пока эти правки не получили runtime-приёмку.
+Этот снимок запуска предшествовал runtime-приёмке B1, указанной выше.
 
 Windows build A1 относится к прежнему root04f/Pulse558, а не к исправленному
 subject. Компиляция/линковка завершились сreturncode0 за2182.45с, но исходный
