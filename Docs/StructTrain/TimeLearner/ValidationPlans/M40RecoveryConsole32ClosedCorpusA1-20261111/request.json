@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-recovery-console32-closed-corpus-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 268435456
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recovery-console32-closed-corpus-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecoveryConsole32ClosedCorpusA1-20261111/manifest.json",
+      "sha256": "f21c042e6fd0e91ba3b64196e816f72888242a54254f4dd0d480b5bf10683b0c"
+    }
+  }
+}
