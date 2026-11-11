@@ -1,6 +1,6 @@
 # Восстановление поиска composite/candidate-window: контракт реализации
 
-Статус: открытый подэтап7, ещё не реализован и не принят. Основание — [реальные N4 графики](ClassicWindowTemporal-20261111.ru.md) и независимый [replay](../../../Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111/replay.json): L=54 missing в прогнозном окне, ambiguous в полном. Переход к глобальному максимуму или ослабление назначения не допускается.
+Статус: открытый подэтап7. В отдельной ветке реализован фундамент native-допуска отказа; серверная проверка ещё не выполнена. Переход search cursor, wire/config policy, persistence и их приёмка остаются не реализованы. Основание — [реальные N4 графики](ClassicWindowTemporal-20261111.ru.md) и независимый [replay](../../../Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111/replay.json): L=54 missing в прогнозном окне, ambiguous в полном. Переход к глобальному максимуму или ослабление назначения не допускается.
 
 ## Фактический разрыв API
 
@@ -37,4 +37,4 @@ BoundedTraining.cpp: ValidateCandidateWindowTrainingConfiguration отклоня
 
 ## Границы
 
-Общая Rdk lifecycle, native scheduler и true-return Build/Reset/Calculate не меняются. Никаких nested Calculate, динамических prototype patches, fallback C или новых общих амплитудных целей. Пока typed policy и её readers не реализованы, новый дорогой Train с ней не запускать. Отдельно продолжается контрольная SDK-сборка исходного N1 на Elder, source root5ba0a2e81759a28f378117757aa3a5b91f1c57ab / Pulsec10206d5e338792d42b58ab28e48e7364b07e481.
+Общая Rdk lifecycle, native scheduler и true-return Build/Reset/Calculate не меняются. Никаких nested Calculate, динамических prototype patches, fallback C или новых общих амплитудных целей. Пока typed policy и её readers не реализованы, новый дорогой Train с ней не запускать. Контрольная SDK-сборка исходного N1 на Elder завершена (2/2 выбранные native roundtrip, не полный119),, source root5ba0a2e81759a28f378117757aa3a5b91f1c57ab / Pulsec10206d5e338792d42b58ab28e48e7364b07e481.

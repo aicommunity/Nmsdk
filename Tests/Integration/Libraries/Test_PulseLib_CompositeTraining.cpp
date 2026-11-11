@@ -55,6 +55,10 @@ static_assert(!std::is_default_constructible_v<PreparedCompositeMeasurement>);
 static_assert(!std::is_default_constructible_v<ValidatedCompositeMeasurement>);
 static_assert(!std::is_aggregate_v<PreparedCompositeMeasurement>);
 static_assert(!std::is_aggregate_v<ValidatedCompositeMeasurement>);
+static_assert(!std::is_default_constructible_v<RejectedCompositeMeasurement>);
+static_assert(!std::is_aggregate_v<RejectedCompositeMeasurement>);
+static_assert(!std::is_constructible_v<RejectedCompositeMeasurement,PreparedCompositeMeasurement,
+    std::shared_ptr<const CandidateWindowReferenceSet>,DeclaredWindowBasinValidity,std::string,std::function<void()>>);
 static_assert(!std::is_default_constructible_v<DecodedNativeCompositeArchive>);
 static_assert(!std::is_aggregate_v<DecodedNativeCompositeArchive>);
 static_assert(!std::is_default_constructible_v<CompositePortableTrainingProof>);
@@ -81,7 +85,7 @@ public:
     std::map<std::string,ValidatedProbeMeasurement> observedScalars;
     std::vector<double> groupBegins;
     unsigned frequency;std::size_t rawSamples=0,preparations=0;
-    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false):frequency(hz) {
+    NativeCompositeFixture(unsigned hz=2000,bool merged=false,std::size_t groupBudget=64,bool bindC0=false,bool n0=false,bool connectedNeed=false,std::size_t dimension=2,double wallBudget=0.,bool distinctAttachments=false,double probeDuration=0.,int maximumCableLength=8):frequency(hz) {
         const auto& core=NmsdkTests::InitEngineForPulseLibTests();storage=core.storage;environment=core.environment;
         environment->DestroyModel();environment->SetUseIndTimeStepFlag(false);environment->GetTime().SetTime(0);
         Require(environment->CreateModel("NModel"),"composite_fixture_model");model=dynamic_pointer_cast<UNet>(environment->GetModel());
@@ -97,7 +101,7 @@ public:
         UEPtr<UContainer> component=owner;Require(model->AddComponent(component)!=ForbiddenId,"composite_fixture_attach");
         NativeModelSpec s;s.branch=branch;s.frequencyHz=hz;s.neuronClass=registered.neuronClass;
         s.normalization=n0?Normalization::SynapseCount:Normalization::TipResistance;
-        s.editPolicy.normalization=s.normalization;s.editPolicy.maximumCableLength=8;
+        s.editPolicy.normalization=s.normalization;s.editPolicy.maximumCableLength=maximumCableLength;
         for(std::size_t i=0;i<dimension;++i){s.inputs.push_back({distinctAttachments?int(dimension-i):(i+1==dimension?1:2),1,{}});s.initialIsi.push_back(i?((merged && i==1)?.001:.08):.01);}
         modelSpec=s;
         const auto built=owner->ConstructNativeModel(s);Require(built.status==NativeModelBuildStatus::Constructed,built.reason.c_str());
@@ -122,7 +126,7 @@ public:
             generator->FrequencyDeviation.GetData(),generator->UseTransitSignal.GetData(),generator->UsePatternOutput.GetData()};
         double onset=0.;CompositeMeasurementContract contract;for(double isi:s.initialIsi){onset+=isi;contract.inputWindows.push_back({onset-.001,onset+.06});}
         if(dimension==2)contract.inputWindows.front()={.009,.07}; // Preserve the frozen two-input fixture bit-for-bit.
-        const double duration=onset+.08;
+        const double duration=probeDuration>0.?probeDuration:onset+.08;
         if(distinctAttachments)for(auto& w:contract.inputWindows)w.endOffset=std::min(w.beginOffset+.121,duration);
         auto& context=contract.contextPolicy;context.timeComparisonTolerance=1e-10;context.baselineAbsolute=1e-12;
         context.repeatabilityAbsolute=1e-10;context.influenceAbsolute=1e-6;
@@ -1720,7 +1724,8 @@ TEST(NativeCandidateWindowBanks,ActualPreparedWrongBankDescriptorRejected){Actua
 
 namespace {
 template<class Owner> void EnableCandidateWindow(NativeCompositeFixture<Owner>& f,const std::string& attemptId="candidate-attempt",
-    std::size_t primaryBudget=128u*1024u*1024u) {
+    std::size_t primaryBudget=128u*1024u*1024u,
+    std::function<void(CandidateWindowMeasurementContract&)> configure={}) {
     f.attempt.reset();const auto fixed=*f.protocol.compositeMeasurement;
     f.protocol.schemaVersion=5;f.protocol.compositeMeasurement.reset();CandidateWindowMeasurementContract c;
     c.contextPolicy=fixed.contextPolicy;c.geometryPolicy=fixed.geometryPolicy;c.referenceInputWindows=fixed.inputWindows;
@@ -1736,6 +1741,7 @@ template<class Owner> void EnableCandidateWindow(NativeCompositeFixture<Owner>& 
         input.hardLastFrame=f.prototype.specification.maximumSamples-1;
         input.maximumWindowFrames=f.frequency/20;
     }
+    if(configure)configure(c);
     f.protocol.candidateWindowMeasurement=c;
     const auto groups=64u;const auto n=f.protocol.inputs.size();
     f.attempt=std::make_unique<NativeCompositeTrainingAttempt>(*f.owner,f.protocol,
@@ -1772,11 +1778,11 @@ template<class Owner> void SaveCandidateWindowGroup(NativeCompositeFixture<Owner
     SaveCompositeBoundary(f,directory.c_str());
 }
 template<class Owner> CapturedReferences CaptureWindowReferences(NativeCompositeFixture<Owner>& f,bool save=true,const std::string& prefix="reference",
-    const std::string& attemptId="candidate-attempt") {
+    const std::string& attemptId="candidate-attempt",double groupLimit=2.) {
     f.referenceMeasurements.clear();
     for(std::size_t i=0;i<f.protocol.inputs.size();++i) {
         const std::string run=attemptId+"/capture/1";
-        f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference);
+        f.Run(f.Request(i,run,run+"/"+std::to_string(i)),CompositeMeasurementPurpose::Reference,{},{},groupLimit);
         if(save)SaveCandidateWindowGroup(f,prefix+"-"+std::to_string(i));
         Require(bool(f.attempt->Measurement()),f.attempt->RejectionReason().c_str());
         f.referenceMeasurements.push_back(*f.attempt->Measurement());EXPECT_EQ(f.attempt->CandidateWindowReferences(),nullptr);
@@ -3903,3 +3909,151 @@ TEST(NativeObservedRequest,ClassicConnectedPartialStopKeepsCancelledRaw){Observe
 TEST(NativeObservedRequest,BranchConnectedPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearnerBranch>(true,1,true);}
 TEST(NativeObservedRequest,ClassicDirectPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearner>(false,1,true);}
 TEST(NativeObservedRequest,BranchDirectPartialStopKeepsCancelledRaw){ObservedRequestRestart<NNeuronTimeLearnerBranch>(false,1,true);}
+
+namespace {
+template<class Owner> void PrepareRejectedSearch(NativeCompositeFixture<Owner>& f,bool ambiguous,bool enabled=true) {
+    EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
+        if(ambiguous)for(auto& policy:contract.candidateWindowPolicy.inputs) {
+            policy.delayFramesPerSegment=0;
+            policy.baseLeftGuardFrames=policy.baseRightGuardFrames=2*f.frequency;
+            policy.hardLastFrame=18*f.frequency/10-1;
+            policy.maximumWindowFrames=18*f.frequency/10;
+        }
+        else {
+            auto& policy=contract.candidateWindowPolicy.inputs[0];
+            policy.delayFramesPerSegment=3*f.frequency/100;
+            policy.baseLeftGuardFrames=policy.baseRightGuardFrames=2;
+        }
+    });
+    if(enabled)f.attempt->EnableRejectedSearchAdmission();
+    const double limit=ambiguous?10.:2.;
+    (void)CaptureWindowReferences(f,false,"reference","candidate-attempt",limit);
+    Require(!f.attempt->RejectedMeasurement(),"reference_capture_minted_rejection_capability");
+    auto parameters=f.owner->ReadNativeParameters();parameters[0].length=ambiguous?54:3;
+    const auto edited=f.owner->ApplyNativeParameters(parameters);
+    Require(edited.status==NativeEditStatus::Applied,edited.reason.c_str());
+    f.Run(f.Request(0,"candidate-attempt","candidate-attempt/search/1",1),
+        CompositeMeasurementPurpose::Search,{},{},limit);
+    Require(f.attempt->Selection() && f.attempt->Selection()->geometry &&
+        f.attempt->Selection()->geometry->validity==(ambiguous?DeclaredWindowBasinValidity::Ambiguous:DeclaredWindowBasinValidity::Missing),
+        f.attempt->RejectionReason().c_str());
+    Require(!f.attempt->Measurement(),"rejected_search_exposed_scalar_measurement");
+}
+template<class Owner> void RejectedSearchCapability(bool ambiguous,bool enabled=true,unsigned hz=2000) {
+    NativeCompositeFixture<Owner> f(hz,false,64,false,true,false,2,1800.,false,ambiguous?1.8:0.,ambiguous?64:8);
+    ASSERT_NO_FATAL_FAILURE(PrepareRejectedSearch(f,ambiguous,enabled));
+    SaveCandidateWindowGroup(f,std::string("rejected-")+::testing::UnitTest::GetInstance()->current_test_info()->name());
+    if(!enabled) {
+        EXPECT_FALSE(f.attempt->RejectedMeasurement());
+        EXPECT_THROW(f.attempt->EnableRejectedSearchAdmission(),std::invalid_argument);
+        return;
+    }
+    ASSERT_TRUE(f.attempt->RejectedMeasurement())<<f.attempt->RejectionReason();
+    const auto proof=*f.attempt->RejectedMeasurement();
+    EXPECT_NO_THROW(proof.RequireCurrent());
+    EXPECT_EQ(proof.Validity(),ambiguous?DeclaredWindowBasinValidity::Ambiguous:DeclaredWindowBasinValidity::Missing);
+    EXPECT_EQ(proof.Prepared().GroupId(),f.attempt->Record().groupId);
+    EXPECT_EQ(proof.ContentId().size(),64u);
+    EXPECT_EQ(proof.ContentId(),CandidateWindowRejectedGroupContentId(f.protocol,f.attempt->Record()));
+    EXPECT_THROW(CandidateWindowTrainingSemanticProofId(f.protocol,f.attempt->Record()),std::invalid_argument);
+    auto falseContext=f.attempt->Record();++falseContext.logical.epoch;
+    EXPECT_THROW(CandidateWindowRejectedGroupContentId(f.protocol,falseContext),std::invalid_argument);
+    auto nonfinite=f.attempt->Record();
+    nonfinite.group.witness.fullBefore.observation.channels.at(0).samples.at(1).rawPotential=std::numeric_limits<double>::quiet_NaN();
+    EXPECT_THROW(CandidateWindowRejectedGroupContentId(f.protocol,nonfinite),std::invalid_argument);
+}
+enum class RejectedProofExpiry { Cancel,Reset,NextGroup,DestroyAttempt,SameGraphRebuilt,ExternalStop };
+template<class Owner> void RejectedSearchExpires(RejectedProofExpiry action) {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    ASSERT_NO_FATAL_FAILURE(PrepareRejectedSearch(f,false));
+    ASSERT_TRUE(f.attempt->RejectedMeasurement())<<f.attempt->RejectionReason();
+    const auto proof=*f.attempt->RejectedMeasurement();ASSERT_NO_THROW(proof.RequireCurrent());
+    if(action==RejectedProofExpiry::Cancel)f.attempt->Cancel("explicit-cancel");
+    if(action==RejectedProofExpiry::Reset)f.owner->Reset();
+    if(action==RejectedProofExpiry::ExternalStop)f.owner->IsNeedToTrain=false;
+    if(action==RejectedProofExpiry::DestroyAttempt)f.attempt.reset();
+    if(action==RejectedProofExpiry::NextGroup) {
+        f.Run(f.Request(0,"candidate-attempt","candidate-attempt/search/2",1),CompositeMeasurementPurpose::Search);
+        ASSERT_TRUE(f.attempt->RejectedMeasurement());
+        EXPECT_NE(f.attempt->RejectedMeasurement()->Prepared().GroupId(),proof.Prepared().GroupId());
+        EXPECT_NO_THROW(f.attempt->RejectedMeasurement()->RequireCurrent());
+    }
+    if(action==RejectedProofExpiry::SameGraphRebuilt) {
+        const auto original=f.owner->ReadNativeParameters();const auto revision=f.Revision();
+        auto changed=original;changed[0].length=4;
+        ASSERT_EQ(f.owner->ApplyNativeParameters(changed).status,NativeEditStatus::Applied);
+        ASSERT_EQ(f.owner->ApplyNativeParameters(original).status,NativeEditStatus::Applied);
+        ASSERT_EQ(f.Revision(),revision);
+    }
+    EXPECT_THROW(proof.RequireCurrent(),std::exception);
+}
+template<class Owner> void RejectedSearchPartialCannotPromote() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    EnableCandidateWindow(f);f.attempt->EnableRejectedSearchAdmission();
+    (void)CaptureWindowReferences(f,false);
+    bool cancelled=false;
+    f.Run(f.Request(0,"candidate-attempt","candidate-attempt/search/3",0),CompositeMeasurementPurpose::Search,{},[&]() {
+        if(!cancelled && f.rawSamples>0){cancelled=true;f.attempt->Cancel("partial-search-cancel");}
+    });
+    EXPECT_TRUE(cancelled);EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectedMeasurement());
+    EXPECT_FALSE(f.attempt->Running());
+}
+template<class Owner> void RejectedReferenceCannotPromote() {
+    NativeCompositeFixture<Owner> f(2000,true,64,false,true);
+    EnableCandidateWindow(f);f.attempt->EnableRejectedSearchAdmission();
+    f.Run(f.Request(0,"candidate-attempt/capture/1","candidate-attempt/capture/1/0"),CompositeMeasurementPurpose::Reference);
+    ASSERT_TRUE(f.attempt->Selection());ASSERT_TRUE(f.attempt->Selection()->geometry);
+    EXPECT_NE(f.attempt->Selection()->geometry->validity,DeclaredWindowBasinValidity::Valid);
+    EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectedMeasurement());
+}
+template<class Owner> void RejectedFinalCannotPromote() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    ASSERT_NO_FATAL_FAILURE(PrepareRejectedSearch(f,false));
+    ASSERT_TRUE(f.attempt->RejectedMeasurement());const auto previous=*f.attempt->RejectedMeasurement();
+    const std::string run="candidate-attempt/final/1";
+    f.Run(f.Request(0,run,run+"/verify/1/0",1),CompositeMeasurementPurpose::Final);
+    ASSERT_TRUE(f.attempt->Selection());ASSERT_TRUE(f.attempt->Selection()->geometry);
+    EXPECT_EQ(f.attempt->Selection()->geometry->validity,DeclaredWindowBasinValidity::Missing);
+    EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectedMeasurement());
+    EXPECT_THROW(previous.RequireCurrent(),std::exception);
+}
+template<class Owner> void RejectedBudgetCannotPromote() {
+    NativeCompositeFixture<Owner> f(2000,false,64,false,true);
+    EnableCandidateWindow(f);f.attempt->EnableRejectedSearchAdmission();(void)CaptureWindowReferences(f,false);
+    bool declined=false;
+    try {
+        f.attempt->StartMeasurement(f.Request(0,"candidate-attempt","candidate-attempt/search/1"),
+            CompositeMeasurementPurpose::Search,f.prototype,1./f.frequency,300.,f.Time(),Wall());
+    } catch(const CompositeTrainingBudgetExhausted&) {declined=true;}
+    // A test driver deadline is separate from the group's one-native-tick
+    // budget, so it can observe that budget expiring on the following tick.
+    for(unsigned tick=0;tick<4 && f.attempt->Running();++tick) {
+        f.attempt->BeforeTick(f.Time(),Wall());if(!f.attempt->Running())break;
+        f.model->Calculate();f.attempt->AfterTick(f.Time(),Wall());f.environment->IncreaseModelTimeByStep();
+    }
+    EXPECT_TRUE(declined || f.attempt->TimeBudgetExhausted());
+    EXPECT_FALSE(f.attempt->Running());EXPECT_FALSE(f.attempt->Measurement());EXPECT_FALSE(f.attempt->RejectedMeasurement());
+}
+}
+TEST(NativeCandidateWindowRejection,ClassicCompleteMissingSearchHasClosedCapability){RejectedSearchCapability<NNeuronTimeLearner>(false);}
+TEST(NativeCandidateWindowRejection,BranchCompleteMissingSearchHasClosedCapability){RejectedSearchCapability<NNeuronTimeLearnerBranch>(false);}
+TEST(NativeCandidateWindowRejection,Classic20000MissingSearchHasClosedCapability){RejectedSearchCapability<NNeuronTimeLearner>(false,true,20000);}
+TEST(NativeCandidateWindowRejection,Branch20000MissingSearchHasClosedCapability){RejectedSearchCapability<NNeuronTimeLearnerBranch>(false,true,20000);}
+TEST(NativeCandidateWindowRejection,ClassicCompleteAmbiguousSearchHasClosedCapability){RejectedSearchCapability<NNeuronTimeLearner>(true);}
+TEST(NativeCandidateWindowRejection,BranchCompleteAmbiguousSearchHasClosedCapability){RejectedSearchCapability<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeCandidateWindowRejection,ClassicDefaultDoesNotCreateCapability){RejectedSearchCapability<NNeuronTimeLearner>(false,false);}
+TEST(NativeCandidateWindowRejection,BranchDefaultDoesNotCreateCapability){RejectedSearchCapability<NNeuronTimeLearnerBranch>(false,false);}
+TEST(NativeCandidateWindowRejection,ClassicPartialSearchCannotPromote){RejectedSearchPartialCannotPromote<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRejection,BranchPartialSearchCannotPromote){RejectedSearchPartialCannotPromote<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowRejection,ClassicRejectedReferenceCannotPromote){RejectedReferenceCannotPromote<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRejection,BranchRejectedReferenceCannotPromote){RejectedReferenceCannotPromote<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowRejection,ClassicRejectedFinalCannotPromote){RejectedFinalCannotPromote<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRejection,BranchRejectedFinalCannotPromote){RejectedFinalCannotPromote<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowRejection,ClassicExpiredGroupBudgetCannotPromote){RejectedBudgetCannotPromote<NNeuronTimeLearner>();}
+TEST(NativeCandidateWindowRejection,BranchExpiredGroupBudgetCannotPromote){RejectedBudgetCannotPromote<NNeuronTimeLearnerBranch>();}
+TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterCancel){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::Cancel);}
+TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterLearnerReset){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::Reset);}
+TEST(NativeCandidateWindowRejection,CapabilityExpiresWhenNextGroupCloses){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::NextGroup);}
+TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterAttemptDestruction){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::DestroyAttempt);}
+TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterSameSemanticGraphRebuild){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::SameGraphRebuilt);}
+TEST(NativeCandidateWindowRejection,CapabilityExpiresAfterExternalStop){RejectedSearchExpires<NNeuronTimeLearner>(RejectedProofExpiry::ExternalStop);}
