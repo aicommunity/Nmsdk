@@ -1,13 +1,13 @@
 # Готовность к научным экспериментам — 11.11.2026
 
-Свежий M40 SDK8362d58f/Pulse1110808 принят32/32 в техническом scope: active Build guards, header publication7/execution5, старый Console wire и source7 recognition. [Результат](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md). Elder ранее принял native recognition10/10 и независимый replay6/6; теперь выполняет отдельную свежую сборку того же32case набора.
+Свежий M40 SDK8362d58f/Pulse1110808 принят32/32 в техническом scope: active Build guards, header publication7/execution5, старый Console wire и source7 recognition. [Результат](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md). Elder ранее принял native recognition10/10 и независимый replay6/6; также завершил отдельную свежую сборку и тот же набор32/32.
 
 На M40 настоящий Console cold8 pipeline принят2/2: Classic/Branch cold Train/Exact, export/import, measured-grid calibration, frozen evaluation и rollback/replay. Обе N2/N0/Sync0.2 модели получили TP2/FP0/FN0/TN2 на одном target и одном foil, предъявленных дважды. Это historical same-matrix калибровка, не независимая научная матрица. [Результат и ограничения](ValidationPlans/M40RecoveryConsoleCold8A1-20261111/RESULT.ru.md). Saved corpus использовался только для исходных условий и storage definitions, не как learned seed нового Train.
 
 До нового научного N4 вывода остаются:
 
 1. Сохранить принятый Console lifecycle/source/fixture result в полном primary corpus, выполнить независимый повторный анализ и собрать полный compact primary и графики всех Test предъявлений с actual input spikes в читаемом масштабе. Подтвердить real threshold candidate и frozen model.
-2. Завершить Elder32, опубликовать M40 native32 primary corpus; ограничения старых неуспешных попыток сохранить отдельно.
+2. Опубликовать полный Elder32 corpus и семантически проверить опубликованный M40 native32 corpus; ограничения старых неуспешных попыток сохранить отдельно.
 3. Повторить N4 при исходных default tolerances/заявленной физике, не заменяя их техническими N2/Sync0.2. Незавершённый Train допускает только явно diagnostic Test, не обычную научную классификацию.
 4. Выполнить исторический replay/cold retrain, отдельные permutation/ITI и полную матрицу исходного плана с явными reset/calibration protocols. Отрицательный валидный результат допускается;8/8 не обязательно.
 

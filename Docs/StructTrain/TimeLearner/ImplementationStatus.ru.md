@@ -13,7 +13,7 @@
 
 Сохраняются CapturedPerInput, anchor N−1, штатный lifecycle/scheduler и историческая доказательность августовских4/8–6/8 в исходном протоколе. Series D не возобновлялась. Корректность текущих тестов не закрывает остальные пункты property/storage/growth, алгоритмов, conversion/PostTune/calibration, миграции scripts, очередей/публикации, полной матрицы и документации. [Готовность научных экспериментов](ExperimentReadiness.ru.md).
 
-Ближайшие шаги: закрыть Console и Elder32 с полными артефактами; опубликовать компактный M40 native32 corpus и временные графики; затем повторить строгий N4 cold/evaluation и оставшуюся обязательную матрицу. Открыто отдельное [Windows file-identity наблюдение](WindowsCollectorIdentityObservation-20261111.ru.md); Linux guard не ослаблялся.
+Ближайшие шаги: опубликовать полные Console/Elder32 primary, семантически проверить M40 native32 corpus и построить временные графики; затем повторить строгий N4 cold/evaluation и оставшуюся обязательную матрицу. Открыто отдельное [Windows file-identity наблюдение](WindowsCollectorIdentityObservation-20261111.ru.md); Linux guard не ослаблялся.
 
 Предыдущие оперативные записи до этой приёмки сохранены [отдельно](ImplementationStatus-BeforeNative32-20261111.ru.md). Ниже сохранены более ранние исторические срезы и подробные ограничения; их running/ещё не реализовано относятся к указанным снимкам и не заменяют таблицу выше.
 
