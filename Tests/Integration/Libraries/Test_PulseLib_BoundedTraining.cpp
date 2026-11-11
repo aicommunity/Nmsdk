@@ -107,6 +107,52 @@ void DriveTraining(BoundedTrainingSession& session,const VerificationProtocol& p
     }
 }
 
+TEST(BoundedTrainingN1GeometryFairness, ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    {
+        std::vector<std::vector<InputParameters>> retryCandidates;
+        for(const auto recovery:{InvalidMeasurementRecovery::RetrySameCandidate,
+                                 InvalidMeasurementRecovery::AdvanceUnassignedBurst})
+        {
+            SCOPED_TRACE(::testing::Message()<<int(routing)<<'/'<<int(recovery));
+            const auto protocol=Protocol(2,routing);
+            auto cfg=Configuration(2,Normalization::TipResistance);
+            cfg.invalidMeasurementRecovery=recovery;cfg.maximumInvalidObservations=1;
+            cfg.resistanceSubdivisionDepth=8;cfg.maximumProbes=12;
+            cfg.bounds={{1,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
+            BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}});
+            DriveTraining(session,protocol,[&](const TrainingAction&,auto&,auto& raw) {
+                // Deliberately valid but unsynchronized/un-normalized measured
+                // responses. This tests controller scheduling, not cable physics.
+                raw[0]+=.002;
+            },[&](const TrainingAction& action) {
+                ResistanceDomainAssessment d;d.status=ResistanceDomainStatus::Available;
+                d.baseModelRevision=action.baseModelRevision;d.geometry=action.parameters;
+                d.inputIndex=action.inputIndex;d.sourceAmplitude=1.;
+                d.previewModelRevision="geometry-"+std::to_string(action.parameters[0].length);
+                const bool locked=routing==ProbeRouting::BranchSoloBurst &&
+                    action.parameters[0].length==action.parameters[1].length;
+                d.minimumResistance=locked?10.:1.;d.maximumResistance=locked?10.:100.;return d;
+            });
+            std::set<int> lengths;std::vector<std::vector<InputParameters>> candidates;
+            for(const auto& measured:session.Evidence())
+            {
+                ASSERT_EQ(measured.inputIndex,0u);
+                lengths.insert(measured.parameters.length);candidates.push_back(measured.fullParameters);
+            }
+            EXPECT_TRUE(lengths.contains(3));EXPECT_TRUE(lengths.contains(4));
+            EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+            EXPECT_TRUE(session.Recoveries().empty());
+            EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+            if(recovery==InvalidMeasurementRecovery::RetrySameCandidate)retryCandidates=candidates;
+            else EXPECT_EQ(candidates,retryCandidates);
+            // Each finite observation remains evidence for a nonexact result.
+            EXPECT_FALSE(session.Status()==TrainingStatus::Exact);
+        }
+    }
+}
+
 void CheckFiniteCandidateRanking(ProbeRouting routing,Normalization normalization,bool overflow)
 {
     // Production session and recorder; only the measured physical response is
