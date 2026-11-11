@@ -36,3 +36,5 @@ provenance и все20полных trial. Отдельные отрицател�
 фактор преобразования, status происхождения, spike count и frozen revision.
 Приёмка не может быть объявлена по synthetic модели либо отсутствующему
 корпусу. Дальнейший Console pipeline и научная матрица остаются отдельными.
+
+Технические fixtures используют N=2 и явно объявленный SyncTolerance0.2 для completed source, как предыдущий package7 roundtrip cohort. Это не default0.02 и не результат научного N4 обучения. Default и математические допуски production не изменяются. На Elder отдельно принят legacy recognition reader/CLI regression14/14 на восьми старых actual models; новый source7 corpus он не заменяет.
