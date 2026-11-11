@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_test_gate_result",
+  "schema_version": 1,
+  "execution": "process_error",
+  "validity": "valid",
+  "assertion_status": "failed",
+  "reason": "complete_declared_test_inventory",
+  "inventory": {
+    "expected": 14,
+    "observed": 14,
+    "failed_test_ids": [
+      "NativeRecoveryPackage7/ClassicN0StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7/BranchN0StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse",
+      "NativeRecoveryPackage7/ClassicCompletedEmptyLedgerIsExplicitRecovery",
+      "NativeRecoveryPackage7/BranchCompletedEmptyLedgerIsExplicitRecovery",
+      "NativeRecoveryPackage7/ClassicAsymmetricC0KeepsChildPhysicsAndResponse",
+      "NativeRecoveryPackage7/BranchAsymmetricC0KeepsChildPhysicsAndResponse",
+      "NativeRecoveryPackage7/ClassicImportedWarmRetryRetainsEarlierRecovery",
+      "NativeRecoveryPackage7/BranchImportedWarmRetryRetainsEarlierRecovery",
+      "NativeRecoveryPackage7/BranchMissingForeignOrDuplicateLedgerCannotMutateOwner"
+    ],
+    "assertion_status": "failed",
+    "sha256": "fa027ae6e356036f460bbd43acc3701720df2fe2b1fd0064769a00f526a69623"
+  },
+  "scientific_verdict": null
+}

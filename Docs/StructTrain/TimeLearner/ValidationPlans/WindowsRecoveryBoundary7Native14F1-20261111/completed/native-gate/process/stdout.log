@@ -1,0 +1,73 @@
+Note: Google Test filter = NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse:NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse:NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse:NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse:NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery:NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery:NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse:NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse:NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery:NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery:NativeRecoveryPackage7.ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner:NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner:NativeRecoveryPackage7.ClassicLegacy6CannotMasqueradeAsRecovery7:NativeRecoveryPackage7.BranchLegacy6CannotMasqueradeAsRecovery7
+[==========] Running 14 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 14 tests from NativeRecoveryPackage7
+[ RUN      ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse
+unknown file: error: C++ exception with description "native_probe_requires_initialized_ready_learner" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse (98755 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse (62419 ms)
+[ RUN      ] NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse (77900 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse (62935 ms)
+[ RUN      ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery (39915 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery (31309 ms)
+[ RUN      ] NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse (242769 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse (222601 ms)
+[ RUN      ] NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery
+unknown file: error: C++ exception with description "native_probe_requires_initialized_ready_learner" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery (21174 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery (63202 ms)
+[ RUN      ] NativeRecoveryPackage7.ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner
+[       OK ] NativeRecoveryPackage7.ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner (8155 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner
+unknown file: error: C++ exception with description "composite_archive_output_new_only" thrown in the test body.
+
+[  FAILED  ] NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner (62772 ms)
+[ RUN      ] NativeRecoveryPackage7.ClassicLegacy6CannotMasqueradeAsRecovery7
+[       OK ] NativeRecoveryPackage7.ClassicLegacy6CannotMasqueradeAsRecovery7 (43743 ms)
+[ RUN      ] NativeRecoveryPackage7.BranchLegacy6CannotMasqueradeAsRecovery7
+[       OK ] NativeRecoveryPackage7.BranchLegacy6CannotMasqueradeAsRecovery7 (35279 ms)
+[----------] 14 tests from NativeRecoveryPackage7 (1072934 ms total)
+
+[----------] Global test environment tear-down
+[==========] 14 tests from 1 test suite ran. (1072935 ms total)
+[  PASSED  ] 3 tests.
+[  FAILED  ] 11 tests, listed below:
+[  FAILED  ] NativeRecoveryPackage7.ClassicN0StoppedRoundtripKeepsResponse
+[  FAILED  ] NativeRecoveryPackage7.BranchN0StoppedRoundtripKeepsResponse
+[  FAILED  ] NativeRecoveryPackage7.ClassicN1StoppedRoundtripKeepsResponse
+[  FAILED  ] NativeRecoveryPackage7.BranchN1StoppedRoundtripKeepsResponse
+[  FAILED  ] NativeRecoveryPackage7.ClassicCompletedEmptyLedgerIsExplicitRecovery
+[  FAILED  ] NativeRecoveryPackage7.BranchCompletedEmptyLedgerIsExplicitRecovery
+[  FAILED  ] NativeRecoveryPackage7.ClassicAsymmetricC0KeepsChildPhysicsAndResponse
+[  FAILED  ] NativeRecoveryPackage7.BranchAsymmetricC0KeepsChildPhysicsAndResponse
+[  FAILED  ] NativeRecoveryPackage7.ClassicImportedWarmRetryRetainsEarlierRecovery
+[  FAILED  ] NativeRecoveryPackage7.BranchImportedWarmRetryRetainsEarlierRecovery
+[  FAILED  ] NativeRecoveryPackage7.BranchMissingForeignOrDuplicateLedgerCannotMutateOwner
+
+11 FAILED TESTS
