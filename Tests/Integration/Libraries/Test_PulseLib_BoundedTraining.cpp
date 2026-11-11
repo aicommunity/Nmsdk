@@ -1293,7 +1293,7 @@ ResistanceDomainAssessment FairDomain(const TrainingAction& action,double low=1.
     return result;
 }
 
-TEST(BoundedTrainingFairDomains,AdvanceVisitsOtherGeometriesBeforeSpendingTheWholeResistanceMesh)
+TEST(BoundedTrainingFairDomains,ValidMeasurementsVisitGeometriesIndependentlyOfRecovery)
 {
     for(const auto policy:{InvalidMeasurementRecovery::RetrySameCandidate,InvalidMeasurementRecovery::AdvanceUnassignedBurst})
     {
@@ -1316,8 +1316,7 @@ TEST(BoundedTrainingFairDomains,AdvanceVisitsOtherGeometriesBeforeSpendingTheWho
         // The same finite mesh survives the order change, including revisits.
         for(int length=1;length<=3;++length)for(double resistance:{1.,10.,100.})
             EXPECT_TRUE(covered.contains({length,resistance}));
-        if(policy==InvalidMeasurementRecovery::AdvanceUnassignedBurst)EXPECT_LT(firstLength3,firstOtherResistance);
-        else EXPECT_LT(firstOtherResistance,firstLength3);
+        EXPECT_LT(firstLength3,firstOtherResistance);
         EXPECT_NE(session.Status(),TrainingStatus::Exact);
         EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
     }

@@ -12,7 +12,7 @@ import unittest
 
 from ..collector_provenance import frozen_digest
 from ..native_evidence import load, require
-from ..native_gate import audit_junit
+from ..native_gate import audit_junit, _environment
 from ..process_runner import execute
 from ..runtime import build_flags, digest_json, file_record, resolved_libraries, runtime_content_identity
 
@@ -52,7 +52,8 @@ def _command(arguments, output, maximum_seconds):
 
 
 def _discover(executable, output):
-    _command([str(executable), '--gtest_list_tests'], output, 60)
+    with _environment({key: None for key in os.environ if key.startswith('GTEST_')}):
+        _command([str(executable), '--gtest_list_tests', '--gtest_filter=*', '--gtest_repeat=1'], output, 60)
     group, identities = None, []
     for line in output.read_text().splitlines():
         text = line.split('#', 1)[0].strip()
@@ -75,7 +76,8 @@ class N1GeometryCppABTest(unittest.TestCase):
         binding = os.environ.get('TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS')
         require(binding is not None, 'decision_cpp_controls_required')
         spec = load(Path(binding)/'declaration.json')
-        require(set(spec) == {'before', 'after', 'output', 'toolchain'} and all(set(spec[n]) ==
+        require(set(spec) == {'before', 'after', 'output', 'toolchain', 'expected_case_ids',
+            'expected_before_failures'} and all(set(spec[n]) ==
             {'directory', 'root_commit', 'pulse_commit'} for n in ('before', 'after')),
             'decision_cpp_controls_schema')
         toolchain = spec['toolchain']
@@ -100,7 +102,11 @@ class N1GeometryCppABTest(unittest.TestCase):
                      for n in ('before', 'after')}
         harness = Path(spec['after']['directory'])/'Tests/Integration/Algorithms'
         compiler = Path(toolchain['compiler']).resolve(strict=True)
-        results, expected = {}, None
+        results, expected = {}, spec['expected_case_ids']
+        require(type(expected) is list and expected and len(set(expected)) == len(expected) and
+            type(spec['expected_before_failures']) is list and
+            len(set(spec['expected_before_failures'])) == len(spec['expected_before_failures']) and
+            set(spec['expected_before_failures']) <= set(expected), 'decision_cpp_expected_inventory')
         regression = ('BoundedTrainingN1GeometryFairness/'
             'ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode')
         for name in ('before', 'after'):
@@ -118,9 +124,8 @@ class N1GeometryCppABTest(unittest.TestCase):
             executable = build/'runtime/Test_PulseLib_TrainingAlgorithms'
             ids = _discover(executable, folder/'discovery.log')
             require(regression in ids, 'decision_cpp_regression_missing')
-            if expected is None:
-                expected = ids
-            self.assertEqual(ids, expected)
+            self.assertEqual(set(ids), set(expected))
+            self.assertEqual(len(ids), len(expected))
             flags = build_flags(build/'CMakeCache.txt')
             flags['role'] = 'production_decision_unit_projection; not native SDK admission'
             closure = {'root': {'head': spec[name]['root_commit'], 'status': ''},
@@ -134,12 +139,16 @@ class N1GeometryCppABTest(unittest.TestCase):
             runtime['runtime_identity'] = runtime_content_identity(runtime)
             runtime['runtime_fingerprint'] = digest_json(runtime['runtime_identity'])
             junit = folder/'native.xml'
-            process = execute(runtime, ['--gtest_output=xml:'+str(junit)], folder,
-                folder/'process', 120., cooperative_capture=True)
+            with _environment({key: None for key in os.environ if key.startswith('GTEST_')}):
+                process = execute(runtime, ['--gtest_output=xml:'+str(junit),
+                    '--gtest_filter=*', '--gtest_repeat=1'], folder,
+                    folder/'process', 120., cooperative_capture=True)
             self.assertEqual(process['returncode'], 1 if name == 'before' else 0)
             self.assertEqual(process['runtime_provenance'], 'loaded_files_captured')
-            inventory = audit_junit(junit, ids)
-            self.assertEqual(inventory['failed_test_ids'], [regression] if name == 'before' else [])
+            inventory = audit_junit(junit, expected)
+            wanted = spec['expected_before_failures'] if name == 'before' else []
+            self.assertEqual(set(inventory['failed_test_ids']), set(wanted))
+            self.assertEqual(len(inventory['failed_test_ids']), len(wanted))
             results[name] = dict(configure=configure, inventory=inventory, process=process,
                 runtime=runtime, scientific_verdict=None)
         self.assertEqual(snapshots, {n: _source(Path(spec[n]['directory']),
