@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/closed_native_collection.py", line 413, in <module>
+    raise SystemExit(main())
+  File "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/closed_native_collection.py", line 405, in main
+    result = collect(arguments.manifest, arguments.manifest_sha256)
+  File "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/closed_native_collection.py", line 335, in collect
+    lease = registry.reserve(manifest['collection_id'], [{'path': str(output), 'access': 'write'}]+
+  File "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/resource_reservations.py", line 310, in reserve
+    _require(all(used[key]+demands[key] <= self.capacity[key] for key in used),
+  File "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/resource_reservations.py", line 25, in _require
+    raise ReservationError(reason)
+Scripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_capacity_exhausted
