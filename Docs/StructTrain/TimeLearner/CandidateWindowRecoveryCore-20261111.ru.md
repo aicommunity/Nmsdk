@@ -55,12 +55,18 @@ C-context recovery, новый checkpoint или полную матрицу р�
 
 ## Незавершённые обязательные части
 
-Service delivery, versioned cold/runtime/package/archive codecs, ordered events
+Следующее отдельное изменение реализует
+[cold8/runtime3 и их readers](CandidateWindowRecoveryWire-20261111.ru.md).
+Оно следует после frozen C1 и не входит в работающие145 проверок.
+Описанные ниже serializer guards относятся к снимку C1;
+в текущем дереве сохраняется service guard до готовности persistence/replay.
+
+Service delivery, versioned package/archive codecs, ordered events
 и независимый Python replay ещё не реализованы. Cold1..7/runtime2/package6
-не должны молча терять новую policy. Поэтому конфигурационный serializer и
-native service пока явно отвергают её, а новый core API проверяется отдельно.
-Guard-test является промежуточным ограничением и должен быть заменён проверкой
-нового versioned roundtrip при подключении wire/service. Отдельный последующий
+не должны молча терять новую policy. Native service пока явно отвергает её,
+а новый core API проверяется отдельно. В снимке C1 serializer также отвергает
+policy; в следующем wire commit этот guard-test заменён проверкой cold8/runtime3
+roundtrip с сохранённым запретом service. Отдельный последующий
 commit должен включить factory opt-in и доставку закрытого отказа после
 beforeConsume/generation/revision/budget проверок, затем persistence/replay.
 

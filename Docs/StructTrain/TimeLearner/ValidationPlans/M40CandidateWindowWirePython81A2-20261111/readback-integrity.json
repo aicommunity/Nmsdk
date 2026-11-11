@@ -1,0 +1,46 @@
+{
+  "sourceCommit": "e273a7e715c839e83023aeb246dd2725e45d1001",
+  "packageFingerprint": "66a7f46eda7b25bd6d7c204a4984809473b8fb7c04cf8c3a4ae6795b5f430391",
+  "expected": 81,
+  "executed": 81,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "wholeGroupClosed": true,
+  "leaseReleased": true,
+  "records": {
+    "worker/validation/result.json": {
+      "bytes": 14811,
+      "sha256": "70036e6b939808c97ded003e5811ea39b08e26b550fbadd7613c6466628d5874"
+    },
+    "worker/validation/suite.json": {
+      "bytes": 15232,
+      "sha256": "43090aa995214d6fbba6940083e65b6f9520f9809f9ecac57a533c70854b4026"
+    },
+    "worker/validation/unittest.log": {
+      "bytes": 19973,
+      "sha256": "e4cd135cf5071c3c120b7f79c66f6c07d8ead9e05232c9f3ad95e1e5f6ebd95e"
+    },
+    "worker/terminal.json": {
+      "bytes": 248,
+      "sha256": "10f2cfd0cb7d2d454c48123ab38819a476cdf65da8b6408830021294b5b0d04d"
+    },
+    "controller-result.json": {
+      "bytes": 1180,
+      "sha256": "07c55ec863c77052215494647f0098cf62db2b19934655acd211ae31b4816e2c"
+    },
+    "closure-and-reservation.json": {
+      "bytes": 3327,
+      "sha256": "e45dbfc3c3190f18d4355a34afc1ad2c2e74b7c43764ea8d24b6dc5fcd9fd1b7"
+    },
+    "lease-recovery.json": {
+      "bytes": 3422,
+      "sha256": "a96f2337216365ccc168f5ae4afc38438effc3ecf65f7370aee459cdcde726ae"
+    },
+    "monitor-final.json": {
+      "bytes": 131,
+      "sha256": "62d74fc8d721d16ab8e221d38cffe7064fe32108ad10b6f783f196a3eba8c760"
+    }
+  },
+  "scope": "Python DATA readers only; native wire roundtrip and service admission not proved"
+}

@@ -1,6 +1,7 @@
 # Форматы объявлений recovery: cold8 и runtime3
 
-Статус: новый код, проверка на серверах ещё требуется. Это отдельное изменение
+Статус: Python readers проверены81/81 на M40; C++ roundtrip и cross-language
+проверка native producer ещё требуются. Это отдельное изменение
 после frozen C1 root8fac40bb/Pulse1c0fa37; работающий C1 его не проверяет.
 
 Cold8 сохраняет все поля cold7, включая base_schema_version1..4, и добавляет
@@ -31,3 +32,18 @@ cross-language audit JSON от actual native producer на workers.
 Service пока явно запрещает новую policy. Package6, archive/history, ordered
 recovery events, независимый replay и Save/Load ещё не подключены. Успешный
 codec roundtrip не разрешает дорогой Train и не завершает этап7.
+## Проверенная область
+
+На M40 выполнены81/81 объявленных DATA tests, failures/errors/skipped=[];
+восемь новых runtime3/cold8 controls, десять прежних runtime2 declarations,
+десять synthetic archive2 controls,14 package6 metadata и39 candidate-window
+DATA controls. Source root e273a7e715c839e83023aeb246dd2725e45d1001 /
+Pulse0fb035a221d6da2b2e883bf767a20a35318d3154,
+package fingerprint66a7f46eda7b25bd6d7c204a4984809473b8fb7c04cf8c3a4ae6795b5f430391.
+Whole cgroup закрыт, lease released/owner missing, operational diagnostics clear.
+[Точные результаты и integrity readback](ValidationPlans/M40CandidateWindowWirePython81A2-20261111/readback-integrity.json).
+Первая попытка остановилась до тестов из-за отсутствовавшего Git-объекта
+`.gitignore`; её outcome сохранён отдельно. A2 использует новый исходный
+каталог с полным набором root metadata. Эти81 не являются новыми научными
+прогонами, приёмкой C++ wire или всего этапа7.
+
