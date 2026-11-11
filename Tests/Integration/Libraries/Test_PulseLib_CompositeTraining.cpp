@@ -4708,3 +4708,94 @@ TEST(NativeCompositeBuildBoundary,ClassicActiveProtocol4BuildStillRevokesControl
 TEST(NativeCompositeBuildBoundary,BranchActiveProtocol4BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearnerBranch>(false);}
 TEST(NativeCompositeBuildBoundary,ClassicActiveProtocol5BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearner>(true);}
 TEST(NativeCompositeBuildBoundary,BranchActiveProtocol5BuildStillRevokesControl){ActiveBuildStillRevokesComposite<NNeuronTimeLearnerBranch>(true);}
+
+namespace {
+template<class Owner> void RecoveryRecognition(bool n1,bool completed,bool c0=false) {
+    const auto source=ActualRecoveryPackage<Owner>(n1,completed,c0).package;
+    const auto sourceHash=source["sha256"];
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);f.attempt.reset();f.owner->IsNeedToTrain=false;
+    NativeRecognitionSpec conversion;
+    if(n1 && NativeCompositeFixture<Owner>::branch) {
+        conversion.mode=RecognitionConversionMode::HistoricalBranchN1;
+        for(const auto& value:source["trained_inputs"].toArray()) {
+            const auto resistance=value.toObject()["resistance"].toDouble();
+            conversion.resistanceBounds.push_back({resistance/10.,resistance*10.});
+        }
+    }
+    const auto convert=[&](){return completed?
+        ConvertNativeSoloToRecognition(source,conversion,f.storage,f.environment,RecoveryPackageImplementation):
+        ConvertNativeStoppedToDiagnosticRecognition(source,conversion,f.storage,f.environment,RecoveryPackageImplementation);};
+    const auto recognition=convert(),repeated=convert();
+    // Re-derive from the same immutable solo model, never multiply live Rs twice.
+    EXPECT_EQ(repeated["model_revision"],recognition["model_revision"]);
+    EXPECT_EQ(repeated["conversion_record"],recognition["conversion_record"]);
+    EXPECT_EQ(repeated["recognition_inputs"],recognition["recognition_inputs"]);
+    EXPECT_EQ(recognition["source_solo"],QJsonValue(source));EXPECT_EQ(source["sha256"],sourceHash);
+    EXPECT_TRUE(recognition["recognition_certificate"].isNull());
+    const auto metadata=recognition["neuron"].toObject()["metadata"].toObject();
+    EXPECT_EQ(metadata["recognition_verification"].toObject()["status"],QJsonValue("unverified"));
+    EXPECT_EQ(metadata["training"].toObject()["scope"],QJsonValue("source_solo"));
+    const auto imported=completed?f.owner->ImportNativeRecognitionState(recognition,RecoveryPackageImplementation):
+        f.owner->ImportNativeDiagnosticRecognitionState(recognition,RecoveryPackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+    f.owner->Build();f.model->Init();f.model->Reset();
+    EXPECT_EQ(f.owner->ExportNativeRecognitionState(RecoveryPackageImplementation),recognition);
+    EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());EXPECT_FALSE(f.owner->NativeTrainingController().Certificate());
+    EXPECT_THROW(f.owner->BeginNativeTraining(NativeTrainingPlan{}),std::logic_error);
+    const auto originalPattern=f.owner->InputPattern.GetData();
+    QJsonArray scope;
+    for(int trial=0;trial<2;++trial) {
+        NativeRecognitionTrialRequest request;request.runId="package7-frozen-target-foil";
+        request.trialId=trial?"foil":"target";request.sampleId=request.trialId;request.label=request.trialId;
+        request.pattern=originalPattern;
+        if(trial)request.pattern(1,0)*=.5;
+        QJsonArray isi;for(int i=0;i<request.pattern.GetRows();++i)isi.append(request.pattern(i,0));
+        request.patternHash=NmsdkTools::CanonicalModelDataSha256(isi).toStdString();
+        request.duration=.3;request.maximumSamples=1200;request.recordThresholdPotential=true;
+        f.owner->QueueNativeRecognitionTrial(request);std::optional<NativeRecognitionTrialObservation> observation;
+        std::size_t ticks=0;
+        while(!observation && ++ticks<2000) {
+            f.model->Calculate();f.environment->IncreaseModelTimeByStep();
+            observation=f.owner->TakeNativeRecognitionTrialResult();
+        }
+        ASSERT_TRUE(observation);ASSERT_TRUE(observation->complete)<<observation->reason;
+        ASSERT_TRUE(observation->valid)<<observation->reason;
+        EXPECT_NO_THROW(ValidateNativeRecognitionObservation(request,*observation));
+        ASSERT_FALSE(observation->samples.empty());
+        EXPECT_EQ(observation->modelBefore,observation->modelAfter);
+        EXPECT_EQ(observation->modelAfter,recognition["model_revision"].toString().toStdString());
+        EXPECT_EQ(f.owner->ExportNativeRecognitionState(RecoveryPackageImplementation),recognition);
+        const auto channels=observation->samples.front().somaPotentials.size();ASSERT_GT(channels,0u);
+        std::vector<double> somaMax(channels,-std::numeric_limits<double>::infinity());
+        double thresholdMax=-std::numeric_limits<double>::infinity();
+        for(const auto& sample:observation->samples) {
+            ASSERT_TRUE(std::isfinite(sample.thresholdPotential));
+            thresholdMax=std::max(thresholdMax,sample.thresholdPotential);
+            ASSERT_EQ(sample.somaPotentials.size(),channels);
+            for(std::size_t i=0;i<channels;++i) {
+                ASSERT_TRUE(std::isfinite(sample.somaPotentials[i]));somaMax[i]=std::max(somaMax[i],sample.somaPotentials[i]);
+            }
+        }
+        QJsonArray maxima;for(double value:somaMax)maxima.append(value);
+        scope.append(QJsonObject{{"trial_id",QString::fromStdString(request.trialId)},
+            {"global_soma_maxima",maxima},{"global_threshold_potential",thresholdMax},
+            {"actual_spikes",double(observation->spikeTimes.size())},{"recorded_frames",double(observation->samples.size())}});
+        const auto filename=trial?"recognition-foil-trial.json":"recognition-target-trial.json";
+        SavePortableObject(RecoveryPackageDirectory().c_str(),filename,NativeRecognitionTrialJson(*observation));
+    }
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"recognition-model.json",recognition);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"recognition-repeat-model.json",repeated);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"recognition-scope.json",{{"schema_version",1},{"trials",scope},
+        {"assigned_Train_window_applied",false},{"classification_success_claimed",false},{"diagnostic",!completed}});
+}
+}
+TEST(NativeRecoveryRecognition7,ClassicCompletedN0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(false,true);}
+TEST(NativeRecoveryRecognition7,BranchCompletedN0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(false,true);}
+TEST(NativeRecoveryRecognition7,ClassicStoppedN0DiagnosticTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(false,false);}
+TEST(NativeRecoveryRecognition7,BranchStoppedN0DiagnosticTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(false,false);}
+TEST(NativeRecoveryRecognition7,ClassicCompletedN1FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(true,true);}
+TEST(NativeRecoveryRecognition7,BranchCompletedN1ScaledTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(true,true);}
+TEST(NativeRecoveryRecognition7,ClassicStoppedN1DiagnosticTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(true,false);}
+TEST(NativeRecoveryRecognition7,BranchStoppedN1ScaledDiagnosticTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(true,false);}
+TEST(NativeRecoveryRecognition7,ClassicAsymmetricC0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(false,true,true);}
+TEST(NativeRecoveryRecognition7,BranchAsymmetricC0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(false,true,true);}
