@@ -1,0 +1,130 @@
+"""Compile whole production C++ units before/after; no copied function bodies.
+
+These controlled-observation decision tests do not admit a physical SDK or
+claim native cable convergence. Physical Console A/B remains separate.
+"""
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import unittest
+
+from ..collector_provenance import frozen_digest
+from ..native_evidence import load, require
+from ..native_gate import audit_junit
+from ..process_runner import execute
+from ..runtime import build_flags, digest_json, file_record, resolved_libraries, runtime_content_identity
+
+
+def _git(root, *args):
+    return subprocess.check_output(['git', '-C', str(root), *args],
+        env={**os.environ, 'GIT_NO_LAZY_FETCH': '1', 'GIT_OPTIONAL_LOCKS': '0'}).decode().strip()
+
+
+def _source(root, root_commit, pulse_commit):
+    root = Path(root).resolve(strict=True)
+    pulse = root/'Libraries/Nmsdk-PulseLib'
+    result = {}
+    for name, path, commit in [('root', root, root_commit), ('Libraries/Nmsdk-PulseLib', pulse, pulse_commit)]:
+        require(_git(path, 'rev-parse', 'HEAD') == commit and
+            not _git(path, 'status', '--porcelain', '--untracked-files=all', '--ignore-submodules=all'),
+            'decision_cpp_source_commit_or_status')
+        inventory = {}
+        for line in _git(path, 'ls-files', '--stage').splitlines():
+            meta, relative = line.split('\t', 1)
+            if meta.split()[0] == '160000':
+                continue
+            file = path/relative
+            if file.is_file():
+                inventory[relative] = frozen_digest(file, 32*1024**2)
+        result[name] = dict(commit=commit, files=inventory)
+    require(_git(root, 'rev-parse', 'HEAD:Libraries/Nmsdk-PulseLib') == pulse_commit,
+        'decision_cpp_gitlink_changed')
+    return result
+
+
+def _command(arguments, output, maximum_seconds):
+    with output.open('xb') as stream:
+        done = subprocess.run(arguments, stdout=stream, stderr=subprocess.STDOUT,
+            timeout=maximum_seconds)
+    require(done.returncode == 0, 'decision_cpp_command_failed:'+str(output))
+
+
+def _discover(executable, output):
+    _command([str(executable), '--gtest_list_tests'], output, 60)
+    group, identities = None, []
+    for line in output.read_text().splitlines():
+        text = line.split('#', 1)[0].strip()
+        if not text:
+            continue
+        if not line.startswith(' '):
+            require(text.endswith('.'), 'decision_cpp_discovery_group')
+            group = text[:-1]
+        else:
+            require(group is not None and re.fullmatch(r'[A-Za-z0-9_/]+', text),
+                'decision_cpp_discovery_case')
+            identities.append(group+'/'+text)
+    require(identities and len(set(identities)) == len(identities) and
+        not any('DISABLED_' in identity for identity in identities), 'decision_cpp_discovery_incomplete')
+    return identities
+
+
+class N1GeometryCppABTest(unittest.TestCase):
+    def test_before_exposes_starvation_and_after_passes_complete_decision_cohort(self):
+        binding = os.environ.get('TIMELEARNER_N1_GEOMETRY_CPP_CONTROLS')
+        require(binding is not None, 'decision_cpp_controls_required')
+        spec = load(Path(binding)/'declaration.json')
+        require(set(spec) == {'before', 'after', 'output'} and all(set(spec[n]) ==
+            {'directory', 'root_commit', 'pulse_commit'} for n in ('before', 'after')),
+            'decision_cpp_controls_schema')
+        output = Path(spec['output']);output.mkdir(parents=True, exist_ok=False)
+        snapshots = {n: _source(Path(spec[n]['directory']), spec[n]['root_commit'], spec[n]['pulse_commit'])
+                     for n in ('before', 'after')}
+        harness = Path(spec['after']['directory'])/'Tests/Integration/Algorithms'
+        compiler = Path(shutil.which('c++')).resolve(strict=True)
+        results, expected = {}, None
+        regression = ('BoundedTrainingN1GeometryFairness/'
+            'ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode')
+        for name in ('before', 'after'):
+            root = Path(spec[name]['directory']);folder = output/name;folder.mkdir()
+            build = folder/'build'
+            configure = ['cmake', '-S', str(harness), '-B', str(build), '-G', 'Ninja',
+                '-DCMAKE_BUILD_TYPE=Release', '-DQT_MAJOR=5',
+                '-DNMSDK_TRAINING_ALGORITHM_SOURCE_ROOT='+str(root)]
+            _command(configure, folder/'configure.log', 180)
+            _command(['cmake', '--build', str(build), '--parallel', '2'], folder/'build.log', 600)
+            executable = build/'runtime/Test_PulseLib_TrainingAlgorithms'
+            ids = _discover(executable, folder/'discovery.log')
+            require(regression in ids, 'decision_cpp_regression_missing')
+            if expected is None:
+                expected = ids
+            self.assertEqual(ids, expected)
+            flags = build_flags(build/'CMakeCache.txt')
+            flags['role'] = 'production_decision_unit_projection; not native SDK admission'
+            closure = {'root': {'head': spec[name]['root_commit'], 'status': ''},
+                'Libraries/Nmsdk-PulseLib': {'head': spec[name]['pulse_commit'],
+                    'recorded_gitlink': spec[name]['pulse_commit'], 'status': ''}}
+            runtime = dict(schema_version=2, source_closure=closure,
+                executable=file_record(executable), app_ini=file_record(Path(binding)/'declaration.json'),
+                compiler=file_record(compiler), build_flags=flags, resolved_libraries=resolved_libraries(executable),
+                loaded_process_files=None, loader_environment={k: os.environ.get(k)
+                    for k in ('LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM')})
+            runtime['runtime_identity'] = runtime_content_identity(runtime)
+            runtime['runtime_fingerprint'] = digest_json(runtime['runtime_identity'])
+            junit = folder/'native.xml'
+            process = execute(runtime, ['--gtest_output=xml:'+str(junit)], folder,
+                folder/'process', 120., cooperative_capture=True)
+            self.assertEqual(process['returncode'], 1 if name == 'before' else 0)
+            self.assertEqual(process['runtime_provenance'], 'loaded_files_captured')
+            inventory = audit_junit(junit, ids)
+            self.assertEqual(inventory['failed_test_ids'], [regression] if name == 'before' else [])
+            results[name] = dict(configure=configure, inventory=inventory, process=process,
+                runtime=runtime, scientific_verdict=None)
+        self.assertEqual(snapshots, {n: _source(Path(spec[n]['directory']),
+            spec[n]['root_commit'], spec[n]['pulse_commit']) for n in ('before', 'after')})
+        (output/'source-inventories.json').write_text(json.dumps(snapshots, indent=2)+'\n')
+        (output/'result.json').write_text(json.dumps(dict(kind='timelearner_n1_geometry_cpp_ab',
+            schema_version=1, results=results, before_expected_failure=True, physical_models_executed=False,
+            scientific_verdict=None), indent=2, allow_nan=False)+'\n')
