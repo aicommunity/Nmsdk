@@ -1,8 +1,8 @@
 # Подготовка распознавания из recovery model7
 
-Новая реализация ещё не принята серверными проверками. Текущая native18
-сборка использует неизменный rootbdefc540/Pulse1110808 и этих добавлений не содержит.
-Они предназначены для отдельного следующего source и набора.
+**Native-приёмка принята на Elder: 10/10.** Rootca8be945/Pulse1110808, свежая сборка, десять реальных conversions/import и двадцать frozen target/foil trials. [Результат и точные ограничения](ValidationPlans/ElderRecoveryRecognition7Native10A2-20261111/RESULT.ru.md). Полный primary corpus опубликован в Git (4.27MB сжатых данных); независимый Python replay6 подготовлен отдельно и пока не принят. Это технические N=2/Sync0.2 cases, не N4 научная матрица.
+
+Исторический native18 использовал rootbdefc540/Pulse1110808 и этих добавлений не содержал; его частичный исход не подменяет новый native10.
 
 В recognition_evidence.py исправляется dispatch опорных амплитуд Branch/N1:
 package7, как5/6, должен читать независимые принятые reference groups, а не
