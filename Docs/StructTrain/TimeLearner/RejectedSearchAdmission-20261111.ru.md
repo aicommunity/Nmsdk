@@ -46,7 +46,12 @@ retry_same_candidate. Не обходить этот запрет и не зап
 несуществующей настройкой. CapturedPerInput, tolerance и assigned maximum не
 меняются; весь исходный план 0–12 остаётся открытым за пределами принятых частей.
 
-Серверная приёмка начата: [один subject на трёх workers](ThreeWorkerRejectedSearch-20261111.ru.md).
-На Elder/M40 выполняются SDK build и native29, на Windows — MSVC SDK build.
-Предварительная Linux-проверка полного namespace и Windows production
-Test-PreparedSdk приняты; это ещё не compiler/test PASS новой функции.
+Серверная приёмка: [исходный subject и исправленный повтор](ThreeWorkerRejectedSearch-20261111.ru.md).
+Исходные Linux попытки завершены19PASS/10FAIL на каждом worker, не приняты.
+NaN mutation выявила выход private MatchedOmission Failure из публичных
+content-ID API; Pulseaf612ba переводит его в std::invalid_argument с исходной
+причиной. Содержимое valid content ID не меняется. Исправлены также envelope
+Ambiguous fixture и проверка отдельного group budget; тесты не ослабляются
+до произвольного отказа. B1 выполняет те же29cases в отдельных leaves на
+новых Linux SDK. Windows отдельно проверяет переносимость19 ранее прошедших
+случаев старого subject. Полная runtime-приёмка новой функции остаётся открытой.

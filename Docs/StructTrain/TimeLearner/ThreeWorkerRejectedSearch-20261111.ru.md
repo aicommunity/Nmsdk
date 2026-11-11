@@ -32,11 +32,32 @@ outer и единственного child cgroup, released reservation; очис
   произвольный отказ не считается прохождением.
 
 Исправленный subject: root9d51f808047f08e0cbfa0e440061f9bf04e8ba88 / Pulseaf612ba.
-Декларации B1 содержат те же 29 test IDs, по одному на leaf; их серверная
-проверка готовится в новых source/build/runtime/output каталогах. Пока эти
-правки не получили runtime-приёмку. Windows build A1 относится к прежнему
-root04f/Pulse558, а не к исправленному subject. Нижеследующий раздел описывает
-снимок первоначального запуска, не текущую занятость.
+Декларации B1 содержат те же 29 test IDs, по одному на leaf. Canonical
+preparation принята на M40 за84.90с и Elder за67.71с; запущены новые отдельные
+SDK build/native29. Подтверждены live supervisors M40 PID3780876/start345701433
+и Elder PID2115216/start395158404 с работающими outer kernel groups. Их точные
+launch/status receipts сохранены в ValidationPlans/*RejectedSearchAdmissionB1.
+Пока эти правки не получили runtime-приёмку.
+
+Windows build A1 относится к прежнему root04f/Pulse558, а не к исправленному
+subject. Компиляция/линковка завершились сreturncode0 за2182.45с, но исходный
+backend outcome — descendants_remaining, build_accepted=false. Backend закрыл
+все процессы. Этот отказ сохранён: [оригинальные23records в Git-архиве](../../../Reports/StructTrain/TimeLearner/WindowsRejectedSearchBuild-20261111/archive.json).
+Независимый closed-build audit прошёл за65.46с: исходные hashes, kernel closure,
+source/dependencies/runtime проверены без изменения исходного результата.
+Полные audit records также сохранены компактным Git pack в том же разделе
+Reports. Суммарный размер двух архивов —1678129bytes; исполняемые файлы туда
+не копировались.
+
+После audit запущен отдельный Windows diagnostic19: те же19cases, которые
+прошли на обоих Linux workers в исходном subject. Полный список, десять
+исключённых известных отказов и ограничение области зафиксированы до запуска
+в native19-plan.json/native19-comparison-scope.json. Это проверка переносимости
+и lifecycle прежней версии; она не подменяет полный29 B1 и не исправляет его
+отказы. Подтверждены активный task instance и живой Test_PulseLib_StorageComponents
+PID9592. Scientific worker admission остаётсяfalse; итогов diagnostic19 ещё нет.
+
+Нижеследующий раздел описывает снимок первоначального запуска, не текущую занятость.
 
 ## Предмет проверки
 

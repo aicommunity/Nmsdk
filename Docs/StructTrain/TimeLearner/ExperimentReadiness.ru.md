@@ -4,8 +4,13 @@
 дала на Elder и M40 одинаковые 19 PASS / 10 FAIL из реально выполненных29;
 попытки не приняты, все owned groups закрыты, reservations released.
 Исправлены граница исключений NaN и две ошибки fixtures; новый B1 разделяет
-каждый случай в отдельный leaf. Его runtime-приёмка ещё впереди. Windows .14
-собирает прежний subject root04f/Pulse558 под MSVC. Закрытый native допуск Missing/Ambiguous Search реализован отдельно;
+каждый случай в отдельный leaf; после успешной canonical preparation новый
+SDK build/native29 запущен на обоих Linux workers. Его runtime-приёмка ещё
+впереди. Windows .14 завершила компиляцию прежнего subject root04f/Pulse558
+сreturncode0, но исходный outcome descendants_remaining остаётся отказом.
+Независимый closed-build audit прошёл; выполняется отдельный diagnostic19
+для переносимости ранее прошедших случаев, без scientific worker admission.
+Закрытый native допуск Missing/Ambiguous Search реализован отдельно;
 продвижение поиска по нему и новая сериализуемая recovery policy ещё не готовы.
 Runtime2 остаётся retry-only. Приведённые ниже принятые результаты относятся
 к предыдущим версиям, а не к новой реализации.
