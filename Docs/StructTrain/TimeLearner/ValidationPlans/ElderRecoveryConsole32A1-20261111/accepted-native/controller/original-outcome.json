@@ -1,0 +1,55 @@
+{
+  "kernel_before_stop": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "0f50e0f1665c0b573cfe85a76f7150c67603f5b8a04b64658c0b1ac80d9671c7",
+      "unit": "timelearner-c3d2f01d-bafe-4524-ac8f-5dd6f422268d.service",
+      "invocation_id": "51c9d6dc58304c7394781c2310e49108",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c3d2f01d-bafe-4524-ac8f-5dd6f422268d.service",
+      "initial_main_pid": 3588621,
+      "initial_start_ticks": "399770466",
+      "sha256": "39385d626e496c91b47806f4b558879c6d7c1efd69e858015b6f7b6b79333334"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt c3d2f01d-bafe-4524-ac8f-5dd6f422268d",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "exited",
+      "InvocationID": "51c9d6dc58304c7394781c2310e49108"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "worker_terminal": {
+    "job_validation_passed": true,
+    "cohort_assertions_passed": true,
+    "built": true,
+    "expected_cpp_cases": 32,
+    "audited_completed_cpp_cases": 32,
+    "actual_audited_assertion_passed_cpp_cases": 32,
+    "actual_audited_failed_cpp_ids": [],
+    "completed_leaf_gates": 32,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "cleanup_does_not_attest_execution_success": true
+}

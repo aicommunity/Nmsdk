@@ -6,8 +6,8 @@
 |---|---|---|
 | Recovery package7/summary8, pipeline snapshot | Elder DATA9/9 и production snapshot12/12 | [Исходный pipeline результат](ValidationPlans/ElderPipelinePackage7Audit12F1-20261111/RESULT.ru.md); не native import |
 | Source7 recognition | Elder native10/10 и независимый replay6/6 | [Replay](ValidationPlans/ElderRecoveryRecognition7Independent6A2-20261111/RESULT.ru.md);10conversions/20frozen trials, полный Git corpus4.27MB |
-| Build boundary, header publication7/execution5, legacy wire, recognition | M40 свежая SDK-сборка и32/32PASS | [Точный scope](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md); outer+32children closed, lease released; полный primary bundle ещё нужен |
-| Такой же SDK/cohort на Elder | Canonical preparation принята; новая сборка работает | [Условия и live proof](ValidationPlans/ElderRecoveryConsole32A1-20261111/); source8362d58f/Pulse1110808, отдельный runtime; итога32/32 ещё нет |
+| Build boundary, header publication7/execution5, legacy wire, recognition | M40 свежая SDK-сборка и32/32PASS | [Точный scope](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md); outer+32children closed, lease released; [M40 corpus6.14MB опубликован](ValidationPlans/M40RecoveryConsole32ClosedCorpusA1-20261111/RESULT.ru.md); semantic replay ещё нужен |
+| Такой же SDK/cohort на Elder | Независимая GCC11/Qt5 SDK-сборка и32/32PASS | [Результат](ValidationPlans/ElderRecoveryConsole32A1-20261111/RESULT.ru.md); outer+32children closed; полный Elder primary bundle ещё нужен |
 | Реальный Console cold8 | M402/2PASS: cold Train/Exact, export, calibration, frozen Test и rollback | [Результат и scope](ValidationPlans/M40RecoveryConsoleCold8A1-20261111/RESULT.ru.md); TP2/FP0/FN0/TN2 для каждой N2/N0 модели, same-matrix, не N4 |
 | Научная N4/default Sync0.02 серия | Не подтверждена новым завершённым контролем | N2/Sync0.2 не переносится на N4;8/8 не является условием рефакторинга |
 
