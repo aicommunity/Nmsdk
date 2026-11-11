@@ -8,8 +8,11 @@
 SDK build/native29 запущен на обоих Linux workers. Его runtime-приёмка ещё
 впереди. Windows .14 завершила компиляцию прежнего subject root04f/Pulse558
 сreturncode0, но исходный outcome descendants_remaining остаётся отказом.
-Независимый closed-build audit прошёл; выполняется отдельный diagnostic19
-для переносимости ранее прошедших случаев, без scientific worker admission.
+Независимый closed-build audit прошёл; отдельный diagnostic19 для переносимости
+ранее прошедших случаев завершён19/19 valid PASS, все native процессы закрыты.
+Полный primary207files опубликован компактным Git pack и побайтно проверен
+после переноса; независимый semantic replay ещё нужен. Scientific worker
+admissionfalse; этот subset не подменяет полный29 B1 на обоих Linux workers.
 Закрытый native допуск Missing/Ambiguous Search реализован отдельно;
 продвижение поиска по нему и новая сериализуемая recovery policy ещё не готовы.
 Runtime2 остаётся retry-only. Приведённые ниже принятые результаты относятся

@@ -55,7 +55,21 @@ Reports. Суммарный размер двух архивов —1678129bytes
 в native19-plan.json/native19-comparison-scope.json. Это проверка переносимости
 и lifecycle прежней версии; она не подменяет полный29 B1 и не исправляет его
 отказы. Подтверждены активный task instance и живой Test_PulseLib_StorageComponents
-PID9592. Scientific worker admission остаётсяfalse; итогов diagnostic19 ещё нет.
+PID9592. Затем diagnostic19 завершён: expected=observed=19, assertion_status=passed,
+execution=completed, validity=valid, все native процессы закрыты. GTest wall
+239.278с. Исходный build outcome не изменён; scientific worker admissionfalse.
+Это19/19 ровно объявленного portability subset, не полный29 и не исправленный B1.
+
+[Полный primary Windows19](../../../Reports/StructTrain/TimeLearner/WindowsRejectedSearchDiagnostic19-20261111/archive.json)
+сохранён:207 regular files,32991186 bytes исходных данных в1207885bytes Git pack,
+SHA256 e367bfdc43d82a38249adf3831d848eed8107ee55638452e80d147495a23c1af.
+После Git-переноса локально независимо сверены все207 payload hashes и точное
+множество файлов (191 unique blobs); это byte verification, не новый расчёт
+модели или независимый семантический replay. Последний ещё не выполнен.
+Native process result, terminal и gate result сохранены рядом с декларацией.
+
+Windows19 закончилась раньше полного Linux B1. Машину не считать занятой
+завершённым task; дальнейшие запуски требуют новой конкретной декларации.
 
 Нижеследующий раздел описывает снимок первоначального запуска, не текущую занятость.
 
