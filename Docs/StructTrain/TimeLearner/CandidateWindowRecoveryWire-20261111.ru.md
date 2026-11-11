@@ -6,11 +6,12 @@
 
 Следующий frozen C2 root5643f8319/Pulse0fb035a содержит146 cases/49leaf gates.
 Все4104 source files и восемь Git repositories доставлены на Elder и M40.
-Подготовка M40 ещё не принята: два прежних запуска остановлены до сборки
-на cohort file binding и совпадении external output с owned job directory.
-Новые декларации C2C сохраняют cohort в отдельном frozen file и разделяют
-output/owner directories. Неудачные outcomes сохранены; их нельзя считать
-сборкой либо результатом C++ тестов.
+Два прежних запуска подготовки M40 остановлены до сборки на cohort file
+binding и совпадении external output с owned job directory. Декларации C2C
+исправляют эти ошибки. Canonical M40 принята за79.77с с clear diagnostics
+и закрытым cgroup; запущена отдельная SDK сборка/native146, supervisor
+PID82620/start346617135. Результата146 пока нет. Неудачные прежние outcomes
+сохранены; их нельзя считать сборкой либо результатом C++ тестов.
 
 Cold8 сохраняет все поля cold7, включая base_schema_version1..4, и добавляет
 обязательное invalid_measurement_recovery=advance_rejected_candidate_window.
