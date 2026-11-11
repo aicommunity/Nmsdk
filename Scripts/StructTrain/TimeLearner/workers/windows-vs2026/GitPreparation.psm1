@@ -10,11 +10,18 @@ function Invoke-CheckedGit {
     param([Parameter(Mandatory=$true)][string[]]$ArgumentList)
     $gitCommand = Get-Command git.exe -CommandType Application -ErrorAction Stop
     $previous = $ErrorActionPreference
+    $previousEncoding = [Console]::OutputEncoding
     try {
+        # Git object/JSON bytes are UTF-8 even when the caller uses an OEM
+        # console code page. Decode before PowerShell creates output strings.
+        [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
         $ErrorActionPreference = 'Continue'
         $lines = @(& $gitCommand.Source @ArgumentList 2>&1)
         $code = $LASTEXITCODE
-    } finally { $ErrorActionPreference = $previous }
+    } finally {
+        $ErrorActionPreference = $previous
+        [Console]::OutputEncoding = $previousEncoding
+    }
     foreach ($entry in $lines) {
         # Windows PowerShell 5.1 wraps the first stderr line and subsequent
         # stderr lines with different IDs, even when Git exits successfully.

@@ -1,7 +1,8 @@
 param([Parameter(Mandatory=$true)][string]$OutputDirectory,
       [Parameter(Mandatory=$true)][string]$SdkRoot,
       [Parameter(Mandatory=$true)][string]$SdkCommit,
-      [Parameter(Mandatory=$true)][string]$SdkNamespaceBlob)
+      [Parameter(Mandatory=$true)][string]$SdkNamespaceBlob,
+      [ValidateRange(1,10000000)][int]$ExpectedSdkFiles=4052)
 $ErrorActionPreference = 'Stop'
 $ProgressPreference = 'SilentlyContinue'
 [Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
@@ -77,6 +78,20 @@ try {
     $file = Join-Path $receiver 'fixture.txt'
     $record = @{bytes=([IO.FileInfo]$file).Length;sha256=(Get-FileHash -LiteralPath $file -Algorithm SHA256).Hash.ToLowerInvariant()}
     $namespace = Write-Blob $receiver 'namespace.json' @{'fixture.txt'=$record}
+    Check 'Utf8GitJsonSurvivesOemConsoleAndRestoresCallerEncoding' {
+        $unicode = -join ([char[]]@(0x0442,0x0435,0x0441,0x0442))
+        $blob = Write-Blob $receiver 'unicode.json' @{name=$unicode;path=('Catalog/'+$unicode+'.json')}
+        $previousEncoding = [Console]::OutputEncoding
+        try {
+            [Console]::OutputEncoding = [Text.Encoding]::GetEncoding(866)
+            $raw = (Invoke-CheckedGit @('-C',$receiver,'cat-file','blob',$blob)) -join "`n"
+            $value = ConvertFrom-Json -InputObject $raw
+            if ($value.name -cne $unicode -or $value.path -cne ('Catalog/'+$unicode+'.json')) {
+                throw 'Git UTF-8 JSON changed in an OEM console'
+            }
+            if ([Console]::OutputEncoding.CodePage -ne 866) { throw 'Caller console encoding was not restored' }
+        } finally { [Console]::OutputEncoding = $previousEncoding }
+    }
     Check 'FixtureExactNamespaceAccepted' {
         $result = Test-PreparedSdk $receiver $commit $namespace 1 1
         if ($result.verified_files -ne 1) { throw 'Fixture namespace count differs' }
@@ -92,8 +107,8 @@ try {
         $bad = Write-Blob $receiver 'bad-namespace.json' @{'fixture.txt'=$badRecord}
         Reject { Test-PreparedSdk $receiver $commit $bad 1 1 } 'Source file type/size differs'
     }
-    Check 'ActualPackage6Sdk4052AndEightRepositories' {
-        $result = Test-PreparedSdk $SdkRoot $SdkCommit $SdkNamespaceBlob 4052 8
+    Check 'ActualDeclaredSdkAndEightRepositories' {
+        $result = Test-PreparedSdk $SdkRoot $SdkCommit $SdkNamespaceBlob $ExpectedSdkFiles 8
         [IO.File]::WriteAllText((Join-Path $output 'actual-sdk.json'),($result|ConvertTo-Json -Depth 5)+"`n",$utf8)
     }
     $receipt = [pscustomobject]@{kind='windows_git_preparation_tests';executed=$script:cases.Count;

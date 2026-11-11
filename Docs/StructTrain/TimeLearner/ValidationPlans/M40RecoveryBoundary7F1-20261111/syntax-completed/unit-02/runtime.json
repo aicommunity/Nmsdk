@@ -1,0 +1,155 @@
+{
+  "schema_version": 2,
+  "source_closure": {
+    "root": {
+      "head": "3edb22a4cf80b76fbae4deb379ec510ebfac0fcf",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "63d7a623e8488617c3cfcda775b1baa68e5db29f",
+      "head": "63d7a623e8488617c3cfcda775b1baa68e5db29f",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "executable": {
+    "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "size": 1027128
+  },
+  "app_ini": {
+    "path": "/media/user/Data/TimeLearnerRefactor/build-candidate-window-recovery-ledger-e1/Libraries/Nmsdk-PulseLib/CMakeFiles/Nmsdk-PulseLib.core.dir/flags.make",
+    "sha256": "3d777b2b9925d630288d5f42ec737f89918b989271e86dce832d4cb7e675526a",
+    "size": 1765
+  },
+  "build_flags": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CXX_COMPILER": "/usr/bin/c++",
+    "CMAKE_CXX_FLAGS": "",
+    "CMAKE_CXX_FLAGS_DEBUG": "-g",
+    "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+    "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+    "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+    "CMAKE_C_COMPILER": "/usr/bin/cc",
+    "CMAKE_EXE_LINKER_FLAGS": "",
+    "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+    "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+    "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+    "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+    "CMAKE_MODULE_LINKER_FLAGS": "",
+    "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+    "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+    "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+    "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+    "CMAKE_SHARED_LINKER_FLAGS": "",
+    "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+    "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+    "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+    "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+    "CMAKE_STATIC_LINKER_FLAGS": "",
+    "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+    "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+    "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+    "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+    "NMSDK_DEPLOY_ROOT": "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-ledger-e1",
+    "NMSDK_RESOURCE_ROOT": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+    "NO_MOTION_CONTROL": "ON",
+    "RDK_LLM_BUILD_EMBEDDED": "OFF",
+    "validation_scope": "syntax_only_no_link_or_native_execution",
+    "translation_unit": "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeLearnedState.cpp"
+  },
+  "resolved_libraries": [
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+      "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "size": 2129424
+    },
+    {
+      "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+      "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+      "size": 236616
+    }
+  ],
+  "loader_environment": {},
+  "compiler": {
+    "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+    "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "size": 1027128,
+    "version": "c++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  "loaded_process_files": null,
+  "runtime_identity": {
+    "kind": "timelearner_runtime_content",
+    "schema_version": 2,
+    "executable": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "app_ini": "3d777b2b9925d630288d5f42ec737f89918b989271e86dce832d4cb7e675526a",
+    "resolved_libraries": [
+      "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+      "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da"
+    ],
+    "build_flags": {
+      "CMAKE_BUILD_TYPE": "Release",
+      "CMAKE_CXX_FLAGS": "",
+      "CMAKE_CXX_FLAGS_DEBUG": "-g",
+      "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+      "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+      "CMAKE_EXE_LINKER_FLAGS": "",
+      "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_MODULE_LINKER_FLAGS": "",
+      "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_SHARED_LINKER_FLAGS": "",
+      "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "CMAKE_STATIC_LINKER_FLAGS": "",
+      "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+      "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+      "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+      "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+      "NO_MOTION_CONTROL": "ON",
+      "RDK_LLM_BUILD_EMBEDDED": "OFF",
+      "validation_scope": "syntax_only_no_link_or_native_execution",
+      "translation_unit": "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeLearnedState.cpp"
+    },
+    "compiler": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+    "loaded_process_files": null
+  },
+  "runtime_fingerprint": "3b88057378047f45c9da752aa08f2b035610f81a62c7bb7a8bfcebfae8e94064"
+}
