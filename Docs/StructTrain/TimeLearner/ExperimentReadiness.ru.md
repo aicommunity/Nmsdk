@@ -1,5 +1,8 @@
 # Готовность к научным экспериментам — 11.11.2026
 
+**Независимый source7 replay принят6/6 на Elder:** полностью восстановлен Git corpus native10, проверены десять conversions и двадцать полных frozen observations, Branch/N1 references, corruption/relabel guards. Source и fixture before/after совпадают; whole cgroup closed, lease released. [Результат](ValidationPlans/ElderRecoveryRecognition7Independent6A2-20261111/RESULT.ru.md). Native10 и независимый DATA reader согласованы; это технические N=2/Sync0.2 fixtures. Настоящий Console cold8 Train→Test, научный N4 и остальные требования полного плана открыты. M40 native32 продолжает свежую SDK-сборку.
+
+
 **Актуализация 11.11.2026:** Elder source7 recognition принят **10/10** на реальных C++ компонентах: public conversion/import, N0/N1, Classic/Branch, completed/stopped и heterogeneous C0, двадцать frozen target/foil trials; outer/10 children closed и lease released. [Доказательства и ограничения](ValidationPlans/ElderRecoveryRecognition7Native10A2-20261111/RESULT.ru.md). Это технические N=2/Sync0.2 fixtures, не научный N4 результат. Независимый replay полного corpus и внешний Console execution5 остаются открыты. M40 DATA execution5 + production Git projection принят **10/10** ([результат](ValidationPlans/M40RecoveryExecution5DataA2-20261111/RESULT.ru.md)). Набор native32 подготовлен на root8362d58f/Pulse1110808; подготовка принята, запрос запуска зафиксирован отдельно. Предыдущие running-статусы ниже являются историческими снимками.
 
 
