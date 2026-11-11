@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/home/user/timelearner-refactor",
+  "source": {
+    "path": "/home/user/timelearner-refactor/source-rejected-search-admission-b1",
+    "commit": "9d51f808047f08e0cbfa0e440061f9bf04e8ba88",
+    "namespace": {
+      "path": "/home/user/timelearner-refactor/requests/rejected-search-admission-b1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRejectedSearchAdmissionB1-20261111/namespace.json",
+      "sha256": "80e84b05cb8f3851e7c4a6e63adbdc4ca9e1a90e518870c8bb4fe20578cc7392"
+    }
+  },
+  "cohort": {
+    "path": "/home/user/timelearner-refactor/requests/rejected-search-admission-b1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRejectedSearchAdmissionB1-20261111/cohort.json",
+    "sha256": "2b881d2e80d67aa1cee5cb6ae831affa8db0749dc23044b4090a2e17619bca85"
+  },
+  "native_job": {
+    "path": "/home/user/timelearner-refactor/requests/rejected-search-admission-b1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRejectedSearchAdmissionB1-20261111/native-job.json",
+    "sha256": "f147e311edea5a695dc37f4a05a93ada43fa2f3a11665850d497d1a5c315c4a2"
+  },
+  "prior_bindings": [],
+  "external_output": "/home/user/timelearner-refactor/readbacks/s07-rejected-search-canonical-elder-b1",
+  "native_tool": {
+    "path": "/home/user/timelearner-refactor/source-n1-geometry-decision-after-a4",
+    "commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a"
+  },
+  "require_fresh_build": true
+}
