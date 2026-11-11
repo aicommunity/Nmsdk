@@ -1,5 +1,9 @@
 # Проверка доставки recovery в native service — 11.11.2026
 
+Поддерживаемый DATA audit расширен до package7/summary8, сохраняя отдельный legacy6 путь. На Elder **107/107 PASS**, без failures/errors/skips, cgroup closed и lease released; [проверенные возможности и ограничения](RecoveryLedgerIndependentAudit-20261111.ru.md). Положительные joins нового native corpus и Console/frozen recognition ещё открыты.
+
+Windows source3edb22a4 compile/link завершились returncode0 за2166.44s. Исходный verdict build_accepted=false/descendants_remaining/all_processes_closed=true сохранён целиком в [build F1](ValidationPlans/WindowsRecoveryBoundary7BuildF1-20261111/terminal/); он не заменён успешным. Отдельный штатный closed-build audit запущен с hash-bound original records, targets и namespace4123: [условия и dispatch](ValidationPlans/WindowsRecoveryBoundary7ClosedAuditF1-20261111/). Подтверждён живой Python10156; его результат пока ожидается.
+
 Новое независимое дополнение: ledger DATA reader с проверкой исходных runtime3 retained attempts принят на Elder по **16/16** адресным event/ledger tests; cgroup closed, lease released. [Контракт, ограничения и первичные записи](RecoveryLedgerIndependentAudit-20261111.ru.md). Это ещё не положительный join полного непустого C++ service ledger и не приёмка package7/summary8 или Console. Ниже сохранена последовательность предыдущих snapshots и их отдельных результатов.
 
 Source root `4417545808e422fcc202b235f566b0cbdc0855cc`, Pulse `dbc8a408e08095c274fae64a44c5bdbeddd4f7c4`. Эта комбинация пока не получила runtime приёмку.
