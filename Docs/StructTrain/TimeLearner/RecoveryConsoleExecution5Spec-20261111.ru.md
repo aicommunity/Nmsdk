@@ -1,8 +1,8 @@
 # Незакрытый Console boundary cold8/package7
 
-**Реализация добавлена, но ещё не принята compiler/runtime проверками.** Header publication7/execution5, Python dispatch8/5, общий ledger binding и live/base2 dispatch реализованы. Добавлены7 C++ real-source producer cases и7 Python DATA cases на фактическом закрытом source7 corpus. Эти wrapper checks явно не являются выполнением внешнего Console. Отдельные настоящий Console preflight/Train/export/Test и сохранение старого wire3/4 обязательны. Текущие M40 F7 и Elder A2 используют прежние неизменные source и этого кода не содержат.
+**DATA-приёмка 10/10 завершена; C++ producer и внешний Console ещё не приняты.** [Семь execution5 DATA checks и три production Git projection проверки](ValidationPlans/M40RecoveryExecution5DataA2-20261111/RESULT.ru.md) выполнены на M40. Отдельный native32 набор с7 новыми producer и11 legacy wire cases запущен в новом runtime; компиляция подтверждена, результатов tests ещё нет. Header publication7/execution5, Python dispatch8/5, общий ledger binding и live/base2 dispatch реализованы. Добавлены7 C++ real-source producer cases и7 Python DATA cases на фактическом закрытом source7 corpus. Эти wrapper checks явно не являются выполнением внешнего Console. Отдельные настоящий Console preflight/Train/export/Test и сохранение старого wire3/4 обязательны. Предшествующие M40 F7 и Elder A2 использовали прежние неизменные source и этого кода не содержали.
 
-Проверка исходников подтвердила дополнительные причины, почему native API
+Исторический диагноз до исправления (ниже не описание текущего кода): проверка исходников подтвердила дополнительные причины, почему native API
 проверки ещё не дают допуска к новой Console научной серии.
 TimeLearnerCompositeArtifacts.h принимает для publication только package5/6;
 WrapConfiguredNativeExecution распознаёт configuration6/7, но не8.

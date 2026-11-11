@@ -18,3 +18,7 @@ Source и пакеты данных реальны. Wrapper base arguments в un
 Build из-за N1physical/N0plan mismatch. Здесь исправлена именно fixture.
 Budget900s на case,6h на wholejob,8GiB memory reservation и12GiB disk
 reservation сохранены как явные эксплуатационные ограничения.
+
+## Подтверждённый запуск
+
+Canonical preparation принята79.914s,32cases/32leaves,4132файла/8trees; [raw](accepted-preparation/). Launch control commit f1fc08ae6194a5d0fe05ff301437d99a1c518255. Supervisor1610135/start349998881 и worker1616042 подтверждены живыми; cmake build Test_PulseLib_StorageComponents/NeuroModelerConsole и два реальных cc1plus работали22:20:58+03. [Наблюдение](first-live.txt). Это работающая сборка, не успешные compile/tests.
