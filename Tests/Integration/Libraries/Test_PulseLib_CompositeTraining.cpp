@@ -4444,7 +4444,7 @@ QJsonObject RecoveryCodecData(bool capacitance=false) {
     e.runId="codec-run";e.trialId="codec-run/search/3";e.baseModelRevision="before";e.effectiveModelRevision="effective";
     e.fullParameters={{3,2,86e6},{1,1,42e6}};e.validity=PeakValidity::Missing;
     e.disposition=CandidateRecoveryDisposition::CursorAdvanced;e.statusAfter=TrainingStatus::Searching;
-    if(capacitance)e.capacitance=TrainingCapacitance{"heterogeneous-origin",.5,{{"cable/1",.8},{"cable/3",1.2}}};
+    if(capacitance)e.capacitance=TrainingCapacitance{std::string(64,'d'),.5,{{"Dendrite1_1",.8},{"Dendrite1_3",1.2}}};
     event.groupId="codec-group";event.rejectedContentId=std::string(64,'a');event.sourceOrigin=std::string(64,'b');
     event.ownerScope="codec-owner";event.candidateWitnessId=std::string(64,'c');
     event.issuedProbes=4;event.appliedEdits=2;event.acceptedCompositeObservations=2;
@@ -4457,8 +4457,8 @@ QJsonObject RehashRecoveryData(QJsonObject value) {
 TEST(NativeCandidateWindowRecoveryEventCodec,RoundtripRetainsFullHeterogeneousCapacitanceData) {
     const auto wire=RecoveryCodecData(true);const auto value=DecodeCandidateWindowRecoveryEvidence(wire);
     ASSERT_TRUE(value.transition.capacitance);EXPECT_EQ(value.transition.capacitance->membraneScales.size(),2u);
-    EXPECT_DOUBLE_EQ(value.transition.capacitance->membraneScales.at("cable/1"),.8);
-    EXPECT_DOUBLE_EQ(value.transition.capacitance->membraneScales.at("cable/3"),1.2);
+    EXPECT_DOUBLE_EQ(value.transition.capacitance->membraneScales.at("Dendrite1_1"),.8);
+    EXPECT_DOUBLE_EQ(value.transition.capacitance->membraneScales.at("Dendrite1_3"),1.2);
     EXPECT_EQ(EncodeCandidateWindowRecoveryEvidence(value),wire);
 }
 TEST(NativeCandidateWindowRecoveryEventCodec,RehashedUnknownFieldsAndEnumsCannotBeNormalizedAway) {
