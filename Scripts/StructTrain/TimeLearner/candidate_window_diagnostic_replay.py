@@ -25,11 +25,7 @@ def replay(native, group_numbers):
     version = count(package['schema_version'])
     require(version in (6, 7), 'window_replay_requires_candidate_window_package')
     resolver = filesystem_primary_resolver(native)
-    if version == 7:
-        from .candidate_window_package_evidence import audit_candidate_window_recovery_package
-        audit = audit_candidate_window_recovery_package(package, summary, external_resolver=resolver)
-    else:
-        audit = audit_composite_package(package, summary, external_resolver=resolver)
+    audit = audit_composite_package(package, summary, external_resolver=resolver)
     records = package['measurement_archive']['records']
     require(type(group_numbers) is list and group_numbers and
             all(type(i) is int and 0 < i <= len(records) for i in group_numbers) and
