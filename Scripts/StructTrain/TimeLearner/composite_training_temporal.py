@@ -1,0 +1,140 @@
+"""Render full/omission training probes after replaying the complete package.
+
+Run on an owned analysis worker. Windows are proposals, not measured peaks.
+This renderer preserves failed selections and never creates a certificate.
+"""
+import csv
+import argparse
+import hashlib
+import io
+import json
+from pathlib import Path
+
+from .composite_package_evidence import audit_composite_package
+from .composite_primary import filesystem_primary_resolver
+from .native_evidence import load, number, require
+from .plotting import figure_title, padded_limits, plotting_runtime
+
+
+def render(native, output, group_numbers):
+    native = Path(native).resolve(strict=True)
+    output = Path(output).resolve()
+    require(not output.exists() and not output.is_relative_to(native) and
+            not native.is_relative_to(output), 'training_report_output_overlap_or_exists')
+    require(type(group_numbers) is list and group_numbers and
+            all(type(i) is int and i > 0 for i in group_numbers) and
+            len(set(group_numbers)) == len(group_numbers), 'training_report_group_inventory')
+    packages = [native/n for n in ('train_stopped_state.json', 'train_learned_state.json')
+                if (native/n).is_file()]
+    require(len(packages) == 1, 'training_report_package_missing_or_ambiguous')
+    package_path = packages[0]
+    summary_path = package_path.with_name(package_path.name.replace('_state.', '_summary.'))
+    raw_package, raw_summary = package_path.read_bytes(), summary_path.read_bytes()
+    package, summary = load(package_path), load(summary_path)
+    resolver = filesystem_primary_resolver(native)
+    audit = audit_composite_package(package, summary, external_resolver=resolver)
+    records = package['measurement_archive']['records']
+    require(max(group_numbers) <= len(records), 'training_report_group_missing')
+    prepared = []
+    for ordinal in group_numbers:
+        record = records[ordinal-1]
+        raw_trials = record['raw_trials']
+        require(record['complete_group'] and raw_trials, 'training_report_group_incomplete')
+        series = []
+        for trial in raw_trials:
+            ref = trial['primary_ref']; raw = resolver(ref['relative_path'])
+            require(len(raw) == ref['bytes'] and hashlib.sha256(raw).hexdigest() == ref['sha256'],
+                    'training_report_primary_changed_after_audit')
+            rows = list(csv.reader(io.StringIO(raw.decode('utf-8'), newline=''), strict=True))
+            values = [[number(float(v)) for v in row] for row in rows[1:]]
+            spec = trial['actual_specification']
+            require(len(values) > 2 and len(spec['baseline']) > 0 and
+                    all(len(v) == len(spec['baseline'])+2 for v in values),
+                    'training_report_channel_dimensions')
+            series.append(dict(reference=ref, values=values, specification=spec,
+                               actual_stimuli=trial['actual_stimuli']))
+        require(len({len(s['specification']['baseline']) for s in series}) == 1,
+                'training_report_control_dimensions')
+        prepared.append((ordinal, record, series))
+    require(raw_package == package_path.read_bytes() and raw_summary == summary_path.read_bytes(),
+            'training_report_package_changed_after_audit')
+    runtime = plotting_runtime()
+    import matplotlib.pyplot as plt
+    output.mkdir(parents=True, exist_ok=False)
+    figures, groups = [], []
+    with plt.rc_context({'font.size': 12, 'path.simplify': False, 'svg.fonttype': 'none'}):
+        for ordinal, record, series in prepared:
+            count = len(series[0]['specification']['baseline'])
+            frame = record['method_specification']['candidate_frame']
+            frequency = number(series[0]['specification']['stimulus_profile']['frequency_hz'])
+            window = [frame[k]/frequency for k in ('first_frame', 'last_frame')]
+            duration = number(series[0]['specification']['end'])-number(series[0]['specification']['begin'])
+            # Detail includes actual response context and the proposed window;
+            # it does not assume the response occurs inside that window.
+            event_times = [e['frame_index']/frequency for e in series[0]['actual_stimuli']]
+            detail = [max(0., min([window[0], *event_times])-.04),
+                      min(duration, max([window[1], *event_times])+.3)]
+            groups.append(dict(ordinal=ordinal, group_id=record['group_id'],
+                selection=record['selection'], rejection_reason=record['rejection_reason'],
+                window_relative_seconds=window, model_revision=record['logical_request']['base_model_revision'],
+                primary_references=[s['reference'] for s in series]))
+            for channel in range(count):
+                limits = padded_limits([v[channel+2] for s in series for v in s['values']])
+                for view, bounds in [('overview', [0., duration]), ('detail', detail)]:
+                    fig, axes = plt.subplots(len(series), 1, figsize=(18, 3*len(series)), sharex=True)
+                    for ax, s in zip(list(axes), series):
+                        begin = number(s['specification']['begin'])
+                        times = [v[0]-begin for v in s['values']]
+                        name = Path(s['reference']['relative_path']).stem
+                        ax.plot(times, [v[channel+2] for v in s['values']], color='#1755a4', linewidth=1.4)
+                        ax.axvspan(*window, color='#aa3f9d', alpha=.13,
+                                   label='proposed assignment window (not a peak)')
+                        ax.set_xlim(*bounds); ax.set_ylim(*limits); ax.grid(alpha=.25)
+                        ax.set_ylabel('Raw soma potential\nSI units unverified')
+                        ax.set_title(name+' | same Y scale across all controls', loc='left')
+                        right = ax.twinx()
+                        stimulus = [v[1] for v in s['values']]
+                        right.plot(times, stimulus, color='#e47b19', linewidth=.8)
+                        right.set_ylim(*padded_limits(stimulus))
+                        right.set_ylabel('Actual input\nraw generator units', color='#b96310')
+                        # The recorded aggregate signal is shown independently
+                        # for every omission control, never a synthetic schedule.
+                    axes[-1].set_xlabel('Time since each native probe began [s]')
+                    status = record['selection']['geometry']['validity']
+                    figure_title(fig, f'Training group {ordinal} | soma{channel} | {view}\n'
+                        f'{record["logical_request"]["input_id"]}: selection={status}; '
+                        f'outcome={audit["training_outcome"]}\n'
+                        'Full and omission responses; no classification or new peak assignment')
+                    fig.subplots_adjust(top=.84, bottom=.05, left=.10, right=.88, hspace=.45)
+                    filenames = []
+                    for extension in ('png', 'svg', 'pdf'):
+                        filename = f'group-{ordinal:06d}-soma-{channel:03d}-{view}.{extension}'
+                        fig.savefig(output/filename, dpi=160); filenames.append(filename)
+                    plt.close(fig)
+                    figures.append(dict(group=ordinal, channel=channel, view=view,
+                        x_bounds_seconds=bounds, y_bounds=limits, files=filenames))
+    manifest = dict(kind='timelearner_composite_training_temporal_report', schema_version=1,
+        package_sha256=hashlib.sha256(raw_package).hexdigest(),
+        summary_sha256=hashlib.sha256(raw_summary).hexdigest(), package_audit=audit,
+        groups=groups, figures=figures, runtime=runtime, downsampling=False,
+        time_transform='recorded CSV time minus that native probe specification.begin',
+        input_transform='unaltered recorded CSV aggregate stimulus for each control',
+        training_certificate_eligible=False, scientific_verdict=None,
+        visual_acceptance_complete=False)
+    (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+    return manifest
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('native', type=Path)
+    parser.add_argument('output', type=Path)
+    parser.add_argument('--groups', nargs='+', type=int, required=True)
+    args = parser.parse_args(argv)
+    result = render(args.native, args.output, args.groups)
+    print(json.dumps(dict(groups=len(result['groups']), figures=len(result['figures']),
+                          scientific_verdict=None)))
+
+
+if __name__ == '__main__':
+    main()
