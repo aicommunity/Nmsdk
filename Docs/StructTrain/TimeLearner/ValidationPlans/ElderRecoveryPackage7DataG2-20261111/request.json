@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-recovery-package7-data-elder-g2",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-recovery-package7-python-g2",
+      "commit": "d6ddd877967bd472013e06286fb6d286953a9b37"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/recovery-package7-data-g2/Docs/StructTrain/TimeLearner/ValidationPlans/ElderRecoveryPackage7DataG2-20261111/suite.json",
+      "sha256": "895e98d9cc26d599d5eb67db23812ec0e789bff5af1e4879dfb77b7f3798872b"
+    },
+    "fixtures": {}
+  }
+}
