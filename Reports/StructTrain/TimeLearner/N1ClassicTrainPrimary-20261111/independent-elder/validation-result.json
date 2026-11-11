@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "independent-Elder-actual-N1-Classic-complete-primary-restore-a1",
+  "package_fingerprint": "bbc21381957c0a4f019cfb60734c40af1601b174ccf562e297b5c28d9b8d78ed",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_n1_classic_compact_primary.N1ClassicCompactPrimaryTest.test_restore_actual_failed_train_replay_graph_and_reject_corrupt_primary"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_N1_CLASSIC_COMPACT_PRIMARY": {
+      "path": "/home/user/timelearner-refactor/fixtures/n1-classic-primary-a1/Reports/StructTrain/TimeLearner/N1ClassicTrainPrimary-20261111",
+      "files": 6,
+      "fingerprint": "fe08e8d18d8bcd8dbc283f79f2a55340e9082f893da23416c9af912e16a98691"
+    }
+  },
+  "scientific_verdict": null
+}
