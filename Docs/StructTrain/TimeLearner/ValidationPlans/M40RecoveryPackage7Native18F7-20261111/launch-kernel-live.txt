@@ -1,0 +1,10 @@
+2026-11-11T20:33:51+03:00
+MainPID=1363178
+ControlGroup=/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-56f9128c-2982-4ef9-9ccb-51f569bb39a0.service
+ActiveState=active
+SubState=running
+InvocationID=335907d5f25c49de9652a967af46dce6
+    PID    PPID     ELAPSED %CPU COMMAND
+1357256       1       01:13 12.1 /usr/bin/python3 -B -m Scripts.StructTrain.TimeLearner.owned_native_job _supervise /media/user/Data/TimeLearnerRefactor/readbacks/s07-recovery-package7-native18-m40-f7-controller/request.json
+1363178    3389       00:59 11.5 /usr/bin/python3.12 -B -m Scripts.StructTrain.TimeLearner.native_acceptance_worker --job /media/user/Data/TimeLearnerRefactor/readbacks/s07-recovery-package7-native18-m40-f7-controller/inputs/job.json
+1363682 1363178       00:50  0.0 cmake --build /media/user/Data/TimeLearnerRefactor/build-recovery-package7-native18-f7 --target Test_PulseLib_StorageComponents NeuroModelerConsole --parallel 2
