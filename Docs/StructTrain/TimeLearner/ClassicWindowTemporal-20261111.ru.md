@@ -22,11 +22,15 @@
 
 [Полный обзор первого отказа](../../../Reports/StructTrain/TimeLearner/ClassicWindowTemporal-20261111/group-000014-soma-000-overview.png) · [последний отказ, detail](../../../Reports/StructTrain/TimeLearner/ClassicWindowTemporal-20261111/group-000018-soma-000-detail.png) · [последний отказ, overview](../../../Reports/StructTrain/TimeLearner/ClassicWindowTemporal-20261111/group-000018-soma-000-overview.png).
 
+## Независимый replay полного окна
+
+Последующая проверка сохранённых CSV production-геометрией Python (без расчёта модели): группа12 valid в обоих окнах; группы14/18 missing в исходном и ambiguous в полном окне. В полной записи первая вершина имеет no_necessary_input; следующие uniquely necessary для inputs2 и3. Для input0 допустимый максимум не установлен. Это подтверждает, что расширение окна само по себе не исправляет этот кандидат. Исходное обучение и certificate не изменены. [Полный replay и причины](../../../Reports/StructTrain/TimeLearner/ClassicWindowReplay-20261111/replay.json).
+
 ## Следующая проверка алгоритма
 
 1. Отделить начальную линейную гипотезу окна (полная L=1 задержка, использованная как коэффициент на сегмент) от измеренного прогноза/неопределённости. Пересмотр прогноза — отдельное изменение от уже проверенного N1 geometry interleaving.
 2. На сохранённых full/omission данных независимо проверить назначение для более широких объявленных окон. Это диагностический replay; он не превращает старое обучение в successful или resumed session.
-3. Проверить восстановление поиска при невалидном/слитом кандидате: ограниченный переход к другим допустимым геометриям, учёт revision и domains; отсутствие возможности назначить пик не считать временным остатком. Отдельно сравнить существующие RetrySame и AdvanceUnassignedBurst без изменения критерия Exact.
+3. Реализовать и проверить типизированное восстановление поиска при невалидном/слитом composite-кандидате: ограниченный переход к другим допустимым геометриям, учёт revision и domains; отсутствие возможности назначить пик не считать временным остатком. Уточнение source review: существующий AdvanceUnassignedBurst относится к scalar/burst-пути; candidate-window configuration и runtime2 явно запрещают его. Здесь требуется новый поддерживаемый контракт, а не переключение существующей настройки.
 4. Выполнить строгий физический A/B при одинаковых runtime/toolchain/protocol/budgets; контрольный SDK до исправления готовится на Elder.
 
 CapturedPerInput, границы Rs, опорный вход, SyncTolerance=.02 и амплитудные допуски не менялись. Полная сжатая публикация primary этого нового Train ещё не выполнена: выбранные рисунки, hash и серверный cache не закрывают это требование. Полный cache: /media/user/Data/TimeLearnerRefactor/readbacks/s07-classic-window-temporal-m40-a2/worker/tmp/classic-window-report. Синхронизация выбранных файлов выполнена через Git pack3001708B, SHA25606147b076f6afa8740459077c1c0f9bbb554e34178bd88a2ed52c2e0942a15dd.

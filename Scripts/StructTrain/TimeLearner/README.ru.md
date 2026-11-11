@@ -17,6 +17,16 @@
 сертификат, не заменяют frozen Test и требуют визуальной проверки. Полный набор
 хранить кэшем M40, в Git — выбранные рисунки и сжатые необходимые primary data.
 
+`python -m Scripts.StructTrain.TimeLearner.candidate_window_diagnostic_replay
+NATIVE OUTPUT.json --groups 12 14 18` независимо пересчитывает геометрию исходного
+окна и полного сохранённого окна. Поддерживается остановленный candidate-window
+package6; до пересчёта проверяются package/summary и все внешние CSV. Это post-hoc
+DATA-анализ без запуска модели: он не меняет Train, references или сертификат.
+На фактическом Classic N4 L=54 полное окно даёт ambiguous вместо исходного missing.
+Для composite/candidate-window режим AdvanceUnassignedBurst пока не реализован:
+существующий режим относится к scalar/burst-пути. Runtime2 явно отвергает такую
+настройку; требуется новый типизированный контракт, а не обход проверки parser.
+
 Для сохранения закрытых заданий Linux `owned_python_job` поддерживает отдельную
 операцию `closed-primary-bundle` с привязанным SHA-256 manifest. Manifest задаёт
 полное множество файлов и glog-алиасов, точные kernel bindings всех сохранённых
