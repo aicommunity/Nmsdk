@@ -1,0 +1,82 @@
+{
+  "kind": "closed_native_acceptance_preservation_receipt",
+  "schema_version": 3,
+  "collection_status": "completed",
+  "original_outcome": {
+    "planned": 29,
+    "executed": 29,
+    "passed": 29,
+    "failed_ids": [],
+    "not_completed_ids": []
+  },
+  "manifest_sha256": "f9f8887eb84b504fcc1d8e0addb02628be97ddb15f52449d62fcd52bbce070c6",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "ef485b91f9e3e3586681d9351d3905b628c00c9c3cdeb2f470c9c040a4c9d12b",
+    "packed/bundle.json": "080fb7bdba8a3a42b3aa7785347f8046d83984bb46523f6d511798e10eedea81",
+    "capture-proof.json": "d94de8a6d2b1a38227519e7ed6d9358039b4cf21fda25e74bda8d6437f9183c6"
+  },
+  "released_collection_lease": {
+    "token": "b02dc498-ae3b-48de-9ccb-4d68fbe0b820",
+    "job_id": "rejection29-b1-primary-evidence-rejection29-b1-m40-20261111",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 3990484,
+      "start_ticks": "346305626",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-rejected-search-admission-b1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/build-rejected-search-admission-b1"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-rejection29-b1-m40-20261111/Reports/StructTrain/TimeLearner/RejectionFactory29B1-M40-20261111",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-rejection29-b1-m40-20261111/Reports/StructTrain/TimeLearner/RejectionFactory29B1-M40-20261111"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/rejection29-b1-preservation-preparation-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/rejection29-b1-preservation-preparation-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rejected-search-native29-m40-b1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rejected-search-native29-m40-b1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rejected-search-native29-m40-b1-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-rejected-search-native29-m40-b1-controller"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-b1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-b1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-rejected-search-admission-b1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-rejected-search-admission-b1"
+      }
+    ],
+    "state": "released",
+    "created": 1794387865.8663204,
+    "deadline": 1794387995.898763,
+    "updated": 1794387882.7959774,
+    "release_note": "Closed native metadata preserved or collection failed; original outcome unchanged.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "collector_external_cgroup_attested": false,
+  "scientific_verdict": null
+}
