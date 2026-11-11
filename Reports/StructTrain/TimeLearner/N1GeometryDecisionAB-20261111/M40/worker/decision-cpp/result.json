@@ -1,0 +1,560 @@
+{
+  "kind": "timelearner_n1_geometry_cpp_ab",
+  "schema_version": 1,
+  "results": {
+    "before": {
+      "configure": [
+        "cmake",
+        "-S",
+        "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Tests/Integration/Algorithms",
+        "-B",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-geometry-decision-ab-m40-a4/worker/decision-cpp/before/build",
+        "-G",
+        "Unix Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_MAJOR=6",
+        "-DQt6_DIR=/usr/lib/x86_64-linux-gnu/cmake/Qt6",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/x86_64-linux-gnu-g++-13",
+        "-DCMAKE_MAKE_PROGRAM=/usr/bin/make",
+        "-DNMSDK_TRAINING_ALGORITHM_SOURCE_ROOT=/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-before-a4",
+        "-DGTest_DIR=/usr/lib/x86_64-linux-gnu/cmake/GTest"
+      ],
+      "inventory": {
+        "expected": 98,
+        "observed": 98,
+        "failed_test_ids": [
+          "BoundedTrainingN1GeometryFairness/ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode",
+          "BoundedTrainingFairDomains/ValidMeasurementsVisitGeometriesIndependentlyOfRecovery"
+        ],
+        "assertion_status": "failed",
+        "sha256": "626ca873efba9a7908b9df92160b231899b04d47fc46523bb7dcd55f8db1910d"
+      },
+      "process": {
+        "kind": "timelearner_process_result",
+        "schema_version": 1,
+        "execution": "process_error",
+        "reason": "nonzero_exit",
+        "returncode": 1,
+        "wall_seconds": 0.31638452410697937,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "308f9ade2395f9b0e3e707d907feb094f599ca9613e29fde8c381cd35186fa82",
+        "ownership_scope": "launched_executable_only",
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 25287,
+              "sha256": "88872781a1d34e44d906f0775a4faa49032cd41f076e524983bfc7f943ab748d"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": null,
+          "scientific_verdict": null
+        }
+      },
+      "runtime": {
+        "schema_version": 2,
+        "source_closure": {
+          "root": {
+            "head": "5ba0a2e81759a28f378117757aa3a5b91f1c57ab",
+            "status": ""
+          },
+          "Libraries/Nmsdk-PulseLib": {
+            "head": "c10206d5e338792d42b58ab28e48e7364b07e481",
+            "recorded_gitlink": "c10206d5e338792d42b58ab28e48e7364b07e481",
+            "status": ""
+          }
+        },
+        "executable": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-geometry-decision-ab-m40-a4/worker/decision-cpp/before/build/runtime/Test_PulseLib_TrainingAlgorithms",
+          "sha256": "f0c08502d43a7d9d62d31f9586a501331027e99b3ed4aeed1c71b4a65e0caf31",
+          "size": 1989096
+        },
+        "app_ini": {
+          "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-geometry-decision-ab-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1GeometryDecisionABA4-20261111/fixture/declaration.json",
+          "sha256": "886f166e750f66593e7cd3b919b653d846b102dc1488448f9ef623d89456e6a8",
+          "size": 8696
+        },
+        "compiler": {
+          "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+          "size": 1027128
+        },
+        "build_flags": {
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_CXX_COMPILER": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "CMAKE_CXX_FLAGS": "",
+          "CMAKE_CXX_FLAGS_DEBUG": "-g",
+          "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+          "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+          "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+          "CMAKE_EXE_LINKER_FLAGS": "",
+          "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "CMAKE_MODULE_LINKER_FLAGS": "",
+          "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "CMAKE_SHARED_LINKER_FLAGS": "",
+          "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "CMAKE_STATIC_LINKER_FLAGS": "",
+          "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "role": "production_decision_unit_projection; not native SDK admission"
+        },
+        "resolved_libraries": [
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2",
+            "sha256": "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390",
+            "size": 5275592
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libb2.so.1.0.4",
+            "sha256": "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093",
+            "size": 121128
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+            "size": 2129424
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3.1",
+            "sha256": "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c",
+            "size": 79952
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+            "size": 183024
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0",
+            "sha256": "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4",
+            "size": 1343056
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "sha256": "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1",
+            "size": 352304
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2",
+            "sha256": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+            "size": 30795392
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libicui18n.so.74.2",
+            "sha256": "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b",
+            "size": 3455304
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2",
+            "sha256": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+            "size": 2140336
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+            "size": 952616
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libpcre2-16.so.0.11.2",
+            "sha256": "526bbf0d9467d22451d04bfdb585cd7b84a22c9978dace5501704125ec2972f9",
+            "size": 572064
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2",
+            "sha256": "6075a70c30fd7216b9214ae50f2def0ce835092b034088ed9bd64c6a376c740f",
+            "size": 625344
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+            "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+            "size": 2592224
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3",
+            "sha256": "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+            "size": 113000
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5",
+            "sha256": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+            "size": 755864
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+            "size": 236616
+          }
+        ],
+        "loaded_process_files": null,
+        "loader_environment": {
+          "LD_LIBRARY_PATH": null,
+          "QT_PLUGIN_PATH": null,
+          "QT_QPA_PLATFORM": null
+        },
+        "runtime_identity": {
+          "kind": "timelearner_runtime_content",
+          "schema_version": 2,
+          "executable": "f0c08502d43a7d9d62d31f9586a501331027e99b3ed4aeed1c71b4a65e0caf31",
+          "app_ini": "886f166e750f66593e7cd3b919b653d846b102dc1488448f9ef623d89456e6a8",
+          "resolved_libraries": [
+            "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+            "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1",
+            "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+            "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b",
+            "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+            "526bbf0d9467d22451d04bfdb585cd7b84a22c9978dace5501704125ec2972f9",
+            "6075a70c30fd7216b9214ae50f2def0ce835092b034088ed9bd64c6a376c740f",
+            "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+            "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4",
+            "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390",
+            "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093",
+            "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+            "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c",
+            "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+            "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+            "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+            "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+          ],
+          "build_flags": {
+            "CMAKE_BUILD_TYPE": "Release",
+            "CMAKE_CXX_FLAGS": "",
+            "CMAKE_CXX_FLAGS_DEBUG": "-g",
+            "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+            "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+            "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+            "CMAKE_EXE_LINKER_FLAGS": "",
+            "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "CMAKE_MODULE_LINKER_FLAGS": "",
+            "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "CMAKE_SHARED_LINKER_FLAGS": "",
+            "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "CMAKE_STATIC_LINKER_FLAGS": "",
+            "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "role": "production_decision_unit_projection; not native SDK admission"
+          },
+          "compiler": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+          "loaded_process_files": null
+        },
+        "runtime_fingerprint": "308f9ade2395f9b0e3e707d907feb094f599ca9613e29fde8c381cd35186fa82"
+      },
+      "scientific_verdict": null
+    },
+    "after": {
+      "configure": [
+        "cmake",
+        "-S",
+        "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Tests/Integration/Algorithms",
+        "-B",
+        "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-geometry-decision-ab-m40-a4/worker/decision-cpp/after/build",
+        "-G",
+        "Unix Makefiles",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DQT_MAJOR=6",
+        "-DQt6_DIR=/usr/lib/x86_64-linux-gnu/cmake/Qt6",
+        "-DCMAKE_CXX_COMPILER=/usr/bin/x86_64-linux-gnu-g++-13",
+        "-DCMAKE_MAKE_PROGRAM=/usr/bin/make",
+        "-DNMSDK_TRAINING_ALGORITHM_SOURCE_ROOT=/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+        "-DGTest_DIR=/usr/lib/x86_64-linux-gnu/cmake/GTest"
+      ],
+      "inventory": {
+        "expected": 98,
+        "observed": 98,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "b5883214325a377ed7d83a445b36ffccae65ff309342e50ca3bebf24aa30bece"
+      },
+      "process": {
+        "kind": "timelearner_process_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "reason": "exit_zero",
+        "returncode": 0,
+        "wall_seconds": 0.3039350011385977,
+        "model_time": null,
+        "runtime_provenance": "loaded_files_captured",
+        "mapping_error": null,
+        "runtime_fingerprint": "2c317c61f4719e45e339d1a209dd270e9fc14cd42dba6b27f72bb709f2d3a299",
+        "ownership_scope": "launched_executable_only",
+        "scientific_verdict": null,
+        "operational_diagnostics": {
+          "kind": "timelearner_operational_diagnostics",
+          "schema_version": 1,
+          "policy": "owned-streams-v1",
+          "status": "clear",
+          "error_records": 0,
+          "warning_records": 0,
+          "unclassified_stderr_chunks": 0,
+          "reasons": [],
+          "examples": [],
+          "streams": [
+            {
+              "path": "stdout.log",
+              "bytes": 19199,
+              "sha256": "e47eff8a75bbaea1f729239cf0fe12ae630f3cf15d3ac3260dd37d83b64327b8"
+            },
+            {
+              "path": "stderr.log",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "contained_streams_match": null,
+          "scientific_verdict": null
+        }
+      },
+      "runtime": {
+        "schema_version": 2,
+        "source_closure": {
+          "root": {
+            "head": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+            "status": ""
+          },
+          "Libraries/Nmsdk-PulseLib": {
+            "head": "5398a5a563d3e358165fa855cd70236032f5b542",
+            "recorded_gitlink": "5398a5a563d3e358165fa855cd70236032f5b542",
+            "status": ""
+          }
+        },
+        "executable": {
+          "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-geometry-decision-ab-m40-a4/worker/decision-cpp/after/build/runtime/Test_PulseLib_TrainingAlgorithms",
+          "sha256": "9fbfdbae31e288dc6d8ba1a4db53d09860d8e5bb54f1bc8d7e805c12291a748c",
+          "size": 1989096
+        },
+        "app_ini": {
+          "path": "/media/user/Data/TimeLearnerRefactor/requests/n1-geometry-decision-ab-a4/Docs/StructTrain/TimeLearner/ValidationPlans/M40N1GeometryDecisionABA4-20261111/fixture/declaration.json",
+          "sha256": "886f166e750f66593e7cd3b919b653d846b102dc1488448f9ef623d89456e6a8",
+          "size": 8696
+        },
+        "compiler": {
+          "path": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "sha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+          "size": 1027128
+        },
+        "build_flags": {
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_CXX_COMPILER": "/usr/bin/x86_64-linux-gnu-g++-13",
+          "CMAKE_CXX_FLAGS": "",
+          "CMAKE_CXX_FLAGS_DEBUG": "-g",
+          "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+          "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+          "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+          "CMAKE_EXE_LINKER_FLAGS": "",
+          "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "CMAKE_MODULE_LINKER_FLAGS": "",
+          "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "CMAKE_SHARED_LINKER_FLAGS": "",
+          "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "CMAKE_STATIC_LINKER_FLAGS": "",
+          "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+          "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+          "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+          "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+          "role": "production_decision_unit_projection; not native SDK admission"
+        },
+        "resolved_libraries": [
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2",
+            "sha256": "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390",
+            "size": 5275592
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libb2.so.1.0.4",
+            "sha256": "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093",
+            "size": 121128
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libc.so.6",
+            "sha256": "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+            "size": 2129424
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libdouble-conversion.so.3.1",
+            "sha256": "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c",
+            "size": 79952
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libgcc_s.so.1",
+            "sha256": "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+            "size": 183024
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0",
+            "sha256": "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4",
+            "size": 1343056
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0",
+            "sha256": "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1",
+            "size": 352304
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libicudata.so.74.2",
+            "sha256": "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+            "size": 30795392
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libicui18n.so.74.2",
+            "sha256": "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b",
+            "size": 3455304
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libicuuc.so.74.2",
+            "sha256": "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+            "size": 2140336
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libm.so.6",
+            "sha256": "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0",
+            "size": 952616
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libpcre2-16.so.0.11.2",
+            "sha256": "526bbf0d9467d22451d04bfdb585cd7b84a22c9978dace5501704125ec2972f9",
+            "size": 572064
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2",
+            "sha256": "6075a70c30fd7216b9214ae50f2def0ce835092b034088ed9bd64c6a376c740f",
+            "size": 625344
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33",
+            "sha256": "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+            "size": 2592224
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libz.so.1.3",
+            "sha256": "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+            "size": 113000
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/libzstd.so.1.5.5",
+            "sha256": "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+            "size": 755864
+          },
+          {
+            "path": "/usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2",
+            "sha256": "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+            "size": 236616
+          }
+        ],
+        "loaded_process_files": null,
+        "loader_environment": {
+          "LD_LIBRARY_PATH": null,
+          "QT_PLUGIN_PATH": null,
+          "QT_QPA_PLATFORM": null
+        },
+        "runtime_identity": {
+          "kind": "timelearner_runtime_content",
+          "schema_version": 2,
+          "executable": "9fbfdbae31e288dc6d8ba1a4db53d09860d8e5bb54f1bc8d7e805c12291a748c",
+          "app_ini": "886f166e750f66593e7cd3b919b653d846b102dc1488448f9ef623d89456e6a8",
+          "resolved_libraries": [
+            "0a2128bc10841fb29e76d08d945864dfb0b6a66da5df6df5d8299197439e54bb",
+            "135f3c8f006d2fe5e68e51281c7974cb991a03de3bfb3593d68d174dfcf854d1",
+            "1fd75fe70354a416d75aef22bcae68c47bd25d20e2d0568c30b1a9838cf62f11",
+            "3550b194eb2cf2e6f798f033eb9ca279d498c21296b4a18790ce158d2023e47b",
+            "3a15d66867d83762c7f2f1e37359cb8f6c5743edb369c65285cb0b1c4f7498bf",
+            "526bbf0d9467d22451d04bfdb585cd7b84a22c9978dace5501704125ec2972f9",
+            "6075a70c30fd7216b9214ae50f2def0ce835092b034088ed9bd64c6a376c740f",
+            "7560aadde38e5f4237a47a1ddd5891f9b36768a77a60faae30beee003ac01901",
+            "96ef9163aee942bdc09e6f4a1acd2fd6b178c03af824c569741440d63ac9f4f4",
+            "9b34e2442ccf558196946a5e944c4e73e6fb5a6cd035c9845b778bbac9f1e390",
+            "a7f147d23fbbf713bff170b906a0488e62e62bd6e92cdf50ad086e2d5bd09093",
+            "c20a2dc8917c755f02b94049356320fe1f62ac7d9f8994731f807d9df39302da",
+            "d1c9583dc7c1fce6f0a0701dd4356448425e45afe15c0946c23edeaf93d9397c",
+            "d93224d2b0dab4247598be683adca02f5cf00586f99c187579cd7e92058fb7cb",
+            "ddbb3718b8bd9cbd780e5ab08b4503c30a6c4fa0706ebe5d074ed6b596c1714e",
+            "f61677c7bdb7c2aa2a243ea781bfd16afcb361cede7b4ef76127a9d8eb9a5242",
+            "fce00b6f25f459cf4ae0b7fae4257909a1a8a86f9149e7c029a5d617baf1ccd0"
+          ],
+          "build_flags": {
+            "CMAKE_BUILD_TYPE": "Release",
+            "CMAKE_CXX_FLAGS": "",
+            "CMAKE_CXX_FLAGS_DEBUG": "-g",
+            "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
+            "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
+            "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
+            "CMAKE_EXE_LINKER_FLAGS": "",
+            "CMAKE_EXE_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_EXE_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_EXE_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "CMAKE_MODULE_LINKER_FLAGS": "",
+            "CMAKE_MODULE_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_MODULE_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_MODULE_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "CMAKE_SHARED_LINKER_FLAGS": "",
+            "CMAKE_SHARED_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_SHARED_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_SHARED_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "CMAKE_STATIC_LINKER_FLAGS": "",
+            "CMAKE_STATIC_LINKER_FLAGS_DEBUG": "",
+            "CMAKE_STATIC_LINKER_FLAGS_MINSIZEREL": "",
+            "CMAKE_STATIC_LINKER_FLAGS_RELEASE": "",
+            "CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO": "",
+            "role": "production_decision_unit_projection; not native SDK admission"
+          },
+          "compiler": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769",
+          "loaded_process_files": null
+        },
+        "runtime_fingerprint": "2c317c61f4719e45e339d1a209dd270e9fc14cd42dba6b27f72bb709f2d3a299"
+      },
+      "scientific_verdict": null
+    }
+  },
+  "before_expected_failure": true,
+  "physical_models_executed": false,
+  "scientific_verdict": null
+}
