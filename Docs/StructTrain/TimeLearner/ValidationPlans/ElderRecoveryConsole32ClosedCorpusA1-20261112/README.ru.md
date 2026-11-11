@@ -1,0 +1,3 @@
+# Полный Elder native32 corpus — сборка первичных данных
+
+Завершённый native32 SDK8362/Pulse111 принят32/32 отдельно. Collector сохраняет полный состав job и controller, включая все native/legacy/publication guards, реальные модели, raw observations, журналы, runtime/source manifests и закрытые process bindings. Census:2703 regular files/834627225 bytes; closed units:33. Архив не переоценивает результаты и не доказывает независимую научную матрицу. Исходные файлы не удаляются; создание bounded XZ выполняется production collector. Floor2GiB и output cap256MiB при свободных3170508800bytes; новые большие сборки не запускаются.
