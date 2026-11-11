@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "process_error",
+  "reason": "nonzero_exit_or_missing_terminal_status",
+  "returncode": 2,
+  "wall_seconds": 0.3523142491467297,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "a226c687a0652ab300acf7fc50105eadefe0daeb5035546197fa6c02fcae5a89",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 1,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "{\"kind\": \"owned_python_job_error\", \"reason\": \"canonical_source_namespace_row\", \"scientific_verdict\": null}"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 107,
+        "sha256": "12ebb015b77eaae1f19bdbb3857446cad3270131e79fb65cd98ec1947a90e71e"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}
