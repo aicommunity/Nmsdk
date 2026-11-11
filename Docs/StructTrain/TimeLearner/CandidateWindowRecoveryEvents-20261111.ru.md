@@ -4,6 +4,28 @@
 ещё не скомпилированы и не приняты на workers. Frozen C2 source root5643f8319
 предшествует этому изменению и его не проверяет.
 
+Добавлен Python reader candidate_window_recovery_events: отдельная проверка
+wire shape и audit поставленного набора событий через полный independent
+archive2 primary replay. Новый content ID отвергнутой группы включает полную
+selection и тот же native/CSV инвентарь, что C++ rejection factory. Сохраняемый
+valid proof2 hash не меняется: общий content builder выделен без смены полей.
+
+Audit связывает source/owner/candidate/group, exact logical trial/action/epoch,
+effective revision, физические параметры/C, validity, current runtime3 budgets,
+порядок событий и принятые измерения до отказа. Валидная геометрия без
+опубликованного measurement не становится разрешением recovery. Восемь новых
+DATA tests проверяют форму, mutations, старую runtime version, отрицательные
+primary joins и честное отсутствие доказательства полноты пустого event set.
+Серверные проверки этого Python изменения ещё впереди.
+
+Проверка supplied events не подтверждает полноту service ledger: невозможно
+восстановить все generic отказы/declined edits из одних групп измерений.
+Reader явно возвращает service_ledger_completeness_verified=false и не
+объявляет независимый пересчёт всех edits/invalids. Положительные native
+Missing/Ambiguous event joins, полная coverage и terminal replay остаются
+обязательными для подключения service/package; отрицательные DATA controls
+не заменяют эту приёмку.
+
 EncodeCandidateWindowRecoveryEvidence сохраняет отдельный документ
 timelearner_candidate_window_recovery_event / schema1. Он содержит полный
 transition прежнего decision serializer, group ID, rejected content ID,

@@ -262,10 +262,10 @@ def validate_specification(spec, protocol, logical, group_id, purpose):
     return spec
 
 
-def expected_measurement_id(record,protocol):
-    """Proof2 CONTENT hash, after independent replay; no restored live lease."""
+def _group_content(record,protocol):
+    """Common content of valid and rejected groups; not admission by itself."""
     budget=record['budgets'];limits=budget['attempt_limits']
-    return digest(dict(kind='live-composite-training-measurement-v2',method_binding=protocol,
+    return dict(kind='live-composite-training-measurement-v2',method_binding=protocol,
         source_origin=record['source_origin'],owner_family_binding=record['owner_family_binding'],
         candidate_witness=digest(record['candidate_binding']),attempt_id=record['attempt_id'],
         logical_request=record['logical_request'],group_id=record['group_id'],purpose=record['purpose'],
@@ -274,5 +274,28 @@ def expected_measurement_id(record,protocol):
         attempt_limits=[limits[k] for k in ('maximum_groups','maximum_native_probes','maximum_total_samples','maximum_model_seconds','maximum_wall_seconds')],
         group_limits=[budget['maximum_group_model_seconds'],budget['maximum_group_wall_seconds']],
         maximum_total_primary_bytes=budget['maximum_total_primary_bytes'],
-        primary=[dict(native=t['native_evidence'],csv_sha256=t['sha256']) for t in record['native_group']['traces']],
-        maximum=record['measurement']['actual_peak']))
+        primary=[dict(native=t['native_evidence'],csv_sha256=t['sha256']) for t in record['native_group']['traces']])
+
+
+def expected_measurement_id(record,protocol):
+    """Proof2 CONTENT hash, after independent replay; no restored live lease."""
+    content=_group_content(record,protocol)
+    content['maximum']=record['measurement']['actual_peak']
+    return digest(content)
+
+
+def expected_rejected_group_content_id(record,protocol):
+    """Rejection CONTENT only. Call only after independent archive replay."""
+    require(record['purpose']=='search' and record['group_state']=='completed' and
+            record['complete_group'] is True and record['measurement'] is None,
+            'candidate_window_rejected_content_requires_closed_search')
+    selection=record['selection']
+    require(type(selection) is dict and selection['status']=='completed' and
+            type(selection['geometry']) is dict and
+            selection['geometry']['validity'] in ('missing','ambiguous') and
+            selection['geometry']['measured_maximum'] is None,
+            'candidate_window_rejected_content_requires_unassigned_peak')
+    content=_group_content(record,protocol)
+    content['kind']='live-composite-search-rejection-content-v1'
+    content['rejected_selection']=selection
+    return digest(content)
