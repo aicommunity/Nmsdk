@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "stock-cold4-independent-primary-elder-a1",
+  "package_fingerprint": "d7abfbea09d803664d268ff906d0a83fec32a3a5b0400d720ae9b948d605d9d8",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_compact_primary.StockColdCompactPrimaryTest.test_complete_archive_and_real_assigned_peaks_and_corruption_control"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD_COMPACT_PRIMARY": {
+      "pattern": "*",
+      "files": 6,
+      "fingerprint": "3dd9bb209d63bba650a46ad7beccb1ca0205daac9e736ab8155721f9531d1ff2"
+    }
+  }
+}
