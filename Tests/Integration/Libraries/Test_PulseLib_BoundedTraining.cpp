@@ -121,7 +121,7 @@ TEST(BoundedTrainingN1GeometryFairness, ValidDenseResistanceMeshDoesNotStarveOth
             cfg.invalidMeasurementRecovery=recovery;cfg.maximumInvalidObservations=1;
             cfg.resistanceSubdivisionDepth=8;cfg.maximumProbes=12;
             cfg.bounds={{1,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
-            BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}});
+            BoundedTrainingSession session(References(protocol),cfg,{{1,1,10.},{1,1,10.}},true);
             DriveTraining(session,protocol,[&](const TrainingAction&,auto&,auto& raw) {
                 // Deliberately valid but unsynchronized/un-normalized measured
                 // responses. This tests controller scheduling, not cable physics.
