@@ -17,7 +17,13 @@ PID82620/start346617135. C2 завершён146/146 valid PASS, outer и49child 
 Elder canonical принята за67.53с, но native launch остановлен до создания
 задания проверкой диска: около6.03GB свободно при требовании4GiB reservation
 +2GiB floor. Смена научных параметров или запуск без проверки места не выполнялись.
-Проверен отдельный план удаления старых generated build caches; удалений ещё нет.
+После этого удалены только15 generated child directories трёх устаревших
+сборок. Все source/runtime trees и CMakeCache.txt сохранены; runtime snapshots
+до/после равны. Свободное место выросло с6005776384 до6659514368bytes:
+[точный receipt](ValidationPlans/ElderObsoleteGeneratedBuilds-20261111/retirement-completed.json).
+Elder native146 запущен, supervisor PID2684254/start396745925;
+[launch](ValidationPlans/ElderCandidateWindowRecoveryWireC2C-20261111/native-launch-receipt.json).
+Итоговой приёмки Elder C2 пока нет.
 Неудачные прежние outcomes
 сохранены; их нельзя считать сборкой либо результатом C++ тестов.
 

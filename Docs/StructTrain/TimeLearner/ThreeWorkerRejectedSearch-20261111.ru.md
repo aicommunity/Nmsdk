@@ -1,6 +1,18 @@
 # Параллельная проверка rejected-search на трёх машинах
 
-## Текущее состояние после B1 и запуска C1
+## Обновление после C1 и C2 M40
+
+C1 source root8fac40bb/Pulse1c0fa37 принят145/145 на Elder и M40,
+outer+48child groups закрыты и leases released на каждом. Следующий C2
+root5643f8319/Pulse0fb035a принят146/146 на M40 с закрытыми49child groups;
+он проверяет cold8/runtime3 и прежнее ядро. После ограниченной очистки старых
+generated build objects C2 также запущен на Elder. Windows нового задания
+не получила. [Текущая сводка](ExperimentReadiness.ru.md),
+[C1](CandidateWindowRecoveryCore-20261111.ru.md),
+[C2](CandidateWindowRecoveryWire-20261111.ru.md).
+Ни один из этих наборов не является новым результатом классификации N4.
+
+## Снимок после B1 и первоначального запуска C1
 
 Исправленный B1 завершён на обоих Linux workers: **29/29 PASS**, по29
 отдельных leaf gates, job_validation_passed=true. Outer и все29 child groups
