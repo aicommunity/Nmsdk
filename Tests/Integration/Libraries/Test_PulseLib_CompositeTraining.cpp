@@ -4088,7 +4088,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
         policy.delayFramesPerSegment=3*f.frequency/100;policy.baseLeftGuardFrames=policy.baseRightGuardFrames=2;
     });
     f.attempt->EnableRejectedSearchAdmission();
-    const auto references=CaptureWindowReferences(f,false,"reference","candidate-attempt",ambiguous?10.:2.);
+    const auto references=CaptureWindowReferences(f,true,"reference","candidate-attempt",ambiguous?10.:2.);
     if(ambiguous) {
         auto current=f.owner->ReadNativeParameters();current[0].length=54;
         ASSERT_EQ(f.owner->ApplyNativeParameters(current).status,NativeEditStatus::Applied);
@@ -4136,6 +4136,7 @@ template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=fa
         f.Run(f.Request(action->inputIndex,action->runId,action->trialId,action->modelEpoch),CompositeMeasurementPurpose::Search,
             [&,serial=action->serial](const auto& p){search.ArmCandidateWindow(serial,p);},{},ambiguous?10.:2.);
         if(f.attempt->Measurement()) {
+            SaveCandidateWindowGroup(f,"core-valid-"+std::to_string(action->serial));
             search.ConsumeCandidateWindow(*f.attempt->Measurement(),f.Revision());continue;
         }
         ASSERT_TRUE(f.attempt->RejectedMeasurement())<<f.attempt->RejectionReason();
