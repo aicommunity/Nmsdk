@@ -15,7 +15,7 @@ from .composite_primary import filesystem_primary_resolver
 from .contained_process import inspect
 from .native_calibration_worker import _signed, _write
 from .native_characterization import audit_execution
-from .native_evidence import equal, load, number, require
+from .native_evidence import count, equal, load, number, require
 from .native_pipeline_worker import audit_run_manifest, run_job, validate_job
 from .native_process_policy import policy_for_reservation
 from .model_identity import canonical_model_sha256 as digest
@@ -25,6 +25,12 @@ from .resource_reservations import Reservations
 from .stock_cold_characterization import jobs as characterization_jobs
 from .stock_phasea_preflight import audit_stock_profile
 from .stock_threshold_study import _condition, audit_final_stock
+
+ALGORITHMS = {
+    1: 'stock-measured-reference-cold7-N4-N1-pilot-v1',
+    2: 'stock-measured-reference-cold8-N4-N1-pilot-v1',
+    3: 'stock-observation-domain-cold8-N4-N1-pilot-v1',
+}
 
 
 def _frame(time, frequency):
@@ -49,7 +55,7 @@ Zero preserves historical equal-deadline execution. A positive, explicitly
         process_maximum_wall_seconds=timeout)
 
 
-def validate_candidate_envelopes(config, origins):
+def validate_candidate_envelopes(config, origins, *, full_observation=False):
     """Arithmetic admission on diagnostic coordinates, not a measurement proof.
 
 The native reference seed is the measured peak/plateau, not the configured
@@ -75,7 +81,10 @@ New Train still obtains every authoritative grid/reference itself.
         for parameters in extremes:
             facts = dict(grid=grid, declared_maximum_samples=config['maximum_samples'],
                 parameters=parameters, capacitance=None)
-            calculate_window(config['composite_measurement']['candidate_window_policy'], seed, facts)
+            result = calculate_window(config['composite_measurement']['candidate_window_policy'], seed, facts)
+            if full_observation:
+                require(result['first_frame'] == 0 and result['last_frame'] == origin['sample_count']-1,
+                    'stock_observation_domain_must_not_shift_with_candidate')
 
 
 def prepare(source, runtime_path, output):
@@ -212,7 +221,37 @@ def recovery_declaration(job, name):
     return changed
 
 
-def prepare_recovery(source, runtime_path, output):
+def observation_domain_declaration(job, origins):
+    """Measure assigned basins over the recorded domain, never the global max.
+
+    Reference amplitudes, reference capture windows and all model/search values
+    stay unchanged. The existing native recipe encodes a zero-shift, full-domain
+    proposal; every candidate still needs the native full/omission proof.
+    """
+    validate_job('train', job)
+    require(job == _resign(job) and job['configuration']['schema_version'] == 8,
+        'stock_observation_domain_requires_signed_cold8')
+    changed = deepcopy(job);config = changed['configuration']
+    require(type(origins) is list and len(origins) == len(config['model']['inputs']),
+        'stock_observation_domain_reference_dimensions')
+    rows = config['composite_measurement']['candidate_window_policy']['inputs']
+    for index, (origin, row) in enumerate(zip(origins, rows)):
+        first = count(origin['assigned_peak_frame']);last = count(origin['assigned_plateau_last_frame'])
+        size = count(origin['sample_count'])
+        require(count(origin['input_index']) == index and 0 < first <= last < size-1 and
+            size <= config['maximum_samples'], 'stock_observation_domain_reference_frame_bounds')
+        row.update(delay_frames_per_segment=0, length_guard_frames=0, synapse_count_guard_frames=0,
+            resistance_change_guard_frames=0, capacitance_change_guard_frames=0,
+            hard_first_frame=0, hard_last_frame=size-1, maximum_window_frames=size,
+            base_left_guard_frames=first, base_right_guard_frames=size-1-last)
+    config['run_id'] += '/recorded-observation-domain'
+    changed = _resign(changed)
+    validate_job('train', changed);validate_job('preflight', changed)
+    validate_candidate_envelopes(config, origins, full_observation=True)
+    return changed
+
+
+def prepare_recovery(source, runtime_path, output, *, full_observation=False):
     """Rebind an audited cold7 declaration, never an old learned state.
 
     Earlier measured coordinates are proposal hypotheses only. The new native
@@ -220,6 +259,8 @@ def prepare_recovery(source, runtime_path, output):
     reference. Cross-runtime reuse does not attest new measurement validity.
     """
     source = Path(source).resolve(strict=True);output = Path(output)
+    require(type(full_observation) is bool, 'stock_observation_domain_flag')
+    plan_version = 3 if full_observation else 2
     require(not output.exists(), 'stock_cold8_preparation_exists')
     index = load(source/'index.json');old_runtime = load(source/'runtime.json')
     require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] == 1 and
@@ -247,6 +288,8 @@ def prepare_recovery(source, runtime_path, output):
         validate_candidate_envelopes(old['configuration'], origins['characterization'][old_name])
         name = old_name.replace('-cold7-', '-cold8-')
         job = recovery_declaration(old, name)
+        if full_observation:
+            job = observation_domain_declaration(job, origins['characterization'][old_name])
         prepared.append((old_name, name, job, identity))
     require(before == {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
         for p in sorted(source.rglob('*.json'))}, 'stock_cold8_original_plan_changed_during_read')
@@ -256,16 +299,16 @@ def prepare_recovery(source, runtime_path, output):
         _write(output/'jobs'/(name+'.json'), job)
         _write(output/'initial'/(name+'.json'), identity)
         _write(output/'conditions'/(name+'.json'), _condition(job, identity, code(runtime), runtime,
-            algorithm_id='stock-measured-reference-cold8-N4-N1-pilot-v1'))
+            algorithm_id=ALGORITHMS[plan_version]))
     _write(output/'runtime.json', runtime)
     _write(output/'reference-origin.json', dict(
         characterization={name:origins['characterization'][old_name] for old_name,name,_,_ in prepared},
         references_recaptured_by_new_train=True, learned_state_imported=False,
-        delay_model_is_initial_total_latency_hypothesis=True, scientific_verdict=None))
+        delay_model_is_initial_total_latency_hypothesis=not full_observation, scientific_verdict=None))
     _write(output/'source-plan.json', dict(path=str(source), files=before,
         source_runtime=old_runtime, measured_coordinate_role='diagnostic_proposal_only',
         effective_native_preflight_required=True, scientific_verdict=None))
-    result = dict(kind='timelearner_stock_candidate_window_plan', schema_version=2,
+    result = dict(kind='timelearner_stock_candidate_window_plan', schema_version=plan_version,
         jobs={name:job['sha256'] for _,name,job,_ in prepared}, scientific_verdict=None)
     _write(output/'index.json', result)
     return result
@@ -281,9 +324,9 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False,
     require(not source.is_relative_to(output) and not output.is_relative_to(source),
         'stock_cold7_output_overlaps_preparation')
     index = load(source/'index.json')
-    require(index['kind'] == 'timelearner_stock_candidate_window_plan' and index['schema_version'] in (1, 2)
+    require(index['kind'] == 'timelearner_stock_candidate_window_plan' and count(index['schema_version']) in ALGORITHMS
         and case in index['jobs'], 'stock_cold7_unknown_plan_or_case')
-    recovery = index['schema_version'] == 2
+    recovery = index['schema_version'] in (2, 3)
     runtime = load(Path(runtime_path));verify_runtime(runtime)
     require(runtime == load(source/'runtime.json'), 'stock_cold7_runtime_changed')
     job_path = source/'jobs'/(case+'.json');job = load(job_path)
@@ -297,8 +340,7 @@ def run(source, runtime_path, controller, case, output, *, preflight_only=False,
         rdk_core=runtime['source_closure']['Rdk']['head'], console_driver=runtime['source_closure']['root']['head'])
     condition = load(source/'conditions'/(case+'.json'))
     require(condition == _condition(job, expected_initial, code, runtime,
-        algorithm_id=('stock-measured-reference-cold8-N4-N1-pilot-v1' if recovery else
-                      'stock-measured-reference-cold7-N4-N1-pilot-v1')), 'stock_cold7_condition_changed')
+        algorithm_id=ALGORITHMS[index['schema_version']]), 'stock_cold7_condition_changed')
     before = {p.relative_to(source).as_posix(): frozen_digest(p, 256*1024**2)
         for p in sorted(source.rglob('*.json'))}
     output.mkdir(parents=True)

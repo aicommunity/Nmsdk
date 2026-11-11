@@ -228,7 +228,7 @@ def main(argv: list[str] | None = None) -> int:
     cold.add_argument("--controller", type=Path)
     cold.add_argument("--output", type=Path, required=True)
     pilot = commands.add_parser("stock-candidate-window-study", help="prepare, preflight or cold Train stock N4 with measured-reference window proposals")
-    pilot.add_argument("action", choices=("prepare", "prepare-recovery", "preflight", "train"))
+    pilot.add_argument("action", choices=("prepare", "prepare-recovery", "prepare-full-window", "preflight", "train"))
     pilot.add_argument("source", type=Path)
     pilot.add_argument("--runtime-manifest", type=Path, required=True)
     pilot.add_argument("--controller", type=Path)
@@ -869,16 +869,20 @@ def main(argv: list[str] | None = None) -> int:
         try:
             require(args.action == 'train' or args.finalization_seconds == 0.,
                 'stock_cold7_finalization_allowance_requires_train')
-            if args.action in ('prepare', 'prepare-recovery'):
+            if args.action in ('prepare', 'prepare-recovery', 'prepare-full-window'):
                 require(args.controller is args.case is None, 'stock_cold7_prepare_execution_arguments')
-                prepare_plan = prepare_recovery if args.action == 'prepare-recovery' else prepare
-                result = prepare_plan(args.source, args.runtime_manifest, args.output)
+                if args.action == 'prepare-full-window':
+                    result = prepare_recovery(args.source, args.runtime_manifest, args.output,
+                        full_observation=True)
+                else:
+                    prepare_plan = prepare_recovery if args.action == 'prepare-recovery' else prepare
+                    result = prepare_plan(args.source, args.runtime_manifest, args.output)
             else:
                 require(args.controller is not None and args.case is not None, 'stock_cold7_execution_bindings_required')
                 result = run(args.source, args.runtime_manifest, args.controller, args.case, args.output,
                     preflight_only=args.action == 'preflight', finalization_seconds=args.finalization_seconds)
             print(json.dumps(result, allow_nan=False))
-            return 0 if args.action in ('prepare', 'prepare-recovery') or result['validity'] == 'valid' else 2
+            return 0 if args.action in ('prepare', 'prepare-recovery', 'prepare-full-window') or result['validity'] == 'valid' else 2
         except (EvidenceError, OSError, ValueError, KeyError, TypeError) as error:
             print(json.dumps({'execution': 'failed', 'reason': str(error), 'scientific_verdict': None}), file=sys.stderr)
             return 2

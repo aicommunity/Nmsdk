@@ -11,6 +11,9 @@ from ..native_evidence import load, require
 
 
 class StockCandidateRecoveryPreflightTest(unittest.TestCase):
+    prepare_action = 'prepare-recovery'
+    expected_plan_version = 2
+
     def test_actual_cold8_initial_graphs_match_original_stock_without_training(self):
         controls = Path(os.environ['TIMELEARNER_STOCK_COLD8_CONTROLS']).resolve(strict=True)
         spec = load(controls/'declaration.json')
@@ -28,9 +31,10 @@ class StockCandidateRecoveryPreflightTest(unittest.TestCase):
         prepared = output/'prepared';transcript = io.StringIO()
         with patch.dict(os.environ, runtime['loader_environment']), \
              contextlib.redirect_stdout(transcript), contextlib.redirect_stderr(transcript):
-            code = main(['stock-candidate-window-study', 'prepare-recovery', spec['source'],
+            code = main(['stock-candidate-window-study', self.prepare_action, spec['source'],
                 '--runtime-manifest', str(runtime_path), '--output', str(prepared)])
             self.assertEqual(code, 0, transcript.getvalue())
+            self.assertEqual(load(prepared/'index.json')['schema_version'], self.expected_plan_version)
             for case in ('Classic-stock-cold8-N1', 'Branch-stock-cold8-N1'):
                 job = load(prepared/'jobs'/(case+'.json'))
                 self.assertEqual(job['configuration']['schema_version'], 8)
