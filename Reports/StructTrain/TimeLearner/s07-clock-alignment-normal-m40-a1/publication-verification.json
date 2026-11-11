@@ -1,0 +1,29 @@
+{
+  "bundles": [
+    {
+      "attempt": "s07-clock-alignment-normal-a1",
+      "members": 9,
+      "archive_bytes": 22724,
+      "archive_sha256": "2a9f880dca4a8e3d8fe8c19f89902dc53fcd43dd49dd054689db214a1b1945a0"
+    }
+  ],
+  "terminal": {
+    "clock_alignment_controls_passed": true,
+    "native_compilation_verified": false,
+    "waveform_equivalence_verified": false,
+    "scientific_verdict": null
+  },
+  "reader_result": {
+    "tests_run": 5,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "unchanged_primary_inputs": 20,
+  "native_reexecuted": false,
+  "training_tolerances_changed": false,
+  "clock_allowance": "32 binary64 eps times absolute operand scale; reject budget reaching quarter tick",
+  "source_only_arithmetic_fix": true,
+  "scientific_verdict": null
+}

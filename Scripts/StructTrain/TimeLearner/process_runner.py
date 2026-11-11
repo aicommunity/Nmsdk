@@ -13,6 +13,7 @@ import time
 
 from .native_evidence import EvidenceError, load, require
 from .runtime import digest_file, digest_json, loaded_process_files, runtime_content_identity
+from .operational_diagnostics import inspect_streams
 
 
 def verify_runtime(manifest):
@@ -166,6 +167,7 @@ def execute(manifest, arguments, working_directory, output, maximum_wall_seconds
               "wall_seconds": time.monotonic()-begin, "model_time": None, "runtime_provenance": provenance,
               "mapping_error": mapping_error, "runtime_fingerprint": manifest["runtime_fingerprint"],
               "ownership_scope": "launched_executable_only", "scientific_verdict": None}
+    result['operational_diagnostics'] = inspect_streams(output)
     _write(output/"result.json", result)
     return result
 

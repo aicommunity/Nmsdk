@@ -1,0 +1,40 @@
+{
+  "kind": "assigned_vertex_asan_sdk_timeout_evidence",
+  "parent": "0f03bdca386a59583a3404b8045ce026a147cf07",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "terminal": {
+    "build_passed": true,
+    "unit23_passed": true,
+    "physical21_passed": false,
+    "passed": false,
+    "ASan_build": true,
+    "ledger_metadata_unchanged": true,
+    "heartbeat_errors": [],
+    "classification_evaluated": false,
+    "whole_plan_complete": false
+  },
+  "unit_inventory": {
+    "expected": 23,
+    "observed": 23,
+    "failed_test_ids": [],
+    "assertion_status": "passed",
+    "sha256": "27ab643175e51cc67a81a7e9b3064bb4ab42f515c11032a34e3c669557f9b520"
+  },
+  "physical_gate": {
+    "kind": "timelearner_native_test_gate_result",
+    "schema_version": 1,
+    "execution": "timeout",
+    "validity": "incomplete_test_observation",
+    "assertion_status": "not_assessed",
+    "reason": "native_gate_loaded_runtime_missing",
+    "inventory": null,
+    "scientific_verdict": null
+  },
+  "all_processes_closed": true,
+  "reservation_state": "released",
+  "missing_junit_not_synthesized": true,
+  "full_physical_gate_accepted": false,
+  "next_action": "split expensive cases into independent declared jobs; preserve this failed attempt",
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

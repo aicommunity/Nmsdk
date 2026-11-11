@@ -93,6 +93,9 @@ def validate_live_plan(plan, configuration, implementation):
 
 
 def audit_live_training(directory, job, execution, names):
+    from .composite_execution_evidence import audit_initial_planning_configuration, audit_composite_execution
+    if job['configuration'].get('schema_version') == 7:
+        from .candidate_window_execution_evidence import audit_candidate_window_execution as audit_composite_execution
     live = load(directory/"finalization.json")
     _signed(live, LIVE_FIELDS, "native_live_finalization")
     require(execution["finalization_path"] == "finalization.json" and "finalization.json" in names and
@@ -118,6 +121,8 @@ def audit_live_training(directory, job, execution, names):
     source = audit = transaction = phase = None
     boundary = live["boundary"]
     if boundary is None:
+        if job['configuration'].get('schema_version') in (6,7):
+            audit_composite_execution(execution, directory, names, mode='train', base_version=2)
         require(not execution["completed_boundary"] and all(execution[k] is None for k in
                 ("package_path", "package_sha256", "model_revision", "training_outcome")) and
                 live["captured_model_time"] is None and live["entry_model_time"] is None and
@@ -138,9 +143,13 @@ def audit_live_training(directory, job, execution, names):
                 boundary["training_request"] == live["training_request"] and
                 boundary["implementation_id"] == job["implementation_id"], "live_job_source_boundary_changed")
         expected = {**job["configuration"], "run_id": job["configuration"]["run_id"]+"/session/1"}
-        require(package["configuration"] == expected and package["implementation_id"] == job["implementation_id"] and
+        composite = job['configuration'].get('schema_version') in (6,7)
+        require((composite or package["configuration"] == expected) and package["implementation_id"] == job["implementation_id"] and
                 execution["package_sha256"] == package["sha256"] and execution["model_revision"] == package["model_revision"] and
                 execution["training_outcome"] == package["training_outcome"], "live_job_training_source_changed")
+        if composite:
+            audit_initial_planning_configuration(package, job, initial)
+            audit_composite_execution(execution, directory, names, mode='train', base_version=2, package=package)
         controls = boundary["controls"]["parameters"];binding = boundary["controls"]["bindings"]["IsNeedToTrain"]
         p = job["finalization_plan"]["post_tune"]
         require(controls["CalculateMode"] == job["calculate_mode"] and controls["StructureBuildMode"] == job["structure_build_mode"] and

@@ -1,0 +1,199 @@
+{
+  "facts": {
+    "kind": "duplicate_static_AR_maintenance_preunlink_inventory_failure",
+    "schema_version": 1,
+    "approved_plan_sha256": "923bd5a49e0bbf6893d9fad350a2380dc104f26ebe366bad05dae298c0571406",
+    "static_tool_root": "6dacdb3d4fb3245649aba3a5d69ba8f83f611c8e",
+    "collector_tool_root": "bf163c2dc9eb8932193b22b48f82b5aaa1caaa09",
+    "original_terminal": {
+      "cleanup_complete": false,
+      "approved_plan_sha256": "923bd5a49e0bbf6893d9fad350a2380dc104f26ebe366bad05dae298c0571406",
+      "expected_AR_targets": 89,
+      "removed_files": null,
+      "partial_operation_not_resumed": false,
+      "guard_observations": 1,
+      "heartbeat_errors": [],
+      "whole_root_lease_released_by_supervisor_only_after_kernel_closure": true,
+      "CPP_or_model_runs": 0,
+      "scientific_verdict": null,
+      "whole_plan_complete": false
+    },
+    "original_exception": {
+      "reason": "",
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/timelearner-duplicate-static-retirement-elder-a3-worker.py\", line 112, in <module>\n    before=inventory();expected={n:r['files'] for n,r in reference['runtime_manifests'].items()};write('all-runtime-files-before.json',before);assert before==expected\n  File \"/tmp/timelearner-duplicate-static-retirement-elder-a3-worker.py\", line 23, in inventory\n    assert stat.S_ISREG(st.st_mode) and canonical(p)\nAssertionError\n",
+      "partial_unlink_possible": false
+    },
+    "original_failed_unit_metadata_preserved": true,
+    "removed_files": 0,
+    "production_apply_plan_entered": false,
+    "all89_target_keeper_AR_preimages_unchanged": true,
+    "all508_regular_runtime_file_identity_hash_preimages_unchanged": true,
+    "retained_symlink_entries": 29,
+    "retained_symlink_paths_modes_previously_enumerated": true,
+    "symlink_link_text_snapshot_phase": "postclosure only; original review recorded path/mode only",
+    "symlink_link_targets_followed": false,
+    "guard": {
+      "guard_triggered": false,
+      "original_reason": null,
+      "peak_owned_allocated_bytes": 2109440,
+      "minimum_free_bytes": 1174274048,
+      "outer_closed": true
+    },
+    "fresh_kernel_and_lease": {
+      "kernel": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "kernel_cgroup_observed",
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "8c4dfe2c1985261950f90d5db60e1a658a80f1f2d44ba19aad084a9eb5641e20",
+          "unit": "timelearner-679a62db-21a1-4d2c-a2e6-1797782fa2cd.service",
+          "invocation_id": "c69c628c1dd240449e8b6e5fbffc6f20",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-679a62db-21a1-4d2c-a2e6-1797782fa2cd.service",
+          "initial_main_pid": 2285816,
+          "initial_start_ticks": "372280273",
+          "sha256": "33c071dc26a9853e6ab78280c43e697f9c044dacb3ac0d9fa9839d472b3ddf83"
+        },
+        "state": {
+          "Type": "exec",
+          "Restart": "no",
+          "RemainAfterExit": "yes",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "ExecMainCode": "1",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "MemoryMax": "268435456",
+          "TasksMax": "32",
+          "KillMode": "control-group",
+          "Description": "TimeLearner contained attempt 679a62db-21a1-4d2c-a2e6-1797782fa2cd",
+          "LoadState": "loaded",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "InvocationID": "c69c628c1dd240449e8b6e5fbffc6f20"
+        },
+        "memory_max": 268435456,
+        "tasks_max": 32,
+        "scientific_verdict": null
+      },
+      "lease": {
+        "token": "8ee9c445-1fbd-4b24-bc88-66cfd9854ad8",
+        "job_id": "s02-duplicate-static-retirement-elder-a3",
+        "owner": {
+          "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+          "executable": "/usr/bin/python3.10",
+          "pid": 2285816,
+          "start_ticks": "372280273",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "write",
+            "canonical_path": "/home/user/timelearner-refactor",
+            "requested_path": "/home/user/timelearner-refactor"
+          }
+        ],
+        "state": "released",
+        "created": 1794153033.1359365,
+        "deadline": 1794153153.1359365,
+        "updated": 1794153035.0487854,
+        "release_note": "Exact duplicate AR maintenance group closed. Plan89 only; original failed units untouched, no CPP/model run. Scoped deletion result remains in fsynced journal.",
+        "demands": {
+          "disk_bytes": 67108864,
+          "memory_bytes": 268435456,
+          "slots": 1
+        },
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    },
+    "initial_guard_observations": 1,
+    "known_kernel_units": 80,
+    "legacy_owner_records": 192,
+    "only_two_reviewed_OS_helper_visibility_exceptions": true,
+    "universal_process_absence_claim": false,
+    "actual_current_free_bytes": 1146454016,
+    "CPP_models_or_tests_run": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "created_utc": "2026-11-08T16:14:34.442136+00:00"
+  },
+  "worker_controller_unchanged": true,
+  "fresh_after_bundle": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "8c4dfe2c1985261950f90d5db60e1a658a80f1f2d44ba19aad084a9eb5641e20",
+        "unit": "timelearner-679a62db-21a1-4d2c-a2e6-1797782fa2cd.service",
+        "invocation_id": "c69c628c1dd240449e8b6e5fbffc6f20",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-679a62db-21a1-4d2c-a2e6-1797782fa2cd.service",
+        "initial_main_pid": 2285816,
+        "initial_start_ticks": "372280273",
+        "sha256": "33c071dc26a9853e6ab78280c43e697f9c044dacb3ac0d9fa9839d472b3ddf83"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "268435456",
+        "TasksMax": "32",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 679a62db-21a1-4d2c-a2e6-1797782fa2cd",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "c69c628c1dd240449e8b6e5fbffc6f20"
+      },
+      "memory_max": 268435456,
+      "tasks_max": 32,
+      "scientific_verdict": null
+    },
+    "lease": {
+      "token": "8ee9c445-1fbd-4b24-bc88-66cfd9854ad8",
+      "job_id": "s02-duplicate-static-retirement-elder-a3",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 2285816,
+        "start_ticks": "372280273",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor",
+          "requested_path": "/home/user/timelearner-refactor"
+        }
+      ],
+      "state": "released",
+      "created": 1794153033.1359365,
+      "deadline": 1794153153.1359365,
+      "updated": 1794153035.0487854,
+      "release_note": "Exact duplicate AR maintenance group closed. Plan89 only; original failed units untouched, no CPP/model run. Scoped deletion result remains in fsynced journal.",
+      "demands": {
+        "disk_bytes": 67108864,
+        "memory_bytes": 268435456,
+        "slots": 1
+      },
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "archive_members": 46,
+  "space_preflight_free_bytes": 1146433536,
+  "expanded_member_bytes": 2648539
+}

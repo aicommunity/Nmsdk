@@ -1,0 +1,39 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 1,
+  "execution": "completed",
+  "reason": "exit_zero",
+  "returncode": 0,
+  "wall_seconds": 0.3039350011385977,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "2c317c61f4719e45e339d1a209dd270e9fc14cd42dba6b27f72bb709f2d3a299",
+  "ownership_scope": "launched_executable_only",
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "clear",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 0,
+    "reasons": [],
+    "examples": [],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 19199,
+        "sha256": "e47eff8a75bbaea1f729239cf0fe12ae630f3cf15d3ac3260dd37d83b64327b8"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "contained_streams_match": null,
+    "scientific_verdict": null
+  }
+}

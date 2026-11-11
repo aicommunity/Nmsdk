@@ -10,7 +10,7 @@ Code review PulseLib `025d809f7b86cc79e18ddd711c6adc40e2396bf8` охватыва
 | Свойство | Тип/default/единицы | Фактический setter/consumer и lifecycle | Условия применения и проверки |
 |---|---|---|---|
 | NormalizationMode | int, 1; N0=0 structural, N1=1 tip Rs | Setter отвергает иные значения, а при native declaration — любое отличие от объявленного mode. N0 очищает derived resistance bounds; N1 может принять реальные tips только при полном readback и принудительно задаёт Ns=1 | Native search.normalization должен совпасть с ModelSpec. N0 и N1 имеют одинаковую CapturedPerInput цель, но разные управляющие переменные. Не требовать разных L; проверять действующий bank/updates |
-| SynapseResistanceStep | double, 1e9 Ом | Legacy setter в N0 применяет candidate value к extra Exc synapses k>=2 существующих tip membranes; в N1 сразу возвращает true без физического эффекта | N1-factor no-effect. Native editor управляет bank через explicit policy и readback, не этот legacy setter. Нужны bank count/Rs, heterogeneous physics и finite/positive validation; setter её не обеспечивает |
+| SynapseResistanceStep | double, 1e9 Ом | Legacy setter в N0 применяет candidate value к extra Exc synapses k>=2 существующих tip membranes; в N1 сразу возвращает true без физического эффекта. Новый candidate guard при NativeTrainingOwned/NativeModelDeclaration/NativeRecognition принимает только прежнее значение и сразу возвращается без child writes; изменённое значение отклоняется до физической записи | N1-factor no-effect сохраняется в legacy. Native editor управляет bank через explicit policy и readback, не этот legacy setter. Guard прошёл scoped ASan gate на M40 (10 storage cases); он не добавляет finite/positive validation и не меняет физику |
 | SynapseResistanceBase | double, 8.6e7 Ом | Setter отвергает <=0, но не NaN/Inf. Legacy baseline и fallback для загружаемых/невалидных tips; изменение само по себе не заменяет все live Rs | Native initial individual Rs принадлежат ModelSpec/storage и learned state. Нельзя объявлять uniform live replacement без effective readback. Нужны cold/load ordering/anchor/per-input controls |
 | ResistanceAdjustGain | double, 0.4, безразмерный | Setter принимает 0<g<=1, NaN не отклоняется. Legacy P-regulator; EffectiveResistanceGain динамически меняется при overshoot/undershoot | Не параметр native bounded candidate search. Gain change требует реального regulator-path positive control, а не различия результатов любой пары runs |
 | AttenuationGamma | double, -1 (auto); показатель на сегмент | Setter не валидирует; <=0 инициирует оценку/fallback. Legacy используется в attenuation feedforward при length edit; auto-estimator может перезаписывать | Не измеренная амплитуда и не критерий сходимости. Native measured search не подтверждает timing по gamma. Проверять valid amplitude, Ns/Rs context, конечность и реальное применение |
@@ -64,3 +64,61 @@ model-bound путь. Полная physics/normalization/public-property matrix 
 capability выбранного controller version, факт применения, effective model/protocol
 и события. Старые отчёты сохраняют свои критерии и не переоцениваются по названию
 нового свойства задним числом.
+
+## Candidate: ownership guard для legacyStep
+
+Изолированный Pulse candidate `2c3eb8dcc128b75da3d3f1e6801ec2a2e0a0090b`
+в ветке `codex/timelearner-native-resistance-step` основан на Pulse
+`e2c6311c0cdd219e3a52c278ce637bd777584dc6` и root
+`461cbcc3e1f904083a37ce479c9ee79e077588d1`. Guard расположен первым в
+SetSynapseResistanceStep обоих learner, перед N1/no-op ветвью. При native
+ownership равное значение допускается без повторного применения scalar к bank;
+отличающееся значение возвращает false до записи в children. Отказ обычного
+UProperty assignment сохраняет прежнее scalar значение. Это bool setter, а не
+новый протокол отказа Build/Calculate/Reset.
+
+`NativeLearnerLifecycle::BeforeDefault` снимает NativeTrainingOwned, declaration
+и recognition hold до вызова legacy defaults, поэтому штатный Default не
+блокируется. Reset ownership не снимает. Native Build валидирует объявленную
+модель; он не должен превращать legacyStep в физический параметр native bank.
+VisitNativeModelMirror/VisitNativeParameterMirror не содержат legacyStep и
+зеркалируют effective values через SetDataDirect. Native learned/recognition и
+prepared-child import устанавливают физику из archive/storage/model declaration,
+не через этот setter. Загрузка нового обычного компонента не восстанавливает
+private native ownership; существующие configured markers по-прежнему требуют
+явного импорта native state при Build. Loading в уже owned экземпляр не должен
+обходить guard.
+
+Новые storage tests находятся в
+`Tests/Integration/Libraries/Test_PulseLib_ResistanceStepOwnership.cpp`.
+Основные8 cases: Classic/Branch × native N0/N1 и legacy N0/N1. Native cases
+используют разные per-input Rs и N0 bank Ns=3/2, сравнивают каждый реальный
+synapse, полную model identity и service/probe metadata после changed/same
+assignment; повторяют после Reset/Build, native archive→prepared-child import
+и повторного native construction после Default. Legacy controls проверяют
+реальные3 extra contacts N0 и отсутствие физической записи N1. Класс контакта
+NPulseSynapse проверяется явно. Это не проверка active search/reference capture,
+connected/external-data bypass или всех других synapse equations.
+
+Ещё2 cases `NativeResistanceStepOwnership.ClassicZeroPacketStoppedDiagnosticImport`
+и `BranchZeroPacketStoppedDiagnosticImport` каждый охватывают N0 и N1. Их source
+создаётся из реального native-constructed graph: production
+RestoreStoppedBoundary задаёт явно административный ExternalStop с0 packets,
+без references/certificate; ExportNativeLearnedState и
+ConvertNativeStoppedToDiagnosticRecognition(identity) формируют проверяемый
+diagnostic package; ImportNativeDiagnosticRecognitionState устанавливает
+настоящий frozen hold. Затем guard проверяется до/после Reset/Build и повторного
+export. Тесты не заявляют успешный Train, не генерируют peaks, не выполняют
+Calculate и не требуют внешних packages/env/skip. Ordinary completed recognition,
+historical scaled conversion и calibrated recognition этим не подтверждаются.
+
+Предобъявленный focused inventory — ровно10 tests:
+`NativeResistanceStepOwnership.*:LegacyResistanceStep.*` в существующем
+`Test_PulseLib_StorageComponents`.
+
+Адресный серверный gate принят на M40: все10 storage cases прошли в составе
+90 C++/43 Python с ASan `detect_leaks=0`, без skipped и без leak claim.
+[Независимая квитанция](NativeResistanceStepAndCodecM40A1Verification.json)
+связывает source2c3eb8d, Bin918ae5e, actual loaded files и неизменные resources.
+Это исправление ordinary setter в перечисленных boundary states, не полная
+матрица нормализации, connected sources или доказательство успешного обучения.

@@ -1,0 +1,116 @@
+{
+  "kind": "closed_owned_python_job_observation",
+  "schema_version": 1,
+  "job_id": "s10-owned-python-jobs-metadata17-m40-a1",
+  "tool_root": "204ec3c00d980bedf72c704d75d541a0342fac68",
+  "operation": "python-validation",
+  "operation_passed": false,
+  "original_terminal": {
+    "operation_passed": false,
+    "operation": "python-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "original_controller_result": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "process_error",
+    "reason": "nonzero_exit_or_missing_terminal_status",
+    "returncode": 1,
+    "wall_seconds": 0.2950232997536659,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "74beb08e2979a5c11c7e5dcde1547c34f3e896a9ea05f2bd1645ce7d69966436",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "expected_tests": 17,
+  "executed_tests": 0,
+  "validation_result": null,
+  "kernel_and_reservation": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "eb34684da71ef0921db5eb1de185d977b71819adfb15d416b93beb57046eb862",
+        "unit": "timelearner-115016a0-b8d7-4e80-943b-ed808abd391a.service",
+        "invocation_id": "d57e9c81e466474d88ed98e6f934ffa6",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-115016a0-b8d7-4e80-943b-ed808abd391a.service",
+        "initial_main_pid": 3353277,
+        "initial_start_ticks": "323446656",
+        "sha256": "8bdfdfcb86123938caf7ed67ea529a23b264aa8804faa7fadaf0e67f5b2c7109"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "536870912",
+        "TasksMax": "32",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 115016a0-b8d7-4e80-943b-ed808abd391a",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "d57e9c81e466474d88ed98e6f934ffa6"
+      },
+      "memory_max": 536870912,
+      "tasks_max": 32,
+      "scientific_verdict": null
+    },
+    "leases": []
+  },
+  "source_capture_phase": "postclosure",
+  "source_pre_after_comparisons_available": {},
+  "tool_materialized_Scripts_files_Git_verified": 624,
+  "guard": {
+    "guard_triggered": false,
+    "original_reason": null,
+    "peak_allocated_bytes": 69632,
+    "minimum_free_bytes": 339415523328
+  },
+  "original_failure": {
+    "reason": "reservation_requires_directory_tree",
+    "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a3/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 195, in _worker\n    lease = registry.reserve(request['job_id'], resources, ttl_seconds=120,\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a3/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 265, in reserve\n    resources = _resources(resources);ttl_seconds = _ttl(ttl_seconds)\n                ^^^^^^^^^^^^^^^^^^^^^\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a3/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 81, in _resources\n    _require(not canonical.exists() or canonical.is_dir(), 'reservation_requires_directory_tree')\n  File \"/media/user/Data/TimeLearnerRefactor/source-owned-python-jobs-m40-a3/Scripts/StructTrain/TimeLearner/resource_reservations.py\", line 25, in _require\n    raise ReservationError(reason)\nScripts.StructTrain.TimeLearner.resource_reservations.ReservationError: reservation_requires_directory_tree\n"
+  },
+  "SDK_or_CPP_or_models_run": false,
+  "scientific_verdict": null,
+  "collector_descriptor_is_not_kernel_or_test_success_authority": true,
+  "created_utc": "2026-11-08T17:38:14.687012+00:00"
+}

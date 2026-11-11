@@ -1,0 +1,30 @@
+{
+  "kind": "independent_measured_response_normal_verification",
+  "evidence_commit": "0e7a30ff19b4d67846cc98f27b98ed9dd3862d74",
+  "compiled_root": "856b918253754b0d18587423ed37f4d26d505e3b",
+  "PulseLib": "f87f1b5308194609643795e6055462d3778c56f8",
+  "archive_members_verified": 625,
+  "archive_bytes": 457932,
+  "archive_sha256": "90142218fd0668a58816b153dc88cdae1f1eb1cb6cf3a403147e60878537eef2",
+  "unit_checks_passed": 78,
+  "feature_checks_passed": [
+    "TimeLearnerResponseFeatures/RetainsAllExtremaAndTheLaterHighestPeak",
+    "TimeLearnerResponseFeatures/TiedSeparatedMaximaRetainDistinctSampleRanges",
+    "TimeLearnerResponseFeatures/PlateauUsesActualSamplesAcrossClockScales",
+    "TimeLearnerResponseFeatures/ClippedBoundaryDoesNotEraseInteriorMeasurements",
+    "TimeLearnerResponseFeatures/SubthresholdAndShortRecordsDoNotInventPeaks",
+    "TimeLearnerResponseFeatures/MalformedRecordsCannotLeakPartialFeatures",
+    "TimeLearnerResponseFeatures/InvalidBaselineOrThresholdIsExplicit"
+  ],
+  "physical_checks_passed": 15,
+  "all_junit_ids_matched_declared_inventory": true,
+  "no_skipped_tests": true,
+  "actual_loaded_executables_captured": true,
+  "asan_gate": false,
+  "current_and_previous_runtimes_unchanged": true,
+  "source_files_matched_git": true,
+  "all_groups_closed_and_lease_released": true,
+  "build_worker_stderr_review": "exact reviewed Git detached-checkout notices, separate from native pipeline error acceptance",
+  "numerical_tests_executed_locally": false,
+  "whole_plan_complete": false
+}

@@ -1,0 +1,292 @@
+{
+  "kind": "candidate_window_step2_declarations_frame_specification_gate",
+  "schema_version": 1,
+  "status": "source_preparation_only",
+  "pulse": "feb3b181224156d4990d7b12fd2c16a8f1df8d7d",
+  "mechanical_pulse": "d6888c9309a797ab8c3e1cc4c06907105fc1d883",
+  "target": "Test_PulseLib_StorageComponents",
+  "inventories": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowDeclarations.cpp",
+      "bytes": 9297,
+      "sha256": "d9f9af1b4405df7528207a0a7180db8193c184f77ea240bf1cd804b00520db2d",
+      "expected_test_ids": [
+        "CandidateWindowDeclarations.Protocol5RoundtripPreservesExplicitReferenceWindowsAndFullPolicy",
+        "CandidateWindowDeclarations.Protocol4KeepsItsFixedWindowWire",
+        "CandidateWindowDeclarations.Contract2CannotFallBackToOldInputWindowsAlias",
+        "CandidateWindowDeclarations.OldContractRejectsNewPolicyFields",
+        "CandidateWindowDeclarations.UnknownProtocolIsNotAnAtLeastFiveBranch",
+        "CandidateWindowDeclarations.BooleanPolicyVersionAndCountAreRejected",
+        "CandidateWindowDeclarations.IntegralNumericCountHasTheSameDeclaredMeaning",
+        "CandidateWindowDeclarations.FeatureDimensionIsCheckedBeforePolicyScan",
+        "CandidateWindowDeclarations.UnknownPolicyAndMultipleProposalsAreRejected",
+        "CandidateWindowDeclarations.DeclaredEnvelopeMustFitMaximumSamples",
+        "CandidateWindowDeclarations.FixedAndCandidateContractsCannotCoexist",
+        "CandidateWindowDeclarations.RawReferenceCaptureCannotMintProtocol5Authority",
+        "CandidateWindowDeclarations.FrameSpec2RoundtripDoesNotPretendFramesWereCaptured",
+        "CandidateWindowDeclarations.Spec2CannotCarryBothCoordinateKinds",
+        "CandidateWindowDeclarations.UnknownCoordinateAndBooleanFrameAreRejected",
+        "CandidateWindowDeclarations.Spec2RejectsUnknownKeysAndMissingCoordinate",
+        "CandidateWindowDeclarations.StandalonePolicyRejectsInvalidHardIntervalAndWidth",
+        "CandidateWindowDeclarations.BoundedTrainingExplicitlyBlocksProtocol5BeforeReferenceFactoryExists"
+      ],
+      "count": 18
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+      "expected_test_ids": [
+        "NativeCandidateWindowFrames.ClassicActualFrameTimestampsAndOffWithoutC0",
+        "NativeCandidateWindowFrames.BranchActualFrameTimestampsAndOffWithoutC0",
+        "NativeCandidateWindowFrames.ClassicReferenceTimeSpec2KeepsSpec1Result",
+        "NativeCandidateWindowFrames.BranchReferenceTimeSpec2KeepsSpec1Result",
+        "NativeCandidateWindowFrames.ActualBoundC0DoesNotInventNewBaseline",
+        "NativeCandidateWindowFrames.MissingActualFramesNeverUseDtPadding",
+        "NativeCandidateWindowFrames.DuplicateOmissionCannotReachGeometry",
+        "NativeCandidateWindowFrames.MissingOmissionCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedActualModelCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedActualEventCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedFullRepeatCannotReachGeometry",
+        "NativeCandidateWindowFrames.ChangedDeclaredGroupCannotReachGeometry"
+      ],
+      "count": 12
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CandidateWindowProposalData.cpp",
+      "bytes": 7707,
+      "sha256": "6915d4633dfadf8c3b2293558b1d44f721e63d5f5d96766f530c60baf8b7009e",
+      "expected_test_ids": [
+        "CandidateWindowProposalData.StrictDataRoundtripDoesNotMintOpaqueReferenceOrReplayAuthority",
+        "CandidateWindowProposalData.BooleanSchemaCannotEqualOne",
+        "CandidateWindowProposalData.BooleanZeroIndicesAndEpochAreNotCounts",
+        "CandidateWindowProposalData.InexactSignedShiftAndAbsurdIndexAreRejectedBeforeUse",
+        "CandidateWindowProposalData.NonfiniteFeatureDoesNotBecomeAProposal",
+        "CandidateWindowProposalData.ChangedGridCannotHideBehindRehashedIdentifiers",
+        "CandidateWindowProposalData.ReferenceEdgeIsNotAnInteriorPlateauSeed",
+        "CandidateWindowProposalData.DeclaredSampleBudgetMustContainCandidateInterval",
+        "CandidateWindowProposalData.OffKeepsBothCapacitanceStatesNull",
+        "CandidateWindowProposalData.SameValueDuplicateJsonFieldIsRejectedAtByteBoundary",
+        "CandidateWindowProposalData.PredictedPeakIsNotARecognizedDataField",
+        "CandidateWindowProposalData.ChangedComputationWithoutHashRebindingIsRejected",
+        "CandidateWindowProposalData.ReboundFalseComputationIsStillOnlyDataAndNeedsOpaqueReplay",
+        "CandidateWindowProposalData.GroupRelabelChangesInstanceWithoutChangingRecipe",
+        "CandidateWindowProposalData.ChangedCandidateEpochAndPolicyChangeRecipe",
+        "CandidateWindowProposalData.MalformedHashAndEmptyReferenceCannotBecomeDataProof"
+      ],
+      "count": 16,
+      "scope": "synthetic DATA codecs and identity relationships; no opaque ReferenceSet or native/Train authority"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+      "expected_test_ids": [
+        "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.ClassicN6ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.BranchN6ActualDistinctBankReadback",
+        "NativeCandidateWindowBanks.ClassicN4EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.BranchN4EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.ClassicN6EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.BranchN6EachActualInputRoutesNPlus2",
+        "NativeCandidateWindowBanks.BranchSharedBankIsLegitimateButNotDistinct",
+        "NativeCandidateWindowBanks.ActualPreparedWrongBankDescriptorRejected"
+      ],
+      "count": 10,
+      "scope": "actual parameter/receiver/source/member readback; every input of distinct N4/N6 native groups, no p5 seed or Exact claim"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+      "expected_test_ids": [
+        "NativeCandidateWindowFactory.ClassicCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory.BranchCompleteReferencesAndActualReplayedCandidate",
+        "NativeCandidateWindowFactory.Classic20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory.Branch20000ActualReplayedCandidate",
+        "NativeCandidateWindowFactory.ClassicGrowthKeepsImmutableP0AndUsesMovedFrameWindow",
+        "NativeCandidateWindowFactory.BranchGrowthKeepsImmutableP0AndUsesMovedFrameWindow",
+        "NativeCandidateWindowFactory.BoundC0UsesOriginalFamily",
+        "NativeCandidateWindowFactory.PartialReferencesNeverReleaseSeedSet",
+        "NativeCandidateWindowFactory.PrimaryByteReservationBeforeQueue",
+        "NativeCandidateWindowFactory.NeedSetterFalseBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.NeedDirectFalseBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.ConnectedNeedFalseBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.OwnerResetExpiresPreparedReferences",
+        "NativeCandidateWindowFactory.OwnerDefaultExpiresPreparedReferences",
+        "NativeCandidateWindowFactory.ChangedNativeModelBeforeReferenceCompletion",
+        "NativeCandidateWindowFactory.RebuiltSameSemanticGraphCannotReviveReferences"
+      ],
+      "count": 16,
+      "scope": "actual native5 cold/reference/candidate measurement factories; old Train5 consumers blocked; source only"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+      "expected_test_ids": [
+        "NativeCandidateWindowArchive.ClassicActualPrimaryReplaysCompleteReferencesAndProposal",
+        "NativeCandidateWindowArchive.BranchActualPrimaryReplaysCompleteReferencesAndProposal",
+        "NativeCandidateWindowArchive.ActualBoundC0MapsReplayedWithoutFakeBaseline",
+        "NativeCandidateWindowArchive.CsvRenameChangesArtifactDocumentOnly",
+        "NativeCandidateWindowArchive.MissingExternalPrimaryNeverFallsBack",
+        "NativeCandidateWindowArchive.ChangedPrimaryRejected",
+        "NativeCandidateWindowArchive.NewRecordCannotMasqueradeAsArchive1",
+        "NativeCandidateWindowArchive.Protocol4CannotCarryArchive2",
+        "NativeCandidateWindowArchive.IncompleteSelectedReferencesCannotMintProposalAuthority",
+        "NativeCandidateWindowArchive.ChangedReferenceFrameOrNativeInstanceBindingRejected",
+        "NativeCandidateWindowArchive.ChangedPolicyRejectedBeforeAuthority",
+        "NativeCandidateWindowArchive.ChangedCandidateReadbackRejected",
+        "NativeCandidateWindowArchive.ReboundFalseReadbackAndProofStillFailActualGraphReplay",
+        "NativeCandidateWindowArchive.ReboundFalseArithmeticAndProofStillFailPolicyReplay",
+        "NativeCandidateWindowArchive.ChangedPrimaryByteCapChangesSemanticProof",
+        "NativeCandidateWindowArchive.ChangedAttemptRelabelCannotReuseProof",
+        "NativeCandidateWindowArchive.ActualPartialCandidateIsNeverPromoted",
+        "NativeCandidateWindowArchive.ClassicWarmUsesPortableOriginalReferencesAfterGrowth",
+        "NativeCandidateWindowArchive.BranchWarmUsesPortableOriginalReferencesAfterGrowth",
+        "NativeCandidateWindowArchive.BoundC0WarmKeepsOriginalFamily",
+        "NativeCandidateWindowArchive.ClassicN4ActualDistinctAllOrdinalClosure",
+        "NativeCandidateWindowArchive.BranchN4ActualDistinctAllOrdinalClosure",
+        "NativeCandidateWindowArchive.ClassicN6ActualDistinctAllOrdinalClosure",
+        "NativeCandidateWindowArchive.BranchN6ActualDistinctAllOrdinalClosure"
+      ],
+      "count": 24,
+      "scope": "actual archive2 writer/replay, original portable references, fresh warm owner lease, partial/tamper and distinct N4/N6 each-ordinal closure; no Train5 admission"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "bytes": 184030,
+      "sha256": "dd54f041f66dbb4cfe76dcd3dd52d299c8b8d21e68573ee6084addb89e37eff4",
+      "expected_test_ids": [
+        "NativeCandidateWindowBudgetReplay.ActualRefsOnlyHistoryAndEmptyHigherCapWarmReplay",
+        "NativeCandidateWindowBudgetReplay.RehashedHistoricalAttemptCapCannotHideBehindNewLargerCap",
+        "NativeCandidateWindowBudgetReplay.RehashedLaterAttemptCapMustIncludeRetainedOriginalRefs",
+        "NativeCandidateWindowBudgetReplay.EmptyWarmCurrentCapCannotDropRetainedEarlierBytes",
+        "NativeCandidateWindowBudgetReplay.RetainedGroupsCannotReverseIssuedOrder",
+        "NativeCandidateWindowBudgetReplay.CandidateCannotBeMovedBeforeItsOriginalReferences"
+      ],
+      "count": 6,
+      "scope": "actual refs-only historical A caps and later retained-prefix cap replay, warm empty current attempt, declared ledger order; no runtime claim"
+    }
+  ],
+  "expected_count": 102,
+  "prior_planned_scope": 240,
+  "planned_cumulative_scope": 384,
+  "numeric_tests_run_locally": false,
+  "new_runtime_acceptance": false,
+  "required_regressions": [
+    {
+      "maintained_declaration": "native-controller-scalar-regression-v1",
+      "expected_count": 97,
+      "compiled_inventory_crosscheck_required": true
+    },
+    {
+      "maintained_prior_scope": "source-prepared composite240 and native diagnostic bridge14 as independently declared",
+      "accepted_by_this_change": false,
+      "literal_inventory_required": true
+    }
+  ],
+  "evidence_environment": "TIMELEARNER_COMPOSITE_OUTPUT",
+  "new_primary_directories": [
+    "classic-growth/frame-spec2-candidate",
+    "branch-growth/frame-spec2-candidate",
+    "classic-distinct-routing-N4/input-*",
+    "branch-distinct-routing-N4/input-*",
+    "classic-distinct-routing-N6/input-*",
+    "branch-distinct-routing-N6/input-*",
+    "classic-native-window5/reference-*",
+    "branch-native-window5/reference-*",
+    "classic-native-window5/candidate*",
+    "branch-native-window5/candidate*",
+    "classic-window-archive2*",
+    "branch-window-archive2*",
+    "classic-window-warm2*",
+    "branch-window-warm2*",
+    "classic-window-partial2",
+    "classic-window-distinct2-N4",
+    "classic-window-distinct2-N6",
+    "branch-window-distinct2-N4",
+    "branch-window-distinct2-N6",
+    "classic-window-budget-refs-A-empty-B",
+    "classic-window-budget-A-B-empty-C"
+  ],
+  "primary_files": [
+    "full-before.csv",
+    "omit-0.csv",
+    "omit-1.csv",
+    "full-after.csv",
+    "matched-witness.json",
+    "declared-window.json",
+    "frame-spec2.json",
+    "after-model.json"
+  ],
+  "scope": "Declaration/proposal DATA, strict closed-input replay, actual frame/bank routing, native5 complete-reference and candidate factories, archive2 strict portable replay/owned restart. Train5/service/CLI remain pending.",
+  "explicitly_not_accepted": [
+    "portable_proposal_replay",
+    "allN_reference_seed_factory",
+    "actual_candidate_bank_factory",
+    "native_protocol5_attempt",
+    "Train_admission",
+    "service_or_CLI_dispatch",
+    "N4_N6_distinct_routing",
+    "growth_policy_integration"
+  ],
+  "actual_bank_fixture_limits": {
+    "frequency_hz": 2000,
+    "maximum_attempt_wall_seconds": 7200,
+    "maximum_group_wall_seconds": 600,
+    "bank_routing_cases_have_all_input_ordinals": true,
+    "native_group_bursts_per_dimension": {
+      "N4": 24,
+      "N6": 48
+    },
+    "applied_to_each": [
+      "Classic",
+      "Branch"
+    ]
+  },
+  "cancellation_baseline_source": {
+    "root": "cc23d9fff8baba3c5dca89f5e2a0131d7ad1c237",
+    "pulse": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+    "expected_cases": 248,
+    "runtime_accepted": false
+  },
+  "native5_factory_source_controls": {
+    "count": 16,
+    "frequencies_hz": [
+      2000,
+      20000
+    ],
+    "reference_input0_window_end": 0.035,
+    "proposal_shift_frames_per_segment": "frequency_hz / 100 (explicit fixture declaration)",
+    "proposal_left_right_guards": "frequency_hz / 100 (explicit fixture declaration)",
+    "maximum_attempt_wall_seconds": 7200,
+    "local_numeric_or_compile": false,
+    "portable_archive2_implemented": true,
+    "Train5_admission": false
+  },
+  "native5_archive2_source_controls": {
+    "count": 24,
+    "records_schema": 2,
+    "protocol_schema": 5,
+    "complete_refs_derived_from_primary": true,
+    "new_lease_preserves_original_targets": true,
+    "old_certificate4_replay_explicitly_rejects5": true,
+    "semantic_proof2_includes_primary_byte_cap": true,
+    "old4_paths_preserved": true,
+    "distinct_dimensions_are_routing_not_convergence_acceptance": true,
+    "actual_model_learned6_import_pending": true,
+    "numeric_or_compile_run_locally": false,
+    "semantic_proof2_includes_complete_native_specification": true
+  },
+  "budget_replay_followup": {
+    "root_base": "80b2571ec396577bfda9efc3c2a836ab89cda050",
+    "pulse_base": "feb5fa5d4d6ee3c649905e638fc4914d63a5e260",
+    "historical_caps_and_prefix_bytes_checked": true,
+    "declared_retained_ledger_order": "contiguous semantic attempts, increasing issued groups, candidates after selected initial refs",
+    "global_cross_process_clock_attestation": false,
+    "new_cases": 6,
+    "runtime_accepted": false
+  }
+}

@@ -15,6 +15,7 @@ from pathlib import Path
 import unittest
 
 from .native_evidence import EvidenceError, load, require
+from .collector_provenance import frozen_digest
 
 
 def _digest(records):
@@ -33,7 +34,8 @@ def fixture_fingerprint(root, pattern):
     require(paths and all(p.is_file() and not p.is_symlink() for p in paths),
             "validation_fixture_files_missing_or_not_regular")
     require(all(p.resolve().is_relative_to(root) for p in paths), "validation_fixture_escapes_root")
-    return len(paths), _digest({p.relative_to(root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
+    return len(paths), _digest({p.relative_to(root).as_posix():
+                               frozen_digest(p, max(1, p.stat().st_size))['sha256']
                                for p in paths})
 
 

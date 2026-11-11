@@ -1,0 +1,35 @@
+{
+  "kind": "independent_existing_worker_ledger_verification",
+  "source_commit": "ab4f1460f228e60cd0e0704ab35afbe2d0e1d415",
+  "workers": [
+    {
+      "worker": "m40",
+      "commit": "8bc1e5a5622d727761544b81807858fef7c2449d",
+      "archive_members_verified": 78,
+      "archive_bytes": 13012,
+      "archive_sha256": "71177bc7052708bb9cd4d4fc8a4f9ea211bc675eded60c460390230681920516",
+      "checks_passed": 44,
+      "new_checks_passed": 8,
+      "source_files_matched_git": true,
+      "closed_groups_and_released_leases_verified": 4,
+      "final_stderr_empty": true,
+      "earlier_failed_attempts_retained": true
+    },
+    {
+      "worker": "elder",
+      "commit": "d4fa89fd753925c15202abdaa343c1935a5505bd",
+      "archive_members_verified": 23,
+      "archive_bytes": 8176,
+      "archive_sha256": "de0a069c383c58e4ecc091cdb2432402159a291707501a9e98892880faa62e83",
+      "checks_passed": 44,
+      "new_checks_passed": 8,
+      "source_files_matched_git": true,
+      "closed_groups_and_released_leases_verified": 1,
+      "final_stderr_empty": true,
+      "earlier_failed_attempts_retained": true
+    }
+  ],
+  "numerical_tests_executed_locally": false,
+  "managed_live_ownership_tested_by_new_schema3_fixture": false,
+  "whole_plan_complete": false
+}

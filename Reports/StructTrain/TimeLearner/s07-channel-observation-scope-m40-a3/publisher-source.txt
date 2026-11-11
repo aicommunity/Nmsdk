@@ -1,0 +1,69 @@
+from pathlib import Path
+import sys,json,hashlib,tarfile,subprocess
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-channel-observation-scope-a1-delivery'
+parent='db8308bedb14a22b2d640a270570d58902b221dd'
+repo=base/'evidence-channel-observation-scope-normal-a3'
+prefix='Reports/StructTrain/TimeLearner/s07-channel-observation-scope-m40-a3'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+registry=Reservations(base/'resource-reservations.sqlite3');payloads={};bundles=[];closed_states=[]
+for suffix in ['a1','a2','a3']:
+ folder=base/'readbacks'/('s07-channel-observation-scope-normal-'+suffix)
+ container=Path(str(folder)+'-container');closed=inspect_worker_dependency(container,registry,folder.name)
+ assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+ closed_states.append(closed)
+ bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+ assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+ seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read()
+   assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':suffix,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in folder.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name=='primary.tar.xz'):payloads[prefix+'/'+suffix+'/'+f.name]=f.read_bytes()
+ for f in container.iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+suffix+'/controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+suffix+'/fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+folder=base/'readbacks/s07-channel-observation-scope-normal-a3';cache=base/'ReportsCache/channel-observation-scope-normal-a2'
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['caption_and_font_gate_passed'] and terminal['heartbeat_errors']==[]
+tests=json.loads((base/'readbacks/s07-channel-observation-scope-normal-a1/tests.json').read_text());assert tests=={'tests_run':3,'successful':True,'failures':0,'errors':0,'skipped':0}
+checks=json.loads((folder/'cache-file-bindings.json').read_text());assert all(hashlib.sha256((cache/n).read_bytes()).hexdigest()==s for n,s in checks.items())
+manifest=json.loads((folder/'report-manifest.json').read_text());assert manifest['schema_version']==2 and len(manifest['reports'])==4
+assert (cache/'manifest.json').read_bytes()==(folder/'report-manifest.json').read_bytes() or json.loads((cache/'manifest.json').read_text())==manifest
+assert sum(len(r['views']) for r in manifest['reports'])==163 and all(v['minimum_visible_text_fontsize_pt']>=12 for r in manifest['reports'] for v in r['views'])
+AB=json.loads((folder/'original-render-AB.json').read_text());assert len(AB)==4 and all(v['original_data_context_and_all_view_domains_unchanged'] for v in AB)
+selection=json.loads((folder/'selection.json').read_text());by_soma={r['soma_path']:r for r in manifest['reports']}
+for figure in selection['figures']:
+ report=by_soma[figure['soma_path']];assert figure['cache_file'].split('/')[0]==report['folder']
+ p=cache/figure['cache_file'];raw=p.read_bytes();assert hashlib.sha256(raw).hexdigest()==figure['sha256']==checks[figure['cache_file']]
+ name=figure['soma_path'].split('.')[-1]+'-'+figure['view']['view']+'.png'
+ figure['published_file']=name;payloads[prefix+'/'+name]=raw
+payloads[prefix+'/selection.json']=(json.dumps(selection,indent=2)+'\n').encode()
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'tests':tests,'cache_files_hashed':len(checks),'cache_bytes_hashed':sum((cache/n).stat().st_size for n in checks),'views':163,'somas':4,'render_manifest_schema':2,'all_visible_text_minimum_pt':12,'all_original_report_data_contexts_and_view_domains_unchanged':True,'all_groups_closed_and_released':True,'new_native_calculations':0,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args,data=None):return subprocess.check_output(['git','-C',str(repo),*args],input=data).decode().strip()
+def tree(base_tree,changes):
+ entries={}
+ if base_tree:
+  for item in subprocess.check_output(['git','-C',str(repo),'ls-tree','-z',base_tree]).split(b'\0'):
+   if item:
+    header,name=item.split(b'\t',1);mode,kind,sha=header.decode().split();entries[name.decode()]=(mode,kind,sha)
+ groups={}
+ for path,value in changes.items():
+  head,sep,tail=path.partition('/')
+  if sep:groups.setdefault(head,{})[tail]=value
+  else:entries[head]=('100644','blob',git('hash-object','-w','--stdin',data=value))
+ for name,sub in groups.items():
+  previous=entries.get(name);entries[name]=('040000','tree',tree(previous[2] if previous else None,sub))
+ raw=b''.join((mode+' '+kind+' '+sha+'\t'+name).encode()+b'\0' for name,(mode,kind,sha) in sorted(entries.items()))
+ return git('mktree','-z','--missing',data=raw)
+commit=git('-c','user.name=Codex','-c','user.email=codex@openai.com','commit-tree',tree(git('rev-parse',parent+'^{tree}'),payloads),'-p',parent,data=b'Preserve packet-scope caption and minimum-font render verification with failed predecessors\n')
+git('update-ref','refs/heads/evidence',commit)
+print(json.dumps({'evidence_commit':commit,'parent':parent,'repository':str(repo),'bundles':bundles,'figures':selection['figures'],'views':163,'cache_files_hashed':len(checks),'all_groups_closed_and_released':True}))

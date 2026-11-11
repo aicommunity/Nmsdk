@@ -1,0 +1,49 @@
+{
+  "kind": "independent_owned_python_job_Git_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "f1f2aa133385fd930828d671316c56e76724e1c9",
+  "parent_tool_root": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93",
+  "job_id": "s02-extra13-static-retirement-elder-a1",
+  "operation_passed": true,
+  "planned_tests": 0,
+  "executed_tests": 0,
+  "actual_log_and_derived_JUnit_cases": 0,
+  "archive_members_verified": 61,
+  "archive_bytes": 71784,
+  "archive_sha256": "e204ccc4816c658872cba0e96826bc6a493c4ecbabb5a00a120a2d203bb2fc08",
+  "pack_sha256": "9ec5e7c579a9ced9496fa58022c0ff729986b846847d048e81a6b404772f83f2",
+  "source_files_Git_verified": {
+    "tool-source-postclosure.json": 179
+  },
+  "source_roots": {
+    "tool-source-postclosure.json": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93"
+  },
+  "source_phase": "postclosure; before/after only when present in original job",
+  "kernel_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "ad1bf0fb05889703d97beb5194e2a3387975f4b9996d94c7e03b57e4aa32c6e5",
+    "unit": "timelearner-bfafc3f3-3296-4153-8e6a-8c835b60fa55.service",
+    "invocation_id": "dffe4a055c664c10971190238a825bc8",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bfafc3f3-3296-4153-8e6a-8c835b60fa55.service",
+    "initial_main_pid": 2367181,
+    "initial_start_ticks": "372997746",
+    "sha256": "a7faf45f5667d678d7c5385e4d0c726ff323622ac11b15f6f573809ebca604f8"
+  },
+  "kernel_group_closed_observed_server": true,
+  "held_job_leases": 0,
+  "kernel_limits": {
+    "memory_bytes": 268435456,
+    "tasks": 32,
+    "maximum_wall_seconds": 1200
+  },
+  "guard_triggered": false,
+  "original_failure_preserved": false,
+  "CPP_or_models_run": false,
+  "all_collector_kernel_test_SDK_scientific_attestation_flags_false": true,
+  "local_tests_or_numerics_run": false,
+  "original_suite_external_raw_file": null,
+  "first_collector_normalized_suite_limitation": false,
+  "scientific_verdict": null,
+  "Git_import": "unpack_objects_without_refs_or_checkout"
+}

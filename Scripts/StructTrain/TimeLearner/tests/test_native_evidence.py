@@ -10,6 +10,7 @@ from pathlib import Path
 from Scripts.StructTrain.TimeLearner.native_evidence import (
     EvidenceError, audit_probe, audit_training_summary, load,
 )
+from Scripts.StructTrain.TimeLearner.learned_evidence import audit_learned_state, load_case
 
 
 class NativeEvidenceTest(unittest.TestCase):
@@ -43,18 +44,51 @@ class NativeEvidenceTest(unittest.TestCase):
         # A full run also contains cold-start and configured-service controls.
         # Audit every supplied summary instead of rejecting those extra cases.
         cls.summaries = [load(p) for p in summary_paths]
+        cls.diagnostics = [s for s in cls.summaries if s['certificate'] is None]
+        if len(cls.diagnostics) < 4:
+            raise RuntimeError('requires actual diagnostic automatic-service outcomes')
+        # Certificate mutation tests must start from a real completed package,
+        # not a certificate invented for an exhausted diagnostic service run.
+        cls.certified_cases = [load_case(p) for p in sorted(cls.directory.glob('*_learned_state.json'))
+                               if load(p)['kind'] == 'timelearner_completed_state' and load(p)['certificate'] is not None]
+        if not cls.certified_cases:
+            raise RuntimeError('requires completed native model packages and their primary traces')
+        for case in cls.certified_cases:
+            result = audit_learned_state(*case)
+            if not result['certificate_consistent'] or result['evaluation_verdict'] is not None:
+                raise RuntimeError('completed package does not provide an auditable training certificate')
 
     def test_actual_native_traces(self):
         for result in self.audits:
             self.assertTrue(result["valid_observation"])
             self.assertIsNone(result["evaluation_verdict"])
 
-    def test_actual_model_bound_negative_certificates(self):
+    def test_actual_diagnostic_training_has_no_certificate(self):
         for summary in self.summaries:
-            result = audit_training_summary(summary, self.packets, "pulse0")
-            self.assertTrue(result["certificate_consistent"])
-            self.assertFalse(result["exact"])
+            result = audit_training_summary(summary, self.packets, "pulse0", require_certificate=False)
+            self.assertEqual(result['certificate_consistent'], summary['certificate'] is not None)
+            if summary['certificate'] is None:
+                self.assertEqual(summary['model_state_kind'], 'diagnostic')
+                self.assertIsNone(result['exact'])
             self.assertIsNone(result["evaluation_verdict"])
+
+    def test_default_gate_rejects_diagnostics_without_certificates(self):
+        for summary in self.diagnostics:
+            with self.assertRaises(EvidenceError):
+                audit_training_summary(summary, self.packets, 'pulse0')
+
+    def test_diagnostic_analysis_cannot_claim_exact(self):
+        for original in self.diagnostics:
+            summary = copy.deepcopy(original);summary['outcome'] = 'exact'
+            with self.assertRaisesRegex(EvidenceError, '^missing_or_unknown_certificate$'):
+                audit_training_summary(summary, self.packets, 'pulse0', require_certificate=False)
+
+    def test_actual_completed_model_certificates_are_recomputed(self):
+        for package, summary, packets, _ in self.certified_cases:
+            result = audit_training_summary(summary, packets, 'pulse0')
+            self.assertTrue(result['certificate_consistent'])
+            self.assertEqual(result['exact'], package['certificate']['exact'])
+            self.assertIsNone(result['evaluation_verdict'])
 
     def test_unknown_schema(self):
         packet = copy.deepcopy(self.packet)
@@ -129,34 +163,38 @@ class NativeEvidenceTest(unittest.TestCase):
                 audit_probe(self.packet, path)
 
     def test_certificate_exact_is_recomputed_from_actual_trials(self):
-        summary = copy.deepcopy(self.summaries[0])
-        summary["certificate"]["exact"] = True
-        with self.assertRaises(EvidenceError):
-            audit_training_summary(summary, self.packets, "pulse0")
+        for _, original, packets, _ in self.certified_cases:
+            summary = copy.deepcopy(original)
+            summary['certificate']['exact'] = not original['certificate']['exact']
+            with self.assertRaises(EvidenceError):
+                audit_training_summary(summary, packets, 'pulse0')
 
     def test_reference_label_is_not_row_position(self):
-        summary = copy.deepcopy(self.summaries[0])
+        _, original, packets, _ = self.certified_cases[0]
+        summary = copy.deepcopy(original)
         summary["references"].reverse()
         summary["certificate"]["residuals"].reverse()
-        self.assertFalse(audit_training_summary(summary, self.packets, "pulse0")["exact"])
+        self.assertEqual(audit_training_summary(summary, packets, 'pulse0')['exact'], original['certificate']['exact'])
 
     def test_missing_final_trial(self):
-        packets = dict(self.packets)
-        trial = self.summaries[0]["certificate"]["residuals"][0]["trial_id"]
+        _, summary, source, _ = self.certified_cases[0]
+        packets = dict(source)
+        trial = summary["certificate"]["residuals"][0]["trial_id"]
         del packets[trial]
         with self.assertRaises(EvidenceError):
-            audit_training_summary(self.summaries[0], packets, "pulse0")
+            audit_training_summary(summary, packets, "pulse0")
 
     def test_peak_selection_is_part_of_the_training_protocol(self):
-        packets = copy.deepcopy(self.packets)
-        trial = self.summaries[0]["certificate"]["residuals"][0]["trial_id"]
+        _, summary, source, _ = self.certified_cases[0]
+        packets = copy.deepcopy(source)
+        trial = summary["certificate"]["residuals"][0]["trial_id"]
         specification = packets[trial]["observation"]["specification"]
         original = specification["peak_selection"]
         specification["peak_selection"] = ("isolated_window" if original == "assigned_burst_wave"
                                              else "assigned_burst_wave")
         self.assertNotEqual(specification["peak_selection"], original)
         with self.assertRaises(EvidenceError):
-            audit_training_summary(self.summaries[0], packets, "pulse0")
+            audit_training_summary(summary, packets, "pulse0")
 
 
 class AssignedNativeEvidenceTest(unittest.TestCase):

@@ -1,0 +1,71 @@
+{
+  "kind": "windows_module_capture_diagnostics_and_short_sdk_control",
+  "parent": "289c3bc44159f08b12e3972e7adae9d934c8fa22",
+  "rows": [
+    {
+      "attempt": "a1",
+      "terminal": {
+        "build_execution_accepted": false,
+        "compiled_runtime_tested": true,
+        "gates_passed": 0,
+        "passed": false,
+        "scientific_worker_admitted": false,
+        "classification_evaluated": false,
+        "whole_plan_complete": false
+      },
+      "controls": {
+        "passed": false,
+        "tests_run": 16,
+        "skipped": 0
+      },
+      "native_not_started": true
+    },
+    {
+      "attempt": "a2",
+      "terminal": {
+        "build_execution_accepted": false,
+        "compiled_runtime_tested": true,
+        "gates_passed": 1,
+        "passed": true,
+        "scientific_worker_admitted": false,
+        "classification_evaluated": false,
+        "whole_plan_complete": false
+      },
+      "controls": {
+        "passed": true,
+        "tests_run": 17,
+        "skipped": 0
+      },
+      "inventory": {
+        "expected": 1,
+        "observed": 1,
+        "failed_test_ids": [],
+        "assertion_status": "passed",
+        "sha256": "abf6ef10cb0490cb5e5015ab2da5eea3a092b62907eda7a27fbfc70115cfa1e5"
+      },
+      "native_gate": {
+        "kind": "timelearner_native_test_gate_result",
+        "schema_version": 1,
+        "execution": "completed",
+        "validity": "valid",
+        "assertion_status": "passed",
+        "reason": "complete_declared_test_inventory",
+        "inventory": {
+          "expected": 1,
+          "observed": 1,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "abf6ef10cb0490cb5e5015ab2da5eea3a092b62907eda7a27fbfc70115cfa1e5"
+        },
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "owned_jobs_closed": 19,
+  "earlier_failed_diagnostic_attempt_preserved": true,
+  "short_actual_cpp_capture_passed": true,
+  "original_long_capture_failure_reproduced": false,
+  "full_native_gate_accepted": false,
+  "scientific_worker_admitted": false,
+  "whole_plan_complete": false
+}

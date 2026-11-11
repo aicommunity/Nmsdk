@@ -1,0 +1,52 @@
+{
+  "kind": "independent_assigned_vertex_unit_metadata_verification",
+  "archives": [
+    {
+      "commit": "745c0bd2455745259f8c4a461cb1ddf6b3f8b172",
+      "members": 130,
+      "bytes": 52340,
+      "sha256": "8f625be3a2e1372feeaf0c9fa3189d9bf566404a238a01bbe1f5fb09b5d557f7"
+    },
+    {
+      "commit": "25b29c0b94cf4cb6ba49dcbc73a42bbbd3d4b4f5",
+      "members": 44,
+      "bytes": 43028,
+      "sha256": "d9e508b7bd8ba8b96462b266e75bad0ff2ac7a34a3f7269fc0a5e4a77aebeec6"
+    }
+  ],
+  "project_source_dependency_bindings_verified": 16,
+  "runs": [
+    {
+      "job": "s07-peak-ownership-baseline-m40-a3",
+      "tests": 23,
+      "failed_test_ids": [
+        "FinalVerification/OneRecordedVertexCannotCertifyDifferentAssignedImpulses",
+        "FinalVerification/SharedPlateauCannotBeRelabelledBySplittingItsEndpoints",
+        "FinalVerification/SharedVertexCannotEnterReferencesOrFinalCertificate"
+      ],
+      "actual_ASan_loaded": true,
+      "root": "2b945d6365feec7c93287a9a3b8120b29cf66b68",
+      "PulseLib": "c17ebd2cc75abd3a1562492907c90782232c2ea6"
+    },
+    {
+      "job": "s07-peak-ownership-fixed-m40-a1",
+      "tests": 23,
+      "failed_test_ids": [],
+      "actual_ASan_loaded": true,
+      "root": "90a0a917b32eeb21925b414cc18450fbdbeaba03",
+      "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810"
+    },
+    {
+      "job": "s07-peak-ownership-fixed-elder-normal-a1",
+      "tests": 23,
+      "failed_test_ids": [],
+      "actual_ASan_loaded": false,
+      "root": "90a0a917b32eeb21925b414cc18450fbdbeaba03",
+      "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810"
+    }
+  ],
+  "physical_models_executed": false,
+  "full_sdk_cmake_verified": false,
+  "burst_attribution_resolved": false,
+  "whole_plan_complete": false
+}

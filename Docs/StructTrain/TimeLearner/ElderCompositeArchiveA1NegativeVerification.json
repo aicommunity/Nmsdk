@@ -1,0 +1,118 @@
+{
+  "kind": "independent_current_composite_archive206_failed_attempt_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "9b9a38f1a5d8842ada5e167d9bdbf33bd24b6381",
+  "parent_root": "d433acf6ed250e7ed5da781970b3963a51c56a26",
+  "pulse": "f925e37247bb987980fce80da47831a1c31d04c9",
+  "Bin": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "archive_members_verified": 810,
+  "archive_bytes": 1041464,
+  "archive_sha256": "f0c51e899db7a6ad91e138235bd2997b0387d12ac677d55aa844d4056e9e01ff",
+  "pack_bytes": 1104628,
+  "pack_sha256": "e697518b3aa73d38c064d6616f5abd643648eaaa1ee1a621f8fe0e56a278af4b",
+  "original_terminal_passed": false,
+  "actual_build_link_passed": true,
+  "compiled_inventory_declared_cases": 206,
+  "actual_JUnit_completed": 112,
+  "actual_JUnit_assertion_passed": 111,
+  "actual_JUnit_failed": 1,
+  "not_run": 94,
+  "failure": {
+    "id": "NativeCompositeTraining/ClassicRawProbeCannotEnterCompositeProtocol",
+    "gate": "composite-native-14",
+    "failure_text": [
+      "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1/Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp:238\nExpected: EncodeVerificationProtocol(f.protocol) throws an exception of type std::invalid_argument.\n  Actual: it throws nothing."
+    ],
+    "declaration_line": 360
+  },
+  "failure_source_line": 238,
+  "failure_meaning": "EncodeVerificationProtocol(protocol) did not throw at the original negative expectation; other RawAdmission rejection expectations have no JUnit failures. This is preserved failure evidence, not a reclassified pass.",
+  "original_failed_outer_unit_metadata_preserved": true,
+  "original_failed_leaf_unit_metadata_preserved": true,
+  "kernel_outer_and24leaf_groups_closed_on_server": true,
+  "whole_worker_reservation_released": true,
+  "source_files_independently_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-storage-recipes",
+      "commit": "d433acf6ed250e7ed5da781970b3963a51c56a26",
+      "files": 968
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-matched-omission",
+      "commit": "f925e37247bb987980fce80da47831a1c31d04c9",
+      "files": 313
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    }
+  ],
+  "actual_postclosure_worktree_byte_verification_recorded": true,
+  "source_capture_ready_before_next_mutation": true,
+  "all7gitlinks_clean_and_matching": true,
+  "actual_loaded_files_metadata_verified": 27,
+  "actual_materialized_resources_Git_verified": 327,
+  "protected_old_codec_and_omission_runtime_before_after_postclosure_equal": true,
+  "current_runtime_before_postclosure_equal": true,
+  "original_current_runtime_after_snapshot_absence_preserved": true,
+  "original_fixture_source_hashes_after_pass_absence_preserved": true,
+  "actual_primary_archives_captured": 0,
+  "six_archive_export_requirement_completed": false,
+  "new_archive_growth_source_guard_cases_executed": 0,
+  "direct_production_COMPOSITE_OUTPUT_request_route_verified_all24leaves": true,
+  "adapter_or_monkeypatch_used": false,
+  "RDK_USE_LLM": false,
+  "RDK_LLM_BUILD_EMBEDDED": false,
+  "FETCHCONTENT_FULLY_DISCONNECTED": true,
+  "retention_keeper_used": false,
+  "full_Configs_materialized": false,
+  "disk_guard_not_triggered": true,
+  "recorded_owned_persistent_scope_peak_increment_bytes": 228548608,
+  "recorded_physical_minimum_free_bytes": 1616924672,
+  "disk_accounting_scope": "Exact persistent paths listed by original watchdog; transient compiler files outside those paths are not claimed individually quota-accounted. Global physical-free floor was continuously monitored.",
+  "original_operational_diagnostics_preserved": true,
+  "new_build_or_model_or_numerical_execution_by_verifier": false,
+  "local_CPP_or_scientific_numerical_execution": false,
+  "ASan_acceptance": false,
+  "independent_archive_geometry_scalar_replay": false,
+  "package5_accepted": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "git_import": "unpack-objects_no_checkout_no_refs"
+}

@@ -1,0 +1,9 @@
+# Package6: серверная проверка метаданных 34/34
+
+На M40 завершены **34/34 проверки**, без пропусков, failures и errors. Source `e91c20213824580ea4199997896e7ac2f9e606ba`, декларация `066a6f84f53d788603a0198fe210d277e0eec867`. Проверены четыре случая формулы остатка опорного входа certificate2, шесть случаев execution4, четырнадцать metadata-контрактов package6 и десять runtime2 declaration cases. Включён ранее падавший `test_C_region_and_context_count_limits_are_checked`; исходный отрицательный запуск73 сохраняется как 72PASS/1FAIL и этой проверкой не переписывается.
+
+Production launcher завершён с кодом0, diagnostics clear; source и Tool не изменились. Исходный terminal подтверждает completed и закрытую группу. Последующее независимое наблюдение уже удалённого systemd unit возвращает execution unknown при all_processes_closed=true: это подтверждение отсутствия процессов, а не повторное установление exit code. Собственный lease `9c3b4925-1ccf-433c-a1ee-37ee28f622c9` released. [Компактные Root observations, полный вывод34 и контрольные суммы](../../../Reports/StructTrain/TimeLearner/s10-package6-reader34-root-observation/index.json).
+
+Это адресные проверки форматов и контролируемых DATA-примеров. Реальный C++ corpus package6 не выбран; новый native экспорт/import, Console Train→Test и научная матрица ими не подтверждены. Полная managed collection этого запуска ещё не опубликована; сжатые Root observations не заменяют её.
+
+В отдельной feature-ветке реализованы native package6, summary7/execution4 и независимые Python readers. Они пока не приняты сквозной native проверкой и не объединены с поддерживаемым SDK baseline. Следующая проверка должна собирать одновременно Console и интеграционный target, использовать исправленную native fixture и сверять реальные новые артефакты независимыми readers. Изменения допусков, CapturedPerInput и математической цели для прохождения проверки не допускаются.

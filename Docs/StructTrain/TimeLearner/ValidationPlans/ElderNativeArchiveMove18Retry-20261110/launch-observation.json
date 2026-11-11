@@ -1,0 +1,45 @@
+{
+  "observed_at_utc": "2026-11-10T13:30:38.163Z",
+  "compiled_source_root": "355c60df066bdc8da09bd6d7872b47f6e71c0494",
+  "controls_root": "4692ea63de8afce248ff22ae36d9f0e724a890ab",
+  "native_tool": "1386206616d82952166ece926e814cd2c5aafbb9",
+  "native_worker_sha256": "e3069ca54c32af9a2a055135c7ac9e46154aa757d13a22ceaab82227bc13a910",
+  "cleanup_preflight": {
+    "cleanup_terminal": {
+      "scientific_verdict": null,
+      "completed": true,
+      "removed_files": 1258684,
+      "removed_logical_bytes": 12043062096,
+      "free_bytes_before": 2420293632,
+      "free_bytes_after": 17256710144,
+      "self_peak_rss_bytes": 195657728
+    },
+    "cleanup_owner_missing": true,
+    "held": [],
+    "capacity": {
+      "disk_bytes": 15032385536,
+      "memory_bytes": 25769803776,
+      "slots": 1
+    },
+    "free_bytes": 17256341504
+  },
+  "canonical_job": {
+    "pid": 14760,
+    "status": "closed",
+    "stdout": "STARTED {\"kind\": \"timelearner_contained_binding\", \"schema_version\": 1, \"request_sha256\": \"13d378cefd061dd74edf5117467032bd86fa12121316e2ddddc766ca7d797596\", \"unit\": \"timelearner-429b65bf-18b7-4733-971c-d998f0bd875e.service\", \"invocation_id\": \"5720dc3b6753444089f25107f24bc3d9\", \"control_group\": \"/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-429b65bf-18b7-4733-971c-d998f0bd875e.service\", \"initial_main_pid\": 4147620, \"initial_start_ticks\": \"388709002\", \"sha256\": \"3d1b5e4852ba10738f2d64bee1dab5c27ea30100fa116436634d16ffd389c575\"}\r\n{\"controller\": {\"kind\": \"timelearner_process_result\", \"schema_version\": 2, \"execution\": \"completed\", \"reason\": \"exit_zero_and_whole_group_closed\", \"returncode\": 0, \"wall_seconds\": 66.57090041879565, \"model_time\": null, \"runtime_provenance\": \"loaded_files_captured\", \"mapping_error\": null, \"runtime_fingerprint\": \"bb44aa67cd8ebc2583366014b0df601eebef934e9af501a59d4d417a17786ab4\", \"ownership_scope\": \"bound_cgroup\", \"all_processes_closed\": true, \"scientific_verdict\": null, \"operational_diagnostics\": {\"kind\": \"timelearner_operational_diagnostics\", \"schema_version\": 1, \"policy\": \"owned-streams-v1\", \"status\": \"clear\", \"error_records\": 0, \"warning_records\": 0, \"unclassified_stderr_chunks\": 0, \"reasons\": [], \"examples\": [], \"streams\": [{\"path\": \"stdout.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}, {\"path\": \"stderr.log\", \"bytes\": 0, \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\"}], \"contained_streams_match\": true, \"scientific_verdict\": null}}, \"worker_terminal\": {\"operation_passed\": true, \"operation\": \"native-canonical-preparation\", \"heartbeat_errors\": [], \"lease_release\": \"controller only after whole cgroup closure\", \"selected_validation_scope_requires_source_review\": true, \"scientific_verdict\": null}, \"scientific_verdict\": null}\r\n",
+    "stderr": "",
+    "exitCode": 0,
+    "signal": null
+  },
+  "launch": {
+    "controller": "/home/user/timelearner-refactor/readbacks/s05-native-archive-move18-normal-a2-controller",
+    "supervisor": {
+      "pid": 1687,
+      "start_ticks": "388720843",
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "uid": 1000
+    },
+    "scientific_verdict": null
+  },
+  "scientific_verdict": null
+}

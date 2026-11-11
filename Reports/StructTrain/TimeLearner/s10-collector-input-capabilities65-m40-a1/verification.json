@@ -1,0 +1,490 @@
+{
+  "kind": "closed_collector_input_capabilities65_scoped_passed",
+  "schema_version": 1,
+  "collection_source_root": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+  "original_controller_tool_root": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "validation_source_root": "2caf3ad467b7f8b82c7f1b42c4680cbe0061bdae",
+  "plan_commit": "884dad3970ba4ec11b9f6ba8739e0b354eb29fcf",
+  "tests": 65,
+  "passed": 65,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "old_tests": 39,
+  "new_tests": 26,
+  "fresh_closure_and_released_lease": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "957c2ed2390c8177c22593c0076f4d77beb6dfc2825ed14ac90d4cbccef8d4f0",
+        "unit": "timelearner-bf68cd0d-3693-4918-bd2c-ec9e0862a740.service",
+        "invocation_id": "e2e621af304748a1929b05c06f44a676",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bf68cd0d-3693-4918-bd2c-ec9e0862a740.service",
+        "initial_main_pid": 1238910,
+        "initial_start_ticks": "329161708",
+        "sha256": "0bf3c26be8c03d533b35527e89ece80474a773e3da4731d2f8c18cceb8343b17"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-bf68cd0d-3693-4918-bd2c-ec9e0862a740.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "released_lease": {
+      "token": "4f15c8af-3394-4092-b760-a3d19b3360ea",
+      "job_id": "s10-collector-input-capabilities65-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1238910,
+        "start_ticks": "329161708",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-input-capabilities65-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-input-capabilities65-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794216419.627247,
+      "deadline": 1794216549.6334832,
+      "updated": 1794216434.2883391,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    "runtime_fingerprint": "0da88ff42813f36c570457c4893a55e117fa4d023b8e3efef5828f8c0898b612"
+  },
+  "original_controller": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 14.861086685210466,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "0da88ff42813f36c570457c4893a55e117fa4d023b8e3efef5828f8c0898b612",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 10445,
+          "sha256": "f04b25ad5de8218d0bd9fb6f427c82c0934db501feeb0cb0e0ee70e39b30c16f"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "original_terminal": {
+    "operation_passed": true,
+    "operation": "python-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "source_before_after_equal": true,
+  "external_scientific_fixtures": {},
+  "source_SDK_verified": false,
+  "original_job_manifest": {
+    "closure-and-reservation.json": {
+      "bytes": 3165,
+      "sha256": "087acdca2c603a781496c2ce0375ecdc2a1f90ceb120695f200604daec1a59fc"
+    },
+    "controller-result.json": {
+      "bytes": 1181,
+      "sha256": "0a87fa86291d9b2bae35c160953aa20d7989c277821815ac3f26d036c6af81ea"
+    },
+    "launch-context.json": {
+      "bytes": 258,
+      "sha256": "027de10634e691e7301569929520aa3eda760f760da52aa8f5c81aa4e4d5abc7"
+    },
+    "lease-recovery.json": {
+      "bytes": 3260,
+      "sha256": "3023a28ef3c76e1c4acb73339185759e356d11a859391ff596b7ac94c5a598ad"
+    },
+    "monitor-final.json": {
+      "bytes": 132,
+      "sha256": "48c88803bcf4224b2541d48b31e4788da1ef34c6a6504f782071baa6f28fe282"
+    },
+    "monitor.jsonl": {
+      "bytes": 1794,
+      "sha256": "fabc84c169a79ae0c2e665689e41eaf47dce572fb199271479f5a34dc1af291e"
+    },
+    "preflight.json": {
+      "bytes": 75,
+      "sha256": "4a4db4efca2357db0be10d8eca4a9bbab5a9d399000a0fb5a1d41e5e75ab9d86"
+    },
+    "process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "ce7ceca94d24e1940b4738c38cdf85a82aa40b409de81c90328ce644f8d5312c"
+    },
+    "process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "c2c844c19c0cef3cebbc79840ac741b488feda72b8c6af116d61acb11fef5e73"
+    },
+    "process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "f7bc89985f0313bbca1b2977b7d99f7393ff29d21e0f856f04e947afab5c97e3"
+    },
+    "process/contained/request.json": {
+      "bytes": 968,
+      "sha256": "994df2ebb8162b8f2457255c0cfc0d9c2bd43ca0460c2b899f31ed767b67c4a2"
+    },
+    "process/contained/runtime.json": {
+      "bytes": 2966,
+      "sha256": "4f36b1846fcb30d6024d8c74b94b6f090bec2f3132c1b2c45bfc8c93fdba51a0"
+    },
+    "process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "process/contained/stdout.log": {
+      "bytes": 10445,
+      "sha256": "f04b25ad5de8218d0bd9fb6f427c82c0934db501feeb0cb0e0ee70e39b30c16f"
+    },
+    "process/loaded-files.json": {
+      "bytes": 976,
+      "sha256": "5db1cd600717b928b17c897be8b83233874937be4f56f87d03f9db48a09c5d28"
+    },
+    "process/owned-process.json": {
+      "bytes": 587,
+      "sha256": "af5071e2d51bc4b48c83519dbf432199ae34b5f162e8a2397bb8eefac81eba5e"
+    },
+    "process/request.json": {
+      "bytes": 565,
+      "sha256": "0578a86ba8b76a6c25a2ce9bdc98a7e2af8c33d1befd6f7fb4e4a5ad7c159de3"
+    },
+    "process/result.json": {
+      "bytes": 1181,
+      "sha256": "0a87fa86291d9b2bae35c160953aa20d7989c277821815ac3f26d036c6af81ea"
+    },
+    "process/runtime.json": {
+      "bytes": 2966,
+      "sha256": "4f36b1846fcb30d6024d8c74b94b6f090bec2f3132c1b2c45bfc8c93fdba51a0"
+    },
+    "process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "process/stdout.log": {
+      "bytes": 10445,
+      "sha256": "f04b25ad5de8218d0bd9fb6f427c82c0934db501feeb0cb0e0ee70e39b30c16f"
+    },
+    "process/terminal-unit-state.json": {
+      "bytes": 1296,
+      "sha256": "d59c729a7cb769ad857ae8f58c1f3f02a8c4e1ad4edd8a9797e175eab2785445"
+    },
+    "process/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "439857aa2f89dda1e246dc4b09f5007fd0bfc0eb987a73da529f3b4cd1d0aa36"
+    },
+    "request.json": {
+      "bytes": 927,
+      "sha256": "c53d1c8e37f016861d4eac13ecab054b0d323fe33f76ef2fc0145dd71dc1be81"
+    },
+    "supervisor.log": {
+      "bytes": 554,
+      "sha256": "47398c0451e43b2de480b6f495bbfccdf1e1fc3c54c58855d38f2138573386f4"
+    },
+    "worker/fixtures-after.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/fixtures-before.json": {
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    "worker/reservation.json": {
+      "bytes": 1374,
+      "sha256": "5efa03a7c9a9ca5d957a5e637912626c1d5caceb424e1dc07ff0279e1a8b47d6"
+    },
+    "worker/temporary-environment.json": {
+      "bytes": 383,
+      "sha256": "f7e39e1aa5af536e5006f186f32e2629918fbe62e0dd89af638913c68f313143"
+    },
+    "worker/terminal.json": {
+      "bytes": 248,
+      "sha256": "10f2cfd0cb7d2d454c48123ab38819a476cdf65da8b6408830021294b5b0d04d"
+    },
+    "worker/tool-source-after.json": {
+      "bytes": 258163,
+      "sha256": "921beef0680b6468d30026e8ea38f076a9c713ded317a10e8a9e79849348e476"
+    },
+    "worker/tool-source-before.json": {
+      "bytes": 258163,
+      "sha256": "921beef0680b6468d30026e8ea38f076a9c713ded317a10e8a9e79849348e476"
+    },
+    "worker/validation/result.json": {
+      "bytes": 10737,
+      "sha256": "0610d3608cda06371cbb391fef5fc111a425c59c783e58643c6657a1d61e7e8a"
+    },
+    "worker/validation/suite.json": {
+      "bytes": 10795,
+      "sha256": "82fe4cbe9dd647869039d8072482ab8b9e18f5dc9889de9f66fbae398f6bbbf1"
+    },
+    "worker/validation/unittest.log": {
+      "bytes": 14280,
+      "sha256": "1721d6e8d896a010a3556b58ff64bf082a035d03e087e351f0a37f549a3243f3"
+    },
+    "worker/validation-process.json": {
+      "bytes": 368,
+      "sha256": "e0d7924940ce4b7e65089dc4ee546a581b252d6d6c29bc530ee5db1144000a5f"
+    },
+    "worker/validation-source-after.json": {
+      "bytes": 261965,
+      "sha256": "4c8cc435d8c2ec8e17fe024ea092b7f7515d90f43fdf95157971fbc1a31622e3"
+    },
+    "worker/validation-source-before.json": {
+      "bytes": 261965,
+      "sha256": "4c8cc435d8c2ec8e17fe024ea092b7f7515d90f43fdf95157971fbc1a31622e3"
+    }
+  },
+  "archive_roles": {
+    "input-manifest": "preparation-history/input-manifest.json",
+    "input-0000": "preparation-history/.gitattributes",
+    "input-0001": "preparation-history/CollectorCapabilities65RootActualPreparation.err",
+    "input-0002": "preparation-history/CollectorCapabilities65RootActualPreparation.json",
+    "input-0003": "preparation-history/CollectorCapabilities65RootActualPreparationA2.err",
+    "input-0004": "preparation-history/CollectorCapabilities65RootActualPreparationA2.json",
+    "input-0005": "preparation-history/CollectorCapabilities65RootPlanA2Absence.err",
+    "input-0006": "preparation-history/CollectorCapabilities65RootPlanA2Absence.json",
+    "input-0007": "preparation-history/CollectorCapabilities65RootPlanA2Delivery.json",
+    "input-0008": "preparation-history/CollectorCapabilities65RootPlanDelivery.json",
+    "input-0009": "preparation-history/CollectorCapabilities65RootPrepA1ReadonlyAudit.err",
+    "input-0010": "preparation-history/CollectorCapabilities65RootPrepA1ReadonlyAudit.json",
+    "input-0011": "preparation-history/CollectorCapabilities65RootReadonlyDiscovery.err",
+    "input-0012": "preparation-history/CollectorCapabilities65RootReadonlyDiscovery.json",
+    "input-0013": "preparation-history/CollectorCapabilities65RootRunTransport.stderr",
+    "input-0014": "preparation-history/CollectorCapabilities65RootRunTransport.stdout",
+    "input-0015": "preparation-history/CollectorCapabilities65RootSourceDelivery.json",
+    "input-0016": "preparation-history/CollectorCapabilities65RootTerminalReadback.err",
+    "input-0017": "preparation-history/CollectorCapabilities65RootTerminalReadback.json",
+    "input-0018": "preparation-history/collector65_publish_closed_a1.py",
+    "input-0019": "preparation-history/collector_capabilities65_A2_delivery_preparation.json",
+    "input-0020": "preparation-history/collector_capabilities65_plan884dad_a2.json",
+    "input-0021": "preparation-history/collector_capabilities65_plan_a2_readonly_absence.txt",
+    "input-0022": "preparation-history/collector_capabilities65_prep_a1_readonly_audit.txt",
+    "input-0023": "preparation-history/collector_capabilities65_prepare_after_delivery.txt",
+    "input-0024": "preparation-history/collector_capabilities65_prepare_after_delivery_a2.txt",
+    "input-0025": "preparation-history/collector_capabilities65_readonly_discovery.txt",
+    "input-0026": "preparation-history/collector_capabilities65_source2caf_plan110f.json",
+    "input-0027": "preparation-history/collector_capabilities65_source2caf_planac4c.json",
+    "input-0028": "preparation-history/timelearner_deliver_empty_private_source_v2.py",
+    "input-0029": "preparation-history/unexecuted-review-command-a1.txt",
+    "input-0030": "preparation-history/unexecuted-review-input-manifest-a1.json",
+    "input-0031": "preparation-history/unexecuted-review-producer-b016.py",
+    "job-0000": "original-job/closure-and-reservation.json",
+    "job-0001": "original-job/controller-result.json",
+    "job-0002": "original-job/launch-context.json",
+    "job-0003": "original-job/lease-recovery.json",
+    "job-0004": "original-job/monitor-final.json",
+    "job-0005": "original-job/monitor.jsonl",
+    "job-0006": "original-job/preflight.json",
+    "job-0007": "original-job/process/contained/launch-result.json",
+    "job-0008": "original-job/process/contained/launcher.py",
+    "job-0009": "original-job/process/contained/limits-readback.json",
+    "job-0010": "original-job/process/contained/owned-unit.json",
+    "job-0011": "original-job/process/contained/ready.json",
+    "job-0012": "original-job/process/contained/request.json",
+    "job-0013": "original-job/process/contained/runtime.json",
+    "job-0014": "original-job/process/contained/start.ack",
+    "job-0015": "original-job/process/contained/stderr.log",
+    "job-0016": "original-job/process/contained/stdout.log",
+    "job-0017": "original-job/process/loaded-files.json",
+    "job-0018": "original-job/process/owned-process.json",
+    "job-0019": "original-job/process/request.json",
+    "job-0020": "original-job/process/result.json",
+    "job-0021": "original-job/process/runtime.json",
+    "job-0022": "original-job/process/stderr.log",
+    "job-0023": "original-job/process/stdout.log",
+    "job-0024": "original-job/process/terminal-unit-state.json",
+    "job-0025": "original-job/process/whole-group-closure.json",
+    "job-0026": "original-job/request.json",
+    "job-0027": "original-job/supervisor.log",
+    "job-0028": "original-job/worker/fixtures-after.json",
+    "job-0029": "original-job/worker/fixtures-before.json",
+    "job-0030": "original-job/worker/reservation.json",
+    "job-0031": "original-job/worker/temporary-environment.json",
+    "job-0032": "original-job/worker/terminal.json",
+    "job-0033": "original-job/worker/tool-source-after.json",
+    "job-0034": "original-job/worker/tool-source-before.json",
+    "job-0035": "original-job/worker/validation-process.json",
+    "job-0036": "original-job/worker/validation-source-after.json",
+    "job-0037": "original-job/worker/validation-source-before.json",
+    "job-0038": "original-job/worker/validation/result.json",
+    "job-0039": "original-job/worker/validation/suite.json",
+    "job-0040": "original-job/worker/validation/unittest.log",
+    "plan-0000": "frozen-plan/CollectorInputCapabilities65Preparation-20261109.json",
+    "plan-0001": "frozen-plan/CollectorInputCapabilities65Preparation-20261109.suite.json",
+    "plan-0002": "frozen-plan/CollectorInputCapabilities65Preparation-20261109.request.json",
+    "plan-0003": "frozen-plan/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+    "plan-0004": "frozen-plan/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+    "plan-0005": "frozen-plan/CollectorInputCapabilities65Preparation-20261109.ru.md",
+    "plan-0006": "frozen-plan/.gitattributes",
+    "plan-0007": "frozen-plan/.gitignore",
+    "plan-0008": "frozen-plan/.gitmodules",
+    "plan-0009": "frozen-plan/suite.json",
+    "plan-0010": "frozen-plan/request.json",
+    "plan-preparation-receipt": "frozen-plan/prepared-metadata.json",
+    "prior-plan-0000": "failed-preparation-a1/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.dependencies.json",
+    "prior-plan-0001": "failed-preparation-a1/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.json",
+    "prior-plan-0002": "failed-preparation-a1/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.request.json",
+    "prior-plan-0003": "failed-preparation-a1/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.ru.md",
+    "prior-plan-0004": "failed-preparation-a1/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.source-manifest.json",
+    "prior-plan-0005": "failed-preparation-a1/Docs/StructTrain/TimeLearner/CollectorInputCapabilities65Preparation-20261109.suite.json",
+    "prior-plan-0006": "failed-preparation-a1/.gitattributes",
+    "prior-plan-0007": "failed-preparation-a1/.gitignore",
+    "prior-plan-0008": "failed-preparation-a1/.gitmodules",
+    "prior-plan-0009": "failed-preparation-a1/prepared-metadata.json"
+  },
+  "upfront_production_APIs_used": [
+    "capture_required_file_roles",
+    "verify_git_input_roles",
+    "capture_python_selection_inventory",
+    "capture_owned_supervisor"
+  ],
+  "publication_reservation": {
+    "token": "bd7aa56e-4645-4107-b5bb-201bd53dedd3",
+    "job_id": "publish-collector-input-capabilities65-m40-a1",
+    "owner": {
+      "pid": 1273562,
+      "start_ticks": "329319286",
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "uid": 1000,
+      "executable": "/usr/bin/python3.12"
+    },
+    "resources": [
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-collector-input-capabilities65-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-collector-input-capabilities65-m40-a1",
+        "access": "write"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a1",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-collector-input-capabilities65-m40-a2",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/publication-collector-input-capabilities65-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/publication-collector-input-capabilities65-m40-a1",
+        "access": "write"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-input-capabilities65-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-collector-input-capabilities65-m40-a1",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+        "access": "read"
+      },
+      {
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-collector-input-capabilities-m40-a1",
+        "access": "read"
+      },
+      {
+        "requested_path": "/tmp/collector65-publication-input-a2",
+        "canonical_path": "/tmp/collector65-publication-input-a2",
+        "access": "read"
+      }
+    ],
+    "state": "held",
+    "scientific_verdict": null
+  },
+  "original_preparation_A1_preserved": true,
+  "no_test_or_model_rerun": true,
+  "parent_CEC_tree_capability": {
+    "parent_commit": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+    "root_tree": "2f2d290c81ddd7f2a16b72a7a9289f1aac9eb3e6",
+    "tree_objects": 3821,
+    "recursive_metadata_sha256": "a72b6ec0a24a92c945ad525672cbb3a1eca6a98447857dd42623b15207e8058f",
+    "tree_oid_fingerprint": "a0ab2394f033f2a03fe9fccab7231618d32a27906eea6db396abcdde4921b59f",
+    "body_blobs_requested": false,
+    "source_index_written": false
+  },
+  "operator_input_Git_commit": "040fee881ee67417bcf243a58e26b1a3e514fa70",
+  "collector_transition": {
+    "this_producer": "transitional fixed reviewed consumer of maintained Source2caf APIs",
+    "negative73_requires_maintained_data_driven_Root_entrypoint": true,
+    "frozen65_tests_not_expanded": true
+  },
+  "native_CPP_or_scientific_acceptance": false,
+  "scientific_verdict": null
+}

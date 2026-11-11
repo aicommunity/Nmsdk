@@ -1,0 +1,113 @@
+{
+  "token": "4bfeaac6-3536-481f-91c0-3ee2c04cf2a4",
+  "job_id": "s07-profile-graph-import-normal-a1",
+  "owner": {
+    "pid": 1461419,
+    "start_ticks": "309722181",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "resources": [
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-configured-probe-ownership-asan-h14/_deps/llama_cpp-src",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-isi-template-baseline-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-inherited-feedback-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-inherited-feedback-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-graph-import-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-profile-graph-import-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-stock-fair-domains-normal-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-inherited-feedback-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-inherited-feedback-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-profile-graph-import-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-profile-graph-import-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-console-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-console-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-native-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-native-normal-a2",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-storage-feedback-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-storage-feedback-normal-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-candidate-recovery-asan19-a1",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-closed-worker-recovery-a3",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "access": "write"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-profile-graph-import-PulseLib-a1-delivery",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-profile-graph-import-PulseLib-a1-delivery",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-profile-graph-import-normal-a1-delivery",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-profile-graph-import-normal-a1-delivery",
+      "access": "read"
+    },
+    {
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-worker-dependency-normal-a2",
+      "access": "read"
+    }
+  ],
+  "state": "held",
+  "scientific_verdict": null,
+  "ledger_schema": 1,
+  "live_K1_ledger_not_migrated": true,
+  "scope": "Read/write paths only; actual memory/task cap enforced by the enclosing cgroup. Native Test/Console build; 2 full-state native import functions,22 existing controls; readers13+2+2+10. No scientific verdict."
+}

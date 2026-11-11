@@ -1,0 +1,62 @@
+{
+  "kind": "n1_windows_full_sdk_build_preparation",
+  "source_commit": "fcfd8bdff149c14cbe67149e996945d122bf954d",
+  "namespace_git_blob": "d0607a99a7a3c5ce4673317065525a705a9bd5d8",
+  "build_specification_git_blob": "f5228c08667ced89ba74f90930212af247bf0e1e",
+  "source_files": 4096,
+  "repositories": [
+    {
+      "key": "root",
+      "commit": "fcfd8bdff149c14cbe67149e996945d122bf954d",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1",
+      "sparse_specification_git_blob": "2e2b07cefae85ad12106e5f3f20be0008c658d9f"
+    },
+    {
+      "key": "Bin",
+      "commit": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Bin",
+      "sparse_specification_git_blob": "1de090919c9b7c9552dd77522cced898cbd72eb6"
+    },
+    {
+      "key": "Libraries/Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Libraries/Nmsdk-MotionControlLib",
+      "sparse_specification_git_blob": "e2798ddd793069eb7dff724d70ba8b37bb1bad17"
+    },
+    {
+      "key": "Libraries/Nmsdk-PulseLib",
+      "commit": "5f1a4ac6f9aff208ada7f8bcf62645c9d79a6615",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Libraries/Nmsdk-PulseLib",
+      "sparse_specification_git_blob": "57afb331d5a2a31ec7556cd430578defe4f301f5"
+    },
+    {
+      "key": "Libraries/Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Libraries/Rdk-BasicLib",
+      "sparse_specification_git_blob": "7896ae300f07e1835db70ad30ff56675f070aed9"
+    },
+    {
+      "key": "Libraries/Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Libraries/Rdk-CvBasicLib",
+      "sparse_specification_git_blob": "d3d4c4dd2414e0a93b182b3de4d46f404d888e9d"
+    },
+    {
+      "key": "Libraries/Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Libraries/Rdk-HardwareLib",
+      "sparse_specification_git_blob": "5c0bd86e00a4968d17b3a487c95a1abca069fcfe"
+    },
+    {
+      "key": "Rdk",
+      "commit": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "destination": "C:/Projects/TimeLearnerWorker/source-n1-geometry-full-win-a1/Rdk",
+      "sparse_specification_git_blob": "335771d7fe478b19cc501bc0065c1134225b92e5"
+    }
+  ],
+  "scope": "Private Windows SDK compile/link only; numerical/native/scientific admission remains separate",
+  "transport": "Git pack/index-pack and existing UTF-8 GitPreparation module; no user checkout writes",
+  "worker_memory_limit_bytes": 4294967296,
+  "compiler_parallel_jobs": 1,
+  "dependency_install_disabled": true
+}

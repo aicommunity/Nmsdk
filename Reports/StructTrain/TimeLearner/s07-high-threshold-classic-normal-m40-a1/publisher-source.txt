@@ -1,0 +1,76 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib,tarfile
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-high-threshold-classic-a1-delivery'
+folder=base/'readbacks/s07-high-threshold-classic-normal-a1'
+repo=base/'evidence-high-threshold-classic-normal-a1';incoming=base/'source-high-threshold-classic-a1-delivery'
+parent='9402e7da09ab5479d74fe3a801988e8ca420ae26';prefix='Reports/StructTrain/TimeLearner/s07-high-threshold-classic-normal-m40-a1'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.native_pipeline_worker import audit_run_manifest
+from Scripts.StructTrain.TimeLearner.native_gate import audit_junit
+registry=Reservations(base/'resource-reservations.sqlite3')
+payloads={};updates={};bundles=[]
+for path,sub in [(folder,'')]:
+ closed=inspect_worker_dependency(Path(str(path)+'-container'),registry,path.name)
+ assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+ bundle=json.loads((path/'bundle.json').read_text());archive=path/'primary.tar.xz';assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256'];seen=set()
+ with tarfile.open(archive,'r:xz') as tf:
+  for m in tf:
+   assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tf.extractfile(m).read();assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+ assert seen==set(bundle['members'])
+ bundles.append({'attempt':path.name,'members':len(seen),'archive_bytes':bundle['archive_bytes'],'archive_sha256':bundle['archive_sha256']})
+ for f in path.iterdir():
+  if f.is_file() and (f.suffix=='.json' or f.name in ('primary.tar.xz','producer.py')):payloads[prefix+'/'+sub+('producer.txt' if f.name=='producer.py' else f.name)]=f.read_bytes()
+ for f in Path(str(path)+'-container').iterdir():
+  if f.is_file() and f.suffix=='.json':payloads[prefix+'/'+sub+'controller/'+f.name]=f.read_bytes()
+ payloads[prefix+'/'+sub+'fresh-closed-released.json']=(json.dumps(closed,indent=2)+'\n').encode()
+terminal=json.loads((folder/'terminal.json').read_text());assert terminal['high_threshold_combined_diagnostic_complete']
+analysis=json.loads((folder/'single-pulse-analysis.json').read_text());assert len(analysis['rows'])==2
+assert all(v['burst_matches_original_Train']['exact_waveform_reproduced'] and v['first_prefix']['exact_first_prefix_reproduced'] for v in analysis['rows'])
+AB=json.loads((folder/'analyzer-extraction-AB.json').read_text());assert len(AB)==2 and all(v['all_summary_fields_equal_to_published_low_result'] for v in AB)
+for manifest in sorted((folder/'runs').glob('*/run-manifest.json')):assert audit_run_manifest(manifest)['run_evidence_consistent']
+assert len(list((folder/'runs').glob('*/run-manifest.json')))==2
+original=base/'readbacks/s07-high-threshold-single-normal-a1'
+original_bundle=json.loads((original/'bundle.json').read_text())
+assert original_bundle['archive_sha256']=='fa35adc24b7841dc0faa857505830ea666b21128ea72f312e5b0c3045b29a8e1'
+bindings=json.loads((folder/'reused-Branch-bindings.json').read_text())
+for name,sha in bindings.items():assert hashlib.sha256((original/name).read_bytes()).hexdigest()==sha==original_bundle['members'][name]['sha256']
+models=json.loads((folder/'effective-models.json').read_text());assert len(models)==4 and all(v['threshold']==100. for v in models)
+for name,sha in json.loads((folder/'runtime-frozen-files.json').read_text()).items():assert hashlib.sha256((base/'runtime-feedback-console-normal-a2'/name).read_bytes()).hexdigest()==sha
+readers=None
+payloads[prefix+'/publication-verification.json']=(json.dumps({'bundles':bundles,'terminal':terminal,'combined_case_count':2,'new_native_probes_completed':2,'native_probes_reused':2,'original_Branch_primary_commit':'2ba950373a79e896d3f7817d3cbdbeb1bad192ee','reused_native_bindings_verified':len(bindings),'source_threshold':100.,'analyzer_extraction_AB':AB,'runtime_unchanged':True,'classification_evaluated':False,'ASan_verified':False,'second_host_verified':False,'scientific_verdict':None},indent=2)+'\n').encode()
+payloads[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+assert not repo.exists();subprocess.run(['git','init','--quiet',str(repo)],check=True)
+for pack in (incoming/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(repo),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(repo/'.git/shallow').write_text(parent+'\n')
+def git(*args, data=None):
+    return subprocess.check_output(['git', '-C', str(repo), *args], input=data).decode().strip()
+
+def tree(base_tree, changes):
+    entries = {}
+    if base_tree:
+        raw = subprocess.check_output(['git', '-C', str(repo), 'ls-tree', '-z', base_tree])
+        for item in raw.split(b'\x00'):
+            if not item:
+                continue
+            header, name = item.split(b'\t', 1)
+            mode, kind, sha = header.decode().split()
+            entries[name.decode()] = (mode, kind, sha)
+    groups = {}
+    for path, value in changes.items():
+        head, sep, tail = path.partition('/')
+        if sep:
+            groups.setdefault(head, {})[tail] = value
+        else:
+            entries[head] = value
+    for name, sub in groups.items():
+        previous = entries.get(name)
+        assert previous is None or previous[1] == 'tree'
+        entries[name] = ('040000', 'tree', tree(previous[2] if previous else None, sub))
+    content = b''.join(((entries[n][0].lstrip('0') + ' ' + n).encode() + b'\x00' + bytes.fromhex(entries[n][2]) for n in sorted(entries, key=lambda n: n + ('/' if entries[n][1] == 'tree' else ''))))
+    return git('hash-object', '-w', '-t', 'tree', '--stdin', data=content)
+for name,raw in payloads.items():updates[name]=('100644','blob',git('hash-object','-w','--stdin',data=raw))
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner@localhost','commit-tree',tree(git('rev-parse',parent+'^{tree}'),updates),'-p',parent,data=b'Preserve two Classic high-threshold probes and verified unchanged Branch reuse after clock correction\n');git('update-ref','refs/heads/codex/high-threshold-classic-normal-a1-evidence',c,'0'*40)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(repo),'bundles':bundles,'terminal':terminal,'reader_result':readers}))

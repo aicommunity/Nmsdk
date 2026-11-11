@@ -1,0 +1,42 @@
+{
+  "terminal": {
+    "native_checks_passed": false,
+    "original_build_outcome_unchanged": true,
+    "scientific_verdict": null,
+    "scientific_worker_admitted": false
+  },
+  "gate_result": {
+    "assertion_status": "failed",
+    "execution": "process_error",
+    "inventory": {
+      "assertion_status": "failed",
+      "expected": 8,
+      "failed_test_ids": [
+        "NativeLearnedState/ClassicOneInput",
+        "NativeLearnedState/BranchOneInput"
+      ],
+      "observed": 8,
+      "sha256": "9782f11db672a4b0d38f47ac514d4abca80acf1a297b6e0b60d213ab1da9da93"
+    },
+    "kind": "timelearner_native_test_gate_result",
+    "reason": "complete_declared_test_inventory",
+    "schema_version": 1,
+    "scientific_verdict": null,
+    "validity": "valid"
+  },
+  "junit": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<testsuites tests=\"8\" failures=\"2\" disabled=\"0\" errors=\"0\" time=\"22.779\" timestamp=\"2026-11-10T21:41:19.516\" name=\"AllTests\">\r\n  <testsuite name=\"NativeLearnerDimensions\" tests=\"4\" failures=\"0\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"9.058\" timestamp=\"2026-11-10T21:41:19.517\">\r\n    <testcase name=\"ClassicSingleInput2000\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeExecution.cpp\" line=\"1262\" status=\"run\" result=\"completed\" time=\"1.136\" timestamp=\"2026-11-10T21:41:19.517\" classname=\"NativeLearnerDimensions\" />\r\n    <testcase name=\"BranchSingleInput2000\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeExecution.cpp\" line=\"1264\" status=\"run\" result=\"completed\" time=\"0.453\" timestamp=\"2026-11-10T21:41:20.653\" classname=\"NativeLearnerDimensions\" />\r\n    <testcase name=\"ClassicSingleInput20000\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeExecution.cpp\" line=\"1266\" status=\"run\" result=\"completed\" time=\"3.714\" timestamp=\"2026-11-10T21:41:21.106\" classname=\"NativeLearnerDimensions\" />\r\n    <testcase name=\"BranchSingleInput20000\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeExecution.cpp\" line=\"1268\" status=\"run\" result=\"completed\" time=\"3.753\" timestamp=\"2026-11-10T21:41:24.821\" classname=\"NativeLearnerDimensions\" />\r\n  </testsuite>\r\n  <testsuite name=\"NativeLearnedState\" tests=\"2\" failures=\"2\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"4.14\" timestamp=\"2026-11-10T21:41:28.575\">\r\n    <testcase name=\"ClassicOneInput\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp\" line=\"4143\" status=\"run\" result=\"completed\" time=\"2.052\" timestamp=\"2026-11-10T21:41:28.575\" classname=\"NativeLearnedState\">\r\n      <failure message=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp:3785&#x0A;Expected equality of these values:&#x0A;  child.exitCode()&#x0A;    Which is: 1&#x0A;  0&#x0A;\" type=\"\"><![CDATA[C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp:3785\r\nExpected equality of these values:\r\n  child.exitCode()\r\n    Which is: 1\r\n  0\r\n]]></failure>\r\n    </testcase>\r\n    <testcase name=\"BranchOneInput\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp\" line=\"4144\" status=\"run\" result=\"completed\" time=\"2.088\" timestamp=\"2026-11-10T21:41:30.627\" classname=\"NativeLearnedState\">\r\n      <failure message=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp:3785&#x0A;Expected equality of these values:&#x0A;  child.exitCode()&#x0A;    Which is: 1&#x0A;  0&#x0A;\" type=\"\"><![CDATA[C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp:3785\r\nExpected equality of these values:\r\n  child.exitCode()\r\n    Which is: 1\r\n  0\r\n]]></failure>\r\n    </testcase>\r\n  </testsuite>\r\n  <testsuite name=\"NativeRecognitionState\" tests=\"1\" failures=\"0\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"5.072\" timestamp=\"2026-11-10T21:41:32.716\">\r\n    <testcase name=\"BranchN1SingleInput\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp\" line=\"4191\" status=\"run\" result=\"completed\" time=\"5.072\" timestamp=\"2026-11-10T21:41:32.716\" classname=\"NativeRecognitionState\" />\r\n  </testsuite>\r\n  <testsuite name=\"NativeRecognitionOwner\" tests=\"1\" failures=\"0\" disabled=\"0\" skipped=\"0\" errors=\"0\" time=\"4.507\" timestamp=\"2026-11-10T21:41:37.789\">\r\n    <testcase name=\"BranchSingleInput\" file=\"C:\\Projects\\TimeLearnerWorker\\source-branch-open-arm-order-win-a1\\Tests\\Integration\\Libraries\\Test_PulseLib_NativeModelEditor.cpp\" line=\"4159\" status=\"run\" result=\"completed\" time=\"4.507\" timestamp=\"2026-11-10T21:41:37.789\" classname=\"NativeRecognitionOwner\" />\r\n  </testsuite>\r\n</testsuites>\r\n",
+  "child_logs": {
+    "Classic_2000_N1_learned_boundary_inputs1_fresh_process.log": "Note: Google Test filter = NativeLearnedState.FreshProcessImport\r\n[==========] Running 1 test from 1 test suite.\r\n[----------] Global test environment set-up.\r\n[----------] 1 test from NativeLearnedState\r\n[ RUN      ] NativeLearnedState.FreshProcessImport\r\nunknown file: error: C++ exception with description \"PulseLib test log directory is not new or overlaps runtime\" thrown in the test body.\r\n\r\n[  FAILED  ] NativeLearnedState.FreshProcessImport (18 ms)\r\n[----------] 1 test from NativeLearnedState (18 ms total)\r\n\r\n[----------] Global test environment tear-down\r\n[==========] 1 test from 1 test suite ran. (18 ms total)\r\n[  PASSED  ] 0 tests.\r\n[  FAILED  ] 1 test, listed below:\r\n[  FAILED  ] NativeLearnedState.FreshProcessImport\r\n\r\n 1 FAILED TEST\r\n",
+    "Branch_2000_N0_learned_boundary_inputs1_fresh_process.log": "Note: Google Test filter = NativeLearnedState.FreshProcessImport\r\n[==========] Running 1 test from 1 test suite.\r\n[----------] Global test environment set-up.\r\n[----------] 1 test from NativeLearnedState\r\n[ RUN      ] NativeLearnedState.FreshProcessImport\r\nunknown file: error: C++ exception with description \"PulseLib test log directory is not new or overlaps runtime\" thrown in the test body.\r\n\r\n[  FAILED  ] NativeLearnedState.FreshProcessImport (18 ms)\r\n[----------] 1 test from NativeLearnedState (18 ms total)\r\n\r\n[----------] Global test environment tear-down\r\n[==========] 1 test from 1 test suite ran. (18 ms total)\r\n[  PASSED  ] 0 tests.\r\n[  FAILED  ] 1 test, listed below:\r\n[  FAILED  ] NativeLearnedState.FreshProcessImport\r\n\r\n 1 FAILED TEST\r\n"
+  },
+  "dispatch": {
+    "scientific_verdict": null,
+    "tool_commit": "8ec5ec265a5995df75e35cebdb78aab5e89dcfe3",
+    "task": "TimeLearner-windows-native-single-input8-a1",
+    "specification_git_blob": "fef794d8c0b1c7f60ff392aeb6dee3f3c2fbcac9",
+    "instance": "{7DC16B94-720B-4F86-A955-E4003E4A2282}",
+    "kind": "windows_native_validation_dispatch",
+    "output": "C:/Projects/TimeLearnerWorker/jobs/windows-native-single-input8-a1",
+    "worker_sha256": "cf6ca9fbbccda7e688ed94291b509656fe53339351ed7c92521eb426228d336c"
+  }
+}

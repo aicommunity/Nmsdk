@@ -1,0 +1,98 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "54c71a12-bf45-4e5b-badc-cfe4415f3219",
+  "job_id": "s07-channel-observation-scope-normal-a1",
+  "recorded_unix": 1794037455.4432771,
+  "administrator": {
+    "pid": 1574991,
+    "start_ticks": "311264681",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1575006,
+    "start_ticks": "311264695",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "aa6ee4636bd4c721d4e146872a35359fc21d1822cadd10020c6a307a0a586603",
+      "unit": "timelearner-a6b06e7d-666e-40ed-b5b5-1c0b763e9346.service",
+      "invocation_id": "ceeba41cff7b465eb38719e8adca79c3",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-a6b06e7d-666e-40ed-b5b5-1c0b763e9346.service",
+      "initial_main_pid": 1575006,
+      "initial_start_ticks": "311264695",
+      "sha256": "6fc8f61567430dc8cf64bd7f50089e541b03cd7d773509e338bf216afd579ee0"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-a6b06e7d-666e-40ed-b5b5-1c0b763e9346.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Analysis worker closed; scientific outcome remains separate.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-observation-scope-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/channel-observation-scope-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/high-threshold-joint-normal-a1/Classic-threshold-training100-retry32-burst",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/high-threshold-joint-normal-a1/Classic-threshold-training100-retry32-burst"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-high-threshold-classic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-high-threshold-classic-normal-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-channel-observation-scope-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-classic-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-joint-visual-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-high-threshold-joint-visual-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-observation-scope-a1-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-observation-scope-a1-delivery"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

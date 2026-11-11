@@ -1,0 +1,224 @@
+{
+  "facts": {
+    "kind": "production_history_migration356_observation",
+    "schema_version": 1,
+    "mode": "positive",
+    "job_id": "s09-declared-time-scale-migration356-m40-a2",
+    "source_root": "4130926410ceaafe358d7f2e7eff5c4ce7267651",
+    "CLI_source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-declared-time-scales-m40-a2",
+      "commit": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277"
+    },
+    "runner_source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-migration356-runner-m40-a3",
+      "commit": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93"
+    },
+    "original_terminal": {
+      "production_migration356_passed": true,
+      "heartbeat_errors": [],
+      "expected_records": 356,
+      "whole_migration_complete": false,
+      "scope": "production CLI and its descendants owned; observer controller and its synchronous Git preparation separate",
+      "CPP_builds": 0,
+      "model_calculations": 0,
+      "archived_scripts_executed": 0,
+      "scientific_verdict": null
+    },
+    "lease": {
+      "token": "d4610dc6-d10d-44f3-9238-f4f70479202e",
+      "job_id": "s09-declared-time-scale-migration356-m40-a2",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3485020,
+        "start_ticks": "323832394",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-declared-time-scale-migration356-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s09-declared-time-scale-migration356-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-declared-time-scales-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-declared-time-scales-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-migration356-runner-m40-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-migration356-runner-m40-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/.git/objects",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/.git/objects"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin/.git/objects",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Bin/.git/objects"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib/.git/objects",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-root-report-retirement-a1/Libraries/Nmsdk-PulseLib/.git/objects"
+        }
+      ],
+      "state": "released",
+      "created": 1794163126.476879,
+      "deadline": 1794163256.4933267,
+      "updated": 1794163140.134945,
+      "release_note": "Controller observed production metadata CLI whole cgroup closure; synchronous preparation complete; no models/CPP/historical scripts executed.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    },
+    "whole_migration_complete": false,
+    "scientific_verdict": null,
+    "CPP_builds": 0,
+    "model_calculations": 0,
+    "archived_scripts_executed": 0,
+    "controller_lease_is_separate_from_CLI_cgroup": true,
+    "actual_records_verified": 356,
+    "actual_CLI_result": {
+      "kind": "timelearner_process_result",
+      "schema_version": 2,
+      "execution": "completed",
+      "reason": "exit_zero_and_whole_group_closed",
+      "returncode": 0,
+      "wall_seconds": 2.595131950918585,
+      "model_time": null,
+      "runtime_provenance": "loaded_files_captured",
+      "mapping_error": null,
+      "runtime_fingerprint": "a7cd11758f8cf3f63fc70204859bee6cb6bb368d4af392dd72977bfadee6d5fd",
+      "ownership_scope": "bound_cgroup",
+      "all_processes_closed": true,
+      "scientific_verdict": null,
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "needs_review",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 0,
+        "reasons": [
+          "stream_line_limit:stdout.log"
+        ],
+        "examples": [],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 175346,
+            "sha256": "02ddca1764443f0c302f845b13dcabd3df2610ec71ece1e30171a902a1c4969c"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "218afacde80dc5c4eaba88fd082c2a6eb8875b7c527cc363597486e8f700bfae",
+        "unit": "timelearner-52caeacc-5052-40d7-b0b2-e138d998e168.service",
+        "invocation_id": "07627e47898148cbbc5d4728937f2da8",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-52caeacc-5052-40d7-b0b2-e138d998e168.service",
+        "initial_main_pid": 3489216,
+        "initial_start_ticks": "323832980",
+        "sha256": "dae153fb3d688fd60eccd1fc6c1d9a232a4acd3c8949e6483f8f9ebef3b82a47"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-52caeacc-5052-40d7-b0b2-e138d998e168.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "sources_before_after_equal": true,
+    "source_files_verified": {
+      "CLI": 623,
+      "runner": 624
+    },
+    "repositories_HEAD_and_tracked_status_unchanged": true,
+    "kernel_unit_scope": "production Python CLI and synchronous Git descendants only; not observer controller",
+    "bootstrap": "process-local GIT_NO_LAZY_FETCH/GIT_OPTIONAL_LOCKS flags, then production CLI"
+  },
+  "original_job_unchanged": true,
+  "members": 50,
+  "after_bundle_CLI_closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "218afacde80dc5c4eaba88fd082c2a6eb8875b7c527cc363597486e8f700bfae",
+      "unit": "timelearner-52caeacc-5052-40d7-b0b2-e138d998e168.service",
+      "invocation_id": "07627e47898148cbbc5d4728937f2da8",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-52caeacc-5052-40d7-b0b2-e138d998e168.service",
+      "initial_main_pid": 3489216,
+      "initial_start_ticks": "323832980",
+      "sha256": "dae153fb3d688fd60eccd1fc6c1d9a232a4acd3c8949e6483f8f9ebef3b82a47"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-52caeacc-5052-40d7-b0b2-e138d998e168.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "kind": "independent_owned_python_job_Git_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "b7fd31aa4b8d01559f55431fc2651a088e1d4f75",
+  "parent_tool_root": "204ec3c00d980bedf72c704d75d541a0342fac68",
+  "job_id": "s10-owned-python-jobs-metadata17-m40-a1",
+  "operation_passed": false,
+  "planned_tests": 17,
+  "executed_tests": 0,
+  "actual_log_and_derived_JUnit_cases": 0,
+  "archive_members_verified": 45,
+  "archive_bytes": 65224,
+  "archive_sha256": "a832a44cf6602834c4e8a438a23b206d046c91cfbb0b9c61bb0b642f1779a466",
+  "pack_sha256": "4d5f7653ef5f2262384809a0340e7f2ba6d2c2bce1fc69acd4befca5fd74981c",
+  "source_files_Git_verified": {
+    "tool-source-postclosure.json": 624,
+    "validation-source-postclosure.json": 624
+  },
+  "source_roots": {
+    "tool-source-postclosure.json": "204ec3c00d980bedf72c704d75d541a0342fac68",
+    "validation-source-postclosure.json": "204ec3c00d980bedf72c704d75d541a0342fac68"
+  },
+  "source_phase": "postclosure; before/after only when present in original job",
+  "kernel_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "eb34684da71ef0921db5eb1de185d977b71819adfb15d416b93beb57046eb862",
+    "unit": "timelearner-115016a0-b8d7-4e80-943b-ed808abd391a.service",
+    "invocation_id": "d57e9c81e466474d88ed98e6f934ffa6",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-115016a0-b8d7-4e80-943b-ed808abd391a.service",
+    "initial_main_pid": 3353277,
+    "initial_start_ticks": "323446656",
+    "sha256": "8bdfdfcb86123938caf7ed67ea529a23b264aa8804faa7fadaf0e67f5b2c7109"
+  },
+  "kernel_group_closed_observed_server": true,
+  "held_job_leases": 0,
+  "kernel_limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240
+  },
+  "guard_triggered": false,
+  "original_failure_preserved": true,
+  "CPP_or_models_run": false,
+  "all_collector_kernel_test_SDK_scientific_attestation_flags_false": true,
+  "local_tests_or_numerics_run": false,
+  "original_suite_external_raw_file": "C:\\Users\\BAKHSH~1\\AppData\\Local\\Temp\\OwnedPythonJobsMetadata17Suite.json",
+  "first_collector_normalized_suite_limitation": true,
+  "scientific_verdict": null,
+  "Git_import": "unpack_objects_without_refs_or_checkout"
+}

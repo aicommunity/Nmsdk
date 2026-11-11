@@ -1,0 +1,46 @@
+{
+  "kind": "unfixed_manual_control_source_preparation_evidence",
+  "schema_version": 1,
+  "status": "source_materialized_and_independently_verified_only",
+  "source_root": "bb1d24ea950ff068c25f7db7186517b55eef3dbd",
+  "source_path": "/media/user/Data/TimeLearnerRefactor/source-manual-control-unfixed-m40-a1",
+  "Pulse": "800f92ae1f9e0133cefc0ccfe36abc3d8c99727f",
+  "repositories": 8,
+  "Git_verified_materialized_files": 4020,
+  "same_SDK_loaded_modules": 29,
+  "four_TU_source_inventory_cases": 422,
+  "full_six_TU_source_inventory_cases": 476,
+  "selected_unfixed_source_controls": 4,
+  "diagnostic_only_unselected": 2,
+  "paired_corrected_evidence_commit": "85b1d24ab7e216285e90f5c65117b44cc35fb2c7",
+  "paired_changed_materialized_paths": [
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeCompositeTrainingAttempt.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingService.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingService.h",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/NativeTrainingServiceComposite.cpp",
+    "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp"
+  ],
+  "package_fingerprint": "d3dd9564a993abc98ee17d7edb793d71a6b09d0e188dcb2c3e8a77e9a5a8ab5f",
+  "Scripts_tree": "2d49bcd6b0608f60ff57a53acb80310e56ebd9d0",
+  "metadata13_30_reexecuted": false,
+  "compiler_profile_configured": false,
+  "canonical_execution_spec_created": false,
+  "CMake_or_native_or_model_execution": false,
+  "compiled_inventory_verified": false,
+  "test_success_attested": false,
+  "kernel_closure_attested": false,
+  "scientific_verdict": null,
+  "limitations": [
+    "Docs/Reports omitted; Bin contains ClDesc/Watch resources only",
+    "same source paths and byte-difference scope do not prove runtime waveform equivalence",
+    "POS2/NEG1/NEG1 have not executed; no reproduced runtime defect is claimed",
+    "A3 and corrected E11 SDK not modified by delivery",
+    "source dump is lossless gzip; no truncated observation in this unfixed preparation"
+  ],
+  "next_requirements": [
+    "complete baseline248 independently",
+    "fresh compiler/runtime/resource/canonical preparation",
+    "real original-positive and original-negative controls",
+    "corrected native20 and remaining regression partitions"
+  ]
+}

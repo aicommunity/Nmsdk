@@ -1,0 +1,46 @@
+{
+  "kind": "high_threshold_subset_preparation_jobs",
+  "design": "HighThresholdSubsetStudyDesign.json",
+  "host": "10.245.1.17",
+  "tool_root": "b711e55358e12dac8104f19d01b8192002b1d614",
+  "attempts": [
+    {
+      "job": "s07-high-threshold-subset-prepare-a1",
+      "status": "closed; preparation incomplete; no native processes started",
+      "reason": "maximum_replay_archive_budget",
+      "unit": "timelearner-6c2c5ebd-1e15-4b54-b47f-fcd8332365dd.service",
+      "initial_main_pid": 1932394,
+      "initial_start_ticks": "316872742",
+      "request_sha256": "39e8c2feb4633cd2638131db054e854bd98a7008b04ec5556e0e1d0110c6d18a",
+      "declared_single_member_limit_bytes": 67108864,
+      "actual_largest_Branch_member_bytes": 67899514
+    },
+    {
+      "job": "s07-high-threshold-subset-prepare-a2",
+      "status": "completed; 14 jobs prepared; native probes not started",
+      "supervisor_pid": 1933035,
+      "declared_single_member_limit_bytes": 134217728,
+      "declared_archive_expansion_limit_bytes": 536870912,
+      "worker_sha256": "b62ac63b4a12f7a5e18418384ae0372a78ed1ab7c8cde6ab914d54f6a1ec32c2",
+      "archive_members_hash_verification_required": true,
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6c7eccd0ac4e7a3daef1d6e1f76ea116995a8664cb6b5366ca3aeb7b9e9fe5e5",
+      "unit": "timelearner-155c13c0-4986-46dd-bc9c-2d7aeb95bb09.service",
+      "invocation_id": "402d161392dd4bc8899a9ad0a08be8ab",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-155c13c0-4986-46dd-bc9c-2d7aeb95bb09.service",
+      "initial_main_pid": 1933044,
+      "initial_start_ticks": "316880683",
+      "sha256": "86adc8d5ef5ec2f3935e21a962cbb3a6baa849811b1c17b4a343a8ccd1a95d36",
+      "all_processes_closed": true,
+      "evidence_commit": "767f579e467cc29d3f7e932b8bd412e0f4f937da"
+    }
+  ],
+  "prepared_jobs_accepted": true,
+  "native_probes_started": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "local_git_verification": "HighThresholdSubsetPreparationVerification.json; all 55 members and 1300 historical file bindings matched",
+  "archive_bytes": 1107976,
+  "archive_sha256": "f84af0a450e2b0dc2466a677949280f1e7a0b82becfd210d0579dee74d3de35a"
+}

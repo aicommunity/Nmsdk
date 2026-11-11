@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-native-image-runner-helper25-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "6bb8baeba6e01999860ad31813ab089b7a194e65",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-native-image-rest-runner-m40-a1",
+      "commit": "1386206616d82952166ece926e814cd2c5aafbb9"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-image-rest-m40-a3/Docs/StructTrain/TimeLearner/ValidationPlans/NativeImageRest20A3-20261110/helper-suite25.json",
+      "sha256": "92722435affa058a4566473b3cded81069186da1c097e1065c6dbd7456f3c33f"
+    },
+    "fixtures": {
+      "TIMELEARNER_NATIVE_GATE_DIR": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2/common-codec-11",
+      "TIMELEARNER_NATIVE_GATE_SPEC": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2/common-codec-11"
+    }
+  }
+}

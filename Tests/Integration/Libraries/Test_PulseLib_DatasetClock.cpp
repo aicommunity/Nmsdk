@@ -192,10 +192,10 @@ TEST(DatasetClockOrigin,ContinuousThirtyMsAt20000){OriginInvariant(20000,2,.03);
 TEST(DatasetClockOrigin,TimedNoGapAt20000){OriginInvariant(20000,1,0.);}
 TEST(DatasetClockOrigin,TimedFiveMsAt20000){OriginInvariant(20000,1,.005);}
 TEST(DatasetClockOrigin,TimedThirtyMsAt20000){OriginInvariant(20000,1,.03);}
-Protocol Extended(const std::string& tag,bool near=false,bool cutoff=false)
+Protocol Extended(const std::string& tag,bool nearGrid=false,bool cutoff=false)
 {
-    Protocol p;p.tag="_"+tag;p.nearGrid=near;
-    if(near){p.firstIsi=.01000001;p.secondIsi=.03999999;}
+    Protocol p;p.tag="_"+tag;p.nearGrid=nearGrid;
+    if(nearGrid){p.firstIsi=.01000001;p.secondIsi=.03999999;}
     if(cutoff){p.timeGeneration=.01;p.minimumEdges=1;}
     return p;
 }

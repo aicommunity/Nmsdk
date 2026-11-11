@@ -1,0 +1,51 @@
+{
+  "kind": "stimulus_subset_native_api_acceptance_job",
+  "schema_version": 1,
+  "host": "10.245.1.11",
+  "source_root": "a798182e5b4ee2ecce34fec98ba0e0017be76f1b",
+  "PulseLib": "09617c67bb3d3e8f4a4de589ee047d6622dc009f",
+  "worker_sha256": "b3854b1456ccde6548617d463ade6091f7e60e5349328948393a87e78278e7aa",
+  "job": "s07-stimulus-subset-api-elder-a1",
+  "unit": "timelearner-71e2b1df-43fa-4d3a-9340-660938ef071d.service",
+  "invocation_id": "24840ef2b3cf4cbab9c9b5adbd787012",
+  "request_sha256": "e92c1c4326d5d300db507d29365ae99db445c7af8aecdf15a5bbd43667e6b31a",
+  "initial_main_pid": 1287890,
+  "initial_start_ticks": "365508294",
+  "source": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+  "build": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+  "runtime": "/home/user/timelearner-refactor/runtime-stimulus-subset-api-elder-a1",
+  "output": "/home/user/timelearner-refactor/readbacks/s07-stimulus-subset-api-elder-a1",
+  "memory_bytes": 6442450944,
+  "tasks": 128,
+  "compiler_parallelism": 1,
+  "maximum_wall_seconds": 7200,
+  "expected_groups": {
+    "subset": 14,
+    "probe": 34,
+    "verification": 23,
+    "physical": 19
+  },
+  "last_observation": "completed: 71 unit + 19 physical passed; complete native gate, wrapper v1 external restoration unknown",
+  "Console_subset_exposed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "evidence_commit": "6e99697aa51f55021735a5d486bbb9c6724907cc",
+  "next_attempt": {
+    "job": "s07-subset-restoration-elder-a1",
+    "root": "928fc7d782ee288a929130d6af3ba35784b34144",
+    "PulseLib": "609a06d31ccad1c382d3df3b8150f7de87b6abfd",
+    "unit": "timelearner-73c0c224-5fc3-4cc1-a2b9-1d9242b7d7c4.service",
+    "invocation_id": "cd6535a422784b498a9d36ddd0a24ac4",
+    "initial_main_pid": 1328301,
+    "initial_start_ticks": "365789913",
+    "request_sha256": "177e0404c6391892e5511413f56e9a4332c3da283c5bcfdb3c13220273a64c48",
+    "worker_sha256": "cf38529fcfc8d71042c99542ebb398976d7a8201a4764c2bede19e84a8890f8d",
+    "expected_groups": {
+      "unit": 71,
+      "physical": 20,
+      "reader": 7
+    },
+    "status": "completed; 71 unit + 20 physical + 7 real-corpus reader checks passed; closed and released",
+    "evidence_commit": "84e3bd5c94cee12b6fe193ad13124217b7c51ca4"
+  }
+}

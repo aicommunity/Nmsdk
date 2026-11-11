@@ -4,6 +4,35 @@
 
 Запуск из корневого репозитория: `python -m Scripts.StructTrain.TimeLearner`.
 
+Для сохранения закрытых заданий Linux `owned_python_job` поддерживает отдельную
+операцию `closed-primary-bundle` с привязанным SHA-256 manifest. Manifest задаёт
+полное множество файлов и glog-алиасов, точные kernel bindings всех сохранённых
+owned units и явные ограничения размера. Коллектор проверяет полное пространство
+имён и закрытие units до и после потокового создания lossless `primary.tar.xz`.
+Исходные файлы и результаты не изменяются; неизвестные ссылки, добавленные файлы,
+живые процессы и изменения первичных данных запрещают итоговое подтверждение.
+`primary-bundle-proof.json` подтверждает сбор байтов и закрытие процессов:
+он не подтверждает сходимость, научный PASS или публикацию в Git. Независимая
+проверка восстановления и Git closure остаются отдельными обязательными шагами.
+Windows этой операцией пока не поддерживается.
+
+`stock-candidate-window-study prepare COLD_CHARACTERIZATION --runtime-manifest RUNTIME
+--output JOBS` создаёт два stock N4/N1 cold7 задания по проверенным начальным
+наблюдениям. `preflight JOBS` и `train JOBS` требуют явные `--case`, `--controller`,
+`--runtime-manifest`, `--output`. Новое обучение само захватывает per-input references;
+характеристика задаёт только proposal windows. Исходный SyncTolerance=.02 сохранён.
+Линейный прогноз задержки является гипотезой; его нельзя считать измерением или
+доказательством сходимости. Runtime-приёмка нового pilot остаётся отдельной.
+
+`stock-cold-characterization prepare --topology both --output JOBS` объявляет
+восемь диагностических проб свежей `NSPNeuronGen`: Classic/Branch × четыре
+закреплённых импульса. `run --source JOBS --runtime-manifest RUNTIME.json
+--controller OWNED_CONTROLLER --output RESULT` использует native `probe` и
+managed leases. Проверяются эффективная stock-физика без LT-мембраны,
+неизменность графа и первичные данные. Это не Train: широкое диагностическое
+окно не становится окном обучения, а невалидное назначение пика сохраняется
+отдельно. Применение на сервере требует отдельной runtime-приёмки.
+
 `stock-phasea-preflight BUNDLE --runtime-manifest RUNTIME.json --output NEW_DIRECTORY`
 создаёт native stock `NSPNeuronGen` без LT-мембраны для Classic/Branch с четырьмя
 входами и проверяет эффективную физику до Train. [Протокол](../../../Docs/StructTrain/TimeLearner/StockPhaseAPreflight.ru.md).
@@ -374,6 +403,9 @@ Source этих контрольных моделей имеет search_unresolv
 
 Добавлены production команды `train`, `export`, `evaluate` и
 `analyze --format pipeline-run`: [контракт, CLI и ограничения](../../../Docs/StructTrain/TimeLearner/NativePipelineWorker.ru.md).
+Завершение exit0 отдельно от операционной диагностики: ERROR или неизвестный
+stderr запрещают положительный pipeline audit. Первичные потоки и данные
+сохраняются; [политика и проверка реального Classic-6](../../../Docs/StructTrain/TimeLearner/OperationalDiagnostics.ru.md).
 Это отдельные owned Console операции с immutable runtime и сохранёнными primary
 data, без шаблонного Test fallback. Первый выпуск требует optional modes Off
 и reset-per-trial evaluation. Общая очередь и полная матрица остаются открытыми.
@@ -437,4 +469,47 @@ calibration с fresh confirmation и импорт полного пакета в
 моделей; все сомы и фактические входные импульсы, общие оси и native zoom.
 [Контракт, проверка волн и ограничения](../../../Docs/StructTrain/TimeLearner/StockFailureBoundaryReports.ru.md).
 
+
+
+Отчёт изменения выбранного C-интервала создаётся штатной командой:
+`report CASE_capacitance_region_region.json --format capacitance-region --output NEW_M40_CACHE`.
+Сначала проверяются effective C0/child physics и полный набор before/after проб
+каждого входа. Отчёт сохраняет проверенный portable snapshot, метки phase/input,
+все записанные soma и реальные input pulses с исходным шагом, общие Y limits
+внутри сравнения и дополнительные detail views. Это characterization штатной
+пачкой, не классификация полной матрицы и не сертификат сходимости.
+Полный кэш хранится на M40 Data; визуальная приёмка и выбранные рисунки отдельно.
+Серверный render gate использует `tests.test_capacitance_region_reports` с
+`TIMELEARNER_CAPACITANCE_REGION_DIR` и новым
+`TIMELEARNER_CAPACITANCE_REGION_REPORT_CACHE`; декларация3 tests/32 trials/48
+trial-soma pairs требует actual восьми native fixtures, а не синтетических копий.
+Пока gate не выполнен, наличие команды не означает проверенный отчёт.
+
+
+Полная история C-search визуализируется командой
+`report CASE_stopped_state.json --format capacitance-search --output NEW_M40_CACHE`
+(также поддерживается completed learned state). Перед построением проверяются
+package, summary, C-state/history и все первичные JSON/CSV; отчёт работает по
+portable проверенному snapshot. Каждая проба связана с phase/input, точным
+model revision и C witness, включая transient кандидатов после последующего
+восстановления лучшего состояния. Общие Y scales и detail views формируются
+production probe-set renderer. Это все записанные training probes; отдельные
+полные реакции на каждый classification pattern по-прежнему обязательны для
+научного Test. Полный figure cache остаётся на M40 Data.
+`tests.test_capacitance_search_reports` требует четыре actual activation cases
+и persistent `TIMELEARNER_CAPACITANCE_SEARCH_REPORT_CACHE`; ожидаемая матрица
+48 trials /72 trial-soma pairs ещё требует серверной render/visual проверки.
+
+
+C-search render-v3 построил все48 actual probes/72 soma пары, но gate остался
+failed: test ошибочно требовал присутствия fallback phase search probe, хотя
+все12 trial каждого реального case уже относятся к reference, candidate,
+candidate anchor либо final verification. Исправлен exact expected phase set
+этого corpus; renderer и аудитор не ослаблены. Результат и рисунки v3 сохраняются,
+новая проверка/прямой просмотр требуются до visual acceptance.
+
+Подробный контракт и границы: [C-search temporal reports](../../../Docs/StructTrain/TimeLearner/CapacitanceSearchVisuals.ru.md).
+
 `analyze INPUTS.json --format legacy-statistic-traces --output NEW.json` — строгий описательный адаптер числовых StatisticLog; явные layout/width/hash, без trial или training PASS. [Схема и область](../../../Docs/StructTrain/TimeLearner/LegacyStatisticTraceReader.ru.md). Elder12/12 и M40 12/12 приняты; это не сертификат обучения.
+
+Managed pipeline schema2 добавляет вычисляемый ConditionSpec и journal binding; schema1 сохраняет historical operational semantics. [Схема, границы и pending приёмка](../../../Docs/StructTrain/TimeLearner/PipelineConditionBinding.ru.md).

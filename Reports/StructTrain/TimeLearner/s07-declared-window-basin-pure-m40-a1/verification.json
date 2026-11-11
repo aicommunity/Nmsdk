@@ -1,0 +1,102 @@
+{
+  "kind": "declared_window_basin_pure_normal_asan_assertion_failure",
+  "schema_version": 1,
+  "root": "236f1acbe978e645774cd96b10503bbe0d56fbd9",
+  "pulse": "fce3cdf01db0c883b7f3b03045094f2580f9e981",
+  "expected_cases_per_mode": 35,
+  "modes": [
+    {
+      "job": "s07-declared-window-basin-pure-normal-m40-a1",
+      "mode": "normal",
+      "tests_observed": 35,
+      "passed_cases": 34,
+      "failed_test_ids": [
+        "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown"
+      ],
+      "junit_sha256": "dd5ba80b74903e7f2d06bf6b5089610f58a29ea2aaa18eef2b3fdbf527331902",
+      "process_returncode": 1,
+      "actual_loaded_files": 18,
+      "original_after_snapshots_absent_due_to_pass_assertion": [
+        "runtime-after.json",
+        "prior90-runtime-after.json",
+        "source-closure-after.json"
+      ],
+      "postclosure_runtime_matches_original_before": true,
+      "postclosure_prior90_matches_original_before": true,
+      "postclosure_source_matches_original_before": true,
+      "failures": [
+        {
+          "id": "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:30\nExpected: (result.validity) != (Validity::Valid), actual: 4-byte object <00-00 00-00> vs 4-byte object <00-00 00-00>\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:30\nValue of: result.selectedCandidate\n  Actual: true\nExpected: false\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:30\nValue of: result.measuredMaximum\n  Actual: true\nExpected: false\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:31\nValue of: result.reasons.empty()\n  Actual: true\nExpected: false\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:124\nExpected equality of these values:\n  result.validity\n    Which is: 4-byte object <00-00 00-00>\n  Validity::Ambiguous\n    Which is: 4-byte object <02-00 00-00>\n"
+          ]
+        }
+      ]
+    },
+    {
+      "job": "s07-declared-window-basin-pure-asan-m40-a1",
+      "mode": "asan",
+      "tests_observed": 35,
+      "passed_cases": 34,
+      "failed_test_ids": [
+        "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown"
+      ],
+      "junit_sha256": "a2e2fa9a43de64481bc261c082c1dc75f56e1e51e043a3461af391e80e4ea360",
+      "process_returncode": 1,
+      "actual_loaded_files": 19,
+      "original_after_snapshots_absent_due_to_pass_assertion": [
+        "runtime-after.json",
+        "prior90-runtime-after.json",
+        "source-closure-after.json"
+      ],
+      "postclosure_runtime_matches_original_before": true,
+      "postclosure_prior90_matches_original_before": true,
+      "postclosure_source_matches_original_before": true,
+      "failures": [
+        {
+          "id": "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown",
+          "messages": [
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:30\nExpected: (result.validity) != (Validity::Valid), actual: 4-byte object <00-00 00-00> vs 4-byte object <00-00 00-00>\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:30\nValue of: result.selectedCandidate\n  Actual: true\nExpected: false\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:30\nValue of: result.measuredMaximum\n  Actual: true\nExpected: false\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:31\nValue of: result.reasons.empty()\n  Actual: true\nExpected: false\n",
+            "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-pure-m40-a1/Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp:124\nExpected equality of these values:\n  result.validity\n    Which is: 4-byte object <00-00 00-00>\n  Validity::Ambiguous\n    Which is: 4-byte object <02-00 00-00>\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "source_preparation_passed": true,
+  "native_cases_observed_total": 70,
+  "native_passed_cases_total": 68,
+  "native_failed_cases_total": 2,
+  "distinct_failing_test_ids": [
+    "DeclaredWindowBasinAssignment/ControlPlateauCrossingMeasuredValleyBoundaryIsUnknown"
+  ],
+  "source_review_diagnosis": "A separate source review identified a rising shoulder in the purported crossing-plateau fixture; original failing assertions/outcome retained. Fixture correction requires a new immutable commit and attempt.",
+  "failed_native_leaf_unit_metadata_retained_without_live_processes": true,
+  "postclosure_snapshots_are_separate_observer_facts": true,
+  "original_worker_terminals_reclassified": false,
+  "new_build_or_test_execution_during_collection": false,
+  "compiled_translation_units": [
+    "Tests/Integration/Libraries/Test_PulseLib_DeclaredWindowBasinAssignment.cpp",
+    "Tests/Integration/Support/ProbeAlgorithmMain.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.cpp",
+    "Libraries/Nmsdk-PulseLib/Core/TimeLearner/DeclaredWindowBasinAssignment.cpp"
+  ],
+  "harness_sha256": "064eda928720833fabba07cdaea854aee018ee191bc0e9b2048023c23a5af55b",
+  "production_root_cmake_blob_sha256": "8e480954a223a2ff0360fa138fccfd92184ed391424f301ff20ffd3934d8efff",
+  "unused_gitlinks_materialization": "standalone exact-commit tree metadata, empty sparse working tree, no alternates",
+  "full_root_cmake_integration_accepted": false,
+  "sdk_source_payload_or_build_validated": false,
+  "native_context_validated": false,
+  "training_certificate_eligible": false,
+  "asan_options": "detect_leaks=0",
+  "leak_check_claimed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

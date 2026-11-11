@@ -1,0 +1,11 @@
+# Native package6: подготовка следующей сквозной проверки
+
+Отдельная SDK доставлена на M40 через Git: root `066a6f84f53d788603a0198fe210d277e0eec867`, Pulse `6741b3c4c05855bf6b53102d27c07cba64378657`, Bin `918ae5e1a2d6085b9ff148f7162eb9e744126592`, Rdk `d6c9df759a3ee20ad42fa0a83841f19385fba60a`. Все восемь repositories чисты, без alternates; Root сверил 4050 физических файлов с Git bytes/SHA. Поддерживаемый baseline и прежняя SDK native48 не изменены.
+
+Точный состав следующего запуска — **119 cases /42 leaves**, а не предварительно предполагавшиеся122: прежние48, portable math17, native package29, Console artifact11, recognition3 и runtime2 codec11. Число runtime2 получено по literal TEST в текущем исходнике; прежнее предположение14 не используется. Служебное имя уже доставленного каталога `source-package6-native122-m40-a1` сохраняется, но не определяет число тестов.
+
+[Декларация](ValidationPlans/NativePackage6-119-20261109/cohort.json) сохраняет все прежние48 IDs и добавляет новые71. [Native job](ValidationPlans/NativePackage6-119-20261109/native-job.json) требует отдельные build/runtime/output и сборку одновременно `Test_PulseLib_StorageComponents` и `NeuroModelerConsole` через production worker. Включены308 обязательных artifact rules, в том числе16 файлов реальной consumed-probe characterization перед cold7 edit и новые package6/summary7/recognition outputs. Файлы index/primary внутри каждого экспортированного пакета дополнительно должны проверяться независимыми readers; наличие обязательных путей не заменяет такую проверку.
+
+В качестве native Tool используется уже доставленная Scripts-проекция `e91c20213824580ea4199997896e7ac2f9e606ba`, содержащая ту же версию worker, которая собирает Console. Каноническую подготовку выполняет отдельный ранее проверенный Tool `ad3c32d0ae4a9a64991e4f30abfabf27fe98a95f`. Подготовка не выполняет сборку и не создаёт свидетельства прохождения native тестов.
+
+Новый cohort пока не запускался. После него нужны independent actual-corpus проверки, реальное выполнение Console Train→export→frozen Test, исходный stock N4 case и последующая научная матрица. N2 fixtures с явно расширенным sync `.2` проверяют перенос/форматы; отдельные default `.02` negative controls сохраняются и не повышаются до Exact. CapturedPerInput, назначение пика закреплённому импульсу и исходные допуски не меняются.

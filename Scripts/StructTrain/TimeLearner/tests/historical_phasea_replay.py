@@ -8,118 +8,12 @@ import shutil
 import subprocess
 import xml.etree.ElementTree as ET
 
+from ..historical_phasea_native import (ROOT, BIN, PULSE, CASES, write, model_readback,
+                                       prepare_case, add_native_temporal_observer)
 from ..historical_selectivity import analyze_historical_csv
 from ..native_evidence import load, require
 from ..process_runner import execute, verify_runtime
 from ..runtime import source_closure
-
-ROOT = "de02a3809395dd0bbd11e2ba792bfc04a51c89f3"
-BIN = "1c1464e248f8744e858bd66df0be99e39969fd65"
-PULSE = "cbf76fbe077a7003dccf72b142d7136721fa1afb"
-CASES = (("baseline", "EXP00_baseline/Test", 4),
-         ("threshold0130", "EXP01_ltz_threshold_sweep/Test_thr00130", 5),
-         ("threshold0135", "EXP01_ltz_threshold_sweep/Test_thr00135", 6))
-
-
-def write(path, record):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(record, ensure_ascii=False, indent=2, allow_nan=False)+"\n", encoding="utf-8")
-
-
-def model_readback(path):
-    root = ET.parse(path).getroot()
-    graph = [];parameters = {}
-    def walk(node, prefix):
-        if "Class" in node.attrib:
-            graph.append({"path": prefix, "class": node.attrib["Class"]})
-            for prop in node.findall("./Parameters/*"):
-                # Descriptive readback, not a complete physical-model fingerprint.
-                if prop.tag in {"DendriteLength", "TipSynapseResistance", "IsNeedToTrain",
-                                "FixedLTZThreshold", "UseFixedLTZThreshold", "Threshold",
-                                "Resistance", "Capacity", "SecretionTC", "DissociationTC"}:
-                    parameters[prefix+"/"+prop.tag] = " ".join((prop.text or "").split())
-        for child in node.findall("./Components/*"):
-            walk(child, prefix+"/"+child.tag)
-    model = root.find("./Model")
-    require(model is not None, "historical_model_root_missing")
-    walk(model, "Model")
-    return {"graph": graph, "selected_parameters": parameters, "full_physics_fingerprint": False}
-
-
-def prepare_case(bin_repo, relative, directory):
-    prefix = "Configs/SpikeSamples/StructTrain/SelectivityPhaseA/"+relative+"/"
-    names = subprocess.check_output(["git", "-C", str(bin_repo), "ls-tree", "-r", "-z",
-                                    "--name-only", BIN, "--", prefix]).decode().split("\0")
-    inputs = directory/"inputs";work = directory/"work"
-    inputs.mkdir(parents=True);work.mkdir()
-    records = []
-    for name in names:
-        if not name:
-            continue
-        rel = Path(name).relative_to(prefix)
-        if any(part in {"SelectivityLog", "StatisticLog", "EventsLog"} for part in rel.parts) or rel.name == "results.csv":
-            continue
-        raw = subprocess.check_output(["git", "-C", str(bin_repo), "show", BIN+":"+name])
-        target = inputs/rel;target.parent.mkdir(parents=True, exist_ok=True);target.write_bytes(raw)
-        dest = work/rel;dest.parent.mkdir(parents=True, exist_ok=True);dest.write_bytes(raw)
-        records.append({"repository": "Bin", "commit": BIN, "path": name,
-                        "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()})
-    for filename in ("Model_00.xml", "Parameters_00.xml"):
-        tree = ET.parse(inputs/filename).getroot()
-        flag = tree.find(".//NeuronTimeLearner/Parameters/IsNeedToTrain")
-        require(flag is not None and flag.text.strip() == "0", "replay_must_not_start_training")
-    require("<GlobalTimeStep>2000</GlobalTimeStep>" in (inputs/"Project.ini").read_text(),
-            "historical_frequency_mismatch")
-    require(not list(work.rglob("results.csv")), "historical_results_copied_into_new_run")
-    ref = directory/"reference.csv"
-    ref.write_bytes(subprocess.check_output(["git", "-C", str(bin_repo), "show",
-                                           BIN+":"+prefix+"SelectivityLog/results.csv"]))
-    return inputs, work, ref, records
-
-
-def add_native_temporal_observer(bin_repo, work):
-    """Use the historical registered Rdk recorder; never calculate a neuron here."""
-    raw = subprocess.check_output(["git", "-C", str(bin_repo), "show", BIN+
-        ":Configs/SpikeSamples/StructTrain/SelectivityPhaseA/EXP00_baseline/Train/Model_00.xml"])
-    template = ET.fromstring(raw).find(".//StatisticDoubleMatrix")
-    require(template is not None and template.get("Class") == "UStatisticDoubleMatrix",
-            "historical_stock_statistic_template_missing")
-    path = work/"Model_00.xml";tree = ET.parse(path);model = tree.getroot().find("./Model")
-    links = model.find("./Links");components = model.find("./Components")
-    require(links is not None and components is not None
-            and components.find("./ReplayTemporalStatistic") is None, "historical_observer_graph_invalid")
-    observer = copy.deepcopy(template);observer.tag = "ReplayTemporalStatistic"
-    for name, value in {"Activity": "1", "SavePath": "TemporalTrace", "SubFolderAfterResetFlag": "0",
-                        "ForceCreateSavePath": "1", "TimeInterval": "0", "AverageMode": "0", "SaveMode": "0",
-                        "WriteIndexFlag": "1", "WriteModelTimeStampFlag": "1"}.items():
-        prop = observer.find("./Parameters/"+name)
-        require(prop is not None, "historical_statistic_property_missing:"+name);prop.text = value
-    components.append(observer)
-    # Historical SumPotential is ptPubState, not ptOutput. UStatisticMatrix
-    # opens files through FindOutputProperty, so a state-only connection
-    # silently produces no file. Record the two native channel outputs instead;
-    # NPulseMembraneCommon::ACalculate defines SumPotential as their sum.
-    # Preserve the unmodified historical executable and expose this derivation.
-    descriptors = [("NeuronTimeLearner.Neuron.Soma"+str(i)+"."+channel, "Output",
-                    "soma"+str(i)+"_"+role)
-                   for i in range(1, 5)
-                   for channel, role in (("ExcChannel", "exc"), ("InhChannel", "inh"))]
-    descriptors += [("NeuronTimeLearner.Neuron", "SomaSumPotential", "neuron_soma_sum")]
-    descriptors += [("NeuronTimeLearner.DatasetMatrix.Generator1", "Output", "stimulus"),
-                    ("NeuronTimeLearner.Neuron.LTZone", "Output", "lt_spikes"),
-                    ("NeuronTimeLearner", "SomaNeuronAmplitude", "learner_cached_somas")]
-    for owner, prop, role in descriptors:
-        link = ET.SubElement(links, "elem", {"Type": "ULink"})
-        ET.SubElement(link, "Item", {"Type": "ULinkSide", "Index": "-1", "Name": prop}).text = owner
-        ET.SubElement(link, "Connector", {"Type": "ULinkSide", "Index": "-1", "Name": "InputMatrixData"}).text = observer.tag
-    links.set("Size", str(len(links)))
-    tree.write(path, encoding="utf-8", xml_declaration=False)
-    return {"component": observer.tag, "class": observer.get("Class"), "streams":
-            [{"source": owner+"."+prop, "role": role} for owner, prop, role in descriptors],
-            "source_code_patched": False, "sampling": "native scheduler, TimeInterval0; no averaging",
-            "soma_derivation": "soma_i = Soma_i.ExcChannel.Output + Soma_i.InhChannel.Output; "
-                "historical NPulseMembraneCommon::ACalculate; state-only SumPotential cannot be recorded "
-                "by historical UStatisticMatrix::FindOutputProperty"}
 
 
 def main():

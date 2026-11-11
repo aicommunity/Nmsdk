@@ -6,6 +6,7 @@ alias bytes from a new derived tree; native artifact auditors stay unchanged.
 import argparse
 import hashlib
 import json
+import lzma
 from pathlib import Path, PurePosixPath
 import re
 import tarfile
@@ -15,6 +16,55 @@ from .native_evidence import EvidenceError, load, require
 
 ALIAS_ADAPTER = "dereferenced-glog-aliases-v1"
 ALIASES = {"NeuroModeler."+s for s in ("INFO", "WARNING", "ERROR", "FATAL")}
+
+
+def create_native_bundle(sources, output, *, dictionary_bytes=128*1024**2):
+    """Store every logical file, streaming equal content adjacently for compression.
+
+    This is the existing regular-file tar format: no hardlinks, missing data or
+    reconstruction references. Callers supply an explicit inventory of closed,
+    owned artifacts. Paths are resolved before packing, so an intentionally
+    inventoried glog alias becomes the same regular bytes as in legacy bundles.
+    """
+    require(type(sources) is dict and bool(sources), 'bundle_empty_source_inventory')
+    require(type(dictionary_bytes) is int and dictionary_bytes in
+            (8*1024**2, 32*1024**2, 64*1024**2, 128*1024**2), 'bundle_invalid_dictionary_size')
+    output = Path(output).absolute()
+    require(not output.exists() and not output.is_symlink(), 'bundle_output_already_exists')
+    output = output.parent.resolve(strict=True)/output.name
+    paths, members = {}, {}
+    for name, source in sources.items():
+        _name(name)
+        source = Path(source).resolve(strict=True)
+        require(source.is_file() and not source.is_relative_to(output), 'bundle_source_invalid_or_inside_output')
+        paths[name] = source
+        members[name] = {'bytes': source.stat().st_size, 'sha256': _sha(source)}
+    for name in paths:
+        require(not any(p.as_posix() in paths for p in PurePosixPath(name).parents
+                        if p.as_posix() != '.'), 'bundle_logical_file_directory_collision')
+    output.mkdir(exist_ok=False)
+    archive = output/'primary.tar.xz'
+    with lzma.LZMAFile(archive, mode='wb', filters=[{'id': lzma.FILTER_LZMA2,
+            'preset': 3, 'dict_size': dictionary_bytes}]) as compressed:
+        with tarfile.open(fileobj=compressed, mode='w|') as stream:
+            for name in sorted(paths, key=lambda n: (members[n]['sha256'], n)):
+                path, record = paths[name], members[name]
+                info = tarfile.TarInfo(name); info.size = record['bytes']
+                with path.open('rb') as source:
+                    stream.addfile(info, source)
+    # A completed archive is not published if any producer changed its inputs.
+    for name, path in paths.items():
+        require({'bytes': path.stat().st_size, 'sha256': _sha(path)} == members[name],
+                'bundle_source_changed_during_pack')
+    unique = {(v['sha256'], v['bytes']) for v in members.values()}
+    bundle = {'kind': 'compact_native_primary', 'schema_version': 1, 'members': members,
+              'archive_bytes': archive.stat().st_size, 'archive_sha256': _sha(archive),
+              'compression': {'codec': 'xz-lzma2', 'dictionary_bytes': dictionary_bytes,
+                              'member_order': 'content_sha256_then_logical_name'},
+              'expanded_bytes': sum(v['bytes'] for v in members.values()),
+              'unique_content_bytes': sum(size for _, size in unique)}
+    (output/'bundle.json').write_text(json.dumps(bundle, indent=2)+'\n', encoding='utf-8')
+    return bundle
 
 
 def _sha(path):

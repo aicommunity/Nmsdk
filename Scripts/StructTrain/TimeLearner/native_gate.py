@@ -26,6 +26,14 @@ def supported_specification(spec):
         return False
     if spec["schema_version"] == 1:
         return set(spec) == FIELDS
+    if spec['schema_version'] == 4:
+        limits = spec.get('process_limits')
+        return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits', 'worker_lock'} and
+                spec['cooperative_runtime_capture'] is True and type(limits) is dict and
+                set(limits) == {'memory_bytes', 'maximum_processes'} and
+                type(limits['memory_bytes']) is int and 32*1024**2 <= limits['memory_bytes'] <= 64*1024**3 and
+                type(limits['maximum_processes']) is int and 1 <= limits['maximum_processes'] <= 64 and
+                type(spec['worker_lock']) is str and bool(spec['worker_lock']))
     if spec['schema_version'] == 3:
         limits = spec.get('process_limits')
         return (set(spec) == FIELDS | {'cooperative_runtime_capture', 'process_limits'} and
@@ -79,6 +87,8 @@ def run_native_gate(specification, output):
     specification = Path(specification).resolve(strict=True)
     spec = load(specification)
     require(supported_specification(spec), "unknown_native_gate_specification")
+    require(spec['schema_version'] != 4 or (os.name == 'nt' and spec['asan_options'] == ''),
+            'windows_native_gate_platform_or_asan_mismatch')
     expected = spec["expected_test_ids"]
     require(type(expected) is list and bool(expected)
             and all(type(x) is str and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*/[A-Za-z_][A-Za-z0-9_]*", x)
@@ -110,13 +120,26 @@ def run_native_gate(specification, output):
     _write(output/"specification.json", spec)
     _write(output/"runtime.json", runtime)
     environment = {key: runtime["loader_environment"].get(key)
-                   for key in ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM")}
-    environment.update(ASAN_OPTIONS=spec["asan_options"], TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"))
+                   for key in (("PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM") if spec['schema_version'] == 4
+                               else ("LD_LIBRARY_PATH", "QT_PLUGIN_PATH", "QT_QPA_PLATFORM"))}
+    environment.update(ASAN_OPTIONS=spec["asan_options"],
+                       TIMELEARNER_EXECUTION_OUTPUT=str(output/"native"),
+                       TIMELEARNER_COMPOSITE_OUTPUT=str(output/"native-composite"))
     with _environment(environment):
         runner, limits = execute, {}
         if spec['schema_version'] == 3:
             from .contained_runner import execute as contained_execute
             runner, limits = contained_execute, spec['process_limits']
+        if spec['schema_version'] == 4:
+            from .windows_process import execute as windows_execute
+            lock = Path(spec['worker_lock'])
+            lock = (lock if lock.is_absolute() else specification.parent/lock).resolve()
+            require(source == Path(runtime['windows_source_root']).resolve(strict=True),
+                    'windows_native_gate_source_binding_mismatch')
+            def runner(manifest, arguments, cwd, destination, wall, **options):
+                return windows_execute(manifest, arguments, cwd, destination, maximum_wall_seconds=wall,
+                                       lock_file=lock, **options)
+            limits = spec['process_limits']
         result = runner(runtime, ["--gtest_filter="+":".join(x.replace("/", ".") for x in expected),
                                   "--gtest_output=xml:"+str(output/"native.xml")],
                          executable.parent, output/"process", wall,
@@ -130,6 +153,10 @@ def run_native_gate(specification, output):
         if spec['schema_version'] == 3:
             require(result.get('schema_version') == 2 and result.get('ownership_scope') == 'bound_cgroup' and
                     result.get('all_processes_closed') is True, 'native_gate_whole_group_closure_missing')
+        if spec['schema_version'] == 4:
+            require(result.get('kind') == 'timelearner_windows_process_result' and
+                    result.get('all_processes_closed') is True and result.get('validity') == 'valid' and
+                    result.get('cooperative_capture') == 'completed', 'windows_native_gate_closure_or_capture_missing')
         require(result["runtime_provenance"] == "loaded_files_captured", "native_gate_loaded_runtime_missing")
         inventory = audit_junit(output/"native.xml", expected)
         require((inventory["assertion_status"] == "passed" and result["execution"] == "completed"

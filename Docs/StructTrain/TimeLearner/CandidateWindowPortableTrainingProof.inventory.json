@@ -1,0 +1,184 @@
+{
+  "kind": "candidate_window_portable_training_proof_source_inventory",
+  "schema_version": 1,
+  "status": "source_prepared_tests_not_executed",
+  "base_root": "956443560ebdb788a0642856381c9c6a7a554b76",
+  "base_pulse": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+  "pulse": "acdb4efca9423b0ae215c44787772d72ef185b89",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "scope": {
+    "archive_schema": 2,
+    "protocol_schema": 5,
+    "certificate_schema": 3,
+    "portable_residual_math": true,
+    "native_execution_attestation": false,
+    "controller_traversal_replay": false,
+    "live_authority": false,
+    "completed_package6": false,
+    "CLI_activation": false,
+    "runtime_accepted": false
+  },
+  "target": "Test_PulseLib_StorageComponents",
+  "static_literal_ids": [
+    "NativeCandidateWindowPortableMath.ClassicActualServiceCertificateMatchesExactly",
+    "NativeCandidateWindowPortableMath.BranchActualServiceCertificateMatchesExactly",
+    "NativeCandidateWindowPortableMath.ActualBoundC0KeepsOriginalBaseWitness",
+    "NativeCandidateWindowPortableMath.DefaultSyncCannotBecomeExact",
+    "NativeCandidateWindowPortableMath.WrongCurrentModelOrEpochRejected",
+    "NativeCandidateWindowPortableMath.NegativeAndNonfiniteTolerancesRejected",
+    "NativeCandidateWindowPortableMath.RehashedCertificateCannotReplaceActualWindowIdentities",
+    "NativeCandidateWindowPortableMath.LatestActualSweepReplaysOutsideTolerance",
+    "NativeCandidateWindowPortableMath.MixedActualSweepsRejected",
+    "NativeCandidateWindowPortableMath.WholeOlderActualSweepRejected",
+    "NativeCandidateWindowPortableMath.PartialReferenceHasNoClosedTargetsOrCertificate",
+    "NativeCandidateWindowPortableMath.MergedReferenceRemainsDiagnostic",
+    "NativeCandidateWindowPortableMath.WarmGrowthRetainsOriginalTargetsWithoutBorrowingOldFinals",
+    "NativeCandidateWindowPortableMath.MissingExternalPrimaryCannotFallBackToEmbeddedBytes",
+    "NativeCandidateWindowPortableMath.FixedProtocol4CannotEnterPortableProtocol5Proof",
+    "NativeCandidateWindowPortableMath.IncompleteSelectedFinalSetHasNoCertificate",
+    "NativeCandidateWindowPortableMath.RehashedForeignReferenceProofCannotJoinActualFinal"
+  ],
+  "static_literal_count": 17,
+  "compiled_inventory_checked": false,
+  "root_sources": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "git_blob": "50b44a744003f8bc9462b6b2d0e0ec92f4de8ba8",
+      "bytes": 318028,
+      "sha256": "662678e2901572db98fe747ee48dfd6ece906354b01a1d7bdc090dc1aa618e89"
+    },
+    {
+      "path": "Docs/StructTrain/TimeLearner/CandidateWindowPortableProofAndNextN4.ru.md",
+      "git_blob": "5bb8d62ec8d62b43edb742a6dab2204ca113c90b",
+      "bytes": 12047,
+      "sha256": "be521aae3b4e3f08f928a026acb269c2f22ac8e2830e814ef049ac1463d068ac"
+    },
+    {
+      "path": "Tests/Integration/Libraries/CMakeLists.txt",
+      "git_blob": "44e715f3ef780bd76037a7a3e07baeb2fe8aafed",
+      "bytes": 14762,
+      "sha256": "912d79712ed5774d8e156fc213bef64e5ded7278ba51253082dfc1914c228a0d"
+    }
+  ],
+  "pulse_sources": [
+    {
+      "path": "Core/TimeLearner/CandidateWindowPortableTrainingProof.h",
+      "git_blob": "eeb884163efda487cbd3ff75021155e3204bfebc",
+      "bytes": 1991,
+      "sha256": "a738b9855ed740224eafdd467c97341191d9a136b995a0627fce46f54aed438d"
+    },
+    {
+      "path": "Core/TimeLearner/CandidateWindowPortableTrainingProof.cpp",
+      "git_blob": "f51b9141c4cb109549464a83995f8882d9e24c2a",
+      "bytes": 9157,
+      "sha256": "e234cf9aee8b04f7d06e599a53f12a5727dcdd1d8a1f65921f1642d7dc1bd068"
+    },
+    {
+      "path": "Core/TimeLearner/FinalVerification.h",
+      "git_blob": "3b6a9391fee8cb13859c059bf18f02bab8042453",
+      "bytes": 13041,
+      "sha256": "f5c8e18fa81d4863e764efe39fa74ed0a0d0fa4563724b3bbab361e4d9b6066a"
+    },
+    {
+      "path": "Core/TimeLearner/FinalVerification.cpp",
+      "git_blob": "9949a4b1c2920a647fae66498a4d2dee5e3798d6",
+      "bytes": 39741,
+      "sha256": "4a84979ff99977d9f1a7943a2f500ec7acf3290ecace8bab0cca2abf1591f7ec"
+    },
+    {
+      "path": "Core/TimeLearner/CompositePortableTrainingProof.cpp",
+      "git_blob": "b8beb8d59f035671029a6154467707bebf6585d4",
+      "bytes": 5839,
+      "sha256": "28df1a956c80089aad3d1e6266425e1136448681a1212f252826be96e0c4de9b"
+    },
+    {
+      "path": "Core/TimeLearner/CandidateWindowPortableReferences.cpp",
+      "git_blob": "b51eca42388c867ec5a138b06639832b5d36da5f",
+      "bytes": 5858,
+      "sha256": "eea701372c33cf5b57467eabe5d83b2c713ba54bf37bd66a60d76566f1b978be"
+    },
+    {
+      "path": "Core/TimeLearner/CandidateWindowProposalReplay.cpp",
+      "git_blob": "0ccdef37a80a480249f13dec3404d717da0d5dda",
+      "bytes": 30229,
+      "sha256": "cadab30a11807826ada55777dc9f5d21f18bac81ce8152b1a7177bf64f96a9e0"
+    },
+    {
+      "path": "Core/TimeLearner/CandidateWindowMeasurementEvidence.cpp",
+      "git_blob": "54e0e631ceef5d78cabb0d6c646c36f58f566571",
+      "bytes": 6292,
+      "sha256": "7f47b2653b36ad2daf1d056e26d398f55aa43ceba77fa96ac0154c57bf1fb608"
+    },
+    {
+      "path": "Core/TimeLearner/NativeCompositeTrainingEvidence.cpp",
+      "git_blob": "a322d250425e14698cb655170f4cc25b14d925dc",
+      "bytes": 75054,
+      "sha256": "267ab366634e63c23ff7bc59d93b6d48e031428a555c362f26c3440817c4a436"
+    },
+    {
+      "path": "Core/TimeLearner/NativeLearnedState.cpp",
+      "git_blob": "2811e7d96390a22e71ce65d7436bfacb50a6de19",
+      "bytes": 30019,
+      "sha256": "c56dea5006a62977bc1598fb4c874562da79a62f95ce7a430a176d14a76761ac"
+    },
+    {
+      "path": "Core/TimeLearner/NativeCompositeLearnedState.cpp",
+      "git_blob": "e752b934e41a634a848b062c632457077b3e2661",
+      "bytes": 31744,
+      "sha256": "7a094ec499d6d82c68664620e922de1c99eb7802d96cd64087d32f2ad38027c2"
+    },
+    {
+      "path": "Core/TimeLearner/ProbeEvidenceJson.cpp",
+      "git_blob": "a7d5bc3f02ff4dd36ee00d047486e680a502a112",
+      "bytes": 36731,
+      "sha256": "d85c7025cf841084dbf820e79b2df519ad233ca437b7f4f8a1d84f4f34bdca12"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "git_blob": "5042dc53742f063888f6ec2714ee1b1f38221464",
+      "bytes": 2160,
+      "sha256": "7b882dc35bd38bf0d3cf38225ffd59ceb901190995cd0c8440e0ac12760188d6"
+    }
+  ],
+  "unchanged_production_bodies": [
+    "Core/TimeLearner/CompositePortableTrainingProof.cpp",
+    "Core/TimeLearner/FinalVerification.cpp",
+    "Core/TimeLearner/NativeLearnedState.cpp",
+    "Core/TimeLearner/NativeCompositeLearnedState.cpp"
+  ],
+  "source_review_only_checks": [
+    "git diff --check",
+    "Git blob hashes",
+    "literal ID uniqueness"
+  ],
+  "future_required": [
+    "remote compilation and exact compiled literal inventory",
+    "real actual Service5 original source/full/omit/repeat/after-model primary saved by maintained producer",
+    "17 selected native controls and separate required old regression scopes",
+    "package6 actual model import/export/completion ownership before removing export block",
+    "cold7/runtime2/summary7/execution4 and independent Python package6 reader/CLI joins",
+    "real N4 Train/export/frozen Test distinct from routing48 and N2 plumbing"
+  ],
+  "producer_scope": {
+    "native_model_dimensions": 2,
+    "normalization": "N0",
+    "frequency_hz": 2000,
+    "positive_plumbing_sync": 0.2,
+    "default_sync_negative": 0.02,
+    "raw_interruption_covered_by_new_cohort": false,
+    "full_archive2_RuntimePlan2_CLI_join": false,
+    "retained_case_prefixes": [
+      "classic-native-window-service5/portable-proof6-0",
+      "branch-native-window-service5/portable-proof6-0",
+      "branch-native-window-service5/portable-proof6-2",
+      "classic-native-window-service5/portable-proof6-1",
+      "classic-native-window-service5/portable-proof6-5",
+      "classic-native-window-service5/portable-proof6-3",
+      "branch-native-window-service5/portable-proof6-4",
+      "classic-native-window-service5/portable-proof6-before-warm",
+      "classic-native-window-service5/portable-proof6-6"
+    ],
+    "primary_origin": "actual maintained Environment/storage/scheduler Service5; no synthetic waveform or scalar packets",
+    "existing_legacy_control_source": "ActualServiceArchive<NNeuronTimeLearner> / classic-service"
+  }
+}
