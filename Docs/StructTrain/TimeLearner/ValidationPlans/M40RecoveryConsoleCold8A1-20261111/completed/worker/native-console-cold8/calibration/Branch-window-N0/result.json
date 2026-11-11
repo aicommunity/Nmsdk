@@ -1,0 +1,78 @@
+{
+  "phases": [
+    {
+      "operation": "measured-grid",
+      "unit": "timelearner-42bf818d-0ec9-4998-a640-ebaa02162d5a.service",
+      "audit": {
+        "run_evidence_consistent": true,
+        "full_grid_model_binding_verified": true,
+        "native_execution_verified": false,
+        "independent_partition_verified": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "operation": "fresh-frozen",
+      "unit": "timelearner-f698650c-95b0-4f16-8ea1-7bc80c2018f1.service",
+      "audit": {
+        "run_evidence_consistent": true,
+        "operation": "evaluate",
+        "native_execution_verified": false,
+        "independent_partition_verified": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "operation": "silent-nonseparable",
+      "unit": "timelearner-49239c44-26d7-4feb-8bf2-2cf7b607732f.service",
+      "audit": {
+        "run_evidence_consistent": true,
+        "full_grid_model_binding_verified": false,
+        "native_execution_verified": false,
+        "independent_partition_verified": false,
+        "evaluation_verdict": null
+      }
+    },
+    {
+      "operation": "rollback-frozen",
+      "unit": "timelearner-d933157d-7143-4ed4-9d95-8fde9976ef22.service",
+      "audit": {
+        "run_evidence_consistent": true,
+        "operation": "evaluate",
+        "native_execution_verified": false,
+        "independent_partition_verified": false,
+        "evaluation_verdict": null
+      }
+    }
+  ],
+  "calibration_status": "calibrated",
+  "thresholds": [
+    0.006653359175157936,
+    0.0074146773741799454,
+    0.008180406786891737,
+    1
+  ],
+  "frozen_counts": {
+    "TP": 2,
+    "FP": 0,
+    "FN": 0,
+    "TN": 2,
+    "targets": 2,
+    "foils": 2,
+    "target_trials_with_outside_spikes": 0,
+    "accuracy": 1.0,
+    "target_hit_rate": 1.0,
+    "foil_response_rate": 0.0
+  },
+  "silent_control_status": "nonseparable",
+  "source_unchanged": true,
+  "changed_threshold_rollback": {
+    "source_threshold": 1,
+    "candidate_threshold": 0.008180406786891737,
+    "source_model_revision": "fb44656022ecb26d602212d20e12df9940d30efd31ed88d5626188d760771f6e",
+    "candidate_model_revision": "4209303b6d9513f62ff4f943fa58fe3107804156cf47526ed915889540630608",
+    "fresh_restored_response_matches_source": true
+  },
+  "scientific_verdict": null,
+  "independent_partition_verified": false
+}
