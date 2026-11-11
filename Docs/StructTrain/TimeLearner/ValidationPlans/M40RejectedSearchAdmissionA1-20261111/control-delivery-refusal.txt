@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "C:\Users\BAKHSH~1\AppData\Local\Temp\timelearner_deliver_empty_private_source_utf8.py", line 29, in <module>
+    run(['git','-C',destination,'-c','submodule.recurse=false','checkout','--detach',root])
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\BAKHSH~1\AppData\Local\Temp\timelearner_deliver_empty_private_source_utf8.py", line 10, in run
+    if status:raise RuntimeError(str(status)+':'+err.decode(errors='replace'))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: 128:fatal: 'origin' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+fatal: could not fetch f5dd4749f067e60edfc5b27b67f1f19a9c703477 from promisor remote
+
