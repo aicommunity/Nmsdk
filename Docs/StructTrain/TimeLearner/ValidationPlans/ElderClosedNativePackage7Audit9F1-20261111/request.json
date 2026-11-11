@@ -1,0 +1,31 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-closed-native-package7-audit9-elder-f1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-closed-native-package7-audit9-f1",
+      "commit": "6546c3b66782e8688bcbe804e5bfe7678b489f6f"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/closed-native-package7-audit9-f1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderClosedNativePackage7Audit9F1-20261111/suite.json",
+      "sha256": "af2e0532e77758a8df9f846dfe2a7afd294dcf7f71f7868987b449281b9348c2"
+    },
+    "fixtures": {
+      "TIMELEARNER_CLOSED_PACKAGE7_SOURCE": "/home/user/timelearner-refactor/source-package7-primary-data-f1/Reports/StructTrain/TimeLearner/Package7ClassicN0ClosedSourceF1-20261111"
+    }
+  }
+}
