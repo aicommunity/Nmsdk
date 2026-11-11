@@ -45,3 +45,8 @@ package roundtrip и чтение старого package6. Наличие тес
 retry_same_candidate. Не обходить этот запрет и не запускать дорогой Train с
 несуществующей настройкой. CapturedPerInput, tolerance и assigned maximum не
 меняются; весь исходный план 0–12 остаётся открытым за пределами принятых частей.
+
+Серверная приёмка начата: [один subject на трёх workers](ThreeWorkerRejectedSearch-20261111.ru.md).
+На Elder/M40 выполняются SDK build и native29, на Windows — MSVC SDK build.
+Предварительная Linux-проверка полного namespace и Windows production
+Test-PreparedSdk приняты; это ещё не compiler/test PASS новой функции.
