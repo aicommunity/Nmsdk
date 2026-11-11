@@ -4074,11 +4074,18 @@ enum class WindowRecoveryCase { Advance, RepeatedN0, DefaultRetry, StringOnly, I
 template<class Owner> void WindowRecoveryCore(WindowRecoveryCase mode,bool n1=false,bool ambiguous=false) {
     NativeCompositeFixture<Owner> f(2000,false,64,false,!n1,false,2,1800.,false,ambiguous?1.8:0.,ambiguous?64:8);
     EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
+        if(ambiguous) {
+            // Shared-cable growth may also move the freshly measured anchor.
+            // Declare both windows before capture; never reuse a stale anchor.
+            for(auto& policy:contract.candidateWindowPolicy.inputs) {
+                policy.delayFramesPerSegment=0;policy.baseLeftGuardFrames=f.frequency/200;
+                policy.baseRightGuardFrames=f.frequency;policy.hardLastFrame=18*f.frequency/10-1;
+                policy.maximumWindowFrames=18*f.frequency/10;
+            }
+            return;
+        }
         auto& policy=contract.candidateWindowPolicy.inputs[0];
-        policy.delayFramesPerSegment=ambiguous?0:3*f.frequency/100;
-        policy.baseLeftGuardFrames=ambiguous?0:2;
-        policy.baseRightGuardFrames=ambiguous?f.frequency:2;
-        if(ambiguous){policy.hardLastFrame=18*f.frequency/10-1;policy.maximumWindowFrames=18*f.frequency/10;}
+        policy.delayFramesPerSegment=3*f.frequency/100;policy.baseLeftGuardFrames=policy.baseRightGuardFrames=2;
     });
     f.attempt->EnableRejectedSearchAdmission();
     const auto references=CaptureWindowReferences(f,false,"reference","candidate-attempt",ambiguous?10.:2.);
