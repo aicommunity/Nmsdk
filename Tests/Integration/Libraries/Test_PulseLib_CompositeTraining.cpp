@@ -1820,6 +1820,9 @@ template<class Owner> void WindowReferencesThenCandidate(unsigned hz=2000,bool c
     }
     EXPECT_EQ(f.owner->OwnedNativeCapacitanceState(),originalC0); // Off has no invented baseline; bound C0 remains the original family.
     EXPECT_EQ(record.semanticProofId,CandidateWindowTrainingSemanticProofId(f.protocol,record));
+    auto nonfinitePrimary=record;
+    nonfinitePrimary.group.witness.fullBefore.observation.channels.at(0).samples.at(1).rawPotential=std::numeric_limits<double>::quiet_NaN();
+    EXPECT_THROW(CandidateWindowTrainingSemanticProofId(f.protocol,nonfinitePrimary),std::invalid_argument);
     const auto binding=CandidateWindowProposalReplayFactory::CheckCandidateBinding(*f.attempt->CandidateWindowReferences(),f.protocol,
         ParseStrictNativeJsonObject(record.candidateBindingJson,128u*1024u*1024u));
     EXPECT_NO_THROW(CandidateWindowProposalReplayFactory::Replay(*f.attempt->CandidateWindowReferences(),f.protocol,binding,request,
@@ -3915,7 +3918,10 @@ template<class Owner> void PrepareRejectedSearch(NativeCompositeFixture<Owner>& 
     EnableCandidateWindow(f,"candidate-attempt",128u*1024u*1024u,[&](auto& contract) {
         if(ambiguous)for(auto& policy:contract.candidateWindowPolicy.inputs) {
             policy.delayFramesPerSegment=0;
-            policy.baseLeftGuardFrames=policy.baseRightGuardFrames=2*f.frequency;
+            // Cover the delayed merged response without asking the arithmetic
+            // proposal to clip an interval extending before frame zero.
+            policy.baseLeftGuardFrames=0;
+            policy.baseRightGuardFrames=f.frequency;
             policy.hardLastFrame=18*f.frequency/10-1;
             policy.maximumWindowFrames=18*f.frequency/10;
         }
