@@ -56,7 +56,12 @@ class StockColdCompactPrimaryTest(unittest.TestCase):
                 new_model_execution=False, scientific_verdict=None)
             # Plot cache stays outside Git and expanded restoration remains a
             # disposable, fully checked copy of the compact primary fixture.
-            render_output = os.environ.get('TIMELEARNER_STOCK_COLD_REPORT_OUTPUT')
+            controls = os.environ.get('TIMELEARNER_STOCK_COLD_REPORT_CONTROLS')
+            render_output = None
+            if controls is not None:
+                require(load(Path(controls)/'render.json') == {'render': True},
+                    'stock_cold_report_controls_schema')
+                render_output = str(Path(os.environ['TMPDIR'])/'stock-cold-reports')
             if render_output is not None:
                 rendered = render_result(directory, Path(render_output))
                 self.assertEqual(len(rendered['reports']), 8)
