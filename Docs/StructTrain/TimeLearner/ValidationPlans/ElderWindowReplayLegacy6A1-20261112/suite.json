@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "actual-Git-primary-package6-diagnostic-replay-current-reader-a1",
+  "package_fingerprint": "a0cb89ce7666e7ab17c7e8fdc1d4b4f8013c81909d9c97e9fa5bf811840cdb44",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_diagnostic_replay_portable"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_candidate_window_diagnostic_replay_portable.CandidateWindowDiagnosticReplayPortableTest.test_actual_legacy6_git_primary_keeps_recorded_and_full_window_results"
+  ],
+  "fixtures": {
+    "TIMELEARNER_DIAGNOSTIC_LEGACY6_BUNDLE": {
+      "pattern": "*",
+      "files": 6,
+      "fingerprint": "fe08e8d18d8bcd8dbc283f79f2a55340e9082f893da23416c9af912e16a98691"
+    }
+  }
+}
