@@ -4,7 +4,7 @@
 
 ## Фактический разрыв API
 
-BoundedTraining.cpp: ValidateCandidateWindowTrainingConfiguration отклоняет recovery!=RetrySameCandidate (composite_recovery_policy_not_implemented); CandidateWindowRuntimePlan.cpp::DecodeSearch и Python candidate_window_runtime_plan.py принимают только retry_same_candidate. BoundedTrainingSession::Consume scalar уже имеет AdvanceUnassignedBurst, но RejectCandidateWindow → RejectTyped → Reject повторяет тот же composite-кандидат до исчерпания общего invalid budget. NativeTrainingServiceComposite.cpp передаёт только строку причины. Определять право продолжения по префиксу этой строки нельзя.
+Исходный разрыв: ValidateCandidateWindowTrainingConfiguration допускал только RetrySameCandidate. Теперь ядро принимает отдельный AdvanceRejectedCandidateWindow и закрытый typed отказ; этот переход проверяется новым C1. CandidateWindowRuntimePlan.cpp::DecodeSearch и Python candidate_window_runtime_plan.py всё ещё принимают только retry_same_candidate. BoundedTrainingSession::Consume scalar имеет самостоятельный AdvanceUnassignedBurst; строковый RejectCandidateWindow → RejectTyped → Reject по-прежнему повторяет тот же composite-кандидат до исчерпания общего invalid budget. NativeTrainingServiceComposite.cpp пока передаёт только строку причины и явно запрещает новую policy при Start. Определять право продолжения по префиксу этой строки нельзя.
 
 ## Последовательность изменений
 

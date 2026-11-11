@@ -5,7 +5,15 @@
 Elder и M40 выполнили29/29 cases,29 отдельных leaf gates; outer+29child groups
 закрыты, reservations released, record_errors=[] на каждом сервере.
 Это приёмка sealed measurement/rejection factory, не нового перехода поиска.
-Полный compact primary этих Linux запусков ещё требуется опубликовать.
+Полный compact primary M40 сохранён в
+[Reports](../../../Reports/StructTrain/TimeLearner/RejectionFactory29B1-M40-20261111/artifact-inventory.json):
+1267 исходных файлов и3 observer members,87095233bytes expanded,
+2776140bytes XZ, SHA256ef485b91f9e3e3586681d9351d3905b628c00c9c3cdeb2f470c9c040a4c9d12b.
+Commit214bf5888665c9bc15d9e1a514aa09e30571d07a включён через merge commit.
+После Git-переноса сверены hashes всех4 payload artifacts; независимый
+семантический replay ещё не выполнен. Elder1267files инвентаризированы,
+но collector получил reservation_capacity_exhausted при занятом C1;
+полный Elder compact primary остаётся открытым пунктом.
 
 ## Изменения ядра
 
