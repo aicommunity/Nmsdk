@@ -1,0 +1,842 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-candidate-window-recovery-wire-c2",
+    "commit": "5643f8319e081b1cf4647965854709d35dc44df7",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-wire-c2/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryWireC2-20261111/namespace.json",
+      "sha256": "b6906af4f8fe410f9a4be8f304dd366b63b0d8d4759b01e1789e55d85eae715a"
+    }
+  },
+  "cohort": {
+    "selections": [
+      {
+        "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+        "suites": [
+          "NativeCandidateWindowRejection",
+          "NativeCandidateWindowFactory",
+          "NativeCandidateWindowPackage",
+          "NativeCandidateWindowRecovery"
+        ],
+        "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+      },
+      {
+        "path": "Tests/Integration/Libraries/Test_PulseLib_NativeLoadHistory.cpp",
+        "suites": [
+          "NativeArchiveOwnership"
+        ],
+        "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+      },
+      {
+        "path": "Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp",
+        "suites": [
+          "BoundedCandidateRecovery",
+          "BoundedTraining",
+          "BoundedTrainingCapacitance",
+          "BoundedTrainingFairDomains",
+          "BoundedTrainingFiniteRanking",
+          "BoundedTrainingLengthCandidates",
+          "BoundedTrainingN0Candidates",
+          "BoundedTrainingN0Repeats",
+          "BoundedTrainingN1GeometryFairness",
+          "BoundedTrainingN1Refinement",
+          "CandidateRecoveryEvidenceCodec",
+          "TrainingInvalidBudget",
+          "TrainingTermination",
+          "UnassignedBurstCandidate"
+        ],
+        "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+      },
+      {
+        "path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredResistanceSearch.cpp",
+        "suites": [
+          "MeasuredResistanceSearch"
+        ],
+        "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+      },
+      {
+        "path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredLengthSearch.cpp",
+        "suites": [
+          "MeasuredLengthSearch"
+        ],
+        "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+      },
+      {
+        "path": "Tests/Integration/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp",
+        "suites": [
+          "MeasuredCapacitanceSearch"
+        ],
+        "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+      }
+    ],
+    "selected_ids": [
+      "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
+      "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+      "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+      "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+      "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+      "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+      "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+      "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+      "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+      "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+      "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+      "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+      "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+      "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+      "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+      "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+      "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+      "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+      "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+      "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+      "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+      "BoundedTrainingCapacitance/CompleteMapFollowsProbesCandidatesAndRepeats",
+      "BoundedTrainingCapacitance/DomainCannotDiscardFullCapacitanceContext",
+      "BoundedTrainingCapacitance/LostDormantScaleRejectsOtherwiseMatchingInputReadback",
+      "BoundedTrainingCapacitance/UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension",
+      "BoundedTrainingCapacitance/UnitScaleExtensionIsRetainedAfterEdit",
+      "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference",
+      "BoundedTrainingFairDomains/EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit",
+      "BoundedTrainingFairDomains/SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves",
+      "BoundedTrainingFairDomains/ValidMeasurementsVisitGeometriesIndependentlyOfRecovery",
+      "BoundedTrainingFiniteRanking/BranchN0Overflow",
+      "BoundedTrainingFiniteRanking/BranchN0Zero",
+      "BoundedTrainingFiniteRanking/BranchN1Overflow",
+      "BoundedTrainingFiniteRanking/BranchN1Zero",
+      "BoundedTrainingFiniteRanking/ClassicN0Overflow",
+      "BoundedTrainingFiniteRanking/ClassicN0Zero",
+      "BoundedTrainingFiniteRanking/ClassicN1Overflow",
+      "BoundedTrainingFiniteRanking/ClassicN1Zero",
+      "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+      "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+      "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+      "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+      "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+      "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+      "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+      "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+      "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+      "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+      "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+      "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+      "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+      "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+      "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+      "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+      "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+      "BoundedTrainingN1GeometryFairness/ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode",
+      "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+      "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+      "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+      "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers",
+      "MeasuredCapacitanceSearch/BroadPeakIntervalsDoNotBecomeAnInventedZero",
+      "MeasuredCapacitanceSearch/ChangedBoundsCannotReuseAnOldThreePointTrend",
+      "MeasuredCapacitanceSearch/FixedDomainAndSmallBudgetDoNotManufactureCandidates",
+      "MeasuredCapacitanceSearch/InconsistentRepeatsCannotBeAveragedIntoSuccess",
+      "MeasuredCapacitanceSearch/MixedEffectivePhysicsNeverCreatesARefinement",
+      "MeasuredCapacitanceSearch/NonfiniteAndReversedIntervalsNeverPropose",
+      "MeasuredCapacitanceSearch/NonmonotoneAndFlatResponsesKeepFiniteMeshFallback",
+      "MeasuredCapacitanceSearch/OneSidedTrendProposesBoundedDampedScaleOnly",
+      "MeasuredCapacitanceSearch/SeedMeshIsFinitePositiveAbsoluteAndBounded",
+      "MeasuredCapacitanceSearch/SeedValidationRejectsUnsafeDeclarations",
+      "MeasuredCapacitanceSearch/ThreeMeasuredScalesBracketWithoutAssumingDirection",
+      "MeasuredCapacitanceSearch/WideFiniteScaleAndResidualRangesDoNotOverflowMidpoint",
+      "MeasuredLengthSearch/BracketUsesOnlyAnUnmeasuredBoundedInteger",
+      "MeasuredLengthSearch/InvalidNumbersAndDomainsNeverProposeAnEdit",
+      "MeasuredLengthSearch/NonmonotoneFlatAndAmbiguousIntervalsKeepEnumeration",
+      "MeasuredLengthSearch/RepeatedIntervalsCannotBeAveragedIntoASlope",
+      "MeasuredLengthSearch/ThreeMeasuredPointsCanProposeBeyondTheNearestMesh",
+      "MeasuredLengthSearch/WideIntegerBoundsDoNotOverflowTheMidpoint",
+      "MeasuredResistanceSearch/AMeasuredPointWithinToleranceNeedsNoInventedRefinement",
+      "MeasuredResistanceSearch/EffectiveBoundsExcludeOldPointsAndInvalidNumbersCannotProposeAnEdit",
+      "MeasuredResistanceSearch/NonmonotoneTimingInvalidAndInconsistentRepeatDataKeepMeshFallback",
+      "MeasuredResistanceSearch/ThreeMeasuredMonotonePointsProposeAnUnmeasuredInteriorResistance",
+      "MeasuredResistanceSearch/WideFiniteDomainsDoNotOverflowTheGeometricMidpoint",
+      "TrainingInvalidBudget/BranchN0",
+      "TrainingInvalidBudget/BranchN1",
+      "TrainingInvalidBudget/ClassicN0",
+      "TrainingInvalidBudget/ClassicN1",
+      "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+      "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+      "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+      "TrainingTermination/MaximumSweepsBranchN0",
+      "TrainingTermination/MaximumSweepsBranchN1",
+      "TrainingTermination/MaximumSweepsClassicN0",
+      "TrainingTermination/MaximumSweepsClassicN1",
+      "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+      "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+      "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+      "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing",
+      "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+      "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+      "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+      "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+      "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+      "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+      "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+      "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+      "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+      "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+      "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+      "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+      "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+      "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+      "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+      "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+      "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+      "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+      "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+      "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+      "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+      "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+      "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+      "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+      "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+      "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+      "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+      "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+      "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent",
+      "NativeCandidateWindowRecovery/ClassicN0AdvancesAndRejectsReplay",
+      "NativeCandidateWindowRecovery/BranchN0AdvancesAndRejectsReplay",
+      "NativeCandidateWindowRecovery/ClassicN1ReassessesActualDomains",
+      "NativeCandidateWindowRecovery/BranchN1ReassessesActualDomains",
+      "NativeCandidateWindowRecovery/ClassicN0RepeatedCandidatesRequireFreshAnchor",
+      "NativeCandidateWindowRecovery/BranchN0RepeatedCandidatesRequireFreshAnchor",
+      "NativeCandidateWindowRecovery/ClassicDefaultPolicyCannotAdvance",
+      "NativeCandidateWindowRecovery/BranchDefaultPolicyCannotAdvance",
+      "NativeCandidateWindowRecovery/ClassicStringCannotAuthorizeAdvance",
+      "NativeCandidateWindowRecovery/BranchStringCannotAuthorizeAdvance",
+      "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishInvalidBudget",
+      "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishProbeBudget",
+      "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishEditBudget",
+      "NativeCandidateWindowRecovery/ExternalStopRevokesPendingRecovery",
+      "NativeCandidateWindowRecovery/WrongRevisionCannotAdvance",
+      "NativeCandidateWindowRecovery/ClassicAmbiguousSearchQueuesFreshCandidate",
+      "NativeCandidateWindowRecovery/BranchAmbiguousSearchQueuesFreshCandidate",
+      "NativeCandidateWindowRecovery/ClassicVersionedWireRoundtripDoesNotEnableService",
+      "NativeCandidateWindowRecovery/BranchVersionedWireRoundtripDoesNotEnableService"
+    ],
+    "runplan": [
+      {
+        "name": "existing-decision98",
+        "expected_ids": [
+          "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
+          "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+          "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+          "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+          "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+          "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+          "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+          "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+          "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+          "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+          "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+          "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+          "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+          "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+          "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+          "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+          "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+          "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+          "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+          "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+          "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+          "BoundedTrainingCapacitance/CompleteMapFollowsProbesCandidatesAndRepeats",
+          "BoundedTrainingCapacitance/DomainCannotDiscardFullCapacitanceContext",
+          "BoundedTrainingCapacitance/LostDormantScaleRejectsOtherwiseMatchingInputReadback",
+          "BoundedTrainingCapacitance/UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension",
+          "BoundedTrainingCapacitance/UnitScaleExtensionIsRetainedAfterEdit",
+          "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference",
+          "BoundedTrainingFairDomains/EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit",
+          "BoundedTrainingFairDomains/SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves",
+          "BoundedTrainingFairDomains/ValidMeasurementsVisitGeometriesIndependentlyOfRecovery",
+          "BoundedTrainingFiniteRanking/BranchN0Overflow",
+          "BoundedTrainingFiniteRanking/BranchN0Zero",
+          "BoundedTrainingFiniteRanking/BranchN1Overflow",
+          "BoundedTrainingFiniteRanking/BranchN1Zero",
+          "BoundedTrainingFiniteRanking/ClassicN0Overflow",
+          "BoundedTrainingFiniteRanking/ClassicN0Zero",
+          "BoundedTrainingFiniteRanking/ClassicN1Overflow",
+          "BoundedTrainingFiniteRanking/ClassicN1Zero",
+          "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+          "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+          "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+          "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+          "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+          "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+          "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+          "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+          "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+          "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+          "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+          "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+          "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+          "BoundedTrainingN1GeometryFairness/ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode",
+          "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+          "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+          "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+          "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers",
+          "MeasuredCapacitanceSearch/BroadPeakIntervalsDoNotBecomeAnInventedZero",
+          "MeasuredCapacitanceSearch/ChangedBoundsCannotReuseAnOldThreePointTrend",
+          "MeasuredCapacitanceSearch/FixedDomainAndSmallBudgetDoNotManufactureCandidates",
+          "MeasuredCapacitanceSearch/InconsistentRepeatsCannotBeAveragedIntoSuccess",
+          "MeasuredCapacitanceSearch/MixedEffectivePhysicsNeverCreatesARefinement",
+          "MeasuredCapacitanceSearch/NonfiniteAndReversedIntervalsNeverPropose",
+          "MeasuredCapacitanceSearch/NonmonotoneAndFlatResponsesKeepFiniteMeshFallback",
+          "MeasuredCapacitanceSearch/OneSidedTrendProposesBoundedDampedScaleOnly",
+          "MeasuredCapacitanceSearch/SeedMeshIsFinitePositiveAbsoluteAndBounded",
+          "MeasuredCapacitanceSearch/SeedValidationRejectsUnsafeDeclarations",
+          "MeasuredCapacitanceSearch/ThreeMeasuredScalesBracketWithoutAssumingDirection",
+          "MeasuredCapacitanceSearch/WideFiniteScaleAndResidualRangesDoNotOverflowMidpoint",
+          "MeasuredLengthSearch/BracketUsesOnlyAnUnmeasuredBoundedInteger",
+          "MeasuredLengthSearch/InvalidNumbersAndDomainsNeverProposeAnEdit",
+          "MeasuredLengthSearch/NonmonotoneFlatAndAmbiguousIntervalsKeepEnumeration",
+          "MeasuredLengthSearch/RepeatedIntervalsCannotBeAveragedIntoASlope",
+          "MeasuredLengthSearch/ThreeMeasuredPointsCanProposeBeyondTheNearestMesh",
+          "MeasuredLengthSearch/WideIntegerBoundsDoNotOverflowTheMidpoint",
+          "MeasuredResistanceSearch/AMeasuredPointWithinToleranceNeedsNoInventedRefinement",
+          "MeasuredResistanceSearch/EffectiveBoundsExcludeOldPointsAndInvalidNumbersCannotProposeAnEdit",
+          "MeasuredResistanceSearch/NonmonotoneTimingInvalidAndInconsistentRepeatDataKeepMeshFallback",
+          "MeasuredResistanceSearch/ThreeMeasuredMonotonePointsProposeAnUnmeasuredInteriorResistance",
+          "MeasuredResistanceSearch/WideFiniteDomainsDoNotOverflowTheGeometricMidpoint",
+          "TrainingInvalidBudget/BranchN0",
+          "TrainingInvalidBudget/BranchN1",
+          "TrainingInvalidBudget/ClassicN0",
+          "TrainingInvalidBudget/ClassicN1",
+          "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+          "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+          "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+          "TrainingTermination/MaximumSweepsBranchN0",
+          "TrainingTermination/MaximumSweepsBranchN1",
+          "TrainingTermination/MaximumSweepsClassicN0",
+          "TrainingTermination/MaximumSweepsClassicN1",
+          "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+          "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+          "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+          "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-001",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-002",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-003",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-004",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-005",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability"
+        ],
+        "wall_seconds": 900
+      },
+      {
+        "name": "native-006",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability"
+        ],
+        "wall_seconds": 900
+      },
+      {
+        "name": "native-007",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-008",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-009",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-010",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-011",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-012",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-013",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-014",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-015",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-016",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-017",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-018",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-019",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-020",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-021",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-022",
+        "expected_ids": [
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-023",
+        "expected_ids": [
+          "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-024",
+        "expected_ids": [
+          "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-025",
+        "expected_ids": [
+          "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-026",
+        "expected_ids": [
+          "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-027",
+        "expected_ids": [
+          "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-028",
+        "expected_ids": [
+          "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-029",
+        "expected_ids": [
+          "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-030",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicN0AdvancesAndRejectsReplay"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-031",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchN0AdvancesAndRejectsReplay"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-032",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicN1ReassessesActualDomains"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-033",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchN1ReassessesActualDomains"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-034",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicN0RepeatedCandidatesRequireFreshAnchor"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-035",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchN0RepeatedCandidatesRequireFreshAnchor"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-036",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicDefaultPolicyCannotAdvance"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-037",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchDefaultPolicyCannotAdvance"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-038",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicStringCannotAuthorizeAdvance"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-039",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchStringCannotAuthorizeAdvance"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-040",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishInvalidBudget"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-041",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishProbeBudget"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-042",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishEditBudget"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-043",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ExternalStopRevokesPendingRecovery"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-044",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/WrongRevisionCannotAdvance"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-045",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicAmbiguousSearchQueuesFreshCandidate"
+        ],
+        "wall_seconds": 900
+      },
+      {
+        "name": "native-046",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchAmbiguousSearchQueuesFreshCandidate"
+        ],
+        "wall_seconds": 900
+      },
+      {
+        "name": "native-047",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/ClassicVersionedWireRoundtripDoesNotEnableService"
+        ],
+        "wall_seconds": 600
+      },
+      {
+        "name": "native-048",
+        "expected_ids": [
+          "NativeCandidateWindowRecovery/BranchVersionedWireRoundtripDoesNotEnableService"
+        ],
+        "wall_seconds": 600
+      }
+    ],
+    "partitions": [
+      {
+        "name": "existing-decision-regressions",
+        "ids": [
+          "BoundedCandidateRecovery/AdvancingDoesNotReplenishInvalidBudgetOrInventFeasibility",
+          "BoundedCandidateRecovery/FinalVerificationNeverSkipsAnUnassignedInput",
+          "BoundedCandidateRecovery/OptInAdvancesWhileDefaultRetriesTheSameCandidate",
+          "BoundedCandidateRecovery/OtherObservationFailuresCannotAdvanceTheCandidateCursor",
+          "BoundedCandidateRecovery/RetiringPartialN0RepeatsRequiresFreshMeasurementsOfTheNextPoint",
+          "BoundedCandidateRecovery/UnassignedRestoredBestCannotReuseItsOldMeasuredCertificate",
+          "BoundedCandidateRecovery/ZeroAllowanceAndUnknownPoliciesAreRejected",
+          "BoundedTraining/AppliedReadbackAndProbeRevisionAreMandatory",
+          "BoundedTraining/CoincidentBranchInputsCannotHideChangesToTheFixedAnchor",
+          "BoundedTraining/ColdBranchReverseOrderPropagatesOnlyUnvisitedAttachments",
+          "BoundedTraining/EffectiveDomainContextAndNumbersAreValidatedBeforeAnEdit",
+          "BoundedTraining/EmptyEffectiveDomainsReachSweepBudgetWithFreshFinalMeasurements",
+          "BoundedTraining/IndependentEffectiveDomainsDoNotRequireACommonInterval",
+          "BoundedTraining/IndependentResistanceBoundsAndNoCommonIntersection",
+          "BoundedTraining/LaterSharedPhysicsDamageCannotInheritLocalSuccess",
+          "BoundedTraining/MeasuredNonmonotoneLengthsAndFixedAnchorRequireFreshAllInputGate",
+          "BoundedTraining/MissingAmbiguousOrIncompletePeaksCannotDriveEdits",
+          "BoundedTraining/Ns128IsJudgedByActualResidualAndQuantizationNeverBecomesExact",
+          "BoundedTraining/RejectedPreviewAdvancesOnlyWhenTheLiveModelStayedUnchanged",
+          "BoundedTraining/SearchBudgetAndExternalStopNeverCreateCertificate",
+          "BoundedTraining/SingleInputStillRequiresRealFinalProbe",
+          "BoundedTrainingCapacitance/CompleteMapFollowsProbesCandidatesAndRepeats",
+          "BoundedTrainingCapacitance/DomainCannotDiscardFullCapacitanceContext",
+          "BoundedTrainingCapacitance/LostDormantScaleRejectsOtherwiseMatchingInputReadback",
+          "BoundedTrainingCapacitance/UndeclaredTrimOfNewChannelIsNotAUnitGrowthExtension",
+          "BoundedTrainingCapacitance/UnitScaleExtensionIsRetainedAfterEdit",
+          "BoundedTrainingFairDomains/BranchVariantsRetainPhysicalBankLegalityAndTheFixedReference",
+          "BoundedTrainingFairDomains/EveryGeometryReturnReassessesChangedBoundsBeforeAnEdit",
+          "BoundedTrainingFairDomains/SmallInvalidBudgetCoversSeveralGeometriesWithoutAcceptingMissingWaves",
+          "BoundedTrainingFairDomains/ValidMeasurementsVisitGeometriesIndependentlyOfRecovery",
+          "BoundedTrainingFiniteRanking/BranchN0Overflow",
+          "BoundedTrainingFiniteRanking/BranchN0Zero",
+          "BoundedTrainingFiniteRanking/BranchN1Overflow",
+          "BoundedTrainingFiniteRanking/BranchN1Zero",
+          "BoundedTrainingFiniteRanking/ClassicN0Overflow",
+          "BoundedTrainingFiniteRanking/ClassicN0Zero",
+          "BoundedTrainingFiniteRanking/ClassicN1Overflow",
+          "BoundedTrainingFiniteRanking/ClassicN1Zero",
+          "BoundedTrainingLengthCandidates/BranchN0UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/BranchN1UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/ClassicN0UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/ClassicN1UsesMeasuredDelayTrendWithinOriginalBudget",
+          "BoundedTrainingLengthCandidates/N0ProposalWaitsForRequiredCandidateRepetitions",
+          "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+          "BoundedTrainingLengthCandidates/NonmonotoneMeasurementsRetainTheBoundedLengthScan",
+          "BoundedTrainingLengthCandidates/PredictedPointIsMeasuredAndCannotBypassTheFinalGate",
+          "BoundedTrainingN0Candidates/BranchTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+          "BoundedTrainingN0Candidates/ClassicTimingReadyLengthGetsNearbyNsBeforeDistantLengths",
+          "BoundedTrainingN0Candidates/LengthOnlySearchKeepsItsOriginalBudget",
+          "BoundedTrainingN0Candidates/PriorityWaitsForAllRequiredObservations",
+          "BoundedTrainingN0Candidates/WorseNeighborReturnsToLengthsAndIsNotIssuedTwice",
+          "BoundedTrainingN0Repeats/BudgetDoesNotTurnOneSuccessfulMeasurementIntoRepeatedEvidence",
+          "BoundedTrainingN0Repeats/Cap128CanPassWithTwoActualMeasurements",
+          "BoundedTrainingN0Repeats/NoOpN1AndInvalidRepeatCountsAreRejected",
+          "BoundedTrainingN0Repeats/SecondObservationCanRejectAnApparentlyExactCandidate",
+          "BoundedTrainingN1GeometryFairness/ValidDenseResistanceMeshDoesNotStarveOtherLengthsInEitherRecoveryMode",
+          "BoundedTrainingN1Refinement/AChangedNormalizedPhysicalScopeOrSourceCannotReuseTheOldBracket",
+          "BoundedTrainingN1Refinement/AMeasuredBracketCanReachBetweenMeshPointsButStillNeedsFreshFinalVerification",
+          "CandidateRecoveryEvidenceCodec/FullOwnedCapacitanceSurvivesJson",
+          "CandidateRecoveryEvidenceCodec/RejectsUnknownEnumsAndNonfiniteOrInexactNumbers",
+          "MeasuredCapacitanceSearch/BroadPeakIntervalsDoNotBecomeAnInventedZero",
+          "MeasuredCapacitanceSearch/ChangedBoundsCannotReuseAnOldThreePointTrend",
+          "MeasuredCapacitanceSearch/FixedDomainAndSmallBudgetDoNotManufactureCandidates",
+          "MeasuredCapacitanceSearch/InconsistentRepeatsCannotBeAveragedIntoSuccess",
+          "MeasuredCapacitanceSearch/MixedEffectivePhysicsNeverCreatesARefinement",
+          "MeasuredCapacitanceSearch/NonfiniteAndReversedIntervalsNeverPropose",
+          "MeasuredCapacitanceSearch/NonmonotoneAndFlatResponsesKeepFiniteMeshFallback",
+          "MeasuredCapacitanceSearch/OneSidedTrendProposesBoundedDampedScaleOnly",
+          "MeasuredCapacitanceSearch/SeedMeshIsFinitePositiveAbsoluteAndBounded",
+          "MeasuredCapacitanceSearch/SeedValidationRejectsUnsafeDeclarations",
+          "MeasuredCapacitanceSearch/ThreeMeasuredScalesBracketWithoutAssumingDirection",
+          "MeasuredCapacitanceSearch/WideFiniteScaleAndResidualRangesDoNotOverflowMidpoint",
+          "MeasuredLengthSearch/BracketUsesOnlyAnUnmeasuredBoundedInteger",
+          "MeasuredLengthSearch/InvalidNumbersAndDomainsNeverProposeAnEdit",
+          "MeasuredLengthSearch/NonmonotoneFlatAndAmbiguousIntervalsKeepEnumeration",
+          "MeasuredLengthSearch/RepeatedIntervalsCannotBeAveragedIntoASlope",
+          "MeasuredLengthSearch/ThreeMeasuredPointsCanProposeBeyondTheNearestMesh",
+          "MeasuredLengthSearch/WideIntegerBoundsDoNotOverflowTheMidpoint",
+          "MeasuredResistanceSearch/AMeasuredPointWithinToleranceNeedsNoInventedRefinement",
+          "MeasuredResistanceSearch/EffectiveBoundsExcludeOldPointsAndInvalidNumbersCannotProposeAnEdit",
+          "MeasuredResistanceSearch/NonmonotoneTimingInvalidAndInconsistentRepeatDataKeepMeshFallback",
+          "MeasuredResistanceSearch/ThreeMeasuredMonotonePointsProposeAnUnmeasuredInteriorResistance",
+          "MeasuredResistanceSearch/WideFiniteDomainsDoNotOverflowTheGeometricMidpoint",
+          "TrainingInvalidBudget/BranchN0",
+          "TrainingInvalidBudget/BranchN1",
+          "TrainingInvalidBudget/ClassicN0",
+          "TrainingInvalidBudget/ClassicN1",
+          "TrainingTermination/ExactAtLastAllowedSweepTakesPrecedence",
+          "TrainingTermination/FinalRejectionDoesNotBorrowEarlierSearchDiagnostic",
+          "TrainingTermination/InvalidMeasurementsRemainInvalidObservation",
+          "TrainingTermination/MaximumSweepsBranchN0",
+          "TrainingTermination/MaximumSweepsBranchN1",
+          "TrainingTermination/MaximumSweepsClassicN0",
+          "TrainingTermination/MaximumSweepsClassicN1",
+          "TrainingTermination/NoAdjustableInputsRemainSearchUnresolved",
+          "TrainingTermination/ProbeAndAdapterBudgetReasonsAreDistinct",
+          "UnassignedBurstCandidate/CorruptionAndOtherFailureCausesCannotAuthorizeAdvancing",
+          "UnassignedBurstCandidate/OnlyClosedMissingOrExtraBurstWavesCanAuthorizeAdvancing"
+        ],
+        "count": 98
+      },
+      {
+        "name": "accepted-rejection-factory",
+        "ids": [
+          "NativeCandidateWindowRejection/ClassicCompleteMissingSearchHasClosedCapability",
+          "NativeCandidateWindowRejection/BranchCompleteMissingSearchHasClosedCapability",
+          "NativeCandidateWindowRejection/Classic20000MissingSearchHasClosedCapability",
+          "NativeCandidateWindowRejection/Branch20000MissingSearchHasClosedCapability",
+          "NativeCandidateWindowRejection/ClassicCompleteAmbiguousSearchHasClosedCapability",
+          "NativeCandidateWindowRejection/BranchCompleteAmbiguousSearchHasClosedCapability",
+          "NativeCandidateWindowRejection/ClassicDefaultDoesNotCreateCapability",
+          "NativeCandidateWindowRejection/BranchDefaultDoesNotCreateCapability",
+          "NativeCandidateWindowRejection/ClassicPartialSearchCannotPromote",
+          "NativeCandidateWindowRejection/BranchPartialSearchCannotPromote",
+          "NativeCandidateWindowRejection/ClassicRejectedReferenceCannotPromote",
+          "NativeCandidateWindowRejection/BranchRejectedReferenceCannotPromote",
+          "NativeCandidateWindowRejection/ClassicRejectedFinalCannotPromote",
+          "NativeCandidateWindowRejection/BranchRejectedFinalCannotPromote",
+          "NativeCandidateWindowRejection/ClassicExpiredGroupBudgetCannotPromote",
+          "NativeCandidateWindowRejection/BranchExpiredGroupBudgetCannotPromote",
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterCancel",
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterLearnerReset",
+          "NativeCandidateWindowRejection/CapabilityExpiresWhenNextGroupCloses",
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterAttemptDestruction",
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterSameSemanticGraphRebuild",
+          "NativeCandidateWindowRejection/CapabilityExpiresAfterExternalStop",
+          "NativeCandidateWindowFactory/ClassicCompleteReferencesAndActualReplayedCandidate",
+          "NativeCandidateWindowFactory/BranchCompleteReferencesAndActualReplayedCandidate",
+          "NativeCandidateWindowFactory/Classic20000ActualReplayedCandidate",
+          "NativeCandidateWindowFactory/Branch20000ActualReplayedCandidate",
+          "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+          "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+          "NativeArchiveOwnership/MoveRetainsDecodedPrimaryStorageAndCopyIsIndependent"
+        ],
+        "count": 29
+      },
+      {
+        "name": "typed-search-core-and-versioned-wire",
+        "ids": [
+          "NativeCandidateWindowRecovery/ClassicN0AdvancesAndRejectsReplay",
+          "NativeCandidateWindowRecovery/BranchN0AdvancesAndRejectsReplay",
+          "NativeCandidateWindowRecovery/ClassicN1ReassessesActualDomains",
+          "NativeCandidateWindowRecovery/BranchN1ReassessesActualDomains",
+          "NativeCandidateWindowRecovery/ClassicN0RepeatedCandidatesRequireFreshAnchor",
+          "NativeCandidateWindowRecovery/BranchN0RepeatedCandidatesRequireFreshAnchor",
+          "NativeCandidateWindowRecovery/ClassicDefaultPolicyCannotAdvance",
+          "NativeCandidateWindowRecovery/BranchDefaultPolicyCannotAdvance",
+          "NativeCandidateWindowRecovery/ClassicStringCannotAuthorizeAdvance",
+          "NativeCandidateWindowRecovery/BranchStringCannotAuthorizeAdvance",
+          "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishInvalidBudget",
+          "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishProbeBudget",
+          "NativeCandidateWindowRecovery/RecoveryDoesNotReplenishEditBudget",
+          "NativeCandidateWindowRecovery/ExternalStopRevokesPendingRecovery",
+          "NativeCandidateWindowRecovery/WrongRevisionCannotAdvance",
+          "NativeCandidateWindowRecovery/ClassicAmbiguousSearchQueuesFreshCandidate",
+          "NativeCandidateWindowRecovery/BranchAmbiguousSearchQueuesFreshCandidate",
+          "NativeCandidateWindowRecovery/ClassicVersionedWireRoundtripDoesNotEnableService",
+          "NativeCandidateWindowRecovery/BranchVersionedWireRoundtripDoesNotEnableService"
+        ],
+        "count": 19
+      }
+    ]
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-wire-c2/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryWireC2-20261111/native-job.json",
+    "sha256": "42d124457239351384128f65f92f1a05760182515596e338d525fb6f7eaac271"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-window-recovery-wire-canonical-m40-c2",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+    "commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a"
+  },
+  "require_fresh_build": true
+}

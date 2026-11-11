@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-window-recovery-wire-canonical-m40-c2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/window-recovery-wire-c2/Docs/StructTrain/TimeLearner/ValidationPlans/M40CandidateWindowRecoveryWireC2-20261111/canonical-plan.json",
+      "sha256": "da88a7e2f517203a4f7ebb7c1e89fdbaa3ff1bc6b4b154d2bf868f5e5d96d202"
+    }
+  }
+}
