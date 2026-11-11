@@ -22,9 +22,14 @@ def replay(native, group_numbers):
     summary_path = native/'train_stopped_summary.json'
     raw_package, raw_summary = package_path.read_bytes(), summary_path.read_bytes()
     package, summary = load(package_path), load(summary_path)
-    require(package['schema_version'] == 6, 'window_replay_requires_candidate_window_package')
+    version = count(package['schema_version'])
+    require(version in (6, 7), 'window_replay_requires_candidate_window_package')
     resolver = filesystem_primary_resolver(native)
-    audit = audit_composite_package(package, summary, external_resolver=resolver)
+    if version == 7:
+        from .candidate_window_package_evidence import audit_candidate_window_recovery_package
+        audit = audit_candidate_window_recovery_package(package, summary, external_resolver=resolver)
+    else:
+        audit = audit_composite_package(package, summary, external_resolver=resolver)
     records = package['measurement_archive']['records']
     require(type(group_numbers) is list and group_numbers and
             all(type(i) is int and 0 < i <= len(records) for i in group_numbers) and
