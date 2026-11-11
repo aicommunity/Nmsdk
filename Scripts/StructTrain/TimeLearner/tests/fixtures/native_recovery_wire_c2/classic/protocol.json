@@ -1,0 +1,103 @@
+{
+    "composite_measurement": {
+        "candidate_window_policy": {
+            "coordinate_mode": "relative_native_frame_interval",
+            "inputs": [
+                {
+                    "base_left_guard_frames": 20,
+                    "base_right_guard_frames": 20,
+                    "capacitance_change_guard_frames": 0,
+                    "delay_frames_per_segment": 20,
+                    "hard_first_frame": 1,
+                    "hard_last_frame": 539,
+                    "length_guard_frames": 0,
+                    "maximum_window_frames": 100,
+                    "resistance_change_guard_frames": 0,
+                    "synapse_count_guard_frames": 0
+                },
+                {
+                    "base_left_guard_frames": 20,
+                    "base_right_guard_frames": 20,
+                    "capacitance_change_guard_frames": 0,
+                    "delay_frames_per_segment": 20,
+                    "hard_first_frame": 1,
+                    "hard_last_frame": 539,
+                    "length_guard_frames": 0,
+                    "maximum_window_frames": 100,
+                    "resistance_change_guard_frames": 0,
+                    "synapse_count_guard_frames": 0
+                }
+            ],
+            "maximum_feature_terms": 4096,
+            "policy_id": "reference-anchored-candidate-window-v1",
+            "proposals_per_logical_request": 1,
+            "schema_version": 1,
+            "seed_rule": "immutable_reference_full_before"
+        },
+        "context_policy": {
+            "baseline_absolute": 1e-12,
+            "comparison_radius_ticks": 1,
+            "influence_absolute": 1e-06,
+            "influence_relative": 0,
+            "maximum_native_probes": 4,
+            "maximum_samples": 540,
+            "maximum_total_samples": 2160,
+            "repeatability_absolute": 1e-10,
+            "repeatability_relative": 0,
+            "schema_version": 1,
+            "time_comparison_tolerance": 1e-10
+        },
+        "geometry_policy": {
+            "maximum_inputs": 2,
+            "maximum_samples": 540,
+            "maximum_total_samples": 2160,
+            "repeatability_absolute": 1e-10,
+            "schema_version": 1
+        },
+        "method_id": "declared-window-basin-necessity-v1",
+        "reference_input_windows": [
+            {
+                "begin_offset": 0.009,
+                "end_offset": 0.035
+            },
+            {
+                "begin_offset": 0.089,
+                "end_offset": 0.15
+            }
+        ],
+        "schema_version": 2
+    },
+    "inputs": [
+        {
+            "id": "input0",
+            "stimulus_id": "pulse0"
+        },
+        {
+            "id": "input1",
+            "stimulus_id": "pulse1"
+        }
+    ],
+    "maximum_sample_gap": 5e-04,
+    "minimum_amplitude": 1e-06,
+    "origin_stimulus_id": "pulse0",
+    "pattern_hash": "0d0e9aa732ccc9002d8bd4a81b1eef3b5c657a85a8648ce82c63706a9934b15b",
+    "peak_selection": "isolated_window",
+    "revision": "native-declared-basin-train-fixture-v1",
+    "routing": "classic_burst",
+    "sample_id": "sample0",
+    "schema_version": 5,
+    "stimulus_ids": [
+        "pulse0",
+        "pulse1"
+    ],
+    "stimulus_profile": {
+        "amplitude": 1,
+        "frequency_deviation": 0,
+        "frequency_hz": 2000,
+        "generator_class": "NPulseGeneratorTransit",
+        "pulse_length": 0.001,
+        "use_pattern_output": false,
+        "use_transit_signal": false
+    },
+    "wave_assignment": "window_only"
+}
