@@ -133,3 +133,63 @@ Linux/vcpkg требует системных X11/XCB/OpenGL-пакетов, п�
 - [Qt 6.5 supported platforms](https://doc.qt.io/qt-6.5/supported-platforms.html)
 - [Qt 6.8 Windows support](https://doc.qt.io/qt-6.8/windows.html)
 
+
+
+## VSCode: смена ветки и выбор vcpkg
+
+Не переключайте ветку во время configure/build: CMake повторно читает toolchain
+после установки зависимостей, и при переходе на ветку без него конфигурация упадёт.
+После смены ветки дождитесь перечитывания пресетов; если остался старый кэш,
+выполните **CMake: Delete Cache and Reconfigure** на нужной ветке. Каталог `.deps`
+удалять не требуется.
+
+CMake Tools может заменить `VCPKG_ROOT` при загрузке окружения Visual Studio.
+Если выбран встроенный `VC/vcpkg`, toolchain восстанавливает явно заданный
+Windows user/machine `VCPKG_ROOT` (пользовательский имеет приоритет).
+Обычный внешний `VCPKG_ROOT` из shell остаётся без изменений.
+Для намеренного выбора другого checkout, включая встроенный в VS, задайте
+cache variable `NMSDK_VCPKG_ROOT` в своём `CMakeUserPresets.json` или передайте
+`-DNMSDK_VCPKG_ROOT=...`. Этот явный параметр имеет наивысший приоритет.
+Абсолютный путь в локальном пользовательском пресете не коммитится.
+`cmake.environment` не используется как способ переопределения preset environment.
+
+## Диагностика и выбор локального Qt в VSCode
+
+`Scripts/Diagnose-Qt.ps1` не меняет конфигурацию. Он опрашивает `qmake -query`,
+проверяет версию и MSVC metadata, архитектуру DLL, обязательные CMake-модули,
+импортные библиотеки и DLL для Debug/Release, Windows platform plugins и windeployqt.
+Это предварительная проверка целостности kit; окончательная проверка — сборка проекта.
+
+```powershell
+./Scripts/Diagnose-Qt.ps1
+./Scripts/Diagnose-Qt.ps1 -SearchRoot <каталог-с-версиями-Qt>
+./Scripts/Diagnose-Qt.ps1 -Root <конкретный-kit> -CompilerVersion 19.44
+./Scripts/Diagnose-Qt.ps1 -Root <конкретный-kit> -WithWebEngine
+```
+
+Без `-Root` кандидаты берутся из process/user/machine `QT_ROOT`, `CMAKE_PREFIX_PATH`,
+PATH, CMake package registry и настроек Qt Creator. `-SearchRoot` дополнительно
+просматривает только два уровня каталогов (версия/kit), без сканирования диска.
+Явный `-Root` ограничивает проверку указанными kit, без подстановки Qt из окружения.
+При обнаружении нескольких подходящих kit автоматического выбора нет.
+
+Чтобы выбирать версию Qt в интерфейсе VSCode, один раз выполните:
+
+```powershell
+./Scripts/Register-LocalQtPresets.ps1 -SearchRoot <каталог-с-версиями-Qt>
+```
+
+Команда добавляет Debug/Release для VS2022 Ninja в игнорируемый Git
+`CMakeUserPresets.json`. Например: `Qt 5.15.2 (msvc2019_64) | MSVC 2022 ninja release`.
+Затем выполните **CMake: Select Configure Preset** и выберите нужную строку;
+при необходимости выберите одноимённый **Build Preset**. Кнопка **Configure**
+использует уже выбранный вариант и не показывает отдельный диалог Qt.
+Если список не обновился, выполните **Developer: Reload Window**.
+
+Для других компиляторов/генераторов передайте `-BasePreset` с именами общих
+`*-localqt` пресетов. Для WebEngine используйте `-WithWebEngine`.
+Неполные kit исключаются. Для каждого kit создаётся отдельный каталог сборки;
+зависимости продолжают использовать общую установку соответствующего профиля `.deps`.
+Повторный запуск обновляет сгенерированные записи, сохраняя остальные пользовательские
+пресеты. Предыдущий файл сохраняется в `.build-audit/CMakeUserPresets.before-qt.json`.
+Локальные абсолютные пути в общий `CMakePresets.json` не попадают.
