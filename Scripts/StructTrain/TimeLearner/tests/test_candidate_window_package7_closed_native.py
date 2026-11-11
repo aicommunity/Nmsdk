@@ -7,6 +7,7 @@ from copy import deepcopy
 import hashlib
 import json
 import os
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
@@ -16,6 +17,7 @@ from ..composite_primary import filesystem_primary_resolver
 from ..model_identity import canonical_model_sha256 as digest
 from ..native_evidence import EvidenceError, load, require
 from ..portable_primary import restore_native_bundle
+from ..native_pipeline_worker import _snapshot_source
 
 
 def resign(document):
@@ -123,3 +125,45 @@ class ClosedNativePackage7SourceTest(unittest.TestCase):
         source='case/native-composite/package7/source-package.json'
         self.assertEqual(hashlib.sha256((self.restored/source).read_bytes()).hexdigest(),
                          self.bundle['members'][source]['sha256'])
+
+    def _transfer_source(self, root):
+        source=root/'source'
+        shutil.copytree(self.directory,source)
+        package=source/'model_stopped_state.json'
+        package.write_bytes((source/'source-package.json').read_bytes())
+        (source/'model_stopped_summary.json').write_bytes((source/'source-summary.json').read_bytes())
+        return package
+
+    def test_pipeline_snapshot_preserves_actual_package7_summary_and_all_primary(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source=self._transfer_source(root);destination=root/'snapshot'
+            copied=_snapshot_source(source,destination,diagnostic=True)
+            self.assertEqual(copied.read_bytes(),source.read_bytes())
+            summary=destination/'model_stopped_summary.json'
+            self.assertEqual(summary.read_bytes(),source.with_name(summary.name).read_bytes())
+            resolver=filesystem_primary_resolver(destination)
+            result=audit_candidate_window_recovery_package(load(copied),load(summary),external_resolver=resolver)
+            self.assertEqual(result,self.audit)
+            expected={trial['primary_ref']['relative_path']
+                      for group in self.package['measurement_archive']['records'] for trial in group['raw_trials']}
+            expected.update((copied.name,summary.name))
+            self.assertEqual({p.relative_to(destination).as_posix() for p in destination.rglob('*') if p.is_file()},expected)
+
+    def test_pipeline_snapshot_rejects_changed_external_primary_before_writing(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source=self._transfer_source(root);destination=root/'snapshot'
+            name=self.package['measurement_archive']['records'][0]['raw_trials'][0]['primary_ref']['relative_path']
+            primary=source.parent/name
+            primary.write_bytes(primary.read_bytes()+b'changed')
+            with self.assertRaisesRegex(EvidenceError,'composite_external_primary_mismatch'):
+                _snapshot_source(source,destination,diagnostic=True)
+            self.assertFalse(destination.exists())
+
+    def test_pipeline_snapshot_cannot_hide_missing_primary_with_embedded_bytes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);source=self._transfer_source(root);destination=root/'snapshot'
+            name=self.package['measurement_archive']['records'][0]['raw_trials'][0]['primary_ref']['relative_path']
+            (source.parent/name).unlink()
+            with self.assertRaisesRegex(EvidenceError,'composite_primary_missing_or_escape'):
+                _snapshot_source(source,destination,diagnostic=True)
+            self.assertFalse(destination.exists())

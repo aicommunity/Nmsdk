@@ -377,12 +377,14 @@ def _snapshot_source(source, destination, *, diagnostic=False):
     source = Path(source).resolve(strict=True)
     stem = source.name.removesuffix("_stopped_state.json" if diagnostic else "_learned_state.json")
     package = load(source)
-    if package.get('schema_version') in (5,6):
+    if package.get('schema_version') in (5,6,7):
         from .composite_package_evidence import audit_composite_package
-        from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths
+        from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths, filesystem_primary_resolver
         summary_path = source.with_name(stem + ('_stopped_summary.json' if diagnostic else '_learned_summary.json'))
         summary = load(summary_path) if summary_path.exists() else None
-        audit_composite_package(package, summary)
+        # The supplied files are the transfer source. Embedded trace bytes must
+        # not hide a missing or modified external primary, including package7.
+        audit_composite_package(package, summary, external_resolver=filesystem_primary_resolver(source.parent))
         archive = package['measurement_archive']
         references = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
         primary = capture_primary_blobs(archive['primary_blobs'], references, archive['maximum_total_primary_bytes'])
