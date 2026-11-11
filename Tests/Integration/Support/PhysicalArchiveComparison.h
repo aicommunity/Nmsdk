@@ -39,8 +39,9 @@ inline QJsonObject LearnedStateComparisonView(QJsonObject package)
     if(!digest.isString() || digest.toString() != NmsdkTools::CanonicalModelDataSha256(package))
         throw std::invalid_argument("learned_state_comparison_digest");
     const int version = package["schema_version"].toInt();
-    if((version != 5 && version != 6) || package["schema_version"] != QJsonValue(version) ||
-       package["dynamic_checkpoint"] != QJsonValue(false) || !package["neuron"].isObject())
+    if((version != 5 && version != 6 && version != 7) || package["schema_version"] != QJsonValue(version) ||
+       package["dynamic_checkpoint"] != QJsonValue(false) || !package["neuron"].isObject() ||
+       (version == 7 && !package["recovery_ledger"].isObject()))
         throw std::invalid_argument("learned_state_comparison_schema");
     package["neuron"] = PhysicalArchiveComparisonView(package["neuron"].toObject());
     return package;

@@ -48,6 +48,7 @@
 #include <stdexcept>
 #include <type_traits>
 #include <thread>
+#include <tuple>
 #if defined(__linux__)
 #include <sys/resource.h>
 #endif
@@ -4379,7 +4380,7 @@ template<class Owner> void NativeRecoveryService(bool n1=false,ServiceRecoveryIn
         SavePortableObject("recovery-service","runtime-plan.json",EncodeCandidateWindowRuntimePlan(service.Plan()));
         SavePortableObject("recovery-service","deliveries.json",QJsonObject{{"kind","native_recovery_service_fixture"},{"schema_version",1},{"deliveries",events}});
         const auto revision=f.Revision();
-        RequireRecoveryDiagnostic([&]{EncodeNativeTrainingState(service,revision,f.owner->ReadNativeParameters());},
+        RequireRecoveryDiagnostic([&]{EncodeNativeCandidateWindowTrainingState(service,revision,f.owner->ReadNativeParameters());},
             "candidate_window_recovery_requires_versioned_summary_ledger");
         RequireRecoveryDiagnostic([&]{NativeCandidateWindowStateFactory::Export(*f.owner,f.modelSpec,service,
             f.owner->ReadNativeParameters(),2,1,1,"native-recovery-service-fixture",nullptr);},
@@ -4390,7 +4391,7 @@ template<class Owner> void NativeRecoveryService(bool n1=false,ServiceRecoveryIn
         f.owner->BeginNativeTraining(retry);ASSERT_EQ(service.State(),NativeTrainingState::Searching)<<service.Reason();
         EXPECT_EQ(service.CandidateWindowRecoveryDeliveries().size(),count);
         RequireRecoveryDiagnostic([&]{EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());},
-            "candidate_window_recovery_requires_versioned_summary_ledger");
+            "candidate_window_summary_requires_owned_finished_boundary");
         f.owner->Reset();auto target=f.owner->InputPattern.GetData();target(1,0)+=.01;f.owner->InputPattern=target;
         EXPECT_TRUE(service.CandidateWindowRecoveryDeliveries().empty());EXPECT_TRUE(service.CandidateWindowRecoveryDeliveryLogIntact());
     }
@@ -4488,3 +4489,174 @@ TEST(NativeCandidateWindowRecoveryEventCodec,ChangedBytesAndInconsistentOutcomeC
     wire["transition"]=transition;
     EXPECT_THROW(DecodeCandidateWindowRecoveryEvidence(RehashRecoveryData(wire)),std::invalid_argument);
 }
+
+namespace {
+constexpr const char* RecoveryPackageImplementation="native-recovery-package7-fixture";
+struct RecoveryPackageFixtureData {QJsonObject package;std::vector<NativeProbeSample> response;};
+
+template<class Owner> std::vector<NativeProbeSample> RecoveryBoundaryResponse(NativeCompositeFixture<Owner>& f) {
+    const auto& service=f.owner->NativeTrainingController();Require(service.State()==NativeTrainingState::Finished,"recovery_response_requires_closed_boundary");
+    f.owner->IsNeedToTrain=false;auto request=service.Plan().probe;
+    request.specification.runId="package7-response";request.specification.trialId="package7-response/solo0";
+    request.routing=service.Plan().protocol.routing;request.activeInput=0;
+    request.inputId=service.Plan().protocol.inputs[0].id;request.protocolRevision=service.Plan().protocol.revision;
+    request.baseModelRevision=f.Revision();request.modelEpoch=service.ModelEpoch();
+    request.readModelRevision=[&f]{return f.Revision();};request.readFullModelRevision=request.readModelRevision;
+    auto samples=std::make_shared<std::vector<NativeProbeSample>>();
+    request.onSample=[samples](const NativeProbeSample& sample){samples->push_back(sample);};
+    f.owner->QueueNativeProbe(std::move(request));std::size_t ticks=0;
+    while(++ticks<4*f.frequency) {
+        f.model->Calculate();f.environment->IncreaseModelTimeByStep();
+        const auto state=f.owner->NativeProbeState();if(state!=NativeProbeStatus::Queued && state!=NativeProbeStatus::Running)break;
+    }
+    Require(ticks<4*f.frequency,"recovery_response_timeout");const auto result=f.owner->TakeNativeProbeResult();
+    Require(result && result->status==NativeProbeStatus::Completed && result->observation && result->observation->complete &&
+        !samples->empty(),"recovery_response_incomplete");
+    // Raw waveform readback only; an ambiguous scalar peak does not make this
+    // a training reference, a certificate, or a classification evaluation.
+    return *samples;
+}
+void SaveRecoveryResponse(const char* name,const std::vector<NativeProbeSample>& samples) {
+    QJsonArray rows;const auto begin=samples.front().time;
+    for(const auto& sample:samples) {QJsonArray row{sample.time-begin,sample.stimulus};
+        for(double value:sample.potentials)row.append(value);rows.append(row);}
+    SavePortableObject("package7",name,{{"kind","native_boundary_response_fixture"},{"schema_version",1},
+        {"routing","native_burst_active_input0"},{"relative_time_stimulus_potentials",rows},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+}
+template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bool n1=false,bool completed=false,bool c0=false) {
+    static std::map<std::tuple<bool,bool,bool>,RecoveryPackageFixtureData> cache;
+    const auto key=std::make_tuple(n1,completed,c0);const auto found=cache.find(key);if(found!=cache.end())return found->second;
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);auto c=ActualCold7Declaration(f);
+    c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
+    c.search.maximumInvalidObservations=2;c.search.maximumProbes=32;c.search.maximumEdits=8;
+    c.search.maximumCandidatesPerInput=completed?1:4;c.search.maximumSweeps=1;c.search.resistanceSubdivisionDepth=0;
+    c.search.normalization=c.model.normalization;c.search.tolerances.sync=completed?.2:0.;c.maximumModelSeconds=100.;
+    if(!completed) {
+        c.search.bounds[0].minimumLength=2;c.search.bounds[0].maximumLength=4;
+        auto& window=c.candidateWindowPolicy->inputs[0];window.delayFramesPerSegment=3*f.frequency/100;
+        window.baseLeftGuardFrames=window.baseRightGuardFrames=2;
+    }
+    if(c0) {
+        StorageProfileSpec profile;const auto* test=::testing::UnitTest::GetInstance()->current_test_info();
+        profile.name=std::string(test->test_suite_name())+"_"+test->name()+"_RecoveryAsymmetric";
+        profile.neuronBaseClass="NSPNeuronGen";profile.frequencyHz=2000;profile.initialThreshold=1.;
+        profile.body.inhChannel.capacity=2e-9;profile.body.inhChannel.resistance=9e7;profile.body.inhChannel.restingResistance=9e7;
+        c.model.neuronClass=RegisterStorageProfile(f.storage,f.environment,profile).neuronClass;
+        c.recordCapacitanceHistory=true;c.capacitanceMaximumRelativeChange=.2;
+    }
+    f.attempt.reset();f.owner->Default();f.owner->SetGlobalTimeStep(2000);f.owner->EnablePostTrainTuning=false;
+    f.owner->AutoCalibrateFixedLTZThreshold=false;f.owner->IsNeedToTrain=false;f.owner->CalculateMode=1;
+    f.owner->ControllerConfiguration=QJsonDocument(EncodeConfiguredNativeTraining(c)).toJson(QJsonDocument::Compact).toStdString();
+    f.owner->ControllerVersion=2;f.owner->Build();f.model->Init();f.model->Reset();f.modelSpec=c.model;
+    Require(f.owner->ConfiguredModelInitialized.GetData(),"recovery_package_configured_cold_not_built");
+    f.owner->IsNeedToTrain=true;ServiceTicks(f);const auto& service=f.owner->NativeTrainingController();
+    Require(service.State()==NativeTrainingState::Finished,"recovery_package_boundary_not_finished");
+    Require(bool(service.Certificate())==completed,"recovery_package_unexpected_certificate");
+    Require(service.CandidateWindowRecoveryDeliveries().empty()==completed,"recovery_package_event_fixture_not_reached");
+    auto response=RecoveryBoundaryResponse(f);const auto neuron=f.owner->template GetComponentL<UNet>("Neuron",true);
+    const auto dataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
+    const auto neuronBefore=LivePackageComponentXml(neuron),datasetBefore=LivePackageComponentXml(dataset);
+    const auto package=f.owner->ExportNativeLearnedState(RecoveryPackageImplementation);
+    EXPECT_EQ(LivePackageComponentXml(neuron),neuronBefore);EXPECT_EQ(LivePackageComponentXml(dataset),datasetBefore);
+    Require(package["schema_version"]==QJsonValue(7),"recovery_package_public_export_not_version7");
+    const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());
+    EXPECT_EQ(summary["schema_version"],QJsonValue(8));EXPECT_EQ(summary["recovery_ledger"],package["recovery_ledger"]);
+    SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),"package7");
+    SavePortableObject("package7","source-package.json",package);SavePortableObject("package7","source-summary.json",summary);
+    SaveRecoveryResponse("source-response.json",response);
+    return cache.emplace(key,RecoveryPackageFixtureData{package,std::move(response)}).first->second;
+}
+template<class Owner> void RecoveryPackageRoundtrip(bool n1=false,bool completed=false,bool c0=false,bool warm=false) {
+    const auto source=ActualRecoveryPackage<Owner>(n1,completed,c0);
+    NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);f.attempt.reset();f.owner->IsNeedToTrain=false;
+    const auto imported=f.owner->ImportNativeLearnedState(source.package,RecoveryPackageImplementation);
+    ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;const auto& service=f.owner->NativeTrainingController();
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_FALSE(service.Search());EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());
+    EXPECT_EQ(f.owner->NativeProbeState(),NativeProbeStatus::Idle);EXPECT_EQ(bool(service.Certificate()),completed);
+    EXPECT_EQ(f.Revision(),source.package["model_revision"].toString().toStdString());
+    const auto exported=f.owner->ExportNativeLearnedState(RecoveryPackageImplementation);
+    EXPECT_EQ(NmsdkTests::LearnedStateComparisonView(exported),NmsdkTests::LearnedStateComparisonView(source.package));
+    const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());
+    EXPECT_EQ(summary["schema_version"],QJsonValue(8));EXPECT_EQ(summary["recovery_ledger"],source.package["recovery_ledger"]);
+    EXPECT_EQ(summary["search_history_retained"],QJsonValue(false));EXPECT_EQ(summary["contains_controller_checkpoint"],QJsonValue(false));
+    const auto response=RecoveryBoundaryResponse(f);ASSERT_EQ(response.size(),source.response.size());
+    for(std::size_t i=0;i<response.size();++i) {
+        EXPECT_NEAR(response[i].time-response.front().time,source.response[i].time-source.response.front().time,5e-10);
+        EXPECT_DOUBLE_EQ(response[i].stimulus,source.response[i].stimulus);ASSERT_EQ(response[i].potentials.size(),source.response[i].potentials.size());
+        for(std::size_t j=0;j<response[i].potentials.size();++j) {
+            ASSERT_TRUE(std::isfinite(response[i].potentials[j]));ASSERT_TRUE(std::isfinite(source.response[i].potentials[j]));
+            EXPECT_NEAR(response[i].potentials[j],source.response[i].potentials[j],1e-12);
+        }
+    }
+    EXPECT_EQ(f.Revision(),source.package["model_revision"].toString().toStdString());
+    SavePortableObject("package7","imported-package.json",exported);SavePortableObject("package7","imported-summary.json",summary);
+    SaveRecoveryResponse("imported-response.json",response);
+    if(c0) {
+        const auto exc=f.owner->template GetComponentL<NPulseChannel>("Neuron.Soma1.ExcChannel",true);
+        const auto inh=f.owner->template GetComponentL<NPulseChannel>("Neuron.Soma1.InhChannel",true);ASSERT_TRUE(exc);ASSERT_TRUE(inh);
+        EXPECT_DOUBLE_EQ(exc->Capacity.GetData(),1e-9);EXPECT_DOUBLE_EQ(inh->Capacity.GetData(),2e-9);
+        EXPECT_EQ(f.owner->OwnedNativeCapacitanceState()["baseline"],source.package["capacitance_state"].toObject()["baseline"]);
+    }
+    if(!warm)return;
+    const auto originalLedger=source.package["recovery_ledger"].toObject();const auto refs=service.References()->Inputs();
+    auto retry=service.Plan();retry.search.runId="package7-imported-warm-retry";
+    retry.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::RetrySameCandidate;
+    const auto attempts=service.SessionAttempt();f.owner->Reset();f.owner->BeginNativeTraining(retry);ServiceTicks(f);
+    ASSERT_EQ(service.State(),NativeTrainingState::Finished);EXPECT_EQ(service.SessionAttempt(),attempts+1);
+    EXPECT_EQ(service.References()->Inputs(),refs);const auto warmed=f.owner->ExportNativeLearnedState(RecoveryPackageImplementation);
+    EXPECT_EQ(warmed["schema_version"],QJsonValue(7));EXPECT_EQ(warmed["runtime_plan"].toObject()["schema_version"],QJsonValue(2));
+    EXPECT_EQ(warmed["recovery_ledger"].toObject()["deliveries"],originalLedger["deliveries"]);
+    EXPECT_NE(warmed["recovery_ledger"].toObject()["measurement_archive_document_id"],originalLedger["measurement_archive_document_id"]);
+    auto prepared=PrepareNativeLearnedState(warmed,f.storage,f.environment,RecoveryPackageImplementation);
+    EXPECT_EQ(prepared->service.CandidateWindowRecoveryDeliveries().size(),service.CandidateWindowRecoveryDeliveries().size());
+    SavePortableObject("package7","warm-retry-package.json",warmed);
+}
+template<class Owner> void RejectRecoveryPackageTampering() {
+    const auto source=ActualRecoveryPackage<Owner>().package;
+    NativeCompositeFixture<Owner> f;f.attempt.reset();f.owner->IsNeedToTrain=false;const auto before=f.Revision();
+    for(int mutation=0;mutation<4;++mutation) {
+        auto bad=source;
+        if(mutation==0)bad.remove("recovery_ledger");
+        else if(mutation==1)bad["schema_version"]=6;
+        else {
+            auto ledger=bad["recovery_ledger"].toObject();auto entries=ledger["deliveries"].toArray();ASSERT_FALSE(entries.isEmpty());
+            if(mutation==2)entries.append(entries[0]);
+            else {auto entry=entries[0].toObject();auto event=entry["event"].toObject();event["group_id"]="missing-native-group";
+                entry["event"]=RehashRecoveryData(event);entries[0]=entry;}
+            ledger["deliveries"]=entries;ledger.remove("sha256");ledger["sha256"]=NmsdkTools::CanonicalModelDataSha256(ledger);
+            bad["recovery_ledger"]=ledger;
+        }
+        bad.remove("sha256");bad["sha256"]=NmsdkTools::CanonicalModelDataSha256(bad);
+        const auto result=f.owner->ImportNativeLearnedState(bad,RecoveryPackageImplementation);
+        EXPECT_EQ(result.status,NativeModelBuildStatus::Rejected);EXPECT_FALSE(result.modelMayHaveChanged);EXPECT_EQ(f.Revision(),before);
+    }
+}
+template<class Owner> void LegacyPackageCannotMasqueradeAsRecovery() {
+    const auto source=ActualWindowPackage<Owner>();
+    const auto archive=DecodeNativeCompositeTrainingArchive(source["measurement_archive"].toObject());
+    auto promoted=source;promoted["schema_version"]=7;
+    promoted["recovery_ledger"]=EncodeCandidateWindowRecoveryLedger({},archive,true);
+    promoted.remove("sha256");promoted["sha256"]=NmsdkTools::CanonicalModelDataSha256(promoted);
+    NativeCompositeFixture<Owner> f;f.attempt.reset();f.owner->IsNeedToTrain=false;const auto before=f.Revision();
+    const auto rejected=f.owner->ImportNativeLearnedState(promoted,CandidateWindowPackageImplementation);
+    EXPECT_EQ(rejected.status,NativeModelBuildStatus::Rejected);EXPECT_EQ(rejected.reason,"recovery_package_requires_explicit_recovery_family");
+    EXPECT_FALSE(rejected.modelMayHaveChanged);EXPECT_EQ(f.Revision(),before);
+    const auto accepted=f.owner->ImportNativeLearnedState(source,CandidateWindowPackageImplementation);
+    ASSERT_EQ(accepted.status,NativeModelBuildStatus::Adopted)<<accepted.reason;
+    EXPECT_EQ(f.owner->ExportNativeLearnedState(CandidateWindowPackageImplementation)["schema_version"],QJsonValue(6));
+}
+}
+TEST(NativeRecoveryPackage7,ClassicN0StoppedRoundtripKeepsResponse){RecoveryPackageRoundtrip<NNeuronTimeLearner>();}
+TEST(NativeRecoveryPackage7,BranchN0StoppedRoundtripKeepsResponse){RecoveryPackageRoundtrip<NNeuronTimeLearnerBranch>();}
+TEST(NativeRecoveryPackage7,ClassicN1StoppedRoundtripKeepsResponse){RecoveryPackageRoundtrip<NNeuronTimeLearner>(true);}
+TEST(NativeRecoveryPackage7,BranchN1StoppedRoundtripKeepsResponse){RecoveryPackageRoundtrip<NNeuronTimeLearnerBranch>(true);}
+TEST(NativeRecoveryPackage7,ClassicCompletedEmptyLedgerIsExplicitRecovery){RecoveryPackageRoundtrip<NNeuronTimeLearner>(false,true);}
+TEST(NativeRecoveryPackage7,BranchCompletedEmptyLedgerIsExplicitRecovery){RecoveryPackageRoundtrip<NNeuronTimeLearnerBranch>(false,true);}
+TEST(NativeRecoveryPackage7,ClassicAsymmetricC0KeepsChildPhysicsAndResponse){RecoveryPackageRoundtrip<NNeuronTimeLearner>(false,true,true);}
+TEST(NativeRecoveryPackage7,BranchAsymmetricC0KeepsChildPhysicsAndResponse){RecoveryPackageRoundtrip<NNeuronTimeLearnerBranch>(false,true,true);}
+TEST(NativeRecoveryPackage7,ClassicImportedWarmRetryRetainsEarlierRecovery){RecoveryPackageRoundtrip<NNeuronTimeLearner>(false,false,false,true);}
+TEST(NativeRecoveryPackage7,BranchImportedWarmRetryRetainsEarlierRecovery){RecoveryPackageRoundtrip<NNeuronTimeLearnerBranch>(false,false,false,true);}
+TEST(NativeRecoveryPackage7,ClassicMissingForeignOrDuplicateLedgerCannotMutateOwner){RejectRecoveryPackageTampering<NNeuronTimeLearner>();}
+TEST(NativeRecoveryPackage7,BranchMissingForeignOrDuplicateLedgerCannotMutateOwner){RejectRecoveryPackageTampering<NNeuronTimeLearnerBranch>();}
+TEST(NativeRecoveryPackage7,ClassicLegacy6CannotMasqueradeAsRecovery7){LegacyPackageCannotMasqueradeAsRecovery<NNeuronTimeLearner>();}
+TEST(NativeRecoveryPackage7,BranchLegacy6CannotMasqueradeAsRecovery7){LegacyPackageCannotMasqueradeAsRecovery<NNeuronTimeLearnerBranch>();}
