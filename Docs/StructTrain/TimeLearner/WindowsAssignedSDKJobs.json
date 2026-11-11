@@ -1,0 +1,75 @@
+{
+  "kind": "optional_windows_native_preparation_job",
+  "schema_version": 1,
+  "source_root": "8314e98f7dbd93441d81de32e7c7174f0fafac24",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "host": "10.245.1.14",
+  "task": "TimeLearner-WindowsAssignedSDK-A1-20261107",
+  "instance": "{B0946FDD-8180-425F-94BC-466C2E64E577}",
+  "worker_sha256": "8af1796ed6e93ef3ff078084f1494c333edd2d1b4377d22bcb771e2b724dee2d",
+  "source": "C:/Projects/TimeLearnerWorker/source-4b4f32262-a4",
+  "build": "C:/Projects/TimeLearnerWorker/build-a4",
+  "runtime": "C:/Projects/TimeLearnerWorker/runtime-windows-assigned-sdk-a1",
+  "output": "C:/Projects/TimeLearnerWorker/jobs/windows-assigned-sdk-a1",
+  "build_identity": {
+    "pid": 11516,
+    "creation_filetime": "134385546165545362",
+    "job_name": "Local\\TimeLearner-e27821bc-9f45-45cc-8e41-e3773decceb1",
+    "runtime_fingerprint": "bc5c6bc5450ab06fb85e727aa3da5b15f867f57ebb5443f61e14523fc262d3a6"
+  },
+  "build_limits": {
+    "memory_bytes": 4294967296,
+    "maximum_processes": 32,
+    "maximum_wall_seconds": 2400,
+    "compiler_parallelism": 1
+  },
+  "native_limits": {
+    "memory_bytes": 3221225472,
+    "maximum_processes": 1,
+    "unit_wall_seconds": 180,
+    "physical_wall_seconds": 3600
+  },
+  "expected_unit_cases": 23,
+  "expected_physical_cases": 21,
+  "cooperative_capture_required": true,
+  "last_observation": "All jobs terminal/closed. A1 build execution rejected; A2 unit23 valid, physical21 JUnit passed but DLL capture failed.",
+  "launch_preparation": "Initial command exceeded remote command length before worker/task creation; bounded stdin bootstrap succeeded. No compute restart.",
+  "scientific_worker_admitted": false,
+  "classification_evaluated": false,
+  "whole_plan_complete": false,
+  "build_execution": {
+    "execution": "descendants_remaining",
+    "returncode": 0,
+    "remaining_pids_at_main_exit": [
+      10872
+    ],
+    "remaining_identity": "unknown; process was closed before identification",
+    "all_processes_closed": true,
+    "accepted": false
+  },
+  "native_followup": {
+    "task": "TimeLearner-WindowsAssignedSDK-Native-A2-20261107",
+    "instance": "{D6050FFC-3E6E-4997-B8AC-C42C2B086F37}",
+    "worker_sha256": "c8466ba9673fab6d99c75c518ebd2a385ecbafa5effbb6dfe0f24fa4d58f3124",
+    "output": "C:/Projects/TimeLearnerWorker/jobs/windows-assigned-sdk-native-a2",
+    "runtime_rebuilt": false,
+    "unit_cases_observed": 23,
+    "unit_assertions": "passed",
+    "unit_cooperative_capture": "completed",
+    "unit_loaded_modules": 37,
+    "unit_job_closed": true,
+    "unit_junit_sha256": "bcc5c0fbd9b179712ce90ed5fbc0adb3c360387fedb21d3aee1499423e1f3927",
+    "physical_status": "terminal rejected",
+    "physical_identity": {
+      "pid": 1076,
+      "creation_filetime": "134385553877355058",
+      "job_name": "Local\\TimeLearner-f7c47a85-a0b9-4953-a68d-b75874429dfd",
+      "runtime_fingerprint": "05b95ea46bdca40264768088c155959cf6d5abccba91fd9b9e4e97ae8b583fe4"
+    },
+    "full_evidence_published": "9822ce2e1248787b2f494063d82f90c75a799eec",
+    "physical_assertions_observed": 21,
+    "physical_validity": "incomplete_test_observation",
+    "physical_rejection": "windows_module_path_unavailable",
+    "all_owned_jobs_closed": true
+  }
+}

@@ -1,9 +1,12 @@
 #include "TimeLearnerTrainingJob.h"
 #include "TimeLearnerJobSupport.h"
 #include "TimeLearnerProbeEvidenceWriter.h"
+#include "TimeLearnerCompositeArtifacts.h"
 #include "NNeuronTimeLearner.h"
 #include "NNeuronTimeLearnerBranch.h"
 #include "TimeLearner/NativeLearnedState.h"
+#include "TimeLearner/BoundedTraining.h"
+#include "TimeLearner/NativeCompositeTrainingEvidence.h"
 #include "TimeLearner/NativeCalculationPolicy.h"
 #include "TimeLearner/NativeLiveFinalization.h"
 #include "NNeuronPostTrainTune.h"
@@ -92,7 +95,9 @@ template<class Owner,class Model,class Environment> int ExecuteLive(const Job& j
     for(const auto& record:evidence->Finalize(!completed))artifacts.append(record);
     owner->SetConfiguredNativeEvidenceSinks({});
     QJsonValue packagePath(QJsonValue::Null),packageSha(QJsonValue::Null),revision(QJsonValue::Null),outcome(QJsonValue::Null);
+    QJsonValue compositeArchive(QJsonValue::Null);
     if(!solo.isEmpty()) {
+        compositeArchive=PublishNativeCompositeArchive(output,solo,artifacts);
         const QString name=completed?"train_learned_state.json":"train_stopped_state.json";
         artifacts.append(Write(output,name,solo));
         artifacts.append(Write(output,completed?"train_learned_summary.json":"train_stopped_summary.json",summary));
@@ -118,14 +123,15 @@ template<class Owner,class Model,class Environment> int ExecuteLive(const Job& j
         const auto bytes=file.readAll();artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
             {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
     }
-    Write(output,"execution.json",Signed({{"kind","timelearner_native_training_execution"},{"schema_version",2},
+    Write(output,"execution.json",WrapConfiguredNativeExecution(job.configuration,{{"kind","timelearner_native_training_execution"},{"schema_version",2},
         {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},{"attempt_id",QString::fromStdString(job.configuration.runId)},
         {"training_started",started},{"package_path",packagePath},{"package_sha256",packageSha},{"model_revision",revision},
         {"training_outcome",outcome},{"completed_boundary",completed},{"finalization_path","finalization.json"},{"finalization_sha256",live["sha256"]},
         {"finalization_status",live["status"]},{"recognition_available",recognitionAvailable},{"recognition_package_path",recognitionPath},
         {"recognition_package_sha256",recognitionSha},{"recognition_model_revision",recognitionRevision},
         {"frequency_hz",double(job.configuration.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",begin},
-        {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
+        {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
+        solo,compositeArchive,revision,evidence->NativeTrials(),evidence->SampledFrames()));
     return execution=="completed"?0:2;
 }
 template<class Owner> int Execute(const Job& job,const QString& output,const bool preflight=false)
@@ -174,7 +180,8 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
         }
         auto plan=MakeConfiguredNativeTrainingPlan(job.configuration);
         plan.search.initialModelRevision=initial["sha256"].toString().toStdString();
-        ValidateBoundedTrainingInputs(plan.protocol,plan.search,parameters);
+        if(plan.protocol.schemaVersion==5)ValidateCandidateWindowTrainingConfiguration(plan.protocol,plan.search,parameters);
+        else ValidateBoundedTrainingInputs(plan.protocol,plan.search,parameters);
         NMSDK::TimeLearner::RequireNativeCalculationSchedule(*owner);
         const auto integration=AssessNativeIntegration(neuron,source->Amplitude.GetData());
         Require(integration.valid,integration.reason.c_str());
@@ -196,13 +203,14 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
             for(const auto& channel:integration.channels)channels.append(QJsonObject{
                 {"path",QString::fromStdString(channel.path)},
                 {"maximum_conductance",channel.maximumConductance},{"maximum_step_gain",channel.maximumStepGain}});
-            Write(output,"execution.json",Signed({{"kind","timelearner_native_preflight_execution"},{"schema_version",1},
+            Write(output,"execution.json",WrapConfiguredNativeExecution(job.configuration,{{"kind","timelearner_native_preflight_execution"},{"schema_version",1},
                 {"execution","completed"},{"job_sha256",job.document["sha256"]},{"model_revision",initial["sha256"]},
                 {"model_ticks",0},{"frequency_hz",double(frequency)},{"model_time_begin",preparationBegin},
                 {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},
                 {"controller_state",NativeTrainingStateName(control.State())},{"reference_probes",0},{"observed_probes",0},
                 {"integration",QJsonObject{{"valid",true},{"reason",""},{"channels",channels}}},
-                {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
+                {"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
+                {},QJsonValue(QJsonValue::Null),initial["sha256"],0,0,true));
             return 0;
         }
         auto evidence=std::make_shared<EvidenceWriter>(output,job.configuration.model.branch?1:parameters.size());
@@ -220,21 +228,47 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
             model->Calculate();environment->IncreaseModelTimeByStep();++ticks;
         }
         const auto& service=owner->NativeTrainingController();const bool stopped=!service.Certificate();
-        Require(service.State()==NativeTrainingState::Finished,"training_job_not_at_export_boundary");
+        Require(service.State()==NativeTrainingState::Finished ||
+            (job.configuration.composite && service.CompositeSourceBinding().isEmpty()),"training_job_not_at_export_boundary");
         for(const auto& record:evidence->Finalize(stopped))artifacts.append(record);
         owner->SetConfiguredNativeEvidenceSinks({});
-        const auto identity=NmsdkTools::IdentifyModel(neuron,ports);Require(identity["valid"]==QJsonValue(true),"training_job_invalid_final_graph");
-        const auto revision=identity["sha256"].toString().toStdString();const auto package=owner->ExportNativeLearnedState(job.implementation);
+        // Editors may replace child instances. Capture the ACTUAL final roots.
+        auto actualNeuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);
+        auto actualSource=owner->template GetComponentL<NPulseGeneratorTransit>("DatasetMatrix.Generator1",true);
+        Require(actualNeuron && actualSource,"training_job_final_graph_missing");
+        const auto identity=NmsdkTools::IdentifyModel(actualNeuron,{{&actualSource->Output,"burst"}});
+        Require(identity["valid"]==QJsonValue(true),"training_job_invalid_final_graph");
+        const auto revision=identity["sha256"].toString().toStdString();
+        if(job.configuration.composite && service.CompositeSourceBinding().isEmpty()) {
+            // Failed/cancelled before owned capture: no invented package/archive.
+            const auto failedOutcome=service.State()==NativeTrainingState::Finished?service.Outcome():
+                (execution=="cancelled"?TrainingStatus::ExternalStop:TrainingStatus::BudgetExhausted);
+            const auto failureReason=service.Reason().empty()?execution+"_before_owned_start":service.Reason();
+            artifacts.append(Write(output,"training-start-failure.json",Signed({{"kind","timelearner_native_training_start_failure"},
+                {"schema_version",1},{"outcome",TrainingStatusName(failedOutcome)},{"reason",QString::fromStdString(failureReason)},
+                {"model_revision",identity["sha256"]},{"dynamic_checkpoint",false},{"source_origin",QJsonValue(QJsonValue::Null)},
+                {"measurement_archive",QJsonValue(QJsonValue::Null)},{"certificate",QJsonValue(QJsonValue::Null)},{"contains_evaluation_verdict",false}})));
+            Write(output,"execution.json",WrapConfiguredNativeExecution(job.configuration,{{"kind","timelearner_native_training_execution"},{"schema_version",1},
+                {"execution","training_start_failed"},{"job_sha256",job.document["sha256"]},{"attempt_id",QString::fromStdString(job.configuration.runId)},
+                {"package_path",QJsonValue(QJsonValue::Null)},{"package_sha256",QJsonValue(QJsonValue::Null)},{"model_revision",identity["sha256"]},
+                {"training_outcome",TrainingStatusName(failedOutcome)},{"completed_boundary",false},
+                {"frequency_hz",double(frequency)},{"model_ticks",double(ticks)},{"model_time_begin",begin},
+                {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
+                {},QJsonValue(QJsonValue::Null),identity["sha256"],evidence->NativeTrials(),evidence->SampledFrames()));return 2;
+        }
+        const auto package=owner->ExportNativeLearnedState(job.implementation);
+        const auto compositeArchive=PublishNativeCompositeArchive(output,package,artifacts);
         const QString packageName=stopped?"train_stopped_state.json":"train_learned_state.json";
         artifacts.append(Write(output,stopped?"train_stopped_summary.json":"train_learned_summary.json",
             EncodeNativeTrainingState(service,revision,owner->ReadNativeParameters())));
         artifacts.append(Write(output,packageName,package));
-        Write(output,"execution.json",Signed({{"kind","timelearner_native_training_execution"},{"schema_version",1},
+        Write(output,"execution.json",WrapConfiguredNativeExecution(job.configuration,{{"kind","timelearner_native_training_execution"},{"schema_version",1},
             {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},{"attempt_id",QString::fromStdString(job.configuration.runId)},
             {"package_path",packageName},{"package_sha256",package["sha256"]},{"model_revision",package["model_revision"]},
             {"training_outcome",package["training_outcome"]},{"completed_boundary",!stopped},
             {"frequency_hz",double(frequency)},{"model_ticks",double(ticks)},{"model_time_begin",begin},
-            {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}}));
+            {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
+            package,compositeArchive,package["model_revision"],evidence->NativeTrials(),evidence->SampledFrames()));
         return execution=="completed"?0:2;
     },[&](auto storage,auto environment) {
         for(const auto& value:job.profiles)

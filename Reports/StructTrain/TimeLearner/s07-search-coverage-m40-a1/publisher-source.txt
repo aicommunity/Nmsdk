@@ -1,0 +1,40 @@
+from pathlib import Path
+import os,sys,json,hashlib,subprocess,tarfile,sqlite3
+base=Path('/media/user/Data/TimeLearnerRefactor');source=base/'source-search-coverage-a1';parent='9cb944fd58ad90a286900d2c991440065001c1c7'
+sys.dont_write_bytecode=True;sys.path.insert(0,str(source))
+from Scripts.StructTrain.TimeLearner.worker_dependency import inspect_worker_dependency
+from Scripts.StructTrain.TimeLearner.resource_reservations import Reservations
+c=sqlite3.connect('file:'+str(base/'resource-reservations.sqlite3')+'?mode=ro',uri=True);meta=dict(c.execute('select key,value from metadata'));c.close()
+registry=Reservations(base/'resource-reservations.sqlite3',**({'capacity':json.loads(meta['capacity'])} if 'capacity' in meta else {}))
+folder=base/'readbacks/s07-search-coverage-a1'
+closed=inspect_worker_dependency(Path(str(folder)+'-container'),registry,folder.name)
+assert closed['state']=='ready' and closed['reservation_state']=='released',closed
+bundle=json.loads((folder/'bundle.json').read_text());archive=folder/'primary.tar.xz'
+assert archive.stat().st_size==bundle['archive_bytes'] and hashlib.sha256(archive.read_bytes()).hexdigest()==bundle['archive_sha256']
+seen=set()
+with tarfile.open(archive,'r:xz') as tar:
+ for m in tar:
+  assert m.isfile() and m.name not in seen;seen.add(m.name);raw=tar.extractfile(m).read()
+  assert bundle['members'][m.name]=={'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+assert seen==set(bundle['members'])
+assert json.loads((folder/'tests.json').read_text())=={'tests_run':4,'successful':True,'failures':0,'errors':0,'skipped':0}
+assert json.loads((folder/'terminal.json').read_text())['checks_passed']
+payload={};prefix='Reports/StructTrain/TimeLearner/s07-search-coverage-m40-a1'
+for name in ('primary.tar.xz','bundle.json','tests.json','terminal.json','coverage.json','source-hashes.json'):
+ payload[prefix+'/'+name]=(folder/name).read_bytes()
+payload[prefix+'/fresh-operational-closure.json']=(json.dumps(closed,indent=2)+'\n').encode()
+
+payload[prefix+'/publisher-source.txt']=PUBLISHER_SOURCE.encode()
+collector=base/'evidence-search-coverage-m40-a1';assert not collector.exists()
+subprocess.run(['git','init','--quiet',str(collector)],check=True)
+for pack in (source/'.git/objects/pack').glob('*.pack'):
+ with pack.open('rb') as f:subprocess.run(['git','-C',str(collector),'index-pack','--stdin','--promisor'],stdin=f,stdout=subprocess.PIPE,check=True)
+(collector/'.git/shallow').write_text(parent+'\n')
+env=dict(os.environ,GIT_INDEX_FILE=str(collector/'publication-index'))
+def git(*a,data=None):return subprocess.check_output(['git','-C',str(collector),*a],input=data,env=env).decode().strip()
+git('read-tree',parent)
+for name,raw in payload.items():
+ oid=git('hash-object','-w','--stdin',data=raw);git('update-index','--add','--cacheinfo','100644',oid,name)
+c=git('-c','user.name=TimeLearner Evidence','-c','user.email=timelearner-evidence@localhost','commit-tree',git('write-tree','--missing-ok'),'-p',parent,data=b'Preserve actual8-case search coverage histogram and4 primary-based tests with production CLI\n')
+git('update-ref','refs/heads/evidence',c)
+print(json.dumps({'commit':c,'parent':parent,'repository':str(collector),'members':len(seen),'tests':4,'new_native_calculations':False}))

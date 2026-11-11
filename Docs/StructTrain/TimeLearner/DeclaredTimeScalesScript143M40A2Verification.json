@@ -1,0 +1,51 @@
+{
+  "kind": "independent_owned_python_job_Git_metadata_verification",
+  "schema_version": 1,
+  "evidence_commit": "da39534553539e2c37c5cb4f188adc8b49b0311c",
+  "parent_tool_root": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93",
+  "job_id": "s09-declared-time-scales-script143-m40-a2",
+  "operation_passed": true,
+  "planned_tests": 143,
+  "executed_tests": 143,
+  "actual_log_and_derived_JUnit_cases": 143,
+  "archive_members_verified": 60,
+  "archive_bytes": 81616,
+  "archive_sha256": "15600b74b98cf6bace9c7b2ca132ad5d13a848e2058e67be28a026007bf051e3",
+  "pack_sha256": "d4d114e27dea41dabae0cac11f0bc0f248396148d0d8aba693c62534efb7c42f",
+  "source_files_Git_verified": {
+    "tool-source-postclosure.json": 624,
+    "validation-source-postclosure.json": 623
+  },
+  "source_roots": {
+    "tool-source-postclosure.json": "edaaa836e27b0ecef1c2f9203fb04ee82d62bd93",
+    "validation-source-postclosure.json": "4e9aff7b72d3cc2460c6d9c886e0f2d7e39d5277"
+  },
+  "source_phase": "postclosure; before/after only when present in original job",
+  "kernel_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "9237d77bd65c710468a071a14a291ff43dbfb95bebc3f75dcf896d9220f9c446",
+    "unit": "timelearner-c687ad7a-c4aa-48f2-a99c-8e533ee9856f.service",
+    "invocation_id": "02df3aa3af4449c3a6888ccc9fafc280",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-c687ad7a-c4aa-48f2-a99c-8e533ee9856f.service",
+    "initial_main_pid": 3394230,
+    "initial_start_ticks": "323543592",
+    "sha256": "916d95b3ccfd7ac8f0b11853b4698b88634f419fa390a560d803409e5b84d12d"
+  },
+  "kernel_group_closed_observed_server": true,
+  "held_job_leases": 0,
+  "kernel_limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 240
+  },
+  "guard_triggered": false,
+  "original_failure_preserved": false,
+  "CPP_or_models_run": false,
+  "all_collector_kernel_test_SDK_scientific_attestation_flags_false": true,
+  "local_tests_or_numerics_run": false,
+  "original_suite_external_raw_file": null,
+  "first_collector_normalized_suite_limitation": false,
+  "scientific_verdict": null,
+  "Git_import": "unpack_objects_without_refs_or_checkout"
+}

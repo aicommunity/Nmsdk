@@ -8,6 +8,8 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <cstdlib>
+#include <chrono>
 #if defined(_WIN32)
 #include <windows.h>
 #endif
@@ -33,6 +35,32 @@ ConsoleInitResult g_result;
 bool g_initialized = false;
 AppCoreType* g_appCore = nullptr;
 std::string g_executable;
+
+std::filesystem::path OwnTestWorkDirectory(const std::filesystem::path& runtime)
+{
+    const auto insideRuntime=[&](const std::filesystem::path& path) {
+        const auto relative=path.lexically_relative(runtime);
+        return !relative.empty() && !relative.is_absolute() && *relative.begin()!="..";
+    };
+    if(const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");output && *output)
+    {
+        const auto native=std::filesystem::weakly_canonical(std::filesystem::absolute(output));
+        const auto work=std::filesystem::path(native.string()+".test-events-log");
+        if(insideRuntime(native) || insideRuntime(work) || native.filename().empty() ||
+           !std::filesystem::is_directory(work.parent_path()) || !std::filesystem::create_directory(work))
+            throw std::runtime_error("PulseLib test log directory is not new or overlaps runtime");
+        return work;
+    }
+    // Direct CTest runs also keep logs out of the executable/resources tree.
+    const auto stamp=std::chrono::steady_clock::now().time_since_epoch().count();
+    const auto parent=std::filesystem::temp_directory_path();
+    for(unsigned attempt=0;attempt<32;++attempt)
+    {
+        const auto work=parent/("NmsdkPulseLibTests-"+std::to_string(stamp)+"-"+std::to_string(attempt));
+        if(!insideRuntime(work) && std::filesystem::create_directory(work))return work;
+    }
+    throw std::runtime_error("PulseLib test log directory reservation failed");
+}
 
 } // namespace
 
@@ -64,10 +92,11 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
     if(!std::ifstream(std::filesystem::path(iniFile)))throw std::runtime_error("PulseLib test runtime ini cannot be read: "+iniFile);
     std::cerr<<"PulseLibTestRuntime executable="<<appPath<<" ini="<<iniFile<<'\n';
 
-    // Для интеграционных тестов PulseLib мы НЕ создаём файловые логи,
-    // чтобы избежать конфликтов glog/файловых логгеров и лишнего шума.
-    // Логи идут только в stderr/stdout.
-    const std::string testLogDir; // пустая строка => файловое логирование отключено
+    // An empty Init log path does not disable Rdk's WorkDirectory/EventsLog
+    // fallback. Reserve an owned work directory before initialization, through
+    // the same native mechanism used by Console jobs.
+    const auto workDirectory=OwnTestWorkDirectory(runtime);
+    const std::string testLogDir=(workDirectory/"EventsLog").string();
 
     std::string defaultUser = "TestUser";
 
@@ -81,6 +110,9 @@ const ConsoleInitResult& InitEngineForPulseLibTests()
 
     if (!g_appCore)
         g_appCore = new AppCoreType();
+
+    g_appCore->application.SetWorkDirectory(workDirectory.string());
+    std::cerr<<"PulseLibTestRuntime work_directory="<<workDirectory.string()<<'\n';
 
     const int initRes = g_appCore->Init(appPath, iniFile, testLogDir, defaultUser, argc, argv);
     if (initRes != 0)

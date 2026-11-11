@@ -1,0 +1,130 @@
+{
+  "facts": {
+    "kind": "composite_native_core_cpp_compile_failure",
+    "schema_version": 1,
+    "root": "27ba5aa2906d5e5a1ecc081044fffb8dc82e6c38",
+    "pulse": "269164d2a2339908a8667e859a04a8e81da50c3c",
+    "capture_phase": "postclosure_failed_compilation_before_next_cache_mutation",
+    "source_files_git_verified": 3056,
+    "source_repositories": [
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-feature-root-a1",
+        "commit": "27ba5aa2906d5e5a1ecc081044fffb8dc82e6c38",
+        "files": 968
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-composite-feature-pulse-a1",
+        "commit": "269164d2a2339908a8667e859a04a8e81da50c3c",
+        "files": 306
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-response-features-rdk-a1",
+        "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+        "files": 1781
+      },
+      {
+        "repository": "/media/user/Data/TimeLearnerRefactor/source-native-step-bin-resources-m40-a1",
+        "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+        "files": 1
+      }
+    ],
+    "cmakecache_snapshot_sha256": "e0541f63103706e19c1e4ca0dc35324ef14a2ddeae7fac4d59f3f9477a286206",
+    "original_terminal_success": false,
+    "built": false,
+    "original_expected_cpp_cases_declared": 143,
+    "actual_cpp_tests_executed": 0,
+    "actual_python_tests_executed": 0,
+    "compiled_test_inventory_executed": false,
+    "native_model_executions": 0,
+    "native_runtime_accepted": false,
+    "first_compile_error": "NativeCompositeTrainingAttempt.cpp:68:40 UEPtr<NPulseNeuron> cannot convert to UEPtr<UContainer>",
+    "build_log_first_error_line": 65,
+    "compiler_and_make_diagnostic_lines": 16,
+    "build_exit_code": 2,
+    "outer_worker_exit_code": 1,
+    "original_new_composite_protocol_exercised_flag": true,
+    "observed_new_composite_protocol_exercised": false,
+    "original_protocol_flag_scope": "producer preset in terminal even when compilation fails; preserved as declaration, not execution evidence",
+    "missing_original_postbuild_snapshots_preserved": [
+      "current-runtime-before.json",
+      "current-runtime-after.json",
+      "compiled-test-inventory.log",
+      "compiled-inventory-crosscheck.json",
+      "test-inventory.json",
+      "fixture-source-hashes.json",
+      "CMakeCache.txt",
+      "resource-files-before.json",
+      "resource-files-after.json"
+    ],
+    "current_runtime_before_snapshot_exists": false,
+    "protected_mechanical_a2_runtime_before_after_postclosure_equal": true,
+    "controller_runtime_manifest_scope": "Python build worker only; no tested native runtime manifest",
+    "failed_unit_metadata_retained": true,
+    "failed_unit_main_pid": 0,
+    "failed_unit_kernel_cgroup_absent": true,
+    "lease_released": true,
+    "original_error_logs_and_terminals_preserved": true,
+    "live_source_cache_opened": false,
+    "live_build_cache_opened": false,
+    "new_build_or_model_run": false,
+    "numerical_result_claimed": false,
+    "training_certificate_eligible": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "created_utc": "2026-11-08T10:56:00.694866+00:00"
+  },
+  "original_worker_controller_and_frozen_capture_unchanged": true,
+  "fresh_failed_unit_after_archive": {
+    "kind": "timelearner_worker_dependency_state",
+    "schema_version": 1,
+    "job_id": "s07-composite-core-m40-a1",
+    "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-composite-core-m40-a1-container",
+    "registry": "/media/user/Data/TimeLearnerRefactor/resource-reservations.sqlite3",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "7aa8e08699aedbc18509d44a8edba68e087d91cb1f7db8a0921187578454f99d",
+        "unit": "timelearner-83a6df1b-97f7-44f1-be4f-a1be7023b68d.service",
+        "invocation_id": "04ec688bd99e4a62af549891dfc73a8e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-83a6df1b-97f7-44f1-be4f-a1be7023b68d.service",
+        "initial_main_pid": 2754480,
+        "initial_start_ticks": "320969779",
+        "sha256": "06cb704ceac6cdd51731752847b6c54edcf3c390539b5059e006c65b4aa5ec60"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt 83a6df1b-97f7-44f1-be4f-a1be7023b68d",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "04ec688bd99e4a62af549891dfc73a8e"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    },
+    "reservation_optional": false,
+    "reservation_state": "released",
+    "reservation_token": "97924cd3-adda-49f9-93eb-cf64f5d8f6cb",
+    "state": "ready",
+    "reason": "dependency_closed_lease_released",
+    "successful_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "archive_members": 44,
+  "compression_dictionary_bytes": 33554432
+}

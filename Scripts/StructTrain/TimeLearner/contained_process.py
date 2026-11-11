@@ -6,7 +6,6 @@ process-runner schema or live experiment is changed by importing this module.
 """
 from pathlib import Path, PurePosixPath
 import json
-import math
 import os
 import re
 import subprocess
@@ -16,6 +15,7 @@ import uuid
 
 from .native_evidence import load, require
 from .process_runner import verify_runtime, _start_identity, _write
+from .process_limits import validate_limits
 from .runtime import digest_json
 
 
@@ -112,13 +112,56 @@ def adopt(directory):
     return binding
 
 
+class _ManagedLaunch:
+    def __init__(self, context):
+        require(type(context) is tuple and len(context) == 2, 'managed_reservation_context_invalid')
+        self.registry, self.token = context
+        require(self.registry.managed_units is True, 'managed_unit_ledger_v3_required')
+        self.attempt = None
+        self.submission_may_have_begun = False
+
+    def register(self, directory, attempt, memory, tasks, wall):
+        self.registry.register_managed_intent(self.token, directory, attempt,
+            memory_bytes=memory, tasks=tasks, maximum_wall_seconds=wall)
+        self.attempt = attempt
+
+    def submit(self):
+        # Set this conservatively before a durable transition whose commit
+        # might succeed even if its acknowledgement is lost.
+        self.submission_may_have_begun = True
+        self.registry.mark_managed_submitted(self.token, self.attempt)
+
+    def bind(self):
+        self.registry.mark_managed_bound(self.token, self.attempt)
+
+    def abort_unsubmitted(self):
+        if self.attempt is not None and not self.submission_may_have_begun:
+            self.registry.abort_managed_unsubmitted(self.token, self.attempt)
+
+
 def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks, maximum_wall_seconds,
-          environment=None):
+          environment=None, managed_reservation=None):
+    """Optional schema3 lease context registers and binds before native exec.
+
+    An ambiguous submitted launch stays reserved for explicit recovery. Existing
+    callers and their ledgers keep the original interface and evidence schema.
+    """
     require(sys.platform == 'linux', 'contained_linux_required')
-    require(type(memory_bytes) is int and 0 < memory_bytes <= 2**63-1 and
-            type(tasks) is int and 0 < tasks <= 2**31-1 and
-            type(maximum_wall_seconds) in (int, float) and math.isfinite(maximum_wall_seconds) and
-            1 <= maximum_wall_seconds <= 86400, 'contained_limits_invalid')
+    validate_limits(memory_bytes, tasks, maximum_wall_seconds)
+    launch = _ManagedLaunch(managed_reservation) if managed_reservation is not None else None
+    try:
+        return _start(manifest, arguments, working_directory, output, memory_bytes=memory_bytes,
+                      tasks=tasks, maximum_wall_seconds=maximum_wall_seconds,
+                      environment=environment, managed_launch=launch)
+    finally:
+        if launch is not None:
+            launch.abort_unsubmitted()
+
+
+def _start(manifest, arguments, working_directory, output, *, memory_bytes, tasks, maximum_wall_seconds,
+           environment=None, managed_launch=None):
+    require(sys.platform == 'linux', 'contained_linux_required')
+    validate_limits(memory_bytes, tasks, maximum_wall_seconds)
     require(type(arguments) is list and all(type(a) is str and '\0' not in a for a in arguments), 'contained_arguments_invalid')
     environment = {} if environment is None else environment
     require(type(environment) is dict and all(type(k) is str and type(v) is str and '\0' not in v and
@@ -131,8 +174,10 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
     # bootstrap arguments. Native arguments stay literal in request JSON.
     require(not any(c in str(path) for path in (cwd, output, sys.executable) for c in ('%', '$')),
             'contained_bootstrap_path_requires_literal_location')
-    output.mkdir(parents=True, exist_ok=False)
     attempt = str(uuid.uuid4());unit = 'timelearner-'+attempt+'.service'
+    if managed_launch is not None:
+        managed_launch.register(output, attempt, memory_bytes, tasks, maximum_wall_seconds)
+    output.mkdir(parents=True, exist_ok=False)
     loader = manifest['loader_environment']
     require(type(loader) is dict and set(loader) <= {'LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM'} and
             all(type(v) is str and '\0' not in v for v in loader.values()), 'contained_loader_environment_invalid')
@@ -153,6 +198,8 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
         '--property=UnsetEnvironment=LD_PRELOAD LD_AUDIT PYTHONPATH PYTHONHOME',
         '--property=WorkingDirectory='+str(cwd), '--property=StandardOutput=file:'+str(output/'stdout.log'),
         '--property=StandardError=file:'+str(output/'stderr.log'), sys.executable, str(output/'launcher.py'), str(output)]
+    if managed_launch is not None:
+        managed_launch.submit()
     launched = subprocess.run(command, capture_output=True, text=True, timeout=15)
     _write(output/'launch-result.json', {'returncode': launched.returncode, 'stdout': launched.stdout, 'stderr': launched.stderr})
     require(launched.returncode == 0, 'contained_launch_failed_recovery_required')
@@ -172,6 +219,8 @@ def start(manifest, arguments, working_directory, output, *, memory_bytes, tasks
         'pids.max': (group/'pids.max').read_text().strip(), 'cgroup.events': (group/'cgroup.events').read_text(),
         'initial_members': [int(p) for p in (group/'cgroup.procs').read_text().split()], 'systemd': state['state']})
     verify_runtime(manifest)
+    if managed_launch is not None:
+        managed_launch.bind()
     (output/'start.ack').write_text('binding committed\n')
     return binding
 

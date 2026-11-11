@@ -1,0 +1,325 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_ModelArchive.cpp",
+      "suites": [
+        "NativeImageRestSnapshot"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    },
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeCandidateWindowPackage",
+        "NativeObservedRequest"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeImageRestSnapshot/RepeatedArchiveAndPoolReuseAt2000",
+    "NativeImageRestSnapshot/RepeatedArchiveAndPoolReuseAt20000",
+    "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+    "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+    "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+    "NativeObservedRequest/ClosedSessionRequiresObservedLowAndAvailableBoundary",
+    "NativeObservedRequest/ClassicConnectedMode0WarmKeepsOriginalFamily",
+    "NativeObservedRequest/ClassicConnectedMode1WarmKeepsOriginalFamily",
+    "NativeObservedRequest/BranchConnectedMode0WarmKeepsOriginalFamily",
+    "NativeObservedRequest/BranchConnectedMode1WarmKeepsOriginalFamily",
+    "NativeObservedRequest/ClassicDirectMode0WarmKeepsOriginalFamily",
+    "NativeObservedRequest/ClassicDirectMode1WarmKeepsOriginalFamily",
+    "NativeObservedRequest/BranchDirectMode0WarmKeepsOriginalFamily",
+    "NativeObservedRequest/BranchDirectMode1WarmKeepsOriginalFamily",
+    "NativeObservedRequest/ClassicConnectedPartialStopKeepsCancelledRaw",
+    "NativeObservedRequest/BranchConnectedPartialStopKeepsCancelledRaw",
+    "NativeObservedRequest/ClassicDirectPartialStopKeepsCancelledRaw",
+    "NativeObservedRequest/BranchDirectPartialStopKeepsCancelledRaw"
+  ],
+  "runplan": [
+    {
+      "name": "image-rest-2000",
+      "expected_ids": [
+        "NativeImageRestSnapshot/RepeatedArchiveAndPoolReuseAt2000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "image-rest-20000",
+      "expected_ids": [
+        "NativeImageRestSnapshot/RepeatedArchiveAndPoolReuseAt20000"
+      ],
+      "wall_seconds": 1200
+    },
+    {
+      "name": "classic-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "branch-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "asymmetric-c0-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+      ],
+      "wall_seconds": 7200
+    },
+    {
+      "name": "classic-warm-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 3600
+    },
+    {
+      "name": "branch-c0-warm-rest",
+      "expected_ids": [
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ],
+      "wall_seconds": 7200
+    },
+    {
+      "name": "observed-request-01",
+      "expected_ids": [
+        "NativeObservedRequest/ClosedSessionRequiresObservedLowAndAvailableBoundary"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-02",
+      "expected_ids": [
+        "NativeObservedRequest/ClassicConnectedMode0WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-03",
+      "expected_ids": [
+        "NativeObservedRequest/ClassicConnectedMode1WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-04",
+      "expected_ids": [
+        "NativeObservedRequest/BranchConnectedMode0WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-05",
+      "expected_ids": [
+        "NativeObservedRequest/BranchConnectedMode1WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-06",
+      "expected_ids": [
+        "NativeObservedRequest/ClassicDirectMode0WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-07",
+      "expected_ids": [
+        "NativeObservedRequest/ClassicDirectMode1WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-08",
+      "expected_ids": [
+        "NativeObservedRequest/BranchDirectMode0WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-09",
+      "expected_ids": [
+        "NativeObservedRequest/BranchDirectMode1WarmKeepsOriginalFamily"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-10",
+      "expected_ids": [
+        "NativeObservedRequest/ClassicConnectedPartialStopKeepsCancelledRaw"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-11",
+      "expected_ids": [
+        "NativeObservedRequest/BranchConnectedPartialStopKeepsCancelledRaw"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-12",
+      "expected_ids": [
+        "NativeObservedRequest/ClassicDirectPartialStopKeepsCancelledRaw"
+      ],
+      "wall_seconds": 2400
+    },
+    {
+      "name": "observed-request-13",
+      "expected_ids": [
+        "NativeObservedRequest/BranchDirectPartialStopKeepsCancelledRaw"
+      ],
+      "wall_seconds": 2400
+    }
+  ],
+  "partitions": [
+    {
+      "name": "image-rest-2000",
+      "count": 1,
+      "ids": [
+        "NativeImageRestSnapshot/RepeatedArchiveAndPoolReuseAt2000"
+      ]
+    },
+    {
+      "name": "image-rest-20000",
+      "count": 1,
+      "ids": [
+        "NativeImageRestSnapshot/RepeatedArchiveAndPoolReuseAt20000"
+      ]
+    },
+    {
+      "name": "classic-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+      ]
+    },
+    {
+      "name": "branch-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip"
+      ]
+    },
+    {
+      "name": "asymmetric-c0-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip"
+      ]
+    },
+    {
+      "name": "classic-warm-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    },
+    {
+      "name": "branch-c0-warm-rest",
+      "count": 1,
+      "ids": [
+        "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime"
+      ]
+    },
+    {
+      "name": "observed-request-01",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClosedSessionRequiresObservedLowAndAvailableBoundary"
+      ]
+    },
+    {
+      "name": "observed-request-02",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClassicConnectedMode0WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-03",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClassicConnectedMode1WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-04",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/BranchConnectedMode0WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-05",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/BranchConnectedMode1WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-06",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClassicDirectMode0WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-07",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClassicDirectMode1WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-08",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/BranchDirectMode0WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-09",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/BranchDirectMode1WarmKeepsOriginalFamily"
+      ]
+    },
+    {
+      "name": "observed-request-10",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClassicConnectedPartialStopKeepsCancelledRaw"
+      ]
+    },
+    {
+      "name": "observed-request-11",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/BranchConnectedPartialStopKeepsCancelledRaw"
+      ]
+    },
+    {
+      "name": "observed-request-12",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/ClassicDirectPartialStopKeepsCancelledRaw"
+      ]
+    },
+    {
+      "name": "observed-request-13",
+      "count": 1,
+      "ids": [
+        "NativeObservedRequest/BranchDirectPartialStopKeepsCancelledRaw"
+      ]
+    }
+  ]
+}

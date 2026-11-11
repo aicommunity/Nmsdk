@@ -1,0 +1,31 @@
+{
+  "kind": "windows_module_capture_followup_jobs",
+  "schema_version": 1,
+  "host": "10.245.1.14",
+  "source_provider": "C:/Projects/TimeLearnerWorker/source-windows-module-diagnostics-a2",
+  "tool_root": "289c3bc44159f08b12e3972e7adae9d934c8fa22",
+  "compiled_root": "8314e98f7dbd93441d81de32e7c7174f0fafac24",
+  "runtime": "C:/Projects/TimeLearnerWorker/runtime-windows-assigned-sdk-a1",
+  "evidence_commit": "092de4cf8bfe831c834b75d082151f4a104bb994",
+  "completed": {
+    "a1": "diagnostic writer failure; no native test started; preserved",
+    "a2": "17 backend controls + 1 native gate valid; 19 owned Jobs rechecked closed across both attempts"
+  },
+  "running": {
+    "job": "windows-module-diagnostics-a3",
+    "task": "TimeLearner-WindowsModuleDiagnostics-A3-20261108",
+    "instance": "{6D8CF39C-B708-49C4-A6A0-CEFC2591E659}",
+    "worker_sha256": "f098147c0ab37bb55b5a8f101c5db7d39116a9a46df587ab7cc39c66df7ee294",
+    "expected": {
+      "unit": 23,
+      "physical": 21
+    },
+    "maximum_native_wall_seconds": 3600,
+    "memory_bytes": 3221225472,
+    "maximum_processes": 1,
+    "status": "completed: 23 unit + 21 physical valid capture; 2 owned Jobs closed",
+    "evidence_commit": "c3295c22748d1a5f02f425d7fd7b3506a11f525f"
+  },
+  "scientific_worker_admitted": false,
+  "whole_plan_complete": false
+}

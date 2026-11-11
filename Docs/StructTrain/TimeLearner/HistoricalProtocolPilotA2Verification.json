@@ -1,0 +1,28 @@
+{
+  "kind": "independent_failed_historical_protocol_metadata_verification",
+  "evidence_commit": "4e705e3d7a269921388398c7fc1026369314f229",
+  "tool_root": "8753e3172a1a4566ef4271453a3ec2b74c4b1fc2",
+  "archive_members_verified": 69,
+  "archive_bytes": 56652,
+  "archive_sha256": "ef25449addcc4c41dcdff4b95923c16468b4a77f1688727f69119303f3623530",
+  "tool_source_hashes_verified": 387,
+  "preparation_tests_passed": 11,
+  "native_prestimulus_processes_completed": 1,
+  "native_loaded_file_records": 26,
+  "full_matrix_processes_started": 0,
+  "failure_reason": "historical_protocol_effective_neuron_changed",
+  "identity_reconciliation": {
+    "source_serialized_neuron": "ed11c257e5b0e01c5ed3ccfc5bd397f93984cf6e544ab4ab87681627d445c474",
+    "actual_prestimulus_neuron": "ed11c257e5b0e01c5ed3ccfc5bd397f93984cf6e544ab4ab87681627d445c474",
+    "nodes": 604,
+    "inbound_edges": 496,
+    "neuron_parameter_changes": 0,
+    "difference_from_declared_threshold_only": true,
+    "reason": "Original Parameters Test threshold overlay was lost by new full parameter preparation; graph guard refused it before full matrix."
+  },
+  "group_closed": true,
+  "lease_released": true,
+  "local_trace_arithmetic_executed": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

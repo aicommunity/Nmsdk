@@ -1,11 +1,98 @@
 #include <gtest/gtest.h>
 #include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/ProbeObservation.h"
+#include "../../../Libraries/Nmsdk-PulseLib/Core/TimeLearner/MeasuredResponse.h"
 #include <algorithm>
 #include <limits>
 #include <stdexcept>
 
 namespace {
 using namespace NMSDK::TimeLearner;
+std::vector<ResponseSample> ResponseSamples(const std::vector<double>& values,double origin=0.,double step=.1)
+{
+    std::vector<ResponseSample> result;
+    for(std::size_t i=0;i<values.size();++i)result.push_back({origin+double(i)*step,values[i]});
+    return result;
+}
+TEST(TimeLearnerResponseFeatures,RetainsAllExtremaAndTheLaterHighestPeak)
+{
+    const auto samples=ResponseSamples({2.,3.,2.,5.,3.,2.});
+    const auto f=ExtractMeasuredResponse(samples,2.,.5);
+    ASSERT_EQ(f.validity,ResponseFeatureValidity::Valid);
+    ASSERT_EQ(f.positiveMaxima.size(),2u);ASSERT_TRUE(f.globalMaximum);
+    EXPECT_EQ(f.positiveMaxima[0].firstSample,1u);
+    EXPECT_EQ(f.positiveMaxima[1].firstSample,3u);
+    EXPECT_EQ(f.globalMaximum->firstSample,3u);EXPECT_DOUBLE_EQ(f.globalMaximum->amplitude,3.);
+    EXPECT_DOUBLE_EQ(f.globalMaximum->rawPotential,5.);
+    EXPECT_EQ(f.largestInteriorMaximumCount,1u);
+    EXPECT_FALSE(f.globalMaximumClipped);EXPECT_FALSE(f.boundaryResponseClipped);
+}
+TEST(TimeLearnerResponseFeatures,TiedSeparatedMaximaRetainDistinctSampleRanges)
+{
+    const auto f=ExtractMeasuredResponse(ResponseSamples({2.,5.,2.,5.,2.}),2.,.5);
+    ASSERT_EQ(f.positiveMaxima.size(),2u);EXPECT_EQ(f.largestInteriorMaximumCount,2u);
+    EXPECT_EQ(f.globalMaximum->firstSample,1u);
+    EXPECT_EQ(f.positiveMaxima[1].firstSample,3u);
+}
+TEST(TimeLearnerResponseFeatures,PlateauUsesActualSamplesAcrossClockScales)
+{
+    for(double origin:{0.,131.,1000000.})for(double step:{.0005,.00005})
+    {
+        const auto samples=ResponseSamples({2.,5.,5.,5.,2.},origin,step);
+        const auto f=ExtractMeasuredResponse(samples,2.,.5);
+        ASSERT_EQ(f.positiveMaxima.size(),1u);
+        EXPECT_EQ(f.globalMaximum->firstSample,1u);EXPECT_EQ(f.globalMaximum->lastSample,3u);
+        EXPECT_DOUBLE_EQ(f.globalMaximum->time,samples[1].time);
+        EXPECT_DOUBLE_EQ(f.globalMaximum->plateauEnd,samples[3].time);
+        EXPECT_EQ(f.largestInteriorMaximumCount,1u);
+    }
+}
+TEST(TimeLearnerResponseFeatures,ClippedBoundaryDoesNotEraseInteriorMeasurements)
+{
+    const auto f=ExtractMeasuredResponse(ResponseSamples({4.,3.,2.,5.,2.}),2.,.5);
+    ASSERT_EQ(f.positiveMaxima.size(),1u);
+    EXPECT_TRUE(f.boundaryResponseClipped);EXPECT_FALSE(f.globalMaximumClipped);
+    EXPECT_EQ(f.positiveMaxima[0].firstSample,3u);
+    const auto edge=ExtractMeasuredResponse(ResponseSamples({5.,5.,2.,3.,2.}),2.,.5);
+    EXPECT_TRUE(edge.globalMaximumClipped);EXPECT_TRUE(edge.boundaryResponseClipped);
+    ASSERT_EQ(edge.positiveMaxima.size(),1u);EXPECT_DOUBLE_EQ(edge.positiveMaxima[0].amplitude,1.);
+}
+TEST(TimeLearnerResponseFeatures,SubthresholdAndShortRecordsDoNotInventPeaks)
+{
+    const auto f=ExtractMeasuredResponse(ResponseSamples({2.,2.1,2.}),2.,.5);
+    EXPECT_EQ(f.validity,ResponseFeatureValidity::Valid);EXPECT_TRUE(f.positiveMaxima.empty());
+    EXPECT_EQ(f.largestInteriorMaximumCount,0u);
+    for(const auto& values:std::vector<std::vector<double>>{{},{2.},{2.,3.}})
+    {
+        const auto shortRecord=ExtractMeasuredResponse(ResponseSamples(values),2.,.5);
+        EXPECT_EQ(shortRecord.validity,ResponseFeatureValidity::InsufficientSamples);
+        EXPECT_FALSE(shortRecord.globalMaximum);EXPECT_TRUE(shortRecord.positiveMaxima.empty());
+    }
+}
+TEST(TimeLearnerResponseFeatures,MalformedRecordsCannotLeakPartialFeatures)
+{
+    const auto original=ResponseSamples({2.,3.,2.,5.,2.});
+    for(bool time:{false,true})for(double invalid:{std::numeric_limits<double>::quiet_NaN(),
+                                                std::numeric_limits<double>::infinity()})
+    {
+        auto samples=original;
+        if(time)samples.back().time=invalid;else samples.back().rawPotential=invalid;
+        const auto f=ExtractMeasuredResponse(samples,2.,.5);
+        EXPECT_EQ(f.validity,ResponseFeatureValidity::NonfiniteSample);
+        EXPECT_TRUE(f.positiveMaxima.empty());EXPECT_FALSE(f.globalMaximum);
+    }
+    auto duplicate=original;duplicate.back().time=duplicate.front().time;
+    EXPECT_EQ(ExtractMeasuredResponse(duplicate,2.,.5).validity,ResponseFeatureValidity::NonmonotonicTime);
+    EXPECT_EQ(ExtractMeasuredResponse(ResponseSamples({0.,std::numeric_limits<double>::max(),0.}),
+        -std::numeric_limits<double>::max(),.5).validity,ResponseFeatureValidity::NonfiniteSample);
+}
+TEST(TimeLearnerResponseFeatures,InvalidBaselineOrThresholdIsExplicit)
+{
+    const auto samples=ResponseSamples({2.,3.,2.});
+    for(double threshold:{0.,-1.,std::numeric_limits<double>::quiet_NaN()})
+        EXPECT_EQ(ExtractMeasuredResponse(samples,2.,threshold).validity,ResponseFeatureValidity::InvalidSpecification);
+    EXPECT_EQ(ExtractMeasuredResponse(samples,std::numeric_limits<double>::infinity(),.5).validity,
+        ResponseFeatureValidity::InvalidSpecification);
+}
 ProbeSpec Specification()
 {
     ProbeSpec s;s.runId="run";s.trialId="trial";s.sampleId="target";
@@ -119,7 +206,7 @@ TEST(TimeLearnerBurstAssignment, AssignedPolicySelectsTheActualLaterWaveInAWideW
 TEST(TimeLearnerBurstAssignment, AssignedPolicyRequiresSamplesAroundTheSelectedPlateau)
 {
     auto s=BurstSpecification();s.peakSelection=PeakSelectionPolicy::AssignedBurstWave;
-    for(const auto bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
+    for(const auto& bounds:std::vector<std::pair<double,double>>{{.751,.9},{.7,.849},{0.,.6}})
     {
         s.windows[0].begin=bounds.first;s.windows[0].end=bounds.second;
         const auto o=BurstObservation(s);EXPECT_FALSE(o.valid);
@@ -278,7 +365,7 @@ TEST(TimeLearnerProbe, StimulusCompletenessAndUniqueIdsAreRequired)
         if(mode==2)recorder.RecordStimulus("unknown",.1);
         auto result=recorder.Close(1.,"model_1","closed");EXPECT_FALSE(result.valid);
         EXPECT_TRUE(Has(result,mode==1?"duplicate_stimulus_id":"missing_stimulus"));
-        if(mode!=1)EXPECT_FALSE(result.peaks[0].delayFromStimulus);
+        if(mode!=1){EXPECT_FALSE(result.peaks[0].delayFromStimulus);}
     }
 }
 
@@ -347,5 +434,71 @@ TEST(TimeLearnerProbe, RejectsWrongSampleDimensionAndWritesAfterClosure)
     EXPECT_FALSE(result.valid);EXPECT_TRUE(Has(result,"invalid_sample"));
     EXPECT_THROW(recorder.Observe(2.,{2.},"model_1"),std::logic_error);
     EXPECT_THROW(recorder.Close(2.,"model_1","closed"),std::logic_error);
+}
+
+ProbeSpec MaximumSpecification()
+{
+    auto s=Specification();s.schemaVersion=5;
+    s.stimulusProfile=StimulusProfile{"source",1.,.01,10.,0.,false,false};
+    s.characterization=SinglePulseCharacterization{"full_training_pattern",4,2};
+    s.peakSelection=PeakSelectionPolicy::SingleImpulseMaximum;return s;
+}
+ProbeObservation MaximumObservation(const std::vector<double>& values,bool complete=true,double stimulusTime=.1)
+{
+    ProbeRecorder recorder(MaximumSpecification());Samples(recorder,values);
+    recorder.RecordStimulus("pulse",stimulusTime);return recorder.Close(complete?1.:.9,"model_1","closed");
+}
+TEST(SingleImpulseMaximum, KeepsLargestPeakAfterDeepFallAndSmallerExtrema)
+{
+    // The later maximum follows a fall well below the old 85% early-lock band.
+    const auto o=MaximumObservation({0.,0.,.02,.001,.01,.001,.04,.01,0.,0.,0.});
+    ASSERT_TRUE(o.valid);ASSERT_EQ(o.peaks.size(),1u);const auto& p=o.peaks[0];
+    EXPECT_EQ(p.candidateCount,3u);ASSERT_TRUE(p.amplitude);EXPECT_NEAR(*p.amplitude,.04,1e-15);
+    EXPECT_DOUBLE_EQ(*p.time,.6);EXPECT_DOUBLE_EQ(*p.plateauEnd,.6);
+}
+TEST(SingleImpulseMaximum, SeparatedEqualLargestPeaksAreTimingAmbiguous)
+{
+    const auto o=MaximumObservation({0.,0.,.02,.0,.02,0.,0.,0.,0.,0.,0.});
+    EXPECT_FALSE(o.valid);ASSERT_EQ(o.peaks.size(),1u);
+    EXPECT_EQ(o.peaks[0].validity,PeakValidity::Ambiguous);
+    EXPECT_EQ(o.peaks[0].candidateCount,2u);EXPECT_FALSE(o.peaks[0].time);
+}
+TEST(SingleImpulseMaximum, PlateauRetainsMeasuredEndpointsDespiteSmallerPeak)
+{
+    const auto o=MaximumObservation({0.,0.,.01,0.,.04,.04,.04,.01,0.,0.,0.});
+    ASSERT_TRUE(o.valid);const auto& p=o.peaks[0];EXPECT_EQ(p.candidateCount,2u);
+    EXPECT_DOUBLE_EQ(*p.time,.4);EXPECT_DOUBLE_EQ(*p.plateauEnd,.6);
+}
+TEST(SingleImpulseMaximum, BoundaryAndIncompleteWindowCannotBecomeValidMaximum)
+{
+    const auto clipped=MaximumObservation({0.,0.,.01,0.,0.,0.,0.,0.,0.,0.,.04});
+    EXPECT_FALSE(clipped.valid);EXPECT_EQ(clipped.peaks[0].validity,PeakValidity::Clipped);
+    const auto incomplete=MaximumObservation(onePeak,false);
+    EXPECT_FALSE(incomplete.complete);EXPECT_EQ(incomplete.peaks[0].validity,PeakValidity::Incomplete);
+}
+TEST(SingleImpulseMaximum, NewPolicyCannotRelabelLegacyOrBurstSpecification)
+{
+    auto s=MaximumSpecification();s.schemaVersion=4;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=MaximumSpecification();s.characterization.reset();
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=MaximumSpecification();s.expectedStimulusIds.push_back("other");
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+    s=MaximumSpecification();s.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    EXPECT_THROW(ProbeRecorder{s},std::invalid_argument);
+}
+TEST(SingleImpulseMaximum, HistoricalIsolatedPolicyStillRejectsMultiplePeaks)
+{
+    auto s=MaximumSpecification();s.schemaVersion=4;s.peakSelection=PeakSelectionPolicy::IsolatedWindow;
+    ProbeRecorder recorder(s);Samples(recorder,{0.,0.,.02,0.,.04,0.,0.,0.,0.,0.,0.});
+    recorder.RecordStimulus("pulse",.1);const auto o=recorder.Close(1.,"model_1","closed");
+    EXPECT_FALSE(o.valid);EXPECT_EQ(o.peaks[0].validity,PeakValidity::Ambiguous);
+}
+TEST(SingleImpulseMaximum, MeasurableMaximumBeforeActualImpulseDoesNotProveAResponse)
+{
+    const auto o=MaximumObservation({0.,0.,.04,0.,.01,0.,0.,0.,0.,0.,0.},true,.5);
+    EXPECT_TRUE(o.complete);EXPECT_FALSE(o.valid);EXPECT_TRUE(Has(o,"peak_precedes_stimulus:input"));
+    ASSERT_EQ(o.peaks.size(),1u);EXPECT_EQ(o.peaks[0].validity,PeakValidity::Valid);
+    EXPECT_DOUBLE_EQ(*o.peaks[0].time,.2);EXPECT_LT(*o.peaks[0].delayFromStimulus,0.);
 }
 }

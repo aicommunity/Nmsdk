@@ -304,6 +304,13 @@ void TransferFixture(unsigned int frequency, bool withBoundary, bool precise = f
     const auto output = directory + prefix + "import-verification-" + QString::number(frequency) + ".json";
     Write(input,fixture);
     QProcess child; auto environment = QProcessEnvironment::systemEnvironment();
+    // InitEngine reserves <execution-output>.test-events-log exclusively per
+    // process. A native-gate child must not inherit its parent's occupied path.
+    // Keep both child artifacts and its native EventsLog inside this run.
+    const auto childOutput = directory + prefix + "child-" + QString::number(frequency);
+    ASSERT_TRUE(std::filesystem::create_directory(childOutput.toStdString()));
+    environment.insert("TIMELEARNER_EXECUTION_OUTPUT",childOutput);
+    environment.insert("TIMELEARNER_COMPOSITE_OUTPUT",childOutput + "/native-composite");
     environment.insert("TIMELEARNER_ARCHIVE_CHILD_INPUT",input); environment.insert("TIMELEARNER_ARCHIVE_CHILD_OUTPUT",output);
     child.setProcessEnvironment(environment);
     child.setProgram(QString::fromStdString(NmsdkTests::PulseLibTestExecutable()));
@@ -454,6 +461,65 @@ TEST(TimeLearnerModelArchive, RejectsMalformedArchiveBeforeRegistration)
     core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
 }
 
+void RejectInconsistentExistingImagePhysics(const QString& imageName)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    auto model = Prepared(2000);
+    const auto identity = NmsdkTools::IdentifyModel(model);
+    auto archive = NmsdkTools::ExportModelArchive(model,Metadata());
+    auto definitions = archive["class_definitions"].toArray();
+    bool changed = false;
+    for(int i = 0; i < definitions.size(); ++i)
+    {
+        auto definition = definitions[i].toObject();
+        if(definition["name"].toString() != imageName) continue;
+        ASSERT_TRUE(core.storage->CheckClass(imageName.toStdString()));
+        auto snapshot = definition["snapshot"].toObject();
+        USerStorageXML xml;
+        ASSERT_TRUE(xml.Load(snapshot["native_xml"].toString().toStdString(),"TimeLearnerNativeGraph"));
+        ASSERT_TRUE(xml.SelectNode(snapshot["component_name"].toString().toStdString()));
+        ASSERT_TRUE(xml.SelectNode("Parameters"));
+        ASSERT_TRUE(xml.SelectNode("Capacity"));
+        bool valid = false;
+        const double capacity = QString::fromStdString(xml.GetNodeText()).toDouble(&valid);
+        ASSERT_TRUE(valid && std::isfinite(capacity) && capacity > 0.);
+        ASSERT_TRUE(xml.SetNodeText(QString::number(2. * capacity,'g',17).toStdString()));
+        xml.SelectRoot();
+        std::string bytes;
+        ASSERT_TRUE(xml.Save(bytes));
+        snapshot["native_xml"] = QString::fromStdString(bytes);
+        snapshot["native_xml_sha256"] = QString::fromLatin1(QCryptographicHash::hash(
+            QByteArray::fromStdString(bytes),QCryptographicHash::Sha256).toHex());
+        // Keep the declared identity unchanged: all file hashes are valid, but
+        // the native XML describes different physics. Existing registration
+        // must not make this contradictory document acceptable.
+        definition["snapshot"] = snapshot;
+        definitions[i] = definition;
+        changed = true;
+        break;
+    }
+    ASSERT_TRUE(changed) << imageName.toStdString();
+    archive["class_definitions"] = definitions;
+    Seal(archive);
+    const auto classes = core.storage->GetNumClasses();
+    if(const char* output = std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
+    {
+        std::filesystem::create_directories(output);
+        Write(QString::fromLocal8Bit(output) + "/contradictory-image-" + imageName + ".json",archive);
+    }
+    ExpectImportFailure(archive,"archive_model_mismatch");
+    EXPECT_EQ(core.storage->GetNumClasses(),classes);
+    EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(identity,model)["match"].toBool());
+    model->BreakLinks();
+    model->Free();
+}
+
+TEST(TimeLearnerModelArchive, RejectsContradictoryNativeImageXmlWithExistingClass)
+{ RejectInconsistentExistingImagePhysics("NPChannel"); }
+
+TEST(TimeLearnerModelArchive, RejectsContradictoryDerivedImageXmlWithExistingClass)
+{ RejectInconsistentExistingImagePhysics("NPExcChannelBio"); }
+
 TEST(TimeLearnerModelArchive, RejectsLostGraphInformationEvenWithUpdatedFileHashes)
 {
     const auto& core = NmsdkTests::InitEngineForPulseLibTests(); auto model = Prepared(2000);
@@ -481,5 +547,46 @@ TEST(TimeLearnerModelArchive, CalibrationMustMatchActualZoneWithoutInventingAThr
     auto imported = NmsdkTools::ImportModelArchive(archive,core.storage,core.environment,"native-archive-fixture-v1");
     ASSERT_TRUE(imported); EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(archive["graph"].toObject()["identity"].toObject(),imported)["match"].toBool());
     core.storage->ReturnObject(imported); core.storage->ReturnObject(model);
+}
+
+void RepeatedPrivateImageRestRoundtrip(unsigned int frequency)
+{
+    const auto& core = NmsdkTests::InitEngineForPulseLibTests();
+    core.environment->DestroyModel();
+    ASSERT_TRUE(core.environment->CreateModel("NModel"));
+    auto clock = dynamic_pointer_cast<UNet>(core.environment->GetModel());
+    ASSERT_TRUE(clock);
+    clock->SetEnvironment(core.environment);
+    clock->SetGlobalTimeStep(frequency);
+    auto source = Prepared(frequency, true, true);
+    ASSERT_TRUE(source);
+    EXPECT_EQ(source->GetTimeStep(), frequency);
+    const auto before = NmsdkTools::IdentifyModel(source);
+    const auto original = NmsdkTools::ExportModelArchive(source, Metadata());
+    ASSERT_FALSE(original["class_definitions"].toArray().isEmpty());
+    for(int cycle = 0; cycle < 3; ++cycle)
+    {
+        auto imported = NmsdkTools::ImportModelArchive(original, core.storage, core.environment,
+            "native-archive-fixture-v1");
+        ASSERT_TRUE(imported) << "cycle=" << cycle;
+        const auto again = NmsdkTools::ExportModelArchive(imported, Metadata());
+        EXPECT_EQ(again["class_definitions"], original["class_definitions"])
+            << "private image rest state must survive native import and pool reuse; cycle=" << cycle;
+        EXPECT_EQ(again, original) << "cycle=" << cycle;
+        EXPECT_TRUE(NmsdkTools::VerifyModelIdentity(before, imported)["match"].toBool());
+        core.storage->ReturnObject(imported);
+    }
+    EXPECT_EQ(NmsdkTools::IdentifyModel(source), before);
+    core.storage->ReturnObject(source);
+}
+
+TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt2000)
+{
+    RepeatedPrivateImageRestRoundtrip(2000);
+}
+
+TEST(NativeImageRestSnapshot, RepeatedArchiveAndPoolReuseAt20000)
+{
+    RepeatedPrivateImageRestRoundtrip(20000);
 }
 }

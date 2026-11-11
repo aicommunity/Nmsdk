@@ -1,0 +1,108 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "6175eab3-e4b0-4ea0-a192-cf1bfd09b53a",
+  "job_id": "s03-single-pulse-joint-visual-normal-a1",
+  "recorded_unix": 1794018410.1249797,
+  "administrator": {
+    "pid": 1432732,
+    "start_ticks": "309347237",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1432742,
+    "start_ticks": "309347251",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-single-pulse-joint-visual-normal-a1-container",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "8e284b475d2b8ca57a514a50c6dcdf42183bacad221a83af87e3d29a2429124c",
+      "unit": "timelearner-8f100ad4-97ea-466e-b8d1-27fc27383145.service",
+      "invocation_id": "d148eca53b444ec485ace47951631132",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-8f100ad4-97ea-466e-b8d1-27fc27383145.service",
+      "initial_main_pid": 1432742,
+      "initial_start_ticks": "309347251",
+      "sha256": "1b16bc14351df418102ec4f4d02110c66f8779fa44c297fc43d7e1cdec8ff677"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-8f100ad4-97ea-466e-b8d1-27fc27383145.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "note": "Native channel diagnostic worker and all compiler, test, probe and archive descendants freshly closed; record actual results separately.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/single-pulse-joint-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/ReportsCache/single-pulse-joint-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-single-pulse-console-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-single-pulse-console-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/plot-venv-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-single-pulse-joint-visual-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-single-pulse-joint-visual-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-single-pulse-console-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-console-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-single-pulse-console-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-csearch-threshold-joint-asan-build-a1/Bin"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-isi-template-baseline-normal-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-single-pulse-console-normal-a2-delivery",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-single-pulse-console-normal-a2-delivery"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

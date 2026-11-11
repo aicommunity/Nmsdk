@@ -1,0 +1,11 @@
+# Composite Console execution3 — source preparation
+
+Cold6 opt-in leaves old job/execution meanings unchanged. The Console publishes the actual package5 measurement archive to composite-measurements/index.json, every group-%06d.json sidecar and every exact primary CSV. Mandatory embedded blobs remain present; the external files are an additional exact mirror. Strict production archive decode runs before publication. Partial groups remain partial, with no reconstructed closure/certificate.
+
+Execution3 wraps base execution1/2 with the agreed method/archive/model/source/counter fields. The semantic model hash comes from actual trained roots/package, never the initial template. Final roots are refreshed after editors may have replaced child instances. Streaming raw trial artifacts remain forensic extras; actual callback native_trials/sampled_frames are distinct from current-attempt and cumulative archive counters. The raw packet schema is unchanged.
+
+Preflight3 retains real initial graph identity with known zero counters and no source family/archive. A failed or cancelled owned Start before source capture returns code2, execution=training_start_failed, null package/archive/source and unknown attempt/archive accounting. A signed training-start-failure.json preserves outcome/reason/actual model revision and explicit null certificate; callbacks are counted only if actually observed.
+
+11 new source cases (7 production writer/counter/envelope checks and 4 actual-profile job emitters), candidate scope240=229+11. The actual profile jobs are emitted under TIMELEARNER_COMPOSITE_OUTPUT/native-composite-cli-inputs/{classic,branch}{,-default-sync}-job.json. Remote workers must execute the compiled NeuroModelerConsole with --timelearner-preflight or --timelearner-train and --timelearner-output into fresh directories. The two .2 jobs are technical plumbing fixtures; .02 jobs must retain the original tolerance and cannot claim Exact merely from a readable package. The emitter cases do not execute CLI or prove scientific convergence.
+
+Actual CLI Train-to-Test, independent Python package/summary/archive replay, temporal rendering of every full/omit/repeat presentation and native runtime provenance remain mandatory gates. Fixed initial windows still limit structural search; no defaults or general experiments are switched to the new method.

@@ -1,0 +1,51 @@
+{
+  "kind": "measured_response_extraction_acceptance_jobs",
+  "schema_version": 1,
+  "compiled_root": "856b918253754b0d18587423ed37f4d26d505e3b",
+  "PulseLib": "f87f1b5308194609643795e6055462d3778c56f8",
+  "Rdk": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+  "unit_cases": 78,
+  "physical_cases_planned": 15,
+  "complete_acceptance": false,
+  "workers": [
+    {
+      "host": "10.245.1.17",
+      "job": "s07-response-features-m40-a1",
+      "source": "/media/user/Data/TimeLearnerRefactor/source-fair-domains-asan38-a1",
+      "build": "/media/user/Data/TimeLearnerRefactor/build-fair-domains-asan38-a1",
+      "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-s07-response-features-m40-a1",
+      "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-response-features-m40-a1",
+      "unit": "timelearner-af9b2613-5e05-4d86-9295-fcd7134e3c58.service",
+      "invocation_id": "098dcf7da4684e7dbf5c696bcf933300",
+      "initial_main_pid": 1998761,
+      "initial_start_ticks": "317649116",
+      "request_sha256": "2d9793729edc7af3a9f07957fca597c5a6296494adc37696861c75dabd1c32c7",
+      "asan_options": "detect_leaks=0",
+      "last_observed": "closed_unit78_native9_passed_native10_timeout_five_not_started_lease_released",
+      "evidence_commit": "6ce6179f605e216444d9c8b23a1d5bf5f17c7461",
+      "physical_cases_passed": 9,
+      "timeout_case": "NativeBurstAssignment/ClassicSix2000",
+      "physical_cases_not_started": 5,
+      "ab_comparison_completed": false,
+      "accepted": false
+    },
+    {
+      "host": "10.245.1.11",
+      "job": "s07-response-features-elder-a1",
+      "source": "/home/user/timelearner-refactor/source-integrated-acceptance-normal-a1",
+      "build": "/home/user/timelearner-refactor/build-integrated-acceptance-normal-a1",
+      "runtime": "/home/user/timelearner-refactor/runtime-s07-response-features-elder-a1",
+      "output": "/home/user/timelearner-refactor/readbacks/s07-response-features-elder-a1",
+      "unit": "timelearner-2337cf04-d493-476f-b10d-74bddda4191f.service",
+      "invocation_id": "3cd43cced0564f8cb8dafc5939e5ca21",
+      "initial_main_pid": 1482700,
+      "initial_start_ticks": "367106436",
+      "request_sha256": "466407cd97d2e0440f4f3eaced69e41b66d012be899040fa220c9a94c813b7c0",
+      "asan_options": "",
+      "last_observed": "normal_unit78_and_physical15_passed_group_closed_lease_released",
+      "evidence_commit": "0e7a30ff19b4d67846cc98f27b98ed9dd3862d74"
+    }
+  ],
+  "new_training_or_classification": false,
+  "whole_plan_complete": false
+}

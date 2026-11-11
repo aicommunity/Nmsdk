@@ -1,0 +1,158 @@
+# Диагностические подмножества исходной пачки
+
+Статус: начата реализация; это не новый способ измерения пика Train и не
+принятый native/Console API. Stage7 и полный план остаются незавершёнными.
+
+Для проверки наложения нужны полная пачка, каждый одиночный импульс в своём
+исходном времени и leave-one-out предъявления. Физическая размерность,
+нейрон, storage physics, порог, training target и references должны оставаться
+неизменными. Между пробами выполняется штатный сброс физической динамики.
+Пробы дают диагностические сигналы; их нельзя выдавать за completed Train,
+Exact certificate или доказанную декомпозицию нелинейной модели.
+
+Первый отдельный компонент `Core/TimeLearner/StimulusSubset` строит ISI
+для строго возрастающего непустого множества исходных ordinal IDs. Он
+проверяет все исходные интервалы, включая пропущенные; отвергает NaN/Inf,
+отрицательные значения, overflow, дубли и неверный порядок индексов.
+Полное множество сохраняет исходные ISI без перегруппировки. Пустое множество
+пока не поддерживается явно; отсутствие baseline-only API не скрывается.
+
+Результат содержит запрошенные source offsets. Из-за перегруппировки binary64
+сложений это не обещание совпадения фактических native timestamps. Положительная
+приёмка опыта должна сверить actual события оставшихся импульсов и actual
+выход генератора; изменение других событий или неверный источник делает
+сравнение невалидным. При перекрытии импульсов бинарный выход источника также
+может быть нелинейным; разность двух soma traces не объявляется универсальным
+«чистым вкладом» импульса.
+
+Семь unit cases production planner прошли на Elder через полный SDK CMake
+configure и отдельный `Test_PulseLib_StimulusSubset` (rootd684cec2e,
+PulseLibe9da428). Есть те же cases в StorageComponents. Evidence
+`2831b273c6566c80f998aa7093179ceeb7cbae5d`:71 members /166180B.
+[Metadata-сверка](StimulusSubsetPlannerVerification.json) подтвердила каждый
+member и6 source hashes против Git. Локальная компиляция не применялась.
+
+В feature branch добавлены diagnostic-only schema6 полного наблюдения,
+временная настройка Dataset на легальной границе, snapshot/restore полного
+training pattern, model/source/readback guards и запрет сертификатов.
+Они ещё не скомпилированы/проверены. Добавлены семь observation unit controls
+и девять native Classic/Branch cases: full subset, удаление внутреннего
+импульса, поздний одиночный импульс, отмена с восстановлением,2000/20000Hz.
+После их приёмки нужны
+Console, readers, настоящие ablation-пробы и временные графики. Никакой новый
+assignment или порог сходимости этим документом не вводится.
+
+## Служебная подготовка Elder
+
+Первый unit attempt остановлен до компиляции: свободное место ниже2GiB.
+Из закрытого private SDK build удалены474 регенерируемых `.cpp.o/.cc.o/.c.o`,
+125358240B. `_deps`, исходники, linked runtimes, модели и primary сохранены;
+source/runtime hashes проверены до/после. Новый unit attempt прошёл7/7.
+Первая попытка не переоценивалась в успешную.
+
+В завершении metadata-only очистки был пропущен обязательный `note` для
+release. После проверки завершённого владельца, сохранённого producer и
+повторной сверки файлов выполнена явная административная коррекция ровно
+одного maintenance lease. Она сохранена в evidence, не является восстановлением
+compute worker и не ослабляет production запрет automatic stale release.
+Будущие maintenance операции также должны использовать bound owner.
+
+## Следующая приёмка
+
+Начат отдельный normal job `s07-stimulus-subset-api-elder-a1`:roota798182e5,
+PulseLib09617c6. Новая runtime directory,71 unit IDs (14 subset/schema,
+34 прежних recorder,23 certificate) и19 physical IDs:9 новых subset,
+4 full-burst,2 bounded2k и4 single-maximum regressions. Сначала SDK build
+и регистрации CTest, затем тесты; при отказе следующая группа не запускается.
+Результат ещё не принят. Поддержка Console, warm continuation, arbitrary
+physics и настоящие сравнительные ablation-эксперименты этим не заявляются.
+
+**Обновление08.11:** a1 завершён:14+34+23 unit и19 physical checks прошли.
+Evidence `6e99697aa51f55021735a5d486bbb9c6724907cc`,187 members,
+646872B compressed. Все members и138 source hashes независимо сверены с Git:
+[metadata receipt](StimulusSubsetNativeVerification.json). Полная группа закрыта,
+резервирование снято. Обёртка первичных данных a1 версии1; полнота её внешнего
+restoration readback ещё неизвестна, хотя внутренние C++ проверки прошли.
+
+## Подготовленный следующий контроль
+
+Отдельная версия требует sample sink до изменения Dataset: иначе waveform-only
+проба могла бы завершиться без сохранения первичного сигнала. Добавлен native
+отрицательный тест отсутствующего sink. Обёртка JSON версии2 сохраняет фактически
+прочитанные InputPattern, Dataset.MatrixData и физическое N после восстановления.
+Одного boolean `training_target_restored` для внешней проверки недостаточно.
+
+Новый reader `stimulus_subset_evidence.py` проверяет полное окно CSV, численную
+валидность, реальные события/амплитуду генератора, source ordinals, исходный и
+предъявленный pattern hashes, модель до/после и readback восстановления.
+Версия1 принимается только явно как draft с неизвестной полнотой восстановления.
+Проверки reader используют реальные серверные пакеты и повреждённые копии этих
+данных; локально выполнен только разбор Python AST и сверка метаданных.
+
+Последующая версия прошла отдельную приёмку `s07-subset-restoration-elder-a1`:
+root `928fc7d782ee288a929130d6af3ba35784b34144`, PulseLib
+`609a06d31ccad1c382d3df3b8150f7de87b6abfd`.71 unit,20 physical и7 reader checks
+прошли без skipped. Восемь успешных waveform-пакетов содержат actual readback
+версии2. Evidence `84e3bd5c94cee12b6fe193ad13124217b7c51ca4`:191 members,
+644456B compressed. [Независимая сверка](StimulusSubsetRestorationVerification.json)
+подтвердила все members,138 source hashes из Git и закрытие/освобождение задания.
+Это адресная приёмка API и данных; Console, произвольная физика, применение
+к историческим обученным состояниям и сопоставление индивидуальных пиков
+по-прежнему не завершены. Следующий шаг — Console job schema, парные full/omit
+и single пробы сохранённых состояний и читаемые временные графики всех сом
+с фактическими входными импульсами.
+
+Оставшиеся импульсы могут изменить фактическое время из-за очереди one-shot
+генератора и квантования. Плановые offsets не доказывают неизменность времени;
+для причинного сравнения обязательны реальные timestamps парной полной пробы.
+Общий пик пачки не становится максимумом закреплённого импульса.
+
+## Console schema6 — подготовлено, ещё не принято
+
+`timelearner_native_probe_job` версии6 импортирует diagnostic stopped-state
+штатным механизмом. `presentation` содержит `kind=stimulus_subset_characterization`
+и непустой строго возрастающий `source_ordinals`. `probe.peak_selection=none`,
+`probe.window=null`: эти поля не изображают действующее измерение пика.
+Для Classic `input_index=0`; для Branch индекс выбирает физическую solo-точку.
+`source_stopped`, исходный stimulus profile и модель обязательны; resistance
+и profile interventions запрещены. Существующие schemas1–5 сохраняются.
+
+Console строит только transient request schema6, передаёт его штатному
+scheduler и сохраняет все samples. `subset-restoration.json` содержит реальные
+InputPattern, Dataset.MatrixData, physical N и MaxSpikes до/после, а также
+identity модели. Несовпадение означает `presentation_not_restored`, без
+положительного научного verdict. Сброс полной динамики после пробы и checkpoint
+посреди неё этим не обещаются.
+
+Python `prepare_subset_job` и `audit_execution` поддерживают эту схему.
+Аудитор проверяет подписанный job, артефакты, idle controller/history,
+модель, реальное восстановление и CSV через явный адаптер заголовка; samples
+и timestamps не изменяются. Разрешение другого trial ID связано с job,
+а прежний native fixture reader сохраняет свой исходный контракт.
+Добавлены6 проверок на настоящем Console corpus и повреждённых/rehashed копиях.
+Локально проверен только AST. До серверного compile/Console/readback gate
+новый CLI нельзя считать принятым или использовать для научных выводов.
+
+Обновление08.11: compile и Console gate на rootb29e8180 завершены. Выполнены
+6 настоящих проб двух сохранённых diagnostic состояний Classic/Branch:
+full `[0,1,2,3]`, omit `[0,2,3]` и late-single `[3]`; исходные ModelSpec,
+профили, trained inputs и controller history сохранены.6 новых reader checks
+и7 прежних reader regressions прошли без skipped. Все процессы закрыты,
+reservation снята. [Bindings и состояние публикации](StimulusSubsetConsoleJobs.json).
+Server evidence f79cdc4 передан через Git, независимо проверен и опубликован
+в origin; [receipt](StimulusSubsetConsoleVerification.json). Это не cold retrain и не Test
+классификации, а расширение адресной приёмки диагностического контура.
+
+Подготовлен `stimulus_subset_temporal`: все реальные soma channels на отдельных
+панелях с записанным input overlay и метками фактических событий. Ширина PNG2240px,
+высота504px на панель, основной шрифт12pt; SVG допускает масштабирование без
+потери линий. Для соответствующей сомы одной топологии шкала Y едина между пробами;
+разные сомы имеют отдельные шкалы, чтобы слабый ответ оставался различимым.
+Overview содержит полное окно, response-view только приближает участок
+наблюдаемой активности; оба сохраняются. Plot не назначает пики и не считает
+классификацию. Полный HTML/PNG/SVG отчёт предназначен для кэша M40 Data;
+Git хранит primary, метаданные и выбранные рисунки. Рендер A3 на M40 завершён:
+12 фигур,24 PNG/SVG; две выбранные overview-фигуры проверены визуально.
+[Отчёт](StimulusSubsetControlReport-2026-11-08.ru.md) явно указывает фактический
+порог0,0117. Он не заменяет отдельное исследование сохранённых состояний
+с порогом100: [постановка](HighThresholdSubsetStudyDesign.json).

@@ -1,0 +1,146 @@
+{
+  "kind": "declared_window_basin_independent_reader_unit_error_publication",
+  "schema_version": 1,
+  "facts": {
+    "kind": "declared_window_basin_independent_python_reader_unit_error",
+    "schema_version": 1,
+    "tool_root": "1de038cc72e6cb6217233d938939385b9f464945",
+    "compiled_root": "51566b251a087589411d0a6bbb848de7d0273b6e",
+    "compiled_pulse": "c3ac0aad30ccc4b9894e0d4dccb3386d688d504f",
+    "primary_evidence_commit": "7ec9d4ff731a7775903080d6a96b5d5a9febe340",
+    "primary_evidence_prefix": "Reports/StructTrain/TimeLearner/s07-native-basin-bridge-m40-a2",
+    "primary_archive_sha256": "fe4ebc07082d3a51e1b3131cc6faf9d6737aad0b5bc2aa35eea4a455be33264d",
+    "original_terminal_success": false,
+    "original_outputs_preserved": true,
+    "original_failure_reclassified": false,
+    "source_materialization_diagnostics_status": "needs_review",
+    "source_checkout_error_lines": 2,
+    "full_root_source_closure_accepted": false,
+    "python_source_payload_integrity_verified": true,
+    "metadata_publisher_attempt_a1_empty_stderr_assumption_failed_preserved": true,
+    "python_unit_tests_observed": 23,
+    "python_unit_tests_passed": 22,
+    "python_unit_test_errors": 1,
+    "failed_or_error_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_declared_window_basin_evidence.DeclaredWindowBasinEvidenceTest.test_file_api_snapshots_exact_referenced_primary"
+    ],
+    "actual_records_audited": 0,
+    "actual_records_not_attempted": 14,
+    "complete_geometry_replays": 0,
+    "partial_nonpromotion_checks": 0,
+    "partial_rejection_reason_recomputed": false,
+    "native_execution_verified_by_python": false,
+    "causal_lineage_verified_by_python": false,
+    "tool_python_source_hashes_verified": 413,
+    "actual_python_loaded_file_count": 17,
+    "protected_current_and_old_runtime_before_postclosure_equal": true,
+    "original_protected_runtime_after_snapshots_absent": true,
+    "new_cpp_or_model_execution": false,
+    "compiled_source_cache_or_runtime_modified": false,
+    "source_review_diagnosis": "File API helper read() unconditionally parses artifacts as JSON; trace CSV at line318 reaches parse_json_bytes at313, raising JSONDecodeError. The test-file API test185 fails. Original outputs are preserved; repair requires new tool commit and new attempt.",
+    "training_certificate_eligible": false,
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "created_utc": "2026-11-08T09:45:25.509804+00:00"
+  },
+  "original_output_unchanged": true,
+  "original_container_unchanged": true,
+  "fresh_closure_after_archive": {
+    "job": "s07-declared-window-basin-reader-m40-a1",
+    "closure": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "97c57f926ceb258c9ae1fd439c6e62fbf84b194c87a7b35a4ebdedf7f2b2bc57",
+        "unit": "timelearner-1ae13ac9-5d9b-4943-be38-b1b0cff7936e.service",
+        "invocation_id": "5a0d1622996d4eaba2f0588f200ca3ae",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1ae13ac9-5d9b-4943-be38-b1b0cff7936e.service",
+        "initial_main_pid": 2720356,
+        "initial_start_ticks": "320616143",
+        "sha256": "d18485d1ceac97fb8034ee60bc1160e230038d13d5ca7a8dcce7af24fb7a34c7"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-1ae13ac9-5d9b-4943-be38-b1b0cff7936e.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "leases": [
+      {
+        "token": "fbf81a7c-4cf0-42a7-8a07-154820ddc651",
+        "job_id": "s07-declared-window-basin-reader-m40-a1",
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 2720356,
+          "start_ticks": "320616143",
+          "uid": 1000
+        },
+        "resources": [
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-basin-bridge-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-basin-bridge-m40-a2"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/incoming-declared-window-basin-reader-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/incoming-declared-window-basin-reader-m40-a1"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-declared-window-basin-reader-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-declared-window-basin-reader-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-basin-bridge-m40-a2"
+          },
+          {
+            "access": "write",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-reader-root-m40-a1",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-declared-window-basin-reader-root-m40-a1"
+          },
+          {
+            "access": "read",
+            "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-root-m40-a2",
+            "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-basin-bridge-root-m40-a2"
+          }
+        ],
+        "state": "released",
+        "created": 1794130963.9457538,
+        "deadline": 1794131083.9457538,
+        "updated": 1794130967.9221048,
+        "release_note": "Bounded pure gate/source preparation worker closed; assertion verdict remains separate.",
+        "heartbeat_expired": true,
+        "owner_status": "missing",
+        "inspection_required": false,
+        "scientific_verdict": null
+      }
+    ]
+  },
+  "archive_members": 56
+}

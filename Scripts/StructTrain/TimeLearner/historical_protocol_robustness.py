@@ -1,0 +1,339 @@
+"""Frozen Phase A order/ITI controls on the exact historical native runtime.
+
+No Train, retargeting, threshold selection, synthetic response or new certificate.
+The original criterion and complete recorded inter-trial intervals stay separate.
+"""
+import argparse
+import hashlib
+import json
+import math
+from pathlib import Path
+import shutil
+import xml.etree.ElementTree as ET
+
+from .historical_model import serialized_neuron
+from .historical_phasea_temporal import read_stream, rising_edges
+from .historical_selectivity import analyze_historical_csv
+from .model_identity import canonical_model_sha256
+from .native_evidence import load, parse_json_bytes, require
+from .process_runner import execute, verify_runtime
+from .runtime import source_closure
+from .historical_phasea_native import (ROOT, BIN, PULSE, prepare_case,
+    add_native_temporal_observer, write, parameter_export, recognition_identity)
+
+
+CASE = "EXP01_ltz_threshold_sweep/Test_thr00135"
+THRESHOLD = .0135
+MODEL_SECONDS = 40
+
+
+def _one(node, path):
+    values = node.findall(path)
+    require(len(values) == 1, "historical_protocol_property_not_unique:"+path)
+    return values[0]
+
+
+def _dataset(tree):
+    return _one(tree, "./Model/Components/NeuronTimeLearner/Components/DatasetMatrix/Parameters")
+
+
+def _target(learner):
+    node = _one(learner, "./InputPattern")
+    values = [float(v) for v in (node.text or "").split()]
+    require((node.get("Rows"), node.get("Cols")) == ("4", "1") and len(values) == 4 and
+            all(math.isfinite(v) and v > 0 for v in values), "unsupported_historical_training_target")
+    return values
+
+
+def _read_patterns(parameters):
+    for name, expected in (("NumFeatures", "1"), ("NumSamples", "8"),
+                           ("MaxSpikesPerFeature", "4"), ("LoopSamples", "0"),
+                           ("AdvanceSampleAfterBurst", "1")):
+        require((_one(parameters, "./"+name).text or "").strip() == expected,
+                "unsupported_historical_protocol_layout:"+name)
+    data = _one(parameters, "./MatrixData");classes = _one(parameters, "./MatrixClasses")
+    require((data.get("Rows"), data.get("Cols")) == ("32", "1") and
+            (classes.get("Rows"), classes.get("Cols")) == ("1", "8"),
+            "unsupported_historical_flat_matrix")
+    tokens = (data.text or "").split();labels = (classes.text or "").split()
+    require(len(tokens) == 32 and len(labels) == 8 and all(v in ("0", "1") for v in labels)
+            and labels.count("1") == 1, "invalid_historical_protocol_matrix")
+    values = [float(v) for v in tokens]
+    require(all(math.isfinite(v) and v > 0 for v in values), "invalid_historical_protocol_isi")
+    return [tokens[i:i+4] for i in range(0, 32, 4)], labels
+
+
+def prepare_protocol(work, order, iti):
+    """Address actual flat matrix blocks and labels in both native input files."""
+    require(type(order) is list and len(order) == 8 and all(type(v) is int for v in order)
+            and set(order) == set(range(8)), "invalid_historical_protocol_permutation")
+    require(type(iti) in (int, float) and math.isfinite(iti) and iti in (1.5, 3.),
+            "unsupported_historical_protocol_iti")
+    source = None;target = None;threshold_controls = None
+    source_identity = serialized_neuron(work/"Model_00.xml");prepared = []
+    for filename in ("Model_00.xml", "Parameters_00.xml"):
+        path = work/filename;tree = ET.parse(path);root = tree.getroot()
+        parameters = _dataset(root);patterns, labels = _read_patterns(parameters)
+        declared = ([[float(v) for v in row] for row in patterns], labels)
+        require(source is None or source == declared, "historical_protocol_model_parameter_data_disagree")
+        source = declared
+        learner = _one(root, "./Model/Components/NeuronTimeLearner/Parameters")
+        actual_target = _target(learner)
+        require(target is None or actual_target == target, "historical_protocol_training_target_disagrees")
+        target = actual_target
+        require((_one(learner, "./IsNeedToTrain").text or "").strip() == "0",
+                "historical_protocol_must_not_train")
+        require((_one(learner, "./NumInputDendrite").text or "").strip() == "4" and
+                (_one(learner, "./StructureBuildMode").text or "").strip() ==
+                ("1" if filename == "Model_00.xml" else "0"),
+                "historical_protocol_unsafe_native_load_modes")
+        _one(learner, "./Delay");_one(parameters, "./Delay")
+        controls = {name: (_one(learner, "./"+name).text or "").strip()
+                    for name in ("LTZThreshold", "FixedLTZThreshold", "UseFixedLTZThreshold")}
+        if filename == "Parameters_00.xml":
+            require(float(controls["LTZThreshold"]) == THRESHOLD and
+                    float(controls["FixedLTZThreshold"]) == THRESHOLD and
+                    controls["UseFixedLTZThreshold"] == "0", "historical_protocol_threshold_overlay_changed")
+            threshold_controls = controls
+        prepared.append((path, tree, learner, parameters, patterns, labels))
+    # Validate both native files before editing either one. A corrupt second
+    # file must not leave the first with a partially changed declared protocol.
+    for path, tree, learner, parameters, patterns, labels in prepared:
+        # The historical Model contains the baseline parent threshold while
+        # Parameters supplies the declared Test overlay. Native parameter export
+        # must preserve that original overlay, not replace it with Model defaults.
+        for name, value in threshold_controls.items():_one(learner, "./"+name).text = value
+        _one(parameters, "./MatrixData").text = "\n".join(v for index in order for v in patterns[index])
+        _one(parameters, "./MatrixClasses").text = "\n".join(labels[index] for index in order)
+        # Learner owns the effective dataset delay; setting only its child can
+        # be overwritten by native construction. Both declarations are explicit.
+        _one(learner, "./Delay").text = str(iti)
+        _one(parameters, "./Delay").text = str(iti)
+        tree.write(path, encoding="utf-8")
+    require(serialized_neuron(work/"Model_00.xml")["sha256"] == source_identity["sha256"],
+            "historical_protocol_edit_changed_neuron")
+    patterns, labels = source
+    return {"order": order, "iti_declared": iti, "threshold": THRESHOLD,
+            "reset_policy": "historical native Test; fresh process per matrix; no added per-trial reset",
+            "model_seconds": MODEL_SECONDS,
+            "training_target": target,
+            "samples": [{"sample_id": "phasea-"+str(i), "original_index": i,
+                         "pattern_hash": canonical_model_sha256({"isi": [float(v) for v in patterns[i]]}),
+                         "pattern": [float(v) for v in patterns[i]], "label": "target" if labels[i] == "1" else "foil"}
+                        for i in order],
+            "serialized_source_neuron_sha256": source_identity["sha256"],
+            "training_started": False, "independent_evaluation": False}
+
+
+def effective_protocol(path, declared):
+    root = ET.parse(path).getroot();p = _dataset(root);patterns, labels = _read_patterns(p)
+    learner = _one(root, "./Model/Components/NeuronTimeLearner/Parameters")
+    require(_target(learner) == declared["training_target"], "historical_protocol_training_target_changed")
+    require(float(_one(learner, "./LTZThreshold").text) == declared["threshold"] and
+            float(_one(learner, "./FixedLTZThreshold").text) == declared["threshold"] and
+            (_one(learner, "./UseFixedLTZThreshold").text or "").strip() == "0",
+            "historical_protocol_effective_threshold_changed")
+    require([[float(v) for v in row] for row in patterns] == [s["pattern"] for s in declared["samples"]]
+            and labels == ["1" if s["label"] == "target" else "0" for s in declared["samples"]],
+            "historical_protocol_effective_matrix_changed")
+    delay = float(_one(p, "./Delay").text)
+    require(math.isfinite(delay) and delay == declared["iti_declared"],
+            "historical_protocol_effective_iti_changed")
+
+
+def read_observations(folder, declared, *, include_signals=False):
+    """Use actual native pulses, labels and all edges, not CSV row position."""
+    require(type(declared.get("samples")) is list and len(declared["samples"]) == 8 and
+            type(declared.get("order")) is list and len(declared["order"]) == 8 and
+            all(type(i) is int for i in declared["order"]) and set(declared["order"]) == set(range(8)),
+            "historical_protocol_declared_sample_set")
+    require([s.get("original_index") for s in declared["samples"]] == declared["order"] and
+            {s.get("sample_id") for s in declared["samples"]} == {"phasea-"+str(i) for i in range(8)} and
+            all(s["sample_id"] == "phasea-"+str(s["original_index"]) and
+                s.get("label") in ("target", "foil") and
+                type(s.get("pattern")) is list and len(s["pattern"]) == 4 and
+                all(type(v) in (int, float) and math.isfinite(v) and v > 0 for v in s["pattern"]) and
+                canonical_model_sha256({"isi": s["pattern"]}) == s.get("pattern_hash")
+                for s in declared["samples"]) and
+            sum(s["label"] == "target" for s in declared["samples"]) == 1 and
+            next(s["pattern"] for s in declared["samples"] if s["label"] == "target") == declared["training_target"],
+            "historical_protocol_declared_sample_identity")
+    records = parse_json_bytes((folder/"trace-files.json").read_bytes());streams = {};times = None
+    require(type(records) is list and all(type(r) is dict and
+            set(r) == {"source", "role", "path", "bytes", "sha256"} and
+            all(type(r[k]) is str and bool(r[k]) for k in ("source", "role", "path", "sha256")) and
+            type(r["bytes"]) is int and r["bytes"] >= 0 and len(r["sha256"]) == 64 and
+            all(c in "0123456789abcdef" for c in r["sha256"]) for r in records),
+            "historical_protocol_unknown_trace_manifest")
+    sources = {"stimulus": "NeuronTimeLearner.DatasetMatrix.Generator1.Output",
+               "lt_spikes": "NeuronTimeLearner.Neuron.LTZone.Output",
+               "neuron_soma_sum": "NeuronTimeLearner.Neuron.SomaSumPotential",
+               "learner_cached_somas": "NeuronTimeLearner.SomaNeuronAmplitude"}
+    sources.update({"soma"+str(i)+"_"+kind: "NeuronTimeLearner.Neuron.Soma"+str(i)+"."+channel+".Output"
+                    for i in range(1, 5) for kind, channel in (("exc", "ExcChannel"), ("inh", "InhChannel"))})
+    expected = {"stimulus", "lt_spikes", "neuron_soma_sum", "learner_cached_somas"}
+    expected.update("soma"+str(i)+"_"+kind for i in range(1, 5) for kind in ("exc", "inh"))
+    require(len(records) == len(expected) and {r["role"] for r in records} == expected,
+            "historical_protocol_trace_set")
+    for record in records:
+        require(record["source"] == sources[record["role"]] and
+                Path(record["path"]).name.endswith(record["source"]+".txt"),
+                "historical_protocol_trace_source_mismatch")
+        path = (folder/record["path"]).resolve(strict=True)
+        require(path.is_relative_to(folder.resolve()), "historical_protocol_trace_path_escape")
+        require(record["source"] == sources[record["role"]] and
+                path.name.endswith(record["source"]+".txt"), "historical_protocol_trace_source_mismatch")
+        require(type(record["bytes"]) is int and path.stat().st_size == record["bytes"],
+                "historical_protocol_trace_size_mismatch")
+        clock, data = read_stream(path, 5 if record["role"] == "learner_cached_somas" else 1, record["sha256"])
+        require(times is None or times == clock, "historical_protocol_clock_disagreement")
+        times = clock;streams[record["role"]] = data
+    # Preserve the historical reader's exact 40s/2000Hz clock contract.
+    pulses = rising_edges(streams["stimulus"]);spikes = rising_edges(streams["lt_spikes"])
+    require(len(pulses) == 32, "historical_protocol_stimulus_set_incomplete")
+    native = analyze_historical_csv(folder/"work/SelectivityLog/results.csv", [str(i) for i in range(8)])
+    by_id = {r["trial_id"]: r for r in native["rows"]};trials = []
+    for position, sample in enumerate(declared["samples"]):
+        row = by_id[str(position)];actual = [times[i] for i in pulses[position*4:(position+1)*4]]
+        require(row["label"] == sample["label"] and row["isis"] == sample["pattern"][1:],
+                "historical_protocol_presented_identity_mismatch")
+        require(all(abs(actual[j+1]-actual[j]-sample["pattern"][j+1]) < 1e-9 for j in range(3)),
+                "historical_protocol_actual_isi_mismatch")
+        onset = actual[0];accept_end = actual[-1]+.5
+        interval_end = times[pulses[(position+1)*4]] if position < 7 else MODEL_SECONDS
+        require(onset < accept_end < interval_end and times[-1]+1/2000 >= interval_end,
+                "historical_protocol_incomplete_or_overlapping_window")
+        in_window = [times[i] for i in spikes if onset <= times[i] <= accept_end]
+        full = [times[i] for i in spikes if onset <= times[i] < interval_end]
+        require(bool(in_window) == row["reported_fired"], "historical_protocol_csv_spike_disagreement")
+        trials.append({**sample, "trial_id": str(position), "position": position, "onset": onset,
+                       "stimulus_times": actual, "accept_end": accept_end, "interval_end": interval_end,
+                       "spike_times": in_window, "full_interval_spike_times": full,
+                       "late_spike_times": [t for t in full if t > accept_end],
+                       "native_match": row["native_match"], "complete": True})
+    # A protocol must apply its factor; report the actual gap before accepting.
+    gaps = [trials[i+1]["onset"]-trials[i]["stimulus_times"][-1] for i in range(7)]
+    require(all(gap >= declared["iti_declared"]-1e-9 for gap in gaps),
+            "historical_protocol_actual_gap_shorter_than_declared")
+    somas = [[streams["soma"+str(i)+"_exc"][n][0]+streams["soma"+str(i)+"_inh"][n][0]
+              for i in range(1, 5)] for n in range(len(times))]
+    require(all(s == c[1:] for s, c in zip(somas, streams["learner_cached_somas"])),
+            "historical_protocol_native_soma_alignment_changed")
+    observation = {"kind": "historical_frozen_protocol_observations", "schema_version": 1,
+            "trials": trials, "native_counts": native["reported_counts"],
+            "native_correct": native["native_match_count"], "actual_inter_burst_gaps": gaps,
+            "pre_stimulus_spikes": [times[i] for i in spikes if times[i] < trials[0]["onset"]],
+            "samples": len(times), "all_recorded_windows_complete": True,
+            "training_certificate": None, "independent_evaluation": False,
+            "scientific_verdict": None}
+    if include_signals:
+        observation["signals"] = {"times": times, "somas": somas,
+            "neuron_soma_sum": [row[0] for row in streams["neuron_soma_sum"]],
+            "stimulus": [row[0] for row in streams["stimulus"]]}
+    return observation
+
+
+def analyze_case(folder, *, include_signals=False):
+    """Read a finished native case without recalculating or editing its model."""
+    folder = Path(folder).resolve(strict=True);declared = load(folder/"protocol.json")
+    source = serialized_neuron(folder/"inputs/Model_00.xml")
+    before = serialized_neuron(folder/"preflight/work/Model_00.xml")
+    after = serialized_neuron(folder/"work/Model_00.xml")
+    require(before["sha256"] == recognition_identity(source, THRESHOLD) and after == before,
+            "historical_protocol_frozen_neuron_changed")
+    for phase in (folder/"preflight", folder):
+        result = load(phase/"process/result.json");runtime = load(phase/"process/runtime.json")
+        owned = load(phase/"process/owned-process.json")
+        loaded = parse_json_bytes((phase/"process/loaded-files.json").read_bytes())
+        require(result["execution"] == "completed" and result["returncode"] == 0 and
+                result["runtime_provenance"] == "loaded_files_captured" and type(loaded) is list and
+                runtime["executable"] in loaded and runtime["source_closure"]["root"]["head"] == ROOT and
+                result["runtime_fingerprint"] == owned["runtime_fingerprint"] == runtime["runtime_fingerprint"],
+                "historical_protocol_native_process_evidence_invalid")
+    effective_protocol(folder/"preflight/work/Model_00.xml", declared)
+    effective_protocol(folder/"work/Model_00.xml", declared)
+    observation = read_observations(folder, declared, include_signals=include_signals)
+    baseline = declared["order"] == list(range(8)) and declared["iti_declared"] == 1.5
+    if baseline:
+        require((folder/"work/SelectivityLog/results.csv").read_bytes() == (folder/"reference.csv").read_bytes(),
+                "historical_protocol_original_control_csv_changed")
+    observation.update(frozen_neuron_sha256=after["sha256"],
+                       original_control_csv_equal=True if baseline else None)
+    return observation
+
+
+def run_case(source, runtime, output, order, iti):
+    source = Path(source).resolve(strict=True);output = Path(output).resolve()
+    runtime_root = Path(runtime["executable"]["path"]).resolve(strict=True).parent
+    require(not output.exists() and not output.is_relative_to(source) and not source.is_relative_to(output)
+            and not output.is_relative_to(runtime_root) and not runtime_root.is_relative_to(output),
+            "historical_protocol_output_exists_or_overlaps")
+    closure = source_closure(source)
+    require(closure["root"]["head"] == ROOT and closure["Bin"]["head"] == BIN and
+            closure["Libraries/Nmsdk-PulseLib"]["head"] == PULSE and runtime["source_closure"] == closure,
+            "historical_protocol_source_runtime_mismatch")
+    verify_runtime(runtime)
+    inputs, work, reference, records = prepare_case(source/"Bin", CASE, output)
+    declared = prepare_protocol(work, order, iti)
+    observer = add_native_temporal_observer(source/"Bin", work);parameter_export(work)
+    write(output/"protocol.json", declared);write(output/"inputs.json", records);write(output/"observer.json", observer)
+    shutil.copyfile(runtime["app_ini"]["path"], work/"NeuroModelerConsole.ini")
+    ini_hash = hashlib.sha256((work/"NeuroModelerConsole.ini").read_bytes()).hexdigest()
+    require(ini_hash == runtime["app_ini"]["sha256"], "historical_protocol_runtime_ini_mismatch")
+    prepared = output/"prepared";shutil.copytree(work, prepared)
+    short = output/"preflight/work";shutil.copytree(prepared, short)
+    result = execute(runtime, ["-c", str(short/"Project.ini"), "-s", "-t", ".0005", "-x", "-S"],
+                     short, output/"preflight/process", 120)
+    require(result["execution"] == "completed", "historical_protocol_preflight_execution_failed")
+    identity = serialized_neuron(short/"Model_00.xml")
+    source_identity = serialized_neuron(inputs/"Model_00.xml")
+    require(identity["sha256"] == recognition_identity(source_identity, THRESHOLD),
+            "historical_protocol_effective_neuron_changed")
+    effective_protocol(short/"Model_00.xml", declared)
+    cached = list((short/"TemporalTrace").glob("*NeuronTimeLearner.SomaNeuronAmplitude.txt"))
+    stimulus = list((short/"TemporalTrace").glob("*NeuronTimeLearner.DatasetMatrix.Generator1.Output.txt"))
+    require(len(cached) == len(stimulus) == 1, "historical_protocol_prestimulus_stream_missing")
+    cached_rows = [line.split() for line in cached[0].read_text().splitlines()]
+    require(bool(cached_rows) and all(len(row) == 7 for row in cached_rows),
+            "historical_protocol_prestimulus_readout_dimension_invalid")
+    require(all(float(line.split()[-1]) == 0 for line in stimulus[0].read_text().splitlines()),
+            "historical_protocol_prestimulus_already_presented_input")
+    write(output/"preflight/validation.json", {"effective_neuron_identity": identity["sha256"],
+          "effective_pattern_and_iti_verified": True, "learner_readout_rows": 5,
+          "no_stimulus_presented": True, "original_native_load_modes_preserved": True})
+    result = execute(runtime, ["-c", str(work/"Project.ini"), "-s", "-t", str(MODEL_SECONDS), "-x", "-S"],
+                     work, output/"process", 900)
+    require(result["execution"] == "completed", "historical_protocol_execution_failed")
+    require(serialized_neuron(work/"Model_00.xml")["sha256"] == identity["sha256"],
+            "historical_protocol_frozen_neuron_changed")
+    effective_protocol(work/"Model_00.xml", declared)
+    require(hashlib.sha256((work/"NeuroModelerConsole.ini").read_bytes()).hexdigest() == ini_hash,
+            "historical_protocol_runtime_ini_changed")
+    traces = []
+    for stream in observer["streams"]:
+        paths = [p for p in (work/"TemporalTrace").glob("*.txt") if p.name.endswith(stream["source"]+".txt")]
+        require(len(paths) == 1 and paths[0].stat().st_size > 0,
+                "historical_protocol_trace_missing:"+stream["role"])
+        p = paths[0];traces.append({**stream, "path": str(p.relative_to(output)),
+                                  "bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()})
+    write(output/"trace-files.json", traces)
+    require(source_closure(source) == closure, "historical_protocol_source_changed")
+    observation = analyze_case(output)
+    write(output/"observations.json", observation)
+    return observation
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source-root", type=Path, required=True)
+    parser.add_argument("--runtime", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--rotation", type=int, required=True, choices=range(8))
+    parser.add_argument("--iti", type=float, required=True, choices=(1.5, 3.))
+    args = parser.parse_args();order = [(i+args.rotation) % 8 for i in range(8)]
+    result = run_case(args.source_root, load(args.runtime), args.output, order, args.iti)
+    print(json.dumps({k: v for k, v in result.items() if k != "trials"}, allow_nan=False))
+
+
+if __name__ == "__main__":
+    main()

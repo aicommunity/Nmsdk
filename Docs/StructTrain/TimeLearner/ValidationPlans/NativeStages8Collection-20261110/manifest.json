@@ -1,0 +1,1372 @@
+{
+  "kind": "timelearner_closed_native_acceptance_collection",
+  "schema_version": 3,
+  "tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3",
+    "commit": "71de4df830872cac433889a3007a4abf542b680b"
+  },
+  "base": "/media/user/Data/TimeLearnerRefactor",
+  "output": "/media/user/Data/TimeLearnerRefactor/evidence-native-stages8-m40-a1/Reports/StructTrain/TimeLearner/s04-native-stages8-preservation-m40-a1",
+  "repository": "/media/user/Data/TimeLearnerRefactor/evidence-native-stages8-m40-a1",
+  "parent": "c481d317ca51c6363111443054f84a8c5ca9a8cc",
+  "collection_id": "s04-native-stages8-preservation-m40-a1",
+  "original_paths": {
+    "native-output": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+    "controller": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+    "source": "/media/user/Data/TimeLearnerRefactor/source-native-image-stages-m40-a6",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-native-image-stages8-m40-a6",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-native-image-stages8-m40-a6"
+  },
+  "readonly_inventory": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native-stages8-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeStages8Collection-20261110/readonly-inventory.json.gz",
+    "compressed_bytes": 333243,
+    "compressed_sha256": "1e721fbc26345c73c881332b186fb99df0c984c0d7c3faad30d64f653099fa03",
+    "raw_bytes": 1142898,
+    "raw_sha256": "f1f6bf86cef0f2a53796ddbb62c047ce6342e6809a746a7ae4e87d272f7165a9"
+  },
+  "regular_files": [
+    {
+      "role": "original-0",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "CMakeCache-terminal.txt",
+      "expected_bytes": 83526,
+      "expected_sha256": "194847f54cd055c73167f1f192ad6fea717c7e02d5b9e4596ae3f80ab8aa1b75",
+      "maximum_bytes": 83526,
+      "staged_name": "original-0000.dat",
+      "archive_path": "native-output/CMakeCache-terminal.txt"
+    },
+    {
+      "role": "original-1",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/native/actual-membrane-copy-load-stages.json",
+      "expected_bytes": 305192,
+      "expected_sha256": "544981ccbe803e1f8f96f680843f13efd3f2a018127405cc5b2abea2c1d3058f",
+      "maximum_bytes": 305192,
+      "staged_name": "original-0001.dat",
+      "archive_path": "native-output/actual-membrane-stages/native/actual-membrane-copy-load-stages.json"
+    },
+    {
+      "role": "original-2",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-121750.168991",
+      "expected_bytes": 290,
+      "expected_sha256": "834f89d40555fa31ea750daf15ae85180c0187fd392ba727efa18eaf939c4a7a",
+      "maximum_bytes": 290,
+      "staged_name": "original-0002.dat",
+      "archive_path": "native-output/actual-membrane-stages/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-121750.168991"
+    },
+    {
+      "role": "original-3",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/native.xml",
+      "expected_bytes": 670,
+      "expected_sha256": "77c388b2a2b190c442b86c92df1a8d9ad573883def73ac8c6e964b1ee8490b33",
+      "maximum_bytes": 670,
+      "staged_name": "original-0003.dat",
+      "archive_path": "native-output/actual-membrane-stages/native.xml"
+    },
+    {
+      "role": "original-4",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/capture-ack.json",
+      "expected_bytes": 113,
+      "expected_sha256": "c93856faa7b95e73ca11a3242a4e08d087189cceab565e44bf9801f761c9d770",
+      "maximum_bytes": 113,
+      "staged_name": "original-0004.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/capture-ack.json"
+    },
+    {
+      "role": "original-5",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/capture-ready.json",
+      "expected_bytes": 97,
+      "expected_sha256": "db3cd34cc9247922dda2eb4a107c23e6e032539a4dbec91c44d64730321cd229",
+      "maximum_bytes": 97,
+      "staged_name": "original-0005.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/capture-ready.json"
+    },
+    {
+      "role": "original-6",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/launch-result.json",
+      "expected_bytes": 54,
+      "expected_sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+      "maximum_bytes": 54,
+      "staged_name": "original-0006.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/launch-result.json"
+    },
+    {
+      "role": "original-7",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/launcher.py",
+      "expected_bytes": 601,
+      "expected_sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c",
+      "maximum_bytes": 601,
+      "staged_name": "original-0007.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/launcher.py"
+    },
+    {
+      "role": "original-8",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/limits-readback.json",
+      "expected_bytes": 1068,
+      "expected_sha256": "65085ed4828326c0b4ebb0400f6de7643ab0972207d87b926a9784b5eaffd618",
+      "maximum_bytes": 1068,
+      "staged_name": "original-0008.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/limits-readback.json"
+    },
+    {
+      "role": "original-9",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/owned-unit.json",
+      "expected_bytes": 565,
+      "expected_sha256": "dfccbc2c2f1979d550cb1ad457e5e2164f5a1c0e22eb1e8f4044d09405468f01",
+      "maximum_bytes": 565,
+      "staged_name": "original-0009.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/owned-unit.json"
+    },
+    {
+      "role": "original-10",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/ready.json",
+      "expected_bytes": 43,
+      "expected_sha256": "f452af4dc58d7bfb2e2a175a147c93dc9d3f04d011c536d9b4e65f43be6b7002",
+      "maximum_bytes": 43,
+      "staged_name": "original-0010.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/ready.json"
+    },
+    {
+      "role": "original-11",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/request.json",
+      "expected_bytes": 1608,
+      "expected_sha256": "4122797bc2e8b13d7fb36a63ff28ceaf9477e32022471c38add3007a0308c3ad",
+      "maximum_bytes": 1608,
+      "staged_name": "original-0011.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/request.json"
+    },
+    {
+      "role": "original-12",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0012.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/runtime.json"
+    },
+    {
+      "role": "original-13",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/start.ack",
+      "expected_bytes": 18,
+      "expected_sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d",
+      "maximum_bytes": 18,
+      "staged_name": "original-0013.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/start.ack"
+    },
+    {
+      "role": "original-14",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/stderr.log",
+      "expected_bytes": 397,
+      "expected_sha256": "511aa9be041b4d953392cb5e93558f321847318cc151d47389f054981c670449",
+      "maximum_bytes": 397,
+      "staged_name": "original-0014.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/stderr.log"
+    },
+    {
+      "role": "original-15",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/contained/stdout.log",
+      "expected_bytes": 560,
+      "expected_sha256": "4f7b723b250a4ffbde82860f29406afb775be582035cdee460b5d4576f40bad8",
+      "maximum_bytes": 560,
+      "staged_name": "original-0015.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/contained/stdout.log"
+    },
+    {
+      "role": "original-16",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/loaded-files.json",
+      "expected_bytes": 12525,
+      "expected_sha256": "f4084f79fdf8c89dfe8ef3b8384b7dce39003a4237f76067b14906d428ac7aa8",
+      "maximum_bytes": 12525,
+      "staged_name": "original-0016.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/loaded-files.json"
+    },
+    {
+      "role": "original-17",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/owned-process.json",
+      "expected_bytes": 671,
+      "expected_sha256": "3aa9f1370d999651844e86869cffb2ef8e0e7403da8a8c477688c61f7857369f",
+      "maximum_bytes": 671,
+      "staged_name": "original-0017.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/owned-process.json"
+    },
+    {
+      "role": "original-18",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/request.json",
+      "expected_bytes": 595,
+      "expected_sha256": "f16639118a814a6355420c7d06a099154ec5999e7e332266f76de1ad186632ed",
+      "maximum_bytes": 595,
+      "staged_name": "original-0018.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/request.json"
+    },
+    {
+      "role": "original-19",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/result.json",
+      "expected_bytes": 1840,
+      "expected_sha256": "11797297205779bd8450f7ec979e6776ebf5a2461b74004be245a4d693a8ebe3",
+      "maximum_bytes": 1840,
+      "staged_name": "original-0019.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/result.json"
+    },
+    {
+      "role": "original-20",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0020.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/runtime.json"
+    },
+    {
+      "role": "original-21",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/stderr.log",
+      "expected_bytes": 397,
+      "expected_sha256": "511aa9be041b4d953392cb5e93558f321847318cc151d47389f054981c670449",
+      "maximum_bytes": 397,
+      "staged_name": "original-0021.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/stderr.log"
+    },
+    {
+      "role": "original-22",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/stdout.log",
+      "expected_bytes": 560,
+      "expected_sha256": "4f7b723b250a4ffbde82860f29406afb775be582035cdee460b5d4576f40bad8",
+      "maximum_bytes": 560,
+      "staged_name": "original-0022.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/stdout.log"
+    },
+    {
+      "role": "original-23",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/terminal-unit-state.json",
+      "expected_bytes": 1299,
+      "expected_sha256": "94507347fac8e7e0fe4a5572dcf5a50dc4d44bf2a1fe84046214cfbb5e82b8a3",
+      "maximum_bytes": 1299,
+      "staged_name": "original-0023.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/terminal-unit-state.json"
+    },
+    {
+      "role": "original-24",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/process/whole-group-closure.json",
+      "expected_bytes": 1212,
+      "expected_sha256": "4620dbadd3512600d04ceed0ae5e105cb9217cf1533d1b85a46a0b40432931bc",
+      "maximum_bytes": 1212,
+      "staged_name": "original-0024.dat",
+      "archive_path": "native-output/actual-membrane-stages/process/whole-group-closure.json"
+    },
+    {
+      "role": "original-25",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/result.json",
+      "expected_bytes": 438,
+      "expected_sha256": "44d2b86997949b86ae9974cb513a042704c4041aa1bba44673c5a4a169c2bd0f",
+      "maximum_bytes": 438,
+      "staged_name": "original-0025.dat",
+      "archive_path": "native-output/actual-membrane-stages/result.json"
+    },
+    {
+      "role": "original-26",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0026.dat",
+      "archive_path": "native-output/actual-membrane-stages/runtime.json"
+    },
+    {
+      "role": "original-27",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages/specification.json",
+      "expected_bytes": 573,
+      "expected_sha256": "418ccbc8757137e6253e4d3c5b517aca70323c3ef1fc2b0a2151af19b4249fe2",
+      "maximum_bytes": 573,
+      "staged_name": "original-0027.dat",
+      "archive_path": "native-output/actual-membrane-stages/specification.json"
+    },
+    {
+      "role": "original-28",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages-actual-tests.json",
+      "expected_bytes": 368,
+      "expected_sha256": "2322bd2c72cd2001c7be5ea76edb4e0d5213969c8201ea6541968c2dd4e2ccef",
+      "maximum_bytes": 368,
+      "staged_name": "original-0028.dat",
+      "archive_path": "native-output/actual-membrane-stages-actual-tests.json"
+    },
+    {
+      "role": "original-29",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages-result.json",
+      "expected_bytes": 438,
+      "expected_sha256": "44d2b86997949b86ae9974cb513a042704c4041aa1bba44673c5a4a169c2bd0f",
+      "maximum_bytes": 438,
+      "staged_name": "original-0029.dat",
+      "archive_path": "native-output/actual-membrane-stages-result.json"
+    },
+    {
+      "role": "original-30",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages-runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0030.dat",
+      "archive_path": "native-output/actual-membrane-stages-runtime.json"
+    },
+    {
+      "role": "original-31",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "actual-membrane-stages-spec.json",
+      "expected_bytes": 573,
+      "expected_sha256": "418ccbc8757137e6253e4d3c5b517aca70323c3ef1fc2b0a2151af19b4249fe2",
+      "maximum_bytes": 573,
+      "staged_name": "original-0031.dat",
+      "archive_path": "native-output/actual-membrane-stages-spec.json"
+    },
+    {
+      "role": "original-32",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "build.log",
+      "expected_bytes": 63381,
+      "expected_sha256": "0c3d3f5dcf3e2e80029e583487e7447108d1bb93b982a30aa290b2bb5d85ef01",
+      "maximum_bytes": 63381,
+      "staged_name": "original-0032.dat",
+      "archive_path": "native-output/build.log"
+    },
+    {
+      "role": "original-33",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "canonical-preparation.json",
+      "expected_bytes": 137261,
+      "expected_sha256": "af096d9d7d7ac8111625693bd640474c85bad3d7d0caa5cbcba9ac41ac6e83b0",
+      "maximum_bytes": 137261,
+      "staged_name": "original-0033.dat",
+      "archive_path": "native-output/canonical-preparation.json"
+    },
+    {
+      "role": "original-34",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "compiled-inventory-crosscheck.json",
+      "expected_bytes": 135968,
+      "expected_sha256": "67cc5ac3e282b7a6eda9c94d2912620ca55e569f86535513e2a592fb568216ef",
+      "maximum_bytes": 135968,
+      "staged_name": "original-0034.dat",
+      "archive_path": "native-output/compiled-inventory-crosscheck.json"
+    },
+    {
+      "role": "original-35",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "compiled-test-inventory.log",
+      "expected_bytes": 84620,
+      "expected_sha256": "092aa62c06e05f2fe7616929d94735f1901c61bf31f956eb0ee678974ff41e4e",
+      "maximum_bytes": 84620,
+      "staged_name": "original-0035.dat",
+      "archive_path": "native-output/compiled-test-inventory.log"
+    },
+    {
+      "role": "original-36",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "configure-arguments.json",
+      "expected_bytes": 1254,
+      "expected_sha256": "da24c88cec0904ac0d452132adb6aa3156c27081714c490714db2c9bf73c9730",
+      "maximum_bytes": 1254,
+      "staged_name": "original-0036.dat",
+      "archive_path": "native-output/configure-arguments.json"
+    },
+    {
+      "role": "original-37",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "configure.log",
+      "expected_bytes": 2846,
+      "expected_sha256": "157153663fe0d69be0b209c8e50f121f238db3e25bf13963e70407cc7c0c1082",
+      "maximum_bytes": 2846,
+      "staged_name": "original-0037.dat",
+      "archive_path": "native-output/configure.log"
+    },
+    {
+      "role": "original-38",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "current-runtime-after.json",
+      "expected_bytes": 1475,
+      "expected_sha256": "92ad26c43a4413b135621cf2de76e0a4db3a4e87dc1c31234c6a82e8945b7686",
+      "maximum_bytes": 1475,
+      "staged_name": "original-0038.dat",
+      "archive_path": "native-output/current-runtime-after.json"
+    },
+    {
+      "role": "original-39",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "current-runtime-before.json",
+      "expected_bytes": 1475,
+      "expected_sha256": "92ad26c43a4413b135621cf2de76e0a4db3a4e87dc1c31234c6a82e8945b7686",
+      "maximum_bytes": 1475,
+      "staged_name": "original-0039.dat",
+      "archive_path": "native-output/current-runtime-before.json"
+    },
+    {
+      "role": "original-40",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "exception.json",
+      "expected_bytes": 930,
+      "expected_sha256": "67f1cc300a2d098ec4d7099970da28dcf15f1db23be220a269ec89d800ca3c39",
+      "maximum_bytes": 930,
+      "staged_name": "original-0040.dat",
+      "archive_path": "native-output/exception.json"
+    },
+    {
+      "role": "original-41",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "final-capture-errors.json",
+      "expected_bytes": 3,
+      "expected_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "maximum_bytes": 3,
+      "staged_name": "original-0041.dat",
+      "archive_path": "native-output/final-capture-errors.json"
+    },
+    {
+      "role": "original-42",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "generated-build-commands.json",
+      "expected_bytes": 33000,
+      "expected_sha256": "251d51f0ed01f79617eb97905afbc31757ed2cbaba76af4747cf3e517cb25330",
+      "maximum_bytes": 33000,
+      "staged_name": "original-0042.dat",
+      "archive_path": "native-output/generated-build-commands.json"
+    },
+    {
+      "role": "original-43",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "job.json",
+      "expected_bytes": 5716,
+      "expected_sha256": "c6a14caedfd59a91a70ac186a8fad767e8eb20588e5fc98f9a2dd3f6507c2e4b",
+      "maximum_bytes": 5716,
+      "staged_name": "original-0043.dat",
+      "archive_path": "native-output/job.json"
+    },
+    {
+      "role": "original-44",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/native/native-load-history-FreshAt2000.json",
+      "expected_bytes": 14331,
+      "expected_sha256": "c213ec1dfc032e28d45130c917f27aacf6495356169dd590f824a87ba363506d",
+      "maximum_bytes": 14331,
+      "staged_name": "original-0044.dat",
+      "archive_path": "native-output/native-load-history-6/native/native-load-history-FreshAt2000.json"
+    },
+    {
+      "role": "original-45",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/native/native-load-history-FreshAt20000.json",
+      "expected_bytes": 14341,
+      "expected_sha256": "4821a6c19a90ee94cebfbd22e599eb7d2c0dbbd36f90f4d55bba52c7eb979be2",
+      "maximum_bytes": 14341,
+      "staged_name": "original-0045.dat",
+      "archive_path": "native-output/native-load-history-6/native/native-load-history-FreshAt20000.json"
+    },
+    {
+      "role": "original-46",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-121802.169658",
+      "expected_bytes": 290,
+      "expected_sha256": "57be95846ad6b105e068970de04db41ca59cf462fd416d3869ca4f7c5f52d583",
+      "maximum_bytes": 290,
+      "staged_name": "original-0046.dat",
+      "archive_path": "native-output/native-load-history-6/native.test-events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261110-121802.169658"
+    },
+    {
+      "role": "original-47",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/native.xml",
+      "expected_bytes": 4113,
+      "expected_sha256": "660b6b607e2b312bc1b34b662eb7ebdd0f1677d95a4f091e45cdffc233aac5cf",
+      "maximum_bytes": 4113,
+      "staged_name": "original-0047.dat",
+      "archive_path": "native-output/native-load-history-6/native.xml"
+    },
+    {
+      "role": "original-48",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/capture-ack.json",
+      "expected_bytes": 113,
+      "expected_sha256": "03404d9bdd88e92fa9c65fbe22fbbd06f3ca00a9312a553746d1cd22a534f2fa",
+      "maximum_bytes": 113,
+      "staged_name": "original-0048.dat",
+      "archive_path": "native-output/native-load-history-6/process/capture-ack.json"
+    },
+    {
+      "role": "original-49",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/capture-ready.json",
+      "expected_bytes": 97,
+      "expected_sha256": "f64dd71a07c2943b31397869ddf4a4c36e18be039e32327d07d682a8d8a156e2",
+      "maximum_bytes": 97,
+      "staged_name": "original-0049.dat",
+      "archive_path": "native-output/native-load-history-6/process/capture-ready.json"
+    },
+    {
+      "role": "original-50",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/launch-result.json",
+      "expected_bytes": 54,
+      "expected_sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+      "maximum_bytes": 54,
+      "staged_name": "original-0050.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/launch-result.json"
+    },
+    {
+      "role": "original-51",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/launcher.py",
+      "expected_bytes": 601,
+      "expected_sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c",
+      "maximum_bytes": 601,
+      "staged_name": "original-0051.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/launcher.py"
+    },
+    {
+      "role": "original-52",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/limits-readback.json",
+      "expected_bytes": 1068,
+      "expected_sha256": "e835b47bb7938c6211777a3f6490fe8f71e040b12c64d406ab972d7c33e8665f",
+      "maximum_bytes": 1068,
+      "staged_name": "original-0052.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/limits-readback.json"
+    },
+    {
+      "role": "original-53",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/owned-unit.json",
+      "expected_bytes": 565,
+      "expected_sha256": "4668684e29fb19b5076eeef7b6ca4fc1465336a636e970fe1ccea8c1cb8bbdf4",
+      "maximum_bytes": 565,
+      "staged_name": "original-0053.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/owned-unit.json"
+    },
+    {
+      "role": "original-54",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/ready.json",
+      "expected_bytes": 43,
+      "expected_sha256": "618a83a371c3379e16edbb9dcfa75d9b9c08d910e1df13c53893fdaa7cde7f0c",
+      "maximum_bytes": 43,
+      "staged_name": "original-0054.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/ready.json"
+    },
+    {
+      "role": "original-55",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/request.json",
+      "expected_bytes": 1766,
+      "expected_sha256": "8fd6c9c3e23e8df9def258dd7ea4c9365453edc253aefb5f32e8ddda6aed4ec2",
+      "maximum_bytes": 1766,
+      "staged_name": "original-0055.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/request.json"
+    },
+    {
+      "role": "original-56",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0056.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/runtime.json"
+    },
+    {
+      "role": "original-57",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/start.ack",
+      "expected_bytes": 18,
+      "expected_sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d",
+      "maximum_bytes": 18,
+      "staged_name": "original-0057.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/start.ack"
+    },
+    {
+      "role": "original-58",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/stderr.log",
+      "expected_bytes": 396,
+      "expected_sha256": "164a23008d662ee9c15032c7d3f5b567dface873902d26ce26db7e1e1604c16e",
+      "maximum_bytes": 396,
+      "staged_name": "original-0058.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/stderr.log"
+    },
+    {
+      "role": "original-59",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/contained/stdout.log",
+      "expected_bytes": 2292,
+      "expected_sha256": "1e38b3cbf0be9e8ec9fef2f5501f33e7e578c9d6b2f4705fdbef14134825f65e",
+      "maximum_bytes": 2292,
+      "staged_name": "original-0059.dat",
+      "archive_path": "native-output/native-load-history-6/process/contained/stdout.log"
+    },
+    {
+      "role": "original-60",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/loaded-files.json",
+      "expected_bytes": 12525,
+      "expected_sha256": "f4084f79fdf8c89dfe8ef3b8384b7dce39003a4237f76067b14906d428ac7aa8",
+      "maximum_bytes": 12525,
+      "staged_name": "original-0060.dat",
+      "archive_path": "native-output/native-load-history-6/process/loaded-files.json"
+    },
+    {
+      "role": "original-61",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/owned-process.json",
+      "expected_bytes": 671,
+      "expected_sha256": "f729fd3a04a2e1b5acfe0574902d33f306fec18530eb219fd1c9ffd59b8406e6",
+      "maximum_bytes": 671,
+      "staged_name": "original-0061.dat",
+      "archive_path": "native-output/native-load-history-6/process/owned-process.json"
+    },
+    {
+      "role": "original-62",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/request.json",
+      "expected_bytes": 755,
+      "expected_sha256": "82194412c3b6c930e755235bdc02d31c568e0b89e12e4aa234092a98a358d1c4",
+      "maximum_bytes": 755,
+      "staged_name": "original-0062.dat",
+      "archive_path": "native-output/native-load-history-6/process/request.json"
+    },
+    {
+      "role": "original-63",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/result.json",
+      "expected_bytes": 1851,
+      "expected_sha256": "f72cb65bb8f5cb19fc41dc645baba3e97161dce264fa40b5f703c821d70dfb1a",
+      "maximum_bytes": 1851,
+      "staged_name": "original-0063.dat",
+      "archive_path": "native-output/native-load-history-6/process/result.json"
+    },
+    {
+      "role": "original-64",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0064.dat",
+      "archive_path": "native-output/native-load-history-6/process/runtime.json"
+    },
+    {
+      "role": "original-65",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/stderr.log",
+      "expected_bytes": 396,
+      "expected_sha256": "164a23008d662ee9c15032c7d3f5b567dface873902d26ce26db7e1e1604c16e",
+      "maximum_bytes": 396,
+      "staged_name": "original-0065.dat",
+      "archive_path": "native-output/native-load-history-6/process/stderr.log"
+    },
+    {
+      "role": "original-66",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/stdout.log",
+      "expected_bytes": 2292,
+      "expected_sha256": "1e38b3cbf0be9e8ec9fef2f5501f33e7e578c9d6b2f4705fdbef14134825f65e",
+      "maximum_bytes": 2292,
+      "staged_name": "original-0066.dat",
+      "archive_path": "native-output/native-load-history-6/process/stdout.log"
+    },
+    {
+      "role": "original-67",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/terminal-unit-state.json",
+      "expected_bytes": 1301,
+      "expected_sha256": "ef8a262e6f7a0594ecb4ff6d66cf00812436de5d231e8a7def2119e5de8fabb5",
+      "maximum_bytes": 1301,
+      "staged_name": "original-0067.dat",
+      "archive_path": "native-output/native-load-history-6/process/terminal-unit-state.json"
+    },
+    {
+      "role": "original-68",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/process/whole-group-closure.json",
+      "expected_bytes": 1301,
+      "expected_sha256": "ef8a262e6f7a0594ecb4ff6d66cf00812436de5d231e8a7def2119e5de8fabb5",
+      "maximum_bytes": 1301,
+      "staged_name": "original-0068.dat",
+      "archive_path": "native-output/native-load-history-6/process/whole-group-closure.json"
+    },
+    {
+      "role": "original-69",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/result.json",
+      "expected_bytes": 638,
+      "expected_sha256": "47e05e51da50226a55439d7c78a07d5a0f73015ec6624c3500f64c84050cd7c0",
+      "maximum_bytes": 638,
+      "staged_name": "original-0069.dat",
+      "archive_path": "native-output/native-load-history-6/result.json"
+    },
+    {
+      "role": "original-70",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0070.dat",
+      "archive_path": "native-output/native-load-history-6/runtime.json"
+    },
+    {
+      "role": "original-71",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6/specification.json",
+      "expected_bytes": 769,
+      "expected_sha256": "5cad47774178618e353b69df1430c47a708b45e5fea9f4d48853ea2c9da6e568",
+      "maximum_bytes": 769,
+      "staged_name": "original-0071.dat",
+      "archive_path": "native-output/native-load-history-6/specification.json"
+    },
+    {
+      "role": "original-72",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6-actual-tests.json",
+      "expected_bytes": 755,
+      "expected_sha256": "929d36bc50737dd8b610806c0a0d0a6ceb7b3bda50c1624c1b3ba7b30f02e1f8",
+      "maximum_bytes": 755,
+      "staged_name": "original-0072.dat",
+      "archive_path": "native-output/native-load-history-6-actual-tests.json"
+    },
+    {
+      "role": "original-73",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6-result.json",
+      "expected_bytes": 638,
+      "expected_sha256": "47e05e51da50226a55439d7c78a07d5a0f73015ec6624c3500f64c84050cd7c0",
+      "maximum_bytes": 638,
+      "staged_name": "original-0073.dat",
+      "archive_path": "native-output/native-load-history-6-result.json"
+    },
+    {
+      "role": "original-74",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6-runtime.json",
+      "expected_bytes": 24345,
+      "expected_sha256": "ce253f70c5f65504928dd109ce0ccd170452bf07a1e7510299e426e726a47969",
+      "maximum_bytes": 24345,
+      "staged_name": "original-0074.dat",
+      "archive_path": "native-output/native-load-history-6-runtime.json"
+    },
+    {
+      "role": "original-75",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "native-load-history-6-spec.json",
+      "expected_bytes": 769,
+      "expected_sha256": "5cad47774178618e353b69df1430c47a708b45e5fea9f4d48853ea2c9da6e568",
+      "maximum_bytes": 769,
+      "staged_name": "original-0075.dat",
+      "archive_path": "native-output/native-load-history-6-spec.json"
+    },
+    {
+      "role": "original-76",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "owned-build.log.json",
+      "expected_bytes": 319,
+      "expected_sha256": "b7434cd0a7f447a65ea9cbc5937be377889a65ccb27c1814434ffd991fa5a42a",
+      "maximum_bytes": 319,
+      "staged_name": "original-0076.dat",
+      "archive_path": "native-output/owned-build.log.json"
+    },
+    {
+      "role": "original-77",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "owned-compiled-test-inventory.log.json",
+      "expected_bytes": 240,
+      "expected_sha256": "fc2ef78f361fdc8e0ce83a08a4dc5b4e5d9db529b491c1e5bfa5f39a6157991d",
+      "maximum_bytes": 240,
+      "staged_name": "original-0077.dat",
+      "archive_path": "native-output/owned-compiled-test-inventory.log.json"
+    },
+    {
+      "role": "original-78",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "owned-configure.log.json",
+      "expected_bytes": 1397,
+      "expected_sha256": "c38c558e698ea38247258745e5d922ab5814ce84671eb2bb28f3a3bd358453ce",
+      "maximum_bytes": 1397,
+      "staged_name": "original-0078.dat",
+      "archive_path": "native-output/owned-configure.log.json"
+    },
+    {
+      "role": "original-79",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "progress.json",
+      "expected_bytes": 830,
+      "expected_sha256": "bae39dc33e69e128e1eb066a8cc9cd549a5744a44165a17aed7f937507732549",
+      "maximum_bytes": 830,
+      "staged_name": "original-0079.dat",
+      "archive_path": "native-output/progress.json"
+    },
+    {
+      "role": "original-80",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "protected-files-after.json",
+      "expected_bytes": 2046181,
+      "expected_sha256": "0282b9c1dcd7830cccf6ade15f6b0c08332551d6a63ab2135f5a18565d7c04eb",
+      "maximum_bytes": 2046181,
+      "staged_name": "original-0080.dat",
+      "archive_path": "native-output/protected-files-after.json"
+    },
+    {
+      "role": "original-81",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "protected-files-before.json",
+      "expected_bytes": 2046181,
+      "expected_sha256": "0282b9c1dcd7830cccf6ade15f6b0c08332551d6a63ab2135f5a18565d7c04eb",
+      "maximum_bytes": 2046181,
+      "staged_name": "original-0081.dat",
+      "archive_path": "native-output/protected-files-before.json"
+    },
+    {
+      "role": "original-82",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "reservation.json",
+      "expected_bytes": 9979,
+      "expected_sha256": "80e78ac3666bf1d4b288de86857ac01a72b68abbc63b4185ae172f0712ba6f7d",
+      "maximum_bytes": 9979,
+      "staged_name": "original-0082.dat",
+      "archive_path": "native-output/reservation.json"
+    },
+    {
+      "role": "original-83",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "resource-Git-bytes.json",
+      "expected_bytes": 100408,
+      "expected_sha256": "0ab36c4c787cc8144f39913de872a9fd5566b567bc49256a3cf20e5f417e888a",
+      "maximum_bytes": 100408,
+      "staged_name": "original-0083.dat",
+      "archive_path": "native-output/resource-Git-bytes.json"
+    },
+    {
+      "role": "original-84",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "resource-closure-after.json",
+      "expected_bytes": 57,
+      "expected_sha256": "25349caa2454a6dbcabc0c2d414222d2bcf7c3311e84342430ff89e59bbc776d",
+      "maximum_bytes": 57,
+      "staged_name": "original-0084.dat",
+      "archive_path": "native-output/resource-closure-after.json"
+    },
+    {
+      "role": "original-85",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "source-closure-after.json",
+      "expected_bytes": 1304,
+      "expected_sha256": "0965704474d6ac756a4ff3385cf26e0c65f1c59759b8fcab69c0d62763361633",
+      "maximum_bytes": 1304,
+      "staged_name": "original-0085.dat",
+      "archive_path": "native-output/source-closure-after.json"
+    },
+    {
+      "role": "original-86",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "source-closure.json",
+      "expected_bytes": 1304,
+      "expected_sha256": "0965704474d6ac756a4ff3385cf26e0c65f1c59759b8fcab69c0d62763361633",
+      "maximum_bytes": 1304,
+      "staged_name": "original-0086.dat",
+      "archive_path": "native-output/source-closure.json"
+    },
+    {
+      "role": "original-87",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "source-hashes-after.json",
+      "expected_bytes": 1013945,
+      "expected_sha256": "5680d9ae1881b97ac5af055375760d7fa0e2b6a329bac01fe6aaf5a12e7e29f6",
+      "maximum_bytes": 1013945,
+      "staged_name": "original-0087.dat",
+      "archive_path": "native-output/source-hashes-after.json"
+    },
+    {
+      "role": "original-88",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "source-hashes-before-build.json",
+      "expected_bytes": 1013945,
+      "expected_sha256": "5680d9ae1881b97ac5af055375760d7fa0e2b6a329bac01fe6aaf5a12e7e29f6",
+      "maximum_bytes": 1013945,
+      "staged_name": "original-0088.dat",
+      "archive_path": "native-output/source-hashes-before-build.json"
+    },
+    {
+      "role": "original-89",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "source-imports.json",
+      "expected_bytes": 1079,
+      "expected_sha256": "bc115788788afd89cc642556c9fba11235f8a20895fbecde8d982bf36061a50b",
+      "maximum_bytes": 1079,
+      "staged_name": "original-0089.dat",
+      "archive_path": "native-output/source-imports.json"
+    },
+    {
+      "role": "original-90",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "source-materialization.json",
+      "expected_bytes": 13939836,
+      "expected_sha256": "d24e385a9d66c0317dea50cf72a563b5c574a14d43521dba2b0eeb6ca7293ac1",
+      "maximum_bytes": 13939836,
+      "staged_name": "original-0090.dat",
+      "archive_path": "native-output/source-materialization.json"
+    },
+    {
+      "role": "original-91",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6",
+      "relative_path": "terminal.json",
+      "expected_bytes": 690,
+      "expected_sha256": "df61387fdb2d2d6b1144efd567eb27699dcf23f99d9946832d8499d93acb422b",
+      "maximum_bytes": 690,
+      "staged_name": "original-0091.dat",
+      "archive_path": "native-output/terminal.json"
+    },
+    {
+      "role": "original-92",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "child-binding-actual-membrane-stages.json",
+      "expected_bytes": 740,
+      "expected_sha256": "00b4ce1d1d8a7f7d203c963853d478b214e26ab8d65e990eb1a993d910097db9",
+      "maximum_bytes": 740,
+      "staged_name": "original-0092.dat",
+      "archive_path": "controller/child-binding-actual-membrane-stages.json"
+    },
+    {
+      "role": "original-93",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "child-binding-native-load-history-6.json",
+      "expected_bytes": 739,
+      "expected_sha256": "5f2e6e2a373bbb9fc96070332e3dea43bddb20d6bba6daf4f125589e97adadfb",
+      "maximum_bytes": 739,
+      "staged_name": "original-0093.dat",
+      "archive_path": "controller/child-binding-native-load-history-6.json"
+    },
+    {
+      "role": "original-94",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "child-closures.json",
+      "expected_bytes": 4365,
+      "expected_sha256": "d8ae5b58c6bc11fa8e4031f584d888cb8e84d29e451a48ba78f160ac27446e89",
+      "maximum_bytes": 4365,
+      "staged_name": "original-0094.dat",
+      "archive_path": "controller/child-closures.json"
+    },
+    {
+      "role": "original-95",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "child-intent-actual-membrane-stages.json",
+      "expected_bytes": 141,
+      "expected_sha256": "4524d47b88bf6188f0b93b2dc244058bb4313937a0527dab834869cada5fbe41",
+      "maximum_bytes": 141,
+      "staged_name": "original-0095.dat",
+      "archive_path": "controller/child-intent-actual-membrane-stages.json"
+    },
+    {
+      "role": "original-96",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "child-intent-native-load-history-6.json",
+      "expected_bytes": 140,
+      "expected_sha256": "2bb19aa462e161bceaf93c3bb541c4b0e8de2cc60449702cc9053e16ce2c5ea6",
+      "maximum_bytes": 140,
+      "staged_name": "original-0096.dat",
+      "archive_path": "controller/child-intent-native-load-history-6.json"
+    },
+    {
+      "role": "original-97",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "consumed-control-identities.json",
+      "expected_bytes": 453,
+      "expected_sha256": "128832bd2c6df1c5e02b38e08d10bc4571c8946bfd8e12d741623bd3ea6f16c2",
+      "maximum_bytes": 453,
+      "staged_name": "original-0097.dat",
+      "archive_path": "controller/consumed-control-identities.json"
+    },
+    {
+      "role": "original-98",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "external-control-identities.json",
+      "expected_bytes": 696,
+      "expected_sha256": "11e85204a78337fbbb8d9c85ebc05a73580e5a8fda6ed28886e8bf6ff07fc2ed",
+      "maximum_bytes": 696,
+      "staged_name": "original-0098.dat",
+      "archive_path": "controller/external-control-identities.json"
+    },
+    {
+      "role": "original-99",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "inputs/job.json",
+      "expected_bytes": 5716,
+      "expected_sha256": "c6a14caedfd59a91a70ac186a8fad767e8eb20588e5fc98f9a2dd3f6507c2e4b",
+      "maximum_bytes": 5716,
+      "staged_name": "original-0099.dat",
+      "archive_path": "controller/inputs/job.json"
+    },
+    {
+      "role": "original-100",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "inputs/preparation.json",
+      "expected_bytes": 137261,
+      "expected_sha256": "af096d9d7d7ac8111625693bd640474c85bad3d7d0caa5cbcba9ac41ac6e83b0",
+      "maximum_bytes": 137261,
+      "staged_name": "original-0100.dat",
+      "archive_path": "controller/inputs/preparation.json"
+    },
+    {
+      "role": "original-101",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "launch-intent.json",
+      "expected_bytes": 423,
+      "expected_sha256": "2afa78dbf06b4c1bda8b7facddf4b8205a2065658dc102e38e11e8e0f65fd916",
+      "maximum_bytes": 423,
+      "staged_name": "original-0101.dat",
+      "archive_path": "controller/launch-intent.json"
+    },
+    {
+      "role": "original-102",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "launched.json",
+      "expected_bytes": 360,
+      "expected_sha256": "0316e6cc79973b72cee7c0fc4fda64f43355d20a2158ca8e1a08178af90d2a0d",
+      "maximum_bytes": 360,
+      "staged_name": "original-0102.dat",
+      "archive_path": "controller/launched.json"
+    },
+    {
+      "role": "original-103",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "lease-recovery.json",
+      "expected_bytes": 12009,
+      "expected_sha256": "a6aa39908b1fe3ce5cf75a1cb5680ac6477c5e225bfb4064b0c723d9dea8ed29",
+      "maximum_bytes": 12009,
+      "staged_name": "original-0103.dat",
+      "archive_path": "controller/lease-recovery.json"
+    },
+    {
+      "role": "original-104",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "module-source.json",
+      "expected_bytes": 37764,
+      "expected_sha256": "53dd2b29b1f71a6942f21ab019b79e611d78c5e13985b491c7d1eb21a5067d67",
+      "maximum_bytes": 37764,
+      "staged_name": "original-0104.dat",
+      "archive_path": "controller/module-source.json"
+    },
+    {
+      "role": "original-105",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "original-outcome.json",
+      "expected_bytes": 2204,
+      "expected_sha256": "563b53ce295fdd7c0691bfdf80c47bc8a640d98f633c064216a9875a8407ecf1",
+      "maximum_bytes": 2204,
+      "staged_name": "original-0105.dat",
+      "archive_path": "controller/original-outcome.json"
+    },
+    {
+      "role": "original-106",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "outer-closure.json",
+      "expected_bytes": 1301,
+      "expected_sha256": "d1ca012a7402b3219ad05da46d4653bdd41342ad3a2cdd4032db31ed32d17b54",
+      "maximum_bytes": 1301,
+      "staged_name": "original-0106.dat",
+      "archive_path": "controller/outer-closure.json"
+    },
+    {
+      "role": "original-107",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "preflight.json",
+      "expected_bytes": 1655,
+      "expected_sha256": "d4088454838a16ff2643670e63f0d3e0ef977628ce6604603534fb0cfbdf206b",
+      "maximum_bytes": 1655,
+      "staged_name": "original-0107.dat",
+      "archive_path": "controller/preflight.json"
+    },
+    {
+      "role": "original-108",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/launch-result.json",
+      "expected_bytes": 54,
+      "expected_sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d",
+      "maximum_bytes": 54,
+      "staged_name": "original-0108.dat",
+      "archive_path": "controller/process/contained/launch-result.json"
+    },
+    {
+      "role": "original-109",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/launcher.py",
+      "expected_bytes": 601,
+      "expected_sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c",
+      "maximum_bytes": 601,
+      "staged_name": "original-0109.dat",
+      "archive_path": "controller/process/contained/launcher.py"
+    },
+    {
+      "role": "original-110",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/limits-readback.json",
+      "expected_bytes": 1068,
+      "expected_sha256": "ab81fe04347fa0c814c261b5e6cee7de61bda85bfce8c059ca51a24658041b1d",
+      "maximum_bytes": 1068,
+      "staged_name": "original-0110.dat",
+      "archive_path": "controller/process/contained/limits-readback.json"
+    },
+    {
+      "role": "original-111",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/owned-unit.json",
+      "expected_bytes": 565,
+      "expected_sha256": "9c55e9a13e58c1fee79275377dad77092fa82f0303b33918755b4793cb913f95",
+      "maximum_bytes": 565,
+      "staged_name": "original-0111.dat",
+      "archive_path": "controller/process/contained/owned-unit.json"
+    },
+    {
+      "role": "original-112",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/ready.json",
+      "expected_bytes": 43,
+      "expected_sha256": "88190747bf93099d41ea8987adf43c773c70fe446d5388a4061565ee610cdb01",
+      "maximum_bytes": 43,
+      "staged_name": "original-0112.dat",
+      "archive_path": "controller/process/contained/ready.json"
+    },
+    {
+      "role": "original-113",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/request.json",
+      "expected_bytes": 976,
+      "expected_sha256": "36f105d7fe042f90d9d80f102b4d835d7a6b41699341adbbcb6f7720d728190b",
+      "maximum_bytes": 976,
+      "staged_name": "original-0113.dat",
+      "archive_path": "controller/process/contained/request.json"
+    },
+    {
+      "role": "original-114",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/runtime.json",
+      "expected_bytes": 4721,
+      "expected_sha256": "64ca468cd63b42b5be8568162970b94e24f7faaf7fee2d09f964698c0116c63c",
+      "maximum_bytes": 4721,
+      "staged_name": "original-0114.dat",
+      "archive_path": "controller/process/contained/runtime.json"
+    },
+    {
+      "role": "original-115",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/start.ack",
+      "expected_bytes": 18,
+      "expected_sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d",
+      "maximum_bytes": 18,
+      "staged_name": "original-0115.dat",
+      "archive_path": "controller/process/contained/start.ack"
+    },
+    {
+      "role": "original-116",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/stderr.log",
+      "expected_bytes": 0,
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_bytes": 1,
+      "staged_name": "original-0116.dat",
+      "archive_path": "controller/process/contained/stderr.log"
+    },
+    {
+      "role": "original-117",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "process/contained/stdout.log",
+      "expected_bytes": 0,
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "maximum_bytes": 1,
+      "staged_name": "original-0117.dat",
+      "archive_path": "controller/process/contained/stdout.log"
+    },
+    {
+      "role": "original-118",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "recorded-child-bindings.json",
+      "expected_bytes": 1424,
+      "expected_sha256": "a701fe26ef3b18e882417a8f1547b9f43ef36216334a9c78e693d39fb6994219",
+      "maximum_bytes": 1424,
+      "staged_name": "original-0118.dat",
+      "archive_path": "controller/recorded-child-bindings.json"
+    },
+    {
+      "role": "original-119",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "request.json",
+      "expected_bytes": 715,
+      "expected_sha256": "f79a0be36c3b43d3cc6d9b45adedfc342db99fa100ff9c573477950d97269934",
+      "maximum_bytes": 715,
+      "staged_name": "original-0119.dat",
+      "archive_path": "controller/request.json"
+    },
+    {
+      "role": "original-120",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "reservation-final.json",
+      "expected_bytes": 10755,
+      "expected_sha256": "3d305304f0d874a371a4206881250d6a62cd1ef7cd42ccd2c1e2dd6f1b7b8fb0",
+      "maximum_bytes": 10755,
+      "staged_name": "original-0120.dat",
+      "archive_path": "controller/reservation-final.json"
+    },
+    {
+      "role": "original-121",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "runtime.json",
+      "expected_bytes": 4721,
+      "expected_sha256": "64ca468cd63b42b5be8568162970b94e24f7faaf7fee2d09f964698c0116c63c",
+      "maximum_bytes": 4721,
+      "staged_name": "original-0121.dat",
+      "archive_path": "controller/runtime.json"
+    },
+    {
+      "role": "original-122",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "seen-child-intents.json",
+      "expected_bytes": 252,
+      "expected_sha256": "4fbd81cdb4cbd59430c04a261ba14daf9776b63fd9e8dee215509cd456154a1c",
+      "maximum_bytes": 252,
+      "staged_name": "original-0122.dat",
+      "archive_path": "controller/seen-child-intents.json"
+    },
+    {
+      "role": "original-123",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "started-binding.json",
+      "expected_bytes": 565,
+      "expected_sha256": "9c55e9a13e58c1fee79275377dad77092fa82f0303b33918755b4793cb913f95",
+      "maximum_bytes": 565,
+      "staged_name": "original-0123.dat",
+      "archive_path": "controller/started-binding.json"
+    },
+    {
+      "role": "original-124",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "supervisor-identity.json",
+      "expected_bytes": 118,
+      "expected_sha256": "912f5f0740cc277746c873317331d7e574ab93cb1b5554eb808e3d3d4517e062",
+      "maximum_bytes": 118,
+      "staged_name": "original-0124.dat",
+      "archive_path": "controller/supervisor-identity.json"
+    },
+    {
+      "role": "original-125",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "supervisor-result.json",
+      "expected_bytes": 6815,
+      "expected_sha256": "f2769cc36d7ab20b7eea3af17a0215f129449da4bf09751087c42010bb71c1fd",
+      "maximum_bytes": 6815,
+      "staged_name": "original-0125.dat",
+      "archive_path": "controller/supervisor-result.json"
+    },
+    {
+      "role": "original-126",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "supervisor.log",
+      "expected_bytes": 577,
+      "expected_sha256": "fa89085b5d70b33a91f316cd92f237482d6b13149c1f6376feec9aafcd00e704",
+      "maximum_bytes": 577,
+      "staged_name": "original-0126.dat",
+      "archive_path": "controller/supervisor.log"
+    },
+    {
+      "role": "original-127",
+      "root": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6-controller",
+      "relative_path": "tool-source.json",
+      "expected_bytes": 275876,
+      "expected_sha256": "38def3b1d5b89dfe49d113fe2a466d8df3ee6904c9cd3202ccf2fc9f9dc3ae7a",
+      "maximum_bytes": 275876,
+      "staged_name": "original-0127.dat",
+      "archive_path": "controller/tool-source.json"
+    },
+    {
+      "role": "actual-cmake-cache",
+      "root": "/media/user/Data/TimeLearnerRefactor/build-native-image-stages8-m40-a6",
+      "relative_path": "CMakeCache.txt",
+      "expected_bytes": 83526,
+      "expected_sha256": "194847f54cd055c73167f1f192ad6fea717c7e02d5b9e4596ae3f80ab8aa1b75",
+      "maximum_bytes": 83526,
+      "staged_name": "actual-CMakeCache.txt",
+      "archive_path": "postclosure-build/CMakeCache.txt"
+    }
+  ],
+  "original_outcome": {
+    "planned": 8,
+    "executed": 7,
+    "passed": 3,
+    "failed_ids": [
+      "NativeLoadHistory/ConnectedChildAt2000",
+      "NativeLoadHistory/DetachedChildAt2000",
+      "NativeLoadHistory/ConnectedChildAt20000",
+      "NativeLoadHistory/DetachedChildAt20000"
+    ],
+    "not_completed_ids": [
+      "NativeClassImageReplay/ClassicActualSavedModelAcrossNativeGraphRelease"
+    ]
+  },
+  "children": {
+    "actual-membrane-stages": {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6/actual-membrane-stages/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "9da093cc97ab259144572dac17b062fcb8ee15d510a63a0b418c1958f212b066",
+        "unit": "timelearner-f4e3a835-d1ae-483a-a1c1-f8d92985a8a1.service",
+        "invocation_id": "1b2d13b6b8364c3fbb74cb7226c6d044",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f4e3a835-d1ae-483a-a1c1-f8d92985a8a1.service",
+        "initial_main_pid": 168991,
+        "initial_start_ticks": "337746784",
+        "sha256": "39637a94764424e2f4f1c1df2b8014794cd854916b8d5b73990d75593638a229"
+      }
+    },
+    "native-load-history-6": {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s04-native-image-stages8-m40-a6/native-load-history-6/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "c0f07015fe9f9a9c739364f25f482a820166185c5a940ef4260deef1d4b7aecb",
+        "unit": "timelearner-807650dc-5361-4dbe-ba9f-3823740d2574.service",
+        "invocation_id": "92218daf402144d19d6bca14a60fb68f",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-807650dc-5361-4dbe-ba9f-3823740d2574.service",
+        "initial_main_pid": 169658,
+        "initial_start_ticks": "337747947",
+        "sha256": "eeecf10116dfdd99f39e0a76d07773ce1af2aa1b89ec3cb5b1f06a8c6a3ec49a"
+      }
+    }
+  },
+  "bounds": {
+    "maximum_capture_bytes": 536870912,
+    "maximum_output_bytes": 1073741824,
+    "minimum_free_bytes": 536870912
+  },
+  "supervisor_dialect": "owned-native-json-lines-v1",
+  "old_lease_token": "a7b77c4e-0b45-4102-82ad-ea2314d39245",
+  "scientific_verdict": null,
+  "incomplete_children": {}
+}

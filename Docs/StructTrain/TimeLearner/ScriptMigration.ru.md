@@ -1,3 +1,9 @@
+Текущий принятый снимок08.11:356 records (352 retired/4 moved), complete=false. Два действующих аудитора конфигов перенесены из Bin в Root после143/143 на каждом Linux worker и production history CLI356 на M40. [Контракт и проверка](DeclaredTimeScaleDiagnostic.ru.md), [квитанция356](DeclaredTimeScaleMigration356M40A2Verification.json). Удалений моделей, конфигов, данных и прежних наблюдений нет; оставшаяся миграция и develop-приёмка открыты. Далее сохранена история прежних снимков.
+
+Принято08.11:245 records (243 retired/2 moved), complete=false. Три исторических AsymRm adaptive guards удалены без wrappers. Оба workers проверили245 retrieval records, restored-path negative, exact3D1M и803 записи четырёх Git trees. [Scope, source и original failed wrappers](AsymRmAdaptiveGuardRetirement.ru.md), [полный классифицированный inventory](FourTreeScriptInventory-20261108.json). Ниже — история прежних снимков.
+
+Принято08.11 в адресном scope:242 records (240 retired/2 moved), complete=false. Четыре исторических AsymRm seed/reset инструмента удалены без wrappers; оба workers проверили все242 записи, negative restored-path control и exact4D+4M scope. Общая миграция и develop-приёмка ещё не завершены. [Область и ограничения](AsymRmSeedRetirement.ru.md). Предыдущие записи ниже относятся к своим снимкам.
+
 Принято06.11:215 records (213 retired/2 moved),complete=false. Десять оставшихся AsymRm shell-драйверов удалены после проверок обоих workers; конфиги, модели, измерения и исходные report bodies сохранены. [Область и Git-источники](AsymRmDriverRetirement.ru.md). Ограниченный path/suffix inventory Bin теперь131; полнота всей миграции не заявляется. Ниже — хронология прежних снимков.
 
 Принято04.11:166 records (164 retired/2 moved),complete=false. Удалены8 исторических PhaseA tools после двух actual CLI/negative/scope gates; августовские модели/конфиги/CSV/тело REPORT сохранены. [Приёмка](PhaseAToolRetirement.ru.md). Ниже — хронология прежних снимков.
@@ -371,3 +377,15 @@ negative fixture. Все20 members и380 Git source hashes на worker неза�
 прошёл verify-migration222 и restored-path negative на обоих серверах.
 Текущий manifest:220 retired+2 moved, complete=false. В AsymRm scripts остаются22
 Python; это не приёмка всех оставшихся legacy launchers/analyzers.
+
+
+08.11: [109 исторических Reports source snapshots](RootReportSnapshotRetirement.ru.md)
+удалены без wrappers; manifest354 (352 retired/2 moved), complete=false.
+Все остальные Reports blobs, включая исторические checksum-bound manifests,
+сохранены. Новый внешний retrieval index не меняет старые доказательства.
+Серверная проверка данного snapshot пока pending.
+
+Приёмка109-record batch завершена на обоих workers: production354 retrieval
+records, restored-path negative,113-entry source diff,86126 остальных Reports
+blobs и412 production Python source hashes. Полные SHA и сохранённый collector
+refusal приведены в RootReportSnapshotRetirement. complete=false остаётся.

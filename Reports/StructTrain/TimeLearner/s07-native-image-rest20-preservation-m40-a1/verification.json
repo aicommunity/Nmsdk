@@ -1,0 +1,102 @@
+{
+  "kind": "closed_native_acceptance_preservation_receipt",
+  "schema_version": 3,
+  "collection_status": "completed",
+  "original_outcome": {
+    "planned": 20,
+    "executed": 3,
+    "passed": 2,
+    "failed_ids": [
+      "NativeCandidateWindowPackage/ClassicActualPhysicalRoundtrip"
+    ],
+    "not_completed_ids": [
+      "NativeCandidateWindowPackage/BranchActualPhysicalRoundtrip",
+      "NativeCandidateWindowPackage/AsymmetricChildPhysicsAndC0Roundtrip",
+      "NativeCandidateWindowPackage/ClassicImportedWarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+      "NativeCandidateWindowPackage/BranchImportedC0WarmPreservesOriginalFamilyAndAllowsCurrentRuntime",
+      "NativeObservedRequest/ClosedSessionRequiresObservedLowAndAvailableBoundary",
+      "NativeObservedRequest/ClassicConnectedMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicConnectedMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchConnectedMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchConnectedMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicDirectMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicDirectMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchDirectMode0WarmKeepsOriginalFamily",
+      "NativeObservedRequest/BranchDirectMode1WarmKeepsOriginalFamily",
+      "NativeObservedRequest/ClassicConnectedPartialStopKeepsCancelledRaw",
+      "NativeObservedRequest/BranchConnectedPartialStopKeepsCancelledRaw",
+      "NativeObservedRequest/ClassicDirectPartialStopKeepsCancelledRaw",
+      "NativeObservedRequest/BranchDirectPartialStopKeepsCancelledRaw"
+    ]
+  },
+  "manifest_sha256": "b7b3eed871bbe1a041451d4485bb12aae42aedb40d325c4f3e326924954e9c30",
+  "artifact_hashes": {
+    "packed/primary.tar.xz": "d508ad26e51a63b617d81e3895d541c406febcba4c4943efcbb37d082d01cacd",
+    "packed/bundle.json": "a1bb002289c05a085fef3b3167d9d3e4221b5b9ce156c66a2e30c6a9eca096ee",
+    "capture-proof.json": "786d2d99f10cc237c6c1bd95b33c1877b50a516afdd8ab935bd3ae25b4f1a40f"
+  },
+  "released_collection_lease": {
+    "token": "f700b6f8-6a3e-40c0-9d81-030ef9c7efd0",
+    "job_id": "s07-native-image-rest20-preservation-m40-a1",
+    "owner": {
+      "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+      "executable": "/usr/bin/python3.12",
+      "pid": 3720246,
+      "start_ticks": "334960935",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-native-image-rest-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/build-native-image-rest-m40-a1"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-image-rest20-m40-a1/Reports/StructTrain/TimeLearner/s07-native-image-rest20-preservation-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/evidence-native-image-rest20-m40-a1/Reports/StructTrain/TimeLearner/s07-native-image-rest20-preservation-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-image-rest20-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-image-rest20-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-image-rest20-m40-a1-controller",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-image-rest20-m40-a1-controller"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native-image-rest20-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeImageRest20Collection-20261110",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native-image-rest20-collection-m40-a1/Docs/StructTrain/TimeLearner/ValidationPlans/NativeImageRest20Collection-20261110"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-image-rest20-m40-a1",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-s07-native-image-rest20-m40-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native-image-rest-m40-a2",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native-image-rest-m40-a2"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3",
+        "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native119-a2-preservation-m40-a3"
+      }
+    ],
+    "state": "released",
+    "created": 1794274421.116749,
+    "deadline": 1794274551.1419852,
+    "updated": 1794274435.979929,
+    "release_note": "Closed native metadata preserved or collection failed; original outcome unchanged.",
+    "heartbeat_expired": false,
+    "owner_status": "identity_live",
+    "inspection_required": false,
+    "scientific_verdict": null
+  },
+  "collector_external_cgroup_attested": false,
+  "scientific_verdict": null
+}

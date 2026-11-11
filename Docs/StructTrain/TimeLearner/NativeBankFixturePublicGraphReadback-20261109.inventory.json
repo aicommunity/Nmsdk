@@ -1,0 +1,98 @@
+{
+  "kind": "native_bank_fixture_public_graph_readback_source_inventory",
+  "schema_version": 1,
+  "status": "source_only_not_compiled_not_executed",
+  "source_root": "029c720a8cff5c9c082d1cb318b60632c5546748",
+  "base_root": "f015db2d4f6ac8c239e07c050ff596524604060c",
+  "Pulse_unchanged": "f7a0e3e63ec29d4647790a695606d1ca32164ef3",
+  "branch": "codex/timelearner-public-bank-descriptor-fixture",
+  "source": {
+    "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+    "bytes": 301393,
+    "sha256": "2f62224ddd3dbbec2e0768516e556cb504afb5e27d3c0527a7217e3713b1ca18",
+    "git_blob": "9e3dc7984368c902ecec4e05b86ff9d620a64ef4"
+  },
+  "diff_scope": {
+    "cpp_files": 1,
+    "production_files": 0,
+    "gitlinks_changed": 0,
+    "insertions": 39,
+    "deletions": 4,
+    "new_TEST_ids": 0
+  },
+  "directly_affected_existing_tests": [
+    {
+      "id": "NativeCandidateWindowBanks.ClassicN4ActualDistinctBankReadback",
+      "line": 1696
+    },
+    {
+      "id": "NativeCandidateWindowBanks.BranchN4ActualDistinctBankReadback",
+      "line": 1697
+    },
+    {
+      "id": "NativeCandidateWindowBanks.ClassicN6ActualDistinctBankReadback",
+      "line": 1698
+    },
+    {
+      "id": "NativeCandidateWindowBanks.BranchN6ActualDistinctBankReadback",
+      "line": 1699
+    },
+    {
+      "id": "NativeCandidateWindowBanks.ClassicN4EachActualInputRoutesNPlus2",
+      "line": 1700
+    },
+    {
+      "id": "NativeCandidateWindowBanks.BranchN4EachActualInputRoutesNPlus2",
+      "line": 1701
+    },
+    {
+      "id": "NativeCandidateWindowBanks.ClassicN6EachActualInputRoutesNPlus2",
+      "line": 1702
+    },
+    {
+      "id": "NativeCandidateWindowBanks.BranchN6EachActualInputRoutesNPlus2",
+      "line": 1703
+    },
+    {
+      "id": "NativeCandidateWindowBanks.BranchSharedBankIsLegitimateButNotDistinct",
+      "line": 1704
+    },
+    {
+      "id": "NativeCandidateWindowBanks.ActualPreparedWrongBankDescriptorRejected",
+      "line": 1705
+    },
+    {
+      "id": "NativeCandidateWindowTrainingCore.ReferenceAndUnqualifiedLegacyApiCannotArmFinal",
+      "line": 2300
+    }
+  ],
+  "descriptor_scope": {
+    "read_only_actual_public_graph": true,
+    "single_synapse_per_input": true,
+    "declared_inhibition_empty": true,
+    "prepared_Branch_source_connected_synapses": 1,
+    "expected_ordinal_used_to_select_observed_synapse": false,
+    "private_executor_list_attested": false,
+    "live_authority_minted": false,
+    "native_hooks_replaced": false,
+    "passed_to_NativeProbeExecutor": false
+  },
+  "source_checks": {
+    "remaining_protected_calls": 0,
+    "same_line_repeated_exception_macro_families": 0,
+    "independent_expected_banks_connections_identity_assertions_preserved": true
+  },
+  "server_prerequisites": [
+    "preserve negative37A3 before retry",
+    "root source review of this normal commit",
+    "fresh reviewed production source preparation and compiled test inventory",
+    "native execution and closure evidence; no runtime acceptance from this source inventory"
+  ],
+  "runtime_claims": {
+    "compiled": false,
+    "tests_executed": false,
+    "native_verified": false,
+    "full37_accepted": false,
+    "future14_accepted": false
+  }
+}

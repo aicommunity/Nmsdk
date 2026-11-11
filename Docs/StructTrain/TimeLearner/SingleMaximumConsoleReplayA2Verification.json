@@ -1,0 +1,134 @@
+{
+  "kind": "independent_git_metadata_verification",
+  "build_evidence_commit": "07bd874f9561e7f027864317c644af0e6347a96f",
+  "replay_evidence_commit": "e7b73e1fdc6c5d626604eb0e841adfb95d00ea70",
+  "build_members_verified": 27,
+  "build_root_source_hashes_verified": 498,
+  "build_Pulse_source_hashes_verified": 265,
+  "replay_members_verified": 459,
+  "replay_archive_bytes": 2128700,
+  "replay_archive_sha256": "93dd6eeec908be54da0f05a510852c1949ac5f5e71ca5a7e35bfc40bcc221ce6",
+  "external_exact_duplicate_cache_members_verified": 216,
+  "tool_source_hashes_verified": 383,
+  "four_run_manifests_artifact_bindings_verified": 424,
+  "server_design_tests": {
+    "tests_run": 5,
+    "successful": true,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "server_observed_rows": [
+    {
+      "id": "Classic",
+      "comparison": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "original_baseline": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "old_peak": {
+        "amplitude": null,
+        "candidate_count": 3,
+        "delay_from_stimulus": null,
+        "input_id": "input0",
+        "plateau_end": null,
+        "raw_potential": null,
+        "relative_to_trial_start": null,
+        "stimulus_id": "pulse0",
+        "time": null,
+        "validity": "ambiguous"
+      },
+      "new_peak": {
+        "amplitude": 0.23209749260986,
+        "candidate_count": 3,
+        "delay_from_stimulus": 0.017,
+        "input_id": "input0",
+        "plateau_end": 0.027,
+        "raw_potential": 0.23209749260986,
+        "relative_to_trial_start": 0.027,
+        "stimulus_id": "pulse0",
+        "time": 0.027,
+        "validity": "valid"
+      },
+      "quality": {
+        "recorded_window_complete": true,
+        "context_observed": true,
+        "measured_peak_validity": "valid",
+        "sample_count": 3601,
+        "diagnostic_only": true,
+        "training_eligible": false,
+        "source_pattern_independently_verified": false,
+        "evaluation_verdict": null
+      },
+      "physical_input_count": 4,
+      "selected_input_index": 0
+    },
+    {
+      "id": "Branch",
+      "comparison": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "original_baseline": {
+        "same_sample_count": true,
+        "relative_clock_equal_with_roundoff": true,
+        "stimulus_samples_exactly_equal": true,
+        "soma_samples_exactly_equal": true,
+        "exact_waveform_reproduced": true
+      },
+      "old_peak": {
+        "amplitude": null,
+        "candidate_count": 2,
+        "delay_from_stimulus": null,
+        "input_id": "input2",
+        "plateau_end": null,
+        "raw_potential": null,
+        "relative_to_trial_start": null,
+        "stimulus_id": "pulse0",
+        "time": null,
+        "validity": "ambiguous"
+      },
+      "new_peak": {
+        "amplitude": 0.011859327741041703,
+        "candidate_count": 2,
+        "delay_from_stimulus": 0.019999999999999997,
+        "input_id": "input2",
+        "plateau_end": 0.03,
+        "raw_potential": 0.011859327741041703,
+        "relative_to_trial_start": 0.03,
+        "stimulus_id": "pulse0",
+        "time": 0.03,
+        "validity": "valid"
+      },
+      "quality": {
+        "recorded_window_complete": true,
+        "context_observed": true,
+        "measured_peak_validity": "valid",
+        "sample_count": 3601,
+        "diagnostic_only": true,
+        "training_eligible": false,
+        "source_pattern_independently_verified": false,
+        "evaluation_verdict": null
+      },
+      "physical_input_count": 4,
+      "selected_input_index": 2
+    }
+  ],
+  "runtime_bindings_unchanged": true,
+  "local_numerical_execution": false,
+  "normal_Console_diagnostic_replay_accepted": true,
+  "training_or_classification_accepted": false,
+  "scientific_verdict": null
+}

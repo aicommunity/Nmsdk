@@ -1,0 +1,152 @@
+{
+  "source_root": "8ec5ec265a5995df75e35cebdb78aab5e89dcfe3",
+  "addressed_cases": [
+    {
+      "gate": "manual-r20-15",
+      "JUnit_sha256": "11db574674bcd9db584215dd919fe52802f16b3c97ba3d216f09003d026a9802",
+      "JUnit_time": "12.956",
+      "status": {
+        "accepted_inputs_before": 1,
+        "actual_accepted_inputs_after": 1,
+        "actual_final_status": "invalid_observation",
+        "actual_model_revision": "f12631a8df26b3fccde2c8b8bfcf1644a272b3fd69dc7f277b2e8651674c4fd3",
+        "actual_owner_lifecycle_current": true,
+        "kind": "native_manual_open_arm_after_failed_begin",
+        "rejections": [
+          "native_training_owner_control_replaced"
+        ],
+        "schema_version": 1
+      },
+      "routing": {
+        "after_failed_begin_model_revision": "f12631a8df26b3fccde2c8b8bfcf1644a272b3fd69dc7f277b2e8651674c4fd3",
+        "baseline_model_revision": "f12631a8df26b3fccde2c8b8bfcf1644a272b3fd69dc7f277b2e8651674c4fd3",
+        "first_accepted_input_index": 0,
+        "kind": "native_manual_open_arm_routing_context",
+        "open_input_index": 1,
+        "prepared_model_revision": "f12631a8df26b3fccde2c8b8bfcf1644a272b3fd69dc7f277b2e8651674c4fd3",
+        "schema_version": 1,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "gate": "manual-r20-16",
+      "JUnit_sha256": "cfac524b97da1ffc15d87e602b5f897ca366345ec89740b4e3885304c07be7f7",
+      "JUnit_time": "10.374",
+      "status": {
+        "accepted_inputs_before": 1,
+        "actual_accepted_inputs_after": 1,
+        "actual_final_status": "invalid_observation",
+        "actual_model_revision": "4cf872f3f37e016c40632d93e122339203191fe3ff8af99789198e23182ede9c",
+        "actual_owner_lifecycle_current": true,
+        "kind": "native_manual_open_arm_after_failed_begin",
+        "rejections": [
+          "native_training_owner_control_replaced"
+        ],
+        "schema_version": 1
+      },
+      "routing": {
+        "after_failed_begin_model_revision": "4cf872f3f37e016c40632d93e122339203191fe3ff8af99789198e23182ede9c",
+        "baseline_model_revision": "4cf872f3f37e016c40632d93e122339203191fe3ff8af99789198e23182ede9c",
+        "first_accepted_input_index": 1,
+        "kind": "native_manual_open_arm_routing_context",
+        "open_input_index": 0,
+        "prepared_model_revision": "9ba7c12f951c4ccd22a8a3a6912bca149ffb0f4dc1c2a22be8de46f167b177ad",
+        "schema_version": 1,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "full119_complete": false,
+  "scientific_verdict": null,
+  "processes": [
+    {
+      "gate": "manual-r20-15",
+      "execution": "completed",
+      "all_processes_closed": true,
+      "runtime_provenance": "loaded_files_captured",
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "needs_review",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 2,
+        "reasons": [],
+        "examples": [
+          {
+            "stream": "stderr.log",
+            "chunk": 1,
+            "severity": "unclassified",
+            "excerpt": "PulseLibTestRuntime executable=/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1/Test_PulseLib_StorageComponents ini=/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1/NeuroModelerConsole.ini"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 2,
+            "severity": "unclassified",
+            "excerpt": "PulseLibTestRuntime work_directory=/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-open-arm-normal-a1/manual-r20-15/native.test-events-log"
+          }
+        ],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 609,
+            "sha256": "e81646dc99a9fbfb5a629dda4802a7cb76dffd62318f25774dd9e01d22cf3713"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 391,
+            "sha256": "da1f3386d09b1af96454876dc738f52c135913d40e0668822e49f1ea7ad922b9"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    },
+    {
+      "gate": "manual-r20-16",
+      "execution": "completed",
+      "all_processes_closed": true,
+      "runtime_provenance": "loaded_files_captured",
+      "operational_diagnostics": {
+        "kind": "timelearner_operational_diagnostics",
+        "schema_version": 1,
+        "policy": "owned-streams-v1",
+        "status": "needs_review",
+        "error_records": 0,
+        "warning_records": 0,
+        "unclassified_stderr_chunks": 2,
+        "reasons": [],
+        "examples": [
+          {
+            "stream": "stderr.log",
+            "chunk": 1,
+            "severity": "unclassified",
+            "excerpt": "PulseLibTestRuntime executable=/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1/Test_PulseLib_StorageComponents ini=/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1/NeuroModelerConsole.ini"
+          },
+          {
+            "stream": "stderr.log",
+            "chunk": 2,
+            "severity": "unclassified",
+            "excerpt": "PulseLibTestRuntime work_directory=/media/user/Data/TimeLearnerRefactor/readbacks/s07-native119-open-arm-normal-a1/manual-r20-16/native.test-events-log"
+          }
+        ],
+        "streams": [
+          {
+            "path": "stdout.log",
+            "bytes": 606,
+            "sha256": "ff40854740eac19538fe16e7c7f7c3cca260286874a6a0ee99ce37b4bd139798"
+          },
+          {
+            "path": "stderr.log",
+            "bytes": 391,
+            "sha256": "32274e025be3cd15bba383a860680a0853f7a9ea6e373b688e1b25efbed98ab4"
+          }
+        ],
+        "contained_streams_match": true,
+        "scientific_verdict": null
+      }
+    }
+  ],
+  "full_primary_capture_pending_until_producer_closure": true
+}

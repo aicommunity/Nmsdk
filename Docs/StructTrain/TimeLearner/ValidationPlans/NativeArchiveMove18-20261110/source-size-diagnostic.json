@@ -1,0 +1,191 @@
+{
+  "kind": "native_package6_size_diagnostic",
+  "schema_version": 1,
+  "source_file": "/media/user/Data/TimeLearnerRefactor/readbacks/s05-native-archive-move18-m40-a1/package-3/native-composite/package6-branch/source-1/train_learned_state.json",
+  "bytes": 33492981,
+  "sha256": "f656c12d44567fb5ad0f049359ae0a458c01345e157e18dcb76fd3dbbf01d710",
+  "top_fields": {
+    "calculate_mode": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "capacitance_state": {
+      "type": "dict",
+      "compact_utf8_bytes": 367190,
+      "items": 7
+    },
+    "capture_epoch": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "capture_revision": {
+      "type": "str",
+      "compact_utf8_bytes": 66,
+      "items": 64
+    },
+    "certificate": {
+      "type": "dict",
+      "compact_utf8_bytes": 2408,
+      "items": 20
+    },
+    "configuration": {
+      "type": "dict",
+      "compact_utf8_bytes": 3652,
+      "items": 22
+    },
+    "controller_version": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "dataset": {
+      "type": "dict",
+      "compact_utf8_bytes": 8906,
+      "items": 6
+    },
+    "dynamic_checkpoint": {
+      "type": "bool",
+      "compact_utf8_bytes": 5,
+      "items": null
+    },
+    "implementation_id": {
+      "type": "str",
+      "compact_utf8_bytes": 45,
+      "items": 43
+    },
+    "kind": {
+      "type": "str",
+      "compact_utf8_bytes": 29,
+      "items": 27
+    },
+    "measurement_archive": {
+      "type": "dict",
+      "compact_utf8_bytes": 10827757,
+      "items": 15
+    },
+    "model_epoch": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "model_revision": {
+      "type": "str",
+      "compact_utf8_bytes": 66,
+      "items": 64
+    },
+    "neuron": {
+      "type": "dict",
+      "compact_utf8_bytes": 421050,
+      "items": 8
+    },
+    "protocol": {
+      "type": "dict",
+      "compact_utf8_bytes": 2177,
+      "items": 14
+    },
+    "reason": {
+      "type": "str",
+      "compact_utf8_bytes": 7,
+      "items": 5
+    },
+    "reference_complete": {
+      "type": "bool",
+      "compact_utf8_bytes": 4,
+      "items": null
+    },
+    "runtime_plan": {
+      "type": "dict",
+      "compact_utf8_bytes": 2674,
+      "items": 12
+    },
+    "schema_version": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "session_attempt": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "sha256": {
+      "type": "str",
+      "compact_utf8_bytes": 66,
+      "items": 64
+    },
+    "state_kind": {
+      "type": "str",
+      "compact_utf8_bytes": 14,
+      "items": 12
+    },
+    "structure_build_mode": {
+      "type": "int",
+      "compact_utf8_bytes": 1,
+      "items": null
+    },
+    "trained_inputs": {
+      "type": "list",
+      "compact_utf8_bytes": 97,
+      "items": 2
+    },
+    "training_outcome": {
+      "type": "str",
+      "compact_utf8_bytes": 7,
+      "items": 5
+    }
+  },
+  "largest_strings": [
+    {
+      "utf8_bytes": 49277,
+      "path": "$.neuron.graph.native_xml"
+    },
+    {
+      "utf8_bytes": 49277,
+      "path": "$.measurement_archive.source_binding.initial_native_snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.neuron.class_definitions[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.source_binding.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.source_binding.optional_C0_witness.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.source_binding.optional_C0_witness.native_state.baseline.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.records[5].capacitance_witnesses.5e95137202640e4356455d0056c0d13e758f71ebc5694f6584ba12920f15c3e9.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.records[5].capacitance_witnesses.5e95137202640e4356455d0056c0d13e758f71ebc5694f6584ba12920f15c3e9.native_state.baseline.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.records[5].candidate_binding.optional_C0_witness.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.records[5].candidate_binding.optional_C0_witness.native_state.baseline.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.records[4].capacitance_witnesses.5e95137202640e4356455d0056c0d13e758f71ebc5694f6584ba12920f15c3e9.storage_images[25].snapshot.native_xml"
+    },
+    {
+      "utf8_bytes": 34102,
+      "path": "$.measurement_archive.records[4].capacitance_witnesses.5e95137202640e4356455d0056c0d13e758f71ebc5694f6584ba12920f15c3e9.native_state.baseline.storage_images[25].snapshot.native_xml"
+    }
+  ],
+  "containers": 103876,
+  "scientific_verdict": null
+}

@@ -1,0 +1,78 @@
+{
+  "kind": "windows_existing_build_descendant_identity_rejection",
+  "root": "818dd80aa9c0a311ab3fae314449600f7edbc29f",
+  "terminal": {
+    "passed": false,
+    "attempt_kind": "bounded_existing_build_diagnostic",
+    "build_execution_accepted": false,
+    "execution": "descendants_remaining",
+    "compile_or_link_observed": false,
+    "runtime_inventories_unchanged": {
+      "runtime-a6": true,
+      "runtime-windows-assigned-sdk-a1": true,
+      "runtime-fixture-identity-windows-a2": true
+    },
+    "no_op_established": false,
+    "native_tests_started": 0,
+    "scientific_worker_admitted": false,
+    "prior_failed_attempt_reclassified": false,
+    "whole_plan_complete": false,
+    "scientific_verdict": null
+  },
+  "process": {
+    "kind": "timelearner_windows_process_result",
+    "schema_version": 1,
+    "execution": "descendants_remaining",
+    "validity": "valid",
+    "reason": "descendants_remaining",
+    "returncode": 0,
+    "scientific_verdict": null,
+    "thread_limit_enforced": false,
+    "memory_limit_semantics": "job_committed_virtual_memory",
+    "wall_budget_scope": "whole_attempt_including_preparation",
+    "descendants_at_main_exit": [
+      11540,
+      16712
+    ],
+    "all_processes_closed": true,
+    "cooperative_capture": "not_requested",
+    "runtime_provenance": "loaded_files_captured",
+    "observed_module_files": 12,
+    "wall_seconds": 4.053788700141013,
+    "child_resumed": true,
+    "job_name": "Local\\TimeLearner-70917f87-2207-4dca-a443-d393836aa251"
+  },
+  "kernel_job_state": "absent",
+  "source_closure_unchanged": true,
+  "runtime_inventory_unchanged": true,
+  "remaining_descendant_identities": [
+    {
+      "pid": 11540,
+      "executable": "C:\\Windows\\System32\\conhost.exe",
+      "creation_filetime": "134385910581877149",
+      "observed_utc": "2026-11-08T05:57:38Z",
+      "executable_file": {
+        "path": "C:\\Windows\\System32\\conhost.exe",
+        "sha256": "b02ee54fb2ec69673386d41119ee8ed083a6eab3bfca6aa2155d20ce68ef8963",
+        "size": 867840
+      }
+    },
+    {
+      "pid": 16712,
+      "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "creation_filetime": "134385910599643538",
+      "observed_utc": "2026-11-08T05:57:39Z",
+      "executable_file": {
+        "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "sha256": "9785001b0dcf755eddb8af294a373c0b87b2498660f724e76c4d53f9c217c7a3",
+        "size": 455680
+      }
+    }
+  ],
+  "historical_a2_pid9556_identity": "unknown_not_retroactively_inferred",
+  "native_tests_started": 0,
+  "numerical_tests_executed_locally": false,
+  "scientific_worker_admitted": false,
+  "prior_failed_attempts_reclassified": false,
+  "whole_plan_complete": false
+}

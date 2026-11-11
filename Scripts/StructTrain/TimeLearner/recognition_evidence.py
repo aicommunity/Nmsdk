@@ -135,7 +135,12 @@ def _audit_derivation(package: dict, source_case: tuple, *, diagnostic=False) ->
     else:
         require(declaration["branch"] and declaration["normalization"] == "N1" and len(bounds) == n,
                 "unsupported_historical_conversion")
-        if diagnostic:
+        if source.get('schema_version') in (5,6):
+            from .composite_certificate_evidence import reference_amplitudes
+            require(source['reference_complete'] is True, 'composite_conversion_requires_complete_references')
+            refs = reference_amplitudes(source)
+            amplitudes = [refs[item['id']] for item in source['protocol']['inputs']]
+        elif diagnostic:
             require(source["reference_complete"] is True, "diagnostic_conversion_requires_complete_references")
             amplitudes = [number(v) for v in source["neuron"]["metadata"]["training"]["captured_per_input"]]
             require(len(amplitudes) == n, "diagnostic_conversion_reference_dimension")

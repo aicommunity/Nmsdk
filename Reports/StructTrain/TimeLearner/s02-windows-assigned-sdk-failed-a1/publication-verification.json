@@ -1,0 +1,82 @@
+{
+  "kind": "optional_windows_sdk_runtime_gate_rejection",
+  "parent": "8314e98f7dbd93441d81de32e7c7174f0fafac24",
+  "PulseLib": "9e0640964945ad5903a4fff1c5091ebf71a69810",
+  "rows": [
+    {
+      "name": "windows-assigned-sdk-a1",
+      "compilation_exit_zero": true,
+      "build_execution_accepted": false,
+      "result": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "descendants_remaining",
+        "validity": "valid",
+        "reason": "descendants_remaining",
+        "returncode": 0,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "descendants_at_main_exit": [
+          10872
+        ],
+        "all_processes_closed": true,
+        "cooperative_capture": "not_requested",
+        "runtime_provenance": "loaded_files_captured",
+        "observed_module_files": 12,
+        "wall_seconds": 616.1798598002642,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-e27821bc-9f45-45cc-8e41-e3773decceb1"
+      }
+    },
+    {
+      "name": "windows-assigned-sdk-native-a2",
+      "inventories": {
+        "unit23": {
+          "expected": 23,
+          "observed": 23,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "bcc5c0fbd9b179712ce90ed5fbc0adb3c360387fedb21d3aee1499423e1f3927"
+        },
+        "physical21": {
+          "expected": 21,
+          "observed": 21,
+          "failed_test_ids": [],
+          "assertion_status": "passed",
+          "sha256": "a62f2d57f60581659b9a55bc05c8558edd9378f30a6e7957877a303a7a2da83f"
+        }
+      },
+      "runtime_changed_paths": [
+        "EventsLog\\NeuroModeler.DESKTOP-RV8IOD6.User.log.INFO.20261107-230307.1076"
+      ],
+      "physical_gate_accepted": false,
+      "physical_result": {
+        "kind": "timelearner_windows_process_result",
+        "schema_version": 1,
+        "execution": "process_error",
+        "validity": "invalid_or_incomplete",
+        "reason": "windows_module_path_unavailable",
+        "returncode": null,
+        "scientific_verdict": null,
+        "thread_limit_enforced": false,
+        "memory_limit_semantics": "job_committed_virtual_memory",
+        "wall_budget_scope": "whole_attempt_including_preparation",
+        "all_processes_closed": true,
+        "wall_seconds": 1404.7768935002387,
+        "child_resumed": true,
+        "job_name": "Local\\TimeLearner-f7c47a85-a0b9-4953-a68d-b75874429dfd"
+      }
+    }
+  ],
+  "owned_jobs_closed": 3,
+  "compilation_succeeded": true,
+  "full_native_gate_accepted": false,
+  "physical_assertions_observed_passed": 21,
+  "unit_gate_accepted_cases": 23,
+  "unknown_module_identity_preserved": true,
+  "scientific_worker_admitted": false,
+  "scientific_classification_evaluated": false,
+  "whole_plan_complete": false
+}

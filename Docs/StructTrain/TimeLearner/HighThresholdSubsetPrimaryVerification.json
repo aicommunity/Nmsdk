@@ -1,0 +1,24 @@
+{
+  "kind": "independent_high_threshold_subset_primary_metadata_verification",
+  "commit": "2194d833df5910207dfc8cf2895f8b11608db2f8",
+  "archive_members_verified": 10967,
+  "expanded_bytes_verified": 2209931029,
+  "archive_bytes": 19313800,
+  "archive_sha256": "98c72e4194bce8f701493c8f9f72ef27c400151bcbf0744825c7002d17049653",
+  "all_members_verified": true,
+  "complete_diagnostic_conditions": 14,
+  "distinct_processes": 14,
+  "reused_full_controls": 2,
+  "full_controls_exact_by_server_comparison": true,
+  "runtime_unchanged": true,
+  "ASan_loaded_in_all_condition_processes": true,
+  "all_groups_closed_and_released": true,
+  "runtime_error_cases": {
+    "a2/worker/corpus/Classic-6/process/stderr.log": "E20261108 02:41:59.575289 1945244 rdk_logging.h:164] [0] St12system_error Resource temporarily unavailable\n"
+  },
+  "scientific_acceptance_all_cases": false,
+  "runtime_error_investigation": "Classic-6 pending owner investigation and clean repeat; original data retained",
+  "numerical_tests_executed_locally": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false
+}

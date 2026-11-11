@@ -1,0 +1,19 @@
+{
+  "observed_at_utc": "2026-11-10T13:26:21.566Z",
+  "source_root": "355c60df066bdc8da09bd6d7872b47f6e71c0494",
+  "canonical_passed": true,
+  "launch_attempt": {
+    "status": 1,
+    "signal": null,
+    "output": [
+      null,
+      "",
+      "Traceback (most recent call last):\r\n  File \"/usr/lib/python3.10/runpy.py\", line 196, in _run_module_as_main\r\n    return _run_code(code, main_globals, None,\r\n  File \"/usr/lib/python3.10/runpy.py\", line 86, in _run_code\r\n    exec(code, run_globals)\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 617, in <module>\r\n    raise SystemExit(main())\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 610, in main\r\n    if args.action=='launch':return launch(args.request)\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 214, in launch\r\n    plan = preflight(request_path)\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 171, in preflight\r\n    require(sdkraw==tool_worker,'owned_native_SDK_worker_helper_version_not_tested')\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\r\n    raise EvidenceError(reason)\r\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_native_SDK_worker_helper_version_not_tested\r\n"
+    ],
+    "pid": 29724,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\r\n  File \"/usr/lib/python3.10/runpy.py\", line 196, in _run_module_as_main\r\n    return _run_code(code, main_globals, None,\r\n  File \"/usr/lib/python3.10/runpy.py\", line 86, in _run_code\r\n    exec(code, run_globals)\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 617, in <module>\r\n    raise SystemExit(main())\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 610, in main\r\n    if args.action=='launch':return launch(args.request)\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 214, in launch\r\n    plan = preflight(request_path)\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py\", line 171, in preflight\r\n    require(sdkraw==tool_worker,'owned_native_SDK_worker_helper_version_not_tested')\r\n  File \"/home/user/timelearner-refactor/source-report-cache-retirement-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\r\n    raise EvidenceError(reason)\r\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_native_SDK_worker_helper_version_not_tested\r\n"
+  },
+  "reason": "owned_native_SDK_worker_helper_version_not_tested",
+  "scientific_verdict": null
+}

@@ -1,0 +1,238 @@
+{
+  "kind": "closed_actual_six_composite_native_semantic7_passed",
+  "schema_version": 1,
+  "tool_root": "cec33f2fcceb8c8f815e3494173bf48dcd39ed6c",
+  "source_files": 632,
+  "package_fingerprint": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+  "plan_commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+  "plan_Git_blob_bindings": {
+    "suite.json": {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.suite.json",
+      "bytes": 1788,
+      "sha256": "11a65d8d7fdebb622f7349cbe85b88a74b8badd704e524e5fd32f6a4ba637aae"
+    },
+    "request.json": {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.request.json",
+      "bytes": 1055,
+      "sha256": "5b34f275517fd42f62407559da1db8f369de8087a68b9addbeddff9903d90c66"
+    },
+    "fixture-manifest.json": {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.fixture-manifest.json",
+      "bytes": 62330,
+      "sha256": "4c6fdf511166693ba427a670648fe27cf2faeda22688ca191715f8fe16530286"
+    },
+    "members.txt": {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.members.txt",
+      "bytes": 23035,
+      "sha256": "dba4206bdd5cd4ab46903861400e525eec6c23d83e1f24f22954d82d60ece6ca"
+    },
+    "SHA256SUMS": {
+      "commit": "9d407b97ebbf9a7036baa01d91b6bb2dc00632cd",
+      "path": "Docs/StructTrain/TimeLearner/CompositeNativeA4Semantic7Preparation-20261109.SHA256SUMS",
+      "bytes": 19267,
+      "sha256": "d887e6604a2ae7640bf8275632ea67b2658ed96ee04f0f934d529c0d3a653fc3"
+    }
+  },
+  "Git_control_objects": {
+    ".gitattributes": {
+      "bytes": 616,
+      "sha256": "d331e2fd777d19c89585679b2e9d8625274a9430e27e715801fd971c42152cef",
+      "git_blob": "5bba2f9531c39afb69d1fd482a68f401d02f6fec",
+      "materialized_as_code": false
+    },
+    ".gitignore": {
+      "bytes": 2042,
+      "sha256": "566a4cc30f6c4e41e57a3f03a8905e395ee0d478a2ef1af4c8f4a0307a972ce6",
+      "git_blob": "ffaf86e6d33ce18a901d396fb436d0077406467e",
+      "materialized_as_code": false
+    },
+    ".gitmodules": {
+      "bytes": 967,
+      "sha256": "d553dd80ec85fd8781f333377bfa59e4b917b21ab6f4d77974fb07d05b9b1809",
+      "git_blob": "878b41e2626ac2cc6a132f498949e89306ed122b",
+      "materialized_as_code": false
+    }
+  },
+  "primary_reference": {
+    "evidence_commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+    "archive": {
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/primary.tar.xz",
+      "git_blob": "0634e7f7f2d820c749571a9322e1ded4e8c140f9",
+      "bytes": 1836352,
+      "sha256": "15b990e1825f7aaac51dfd7a252215253a429df871c02c418ccb25cc8dc25008"
+    },
+    "bundle": {
+      "commit": "b4feb38aeed9940c4292b532b3de0e3ab853685e",
+      "path": "Reports/StructTrain/TimeLearner/s07-composite-cold6-m40-asan-a4/bundle.json",
+      "git_blob": "1818e031a257e0657653c8aa3b5950b031eead67",
+      "bytes": 1015442,
+      "sha256": "e67428fbcf469781b1e8bb8613b49b2b7a80a7faf4d00fc17a052eafca936fd4"
+    },
+    "selected_member_prefix": "s07-composite-cold6-m40-asan-a4/worker/cold6-regression-archive-native23/native-composite/",
+    "files": 157,
+    "bytes": 74969578,
+    "fixture_fingerprint": "78f286701300c7d365e16d25bb64fca430a06b23e08b638396249a87b89056db",
+    "manifest_sha256": "4c6fdf511166693ba427a670648fe27cf2faeda22688ca191715f8fe16530286",
+    "case_order": [
+      "classic-service",
+      "branch-service",
+      "classic-partial",
+      "branch-C0",
+      "classic-warm",
+      "branch-ambiguous"
+    ],
+    "primary_payload_in_this_publication": false
+  },
+  "tests": 7,
+  "passed": 7,
+  "errors": 0,
+  "failures": 0,
+  "skipped": 0,
+  "actual_log_and_AST_ids_verified": true,
+  "original_terminal": {
+    "operation_passed": true,
+    "operation": "python-validation",
+    "heartbeat_errors": [],
+    "lease_release": "controller only after whole cgroup closure",
+    "selected_validation_scope_requires_source_review": true,
+    "scientific_verdict": null
+  },
+  "controller": {
+    "kind": "timelearner_process_result",
+    "schema_version": 2,
+    "execution": "completed",
+    "reason": "exit_zero_and_whole_group_closed",
+    "returncode": 0,
+    "wall_seconds": 36.3655855008401,
+    "model_time": null,
+    "runtime_provenance": "loaded_files_captured",
+    "mapping_error": null,
+    "runtime_fingerprint": "49c4f019ba1cd27e8aabd2a289eef14abcd66a937d2602376b82af000779312a",
+    "ownership_scope": "bound_cgroup",
+    "all_processes_closed": true,
+    "scientific_verdict": null,
+    "operational_diagnostics": {
+      "kind": "timelearner_operational_diagnostics",
+      "schema_version": 1,
+      "policy": "owned-streams-v1",
+      "status": "clear",
+      "error_records": 0,
+      "warning_records": 0,
+      "unclassified_stderr_chunks": 0,
+      "reasons": [],
+      "examples": [],
+      "streams": [
+        {
+          "path": "stdout.log",
+          "bytes": 1836,
+          "sha256": "45388c9a97ba099f66e1fc020842f687bc5484af00f8f586f49f771256241617"
+        },
+        {
+          "path": "stderr.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "contained_streams_match": true,
+      "scientific_verdict": null
+    }
+  },
+  "fresh_closure_and_released_lease": {
+    "kernel": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "db1a73ec3840bd8ce3521a6fef0b6baa80c1196bb43dbe81fd5fbc34435a806c",
+        "unit": "timelearner-2ef634c6-93ac-424b-87c0-44d81167c32e.service",
+        "invocation_id": "549b79f1c0e849128639083aecb5a575",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-2ef634c6-93ac-424b-87c0-44d81167c32e.service",
+        "initial_main_pid": 1046103,
+        "initial_start_ticks": "328064253",
+        "sha256": "b00a7c34b18db6f308ac8c8cd2e1b07fce2bab0707bd9d2552ca427c252d055c"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-2ef634c6-93ac-424b-87c0-44d81167c32e.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "released_lease": {
+      "token": "2148bac9-4865-432f-b4ff-18758c16a708",
+      "job_id": "s10-composite-native-a4-semantic7-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1046103,
+        "start_ticks": "328064253",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/fixtures-composite-native-a4-git-b4feb-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/plan-composite-native-a4-semantic7-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-composite-native-a4-semantic7-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s10-composite-native-a4-semantic7-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794205445.0459325,
+      "deadline": 1794205595.0748014,
+      "updated": 1794205481.236918,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": true,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  },
+  "source_and_fixture_before_after_equal": true,
+  "preparation_history": {
+    "initial_missing_Git_control_object_refusal_preserved": true,
+    "occurred_before_lease_or_data_creation": true,
+    "original_control_Git_object_append_not_scientific_mutation": true,
+    "final_preparation_tests_not_yet_dispatched_record_preserved": true
+  },
+  "scope": "Actual six original exports and seven semantic Python reader gates only",
+  "seventh_final_sweep_accepted": false,
+  "production_Cpp_cold_decoder_accepted": false,
+  "AppPackage5_accepted": false,
+  "new_scientific_experiment_accepted": false,
+  "Cpp_build_or_model_or_plot_runs_by_this_job_or_collector": 0,
+  "scientific_verdict": null
+}

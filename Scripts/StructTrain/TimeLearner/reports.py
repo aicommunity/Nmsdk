@@ -70,9 +70,19 @@ def _render_evaluation(source, model, output, *, calibration_probe=False, source
     _write(primary/"model.json", package)
     if diagnostic:
         # Keep the audited stopped source and every original training trace.
-        evidence = primary/"stopped-source";evidence.mkdir()
+        evidence = primary/"stopped-source"
+        if source_case[0].get('schema_version') == 5:
+            from .composite_primary import capture_primary_blobs, write_primary_snapshot, _paths
+            archive = source_case[0]['measurement_archive']
+            refs = [trial['primary_ref'] for group in archive['records'] for trial in group['raw_trials']]
+            values = capture_primary_blobs(archive['primary_blobs'], refs, archive['maximum_total_primary_bytes'])
+            _paths(list(values) + ['train_stopped_state.json'] + (['train_stopped_summary.json'] if source_case[1] is not None else []))
+            write_primary_snapshot(values, evidence)
+        else:
+            evidence.mkdir()
         _write(evidence/"train_stopped_state.json", source_case[0])
-        _write(evidence/"train_stopped_summary.json", source_case[1])
+        if source_case[1] is not None:
+            _write(evidence/"train_stopped_summary.json", source_case[1])
         for trial_id, trace in source_case[3].items():
             (evidence/trace.name).write_bytes(trace.read_bytes())
             _write(evidence/trace.with_suffix(".json").name, source_case[2][trial_id])

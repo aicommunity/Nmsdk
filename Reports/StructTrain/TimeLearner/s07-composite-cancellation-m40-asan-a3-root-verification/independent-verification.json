@@ -1,0 +1,184 @@
+{
+  "kind": "independent_native_acceptance_full248_negative_verification",
+  "evidence": "a7dae002295800d520b1fd35975283f0daa2362d",
+  "source_root": "b6d0f752ca1668b6a908a435438020db58d2018e",
+  "source_Git_files": 3719,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-native-acceptance-worker",
+      "commit": "b6d0f752ca1668b6a908a435438020db58d2018e",
+      "files": 1000
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-composite-cancel-delivery",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    }
+  ],
+  "archive_members": 3972,
+  "archive_bytes": 1481568,
+  "archive_sha256": "84a08abdd5879aa2a7e5a16374932184c8649b06a26b5ee205c9c252ff2b17d3",
+  "expected_cases": 248,
+  "actual_completed": 231,
+  "passed": 230,
+  "failed": [
+    {
+      "id": "NativeCompositeDeclarations/ClassicCold6AndProtocol4StrictRoundtrip",
+      "line": 926,
+      "errors": [
+        "unknown file\nC++ exception with description \"invalid_native_configuration_number\" thrown in the test body."
+      ]
+    }
+  ],
+  "not_run": [
+    "NativeCompositeDeclarations/BranchCold6AndProtocol4StrictRoundtrip",
+    "NativeCompositeAutostart/ClassicCalculateMode0",
+    "NativeCompositeAutostart/ClassicCalculateMode1",
+    "NativeCompositeAutostart/BranchCalculateMode0",
+    "NativeCompositeAutostart/BranchCalculateMode1",
+    "NativeCompositeDimensions/ClassicN4ActualLastInput",
+    "NativeCompositeDimensions/BranchN4ActualLastInput",
+    "NativeCompositeDimensions/ClassicN6ActualLastInput",
+    "NativeCompositeDimensions/BranchN6ActualLastInput",
+    "NativePreparationCancellation/ClassicCallbackKeepsSingleCancelledResult",
+    "NativePreparationCancellation/BranchCallbackKeepsSingleCancelledResult",
+    "NativePreparationCancellation/ClassicSubsetRestoresFullPresentation",
+    "NativePreparationCancellation/BranchSubsetRestoresFullPresentation",
+    "NativeCompositeWindowLimitation/ClassicActualGrowthLeavesInitialWindow",
+    "NativeCompositeWindowLimitation/BranchActualGrowthLeavesInitialWindow",
+    "NativeCompositeSourceGuard/ClassicActualSourceChangedBetweenCloseAndConsume",
+    "NativeCompositeSourceGuard/BranchActualSourceChangedBetweenCloseAndConsume"
+  ],
+  "actual_binary_cases": 1624,
+  "source_selected_scope_with_diagnostics": 250,
+  "executed_leaf_gates": 121,
+  "kernel_groups_closed": 122,
+  "lease_released": true,
+  "protected_roots": 8,
+  "cache_full_required_entries": 7,
+  "additional_global_link_entries": 6,
+  "all68_artifact_rules_independently_evaluated": true,
+  "fulfilled_rules": 42,
+  "missing_rules": 26,
+  "six_archives": {
+    "classic-service": {
+      "records": 6,
+      "raw_references": 24,
+      "logical_csv_bytes": 455730,
+      "native_model_and_dataset_xml_hashes_verified": true
+    },
+    "branch-service": {
+      "records": 6,
+      "raw_references": 24,
+      "logical_csv_bytes": 301080,
+      "native_model_and_dataset_xml_hashes_verified": true
+    },
+    "classic-partial": {
+      "records": 1,
+      "raw_references": 1,
+      "logical_csv_bytes": 55,
+      "native_model_and_dataset_xml_hashes_verified": true
+    },
+    "branch-C0": {
+      "records": 6,
+      "raw_references": 24,
+      "logical_csv_bytes": 301080,
+      "native_model_and_dataset_xml_hashes_verified": true
+    },
+    "classic-warm": {
+      "records": 6,
+      "raw_references": 24,
+      "logical_csv_bytes": 466697,
+      "native_model_and_dataset_xml_hashes_verified": true
+    },
+    "branch-ambiguous": {
+      "records": 1,
+      "raw_references": 4,
+      "logical_csv_bytes": 28482,
+      "native_model_and_dataset_xml_hashes_verified": true
+    }
+  },
+  "raw_CSV_references_verified": 101,
+  "models_native_XML_and_identity_hashes_verified": true,
+  "initial_planning_configuration_schema_valid": false,
+  "invalid_planning_configurations": {
+    "classic-service": {
+      "schema_version": 6,
+      "base_schema_version": "sample0",
+      "valid_base_schema_version": false,
+      "raw_bytes_preserved": true
+    },
+    "branch-service": {
+      "schema_version": 6,
+      "base_schema_version": "sample0",
+      "valid_base_schema_version": false,
+      "raw_bytes_preserved": true
+    },
+    "classic-partial": {
+      "schema_version": 6,
+      "base_schema_version": "sample0",
+      "valid_base_schema_version": false,
+      "raw_bytes_preserved": true
+    },
+    "branch-C0": {
+      "schema_version": 6,
+      "base_schema_version": "sample0",
+      "valid_base_schema_version": false,
+      "raw_bytes_preserved": true
+    },
+    "classic-warm": {
+      "schema_version": 6,
+      "base_schema_version": "sample0",
+      "valid_base_schema_version": false,
+      "raw_bytes_preserved": true
+    },
+    "branch-ambiguous": {
+      "schema_version": 6,
+      "base_schema_version": "sample0",
+      "valid_base_schema_version": false,
+      "raw_bytes_preserved": true
+    }
+  },
+  "semantic_archive_reader_acceptance": false,
+  "full248_accepted": false,
+  "local_CPP_or_unittest_or_numerical_execution": false,
+  "scientific_verdict": null
+}

@@ -1,0 +1,259 @@
+{
+  "kind": "declared_time_scale_auditor_port_source_preparation",
+  "schema_version": 1,
+  "base_root": "4a6450f799865be213a42a0bc0cc251cee083646",
+  "branch": "codex/timelearner-declared-time-scales-port",
+  "state": "source_only_pending_root_review_and_Linux_gate",
+  "old_Bin_entrypoints_deleted": false,
+  "old_wrappers_added": false,
+  "native_CPP_or_runtime_or_models_modified": false,
+  "source_files": {
+    "Scripts/StructTrain/TimeLearner/declared_time_scales.py": {
+      "bytes": 14542,
+      "sha256": "669cbd60ef9ebda4ea31ee0f887602c08463e7595114e3f40ff61761f86a0f50",
+      "AST_valid": true,
+      "git_blob": "483566941a53c590d3c9f4876aff399d5398a418"
+    },
+    "Scripts/StructTrain/TimeLearner/config_document.py": {
+      "bytes": 8942,
+      "sha256": "eb23466af82e016441f5bc34337a2e21f04e90d458717582c8913abddb6a5c0c",
+      "AST_valid": true,
+      "git_blob": "7df76c1a4ba3df81c4821176c8b37fff5c349d4f"
+    },
+    "Scripts/StructTrain/TimeLearner/__main__.py": {
+      "bytes": 66514,
+      "sha256": "02adfa0cc20a5fd1144ca004c6b1ea93c7ca51c78ee6d3bccdd0734c4e2fefe6",
+      "AST_valid": true,
+      "git_blob": "0736ce0a2d97e156cbde77f0e6a5deb6b7429c78"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_declared_time_scales.py": {
+      "bytes": 18331,
+      "sha256": "65183148b1c506ab48022b763f8786f8786108cb6b6556f4d3ab08060da6c379",
+      "AST_valid": true,
+      "git_blob": "c5d72787d62c408ef39e19dad672de7616c3afb2"
+    }
+  },
+  "source_entrypoints": [
+    {
+      "repo": "Bin",
+      "commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_step_stability.py",
+      "git_blob": "2c865b33ab4bbd3c9c72c8f636aef18dca977160",
+      "sha256": "5ef2a7a21163e8cdacdab27da7fbff7130be979673002a6ab2c200e5b065aa7b",
+      "bytes": 12763,
+      "retirement_state": "not_started_requires_root_source_migration_review"
+    },
+    {
+      "repo": "Bin",
+      "commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+      "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+      "git_blob": "689d78e13ece1fdb8cf7df157e73822f23b16701",
+      "sha256": "d6fc4ff1b8ef51a72e37266fdd6e1f87a20a6539a0bde9821b05470ec0ecd02f",
+      "bytes": 6462,
+      "retirement_state": "not_started_requires_root_source_migration_review"
+    }
+  ],
+  "caller_search": {
+    "exact_names": [
+      "audit_timelearner_step_stability",
+      "audit_timelearner_config_tree_stability"
+    ],
+    "scope": "all tracked text blobs at four pinned trees; binary primary not decoded; lazy fetch disabled; not arbitrary dynamic-call coverage",
+    "trees": [
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "returncode": 0,
+        "matches": 12
+      },
+      {
+        "repository": "Bin",
+        "commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+        "returncode": 0,
+        "matches": 1
+      },
+      {
+        "repository": "PulseLib",
+        "commit": "e183bee14be285862663c094b0b36b3f0dc15747",
+        "returncode": 1,
+        "matches": 0
+      },
+      {
+        "repository": "Rdk",
+        "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+        "returncode": 1,
+        "matches": 0
+      }
+    ],
+    "matched_references": [
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+        "line": 651,
+        "role": "historical_report_link",
+        "disposition": "preserve historical report, change launcher link to Git history after reviewed Bin retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/Audit/TimeLearner-2026-09-26-review/RS_DROP_AND_MIN_RATIO_INVESTIGATION_2026-10-13.ru.md",
+        "line": 661,
+        "role": "historical_report_link",
+        "disposition": "preserve historical report, change launcher link to Git history after reviewed Bin retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json",
+        "line": 7150,
+        "role": "inventory_snapshot",
+        "disposition": "retain dated inventory; append migration record after retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/StructTrain/TimeLearner/FourTreeScriptInventory-20261108.json",
+        "line": 7160,
+        "role": "inventory_snapshot",
+        "disposition": "retain dated inventory; append migration record after retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/StructTrain/TimeLearner/related_script_review.json",
+        "line": 2407,
+        "role": "inventory_snapshot",
+        "disposition": "retain dated inventory; append migration record after retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/StructTrain/TimeLearner/related_script_review.json",
+        "line": 2425,
+        "role": "inventory_snapshot",
+        "disposition": "retain dated inventory; append migration record after retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+        "line": 1385,
+        "role": "inventory_snapshot",
+        "disposition": "retain dated inventory; append migration record after retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Docs/StructTrain/TimeLearner/source_inventory.json",
+        "line": 1396,
+        "role": "inventory_snapshot",
+        "disposition": "retain dated inventory; append migration record after retirement"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Reports/StructTrain/TimeLearner/s02-elder-bin-worktree-repair-a1/actual-content-before.json",
+        "line": 51798,
+        "role": "historical_source_snapshot",
+        "disposition": "preserve immutable historical snapshot"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Reports/StructTrain/TimeLearner/s02-elder-bin-worktree-repair-a1/actual-content-before.json",
+        "line": 51802,
+        "role": "historical_source_snapshot",
+        "disposition": "preserve immutable historical snapshot"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a1/actual-bin-content.json",
+        "line": 51798,
+        "role": "historical_source_snapshot",
+        "disposition": "preserve immutable historical snapshot"
+      },
+      {
+        "repository": "root",
+        "commit": "4a6450f799865be213a42a0bc0cc251cee083646",
+        "path": "Reports/StructTrain/TimeLearner/s07-measured-length-gate-normal-a1/actual-bin-content.json",
+        "line": 51802,
+        "role": "historical_source_snapshot",
+        "disposition": "preserve immutable historical snapshot"
+      },
+      {
+        "repository": "Bin",
+        "commit": "36f4ce6ae4cdbea90240dced08425fdf64f3bcf7",
+        "path": "Configs/SpikeSamples/StructTrain/TimeLearnerMatrix/scripts/audit_timelearner_config_tree_stability.py",
+        "line": 23,
+        "role": "coupled_legacy_import",
+        "disposition": "remove together only after root port accepted"
+      }
+    ]
+  },
+  "numeric_policy": "binary64-exact-declared-q-v1; zero relative tolerance in both bands and counts; no integrator stability verdict",
+  "Class_attribute_interpretation": "registered image or class name; effective/storage physics unknown",
+  "prepared_tests": [
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_registered_image_names_are_not_inferred_cpp_classes_or_physics",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_real_numeric_channel_dialect_bom_comments_and_attributes_survive",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_attribute_view_is_read_only_without_changing_existing_text_edits",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_missing_project_never_silently_uses_2000",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_missing_clock_fields_and_flags_are_explicitly_unknown",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_zero_global_uses_only_explicit_positive_declared_default",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_individual_clock_is_unresolved_and_override_is_hypothetical",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_duplicate_channel_binding_is_not_flattened_to_same_frequency",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_other_parameters_filename_cannot_bind_a_project_clock",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_component_time_step_is_not_replaced_with_global_or_override",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_empty_and_no_rc_document_never_get_positive_classification",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_ancestor_clock_cannot_be_ignored_for_nested_rc_parameters",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_malformed_document_is_not_assessed_with_consistent_empty_summary",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_invalid_capacity_tokens_are_retained_as_unresolved",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_invalid_resistance_is_not_omitted_beside_valid_mode",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_missing_or_duplicate_capacity_does_not_borrow_another_block",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_nonfinite_or_underflow_product_never_escapes_as_json_infinity",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_nonfinite_inverse_is_not_stored_after_positive_subnormal_product",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_threshold_counts_and_bands_share_exact_versioned_policy",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_returned_threshold_metadata_cannot_mutate_future_policy",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_duplicate_component_names_keep_distinct_block_ordinals",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_boolean_nonfinite_and_nonpositive_override_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_file_digest_is_of_parsed_snapshot_not_later_replacement",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_parameter_and_project_symlinks_never_supply_configuration",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_size_budget_is_enforced_before_config_parsing",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_matrix_discovery_retains_bad_case_without_losing_good_case",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_tracked_tree_is_relocatable_and_ignores_untracked_parameters",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_cli_writes_strict_diagnostic_and_never_overwrites_existing_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_tracked_subtree_metacharacters_are_literal_paths",
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_time_scales.DeclaredTimeScalesTest.test_cli_empty_discovery_is_nonzero_and_explicitly_not_assessed"
+  ],
+  "prepared_literal_test_count": 30,
+  "tests_executed": 0,
+  "existing_lossless_ConfigDocument_tests_required": 7,
+  "proposed_combined_Linux_gate": {
+    "wire": 67,
+    "collector": 39,
+    "new_declared_time_scales": 30,
+    "ConfigDocument": 7,
+    "total": 143,
+    "actual_10_Project_ini_corpus_must_be_declared_fixture": true,
+    "native_6_archive_reader_included": false,
+    "model_or_CPP_runs": false,
+    "dispatch_state": "not_dispatched",
+    "runner": "production validation.run_suite + maintained contained_runner API, declared exact inventory; no generated program bodies"
+  },
+  "source_execution_attestation": false,
+  "scientific_verdict": null,
+  "whole_plan_complete": false,
+  "source_byte_basis": "exact staged Git blob bytes; AST only locally; no numerical or unit execution",
+  "prior_gate": {
+    "source_root": "76ffc4c566a7c6113eb5131de398467103e320fa",
+    "job": "s09-declared-time-scales-script143-m40-a1",
+    "executed": 143,
+    "passed": 142,
+    "errors": 1,
+    "skipped": 0,
+    "outcome": "closed_failed",
+    "reason": "main branch-local import subprocess shadowed module binding in exception handler; original no-overwrite FileExistsError masked by UnboundLocalError",
+    "existing_regression": "DeclaredTimeScalesTest.test_cli_writes_strict_diagnostic_and_never_overwrites_existing_output"
+  }
+}

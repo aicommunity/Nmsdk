@@ -1,0 +1,77 @@
+{
+  "kind": "independent_native_slow_sink_deadline4_verification",
+  "evidence_commit": "43377c50075f015bed68d5717afdffac23201c6e",
+  "source_files_Git_verified": 3687,
+  "source_repositories": [
+    {
+      "scope": "root",
+      "repository": "E:\\Science-Repo\\nmsdk-composite-cancel-delivery",
+      "commit": "17db91ee0e8f308ea39cf7ebef641e1814080337",
+      "files": 968
+    },
+    {
+      "scope": "Bin",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Bin",
+      "commit": "918ae5e1a2d6085b9ff148f7162eb9e744126592",
+      "files": 1
+    },
+    {
+      "scope": "Libraries/Rdk-HardwareLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-HardwareLib",
+      "commit": "de40b008e990105856726e01230dde19f42a90a9",
+      "files": 356
+    },
+    {
+      "scope": "Libraries/Nmsdk-PulseLib",
+      "repository": "E:\\Science-Repo\\pulselib-composite-cancel-delivery",
+      "commit": "88ea9c7ab3583da601b1f01ec84bf6f122875a34",
+      "files": 313
+    },
+    {
+      "scope": "Libraries/Nmsdk-MotionControlLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Nmsdk-MotionControlLib",
+      "commit": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "files": 93
+    },
+    {
+      "scope": "Rdk",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Rdk",
+      "commit": "d6c9df759a3ee20ad42fa0a83841f19385fba60a",
+      "files": 1781
+    },
+    {
+      "scope": "Libraries/Rdk-BasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-BasicLib",
+      "commit": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "files": 43
+    },
+    {
+      "scope": "Libraries/Rdk-CvBasicLib",
+      "repository": "E:\\Science-Repo\\nmsdk-git\\Libraries\\Rdk-CvBasicLib",
+      "commit": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "files": 132
+    }
+  ],
+  "archive_members": 219,
+  "archive_bytes": 1007592,
+  "archive_sha256": "b01bbf5a4477f97d7ffba6daa814bdd10b62d822d57cd928a9a7e3ea97f79c77",
+  "CPP_cases_passed": 4,
+  "kernel_groups_closed": 5,
+  "reservation_released": true,
+  "protected_runtimes": 5,
+  "source_suite_inventory_cases": 64,
+  "explicit_executed_subset": [
+    "NativeCompositeService/BranchLastCompositeSinkCannotCrossRealGroupDeadline",
+    "NativeCompositeService/BranchSlowSinkCannotCrossRealDeadlineIntoConsume",
+    "NativeCompositeService/ClassicLastCompositeSinkCannotCrossRealGroupDeadline",
+    "NativeCompositeService/ClassicSlowSinkCannotCrossRealDeadlineIntoConsume"
+  ],
+  "actual_sleep_assertions_passed": true,
+  "group_wall_seconds": 60,
+  "source_sleep_seconds": 61,
+  "whole_attempt_wall_seconds": 1800,
+  "post_callback_deadline_tested": true,
+  "full248_accepted": false,
+  "scientific_verdict": null,
+  "local_numerical_CPP_or_unittest_execution": false
+}

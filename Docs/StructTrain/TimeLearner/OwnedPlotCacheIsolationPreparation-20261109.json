@@ -1,0 +1,108 @@
+{
+  "kind": "owned_plot_cache_isolation_source_preparation",
+  "schema_version": 1,
+  "prepared_date": "2026-11-09",
+  "base_root": "7930d6b2ef689326c91a423b62cb6faf7e0a2fd7",
+  "status": "source_only_unrun",
+  "changes": {
+    "request_API_changed": false,
+    "cache_paths": {
+      "TMPDIR": "<job>/worker/tmp",
+      "MPLCONFIGDIR": "<job>/worker/tmp/matplotlib",
+      "XDG_CACHE_HOME": "<job>/worker/tmp/xdg-cache"
+    },
+    "record": "<job>/worker/temporary-environment.json",
+    "historical_jobs_artifacts_changed": false,
+    "Cpp_physics_or_model_changes": false
+  },
+  "candidate_source_blobs": {
+    "Scripts/StructTrain/TimeLearner/owned_python_job.py": {
+      "git_blob": "eacf09ed9b1c177e80e6d71c33cd231e611b24f9",
+      "bytes": 22237,
+      "sha256": "0ba0b1cca145e5ed442a19ace9c706cd034acd717b65589e03cb64c311944ec5"
+    },
+    "Scripts/StructTrain/TimeLearner/tests/test_owned_python_job.py": {
+      "git_blob": "d0e6b874a6ccc63a77b789dd9597ae77445036dc",
+      "bytes": 15965,
+      "sha256": "ed5e1a162808fa15444b546dfc725c05f7da089d674660dcd5f765536f141846"
+    }
+  },
+  "package_python_files": 441,
+  "package_fingerprint_Git_bytes": "629bd6fe86318b5e38251ab4f822a07d01debf4c8a9ab3d88a8896c0636de20d",
+  "metadata_scope": {
+    "module": "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job",
+    "expected_tests": 13,
+    "unchanged_tests": 12,
+    "new_test_id": "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_worker_projects_actual_child_plotting_caches_inside_owned_TMPDIR",
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callable_hook_failure_stops_only_the_bound_group_and_cannot_pass",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_callbacks_are_checked_before_any_runtime_or_output_side_effect",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_changed_source_or_wrong_epoch_cannot_keep_projection_identity",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_closed_observer_pipe_does_not_raise_into_execution_control",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_invalid_limits_and_boolean_schema_never_clip_to_defaults",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_readbacks_parent_alias_cannot_redirect_owned_output",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_retained_glog_alias_is_lstat_readlink_only_even_when_dangling",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_reviewed_typed_request_is_preserved_without_implicit_fields",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_and_input_bindings_require_full_digest_and_absolute_path",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_source_projection_is_verified_against_exact_git_blob_bytes",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_unknown_fields_native_actions_and_path_job_ids_refuse",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_validation_leases_suite_parent_as_real_directory_tree",
+      "Scripts.StructTrain.TimeLearner.tests.test_owned_python_job.OwnedPythonJobTest.test_worker_projects_actual_child_plotting_caches_inside_owned_TMPDIR"
+    ],
+    "new_test_method": "Production _worker is invoked with mocked outer-unit/source attestations; its real subprocess environment is passed to an actual metadata child. The child writes markers into its received cache paths; deliberate boundary exception prevents any fabricated validation-success result. Old caller cache directories must stay empty. No new units/models are launched by this test.",
+    "tests_executed": false,
+    "prior18_acceptance_reused_for_new_environment": false,
+    "unchanged_StaticArchiveCleanup_tests_not_added_without_new_scope": true
+  },
+  "renderer_scope": {
+    "expected_tests": 14,
+    "expected_test_ids": [
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_actual_channel_rest_is_not_assumed_zero",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_actual_lt_events_are_preserved_and_all_classic_somas_exist",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_existing_report_is_preserved",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_diagnostic_reports.ChannelDiagnosticReportsTest.test_wrong_git_native_prefix_is_rejected_before_creating_report",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_nonfinite_threshold_or_invalid_axis_cannot_be_reported_as_a_valid_reference",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_remote_thresholds_keep_exact_value_and_direction_without_an_axis_line",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_lt_threshold_display.ChannelLTThresholdDisplayTest.test_visible_threshold_and_axis_boundaries_keep_the_actual_reference_line",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationCaptionTest.test_complete_waveform_and_packet_refusal_are_separate_claims",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationCaptionTest.test_missing_scope_cannot_silently_reuse_ambiguous_legacy_caption",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_additional_classic_soma_is_not_the_selected_peak_window",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_observation_scope.ChannelObservationScopeNativeTest.test_actual_high_threshold_is_excluded_from_the_full_time_LT_signal_axis",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_branch_positive_crest_remains_visible_without_hiding_clipped_samples",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_classic_positive_crest_remains_visible_without_hiding_clipped_samples",
+      "Scripts.StructTrain.TimeLearner.tests.test_channel_positive_lobe.PositiveLobeNativeReportTest.test_paired_full_range_preserves_actual_negative_feedback_excursion"
+    ],
+    "new_or_removed_renderer_test_ids": 0,
+    "test_sources_and_numerical_assertions_changed_by_this_commit": false,
+    "tests_executed": false
+  },
+  "already_completed_preparation_7930": {
+    "source": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a1",
+    "source_files": 632,
+    "source_package_fingerprint": "189924662865b2489103c28ec56f7d7935f539daf2a2412f43a4cff12996b324",
+    "curated_fixtures": "/media/user/Data/TimeLearnerRefactor/data-channel-lt-overview-fixtures-m40-a1",
+    "curated_regular_files": 60,
+    "environment": "/media/user/Data/TimeLearnerRefactor/plot-venv-channel-lt-overview-a1",
+    "real_binary_sha256": "e50d468e8b0adfb05733f5b87b3cff34829c4a8c1aea50c865aa8bdfe4bb150f",
+    "site_packages_files": 4926,
+    "site_packages_fingerprint": "80712ac0a87f547d366f45a2b771bc44826e2f60dd285594f3e69db0b30f0d87",
+    "actual_imports": {
+      "matplotlib": "3.9.4",
+      "numpy": "2.5.4",
+      "pillow": "13.0.0",
+      "backend": "Agg"
+    },
+    "old_environment_unchanged": true,
+    "source_unchanged": true,
+    "tests_render_models_executed": false
+  },
+  "next_review": {
+    "source_path": "/media/user/Data/TimeLearnerRefactor/source-channel-lt-overview-tool-m40-a2",
+    "first_scope": "13 worker metadata tests",
+    "then_scope": "14 renderer tests only after metadata outcome/whole-group closure review",
+    "requires_frozen_actual_suite_request_source_fixture_environment_bindings": true,
+    "server_dispatch_state": "not_dispatched",
+    "shared_active_SDK_sources_or_caches_accessed": false
+  },
+  "local_checks": "Git blobs/hashes, AST IDs, JSON and diff only; no module imports or tests/plots/numerics"
+}

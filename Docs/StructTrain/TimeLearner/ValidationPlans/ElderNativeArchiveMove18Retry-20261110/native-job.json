@@ -1,0 +1,130 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/home/user/timelearner-refactor",
+  "preparation": "/home/user/timelearner-refactor/readbacks/s05-native-archive-move18-normal-a2-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/home/user/timelearner-refactor/source-native-archive-move-normal-a1",
+    "build": "/home/user/timelearner-refactor/build-native-archive-move18-normal-a2",
+    "runtime": "/home/user/timelearner-refactor/runtime-native-archive-move18-normal-a2",
+    "output": "/home/user/timelearner-refactor/readbacks/s05-native-archive-move18-normal-a2",
+    "resources": "/home/user/timelearner-refactor/resources-bin8cb-native-archive-move-normal-a1",
+    "framework": "/home/user/timelearner-refactor/framework-initial-threshold-normal-a4"
+  },
+  "build": {
+    "type": "Release",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/home/user/timelearner-refactor/framework-initial-threshold-normal-a4",
+      "RDK_USE_LLM:BOOL=OFF",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 43200,
+    "leaf_memory_bytes": 4294967296,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 536870912,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 12884901888
+  },
+  "asan_options": null,
+  "protected_runtimes": [
+    "/home/user/timelearner-refactor/runtime-integrated-acceptance-normal-a1"
+  ],
+  "artifacts": [
+    {
+      "glob": "actual-membrane-stages/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "actual-class-image-replay/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "archive-waveforms/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "load-and-xml-controls-8/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "actual-membrane-stages/native/actual-membrane-copy-load-stages.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "actual-class-image-replay/native/actual-class-image-cycle-*.json",
+      "minimum": 3,
+      "maximum": 3
+    },
+    {
+      "glob": "archive-waveforms/native/telemetry-matrix-precise-boundary-fixture-*.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "archive-waveforms/native/telemetry-matrix-precise-boundary-import-verification-*.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "load-and-xml-controls-8/native/native-load-history-*.json",
+      "minimum": 6,
+      "maximum": 6
+    },
+    {
+      "glob": "load-and-xml-controls-8/native/contradictory-image-*.json",
+      "minimum": 2,
+      "maximum": 2
+    },
+    {
+      "glob": "archive-ownership/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "package-1/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "package-2/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "package-3/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "package-4/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "package-5/native.xml",
+      "minimum": 1,
+      "maximum": 1
+    }
+  ]
+}
