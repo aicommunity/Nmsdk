@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "TimeLearner/BoundedTraining.h"
-#include "TimeLearner/ProbeEvidenceJson.h"
+#include "TimeLearner/CandidateRecoveryEvidenceJson.h"
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <algorithm>

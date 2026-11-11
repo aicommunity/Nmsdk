@@ -10,6 +10,7 @@ add_executable(Test_PulseLib_TrainingAlgorithms
     "${_tl_tests}/Libraries/Test_PulseLib_MeasuredCapacitanceSearch.cpp"
     "${_tl_tests}/Support/ProbeAlgorithmMain.cpp"
     "${_tl_core}/BoundedTraining.cpp"
+    "${_tl_core}/CandidateRecoveryEvidenceJson.cpp"
     "${_tl_core}/ProbeObservation.cpp"
     "${_tl_core}/MeasuredResponse.cpp"
     "${_tl_core}/FinalVerification.cpp"
