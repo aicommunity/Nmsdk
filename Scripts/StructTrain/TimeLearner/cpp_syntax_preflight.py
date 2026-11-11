@@ -94,7 +94,9 @@ def run(plan):
     registry = Reservations.open_existing(base/'resource-reservations.sqlite3')
     require(not registry.managed_units, 'syntax_preflight_requires_existing_legacy_registry')
     require(shutil.disk_usage(base).free >= 512*1024**2, 'syntax_preflight_disk_floor')
-    resources = [{'path':str(p), 'access':'read'} for p in (source, previous, cache.parent, reference)]
+    framework = _canonical(Path(reference_job['paths']['framework']))
+    require(framework.is_relative_to(base), 'syntax_preflight_framework_outside_workspace')
+    resources = [{'path':str(p), 'access':'read'} for p in (source, previous, cache.parent, reference, framework)]
     resources.append({'path':str(output), 'access':'write'})
     demands = {} if registry.capacity is None else {'demands':{'slots':1, 'memory_bytes':4*1024**3, 'disk_bytes':128*1024**2}}
     lease = registry.reserve(output.name, resources, ttl_seconds=240, **demands);token = lease['token']
