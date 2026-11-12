@@ -1,3 +1,7 @@
 # Независимая проверка DATA loader на Elder
 
 SourceRoot 929dbc176a0804910544539aaf79bdc4a02aa82a / Pulse dfb9a98244f91b4f4029d8470465fd40116436ca. Отдельные source/build/runtime. Сначала закрыть старое задание SDK102 и проверить его результат; не выполнять второй build при неизвестном состоянии старого. Затем canonical4163 files и fresh Release/O3 с enum smoke. После сборки выполнить все52 исходных finalization cases через8 hash-bound DATA inputs (два набора26), без skips. Полного SDK102 PASS и scientific PASS этот smoke не даёт. Восстановление fixtures — ровно8 regular flat members по Git manifest; старые env roots не передаются в native runner.
+
+Canonical A1 отклонён до создания worker/lease: worker_host был ошибочно указан Elder вместо фактического Elder-1. A2 использует подтверждённое имя и отдельные immutable controls; до native build требуется прежний запас4GiB+floor2GiB. Для него разрешено удалить только ELF relocatable .o cache завершённого SDK c735, сохранив runtime и все результаты/конфиги.
+
+Проверка actual space уточнила решение: завершённый SDK102 целиком достиг disk_peak_increment1777504256 bytes (build211672KiB, runtime166904KiB,50-case outputs1356800KiB). Для нового build+одного enum smoke выбран reserve2GiB, больше измеренного пика предыдущей полной серии; physical floor2GiB сохранён. При free5938MB это достаточная admission capacity. Найденный .o cache150011904 allocated bytes не удалялся; модели, runtime и уникальные результаты сохранены. DATA52 будет иметь отдельные limits/reservations.
