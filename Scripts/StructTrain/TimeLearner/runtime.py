@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import subprocess
+from contextlib import contextmanager
 from pathlib import Path
 
 BUILD_KEYS = {"CMAKE_BUILD_TYPE", "CMAKE_C_COMPILER", "CMAKE_CXX_COMPILER",
@@ -20,6 +21,33 @@ BUILD_KEYS.update({"CMAKE_"+kind+"_LINKER_FLAGS"+configuration
 
 LOCATION_BUILD_KEYS = {"CMAKE_C_COMPILER", "CMAKE_CXX_COMPILER",
                        "NMSDK_DEPLOY_ROOT", "NMSDK_RESOURCE_ROOT"}
+
+
+@contextmanager
+def applied_loader_environment(manifest):
+    """Apply only pinned loader keys during one synchronous native operation.
+
+    The contained runner still checks equality. This does not authorize request
+    environment overrides, and restores both values and absent keys on failure.
+    Concurrent operations in the same interpreter must use separate processes.
+    """
+    from .native_evidence import require
+    keys = ('LD_LIBRARY_PATH', 'QT_PLUGIN_PATH', 'QT_QPA_PLATFORM')
+    environment = manifest.get('loader_environment') if type(manifest) is dict else None
+    require(type(environment) is dict and set(environment) <= set(keys) and
+            all(type(value) is str and '\0' not in value for value in environment.values()),
+            'invalid_loader_environment')
+    previous = {key: os.environ.get(key) for key in keys}
+    def apply(values):
+        for key in keys:
+            value = values.get(key)
+            if value is None:os.environ.pop(key, None)
+            else:os.environ[key] = value
+    try:
+        apply(environment)
+        yield
+    finally:
+        apply(previous)
 
 
 def digest_file(path: Path) -> str:

@@ -16,6 +16,7 @@ from .native_process_policy import validate_policy, execute_native, audit_contai
 from .learned_evidence import load_case, audit_learned_state
 from .recognition_evidence import audit_recognition_source
 from .recognition_metrics import load_evaluation, score_recognition_evaluation
+from .runtime import applied_loader_environment
 
 
 TRAINING_FIELDS = {"owner_class", "implementation_id", "configuration", "profile_archives", "optional_modes",
@@ -433,9 +434,12 @@ def run_job(mode, job_path, source_path, runtime_path, output, maximum_wall_seco
         _write(inputs/"process-policy.json", policy)
     executor = execute if policy is None else execute_native
     options = ({"cooperative_capture": mode in ("preflight", "probe")} if policy is None else {"policy": policy})
-    process = executor(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
-        "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
-        executable.parent, output/"process", maximum_wall_seconds, **options)
+    # The manifest owns the native loader settings. Keep the executor's equality
+    # guard; restore the Python caller's environment even if execution fails.
+    with applied_loader_environment(runtime):
+        process = executor(runtime, ["--app-ini", str(Path(runtime["app_ini"]["path"]).resolve(strict=True)),
+            "--timelearner-"+mode, str(inputs/"job.json"), "--timelearner-output", str(output/"native")],
+            executable.parent, output/"process", maximum_wall_seconds, **options)
     verify_runtime(runtime)
     audit = None
     from .operational_diagnostics import permits_positive_audit
