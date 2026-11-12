@@ -1,0 +1,33 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "native-DATA-controller17-a1",
+  "package_fingerprint": "14f319eaf4f8bf1aa5605dfd20ddb341c14245a598ddcddc04db77c522ada5a6",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_exact_closed_request_has_no_command_or_build_extension",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_schema_bool_unknown_and_extra_fields_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_id_and_workspace_cannot_escape_layout",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_source_and_runtime_binding_are_exact",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_inputs_keep_production_staging_name_size_and_digest_guards",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_empty_or_unbounded_case_inventory_refuses",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_duplicate_case_name_casefold_and_test_id_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_bool_zero_and_aggregate_limits_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_disk_budget_bool_or_missing_field_is_not_a_budget",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_layout_has_one_finite_sibling_controller",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_resources_reserve_inputs_runtime_source_and_owned_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_read_resource_outside_workspace_and_alias_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_input_cannot_be_inside_owned_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_control_bytes_and_replaced_identity_refuse",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_runtime_hash_refuses_before_runtime_execution_api",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_context_changed_copy_refuses_before_process_recovery",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest.test_context_cannot_borrow_other_supervisor_request"
+  ],
+  "executed_tests": 17,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {},
+  "scientific_verdict": null
+}
