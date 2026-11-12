@@ -17,10 +17,12 @@ BASES = {Path('/home/user/timelearner-refactor'), Path('/media/user/Data/TimeLea
 
 
 def validate_manifest(value):
-    require(type(value) is dict and set(value) == {'kind', 'schema_version', 'base',
-        'roots', 'closed_units', 'bounds', 'scientific_verdict'} and
+    fields = {'kind', 'schema_version', 'base', 'roots', 'closed_units', 'bounds', 'scientific_verdict'}
+    require(type(value) is dict and
+        ((value.get('schema_version') == 1 and set(value) == fields) or
+         (value.get('schema_version') == 2 and set(value) == fields | {'controller_join'})) and
         value['kind'] == 'timelearner_closed_primary_bundle' and
-        type(value['schema_version']) is int and value['schema_version'] == 1 and
+        type(value['schema_version']) is int and
         value['scientific_verdict'] is None, 'primary_bundle_manifest_schema')
     base = _canonical(Path(value['base']))
     require(base in BASES and os.name == 'posix', 'primary_bundle_worker_base')
@@ -71,7 +73,29 @@ def validate_manifest(value):
     declared = [Path(u['directory']) for u in units]
     require(len(set(declared)) == len(declared) and all(p.is_absolute() and
         any(p.is_relative_to(r) for r in directories) for p in declared), 'primary_bundle_unit_outside_source')
+    if value['schema_version'] == 2:
+        join = value['controller_join']
+        require(type(join) is dict and set(join) ==
+                {'kind', 'native_prefix', 'controller_prefix', 'original_job_path'} and
+                join['kind'] == 'recorded-n4-roundtrip' and
+                all(type(join[k]) is str for k in join), 'primary_bundle_controller_join_schema')
+        roots = {r['prefix']: r for r in value['roots']}
+        require(join['native_prefix'] != join['controller_prefix'] and
+                join['native_prefix'] in roots and join['controller_prefix'] in roots and
+                join['original_job_path'] == roots[join['native_prefix']]['directory'],
+                'primary_bundle_controller_join_roots')
     return directories
+
+
+def verify_controller_join(manifest):
+    """Schema2 prevents a byte-valid archive of unrelated closed jobs."""
+    if manifest['schema_version'] == 1:
+        return None  # Historical byte/closure-only contract remains explicit.
+    from .recorded_roundtrip_evidence import audit_roundtrip_controller
+    join = manifest['controller_join']
+    roots = {r['prefix']: r['directory'] for r in manifest['roots']}
+    return audit_roundtrip_controller(roots[join['native_prefix']], roots[join['controller_prefix']],
+                                      original_job_path=join['original_job_path'])
 
 
 def resources(manifest, job, manifest_path, source):
@@ -90,6 +114,7 @@ def verify_sources(manifest):
         declarations = [dict(root=root['directory'], relative_path=n,
             expected_bytes=r['bytes'], expected_sha256=r['sha256']) for n, r in root['files'].items()]
         verify_closed_namespace(root['directory'], declarations, root['links'])
+    verify_controller_join(manifest)
     # Every retained binding file belongs to the finite closure requirement.
     # Extra/unbound child records cannot silently fall outside the manifest.
     found = {p.parent for root in directories for p in root.rglob('owned-unit.json')}

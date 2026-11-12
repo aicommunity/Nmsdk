@@ -17,6 +17,7 @@ from ..candidate_window_package_evidence import audit_candidate_window_recovery_
 from ..native_evidence import EvidenceError, load, parse_json_bytes, require
 from ..portable_primary import restore_native_bundle
 from ..recorded_roundtrip_evidence import audit_roundtrip_controller
+from ..closed_primary_bundle import verify_controller_join
 
 
 def read_qcompress(path, *, expected_bytes, expected_sha256):
@@ -70,6 +71,16 @@ class RecordedN4RoundtripPrimaryTest(unittest.TestCase):
                                             original_job_path=original)
         self.assertEqual(result['closed_groups'], 3)
         self.assertFalse(result['native_execution_attested'])
+        # Exercise the production collector's pre-archive semantic gate too.
+        manifest = dict(schema_version=2, roots=[
+            dict(prefix='native', directory=str(self.restored/'native')),
+            dict(prefix='controller', directory=str(corrected/'controller'))],
+            controller_join=dict(kind='recorded-n4-roundtrip', native_prefix='native',
+                                 controller_prefix='controller', original_job_path=original))
+        self.assertEqual(verify_controller_join(manifest), result)
+        manifest['roots'][1]['directory'] = str(self.restored/'controller')
+        with self.assertRaisesRegex(EvidenceError, 'roundtrip_foreign_controller_request'):
+            verify_controller_join(manifest)
 
     def audit_case(self, role, outcome, revision, groups, raw_bytes, raw_sha):
         name = role.title()+'FullDomainN4Roundtrip'

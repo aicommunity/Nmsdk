@@ -103,6 +103,29 @@ class ClosedPrimaryBundleTest(unittest.TestCase):
         with self.assertRaisesRegex(EvidenceError, 'primary_bundle_schema'):
             validate_request(value)
 
+    def test_version2_requires_explicit_native_controller_join(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory);manifest,source,base = self.fixture(root)
+            controller = base/'readbacks/controller';controller.mkdir()
+            manifest['schema_version'] = 2
+            manifest['roots'].append(dict(directory=str(controller), prefix='controller',
+                                         files={'request.json': {'bytes': 2, 'sha256': 'a'*64}}, links={}))
+            manifest['controller_join'] = dict(kind='recorded-n4-roundtrip',
+                native_prefix='original-job', controller_prefix='controller', original_job_path=str(source))
+            with patch.object(subject, 'BASES', {base}):
+                self.assertEqual(len(subject.validate_manifest(manifest)), 2)
+                for mutation in ('kind', 'prefix', 'job', 'extra'):
+                    changed = copy.deepcopy(manifest);join = changed['controller_join']
+                    if mutation == 'kind':join['kind'] = 'unchecked'
+                    elif mutation == 'prefix':join['controller_prefix'] = 'missing'
+                    elif mutation == 'job':join['original_job_path'] = str(controller)
+                    else:join['skip_join'] = True
+                    with self.subTest(mutation=mutation), self.assertRaises(EvidenceError):
+                        subject.validate_manifest(changed)
+
+    def test_version1_never_claims_controller_join(self):
+        self.assertIsNone(subject.verify_controller_join({'schema_version': 1}))
+
     def test_source_mutation_after_pack_never_emits_completed_proof(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory);m,s,b = self.fixture(root);events = {}
