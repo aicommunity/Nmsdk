@@ -1,0 +1,3 @@
+# Native DATA controller:17 metadata checks
+
+Source 3314a3a782be960ec46b858ad04918301872f100, package 14f319eaf4f8bf1aa5605dfd20ddb341c14245a598ddcddc04db77c522ada5a6. Проверяются закрытый command-free schema, finite exact cases, границы и aggregate budgets, READ inputs/runtime/source и WRITE output, aliases/outside/overlap, исходные control bytes+identity, runtime binding и supervisor link. Это metadata checks, не kernel/native success. Production uses existing _run_owned/_finish; actual schema5 consumption больших моделей проверяется отдельным native2 запуском. До фактического результата не принято.
