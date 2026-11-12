@@ -14,9 +14,9 @@ import unittest
 import zlib
 
 from ..candidate_window_package_evidence import audit_candidate_window_recovery_package
-from ..native_evidence import EvidenceError, load, load_json, parse_json_bytes, require
-from ..native_gate import audit_junit
+from ..native_evidence import EvidenceError, load, parse_json_bytes, require
 from ..portable_primary import restore_native_bundle
+from ..recorded_roundtrip_evidence import audit_roundtrip_controller
 
 
 def read_qcompress(path, *, expected_bytes, expected_sha256):
@@ -58,23 +58,18 @@ class RecordedN4RoundtripPrimaryTest(unittest.TestCase):
         self.assertEqual(self.restoration['archive_members_verified'], 189)
         self.assertFalse(self.restoration['native_execution_attested'])
         self.assertFalse(self.restoration['source_archive_modified'])
-        self.assertEqual(len(list(self.restored.rglob('owned-unit.json'))), 3)
-        controller = self.restored/'controller'
-        result = load(controller/'supervisor-result.json')
-        self.assertTrue(result['outer_closed']);self.assertEqual(result['record_errors'], [])
-        self.assertEqual(len(result['children_closed']), 2)
-        self.assertTrue(all(r['closure']['all_processes_closed'] for r in result['children_closed']))
-        self.assertIsNone(result['scientific_verdict'])
-        leases = load_json(controller/'reservation-final.json')
-        self.assertIsInstance(leases, list);self.assertEqual(len(leases), 1)
-        self.assertEqual(leases[0]['state'], 'released')
-        for role in ('classic', 'branch'):
-            directory = self.restored/'native'/role
-            spec = load(directory/'specification.json')
-            self.assertEqual(len(spec['expected_test_ids']), 1)
-            self.assertEqual(audit_junit(directory/'native.xml', spec['expected_test_ids'])['assertion_status'], 'passed')
-            self.assertEqual((directory/'data-inputs-before.json').read_bytes(),
-                             (directory/'data-inputs-after.json').read_bytes())
+        original = load(self.bundle/'ORIGIN.json')['source_job']
+        # The original 189-member collector selected a neighbouring SDK36
+        # controller. Keep it as failed evidence; never use it as authority.
+        with self.assertRaisesRegex(EvidenceError, 'roundtrip_foreign_controller_request'):
+            audit_roundtrip_controller(self.restored/'native', self.restored/'controller',
+                                       original_job_path=original)
+        # Explicit, separately pinned Git fixture: original native2 proofs.
+        corrected = Path(os.environ['TIMELEARNER_RECORDED_N4_EXECUTION_PROOF'])
+        result = audit_roundtrip_controller(self.restored/'native', corrected/'controller',
+                                            original_job_path=original)
+        self.assertEqual(result['closed_groups'], 3)
+        self.assertFalse(result['native_execution_attested'])
 
     def audit_case(self, role, outcome, revision, groups, raw_bytes, raw_sha):
         name = role.title()+'FullDomainN4Roundtrip'
