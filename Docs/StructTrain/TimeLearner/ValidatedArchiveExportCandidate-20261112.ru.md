@@ -1,5 +1,12 @@
 # Кандидат устранения повторного декодирования при экспорте — 12.11.2026
 
+На M40 принята свежая SDK и36/36 actual native checks, включая четыре новых
+проверки Classic/Branch×completed/stopped. Source/runtime/protected bytes
+сохранены, outer+36 children closed и lease released.
+[Приёмка и исходные JUnit](ValidationPlans/M40ValidatedExport36A2-20261112/RESULT.ru.md).
+Сравнение API выполнено в одном новом binary, не как A/B двух бинарников.
+Большой N4 export/performance и Elder остаются отдельными gates.
+
 Изменён владелец сериализации в PulseLib: NativeCompositeTrainingEvidence.h/.cpp,
 NativeCompositeLearnedState.cpp. [Подробный контракт](../../../Libraries/Nmsdk-PulseLib/Docs/Analysis/TimeLearnerValidatedArchiveExport.ru.md).
 
