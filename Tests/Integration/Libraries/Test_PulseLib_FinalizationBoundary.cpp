@@ -16,6 +16,7 @@
 #include <iomanip>
 #include <locale>
 #include <QCryptographicHash>
+#include <QFileInfo>
 
 namespace {
 using namespace RDK;
@@ -55,14 +56,49 @@ QJsonObject SemanticSolo(QJsonObject package)
     package["dataset"]=snapshot(package["dataset"].toObject());return package;
 }
 
+enum class FinalizationFixtureRole { Fixed, ColdTraining, FrozenEvaluation, Calibration };
+
+std::optional<QJsonObject> FinalizationFixture(bool branch,FinalizationFixtureRole role)
+{
+    const QString prefix=branch?"branch":"classic",legacyPrefix=branch?"Branch-v1":"Classic-v1";
+    QString stagedName,legacyName;const char* legacyVariable=nullptr;
+    switch(role) {
+    case FinalizationFixtureRole::Fixed:
+        stagedName=prefix+"-finalization-fixed-job.json";
+        legacyName=branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json";
+        legacyVariable="TIMELEARNER_POSTTUNE_FIXED_SOURCE";break;
+    case FinalizationFixtureRole::ColdTraining:
+        stagedName=prefix+"-finalization-cold-job.json";legacyName=legacyPrefix+"-train/input/job.json";
+        legacyVariable="TIMELEARNER_LIVE_COLD_SOURCE";break;
+    case FinalizationFixtureRole::FrozenEvaluation:
+        stagedName=prefix+"-finalization-evaluation-job.json";legacyName=legacyPrefix+"-frozen/input/job.json";
+        legacyVariable="TIMELEARNER_LIVE_COLD_SOURCE";break;
+    case FinalizationFixtureRole::Calibration:
+        stagedName=prefix+"-finalization-calibration-job.json";legacyName=legacyPrefix+"/measured-grid-job.json";
+        legacyVariable="TIMELEARNER_LIVE_CALIBRATION_SOURCE";break;
+    }
+    NmsdkWorker::Require(legacyVariable!=nullptr,"unsupported_finalization_fixture_role");
+    // Gate schema5 captures and hashes these original DATA files. Once its
+    // descriptor exists, a missing role is an error, never a hidden env fallback.
+    if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT")) {
+        const QDir staged(QDir(QString::fromLocal8Bit(output)).filePath("../native-inputs"));
+        if(QFileInfo::exists(staged.filePath("descriptor.json"))) {
+            NmsdkWorker::Require(QFileInfo::exists(staged.filePath(stagedName)),"finalization_declared_fixture_role_missing");
+            return NmsdkWorker::ReadDocument(staged.filePath(stagedName));
+        }
+    }
+    const auto directory=std::getenv(legacyVariable);
+    if(!directory)return {};
+    return NmsdkWorker::ReadDocument(QDir(QString::fromLocal8Bit(directory)).filePath(legacyName));
+}
+
 template<class Owner> void Boundary(Scenario scenario)
 {
-    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
-    if(!directory)GTEST_SKIP()<<"Requires portable original native source/model primaries";
     constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
+    const auto fixture=FinalizationFixture(branch,FinalizationFixtureRole::Fixed);
+    if(!fixture)GTEST_SKIP()<<"Requires portable original native source/model primaries";
     const std::string name=std::string(branch?"Branch":"Classic")+"_finalization_boundary_"+std::to_string(int(scenario));
-    const QDir root(QString::fromLocal8Bit(directory));
-    const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+    const auto job=*fixture;
     const auto recognition=job["source_recognition"].toObject(),solo=recognition["source_solo"].toObject();
     const auto implementation=job["implementation_id"].toString().toStdString();
     std::optional<NativeFinalizationBoundary> frozen;QJsonObject saved;
@@ -215,12 +251,11 @@ TEST(NativeFinalizationBoundary,PublicEnumsUseExplicitMapping)
 namespace {
 template<class Owner> void ManagedFinalization(int calculateMode,bool owned=false,bool connected=true,bool interrupted=false,bool clockGap=false)
 {
-    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
-    if(!directory)GTEST_SKIP()<<"Requires original native source/model primaries";
     constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
+    const auto fixture=FinalizationFixture(branch,FinalizationFixtureRole::Fixed);
+    if(!fixture)GTEST_SKIP()<<"Requires original native source/model primaries";
     const auto name=std::string(branch?"Branch":"Classic")+"_managed_finalization_"+std::to_string(calculateMode)+(owned?(connected?"_owned_connected":"_owned_local"):"")+(interrupted?"_reset":"")+(clockGap?"_clock_gap":"");
-    const QDir root(QString::fromLocal8Bit(directory));
-    const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+    const auto job=*fixture;
     const auto original=job["source_recognition"].toObject();
     const auto implementation=job["implementation_id"].toString().toStdString();
     NativeThresholdGridSpec grid;grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
@@ -419,23 +454,18 @@ namespace {
 enum class LiveScenario { Fixed, Calibrate, Stopped, ControlDrift, ResetQueued, StopQueued, InvalidDesign, Multirate, CancelArmed, CancelTraining, CancelQueued, CancelPostTune };
 template<class Owner> void LiveFinalization(int mode,bool connected,LiveScenario scenario)
 {
-    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
-    const auto coldDirectory=std::getenv("TIMELEARNER_LIVE_COLD_SOURCE");
-    const auto calibrationDirectory=std::getenv("TIMELEARNER_LIVE_CALIBRATION_SOURCE");
-    if(!directory || !coldDirectory || !calibrationDirectory)
-        GTEST_SKIP()<<"Requires separate saved-state, cold-training and calibration declarations";
     constexpr bool branch=std::is_same_v<Owner,NNeuronTimeLearnerBranch>;
+    const auto fixed=FinalizationFixture(branch,FinalizationFixtureRole::Fixed);
+    const auto cold=FinalizationFixture(branch,FinalizationFixtureRole::ColdTraining);
+    const auto evaluation=FinalizationFixture(branch,FinalizationFixtureRole::FrozenEvaluation);
+    const auto calibration=FinalizationFixture(branch,FinalizationFixtureRole::Calibration);
+    if(!fixed || !cold || !evaluation || !calibration)
+        GTEST_SKIP()<<"Requires separate saved-state, cold-training and calibration declarations";
     const std::string name=std::string(branch?"Branch":"Classic")+"_live_finalization_"+
         std::to_string(mode)+(connected?"_connected":"_local")+"_"+std::to_string(int(scenario));
-    const QDir root(QString::fromLocal8Bit(directory));
-    const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+    const auto job=*fixed;
     const auto implementation=job["implementation_id"].toString().toStdString();
-    const QString coldName=branch?"Branch-v1":"Classic-v1";
-    const QDir coldRoot(QString::fromLocal8Bit(coldDirectory));
-    const auto coldJob=NmsdkWorker::ReadDocument(coldRoot.filePath(coldName+"-train/input/job.json"));
-    const auto evaluationJob=NmsdkWorker::ReadDocument(coldRoot.filePath(coldName+"-frozen/input/job.json"));
-    const auto calibrationJob=NmsdkWorker::ReadDocument(QDir(QString::fromLocal8Bit(calibrationDirectory)).filePath(
-        coldName+"/measured-grid-job.json"));
+    const auto coldJob=*cold,evaluationJob=*evaluation,calibrationJob=*calibration;
     for(const auto& declaration:{coldJob,evaluationJob,calibrationJob}) {
         NmsdkWorker::Require(NmsdkWorker::Signed(declaration)==declaration,"live_fixture_job_digest_mismatch");
         NmsdkWorker::Require(declaration["implementation_id"]==job["implementation_id"],"live_fixture_implementation_mismatch");
@@ -682,11 +712,12 @@ TEST(NativeLiveFinalization,BranchCancelPostTune){LiveFinalization<NNeuronTimeLe
 
 TEST(NativeLiveFinalizationPlanCodec,ActualDesignRoundtripAndMalformedDeclarations)
 {
-    const auto directory=std::getenv("TIMELEARNER_POSTTUNE_FIXED_SOURCE");
-    if(!directory)GTEST_SKIP()<<"Requires actual persisted PostTune designs";
-    const QDir root(QString::fromLocal8Bit(directory));QJsonArray plans;int rejected=0;
+    const auto classicFixture=FinalizationFixture(false,FinalizationFixtureRole::Fixed);
+    const auto branchFixture=FinalizationFixture(true,FinalizationFixtureRole::Fixed);
+    if(!classicFixture || !branchFixture)GTEST_SKIP()<<"Requires actual persisted PostTune designs";
+    QJsonArray plans;int rejected=0;
     for(bool branch:{false,true})for(bool calibrate:{false,true}) {
-        const auto job=NmsdkWorker::ReadDocument(root.filePath(branch?"Branch-synthetic/input/job.json":"Classic-auto_metric/input/job.json"));
+        const auto job=branch?*branchFixture:*classicFixture;
         NativeThresholdGridSpec grid;
         grid.confirmation=DecodeNativeThresholdConfirmationSpec(job["specification"].toObject());
         for(const auto& q:job["trials"].toArray())grid.trials.push_back(DecodeNativeCalibrationRequest(q.toObject()));

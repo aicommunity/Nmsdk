@@ -1,3 +1,5 @@
+> **Терминальный результат:** [50 actual PASS,1 skipped, общий job failed](RESULT.ru.md). Следующие ранние working snapshots сохранены исторически. Новый Train не допущен.
+
 # Серверная проверка общего export boundary
 
 Canonical preparation s08-shared-export-sdk-canonical-m40-a1 завершена: completed/exit0,82.51365973614156s, whole group closed, diagnostics clear;4160 files/8 repos,30 SDK Python modules,102 selected IDs. [Исходные подтверждения](canonical-readback/readback-integrity.json).

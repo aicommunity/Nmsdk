@@ -1,0 +1,55 @@
+{
+  "kernel_before_stop": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "416f2a6987daab0cf68f6a5cc8703f268cab0c311db0bbec1dd8cbd55d59b36d",
+      "unit": "timelearner-37f04d1a-9b16-4ae0-a171-ef0468406115.service",
+      "invocation_id": "3283df2880f843d7b0ede5109e7edcd2",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-37f04d1a-9b16-4ae0-a171-ef0468406115.service",
+      "initial_main_pid": 1366139,
+      "initial_start_ticks": "357907435",
+      "sha256": "9b9b35bede1e921b4e6c40621ef9d7167e676b74bfa96b5cacdcc97cc9547540"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 37f04d1a-9b16-4ae0-a171-ef0468406115",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "3283df2880f843d7b0ede5109e7edcd2"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "worker_terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 102,
+    "audited_completed_cpp_cases": 50,
+    "actual_audited_assertion_passed_cpp_cases": 50,
+    "actual_audited_failed_cpp_ids": [],
+    "completed_leaf_gates": 51,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "cleanup_does_not_attest_execution_success": true
+}
