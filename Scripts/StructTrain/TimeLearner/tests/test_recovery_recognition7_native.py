@@ -29,9 +29,11 @@ def resign(document):
 
 
 class RecoveryRecognition7NativeTest(unittest.TestCase):
+    fixture_environment = 'TIMELEARNER_RECOVERY_RECOGNITION7_NATIVE_BUNDLE'
+
     @classmethod
     def setUpClass(cls):
-        value = os.environ.get('TIMELEARNER_RECOVERY_RECOGNITION7_NATIVE_BUNDLE')
+        value = os.environ.get(cls.fixture_environment)
         require(value is not None, 'recovery_recognition7_actual_bundle_required')
         cls.bundle_root = Path(value)
         require(cls.bundle_root.is_dir() and not cls.bundle_root.is_symlink(), 'recovery_recognition7_bundle_missing')
