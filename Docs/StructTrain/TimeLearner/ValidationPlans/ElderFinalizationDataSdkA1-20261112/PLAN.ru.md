@@ -1,0 +1,3 @@
+# Независимая проверка DATA loader на Elder
+
+SourceRoot 929dbc176a0804910544539aaf79bdc4a02aa82a / Pulse dfb9a98244f91b4f4029d8470465fd40116436ca. Отдельные source/build/runtime. Сначала закрыть старое задание SDK102 и проверить его результат; не выполнять второй build при неизвестном состоянии старого. Затем canonical4163 files и fresh Release/O3 с enum smoke. После сборки выполнить все52 исходных finalization cases через8 hash-bound DATA inputs (два набора26), без skips. Полного SDK102 PASS и scientific PASS этот smoke не даёт. Восстановление fixtures — ровно8 regular flat members по Git manifest; старые env roots не передаются в native runner.

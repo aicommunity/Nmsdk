@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-finalization-data-sdk-canonical-elder-a1",
+  "worker_host": "Elder",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/home/user/timelearner-refactor/requests/finalization-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderFinalizationDataSdkA1-20261112/canonical-plan.json",
+      "sha256": "b3846e23b2bf0ead791eba1217837308e6b83de692cdf047735ab06b9b083d61"
+    }
+  }
+}
