@@ -1,0 +1,158 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "f34dd842c58049619c4768a040013b0f5a65fd9dcc4aadce8360664447d1eb76",
+      "unit": "timelearner-e77f076c-9705-4ccd-9e96-94a14b5ec9e0.service",
+      "invocation_id": "58b0f68a60944083a72452f903a9ef8d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e77f076c-9705-4ccd-9e96-94a14b5ec9e0.service",
+      "initial_main_pid": 3440869,
+      "initial_start_ticks": "353359155",
+      "sha256": "e89822d0fc56b60c1e0b6e47a0dc556bf2c1a697c2ee57a01d3a3291ff5edda6"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "536870912",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt e77f076c-9705-4ccd-9e96-94a14b5ec9e0",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "58b0f68a60944083a72452f903a9ef8d"
+    },
+    "memory_max": 536870912,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "8cf9e355-9014-4e6a-8533-807df6cf7dc4",
+      "job_id": "s08-recorded-n4-sdk36-canonical-m40-a3",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3440869,
+        "start_ticks": "353359155",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-canonical-m40-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-canonical-m40-a3"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-prepared-m40-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-prepared-m40-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-sdk36-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4Sdk36A3-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-sdk36-a3/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4Sdk36A3-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-core-c1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-core-c1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-wire-c2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-wire-c2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-geometry-full-after-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-geometry-full-after-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-archive-move18-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-archive-move18-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-foreign-reference-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-foreign-reference-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-package7-native18-f7",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-package7-native18-f7"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-b1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-b1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-validated-export36-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-validated-export36-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-canonical-module-closure-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-canonical-module-closure-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a2"
+        }
+      ],
+      "state": "released",
+      "created": 1794458394.1260726,
+      "deadline": 1794458584.207119,
+      "updated": 1794458477.6384385,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

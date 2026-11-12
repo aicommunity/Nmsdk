@@ -1,0 +1,4 @@
+{
+  "reason": "canonical_SDK_module_inventory_changed",
+  "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-canonical-module-closure-a1/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 308, in _worker\n    produce(plan,operation['plan']['path'],operation['plan']['sha256'],output,registry,token,canonical_guard,emit)\n  File \"/media/user/Data/TimeLearnerRefactor/source-canonical-module-closure-a1/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py\", line 264, in produce\n    require(len(result['SDK_modules'])==29,'canonical_SDK_module_inventory_changed')\n  File \"/media/user/Data/TimeLearnerRefactor/source-canonical-module-closure-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: canonical_SDK_module_inventory_changed\n"
+}
