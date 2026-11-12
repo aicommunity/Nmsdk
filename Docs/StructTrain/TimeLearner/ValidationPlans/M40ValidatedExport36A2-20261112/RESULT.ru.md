@@ -8,4 +8,4 @@ Root08b898b1ad89d002cccde534e08e0925e080e45d / Pulse e9b80746103750d3b5a100d7454
 
 Source Git closure и source hashes до/после совпали побайтно, как и protected files и current runtime. [Source closure](accepted-native/native/source-closure-after.json), [runtime](accepted-native/native/current-runtime-after.json), [SHA256 всех55 raw proofs](accepted-native/readback-integrity.json). Test binary SHA256 6d14f4207f1b610a2f2351bb784a8d72027a46ed04f0b832bb3407915b496a83; Console d70c563e1ecab7552c76037395328c06571742d4770e5159678480441b5097a0.
 
-Приёмка ограничена этими36 проверками на M40. Полный compact native corpus ещё публикуется; independent semantic replay, Elder и большой N4 export/performance открыты. Полный план0–12, новые N4 Train и scientific Test этим результатом не закрываются.
+Приёмка ограничена этими36 проверками на M40. Полный compact native corpus ещё не опубликован; independent semantic replay, Elder и большой N4 export/performance открыты. Полный план0–12, новые N4 Train и scientific Test этим результатом не закрываются.
