@@ -1,0 +1,910 @@
+{
+  "kind": "timelearner_native_acceptance_job",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "preparation": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-validated-export36-m40-a1-controller/inputs/preparation.json",
+  "paths": {
+    "source": "/media/user/Data/TimeLearnerRefactor/source-validated-export36-a1",
+    "build": "/media/user/Data/TimeLearnerRefactor/build-validated-export36-a1",
+    "runtime": "/media/user/Data/TimeLearnerRefactor/runtime-validated-export36-a1",
+    "output": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-validated-export36-m40-a1",
+    "resources": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+    "framework": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+  },
+  "build": {
+    "type": "Release",
+    "parallel": 2,
+    "wall_seconds": 10800,
+    "required_cache_tokens": [
+      "CMAKE_BUILD_TYPE:STRING=Release",
+      "CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS_RELEASE:STRING=-O3 -DNDEBUG",
+      "CMAKE_C_FLAGS:STRING=",
+      "CMAKE_CXX_FLAGS:STRING=",
+      "CMAKE_EXE_LINKER_FLAGS:STRING=",
+      "CMAKE_SHARED_LINKER_FLAGS:STRING=",
+      "CMAKE_MODULE_LINKER_FLAGS:STRING=",
+      "CMAKE_STATIC_LINKER_FLAGS:STRING=",
+      "FETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_UPDATES_DISCONNECTED:BOOL=ON",
+      "FETCHCONTENT_SOURCE_DIR_GOOGLETEST:PATH=/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "RDK_USE_LLM:BOOL=OFF",
+      "RDK_LLM_BUILD_EMBEDDED:BOOL=OFF",
+      "NMSDK_BUILD_PARALLEL_JOBS:UNINITIALIZED=2"
+    ]
+  },
+  "limits": {
+    "whole_wall_seconds": 21600,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "physical_free_floor_bytes": 2147483648,
+    "reservation_memory_bytes": 8589934592,
+    "reservation_disk_bytes": 12884901888
+  },
+  "asan_options": null,
+  "protected_runtimes": [
+    "/media/user/Data/TimeLearnerRefactor/runtime-native-archive-move18-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native119-normal-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native119-open-arm-normal-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-native119-foreign-reference-normal-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-n1-geometry-full-after-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-a1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-rejected-search-admission-b1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-core-c1",
+    "/media/user/Data/TimeLearnerRefactor/runtime-candidate-window-recovery-wire-c2",
+    "/media/user/Data/TimeLearnerRefactor/runtime-recovery-package7-native18-f7",
+    "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1"
+  ],
+  "artifacts": [
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-001/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN0FrozenTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-002/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN0FrozenTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-003/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN0DiagnosticTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-004/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN0DiagnosticTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-005/native-composite/package7/NativeRecoveryRecognition7/ClassicCompletedN1FrozenTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-006/native-composite/package7/NativeRecoveryRecognition7/BranchCompletedN1ScaledTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-007/native-composite/package7/NativeRecoveryRecognition7/ClassicStoppedN1DiagnosticTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-008/native-composite/package7/NativeRecoveryRecognition7/BranchStoppedN1ScaledDiagnosticTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-009/native-composite/package7/NativeRecoveryRecognition7/ClassicAsymmetricC0FrozenTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/recognition-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/recognition-repeat-model.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/recognition-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/recognition-target-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "native-010/native-composite/package7/NativeRecoveryRecognition7/BranchAsymmetricC0FrozenTargetAndFoil/recognition-foil-trial.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/console-artifacts/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/console-artifacts/wrapper-base1.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/console-artifacts/wrapper-base2.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/console-artifacts/wrapper-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/console-artifacts/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-001/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5/console-artifacts/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/console-artifacts/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/console-artifacts/wrapper-base1.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/console-artifacts/wrapper-base2.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/console-artifacts/wrapper-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/console-artifacts/train_stopped_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-002/native-composite/package7/NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5/console-artifacts/train_stopped_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/console-artifacts/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/console-artifacts/wrapper-base1.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/console-artifacts/wrapper-base2.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/console-artifacts/wrapper-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/console-artifacts/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-003/native-composite/package7/NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5/console-artifacts/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/console-artifacts/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/console-artifacts/wrapper-base1.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/console-artifacts/wrapper-base2.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/console-artifacts/wrapper-scope.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/console-artifacts/train_learned_state.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-004/native-composite/package7/NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5/console-artifacts/train_learned_summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-005/native-composite/package7/NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-005/native-composite/package7/NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-005/native-composite/package7/NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-005/native-composite/package7/NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-005/native-composite/package7/NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters/preflight-base1.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-005/native-composite/package7/NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters/preflight-base2.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-006/native-composite/package7/NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-006/native-composite/package7/NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-006/native-composite/package7/NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-006/native-composite/package7/NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-006/native-composite/package7/NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger/start-failure-base1.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-006/native-composite/package7/NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger/start-failure-base2.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-007/native-composite/package7/NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-007/native-composite/package7/NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-007/native-composite/package7/NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "console-007/native-composite/package7/NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-001/native-composite/package7/NativeValidatedArchiveExport/ClassicStoppedSameBytesAndIndependentReplay/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-001/native-composite/package7/NativeValidatedArchiveExport/ClassicStoppedSameBytesAndIndependentReplay/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-001/native-composite/package7/NativeValidatedArchiveExport/ClassicStoppedSameBytesAndIndependentReplay/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-001/native-composite/package7/NativeValidatedArchiveExport/ClassicStoppedSameBytesAndIndependentReplay/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-001/native-composite/package7/NativeValidatedArchiveExport/ClassicStoppedSameBytesAndIndependentReplay/composite-measurements/group-*.json",
+      "minimum": 1,
+      "maximum": 128
+    },
+    {
+      "glob": "validated-001/native-composite/package7/NativeValidatedArchiveExport/ClassicStoppedSameBytesAndIndependentReplay/composite-measurements/group-*/*.csv",
+      "minimum": 1,
+      "maximum": 512
+    },
+    {
+      "glob": "validated-002/native-composite/package7/NativeValidatedArchiveExport/BranchStoppedSameBytesAndIndependentReplay/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-002/native-composite/package7/NativeValidatedArchiveExport/BranchStoppedSameBytesAndIndependentReplay/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-002/native-composite/package7/NativeValidatedArchiveExport/BranchStoppedSameBytesAndIndependentReplay/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-002/native-composite/package7/NativeValidatedArchiveExport/BranchStoppedSameBytesAndIndependentReplay/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-002/native-composite/package7/NativeValidatedArchiveExport/BranchStoppedSameBytesAndIndependentReplay/composite-measurements/group-*.json",
+      "minimum": 1,
+      "maximum": 128
+    },
+    {
+      "glob": "validated-002/native-composite/package7/NativeValidatedArchiveExport/BranchStoppedSameBytesAndIndependentReplay/composite-measurements/group-*/*.csv",
+      "minimum": 1,
+      "maximum": 512
+    },
+    {
+      "glob": "validated-003/native-composite/package7/NativeValidatedArchiveExport/ClassicCompletedSameBytesAndIndependentReplay/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-003/native-composite/package7/NativeValidatedArchiveExport/ClassicCompletedSameBytesAndIndependentReplay/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-003/native-composite/package7/NativeValidatedArchiveExport/ClassicCompletedSameBytesAndIndependentReplay/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-003/native-composite/package7/NativeValidatedArchiveExport/ClassicCompletedSameBytesAndIndependentReplay/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-003/native-composite/package7/NativeValidatedArchiveExport/ClassicCompletedSameBytesAndIndependentReplay/composite-measurements/group-*.json",
+      "minimum": 1,
+      "maximum": 128
+    },
+    {
+      "glob": "validated-003/native-composite/package7/NativeValidatedArchiveExport/ClassicCompletedSameBytesAndIndependentReplay/composite-measurements/group-*/*.csv",
+      "minimum": 1,
+      "maximum": 512
+    },
+    {
+      "glob": "validated-004/native-composite/package7/NativeValidatedArchiveExport/BranchCompletedSameBytesAndIndependentReplay/source-package.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-004/native-composite/package7/NativeValidatedArchiveExport/BranchCompletedSameBytesAndIndependentReplay/source-summary.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-004/native-composite/package7/NativeValidatedArchiveExport/BranchCompletedSameBytesAndIndependentReplay/source-response.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-004/native-composite/package7/NativeValidatedArchiveExport/BranchCompletedSameBytesAndIndependentReplay/composite-measurements/index.json",
+      "minimum": 1,
+      "maximum": 1
+    },
+    {
+      "glob": "validated-004/native-composite/package7/NativeValidatedArchiveExport/BranchCompletedSameBytesAndIndependentReplay/composite-measurements/group-*.json",
+      "minimum": 1,
+      "maximum": 128
+    },
+    {
+      "glob": "validated-004/native-composite/package7/NativeValidatedArchiveExport/BranchCompletedSameBytesAndIndependentReplay/composite-measurements/group-*/*.csv",
+      "minimum": 1,
+      "maximum": 512
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Fresh SDK validated export:36 native cases — M40,12.11.2026
+
+Кандидат root08b898b1ad89d002cccde534e08e0925e080e45d/Pulsee9b80746103750d3b5a100d74549462d6d2c46c6. [Изменение и ограничения](../../ValidatedArchiveExportCandidate-20261112.ru.md). Новые четыре Classic/Branch×completed/stopped cases используют настоящий storage/Environment/learner и проверяют raw document/CSV equality, независимый decode, portable proof и отказы на повреждение без изменения живого графа. Старые32 cases сохранены полностью:4 active-Build guards,7 recovery Console producers,11 legacy wire,10 recognition/20 frozen trials. Это36 технических C++ cases, не36 научных моделей и не весь исходный план.
+
+Все8 Git repositories доставляются отдельно в source-validated-export36-a1; namespace4145 files сформирован по точным code-name sets,6 неизменных dependencies взяты из ранее проверенных Git packs. Основная пользовательская копия не читается и не меняется. Новый build/runtime изолирован; действующий runtime-recovery-console32-a1 включён в protected snapshots. Ни один source/runtime работающих N4 заданий не обновляется.
+
+Fresh Release build,2 compiler jobs, те же framework/resources/flags;36 отдельных native leaves по900s и прежние managed limits8GiB/tasks128, whole21600s, disk floor2GiB/reservation12GiB. Source/control/primary hashes, JUnit inventory, source/runtime preservation и kernel closure/released leases обязательны. До завершения и независимой проверки не принято. Большой N4 export с новым кодом и end-to-end speed/peak остаются отдельными gates.
