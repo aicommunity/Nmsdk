@@ -65,3 +65,31 @@ class RecordedMatrixPrimaryActualTest(unittest.TestCase):
         self.assertLess(bundle['expanded_bytes'], 768*1024**2)
         (temporary/'recorded-matrix-compact-readback.json').write_text(
             json.dumps(result, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+
+
+class RecordedMatrixPrimaryPortableTest(unittest.TestCase):
+    """Replay using only the published bundle, without the M40 work directory."""
+    def test_published_models_and_sixteen_trials_need_no_original_runtime_directory(self):
+        root = Path(os.environ['TIMELEARNER_RECORDED_MATRIX_BUNDLE'])
+        bundle = json.loads((root/'bundle.json').read_bytes())
+        self.assertEqual(bundle['archive_bytes'], 28053768)
+        self.assertEqual(bundle['archive_sha256'],
+                         'd8ea0c4911f0114737d955a81261abba23a1f4e49858a08c8e4e2991a6755468')
+        self.assertEqual(len(bundle['members']), 42)
+        temporary = Path(os.environ['TMPDIR'])
+        result = audit_primary(root/'bundle.json', temporary/'recorded-matrix-portable-restored')
+        self.assertEqual(result['original_job_id'], 's11-recorded-n4-diagnostic16-m40-a2')
+        self.assertEqual(result['trials'], 16)
+        self.assertTrue(result['diagnostic_only'])
+        self.assertFalse(result['complete_runtime_directory'])
+        self.assertFalse(result['native_execution_attested'])
+        self.assertIsNone(result['scientific_verdict'])
+        rows = {r['name']: r for r in result['models']}
+        self.assertEqual(set(rows), {'classic', 'branch'})
+        self.assertEqual(rows['classic']['training_outcome'], 'invalid_observation')
+        self.assertEqual(rows['branch']['training_outcome'], 'budget_exhausted')
+        for row in rows.values():
+            self.assertEqual({k: row['counts'][k] for k in ('TP', 'FP', 'FN', 'TN')},
+                             dict(TP=0, FP=0, FN=1, TN=7))
+        (temporary/'recorded-matrix-portable-readback.json').write_text(
+            json.dumps(result, indent=2, allow_nan=False)+'\n', encoding='utf-8')
