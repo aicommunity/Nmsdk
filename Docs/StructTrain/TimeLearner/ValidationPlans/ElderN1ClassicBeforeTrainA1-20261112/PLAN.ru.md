@@ -1,0 +1,15 @@
+# N1 Classic: исходная половина физического A/B
+
+Статус: подготовлено к запуску. Используются существующие SDK на Elder, новые сборки не требуются. Задание не возобновляет Series D.
+
+Before SDK Root `5ba0a2e81759a28f378117757aa3a5b91f1c57ab` / Pulse `c10206d5e338792d42b58ab28e48e7364b07e481`. After subject для следующего отдельного задания — Root `fcfd8bdff149c14cbe67149e996945d122bf954d` / Pulse `5f1a4ac6f9aff208ada7f8bcf62645c9d79a6615`. Production Core diff содержит только условие interleave в `BoundedTraining.cpp`; начальные графы и8 waveform CSV до/после уже побайтно совпали на Elder. Это позволяет исследовать порядок поиска без подмены физики. Исходные before cold probes сохранены в собственном закрытом job, after observations под before identity не используются.
+
+Обе половины должны использовать общий Python controller `fd55a9936ba6018ca86e583c0e844b10fb582d56`, штатный public `stock-candidate-window-study` и свежую холодную модель. Cold characterization задаёт предложения окон, но Train заново захватывает CapturedPerInput; learned state не используется как seed. Ни глобальный пик пачки, ни SinglePulse не подставляются вместо максимума закреплённого импульса.
+
+Фиксированные условия: Classic N4/N1;2000Гц; штатные storage images без LTMembrane; threshold100; anchor3 с L1/Rs86M; исходные R/L bounds; amplitude absolute1e-5,relative0,min1e-6,Sync0.02. Прежние declared candidate windows и модель предложения задержки сохраняются в обеих половинах: их возможный missing/ambiguous результат остаётся отдельным ограничением, не устраняется только для одной версии. Search budget128 probes/1280 edits/1800s, model budget7200s; finalization300s даёт process timeout2100s. Outer timeout3600s.
+
+Приёмка1 Python CLI case проверяет полный свежий Train, исходный condition hash, честный typed outcome и package/physical audit. Она не требует Exact и не запускает calibration/Test после незавершённого обучения. Повреждение condition проверяется отрицательным контролем до дорогого Train. Остановка invalid_observation, quantization или budget_exhausted не переименовывается в сходимость.
+
+Для сравнения собрать полные decision/events/measurement traces, model export и summary. Сопоставлять последовательность реально проверенных geometry/Rs, signed timing/amplitude residuals, число probes/edits, причины завершения и свежую финальную проверку. Одних конечных L или одинакового outcome недостаточно для вывода о влиянии порядка. Wall time и model time хранить отдельно; если раньше сработал wall budget, явно указать ограничение сравнения.
+
+На Elder измерено2305871872 свободных bytes. Before запускается первым; after — только после закрытия всей before group, освобождения lease и проверки диска. Максимальный output текущего job1GiB, minimum free1GiB. После получения результатов сохранить компактные primary через Git; не удалять исходные данные до проверки публикации. Branch pair остаётся отдельным следующим заданием. Сходимость и вся матрица этапа7 этим Classic pair не закрываются.
