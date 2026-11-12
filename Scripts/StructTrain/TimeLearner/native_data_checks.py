@@ -26,7 +26,7 @@ from .owned_native_job import (_identity, _same_process, _backend, _write, _run_
 from .owned_python_job import _source_snapshot
 from .process_limits import validate_limits
 from .process_runner import verify_runtime
-from .resource_reservations import Reservations
+from .resource_reservations import Reservations, _resources as validate_resource_trees
 from .runtime import (file_record, resolved_libraries, runtime_content_identity,
                       digest_json, source_closure)
 
@@ -88,11 +88,14 @@ def layout(request):
 
 def resources(request, runtime, request_path):
     base, output, controller = layout(request)
+    # The shared registry reserves directory trees, never individual files.
+    # Validate file identities/aliases before lifting their read scope to the
+    # parent; bounded DATA bytes are still captured/verified independently.
+    files = [_canonical(Path(p)) for p in [request_path, request['runtime_manifest']['path'],
+                                          *[r['path'] for r in request['inputs']]]]
     rows = [(ROOT, 'read'), (Path(request['source']['path']), 'read'),
-            (Path(request_path), 'read'), (Path(request['runtime_manifest']['path']), 'read'),
             (Path(runtime['executable']['path']).parent, 'read'),
-            *[(Path(r['path']), 'read') for r in request['inputs']],
-            (output, 'write')]
+            *[(p.parent, 'read') for p in files], (output, 'write')]
     result = {}
     for path, access in rows:
         path = _canonical(path, exists=access == 'read')
@@ -101,7 +104,9 @@ def resources(request, runtime, request_path):
             require(not any(path.is_relative_to(p) or p.is_relative_to(path)
                 for p in (output, controller)), 'native_data_input_output_overlap')
         result[str(path), access] = {'path': str(path), 'access': access}
-    return list(result.values())
+    rows = list(result.values())
+    validate_resource_trees(rows)  # Same production admission as reserve(), before launch.
+    return rows
 
 
 def _bound_runtime(request):

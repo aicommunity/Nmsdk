@@ -110,8 +110,10 @@ class NativeDataChecksTest(unittest.TestCase):
             writes = [r for r in rows if r['access'] == 'write']
             self.assertEqual(writes, [dict(path=str(root/'readbacks/recorded-cases'), access='write')])
             reads = {r['path'] for r in rows if r['access'] == 'read'}
-            for path in (root/'tool', root/'SDK', root/'runtime', spec, root/'inputs/recorded.qz'):
+            for path in (root/'tool', root/'SDK', root/'runtime', spec.parent, root/'inputs'):
                 self.assertIn(str(path), reads)
+            # The actual registry contract, not a parallel test-only schema.
+            subject.validate_resource_trees(rows)
 
     def test_read_resource_outside_workspace_and_alias_refuse(self):
         with tempfile.TemporaryDirectory() as directory, tempfile.TemporaryDirectory() as outside:
@@ -132,6 +134,17 @@ class NativeDataChecksTest(unittest.TestCase):
             with patch.object(subject, 'ROOT', root/'tool'):
                 with self.assertRaisesRegex(ValueError, 'input_output_overlap'):
                     subject.resources(value, runtime, spec)
+
+    def test_parent_tree_is_deduplicated_and_registry_rejects_file_lease(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve();value, runtime, spec = self.fixture(root)
+            second = root/'inputs/second.qz';second.write_bytes(b'fixture')
+            value['inputs'].append(dict(value['inputs'][0], name='second.qz', path=str(second)))
+            with patch.object(subject, 'ROOT', root/'tool'):
+                rows = subject.resources(value, runtime, spec)
+            self.assertEqual(sum(r['path'] == str(root/'inputs') for r in rows), 1)
+            with self.assertRaisesRegex(ValueError, 'requires_directory_tree'):
+                subject.validate_resource_trees([dict(path=value['inputs'][0]['path'], access='read')])
 
     def test_control_bytes_and_replaced_identity_refuse(self):
         with tempfile.TemporaryDirectory() as directory:
