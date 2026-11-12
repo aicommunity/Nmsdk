@@ -1,0 +1,19 @@
+*** Aborted at 1794496248 (unix time) try "date -d @1794496248" if you are using GNU date ***
+PC: @                0x0 (unknown)
+*** SIGTERM (@0x3e800000d3d) received by PID 1004994 (TID 0x731d26039fc0) from PID 3389; stack trace: ***
+    @     0x731d26b73206 (unknown)
+    @     0x731d25e45330 (unknown)
+    @     0x731d267ee084 (unknown)
+    @     0x731d267ee1c4 QtPrivate::isAscii()
+    @     0x731d267a4474 QCborValue::QCborValue()
+    @     0x63a877d9ec2f NMSDK::TimeLearner::EncodeAndValidateNativeCandidateWindowServiceArchive()
+    @     0x63a8780acbc9 NMSDK::TimeLearner::(anonymous namespace)::CompositeSummary<>()
+    @     0x63a8780add38 NMSDK::TimeLearner::EncodeNativeCandidateWindowRecoveryTrainingState()
+    @     0x63a877e97a34 NMSDK::TimeLearner::EncodeNativeTrainingState()
+    @     0x63a8774b1718 _ZZN12_GLOBAL__N_17ExecuteIN5NMSDK18NNeuronTimeLearnerEEEiRKNS_3JobERK7QStringbENKUlT_T0_T1_T2_E_clIN3RDK5UEPtrINSF_8UStorageEEENSG_INSF_12UEnvironmentEEENSG_INSF_10UContainerEEENSG_IS2_EEEEDaS9_SA_SB_SC_.isra.0
+    @     0x63a8774b2f4b (anonymous namespace)::Execute<>()
+    @     0x63a8774b77f5 RunTimeLearnerTrainingJob()
+    @     0x63a877479111 main
+    @     0x731d25e2a1ca (unknown)
+    @     0x731d25e2a28b __libc_start_main
+    @     0x63a87747b0c5 _start

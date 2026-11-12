@@ -1,0 +1,149 @@
+{
+    "current_base_revision": "89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b",
+    "evidence_schema_version": 2,
+    "kind": "timelearner_native_probe_evidence",
+    "native_status": "cancelled",
+    "observation": {
+        "burst_assignments": [
+        ],
+        "complete": false,
+        "end_reason": "native_training_time_budget_exhausted",
+        "first_stimulus_time": 714.953,
+        "peaks": [
+        ],
+        "reasons": [
+            "incomplete_observation",
+            "native_training_time_budget_exhausted"
+        ],
+        "sample_count": 2287,
+        "schema_version": 6,
+        "specification": {
+            "baseline": [
+                0,
+                0,
+                0,
+                0
+            ],
+            "begin": 714.863,
+            "effective_model_revision": "89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b",
+            "end": 716.663,
+            "expected_stimulus_ids": [
+                "pulse1",
+                "pulse2",
+                "pulse3"
+            ],
+            "maximum_sample_gap": 5e-04,
+            "maximum_samples": 3605,
+            "minimum_amplitude": 1e-06,
+            "pattern_hash": "3de2c7bcc77e54fbc46926e21d0bb642606ed6b9379aeba29f2af12d2998b007",
+            "peak_selection": "isolated_window",
+            "record_spikes": false,
+            "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+            "sample_id": "phasea-target",
+            "schema_version": 6,
+            "stimulus_profile": {
+                "amplitude": 1,
+                "frequency_deviation": 0,
+                "frequency_hz": 2000,
+                "generator_class": "NPulseGeneratorTransit",
+                "pulse_length": 0.001,
+                "use_pattern_output": false,
+                "use_transit_signal": false
+            },
+            "stimulus_subset": {
+                "physical_input_count": 4,
+                "purpose": "stimulus_subset_characterization",
+                "source_ordinals": [
+                    1,
+                    2,
+                    3
+                ],
+                "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+            },
+            "time_frame": "absolute_model_time",
+            "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/125/composite/67/native/1",
+            "wave_assignment": "window_only",
+            "windows": [
+            ]
+        },
+        "spike_count": null,
+        "spikes": [
+        ],
+        "stimuli": [
+            {
+                "id": "pulse1",
+                "relative_to_trial_start": 0.08999999999991815,
+                "time": 714.953
+            },
+            {
+                "id": "pulse2",
+                "relative_to_trial_start": 0.25,
+                "time": 715.113
+            },
+            {
+                "id": "pulse3",
+                "relative_to_trial_start": 0.4899999999998954,
+                "time": 715.353
+            }
+        ],
+        "valid": false
+    },
+    "prepared": {
+        "base_model_revision": "89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b",
+        "effective_model_revision": "89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b",
+        "input_id": "input3",
+        "model_epoch": 31,
+        "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+        "routing": "classic_burst",
+        "selected_input_index": null
+    },
+    "reasons": [
+        "native_training_time_budget_exhausted"
+    ],
+    "requested_specification": {
+        "baseline": [
+        ],
+        "begin": 0,
+        "effective_model_revision": "",
+        "end": 1.8,
+        "expected_stimulus_ids": [
+            "pulse1",
+            "pulse2",
+            "pulse3"
+        ],
+        "maximum_sample_gap": 5e-04,
+        "maximum_samples": 3605,
+        "minimum_amplitude": 1e-06,
+        "pattern_hash": "3de2c7bcc77e54fbc46926e21d0bb642606ed6b9379aeba29f2af12d2998b007",
+        "peak_selection": "isolated_window",
+        "record_spikes": false,
+        "run_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1",
+        "sample_id": "phasea-target",
+        "schema_version": 6,
+        "stimulus_profile": {
+            "amplitude": 1,
+            "frequency_deviation": 0,
+            "frequency_hz": 2000,
+            "generator_class": "NPulseGeneratorTransit",
+            "pulse_length": 0.001,
+            "use_pattern_output": false,
+            "use_transit_signal": false
+        },
+        "stimulus_subset": {
+            "physical_input_count": 4,
+            "purpose": "stimulus_subset_characterization",
+            "source_ordinals": [
+                1,
+                2,
+                3
+            ],
+            "source_training_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451"
+        },
+        "time_frame": "relative_to_trial_start",
+        "trial_id": "Classic-stock-cold8-N1/recorded-observation-domain/session/1/search/125/composite/67/native/1",
+        "wave_assignment": "window_only",
+        "windows": [
+        ]
+    },
+    "requires_fresh_verification": true
+}
