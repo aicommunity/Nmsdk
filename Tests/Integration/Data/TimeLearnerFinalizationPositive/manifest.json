@@ -1,0 +1,86 @@
+{
+  "actual_native_positive_validated": false,
+  "archive": {
+    "bytes": 34016,
+    "name": "fixtures.tar.xz",
+    "sha256": "0850bba54648338dbcb495354d1ecc2787d9cc028c2d0ce47b5f0c5c1a8be788"
+  },
+  "changed_roles": {
+    "branch-finalization-cold-job.json": {
+      "changes": {
+        "allocated_cable0": 8,
+        "duration": 0.3,
+        "initial_attachment0": 8,
+        "length_domain0": [
+          8,
+          8
+        ],
+        "maximum_samples": 620
+      },
+      "purpose": "fresh lifecycle positive candidate; acceptance requires actual native execution; not search benchmark",
+      "source_sha256": "dd459efdfdb693a303a58bf4ee8f9516d11c0282a536b3aadbcc3bf418a2bd60"
+    },
+    "classic-finalization-cold-job.json": {
+      "changes": {
+        "allocated_cable0": 8,
+        "duration": 0.3,
+        "initial_attachment0": 8,
+        "length_domain0": [
+          8,
+          8
+        ],
+        "maximum_samples": 620
+      },
+      "purpose": "fresh lifecycle positive candidate; acceptance requires actual native execution; not search benchmark",
+      "source_sha256": "bdb7d9a6b5cece9e169a88523d58ec2eebc77b9b8798cad9d13625ec63c1ed8f"
+    }
+  },
+  "kind": "timelearner_finalization_aligned_initial_positive_candidate_DATA",
+  "members": {
+    "branch-finalization-calibration-job.json": {
+      "bytes": 1771601,
+      "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077"
+    },
+    "branch-finalization-cold-job.json": {
+      "bytes": 841629,
+      "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f"
+    },
+    "branch-finalization-evaluation-job.json": {
+      "bytes": 1771350,
+      "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a"
+    },
+    "branch-finalization-fixed-job.json": {
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    "classic-finalization-calibration-job.json": {
+      "bytes": 1917019,
+      "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49"
+    },
+    "classic-finalization-cold-job.json": {
+      "bytes": 913190,
+      "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31"
+    },
+    "classic-finalization-evaluation-job.json": {
+      "bytes": 1916765,
+      "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778"
+    },
+    "classic-finalization-fixed-job.json": {
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    }
+  },
+  "schema_version": 1,
+  "scientific_verdict": null,
+  "source_archive": {
+    "bytes": 34008,
+    "name": "fixtures.tar.xz",
+    "sha256": "c5c3aa3ad243b34eca6e3b143aa2b9d26fdc7d8c1a2ca015f8e6d6c22d91b11f"
+  },
+  "source_root": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "unchanged_tolerances": {
+    "amplitude_absolute": 1e-05,
+    "amplitude_relative": 0,
+    "sync": 0.02
+  }
+}
