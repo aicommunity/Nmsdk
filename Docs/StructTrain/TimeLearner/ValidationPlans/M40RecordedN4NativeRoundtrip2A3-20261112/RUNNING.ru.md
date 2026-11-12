@@ -1,0 +1,5 @@
+# Actual DATA A3: native Classic запущен
+
+После принятого metadata18B1 запущен production controller. Supervisor3923332, bound outer main3926499/start_ticks353989693, native Classic case3929980. Shared _run_owned наблюдает outer и заранее объявленные classic/branch child intents; lease принадлежит bound worker, READ scopes directory trees. Это подтверждение запуска по живым PID/cgroup, не результат2/2.
+
+Job /media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3; controller sibling -controller. Actor /media/user/Data/TimeLearnerRefactor/source-native-data-checks-a3. CLI status/recover в native_data_checks; recovery только после смерти исходного supervisor, без перезапуска. Новый процесс не запускать без проверки исходного handle. Полные input raw hashes/размеры и бюджет неизменны; runtime остаётся принятым SDK36. После terminal проверить исходный outcome, оба JUnit, data before/after, effective model/waveform/timings, runtime/source hashes и всю closure/reservation. Нужны compact primary и independent readback; staged duplicate qz не должны превращаться в лишние обязательные Git primary.
