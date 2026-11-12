@@ -1,0 +1,103 @@
+{
+  "kind": "learner_export_boundary_source_method_delta",
+  "before": "7b524b8d6c760c5ecfeea432b14b5f9d5045987d",
+  "after": "dfb9a98244f91b4f4029d8470465fd40116436ca",
+  "classes": [
+    {
+      "component": "NNeuronTimeLearner",
+      "before_source": {
+        "commit": "7b524b8d6c760c5ecfeea432b14b5f9d5045987d",
+        "path": "Core/NNeuronTimeLearner.cpp",
+        "blob": "ec81f567c91b815516e93c695c7f93e2acf7d32c",
+        "sha256": "b54361995f35e0aa74754972f967042c29ff5c5f391fc95fc8191ac72040b02f"
+      },
+      "after_source": {
+        "commit": "dfb9a98244f91b4f4029d8470465fd40116436ca",
+        "path": "Core/NNeuronTimeLearner.cpp",
+        "blob": "e76af8f381922fd686adb8ece73679e329590d06",
+        "sha256": "382c29bde0840753106a9dead2650aa425692c3c4690c3b3a1d51ddeeae312a8"
+      },
+      "existing_changed_method_names": [
+        "ExportNativeLearnedStateWithCapacitance"
+      ],
+      "added_method_names": [
+        "ExportNativeLearnedBoundary",
+        "NativeLiveTrainingSummary"
+      ],
+      "removed_method_names": [],
+      "unchanged_lifecycle_method_names": [
+        "AAfterReset",
+        "ABeforeBuild",
+        "ABeforeCalculate",
+        "ABeforeDefault",
+        "ABeforeReset",
+        "ABuild",
+        "ACalculate",
+        "ADefault",
+        "AReset",
+        "Build",
+        "BuildStructure",
+        "Init",
+        "ResetToUntrained",
+        "SetCalculateMode",
+        "SetInitialSomaPotential",
+        "SetResetToUntrainedState",
+        "SetStructureBuildMode",
+        "UnInit"
+      ],
+      "declared_lifecycle_bodies_unchanged": true
+    },
+    {
+      "component": "NNeuronTimeLearnerBranch",
+      "before_source": {
+        "commit": "7b524b8d6c760c5ecfeea432b14b5f9d5045987d",
+        "path": "Core/NNeuronTimeLearnerBranch.cpp",
+        "blob": "ad4e688226ba58e43867212496b5431115d587f4",
+        "sha256": "eb15dd1c30d4aeae4c697d6e1a754711c549d0d0812d3c9e2f2f28df39028184"
+      },
+      "after_source": {
+        "commit": "dfb9a98244f91b4f4029d8470465fd40116436ca",
+        "path": "Core/NNeuronTimeLearnerBranch.cpp",
+        "blob": "e44a225f70758517974bd62621621b928fef8054",
+        "sha256": "58cbfd48a1ac58edc30e186359e27d6a850a79045eceb10490aab3ca7bdb5c16"
+      },
+      "existing_changed_method_names": [
+        "ExportNativeLearnedStateWithCapacitance"
+      ],
+      "added_method_names": [
+        "ExportNativeLearnedBoundary",
+        "NativeLiveTrainingSummary"
+      ],
+      "removed_method_names": [],
+      "unchanged_lifecycle_method_names": [
+        "AAfterReset",
+        "ABeforeBuild",
+        "ABeforeCalculate",
+        "ABeforeDefault",
+        "ABeforeReset",
+        "ABuild",
+        "ACalculate",
+        "ADefault",
+        "AReset",
+        "Build",
+        "BuildAuditComponentStateSnapshot",
+        "BuildStructure",
+        "Init",
+        "ResetToUntrained",
+        "SetCalculateMode",
+        "SetInitEstDelayPerSeg",
+        "SetInitialSomaPotential",
+        "SetResetToUntrainedState",
+        "SetStructureBuildMode",
+        "UnInit"
+      ],
+      "declared_lifecycle_bodies_unchanged": true
+    }
+  ],
+  "runtime_test": false,
+  "full_property_matrix_complete": false,
+  "limitations": [
+    "Only method bodies parsed from these two component source files.",
+    "Changed common helpers, consumers and inherited Rdk lifecycle require separate review."
+  ]
+}

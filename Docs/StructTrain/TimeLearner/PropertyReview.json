@@ -2456,6 +2456,17 @@
       "source": "ControlPeakPropertyReconciliation-20261109.source.json",
       "original_rows_annotated": 12,
       "runtime_property_matrix_complete": false
+    },
+    {
+      "scope": "217 declared UProperty slices unchanged across export-boundary feature only; 38 component lifecycle-related method bodies unchanged",
+      "contract": "PropertyExportBoundarySourceDrift-20261112.ru.md",
+      "source": "PropertyExportBoundarySourceDrift-20261112.json",
+      "methods": "PropertyExportBoundaryMethodDelta-20261112.json",
+      "before": "7b524b8d6c760c5ecfeea432b14b5f9d5045987d",
+      "after": "dfb9a98244f91b4f4029d8470465fd40116436ca",
+      "status": "source_only; no earlier helper/consumer gap or runtime matrix closed",
+      "runtime_property_matrix_complete": false,
+      "inherited_rdk_properties_included": false
     }
   ]
 }
