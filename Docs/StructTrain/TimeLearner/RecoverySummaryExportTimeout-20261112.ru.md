@@ -25,3 +25,19 @@ NativeCompositeLearnedState.cpp::CompositeSummary, ветка Summary==8, стр
 После адресной приёмки — один повтор исходного ограниченного scientific job с теми же математическими условиями. Пока исправление **не реализовано и не принято**. Весь план остаётся частичным.
 
 Для адресной диагностики исходный индекс270193422 bytes сохранён: он содержит67 measurement records и primary blobs; production DATA reader независимо пересчитал их за66.82s. Это даёт готовый регрессионный корпус без повторного Train. Наличие полного measurement archive не заменяет отсутствующую финальную модель и summary/controller state. Периодичность записи этого тяжёлого индекса и доли расходов следует измерить, а не предполагать.
+
+## Уточнённый конкретный caller и порядок
+
+App/NeuroModelerConsole/TimeLearnerTrainingJob.cpp имеет одинаковый Git blob60f7f23f69142abf83cfbe531646e594491ac020 в compiled Root448b153f2 и текущем root. Подтверждён порядок:
+
+```text
+package = owner.ExportNativeLearnedState(...)
+PublishNativeCompositeArchive(output, package, artifacts)
+Write(summary_name, EncodeNativeTrainingState(service,...))
+Write(package_name, package)
+Write(execution.json, final_manifest)
+```
+
+Таким образом, package уже был получен в памяти и archive index опубликован, но запись файла модели отложена до повторного тяжёлого EncodeNativeTrainingState. Этим объясняются сохранённый индекс и отсутствующая модель при SIGTERM внутри summary8.
+
+Адресный путь исправления: фабрика export формирует model+summary из одного уже проверенного boundary/archive; Console использует этот результат без второго кодирования primary. Сначала атомарно сохранять полученный package, затем остальные файлы, а положительный execution manifest — только последним. Даже если последующая запись оборвётся, отдельный package не делает весь run успешным. Сохранить standalone summary API для совместимости и проверить все его callers; не подставлять произвольный непроверенный JSON ledger. Постоянный service cache с новой схемой invalidation для этого не требуется.
