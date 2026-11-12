@@ -229,6 +229,27 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
         self.assertTrue(all(Path(row['path']).is_relative_to(self.sdk) for row in modules.values()))
         self.assertFalse(self.external.exists())
 
+    def test_parent_validator_accepts_actual_extended_child_inventory(self):
+        self.extra_module_sdk('valid');result=self.child()
+        self.assertEqual(result.returncode,0,result.stderr.decode())
+        observed=json.loads(result.stdout)
+        self.assertEqual(subject.validate_sdk_module_inventory(observed['SDK_modules'],self.sdk,
+                         observed['namespace']),observed['SDK_modules'])
+        self.assertIn('Scripts.StructTrain.TimeLearner.closure_fixture_extra',observed['SDK_modules'])
+
+    def test_parent_validator_rejects_lost_root_forged_hash_and_alias(self):
+        result=self.child();self.assertEqual(result.returncode,0,result.stderr.decode())
+        observed=json.loads(result.stdout);modules=observed['SDK_modules'];root='Scripts.StructTrain.TimeLearner.native_gate'
+        missing=copy.deepcopy(modules);missing.pop(root)
+        with self.assertRaisesRegex(ValueError,'canonical_required_SDK_module_missing'):
+            subject.validate_sdk_module_inventory(missing,self.sdk,observed['namespace'])
+        forged=copy.deepcopy(modules);forged[root]['sha256']='0'*64
+        with self.assertRaisesRegex(ValueError,'canonical_child_module_changed'):
+            subject.validate_sdk_module_inventory(forged,self.sdk,observed['namespace'])
+        alias=copy.deepcopy(modules);alias['Scripts.StructTrain.TimeLearner.wrong_alias']=alias[root]
+        with self.assertRaisesRegex(ValueError,'canonical_child_module_name_path_changed'):
+            subject.validate_sdk_module_inventory(alias,self.sdk,observed['namespace'])
+
     def test_extra_import_from_foreign_Tool_path_is_rejected(self):
         self.extra_module_sdk('foreign');result=self.child()
         self.assertNotEqual(result.returncode,0)

@@ -166,6 +166,27 @@ def verify_namespace(source, expected):
     return closure,actual
 
 
+def validate_sdk_module_inventory(loaded, source, namespace):
+    """Common child/parent contract for every consumed source module."""
+    provenance,require,_=_api();source=Path(source)
+    require(type(loaded) is dict and loaded,'canonical_SDK_module_inventory_required')
+    required={'Scripts.StructTrain.TimeLearner.'+name for name in MODULES}
+    require(required<=set(loaded),'canonical_required_SDK_module_missing')
+    for name,row in loaded.items():
+        require(type(name) is str and name.startswith('Scripts.'),'canonical_child_module_name_path_changed')
+        _keys(row,'path sha256 git_blob','canonical_child_module_record')
+        require(type(row['path']) is str,'canonical_child_module_origin')
+        path=provenance._canonical(Path(row['path']))
+        require(path.is_relative_to(source),'canonical_child_Tool_SDK_namespace_mix')
+        relative=path.relative_to(source).as_posix()
+        expected=(relative[:-len('/__init__.py')] if relative.endswith('/__init__.py')
+                  else relative[:-3] if relative.endswith('.py') else '')
+        require(expected and name==expected.replace('/','.'),'canonical_child_module_name_path_changed')
+        require(relative in namespace and row['sha256']==namespace[relative]['sha256'] and
+                row['git_blob']==namespace[relative]['git_blob'],'canonical_child_module_changed')
+    return loaded
+
+
 def capture_sdk_modules(source, namespace):
     """Bind the actual import closure to declared Git bytes, never a fixed count."""
     _,require,_=_api();source=Path(source);loaded={}
@@ -176,13 +197,8 @@ def capture_sdk_modules(source, namespace):
         relative=path.relative_to(source).as_posix();data=path.read_bytes()
         require(relative in namespace and _hash(data)==namespace[relative]['sha256'],
                 'canonical_child_module_changed')
-        expected=(relative[:-len('/__init__.py')] if relative.endswith('/__init__.py')
-                  else relative[:-3] if relative.endswith('.py') else '')
-        require(expected and name==expected.replace('/','.'),'canonical_child_module_name_path_changed')
         loaded[name]={'path':str(path),'sha256':_hash(data),'git_blob':namespace[relative]['git_blob']}
-    required={'Scripts.StructTrain.TimeLearner.'+name for name in MODULES}
-    require(required<=set(loaded),'canonical_required_SDK_module_missing')
-    return loaded
+    return validate_sdk_module_inventory(loaded,source,namespace)
 
 
 def _child(plan_path, source, commit, plan_digest):
@@ -261,12 +277,7 @@ def produce(plan, plan_path, plan_digest, output, registry, token, guard, emit):
     args=['--job',str(state['controller']/'inputs/job.json')];ids=validate_job(state['job'],spec,args)
     after,namespace=verify_namespace(state['source'],state['namespace'])
     require(after==before==result['source_closure'] and namespace==result['namespace'] and ids==result['selected_ids'],'canonical_child_source_changed')
-    require(len(result['SDK_modules'])==29,'canonical_SDK_module_inventory_changed')
-    for row in result['SDK_modules'].values():
-        path=Path(row['path']);require(path.is_relative_to(state['source']),'canonical_child_module_origin')
-        relative=path.relative_to(state['source']).as_posix()
-        require(relative in namespace and row['sha256']==namespace[relative]['sha256'] and
-                row['git_blob']==namespace[relative]['git_blob'],'canonical_child_module_changed')
+    validate_sdk_module_inventory(result['SDK_modules'],state['source'],namespace)
     require(result['configure_arguments']==state['configure'],'canonical_child_configure_changed')
     inputs_after=capture_inputs(plan,plan_path,plan_digest);emit('canonical-inputs-after.json',inputs_after)
     require(inputs_after==inputs_before,'canonical_inputs_changed_during_preparation')
