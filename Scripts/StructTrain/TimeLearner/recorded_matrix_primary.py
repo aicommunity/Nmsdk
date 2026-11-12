@@ -7,6 +7,7 @@ the original runtime directory and must never pass as its full artifact closure.
 """
 from pathlib import Path
 import argparse
+import html
 import json
 import tempfile
 
@@ -129,17 +130,60 @@ def audit_primary(bundle_path, restored):
         complete_runtime_directory=False, native_execution_attested=False, scientific_verdict=None)
 
 
+def report_primary(bundle_path, restored, output):
+    """Restore, audit and render every recorded pattern from the compact bundle.
+
+    The restored subset is never presented as the original runtime directory.
+    Reports use the production diagnostic renderer and retain its lack of a
+    scientific verdict and its explicit visual-review status.
+    """
+    from .plotting import plotting_runtime
+    from .reports import render_diagnostic_evaluation_case
+
+    bundle_path = Path(bundle_path).resolve(strict=True)
+    restored, output = Path(restored).resolve(), Path(output).resolve()
+    protected = (bundle_path.parent, restored)
+    require(not output.exists() and all(not output.is_relative_to(p) and
+            not p.is_relative_to(output) for p in protected),
+            'recorded_primary_report_overlaps_primary')
+    plotting_runtime()  # Reject an unavailable renderer before decompression.
+    analysis = audit_primary(bundle_path, restored)
+    output.mkdir(parents=True)
+    reports = []
+    for row in analysis['models']:
+        root = restored/'native'/row['name']
+        model = load(root/'native/model.json')
+        summary = load(root/'input/source/train_stopped_summary.json')
+        result = render_diagnostic_evaluation_case(root/'native/evaluation.json',
+            root/'native/model.json', (model['source_solo'], summary, {}, {}), output/row['name'])
+        reports.append(dict(name=row['name'], report=result))
+    result = dict(analysis=analysis, reports=reports, visual_acceptance_complete=False,
+                  native_execution_attested=False, scientific_verdict=None)
+    (output/'manifest.json').write_text(json.dumps(result, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+    links = ''.join('<li><a href="'+html.escape(r['name'])+'/index.html">'+html.escape(r['name'])+'</a></li>'
+                    for r in reports)
+    (output/'index.html').write_text('<!doctype html><meta charset="utf-8">'
+        '<h1>Recorded diagnostic responses from compact primary data</h1>'
+        '<p>Stopped models; inherited fixed thresholds. All declared patterns with actual input overlays. '
+        'No convergence, calibration or independent scientific verdict is inferred.</p><ul>'+links+'</ul>',
+        encoding='utf-8')
+    return result
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='action', required=True)
     create = commands.add_parser('create')
     for name in ('directory', 'controller', 'runtime_manifest'):create.add_argument(name, type=Path)
     audit = commands.add_parser('audit');audit.add_argument('bundle', type=Path)
-    for command in (create, audit):command.add_argument('--output', required=True, type=Path)
+    report = commands.add_parser('report');report.add_argument('bundle', type=Path)
+    report.add_argument('--restored', required=True, type=Path)
+    for command in (create, audit, report):command.add_argument('--output', required=True, type=Path)
     args = parser.parse_args(argv)
     if args.action == 'create':
         result = create_primary(args.directory, args.controller, args.runtime_manifest, args.output)
-    else:result = audit_primary(args.bundle, args.output)
+    elif args.action == 'audit':result = audit_primary(args.bundle, args.output)
+    else:result = report_primary(args.bundle, args.restored, args.output)
     print(json.dumps(result, allow_nan=False));return 0
 
 

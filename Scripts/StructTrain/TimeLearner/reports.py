@@ -28,6 +28,16 @@ def render_diagnostic_evaluation(source: Path, model: Path, stopped: Path, outpu
     return _render_evaluation(source, model, output, source_case=load_case(stopped))
 
 
+def render_diagnostic_evaluation_case(source: Path, model: Path, source_case, output: Path):
+    """Render an audited embedded stopped case through the same diagnostic scorer.
+
+    Compact recordings embed the source in the recognition model rather than
+    retaining a second copy of the standalone stopped-state file.
+    """
+    require(source_case is not None, 'diagnostic_report_requires_source_case')
+    return _render_evaluation(source, model, output, source_case=source_case)
+
+
 def _render_evaluation(source, model, output, *, calibration_probe=False, source_case=None):
     runtime = plotting_runtime()
     diagnostic = source_case is not None

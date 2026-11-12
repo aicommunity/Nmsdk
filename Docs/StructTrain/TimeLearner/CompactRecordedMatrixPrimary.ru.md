@@ -13,6 +13,9 @@
 ```text
 python3 -B -m Scripts.StructTrain.TimeLearner.recorded_matrix_primary create DIRECTORY CONTROLLER RUNTIME_MANIFEST --output NEW_BUNDLE_DIRECTORY
 python3 -B -m Scripts.StructTrain.TimeLearner.recorded_matrix_primary audit BUNDLE_DIRECTORY/bundle.json --output NEW_RESTORED_DIRECTORY
+python3 -B -m Scripts.StructTrain.TimeLearner.recorded_matrix_primary report BUNDLE_DIRECTORY/bundle.json --restored NEW_RESTORED_DIRECTORY --output NEW_REPORT_DIRECTORY
 ```
+
+Команда `report` добавлена для повторного построения галереи непосредственно из опубликованного compact bundle. Она проверяет plotting backend до распаковки, выполняет тот же `audit_primary`, затем передаёт embedded stopped case штатному diagnostic renderer. Не создаёт фиктивный полный runtime-каталог. Все паттерны и каналы сомы, временной масштаб и входные импульсы формируются существующим renderer. Статус этой новой команды: реализация подготовлена; серверная проверка guards и фактического построения40 trial×soma pairs ещё не выполнена. Ранее принятая полная галерея A2 построена из исходного полного каталога, поэтому не заменяет эту проверку.
 
 Оба пути вывода должны быть новыми и находиться вне входных деревьев. Пределы reader: archive128 MiB, expanded768 MiB, member256 MiB, максимум64 members. Для других размерностей/наборов данных этот формат нельзя молча расширять: пределы и проверки пересматриваются явно. Модели остаются остановленными, без certificates; молчание target остаётся FN. Пакет предназначен для повторного анализа научных данных, а не для продолжения посреди пробы или восстановления полного runtime.

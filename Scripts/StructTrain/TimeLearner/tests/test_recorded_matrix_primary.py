@@ -4,8 +4,55 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
-from ..recorded_matrix_primary import audit_primary, create_primary
+from ..recorded_matrix_primary import audit_primary, create_primary, report_primary
+
+
+class RecordedMatrixPrimaryReportBoundsTest(unittest.TestCase):
+    def test_report_cannot_replace_bundle_or_restore_tree(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary);(root/'input').mkdir()
+            bundle = root/'input/bundle.json';bundle.write_bytes(b'{}')
+            for output in (root/'input/report', root/'restored/report', root):
+                with self.subTest(output=output), self.assertRaisesRegex(ValueError, 'report_overlaps_primary'):
+                    report_primary(bundle, root/'restored', output)
+            self.assertFalse((root/'restored').exists())
+
+    def test_backend_failure_precedes_archive_restore(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary);(root/'input').mkdir()
+            bundle = root/'input/bundle.json';bundle.write_bytes(b'{}')
+            with patch('Scripts.StructTrain.TimeLearner.plotting.plotting_runtime',
+                       side_effect=ValueError('test_backend_unavailable')), \
+                 patch('Scripts.StructTrain.TimeLearner.recorded_matrix_primary.audit_primary') as audit:
+                with self.assertRaisesRegex(ValueError, 'test_backend_unavailable'):
+                    report_primary(bundle, root/'restored', root/'report')
+                audit.assert_not_called()
+            self.assertFalse((root/'restored').exists())
+            self.assertFalse((root/'report').exists())
+
+
+class RecordedMatrixPrimaryReportActualTest(unittest.TestCase):
+    """Opt-in full production rendering from the published compact bundle only."""
+    def test_published_bundle_renders_all_forty_trial_soma_pairs(self):
+        root = Path(os.environ['TIMELEARNER_RECORDED_MATRIX_BUNDLE'])
+        temporary = Path(os.environ['TMPDIR'])
+        result = report_primary(root/'bundle.json', temporary/'compact-report-restored',
+                                temporary/'compact-report-gallery')
+        self.assertEqual(result['analysis']['trials'], 16)
+        self.assertEqual({r['name']: r['report']['trial_soma_pairs'] for r in result['reports']},
+                         {'classic': 32, 'branch': 8})
+        self.assertFalse(result['native_execution_attested'])
+        self.assertFalse(result['visual_acceptance_complete'])
+        self.assertIsNone(result['scientific_verdict'])
+        for row in result['reports']:
+            report = row['report']
+            self.assertTrue(report['diagnostic_only'])
+            self.assertFalse(report['training_completed'])
+            self.assertIsNone(report['evaluation_verdict'])
+        (temporary/'compact-report-readback.json').write_text(
+            json.dumps(result, indent=2, allow_nan=False)+'\n', encoding='utf-8')
 
 
 class RecordedMatrixPrimaryBoundsTest(unittest.TestCase):
