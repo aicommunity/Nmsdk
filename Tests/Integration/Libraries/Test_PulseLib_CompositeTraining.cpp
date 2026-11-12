@@ -4913,3 +4913,87 @@ TEST(NativeRecoveryConsoleArtifact,RehashedForeignLedgerRejectedBeforeAnyPublica
     EXPECT_THROW(NmsdkWorker::PublishNativeCompositeArchive(temporary.path(),package,artifacts),std::invalid_argument);
     EXPECT_TRUE(artifacts.isEmpty());EXPECT_FALSE(QFileInfo::exists(temporary.path()+"/composite-measurements"));
 }
+
+#if defined(NMSDK_RECORDED_MODEL_INPUT_TESTS)
+namespace {
+QJsonObject RecordedRecoveryInput(bool branch) {
+    const char* output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT");
+    Require(output && *output,"recorded_model_requires_owned_native_output");
+    QFile file(QDir(QString::fromLocal8Bit(output)).filePath(branch?
+        "../native-inputs/branch-recorded-model.qz":"../native-inputs/classic-recorded-model.qz"));
+    Require(file.open(QIODevice::ReadOnly) && file.size()>4 && file.size()<=64*1024*1024,
+        "recorded_model_input_missing_or_oversize");
+    const auto packed=file.readAll();const auto expected=branch?192607805u:175521654u;
+    const auto* bytes=reinterpret_cast<const unsigned char*>(packed.constData());
+    const auto declared=(unsigned(bytes[0])<<24)|(unsigned(bytes[1])<<16)|(unsigned(bytes[2])<<8)|unsigned(bytes[3]);
+    Require(declared==expected,"recorded_model_compressed_size_header");
+    const auto raw=qUncompress(packed);Require(raw.size()==int(expected),"recorded_model_raw_size");
+    const auto sha=branch?"d10368eb17016819387daf4ee614bddffda46dbe774c440109fa741e222308d9":
+        "6107b4b0762ae2d5247bc2356a8fb533d872af2f0aafeb972783aeb85555a078";
+    Require(QCryptographicHash::hash(raw,QCryptographicHash::Sha256).toHex()==QByteArray(sha),"recorded_model_raw_sha256");
+    QJsonParseError error;const auto document=QJsonDocument::fromJson(raw,&error);
+    Require(error.error==QJsonParseError::NoError && document.isObject(),"recorded_model_json");
+    return document.object();
+}
+template<class Owner> void RecordedRecoveryRoundtrip() {
+    constexpr bool branch=NativeCompositeFixture<Owner>::branch;
+    const double readStart=Wall();const auto source=RecordedRecoveryInput(branch);const double readSeconds=Wall()-readStart;
+    ASSERT_EQ(source["schema_version"],QJsonValue(7));ASSERT_TRUE(source["certificate"].isNull());
+    ASSERT_EQ(source["training_outcome"],QJsonValue(branch?"budget_exhausted":"invalid_observation"));
+    const auto implementation=source["implementation_id"].toString().toStdString();
+    QJsonObject exported,summary;std::vector<NativeProbeSample> before,after;
+    double firstImport=0.,exportSeconds=0.,summarySeconds=0.,secondImport=0.;
+    {
+        NativeCompositeFixture<Owner> f;f.attempt.reset();f.owner->IsNeedToTrain=false;
+        double start=Wall();const auto imported=f.owner->ImportNativeLearnedState(source,implementation);firstImport=Wall()-start;
+        ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+        f.owner->Build();f.owner->Init();ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
+        ASSERT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+        const auto& service=f.owner->NativeTrainingController();ASSERT_EQ(service.State(),NativeTrainingState::Finished);
+        ASSERT_TRUE(service.HasDetachedCompositeBoundary());EXPECT_FALSE(service.Search());EXPECT_FALSE(service.Certificate());
+        ASSERT_EQ(f.owner->ReadNativeParameters().size(),4u);
+        start=Wall();exported=f.owner->ExportNativeLearnedState(implementation);exportSeconds=Wall()-start;
+        EXPECT_EQ(NmsdkTests::LearnedStateComparisonView(exported),NmsdkTests::LearnedStateComparisonView(source));
+        start=Wall();summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());summarySeconds=Wall()-start;
+        EXPECT_EQ(summary["schema_version"],QJsonValue(8));EXPECT_EQ(summary["recovery_ledger"],source["recovery_ledger"]);
+        EXPECT_EQ(summary["search_history_retained"],QJsonValue(false));EXPECT_EQ(summary["contains_controller_checkpoint"],QJsonValue(false));
+        before=RecoveryBoundaryResponse(f);EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+    }
+    {
+        NativeCompositeFixture<Owner> f;f.attempt.reset();f.owner->IsNeedToTrain=false;
+        const double start=Wall();const auto imported=f.owner->ImportNativeLearnedState(exported,implementation);secondImport=Wall()-start;
+        ASSERT_EQ(imported.status,NativeModelBuildStatus::Adopted)<<imported.reason;
+        f.owner->Build();f.owner->Init();ASSERT_TRUE(f.owner->IsReady());ASSERT_TRUE(f.owner->IsInit());
+        ASSERT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+        EXPECT_FALSE(f.owner->NativeTrainingController().Search());EXPECT_FALSE(f.owner->IsNeedToTrain.GetData());
+        after=RecoveryBoundaryResponse(f);EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
+    }
+    ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    for(std::size_t i=0;i<before.size();++i) {
+        EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,5e-10);
+        EXPECT_DOUBLE_EQ(before[i].stimulus,after[i].stimulus);ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
+        for(std::size_t j=0;j<before[i].potentials.size();++j) {
+            ASSERT_TRUE(std::isfinite(before[i].potentials[j]));ASSERT_TRUE(std::isfinite(after[i].potentials[j]));
+            EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1e-12);
+        }
+    }
+    const char* output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");Require(output && *output,"recorded_model_output_missing");
+    const auto directory=QDir(QString::fromLocal8Bit(output)).filePath(QString::fromStdString(RecoveryPackageDirectory()));
+    Require(QDir().mkpath(directory),"recorded_model_output_directory");
+    QSaveFile file(QDir(directory).filePath("roundtrip-package.json.qz"));Require(file.open(QIODevice::WriteOnly),"recorded_model_output_open");
+    const auto raw=QJsonDocument(exported).toJson(QJsonDocument::Compact);const auto packed=qCompress(raw,9);
+    Require(file.write(packed)==packed.size() && file.commit(),"recorded_model_output_write");
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"roundtrip-summary.json",summary);
+    SaveRecoveryResponse("response-before.json",before);SaveRecoveryResponse("response-after.json",after);
+    SavePortableObject(RecoveryPackageDirectory().c_str(),"phase-times.json",{
+        {"read_decompress_parse_seconds",readSeconds},{"first_import_seconds",firstImport},{"export_seconds",exportSeconds},
+        {"summary_seconds",summarySeconds},{"second_import_seconds",secondImport},
+        {"model_revision",source["model_revision"]},{"training_outcome",source["training_outcome"]},
+        {"source_package_sha256",source["sha256"]},{"exported_package_sha256",exported["sha256"]},
+        {"exported_raw_bytes",double(raw.size())},{"exported_raw_sha256",QString::fromLatin1(QCryptographicHash::hash(raw,QCryptographicHash::Sha256).toHex())},
+        {"cold_training_replayed",false},{"controller_checkpoint_restored",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
+}
+}
+TEST(NativeRecordedRecoveryArchive,ClassicFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearner>();}
+TEST(NativeRecordedRecoveryArchive,BranchFullDomainN4Roundtrip){RecordedRecoveryRoundtrip<NNeuronTimeLearnerBranch>();}
+#endif

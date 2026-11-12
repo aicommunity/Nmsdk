@@ -1,0 +1,38 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "native-data-inputs5-and-legacy-actual-JUnit-regression16-a1",
+  "package_fingerprint": "231f28fd3d60ca856d96b6c0754e884dad2eb3231dd49748dc584ab6c08ef3ea",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_exact_captured_bytes_and_descriptor_are_retained",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_source_changed_after_capture_is_not_a_successful_gate",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_staged_bytes_changed_by_native_process_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_extra_staged_file_and_changed_descriptor_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_wrong_source_digest_is_rejected_before_output_is_created",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_alias_and_traversal_names_and_boolean_size_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_symlink_source_and_staged_alias_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate_inputs.NativeGateInputsTest.test_explicit_schema5_does_not_change_legacy_or_windows_contract",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_actual_inventory_and_reversed_declaration_have_identical_results",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_actual_contract_and_explicit_capture_versions",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_missing_or_duplicate_identity_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_skipped_or_unfinished_case_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_corrupt_totals_are_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_complete_assertion_failure_is_observed_as_failed",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateJUnitTest.test_truncated_xml_is_rejected",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_gate.NativeGateEnvironmentTest.test_present_and_absent_environment_are_restored_after_exception"
+  ],
+  "executed_tests": 16,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_NATIVE_GATE_DIR": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-package6-native119-m40-a2/common-codec-11",
+      "files": 4,
+      "fingerprint": "4cee777c6b6146cee0a058e4a78895f42e506fa3b484450e97946150c1eb2443"
+    }
+  },
+  "scientific_verdict": null
+}

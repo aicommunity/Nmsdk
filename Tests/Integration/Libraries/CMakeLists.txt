@@ -214,6 +214,12 @@ add_executable(Test_PulseLib_StorageComponents
     Test_PulseLib_Main.cpp
 )
 
+option(NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS
+    "Enable explicitly staged recorded-model tests for owned native gates" OFF)
+if(NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS)
+    target_compile_definitions(Test_PulseLib_StorageComponents PRIVATE NMSDK_RECORDED_MODEL_INPUT_TESTS=1)
+endif()
+
 target_sources(Test_PulseLib_StorageComponents PRIVATE
     ${CMAKE_SOURCE_DIR}/Libraries/Libraries.cpp
     ${CMAKE_SOURCE_DIR}/Tests/Integration/Support/ConsoleLikeInit.cpp
@@ -249,7 +255,10 @@ set_target_properties(Test_PulseLib_StorageComponents PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL      "${PULSELIB_TEST_OUTPUT_DIR}"
 )
 
-add_test(NAME PulseLib_StorageComponents COMMAND Test_PulseLib_StorageComponents)
+# Recorded-model cases require hash-bound files staged by the owned gate.
+# They are selected separately, including in builds with the opt-in enabled.
+add_test(NAME PulseLib_StorageComponents COMMAND Test_PulseLib_StorageComponents
+    --gtest_filter=-NativeRecordedRecoveryArchive.*)
 set_tests_properties(PulseLib_StorageComponents PROPERTIES WORKING_DIRECTORY "${DEPLOY_ROOT}")
 
 add_executable(PulseLibIntervalTuner
