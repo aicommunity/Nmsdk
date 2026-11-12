@@ -7,6 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from .. import native_data_checks as subject
+from ..resource_reservations import ReservationError
 
 
 def declaration():
@@ -143,7 +144,7 @@ class NativeDataChecksTest(unittest.TestCase):
             with patch.object(subject, 'ROOT', root/'tool'):
                 rows = subject.resources(value, runtime, spec)
             self.assertEqual(sum(r['path'] == str(root/'inputs') for r in rows), 1)
-            with self.assertRaisesRegex(ValueError, 'requires_directory_tree'):
+            with self.assertRaisesRegex(ReservationError, 'requires_directory_tree'):
                 subject.validate_resource_trees([dict(path=value['inputs'][0]['path'], access='read')])
 
     def test_control_bytes_and_replaced_identity_refuse(self):
