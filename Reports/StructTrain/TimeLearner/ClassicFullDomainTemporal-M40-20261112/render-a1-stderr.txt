@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 35, in plotting_runtime
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/composite_training_temporal.py", line 166, in <module>
+    main()
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/composite_training_temporal.py", line 160, in main
+    result = render(args.native, args.output, args.groups, native_window_zooms=args.native_window_zooms)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/composite_training_temporal.py", line 62, in render
+    runtime = plotting_runtime()
+              ^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 40, in plotting_runtime
+    raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: plotting_runtime_unavailable:No module named 'matplotlib'

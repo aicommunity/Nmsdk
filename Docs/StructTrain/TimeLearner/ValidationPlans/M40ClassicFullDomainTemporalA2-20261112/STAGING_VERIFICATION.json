@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_staged_artifact_batch_verification",
+  "artifact_sets": [
+    {
+      "manifest": "Reports/StructTrain/TimeLearner/ClassicFullDomainTemporal-M40-20261112/ARTIFACTS.json",
+      "manifest_sha256": "09dba77343b6af4533bb4916a290b974ca374fa4921ed7be8209551e9652f025",
+      "files": 11
+    },
+    {
+      "manifest": "Reports/StructTrain/TimeLearner/CurrentSDKCold8Primary-M40-20261112/ARTIFACTS.json",
+      "manifest_sha256": "784992764c461956d93e08f1f97d9ca6b72ca0acd141e4e249fc138c900c6261",
+      "files": 6
+    }
+  ],
+  "staged_regular_blobs_verified": 17,
+  "checks": [
+    "exact inventory",
+    "stage0 regular Git blobs",
+    "SHA256 from actual index blobs",
+    "production new report artifact policy"
+  ],
+  "scientific_verdict": null
+}

@@ -5,3 +5,5 @@
 [Исходные подтверждения](completed/readback-integrity.json): controller completed, diagnostics clear, все процессы закрыты и lease released, байты source/tool/fixtures до и после совпадают. Production prepare следующего плана дополнительно проверил valid/complete закреплённые пики всех восьми записей, реальные storage-графы и привязку runtime.
 
 Это характеризация исходного состояния, а не обучение или результат классификации. Следующий конечный опыт: [Classic full-domain, recovery budget16](../M40FullDomainBudget16TrainA1-20261112/PLAN.ru.md).
+
+[Полные первичные данные опубликованы компактно](../../CurrentSDKCold8PrimaryPublication-20261112.ru.md):342 members/138952 bytes XZ. Это тот же закрытый cold8, без нового выполнения.

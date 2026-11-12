@@ -37,5 +37,5 @@ Whole cohort закрыт; [controller/leases](completed/closure-and-reservation
 до и после побайтно совпали. [SHA256 raw readbacks](completed/readback-integrity.json).
 Полные первичные данные/модель [опубликованы компактным corpus](../M40ObservationDomainCombinedClosedCorpusA3-20261112/RESULT.ru.md),
 [независимый DATA replay принят2/2](../M40ObservationDomainPrimaryIndependentA1-20261112/RESULT.ru.md);
-подробный temporal разбор ambiguous остаётся отдельным обязательным шагом.
+[Подробный temporal разбор ambiguous завершён позднее](../../ClassicFullDomainAssignmentScientificReport-20261112.ru.md): извлечены причины всех5 отказов, построены full/omission графики групп12/14/42,3 выбранных изображения просмотрены. Это анализ того же закрытого опыта, без нового Train и без смены его результата.
 Test, калибровка и classification verdict не выполнялись. Этапы1–12 не закрыты.

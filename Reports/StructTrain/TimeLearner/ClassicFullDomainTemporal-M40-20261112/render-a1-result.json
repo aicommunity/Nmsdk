@@ -1,0 +1,137 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "process_error",
+  "reason": "nonzero_exit_or_missing_terminal_status",
+  "returncode": 1,
+  "wall_seconds": 140.67317408602685,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "2d8f91ea2e74ebbbe8383d7ac8165e592819087317e0051cd0375a97bfbe6ae5",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "error",
+    "error_records": 2,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 17,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "error",
+        "excerpt": "Traceback (most recent call last):"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 2,
+        "severity": "unclassified",
+        "excerpt": "  File \"/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/plotting.py\", line 35, in plotting_runtime"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 3,
+        "severity": "unclassified",
+        "excerpt": "    import matplotlib"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 4,
+        "severity": "unclassified",
+        "excerpt": "ModuleNotFoundError: No module named 'matplotlib'"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 6,
+        "severity": "unclassified",
+        "excerpt": "The above exception was the direct cause of the following exception:"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 8,
+        "severity": "error",
+        "excerpt": "Traceback (most recent call last):"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 9,
+        "severity": "unclassified",
+        "excerpt": "  File \"<frozen runpy>\", line 198, in _run_module_as_main"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 10,
+        "severity": "unclassified",
+        "excerpt": "  File \"<frozen runpy>\", line 88, in _run_code"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 11,
+        "severity": "unclassified",
+        "excerpt": "  File \"/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/composite_training_temporal.py\", line 166, in <module>"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 12,
+        "severity": "unclassified",
+        "excerpt": "    main()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 13,
+        "severity": "unclassified",
+        "excerpt": "  File \"/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/composite_training_temporal.py\", line 160, in main"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 14,
+        "severity": "unclassified",
+        "excerpt": "    result = render(args.native, args.output, args.groups, native_window_zooms=args.native_window_zooms)"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 15,
+        "severity": "unclassified",
+        "excerpt": "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 16,
+        "severity": "unclassified",
+        "excerpt": "  File \"/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1/Scripts/StructTrain/TimeLearner/composite_training_temporal.py\", line 62, in render"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 17,
+        "severity": "unclassified",
+        "excerpt": "    runtime = plotting_runtime()"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 18,
+        "severity": "unclassified",
+        "excerpt": "              ^^^^^^^^^^^^^^^^^^"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 1619,
+        "sha256": "fbb58ce65b25b05c03b1d759933fd2b63401df6a72cc64882da226b679254cda"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}
