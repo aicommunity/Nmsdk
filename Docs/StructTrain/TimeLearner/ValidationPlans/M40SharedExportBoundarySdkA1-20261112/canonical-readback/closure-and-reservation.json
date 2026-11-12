@@ -1,0 +1,101 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "d7a25249d58255196592e8cecca86779c116180b3ccdcf29e9152aa1d829dcdb",
+      "unit": "timelearner-5116853a-c0bd-4fd7-ad1b-144dd5c0a061.service",
+      "invocation_id": "793f11393e354c1390a042c112fa38a9",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5116853a-c0bd-4fd7-ad1b-144dd5c0a061.service",
+      "initial_main_pid": 1308875,
+      "initial_start_ticks": "357894663",
+      "sha256": "a30e98b27f90c5acbefc98ce9101be67a59a2838ff49c19de36d34df5b7e2bb3"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-5116853a-c0bd-4fd7-ad1b-144dd5c0a061.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "db2ae67b-548e-4b9f-8e14-7fc84e246dda",
+      "job_id": "s08-shared-export-sdk-canonical-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1308875,
+        "start_ticks": "357894663",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-shared-export-sdk-canonical-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-shared-export-sdk-canonical-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-shared-export-sdk-prepared-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-shared-export-sdk-prepared-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/shared-export-sdk102-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SharedExportBoundarySdkA1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/shared-export-sdk102-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SharedExportBoundarySdkA1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-shared-export-boundary-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-shared-export-boundary-sdk-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794503749.2183094,
+      "deadline": 1794503949.2810104,
+      "updated": 1794503831.5167992,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
