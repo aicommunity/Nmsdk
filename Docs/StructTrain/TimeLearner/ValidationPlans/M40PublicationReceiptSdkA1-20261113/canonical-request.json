@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s08-publication-receipt-sdk-canonical-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 134217728
+  },
+  "operation": {
+    "kind": "native-canonical-preparation",
+    "plan": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/publication-receipt-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PublicationReceiptSdkA1-20261113/canonical-plan.json",
+      "sha256": "dfffc9e4f766d6506171bb541d5befd0e417dc3d5e73eaa15515ce253e3bfc43"
+    }
+  }
+}
