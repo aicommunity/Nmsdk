@@ -1,0 +1,185 @@
+{
+  "kind": "timelearner_native_data_checks",
+  "schema_version": 1,
+  "job_id": "s08-finalization-data26-1-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "source": {
+    "path": "/home/user/timelearner-refactor/source-finalization-data-sdk-a1",
+    "commit": "929dbc176a0804910544539aaf79bdc4a02aa82a"
+  },
+  "runtime_manifest": {
+    "path": "/home/user/timelearner-refactor/readbacks/s08-finalization-data-sdk-elder-a1/finalization-enum-smoke-runtime.json",
+    "sha256": "822da9389f00185194e356ba82bb8b678f741545469707919bd03367b0548951"
+  },
+  "inputs": [
+    {
+      "name": "branch-finalization-calibration-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-calibration-job.json",
+      "bytes": 1771601,
+      "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077"
+    },
+    {
+      "name": "branch-finalization-cold-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-cold-job.json",
+      "bytes": 841629,
+      "sha256": "fd4bfc80491e4c3ecd1bf55e400dedf7af114f53ccce33ba09e753e894353e7f"
+    },
+    {
+      "name": "branch-finalization-evaluation-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-evaluation-job.json",
+      "bytes": 1771350,
+      "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a"
+    },
+    {
+      "name": "branch-finalization-fixed-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/branch-finalization-fixed-job.json",
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    {
+      "name": "classic-finalization-calibration-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-calibration-job.json",
+      "bytes": 1917019,
+      "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49"
+    },
+    {
+      "name": "classic-finalization-cold-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-cold-job.json",
+      "bytes": 913190,
+      "sha256": "aa6e5e358030d9ff7025e4cb3fa28a3e002d94d9c19eb3c05d1bd183b51e5a31"
+    },
+    {
+      "name": "classic-finalization-evaluation-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-evaluation-job.json",
+      "bytes": 1916765,
+      "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778"
+    },
+    {
+      "name": "classic-finalization-fixed-job.json",
+      "path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1/classic-finalization-fixed-job.json",
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    }
+  ],
+  "cases": [
+    {
+      "name": "finalization-boundary-001",
+      "test_id": "NativeFinalizationBoundary/ClassicSnapshot"
+    },
+    {
+      "name": "finalization-boundary-002",
+      "test_id": "NativeFinalizationBoundary/BranchSnapshot"
+    },
+    {
+      "name": "finalization-boundary-003",
+      "test_id": "NativeFinalizationBoundary/ClassicConnectedRequest"
+    },
+    {
+      "name": "finalization-boundary-004",
+      "test_id": "NativeFinalizationBoundary/BranchConnectedRequest"
+    },
+    {
+      "name": "finalization-boundary-005",
+      "test_id": "NativeFinalizationBoundary/ClassicPendingProbeRejects"
+    },
+    {
+      "name": "finalization-boundary-006",
+      "test_id": "NativeFinalizationBoundary/BranchPendingProbeRejects"
+    },
+    {
+      "name": "finalization-boundary-007",
+      "test_id": "NativeFinalizationBoundary/ClassicStoppedIsDiagnostic"
+    },
+    {
+      "name": "finalization-boundary-008",
+      "test_id": "NativeFinalizationBoundary/BranchStoppedIsDiagnostic"
+    },
+    {
+      "name": "finalization-boundary-009",
+      "test_id": "NativeFinalizationBoundary/PublicEnumsUseExplicitMapping"
+    },
+    {
+      "name": "finalization-boundary-010",
+      "test_id": "NativeFinalizationOwnership/ClassicAutomatic"
+    },
+    {
+      "name": "finalization-boundary-011",
+      "test_id": "NativeFinalizationOwnership/ClassicExternal"
+    },
+    {
+      "name": "finalization-boundary-012",
+      "test_id": "NativeFinalizationOwnership/BranchAutomatic"
+    },
+    {
+      "name": "finalization-boundary-013",
+      "test_id": "NativeFinalizationOwnership/BranchExternal"
+    },
+    {
+      "name": "finalization-boundary-014",
+      "test_id": "NativeOwnedPostTune/ClassicAutomaticConnected"
+    },
+    {
+      "name": "finalization-boundary-015",
+      "test_id": "NativeOwnedPostTune/ClassicAutomaticLocal"
+    },
+    {
+      "name": "finalization-boundary-016",
+      "test_id": "NativeOwnedPostTune/ClassicExternalConnected"
+    },
+    {
+      "name": "finalization-boundary-017",
+      "test_id": "NativeOwnedPostTune/ClassicExternalLocal"
+    },
+    {
+      "name": "finalization-boundary-018",
+      "test_id": "NativeOwnedPostTune/ClassicResetInterrupt"
+    },
+    {
+      "name": "finalization-boundary-019",
+      "test_id": "NativeOwnedPostTune/BranchAutomaticConnected"
+    },
+    {
+      "name": "finalization-boundary-020",
+      "test_id": "NativeOwnedPostTune/BranchAutomaticLocal"
+    },
+    {
+      "name": "finalization-boundary-021",
+      "test_id": "NativeOwnedPostTune/BranchExternalConnected"
+    },
+    {
+      "name": "finalization-boundary-022",
+      "test_id": "NativeOwnedPostTune/BranchExternalLocal"
+    },
+    {
+      "name": "finalization-boundary-023",
+      "test_id": "NativeOwnedPostTune/BranchResetInterrupt"
+    },
+    {
+      "name": "finalization-boundary-024",
+      "test_id": "NativeFinalizationClockHandoff/ClassicAutomatic"
+    },
+    {
+      "name": "finalization-boundary-025",
+      "test_id": "NativeFinalizationClockHandoff/ClassicExternal"
+    },
+    {
+      "name": "finalization-boundary-026",
+      "test_id": "NativeFinalizationClockHandoff/BranchAutomatic"
+    }
+  ],
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 64,
+    "maximum_wall_seconds": 24000,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "leaf_wall_seconds": 900,
+    "reservation_memory_bytes": 9126805504
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 2147483648
+  }
+}
