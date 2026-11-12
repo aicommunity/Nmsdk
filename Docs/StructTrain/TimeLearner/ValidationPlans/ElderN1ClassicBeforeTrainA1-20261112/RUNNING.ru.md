@@ -1,4 +1,6 @@
-# Исходное Classic N1 обучение запущено
+# Историческое подтверждение запуска
+
+[Завершено timeout при финализации](RESULT.ru.md); learning outcome неизвестен. Ниже сохранён исходный снимок запуска.
 
 Job `s07-n1-classic-before-train-elder-a1`: подтверждены живой outer worker PID282559 и отдельный native Train unit `timelearner-3684c1d0-3d1c-44a9-8a48-81e8b35ef861.service`, PID288958, ActiveState=active/SubState=running. Исходные request/launch context/preflight/outer binding сохранены в `startup` с raw SHA/размерами. Это снимок запуска, не подтверждение завершения.
 

@@ -1,0 +1,98 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "33ee1a9b2b7bf9d2c44f7be59a21edbd782cbbe252f6b2319115fe47e1725a1e",
+      "unit": "timelearner-6e64f5cf-4f10-41aa-a2f9-120131725e7d.service",
+      "invocation_id": "ed3d6d03c22c46f6b3101306fb184fe7",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-6e64f5cf-4f10-41aa-a2f9-120131725e7d.service",
+      "initial_main_pid": 282559,
+      "initial_start_ticks": "405616203",
+      "sha256": "b1e2fbba671fde2082de19984acb84fb25a5549a49b6c3448b1ffe52c8ae2c4b"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "4294967296",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 6e64f5cf-4f10-41aa-a2f9-120131725e7d",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "ed3d6d03c22c46f6b3101306fb184fe7"
+    },
+    "memory_max": 4294967296,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "4144bae3-1ae0-47fa-8bf3-0cfbb26a6f67",
+      "job_id": "s07-n1-classic-before-train-elder-a1",
+      "owner": {
+        "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+        "executable": "/usr/bin/python3.10",
+        "pid": 282559,
+        "start_ticks": "405616203",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s07-n1-classic-before-train-elder-a1",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s07-n1-classic-before-train-elder-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/readbacks/s11-n1-before-cold4-probes8-elder-a1/worker/native-stock-cold4/result",
+          "requested_path": "/home/user/timelearner-refactor/readbacks/s11-n1-before-cold4-probes8-elder-a1/worker/native-stock-cold4/result"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/requests/n1-classic-before-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1ClassicBeforeTrainA1-20261112",
+          "requested_path": "/home/user/timelearner-refactor/requests/n1-classic-before-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1ClassicBeforeTrainA1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/requests/n1-classic-before-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1ClassicBeforeTrainA1-20261112/fixture",
+          "requested_path": "/home/user/timelearner-refactor/requests/n1-classic-before-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderN1ClassicBeforeTrainA1-20261112/fixture"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/runtime-n1-geometry-full-before-a1",
+          "requested_path": "/home/user/timelearner-refactor/runtime-n1-geometry-full-before-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/home/user/timelearner-refactor/source-n1-stock-train-finalization-a1",
+          "requested_path": "/home/user/timelearner-refactor/source-n1-stock-train-finalization-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794486392.394964,
+      "deadline": 1794488623.8700702,
+      "updated": 1794488517.9536533,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 4294967296,
+        "slots": 1
+      },
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances (Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_window_study.StockCandidateWindowStudyTest) ... FAIL
+
+======================================================================
+FAIL: test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances (Scripts.StructTrain.TimeLearner.tests.test_stock_candidate_window_study.StockCandidateWindowStudyTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/timelearner-refactor/source-n1-stock-train-finalization-a1/Scripts/StructTrain/TimeLearner/tests/test_stock_candidate_window_study.py", line 84, in test_declared_public_operation_uses_fresh_stock_model_and_original_tolerances
+    self.assertEqual(code, 0, transcript.getvalue())
+AssertionError: 2 != 0 : {"kind": "timelearner_stock_candidate_window_plan", "schema_version": 1, "jobs": {"Classic-stock-cold7-N1": "a358ea8591888dc72de0760d9bffcd1ecbdf04cc0bbea88c83fbac4602eb7c78", "Branch-stock-cold7-N1": "3be896a203398d748ff8bed7d0949c202ca3206e397829cd72ae1af95039c5f4"}, "scientific_verdict": null}
+{"execution": "failed", "reason": "stock_cold7_condition_changed", "scientific_verdict": null}
+{"kind": "timelearner_stock_candidate_window_training_result", "schema_version": 1, "case": "Classic-stock-cold7-N1", "condition_fingerprint": "3182cf1e2cddc351f64ff574fe4e675d27987e9c8850434b7e0614ed59710afb", "execution": "timeout", "validity": "unverified_execution", "package_audit": null, "physical_audit": null, "package_path": null, "classification_assessed": false, "scientific_verdict": null}
+
+
+----------------------------------------------------------------------
+Ran 1 test in 2106.913s
+
+FAILED (failures=1)
