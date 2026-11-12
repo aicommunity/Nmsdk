@@ -116,6 +116,9 @@ template<class Owner> void Boundary(Scenario scenario)
         const auto before=owner->ExportNativeLearnedState(implementation),controls=ReadNativeFinalizationControls(*owner);
         const auto lifecycle=owner->ObserveLifecycle();const double clock=environment->GetTime().GetDoubleTime();
         frozen.emplace(CaptureNativeFinalizationBoundary(*owner,implementation));saved=frozen->Document();
+        const auto capturedSummary=frozen->TrainingSummary();
+        EXPECT_EQ(capturedSummary,EncodeNativeTrainingState(owner->NativeTrainingController(),
+            frozen->Solo()["model_revision"].toString().toStdString(),owner->ReadNativeParameters()));
         const auto afterCapture=owner->ExportNativeLearnedState(implementation);
         if(const auto output=std::getenv("TIMELEARNER_EXECUTION_OUTPUT"))
         {
@@ -148,6 +151,7 @@ template<class Owner> void Boundary(Scenario scenario)
         EXPECT_EQ(owner->NativeTrainingController().State(),NativeTrainingState::Idle);
         EXPECT_FALSE(owner->AutoCalibrateFixedLTZThreshold.GetData());EXPECT_FALSE(owner->EnablePostTrainTuning.GetData());
         EXPECT_FALSE(owner->IsNeedToTrain.GetData());EXPECT_EQ(frozen->Document(),saved);
+        EXPECT_EQ(frozen->TrainingSummary(),capturedSummary); // Original solo metadata survives import/reset as immutable DATA.
         EXPECT_THROW(CaptureNativeFinalizationBoundary(*owner,implementation),std::logic_error);
         QJsonArray observations;
         for(const auto& value:job["trials"].toArray())

@@ -22,7 +22,7 @@ NativeCompositeLearnedState.cpp::CompositeSummary, ветка Summary==8, стр
 
 Проверки: существующие реальные recovery service fixtures Classic/Branch, stopped и completed boundaries, неполная последняя проба, повреждённый ledger/source/primary; semantic equality до/после оптимизации. Выполнять на указанных Linux workers. Отдельно измерить размерность не меньше67 groups/398 raw trials: wall time, peak memory и число материализаций primary. Итоговая выгрузка должна укладываться в уже объявленные300s, без увеличения времени Train ради сокрытия дефекта. Использовать production код, не копию тела функции.
 
-После адресной приёмки — один повтор исходного ограниченного scientific job с теми же математическими условиями. Пока исправление **не реализовано и не принято**. Весь план остаётся частичным.
+После адресной приёмки — один повтор исходного ограниченного scientific job с теми же математическими условиями. Исправление **подготовлено в feature-ветке; серверная приёмка ещё не выполнена**. Весь план остаётся частичным.
 
 Для адресной диагностики исходный индекс270193422 bytes сохранён: он содержит67 measurement records и primary blobs; production DATA reader независимо пересчитал их за66.82s. Это даёт готовый регрессионный корпус без повторного Train. Наличие полного measurement archive не заменяет отсутствующую финальную модель и summary/controller state. Периодичность записи этого тяжёлого индекса и доли расходов следует измерить, а не предполагать.
 
@@ -41,3 +41,11 @@ Write(execution.json, final_manifest)
 Таким образом, package уже был получен в памяти и archive index опубликован, но запись файла модели отложена до повторного тяжёлого EncodeNativeTrainingState. Этим объясняются сохранённый индекс и отсутствующая модель при SIGTERM внутри summary8.
 
 Адресный путь исправления: фабрика export формирует model+summary из одного уже проверенного boundary/archive; Console использует этот результат без второго кодирования primary. Сначала атомарно сохранять полученный package, затем остальные файлы, а положительный execution manifest — только последним. Даже если последующая запись оборвётся, отдельный package не делает весь run успешным. Сохранить standalone summary API для совместимости и проверить все его callers; не подставлять произвольный непроверенный JSON ledger. Постоянный service cache с новой схемой invalidation для этого не требуется.
+
+## Подготовленная реализация общего export boundary
+
+В рабочей feature-ветке реализованы NativeTrainingExport {learnedState,summary} и ExportNativeLearnedBoundary для обеих топологий и сохранённой/явной C0 correction. Factory protocol5 повторно использует проверенный recovery ledger для summary8; самостоятельный summary API сохраняет полную проверку. Непрерывный cache не введён.
+
+Обычный Console путь использует общую границу и сначала пишет файл модели; execution manifest остаётся последним. NativeFinalizationBoundary удерживает неизменяемую summary вне serialized document; Live/PostTune caller получает её через NativeLiveTrainingSummary без повторного кодирования и без смены исходного solo на recognition.
+
+Существующие реальные recovery fixtures переведены на общую границу и сравнивают summary с самостоятельным API, сохраняют граф/динамику и проверяют C0 explicit/owned пути. Finalization fixtures проверяют, что captured summary переживает импорт/reset без подмены. Локально выполнялась только проверка diff/кодировки; сборки/численные тесты разрешены только на серверах и пока не приняты. Большой job не перезапускается до адресной приёмки.

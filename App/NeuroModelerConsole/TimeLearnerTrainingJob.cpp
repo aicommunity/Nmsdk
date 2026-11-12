@@ -75,7 +75,9 @@ template<class Owner,class Model,class Environment> int ExecuteLive(const Job& j
         Require(service.State()==NativeTrainingState::Finished && !owner->HasNativeRecognitionState(),
             "training_source_summary_missed_before_import");
         solo=boundary["source_solo"].toObject();Require(!solo.isEmpty(),"training_live_source_missing");
-        summary=EncodeNativeTrainingState(service,solo["model_revision"].toString().toStdString(),owner->ReadNativeParameters());
+        summary=owner->NativeLiveTrainingSummary();
+        Require(!summary.isEmpty() && summary["actual_model_revision"]==solo["model_revision"],
+            "training_source_summary_boundary_mismatch");
     };
     owner->IsNeedToTrain=true;
     while(!owner->NativeLiveFinalizationDone()) {
@@ -256,12 +258,14 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
                 {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
                 {},QJsonValue(QJsonValue::Null),identity["sha256"],evidence->NativeTrials(),evidence->SampledFrames()));return 2;
         }
-        const auto package=owner->ExportNativeLearnedState(job.implementation);
-        const auto compositeArchive=PublishNativeCompositeArchive(output,package,artifacts);
+        const auto exported=owner->ExportNativeLearnedBoundary(job.implementation);
+        const auto& package=exported.learnedState;
         const QString packageName=stopped?"train_stopped_state.json":"train_learned_state.json";
-        artifacts.append(Write(output,stopped?"train_stopped_summary.json":"train_learned_summary.json",
-            EncodeNativeTrainingState(service,revision,owner->ReadNativeParameters())));
+        // Preserve the completed model if a later artifact write is interrupted.
+        // execution.json remains the final completion marker for the entire run.
         artifacts.append(Write(output,packageName,package));
+        const auto compositeArchive=PublishNativeCompositeArchive(output,package,artifacts);
+        artifacts.append(Write(output,stopped?"train_stopped_summary.json":"train_learned_summary.json",exported.summary));
         Write(output,"execution.json",WrapConfiguredNativeExecution(job.configuration,{{"kind","timelearner_native_training_execution"},{"schema_version",1},
             {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},{"attempt_id",QString::fromStdString(job.configuration.runId)},
             {"package_path",packageName},{"package_sha256",package["sha256"]},{"model_revision",package["model_revision"]},

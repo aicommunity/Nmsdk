@@ -4599,10 +4599,23 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     auto response=RecoveryBoundaryResponse(f);const auto neuron=f.owner->template GetComponentL<UNet>("Neuron",true);
     const auto dataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
     const auto neuronBefore=LivePackageComponentXml(neuron),datasetBefore=LivePackageComponentXml(dataset);
-    const auto package=f.owner->ExportNativeLearnedState(RecoveryPackageImplementation);
+    const auto exportedBoundary=f.owner->ExportNativeLearnedBoundary(RecoveryPackageImplementation);
+    const auto& package=exportedBoundary.learnedState;const auto& summary=exportedBoundary.summary;
     EXPECT_EQ(LivePackageComponentXml(neuron),neuronBefore);EXPECT_EQ(LivePackageComponentXml(dataset),datasetBefore);
     Require(package["schema_version"]==QJsonValue(7),"recovery_package_public_export_not_version7");
-    const auto summary=EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters());
+    // The public combined path must retain the standalone summary contract.
+    // Both are exercised on the same real native service, including stopped,
+    // completed, N0/N1 and heterogeneous C0 fixtures.
+    EXPECT_EQ(summary,EncodeNativeTrainingState(service,f.Revision(),f.owner->ReadNativeParameters()));
+    if(verifyCheckedArchive)EXPECT_EQ(NmsdkTests::LearnedStateComparisonView(package),
+        NmsdkTests::LearnedStateComparisonView(f.owner->ExportNativeLearnedState(RecoveryPackageImplementation)));
+    if(c0) {
+        std::string cRevision;
+        const auto correction=ParseNativeCapacitanceState(QJsonDocument(f.owner->OwnedNativeCapacitanceState()).toJson(QJsonDocument::Compact).toStdString(),cRevision);
+        const auto explicitBoundary=f.owner->ExportNativeLearnedBoundary(RecoveryPackageImplementation,correction);
+        EXPECT_EQ(explicitBoundary.summary,summary);
+        EXPECT_EQ(NmsdkTests::LearnedStateComparisonView(explicitBoundary.learnedState),NmsdkTests::LearnedStateComparisonView(package));
+    }
     EXPECT_EQ(summary["schema_version"],QJsonValue(8));EXPECT_EQ(summary["recovery_ledger"],package["recovery_ledger"]);
     SaveCompositeArchive(EncodeNativeCandidateWindowServiceArchive(service),RecoveryPackageDirectory().c_str());
     SavePortableObject(RecoveryPackageDirectory().c_str(),"source-package.json",package);
