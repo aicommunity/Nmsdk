@@ -1,0 +1,9 @@
+# Первичные данные исходного N1 Train, завершившегося timeout
+
+Пакет `Reports/StructTrain/TimeLearner/N1ClassicBeforeTimeoutPrimary-Elder-20261112` сохраняет весь закрытый job `s07-n1-classic-before-train-elder-a1`:1341 files,246301289 raw bytes. XZ13566696 bytes, SHA `1adbc055bba0cffed5ff1886019866b1bb5ae7180fd54105a597525d94fceefe`. Наблюдения, входные jobs, исходный граф, runtime/process manifests, ошибки, closure и source/fixture witnesses сохранены без пересериализации первичных байтов.
+
+Итогового model export/summary в исходном job не было. Архив не восполняет эту потерю: execution=timeout, learning outcome=null, full_model_export_available=false. [Причина и ограничения](ValidationPlans/ElderN1ClassicBeforeTrainA1-20261112/RESULT.ru.md). Нельзя оценивать такой архив как завершённое обучение или подставлять шаблонную модель в Test.
+
+Метаданные содержат613 packets:612 отмечены valid/complete и1 invalid/incomplete. Неполная запись не превращается в завершённую пробу. Зафиксировано50 разных effective-model revision hashes. Это не613 поисковых решений и не50 геометрий: hash может отличаться из-за Rs или других разрешённых параметров. Полный waveform/measurement audit этим подсчётом не выполнен; ORIGIN явно отмечает metadata_projection_only=true и primary_waveform_audit_performed=false. Для анализа отдельных наблюдений остаются исходные CSV/JSON.
+
+Git data commit `417c66e8d51fef9e538b1fc3f71cee2074c08ba9`, transfer pack13636110 bytes, SHA `be1747fb4ac9922dc43360650c61d57ddc7dd2d51bab9b06286d45afd3f26946`. Все5 извлечённых файлов проверены по ARTIFACTS. Исходный SDKRoot5ba0a2e/Pulsec10206 и controllerfd55a9936 сохранены в provenance; это архив собственного before job, без подмены controller чужого запуска. Восстановление legacy glog aliases требует явного штатного adapter; текущая scientific/native authority из сохранённых JSON не выводится.
