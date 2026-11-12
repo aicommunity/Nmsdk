@@ -4969,14 +4969,22 @@ template<class Owner> void RecordedRecoveryRoundtrip() {
         after=RecoveryBoundaryResponse(f);EXPECT_EQ(f.Revision(),source["model_revision"].toString().toStdString());
     }
     ASSERT_FALSE(before.empty());ASSERT_EQ(before.size(),after.size());
+    ASSERT_FALSE(before.front().potentials.empty());
+    std::size_t stimulusEdges=0;bool previousStimulus=false;double maximumExcursion=0.;
     for(std::size_t i=0;i<before.size();++i) {
+        ASSERT_TRUE(std::isfinite(before[i].time));ASSERT_TRUE(std::isfinite(after[i].time));
+        ASSERT_TRUE(std::isfinite(before[i].stimulus));ASSERT_TRUE(std::isfinite(after[i].stimulus));
+        const bool stimulus=before[i].stimulus>0.;if(stimulus && !previousStimulus)++stimulusEdges;previousStimulus=stimulus;
         EXPECT_NEAR(before[i].time-before.front().time,after[i].time-after.front().time,5e-10);
         EXPECT_DOUBLE_EQ(before[i].stimulus,after[i].stimulus);ASSERT_EQ(before[i].potentials.size(),after[i].potentials.size());
+        ASSERT_EQ(before[i].potentials.size(),before.front().potentials.size());
         for(std::size_t j=0;j<before[i].potentials.size();++j) {
             ASSERT_TRUE(std::isfinite(before[i].potentials[j]));ASSERT_TRUE(std::isfinite(after[i].potentials[j]));
+            maximumExcursion=std::max(maximumExcursion,std::abs(before[i].potentials[j]-before.front().potentials[j]));
             EXPECT_NEAR(before[i].potentials[j],after[i].potentials[j],1e-12);
         }
     }
+    EXPECT_EQ(stimulusEdges,4u);EXPECT_GT(maximumExcursion,1e-6);
     const char* output=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT");Require(output && *output,"recorded_model_output_missing");
     const auto directory=QDir(QString::fromLocal8Bit(output)).filePath(QString::fromStdString(RecoveryPackageDirectory()));
     Require(QDir().mkpath(directory),"recorded_model_output_directory");
@@ -4990,6 +4998,7 @@ template<class Owner> void RecordedRecoveryRoundtrip() {
         {"summary_seconds",summarySeconds},{"second_import_seconds",secondImport},
         {"model_revision",source["model_revision"]},{"training_outcome",source["training_outcome"]},
         {"source_package_sha256",source["sha256"]},{"exported_package_sha256",exported["sha256"]},
+        {"actual_stimulus_edges",double(stimulusEdges)},{"maximum_soma_excursion",maximumExcursion},
         {"exported_raw_bytes",double(raw.size())},{"exported_raw_sha256",QString::fromLatin1(QCryptographicHash::hash(raw,QCryptographicHash::Sha256).toHex())},
         {"cold_training_replayed",false},{"controller_checkpoint_restored",false},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
 }

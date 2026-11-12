@@ -166,6 +166,25 @@ def verify_namespace(source, expected):
     return closure,actual
 
 
+def capture_sdk_modules(source, namespace):
+    """Bind the actual import closure to declared Git bytes, never a fixed count."""
+    _,require,_=_api();source=Path(source);loaded={}
+    for name,module in tuple(sys.modules.items()):
+        if not name.startswith('Scripts.') or not getattr(module,'__file__',None):continue
+        path=Path(module.__file__).resolve(strict=True)
+        require(path.is_relative_to(source),'canonical_child_Tool_SDK_namespace_mix')
+        relative=path.relative_to(source).as_posix();data=path.read_bytes()
+        require(relative in namespace and _hash(data)==namespace[relative]['sha256'],
+                'canonical_child_module_changed')
+        expected=(relative[:-len('/__init__.py')] if relative.endswith('/__init__.py')
+                  else relative[:-3] if relative.endswith('.py') else '')
+        require(expected and name==expected.replace('/','.'),'canonical_child_module_name_path_changed')
+        loaded[name]={'path':str(path),'sha256':_hash(data),'git_blob':namespace[relative]['git_blob']}
+    required={'Scripts.StructTrain.TimeLearner.'+name for name in MODULES}
+    require(required<=set(loaded),'canonical_required_SDK_module_missing')
+    return loaded
+
+
 def _child(plan_path, source, commit, plan_digest):
     if __package__ not in (None,'') or any(n=='Scripts' or n.startswith('Scripts.') for n in sys.modules):
         raise ValueError('canonical_child_not_clean_file_bootstrap')
@@ -178,16 +197,7 @@ def _child(plan_path, source, commit, plan_digest):
     require(state['source']==source and plan['source']['commit']==commit,'canonical_child_source_binding')
     closure,namespace=verify_namespace(source,state['namespace'])
     require(closure['root']['head']==commit,'canonical_child_source_head')
-    loaded={}
-    for name,module in tuple(sys.modules.items()):
-        if not name.startswith('Scripts.') or not getattr(module,'__file__',None):continue
-        path=Path(module.__file__).resolve(strict=True)
-        require(path.is_relative_to(source),'canonical_child_Tool_SDK_namespace_mix')
-        relative=path.relative_to(source).as_posix();data=path.read_bytes()
-        require(relative in namespace and _hash(data)==namespace[relative]['sha256'],
-                'canonical_child_module_changed')
-        loaded[name]={'path':str(path),'sha256':_hash(data),'git_blob':namespace[relative]['git_blob']}
-    require(len(loaded)==29,'canonical_SDK_module_inventory_changed')
+    loaded=capture_sdk_modules(source,namespace)
     claims=[{'binding_path':p,'binding':value} for p,value,_ in state['prior']]
     originals={p:raw for p,_,raw in state['prior']}
     args=['--job',str(state['controller']/'inputs/job.json')]
@@ -197,9 +207,14 @@ def _child(plan_path, source, commit, plan_digest):
     canonical=modules['native_preparation'].serialize_preparation(spec)
     ids=modules['native_acceptance_worker'].validate_job(state['job'],spec,args)
     require(runtime.source_closure(source)==closure,'canonical_source_changed_during_child')
+    # Include imports performed lazily by the real preparation/validation APIs.
+    # Required roots and every consumed file still need exact declared Git bytes.
+    final_loaded=capture_sdk_modules(source,namespace)
+    require(all(final_loaded.get(name)==row for name,row in loaded.items()),
+            'canonical_SDK_module_changed_during_preparation')
     return {'kind':'timelearner_native_canonical_child_result','schema_version':1,
         'canonical_utf8':canonical.decode('utf-8'),'native_job_utf8':state['jobraw'].decode('utf-8'),
-        'source_closure':closure,'namespace':namespace,'SDK_modules':loaded,'selected_ids':ids,
+        'source_closure':closure,'namespace':namespace,'SDK_modules':final_loaded,'selected_ids':ids,
         'configure_arguments':state['configure'],'actor':{'path':str(Path(__file__).resolve()),
         'sha256':_hash(Path(__file__).read_bytes()),'Scripts_namespace_owner':str(source)},
         'compiled_or_tests_or_models':False,'scientific_verdict':None}

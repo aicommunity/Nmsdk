@@ -12,6 +12,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import shutil
 
 from .. import native_canonical_preparation as subject
 from .. import owned_python_job
@@ -182,7 +183,8 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
     def test_independent_actual_SDK_child_uses_stock_preparation_and_raw_bytes(self):
         result=self.child();self.assertEqual(result.returncode,0,result.stderr.decode('utf-8'))
         observed=json.loads(result.stdout);spec=json.loads(observed['canonical_utf8'])
-        self.assertEqual(len(observed['SDK_modules']),29)
+        self.assertTrue({'Scripts.StructTrain.TimeLearner.'+n for n in subject.MODULES}
+                        <= set(observed['SDK_modules']))
         self.assertTrue(all(Path(r['path']).is_relative_to(self.sdk) for r in observed['SDK_modules'].values()))
         self.assertEqual(observed['actor']['path'],str(Path(subject.__file__).resolve()))
         self.assertEqual(observed['native_job_utf8'].encode('utf-8'),(self.controls/'job.json').read_bytes())
@@ -190,6 +192,54 @@ class NativeCanonicalPreparationTest(unittest.TestCase):
         self.assertEqual(observed['selected_ids'],['Suite/First','Suite/Second'])
         self.assertFalse(observed['compiled_or_tests_or_models']);self.assertIsNone(observed['scientific_verdict'])
         self.assertFalse(self.external.exists());self.assertFalse(self.controller.exists())
+
+    def extra_module_sdk(self, mode):
+        # A separate real Git fixture, so the shared source and other cases stay
+        # untouched. Whole production Scripts still execute in the clean child.
+        sdk=self.case/'extended-sdk';shutil.copytree(self.sdk,sdk)
+        self.sdk=sdk
+        package=sdk/'Scripts/StructTrain/TimeLearner'
+        extra=package/'closure_fixture_extra.py';extra.write_bytes(b'VALUE = "metadata only"\n')
+        if mode=='valid':
+            addition='\nfrom . import closure_fixture_extra\n'
+        else:
+            outside=self.case/'outside.py';outside.write_bytes(b'# outside SDK\n')
+            alias='Scripts.StructTrain.TimeLearner.closure_fixture_alias'
+            path=str(outside if mode=='foreign' else extra)
+            addition=('\nimport sys as _s, types as _t\n_m=_t.ModuleType('+repr(alias)+')\n'
+                      '_m.__file__='+repr(path)+'\n_s.modules['+repr(alias)+']=_m\n')
+        init=package/'__init__.py';init.write_bytes(init.read_bytes()+addition.encode())
+        self.git(sdk,'add','Scripts');self.git(sdk,'commit','--quiet','-m','Extra metadata import fixture')
+        self.commit=self.git(sdk,'rev-parse','HEAD').decode().strip()
+        namespace=copy.deepcopy(self.namespace)
+        for path in [init,extra]:
+            relative=path.relative_to(sdk).as_posix();raw=path.read_bytes()
+            oid=self.git(sdk,'rev-parse','HEAD:'+relative).decode().strip()
+            namespace[relative]={'git_mode':'100644','git_blob':oid,'bytes':len(raw),'sha256':digest(raw)}
+        self.plan['source']={'path':str(sdk),'commit':self.commit,
+                             'namespace':self.binding('extended-namespace.json',namespace)}
+        self.job['paths']['source']=str(sdk)
+        self.plan['native_job']=self.binding('extended-job.json',self.job)
+
+    def test_extra_Git_bound_import_is_inventoried_without_magic_count(self):
+        self.extra_module_sdk('valid');result=self.child()
+        self.assertEqual(result.returncode,0,result.stderr.decode())
+        modules=json.loads(result.stdout)['SDK_modules']
+        self.assertIn('Scripts.StructTrain.TimeLearner.closure_fixture_extra',modules)
+        self.assertTrue(all(Path(row['path']).is_relative_to(self.sdk) for row in modules.values()))
+        self.assertFalse(self.external.exists())
+
+    def test_extra_import_from_foreign_Tool_path_is_rejected(self):
+        self.extra_module_sdk('foreign');result=self.child()
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn(b'canonical_child_Tool_SDK_namespace_mix',result.stderr)
+        self.assertFalse(self.external.exists())
+
+    def test_alias_name_cannot_impersonate_a_different_bound_module(self):
+        self.extra_module_sdk('alias');result=self.child()
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn(b'canonical_child_module_name_path_changed',result.stderr)
+        self.assertFalse(self.external.exists())
 
     def test_wrong_actual_child_head_refuses_without_canonical_sideeffects(self):
         result=self.child(commit='a'*40);self.assertNotEqual(result.returncode,0)
