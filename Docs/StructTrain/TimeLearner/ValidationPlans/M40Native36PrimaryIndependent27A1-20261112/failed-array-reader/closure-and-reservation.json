@@ -1,0 +1,98 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "07707baaf9706374e82c56592d04b283e7d429931ef30708a2aa78d6d74fb7de",
+      "unit": "timelearner-69d2d569-434e-4f0f-814a-641ee2666a62.service",
+      "invocation_id": "ed4db21df4ec465fb2864a6a703ebf4d",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-69d2d569-434e-4f0f-814a-641ee2666a62.service",
+      "initial_main_pid": 4040048,
+      "initial_start_ticks": "354172196",
+      "sha256": "024456248a30bb9f6fd9cf5b4995aacbb7d75086e9282a766fd5c23ed101aa21"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "2147483648",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 69d2d569-434e-4f0f-814a-641ee2666a62",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "ed4db21df4ec465fb2864a6a703ebf4d"
+    },
+    "memory_max": 2147483648,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "73dcd2a5-5b89-4551-95cf-7a09bc466041",
+      "job_id": "s08-native36-primary-independent27-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 4040048,
+        "start_ticks": "354172196",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-native36-primary-independent27-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-native36-primary-independent27-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/native36-primary-independent27-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Native36PrimaryIndependent27A1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/native36-primary-independent27-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40Native36PrimaryIndependent27A1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native32-independent-a1/Reports/StructTrain/TimeLearner/RecoveryConsole32NativeClosedCorpus-Elder-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native32-independent-a1/Reports/StructTrain/TimeLearner/RecoveryConsole32NativeClosedCorpus-Elder-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native32-independent-a1/Reports/StructTrain/TimeLearner/RecoveryConsole32NativeClosedCorpus-M40-20261111",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native32-independent-a1/Reports/StructTrain/TimeLearner/RecoveryConsole32NativeClosedCorpus-M40-20261111"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native36-primary-independent-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native36-primary-independent-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-native36-primary-independent-a1/Reports/StructTrain/TimeLearner/RecordedSdk36Primary-M40-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-native36-primary-independent-a1/Reports/StructTrain/TimeLearner/RecordedSdk36Primary-M40-20261112"
+        }
+      ],
+      "state": "released",
+      "created": 1794466524.4905477,
+      "deadline": 1794467294.8016722,
+      "updated": 1794467182.697512,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
