@@ -1,6 +1,6 @@
 # Диагностика двух полных N4 моделей на восьми паттернах
 
-Декларация подготовлена; запуск допускается после acceptance28 controller/decoder checks. Source Tool `742bc6618f47054e9db72b91be6b0b3e27c15cd2`, Console SDK `448b153f2fea3486ff40f3a626b8f1110b9e3ee2`, Pulse7b524b8. Runtime создан production `runtime.snapshot` из готовой изолированной сборки; binary/loader/source hashes закреплены manifest, без новой сборки или подмены executable.
+Декларация зафиксирована; [28/28 controller/decoder checks](../M40RecordedDiagnosticDeclaration28A1-20261112/RESULT.ru.md) приняты. [Задание запущено](RUNNING.ru.md), его конечная приёмка пока не завершена. Source Tool `742bc6618f47054e9db72b91be6b0b3e27c15cd2`, Console SDK `448b153f2fea3486ff40f3a626b8f1110b9e3ee2`, Pulse7b524b8. Runtime создан production `runtime.snapshot` из готовой изолированной сборки; binary/loader/source hashes закреплены manifest, без новой сборки или подмены executable.
 
 Полные source models берутся из Git-derived qCompress cache, raw size/SHA закреплены. Они уже прошли actual native2 roundtrip и independent composition5/5. Classic model35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263 остановлен invalid_observation; Branch efc6bacd25770cb3ccde41b952b2e09638296e401be88e2b6f5f7bd3548e9ecd — budget_exhausted. Certificate null. Транспортные summary8 — readout после roundtrip того же canonical package, а не поддельные результаты старого Train.
 
