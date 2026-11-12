@@ -18,3 +18,5 @@ Learning outcome `invalid_observation`, reason `composite_train_assignment_missi
 [Сопоставление с M40](comparison-to-M40.json): source input job и исходный граф совпадают; все108 CSV нового холодного запуска на Elder побайтно совпали с исходным M40 запуском. Нативные JSON/package bytes не объявляются одинаковыми. Совпавшие трассы позволяют использовать [ранее построенные временные графики](../../ClassicWindowTemporal-20261111.ru.md), сохраняя раздельное provenance двух запусков. Это детерминированное воспроизведение на другом worker, не независимые случайные обучения.
 
 [Before завершился timeout без полного пакета](../ElderN1ClassicBeforeTrainA1-20261112/RESULT.ru.md). Поэтому данный after не закрывает полное физическое A/B и не доказывает улучшение классификации. [Читаемый алгоритмический разбор](../../N1ClassicScientificOutcome-20261112.ru.md).
+
+[Полная новая stopped model и все первичные наблюдения](../../N1AfterPrimaryPublication-20261112.ru.md) сохранены отдельно в Git:463 members,10.3MB XZ. Совпавшие CSV не используются для подмены новых controller/runtime/model package файлов прежним corpus.

@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "current-full-domain-cold8-m40-a2",
+  "package_fingerprint": "37cdb645c147db532124704b8cedd73102a7aba26d2ec0b992e28fcd62d39389",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_characterization"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold_characterization.StockColdCharacterizationTest.test_public_cold_stock_assigned_probes_preserve_actual_graph_and_primary"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD_PROBE_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "60a5161be71879c2b1efeab3eed5594571877c9e588f834dc16cbb23ac5d3767"
+    },
+    "TIMELEARNER_STOCK_COLD_NATIVE_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "0a1e516d95340d54b2f6ed4d963fea9b5bee2cc81c03cb76469a41ea63fde73f"
+    },
+    "TIMELEARNER_STOCK_COLD_NATIVE_INI": {
+      "pattern": "NeuroModelerConsole.ini",
+      "files": 1,
+      "fingerprint": "b6bb0f8178de9b7fb3df914b4e3408322394d21ff5036973bc45c57b1b264a79"
+    }
+  }
+}
