@@ -1,0 +1,30 @@
+setUpClass (Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixPrimaryTest) ... ERROR
+
+======================================================================
+ERROR: setUpClass (Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixPrimaryTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 35, in plotting_runtime
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1/Scripts/StructTrain/TimeLearner/tests/test_recorded_diagnostic_matrix.py", line 81, in setUpClass
+    cls.result = report_matrix(cls.primary, cls.controller, cls.runtime, cls.output)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1/Scripts/StructTrain/TimeLearner/recorded_diagnostic_matrix.py", line 196, in report_matrix
+    value = render_pipeline_run(directory/row['name']/'run-manifest.json', output/row['name'])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1/Scripts/StructTrain/TimeLearner/live_pipeline_reports.py", line 66, in render_pipeline_run
+    runtime = plotting_runtime();output.mkdir(parents=True, exist_ok=False)
+              ^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 40, in plotting_runtime
+    raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: plotting_runtime_unavailable:No module named 'matplotlib'
+
+----------------------------------------------------------------------
+Ran 0 tests in 1624.835s
+
+FAILED (errors=1)

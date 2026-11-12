@@ -1,0 +1,103 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "fe8199a59c1ddedf3b6822fe0853fa7ec1b460f0f97231a9867a4fe111c4899a",
+      "unit": "timelearner-f94bb0dd-d43f-44af-9aa5-efdaed580f79.service",
+      "invocation_id": "05e78845fa4d4044a8015b9fad14a3d5",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-f94bb0dd-d43f-44af-9aa5-efdaed580f79.service",
+      "initial_main_pid": 348108,
+      "initial_start_ticks": "355337664",
+      "sha256": "60de0719c7c51cb1f2e14ed1ec0172d3acd29d24ae01b2dabaacb5b207070f90"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "6442450944",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt f94bb0dd-d43f-44af-9aa5-efdaed580f79",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "05e78845fa4d4044a8015b9fad14a3d5"
+    },
+    "memory_max": 6442450944,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "c2f2d1be-2bf6-4aab-9141-eca0a26e7fba",
+      "job_id": "s11-recorded-matrix-primary2-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 348108,
+        "start_ticks": "355337664",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-matrix-primary2-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-matrix-primary2-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2-controller",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2-controller"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2/native-inputs",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2/native-inputs"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-matrix-primary2-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedMatrixPrimary2A1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-matrix-primary2-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedMatrixPrimary2A1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-diagnostic-runtime-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-diagnostic-runtime-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-primary2-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794478179.164804,
+      "deadline": 1794479960.295946,
+      "updated": 1794479850.5672767,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

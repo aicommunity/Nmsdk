@@ -1,3 +1,5 @@
+> Исторический startup. Задание завершено отказом plotting runtime; [результат](RESULT.ru.md).
+
 # Независимое чтение и галерея запущены
 
 Job `s11-recorded-matrix-primary2-m40-a1`, source `557decacf65bb5f13af43cb5195093e890360411`, controller Tool40e28802. Supervisor PID345224; проверен реальный main PID348108, unit `timelearner-f94bb0dd-d43f-44af-9aa5-efdaed580f79.service`, invocation `05e78845fa4d4044a8015b9fad14a3d5`, active/running. Это Python DATA replay и рендеринг, без нового Train или изменения моделей.
