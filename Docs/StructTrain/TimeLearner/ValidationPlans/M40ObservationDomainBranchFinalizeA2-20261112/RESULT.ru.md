@@ -30,7 +30,8 @@ amp abs1e-5. Нулевой recovery_count не доказывает эффек�
 
 Outer completed за3181.215s, diagnostics clear; [whole group closed/lease released](completed/closure-and-reservation.json),
 heartbeat_errors отсутствуют. Actor/source/fixtures snapshots совпали.
-[Точные readbacks](completed/readback-integrity.json). Требуется публикация
-полного компактного primary и temporal отчёт. Ordinary Test/calibration не
+[Точные readbacks](completed/readback-integrity.json). [Полный compact primary опубликован](../M40ObservationDomainBranchClosedCorpusA3-20261112/RESULT.ru.md),
+[независимый DATA replay принят2/2](../M40ObservationDomainPrimaryIndependentA1-20261112/RESULT.ru.md).
+Temporal отчёт ещё нужен. Ordinary Test/calibration не
 запускались; допустим только отдельно объявленный diagnostic evaluation либо
 дальнейшее явно маркированное обучение. Полный план остаётся активным.

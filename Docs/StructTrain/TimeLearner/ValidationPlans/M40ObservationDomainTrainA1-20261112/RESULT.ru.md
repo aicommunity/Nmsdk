@@ -35,6 +35,7 @@ Test как обученной модели. [Точный разбор](../../O
 Whole cohort закрыт; [controller/leases](completed/closure-and-reservation.json)
 фиксируют released, heartbeat_errors отсутствуют. Снимки actor/source/fixtures
 до и после побайтно совпали. [SHA256 raw readbacks](completed/readback-integrity.json).
-Полные первичные данные/модель ещё должны быть опубликованы компактным corpus;
+Полные первичные данные/модель [опубликованы компактным corpus](../M40ObservationDomainCombinedClosedCorpusA3-20261112/RESULT.ru.md),
+[независимый DATA replay принят2/2](../M40ObservationDomainPrimaryIndependentA1-20261112/RESULT.ru.md);
 подробный temporal разбор ambiguous остаётся отдельным обязательным шагом.
 Test, калибровка и classification verdict не выполнялись. Этапы1–12 не закрыты.
