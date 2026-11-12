@@ -120,6 +120,19 @@ class RecordedN4RoundtripPrimaryTest(unittest.TestCase):
         self.assertEqual(edges, 4);self.assertEqual(phase['actual_stimulus_edges'], edges)
         self.assertGreater(excursion, 1e-6)
         self.assertAlmostEqual(phase['maximum_soma_excursion'], excursion, delta=1e-12)
+        # Audit the retained producer input too. Phase metadata alone cannot
+        # prove that the exported model corresponds to the original model.
+        del package, summary, audit
+        original_bytes, original_sha = {
+            'classic': (175521654, '6107b4b0762ae2d5247bc2356a8fb533d872af2f0aafeb972783aeb85555a078'),
+            'branch': (192607805, 'd10368eb17016819387daf4ee614bddffda46dbe774c440109fa741e222308d9'),
+        }[role]
+        source = read_qcompress(self.restored/f'native/{role}/native-inputs/{role}-recorded-model.qz',
+            expected_bytes=original_bytes, expected_sha256=original_sha)
+        original_audit = audit_candidate_window_recovery_package(source)
+        self.assertEqual(original_audit['model_revision'], revision)
+        self.assertEqual(original_audit['training_outcome'], outcome)
+        self.assertEqual(source['sha256'], phase['exported_package_sha256'])
 
     def test_classic_full_model_archive_summary_and_response(self):
         self.audit_case('classic', 'invalid_observation',
