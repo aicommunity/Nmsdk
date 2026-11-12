@@ -1,0 +1,5 @@
+# Два положительных lifecycle controls:actual PASS
+
+ClassicAutomaticFixed и BranchAutomaticFixed завершились completed/valid/passed2/2. Outer и два child groups closed, heartbeat errors нет. Новая начальная геометрияL8/1, окно0.30s; прежние Rs/Ns, физика, ISI и допуски. Проверки из исходного C++ тела не ослаблялись: fresh native Train до completed boundary, queued handoff, installed recognition, штатный PostTune и frozen probes. Это положительный lifecycle control уже близкой к синхронности исходной модели; не демонстрация поиска длины, научного обучения N4 или независимой классификации.
+
+Исходный L2..3 candidate остаётся failed и сохраняется отдельным negative control; исходные результаты не перезаписаны. Raw подтверждения текущих двух controls и compact archive будут сохранены отдельно; полный52-case acceptance ещё отсутствует, остаются23 IDs и независимый Elder. Поле actual_native_positive_validated=false в immutable DATA manifest относится к моменту генерации; actual execution оценивается этим новым отчётом, исходный manifest не переписывается.
