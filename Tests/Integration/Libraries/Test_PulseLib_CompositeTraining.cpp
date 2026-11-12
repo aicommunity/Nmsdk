@@ -4535,9 +4535,10 @@ void SaveRecoveryResponse(const char* name,const std::vector<NativeProbeSample>&
     SavePortableObject(RecoveryPackageDirectory().c_str(),name,{{"kind","native_boundary_response_fixture"},{"schema_version",1},
         {"routing","native_burst_active_input0"},{"relative_time_stimulus_potentials",rows},{"scientific_verdict",QJsonValue(QJsonValue::Null)}});
 }
-template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bool n1=false,bool completed=false,bool c0=false) {
-    static std::map<std::tuple<bool,bool,bool>,RecoveryPackageFixtureData> cache;
-    const auto key=std::make_tuple(n1,completed,c0);const auto found=cache.find(key);if(found!=cache.end())return found->second;
+template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bool n1=false,bool completed=false,bool c0=false,
+    bool verifyCheckedArchive=false) {
+    static std::map<std::tuple<bool,bool,bool,bool>,RecoveryPackageFixtureData> cache;
+    const auto key=std::make_tuple(n1,completed,c0,verifyCheckedArchive);const auto found=cache.find(key);if(found!=cache.end())return found->second;
     NativeCompositeFixture<Owner> f(2000,false,64,false,!n1);auto c=ActualCold7Declaration(f);
     c.search.invalidMeasurementRecovery=InvalidMeasurementRecovery::AdvanceRejectedCandidateWindow;
     c.search.maximumInvalidObservations=2;c.search.maximumProbes=32;c.search.maximumEdits=8;
@@ -4566,6 +4567,35 @@ template<class Owner> const RecoveryPackageFixtureData& ActualRecoveryPackage(bo
     Require(service.State()==NativeTrainingState::Finished,"recovery_package_boundary_not_finished");
     Require(bool(service.Certificate())==completed,"recovery_package_unexpected_certificate");
     Require(service.CandidateWindowRecoveryDeliveries().empty()==completed,"recovery_package_event_fixture_not_reached");
+    if(verifyCheckedArchive) {
+        const auto neuron=f.owner->template GetComponentL<UNet>("Neuron",true);
+        const auto dataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
+        const auto neuronBefore=LivePackageComponentXml(neuron),datasetBefore=LivePackageComponentXml(dataset);
+        auto checked=EncodeAndValidateNativeCandidateWindowServiceArchive(service);
+        const auto legacy=EncodeNativeCandidateWindowServiceArchive(service);
+        EXPECT_EQ(QJsonDocument(checked.first.document).toJson(QJsonDocument::Compact),
+            QJsonDocument(legacy.document).toJson(QJsonDocument::Compact));
+        EXPECT_EQ(checked.first.primary,legacy.primary);
+        EXPECT_EQ(checked.second.Document(),checked.first.document);
+        const auto independent=DecodeNativeCompositeTrainingArchive(checked.first.document,
+            [&](const QString& name){return checked.first.primary.at(name);});
+        EXPECT_EQ(independent.Document(),checked.second.Document());
+        Require(!checked.first.primary.empty(),"validated_archive_export_missing_real_primary");
+        const auto badPath=checked.first.primary.begin()->first;
+        EXPECT_THROW(DecodeNativeCompositeTrainingArchive(checked.first.document,[&](const QString& name){
+            auto bytes=checked.first.primary.at(name);if(name==badPath)bytes.append("changed");return bytes;
+        }),std::invalid_argument);
+        auto changed=checked.first.document;changed["source_origin"]=QString(64,QLatin1Char('0'));
+        changed.remove("artifact_document_sha256");changed["artifact_document_sha256"]=NmsdkTools::CanonicalModelDataSha256(changed);
+        EXPECT_THROW(DecodeNativeCompositeTrainingArchive(changed),std::invalid_argument);
+        const auto proof=CandidateWindowPortableTrainingProof::Replay(std::move(checked.second),
+            service.Plan().search.tolerances,f.Revision(),service.ModelEpoch());
+        EXPECT_EQ(bool(proof.References()),bool(service.References()));
+        if(service.References())EXPECT_EQ(proof.References()->Inputs(),service.References()->Inputs());
+        if(service.Certificate())EXPECT_NO_THROW(proof.RequireCertificate(EncodeTrainingCertificate(*service.Certificate())));
+        EXPECT_EQ(LivePackageComponentXml(neuron),neuronBefore);EXPECT_EQ(LivePackageComponentXml(dataset),datasetBefore);
+        EXPECT_EQ(service.State(),NativeTrainingState::Finished);
+    }
     auto response=RecoveryBoundaryResponse(f);const auto neuron=f.owner->template GetComponentL<UNet>("Neuron",true);
     const auto dataset=f.owner->template GetComponentL<UNet>("DatasetMatrix",true);
     const auto neuronBefore=LivePackageComponentXml(neuron),datasetBefore=LivePackageComponentXml(dataset);
@@ -4800,6 +4830,19 @@ TEST(NativeRecoveryRecognition7,ClassicStoppedN1DiagnosticTargetAndFoil){Recover
 TEST(NativeRecoveryRecognition7,BranchStoppedN1ScaledDiagnosticTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(true,false);}
 TEST(NativeRecoveryRecognition7,ClassicAsymmetricC0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearner>(false,true,true);}
 TEST(NativeRecoveryRecognition7,BranchAsymmetricC0FrozenTargetAndFoil){RecoveryRecognition<NNeuronTimeLearnerBranch>(false,true,true);}
+
+TEST(NativeValidatedArchiveExport,ClassicStoppedSameBytesAndIndependentReplay) {
+    (void)ActualRecoveryPackage<NNeuronTimeLearner>(false,false,false,true);
+}
+TEST(NativeValidatedArchiveExport,BranchStoppedSameBytesAndIndependentReplay) {
+    (void)ActualRecoveryPackage<NNeuronTimeLearnerBranch>(false,false,false,true);
+}
+TEST(NativeValidatedArchiveExport,ClassicCompletedSameBytesAndIndependentReplay) {
+    (void)ActualRecoveryPackage<NNeuronTimeLearner>(false,true,false,true);
+}
+TEST(NativeValidatedArchiveExport,BranchCompletedSameBytesAndIndependentReplay) {
+    (void)ActualRecoveryPackage<NNeuronTimeLearnerBranch>(false,true,false,true);
+}
 
 namespace {
 template<class Owner> void RecoveryConsoleArtifact(bool completed) {
