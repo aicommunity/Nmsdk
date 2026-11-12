@@ -11,11 +11,28 @@ namespace NmsdkWorker {
 // Portable groups are written from the exact production package. The embedded
 // primary remains mandatory; external files are an independently hash-bound
 // mirror, not regenerated traces or a substitute for missing native closure.
-inline QJsonValue PublishNativeCompositeArchive(const QString& output,const QJsonObject& package,QJsonArray& artifacts) {
+class NativeCompositePublication {
+public:
+    const QJsonValue& Descriptor() const { return descriptor_; }
+    std::size_t RecoveryDeliveries(const QJsonObject& package,const QJsonValue& descriptor) const {
+        // Owning JSON values cannot be substituted by a rehashed package or
+        // descriptor after the publication has validated their complete DATA.
+        Require(package==package_ && descriptor==descriptor_,"recovery_execution_publication_changed");
+        return recoveryDeliveries_;
+    }
+private:
+    NativeCompositePublication(QJsonObject package,QJsonValue descriptor,std::size_t count)
+        :package_(std::move(package)),descriptor_(std::move(descriptor)),recoveryDeliveries_(count){}
+    friend NativeCompositePublication PublishCheckedNativeCompositeArchive(const QString&,const QJsonObject&,QJsonArray&);
+    QJsonObject package_;
+    QJsonValue descriptor_;
+    std::size_t recoveryDeliveries_=0;
+};
+inline NativeCompositePublication PublishCheckedNativeCompositeArchive(const QString& output,const QJsonObject& package,QJsonArray& artifacts) {
     const auto schema=package.value("schema_version");
     if(schema!=QJsonValue(5) && schema!=QJsonValue(6) && schema!=QJsonValue(7)) {
         Require(schema==QJsonValue(1) || schema==QJsonValue(2) || schema==QJsonValue(3) || schema==QJsonValue(4),
-            "unsupported_composite_publication_package_schema");return QJsonValue(QJsonValue::Null);
+            "unsupported_composite_publication_package_schema");return NativeCompositePublication(package,QJsonValue(QJsonValue::Null),0);
     }
     const auto archive=Object(package["measurement_archive"]);const auto decoded=NMSDK::TimeLearner::DecodeNativeCompositeTrainingArchive(archive);
     Require(archive.value("schema_version")==QJsonValue(schema==QJsonValue(5)?1:2) &&
@@ -23,9 +40,10 @@ inline QJsonValue PublishNativeCompositeArchive(const QString& output,const QJso
         NMSDK::TimeLearner::EncodeVerificationProtocol(decoded.Protocol())==Object(package["protocol"]),"composite_publication_version_binding");
     auto body=package;body.remove("sha256");Require(package.value("sha256")==QJsonValue(NmsdkTools::CanonicalModelDataSha256(body)),
         "composite_publication_package_digest");
+    std::size_t recoveryDeliveries=0;
     if(schema==QJsonValue(7)) {
         const auto ledger=Object(package["recovery_ledger"]);
-        NMSDK::TimeLearner::DecodeCandidateWindowRecoveryLedger(ledger,decoded);
+        recoveryDeliveries=NMSDK::TimeLearner::DecodeCandidateWindowRecoveryLedger(ledger,decoded).size();
         Require(Object(Object(package["neuron"])["metadata"]).value("recovery_ledger_sha256")==ledger.value("sha256"),
             "recovery_publication_physical_archive_binding");
     }
@@ -43,7 +61,10 @@ inline QJsonValue PublishNativeCompositeArchive(const QString& output,const QJso
             artifacts.append(actual);
         }
     }
-    const auto index=Write(output,"composite-measurements/index.json",archive);artifacts.append(index);return index;
+    const auto index=Write(output,"composite-measurements/index.json",archive);artifacts.append(index);return NativeCompositePublication(package,index,recoveryDeliveries);
+}
+inline QJsonValue PublishNativeCompositeArchive(const QString& output,const QJsonObject& package,QJsonArray& artifacts) {
+    return PublishCheckedNativeCompositeArchive(output,package,artifacts).Descriptor();
 }
 inline QJsonObject WrapNativeCompositeExecution(bool composite,QJsonObject base,const QJsonObject& package,const QJsonValue& archive,
     const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false) {
@@ -68,7 +89,7 @@ inline QJsonObject WrapNativeCompositeExecution(bool composite,QJsonObject base,
 
 // Explicit new wrapper. Old execution3 remains above with its original wire.
 inline QJsonObject WrapNativeCandidateWindowFamilyExecution(QJsonObject base,const QJsonObject& package,const QJsonValue& archive,
-    const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight,bool recovery) {
+    const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight,bool recovery,const NativeCompositePublication* publication=nullptr) {
     Require(rawTrials<=9007199254740991ULL && sampledFrames<=9007199254740991ULL,"candidate_window_execution_inexact_counter");
     Require(!preflight || package.isEmpty(),"candidate_window_preflight_has_package");
     const QJsonValue baseSchema=base.value("schema_version");
@@ -100,11 +121,15 @@ inline QJsonObject WrapNativeCandidateWindowFamilyExecution(QJsonObject base,con
         base["recovery_delivery_count"]=QJsonValue(QJsonValue::Null);
         if(!package.isEmpty()) {
             const auto ledger=Object(package["recovery_ledger"]);
-            const auto decoded=NMSDK::TimeLearner::DecodeNativeCompositeTrainingArchive(Object(package["measurement_archive"]));
-            const auto deliveries=NMSDK::TimeLearner::DecodeCandidateWindowRecoveryLedger(ledger,decoded);
+            const auto count=[&]() -> std::size_t {
+                if(publication)return publication->RecoveryDeliveries(package,archive);
+                // Independent callers retain the full DATA replay path.
+                const auto decoded=NMSDK::TimeLearner::DecodeNativeCompositeTrainingArchive(Object(package["measurement_archive"]));
+                return NMSDK::TimeLearner::DecodeCandidateWindowRecoveryLedger(ledger,decoded).size();
+            }();
             Require(Object(Object(package["neuron"])["metadata"]).value("recovery_ledger_sha256")==ledger.value("sha256"),
                 "recovery_execution_physical_archive_binding");
-            base["recovery_ledger_sha256"]=ledger.value("sha256");base["recovery_delivery_count"]=double(deliveries.size());
+            base["recovery_ledger_sha256"]=ledger.value("sha256");base["recovery_delivery_count"]=double(count);
         }
     }
     return Signed(base);
@@ -114,13 +139,13 @@ inline QJsonObject WrapNativeCandidateWindowExecution(QJsonObject base,const QJs
     return WrapNativeCandidateWindowFamilyExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,false);
 }
 inline QJsonObject WrapNativeRecoveryCandidateWindowExecution(QJsonObject base,const QJsonObject& package,const QJsonValue& archive,
-    const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false) {
-    return WrapNativeCandidateWindowFamilyExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,true);
+    const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false,const NativeCompositePublication* publication=nullptr) {
+    return WrapNativeCandidateWindowFamilyExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,true,publication);
 }
 inline QJsonObject WrapConfiguredNativeExecution(const NMSDK::TimeLearner::ConfiguredNativeTraining& configuration,QJsonObject base,
-    const QJsonObject& package,const QJsonValue& archive,const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false) {
+    const QJsonObject& package,const QJsonValue& archive,const QJsonValue& actualModel,std::size_t rawTrials,std::size_t sampledFrames,bool preflight=false,const NativeCompositePublication* publication=nullptr) {
     const auto schema=NMSDK::TimeLearner::EncodeConfiguredNativeTraining(configuration).value("schema_version");
-    if(schema==QJsonValue(8))return WrapNativeRecoveryCandidateWindowExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight);
+    if(schema==QJsonValue(8))return WrapNativeRecoveryCandidateWindowExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight,publication);
     if(schema==QJsonValue(7))return WrapNativeCandidateWindowExecution(std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight);
     if(schema==QJsonValue(6))return WrapNativeCompositeExecution(true,std::move(base),package,archive,actualModel,rawTrials,sampledFrames,preflight);
     Require(schema==QJsonValue(1) || schema==QJsonValue(2) || schema==QJsonValue(3) || schema==QJsonValue(4) || schema==QJsonValue(5),

@@ -4864,7 +4864,8 @@ template<class Owner> void RecoveryConsoleArtifact(bool completed) {
     if(const auto root=std::getenv("TIMELEARNER_COMPOSITE_OUTPUT"))
         output=QString::fromLocal8Bit(root)+"/"+QString::fromStdString(RecoveryPackageDirectory())+"/console-artifacts";
     QJsonArray artifacts;
-    const auto descriptor=NmsdkWorker::PublishNativeCompositeArchive(output,source.package,artifacts);
+    const auto publication=NmsdkWorker::PublishCheckedNativeCompositeArchive(output,source.package,artifacts);
+    const auto descriptor=publication.Descriptor();
     ASSERT_TRUE(descriptor.isObject());
     const auto archive=source.package["measurement_archive"].toObject();
     const auto counters=archive["counters"].toObject()["attempt"].toObject();
@@ -4882,6 +4883,15 @@ template<class Owner> void RecoveryConsoleArtifact(bool completed) {
             {"execution","completed"},{"model_revision",source.package["model_revision"]}};
         const auto wire=NmsdkWorker::WrapConfiguredNativeExecution(configuration,original,source.package,descriptor,
             source.package["model_revision"],raw,frames);
+        const auto shared=NmsdkWorker::WrapConfiguredNativeExecution(configuration,original,source.package,descriptor,
+            source.package["model_revision"],raw,frames,false,&publication);
+        EXPECT_EQ(shared,wire); // Byte-identical signed wire to the independent full replay.
+        auto changed=source.package;changed["training_outcome"]="receipt-test-change";RebindPortable(changed);
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(configuration,original,changed,descriptor,
+                changed["model_revision"],raw,frames,false,&publication),std::invalid_argument);
+        auto wrongDescriptor=descriptor.toObject();wrongDescriptor["sha256"]=QString(64,QLatin1Char('0'));
+        EXPECT_THROW(NmsdkWorker::WrapConfiguredNativeExecution(configuration,original,source.package,wrongDescriptor,
+            source.package["model_revision"],raw,frames,false,&publication),std::invalid_argument);
         EXPECT_EQ(original["schema_version"],QJsonValue(base));EXPECT_EQ(wire["schema_version"],QJsonValue(5));
         EXPECT_EQ(wire["base_schema_version"],QJsonValue(base));
         EXPECT_EQ(wire["recovery_ledger_sha256"],source.package["recovery_ledger"].toObject()["sha256"]);

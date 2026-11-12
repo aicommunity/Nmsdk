@@ -98,8 +98,10 @@ template<class Owner,class Model,class Environment> int ExecuteLive(const Job& j
     owner->SetConfiguredNativeEvidenceSinks({});
     QJsonValue packagePath(QJsonValue::Null),packageSha(QJsonValue::Null),revision(QJsonValue::Null),outcome(QJsonValue::Null);
     QJsonValue compositeArchive(QJsonValue::Null);
+    std::optional<NativeCompositePublication> publication;
     if(!solo.isEmpty()) {
-        compositeArchive=PublishNativeCompositeArchive(output,solo,artifacts);
+        publication.emplace(PublishCheckedNativeCompositeArchive(output,solo,artifacts));
+        compositeArchive=publication->Descriptor();
         const QString name=completed?"train_learned_state.json":"train_stopped_state.json";
         artifacts.append(Write(output,name,solo));
         artifacts.append(Write(output,completed?"train_learned_summary.json":"train_stopped_summary.json",summary));
@@ -133,7 +135,7 @@ template<class Owner,class Model,class Environment> int ExecuteLive(const Job& j
         {"recognition_package_sha256",recognitionSha},{"recognition_model_revision",recognitionRevision},
         {"frequency_hz",double(job.configuration.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",begin},
         {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
-        solo,compositeArchive,revision,evidence->NativeTrials(),evidence->SampledFrames()));
+        solo,compositeArchive,revision,evidence->NativeTrials(),evidence->SampledFrames(),false,publication?&*publication:nullptr));
     return execution=="completed"?0:2;
 }
 template<class Owner> int Execute(const Job& job,const QString& output,const bool preflight=false)
@@ -264,7 +266,8 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
         // Preserve the completed model if a later artifact write is interrupted.
         // execution.json remains the final completion marker for the entire run.
         artifacts.append(Write(output,packageName,package));
-        const auto compositeArchive=PublishNativeCompositeArchive(output,package,artifacts);
+        const auto publication=PublishCheckedNativeCompositeArchive(output,package,artifacts);
+        const auto compositeArchive=publication.Descriptor();
         artifacts.append(Write(output,stopped?"train_stopped_summary.json":"train_learned_summary.json",exported.summary));
         Write(output,"execution.json",WrapConfiguredNativeExecution(job.configuration,{{"kind","timelearner_native_training_execution"},{"schema_version",1},
             {"execution",QString::fromStdString(execution)},{"job_sha256",job.document["sha256"]},{"attempt_id",QString::fromStdString(job.configuration.runId)},
@@ -272,7 +275,7 @@ template<class Owner> int Execute(const Job& job,const QString& output,const boo
             {"training_outcome",package["training_outcome"]},{"completed_boundary",!stopped},
             {"frequency_hz",double(frequency)},{"model_ticks",double(ticks)},{"model_time_begin",begin},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"artifacts",artifacts},{"evaluation_verdict",QJsonValue(QJsonValue::Null)}},
-            package,compositeArchive,package["model_revision"],evidence->NativeTrials(),evidence->SampledFrames()));
+            package,compositeArchive,package["model_revision"],evidence->NativeTrials(),evidence->SampledFrames(),false,&publication));
         return execution=="completed"?0:2;
     },[&](auto storage,auto environment) {
         for(const auto& value:job.profiles)
