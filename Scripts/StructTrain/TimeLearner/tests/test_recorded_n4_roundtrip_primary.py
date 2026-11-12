@@ -14,30 +14,11 @@ import unittest
 import zlib
 
 from ..candidate_window_package_evidence import audit_candidate_window_recovery_package
-from ..native_evidence import EvidenceError, load, parse_json_bytes, require
+from ..native_evidence import EvidenceError, load, require
+from ..qt_json import read_qcompress_json as read_qcompress
 from ..portable_primary import restore_native_bundle
 from ..recorded_roundtrip_evidence import audit_roundtrip_controller
 from ..closed_primary_bundle import verify_controller_join
-
-
-def read_qcompress(path, *, expected_bytes, expected_sha256):
-    """Bounded Qt qCompress framing; reject truncation and appended streams."""
-    require(4 < path.stat().st_size <= 64*1024**2, 'recorded_qz_packed_size')
-    packed = path.read_bytes()
-    declared = struct.unpack('>I', packed[:4])[0]
-    require(declared == expected_bytes and 0 < declared <= 256*1024**2,
-            'recorded_qz_declared_size')
-    decoder = zlib.decompressobj()
-    try:
-        raw = decoder.decompress(packed[4:], declared+1)
-    except zlib.error as error:
-        raise EvidenceError('recorded_qz_invalid_stream') from error
-    require(decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail
-            and len(raw) == declared, 'recorded_qz_incomplete_or_trailing')
-    require(hashlib.sha256(raw).hexdigest() == expected_sha256, 'recorded_qz_raw_sha256')
-    document = parse_json_bytes(raw)
-    require(isinstance(document, dict), 'recorded_qz_json_object')
-    return document
 
 
 class RecordedN4RoundtripPrimaryTest(unittest.TestCase):
