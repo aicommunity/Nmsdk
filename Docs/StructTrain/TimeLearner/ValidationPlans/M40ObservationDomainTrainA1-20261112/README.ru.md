@@ -1,0 +1,7 @@
+# Повторный строгий N4 Train с полным доменом наблюдения — M40, 12.11.2026
+
+Основание: [приёмка 5/5](../M40ObservationDomainPreflightA1-20261112/RESULT.ru.md) и [разбор исключённого максимума](../../ObservationDomainWindowFix-20261112.ru.md). Два независимых cold Train: Classic/Branch, N4/N1, 2000Hz, CapturedPerInput, исходные амплитудные и временные допуски. Prepared plan3/config8; это версия плана Python, не ControllerVersion. Native SDK/Pulse/runtime и физика сохранены. Исходные окна захвата references не меняются. Окна последующих candidate observations охватывают весь записанный домен; назначение максимума закреплённому импульсу сохраняется.
+
+Производный integration test проверяет каждое реально измеренное candidate frame: first=0, last=hard_last; требуется хотя бы одна фактическая candidate measurement. Повторно используются production CLI и общий аудит, без копии алгоритма. Сохранены прежние budgets: 128 probes, 1280 edits, 128 candidates/input, 4 sweeps, invalid budget4, 1800s wall/7200s model; 120s отдельно только для финализации. Внешний controller7200s/2GiB/tasks128; native4GiB/tasks64. Никаких Test, калибровки или подстановки template после остановки. Exact не является условием engineering PASS.
+
+До завершения, проверки closure и исходных наблюдений результат не принят. Старые invalid_observation сохраняются в истории. Пакет исходников f71bb4dd411922f28b3a5e419b6ffcc1184641a3; source/tool одинаковы. Артефакты и результаты будут добавлены отдельно.
