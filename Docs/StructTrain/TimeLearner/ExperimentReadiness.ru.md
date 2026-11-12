@@ -1,5 +1,7 @@
 # Готовность к научным экспериментам — 12.11.2026
 
+Оперативно: [новый строгий N4 cold Train](ValidationPlans/M40ObservationDomainTrainA1-20261112/README.ru.md) с исправленным полным доменом candidate observations запущен на M40 после preflight5/5. Реальный Branch native process подтверждён; Classic следует отдельным cold case того же задания. Результат пока не принят. Изменение касается области поиска закреплённого пика, а не физики, допусков или подстановки глобального максимума. Предыдущий invalid_observation остаётся отдельным результатом.
+
 Свежий M40 SDK8362d58f/Pulse1110808 принят32/32 в техническом scope: active Build guards, header publication7/execution5, старый Console wire и source7 recognition. [Результат](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md). Elder ранее принял native recognition10/10 и независимый replay6/6; также завершил отдельную свежую сборку и тот же набор32/32.
 
 На M40 настоящий Console cold8 pipeline принят2/2: Classic/Branch cold Train/Exact, export/import, measured-grid calibration, frozen evaluation и rollback/replay. Обе N2/N0/Sync0.2 модели получили TP2/FP0/FN0/TN2 на одном target и одном foil, предъявленных дважды. Это historical same-matrix калибровка, не независимая научная матрица. [Результат и ограничения](ValidationPlans/M40RecoveryConsoleCold8A1-20261111/RESULT.ru.md). Saved corpus использовался только для исходных условий и storage definitions, не как learned seed нового Train.

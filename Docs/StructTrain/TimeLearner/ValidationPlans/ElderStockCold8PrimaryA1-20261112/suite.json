@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "complete-Git-actual-N4-cold8-primary-independent-restore-a1",
+  "package_fingerprint": "de5fd75f66ac1b5d5b3f598faf2ba6731e818a2dc7a63d47df90d634f8465dd8",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold8_compact_primary"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_cold8_compact_primary.StockCold8CompactPrimaryTest.test_restore_both_real_N4_trains_and_reject_changed_primary"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD8_COMPACT_PRIMARY": {
+      "pattern": "*",
+      "files": 4,
+      "fingerprint": "37b620fbadde03041c0db1c5f7bd511b6dd8dabd48e022eaf117ba0ab793f622"
+    }
+  }
+}
