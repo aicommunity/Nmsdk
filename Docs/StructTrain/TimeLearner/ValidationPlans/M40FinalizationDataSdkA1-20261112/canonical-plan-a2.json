@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-finalization-data-sdk-a1",
+    "commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/finalization-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FinalizationDataSdkA1-20261112/namespace.json",
+      "sha256": "319b488a019e5ef622934a0baf10fb1b2b7e4e0a6a88d3423fac356d1579c4f7"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/finalization-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FinalizationDataSdkA1-20261112/cohort.json",
+    "sha256": "03f3d861e3276dda78954f710017427a3c93e32a19c8559507767991daf4bf48"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/finalization-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FinalizationDataSdkA1-20261112/native-job.json",
+    "sha256": "e6ae476713aa29b53697a17240892399a5f5524d421f2f948e450ee46358a252"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-prepared-m40-a2",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}

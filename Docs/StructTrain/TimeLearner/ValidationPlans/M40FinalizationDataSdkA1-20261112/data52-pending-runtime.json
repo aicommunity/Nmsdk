@@ -1,0 +1,286 @@
+{
+  "kind": "timelearner_finalization_DATA_pending_runtime_binding",
+  "schema_version": 1,
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-finalization-data-sdk-a1",
+    "commit": "929dbc176a0804910544539aaf79bdc4a02aa82a"
+  },
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "runtime_manifest_expected": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-m40-a1/finalization-enum-smoke-runtime.json",
+  "inputs": [
+    {
+      "name": "branch-finalization-calibration-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/branch-finalization-calibration-job.json",
+      "bytes": 1771601,
+      "sha256": "0e738ab97b91f6a93229749b3d00a8335c07d7e27f9a64f3496132c16af36077"
+    },
+    {
+      "name": "branch-finalization-cold-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/branch-finalization-cold-job.json",
+      "bytes": 841617,
+      "sha256": "dd459efdfdb693a303a58bf4ee8f9516d11c0282a536b3aadbcc3bf418a2bd60"
+    },
+    {
+      "name": "branch-finalization-evaluation-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/branch-finalization-evaluation-job.json",
+      "bytes": 1771350,
+      "sha256": "b3a63aefb3cb1ae4a1a6c6a663864341f1d9e5300c6c030ff2f112745a14e44a"
+    },
+    {
+      "name": "branch-finalization-fixed-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/branch-finalization-fixed-job.json",
+      "bytes": 1772056,
+      "sha256": "7e8ed0c4f750cdf028ea60d4cfaa4f81700b85191da461865375d6cee07e3946"
+    },
+    {
+      "name": "classic-finalization-calibration-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/classic-finalization-calibration-job.json",
+      "bytes": 1917019,
+      "sha256": "c0cacbbb6eede445755ca9cd8ec37e17a61d237b2b6a31a2450b527029abcd49"
+    },
+    {
+      "name": "classic-finalization-cold-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/classic-finalization-cold-job.json",
+      "bytes": 913178,
+      "sha256": "bdb7d9a6b5cece9e169a88523d58ec2eebc77b9b8798cad9d13625ec63c1ed8f"
+    },
+    {
+      "name": "classic-finalization-evaluation-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/classic-finalization-evaluation-job.json",
+      "bytes": 1916765,
+      "sha256": "79e705f16bbef2313c38f7122cd9c2df06245569bb69b6364ddbb9c943bad778"
+    },
+    {
+      "name": "classic-finalization-fixed-job.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/cache/finalization-data-inputs-a1/classic-finalization-fixed-job.json",
+      "bytes": 1917293,
+      "sha256": "f8ac268746235b7b188eea2c382b0b6782a400fc5270f8d5438c7166b4394f8d"
+    }
+  ],
+  "groups": [
+    {
+      "job_id": "s08-finalization-data26-1-m40-a1",
+      "cases": [
+        {
+          "name": "finalization-boundary-001",
+          "test_id": "NativeFinalizationBoundary/ClassicSnapshot"
+        },
+        {
+          "name": "finalization-boundary-002",
+          "test_id": "NativeFinalizationBoundary/BranchSnapshot"
+        },
+        {
+          "name": "finalization-boundary-003",
+          "test_id": "NativeFinalizationBoundary/ClassicConnectedRequest"
+        },
+        {
+          "name": "finalization-boundary-004",
+          "test_id": "NativeFinalizationBoundary/BranchConnectedRequest"
+        },
+        {
+          "name": "finalization-boundary-005",
+          "test_id": "NativeFinalizationBoundary/ClassicPendingProbeRejects"
+        },
+        {
+          "name": "finalization-boundary-006",
+          "test_id": "NativeFinalizationBoundary/BranchPendingProbeRejects"
+        },
+        {
+          "name": "finalization-boundary-007",
+          "test_id": "NativeFinalizationBoundary/ClassicStoppedIsDiagnostic"
+        },
+        {
+          "name": "finalization-boundary-008",
+          "test_id": "NativeFinalizationBoundary/BranchStoppedIsDiagnostic"
+        },
+        {
+          "name": "finalization-boundary-009",
+          "test_id": "NativeFinalizationBoundary/PublicEnumsUseExplicitMapping"
+        },
+        {
+          "name": "finalization-boundary-010",
+          "test_id": "NativeFinalizationOwnership/ClassicAutomatic"
+        },
+        {
+          "name": "finalization-boundary-011",
+          "test_id": "NativeFinalizationOwnership/ClassicExternal"
+        },
+        {
+          "name": "finalization-boundary-012",
+          "test_id": "NativeFinalizationOwnership/BranchAutomatic"
+        },
+        {
+          "name": "finalization-boundary-013",
+          "test_id": "NativeFinalizationOwnership/BranchExternal"
+        },
+        {
+          "name": "finalization-boundary-014",
+          "test_id": "NativeOwnedPostTune/ClassicAutomaticConnected"
+        },
+        {
+          "name": "finalization-boundary-015",
+          "test_id": "NativeOwnedPostTune/ClassicAutomaticLocal"
+        },
+        {
+          "name": "finalization-boundary-016",
+          "test_id": "NativeOwnedPostTune/ClassicExternalConnected"
+        },
+        {
+          "name": "finalization-boundary-017",
+          "test_id": "NativeOwnedPostTune/ClassicExternalLocal"
+        },
+        {
+          "name": "finalization-boundary-018",
+          "test_id": "NativeOwnedPostTune/ClassicResetInterrupt"
+        },
+        {
+          "name": "finalization-boundary-019",
+          "test_id": "NativeOwnedPostTune/BranchAutomaticConnected"
+        },
+        {
+          "name": "finalization-boundary-020",
+          "test_id": "NativeOwnedPostTune/BranchAutomaticLocal"
+        },
+        {
+          "name": "finalization-boundary-021",
+          "test_id": "NativeOwnedPostTune/BranchExternalConnected"
+        },
+        {
+          "name": "finalization-boundary-022",
+          "test_id": "NativeOwnedPostTune/BranchExternalLocal"
+        },
+        {
+          "name": "finalization-boundary-023",
+          "test_id": "NativeOwnedPostTune/BranchResetInterrupt"
+        },
+        {
+          "name": "finalization-boundary-024",
+          "test_id": "NativeFinalizationClockHandoff/ClassicAutomatic"
+        },
+        {
+          "name": "finalization-boundary-025",
+          "test_id": "NativeFinalizationClockHandoff/ClassicExternal"
+        },
+        {
+          "name": "finalization-boundary-026",
+          "test_id": "NativeFinalizationClockHandoff/BranchAutomatic"
+        }
+      ],
+      "leaf_wall_seconds": 900,
+      "maximum_wall_seconds": 23460
+    },
+    {
+      "job_id": "s08-finalization-data26-2-m40-a1",
+      "cases": [
+        {
+          "name": "finalization-boundary-027",
+          "test_id": "NativeFinalizationClockHandoff/BranchExternal"
+        },
+        {
+          "name": "finalization-boundary-028",
+          "test_id": "NativeLiveFinalization/ClassicAutomaticFixed"
+        },
+        {
+          "name": "finalization-boundary-029",
+          "test_id": "NativeLiveFinalization/BranchAutomaticFixed"
+        },
+        {
+          "name": "finalization-boundary-030",
+          "test_id": "NativeLiveFinalization/ClassicConnectedCalibrate"
+        },
+        {
+          "name": "finalization-boundary-031",
+          "test_id": "NativeLiveFinalization/BranchConnectedCalibrate"
+        },
+        {
+          "name": "finalization-boundary-032",
+          "test_id": "NativeLiveFinalization/ClassicStopped"
+        },
+        {
+          "name": "finalization-boundary-033",
+          "test_id": "NativeLiveFinalization/BranchStopped"
+        },
+        {
+          "name": "finalization-boundary-034",
+          "test_id": "NativeLiveFinalization/ClassicQueuedControlDrift"
+        },
+        {
+          "name": "finalization-boundary-035",
+          "test_id": "NativeLiveFinalization/BranchQueuedControlDrift"
+        },
+        {
+          "name": "finalization-boundary-036",
+          "test_id": "NativeLiveFinalization/ClassicQueuedReset"
+        },
+        {
+          "name": "finalization-boundary-037",
+          "test_id": "NativeLiveFinalization/BranchQueuedReset"
+        },
+        {
+          "name": "finalization-boundary-038",
+          "test_id": "NativeLiveFinalization/ClassicQueuedStop"
+        },
+        {
+          "name": "finalization-boundary-039",
+          "test_id": "NativeLiveFinalization/BranchQueuedStop"
+        },
+        {
+          "name": "finalization-boundary-040",
+          "test_id": "NativeLiveFinalization/ClassicInvalidDesign"
+        },
+        {
+          "name": "finalization-boundary-041",
+          "test_id": "NativeLiveFinalization/BranchInvalidDesign"
+        },
+        {
+          "name": "finalization-boundary-042",
+          "test_id": "NativeLiveFinalization/ClassicMultirate"
+        },
+        {
+          "name": "finalization-boundary-043",
+          "test_id": "NativeLiveFinalization/BranchMultirate"
+        },
+        {
+          "name": "finalization-boundary-044",
+          "test_id": "NativeLiveFinalization/ClassicCancelArmed"
+        },
+        {
+          "name": "finalization-boundary-045",
+          "test_id": "NativeLiveFinalization/BranchCancelArmed"
+        },
+        {
+          "name": "finalization-boundary-046",
+          "test_id": "NativeLiveFinalization/ClassicCancelTraining"
+        },
+        {
+          "name": "finalization-boundary-047",
+          "test_id": "NativeLiveFinalization/BranchCancelTraining"
+        },
+        {
+          "name": "finalization-boundary-048",
+          "test_id": "NativeLiveFinalization/ClassicCancelQueued"
+        },
+        {
+          "name": "finalization-boundary-049",
+          "test_id": "NativeLiveFinalization/BranchCancelQueued"
+        },
+        {
+          "name": "finalization-boundary-050",
+          "test_id": "NativeLiveFinalization/ClassicCancelPostTune"
+        },
+        {
+          "name": "finalization-boundary-051",
+          "test_id": "NativeLiveFinalization/BranchCancelPostTune"
+        },
+        {
+          "name": "finalization-boundary-052",
+          "test_id": "NativeLiveFinalizationPlanCodec/ActualDesignRoundtripAndMalformedDeclarations"
+        }
+      ],
+      "leaf_wall_seconds": 900,
+      "maximum_wall_seconds": 23460
+    }
+  ],
+  "active_request": false,
+  "scientific_verdict": null
+}

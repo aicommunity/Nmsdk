@@ -1,3 +1,5 @@
 # Проверка test-only DATA loader
 
 SourceRoot 929dbc176a0804910544539aaf79bdc4a02aa82a / Pulse dfb9a98244f91b4f4029d8470465fd40116436ca. Отдельный чистый SDK и fresh Release/O3 build обоих targets. Один enum smoke проверяет загрузку binary, но не заменяет52 finalization cases. После него все52 исходных cases выполняются через production native_data_checks schema1 с8 immutable DATA inputs, двумя явными наборами по26. Никакой алгоритм не меняется;50 предыдущих production cases на c735 остаются отдельным результатом. Научный Train ещё не допущен.
+
+Canonical A1 отклонён до сборки: восемь кириллических sparse-pattern names были искажены Windows stdin decoder при передаче списка. Все8 файлов остаются в исходном Git. На обоих новых SDK sparse patterns повторно применены штатным Git с точными UTF-8 bytes прежнего проверенного SDK; legacy working source не менялся. A1 whole group closed, lease released; raw receipts сохранены в canonical-a1-failed-readback. A2 повторно проверяет прежний полный namespace4163, без исключения этих файлов и без снижения guards.

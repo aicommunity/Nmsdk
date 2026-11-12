@@ -1,0 +1,103 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "33f841bda6320176e0862afab84c928b583355108ad9f7c6c7a0ebde0e8f34d1",
+      "unit": "timelearner-cea31a15-098c-432f-bbed-54cb8a72e389.service",
+      "invocation_id": "98f4cbbb17dc49bca1cb57be13300be2",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-cea31a15-098c-432f-bbed-54cb8a72e389.service",
+      "initial_main_pid": 1711405,
+      "initial_start_ticks": "358618203",
+      "sha256": "a593ee62848373001cf203ec14e752ade6c19c7c46d14c57edddbae04d9e108b"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "536870912",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt cea31a15-098c-432f-bbed-54cb8a72e389",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "98f4cbbb17dc49bca1cb57be13300be2"
+    },
+    "memory_max": 536870912,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "052dd140-5900-408f-ace4-67118c6678b9",
+      "job_id": "s08-finalization-data-sdk-canonical-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1711405,
+        "start_ticks": "358618203",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-canonical-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-canonical-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-prepared-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-finalization-data-sdk-prepared-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/finalization-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FinalizationDataSdkA1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/finalization-data-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40FinalizationDataSdkA1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-finalization-data-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-finalization-data-sdk-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794510984.6111913,
+      "deadline": 1794511114.6200771,
+      "updated": 1794511003.396779,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
