@@ -1,0 +1,11 @@
+# N4 diagnostic16 A1: отказ до запуска моделей, 0/16 наблюдений
+
+Исходный supervisor206695 и worker209983 завершены; whole outer group closed, child units0, original main exit1, один lease released, record_errors=[], heartbeat_errors=[]. Это подтверждено собственными original-outcome/closure/terminal records в `failed/`. Supervisor reason=null описывает отсутствие ошибки cleanup, а не успешное выполнение; worker operation_passed=false.
+
+Причина: `loader_environment_changed:QT_QPA_PLATFORM` в `contained_runner.execute`. Runtime закрепляет headless Qt environment, но Python pipeline caller не применил его перед проверкой. Предыдущие отдельные Console callers задавали окружение снаружи; новый adapter полагался на runtime manifest. Правильное место применения — execution boundary общего `native_pipeline_worker.run_job`, с сохранением строгого equality guard в executor.
+
+Первый полный source package/summary/embedded и external primary прошёл аудиты, input/source snapshots и applied job подготовлены. Однако ни одного native Console child, execution.json, evaluation trial или нового model result не создано. Поэтому моделей нет среди «неудачных классификаций»: измерено0/16, классификация не оценивалась. Classic invalid_observation и Branch budget_exhausted относятся к прежним Train, а не к этому отказу инфраструктуры.
+
+Fix source `251dddc62`: scoped `runtime.applied_loader_environment` применяет только три закреплённых loader key и восстанавливает значения/отсутствие ключей даже при исключении. Arbitrary environment в request по-прежнему запрещён. Guard не отключается, runtime/модели/пороги/физика не меняются. Четыре адресных tests проверяют применение, отсутствие, restoration и unknown/null/NUL guards; до их серверной приёмки и новой actual попытки fix не считается runtime-принятым.
+
+Все original15 small proofs сохранены без изменения bytes. Большие подготовленные source/job копии остаются серверным кэшем; исходные модели, первичные данные, matrix XML/CSV и публичные функции `qt_json.read_qcompress_bytes`, `phasea_matrix.extract`, `stock_stopped_evaluation.job_for` позволяют восстановить их из Git. Старую попытку не возобновлять и не переписывать; следующий запуск получает новый job ID/controller/output.

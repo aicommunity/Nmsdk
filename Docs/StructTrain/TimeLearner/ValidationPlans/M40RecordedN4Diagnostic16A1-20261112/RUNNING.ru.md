@@ -1,5 +1,7 @@
 # Полная N4 diagnostic matrix — запущена, результат ещё не принят
 
+**Исторический снимок. A1 завершён отказом до первого native child; наблюдений0/16. [Конечный результат](RESULT.ru.md).**
+
 M40 job `s11-recorded-n4-diagnostic16-m40-a1`, source Tool742bc6618. Supervisor PID206695, bound worker PID209983/start_ticks354836318, unit `timelearner-b6ec6cd7-7ac1-46ec-ac5e-c2e3f9439cb4.service`, binding SHA `a0f5ca025652e46d9e0aa17643bf13c795dc8de2140730e8c0d5658b2215caba`. Это исходный запуск, не повтор после timeout.
 
 Первое подтверждение: оба процесса kernel-live, controller/output directories существуют, exception отсутствует; worker проверяет полные источники. На этом снимке первый native Console child ещё не был создан. Следовательно, число16 означает объявленные пробы, а не уже завершённые измерения.
