@@ -6,6 +6,7 @@ omit duplicate jobs/source copies and reproducible figures. This subset is not
 the original runtime directory and must never pass as its full artifact closure.
 """
 from pathlib import Path
+import argparse
 import json
 import tempfile
 
@@ -123,3 +124,21 @@ def audit_primary(bundle_path, restored):
     return dict(kind='timelearner_compact_recorded_matrix_readback', schema_version=1,
         original_job_id=request['job_id'], models=rows, trials=8*len(rows), diagnostic_only=True,
         complete_runtime_directory=False, native_execution_attested=False, scientific_verdict=None)
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    commands = parser.add_subparsers(dest='action', required=True)
+    create = commands.add_parser('create')
+    for name in ('directory', 'controller', 'runtime_manifest'):create.add_argument(name, type=Path)
+    audit = commands.add_parser('audit');audit.add_argument('bundle', type=Path)
+    for command in (create, audit):command.add_argument('--output', required=True, type=Path)
+    args = parser.parse_args(argv)
+    if args.action == 'create':
+        result = create_primary(args.directory, args.controller, args.runtime_manifest, args.output)
+    else:result = audit_primary(args.bundle, args.output)
+    print(json.dumps(result, allow_nan=False));return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
