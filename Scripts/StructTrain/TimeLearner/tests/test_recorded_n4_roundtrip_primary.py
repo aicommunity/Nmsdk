@@ -4,6 +4,7 @@ Uses production archive/model auditors. No new native execution or successful
 training is inferred from the saved stopped states or matching responses.
 """
 import hashlib
+import json
 import math
 import os
 from pathlib import Path
@@ -162,3 +163,33 @@ class RecordedQcompressFramingTest(unittest.TestCase):
             path.write_bytes(correct)
             with self.assertRaises(EvidenceError):
                 read_qcompress(path, expected_bytes=len(raw), expected_sha256='0'*64)
+
+
+class RecordedN4RoundtripVisualTest(unittest.TestCase):
+    setUpClass = classmethod(RecordedN4RoundtripPrimaryTest.setUpClass.__func__)
+
+    def test_actual_two_models_all_somas_with_input_and_difference(self):
+        from PIL import Image
+        from ..plotting import render_boundary_roundtrip
+        output = Path(os.environ['TMPDIR'])/'recorded-n4-roundtrip-gallery'
+        output.mkdir()
+        reports = {}
+        for role in ('classic', 'branch'):
+            name = role.title()+'FullDomainN4Roundtrip'
+            base = self.restored/f'native/{role}/native-composite/package7/NativeRecordedRecoveryArchive/{name}'
+            before, after = load(base/'response-before.json'), load(base/'response-after.json')
+            phase = load(base/'phase-times.json')
+            context = role.title()+' | stopped: '+phase['training_outcome']+' | '+phase['model_revision'][:16]
+            report = render_boundary_roundtrip(before, after, output/role, context=context)
+            self.assertEqual(len(report['figures']), 2*(len(before['relative_time_stimulus_potentials'][0])-2))
+            for figure in report['figures']:
+                with Image.open(output/role/figure['file']) as image:
+                    self.assertEqual(image.size, (1920, 1200))
+                    self.assertGreater(len(image.getcolors(maxcolors=1000000)), 100)
+                self.assertTrue(figure['actual_input_overlay']);self.assertFalse(figure['downsampling'])
+            report['source_response_sha256'] = {
+                name: hashlib.sha256((base/name).read_bytes()).hexdigest()
+                for name in ('response-before.json', 'response-after.json')}
+            reports[role] = report
+        with (output/'manifest.json').open('x', encoding='utf-8') as stream:
+            json.dump(reports, stream, indent=2, allow_nan=False);stream.write('\n')

@@ -42,6 +42,73 @@ def plotting_runtime():
             "matplotlib": matplotlib.__version__, "pillow": PIL.__version__}
 
 
+def render_boundary_roundtrip(before, after, output, *, context):
+    """Readable transfer diagnostic from all recorded samples, with input overlay.
+
+    These are active-input0 native bursts, not whole-matrix classification.
+    The full time window is retained and a second view enlarges the response.
+    """
+    runtime = plotting_runtime()
+    import matplotlib.pyplot as plt
+    for document in (before, after):
+        require(document.get('kind') == 'native_boundary_response_fixture' and
+                document.get('routing') == 'native_burst_active_input0' and
+                document.get('scientific_verdict') is None, 'boundary_plot_scope')
+    rows, replay = (d['relative_time_stimulus_potentials'] for d in (before, after))
+    require(bool(rows) and len(rows) == len(replay), 'boundary_plot_missing_samples')
+    size = len(rows[0]);require(size >= 3, 'boundary_plot_missing_soma')
+    require(all(len(row) == size and all(type(v) in (int, float) and math.isfinite(v) for v in row)
+                for row in rows+replay), 'boundary_plot_nonfinite_or_dimension')
+    require(all(a[0] < b[0] for a, b in zip(rows, rows[1:])) and
+                all(a[0] < b[0] for a, b in zip(replay, replay[1:])), 'boundary_plot_clock_order')
+    require(all(abs(a[0]-b[0]) <= 5e-10 and a[1] == b[1] for a, b in zip(rows, replay)),
+            'boundary_plot_time_or_input_mismatch')
+    target = Path(output);require(not target.exists(), 'boundary_plot_output_exists')
+    target.mkdir(parents=True)
+    times = [r[0] for r in rows];stimulus = [r[1] for r in rows]
+    figures = []
+    for channel in range(2, size):
+        values = [r[channel] for r in rows];restored = [r[channel] for r in replay]
+        delta = [b-a for a, b in zip(values, restored)]
+        amplitude = max(abs(v-values[0]) for v in values)
+        active = [i for i, row in enumerate(rows) if row[1] > 0 or
+                  abs(row[channel]-values[0]) > max(1e-12, amplitude*1e-4)]
+        detail = (max(times[0], times[active[0]]-.05), min(times[-1], times[active[-1]]+.05)) if active else (times[0], times[-1])
+        for view, limits in (('full', (times[0], times[-1])), ('response', detail)):
+            fig, axes = plt.subplots(2, 1, figsize=(12, 7.5), dpi=160, sharex=True,
+                                     gridspec_kw={'height_ratios': [3, 1]})
+            fig.subplots_adjust(top=.78, hspace=.12, left=.10, right=.90, bottom=.10)
+            try:
+                axes[0].plot(times, values, color='#1659a6', label='Before export', linewidth=1.8)
+                axes[0].plot(times, restored, color='#ad2460', label='After fresh import', linestyle='--', linewidth=1.2)
+                axes[0].set_ylim(*padded_limits(values+restored))
+                axes[0].set_ylabel('Soma potential [native units]')
+                overlay = axes[0].twinx()
+                overlay.step(times, stimulus, where='post', color='#c46b08', alpha=.65,
+                             label='Actual input', linewidth=1.)
+                overlay.set_ylabel('Actual input [native units]', color='#a34d00')
+                overlay.set_ylim(*padded_limits(stimulus))
+                axes[1].plot(times, delta, color='#7040a5')
+                axes[1].set_ylim(*padded_limits(delta));axes[1].set_ylabel('After − before')
+                axes[1].set_xlabel('Time from first recorded sample [s]')
+                for axis in axes:axis.set_xlim(*limits);axis.grid(True, alpha=.25)
+                figure_title(fig, context+'\n'+f'Soma {channel-1} | {view} | native burst, active input 0\n'
+                             'Model transfer diagnostic; no classification or successful training claim')
+                handles, labels = axes[0].get_legend_handles_labels()
+                extra, extra_labels = overlay.get_legend_handles_labels()
+                fig.legend(handles+extra, labels+extra_labels, loc='upper center',
+                           bbox_to_anchor=(.5, .85), frameon=False, ncol=3)
+                filename = f'soma-{channel-1}-{view}.png';fig.savefig(target/filename)
+                figures.append(dict(file=filename, soma_index=channel-2, view=view,
+                    time_limits=list(limits), png_width=1920, png_height=1200,
+                    downsampling=False, actual_input_overlay=True, samples=len(rows)))
+            finally:
+                plt.close(fig)
+    return dict(kind='native_boundary_roundtrip_visual_report', schema_version=1,
+                runtime=runtime, figures=figures, scientific_verdict=None,
+                scope='active input0 transfer diagnostic; not whole-pattern matrix evaluation')
+
+
 def padded_limits(values):
     require(bool(values) and all(math.isfinite(v) for v in values), "invalid_plot_amplitudes")
     low, high = min(values), max(values)
