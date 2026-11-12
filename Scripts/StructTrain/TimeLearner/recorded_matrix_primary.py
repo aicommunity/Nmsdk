@@ -138,7 +138,6 @@ def report_primary(bundle_path, restored, output):
     scientific verdict and its explicit visual-review status.
     """
     from .plotting import plotting_runtime
-    from .reports import render_diagnostic_evaluation_case
 
     bundle_path = Path(bundle_path).resolve(strict=True)
     restored, output = Path(restored).resolve(), Path(output).resolve()
@@ -147,6 +146,7 @@ def report_primary(bundle_path, restored, output):
             not p.is_relative_to(output) for p in protected),
             'recorded_primary_report_overlaps_primary')
     plotting_runtime()  # Reject an unavailable renderer before decompression.
+    from .reports import render_diagnostic_evaluation_case
     analysis = audit_primary(bundle_path, restored)
     output.mkdir(parents=True)
     reports = []
