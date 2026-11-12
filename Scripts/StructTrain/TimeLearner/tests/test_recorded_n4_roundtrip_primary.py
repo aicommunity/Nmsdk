@@ -1,0 +1,151 @@
+"""Independent DATA replay of both large recorded N4 roundtrips.
+
+Uses production archive/model auditors. No new native execution or successful
+training is inferred from the saved stopped states or matching responses.
+"""
+import hashlib
+import math
+import os
+from pathlib import Path
+import struct
+import tempfile
+import unittest
+import zlib
+
+from ..candidate_window_package_evidence import audit_candidate_window_recovery_package
+from ..native_evidence import EvidenceError, load, load_json, parse_json_bytes, require
+from ..native_gate import audit_junit
+from ..portable_primary import restore_native_bundle
+
+
+def read_qcompress(path, *, expected_bytes, expected_sha256):
+    """Bounded Qt qCompress framing; reject truncation and appended streams."""
+    require(4 < path.stat().st_size <= 64*1024**2, 'recorded_qz_packed_size')
+    packed = path.read_bytes()
+    declared = struct.unpack('>I', packed[:4])[0]
+    require(declared == expected_bytes and 0 < declared <= 256*1024**2,
+            'recorded_qz_declared_size')
+    decoder = zlib.decompressobj()
+    try:
+        raw = decoder.decompress(packed[4:], declared+1)
+    except zlib.error as error:
+        raise EvidenceError('recorded_qz_invalid_stream') from error
+    require(decoder.eof and not decoder.unused_data and not decoder.unconsumed_tail
+            and len(raw) == declared, 'recorded_qz_incomplete_or_trailing')
+    require(hashlib.sha256(raw).hexdigest() == expected_sha256, 'recorded_qz_raw_sha256')
+    document = parse_json_bytes(raw)
+    require(isinstance(document, dict), 'recorded_qz_json_object')
+    return document
+
+
+class RecordedN4RoundtripPrimaryTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.bundle = Path(os.environ['TIMELEARNER_RECORDED_N4_ROUNDTRIP_BUNDLE'])
+        manifest = load(cls.bundle/'bundle.json')
+        require(manifest['archive_sha256'] ==
+                'f00fd600e1ca5341e4cdd1e8216085a8fea2dc3719f0b624b98ea71fdadb4f25'
+                and manifest['archive_bytes'] == 91914992
+                and len(manifest['members']) == 189 and manifest['expanded_bytes'] == 151482797,
+                'recorded_n4_original_corpus')
+        cls.temporary = tempfile.TemporaryDirectory(prefix='recorded-n4-data-')
+        cls.addClassCleanup(cls.temporary.cleanup)
+        cls.restored = Path(cls.temporary.name)/'restored'
+        cls.restoration = restore_native_bundle(cls.bundle/'bundle.json', cls.restored)
+
+    def test_original_two_junit_cases_and_three_closed_groups(self):
+        self.assertEqual(self.restoration['archive_members_verified'], 189)
+        self.assertFalse(self.restoration['native_execution_attested'])
+        self.assertFalse(self.restoration['source_archive_modified'])
+        self.assertEqual(len(list(self.restored.rglob('owned-unit.json'))), 3)
+        controller = self.restored/'controller'
+        result = load(controller/'supervisor-result.json')
+        self.assertTrue(result['outer_closed']);self.assertEqual(result['record_errors'], [])
+        self.assertEqual(len(result['children_closed']), 2)
+        self.assertTrue(all(r['closure']['all_processes_closed'] for r in result['children_closed']))
+        self.assertIsNone(result['scientific_verdict'])
+        leases = load_json(controller/'reservation-final.json')
+        self.assertIsInstance(leases, list);self.assertEqual(len(leases), 1)
+        self.assertEqual(leases[0]['state'], 'released')
+        for role in ('classic', 'branch'):
+            directory = self.restored/'native'/role
+            spec = load(directory/'specification.json')
+            self.assertEqual(len(spec['expected_test_ids']), 1)
+            self.assertEqual(audit_junit(directory/'native.xml', spec['expected_test_ids'])['assertion_status'], 'passed')
+            self.assertEqual((directory/'data-inputs-before.json').read_bytes(),
+                             (directory/'data-inputs-after.json').read_bytes())
+
+    def audit_case(self, role, outcome, revision, groups, raw_bytes, raw_sha):
+        name = role.title()+'FullDomainN4Roundtrip'
+        base = self.restored/f'native/{role}/native-composite/package7/NativeRecordedRecoveryArchive/{name}'
+        phase = load(base/'phase-times.json')
+        package = read_qcompress(base/'roundtrip-package.json.qz',
+            expected_bytes=raw_bytes, expected_sha256=raw_sha)
+        summary = load(base/'roundtrip-summary.json')
+        audit = audit_candidate_window_recovery_package(package, summary)
+        self.assertEqual(audit['model_revision'], revision)
+        self.assertEqual(audit['logical_groups'], groups)
+        self.assertEqual(audit['training_outcome'], outcome)
+        self.assertFalse(audit['certificate_consistent']);self.assertIsNone(audit['exact'])
+        self.assertFalse(audit['native_execution_verified']);self.assertFalse(audit['live_authority_restored'])
+        self.assertIsNone(package['certificate']);self.assertEqual(len(package['trained_inputs']), 4)
+        self.assertEqual(phase['source_package_sha256'], package['sha256'])
+        self.assertEqual(phase['exported_package_sha256'], package['sha256'])
+        self.assertEqual(phase['exported_raw_bytes'], raw_bytes)
+        self.assertEqual(phase['exported_raw_sha256'], raw_sha)
+        self.assertFalse(phase['cold_training_replayed']);self.assertFalse(phase['controller_checkpoint_restored'])
+        self.assertIsNone(phase['scientific_verdict'])
+        self.assertEqual(summary['recovery_ledger'], package['recovery_ledger'])
+        self.assertFalse(summary['search_history_retained']);self.assertFalse(summary['contains_controller_checkpoint'])
+        before, after = load(base/'response-before.json'), load(base/'response-after.json')
+        for response in (before, after):
+            self.assertEqual(response['kind'], 'native_boundary_response_fixture')
+            self.assertEqual(response['routing'], 'native_burst_active_input0')
+            self.assertIsNone(response['scientific_verdict'])
+        left, right = (r['relative_time_stimulus_potentials'] for r in (before, after))
+        self.assertTrue(left);self.assertEqual(len(left), len(right))
+        dimension = len(left[0]);self.assertGreaterEqual(dimension, 3)
+        self.assertEqual(left[0][0], 0.)
+        self.assertTrue(all(a[0] < b[0] for a, b in zip(left, left[1:])))
+        edges, previous, excursion = 0, False, 0.
+        for a, b in zip(left, right):
+            self.assertEqual(len(a), dimension);self.assertEqual(len(b), dimension)
+            self.assertTrue(all(type(v) in (int, float) and math.isfinite(v) for v in a+b))
+            self.assertLessEqual(abs(a[0]-b[0]), 5e-10);self.assertEqual(a[1], b[1])
+            active = a[1] > 0
+            edges += int(active and not previous);previous = active
+            for index in range(2, dimension):
+                self.assertLessEqual(abs(a[index]-b[index]), 1e-12)
+                excursion = max(excursion, abs(a[index]-left[0][index]))
+        self.assertEqual(edges, 4);self.assertEqual(phase['actual_stimulus_edges'], edges)
+        self.assertGreater(excursion, 1e-6)
+        self.assertAlmostEqual(phase['maximum_soma_excursion'], excursion, delta=1e-12)
+
+    def test_classic_full_model_archive_summary_and_response(self):
+        self.audit_case('classic', 'invalid_observation',
+            '35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263', 42,
+            142851310, 'e4060577f2c9d99f9b23898ee00e9c1c028379c2abda4912c2a23b48d11529a2')
+
+    def test_branch_full_model_archive_summary_and_response(self):
+        self.audit_case('branch', 'budget_exhausted',
+            'efc6bacd25770cb3ccde41b952b2e09638296e401be88e2b6f5f7bd3548e9ecd', 105,
+            143716360, 'bfdc7d54eec4ef7ec27f21c631a19066582fe8981cbce459616779c96b0d24f8')
+
+
+class RecordedQcompressFramingTest(unittest.TestCase):
+    def test_corrupted_size_stream_hash_and_trailing_bytes_rejected(self):
+        raw = b'{"schema_version":7}'
+        correct = struct.pack('>I', len(raw))+zlib.compress(raw)
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary)/'model.qz'
+            path.write_bytes(correct)
+            expected = dict(expected_bytes=len(raw), expected_sha256=hashlib.sha256(raw).hexdigest())
+            self.assertEqual(read_qcompress(path, **expected), {'schema_version': 7})
+            for broken in (b'bad', struct.pack('>I', len(raw)+1)+correct[4:],
+                           correct[:-1], correct+b'extra', correct+zlib.compress(raw)):
+                with self.subTest(bytes=len(broken)):
+                    path.write_bytes(broken)
+                    with self.assertRaises(EvidenceError):read_qcompress(path, **expected)
+            path.write_bytes(correct)
+            with self.assertRaises(EvidenceError):
+                read_qcompress(path, expected_bytes=len(raw), expected_sha256='0'*64)
