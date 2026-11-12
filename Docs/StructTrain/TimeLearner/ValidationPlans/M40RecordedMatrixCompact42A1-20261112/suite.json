@@ -1,8 +1,8 @@
 {
   "kind": "timelearner_python_validation_suite",
   "schema_version": 1,
-  "suite_id": "recorded-matrix-compact40-a1",
-  "package_fingerprint": "11bae7170ecbc3948b80e775fee396977e76c48b5082484587aeffb66187e626",
+  "suite_id": "recorded-matrix-compact42-a1",
+  "package_fingerprint": "cd691ab7400a63c701a42fb10917e70377972e131912d5561f12e3850fa98733",
   "modules": [
     "Scripts.StructTrain.TimeLearner.tests.test_native_data_checks.NativeDataChecksTest",
     "Scripts.StructTrain.TimeLearner.tests.test_recorded_diagnostic_matrix.RecordedDiagnosticMatrixDeclarationTest",
@@ -51,7 +51,9 @@
     "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_excessive_archive_is_refused_before_decompression",
     "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_excessive_expansion_is_refused_before_decompression",
     "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_member_total_must_match_declared_expansion",
-    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_large_individual_model_is_refused_before_decompression"
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_large_individual_model_is_refused_before_decompression",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_export_normalizes_parent_segments_before_overlap_check",
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryBoundsTest.test_restore_never_writes_into_input_bundle"
   ],
   "fixtures": {}
 }
