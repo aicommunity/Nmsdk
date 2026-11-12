@@ -4,7 +4,7 @@
 
 [Branch-only A2](ValidationPlans/M40ObservationDomainBranchFinalizeA2-20261112/RESULT.ru.md) принят 1/1 в техническом scope: полный пакет valid, training budget_exhausted после 101 поисковой пробы/50 изменений, L27,27,26,1. Search budget1800s сохранён;900s финализации позволили получить пакет. Сертификата сходимости нет; ordinary Test/calibration этих незавершённых обучений не запускались. Полные compact primary ещё требуют публикации.
 
-[Новый SDK Root08b898b/Pulsee9b807](ValidationPlans/M40ValidatedExport36A2-20261112/PREPARATION-RESULT.ru.md) устраняет два повторных полного decode при экспорте, сохраняя проверки. Canonical preparation4145 файлов/29 SDK modules принята; свежая сборка выполнена, native36 на M40 сейчас активен (подтверждены supervisor2999988 и исполняемый leaf;28 XML результатов). Итог36/36, большой N4 export/performance и Elder ещё не приняты.
+[Новый SDK Root08b898b/Pulsee9b807](ValidationPlans/M40ValidatedExport36A2-20261112/RESULT.ru.md) принят на M40: свежая сборка и36/36 actual native PASS, включая4 новых export checks. Outer+36 children closed, lease released; source/runtime/protected bytes unchanged. Два повторных полного decode устранены без обхода проверок. Большой N4 export/performance, Elder и full native corpus independent replay ещё открыты.
 
 Принят [независимый DATA replay двух полных native32 корпусов16/16](ValidationPlans/M40Native32IndependentA2-20261112/RESULT.ru.md):5470 members, исходные64 JUnit IDs/artifact rules,16 execution5 wrappers и40 полных frozen trials. Source/actor/fixtures unchanged, whole group closed, leases released. Это проверка сохранённых технических данных, без новых native executions и N4 scientific PASS.
 

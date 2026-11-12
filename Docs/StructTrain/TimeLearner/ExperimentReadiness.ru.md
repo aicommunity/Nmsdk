@@ -2,7 +2,7 @@
 
 Оперативно: [full-domain N4 A1](ValidationPlans/M40ObservationDomainTrainA1-20261112/RESULT.ru.md) закрыт с общим отказом: Classic valid, но training invalid_observation/ambiguous; Branch timeout при экспорте, training outcome неизвестен. [Branch-only A2](ValidationPlans/M40ObservationDomainBranchFinalizeA2-20261112/RESULT.ru.md) технически принят1/1, полный пакет valid, обучение budget_exhausted после101 поисковой пробы; сертификата нет. Физика, CapturedPerInput, допуски и search1800s сохранены. Обычного Test этих незавершённых N4 обучений нет. Требуются публикация полных primary и temporal отчёт.
 
-Новый export SDK08b898b/Pulsee9b807 собран на M40; native36 активен, итог не принят. [Подготовка и границы](ValidationPlans/M40ValidatedExport36A2-20261112/PREPARATION-RESULT.ru.md). Устранение повторных decode ещё требует большого N4 roundtrip/performance и проверки на Elder.
+Новый export SDK08b898b/Pulsee9b807 принят на M40: свежая сборка,36/36 actual native PASS, outer+36 children closed и lease released. [Приёмка и границы](ValidationPlans/M40ValidatedExport36A2-20261112/RESULT.ru.md). Большой N4 roundtrip/performance, Elder и полный independent replay остаются отдельными проверками.
 
 Свежий M40 SDK8362d58f/Pulse1110808 принят32/32 в техническом scope: active Build guards, header publication7/execution5, старый Console wire и source7 recognition. [Результат](ValidationPlans/M40RecoveryConsole32A1-20261111/RESULT.ru.md). Elder ранее принял native recognition10/10 и независимый replay6/6; также завершил отдельную свежую сборку и тот же набор32/32.
 
