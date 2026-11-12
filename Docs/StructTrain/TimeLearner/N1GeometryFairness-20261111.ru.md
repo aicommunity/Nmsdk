@@ -1,6 +1,6 @@
 # N1: независимый от recovery обход geometry/Rs — 11.11.2026
 
-Адресная проверка production C++ завершена на обоих Linux workers. Исправленный код проходит98/98 cases на каждом; исходный порядок воспроизводит два заранее объявленных отказа. Это проверка общего контроллера и кодека на управляемых наблюдениях, без физических нейронных моделей; native SDK/Console A/B ещё требуется. Этап7 и весь план не объявляются завершёнными.
+Адресная проверка production C++ завершена на обоих Linux workers:98/98 cases after, два заранее объявленных отказа before. Это controlled-observation проверка контроллера и кодека. Позднее приняты полный SDK build, native linking/storage/serializer и реальные N4 прогоны (см. уточнение12.11 ниже); отдельное физическое before/after сравнение именно этой правки ещё не выполнено. Этап7 и весь план не объявляются завершёнными.
 
 ## Дефект и изменение
 
@@ -47,8 +47,14 @@ CapturedPerInput, anchorN−1, tolerances, N0, реальные invalid-observat
 
 A1 отозван до запуска после проверки toolchain/native-domain flag. A2 завершился compile error из-за тяжёлого native include; он сохранён. A3 реально выполнил98cases: before97PASS/1FAIL, after97PASS/1FAIL. Новый regression тогда уже прошёл after, а единственный after-отказ требовал старого порядка RetrySameCandidate; тест усилен новым независимым контрактом с прежними mesh/bounds assertions. Исходные результаты не переименованы в PASS.
 
+## Уточнение состояния12.11
+
+После исходного controlled gate принят [fresh SDK36/36](ValidationPlans/M40RecordedN4Sdk36A5-20261112/NATIVE36-RESULT.ru.md), Root `448b153f2fea3486ff40f3a626b8f1110b9e3ee2` / Pulse `7b524b8d6c760c5ecfeea432b14b5f9d5045987d`. Два [полных N4 native roundtrip](ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112/RESULT.ru.md) дополнительно проверили настоящий import/build/export и response, без нового обучения. Требование собрать и связать полный SDK больше не является открытым.
+
+Исходные full-domain stock Train использовали Root `8362d58f4d6576a0c8b0cc7633270976dff1df7b`, Pulse `1110808f4ad1f67538dadc6fe1d3f097e00c0630`, Rdk `de4134235c0dcb8b91fd9a43b267348ad1a163ca`; [actual runtime closure](ValidationPlans/M40ObservationDomainTrainA1-20261112/fixture/runtime.json). Pulse539 — предок111, а NextDomainCandidate не менялась между этими версиями: старый interleave defect нельзя повторно переносить в открытые дефекты или приписывать им результаты поздних stock запусков. Classic invalid_observation/ambiguous и Branch budget_exhausted сохраняют свои исходные причины; сам ancestry не доказывает отдельный native fairness A/B.
+
 ## Следующая приёмка
 
-Собрать полный SDK с новым Pulse и проверить native linking/serializer/storage и фактические controlled Console cases. Затем native stock N4 before/after с одинаковой математической целью, явными budgets и полными временными traces. Measured-window prediction29frames/segment остаётся отдельной проверяемой гипотезой; source prediction не подтверждает отсутствующий пик. Нового классификатора и нового научного8/8 здесь нет.
+Остаётся native stock N4 before/after с одинаковой математической целью, явными budgets и полными временными traces, с изолированным объявленным различием порядка обхода. Поздние stock прогоны уже включают и другие controller/recovery изменения и не являются таким сравнением. Measured-window prediction29frames/segment остаётся отдельной проверяемой гипотезой; source prediction не подтверждает отсутствующий пик. Нового классификатора и нового научного8/8 здесь нет.
 
 Ветки корня/PulseLib созданы от develop с --no-ff dependency merges; история не переписывалась. Merge в develop откладывается до соответствующей native приёмки.
