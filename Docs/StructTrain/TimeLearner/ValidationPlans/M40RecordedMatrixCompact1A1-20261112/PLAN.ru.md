@@ -1,0 +1,7 @@
+# Компактные primary: actual 16-trial roundtrip
+
+Source `b0ceed67f7729d1ee501a9a5b8644089db7a5354`. После принятия metadata40 отдельное owned DATA задание должно выполнить production `create_primary` на закрытом A2 и `audit_primary` после восстановления. Полная исходная matrix проходит обычный auditor до отбора байтов. В пакет входят полные реальные recognition models с embedded stopped source/training primary, summaries, все новые 16 observations, evaluation/execution specs, original signed run manifests, необходимые saved closure joins, raw runtime и исходная Phase A матрица. Это самостоятельный scientific DATA subset, не полная копия runtime: duplicate jobs/source copies и рисунки исключены явно.
+
+Reader проверяет raw SHA каждого выбранного файла по original manifest, равенство original before/after model hashes, все labels/IDs/ISI/complete и вызывает единственный production diagnostic scorer. Полные метрики должны совпасть с original manifests, включая source evidence. No native attestation, convergence certificate или scientific PASS из saved JSON не выводятся.
+
+Пределы: archive128 MiB, expanded768 MiB, member256 MiB, не более64 members; общий owned job 6 GiB RAM/64 tasks/21600 s. Четыре fixture bindings побайтно совпадают с принятым closed A2 inventory. Все selected байты остаются исходными; новый tar.xz использует существующий lossless portable_primary codec. Исходная working directory A2 остаётся M40 cache. Полная галерея строится другим уже работающим job и в Git целиком не помещается. Приёмка ещё не заявлена.

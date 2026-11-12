@@ -1,0 +1,34 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "recorded-matrix-compact1-a1",
+  "package_fingerprint": "11bae7170ecbc3948b80e775fee396977e76c48b5082484587aeffb66187e626",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryActualTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_recorded_matrix_primary.RecordedMatrixPrimaryActualTest.test_actual_models_and_all_sixteen_observations_rescore_from_compact_bundle"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_MATRIX_PRIMARY": {
+      "pattern": "**/*.json",
+      "files": 91,
+      "fingerprint": "b3ee1a486414a2d7af9c2099185bf464150781a3c356a5902dfdf0b0486cc32a"
+    },
+    "TIMELEARNER_RECORDED_MATRIX_INPUTS": {
+      "pattern": "*",
+      "files": 7,
+      "fingerprint": "0cef600ca970f41de0f580accc614a9e52cecfc6960d10b3d8c178afad006506"
+    },
+    "TIMELEARNER_RECORDED_MATRIX_CONTROLLER": {
+      "pattern": "*.json",
+      "files": 18,
+      "fingerprint": "e47d742d1c778d204a26bf0246988e0a7af8c7964fda232beed3215a7e2fcad7"
+    },
+    "TIMELEARNER_RECORDED_MATRIX_RUNTIME": {
+      "pattern": "runtime.json",
+      "files": 1,
+      "fingerprint": "4bde14984c9358153c217860056ee599cb259f0b65f6a50b0f37ac8b9c14cd00"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-recorded-matrix-compact40-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 32,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-recorded-matrix-compact-a1",
+      "commit": "b0ceed67f7729d1ee501a9a5b8644089db7a5354"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-matrix-compact-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedMatrixCompact40A1-20261112/suite.json",
+      "sha256": "cc7cc7acb81691d1438ea0a8e89d2d3dd1fe81ffe588c76c9923ebe9a565a277"
+    },
+    "fixtures": {}
+  }
+}
