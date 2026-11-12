@@ -1,6 +1,6 @@
 # N1: независимый от recovery обход geometry/Rs — 11.11.2026
 
-Адресная проверка production C++ завершена на обоих Linux workers:98/98 cases after, два заранее объявленных отказа before. Это controlled-observation проверка контроллера и кодека. Позднее приняты полный SDK build, native linking/storage/serializer и реальные N4 прогоны (см. уточнение12.11 ниже); отдельное физическое before/after сравнение именно этой правки ещё не выполнено. Этап7 и весь план не объявляются завершёнными.
+Адресная проверка production C++ завершена на обоих Linux workers:98/98 cases after, два заранее объявленных отказа before. Это controlled-observation проверка контроллера и кодека. Позднее приняты полный SDK build, native linking/storage/serializer и реальные N4 прогоны (см. уточнение12.11 ниже); [Физическое сравнение](N1ClassicScientificOutcome-20261112.ru.md) начато: after завершён с invalid_observation, before остановился timeout при export; полного принятого A/B пока нет. Этап7 и весь план не объявляются завершёнными.
 
 ## Дефект и изменение
 

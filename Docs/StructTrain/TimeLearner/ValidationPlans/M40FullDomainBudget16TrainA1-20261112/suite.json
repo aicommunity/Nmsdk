@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "current-full-domain-Classic-recovery-budget16-train-a1",
+  "package_fingerprint": "37cdb645c147db532124704b8cedd73102a7aba26d2ec0b992e28fcd62d39389",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_classic_actual_strict_N4_cold8_train_retains_honest_outcome"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "390c26bf830034fef151eac480a6380d9d05818143cdf970d350fbce0fdab579"
+    },
+    "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": {
+      "pattern": "**/*.json",
+      "files": 10,
+      "fingerprint": "a92bd371ef4d3f6c20d1f2b6e53fdf0badc176353c5fa0d0489058b5375c8f41"
+    },
+    "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": {
+      "pattern": "NeuroModelerConsole*",
+      "files": 2,
+      "fingerprint": "c76cdb8265fc7510140af619492b47342219f5df06ae9c29db2a45dfddc3175b"
+    }
+  }
+}
