@@ -41,7 +41,7 @@ class RecordedMatrixPrimaryBoundsTest(unittest.TestCase):
 
     def refused(self, value, reason):
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary);path = root/'bundle.json'
+            root = Path(temporary);(root/'input').mkdir();path = root/'input/bundle.json'
             path.write_text(json.dumps(value), encoding='utf-8')
             with self.assertRaisesRegex(ValueError, reason):audit_primary(path, root/'restored')
             self.assertFalse((root/'restored').exists())
