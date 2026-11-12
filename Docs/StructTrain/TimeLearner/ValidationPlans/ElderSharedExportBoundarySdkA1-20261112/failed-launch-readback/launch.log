@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py", line 617, in <module>
+    raise SystemExit(main())
+  File "/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py", line 610, in main
+    if args.action=='launch':return launch(args.request)
+  File "/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py", line 214, in launch
+    plan = preflight(request_path)
+  File "/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/owned_native_job.py", line 197, in preflight
+    require(memory>=job['limits']['reservation_memory_bytes']+256*1024**2 and
+  File "/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_native_capacity_preflight
