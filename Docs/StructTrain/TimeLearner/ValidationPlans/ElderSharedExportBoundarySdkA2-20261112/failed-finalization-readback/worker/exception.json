@@ -1,0 +1,4 @@
+{
+  "reason": "native_gate_rejected:finalization-boundary-001:completed:incomplete_test_observation:native_gate_skipped_or_unfinished_case",
+  "traceback": "Traceback (most recent call last):\n  File \"/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 605, in run\n    self.gate(leaf)\n  File \"/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 441, in gate\n    _require(result[\"validity\"] == \"valid\" and result[\"assertion_status\"] == \"passed\" and inventory and\n  File \"/home/user/timelearner-refactor/source-shared-export-boundary-sdk-a1/Scripts/StructTrain/TimeLearner/native_acceptance_worker.py\", line 26, in _require\n    raise ValueError(reason)\nValueError: native_gate_rejected:finalization-boundary-001:completed:incomplete_test_observation:native_gate_skipped_or_unfinished_case\n"
+}
