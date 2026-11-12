@@ -30,6 +30,7 @@ def resign(document):
 
 class RecoveryRecognition7NativeTest(unittest.TestCase):
     fixture_environment = 'TIMELEARNER_RECOVERY_RECOGNITION7_NATIVE_BUNDLE'
+    archive_prefix = 'case'
 
     @classmethod
     def setUpClass(cls):
@@ -40,7 +41,7 @@ class RecoveryRecognition7NativeTest(unittest.TestCase):
         cls.scratch = tempfile.TemporaryDirectory(); cls.addClassCleanup(cls.scratch.cleanup)
         cls.restored = Path(cls.scratch.name)/'original'
         cls.restoration = restore_native_bundle(cls.bundle_root/'bundle.json', cls.restored)
-        cls.directories = tuple(cls.restored/f'case/native-{i:03d}/native-composite/package7/NativeRecoveryRecognition7/{name}'
+        cls.directories = tuple(cls.restored/f'{cls.archive_prefix}/native-{i:03d}/native-composite/package7/NativeRecoveryRecognition7/{name}'
                                 for i, name in enumerate(CASES, 1))
         require(all(p.is_dir() for p in cls.directories), 'recovery_recognition7_actual_case_missing')
 

@@ -69,7 +69,7 @@ class Native32BundleChecks:
     def test_actual_console_publications_bind_source7_and_execution5(self):
         checked = 0
         for ordinal in range(1, 5):
-            paths = list((self.restored/'case'/f'console-{ordinal:03d}').glob(
+            paths = list((self.restored/self.archive_prefix/f'console-{ordinal:03d}').glob(
                 'native-composite/package7/*/*/source-package.json'))
             self.assertEqual(len(paths), 1)
             directory = paths[0].parent
