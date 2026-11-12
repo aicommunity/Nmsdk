@@ -3,10 +3,13 @@
 Called only by the finite native DATA controller. Materialize declared embedded
 primary first; the ordinary pipeline must then validate actual external files.
 """
-from pathlib import Path
+import argparse
+import html
+import json
+from pathlib import Path, PurePosixPath
 import re
 
-from .native_evidence import load, parse_json_bytes, require
+from .native_evidence import load, load_json, parse_json_bytes, require
 
 
 SHA = re.compile('[0-9a-f]{64}')
@@ -92,3 +95,130 @@ def run_case(request, row, runtime_path, output):
             metrics['training_certificate_present'] is False and metrics['evaluation_verdict'] is None,
             'recorded_diagnostic_false_training_verdict')
     return result
+
+
+def audit_matrix(directory, controller, runtime_manifest):
+    """Portable DATA joins; saved closure alone never proves successful work."""
+    from .native_data_checks import validate_request
+    from .native_pipeline_worker import audit_run_manifest
+    from .phasea_matrix import extract, trial_design
+    from .recognition_metrics import load_diagnostic_evaluation
+    from .collector_provenance import _frozen, frozen_digest
+
+    directory, controller = Path(directory).resolve(strict=True), Path(controller).resolve(strict=True)
+    request = validate_request(load(controller/'request.json'))
+    require(request['schema_version'] == 2, 'recorded_matrix_requires_diagnostic_request')
+    runtime_raw, runtime_record = _frozen(Path(runtime_manifest).resolve(strict=True), 16*1024**2)
+    require(runtime_record['sha256'] == request['runtime_manifest']['sha256'],
+            'recorded_matrix_pinned_runtime_changed')
+    runtime = parse_json_bytes(runtime_raw)
+    terminal = load(directory/'terminal.json')
+    require(terminal['operation_passed'] is True and terminal['heartbeat_errors'] == [],
+            'recorded_matrix_operation_not_completed')
+    result = load(controller/'supervisor-result.json')
+    require(result['outer_closed'] and result['reason'] is None and result['record_errors'] == [],
+            'recorded_matrix_controller_not_closed')
+    outer = load(controller/'outer-closure.json')
+    require(outer['all_processes_closed'] and outer['binding'] == result['outer_binding'],
+            'recorded_matrix_outer_binding')
+    outcome = load(controller/'original-outcome.json')['kernel_before_stop']['state']
+    require(outcome['ExecMainStatus'] == '0' and outcome['Result'] == 'success',
+            'recorded_matrix_original_worker_failed')
+    leases = load_json(controller/'reservation-final.json')
+    require(type(leases) is list and len(leases) == 1 and leases[0]['state'] == 'released',
+            'recorded_matrix_lease_not_released')
+    for stem in ('source', 'tool'):
+        require((directory/(stem+'-before.json')).read_bytes() ==
+                (directory/(stem+'-after.json')).read_bytes(), 'recorded_matrix_source_changed')
+    original = PurePosixPath(request['execution_root'])/'readbacks'/request['job_id']
+    children = result['children_closed']
+    expected = {str(original/r['name']/'process/contained') for r in request['cases']}
+    require(len(children) == len(expected) and {r['directory'] for r in children} == expected,
+            'recorded_matrix_foreign_or_missing_children')
+    by_directory = {r['directory']: r for r in children}
+    staged = directory/'native-inputs'
+    for record in request['inputs']:
+        path = staged/record['name']
+        actual = frozen_digest(path, 64*1024**2)
+        require(actual['bytes'] == record['bytes'] and actual['sha256'] == record['sha256'],
+                'recorded_matrix_staged_input_changed')
+    matrix = extract((staged/request['matrix']['parameters_name']).read_bytes(),
+                     (staged/request['matrix']['observations_name']).read_bytes(), request['matrix']['revision'])
+    rows = []
+    for row in request['cases']:
+        root = directory/row['name']
+        child = by_directory[str(original/row['name']/'process/contained')]
+        binding = load(root/'process/contained/owned-unit.json')
+        require(child['binding'] == binding and child['closure']['binding'] == binding and
+                child['closure']['all_processes_closed'], 'recorded_matrix_foreign_child_binding')
+        audit = audit_run_manifest(root/'run-manifest.json')
+        manifest = load(root/'run-manifest.json')
+        require(manifest['operation'] == 'diagnostic-evaluate' and manifest['execution'] == 'completed'
+                and manifest['validity'] == 'valid', 'recorded_matrix_invalid_case')
+        require(manifest['runtime_fingerprint'] == runtime['runtime_fingerprint'] and
+                manifest['source_closure'] == runtime['source_closure'],
+                'recorded_matrix_case_runtime_substitution')
+        source = root/'input/source/train_stopped_state.json'
+        actual = frozen_digest(source, 256*1024**2)
+        require(actual['bytes'] == row['source_raw_bytes'] and actual['sha256'] == row['source_raw_sha256'],
+                'recorded_matrix_source_substitution')
+        job = load(root/'input/job.json');package = job['source_stopped'];model = package['configuration']['model']
+        run_id = row['name']+'/stopped-phasea-diagnostic'
+        require(job['trials'] == trial_design(matrix, model['initial_isi'], run_id, duration=2., rotations=1),
+                'recorded_matrix_wrong_pattern_design')
+        spec, observations = load_diagnostic_evaluation(root/'native/evaluation.json')
+        require(len(observations) == len(spec['trials']) == 8 and
+                all(o['complete'] for o in observations), 'recorded_matrix_incomplete_observations')
+        metrics = manifest['analysis']['metrics']
+        require(metrics['diagnostic_only'] is True and metrics['training_completed'] is False and
+                metrics['training_certificate_present'] is False and metrics['evaluation_verdict'] is None,
+                'recorded_matrix_false_training_or_scientific_verdict')
+        rows.append(dict(name=row['name'], source_model_revision=package['model_revision'],
+            training_outcome=package['training_outcome'], topology='Branch' if model['branch'] else 'Classic',
+            source_threshold=package['neuron']['metadata']['calibration']['threshold'],
+            trial_count=len(observations), metrics=metrics, run_audit=audit))
+    return dict(kind='timelearner_recorded_n4_matrix_analysis', schema_version=1,
+        original_job_id=request['job_id'], models=rows, trials=8*len(rows), diagnostic_only=True,
+        training_completed=False, native_execution_attested=False, scientific_verdict=None)
+
+
+def report_matrix(directory, controller, runtime_manifest, output):
+    """Reuse the production renderer for every trial/soma; never change models."""
+    from .live_pipeline_reports import render_pipeline_run
+    directory, controller = Path(directory).resolve(strict=True), Path(controller).resolve(strict=True)
+    output = Path(output).resolve()
+    require(not output.exists() and all(not output.is_relative_to(p) and not p.is_relative_to(output)
+            for p in (directory, controller)), 'recorded_matrix_report_overlaps_primary')
+    analysis = audit_matrix(directory, controller, runtime_manifest)
+    output.mkdir(parents=True)
+    reports = []
+    for row in analysis['models']:
+        value = render_pipeline_run(directory/row['name']/'run-manifest.json', output/row['name'])
+        reports.append(dict(name=row['name'], report=value))
+    manifest = dict(analysis=analysis, reports=reports, visual_acceptance_complete=False,
+                    scientific_verdict=None)
+    (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+    links = ''.join('<li><a href="'+html.escape(r['name'])+'/index.html">'+html.escape(r['name'])+'</a></li>'
+                    for r in reports)
+    (output/'index.html').write_text('<!doctype html><meta charset="utf-8"><h1>Recorded N4 diagnostic responses</h1>'
+        '<p>Stopped models; inherited fixed thresholds. All eight patterns per model, actual input overlays. '
+        'No training convergence, threshold selection or independent scientific verdict.</p><ul>'+links+'</ul>', encoding='utf-8')
+    return manifest
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('action', choices=('audit', 'report'))
+    parser.add_argument('directory', type=Path);parser.add_argument('controller', type=Path)
+    parser.add_argument('runtime_manifest', type=Path)
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args(argv)
+    if args.action == 'audit':result = audit_matrix(args.directory, args.controller, args.runtime_manifest)
+    else:
+        require(args.output is not None, 'recorded_matrix_report_output_required')
+        result = report_matrix(args.directory, args.controller, args.runtime_manifest, args.output)
+    print(json.dumps(result, allow_nan=False));return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

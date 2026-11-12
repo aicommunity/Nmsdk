@@ -1,9 +1,14 @@
 """Strict diagnostic declarations; no model execution is inferred here."""
 from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+import tempfile
 import unittest
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
+from ..recorded_diagnostic_matrix import audit_matrix
 
 
 def diagnostic_request():
@@ -17,6 +22,50 @@ def diagnostic_request():
                           source_raw_bytes=1000, source_raw_sha256='c'*64)
                       for role in ('classic', 'branch')]
     return value
+
+
+class RecordedDiagnosticMatrixJoinTest(unittest.TestCase):
+    """Reject misleading closure before reading expensive recorded primary."""
+    def setUp(self):
+        temporary = tempfile.TemporaryDirectory();self.addCleanup(temporary.cleanup)
+        self.root = Path(temporary.name);self.data = self.root/'data';self.data.mkdir()
+        self.controller = self.root/'controller';self.controller.mkdir()
+        self.runtime = self.root/'runtime.json'
+        self.runtime.write_bytes(b'{"runtime_fingerprint":"declared","source_closure":{}}')
+        request = diagnostic_request()
+        request['runtime_manifest']['sha256'] = hashlib.sha256(self.runtime.read_bytes()).hexdigest()
+        self.write(self.controller/'request.json', request)
+        self.write(self.data/'terminal.json', dict(operation_passed=True, heartbeat_errors=[]))
+        self.write(self.controller/'supervisor-result.json', dict(outer_closed=True, reason=None,
+            record_errors=[], outer_binding={}, children_closed=[]))
+        self.write(self.controller/'outer-closure.json', dict(all_processes_closed=True, binding={}))
+        self.write(self.controller/'original-outcome.json',
+            dict(kernel_before_stop=dict(state=dict(ExecMainStatus='0', Result='success'))))
+        self.write(self.controller/'reservation-final.json', [dict(state='released')])
+        for stem in ('source', 'tool'):
+            for suffix in ('before', 'after'):self.write(self.data/(stem+'-'+suffix+'.json'), {})
+
+    @staticmethod
+    def write(path, value):
+        path.write_text(json.dumps(value), encoding='utf-8')
+
+    def audit(self):
+        return audit_matrix(self.data, self.controller, self.runtime)
+
+    def test_failed_operation_cannot_be_rescued_by_successful_cleanup(self):
+        self.write(self.data/'terminal.json', dict(operation_passed=False, heartbeat_errors=[]))
+        with self.assertRaisesRegex(ValueError, 'operation_not_completed'):self.audit()
+
+    def test_explicit_runtime_must_match_original_request_bytes(self):
+        self.runtime.write_bytes(b'{}')
+        with self.assertRaisesRegex(ValueError, 'pinned_runtime_changed'):self.audit()
+
+    def test_released_outer_group_cannot_replace_missing_case_groups(self):
+        with self.assertRaisesRegex(ValueError, 'foreign_or_missing_children'):self.audit()
+
+    def test_unreleased_reservation_refuses_data_acceptance(self):
+        self.write(self.controller/'reservation-final.json', [dict(state='held')])
+        with self.assertRaisesRegex(ValueError, 'lease_not_released'):self.audit()
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
