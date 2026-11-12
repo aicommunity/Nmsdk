@@ -6,11 +6,12 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
 from ..recorded_diagnostic_matrix import audit_matrix, report_matrix
-from ..native_evidence import load
+from ..native_evidence import EvidenceError, load
 
 
 def diagnostic_request():
@@ -68,6 +69,22 @@ class RecordedDiagnosticMatrixJoinTest(unittest.TestCase):
     def test_unreleased_reservation_refuses_data_acceptance(self):
         self.write(self.controller/'reservation-final.json', [dict(state='held')])
         with self.assertRaisesRegex(ValueError, 'lease_not_released'):self.audit()
+
+    def test_missing_plot_backend_refuses_before_expensive_audit_or_output(self):
+        output = self.root/'report'
+        with patch('Scripts.StructTrain.TimeLearner.plotting.plotting_runtime',
+                   side_effect=EvidenceError('plotting_runtime_unavailable:missing')), \
+             patch('Scripts.StructTrain.TimeLearner.recorded_diagnostic_matrix.audit_matrix') as audit:
+            with self.assertRaisesRegex(ValueError, 'plotting_runtime_unavailable'):
+                report_matrix(self.data, self.controller, self.runtime, output)
+            audit.assert_not_called()
+        self.assertFalse(output.exists())
+
+    def test_invalid_report_destination_is_refused_before_backend_preflight(self):
+        with patch('Scripts.StructTrain.TimeLearner.plotting.plotting_runtime') as backend:
+            with self.assertRaisesRegex(ValueError, 'report_overlaps_primary'):
+                report_matrix(self.data, self.controller, self.runtime, self.data/'report')
+            backend.assert_not_called()
 
 
 class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):

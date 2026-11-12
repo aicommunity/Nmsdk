@@ -195,10 +195,12 @@ def audit_matrix(directory, controller, runtime_manifest):
 def report_matrix(directory, controller, runtime_manifest, output):
     """Reuse the production renderer for every trial/soma; never change models."""
     from .live_pipeline_reports import render_pipeline_run
+    from .plotting import plotting_runtime
     directory, controller = Path(directory).resolve(strict=True), Path(controller).resolve(strict=True)
     output = Path(output).resolve()
     require(not output.exists() and all(not output.is_relative_to(p) and not p.is_relative_to(output)
             for p in (directory, controller)), 'recorded_matrix_report_overlaps_primary')
+    plotting_runtime()  # Fail before the expensive full-source DATA audit.
     analysis = audit_matrix(directory, controller, runtime_manifest)
     output.mkdir(parents=True)
     reports = []
