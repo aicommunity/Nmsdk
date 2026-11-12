@@ -1,0 +1,91 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "4e29e66551e87094183bdaa731d2402af19b19d7f2eefb9d0e83147fd16fd302",
+      "unit": "timelearner-ad5adbab-23d7-4d77-8360-1af8af0f1dba.service",
+      "invocation_id": "fe14a084653d46a0a563b7c5f50c6cd4",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-ad5adbab-23d7-4d77-8360-1af8af0f1dba.service",
+      "initial_main_pid": 3248266,
+      "initial_start_ticks": "352764401",
+      "sha256": "ab6294698341c7995d39671b4fce34a90bcc77d82fba5ff2ef6117e23fcf9ce5"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-ad5adbab-23d7-4d77-8360-1af8af0f1dba.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "9ca28344-59a8-4b4c-bc8e-1739edff3e30",
+      "job_id": "s07-observation-domain-primary-independent-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3248266,
+        "start_ticks": "352764401",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-primary-independent-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-primary-independent-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-primary-independent-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainPrimaryIndependentA1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/observation-domain-primary-independent-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ObservationDomainPrimaryIndependentA1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1/Reports/StructTrain/TimeLearner/ObservationDomainBranchPrimary-M40-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1/Reports/StructTrain/TimeLearner/ObservationDomainBranchPrimary-M40-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1/Reports/StructTrain/TimeLearner/ObservationDomainCombinedPrimary-M40-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-observation-domain-primary-independent-a1/Reports/StructTrain/TimeLearner/ObservationDomainCombinedPrimary-M40-20261112"
+        }
+      ],
+      "state": "released",
+      "created": 1794452446.5292206,
+      "deadline": 1794452876.8004942,
+      "updated": 1794452758.3974128,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
