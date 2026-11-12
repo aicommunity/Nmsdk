@@ -1,7 +1,9 @@
 # Серверная проверка общего export boundary
 
-Canonical preparation s08-shared-export-sdk-canonical-m40-a1 завершена: completed/exit0, 82.51365973614156 s, вся группа процессов закрыта, diagnostics clear. Проверены 4160 файлов восьми репозиториев, импортированы 30 SDK Python modules; selected_ids=102. Это подготовка DATA, не результат C++ tests. Исходные подтверждения сохранены в canonical-readback без повторной сериализации.
+Canonical preparation s08-shared-export-sdk-canonical-m40-a1 завершена: completed/exit0,82.51365973614156s, whole group closed, diagnostics clear;4160 files/8 repos,30 SDK Python modules,102 selected IDs. [Исходные подтверждения](canonical-readback/readback-integrity.json).
 
-Запущен штатный owned native job s08-shared-export-sdk102-m40-a1: отдельные source/build/runtime/output, supervisor PID1359732 (boot/start identity в controller), SourceRoot c73575fe545b00cc7c9bf170c81c185c30b7026a / Pulse dfb9a98244f91b4f4029d8470465fd40116436ca. Фактический итог сборки и 102 tests ещё ожидается; PASS не заявлен.
+Fresh Release/O3 build обоих targets Test_PulseLib_StorageComponents и NeuroModelerConsole завершён. [Сохранённый ранний снимок](build-and-running-readback-a1/readback-integrity.json) содержит build receipt, compiled inventory102 и11 completed valid passed cases без отказов; cohort продолжает работать. Это нижняя граница подтверждённого прогресса данного снимка, не финальный результат102/102. SourceRoot c73575fe545b00cc7c9bf170c81c185c30b7026a / Pulse dfb9a98244f91b4f4029d8470465fd40116436ca, Python actor7bd3684732e1d3f7a0aa038d659fd52bc95892bf.
 
-M40: доступ восстановлен, /media/user/Data свободно около248 GiB. Elder: /home/user свободно около1.9 GiB; новая сборка не запускалась. После функциональной приёмки остаются большой 67-group export в прежние300s, один конечный scientific rerun и независимая проверка Elder. Исходный план не завершён.
+[Независимая проверка Elder](../ElderSharedExportBoundarySdkA2-20261112/PLAN.ru.md) имеет тот же code/cohort, отдельный actor binding и изолированный runtime; A1 launch отвергнут до native из-за избыточного дискового резерва. Окончательная функциональная приёмка на обоих workers ещё не завершена.
+
+После неё остаются большой67-group export в прежние300s и один конечный scientific rerun. Нынешние данные не добавляют сертификат сходимости или научный PASS; весь исходный план частичен.
