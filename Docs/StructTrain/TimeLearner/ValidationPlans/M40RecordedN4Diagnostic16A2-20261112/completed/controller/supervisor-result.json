@@ -1,0 +1,157 @@
+{
+  "reason": null,
+  "record_errors": [],
+  "last_before_cleanup": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "18dfb175b316c33f5eab0677655016cc086f978f86183a3f7c6d205c1b15ae1c",
+      "unit": "timelearner-de4eab35-c4d7-446f-ad9d-3a1b22c716c0.service",
+      "invocation_id": "0258c988939d4c4584a81bfe5a0683aa",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-de4eab35-c4d7-446f-ad9d-3a1b22c716c0.service",
+      "initial_main_pid": 260285,
+      "initial_start_ticks": "355051757",
+      "sha256": "42df235635ac0d51091bee41303d34fa696b285e274c64a4b583634af37918b2"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "4294967296",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt de4eab35-c4d7-446f-ad9d-3a1b22c716c0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "exited",
+      "InvocationID": "0258c988939d4c4584a81bfe5a0683aa"
+    },
+    "memory_max": 4294967296,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "outer_binding": {
+    "kind": "timelearner_contained_binding",
+    "schema_version": 1,
+    "request_sha256": "18dfb175b316c33f5eab0677655016cc086f978f86183a3f7c6d205c1b15ae1c",
+    "unit": "timelearner-de4eab35-c4d7-446f-ad9d-3a1b22c716c0.service",
+    "invocation_id": "0258c988939d4c4584a81bfe5a0683aa",
+    "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-de4eab35-c4d7-446f-ad9d-3a1b22c716c0.service",
+    "initial_main_pid": 260285,
+    "initial_start_ticks": "355051757",
+    "sha256": "42df235635ac0d51091bee41303d34fa696b285e274c64a4b583634af37918b2"
+  },
+  "outer_closed": true,
+  "children_closed": [
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2/classic/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "76de903b0a975b1bf1c089369a8deac2723c1bad43e3a9ec8e099e3bf73c1483",
+        "unit": "timelearner-beaf3ff6-ef0c-48bc-b777-c48e7451ac09.service",
+        "invocation_id": "7cc8a2f6b9c841889ce6d8c2a4254067",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-beaf3ff6-ef0c-48bc-b777-c48e7451ac09.service",
+        "initial_main_pid": 272390,
+        "initial_start_ticks": "355116331",
+        "sha256": "51a1e3c5ae0b66e67bc0fd841ac03796b195f22863a24326f662026631386d7e"
+      },
+      "closure": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "76de903b0a975b1bf1c089369a8deac2723c1bad43e3a9ec8e099e3bf73c1483",
+          "unit": "timelearner-beaf3ff6-ef0c-48bc-b777-c48e7451ac09.service",
+          "invocation_id": "7cc8a2f6b9c841889ce6d8c2a4254067",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-beaf3ff6-ef0c-48bc-b777-c48e7451ac09.service",
+          "initial_main_pid": 272390,
+          "initial_start_ticks": "355116331",
+          "sha256": "51a1e3c5ae0b66e67bc0fd841ac03796b195f22863a24326f662026631386d7e"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-beaf3ff6-ef0c-48bc-b777-c48e7451ac09.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    },
+    {
+      "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-recorded-n4-diagnostic16-m40-a2/branch/process/contained",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "a5d08e1403292313a76b1df02f93d8eb7cec7abe72f1969765257cfe20a7be32",
+        "unit": "timelearner-e8a419ee-8690-4b8c-a92f-ebd90932269e.service",
+        "invocation_id": "eded388acf0b4ab68d96a482a964c8a4",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e8a419ee-8690-4b8c-a92f-ebd90932269e.service",
+        "initial_main_pid": 317581,
+        "initial_start_ticks": "355247504",
+        "sha256": "ac7915f4980be1b87639197310f76952eedf5bb8adfe209367853cf24a789fb5"
+      },
+      "closure": {
+        "execution": "unknown",
+        "all_processes_closed": true,
+        "reason": "bound_unit_and_group_absent",
+        "scientific_verdict": null,
+        "binding": {
+          "kind": "timelearner_contained_binding",
+          "schema_version": 1,
+          "request_sha256": "a5d08e1403292313a76b1df02f93d8eb7cec7abe72f1969765257cfe20a7be32",
+          "unit": "timelearner-e8a419ee-8690-4b8c-a92f-ebd90932269e.service",
+          "invocation_id": "eded388acf0b4ab68d96a482a964c8a4",
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-e8a419ee-8690-4b8c-a92f-ebd90932269e.service",
+          "initial_main_pid": 317581,
+          "initial_start_ticks": "355247504",
+          "sha256": "ac7915f4980be1b87639197310f76952eedf5bb8adfe209367853cf24a789fb5"
+        },
+        "state": {
+          "Type": "",
+          "Restart": "no",
+          "RemainAfterExit": "no",
+          "MainPID": "0",
+          "Result": "success",
+          "ExecMainCode": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "",
+          "MemoryMax": "infinity",
+          "TasksMax": "52862",
+          "KillMode": "control-group",
+          "Description": "timelearner-e8a419ee-8690-4b8c-a92f-ebd90932269e.service",
+          "LoadState": "not-found",
+          "ActiveState": "inactive",
+          "SubState": "dead",
+          "InvocationID": ""
+        }
+      }
+    }
+  ],
+  "disk_peak_increment": 3002867712,
+  "minimum_free": 271364689920,
+  "execution_success_not_inferred_from_cleanup": true,
+  "scientific_verdict": null
+}

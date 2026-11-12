@@ -1,0 +1,46 @@
+{
+  "kernel_before_stop": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "18dfb175b316c33f5eab0677655016cc086f978f86183a3f7c6d205c1b15ae1c",
+      "unit": "timelearner-de4eab35-c4d7-446f-ad9d-3a1b22c716c0.service",
+      "invocation_id": "0258c988939d4c4584a81bfe5a0683aa",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-de4eab35-c4d7-446f-ad9d-3a1b22c716c0.service",
+      "initial_main_pid": 260285,
+      "initial_start_ticks": "355051757",
+      "sha256": "42df235635ac0d51091bee41303d34fa696b285e274c64a4b583634af37918b2"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "4294967296",
+      "TasksMax": "64",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt de4eab35-c4d7-446f-ad9d-3a1b22c716c0",
+      "LoadState": "loaded",
+      "ActiveState": "active",
+      "SubState": "exited",
+      "InvocationID": "0258c988939d4c4584a81bfe5a0683aa"
+    },
+    "memory_max": 4294967296,
+    "tasks_max": 64,
+    "scientific_verdict": null
+  },
+  "worker_terminal": {
+    "operation_passed": true,
+    "heartbeat_errors": [],
+    "lease_release": "external controller only after exact outer and finite children close",
+    "scientific_verdict": null
+  },
+  "cleanup_does_not_attest_execution_success": true
+}
