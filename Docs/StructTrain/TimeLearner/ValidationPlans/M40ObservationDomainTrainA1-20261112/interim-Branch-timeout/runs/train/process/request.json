@@ -1,0 +1,16 @@
+{
+  "arguments": [
+    "--app-ini",
+    "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1/NeuroModelerConsole.ini",
+    "--timelearner-train",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-train-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/input/job.json",
+    "--timelearner-output",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-train-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/native"
+  ],
+  "working_directory": "/media/user/Data/TimeLearnerRefactor/runtime-recovery-console32-a1",
+  "maximum_wall_seconds": 1920.0,
+  "cancel_file": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-observation-domain-train-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train/process/cancel.request",
+  "memory_bytes": 4294967296,
+  "tasks": 64,
+  "cooperative_capture": true
+}
