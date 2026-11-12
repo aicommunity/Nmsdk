@@ -9,7 +9,7 @@ import math
 
 from ..candidate_window_package_evidence import audit_candidate_window_recovery_package
 from ..composite_primary import filesystem_primary_resolver
-from ..native_evidence import EvidenceError, load, require
+from ..native_evidence import EvidenceError, load, load_json, require
 from ..native_gate import audit_junit
 from . import test_recovery_recognition7_native as shared
 from . import test_native32_compact_primary as native32
@@ -76,7 +76,8 @@ class Native36CompactPrimaryTest(shared.RecoveryRecognition7NativeTest):
         self.assertTrue(all(r['closure']['all_processes_closed'] for r in result['children_closed']))
         outer = load(controller/'outer-closure.json');self.assertTrue(outer['all_processes_closed'])
         bound = list(self.restored.rglob('owned-unit.json'));self.assertEqual(len(bound), 37)
-        leases = load(controller/'reservation-final.json')
+        leases = load_json(controller/'reservation-final.json')
+        self.assertIsInstance(leases, list)
         self.assertEqual(len(leases), 1);self.assertEqual(leases[0]['state'], 'released')
         outcome = load(controller/'original-outcome.json')
         self.assertEqual(outcome['kernel_before_stop']['state']['ExecMainStatus'], '0')
