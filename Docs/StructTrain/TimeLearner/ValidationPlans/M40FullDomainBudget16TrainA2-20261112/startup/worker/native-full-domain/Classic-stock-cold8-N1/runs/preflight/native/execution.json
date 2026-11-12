@@ -1,0 +1,139 @@
+{
+    "artifacts": [
+        {
+            "bytes": 9426,
+            "path": "job.json",
+            "sha256": "53531356c4b066a406679a637ac423157458ff0dbef2e94931d4413791d01c4a"
+        },
+        {
+            "bytes": 222098,
+            "path": "initial-state.json",
+            "sha256": "2f223aa6499a64414dcaeefcee9ad4f70506ada4d1c0cc815d823ec5555ee037"
+        }
+    ],
+    "base_schema_version": 1,
+    "composite_counters": {
+        "archive": {
+            "groups": 0,
+            "native_probes": 0,
+            "primary_bytes": 0,
+            "sampled_frames": 0
+        },
+        "attempt": {
+            "logical_groups": 0,
+            "native_probes": 0,
+            "sampled_frames": 0
+        },
+        "execution": {
+            "native_trials": 0,
+            "sampled_frames": 0
+        }
+    },
+    "controller_state": "idle",
+    "evaluation_verdict": null,
+    "execution": "completed",
+    "frequency_hz": 2000,
+    "integration": {
+        "channels": [
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite1_1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite1_1.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite2_1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite2_1.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite3_1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite3_1.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite4_1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Dendrite4_1.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma1.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma1.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma2.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma2.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma3.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma3.InhChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma4.ExcChannel"
+            },
+            {
+                "maximum_conductance": 1.1627906976744186e-08,
+                "maximum_step_gain": 0.06230394808004327,
+                "path": "Soma4.InhChannel"
+            }
+        ],
+        "reason": "",
+        "valid": true
+    },
+    "job_sha256": "6b3a427b5b689026ce2395b7a6554f53571d8d8b5520b1dbcd0e236d9f62468c",
+    "kind": "timelearner_native_preflight_execution",
+    "measurement_archive": null,
+    "measurement_method": "declared-window-basin-necessity-v1",
+    "model_revision": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+    "model_semantic_hash": "f2e0e2d02303e15f4118dc248fdb4ff390a8b30993c16c9169ba140dc385754a",
+    "model_ticks": 0,
+    "model_time_begin": 0,
+    "model_time_end": 0,
+    "observed_probes": 0,
+    "recovery_delivery_count": null,
+    "recovery_ledger_sha256": null,
+    "reference_probes": 0,
+    "schema_version": 5,
+    "sha256": "f4f7b5e584603f2e7061ee8df39e736903182b28c733d8fba9f9564c0477d6e6",
+    "source_origin": null,
+    "training_started": false
+}
