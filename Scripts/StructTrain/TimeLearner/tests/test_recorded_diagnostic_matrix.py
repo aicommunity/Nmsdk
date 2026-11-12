@@ -104,13 +104,16 @@ class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
         for role, expected in (('classic', 32), ('branch', 8)):
             root = self.output/role/'evaluation'
             manifest = load(root/'manifest.json')
-            self.assertEqual(manifest['trial_soma_pairs'], expected)
+            self.assertEqual(manifest['expected_trial_soma_pairs'], expected)
+            self.assertEqual(manifest['observed_trial_soma_pairs'], expected)
+            self.assertEqual(manifest['missing_observation_ids'], [])
             self.assertEqual(len(manifest['figures']), expected)
             self.assertFalse(manifest['visual_acceptance_complete'])
             for figure in manifest['figures']:
                 views = figure['views']
                 self.assertTrue(views)
-                self.assertTrue(any(v['y_scale'] == 'local_detail' for v in views))
+                self.assertTrue(any(v['time_view'] != 'overview' and
+                    v['minimum_native_tick_pixels_on_zoom'] >= 8 for v in views))
                 for view in views:
                     self.assertFalse(view['downsampling'])
                     self.assertGreater(view['end'], view['begin'])
