@@ -1,0 +1,81 @@
+{
+  "analysis": {
+    "kind": "timelearner_compact_recorded_matrix_readback",
+    "schema_version": 1,
+    "original_job_id": "s11-recorded-n4-diagnostic16-m40-a2",
+    "models": [
+      {
+        "name": "classic",
+        "trials": 8,
+        "model_revision": "35d849faa2aaea5d2620f0fd59d9934c77760b7fde0dd49d3284539f69f68263",
+        "training_outcome": "invalid_observation",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        }
+      },
+      {
+        "name": "branch",
+        "trials": 8,
+        "model_revision": "efc6bacd25770cb3ccde41b952b2e09638296e401be88e2b6f5f7bd3548e9ecd",
+        "training_outcome": "budget_exhausted",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        }
+      }
+    ],
+    "trials": 16,
+    "diagnostic_only": true,
+    "complete_runtime_directory": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "reports": [
+    {
+      "name": "classic",
+      "report": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 32,
+        "files": 5524,
+        "evaluation_verdict": null,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "source_training_outcome": "invalid_observation"
+      }
+    },
+    {
+      "name": "branch",
+      "report": {
+        "kind": "timelearner_visual_report",
+        "status": "diagnostic",
+        "trial_soma_pairs": 8,
+        "files": 1531,
+        "evaluation_verdict": null,
+        "diagnostic_only": true,
+        "training_completed": false,
+        "source_training_outcome": "budget_exhausted"
+      }
+    }
+  ],
+  "visual_acceptance_complete": false,
+  "native_execution_attested": false,
+  "scientific_verdict": null
+}

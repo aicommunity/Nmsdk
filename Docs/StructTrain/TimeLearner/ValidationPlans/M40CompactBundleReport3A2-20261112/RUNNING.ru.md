@@ -1,4 +1,6 @@
-# A2 запущен; результат ожидается
+# Историческое подтверждение запуска A2
+
+[Завершено3/3 PASS](RESULT.ru.md). Ниже сохранён исходный снимок запуска.
 
 Подтверждён живой worker PID786786 для job `s11-compact-bundle-report3-m40-a2`; systemd ActiveState=active/SubState=running. Исходные request/launch context/preflight/owned binding сохранены в `startup` с raw SHA/размерами. Это снимок наблюдения, а не последующее доказательство завершения.
 
