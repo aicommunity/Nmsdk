@@ -2,13 +2,15 @@
 from copy import deepcopy
 import hashlib
 import json
+import os
 from pathlib import Path
 import tempfile
 import unittest
 
 from ..native_data_checks import validate_request
 from .test_native_data_checks import declaration
-from ..recorded_diagnostic_matrix import audit_matrix
+from ..recorded_diagnostic_matrix import audit_matrix, report_matrix
+from ..native_evidence import load
 
 
 def diagnostic_request():
@@ -66,6 +68,57 @@ class RecordedDiagnosticMatrixJoinTest(unittest.TestCase):
     def test_unreleased_reservation_refuses_data_acceptance(self):
         self.write(self.controller/'reservation-final.json', [dict(state='held')])
         with self.assertRaisesRegex(ValueError, 'lease_not_released'):self.audit()
+
+
+class RecordedDiagnosticMatrixPrimaryTest(unittest.TestCase):
+    """Opt-in production replay of closed real N4 data, never new training."""
+    @classmethod
+    def setUpClass(cls):
+        cls.primary = Path(os.environ['TIMELEARNER_RECORDED_MATRIX_PRIMARY'])
+        cls.controller = Path(os.environ['TIMELEARNER_RECORDED_MATRIX_CONTROLLER'])
+        cls.runtime = Path(os.environ['TIMELEARNER_RECORDED_MATRIX_RUNTIME'])/'runtime.json'
+        cls.output = Path(os.environ['TMPDIR'])/'recorded-n4-diagnostic-gallery'
+        cls.result = report_matrix(cls.primary, cls.controller, cls.runtime, cls.output)
+
+    def test_complete_sixteen_observations_keep_stopped_outcomes(self):
+        analysis = self.result['analysis']
+        self.assertEqual(analysis['trials'], 16)
+        self.assertTrue(analysis['diagnostic_only'])
+        self.assertFalse(analysis['training_completed'])
+        self.assertIsNone(analysis['scientific_verdict'])
+        rows = {r['name']: r for r in analysis['models']}
+        self.assertEqual(set(rows), {'classic', 'branch'})
+        self.assertEqual(rows['classic']['training_outcome'], 'invalid_observation')
+        self.assertEqual(rows['branch']['training_outcome'], 'budget_exhausted')
+        for row in rows.values():
+            self.assertEqual(row['trial_count'], 8)
+            self.assertEqual(row['source_threshold'], 100.)
+            self.assertIsNone(row['metrics']['evaluation_verdict'])
+            self.assertEqual(row['metrics']['invalid_trial_ids'], [])
+            self.assertEqual(row['metrics']['pooled_counts']['targets'], 1)
+            self.assertEqual(row['metrics']['pooled_counts']['foils'], 7)
+
+    def test_all_forty_trial_soma_pairs_have_readable_native_views(self):
+        from PIL import Image
+        total = 0
+        for role, expected in (('classic', 32), ('branch', 8)):
+            root = self.output/role/'evaluation'
+            manifest = load(root/'manifest.json')
+            self.assertEqual(manifest['trial_soma_pairs'], expected)
+            self.assertEqual(len(manifest['figures']), expected)
+            self.assertFalse(manifest['visual_acceptance_complete'])
+            for figure in manifest['figures']:
+                views = figure['views']
+                self.assertTrue(views)
+                self.assertTrue(any(v['y_scale'] == 'local_detail' for v in views))
+                for view in views:
+                    self.assertFalse(view['downsampling'])
+                    self.assertGreater(view['end'], view['begin'])
+                    self.assertEqual(len(view['files']), 3)
+                    with Image.open(root/view['files'][0]) as image:
+                        self.assertEqual(image.size, (1920, 960))
+            total += len(manifest['figures'])
+        self.assertEqual(total, 40)
 
 
 class RecordedDiagnosticMatrixDeclarationTest(unittest.TestCase):
