@@ -1,4 +1,6 @@
-# Исправленная Classic N1 версия выполняется
+# Историческое подтверждение запуска
+
+[Завершено технически1/1; обучение invalid_observation](RESULT.ru.md). Ниже сохранён исходный снимок запуска.
 
 Job `s07-n1-classic-after-train-elder-a2`: подтверждены outer PID489512 и native PID495854, unit `timelearner-8e16f81c-1ca4-494d-acf5-931d984e172a.service`, ActiveState=active/SubState=running. Raw request/context/preflight/outer binding сохранены в `startup`. Это снимок запуска; завершение и learning outcome ещё не подтверждены.
 

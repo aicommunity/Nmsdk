@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-current-full-domain-cold8-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "40e28802c29014ec8a5af0f8763aa607ad9a986a",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+      "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/current-full-domain-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CurrentFullDomainCold8A1-20261112/suite.json",
+      "sha256": "7c9c4f569cbb16bcba97671457c73a276f700cebb9e17807383cf8e802cdf314"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD_PROBE_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/current-full-domain-cold8-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40CurrentFullDomainCold8A1-20261112/fixture",
+      "TIMELEARNER_STOCK_COLD_NATIVE_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3",
+      "TIMELEARNER_STOCK_COLD_NATIVE_INI": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 134217728,
+      "maximum_total_bytes": 268435456
+    }
+  }
+}
