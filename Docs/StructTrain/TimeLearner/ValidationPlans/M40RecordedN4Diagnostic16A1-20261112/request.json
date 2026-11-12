@@ -1,0 +1,89 @@
+{
+  "kind": "timelearner_native_data_checks",
+  "schema_version": 2,
+  "job_id": "s11-recorded-n4-diagnostic16-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "742bc6618f47054e9db72b91be6b0b3e27c15cd2",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a3",
+    "commit": "448b153f2fea3486ff40f3a626b8f1110b9e3ee2"
+  },
+  "runtime_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/recorded-n4-diagnostic-runtime-a1/runtime.json",
+    "sha256": "8dcec12353cfff0c198bebc6e9c2c18de557965500b34924b76c0583299ee6ad"
+  },
+  "inputs": [
+    {
+      "name": "phasea.xml",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs/phasea.xml",
+      "bytes": 816326,
+      "sha256": "03dac589830d57d4a40e29b526f4126387a20461e221ce4e33d7e001679a62ff"
+    },
+    {
+      "name": "phasea.csv",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs/phasea.csv",
+      "bytes": 878,
+      "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66"
+    },
+    {
+      "name": "branch-summary.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs/branch-summary.json",
+      "bytes": 12635,
+      "sha256": "18593dcfe03d0993d497caae99f7f5b4c69cc5599131a574010339adbe23ba5c"
+    },
+    {
+      "name": "classic-summary.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-diagnostic-inputs-a1/inputs/classic-summary.json",
+      "bytes": 69580,
+      "sha256": "d577d1c6d119554b6d843abd8c7c963fd3f150cf0ba312542528db70b34d4b35"
+    },
+    {
+      "name": "classic.qz",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1/Tests/Integration/Data/RecordedN4Recovery/Classic-full-domain-stopped.json.qz",
+      "bytes": 24518983,
+      "sha256": "54ecf4a1696ea369ed29fd56831f9bd4d5169a1b9b0867ec6281ffd0738896db"
+    },
+    {
+      "name": "branch.qz",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1/Tests/Integration/Data/RecordedN4Recovery/Branch-full-domain-stopped.json.qz",
+      "bytes": 25195012,
+      "sha256": "b3fadca58c562c45b88c5015f8ce7ab710351dd0e962cad6569765f6f2e3a4e1"
+    }
+  ],
+  "cases": [
+    {
+      "name": "classic",
+      "source_name": "classic.qz",
+      "summary_name": "classic-summary.json",
+      "source_raw_bytes": 175521654,
+      "source_raw_sha256": "6107b4b0762ae2d5247bc2356a8fb533d872af2f0aafeb972783aeb85555a078"
+    },
+    {
+      "name": "branch",
+      "source_name": "branch.qz",
+      "summary_name": "branch-summary.json",
+      "source_raw_bytes": 192607805,
+      "source_raw_sha256": "d10368eb17016819387daf4ee614bddffda46dbe774c440109fa741e222308d9"
+    }
+  ],
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 64,
+    "maximum_wall_seconds": 21600,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "leaf_wall_seconds": 3600,
+    "reservation_memory_bytes": 12884901888
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": "diagnostic-evaluate",
+  "matrix": {
+    "parameters_name": "phasea.xml",
+    "observations_name": "phasea.csv",
+    "revision": "1c1464e248f8744e858bd66df0be99e39969fd65"
+  }
+}
