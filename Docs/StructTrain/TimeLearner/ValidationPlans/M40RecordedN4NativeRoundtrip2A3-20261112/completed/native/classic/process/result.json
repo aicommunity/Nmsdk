@@ -1,0 +1,53 @@
+{
+  "kind": "timelearner_process_result",
+  "schema_version": 2,
+  "execution": "completed",
+  "reason": "exit_zero_and_whole_group_closed",
+  "returncode": 0,
+  "wall_seconds": 1276.4050031970255,
+  "model_time": null,
+  "runtime_provenance": "loaded_files_captured",
+  "mapping_error": null,
+  "runtime_fingerprint": "0d3a7ab04bd65dc01195930284fc2ed5679c9e9d68dc7e1888fbab5b5e5aa3f9",
+  "ownership_scope": "bound_cgroup",
+  "all_processes_closed": true,
+  "scientific_verdict": null,
+  "operational_diagnostics": {
+    "kind": "timelearner_operational_diagnostics",
+    "schema_version": 1,
+    "policy": "owned-streams-v1",
+    "status": "needs_review",
+    "error_records": 0,
+    "warning_records": 0,
+    "unclassified_stderr_chunks": 2,
+    "reasons": [],
+    "examples": [
+      {
+        "stream": "stderr.log",
+        "chunk": 1,
+        "severity": "unclassified",
+        "excerpt": "PulseLibTestRuntime executable=/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3/Test_PulseLib_StorageComponents ini=/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3/NeuroModelerConsole.ini"
+      },
+      {
+        "stream": "stderr.log",
+        "chunk": 2,
+        "severity": "unclassified",
+        "excerpt": "PulseLibTestRuntime work_directory=/media/user/Data/TimeLearnerRefactor/readbacks/s07-recorded-n4-native-roundtrip-m40-a3/classic/native.test-events-log"
+      }
+    ],
+    "streams": [
+      {
+        "path": "stdout.log",
+        "bytes": 595,
+        "sha256": "3ad53887933dd8aabbf99c86b5d685626477c3fe2ee350eefd311064d1db8c48"
+      },
+      {
+        "path": "stderr.log",
+        "bytes": 392,
+        "sha256": "cf159783772faac1d0cbf2da5cb04cfb87318893f627ebcd69575c097ed0e81c"
+      }
+    ],
+    "contained_streams_match": true,
+    "scientific_verdict": null
+  }
+}

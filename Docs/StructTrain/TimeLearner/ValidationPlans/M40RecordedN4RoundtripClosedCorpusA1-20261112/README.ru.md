@@ -1,0 +1,5 @@
+# Complete actual N4 model roundtrip corpus
+
+Source DATA A3 accepted2/2, outer+2 child groups closed/released.187 regular files/2 glog aliases/151482215 regular bytes. Полностью сохраняются request/control/JUnit/runtime/source snapshots, input descriptors/staged bytes, два exported model qz, summary8, оба waveform и phase times. Existing portable_primary сортирует равный content по SHA adjacency: повторные staged qz остаются отдельными regular members и сжимаются как дубли, без missing files/hardlinks/reconstruction references. Уникальные исходные JSON находятся в прежних Root primary archives; здесь остаются точные transport/output bytes для independent replay.
+
+Manifest raw/base64 из stock snapshot без JS nanos conversion.37 SDK units не относятся к этому corpus: здесь ровно3 owned groups. Bounds256MiB/file/4GiB expanded/256MiB archive; source/outcomes read-only. Archive success не научный verdict и не новый native execution. После Git publication нужен independent reader с full models, summaries, waveform equality и damaged data negatives.
