@@ -33,7 +33,7 @@ def _paths(request):
 def create_primary(directory, controller, runtime_manifest, output):
     """Export selected original bytes only after the full production audit."""
     directory, controller = Path(directory).resolve(strict=True), Path(controller).resolve(strict=True)
-    runtime_manifest = Path(runtime_manifest).resolve(strict=True);output = Path(output).absolute()
+    runtime_manifest = Path(runtime_manifest).resolve(strict=True);output = Path(output).resolve()
     require(not output.exists() and all(not output.is_relative_to(p) and not p.is_relative_to(output)
             for p in (directory, controller, runtime_manifest.parent)), 'recorded_primary_output_overlaps_source')
     audit_matrix(directory, controller, runtime_manifest)
@@ -67,7 +67,10 @@ def audit_primary(bundle_path, restored):
     from .phasea_matrix import extract, trial_design
     from .recognition_metrics import load_diagnostic_evaluation, score_diagnostic_recognition_evaluation
 
-    declaration = load(Path(bundle_path))
+    bundle_path = Path(bundle_path).resolve(strict=True);restored = Path(restored).resolve()
+    require(not restored.is_relative_to(bundle_path.parent) and
+            not bundle_path.parent.is_relative_to(restored), 'recorded_primary_restore_overlaps_bundle')
+    declaration = load(bundle_path)
     require(type(declaration.get('archive_bytes')) is int and 0 < declaration['archive_bytes'] <= 128*1024**2
             and type(declaration.get('members')) is dict and 0 < len(declaration['members']) <= 64
             and type(declaration.get('expanded_bytes')) is int

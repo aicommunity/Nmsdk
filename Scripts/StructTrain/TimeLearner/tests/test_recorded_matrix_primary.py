@@ -9,6 +9,23 @@ from ..recorded_matrix_primary import audit_primary, create_primary
 
 
 class RecordedMatrixPrimaryBoundsTest(unittest.TestCase):
+    def test_export_normalizes_parent_segments_before_overlap_check(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            for name in ('source', 'controller', 'runtime', 'detour'):(root/name).mkdir()
+            runtime = root/'runtime/runtime.json';runtime.write_bytes(b'{}')
+            with self.assertRaisesRegex(ValueError, 'output_overlaps_source'):
+                create_primary(root/'source', root/'controller', runtime,
+                               root/'detour/../source/new-bundle')
+            self.assertFalse((root/'source/new-bundle').exists())
+
+    def test_restore_never_writes_into_input_bundle(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary);path = root/'bundle.json';path.write_bytes(b'{}')
+            with self.assertRaisesRegex(ValueError, 'restore_overlaps_bundle'):
+                audit_primary(path, root/'restored')
+            self.assertFalse((root/'restored').exists())
+
     def test_excessive_archive_is_refused_before_decompression(self):
         self.refused(dict(archive_bytes=128*1024**2+1, members={'x': dict(bytes=1)}, expanded_bytes=1), 'size_budget')
 
