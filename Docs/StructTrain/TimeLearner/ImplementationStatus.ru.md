@@ -1,8 +1,10 @@
 # Состояние реализации TimeLearner — 12.11.2026
 
-Текущий строгий N4 контроль ещё не принят. A1 Branch завершён timeout1920s во время экспорта:652 первичные трассы записаны, итогового package/summary нет, training outcome неизвестен. A1 Classic PID2496264 продолжает отдельный cold Train. [Причина и доказательства](ObservationDomainFinalizationTimeout-20261112.ru.md).
+Строгие full-domain N4 прогоны закрыты. [A1](ValidationPlans/M40ObservationDomainTrainA1-20261112/RESULT.ru.md): Classic технически valid, training invalid_observation/ambiguous, конечные L45,1,1,1; Branch timeout1920s при экспорте, итоговый training outcome неизвестен. Общий A1 cohort failed (Classic PASS / Branch FAIL).
 
-Отдельная [Branch-only A2](ValidationPlans/M40ObservationDomainBranchFinalizeA2-20261112/README.ru.md) запущена, native PID2573591 подтверждён. Source/tool f71bb4dd411922f28b3a5e419b6ffcc1184641a3, SDK8362/Pulse111/runtime61f3e2f0 и native search1800s сохранены; явно выделено900s на финализацию вместо120s. Старое задание/его Classic не меняются. Ни один новый Train пока не получил принятого результата.
+[Branch-only A2](ValidationPlans/M40ObservationDomainBranchFinalizeA2-20261112/RESULT.ru.md) принят 1/1 в техническом scope: полный пакет valid, training budget_exhausted после 101 поисковой пробы/50 изменений, L27,27,26,1. Search budget1800s сохранён;900s финализации позволили получить пакет. Сертификата сходимости нет; ordinary Test/calibration этих незавершённых обучений не запускались. Полные compact primary ещё требуют публикации.
+
+[Новый SDK Root08b898b/Pulsee9b807](ValidationPlans/M40ValidatedExport36A2-20261112/PREPARATION-RESULT.ru.md) устраняет два повторных полного decode при экспорте, сохраняя проверки. Canonical preparation4145 файлов/29 SDK modules принята; свежая сборка выполнена, native36 на M40 сейчас активен (подтверждены supervisor2999988 и исполняемый leaf;28 XML результатов). Итог36/36, большой N4 export/performance и Elder ещё не приняты.
 
 Принят [независимый DATA replay двух полных native32 корпусов16/16](ValidationPlans/M40Native32IndependentA2-20261112/RESULT.ru.md):5470 members, исходные64 JUnit IDs/artifact rules,16 execution5 wrappers и40 полных frozen trials. Source/actor/fixtures unchanged, whole group closed, leases released. Это проверка сохранённых технических данных, без новых native executions и N4 scientific PASS.
 
@@ -23,7 +25,7 @@
 
 Сохраняются CapturedPerInput, anchor N−1, штатный lifecycle/scheduler и историческая доказательность августовских4/8–6/8 в исходном протоколе. Series D не возобновлялась. Корректность текущих тестов не закрывает остальные пункты property/storage/growth, алгоритмов, conversion/PostTune/calibration, миграции scripts, очередей/публикации, полной матрицы и документации. [Готовность научных экспериментов](ExperimentReadiness.ru.md).
 
-Ближайшие шаги: получить и проверить полные пакеты текущих N4 Classic/Branch, измерить стоимость финализации и устранить повторные архивные проходы без потери проверок; независимо проверить оставшийся Console cold8 corpus и продолжить обязательную матрицу. Оба native32 corpora и прежний N4 corpus уже прошли независимый DATA replay; временные графики Console построены, выборочно просмотрены и сохранены в Git. Открыто отдельное [Windows file-identity наблюдение](WindowsCollectorIdentityObservation-20261111.ru.md); Linux guard не ослаблялся.
+Ближайшие шаги: опубликовать полные compact primary завершённых N4 попыток, принять новый export SDK на обоих Linux workers и проверить стоимость финализации большого пакета без потери проверок; независимо проверить оставшийся Console cold8 corpus и продолжить обязательную матрицу. Оба native32 corpora и прежний N4 corpus уже прошли независимый DATA replay; временные графики Console построены, выборочно просмотрены и сохранены в Git. Открыто отдельное [Windows file-identity наблюдение](WindowsCollectorIdentityObservation-20261111.ru.md); Linux guard не ослаблялся.
 
 Предыдущие оперативные записи до этой приёмки сохранены [отдельно](ImplementationStatus-BeforeNative32-20261111.ru.md). Ниже сохранены более ранние исторические срезы и подробные ограничения; их running/ещё не реализовано относятся к указанным снимкам и не заменяют таблицу выше.
 

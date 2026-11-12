@@ -1,0 +1,20 @@
+test_branch_actual_strict_N4_cold8_train_retains_honest_outcome (Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_branch_actual_strict_N4_cold8_train_retains_honest_outcome) ... FAIL
+test_classic_actual_strict_N4_cold8_train_retains_honest_outcome (Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_classic_actual_strict_N4_cold8_train_retains_honest_outcome) ... ok
+
+======================================================================
+FAIL: test_branch_actual_strict_N4_cold8_train_retains_honest_outcome (Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_branch_actual_strict_N4_cold8_train_retains_honest_outcome)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-full-observation-domain-train-a1/Scripts/StructTrain/TimeLearner/tests/test_stock_candidate_recovery_train.py", line 71, in test_branch_actual_strict_N4_cold8_train_retains_honest_outcome
+    self.train_case('Branch-stock-cold8-N1')
+  File "/media/user/Data/TimeLearnerRefactor/source-full-observation-domain-train-a1/Scripts/StructTrain/TimeLearner/tests/test_stock_observation_domain_train.py", line 13, in train_case
+    super().train_case(case)
+  File "/media/user/Data/TimeLearnerRefactor/source-full-observation-domain-train-a1/Scripts/StructTrain/TimeLearner/tests/test_stock_candidate_recovery_train.py", line 52, in train_case
+    self.assertEqual(code, 0, transcript.getvalue())
+AssertionError: 2 != 0 : {"kind": "timelearner_stock_candidate_window_training_result", "schema_version": 1, "case": "Branch-stock-cold8-N1", "condition_fingerprint": "f19e82178862394d218b16c8f009b86ef9c230913706ba9059b9cc24daa5dc23", "execution": "timeout", "validity": "unverified_execution", "package_audit": null, "physical_audit": null, "package_path": null, "classification_assessed": false, "scientific_verdict": null}
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 4350.482s
+
+FAILED (failures=1)
