@@ -1,0 +1,1383 @@
+{
+  "kind": "compact_native_primary",
+  "schema_version": 1,
+  "members": {
+    "case/monitor-final.json": {
+      "bytes": 129,
+      "sha256": "eb30bdb081f9615c82dba8600a37866935129e59286e7016ec4b888a765397d4"
+    },
+    "case/monitor.jsonl": {
+      "bytes": 6395,
+      "sha256": "3d6b844b268e2c3ee966a1fb87e07eb2ff841bf9a889946d68fe9aa618934021"
+    },
+    "case/request.json": {
+      "bytes": 1551,
+      "sha256": "916833dd3ca53be5eb5389bf31fd9f5edc65ae08ed52e68b2b13eb3488075a46"
+    },
+    "case/launch-context.json": {
+      "bytes": 173,
+      "sha256": "e748c91c71d081e7662a1f27127af4576098ffd95965147cac6bdc75cbc480a5"
+    },
+    "case/preflight.json": {
+      "bytes": 73,
+      "sha256": "0909d12e2175dfa8b161283fe6a15e4b146bfb3b564ba1149ba791cafe4f0a59"
+    },
+    "case/supervisor.log": {
+      "bytes": 553,
+      "sha256": "3e8dc85949cbeb42abd67960444f06981db586108af5b7c69e2488a1e1d34cea"
+    },
+    "case/controller-result.json": {
+      "bytes": 1176,
+      "sha256": "c27a896dcb58e06b969bdee0336708d71fcee46bf297fd6a9d4894deef59282b"
+    },
+    "case/lease-recovery.json": {
+      "bytes": 3729,
+      "sha256": "e390d70e44824875f7301be577495bc0aeacc04c7a5a39ce1a874caf62828842"
+    },
+    "case/closure-and-reservation.json": {
+      "bytes": 3782,
+      "sha256": "d08fc55061d00c073b98eb41d660ce9a92dfbe2d5245b443e6ab856e0ca00ac4"
+    },
+    "case/worker/reservation.json": {
+      "bytes": 1952,
+      "sha256": "9948c34fc86688af17e207e19e36330bcc305cb43bec728b90abc260bbba6326"
+    },
+    "case/worker/validation-source-before.json": {
+      "bytes": 277649,
+      "sha256": "f6770381d032258d72f595ae1d3826a3d1b68965ea688f7b32a8d439a3d79eb5"
+    },
+    "case/worker/temporary-environment.json": {
+      "bytes": 353,
+      "sha256": "7645c028d65d0d7970ae524af24b34ce80fa62fba91d9bc84d98a24557353a25"
+    },
+    "case/worker/tool-source-after.json": {
+      "bytes": 277649,
+      "sha256": "f6770381d032258d72f595ae1d3826a3d1b68965ea688f7b32a8d439a3d79eb5"
+    },
+    "case/worker/validation-process.json": {
+      "bytes": 152,
+      "sha256": "46bf53d244c999f5bdbe6d6565c47f893a1790d43c4316db0aabfc550843456e"
+    },
+    "case/worker/fixtures-after.json": {
+      "bytes": 1687,
+      "sha256": "992bfe1a92f7d20abafeca8e5ef1519cfcbebb350ce987df3134de273dc04441"
+    },
+    "case/worker/validation-source-after.json": {
+      "bytes": 277649,
+      "sha256": "f6770381d032258d72f595ae1d3826a3d1b68965ea688f7b32a8d439a3d79eb5"
+    },
+    "case/worker/fixtures-before.json": {
+      "bytes": 1687,
+      "sha256": "992bfe1a92f7d20abafeca8e5ef1519cfcbebb350ce987df3134de273dc04441"
+    },
+    "case/worker/terminal.json": {
+      "bytes": 259,
+      "sha256": "5f9ab9b5b527b3eacc9b6f4657c7fe14a36807d8403057e09042c95317d4d554"
+    },
+    "case/worker/tool-source-before.json": {
+      "bytes": 277649,
+      "sha256": "f6770381d032258d72f595ae1d3826a3d1b68965ea688f7b32a8d439a3d79eb5"
+    },
+    "case/worker/validation/unittest.log": {
+      "bytes": 281,
+      "sha256": "6551258d632e0d69c720a7fcaa697c83304455a7bd6328bc760a935c7ebd4fd1"
+    },
+    "case/worker/validation/suite.json": {
+      "bytes": 1119,
+      "sha256": "11bef32a8658dd77d0e9ea7ab97c1a626502c01ad286e44dd697a10320fadf40"
+    },
+    "case/worker/validation/result.json": {
+      "bytes": 1437,
+      "sha256": "2532630ec4917c85820ef3e8634abc6c179b437c56a52273f83130995c5742d8"
+    },
+    "case/worker/native-stock-cold4/cli-transcript.log": {
+      "bytes": 7905,
+      "sha256": "7c178269b476d2cc163b2b3dceac89bfde875ced3d5cd09e5930667cf35f6511"
+    },
+    "case/worker/native-stock-cold4/result/leases.sqlite3": {
+      "bytes": 45056,
+      "sha256": "0068ee31048b342d3c9b4f85ccb2cd897790c7f4708284f4487d4e0c85e4d317"
+    },
+    "case/worker/native-stock-cold4/result/progress-3.json": {
+      "bytes": 3102,
+      "sha256": "2321d26c4b404b0c677707ae175825b7aa8677217659de7f33b40c5ef0dce6cf"
+    },
+    "case/worker/native-stock-cold4/result/progress-5.json": {
+      "bytes": 5165,
+      "sha256": "5c4731b9c7260cd9f8013c1302f00f298ac4c7564a7654a8e8fa658a63af6c35"
+    },
+    "case/worker/native-stock-cold4/result/progress-7.json": {
+      "bytes": 7225,
+      "sha256": "68b67f8a7a96af3de192659fdacefe7377085655f01fdaae5577bfb485be9675"
+    },
+    "case/worker/native-stock-cold4/result/progress-4.json": {
+      "bytes": 4135,
+      "sha256": "04b6f785fc8bf27bee849a4b040578ea8e0852ca1d4e9bd16cb06a490a36f3cd"
+    },
+    "case/worker/native-stock-cold4/result/progress-8.json": {
+      "bytes": 8255,
+      "sha256": "8ad27199506f945402644a5d471f75e59526d24fe3468a1425e276d839593e89"
+    },
+    "case/worker/native-stock-cold4/result/index.json": {
+      "bytes": 9023,
+      "sha256": "33ea9307fca606f0a206bb60b8066eed1fe1bc06561053aca631ba568abd29d0"
+    },
+    "case/worker/native-stock-cold4/result/progress-2.json": {
+      "bytes": 2069,
+      "sha256": "60c3c48b982809a61267e7b15630aa8f6b413e0d0831b7a459131dd756623f4f"
+    },
+    "case/worker/native-stock-cold4/result/progress-1.json": {
+      "bytes": 1036,
+      "sha256": "98c13ad49af6dd23643235a8914f94b98e7858a1da1dc3e40d976337d1497c62"
+    },
+    "case/worker/native-stock-cold4/result/progress-6.json": {
+      "bytes": 6195,
+      "sha256": "29d466049fb763a1c2c0b5d49cfaa5e7e589547651325cd2f695400e5357737d"
+    },
+    "case/worker/native-stock-cold4/result/design.json": {
+      "bytes": 1018,
+      "sha256": "b2c9eab42065ba86e519e6e89ecf802f8cfbde5cd32d888e3930f4fd9c172841"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/runtime-cli-interface.json": {
+      "bytes": 5490,
+      "sha256": "3e376fe8d4750c2f38f2a8fd2ef124e220781a5bb40c0cb7c0538b212542366c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/run-manifest.json": {
+      "bytes": 36115,
+      "sha256": "5541a8d9c362cf0e4f4e7197ec7ca753526ff7221fb3dc6862fefb39ba519a78"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "ba8d9649ca8a34eea368e2ababb42e1c3056c34752ceb38ed63a44a0369279f2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151534.264327": {
+      "bytes": 250,
+      "sha256": "ba8d9649ca8a34eea368e2ababb42e1c3056c34752ceb38ed63a44a0369279f2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/input/job.json": {
+      "bytes": 2211,
+      "sha256": "078a7f047f303b5e4147235190a0af8284cbee6858f3651c3b1b4a9f3b236727"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/final-state.json": {
+      "bytes": 221990,
+      "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/initial-state.json": {
+      "bytes": 222029,
+      "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/probe_trial_1.json": {
+      "bytes": 6762,
+      "sha256": "9445d19658cbd4a9fcbf0872f7ed8ac5e36ace22df0417e9f90e4b17b6bd231a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/probe_trial_1.csv": {
+      "bytes": 390311,
+      "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/owner-configuration.json": {
+      "bytes": 4047,
+      "sha256": "cbf83b02688ead6a1a49e775d3ee9bd1636ed7729d6ac2e2245b7a2338e51738"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/job.json": {
+      "bytes": 2603,
+      "sha256": "f4f316b4c21cee59f636b135e8992868189df82e394dac23930a78c5562fc7fd"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/native/execution.json": {
+      "bytes": 1896,
+      "sha256": "67fcf390c79a99b2a84d8c7d08c407a261d1bffeb791637071aa5bb1fea876ea"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "670b75f5453adf8f1635d5853e100a6d8c13dc9a962bada1d10ae47df6773f60"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "4a8314a6e257233530cf89a68f330e45815022fd4bf842f4460160e5a547f950"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/reservation-context.json": {
+      "bytes": 3052,
+      "sha256": "2631a6c6e649ebecde7da51ab311d926914b1808d775fb3fb0be878e5d8fa8fb"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/request.json": {
+      "bytes": 904,
+      "sha256": "0f4f1565486f7b1f53eac5568eaf94ffb00fed4b9993837e0a8ef92fa2f6a9f1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/result.json": {
+      "bytes": 1177,
+      "sha256": "4af6b4d2f03cd5f0e582c7cc16d034e576efdaa72f9a1127acd7b63e97bd7e20"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "9c5fb9405d19c6b94eb1c9821d82774fcdf5a92c98e2961128da0309072649ad"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "cd9185161b043091796ca1d51db8b3e49ddf4d54071f8a52e1134bb8c01ee685"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "6f983d75f0e6b220069c627f28ceb10849a8b4096ed34d988b7c33f08696308c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/request.json": {
+      "bytes": 1555,
+      "sha256": "2705e0d7b930ffd3a419070d98e57dea1858eee8272c3a55ffd04ed5b57ac7e7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "048f7430b2c98575c2e42808a523ccced0712297f62b4878ac11486333b96f6a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "4302d83dc25d9a067a6be75f6c208a5256c32218e83e405dc888af6724b564ea"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "2e0435ee96180d72112f5b3c589adf9a46917809b8e3ebcab247d8a234b49d90"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input2/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "40ae4a632e646f7c9d07b3fb832c83453f7548d48a59e99ef42b0c1b10083546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/run-manifest.json": {
+      "bytes": 36115,
+      "sha256": "d55e10306fe484bebf51c3850bc90d999957ba02bac4b5f94065d9f04a1e263a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151524.263621": {
+      "bytes": 250,
+      "sha256": "ca57a7ea993895dd4948e1e9302c10db04a44adaaed63f230df8ed3803e6d6c2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "ca57a7ea993895dd4948e1e9302c10db04a44adaaed63f230df8ed3803e6d6c2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/input/job.json": {
+      "bytes": 2211,
+      "sha256": "e1eb3324af8812977cdf3baa7bf218348830a762087d124e603255aed39c806a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/final-state.json": {
+      "bytes": 221990,
+      "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/initial-state.json": {
+      "bytes": 222029,
+      "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/probe_trial_1.json": {
+      "bytes": 6750,
+      "sha256": "eca01ef22bc32ae334a75009d36a1484d6c25650b54c2a59216bde69e2f7300a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/probe_trial_1.csv": {
+      "bytes": 390311,
+      "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/owner-configuration.json": {
+      "bytes": 4047,
+      "sha256": "edac8acb1735cda4021cc06ef4eabbf4008b55199333ce3ed91084fce4f5bf57"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/job.json": {
+      "bytes": 2603,
+      "sha256": "15149db97f4cf9087e5a908db663df38489c43020e7697dfc4a15db393c90f11"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/native/execution.json": {
+      "bytes": 1896,
+      "sha256": "ba7c305ebc7f7cd666c2cd4a9bf80a597b3e554e4b39e17865570499313aa004"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "d6ac8a925e02a1c72e77d477f4c3dcdb1fa76da5f4267becaeceba1da3dec339"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "42ba73a4a86f0efaaa9065fa856ebac6e4edcab994c0277aadd00a1f3e73e204"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/reservation-context.json": {
+      "bytes": 3052,
+      "sha256": "8fba8caab864b7bd6da8c0ab85160e0402eb85b85fdb734d896d6ef8be43c732"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/request.json": {
+      "bytes": 904,
+      "sha256": "937d574dc9d31fe744bc2b244f1815a03853687c19355321836d665ec0e629f4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/result.json": {
+      "bytes": 1177,
+      "sha256": "38e030bacd62263257e4af55c8aaf82c68c1c5f1a8293fb6aa73df1f7549b7db"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "24ef5b2065e3febedb906a1694be1f0361c628b33a5ad493a5a2ef4e4b97d577"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "590e8aa5d6926c85eb1e872a42f18b184e64937bfb0e060f1f1110010e4329c8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "fdf71cc153be9a21f7d158ba8c4f974c76cf645029e0c6f78f67461f9cd3703a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/request.json": {
+      "bytes": 1555,
+      "sha256": "32951c5dda4fd4f3c724749d775b057c0eb931c3945ebbe83beb7ef002e5e6cf"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "5ff1e289e7c6b5caf8a7188c0103fcbd55e2e597d25583b1e0805664cc3e2233"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "7f092692cfecbec25a866f1cf1db31c459b20272d3b43f300c0a7b5096bb39d0"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "03a81f5af3b2d1501a6c7031fdb4895c1deb19af93014096a080abfba8d8d41e"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input0/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "889ba4a3300b5ec345b45fc76d8addc3ceb213de6d28f7d3821dce4a964e1f80"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/run-manifest.json": {
+      "bytes": 36115,
+      "sha256": "e160a0231159c834f105aad4838f9fa6f8795b8663f8d778bd7b14ed1db09cb4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "3bce1e998a7c91ee9bff19ba858706e5d7f8da1b0c588aa21c261d0d8ca3033d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151539.264766": {
+      "bytes": 250,
+      "sha256": "3bce1e998a7c91ee9bff19ba858706e5d7f8da1b0c588aa21c261d0d8ca3033d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/input/job.json": {
+      "bytes": 2211,
+      "sha256": "9dc67125d61ced2e53e85a2d018bc0d88d8b40fa96db407bf618228093a9b844"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/final-state.json": {
+      "bytes": 221990,
+      "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/initial-state.json": {
+      "bytes": 222029,
+      "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/probe_trial_1.json": {
+      "bytes": 6764,
+      "sha256": "56f0580a0d95bbf65578f363fa3a345cbecbb43d6d2aefb2a2adcc63b4136ead"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/probe_trial_1.csv": {
+      "bytes": 390311,
+      "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/owner-configuration.json": {
+      "bytes": 4047,
+      "sha256": "1171992b209587ed2c636107865bb125ee65c15cb7c3bb6a50b8adda67cc1215"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/job.json": {
+      "bytes": 2603,
+      "sha256": "3c0261e2674b113c56e8b0ea89adb080ffc3984dbea5e6f26291561b6f069816"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/native/execution.json": {
+      "bytes": 1896,
+      "sha256": "89fdb5d1ec9a2bc13ac069c6f50ba4a55403a51bff5b80f4f204d56a5d646e1c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "5be6ed944ea555747e7832f81bc532a3dcb617b77fa6c9683865741747e75be2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "5eb97e3be84849fb87d2537a91ec450aa7590b7e204ec23e862af0edad58ab95"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/reservation-context.json": {
+      "bytes": 3052,
+      "sha256": "4f65a89e55105a87bfb9fad9e32a83d240d45fd34ad1bff7b3424be082ebff7c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/request.json": {
+      "bytes": 904,
+      "sha256": "6c24525ef7b2972eb94af3590e95cae899e1220da65a5d510453de901feee43a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/result.json": {
+      "bytes": 1176,
+      "sha256": "01ccb8c323375ebf2393de7e624904e29906acd553c3912c9303aab24fa5218c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "330d101f6812a2f51d9792ce40345b266087fd5a843d5491d1d092b24c9b6eec"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "1bdd66ac874328f4b2500387daafb16d22dd8edaf611649fae808d0005488c71"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "384c3bb5c75fb89d5e5334891262e971b07c71a888bcc776ab1125487443dee2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/request.json": {
+      "bytes": 1555,
+      "sha256": "1970910f7997030932318f80da5ae88f670d5bf99bf5f065e42e98e02ae5b06f"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c0068ad5408bfc1d8d111ff8ba01f6e918a8b8903d368913d089c45c3a23d39e"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "7ec443e3929782abdda5f7d8c681b602c35c5e34fd2624321a8cc57313e4bac8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "b82e9c2e989ec77387f7f3f4df672f93e00ffa890e2d42cb22235823ba58c3b9"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input3/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "35fc5909f7a7c05c4882277768f756577c41fd0e478983ea4056f3e8fd533ae2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/run-manifest.json": {
+      "bytes": 36115,
+      "sha256": "81b4caf363307f833df5f1b612be466de03a43afa02b6a94f80e9d20e4d98662"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151529.263971": {
+      "bytes": 250,
+      "sha256": "3d5a5a49ddbadcb90affd8d18d8f347f548f762158ef11a5b8f24e80eaeb0dd5"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "3d5a5a49ddbadcb90affd8d18d8f347f548f762158ef11a5b8f24e80eaeb0dd5"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/input/job.json": {
+      "bytes": 2211,
+      "sha256": "c5c83c80c22dfb325ae89aec1a9f779257640e6e3c15fd3781e8a89da1d6cb4d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/final-state.json": {
+      "bytes": 221990,
+      "sha256": "5917e8a1ecd99f626ea23b5176a2d78d4e717560191b8f55b9d9adf3a482f6f7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/initial-state.json": {
+      "bytes": 222029,
+      "sha256": "7808fa62fa8bcad75b69cfe19ed0dcbc8de08f5f4c8d59b2b8fd64b021a2d523"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/probe_trial_1.json": {
+      "bytes": 6764,
+      "sha256": "f7ed7fc4f4833e1eb1e2844013f798d4af7361773988e42f20740db1dd67a8ee"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/probe_trial_1.csv": {
+      "bytes": 390311,
+      "sha256": "9841159732fec2890b4db18b322fad0fee5a4df00d0437d970712f016dc98fd3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/owner-configuration.json": {
+      "bytes": 4047,
+      "sha256": "93fb06e62f37c929a2b050bc2e6fdb7c210ce6e4621e4b93a6283226152aa6ec"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/job.json": {
+      "bytes": 2603,
+      "sha256": "30c3f7eb1241d6ed02a0dadc46d8dedcf9a03669643ae6c0ea5c0f2d6a553323"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/native/execution.json": {
+      "bytes": 1896,
+      "sha256": "2fd231279e31058f544a58651e47e37f7d5858d9a2cb28af8cef1c709b74e496"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "7108cf3bf99f8ac2cd85a5d9bf2ddd39802cc000ff8f358bb40fb773d36c027f"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "767c62ad75c55b16645d4aae828a048e07a03f198fa94da94759b3d066fdf365"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/reservation-context.json": {
+      "bytes": 3052,
+      "sha256": "0e28db3e7347f1a37e7772100f90c86f73f2a6a68eea78301d2ea8770cb60de6"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/request.json": {
+      "bytes": 904,
+      "sha256": "dc2ac2b101fd151e74f108ee3d1779f36190bdaa3e2a2b5ba53b8ee2a8392fff"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/result.json": {
+      "bytes": 1176,
+      "sha256": "0165047104c04675de2213880b97b1f4957185077823559da56b7e4b4969203c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "3927990fb1ae7cdc20361515281ccd180c1f0e138b443e8d14e511689d4b2b46"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "e9a86829fe9e0cf40cae78cc5d639e6670154dbcc2d4db94ac4107c21b27c333"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "cc6f6576eeeb349d93db3e033fad1d1f1e01146fa3bdb738acf892f2421f56a4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/request.json": {
+      "bytes": 1555,
+      "sha256": "6512d2b67c1538fb2aa0668818f465bc11e8e289cb83ab7de86c1000c83c82b4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "8091adc0319b1706244135976682052ad0d5a3ba796e5a296684056aa72a2688"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "4fba4fe18d764dae1114df79e095bf94996c43858746577655b8b0cce3200ec1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "048e2779104f073d704ae4ed16463ed233a10a1658582c31d3d09301ddd76b26"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Classic-cold-stock-input1/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "5f10162d9b77b161b2eafdd315915b9dc433b3664490cd3c07ee68bd8001e216"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/run-manifest.json": {
+      "bytes": 36113,
+      "sha256": "21f26de2d9d068b8a332f28daf2c8e9361371a6b15e6c64ba7d61b7027e52b6c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151548.265413": {
+      "bytes": 250,
+      "sha256": "b5f4b7779bb63e33efedc5664e61a99c7c01180d996aac318b5ef4a9eefc02df"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "b5f4b7779bb63e33efedc5664e61a99c7c01180d996aac318b5ef4a9eefc02df"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/input/job.json": {
+      "bytes": 2187,
+      "sha256": "87c47cff91d6dc54052ff73d71bf99634c301c59a21ba6cc82ae85354ddfbc13"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/final-state.json": {
+      "bytes": 72272,
+      "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/initial-state.json": {
+      "bytes": 72311,
+      "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/probe_trial_1.json": {
+      "bytes": 6704,
+      "sha256": "ae35293760f11d01227f3f4caf496681297ab8a9d4dc9be96565e04b22d06d5d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/probe_trial_1.csv": {
+      "bytes": 145589,
+      "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/owner-configuration.json": {
+      "bytes": 4000,
+      "sha256": "556eea10fc39b35d5c2c3b27dd2289437fe6a4d2fca1a2edce9ca27e50efa239"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/job.json": {
+      "bytes": 2561,
+      "sha256": "676b1651f855c6a4e3454d365cbef266468198e6d030b0fc1c73a58ce7405e9a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/native/execution.json": {
+      "bytes": 1894,
+      "sha256": "46054cdfd18b551ceeeefd1903330ede59cb4febbb40a15ae24337406b471e2c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "a1bce78b606f60563fc1d264355074b6a60ae9612dd83a09bd0fa0c376f91818"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "a297967d7b56a31065cd3634a9b512036f7c979f4e6b265a2d1f93c0190e7da2"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/reservation-context.json": {
+      "bytes": 3051,
+      "sha256": "3d6d3df7c21772f3839ee35f30f4d0935a0e662ec36cf61aa3cef68701f7cf66"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/request.json": {
+      "bytes": 901,
+      "sha256": "7b14e48bec3f666e605b06e107497cc06e57e8b628ec9a06d6ce5978c8eaa26a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/result.json": {
+      "bytes": 1176,
+      "sha256": "dffac77d2cb1b3f434528d73198da40415709da9fc91b55a02576c2c4bbc7f10"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "6eba473f3e6362b35affc9c876ce54d6e5eb12fd2e82604047d4b6824fe75df4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "ab0a95487892c0935345a4be18ee8eff5da5f169e938e250f68f41bbf87c52a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "34c86a38ecbcc9fe2eda00af4c6a89e6b940c507d40979a92a639ab8e87a3acc"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/request.json": {
+      "bytes": 1552,
+      "sha256": "2f015c62a3f5d44d2a2275b27b01367991456bfdb614bb7ba35ff6c9a425b610"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "63949898cf3560462bfa30afbd82b08112666835dfa541fe3de5068ec668e48c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "eb2480aa83f2efd0e0b548d4dea9c23a72e87adfe40bcc8877a69ce58ab733fc"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "c74c676534434cf39a4b5184ba187b94608a9629d992d22dc07f13a939c07d07"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input1/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "3bc7b784659cbbf5c628811f7ccfd5d3093494f2f59c3e16f589f4ffd909c137"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/run-manifest.json": {
+      "bytes": 36113,
+      "sha256": "e530cb0d8d8b2b5d04cd93c82e68d844767f9108a709e52503550342e32cc312"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "6bef6679f08d6bed0b973ef8aee12a8ead3002138d86debc3cb18c259f508f14"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151544.265124": {
+      "bytes": 250,
+      "sha256": "6bef6679f08d6bed0b973ef8aee12a8ead3002138d86debc3cb18c259f508f14"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/input/job.json": {
+      "bytes": 2187,
+      "sha256": "e71fb8308278b6c4f6f9ef56c77ce11d8b0500955ffc2d76b9dca8a052ee4322"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/final-state.json": {
+      "bytes": 72272,
+      "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/initial-state.json": {
+      "bytes": 72311,
+      "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/probe_trial_1.json": {
+      "bytes": 6690,
+      "sha256": "70af2ddea95954f183d23bdcd0b65ac85a651fa763d7a83bd909bd079fe37620"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/probe_trial_1.csv": {
+      "bytes": 145589,
+      "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/owner-configuration.json": {
+      "bytes": 4000,
+      "sha256": "c3bd9e7ef03c89408a39abc22db4ff8c2f4ae480788c366d66859009a16d7f2a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/job.json": {
+      "bytes": 2561,
+      "sha256": "f5ff2a473481d3090a81ff3e9959809e75b7857c65668270d3925b4c4059fd77"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/native/execution.json": {
+      "bytes": 1894,
+      "sha256": "5b4c506641c24abf17be4bde334260bc6c565c4345ad2c3f1a7dd77da6e3ca74"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "bc602babc03c2582a3657e67d44af4435da2900fa9c76134c4540582254cd438"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "59e9dde5fce26e25cdef4cce7f7efc4fb5e569a03a7fec30f8ef569b0d08cdb7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/reservation-context.json": {
+      "bytes": 3051,
+      "sha256": "79134f36f6391602dc95d8abe51d8bf45126257f58317cba3431dd494dad379e"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/request.json": {
+      "bytes": 901,
+      "sha256": "cf84d1a0efb2250a4134fc71f8853df1d87d24fa2027b6987a8b98e4b1ec23a9"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/result.json": {
+      "bytes": 1177,
+      "sha256": "aff94ae89ba7f1ac24b45bd62da564aca4594eee55cd1b4c374a83209eee47dd"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "6188f2a6a82960219c8ea8f3850d689590cb7ffcec80aade4f9604096a35c5d5"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "d6854d2f79c5082affa28d3e7e41271d235cd0e9b3f0870117e423f6e5e64d23"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "fdd7c76c060f10a4ff264b1f200794121815e5551cd290f79306b6e55760c226"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/request.json": {
+      "bytes": 1552,
+      "sha256": "4e4cebefd058e4375fb329b46568f49d749d3d2ec88885c9402150d59a2f1657"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "39631f08b8c1cb1ea3ff8b1efa9c49eed667c578b51482cee6897a42f4bfce7d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "a5bfcddfa1c9c9058bb65e9ef291efd147d909da10ca2736e3013b4974e25eeb"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "36e75713729af447c52b03c5c8970e3d0dd8257e1a613d2fb9c0e9db8bfacb53"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input0/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "786503e38f4f81160ffec4ddd9f847b3e17ef1935a27f88e04d8296ca9a4b709"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/run-manifest.json": {
+      "bytes": 36113,
+      "sha256": "ec0d4d53414b7eafc332bf9ee711c2cfc02631675475ac7a4871876e9018ff13"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "346f4e9ad9f7279fe2ab28d21e53c851d46d17cba784c71081d2db7b16e8edfd"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151557.266044": {
+      "bytes": 250,
+      "sha256": "346f4e9ad9f7279fe2ab28d21e53c851d46d17cba784c71081d2db7b16e8edfd"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/input/job.json": {
+      "bytes": 2187,
+      "sha256": "3ea321b3f9b17e9edb731bfb48a0d5a5584e4da7b35dd32edb6aa4c6f4fab2b7"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/final-state.json": {
+      "bytes": 72272,
+      "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/initial-state.json": {
+      "bytes": 72311,
+      "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/probe_trial_1.json": {
+      "bytes": 6704,
+      "sha256": "7f8a0038124dfc04ab97acbc5dda23273ca4e216e39239eac246769ffe9279a4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/probe_trial_1.csv": {
+      "bytes": 145589,
+      "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/owner-configuration.json": {
+      "bytes": 4000,
+      "sha256": "10355f7c61de2b68a69ed0c1db00a5e149dffdb9309f6655192bc56a3a43b14a"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/job.json": {
+      "bytes": 2561,
+      "sha256": "e017f3d77a7b8d42aa9f695d06b72029fd8fc7f64da747a2bb94d6b43c42c5d3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/native/execution.json": {
+      "bytes": 1894,
+      "sha256": "74da33e862dad6fcf41926a210b4d513d9e65bac166593e8bc90027545df5752"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "496e4ef04e33af510dc7c1d3b458ac264e7bf196475a149a47082274634fd217"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "e80d6d6ccfb979de7f541c178b87f650c56200e5b21665cb0390a5a38c26c730"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/reservation-context.json": {
+      "bytes": 3051,
+      "sha256": "f3899724eda185e3458a987b722fb247b65cdbac45d3252d5235d40fd32b3663"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/request.json": {
+      "bytes": 901,
+      "sha256": "97f93bac306f0fb7f83fe740ff3f0d7df04de7b7a54d147e19b826935a59ad4f"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/result.json": {
+      "bytes": 1177,
+      "sha256": "c2d8d04132126490324b8d4356d355a192c1eca13dc3ea31c80a418af8f841b4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "c624a18fd7607ebffe449067af5eb40dd38b0d4c45a39d91da723c0b66733f48"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "bff3f81a3a196849ffda16953e4ad92947f161500f14a76fa1f6c5406d1bbf0d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "936804ff4a33c7251b8879bc59cc32b0b1d9abab9a1426926a9b4c274a2c6477"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/request.json": {
+      "bytes": 1552,
+      "sha256": "868d7034bd023ab0106d493a1834de84b60536725e3c4874e0e7ca9bc34fd3ba"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c759b3caa32d7140e9af815f31a4d87422d44b830a48aaace53cc6711efa772f"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "56788f3cfe3921d7f6db42f9ceb750892d1d5d49c189ff5a243a977bc4e0a1f4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "2d2fcff51dbf771623adbd83329e67facc83b64cfbabaa803b54c6dc63559246"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input3/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/runtime-cli-interface.json": {
+      "bytes": 5491,
+      "sha256": "767162f25bbb60b29f8cd4b54d44bcdcb41312358fba5a97c3df90d45022eca8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/run-manifest.json": {
+      "bytes": 36113,
+      "sha256": "1bca414141a43e046cd7bc267d738c177b3fe9bb92a9443879e15c3260c402d5"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 250,
+      "sha256": "66dd6a8ad3b729dfb444a82a5255ceb369be2e455e844142f8c5db5327e071f3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native.events-log/EventsLog/NeuroModeler.Elder-1.user.log.INFO.20261112-151552.265696": {
+      "bytes": 250,
+      "sha256": "66dd6a8ad3b729dfb444a82a5255ceb369be2e455e844142f8c5db5327e071f3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/input/process-policy.json": {
+      "bytes": 528,
+      "sha256": "dd3fd78bc420161f2d89544619bb43d291282db929d6268c96ac8b00cc9870a3"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/input/job.json": {
+      "bytes": 2187,
+      "sha256": "bf57f3e9564b0733da9340d754a032469aafb1b593693b2d5777f80cb8f35a36"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/final-state.json": {
+      "bytes": 72272,
+      "sha256": "71e27b71ff031d878d834916a603dc82d13bdbac561fccd748a1a8f8fa903ad8"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/initial-state.json": {
+      "bytes": 72311,
+      "sha256": "679826797bcfd3508a0fc1a2b508751002a05a93a6210687859d374c81692c91"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/probe_trial_1.json": {
+      "bytes": 6702,
+      "sha256": "c67a7eb4f76a997f9c2f77fe395ee674d385ff86827ea9acea3b7661e0e00faf"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/probe_trial_1.csv": {
+      "bytes": 145589,
+      "sha256": "45bc179c233e46e110e7d01ec90478905752ca0f23db09489482836b4856b87b"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/owner-configuration.json": {
+      "bytes": 4000,
+      "sha256": "3f5f4148823785edd2e718dabcbb4dd28af0d52b008f53d162c7be263fa94fa4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/job.json": {
+      "bytes": 2561,
+      "sha256": "1911fcba497ec90f1fb01f55c4a4d854eeea8cfe0e0690d325ce3d78f65d2b71"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/native/execution.json": {
+      "bytes": 1894,
+      "sha256": "2d0109290b4865436376822acd4b214fc8b0a7ddd0e8a0652566d111d4d62467"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "25d1a6476e5b699f9e6ea0dbd641de8c8debfc20dd0b248f19b5c742d1e2ad9b"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/owned-process.json": {
+      "bytes": 653,
+      "sha256": "7cf5641bc3d6ed7261c61e58f5942c9348d569a65a898a90698db59d1e6ebb28"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/reservation-context.json": {
+      "bytes": 3051,
+      "sha256": "3c57c6447df61b2bf12a9352f329bf5ea51163f0aecb47659f78b25a2a95e561"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/request.json": {
+      "bytes": 901,
+      "sha256": "48815a61dc47f91591363be3c5f0e02bd243edffaf9ae837a09fc4fd2e67ba5f"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/loaded-files.json": {
+      "bytes": 4494,
+      "sha256": "dd9321f9a713cfde4c3a1e560d4f7060bd800b2efa6ba4c5e41800f350b89dc1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/result.json": {
+      "bytes": 1177,
+      "sha256": "032791fd19effb72e639fc984d6c5fd9b640088795c9fb5283bfa8667f1e77c1"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "470c2144db3bc67dfe1c2b974dbd7bdcf3526f3e4be479f02618ca718bc9accd"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "9e0f4a0a19415bcc1505d8546f40c436b42c7c4ae5eaeda64038bb55a7cdde3e"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/terminal-unit-state.json": {
+      "bytes": 1297,
+      "sha256": "ccaa67e3dcd16b4f75a91912b3b9001f49376a385d6987357f87fa53871941a4"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/request.json": {
+      "bytes": 1552,
+      "sha256": "31579d513d2138365b76e33446e2bbc1b5863502b4d04ae21b3f8e75094bf6fd"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/limits-readback.json": {
+      "bytes": 1066,
+      "sha256": "c4a092a32c6429441b95bdd82d33862fb578a075acf901306e24309ffc103c24"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "712ac7feb5d34ecb03e250c7ae67e3c0a5ca8d9186955e5eedf4df0b6277352c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "8b4a54f72b33c6b25508a25efcfeaeb415375a4ab5ecd2cfbc03a7fdee358b42"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/worker/native-stock-cold4/result/runs/Branch-cold-stock-input2/process/contained/runtime.json": {
+      "bytes": 12133,
+      "sha256": "f9163fb9aa07032f50abf6a06ae3f511b9978421b9521de4c3a8d292243ce546"
+    },
+    "case/worker/native-stock-cold4/prepared/Branch-cold-stock-input3.json": {
+      "bytes": 2187,
+      "sha256": "3ea321b3f9b17e9edb731bfb48a0d5a5584e4da7b35dd32edb6aa4c6f4fab2b7"
+    },
+    "case/worker/native-stock-cold4/prepared/Classic-cold-stock-input0.json": {
+      "bytes": 2211,
+      "sha256": "e1eb3324af8812977cdf3baa7bf218348830a762087d124e603255aed39c806a"
+    },
+    "case/worker/native-stock-cold4/prepared/Classic-cold-stock-input3.json": {
+      "bytes": 2211,
+      "sha256": "9dc67125d61ced2e53e85a2d018bc0d88d8b40fa96db407bf618228093a9b844"
+    },
+    "case/worker/native-stock-cold4/prepared/Branch-cold-stock-input2.json": {
+      "bytes": 2187,
+      "sha256": "bf57f3e9564b0733da9340d754a032469aafb1b593693b2d5777f80cb8f35a36"
+    },
+    "case/worker/native-stock-cold4/prepared/Branch-cold-stock-input1.json": {
+      "bytes": 2187,
+      "sha256": "87c47cff91d6dc54052ff73d71bf99634c301c59a21ba6cc82ae85354ddfbc13"
+    },
+    "case/worker/native-stock-cold4/prepared/Classic-cold-stock-input1.json": {
+      "bytes": 2211,
+      "sha256": "c5c83c80c22dfb325ae89aec1a9f779257640e6e3c15fd3781e8a89da1d6cb4d"
+    },
+    "case/worker/native-stock-cold4/prepared/Branch-cold-stock-input0.json": {
+      "bytes": 2187,
+      "sha256": "e71fb8308278b6c4f6f9ef56c77ce11d8b0500955ffc2d76b9dca8a052ee4322"
+    },
+    "case/worker/native-stock-cold4/prepared/index.json": {
+      "bytes": 1018,
+      "sha256": "b2c9eab42065ba86e519e6e89ecf802f8cfbde5cd32d888e3930f4fd9c172841"
+    },
+    "case/worker/native-stock-cold4/prepared/Classic-cold-stock-input2.json": {
+      "bytes": 2211,
+      "sha256": "078a7f047f303b5e4147235190a0af8284cbee6858f3651c3b1b4a9f3b236727"
+    },
+    "case/process/owned-process.json": {
+      "bytes": 586,
+      "sha256": "b95bc7bc83ed4e769af9f924cb5d3deb8d08648b50d2162263c98b91a045a8cc"
+    },
+    "case/process/request.json": {
+      "bytes": 542,
+      "sha256": "c46b58485ebcb98433aecfdd002190277cca5ae2aaf8fd8c60358d11b438c3cf"
+    },
+    "case/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/process/loaded-files.json": {
+      "bytes": 979,
+      "sha256": "57d58ffeed25765e3b6e36c63c819d57af6b36ed2686623ce22cffff3b2fdc2a"
+    },
+    "case/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/process/result.json": {
+      "bytes": 1176,
+      "sha256": "c27a896dcb58e06b969bdee0336708d71fcee46bf297fd6a9d4894deef59282b"
+    },
+    "case/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "889b5b5e089dcf838e7e8f4b68c4bc9417e3bf6aefb295d2271663452883592f"
+    },
+    "case/process/terminal-unit-state.json": {
+      "bytes": 1299,
+      "sha256": "dd98657688884a852ebfc7f0f6645ab3258272e3002100ce847942f94118ebc0"
+    },
+    "case/process/runtime.json": {
+      "bytes": 2960,
+      "sha256": "dfe6c3faf92b15b15e406b08695d86a5ebe4fac2857d0aa4dbff8f83aa6be708"
+    },
+    "case/process/contained/request.json": {
+      "bytes": 954,
+      "sha256": "03a2685e9ffd192420a86bf678335460e30d97936c9bae3e4b714f881875d5b8"
+    },
+    "case/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "case/process/contained/limits-readback.json": {
+      "bytes": 1068,
+      "sha256": "3264e4b1878a83b481ec0e0e609ca65942d222a1fed402f00dd8f95ab97786e6"
+    },
+    "case/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "case/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "case/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "8a47b300a794f141b52037f663172ac9f3f2c895e221a743ac29b841ff860d2f"
+    },
+    "case/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "3416b1ab83f6a74c22f66f491059b4b0be0cbe052af3a2eac5090da1d62bf82a"
+    },
+    "case/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "case/process/contained/runtime.json": {
+      "bytes": 2960,
+      "sha256": "dfe6c3faf92b15b15e406b08695d86a5ebe4fac2857d0aa4dbff8f83aa6be708"
+    }
+  },
+  "archive_bytes": 133872,
+  "archive_sha256": "85342b1a6f98ec7a856feafcd0cee8f1282917c0eccea5e4d9237a85777b9266",
+  "compression": {
+    "codec": "xz-lzma2",
+    "dictionary_bytes": 33554432,
+    "member_order": "content_sha256_then_logical_name"
+  },
+  "expanded_bytes": 6578707,
+  "unique_content_bytes": 2123288
+}
