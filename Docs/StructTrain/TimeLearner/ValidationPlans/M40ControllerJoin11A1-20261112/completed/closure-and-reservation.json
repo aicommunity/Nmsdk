@@ -1,0 +1,91 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "b96231881eec1db49c4107a0eb3f66e6d4cb877820aa6950c42a7a0375405387",
+      "unit": "timelearner-5198a07b-5e54-4822-8ae8-ce16baba0290.service",
+      "invocation_id": "2160433e5be040c386aac7fd47da3b4e",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-5198a07b-5e54-4822-8ae8-ce16baba0290.service",
+      "initial_main_pid": 127997,
+      "initial_start_ticks": "354634644",
+      "sha256": "70963fa2ccfdc42d46f57a8fdb088636cb1536e9d2eb3b20275fb5aa3fd6bcf0"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-5198a07b-5e54-4822-8ae8-ce16baba0290.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "909d554d-3610-4a45-88da-1eed53767280",
+      "job_id": "s08-controller-join11-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 127997,
+        "start_ticks": "354634644",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-roundtrip-m40-a1/Reports/StructTrain/TimeLearner/RecordedN4RoundtripPrimary-M40-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-roundtrip-m40-a1/Reports/StructTrain/TimeLearner/RecordedN4RoundtripPrimary-M40-20261112"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-controller-join11-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-controller-join11-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/controller-join11-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ControllerJoin11A1-20261112",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/controller-join11-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40ControllerJoin11A1-20261112"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-controller-join10-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-controller-join10-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-controller-join10-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112/completed",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-controller-join10-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112/completed"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4"
+        }
+      ],
+      "state": "released",
+      "created": 1794471148.9712794,
+      "deadline": 1794471288.9848874,
+      "updated": 1794471172.2232962,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
