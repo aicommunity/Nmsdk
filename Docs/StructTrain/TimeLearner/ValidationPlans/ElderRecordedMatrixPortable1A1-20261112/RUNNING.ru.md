@@ -1,3 +1,5 @@
+> Исторический startup. Задание завершено; [принятый результат](RESULT.ru.md).
+
 # Bundle-only replay на Elder запущен
 
 Job `s11-recorded-matrix-portable1-elder-a1`, source/controller `f1d1953da0dff6b3b0636c433dbea16c65b9d49c`. Supervisor PID200327, actual main PID203397, unit `timelearner-855052a1-13ff-4734-89ac-7fc3567cdd05.service`, invocation `3e2b615e9350413c93b5402ff651ff17`, kernel active/running.
