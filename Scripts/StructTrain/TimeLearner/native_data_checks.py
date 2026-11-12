@@ -44,10 +44,13 @@ def _hash(raw):
 
 
 def validate_request(value):
-    require(type(value) is dict and set(value) == {'kind', 'schema_version', 'job_id',
+    fields = {'kind', 'schema_version', 'job_id',
         'worker_host', 'execution_root', 'tool_commit', 'source', 'runtime_manifest',
-        'inputs', 'cases', 'limits', 'disk'} and value['kind'] == 'timelearner_native_data_checks'
-        and type(value['schema_version']) is int and value['schema_version'] == 1,
+        'inputs', 'cases', 'limits', 'disk'}
+    require(type(value) is dict and
+        ((value.get('schema_version') == 1 and set(value) == fields) or
+         (value.get('schema_version') == 2 and set(value) == fields | {'operation', 'matrix'})) and
+        value['kind'] == 'timelearner_native_data_checks' and type(value['schema_version']) is int,
         'native_data_request_schema')
     require(type(value['job_id']) is str and NAME.fullmatch(value['job_id']) and
         type(value['worker_host']) is str and value['worker_host'] and
@@ -61,11 +64,16 @@ def validate_request(value):
             type(row[field]) is str and pattern.fullmatch(row[field]), 'native_data_binding')
     require(valid_declarations(value['inputs']), 'native_data_inputs')
     cases = value['cases']
-    require(type(cases) is list and 1 <= len(cases) <= 32 and all(type(r) is dict and
+    if value['schema_version'] == 2:
+        from .recorded_diagnostic_matrix import validate_declaration
+        validate_declaration(value)
+    else:
+        require(type(cases) is list and 1 <= len(cases) <= 32 and all(type(r) is dict and
         set(r) == {'name', 'test_id'} and type(r['name']) is str and NAME.fullmatch(r['name']) and
         type(r['test_id']) is str and TEST.fullmatch(r['test_id']) for r in cases), 'native_data_cases')
-    require(len({r['name'].casefold() for r in cases}) == len(cases) and
-        len({r['test_id'] for r in cases}) == len(cases), 'native_data_duplicate_case')
+        require(len({r['test_id'] for r in cases}) == len(cases), 'native_data_duplicate_case')
+    require(all(type(r['name']) is str and NAME.fullmatch(r['name']) for r in cases), 'native_data_cases')
+    require(len({r['name'].casefold() for r in cases}) == len(cases), 'native_data_duplicate_case')
     limits = value['limits']
     require(type(limits) is dict and set(limits) == {'memory_bytes', 'tasks', 'maximum_wall_seconds',
         'leaf_memory_bytes', 'leaf_tasks', 'leaf_wall_seconds', 'reservation_memory_bytes'} and
@@ -222,10 +230,20 @@ def worker(request_path):
         thread = threading.Thread(target=heartbeat, daemon=True);thread.start()
         before = _source_snapshot(ROOT, request['tool_commit']);_write(output/'tool-before.json', before)
         source_before = source_closure(Path(request['source']['path']));_write(output/'source-before.json', source_before)
+        captured = None
+        if request['schema_version'] == 2:
+            from .native_gate_inputs import stage_inputs
+            captured = capture_inputs(request['inputs'], output)
+            stage_inputs(captured, output)
         results = []
         for row in request['cases']:
             require(not errors, 'native_data_heartbeat_failed');registry.validate_paths(token)
             _bound_runtime(request)
+            if request['schema_version'] == 2:
+                from .recorded_diagnostic_matrix import run_case
+                result = run_case(request, row, request['runtime_manifest']['path'], output)
+                results.append(result);_write(output/(row['name']+'-result.json'), result)
+                continue
             spec = {'kind': 'timelearner_native_test_gate', 'schema_version': 5,
                 'runtime_manifest': request['runtime_manifest']['path'], 'source_root': request['source']['path'],
                 'expected_test_ids': [row['test_id']], 'maximum_wall_seconds': request['limits']['leaf_wall_seconds'],
@@ -239,6 +257,9 @@ def worker(request_path):
                     result['assertion_status'] == 'passed', 'native_data_case_not_passed:'+row['name'])
         require(not errors, 'native_data_heartbeat_failed');registry.validate_paths(token)
         _bound_runtime(request)
+        if captured is not None:
+            from .native_gate_inputs import verify_inputs
+            _write(output/'data-inputs-after.json', verify_inputs(captured, output))
         after = _source_snapshot(ROOT, request['tool_commit']);_write(output/'tool-after.json', after)
         source_after = source_closure(Path(request['source']['path']));_write(output/'source-after.json', source_after)
         require(before == after and source_before == source_after, 'native_data_source_changed')
