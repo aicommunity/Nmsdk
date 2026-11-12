@@ -136,8 +136,10 @@ class NativeAcceptanceWorkerTest(unittest.TestCase):
         # failure; NONE enables no compiler language and builds no SDK/model.
         with tempfile.TemporaryDirectory() as directory:
             job, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            job["build"]["required_cache_tokens"].append("NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS:BOOL=ON")
             (paths["source"]/"CMakeLists.txt").write_text(
-                'cmake_minimum_required(VERSION 3.16)\nproject(NativeProfile NONE)\n', encoding="utf-8")
+                'cmake_minimum_required(VERSION 3.16)\nproject(NativeProfile NONE)\n'
+                'option(NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS "Recorded inputs" OFF)\n', encoding="utf-8")
             self.assertFalse(paths["build"].exists())
             arguments = subject.configure_arguments(job, paths, protected)
             # An explicitly declared fixture binds the installed tool, without
@@ -159,6 +161,29 @@ class NativeAcceptanceWorkerTest(unittest.TestCase):
             self.assertIn("CMAKE_HOME_DIRECTORY:INTERNAL="+str(paths["source"]), cache.splitlines())
             self.assertIn("NMSDK_DEPLOY_ROOT:PATH="+str(paths["runtime"]), cache.splitlines())
             self.assertFalse((paths["build"]/"compile_commands.json").exists())
+
+    def test_recorded_input_option_is_explicit_and_other_checks_stay_read_only(self):
+        with tempfile.TemporaryDirectory() as directory:
+            job, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            original = copy.deepcopy(job)
+            self.assertFalse(any("NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS" in v
+                                 for v in subject.configure_arguments(job, paths, protected)))
+            for value in ("ON", "OFF"):
+                job = copy.deepcopy(original)
+                token = "NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS:BOOL="+value
+                job["build"]["required_cache_tokens"] += [token, "FOREIGN_POSTCONDITION:BOOL=ON"]
+                arguments = subject.configure_arguments(job, paths, protected)
+                self.assertEqual(arguments.count("-D"+token), 1)
+                self.assertFalse(any("FOREIGN_POSTCONDITION" in v for v in arguments))
+
+    def test_recorded_input_option_rejects_nonboolean_type_and_value(self):
+        with tempfile.TemporaryDirectory() as directory:
+            original, _, _, paths, protected = configure_fixture(Path(directory).resolve())
+            for token in ("STRING=ON", "BOOL=TRUE", "BOOL=1", "BOOL="):
+                job = copy.deepcopy(original)
+                job["build"]["required_cache_tokens"].append("NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS:"+token)
+                with self.subTest(token=token), self.assertRaisesRegex(ValueError, "configure_bool"):
+                    subject.configure_arguments(job, paths, protected)
 
     def test_unknown_profile_tokens_remain_postconditions_not_assignments(self):
         with tempfile.TemporaryDirectory() as directory:

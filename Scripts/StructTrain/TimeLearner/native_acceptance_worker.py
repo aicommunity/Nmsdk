@@ -107,7 +107,8 @@ def configure_arguments(job, paths, protected):
     flags = {"CMAKE_C_FLAGS", "CMAKE_CXX_FLAGS", "CMAKE_EXE_LINKER_FLAGS",
              "CMAKE_SHARED_LINKER_FLAGS", "CMAKE_MODULE_LINKER_FLAGS", "CMAKE_STATIC_LINKER_FLAGS",
              "CMAKE_C_FLAGS_"+active, "CMAKE_CXX_FLAGS_"+active}
-    booleans = {"RDK_USE_LLM", "RDK_LLM_BUILD_EMBEDDED"}
+    booleans = {"RDK_USE_LLM", "RDK_LLM_BUILD_EMBEDDED",
+                "NMSDK_BUILD_RECORDED_MODEL_INPUT_TESTS"}
     for name, (kind, value, _) in declared.items():
         if name in flags:
             _require(kind == "STRING", "configure_flag_type:"+name)
