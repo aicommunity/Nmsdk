@@ -37,6 +37,7 @@ endif()
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 include(NmsdkParallelBuild)
+include("${CMAKE_SOURCE_DIR}/cmake/GenerateBuildVersion.cmake")
 
 # Policies and standard
 set(CMAKE_CXX_STANDARD 20)

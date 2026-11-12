@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(NeuroModelerConsole LANGUAGES CXX)
 
 add_executable(NeuroModelerConsole)
+nmsdk_add_build_version(NeuroModelerConsole)
 
 # Set DLL runtime library for compatibility with vcpkg
 if(MSVC)

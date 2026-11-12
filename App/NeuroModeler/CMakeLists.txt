@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(NeuroModeler LANGUAGES CXX)
 
-# Include helper function to get version from Git
-include(${CMAKE_SOURCE_DIR}/cmake/GetGitVersion.cmake)
-
-# Obtain version string from Git
-get_git_version(GIT_VERSION_STRING)
 
 # For a Qt GUI application on Windows we need subsystem:windows
 if(WIN32)
@@ -13,6 +8,8 @@ if(WIN32)
 else()
   add_executable(NeuroModeler)
 endif()
+
+nmsdk_add_build_version(NeuroModeler)
 
 # Set DLL runtime library for compatibility with vcpkg
 # Enable AUTOUIC at the target level to avoid conflicts with global settings
@@ -250,7 +247,7 @@ target_compile_definitions(NeuroModeler PRIVATE
   RDK_DISABLE_EXT_GUI
   QT_DLL
   QT_WIDGETS_LIB
-  RDK_APP_VERSION="${GIT_VERSION_STRING}"
+
   $<$<BOOL:${RDK_USE_QT_WEBENGINE}>:RDK_USE_QT_WEBENGINE>
 )
 

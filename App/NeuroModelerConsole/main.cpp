@@ -4,6 +4,9 @@
 #include <QDir>
 #include <QString>
 #include <QDebug>
+#if defined(NMSDK_GENERATED_BUILD_VERSION)
+#include "NmsdkBuildVersion.h"
+#endif
 #include <iostream>
 #include <algorithm>
 #include <utility>
@@ -35,10 +38,16 @@ int main(int argc, char* argv[])
 {
  using namespace RDK;
  QCoreApplication a(argc, argv);
+#if defined(NMSDK_GENERATED_BUILD_VERSION)
+ QCoreApplication::setApplicationVersion(QString::fromUtf8(nmsdk::build_version()));
+#endif
 
  QCommandLineParser parser;
  parser.setApplicationDescription("NeuroModelerConsole automation arguments");
  parser.addHelpOption();
+#if defined(NMSDK_GENERATED_BUILD_VERSION)
+ parser.addVersionOption();
+#endif
  const QCommandLineOption configOption(QStringList() << "c" << "config",
                                        "Path to project ini to open.",
                                        "path");
