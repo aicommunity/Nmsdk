@@ -1,5 +1,7 @@
 # Native32 M40:32/32
 
+Актуализация12.11: [полный compact primary опубликован](../M40RecoveryConsole32ClosedCorpusA1-20261111/RESULT.ru.md), [независимый DATA replay принят16/16 вместе с Elder](../M40Native32IndependentA2-20261112/RESULT.ru.md). Ниже сохранён статус на момент исходной native приёмки; его строка о требуемом corpus относится к тому снимку.
+
 Root8362d58f4d6576a0c8b0cc7633270976dff1df7b/Pulse1110808f4ad1f67538dadc6fe1d3f097e00c0630: свежая SDK-сборка Test_PulseLib_StorageComponents и NeuroModelerConsole принята, все32cases/32leaves прошли.
 
 - 4active-Build guards protocol4/5 Classic/Branch: живое управление сбрасывается при Build; прежний ошибочный N1physical/N0plan fixture устранён до этих запусков.

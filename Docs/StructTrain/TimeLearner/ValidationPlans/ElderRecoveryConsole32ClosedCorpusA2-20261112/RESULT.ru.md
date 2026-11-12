@@ -1,5 +1,7 @@
 # Полный Elder native32 primary corpus — 12.11.2026
 
+Актуализация12.11: [независимый DATA replay обоих полных корпусов принят16/16](../M40Native32IndependentA2-20261112/RESULT.ru.md). Ниже сохранён исходный collection/Git transport результат; его замечание о ещё требуемом semantic restore относится к моменту публикации.
+
 Production collector завершён:operation_passed=true, whole group closed, lease released, heartbeat_errors пуст. [Terminal](completed/worker/terminal.json), [controller result](completed/controller-result.json), [closure](completed/closure-and-reservation.json), [состав/контрольные суммы readbacks](completed/readback-integrity.json).
 
 Сохранены весь job и его controller:2703regular files/834627225bytes, плюс links; проверены33исходные закрытые units. Исходный native32 результат32/32 и исходные данные не изменены. [Collector proof](completed/worker/primary-bundle-proof.json). Архив не переоценивает старые неуспешные попытки.
