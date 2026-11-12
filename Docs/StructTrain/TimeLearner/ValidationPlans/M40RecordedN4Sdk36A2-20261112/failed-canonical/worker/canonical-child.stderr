@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 280, in <module>
+    if __name__=='__main__':raise SystemExit(main())
+                                             ^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 276, in main
+    args=parser.parse_args(argv);result=_child(args.plan,args.source,args.commit,args.digest)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-n1-geometry-decision-after-a4/Scripts/StructTrain/TimeLearner/native_canonical_preparation.py", line 190, in _child
+    require(len(loaded)==29,'canonical_SDK_module_inventory_changed')
+  File "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: canonical_SDK_module_inventory_changed
