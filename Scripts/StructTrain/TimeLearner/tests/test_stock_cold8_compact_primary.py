@@ -55,7 +55,7 @@ class StockCold8CompactPrimaryTest(unittest.TestCase):
                     deliveries = package['recovery_ledger']['deliveries']
                     self.assertEqual([d['event']['transition']['disposition'] for d in deliveries],
                         ['cursor_advanced']*4+['invalid_budget_stop'])
-                    initial = load(work/'prepared/initial'/(case+'.json'))
+                    initial = load(work/case/'runs/preflight/native/initial-state.json')['identity']
                     physics = audit_final_stock(initial, package['neuron']['graph']['identity'])
                     primary = native/package['measurement_archive']['records'][-1]['raw_trials'][0]['primary_ref']['relative_path']
                     with primary.open('ab') as stream:
