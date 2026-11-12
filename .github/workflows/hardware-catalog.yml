@@ -1,0 +1,52 @@
+name: Hardware catalog and hub firmware
+
+on:
+  push:
+    paths:
+      - "Libraries/Rdk-HardwareLib/Catalog/**"
+      - "Libraries/Rdk-HardwareLib/Firmware/nmsdk_*/**"
+      - "Scripts/validate_hardware_catalog.py"
+      - "Scripts/build_arduino_firmware.ps1"
+      - "Scripts/build_arduino_firmware.sh"
+      - ".github/workflows/hardware-catalog.yml"
+  pull_request:
+    paths:
+      - "Libraries/Rdk-HardwareLib/Catalog/**"
+      - "Libraries/Rdk-HardwareLib/Firmware/nmsdk_*/**"
+      - "Scripts/validate_hardware_catalog.py"
+      - "Scripts/build_arduino_firmware.ps1"
+      - "Scripts/build_arduino_firmware.sh"
+      - ".github/workflows/hardware-catalog.yml"
+  workflow_dispatch:
+
+jobs:
+  validate-catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate HardwareCatalog
+        run: python Scripts/validate_hardware_catalog.py
+
+  compile-hubs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+      - name: Install AVR core and DHT
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+          arduino-cli lib install "DHT sensor library"
+      - name: Compile sensor hub (Uno + Mega)
+        run: |
+          mkdir -p /tmp/hub_build
+          arduino-cli compile -b arduino:avr:uno Libraries/Rdk-HardwareLib/Firmware/nmsdk_sensor_hub --output-dir /tmp/hub_build/sensor_uno
+          arduino-cli compile -b arduino:avr:mega Libraries/Rdk-HardwareLib/Firmware/nmsdk_sensor_hub --output-dir /tmp/hub_build/sensor_mega
+      - name: Compile motor hub (Uno + Mega)
+        run: |
+          arduino-cli compile -b arduino:avr:uno Libraries/Rdk-HardwareLib/Firmware/nmsdk_motor_hub --output-dir /tmp/hub_build/motor_uno
+          arduino-cli compile -b arduino:avr:mega Libraries/Rdk-HardwareLib/Firmware/nmsdk_motor_hub --output-dir /tmp/hub_build/motor_mega

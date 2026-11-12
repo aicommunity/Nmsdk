@@ -105,6 +105,14 @@ TEST_F(PropertySerializationTest, XMLSerializationMatrix)
     EXPECT_EQ(comp2->MatrixState()->GetCols(), 2);
     EXPECT_DOUBLE_EQ((*comp2->MatrixState())(0, 0), 1.0);
     EXPECT_DOUBLE_EQ((*comp2->MatrixState())(1, 1), 4.0);
+
+    USerStorageXML matrixNode;
+    matrixNode.Create("MatrixState");
+    *matrixNode << (*comp2->MatrixState());
+    const std::string nodeText = matrixNode.GetNodeText();
+    EXPECT_FALSE(nodeText.empty());
+    EXPECT_NE('\n', nodeText.front());
+    EXPECT_NE('\t', nodeText.back());
     
     delete storage;
 }

@@ -1,3 +1,5 @@
+> **Historical report.** See [Docs/Overview/](../Docs/Overview/) for current documentation.
+
 # Компонентная система
 
 ## Обзор
@@ -315,6 +317,6 @@ protected:
 ## См. также
 
 - [01-Rdk-Core-Structure.md](01-Rdk-Core-Structure.md) - структура ядра Rdk
-- [02-Libraries-Overview.md](02-Libraries-Overview.md) - обзор библиотек компонентов
+- [Docs/Libraries/Overview.md](../Docs/Libraries/Overview.md) - обзор библиотек компонентов
 - [00-Project-Overview.md](00-Project-Overview.md) - общий обзор проекта
 

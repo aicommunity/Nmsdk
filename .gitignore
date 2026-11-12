@@ -89,12 +89,14 @@ Debug
 Debug_Build
 Release_Build
 InstallSources
-build-*
+build-*/
 *.orig
 *.stat
 *.res
 ode-solver-build/
 build/
+out/
+vcpkg_installed/
 CMakeFiles/
 *_autogen/
 CMakeCache.txt
@@ -108,3 +110,15 @@ Tests/Integration/GUI/build_test/
 Tests/Integration/GUI/build_prod/
 Tests/Integration/GUI/GUI/CMakeFiles/
 Tests/Integration/GUI/GUI/cmake_install.cmake
+*.pyc
+dummy
+cp1251_*.txt
+save.tmp
+/Testing/
+Reports/*
+!Reports/README.md
+
+# Persistent dependencies and local build validation logs
+/.deps/
+/.build-audit/
+CMakeUserPresets.json

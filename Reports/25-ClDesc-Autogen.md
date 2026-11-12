@@ -13,7 +13,7 @@
   - сохраняет XML в правильную папку библиотеки и выводит статистику.
 - Добавлен модуль `ClDescGenerator` с эвристиками разбиения имён и локализацией на русский язык.
 - Сформирован словарь `Docs/ClDescLexicon.json`, содержащий переводы токенов и точечные overrides (например, для `NDCEngine`, `NPulseNeuron`, `NActuatorSignals`).
-- Подготовлен README (`Docs/ClDesc/README.md`) с инструкциями по запуску и тонкой настройке словаря.
+- Инструкции по запуску: этот отчёт + [Docs/PropertyAliasGeneration.md](../Docs/PropertyAliasGeneration.md) + [Docs/ClDesc-Detailed-Methodology.md](../Docs/ClDesc-Detailed-Methodology.md).
 
 ## Как использовать
 
@@ -24,14 +24,23 @@
        --cldesc-lexicon Docs/ClDescLexicon.json
    ```
 3. По окончании генератор выведет статистику (количество новых/обновлённых описаний и разбивку по библиотекам). Готовые XML находятся в `Bin/ClDesc/<Library>/ru-RU/<Class>.xml`.
-4. При необходимости измените словарь и повторите запуск — файлы будут перезаписаны.
+4. При необходимости измените словарь и повторите запуск — **тексты** могут обновиться; Favorites aliases мержатся поверх существующих.
 
 ### Что делает генератор
 
 - Загружает библиотеки через `RdkLoadPredefinedLibraries()`.
 - Для каждого класса из `UStorage` вызывает `UContainerDescription::CreateProperties()`, чтобы зафиксировать актуальный набор свойств.
 - Строит заголовки и описания на русском (разбиение CamelCase, перевод токенов, шаблоны фраз).
+- Для `UNet` с вложенностью пишет **nested aliases** в `<Favorites>` (не curated primary).
 - Пишет результат в `Bin/ClDesc`, сохраняя структуру `<Library>/ru-RU/`.
+
+### Favorites ≠ DETAILED
+
+Автоген — уровень **Autogen** (каркас). Уровень **DETAILED** (primary Favorites `{CompName}:Prop`, отфильтрованные aliases, смысловые Description) — ручная/агентная курация по [ClDesc-Detailed-Methodology.md](../Docs/ClDesc-Detailed-Methodology.md).
+
+Не запускать массовый `--cldesc-force` после курации Favorites без политики сохранения. Autogen часто добавляет шум (`Coord`/`Activity`/`Type`) и **не** создаёт top-level primary Favorites.
+
+Эталон схемы: [Bin/Docs/Examples/ClDesc-Example.md](../Bin/Docs/Examples/ClDesc-Example.md).
 
 ### Настройка словаря
 
@@ -53,11 +62,11 @@
 }
 ```
 
-После правок словаря достаточно снова выполнить `--generate-cldesc`, чтобы обновить XML.
+После правок словаря достаточно снова выполнить `--generate-cldesc` (без `-F` на уже DETAILED Favorites), чтобы обновить тексты свойств/классов.
 
 ## Дальнейшие улучшения
 
+- Фильтр технических leaf-имён в `PropertyAliasAnalyzer` / опция не трогать Favorites при наличии direct — **сделано** (см. `Docs/PropertyAliasConfig.json`).
 - Добавить поддержку английской локализации.
 - Интегрировать проверку CI, чтобы гарантировать актуальность `Bin/ClDesc`.
 - Расширить словарь библиотек CV/Hardware дополнительными overrides, если появятся новые компоненты.
-

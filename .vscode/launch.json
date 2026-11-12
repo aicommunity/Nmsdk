@@ -2,44 +2,34 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "CMake: Launch active target (Debug, Windows)",
+      "name": "Selected CMake target (Windows)",
       "type": "cppvsdbg",
       "request": "launch",
       "program": "${command:cmake.launchTargetPath}",
       "cwd": "${command:cmake.launchTargetDirectory}",
       "environment": [
-        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
+        {
+          "name": "NMSDK_ROOT",
+          "value": "${workspaceFolder}"
+        },
+        {
+          "name": "QT_PLUGIN_PATH",
+          "value": ""
+        }
       ],
-      "preLaunchTask": "CMake: build (platform preset)",
-      "console": "integratedTerminal",
-      "windows": {}
+      "args": [],
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
     },
     {
-      "name": "CMake: Launch active target (Debug, Linux)",
+      "name": "Selected CMake target (Linux, gdb)",
       "type": "cppdbg",
       "request": "launch",
       "program": "${command:cmake.launchTargetPath}",
       "cwd": "${command:cmake.launchTargetDirectory}",
-      "environment": [
-        { "name": "VCPKG_ROOT", "value": "${env:VCPKG_ROOT}" }
-      ],
       "MIMode": "gdb",
-      "miDebuggerPath": "/usr/bin/gdb",
-      "preLaunchTask": "CMake: build (platform preset)",
-      "console": "integratedTerminal",
-      "linux": {}
+      "args": [],
+      "externalConsole": false
     }
   ]
-}
-{
-    "configurations": [
-        {
-            "type": "cmake",
-            "request": "launch",
-            "name": "Debug portfile(s)",
-            "cmakeDebugType": "external",
-            "pipeName": "\\\\.\\pipe\\vcpkg_ext_portfile_dbg",
-            "preLaunchTask": "Debug vcpkg commands"
-        }
-    ]
 }

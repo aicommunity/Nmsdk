@@ -1,200 +1,1485 @@
 {
-  "version": 6,
-  "cmakeMinimumRequired": { "major": 3, "minor": 20, "patch": 0 },
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 23,
+    "patch": 0
+  },
   "configurePresets": [
     {
-      "name": "win-msvc-base",
+      "name": "localqt-qt-root",
       "hidden": true,
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/build/install/${presetName}",
-      "cacheVariables": {
-        "CMAKE_CXX_STANDARD": "20",
-        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_MANIFEST_DIR": "${sourceDir}",
-        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
-        "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
       }
     },
     {
-      "name": "win-msvc-debug",
-      "displayName": "Windows Ninja Debug",
-      "inherits": [ "win-msvc-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
-    },
-    {
-      "name": "win-msvc-release",
-      "displayName": "Windows Ninja Release",
-      "inherits": [ "win-msvc-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
-    },
-    {
-      "name": "win-vs2019-base",
+      "name": "base",
       "hidden": true,
-      "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/build/install/${presetName}",
       "cacheVariables": {
-        "CMAKE_C_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
-        "CMAKE_CXX_COMPILER": "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.29.30133/bin/Hostx64/x64/cl.exe",
         "CMAKE_CXX_STANDARD": "20",
-        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_MANIFEST_DIR": "${sourceDir}",
-        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
-        "BUILD_SHARED_LIBS": "OFF",
+        "BUILD_TESTING": "OFF",
+        "RDK_USE_LLM": "ON",
+        "RDK_LLM_BUILD_EMBEDDED": "OFF",
         "RDK_USE_ODESOLVER": "OFF",
+        "RDK_USE_OPENCV": "OFF",
         "RDK_USE_PYTHON": "OFF",
         "RDK_USE_DARKNET": "OFF",
         "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
-      },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+        "RDK_UNICODE_RUN": "ON",
+        "NO_MOTION_CONTROL": "ON",
+        "NMSDK_USE_WEBENGINE": "OFF"
       }
     },
     {
-      "name": "win-vs2019-debug",
+      "name": "windows",
       "hidden": true,
-      "inherits": [ "win-vs2019-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+      "inherits": "base",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg-overlay-triplets",
+        "VCPKG_MANIFEST_FEATURES": "llm",
+        "BUILD_SHARED_LIBS": "OFF",
+        "QT_CREATOR_SKIP_PACKAGE_MANAGER_SETUP": "ON"
+      }
     },
     {
-      "name": "win-vs2019-release",
+      "name": "win-vs2019-ninja",
       "hidden": true,
-      "inherits": [ "win-vs2019-base" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+      "inherits": "windows",
+      "generator": "Ninja",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "toolset": {
+        "value": "v142",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "NMSDK_EXPECTED_TOOLSET": "v142",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-v142",
+        "VCPKG_HOST_TRIPLET": "x64-windows-v142",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}/cmake/manifests/v142",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      }
     },
     {
-      "name": "win-vs2022-base",
+      "name": "win-vs2019-ninja-debug-localqt",
+      "displayName": "MSVC 2019 ninja Debug (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2019-ninja"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2019-ninja-release-localqt",
+      "displayName": "MSVC 2019 ninja Release (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2019-ninja"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2019-ninja-debug-vcpkgqt",
+      "displayName": "MSVC 2019 ninja Debug (vcpkgqt)",
+      "inherits": "win-vs2019-ninja",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-vcpkgqt",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2019-ninja-release-vcpkgqt",
+      "displayName": "MSVC 2019 ninja Release (vcpkgqt)",
+      "inherits": "win-vs2019-ninja",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-vcpkgqt",
+        "CMAKE_BUILD_TYPE": "Release",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2019-msbuild",
       "hidden": true,
-      "generator": "Visual Studio 17 2022",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/build/install/${presetName}",
+      "inherits": "windows",
+      "generator": "Visual Studio 16 2019",
       "architecture": {
         "value": "x64",
         "strategy": "set"
       },
-      "cacheVariables": {
-        "CMAKE_CXX_STANDARD": "20",
-        "CMAKE_CXX_STANDARD_REQUIRED": "ON",
-        "CMAKE_POLICY_DEFAULT_CMP0091": "NEW",
-        "CMAKE_MSVC_RUNTIME_LIBRARY": "MultiThreaded$<IF:$<CONFIG:Debug>,Debug,>DLL",
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
-        "VCPKG_MANIFEST_DIR": "${sourceDir}",
-        "CMAKE_PREFIX_PATH": "${binaryDir}/vcpkg_installed/x64-windows/debug;${binaryDir}/vcpkg_installed/x64-windows",
-        "CMAKE_VS_GENERATE_DEVENV_LAUNCHER": "ON",
-        "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
+      "toolset": {
+        "value": "v142",
+        "strategy": "set"
       },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      "cacheVariables": {
+        "NMSDK_EXPECTED_TOOLSET": "v142",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-v142",
+        "VCPKG_HOST_TRIPLET": "x64-windows-v142",
+        "VCPKG_MANIFEST_DIR": "${sourceDir}/cmake/manifests/v142"
+      }
+    },
+    {
+      "name": "win-vs2019-msbuild-debug-localqt",
+      "displayName": "MSVC 2019 msbuild Debug (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2019-msbuild"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
       },
-      "vendor": {
-        "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "hostOS": [ "Windows" ],
-          "intelliSenseMode": "windows-msvc-x64"
-        }
-      }
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
-      "name": "win-vs2022-debug",
-      "hidden": true,
-      "inherits": [ "win-vs2022-base" ],
+      "name": "win-vs2019-msbuild-release-localqt",
+      "displayName": "MSVC 2019 msbuild Release (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2019-msbuild"
+      ],
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-localqt",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
     },
     {
-      "name": "win-vs2022-release",
-      "hidden": true,
-      "inherits": [ "win-vs2022-base" ],
+      "name": "win-vs2019-msbuild-debug-vcpkgqt",
+      "displayName": "MSVC 2019 msbuild Debug (vcpkgqt)",
+      "inherits": "win-vs2019-msbuild",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-vcpkgqt",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
       }
     },
     {
-      "name": "linux-gcc-debug",
+      "name": "win-vs2019-msbuild-release-vcpkgqt",
+      "displayName": "MSVC 2019 msbuild Release (vcpkgqt)",
+      "inherits": "win-vs2019-msbuild",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v142-vcpkgqt",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2022-ninja",
       "hidden": true,
+      "inherits": "windows",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "installDir": "${sourceDir}/build/install/${presetName}",
-      "cacheVariables": {
-        "CMAKE_C_COMPILER": "/usr/bin/gcc",
-        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
-        "CMAKE_CXX_STANDARD": "20",
-        "BUILD_SHARED_LIBS": "OFF",
-        "RDK_USE_ODESOLVER": "OFF",
-        "RDK_USE_PYTHON": "OFF",
-        "RDK_USE_DARKNET": "OFF",
-        "RDK_USE_TENSORFLOW": "OFF",
-        "RDK_UNICODE_RUN": "OFF"
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
       },
-      "environment": {
-        "CMAKE_BUILD_PARALLEL_LEVEL": "$env{NUMBER_OF_PROCESSORS}",
-        "QT_CREATOR_SKIP_VCPKG_SETUP": "ON"
+      "toolset": {
+        "value": "v143",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "NMSDK_EXPECTED_TOOLSET": "v143",
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "VCPKG_HOST_TRIPLET": "x64-windows",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
       }
     },
     {
-      "name": "linux-gcc-release",
+      "name": "win-vs2022-ninja-debug-localqt",
+      "displayName": "MSVC 2022 ninja Debug (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2022-ninja"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2022-ninja-release-localqt",
+      "displayName": "MSVC 2022 ninja Release (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2022-ninja"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2022-ninja-debug-vcpkgqt",
+      "displayName": "MSVC 2022 ninja Debug (vcpkgqt)",
+      "inherits": "win-vs2022-ninja",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-vcpkgqt",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2022-ninja-release-vcpkgqt",
+      "displayName": "MSVC 2022 ninja Release (vcpkgqt)",
+      "inherits": "win-vs2022-ninja",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-vcpkgqt",
+        "CMAKE_BUILD_TYPE": "Release",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2022-msbuild",
       "hidden": true,
-      "inherits": [ "linux-gcc-debug" ],
-      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+      "inherits": "windows",
+      "generator": "Visual Studio 17 2022",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "toolset": {
+        "value": "v143",
+        "strategy": "set"
+      },
+      "cacheVariables": {
+        "NMSDK_EXPECTED_TOOLSET": "v143",
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "VCPKG_HOST_TRIPLET": "x64-windows"
+      }
+    },
+    {
+      "name": "win-vs2022-msbuild-debug-localqt",
+      "displayName": "MSVC 2022 msbuild Debug (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2022-msbuild"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2022-msbuild-release-localqt",
+      "displayName": "MSVC 2022 msbuild Release (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2022-msbuild"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-localqt",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2022-msbuild-debug-vcpkgqt",
+      "displayName": "MSVC 2022 msbuild Debug (vcpkgqt)",
+      "inherits": "win-vs2022-msbuild",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-vcpkgqt",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2022-msbuild-release-vcpkgqt",
+      "displayName": "MSVC 2022 msbuild Release (vcpkgqt)",
+      "inherits": "win-vs2022-msbuild",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v143-vcpkgqt",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2026-ninja",
+      "hidden": true,
+      "inherits": "windows",
+      "generator": "Ninja",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "toolset": {
+        "value": "v145",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "NMSDK_EXPECTED_TOOLSET": "v145",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-v145",
+        "VCPKG_HOST_TRIPLET": "x64-windows-v145",
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      }
+    },
+    {
+      "name": "win-vs2026-ninja-debug-localqt",
+      "displayName": "MSVC 2026 ninja Debug (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2026-ninja"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2026-ninja-release-localqt",
+      "displayName": "MSVC 2026 ninja Release (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2026-ninja"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2026-ninja-debug-vcpkgqt",
+      "displayName": "MSVC 2026 ninja Debug (vcpkgqt)",
+      "inherits": "win-vs2026-ninja",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-vcpkgqt",
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2026-ninja-release-vcpkgqt",
+      "displayName": "MSVC 2026 ninja Release (vcpkgqt)",
+      "inherits": "win-vs2026-ninja",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-vcpkgqt",
+        "CMAKE_BUILD_TYPE": "Release",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2026-msbuild",
+      "hidden": true,
+      "inherits": "windows",
+      "generator": "Visual Studio 18 2026",
+      "architecture": {
+        "value": "x64",
+        "strategy": "set"
+      },
+      "toolset": {
+        "value": "v145",
+        "strategy": "set"
+      },
+      "cacheVariables": {
+        "NMSDK_EXPECTED_TOOLSET": "v145",
+        "VCPKG_TARGET_TRIPLET": "x64-windows-v145",
+        "VCPKG_HOST_TRIPLET": "x64-windows-v145"
+      }
+    },
+    {
+      "name": "win-vs2026-msbuild-debug-localqt",
+      "displayName": "MSVC 2026 msbuild Debug (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2026-msbuild"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2026-msbuild-release-localqt",
+      "displayName": "MSVC 2026 msbuild Release (localqt) [QT_ROOT]",
+      "inherits": [
+        "localqt-qt-root",
+        "win-vs2026-msbuild"
+      ],
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "local",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-localqt",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}"
+      },
+      "description": "Advanced generic preset: set QT_ROOT and NMSDK_SHOW_QT_ROOT_PRESETS=1. For VSCode use Register-LocalQtPresets.ps1 to select a validated Qt kit and installed toolset."
+    },
+    {
+      "name": "win-vs2026-msbuild-debug-vcpkgqt",
+      "displayName": "MSVC 2026 msbuild Debug (vcpkgqt)",
+      "inherits": "win-vs2026-msbuild",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-vcpkgqt",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "win-vs2026-msbuild-release-vcpkgqt",
+      "displayName": "MSVC 2026 msbuild Release (vcpkgqt)",
+      "inherits": "win-vs2026-msbuild",
+      "cacheVariables": {
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "NMSDK_DEPENDENCY_PROFILE": "v145-vcpkgqt",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6"
+      }
+    },
+    {
+      "name": "linux-gcc-debug-local",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "NMSDK_QT_PROVIDER": "local"
+      }
+    },
+    {
+      "name": "linux-gcc-debug-vcpkg",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-dynamic",
+        "NMSDK_DEPENDENCY_PROFILE": "linux-gcc-vcpkg",
+        "VCPKG_HOST_TRIPLET": "x64-linux-dynamic"
+      },
+      "environment": {
+        "CC": "gcc",
+        "CXX": "g++"
+      }
+    },
+    {
+      "name": "linux-gcc-release-local",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "NMSDK_QT_PROVIDER": "local"
+      }
+    },
+    {
+      "name": "linux-gcc-release-vcpkg",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++",
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-dynamic",
+        "NMSDK_DEPENDENCY_PROFILE": "linux-gcc-vcpkg",
+        "VCPKG_HOST_TRIPLET": "x64-linux-dynamic"
+      },
+      "environment": {
+        "CC": "gcc",
+        "CXX": "g++"
+      }
+    },
+    {
+      "name": "linux-clang-debug-local",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "NMSDK_QT_PROVIDER": "local"
+      }
+    },
+    {
+      "name": "linux-clang-debug-vcpkg",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-dynamic",
+        "NMSDK_DEPENDENCY_PROFILE": "linux-clang-vcpkg",
+        "VCPKG_HOST_TRIPLET": "x64-linux-dynamic"
+      },
+      "environment": {
+        "CC": "clang",
+        "CXX": "clang++"
+      }
+    },
+    {
+      "name": "linux-clang-release-local",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "NMSDK_QT_PROVIDER": "local"
+      }
+    },
+    {
+      "name": "linux-clang-release-vcpkg",
+      "inherits": "base",
+      "generator": "Ninja",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "NMSDK_QT_PROVIDER": "vcpkg",
+        "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg_toolchain_from_env.cmake",
+        "VCPKG_MANIFEST_FEATURES": "qt;llm",
+        "QT_VERSION_MAJOR": "6",
+        "VCPKG_TARGET_TRIPLET": "x64-linux-dynamic",
+        "NMSDK_DEPENDENCY_PROFILE": "linux-clang-vcpkg",
+        "VCPKG_HOST_TRIPLET": "x64-linux-dynamic"
+      },
+      "environment": {
+        "CC": "clang",
+        "CXX": "clang++"
+      }
     }
   ],
   "buildPresets": [
     {
-      "name": "win-msvc-debug",
-      "configurePreset": "win-msvc-debug",
-      "displayName": "Build Windows Ninja Debug",
-      "jobs": 8
+      "name": "localqt-qt-root",
+      "hidden": true,
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
     },
     {
-      "name": "win-msvc-release",
-      "configurePreset": "win-msvc-release",
-      "displayName": "Build Windows Ninja Release",
-      "jobs": 8
+      "name": "win-vs2019-ninja-debug-localqt",
+      "configurePreset": "win-vs2019-ninja-debug-localqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
     },
     {
-      "name": "win-vs2019-debug",
-      "configurePreset": "win-vs2019-debug",
-      "displayName": "Build Windows VS2019 Ninja Debug"
+      "name": "win-vs2019-ninja-release-localqt",
+      "configurePreset": "win-vs2019-ninja-release-localqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
     },
     {
-      "name": "win-vs2019-release",
-      "configurePreset": "win-vs2019-release",
-      "displayName": "Build Windows VS2019 Ninja Release"
+      "name": "win-vs2019-ninja-debug-vcpkgqt",
+      "configurePreset": "win-vs2019-ninja-debug-vcpkgqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
     },
     {
-      "name": "win-vs2022-debug",
-      "configurePreset": "win-vs2022-debug",
-      "displayName": "Build Windows VS2022 Debug"
+      "name": "win-vs2019-ninja-release-vcpkgqt",
+      "configurePreset": "win-vs2019-ninja-release-vcpkgqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
     },
     {
-      "name": "win-vs2022-release",
-      "configurePreset": "win-vs2022-release",
-      "displayName": "Build Windows VS2022 Release"
+      "name": "win-vs2019-msbuild-debug-localqt",
+      "configurePreset": "win-vs2019-msbuild-debug-localqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2019-msbuild-release-localqt",
+      "configurePreset": "win-vs2019-msbuild-release-localqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2019-msbuild-debug-vcpkgqt",
+      "configurePreset": "win-vs2019-msbuild-debug-vcpkgqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2019-msbuild-release-vcpkgqt",
+      "configurePreset": "win-vs2019-msbuild-release-vcpkgqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2022-ninja-debug-localqt",
+      "configurePreset": "win-vs2022-ninja-debug-localqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-ninja-release-localqt",
+      "configurePreset": "win-vs2022-ninja-release-localqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-ninja-debug-vcpkgqt",
+      "configurePreset": "win-vs2022-ninja-debug-vcpkgqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2022-ninja-release-vcpkgqt",
+      "configurePreset": "win-vs2022-ninja-release-vcpkgqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2022-msbuild-debug-localqt",
+      "configurePreset": "win-vs2022-msbuild-debug-localqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-msbuild-release-localqt",
+      "configurePreset": "win-vs2022-msbuild-release-localqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-msbuild-debug-vcpkgqt",
+      "configurePreset": "win-vs2022-msbuild-debug-vcpkgqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2022-msbuild-release-vcpkgqt",
+      "configurePreset": "win-vs2022-msbuild-release-vcpkgqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2026-ninja-debug-localqt",
+      "configurePreset": "win-vs2026-ninja-debug-localqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-ninja-release-localqt",
+      "configurePreset": "win-vs2026-ninja-release-localqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-ninja-debug-vcpkgqt",
+      "configurePreset": "win-vs2026-ninja-debug-vcpkgqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2026-ninja-release-vcpkgqt",
+      "configurePreset": "win-vs2026-ninja-release-vcpkgqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2026-msbuild-debug-localqt",
+      "configurePreset": "win-vs2026-msbuild-debug-localqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-msbuild-release-localqt",
+      "configurePreset": "win-vs2026-msbuild-release-localqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ],
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-msbuild-debug-vcpkgqt",
+      "configurePreset": "win-vs2026-msbuild-debug-vcpkgqt",
+      "configuration": "Debug",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "win-vs2026-msbuild-release-vcpkgqt",
+      "configurePreset": "win-vs2026-msbuild-release-vcpkgqt",
+      "configuration": "Release",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-gcc-debug-local",
+      "configurePreset": "linux-gcc-debug-local",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-gcc-debug-vcpkg",
+      "configurePreset": "linux-gcc-debug-vcpkg",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-gcc-release-local",
+      "configurePreset": "linux-gcc-release-local",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-gcc-release-vcpkg",
+      "configurePreset": "linux-gcc-release-vcpkg",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-clang-debug-local",
+      "configurePreset": "linux-clang-debug-local",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-clang-debug-vcpkg",
+      "configurePreset": "linux-clang-debug-vcpkg",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-clang-release-local",
+      "configurePreset": "linux-clang-release-local",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    },
+    {
+      "name": "linux-clang-release-vcpkg",
+      "configurePreset": "linux-clang-release-vcpkg",
+      "targets": [
+        "NeuroModeler",
+        "NeuroModelerConsole"
+      ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "localqt-qt-root",
+      "hidden": true,
+      "condition": {
+        "type": "allOf",
+        "conditions": [
+          {
+            "type": "equals",
+            "lhs": "${hostSystemName}",
+            "rhs": "Windows"
+          },
+          {
+            "type": "equals",
+            "lhs": "$penv{NMSDK_SHOW_QT_ROOT_PRESETS}",
+            "rhs": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "win-vs2019-ninja-debug-localqt",
+      "configurePreset": "win-vs2019-ninja-debug-localqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2019-ninja-release-localqt",
+      "configurePreset": "win-vs2019-ninja-release-localqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2019-ninja-debug-vcpkgqt",
+      "configurePreset": "win-vs2019-ninja-debug-vcpkgqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2019-ninja-release-vcpkgqt",
+      "configurePreset": "win-vs2019-ninja-release-vcpkgqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2019-msbuild-debug-localqt",
+      "configurePreset": "win-vs2019-msbuild-debug-localqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2019-msbuild-release-localqt",
+      "configurePreset": "win-vs2019-msbuild-release-localqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2019-msbuild-debug-vcpkgqt",
+      "configurePreset": "win-vs2019-msbuild-debug-vcpkgqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2019-msbuild-release-vcpkgqt",
+      "configurePreset": "win-vs2019-msbuild-release-vcpkgqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2022-ninja-debug-localqt",
+      "configurePreset": "win-vs2022-ninja-debug-localqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-ninja-release-localqt",
+      "configurePreset": "win-vs2022-ninja-release-localqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-ninja-debug-vcpkgqt",
+      "configurePreset": "win-vs2022-ninja-debug-vcpkgqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2022-ninja-release-vcpkgqt",
+      "configurePreset": "win-vs2022-ninja-release-vcpkgqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2022-msbuild-debug-localqt",
+      "configurePreset": "win-vs2022-msbuild-debug-localqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-msbuild-release-localqt",
+      "configurePreset": "win-vs2022-msbuild-release-localqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2022-msbuild-debug-vcpkgqt",
+      "configurePreset": "win-vs2022-msbuild-debug-vcpkgqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2022-msbuild-release-vcpkgqt",
+      "configurePreset": "win-vs2022-msbuild-release-vcpkgqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2026-ninja-debug-localqt",
+      "configurePreset": "win-vs2026-ninja-debug-localqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-ninja-release-localqt",
+      "configurePreset": "win-vs2026-ninja-release-localqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-ninja-debug-vcpkgqt",
+      "configurePreset": "win-vs2026-ninja-debug-vcpkgqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2026-ninja-release-vcpkgqt",
+      "configurePreset": "win-vs2026-ninja-release-vcpkgqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2026-msbuild-debug-localqt",
+      "configurePreset": "win-vs2026-msbuild-debug-localqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-msbuild-release-localqt",
+      "configurePreset": "win-vs2026-msbuild-release-localqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      },
+      "inherits": "localqt-qt-root"
+    },
+    {
+      "name": "win-vs2026-msbuild-debug-vcpkgqt",
+      "configurePreset": "win-vs2026-msbuild-debug-vcpkgqt",
+      "configuration": "Debug",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "win-vs2026-msbuild-release-vcpkgqt",
+      "configurePreset": "win-vs2026-msbuild-release-vcpkgqt",
+      "configuration": "Release",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-gcc-debug-local",
+      "configurePreset": "linux-gcc-debug-local",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-gcc-debug-vcpkg",
+      "configurePreset": "linux-gcc-debug-vcpkg",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-gcc-release-local",
+      "configurePreset": "linux-gcc-release-local",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-gcc-release-vcpkg",
+      "configurePreset": "linux-gcc-release-vcpkg",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-clang-debug-local",
+      "configurePreset": "linux-clang-debug-local",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-clang-debug-vcpkg",
+      "configurePreset": "linux-clang-debug-vcpkg",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-clang-release-local",
+      "configurePreset": "linux-clang-release-local",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
+    },
+    {
+      "name": "linux-clang-release-vcpkg",
+      "configurePreset": "linux-clang-release-vcpkg",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error"
+      },
+      "environment": {
+        "QT_PLUGIN_PATH": null,
+        "QML2_IMPORT_PATH": null
+      }
     }
   ]
 }
-
-
-

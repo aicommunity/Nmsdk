@@ -133,7 +133,7 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
 
         applyClassText(className, libraryName, description, options.forceOverride);
         applyPropertiesText(className, QString::fromStdString(description->GetHeader()), description, options.forceOverride);
-        
+
         // Генерируем алиасы свойств для компонентов с вложенными структурами
         // Обернуто в try-catch, чтобы не прерывать генерацию других компонентов при ошибках
         try
@@ -144,7 +144,7 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
         {
             if (options.verbose)
             {
-                qWarning() << "ClDescGenerator: ошибка при генерации алиасов для" 
+                qWarning() << "ClDescGenerator: ошибка при генерации алиасов для"
                           << QString::fromStdString(className) << ":" << e.what();
             }
         }
@@ -152,7 +152,7 @@ bool ClDescGenerator::Generate(RDK::UELockPtr<RDK::UStorage> storage,
         {
             if (options.verbose)
             {
-                qWarning() << "ClDescGenerator: неизвестная ошибка при генерации алиасов для" 
+                qWarning() << "ClDescGenerator: неизвестная ошибка при генерации алиасов для"
                           << QString::fromStdString(className);
             }
         }
@@ -346,7 +346,9 @@ void ClDescGenerator::applyPropertiesText(const std::string& className,
         const auto overrideText = resolvePropertyOverride(QString::fromStdString(className), propertyKey);
 
         QString header = QString::fromStdString(propDesc.Header);
-        if (forceOverride || header.trimmed().isEmpty())
+        // Перезаписываем заголовок только если он пуст или есть явное переопределение из лексикона.
+        // Не затираем содержательные заголовки при forceOverride.
+        if (header.trimmed().isEmpty() || !overrideText.header.isEmpty())
         {
             if (!overrideText.header.isEmpty())
             {
@@ -364,11 +366,12 @@ void ClDescGenerator::applyPropertiesText(const std::string& className,
         QString desc = QString::fromStdString(propDesc.Description);
         // Старые автогенераторы могли оставить заглушки вида
         // «%1 — параметр компонента %2.» или «%1 — свойство %2.».
-        // Если видим такую фразу, считаем описание пустым и перезаписываем его.
+        // Перезаписываем только пустые, заглушки или при явном переопределении из лексикона.
+        // Не затираем содержательные описания при forceOverride.
         const bool isStubDescription =
             desc.contains(QStringLiteral("— параметр компонента"))
             || desc.contains(QStringLiteral("— свойство "));
-        if (forceOverride || desc.trimmed().isEmpty() || isStubDescription)
+        if (desc.trimmed().isEmpty() || isStubDescription || !overrideText.description.isEmpty())
         {
             QString generated = overrideText.description;
             if (generated.isEmpty())
@@ -470,17 +473,17 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
 {
     if (!description || !storage)
         return;
-    
+
     // Создаем экземпляр компонента для анализа
     // Используем RAII-подход: гарантируем возврат компонента даже при исключениях
     RDK::UEPtr<RDK::UComponent> component;
-    
+
     try
     {
         component = storage->TakeObject(className);
         if (!component)
             return;
-        
+
         // Преобразуем в UContainer для анализа
         RDK::UEPtr<RDK::UContainer> container = RDK::dynamic_pointer_cast<RDK::UContainer>(component);
         if (!container)
@@ -489,7 +492,7 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
             component = RDK::UEPtr<RDK::UComponent>();
             return;
         }
-        
+
         // Проверяем, является ли компонент UNet (имеет вложенные компоненты)
         RDK::UEPtr<RDK::UNet> net = RDK::dynamic_pointer_cast<RDK::UNet>(container);
         if (!net)
@@ -498,7 +501,28 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
             component = RDK::UEPtr<RDK::UComponent>();
             return;
         }
-        
+
+        // If curated direct Favorites already exist ({CompName}:Prop / no '.'), do not
+        // regenerate nested aliases — protects DETAILED curation from --generate-cldesc.
+        {
+            const auto& existingFavorites = description->GetFavorites();
+            bool hasDirectFavorite = false;
+            for (const auto& fav : existingFavorites)
+            {
+                if (fav.second.find('.') == std::string::npos)
+                {
+                    hasDirectFavorite = true;
+                    break;
+                }
+            }
+            if (hasDirectFavorite)
+            {
+                storage->ReturnObject(component);
+                component = RDK::UEPtr<RDK::UComponent>();
+                return;
+            }
+        }
+
         // Настраиваем опции анализатора
         PropertyAliasAnalyzerOptions analyzerOptions;
         analyzerOptions.minDepth = 2;
@@ -508,7 +532,15 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
         analyzerOptions.preferredTypes.insert("ptParameter");
         analyzerOptions.excludePatterns.insert("DataInput*");
         analyzerOptions.excludePatterns.insert("DataOutput*");
-        
+        // Secondary / technical leaves (see Docs/PropertyAliasConfig.json)
+        for (const char* leaf : {
+                 "Coord", "Activity", "Type", "Name", "Id", "TimeStep", "StepDuration",
+                 "DebugSysEventsMask", "CalculationDurationThreshold", "MaxCalculationDuration",
+                 "IsVisible", "MemoryMonitor"})
+        {
+            analyzerOptions.excludePatterns.insert(QString::fromUtf8(leaf));
+        }
+
         // Определяем путь к конфигурациям
         QString appDir = QCoreApplication::applicationDirPath();
         QString configsPath = QDir(appDir).absoluteFilePath("../../Bin/Configs");
@@ -518,21 +550,28 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
         }
         analyzerOptions.configsPath = configsPath;
         analyzerOptions.analyzeConfigs = QDir(configsPath).exists();
-        
+
         // Анализируем компонент
         std::vector<PropertyAliasCandidate> candidates = aliasAnalyzer_.AnalyzeComponent(container, analyzerOptions);
-        
-        // Добавляем алиасы в Favorites
+
+        // Добавляем алиасы в Favorites (I/O leaves only — avoid parameter noise)
         for (const auto& candidate : candidates)
         {
-            QString aliasName = candidate.aliasName;
-            QString componentPath = candidate.componentPath;
-            QString propertyName = candidate.propertyName;
-            
-            // Добавляем алиас в Favorites
+            const QString& propertyName = candidate.propertyName;
+            const bool isIo =
+                propertyName == QLatin1String("Input") ||
+                propertyName == QLatin1String("Output") ||
+                propertyName == QLatin1String("Weight") ||
+                propertyName == QLatin1String("Threshold") ||
+                propertyName == QLatin1String("Frequency") ||
+                propertyName.endsWith(QLatin1String("Input")) ||
+                propertyName.endsWith(QLatin1String("Output"));
+            if (!isIo)
+                continue;
+
             description->AddPropertyAlias(
-                aliasName.toStdString(),
-                componentPath.toStdString(),
+                candidate.aliasName.toStdString(),
+                candidate.componentPath.toStdString(),
                 propertyName.toStdString(),
                 candidate.propertyType
             );
@@ -554,7 +593,7 @@ void ClDescGenerator::generatePropertyAliases(const std::string& className,
         }
         throw; // Пробрасываем исключение дальше
     }
-    
+
     // Возвращаем компонент в storage
     if (component)
     {

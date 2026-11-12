@@ -3,23 +3,7 @@
   "version-string": "0.1.0",
   "dependencies": [
     {
-      "name": "qt5-base"
-    },
-    {
-      "name": "qt5-serialport"
-    },
-    {
-      "name": "qt5-charts"
-    },
-    {
       "name": "curl"
-    },
-    {
-      "name": "opencv",
-      "default-features": true
-    },
-    {
-      "name": "python3"
     },
     {
       "name": "eigen3"
@@ -27,17 +11,47 @@
     {
       "name": "zlib"
     },
-    { "name": "boost-program-options" },
-    { "name": "boost-thread" },
-    { "name": "boost-filesystem" },
-    { "name": "boost-system" },
-    { "name": "boost-chrono" },
-    { "name": "boost-atomic" },
-    { "name": "glog" }
+    {
+      "name": "boost-program-options"
+    },
+    {
+      "name": "boost-thread"
+    },
+    {
+      "name": "boost-filesystem"
+    },
+    {
+      "name": "boost-system"
+    },
+    {
+      "name": "boost-chrono"
+    },
+    {
+      "name": "boost-atomic"
+    },
+    {
+      "name": "glog"
+    }
   ],
   "features": {
+    "opencv": {
+      "description": "Enable OpenCV (optional; avoids opencv4 build issues with x64-windows-v142)",
+      "dependencies": [
+        "opencv"
+      ]
+    },
+    "qt": {
+      "description": "Qt 6 desktop GUI; WebEngine is a separate opt-in feature",
+      "dependencies": [
+        "qtbase",
+        "qtserialport",
+        "qtcharts",
+        "qtsvg",
+        "qt5compat"
+      ]
+    },
     "python": {
-      "description": "Enable Python",
+      "description": "Enable Python (optional; python3 from vcpkg)",
       "dependencies": [
         "python3"
       ]
@@ -49,7 +63,25 @@
     "tensorflow": {
       "description": "Enable TensorFlow",
       "dependencies": []
+    },
+    "llm": {
+      "description": "RDK LLM module (Windows): nlohmann-json when RDK_USE_LLM=ON",
+      "dependencies": [
+        "nlohmann-json"
+      ]
+    },
+    "webengine": {
+      "description": "Optional Chromium renderer (large source build)",
+      "dependencies": [
+        "qtwebengine"
+      ]
+    },
+    "tests": {
+      "description": "Unit and integration tests",
+      "dependencies": [
+        "gtest"
+      ]
     }
   },
-  "builtin-baseline": "288e8bebf4ca67c1f8ebd49366b03650cfd9eb7d"
+  "builtin-baseline": "5cad485d1ddb649c8fa1022bf0b3908555e6e6ba"
 }

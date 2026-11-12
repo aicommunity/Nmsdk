@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QCoreApplication>
 #include <QCommandLineParser>
 #include <QMessageBox>
 #include <QTimer>
@@ -7,17 +8,28 @@
 #include <QDir>
 #include <QPushButton>
 #include <QDialogButtonBox>
+#include <QProgressDialog>
+#include <QtGlobal>
 #include <algorithm>
 #include <utility>
 #include <vector>
 #include <atomic>
+#include <clocale>
+#include <cstdio>
+#include <locale>
 #include "../../../Rdk/Deploy/Include/rdk_cpp_initdll.h"
 
 #include "UGEngineControlWidget.h"
+#include "UGuiShellController.h"
+#include "UEngineControlStripWidget.h"
+#ifdef RDK_USE_LLM
+#include "NmsdkRegisterLlm.h"
+#endif
 #include "UStyleManager.h"
 #include "../../../Rdk/Core/Utilities/UIniFile.h"
 #include "../../../Rdk/Core/Application/Qt/UProjectDeployerQt.h"
 #include "../../../Rdk/GUI/Qt/UGuiModelSnapshot.h"
+#include "../../../Rdk/GUI/Qt/Plot/WatchDebug.h"
 
 QProgressDialog* d(NULL);
 std::atomic<bool> g_cancelRequested(false);
@@ -127,8 +139,21 @@ void diagnoseQtPlugins()
 
 int main(int argc, char *argv[])
 {
+    if(std::setlocale(LC_ALL, "C.UTF-8") == nullptr)
+        std::setlocale(LC_ALL, "POSIX");
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    // GNOME "Large Text" / fractional scaling: let Qt follow desktop DPI before QApplication.
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
+
     // Создаем QApplication
     QApplication a(argc, argv);
+    a.setQuitOnLastWindowClosed(false);
+    // Qt may call setlocale(LC_ALL, "") during QApplication init; keep numeric C
+    // so strtod/printf and property paths always use '.' as decimal separator.
+    std::setlocale(LC_NUMERIC, "C");
 
     // Регистрируем типы для использования в Qt signals/slots с queued connections
     qRegisterMetaType<NMSDK::UGuiSnapshotPtr>("NMSDK::UGuiSnapshotPtr");
@@ -166,10 +191,13 @@ int main(int argc, char *argv[])
                                             "seconds");
     const QCommandLineOption exitAfterOption(QStringList() << "x" << "exit-after-calc",
                                              "Exit application after calculations finish.");
+    const QCommandLineOption watchDebugOption(QStringList() << "watch-debug",
+                                              "Log Watch Track/reader/axis window diagnostics to stderr.");
     parser.addOption(configOption);
     parser.addOption(startCalcOption);
     parser.addOption(calcTimeOption);
     parser.addOption(exitAfterOption);
+    parser.addOption(watchDebugOption);
     parser.process(a);
 
     auto buildForwardArgs = []() {
@@ -197,7 +225,8 @@ int main(int argc, char *argv[])
             if(token == "--config" || token == "-c" ||
                token == "--start-calc" || token == "-s" ||
                token == "--calc-time" || token == "-t" ||
-               token == "--exit-after-calc" || token == "-x")
+               token == "--exit-after-calc" || token == "-x" ||
+               token == "--watch-debug")
             {
                 if(optionNeedsValue(token) && i + 1 < original.size())
                     ++i;
@@ -216,6 +245,7 @@ int main(int argc, char *argv[])
     const QString cliConfigPath = parser.value(configOption).trimmed();
     const bool cliStartCalc = parser.isSet(startCalcOption);
     const bool cliExitAfterCalc = parser.isSet(exitAfterOption);
+    const bool cliWatchDebug = parser.isSet(watchDebugOption);
     double cliCalcTimeSec = 0.0;
     if(parser.isSet(calcTimeOption))
     {
@@ -247,6 +277,7 @@ int main(int argc, char *argv[])
     }
 
     // Обработка отмены через кнопку Cancel (подключаем ДО show())
+    // d is file-scope; MSVC rejects capturing it in [d] (C3495). Globals need no capture.
     QObject::connect(d, &QProgressDialog::canceled, []() {
         g_cancelRequested.store(true);
         if(d)
@@ -355,13 +386,40 @@ int main(int argc, char *argv[])
         AppCore.calcTimeIntervalSec = cliCalcTimeSec;
     if(cliExitAfterCalc)
         AppCore.exitAfterCalcFlag = 1;
+    if(cliWatchDebug)
+    {
+        NMSDK::WatchDebug::setEnabled(true);
+        std::fprintf(stderr, "[WatchDebug] enabled via --watch-debug\n");
+        std::fflush(stderr);
+    }
 
     UGEngineControlWidget w(NULL, &AppCore.application);
 
-    if(AppCore.hideAdminForm)
-      w.hide();
-    else
-      w.show();
+    auto* shell = new UGuiShellController(&w, &a);
+    w.setShellController(shell);
+    auto* strip = new UEngineControlStripWidget(shell, &AppCore.application);
+    shell->setStrip(strip);
+    strip->bindHost(&w);
+    shell->installWindowMenuActions();
+    shell->loadSettings(QString::fromStdString(AppCore.guiShellPreset));
+
+#ifdef RDK_USE_LLM
+    // Default: ShowLlmAssistantMenu=0 → skip LLM entirely (no index/provider cost on startup).
+    // Enable via NeuroModeler.ini General/ShowLlmAssistantMenu=1 or NMSDK_LLM_ENABLE=1.
+    if(NmsdkLlmRuntimeEnabled(AppCore.showLlmAssistantMenu))
+    {
+        if(d)
+        {
+            d->setLabelText("Launching application: starting AI assistant…");
+            d->setValue(22);
+            QApplication::processEvents(QEventLoop::AllEvents, 0);
+        }
+        // Non-blocking: core init runs on a worker thread; UI registers when ready.
+        NmsdkRegisterLlm(&w, &AppCore.application, AppCore.showLlmAssistantMenu);
+    }
+#endif
+
+    shell->applyStartupVisibility(AppCore.hideAdminForm != 0, AppCore.startMinimized != 0);
 
     AppCore.PostInit();
 
@@ -402,9 +460,6 @@ int main(int argc, char *argv[])
     configureAutomation();
 
     RDK::UIVisualControllerStorage::UpdateInterface(true);
-
-    if(AppCore.startMinimized)
-      w.showMinimized();
 
     d->setValue(100);
     d->hide();

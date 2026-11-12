@@ -1,5 +1,7 @@
 # Повторный анализ GUI (Qt)
 
+> **Note (2026-08):** legacy `UGraphWidget` / QCustomPlot stack has been removed. Live charts are `UWatch` / `PlotSurface` (Qt Charts). Sections below that cite `UGraphWidget.cpp` are historical.
+
 ## Контекст и цели
 
 - Согласно `Reports/00-Project-Overview.md`, Neuro Modeler SDK (Nmsdk) — это компонентная среда для конструирования и исполнения нейросетевых и робототехнических моделей. GUI служит единственным визуальным фронтендом NeuroModeler и должен быстро отображать состояние `UNet`, предоставляя средства настройки компонентов и анализа сигналов.
