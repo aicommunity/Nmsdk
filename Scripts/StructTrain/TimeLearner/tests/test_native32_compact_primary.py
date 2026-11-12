@@ -17,7 +17,7 @@ class Native32BundleChecks:
         origin = load(cls.bundle_root/'ORIGIN.json')
         require(bundle['archive_sha256'] == cls.archive_sha256 and len(bundle['members']) == 2735,
                 'native32_original_archive_scope')
-        require(origin['native_cases_passed'] == 32 and origin['recognition_full_pattern_trials'] == 20 and
+        require(origin['native_cases_passed'] == 32 and origin[cls.origin_trial_count_field] == 20 and
                 origin['native_source_commit'] == '8362d58f4d6576a0c8b0cc7633270976dff1df7b' and
                 origin['pulse_commit'] == '1110808f4ad1f67538dadc6fe1d3f097e00c0630' and
                 origin['scientific_verdict'] is None, 'native32_original_source_scope')
@@ -94,9 +94,11 @@ class Native32BundleChecks:
 
 class ElderNative32Test(Native32BundleChecks, shared.RecoveryRecognition7NativeTest):
     fixture_environment = 'TIMELEARNER_NATIVE32_ELDER_BUNDLE'
+    origin_trial_count_field = 'full_pattern_trials'
     archive_sha256 = 'ecd6a2570e4cdbac1aaac6c1f0d6e604cfc13f38032188732434fbbe46b8e42a'
 
 
 class M40Native32Test(Native32BundleChecks, shared.RecoveryRecognition7NativeTest):
     fixture_environment = 'TIMELEARNER_NATIVE32_M40_BUNDLE'
+    origin_trial_count_field = 'recognition_full_pattern_trials'
     archive_sha256 = '3e17d8a92a7ede6e0d23be7b21a82749ffc5564d7756c08e957641db6b857d36'
