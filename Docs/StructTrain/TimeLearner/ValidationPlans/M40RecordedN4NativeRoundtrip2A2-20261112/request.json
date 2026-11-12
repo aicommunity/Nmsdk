@@ -1,0 +1,53 @@
+{
+  "kind": "timelearner_native_data_checks",
+  "schema_version": 1,
+  "job_id": "s07-recorded-n4-native-roundtrip-m40-a2",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "5522223591558c59b8aa212eb4f4bec509cf340d",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-recorded-n4-roundtrip-sdk-a3",
+    "commit": "448b153f2fea3486ff40f3a626b8f1110b9e3ee2"
+  },
+  "runtime_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-recorded-n4-sdk36-m40-a3/native-001-runtime.json",
+    "sha256": "b06763299be0fe138c1c073654981cf846b7059548b91eafbfa10bf04139dfe4"
+  },
+  "inputs": [
+    {
+      "name": "classic-recorded-model.qz",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1/Tests/Integration/Data/RecordedN4Recovery/Classic-full-domain-stopped.json.qz",
+      "bytes": 24518983,
+      "sha256": "54ecf4a1696ea369ed29fd56831f9bd4d5169a1b9b0867ec6281ffd0738896db"
+    },
+    {
+      "name": "branch-recorded-model.qz",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/recorded-n4-recovery-fixtures-a1/Tests/Integration/Data/RecordedN4Recovery/Branch-full-domain-stopped.json.qz",
+      "bytes": 25195012,
+      "sha256": "b3fadca58c562c45b88c5015f8ce7ab710351dd0e962cad6569765f6f2e3a4e1"
+    }
+  ],
+  "cases": [
+    {
+      "name": "classic",
+      "test_id": "NativeRecordedRecoveryArchive/ClassicFullDomainN4Roundtrip"
+    },
+    {
+      "name": "branch",
+      "test_id": "NativeRecordedRecoveryArchive/BranchFullDomainN4Roundtrip"
+    }
+  ],
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 64,
+    "maximum_wall_seconds": 7320,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "leaf_wall_seconds": 3600,
+    "reservation_memory_bytes": 9126805504
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 1073741824
+  }
+}
