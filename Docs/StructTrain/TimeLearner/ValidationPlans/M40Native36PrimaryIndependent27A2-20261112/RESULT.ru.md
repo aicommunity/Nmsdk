@@ -1,0 +1,9 @@
+# Complete independent DATA replay27: PASS8+8+11
+
+Sourcec3a4ea89143e24099c549ca0e69b8b4b738c261f, package 1a440fd8495405c385f84f6b56852a73483ecd1ac10a9f26463a965e8a9fd874. Все27 exact IDs прошли, без failures/errors/skips:8 Elder-native32 DATA,8 M40-native32 DATA,11 новый SDK36 DATA. Три controlled jobs выполнены параллельно, outer walls246.506/246.550/257.687s; все группы closed, по одному lease released, diagnostics clear, heartbeat_errors=[]; Tool/validation source/fixtures before/after byte-equal. Raw39files в completed, readback-integrity.json хранит исходные SHA256.
+
+Все8533 members трёх Git archives восстановлены; original100 JUnit IDs/artifact rules,3 snapshots of10 conversions/20 whole-pattern trials (60 recorded trials),24 Console wrappers и4 validated export packages/summary8/mirrors/response проверены штатными readers. Повреждённые mirrors/spike counts/frozen hashes/conversion factors отвергнуты. Новая точная36-ID set/hash и37 archived closure/released lease records подтверждены. Source protocol outcomes и отсутствие новой native/scientific authority сохранены. Это повторный анализ данных, не100 новых native executions или независимых обучений.
+
+A1 failed26/27 из-за object-only reader для lease array сохранён. A2 использует strict load_json и проверяет list/ровно1 lease/released; nonfinite/duplicate JSON protections сохраняются. Старые Native32 prefixes case и новый native36 prefix native проверены одним code snapshot без ослабления правил. Producer ORIGIN.independent_semantic_replay_accepted=false остаётся историческим утверждением producer; эта отдельная проверка хранится здесь.
+
+Большой native N4 roundtrip2 уже принят отдельно и имеет свой complete corpus; independent replay именно большого189-member корпуса ещё нужен. Общие этапы1–12 и scientific matrix этим не закрываются.

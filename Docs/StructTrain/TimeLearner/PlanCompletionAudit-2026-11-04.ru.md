@@ -470,3 +470,5 @@ Coordinator retryA2 source2cc/runtimef679 фактически выполняе�
 ## Подготовлен запас диска Elder
 
 [Адресно удалены1392 generated compiler outputs трёх закрытых builds](IntegratedSdkGate.ru.md), runtime/source/data/CMakeCache сохранены, все6 archive members и fresh closed/released состояние сверены. Это подтверждённая очистка воспроизводимого кэша, не scientific result и не завершение этапа2.
+Принято12.11: actual full-model N4 native roundtrip2/2 и полный compact corpus сохранены; Source outcomes invalid_observation/budget_exhausted и отсутствие certificate не менялись. Fresh SDK36/36 принят; independent DATA replay27=8+8+11 проверил новый SDK36 и оба legacy32 full archives. Это адресные приёмки model transfer/данных, не scientific convergence и не закрытие этапов1–12. [Текущая сводка](ImplementationStatus.ru.md), [N4 native2](ValidationPlans/M40RecordedN4NativeRoundtrip2A3-20261112/RESULT.ru.md), [independent27](ValidationPlans/M40Native36PrimaryIndependent27A2-20261112/RESULT.ru.md).
+
