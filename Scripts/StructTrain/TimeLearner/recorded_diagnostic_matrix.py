@@ -97,13 +97,10 @@ def run_case(request, row, runtime_path, output):
     return result
 
 
-def audit_matrix(directory, controller, runtime_manifest):
-    """Portable DATA joins; saved closure alone never proves successful work."""
+def audit_closed_execution(directory, controller, runtime_manifest):
+    """Shared saved execution joins; no process attestation from JSON alone."""
     from .native_data_checks import validate_request
-    from .native_pipeline_worker import audit_run_manifest
-    from .phasea_matrix import extract, trial_design
-    from .recognition_metrics import load_diagnostic_evaluation
-    from .collector_provenance import _frozen, frozen_digest
+    from .collector_provenance import _frozen
 
     directory, controller = Path(directory).resolve(strict=True), Path(controller).resolve(strict=True)
     request = validate_request(load(controller/'request.json'))
@@ -136,6 +133,23 @@ def audit_matrix(directory, controller, runtime_manifest):
     require(len(children) == len(expected) and {r['directory'] for r in children} == expected,
             'recorded_matrix_foreign_or_missing_children')
     by_directory = {r['directory']: r for r in children}
+    for row in request['cases']:
+        child = by_directory[str(original/row['name']/'process/contained')]
+        binding = load(directory/row['name']/'process/contained/owned-unit.json')
+        require(child['binding'] == binding and child['closure']['binding'] == binding and
+                child['closure']['all_processes_closed'], 'recorded_matrix_foreign_child_binding')
+    return request, runtime
+
+
+def audit_matrix(directory, controller, runtime_manifest):
+    """Portable DATA joins; saved closure alone never proves successful work."""
+    from .native_pipeline_worker import audit_run_manifest
+    from .phasea_matrix import extract, trial_design
+    from .recognition_metrics import load_diagnostic_evaluation
+    from .collector_provenance import frozen_digest
+
+    directory = Path(directory).resolve(strict=True)
+    request, runtime = audit_closed_execution(directory, controller, runtime_manifest)
     staged = directory/'native-inputs'
     for record in request['inputs']:
         path = staged/record['name']
@@ -147,10 +161,6 @@ def audit_matrix(directory, controller, runtime_manifest):
     rows = []
     for row in request['cases']:
         root = directory/row['name']
-        child = by_directory[str(original/row['name']/'process/contained')]
-        binding = load(root/'process/contained/owned-unit.json')
-        require(child['binding'] == binding and child['closure']['binding'] == binding and
-                child['closure']['all_processes_closed'], 'recorded_matrix_foreign_child_binding')
         audit = audit_run_manifest(root/'run-manifest.json')
         manifest = load(root/'run-manifest.json')
         require(manifest['operation'] == 'diagnostic-evaluate' and manifest['execution'] == 'completed'
