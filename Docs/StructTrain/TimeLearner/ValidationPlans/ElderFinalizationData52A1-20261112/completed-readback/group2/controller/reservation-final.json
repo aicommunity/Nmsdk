@@ -1,0 +1,59 @@
+[
+  {
+    "token": "eb767f45-f80c-4724-a1ab-e5f6e98f036e",
+    "job_id": "s08-finalization-data26-2-elder-a1",
+    "owner": {
+      "boot_id": "648c6850-88c5-4e0d-8cd4-2129df4100e5",
+      "executable": "/usr/bin/python3.10",
+      "pid": 1356145,
+      "start_ticks": "408563273",
+      "uid": 1000
+    },
+    "resources": [
+      {
+        "access": "read",
+        "canonical_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1",
+        "requested_path": "/home/user/timelearner-refactor/cache/finalization-positive-inputs-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/home/user/timelearner-refactor/readbacks/s08-finalization-data-sdk-elder-a1",
+        "requested_path": "/home/user/timelearner-refactor/readbacks/s08-finalization-data-sdk-elder-a1"
+      },
+      {
+        "access": "write",
+        "canonical_path": "/home/user/timelearner-refactor/readbacks/s08-finalization-data26-2-elder-a1",
+        "requested_path": "/home/user/timelearner-refactor/readbacks/s08-finalization-data26-2-elder-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/home/user/timelearner-refactor/requests/finalization-data52-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderFinalizationData52A1-20261112",
+        "requested_path": "/home/user/timelearner-refactor/requests/finalization-data52-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderFinalizationData52A1-20261112"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/home/user/timelearner-refactor/runtime-finalization-data-sdk-a1",
+        "requested_path": "/home/user/timelearner-refactor/runtime-finalization-data-sdk-a1"
+      },
+      {
+        "access": "read",
+        "canonical_path": "/home/user/timelearner-refactor/source-finalization-data-sdk-a1",
+        "requested_path": "/home/user/timelearner-refactor/source-finalization-data-sdk-a1"
+      }
+    ],
+    "state": "released",
+    "created": 1794515863.5983565,
+    "deadline": 1794516714.1863472,
+    "updated": 1794516604.4429643,
+    "release_note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+    "demands": {
+      "disk_bytes": 2147483648,
+      "memory_bytes": 9126805504,
+      "slots": 1
+    },
+    "heartbeat_expired": false,
+    "owner_status": "missing",
+    "inspection_required": false,
+    "scientific_verdict": null
+  }
+]
