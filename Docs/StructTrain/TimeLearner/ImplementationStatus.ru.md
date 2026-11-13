@@ -4,7 +4,7 @@
 
 ## Последний завершённый Train и текущее задание
 
-[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. Сейчас собирается весь compact primary и [строится временной отчёт всех4 soma выбранных групп](ValidationPlans/M40ClassicCoupledTrainingReportA1-20261114/STATUS.ru.md); нового Train/Test/threshold tuning нет.
+[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. [Весь compact primary29.285MB сохранён вGit](ValidationPlans/M40N1CoupledClassicPrimaryA1-20261114/RESULT.ru.md), [временной отчёт всех4 soma выбранных групп строится](ValidationPlans/M40ClassicCoupledTrainingReportA1-20261114/STATUS.ru.md); нового Train/Test/threshold tuning нет.
 
 [Cold Branch N4/N1 coupled-search](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md) завершён: production1/1 PASS, native/outer closed. Один реально измеренный кандидат input2 одновременно удовлетворяет timing/amplitude допускам; следующий input1 дал5 ambiguous rejections. Итог invalid_observation, certificate=null, all-input verification отсутствует. Это локальный прогресс относительно прежних0 jointly-ready, не работа всей модели/классификатора.
 
