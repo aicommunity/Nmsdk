@@ -46,6 +46,10 @@
 |11. Научные проверки|Исторические replay/cold results; реальные современные отрицательные Train и diagnostic; читаемые временные отчёты прежних снимков.|Продолжить разбор измеренного stock поиска после принятого полного N4 опыта; legacy/V2 A/B, target в каждой позиции, order/ITI/reset, физические профили и independent frozen matrix.8/8 не обязательно.|
 |12. Документация|Текущие сводки отделены от истории, исходные наблюдения сохраняются.|Сквозная сверка root/PulseLib/Bin/config/ClDesc/defaults и ссылок после завершения миграции.|
 
+## Текущая подготовка Rs-диагностики
+
+[Full native burst readback](NativeBurstReadback.ru.md) добавлен в Root1ae882633: все импульсы, без выбора пика; Rs edit только после настоящей baseline и свежего native domain assessment. [Elder:7/7 декларационных проверок приняты](ValidationPlans/ElderNativeBurstReadbackA1-20261113/RESULT.ru.md). [M40:canonical4173 files принят, отдельная fresh сборка и9 native checks выполняются](ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/STATUS.ru.md). Новая C++ ветка и реальные Rs probes ещё не приняты; новый Train не запущен.
+
 ## Следующий критерий решения
 
 Новый Train и полный DATA audit приняты; [полный первичный corpus46.04MB XZ сохранён](ValidationPlans/M40PublicationReceiptBudget16PrimaryA1-20261113/RESULT.ru.md). Следующее решение принимается по измеренным остаткам и search history, не по конечному L22 без завершённого candidate measurement. Exact требует свежей проверки всех входов в исходных допусках. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible. Увеличение бюджета или автоматическая замена назначенного пика максимумом пачки не являются исправлением.

@@ -1,0 +1,1 @@
+Fresh Release/O3 SDK: Console schema7 и9 native regression cases, включая2 N1 stopped package fixtures для последующих настоящих raw-burst probes. Сами новые schema7 probes и научный Train не входят в этот build gate. Исходные SDK/runtime сохраняются.

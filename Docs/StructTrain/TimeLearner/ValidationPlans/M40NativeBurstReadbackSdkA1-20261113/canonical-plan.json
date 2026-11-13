@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-native-burst-readback-a1",
+    "commit": "1ae8826338906fedff5efd914b93a3814a2a50db",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/native-burst-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/namespace.json",
+      "sha256": "9cac2163b965bb4c92ccb9093aa515e0e0dabc4637808b309029a58696b11709"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native-burst-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/cohort.json",
+    "sha256": "9560452b2499a8ae3410b021c8ae970ad52814fac3777fcae7a69f5fb996e21e"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/native-burst-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/native-job.json",
+    "sha256": "534db80289ebb64840eca0428509df52a1236428b610a96654749d5fdeef1bf4"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-burst-readback-sdk-prepared-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}

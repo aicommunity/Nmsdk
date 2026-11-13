@@ -1,0 +1,63 @@
+{
+  "selections": [
+    {
+      "path": "Tests/Integration/Libraries/Test_PulseLib_CompositeTraining.cpp",
+      "suites": [
+        "NativeRecoveryConsoleArtifact",
+        "NativeRecoveryPackage7"
+      ],
+      "dialect": "literal-TEST-and-attempt-invalid-budget-v1"
+    }
+  ],
+  "selected_ids": [
+    "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+    "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+    "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+    "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication",
+    "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+    "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse"
+  ],
+  "runplan": [
+    {
+      "name": "burst-readback-sdk-nine",
+      "expected_ids": [
+        "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+        "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+        "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication",
+        "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+        "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse"
+      ],
+      "wall_seconds": 900
+    }
+  ],
+  "partitions": [
+    {
+      "name": "publication-wrapper-and-negative-bindings",
+      "ids": [
+        "NativeRecoveryConsoleArtifact/ClassicStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchStoppedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/ClassicCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/BranchCompletedPublicationAndExecution5",
+        "NativeRecoveryConsoleArtifact/Preflight5KeepsNullLedgerAndKnownZeroCounters",
+        "NativeRecoveryConsoleArtifact/BeforeSourceFailure5DoesNotInventLedger",
+        "NativeRecoveryConsoleArtifact/RehashedForeignLedgerRejectedBeforeAnyPublication"
+      ],
+      "count": 7
+    },
+    {
+      "name": "n1-source-fixtures",
+      "ids": [
+        "NativeRecoveryPackage7/ClassicN1StoppedRoundtripKeepsResponse",
+        "NativeRecoveryPackage7/BranchN1StoppedRoundtripKeepsResponse"
+      ],
+      "count": 2
+    }
+  ]
+}

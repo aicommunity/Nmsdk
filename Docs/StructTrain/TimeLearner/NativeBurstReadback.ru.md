@@ -14,7 +14,7 @@ presentation.kind=native_burst_readback, source_ordinals содержит стр
 
 ## Проверки и границы приёмки
 
-Добавлены7 declaration controls: N=1 и >4, Classic/Branch; no-op и индивидуальное изменение Rs; запрет omissions/reorder/duplicates; запрет window/peak/profile/schema overrides; прежний запрет Rs в job6; согласованность общей Branch bank. Это синтетические wire declarations, не native runtime evidence.
+Добавлены7 declaration controls: N=1 и >4, Classic/Branch; no-op и индивидуальное изменение Rs; запрет omissions/reorder/duplicates; запрет window/peak/profile/schema overrides; прежний запрет Rs в job6; согласованность общей Branch bank. Это синтетические wire declarations, не native runtime evidence. [Elder7/7 приняты](ValidationPlans/ElderNativeBurstReadbackA1-20261113/RESULT.ru.md), исходные receipts сохранены в Git.
 
 Перед фактической N4 диагностикой требуются серверная сборка Console, эти проверки и реальные production probes на импортированном stopped package7: unchanged replay, matched no-op, changed Rs с полной проверкой graph diff, clocks и входов. Приёмка schema7 пока не заявляется. Большая N4 модель не заменяется синтетической моделью или неполным legacy overlay. Конечный список Rs фиксируется после свежей native domain assessment для конкретной revision; границы другого графа не переносятся автоматически.
 

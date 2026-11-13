@@ -32,3 +32,5 @@
 - Закрыть оставшиеся требования этапов1–12 и children-first --no-ff merges в develop. Подробный список находится в [карте приёмки](ImplementationStatus.ru.md), а не подменяется этими научными шагами.
 
 Во время Train используется максимум закреплённого импульса; при Test — полный отклик паттерна. Общий максимум пачки не исправляет неоднозначность принадлежности при обучении. Ни современный отрицательный результат, ни новая процедура оценки не отменяют августовские4/8–6/8 в исходных условиях. Series D автоматически не возобновляется.
+
+Текущий конечный шаг подготовки: [full-burst readback без выбора пика](NativeBurstReadback.ru.md), [7/7 declaration controls приняты на Elder](ValidationPlans/ElderNativeBurstReadbackA1-20261113/RESULT.ru.md), [fresh M40 SDK build+9 native cases выполняются](ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/STATUS.ru.md). После сборки нужны реальные schema7 probes на малых stopped fixtures, затем на исходной N4 модели с time-matched control. Эти пробы ещё не выполнены.
