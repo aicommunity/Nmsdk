@@ -1,6 +1,6 @@
 # L22: влияние сопротивления и принадлежность ранней вершины
 
-Промежуточный научный отчёт по одной штатной пачке. Численная серия завершена, два original PNG группы62 просмотрены. Полный Rs-gallery/report validation ещё выполняется; большой byte-exact restore принят1/1. Работающая классификация, завершённое обучение и Exact не заявляются.
+Отчёт завершённой ограниченной диагностики одной штатной пачки. Численная серия завершена; read-only report validation2/2, большой byte-exact restore1/1 приняты. Просмотрены6 Rs PNG и2 censored control PNG. Работающая классификация, завершённое обучение и Exact не заявляются.
 
 ## Что исследовалось
 
@@ -17,7 +17,7 @@ Actual Classic N4/N1 stopped model3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd74635
 
 Во всех changed условиях waveform Soma2–4 совпала с matched во всех отсчётах. Потенциалы указаны в native units; перевод в SI не подтверждён. Общий максимум здесь — диагностическая величина, он не подставляется вместо максимума закреплённого импульса и не используется для объявления амплитудной нормализации.
 
-Для86/64.5/43МОм найдены три геометрические вершины; их времена отличаются не более одного dt0.0005s. Геометрию последней точки и полный сравнительный график ещё предстоит проверить. Из увеличения амплитуды не следует восстановление однозначной принадлежности.
+Для всех четырёх Rs найдены три геометрические вершины; времена соответствующих вершин отличаются не более одного dt0.0005s. При21.5МОм:0.2785/0.4615/0.7030s. Число вершин не восстановилось. Из увеличения амплитуды не следует восстановление однозначной принадлежности.
 
 ## Что уже видно из исходного Train
 
@@ -33,7 +33,7 @@ Group62 этой же model revision содержит два полных observ
 
 ![Soma2: контроль фактически предъявленных импульсов](ValidationPlans/M40L22RecordedReportsA1-20261113/preview/group-000062-soma-001-overview.png)
 
-Эти два PNG прочитаны из завершённого render substep работающего read-only report job. Его общий исход пока pending. [Original plotting manifest](ValidationPlans/M40L22RecordedReportsA1-20261113/preview/manifest.json) не переписан; visual_acceptance_complete=false сохраняет свой исходный смысл. Здесь зафиксирован просмотр только двух выбранных overview, не приёмка всей галереи.
+Первый render substep был просмотрен до завершения parent job; теперь весь read-only отчёт принят2/2. Original manifests сохраняют visual_acceptance_complete=false; отдельная ручная проверка выбранных8 PNG записана в VISUAL_REVIEW.json, просмотр всей32-view gallery не заявляется.
 
 ## Проверка переноса и объяснение траектории поиска
 
@@ -43,7 +43,7 @@ Group62 этой же model revision содержит два полных observ
 
 ## Ограничения и следующий шаг
 
-Сначала закончить visual review Rs-gallery и full restore/production audits опубликованного [48.78MB primary](ValidationPlans/M40L22PrimaryEnvelopeA1-20261113/RESULT.ru.md). Затем сопоставить собственные complete omission waveforms уже измеренных L15/L21/L54, прежде чем назначать новые прогоны или менять измеритель. Слившуюся вершину не превращать автоматически в valid assigned peak; допускается раздельная ранняя вершина с хвостовым влиянием.
+Завершены selected visual review Rs-gallery и full restore/production audits опубликованного [48.78MB primary](ValidationPlans/M40L22PrimaryEnvelopeA1-20261113/RESULT.ru.md). Затем сопоставить собственные complete omission waveforms уже измеренных L15/L21/L54, прежде чем назначать новые прогоны или менять измеритель. Слившуюся вершину не превращать автоматически в valid assigned peak; допускается раздельная ранняя вершина с хвостовым влиянием.
 
 Не повышать budgets/tolerances и не менять CapturedPerInput по этим общим максимумам. Отдельная научная оценка потребует frozen модели, реального подтверждения порога и всех test patterns. Этот опыт одной пачки не заменяет такую матрицу и не отменяет исторические4/8–6/8 исходного протокола. SeriesD не возобновляется.
 
@@ -55,4 +55,16 @@ Group62 этой же model revision содержит два полных observ
 
 [Полное восстановление нового N4 primary принято](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md):1/1 за351.980s, затем production source/five-native audits. Исходные numerics и ограничения этого отчёта сохраняются; классификация не установлена.
 
-[Адресный разбор L14/L15/L21 по18 сохранённым complete trials запущен](ValidationPlans/M40L14L15TransitionA1-20261113/STATUS.ru.md). Это обработка уже имеющихся данных, не новые пробы или независимые retrains. Результаты/визуальная приёмка пока pending.
+[Адресный разбор L14/L15/L21 по18 сохранённым complete trials запущен](ValidationPlans/M40L14L15TransitionA1-20261113/STATUS.ru.md). Это обработка уже имеющихся данных, не новые пробы или независимые retrains. Результат1/1 и выбранные графики приняты; слабая впадина L14 ещё требует локального Y zoom.
+
+## Сравнение временных форм при четырёх Rs
+
+В выбранных условиях меняется амплитуда, а дополнительная ранняя вершина не появляется. Это результат данной конечной сетки приL22, не доказательство для всех Rs, длин и физических профилей. Ниже обзор и native-sample detail; оранжевые линии и нижняя панель показывают реальный вход.
+
+![Все четыре Rs, Soma1](ValidationPlans/M40L22RecordedReportsA1-20261113/rs-selected/soma-1/full.png)
+
+![Начальная часть с native samples](ValidationPlans/M40L22RecordedReportsA1-20261113/rs-selected/soma-1/frames-0-900.png)
+
+[Поздние вершины крупно](ValidationPlans/M40L22RecordedReportsA1-20261113/rs-selected/soma-1/frames-800-1700.png). Неизменённые каналы: [Soma2](ValidationPlans/M40L22RecordedReportsA1-20261113/rs-selected/soma-2/full.png), [Soma3](ValidationPlans/M40L22RecordedReportsA1-20261113/rs-selected/soma-3/full.png), [Soma4](ValidationPlans/M40L22RecordedReportsA1-20261113/rs-selected/soma-4/full.png). Их линии совпадают, что подтверждено также нулевым maximum waveform difference по всем отсчётам.
+
+[Разбор перехода L14→L15](L14L15AssignmentTransitionScientificReport-20261113.ru.md) отделяет потерю отдельной ранней вершины от амплитудного эффекта Rs.

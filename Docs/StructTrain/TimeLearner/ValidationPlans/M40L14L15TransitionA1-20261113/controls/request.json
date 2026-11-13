@@ -1,0 +1,36 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-l14-l15-transition-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 8589934592,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-l14-l15-transition-a1",
+      "commit": "9b57964e3f4db419a60bd5b5e8df76ca8a8a4b13"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/l14-l15-transition-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40L14L15TransitionA1-20261113/suite.json",
+      "sha256": "10ab3aa6fbc2844e5969ecf3d2bc0ed604f3c4bc637dfec6ba4b99943d4d95de"
+    },
+    "fixtures": {
+      "TIMELEARNER_L22_TRAIN_NATIVE": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native",
+      "TIMELEARNER_L22_TRAIN_CSV": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 2147483648
+    }
+  }
+}

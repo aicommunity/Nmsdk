@@ -1,0 +1,88 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6875fbad9a0dd2e95c4248046190c0f5a417acd143110913a975de5b667fb8ad",
+      "unit": "timelearner-638a97ff-e5d5-4bec-9cf9-e60f88e70d09.service",
+      "invocation_id": "ee1b03908adc435399dca72c6505f550",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-638a97ff-e5d5-4bec-9cf9-e60f88e70d09.service",
+      "initial_main_pid": 3948924,
+      "initial_start_ticks": "363600437",
+      "sha256": "73b91ea7742b0c59e08f7ac9c016aec921f1697b85719e34245673fb5775df96"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 638a97ff-e5d5-4bec-9cf9-e60f88e70d09",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "ee1b03908adc435399dca72c6505f550"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "436b4159-c9f5-40d9-a193-f5b3025a021b",
+      "job_id": "s03-l22-censored-temporal-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3948924,
+        "start_ticks": "363600437",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-l22-censored-temporal-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s03-l22-censored-temporal-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/l22-censored-temporal-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40L22CensoredTemporalA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/l22-censored-temporal-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40L22CensoredTemporalA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-censored-temporal-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-censored-temporal-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794560806.91167,
+      "deadline": 1794560926.91167,
+      "updated": 1794560816.4809537,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
