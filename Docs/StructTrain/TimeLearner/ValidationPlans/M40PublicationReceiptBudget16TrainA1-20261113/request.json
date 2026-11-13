@@ -1,0 +1,37 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-publication-receipt-budget16-train-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 2147483648,
+    "tasks": 128,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 2147483648
+  },
+  "operation": {
+    "kind": "python-controller-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+      "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/publication-receipt-budget16-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/suite.json",
+      "sha256": "dcda2ee9062e59ee5cb639801cc0758c80c538da73cd2d7415d28e5a8d8d1d77"
+    },
+    "fixtures": {
+      "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": "/media/user/Data/TimeLearnerRefactor/requests/publication-receipt-budget16-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/fixture",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": "/media/user/Data/TimeLearnerRefactor/requests/publication-receipt-budget16-train-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/prepared",
+      "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 134217728,
+      "maximum_total_bytes": 268435456
+    }
+  }
+}
