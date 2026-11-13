@@ -662,3 +662,5 @@ lease recovery и production pipeline integration остаются открыт�
 ## Branch N1 coupled-search,13.11.2026
 
 [N1CoupledBranch-20261113](N1CoupledBranch-20261113/primary/bundle.json): полный primary24.11MB,1214logical members, literal XZ/container2. Один input2 candidate выполняет timing/amplitude tolerances; итог invalid_observation/ambiguous input1, certificate=null. Четыре просмотренных original PNG и metadata — figures; полная SVG/PDF gallery M40 cache. [Научный отчёт](../../../Docs/StructTrain/TimeLearner/N1CoupledScientificReport-20261113.ru.md).
+
+Frozen8 baseline того же actual terminal state: [frozen-primary/bundle.json](N1CoupledBranch-20261113/frozen-primary/bundle.json),42.32MB XZ,436logical members. Completed/valid, unchanged model,8complete observations; при100 TP0/FP0/FN1/TN7. [Приёмка](../../../Docs/StructTrain/TimeLearner/ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md).
