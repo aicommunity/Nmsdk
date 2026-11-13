@@ -6,6 +6,8 @@
 
 ## Что уже можно читать
 
+- [L22: сопротивление и принадлежность ранней вершины — промежуточный отчёт](L22BurstResistanceScientificReport-20261113.ru.md). Полная численная сетка86/64.5/43/21.5МОм, два просмотренных original control PNG; остальные Rs-графики/restore ещё проверяются, классификация не заявляется.
+
 - [Новый полный временной отчёт Classic budget16](Budget16DiagnosticScientificReport-20261113.ru.md):32 пары pattern×soma,14 просмотренных originals, все8 паттернов. Source training=budget_exhausted; fixed threshold100, target пропущен.
 - [Историческое холодное Train→Test:4/8–6/8](HistoricalAugustColdStart.ru.md). Сохраняется значение августовских визуальных наблюдений исходного протокола.
 - [Историческая frozen matrix порядка и ITI](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md). Это отдельная проверка одной сохранённой модели, а не универсальная устойчивость обучения.
