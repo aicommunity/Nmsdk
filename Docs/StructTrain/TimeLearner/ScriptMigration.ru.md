@@ -1,3 +1,11 @@
+# Миграция скриптов TimeLearner — актуально14.11.2026
+
+Приняты357 записей:353 retired и4 moved, complete=false. [Production history CLI357 и восстановление последнего старого пути как отрицательный контроль проверены на M40 и Elder](Migration357CliVerification.ru.md); положительные receipts побайтово равны. Полнота миграции всех Bin analysis/matrix/shared tools и их callers ещё не подтверждена. Основные научные отчёты и CLI находятся в корневом пакете; исторические файлы извлекаются из Git по [manifest](script_migration.json), wrappers на старых местах не сохраняются.
+
+## История предыдущих снимков
+
+Ниже сохранён журнал приёмок своих дат. Указатели «текущее» в нём не заменяют сводку выше.
+
 Текущий принятый снимок08.11:356 records (352 retired/4 moved), complete=false. Два действующих аудитора конфигов перенесены из Bin в Root после143/143 на каждом Linux worker и production history CLI356 на M40. [Контракт и проверка](DeclaredTimeScaleDiagnostic.ru.md), [квитанция356](DeclaredTimeScaleMigration356M40A2Verification.json). Удалений моделей, конфигов, данных и прежних наблюдений нет; оставшаяся миграция и develop-приёмка открыты. Далее сохранена история прежних снимков.
 
 Принято08.11:245 records (243 retired/2 moved), complete=false. Три исторических AsymRm adaptive guards удалены без wrappers. Оба workers проверили245 retrieval records, restored-path negative, exact3D1M и803 записи четырёх Git trees. [Scope, source и original failed wrappers](AsymRmAdaptiveGuardRetirement.ru.md), [полный классифицированный inventory](FourTreeScriptInventory-20261108.json). Ниже — история прежних снимков.

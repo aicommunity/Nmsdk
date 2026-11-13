@@ -11,6 +11,7 @@ import tempfile
 from unittest.mock import patch
 
 from ..native_evidence import EvidenceError
+from ..model_identity import canonical_model_sha256 as digest
 from ..training_search_report import _project_summary, analyze_search_history
 
 
@@ -30,7 +31,84 @@ def fixture(size=2):
     return summary, model
 
 
+def recovery_ledger(summary):
+    deliveries = []
+    for ordinal in range(5):
+        values = deepcopy(summary['actual_parameters'])
+        values[0]['length'] = ordinal+1
+        transition = dict(action_serial=ordinal+1, input_index=0, candidate_input_index=0,
+            sweep=0, model_epoch=ordinal, invalid_before=ordinal, invalid_after=ordinal+1,
+            run_id='attempt', trial_id='rejected/'+str(ordinal), base_model_revision='a'*64,
+            effective_model_revision='b'*64, phase='input', validity='ambiguous',
+            full_parameters=values, capacitance=None,
+            disposition='invalid_budget_stop' if ordinal == 4 else 'cursor_advanced',
+            status_after='invalid_observation' if ordinal == 4 else 'searching', reason_after='')
+        event = dict(kind='timelearner_candidate_window_recovery_event', schema_version=1,
+            transition=transition, group_id='group/'+str(ordinal), rejected_content_id='c'*64,
+            source_origin='d'*64, owner_scope='owner', candidate_witness_id='e'*64,
+            issued_probes=ordinal+1, applied_edits=ordinal, accepted_composite_observations=0)
+        event['event_id'] = digest(event)
+        # A wire-only fixture; full runtime/primary admission is checked by the
+        # real-corpus CLI test, not inferred from this projection unit control.
+        deliveries.append(dict(event=event, runtime_plan=dict(schema_version=3, run_id='attempt')))
+    ledger = dict(kind='timelearner_candidate_window_recovery_ledger', schema_version=1,
+        source_origin='d'*64, owner_family_binding='e'*64,
+        measurement_archive_document_id='f'*64, producer_log_intact=True,
+        independent_delivery_completeness_verified=False, deliveries=deliveries)
+    ledger['sha256'] = digest(ledger)
+    return ledger
+
+
 class TrainingSearchReportTest(unittest.TestCase):
+    def test_absent_recovery_ledger_is_unknown_not_zero_recoveries(self):
+        summary, model = fixture()
+        result = _project_summary(summary, model)
+        self.assertIsNone(result['recorded_recovery_deliveries'])
+        self.assertIsNone(result['recovery_ledger_provenance'])
+
+    def test_empty_ledger_does_not_claim_independent_attempt_completeness(self):
+        summary, model = fixture()
+        ledger = recovery_ledger(summary);ledger['deliveries'] = []
+        ledger['sha256'] = digest({k: v for k, v in ledger.items() if k != 'sha256'})
+        summary['recovery_ledger'] = ledger
+        result = _project_summary(summary, model)
+        self.assertEqual(result['recorded_recovery_deliveries'], [])
+        self.assertFalse(result['recovery_ledger_provenance']['independent_delivery_completeness_verified'])
+        self.assertFalse(result['attempt_total_independently_recounted'])
+
+    def test_different_rejected_geometries_runtime_plans_and_budget_stop_survive(self):
+        summary, model = fixture()
+        summary['recovery_ledger'] = recovery_ledger(summary)
+        before = deepcopy(summary)
+        result = _project_summary(summary, model)
+        rows = result['recorded_recovery_deliveries']
+        self.assertEqual(rows, summary['recovery_ledger']['deliveries'])
+        self.assertEqual([r['event']['transition']['full_parameters'][0]['length'] for r in rows], [1,2,3,4,5])
+        self.assertEqual(rows[-1]['event']['transition']['disposition'], 'invalid_budget_stop')
+        self.assertEqual(len(result['recorded_candidate_measurements']), 1)
+        self.assertIsNone(result['scientific_verdict'])
+        rows[0]['event']['transition']['full_parameters'][0]['length'] = 99
+        rows[0]['runtime_plan']['run_id'] = 'changed-copy'
+        self.assertEqual(summary, before)
+
+    def test_malformed_rehashed_or_duplicate_recovery_data_are_refused(self):
+        for defect in ('schema', 'duplicate', 'dimension', 'nonfinite', 'counter', 'completeness'):
+            summary, model = fixture()
+            ledger = recovery_ledger(summary)
+            event = ledger['deliveries'][0]['event']
+            if defect == 'schema':ledger['schema_version'] = 2
+            elif defect == 'duplicate':ledger['deliveries'].append(deepcopy(ledger['deliveries'][0]))
+            elif defect == 'dimension':event['transition']['full_parameters'].pop()
+            elif defect == 'counter':event['transition']['invalid_after'] = 99
+            elif defect == 'completeness':ledger['independent_delivery_completeness_verified'] = True
+            else:event['transition']['full_parameters'][0]['resistance'] = float('nan')
+            if defect != 'nonfinite':
+                event['event_id'] = digest({k: v for k, v in event.items() if k != 'event_id'})
+                ledger['sha256'] = digest({k: v for k, v in ledger.items() if k != 'sha256'})
+            summary['recovery_ledger'] = ledger
+            with self.subTest(defect=defect), self.assertRaises(EvidenceError):
+                _project_summary(summary, model)
+
     def test_cli_refuses_output_inside_original_run_before_any_audit(self):
         from ..__main__ import main
         with tempfile.TemporaryDirectory() as temporary:
@@ -142,3 +220,37 @@ class TrainingSearchReportActualTest(unittest.TestCase):
         self.assertIsNone(result['scientific_verdict'])
         (Path(os.environ['TMPDIR'])/'actual-training-search-report.json').write_text(
             json.dumps(document, indent=2, allow_nan=False)+'\n', encoding='utf-8')
+
+
+class CoupledRecoverySearchReportActualTest(unittest.TestCase):
+    def test_production_cli_keeps_five_distinct_failed_candidates_outside_measured_history(self):
+        from ..__main__ import main
+        manifest = Path(os.environ['TIMELEARNER_COUPLED_RECOVERY_REPORT_RUN'])/'run-manifest.json'
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            code = main(['analyze', str(manifest), '--format', 'native-search-history'])
+        self.assertEqual(code, 0)
+        document = json.loads(output.getvalue());result = document['analysis']
+        self.assertEqual(document['validity'], 'valid')
+        self.assertEqual(result['schema_version'], 2)
+        self.assertEqual(result['outcome'], 'invalid_observation')
+        self.assertEqual(result['reason'], 'rejected_candidate_window:ambiguous')
+        rows = result['recorded_recovery_deliveries']
+        transitions = [row['event']['transition'] for row in rows]
+        self.assertEqual([t['trial_id'].split('/')[-1] for t in transitions], ['90','95','99','103','107'])
+        self.assertEqual([t['model_epoch'] for t in transitions], [21,22,23,24,25])
+        self.assertEqual([[p['length'] for p in t['full_parameters']] for t in transitions],
+                         [[28,28,27,1], [29,28,27,1], [29,29,27,1], [30,29,27,1], [28,27,27,1]])
+        self.assertEqual([t['disposition'] for t in transitions], ['cursor_advanced']*4+['invalid_budget_stop'])
+        self.assertTrue(all(t['phase'] == 'input' and t['input_index'] == 1 for t in transitions))
+        self.assertTrue(all(row['runtime_plan']['search']['maximum_invalid_observations'] == 4 for row in rows))
+        self.assertEqual(len(result['recorded_candidate_measurements']), 22)
+        measured_trials = {row['trial_id'] for row in result['recorded_candidate_measurements']}
+        self.assertFalse(measured_trials.intersection(t['trial_id'] for t in transitions))
+        self.assertFalse(result['recovery_ledger_provenance']['independent_delivery_completeness_verified'])
+        self.assertFalse(result['attempt_total_independently_recounted'])
+        self.assertEqual(result['final_verification_group_ids'], [])
+        self.assertIsNone(result['scientific_verdict'])
+        self.assertIsNone(document['evaluation_verdict'])
+        with (Path(os.environ['TMPDIR'])/'coupled-recovery-search-history.json').open('x', encoding='utf-8') as stream:
+            json.dump(document, stream, indent=2, allow_nan=False);stream.write('\n')

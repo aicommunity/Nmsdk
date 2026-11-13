@@ -8,6 +8,10 @@ from copy import deepcopy
 from pathlib import Path
 
 from .collector_provenance import _frozen
+from .candidate_window_recovery_events import validate_candidate_window_recovery_event
+from .candidate_window_recovery_ledger import FIELDS as RECOVERY_LEDGER_FIELDS
+from .composite_source_evidence import keys
+from .model_identity import canonical_model_sha256 as digest
 from .native_evidence import count, number, parse_json_bytes, require
 from .native_pipeline_worker import audit_run_manifest
 
@@ -19,6 +23,40 @@ def _parameters(values, size):
                 count(value['length']) >= 1 and count(value['synapses']) >= 1 and
                 number(value['resistance']) > 0, 'search_report_parameters')
     return deepcopy(values)
+
+
+def _recovery_history(summary, size):
+    """Preserve supplied delivery DATA without inventing missing actions.
+
+    The full archive/primary join belongs to analyze_search_history's existing
+    production audit. Wire validation here does not repeat that expensive audit
+    or promote a producer's ledger into an independently complete attempt log.
+    """
+    ledger = summary.get('recovery_ledger')
+    if ledger is None:
+        return dict(recorded_recovery_deliveries=None, recovery_ledger_provenance=None)
+    keys(ledger, RECOVERY_LEDGER_FIELDS, 'search_report_recovery_ledger_fields')
+    require(ledger['kind'] == 'timelearner_candidate_window_recovery_ledger' and
+            type(ledger['schema_version']) is int and ledger['schema_version'] == 1 and
+            type(ledger['deliveries']) is list and ledger['producer_log_intact'] is True and
+            ledger['independent_delivery_completeness_verified'] is False,
+            'search_report_recovery_ledger_schema_or_claim')
+    require(ledger['sha256'] == digest({k: v for k, v in ledger.items() if k != 'sha256'}),
+            'search_report_recovery_ledger_digest')
+    seen_events, seen_trials, seen_groups = set(), set(), set()
+    for delivery in ledger['deliveries']:
+        keys(delivery, {'event', 'runtime_plan'}, 'search_report_recovery_delivery_fields')
+        event = delivery['event']
+        transition = validate_candidate_window_recovery_event(event)
+        _parameters(transition['full_parameters'], size)
+        require(type(delivery['runtime_plan']) is dict,
+                'search_report_recovery_runtime_plan')
+        trial = (transition['run_id'], transition['trial_id'])
+        require(event['event_id'] not in seen_events and trial not in seen_trials and
+                event['group_id'] not in seen_groups, 'search_report_replayed_recovery_delivery')
+        seen_events.add(event['event_id']);seen_trials.add(trial);seen_groups.add(event['group_id'])
+    return dict(recorded_recovery_deliveries=deepcopy(ledger['deliveries']),
+        recovery_ledger_provenance=deepcopy({k: v for k, v in ledger.items() if k != 'deliveries'}))
 
 
 def _project_summary(summary, model):
@@ -80,7 +118,8 @@ def _project_summary(summary, model):
         assessed_resistance_domains=domains, tolerances=deepcopy(summary['tolerances']),
         domain_assessments_are_not_presentations=True,
         attempt_total_independently_recounted=False,
-        training_or_final_verification_verdict=None, scientific_verdict=None)
+        training_or_final_verification_verdict=None, scientific_verdict=None,
+        **_recovery_history(summary, size))
 
 
 def analyze_search_history(path):
@@ -117,7 +156,7 @@ def analyze_search_history(path):
     result = _project_summary(summary, job['configuration']['model'])
     _, after = _frozen(path, 16*1024**2)
     require(after == manifest_record, 'search_report_manifest_changed')
-    return dict(kind='timelearner_native_search_history_report', schema_version=1,
+    return dict(kind='timelearner_native_search_history_report', schema_version=2,
         source_manifest=manifest_record, source_summary=summary_record,
         source_run_execution=manifest['execution'], source_run_validity=manifest['validity'],
         runtime_fingerprint=manifest['runtime_fingerprint'], data_audit=proof,

@@ -67,7 +67,7 @@ Git содержит compact primary/models/metrics/selected figures. Полны
 
 ## Следующий научный шаг и ограничения
 
-Same-budget cold Branch N4/N1 завершён: один measured jointly-ready input2, затем ambiguous input1; общая сходимость не принята. Frozen8 baseline подтвердил импорт полного terminal state и неизменность модели. Сейчас проверяется один заранее определённый Same-Matrix порог0.03578062022182049; actual spiking данные ждут финального DATA audit и полного визуального отчёта. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
+Same-budget cold Branch N4/N1 завершён: один measured jointly-ready input2, затем ambiguous input1; общая сходимость не принята. Frozen8 baseline подтвердил импорт полного terminal state и неизменность модели. Один заранее определённый Same-Matrix порог0.03578062022182049 проверен: TP1/FP5/FN0/TN2,32 выбранных графика просмотрены и опубликованы. Текущий холодный Classic recovery4 выполняется на том же SDK; повышения budget/tolerances нет. Exact требует свежей проверки всех входов. Sign bracket, local timing readiness, Done и завершённый процесс не заменяют это требование. BudgetExhausted/SearchUnresolved не доказывают PhysicalInfeasible.
 
 Дальше остаются legacy/V2 A/B и полная физическая/режимная матрица, frozen order/ITI/reset и согласованные stage merges children-first через--no-ff. Полные открытые требования перечислены выше; этот научный шаг не подменяет их.
 

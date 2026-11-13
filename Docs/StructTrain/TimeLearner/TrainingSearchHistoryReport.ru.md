@@ -1,5 +1,11 @@
 # Измеренные кандидаты и конечный снимок native Train
 
+## Уточнение14.11: история восстановления в output schema2
+
+В новой проекции записанные recovery deliveries сохраняются целиком: event с полным L/Ns/Rs/C, фазой anchor/input, epoch/revisions, invalid counters и disposition, а также исходный runtime plan каждой доставки. Provenance ledger вынесена отдельно без потери SHA/source/owner/archive binding. Отсутствующий ledger означает null/unknown; пустой ledger остаётся пустым и не доказывает полноту попытки. Отвергнутые точки не попадают в measured candidate history и не получают residuals либо сертификат. Перед проекцией используется тот же полный DATA audit, повторный дорогой archive replay не добавлен. Сам wire hash не является доказательством исполнения.
+
+Причина изменения: в coupled Branch исходный ledger содержит пять разных отвергнутых геометрий, а прежняя проекция оставляла только reason/trial ID, скрывая продвижение поиска. Summary input по-прежнему8, новый native_search_history_report output2; сохранённые отчёты output1 не переписываются. Старый набор7/8 проверок ниже относится к прежнему снимку. Для нового кода подготовлены11 unit controls и отдельный actual CLI case всех5 доставок на исходном Branch corpus. Серверная приёмка нового кода ещё ожидается.
+
 Новый root CLI analyze --format native-search-history принимает signed run-manifest.json операции train, выполняет полный production audit_run_manifest, затем читает native summary8 из hash-bound исходных bytes. Поддерживаются Classic/Branch, N0/N1 и произвольная допустимая размерность; это отчёт по уже выполненным пробам, не запуск обучения и не новый scorer сходимости. Иные summary versions явно отвергаются и продолжают иметь свои прежние readers.
 
 Отдельно выводятся complete candidate records с исходными signed timing bounds/amplitude residuals, parameter-change cost и прочими полями (включая C witnesses); recorded rejections; assessed per-input Rs domains; producer-reported counters; actual terminal graph revision/parameters; final verification group IDs. Число measured candidates не выдаётся за число всех search probes: последние включают anchor и другие действия. Domain assessment не является предъявлением/измерением точки.
