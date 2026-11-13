@@ -1,6 +1,8 @@
 # Побайтное восстановление job вокруг сохранённого source package
 
-Статус: [узкая серверная проверка4/4 пройдена](ValidationPlans/M40SourceJobEnvelopeDataA1-20261113/RESULT.ru.md) на12 настоящих Python/Qt job files из закрытого A4 corpus. Работающий N4 эксперимент, его source/runtime и файлы не меняются. Это подготовка компактной публикации, не изменение способа расчёта; весь N4 publication/restore контур ещё не принят.
+Текущий большой N4 roundtrip принят: [1/1, исходный source и5 native audits после восстановления](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md). Это не научный verdict или independent-host N4 replay.
+
+Базовая проверка: [узкая серверная проверка4/4 пройдена](ValidationPlans/M40SourceJobEnvelopeDataA1-20261113/RESULT.ru.md) на12 настоящих Python/Qt job files из закрытого A4 corpus. Работающий N4 эксперимент, его source/runtime и файлы не меняются. Это подготовка компактной публикации, не изменение способа расчёта; весь N4 publication/restore контур ещё не принят.
 
 В stopped probe один и тот же большой source_stopped включён в исходный job, input/job.json и native/job.json. Сохранение всех этих копий как независимых XZ members избыточно. Сам source package уже должен быть сохранён в Git как необходимый первичный материал; ссылка на абсолютный путь M40 его не заменяет.
 
