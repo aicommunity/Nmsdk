@@ -1,0 +1,18 @@
+{
+  "kind": "timelearner_native_process_policy",
+  "schema_version": 2,
+  "backend": "bound_cgroup",
+  "memory_bytes": 4294967296,
+  "tasks": 64,
+  "cooperative_capture": true,
+  "reservation": {
+    "database": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Classic-stock-cold8-N0/leases.sqlite3",
+    "capacity": {
+      "slots": 1,
+      "memory_bytes": 8589934592,
+      "disk_bytes": 4294967296,
+      "tasks": 512
+    },
+    "token": "57f004b7-0742-4973-a042-82d69957ee2e"
+  }
+}

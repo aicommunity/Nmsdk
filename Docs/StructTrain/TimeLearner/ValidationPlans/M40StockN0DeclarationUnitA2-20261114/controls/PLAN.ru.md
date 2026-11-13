@@ -1,0 +1,1 @@
+N0 declaration gate: all11 exact tests (4 recovery,4 full-domain,3 N0), no skips. Preserve cold physics, references, budgets and strict tolerances; pin per-input resistance, allow Ns1..128 only for non-anchor inputs. Reject corrupt/repeated/nonfull-window/moving-anchor/relaxed declarations. No native model execution; preflight and scientific Train remain separate gates.

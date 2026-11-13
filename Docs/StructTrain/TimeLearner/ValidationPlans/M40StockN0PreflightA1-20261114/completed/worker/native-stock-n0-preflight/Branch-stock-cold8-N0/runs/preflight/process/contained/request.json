@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_contained_request",
+  "schema_version": 1,
+  "attempt_id": "489dbc31-a0a4-48e3-8177-827f91599601",
+  "unit": "timelearner-489dbc31-a0a4-48e3-8177-827f91599601.service",
+  "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+  "uid": 1000,
+  "controller": {
+    "pid": 3048660,
+    "start_ticks": "368840527"
+  },
+  "executable": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4/NeuroModelerConsole",
+  "arguments": [
+    "--app-ini",
+    "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4/NeuroModelerConsole.ini",
+    "--timelearner-preflight",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Branch-stock-cold8-N0/runs/preflight/input/job.json",
+    "--timelearner-output",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Branch-stock-cold8-N0/runs/preflight/native",
+    "--timelearner-capture-directory",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s11-stock-n0-preflight-m40-a1/worker/native-stock-n0-preflight/Branch-stock-cold8-N0/runs/preflight/process"
+  ],
+  "working_directory": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a4",
+  "runtime_fingerprint": "105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a",
+  "memory_bytes": 4294967296,
+  "tasks": 64,
+  "maximum_wall_seconds": 180.0,
+  "environment": {
+    "QT_QPA_PLATFORM": "offscreen"
+  },
+  "sha256": "22d0ca49f62331ad5b00471f3261eb6f630ff8ca244e54ce5b9539dece19148c"
+}

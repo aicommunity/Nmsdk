@@ -1,0 +1,1 @@
+Eleven strict declaration tests: N0 bounds and fixed heterogeneous Rs, anchor isolation, immutable physics/budgets/tolerances, full-observation and rejection policy regressions. No neural model execution. Previous Elder launch requests a1/a2 rejected before test start; this request uses canonical worker Elder-1 and owned source root.

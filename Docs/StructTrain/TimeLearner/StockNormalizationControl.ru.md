@@ -23,3 +23,7 @@
 5. Отчёт: исходы/остатки/Ns/quantization/saturation/budget и assigned waveforms с actual inputs, читаемый масштаб и selected originals. Совпавшие детерминированные состояния не считать независимыми seeds.
 
 Train и успех этапа11 пока не подтверждены. Даже совпадение N0/N1 исходов не доказывает эквивалентность алгоритмов, глобальную недостижимость или отсутствие влияния физики. Исходные августовские наблюдения относятся к своему протоколу и сохраняются.
+
+## Проверено и запущено14.11
+
+[Declaration11/11 M40](ValidationPlans/M40StockN0DeclarationUnitA2-20261114/RESULT.ru.md) и [11/11 Elder](ValidationPlans/ElderStockN0DeclarationUnitA3-20261114/RESULT.ru.md) приняты; исходные ранние отказы launcher сохранены. [Настоящие оба preflight1/1 M40](ValidationPlans/M40StockN0PreflightA1-20261114/RESULT.ru.md) приняты на прежнем native SDK. После этих gates запущен отдельный холодный Classic N0 s11-stock-n0-classic-train-m40-a1. Branch N0 ожидает закрытия Classic; параллельные изменения runtime исключены. Scientific outcome ещё неизвестен; он не выводится из успешных предварительных проверок.
