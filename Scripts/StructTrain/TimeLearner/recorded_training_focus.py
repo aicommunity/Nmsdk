@@ -8,7 +8,7 @@ from .composite_primary import filesystem_primary_resolver
 from .native_calibration_worker import _write
 from .native_evidence import load, require
 from .plotting import figure_title, padded_limits, plotting_runtime
-from .stimulus_subset_evidence import read_console_subset_observation
+from .stimulus_subset_evidence import parse_console_subset_observation
 
 
 def render(native, output, groups, *, channel, first_frame, last_frame):
@@ -43,8 +43,8 @@ def render(native, output, groups, *, channel, first_frame, last_frame):
         packets = [p for p in record['native_packets'] if p.get('observation') and
                    p['observation']['specification']['trial_id'] == trial['native_trial_id']]
         require(len(packets) == 1, 'training_focus_packet_binding')
-        observation, spec, samples, _ = read_console_subset_observation(packets[0],
-            native/ref['relative_path'], state['configuration']['model']['initial_isi'],
+        observation, spec, samples, _ = parse_console_subset_observation(packets[0],
+            raw, state['configuration']['model']['initial_isi'],
             expected_trial_id=trial['native_trial_id'])
         require(channel < len(spec['baseline']) and last_frame < len(samples),
                 'training_focus_slice_out_of_bounds')

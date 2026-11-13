@@ -138,6 +138,17 @@ def _audit_subset_observation(e, rows, source_pattern, expected_trial_id):
 def read_console_subset_observation(packet, trace, source_pattern, *, expected_trial_id):
     """Lossless Console CSV header adapter; no graph/restoration attestation."""
     with Path(trace).open(newline='', encoding='utf-8') as stream:rows=list(csv.reader(stream))
+    return _console_subset_rows(packet, rows, source_pattern, expected_trial_id)
+
+
+def parse_console_subset_observation(packet, raw, source_pattern, *, expected_trial_id):
+    """Read the exact already hash-checked bytes, without reopening their path."""
+    require(type(raw) is bytes, 'console_subset_bytes_required')
+    rows = list(csv.reader(io.StringIO(raw.decode('utf-8'), newline=''), strict=True))
+    return _console_subset_rows(packet, rows, source_pattern, expected_trial_id)
+
+
+def _console_subset_rows(packet, rows, source_pattern, expected_trial_id):
     channels=len(source_pattern) if packet['prepared']['routing']=='classic_burst' else 1
     require(rows and rows[0]==['time','stimulus']+['soma'+str(i) for i in range(channels)],
             'unknown_console_subset_trace')

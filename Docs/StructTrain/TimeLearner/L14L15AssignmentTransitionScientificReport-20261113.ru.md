@@ -43,3 +43,5 @@
 ## Подготовка увеличенного масштаба
 
 Добавлен root module recorded_training_focus: отдельное display-only представление явного диапазона native frames, с полной production source проверкой, существующим schema6 reader, actual input и каждым исходным отсчётом. CLI: python -m Scripts.StructTrain.TimeLearner.recorded_training_focus NATIVE OUTPUT --groups 44 48 --channel 0 --first-frame 290 --last-frame 351. Для этих данных это62 samples каждой модели; общий локальный Y-масштаб нужен для различимости слабого спада. Sampling/selection/tolerances не меняются. Actual-file серверная проверка и visual review нового focus пока pending.
+
+Focus читает именно ранее проверенные primary bytes через общий parse_console_subset_observation, без повторного открытия исходного CSV между SHA-проверкой и рисованием. Старый path-reader использует тот же валидатор строк. Это изменение пути чтения, не измерительного алгоритма.
