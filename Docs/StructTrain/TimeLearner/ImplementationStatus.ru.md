@@ -60,7 +60,7 @@
 
 [Готовность научных экспериментов](ExperimentReadiness.ru.md). Series D остаётся остановленной. Build/Calculate/Reset возвращают true; ошибки передаются специализированными состояниями. Общая физика задаётся storage-образами и штатным lifecycle. Компактный Git содержит primary/models/metrics/выбранные figures; полные воспроизводимые galleries остаются кэшем M40.
 
-Дополнительно [разбирается обрыв исходной терминальной группы62](ValidationPlans/M40L22CensoredTemporalA2-20261113/STATUS.ru.md): два complete observations и один censored, остальные trials отсутствуют. Explicit diagnostic renderer не заменяет полную группу. A1 остановлена до test execution из-за неполного Git transport; fresh A2 с тем же кодом/fixture подтверждена running. Итог и visual acceptance pending.
+Разбор терминальной группы62 завершён: два complete observations и один censored, остальные trials отсутствуют. Первые A1/A2 ошибки сохранены; [read-only report2/2 принят](ValidationPlans/M40L22RecordedReportsA1-20261113/RESULT.ru.md). Censored группа не стала полной.
 
 Read-only отчёты и compact collection/restore завершены. [Rs/censored report2/2](ValidationPlans/M40L22RecordedReportsA1-20261113/RESULT.ru.md), [L14/L15/L21 report1/1](ValidationPlans/M40L14L15TransitionA1-20261113/RESULT.ru.md), [large restore1/1](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md). Все перечисленные группы закрыты; original failures сохранены.
 
@@ -70,4 +70,4 @@ Read-only отчёты и compact collection/restore завершены. [Rs/cen
 
 [Переход L14→L15](L14L15AssignmentTransitionScientificReport-20261113.ru.md): полные controls подтверждают4→3 вершины и потерю unique assignment input0; приL14 выбран ранний меньший пик, но timing/amplitude residuals вне допусков. [Rs серия L22](L22BurstResistanceScientificReport-20261113.ru.md) усилила ответ без восстановления отдельной вершины на четырёх проверенных Rs.12 selected originals просмотрены; полные56 views остаются M40 cache. Во всех перечисленных jobs теперь terminal/closure подтверждены.
 
-Следующий конкретный шаг — локальный Y focus слабой впадины L14 по исходным native frames310→331, без изменения peak criterion, tolerances или новых Train. Затем продолжить обязательную матрицу и исправления алгоритмов по измеренным причинам. Полные стадии1–12 остаются частичными; подтверждённой новой классификации нет.
+[Локальный native focus L14/L15 принят1/1 и просмотрен](ValidationPlans/M40L14L15FocusA1-20261113/RESULT.ru.md): слабая впадинаL14 видна, на том же участкеL15 растёт без вершины; assignment/tolerances не менялись. Следующий научный опыт — [новый cold Branch N4/N1](ValidationPlans/M40BranchFullDomainCold4A1-20261113/STATUS.ru.md), recovery4/search1800s, stock physics, full-domain measurement. Его исход ещё не принят; автоматического повтора нет. Полные стадии1–12 остаются частичными; подтверждённой новой классификации нет.
