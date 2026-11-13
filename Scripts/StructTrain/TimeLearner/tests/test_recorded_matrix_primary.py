@@ -56,6 +56,12 @@ class RecordedMatrixPrimaryReportActualTest(unittest.TestCase):
 
 
 class RecordedMatrixPrimaryBoundsTest(unittest.TestCase):
+    def test_explicit_member_budget_remains_typed_and_bounded(self):
+        for value in (True, 0, -1, 512*1024**2+1, float('inf')):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'member_limit'):
+                audit_primary(Path('/not-read/bundle.json'), Path('/not-created/restored'),
+                              maximum_member_bytes=value)
+
     def test_export_normalizes_parent_segments_before_overlap_check(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

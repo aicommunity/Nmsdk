@@ -25,14 +25,22 @@ CASE_FILES = ('run-manifest.json', 'process/contained/owned-unit.json',
               'native/execution.json', 'native/evaluation.json') + tuple(f'native/trial-{i}.json' for i in range(8))
 
 
+def _member_limit(value):
+    require(type(value) is int and 0 < value <= 512*1024**2, 'recorded_primary_member_limit')
+    return value
+
+
 def _paths(request):
     return {'runtime/runtime.json', 'matrix/parameters.xml', 'matrix/observations.csv'} | {
         'native/'+n for n in HEADER} | {'controller/'+n for n in CONTROLLER} | {
         'native/'+r['name']+'/'+n for r in request['cases'] for n in CASE_FILES}
 
 
-def create_primary(directory, controller, runtime_manifest, output):
+def create_primary(directory, controller, runtime_manifest, output, *,
+                   maximum_member_bytes=256*1024**2, deduplicate_content=False):
     """Export selected original bytes only after the full production audit."""
+    maximum_member_bytes = _member_limit(maximum_member_bytes)
+    require(type(deduplicate_content) is bool, 'recorded_primary_deduplication_mode')
     directory, controller = Path(directory).resolve(strict=True), Path(controller).resolve(strict=True)
     runtime_manifest = Path(runtime_manifest).resolve(strict=True);output = Path(output).resolve()
     require(not output.exists() and all(not output.is_relative_to(p) and not p.is_relative_to(output)
@@ -47,7 +55,7 @@ def create_primary(directory, controller, runtime_manifest, output):
     sources.update({'native/'+r['name']+'/'+n: directory/r['name']/n
                     for r in request['cases'] for n in CASE_FILES})
     require(set(sources) == _paths(request), 'recorded_primary_selection_changed')
-    records = {n: {k: v for k, v in frozen_digest(p, 256*1024**2).items() if k != 'source_path'}
+    records = {n: {k: v for k, v in frozen_digest(p, maximum_member_bytes).items() if k != 'source_path'}
                for n, p in sources.items()}
     selection = dict(kind='timelearner_compact_recorded_matrix', schema_version=1,
         original_job_id=request['job_id'], files=records, complete_runtime_directory=False,
@@ -56,18 +64,20 @@ def create_primary(directory, controller, runtime_manifest, output):
         index = Path(temporary)/'selection.json'
         index.write_text(json.dumps(selection, indent=2, allow_nan=False)+'\n', encoding='utf-8')
         sources['selection.json'] = index
-        bundle = create_native_bundle(sources, output, dictionary_bytes=32*1024**2)
+        bundle = create_native_bundle(sources, output, dictionary_bytes=32*1024**2,
+                                      deduplicate_content=deduplicate_content)
     require({n: r for n, r in bundle['members'].items() if n != 'selection.json'} == records,
             'recorded_primary_source_changed')
     return bundle
 
 
-def audit_primary(bundle_path, restored):
+def audit_primary(bundle_path, restored, *, maximum_member_bytes=256*1024**2):
     """Restore and rescore all primary observations through the sole scorer."""
     from .native_calibration_worker import _digest
     from .phasea_matrix import extract, trial_design
     from .recognition_metrics import load_diagnostic_evaluation, score_diagnostic_recognition_evaluation
 
+    maximum_member_bytes = _member_limit(maximum_member_bytes)
     bundle_path = Path(bundle_path).resolve(strict=True);restored = Path(restored).resolve()
     require(not restored.is_relative_to(bundle_path.parent) and
             not bundle_path.parent.is_relative_to(restored), 'recorded_primary_restore_overlaps_bundle')
@@ -76,7 +86,7 @@ def audit_primary(bundle_path, restored):
             and type(declaration.get('members')) is dict and 0 < len(declaration['members']) <= 64
             and type(declaration.get('expanded_bytes')) is int
             and 0 < declaration['expanded_bytes'] <= 768*1024**2, 'recorded_primary_size_budget')
-    require(all(type(r) is dict and type(r.get('bytes')) is int and 0 <= r['bytes'] <= 256*1024**2
+    require(all(type(r) is dict and type(r.get('bytes')) is int and 0 <= r['bytes'] <= maximum_member_bytes
                 for r in declaration['members'].values()) and
             sum(r['bytes'] for r in declaration['members'].values()) == declaration['expanded_bytes'],
             'recorded_primary_member_budget')
@@ -130,7 +140,7 @@ def audit_primary(bundle_path, restored):
         complete_runtime_directory=False, native_execution_attested=False, scientific_verdict=None)
 
 
-def report_primary(bundle_path, restored, output):
+def report_primary(bundle_path, restored, output, *, maximum_member_bytes=256*1024**2):
     """Restore, audit and render every recorded pattern from the compact bundle.
 
     The restored subset is never presented as the original runtime directory.
@@ -147,7 +157,7 @@ def report_primary(bundle_path, restored, output):
             'recorded_primary_report_overlaps_primary')
     plotting_runtime()  # Reject an unavailable renderer before decompression.
     from .reports import render_diagnostic_evaluation_case
-    analysis = audit_primary(bundle_path, restored)
+    analysis = audit_primary(bundle_path, restored, maximum_member_bytes=maximum_member_bytes)
     output.mkdir(parents=True)
     reports = []
     for row in analysis['models']:
@@ -178,12 +188,19 @@ def main(argv=None):
     audit = commands.add_parser('audit');audit.add_argument('bundle', type=Path)
     report = commands.add_parser('report');report.add_argument('bundle', type=Path)
     report.add_argument('--restored', required=True, type=Path)
-    for command in (create, audit, report):command.add_argument('--output', required=True, type=Path)
+    for command in (create, audit, report):
+        command.add_argument('--output', required=True, type=Path)
+        command.add_argument('--maximum-member-bytes', type=int, default=256*1024**2)
+    create.add_argument('--deduplicate-content', action='store_true')
     args = parser.parse_args(argv)
     if args.action == 'create':
-        result = create_primary(args.directory, args.controller, args.runtime_manifest, args.output)
-    elif args.action == 'audit':result = audit_primary(args.bundle, args.output)
-    else:result = report_primary(args.bundle, args.restored, args.output)
+        result = create_primary(args.directory, args.controller, args.runtime_manifest, args.output,
+            maximum_member_bytes=args.maximum_member_bytes, deduplicate_content=args.deduplicate_content)
+    elif args.action == 'audit':
+        result = audit_primary(args.bundle, args.output, maximum_member_bytes=args.maximum_member_bytes)
+    else:
+        result = report_primary(args.bundle, args.restored, args.output,
+                                maximum_member_bytes=args.maximum_member_bytes)
     print(json.dumps(result, allow_nan=False));return 0
 
 
