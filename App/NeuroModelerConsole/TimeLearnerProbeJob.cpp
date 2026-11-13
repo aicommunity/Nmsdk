@@ -28,7 +28,7 @@ struct Job {
     std::string ownerClass,runId,trialId,sampleId,protocolRevision;
     std::size_t input=0,maximumTicks=0,maximumSamples=0;
     double duration=0.,gap=0.,minimumAmplitude=0.,windowBegin=0.,windowEnd=0.,wallSeconds=0.;
-    bool recordSpikes=false,channelDiagnostics=false,singlePulse=false;
+    bool recordSpikes=false,channelDiagnostics=false,singlePulse=false,burstReadback=false;
     PeakSelectionPolicy selection=PeakSelectionPolicy::IsolatedWindow;
     std::optional<std::vector<std::size_t>> subset;
 };
@@ -36,7 +36,8 @@ bool Boolean(const QJsonValue& v){Require(v.isBool(),"probe_boolean_required");r
 Job Read(const QString& path)
 {
     Job j;j.document=ReadDocument(path);const auto& d=j.document;
-    const auto version=Count(d["schema_version"],1,6);
+    const auto version=Count(d["schema_version"],1,7);
+    j.burstReadback=version==7;
     std::set<QString> fields{"kind","schema_version","owner_class","implementation_id","model","profile_archives",
         "stimulus_profile","probe","maximum_model_ticks","maximum_wall_seconds","sha256"};
     if(version>=2){fields.insert("source_stopped");fields.insert("resistance_intervention");}
@@ -54,15 +55,20 @@ Job Read(const QString& path)
     if(version>=3)j.channelDiagnostics=Boolean(d["channel_diagnostics"]);
     if(version>=4) {
         const auto presentation=Object(d["presentation"]);
-        if(version==6) {
+        if(version==6 || version==7) {
             Keys(presentation,{"kind","source_ordinals"});
-            Require(presentation["kind"]==QJsonValue("stimulus_subset_characterization"),"unsupported_probe_subset_presentation");
+            Require(presentation["kind"]==QJsonValue(j.burstReadback?"native_burst_readback":
+                "stimulus_subset_characterization"),"unsupported_probe_subset_presentation");
             j.subset.emplace();
             for(const auto& value:Array(presentation["source_ordinals"])) {
                 const auto i=Count(value,0,j.model.inputs.size()-1);
                 Require(j.subset->empty() || i>j.subset->back(),"invalid_probe_subset_ordinals");j.subset->push_back(i);
             }
             Require(!j.subset->empty(),"empty_probe_subset");
+            // Full-burst readback is not permission to omit a troublesome
+            // impulse or to manufacture an assigned-peak measurement.
+            if(j.burstReadback)Require(j.subset->size()==j.model.inputs.size(),
+                "burst_readback_requires_all_source_impulses");
         } else {
             Keys(presentation,{"kind"});
             Require(presentation["kind"]==QJsonValue("single_pulse_characterization") ||
@@ -90,7 +96,7 @@ Job Read(const QString& path)
     Require(!j.singlePulse || j.resistanceIntervention.empty(),"single_pulse_intervention_not_supported");
     Require(!j.singlePulse || Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"single_pulse_source_profile_changed");
     if(j.subset) {
-        Require(j.resistanceIntervention.empty(),"subset_resistance_intervention_forbidden");
+        Require(j.burstReadback || j.resistanceIntervention.empty(),"subset_resistance_intervention_forbidden");
         Require(Object(j.stopped["configuration"])["stimulus_profile"]==d["stimulus_profile"],"subset_source_profile_changed");
     }
     const auto source=Object(d["stimulus_profile"]);
@@ -284,6 +290,21 @@ template<class Owner> int Execute(const Job& j,const QString& output)
                 terminalPhase="source_baseline";terminalResult=std::move(measured);
             } else {
                 auto requested=built.effective;for(const auto& change:j.resistanceIntervention)requested.at(change.first).resistance=change.second;
+                if(j.burstReadback) {
+                    Require(j.model.normalization==Normalization::TipResistance,"burst_readback_rs_requires_n1");
+                    QJsonArray domains;
+                    for(const auto& change:j.resistanceIntervention) {
+                        const auto assessment=owner->AssessNativeResistanceDomain(requested,change.first);
+                        Require(assessment.status==ResistanceDomainStatus::Available && !assessment.modelMayHaveChanged &&
+                            assessment.baseModelRevision==restoredIdentity["sha256"].toString().toStdString() &&
+                            assessment.geometry==requested && assessment.inputIndex==change.first &&
+                            change.second>=assessment.minimumResistance && change.second<=assessment.maximumResistance,
+                            "burst_readback_rs_outside_fresh_native_domain");
+                        domains.append(EncodeResistanceDomainAssessment(assessment));
+                    }
+                    artifacts.append(Write(output,"resistance-domains.json",Signed({
+                        {"kind","native_burst_readback_domains"},{"schema_version",1},{"assessments",domains}})));
+                }
                 const auto edited=owner->ApplyNativeParameters(requested);Require(edited.status==NativeEditStatus::Applied,edited.reason.c_str());
                 interventionApplied=true;
                 neuron=owner->template GetComponentL<NPulseNeuron>("Neuron",true);Require(bool(neuron),"probe_edited_graph_missing");observer.Clear();
@@ -340,8 +361,8 @@ template<class Owner> int Execute(const Job& j,const QString& output)
             artifacts.append(QJsonObject{{"path","cancel.request"},{"bytes",double(bytes.size())},
                 {"sha256",QString::fromLatin1(QCryptographicHash::hash(bytes,QCryptographicHash::Sha256).toHex())}});
         }
-        const bool diagnosticJob=Count(j.document["schema_version"],1,6)>=3;
-        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",j.subset?6:(derived?5:(diagnosticJob?4:(imported?3:2)))},
+        const bool diagnosticJob=Count(j.document["schema_version"],1,7)>=3;
+        QJsonObject executionRecord{{"kind","timelearner_native_probe_execution"},{"schema_version",j.burstReadback?7:(j.subset?6:(derived?5:(diagnosticJob?4:(imported?3:2))))},
             {"execution",QString::fromStdString(execution)},{"job_sha256",j.document["sha256"]},{"model_revision",initial["sha256"]},
             {"frequency_hz",double(j.model.frequencyHz)},{"model_ticks",double(ticks)},{"model_time_begin",0.},
             {"model_time_end",environment->GetTime().GetDoubleTime()},{"training_started",false},{"search_executed",false},{"certificate_available",false},

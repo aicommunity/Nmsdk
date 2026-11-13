@@ -24,7 +24,7 @@ PROBE_FIELDS = {'run_id', 'trial_id', 'sample_id', 'protocol_revision', 'input_i
 @_evidence_boundary
 def validate_job(job):
     version = job.get('schema_version') if type(job) is dict else None
-    require(type(version) is int and version in (1, 2, 3, 4, 5, 6), 'unknown_characterization_job')
+    require(type(version) is int and version in (1, 2, 3, 4, 5, 6, 7), 'unknown_characterization_job')
     require(set(job) == JOB_FIELDS | ({'source_stopped', 'resistance_intervention'} if version >= 2 else set()) |
             ({'channel_diagnostics'} if version >= 3 else set()) | ({'presentation'} if version >= 4 else set()) | ({'profile_intervention'} if version == 5 else set()) and
             job['kind'] == 'timelearner_native_probe_job', 'unknown_characterization_job')
@@ -45,16 +45,16 @@ def validate_job(job):
     require(frequency > 0 and number(probe['duration']) > 0 and
             equal(probe['maximum_sample_gap'], 1/frequency) and number(probe['minimum_amplitude']) > 0 and
             1 <= count(probe['maximum_samples']) <= 100000000 and probe['record_spikes'] is False and
-            probe['peak_selection'] in (('none',) if version == 6 else
+            probe['peak_selection'] in (('none',) if version in (6, 7) else
                 ('isolated_window', 'assigned_burst_wave', 'single_impulse_maximum')), 'characterization_protocol_invalid')
     require(is_single_pulse(job) or probe['peak_selection'] != 'single_impulse_maximum',
             'maximum_requires_single_impulse_presentation')
     window = probe['window']
-    if version == 6:
+    if version in (6, 7):
         require(window is None, 'subset_peak_window_forbidden')
         require(model['branch'] or probe['input_index'] == 0, 'subset_classic_requires_zero_input_index')
         subset_presented_isi(job)
-        require(job['resistance_intervention'] == [] and
+        require((version == 7 or job['resistance_intervention'] == []) and
                 job['stimulus_profile'] == job['source_stopped']['configuration']['stimulus_profile'],
                 'subset_source_or_intervention_changed')
     else:
@@ -93,6 +93,8 @@ def validate_job(job):
                 source['configuration']['model'] == model and job['profile_archives'] == [],
                 'characterization_stopped_source_mismatch')
         expected_import_parameters(job)
+        require(version != 7 or not job['resistance_intervention'] or model['normalization'] == 'N1',
+                'burst_readback_rs_requires_n1')
     return {'job_sha256': job['sha256'], 'native_configuration_validation_required': True, 'training_started': False}
 
 
@@ -103,11 +105,14 @@ def is_single_pulse(job):
 def subset_presented_isi(job):
     presentation = job['presentation'];source = job['model']['initial_isi']
     require(type(presentation) is dict and set(presentation) == {'kind', 'source_ordinals'} and
-            presentation['kind'] == 'stimulus_subset_characterization', 'invalid_subset_presentation')
+            presentation['kind'] == ('native_burst_readback' if job['schema_version'] == 7 else
+                                      'stimulus_subset_characterization'), 'invalid_subset_presentation')
     indices = presentation['source_ordinals']
     require(type(indices) is list and 0 < len(indices) <= len(source) and
             all(type(i) is int and 0 <= i < len(source) for i in indices) and
             all(b > a for a,b in zip(indices, indices[1:])), 'invalid_subset_source_ordinals')
+    if job['schema_version'] == 7:
+        require(indices == list(range(len(source))), 'burst_readback_requires_all_source_impulses')
     total = 0.
     for value in source:
         require(number(value) >= 0, 'invalid_subset_source_interval');total = number(total+value)
@@ -193,6 +198,30 @@ def expected_import_parameters(job):
 
 def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=None, maximum_wall_seconds=900,
                        channel_diagnostics=None):
+    job = _stopped_job(case, input_index, trial_id, resistance_intervention=resistance_intervention,
+                       maximum_wall_seconds=maximum_wall_seconds, channel_diagnostics=channel_diagnostics)
+    validate_job(job);return job
+
+
+def prepare_burst_readback_job(case, input_index, trial_id, *, resistance_intervention=None,
+                              maximum_wall_seconds=900, channel_diagnostics=True):
+    """Full native burst, no peak decision or training certificate.
+
+    Use the same native whole-set presentation mechanism as subset diagnostics.
+    Schema7 explicitly forbids omitting any source impulse. Rs changes retain
+    the real consumed baseline boundary and its time-matched no-op control.
+    """
+    job = _stopped_job(case, input_index, trial_id, resistance_intervention=resistance_intervention,
+                       maximum_wall_seconds=maximum_wall_seconds, channel_diagnostics=channel_diagnostics)
+    job.pop('sha256');job.update(schema_version=7, presentation={
+        'kind': 'native_burst_readback', 'source_ordinals': list(range(len(job['model']['inputs'])))})
+    job['probe'].update(peak_selection='none', window=None)
+    job['probe']['protocol_revision'] += '/native-burst-readback-v1'
+    job = _signed(job);validate_job(job);return job
+
+
+def _stopped_job(case, input_index, trial_id, *, resistance_intervention, maximum_wall_seconds,
+                 channel_diagnostics):
     from .stopped_evidence import audit_stopped_state
     audit_stopped_state(*case)
     package = case[0];c = package['configuration']
@@ -211,7 +240,7 @@ def prepare_stopped_job(case, input_index, trial_id, *, resistance_intervention=
         job.update(schema_version=3, channel_diagnostics=channel_diagnostics)
         job.pop('sha256')
         job = _signed(job)
-    validate_job(job);return job
+    return job
 
 
 def prepare_single_pulse_job(case, input_index, trial_id, *, maximum_wall_seconds=900, channel_diagnostics=True,
@@ -315,7 +344,7 @@ def audit_execution(directory):
     job, execution = load(directory/'job.json'), load(directory/'execution.json')
     validate_job(job);_digest(execution)
     schema = execution['schema_version']
-    require(type(schema) is int and schema in (1, 2, 3, 4, 5, 6), 'characterization_execution_schema')
+    require(type(schema) is int and schema in (1, 2, 3, 4, 5, 6, 7), 'characterization_execution_schema')
     require(set(execution) == {'kind', 'schema_version', 'execution', 'job_sha256', 'model_revision', 'frequency_hz',
             'model_ticks', 'model_time_begin', 'model_time_end', 'training_started', 'search_executed', 'certificate_available',
             'model_unchanged', 'controller_idle', 'probe_status', 'observation_valid', 'observation_complete', 'artifacts',
@@ -325,8 +354,10 @@ def audit_execution(directory):
             ({'profile_intervention_applied'} if schema == 5 else set()) and execution['kind'] == 'timelearner_native_probe_execution' and
             execution['job_sha256'] == job['sha256'], 'characterization_execution_scope_changed')
     imported = job['schema_version'] >= 2
-    subset = job['schema_version'] == 6
-    require((schema == 6) == subset, 'subset_execution_schema_mismatch')
+    subset = job['schema_version'] in (6, 7)
+    require((schema in (6, 7)) == subset and
+            (schema != 7 or job['schema_version'] == 7) and
+            (job['schema_version'] != 7 or schema == 7), 'subset_execution_schema_mismatch')
     require((schema >= 4) == (job['schema_version'] >= 3) and (schema == 5) == (job['schema_version'] == 5), 'characterization_diagnostics_schema_mismatch')
     baseline_terminal = schema >= 3 and execution['terminal_phase'] == 'source_baseline'
     if schema >= 3:
@@ -344,6 +375,7 @@ def audit_execution(directory):
         if job['resistance_intervention']:
             expected_files.update({'baseline_trial_1.json', 'baseline_trial_1.csv'})
     if subset:expected_files.add('subset-restoration.json')
+    if job['schema_version'] == 7 and applied:expected_files.add('resistance-domains.json')
     if schema >= 4:
         require(type(execution['channel_diagnostic_files']) is list and
                 all(type(v) is str and v in ('probe_diagnostics_1.json', 'probe_diagnostics_2.json')
@@ -400,6 +432,25 @@ def audit_execution(directory):
             require(initial['identity']['model'] == (expected_import_model(job) if applied else source['neuron']['graph']['identity']['model']),
                     'characterization_import_or_intervention_graph_changed')
         if applied:
+            if job['schema_version'] == 7:
+                from .domain_evidence import audit_resistance_domain
+                domains = load(directory/'resistance-domains.json');_digest(domains)
+                require(set(domains) == {'kind','schema_version','assessments','sha256'} and
+                        domains['kind'] == 'native_burst_readback_domains' and
+                        type(domains['schema_version']) is int and domains['schema_version'] == 1 and
+                        type(domains['assessments']) is list and
+                        len(domains['assessments']) == len(job['resistance_intervention']),
+                        'burst_readback_domain_inventory')
+                for domain, change in zip(domains['assessments'], job['resistance_intervention']):
+                    require(audit_resistance_domain(domain)['physics_verified'] is True and
+                            domain['status'] == 'available' and domain['model_may_have_changed'] is False and
+                            domain['base_model_revision'] == source['model_revision'] and
+                            domain['preview_model_revision'] == initial['identity']['sha256'] and
+                            domain['preview_model'] == initial['identity']['model'] and
+                            domain['geometry'] == expected_import_parameters(job) and
+                            domain['input_index'] == change['input_index'] and
+                            number(domain['minimum_resistance']) <= change['resistance'] <=
+                            number(domain['maximum_resistance']), 'burst_readback_domain_binding')
             baseline = load(directory/'baseline_trial_1.json')
             require(baseline['native_status'] == 'completed' and baseline['observation'] is not None and
                     baseline['observation']['complete'] is True and
@@ -487,7 +538,7 @@ def audit_execution(directory):
             'training_pattern_after':before['training_pattern'],'dataset_pattern_after':before['dataset_pattern'],
             'physical_input_count_after':before['physical_input_count'],'training_target_restored':True,
             'scientific_training_result':False}
-        single_audit['stimulus_subset_diagnostic'] = audit_subset(wrapper, rows, expected_trial_id=p['trial_id'])
+        single_audit['stimulus_subset_diagnostic'] = audit_subset(wrapper, rows, expected_trial_id=requested['trial_id'])
     elif is_single_pulse(job):
         from .single_pulse_evidence import read_single_pulse
         observation, spec, _, samples, _, quality = read_single_pulse(packet, trace)
