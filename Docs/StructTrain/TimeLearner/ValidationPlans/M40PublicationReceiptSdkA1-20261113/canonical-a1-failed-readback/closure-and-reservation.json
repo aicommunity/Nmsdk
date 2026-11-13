@@ -1,0 +1,103 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "65924930a99fae0c45e659b12b3a6b02c6ddf5459925fe823aa69fca69eb0647",
+      "unit": "timelearner-1355811e-f901-4aa6-b4ba-909f891731c7.service",
+      "invocation_id": "2dd56895add346ff9897b7d67526551a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-1355811e-f901-4aa6-b4ba-909f891731c7.service",
+      "initial_main_pid": 2343141,
+      "initial_start_ticks": "360452115",
+      "sha256": "713e1d9c850a884cb756932cc58bd03fefa6f0c0476c5b4ba7c200b46345d4eb"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "536870912",
+      "TasksMax": "32",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt 1355811e-f901-4aa6-b4ba-909f891731c7",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "2dd56895add346ff9897b7d67526551a"
+    },
+    "memory_max": 536870912,
+    "tasks_max": 32,
+    "scientific_verdict": null
+  },
+  "leases": [
+    {
+      "token": "da532fce-a09d-4263-a463-6174e2397cab",
+      "job_id": "s08-publication-receipt-sdk-canonical-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 2343141,
+        "start_ticks": "360452115",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-publication-receipt-sdk-canonical-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-publication-receipt-sdk-canonical-m40-a1"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-publication-receipt-sdk-prepared-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s08-publication-receipt-sdk-prepared-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/publication-receipt-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PublicationReceiptSdkA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/publication-receipt-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40PublicationReceiptSdkA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-recorded-n4-roundtrip-sdk-a3"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-publication-receipt-sdk-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-publication-receipt-sdk-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794529323.764667,
+      "deadline": 1794529453.7890186,
+      "updated": 1794529342.1179016,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}
