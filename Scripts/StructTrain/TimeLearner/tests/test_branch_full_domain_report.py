@@ -1,8 +1,9 @@
 """Actual stock Branch N4 search: retain outcome and render measured controls.
 
-The selection rule is fixed before the new Train finishes: first/last complete
-candidate and first/last complete rejected candidate, without cherry-picking
-the most attractive waveform. No new model execution or verdict is created.
+Join first/last measured candidates and rejections to the actual search history;
+show the last complete but unconsumed budget group separately. Anchor timing
+probes are not candidate measurements. This corrected post-hoc display rule
+creates neither new model execution nor a scientific verdict.
 """
 import os
 from pathlib import Path
@@ -41,15 +42,25 @@ class BranchFullDomainReportTest(unittest.TestCase):
         self.assertIsNone(analysis['scientific_verdict'])
 
         records = package['measurement_archive']['records']
+        # A candidate window also exists on anchor remeasurements. Join actual
+        # accepted candidates/rejections to the authoritative search history.
+        measured_ids = {c['measurement_group_id'] for c in analysis['recorded_candidate_measurements']}
+        rejected_ids = {r['trial_id'] for r in analysis['recorded_rejections']}
         complete = [i for i, record in enumerate(records, 1) if record['complete_group']
-                    and record['method_specification']['candidate_frame'] is not None]
+                    and record['group_id'] in measured_ids]
         self.assertTrue(complete)
-        # The native schema uses an empty string for an accepted observation.
-        rejected = [i for i in complete if bool(records[i-1]['rejection_reason'])]
-        if not analysis['recorded_rejections']:
-            self.assertEqual(rejected, [], 'empty rejection reasons must not become rejected groups')
+        self.assertEqual(len(complete), len(measured_ids))
+        rejected = [i for i, record in enumerate(records, 1) if record['complete_group']
+                    and record['logical_request']['trial_id'] in rejected_ids]
+        terminal = [i for i, record in enumerate(records, 1) if record['complete_group']
+                    and record['group_id'] not in measured_ids
+                    and record['logical_request']['input_index'] != analysis['anchor_index']
+                    and record['rejection_reason'] == 'native_training_time_budget_exhausted']
+        self.assertTrue(all(records[i-1]['logical_request']['input_index'] != analysis['anchor_index']
+                            and not records[i-1]['rejection_reason'] for i in complete))
         selected = sorted(set([complete[0], complete[-1]] +
-                              ([rejected[0], rejected[-1]] if rejected else [])))
+                              ([rejected[0], rejected[-1]] if rejected else []) +
+                              ([terminal[-1]] if terminal else [])))
         output = Path(os.environ['TMPDIR'])/'Branch-full-domain-scientific-report'
         report = render(run/'native', output, selected)
         self.assertEqual([g['ordinal'] for g in report['groups']], selected)
@@ -68,7 +79,8 @@ class BranchFullDomainReportTest(unittest.TestCase):
         _write(output/'search-analysis.json', analysis)
         _write(output/'selection-rule.json', dict(
             kind='branch_actual_search_predeclared_views', schema_version=1,
-            rule='first_last_complete_candidate_and_first_last_complete_rejection',
+            rule='first_last_history_joined_candidate_and_rejection_plus_last_complete_unconsumed_budget_group',
             complete_candidate_groups=complete, rejected_candidate_groups=rejected,
+            complete_unconsumed_budget_groups=terminal,
             selected_groups=selected, new_model_execution=False,
             classification_assessed=False, scientific_verdict=None))

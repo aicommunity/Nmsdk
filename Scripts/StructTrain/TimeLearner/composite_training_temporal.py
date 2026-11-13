@@ -127,7 +127,8 @@ def render(native, output, group_numbers, *, native_window_zooms=False, allow_in
                         # for every omission control, never a synthetic schedule.
                     axes[-1].set_xlabel('Time since each native probe began [s]')
                     status = (record['selection']['geometry']['validity'] if record['selection']
-                              else 'INCOMPLETE GROUP; assignment unavailable')
+                              else ('COMPLETE RAW GROUP; assignment unavailable' if record['complete_group']
+                                    else 'INCOMPLETE GROUP; assignment unavailable'))
                     figure_title(fig, f'Training group {ordinal} | soma{channel} | {view}\n'
                         f'{record["logical_request"]["input_id"]}: selection={status}; '
                         f'outcome={audit["training_outcome"]}\n'
