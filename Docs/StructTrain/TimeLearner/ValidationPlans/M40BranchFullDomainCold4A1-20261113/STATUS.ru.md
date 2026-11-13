@@ -5,3 +5,5 @@
 Job s07-branch-full-domain-cold4-m40-a1; подтверждённый native cgroup running, unit timelearner-c2a6a7cd-b290-42f8-9243-ef8e56f047cd.service, invocation4f7cfa0105d44932860cf80322353505, initialPID134094/start364264458. Первичные CSV создаются. Результат не принят до terminal/closure и полного DATA audit.
 
 2000Hz, N4/N1, CapturedPerInput, assigned impulse, anchor3, amplitude1e-5/sync.02; recovery4, search1800s/finalization300s, outer3600s. Classic budget16 не является равным по бюджету контролем. C-trim/PostTune/калибровка Off. Автоматического повтора и увеличения бюджета нет. Ни completed процесса, ни прошедший engineering test не означают Exact или работающую классификацию.
+
+Завершение: [полный Train/DATA1/1 принят](RESULT.ru.md); old running handle закрыт. Начат отдельный read-only report job, recovery/search budgets не повышались.
