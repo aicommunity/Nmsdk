@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-branch-full-domain-primary-replay-elder-a2",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "e98bed8149ba37944f05a0242a201f17dbc63eb6",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 3600
+  },
+  "disk": {
+    "minimum_free_bytes": 536870912,
+    "maximum_output_bytes": 1073741824
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-scientific-readers-a1",
+      "commit": "e98bed8149ba37944f05a0242a201f17dbc63eb6"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/branch-full-domain-primary-replay-a2/Docs/StructTrain/TimeLearner/ValidationPlans/ElderBranchFullDomainPrimaryReplayA2-20261113/suite.json",
+      "sha256": "3f0b61a6e909d1520ff79bdaf4042b4fd010cdfe4e0e0943348dc0d320447ead"
+    },
+    "fixtures": {
+      "TIMELEARNER_BRANCH_FULL_DOMAIN_PRIMARY": "/home/user/timelearner-refactor/fixtures/branch-full-domain-primary-a1/Reports/StructTrain/TimeLearner/BranchFullDomain-20261113/primary"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 134217728,
+      "maximum_total_bytes": 134217728
+    }
+  }
+}

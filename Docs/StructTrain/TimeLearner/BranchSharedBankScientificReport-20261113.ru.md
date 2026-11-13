@@ -35,3 +35,5 @@
 ![Branch group108](ValidationPlans/M40BranchFullDomainReportA3-20261113/selected-plots/group-000108-soma-000-overview.png)
 
 Исходные [результаты Train](ValidationPlans/M40BranchFullDomainCold4A1-20261113/RESULT.ru.md), [проверка отчёта A3](ValidationPlans/M40BranchFullDomainReportA3-20261113/RESULT.ru.md) и [визуальная проверка](ValidationPlans/M40BranchFullDomainReportA3-20261113/VISUAL_REVIEW.ru.md). Полная компактная публикация первичного corpus пока не завершена; эта ограниченность остаётся открытой. Научная классификация данной Branch-модели ещё не измерена.
+
+Обновление публикации: [полный primary44.06MB](ValidationPlans/M40BranchFullDomainPrimaryA1-20261113/RESULT.ru.md) сохранён в Git; [независимый Elder replay1/1 принят](ValidationPlans/ElderBranchFullDomainPrimaryReplayA2-20261113/RESULT.ru.md). Предшествующее предупреждение о незавершённой компактной публикации относится к раннему снимку, этот пункт для данного корпуса закрыт. Научная классификация Branch по-прежнему не измерена.
