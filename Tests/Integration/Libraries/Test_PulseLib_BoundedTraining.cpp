@@ -991,7 +991,8 @@ TEST(BoundedTrainingLengthCandidates, N1ProposedGeometryStillRequiresItsEffectiv
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
     for(const std::size_t candidates:{5u,6u})
     {
-        SCOPED_TRACE(int(routing));SCOPED_TRACE(candidates);
+        SCOPED_TRACE(int(routing));
+        SCOPED_TRACE(candidates);
         const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
         cfg.maximumCandidatesPerInput=candidates;
         cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};

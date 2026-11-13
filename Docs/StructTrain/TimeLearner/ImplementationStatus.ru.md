@@ -4,7 +4,7 @@
 
 ## Текущее выполняемое задание
 
-[Повторная SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) выполняется на M40 в отдельной сборке: source45f76e89ab62dac0429e615a176c82571116b4da/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8,93 заявленных C++ cases. Проверка kernel handle подтвердила живую группу и реальную компиляцию. Итогового verdict пока нет. Прежние runtimes защищены, работающий каталог не меняется.
+[Повторная SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке создавали одинаковое имя.0 из93 cases исполнены; научный Train не запускался. Исправление разносит макросы по строкам, production Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8 не меняется. После подтверждённого закрытия A2 готовится последовательная incremental проверка A3 с новым runtime; прежние runtimes защищены.
 
 [Первая сборка A1 завершилась91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md). Уточнены два synthetic test contracts: малый budget при Branch factor-two guard должен давать честную остановку; safeguard log-secant не обещает сходимость произвольной нелинейной функции за12 calls. Production Pulse code, controller local allowance<=12 и scientific budgets/tolerances не менялись. Исходный FAIL сохранён, в PASS не переименован.
 

@@ -19,7 +19,7 @@
 
 ## Что выполняется сейчас
 
-[Повторная native SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) на M40:93 заявленных C++ cases, исходники45f76e89ab62dac0429e615a176c82571116b4da/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8. Проверены живой kernel handle и реальная компиляция. Итог пока не принят.
+[SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке.0 из93 cases исполнены, scientific Train не запускался. Макросы разнесены по строкам; production Pulse7c6c9478 и научные настройки не меняются. После подтверждённого закрытия A2 готовится последовательная incremental проверка A3 с новым runtime.
 
 [Первый SDK A1 завершился91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md). Исправлены два synthetic test expectations под уже объявленные guards; производственный Pulse code и научные настройки не изменены. Исходный FAIL сохранён. Новый scientific Train не запускается до93/93 и закрытия всех kernel groups.
 
