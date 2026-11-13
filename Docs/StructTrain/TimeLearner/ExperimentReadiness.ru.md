@@ -19,7 +19,7 @@
 
 ## Что выполняется сейчас
 
-[SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке.0 из93 cases исполнены, scientific Train не запускался. Макросы разнесены по строкам; production Pulse7c6c9478 и научные настройки не меняются. После подтверждённого закрытия A2 готовится последовательная incremental проверка A3 с новым runtime.
+[SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке.0 из93 cases исполнены, scientific Train не запускался. Макросы разнесены по строкам; production Pulse7c6c9478 и научные настройки не меняются. [Canonical A3 отверг существующий build](ValidationPlans/M40N1CoupledSdkA3-20261113/RESULT.ru.md), guard сохранён; [A4 запущена](ValidationPlans/M40N1CoupledSdkA4-20261113/STATUS.ru.md) с чистым build/runtime и source74e5d206d/Pulse7c6c9478, kernel handle/компиляция подтверждены.
 
 [Первый SDK A1 завершился91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md). Исправлены два synthetic test expectations под уже объявленные guards; производственный Pulse code и научные настройки не изменены. Исходный FAIL сохранён. Новый scientific Train не запускается до93/93 и закрытия всех kernel groups.
 

@@ -1,0 +1,7 @@
+# SDK A3: подготовка отвергла существующий build
+
+Owned canonical job s07-n1-coupled-sdk-canonical-m40-a3 завершён process_error0.377s, whole group closed. [Receipt](readback/controller-result.json), [stderr](readback/process/contained/stderr.log):canonical_source_or_fresh_build. Никакие компиляторы, C++ cases или научные модели этой попыткой не запускались. Fresh-build guard не ослаблен и не обойдён.
+
+Моё предположение о допустимости incremental сборки оказалось неверным для production canonical path: нижний native worker допускает существующий каталог, но canonical preparation требует fresh build. Следующая A4 использует новый build/runtime. [Controls](controls/native-job.json), [переход source после закрытия A2](controls/source-transition.json). Source обновлён только после закрытия обеих A2 kernel groups; старый commit45 и before/after source captures сохранены. Checkout частного sparse SDK был прерван проверкой нематериализованных Bin blobs; он завершён только после точного совпадения index tree с Git target и working source blob, при неизменных child commits. Это транспортный detached SDK snapshot, не изменение опубликованной истории.
+
+Source root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8. Production алгоритм и scientific limits не изменены. Producer c1c76c001f60256156458f252e45373b7635485a; pack348041 bytes SHA2567671910c70fb0f481399425e3901ab61125870eddc9e25a9836d48cd0727f3fb.

@@ -4,7 +4,7 @@
 
 ## Текущее выполняемое задание
 
-[Повторная SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке создавали одинаковое имя.0 из93 cases исполнены; научный Train не запускался. Исправление разносит макросы по строкам, production Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8 не меняется. После подтверждённого закрытия A2 готовится последовательная incremental проверка A3 с новым runtime; прежние runtimes защищены.
+[Повторная SDK-проверка A2](ValidationPlans/M40N1CoupledSdkA2-20261113/STATUS.ru.md) завершилась ошибкой компиляции тестовой диагностики: два SCOPED_TRACE на одной строке создавали одинаковое имя.0 из93 cases исполнены; научный Train не запускался. Исправление разносит макросы по строкам, production Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8 не меняется. [Canonical A3 отверг существующий build](ValidationPlans/M40N1CoupledSdkA3-20261113/RESULT.ru.md); контроль сохранён. [A4 запущена](ValidationPlans/M40N1CoupledSdkA4-20261113/STATUS.ru.md) с новым чистым build/runtime, source74e5d206d/Pulse7c6c9478; живой kernel handle и компиляция подтверждены. Прежние runtimes защищены.
 
 [Первая сборка A1 завершилась91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md). Уточнены два synthetic test contracts: малый budget при Branch factor-two guard должен давать честную остановку; safeguard log-secant не обещает сходимость произвольной нелинейной функции за12 calls. Production Pulse code, controller local allowance<=12 и scientific budgets/tolerances не менялись. Исходный FAIL сохранён, в PASS не переименован.
 

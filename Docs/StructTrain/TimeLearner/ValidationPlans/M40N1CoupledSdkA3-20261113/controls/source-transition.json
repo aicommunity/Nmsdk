@@ -1,0 +1,172 @@
+{
+  "kind": "timelearner_closed_sdk_source_transition",
+  "schema_version": 1,
+  "source": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a2",
+  "before": {
+    "root": {
+      "head": "45f76e89ab62dac0429e615a176c82571116b4da",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "head": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "after": {
+    "root": {
+      "head": "74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e",
+      "status": ""
+    },
+    "Bin": {
+      "recorded_gitlink": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "head": "8cb6dba07b30432272984c8ce3136b48ad06f064",
+      "status": ""
+    },
+    "Libraries/Nmsdk-MotionControlLib": {
+      "recorded_gitlink": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "head": "85e4494e8596b0998feebff7da2f8d421a6df66f",
+      "status": ""
+    },
+    "Libraries/Nmsdk-PulseLib": {
+      "recorded_gitlink": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "head": "7c6c94785af0c83104d348bb3b733ed1f149c8a8",
+      "status": ""
+    },
+    "Libraries/Rdk-BasicLib": {
+      "recorded_gitlink": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "head": "2927cad5a7456b301217b7abb228f12c9a359ea9",
+      "status": ""
+    },
+    "Libraries/Rdk-CvBasicLib": {
+      "recorded_gitlink": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "head": "c471297811367abd348c6258bdaeaf8e1a40c7bd",
+      "status": ""
+    },
+    "Libraries/Rdk-HardwareLib": {
+      "recorded_gitlink": "de40b008e990105856726e01230dde19f42a90a9",
+      "head": "de40b008e990105856726e01230dde19f42a90a9",
+      "status": ""
+    },
+    "Rdk": {
+      "recorded_gitlink": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "head": "de4134235c0dcb8b91fd9a43b267348ad1a163ca",
+      "status": ""
+    }
+  },
+  "closed_prior_units": {
+    "s07-n1-coupled-sdk-canonical-m40-a2": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "bound_unit_and_group_absent",
+      "scientific_verdict": null,
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "78566f3958223db174742fa86094134f2996d4b5dba960499949fb30992535b3",
+        "unit": "timelearner-fd3c5caa-3657-4257-8f04-033bbb5f90bd.service",
+        "invocation_id": "d546f7c95e06492d9bad4e7b7cedcd2e",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fd3c5caa-3657-4257-8f04-033bbb5f90bd.service",
+        "initial_main_pid": 1934030,
+        "initial_start_ticks": "366901454",
+        "sha256": "5867c6c0f35404aafc357f2ba9bef08bef43129ecd34e452c61df0849309ac00"
+      },
+      "state": {
+        "Type": "",
+        "Restart": "no",
+        "RemainAfterExit": "no",
+        "MainPID": "0",
+        "Result": "success",
+        "ExecMainCode": "0",
+        "ExecMainStatus": "0",
+        "ControlGroup": "",
+        "MemoryMax": "infinity",
+        "TasksMax": "52862",
+        "KillMode": "control-group",
+        "Description": "timelearner-fd3c5caa-3657-4257-8f04-033bbb5f90bd.service",
+        "LoadState": "not-found",
+        "ActiveState": "inactive",
+        "SubState": "dead",
+        "InvocationID": ""
+      }
+    },
+    "s07-n1-coupled-sdk-m40-a2-controller": {
+      "execution": "unknown",
+      "all_processes_closed": true,
+      "reason": "kernel_cgroup_observed",
+      "binding": {
+        "kind": "timelearner_contained_binding",
+        "schema_version": 1,
+        "request_sha256": "208dbe80cd1e3be60574014ad411ae7112be3689a0cb41d6328b7f250ff75cce",
+        "unit": "timelearner-b1dc04f5-7190-42a3-a888-1dde25c3c8d5.service",
+        "invocation_id": "b76951b3c71948cda98e1b09f538d5f5",
+        "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-b1dc04f5-7190-42a3-a888-1dde25c3c8d5.service",
+        "initial_main_pid": 1992395,
+        "initial_start_ticks": "366919192",
+        "sha256": "3e765e364e86da581b397a03f2af92e16a3d532670a71642b32bb052db81479a"
+      },
+      "state": {
+        "Type": "exec",
+        "Restart": "no",
+        "RemainAfterExit": "yes",
+        "MainPID": "0",
+        "Result": "exit-code",
+        "ExecMainCode": "1",
+        "ExecMainStatus": "1",
+        "ControlGroup": "",
+        "MemoryMax": "8589934592",
+        "TasksMax": "128",
+        "KillMode": "control-group",
+        "Description": "TimeLearner contained attempt b1dc04f5-7190-42a3-a888-1dde25c3c8d5",
+        "LoadState": "loaded",
+        "ActiveState": "failed",
+        "SubState": "failed",
+        "InvocationID": "b76951b3c71948cda98e1b09f538d5f5"
+      },
+      "memory_max": 8589934592,
+      "tasks_max": 128,
+      "scientific_verdict": null
+    }
+  },
+  "changed_code_paths": [
+    "Tests/Integration/Libraries/Test_PulseLib_BoundedTraining.cpp"
+  ],
+  "pack_bytes": 67945,
+  "pack_sha256": "f72f449942e2dd39ac2ef6cac412136600d5aae7be91718215d96399bc0286e7",
+  "prior_failure_git_producer": "65ffbe9d9fff7fd217343f9ff292d86e7f397e95",
+  "old_commit_retained": true,
+  "interrupted_detached_checkout_recovered": true,
+  "index_tree": "a4e05b39936b5cef7e38fa34be51d9294bdfedd5",
+  "old_runtime_changed": false,
+  "scientific_verdict": null
+}
