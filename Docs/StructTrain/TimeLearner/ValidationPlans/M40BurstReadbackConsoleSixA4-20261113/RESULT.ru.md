@@ -10,4 +10,4 @@ Console Root49689590cbdc0bbe5abccfb91374ad716f0ff977 / PulseLibdfb9a98244f91b4f4
 
 Оба реальных случая N=2, physical bank owners=[0]. Совпадающие точки подключения Branch и N>2 этим runtime-набором не проверены. Обучение и назначение пика не выполнялись, certificate/classification verdict отсутствуют. Приёмка относится к этому readback контуру, не ко всему этапу7.
 
-На основании этого контроля запущена [фактическая N4 серия L22](../M40L22BurstResistanceStudyA1-20261113/STATUS.ru.md). Полные первичные данные контрольной группы сжимаются отдельным штатным closed-primary-bundle.
+На основании этого контроля запущена [фактическая N4 серия L22](../M40L22BurstResistanceStudyA1-20261113/STATUS.ru.md). [Полные первичные данные контрольной группы сохранены в Git](../M40BurstReadbackA4PrimaryA1-20261113/RESULT.ru.md):712 members/179.89MB в1.07MB XZ, все6 процессов и10 observations.
