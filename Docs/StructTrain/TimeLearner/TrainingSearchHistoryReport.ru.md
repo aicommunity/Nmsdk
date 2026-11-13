@@ -10,4 +10,36 @@
 
 Перед проекцией summary/job/execution сверяются с original manifest SHA/size, каждый файл читается bounded frozen read; manifest повторно сверяется после анализа. CLI запрещает запись результата внутри original run directory. Основной native DATA audit не удаляется и не заменяется сравнением нескольких полей или producer bool. Source snapshots работающих заданий не обновляются.
 
-Проверки:7 unit controls (revision vs parameters, empty retained history, Branch/N0/N7 projection, extra C/cost preservation, duplicates/schema/nonfinite, changed-after-audit refusal, CLI output overlap) и1 actual production CLI case полного исходного N4 run. Последний проверяет конкретные15/13/28 records и отсутствие measured/final coverage terminal L22. C++ тело в Python не копируется. Локально выполнен только AST parse. [Elder:7/7 unit controls приняты](ValidationPlans/ElderNativeSearchHistoryA1-20261113/RESULT.ru.md); отдельный M40 gate7+1 с полным исходным N4 run ещё выполняется. Новый формат не закрывает весь этап3/7/9 или full physical matrix.
+Проверки:7 unit controls (revision vs parameters, empty retained history, Branch/N0/N7 projection, extra C/cost preservation, duplicates/schema/nonfinite, changed-after-audit refusal, CLI output overlap) и1 actual production CLI case полного исходного N4 run. Последний проверяет конкретные15/13/28 records и отсутствие measured/final coverage terminal L22. C++ тело в Python не копируется. Локально выполнен только AST parse. [Elder:7/7 unit controls приняты](ValidationPlans/ElderNativeSearchHistoryA1-20261113/RESULT.ru.md); [M40:8/8, включая полный исходный N4 run, приняты](ValidationPlans/M40NativeSearchHistoryA1-20261113/RESULT.ru.md). Новый формат не закрывает весь этап3/7/9 или full physical matrix.
+
+## Измеренная траектория input0 последнего принятого Train
+
+Таблица получена из [исходного production CLI output](ValidationPlans/M40NativeSearchHistoryA1-20261113/completed-readback/worker/tmp/actual-training-search-report.json), проверенного на M40. Амплитудные остатки приведены в native units; перевод в SI отдельно не подтверждён. Во всех строках within_timing=false. Таблица не включает отклонённые пробы и не описывает все58 search probes.
+
+|L|Rs, МОм|Временной остаток, s|Амплитудный остаток|
+|---:|---:|---:|---:|
+|1|86.0000000|-0.4800|0.000000e+0|
+|1|2.88007156|-0.4825|3.308828e-1|
+|2|86.0000000|-0.4705|-3.462558e-3|
+|3|86.0000000|-0.4615|-5.368698e-3|
+|4|86.0000000|-0.4520|-6.605703e-3|
+|5|86.0000000|-0.4425|-7.488893e-3|
+|6|86.0000000|-0.4330|-8.159176e-3|
+|7|86.0000000|-0.4235|-8.689981e-3|
+|8|86.0000000|-0.4140|-9.123674e-3|
+|9|86.0000000|-0.4045|-9.486512e-3|
+|10|86.0000000|-0.3950|-9.794164e-3|
+|11|86.0000000|-0.3850|-1.005370e-2|
+|12|86.0000000|-0.3745|-1.026773e-2|
+|13|86.0000000|-0.3630|-1.043673e-2|
+|14|86.0000000|-0.3495|-1.055690e-2|
+
+При Rs86МОм увеличение L уменьшает модуль временной ошибки и одновременно увеличивает модуль амплитудной. Единственная сохранённая complete точка с другим Rs относится к L1; по ней нельзя заключать, что нормализация при L14 или L22 невозможна. Все13 retained rejections имеют reason rejected_candidate_window:ambiguous. Принадлежность каждого отказа конкретной геометрии требует связи с исходной пробой; один список rejections такой связи не доказывает.28 оценённых Rs-интервалов не означают28 измеренных Rs-кандидатов.
+
+## Следующее решение об алгоритме
+
+Сначала выполнить ограниченную диагностику Rs при неизменной геометрии фактического L22, отдельную от Train и классификации. Использовать штатный импорт полной stopped модели; исходные storage/дочерняя физика/пачка/частота/порог сохраняются. Существующие prepare_stopped_job/expected_import_parameters задают семантику Rs intervention, но не считаются проверенным готовым запускателем нового composite/candidate-window package: перед запуском обязательна проверка совместимости схемы/configuration/window и native import readback. При отсутствии такой поддержки нужен отдельный production adapter с адресными проверками; экспорт в неполный legacy overlay запрещён. Для changed и matched-control нужны одинаковые абсолютные model clocks, actual input events, reset policy и byte-equal warm baseline; прежний matched_resistance_analysis задаёт этот принцип, но его старую жёсткую матрицу Classic+Branch нельзя выдавать за новый single-Classic protocol.
+
+Перед запуском зафиксировать конечный список Rs из свежей per-input native domain assessment, включая unchanged86МОм и ограниченные изменённые точки; старый интервал другого model revision не использовать как live bound. Изменение должно затрагивать только заявленный excitation bank и разрешённые зависимости; полный semantic graph diff обязателен. Выбирать максимум закреплённого импульса; ambiguous остаётся отрицательным измерительным исходом, полный waveform сохраняется для визуального анализа. Не заменять его максимумом пачки и не захватывать новую цель CapturedPerInput на изменённой геометрии.
+
+Если при fixed L корректная Rs-нормализация восстанавливает измеримость/амплитуду, отдельно проверить изменение порядка поиска L/Rs: механическое выделение кода, затем алгоритмический commit с A/B. Если нет, исследовать оставшиеся причины по waveform и конкретным rejected trials. Одна диагностическая длина не доказывает PhysicalInfeasible. Длинный Train, увеличение budgets и изменение tolerances не являются следующим автоматическим действием. Этот ограниченный протокол пока не выполнен.
