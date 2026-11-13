@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-burst-readback-console-six-m40-a1",
+  "package_fingerprint": "54e3034783b660de1429ef9e1fd6049f53c17683d1725f2be908d560842b24d8",
+  "execution": "completed",
+  "assertion_status": "failed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls"
+  ],
+  "executed_tests": 1,
+  "failures": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls"
+  ],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_BURST_READBACK_SOURCE": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-native-burst-readback-sdk-m40-a1/burst-readback-sdk-nine/native-composite/package7",
+      "files": 12,
+      "fingerprint": "630fee48d5d5402fdc18928a1deeddce170e29ed159f08a1fd49bbb081168a3e"
+    },
+    "TIMELEARNER_BURST_READBACK_CONTROLS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/burst-readback-console-six-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BurstReadbackConsoleSixA1-20261113/fixture",
+      "files": 2,
+      "fingerprint": "2120959e7e87aff4e006b420b430eccc5af5a05e3d864db8da985e57dd926bdd"
+    },
+    "TIMELEARNER_BURST_READBACK_RUNTIME": {
+      "path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+      "files": 1,
+      "fingerprint": "8f58cc5082c2735810c802da914f612a8512c6ca053dcb8ee198dc88435b96c1"
+    }
+  },
+  "scientific_verdict": null
+}

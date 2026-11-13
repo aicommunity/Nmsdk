@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-idle-probe-readback-tests-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 300
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 67108864
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-idle-probe-readback-tests-a1",
+      "commit": "49689590cbdc0bbe5abccfb91374ad716f0ff977"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/idle-probe-readback-tests-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderIdleProbeReadbackA1-20261113/suite.json",
+      "sha256": "2a987f6d7cb92f5aee595416d61686658f643b8eb5c38d9548039db8aa6f1a27"
+    },
+    "fixtures": {}
+  }
+}
