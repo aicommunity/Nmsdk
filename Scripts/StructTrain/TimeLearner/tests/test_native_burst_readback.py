@@ -1,5 +1,7 @@
 """Wire-declaration controls; these do not stand in for native model probes."""
 from copy import deepcopy
+from pathlib import Path
+import tempfile
 import unittest
 
 from .test_composite_configuration import configuration
@@ -75,3 +77,17 @@ class NativeBurstReadbackDeclarationTest(unittest.TestCase):
             validate_job(_signed(job))
         job['resistance_intervention'] = []
         self.assertFalse(validate_job(_signed(job))['training_started'])
+
+    def test_schema7_exit2_requests_audit_instead_of_becoming_a_success(self):
+        from ..native_pipeline_worker import _structured_training_exit, audit_execution
+        job = declaration();process = dict(execution='process_error', returncode=2)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            self.assertFalse(_structured_training_exit('probe', job, process, root))
+            (root/'execution.json').write_text('{}', encoding='utf-8')
+            self.assertTrue(_structured_training_exit('probe', job, process, root))
+            # The routing decision is not evidence: absent native job/data
+            # still fails the actual production execution auditor.
+            with self.assertRaises((EvidenceError, OSError)):
+                audit_execution('probe', root, job)
+            self.assertFalse(_structured_training_exit('probe', {**job, 'schema_version': 8}, process, root))

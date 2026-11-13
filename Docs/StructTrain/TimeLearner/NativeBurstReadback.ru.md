@@ -19,3 +19,9 @@ presentation.kind=native_burst_readback, source_ordinals содержит стр
 Перед фактической N4 диагностикой требуются серверная сборка Console, эти проверки и реальные production probes на импортированном stopped package7: unchanged replay, matched no-op, changed Rs с полной проверкой graph diff, clocks и входов. Приёмка schema7 пока не заявляется. Большая N4 модель не заменяется синтетической моделью или неполным legacy overlay. Конечный список Rs фиксируется после свежей native domain assessment для конкретной revision; границы другого графа не переносятся автоматически.
 
 Результат нужен для решения о порядке поиска L/Rs и причинах ambiguous assignment. Даже отчётливо видимый общий максимум не становится максимумом закреплённого импульса. Для обучения остаётся действующий composite/candidate-window протокол, а scientific Test требует отдельного frozen evaluation с проверенным порогом.
+
+## Дополнительная проверка Console перед N4
+
+Подготовлен NativeBurstReadbackConsoleTest: реальные Classic/Branch stopped N1 package7, для каждого исходный replay, time-matched no-op Rs и Rs×0.75. Штатные production run_job/audit_run_manifest проверяют импорт и полный граф, managed child groups, domain preview, actual inputs, byte-equal warm baseline и неизменность геометрии. Изменённый Rs обязан реально менять выходной потенциал. Это6 настоящих Console probes; их выполнение пока не принято.
+
+Consumer native_pipeline_worker теперь направляет структурированный exit2 probe job7 на полный аудит, как для прежних версий. Сам exit2 и наличие execution.json не становятся valid/PASS; добавлен отдельный отрицательный declaration control. Ранее7/7 относятся к Root1ae882633; новый набор из8 declaration controls ещё требует серверного запуска. Бинарник schema7 остаётся из отдельной сборки Root1ae882633; последующие Python-only проверки не требуют его повторной сборки.
