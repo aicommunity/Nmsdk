@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s10-source-envelope-collect-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "5fda947e4d3bac6d4cebcc33a6e7a41aa372c5e3",
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 32,
+    "maximum_wall_seconds": 900
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 536870912
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/source-envelope-collect-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40SourceEnvelopeCollectA1-20261113/manifest.json",
+      "sha256": "1a1075ce184324558f90bf527af2efb21bebed9b52cf18d6cddfafd43c241896"
+    }
+  }
+}

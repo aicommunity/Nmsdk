@@ -1,0 +1,1 @@
+Actual production manifest3 collector output, complete original 712-member namespace, eighteen job recipes, full restoration before six production primary audits. Compare complete package byte sizes with old format; no numerical/native execution or scientific verdict.

@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s10-source-envelope-bundle-data-m40-a1",
+  "package_fingerprint": "db510d996b3751cbb16569ddd8dd9e32813a5564adb2331b87e06f20e7ac0cc0",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeBundleRecordedTest.test_changed_recipe_is_refused_before_restore_output",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeBundleRecordedTest.test_full_actual_corpus_restores_before_all_six_production_audits",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeBundleRecordedTest.test_manifest3_roles_and_legacy_manifest1_are_validated",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeBundleRecordedTest.test_reference_to_another_recipe_target_is_refused",
+    "Scripts.StructTrain.TimeLearner.tests.test_source_envelope_bundle.SourceEnvelopeBundleRecordedTest.test_unsupported_job_stays_literal_without_losing_bytes"
+  ],
+  "executed_tests": 5,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_SOURCE_ENVELOPE_RECORDED": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs",
+      "files": 216,
+      "fingerprint": "a6b538d8058b65702e27ffc9106816c2525d55c1a660f3178ba90c62bd3fde1c"
+    },
+    "TIMELEARNER_SOURCE_ENVELOPE_RECORDED_CSV": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs",
+      "files": 298,
+      "fingerprint": "8530791053b4ce36fbc51f936d5a0ba638ce6590dc8b89f6c46148590d4e489e"
+    }
+  },
+  "scientific_verdict": null
+}

@@ -1,0 +1,1 @@
+Five actual-file DATA checks: complete six-run source-envelope package, byte-exact namespace restore before six production primary audits, corrupt recipe refusal, literal fallback, dependency-cycle refusal and manifest3/legacy1 role validation. No native calculation or scientific verdict.
