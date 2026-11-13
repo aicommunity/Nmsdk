@@ -36,6 +36,80 @@ Production scorer принял оба native run как completed/valid, все1
 
 Общий acquisition test сохранил ERROR: после записи complete result.json очистка вызвала Reservations.release без note. Это исправлено отдельно; исходный отказ и последующее освобождение exact closed-worker lease сохранены. Эксперименты не повторялись. [Raw условия, обе метрики и сведения об отказе](ValidationPlans/M40DiagnosticThresholdScienceA2-20261113/RESULT.ru.md). Общий10-case SDK cohort также остаётся failed8 upstream fixtures; scoped diagnostic2/2 и DATA5/5 не означают принятия всего SDK.
 
-Полный отчёт строит все8×4 Soma.SumPotential и отдельно actual LTZone.Potential с входами и LT events. Порог относится к LTZone и не рисуется как порог отдельной сомы. Overview/увеличения сохраняют исходные точки; визуальная приёмка и компактная primary публикация пока выполняются. После их завершения сюда будут добавлены проверенные рисунки.
+Полный отчёт строит все8×4 Soma.SumPotential и отдельно actual LTZone.Potential с входами и LT events. Порог относится к LTZone и не рисуется как порог отдельной сомы. Overview/увеличения сохраняют исходные точки. Проверка отчёта на M40 завершилась1/1 PASS (960.086s); scorer повторил исходные метрики без изменения модели. В Git отобраны все32 soma overview,8 LT overview и детали целевого события;2476 PNG и остальные SVG/PDF остаются воспроизводимым кэшем на M40. Просмотрены все8 LT overview, целевой zoom и Soma1 target overview; автоматический контроль всех изображений не подменяет просмотр каждого из32 soma. Полная компактная primary публикация ещё проверяется.
 
 Следующее алгоритмическое действие — [ограниченный приоритет нормализации N1 на измеренной timing-ready геометрии](N1TimingReadyNormalizationFollowup-20261113.ru.md), затем свежая all-input verification. Подбирать новые пороги до исчезновения ошибок этого Test не планируется.
+
+## Реальные реакции на все паттерны
+
+Оранжевая кривая — фактический вход; фиолетовые пунктиры — зарегистрированные LT events. Для каждой строки приведены Soma1 и отдельный LT decision channel; остальные три сомы доступны по ссылкам. Порог нарисован только для LT. Общая Y-шкала сохраняет величину отрицательной обратной реакции после спайка; небольшие положительные ответы на overview сжаты, для количественного визуального анализа нужны увеличения. Полный кэш: `/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-report-m40-a1/worker/tmp/fixed-threshold-eight-pattern-gallery/index.html`. Увеличения имеют >=8px на native tick, без прореживания.
+
+### phasea-row-0: target, TP
+
+![Soma1, паттерн 0](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0000-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0000-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0000-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0000-soma-004/overview.png).
+
+![LT, паттерн 0](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0000-lt-decision/overview.png)
+
+### phasea-row-1: foil, TN
+
+![Soma1, паттерн 1](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0001-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0001-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0001-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0001-soma-004/overview.png).
+
+![LT, паттерн 1](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0001-lt-decision/overview.png)
+
+### phasea-row-2: foil, TN
+
+![Soma1, паттерн 2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0002-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0002-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0002-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0002-soma-004/overview.png).
+
+![LT, паттерн 2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0002-lt-decision/overview.png)
+
+### phasea-row-3: foil, TN
+
+![Soma1, паттерн 3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0003-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0003-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0003-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0003-soma-004/overview.png).
+
+![LT, паттерн 3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0003-lt-decision/overview.png)
+
+### phasea-row-4: foil, FP
+
+![Soma1, паттерн 4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0004-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0004-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0004-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0004-soma-004/overview.png).
+
+![LT, паттерн 4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0004-lt-decision/overview.png)
+
+### phasea-row-5: foil, FP
+
+![Soma1, паттерн 5](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0005-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0005-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0005-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0005-soma-004/overview.png).
+
+![LT, паттерн 5](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0005-lt-decision/overview.png)
+
+### phasea-row-6: foil, TN
+
+![Soma1, паттерн 6](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0006-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0006-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0006-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0006-soma-004/overview.png).
+
+![LT, паттерн 6](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0006-lt-decision/overview.png)
+
+### phasea-row-7: foil, TN
+
+![Soma1, паттерн 7](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0007-soma-001/overview.png)
+
+[Сома2](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0007-soma-002/overview.png), [Сома3](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0007-soma-003/overview.png), [Сома4](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0007-soma-004/overview.png).
+
+![LT, паттерн 7](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0007-lt-decision/overview.png)
+
+### Деталь раннего целевого ответа
+
+![Целевой LT event 0.2645s](ValidationPlans/M40DiagnosticThresholdReportA1-20261113/selected-plots/trial-0000-lt-decision/zoom-006.png)
+
+В интервале0.25–0.30s видны третий вход, LT event и последующая отрицательная динамика. Четвёртый вход будет только в0.49s; этот график подтверждает ограничение интерпретации раннего TP.

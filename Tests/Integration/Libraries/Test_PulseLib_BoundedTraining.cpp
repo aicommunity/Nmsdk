@@ -1293,6 +1293,63 @@ ResistanceDomainAssessment FairDomain(const TrainingAction& action,double low=1.
     return result;
 }
 
+TEST(BoundedTrainingN1LocalTurn, TimingReadyAmplitudeMissTriesAnotherRsBeforeOtherLengthsWithoutStarvingThem)
+{
+    for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const bool losesTiming:{false,true})
+    {
+        const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.bounds={{2,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
+        cfg.maximumCandidatesPerInput=12;cfg.resistanceSubdivisionDepth=8;
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true);
+        std::map<int,int> assessments;
+        DriveTraining(session,p,[&](const auto& a,auto& delay,auto& raw) {
+            delay[0]=losesTiming && a.parameters[0].resistance!=10.?.03:.13;
+            raw[0]+=.001; // No legal candidate is normalized; never invent Exact.
+        },[&](const auto& a) {
+            const auto visit=++assessments[a.parameters[0].length];
+            // The local turn must reassess; its first interval is stale now.
+            return FairDomain(a,visit==1?1.:2.,100.);
+        });
+        const auto& measured=session.Evidence();ASSERT_GE(measured.size(),5u);
+        EXPECT_EQ(measured[0].parameters,(InputParameters{2,1,10.}));
+        EXPECT_EQ(measured[1].parameters,(InputParameters{2,1,10.}));
+        EXPECT_EQ(measured[2].parameters,(InputParameters{2,1,2.}));
+        EXPECT_EQ(measured[3].parameters.length,3);
+        EXPECT_NE(measured[1].anchorTrialId,measured[2].anchorTrialId);
+        EXPECT_NE(measured[1].modelRevision,measured[2].modelRevision);
+        EXPECT_GT(assessments[2],1);
+        EXPECT_TRUE(std::any_of(measured.begin(),measured.end(),[](const auto& e){return e.parameters.length==4;}));
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+        EXPECT_LE(session.AppliedEdits(),cfg.maximumEdits);
+        EXPECT_EQ(session.Parameters()[1],(InputParameters{1,1,10.}));
+        EXPECT_FALSE(session.Status()==TrainingStatus::Exact);
+    }
+}
+
+TEST(BoundedTrainingN1LocalTurn, SingletonDomainYieldsAndGlobalProbeBudgetStillStopsTheLocalTurn)
+{
+    for(const bool singleton:{false,true})
+    {
+        const auto p=Protocol();auto cfg=Configuration(2,Normalization::TipResistance);
+        cfg.bounds={{2,4,1,1,1.,100.},{1,1,1,1,10.,10.}};
+        cfg.maximumProbes=singleton?12:4;
+        BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true);
+        DriveTraining(session,p,[](const auto&,auto& delay,auto& raw){delay[0]=.13;raw[0]+=.001;},
+            [&](const auto& a){return FairDomain(a,singleton?10.:1.,singleton?10.:100.);});
+        EXPECT_EQ(session.Status(),TrainingStatus::BudgetExhausted);
+        EXPECT_LE(session.IssuedProbes(),cfg.maximumProbes);
+        if(singleton)
+            EXPECT_TRUE(std::any_of(session.Evidence().begin(),session.Evidence().end(),
+                [](const auto& e){return e.parameters.length==4;}));
+        else {
+            EXPECT_EQ(session.IssuedProbes(),4u);EXPECT_EQ(session.Evidence().size(),2u);
+            EXPECT_FALSE(session.Certificate());
+        }
+    }
+}
+
 TEST(BoundedTrainingFairDomains,ValidMeasurementsVisitGeometriesIndependentlyOfRecovery)
 {
     for(const auto policy:{InvalidMeasurementRecovery::RetrySameCandidate,InvalidMeasurementRecovery::AdvanceUnassignedBurst})

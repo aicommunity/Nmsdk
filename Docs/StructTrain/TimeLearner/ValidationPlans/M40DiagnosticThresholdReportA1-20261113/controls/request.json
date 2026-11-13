@@ -1,0 +1,35 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-diagnostic-threshold-report-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "29ed8764aa6fa98cf7d05e8334377348d4ca7b9a",
+  "limits": {
+    "memory_bytes": 8589934592,
+    "tasks": 32,
+    "maximum_wall_seconds": 7200
+  },
+  "disk": {
+    "minimum_free_bytes": 17179869184,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/media/user/Data/TimeLearnerRefactor/source-threshold-scientific-report-a2",
+      "commit": "449019ebbc02c2162ee9f737b13a9034770162fe"
+    },
+    "suite": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/diagnostic-threshold-report-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40DiagnosticThresholdReportA1-20261113/suite.json",
+      "sha256": "9381820814b22e247bc694e90e3715588ecab1b5c39603cbd55506a7fbe61265"
+    },
+    "fixtures": {
+      "TIMELEARNER_THRESHOLD_COMPLETED_STUDY": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-science-m40-a2/worker/tmp/same-matrix-stopped-threshold-study"
+    },
+    "fixture_byte_limits": {
+      "maximum_file_bytes": 536870912,
+      "maximum_total_bytes": 8589934592
+    }
+  }
+}
