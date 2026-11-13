@@ -6,7 +6,7 @@
 
 | Отчёт | Основной результат | Что нельзя из него заключать |
 |---|---|---|
-|[Branch N1: локально выполнены оба допуска](N1CoupledScientificReport-20261113.ru.md)|Один реально измеренный input2 candidate timing+amplitude-ready; затем5 ambiguous rejections input1. Полный primary24.11MB и4 просмотренных temporal originals.|Общего сертификата/all-input verification нет; terminal vector отличается от локально успешного. Frozen8pattern diagnostic выполняется.|
+|[Branch N1: локально выполнены оба допуска](N1CoupledScientificReport-20261113.ru.md)|Один реально измеренный input2 candidate timing+amplitude-ready; затем5 ambiguous rejections input1. Полный primary24.11MB и4 просмотренных temporal originals.|Общего сертификата/all-input verification нет; terminal vector отличается от локально успешного. Frozen8pattern diagnostic принят: TP0/FP0/FN1/TN7 при100, модель неизменна. Fixed-threshold spiking опыт выполняется.|
 |[Branch N1: измеренный интервал нормализации](N1LocalTurnScientificReport-20261113.ru.md)|Same-budget холодное обучение завершено completed/valid, но BudgetExhausted. На одной геометрии Rs86M/2.880071555M дают opposite amplitude residuals при timing-valid. Есть четыре просмотренных временных графика с полными пачками, actual inputs и omission controls.|Bracket не является сходимостью. Ни один consumed candidate не удовлетворяет обоим допускам; классификация не измерялась.|
 |[Classic: фактический fixed-threshold опыт на8 паттернах](ActualThresholdScientificReport-20261113.ru.md)|TP1/FP2/FN0/TN5 при заранее выбранном пороге0.013048873000159292. Реальные спайки и полные окна; report1/1, выбранные Soma/LT figures, полная32-soma/8-LT gallery.|Target event0.2645s раньше последнего входа0.49s. Partial6/8 Same-Matrix остановленной модели не является детекцией завершённого паттерна или независимым Test.|
 |[Branch: coherent shared-bank Rs intervention](BranchSharedBankScientificReport-20261113.ru.md)|Общий максимум Soma1 растёт примерно4.10× при86M→21.5M; replay/source/clocks/inputs проверены, три originals просмотрены.|Глобальный максимум не заменяет максимум закреплённого импульса. Assigned certificate/классификация не получены.|
@@ -20,7 +20,7 @@
 
 ## Что выполняется сейчас
 
-[Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/STATUS.ru.md) фактического terminal state выполняется отдельно.
+[Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md) фактического terminal state принят1/1,8полных observations, модель неизменна. При100 все молчат. [Один Same-Matrix threshold](ValidationPlans/M40N1CoupledThresholdA1-20261113/STATUS.ru.md) проверяется настоящими спайками.
 
 [SDK A4 принята93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md), native/outer groups закрыты. Source root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8; runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Положительный SDK verdict не является научной сходимостью и не закрывает полную physical matrix.
 
