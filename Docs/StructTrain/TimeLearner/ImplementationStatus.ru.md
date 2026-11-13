@@ -20,7 +20,7 @@
 
 ## Последний завершённый Train и текущая разработка
 
-Пути на M40 относятся к /media/user/Data/TimeLearnerRefactor/readbacks. Последний native Train и внешние проверки завершены. Новый Train не запущен. Готовится адресная серверная проверка [native-search-history CLI](TrainingSearchHistoryReport.ru.md); её успешность пока не заявляется.
+Пути на M40 относятся к /media/user/Data/TimeLearnerRefactor/readbacks. Последний native Train и внешние проверки завершены. Новый Train не запущен. [Native-search-history CLI](TrainingSearchHistoryReport.ru.md): [7/7 unit controls приняты на Elder](ValidationPlans/ElderNativeSearchHistoryA1-20261113/RESULT.ru.md); [M407+1 с полным исходным corpus выполняется](ValidationPlans/M40NativeSearchHistoryA1-20261113/STATUS.ru.md), его успешность пока не заявляется.
 
 | Job | Задача | Подтверждённый handle |
 |---|---|---|
