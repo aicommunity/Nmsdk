@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-l22-burst-resistance-study-m40-a1",
+  "package_fingerprint": "f5f3d4a33d2d6e3edd026b5e2c76e3bbf36b7514936181222f5d04e04b0c1248",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model"
+  ],
+  "fixtures": {
+    "TIMELEARNER_BURST_STUDY_SOURCE": {
+      "pattern": "train_stopped_s*.json",
+      "files": 2,
+      "fingerprint": "05b9903a40737109a13a5d512a9bcfb96d8a8753621c3abd04058ed7a0fca9eb"
+    },
+    "TIMELEARNER_BURST_STUDY_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "ea193e4f41ce2d4c51e423879108d303aa61e13bb866e98666c4a7b7f43d3be7"
+    },
+    "TIMELEARNER_BURST_STUDY_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "61e1b1eb833b14343680a2e5afb50acaef8794854324ede1337497ad5f57714c"
+    }
+  }
+}

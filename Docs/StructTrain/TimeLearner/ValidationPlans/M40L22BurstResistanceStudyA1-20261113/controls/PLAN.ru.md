@@ -1,0 +1,1 @@
+Actual frozen L22 model: replay, matched86, changed64.5/43/21.5MOhm; native per-revision domain check before each edit. Full target burst, all Soma waveforms with actual input overlays and <=901-sample details. No Train, peak assignment or classification verdict. Technical pass only means completed declared diagnostic.

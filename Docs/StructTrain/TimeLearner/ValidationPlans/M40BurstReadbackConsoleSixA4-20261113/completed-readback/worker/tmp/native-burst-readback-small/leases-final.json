@@ -1,0 +1,220 @@
+{
+  "kind": "timelearner_worker_resource_reservations",
+  "schema_version": 3,
+  "worker_host": "M40",
+  "leases": [
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "job_id": "burst-console-six-native-probes",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 3462973,
+        "start_ticks": "362876139",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs"
+        }
+      ],
+      "state": "released",
+      "created": 1794553575.843626,
+      "deadline": 1794557358.0910058,
+      "updated": 1794553785.9235704,
+      "release_note": "All managed Console probe groups closed; no training verdict.",
+      "demands": {
+        "disk_bytes": 1073741824,
+        "memory_bytes": 4294967296,
+        "slots": 1,
+        "tasks": 256
+      },
+      "controller": {
+        "binding": {
+          "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-bd72b1d1-90ec-48ea-9fd0-5bb3cdeb5f43.service",
+          "initial_main_pid": 3462973,
+          "initial_start_ticks": "362876139",
+          "invocation_id": "5f5000b135394e5b88acd8078d8dcb9d",
+          "kind": "timelearner_contained_binding",
+          "request_sha256": "07a2f53b2a2cc0887087875e89e881b6e2ca43d0bda228e0bfc66bcccea68d2d",
+          "schema_version": 1,
+          "sha256": "581088c86498ebe97be0c10f3bb6c041a63434232cd04b3b156a0ca545806f0f",
+          "unit": "timelearner-bd72b1d1-90ec-48ea-9fd0-5bb3cdeb5f43.service"
+        },
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/process/contained",
+        "memory_bytes": 3221225472,
+        "tasks": 128
+      },
+      "heartbeat_expired": false,
+      "owner_status": "identity_live",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ],
+  "automatic_release_on_expiry": false,
+  "execution_attested": false,
+  "scientific_verdict": null,
+  "managed_unit_intents": [
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "0ccd99a7-a43b-409b-b5c6-f8239bbdd791",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs/Classic-changed/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3462973,
+          "start_ticks": "362876139",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "120daaab88d9b14be307d97f4a744f0177a29e61620b0fb2997d4ef06d0ed207",
+        "tasks": 64,
+        "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+        "unit": "timelearner-0ccd99a7-a43b-409b-b5c6-f8239bbdd791.service"
+      }
+    },
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "69db7262-9e9f-475e-8c8a-9e1ba6e699c4",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs/Classic-matched/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3462973,
+          "start_ticks": "362876139",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "f52d28fe8e7dcb764e4aadb2c1f1b932a0b04d23f5ffb4c7dca9a5f55e4a111a",
+        "tasks": 64,
+        "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+        "unit": "timelearner-69db7262-9e9f-475e-8c8a-9e1ba6e699c4.service"
+      }
+    },
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "76cafd8f-649d-41d2-8879-d5b75914452b",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs/Branch-replay/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3462973,
+          "start_ticks": "362876139",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "8531d1a660bb9956585beb0b94b3d07d7ea46c10faa44683c119fcc031b958d6",
+        "tasks": 64,
+        "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+        "unit": "timelearner-76cafd8f-649d-41d2-8879-d5b75914452b.service"
+      }
+    },
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "82858717-7113-4e66-9ffb-83a5b2ff4457",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs/Classic-replay/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3462973,
+          "start_ticks": "362876139",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "93deecc60ff24bf206004bcd878348fd43a4dd9dac2828c1d350c82d55057362",
+        "tasks": 64,
+        "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+        "unit": "timelearner-82858717-7113-4e66-9ffb-83a5b2ff4457.service"
+      }
+    },
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "8ab0848e-5be3-49c4-98bf-b8458c283358",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs/Branch-matched/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3462973,
+          "start_ticks": "362876139",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "5b05087bc247d34acb193ea5848c555d4bdab6496e628028dac82b2fe0fdea35",
+        "tasks": 64,
+        "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+        "unit": "timelearner-8ab0848e-5be3-49c4-98bf-b8458c283358.service"
+      }
+    },
+    {
+      "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+      "state": "bound",
+      "intent": {
+        "attempt_id": "e1d47dcb-e5ee-417e-a91e-c2a47a342a04",
+        "directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-burst-readback-console-six-m40-a4/worker/tmp/native-burst-readback-small/runs/Branch-changed/process/contained",
+        "kind": "timelearner_managed_unit_intent",
+        "maximum_wall_seconds": 180.0,
+        "memory_bytes": 1073741824,
+        "owner": {
+          "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+          "executable": "/usr/bin/python3.12",
+          "pid": 3462973,
+          "start_ticks": "362876139",
+          "uid": 1000
+        },
+        "schema_version": 1,
+        "sha256": "c2677b1a7471c4ee4b254b5bbdc1fb592c0a67e84389e17a6267135e76fc5a67",
+        "tasks": 64,
+        "token": "da7f0df2-e6da-4599-b710-f48836acedc3",
+        "unit": "timelearner-e1d47dcb-e5ee-417e-a91e-c2a47a342a04.service"
+      }
+    }
+  ],
+  "managed_unit_states_are_declarations": true,
+  "capacity": {
+    "slots": 1,
+    "memory_bytes": 5368709120,
+    "disk_bytes": 2147483648,
+    "tasks": 512
+  },
+  "reserved": {
+    "slots": 0,
+    "memory_bytes": 0,
+    "disk_bytes": 0,
+    "tasks": 0
+  },
+  "available": {
+    "slots": 1,
+    "memory_bytes": 5368709120,
+    "disk_bytes": 2147483648,
+    "tasks": 512
+  },
+  "disk_device": 2048,
+  "os_resource_limits_enforced": false
+}

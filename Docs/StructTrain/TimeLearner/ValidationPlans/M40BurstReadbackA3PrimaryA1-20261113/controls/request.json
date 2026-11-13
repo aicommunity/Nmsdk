@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-burst-readback-a3-primary-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "limits": {
+    "memory_bytes": 1073741824,
+    "tasks": 32,
+    "maximum_wall_seconds": 600
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 268435456
+  },
+  "operation": {
+    "kind": "closed-primary-bundle",
+    "manifest": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/burst-readback-a3-primary-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BurstReadbackA3PrimaryA1-20261113/manifest.json",
+      "sha256": "bf84b82113bcfb20096dc4789a6f653def4fbb295bbd29fc8f6b60c51f4bb087"
+    }
+  }
+}

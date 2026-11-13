@@ -1,0 +1,44 @@
+{
+  "kind": "native_burst_readback_console_acceptance",
+  "schema_version": 1,
+  "cases": [
+    {
+      "name": "Classic",
+      "branch": false,
+      "source_revision": "196629d47d609a02da108f8837c1eaadb0224f64a41e3d371e9c73dca6d81f86",
+      "changed_revision": "3c301b34ef56795fa2501fb18f6ca6fb2ffd3fe1d4527ef9405df740e21c1787",
+      "bank_owners": [
+        0
+      ],
+      "matched_inputs": {
+        "absolute_sample_times_equal": true,
+        "windows_equal": true,
+        "actual_stimulus_rows_and_events_equal": true
+      },
+      "maximum_potential_difference": 0.0012052388484419252,
+      "training_executed": false,
+      "assigned_peak_measured": false,
+      "scientific_verdict": null
+    },
+    {
+      "name": "Branch",
+      "branch": true,
+      "source_revision": "73df38db84bddf260c9c985f1568cffc9f7b8d807e4f7ffb52e7d0ce0a66f707",
+      "changed_revision": "0cdf19ec0e22e2d73c1146534d0afbb46dd2352137c56ff1cc2d87870da1c162",
+      "bank_owners": [
+        0
+      ],
+      "matched_inputs": {
+        "absolute_sample_times_equal": true,
+        "windows_equal": true,
+        "actual_stimulus_rows_and_events_equal": true
+      },
+      "maximum_potential_difference": 0.0012052388484419252,
+      "training_executed": false,
+      "assigned_peak_measured": false,
+      "scientific_verdict": null
+    }
+  ],
+  "native_probes": 6,
+  "scientific_verdict": null
+}
