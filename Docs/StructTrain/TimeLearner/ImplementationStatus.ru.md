@@ -48,7 +48,7 @@
 
 ## Текущая подготовка Rs-диагностики
 
-[Full native burst readback](NativeBurstReadback.ru.md) добавлен в Root1ae882633: все импульсы, без выбора пика; Rs edit только после настоящей baseline и свежего native domain assessment. [Elder:7/7 декларационных проверок приняты](ValidationPlans/ElderNativeBurstReadbackA1-20261113/RESULT.ru.md). [M40:canonical4173 files принят, отдельная fresh сборка и9 native checks выполняются](ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/STATUS.ru.md). Новая C++ ветка и реальные Rs probes ещё не приняты; новый Train не запущен.
+[Full native burst readback](NativeBurstReadback.ru.md) добавлен в Root1ae882633: все импульсы, без выбора пика; Rs edit только после настоящей baseline и свежего native domain assessment. [Сборка Root1ae882633 и9/9 native checks завершены](ValidationPlans/M40NativeBurstReadbackSdkA1-20261113/STATUS.ru.md), но [первая Console-проба отказала до наблюдения](ValidationPlans/M40BurstReadbackConsoleSixA1-20261113/RESULT.ru.md): monitor запрашивал finished summary после штатного Reset в Idle. Исправление Root49689590c отделяет idle readback; [13/13 DATA/declaration проверок Elder приняты](ValidationPlans/ElderIdleProbeReadbackA1-20261113/RESULT.ru.md). [Свежая сборка исправленного Console выполняется](ValidationPlans/M40IdleProbeReadbackSdkA2-20261113/STATUS.ru.md); затем нужны реальные шесть Console probes и N4 fixed-geometry Rs study. Ограниченный study runner с графиками всех сом подготовлен в Rootc67839384, но ещё не прошёл серверный запуск. Новый Train не запущен; приёмка полного этапа7 и научная сходимость не заявляются.
 
 ## Следующий критерий решения
 

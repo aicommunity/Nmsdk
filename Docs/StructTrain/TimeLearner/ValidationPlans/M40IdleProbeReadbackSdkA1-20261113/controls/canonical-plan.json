@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_native_canonical_preparation",
+  "schema_version": 1,
+  "workspace": "/media/user/Data/TimeLearnerRefactor",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-idle-probe-readback-sdk-a1",
+    "commit": "49689590cbdc0bbe5abccfb91374ad716f0ff977",
+    "namespace": {
+      "path": "/media/user/Data/TimeLearnerRefactor/requests/idle-probe-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40IdleProbeReadbackSdkA1-20261113/namespace.json",
+      "sha256": "f97085f5e0215712140e0914eec534e8b3499191a858be170b3da4a77ae13f8f"
+    }
+  },
+  "cohort": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/idle-probe-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40IdleProbeReadbackSdkA1-20261113/cohort.json",
+    "sha256": "0767e3496f46d42f12eb8975e7192b7a84a53ca4117d00d7b41a239fb7851756"
+  },
+  "native_job": {
+    "path": "/media/user/Data/TimeLearnerRefactor/requests/idle-probe-readback-sdk-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40IdleProbeReadbackSdkA1-20261113/native-job.json",
+    "sha256": "57fcfcabda779bb6dc829fac8d3cc636a5d17db29a4ae56d8ad50087b457cca9"
+  },
+  "prior_bindings": [],
+  "external_output": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-idle-probe-readback-sdk-prepared-m40-a1",
+  "native_tool": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-n1-baseline-primary-reader-a1",
+    "commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf"
+  },
+  "require_fresh_build": true
+}
