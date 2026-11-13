@@ -44,7 +44,10 @@ class BranchFullDomainReportTest(unittest.TestCase):
         complete = [i for i, record in enumerate(records, 1) if record['complete_group']
                     and record['method_specification']['candidate_frame'] is not None]
         self.assertTrue(complete)
-        rejected = [i for i in complete if records[i-1]['rejection_reason'] is not None]
+        # The native schema uses an empty string for an accepted observation.
+        rejected = [i for i in complete if bool(records[i-1]['rejection_reason'])]
+        if not analysis['recorded_rejections']:
+            self.assertEqual(rejected, [], 'empty rejection reasons must not become rejected groups')
         selected = sorted(set([complete[0], complete[-1]] +
                               ([rejected[0], rejected[-1]] if rejected else [])))
         output = Path(os.environ['TMPDIR'])/'Branch-full-domain-scientific-report'
