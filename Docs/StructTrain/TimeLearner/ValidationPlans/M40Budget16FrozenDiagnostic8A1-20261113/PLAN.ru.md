@@ -1,0 +1,11 @@
+# Восемь frozen diagnostic ответов реального budget16 состояния
+
+Используется точная модель последнего Classic N4/N1 Train, исходный outcome=budget_exhausted, certificate=null, revision89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b, package SHA a9e324275cf35781f058169d4287d55a2fd5aa6bf585095c393fd294103e1c48. Исходный native запуск timeout2100.32s не переименовывается в успешный; отсутствующий execution не достраивается.
+
+Прежний native_data_checks schema2 и recorded_diagnostic_matrix, без нового launcher/адаптера. Новый SDK Root92ad/Pulsedfb собран Release/O3,7/7 адресных cases приняты, outer и1 child closed, lease released. Runtime manifest закреплён raw. Tool7bd, Git producer входов160e27c9af41db8216041cc67c8a5302feb6e94c.
+
+Оригинальный276102071B state сохранён в исходном lossless corpus. Для прежнего qCompress reader компактно сериализовано то же JSON-дерево224601694B: равенство parsed tree, прежние model/package hashes, новый raw SHA явно указаны в SERIALIZATION.json. qz38794216B, job253090829B; прежние лимиты64MiB packed/256MiB uncompressed и Console256MiB сохранены. Это преобразование представления, не изменение параметров или восстановление недостающих результатов.
+
+Все8 исторических PhaseA паттернов (Git Bin1c1464e248f8744e858bd66df0be99e39969fd65),1 target/7 foils,2s полные окна, reset_per_trial, фактические inputs, все somas. Whole-pattern Test maximum, не assigned training windows. Identity conversion, унаследованный threshold100, без обучения/калибровки/PostTune/C-trim. Model hash до/после каждой пробы обязан совпасть. Silent target не считается успехом по7 true negatives. Оценка только diagnostic; не independent frozen benchmark и не воспроизведение августовского протокола.
+
+Controller4GiB/64tasks/7200s, native8GiB/128tasks/3600s, reservation12GiB, output8GiB/floor2GiB. Сначала admission/strict source audit, потом actual import и8 проб. При отказе не подменять модель и не менять порог. Затем отчёт со временными графиками каждой soma на каждый паттерн и наложенными actual inputs; полный масштаб и zoom для визуального анализа. Большой отчёт — кэш M40, Root Git — сжатые primary/models/metrics и выбранные рисунки. Проверка package/model provenance и реального ответа не доказывает сходимость или полную готовность плана.

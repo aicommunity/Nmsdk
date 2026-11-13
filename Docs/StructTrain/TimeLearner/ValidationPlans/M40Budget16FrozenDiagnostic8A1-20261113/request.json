@@ -1,0 +1,70 @@
+{
+  "kind": "timelearner_native_data_checks",
+  "schema_version": 2,
+  "job_id": "s11-budget16-frozen-diagnostic8-m40-a1",
+  "worker_host": "M40",
+  "execution_root": "/media/user/Data/TimeLearnerRefactor",
+  "tool_commit": "7bd3684732e1d3f7a0aa038d659fd52bc95892bf",
+  "source": {
+    "path": "/media/user/Data/TimeLearnerRefactor/source-publication-receipt-sdk-a1",
+    "commit": "92ad93cdf453967ac29108a9bbef5fd3905da59d"
+  },
+  "runtime_manifest": {
+    "path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1/runtime.json",
+    "sha256": "9c8eb891dfc68715b0872749b288f15e97dfda5f53f0deae4b4b9dae1b20854c"
+  },
+  "inputs": [
+    {
+      "name": "phasea.xml",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1/inputs/phasea.xml",
+      "bytes": 816326,
+      "sha256": "03dac589830d57d4a40e29b526f4126387a20461e221ce4e33d7e001679a62ff"
+    },
+    {
+      "name": "phasea.csv",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1/inputs/phasea.csv",
+      "bytes": 878,
+      "sha256": "ae21460b33e9ebb7feda72c80ad6b726459630873f8075e9f3664fc749a12e66"
+    },
+    {
+      "name": "classic.qz",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1/inputs/classic.qz",
+      "bytes": 38794216,
+      "sha256": "6a46b9549fd0693879c6a36c5ad0f2a54ebd47b421a7ce5d442ea8457a7b3ce1"
+    },
+    {
+      "name": "classic-summary.json",
+      "path": "/media/user/Data/TimeLearnerRefactor/publications/data-sdk-budget16-diagnostic-inputs-a1/inputs/classic-summary.json",
+      "bytes": 21412671,
+      "sha256": "ae468c0239a834c7a38db2abfcd2fa43d6e64db034dab1e03edf28e87aed708a"
+    }
+  ],
+  "cases": [
+    {
+      "name": "classic",
+      "source_name": "classic.qz",
+      "summary_name": "classic-summary.json",
+      "source_raw_bytes": 224601694,
+      "source_raw_sha256": "aaa2e50c756030aaa9b7f0865a26ab759cd36c41ed2ac40396fe81415e5455c9"
+    }
+  ],
+  "limits": {
+    "memory_bytes": 4294967296,
+    "tasks": 64,
+    "maximum_wall_seconds": 7200,
+    "leaf_memory_bytes": 8589934592,
+    "leaf_tasks": 128,
+    "leaf_wall_seconds": 3600,
+    "reservation_memory_bytes": 12884901888
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 8589934592
+  },
+  "operation": "diagnostic-evaluate",
+  "matrix": {
+    "parameters_name": "phasea.xml",
+    "observations_name": "phasea.csv",
+    "revision": "1c1464e248f8744e858bd66df0be99e39969fd65"
+  }
+}
