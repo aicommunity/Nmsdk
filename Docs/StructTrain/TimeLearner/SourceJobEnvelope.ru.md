@@ -21,3 +21,7 @@ closed_primary_bundle manifest3 добавляет только source_envelopes
 Пакетный путь принят в узкой области фактического A4 corpus: [5/5 DATA checks](ValidationPlans/M40SourceEnvelopeBundleA1-20261113/RESULT.ru.md), [штатный manifest3 collector](ValidationPlans/M40SourceEnvelopeCollectA1-20261113/RESULT.ru.md), [actual produced package restore и шесть primary audits](ValidationPlans/M40SourceEnvelopeProducedA1-20261113/RESULT.ru.md). Большой N4 corpus этим не проверен. Для N4 пока не обещано внешнее Git source reuse: пакет хранит один literal source внутри себя. Вынос уже опубликованного source в проверяемую Git dependency остаётся отдельным шагом. Работающий эксперимент не переключается на новый формат.
 
 [Независимый Elder Git-only restore](ValidationPlans/ElderSourceEnvelopeGitReplayA2-20261113/RESULT.ru.md) также принят: исходные bytes706 files/18 jobs восстановлены из опубликованного формата перед шестью production primary audits. Проверка относится к N2 corpus; large-file N4 и научный verdict не заявлены.
+
+## Большой N4 corpus
+
+[Actual L22 package48.78MB](ValidationPlans/M40L22PrimaryEnvelopeA1-20261113/RESULT.ru.md) сохраняет6.66GB logical original bytes. [M40 full restore1/1 за351.980s](ValidationPlans/M40L22PrimaryRestoreA1-20261113/RESULT.ru.md):15 exact jobs, исходный composite source audit и5 native primary audits после восстановления. Данный large-file путь теперь проверен в этой конкретной области; independent-host N4 replay, внешнее Git source reuse и научный verdict не заявлены.
