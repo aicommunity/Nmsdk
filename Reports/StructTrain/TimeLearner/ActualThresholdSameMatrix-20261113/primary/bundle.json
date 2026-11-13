@@ -1,0 +1,3588 @@
+{
+  "kind": "timelearner_source_enveloped_primary",
+  "schema_version": 1,
+  "members": {
+    "study/jobs/baseline100.json": {
+      "bytes": 253090901,
+      "sha256": "1853e9ab526c8ccaa0afbfd8115c7be6b3212a5250181d266538023fc5306c27"
+    },
+    "study/jobs/candidate.json": {
+      "bytes": 253090931,
+      "sha256": "184de6190184dd6338d6e6103cd8ec6bf22ce8f3125d657ec1938f9a3f90f7a8"
+    },
+    "study/leases.sqlite3": {
+      "bytes": 49152,
+      "sha256": "eb2c984fbafeff11ac61a82b4585d79ba85cb8a01e1949fda2c3e6de7e565133"
+    },
+    "study/proposal.json": {
+      "bytes": 5611,
+      "sha256": "0024b9a950132fb6a58d9abc14683712d0885b62cd9ef0e0c62514cc9fb2afb2"
+    },
+    "study/result.json": {
+      "bytes": 216220,
+      "sha256": "a3ddb6d9a9c0e3f66d59530bd6e2d97879bfdd9f9e7883ee6d522d9fe9b1ba82"
+    },
+    "study/runs/baseline100/input/job.json": {
+      "bytes": 253090901,
+      "sha256": "1853e9ab526c8ccaa0afbfd8115c7be6b3212a5250181d266538023fc5306c27"
+    },
+    "study/runs/baseline100/input/process-policy.json": {
+      "bytes": 552,
+      "sha256": "cb2bf005f6f83eeaea281ed0a8d4f748df37036c5b4e9ab1cbcaffb1b802dd40"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000001/full-after.csv": {
+      "bytes": 389997,
+      "sha256": "a946f68cf573b695e07de7d961c7810cdda1a6bcfacb7249fac6648aa7e5eb8d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000001/full-before.csv": {
+      "bytes": 390316,
+      "sha256": "1fdf97cd5ae82864f607aa31e9303204380fc8f43fac602e6e44f1a1521cb62d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000001/omit-0.csv": {
+      "bytes": 377681,
+      "sha256": "f3f51b996abda508dc73c429cfa88080559ee3a0aae9c096906b476032a49764"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000001/omit-1.csv": {
+      "bytes": 396011,
+      "sha256": "2556ef0adeef375baa9916ab88adb14a9bcd89e9e09cc3317e613faeeb823c34"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000001/omit-2.csv": {
+      "bytes": 397210,
+      "sha256": "03be17f22445ba0264543ca2602346a20248cdfa4a28893b0d635a55ceaae769"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000001/omit-3.csv": {
+      "bytes": 398988,
+      "sha256": "8732dd132ee2e7d6f30b88342795ead7cc497c628dc265b87408bfedf5761790"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000002/full-after.csv": {
+      "bytes": 390246,
+      "sha256": "89a6d9825ee91d0d289cc4908c22b34773abd94dbb1e9d0cf929b8df1929ce30"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000002/full-before.csv": {
+      "bytes": 378275,
+      "sha256": "2a92a6f07b886c49941015d5132f52f6aaac531144ce3afbffbb8840cd882ba8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000002/omit-0.csv": {
+      "bytes": 365614,
+      "sha256": "317a5ddb768f0f2dbc984777ddbe2fd9e8d8863b6d157472f89be0b067b823ef"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000002/omit-1.csv": {
+      "bytes": 380302,
+      "sha256": "b211b50f76160c948f15f07f14fbb09459bea9b07e3936a5a70d0dead15420f5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000002/omit-2.csv": {
+      "bytes": 390965,
+      "sha256": "1ae1a6c6d33705480e38d3760ab0480f1a3dbd84f6068fd5125d405d029917dd"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000002/omit-3.csv": {
+      "bytes": 391175,
+      "sha256": "78c11866706ffc6b223a3270901e06d6dc3194cdd77209b143187ca88be552e3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000003/full-after.csv": {
+      "bytes": 391657,
+      "sha256": "e8ac88c864247597dd6c29fe4a38b305076be294a54f953e4af5a5bc96cf44d3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000003/full-before.csv": {
+      "bytes": 390294,
+      "sha256": "832e6eb9a9533a576cd12d77976e802936506ff7a5b991f3535388182c4c2e2e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000003/omit-0.csv": {
+      "bytes": 377624,
+      "sha256": "5a6e409b1eb016936ff723fc6a36f3ae8e0867b45743d031e2f9484495be72ac"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000003/omit-1.csv": {
+      "bytes": 390881,
+      "sha256": "bb2722ff6605efe120bd10128bc66e71eaa4f1c67f20dc7df9dd9b9fdbe7ff34"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000003/omit-2.csv": {
+      "bytes": 391003,
+      "sha256": "48ee8195d43ccba31d11ef3256ddcb63ddaa96051aeb57c686e0207b21e32ad2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000003/omit-3.csv": {
+      "bytes": 391149,
+      "sha256": "85f7cafea43cb9cc7710bda14f71b44d3617e60ef5b5e4ab24c678adda8094a3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000004/full-after.csv": {
+      "bytes": 396232,
+      "sha256": "0ce3a06011a21148000e66326ef6517a9d29d5f5deda23a287d0f5de6cb9d335"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000004/full-before.csv": {
+      "bytes": 396232,
+      "sha256": "ad0177e5830a7a6304baff40f0829a879cf36edf3e13d138970cf896f88de578"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000004/omit-0.csv": {
+      "bytes": 383575,
+      "sha256": "bf004d302a8c56c8b9b715f3e3d723a39e643bcb8f532c4675176bb5dc7e3b28"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000004/omit-1.csv": {
+      "bytes": 396951,
+      "sha256": "d4b3fadccb58483ab6197f5b635dcb9a6bac18638fa056891cd3c00231a5954b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000004/omit-2.csv": {
+      "bytes": 397032,
+      "sha256": "3a8ba1486739c7c029888303106edc3eef9267bcc1c92b75248ca011eacc7a44"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000004/omit-3.csv": {
+      "bytes": 397113,
+      "sha256": "3841e78e51a9a7bdf4a52ed8dc345687d7a853635cf07b618114f95ab0445ca2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000005/full-after.csv": {
+      "bytes": 396231,
+      "sha256": "8cca0afbe33b5ed28abbdd3746c4379b83f4ca4c15dc305ea2c2bb23db9cbeca"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000005/full-before.csv": {
+      "bytes": 396231,
+      "sha256": "39042a501c79178696623d9621eb92471b1ce47771c17679e10dc6c626aa4d6e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000005/omit-0.csv": {
+      "bytes": 383648,
+      "sha256": "71170b4df83f9b94d20d5c24bf0a742492daa5a5f6bea839772998713320cca8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000005/omit-1.csv": {
+      "bytes": 396948,
+      "sha256": "9210916ef710b6a6ad75d2db6dcededf3f9228b6b11ba950bd4a8bc7a912d844"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000005/omit-2.csv": {
+      "bytes": 396964,
+      "sha256": "ebb056a41310dbc6bfddcdce6bbd774fe1f2ff8a109935e15e5e8a2be07106b7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000005/omit-3.csv": {
+      "bytes": 397112,
+      "sha256": "bc6ef18ce239b42e9fee82c407a8df1e8fb47491ec45a90c0b57fe265b007240"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000006/full-after.csv": {
+      "bytes": 397508,
+      "sha256": "aea81078b63d9e24440aaa8fddbb7c31e21fbc5b86c4c48d5dd2acde82787b40"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000006/full-before.csv": {
+      "bytes": 396293,
+      "sha256": "f028b700a1df3bc7bb6bdadd023efb7e6016d94422f8b676d47e7618aba35b78"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000006/omit-0.csv": {
+      "bytes": 383656,
+      "sha256": "d8f6e53adc2ecfb164740aee34de3648e1e1ee38b0ff7dde00b7bde6ded73d7c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000006/omit-1.csv": {
+      "bytes": 396903,
+      "sha256": "6210fcdc860fc3d22207654a1846a185c68f44fba16a658c21994e845d3c4ff6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000006/omit-2.csv": {
+      "bytes": 396940,
+      "sha256": "1edbc7177822ee3d26fa7bd8b2914a2aa7be32087a7b7ae97c08f5e6dc333e29"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000006/omit-3.csv": {
+      "bytes": 397111,
+      "sha256": "2ab4d0766bf1d3b05a925986931b1840c3f4e937df691d7b65e4037956be13a3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000007/full-after.csv": {
+      "bytes": 398007,
+      "sha256": "d134f5f6c2a8839f69ceac530c8b4d6307a95dbac9ee07cf17a36d9b000d9c49"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000007/full-before.csv": {
+      "bytes": 398008,
+      "sha256": "7667b6782d235fdd5fd646b99599624acbcff82cbaceb397e77ccea16ba8d995"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000007/omit-0.csv": {
+      "bytes": 385535,
+      "sha256": "d56ebbfaec4b8c04c827b5dffc23c8a9e7e34b161c4c9e719f27328ddcca4e74"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000007/omit-1.csv": {
+      "bytes": 398788,
+      "sha256": "eba3f685b19776e86f9ad3da64e795f131729790af993ddb62f0348d8386feea"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000007/omit-2.csv": {
+      "bytes": 398919,
+      "sha256": "c0b75cfce737a5a28eeda26162c1841d00b65e91492af2e5bc5f113384fa1670"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000007/omit-3.csv": {
+      "bytes": 399105,
+      "sha256": "17cc6a1537c6d0b33c14b8b65e1eb68bc918f43eed3a29cce2a9dfd3b03ba0f8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000008/full-after.csv": {
+      "bytes": 398010,
+      "sha256": "38b086b033653740d2da15351eef2ea566cfd603ef938b4a86211f752c2d8288"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000008/full-before.csv": {
+      "bytes": 398009,
+      "sha256": "4e75a2089b220fbdc7244d7dbdf01b687684d37042a591b7abefb4953d9e9de0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000008/omit-0.csv": {
+      "bytes": 385506,
+      "sha256": "66250dc1bc04eaf6f76ae80fa0e359b478fc4f6f3ad97206a2891bc2075a0ca9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000008/omit-1.csv": {
+      "bytes": 398778,
+      "sha256": "1e808b22dd42c064523f2b18daf4b8faeeac62b8dd475d4dd99896faef2892ff"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000008/omit-2.csv": {
+      "bytes": 398932,
+      "sha256": "41bd1364746390a44dc3200c35ba7a53de034ff8d2ac194540b6a2fcf60c4c57"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000008/omit-3.csv": {
+      "bytes": 399129,
+      "sha256": "486313c1710e606ec9469910771d6f86e4774ff6104e2d9ea3db57bb29591db9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000009/full-after.csv": {
+      "bytes": 398884,
+      "sha256": "b7a44df9143b2bfc9926d6b5882c3c52cc48c0b262b579345a27c104d3f7cee4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000009/full-before.csv": {
+      "bytes": 398873,
+      "sha256": "ebbb6893520e780809e34db9fa6420e757ecbd837fdb30025b57bb849efbbf1f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000009/omit-0.csv": {
+      "bytes": 386197,
+      "sha256": "e145028da989ebe45e7c3b3c60751035ed4fde7c7a4d500b58df7fb3a27ed8ef"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000009/omit-1.csv": {
+      "bytes": 399502,
+      "sha256": "f11ff7086a95998a7026aadce73116760079dcf379cc393926bc562d17fbb0c6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000009/omit-2.csv": {
+      "bytes": 399602,
+      "sha256": "b2bdc834ac31e4602e3280a8543595e86dd8ba556adcf3bcef5608c12abefc06"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000009/omit-3.csv": {
+      "bytes": 399792,
+      "sha256": "b88e45e0a71c86ff3af0770bbee7e10c7adfc7cbf4ff3be53acf5124761fc125"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000010/full-after.csv": {
+      "bytes": 375401,
+      "sha256": "4a71d297041b7724f8ca17324af43c8900d3b019a1f99a07832312691b7cd25f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000010/full-before.csv": {
+      "bytes": 398841,
+      "sha256": "f6909038ce70dbd831a9838689a1da3b3ebb952592c2cf9ae3d1a997be9ce229"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000010/omit-0.csv": {
+      "bytes": 375343,
+      "sha256": "2878bb8016b423b34b8fbfe2e83f9ee6f559b1cb3083ca7704a21cea51672921"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000010/omit-1.csv": {
+      "bytes": 376049,
+      "sha256": "89cd9c4982606c0a59f5b04247f7fcbf2849ffc8771ed8a636c310874cfb62a4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000010/omit-2.csv": {
+      "bytes": 376160,
+      "sha256": "94e46e51cc0c6a2bcd17caea19d60934d4381c1120390c0cd9c861811b604aa2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000010/omit-3.csv": {
+      "bytes": 376311,
+      "sha256": "933f94f9fd4c4943e42df15d2ef2e2da254ec8c4999e2f01460b4dd0c1a671b4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000011/full-after.csv": {
+      "bytes": 375382,
+      "sha256": "5f3b321a4b9b80efd313635677b2a37f1c14b73c3e7ed30a343792ff7f64815c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000011/full-before.csv": {
+      "bytes": 375384,
+      "sha256": "d5f48498bd09509de3990a094adb7d565d1bed8f95090cc98af425733afe06ef"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000011/omit-0.csv": {
+      "bytes": 362694,
+      "sha256": "2fdea2bbe4d2829716df072117beb525c0d2c2873507d8a958a530e8b07ee92b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000011/omit-1.csv": {
+      "bytes": 376012,
+      "sha256": "58d23bef4b04b3ed2e174a064654b24116dc2971bdf66d0a0a93549d85d05581"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000011/omit-2.csv": {
+      "bytes": 376135,
+      "sha256": "b10b656e73ba65bcf1bee81ec3962ebc16bfa320d52f1427d89d81dddedccadc"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000011/omit-3.csv": {
+      "bytes": 376287,
+      "sha256": "d9321723074199495a109326319b58e4e92dd4b65beeb53536c4c73e781a9290"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000012/full-after.csv": {
+      "bytes": 387596,
+      "sha256": "b17643c868a473db84c5a43ee732ceb140737f5f5796de0a2cf04780417fb1de"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000012/full-before.csv": {
+      "bytes": 375377,
+      "sha256": "2f6a23f5797aad20366279872e0e95484b4bfa0947499bd3a25390423418e5f2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000012/omit-0.csv": {
+      "bytes": 362699,
+      "sha256": "dd41cc4f8e003f84d1c5c4670a365316a83c178585a635f6c462e5ce00491254"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000012/omit-1.csv": {
+      "bytes": 376041,
+      "sha256": "dc2707b91ac975002b1dbd69d1f80c548e8f888cbaff0f22b818f497918e0148"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000012/omit-2.csv": {
+      "bytes": 376103,
+      "sha256": "b0bcc28aadaa8990f073bf057cecc9bd42602c390efcd40578d2a68f273b8998"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000012/omit-3.csv": {
+      "bytes": 376291,
+      "sha256": "c2238fd87f3646a8086413aa6e3ae0956ae8e1596d55b5f9c2d5dcf9fd6dda49"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000013/full-after.csv": {
+      "bytes": 382000,
+      "sha256": "c485713d476bf056068f4806665be107e636fd099c9eadcd5084735f8a543bd4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000013/full-before.csv": {
+      "bytes": 382000,
+      "sha256": "7cb674248be6ca5f0202f6972f67c9920630a99b286d0e559e2c276ecace8aae"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000013/omit-0.csv": {
+      "bytes": 369322,
+      "sha256": "a07bf14a56469e4920c9d034bb337bb07f583bccd793071cf38a848ed27a0bc4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000013/omit-1.csv": {
+      "bytes": 382452,
+      "sha256": "9963913349cff1aa350b133876fafbf9050d679fe1d0b768bca63a7e00e93cc0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000013/omit-2.csv": {
+      "bytes": 382912,
+      "sha256": "d35a0f1a6f1481ff9fb0a6e26ccc42a07adaebf22db143c915be1d6e01598336"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000013/omit-3.csv": {
+      "bytes": 382706,
+      "sha256": "3f902c9c710f759c925a96b207e308f1d63f442b951e83786af64587bb67f062"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000014/full-after.csv": {
+      "bytes": 381998,
+      "sha256": "f450a57c12c6bc7b3903962ef912d4e3b6d81005b6d6a35513317804c1b805e7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000014/full-before.csv": {
+      "bytes": 382008,
+      "sha256": "71a0c69107cec5aab8ddda2ea463158ebdfb0784f670fca2ef5b0eb06a162624"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000014/omit-0.csv": {
+      "bytes": 369322,
+      "sha256": "7400dd435e1f86418fe3a4b10e44f6a1171ca22ef7063d051446528e16eaea8f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000014/omit-1.csv": {
+      "bytes": 382456,
+      "sha256": "301c13adc3587cd4c07ba27ecde6a1621a1a9e1cc1ded61137ac4d50b2c9d9da"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000014/omit-2.csv": {
+      "bytes": 382908,
+      "sha256": "88f01ecb09a14fb3d77bc6d7a95034be6ae5a850dc190ba9631d712d027f5d95"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000014/omit-3.csv": {
+      "bytes": 382708,
+      "sha256": "69df2234ec9da8622fbeb5b8b6cb43a871a819ffda0cec078a6b3d161614b4f8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000015/full-after.csv": {
+      "bytes": 388822,
+      "sha256": "0cc86e42a05350de738bd9e3616ab5ea4fd95c9c78f895894fa1abce6726a491"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000015/full-before.csv": {
+      "bytes": 388810,
+      "sha256": "9b786e9b1bda204fcf39e8b008ab6612bd831d648057c06751e210e59e625ad4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000015/omit-0.csv": {
+      "bytes": 376134,
+      "sha256": "a31af31acad26d04ed0bcf3281c39089ca4a2cd85dffc53812409c67f06c9fb5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000015/omit-1.csv": {
+      "bytes": 389451,
+      "sha256": "452df6d1850cca4280b2c19962fa26cd3d8b51586c5f1fb889e15e167743c55c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000015/omit-2.csv": {
+      "bytes": 389531,
+      "sha256": "b92926aa812a12861ac769370009f42d58cfa8ccf7970cfac2621bf2eeaf4d5a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000015/omit-3.csv": {
+      "bytes": 389678,
+      "sha256": "c2cb7e3ab90d7dc32d7c956ffa3682a5ecbb808fda581610e0f84db2ec75c4ef"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000016/full-after.csv": {
+      "bytes": 388805,
+      "sha256": "817b6eba375b070bafac29ee49567cc7f6c5c488bc3a4279f01cd36d285a85e8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000016/full-before.csv": {
+      "bytes": 388802,
+      "sha256": "64552d3c4630b374105731f29ab9028ab367530c4536143c6da8745707545ed9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000016/omit-0.csv": {
+      "bytes": 376130,
+      "sha256": "6be990160bd1b4eed69ae6b8ea06e020ae12158e91ca22776e70bc5a36917ec5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000016/omit-1.csv": {
+      "bytes": 389453,
+      "sha256": "1ce28d9d34901490097d8107ad80e29d5ec87cc0a09cd7400ade2d970b0ec312"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000016/omit-2.csv": {
+      "bytes": 389529,
+      "sha256": "ce43c1c824d2bdf5bc8af6bf81df41a79d9537247f8daae1a94dcd96d8d483e4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000016/omit-3.csv": {
+      "bytes": 389689,
+      "sha256": "2edbaf8f79fee0c40c4ff80ac97adc92534120fd1f2d5409673859b83563d97e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000017/full-after.csv": {
+      "bytes": 382530,
+      "sha256": "1247f0c2d3625fa4695081f2d4b9dcf6020ad7e653cf694ae51dd117fcaa4437"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000017/full-before.csv": {
+      "bytes": 382528,
+      "sha256": "a9b3a89ac7d0f57aeeb51bf455fb6e592fc966771840e2b43af18e655191db40"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000017/omit-0.csv": {
+      "bytes": 369845,
+      "sha256": "493d485479ecef55c657f427e651ba5650320a6159de0a26114ed2b2a7f5508b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000017/omit-1.csv": {
+      "bytes": 382983,
+      "sha256": "bf53d967ffdd23cb9d5f889cc2910a4457b7c97e40ff1b776c816f9bcf925cbf"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000017/omit-2.csv": {
+      "bytes": 383463,
+      "sha256": "8992bde81f9a89c6e2edd6897987d62df0795f12d4e2a0e39b11b3e6543f86c1"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000017/omit-3.csv": {
+      "bytes": 383772,
+      "sha256": "9057fcb1bf540e86e04bbc24f3db338d4010faa74f9d2e59ccf5264b7dff55a6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000018/full-after.csv": {
+      "bytes": 382534,
+      "sha256": "7c8be8db2593f93b905e1a166f0b64ab1631da0d94d5a73f2af39ca4b53d9201"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000018/full-before.csv": {
+      "bytes": 382532,
+      "sha256": "990ea09222ce641f9a1c813cfe280be97f893f35159153221f4a82e51cf9a5fe"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000018/omit-0.csv": {
+      "bytes": 369842,
+      "sha256": "7b49aef58f0697d74b9ccdc97d717be4ba123842c42798a97549cbd7e14126e9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000018/omit-1.csv": {
+      "bytes": 382984,
+      "sha256": "b6fc12395e3a133ef80a8eb6b2befe85a560c1672f0c67627feddc06b0236983"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000018/omit-2.csv": {
+      "bytes": 383477,
+      "sha256": "0fbcc80bdbc9970da07980533ec386a3d091f5c5cca07a748dbbcb6c0c5c0457"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000018/omit-3.csv": {
+      "bytes": 383756,
+      "sha256": "918309fbb2ad5c49dbe9e198a697bead35c12a09dc6d2892a820b29db9fa844b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000019/full-after.csv": {
+      "bytes": 388752,
+      "sha256": "dad1fa9bbc918d85c038d6bd4a9a9570e71c2eef72dbab65502583a147b4372b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000019/full-before.csv": {
+      "bytes": 388752,
+      "sha256": "b25a12327040ace93b460357738ff65c072a0252a0a6f435c74450eaa2910b20"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000019/omit-0.csv": {
+      "bytes": 376067,
+      "sha256": "69964ce00ef25ec1f5f6eeab65ffd0f10b3e8bce7ad3aed4a780784e5a42a5e0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000019/omit-1.csv": {
+      "bytes": 389386,
+      "sha256": "e073cf42f55585ad1a379fdcec8ea4fc0d2b49f9f50331dcd86a1d8f9bca8fc9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000019/omit-2.csv": {
+      "bytes": 389482,
+      "sha256": "65834b133066cf7aaeee4359c51d729b0c34f2f16410ab150a605451498408d5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000019/omit-3.csv": {
+      "bytes": 389671,
+      "sha256": "ca15749d918bb082ef9bdf3db9622ba1ff2e3cc8100a93fd0693c51031bf961b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000020/full-after.csv": {
+      "bytes": 388753,
+      "sha256": "77323ebcfbbb8783ce7e8c67440cedc5b4f185e8c4644696a78a7fb99ef60771"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000020/full-before.csv": {
+      "bytes": 388752,
+      "sha256": "094dcf17e38bdfb0cd6c88bb51afc03e4a6a5640a919558eb91a37b4302ef970"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000020/omit-0.csv": {
+      "bytes": 376080,
+      "sha256": "8a755b3214d4c3226bb6889b1f8e281a1b0f2220af1d10637260d2a86eb5f999"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000020/omit-1.csv": {
+      "bytes": 389382,
+      "sha256": "e7b0ebfc524a230e38a3bde02fae96d3bb10ce97595e91674832f8a7c35e2037"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000020/omit-2.csv": {
+      "bytes": 389485,
+      "sha256": "14c0f2a242c337285b3f71bae7a31ded79a9e3d2af3a494148128e5374bc61c0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000020/omit-3.csv": {
+      "bytes": 389669,
+      "sha256": "911699e849aaafe407e83673985e6a90ab1e436e1bb91be12e7b82c459e18a56"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000021/full-after.csv": {
+      "bytes": 388717,
+      "sha256": "98954f2fa8e5e2a4a682bccad30e83bc36f81772cb63821abffc8efd86a02716"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000021/full-before.csv": {
+      "bytes": 388720,
+      "sha256": "471a3d91c527bebb03109a739fa4cd64bbb01fcf3ef4ffaffa88faa0905fffbd"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000021/omit-0.csv": {
+      "bytes": 376046,
+      "sha256": "9a66630af4963217b98d735d76df84b27cef3b063e77f31b5b68d4b933c632ef"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000021/omit-1.csv": {
+      "bytes": 389346,
+      "sha256": "1b989c8d6568adc52cda453d948160e996c2056ab3873ef2960675f9ba060790"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000021/omit-2.csv": {
+      "bytes": 389443,
+      "sha256": "c9562f6ce07db1ca1cf82d5a543a8285c6eb59a495663280b4535e9875b8f75f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000021/omit-3.csv": {
+      "bytes": 389621,
+      "sha256": "f35c77e3473a2fc63222b39427058c066c3a6c4ae2aa8031812eab91efef8591"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000022/full-after.csv": {
+      "bytes": 388728,
+      "sha256": "fc24f0c80b7dc85c51a927f43894904abb0e49d52488007f0c650a39fc7a3017"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000022/full-before.csv": {
+      "bytes": 388739,
+      "sha256": "091e7e3c49bc9e4ad0f960f565e3a8afe3bfb917a8820660f7074839a622f1ff"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000022/omit-0.csv": {
+      "bytes": 376038,
+      "sha256": "b15eba21420f8f755644ebd18737643cfdfdbfed08ec2cac67b40d2666388fa4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000022/omit-1.csv": {
+      "bytes": 389343,
+      "sha256": "fb632b3e0bd2c9c84ff0199c5d5f0eaf77583c01763d16cfe54eb931ce2d6232"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000022/omit-2.csv": {
+      "bytes": 389446,
+      "sha256": "91bf163b00ea0d41449520f857d36ce9bb43c753829ec1fd4691132f3ddecd73"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000022/omit-3.csv": {
+      "bytes": 389620,
+      "sha256": "9292ebf928cecef3cf69427772429912c118fb52a0fd46191b774cd32b31ee82"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000023/full-after.csv": {
+      "bytes": 388688,
+      "sha256": "22acbd693618b4602fbc300985675bbb6644027cb3ed52f6567cffcd041cfeed"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000023/full-before.csv": {
+      "bytes": 388680,
+      "sha256": "2cf0d7801d78f8093dfb3b09e57f72d5a5a6a677de6c63a0611da707ee9029f1"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000023/omit-0.csv": {
+      "bytes": 375987,
+      "sha256": "c64d961439bc20ab531786fe8921e9ef5ecd4c24e20cc9ffdea56f1dda2cd6e6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000023/omit-1.csv": {
+      "bytes": 389311,
+      "sha256": "6a233b51ec87fd22739bb2015eab11f25567bb225d876716dc5fcc4857770c4b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000023/omit-2.csv": {
+      "bytes": 389416,
+      "sha256": "8fa79243554ae6c3242dd20a8c7ff04e1ee593ef42284f5cf605d3d225025741"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000023/omit-3.csv": {
+      "bytes": 389603,
+      "sha256": "90863bbf693568a2b38720f8fd14f77009b7e7d7c49af2b7169ab6ad9c17cc65"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000024/full-after.csv": {
+      "bytes": 395363,
+      "sha256": "6f0b15d0d9dcda0d742ba2736b60e14cc3683035e11fb6be01a0669295a58b06"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000024/full-before.csv": {
+      "bytes": 388678,
+      "sha256": "803c7ac90c00bd05e69e2afbdbf0b7822bf76c3ae46661ed3828ae952d8e7756"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000024/omit-0.csv": {
+      "bytes": 375988,
+      "sha256": "675c7658b9486d113c60632d6d2053091f1646bf6f6c548e5d74e196fbc256c0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000024/omit-1.csv": {
+      "bytes": 389312,
+      "sha256": "f17ab6d3dd5d608a34409f945a7483cae5cd3366dad8f7302ec0c901af45951e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000024/omit-2.csv": {
+      "bytes": 389415,
+      "sha256": "059f421ff2497edebebdf23e9f17759612ee07db464518c887af9528687ea4c8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000024/omit-3.csv": {
+      "bytes": 395150,
+      "sha256": "7c85e28de8b9b09f3849385153f97790556475fb9f5a30b2130559c881fa7164"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000025/full-after.csv": {
+      "bytes": 395309,
+      "sha256": "b767ad170a19d3d84d33102f2a2362df85318541ceff5e809e18f1c3f4ae0e41"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000025/full-before.csv": {
+      "bytes": 395310,
+      "sha256": "b9b16aad618cdac0345d33543d3d52e95283849baeca1a94cd0b240f09cf3169"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000025/omit-0.csv": {
+      "bytes": 382628,
+      "sha256": "9990a89e6cc14543a2c9717d96b7239baf5d54626ffc01f1e6fbfc92f254f6ea"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000025/omit-1.csv": {
+      "bytes": 395953,
+      "sha256": "d6b525525ce10498fa94f005454a58c7a1417633f4e8ff0502455a1c2138f00c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000025/omit-2.csv": {
+      "bytes": 396058,
+      "sha256": "9bbc3ecd1b20cc12bbbe0749832bf34abd75c6c654be744e2cdc46d2b15147c6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000025/omit-3.csv": {
+      "bytes": 396247,
+      "sha256": "05537522c17ffd9f73049afda35f22e11f8ae3962d88dd9b326aa8023574c618"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000026/full-after.csv": {
+      "bytes": 395311,
+      "sha256": "6a7313a21a4dd9feb06436f97eb0ab474752975c7f60dcfc84a7cb7d35127fc7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000026/full-before.csv": {
+      "bytes": 395312,
+      "sha256": "d6a03ada232d62acb80f7c474ee77536f81a75e0de8123e76d652d77010336c4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000026/omit-0.csv": {
+      "bytes": 382626,
+      "sha256": "9457e6f1ad6b3a8ec86f76ab664a03d79e4041fbf4f379bc1190a798f66a8af0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000026/omit-1.csv": {
+      "bytes": 395955,
+      "sha256": "dddb4f3daf6a4ef0b4dcceac74ca207d48a25231fadd6320d574c54e21410881"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000026/omit-2.csv": {
+      "bytes": 396056,
+      "sha256": "5c0e248453b51064c09af1116397bf022f6e3ca7f807e284c2f99a5c9a2d7625"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000026/omit-3.csv": {
+      "bytes": 396247,
+      "sha256": "754cf5a05bde385371d5ea68d6e970040b8451920947a8e8e764fd1428ecab61"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000027/full-after.csv": {
+      "bytes": 395291,
+      "sha256": "b0ba6e1495d3545ceeed22ef8c572d48971f74a427fe1dc5c6629f0a9f80786d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000027/full-before.csv": {
+      "bytes": 395290,
+      "sha256": "c7f8cd1ccaa226b8e9761dc5fd8ec250835d15b05540504bda3cceec453c99b7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000027/omit-0.csv": {
+      "bytes": 382610,
+      "sha256": "7b63aa570a5ebabc49040258932e2d132445b0a3be1d260be28a75006148c6a1"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000027/omit-1.csv": {
+      "bytes": 395917,
+      "sha256": "2d6adca59072de78ce5af046bbfa604618e9fc035689ec316eefce6d168db31e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000027/omit-2.csv": {
+      "bytes": 396086,
+      "sha256": "8201bef1e3b055c10fc7a45451322cc4f431d95de62f89574e44c877581cf8c4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000027/omit-3.csv": {
+      "bytes": 396248,
+      "sha256": "3ee030fd734590cef39b0119d5d2153a3a4a8557c7bfc4c29c98c513a8476039"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000028/full-after.csv": {
+      "bytes": 395290,
+      "sha256": "5bf70576025845155b21ee8c19b58ba07998c4a5c9a9fa98ad7f74417c07bef5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000028/full-before.csv": {
+      "bytes": 395290,
+      "sha256": "6d92c7f230fb350544a67a002fd7848809582631d83222fe357fc61c7a347b4e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000028/omit-0.csv": {
+      "bytes": 382622,
+      "sha256": "7974d690230a462ee43d32c9a71886ffeb86e08a7cc47483aa56536c0a9023ea"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000028/omit-1.csv": {
+      "bytes": 395916,
+      "sha256": "ec5e921ed7ba952047df57ea3d7e8cad88067f53de9194c6d7d2dd7828c13214"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000028/omit-2.csv": {
+      "bytes": 396087,
+      "sha256": "bccb2e6a554a821dc7ce2ee19e1f41f7fc43c5240a1c675de116509e6307671c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000028/omit-3.csv": {
+      "bytes": 396247,
+      "sha256": "98034020a74800a024b0bc5bf1ae4d068fb34cebd535da8e2d85c185ebd0a6e2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000029/full-after.csv": {
+      "bytes": 395271,
+      "sha256": "642b54c4e4d580439a907ebc09c412d80ed820ea3513634788126fa978dba357"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000029/full-before.csv": {
+      "bytes": 395270,
+      "sha256": "4b07b432291932d90936ed4182527e717494f5128b075752613782d19a1cbe7e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000029/omit-0.csv": {
+      "bytes": 382593,
+      "sha256": "524b1b580dd8bc105d79c6ebdb28b69ada7ff9c607c8e2fe1ab296f7021cc33b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000029/omit-1.csv": {
+      "bytes": 395908,
+      "sha256": "adcd6cde12dea86cbd9b713dc2f2f548f2c3ca990deb734a6ddfe3171069a32e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000029/omit-2.csv": {
+      "bytes": 396047,
+      "sha256": "4106b2127df8e2235e2d89b92377056d9cd2d40d2ba2be4b328f814d0285ffa0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000029/omit-3.csv": {
+      "bytes": 396231,
+      "sha256": "d89584479436a2e4b5c15fc77b957cd6cf3edc1770afebf8ae23e32455cc5a62"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000030/full-after.csv": {
+      "bytes": 395271,
+      "sha256": "37dbc78572eb7da23d663ba37fbc2bca318d0cbf34d099c167376d780ede2f56"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000030/full-before.csv": {
+      "bytes": 395270,
+      "sha256": "d0aa9673fb6343911673e1b381e111c9909cbbbaef2a4e101afc5dae427a10fd"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000030/omit-0.csv": {
+      "bytes": 382594,
+      "sha256": "3d3394bc96aaf45a22949689ebab19137ee053c0e40f8e4ee6c4c5e38d6f310b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000030/omit-1.csv": {
+      "bytes": 395906,
+      "sha256": "285f94b2971f830679e2aef5b374d55bc3a0a1d998d4235deb70b44e93241bc1"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000030/omit-2.csv": {
+      "bytes": 396047,
+      "sha256": "405168dc586c48bc850280bb0e9fb4ab74fcaa15f859f80cf0941b66d8a69036"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000030/omit-3.csv": {
+      "bytes": 396232,
+      "sha256": "426312157852fe8026b9ec593b19285de9d9c8af51cc8490f3f5b6a85f9bfb0b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000031/full-after.csv": {
+      "bytes": 395208,
+      "sha256": "18eb44b4c1ba8d77766f9ea7987e60cfbc2348b198b36bd5c5de947ccb873497"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000031/full-before.csv": {
+      "bytes": 395206,
+      "sha256": "af1ddc1aba419efd03f9a81ecda3743dc85c8fb471530106d9ab0d79302b25ae"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000031/omit-0.csv": {
+      "bytes": 382499,
+      "sha256": "575adc3464edb6616b9194642fcd5b357f9ecd2f796642b12ac7c2ade8af8cc7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000031/omit-1.csv": {
+      "bytes": 395837,
+      "sha256": "130dddbf6fb8ffc4b3eda5fde0f1ea0021471daafae8aa901e52c634b53ea7e6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000031/omit-2.csv": {
+      "bytes": 395984,
+      "sha256": "d6e31f158ba7a6fe7baecc66447127c424c9becb7ff3b805b10351ed819ba560"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000031/omit-3.csv": {
+      "bytes": 396175,
+      "sha256": "a1d086813a98a37759daab171230869b822e0cb32ac0a12c254d48266fadeab4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000032/full-after.csv": {
+      "bytes": 395205,
+      "sha256": "a5fcb3f2071d047d66dad7f9be15b548047e94210068342f2595792d1d7038fc"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000032/full-before.csv": {
+      "bytes": 395204,
+      "sha256": "9d892aadc6dda4a13b3457f9cbc37acf07736f5f6a29fc3ce5dfb61b1a4d495e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000032/omit-0.csv": {
+      "bytes": 382499,
+      "sha256": "c5de02cae58163391e273c1b05b61385d0389d96eca28e8a5da6425995fbaaac"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000032/omit-1.csv": {
+      "bytes": 395838,
+      "sha256": "ab76baea88eea62ce4fe248c3113d4862387808fa46918b530061030186ef848"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000032/omit-2.csv": {
+      "bytes": 395983,
+      "sha256": "fce5796e74e11d761411ae9c1b62c84f283187e8681d2f76e05416b5dffdcf85"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000032/omit-3.csv": {
+      "bytes": 396178,
+      "sha256": "3c80d7e9ce4e7e10b2f0306bf6648217ff7993ea7e09c6269b511db16b316335"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000033/full-after.csv": {
+      "bytes": 389622,
+      "sha256": "d1c742bcdf5817c686295dbb94ae9c16e9e25c7eadf8db8e7b27c4679c6a42ac"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000033/full-before.csv": {
+      "bytes": 389623,
+      "sha256": "c960de47e9be116cc303e1996c37ab107f3f991788a28f22cbbc0edf6854f304"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000033/omit-0.csv": {
+      "bytes": 376978,
+      "sha256": "7e182e84f289c1ad94cf483447f60e7861f5d1adb3740a21884202f4cee2dc7d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000033/omit-1.csv": {
+      "bytes": 390111,
+      "sha256": "eb401e99665727e93b1c45acf2f0438051c2529fe619cbaab60584ea8cef7619"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000033/omit-2.csv": {
+      "bytes": 390567,
+      "sha256": "e595c67ba494d6b100e8828fc7ca3fa6ea31b1dceeb50a7b5bfb7e507c5e9b76"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000033/omit-3.csv": {
+      "bytes": 390802,
+      "sha256": "8b096cb031369803e4f276603b557e57222b9f9a622c556955e855b4dc1fdc92"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000034/full-after.csv": {
+      "bytes": 389624,
+      "sha256": "21a8cfb117bb4c51c47c9faf2fa489eb50046196b2343fbe7d104da2e230e2d3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000034/full-before.csv": {
+      "bytes": 389624,
+      "sha256": "21c666c9a2b8e32ff81c6fe4ac988eef1ce5757aef17ffe76f23198858641e2f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000034/omit-0.csv": {
+      "bytes": 376976,
+      "sha256": "b65757b80cce295e21dc3e4e26f9fa80d0e08f115db56d1381c731c04b94ab18"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000034/omit-1.csv": {
+      "bytes": 390125,
+      "sha256": "1ed9810033b3828cc436dc9917a32c6c20e64c050327e900cf62c7eed5547d7f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000034/omit-2.csv": {
+      "bytes": 390565,
+      "sha256": "3921f3994b0c57ba80d8e310042ea7e6ed659393ffa8f3219f5163fe51a6e043"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000034/omit-3.csv": {
+      "bytes": 390801,
+      "sha256": "06a0ef86a101b6aa790f78d6ee63e1d26e1de3feca98a913533c34c0fd5ebdc0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000035/full-after.csv": {
+      "bytes": 395183,
+      "sha256": "27b40208000fd7664bdcfb2bc06d9a090e70f452449ff05d6a711c01dd4c494a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000035/full-before.csv": {
+      "bytes": 395184,
+      "sha256": "afcbc77580a76243c2ba966de090ffa8ad588d09fb7591cbb61621713ff98013"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000035/omit-0.csv": {
+      "bytes": 382508,
+      "sha256": "7bc2a7f3be6f8c4c1b17d7f42e93269be25b0d923a72fe0b37370576b802cd12"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000035/omit-1.csv": {
+      "bytes": 395812,
+      "sha256": "1a9f38d28408c03aae85ec2bf86f03ab829be9eb65531855577c0989466743cf"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000035/omit-2.csv": {
+      "bytes": 395958,
+      "sha256": "4eeac3753336d7d2317f17cace6d59ed8dee44395331d8b33fb8a25bb367809a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000035/omit-3.csv": {
+      "bytes": 396133,
+      "sha256": "bc5f388667b466c8eeb6e7e8204fd94d8fdd1b7000f4a216f53b13f865af6580"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000036/full-after.csv": {
+      "bytes": 395187,
+      "sha256": "bdd7d63b66811da807392e53a9ec6f8aa7c22db79a19f5a96fad6da6a8e395d5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000036/full-before.csv": {
+      "bytes": 395189,
+      "sha256": "52de118c7f7c6ba2af3f781e0be2ac42a1fc7d3fc306c71f750d303b26fb2eaf"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000036/omit-0.csv": {
+      "bytes": 382504,
+      "sha256": "96da7f3c5a9f4ee009c7f2dd426ce5c94e5ca6f9255444ef27d45973d81d1b0c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000036/omit-1.csv": {
+      "bytes": 395812,
+      "sha256": "ecf49fad51e7a18fb6d649c3518185718cc84225cccb20725e3e7c64a8188a3b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000036/omit-2.csv": {
+      "bytes": 395959,
+      "sha256": "3fa6fa25c6e3e3dca3ae745e2fcfc6d9161fe22113e0061ee3939cde31a20913"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000036/omit-3.csv": {
+      "bytes": 396131,
+      "sha256": "3d0ed30f707e3874f7d425822a25935b8749b3d54d0935939c4ddd7fc8c82a5f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000037/full-after.csv": {
+      "bytes": 389697,
+      "sha256": "ab4670695faa89dc6f1b8974885a0b29b7f60bd9748def81d5f4cb0b0fd7fbbc"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000037/full-before.csv": {
+      "bytes": 389698,
+      "sha256": "7c34ee43af7dba31394134a1a43aab86edfa4246f53b3390c9dce902a2f82f47"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000037/omit-0.csv": {
+      "bytes": 377001,
+      "sha256": "3665c4b8f576a0240c627e2164d9893b629023d670e62cb4ce69e572438c6a1c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000037/omit-1.csv": {
+      "bytes": 390180,
+      "sha256": "0b1ecd88ae7ac006b068706b43d021aa49e047a56444e05f91b9e73327bc5e87"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000037/omit-2.csv": {
+      "bytes": 390626,
+      "sha256": "cb77292b6e6094971e4c10bbed0940c313a0475a631270dd7d7c7088ee8a6e6a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000037/omit-3.csv": {
+      "bytes": 390419,
+      "sha256": "d931fd28fd1852991940a2585455ff6e26932ca20a0c1826146af87bb0f5621c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000038/full-after.csv": {
+      "bytes": 389696,
+      "sha256": "7ce381e4586cbad6acc7df44f3ba200e0c1a4d7a7106de977deb1803da5e628e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000038/full-before.csv": {
+      "bytes": 389697,
+      "sha256": "9779b0a4fc239d4f590914b1731d1f0d96ed5a384235b7735ae098d01d079629"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000038/omit-0.csv": {
+      "bytes": 377002,
+      "sha256": "a65f5a22819f0537fd6f619ca256e4bebd720d629c4b8eb997234582134732ba"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000038/omit-1.csv": {
+      "bytes": 390178,
+      "sha256": "f61ad88b7809de3c5588dc492b704511273940d2d1b641ce67d6e36caeaa6df6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000038/omit-2.csv": {
+      "bytes": 390630,
+      "sha256": "d708708db496ef9ee47be76a1d730d58ff56a337b0f7d46095bc517383c2fb27"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000038/omit-3.csv": {
+      "bytes": 390417,
+      "sha256": "c20074b24ea47271a97e6bcb49dee5a095d302b2e265da76b86a95888883695c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000039/full-after.csv": {
+      "bytes": 395072,
+      "sha256": "1567bc92f27a220f487a8dc8d19f32497d7c3176aee44017270eb18412d40f80"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000039/full-before.csv": {
+      "bytes": 395073,
+      "sha256": "e88a9c2b9f687f18ebf9afb4032df691c640ee4129c798f4d920a56baa811356"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000039/omit-0.csv": {
+      "bytes": 382380,
+      "sha256": "2b4df241b799f17f209fcd0928629009905ab18ebac3112f8c8af603ff3193b0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000039/omit-1.csv": {
+      "bytes": 395739,
+      "sha256": "244dc496aff556ed7aedbb3e2cee6c747d367c2dc7b1524aa0238d1080b01d62"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000039/omit-2.csv": {
+      "bytes": 395895,
+      "sha256": "8157e141902e4362379d3b37755596a6e3fc2f0777c14d8c6096ff02319974ff"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000039/omit-3.csv": {
+      "bytes": 396060,
+      "sha256": "a65db9e982c9f2160149a516ec60489a0dc10afead083efee1cfcd0faa2e0612"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000040/full-after.csv": {
+      "bytes": 395070,
+      "sha256": "aa7f208a79a024c072ef941224dfe527b0427456d0b04c391082072cfeee0007"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000040/full-before.csv": {
+      "bytes": 395070,
+      "sha256": "36a32d003256fe6e08a7e4c161dd49dace60378ce06388b7189b51bd4a060bcf"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000040/omit-0.csv": {
+      "bytes": 382385,
+      "sha256": "15f9e9dc7c21df185f0f401a5f552414972cb9bc0672eb51ad6a7dd99c4334a3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000040/omit-1.csv": {
+      "bytes": 395735,
+      "sha256": "46d9f6ade69aa85e55da0c0070a3d7831854ac97d7a1425c99c850c429de26ea"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000040/omit-2.csv": {
+      "bytes": 395907,
+      "sha256": "63de57545d5be5da7804160bb15135505971e6e4ff816afc8893938d3ff52c0a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000040/omit-3.csv": {
+      "bytes": 396060,
+      "sha256": "382742c61dcf7afd69a51ddfc0bc6fbe7408ed0626ea8bdfd0627084f85d7c97"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000041/full-after.csv": {
+      "bytes": 390603,
+      "sha256": "15db351732ac2cb0c0365955ec6690d2a464f0ab45db9002a5296d22df7902d4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000041/full-before.csv": {
+      "bytes": 390604,
+      "sha256": "1c5382051beab697b7df215dd4ee9af259b94c895da1af3e6a47eb2c6e11d383"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000041/omit-0.csv": {
+      "bytes": 377910,
+      "sha256": "17bda851f86ea10ea29e548edda21165c890ce8c7754c94499b9e44a52916abc"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000041/omit-1.csv": {
+      "bytes": 391064,
+      "sha256": "aeb19833c8bd8c814e776a96877fe2c286c2f118e558fa3725d9053dfa27401c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000041/omit-2.csv": {
+      "bytes": 391517,
+      "sha256": "bc60e8502ddb0624207703a19d81e46d6975125527068268788b47a375f68df6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000041/omit-3.csv": {
+      "bytes": 391808,
+      "sha256": "fff89834faaead5edfb3cc86676b94d376eb8563154023452cb84eb70ab5ea47"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000042/full-after.csv": {
+      "bytes": 390601,
+      "sha256": "88e23060e0d544d31e9f6ff18818c537a5f088f6bcec36cee400de061ec5167f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000042/full-before.csv": {
+      "bytes": 390600,
+      "sha256": "831f9716a71dbf52696e182955f6811aaf97a3eac183e0d5faf4857c5bae8397"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000042/omit-0.csv": {
+      "bytes": 377911,
+      "sha256": "7a99969f357f9ba27ff70b0ed482c6f758b9c65faeb72ae1ccfc4fa2d1ca90f9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000042/omit-1.csv": {
+      "bytes": 391064,
+      "sha256": "ab745f60c157db3356d11bbd0ca31b2e2862cec71494920fd275c1bb919bfc64"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000042/omit-2.csv": {
+      "bytes": 391516,
+      "sha256": "a088cbdf4a4361d2b18dc0ab27a09b1559d647d0795c647e11b5ab71652deb6c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000042/omit-3.csv": {
+      "bytes": 391811,
+      "sha256": "aed137a08849147de2e596d6854a9f38cb09c85eaf8061b657bfa8397f37dff9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000043/full-after.csv": {
+      "bytes": 395004,
+      "sha256": "b83dd40c94d441b38f0e20bad066c383f73322a8834f9d0b865bbce66a00d685"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000043/full-before.csv": {
+      "bytes": 395003,
+      "sha256": "7146f4fbc3e69b851cc757ef9349dcc4120c42970dbce9ac62f2e1bc9e6ccf4b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000043/omit-0.csv": {
+      "bytes": 382303,
+      "sha256": "e6723638a407dc9708d29f338fad239383dcb86695e646663bb95f82e77af2e3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000043/omit-1.csv": {
+      "bytes": 395657,
+      "sha256": "b75505a6b7f044fc38f1ba43a60fa07b0e33ce28b70a02bffdc1d5452309febd"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000043/omit-2.csv": {
+      "bytes": 395844,
+      "sha256": "00b81e278147e412425460078338a1662d01dd47b8477bae64ed439acf041e0d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000043/omit-3.csv": {
+      "bytes": 395967,
+      "sha256": "77e128a911637c20283f0fd89b8402f5b26479cd3b546e4c694d3f608e099084"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000044/full-after.csv": {
+      "bytes": 395005,
+      "sha256": "8a47d7f91fc0e57497fde3ef196bafc2b91581db6cbc6e225a84ea6950f64288"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000044/full-before.csv": {
+      "bytes": 395004,
+      "sha256": "cf17dd3d259ff00bd5a15ffdaaa6c90d42893cb4ccc8c86670fd78f2190cb237"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000044/omit-0.csv": {
+      "bytes": 382301,
+      "sha256": "10e00f6fdb4664996c348bdcdeb48dbcb3674bbff7195148d915d4452e6fb727"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000044/omit-1.csv": {
+      "bytes": 395661,
+      "sha256": "aedd056cf396bf6724c91f1afabdcf438c64a262e6096328643b778230107966"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000044/omit-2.csv": {
+      "bytes": 395841,
+      "sha256": "81c56292030548a0b76ac6bc1a783412ec5d0df03c362c137ff7afd8b1d73272"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000044/omit-3.csv": {
+      "bytes": 395967,
+      "sha256": "e20082482e1f94eeee87694c72a90682a46c85a343fd5b7b707595a9c69338ae"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000045/full-after.csv": {
+      "bytes": 391513,
+      "sha256": "77948394de7d58cd16fc78b8aa0650d90f770a958b9a9b8169925e87e3af5f13"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000045/full-before.csv": {
+      "bytes": 391512,
+      "sha256": "f40c0deb8f03066fe8498bd9ec5f3d64f66b2cc79d4ee9b134fc5fbb3ab9c86c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000045/omit-0.csv": {
+      "bytes": 378854,
+      "sha256": "1f3f838fd5fca5353354b8b6cf80597dc5d3de4bdd2b1cf0dd87ae5fb7565008"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000045/omit-1.csv": {
+      "bytes": 392091,
+      "sha256": "a7c5de913080d36339c49cf8748e049af97190c67de87e0f8ee2a05fa1d8479d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000045/omit-2.csv": {
+      "bytes": 392383,
+      "sha256": "4afe30bbd018e62db2a15d9a8d561a35132f7a80dc2ad1523de92a2ded746d2e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000045/omit-3.csv": {
+      "bytes": 392664,
+      "sha256": "64b131b7736a3f26cd9247a32df6d4c2c061433f333b7003378ba2d1f2e668e9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000046/full-after.csv": {
+      "bytes": 391516,
+      "sha256": "ae61cec8e78cccf6f02d6fa46b91a2f16b50dbf906a3ba9bb67c218cf2aa2e08"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000046/full-before.csv": {
+      "bytes": 391515,
+      "sha256": "9d03db9609509c5eeee48ab52f6dacd11efda3e5b2e41f2cdac2b208e0a566a5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000046/omit-0.csv": {
+      "bytes": 378851,
+      "sha256": "ab471a675277488a6a59d9d08b8092f70cc8342e2a7f648cd15c6e47e9850732"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000046/omit-1.csv": {
+      "bytes": 392091,
+      "sha256": "765770180b4d8b732fda0bd3f3e53f8b9396c08cd3a792232381b9f6a8dbb559"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000046/omit-2.csv": {
+      "bytes": 392384,
+      "sha256": "9a5732a7671d96a9f102022099253e336f3b0a6c7ed5577e8cacfb72e93d9548"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000046/omit-3.csv": {
+      "bytes": 392663,
+      "sha256": "2db539010c890155a26f9ebb9723c1ac319a1757180b2a12d6d5db62be404334"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000047/full-after.csv": {
+      "bytes": 394900,
+      "sha256": "9ea8984dd3d7ae4fec31959c84bc338cdc5d68f16a61506e890e27f9e92803e3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000047/full-before.csv": {
+      "bytes": 394899,
+      "sha256": "f337467ba746e1ae2dd2a5297147e8e65282157afa5509c74dd343d9eef38cc4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000047/omit-0.csv": {
+      "bytes": 382223,
+      "sha256": "cc0d4f21c9d62583a9ca46949802d7a0979856055db2e2e9a5c0d5dc9c3192cd"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000047/omit-1.csv": {
+      "bytes": 395572,
+      "sha256": "5ecd51ccfa93df60f1ace4e6501d8e56b2fcd4ccbe1057832bcb4d961b9bfa51"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000047/omit-2.csv": {
+      "bytes": 395752,
+      "sha256": "66444b7a5c9fde9ae76ef671a79cb1ac56b7c620badd4b9319cdc1d0a2819e58"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000047/omit-3.csv": {
+      "bytes": 395899,
+      "sha256": "29bcf3b6b4551521cfd97c27186e06e82ddcf0452746062161345fa0dd392494"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000048/full-after.csv": {
+      "bytes": 397939,
+      "sha256": "a28e1af441b1749a40b99baf38102d349376094a33fe6febedc51b30751c8e3c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000048/full-before.csv": {
+      "bytes": 394899,
+      "sha256": "01517447624b55a944ba30055d440f5c1d3b5735f87f658358a5f31a640bb365"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000048/omit-0.csv": {
+      "bytes": 382223,
+      "sha256": "ad5a50c8438a49acf77b5d01e0dc23584f9d1445747e9e8ccadfc237561f3389"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000048/omit-1.csv": {
+      "bytes": 397577,
+      "sha256": "df15b222b78aed266ed0ca799df634052af335628af20053a49506051c4de28e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000048/omit-2.csv": {
+      "bytes": 398793,
+      "sha256": "7590c9279aae925d1c981e35f388dff71281a2627f446a3ff06d794152b5ba0a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000048/omit-3.csv": {
+      "bytes": 398934,
+      "sha256": "7cdf55cb31c4795e2554a4d2af9b1fe3fd366dbce4d87195e964d8e81e972dfc"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000049/full-after.csv": {
+      "bytes": 397887,
+      "sha256": "5becfc9ab26a6bbbd12bdc2bfa980726e62b251968aa704185d29b5ea6c7defb"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000049/full-before.csv": {
+      "bytes": 397877,
+      "sha256": "808ddbc7894c32429d48779333c5211bf81297621a76e14287c004ff6e277e45"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000049/omit-0.csv": {
+      "bytes": 385196,
+      "sha256": "d717c42c10da3a4ab87a0090b05f56e8107d08ecef208557f76162237ea7d58f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000049/omit-1.csv": {
+      "bytes": 398552,
+      "sha256": "6184061ec38f041f6bef3b82a47cd9acb0ae0e189a674cda76c004e153691e37"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000049/omit-2.csv": {
+      "bytes": 398760,
+      "sha256": "03e2d120924089b028f6984b57d7df93acca53f863f8a85de69ccbb474c6174d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000049/omit-3.csv": {
+      "bytes": 398881,
+      "sha256": "9d242e7a23cb80154a31d95b8da231ee511aabf67586eae79f2f5bd80346f250"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000050/full-after.csv": {
+      "bytes": 397889,
+      "sha256": "0ac1d452306381ea35a4d40940cfee7f87d63887d00f9c31a8bfd7acb1db81d8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000050/full-before.csv": {
+      "bytes": 397889,
+      "sha256": "6635a87147a97ef953cf2b99f52f5dab7380be31b335de44a172fbb289877f7d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000050/omit-0.csv": {
+      "bytes": 385199,
+      "sha256": "76b7c72dde4bd50b3f5294d365de732e189e1a2c4f5878384abf40a9f1b691f2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000050/omit-1.csv": {
+      "bytes": 398547,
+      "sha256": "3cd24da67395d8dd32e2274d55ab6e898d751bcb0c9b771d3ade57d19d72e5a2"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000050/omit-2.csv": {
+      "bytes": 398762,
+      "sha256": "0f4e85f2fc49c1e8245b0a1f2b6f00a3de945151c79b19d33ad91c4862d69034"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000050/omit-3.csv": {
+      "bytes": 398879,
+      "sha256": "af3df6adfde1f5936f99f9b4f935cd9d957002aa124de1aa09562322d628251f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000051/full-after.csv": {
+      "bytes": 397771,
+      "sha256": "50294a42c44fc080a14ae794e6fa3c0366808b4abe6a7716eb080d4d2f7e12eb"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000051/full-before.csv": {
+      "bytes": 397786,
+      "sha256": "da381a4fe4dd51c24835b2312cd6cf9bf1c5c971878e61f4eef77135a8b10b79"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000051/omit-0.csv": {
+      "bytes": 385104,
+      "sha256": "47131ec7dba8523d1e597587d07909318a15179c23b115435c18e07d9a467004"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000051/omit-1.csv": {
+      "bytes": 398452,
+      "sha256": "c23bbe6cf3fdc61fb137b713e0977b57bb78865ec8e08f07664746a81ee9c3ec"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000051/omit-2.csv": {
+      "bytes": 398636,
+      "sha256": "e09ebb756124081b8f7053a412824954a3cd4607e68b80ea988eaea4b8bf4a1e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000051/omit-3.csv": {
+      "bytes": 398766,
+      "sha256": "61e145d5d3351d5aa33ca6b02a512a7878af2e39503ecfeeaf061558261a8995"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000052/full-after.csv": {
+      "bytes": 397775,
+      "sha256": "5ae4df7a0667c51e5afc7c24d6af6c24ac29b6b9374bc95c232d37aa4dfff0da"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000052/full-before.csv": {
+      "bytes": 397786,
+      "sha256": "740018262d1d4cb4ae42d625a5e727a36a7ddf960cadf00820a6440ca93c2a8b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000052/omit-0.csv": {
+      "bytes": 385095,
+      "sha256": "7dce7334b3c3d3e70f8cc17bfeb6cef9f83561cb275d07c9ea7b8ca7e04f85a7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000052/omit-1.csv": {
+      "bytes": 398461,
+      "sha256": "ac3b4212dfc9dfb6a9bcb9e04529ec599232532304b4211813a73c2dc1cc859f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000052/omit-2.csv": {
+      "bytes": 398627,
+      "sha256": "a82ba2dd9c4a45562a15f313193f2eabb1af11879f4d413ad900e0cd97bfcae9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000052/omit-3.csv": {
+      "bytes": 398775,
+      "sha256": "0e5ec9be2c06189255de6cb374c928a724884a7530016e612c06079175f56041"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000053/full-after.csv": {
+      "bytes": 397726,
+      "sha256": "79f94809142a0e15a11403b14a6afe12ac1f50b58f99728abf17d89880cf439e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000053/full-before.csv": {
+      "bytes": 397716,
+      "sha256": "70543b7004770e41bd807115f22834f576e4860ef2b0db8d8b511b34f210632b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000053/omit-0.csv": {
+      "bytes": 385014,
+      "sha256": "a946a7a113cd28790ff013da49ead7b43ba5ceeca40b3a2cb7f3bb71b4486920"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000053/omit-1.csv": {
+      "bytes": 398320,
+      "sha256": "e138580e88fb8c6f1ef306345d6257f61803b1b0aeb6b90cf48e2f1f9da78e7e"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000053/omit-2.csv": {
+      "bytes": 398521,
+      "sha256": "b75ac234e6de9eee1e71beba0bf1bd42cc3d2da15205358bcc21a4c39899f2e9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000053/omit-3.csv": {
+      "bytes": 398704,
+      "sha256": "25e35ad6c5c5633b067cbe17853f0d2a2f9844f6ca48f24d547e2c992ed74789"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000054/full-after.csv": {
+      "bytes": 397714,
+      "sha256": "97eb39eea25628f04f2fe03299507d8ef0aa39706056ce4b31523234af895952"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000054/full-before.csv": {
+      "bytes": 397704,
+      "sha256": "66106c00f818876ce509c1b647992249b3a241cc5d43004eb20fbfab16dfced0"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000054/omit-0.csv": {
+      "bytes": 385026,
+      "sha256": "b27028dfb6fb4eec0b2241ca40d4e5baad38f4cb344f649620a0a02911e55dd8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000054/omit-1.csv": {
+      "bytes": 398308,
+      "sha256": "31afb6106fa5757f73b523db13e0d1124400b1dbdcfe67387ee4cbe18bd80dd3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000054/omit-2.csv": {
+      "bytes": 398536,
+      "sha256": "47aa83fc600efe146ae0b496079cdc2706d3c8a391ad4b159928ece786e0ae0a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000054/omit-3.csv": {
+      "bytes": 398701,
+      "sha256": "67dcc18215884727d97f5624512d3001013ef3ca6cd4fc983d67df56bff51343"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000055/full-after.csv": {
+      "bytes": 397623,
+      "sha256": "88caa00c9a43cf985c6b2af52732590bc7adffc585a05b64bef9da209263446f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000055/full-before.csv": {
+      "bytes": 397633,
+      "sha256": "fcaa7c163625517ec0d136679cf789844a0086090be34757c11d8b0b6cb303ee"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000055/omit-0.csv": {
+      "bytes": 384910,
+      "sha256": "a94f0af07976a70193e8487d7f47788250b1917c71174809735d8231411319f9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000055/omit-1.csv": {
+      "bytes": 398287,
+      "sha256": "60930ef62deae6f3bb7bf18a7c5694897477f6c8e23cdebc1519b66cdc403501"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000055/omit-2.csv": {
+      "bytes": 398479,
+      "sha256": "deffe230cc7349bf6d1856f7229767f985b8b2157020fe193b6e369bce4b531a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000055/omit-3.csv": {
+      "bytes": 398645,
+      "sha256": "397501a302ad642df53a738e0006fa6c2e1f837b01ae9218af7241227d86008a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000056/full-after.csv": {
+      "bytes": 397621,
+      "sha256": "799579ceba8fea9cbf8d4ea3ed4de88430a374622f070e8d937a49b10ce89d4f"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000056/full-before.csv": {
+      "bytes": 397621,
+      "sha256": "9c6a602d83373772e54e68cb45dc3ffc7fbf907d7e8fe005c07faf12f3cdff72"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000056/omit-0.csv": {
+      "bytes": 384925,
+      "sha256": "86c13dd8e503001aa37a758da434d3d1f51cff884b40236f7cee135bb575452a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000056/omit-1.csv": {
+      "bytes": 398284,
+      "sha256": "2bf82bd7c216d6669220971247231498e72ec0522600fa225022dfb1f3abcce9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000056/omit-2.csv": {
+      "bytes": 398477,
+      "sha256": "fde7ca7ce7ac0f07085c4a6650c950017741f3622a346d3584bb82f25d655c42"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000056/omit-3.csv": {
+      "bytes": 398647,
+      "sha256": "b33ae002cf0d96ba7aa1a20fe72f62f64b3ebf4c1677c349e0d6d8d3cf0ae369"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000057/full-after.csv": {
+      "bytes": 397507,
+      "sha256": "4772e41cbd67e28bead1cfb9c87f80f854a0785c8a62b666b3f20205f486674d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000057/full-before.csv": {
+      "bytes": 397496,
+      "sha256": "aa79632bfbe72e5f1734f490986a01bcbe7e0d4f408efe1047911a32af704088"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000057/omit-0.csv": {
+      "bytes": 384826,
+      "sha256": "f64075493c4bab257ea109109ff19b791b70e184ad962eaa908c27bc57270b63"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000057/omit-1.csv": {
+      "bytes": 398137,
+      "sha256": "512c7d6f3834eee993c13ebffadd6ddbbd93a7fbd31be0877c2e0e422b92843b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000057/omit-2.csv": {
+      "bytes": 398342,
+      "sha256": "cfeb97f118b6377df01140b60563fb6fa807c31db2a1d2b53dc62ab5043a684c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000057/omit-3.csv": {
+      "bytes": 398545,
+      "sha256": "e090eb76d7773c851ecfaba482669efc3dd2554ac94a75bb796d83b1c718264d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000058/full-after.csv": {
+      "bytes": 397513,
+      "sha256": "6c641bbccba6290a359f8b19d277cea6198cb2953b747a8636d8c709136f7d53"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000058/full-before.csv": {
+      "bytes": 397502,
+      "sha256": "adacf9db3c858e9f560335b4bae99c944c6ccd08a3b07b24d50cb6779d5a5775"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000058/omit-0.csv": {
+      "bytes": 384827,
+      "sha256": "36a702cedd253c9cdad170921110f0e68b92701eaabfc6e250e5ae9db4238e07"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000058/omit-1.csv": {
+      "bytes": 398127,
+      "sha256": "998167b8c3c3e483f4614bdc3d81abea4df3d16b9f1148daaba634ddeee4842a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000058/omit-2.csv": {
+      "bytes": 398351,
+      "sha256": "ba63316604ea290fce848331ccee99024f8b2d112e2dddd8458b1eecb1f0f928"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000058/omit-3.csv": {
+      "bytes": 398539,
+      "sha256": "5ec5462eac61b3d742bc49e1813b2cd01d642e0bfac9256048c4257a5b8e06e9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000059/full-after.csv": {
+      "bytes": 397395,
+      "sha256": "4f4484ee8e8b6a9333155de81b01fc27f7583ac1be9c7db5fc02517582618dd7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000059/full-before.csv": {
+      "bytes": 397405,
+      "sha256": "aef1c522797f409e5350d36ffa8acaa0c9e580fa2a78a5c26a2a32712f4dfba7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000059/omit-0.csv": {
+      "bytes": 384726,
+      "sha256": "1e2e89c911e78513c7dcd224d733fa5fd9b046c8fd54a3a60ab37277c8f3a852"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000059/omit-1.csv": {
+      "bytes": 398056,
+      "sha256": "ccfde14709dd78af2954a3f1c0677d19c8a708c3b633ceec75144c4ec21ecd41"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000059/omit-2.csv": {
+      "bytes": 398244,
+      "sha256": "0a235c175f78aad321a56fb2ea5e6a7a59711c8bbd0ac78f1b539bce33ca65ae"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000059/omit-3.csv": {
+      "bytes": 398423,
+      "sha256": "ada8f2e21c055a9738c1353692279982d60318bbecd565d1b6b37826da3658d9"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000060/full-after.csv": {
+      "bytes": 397394,
+      "sha256": "bb40f23b8d3a419cbfc18fd0281b0c67948db37d331d15069e705a06febb8c18"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000060/full-before.csv": {
+      "bytes": 397404,
+      "sha256": "150dbda29e96eda54312601ea8ba0f45432da5fb32f9cdde1b21b5250abedbfa"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000060/omit-0.csv": {
+      "bytes": 384714,
+      "sha256": "da133ac58c0ef5c748dae025c1e2d54d2bd601ff42933e6390e7d1ae957d3fa5"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000060/omit-1.csv": {
+      "bytes": 398071,
+      "sha256": "6392f264cfc7fb8177e18d2e58e43ef0c236b187ad3dc71f2476a89b8a30218d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000060/omit-2.csv": {
+      "bytes": 398228,
+      "sha256": "210376895798aad260507b05f21a3288d997e89ce05beca3f57e8232b096d4dd"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000060/omit-3.csv": {
+      "bytes": 398437,
+      "sha256": "5a9edd2e525dcff3ebe911b0c725e9e72a9721e93b4735683b7a19bb26f60115"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000061/full-after.csv": {
+      "bytes": 395025,
+      "sha256": "7261f1f33fd6a445cf688228b7d4e14ca00b2eac4e68adf7c9f4af6c5af46c3a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000061/full-before.csv": {
+      "bytes": 395015,
+      "sha256": "05b93473eef8cdd624cda614dfce883f02078d481457f199f13b3d45b41829eb"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000061/omit-0.csv": {
+      "bytes": 382378,
+      "sha256": "46f70b20a8a6edbe4d80ab974195a738fa856b4cd7c8465e747fa6e734610fac"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000061/omit-1.csv": {
+      "bytes": 395675,
+      "sha256": "6092d5a8add1455ba0735b0deb444b05d29f31d3d4e054465eb25b0d66bcc802"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000061/omit-2.csv": {
+      "bytes": 395937,
+      "sha256": "62f9ab1cc67c8254339592792f83c240e33b7237a0db1d24c85cda1e41c0feec"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000061/omit-3.csv": {
+      "bytes": 395120,
+      "sha256": "4ab473625c43303d8aff63d5e5b659fb24716f8ab81e7f0bbee7a1b1d35585ed"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000062/full-after.csv": {
+      "bytes": 395030,
+      "sha256": "16cc9b96332aec38ee94c24a192c8172615e802bb00277c7cef582db291e1ed3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000062/full-before.csv": {
+      "bytes": 395030,
+      "sha256": "8e0ba648bcf2ed7f41f98805c10a2edaecbc2d4723652a3cded06a7e936d86ce"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000062/omit-0.csv": {
+      "bytes": 382362,
+      "sha256": "ebc0dafe4876708e5d8a5bfe9d0437e239b7f48c3b71cfe20cb179082c00b983"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000062/omit-1.csv": {
+      "bytes": 395689,
+      "sha256": "d1e53d768ecb0d6639b3c88e8ad44d37912fcdbf36b1a1448601169479b214ad"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000062/omit-2.csv": {
+      "bytes": 395936,
+      "sha256": "382c302a7c31b06e79a5828417164d979be3a355fe7f5ecc05e3e84ed07fac4d"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000062/omit-3.csv": {
+      "bytes": 395118,
+      "sha256": "1a935feda562c45c916be87da2d1d212a3d80f47481c4069079a4467e8c93130"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000063/full-after.csv": {
+      "bytes": 397179,
+      "sha256": "f0547ea18d2e3f1b672531dd6d58924d3af4ceb7a7394c52ac30ae5cbfa19d59"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000063/full-before.csv": {
+      "bytes": 397190,
+      "sha256": "8f3b39a943d5ac0ca11d9bc781afb6504bf14154b109cbcd9201e5381dd85e2b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000063/omit-0.csv": {
+      "bytes": 384497,
+      "sha256": "b2193411dc873c24a1bf4fe6f41aad94075e4f11e449584b20712dbd28b68c40"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000063/omit-1.csv": {
+      "bytes": 397828,
+      "sha256": "edd73e5d070dd3ffd28771038a9c46a00c30dc87fd1864b8c9ed7e46061e0575"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000063/omit-2.csv": {
+      "bytes": 398022,
+      "sha256": "7cdc67209e2d05c57f083ca1b912d49843a1c2fc2cf55de0124b5cbe92510e56"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000063/omit-3.csv": {
+      "bytes": 398215,
+      "sha256": "a8d5a057fc2fa7949edc33341fed637f14a7ff24cd6c0be7b96909e9cf52bb5b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000064/full-after.csv": {
+      "bytes": 397172,
+      "sha256": "daa3fece7498b27893cf1e866ce372ff6ae72681219b2d96f7b1236da218f953"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000064/full-before.csv": {
+      "bytes": 397183,
+      "sha256": "3979d33f7f3e3605fdf0baf2b00cb411ea2dc20b1ea7ffac647039c90ba0f5d1"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000064/omit-0.csv": {
+      "bytes": 384505,
+      "sha256": "16917cceb6ff0139d56aa2c347fd9f7602281f5e263af412fe596237ac428191"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000064/omit-1.csv": {
+      "bytes": 397828,
+      "sha256": "9350bd4067ada7df04913226abf80c8dcd09e18a2e055721733bb457f3dc1e5a"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000064/omit-2.csv": {
+      "bytes": 398016,
+      "sha256": "32e1de7f253149e995c0bb20688fa5d0d62fd41ad913ee35eb1eb1a35fa245e8"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000064/omit-3.csv": {
+      "bytes": 398220,
+      "sha256": "ba80aeb23369e2af5d853cf58b663b35e2cfc65b12f305447977dc1c32b2526b"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000065/full-after.csv": {
+      "bytes": 397035,
+      "sha256": "96bf18dc011b7b752eafb380b8f6ee111072e191b3fcdda3aec3eb7356dcdbb4"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000065/full-before.csv": {
+      "bytes": 397046,
+      "sha256": "4d4a28eae7d4d4984e1fb04dca8d16a188710d67351a9c7f703b9f97a5f96dea"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000065/omit-0.csv": {
+      "bytes": 384376,
+      "sha256": "1e6b4305335f0d6196d6a9582b0f20860d820af0b3ba8a9d073d085fd7bc3e57"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000065/omit-1.csv": {
+      "bytes": 397707,
+      "sha256": "ba0256f99aec6f1048083a9d61ff3d3ee63b7d64bd49b3502f5b2e7cdf2a2236"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000065/omit-2.csv": {
+      "bytes": 397905,
+      "sha256": "44f82d75b4486b53be9ff142d4e6e5b3de954c1dce0b5589b25097b7dab387aa"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000065/omit-3.csv": {
+      "bytes": 398064,
+      "sha256": "6261a0bedf77f6e482c197fbfd361ada4c61b6ec7627f60c63d2e4bab37511e6"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000066/full-after.csv": {
+      "bytes": 397047,
+      "sha256": "a5868d529fd8e48f9fd61bcf75591f3296e8e9484fa1feca0ba61ecfcb0d41d7"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000066/full-before.csv": {
+      "bytes": 397037,
+      "sha256": "9be52141f667260e88257576fc98ac4fd3a651e5555f9d3ca4f61e43bcc3a634"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000066/omit-0.csv": {
+      "bytes": 384390,
+      "sha256": "f8ab61ca8d6098b235c6faca7d8a71512205257e8eed2148dbdbdaf478a8fec3"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000066/omit-1.csv": {
+      "bytes": 397691,
+      "sha256": "658d3161846198218c0fbc6ed926b43924ddb3b31eb461cee780e68dd61c075c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000066/omit-2.csv": {
+      "bytes": 397919,
+      "sha256": "8038b197eb4f11a689d635f6768eba13af5adf6d50bdabfae73adac4db435c1c"
+    },
+    "study/runs/baseline100/input/source/composite-measurements/group-000066/omit-3.csv": {
+      "bytes": 398051,
+      "sha256": "e5cd00ebc255aa474cdbc24ece99081d228b770231e2a6e48a45c94b78d2c962"
+    },
+    "study/runs/baseline100/input/source/train_stopped_state.json": {
+      "bytes": 224601694,
+      "sha256": "aaa2e50c756030aaa9b7f0865a26ab759cd36c41ed2ac40396fe81415e5455c9"
+    },
+    "study/runs/baseline100/input/source/train_stopped_summary.json": {
+      "bytes": 21412671,
+      "sha256": "ae468c0239a834c7a38db2abfcd2fa43d6e64db034dab1e03edf28e87aed708a"
+    },
+    "study/runs/baseline100/native/evaluation.json": {
+      "bytes": 4003,
+      "sha256": "ab817cb82721b27a62fbe4b10044bbd7006176c4cf2e2aa72d5e99af8e6d8bf0"
+    },
+    "study/runs/baseline100/native/execution.json": {
+      "bytes": 3097,
+      "sha256": "0c72c9e8e8fe0bf313468c4cc786236b3dcf771f52ecae1608a304fded30b0f0"
+    },
+    "study/runs/baseline100/native/job.json": {
+      "bytes": 281020862,
+      "sha256": "2ed4b4f5162cc25b0baeed1829182857ebceebb1aa288e3eb5ae611c009ef0d5"
+    },
+    "study/runs/baseline100/native/model-after.json": {
+      "bytes": 282794133,
+      "sha256": "41fe1362d3fd6e8acada44b3e2a9de0ea4cf841a14d32ba30e24700d44583fed"
+    },
+    "study/runs/baseline100/native/model.json": {
+      "bytes": 282794133,
+      "sha256": "41fe1362d3fd6e8acada44b3e2a9de0ea4cf841a14d32ba30e24700d44583fed"
+    },
+    "study/runs/baseline100/native/trial-0.json": {
+      "bytes": 1760654,
+      "sha256": "a68164559febed0d756893bb4a304aa264dbc828454b471805c060dd02dadbcd"
+    },
+    "study/runs/baseline100/native/trial-1.json": {
+      "bytes": 1760785,
+      "sha256": "30741c18d0a968e3e35dfc2e53d19193d6e7d571f5037431219b5cd20a1c26f4"
+    },
+    "study/runs/baseline100/native/trial-2.json": {
+      "bytes": 1760777,
+      "sha256": "d62fcf0b087bb3dc2b6e908ce495f3c5916b4188de66acde47f168510592c5ad"
+    },
+    "study/runs/baseline100/native/trial-3.json": {
+      "bytes": 1760706,
+      "sha256": "651c2e79e38944c3de4d5e75afdb6f84b74766cda24abe56857eca3071e0c6d2"
+    },
+    "study/runs/baseline100/native/trial-4.json": {
+      "bytes": 1761138,
+      "sha256": "0313934575aece1b66b8f55600f5991092e876dcce8d3623871e347f85cb012b"
+    },
+    "study/runs/baseline100/native/trial-5.json": {
+      "bytes": 1765124,
+      "sha256": "9264c51a17d0269cce61a203306c0d6e3821e6dcf806ae04b19713190230a59f"
+    },
+    "study/runs/baseline100/native/trial-6.json": {
+      "bytes": 1765045,
+      "sha256": "0412321f0228732f7a9dc434dc6c1d4adf561acf88e5bc23af1909145a39209e"
+    },
+    "study/runs/baseline100/native/trial-7.json": {
+      "bytes": 1765039,
+      "sha256": "5a13b556e2f14c1bea97cf9f131342b72fb0632fb24e482391adcf37c283f9e3"
+    },
+    "study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261113-161108.837989": {
+      "bytes": 290,
+      "sha256": "0ac65f12c88fa82ad920fcd1b75b15de0a751d9c95a454b28942a97c209206d7"
+    },
+    "study/runs/baseline100/process/capture-ack.json": {
+      "bytes": 113,
+      "sha256": "60d0dc5de4f5ced18193ea1306653687177347a4d42ee51c8d94fcfda1b4a8b2"
+    },
+    "study/runs/baseline100/process/capture-ready.json": {
+      "bytes": 97,
+      "sha256": "26ff38f1cc91c5b5dae0729ba820112b194abdcd877fc9b47766140a76df43f2"
+    },
+    "study/runs/baseline100/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "study/runs/baseline100/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "study/runs/baseline100/process/contained/limits-readback.json": {
+      "bytes": 1068,
+      "sha256": "d956aab634a836e25f3253c7adea4d2aa08dcc65ff2cdd50ed379d243a4a6b42"
+    },
+    "study/runs/baseline100/process/contained/owned-unit.json": {
+      "bytes": 565,
+      "sha256": "d93cb14b7f8bbefd4d4e9632d5f54221bdba4005a04242ad4166dcd7c12ac885"
+    },
+    "study/runs/baseline100/process/contained/ready.json": {
+      "bytes": 43,
+      "sha256": "79a945537bc39eef928565ce0cc15a67217a03f79f73285ad924afa51c95e1a1"
+    },
+    "study/runs/baseline100/process/contained/request.json": {
+      "bytes": 1573,
+      "sha256": "4f30556feab1f6c9766200f58317ea4727f300c3fce171627a06f419977c991e"
+    },
+    "study/runs/baseline100/process/contained/runtime.json": {
+      "bytes": 12614,
+      "sha256": "f06445077538491390aeb6fb18175bf7837f42d2e1ef75a9318f9b7709fe4d06"
+    },
+    "study/runs/baseline100/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "study/runs/baseline100/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/baseline100/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/baseline100/process/loaded-files.json": {
+      "bytes": 4832,
+      "sha256": "13b2e78c30ab600e10fc41c1628a7329a48ca013dbb1e4b160b5c215776d68c5"
+    },
+    "study/runs/baseline100/process/owned-process.json": {
+      "bytes": 659,
+      "sha256": "8f0291e6ddba7ad0feadfc1ee8269fea464ee16e039b6783dff2664e24c9bfe3"
+    },
+    "study/runs/baseline100/process/request.json": {
+      "bytes": 954,
+      "sha256": "5aab3a9bbf575a07844dcfdc0d9ec9b21de7bba0ef08d6e96688b8ed2d1893a8"
+    },
+    "study/runs/baseline100/process/reservation-context.json": {
+      "bytes": 3150,
+      "sha256": "2b7dbf258bc07b69a523104cc01db64c79c345c9778fc20db0abafaa4ab7a4b0"
+    },
+    "study/runs/baseline100/process/result.json": {
+      "bytes": 1176,
+      "sha256": "06118bdeed1f394648895e274235c216b5736ef38356aa9c1aaf1f81ba1eb81a"
+    },
+    "study/runs/baseline100/process/runtime.json": {
+      "bytes": 12614,
+      "sha256": "f06445077538491390aeb6fb18175bf7837f42d2e1ef75a9318f9b7709fe4d06"
+    },
+    "study/runs/baseline100/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/baseline100/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/baseline100/process/terminal-unit-state.json": {
+      "bytes": 1299,
+      "sha256": "ab9b34e39eeb4d7d2e2a15525c5138f338e97692fa444ae848c0b7e5ee65e7b6"
+    },
+    "study/runs/baseline100/process/whole-group-closure.json": {
+      "bytes": 1212,
+      "sha256": "44911d07f7424dbd452c65749e4e2af3351315246470e1fe4b6e387cbb0f62b2"
+    },
+    "study/runs/baseline100/run-manifest.json": {
+      "bytes": 303671,
+      "sha256": "47b5b190d81304087ea569d19b2c5b5f73ebff05b8c9429225d9e2f611b53601"
+    },
+    "study/runs/baseline100/runtime-cli-interface.json": {
+      "bytes": 5525,
+      "sha256": "f334f195f2d56fe2bcfc71826afc28596fa7630db83c794c1b6ccfa5c532abb0"
+    },
+    "study/runs/candidate/input/job.json": {
+      "bytes": 253090931,
+      "sha256": "184de6190184dd6338d6e6103cd8ec6bf22ce8f3125d657ec1938f9a3f90f7a8"
+    },
+    "study/runs/candidate/input/process-policy.json": {
+      "bytes": 552,
+      "sha256": "cb2bf005f6f83eeaea281ed0a8d4f748df37036c5b4e9ab1cbcaffb1b802dd40"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000001/full-after.csv": {
+      "bytes": 389997,
+      "sha256": "a946f68cf573b695e07de7d961c7810cdda1a6bcfacb7249fac6648aa7e5eb8d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000001/full-before.csv": {
+      "bytes": 390316,
+      "sha256": "1fdf97cd5ae82864f607aa31e9303204380fc8f43fac602e6e44f1a1521cb62d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000001/omit-0.csv": {
+      "bytes": 377681,
+      "sha256": "f3f51b996abda508dc73c429cfa88080559ee3a0aae9c096906b476032a49764"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000001/omit-1.csv": {
+      "bytes": 396011,
+      "sha256": "2556ef0adeef375baa9916ab88adb14a9bcd89e9e09cc3317e613faeeb823c34"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000001/omit-2.csv": {
+      "bytes": 397210,
+      "sha256": "03be17f22445ba0264543ca2602346a20248cdfa4a28893b0d635a55ceaae769"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000001/omit-3.csv": {
+      "bytes": 398988,
+      "sha256": "8732dd132ee2e7d6f30b88342795ead7cc497c628dc265b87408bfedf5761790"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000002/full-after.csv": {
+      "bytes": 390246,
+      "sha256": "89a6d9825ee91d0d289cc4908c22b34773abd94dbb1e9d0cf929b8df1929ce30"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000002/full-before.csv": {
+      "bytes": 378275,
+      "sha256": "2a92a6f07b886c49941015d5132f52f6aaac531144ce3afbffbb8840cd882ba8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000002/omit-0.csv": {
+      "bytes": 365614,
+      "sha256": "317a5ddb768f0f2dbc984777ddbe2fd9e8d8863b6d157472f89be0b067b823ef"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000002/omit-1.csv": {
+      "bytes": 380302,
+      "sha256": "b211b50f76160c948f15f07f14fbb09459bea9b07e3936a5a70d0dead15420f5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000002/omit-2.csv": {
+      "bytes": 390965,
+      "sha256": "1ae1a6c6d33705480e38d3760ab0480f1a3dbd84f6068fd5125d405d029917dd"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000002/omit-3.csv": {
+      "bytes": 391175,
+      "sha256": "78c11866706ffc6b223a3270901e06d6dc3194cdd77209b143187ca88be552e3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000003/full-after.csv": {
+      "bytes": 391657,
+      "sha256": "e8ac88c864247597dd6c29fe4a38b305076be294a54f953e4af5a5bc96cf44d3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000003/full-before.csv": {
+      "bytes": 390294,
+      "sha256": "832e6eb9a9533a576cd12d77976e802936506ff7a5b991f3535388182c4c2e2e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000003/omit-0.csv": {
+      "bytes": 377624,
+      "sha256": "5a6e409b1eb016936ff723fc6a36f3ae8e0867b45743d031e2f9484495be72ac"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000003/omit-1.csv": {
+      "bytes": 390881,
+      "sha256": "bb2722ff6605efe120bd10128bc66e71eaa4f1c67f20dc7df9dd9b9fdbe7ff34"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000003/omit-2.csv": {
+      "bytes": 391003,
+      "sha256": "48ee8195d43ccba31d11ef3256ddcb63ddaa96051aeb57c686e0207b21e32ad2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000003/omit-3.csv": {
+      "bytes": 391149,
+      "sha256": "85f7cafea43cb9cc7710bda14f71b44d3617e60ef5b5e4ab24c678adda8094a3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000004/full-after.csv": {
+      "bytes": 396232,
+      "sha256": "0ce3a06011a21148000e66326ef6517a9d29d5f5deda23a287d0f5de6cb9d335"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000004/full-before.csv": {
+      "bytes": 396232,
+      "sha256": "ad0177e5830a7a6304baff40f0829a879cf36edf3e13d138970cf896f88de578"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000004/omit-0.csv": {
+      "bytes": 383575,
+      "sha256": "bf004d302a8c56c8b9b715f3e3d723a39e643bcb8f532c4675176bb5dc7e3b28"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000004/omit-1.csv": {
+      "bytes": 396951,
+      "sha256": "d4b3fadccb58483ab6197f5b635dcb9a6bac18638fa056891cd3c00231a5954b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000004/omit-2.csv": {
+      "bytes": 397032,
+      "sha256": "3a8ba1486739c7c029888303106edc3eef9267bcc1c92b75248ca011eacc7a44"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000004/omit-3.csv": {
+      "bytes": 397113,
+      "sha256": "3841e78e51a9a7bdf4a52ed8dc345687d7a853635cf07b618114f95ab0445ca2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000005/full-after.csv": {
+      "bytes": 396231,
+      "sha256": "8cca0afbe33b5ed28abbdd3746c4379b83f4ca4c15dc305ea2c2bb23db9cbeca"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000005/full-before.csv": {
+      "bytes": 396231,
+      "sha256": "39042a501c79178696623d9621eb92471b1ce47771c17679e10dc6c626aa4d6e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000005/omit-0.csv": {
+      "bytes": 383648,
+      "sha256": "71170b4df83f9b94d20d5c24bf0a742492daa5a5f6bea839772998713320cca8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000005/omit-1.csv": {
+      "bytes": 396948,
+      "sha256": "9210916ef710b6a6ad75d2db6dcededf3f9228b6b11ba950bd4a8bc7a912d844"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000005/omit-2.csv": {
+      "bytes": 396964,
+      "sha256": "ebb056a41310dbc6bfddcdce6bbd774fe1f2ff8a109935e15e5e8a2be07106b7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000005/omit-3.csv": {
+      "bytes": 397112,
+      "sha256": "bc6ef18ce239b42e9fee82c407a8df1e8fb47491ec45a90c0b57fe265b007240"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000006/full-after.csv": {
+      "bytes": 397508,
+      "sha256": "aea81078b63d9e24440aaa8fddbb7c31e21fbc5b86c4c48d5dd2acde82787b40"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000006/full-before.csv": {
+      "bytes": 396293,
+      "sha256": "f028b700a1df3bc7bb6bdadd023efb7e6016d94422f8b676d47e7618aba35b78"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000006/omit-0.csv": {
+      "bytes": 383656,
+      "sha256": "d8f6e53adc2ecfb164740aee34de3648e1e1ee38b0ff7dde00b7bde6ded73d7c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000006/omit-1.csv": {
+      "bytes": 396903,
+      "sha256": "6210fcdc860fc3d22207654a1846a185c68f44fba16a658c21994e845d3c4ff6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000006/omit-2.csv": {
+      "bytes": 396940,
+      "sha256": "1edbc7177822ee3d26fa7bd8b2914a2aa7be32087a7b7ae97c08f5e6dc333e29"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000006/omit-3.csv": {
+      "bytes": 397111,
+      "sha256": "2ab4d0766bf1d3b05a925986931b1840c3f4e937df691d7b65e4037956be13a3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000007/full-after.csv": {
+      "bytes": 398007,
+      "sha256": "d134f5f6c2a8839f69ceac530c8b4d6307a95dbac9ee07cf17a36d9b000d9c49"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000007/full-before.csv": {
+      "bytes": 398008,
+      "sha256": "7667b6782d235fdd5fd646b99599624acbcff82cbaceb397e77ccea16ba8d995"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000007/omit-0.csv": {
+      "bytes": 385535,
+      "sha256": "d56ebbfaec4b8c04c827b5dffc23c8a9e7e34b161c4c9e719f27328ddcca4e74"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000007/omit-1.csv": {
+      "bytes": 398788,
+      "sha256": "eba3f685b19776e86f9ad3da64e795f131729790af993ddb62f0348d8386feea"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000007/omit-2.csv": {
+      "bytes": 398919,
+      "sha256": "c0b75cfce737a5a28eeda26162c1841d00b65e91492af2e5bc5f113384fa1670"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000007/omit-3.csv": {
+      "bytes": 399105,
+      "sha256": "17cc6a1537c6d0b33c14b8b65e1eb68bc918f43eed3a29cce2a9dfd3b03ba0f8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000008/full-after.csv": {
+      "bytes": 398010,
+      "sha256": "38b086b033653740d2da15351eef2ea566cfd603ef938b4a86211f752c2d8288"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000008/full-before.csv": {
+      "bytes": 398009,
+      "sha256": "4e75a2089b220fbdc7244d7dbdf01b687684d37042a591b7abefb4953d9e9de0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000008/omit-0.csv": {
+      "bytes": 385506,
+      "sha256": "66250dc1bc04eaf6f76ae80fa0e359b478fc4f6f3ad97206a2891bc2075a0ca9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000008/omit-1.csv": {
+      "bytes": 398778,
+      "sha256": "1e808b22dd42c064523f2b18daf4b8faeeac62b8dd475d4dd99896faef2892ff"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000008/omit-2.csv": {
+      "bytes": 398932,
+      "sha256": "41bd1364746390a44dc3200c35ba7a53de034ff8d2ac194540b6a2fcf60c4c57"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000008/omit-3.csv": {
+      "bytes": 399129,
+      "sha256": "486313c1710e606ec9469910771d6f86e4774ff6104e2d9ea3db57bb29591db9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000009/full-after.csv": {
+      "bytes": 398884,
+      "sha256": "b7a44df9143b2bfc9926d6b5882c3c52cc48c0b262b579345a27c104d3f7cee4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000009/full-before.csv": {
+      "bytes": 398873,
+      "sha256": "ebbb6893520e780809e34db9fa6420e757ecbd837fdb30025b57bb849efbbf1f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000009/omit-0.csv": {
+      "bytes": 386197,
+      "sha256": "e145028da989ebe45e7c3b3c60751035ed4fde7c7a4d500b58df7fb3a27ed8ef"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000009/omit-1.csv": {
+      "bytes": 399502,
+      "sha256": "f11ff7086a95998a7026aadce73116760079dcf379cc393926bc562d17fbb0c6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000009/omit-2.csv": {
+      "bytes": 399602,
+      "sha256": "b2bdc834ac31e4602e3280a8543595e86dd8ba556adcf3bcef5608c12abefc06"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000009/omit-3.csv": {
+      "bytes": 399792,
+      "sha256": "b88e45e0a71c86ff3af0770bbee7e10c7adfc7cbf4ff3be53acf5124761fc125"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000010/full-after.csv": {
+      "bytes": 375401,
+      "sha256": "4a71d297041b7724f8ca17324af43c8900d3b019a1f99a07832312691b7cd25f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000010/full-before.csv": {
+      "bytes": 398841,
+      "sha256": "f6909038ce70dbd831a9838689a1da3b3ebb952592c2cf9ae3d1a997be9ce229"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000010/omit-0.csv": {
+      "bytes": 375343,
+      "sha256": "2878bb8016b423b34b8fbfe2e83f9ee6f559b1cb3083ca7704a21cea51672921"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000010/omit-1.csv": {
+      "bytes": 376049,
+      "sha256": "89cd9c4982606c0a59f5b04247f7fcbf2849ffc8771ed8a636c310874cfb62a4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000010/omit-2.csv": {
+      "bytes": 376160,
+      "sha256": "94e46e51cc0c6a2bcd17caea19d60934d4381c1120390c0cd9c861811b604aa2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000010/omit-3.csv": {
+      "bytes": 376311,
+      "sha256": "933f94f9fd4c4943e42df15d2ef2e2da254ec8c4999e2f01460b4dd0c1a671b4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000011/full-after.csv": {
+      "bytes": 375382,
+      "sha256": "5f3b321a4b9b80efd313635677b2a37f1c14b73c3e7ed30a343792ff7f64815c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000011/full-before.csv": {
+      "bytes": 375384,
+      "sha256": "d5f48498bd09509de3990a094adb7d565d1bed8f95090cc98af425733afe06ef"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000011/omit-0.csv": {
+      "bytes": 362694,
+      "sha256": "2fdea2bbe4d2829716df072117beb525c0d2c2873507d8a958a530e8b07ee92b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000011/omit-1.csv": {
+      "bytes": 376012,
+      "sha256": "58d23bef4b04b3ed2e174a064654b24116dc2971bdf66d0a0a93549d85d05581"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000011/omit-2.csv": {
+      "bytes": 376135,
+      "sha256": "b10b656e73ba65bcf1bee81ec3962ebc16bfa320d52f1427d89d81dddedccadc"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000011/omit-3.csv": {
+      "bytes": 376287,
+      "sha256": "d9321723074199495a109326319b58e4e92dd4b65beeb53536c4c73e781a9290"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000012/full-after.csv": {
+      "bytes": 387596,
+      "sha256": "b17643c868a473db84c5a43ee732ceb140737f5f5796de0a2cf04780417fb1de"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000012/full-before.csv": {
+      "bytes": 375377,
+      "sha256": "2f6a23f5797aad20366279872e0e95484b4bfa0947499bd3a25390423418e5f2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000012/omit-0.csv": {
+      "bytes": 362699,
+      "sha256": "dd41cc4f8e003f84d1c5c4670a365316a83c178585a635f6c462e5ce00491254"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000012/omit-1.csv": {
+      "bytes": 376041,
+      "sha256": "dc2707b91ac975002b1dbd69d1f80c548e8f888cbaff0f22b818f497918e0148"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000012/omit-2.csv": {
+      "bytes": 376103,
+      "sha256": "b0bcc28aadaa8990f073bf057cecc9bd42602c390efcd40578d2a68f273b8998"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000012/omit-3.csv": {
+      "bytes": 376291,
+      "sha256": "c2238fd87f3646a8086413aa6e3ae0956ae8e1596d55b5f9c2d5dcf9fd6dda49"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000013/full-after.csv": {
+      "bytes": 382000,
+      "sha256": "c485713d476bf056068f4806665be107e636fd099c9eadcd5084735f8a543bd4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000013/full-before.csv": {
+      "bytes": 382000,
+      "sha256": "7cb674248be6ca5f0202f6972f67c9920630a99b286d0e559e2c276ecace8aae"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000013/omit-0.csv": {
+      "bytes": 369322,
+      "sha256": "a07bf14a56469e4920c9d034bb337bb07f583bccd793071cf38a848ed27a0bc4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000013/omit-1.csv": {
+      "bytes": 382452,
+      "sha256": "9963913349cff1aa350b133876fafbf9050d679fe1d0b768bca63a7e00e93cc0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000013/omit-2.csv": {
+      "bytes": 382912,
+      "sha256": "d35a0f1a6f1481ff9fb0a6e26ccc42a07adaebf22db143c915be1d6e01598336"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000013/omit-3.csv": {
+      "bytes": 382706,
+      "sha256": "3f902c9c710f759c925a96b207e308f1d63f442b951e83786af64587bb67f062"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000014/full-after.csv": {
+      "bytes": 381998,
+      "sha256": "f450a57c12c6bc7b3903962ef912d4e3b6d81005b6d6a35513317804c1b805e7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000014/full-before.csv": {
+      "bytes": 382008,
+      "sha256": "71a0c69107cec5aab8ddda2ea463158ebdfb0784f670fca2ef5b0eb06a162624"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000014/omit-0.csv": {
+      "bytes": 369322,
+      "sha256": "7400dd435e1f86418fe3a4b10e44f6a1171ca22ef7063d051446528e16eaea8f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000014/omit-1.csv": {
+      "bytes": 382456,
+      "sha256": "301c13adc3587cd4c07ba27ecde6a1621a1a9e1cc1ded61137ac4d50b2c9d9da"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000014/omit-2.csv": {
+      "bytes": 382908,
+      "sha256": "88f01ecb09a14fb3d77bc6d7a95034be6ae5a850dc190ba9631d712d027f5d95"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000014/omit-3.csv": {
+      "bytes": 382708,
+      "sha256": "69df2234ec9da8622fbeb5b8b6cb43a871a819ffda0cec078a6b3d161614b4f8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000015/full-after.csv": {
+      "bytes": 388822,
+      "sha256": "0cc86e42a05350de738bd9e3616ab5ea4fd95c9c78f895894fa1abce6726a491"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000015/full-before.csv": {
+      "bytes": 388810,
+      "sha256": "9b786e9b1bda204fcf39e8b008ab6612bd831d648057c06751e210e59e625ad4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000015/omit-0.csv": {
+      "bytes": 376134,
+      "sha256": "a31af31acad26d04ed0bcf3281c39089ca4a2cd85dffc53812409c67f06c9fb5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000015/omit-1.csv": {
+      "bytes": 389451,
+      "sha256": "452df6d1850cca4280b2c19962fa26cd3d8b51586c5f1fb889e15e167743c55c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000015/omit-2.csv": {
+      "bytes": 389531,
+      "sha256": "b92926aa812a12861ac769370009f42d58cfa8ccf7970cfac2621bf2eeaf4d5a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000015/omit-3.csv": {
+      "bytes": 389678,
+      "sha256": "c2cb7e3ab90d7dc32d7c956ffa3682a5ecbb808fda581610e0f84db2ec75c4ef"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000016/full-after.csv": {
+      "bytes": 388805,
+      "sha256": "817b6eba375b070bafac29ee49567cc7f6c5c488bc3a4279f01cd36d285a85e8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000016/full-before.csv": {
+      "bytes": 388802,
+      "sha256": "64552d3c4630b374105731f29ab9028ab367530c4536143c6da8745707545ed9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000016/omit-0.csv": {
+      "bytes": 376130,
+      "sha256": "6be990160bd1b4eed69ae6b8ea06e020ae12158e91ca22776e70bc5a36917ec5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000016/omit-1.csv": {
+      "bytes": 389453,
+      "sha256": "1ce28d9d34901490097d8107ad80e29d5ec87cc0a09cd7400ade2d970b0ec312"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000016/omit-2.csv": {
+      "bytes": 389529,
+      "sha256": "ce43c1c824d2bdf5bc8af6bf81df41a79d9537247f8daae1a94dcd96d8d483e4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000016/omit-3.csv": {
+      "bytes": 389689,
+      "sha256": "2edbaf8f79fee0c40c4ff80ac97adc92534120fd1f2d5409673859b83563d97e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000017/full-after.csv": {
+      "bytes": 382530,
+      "sha256": "1247f0c2d3625fa4695081f2d4b9dcf6020ad7e653cf694ae51dd117fcaa4437"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000017/full-before.csv": {
+      "bytes": 382528,
+      "sha256": "a9b3a89ac7d0f57aeeb51bf455fb6e592fc966771840e2b43af18e655191db40"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000017/omit-0.csv": {
+      "bytes": 369845,
+      "sha256": "493d485479ecef55c657f427e651ba5650320a6159de0a26114ed2b2a7f5508b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000017/omit-1.csv": {
+      "bytes": 382983,
+      "sha256": "bf53d967ffdd23cb9d5f889cc2910a4457b7c97e40ff1b776c816f9bcf925cbf"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000017/omit-2.csv": {
+      "bytes": 383463,
+      "sha256": "8992bde81f9a89c6e2edd6897987d62df0795f12d4e2a0e39b11b3e6543f86c1"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000017/omit-3.csv": {
+      "bytes": 383772,
+      "sha256": "9057fcb1bf540e86e04bbc24f3db338d4010faa74f9d2e59ccf5264b7dff55a6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000018/full-after.csv": {
+      "bytes": 382534,
+      "sha256": "7c8be8db2593f93b905e1a166f0b64ab1631da0d94d5a73f2af39ca4b53d9201"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000018/full-before.csv": {
+      "bytes": 382532,
+      "sha256": "990ea09222ce641f9a1c813cfe280be97f893f35159153221f4a82e51cf9a5fe"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000018/omit-0.csv": {
+      "bytes": 369842,
+      "sha256": "7b49aef58f0697d74b9ccdc97d717be4ba123842c42798a97549cbd7e14126e9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000018/omit-1.csv": {
+      "bytes": 382984,
+      "sha256": "b6fc12395e3a133ef80a8eb6b2befe85a560c1672f0c67627feddc06b0236983"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000018/omit-2.csv": {
+      "bytes": 383477,
+      "sha256": "0fbcc80bdbc9970da07980533ec386a3d091f5c5cca07a748dbbcb6c0c5c0457"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000018/omit-3.csv": {
+      "bytes": 383756,
+      "sha256": "918309fbb2ad5c49dbe9e198a697bead35c12a09dc6d2892a820b29db9fa844b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000019/full-after.csv": {
+      "bytes": 388752,
+      "sha256": "dad1fa9bbc918d85c038d6bd4a9a9570e71c2eef72dbab65502583a147b4372b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000019/full-before.csv": {
+      "bytes": 388752,
+      "sha256": "b25a12327040ace93b460357738ff65c072a0252a0a6f435c74450eaa2910b20"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000019/omit-0.csv": {
+      "bytes": 376067,
+      "sha256": "69964ce00ef25ec1f5f6eeab65ffd0f10b3e8bce7ad3aed4a780784e5a42a5e0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000019/omit-1.csv": {
+      "bytes": 389386,
+      "sha256": "e073cf42f55585ad1a379fdcec8ea4fc0d2b49f9f50331dcd86a1d8f9bca8fc9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000019/omit-2.csv": {
+      "bytes": 389482,
+      "sha256": "65834b133066cf7aaeee4359c51d729b0c34f2f16410ab150a605451498408d5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000019/omit-3.csv": {
+      "bytes": 389671,
+      "sha256": "ca15749d918bb082ef9bdf3db9622ba1ff2e3cc8100a93fd0693c51031bf961b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000020/full-after.csv": {
+      "bytes": 388753,
+      "sha256": "77323ebcfbbb8783ce7e8c67440cedc5b4f185e8c4644696a78a7fb99ef60771"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000020/full-before.csv": {
+      "bytes": 388752,
+      "sha256": "094dcf17e38bdfb0cd6c88bb51afc03e4a6a5640a919558eb91a37b4302ef970"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000020/omit-0.csv": {
+      "bytes": 376080,
+      "sha256": "8a755b3214d4c3226bb6889b1f8e281a1b0f2220af1d10637260d2a86eb5f999"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000020/omit-1.csv": {
+      "bytes": 389382,
+      "sha256": "e7b0ebfc524a230e38a3bde02fae96d3bb10ce97595e91674832f8a7c35e2037"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000020/omit-2.csv": {
+      "bytes": 389485,
+      "sha256": "14c0f2a242c337285b3f71bae7a31ded79a9e3d2af3a494148128e5374bc61c0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000020/omit-3.csv": {
+      "bytes": 389669,
+      "sha256": "911699e849aaafe407e83673985e6a90ab1e436e1bb91be12e7b82c459e18a56"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000021/full-after.csv": {
+      "bytes": 388717,
+      "sha256": "98954f2fa8e5e2a4a682bccad30e83bc36f81772cb63821abffc8efd86a02716"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000021/full-before.csv": {
+      "bytes": 388720,
+      "sha256": "471a3d91c527bebb03109a739fa4cd64bbb01fcf3ef4ffaffa88faa0905fffbd"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000021/omit-0.csv": {
+      "bytes": 376046,
+      "sha256": "9a66630af4963217b98d735d76df84b27cef3b063e77f31b5b68d4b933c632ef"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000021/omit-1.csv": {
+      "bytes": 389346,
+      "sha256": "1b989c8d6568adc52cda453d948160e996c2056ab3873ef2960675f9ba060790"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000021/omit-2.csv": {
+      "bytes": 389443,
+      "sha256": "c9562f6ce07db1ca1cf82d5a543a8285c6eb59a495663280b4535e9875b8f75f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000021/omit-3.csv": {
+      "bytes": 389621,
+      "sha256": "f35c77e3473a2fc63222b39427058c066c3a6c4ae2aa8031812eab91efef8591"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000022/full-after.csv": {
+      "bytes": 388728,
+      "sha256": "fc24f0c80b7dc85c51a927f43894904abb0e49d52488007f0c650a39fc7a3017"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000022/full-before.csv": {
+      "bytes": 388739,
+      "sha256": "091e7e3c49bc9e4ad0f960f565e3a8afe3bfb917a8820660f7074839a622f1ff"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000022/omit-0.csv": {
+      "bytes": 376038,
+      "sha256": "b15eba21420f8f755644ebd18737643cfdfdbfed08ec2cac67b40d2666388fa4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000022/omit-1.csv": {
+      "bytes": 389343,
+      "sha256": "fb632b3e0bd2c9c84ff0199c5d5f0eaf77583c01763d16cfe54eb931ce2d6232"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000022/omit-2.csv": {
+      "bytes": 389446,
+      "sha256": "91bf163b00ea0d41449520f857d36ce9bb43c753829ec1fd4691132f3ddecd73"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000022/omit-3.csv": {
+      "bytes": 389620,
+      "sha256": "9292ebf928cecef3cf69427772429912c118fb52a0fd46191b774cd32b31ee82"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000023/full-after.csv": {
+      "bytes": 388688,
+      "sha256": "22acbd693618b4602fbc300985675bbb6644027cb3ed52f6567cffcd041cfeed"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000023/full-before.csv": {
+      "bytes": 388680,
+      "sha256": "2cf0d7801d78f8093dfb3b09e57f72d5a5a6a677de6c63a0611da707ee9029f1"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000023/omit-0.csv": {
+      "bytes": 375987,
+      "sha256": "c64d961439bc20ab531786fe8921e9ef5ecd4c24e20cc9ffdea56f1dda2cd6e6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000023/omit-1.csv": {
+      "bytes": 389311,
+      "sha256": "6a233b51ec87fd22739bb2015eab11f25567bb225d876716dc5fcc4857770c4b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000023/omit-2.csv": {
+      "bytes": 389416,
+      "sha256": "8fa79243554ae6c3242dd20a8c7ff04e1ee593ef42284f5cf605d3d225025741"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000023/omit-3.csv": {
+      "bytes": 389603,
+      "sha256": "90863bbf693568a2b38720f8fd14f77009b7e7d7c49af2b7169ab6ad9c17cc65"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000024/full-after.csv": {
+      "bytes": 395363,
+      "sha256": "6f0b15d0d9dcda0d742ba2736b60e14cc3683035e11fb6be01a0669295a58b06"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000024/full-before.csv": {
+      "bytes": 388678,
+      "sha256": "803c7ac90c00bd05e69e2afbdbf0b7822bf76c3ae46661ed3828ae952d8e7756"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000024/omit-0.csv": {
+      "bytes": 375988,
+      "sha256": "675c7658b9486d113c60632d6d2053091f1646bf6f6c548e5d74e196fbc256c0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000024/omit-1.csv": {
+      "bytes": 389312,
+      "sha256": "f17ab6d3dd5d608a34409f945a7483cae5cd3366dad8f7302ec0c901af45951e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000024/omit-2.csv": {
+      "bytes": 389415,
+      "sha256": "059f421ff2497edebebdf23e9f17759612ee07db464518c887af9528687ea4c8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000024/omit-3.csv": {
+      "bytes": 395150,
+      "sha256": "7c85e28de8b9b09f3849385153f97790556475fb9f5a30b2130559c881fa7164"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000025/full-after.csv": {
+      "bytes": 395309,
+      "sha256": "b767ad170a19d3d84d33102f2a2362df85318541ceff5e809e18f1c3f4ae0e41"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000025/full-before.csv": {
+      "bytes": 395310,
+      "sha256": "b9b16aad618cdac0345d33543d3d52e95283849baeca1a94cd0b240f09cf3169"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000025/omit-0.csv": {
+      "bytes": 382628,
+      "sha256": "9990a89e6cc14543a2c9717d96b7239baf5d54626ffc01f1e6fbfc92f254f6ea"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000025/omit-1.csv": {
+      "bytes": 395953,
+      "sha256": "d6b525525ce10498fa94f005454a58c7a1417633f4e8ff0502455a1c2138f00c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000025/omit-2.csv": {
+      "bytes": 396058,
+      "sha256": "9bbc3ecd1b20cc12bbbe0749832bf34abd75c6c654be744e2cdc46d2b15147c6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000025/omit-3.csv": {
+      "bytes": 396247,
+      "sha256": "05537522c17ffd9f73049afda35f22e11f8ae3962d88dd9b326aa8023574c618"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000026/full-after.csv": {
+      "bytes": 395311,
+      "sha256": "6a7313a21a4dd9feb06436f97eb0ab474752975c7f60dcfc84a7cb7d35127fc7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000026/full-before.csv": {
+      "bytes": 395312,
+      "sha256": "d6a03ada232d62acb80f7c474ee77536f81a75e0de8123e76d652d77010336c4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000026/omit-0.csv": {
+      "bytes": 382626,
+      "sha256": "9457e6f1ad6b3a8ec86f76ab664a03d79e4041fbf4f379bc1190a798f66a8af0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000026/omit-1.csv": {
+      "bytes": 395955,
+      "sha256": "dddb4f3daf6a4ef0b4dcceac74ca207d48a25231fadd6320d574c54e21410881"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000026/omit-2.csv": {
+      "bytes": 396056,
+      "sha256": "5c0e248453b51064c09af1116397bf022f6e3ca7f807e284c2f99a5c9a2d7625"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000026/omit-3.csv": {
+      "bytes": 396247,
+      "sha256": "754cf5a05bde385371d5ea68d6e970040b8451920947a8e8e764fd1428ecab61"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000027/full-after.csv": {
+      "bytes": 395291,
+      "sha256": "b0ba6e1495d3545ceeed22ef8c572d48971f74a427fe1dc5c6629f0a9f80786d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000027/full-before.csv": {
+      "bytes": 395290,
+      "sha256": "c7f8cd1ccaa226b8e9761dc5fd8ec250835d15b05540504bda3cceec453c99b7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000027/omit-0.csv": {
+      "bytes": 382610,
+      "sha256": "7b63aa570a5ebabc49040258932e2d132445b0a3be1d260be28a75006148c6a1"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000027/omit-1.csv": {
+      "bytes": 395917,
+      "sha256": "2d6adca59072de78ce5af046bbfa604618e9fc035689ec316eefce6d168db31e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000027/omit-2.csv": {
+      "bytes": 396086,
+      "sha256": "8201bef1e3b055c10fc7a45451322cc4f431d95de62f89574e44c877581cf8c4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000027/omit-3.csv": {
+      "bytes": 396248,
+      "sha256": "3ee030fd734590cef39b0119d5d2153a3a4a8557c7bfc4c29c98c513a8476039"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000028/full-after.csv": {
+      "bytes": 395290,
+      "sha256": "5bf70576025845155b21ee8c19b58ba07998c4a5c9a9fa98ad7f74417c07bef5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000028/full-before.csv": {
+      "bytes": 395290,
+      "sha256": "6d92c7f230fb350544a67a002fd7848809582631d83222fe357fc61c7a347b4e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000028/omit-0.csv": {
+      "bytes": 382622,
+      "sha256": "7974d690230a462ee43d32c9a71886ffeb86e08a7cc47483aa56536c0a9023ea"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000028/omit-1.csv": {
+      "bytes": 395916,
+      "sha256": "ec5e921ed7ba952047df57ea3d7e8cad88067f53de9194c6d7d2dd7828c13214"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000028/omit-2.csv": {
+      "bytes": 396087,
+      "sha256": "bccb2e6a554a821dc7ce2ee19e1f41f7fc43c5240a1c675de116509e6307671c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000028/omit-3.csv": {
+      "bytes": 396247,
+      "sha256": "98034020a74800a024b0bc5bf1ae4d068fb34cebd535da8e2d85c185ebd0a6e2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000029/full-after.csv": {
+      "bytes": 395271,
+      "sha256": "642b54c4e4d580439a907ebc09c412d80ed820ea3513634788126fa978dba357"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000029/full-before.csv": {
+      "bytes": 395270,
+      "sha256": "4b07b432291932d90936ed4182527e717494f5128b075752613782d19a1cbe7e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000029/omit-0.csv": {
+      "bytes": 382593,
+      "sha256": "524b1b580dd8bc105d79c6ebdb28b69ada7ff9c607c8e2fe1ab296f7021cc33b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000029/omit-1.csv": {
+      "bytes": 395908,
+      "sha256": "adcd6cde12dea86cbd9b713dc2f2f548f2c3ca990deb734a6ddfe3171069a32e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000029/omit-2.csv": {
+      "bytes": 396047,
+      "sha256": "4106b2127df8e2235e2d89b92377056d9cd2d40d2ba2be4b328f814d0285ffa0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000029/omit-3.csv": {
+      "bytes": 396231,
+      "sha256": "d89584479436a2e4b5c15fc77b957cd6cf3edc1770afebf8ae23e32455cc5a62"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000030/full-after.csv": {
+      "bytes": 395271,
+      "sha256": "37dbc78572eb7da23d663ba37fbc2bca318d0cbf34d099c167376d780ede2f56"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000030/full-before.csv": {
+      "bytes": 395270,
+      "sha256": "d0aa9673fb6343911673e1b381e111c9909cbbbaef2a4e101afc5dae427a10fd"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000030/omit-0.csv": {
+      "bytes": 382594,
+      "sha256": "3d3394bc96aaf45a22949689ebab19137ee053c0e40f8e4ee6c4c5e38d6f310b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000030/omit-1.csv": {
+      "bytes": 395906,
+      "sha256": "285f94b2971f830679e2aef5b374d55bc3a0a1d998d4235deb70b44e93241bc1"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000030/omit-2.csv": {
+      "bytes": 396047,
+      "sha256": "405168dc586c48bc850280bb0e9fb4ab74fcaa15f859f80cf0941b66d8a69036"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000030/omit-3.csv": {
+      "bytes": 396232,
+      "sha256": "426312157852fe8026b9ec593b19285de9d9c8af51cc8490f3f5b6a85f9bfb0b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000031/full-after.csv": {
+      "bytes": 395208,
+      "sha256": "18eb44b4c1ba8d77766f9ea7987e60cfbc2348b198b36bd5c5de947ccb873497"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000031/full-before.csv": {
+      "bytes": 395206,
+      "sha256": "af1ddc1aba419efd03f9a81ecda3743dc85c8fb471530106d9ab0d79302b25ae"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000031/omit-0.csv": {
+      "bytes": 382499,
+      "sha256": "575adc3464edb6616b9194642fcd5b357f9ecd2f796642b12ac7c2ade8af8cc7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000031/omit-1.csv": {
+      "bytes": 395837,
+      "sha256": "130dddbf6fb8ffc4b3eda5fde0f1ea0021471daafae8aa901e52c634b53ea7e6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000031/omit-2.csv": {
+      "bytes": 395984,
+      "sha256": "d6e31f158ba7a6fe7baecc66447127c424c9becb7ff3b805b10351ed819ba560"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000031/omit-3.csv": {
+      "bytes": 396175,
+      "sha256": "a1d086813a98a37759daab171230869b822e0cb32ac0a12c254d48266fadeab4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000032/full-after.csv": {
+      "bytes": 395205,
+      "sha256": "a5fcb3f2071d047d66dad7f9be15b548047e94210068342f2595792d1d7038fc"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000032/full-before.csv": {
+      "bytes": 395204,
+      "sha256": "9d892aadc6dda4a13b3457f9cbc37acf07736f5f6a29fc3ce5dfb61b1a4d495e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000032/omit-0.csv": {
+      "bytes": 382499,
+      "sha256": "c5de02cae58163391e273c1b05b61385d0389d96eca28e8a5da6425995fbaaac"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000032/omit-1.csv": {
+      "bytes": 395838,
+      "sha256": "ab76baea88eea62ce4fe248c3113d4862387808fa46918b530061030186ef848"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000032/omit-2.csv": {
+      "bytes": 395983,
+      "sha256": "fce5796e74e11d761411ae9c1b62c84f283187e8681d2f76e05416b5dffdcf85"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000032/omit-3.csv": {
+      "bytes": 396178,
+      "sha256": "3c80d7e9ce4e7e10b2f0306bf6648217ff7993ea7e09c6269b511db16b316335"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000033/full-after.csv": {
+      "bytes": 389622,
+      "sha256": "d1c742bcdf5817c686295dbb94ae9c16e9e25c7eadf8db8e7b27c4679c6a42ac"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000033/full-before.csv": {
+      "bytes": 389623,
+      "sha256": "c960de47e9be116cc303e1996c37ab107f3f991788a28f22cbbc0edf6854f304"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000033/omit-0.csv": {
+      "bytes": 376978,
+      "sha256": "7e182e84f289c1ad94cf483447f60e7861f5d1adb3740a21884202f4cee2dc7d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000033/omit-1.csv": {
+      "bytes": 390111,
+      "sha256": "eb401e99665727e93b1c45acf2f0438051c2529fe619cbaab60584ea8cef7619"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000033/omit-2.csv": {
+      "bytes": 390567,
+      "sha256": "e595c67ba494d6b100e8828fc7ca3fa6ea31b1dceeb50a7b5bfb7e507c5e9b76"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000033/omit-3.csv": {
+      "bytes": 390802,
+      "sha256": "8b096cb031369803e4f276603b557e57222b9f9a622c556955e855b4dc1fdc92"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000034/full-after.csv": {
+      "bytes": 389624,
+      "sha256": "21a8cfb117bb4c51c47c9faf2fa489eb50046196b2343fbe7d104da2e230e2d3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000034/full-before.csv": {
+      "bytes": 389624,
+      "sha256": "21c666c9a2b8e32ff81c6fe4ac988eef1ce5757aef17ffe76f23198858641e2f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000034/omit-0.csv": {
+      "bytes": 376976,
+      "sha256": "b65757b80cce295e21dc3e4e26f9fa80d0e08f115db56d1381c731c04b94ab18"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000034/omit-1.csv": {
+      "bytes": 390125,
+      "sha256": "1ed9810033b3828cc436dc9917a32c6c20e64c050327e900cf62c7eed5547d7f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000034/omit-2.csv": {
+      "bytes": 390565,
+      "sha256": "3921f3994b0c57ba80d8e310042ea7e6ed659393ffa8f3219f5163fe51a6e043"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000034/omit-3.csv": {
+      "bytes": 390801,
+      "sha256": "06a0ef86a101b6aa790f78d6ee63e1d26e1de3feca98a913533c34c0fd5ebdc0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000035/full-after.csv": {
+      "bytes": 395183,
+      "sha256": "27b40208000fd7664bdcfb2bc06d9a090e70f452449ff05d6a711c01dd4c494a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000035/full-before.csv": {
+      "bytes": 395184,
+      "sha256": "afcbc77580a76243c2ba966de090ffa8ad588d09fb7591cbb61621713ff98013"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000035/omit-0.csv": {
+      "bytes": 382508,
+      "sha256": "7bc2a7f3be6f8c4c1b17d7f42e93269be25b0d923a72fe0b37370576b802cd12"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000035/omit-1.csv": {
+      "bytes": 395812,
+      "sha256": "1a9f38d28408c03aae85ec2bf86f03ab829be9eb65531855577c0989466743cf"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000035/omit-2.csv": {
+      "bytes": 395958,
+      "sha256": "4eeac3753336d7d2317f17cace6d59ed8dee44395331d8b33fb8a25bb367809a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000035/omit-3.csv": {
+      "bytes": 396133,
+      "sha256": "bc5f388667b466c8eeb6e7e8204fd94d8fdd1b7000f4a216f53b13f865af6580"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000036/full-after.csv": {
+      "bytes": 395187,
+      "sha256": "bdd7d63b66811da807392e53a9ec6f8aa7c22db79a19f5a96fad6da6a8e395d5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000036/full-before.csv": {
+      "bytes": 395189,
+      "sha256": "52de118c7f7c6ba2af3f781e0be2ac42a1fc7d3fc306c71f750d303b26fb2eaf"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000036/omit-0.csv": {
+      "bytes": 382504,
+      "sha256": "96da7f3c5a9f4ee009c7f2dd426ce5c94e5ca6f9255444ef27d45973d81d1b0c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000036/omit-1.csv": {
+      "bytes": 395812,
+      "sha256": "ecf49fad51e7a18fb6d649c3518185718cc84225cccb20725e3e7c64a8188a3b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000036/omit-2.csv": {
+      "bytes": 395959,
+      "sha256": "3fa6fa25c6e3e3dca3ae745e2fcfc6d9161fe22113e0061ee3939cde31a20913"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000036/omit-3.csv": {
+      "bytes": 396131,
+      "sha256": "3d0ed30f707e3874f7d425822a25935b8749b3d54d0935939c4ddd7fc8c82a5f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000037/full-after.csv": {
+      "bytes": 389697,
+      "sha256": "ab4670695faa89dc6f1b8974885a0b29b7f60bd9748def81d5f4cb0b0fd7fbbc"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000037/full-before.csv": {
+      "bytes": 389698,
+      "sha256": "7c34ee43af7dba31394134a1a43aab86edfa4246f53b3390c9dce902a2f82f47"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000037/omit-0.csv": {
+      "bytes": 377001,
+      "sha256": "3665c4b8f576a0240c627e2164d9893b629023d670e62cb4ce69e572438c6a1c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000037/omit-1.csv": {
+      "bytes": 390180,
+      "sha256": "0b1ecd88ae7ac006b068706b43d021aa49e047a56444e05f91b9e73327bc5e87"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000037/omit-2.csv": {
+      "bytes": 390626,
+      "sha256": "cb77292b6e6094971e4c10bbed0940c313a0475a631270dd7d7c7088ee8a6e6a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000037/omit-3.csv": {
+      "bytes": 390419,
+      "sha256": "d931fd28fd1852991940a2585455ff6e26932ca20a0c1826146af87bb0f5621c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000038/full-after.csv": {
+      "bytes": 389696,
+      "sha256": "7ce381e4586cbad6acc7df44f3ba200e0c1a4d7a7106de977deb1803da5e628e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000038/full-before.csv": {
+      "bytes": 389697,
+      "sha256": "9779b0a4fc239d4f590914b1731d1f0d96ed5a384235b7735ae098d01d079629"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000038/omit-0.csv": {
+      "bytes": 377002,
+      "sha256": "a65f5a22819f0537fd6f619ca256e4bebd720d629c4b8eb997234582134732ba"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000038/omit-1.csv": {
+      "bytes": 390178,
+      "sha256": "f61ad88b7809de3c5588dc492b704511273940d2d1b641ce67d6e36caeaa6df6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000038/omit-2.csv": {
+      "bytes": 390630,
+      "sha256": "d708708db496ef9ee47be76a1d730d58ff56a337b0f7d46095bc517383c2fb27"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000038/omit-3.csv": {
+      "bytes": 390417,
+      "sha256": "c20074b24ea47271a97e6bcb49dee5a095d302b2e265da76b86a95888883695c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000039/full-after.csv": {
+      "bytes": 395072,
+      "sha256": "1567bc92f27a220f487a8dc8d19f32497d7c3176aee44017270eb18412d40f80"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000039/full-before.csv": {
+      "bytes": 395073,
+      "sha256": "e88a9c2b9f687f18ebf9afb4032df691c640ee4129c798f4d920a56baa811356"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000039/omit-0.csv": {
+      "bytes": 382380,
+      "sha256": "2b4df241b799f17f209fcd0928629009905ab18ebac3112f8c8af603ff3193b0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000039/omit-1.csv": {
+      "bytes": 395739,
+      "sha256": "244dc496aff556ed7aedbb3e2cee6c747d367c2dc7b1524aa0238d1080b01d62"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000039/omit-2.csv": {
+      "bytes": 395895,
+      "sha256": "8157e141902e4362379d3b37755596a6e3fc2f0777c14d8c6096ff02319974ff"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000039/omit-3.csv": {
+      "bytes": 396060,
+      "sha256": "a65db9e982c9f2160149a516ec60489a0dc10afead083efee1cfcd0faa2e0612"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000040/full-after.csv": {
+      "bytes": 395070,
+      "sha256": "aa7f208a79a024c072ef941224dfe527b0427456d0b04c391082072cfeee0007"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000040/full-before.csv": {
+      "bytes": 395070,
+      "sha256": "36a32d003256fe6e08a7e4c161dd49dace60378ce06388b7189b51bd4a060bcf"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000040/omit-0.csv": {
+      "bytes": 382385,
+      "sha256": "15f9e9dc7c21df185f0f401a5f552414972cb9bc0672eb51ad6a7dd99c4334a3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000040/omit-1.csv": {
+      "bytes": 395735,
+      "sha256": "46d9f6ade69aa85e55da0c0070a3d7831854ac97d7a1425c99c850c429de26ea"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000040/omit-2.csv": {
+      "bytes": 395907,
+      "sha256": "63de57545d5be5da7804160bb15135505971e6e4ff816afc8893938d3ff52c0a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000040/omit-3.csv": {
+      "bytes": 396060,
+      "sha256": "382742c61dcf7afd69a51ddfc0bc6fbe7408ed0626ea8bdfd0627084f85d7c97"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000041/full-after.csv": {
+      "bytes": 390603,
+      "sha256": "15db351732ac2cb0c0365955ec6690d2a464f0ab45db9002a5296d22df7902d4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000041/full-before.csv": {
+      "bytes": 390604,
+      "sha256": "1c5382051beab697b7df215dd4ee9af259b94c895da1af3e6a47eb2c6e11d383"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000041/omit-0.csv": {
+      "bytes": 377910,
+      "sha256": "17bda851f86ea10ea29e548edda21165c890ce8c7754c94499b9e44a52916abc"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000041/omit-1.csv": {
+      "bytes": 391064,
+      "sha256": "aeb19833c8bd8c814e776a96877fe2c286c2f118e558fa3725d9053dfa27401c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000041/omit-2.csv": {
+      "bytes": 391517,
+      "sha256": "bc60e8502ddb0624207703a19d81e46d6975125527068268788b47a375f68df6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000041/omit-3.csv": {
+      "bytes": 391808,
+      "sha256": "fff89834faaead5edfb3cc86676b94d376eb8563154023452cb84eb70ab5ea47"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000042/full-after.csv": {
+      "bytes": 390601,
+      "sha256": "88e23060e0d544d31e9f6ff18818c537a5f088f6bcec36cee400de061ec5167f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000042/full-before.csv": {
+      "bytes": 390600,
+      "sha256": "831f9716a71dbf52696e182955f6811aaf97a3eac183e0d5faf4857c5bae8397"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000042/omit-0.csv": {
+      "bytes": 377911,
+      "sha256": "7a99969f357f9ba27ff70b0ed482c6f758b9c65faeb72ae1ccfc4fa2d1ca90f9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000042/omit-1.csv": {
+      "bytes": 391064,
+      "sha256": "ab745f60c157db3356d11bbd0ca31b2e2862cec71494920fd275c1bb919bfc64"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000042/omit-2.csv": {
+      "bytes": 391516,
+      "sha256": "a088cbdf4a4361d2b18dc0ab27a09b1559d647d0795c647e11b5ab71652deb6c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000042/omit-3.csv": {
+      "bytes": 391811,
+      "sha256": "aed137a08849147de2e596d6854a9f38cb09c85eaf8061b657bfa8397f37dff9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000043/full-after.csv": {
+      "bytes": 395004,
+      "sha256": "b83dd40c94d441b38f0e20bad066c383f73322a8834f9d0b865bbce66a00d685"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000043/full-before.csv": {
+      "bytes": 395003,
+      "sha256": "7146f4fbc3e69b851cc757ef9349dcc4120c42970dbce9ac62f2e1bc9e6ccf4b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000043/omit-0.csv": {
+      "bytes": 382303,
+      "sha256": "e6723638a407dc9708d29f338fad239383dcb86695e646663bb95f82e77af2e3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000043/omit-1.csv": {
+      "bytes": 395657,
+      "sha256": "b75505a6b7f044fc38f1ba43a60fa07b0e33ce28b70a02bffdc1d5452309febd"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000043/omit-2.csv": {
+      "bytes": 395844,
+      "sha256": "00b81e278147e412425460078338a1662d01dd47b8477bae64ed439acf041e0d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000043/omit-3.csv": {
+      "bytes": 395967,
+      "sha256": "77e128a911637c20283f0fd89b8402f5b26479cd3b546e4c694d3f608e099084"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000044/full-after.csv": {
+      "bytes": 395005,
+      "sha256": "8a47d7f91fc0e57497fde3ef196bafc2b91581db6cbc6e225a84ea6950f64288"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000044/full-before.csv": {
+      "bytes": 395004,
+      "sha256": "cf17dd3d259ff00bd5a15ffdaaa6c90d42893cb4ccc8c86670fd78f2190cb237"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000044/omit-0.csv": {
+      "bytes": 382301,
+      "sha256": "10e00f6fdb4664996c348bdcdeb48dbcb3674bbff7195148d915d4452e6fb727"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000044/omit-1.csv": {
+      "bytes": 395661,
+      "sha256": "aedd056cf396bf6724c91f1afabdcf438c64a262e6096328643b778230107966"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000044/omit-2.csv": {
+      "bytes": 395841,
+      "sha256": "81c56292030548a0b76ac6bc1a783412ec5d0df03c362c137ff7afd8b1d73272"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000044/omit-3.csv": {
+      "bytes": 395967,
+      "sha256": "e20082482e1f94eeee87694c72a90682a46c85a343fd5b7b707595a9c69338ae"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000045/full-after.csv": {
+      "bytes": 391513,
+      "sha256": "77948394de7d58cd16fc78b8aa0650d90f770a958b9a9b8169925e87e3af5f13"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000045/full-before.csv": {
+      "bytes": 391512,
+      "sha256": "f40c0deb8f03066fe8498bd9ec5f3d64f66b2cc79d4ee9b134fc5fbb3ab9c86c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000045/omit-0.csv": {
+      "bytes": 378854,
+      "sha256": "1f3f838fd5fca5353354b8b6cf80597dc5d3de4bdd2b1cf0dd87ae5fb7565008"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000045/omit-1.csv": {
+      "bytes": 392091,
+      "sha256": "a7c5de913080d36339c49cf8748e049af97190c67de87e0f8ee2a05fa1d8479d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000045/omit-2.csv": {
+      "bytes": 392383,
+      "sha256": "4afe30bbd018e62db2a15d9a8d561a35132f7a80dc2ad1523de92a2ded746d2e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000045/omit-3.csv": {
+      "bytes": 392664,
+      "sha256": "64b131b7736a3f26cd9247a32df6d4c2c061433f333b7003378ba2d1f2e668e9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000046/full-after.csv": {
+      "bytes": 391516,
+      "sha256": "ae61cec8e78cccf6f02d6fa46b91a2f16b50dbf906a3ba9bb67c218cf2aa2e08"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000046/full-before.csv": {
+      "bytes": 391515,
+      "sha256": "9d03db9609509c5eeee48ab52f6dacd11efda3e5b2e41f2cdac2b208e0a566a5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000046/omit-0.csv": {
+      "bytes": 378851,
+      "sha256": "ab471a675277488a6a59d9d08b8092f70cc8342e2a7f648cd15c6e47e9850732"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000046/omit-1.csv": {
+      "bytes": 392091,
+      "sha256": "765770180b4d8b732fda0bd3f3e53f8b9396c08cd3a792232381b9f6a8dbb559"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000046/omit-2.csv": {
+      "bytes": 392384,
+      "sha256": "9a5732a7671d96a9f102022099253e336f3b0a6c7ed5577e8cacfb72e93d9548"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000046/omit-3.csv": {
+      "bytes": 392663,
+      "sha256": "2db539010c890155a26f9ebb9723c1ac319a1757180b2a12d6d5db62be404334"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000047/full-after.csv": {
+      "bytes": 394900,
+      "sha256": "9ea8984dd3d7ae4fec31959c84bc338cdc5d68f16a61506e890e27f9e92803e3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000047/full-before.csv": {
+      "bytes": 394899,
+      "sha256": "f337467ba746e1ae2dd2a5297147e8e65282157afa5509c74dd343d9eef38cc4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000047/omit-0.csv": {
+      "bytes": 382223,
+      "sha256": "cc0d4f21c9d62583a9ca46949802d7a0979856055db2e2e9a5c0d5dc9c3192cd"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000047/omit-1.csv": {
+      "bytes": 395572,
+      "sha256": "5ecd51ccfa93df60f1ace4e6501d8e56b2fcd4ccbe1057832bcb4d961b9bfa51"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000047/omit-2.csv": {
+      "bytes": 395752,
+      "sha256": "66444b7a5c9fde9ae76ef671a79cb1ac56b7c620badd4b9319cdc1d0a2819e58"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000047/omit-3.csv": {
+      "bytes": 395899,
+      "sha256": "29bcf3b6b4551521cfd97c27186e06e82ddcf0452746062161345fa0dd392494"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000048/full-after.csv": {
+      "bytes": 397939,
+      "sha256": "a28e1af441b1749a40b99baf38102d349376094a33fe6febedc51b30751c8e3c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000048/full-before.csv": {
+      "bytes": 394899,
+      "sha256": "01517447624b55a944ba30055d440f5c1d3b5735f87f658358a5f31a640bb365"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000048/omit-0.csv": {
+      "bytes": 382223,
+      "sha256": "ad5a50c8438a49acf77b5d01e0dc23584f9d1445747e9e8ccadfc237561f3389"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000048/omit-1.csv": {
+      "bytes": 397577,
+      "sha256": "df15b222b78aed266ed0ca799df634052af335628af20053a49506051c4de28e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000048/omit-2.csv": {
+      "bytes": 398793,
+      "sha256": "7590c9279aae925d1c981e35f388dff71281a2627f446a3ff06d794152b5ba0a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000048/omit-3.csv": {
+      "bytes": 398934,
+      "sha256": "7cdf55cb31c4795e2554a4d2af9b1fe3fd366dbce4d87195e964d8e81e972dfc"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000049/full-after.csv": {
+      "bytes": 397887,
+      "sha256": "5becfc9ab26a6bbbd12bdc2bfa980726e62b251968aa704185d29b5ea6c7defb"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000049/full-before.csv": {
+      "bytes": 397877,
+      "sha256": "808ddbc7894c32429d48779333c5211bf81297621a76e14287c004ff6e277e45"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000049/omit-0.csv": {
+      "bytes": 385196,
+      "sha256": "d717c42c10da3a4ab87a0090b05f56e8107d08ecef208557f76162237ea7d58f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000049/omit-1.csv": {
+      "bytes": 398552,
+      "sha256": "6184061ec38f041f6bef3b82a47cd9acb0ae0e189a674cda76c004e153691e37"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000049/omit-2.csv": {
+      "bytes": 398760,
+      "sha256": "03e2d120924089b028f6984b57d7df93acca53f863f8a85de69ccbb474c6174d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000049/omit-3.csv": {
+      "bytes": 398881,
+      "sha256": "9d242e7a23cb80154a31d95b8da231ee511aabf67586eae79f2f5bd80346f250"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000050/full-after.csv": {
+      "bytes": 397889,
+      "sha256": "0ac1d452306381ea35a4d40940cfee7f87d63887d00f9c31a8bfd7acb1db81d8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000050/full-before.csv": {
+      "bytes": 397889,
+      "sha256": "6635a87147a97ef953cf2b99f52f5dab7380be31b335de44a172fbb289877f7d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000050/omit-0.csv": {
+      "bytes": 385199,
+      "sha256": "76b7c72dde4bd50b3f5294d365de732e189e1a2c4f5878384abf40a9f1b691f2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000050/omit-1.csv": {
+      "bytes": 398547,
+      "sha256": "3cd24da67395d8dd32e2274d55ab6e898d751bcb0c9b771d3ade57d19d72e5a2"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000050/omit-2.csv": {
+      "bytes": 398762,
+      "sha256": "0f4e85f2fc49c1e8245b0a1f2b6f00a3de945151c79b19d33ad91c4862d69034"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000050/omit-3.csv": {
+      "bytes": 398879,
+      "sha256": "af3df6adfde1f5936f99f9b4f935cd9d957002aa124de1aa09562322d628251f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000051/full-after.csv": {
+      "bytes": 397771,
+      "sha256": "50294a42c44fc080a14ae794e6fa3c0366808b4abe6a7716eb080d4d2f7e12eb"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000051/full-before.csv": {
+      "bytes": 397786,
+      "sha256": "da381a4fe4dd51c24835b2312cd6cf9bf1c5c971878e61f4eef77135a8b10b79"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000051/omit-0.csv": {
+      "bytes": 385104,
+      "sha256": "47131ec7dba8523d1e597587d07909318a15179c23b115435c18e07d9a467004"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000051/omit-1.csv": {
+      "bytes": 398452,
+      "sha256": "c23bbe6cf3fdc61fb137b713e0977b57bb78865ec8e08f07664746a81ee9c3ec"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000051/omit-2.csv": {
+      "bytes": 398636,
+      "sha256": "e09ebb756124081b8f7053a412824954a3cd4607e68b80ea988eaea4b8bf4a1e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000051/omit-3.csv": {
+      "bytes": 398766,
+      "sha256": "61e145d5d3351d5aa33ca6b02a512a7878af2e39503ecfeeaf061558261a8995"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000052/full-after.csv": {
+      "bytes": 397775,
+      "sha256": "5ae4df7a0667c51e5afc7c24d6af6c24ac29b6b9374bc95c232d37aa4dfff0da"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000052/full-before.csv": {
+      "bytes": 397786,
+      "sha256": "740018262d1d4cb4ae42d625a5e727a36a7ddf960cadf00820a6440ca93c2a8b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000052/omit-0.csv": {
+      "bytes": 385095,
+      "sha256": "7dce7334b3c3d3e70f8cc17bfeb6cef9f83561cb275d07c9ea7b8ca7e04f85a7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000052/omit-1.csv": {
+      "bytes": 398461,
+      "sha256": "ac3b4212dfc9dfb6a9bcb9e04529ec599232532304b4211813a73c2dc1cc859f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000052/omit-2.csv": {
+      "bytes": 398627,
+      "sha256": "a82ba2dd9c4a45562a15f313193f2eabb1af11879f4d413ad900e0cd97bfcae9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000052/omit-3.csv": {
+      "bytes": 398775,
+      "sha256": "0e5ec9be2c06189255de6cb374c928a724884a7530016e612c06079175f56041"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000053/full-after.csv": {
+      "bytes": 397726,
+      "sha256": "79f94809142a0e15a11403b14a6afe12ac1f50b58f99728abf17d89880cf439e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000053/full-before.csv": {
+      "bytes": 397716,
+      "sha256": "70543b7004770e41bd807115f22834f576e4860ef2b0db8d8b511b34f210632b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000053/omit-0.csv": {
+      "bytes": 385014,
+      "sha256": "a946a7a113cd28790ff013da49ead7b43ba5ceeca40b3a2cb7f3bb71b4486920"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000053/omit-1.csv": {
+      "bytes": 398320,
+      "sha256": "e138580e88fb8c6f1ef306345d6257f61803b1b0aeb6b90cf48e2f1f9da78e7e"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000053/omit-2.csv": {
+      "bytes": 398521,
+      "sha256": "b75ac234e6de9eee1e71beba0bf1bd42cc3d2da15205358bcc21a4c39899f2e9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000053/omit-3.csv": {
+      "bytes": 398704,
+      "sha256": "25e35ad6c5c5633b067cbe17853f0d2a2f9844f6ca48f24d547e2c992ed74789"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000054/full-after.csv": {
+      "bytes": 397714,
+      "sha256": "97eb39eea25628f04f2fe03299507d8ef0aa39706056ce4b31523234af895952"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000054/full-before.csv": {
+      "bytes": 397704,
+      "sha256": "66106c00f818876ce509c1b647992249b3a241cc5d43004eb20fbfab16dfced0"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000054/omit-0.csv": {
+      "bytes": 385026,
+      "sha256": "b27028dfb6fb4eec0b2241ca40d4e5baad38f4cb344f649620a0a02911e55dd8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000054/omit-1.csv": {
+      "bytes": 398308,
+      "sha256": "31afb6106fa5757f73b523db13e0d1124400b1dbdcfe67387ee4cbe18bd80dd3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000054/omit-2.csv": {
+      "bytes": 398536,
+      "sha256": "47aa83fc600efe146ae0b496079cdc2706d3c8a391ad4b159928ece786e0ae0a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000054/omit-3.csv": {
+      "bytes": 398701,
+      "sha256": "67dcc18215884727d97f5624512d3001013ef3ca6cd4fc983d67df56bff51343"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000055/full-after.csv": {
+      "bytes": 397623,
+      "sha256": "88caa00c9a43cf985c6b2af52732590bc7adffc585a05b64bef9da209263446f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000055/full-before.csv": {
+      "bytes": 397633,
+      "sha256": "fcaa7c163625517ec0d136679cf789844a0086090be34757c11d8b0b6cb303ee"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000055/omit-0.csv": {
+      "bytes": 384910,
+      "sha256": "a94f0af07976a70193e8487d7f47788250b1917c71174809735d8231411319f9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000055/omit-1.csv": {
+      "bytes": 398287,
+      "sha256": "60930ef62deae6f3bb7bf18a7c5694897477f6c8e23cdebc1519b66cdc403501"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000055/omit-2.csv": {
+      "bytes": 398479,
+      "sha256": "deffe230cc7349bf6d1856f7229767f985b8b2157020fe193b6e369bce4b531a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000055/omit-3.csv": {
+      "bytes": 398645,
+      "sha256": "397501a302ad642df53a738e0006fa6c2e1f837b01ae9218af7241227d86008a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000056/full-after.csv": {
+      "bytes": 397621,
+      "sha256": "799579ceba8fea9cbf8d4ea3ed4de88430a374622f070e8d937a49b10ce89d4f"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000056/full-before.csv": {
+      "bytes": 397621,
+      "sha256": "9c6a602d83373772e54e68cb45dc3ffc7fbf907d7e8fe005c07faf12f3cdff72"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000056/omit-0.csv": {
+      "bytes": 384925,
+      "sha256": "86c13dd8e503001aa37a758da434d3d1f51cff884b40236f7cee135bb575452a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000056/omit-1.csv": {
+      "bytes": 398284,
+      "sha256": "2bf82bd7c216d6669220971247231498e72ec0522600fa225022dfb1f3abcce9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000056/omit-2.csv": {
+      "bytes": 398477,
+      "sha256": "fde7ca7ce7ac0f07085c4a6650c950017741f3622a346d3584bb82f25d655c42"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000056/omit-3.csv": {
+      "bytes": 398647,
+      "sha256": "b33ae002cf0d96ba7aa1a20fe72f62f64b3ebf4c1677c349e0d6d8d3cf0ae369"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000057/full-after.csv": {
+      "bytes": 397507,
+      "sha256": "4772e41cbd67e28bead1cfb9c87f80f854a0785c8a62b666b3f20205f486674d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000057/full-before.csv": {
+      "bytes": 397496,
+      "sha256": "aa79632bfbe72e5f1734f490986a01bcbe7e0d4f408efe1047911a32af704088"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000057/omit-0.csv": {
+      "bytes": 384826,
+      "sha256": "f64075493c4bab257ea109109ff19b791b70e184ad962eaa908c27bc57270b63"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000057/omit-1.csv": {
+      "bytes": 398137,
+      "sha256": "512c7d6f3834eee993c13ebffadd6ddbbd93a7fbd31be0877c2e0e422b92843b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000057/omit-2.csv": {
+      "bytes": 398342,
+      "sha256": "cfeb97f118b6377df01140b60563fb6fa807c31db2a1d2b53dc62ab5043a684c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000057/omit-3.csv": {
+      "bytes": 398545,
+      "sha256": "e090eb76d7773c851ecfaba482669efc3dd2554ac94a75bb796d83b1c718264d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000058/full-after.csv": {
+      "bytes": 397513,
+      "sha256": "6c641bbccba6290a359f8b19d277cea6198cb2953b747a8636d8c709136f7d53"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000058/full-before.csv": {
+      "bytes": 397502,
+      "sha256": "adacf9db3c858e9f560335b4bae99c944c6ccd08a3b07b24d50cb6779d5a5775"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000058/omit-0.csv": {
+      "bytes": 384827,
+      "sha256": "36a702cedd253c9cdad170921110f0e68b92701eaabfc6e250e5ae9db4238e07"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000058/omit-1.csv": {
+      "bytes": 398127,
+      "sha256": "998167b8c3c3e483f4614bdc3d81abea4df3d16b9f1148daaba634ddeee4842a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000058/omit-2.csv": {
+      "bytes": 398351,
+      "sha256": "ba63316604ea290fce848331ccee99024f8b2d112e2dddd8458b1eecb1f0f928"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000058/omit-3.csv": {
+      "bytes": 398539,
+      "sha256": "5ec5462eac61b3d742bc49e1813b2cd01d642e0bfac9256048c4257a5b8e06e9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000059/full-after.csv": {
+      "bytes": 397395,
+      "sha256": "4f4484ee8e8b6a9333155de81b01fc27f7583ac1be9c7db5fc02517582618dd7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000059/full-before.csv": {
+      "bytes": 397405,
+      "sha256": "aef1c522797f409e5350d36ffa8acaa0c9e580fa2a78a5c26a2a32712f4dfba7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000059/omit-0.csv": {
+      "bytes": 384726,
+      "sha256": "1e2e89c911e78513c7dcd224d733fa5fd9b046c8fd54a3a60ab37277c8f3a852"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000059/omit-1.csv": {
+      "bytes": 398056,
+      "sha256": "ccfde14709dd78af2954a3f1c0677d19c8a708c3b633ceec75144c4ec21ecd41"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000059/omit-2.csv": {
+      "bytes": 398244,
+      "sha256": "0a235c175f78aad321a56fb2ea5e6a7a59711c8bbd0ac78f1b539bce33ca65ae"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000059/omit-3.csv": {
+      "bytes": 398423,
+      "sha256": "ada8f2e21c055a9738c1353692279982d60318bbecd565d1b6b37826da3658d9"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000060/full-after.csv": {
+      "bytes": 397394,
+      "sha256": "bb40f23b8d3a419cbfc18fd0281b0c67948db37d331d15069e705a06febb8c18"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000060/full-before.csv": {
+      "bytes": 397404,
+      "sha256": "150dbda29e96eda54312601ea8ba0f45432da5fb32f9cdde1b21b5250abedbfa"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000060/omit-0.csv": {
+      "bytes": 384714,
+      "sha256": "da133ac58c0ef5c748dae025c1e2d54d2bd601ff42933e6390e7d1ae957d3fa5"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000060/omit-1.csv": {
+      "bytes": 398071,
+      "sha256": "6392f264cfc7fb8177e18d2e58e43ef0c236b187ad3dc71f2476a89b8a30218d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000060/omit-2.csv": {
+      "bytes": 398228,
+      "sha256": "210376895798aad260507b05f21a3288d997e89ce05beca3f57e8232b096d4dd"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000060/omit-3.csv": {
+      "bytes": 398437,
+      "sha256": "5a9edd2e525dcff3ebe911b0c725e9e72a9721e93b4735683b7a19bb26f60115"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000061/full-after.csv": {
+      "bytes": 395025,
+      "sha256": "7261f1f33fd6a445cf688228b7d4e14ca00b2eac4e68adf7c9f4af6c5af46c3a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000061/full-before.csv": {
+      "bytes": 395015,
+      "sha256": "05b93473eef8cdd624cda614dfce883f02078d481457f199f13b3d45b41829eb"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000061/omit-0.csv": {
+      "bytes": 382378,
+      "sha256": "46f70b20a8a6edbe4d80ab974195a738fa856b4cd7c8465e747fa6e734610fac"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000061/omit-1.csv": {
+      "bytes": 395675,
+      "sha256": "6092d5a8add1455ba0735b0deb444b05d29f31d3d4e054465eb25b0d66bcc802"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000061/omit-2.csv": {
+      "bytes": 395937,
+      "sha256": "62f9ab1cc67c8254339592792f83c240e33b7237a0db1d24c85cda1e41c0feec"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000061/omit-3.csv": {
+      "bytes": 395120,
+      "sha256": "4ab473625c43303d8aff63d5e5b659fb24716f8ab81e7f0bbee7a1b1d35585ed"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000062/full-after.csv": {
+      "bytes": 395030,
+      "sha256": "16cc9b96332aec38ee94c24a192c8172615e802bb00277c7cef582db291e1ed3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000062/full-before.csv": {
+      "bytes": 395030,
+      "sha256": "8e0ba648bcf2ed7f41f98805c10a2edaecbc2d4723652a3cded06a7e936d86ce"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000062/omit-0.csv": {
+      "bytes": 382362,
+      "sha256": "ebc0dafe4876708e5d8a5bfe9d0437e239b7f48c3b71cfe20cb179082c00b983"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000062/omit-1.csv": {
+      "bytes": 395689,
+      "sha256": "d1e53d768ecb0d6639b3c88e8ad44d37912fcdbf36b1a1448601169479b214ad"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000062/omit-2.csv": {
+      "bytes": 395936,
+      "sha256": "382c302a7c31b06e79a5828417164d979be3a355fe7f5ecc05e3e84ed07fac4d"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000062/omit-3.csv": {
+      "bytes": 395118,
+      "sha256": "1a935feda562c45c916be87da2d1d212a3d80f47481c4069079a4467e8c93130"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000063/full-after.csv": {
+      "bytes": 397179,
+      "sha256": "f0547ea18d2e3f1b672531dd6d58924d3af4ceb7a7394c52ac30ae5cbfa19d59"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000063/full-before.csv": {
+      "bytes": 397190,
+      "sha256": "8f3b39a943d5ac0ca11d9bc781afb6504bf14154b109cbcd9201e5381dd85e2b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000063/omit-0.csv": {
+      "bytes": 384497,
+      "sha256": "b2193411dc873c24a1bf4fe6f41aad94075e4f11e449584b20712dbd28b68c40"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000063/omit-1.csv": {
+      "bytes": 397828,
+      "sha256": "edd73e5d070dd3ffd28771038a9c46a00c30dc87fd1864b8c9ed7e46061e0575"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000063/omit-2.csv": {
+      "bytes": 398022,
+      "sha256": "7cdc67209e2d05c57f083ca1b912d49843a1c2fc2cf55de0124b5cbe92510e56"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000063/omit-3.csv": {
+      "bytes": 398215,
+      "sha256": "a8d5a057fc2fa7949edc33341fed637f14a7ff24cd6c0be7b96909e9cf52bb5b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000064/full-after.csv": {
+      "bytes": 397172,
+      "sha256": "daa3fece7498b27893cf1e866ce372ff6ae72681219b2d96f7b1236da218f953"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000064/full-before.csv": {
+      "bytes": 397183,
+      "sha256": "3979d33f7f3e3605fdf0baf2b00cb411ea2dc20b1ea7ffac647039c90ba0f5d1"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000064/omit-0.csv": {
+      "bytes": 384505,
+      "sha256": "16917cceb6ff0139d56aa2c347fd9f7602281f5e263af412fe596237ac428191"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000064/omit-1.csv": {
+      "bytes": 397828,
+      "sha256": "9350bd4067ada7df04913226abf80c8dcd09e18a2e055721733bb457f3dc1e5a"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000064/omit-2.csv": {
+      "bytes": 398016,
+      "sha256": "32e1de7f253149e995c0bb20688fa5d0d62fd41ad913ee35eb1eb1a35fa245e8"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000064/omit-3.csv": {
+      "bytes": 398220,
+      "sha256": "ba80aeb23369e2af5d853cf58b663b35e2cfc65b12f305447977dc1c32b2526b"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000065/full-after.csv": {
+      "bytes": 397035,
+      "sha256": "96bf18dc011b7b752eafb380b8f6ee111072e191b3fcdda3aec3eb7356dcdbb4"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000065/full-before.csv": {
+      "bytes": 397046,
+      "sha256": "4d4a28eae7d4d4984e1fb04dca8d16a188710d67351a9c7f703b9f97a5f96dea"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000065/omit-0.csv": {
+      "bytes": 384376,
+      "sha256": "1e6b4305335f0d6196d6a9582b0f20860d820af0b3ba8a9d073d085fd7bc3e57"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000065/omit-1.csv": {
+      "bytes": 397707,
+      "sha256": "ba0256f99aec6f1048083a9d61ff3d3ee63b7d64bd49b3502f5b2e7cdf2a2236"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000065/omit-2.csv": {
+      "bytes": 397905,
+      "sha256": "44f82d75b4486b53be9ff142d4e6e5b3de954c1dce0b5589b25097b7dab387aa"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000065/omit-3.csv": {
+      "bytes": 398064,
+      "sha256": "6261a0bedf77f6e482c197fbfd361ada4c61b6ec7627f60c63d2e4bab37511e6"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000066/full-after.csv": {
+      "bytes": 397047,
+      "sha256": "a5868d529fd8e48f9fd61bcf75591f3296e8e9484fa1feca0ba61ecfcb0d41d7"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000066/full-before.csv": {
+      "bytes": 397037,
+      "sha256": "9be52141f667260e88257576fc98ac4fd3a651e5555f9d3ca4f61e43bcc3a634"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000066/omit-0.csv": {
+      "bytes": 384390,
+      "sha256": "f8ab61ca8d6098b235c6faca7d8a71512205257e8eed2148dbdbdaf478a8fec3"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000066/omit-1.csv": {
+      "bytes": 397691,
+      "sha256": "658d3161846198218c0fbc6ed926b43924ddb3b31eb461cee780e68dd61c075c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000066/omit-2.csv": {
+      "bytes": 397919,
+      "sha256": "8038b197eb4f11a689d635f6768eba13af5adf6d50bdabfae73adac4db435c1c"
+    },
+    "study/runs/candidate/input/source/composite-measurements/group-000066/omit-3.csv": {
+      "bytes": 398051,
+      "sha256": "e5cd00ebc255aa474cdbc24ece99081d228b770231e2a6e48a45c94b78d2c962"
+    },
+    "study/runs/candidate/input/source/train_stopped_state.json": {
+      "bytes": 224601694,
+      "sha256": "aaa2e50c756030aaa9b7f0865a26ab759cd36c41ed2ac40396fe81415e5455c9"
+    },
+    "study/runs/candidate/input/source/train_stopped_summary.json": {
+      "bytes": 21412671,
+      "sha256": "ae468c0239a834c7a38db2abfcd2fa43d6e64db034dab1e03edf28e87aed708a"
+    },
+    "study/runs/candidate/native/evaluation.json": {
+      "bytes": 4001,
+      "sha256": "aef5fdf9e0502dde445ed6d63339885aa5b216b245b7a8314261a362bba4421d"
+    },
+    "study/runs/candidate/native/execution.json": {
+      "bytes": 3095,
+      "sha256": "a46445b3f9f26ceb3f36097ee65dad953693111123a093525630cee184711f74"
+    },
+    "study/runs/candidate/native/job.json": {
+      "bytes": 281020894,
+      "sha256": "d3879d75ea0dd1de885f53c0eb7afbc067515595bd518cdec04da297ab2342c4"
+    },
+    "study/runs/candidate/native/model-after.json": {
+      "bytes": 289583601,
+      "sha256": "451b4839613d302a6fbecfd01331a674fbf6069e968dc9fe9f2f5dc0c778031b"
+    },
+    "study/runs/candidate/native/model.json": {
+      "bytes": 289583601,
+      "sha256": "451b4839613d302a6fbecfd01331a674fbf6069e968dc9fe9f2f5dc0c778031b"
+    },
+    "study/runs/candidate/native/trial-0.json": {
+      "bytes": 1850076,
+      "sha256": "c974519b15412809f53fba10940785b795d40cd8755682c7431abaf2ffbd924c"
+    },
+    "study/runs/candidate/native/trial-1.json": {
+      "bytes": 1760783,
+      "sha256": "72542da186150ad9388c278a8f41d3b9c0cdf3f20620c2cce02c08b12ed9a6c5"
+    },
+    "study/runs/candidate/native/trial-2.json": {
+      "bytes": 1760775,
+      "sha256": "1710547128dd3ea68a8951d3b27dfdfd632cd644a4b9430aa06de05889585148"
+    },
+    "study/runs/candidate/native/trial-3.json": {
+      "bytes": 1760704,
+      "sha256": "1d8a3d1ed2c3111796294b687fd7e3bc58db1ce1fcedb3bd953f3c6ae9d153bb"
+    },
+    "study/runs/candidate/native/trial-4.json": {
+      "bytes": 1898425,
+      "sha256": "5fb04df674d7a720b2a00f7976de7f45804a9ff9e65fe0c3a9a719defaf7a1e6"
+    },
+    "study/runs/candidate/native/trial-5.json": {
+      "bytes": 1843513,
+      "sha256": "863aefe0c9866704c88025406670f092f29870194b89024b83611665ec254529"
+    },
+    "study/runs/candidate/native/trial-6.json": {
+      "bytes": 1765043,
+      "sha256": "a755f357d746828e63c3c1e9be4a7db9c4cee018d6a4e2b1f19f906aa0046572"
+    },
+    "study/runs/candidate/native/trial-7.json": {
+      "bytes": 1765037,
+      "sha256": "acbf3faf54243526a5bbddbeedca83c77bf83ab5accf0bb02d228f16701e934c"
+    },
+    "study/runs/candidate/native.events-log/EventsLog/NeuroModeler.M40.user.log.INFO.20261113-163832.1000209": {
+      "bytes": 291,
+      "sha256": "a875ea525518276f8c185748b2f9b69659008f9bd3a0114e099817b18a73b55f"
+    },
+    "study/runs/candidate/process/capture-ack.json": {
+      "bytes": 114,
+      "sha256": "f23f4b1d4e53c0c02962c1d47ab8bf20c276dffeb258ce47c119fd73bf942e58"
+    },
+    "study/runs/candidate/process/capture-ready.json": {
+      "bytes": 98,
+      "sha256": "2d7f23d0a34e5425a2bb3d16d86a1ad1b14a21ba388552d10d769fe446d1f665"
+    },
+    "study/runs/candidate/process/contained/launch-result.json": {
+      "bytes": 54,
+      "sha256": "6379c17d798191f995d43b0950ea7787779fe29c9af7354b25de37a514ff207d"
+    },
+    "study/runs/candidate/process/contained/launcher.py": {
+      "bytes": 601,
+      "sha256": "a586b08abf4b72f0c6723595eb9477a3f59fd4c0698ddfea3e33140f8015032c"
+    },
+    "study/runs/candidate/process/contained/limits-readback.json": {
+      "bytes": 1070,
+      "sha256": "0a415f9eb0aea7d08bf1fdfbd65903d95aa86da5e75f9d851634f8b19a8b8b5d"
+    },
+    "study/runs/candidate/process/contained/owned-unit.json": {
+      "bytes": 566,
+      "sha256": "c6b824eae2bc33d60fef0f22856b91c87960b0268fe639ecb0648bc1b8227eeb"
+    },
+    "study/runs/candidate/process/contained/ready.json": {
+      "bytes": 44,
+      "sha256": "5a353fbc3724bdb66bbcf9c39bf667a23b8700e4e2dcb52858889ae093e3bb1a"
+    },
+    "study/runs/candidate/process/contained/request.json": {
+      "bytes": 1567,
+      "sha256": "fc8157b6e7ca1c24bb49a5b6ee9c651a4479d3dbc2ad8a2f95294a14bbab4595"
+    },
+    "study/runs/candidate/process/contained/runtime.json": {
+      "bytes": 12614,
+      "sha256": "f06445077538491390aeb6fb18175bf7837f42d2e1ef75a9318f9b7709fe4d06"
+    },
+    "study/runs/candidate/process/contained/start.ack": {
+      "bytes": 18,
+      "sha256": "9933d0b376991d31b613aeb1424ebe062a642be58a3041a60ccffb8037a8884d"
+    },
+    "study/runs/candidate/process/contained/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/candidate/process/contained/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/candidate/process/loaded-files.json": {
+      "bytes": 4832,
+      "sha256": "13b2e78c30ab600e10fc41c1628a7329a48ca013dbb1e4b160b5c215776d68c5"
+    },
+    "study/runs/candidate/process/owned-process.json": {
+      "bytes": 660,
+      "sha256": "2bbe1de85c8f873e2b07ba58c8b623f3810e0e3f43b0959011c5e8f7d44ad343"
+    },
+    "study/runs/candidate/process/request.json": {
+      "bytes": 948,
+      "sha256": "9442949fb04dd011cb30b584be44ee29e4b7656f809c45e596b6270c915ed442"
+    },
+    "study/runs/candidate/process/reservation-context.json": {
+      "bytes": 3148,
+      "sha256": "27d83562605f8394f759a6f077b286975700f0c28ff64a24c6139c525b7ddf57"
+    },
+    "study/runs/candidate/process/result.json": {
+      "bytes": 1177,
+      "sha256": "df4be9291a7bd8b8b77e204cec01cae6d0b0f6c645cb406fd512a87816231192"
+    },
+    "study/runs/candidate/process/runtime.json": {
+      "bytes": 12614,
+      "sha256": "f06445077538491390aeb6fb18175bf7837f42d2e1ef75a9318f9b7709fe4d06"
+    },
+    "study/runs/candidate/process/stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/candidate/process/stdout.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "study/runs/candidate/process/terminal-unit-state.json": {
+      "bytes": 1300,
+      "sha256": "8988835b28e1e488afacb8257fa804627979d42eebfe3430565dc81355cf1bcc"
+    },
+    "study/runs/candidate/process/whole-group-closure.json": {
+      "bytes": 1213,
+      "sha256": "6354760be3ca827dee0992d1ea184b4d4095bf64fed5a53a66ae32773b4c2d6c"
+    },
+    "study/runs/candidate/run-manifest.json": {
+      "bytes": 313856,
+      "sha256": "67cffee722587fb67581f52ad102a870fdbf5c9316091e7dc5d9203031083fbf"
+    },
+    "study/runs/candidate/runtime-cli-interface.json": {
+      "bytes": 5525,
+      "sha256": "86cd7d9e2df8e92aa3ae0d761f62ba9a1df055980f68287363ea1038c5ed5226"
+    },
+    "study/runs/baseline100/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 290,
+      "sha256": "0ac65f12c88fa82ad920fcd1b75b15de0a751d9c95a454b28942a97c209206d7"
+    },
+    "study/runs/candidate/native.events-log/EventsLog/NeuroModeler.INFO": {
+      "bytes": 291,
+      "sha256": "a875ea525518276f8c185748b2f9b69659008f9bd3a0114e099817b18a73b55f"
+    }
+  },
+  "recipes": {
+    "study/jobs/baseline100.json": {
+      "source": "study/runs/baseline100/input/source/train_stopped_state.json",
+      "path": "recipes/450bfa3efb7c418dad0be0739ea93fc76b99a671fca6ba99de2b7361b76266b8.json",
+      "record": {
+        "bytes": 6856,
+        "sha256": "a53d3d37ae141f677ce4fdd49d880bee8078028b559c9fa1e20398390115c7ff"
+      }
+    },
+    "study/jobs/candidate.json": {
+      "source": "study/runs/baseline100/input/source/train_stopped_state.json",
+      "path": "recipes/f411b97b4ae9be1fb25eb5aaacdba939832f5271e2803cbe3eb6b9d72397d89f.json",
+      "record": {
+        "bytes": 6896,
+        "sha256": "dda65faa64daae4234fe38079e180d9b4da2ca4bdcb3ae16b899510937c6b9b4"
+      }
+    },
+    "study/runs/baseline100/input/job.json": {
+      "source": "study/runs/baseline100/input/source/train_stopped_state.json",
+      "path": "recipes/5bb3ebc2d75ca6c4b6d018fd462bede3013d9d9057c57b85c748d778e1aa5970.json",
+      "record": {
+        "bytes": 6856,
+        "sha256": "a53d3d37ae141f677ce4fdd49d880bee8078028b559c9fa1e20398390115c7ff"
+      }
+    },
+    "study/runs/candidate/input/job.json": {
+      "source": "study/runs/baseline100/input/source/train_stopped_state.json",
+      "path": "recipes/8e6b3f158acbbb6e73a0521656f4fca07988b09a87c346f6b2e2f83b013081b1.json",
+      "record": {
+        "bytes": 6896,
+        "sha256": "dda65faa64daae4234fe38079e180d9b4da2ca4bdcb3ae16b899510937c6b9b4"
+      }
+    }
+  },
+  "literal_fallbacks": {
+    "study/runs/baseline100/native/job.json": "unsupported_encoding",
+    "study/runs/candidate/native/job.json": "unsupported_encoding"
+  },
+  "literals_bundle": {
+    "path": "literals/bundle.json",
+    "record": {
+      "bytes": 177951,
+      "sha256": "dbf447693cc7374ad49283aeb9f55061ad2e44660676647fe9bdde1c66080bd8"
+    }
+  },
+  "maximum_total_bytes": 6442450944,
+  "expanded_bytes": 3550437808,
+  "native_execution_attested": false,
+  "scientific_verdict": null,
+  "sha256": "51d10a0db75ad108863f017658d54734a37ac217e32e18253f597ec9cc7c6922"
+}

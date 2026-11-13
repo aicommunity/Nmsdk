@@ -1,0 +1,23 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s11-threshold-primary-recompression-m40-a1",
+  "package_fingerprint": "f228348eaf433ed5c93976988dbb10a78b454c60e0cf6b212fa204f49a6fadce",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_actual_primary_recompression.ActualPrimaryRecompressionTest.test_actual_envelopes_restore_all_original_bytes_after_container_recompression"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_ENVELOPED_PRIMARY_TO_RECOMPRESS": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s11-diagnostic-threshold-primary-m40-a2/worker/packed-primary",
+      "files": 6,
+      "fingerprint": "0b42b5802f52068c81cd3d0f912b82108bac079ba8509c251c0ab5fdc90110fe"
+    }
+  },
+  "scientific_verdict": null
+}
