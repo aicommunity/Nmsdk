@@ -42,6 +42,10 @@
 
 ## Подготовка увеличенного масштаба
 
-Добавлен root module recorded_training_focus: отдельное display-only представление явного диапазона native frames, с полной production source проверкой, существующим schema6 reader, actual input и каждым исходным отсчётом. CLI: python -m Scripts.StructTrain.TimeLearner.recorded_training_focus NATIVE OUTPUT --groups 44 48 --channel 0 --first-frame 290 --last-frame 351. Для этих данных это62 samples каждой модели; общий локальный Y-масштаб нужен для различимости слабого спада. Sampling/selection/tolerances не меняются. Actual-file серверная проверка и visual review нового focus пока pending.
+Добавлен root module recorded_training_focus: отдельное display-only представление явного диапазона native frames, с полной production source проверкой, существующим schema6 reader, actual input и каждым исходным отсчётом. CLI: python -m Scripts.StructTrain.TimeLearner.recorded_training_focus NATIVE OUTPUT --groups 44 48 --channel 0 --first-frame 290 --last-frame 351. Для этих данных это62 samples каждой модели; общий локальный Y-масштаб нужен для различимости слабого спада. Sampling/selection/tolerances не меняются. [Actual-file проверка1/1 и visual review приняты](ValidationPlans/M40L14L15FocusA1-20261113/RESULT.ru.md).
 
 Focus читает именно ранее проверенные primary bytes через общий parse_console_subset_observation, без повторного открытия исходного CSV между SHA-проверкой и рисованием. Старый path-reader использует тот же валидатор строк. Это изменение пути чтения, не измерительного алгоритма.
+
+![L14 и L15: каждый native sample, одинаковый локальный Y](ValidationPlans/M40L14L15FocusA1-20261113/selected-plots/native-frame-focus.png)
+
+В увеличенном виде ранняя вершина и спад L14 различимы; на том же интервале L15 остаётся монотонным. Это подтверждает описание исходных данных, не доказывает устойчивость слабой вершины к изменению timestep или физики.

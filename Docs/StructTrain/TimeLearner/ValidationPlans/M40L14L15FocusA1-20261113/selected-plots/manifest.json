@@ -1,0 +1,63 @@
+{
+  "kind": "recorded_training_native_frame_focus",
+  "schema_version": 1,
+  "source_package_sha256": "8b36876b486741d68cabbd47222a221dce9973e5db8473480c360035469ccca7",
+  "source_summary_sha256": "d15e4f751c4dde60c714f731cba4b11139906e5c426b01d56ccf809896026651",
+  "rows": [
+    {
+      "group": 44,
+      "model_revision": "f1bbba550d9ac659c319f933404b902d25802959cc2b16c6f419d140b0f3bac2",
+      "primary_reference": {
+        "bytes": 395004,
+        "relative_path": "composite-measurements/group-000044/full-before.csv",
+        "sha256": "cf17dd3d259ff00bd5a15ffdaaa6c90d42893cb4ccc8c86670fd78f2190cb237"
+      },
+      "first_frame": 290,
+      "last_frame": 351,
+      "samples": 62,
+      "x_bounds": [
+        0.1449999999999818,
+        0.17549999999999955
+      ],
+      "original_selection": "valid"
+    },
+    {
+      "group": 48,
+      "model_revision": "784847f96d7735c202a74b07603ba00ffe79d4d54aec0a903eb1df9d51efea00",
+      "primary_reference": {
+        "bytes": 394899,
+        "relative_path": "composite-measurements/group-000048/full-before.csv",
+        "sha256": "01517447624b55a944ba30055d440f5c1d3b5735f87f658358a5f31a640bb365"
+      },
+      "first_frame": 290,
+      "last_frame": 351,
+      "samples": 62,
+      "x_bounds": [
+        0.1449999999999818,
+        0.17549999999999955
+      ],
+      "original_selection": "ambiguous"
+    }
+  ],
+  "channel": 0,
+  "y_limits": [
+    0.004654900618065425,
+    0.005310098906397411
+  ],
+  "minimum_native_tick_pixels": 34.42622950819672,
+  "files": [
+    "native-frame-focus.png",
+    "native-frame-focus.svg",
+    "native-frame-focus.pdf"
+  ],
+  "plotting_environment": {
+    "python": "3.12.3",
+    "python_executable": "/media/user/Data/TimeLearnerRefactor/plot-python-owned-copy-a1/bin/python",
+    "matplotlib": "3.9.4",
+    "pillow": "13.0.0"
+  },
+  "downsampling": false,
+  "scientific_verdict": null,
+  "assignment_changed": false,
+  "display_only": true
+}
