@@ -20,7 +20,8 @@ def validate_manifest(value):
     fields = {'kind', 'schema_version', 'base', 'roots', 'closed_units', 'bounds', 'scientific_verdict'}
     require(type(value) is dict and
         ((value.get('schema_version') == 1 and set(value) == fields) or
-         (value.get('schema_version') == 2 and set(value) == fields | {'controller_join'})) and
+         (value.get('schema_version') == 2 and set(value) == fields | {'controller_join'}) or
+         (value.get('schema_version') == 3 and set(value) == fields | {'source_envelopes'})) and
         value['kind'] == 'timelearner_closed_primary_bundle' and
         type(value['schema_version']) is int and
         value['scientific_verdict'] is None, 'primary_bundle_manifest_schema')
@@ -73,6 +74,11 @@ def validate_manifest(value):
     declared = [Path(u['directory']) for u in units]
     require(len(set(declared)) == len(declared) and all(p.is_absolute() and
         any(p.is_relative_to(r) for r in directories) for p in declared), 'primary_bundle_unit_outside_source')
+    if value['schema_version'] == 3:
+        from .source_envelope_bundle import assignments
+        members={(PurePosixPath(r['prefix'])/name).as_posix():record for r in value['roots']
+                 for name,record in r['files'].items()}
+        assignments(value['source_envelopes'],members)
     if value['schema_version'] == 2:
         join = value['controller_join']
         require(type(join) is dict and set(join) ==
@@ -89,7 +95,7 @@ def validate_manifest(value):
 
 def verify_controller_join(manifest):
     """Schema2 prevents a byte-valid archive of unrelated closed jobs."""
-    if manifest['schema_version'] == 1:
+    if manifest['schema_version'] != 2:
         return None  # Historical byte/closure-only contract remains explicit.
     from .recorded_roundtrip_evidence import audit_roundtrip_controller
     join = manifest['controller_join']
@@ -139,10 +145,15 @@ def collect(manifest, output, guard, emit):
     for root in manifest['roots']:
         for name in [*root['files'], *root['links']]:
             sources[(PurePosixPath(root['prefix'])/name).as_posix()] = Path(root['directory'])/name
-    bundle = portable_primary.create_native_bundle(sources, output, dictionary_bytes=32*1024**2,
-                                                   deduplicate_content=True)
+    if manifest['schema_version'] == 3:
+        from .source_envelope_bundle import create
+        bundle=create(sources,manifest['source_envelopes'],output,
+                      maximum_total_bytes=manifest['bounds']['maximum_total_bytes'])
+    else:
+        bundle = portable_primary.create_native_bundle(sources, output, dictionary_bytes=32*1024**2,
+                                                       deduplicate_content=True)
     require(bundle['expanded_bytes'] <= manifest['bounds']['maximum_total_bytes'] and
-            bundle['archive_bytes'] <= manifest['bounds']['maximum_archive_bytes'],
+            bundle.get('package_bytes',bundle['archive_bytes']) <= manifest['bounds']['maximum_archive_bytes'],
             'primary_bundle_output_budget')
     after = verify_sources(manifest);guard()
     emit('primary-bundle-proof.json', {'manifest': manifest, 'before': before, 'after': after,

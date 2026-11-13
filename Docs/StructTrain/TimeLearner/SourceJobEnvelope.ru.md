@@ -11,3 +11,11 @@ Recipe хранит размер/SHA256 reference document и оригиналь
 Исходные jobs, run manifests, native execution records и их hashes не переписываются. Перед production audit восстанавливаются исходные bytes; аудитор не читает recipe вместо настоящего job. Любая экономия размера считается доказанной только после actual-file roundtrip. Сам codec не подтверждает валидность JSON, native execution, обучение, принадлежность пика или классификацию.
 
 Для публикации N4 дополнительно нужны закреплённый Git archive/member с reference source document, recipe index, проверка полного восстановленного namespace и повторный production audit на восстановленном corpus. Эти шаги ещё не реализованы/приняты данным codec и не должны считаться завершёнными по его узким тестам.
+
+## Подготовка пакетного применения
+
+Добавлен source_envelope_bundle: finite source map и явные target/source роли, literal compact_native_primary schema2 плюс recipes и общий индекс исходных byte hashes. Source document остаётся literal member; ссылки на другой recipe target запрещены, циклов нет. Неподдержанные layouts остаются literal с явной причиной. Restore сначала восстанавливает literals штатным portable_primary, затем исходные jobs, после чего проверяет весь namespace/размеры/SHA256. Glog aliases используют прежний явный compatibility adapter.
+
+closed_primary_bundle manifest3 добавляет только source_envelopes; прежние manifest1/2 сохраняются. Семантика manifest3 — bytes/closure, без controller-join attestation из manifest2. Максимальный archive budget применяется ко всему пакету, включая recipes и индекс. Упаковка допускается лишь после полного закрытия исходного задания и проверки его конечного namespace.
+
+Серверная приёмка пакетного применения ещё не выполнена. Для N4 пока не обещано внешнее Git source reuse: подготовленный пакет хранит один literal source внутри себя. Вынос уже опубликованного source в проверяемую Git dependency остаётся отдельным шагом. Работающий эксперимент не переключается на новый формат.
