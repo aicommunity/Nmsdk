@@ -1,0 +1,17 @@
+test_actual_baseline_replay_then_fixed_same_matrix_candidate (Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_study.DiagnosticThresholdStudyNativeTest.test_actual_baseline_replay_then_fixed_same_matrix_candidate) ... ERROR
+
+======================================================================
+ERROR: test_actual_baseline_replay_then_fixed_same_matrix_candidate (Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_study.DiagnosticThresholdStudyNativeTest.test_actual_baseline_replay_then_fixed_same_matrix_candidate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1/Scripts/StructTrain/TimeLearner/tests/test_diagnostic_threshold_study.py", line 11, in test_actual_baseline_replay_then_fixed_same_matrix_candidate
+    result = run(Path(os.environ['TIMELEARNER_THRESHOLD_SOURCE_RUN'])/'run-manifest.json',
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1/Scripts/StructTrain/TimeLearner/diagnostic_threshold_study.py", line 163, in run
+    registry.release(lease['token'])
+TypeError: Reservations.release() missing 1 required keyword-only argument: 'note'
+
+----------------------------------------------------------------------
+Ran 1 test in 4347.106s
+
+FAILED (errors=1)

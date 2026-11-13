@@ -37,3 +37,15 @@
 Исходные [результаты Train](ValidationPlans/M40BranchFullDomainCold4A1-20261113/RESULT.ru.md), [проверка отчёта A3](ValidationPlans/M40BranchFullDomainReportA3-20261113/RESULT.ru.md) и [визуальная проверка](ValidationPlans/M40BranchFullDomainReportA3-20261113/VISUAL_REVIEW.ru.md). Полная компактная публикация первичного corpus пока не завершена; эта ограниченность остаётся открытой. Научная классификация данной Branch-модели ещё не измерена.
 
 Обновление публикации: [полный primary44.06MB](ValidationPlans/M40BranchFullDomainPrimaryA1-20261113/RESULT.ru.md) сохранён в Git; [независимый Elder replay1/1 принят](ValidationPlans/ElderBranchFullDomainPrimaryReplayA2-20261113/RESULT.ru.md). Предшествующее предупреждение о незавершённой компактной публикации относится к раннему снимку, этот пункт для данного корпуса закрыт. Научная классификация Branch по-прежнему не измерена.
+
+## Физический контроль общего банка завершён
+
+На фиксированных [27,27,27,1] реально проверены replay, matched86M и согласованные21.5M для owners0/1/2. 1/1 проверки пройдено, source/clock/input controls сохранены. Общий максимум Soma1 вырос с0.005456576369859967 до0.02235560254260882, примерно4.10 раза. Это подтверждает возможность согласованной физической правки банка и её существенный эффект; она не доказывает амплитудную сходимость закреплённого input2 или распознавание8 паттернов.
+
+[Условия, результаты и ограничения](ValidationPlans/M40BranchSharedBankRsA2-20261113/RESULT.ru.md). Все3 selected originals просмотрены; первичная компактная публикация этого нового вмешательства ещё выполняется отдельно.
+
+![Branch shared bank full](ValidationPlans/M40BranchSharedBankRsA2-20261113/selected-plots/soma-1/full.png)
+
+![Branch first response enlarged](ValidationPlans/M40BranchSharedBankRsA2-20261113/selected-plots/soma-1/frames-0-900.png)
+
+![Branch later responses enlarged](ValidationPlans/M40BranchSharedBankRsA2-20261113/selected-plots/soma-1/frames-800-1700.png)
