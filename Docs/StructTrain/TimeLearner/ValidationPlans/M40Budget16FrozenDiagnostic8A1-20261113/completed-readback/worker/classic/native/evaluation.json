@@ -1,0 +1,99 @@
+{
+    "coverage_policy": "per_trial_windows",
+    "criterion": {
+        "anchor": "onset",
+        "begin_offset": 0,
+        "end_offset": null,
+        "id": "post_anchor_target_whole_window_foil_v1",
+        "reject_target_outside_window": true
+    },
+    "diagnostic_only": true,
+    "kind": "timelearner_diagnostic_recognition_evaluation_spec",
+    "model_revision": "89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b",
+    "run_id": "classic/stopped-phasea-diagnostic",
+    "schema_version": 1,
+    "source_stopped_sha256": "a9e324275cf35781f058169d4287d55a2fd5aa6bf585095c393fd294103e1c48",
+    "training_outcome": "budget_exhausted",
+    "trials": [
+        {
+            "duration": 2,
+            "label": "target",
+            "observation": "trial-0.json",
+            "pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+            "presentation_index": 0,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-0",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/0"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-1.json",
+            "pattern_hash": "36041ec22b63d8d8bb408206a2271702dc7d9240d9052da27d23c78ea55f959d",
+            "presentation_index": 1,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-1",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/1"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-2.json",
+            "pattern_hash": "9c7cb4b0313fb5d1d3d87e903c3d4a500f2226bf6962d2f55b895e875e7c7a85",
+            "presentation_index": 2,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-2",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/2"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-3.json",
+            "pattern_hash": "ce915da00aa267d665ddd1c360b4803d115b13ec3eac683b0f8ba90a52a57413",
+            "presentation_index": 3,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-3",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/3"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-4.json",
+            "pattern_hash": "4047791f09257b779ecdc2a373bcf9b1c84c323f5af6b1a9ec5df55479601243",
+            "presentation_index": 4,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-4",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/4"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-5.json",
+            "pattern_hash": "6f76812a27c0b273529753e181fa2cc7a0b8d4f0b3c42fba2e436dbb2d0b9934",
+            "presentation_index": 5,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-5",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/5"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-6.json",
+            "pattern_hash": "a9c1310975c490708e44be19a7efe99502884491009f8efd1672789731f90e28",
+            "presentation_index": 6,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-6",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/6"
+        },
+        {
+            "duration": 2,
+            "label": "foil",
+            "observation": "trial-7.json",
+            "pattern_hash": "55d26999e0e39704e925a7eb6fb22734aad6e1d9aba1cc6a623e86e3f3c614e6",
+            "presentation_index": 7,
+            "reset_policy": "reset_per_trial",
+            "sample_id": "phasea-row-7",
+            "trial_id": "classic/stopped-phasea-diagnostic/rotation-0/7"
+        }
+    ]
+}

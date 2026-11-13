@@ -7,3 +7,8 @@ Controller PID2453780/start360653488; contained Python worker2456987/start360654
 Файлы source и job сформированы, native process запущен. evaluation/run-manifest/terminal ещё не подтверждены. Не перезапускать по истечению наблюдения: сначала сверить эти owned handles. Следующий шаг — закончить source import и8 frozen trials, проверить полные наблюдения/неизменность модели, затем построить временной отчёт.
 
 Preparation уже занимает существенное wall time: это большие архив/ledger и повторные source audits. Их оптимизацию исследовать отдельно после завершения данного неизменяемого опыта; работающий Tool/runtime не менять. Успех процесса, source DATA audit и распознавание являются разными результатами.
+
+
+## Завершение diagnostic run
+
+Предыдущий running снимок исторический.8 observations valid/complete, immutable model, TP0/FP0/FN1/TN7 при100; whole groups closed/lease released. [Результат](RESULT.ru.md). Report A2 выполняется отдельно; новый Train не запускался.
