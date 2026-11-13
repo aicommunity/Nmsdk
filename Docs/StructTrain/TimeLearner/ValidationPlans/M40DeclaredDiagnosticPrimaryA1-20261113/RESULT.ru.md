@@ -7,3 +7,5 @@ Job s11-declared-diagnostic-primary-m40-a1 завершён completed/exit0 за
 После restore production audit_primary повторно проверил модель, binding/план восьми проб, полноту и исходные метрики. Model revision89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b, training=budget_exhausted, TP0/FP0/FN1/TN7, diagnostic_only=true, scientific_verdict=null. Семь молчаний foil не подтверждают target detection. Source Train timeout не исправлен задним числом.
 
 [Git primary](../../../../../Reports/StructTrain/TimeLearner/Budget16DiagnosticPrimary-M40-20261113/bundle.json) — selected DATA subset с полным model и observations; это не полный runtime directory и не самостоятельная аттестация native execution. Producer61314dcca822705eb45ee4105e7a26b60465aade; независимый bundle-only Elder replay ставится отдельно, его успешность пока не заявляется.
+
+Последующая независимая проверка закрыта: [Elder1/1,335.39s](../ElderBudget16CompactReplayA1-20261113/RESULT.ru.md), весь original readback совпал без исходных каталогов M40. Прежнее pending выше относится к моменту export приёмки.

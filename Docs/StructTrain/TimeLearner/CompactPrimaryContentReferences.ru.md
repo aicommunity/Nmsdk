@@ -22,3 +22,5 @@ M40: 34/34 passed, job `s02-content-reference-primary-m40-a1`, Tool `c97ff92cc0b
 ## Проверка большого original model завершена
 
 [Actual export/restore/rescore10/10 на M40](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/RESULT.ru.md) принят:28 logical members/320078865B →19575080B XZ, original model282794133B и все8 observations сохранены без перекодирования, исходные метрики совпали. Default256MiB не изменён; explicit384MiB ограничен отдельным вызовом. Whole group closed/lease released. Это последующее подтверждение, уточняющее раннее «runtime проверка открыта» выше; независимый перенос на Elder пока отдельный pending gate.
+
+Независимый перенос нового large-model primary также подтверждён: [Elder1/1,335.39s](ValidationPlans/ElderBudget16CompactReplayA1-20261113/RESULT.ru.md), original M40 directories отсутствуют, весь original readback равен. Source archive/fixtures неизменны, процессы закрыты и lease released. Это DATA replay, не новая научная классификация.

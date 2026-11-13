@@ -1,0 +1,47 @@
+{
+  "kind": "timelearner_declared_compact_replay",
+  "schema_version": 1,
+  "bundle": {
+    "schema_version": 2,
+    "archive_bytes": 19575080,
+    "archive_sha256": "fe5fb13532f0ea0155bf3c4aaa3b1d2e179f583f74eef44ce4e0125fc2b7ef1e",
+    "expanded_bytes": 320078865,
+    "members": 28
+  },
+  "maximum_member_bytes": 402653184,
+  "must_be_absent": [
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s11-budget16-frozen-diagnostic8-m40-a1-controller",
+    "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+  ],
+  "readback": {
+    "kind": "timelearner_compact_recorded_matrix_readback",
+    "schema_version": 1,
+    "original_job_id": "s11-budget16-frozen-diagnostic8-m40-a1",
+    "models": [
+      {
+        "name": "classic",
+        "trials": 8,
+        "model_revision": "89681f2f4ee996b4a1208b18cbdaa3c3c2c2b487e78d7aa56ccec1d37a8a1f0b",
+        "training_outcome": "budget_exhausted",
+        "counts": {
+          "TP": 0,
+          "FP": 0,
+          "FN": 1,
+          "TN": 7,
+          "targets": 1,
+          "foils": 7,
+          "target_trials_with_outside_spikes": 0,
+          "accuracy": 0.875,
+          "target_hit_rate": 0.0,
+          "foil_response_rate": 0.0
+        }
+      }
+    ],
+    "trials": 8,
+    "diagnostic_only": true,
+    "complete_runtime_directory": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  }
+}

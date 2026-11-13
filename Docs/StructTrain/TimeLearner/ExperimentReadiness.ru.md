@@ -6,6 +6,7 @@
 
 ## Что уже можно читать
 
+- [Новый полный временной отчёт Classic budget16](Budget16DiagnosticScientificReport-20261113.ru.md):32 пары pattern×soma,14 просмотренных originals, все8 паттернов. Source training=budget_exhausted; fixed threshold100, target пропущен.
 - [Историческое холодное Train→Test:4/8–6/8](HistoricalAugustColdStart.ru.md). Сохраняется значение августовских визуальных наблюдений исходного протокола.
 - [Историческая frozen matrix порядка и ITI](HistoricalFrozenProtocolMatrixScientificReport-2026-11-07.ru.md). Это отдельная проверка одной сохранённой модели, а не универсальная устойчивость обучения.
 - [Classic full-domain: почему некоторые вершины не назначены input0](ClassicFullDomainAssignmentScientificReport-20261112.ru.md). Три просмотренных full/omission графика с реальными входами; no_necessary_input не означает отсутствие влияния импульса.
@@ -14,16 +15,16 @@
 
 ## Что выполняется сейчас
 
-1. [Один новый cold Classic N4/N1 после исправления экспорта](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/PLAN.ru.md). Root92ad/Pulsedfb, production runtime принят7/7 на M40 и Elder. Полный scientific job равен прежнему; search1800s+finalization300s, original tolerances, stock безLTMembrane. Native Console подтверждён живым; итог не принят. Это проверка завершения большого экспорта и честного training outcome, без обещания сходимости.
-2. [Временной отчёт последнего diagnostic](ValidationPlans/M40Budget16DiagnosticReportA1-20261113/STATUS.ru.md):32 пары pattern×soma, actual inputs, полный обзор и zoom≥8pixels/native tick, без downsampling. Пока идёт полный DATA audit, ручная визуальная приёмка открыта.
-3. [Exact compact export/restore/rescore](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/PLAN.ru.md): original model.json282794133B и8 observations, explicit384MiB member budget.10 объявленных checks, результат ожидается. Предшествующие34/34 schema2 archive checks не заменяют этот запуск.
+1. [Внешний DATA audit нового cold Classic N4/N1](ValidationPlans/M40PublicationReceiptBudget16TrainA1-20261113/NATIVE_COMPLETED.ru.md). Сам native Console completed/exit0 за2070.92s в прежнем2100s лимите; state/summary/execution записаны. Training=budget_exhausted, certificate=null, L22,1,1,1;58 probes/28 edits. Полный внешний Python cohort ещё не принят. Не запускать новый Train автоматически.
+
+[Report2/2 и visual review14 originals завершены](ValidationPlans/M40Budget16DiagnosticReportA1-20261113/RESULT.ru.md). [Exact original-model export/restore/rescore10/10](ValidationPlans/M40DeclaredDiagnosticPrimaryA1-20261113/RESULT.ru.md) также принят:28 members/320.08MB в19.58MB XZ. [Независимый Elder compact replay1/1 принят](ValidationPlans/ElderBudget16CompactReplayA1-20261113/RESULT.ru.md): весь original readback совпал без original M40 directories. Эти результаты относятся к прежнему frozen model89681..., а не новому native model3b8a160f... из пункта1.
 
 У работающих заданий разные output/runtime/source bindings; их каталоги не обновляются. При потере связи сначала проверяется тот же kernel handle. Timeout наблюдения не является основанием перезапуска. Полные gallery — M40 cache; Git содержит сжатые primary, модели, метрики и выбранные рисунки.
 
 ## Что отделяет нас от итогового научного сравнения
 
-- Завершить новый Train и проверить полный execution/model/summary/primary. При отрицательном outcome разбирать конкретные измерения и решения поиска; не повышать бюджеты автоматически и не выдавать остановленное обучение за Exact.
-- Закончить опубликованный отчёт текущего состояния с читаемыми временными графиками всех паттернов, сохранением масштаба и actual input overlay; проверить compact replay исходных данных.
+- Завершить внешний audit нового Train и проверить полную цепочку execution/model/summary/primary. При отрицательном outcome разбирать конкретные измерения и решения поиска; не повышать бюджеты автоматически и не выдавать остановленное обучение за Exact.
+- Читаемый отчёт предыдущего budget16 состояния опубликован; independent compact replay принят; далее анализировать новый Train по его собственным данным и outcome.
 - Выполнить оставшиеся legacy/V2 A/B и обязательную матрицу моделей, нормализации, физики, частот, bounds, reset/inhibition/PostTune/calibration. Для независимого Test сначала фиксируются модель и подтверждённый реальным прогоном порог. Same-Matrix отмечается отдельно.
 - Проверить target в каждой позиции, order/ITI и reset-per-trial/continuous отдельно. Partial observations и all-silent7/8 не являются успешной детекцией. Не требовать8/8 как условия завершения рефакторинга; валидные отрицательные и unresolved результаты входят в карту.
 - Закрыть оставшиеся требования этапов1–12 и children-first --no-ff merges в develop. Подробный список находится в [карте приёмки](ImplementationStatus.ru.md), а не подменяется этими научными шагами.

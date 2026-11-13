@@ -1,0 +1,9 @@
+# Native завершён, independent DATA audit ещё выполняется
+
+Original process/result: completed/exit0,2070.921272671316s при неизменном2100s лимите; whole native group closed, loaded-files capture, mapping_error=null, diagnostics clear. Записаны train_stopped_state255834739B, train_stopped_summary19197960B и execution232723B. [Пять исходных native/runtime подтверждений](native-completed-readback/integrity.json). Это подтверждённое native завершение, не приёмка всего внешнего Python cohort.
+
+Итог native обучения budget_exhausted/native_training_time_budget_exhausted, state=finished, reference_complete=true, certificate=null, completed_boundary=false.58 search probes/28 edits;15 candidate evidence records,13 rejections,28 resistance-domain records. Фактическая модель3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd746358ca8d7c34fc67a6b1c: L22,1,1,1; все Rs86MΩ/Ns1. Полная search history заявлена сохранённой; её независимый Python audit ещё не принят.
+
+Прежний процесс был остановлен по2100.32s при повторном archive decode и не записал execution. В новом запуске publication receipt позволил получить все три итоговых файла в том же лимите. Это один инженерный опыт, не доказательство универсального ускорения или научной сходимости. В M40 шли ещё два Python задания; wall-budget привёл к58 вместо прежних62 probes, поэтому новые model revision и длины отличаются. Scientific job и исходная identity совпадали, поисковая политика/физика/допуски не менялись.
+
+Новый ordinary Test/calibration не запускаются автоматически. Следующий алгоритмический шаг — после полного DATA audit разобрать measured residuals и распределение L/Rs кандидатов; при необходимости поставить отдельно объявленную конечную L/Rs диагностику. Не увеличивать search/finalization budgets и не заменять assigned maximum общим максимумом пачки. Отрицательный исход не означает PhysicalInfeasible. Внешний controller2653098 остаётся отдельным активным handle до его собственного закрытия.

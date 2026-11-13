@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "independent-Elder-large-model-eight-trial-compact-replay-a1",
+  "package_fingerprint": "9491fc6ed210b14326d82f7cebfdc7eb4940741fcac4a45083caa88594c4de33",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_compact_replay.DeclaredCompactReplayTest"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_declared_compact_replay.DeclaredCompactReplayTest.test_published_primary_rescores_without_original_worker_directories"
+  ],
+  "fixtures": {
+    "TIMELEARNER_RECORDED_MATRIX_BUNDLE": {
+      "pattern": "*",
+      "files": 10,
+      "fingerprint": "509b40852eb5d5424ad0dbd3ce0c9de5b356a72bfab6bb21e295ea09027dea70"
+    },
+    "TIMELEARNER_COMPACT_REPLAY_EXPECTATION": {
+      "pattern": "*",
+      "files": 1,
+      "fingerprint": "78f3eaef9cfcee1101c05741e6e6b9408f37df4be124388547954101a86aef33"
+    }
+  }
+}

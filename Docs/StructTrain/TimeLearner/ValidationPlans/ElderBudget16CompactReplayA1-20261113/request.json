@@ -1,0 +1,32 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s11-budget16-compact-replay-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "limits": {
+    "memory_bytes": 6442450944,
+    "tasks": 64,
+    "maximum_wall_seconds": 1800
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 671088640
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-declared-compact-replay-a1",
+      "commit": "7207605fcc6e1699da8a5a48a7d40f3b42a0123a"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/budget16-compact-replay-elder-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderBudget16CompactReplayA1-20261113/suite.json",
+      "sha256": "0b0b76cb47813be4f4a6be433279d9e776c8356de95c2a8358482367e10e8496"
+    },
+    "fixtures": {
+      "TIMELEARNER_RECORDED_MATRIX_BUNDLE": "/home/user/timelearner-refactor/publications/budget16-diagnostic-primary-m40-a1/Reports/StructTrain/TimeLearner/Budget16DiagnosticPrimary-M40-20261113",
+      "TIMELEARNER_COMPACT_REPLAY_EXPECTATION": "/home/user/timelearner-refactor/requests/budget16-compact-replay-elder-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderBudget16CompactReplayA1-20261113/expectation"
+    }
+  }
+}
