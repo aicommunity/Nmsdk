@@ -1,0 +1,209 @@
+{
+  "kind": "native_burst_resistance_study_result",
+  "schema_version": 1,
+  "source_revision": "3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd746358ca8d7c34fc67a6b1c",
+  "source_geometry": [
+    22,
+    1,
+    1,
+    1
+  ],
+  "input_index": 0,
+  "physical_bank_owners": [
+    0
+  ],
+  "rows": [
+    {
+      "name": "replay",
+      "resistance": 86000000,
+      "model_revision": "3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd746358ca8d7c34fc67a6b1c",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.005683014493454208
+        },
+        {
+          "channel": 1,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 2,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 3,
+          "potential": 0.015828572406203167
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    },
+    {
+      "name": "matched",
+      "resistance": 86000000,
+      "model_revision": "3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd746358ca8d7c34fc67a6b1c",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.005683014493454208
+        },
+        {
+          "channel": 1,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 2,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 3,
+          "potential": 0.015828572406203167
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    },
+    {
+      "name": "resistance-1",
+      "resistance": 64500000,
+      "model_revision": "07c0c66a3e42547ce0efa1ef1418a81aa4e3c9d05fbda965768a4b9b73facb0f",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.0076080042832809
+        },
+        {
+          "channel": 1,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 2,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 3,
+          "potential": 0.015828572406203167
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    },
+    {
+      "name": "resistance-2",
+      "resistance": 43000000,
+      "model_revision": "2c6f281823fbf634ac30d5ba46a5117ec261421c71cf0351e9fb034ff99fec2e",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.011492021514233342
+        },
+        {
+          "channel": 1,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 2,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 3,
+          "potential": 0.015828572406203167
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    },
+    {
+      "name": "resistance-3",
+      "resistance": 21500000,
+      "model_revision": "9542ba1f6a63aeb45710a7a54433c23810ffe5de26fb9fa31ba137ea051b1968",
+      "observation_complete": true,
+      "sample_count": 3601,
+      "global_diagnostic_maxima": [
+        {
+          "channel": 0,
+          "potential": 0.023283525200348487
+        },
+        {
+          "channel": 1,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 2,
+          "potential": 0.015828572406203167
+        },
+        {
+          "channel": 3,
+          "potential": 0.015828572406203167
+        }
+      ],
+      "global_maxima_are_not_assigned_impulse_measurements": true
+    }
+  ],
+  "comparisons": [
+    {
+      "name": "resistance-1",
+      "conditions": {
+        "absolute_sample_times_equal": true,
+        "windows_equal": true,
+        "actual_stimulus_rows_and_events_equal": true
+      },
+      "maximum_absolute_potential_difference": [
+        0.0019250042648812915,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "resistance-2",
+      "conditions": {
+        "absolute_sample_times_equal": true,
+        "windows_equal": true,
+        "actual_stimulus_rows_and_events_equal": true
+      },
+      "maximum_absolute_potential_difference": [
+        0.005809064829495503,
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "resistance-3",
+      "conditions": {
+        "absolute_sample_times_equal": true,
+        "windows_equal": true,
+        "actual_stimulus_rows_and_events_equal": true
+      },
+      "maximum_absolute_potential_difference": [
+        0.01760056851561065,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "source_files": [
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native/train_stopped_state.json",
+      "sha256": "8b36876b486741d68cabbd47222a221dce9973e5db8473480c360035469ccca7",
+      "size": 255834739
+    },
+    {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-publication-receipt-budget16-train-m40-a1/worker/native-full-domain/Classic-stock-cold8-N1/runs/train/native/train_stopped_summary.json",
+      "sha256": "d15e4f751c4dde60c714f731cba4b11139906e5c426b01d56ccf809896026651",
+      "size": 19197960
+    }
+  ],
+  "runtime_fingerprint": "381d28bdf1e32674f9ad6698a095be29c89620cbdbf949952e624c72762cd019",
+  "declared_grid_completed": true,
+  "training_executed": false,
+  "assigned_peak_measured": false,
+  "single_training_pattern_only": true,
+  "classification_verdict": null
+}

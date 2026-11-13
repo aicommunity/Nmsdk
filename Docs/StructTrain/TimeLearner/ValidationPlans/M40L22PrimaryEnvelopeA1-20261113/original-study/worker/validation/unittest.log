@@ -1,0 +1,27 @@
+test_declared_grid_on_actual_stopped_model (Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model) ... ERROR
+
+======================================================================
+ERROR: test_declared_grid_on_actual_stopped_model (Scripts.StructTrain.TimeLearner.tests.test_native_burst_resistance_study.NativeBurstResistanceStudyTest.test_declared_grid_on_actual_stopped_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-subset-baseline-reader-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 35, in plotting_runtime
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-subset-baseline-reader-a1/Scripts/StructTrain/TimeLearner/tests/test_native_burst_resistance_study.py", line 19, in test_declared_grid_on_actual_stopped_model
+    plots = render(directory, directory.with_name(directory.name+'-plots'))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-subset-baseline-reader-a1/Scripts/StructTrain/TimeLearner/native_burst_resistance_study.py", line 160, in render
+    environment = plotting_runtime()
+                  ^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-subset-baseline-reader-a1/Scripts/StructTrain/TimeLearner/plotting.py", line 40, in plotting_runtime
+    raise EvidenceError("plotting_runtime_unavailable:"+str(error)) from error
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: plotting_runtime_unavailable:No module named 'matplotlib'
+
+----------------------------------------------------------------------
+Ran 1 test in 7642.867s
+
+FAILED (errors=1)

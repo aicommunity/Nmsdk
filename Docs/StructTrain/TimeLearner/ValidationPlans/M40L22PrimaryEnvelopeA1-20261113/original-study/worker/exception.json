@@ -1,0 +1,4 @@
+{
+  "reason": "owned_job_validation_failed",
+  "traceback": "Traceback (most recent call last):\n  File \"/media/user/Data/TimeLearnerRefactor/source-subset-baseline-reader-a1/Scripts/StructTrain/TimeLearner/owned_python_job.py\", line 286, in _worker\n    require(returncode == 0 and record['assertion_status'] == 'passed' and\n  File \"/media/user/Data/TimeLearnerRefactor/source-subset-baseline-reader-a1/Scripts/StructTrain/TimeLearner/native_evidence.py\", line 28, in require\n    raise EvidenceError(reason)\nScripts.StructTrain.TimeLearner.native_evidence.EvidenceError: owned_job_validation_failed\n"
+}

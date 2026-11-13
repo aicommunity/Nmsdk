@@ -1,0 +1,1 @@
+Freeze all exact bytes of completed five-run L22 diagnostic plus original source native tree. Original outer plotting failure retained. Fifteen Python/Qt job files may be factored only with byte-exact source envelopes; no native rerun, file rewrite or scientific verdict. Six original groups must remain closed. Independent full restore and run audits required before acceptance.
