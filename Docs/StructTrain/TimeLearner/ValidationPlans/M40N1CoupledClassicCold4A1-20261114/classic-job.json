@@ -1,0 +1,251 @@
+{
+  "kind": "timelearner_native_training_job",
+  "schema_version": 1,
+  "owner_class": "NNeuronTimeLearner",
+  "implementation_id": "stock-measured-reference-cold7-N4-N1-pilot-v1",
+  "configuration": {
+    "kind": "timelearner_native_cold_configuration",
+    "schema_version": 8,
+    "base_schema_version": 1,
+    "model": {
+      "schema_version": 2,
+      "branch": false,
+      "frequency_hz": 2000,
+      "neuron_class": "NSPNeuronGen",
+      "dataset_class": "NDatasetMatrix",
+      "generator_class": "NPulseGeneratorTransit",
+      "neuron_structure_mode": 2,
+      "normalization": "N1",
+      "inputs": [
+        {
+          "attachment": 1,
+          "synapses": 1,
+          "resistance": 86000000.0
+        },
+        {
+          "attachment": 1,
+          "synapses": 1,
+          "resistance": 86000000.0
+        },
+        {
+          "attachment": 1,
+          "synapses": 1,
+          "resistance": 86000000.0
+        },
+        {
+          "attachment": 1,
+          "synapses": 1,
+          "resistance": 86000000.0
+        }
+      ],
+      "initial_isi": [
+        0.01,
+        0.08,
+        0.16,
+        0.24
+      ],
+      "allocated_cable_lengths": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "maximum_cable_length": 100,
+      "preserve_allocated_cable": false,
+      "maximum_resistance_ratio": 1000.0,
+      "configured_minimum_resistance": 0.0,
+      "inhibition": [],
+      "scale_inhibition_with_input": true,
+      "allow_muted_input_baseline": false,
+      "initial_threshold": 100.0
+    },
+    "stimulus_profile": {
+      "generator_class": "NPulseGeneratorTransit",
+      "amplitude": 1.0,
+      "pulse_length": 0.001,
+      "frequency_hz": 2000,
+      "frequency_deviation": 0.0,
+      "use_transit_signal": false,
+      "use_pattern_output": false
+    },
+    "run_id": "Classic-stock-cold8-N1/recorded-observation-domain",
+    "protocol_revision": "stock-measured-reference-cold7-pilot-v1",
+    "sample_id": "phasea-target",
+    "duration": 1.8,
+    "maximum_sample_gap": 0.0005,
+    "minimum_amplitude": 1e-06,
+    "maximum_samples": 3605,
+    "record_spikes": false,
+    "peak_selection": "isolated_window",
+    "windows": [
+      {
+        "begin": 0.009,
+        "end": 0.05
+      },
+      {
+        "begin": 0.089,
+        "end": 0.13
+      },
+      {
+        "begin": 0.249,
+        "end": 0.29
+      },
+      {
+        "begin": 0.489,
+        "end": 0.53
+      }
+    ],
+    "maximum_reference_probes": 8,
+    "maximum_invalid_reference_probes": 0,
+    "maximum_model_seconds": 7200.0,
+    "maximum_wall_seconds": 1800.0,
+    "search": {
+      "maximum_probes": 128,
+      "maximum_edits": 1280,
+      "maximum_candidates_per_input": 128,
+      "maximum_sweeps": 4,
+      "maximum_invalid_observations": 4,
+      "resistance_subdivision_depth": 8,
+      "bounds": [
+        {
+          "minimum_length": 1,
+          "maximum_length": 100,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 1000000.0,
+          "maximum_resistance": 86000000.0
+        },
+        {
+          "minimum_length": 1,
+          "maximum_length": 100,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 1000000.0,
+          "maximum_resistance": 86000000.0
+        },
+        {
+          "minimum_length": 1,
+          "maximum_length": 100,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 1000000.0,
+          "maximum_resistance": 86000000.0
+        },
+        {
+          "minimum_length": 1,
+          "maximum_length": 1,
+          "minimum_synapses": 1,
+          "maximum_synapses": 1,
+          "minimum_resistance": 86000000.0,
+          "maximum_resistance": 86000000.0
+        }
+      ],
+      "tolerances": {
+        "amplitude_absolute": 1e-05,
+        "amplitude_relative": 0.0,
+        "sync": 0.02
+      }
+    },
+    "composite_measurement": {
+      "schema_version": 2,
+      "method_id": "declared-window-basin-necessity-v1",
+      "context_policy": {
+        "schema_version": 1,
+        "comparison_radius_ticks": 1,
+        "maximum_samples": 3605,
+        "maximum_total_samples": 21630,
+        "maximum_native_probes": 6,
+        "time_comparison_tolerance": 1e-10,
+        "baseline_absolute": 1e-12,
+        "repeatability_absolute": 1e-10,
+        "repeatability_relative": 0.0,
+        "influence_absolute": 1e-06,
+        "influence_relative": 0.0
+      },
+      "geometry_policy": {
+        "schema_version": 1,
+        "maximum_inputs": 4,
+        "maximum_samples": 3605,
+        "maximum_total_samples": 21630,
+        "repeatability_absolute": 1e-10
+      },
+      "attempt_limits": {
+        "maximum_groups": 512,
+        "maximum_native_probes": 3072,
+        "maximum_total_samples": 11074560
+      },
+      "maximum_group_model_seconds": 20.0,
+      "maximum_group_wall_seconds": 300.0,
+      "maximum_total_primary_bytes": 536870912,
+      "candidate_window_policy": {
+        "schema_version": 1,
+        "policy_id": "reference-anchored-candidate-window-v1",
+        "seed_rule": "immutable_reference_full_before",
+        "coordinate_mode": "relative_native_frame_interval",
+        "proposals_per_logical_request": 1,
+        "maximum_feature_terms": 4096,
+        "inputs": [
+          {
+            "delay_frames_per_segment": 0,
+            "base_left_guard_frames": 49,
+            "base_right_guard_frames": 3551,
+            "length_guard_frames": 0,
+            "synapse_count_guard_frames": 0,
+            "resistance_change_guard_frames": 0,
+            "capacitance_change_guard_frames": 0,
+            "hard_first_frame": 0,
+            "hard_last_frame": 3600,
+            "maximum_window_frames": 3601
+          },
+          {
+            "delay_frames_per_segment": 0,
+            "base_left_guard_frames": 209,
+            "base_right_guard_frames": 3391,
+            "length_guard_frames": 0,
+            "synapse_count_guard_frames": 0,
+            "resistance_change_guard_frames": 0,
+            "capacitance_change_guard_frames": 0,
+            "hard_first_frame": 0,
+            "hard_last_frame": 3600,
+            "maximum_window_frames": 3601
+          },
+          {
+            "delay_frames_per_segment": 0,
+            "base_left_guard_frames": 529,
+            "base_right_guard_frames": 3071,
+            "length_guard_frames": 0,
+            "synapse_count_guard_frames": 0,
+            "resistance_change_guard_frames": 0,
+            "capacitance_change_guard_frames": 0,
+            "hard_first_frame": 0,
+            "hard_last_frame": 3600,
+            "maximum_window_frames": 3601
+          },
+          {
+            "delay_frames_per_segment": 0,
+            "base_left_guard_frames": 1009,
+            "base_right_guard_frames": 2591,
+            "length_guard_frames": 0,
+            "synapse_count_guard_frames": 0,
+            "resistance_change_guard_frames": 0,
+            "capacitance_change_guard_frames": 0,
+            "hard_first_frame": 0,
+            "hard_last_frame": 3600,
+            "maximum_window_frames": 3601
+          }
+        ]
+      }
+    },
+    "invalid_measurement_recovery": "advance_rejected_candidate_window"
+  },
+  "profile_archives": [],
+  "optional_modes": {
+    "sync_capacitance_trim": 0,
+    "post_train_tuning": false,
+    "auto_calibrate_threshold": false
+  },
+  "calculate_mode": 0,
+  "structure_build_mode": 1,
+  "maximum_model_ticks": 14400000,
+  "sha256": "d2a5b3b45267ade3cdbc267356f2d80a3b7a65441ba30b70e37be4190bd2e6ae"
+}
