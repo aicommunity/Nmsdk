@@ -14,3 +14,7 @@ Schema2 сохраняет полный прежний logical members inventory
 ## Фактический model.json нового diagnostic run
 
 Console записал native/model.json282794133B. Прежний compact matrix exporter имел фиксированный per-member256MiB предел и не мог сохранить этот подлинный оригинал. Добавлен explicit maximum_member_bytes: default256MiB сохранён, допустим только integer1..512MiB. Для текущего случая выбирается384MiB. Общие archive128MiB/expanded768MiB/64members не изменяются. CLI create/audit/report записывает выбор через --maximum-member-bytes; --deduplicate-content отдельно выбирает schema2. Исходные model/summary/trial bytes не перекодируются. Проверки: прежний default отказ256MiB+1, invalid explicit budgets, actual selected primary export и полный rescore текущих8 проб по оригинальным model/trial SHA и original metrics. Runtime проверка нового лимита пока открыта.
+
+## Серверная проверка schema2
+
+M40: 34/34 passed, job `s02-content-reference-primary-m40-a1`, Tool `c97ff92cc0b7cb11e714133e6342d16a35aaf01c`; исходные данные неизменны, процессы закрыты, lease released. Фактические две копии classic.qz: schema1 76248036 B → schema2 38160432 B, byte-exact независимое восстановление. [Отчёт и raw receipts](ValidationPlans/M40ContentReferencePrimaryA1-20261113/RESULT.ru.md). Более поздний explicit 384MiB member budget пока не проверен этим запуском.
