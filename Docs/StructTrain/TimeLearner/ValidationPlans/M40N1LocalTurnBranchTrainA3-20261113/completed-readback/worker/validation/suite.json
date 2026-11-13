@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-n1-local-turn-branch-train-m40-a3",
+  "package_fingerprint": "2232e1c566962357c9e71294a003a2002aea68f6d0a8b17a569851bbc0fa201f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_branch_actual_strict_N4_cold8_train_retains_honest_outcome"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_stock_observation_domain_train.StockObservationDomainTrainTest.test_branch_actual_strict_N4_cold8_train_retains_honest_outcome"
+  ],
+  "fixtures": {
+    "TIMELEARNER_STOCK_COLD8_TRAIN_CONTROLS": {
+      "pattern": "*.json",
+      "files": 2,
+      "fingerprint": "af832f6524f7e0a8ecdc77775376a0b8655747a00ad1e9e2fc1f42c5ac273be3"
+    },
+    "TIMELEARNER_STOCK_COLD8_TRAIN_SOURCE": {
+      "pattern": "**/*.json",
+      "files": 10,
+      "fingerprint": "31c7141d28c568e189d7166fd15bb0e4807b159c72d6aeabece836cdcb552bd4"
+    },
+    "TIMELEARNER_STOCK_COLD8_TRAIN_RUNTIME": {
+      "pattern": "NeuroModelerConsole",
+      "files": 1,
+      "fingerprint": "3d0a17c9bbaf019139063194f356c81271c5f613b1e2805e2afcc221a255863f"
+    }
+  }
+}
