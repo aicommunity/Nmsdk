@@ -68,17 +68,17 @@ def run(source_path, controls):
         source_path.name.removesuffix('_stopped_state.json')+'_stopped_summary.json')]
     before = [file_record(p) for p in source_files]
     output.mkdir(parents=True)
-    memory = live['memory_max']
+    memory = live['memory_max'];controller_tasks = live['tasks_max'];leaf_tasks = 64
     registry = Reservations(output/'leases.sqlite3', managed_units=True,
         capacity=dict(slots=1, memory_bytes=memory+2*leaf_memory,
-                      disk_bytes=8*1024**3, tasks=512))
+                      disk_bytes=8*1024**3, tasks=controller_tasks+2*leaf_tasks))
     lease = registry.reserve('fixed-geometry-native-burst-resistance-study',
         [dict(path=str(output/'runs'), access='write')], ttl_seconds=14400,
         demands=dict(slots=1, memory_bytes=memory+leaf_memory,
-                     disk_bytes=6*1024**3, tasks=256), controller_directory=str(controller))
-    policy = policy_for_reservation(registry, lease['token'], memory_bytes=leaf_memory, tasks=64)
+                     disk_bytes=6*1024**3, tasks=controller_tasks+leaf_tasks), controller_directory=str(controller))
     rows = [];folders = {}
     try:
+        policy = policy_for_reservation(registry, lease['token'], memory_bytes=leaf_memory, tasks=leaf_tasks)
         variants = [('replay', None), ('matched', values[0])]+[
             ('resistance-'+str(i), v) for i, v in enumerate(values[1:], 1)]
         for name, resistance in variants:

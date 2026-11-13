@@ -108,15 +108,18 @@ def run(source_manifest, controls):
     require(original_job['schema_version'] == 1 and original_job['conversion_spec'] ==
         dict(schema_version=1, mode='identity', resistance_bounds=[]), 'threshold_study_identity_source_required')
     output.mkdir();(output/'jobs').mkdir();_write(output/'proposal.json', proposal)
+    controller_tasks = live['tasks_max'];leaf_tasks = 128
     registry = Reservations(output/'leases.sqlite3', managed_units=True,
-        capacity=dict(slots=1, memory_bytes=live['memory_max']+2*memory, disk_bytes=8*1024**3, tasks=512))
+        capacity=dict(slots=1, memory_bytes=live['memory_max']+2*memory,
+                      disk_bytes=8*1024**3, tasks=controller_tasks+2*leaf_tasks))
     lease = registry.reserve('same-matrix-stopped-threshold-study',
         [dict(path=str(output/'runs'), access='write')], ttl_seconds=14400,
-        demands=dict(slots=1, memory_bytes=live['memory_max']+memory, disk_bytes=8*1024**3, tasks=256),
+        demands=dict(slots=1, memory_bytes=live['memory_max']+memory,
+                     disk_bytes=8*1024**3, tasks=controller_tasks+leaf_tasks),
         controller_directory=declaration['controller'])
-    policy = policy_for_reservation(registry, lease['token'], memory_bytes=memory, tasks=128)
     results = []
     try:
+        policy = policy_for_reservation(registry, lease['token'], memory_bytes=memory, tasks=leaf_tasks)
         for name in ('baseline100', 'candidate'):
             job = {k: v for k, v in original_job.items() if k != 'sha256'}
             job['run_id'] = 'same-matrix-stopped-threshold/'+name
