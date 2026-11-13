@@ -1,0 +1,24 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s07-native-burst-readback-declaration-v2-elder-a1",
+  "package_fingerprint": "54e3034783b660de1429ef9e1fd6049f53c17683d1725f2be908d560842b24d8",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_changed_resistance_preserves_source_and_changes_only_declared_input",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_full_burst_and_time_matched_noop_control_are_declared_without_peak",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_n0_raw_replay_is_allowed_but_rs_intervention_requires_n1",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_omission_reordering_and_duplicate_source_impulses_are_forbidden",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_previous_subset_schema_still_forbids_resistance_intervention",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_schema7_exit2_requests_audit_instead_of_becoming_a_success",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_shared_branch_bank_cannot_receive_inconsistent_resistances",
+    "Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback.NativeBurstReadbackDeclarationTest.test_window_peak_stimulus_change_and_reserved_schema_cannot_enter_raw_readback"
+  ],
+  "executed_tests": 8,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {},
+  "scientific_verdict": null
+}

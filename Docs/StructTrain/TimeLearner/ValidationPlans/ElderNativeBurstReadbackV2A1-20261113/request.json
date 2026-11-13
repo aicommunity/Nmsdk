@@ -1,0 +1,29 @@
+{
+  "kind": "timelearner_owned_python_job",
+  "schema_version": 1,
+  "job_id": "s07-native-burst-readback-declaration-v2-elder-a1",
+  "worker_host": "Elder-1",
+  "execution_root": "/home/user/timelearner-refactor",
+  "tool_commit": "929dbc176a0804910544539aaf79bdc4a02aa82a",
+  "limits": {
+    "memory_bytes": 536870912,
+    "tasks": 32,
+    "maximum_wall_seconds": 300
+  },
+  "disk": {
+    "minimum_free_bytes": 2147483648,
+    "maximum_output_bytes": 67108864
+  },
+  "operation": {
+    "kind": "python-validation",
+    "source": {
+      "path": "/home/user/timelearner-refactor/source-burst-readback-native-validation-a1",
+      "commit": "7362d102f89643afc7452545b0c40a5393f0745e"
+    },
+    "suite": {
+      "path": "/home/user/timelearner-refactor/requests/native-burst-readback-declaration-v2-elder-a1/Docs/StructTrain/TimeLearner/ValidationPlans/ElderNativeBurstReadbackV2A1-20261113/suite.json",
+      "sha256": "fe199a23306ecc04222bd5bf80180b92b95bacd5c7f6a1cf6b6a464b819f5aac"
+    },
+    "fixtures": {}
+  }
+}

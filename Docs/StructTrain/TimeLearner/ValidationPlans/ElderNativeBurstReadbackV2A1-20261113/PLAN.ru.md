@@ -1,0 +1,1 @@
+Проверка production native-burst-readback-declaration-v2 без нового Train и без изменения исходных артефактов. 7 unit controls; реальный N4 corpus проверяется отдельно на M40. Успех тестов не является сертификатом обучения.
