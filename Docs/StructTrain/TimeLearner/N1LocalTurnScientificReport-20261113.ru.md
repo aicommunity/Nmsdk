@@ -29,7 +29,17 @@ Native root4acc1f0ec10708bc4632a793f34630c259e807c3, Pulse9656b420685cbbd7eaac58
 
 [Полный закрытый primary package](../../../Reports/StructTrain/TimeLearner/N1LocalTurnBranch-20261113/primary/bundle.json) сохраняет2175 regular files и2 aliases, включая native модели,652 trial CSV, source-state, summary и process receipts. Не все652 пробы полны: последняя группа прервана научным бюджетом и не потреблена контроллером. Сжатый архив44,208,656 bytes, SHA256071b109a240265f21a52c659045b17286e8303cd015c59bab7a87c4cde29c09b; expanded logical669,760,805 bytes. [Коллектор](ValidationPlans/M40N1LocalTurnPrimaryA1-20261113/RESULT.ru.md) проверил исходные файлы и закрытие групп; независимый restore именно этого нового пакета пока не выполнен.
 
-[Тонкая derived search projection](ValidationPlans/M40N1LocalTurnBranchTrainA3-20261113/derived-search/search-projection.json) — удобная навигация, не замена исходного summary. Выделенные графики двух consumed точек строятся отдельным read-only заданием из полной записи пачки и контрольных пропусков; их визуальная приёмка пока ожидается. Новых Train/threshold runs при построении нет.
+[Тонкая derived search projection](ValidationPlans/M40N1LocalTurnBranchTrainA3-20261113/derived-search/search-projection.json) — удобная навигация, не замена исходного summary. [Отчёт двух consumed точек принят1/1](ValidationPlans/M40N1LocalTurnAmplitudeReportA1-20261113/RESULT.ru.md),447.251s; все4 original PNG просмотрены. В каждой группе полная пачка до/после четырёх omission controls,3601 samples на пробу, no downsampling, реальные входы. Новых Train/threshold runs при построении нет.
+
+Визуально средняя вершина около0.49s исчезает при omission2, а ранний глобальный максимум сохраняется: именно меньшая средняя вершина относится к закреплённому input2. Меньший Rs усиливает также другие вершины, что подтверждает необходимость all-input verification общего Branch-кабеля. Y одинаков между controls одной группы, но различается между группами; сравнение по числам оси. Значение SI единиц не подтверждено. Здесь detail сохраняет полный0..1.8s диапазон: это читаемый обзор2880×2880, не дополнительный временной zoom.
+
+Rs86МОм, группа102:
+
+![Full burst and omission controls at86M](ValidationPlans/M40N1LocalTurnAmplitudeReportA1-20261113/report/group-000102-soma-000-detail.png)
+
+Rs2.880071555МОм, группа104:
+
+![Full burst and omission controls at2.88M](ValidationPlans/M40N1LocalTurnAmplitudeReportA1-20261113/report/group-000104-soma-000-detail.png)
 
 ## Следующее решение
 

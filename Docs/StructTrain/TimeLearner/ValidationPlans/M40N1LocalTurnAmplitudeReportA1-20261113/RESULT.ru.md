@@ -1,0 +1,9 @@
+# Измеренные Rs endpoints: отчёт принят
+
+M40 s07-n1-local-turn-amplitude-report-m40-a1:1/1 PASS447.251s, outer completed/whole-group closed470.490s,0 heartbeat errors. [Unit result](readback/worker/validation/result.json), [whole closure](readback/process/whole-group-closure.json), [selected pair](report/selected-pair.json), [manifest](report/manifest.json). Native Train не повторялся; исходный A3 остаётся BudgetExhausted/certificate=null.
+
+Две реально consumed группы102/104: геометрия[26,26,25,1], input2, Rs86M/2.880071555M. Обе timing-valid, amplitude-outside с противоположными знаками; разные model revision, fresh anchor и group IDs. Для каждой группы6 complete traces по3601 samples. Четыре original PNG2880×2880 включают полную пачку, реальные импульсы и четыре omission controls; все четыре просмотрены отдельно. Downsampling=false. В данном случае overview/detail имеют одинаковый полный диапазон0..1.8s из-за широкого объявленного окна; это не дополнительный временной zoom и не обещание8px/native tick. Масштаб позволяет различать отдельные вершины и эффекты пропусков.
+
+Средняя вершина около0.49s исчезает при omission2, ранний глобальный максимум остаётся. Это визуально согласуется с назначением input2; картинка не переназначает peak и не выдаёт сертификат. При меньшем Rs растут и другие вершины, поэтому локальная нормализация не доказывает сохранность остальных входов. Y одинаков внутри всех controls одной группы, но различается между двумя группами: сравнивать по числам оси, не по высоте рисунка. SI единицы остаются unverified.
+
+[Общий научный отчёт](../../N1LocalTurnScientificReport-20261113.ru.md) содержит таблицу residuals и обе иллюстрации. Полные SVG/PDF остаются M40 cache worker/tmp/N1-local-turn-amplitude-interval-report. Git producer54a06eb6b92410b5cae8a7d952c7bce5ebaef8f0, pack2,038,896 bytes SHA2563a8bc067847dd07292929a0a3b7d5fb5a85a4189c56afba3ba8cc45714b28233.
