@@ -20,7 +20,7 @@
 
 ## Что выполняется сейчас
 
-[Текущее задание: холодный Classic N4/N1 recovery4](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/STATUS.ru.md) запущено на M40 на принятом SDK74e5/Pulse7c6c/runtime105ccc46. Подтверждён running kernel handle; научного исхода ещё нет. Job/initial/profile подготовлены production-путём и не меняются. Это текущий протокол с4 допустимыми восстановлениями, а не same-budget сравнение с прежним Classic recovery16. Автоматического Test/threshold tuning нет.
+[Холодный Classic N4/N1 recovery4 завершён](ValidationPlans/M40N1CoupledClassicCold4A1-20261114/RESULT.ru.md): production1/1/DATA/physical audit приняты, native/outer закрыты.14 measured candidates,0 jointly-ready, затем5 ambiguous input0 на L54/52/50/48/45; certificate=null, классификация не оценивалась. Это не same-budget сравнение с прежним Classic recovery16. Сейчас собирается весь compact primary и [строится временной отчёт всех4 soma выбранных групп](ValidationPlans/M40ClassicCoupledTrainingReportA1-20261114/STATUS.ru.md); нового Train/Test/threshold tuning нет.
 
 [Cold Branch N4/N1 coupled-search Train](N1CoupledScientificReport-20261113.ru.md) завершён: одна local-ready input2, затем invalid_observation/ambiguous input1. Production CLI/DATA1/1 и report1/1 приняты, общая сходимость не подтверждена. [Frozen8pattern diagnostic](ValidationPlans/M40N1CoupledFrozenA1-20261113/RESULT.ru.md) фактического terminal state принят1/1,8полных observations, модель неизменна. При100 все молчат. [Один Same-Matrix threshold проверен настоящими спайками](BranchCoupledThresholdScientificReport-20261114.ru.md): TP1/FP5/FN0/TN2, target на228ms раньше последнего input. Report1/1,32 selected originals просмотрены, primary69.875324MB сохранён.
 
