@@ -1,0 +1,58 @@
+{
+  "kernel_before_stop": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6f3f57a1498dde897cfc555380cd25a042691b16cd228dba7d4a0a80ffd8f24b",
+      "unit": "timelearner-fd1d7b5d-82e4-4edb-b291-304a2fea2a6d.service",
+      "invocation_id": "f78b0e49d6554ca2956a3b4ce98daf7a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fd1d7b5d-82e4-4edb-b291-304a2fea2a6d.service",
+      "initial_main_pid": 1880773,
+      "initial_start_ticks": "366714451",
+      "sha256": "c427a9c4b8fcc9777b67112e4b6e6f2a5bc67ff2604d5ea3a9fb98943295cb97"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt fd1d7b5d-82e4-4edb-b291-304a2fea2a6d",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "f78b0e49d6554ca2956a3b4ce98daf7a"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "worker_terminal": {
+    "job_validation_passed": false,
+    "cohort_assertions_passed": false,
+    "built": true,
+    "expected_cpp_cases": 93,
+    "audited_completed_cpp_cases": 93,
+    "actual_audited_assertion_passed_cpp_cases": 91,
+    "actual_audited_failed_cpp_ids": [
+      "BoundedTrainingLengthCandidates/N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain",
+      "MeasuredResistanceSearch/MeasuredLogTrendProposesItsRootAndNonlinearResponseIsMeasuredAgain"
+    ],
+    "completed_leaf_gates": 1,
+    "heartbeat_errors": [],
+    "final_capture_errors": [],
+    "scientific_verdict": null,
+    "whole_plan_complete": false,
+    "lease_release_policy": "external owner only after exact outer and all recorded leaf kernel groups are closed"
+  },
+  "cleanup_does_not_attest_execution_success": true
+}

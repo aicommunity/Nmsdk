@@ -1,0 +1,115 @@
+{
+  "kind": "timelearner_closed_worker_recovery",
+  "schema_version": 1,
+  "token": "ed55ad06-09d6-44a6-a33d-a3e60188ad3b",
+  "job_id": "s07-n1-coupled-sdk-m40-a1",
+  "recorded_unix": 1794592966.3386981,
+  "administrator": {
+    "pid": 1874192,
+    "start_ticks": "366713560",
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "uid": 1000,
+    "executable": "/usr/bin/python3.12"
+  },
+  "owner": {
+    "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+    "executable": "/usr/bin/python3.12",
+    "pid": 1880773,
+    "start_ticks": "366714451",
+    "uid": 1000
+  },
+  "owner_status": "missing",
+  "contained_directory": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-m40-a1-controller/process/contained",
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "kernel_cgroup_observed",
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "6f3f57a1498dde897cfc555380cd25a042691b16cd228dba7d4a0a80ffd8f24b",
+      "unit": "timelearner-fd1d7b5d-82e4-4edb-b291-304a2fea2a6d.service",
+      "invocation_id": "f78b0e49d6554ca2956a3b4ce98daf7a",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-fd1d7b5d-82e4-4edb-b291-304a2fea2a6d.service",
+      "initial_main_pid": 1880773,
+      "initial_start_ticks": "366714451",
+      "sha256": "c427a9c4b8fcc9777b67112e4b6e6f2a5bc67ff2604d5ea3a9fb98943295cb97"
+    },
+    "state": {
+      "Type": "exec",
+      "Restart": "no",
+      "RemainAfterExit": "yes",
+      "MainPID": "0",
+      "Result": "exit-code",
+      "ExecMainCode": "1",
+      "ExecMainStatus": "1",
+      "ControlGroup": "",
+      "MemoryMax": "8589934592",
+      "TasksMax": "128",
+      "KillMode": "control-group",
+      "Description": "TimeLearner contained attempt fd1d7b5d-82e4-4edb-b291-304a2fea2a6d",
+      "LoadState": "loaded",
+      "ActiveState": "failed",
+      "SubState": "failed",
+      "InvocationID": "f78b0e49d6554ca2956a3b4ce98daf7a"
+    },
+    "memory_max": 8589934592,
+    "tasks_max": 128,
+    "scientific_verdict": null
+  },
+  "note": "Maintained native controller: exact outer owner and all finite canonical child intents closed; original outcome preserved; no science implied.",
+  "resources": [
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/build-n1-coupled-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/build-n1-coupled-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/framework-configured-probe-ownership-asan-h14"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/resources-bin8cb-native-image-rest-m40-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-diagnostic-threshold-sdk-a1"
+    },
+    {
+      "access": "write",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-coupled-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-n1-local-turn-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-native-burst-readback-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/runtime-publication-receipt-sdk-a1"
+    },
+    {
+      "access": "read",
+      "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1",
+      "requested_path": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1"
+    }
+  ],
+  "scientific_verdict": null,
+  "successful_execution_attested": false
+}

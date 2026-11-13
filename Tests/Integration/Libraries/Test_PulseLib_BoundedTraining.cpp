@@ -989,9 +989,11 @@ TEST(BoundedTrainingLengthCandidates, N0ProposalWaitsForRequiredCandidateRepetit
 TEST(BoundedTrainingLengthCandidates, N1ProposedGeometryStillRequiresItsEffectiveResistanceDomain)
 {
     for(const auto routing:{ProbeRouting::ClassicBurst,ProbeRouting::BranchSoloBurst})
+    for(const std::size_t candidates:{5u,6u})
     {
+        SCOPED_TRACE(int(routing));SCOPED_TRACE(candidates);
         const auto p=Protocol(2,routing);auto cfg=Configuration(2,Normalization::TipResistance);
-        cfg.maximumCandidatesPerInput=5;
+        cfg.maximumCandidatesPerInput=candidates;
         cfg.bounds={{2,20,1,1,10.,10.},{1,1,1,1,10.,10.}};
         BoundedTrainingSession session(References(p),cfg,{{2,1,10.},{1,1,10.}},true);
         DriveTraining(session,p,[](const auto& action,auto& delay,auto&) {
@@ -1004,9 +1006,15 @@ TEST(BoundedTrainingLengthCandidates, N1ProposedGeometryStillRequiresItsEffectiv
             d.previewModelRevision="length_scope_"+std::to_string(action.parameters[0].length);
             d.minimumResistance=d.maximumResistance=10.;d.sourceAmplitude=1.;return d;
         });
-        EXPECT_EQ(session.Status(),TrainingStatus::Exact);
-        EXPECT_TRUE(std::any_of(session.Domains().begin(),session.Domains().end(),[](const auto& d){return d.geometry[0].length==12;}));
-        EXPECT_EQ(session.Parameters()[0].length,12);
+        // The Branch-only factor-two proposal guard adds an actually measured
+        // intermediate geometry. A small budget must stop honestly; its extra
+        // step must still obtain a native domain, never inherit an old one.
+        const bool boundedStop=routing==ProbeRouting::BranchSoloBurst && candidates==5;
+        const int expectedLength=boundedStop?8:12;
+        EXPECT_EQ(session.Status(),boundedStop?TrainingStatus::BudgetExhausted:TrainingStatus::Exact);
+        EXPECT_TRUE(std::any_of(session.Domains().begin(),session.Domains().end(),[&](const auto& d){return d.geometry[0].length==expectedLength;}));
+        EXPECT_EQ(session.Parameters()[0].length,expectedLength);
+        if(boundedStop && session.Certificate())EXPECT_FALSE(session.Certificate()->Exact());
     }
 }
 TEST(BoundedTrainingLengthCandidates, NonmonotoneMeasurementsRetainTheBoundedLengthScan)

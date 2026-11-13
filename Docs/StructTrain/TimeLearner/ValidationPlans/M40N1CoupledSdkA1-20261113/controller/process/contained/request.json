@@ -1,0 +1,27 @@
+{
+  "kind": "timelearner_contained_request",
+  "schema_version": 1,
+  "attempt_id": "fd1d7b5d-82e4-4edb-b291-304a2fea2a6d",
+  "unit": "timelearner-fd1d7b5d-82e4-4edb-b291-304a2fea2a6d.service",
+  "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+  "uid": 1000,
+  "controller": {
+    "pid": 1874192,
+    "start_ticks": "366713560"
+  },
+  "executable": "/usr/bin/python3.12",
+  "arguments": [
+    "-B",
+    "-m",
+    "Scripts.StructTrain.TimeLearner.native_acceptance_worker",
+    "--job",
+    "/media/user/Data/TimeLearnerRefactor/readbacks/s07-n1-coupled-sdk-m40-a1-controller/inputs/job.json"
+  ],
+  "working_directory": "/media/user/Data/TimeLearnerRefactor/source-n1-coupled-search-sdk-a1",
+  "runtime_fingerprint": "47ff3888c8587fd0061589514eab20d338876b2763531bc3d8031e010f27c266",
+  "memory_bytes": 8589934592,
+  "tasks": 128,
+  "maximum_wall_seconds": 14400,
+  "environment": {},
+  "sha256": "6f3f57a1498dde897cfc555380cd25a042691b16cd228dba7d4a0a80ffd8f24b"
+}

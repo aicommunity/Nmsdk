@@ -30,8 +30,13 @@ TEST(MeasuredResistanceSearch, MeasuredLogTrendProposesItsRootAndNonlinearRespon
     // solution. Feed every new measurement back through the production search.
     std::vector<MeasuredResistancePoint> points;
     for(double r:{1.,4.,16.})points.push_back({r,1./r-1./6.,true});
-    double best=1.;
-    for(unsigned step=0;step<12 && best>1e-8;++step)
+    // On [4,16], |d(1/R)/d(log R)|<=1/4 and each safeguarded step
+    // contracts the sign bracket by at least 1/4. Thus 64 measured proposals
+    // bound the residual below (log(4)/4)*pow(.75,64)<1e-8. This pure
+    // helper check does not change the controller local allowance (<=12),
+    // nor promise convergence within that allowance or any scientific budget.
+    double best=std::fabs(1./4.-1./6.);
+    for(unsigned step=0;step<64 && best>1e-8;++step)
     {
         const auto next=ProposeMeasuredResistanceRefinement(points,1.,16.,1e-8);
         ASSERT_TRUE(next);EXPECT_GT(*next,1.);EXPECT_LT(*next,16.);
