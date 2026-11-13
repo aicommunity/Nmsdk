@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s08-diagnostic-threshold-data-m40-a1",
+  "package_fingerprint": "f99abf930bd7a0bf8cf3f2bf2bfc9594392c48cd21c979469ad456f38ab8f36c",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_candidate"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_candidate.DiagnosticThresholdCandidateNativeTest.test_explicit_job_schema_is_required_for_the_threshold_factor",
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_candidate.DiagnosticThresholdCandidateNativeTest.test_native_sole_threshold_edit_preserves_stopped_source_and_all_trials",
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_candidate.DiagnosticThresholdCandidateNativeTest.test_ordinary_candidate_and_trial_readers_reject_diagnostic_kind",
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_candidate.DiagnosticThresholdCandidateNativeTest.test_resigned_other_physics_edit_cannot_hide_in_threshold_candidate",
+    "Scripts.StructTrain.TimeLearner.tests.test_diagnostic_threshold_candidate.DiagnosticThresholdCandidateNativeTest.test_same_full_window_counts_keep_unfinished_role_and_null_verdict"
+  ],
+  "fixtures": {
+    "TIMELEARNER_DIAGNOSTIC_THRESHOLD_NATIVE": {
+      "pattern": "*.json",
+      "files": 180,
+      "fingerprint": "b4c2c8993fa1cbff73612ee5983d16fe1bceb52545b95d2e78312ffb166ceab5"
+    },
+    "TIMELEARNER_DIAGNOSTIC_THRESHOLD_CSV": {
+      "pattern": "*.csv",
+      "files": 130,
+      "fingerprint": "596082e5b2cec9ddecdc9ebd57c2fdc4031c3ba8d97d9d962d74205dd752775c"
+    }
+  }
+}

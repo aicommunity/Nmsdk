@@ -1,0 +1,28 @@
+{
+  "kind": "timelearner_python_validation_result",
+  "schema_version": 1,
+  "suite_id": "s03-branch-full-domain-report-m40-a3",
+  "package_fingerprint": "26481c5396f08547e5df3982b365b3cffcf762dd6b1ffe1fda67f0e58a626450",
+  "execution": "completed",
+  "assertion_status": "passed",
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_branch_full_domain_report.BranchFullDomainReportTest.test_actual_branch_search_and_predeclared_control_views"
+  ],
+  "executed_tests": 1,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "fixtures": {
+    "TIMELEARNER_BRANCH_TRAIN_RUN": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train",
+      "files": 782,
+      "fingerprint": "d4addfa62479d589d21d409d7db42dc22afa49863cb3d62e78bda0d2cb84cbbe"
+    },
+    "TIMELEARNER_BRANCH_TRAIN_CSV": {
+      "path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-branch-full-domain-cold4-m40-a1/worker/native-full-domain/Branch-stock-cold8-N1/runs/train",
+      "files": 1296,
+      "fingerprint": "4fa249cec5e5327ca698d158cc9f3df01e29587948b44fb1daeead02334d92a8"
+    }
+  },
+  "scientific_verdict": null
+}
