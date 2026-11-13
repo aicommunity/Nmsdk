@@ -2,13 +2,13 @@
 
 Полностью принят исходный этап0. Этапы1–12 частичны: адресные проверки и реальные эксперименты существуют, но полная обязательная матрица и завершение миграции не приняты. Научный результат8/8 не является условием завершения; количество инженерных PASS не доказывает работу классификатора. Источники требований: [утверждённый план](RefactoringPlan.ru.md), [исходный аудит](PlanCompletionAudit-2026-10-25.ru.md).
 
-## Текущее выполняемое задание
+## Последний завершённый Train и текущее задание
 
-[Cold Branch N4/N1 coupled-search Train](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/STATUS.ru.md) выполняется на M40 после принятой [A4 SDK-проверки93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md). Native cold preflight completed/closed1.716s, подтверждены живые outer/native kernel handles и145 live raw CSV на промежуточном снимке. Итог обучения/полнота всех проб/классификация ещё не установлены.
+[Cold Branch N4/N1 coupled-search](ValidationPlans/M40N1CoupledBranchTrainA1-20261113/RESULT.ru.md) завершён: production1/1 PASS, native/outer closed. Один реально измеренный кандидат input2 одновременно удовлетворяет timing/amplitude допускам; следующий input1 дал5 ambiguous rejections. Итог invalid_observation, certificate=null, all-input verification отсутствует. Это локальный прогресс относительно прежних0 jointly-ready, не работа всей модели/классификатора.
 
-Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Новый commit Pulse documentation не изменяет этот зафиксированный код. Production prepare_recovery подтвердил прежние Branch job/initial/reference-origin bytes; budgets/tolerances/CapturedPerInput/fixed anchor сохранены. Source/runtime работающего задания не обновляются.
+Source SDK root74e5d206d4b619fcf81f77f11b54ebec7b8f0f6e/Pulse7c6c94785af0c83104d348bb3b733ed1f149c8a8, runtime105ccc46bf2d23aa093ee6ec5fb088d9f33faa8e572f8191869f8cc279377a8a. Actual job/initial bytes равны baseline; scientific limits не изменены. SDK A4[93/93](ValidationPlans/M40N1CoupledSdkA4-20261113/RESULT.ru.md) принята адресно; A1/A2/A3 failures сохранены. Этапы1–12 остаются частичными.
 
-SDK A4:все93 declared cases выполнены и прошли, native/outer groups закрыты,0 heartbeat/final capture errors. Это адресная helper/controller приёмка, не full CTest/physical matrix и не сходимость N4. [A1:91/93](ValidationPlans/M40N1CoupledSdkA1-20261113/RESULT.ru.md), [A2:compile failure](ValidationPlans/M40N1CoupledSdkA2-20261113/RESULT.ru.md), [A3:fresh-build refusal](ValidationPlans/M40N1CoupledSdkA3-20261113/RESULT.ru.md) сохранены исходными неудачами. Тестовые ожидания/макрос исправлены; production Pulse, scientific limits и fresh-build guard не менялись. A4 использовала чистые build/runtime.
+Сейчас строится read-only отчёт групп48/58 с actual input overlays; полные первичные данные упакованы для Git, графическая галерея остаётся кэшем M40. Следующий научный шаг — frozen diagnostic8pattern evaluation фактического остановленного состояния без completed-training claim и template fallback.
 
 ## Последние научные результаты
 
