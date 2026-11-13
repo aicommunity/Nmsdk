@@ -26,7 +26,7 @@ def run(source_path, controls):
     declaration = load(controls/'declaration.json')
     require(set(declaration) == {'kind', 'schema_version', 'source_revision',
         'source_geometry', 'input_index', 'resistances', 'runtime', 'controller',
-        'output', 'maximum_wall_seconds'}, 'burst_study_declaration_fields')
+        'output', 'maximum_wall_seconds', 'leaf_memory_bytes'}, 'burst_study_declaration_fields')
     require(declaration['kind'] == 'native_burst_resistance_study' and
         type(declaration['schema_version']) is int and declaration['schema_version'] == 1,
         'burst_study_declaration_version')
@@ -36,6 +36,9 @@ def run(source_path, controls):
         len(set(values)) == len(values), 'burst_study_finite_resistance_grid')
     wall = declaration['maximum_wall_seconds']
     require(type(wall) is int and 1 <= wall <= 1800, 'burst_study_probe_wall_budget')
+    leaf_memory = declaration['leaf_memory_bytes']
+    require(type(leaf_memory) is int and 1024**3 <= leaf_memory <= 8*1024**3,
+            'burst_study_probe_memory_budget')
     runtime_path = controls/'runtime.json';runtime = load(runtime_path)
     require(runtime == declaration['runtime'], 'burst_study_runtime_changed')
     verify_runtime(runtime)
@@ -65,7 +68,7 @@ def run(source_path, controls):
         source_path.name.removesuffix('_stopped_state.json')+'_stopped_summary.json')]
     before = [file_record(p) for p in source_files]
     output.mkdir(parents=True)
-    memory = live['memory_max'];leaf_memory = 3*1024**3
+    memory = live['memory_max']
     registry = Reservations(output/'leases.sqlite3', managed_units=True,
         capacity=dict(slots=1, memory_bytes=memory+2*leaf_memory,
                       disk_bytes=8*1024**3, tasks=512))

@@ -22,6 +22,8 @@
 
 Runner: `Scripts/StructTrain/TimeLearner/native_burst_resistance_study.py`, вход штатного owned controller — `tests/test_native_burst_resistance_study.py`. До выполнения фиксируются Git control commit, fixture fingerprints, exact source file digests и immutable runtime manifest. Файлы исходной stopped-модели проверяются до и после серии; новый Train, захват новых references и правка порога отсутствуют.
 
+Wall budget каждой пробы и leaf_memory_bytes задаются в declaration до запуска. Допустимы1–1800 s и1–8 GiB; эти бюджеты не являются условиями сходимости. Для большого N4 package255.8MB следует использовать8 GiB native limit, как у исходного Train; память внешнего Python controller и native child резервируется раздельно. Пределы малых N2 fixtures не переносятся автоматически на большой архив.
+
 ## Графики и интерпретация
 
 Для каждого фактического Soma channel сохраняются общий вид и увеличенные фрагменты не более901 исходного отсчёта с перекрытием. Не применять прореживание или сглаживание. Рисунки3200px по ширине показывают потенциал, наложенные реальные stimulus timestamps и отдельную дорожку фактического входа. Сравниваемые Rs имеют одну шкалу потенциала для данного Soma channel. Все gallery хранятся как воспроизводимый кэш M40; в Git — сжатые primary, условия, метрики и выбранные рисунки после визуальной проверки.
