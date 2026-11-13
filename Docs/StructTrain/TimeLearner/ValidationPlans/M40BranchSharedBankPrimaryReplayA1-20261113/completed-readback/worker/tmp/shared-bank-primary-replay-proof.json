@@ -1,0 +1,257 @@
+{
+  "restoration": {
+    "restored_files": 2087,
+    "reconstructed_job_files": 9,
+    "all_primary_bytes_verified": true,
+    "run_manifests_rewritten": false,
+    "native_execution_attested": false,
+    "scientific_verdict": null
+  },
+  "native_data_audits": {
+    "replay": {
+      "primary_evidence_checked": true,
+      "runtime_provenance_checked": false,
+      "model_unchanged": true,
+      "terminal_phase": "main_probe",
+      "channel_diagnostics": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "fixed-geometry/replay",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      },
+      "stimulus_subset_diagnostic": {
+        "kind": "native_stimulus_subset_trace_audit",
+        "schema_version": 1,
+        "run_id": "Branch-stock-cold8-N1/recorded-observation-domain",
+        "model_revision": "fea609e0651ccf779b58a9321e8d4008e984db768ce1167cdcc1406d1a03280d",
+        "routing": "branch_solo_burst",
+        "physical_input_count": 4,
+        "channel_count": 1,
+        "source_ordinals": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "presented_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "actual_stimuli": [
+          {
+            "id": "pulse0",
+            "relative_to_trial_start": 0.01,
+            "time": 0.01
+          },
+          {
+            "id": "pulse1",
+            "relative_to_trial_start": 0.09,
+            "time": 0.09
+          },
+          {
+            "id": "pulse2",
+            "relative_to_trial_start": 0.25,
+            "time": 0.25
+          },
+          {
+            "id": "pulse3",
+            "relative_to_trial_start": 0.49,
+            "time": 0.49
+          }
+        ],
+        "frequency_hz": 2000.0,
+        "sample_count": 3601,
+        "recorded_window_complete": true,
+        "restoration": "validated_readback",
+        "source_timing": "observed; paired full control required to establish retained timing invariance",
+        "spike_response": "unknown",
+        "peak_assignment": "not_performed",
+        "scientific_verdict": null
+      },
+      "execution": "completed",
+      "observation_valid": true,
+      "observation_complete": true,
+      "training_started": false,
+      "evaluation_verdict": null
+    },
+    "matched": {
+      "primary_evidence_checked": true,
+      "runtime_provenance_checked": false,
+      "model_unchanged": true,
+      "terminal_phase": "main_probe",
+      "channel_diagnostics": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "fixed-geometry/matched/source-baseline",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          },
+          {
+            "file": "probe_diagnostics_2.json",
+            "trial_id": "fixed-geometry/matched",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      },
+      "stimulus_subset_diagnostic": {
+        "kind": "native_stimulus_subset_trace_audit",
+        "schema_version": 1,
+        "run_id": "Branch-stock-cold8-N1/recorded-observation-domain",
+        "model_revision": "fea609e0651ccf779b58a9321e8d4008e984db768ce1167cdcc1406d1a03280d",
+        "routing": "branch_solo_burst",
+        "physical_input_count": 4,
+        "channel_count": 1,
+        "source_ordinals": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "presented_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "actual_stimuli": [
+          {
+            "id": "pulse0",
+            "relative_to_trial_start": 0.010000000000000009,
+            "time": 1.8105
+          },
+          {
+            "id": "pulse1",
+            "relative_to_trial_start": 0.09000000000000008,
+            "time": 1.8905
+          },
+          {
+            "id": "pulse2",
+            "relative_to_trial_start": 0.25,
+            "time": 2.0505
+          },
+          {
+            "id": "pulse3",
+            "relative_to_trial_start": 0.4900000000000002,
+            "time": 2.2905
+          }
+        ],
+        "frequency_hz": 2000.0,
+        "sample_count": 3601,
+        "recorded_window_complete": true,
+        "restoration": "validated_readback",
+        "source_timing": "observed; paired full control required to establish retained timing invariance",
+        "spike_response": "unknown",
+        "peak_assignment": "not_performed",
+        "scientific_verdict": null
+      },
+      "execution": "completed",
+      "observation_valid": true,
+      "observation_complete": true,
+      "training_started": false,
+      "evaluation_verdict": null
+    },
+    "resistance-1": {
+      "primary_evidence_checked": true,
+      "runtime_provenance_checked": false,
+      "model_unchanged": true,
+      "terminal_phase": "main_probe",
+      "channel_diagnostics": {
+        "enabled": true,
+        "probes": [
+          {
+            "file": "probe_diagnostics_1.json",
+            "trial_id": "fixed-geometry/resistance-1/source-baseline",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          },
+          {
+            "file": "probe_diagnostics_2.json",
+            "trial_id": "fixed-geometry/resistance-1",
+            "samples": 3601,
+            "complete": true,
+            "signals": 8,
+            "recorded_lt_spike_times": [],
+            "soma_values_match_primary": true,
+            "channel_physics_reconstructed_independently": false
+          }
+        ],
+        "scientific_verdict": null
+      },
+      "stimulus_subset_diagnostic": {
+        "kind": "native_stimulus_subset_trace_audit",
+        "schema_version": 1,
+        "run_id": "Branch-stock-cold8-N1/recorded-observation-domain",
+        "model_revision": "34d7414fdaf701987c43643bf22b4fb484615e77efa83106939d786253cf6451",
+        "routing": "branch_solo_burst",
+        "physical_input_count": 4,
+        "channel_count": 1,
+        "source_ordinals": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "source_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "presented_pattern_hash": "2e19cdd8101e26d2e5d8c880a12d909f377e1d88df177ca718413cb453e5f451",
+        "actual_stimuli": [
+          {
+            "id": "pulse0",
+            "relative_to_trial_start": 0.010000000000000009,
+            "time": 1.8105
+          },
+          {
+            "id": "pulse1",
+            "relative_to_trial_start": 0.09000000000000008,
+            "time": 1.8905
+          },
+          {
+            "id": "pulse2",
+            "relative_to_trial_start": 0.25,
+            "time": 2.0505
+          },
+          {
+            "id": "pulse3",
+            "relative_to_trial_start": 0.4900000000000002,
+            "time": 2.2905
+          }
+        ],
+        "frequency_hz": 2000.0,
+        "sample_count": 3601,
+        "recorded_window_complete": true,
+        "restoration": "validated_readback",
+        "source_timing": "observed; paired full control required to establish retained timing invariance",
+        "spike_response": "unknown",
+        "peak_assignment": "not_performed",
+        "scientific_verdict": null
+      },
+      "execution": "completed",
+      "observation_valid": true,
+      "observation_complete": true,
+      "training_started": false,
+      "evaluation_verdict": null
+    }
+  },
+  "source_package_changed": false,
+  "new_native_execution": false,
+  "scientific_verdict": null
+}

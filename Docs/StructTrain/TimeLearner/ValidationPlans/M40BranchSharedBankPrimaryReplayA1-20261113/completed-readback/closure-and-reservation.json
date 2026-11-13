@@ -1,0 +1,86 @@
+{
+  "closure": {
+    "execution": "unknown",
+    "all_processes_closed": true,
+    "reason": "bound_unit_and_group_absent",
+    "scientific_verdict": null,
+    "binding": {
+      "kind": "timelearner_contained_binding",
+      "schema_version": 1,
+      "request_sha256": "88ffc9f4fe1b51c06b7acf0bdfc3e1f2e695f68d6e736c300ba6cf71adfd6ae6",
+      "unit": "timelearner-70aed150-ecc9-4c5b-8662-f93a7e8cccd2.service",
+      "invocation_id": "d6d05f0c2cd442f4b831e2e957f8c00f",
+      "control_group": "/user.slice/user-1000.slice/user@1000.service/app.slice/timelearner-70aed150-ecc9-4c5b-8662-f93a7e8cccd2.service",
+      "initial_main_pid": 1448932,
+      "initial_start_ticks": "366050733",
+      "sha256": "2d15c5f0ed8946efcff2c91d3f4dadb0f3b1e8b3a34bf5abb443d181ef4a539d"
+    },
+    "state": {
+      "Type": "",
+      "Restart": "no",
+      "RemainAfterExit": "no",
+      "MainPID": "0",
+      "Result": "success",
+      "ExecMainCode": "0",
+      "ExecMainStatus": "0",
+      "ControlGroup": "",
+      "MemoryMax": "infinity",
+      "TasksMax": "52862",
+      "KillMode": "control-group",
+      "Description": "timelearner-70aed150-ecc9-4c5b-8662-f93a7e8cccd2.service",
+      "LoadState": "not-found",
+      "ActiveState": "inactive",
+      "SubState": "dead",
+      "InvocationID": ""
+    }
+  },
+  "leases": [
+    {
+      "token": "65e84321-761b-460d-b19e-2ba197fbf529",
+      "job_id": "s07-shared-bank-primary-replay-m40-a1",
+      "owner": {
+        "boot_id": "0340843f-8a05-4b7e-bd66-afeefecdbe55",
+        "executable": "/usr/bin/python3.12",
+        "pid": 1448932,
+        "start_ticks": "366050733",
+        "uid": 1000
+      },
+      "resources": [
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/publications/branch-shared-bank-primary-completed-20261113-a2/Reports/StructTrain/TimeLearner/BranchSharedBankRs-20261113/primary",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/publications/branch-shared-bank-primary-completed-20261113-a2/Reports/StructTrain/TimeLearner/BranchSharedBankRs-20261113/primary"
+        },
+        {
+          "access": "write",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-shared-bank-primary-replay-m40-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/readbacks/s07-shared-bank-primary-replay-m40-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-primary-replay-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankPrimaryReplayA1-20261113",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/requests/branch-shared-bank-primary-replay-a1/Docs/StructTrain/TimeLearner/ValidationPlans/M40BranchSharedBankPrimaryReplayA1-20261113"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-bounded-science-taskfix-a1"
+        },
+        {
+          "access": "read",
+          "canonical_path": "/media/user/Data/TimeLearnerRefactor/source-shared-bank-primary-replay-a1",
+          "requested_path": "/media/user/Data/TimeLearnerRefactor/source-shared-bank-primary-replay-a1"
+        }
+      ],
+      "state": "released",
+      "created": 1794585309.891924,
+      "deadline": 1794585492.3578205,
+      "updated": 1794585382.271512,
+      "release_note": "Typed Python job whole cgroup closed; execution/test/maintenance outcome remains separate.",
+      "heartbeat_expired": false,
+      "owner_status": "missing",
+      "inspection_required": false,
+      "scientific_verdict": null
+    }
+  ]
+}

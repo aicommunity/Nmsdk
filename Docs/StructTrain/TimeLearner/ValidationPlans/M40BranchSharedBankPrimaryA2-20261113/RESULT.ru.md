@@ -5,3 +5,7 @@ Collector s07-branch-shared-bank-primary-m40-a2 завершён, operation_pass
 Original raw producer e0b08b81a25c20a3712e3348583916af3ec6b002; pack SHA256 c1d0389ca8701787746ccdafa4239b45e634982cc362ecc104e3822e37a6290f. Контроль, доказательства закрытия и package не пересериализованы при переносе. Первоначальная попытка A1 была остановлена ограничением размера; её не считать успешной. Для A2 ещё требуется полный production restore/DATA audit; один успешный collector не является окончательной проверкой научной Git closure.
 
 Результат физического вмешательства описан в [отчёте](../../BranchSharedBankScientificReport-20261113.ru.md):maxSoma1 вырос примерно4.097x при86M→21.5M для всехowners0/1/2; anchor не менялся. Это не результат завершённого Train или классификации.
+
+## Приёмка восстановления
+
+[Production restore и3 actual DATA audits завершились1/1 PASS49.418s](../M40BranchSharedBankPrimaryReplayA1-20261113/RESULT.ru.md). Пакет в Git восстановим полностью; исходные модели и наблюдения не переписаны. Это не новая симуляция или proof of convergence.

@@ -49,3 +49,7 @@
 ![Branch first response enlarged](ValidationPlans/M40BranchSharedBankRsA2-20261113/selected-plots/soma-1/frames-0-900.png)
 
 ![Branch later responses enlarged](ValidationPlans/M40BranchSharedBankRsA2-20261113/selected-plots/soma-1/frames-800-1700.png)
+
+## Замыкание первичных данных физического Rs-контроля
+
+Полный intervention corpus сохранён lossless в27.42MB literal archive плюс9 exact recipes. [Восстановление всех2087 regular files и повторный production аудит3 native runs приняты1/1](ValidationPlans/M40BranchSharedBankPrimaryReplayA1-20261113/RESULT.ru.md); source package неизменён. Полный PNG/SVG/PDF кэш не дублируется вGit. Этот контроль физического влияния Rs воспроизводим; обучение и классификация им не заменяются.

@@ -1,0 +1,1 @@
+Restore the Git-published complete Branch intervention package into a fresh temporary namespace; verify every original byte and all3 production characterization audits. Preserve source package and observations; do not execute models or grant a training/classification verdict. Original source directories are not inputs.

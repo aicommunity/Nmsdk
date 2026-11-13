@@ -1,0 +1,19 @@
+{
+  "kind": "timelearner_python_validation_suite",
+  "schema_version": 1,
+  "suite_id": "s07-shared-bank-primary-replay-m40-a1",
+  "package_fingerprint": "2232e1c566962357c9e71294a003a2002aea68f6d0a8b17a569851bbc0fa201f",
+  "modules": [
+    "Scripts.StructTrain.TimeLearner.tests.test_shared_bank_primary_replay"
+  ],
+  "expected_test_ids": [
+    "Scripts.StructTrain.TimeLearner.tests.test_shared_bank_primary_replay.SharedBankPrimaryReplayTest.test_restore_every_original_byte_then_audit_all_three_native_runs"
+  ],
+  "fixtures": {
+    "TIMELEARNER_SHARED_BANK_PRIMARY": {
+      "pattern": "**/*.json",
+      "files": 11,
+      "fingerprint": "39a5392b0dfe7ee7857f9267cb45266bb09ba23805b600df21a09d5c8dd8e91d"
+    }
+  }
+}
