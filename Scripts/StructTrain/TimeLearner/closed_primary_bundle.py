@@ -139,7 +139,8 @@ def collect(manifest, output, guard, emit):
     for root in manifest['roots']:
         for name in [*root['files'], *root['links']]:
             sources[(PurePosixPath(root['prefix'])/name).as_posix()] = Path(root['directory'])/name
-    bundle = portable_primary.create_native_bundle(sources, output, dictionary_bytes=32*1024**2)
+    bundle = portable_primary.create_native_bundle(sources, output, dictionary_bytes=32*1024**2,
+                                                   deduplicate_content=True)
     require(bundle['expanded_bytes'] <= manifest['bounds']['maximum_total_bytes'] and
             bundle['archive_bytes'] <= manifest['bounds']['maximum_archive_bytes'],
             'primary_bundle_output_budget')
