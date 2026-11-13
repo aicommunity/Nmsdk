@@ -1,4 +1,4 @@
-# Ограниченный эксперимент L22 запущен
+# Численная серия L22 завершена; отчёты и публикация ожидаются
 
 s07-l22-burst-resistance-study-m40-a1 на M40 выполняет [заранее объявленный протокол](../../NativeBurstResistanceStudy.ru.md). Source revision3b8a160f2fe6f5ace6aa377f5d42117bcc922bcdd746358ca8d7c34fc67a6b1c, L=[22,1,1,1], исходный Rs86МОм, N1, frequency2000Hz, threshold100; training=budget_exhausted, certificate=null. Это actual stopped import, не реконструкция из начального template.
 
@@ -29,3 +29,11 @@ Resistance-2 прошёл per-run production audit и сохранил complete3
 ## Дополнительная сверка original Train и нового replay
 
 На M40 сопоставлены group62/full-before.csv исходного Train (SHA2568e0ba648bcf2ed7f41f98805c10a2edaecbc2d4723652a3cded06a7e936d86ce) и текущий replay/probe_trial_1.csv (SHA25612f0c136f7a532347441f48c6b63707bc97363e262a5cc9c7d5e5a66cfb7ea23). Во всех3601 rows stimulus values совпадают, maximum absolute potential difference всех четырёх Soma равна0. Абсолютные clocks различны: начало659.042 против0; maximum relative grid difference8.64e-14s. Это диагностическое согласие формы реакции после импорта, а не matched absolute-clock control и не новый certificate. Original primary уже опубликован; новый replay войдёт в полный пакет после закрытия серии.
+
+## Завершение численной серии и отказ построения графиков
+
+Все5 Console runs и межусловные проверки завершены. Result.json записан после проверки исходных файлов, geometry, model changes, clocks/actual input events и byte-equal warm baselines. Resistance-3 (21.5МОм), revision9542ba1f6a63aeb45710a7a54433c23810ffe5de26fb9fa31ba137ea051b1968, complete3601 samples, global Soma1 maximum0.023283525200348487. Во всех трёх вмешательствах остальные Soma2–4 имеют maximum absolute waveform difference0 относительно matched-control; изменения Soma1:0.0019250042648812915/0.005809064829495503/0.01760056851561065.
+
+Весь validation test завершился ERROR после7642.867s на render: system Python не имеетmatplotlib. Это не отказ native probes, но исходный job не объявляется passed. Parent и5 children закрыты, leases released. Исходные terminal/exception/result сохраняются. Новых native runs для исправления среды не требуется.
+
+[Read-only построение отчётов](../M40L22RecordedReportsA1-20261113/STATUS.ru.md) запущено с проверенным plot-python-owned-copy-a1/bin/python. [Упаковка полной первичной выборки](../M40L22PrimaryEnvelopeA1-20261113/STATUS.ru.md) выполняется отдельно; большая N4 byte-exact restore ещё не принята. Полные этапы1–12 остаются частичными.
