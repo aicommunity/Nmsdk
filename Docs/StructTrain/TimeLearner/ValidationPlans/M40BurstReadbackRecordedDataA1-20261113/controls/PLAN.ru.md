@@ -1,0 +1,1 @@
+Five DATA checks on exact actual Classic replay/matched source-baseline/main outputs from closed A3. No native calculation; strict schema6 waveform reader, corruption rejection and unchanged model/restoration checks.

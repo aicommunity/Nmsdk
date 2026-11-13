@@ -1,0 +1,40 @@
+test_real_classic_branch_replays_and_time_matched_rs_controls (Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls) ... ERROR
+
+======================================================================
+ERROR: test_real_classic_branch_replays_and_time_matched_rs_controls (Scripts.StructTrain.TimeLearner.tests.test_native_burst_readback_console.NativeBurstReadbackConsoleTest.test_real_classic_branch_replays_and_time_matched_rs_controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/tests/test_native_burst_readback_console.py", line 85, in test_real_classic_branch_replays_and_time_matched_rs_controls
+    result = run_job('probe', job_path, source_path, runtime_path, folder, 180., process_policy=policy)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 449, in run_job
+    audit = audit_execution(mode, output/"native", job, source_case)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_pipeline_worker.py", line 193, in audit_execution
+    return audit_probe_execution(directory)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_calibration_worker.py", line 39, in checked
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_characterization.py", line 465, in audit_execution
+    base_audit = audit_probe(baseline, baseline_trace)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 303, in audit_probe
+    return _audit_probe(packet, trace)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 125, in _audit_probe
+    require(observation["schema_version"] == spec["schema_version"] == 3, "unsupported_observation_schema")
+  File "/media/user/Data/TimeLearnerRefactor/source-idle-probe-console-validation-a1/Scripts/StructTrain/TimeLearner/native_evidence.py", line 28, in require
+    raise EvidenceError(reason)
+Scripts.StructTrain.TimeLearner.native_evidence.EvidenceError: unsupported_observation_schema
+
+----------------------------------------------------------------------
+Ran 1 test in 69.198s
+
+FAILED (errors=1)
