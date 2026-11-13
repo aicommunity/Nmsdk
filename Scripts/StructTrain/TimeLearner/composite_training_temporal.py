@@ -16,7 +16,7 @@ from .native_evidence import load, number, require
 from .plotting import figure_title, padded_limits, plotting_runtime
 
 
-def render(native, output, group_numbers, *, native_window_zooms=False):
+def render(native, output, group_numbers, *, native_window_zooms=False, allow_incomplete_groups=False):
     native = Path(native).resolve(strict=True)
     output = Path(output).resolve()
     require(not output.exists() and not output.is_relative_to(native) and
@@ -25,6 +25,7 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
             all(type(i) is int and i > 0 for i in group_numbers) and
             len(set(group_numbers)) == len(group_numbers), 'training_report_group_inventory')
     require(type(native_window_zooms) is bool, 'training_report_native_zoom_flag')
+    require(type(allow_incomplete_groups) is bool, 'training_report_incomplete_flag')
     packages = [native/n for n in ('train_stopped_state.json', 'train_learned_state.json')
                 if (native/n).is_file()]
     require(len(packages) == 1, 'training_report_package_missing_or_ambiguous')
@@ -40,7 +41,10 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
     for ordinal in group_numbers:
         record = records[ordinal-1]
         raw_trials = record['raw_trials']
-        require(record['complete_group'] and raw_trials, 'training_report_group_incomplete')
+        require(raw_trials and (record['complete_group'] or allow_incomplete_groups),
+                'training_report_group_incomplete')
+        packets = {p['observation']['specification']['trial_id']: p['observation']
+                   for p in record['native_packets'] if p.get('observation') is not None}
         series = []
         for trial in raw_trials:
             ref = trial['primary_ref']; raw = resolver(ref['relative_path'])
@@ -49,11 +53,15 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
             rows = list(csv.reader(io.StringIO(raw.decode('utf-8'), newline=''), strict=True))
             values = [[number(float(v)) for v in row] for row in rows[1:]]
             spec = trial['actual_specification']
+            observation = packets.get(trial['native_trial_id'])
+            require(observation is not None and observation['specification'] == spec and
+                    observation['sample_count'] == len(values), 'training_report_trial_packet_binding')
             require(len(values) > 2 and len(spec['baseline']) > 0 and
                     all(len(v) == len(spec['baseline'])+2 for v in values),
                     'training_report_channel_dimensions')
             series.append(dict(reference=ref, values=values, specification=spec,
-                               actual_stimuli=trial['actual_stimuli']))
+                               actual_stimuli=trial['actual_stimuli'], complete=observation['complete'],
+                               end_reason=observation['end_reason']))
         require(len({len(s['specification']['baseline']) for s in series}) == 1,
                 'training_report_control_dimensions')
         prepared.append((ordinal, record, series))
@@ -78,7 +86,11 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
             groups.append(dict(ordinal=ordinal, group_id=record['group_id'],
                 selection=record['selection'], rejection_reason=record['rejection_reason'],
                 window_relative_seconds=window, model_revision=record['logical_request']['base_model_revision'],
-                primary_references=[s['reference'] for s in series]))
+                primary_references=[s['reference'] for s in series],
+                complete_group=record['complete_group'],
+                recorded_trials=[dict(reference=s['reference'], complete=s['complete'],
+                    end_reason=s['end_reason'], sample_count=len(s['values']),
+                    recorded_begin=s['values'][0][0], recorded_end=s['values'][-1][0]) for s in series]))
             for channel in range(count):
                 limits = padded_limits([v[channel+2] for s in series for v in s['values']])
                 views = [('overview', [0., duration]), ('detail', detail)]
@@ -101,7 +113,11 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
                                    label='proposed assignment window (not a peak)')
                         ax.set_xlim(*bounds); ax.set_ylim(*limits); ax.grid(alpha=.25)
                         ax.set_ylabel('Raw soma potential\nSI units unverified')
-                        ax.set_title(name+' | same Y scale across all controls', loc='left')
+                        label = 'complete' if s['complete'] else 'CENSORED: '+s['end_reason']
+                        ax.set_title(name+' | '+label+' | same Y scale across all controls', loc='left')
+                        if not s['complete']:
+                            ax.axvspan(times[-1], number(s['specification']['end'])-begin,
+                                       color='#888888', alpha=.18)
                         right = ax.twinx()
                         stimulus = [v[1] for v in s['values']]
                         right.plot(times, stimulus, color='#e47b19', linewidth=.8)
@@ -110,7 +126,8 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
                         # The recorded aggregate signal is shown independently
                         # for every omission control, never a synthetic schedule.
                     axes[-1].set_xlabel('Time since each native probe began [s]')
-                    status = record['selection']['geometry']['validity']
+                    status = (record['selection']['geometry']['validity'] if record['selection']
+                              else 'INCOMPLETE GROUP; assignment unavailable')
                     figure_title(fig, f'Training group {ordinal} | soma{channel} | {view}\n'
                         f'{record["logical_request"]["input_id"]}: selection={status}; '
                         f'outcome={audit["training_outcome"]}\n'
@@ -145,6 +162,9 @@ def render(native, output, group_numbers, *, native_window_zooms=False):
             'axis_selection': 'fifty_native_frames_each_side_of_declared_window_boundary',
             'minimum_tick_pixels': 8, 'sample_markers': True,
             'peak_assignment_changed': False})
+    if allow_incomplete_groups:
+        manifest.update(schema_version=3, incomplete_group_diagnostics=True,
+                        missing_trials_not_synthesized=True)
     (output/'manifest.json').write_text(json.dumps(manifest, indent=2, allow_nan=False)+'\n', encoding='utf-8')
     return manifest
 
@@ -156,8 +176,11 @@ def main(argv=None):
     parser.add_argument('--groups', nargs='+', type=int, required=True)
     parser.add_argument('--native-window-zooms', action='store_true',
         help='also show both proposed window edges with at least eight pixels per native tick')
+    parser.add_argument('--allow-incomplete-groups', action='store_true',
+        help='diagnostic only: label censored traces and retain missing trials without filling them')
     args = parser.parse_args(argv)
-    result = render(args.native, args.output, args.groups, native_window_zooms=args.native_window_zooms)
+    result = render(args.native, args.output, args.groups, native_window_zooms=args.native_window_zooms,
+                    allow_incomplete_groups=args.allow_incomplete_groups)
     print(json.dumps(dict(groups=len(result['groups']), figures=len(result['figures']),
                           scientific_verdict=None)))
 
